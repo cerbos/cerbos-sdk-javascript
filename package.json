@@ -1,5 +1,5 @@
 {
-  "name": "cerbos-sdk-node",
+  "name": "cerbos",
   "version": "0.0.1",
   "homepage": "https://cerbos.dev",
   "description": "Cerbos helps you super-charge your authorization implementation by writing context-aware access control policies for your application resources.",

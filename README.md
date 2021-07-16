@@ -24,19 +24,19 @@ To use the Cerbos JavaScript client library, you'll need:
 ## Installation
 
 ```sh
-$ npm i cerbos-sdk-node
+$ npm i cerbos
 ```
 
 or
 
 ```
-$ yarn add cerbos-sdk-node
+$ yarn add cerbos
 ```
 
 ## Usage
 
 ```js
-import Cerbos from "cerbos-sdk-node";
+import Cerbos from "cerbos";
 
 const cerbos = new Cerbos({
   hostname: "http://localhost:9090", // The Cerbos PDP instance
