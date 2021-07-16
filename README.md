@@ -64,6 +64,8 @@ The Cerbos JavaScript client library is written in TypeScript and comes with typ
 
 ## Configuration
 
+A number of configuration options are avaliable when creating the Cerbos SDK instance:
+
 ### Hostname (required)
 
 The hostname to the Cerbos PDP instance must be defined when creating the Cerbos instance.
@@ -73,6 +75,7 @@ The hostname to the Cerbos PDP instance must be defined when creating the Cerbos
 It is possible to define a timeout value for all calls to the Cerbos instance. This is defined in
 
 ### Logging
+
 You can turn on debug logging if you want to check what endpoints are being called and with what arguments.
 
 ```js
