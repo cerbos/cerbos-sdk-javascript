@@ -98,7 +98,7 @@ class CerbosResponseWrapper implements ICerbosResponse {
   }
 
   isAuthorized(resourceKey: string, action: string): boolean {
-    let allowed =
+    const allowed =
       this.resp.resourceInstances[resourceKey]?.actions[action] ==
       AuthorizeEffect.ALLOW;
     return allowed ?? false;
