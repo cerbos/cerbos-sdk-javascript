@@ -48,12 +48,19 @@ const result = await cerbos.check({
     policyVersion: "default", // optional
     kind: "blogPost", // the name of the resource kind in the policies
     instances: {
-      // Map of instances where the key is the ID for the resource
-      resourceId1: {
+      // Map of instances of resource where the key is the ID
+      article123: {
         attr: {
           // optional user-defined attributes used in policies
           authorId: "212324",
           status: "DRAFT",
+        },
+      },
+      article456: {
+        attr: {
+          // optional user-defined attributes used in policies
+          authorId: "56756",
+          status: "PUBLISHED",
         },
       },
     },
@@ -69,8 +76,11 @@ const result = await cerbos.check({
   },
 });
 
-const canView = result.isAuthorized("resourceId1", "view"); // boolean
-const canEdit = result.isAuthorized("resourceId1", "edit"); // boolean
+// Check whether the principal can view article123
+const canView = result.isAuthorized("article123", "view"); // boolean
+
+// Check whether the principal can edit article456
+const canEdit = result.isAuthorized("article456", "edit"); // boolean
 ```
 
 ### TypeScript
