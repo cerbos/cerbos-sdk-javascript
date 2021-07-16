@@ -1,0 +1,9 @@
+---
+server:
+  httpListenAddr: ":8080"
+storage:
+  driver: "disk" # Valid values are "disk" or "git"
+  disk: # Only required if "driver" is "disk"
+    directory: /policies
+    readOnly: true # Set to false if you want to write new policies to disk through
+    watchForChanges: false

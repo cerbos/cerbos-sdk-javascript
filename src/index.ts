@@ -5,14 +5,14 @@ import * as winston from "winston";
 interface IPrincipal {
   id: string;
   policyVersion?: any;
-  roles: [string];
+  roles: string[];
   attr: {
     [key: string]: any;
   };
 }
 
 interface IAuthorize {
-  actions: [string];
+  actions: string[];
   resource: {
     policyVersion?: any;
     kind: string;
@@ -39,7 +39,7 @@ interface IAuthorizeResponse {
 }
 
 export interface ICerbosBatchAuthorizeResource {
-  actions: [string];
+  actions: string[];
   resource: {
     policyVersion?: any;
     kind: string;
@@ -79,12 +79,7 @@ interface ICerbosBatchResponse {
   };
 }
 
-export class AuthorizationError extends Error {
-  constructor(message: string) {
-    super();
-    Object.defineProperty(this, "name", { value: "AuthorizationError" });
-  }
-}
+export class AuthorizationError extends Error {}
 
 export interface ICerbosResponse {
   isAuthorized: (resourceKey: string, action: string) => boolean;
@@ -111,7 +106,7 @@ interface CerbosOptions {
   timeout?: number;
 }
 
-export class Cerbos {
+export default class Cerbos {
   private host: string;
   private log: winston.Logger;
   private timeout: number;
@@ -121,6 +116,7 @@ export class Cerbos {
     this.timeout = timeout;
     this.log = winston.createLogger({
       level: logLevel,
+      silent: !logLevel,
       transports: [
         new winston.transports.Console({
           format: winston.format.simple(),
