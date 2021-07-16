@@ -30,7 +30,7 @@ $ npm i cerbos-sdk-node
 or
 
 ```
-$ yarm add cerbos-sdk-node
+$ yarn add cerbos-sdk-node
 ```
 
 ## Usage
