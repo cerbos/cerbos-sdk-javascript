@@ -7,6 +7,7 @@ The Cerbos JavaScript client library - sometimes known as an SDK - makes it easy
 ## Contents
 
 - [Requirements](#requirements)
+- [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Documentation](#documentation)
@@ -20,15 +21,19 @@ To use the Cerbos JavaScript client library, you'll need:
 
 **Note:** You can only use the library in server-side JavaScript applications developed in Node.js. It won't work in frontend applications that run in your users' browsers.
 
-## Usage
+## Installation
 
 ```sh
 $ npm i cerbos-sdk-node
+```
 
 or
 
+```
 $ yarm add cerbos-sdk-node
 ```
+
+## Usage
 
 ```js
 import Cerbos from "cerbos-sdk-node";
