@@ -1,0 +1,44 @@
+{
+  "name": "cerbos-sdk-node",
+  "version": "0.0.1",
+  "homepage": "https://cerbos.dev",
+  "description": "Cerbos helps you super-charge your authorization implementation by writing context-aware access control policies for your application resources.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --config jestconfig.json",
+    "prepare": "npm run build",
+    "lint": "eslint . --ext .ts",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "author": "Cerbos",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "@types/node-fetch": "^2.5.11",
+    "@types/uuid": "^8.3.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "eslint": "^7.30.0",
+    "eslint-plugin-jest": "^24.3.6",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cerbos/cerbos-sdk-node.git"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
+  }
+}
