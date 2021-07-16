@@ -55,7 +55,7 @@ const result = await cerbos.check({
 });
 
 const canView = result.isAuthorized("resourceId1", "view"); // boolean
-const canView = result.isAuthorized("resourceId1", "edit"); // boolean
+const canEdit = result.isAuthorized("resourceId1", "edit"); // boolean
 ```
 
 ### TypeScript
