@@ -22,6 +22,14 @@ To use the Cerbos JavaScript client library, you'll need:
 
 ## Usage
 
+```sh
+$ npm i cerbos-sdk-node
+
+or
+
+$ yarm add cerbos-sdk-node
+```
+
 ```js
 import Cerbos from "cerbos-sdk-node";
 
