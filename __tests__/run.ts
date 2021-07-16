@@ -1,4 +1,4 @@
-import Cerbos, { AuthorizationError } from "../src/index";
+import Cerbos from "../src/index";
 
 describe("Cerbos", () => {
   let cerbos: Cerbos;
@@ -100,9 +100,8 @@ describe("Cerbos - No PDP", () => {
   });
 
   test("Throw when can't talk to Cerbos PDP", async () => {
-    expect.assertions(1);
-    try {
-      await cerbos.check({
+    await expect(
+      cerbos.check({
         actions: ["view", "edit"],
         resource: {
           policyVersion: "default", // optional
@@ -134,9 +133,7 @@ describe("Cerbos - No PDP", () => {
             department: "marketing",
           },
         },
-      });
-    } catch (e) {
-      expect(e.message).toBe("Error authorizing");
-    }
+      })
+    ).rejects.toThrow();
   });
 });

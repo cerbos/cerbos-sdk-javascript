@@ -1,7 +1,7 @@
 name: CI
 on: [pull_request]
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout commit
@@ -23,5 +23,5 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Run tests
-        run: npm run test
+      - name: Run lints
+        run: npm run lint
