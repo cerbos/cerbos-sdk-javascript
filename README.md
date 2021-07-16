@@ -50,15 +50,15 @@ const result = await cerbos.check({
     instances: {
       // Map of instances of resource where the key is the ID
       article123: {
+        // optional user-defined attributes used in policies
         attr: {
-          // optional user-defined attributes used in policies
           authorId: "212324",
           status: "DRAFT",
         },
       },
       article456: {
+        // optional user-defined attributes used in policies
         attr: {
-          // optional user-defined attributes used in policies
           authorId: "56756",
           status: "PUBLISHED",
         },
@@ -69,8 +69,8 @@ const result = await cerbos.check({
     id: "userId1", // the ID of the principal accessing the resource
     policyVersion: "default", // optional
     roles: ["USER"], // from your authentication provider
+    // optional user-defined attributes used in policies
     attr: {
-      // optional user-defined attributes used in policies
       department: "marketing",
     },
   },

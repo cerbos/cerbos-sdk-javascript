@@ -6,7 +6,7 @@ interface IPrincipal {
   id: string;
   policyVersion?: any;
   roles: string[];
-  attr: {
+  attr?: {
     [key: string]: any;
   };
 }
@@ -18,7 +18,7 @@ interface IAuthorize {
     kind: string;
     instances: {
       [resourceKey: string]: {
-        attr: {
+        attr?: {
           [key: string]: any;
         };
       };
@@ -152,7 +152,9 @@ export default class Cerbos {
       return new CerbosResponseWrapper(data);
     } catch (e) {
       this.log.error("Cerbos.check Error", e);
-      throw new AuthorizationError("Error authorizing");
+      throw new AuthorizationError(
+        `Could not connect to Cerbos PDP at ${this.host}`
+      );
     }
   }
 
