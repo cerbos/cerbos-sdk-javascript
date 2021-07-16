@@ -8,24 +8,21 @@ describe("Cerbos", () => {
     });
   });
 
-  test("Allow call", async () => {
+  test("Allowed action", async () => {
     const result = await cerbos.check({
       actions: ["view", "edit"],
       resource: {
-        policyVersion: "default", // optional
-        kind: "blogPost", // the name of the resource kind in the policies
+        policyVersion: "default",
+        kind: "blogPost",
         instances: {
-          // Map of instances of resource where the key is the ID
           article123: {
             attr: {
-              // optional user-defined attributes used in policies
               authorId: "212324",
               status: "DRAFT",
             },
           },
           article456: {
             attr: {
-              // optional user-defined attributes used in policies
               authorId: "56756",
               status: "PUBLISHED",
             },
@@ -33,40 +30,35 @@ describe("Cerbos", () => {
         },
       },
       principal: {
-        id: "userId1", // the ID of the principal accessing the resource
-        policyVersion: "default", // optional
-        roles: ["USER"], // from your authentication provider
+        id: "userId1",
+        policyVersion: "default",
+        roles: ["USER"],
         attr: {
-          // optional user-defined attributes used in policies
           department: "marketing",
         },
       },
     });
 
-    // Check whether the principal can view article123
     const canView = result.isAuthorized("article123", "view");
 
     expect(canView).toBe(true);
   });
 
-  test("Deny call", async () => {
+  test("Denied action", async () => {
     const result = await cerbos.check({
       actions: ["view", "edit"],
       resource: {
-        policyVersion: "default", // optional
-        kind: "blogPost", // the name of the resource kind in the policies
+        policyVersion: "default",
+        kind: "blogPost",
         instances: {
-          // Map of instances of resource where the key is the ID
           article123: {
             attr: {
-              // optional user-defined attributes used in policies
               authorId: "212324",
               status: "DRAFT",
             },
           },
           article456: {
             attr: {
-              // optional user-defined attributes used in policies
               authorId: "56756",
               status: "PUBLISHED",
             },
@@ -74,24 +66,58 @@ describe("Cerbos", () => {
         },
       },
       principal: {
-        id: "userId1", // the ID of the principal accessing the resource
-        policyVersion: "default", // optional
-        roles: ["USER"], // from your authentication provider
+        id: "userId1",
+        policyVersion: "default",
+        roles: ["USER"],
         attr: {
-          // optional user-defined attributes used in policies
           department: "marketing",
         },
       },
     });
 
-    // Check whether the principal can view article123
     const canView = result.isAuthorized("article123", "edit");
+
+    expect(canView).toBe(false);
+  });
+
+  test("Undefined action", async () => {
+    const result = await cerbos.check({
+      actions: ["view", "edit"],
+      resource: {
+        policyVersion: "default",
+        kind: "blogPost",
+        instances: {
+          article123: {
+            attr: {
+              authorId: "212324",
+              status: "DRAFT",
+            },
+          },
+          article456: {
+            attr: {
+              authorId: "56756",
+              status: "PUBLISHED",
+            },
+          },
+        },
+      },
+      principal: {
+        id: "userId1",
+        policyVersion: "default",
+        roles: ["USER"],
+        attr: {
+          department: "marketing",
+        },
+      },
+    });
+
+    const canView = result.isAuthorized("article123", "some-other-action");
 
     expect(canView).toBe(false);
   });
 });
 
-describe("Cerbos - No PDP", () => {
+describe("Cerbos - Failed to connect", () => {
   let cerbos: Cerbos;
   beforeEach(() => {
     cerbos = new Cerbos({
@@ -102,36 +128,16 @@ describe("Cerbos - No PDP", () => {
   test("Throw when can't talk to Cerbos PDP", async () => {
     await expect(
       cerbos.check({
-        actions: ["view", "edit"],
+        actions: ["view"],
         resource: {
-          policyVersion: "default", // optional
-          kind: "blogPost", // the name of the resource kind in the policies
+          kind: "blogPost",
           instances: {
-            // Map of instances of resource where the key is the ID
-            article123: {
-              attr: {
-                // optional user-defined attributes used in policies
-                authorId: "212324",
-                status: "DRAFT",
-              },
-            },
-            article456: {
-              attr: {
-                // optional user-defined attributes used in policies
-                authorId: "56756",
-                status: "PUBLISHED",
-              },
-            },
+            article123: {},
           },
         },
         principal: {
-          id: "userId1", // the ID of the principal accessing the resource
-          policyVersion: "default", // optional
-          roles: ["USER"], // from your authentication provider
-          attr: {
-            // optional user-defined attributes used in policies
-            department: "marketing",
-          },
+          id: "userId1",
+          roles: ["USER"],
         },
       })
     ).rejects.toThrow();
