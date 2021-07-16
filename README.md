@@ -33,23 +33,25 @@ const result = await cerbos.check({
   actions: ["view", "edit"],
   resource: {
     policyVersion: "default", // optional
-    kind: "resourceKind",
+    kind: "blogPost", // the name of the resource kind in the policies
     instances: {
+      // Map of instances where the key is the ID for the resource
       resourceId1: {
         attr: {
-          // optional user defined attributes used in policies
-          someAttribute: true,
+          // optional user-defined attributes used in policies
+          authorId: "212324",
+          status: "DRAFT",
         },
       },
     },
   },
   principal: {
-    id: "userId1",
+    id: "userId1", // the ID of the principal accessing the resource
     policyVersion: "default", // optional
     roles: ["USER"], // from your authentication provider
     attr: {
-      // optional user defined attributes used in policies
-      somePrincipalAttribute: true,
+      // optional user-defined attributes used in policies
+      department: "marketing",
     },
   },
 });
