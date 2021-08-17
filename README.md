@@ -36,7 +36,7 @@ $ yarn add cerbos
 ## Usage
 
 ```js
-import Cerbos from "cerbos";
+import { Cerbos } from "cerbos";
 
 const cerbos = new Cerbos({
   hostname: "http://localhost:9090", // The Cerbos PDP instance

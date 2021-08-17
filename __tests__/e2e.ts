@@ -1,4 +1,4 @@
-import Cerbos from "../src/index";
+import { Cerbos } from "../src/index";
 
 describe("Cerbos", () => {
   let cerbos: Cerbos;

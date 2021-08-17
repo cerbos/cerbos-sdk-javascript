@@ -106,7 +106,7 @@ interface CerbosOptions {
   timeout?: number;
 }
 
-export default class Cerbos {
+export class Cerbos {
   private host: string;
   private log: winston.Logger;
   private timeout: number;
