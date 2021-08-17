@@ -5,7 +5,6 @@
   "description": "Cerbos helps you super-charge your authorization implementation by writing context-aware access control policies for your application resources.",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
-  "types": "./lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
