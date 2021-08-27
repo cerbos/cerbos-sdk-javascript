@@ -93,10 +93,14 @@ class CerbosResponseWrapper implements ICerbosResponse {
   }
 
   isAuthorized(resourceKey: string, action: string): boolean {
-    const allowed =
-      this.resp.resourceInstances[resourceKey]?.actions[action] ==
-      AuthorizeEffect.ALLOW;
-    return allowed ?? false;
+    try {
+      const allowed =
+        this.resp.resourceInstances[resourceKey]?.actions[action] ==
+        AuthorizeEffect.ALLOW;
+      return allowed ?? false;
+    } catch (e) {
+      return false;
+    }
   }
 }
 
@@ -104,16 +108,24 @@ interface CerbosOptions {
   hostname: string;
   logLevel?: "fatal" | "error" | "warn" | "info" | "debug";
   timeout?: number;
+  playgroundInstance?: string;
 }
 
 export class Cerbos {
   private host: string;
   private log: winston.Logger;
   private timeout: number;
+  private playgroundInstance?: string;
 
-  constructor({ hostname, logLevel, timeout = 0 }: CerbosOptions) {
+  constructor({
+    hostname,
+    logLevel,
+    timeout = 0,
+    playgroundInstance,
+  }: CerbosOptions) {
     this.host = hostname;
     this.timeout = timeout;
+    this.playgroundInstance = playgroundInstance;
     this.log = winston.createLogger({
       level: logLevel,
       silent: !logLevel,
@@ -140,11 +152,25 @@ export class Cerbos {
       },
     };
     this.log.debug("Cerbos.check Payload", payload);
+
+    // eslint-disable-next-line prefer-const
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let headers: any = {
+      "Content-Type": "application/json",
+    };
+
+    if (this.playgroundInstance) {
+      headers = {
+        ...headers,
+        "Playground-Instance": this.playgroundInstance,
+      };
+    }
+
     try {
       const response = await fetch(`${this.host}/api/check`, {
         method: "post",
         body: JSON.stringify(payload),
-        headers: { "Content-Type": "application/json" },
+        headers,
         timeout: this.timeout,
       });
       const data = await response.json();
