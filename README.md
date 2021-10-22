@@ -17,7 +17,7 @@ The Cerbos JavaScript client library - sometimes known as an SDK - makes it easy
 To use the Cerbos JavaScript client library, you'll need:
 
 - Node.js v12 (LTS) or later.
-- An instance of the Cerbos PDP needs to be running and accessible by your application. See our [Getting Started](https://docs.cerbos.dev/cerbos/quickstart.html) guide for details.
+- An instance of the Cerbos PDP needs to be running and accessible by your application. See our [Getting Started](https://docs.cerbos.dev/cerbos/latest/quickstart.html) guide for details.
 
 **Note:** You can only use the library in server-side JavaScript applications developed in Node.js. It won't work in frontend applications that run in your users' browsers.
 
