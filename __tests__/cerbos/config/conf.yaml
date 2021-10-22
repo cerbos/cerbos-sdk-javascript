@@ -5,5 +5,10 @@ storage:
   driver: "disk" # Valid values are "disk" or "git"
   disk: # Only required if "driver" is "disk"
     directory: /policies
-    readOnly: true # Set to false if you want to write new policies to disk through
     watchForChanges: false
+auxData:
+  jwt:
+    keySets:
+      - id: ks1
+        local:
+          file: /Users/oguzhan/github/oguzhand95/cerbos-sdk-node/__tests__/cerbos/keys/verify_key.jwk
