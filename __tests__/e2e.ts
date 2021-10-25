@@ -40,7 +40,6 @@ describe("Cerbos", () => {
   });
 
   test("Allowed action", async () => {
-    console.log("tokentoken", jwtToken);
     const result = await cerbos.check({
       actions: ["view", "edit"],
       resource: {
