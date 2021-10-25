@@ -74,6 +74,13 @@ const result = await cerbos.check({
       department: "marketing",
     },
   },
+  // Optional section for providing auxiliary data.
+  auxData: {
+    jwt: {
+      token: "jwt-token", // JWT to use as an auxiliary data source.
+      keySetId: "ks1", // ID of the keyset to use to verify the JWT. Optional if only a single keyset is configured.
+    },
+  },
 });
 
 // Check whether the principal can view article123

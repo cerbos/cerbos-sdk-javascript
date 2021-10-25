@@ -1,4 +1,35 @@
+import * as fs from "fs";
 import { Cerbos } from "../src/index";
+import * as jose from "node-jose";
+
+let jwtToken = "";
+
+beforeAll(async () => {
+  let signingKey;
+
+  try {
+    signingKey = fs.readFileSync("./__tests__/cerbos/keys/signing_key.jwk");
+  } catch (error) {
+    console.log("Problem occurred during reading JWT signing key.");
+    process.exit(1);
+  }
+
+  const key = await jose.JWK.asKey(signingKey);
+  const options = { compact: true, jwk: key, fields: { typ: "jwt" } };
+
+  const jwtClaims = JSON.stringify({
+    exp: Math.floor((Date.now() + 86400000) / 1000),
+    iat: Math.floor(Date.now() / 1000),
+    sub: "test",
+  });
+
+  await jose.JWS.createSign(options, key)
+    .update(jwtClaims)
+    .final()
+    .then(function (result) {
+      jwtToken = result as unknown as string;
+    });
+});
 
 describe("Cerbos", () => {
   let cerbos: Cerbos;
@@ -35,6 +66,12 @@ describe("Cerbos", () => {
         roles: ["USER"],
         attr: {
           department: "marketing",
+        },
+      },
+      auxData: {
+        jwt: {
+          token: jwtToken,
+          keySetId: "ks1",
         },
       },
     });

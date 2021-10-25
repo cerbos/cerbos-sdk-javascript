@@ -11,6 +11,15 @@ interface IPrincipal {
   };
 }
 
+interface IAuxData {
+  jwt?: IJwt;
+}
+
+interface IJwt {
+  token: string;
+  keySetId?: string;
+}
+
 interface IAuthorize {
   actions: string[];
   resource: {
@@ -25,6 +34,7 @@ interface IAuthorize {
     };
   };
   principal: IPrincipal;
+  auxData?: IAuxData;
 }
 
 interface IAuthorizeResponse {
