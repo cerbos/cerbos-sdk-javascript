@@ -224,3 +224,7 @@ export class Cerbos {
   //   }
   // }
 }
+
+export default {
+  Cerbos,
+};

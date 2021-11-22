@@ -1,6 +1,6 @@
 {
   "name": "cerbos",
-  "version": "0.0.5",
+  "version": "0.0.6-alpha.1",
   "homepage": "https://cerbos.dev",
   "description": "Cerbos helps you super-charge your authorization implementation by writing context-aware access control policies for your application resources.",
   "main": "./lib/cjs/index.js",
