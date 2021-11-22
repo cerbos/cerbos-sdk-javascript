@@ -1,15 +1,15 @@
 {
   "name": "cerbos",
-  "version": "0.0.6-alpha.1",
+  "version": "0.0.6-alpha.2",
   "homepage": "https://cerbos.dev",
   "description": "Cerbos helps you super-charge your authorization implementation by writing context-aware access control policies for your application resources.",
-  "main": "./lib/cjs/index.js",
-  "module": "./lib/esm/index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "build": "tsc -p tsconfig.json",
     "test": "jest --config jestconfig.json",
     "prepare": "npm run build",
     "lint": "eslint . --ext .ts",
