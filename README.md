@@ -6,11 +6,16 @@ The Cerbos JavaScript client library - sometimes known as an SDK - makes it easy
 
 ## Contents
 
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Documentation](#documentation)
+- [Cerbos Node SDK](#cerbos-node-sdk)
+  - [Contents](#contents)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [TypeScript](#typescript)
+  - [Configuration](#configuration)
+    - [Hostname (required)](#hostname-required)
+    - [Logging](#logging)
+  - [Documentation](#documentation)
 
 ## Requirements
 
@@ -102,10 +107,6 @@ A number of configuration options are avaliable when creating the Cerbos SDK ins
 
 The hostname to the Cerbos PDP instance must be defined when creating the Cerbos instance.
 
-### Timeouts
-
-It is possible to define a timeout value for all calls to the Cerbos instance. This is defined in milliseconds.
-
 ### Logging
 
 You can turn on debug logging if you want to check what endpoints are being called and with what arguments.
@@ -114,7 +115,6 @@ You can turn on debug logging if you want to check what endpoints are being call
 const cerbos = new Cerbos({
   hostname: "http://localhost:9090", // The Cerbos PDP instance
   logLevel: "debug",
-  timeout: 5000, // timeout in ms
 });
 ```
 
