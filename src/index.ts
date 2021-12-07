@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import fetch from "isomorphic-unfetch";
 import { v4 as uuidv4 } from "uuid";
 import * as winston from "winston";
 
@@ -117,24 +117,16 @@ class CerbosResponseWrapper implements ICerbosResponse {
 interface CerbosOptions {
   hostname: string;
   logLevel?: "fatal" | "error" | "warn" | "info" | "debug";
-  timeout?: number;
   playgroundInstance?: string;
 }
 
 export class Cerbos {
   private host: string;
   private log: winston.Logger;
-  private timeout: number;
   private playgroundInstance?: string;
 
-  constructor({
-    hostname,
-    logLevel,
-    timeout = 0,
-    playgroundInstance,
-  }: CerbosOptions) {
+  constructor({ hostname, logLevel, playgroundInstance }: CerbosOptions) {
     this.host = hostname;
-    this.timeout = timeout;
     this.playgroundInstance = playgroundInstance;
     this.log = winston.createLogger({
       level: logLevel,
@@ -181,7 +173,6 @@ export class Cerbos {
         method: "post",
         body: JSON.stringify(payload),
         headers,
-        timeout: this.timeout,
       });
       const data = await response.json();
       this.log.info("Cerbos.check: Response", data);

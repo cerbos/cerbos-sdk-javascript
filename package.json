@@ -39,7 +39,7 @@
     "url": "git+https://github.com/cerbos/cerbos-sdk-node.git"
   },
   "dependencies": {
-    "node-fetch": "^2.6.1",
+    "isomorphic-unfetch": "^3.1.0",
     "node-jose": "^2.0.0",
     "uuid": "^8.3.2",
     "winston": "^3.3.3"
