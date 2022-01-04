@@ -4,10 +4,10 @@ import * as winston from "winston";
 
 interface IPrincipal {
   id: string;
-  policyVersion?: any;
+  policyVersion?: unknown;
   roles: string[];
   attr?: {
-    [key: string]: any;
+    [key: string]: unknown;
   };
 }
 
@@ -23,18 +23,29 @@ interface IJwt {
 interface IAuthorize {
   actions: string[];
   resource: {
-    policyVersion?: any;
+    policyVersion?: unknown;
     kind: string;
     instances: {
       [resourceKey: string]: {
         attr?: {
-          [key: string]: any;
+          [key: string]: unknown;
         };
       };
     };
   };
   principal: IPrincipal;
   auxData?: IAuxData;
+}
+
+export enum ValidationErrorSource {
+  SOURCE_RESOURCE = "SOURCE_RESOURCE",
+  SOURCE_PRINCIPAL = "SOURCE_PRINCIPAL",
+}
+
+interface ValidationError {
+  path: string;
+  message: string;
+  source: ValidationErrorSource;
 }
 
 interface IAuthorizeResponse {
@@ -44,6 +55,7 @@ interface IAuthorizeResponse {
       actions: {
         [key: string]: AuthorizeEffect;
       };
+      validationErrors?: ValidationError[];
     };
   };
 }
@@ -51,11 +63,11 @@ interface IAuthorizeResponse {
 export interface ICerbosBatchAuthorizeResource {
   actions: string[];
   resource: {
-    policyVersion?: any;
+    policyVersion?: unknown;
     kind: string;
     id: string;
     attr: {
-      [key: string]: any;
+      [key: string]: unknown;
     };
   };
 }
@@ -64,29 +76,29 @@ export interface ICerbosBatchAuthorizeResult {
   [key: string]: AuthorizeEffect;
 }
 
-interface IBatchAuthorize {
-  principal: IPrincipal;
-  resources: ICerbosBatchAuthorizeResource[];
-}
+// interface IBatchAuthorize {
+//   principal: IPrincipal;
+//   resources: ICerbosBatchAuthorizeResource[];
+// }
 
-interface IAuthorizeBatchResponse {
-  requestID: string;
-  results: {
-    resourceId: string;
-    actions: ICerbosBatchAuthorizeResult;
-  }[];
-}
+// interface IAuthorizeBatchResponse {
+//   requestID: string;
+//   results: {
+//     resourceId: string;
+//     actions: ICerbosBatchAuthorizeResult;
+//   }[];
+// }
+
+// interface ICerbosBatchResponse {
+//   resourceId: string;
+//   actions: {
+//     [action: string]: AuthorizeEffect;
+//   };
+// }
 
 export enum AuthorizeEffect {
   ALLOW = "EFFECT_ALLOW",
   DENY = "EFFECT_DENY",
-}
-
-interface ICerbosBatchResponse {
-  resourceId: string;
-  actions: {
-    [action: string]: AuthorizeEffect;
-  };
 }
 
 export class AuthorizationError extends Error {}

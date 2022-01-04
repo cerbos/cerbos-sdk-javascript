@@ -5,7 +5,7 @@ import * as jose from "node-jose";
 let jwtToken = "";
 
 beforeAll(async () => {
-  let signingKey;
+  let signingKey: Buffer;
 
   try {
     signingKey = fs.readFileSync("./__tests__/cerbos/keys/signing_key.jwk");
