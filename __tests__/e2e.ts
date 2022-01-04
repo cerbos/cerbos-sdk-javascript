@@ -154,6 +154,86 @@ describe("Cerbos", () => {
   });
 });
 
+describe("Cerbos - Schema", () => {
+  let cerbos: Cerbos;
+
+  test("Log a validation error", async () => {
+    cerbos = new Cerbos({
+      hostname: "http://localhost:8080",
+      onValidationErrors: "log",
+    });
+    const result = await cerbos.check({
+      actions: ["view", "edit"],
+      resource: {
+        policyVersion: "default",
+        kind: "blogPost",
+        instances: {
+          article123: {
+            attr: {
+              authorId: "212324",
+              status: "INVALID",
+            },
+          },
+          article456: {
+            attr: {
+              authorId: "56756",
+              status: "PUBLISHED",
+            },
+          },
+        },
+      },
+      principal: {
+        id: "userId1",
+        policyVersion: "default",
+        roles: ["USER"],
+        attr: {
+          department: "marketing",
+        },
+      },
+      auxData: {
+        jwt: {
+          token: jwtToken,
+          keySetId: "ks1",
+        },
+      },
+    });
+
+    const canView = result.isAuthorized("article123", "view");
+
+    expect(canView).toBe(true);
+  });
+
+  test("Throw a validation error", async () => {
+    cerbos = new Cerbos({
+      hostname: "http://localhost:8080",
+      onValidationErrors: "error",
+    });
+    await expect(
+      cerbos.check({
+        actions: ["view"],
+        resource: {
+          kind: "blogPost",
+          instances: {
+            article123: {
+              attr: {
+                authorId: "212324",
+                status: "INVALID",
+              },
+            },
+          },
+        },
+        principal: {
+          id: "userId1",
+          roles: ["USER"],
+          attr: {
+            department: "marketing",
+          },
+        },
+      })
+    ).rejects.toThrow();
+  });
+});
+
 describe("Cerbos - Failed to connect", () => {
   let cerbos: Cerbos;
   beforeEach(() => {

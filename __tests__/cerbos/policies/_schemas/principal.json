@@ -2,8 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
-    "firstName": { "type": "string" },
-    "lastName": { "type": "string" }
+    "department": { "type": "string" }
   },
-  "required": ["firstName", "lastName"]
+  "required": ["department"]
 }

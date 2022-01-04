@@ -129,6 +129,7 @@ class CerbosResponseWrapper implements ICerbosResponse {
 interface CerbosOptions {
   hostname: string;
   logLevel?: "fatal" | "error" | "warn" | "info" | "debug";
+  onValidationErrors?: "error" | "log";
   playgroundInstance?: string;
 }
 
@@ -136,10 +137,17 @@ export class Cerbos {
   private host: string;
   private log: winston.Logger;
   private playgroundInstance?: string;
+  private onValidationErrors?: "error" | "log";
 
-  constructor({ hostname, logLevel, playgroundInstance }: CerbosOptions) {
+  constructor({
+    hostname,
+    logLevel,
+    playgroundInstance,
+    onValidationErrors,
+  }: CerbosOptions) {
     this.host = hostname;
     this.playgroundInstance = playgroundInstance;
+    this.onValidationErrors = onValidationErrors;
     this.log = winston.createLogger({
       level: logLevel,
       silent: !logLevel,
@@ -178,21 +186,45 @@ export class Cerbos {
       };
     }
 
+    let resp: IAuthorizeResponse;
+
+    // Fetch Data
     try {
       const response = await fetch(`${this.host}/api/check`, {
         method: "post",
         body: JSON.stringify(payload),
         headers,
       });
-      const data = await response.json();
-      this.log.info("Cerbos.check: Response", data);
-      return new CerbosResponseWrapper(data);
+      resp = await response.json();
+      this.log.info("Cerbos.check: Response", resp);
     } catch (e) {
       this.log.error("Cerbos.check Error", e);
       throw new AuthorizationError(
         `Could not connect to Cerbos PDP at ${this.host}`
       );
     }
+
+    // Handle Validation Errors
+
+    if (this.onValidationErrors) {
+      const validationErrors = resp.resourceInstances
+        ? Object.values(resp.resourceInstances)
+            .map((resource) => resource.validationErrors)
+            .flat()
+        : [];
+
+      if (validationErrors.length > 0) {
+        if (this.onValidationErrors === "error") {
+          throw new AuthorizationError(
+            `Validation Error: ${JSON.stringify(validationErrors)}`
+          );
+        } else {
+          this.log.error("Cerbos.check: Validation Errors", validationErrors);
+        }
+      }
+    }
+
+    return new CerbosResponseWrapper(resp);
   }
 
   // async authorizeBatch(data: IBatchAuthorize): Promise<ICerbosBatchResponse[]> {

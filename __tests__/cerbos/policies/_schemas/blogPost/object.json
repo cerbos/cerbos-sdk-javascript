@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
-    "title": { "type": "string" },
-    "authorId": { "type": "string" }
+    "authorId": { "type": "string" },
+    "status": { "enum": ["DRAFT", "PUBLISHED"] }
   },
-  "required": ["authorId"]
+  "required": ["authorId", "status"]
 }

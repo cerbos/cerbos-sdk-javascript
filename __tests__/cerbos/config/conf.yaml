@@ -13,4 +13,4 @@ auxData:
         local:
           file: /keys/verify_key.jwk
 schema:
-  enforcement: reject
+  enforcement: warn
