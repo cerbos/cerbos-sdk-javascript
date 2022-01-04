@@ -129,7 +129,7 @@ class CerbosResponseWrapper implements ICerbosResponse {
 interface CerbosOptions {
   hostname: string;
   logLevel?: "fatal" | "error" | "warn" | "info" | "debug";
-  onValidationErrors?: "error" | "log";
+  handleValidationErrors?: "error" | "log" | false;
   playgroundInstance?: string;
 }
 
@@ -137,17 +137,17 @@ export class Cerbos {
   private host: string;
   private log: winston.Logger;
   private playgroundInstance?: string;
-  private onValidationErrors?: "error" | "log";
+  private handleValidationErrors?: "error" | "log" | false;
 
   constructor({
     hostname,
     logLevel,
     playgroundInstance,
-    onValidationErrors,
+    handleValidationErrors,
   }: CerbosOptions) {
     this.host = hostname;
     this.playgroundInstance = playgroundInstance;
-    this.onValidationErrors = onValidationErrors;
+    this.handleValidationErrors = handleValidationErrors;
     this.log = winston.createLogger({
       level: logLevel,
       silent: !logLevel,
@@ -206,7 +206,7 @@ export class Cerbos {
 
     // Handle Validation Errors
 
-    if (this.onValidationErrors) {
+    if (this.handleValidationErrors) {
       const validationErrors = resp.resourceInstances
         ? Object.values(resp.resourceInstances)
             .map((resource) => resource.validationErrors)
@@ -214,7 +214,7 @@ export class Cerbos {
         : [];
 
       if (validationErrors.length > 0) {
-        if (this.onValidationErrors === "error") {
+        if (this.handleValidationErrors === "error") {
           throw new AuthorizationError(
             `Validation Error: ${JSON.stringify(validationErrors)}`
           );
