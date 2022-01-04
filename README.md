@@ -14,6 +14,7 @@ The Cerbos JavaScript client library - sometimes known as an SDK - makes it easy
     - [TypeScript](#typescript)
   - [Configuration](#configuration)
     - [Hostname (required)](#hostname-required)
+    - [Validation Errors](#validation-errors)
     - [Logging](#logging)
   - [Documentation](#documentation)
 
@@ -106,6 +107,18 @@ A number of configuration options are avaliable when creating the Cerbos SDK ins
 ### Hostname (required)
 
 The hostname to the Cerbos PDP instance must be defined when creating the Cerbos instance.
+
+### Validation Errors
+
+If you have [schema support](https://docs.cerbos.dev/cerbos/latest/policies/schemas.html) enabled on your Cerbos PDP then validation errors can be surfaced in the SDK also. To do this set the `handleValidationErrors` configuration value to either `log` for validation errors to be logged to console or `error` for an exception to be thrown should any validation errors occur.
+
+```js
+const cerbos = new Cerbos({
+  hostname: "http://localhost:9090", // The Cerbos PDP instance
+  handleValidationErrors: 'log', // or 'error'
+  logLevel: "error",
+});
+```
 
 ### Logging
 
