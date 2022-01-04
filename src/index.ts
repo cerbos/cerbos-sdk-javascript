@@ -60,21 +60,21 @@ interface IAuthorizeResponse {
   };
 }
 
-export interface ICerbosBatchAuthorizeResource {
-  actions: string[];
-  resource: {
-    policyVersion?: unknown;
-    kind: string;
-    id: string;
-    attr: {
-      [key: string]: unknown;
-    };
-  };
-}
+// export interface ICerbosBatchAuthorizeResource {
+//   actions: string[];
+//   resource: {
+//     policyVersion?: unknown;
+//     kind: string;
+//     id: string;
+//     attr: {
+//       [key: string]: unknown;
+//     };
+//   };
+// }
 
-export interface ICerbosBatchAuthorizeResult {
-  [key: string]: AuthorizeEffect;
-}
+// export interface ICerbosBatchAuthorizeResult {
+//   [key: string]: AuthorizeEffect;
+// }
 
 // interface IBatchAuthorize {
 //   principal: IPrincipal;
@@ -167,9 +167,7 @@ export class Cerbos {
     };
     this.log.debug("Cerbos.check Payload", payload);
 
-    // eslint-disable-next-line prefer-const
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let headers: any = {
+    let headers: HeadersInit = {
       "Content-Type": "application/json",
     };
 
