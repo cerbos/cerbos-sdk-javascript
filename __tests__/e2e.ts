@@ -5,7 +5,7 @@ import * as jose from "node-jose";
 let jwtToken = "";
 
 beforeAll(async () => {
-  let signingKey;
+  let signingKey: Buffer;
 
   try {
     signingKey = fs.readFileSync("./__tests__/cerbos/keys/signing_key.jwk");
@@ -151,6 +151,86 @@ describe("Cerbos", () => {
     const canView = result.isAuthorized("article123", "some-other-action");
 
     expect(canView).toBe(false);
+  });
+});
+
+describe("Cerbos - Schema", () => {
+  let cerbos: Cerbos;
+
+  test("Log a validation error", async () => {
+    cerbos = new Cerbos({
+      hostname: "http://localhost:8080",
+      handleValidationErrors: "log",
+    });
+    const result = await cerbos.check({
+      actions: ["view", "edit"],
+      resource: {
+        policyVersion: "default",
+        kind: "blogPost",
+        instances: {
+          article123: {
+            attr: {
+              authorId: "212324",
+              status: "INVALID",
+            },
+          },
+          article456: {
+            attr: {
+              authorId: "56756",
+              status: "PUBLISHED",
+            },
+          },
+        },
+      },
+      principal: {
+        id: "userId1",
+        policyVersion: "default",
+        roles: ["USER"],
+        attr: {
+          department: "marketing",
+        },
+      },
+      auxData: {
+        jwt: {
+          token: jwtToken,
+          keySetId: "ks1",
+        },
+      },
+    });
+
+    const canView = result.isAuthorized("article456", "view");
+
+    expect(canView).toBe(true);
+  });
+
+  test("Throw a validation error", async () => {
+    cerbos = new Cerbos({
+      hostname: "http://localhost:8080",
+      handleValidationErrors: "error",
+    });
+    await expect(
+      cerbos.check({
+        actions: ["view"],
+        resource: {
+          kind: "blogPost",
+          instances: {
+            article123: {
+              attr: {
+                authorId: "212324",
+                status: "INVALID",
+              },
+            },
+          },
+        },
+        principal: {
+          id: "userId1",
+          roles: ["USER"],
+          attr: {
+            department: "marketing",
+          },
+        },
+      })
+    ).rejects.toThrow();
   });
 });
 
