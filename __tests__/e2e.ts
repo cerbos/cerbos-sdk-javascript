@@ -160,7 +160,7 @@ describe("Cerbos - Schema", () => {
   test("Log a validation error", async () => {
     cerbos = new Cerbos({
       hostname: "http://localhost:8080",
-      onValidationErrors: "log",
+      handleValidationErrors: "log",
     });
     const result = await cerbos.check({
       actions: ["view", "edit"],
@@ -198,7 +198,7 @@ describe("Cerbos - Schema", () => {
       },
     });
 
-    const canView = result.isAuthorized("article123", "view");
+    const canView = result.isAuthorized("article456", "view");
 
     expect(canView).toBe(true);
   });
@@ -206,7 +206,7 @@ describe("Cerbos - Schema", () => {
   test("Throw a validation error", async () => {
     cerbos = new Cerbos({
       hostname: "http://localhost:8080",
-      onValidationErrors: "error",
+      handleValidationErrors: "error",
     });
     await expect(
       cerbos.check({
