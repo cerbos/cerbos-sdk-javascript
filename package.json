@@ -40,8 +40,8 @@
   },
   "dependencies": {
     "isomorphic-unfetch": "^3.1.0",
+    "loglevel": "^1.8.0",
     "node-jose": "^2.0.0",
-    "uuid": "^8.3.2",
-    "winston": "^3.3.3"
+    "uuid": "^8.3.2"
   }
 }

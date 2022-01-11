@@ -1,6 +1,6 @@
 import fetch from "isomorphic-unfetch";
 import { v4 as uuidv4 } from "uuid";
-import * as winston from "winston";
+import log from "loglevel";
 
 interface IPrincipal {
   id: string;
@@ -128,14 +128,14 @@ class CerbosResponseWrapper implements ICerbosResponse {
 
 interface CerbosOptions {
   hostname: string;
-  logLevel?: "fatal" | "error" | "warn" | "info" | "debug";
+  logLevel?: log.LogLevelDesc;
   handleValidationErrors?: "error" | "log" | false;
   playgroundInstance?: string;
 }
 
 export class Cerbos {
   private host: string;
-  private log: winston.Logger;
+  private log: log.Logger;
   private playgroundInstance?: string;
   private handleValidationErrors?: "error" | "log" | false;
 
@@ -148,15 +148,8 @@ export class Cerbos {
     this.host = hostname;
     this.playgroundInstance = playgroundInstance;
     this.handleValidationErrors = handleValidationErrors;
-    this.log = winston.createLogger({
-      level: logLevel,
-      silent: !logLevel,
-      transports: [
-        new winston.transports.Console({
-          format: winston.format.simple(),
-        }),
-      ],
-    });
+    this.log = log.noConflict();
+    this.log.setLevel(logLevel ?? "silent");
   }
 
   async check(data: IAuthorize): Promise<ICerbosResponse> {
