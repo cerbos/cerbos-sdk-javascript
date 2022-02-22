@@ -1,27 +1,55 @@
 name: CI
-on: [pull_request]
+
+on:
+  - pull_request
+
 jobs:
   lint:
+    name: Lint
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout commit
         uses: actions/checkout@v2
 
-      - name: Use Node.js
-        uses: actions/setup-node@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          cache: npm
+          node-version-file: .node-version
 
-      - name: Cache NPM
-        uses: actions/cache@v1
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm ci
 
       - name: Run lints
         run: npm run lint
+
+  test:
+    name: Test (Node.js v${{ matrix.node-version }})
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 12
+          - 14
+          - 16
+
+    steps:
+      - name: Checkout commit
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          cache: npm
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:with-server
