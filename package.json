@@ -11,6 +11,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "test": "jest --config jestconfig.json",
+    "test:server": "cd __tests__/cerbos && ./start.sh",
+    "test:with-server": "start-server-and-test test:server http://localhost:8080/_cerbos/health test",
     "prepare": "npm run build",
     "lint": "eslint . --ext .ts",
     "prepublishOnly": "npm test && npm run lint",
@@ -21,7 +23,7 @@
   "author": "Cerbos",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.4.0",
     "@types/node-fetch": "^2.5.11",
     "@types/node-jose": "^1.1.8",
     "@types/uuid": "^8.3.1",
@@ -30,6 +32,7 @@
     "eslint": "^7.30.0",
     "eslint-plugin-jest": "^24.3.6",
     "jest": "^27.0.6",
+    "start-server-and-test": "^1.14.0",
     "ts-jest": "^27.0.3",
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
