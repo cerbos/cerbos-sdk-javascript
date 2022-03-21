@@ -107,7 +107,7 @@ export interface ICerbosResponse {
   isAuthorized: (resourceKey: string, action: string) => boolean;
 }
 
-class CerbosResponseWrapper implements ICerbosResponse {
+export class CerbosResponseWrapper implements ICerbosResponse {
   readonly resp: IAuthorizeResponse;
 
   constructor(resp: IAuthorizeResponse) {
