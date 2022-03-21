@@ -2,7 +2,7 @@ import fetch from "isomorphic-unfetch";
 import { v4 as uuidv4 } from "uuid";
 import log from "loglevel";
 
-interface IPrincipal {
+export interface IPrincipal {
   id: string;
   policyVersion?: unknown;
   roles: string[];
@@ -11,16 +11,16 @@ interface IPrincipal {
   };
 }
 
-interface IAuxData {
+export interface IAuxData {
   jwt?: IJwt;
 }
 
-interface IJwt {
+export interface IJwt {
   token: string;
   keySetId?: string;
 }
 
-interface IAuthorize {
+export interface IAuthorize {
   actions: string[];
   resource: {
     policyVersion?: unknown;
@@ -42,13 +42,13 @@ export enum ValidationErrorSource {
   SOURCE_PRINCIPAL = "SOURCE_PRINCIPAL",
 }
 
-interface ValidationError {
+export interface ValidationError {
   path: string;
   message: string;
   source: ValidationErrorSource;
 }
 
-interface IAuthorizeResponse {
+export interface IAuthorizeResponse {
   requestID: string;
   resourceInstances: {
     [resourceKey: string]: {
@@ -101,13 +101,13 @@ export enum AuthorizeEffect {
   DENY = "EFFECT_DENY",
 }
 
-export class AuthorizationError extends Error {}
+export class AuthorizationError extends Error { }
 
 export interface ICerbosResponse {
   isAuthorized: (resourceKey: string, action: string) => boolean;
 }
 
-class CerbosResponseWrapper implements ICerbosResponse {
+export class CerbosResponseWrapper implements ICerbosResponse {
   readonly resp: IAuthorizeResponse;
 
   constructor(resp: IAuthorizeResponse) {
@@ -126,7 +126,7 @@ class CerbosResponseWrapper implements ICerbosResponse {
   }
 }
 
-interface CerbosOptions {
+export interface CerbosOptions {
   hostname: string;
   logLevel?: log.LogLevelDesc;
   handleValidationErrors?: "error" | "log" | false;
@@ -202,8 +202,8 @@ export class Cerbos {
     if (this.handleValidationErrors) {
       const validationErrors = resp.resourceInstances
         ? Object.values(resp.resourceInstances)
-            .map((resource) => resource.validationErrors)
-            .flat()
+          .map((resource) => resource.validationErrors)
+          .flat()
         : [];
 
       if (validationErrors.length > 0) {
