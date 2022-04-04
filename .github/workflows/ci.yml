@@ -52,4 +52,4 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm run test:with-server
+        run: CERBOS_NO_TELEMETRY npm run test:with-server
