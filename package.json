@@ -12,7 +12,7 @@
     "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "test": "jest --config jestconfig.json",
     "test:server": "cd __tests__/cerbos && ./start.sh",
-    "test:with-server": "DEBUG=start-server-and-test start-server-and-test test:server http://localhost:8080/_cerbos/health test",
+    "test:with-server": "start-server-and-test test:server http-get://localhost:8080/_cerbos/health test",
     "prepare": "npm run build",
     "lint": "eslint . --ext .ts",
     "prepublishOnly": "npm test && npm run lint",
