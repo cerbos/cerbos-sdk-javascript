@@ -81,6 +81,51 @@ describe("Cerbos", () => {
     expect(canView).toBe(true);
   });
 
+
+  test("Allowed action (scoped)", async () => {
+    const result = await cerbos.check({
+      actions: ["view", "edit"],
+      resource: {
+        policyVersion: "default",
+        kind: "blogPost",
+        scope: "testScope",
+        instances: {
+          article123: {
+            attr: {
+              authorId: "212324",
+              status: "DRAFT",
+            },
+          },
+          article456: {
+            attr: {
+              authorId: "56756",
+              status: "PUBLISHED",
+            },
+          },
+        },
+      },
+      principal: {
+        id: "userId1",
+        policyVersion: "default",
+        roles: ["USER"],
+        attr: {
+          department: "marketing",
+        },
+      },
+      auxData: {
+        jwt: {
+          token: jwtToken,
+          keySetId: "ks1",
+        },
+      },
+    });
+
+    const canView = result.isAuthorized("article123", "view");
+
+    expect(canView).toBe(true);
+  });
+
+
   test("Denied action", async () => {
     const result = await cerbos.check({
       actions: ["view", "edit"],

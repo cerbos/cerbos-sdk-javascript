@@ -5,6 +5,7 @@ import log from "loglevel";
 export interface IPrincipal {
   id: string;
   policyVersion?: unknown;
+  scope?: string;
   roles: string[];
   attr?: {
     [key: string]: unknown;
@@ -25,6 +26,7 @@ export interface IAuthorize {
   resource: {
     policyVersion?: unknown;
     kind: string;
+    scope?: string;
     instances: {
       [resourceKey: string]: {
         attr?: {
