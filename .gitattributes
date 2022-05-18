@@ -1,0 +1,2 @@
+/packages/grpc/src/protobuf/**/* linguist-generated=true
+/packages/http/src/openapi.d.ts linguist-generated=true

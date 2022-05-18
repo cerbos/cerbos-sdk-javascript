@@ -22,7 +22,13 @@
     "lib/**/*.d.ts",
     "lib/**/*.js"
   ],
+  "scripts": {
+    "generate": "rm -rf src/protobuf && buf generate --include-imports --output src/protobuf buf.build/cerbos/cerbos-api",
+    "postbuild": "rm -rf lib/protobuf && cp -r src/protobuf lib/"
+  },
   "dependencies": {
-    "@cerbos/core": "^0.1.0-dev"
+    "@cerbos/core": "^0.1.0-dev",
+    "@grpc/grpc-js": "^1.6.7",
+    "google-protobuf": "~> 3.19.4"
   }
 }

@@ -22,6 +22,9 @@
     "lib/**/*.d.ts",
     "lib/**/*.js"
   ],
+  "scripts": {
+    "generate": "openapi-typescript https://raw.githubusercontent.com/cerbos/cerbos/main/schema/openapiv2/cerbos/svc/v1/svc.swagger.json --output src/openapi.d.ts"
+  },
   "dependencies": {
     "@cerbos/core": "^0.1.0-dev"
   }

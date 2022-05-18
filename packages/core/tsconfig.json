@@ -3,6 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "declarationMap": true,
+    "lib": ["DOM"],
     "outDir": "lib",
     "rootDir": "src",
     "tsBuildInfoFile": "lib/.tsbuildinfo"
