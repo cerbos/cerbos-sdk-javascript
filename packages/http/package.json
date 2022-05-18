@@ -1,0 +1,28 @@
+{
+  "name": "@cerbos/http",
+  "version": "0.1.0-dev",
+  "description": "TODO",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cerbos/cerbos-sdk-javascript.git",
+    "directory": "packages/http"
+  },
+  "homepage": "https://github.com/cerbos/cerbos-sdk-javascript#readme",
+  "bugs": {
+    "url": "https://github.com/cerbos/cerbos-sdk-javascript/issues"
+  },
+  "author": "Cerbos <help@cerbos.dev> (https://cerbos.dev)",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 14"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib/**/*.d.ts",
+    "lib/**/*.js"
+  ],
+  "dependencies": {
+    "@cerbos/core": "^0.1.0-dev"
+  }
+}
