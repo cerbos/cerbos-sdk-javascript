@@ -1,3 +1,5 @@
+import "./fetch-polyfill";
+
 import { Client } from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";

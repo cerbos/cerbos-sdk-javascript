@@ -5,6 +5,10 @@ set -o pipefail
 
 export CERBOS_VERSION="${CERBOS_VERSION:-0.16.0}"
 
+if [[ "${CERBOS_VERSION}" = *-prerelease ]]; then
+  export CERBOS_IMAGE_TAG="${CERBOS_IMAGE_TAG:-dev}"
+fi
+
 uid=$(id -u)
 gid=$(id -g)
 export USER="${uid}:${gid}"
