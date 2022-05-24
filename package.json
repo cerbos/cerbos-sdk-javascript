@@ -14,7 +14,11 @@
     "lint:fix": "concurrently --max-processes=1 --prefix=none 'npm:lint:fix:*'",
     "lint:fix:eslint": "eslint --fix --max-warnings=0 .",
     "lint:fix:prettier": "prettier --write .",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "test": "npm run --workspace=packages/test test",
+    "test:servers:start": "npm run --workspace=packages/test test:servers:start",
+    "test:servers:stop": "npm run --workspace=packages/test test:servers:stop",
+    "test:watch": "npm run --workspace=packages/test test:watch"
   },
   "devDependencies": {
     "@tsconfig/node14": "^1.0.1",
@@ -27,9 +31,12 @@
     "eslint-import-resolver-typescript": "^2.7.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.2.2",
+    "jest": "^28.1.0",
     "openapi-typescript": "^5.3.0",
     "prettier": "^2.6.2",
     "prettier-plugin-pkg": "^0.13.2",
+    "ts-jest": "^28.0.3",
+    "ts-node": "^10.8.0",
     "ts-protoc-gen": "^0.15.0",
     "typescript": "^4.6.4"
   }

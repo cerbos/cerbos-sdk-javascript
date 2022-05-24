@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+export CERBOS_VERSION="${CERBOS_VERSION:-0.16.0}"
+
+uid=$(id -u)
+gid=$(id -g)
+export USER="${uid}:${gid}"
+
+mkdir -p servers/tmp/certificates servers/tmp/socket
+
+docker compose --file=servers/docker-compose.yml up --wait

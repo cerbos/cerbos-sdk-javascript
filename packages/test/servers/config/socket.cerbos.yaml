@@ -1,0 +1,17 @@
+auxData:
+  jwt:
+    disableVerification: true
+
+schema:
+  enforcement: reject
+
+server:
+  grpcListenAddr: unix:/socket/cerbos
+
+storage:
+  driver: disk
+  disk:
+    directory: /policies
+
+telemetry:
+  disabled: true

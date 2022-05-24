@@ -12,6 +12,7 @@ extends:
   - plugin:@typescript-eslint/strict
   - plugin:import/recommended
   - plugin:import/typescript
+  - plugin:jest/recommended
 
 rules:
   "@typescript-eslint/explicit-function-return-type": error

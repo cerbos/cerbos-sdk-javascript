@@ -1,0 +1,93 @@
+name: cerbos-sdk-javascript-test
+
+services:
+  certificates:
+    image: ruby:3.1-alpine
+    entrypoint: /generate-certificates
+    healthcheck:
+      interval: 2s
+      timeout: 1s
+      test:
+        - CMD
+        - test
+        - -f
+        - /healthy
+    volumes:
+      - type: bind
+        source: generate-certificates
+        target: /generate-certificates
+        read_only: true
+      - type: bind
+        source: tmp/certificates
+        target: /certificates
+
+  plaintext:
+    image: ghcr.io/cerbos/cerbos:${CERBOS_IMAGE_TAG:-$CERBOS_VERSION}
+    environment:
+      - CERBOS_CONFIG=/config/plaintext.cerbos.yaml
+    healthcheck:
+      interval: 2s
+    ports:
+      - 3592
+      - 3593
+    user: ${USER}
+    volumes:
+      - type: bind
+        source: config
+        target: /config
+        read_only: true
+      - type: bind
+        source: policies
+        target: /policies
+        read_only: true
+
+  socket:
+    extends: plaintext
+    environment:
+      - CERBOS_CONFIG=/config/socket.cerbos.yaml
+    volumes:
+      - type: bind
+        source: tmp/socket
+        target: /socket
+
+  tls:
+    extends: plaintext
+    environment:
+      - CERBOS_CONFIG=/config/tls.cerbos.yaml
+    volumes:
+      - type: bind
+        source: tmp/certificates
+        target: /certificates
+        read_only: true
+    depends_on:
+      certificates:
+        condition: service_healthy
+
+  mtls:
+    image: traefik:2.6
+    command:
+      - --entrypoints.grpc.address=:3593
+      - --ping
+      - --providers.file.filename=/config/mtls.traefik.yaml
+    healthcheck:
+      interval: 2s
+      timeout: 1s
+      test:
+        - CMD
+        - traefik
+        - healthcheck
+        - --ping
+    ports:
+      - 3593
+    volumes:
+      - type: bind
+        source: tmp/certificates
+        target: /certificates
+        read_only: true
+      - type: bind
+        source: config
+        target: /config
+        read_only: true
+    depends_on:
+      certificates:
+        condition: service_healthy

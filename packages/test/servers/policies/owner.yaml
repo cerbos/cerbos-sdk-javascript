@@ -1,0 +1,10 @@
+apiVersion: api.cerbos.dev/v1
+derivedRoles:
+  name: owner
+  definitions:
+    - name: OWNER
+      parentRoles:
+        - USER
+      condition:
+        match:
+          expr: R.attr.owner == P.id
