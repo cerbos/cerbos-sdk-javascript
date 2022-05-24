@@ -4,7 +4,6 @@ parser: "@typescript-eslint/parser"
 parserOptions:
   project:
     - packages/*/tsconfig.json
-    - scripts/tsconfig.json
 
 extends:
   - eslint:recommended

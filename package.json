@@ -4,7 +4,6 @@
     "packages/*"
   ],
   "scripts": {
-    "boilerplate": "ts-node scripts/boilerplate.ts",
     "build": "tsc --build && npm run --workspaces --if-present postbuild",
     "build:watch": "tsc --build --watch",
     "clean": "rm -rf packages/*/lib",
@@ -19,7 +18,6 @@
   },
   "devDependencies": {
     "@tsconfig/node14": "^1.0.1",
-    "@tsconfig/node18": "^1.0.0",
     "@types/node": "^14.18.18",
     "@types/prettier": "^2.6.1",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
@@ -32,7 +30,6 @@
     "openapi-typescript": "^5.3.0",
     "prettier": "^2.6.2",
     "prettier-plugin-pkg": "^0.13.2",
-    "ts-node": "^10.8.0",
     "ts-protoc-gen": "^0.15.0",
     "typescript": "^4.6.4"
   }

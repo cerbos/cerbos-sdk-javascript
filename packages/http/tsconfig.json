@@ -1,8 +1,6 @@
 {
-  "extends": "@tsconfig/node14/tsconfig.json",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "composite": true,
-    "declarationMap": true,
     "lib": ["DOM"],
     "outDir": "lib",
     "rootDir": "src",

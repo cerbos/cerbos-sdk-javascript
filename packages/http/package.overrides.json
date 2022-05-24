@@ -1,8 +1,0 @@
-{
-  "$schema": "https://json.schemastore.org/package.json",
-  "version": "0.1.0-dev",
-  "description": "TODO",
-  "scripts": {
-    "generate": "openapi-typescript https://raw.githubusercontent.com/cerbos/cerbos/main/schema/openapiv2/cerbos/svc/v1/svc.swagger.json --output src/openapi.d.ts"
-  }
-}
