@@ -1,3 +1,5 @@
+import { SecureContext } from "tls";
+
 import { Client, ServerInfo } from "@cerbos/core";
 import {
   ChannelCredentials,
@@ -8,14 +10,27 @@ import {
 import { ServerInfoRequest } from "./protobuf/cerbos/request/v1/request_pb";
 import { CerbosServiceService as cerbosService } from "./protobuf/cerbos/svc/v1/svc_grpc_pb";
 
+export interface Options {
+  tls: boolean | SecureContext;
+}
+
+const credentials = ({ tls }: Options): ChannelCredentials => {
+  if (!tls) {
+    return ChannelCredentials.createInsecure();
+  }
+
+  if (tls === true) {
+    return ChannelCredentials.createSsl();
+  }
+
+  return ChannelCredentials.createFromSecureContext(tls);
+};
+
 export class GRPC implements Client {
   private readonly client: GenericClient;
 
-  public constructor(target: string) {
-    this.client = new GenericClient(
-      target,
-      ChannelCredentials.createInsecure()
-    );
+  public constructor(target: string, options: Options) {
+    this.client = new GenericClient(target, credentials(options));
   }
 
   public async serverInfo(): Promise<ServerInfo> {
