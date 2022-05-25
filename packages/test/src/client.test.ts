@@ -55,6 +55,16 @@ describe("client", () => {
     },
   ];
 
+  if (process.platform === "linux") {
+    cases.push({
+      type: "gRPC | Unix socket | plaintext",
+      client: (): Client =>
+        new GRPC(`unix:${resolve(__dirname, "../servers/tmp/socket/cerbos")}`, {
+          tls: false,
+        }),
+    });
+  }
+
   describe.each(cases)("$type", ({ client: factory }: typeof cases[number]) => {
     let client: Client;
 
