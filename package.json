@@ -4,7 +4,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "tsc --build && npm run --workspaces --if-present postbuild",
+    "build": "tsc --build",
     "build:watch": "tsc --build --watch",
     "clean": "rm -rf packages/*/lib",
     "generate": "npm run --workspaces --if-present generate",
@@ -39,7 +39,7 @@
     "prettier-plugin-pkg": "^0.13.2",
     "ts-jest": "^28.0.3",
     "ts-node": "^10.8.0",
-    "ts-protoc-gen": "^0.15.0",
+    "ts-proto": "^1.112.2",
     "typescript": "^4.6.4"
   }
 }

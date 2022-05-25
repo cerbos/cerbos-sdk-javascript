@@ -7,8 +7,7 @@ import {
   MethodDefinition,
 } from "@grpc/grpc-js";
 
-import { ServerInfoRequest } from "./protobuf/cerbos/request/v1/request_pb";
-import { CerbosServiceService as cerbosService } from "./protobuf/cerbos/svc/v1/svc_grpc_pb";
+import { CerbosServiceService as cerbosService } from "./protobuf/cerbos/svc/v1/svc";
 
 export interface Options {
   tls: boolean | SecureContext;
@@ -33,13 +32,8 @@ export class GRPC implements Client {
     this.client = new GenericClient(target, credentials(options));
   }
 
-  public async serverInfo(): Promise<ServerInfo> {
-    const response = await this.performRequest(
-      cerbosService.serverInfo,
-      new ServerInfoRequest()
-    );
-
-    return response.toObject();
+  public serverInfo(): Promise<ServerInfo> {
+    return this.performRequest(cerbosService.serverInfo, {});
   }
 
   private performRequest<Request, Response>(
