@@ -4,10 +4,11 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 import { createSecureContext } from "tls";
 
-import { Client } from "@cerbos/core";
+import { Client, Effect, ValidationErrorSource } from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
 import { beforeAll, describe, expect, it } from "@jest/globals";
+import { UnsecuredJWT } from "jose";
 
 import { Ports, cerbosVersion, ports as serverPorts } from "./servers";
 
@@ -70,6 +71,172 @@ describe("client", () => {
 
     beforeAll(() => {
       client = factory();
+    });
+
+    describe("checkResources", () => {
+      it("checks a principal's permissions on a set of resources", async () => {
+        const response = await client.checkResources({
+          principal: {
+            id: "me@example.com",
+            policyVersion: "1",
+            scope: "test",
+            roles: ["USER"],
+            attributes: {
+              country: "NZ",
+            },
+          },
+          resources: [
+            {
+              resource: {
+                kind: "document",
+                id: "mine",
+                policyVersion: "1",
+                scope: "test",
+                attributes: {
+                  owner: "me@example.com",
+                },
+              },
+              actions: ["view", "edit", "delete"],
+            },
+            {
+              resource: {
+                kind: "document",
+                id: "theirs",
+                policyVersion: "1",
+                scope: "test",
+                attributes: {
+                  owner: "them@example.com",
+                },
+              },
+              actions: ["view", "edit", "delete"],
+            },
+            {
+              resource: {
+                kind: "document",
+                id: "invalid",
+                policyVersion: "1",
+                scope: "test",
+                attributes: {
+                  owner: 123,
+                },
+              },
+              actions: ["view", "edit", "delete"],
+            },
+          ],
+          auxData: {
+            jwt: {
+              token: new UnsecuredJWT({ delete: true }).encode(),
+            },
+          },
+          includeMetadata: true,
+          requestId: "42",
+        });
+
+        expect(response).toEqual({
+          requestId: "42",
+          results: [
+            {
+              resource: {
+                kind: "document",
+                id: "mine",
+                policyVersion: "1",
+                scope: "test",
+              },
+              actions: {
+                view: Effect.ALLOW,
+                edit: Effect.ALLOW,
+                delete: Effect.ALLOW,
+              },
+              validationErrors: [],
+              metadata: {
+                actions: {
+                  view: {
+                    matchedPolicy: "resource.document.v1/test",
+                    matchedScope: "test",
+                  },
+                  edit: {
+                    matchedPolicy: "resource.document.v1/test",
+                    matchedScope: "test",
+                  },
+                  delete: {
+                    matchedPolicy: "resource.document.v1/test",
+                    matchedScope: "",
+                  },
+                },
+                effectiveDerivedRoles: ["OWNER"],
+              },
+            },
+            {
+              resource: {
+                kind: "document",
+                id: "theirs",
+                policyVersion: "1",
+                scope: "test",
+              },
+              actions: {
+                view: Effect.ALLOW,
+                edit: Effect.DENY,
+                delete: Effect.ALLOW,
+              },
+              validationErrors: [],
+              metadata: {
+                actions: {
+                  view: {
+                    matchedPolicy: "resource.document.v1/test",
+                    matchedScope: "test",
+                  },
+                  edit: {
+                    matchedPolicy: "resource.document.v1/test",
+                    matchedScope: "",
+                  },
+                  delete: {
+                    matchedPolicy: "resource.document.v1/test",
+                    matchedScope: "",
+                  },
+                },
+                effectiveDerivedRoles: [],
+              },
+            },
+            {
+              resource: {
+                kind: "document",
+                id: "invalid",
+                policyVersion: "1",
+                scope: "test",
+              },
+              actions: {
+                view: Effect.DENY,
+                edit: Effect.DENY,
+                delete: Effect.DENY,
+              },
+              validationErrors: [
+                {
+                  path: "/owner",
+                  message: "expected string, but got number",
+                  source: ValidationErrorSource.RESOURCE,
+                },
+              ],
+              metadata: {
+                actions: {
+                  view: {
+                    matchedPolicy: "resource.document.v1/test",
+                    matchedScope: "",
+                  },
+                  edit: {
+                    matchedPolicy: "resource.document.v1/test",
+                    matchedScope: "",
+                  },
+                  delete: {
+                    matchedPolicy: "resource.document.v1/test",
+                    matchedScope: "",
+                  },
+                },
+                effectiveDerivedRoles: [],
+              },
+            },
+          ],
+        });
+      });
     });
 
     describe("serverInfo", () => {

@@ -1,7 +1,11 @@
 import { SecureContext } from "tls";
 
-import { Client, Transport } from "@cerbos/core";
-import { ChannelCredentials, Client as GenericClient } from "@grpc/grpc-js";
+import { Client, Response, Transport } from "@cerbos/core";
+import {
+  ChannelCredentials,
+  Client as GenericClient,
+  MethodDefinition,
+} from "@grpc/grpc-js";
 
 import { CerbosServiceService as cerbosService } from "./protobuf/cerbos/svc/v1/svc";
 
@@ -26,8 +30,9 @@ export class GRPC extends Client {
     const client = new GenericClient(target, credentials(options));
 
     const transport: Transport = (rpc, request) => {
-      const { path, requestSerialize, responseDeserialize } =
-        cerbosService[rpc];
+      const { path, requestSerialize, responseDeserialize } = cerbosService[
+        rpc
+      ] as MethodDefinition<typeof request, Response<typeof rpc>>; // https://github.com/microsoft/TypeScript/issues/30581
 
       return new Promise((resolve, reject) => {
         client.makeUnaryRequest(

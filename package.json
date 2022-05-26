@@ -30,6 +30,7 @@
     "@types/node": "^14.18.18",
     "@types/node-fetch": "^2.6.1",
     "@types/prettier": "^2.6.1",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
     "concurrently": "^7.2.1",
@@ -38,12 +39,13 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.2.2",
     "jest": "^28.1.0",
+    "jose": "^4.8.1",
     "node-fetch": "^2.6.7",
     "prettier": "^2.6.2",
     "prettier-plugin-pkg": "^0.13.2",
     "ts-jest": "^28.0.3",
     "ts-node": "^10.8.0",
-    "ts-proto": "^1.112.2",
+    "ts-proto": "^1.114.7",
     "typescript": "^4.6.4"
   }
 }

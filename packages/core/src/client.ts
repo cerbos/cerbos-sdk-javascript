@@ -1,13 +1,11 @@
-import { ServerInfoRequest } from "./protobuf/cerbos/request/v1/request";
-import { ServerInfoResponse } from "./protobuf/cerbos/response/v1/response";
-import { ServerInfo } from "./types";
-
-export interface RPCs {
-  serverInfo: [ServerInfoRequest, ServerInfoResponse];
-}
-
-export type Request<RPC extends keyof RPCs> = RPCs[RPC][0];
-export type Response<RPC extends keyof RPCs> = RPCs[RPC][1];
+import { checkResourcesResponseFromProtobuf } from "./convert/fromProtobuf";
+import { checkResourcesRequestToProtobuf } from "./convert/toProtobuf";
+import type { RPCs, Request, Response } from "./rpcs";
+import {
+  CheckResourcesRequest,
+  CheckResourcesResponse,
+  ServerInfo,
+} from "./types";
 
 export type Transport = <RPC extends keyof RPCs>(
   rpc: RPC,
@@ -16,6 +14,17 @@ export type Transport = <RPC extends keyof RPCs>(
 
 export class Client {
   protected constructor(private readonly transport: Transport) {}
+
+  public async checkResources(
+    request: CheckResourcesRequest
+  ): Promise<CheckResourcesResponse> {
+    return checkResourcesResponseFromProtobuf(
+      await this.transport(
+        "checkResources",
+        checkResourcesRequestToProtobuf(request)
+      )
+    );
+  }
 
   public serverInfo(): Promise<ServerInfo> {
     return this.transport("serverInfo", {});

@@ -1347,7 +1347,7 @@ export const TestTable_Expectation = {
       actions: isObject(object.actions)
         ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
             (acc, [key, value]) => {
-              acc[key] = value as Effect;
+              acc[key] = effectFromJSON(value);
               return acc;
             },
             {}
@@ -1416,7 +1416,7 @@ export const Test = {
       expected: isObject(object.expected)
         ? Object.entries(object.expected).reduce<{ [key: string]: Effect }>(
             (acc, [key, value]) => {
-              acc[key] = value as Effect;
+              acc[key] = effectFromJSON(value);
               return acc;
             },
             {}

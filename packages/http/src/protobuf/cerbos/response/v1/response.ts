@@ -1,8 +1,8 @@
 /* eslint-disable */
 import {
   Effect,
-  effectToJSON,
   effectFromJSON,
+  effectToJSON,
 } from "../../../cerbos/effect/v1/effect";
 import { ValidationError, Schema } from "../../../cerbos/schema/v1/schema";
 import { TestResults, Policy } from "../../../cerbos/policy/v1/policy";
@@ -521,7 +521,7 @@ export const CheckResourceSetResponse_ActionEffectMap = {
       actions: isObject(object.actions)
         ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
             (acc, [key, value]) => {
-              acc[key] = value as Effect;
+              acc[key] = effectFromJSON(value);
               return acc;
             },
             {}
@@ -789,7 +789,7 @@ export const CheckResourceBatchResponse_ActionEffectMap = {
       actions: isObject(object.actions)
         ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
             (acc, [key, value]) => {
-              acc[key] = value as Effect;
+              acc[key] = effectFromJSON(value);
               return acc;
             },
             {}
@@ -893,7 +893,7 @@ export const CheckResourcesResponse_ResultEntry = {
       actions: isObject(object.actions)
         ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
             (acc, [key, value]) => {
-              acc[key] = value as Effect;
+              acc[key] = effectFromJSON(value);
               return acc;
             },
             {}
