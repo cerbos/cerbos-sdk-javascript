@@ -1,0 +1,46 @@
+version: v1
+plugins:
+  - name: core
+    path: node_modules/.bin/protoc-gen-ts_proto
+    out: packages/core/src/protobuf
+    strategy: all
+    opt:
+      - env=both
+      - esModuleInterop=true
+      - oneof=unions
+      - onlyTypes=true
+      - outputEncodeMethods=false
+      - outputJsonMethods=false
+      - outputPartialMethods=false
+      - outputServices=false
+      - unrecognizedEnum=false
+
+  - name: grpc
+    path: node_modules/.bin/protoc-gen-ts_proto
+    out: packages/grpc/src/protobuf
+    strategy: all
+    opt:
+      - env=node
+      - esModuleInterop=true
+      - oneof=unions
+      - onlyTypes=false
+      - outputEncodeMethods=true
+      - outputJsonMethods=false
+      - outputPartialMethods=false
+      - outputServices=grpc-js
+      - unrecognizedEnum=false
+
+  - name: http
+    path: node_modules/.bin/protoc-gen-ts_proto
+    out: packages/http/src/protobuf
+    strategy: all
+    opt:
+      - env=both
+      - esModuleInterop=true
+      - oneof=unions
+      - onlyTypes=true
+      - outputEncodeMethods=false
+      - outputJsonMethods=true
+      - outputPartialMethods=false
+      - outputServices=false
+      - unrecognizedEnum=false

@@ -1,36 +1,39 @@
-import { Client, ServerInfo } from "@cerbos/core";
+import { Client, RPCs, Request, Response, Transport } from "@cerbos/core";
 
-import type { paths } from "./openapi";
+import { ServerInfoResponse } from "./protobuf/cerbos/response/v1/response";
 
-type Path = keyof paths;
-type Method<P extends Path> = keyof paths[P];
-type Response<P extends Path, M extends Method<P>> = paths[P][M] extends {
-  responses: { 200: { schema: infer Schema } };
-}
-  ? Schema
-  : never;
+type Service = {
+  [RPC in keyof RPCs]: {
+    method: "GET" | "POST";
+    path: string;
+    serializeRequest: (request: Request<RPC>) => string | null;
+    deserializeResponse: (response: unknown) => Response<RPC>;
+  };
+};
 
-export class HTTP implements Client {
-  public constructor(private readonly url: string) {}
+const service: Service = {
+  serverInfo: {
+    method: "GET",
+    path: "/api/server_info",
+    serializeRequest: () => null,
+    deserializeResponse: (response) => ServerInfoResponse.fromJSON(response),
+  },
+};
 
-  public async serverInfo(): Promise<ServerInfo> {
-    const { buildDate, commit, version } = await this.performRequest(
-      "/api/server_info",
-      "get"
-    );
+export class HTTP extends Client {
+  public constructor(url: string) {
+    const transport: Transport = async (rpc, request) => {
+      const { method, path, serializeRequest, deserializeResponse } =
+        service[rpc];
 
-    return {
-      buildDate: buildDate ?? "",
-      commit: commit ?? "",
-      version: version ?? "",
+      const response = await fetch(url + path, {
+        method,
+        body: serializeRequest(request),
+      });
+
+      return deserializeResponse(await response.json());
     };
-  }
 
-  private async performRequest<
-    Path extends keyof paths,
-    Method extends string & keyof paths[Path]
-  >(path: Path, method: Method): Promise<Response<Path, Method>> {
-    const response = await fetch(`${this.url}${path}`, { method });
-    return (await response.json()) as Response<Path, Method>;
+    super(transport);
   }
 }

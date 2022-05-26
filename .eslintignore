@@ -1,3 +1,2 @@
 /packages/*/lib/
-/packages/grpc/src/protobuf/
-/packages/http/src/openapi.d.ts
+/packages/*/src/protobuf/

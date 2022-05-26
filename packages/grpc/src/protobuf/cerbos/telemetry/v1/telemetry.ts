@@ -110,21 +110,16 @@ export interface Event {
   data?: { $case: "apiActivity"; apiActivity: Event_ApiActivity };
 }
 
+export interface Event_CountStat {
+  key: string;
+  count: number;
+}
+
 export interface Event_ApiActivity {
   version: string;
   uptime: Duration | undefined;
-  methodCalls: { [key: string]: number };
-  userAgents: { [key: string]: number };
-}
-
-export interface Event_ApiActivity_MethodCallsEntry {
-  key: string;
-  value: number;
-}
-
-export interface Event_ApiActivity_UserAgentsEntry {
-  key: string;
-  value: number;
+  methodCalls: Event_CountStat[];
+  userAgents: Event_CountStat[];
 }
 
 function createBaseServerLaunch(): ServerLaunch {
@@ -1106,8 +1101,48 @@ export const Event = {
   },
 };
 
+function createBaseEvent_CountStat(): Event_CountStat {
+  return { key: "", count: 0 };
+}
+
+export const Event_CountStat = {
+  encode(
+    message: Event_CountStat,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+    if (message.count !== 0) {
+      writer.uint32(16).uint64(message.count);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Event_CountStat {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEvent_CountStat();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+        case 2:
+          message.count = longToNumber(reader.uint64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
 function createBaseEvent_ApiActivity(): Event_ApiActivity {
-  return { version: "", uptime: undefined, methodCalls: {}, userAgents: {} };
+  return { version: "", uptime: undefined, methodCalls: [], userAgents: [] };
 }
 
 export const Event_ApiActivity = {
@@ -1121,18 +1156,12 @@ export const Event_ApiActivity = {
     if (message.uptime !== undefined) {
       Duration.encode(message.uptime, writer.uint32(18).fork()).ldelim();
     }
-    Object.entries(message.methodCalls).forEach(([key, value]) => {
-      Event_ApiActivity_MethodCallsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(26).fork()
-      ).ldelim();
-    });
-    Object.entries(message.userAgents).forEach(([key, value]) => {
-      Event_ApiActivity_UserAgentsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(34).fork()
-      ).ldelim();
-    });
+    for (const v of message.methodCalls) {
+      Event_CountStat.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+    for (const v of message.userAgents) {
+      Event_CountStat.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -1150,108 +1179,14 @@ export const Event_ApiActivity = {
           message.uptime = Duration.decode(reader, reader.uint32());
           break;
         case 3:
-          const entry3 = Event_ApiActivity_MethodCallsEntry.decode(
-            reader,
-            reader.uint32()
+          message.methodCalls.push(
+            Event_CountStat.decode(reader, reader.uint32())
           );
-          if (entry3.value !== undefined) {
-            message.methodCalls[entry3.key] = entry3.value;
-          }
           break;
         case 4:
-          const entry4 = Event_ApiActivity_UserAgentsEntry.decode(
-            reader,
-            reader.uint32()
+          message.userAgents.push(
+            Event_CountStat.decode(reader, reader.uint32())
           );
-          if (entry4.value !== undefined) {
-            message.userAgents[entry4.key] = entry4.value;
-          }
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-};
-
-function createBaseEvent_ApiActivity_MethodCallsEntry(): Event_ApiActivity_MethodCallsEntry {
-  return { key: "", value: 0 };
-}
-
-export const Event_ApiActivity_MethodCallsEntry = {
-  encode(
-    message: Event_ApiActivity_MethodCallsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== 0) {
-      writer.uint32(16).uint64(message.value);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Event_ApiActivity_MethodCallsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEvent_ApiActivity_MethodCallsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-        case 2:
-          message.value = longToNumber(reader.uint64() as Long);
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-};
-
-function createBaseEvent_ApiActivity_UserAgentsEntry(): Event_ApiActivity_UserAgentsEntry {
-  return { key: "", value: 0 };
-}
-
-export const Event_ApiActivity_UserAgentsEntry = {
-  encode(
-    message: Event_ApiActivity_UserAgentsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== 0) {
-      writer.uint32(16).uint64(message.value);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Event_ApiActivity_UserAgentsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEvent_ApiActivity_UserAgentsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.string();
-          break;
-        case 2:
-          message.value = longToNumber(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
