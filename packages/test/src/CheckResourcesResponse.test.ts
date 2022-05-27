@@ -85,6 +85,42 @@ describe("CheckResourcesResponse", () => {
     });
   });
 
+  describe("#allowedActions", () => {
+    const response = new CheckResourcesResponse({
+      requestId: uuidv4(),
+      results: [
+        buildResult({
+          resource: {
+            kind: "document",
+            id: "found",
+            policyVersion: "default",
+            scope: "",
+          },
+          actions: {
+            allowed: Effect.ALLOW,
+            denied: Effect.DENY,
+          },
+        }),
+      ],
+    });
+
+    describe("when the resource is found", () => {
+      it("returns a list of allowed actions", () => {
+        expect(
+          response.allowedActions({ kind: "document", id: "found" })
+        ).toEqual(["allowed"]);
+      });
+    });
+
+    describe("when the resource is not found", () => {
+      it("returns undefined", () => {
+        expect(
+          response.allowedActions({ kind: "document", id: "not_found" })
+        ).toBeUndefined();
+      });
+    });
+  });
+
   describe("#isAllowed", () => {
     const response = new CheckResourcesResponse({
       requestId: uuidv4(),

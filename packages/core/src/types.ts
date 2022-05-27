@@ -28,6 +28,10 @@ export class CheckResourcesResponse implements CheckResourcesResponseData {
     return this.findResult(resource)?.allAllowed();
   }
 
+  public allowedActions(resource: ResourceQuery): string[] | undefined {
+    return this.findResult(resource)?.allowedActions();
+  }
+
   public isAllowed({
     resource,
     action,
