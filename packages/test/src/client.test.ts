@@ -320,6 +320,41 @@ describe("client", () => {
       });
     });
 
+    describe("isAllowed", () => {
+      it("checks if a principal is allowed to perform an action on a resource", async () => {
+        const allowed = await client.isAllowed({
+          principal: {
+            id: "me@example.com",
+            policyVersion: "1",
+            scope: "test",
+            roles: ["USER"],
+            attributes: {
+              country: "NZ",
+            },
+          },
+          resource: {
+            kind: "document",
+            id: "mine",
+            policyVersion: "1",
+            scope: "test",
+            attributes: {
+              owner: "me@example.com",
+            },
+          },
+          action: "edit",
+          auxData: {
+            jwt: {
+              token: new UnsecuredJWT({ delete: true }).encode(),
+            },
+          },
+          includeMetadata: true,
+          requestId: "42",
+        });
+
+        expect(allowed).toBe(true);
+      });
+    });
+
     describe("serverInfo", () => {
       it("returns information about the server", async () => {
         const result = await client.serverInfo();

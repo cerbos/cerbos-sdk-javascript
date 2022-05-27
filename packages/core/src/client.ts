@@ -6,6 +6,7 @@ import {
   CheckResourcesRequest,
   CheckResourcesResponse,
   CheckResourcesResult,
+  IsAllowedRequest,
   ServerInfo,
 } from "./types";
 
@@ -44,6 +45,20 @@ export class Client {
         checkResourcesRequestToProtobuf(request)
       )
     );
+  }
+
+  public async isAllowed({
+    action,
+    ...rest
+  }: IsAllowedRequest): Promise<boolean> {
+    const result = await this.checkResource({ actions: [action], ...rest });
+
+    const allowed = result.isAllowed(action);
+    if (allowed === undefined) {
+      throw new Error("No decision returned for action");
+    }
+
+    return allowed;
   }
 
   public serverInfo(): Promise<ServerInfo> {

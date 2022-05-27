@@ -135,6 +135,10 @@ export enum Effect {
   DENY = "EFFECT_DENY",
 }
 
+export type IsAllowedRequest = Omit<CheckResourceRequest, "actions"> & {
+  action: string;
+};
+
 export interface JWT {
   token: string;
   keySetId?: string;
