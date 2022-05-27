@@ -76,6 +76,12 @@ export class CheckResourcesResult implements CheckResourcesResultData {
     this.metadata = metadata;
   }
 
+  public allAllowed(): boolean {
+    return Object.values(this.actions).every(
+      (effect) => effect === Effect.ALLOW
+    );
+  }
+
   public isAllowed(action: string): boolean | undefined {
     switch (this.actions[action]) {
       case Effect.ALLOW:
