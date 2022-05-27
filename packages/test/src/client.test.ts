@@ -85,6 +85,73 @@ describe("client", () => {
       }
     });
 
+    describe("checkResource", () => {
+      it("checks a principal's permissions on a resource", async () => {
+        const result = await client.checkResource({
+          principal: {
+            id: "me@example.com",
+            policyVersion: "1",
+            scope: "test",
+            roles: ["USER"],
+            attributes: {
+              country: "NZ",
+            },
+          },
+          resource: {
+            kind: "document",
+            id: "mine",
+            policyVersion: "1",
+            scope: "test",
+            attributes: {
+              owner: "me@example.com",
+            },
+          },
+          actions: ["view", "edit", "delete"],
+          auxData: {
+            jwt: {
+              token: new UnsecuredJWT({ delete: true }).encode(),
+            },
+          },
+          includeMetadata: true,
+          requestId: "42",
+        });
+
+        expect(result).toEqual(
+          new CheckResourcesResult({
+            resource: {
+              kind: "document",
+              id: "mine",
+              policyVersion: "1",
+              scope: "test",
+            },
+            actions: {
+              view: Effect.ALLOW,
+              edit: Effect.ALLOW,
+              delete: Effect.ALLOW,
+            },
+            validationErrors: [],
+            metadata: {
+              actions: {
+                view: {
+                  matchedPolicy: "resource.document.v1/test",
+                  matchedScope: "test",
+                },
+                edit: {
+                  matchedPolicy: "resource.document.v1/test",
+                  matchedScope: "test",
+                },
+                delete: {
+                  matchedPolicy: "resource.document.v1/test",
+                  matchedScope: "",
+                },
+              },
+              effectiveDerivedRoles: ["OWNER"],
+            },
+          })
+        );
+      });
+    });
+
     describe("checkResources", () => {
       it("checks a principal's permissions on a set of resources", async () => {
         const response = await client.checkResources({

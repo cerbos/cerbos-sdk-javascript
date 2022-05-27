@@ -2,6 +2,9 @@ export interface AuxData {
   jwt?: JWT;
 }
 
+export type CheckResourceRequest = Omit<CheckResourcesRequest, "resources"> &
+  ResourceCheck;
+
 export interface CheckResourcesRequest {
   principal: Principal;
   resources: ResourceCheck[];
