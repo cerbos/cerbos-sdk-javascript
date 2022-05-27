@@ -1,9 +1,6 @@
-import {
-  CheckResourcesResult,
-  CheckResourcesResultResource,
-} from "@cerbos/core";
+import { CheckResourcesResult, CheckResourcesResultData } from "@cerbos/core";
 
-export const buildResults = ({
+export const buildResultsForResources = ({
   id,
   policyVersions,
   scopes,
@@ -14,18 +11,27 @@ export const buildResults = ({
 }): CheckResourcesResult[] =>
   ["document", "image"].flatMap((kind) =>
     policyVersions.flatMap((policyVersion) =>
-      scopes.map((scope) => buildResult({ kind, id, policyVersion, scope }))
+      scopes.map((scope) =>
+        buildResult({ resource: { kind, id, policyVersion, scope } })
+      )
     )
   );
 
 export const buildResult = (
-  resource: CheckResourcesResultResource
-): CheckResourcesResult => ({
-  resource,
-  actions: {},
-  validationErrors: [],
-  metadata: undefined,
-});
+  result: Partial<CheckResourcesResultData>
+): CheckResourcesResult =>
+  new CheckResourcesResult({
+    resource: {
+      kind: "document",
+      id: "1",
+      policyVersion: "default",
+      scope: "",
+    },
+    actions: {},
+    validationErrors: [],
+    metadata: undefined,
+    ...result,
+  });
 
 export const shuffle = <T>(values: T[]): T[] =>
   values

@@ -41,11 +41,43 @@ export class CheckResourcesResponse implements CheckResourcesResponseData {
   }
 }
 
-export interface CheckResourcesResult {
+export interface CheckResourcesResultData {
   resource: CheckResourcesResultResource;
   actions: Record<string, Effect | undefined>;
   validationErrors: ValidationError[];
   metadata: CheckResourcesResultMetadata | undefined;
+}
+
+export class CheckResourcesResult implements CheckResourcesResultData {
+  public resource: CheckResourcesResultResource;
+  public actions: Record<string, Effect | undefined>;
+  public validationErrors: ValidationError[];
+  public metadata: CheckResourcesResultMetadata | undefined;
+
+  public constructor({
+    resource,
+    actions,
+    validationErrors,
+    metadata,
+  }: CheckResourcesResultData) {
+    this.resource = resource;
+    this.actions = actions;
+    this.validationErrors = validationErrors;
+    this.metadata = metadata;
+  }
+
+  public isAllowed(action: string): boolean | undefined {
+    switch (this.actions[action]) {
+      case Effect.ALLOW:
+        return true;
+
+      case Effect.DENY:
+        return false;
+
+      default:
+        return undefined;
+    }
+  }
 }
 
 export interface CheckResourcesResultResource {

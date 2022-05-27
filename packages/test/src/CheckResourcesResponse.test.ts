@@ -2,29 +2,29 @@ import { CheckResourcesResponse } from "@cerbos/core";
 import { describe, expect, it } from "@jest/globals";
 import { v4 as uuidv4 } from "uuid";
 
-import { buildResult, buildResults, shuffle } from "./helpers";
+import { buildResult, buildResultsForResources, shuffle } from "./helpers";
 
 describe("CheckResourcesResponse", () => {
   describe("#findResult", () => {
     const response = new CheckResourcesResponse({
       requestId: uuidv4(),
       results: shuffle([
-        ...buildResults({
+        ...buildResultsForResources({
           id: "kind_and_id",
           policyVersions: ["default"],
           scopes: [""],
         }),
-        ...buildResults({
+        ...buildResultsForResources({
           id: "policy_version",
           policyVersions: ["1", "2"],
           scopes: [""],
         }),
-        ...buildResults({
+        ...buildResultsForResources({
           id: "scope",
           policyVersions: ["default"],
           scopes: ["alpha", "beta"],
         }),
-        ...buildResults({
+        ...buildResultsForResources({
           id: "policy_version_and_scope",
           policyVersions: ["1", "2"],
           scopes: ["alpha", "beta"],
@@ -40,7 +40,9 @@ describe("CheckResourcesResponse", () => {
 
       it("finds a matching result", () => {
         expect(response.findResult(query)).toEqual(
-          buildResult({ ...query, policyVersion: "default", scope: "" })
+          buildResult({
+            resource: { ...query, policyVersion: "default", scope: "" },
+          })
         );
       });
     });
@@ -54,7 +56,7 @@ describe("CheckResourcesResponse", () => {
 
       it("finds a matching result", () => {
         expect(response.findResult(query)).toEqual(
-          buildResult({ ...query, scope: "" })
+          buildResult({ resource: { ...query, scope: "" } })
         );
       });
     });
@@ -68,7 +70,7 @@ describe("CheckResourcesResponse", () => {
 
       it("finds a matching result", () => {
         expect(response.findResult(query)).toEqual(
-          buildResult({ ...query, policyVersion: "default" })
+          buildResult({ resource: { ...query, policyVersion: "default" } })
         );
       });
     });
@@ -82,7 +84,9 @@ describe("CheckResourcesResponse", () => {
       };
 
       it("finds a matching result", () => {
-        expect(response.findResult(query)).toEqual(buildResult(query));
+        expect(response.findResult(query)).toEqual(
+          buildResult({ resource: query })
+        );
       });
     });
 

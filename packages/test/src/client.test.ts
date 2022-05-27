@@ -6,6 +6,7 @@ import { createSecureContext } from "tls";
 
 import {
   CheckResourcesResponse,
+  CheckResourcesResult,
   Client,
   Effect,
   ValidationErrorSource,
@@ -147,7 +148,7 @@ describe("client", () => {
           new CheckResourcesResponse({
             requestId: "42",
             results: [
-              {
+              new CheckResourcesResult({
                 resource: {
                   kind: "document",
                   id: "mine",
@@ -177,8 +178,8 @@ describe("client", () => {
                   },
                   effectiveDerivedRoles: ["OWNER"],
                 },
-              },
-              {
+              }),
+              new CheckResourcesResult({
                 resource: {
                   kind: "document",
                   id: "theirs",
@@ -208,8 +209,8 @@ describe("client", () => {
                   },
                   effectiveDerivedRoles: [],
                 },
-              },
-              {
+              }),
+              new CheckResourcesResult({
                 resource: {
                   kind: "document",
                   id: "invalid",
@@ -245,7 +246,7 @@ describe("client", () => {
                   },
                   effectiveDerivedRoles: [],
                 },
-              },
+              }),
             ],
           })
         );

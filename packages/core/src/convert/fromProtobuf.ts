@@ -34,12 +34,12 @@ const checkResourcesResultFromProtobuf = ({
     throw new Error("Missing resource on CheckResources result");
   }
 
-  return {
+  return new CheckResourcesResult({
     resource,
     actions: actionsFromProtobuf(actions),
     validationErrors: validationErrors.map(validationErrorFromProtobuf),
     metadata: meta,
-  };
+  });
 };
 
 const actionsFromProtobuf = (
