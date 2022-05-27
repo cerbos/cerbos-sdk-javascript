@@ -1,10 +1,72 @@
-import { CheckResourcesResponse } from "@cerbos/core";
+import { CheckResourcesResponse, Effect, ResourceQuery } from "@cerbos/core";
 import { describe, expect, it } from "@jest/globals";
 import { v4 as uuidv4 } from "uuid";
 
 import { buildResult, buildResultsForResources, shuffle } from "./helpers";
 
 describe("CheckResourcesResponse", () => {
+  describe("#isAllowed", () => {
+    const response = new CheckResourcesResponse({
+      requestId: uuidv4(),
+      results: [
+        buildResult({
+          resource: {
+            kind: "document",
+            id: "found",
+            policyVersion: "default",
+            scope: "",
+          },
+          actions: {
+            allowed: Effect.ALLOW,
+            denied: Effect.DENY,
+          },
+        }),
+      ],
+    });
+
+    describe("when the resource is found", () => {
+      const query: ResourceQuery = {
+        kind: "document",
+        id: "found",
+      };
+
+      describe("when the action is allowed", () => {
+        it("returns true", () => {
+          expect(
+            response.isAllowed({ resource: query, action: "allowed" })
+          ).toBe(true);
+        });
+      });
+
+      describe("when the action is denied", () => {
+        it("returns false", () => {
+          expect(
+            response.isAllowed({ resource: query, action: "denied" })
+          ).toBe(false);
+        });
+      });
+
+      describe("when the action is not present", () => {
+        it("returns undefined", () => {
+          expect(
+            response.isAllowed({ resource: query, action: "unknown" })
+          ).toBeUndefined();
+        });
+      });
+    });
+
+    describe("when the resource is not found", () => {
+      it("returns undefined", () => {
+        expect(
+          response.isAllowed({
+            resource: { kind: "document", id: "not_found" },
+            action: "any",
+          })
+        ).toBeUndefined();
+      });
+    });
+  });
+
   describe("#findResult", () => {
     const response = new CheckResourcesResponse({
       requestId: uuidv4(),
