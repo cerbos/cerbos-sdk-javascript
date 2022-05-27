@@ -4,10 +4,15 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 import { createSecureContext } from "tls";
 
-import { Client, Effect, ValidationErrorSource } from "@cerbos/core";
+import {
+  CheckResourcesResponse,
+  Client,
+  Effect,
+  ValidationErrorSource,
+} from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
-import { beforeAll, describe, expect, it } from "@jest/globals";
+import { afterAll, beforeAll, describe, expect, it } from "@jest/globals";
 import { UnsecuredJWT } from "jose";
 
 import { Ports, cerbosVersion, ports as serverPorts } from "./servers";
@@ -73,6 +78,12 @@ describe("client", () => {
       client = factory();
     });
 
+    afterAll(() => {
+      if (client instanceof GRPC) {
+        client.close();
+      }
+    });
+
     describe("checkResources", () => {
       it("checks a principal's permissions on a set of resources", async () => {
         const response = await client.checkResources({
@@ -132,110 +143,112 @@ describe("client", () => {
           requestId: "42",
         });
 
-        expect(response).toEqual({
-          requestId: "42",
-          results: [
-            {
-              resource: {
-                kind: "document",
-                id: "mine",
-                policyVersion: "1",
-                scope: "test",
-              },
-              actions: {
-                view: Effect.ALLOW,
-                edit: Effect.ALLOW,
-                delete: Effect.ALLOW,
-              },
-              validationErrors: [],
-              metadata: {
+        expect(response).toEqual(
+          new CheckResourcesResponse({
+            requestId: "42",
+            results: [
+              {
+                resource: {
+                  kind: "document",
+                  id: "mine",
+                  policyVersion: "1",
+                  scope: "test",
+                },
                 actions: {
-                  view: {
-                    matchedPolicy: "resource.document.v1/test",
-                    matchedScope: "test",
-                  },
-                  edit: {
-                    matchedPolicy: "resource.document.v1/test",
-                    matchedScope: "test",
-                  },
-                  delete: {
-                    matchedPolicy: "resource.document.v1/test",
-                    matchedScope: "",
-                  },
+                  view: Effect.ALLOW,
+                  edit: Effect.ALLOW,
+                  delete: Effect.ALLOW,
                 },
-                effectiveDerivedRoles: ["OWNER"],
+                validationErrors: [],
+                metadata: {
+                  actions: {
+                    view: {
+                      matchedPolicy: "resource.document.v1/test",
+                      matchedScope: "test",
+                    },
+                    edit: {
+                      matchedPolicy: "resource.document.v1/test",
+                      matchedScope: "test",
+                    },
+                    delete: {
+                      matchedPolicy: "resource.document.v1/test",
+                      matchedScope: "",
+                    },
+                  },
+                  effectiveDerivedRoles: ["OWNER"],
+                },
               },
-            },
-            {
-              resource: {
-                kind: "document",
-                id: "theirs",
-                policyVersion: "1",
-                scope: "test",
-              },
-              actions: {
-                view: Effect.ALLOW,
-                edit: Effect.DENY,
-                delete: Effect.ALLOW,
-              },
-              validationErrors: [],
-              metadata: {
+              {
+                resource: {
+                  kind: "document",
+                  id: "theirs",
+                  policyVersion: "1",
+                  scope: "test",
+                },
                 actions: {
-                  view: {
-                    matchedPolicy: "resource.document.v1/test",
-                    matchedScope: "test",
-                  },
-                  edit: {
-                    matchedPolicy: "resource.document.v1/test",
-                    matchedScope: "",
-                  },
-                  delete: {
-                    matchedPolicy: "resource.document.v1/test",
-                    matchedScope: "",
-                  },
+                  view: Effect.ALLOW,
+                  edit: Effect.DENY,
+                  delete: Effect.ALLOW,
                 },
-                effectiveDerivedRoles: [],
-              },
-            },
-            {
-              resource: {
-                kind: "document",
-                id: "invalid",
-                policyVersion: "1",
-                scope: "test",
-              },
-              actions: {
-                view: Effect.DENY,
-                edit: Effect.DENY,
-                delete: Effect.DENY,
-              },
-              validationErrors: [
-                {
-                  path: "/owner",
-                  message: "expected string, but got number",
-                  source: ValidationErrorSource.RESOURCE,
+                validationErrors: [],
+                metadata: {
+                  actions: {
+                    view: {
+                      matchedPolicy: "resource.document.v1/test",
+                      matchedScope: "test",
+                    },
+                    edit: {
+                      matchedPolicy: "resource.document.v1/test",
+                      matchedScope: "",
+                    },
+                    delete: {
+                      matchedPolicy: "resource.document.v1/test",
+                      matchedScope: "",
+                    },
+                  },
+                  effectiveDerivedRoles: [],
                 },
-              ],
-              metadata: {
+              },
+              {
+                resource: {
+                  kind: "document",
+                  id: "invalid",
+                  policyVersion: "1",
+                  scope: "test",
+                },
                 actions: {
-                  view: {
-                    matchedPolicy: "resource.document.v1/test",
-                    matchedScope: "",
-                  },
-                  edit: {
-                    matchedPolicy: "resource.document.v1/test",
-                    matchedScope: "",
-                  },
-                  delete: {
-                    matchedPolicy: "resource.document.v1/test",
-                    matchedScope: "",
-                  },
+                  view: Effect.DENY,
+                  edit: Effect.DENY,
+                  delete: Effect.DENY,
                 },
-                effectiveDerivedRoles: [],
+                validationErrors: [
+                  {
+                    path: "/owner",
+                    message: "expected string, but got number",
+                    source: ValidationErrorSource.RESOURCE,
+                  },
+                ],
+                metadata: {
+                  actions: {
+                    view: {
+                      matchedPolicy: "resource.document.v1/test",
+                      matchedScope: "",
+                    },
+                    edit: {
+                      matchedPolicy: "resource.document.v1/test",
+                      matchedScope: "",
+                    },
+                    delete: {
+                      matchedPolicy: "resource.document.v1/test",
+                      matchedScope: "",
+                    },
+                  },
+                  effectiveDerivedRoles: [],
+                },
               },
-            },
-          ],
-        });
+            ],
+          })
+        );
       });
     });
 

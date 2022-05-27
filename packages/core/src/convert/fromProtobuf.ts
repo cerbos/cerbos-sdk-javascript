@@ -18,10 +18,11 @@ import {
 export const checkResourcesResponseFromProtobuf = ({
   requestId,
   results,
-}: CheckResourcesResponseProtobuf): CheckResourcesResponse => ({
-  requestId,
-  results: results.map(checkResourcesResultFromProtobuf),
-});
+}: CheckResourcesResponseProtobuf): CheckResourcesResponse =>
+  new CheckResourcesResponse({
+    requestId,
+    results: results.map(checkResourcesResultFromProtobuf),
+  });
 
 const checkResourcesResultFromProtobuf = ({
   resource,

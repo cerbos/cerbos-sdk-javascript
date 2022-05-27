@@ -26,6 +26,8 @@ const credentials = ({ tls }: Options): ChannelCredentials => {
 };
 
 export class GRPC extends Client {
+  private readonly client: GenericClient;
+
   public constructor(target: string, options: Options) {
     const client = new GenericClient(target, credentials(options));
 
@@ -52,5 +54,11 @@ export class GRPC extends Client {
     };
 
     super(transport);
+
+    this.client = client;
+  }
+
+  public close(): void {
+    this.client.close();
   }
 }

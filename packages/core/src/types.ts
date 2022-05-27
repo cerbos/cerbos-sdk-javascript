@@ -10,9 +10,35 @@ export interface CheckResourcesRequest {
   requestId?: string;
 }
 
-export interface CheckResourcesResponse {
+export interface CheckResourcesResponseData {
   requestId: string;
   results: CheckResourcesResult[];
+}
+
+export class CheckResourcesResponse implements CheckResourcesResponseData {
+  public requestId: string;
+  public results: CheckResourcesResult[];
+
+  public constructor({ requestId, results }: CheckResourcesResponseData) {
+    this.requestId = requestId;
+    this.results = results;
+  }
+
+  public findResult({
+    kind,
+    id,
+    policyVersion,
+    scope,
+  }: ResourceQuery): CheckResourcesResult | undefined {
+    return this.results.find(
+      ({ resource }) =>
+        resource.kind === kind &&
+        resource.id === id &&
+        (policyVersion === undefined ||
+          resource.policyVersion === policyVersion) &&
+        (scope === undefined || resource.scope === scope)
+    );
+  }
 }
 
 export interface CheckResourcesResult {
@@ -64,6 +90,8 @@ export interface Resource {
   policyVersion?: string;
   scope?: string;
 }
+
+export type ResourceQuery = Omit<Resource, "attributes">;
 
 export interface ResourceCheck {
   resource: Resource;
