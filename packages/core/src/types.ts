@@ -24,6 +24,10 @@ export class CheckResourcesResponse implements CheckResourcesResponseData {
     this.results = results;
   }
 
+  public allAllowed(resource: ResourceQuery): boolean | undefined {
+    return this.findResult(resource)?.allAllowed();
+  }
+
   public isAllowed({
     resource,
     action,

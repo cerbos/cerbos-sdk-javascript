@@ -1,10 +1,90 @@
-import { CheckResourcesResponse, Effect, ResourceQuery } from "@cerbos/core";
+import {
+  CheckResourcesResponse,
+  CheckResourcesResultResource,
+  Effect,
+  ResourceQuery,
+} from "@cerbos/core";
 import { describe, expect, it } from "@jest/globals";
 import { v4 as uuidv4 } from "uuid";
 
 import { buildResult, buildResultsForResources, shuffle } from "./helpers";
 
 describe("CheckResourcesResponse", () => {
+  describe("#allAllowed", () => {
+    const resource: CheckResourcesResultResource = {
+      kind: "document",
+      id: "found",
+      policyVersion: "default",
+      scope: "",
+    };
+
+    describe("when the resource is found", () => {
+      const query: ResourceQuery = {
+        kind: "document",
+        id: "found",
+      };
+
+      describe("when all actions are allowed", () => {
+        const response = new CheckResourcesResponse({
+          requestId: uuidv4(),
+          results: [
+            buildResult({
+              resource,
+              actions: {
+                allowed: Effect.ALLOW,
+                also_allowed: Effect.ALLOW,
+              },
+            }),
+          ],
+        });
+
+        it("returns true", () => {
+          expect(response.allAllowed(query)).toBe(true);
+        });
+      });
+
+      describe("when some actions are denied", () => {
+        const response = new CheckResourcesResponse({
+          requestId: uuidv4(),
+          results: [
+            buildResult({
+              resource,
+              actions: {
+                allowed: Effect.ALLOW,
+                denied: Effect.DENY,
+              },
+            }),
+          ],
+        });
+
+        it("returns false", () => {
+          expect(response.allAllowed(query)).toBe(false);
+        });
+      });
+    });
+
+    describe("when the resource is not found", () => {
+      const response = new CheckResourcesResponse({
+        requestId: uuidv4(),
+        results: [
+          buildResult({
+            resource,
+            actions: {
+              allowed: Effect.ALLOW,
+              also_allowed: Effect.ALLOW,
+            },
+          }),
+        ],
+      });
+
+      it("returns undefined", () => {
+        expect(
+          response.allAllowed({ kind: "document", id: "not_found" })
+        ).toBeUndefined();
+      });
+    });
+  });
+
   describe("#isAllowed", () => {
     const response = new CheckResourcesResponse({
       requestId: uuidv4(),
