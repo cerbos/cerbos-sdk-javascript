@@ -35,6 +35,22 @@ describe("CheckResourcesResult", () => {
     });
   });
 
+  describe("#allowedActions", () => {
+    const result = buildResult({
+      actions: {
+        yes: Effect.ALLOW,
+        no: Effect.DENY,
+        yup: Effect.ALLOW,
+        nah: Effect.DENY,
+        yeah: Effect.ALLOW,
+      },
+    });
+
+    it("returns a list of allowed actions", () => {
+      expect(result.allowedActions()).toEqual(["yes", "yup", "yeah"]);
+    });
+  });
+
   describe("#isAllowed", () => {
     const result = buildResult({
       actions: {

@@ -86,6 +86,12 @@ export class CheckResourcesResult implements CheckResourcesResultData {
     );
   }
 
+  public allowedActions(): string[] {
+    return Object.keys(this.actions).filter(
+      (action) => this.actions[action] === Effect.ALLOW
+    );
+  }
+
   public isAllowed(action: string): boolean | undefined {
     switch (this.actions[action]) {
       case Effect.ALLOW:
