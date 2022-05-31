@@ -2,6 +2,10 @@ import { Effect as EffectProtobuf } from "../protobuf/cerbos/effect/v1/effect";
 import {
   CheckResourcesResponse as CheckResourcesResponseProtobuf,
   CheckResourcesResponse_ResultEntry,
+  PlanResourcesResponse as PlanResourcesResponseProtobuf,
+  PlanResourcesResponse_Expression_Operand,
+  PlanResourcesResponse_Filter_Kind,
+  PlanResourcesResponse_Meta,
 } from "../protobuf/cerbos/response/v1/response";
 import {
   ValidationError as ValidationErrorProtobuf,
@@ -11,8 +15,16 @@ import {
   CheckResourcesResponse,
   CheckResourcesResult,
   Effect,
+  PlanExpression,
+  PlanExpressionOperand,
+  PlanExpressionValue,
+  PlanExpressionVariable,
+  PlanKind,
+  PlanResourcesMetadata,
+  PlanResourcesResponse,
   ValidationError,
   ValidationErrorSource,
+  Value,
 } from "../types";
 
 export const checkResourcesResponseFromProtobuf = ({
@@ -81,3 +93,85 @@ const validationErrorSourceFromProtobuf = (
       );
   }
 };
+
+export const planResourcesResponseFromProtobuf = ({
+  requestId,
+  filter,
+  meta,
+}: PlanResourcesResponseProtobuf): PlanResourcesResponse => {
+  if (!filter) {
+    throw new Error("Missing filter on PlanResources response");
+  }
+
+  const kind = planKindFromProtobuf(filter.kind);
+  const metadata = meta && planResourcesMetadataFromProtobuf(meta);
+
+  if (kind === PlanKind.CONDITIONAL) {
+    if (!filter.condition) {
+      throw new Error("Missing filter condition on PlanResources response");
+    }
+
+    return {
+      requestId,
+      kind,
+      condition: planOperandFromProtobuf(filter.condition),
+      metadata,
+    };
+  }
+
+  return {
+    requestId,
+    kind,
+    metadata,
+  };
+};
+
+const planKindFromProtobuf = (
+  kind: PlanResourcesResponse_Filter_Kind
+): PlanKind => {
+  switch (kind) {
+    case PlanResourcesResponse_Filter_Kind.KIND_ALWAYS_ALLOWED:
+      return PlanKind.ALWAYS_ALLOWED;
+
+    case PlanResourcesResponse_Filter_Kind.KIND_ALWAYS_DENIED:
+      return PlanKind.ALWAYS_DENIED;
+
+    case PlanResourcesResponse_Filter_Kind.KIND_CONDITIONAL:
+      return PlanKind.CONDITIONAL;
+
+    default:
+      throw new Error(
+        `Unexpected PlanResources filter kind ${kind} (${PlanResourcesResponse_Filter_Kind[kind]})`
+      );
+  }
+};
+
+const planOperandFromProtobuf = ({
+  node,
+}: PlanResourcesResponse_Expression_Operand): PlanExpressionOperand => {
+  if (!node) {
+    throw new Error("Missing node on PlanResources expression operand");
+  }
+
+  switch (node.$case) {
+    case "expression":
+      return new PlanExpression(
+        node.expression.operator,
+        node.expression.operands.map(planOperandFromProtobuf)
+      );
+
+    case "value":
+      return new PlanExpressionValue((node.value ?? null) as Value);
+
+    case "variable":
+      return new PlanExpressionVariable(node.variable);
+  }
+};
+
+const planResourcesMetadataFromProtobuf = ({
+  filterDebug,
+  matchedScope,
+}: PlanResourcesResponse_Meta): PlanResourcesMetadata => ({
+  conditionString: filterDebug,
+  matchedScope,
+});

@@ -1,5 +1,11 @@
-import { checkResourcesResponseFromProtobuf } from "./convert/fromProtobuf";
-import { checkResourcesRequestToProtobuf } from "./convert/toProtobuf";
+import {
+  checkResourcesResponseFromProtobuf,
+  planResourcesResponseFromProtobuf,
+} from "./convert/fromProtobuf";
+import {
+  checkResourcesRequestToProtobuf,
+  planResourcesRequestToProtobuf,
+} from "./convert/toProtobuf";
 import type { RPCs, Request, Response } from "./rpcs";
 import {
   CheckResourceRequest,
@@ -7,6 +13,8 @@ import {
   CheckResourcesResponse,
   CheckResourcesResult,
   IsAllowedRequest,
+  PlanResourcesRequest,
+  PlanResourcesResponse,
   ServerInfo,
   ValidationFailed,
   ValidationFailedCallback,
@@ -86,6 +94,17 @@ export class Client {
     }
 
     return allowed;
+  }
+
+  public async planResources(
+    request: PlanResourcesRequest
+  ): Promise<PlanResourcesResponse> {
+    return planResourcesResponseFromProtobuf(
+      await this.transport(
+        "planResources",
+        planResourcesRequestToProtobuf(request)
+      )
+    );
   }
 
   public serverInfo(): Promise<ServerInfo> {

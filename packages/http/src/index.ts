@@ -7,9 +7,13 @@ import {
   Transport,
 } from "@cerbos/core";
 
-import { CheckResourcesRequest } from "./protobuf/cerbos/request/v1/request";
+import {
+  CheckResourcesRequest,
+  PlanResourcesRequest,
+} from "./protobuf/cerbos/request/v1/request";
 import {
   CheckResourcesResponse,
+  PlanResourcesResponse,
   ServerInfoResponse,
 } from "./protobuf/cerbos/response/v1/response";
 
@@ -30,6 +34,13 @@ const service: Service = {
       JSON.stringify(CheckResourcesRequest.toJSON(request)),
     deserializeResponse: (response) =>
       CheckResourcesResponse.fromJSON(response),
+  },
+  planResources: {
+    method: "POST",
+    path: "/api/plan/resources",
+    serializeRequest: (request) =>
+      JSON.stringify(PlanResourcesRequest.toJSON(request)),
+    deserializeResponse: (response) => PlanResourcesResponse.fromJSON(response),
   },
   serverInfo: {
     method: "GET",

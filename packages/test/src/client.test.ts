@@ -11,6 +11,10 @@ import {
   Client,
   Effect,
   Options,
+  PlanExpression,
+  PlanExpressionValue,
+  PlanExpressionVariable,
+  PlanKind,
   ValidationErrorSource,
   ValidationFailed,
   ValidationFailedCallback,
@@ -411,6 +415,49 @@ describe("client", () => {
         });
 
         expect(allowed).toBe(true);
+      });
+    });
+
+    describe("planResources", () => {
+      it("returns a query plan for resources", async () => {
+        const response = await clients.default.planResources({
+          principal: {
+            id: "me@example.com",
+            policyVersion: "1",
+            scope: "test",
+            roles: ["USER"],
+            attributes: {
+              country: "NZ",
+            },
+          },
+          resource: {
+            kind: "document",
+            policyVersion: "1",
+            scope: "test",
+            attributes: {},
+          },
+          action: "edit",
+          auxData: {
+            jwt: {
+              token: new UnsecuredJWT({ delete: true }).encode(),
+            },
+          },
+          includeMetadata: true,
+          requestId: "42",
+        });
+
+        expect(response).toEqual({
+          requestId: "42",
+          kind: PlanKind.CONDITIONAL,
+          condition: new PlanExpression("eq", [
+            new PlanExpressionVariable("R.attr.owner"),
+            new PlanExpressionValue("me@example.com"),
+          ]),
+          metadata: {
+            conditionString: '(R.attr.owner == "me@example.com")',
+            matchedScope: "test",
+          },
+        });
       });
     });
 

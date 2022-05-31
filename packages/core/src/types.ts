@@ -27,11 +27,11 @@ export class CheckResourcesResponse implements CheckResourcesResponseData {
     this.results = results;
   }
 
-  public allAllowed(resource: ResourceQuery): boolean | undefined {
+  public allAllowed(resource: ResourceSearch): boolean | undefined {
     return this.findResult(resource)?.allAllowed();
   }
 
-  public allowedActions(resource: ResourceQuery): string[] | undefined {
+  public allowedActions(resource: ResourceSearch): string[] | undefined {
     return this.findResult(resource)?.allowedActions();
   }
 
@@ -39,7 +39,7 @@ export class CheckResourcesResponse implements CheckResourcesResponseData {
     resource,
     action,
   }: {
-    resource: ResourceQuery;
+    resource: ResourceSearch;
     action: string;
   }): boolean | undefined {
     return this.findResult(resource)?.isAllowed(action);
@@ -50,7 +50,7 @@ export class CheckResourcesResponse implements CheckResourcesResponseData {
     id,
     policyVersion,
     scope,
-  }: ResourceQuery): CheckResourcesResult | undefined {
+  }: ResourceSearch): CheckResourcesResult | undefined {
     return this.results.find(
       ({ resource }) =>
         resource.kind === kind &&
@@ -144,6 +144,54 @@ export interface JWT {
   keySetId?: string;
 }
 
+export class PlanExpression {
+  public constructor(
+    public operator: string,
+    public operands: PlanExpressionOperand[]
+  ) {}
+}
+
+export type PlanExpressionOperand =
+  | PlanExpression
+  | PlanExpressionValue
+  | PlanExpressionVariable;
+
+export class PlanExpressionValue {
+  public constructor(public value: Value) {}
+}
+
+export class PlanExpressionVariable {
+  public constructor(public name: string) {}
+}
+
+export enum PlanKind {
+  ALWAYS_ALLOWED = "KIND_ALWAYS_ALLOWED",
+  ALWAYS_DENIED = "KIND_ALWAYS_DENIED",
+  CONDITIONAL = "KIND_CONDITIONAL",
+}
+
+export interface PlanResourcesMetadata {
+  conditionString: string;
+  matchedScope: string;
+}
+
+export interface PlanResourcesRequest {
+  principal: Principal;
+  resource: ResourceQuery;
+  action: string;
+  auxData?: AuxData;
+  includeMetadata?: boolean;
+  requestId?: string;
+}
+
+export type PlanResourcesResponse = {
+  requestId: string;
+  metadata: PlanResourcesMetadata | undefined;
+} & (
+  | { kind: PlanKind.ALWAYS_ALLOWED | PlanKind.ALWAYS_DENIED }
+  | { kind: PlanKind.CONDITIONAL; condition: PlanExpressionOperand }
+);
+
 export interface Principal {
   id: string;
   roles: string[];
@@ -160,12 +208,14 @@ export interface Resource {
   scope?: string;
 }
 
-export type ResourceQuery = Omit<Resource, "attributes">;
-
 export interface ResourceCheck {
   resource: Resource;
   actions: string[];
 }
+
+export type ResourceQuery = Omit<Resource, "id">;
+
+export type ResourceSearch = Omit<Resource, "attributes">;
 
 export interface ServerInfo {
   buildDate: string;

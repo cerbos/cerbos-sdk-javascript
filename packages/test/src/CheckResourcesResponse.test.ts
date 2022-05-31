@@ -2,7 +2,7 @@ import {
   CheckResourcesResponse,
   CheckResourcesResultResource,
   Effect,
-  ResourceQuery,
+  ResourceSearch,
 } from "@cerbos/core";
 import { describe, expect, it } from "@jest/globals";
 import { v4 as uuidv4 } from "uuid";
@@ -19,7 +19,7 @@ describe("CheckResourcesResponse", () => {
     };
 
     describe("when the resource is found", () => {
-      const query: ResourceQuery = {
+      const search: ResourceSearch = {
         kind: "document",
         id: "found",
       };
@@ -39,7 +39,7 @@ describe("CheckResourcesResponse", () => {
         });
 
         it("returns true", () => {
-          expect(response.allAllowed(query)).toBe(true);
+          expect(response.allAllowed(search)).toBe(true);
         });
       });
 
@@ -58,7 +58,7 @@ describe("CheckResourcesResponse", () => {
         });
 
         it("returns false", () => {
-          expect(response.allAllowed(query)).toBe(false);
+          expect(response.allAllowed(search)).toBe(false);
         });
       });
     });
@@ -141,7 +141,7 @@ describe("CheckResourcesResponse", () => {
     });
 
     describe("when the resource is found", () => {
-      const query: ResourceQuery = {
+      const search: ResourceSearch = {
         kind: "document",
         id: "found",
       };
@@ -149,7 +149,7 @@ describe("CheckResourcesResponse", () => {
       describe("when the action is allowed", () => {
         it("returns true", () => {
           expect(
-            response.isAllowed({ resource: query, action: "allowed" })
+            response.isAllowed({ resource: search, action: "allowed" })
           ).toBe(true);
         });
       });
@@ -157,7 +157,7 @@ describe("CheckResourcesResponse", () => {
       describe("when the action is denied", () => {
         it("returns false", () => {
           expect(
-            response.isAllowed({ resource: query, action: "denied" })
+            response.isAllowed({ resource: search, action: "denied" })
           ).toBe(false);
         });
       });
@@ -165,7 +165,7 @@ describe("CheckResourcesResponse", () => {
       describe("when the action is not present", () => {
         it("returns undefined", () => {
           expect(
-            response.isAllowed({ resource: query, action: "unknown" })
+            response.isAllowed({ resource: search, action: "unknown" })
           ).toBeUndefined();
         });
       });
@@ -211,50 +211,50 @@ describe("CheckResourcesResponse", () => {
     });
 
     describe("with kind and id", () => {
-      const query = {
+      const search = {
         kind: "document",
         id: "kind_and_id",
       };
 
       it("finds a matching result", () => {
-        expect(response.findResult(query)).toEqual(
+        expect(response.findResult(search)).toEqual(
           buildResult({
-            resource: { ...query, policyVersion: "default", scope: "" },
+            resource: { ...search, policyVersion: "default", scope: "" },
           })
         );
       });
     });
 
     describe("with kind, id, and policy version", () => {
-      const query = {
+      const search = {
         kind: "document",
         id: "policy_version",
         policyVersion: "1",
       };
 
       it("finds a matching result", () => {
-        expect(response.findResult(query)).toEqual(
-          buildResult({ resource: { ...query, scope: "" } })
+        expect(response.findResult(search)).toEqual(
+          buildResult({ resource: { ...search, scope: "" } })
         );
       });
     });
 
     describe("with kind, id, and scope", () => {
-      const query = {
+      const search = {
         kind: "document",
         id: "scope",
         scope: "alpha",
       };
 
       it("finds a matching result", () => {
-        expect(response.findResult(query)).toEqual(
-          buildResult({ resource: { ...query, policyVersion: "default" } })
+        expect(response.findResult(search)).toEqual(
+          buildResult({ resource: { ...search, policyVersion: "default" } })
         );
       });
     });
 
     describe("with kind, id, policy version, and scope", () => {
-      const query = {
+      const search = {
         kind: "document",
         id: "policy_version_and_scope",
         policyVersion: "1",
@@ -262,8 +262,8 @@ describe("CheckResourcesResponse", () => {
       };
 
       it("finds a matching result", () => {
-        expect(response.findResult(query)).toEqual(
-          buildResult({ resource: query })
+        expect(response.findResult(search)).toEqual(
+          buildResult({ resource: search })
         );
       });
     });
