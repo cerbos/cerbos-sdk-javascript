@@ -1,6 +1,11 @@
 import { SecureContext } from "tls";
 
-import { Client, Response, Transport } from "@cerbos/core";
+import {
+  Client,
+  Options as ClientOptions,
+  Response,
+  Transport,
+} from "@cerbos/core";
 import {
   ChannelCredentials,
   Client as GenericClient,
@@ -9,7 +14,7 @@ import {
 
 import { CerbosServiceService as cerbosService } from "./protobuf/cerbos/svc/v1/svc";
 
-export interface Options {
+export interface Options extends ClientOptions {
   tls: boolean | SecureContext;
 }
 
@@ -53,7 +58,7 @@ export class GRPC extends Client {
       });
     };
 
-    super(transport);
+    super(transport, options);
 
     this.client = client;
   }

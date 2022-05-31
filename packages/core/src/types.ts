@@ -184,6 +184,18 @@ export enum ValidationErrorSource {
   RESOURCE = "SOURCE_RESOURCE",
 }
 
+export class ValidationFailed extends Error {
+  public constructor(public readonly validationErrors: ValidationError[]) {
+    super("Input failed schema validation");
+    this.name = this.constructor.name;
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
+export type ValidationFailedCallback = (
+  validationErrors: ValidationError[]
+) => void;
+
 export type Value =
   | string
   | number

@@ -5,15 +5,19 @@ import { resolve } from "path";
 import { createSecureContext } from "tls";
 
 import {
+  CheckResourcesRequest,
   CheckResourcesResponse,
   CheckResourcesResult,
   Client,
   Effect,
+  Options,
   ValidationErrorSource,
+  ValidationFailed,
+  ValidationFailedCallback,
 } from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
-import { afterAll, beforeAll, describe, expect, it } from "@jest/globals";
+import { afterAll, beforeAll, describe, expect, it, jest } from "@jest/globals";
 import { UnsecuredJWT } from "jose";
 
 import { Ports, cerbosVersion, ports as serverPorts } from "./servers";
@@ -33,61 +37,84 @@ describe("client", () => {
   const cases = [
     {
       type: "gRPC | TCP | plaintext",
-      client: (): Client =>
-        new GRPC(`localhost:${ports.grpc.plaintext}`, { tls: false }),
+      client: (options: Options = {}): Client =>
+        new GRPC(`localhost:${ports.grpc.plaintext}`, {
+          tls: false,
+          ...options,
+        }),
     },
     {
       type: "gRPC | TCP | TLS",
-      client: (): Client =>
+      client: (options: Options = {}): Client =>
         new GRPC(`localhost:${ports.grpc.tls}`, {
           tls: createSecureContext({
             ca: readPEM("server.root.crt"),
           }),
+          ...options,
         }),
     },
     {
       type: "gRPC | TCP | mTLS",
-      client: (): Client =>
+      client: (options: Options = {}): Client =>
         new GRPC(`localhost:${ports.grpc.mtls}`, {
           tls: createSecureContext({
             ca: readPEM("server.root.crt"),
             cert: readPEM("client.crt"),
             key: readPEM("client.key"),
           }),
+          ...options,
         }),
     },
     {
       type: "HTTP",
-      client: (): Client => new HTTP(`http://localhost:${ports.http}`),
+      client: (options: Options = {}): Client =>
+        new HTTP(`http://localhost:${ports.http}`, options),
     },
   ];
 
   if (process.platform === "linux") {
     cases.push({
       type: "gRPC | Unix socket | plaintext",
-      client: (): Client =>
+      client: (options: Options = {}): Client =>
         new GRPC(`unix:${resolve(__dirname, "../servers/tmp/socket/cerbos")}`, {
           tls: false,
+          ...options,
         }),
     });
   }
 
   describe.each(cases)("$type", ({ client: factory }: typeof cases[number]) => {
-    let client: Client;
+    let clients: {
+      default: Client;
+      throwOnValidationError: Client;
+      callbackOnValidationError: Client;
+    };
+
+    const validationFailed = jest.fn<ValidationFailedCallback>();
 
     beforeAll(() => {
-      client = factory();
+      clients = {
+        default: factory(),
+        throwOnValidationError: factory({
+          onValidationError: "throw",
+        }),
+        callbackOnValidationError: factory({
+          onValidationError: validationFailed,
+        }),
+      };
     });
 
     afterAll(() => {
-      if (client instanceof GRPC) {
-        client.close();
-      }
+      Object.values(clients).forEach((client) => {
+        if (client instanceof GRPC) {
+          client.close();
+        }
+      });
     });
 
     describe("checkResource", () => {
       it("checks a principal's permissions on a resource", async () => {
-        const result = await client.checkResource({
+        const result = await clients.default.checkResource({
           principal: {
             id: "me@example.com",
             policyVersion: "1",
@@ -153,63 +180,65 @@ describe("client", () => {
     });
 
     describe("checkResources", () => {
+      const request: CheckResourcesRequest = {
+        principal: {
+          id: "me@example.com",
+          policyVersion: "1",
+          scope: "test",
+          roles: ["USER"],
+          attributes: {
+            country: "NZ",
+          },
+        },
+        resources: [
+          {
+            resource: {
+              kind: "document",
+              id: "mine",
+              policyVersion: "1",
+              scope: "test",
+              attributes: {
+                owner: "me@example.com",
+              },
+            },
+            actions: ["view", "edit", "delete"],
+          },
+          {
+            resource: {
+              kind: "document",
+              id: "theirs",
+              policyVersion: "1",
+              scope: "test",
+              attributes: {
+                owner: "them@example.com",
+              },
+            },
+            actions: ["view", "edit", "delete"],
+          },
+          {
+            resource: {
+              kind: "document",
+              id: "invalid",
+              policyVersion: "1",
+              scope: "test",
+              attributes: {
+                owner: 123,
+              },
+            },
+            actions: ["view", "edit", "delete"],
+          },
+        ],
+        auxData: {
+          jwt: {
+            token: new UnsecuredJWT({ delete: true }).encode(),
+          },
+        },
+        includeMetadata: true,
+        requestId: "42",
+      };
+
       it("checks a principal's permissions on a set of resources", async () => {
-        const response = await client.checkResources({
-          principal: {
-            id: "me@example.com",
-            policyVersion: "1",
-            scope: "test",
-            roles: ["USER"],
-            attributes: {
-              country: "NZ",
-            },
-          },
-          resources: [
-            {
-              resource: {
-                kind: "document",
-                id: "mine",
-                policyVersion: "1",
-                scope: "test",
-                attributes: {
-                  owner: "me@example.com",
-                },
-              },
-              actions: ["view", "edit", "delete"],
-            },
-            {
-              resource: {
-                kind: "document",
-                id: "theirs",
-                policyVersion: "1",
-                scope: "test",
-                attributes: {
-                  owner: "them@example.com",
-                },
-              },
-              actions: ["view", "edit", "delete"],
-            },
-            {
-              resource: {
-                kind: "document",
-                id: "invalid",
-                policyVersion: "1",
-                scope: "test",
-                attributes: {
-                  owner: 123,
-                },
-              },
-              actions: ["view", "edit", "delete"],
-            },
-          ],
-          auxData: {
-            jwt: {
-              token: new UnsecuredJWT({ delete: true }).encode(),
-            },
-          },
-          includeMetadata: true,
-          requestId: "42",
-        });
+        const response = await clients.default.checkResources(request);
 
         expect(response).toEqual(
           new CheckResourcesResponse({
@@ -318,11 +347,41 @@ describe("client", () => {
           })
         );
       });
+
+      describe("when configured to throw on validation error", () => {
+        it("throws on validation error", async () => {
+          await expect(
+            clients.throwOnValidationError.checkResources(request)
+          ).rejects.toThrow(
+            new ValidationFailed([
+              {
+                path: "/owner",
+                message: "expected string, but got number",
+                source: ValidationErrorSource.RESOURCE,
+              },
+            ])
+          );
+        });
+      });
+
+      describe("when configured with a callback on validation error", () => {
+        it("throws on validation error", async () => {
+          await clients.callbackOnValidationError.checkResources(request);
+
+          expect(validationFailed).toBeCalledWith([
+            {
+              path: "/owner",
+              message: "expected string, but got number",
+              source: ValidationErrorSource.RESOURCE,
+            },
+          ]);
+        });
+      });
     });
 
     describe("isAllowed", () => {
       it("checks if a principal is allowed to perform an action on a resource", async () => {
-        const allowed = await client.isAllowed({
+        const allowed = await clients.default.isAllowed({
           principal: {
             id: "me@example.com",
             policyVersion: "1",
@@ -357,7 +416,7 @@ describe("client", () => {
 
     describe("serverInfo", () => {
       it("returns information about the server", async () => {
-        const result = await client.serverInfo();
+        const result = await clients.default.serverInfo();
 
         expect(result).toEqual({
           buildDate: expect.stringMatching(

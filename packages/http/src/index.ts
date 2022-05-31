@@ -1,4 +1,11 @@
-import { Client, RPCs, Request, Response, Transport } from "@cerbos/core";
+import {
+  Client,
+  Options,
+  RPCs,
+  Request,
+  Response,
+  Transport,
+} from "@cerbos/core";
 
 import { CheckResourcesRequest } from "./protobuf/cerbos/request/v1/request";
 import {
@@ -32,8 +39,10 @@ const service: Service = {
   },
 };
 
+export type { Options } from "@cerbos/core";
+
 export class HTTP extends Client {
-  public constructor(url: string) {
+  public constructor(url: string, options: Options = {}) {
     const transport: Transport = async (rpc, request) => {
       const { method, path, serializeRequest, deserializeResponse } =
         service[rpc];
@@ -46,6 +55,6 @@ export class HTTP extends Client {
       return deserializeResponse(await response.json());
     };
 
-    super(transport);
+    super(transport, options);
   }
 }

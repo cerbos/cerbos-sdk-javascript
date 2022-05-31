@@ -8,6 +8,8 @@ import {
   CheckResourcesResult,
   IsAllowedRequest,
   ServerInfo,
+  ValidationFailed,
+  ValidationFailedCallback,
 } from "./types";
 
 export type Transport = <RPC extends keyof RPCs>(
@@ -15,8 +17,15 @@ export type Transport = <RPC extends keyof RPCs>(
   request: Request<RPC>
 ) => Promise<Response<RPC>>;
 
+export interface Options {
+  onValidationError?: "throw" | ValidationFailedCallback | undefined;
+}
+
 export class Client {
-  protected constructor(private readonly transport: Transport) {}
+  protected constructor(
+    private readonly transport: Transport,
+    private readonly options: Options
+  ) {}
 
   public async checkResource({
     resource,
@@ -39,12 +48,30 @@ export class Client {
   public async checkResources(
     request: CheckResourcesRequest
   ): Promise<CheckResourcesResponse> {
-    return checkResourcesResponseFromProtobuf(
+    const { onValidationError } = this.options;
+
+    const response = checkResourcesResponseFromProtobuf(
       await this.transport(
         "checkResources",
         checkResourcesRequestToProtobuf(request)
       )
     );
+
+    if (onValidationError) {
+      const validationErrors = response.results.flatMap(
+        ({ validationErrors }) => validationErrors
+      );
+
+      if (validationErrors.length > 0) {
+        if (onValidationError === "throw") {
+          throw new ValidationFailed(validationErrors);
+        }
+
+        onValidationError(validationErrors);
+      }
+    }
+
+    return response;
   }
 
   public async isAllowed({
