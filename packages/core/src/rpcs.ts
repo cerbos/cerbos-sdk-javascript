@@ -1,9 +1,9 @@
-import {
+import type {
   CheckResourcesRequest,
   PlanResourcesRequest,
   ServerInfoRequest,
 } from "./protobuf/cerbos/request/v1/request";
-import {
+import type {
   CheckResourcesResponse,
   PlanResourcesResponse,
   ServerInfoResponse,

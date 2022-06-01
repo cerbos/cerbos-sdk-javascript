@@ -8,7 +8,7 @@ import {
 } from "./convert/toProtobuf";
 import { ValidationFailed } from "./errors";
 import type { RPCs, Request, Response } from "./rpcs";
-import {
+import type {
   CheckResourceRequest,
   CheckResourcesRequest,
   CheckResourcesResponse,

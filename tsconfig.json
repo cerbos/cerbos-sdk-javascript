@@ -1,9 +1,4 @@
 {
   "files": [],
-  "references": [
-    { "path": "packages/core" },
-    { "path": "packages/grpc" },
-    { "path": "packages/http" },
-    { "path": "packages/test" }
-  ]
+  "references": [{ "path": "packages/test" }]
 }

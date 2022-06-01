@@ -1,4 +1,4 @@
-import { SecureContext } from "tls";
+import type { SecureContext } from "tls";
 
 import {
   Client,

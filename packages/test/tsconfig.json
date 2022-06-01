@@ -1,7 +1,12 @@
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../tsconfig.strict.json",
+  "references": [
+    { "path": "../core" },
+    { "path": "../grpc" },
+    { "path": "../http" }
+  ],
   "compilerOptions": {
     "noEmit": true,
-    "tsBuildInfoFile": "lib/.tsbuildinfo"
+    "tsBuildInfoFile": "lib/test.tsbuildinfo"
   }
 }

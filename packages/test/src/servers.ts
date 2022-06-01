@@ -4,7 +4,7 @@ import { promisify } from "util";
 
 const execFile = promisify(execFileCallback);
 
-export const cerbosVersion = process.env.CERBOS_VERSION ?? "0.16.0";
+export const cerbosVersion = process.env["CERBOS_VERSION"] ?? "0.16.0";
 
 export interface Ports {
   grpc: {

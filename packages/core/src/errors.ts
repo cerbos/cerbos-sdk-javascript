@@ -1,6 +1,6 @@
 import { status as Status } from "@grpc/grpc-js";
 
-import { ValidationError } from "./types";
+import type { ValidationError } from "./types";
 
 export { Status };
 
@@ -9,7 +9,7 @@ export class NotOK extends Error {
     public readonly code: Exclude<Status, Status.OK>,
     public readonly details: string
   ) {
-    super(`gRPC error ${code} (${Status[code]}): ${details}`);
+    super(`gRPC error ${code} (${Status[code] ?? "unrecognized"}): ${details}`);
     this.name = this.constructor.name;
     Error.captureStackTrace(this, this.constructor);
   }

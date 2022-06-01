@@ -16,14 +16,16 @@ import {
   CheckResourcesResult,
   Effect,
   PlanExpression,
-  PlanExpressionOperand,
   PlanExpressionValue,
   PlanExpressionVariable,
   PlanKind,
+  ValidationErrorSource,
+} from "../types";
+import type {
+  PlanExpressionOperand,
   PlanResourcesMetadata,
   PlanResourcesResponse,
   ValidationError,
-  ValidationErrorSource,
   Value,
 } from "../types";
 
@@ -89,7 +91,9 @@ const validationErrorSourceFromProtobuf = (
 
     default:
       throw new Error(
-        `Unexpected validation error source ${source} (${ValidationError_Source[source]})`
+        `Unexpected validation error source ${source} (${
+          ValidationError_Source[source] ?? "unrecognized"
+        })`
       );
   }
 };
@@ -141,7 +145,9 @@ const planKindFromProtobuf = (
 
     default:
       throw new Error(
-        `Unexpected PlanResources filter kind ${kind} (${PlanResourcesResponse_Filter_Kind[kind]})`
+        `Unexpected PlanResources filter kind ${kind} (${
+          PlanResourcesResponse_Filter_Kind[kind] ?? "unrecognized"
+        })`
       );
   }
 };

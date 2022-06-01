@@ -1,18 +1,18 @@
 import { v4 as uuidv4 } from "uuid";
 
-import {
+import type {
   PlanResourcesRequest_Resource,
   Principal as PrincipalProtobuf,
   Resource as ResourceProtobuf,
 } from "../protobuf/cerbos/engine/v1/engine";
-import {
+import type {
   AuxData as AuxDataProtobuf,
   AuxData_JWT,
   CheckResourcesRequest as CheckResourcesRequestProtobuf,
   CheckResourcesRequest_ResourceEntry,
   PlanResourcesRequest as PlanResourcesRequestProtobuf,
 } from "../protobuf/cerbos/request/v1/request";
-import {
+import type {
   AuxData,
   CheckResourcesRequest,
   JWT,
