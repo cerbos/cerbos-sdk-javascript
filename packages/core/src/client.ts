@@ -6,6 +6,7 @@ import {
   checkResourcesRequestToProtobuf,
   planResourcesRequestToProtobuf,
 } from "./convert/toProtobuf";
+import { ValidationFailed } from "./errors";
 import type { RPCs, Request, Response } from "./rpcs";
 import {
   CheckResourceRequest,
@@ -16,7 +17,6 @@ import {
   PlanResourcesRequest,
   PlanResourcesResponse,
   ServerInfo,
-  ValidationFailed,
   ValidationFailedCallback,
 } from "./types";
 

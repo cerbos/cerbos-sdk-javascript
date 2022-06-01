@@ -3,7 +3,9 @@ import { SecureContext } from "tls";
 import {
   Client,
   Options as ClientOptions,
+  NotOK,
   Response,
+  Status,
   Transport,
 } from "@cerbos/core";
 import {
@@ -53,8 +55,10 @@ export class GRPC extends Client {
           responseDeserialize,
           request,
           (error, response) => {
-            if (error || !response) {
-              reject(error ?? new Error("Didn't receive a response"));
+            if (error) {
+              reject(new NotOK(error.code || Status.UNKNOWN, error.details));
+            } else if (!response) {
+              reject(new NotOK(Status.UNKNOWN, "No response received"));
             } else {
               resolve(response);
             }

@@ -10,11 +10,13 @@ import {
   CheckResourcesResult,
   Client,
   Effect,
+  NotOK,
   Options,
   PlanExpression,
   PlanExpressionValue,
   PlanExpressionVariable,
   PlanKind,
+  Status,
   ValidationErrorSource,
   ValidationFailed,
   ValidationFailedCallback,
@@ -473,6 +475,23 @@ describe("client", () => {
           version: cerbosVersion,
         });
       });
+    });
+
+    it("handles errors", async () => {
+      await expect(
+        clients.default.checkResources({
+          principal: {
+            id: "",
+            roles: [],
+          },
+          resources: [],
+        })
+      ).rejects.toThrow(
+        new NotOK(
+          Status.INVALID_ARGUMENT,
+          "invalid CheckResourcesRequest.Principal: embedded message failed validation | caused by: invalid Principal.Id: value length must be at least 1 runes"
+        )
+      );
     });
   });
 });
