@@ -14,6 +14,9 @@ import {
 
 import { CerbosServiceService as cerbosService } from "./protobuf/cerbos/svc/v1/svc";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires -- Can't import package.json because it is outside of the project's rootDir
+const { version } = require("../package.json") as { version: string };
+
 export interface Options extends ClientOptions {
   tls: boolean | SecureContext;
 }
@@ -34,7 +37,9 @@ export class GRPC extends Client {
   private readonly client: GenericClient;
 
   public constructor(target: string, options: Options) {
-    const client = new GenericClient(target, credentials(options));
+    const client = new GenericClient(target, credentials(options), {
+      "grpc.primary_user_agent": `cerbos-sdk-javascript-grpc/${version}`,
+    });
 
     const transport: Transport = (rpc, request) => {
       const { path, requestSerialize, responseDeserialize } = cerbosService[

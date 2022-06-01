@@ -17,6 +17,9 @@ import {
   ServerInfoResponse,
 } from "./protobuf/cerbos/response/v1/response";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires -- Can't import package.json because it is outside of the project's rootDir
+const { version } = require("../package.json") as { version: string };
+
 type Service = {
   [RPC in keyof RPCs]: {
     method: "GET" | "POST";
@@ -61,6 +64,9 @@ export class HTTP extends Client {
       const response = await fetch(url + path, {
         method,
         body: serializeRequest(request),
+        headers: {
+          "User-Agent": `cerbos-sdk-javascript-http/${version}`,
+        },
       });
 
       return deserializeResponse(await response.json());
