@@ -8,25 +8,84 @@ import { Value } from "../../../google/protobuf/struct";
 
 export const protobufPackage = "cerbos.engine.v1";
 
-export interface PlanResourcesRequest {
+export interface PlanResourcesInput {
   requestId: string;
   action: string;
   principal: Principal | undefined;
-  resource: PlanResourcesRequest_Resource | undefined;
+  resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
   includeMeta: boolean;
 }
 
-export interface PlanResourcesRequest_Resource {
+export interface PlanResourcesInput_Resource {
   kind: string;
   attr: { [key: string]: any | undefined };
   policyVersion: string;
   scope: string;
 }
 
-export interface PlanResourcesRequest_Resource_AttrEntry {
+export interface PlanResourcesInput_Resource_AttrEntry {
   key: string;
   value: any | undefined;
+}
+
+export interface PlanResourcesAst {
+  filterAst: PlanResourcesAst_Node | undefined;
+}
+
+export interface PlanResourcesAst_Node {
+  node?:
+    | {
+        $case: "logicalOperation";
+        logicalOperation: PlanResourcesAst_LogicalOperation;
+      }
+    | { $case: "expression"; expression: CheckedExpr };
+}
+
+export interface PlanResourcesAst_LogicalOperation {
+  operator: PlanResourcesAst_LogicalOperation_Operator;
+  nodes: PlanResourcesAst_Node[];
+}
+
+export enum PlanResourcesAst_LogicalOperation_Operator {
+  OPERATOR_UNSPECIFIED = 0,
+  OPERATOR_AND = 1,
+  OPERATOR_OR = 2,
+  OPERATOR_NOT = 3,
+}
+
+export interface PlanResourcesFilter {
+  kind: PlanResourcesFilter_Kind;
+  condition: PlanResourcesFilter_Expression_Operand | undefined;
+}
+
+export enum PlanResourcesFilter_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_ALWAYS_ALLOWED = 1,
+  KIND_ALWAYS_DENIED = 2,
+  KIND_CONDITIONAL = 3,
+}
+
+export interface PlanResourcesFilter_Expression {
+  operator: string;
+  operands: PlanResourcesFilter_Expression_Operand[];
+}
+
+export interface PlanResourcesFilter_Expression_Operand {
+  node?:
+    | { $case: "value"; value: any | undefined }
+    | { $case: "expression"; expression: PlanResourcesFilter_Expression }
+    | { $case: "variable"; variable: string };
+}
+
+export interface PlanResourcesOutput {
+  requestId: string;
+  action: string;
+  kind: string;
+  policyVersion: string;
+  scope: string;
+  filter: PlanResourcesFilter | undefined;
+  filterDebug: string;
 }
 
 export interface CheckInput {
@@ -54,36 +113,6 @@ export interface CheckOutput_ActionEffect {
 export interface CheckOutput_ActionsEntry {
   key: string;
   value: CheckOutput_ActionEffect | undefined;
-}
-
-export interface PlanResourcesOutput {
-  requestId: string;
-  action: string;
-  kind: string;
-  policyVersion: string;
-  scope: string;
-  filter: PlanResourcesOutput_Node | undefined;
-}
-
-export interface PlanResourcesOutput_Node {
-  node?:
-    | {
-        $case: "logicalOperation";
-        logicalOperation: PlanResourcesOutput_LogicalOperation;
-      }
-    | { $case: "expression"; expression: CheckedExpr };
-}
-
-export interface PlanResourcesOutput_LogicalOperation {
-  operator: PlanResourcesOutput_LogicalOperation_Operator;
-  nodes: PlanResourcesOutput_Node[];
-}
-
-export enum PlanResourcesOutput_LogicalOperation_Operator {
-  OPERATOR_UNSPECIFIED = 0,
-  OPERATOR_AND = 1,
-  OPERATOR_OR = 2,
-  OPERATOR_NOT = 3,
 }
 
 export interface Resource {
@@ -176,7 +205,7 @@ export enum Trace_Event_Status {
   STATUS_SKIPPED = 2,
 }
 
-function createBasePlanResourcesRequest(): PlanResourcesRequest {
+function createBasePlanResourcesInput(): PlanResourcesInput {
   return {
     requestId: "",
     action: "",
@@ -187,9 +216,9 @@ function createBasePlanResourcesRequest(): PlanResourcesRequest {
   };
 }
 
-export const PlanResourcesRequest = {
+export const PlanResourcesInput = {
   encode(
-    message: PlanResourcesRequest,
+    message: PlanResourcesInput,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     if (message.requestId !== "") {
@@ -202,7 +231,7 @@ export const PlanResourcesRequest = {
       Principal.encode(message.principal, writer.uint32(26).fork()).ldelim();
     }
     if (message.resource !== undefined) {
-      PlanResourcesRequest_Resource.encode(
+      PlanResourcesInput_Resource.encode(
         message.resource,
         writer.uint32(34).fork()
       ).ldelim();
@@ -216,13 +245,10 @@ export const PlanResourcesRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PlanResourcesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesInput {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesRequest();
+    const message = createBasePlanResourcesInput();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -236,7 +262,7 @@ export const PlanResourcesRequest = {
           message.principal = Principal.decode(reader, reader.uint32());
           break;
         case 4:
-          message.resource = PlanResourcesRequest_Resource.decode(
+          message.resource = PlanResourcesInput_Resource.decode(
             reader,
             reader.uint32()
           );
@@ -256,13 +282,13 @@ export const PlanResourcesRequest = {
   },
 };
 
-function createBasePlanResourcesRequest_Resource(): PlanResourcesRequest_Resource {
+function createBasePlanResourcesInput_Resource(): PlanResourcesInput_Resource {
   return { kind: "", attr: {}, policyVersion: "", scope: "" };
 }
 
-export const PlanResourcesRequest_Resource = {
+export const PlanResourcesInput_Resource = {
   encode(
-    message: PlanResourcesRequest_Resource,
+    message: PlanResourcesInput_Resource,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     if (message.kind !== "") {
@@ -270,7 +296,7 @@ export const PlanResourcesRequest_Resource = {
     }
     Object.entries(message.attr).forEach(([key, value]) => {
       if (value !== undefined) {
-        PlanResourcesRequest_Resource_AttrEntry.encode(
+        PlanResourcesInput_Resource_AttrEntry.encode(
           { key: key as any, value },
           writer.uint32(18).fork()
         ).ldelim();
@@ -288,10 +314,10 @@ export const PlanResourcesRequest_Resource = {
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
-  ): PlanResourcesRequest_Resource {
+  ): PlanResourcesInput_Resource {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesRequest_Resource();
+    const message = createBasePlanResourcesInput_Resource();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -299,7 +325,7 @@ export const PlanResourcesRequest_Resource = {
           message.kind = reader.string();
           break;
         case 2:
-          const entry2 = PlanResourcesRequest_Resource_AttrEntry.decode(
+          const entry2 = PlanResourcesInput_Resource_AttrEntry.decode(
             reader,
             reader.uint32()
           );
@@ -322,13 +348,13 @@ export const PlanResourcesRequest_Resource = {
   },
 };
 
-function createBasePlanResourcesRequest_Resource_AttrEntry(): PlanResourcesRequest_Resource_AttrEntry {
+function createBasePlanResourcesInput_Resource_AttrEntry(): PlanResourcesInput_Resource_AttrEntry {
   return { key: "", value: undefined };
 }
 
-export const PlanResourcesRequest_Resource_AttrEntry = {
+export const PlanResourcesInput_Resource_AttrEntry = {
   encode(
-    message: PlanResourcesRequest_Resource_AttrEntry,
+    message: PlanResourcesInput_Resource_AttrEntry,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     if (message.key !== "") {
@@ -346,10 +372,10 @@ export const PlanResourcesRequest_Resource_AttrEntry = {
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
-  ): PlanResourcesRequest_Resource_AttrEntry {
+  ): PlanResourcesInput_Resource_AttrEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesRequest_Resource_AttrEntry();
+    const message = createBasePlanResourcesInput_Resource_AttrEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -358,6 +384,391 @@ export const PlanResourcesRequest_Resource_AttrEntry = {
           break;
         case 2:
           message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBasePlanResourcesAst(): PlanResourcesAst {
+  return { filterAst: undefined };
+}
+
+export const PlanResourcesAst = {
+  encode(
+    message: PlanResourcesAst,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.filterAst !== undefined) {
+      PlanResourcesAst_Node.encode(
+        message.filterAst,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesAst {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlanResourcesAst();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.filterAst = PlanResourcesAst_Node.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBasePlanResourcesAst_Node(): PlanResourcesAst_Node {
+  return { node: undefined };
+}
+
+export const PlanResourcesAst_Node = {
+  encode(
+    message: PlanResourcesAst_Node,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.node?.$case === "logicalOperation") {
+      PlanResourcesAst_LogicalOperation.encode(
+        message.node.logicalOperation,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    if (message.node?.$case === "expression") {
+      CheckedExpr.encode(
+        message.node.expression,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): PlanResourcesAst_Node {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlanResourcesAst_Node();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.node = {
+            $case: "logicalOperation",
+            logicalOperation: PlanResourcesAst_LogicalOperation.decode(
+              reader,
+              reader.uint32()
+            ),
+          };
+          break;
+        case 2:
+          message.node = {
+            $case: "expression",
+            expression: CheckedExpr.decode(reader, reader.uint32()),
+          };
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBasePlanResourcesAst_LogicalOperation(): PlanResourcesAst_LogicalOperation {
+  return { operator: 0, nodes: [] };
+}
+
+export const PlanResourcesAst_LogicalOperation = {
+  encode(
+    message: PlanResourcesAst_LogicalOperation,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.operator !== 0) {
+      writer.uint32(8).int32(message.operator);
+    }
+    for (const v of message.nodes) {
+      PlanResourcesAst_Node.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): PlanResourcesAst_LogicalOperation {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlanResourcesAst_LogicalOperation();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.operator = reader.int32() as any;
+          break;
+        case 2:
+          message.nodes.push(
+            PlanResourcesAst_Node.decode(reader, reader.uint32())
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBasePlanResourcesFilter(): PlanResourcesFilter {
+  return { kind: 0, condition: undefined };
+}
+
+export const PlanResourcesFilter = {
+  encode(
+    message: PlanResourcesFilter,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.kind !== 0) {
+      writer.uint32(8).int32(message.kind);
+    }
+    if (message.condition !== undefined) {
+      PlanResourcesFilter_Expression_Operand.encode(
+        message.condition,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesFilter {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlanResourcesFilter();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.kind = reader.int32() as any;
+          break;
+        case 2:
+          message.condition = PlanResourcesFilter_Expression_Operand.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBasePlanResourcesFilter_Expression(): PlanResourcesFilter_Expression {
+  return { operator: "", operands: [] };
+}
+
+export const PlanResourcesFilter_Expression = {
+  encode(
+    message: PlanResourcesFilter_Expression,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.operator !== "") {
+      writer.uint32(10).string(message.operator);
+    }
+    for (const v of message.operands) {
+      PlanResourcesFilter_Expression_Operand.encode(
+        v!,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): PlanResourcesFilter_Expression {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlanResourcesFilter_Expression();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.operator = reader.string();
+          break;
+        case 2:
+          message.operands.push(
+            PlanResourcesFilter_Expression_Operand.decode(
+              reader,
+              reader.uint32()
+            )
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBasePlanResourcesFilter_Expression_Operand(): PlanResourcesFilter_Expression_Operand {
+  return { node: undefined };
+}
+
+export const PlanResourcesFilter_Expression_Operand = {
+  encode(
+    message: PlanResourcesFilter_Expression_Operand,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.node?.$case === "value") {
+      Value.encode(
+        Value.wrap(message.node.value),
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    if (message.node?.$case === "expression") {
+      PlanResourcesFilter_Expression.encode(
+        message.node.expression,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    if (message.node?.$case === "variable") {
+      writer.uint32(26).string(message.node.variable);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): PlanResourcesFilter_Expression_Operand {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlanResourcesFilter_Expression_Operand();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.node = {
+            $case: "value",
+            value: Value.unwrap(Value.decode(reader, reader.uint32())),
+          };
+          break;
+        case 2:
+          message.node = {
+            $case: "expression",
+            expression: PlanResourcesFilter_Expression.decode(
+              reader,
+              reader.uint32()
+            ),
+          };
+          break;
+        case 3:
+          message.node = { $case: "variable", variable: reader.string() };
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBasePlanResourcesOutput(): PlanResourcesOutput {
+  return {
+    requestId: "",
+    action: "",
+    kind: "",
+    policyVersion: "",
+    scope: "",
+    filter: undefined,
+    filterDebug: "",
+  };
+}
+
+export const PlanResourcesOutput = {
+  encode(
+    message: PlanResourcesOutput,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.requestId !== "") {
+      writer.uint32(10).string(message.requestId);
+    }
+    if (message.action !== "") {
+      writer.uint32(18).string(message.action);
+    }
+    if (message.kind !== "") {
+      writer.uint32(26).string(message.kind);
+    }
+    if (message.policyVersion !== "") {
+      writer.uint32(34).string(message.policyVersion);
+    }
+    if (message.scope !== "") {
+      writer.uint32(42).string(message.scope);
+    }
+    if (message.filter !== undefined) {
+      PlanResourcesFilter.encode(
+        message.filter,
+        writer.uint32(50).fork()
+      ).ldelim();
+    }
+    if (message.filterDebug !== "") {
+      writer.uint32(58).string(message.filterDebug);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesOutput {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlanResourcesOutput();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.requestId = reader.string();
+          break;
+        case 2:
+          message.action = reader.string();
+          break;
+        case 3:
+          message.kind = reader.string();
+          break;
+        case 4:
+          message.policyVersion = reader.string();
+          break;
+        case 5:
+          message.scope = reader.string();
+          break;
+        case 6:
+          message.filter = PlanResourcesFilter.decode(reader, reader.uint32());
+          break;
+        case 7:
+          message.filterDebug = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -594,186 +1005,6 @@ export const CheckOutput_ActionsEntry = {
           message.value = CheckOutput_ActionEffect.decode(
             reader,
             reader.uint32()
-          );
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-};
-
-function createBasePlanResourcesOutput(): PlanResourcesOutput {
-  return {
-    requestId: "",
-    action: "",
-    kind: "",
-    policyVersion: "",
-    scope: "",
-    filter: undefined,
-  };
-}
-
-export const PlanResourcesOutput = {
-  encode(
-    message: PlanResourcesOutput,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    if (message.requestId !== "") {
-      writer.uint32(10).string(message.requestId);
-    }
-    if (message.action !== "") {
-      writer.uint32(18).string(message.action);
-    }
-    if (message.kind !== "") {
-      writer.uint32(26).string(message.kind);
-    }
-    if (message.policyVersion !== "") {
-      writer.uint32(34).string(message.policyVersion);
-    }
-    if (message.scope !== "") {
-      writer.uint32(42).string(message.scope);
-    }
-    if (message.filter !== undefined) {
-      PlanResourcesOutput_Node.encode(
-        message.filter,
-        writer.uint32(50).fork()
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesOutput {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesOutput();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.requestId = reader.string();
-          break;
-        case 2:
-          message.action = reader.string();
-          break;
-        case 3:
-          message.kind = reader.string();
-          break;
-        case 4:
-          message.policyVersion = reader.string();
-          break;
-        case 5:
-          message.scope = reader.string();
-          break;
-        case 6:
-          message.filter = PlanResourcesOutput_Node.decode(
-            reader,
-            reader.uint32()
-          );
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-};
-
-function createBasePlanResourcesOutput_Node(): PlanResourcesOutput_Node {
-  return { node: undefined };
-}
-
-export const PlanResourcesOutput_Node = {
-  encode(
-    message: PlanResourcesOutput_Node,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    if (message.node?.$case === "logicalOperation") {
-      PlanResourcesOutput_LogicalOperation.encode(
-        message.node.logicalOperation,
-        writer.uint32(10).fork()
-      ).ldelim();
-    }
-    if (message.node?.$case === "expression") {
-      CheckedExpr.encode(
-        message.node.expression,
-        writer.uint32(18).fork()
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PlanResourcesOutput_Node {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesOutput_Node();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.node = {
-            $case: "logicalOperation",
-            logicalOperation: PlanResourcesOutput_LogicalOperation.decode(
-              reader,
-              reader.uint32()
-            ),
-          };
-          break;
-        case 2:
-          message.node = {
-            $case: "expression",
-            expression: CheckedExpr.decode(reader, reader.uint32()),
-          };
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-};
-
-function createBasePlanResourcesOutput_LogicalOperation(): PlanResourcesOutput_LogicalOperation {
-  return { operator: 0, nodes: [] };
-}
-
-export const PlanResourcesOutput_LogicalOperation = {
-  encode(
-    message: PlanResourcesOutput_LogicalOperation,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    if (message.operator !== 0) {
-      writer.uint32(8).int32(message.operator);
-    }
-    for (const v of message.nodes) {
-      PlanResourcesOutput_Node.encode(v!, writer.uint32(18).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PlanResourcesOutput_LogicalOperation {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesOutput_LogicalOperation();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.operator = reader.int32() as any;
-          break;
-        case 2:
-          message.nodes.push(
-            PlanResourcesOutput_Node.decode(reader, reader.uint32())
           );
           break;
         default:

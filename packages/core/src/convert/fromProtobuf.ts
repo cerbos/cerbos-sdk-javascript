@@ -1,10 +1,10 @@
 import { Effect as EffectProtobuf } from "../protobuf/cerbos/effect/v1/effect";
-import {
+import { PlanResourcesFilter_Kind } from "../protobuf/cerbos/engine/v1/engine";
+import type { PlanResourcesFilter_Expression_Operand } from "../protobuf/cerbos/engine/v1/engine";
+import type {
   CheckResourcesResponse as CheckResourcesResponseProtobuf,
   CheckResourcesResponse_ResultEntry,
   PlanResourcesResponse as PlanResourcesResponseProtobuf,
-  PlanResourcesResponse_Expression_Operand,
-  PlanResourcesResponse_Filter_Kind,
   PlanResourcesResponse_Meta,
 } from "../protobuf/cerbos/response/v1/response";
 import {
@@ -130,23 +130,21 @@ export const planResourcesResponseFromProtobuf = ({
   };
 };
 
-const planKindFromProtobuf = (
-  kind: PlanResourcesResponse_Filter_Kind
-): PlanKind => {
+const planKindFromProtobuf = (kind: PlanResourcesFilter_Kind): PlanKind => {
   switch (kind) {
-    case PlanResourcesResponse_Filter_Kind.KIND_ALWAYS_ALLOWED:
+    case PlanResourcesFilter_Kind.KIND_ALWAYS_ALLOWED:
       return PlanKind.ALWAYS_ALLOWED;
 
-    case PlanResourcesResponse_Filter_Kind.KIND_ALWAYS_DENIED:
+    case PlanResourcesFilter_Kind.KIND_ALWAYS_DENIED:
       return PlanKind.ALWAYS_DENIED;
 
-    case PlanResourcesResponse_Filter_Kind.KIND_CONDITIONAL:
+    case PlanResourcesFilter_Kind.KIND_CONDITIONAL:
       return PlanKind.CONDITIONAL;
 
     default:
       throw new Error(
         `Unexpected PlanResources filter kind ${kind} (${
-          PlanResourcesResponse_Filter_Kind[kind] ?? "unrecognized"
+          PlanResourcesFilter_Kind[kind] ?? "unrecognized"
         })`
       );
   }
@@ -154,7 +152,7 @@ const planKindFromProtobuf = (
 
 const planOperandFromProtobuf = ({
   node,
-}: PlanResourcesResponse_Expression_Operand): PlanExpressionOperand => {
+}: PlanResourcesFilter_Expression_Operand): PlanExpressionOperand => {
   if (!node) {
     throw new Error("Missing node on PlanResources expression operand");
   }

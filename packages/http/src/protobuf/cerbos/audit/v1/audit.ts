@@ -1,6 +1,11 @@
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { CheckInput, CheckOutput } from "../../../cerbos/engine/v1/engine";
+import {
+  CheckInput,
+  CheckOutput,
+  PlanResourcesInput,
+  PlanResourcesOutput,
+} from "../../../cerbos/engine/v1/engine";
 
 export const protobufPackage = "cerbos.audit.v1";
 
@@ -22,8 +27,29 @@ export interface DecisionLogEntry {
   callId: string;
   timestamp: Date | undefined;
   peer: Peer | undefined;
+  /** Deprecated. Use method.check_resources.inputs instead. */
+  inputs: CheckInput[];
+  /** Deprecated. Use method.check_resources.outputs instead. */
+  outputs: CheckOutput[];
+  /** Deprecated. Use method.check_resources.error instead. */
+  error: string;
+  method?:
+    | {
+        $case: "checkResources";
+        checkResources: DecisionLogEntry_CheckResources;
+      }
+    | { $case: "planResources"; planResources: DecisionLogEntry_PlanResources };
+}
+
+export interface DecisionLogEntry_CheckResources {
   inputs: CheckInput[];
   outputs: CheckOutput[];
+  error: string;
+}
+
+export interface DecisionLogEntry_PlanResources {
+  input: PlanResourcesInput | undefined;
+  output: PlanResourcesOutput | undefined;
   error: string;
 }
 
@@ -124,6 +150,7 @@ function createBaseDecisionLogEntry(): DecisionLogEntry {
     inputs: [],
     outputs: [],
     error: "",
+    method: undefined,
   };
 }
 
@@ -142,6 +169,21 @@ export const DecisionLogEntry = {
         ? object.outputs.map((e: any) => CheckOutput.fromJSON(e))
         : [],
       error: isSet(object.error) ? String(object.error) : "",
+      method: isSet(object.checkResources)
+        ? {
+            $case: "checkResources",
+            checkResources: DecisionLogEntry_CheckResources.fromJSON(
+              object.checkResources
+            ),
+          }
+        : isSet(object.planResources)
+        ? {
+            $case: "planResources",
+            planResources: DecisionLogEntry_PlanResources.fromJSON(
+              object.planResources
+            ),
+          }
+        : undefined,
     };
   },
 
@@ -166,6 +208,84 @@ export const DecisionLogEntry = {
     } else {
       obj.outputs = [];
     }
+    message.error !== undefined && (obj.error = message.error);
+    message.method?.$case === "checkResources" &&
+      (obj.checkResources = message.method?.checkResources
+        ? DecisionLogEntry_CheckResources.toJSON(message.method?.checkResources)
+        : undefined);
+    message.method?.$case === "planResources" &&
+      (obj.planResources = message.method?.planResources
+        ? DecisionLogEntry_PlanResources.toJSON(message.method?.planResources)
+        : undefined);
+    return obj;
+  },
+};
+
+function createBaseDecisionLogEntry_CheckResources(): DecisionLogEntry_CheckResources {
+  return { inputs: [], outputs: [], error: "" };
+}
+
+export const DecisionLogEntry_CheckResources = {
+  fromJSON(object: any): DecisionLogEntry_CheckResources {
+    return {
+      inputs: Array.isArray(object?.inputs)
+        ? object.inputs.map((e: any) => CheckInput.fromJSON(e))
+        : [],
+      outputs: Array.isArray(object?.outputs)
+        ? object.outputs.map((e: any) => CheckOutput.fromJSON(e))
+        : [],
+      error: isSet(object.error) ? String(object.error) : "",
+    };
+  },
+
+  toJSON(message: DecisionLogEntry_CheckResources): unknown {
+    const obj: any = {};
+    if (message.inputs) {
+      obj.inputs = message.inputs.map((e) =>
+        e ? CheckInput.toJSON(e) : undefined
+      );
+    } else {
+      obj.inputs = [];
+    }
+    if (message.outputs) {
+      obj.outputs = message.outputs.map((e) =>
+        e ? CheckOutput.toJSON(e) : undefined
+      );
+    } else {
+      obj.outputs = [];
+    }
+    message.error !== undefined && (obj.error = message.error);
+    return obj;
+  },
+};
+
+function createBaseDecisionLogEntry_PlanResources(): DecisionLogEntry_PlanResources {
+  return { input: undefined, output: undefined, error: "" };
+}
+
+export const DecisionLogEntry_PlanResources = {
+  fromJSON(object: any): DecisionLogEntry_PlanResources {
+    return {
+      input: isSet(object.input)
+        ? PlanResourcesInput.fromJSON(object.input)
+        : undefined,
+      output: isSet(object.output)
+        ? PlanResourcesOutput.fromJSON(object.output)
+        : undefined,
+      error: isSet(object.error) ? String(object.error) : "",
+    };
+  },
+
+  toJSON(message: DecisionLogEntry_PlanResources): unknown {
+    const obj: any = {};
+    message.input !== undefined &&
+      (obj.input = message.input
+        ? PlanResourcesInput.toJSON(message.input)
+        : undefined);
+    message.output !== undefined &&
+      (obj.output = message.output
+        ? PlanResourcesOutput.toJSON(message.output)
+        : undefined);
     message.error !== undefined && (obj.error = message.error);
     return obj;
   },

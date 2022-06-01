@@ -2,7 +2,7 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import {
   Principal,
-  PlanResourcesRequest_Resource,
+  PlanResourcesInput_Resource,
   Resource,
 } from "../../../cerbos/engine/v1/engine";
 import { Policy } from "../../../cerbos/policy/v1/policy";
@@ -15,7 +15,7 @@ export interface PlanResourcesRequest {
   requestId: string;
   action: string;
   principal: Principal | undefined;
-  resource: PlanResourcesRequest_Resource | undefined;
+  resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
   includeMeta: boolean;
 }
@@ -235,7 +235,7 @@ export const PlanResourcesRequest = {
         ? Principal.fromJSON(object.principal)
         : undefined,
       resource: isSet(object.resource)
-        ? PlanResourcesRequest_Resource.fromJSON(object.resource)
+        ? PlanResourcesInput_Resource.fromJSON(object.resource)
         : undefined,
       auxData: isSet(object.auxData)
         ? AuxData.fromJSON(object.auxData)
@@ -256,7 +256,7 @@ export const PlanResourcesRequest = {
         : undefined);
     message.resource !== undefined &&
       (obj.resource = message.resource
-        ? PlanResourcesRequest_Resource.toJSON(message.resource)
+        ? PlanResourcesInput_Resource.toJSON(message.resource)
         : undefined);
     message.auxData !== undefined &&
       (obj.auxData = message.auxData

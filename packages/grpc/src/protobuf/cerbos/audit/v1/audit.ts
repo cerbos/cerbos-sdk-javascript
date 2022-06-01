@@ -2,7 +2,12 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { CheckInput, CheckOutput } from "../../../cerbos/engine/v1/engine";
+import {
+  CheckInput,
+  CheckOutput,
+  PlanResourcesInput,
+  PlanResourcesOutput,
+} from "../../../cerbos/engine/v1/engine";
 
 export const protobufPackage = "cerbos.audit.v1";
 
@@ -24,8 +29,29 @@ export interface DecisionLogEntry {
   callId: string;
   timestamp: Date | undefined;
   peer: Peer | undefined;
+  /** Deprecated. Use method.check_resources.inputs instead. */
+  inputs: CheckInput[];
+  /** Deprecated. Use method.check_resources.outputs instead. */
+  outputs: CheckOutput[];
+  /** Deprecated. Use method.check_resources.error instead. */
+  error: string;
+  method?:
+    | {
+        $case: "checkResources";
+        checkResources: DecisionLogEntry_CheckResources;
+      }
+    | { $case: "planResources"; planResources: DecisionLogEntry_PlanResources };
+}
+
+export interface DecisionLogEntry_CheckResources {
   inputs: CheckInput[];
   outputs: CheckOutput[];
+  error: string;
+}
+
+export interface DecisionLogEntry_PlanResources {
+  input: PlanResourcesInput | undefined;
+  output: PlanResourcesOutput | undefined;
   error: string;
 }
 
@@ -176,6 +202,7 @@ function createBaseDecisionLogEntry(): DecisionLogEntry {
     inputs: [],
     outputs: [],
     error: "",
+    method: undefined,
   };
 }
 
@@ -205,6 +232,18 @@ export const DecisionLogEntry = {
     if (message.error !== "") {
       writer.uint32(50).string(message.error);
     }
+    if (message.method?.$case === "checkResources") {
+      DecisionLogEntry_CheckResources.encode(
+        message.method.checkResources,
+        writer.uint32(58).fork()
+      ).ldelim();
+    }
+    if (message.method?.$case === "planResources") {
+      DecisionLogEntry_PlanResources.encode(
+        message.method.planResources,
+        writer.uint32(66).fork()
+      ).ldelim();
+    }
     return writer;
   },
 
@@ -233,6 +272,128 @@ export const DecisionLogEntry = {
           message.outputs.push(CheckOutput.decode(reader, reader.uint32()));
           break;
         case 6:
+          message.error = reader.string();
+          break;
+        case 7:
+          message.method = {
+            $case: "checkResources",
+            checkResources: DecisionLogEntry_CheckResources.decode(
+              reader,
+              reader.uint32()
+            ),
+          };
+          break;
+        case 8:
+          message.method = {
+            $case: "planResources",
+            planResources: DecisionLogEntry_PlanResources.decode(
+              reader,
+              reader.uint32()
+            ),
+          };
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBaseDecisionLogEntry_CheckResources(): DecisionLogEntry_CheckResources {
+  return { inputs: [], outputs: [], error: "" };
+}
+
+export const DecisionLogEntry_CheckResources = {
+  encode(
+    message: DecisionLogEntry_CheckResources,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    for (const v of message.inputs) {
+      CheckInput.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    for (const v of message.outputs) {
+      CheckOutput.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    if (message.error !== "") {
+      writer.uint32(26).string(message.error);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): DecisionLogEntry_CheckResources {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDecisionLogEntry_CheckResources();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.inputs.push(CheckInput.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.outputs.push(CheckOutput.decode(reader, reader.uint32()));
+          break;
+        case 3:
+          message.error = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBaseDecisionLogEntry_PlanResources(): DecisionLogEntry_PlanResources {
+  return { input: undefined, output: undefined, error: "" };
+}
+
+export const DecisionLogEntry_PlanResources = {
+  encode(
+    message: DecisionLogEntry_PlanResources,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.input !== undefined) {
+      PlanResourcesInput.encode(
+        message.input,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    if (message.output !== undefined) {
+      PlanResourcesOutput.encode(
+        message.output,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    if (message.error !== "") {
+      writer.uint32(26).string(message.error);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): DecisionLogEntry_PlanResources {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDecisionLogEntry_PlanResources();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.input = PlanResourcesInput.decode(reader, reader.uint32());
+          break;
+        case 2:
+          message.output = PlanResourcesOutput.decode(reader, reader.uint32());
+          break;
+        case 3:
           message.error = reader.string();
           break;
         default:

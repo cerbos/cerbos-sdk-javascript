@@ -4,6 +4,7 @@ import {
   effectFromJSON,
   effectToJSON,
 } from "../../../cerbos/effect/v1/effect";
+import { PlanResourcesFilter } from "../../../cerbos/engine/v1/engine";
 import { ValidationError, Schema } from "../../../cerbos/schema/v1/schema";
 import { TestResults, Policy } from "../../../cerbos/policy/v1/policy";
 import { Empty } from "../../../google/protobuf/empty";
@@ -19,78 +20,8 @@ export interface PlanResourcesResponse {
   action: string;
   resourceKind: string;
   policyVersion: string;
-  filter: PlanResourcesResponse_Filter | undefined;
+  filter: PlanResourcesFilter | undefined;
   meta: PlanResourcesResponse_Meta | undefined;
-}
-
-export interface PlanResourcesResponse_Expression {
-  operator: string;
-  operands: PlanResourcesResponse_Expression_Operand[];
-}
-
-export interface PlanResourcesResponse_Expression_Operand {
-  node?:
-    | { $case: "value"; value: any | undefined }
-    | { $case: "expression"; expression: PlanResourcesResponse_Expression }
-    | { $case: "variable"; variable: string };
-}
-
-export interface PlanResourcesResponse_Filter {
-  kind: PlanResourcesResponse_Filter_Kind;
-  condition: PlanResourcesResponse_Expression_Operand | undefined;
-}
-
-export enum PlanResourcesResponse_Filter_Kind {
-  KIND_UNSPECIFIED = 0,
-  KIND_ALWAYS_ALLOWED = 1,
-  KIND_ALWAYS_DENIED = 2,
-  KIND_CONDITIONAL = 3,
-}
-
-export function planResourcesResponse_Filter_KindFromJSON(
-  object: any
-): PlanResourcesResponse_Filter_Kind {
-  switch (object) {
-    case 0:
-    case "KIND_UNSPECIFIED":
-      return PlanResourcesResponse_Filter_Kind.KIND_UNSPECIFIED;
-    case 1:
-    case "KIND_ALWAYS_ALLOWED":
-      return PlanResourcesResponse_Filter_Kind.KIND_ALWAYS_ALLOWED;
-    case 2:
-    case "KIND_ALWAYS_DENIED":
-      return PlanResourcesResponse_Filter_Kind.KIND_ALWAYS_DENIED;
-    case 3:
-    case "KIND_CONDITIONAL":
-      return PlanResourcesResponse_Filter_Kind.KIND_CONDITIONAL;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum PlanResourcesResponse_Filter_Kind"
-      );
-  }
-}
-
-export function planResourcesResponse_Filter_KindToJSON(
-  object: PlanResourcesResponse_Filter_Kind
-): string {
-  switch (object) {
-    case PlanResourcesResponse_Filter_Kind.KIND_UNSPECIFIED:
-      return "KIND_UNSPECIFIED";
-    case PlanResourcesResponse_Filter_Kind.KIND_ALWAYS_ALLOWED:
-      return "KIND_ALWAYS_ALLOWED";
-    case PlanResourcesResponse_Filter_Kind.KIND_ALWAYS_DENIED:
-      return "KIND_ALWAYS_DENIED";
-    case PlanResourcesResponse_Filter_Kind.KIND_CONDITIONAL:
-      return "KIND_CONDITIONAL";
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum PlanResourcesResponse_Filter_Kind"
-      );
-  }
 }
 
 export interface PlanResourcesResponse_Meta {
@@ -326,7 +257,7 @@ export const PlanResourcesResponse = {
         ? String(object.policyVersion)
         : "",
       filter: isSet(object.filter)
-        ? PlanResourcesResponse_Filter.fromJSON(object.filter)
+        ? PlanResourcesFilter.fromJSON(object.filter)
         : undefined,
       meta: isSet(object.meta)
         ? PlanResourcesResponse_Meta.fromJSON(object.meta)
@@ -344,104 +275,11 @@ export const PlanResourcesResponse = {
       (obj.policyVersion = message.policyVersion);
     message.filter !== undefined &&
       (obj.filter = message.filter
-        ? PlanResourcesResponse_Filter.toJSON(message.filter)
+        ? PlanResourcesFilter.toJSON(message.filter)
         : undefined);
     message.meta !== undefined &&
       (obj.meta = message.meta
         ? PlanResourcesResponse_Meta.toJSON(message.meta)
-        : undefined);
-    return obj;
-  },
-};
-
-function createBasePlanResourcesResponse_Expression(): PlanResourcesResponse_Expression {
-  return { operator: "", operands: [] };
-}
-
-export const PlanResourcesResponse_Expression = {
-  fromJSON(object: any): PlanResourcesResponse_Expression {
-    return {
-      operator: isSet(object.operator) ? String(object.operator) : "",
-      operands: Array.isArray(object?.operands)
-        ? object.operands.map((e: any) =>
-            PlanResourcesResponse_Expression_Operand.fromJSON(e)
-          )
-        : [],
-    };
-  },
-
-  toJSON(message: PlanResourcesResponse_Expression): unknown {
-    const obj: any = {};
-    message.operator !== undefined && (obj.operator = message.operator);
-    if (message.operands) {
-      obj.operands = message.operands.map((e) =>
-        e ? PlanResourcesResponse_Expression_Operand.toJSON(e) : undefined
-      );
-    } else {
-      obj.operands = [];
-    }
-    return obj;
-  },
-};
-
-function createBasePlanResourcesResponse_Expression_Operand(): PlanResourcesResponse_Expression_Operand {
-  return { node: undefined };
-}
-
-export const PlanResourcesResponse_Expression_Operand = {
-  fromJSON(object: any): PlanResourcesResponse_Expression_Operand {
-    return {
-      node: isSet(object.value)
-        ? { $case: "value", value: object.value }
-        : isSet(object.expression)
-        ? {
-            $case: "expression",
-            expression: PlanResourcesResponse_Expression.fromJSON(
-              object.expression
-            ),
-          }
-        : isSet(object.variable)
-        ? { $case: "variable", variable: String(object.variable) }
-        : undefined,
-    };
-  },
-
-  toJSON(message: PlanResourcesResponse_Expression_Operand): unknown {
-    const obj: any = {};
-    message.node?.$case === "value" && (obj.value = message.node?.value);
-    message.node?.$case === "expression" &&
-      (obj.expression = message.node?.expression
-        ? PlanResourcesResponse_Expression.toJSON(message.node?.expression)
-        : undefined);
-    message.node?.$case === "variable" &&
-      (obj.variable = message.node?.variable);
-    return obj;
-  },
-};
-
-function createBasePlanResourcesResponse_Filter(): PlanResourcesResponse_Filter {
-  return { kind: 0, condition: undefined };
-}
-
-export const PlanResourcesResponse_Filter = {
-  fromJSON(object: any): PlanResourcesResponse_Filter {
-    return {
-      kind: isSet(object.kind)
-        ? planResourcesResponse_Filter_KindFromJSON(object.kind)
-        : 0,
-      condition: isSet(object.condition)
-        ? PlanResourcesResponse_Expression_Operand.fromJSON(object.condition)
-        : undefined,
-    };
-  },
-
-  toJSON(message: PlanResourcesResponse_Filter): unknown {
-    const obj: any = {};
-    message.kind !== undefined &&
-      (obj.kind = planResourcesResponse_Filter_KindToJSON(message.kind));
-    message.condition !== undefined &&
-      (obj.condition = message.condition
-        ? PlanResourcesResponse_Expression_Operand.toJSON(message.condition)
         : undefined);
     return obj;
   },
@@ -1646,17 +1484,6 @@ export const ReloadStoreResponse = {
     return obj;
   },
 };
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
 
 function isObject(value: any): boolean {
   return typeof value === "object" && value !== null;

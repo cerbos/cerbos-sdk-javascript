@@ -1,5 +1,6 @@
 /* eslint-disable */
 import type { Effect } from "../../../cerbos/effect/v1/effect";
+import type { PlanResourcesFilter } from "../../../cerbos/engine/v1/engine";
 import type { ValidationError, Schema } from "../../../cerbos/schema/v1/schema";
 import type { TestResults, Policy } from "../../../cerbos/policy/v1/policy";
 import type { Empty } from "../../../google/protobuf/empty";
@@ -15,32 +16,8 @@ export interface PlanResourcesResponse {
   action: string;
   resourceKind: string;
   policyVersion: string;
-  filter: PlanResourcesResponse_Filter | undefined;
+  filter: PlanResourcesFilter | undefined;
   meta: PlanResourcesResponse_Meta | undefined;
-}
-
-export interface PlanResourcesResponse_Expression {
-  operator: string;
-  operands: PlanResourcesResponse_Expression_Operand[];
-}
-
-export interface PlanResourcesResponse_Expression_Operand {
-  node?:
-    | { $case: "value"; value: any | undefined }
-    | { $case: "expression"; expression: PlanResourcesResponse_Expression }
-    | { $case: "variable"; variable: string };
-}
-
-export interface PlanResourcesResponse_Filter {
-  kind: PlanResourcesResponse_Filter_Kind;
-  condition: PlanResourcesResponse_Expression_Operand | undefined;
-}
-
-export enum PlanResourcesResponse_Filter_Kind {
-  KIND_UNSPECIFIED = 0,
-  KIND_ALWAYS_ALLOWED = 1,
-  KIND_ALWAYS_DENIED = 2,
-  KIND_CONDITIONAL = 3,
 }
 
 export interface PlanResourcesResponse_Meta {

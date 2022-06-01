@@ -5,25 +5,84 @@ import type { CheckedExpr } from "../../../google/api/expr/v1alpha1/checked";
 
 export const protobufPackage = "cerbos.engine.v1";
 
-export interface PlanResourcesRequest {
+export interface PlanResourcesInput {
   requestId: string;
   action: string;
   principal: Principal | undefined;
-  resource: PlanResourcesRequest_Resource | undefined;
+  resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
   includeMeta: boolean;
 }
 
-export interface PlanResourcesRequest_Resource {
+export interface PlanResourcesInput_Resource {
   kind: string;
   attr: { [key: string]: any | undefined };
   policyVersion: string;
   scope: string;
 }
 
-export interface PlanResourcesRequest_Resource_AttrEntry {
+export interface PlanResourcesInput_Resource_AttrEntry {
   key: string;
   value: any | undefined;
+}
+
+export interface PlanResourcesAst {
+  filterAst: PlanResourcesAst_Node | undefined;
+}
+
+export interface PlanResourcesAst_Node {
+  node?:
+    | {
+        $case: "logicalOperation";
+        logicalOperation: PlanResourcesAst_LogicalOperation;
+      }
+    | { $case: "expression"; expression: CheckedExpr };
+}
+
+export interface PlanResourcesAst_LogicalOperation {
+  operator: PlanResourcesAst_LogicalOperation_Operator;
+  nodes: PlanResourcesAst_Node[];
+}
+
+export enum PlanResourcesAst_LogicalOperation_Operator {
+  OPERATOR_UNSPECIFIED = 0,
+  OPERATOR_AND = 1,
+  OPERATOR_OR = 2,
+  OPERATOR_NOT = 3,
+}
+
+export interface PlanResourcesFilter {
+  kind: PlanResourcesFilter_Kind;
+  condition: PlanResourcesFilter_Expression_Operand | undefined;
+}
+
+export enum PlanResourcesFilter_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_ALWAYS_ALLOWED = 1,
+  KIND_ALWAYS_DENIED = 2,
+  KIND_CONDITIONAL = 3,
+}
+
+export interface PlanResourcesFilter_Expression {
+  operator: string;
+  operands: PlanResourcesFilter_Expression_Operand[];
+}
+
+export interface PlanResourcesFilter_Expression_Operand {
+  node?:
+    | { $case: "value"; value: any | undefined }
+    | { $case: "expression"; expression: PlanResourcesFilter_Expression }
+    | { $case: "variable"; variable: string };
+}
+
+export interface PlanResourcesOutput {
+  requestId: string;
+  action: string;
+  kind: string;
+  policyVersion: string;
+  scope: string;
+  filter: PlanResourcesFilter | undefined;
+  filterDebug: string;
 }
 
 export interface CheckInput {
@@ -51,36 +110,6 @@ export interface CheckOutput_ActionEffect {
 export interface CheckOutput_ActionsEntry {
   key: string;
   value: CheckOutput_ActionEffect | undefined;
-}
-
-export interface PlanResourcesOutput {
-  requestId: string;
-  action: string;
-  kind: string;
-  policyVersion: string;
-  scope: string;
-  filter: PlanResourcesOutput_Node | undefined;
-}
-
-export interface PlanResourcesOutput_Node {
-  node?:
-    | {
-        $case: "logicalOperation";
-        logicalOperation: PlanResourcesOutput_LogicalOperation;
-      }
-    | { $case: "expression"; expression: CheckedExpr };
-}
-
-export interface PlanResourcesOutput_LogicalOperation {
-  operator: PlanResourcesOutput_LogicalOperation_Operator;
-  nodes: PlanResourcesOutput_Node[];
-}
-
-export enum PlanResourcesOutput_LogicalOperation_Operator {
-  OPERATOR_UNSPECIFIED = 0,
-  OPERATOR_AND = 1,
-  OPERATOR_OR = 2,
-  OPERATOR_NOT = 3,
 }
 
 export interface Resource {

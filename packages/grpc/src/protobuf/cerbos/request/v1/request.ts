@@ -4,7 +4,7 @@ import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import {
   Principal,
-  PlanResourcesRequest_Resource,
+  PlanResourcesInput_Resource,
   Resource,
 } from "../../../cerbos/engine/v1/engine";
 import { Policy } from "../../../cerbos/policy/v1/policy";
@@ -18,7 +18,7 @@ export interface PlanResourcesRequest {
   requestId: string;
   action: string;
   principal: Principal | undefined;
-  resource: PlanResourcesRequest_Resource | undefined;
+  resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
   includeMeta: boolean;
 }
@@ -203,7 +203,7 @@ export const PlanResourcesRequest = {
       Principal.encode(message.principal, writer.uint32(26).fork()).ldelim();
     }
     if (message.resource !== undefined) {
-      PlanResourcesRequest_Resource.encode(
+      PlanResourcesInput_Resource.encode(
         message.resource,
         writer.uint32(34).fork()
       ).ldelim();
@@ -237,7 +237,7 @@ export const PlanResourcesRequest = {
           message.principal = Principal.decode(reader, reader.uint32());
           break;
         case 4:
-          message.resource = PlanResourcesRequest_Resource.decode(
+          message.resource = PlanResourcesInput_Resource.decode(
             reader,
             reader.uint32()
           );

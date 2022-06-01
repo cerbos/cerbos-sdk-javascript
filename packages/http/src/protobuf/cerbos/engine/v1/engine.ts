@@ -9,25 +9,176 @@ import { CheckedExpr } from "../../../google/api/expr/v1alpha1/checked";
 
 export const protobufPackage = "cerbos.engine.v1";
 
-export interface PlanResourcesRequest {
+export interface PlanResourcesInput {
   requestId: string;
   action: string;
   principal: Principal | undefined;
-  resource: PlanResourcesRequest_Resource | undefined;
+  resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
   includeMeta: boolean;
 }
 
-export interface PlanResourcesRequest_Resource {
+export interface PlanResourcesInput_Resource {
   kind: string;
   attr: { [key: string]: any | undefined };
   policyVersion: string;
   scope: string;
 }
 
-export interface PlanResourcesRequest_Resource_AttrEntry {
+export interface PlanResourcesInput_Resource_AttrEntry {
   key: string;
   value: any | undefined;
+}
+
+export interface PlanResourcesAst {
+  filterAst: PlanResourcesAst_Node | undefined;
+}
+
+export interface PlanResourcesAst_Node {
+  node?:
+    | {
+        $case: "logicalOperation";
+        logicalOperation: PlanResourcesAst_LogicalOperation;
+      }
+    | { $case: "expression"; expression: CheckedExpr };
+}
+
+export interface PlanResourcesAst_LogicalOperation {
+  operator: PlanResourcesAst_LogicalOperation_Operator;
+  nodes: PlanResourcesAst_Node[];
+}
+
+export enum PlanResourcesAst_LogicalOperation_Operator {
+  OPERATOR_UNSPECIFIED = 0,
+  OPERATOR_AND = 1,
+  OPERATOR_OR = 2,
+  OPERATOR_NOT = 3,
+}
+
+export function planResourcesAst_LogicalOperation_OperatorFromJSON(
+  object: any
+): PlanResourcesAst_LogicalOperation_Operator {
+  switch (object) {
+    case 0:
+    case "OPERATOR_UNSPECIFIED":
+      return PlanResourcesAst_LogicalOperation_Operator.OPERATOR_UNSPECIFIED;
+    case 1:
+    case "OPERATOR_AND":
+      return PlanResourcesAst_LogicalOperation_Operator.OPERATOR_AND;
+    case 2:
+    case "OPERATOR_OR":
+      return PlanResourcesAst_LogicalOperation_Operator.OPERATOR_OR;
+    case 3:
+    case "OPERATOR_NOT":
+      return PlanResourcesAst_LogicalOperation_Operator.OPERATOR_NOT;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum PlanResourcesAst_LogicalOperation_Operator"
+      );
+  }
+}
+
+export function planResourcesAst_LogicalOperation_OperatorToJSON(
+  object: PlanResourcesAst_LogicalOperation_Operator
+): string {
+  switch (object) {
+    case PlanResourcesAst_LogicalOperation_Operator.OPERATOR_UNSPECIFIED:
+      return "OPERATOR_UNSPECIFIED";
+    case PlanResourcesAst_LogicalOperation_Operator.OPERATOR_AND:
+      return "OPERATOR_AND";
+    case PlanResourcesAst_LogicalOperation_Operator.OPERATOR_OR:
+      return "OPERATOR_OR";
+    case PlanResourcesAst_LogicalOperation_Operator.OPERATOR_NOT:
+      return "OPERATOR_NOT";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum PlanResourcesAst_LogicalOperation_Operator"
+      );
+  }
+}
+
+export interface PlanResourcesFilter {
+  kind: PlanResourcesFilter_Kind;
+  condition: PlanResourcesFilter_Expression_Operand | undefined;
+}
+
+export enum PlanResourcesFilter_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_ALWAYS_ALLOWED = 1,
+  KIND_ALWAYS_DENIED = 2,
+  KIND_CONDITIONAL = 3,
+}
+
+export function planResourcesFilter_KindFromJSON(
+  object: any
+): PlanResourcesFilter_Kind {
+  switch (object) {
+    case 0:
+    case "KIND_UNSPECIFIED":
+      return PlanResourcesFilter_Kind.KIND_UNSPECIFIED;
+    case 1:
+    case "KIND_ALWAYS_ALLOWED":
+      return PlanResourcesFilter_Kind.KIND_ALWAYS_ALLOWED;
+    case 2:
+    case "KIND_ALWAYS_DENIED":
+      return PlanResourcesFilter_Kind.KIND_ALWAYS_DENIED;
+    case 3:
+    case "KIND_CONDITIONAL":
+      return PlanResourcesFilter_Kind.KIND_CONDITIONAL;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum PlanResourcesFilter_Kind"
+      );
+  }
+}
+
+export function planResourcesFilter_KindToJSON(
+  object: PlanResourcesFilter_Kind
+): string {
+  switch (object) {
+    case PlanResourcesFilter_Kind.KIND_UNSPECIFIED:
+      return "KIND_UNSPECIFIED";
+    case PlanResourcesFilter_Kind.KIND_ALWAYS_ALLOWED:
+      return "KIND_ALWAYS_ALLOWED";
+    case PlanResourcesFilter_Kind.KIND_ALWAYS_DENIED:
+      return "KIND_ALWAYS_DENIED";
+    case PlanResourcesFilter_Kind.KIND_CONDITIONAL:
+      return "KIND_CONDITIONAL";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum PlanResourcesFilter_Kind"
+      );
+  }
+}
+
+export interface PlanResourcesFilter_Expression {
+  operator: string;
+  operands: PlanResourcesFilter_Expression_Operand[];
+}
+
+export interface PlanResourcesFilter_Expression_Operand {
+  node?:
+    | { $case: "value"; value: any | undefined }
+    | { $case: "expression"; expression: PlanResourcesFilter_Expression }
+    | { $case: "variable"; variable: string };
+}
+
+export interface PlanResourcesOutput {
+  requestId: string;
+  action: string;
+  kind: string;
+  policyVersion: string;
+  scope: string;
+  filter: PlanResourcesFilter | undefined;
+  filterDebug: string;
 }
 
 export interface CheckInput {
@@ -55,82 +206,6 @@ export interface CheckOutput_ActionEffect {
 export interface CheckOutput_ActionsEntry {
   key: string;
   value: CheckOutput_ActionEffect | undefined;
-}
-
-export interface PlanResourcesOutput {
-  requestId: string;
-  action: string;
-  kind: string;
-  policyVersion: string;
-  scope: string;
-  filter: PlanResourcesOutput_Node | undefined;
-}
-
-export interface PlanResourcesOutput_Node {
-  node?:
-    | {
-        $case: "logicalOperation";
-        logicalOperation: PlanResourcesOutput_LogicalOperation;
-      }
-    | { $case: "expression"; expression: CheckedExpr };
-}
-
-export interface PlanResourcesOutput_LogicalOperation {
-  operator: PlanResourcesOutput_LogicalOperation_Operator;
-  nodes: PlanResourcesOutput_Node[];
-}
-
-export enum PlanResourcesOutput_LogicalOperation_Operator {
-  OPERATOR_UNSPECIFIED = 0,
-  OPERATOR_AND = 1,
-  OPERATOR_OR = 2,
-  OPERATOR_NOT = 3,
-}
-
-export function planResourcesOutput_LogicalOperation_OperatorFromJSON(
-  object: any
-): PlanResourcesOutput_LogicalOperation_Operator {
-  switch (object) {
-    case 0:
-    case "OPERATOR_UNSPECIFIED":
-      return PlanResourcesOutput_LogicalOperation_Operator.OPERATOR_UNSPECIFIED;
-    case 1:
-    case "OPERATOR_AND":
-      return PlanResourcesOutput_LogicalOperation_Operator.OPERATOR_AND;
-    case 2:
-    case "OPERATOR_OR":
-      return PlanResourcesOutput_LogicalOperation_Operator.OPERATOR_OR;
-    case 3:
-    case "OPERATOR_NOT":
-      return PlanResourcesOutput_LogicalOperation_Operator.OPERATOR_NOT;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum PlanResourcesOutput_LogicalOperation_Operator"
-      );
-  }
-}
-
-export function planResourcesOutput_LogicalOperation_OperatorToJSON(
-  object: PlanResourcesOutput_LogicalOperation_Operator
-): string {
-  switch (object) {
-    case PlanResourcesOutput_LogicalOperation_Operator.OPERATOR_UNSPECIFIED:
-      return "OPERATOR_UNSPECIFIED";
-    case PlanResourcesOutput_LogicalOperation_Operator.OPERATOR_AND:
-      return "OPERATOR_AND";
-    case PlanResourcesOutput_LogicalOperation_Operator.OPERATOR_OR:
-      return "OPERATOR_OR";
-    case PlanResourcesOutput_LogicalOperation_Operator.OPERATOR_NOT:
-      return "OPERATOR_NOT";
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum PlanResourcesOutput_LogicalOperation_Operator"
-      );
-  }
 }
 
 export interface Resource {
@@ -348,7 +423,7 @@ export function trace_Event_StatusToJSON(object: Trace_Event_Status): string {
   }
 }
 
-function createBasePlanResourcesRequest(): PlanResourcesRequest {
+function createBasePlanResourcesInput(): PlanResourcesInput {
   return {
     requestId: "",
     action: "",
@@ -359,8 +434,8 @@ function createBasePlanResourcesRequest(): PlanResourcesRequest {
   };
 }
 
-export const PlanResourcesRequest = {
-  fromJSON(object: any): PlanResourcesRequest {
+export const PlanResourcesInput = {
+  fromJSON(object: any): PlanResourcesInput {
     return {
       requestId: isSet(object.requestId) ? String(object.requestId) : "",
       action: isSet(object.action) ? String(object.action) : "",
@@ -368,7 +443,7 @@ export const PlanResourcesRequest = {
         ? Principal.fromJSON(object.principal)
         : undefined,
       resource: isSet(object.resource)
-        ? PlanResourcesRequest_Resource.fromJSON(object.resource)
+        ? PlanResourcesInput_Resource.fromJSON(object.resource)
         : undefined,
       auxData: isSet(object.auxData)
         ? AuxData.fromJSON(object.auxData)
@@ -379,7 +454,7 @@ export const PlanResourcesRequest = {
     };
   },
 
-  toJSON(message: PlanResourcesRequest): unknown {
+  toJSON(message: PlanResourcesInput): unknown {
     const obj: any = {};
     message.requestId !== undefined && (obj.requestId = message.requestId);
     message.action !== undefined && (obj.action = message.action);
@@ -389,7 +464,7 @@ export const PlanResourcesRequest = {
         : undefined);
     message.resource !== undefined &&
       (obj.resource = message.resource
-        ? PlanResourcesRequest_Resource.toJSON(message.resource)
+        ? PlanResourcesInput_Resource.toJSON(message.resource)
         : undefined);
     message.auxData !== undefined &&
       (obj.auxData = message.auxData
@@ -401,12 +476,12 @@ export const PlanResourcesRequest = {
   },
 };
 
-function createBasePlanResourcesRequest_Resource(): PlanResourcesRequest_Resource {
+function createBasePlanResourcesInput_Resource(): PlanResourcesInput_Resource {
   return { kind: "", attr: {}, policyVersion: "", scope: "" };
 }
 
-export const PlanResourcesRequest_Resource = {
-  fromJSON(object: any): PlanResourcesRequest_Resource {
+export const PlanResourcesInput_Resource = {
+  fromJSON(object: any): PlanResourcesInput_Resource {
     return {
       kind: isSet(object.kind) ? String(object.kind) : "",
       attr: isObject(object.attr)
@@ -424,7 +499,7 @@ export const PlanResourcesRequest_Resource = {
     };
   },
 
-  toJSON(message: PlanResourcesRequest_Resource): unknown {
+  toJSON(message: PlanResourcesInput_Resource): unknown {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = message.kind);
     obj.attr = {};
@@ -440,22 +515,257 @@ export const PlanResourcesRequest_Resource = {
   },
 };
 
-function createBasePlanResourcesRequest_Resource_AttrEntry(): PlanResourcesRequest_Resource_AttrEntry {
+function createBasePlanResourcesInput_Resource_AttrEntry(): PlanResourcesInput_Resource_AttrEntry {
   return { key: "", value: undefined };
 }
 
-export const PlanResourcesRequest_Resource_AttrEntry = {
-  fromJSON(object: any): PlanResourcesRequest_Resource_AttrEntry {
+export const PlanResourcesInput_Resource_AttrEntry = {
+  fromJSON(object: any): PlanResourcesInput_Resource_AttrEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
 
-  toJSON(message: PlanResourcesRequest_Resource_AttrEntry): unknown {
+  toJSON(message: PlanResourcesInput_Resource_AttrEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+};
+
+function createBasePlanResourcesAst(): PlanResourcesAst {
+  return { filterAst: undefined };
+}
+
+export const PlanResourcesAst = {
+  fromJSON(object: any): PlanResourcesAst {
+    return {
+      filterAst: isSet(object.filterAst)
+        ? PlanResourcesAst_Node.fromJSON(object.filterAst)
+        : undefined,
+    };
+  },
+
+  toJSON(message: PlanResourcesAst): unknown {
+    const obj: any = {};
+    message.filterAst !== undefined &&
+      (obj.filterAst = message.filterAst
+        ? PlanResourcesAst_Node.toJSON(message.filterAst)
+        : undefined);
+    return obj;
+  },
+};
+
+function createBasePlanResourcesAst_Node(): PlanResourcesAst_Node {
+  return { node: undefined };
+}
+
+export const PlanResourcesAst_Node = {
+  fromJSON(object: any): PlanResourcesAst_Node {
+    return {
+      node: isSet(object.logicalOperation)
+        ? {
+            $case: "logicalOperation",
+            logicalOperation: PlanResourcesAst_LogicalOperation.fromJSON(
+              object.logicalOperation
+            ),
+          }
+        : isSet(object.expression)
+        ? {
+            $case: "expression",
+            expression: CheckedExpr.fromJSON(object.expression),
+          }
+        : undefined,
+    };
+  },
+
+  toJSON(message: PlanResourcesAst_Node): unknown {
+    const obj: any = {};
+    message.node?.$case === "logicalOperation" &&
+      (obj.logicalOperation = message.node?.logicalOperation
+        ? PlanResourcesAst_LogicalOperation.toJSON(
+            message.node?.logicalOperation
+          )
+        : undefined);
+    message.node?.$case === "expression" &&
+      (obj.expression = message.node?.expression
+        ? CheckedExpr.toJSON(message.node?.expression)
+        : undefined);
+    return obj;
+  },
+};
+
+function createBasePlanResourcesAst_LogicalOperation(): PlanResourcesAst_LogicalOperation {
+  return { operator: 0, nodes: [] };
+}
+
+export const PlanResourcesAst_LogicalOperation = {
+  fromJSON(object: any): PlanResourcesAst_LogicalOperation {
+    return {
+      operator: isSet(object.operator)
+        ? planResourcesAst_LogicalOperation_OperatorFromJSON(object.operator)
+        : 0,
+      nodes: Array.isArray(object?.nodes)
+        ? object.nodes.map((e: any) => PlanResourcesAst_Node.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: PlanResourcesAst_LogicalOperation): unknown {
+    const obj: any = {};
+    message.operator !== undefined &&
+      (obj.operator = planResourcesAst_LogicalOperation_OperatorToJSON(
+        message.operator
+      ));
+    if (message.nodes) {
+      obj.nodes = message.nodes.map((e) =>
+        e ? PlanResourcesAst_Node.toJSON(e) : undefined
+      );
+    } else {
+      obj.nodes = [];
+    }
+    return obj;
+  },
+};
+
+function createBasePlanResourcesFilter(): PlanResourcesFilter {
+  return { kind: 0, condition: undefined };
+}
+
+export const PlanResourcesFilter = {
+  fromJSON(object: any): PlanResourcesFilter {
+    return {
+      kind: isSet(object.kind)
+        ? planResourcesFilter_KindFromJSON(object.kind)
+        : 0,
+      condition: isSet(object.condition)
+        ? PlanResourcesFilter_Expression_Operand.fromJSON(object.condition)
+        : undefined,
+    };
+  },
+
+  toJSON(message: PlanResourcesFilter): unknown {
+    const obj: any = {};
+    message.kind !== undefined &&
+      (obj.kind = planResourcesFilter_KindToJSON(message.kind));
+    message.condition !== undefined &&
+      (obj.condition = message.condition
+        ? PlanResourcesFilter_Expression_Operand.toJSON(message.condition)
+        : undefined);
+    return obj;
+  },
+};
+
+function createBasePlanResourcesFilter_Expression(): PlanResourcesFilter_Expression {
+  return { operator: "", operands: [] };
+}
+
+export const PlanResourcesFilter_Expression = {
+  fromJSON(object: any): PlanResourcesFilter_Expression {
+    return {
+      operator: isSet(object.operator) ? String(object.operator) : "",
+      operands: Array.isArray(object?.operands)
+        ? object.operands.map((e: any) =>
+            PlanResourcesFilter_Expression_Operand.fromJSON(e)
+          )
+        : [],
+    };
+  },
+
+  toJSON(message: PlanResourcesFilter_Expression): unknown {
+    const obj: any = {};
+    message.operator !== undefined && (obj.operator = message.operator);
+    if (message.operands) {
+      obj.operands = message.operands.map((e) =>
+        e ? PlanResourcesFilter_Expression_Operand.toJSON(e) : undefined
+      );
+    } else {
+      obj.operands = [];
+    }
+    return obj;
+  },
+};
+
+function createBasePlanResourcesFilter_Expression_Operand(): PlanResourcesFilter_Expression_Operand {
+  return { node: undefined };
+}
+
+export const PlanResourcesFilter_Expression_Operand = {
+  fromJSON(object: any): PlanResourcesFilter_Expression_Operand {
+    return {
+      node: isSet(object.value)
+        ? { $case: "value", value: object.value }
+        : isSet(object.expression)
+        ? {
+            $case: "expression",
+            expression: PlanResourcesFilter_Expression.fromJSON(
+              object.expression
+            ),
+          }
+        : isSet(object.variable)
+        ? { $case: "variable", variable: String(object.variable) }
+        : undefined,
+    };
+  },
+
+  toJSON(message: PlanResourcesFilter_Expression_Operand): unknown {
+    const obj: any = {};
+    message.node?.$case === "value" && (obj.value = message.node?.value);
+    message.node?.$case === "expression" &&
+      (obj.expression = message.node?.expression
+        ? PlanResourcesFilter_Expression.toJSON(message.node?.expression)
+        : undefined);
+    message.node?.$case === "variable" &&
+      (obj.variable = message.node?.variable);
+    return obj;
+  },
+};
+
+function createBasePlanResourcesOutput(): PlanResourcesOutput {
+  return {
+    requestId: "",
+    action: "",
+    kind: "",
+    policyVersion: "",
+    scope: "",
+    filter: undefined,
+    filterDebug: "",
+  };
+}
+
+export const PlanResourcesOutput = {
+  fromJSON(object: any): PlanResourcesOutput {
+    return {
+      requestId: isSet(object.requestId) ? String(object.requestId) : "",
+      action: isSet(object.action) ? String(object.action) : "",
+      kind: isSet(object.kind) ? String(object.kind) : "",
+      policyVersion: isSet(object.policyVersion)
+        ? String(object.policyVersion)
+        : "",
+      scope: isSet(object.scope) ? String(object.scope) : "",
+      filter: isSet(object.filter)
+        ? PlanResourcesFilter.fromJSON(object.filter)
+        : undefined,
+      filterDebug: isSet(object.filterDebug) ? String(object.filterDebug) : "",
+    };
+  },
+
+  toJSON(message: PlanResourcesOutput): unknown {
+    const obj: any = {};
+    message.requestId !== undefined && (obj.requestId = message.requestId);
+    message.action !== undefined && (obj.action = message.action);
+    message.kind !== undefined && (obj.kind = message.kind);
+    message.policyVersion !== undefined &&
+      (obj.policyVersion = message.policyVersion);
+    message.scope !== undefined && (obj.scope = message.scope);
+    message.filter !== undefined &&
+      (obj.filter = message.filter
+        ? PlanResourcesFilter.toJSON(message.filter)
+        : undefined);
+    message.filterDebug !== undefined &&
+      (obj.filterDebug = message.filterDebug);
     return obj;
   },
 };
@@ -614,121 +924,6 @@ export const CheckOutput_ActionsEntry = {
       (obj.value = message.value
         ? CheckOutput_ActionEffect.toJSON(message.value)
         : undefined);
-    return obj;
-  },
-};
-
-function createBasePlanResourcesOutput(): PlanResourcesOutput {
-  return {
-    requestId: "",
-    action: "",
-    kind: "",
-    policyVersion: "",
-    scope: "",
-    filter: undefined,
-  };
-}
-
-export const PlanResourcesOutput = {
-  fromJSON(object: any): PlanResourcesOutput {
-    return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
-      action: isSet(object.action) ? String(object.action) : "",
-      kind: isSet(object.kind) ? String(object.kind) : "",
-      policyVersion: isSet(object.policyVersion)
-        ? String(object.policyVersion)
-        : "",
-      scope: isSet(object.scope) ? String(object.scope) : "",
-      filter: isSet(object.filter)
-        ? PlanResourcesOutput_Node.fromJSON(object.filter)
-        : undefined,
-    };
-  },
-
-  toJSON(message: PlanResourcesOutput): unknown {
-    const obj: any = {};
-    message.requestId !== undefined && (obj.requestId = message.requestId);
-    message.action !== undefined && (obj.action = message.action);
-    message.kind !== undefined && (obj.kind = message.kind);
-    message.policyVersion !== undefined &&
-      (obj.policyVersion = message.policyVersion);
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.filter !== undefined &&
-      (obj.filter = message.filter
-        ? PlanResourcesOutput_Node.toJSON(message.filter)
-        : undefined);
-    return obj;
-  },
-};
-
-function createBasePlanResourcesOutput_Node(): PlanResourcesOutput_Node {
-  return { node: undefined };
-}
-
-export const PlanResourcesOutput_Node = {
-  fromJSON(object: any): PlanResourcesOutput_Node {
-    return {
-      node: isSet(object.logicalOperation)
-        ? {
-            $case: "logicalOperation",
-            logicalOperation: PlanResourcesOutput_LogicalOperation.fromJSON(
-              object.logicalOperation
-            ),
-          }
-        : isSet(object.expression)
-        ? {
-            $case: "expression",
-            expression: CheckedExpr.fromJSON(object.expression),
-          }
-        : undefined,
-    };
-  },
-
-  toJSON(message: PlanResourcesOutput_Node): unknown {
-    const obj: any = {};
-    message.node?.$case === "logicalOperation" &&
-      (obj.logicalOperation = message.node?.logicalOperation
-        ? PlanResourcesOutput_LogicalOperation.toJSON(
-            message.node?.logicalOperation
-          )
-        : undefined);
-    message.node?.$case === "expression" &&
-      (obj.expression = message.node?.expression
-        ? CheckedExpr.toJSON(message.node?.expression)
-        : undefined);
-    return obj;
-  },
-};
-
-function createBasePlanResourcesOutput_LogicalOperation(): PlanResourcesOutput_LogicalOperation {
-  return { operator: 0, nodes: [] };
-}
-
-export const PlanResourcesOutput_LogicalOperation = {
-  fromJSON(object: any): PlanResourcesOutput_LogicalOperation {
-    return {
-      operator: isSet(object.operator)
-        ? planResourcesOutput_LogicalOperation_OperatorFromJSON(object.operator)
-        : 0,
-      nodes: Array.isArray(object?.nodes)
-        ? object.nodes.map((e: any) => PlanResourcesOutput_Node.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: PlanResourcesOutput_LogicalOperation): unknown {
-    const obj: any = {};
-    message.operator !== undefined &&
-      (obj.operator = planResourcesOutput_LogicalOperation_OperatorToJSON(
-        message.operator
-      ));
-    if (message.nodes) {
-      obj.nodes = message.nodes.map((e) =>
-        e ? PlanResourcesOutput_Node.toJSON(e) : undefined
-      );
-    } else {
-      obj.nodes = [];
-    }
     return obj;
   },
 };

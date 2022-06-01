@@ -1,7 +1,7 @@
 /* eslint-disable */
 import type {
   Principal,
-  PlanResourcesRequest_Resource,
+  PlanResourcesInput_Resource,
   Resource,
 } from "../../../cerbos/engine/v1/engine";
 import type { Policy } from "../../../cerbos/policy/v1/policy";
@@ -14,7 +14,7 @@ export interface PlanResourcesRequest {
   requestId: string;
   action: string;
   principal: Principal | undefined;
-  resource: PlanResourcesRequest_Resource | undefined;
+  resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
   includeMeta: boolean;
 }

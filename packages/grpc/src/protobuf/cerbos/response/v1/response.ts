@@ -2,6 +2,7 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Effect } from "../../../cerbos/effect/v1/effect";
+import { PlanResourcesFilter } from "../../../cerbos/engine/v1/engine";
 import { ValidationError, Schema } from "../../../cerbos/schema/v1/schema";
 import { TestResults, Policy } from "../../../cerbos/policy/v1/policy";
 import { Empty } from "../../../google/protobuf/empty";
@@ -9,7 +10,6 @@ import {
   AccessLogEntry,
   DecisionLogEntry,
 } from "../../../cerbos/audit/v1/audit";
-import { Value } from "../../../google/protobuf/struct";
 
 export const protobufPackage = "cerbos.response.v1";
 
@@ -18,32 +18,8 @@ export interface PlanResourcesResponse {
   action: string;
   resourceKind: string;
   policyVersion: string;
-  filter: PlanResourcesResponse_Filter | undefined;
+  filter: PlanResourcesFilter | undefined;
   meta: PlanResourcesResponse_Meta | undefined;
-}
-
-export interface PlanResourcesResponse_Expression {
-  operator: string;
-  operands: PlanResourcesResponse_Expression_Operand[];
-}
-
-export interface PlanResourcesResponse_Expression_Operand {
-  node?:
-    | { $case: "value"; value: any | undefined }
-    | { $case: "expression"; expression: PlanResourcesResponse_Expression }
-    | { $case: "variable"; variable: string };
-}
-
-export interface PlanResourcesResponse_Filter {
-  kind: PlanResourcesResponse_Filter_Kind;
-  condition: PlanResourcesResponse_Expression_Operand | undefined;
-}
-
-export enum PlanResourcesResponse_Filter_Kind {
-  KIND_UNSPECIFIED = 0,
-  KIND_ALWAYS_ALLOWED = 1,
-  KIND_ALWAYS_DENIED = 2,
-  KIND_CONDITIONAL = 3,
 }
 
 export interface PlanResourcesResponse_Meta {
@@ -285,7 +261,7 @@ export const PlanResourcesResponse = {
       writer.uint32(34).string(message.policyVersion);
     }
     if (message.filter !== undefined) {
-      PlanResourcesResponse_Filter.encode(
+      PlanResourcesFilter.encode(
         message.filter,
         writer.uint32(42).fork()
       ).ldelim();
@@ -322,177 +298,10 @@ export const PlanResourcesResponse = {
           message.policyVersion = reader.string();
           break;
         case 5:
-          message.filter = PlanResourcesResponse_Filter.decode(
-            reader,
-            reader.uint32()
-          );
+          message.filter = PlanResourcesFilter.decode(reader, reader.uint32());
           break;
         case 6:
           message.meta = PlanResourcesResponse_Meta.decode(
-            reader,
-            reader.uint32()
-          );
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-};
-
-function createBasePlanResourcesResponse_Expression(): PlanResourcesResponse_Expression {
-  return { operator: "", operands: [] };
-}
-
-export const PlanResourcesResponse_Expression = {
-  encode(
-    message: PlanResourcesResponse_Expression,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    if (message.operator !== "") {
-      writer.uint32(10).string(message.operator);
-    }
-    for (const v of message.operands) {
-      PlanResourcesResponse_Expression_Operand.encode(
-        v!,
-        writer.uint32(18).fork()
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PlanResourcesResponse_Expression {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesResponse_Expression();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.operator = reader.string();
-          break;
-        case 2:
-          message.operands.push(
-            PlanResourcesResponse_Expression_Operand.decode(
-              reader,
-              reader.uint32()
-            )
-          );
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-};
-
-function createBasePlanResourcesResponse_Expression_Operand(): PlanResourcesResponse_Expression_Operand {
-  return { node: undefined };
-}
-
-export const PlanResourcesResponse_Expression_Operand = {
-  encode(
-    message: PlanResourcesResponse_Expression_Operand,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    if (message.node?.$case === "value") {
-      Value.encode(
-        Value.wrap(message.node.value),
-        writer.uint32(10).fork()
-      ).ldelim();
-    }
-    if (message.node?.$case === "expression") {
-      PlanResourcesResponse_Expression.encode(
-        message.node.expression,
-        writer.uint32(18).fork()
-      ).ldelim();
-    }
-    if (message.node?.$case === "variable") {
-      writer.uint32(26).string(message.node.variable);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PlanResourcesResponse_Expression_Operand {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesResponse_Expression_Operand();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.node = {
-            $case: "value",
-            value: Value.unwrap(Value.decode(reader, reader.uint32())),
-          };
-          break;
-        case 2:
-          message.node = {
-            $case: "expression",
-            expression: PlanResourcesResponse_Expression.decode(
-              reader,
-              reader.uint32()
-            ),
-          };
-          break;
-        case 3:
-          message.node = { $case: "variable", variable: reader.string() };
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-};
-
-function createBasePlanResourcesResponse_Filter(): PlanResourcesResponse_Filter {
-  return { kind: 0, condition: undefined };
-}
-
-export const PlanResourcesResponse_Filter = {
-  encode(
-    message: PlanResourcesResponse_Filter,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    if (message.kind !== 0) {
-      writer.uint32(8).int32(message.kind);
-    }
-    if (message.condition !== undefined) {
-      PlanResourcesResponse_Expression_Operand.encode(
-        message.condition,
-        writer.uint32(18).fork()
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PlanResourcesResponse_Filter {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesResponse_Filter();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.kind = reader.int32() as any;
-          break;
-        case 2:
-          message.condition = PlanResourcesResponse_Expression_Operand.decode(
             reader,
             reader.uint32()
           );
