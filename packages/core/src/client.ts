@@ -27,6 +27,7 @@ export type Transport = <RPC extends keyof RPCs>(
 
 export interface Options {
   onValidationError?: "throw" | ValidationFailedCallback | undefined;
+  playgroundInstance?: string;
 }
 
 export class Client {

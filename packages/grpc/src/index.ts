@@ -9,8 +9,10 @@ import {
   Transport,
 } from "@cerbos/core";
 import {
+  CallCredentials,
   ChannelCredentials,
   Client as GenericClient,
+  Metadata,
   MethodDefinition,
 } from "@grpc/grpc-js";
 
@@ -22,18 +24,6 @@ const { version } = require("../package.json") as { version: string };
 export interface Options extends ClientOptions {
   tls: boolean | SecureContext;
 }
-
-const credentials = ({ tls }: Options): ChannelCredentials => {
-  if (!tls) {
-    return ChannelCredentials.createInsecure();
-  }
-
-  if (tls === true) {
-    return ChannelCredentials.createSsl();
-  }
-
-  return ChannelCredentials.createFromSecureContext(tls);
-};
 
 export class GRPC extends Client {
   private readonly client: GenericClient;
@@ -76,3 +66,39 @@ export class GRPC extends Client {
     this.client.close();
   }
 }
+
+const credentials = ({
+  playgroundInstance,
+  tls,
+}: Options): ChannelCredentials => {
+  if (!tls) {
+    if (playgroundInstance) {
+      throw new Error(
+        "TLS is required when connecting to a playground instance"
+      );
+    }
+
+    return ChannelCredentials.createInsecure();
+  }
+
+  let channelCredentials: ChannelCredentials;
+
+  if (tls === true) {
+    channelCredentials = ChannelCredentials.createSsl();
+  } else {
+    channelCredentials = ChannelCredentials.createFromSecureContext(tls);
+  }
+
+  if (playgroundInstance) {
+    return channelCredentials.compose(callCredentials(playgroundInstance));
+  }
+
+  return channelCredentials;
+};
+
+const callCredentials = (playgroundInstance: string): CallCredentials =>
+  CallCredentials.createFromMetadataGenerator((_, callback) => {
+    const metadata = new Metadata();
+    metadata.set("playground-instance", playgroundInstance);
+    callback(null, metadata);
+  });

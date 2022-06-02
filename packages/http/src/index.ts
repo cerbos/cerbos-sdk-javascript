@@ -59,6 +59,16 @@ export type { Options } from "@cerbos/core";
 
 export class HTTP extends Client {
   public constructor(url: string, options: Options = {}) {
+    const { playgroundInstance } = options;
+
+    const headers: HeadersInit = {
+      "User-Agent": `cerbos-sdk-javascript-http/${version}`,
+    };
+
+    if (playgroundInstance) {
+      headers["Playground-Instance"] = playgroundInstance;
+    }
+
     const transport: Transport = async (rpc, request) => {
       const { method, path, serializeRequest, deserializeResponse } =
         service[rpc];
@@ -66,9 +76,7 @@ export class HTTP extends Client {
       const response = await fetch(url + path, {
         method,
         body: serializeRequest(request),
-        headers: {
-          "User-Agent": `cerbos-sdk-javascript-http/${version}`,
-        },
+        headers,
       });
 
       if (!response.ok) {
