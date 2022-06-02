@@ -1,4 +1,4 @@
-import { CheckResourcesResult, CheckResourcesResultData } from "@cerbos/core";
+import { CheckResourcesResult } from "@cerbos/core";
 
 export const buildResultsForResources = ({
   id,
@@ -18,7 +18,7 @@ export const buildResultsForResources = ({
   );
 
 export const buildResult = (
-  result: Partial<CheckResourcesResultData>
+  result: Partial<ConstructorParameters<typeof CheckResourcesResult>[0]>
 ): CheckResourcesResult =>
   new CheckResourcesResult({
     resource: {

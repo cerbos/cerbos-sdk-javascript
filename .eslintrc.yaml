@@ -5,6 +5,9 @@ parserOptions:
   project:
     - packages/*/tsconfig.json
 
+plugins:
+  - eslint-plugin-tsdoc
+
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
@@ -26,3 +29,5 @@ rules:
   sort-imports:
     - error
     - ignoreDeclarationSort: true
+  tsdoc/syntax:
+    - error

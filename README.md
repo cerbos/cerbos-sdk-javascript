@@ -5,4 +5,15 @@ Author access rules using an intuitive YAML configuration language, use your Git
 
 The Cerbos JavaScript SDK makes it easy to interact with the Cerbos PDP from your Node.js and browser-based applications.
 
-TODO
+## Packages
+
+For server-side Node.js applications, the [@cerbos/grpc](/packages/grpc/README.md) library provides a client ([`GRPC`](/docs/grpc.grpc.md)) for interacting with the Cerbos PDP over gRPC.
+
+For browser-based applications, the [@cerbos/http](/packages/http/README.md) library provides a client ([`HTTP`](/docs/http.http.md)) for interacting with the Cerbos PDP over HTTP.
+
+Both clients extend the base [`Client`](/docs/core.client.md) class from [@cerbos/core](/packages/core/README.md), so they can be used interchangeably in isomorphic applications.
+
+## Further reading
+
+- [API reference](/docs/index.md)
+- [Cerbos documentation](https://docs.cerbos.dev)

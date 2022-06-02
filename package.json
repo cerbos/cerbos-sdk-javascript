@@ -9,6 +9,10 @@
     "build": "tsc --build",
     "build:watch": "tsc --build --watch",
     "clean": "rm -rf packages/*/lib",
+    "docs": "npm run docs:extract-api && npm run docs:generate && npm run docs:fixup",
+    "docs:extract-api": "npm --workspace=packages/core --workspace=packages/grpc --workspace=packages/http exec api-extractor run",
+    "docs:fixup": "find docs -type f -execdir sed -i '' 's/\\r$//' {} \\;",
+    "docs:generate": "api-documenter markdown --input-folder api --output-folder docs",
     "generate": "npm run generate:clean && npm run generate:buf && npm run generate:fixup",
     "generate:buf": "buf generate --include-imports buf.build/cerbos/cerbos-api",
     "generate:clean": "rm -rf packages/*/src/protobuf",
@@ -26,6 +30,8 @@
     "test:watch": "npm run --workspace=packages/test test:watch"
   },
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.17.16",
+    "@microsoft/api-extractor": "^7.24.2",
     "@tsconfig/node14": "^1.0.1",
     "@types/node": "^14.18.20",
     "@types/node-fetch": "^2.6.1",
@@ -38,6 +44,7 @@
     "eslint-import-resolver-typescript": "^2.7.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.4.6",
+    "eslint-plugin-tsdoc": "^0.2.16",
     "jest": "^28.1.0",
     "jose": "^4.8.1",
     "node-fetch": "^2.6.7",

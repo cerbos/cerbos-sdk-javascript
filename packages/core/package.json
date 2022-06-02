@@ -1,13 +1,13 @@
 {
   "name": "@cerbos/core",
   "version": "0.1.0-dev",
-  "description": "TODO",
+  "description": "Common types used by the @cerbos/grpc and @cerbos/http client libraries",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cerbos/cerbos-sdk-javascript.git",
     "directory": "packages/core"
   },
-  "homepage": "https://github.com/cerbos/cerbos-sdk-javascript#readme",
+  "homepage": "https://github.com/cerbos/cerbos-sdk-javascript/tree/main/packages/core#readme",
   "bugs": {
     "url": "https://github.com/cerbos/cerbos-sdk-javascript/issues"
   },

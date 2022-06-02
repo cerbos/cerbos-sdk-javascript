@@ -1,3 +1,4 @@
+/api/
 /node_modules/
 /packages/*/lib/
 /packages/test/servers/tmp/

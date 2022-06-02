@@ -1,13 +1,13 @@
 {
   "name": "@cerbos/grpc",
   "version": "0.1.0-dev",
-  "description": "TODO",
+  "description": "Client library for interacting with the Cerbos policy decision point over gRPC from server-side Node.js applications",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cerbos/cerbos-sdk-javascript.git",
     "directory": "packages/grpc"
   },
-  "homepage": "https://github.com/cerbos/cerbos-sdk-javascript#readme",
+  "homepage": "https://github.com/cerbos/cerbos-sdk-javascript/tree/main/packages/grpc#readme",
   "bugs": {
     "url": "https://github.com/cerbos/cerbos-sdk-javascript/issues"
   },

@@ -28,6 +28,18 @@ jobs:
       - name: Lint code
         run: npm run lint
 
+      - name: Generate docs
+        run: npm run docs
+
+      - name: Check for uncommitted changes
+        run: |-
+          git_status=$(git status --porcelain)
+          if [[ -n "${git_status}" ]]; then
+            echo "::error::Uncommitted changes detected"
+            printf "%s\n" "${git_status}"
+            exit 1
+          fi
+
   test-matrix:
     name: Generate test matrix
     runs-on: ubuntu-latest

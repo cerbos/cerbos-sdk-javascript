@@ -9,11 +9,15 @@ import type {
   ServerInfoResponse,
 } from "./protobuf/cerbos/response/v1/response";
 
-export interface RPCs {
+/** @internal */
+export interface _RPCs {
   checkResources: [CheckResourcesRequest, CheckResourcesResponse];
   planResources: [PlanResourcesRequest, PlanResourcesResponse];
   serverInfo: [ServerInfoRequest, ServerInfoResponse];
 }
 
-export type Request<RPC extends keyof RPCs> = RPCs[RPC][0];
-export type Response<RPC extends keyof RPCs> = RPCs[RPC][1];
+/** @internal */
+export type _Request<RPC extends keyof _RPCs> = _RPCs[RPC][0];
+
+/** @internal */
+export type _Response<RPC extends keyof _RPCs> = _RPCs[RPC][1];
