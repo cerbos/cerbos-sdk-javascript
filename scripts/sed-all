@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+target_dir="$1"
+shift
+
+find "${target_dir}" -type f -execdir "${script_dir}/sed-i" "$@" {} \;
