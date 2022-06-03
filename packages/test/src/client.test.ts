@@ -452,11 +452,12 @@ describe("client", () => {
           requestId: "42",
           kind: PlanKind.CONDITIONAL,
           condition: new PlanExpression("eq", [
-            new PlanExpressionVariable("R.attr.owner"),
+            new PlanExpressionVariable("request.resource.attr.owner"),
             new PlanExpressionValue("me@example.com"),
           ]),
           metadata: {
-            conditionString: '(R.attr.owner == "me@example.com")',
+            conditionString:
+              '(request.resource.attr.owner == "me@example.com")',
             matchedScope: "test",
           },
         });

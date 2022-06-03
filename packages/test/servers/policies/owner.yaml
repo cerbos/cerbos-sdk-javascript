@@ -7,4 +7,4 @@ derivedRoles:
         - USER
       condition:
         match:
-          expr: R.attr.owner == P.id
+          expr: request.resource.attr.owner == request.principal.id
