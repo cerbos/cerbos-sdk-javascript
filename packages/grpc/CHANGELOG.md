@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Explicit dependency on [long](https://www.npmjs.com/package/long) ([#100](https://github.com/cerbos/cerbos-sdk-javascript/pull/100))
 
 ## [0.5.0] - 2022-06-07
 
