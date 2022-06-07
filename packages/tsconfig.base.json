@@ -2,6 +2,7 @@
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "sourceMap": true
   }
 }

@@ -20,7 +20,10 @@
   "types": "./lib/index.d.ts",
   "files": [
     "lib/**/*.d.ts",
-    "lib/**/*.js"
+    "lib/**/*.d.ts.map",
+    "lib/**/*.js",
+    "lib/**/*.js.map",
+    "src/**/*.ts"
   ],
   "dependencies": {
     "@cerbos/core": "^0.1.0-dev",
