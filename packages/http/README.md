@@ -51,3 +51,8 @@ For more details, [see the `HTTP` class documentation](/docs/http.http.md).
 
 - [API reference](/docs/http.md)
 - [Cerbos documentation](https://docs.cerbos.dev)
+
+## Get help
+
+- [Join the Cerbos community on Slack](http://go.cerbos.io/slack)
+- [Email us at help@cerbos.dev](mailto:help@cerbos.dev)

@@ -8,3 +8,8 @@ Common types used by the [gRPC](/packages/grpc/README.md) and [HTTP](/packages/h
 
 - [API reference](/docs/core.md)
 - [Cerbos documentation](https://docs.cerbos.dev)
+
+## Get help
+
+- [Join the Cerbos community on Slack](http://go.cerbos.io/slack)
+- [Email us at help@cerbos.dev](mailto:help@cerbos.dev)

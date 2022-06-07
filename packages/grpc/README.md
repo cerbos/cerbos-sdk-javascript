@@ -41,3 +41,8 @@ For more details, [see the `GRPC` class documentation](/docs/grpc.grpc.md).
 
 - [API reference](/docs/grpc.md)
 - [Cerbos documentation](https://docs.cerbos.dev)
+
+## Get help
+
+- [Join the Cerbos community on Slack](http://go.cerbos.io/slack)
+- [Email us at help@cerbos.dev](mailto:help@cerbos.dev)

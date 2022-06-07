@@ -17,3 +17,8 @@ Both clients extend the base [`Client`](/docs/core.client.md) class from [@cerbo
 
 - [API reference](/docs/index.md)
 - [Cerbos documentation](https://docs.cerbos.dev)
+
+## Get help
+
+- [Join the Cerbos community on Slack](http://go.cerbos.io/slack)
+- [Email us at help@cerbos.dev](mailto:help@cerbos.dev)
