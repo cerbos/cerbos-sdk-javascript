@@ -50,7 +50,7 @@
     "node-fetch": "^2.6.7",
     "prettier": "^2.6.2",
     "prettier-plugin-pkg": "^0.13.2",
-    "ts-jest": "^28.0.3",
+    "ts-jest": "^28.0.4",
     "ts-node": "^10.8.1",
     "ts-proto": "^1.114.7",
     "typescript": "^4.7.3"
