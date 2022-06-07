@@ -52,7 +52,7 @@
     "prettier-plugin-pkg": "^0.13.2",
     "ts-jest": "^28.0.4",
     "ts-node": "^10.8.1",
-    "ts-proto": "^1.114.7",
+    "ts-proto": "^1.115.4",
     "typescript": "^4.7.3"
   }
 }
