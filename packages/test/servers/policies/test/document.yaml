@@ -1,0 +1,22 @@
+apiVersion: api.cerbos.dev/v1
+resourcePolicy:
+  resource: document
+  version: "1"
+  scope: test
+  schemas:
+    resourceSchema:
+      ref: cerbos:///document.json
+  importDerivedRoles:
+    - owner
+  rules:
+    - actions:
+        - view
+      effect: EFFECT_ALLOW
+      roles:
+        - USER
+
+    - actions:
+        - edit
+      effect: EFFECT_ALLOW
+      derivedRoles:
+        - OWNER

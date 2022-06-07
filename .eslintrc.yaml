@@ -1,0 +1,33 @@
+root: true
+
+parser: "@typescript-eslint/parser"
+parserOptions:
+  project:
+    - packages/*/tsconfig.json
+
+plugins:
+  - eslint-plugin-tsdoc
+
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:@typescript-eslint/recommended-requiring-type-checking
+  - plugin:@typescript-eslint/strict
+  - plugin:import/recommended
+  - plugin:import/typescript
+  - plugin:jest/recommended
+
+rules:
+  "@typescript-eslint/explicit-function-return-type": error
+  "@typescript-eslint/explicit-member-accessibility": error
+  import/order:
+    - error
+    - alphabetize:
+        order: asc
+        caseInsensitive: true
+      newlines-between: always
+  sort-imports:
+    - error
+    - ignoreDeclarationSort: true
+  tsdoc/syntax:
+    - error

@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.strict.json",
+  "include": ["src"],
+  "exclude": ["src/protobuf"],
+  "references": [{ "path": "../core" }, { "path": "./tsconfig.protobuf.json" }],
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "tsBuildInfoFile": "lib/grpc.tsbuildinfo"
+  }
+}

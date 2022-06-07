@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "test:servers:start": "servers/start",
+    "test:servers:stop": "servers/stop",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@cerbos/grpc": "^0.1.0-dev",
+    "@cerbos/http": "^0.1.0-dev"
+  }
+}

@@ -1,0 +1,26 @@
+http:
+  routers:
+    grpc:
+      rule: PathPrefix(`/`)
+      service: cerbos
+      tls: true
+
+  services:
+    cerbos:
+      loadBalancer:
+        servers:
+          - url: h2c://plaintext:3593
+
+tls:
+  options:
+    default:
+      clientAuth:
+        clientAuthType: RequireAndVerifyClientCert
+        caFiles:
+          - /certificates/client.root.crt
+
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certificates/server.crt
+        keyFile: /certificates/server.key

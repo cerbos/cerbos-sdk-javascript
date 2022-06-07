@@ -1,0 +1,16 @@
+apiVersion: api.cerbos.dev/v1
+resourcePolicy:
+  resource: document
+  version: "1"
+  schemas:
+    resourceSchema:
+      ref: cerbos:///document.json
+  rules:
+    - actions:
+        - delete
+      effect: EFFECT_ALLOW
+      roles:
+        - USER
+      condition:
+        match:
+          expr: request.aux_data.jwt.delete

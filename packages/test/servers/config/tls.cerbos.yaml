@@ -1,0 +1,19 @@
+auxData:
+  jwt:
+    disableVerification: true
+
+schema:
+  enforcement: reject
+
+server:
+  tls:
+    cert: /certificates/server.crt
+    key: /certificates/server.key
+
+storage:
+  driver: disk
+  disk:
+    directory: /policies
+
+telemetry:
+  disabled: true

@@ -1,0 +1,14 @@
+auxData:
+  jwt:
+    disableVerification: true
+
+schema:
+  enforcement: reject
+
+storage:
+  driver: disk
+  disk:
+    directory: /policies
+
+telemetry:
+  disabled: true
