@@ -35,11 +35,11 @@ await cerbos.isAllowed({
 }); // => true
 ```
 
-For more details, [see the `GRPC` class documentation](/docs/grpc.grpc.md).
+For more details, [see the `GRPC` class documentation](../../docs/grpc.grpc.md).
 
 ## Further reading
 
-- [API reference](/docs/grpc.md)
+- [API reference](../../docs/grpc.md)
 - [Cerbos documentation](https://docs.cerbos.dev)
 
 ## Get help
