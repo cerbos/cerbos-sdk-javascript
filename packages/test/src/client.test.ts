@@ -26,7 +26,12 @@ import { HTTP } from "@cerbos/http";
 import { afterAll, beforeAll, describe, expect, it, jest } from "@jest/globals";
 import { UnsecuredJWT } from "jose";
 
-import { Ports, cerbosVersion, ports as serverPorts } from "./servers";
+import {
+  Ports,
+  cerbosVersion,
+  cerbosVersionIsAtLeast,
+  ports as serverPorts,
+} from "./servers";
 
 const readPEM = (filename: string): string =>
   readFileSync(resolve(__dirname, "../servers/tmp/certificates", filename), {
@@ -456,8 +461,9 @@ describe("client", () => {
             new PlanExpressionValue("me@example.com"),
           ]),
           metadata: {
-            conditionString:
-              '(request.resource.attr.owner == "me@example.com")',
+            conditionString: cerbosVersionIsAtLeast("0.18.0")
+              ? '(eq request.resource.attr.owner "me@example.com")'
+              : '(request.resource.attr.owner == "me@example.com")',
             matchedScope: "test",
           },
         });
