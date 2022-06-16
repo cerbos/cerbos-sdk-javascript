@@ -2,9 +2,14 @@ import { execFile as execFileCallback } from "child_process";
 import { resolve } from "path";
 import { promisify } from "util";
 
+import { gte as semverGte } from "semver";
+
 const execFile = promisify(execFileCallback);
 
 export const cerbosVersion = process.env["CERBOS_VERSION"] ?? "0.16.0";
+
+export const cerbosVersionIsAtLeast = (version: string): boolean =>
+  semverGte(cerbosVersion, version);
 
 export interface Ports {
   grpc: {
