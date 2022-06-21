@@ -1,6 +1,4 @@
 /* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import {
   Principal,
@@ -10,6 +8,7 @@ import {
 import { Policy } from "../../../cerbos/policy/v1/policy";
 import { Schema } from "../../../cerbos/schema/v1/schema";
 import { Duration } from "../../../google/protobuf/duration";
+import * as _m0 from "protobufjs/minimal";
 import { Value } from "../../../google/protobuf/struct";
 
 export const protobufPackage = "cerbos.request.v1";
@@ -1550,9 +1549,4 @@ function fromTimestamp(t: Timestamp): Date {
   let millis = t.seconds * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
 }

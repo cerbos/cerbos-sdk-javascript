@@ -1,6 +1,4 @@
 /* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Effect } from "../../../cerbos/effect/v1/effect";
 import { PlanResourcesFilter } from "../../../cerbos/engine/v1/engine";
 import { ValidationError, Schema } from "../../../cerbos/schema/v1/schema";
@@ -10,6 +8,7 @@ import {
   AccessLogEntry,
   DecisionLogEntry,
 } from "../../../cerbos/audit/v1/audit";
+import * as _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "cerbos.response.v1";
 
@@ -20,6 +19,7 @@ export interface PlanResourcesResponse {
   policyVersion: string;
   filter: PlanResourcesFilter | undefined;
   meta: PlanResourcesResponse_Meta | undefined;
+  validationErrors: ValidationError[];
 }
 
 export interface PlanResourcesResponse_Meta {
@@ -240,6 +240,7 @@ function createBasePlanResourcesResponse(): PlanResourcesResponse {
     policyVersion: "",
     filter: undefined,
     meta: undefined,
+    validationErrors: [],
   };
 }
 
@@ -271,6 +272,9 @@ export const PlanResourcesResponse = {
         message.meta,
         writer.uint32(50).fork()
       ).ldelim();
+    }
+    for (const v of message.validationErrors) {
+      ValidationError.encode(v!, writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -304,6 +308,11 @@ export const PlanResourcesResponse = {
           message.meta = PlanResourcesResponse_Meta.decode(
             reader,
             reader.uint32()
+          );
+          break;
+        case 7:
+          message.validationErrors.push(
+            ValidationError.decode(reader, reader.uint32())
           );
           break;
         default:
@@ -2237,8 +2246,3 @@ export const ReloadStoreResponse = {
     return message;
   },
 };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}

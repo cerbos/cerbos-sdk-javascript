@@ -38,7 +38,7 @@ plugins:
       - env=both
       - esModuleInterop=true
       - oneof=unions
-      - onlyTypes=true
+      - onlyTypes=false
       - outputEncodeMethods=false
       - outputJsonMethods=true
       - outputPartialMethods=false

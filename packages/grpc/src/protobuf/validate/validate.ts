@@ -1,8 +1,8 @@
 /* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "../google/protobuf/timestamp";
+import Long from "long";
 import { Duration } from "../google/protobuf/duration";
+import * as _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "validate";
 
