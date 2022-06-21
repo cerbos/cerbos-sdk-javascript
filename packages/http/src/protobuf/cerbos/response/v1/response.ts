@@ -22,6 +22,7 @@ export interface PlanResourcesResponse {
   policyVersion: string;
   filter: PlanResourcesFilter | undefined;
   meta: PlanResourcesResponse_Meta | undefined;
+  validationErrors: ValidationError[];
 }
 
 export interface PlanResourcesResponse_Meta {
@@ -242,6 +243,7 @@ function createBasePlanResourcesResponse(): PlanResourcesResponse {
     policyVersion: "",
     filter: undefined,
     meta: undefined,
+    validationErrors: [],
   };
 }
 
@@ -262,6 +264,9 @@ export const PlanResourcesResponse = {
       meta: isSet(object.meta)
         ? PlanResourcesResponse_Meta.fromJSON(object.meta)
         : undefined,
+      validationErrors: Array.isArray(object?.validationErrors)
+        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
+        : [],
     };
   },
 
@@ -281,6 +286,13 @@ export const PlanResourcesResponse = {
       (obj.meta = message.meta
         ? PlanResourcesResponse_Meta.toJSON(message.meta)
         : undefined);
+    if (message.validationErrors) {
+      obj.validationErrors = message.validationErrors.map((e) =>
+        e ? ValidationError.toJSON(e) : undefined
+      );
+    } else {
+      obj.validationErrors = [];
+    }
     return obj;
   },
 };

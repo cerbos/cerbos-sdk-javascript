@@ -1,11 +1,11 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import {
   SourceInfo,
   Expr,
   Constant,
 } from "../../../../google/api/expr/v1alpha1/syntax";
+import * as _m0 from "protobufjs/minimal";
 import { Empty } from "../../../../google/protobuf/empty";
 import { NullValue } from "../../../../google/protobuf/struct";
 

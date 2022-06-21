@@ -1,6 +1,4 @@
 /* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import {
   CheckInput,
@@ -8,6 +6,7 @@ import {
   PlanResourcesInput,
   PlanResourcesOutput,
 } from "../../../cerbos/engine/v1/engine";
+import * as _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "cerbos.audit.v1";
 
@@ -498,9 +497,4 @@ function fromTimestamp(t: Timestamp): Date {
   let millis = t.seconds * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
 }

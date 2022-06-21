@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import {
   makeGenericClientConstructor,
   ChannelCredentials,
@@ -14,7 +13,6 @@ import {
   ClientReadableStream,
   ServiceError,
 } from "@grpc/grpc-js";
-import * as _m0 from "protobufjs/minimal";
 import {
   CheckResourceSetRequest,
   CheckResourceBatchRequest,
@@ -778,8 +776,3 @@ export const CerbosPlaygroundServiceClient = makeGenericClientConstructor(
   ): CerbosPlaygroundServiceClient;
   service: typeof CerbosPlaygroundServiceService;
 };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}

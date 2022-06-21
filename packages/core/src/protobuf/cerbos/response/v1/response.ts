@@ -18,6 +18,7 @@ export interface PlanResourcesResponse {
   policyVersion: string;
   filter: PlanResourcesFilter | undefined;
   meta: PlanResourcesResponse_Meta | undefined;
+  validationErrors: ValidationError[];
 }
 
 export interface PlanResourcesResponse_Meta {

@@ -1,9 +1,8 @@
 /* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Effect } from "../../../cerbos/effect/v1/effect";
 import { ValidationError } from "../../../cerbos/schema/v1/schema";
 import { CheckedExpr } from "../../../google/api/expr/v1alpha1/checked";
+import * as _m0 from "protobufjs/minimal";
 import { Value } from "../../../google/protobuf/struct";
 
 export const protobufPackage = "cerbos.engine.v1";
@@ -86,6 +85,7 @@ export interface PlanResourcesOutput {
   scope: string;
   filter: PlanResourcesFilter | undefined;
   filterDebug: string;
+  validationErrors: ValidationError[];
 }
 
 export interface CheckInput {
@@ -707,6 +707,7 @@ function createBasePlanResourcesOutput(): PlanResourcesOutput {
     scope: "",
     filter: undefined,
     filterDebug: "",
+    validationErrors: [],
   };
 }
 
@@ -739,6 +740,9 @@ export const PlanResourcesOutput = {
     if (message.filterDebug !== "") {
       writer.uint32(58).string(message.filterDebug);
     }
+    for (const v of message.validationErrors) {
+      ValidationError.encode(v!, writer.uint32(66).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -769,6 +773,11 @@ export const PlanResourcesOutput = {
           break;
         case 7:
           message.filterDebug = reader.string();
+          break;
+        case 8:
+          message.validationErrors.push(
+            ValidationError.decode(reader, reader.uint32())
+          );
           break;
         default:
           reader.skipType(tag & 7);
@@ -1558,8 +1567,3 @@ export const Trace_Event = {
     return message;
   },
 };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}

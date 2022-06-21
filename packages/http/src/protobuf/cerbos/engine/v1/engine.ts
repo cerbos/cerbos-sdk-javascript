@@ -179,6 +179,7 @@ export interface PlanResourcesOutput {
   scope: string;
   filter: PlanResourcesFilter | undefined;
   filterDebug: string;
+  validationErrors: ValidationError[];
 }
 
 export interface CheckInput {
@@ -732,6 +733,7 @@ function createBasePlanResourcesOutput(): PlanResourcesOutput {
     scope: "",
     filter: undefined,
     filterDebug: "",
+    validationErrors: [],
   };
 }
 
@@ -749,6 +751,9 @@ export const PlanResourcesOutput = {
         ? PlanResourcesFilter.fromJSON(object.filter)
         : undefined,
       filterDebug: isSet(object.filterDebug) ? String(object.filterDebug) : "",
+      validationErrors: Array.isArray(object?.validationErrors)
+        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
+        : [],
     };
   },
 
@@ -766,6 +771,13 @@ export const PlanResourcesOutput = {
         : undefined);
     message.filterDebug !== undefined &&
       (obj.filterDebug = message.filterDebug);
+    if (message.validationErrors) {
+      obj.validationErrors = message.validationErrors.map((e) =>
+        e ? ValidationError.toJSON(e) : undefined
+      );
+    } else {
+      obj.validationErrors = [];
+    }
     return obj;
   },
 };

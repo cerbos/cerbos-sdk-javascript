@@ -1,6 +1,4 @@
 /* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Effect } from "../../../cerbos/effect/v1/effect";
 import {
   Principal,
@@ -9,6 +7,7 @@ import {
   CheckInput,
   Trace,
 } from "../../../cerbos/engine/v1/engine";
+import * as _m0 from "protobufjs/minimal";
 import { UInt64Value } from "../../../google/protobuf/wrappers";
 
 export const protobufPackage = "cerbos.policy.v1";
@@ -2529,8 +2528,3 @@ export const TestResults_Failure = {
     return message;
   },
 };
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}

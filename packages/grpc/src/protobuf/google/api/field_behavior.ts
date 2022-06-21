@@ -1,7 +1,4 @@
 /* eslint-disable */
-import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-
 export const protobufPackage = "google.api";
 
 /**
@@ -60,9 +57,4 @@ export enum FieldBehavior {
    * non-empty value to expect.
    */
   NON_EMPTY_DEFAULT = 7,
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
 }

@@ -16,6 +16,7 @@ import {
   PlanExpressionValue,
   PlanExpressionVariable,
   PlanKind,
+  PlanResourcesRequest,
   Status,
   ValidationErrorSource,
   ValidationFailed,
@@ -132,7 +133,10 @@ describe("client", () => {
             scope: "test",
             roles: ["USER"],
             attributes: {
-              country: "NZ",
+              country: {
+                alpha2: "",
+                alpha3: "NZL",
+              },
             },
           },
           resource: {
@@ -167,7 +171,13 @@ describe("client", () => {
               edit: Effect.ALLOW,
               delete: Effect.ALLOW,
             },
-            validationErrors: [],
+            validationErrors: [
+              {
+                path: "/country/alpha2",
+                message: "does not match pattern '[A-Z]{2}'",
+                source: ValidationErrorSource.PRINCIPAL,
+              },
+            ],
             metadata: {
               actions: {
                 view: {
@@ -198,7 +208,10 @@ describe("client", () => {
           scope: "test",
           roles: ["USER"],
           attributes: {
-            country: "NZ",
+            country: {
+              alpha2: "",
+              alpha3: "NZL",
+            },
           },
         },
         resources: [
@@ -267,7 +280,13 @@ describe("client", () => {
                   edit: Effect.ALLOW,
                   delete: Effect.ALLOW,
                 },
-                validationErrors: [],
+                validationErrors: [
+                  {
+                    path: "/country/alpha2",
+                    message: "does not match pattern '[A-Z]{2}'",
+                    source: ValidationErrorSource.PRINCIPAL,
+                  },
+                ],
                 metadata: {
                   actions: {
                     view: {
@@ -298,7 +317,13 @@ describe("client", () => {
                   edit: Effect.DENY,
                   delete: Effect.ALLOW,
                 },
-                validationErrors: [],
+                validationErrors: [
+                  {
+                    path: "/country/alpha2",
+                    message: "does not match pattern '[A-Z]{2}'",
+                    source: ValidationErrorSource.PRINCIPAL,
+                  },
+                ],
                 metadata: {
                   actions: {
                     view: {
@@ -325,11 +350,16 @@ describe("client", () => {
                   scope: "test",
                 },
                 actions: {
-                  view: Effect.DENY,
+                  view: Effect.ALLOW,
                   edit: Effect.DENY,
-                  delete: Effect.DENY,
+                  delete: Effect.ALLOW,
                 },
                 validationErrors: [
+                  {
+                    path: "/country/alpha2",
+                    message: "does not match pattern '[A-Z]{2}'",
+                    source: ValidationErrorSource.PRINCIPAL,
+                  },
                   {
                     path: "/owner",
                     message: "expected string, but got number",
@@ -340,7 +370,7 @@ describe("client", () => {
                   actions: {
                     view: {
                       matchedPolicy: "resource.document.v1/test",
-                      matchedScope: "",
+                      matchedScope: "test",
                     },
                     edit: {
                       matchedPolicy: "resource.document.v1/test",
@@ -366,6 +396,11 @@ describe("client", () => {
           ).rejects.toThrow(
             new ValidationFailed([
               {
+                path: "/country/alpha2",
+                message: "does not match pattern '[A-Z]{2}'",
+                source: ValidationErrorSource.PRINCIPAL,
+              },
+              {
                 path: "/owner",
                 message: "expected string, but got number",
                 source: ValidationErrorSource.RESOURCE,
@@ -380,6 +415,11 @@ describe("client", () => {
           await clients.callbackOnValidationError.checkResources(request);
 
           expect(validationFailed).toBeCalledWith([
+            {
+              path: "/country/alpha2",
+              message: "does not match pattern '[A-Z]{2}'",
+              source: ValidationErrorSource.PRINCIPAL,
+            },
             {
               path: "/owner",
               message: "expected string, but got number",
@@ -399,7 +439,10 @@ describe("client", () => {
             scope: "test",
             roles: ["USER"],
             attributes: {
-              country: "NZ",
+              country: {
+                alpha2: "",
+                alpha3: "NZL",
+              },
             },
           },
           resource: {
@@ -426,32 +469,37 @@ describe("client", () => {
     });
 
     describe("planResources", () => {
+      const request: PlanResourcesRequest = {
+        principal: {
+          id: "me@example.com",
+          policyVersion: "1",
+          scope: "test",
+          roles: ["USER"],
+          attributes: {
+            country: {
+              alpha2: "",
+              alpha3: "NZL",
+            },
+          },
+        },
+        resource: {
+          kind: "document",
+          policyVersion: "1",
+          scope: "test",
+          attributes: {},
+        },
+        action: "edit",
+        auxData: {
+          jwt: {
+            token: new UnsecuredJWT({ delete: true }).encode(),
+          },
+        },
+        includeMetadata: true,
+        requestId: "42",
+      };
+
       it("returns a query plan for resources", async () => {
-        const response = await clients.default.planResources({
-          principal: {
-            id: "me@example.com",
-            policyVersion: "1",
-            scope: "test",
-            roles: ["USER"],
-            attributes: {
-              country: "NZ",
-            },
-          },
-          resource: {
-            kind: "document",
-            policyVersion: "1",
-            scope: "test",
-            attributes: {},
-          },
-          action: "edit",
-          auxData: {
-            jwt: {
-              token: new UnsecuredJWT({ delete: true }).encode(),
-            },
-          },
-          includeMetadata: true,
-          requestId: "42",
-        });
+        const response = await clients.default.planResources(request);
 
         expect(response).toEqual({
           requestId: "42",
@@ -460,6 +508,15 @@ describe("client", () => {
             new PlanExpressionVariable("request.resource.attr.owner"),
             new PlanExpressionValue("me@example.com"),
           ]),
+          validationErrors: cerbosVersionIsAtLeast("0.19.0-prerelease")
+            ? [
+                {
+                  path: "/country/alpha2",
+                  message: "does not match pattern '[A-Z]{2}'",
+                  source: ValidationErrorSource.PRINCIPAL,
+                },
+              ]
+            : [],
           metadata: {
             conditionString: cerbosVersionIsAtLeast("0.18.0")
               ? '(eq request.resource.attr.owner "me@example.com")'
@@ -468,6 +525,38 @@ describe("client", () => {
           },
         });
       });
+
+      if (cerbosVersionIsAtLeast("0.19.0-prerelease")) {
+        describe("when configured to throw on validation error", () => {
+          it("throws on validation error", async () => {
+            await expect(
+              clients.throwOnValidationError.planResources(request)
+            ).rejects.toThrow(
+              new ValidationFailed([
+                {
+                  path: "/country/alpha2",
+                  message: "does not match pattern '[A-Z]{2}'",
+                  source: ValidationErrorSource.PRINCIPAL,
+                },
+              ])
+            );
+          });
+        });
+
+        describe("when configured with a callback on validation error", () => {
+          it("throws on validation error", async () => {
+            await clients.callbackOnValidationError.planResources(request);
+
+            expect(validationFailed).toBeCalledWith([
+              {
+                path: "/country/alpha2",
+                message: "does not match pattern '[A-Z]{2}'",
+                source: ValidationErrorSource.PRINCIPAL,
+              },
+            ]);
+          });
+        });
+      }
     });
 
     describe("serverInfo", () => {

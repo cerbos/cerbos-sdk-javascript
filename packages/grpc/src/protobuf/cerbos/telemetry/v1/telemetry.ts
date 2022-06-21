@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
 import { Duration } from "../../../google/protobuf/duration";
+import * as _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "cerbos.telemetry.v1";
 

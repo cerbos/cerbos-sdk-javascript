@@ -83,6 +83,7 @@ export interface PlanResourcesOutput {
   scope: string;
   filter: PlanResourcesFilter | undefined;
   filterDebug: string;
+  validationErrors: ValidationError[];
 }
 
 export interface CheckInput {

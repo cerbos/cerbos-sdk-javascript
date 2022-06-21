@@ -101,6 +101,7 @@ const validationErrorSourceFromProtobuf = (
 export const planResourcesResponseFromProtobuf = ({
   requestId,
   filter,
+  validationErrors,
   meta,
 }: PlanResourcesResponseProtobuf): PlanResourcesResponse => {
   if (!filter) {
@@ -119,6 +120,7 @@ export const planResourcesResponseFromProtobuf = ({
       requestId,
       kind,
       condition: planOperandFromProtobuf(filter.condition),
+      validationErrors: validationErrors.map(validationErrorFromProtobuf),
       metadata,
     };
   }
@@ -126,6 +128,7 @@ export const planResourcesResponseFromProtobuf = ({
   return {
     requestId,
     kind,
+    validationErrors: validationErrors.map(validationErrorFromProtobuf),
     metadata,
   };
 };
