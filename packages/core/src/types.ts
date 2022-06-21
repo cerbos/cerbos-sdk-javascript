@@ -133,6 +133,22 @@ export class CheckResourcesResponse {
         (scope === undefined || resource.scope === scope)
     );
   }
+
+  /**
+   * Unique schema validation errors for the principal or resource attributes.
+   */
+  public get validationErrors(): ValidationError[] {
+    const unique: Record<string, ValidationError> = {};
+
+    this.results.forEach(({ validationErrors }) => {
+      validationErrors.forEach((validationError) => {
+        const { path, message, source } = validationError;
+        unique[`${path}:${message}:${source}`] = validationError;
+      });
+    });
+
+    return Object.values(unique);
+  }
 }
 
 /**
@@ -480,6 +496,11 @@ export interface PlanResourcesResponseBase {
    * The identifier for tracing the request.
    */
   requestId: string;
+
+  /**
+   * Any schema validation errors for the principal or resource attributes.
+   */
+  validationErrors: ValidationError[];
 
   /**
    * Additional information about the query plan.

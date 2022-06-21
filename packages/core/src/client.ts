@@ -17,6 +17,7 @@ import type {
   PlanResourcesRequest,
   PlanResourcesResponse,
   ServerInfo,
+  ValidationError,
   ValidationFailedCallback,
 } from "./types";
 
@@ -128,8 +129,6 @@ export abstract class Client {
   public async checkResources(
     request: CheckResourcesRequest
   ): Promise<CheckResourcesResponse> {
-    const { onValidationError } = this.options;
-
     const response = checkResourcesResponseFromProtobuf(
       await this.transport(
         "checkResources",
@@ -137,19 +136,7 @@ export abstract class Client {
       )
     );
 
-    if (onValidationError) {
-      const validationErrors = response.results.flatMap(
-        ({ validationErrors }) => validationErrors
-      );
-
-      if (validationErrors.length > 0) {
-        if (onValidationError === "throw") {
-          throw new ValidationFailed(validationErrors);
-        }
-
-        onValidationError(validationErrors);
-      }
-    }
+    this.handleValidationErrors(response);
 
     return response;
   }
@@ -192,12 +179,16 @@ export abstract class Client {
   public async planResources(
     request: PlanResourcesRequest
   ): Promise<PlanResourcesResponse> {
-    return planResourcesResponseFromProtobuf(
+    const response = planResourcesResponseFromProtobuf(
       await this.transport(
         "planResources",
         planResourcesRequestToProtobuf(request)
       )
     );
+
+    this.handleValidationErrors(response);
+
+    return response;
   }
 
   /**
@@ -205,5 +196,23 @@ export abstract class Client {
    */
   public serverInfo(): Promise<ServerInfo> {
     return this.transport("serverInfo", {});
+  }
+
+  private handleValidationErrors({
+    validationErrors,
+  }: {
+    validationErrors: ValidationError[];
+  }): void {
+    const { onValidationError } = this.options;
+
+    if (onValidationError) {
+      if (validationErrors.length > 0) {
+        if (onValidationError === "throw") {
+          throw new ValidationFailed(validationErrors);
+        }
+
+        onValidationError(validationErrors);
+      }
+    }
   }
 }

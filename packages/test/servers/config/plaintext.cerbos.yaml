@@ -3,7 +3,7 @@ auxData:
     disableVerification: true
 
 schema:
-  enforcement: reject
+  enforcement: warn
 
 storage:
   driver: disk
