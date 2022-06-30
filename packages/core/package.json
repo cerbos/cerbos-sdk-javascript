@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/core",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Common types used by the @cerbos/grpc and @cerbos/http client libraries",
   "repository": {
     "type": "git",
