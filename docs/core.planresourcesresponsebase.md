@@ -14,9 +14,9 @@ export interface PlanResourcesResponseBase
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [metadata](./core.planresourcesresponsebase.metadata.md) | [PlanResourcesMetadata](./core.planresourcesmetadata.md) \| undefined | Additional information about the query plan. |
-|  [requestId](./core.planresourcesresponsebase.requestid.md) | string | The identifier for tracing the request. |
-|  [validationErrors](./core.planresourcesresponsebase.validationerrors.md) | [ValidationError](./core.validationerror.md)<!-- -->\[\] | Any schema validation errors for the principal or resource attributes. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [metadata](./core.planresourcesresponsebase.metadata.md) |  | [PlanResourcesMetadata](./core.planresourcesmetadata.md) \| undefined | Additional information about the query plan. |
+|  [requestId](./core.planresourcesresponsebase.requestid.md) |  | string | The identifier for tracing the request. |
+|  [validationErrors](./core.planresourcesresponsebase.validationerrors.md) |  | [ValidationError](./core.validationerror.md)<!-- -->\[\] | Any schema validation errors for the principal or resource attributes. |
 

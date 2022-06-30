@@ -14,9 +14,9 @@ export interface ValidationError
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [message](./core.validationerror.message.md) | string | The error message. |
-|  [path](./core.validationerror.path.md) | string | The path to the attribute that failed validation. |
-|  [source](./core.validationerror.source.md) | [ValidationErrorSource](./core.validationerrorsource.md) | The source of the invalid attributes. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [message](./core.validationerror.message.md) |  | string | The error message. |
+|  [path](./core.validationerror.path.md) |  | string | The path to the attribute that failed validation. |
+|  [source](./core.validationerror.source.md) |  | [ValidationErrorSource](./core.validationerrorsource.md) | The source of the invalid attributes. |
 

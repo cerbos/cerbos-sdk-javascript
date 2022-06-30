@@ -23,5 +23,5 @@ export declare class ValidationFailed extends Error
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [validationErrors](./core.validationfailed.validationerrors.md) |  | [ValidationError](./core.validationerror.md)<!-- -->\[\] | The validation errors that occurred. |
+|  [validationErrors](./core.validationfailed.validationerrors.md) | <code>readonly</code> | [ValidationError](./core.validationerror.md)<!-- -->\[\] | The validation errors that occurred. |
 

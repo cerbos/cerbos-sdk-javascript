@@ -24,7 +24,7 @@ export declare class CheckResourcesResponse
 |  --- | --- | --- | --- |
 |  [requestId](./core.checkresourcesresponse.requestid.md) |  | string | The identifier for tracing the request. |
 |  [results](./core.checkresourcesresponse.results.md) |  | [CheckResourcesResult](./core.checkresourcesresult.md)<!-- -->\[\] | The outcomes of the permission checks for each resource. |
-|  [validationErrors](./core.checkresourcesresponse.validationerrors.md) |  | [ValidationError](./core.validationerror.md)<!-- -->\[\] | Unique schema validation errors for the principal or resource attributes. |
+|  [validationErrors](./core.checkresourcesresponse.validationerrors.md) | <code>readonly</code> | [ValidationError](./core.validationerror.md)<!-- -->\[\] | Unique schema validation errors for the principal or resource attributes. |
 
 ## Methods
 

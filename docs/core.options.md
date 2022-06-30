@@ -14,8 +14,8 @@ export interface Options
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [onValidationError?](./core.options.onvalidationerror.md) | "throw" \| [ValidationFailedCallback](./core.validationfailedcallback.md) \| undefined | <i>(Optional)</i> Action to take when input fails schema validation. |
-|  [playgroundInstance?](./core.options.playgroundinstance.md) | string \| undefined | <i>(Optional)</i> Identifier of the playground instance to use when prototyping against the hosted demo policy decision point. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [onValidationError?](./core.options.onvalidationerror.md) |  | "throw" \| [ValidationFailedCallback](./core.validationfailedcallback.md) \| undefined | <i>(Optional)</i> Action to take when input fails schema validation. |
+|  [playgroundInstance?](./core.options.playgroundinstance.md) |  | string \| undefined | <i>(Optional)</i> Identifier of the playground instance to use when prototyping against the hosted demo policy decision point. |
 

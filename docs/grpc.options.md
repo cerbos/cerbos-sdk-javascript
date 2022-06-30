@@ -15,7 +15,7 @@ export interface Options extends CoreOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [tls](./grpc.options.tls.md) | boolean \| SecureContext | Encrypt the gRPC connection with TLS. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [tls](./grpc.options.tls.md) |  | boolean \| SecureContext | Encrypt the gRPC connection with TLS. |
 

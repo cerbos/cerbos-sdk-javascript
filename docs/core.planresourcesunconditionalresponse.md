@@ -15,7 +15,7 @@ export interface PlanResourcesUnconditionalResponse extends PlanResourcesRespons
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [kind](./core.planresourcesunconditionalresponse.kind.md) | [PlanKind.ALWAYS\_ALLOWED](./core.plankind.md) \| [PlanKind.ALWAYS\_DENIED](./core.plankind.md) | The type of plan. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [kind](./core.planresourcesunconditionalresponse.kind.md) |  | [PlanKind.ALWAYS\_ALLOWED](./core.plankind.md) \| [PlanKind.ALWAYS\_DENIED](./core.plankind.md) | The type of plan. |
 
