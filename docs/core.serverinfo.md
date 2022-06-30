@@ -14,9 +14,9 @@ export interface ServerInfo
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [buildDate](./core.serverinfo.builddate.md) | string | The time at which the PDP server binary was built. |
-|  [commit](./core.serverinfo.commit.md) | string | The commit SHA from which the PDP server binary was built. |
-|  [version](./core.serverinfo.version.md) | string | The version of the PDP server. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [buildDate](./core.serverinfo.builddate.md) |  | string | The time at which the PDP server binary was built. |
+|  [commit](./core.serverinfo.commit.md) |  | string | The commit SHA from which the PDP server binary was built. |
+|  [version](./core.serverinfo.version.md) |  | string | The version of the PDP server. |
 

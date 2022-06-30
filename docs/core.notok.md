@@ -23,6 +23,6 @@ export declare class NotOK extends Error
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [code](./core.notok.code.md) |  | [Status](./core.status.md) | The status code returned by the Cerbos policy decision point server. |
-|  [details](./core.notok.details.md) |  | string | Additional error details. |
+|  [code](./core.notok.code.md) | <code>readonly</code> | [Status](./core.status.md) | The status code returned by the Cerbos policy decision point server. |
+|  [details](./core.notok.details.md) | <code>readonly</code> | string | Additional error details. |
 

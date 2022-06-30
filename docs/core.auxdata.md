@@ -14,7 +14,7 @@ export interface AuxData
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [jwt?](./core.auxdata.jwt.md) | [JWT](./core.jwt.md) | <i>(Optional)</i> A JSON Web Token (JWT) to use as an auxiliary data source. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [jwt?](./core.auxdata.jwt.md) |  | [JWT](./core.jwt.md) | <i>(Optional)</i> A JSON Web Token (JWT) to use as an auxiliary data source. |
 

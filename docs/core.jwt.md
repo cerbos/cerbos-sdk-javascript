@@ -14,8 +14,8 @@ export interface JWT
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [keySetId?](./core.jwt.keysetid.md) | string | <i>(Optional)</i> The ID of the JWKS to be used by the PDP server to verify the JWT. |
-|  [token](./core.jwt.token.md) | string | The encoded JWT. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [keySetId?](./core.jwt.keysetid.md) |  | string | <i>(Optional)</i> The ID of the JWKS to be used by the PDP server to verify the JWT. |
+|  [token](./core.jwt.token.md) |  | string | The encoded JWT. |
 

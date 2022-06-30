@@ -14,11 +14,11 @@ export interface Principal
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [attributes?](./core.principal.attributes.md) | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; | <i>(Optional)</i> Application-specific attributes describing the principal. |
-|  [id](./core.principal.id.md) | string | A unique identifier for the principal. |
-|  [policyVersion?](./core.principal.policyversion.md) | string | <i>(Optional)</i> The policy version to use when authorizing the principal. |
-|  [roles](./core.principal.roles.md) | string\[\] | The roles held by the principal. |
-|  [scope?](./core.principal.scope.md) | string | <i>(Optional)</i> The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) to use when authorizing the principal. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [attributes?](./core.principal.attributes.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; | <i>(Optional)</i> Application-specific attributes describing the principal. |
+|  [id](./core.principal.id.md) |  | string | A unique identifier for the principal. |
+|  [policyVersion?](./core.principal.policyversion.md) |  | string | <i>(Optional)</i> The policy version to use when authorizing the principal. |
+|  [roles](./core.principal.roles.md) |  | string\[\] | The roles held by the principal. |
+|  [scope?](./core.principal.scope.md) |  | string | <i>(Optional)</i> The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) to use when authorizing the principal. |
 

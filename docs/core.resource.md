@@ -14,11 +14,11 @@ export interface Resource
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [attributes?](./core.resource.attributes.md) | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; | <i>(Optional)</i> Application-specific attributes describing the resource. |
-|  [id](./core.resource.id.md) | string | A unique identifier for the resource. |
-|  [kind](./core.resource.kind.md) | string | The type of resource. |
-|  [policyVersion?](./core.resource.policyversion.md) | string | <i>(Optional)</i> The policy version to use when checking the principal's permissions on the resource. |
-|  [scope?](./core.resource.scope.md) | string | <i>(Optional)</i> The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) to use when checking the principal's permissions on the resource. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [attributes?](./core.resource.attributes.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; | <i>(Optional)</i> Application-specific attributes describing the resource. |
+|  [id](./core.resource.id.md) |  | string | A unique identifier for the resource. |
+|  [kind](./core.resource.kind.md) |  | string | The type of resource. |
+|  [policyVersion?](./core.resource.policyversion.md) |  | string | <i>(Optional)</i> The policy version to use when checking the principal's permissions on the resource. |
+|  [scope?](./core.resource.scope.md) |  | string | <i>(Optional)</i> The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) to use when checking the principal's permissions on the resource. |
 

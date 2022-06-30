@@ -15,8 +15,8 @@ export interface PlanResourcesConditionalResponse extends PlanResourcesResponseB
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [condition](./core.planresourcesconditionalresponse.condition.md) | [PlanExpressionOperand](./core.planexpressionoperand.md) | The root node of the query condition abstract syntax tree. |
-|  [kind](./core.planresourcesconditionalresponse.kind.md) | [PlanKind.CONDITIONAL](./core.plankind.md) | The type of plan. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [condition](./core.planresourcesconditionalresponse.condition.md) |  | [PlanExpressionOperand](./core.planexpressionoperand.md) | The root node of the query condition abstract syntax tree. |
+|  [kind](./core.planresourcesconditionalresponse.kind.md) |  | [PlanKind.CONDITIONAL](./core.plankind.md) | The type of plan. |
 
