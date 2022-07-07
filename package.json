@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@microsoft/api-documenter": "^7.18.0",
-    "@microsoft/api-extractor": "^7.28.2",
+    "@microsoft/api-extractor": "^7.28.3",
     "@tsconfig/node14": "^1.0.3",
     "@types/node": "^14.18.21",
     "@types/node-fetch": "^2.6.1",
@@ -42,7 +42,7 @@
     "@typescript-eslint/parser": "^5.30.0",
     "concurrently": "^7.2.2",
     "eslint": "^8.19.0",
-    "eslint-import-resolver-typescript": "^3.1.1",
+    "eslint-import-resolver-typescript": "^3.2.4",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.5.3",
     "eslint-plugin-tsdoc": "^0.2.16",
@@ -54,7 +54,7 @@
     "semver": "^7.3.7",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.1",
-    "ts-proto": "^1.115.5",
+    "ts-proto": "^1.117.0",
     "typescript": "^4.7.4"
   }
 }
