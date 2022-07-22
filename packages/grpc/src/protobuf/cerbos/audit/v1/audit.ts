@@ -1,12 +1,7 @@
 /* eslint-disable */
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import {
-  CheckInput,
-  CheckOutput,
-  PlanResourcesInput,
-  PlanResourcesOutput,
-} from "../../engine/v1/engine";
 import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../../google/protobuf/timestamp";
+import { CheckInput, CheckOutput, PlanResourcesInput, PlanResourcesOutput } from "../../engine/v1/engine";
 
 export const protobufPackage = "cerbos.audit.v1";
 
@@ -27,19 +22,19 @@ export interface AccessLogEntry_MetadataEntry {
 export interface DecisionLogEntry {
   callId: string;
   timestamp: Date | undefined;
-  peer: Peer | undefined;
+  peer:
+    | Peer
+    | undefined;
   /** Deprecated. Use method.check_resources.inputs instead. */
   inputs: CheckInput[];
   /** Deprecated. Use method.check_resources.outputs instead. */
   outputs: CheckOutput[];
   /** Deprecated. Use method.check_resources.error instead. */
   error: string;
-  method?:
-    | {
-        $case: "checkResources";
-        checkResources: DecisionLogEntry_CheckResources;
-      }
-    | { $case: "planResources"; planResources: DecisionLogEntry_PlanResources };
+  method?: { $case: "checkResources"; checkResources: DecisionLogEntry_CheckResources } | {
+    $case: "planResources";
+    planResources: DecisionLogEntry_PlanResources;
+  };
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -66,38 +61,22 @@ export interface Peer {
 }
 
 function createBaseAccessLogEntry(): AccessLogEntry {
-  return {
-    callId: "",
-    timestamp: undefined,
-    peer: undefined,
-    metadata: {},
-    method: "",
-    statusCode: 0,
-  };
+  return { callId: "", timestamp: undefined, peer: undefined, metadata: {}, method: "", statusCode: 0 };
 }
 
 export const AccessLogEntry = {
-  encode(
-    message: AccessLogEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: AccessLogEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.callId !== "") {
       writer.uint32(10).string(message.callId);
     }
     if (message.timestamp !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.timestamp),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
     }
     if (message.peer !== undefined) {
       Peer.encode(message.peer, writer.uint32(26).fork()).ldelim();
     }
     Object.entries(message.metadata).forEach(([key, value]) => {
-      AccessLogEntry_MetadataEntry.encode(
-        { key: key as any, value },
-        writer.uint32(34).fork()
-      ).ldelim();
+      AccessLogEntry_MetadataEntry.encode({ key: key as any, value }, writer.uint32(34).fork()).ldelim();
     });
     if (message.method !== "") {
       writer.uint32(42).string(message.method);
@@ -119,18 +98,13 @@ export const AccessLogEntry = {
           message.callId = reader.string();
           break;
         case 2:
-          message.timestamp = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 3:
           message.peer = Peer.decode(reader, reader.uint32());
           break;
         case 4:
-          const entry4 = AccessLogEntry_MetadataEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry4 = AccessLogEntry_MetadataEntry.decode(reader, reader.uint32());
           if (entry4.value !== undefined) {
             message.metadata[entry4.key] = entry4.value;
           }
@@ -155,10 +129,7 @@ function createBaseAccessLogEntry_MetadataEntry(): AccessLogEntry_MetadataEntry 
 }
 
 export const AccessLogEntry_MetadataEntry = {
-  encode(
-    message: AccessLogEntry_MetadataEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: AccessLogEntry_MetadataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -168,10 +139,7 @@ export const AccessLogEntry_MetadataEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): AccessLogEntry_MetadataEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccessLogEntry_MetadataEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessLogEntry_MetadataEntry();
@@ -194,30 +162,16 @@ export const AccessLogEntry_MetadataEntry = {
 };
 
 function createBaseDecisionLogEntry(): DecisionLogEntry {
-  return {
-    callId: "",
-    timestamp: undefined,
-    peer: undefined,
-    inputs: [],
-    outputs: [],
-    error: "",
-    method: undefined,
-  };
+  return { callId: "", timestamp: undefined, peer: undefined, inputs: [], outputs: [], error: "", method: undefined };
 }
 
 export const DecisionLogEntry = {
-  encode(
-    message: DecisionLogEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: DecisionLogEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.callId !== "") {
       writer.uint32(10).string(message.callId);
     }
     if (message.timestamp !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.timestamp),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
     }
     if (message.peer !== undefined) {
       Peer.encode(message.peer, writer.uint32(26).fork()).ldelim();
@@ -232,16 +186,10 @@ export const DecisionLogEntry = {
       writer.uint32(50).string(message.error);
     }
     if (message.method?.$case === "checkResources") {
-      DecisionLogEntry_CheckResources.encode(
-        message.method.checkResources,
-        writer.uint32(58).fork()
-      ).ldelim();
+      DecisionLogEntry_CheckResources.encode(message.method.checkResources, writer.uint32(58).fork()).ldelim();
     }
     if (message.method?.$case === "planResources") {
-      DecisionLogEntry_PlanResources.encode(
-        message.method.planResources,
-        writer.uint32(66).fork()
-      ).ldelim();
+      DecisionLogEntry_PlanResources.encode(message.method.planResources, writer.uint32(66).fork()).ldelim();
     }
     return writer;
   },
@@ -257,9 +205,7 @@ export const DecisionLogEntry = {
           message.callId = reader.string();
           break;
         case 2:
-          message.timestamp = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 3:
           message.peer = Peer.decode(reader, reader.uint32());
@@ -276,19 +222,13 @@ export const DecisionLogEntry = {
         case 7:
           message.method = {
             $case: "checkResources",
-            checkResources: DecisionLogEntry_CheckResources.decode(
-              reader,
-              reader.uint32()
-            ),
+            checkResources: DecisionLogEntry_CheckResources.decode(reader, reader.uint32()),
           };
           break;
         case 8:
           message.method = {
             $case: "planResources",
-            planResources: DecisionLogEntry_PlanResources.decode(
-              reader,
-              reader.uint32()
-            ),
+            planResources: DecisionLogEntry_PlanResources.decode(reader, reader.uint32()),
           };
           break;
         default:
@@ -305,10 +245,7 @@ function createBaseDecisionLogEntry_CheckResources(): DecisionLogEntry_CheckReso
 }
 
 export const DecisionLogEntry_CheckResources = {
-  encode(
-    message: DecisionLogEntry_CheckResources,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: DecisionLogEntry_CheckResources, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.inputs) {
       CheckInput.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -321,10 +258,7 @@ export const DecisionLogEntry_CheckResources = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): DecisionLogEntry_CheckResources {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DecisionLogEntry_CheckResources {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecisionLogEntry_CheckResources();
@@ -354,21 +288,12 @@ function createBaseDecisionLogEntry_PlanResources(): DecisionLogEntry_PlanResour
 }
 
 export const DecisionLogEntry_PlanResources = {
-  encode(
-    message: DecisionLogEntry_PlanResources,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: DecisionLogEntry_PlanResources, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.input !== undefined) {
-      PlanResourcesInput.encode(
-        message.input,
-        writer.uint32(10).fork()
-      ).ldelim();
+      PlanResourcesInput.encode(message.input, writer.uint32(10).fork()).ldelim();
     }
     if (message.output !== undefined) {
-      PlanResourcesOutput.encode(
-        message.output,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PlanResourcesOutput.encode(message.output, writer.uint32(18).fork()).ldelim();
     }
     if (message.error !== "") {
       writer.uint32(26).string(message.error);
@@ -376,10 +301,7 @@ export const DecisionLogEntry_PlanResources = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): DecisionLogEntry_PlanResources {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DecisionLogEntry_PlanResources {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecisionLogEntry_PlanResources();
@@ -409,10 +331,7 @@ function createBaseMetaValues(): MetaValues {
 }
 
 export const MetaValues = {
-  encode(
-    message: MetaValues,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MetaValues, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       writer.uint32(10).string(v!);
     }

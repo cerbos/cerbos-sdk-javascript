@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export const protobufPackage = "cerbos.effect.v1";
 
 export enum Effect {
@@ -23,9 +24,7 @@ export function effectFromJSON(object: any): Effect {
     case "EFFECT_NO_MATCH":
       return Effect.EFFECT_NO_MATCH;
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum Effect"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Effect");
   }
 }
 
@@ -40,9 +39,7 @@ export function effectToJSON(object: Effect): string {
     case Effect.EFFECT_NO_MATCH:
       return "EFFECT_NO_MATCH";
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum Effect"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Effect");
   }
 }
 
@@ -50,9 +47,17 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
   throw "Unable to locate global object";
 })();

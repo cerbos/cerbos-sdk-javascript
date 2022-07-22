@@ -55,7 +55,9 @@ export interface Swagger {
    * Provides metadata about the API. The metadata can be used by the
    * clients if needed.
    */
-  info: Info | undefined;
+  info:
+    | Info
+    | undefined;
   /**
    * The host (name or ip) serving the API. This MUST be the host only and does
    * not include the scheme nor sub-paths. It MAY include a port. If the host is
@@ -99,7 +101,9 @@ export interface Swagger {
    */
   responses: { [key: string]: Response };
   /** Security scheme definitions that can be used across the specification. */
-  securityDefinitions: SecurityDefinitions | undefined;
+  securityDefinitions:
+    | SecurityDefinitions
+    | undefined;
   /**
    * A declaration of which security schemes are applied for the API as a whole.
    * The list of values describes alternative security schemes that can be used
@@ -166,7 +170,9 @@ export interface Operation {
    */
   description: string;
   /** Additional external documentation for this operation. */
-  externalDocs: ExternalDocumentation | undefined;
+  externalDocs:
+    | ExternalDocumentation
+    | undefined;
   /**
    * Unique string used to identify the operation. The id MUST be unique among
    * all operations described in the API. Tools and libraries MAY use the
@@ -260,7 +266,9 @@ export interface Response {
    * `Schema` optionally defines the structure of the response.
    * If `Schema` is not provided, it means there is no content to the response.
    */
-  schema: Schema | undefined;
+  schema:
+    | Schema
+    | undefined;
   /**
    * `Headers` A list of headers that are sent with the response.
    * `Header` name is expected to be a string in the canonical format of the MIME header key
@@ -326,9 +334,13 @@ export interface Info {
   /** The Terms of Service for the API. */
   termsOfService: string;
   /** The contact information for the exposed API. */
-  contact: Contact | undefined;
+  contact:
+    | Contact
+    | undefined;
   /** The license information for the exposed API. */
-  license: License | undefined;
+  license:
+    | License
+    | undefined;
   /**
    * Provides the version of the application API (not to be confused
    * with the specification version).
@@ -439,7 +451,9 @@ export interface ExternalDocumentation {
  * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#schemaObject
  */
 export interface Schema {
-  jsonSchema: JSONSchema | undefined;
+  jsonSchema:
+    | JSONSchema
+    | undefined;
   /**
    * Adds support for polymorphism. The discriminator is the schema property
    * name that is used to differentiate between other schema that inherit this
@@ -457,7 +471,9 @@ export interface Schema {
    */
   readOnly: boolean;
   /** Additional external documentation for this schema. */
-  externalDocs: ExternalDocumentation | undefined;
+  externalDocs:
+    | ExternalDocumentation
+    | undefined;
   /**
    * A free-form property to include an example of an instance for this schema in JSON.
    * This is copied verbatim to the output.
@@ -707,9 +723,7 @@ export interface SecurityRequirement {
    * then the value is a list of scope names required for the execution.
    * For other security scheme types, the array MUST be empty.
    */
-  securityRequirement: {
-    [key: string]: SecurityRequirement_SecurityRequirementValue;
-  };
+  securityRequirement: { [key: string]: SecurityRequirement_SecurityRequirementValue };
 }
 
 /**
@@ -764,10 +778,7 @@ function createBaseSwagger(): Swagger {
 }
 
 export const Swagger = {
-  encode(
-    message: Swagger,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Swagger, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.swagger !== "") {
       writer.uint32(10).string(message.swagger);
     }
@@ -792,32 +803,20 @@ export const Swagger = {
       writer.uint32(58).string(v!);
     }
     Object.entries(message.responses).forEach(([key, value]) => {
-      Swagger_ResponsesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(82).fork()
-      ).ldelim();
+      Swagger_ResponsesEntry.encode({ key: key as any, value }, writer.uint32(82).fork()).ldelim();
     });
     if (message.securityDefinitions !== undefined) {
-      SecurityDefinitions.encode(
-        message.securityDefinitions,
-        writer.uint32(90).fork()
-      ).ldelim();
+      SecurityDefinitions.encode(message.securityDefinitions, writer.uint32(90).fork()).ldelim();
     }
     for (const v of message.security) {
       SecurityRequirement.encode(v!, writer.uint32(98).fork()).ldelim();
     }
     if (message.externalDocs !== undefined) {
-      ExternalDocumentation.encode(
-        message.externalDocs,
-        writer.uint32(114).fork()
-      ).ldelim();
+      ExternalDocumentation.encode(message.externalDocs, writer.uint32(114).fork()).ldelim();
     }
     Object.entries(message.extensions).forEach(([key, value]) => {
       if (value !== undefined) {
-        Swagger_ExtensionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(122).fork()
-        ).ldelim();
+        Swagger_ExtensionsEntry.encode({ key: key as any, value }, writer.uint32(122).fork()).ldelim();
       }
     });
     return writer;
@@ -859,36 +858,22 @@ export const Swagger = {
           message.produces.push(reader.string());
           break;
         case 10:
-          const entry10 = Swagger_ResponsesEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry10 = Swagger_ResponsesEntry.decode(reader, reader.uint32());
           if (entry10.value !== undefined) {
             message.responses[entry10.key] = entry10.value;
           }
           break;
         case 11:
-          message.securityDefinitions = SecurityDefinitions.decode(
-            reader,
-            reader.uint32()
-          );
+          message.securityDefinitions = SecurityDefinitions.decode(reader, reader.uint32());
           break;
         case 12:
-          message.security.push(
-            SecurityRequirement.decode(reader, reader.uint32())
-          );
+          message.security.push(SecurityRequirement.decode(reader, reader.uint32()));
           break;
         case 14:
-          message.externalDocs = ExternalDocumentation.decode(
-            reader,
-            reader.uint32()
-          );
+          message.externalDocs = ExternalDocumentation.decode(reader, reader.uint32());
           break;
         case 15:
-          const entry15 = Swagger_ExtensionsEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry15 = Swagger_ExtensionsEntry.decode(reader, reader.uint32());
           if (entry15.value !== undefined) {
             message.extensions[entry15.key] = entry15.value;
           }
@@ -907,10 +892,7 @@ function createBaseSwagger_ResponsesEntry(): Swagger_ResponsesEntry {
 }
 
 export const Swagger_ResponsesEntry = {
-  encode(
-    message: Swagger_ResponsesEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Swagger_ResponsesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -920,10 +902,7 @@ export const Swagger_ResponsesEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Swagger_ResponsesEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Swagger_ResponsesEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSwagger_ResponsesEntry();
@@ -950,26 +929,17 @@ function createBaseSwagger_ExtensionsEntry(): Swagger_ExtensionsEntry {
 }
 
 export const Swagger_ExtensionsEntry = {
-  encode(
-    message: Swagger_ExtensionsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Swagger_ExtensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(
-        Value.wrap(message.value),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Swagger_ExtensionsEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Swagger_ExtensionsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSwagger_ExtensionsEntry();
@@ -1009,10 +979,7 @@ function createBaseOperation(): Operation {
 }
 
 export const Operation = {
-  encode(
-    message: Operation,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Operation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.tags) {
       writer.uint32(10).string(v!);
     }
@@ -1023,10 +990,7 @@ export const Operation = {
       writer.uint32(26).string(message.description);
     }
     if (message.externalDocs !== undefined) {
-      ExternalDocumentation.encode(
-        message.externalDocs,
-        writer.uint32(34).fork()
-      ).ldelim();
+      ExternalDocumentation.encode(message.externalDocs, writer.uint32(34).fork()).ldelim();
     }
     if (message.operationId !== "") {
       writer.uint32(42).string(message.operationId);
@@ -1038,10 +1002,7 @@ export const Operation = {
       writer.uint32(58).string(v!);
     }
     Object.entries(message.responses).forEach(([key, value]) => {
-      Operation_ResponsesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(74).fork()
-      ).ldelim();
+      Operation_ResponsesEntry.encode({ key: key as any, value }, writer.uint32(74).fork()).ldelim();
     });
     writer.uint32(82).fork();
     for (const v of message.schemes) {
@@ -1056,10 +1017,7 @@ export const Operation = {
     }
     Object.entries(message.extensions).forEach(([key, value]) => {
       if (value !== undefined) {
-        Operation_ExtensionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(106).fork()
-        ).ldelim();
+        Operation_ExtensionsEntry.encode({ key: key as any, value }, writer.uint32(106).fork()).ldelim();
       }
     });
     return writer;
@@ -1082,10 +1040,7 @@ export const Operation = {
           message.description = reader.string();
           break;
         case 4:
-          message.externalDocs = ExternalDocumentation.decode(
-            reader,
-            reader.uint32()
-          );
+          message.externalDocs = ExternalDocumentation.decode(reader, reader.uint32());
           break;
         case 5:
           message.operationId = reader.string();
@@ -1097,10 +1052,7 @@ export const Operation = {
           message.produces.push(reader.string());
           break;
         case 9:
-          const entry9 = Operation_ResponsesEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry9 = Operation_ResponsesEntry.decode(reader, reader.uint32());
           if (entry9.value !== undefined) {
             message.responses[entry9.key] = entry9.value;
           }
@@ -1119,15 +1071,10 @@ export const Operation = {
           message.deprecated = reader.bool();
           break;
         case 12:
-          message.security.push(
-            SecurityRequirement.decode(reader, reader.uint32())
-          );
+          message.security.push(SecurityRequirement.decode(reader, reader.uint32()));
           break;
         case 13:
-          const entry13 = Operation_ExtensionsEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry13 = Operation_ExtensionsEntry.decode(reader, reader.uint32());
           if (entry13.value !== undefined) {
             message.extensions[entry13.key] = entry13.value;
           }
@@ -1146,10 +1093,7 @@ function createBaseOperation_ResponsesEntry(): Operation_ResponsesEntry {
 }
 
 export const Operation_ResponsesEntry = {
-  encode(
-    message: Operation_ResponsesEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Operation_ResponsesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1159,10 +1103,7 @@ export const Operation_ResponsesEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Operation_ResponsesEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Operation_ResponsesEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation_ResponsesEntry();
@@ -1189,26 +1130,17 @@ function createBaseOperation_ExtensionsEntry(): Operation_ExtensionsEntry {
 }
 
 export const Operation_ExtensionsEntry = {
-  encode(
-    message: Operation_ExtensionsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Operation_ExtensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(
-        Value.wrap(message.value),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Operation_ExtensionsEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Operation_ExtensionsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation_ExtensionsEntry();
@@ -1235,10 +1167,7 @@ function createBaseHeader(): Header {
 }
 
 export const Header = {
-  encode(
-    message: Header,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Header, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
     }
@@ -1289,20 +1218,11 @@ export const Header = {
 };
 
 function createBaseResponse(): Response {
-  return {
-    description: "",
-    schema: undefined,
-    headers: {},
-    examples: {},
-    extensions: {},
-  };
+  return { description: "", schema: undefined, headers: {}, examples: {}, extensions: {} };
 }
 
 export const Response = {
-  encode(
-    message: Response,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
     }
@@ -1310,23 +1230,14 @@ export const Response = {
       Schema.encode(message.schema, writer.uint32(18).fork()).ldelim();
     }
     Object.entries(message.headers).forEach(([key, value]) => {
-      Response_HeadersEntry.encode(
-        { key: key as any, value },
-        writer.uint32(26).fork()
-      ).ldelim();
+      Response_HeadersEntry.encode({ key: key as any, value }, writer.uint32(26).fork()).ldelim();
     });
     Object.entries(message.examples).forEach(([key, value]) => {
-      Response_ExamplesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(34).fork()
-      ).ldelim();
+      Response_ExamplesEntry.encode({ key: key as any, value }, writer.uint32(34).fork()).ldelim();
     });
     Object.entries(message.extensions).forEach(([key, value]) => {
       if (value !== undefined) {
-        Response_ExtensionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(42).fork()
-        ).ldelim();
+        Response_ExtensionsEntry.encode({ key: key as any, value }, writer.uint32(42).fork()).ldelim();
       }
     });
     return writer;
@@ -1358,10 +1269,7 @@ export const Response = {
           }
           break;
         case 5:
-          const entry5 = Response_ExtensionsEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry5 = Response_ExtensionsEntry.decode(reader, reader.uint32());
           if (entry5.value !== undefined) {
             message.extensions[entry5.key] = entry5.value;
           }
@@ -1380,10 +1288,7 @@ function createBaseResponse_HeadersEntry(): Response_HeadersEntry {
 }
 
 export const Response_HeadersEntry = {
-  encode(
-    message: Response_HeadersEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Response_HeadersEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1393,10 +1298,7 @@ export const Response_HeadersEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Response_HeadersEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Response_HeadersEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponse_HeadersEntry();
@@ -1423,10 +1325,7 @@ function createBaseResponse_ExamplesEntry(): Response_ExamplesEntry {
 }
 
 export const Response_ExamplesEntry = {
-  encode(
-    message: Response_ExamplesEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Response_ExamplesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1436,10 +1335,7 @@ export const Response_ExamplesEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Response_ExamplesEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Response_ExamplesEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponse_ExamplesEntry();
@@ -1466,26 +1362,17 @@ function createBaseResponse_ExtensionsEntry(): Response_ExtensionsEntry {
 }
 
 export const Response_ExtensionsEntry = {
-  encode(
-    message: Response_ExtensionsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Response_ExtensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(
-        Value.wrap(message.value),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Response_ExtensionsEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Response_ExtensionsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponse_ExtensionsEntry();
@@ -1541,10 +1428,7 @@ export const Info = {
     }
     Object.entries(message.extensions).forEach(([key, value]) => {
       if (value !== undefined) {
-        Info_ExtensionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(58).fork()
-        ).ldelim();
+        Info_ExtensionsEntry.encode({ key: key as any, value }, writer.uint32(58).fork()).ldelim();
       }
     });
     return writer;
@@ -1595,26 +1479,17 @@ function createBaseInfo_ExtensionsEntry(): Info_ExtensionsEntry {
 }
 
 export const Info_ExtensionsEntry = {
-  encode(
-    message: Info_ExtensionsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Info_ExtensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(
-        Value.wrap(message.value),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Info_ExtensionsEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Info_ExtensionsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInfo_ExtensionsEntry();
@@ -1641,10 +1516,7 @@ function createBaseContact(): Contact {
 }
 
 export const Contact = {
-  encode(
-    message: Contact,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Contact, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1687,10 +1559,7 @@ function createBaseLicense(): License {
 }
 
 export const License = {
-  encode(
-    message: License,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: License, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1727,10 +1596,7 @@ function createBaseExternalDocumentation(): ExternalDocumentation {
 }
 
 export const ExternalDocumentation = {
-  encode(
-    message: ExternalDocumentation,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ExternalDocumentation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
     }
@@ -1740,10 +1606,7 @@ export const ExternalDocumentation = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ExternalDocumentation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ExternalDocumentation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExternalDocumentation();
@@ -1766,20 +1629,11 @@ export const ExternalDocumentation = {
 };
 
 function createBaseSchema(): Schema {
-  return {
-    jsonSchema: undefined,
-    discriminator: "",
-    readOnly: false,
-    externalDocs: undefined,
-    example: "",
-  };
+  return { jsonSchema: undefined, discriminator: "", readOnly: false, externalDocs: undefined, example: "" };
 }
 
 export const Schema = {
-  encode(
-    message: Schema,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Schema, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.jsonSchema !== undefined) {
       JSONSchema.encode(message.jsonSchema, writer.uint32(10).fork()).ldelim();
     }
@@ -1790,10 +1644,7 @@ export const Schema = {
       writer.uint32(24).bool(message.readOnly);
     }
     if (message.externalDocs !== undefined) {
-      ExternalDocumentation.encode(
-        message.externalDocs,
-        writer.uint32(42).fork()
-      ).ldelim();
+      ExternalDocumentation.encode(message.externalDocs, writer.uint32(42).fork()).ldelim();
     }
     if (message.example !== "") {
       writer.uint32(50).string(message.example);
@@ -1818,10 +1669,7 @@ export const Schema = {
           message.readOnly = reader.bool();
           break;
         case 5:
-          message.externalDocs = ExternalDocumentation.decode(
-            reader,
-            reader.uint32()
-          );
+          message.externalDocs = ExternalDocumentation.decode(reader, reader.uint32());
           break;
         case 6:
           message.example = reader.string();
@@ -1865,10 +1713,7 @@ function createBaseJSONSchema(): JSONSchema {
 }
 
 export const JSONSchema = {
-  encode(
-    message: JSONSchema,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: JSONSchema, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.ref !== "") {
       writer.uint32(26).string(message.ref);
     }
@@ -2051,10 +1896,7 @@ export const Tag = {
       writer.uint32(18).string(message.description);
     }
     if (message.externalDocs !== undefined) {
-      ExternalDocumentation.encode(
-        message.externalDocs,
-        writer.uint32(26).fork()
-      ).ldelim();
+      ExternalDocumentation.encode(message.externalDocs, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -2070,10 +1912,7 @@ export const Tag = {
           message.description = reader.string();
           break;
         case 3:
-          message.externalDocs = ExternalDocumentation.decode(
-            reader,
-            reader.uint32()
-          );
+          message.externalDocs = ExternalDocumentation.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2089,15 +1928,9 @@ function createBaseSecurityDefinitions(): SecurityDefinitions {
 }
 
 export const SecurityDefinitions = {
-  encode(
-    message: SecurityDefinitions,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SecurityDefinitions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.security).forEach(([key, value]) => {
-      SecurityDefinitions_SecurityEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork()
-      ).ldelim();
+      SecurityDefinitions_SecurityEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
     });
     return writer;
   },
@@ -2110,10 +1943,7 @@ export const SecurityDefinitions = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          const entry1 = SecurityDefinitions_SecurityEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry1 = SecurityDefinitions_SecurityEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.security[entry1.key] = entry1.value;
           }
@@ -2132,10 +1962,7 @@ function createBaseSecurityDefinitions_SecurityEntry(): SecurityDefinitions_Secu
 }
 
 export const SecurityDefinitions_SecurityEntry = {
-  encode(
-    message: SecurityDefinitions_SecurityEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SecurityDefinitions_SecurityEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -2145,10 +1972,7 @@ export const SecurityDefinitions_SecurityEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): SecurityDefinitions_SecurityEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SecurityDefinitions_SecurityEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSecurityDefinitions_SecurityEntry();
@@ -2185,10 +2009,7 @@ function createBaseSecurityScheme(): SecurityScheme {
 }
 
 export const SecurityScheme = {
-  encode(
-    message: SecurityScheme,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SecurityScheme, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
@@ -2215,10 +2036,7 @@ export const SecurityScheme = {
     }
     Object.entries(message.extensions).forEach(([key, value]) => {
       if (value !== undefined) {
-        SecurityScheme_ExtensionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(74).fork()
-        ).ldelim();
+        SecurityScheme_ExtensionsEntry.encode({ key: key as any, value }, writer.uint32(74).fork()).ldelim();
       }
     });
     return writer;
@@ -2256,10 +2074,7 @@ export const SecurityScheme = {
           message.scopes = Scopes.decode(reader, reader.uint32());
           break;
         case 9:
-          const entry9 = SecurityScheme_ExtensionsEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry9 = SecurityScheme_ExtensionsEntry.decode(reader, reader.uint32());
           if (entry9.value !== undefined) {
             message.extensions[entry9.key] = entry9.value;
           }
@@ -2278,26 +2093,17 @@ function createBaseSecurityScheme_ExtensionsEntry(): SecurityScheme_ExtensionsEn
 }
 
 export const SecurityScheme_ExtensionsEntry = {
-  encode(
-    message: SecurityScheme_ExtensionsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SecurityScheme_ExtensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(
-        Value.wrap(message.value),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): SecurityScheme_ExtensionsEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SecurityScheme_ExtensionsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSecurityScheme_ExtensionsEntry();
@@ -2324,15 +2130,10 @@ function createBaseSecurityRequirement(): SecurityRequirement {
 }
 
 export const SecurityRequirement = {
-  encode(
-    message: SecurityRequirement,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SecurityRequirement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.securityRequirement).forEach(([key, value]) => {
-      SecurityRequirement_SecurityRequirementEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork()
-      ).ldelim();
+      SecurityRequirement_SecurityRequirementEntry.encode({ key: key as any, value }, writer.uint32(10).fork())
+        .ldelim();
     });
     return writer;
   },
@@ -2345,10 +2146,7 @@ export const SecurityRequirement = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          const entry1 = SecurityRequirement_SecurityRequirementEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry1 = SecurityRequirement_SecurityRequirementEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.securityRequirement[entry1.key] = entry1.value;
           }
@@ -2367,20 +2165,14 @@ function createBaseSecurityRequirement_SecurityRequirementValue(): SecurityRequi
 }
 
 export const SecurityRequirement_SecurityRequirementValue = {
-  encode(
-    message: SecurityRequirement_SecurityRequirementValue,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SecurityRequirement_SecurityRequirementValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.scope) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): SecurityRequirement_SecurityRequirementValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SecurityRequirement_SecurityRequirementValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSecurityRequirement_SecurityRequirementValue();
@@ -2404,26 +2196,17 @@ function createBaseSecurityRequirement_SecurityRequirementEntry(): SecurityRequi
 }
 
 export const SecurityRequirement_SecurityRequirementEntry = {
-  encode(
-    message: SecurityRequirement_SecurityRequirementEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SecurityRequirement_SecurityRequirementEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      SecurityRequirement_SecurityRequirementValue.encode(
-        message.value,
-        writer.uint32(18).fork()
-      ).ldelim();
+      SecurityRequirement_SecurityRequirementValue.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): SecurityRequirement_SecurityRequirementEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SecurityRequirement_SecurityRequirementEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSecurityRequirement_SecurityRequirementEntry();
@@ -2434,10 +2217,7 @@ export const SecurityRequirement_SecurityRequirementEntry = {
           message.key = reader.string();
           break;
         case 2:
-          message.value = SecurityRequirement_SecurityRequirementValue.decode(
-            reader,
-            reader.uint32()
-          );
+          message.value = SecurityRequirement_SecurityRequirementValue.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2453,15 +2233,9 @@ function createBaseScopes(): Scopes {
 }
 
 export const Scopes = {
-  encode(
-    message: Scopes,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Scopes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.scope).forEach(([key, value]) => {
-      Scopes_ScopeEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork()
-      ).ldelim();
+      Scopes_ScopeEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
     });
     return writer;
   },
@@ -2493,10 +2267,7 @@ function createBaseScopes_ScopeEntry(): Scopes_ScopeEntry {
 }
 
 export const Scopes_ScopeEntry = {
-  encode(
-    message: Scopes_ScopeEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Scopes_ScopeEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }

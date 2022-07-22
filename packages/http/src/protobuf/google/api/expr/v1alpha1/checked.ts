@@ -1,11 +1,7 @@
 /* eslint-disable */
-import { SourceInfo, Expr, Constant } from "./syntax";
 import { Empty } from "../../../protobuf/empty";
-import {
-  NullValue,
-  nullValueToJSON,
-  nullValueFromJSON,
-} from "../../../protobuf/struct";
+import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { Constant, Expr, SourceInfo } from "./syntax";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
@@ -41,7 +37,9 @@ export interface CheckedExpr {
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
    */
-  sourceInfo: SourceInfo | undefined;
+  sourceInfo:
+    | SourceInfo
+    | undefined;
   /**
    * The expr version indicates the major / minor version number of the `expr`
    * representation.
@@ -141,9 +139,7 @@ export function type_PrimitiveTypeFromJSON(object: any): Type_PrimitiveType {
     case "BYTES":
       return Type_PrimitiveType.BYTES;
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum Type_PrimitiveType"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Type_PrimitiveType");
   }
 }
 
@@ -164,9 +160,7 @@ export function type_PrimitiveTypeToJSON(object: Type_PrimitiveType): string {
     case Type_PrimitiveType.BYTES:
       return "BYTES";
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum Type_PrimitiveType"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Type_PrimitiveType");
   }
 }
 
@@ -203,9 +197,7 @@ export function type_WellKnownTypeFromJSON(object: any): Type_WellKnownType {
     case "DURATION":
       return Type_WellKnownType.DURATION;
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum Type_WellKnownType"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Type_WellKnownType");
   }
 }
 
@@ -220,9 +212,7 @@ export function type_WellKnownTypeToJSON(object: Type_WellKnownType): string {
     case Type_WellKnownType.DURATION:
       return "DURATION";
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum Type_WellKnownType"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Type_WellKnownType");
   }
 }
 
@@ -235,7 +225,9 @@ export interface Type_ListType {
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapType {
   /** The type of the key. */
-  keyType: Type | undefined;
+  keyType:
+    | Type
+    | undefined;
   /** The type of the value. */
   valueType: Type | undefined;
 }
@@ -243,7 +235,9 @@ export interface Type_MapType {
 /** Function type with result and arg types. */
 export interface Type_FunctionType {
   /** Result type of the function. */
-  resultType: Type | undefined;
+  resultType:
+    | Type
+    | undefined;
   /** Argument types of the function. */
   argTypes: Type[];
 }
@@ -274,9 +268,7 @@ export interface Decl {
    * function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].
    */
   name: string;
-  declKind?:
-    | { $case: "ident"; ident: Decl_IdentDecl }
-    | { $case: "function"; function: Decl_FunctionDecl };
+  declKind?: { $case: "ident"; ident: Decl_IdentDecl } | { $case: "function"; function: Decl_FunctionDecl };
 }
 
 /**
@@ -289,12 +281,16 @@ export interface Decl {
  */
 export interface Decl_IdentDecl {
   /** Required. The type of the identifier. */
-  type: Type | undefined;
+  type:
+    | Type
+    | undefined;
   /**
    * The constant value of the identifier. If not specified, the identifier
    * must be supplied at evaluation time.
    */
-  value: Constant | undefined;
+  value:
+    | Constant
+    | undefined;
   /** Documentation string for the identifier. */
   doc: string;
 }
@@ -356,7 +352,9 @@ export interface Decl_FunctionDecl_Overload {
    * Required. The result type of the function. For example, the operator
    * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
    */
-  resultType: Type | undefined;
+  resultType:
+    | Type
+    | undefined;
   /**
    * Whether the function is to be used in a method call-style `x.f(...)`
    * of a function call-style `f(x, ...)`.
@@ -392,38 +390,25 @@ export interface Reference {
 }
 
 function createBaseCheckedExpr(): CheckedExpr {
-  return {
-    referenceMap: {},
-    typeMap: {},
-    sourceInfo: undefined,
-    exprVersion: "",
-    expr: undefined,
-  };
+  return { referenceMap: {}, typeMap: {}, sourceInfo: undefined, exprVersion: "", expr: undefined };
 }
 
 export const CheckedExpr = {
   fromJSON(object: any): CheckedExpr {
     return {
       referenceMap: isObject(object.referenceMap)
-        ? Object.entries(object.referenceMap).reduce<{
-            [key: string]: Reference;
-          }>((acc, [key, value]) => {
-            acc[key] = Reference.fromJSON(value);
-            return acc;
-          }, {})
+        ? Object.entries(object.referenceMap).reduce<{ [key: string]: Reference }>((acc, [key, value]) => {
+          acc[key] = Reference.fromJSON(value);
+          return acc;
+        }, {})
         : {},
       typeMap: isObject(object.typeMap)
-        ? Object.entries(object.typeMap).reduce<{ [key: string]: Type }>(
-            (acc, [key, value]) => {
-              acc[key] = Type.fromJSON(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.typeMap).reduce<{ [key: string]: Type }>((acc, [key, value]) => {
+          acc[key] = Type.fromJSON(value);
+          return acc;
+        }, {})
         : {},
-      sourceInfo: isSet(object.sourceInfo)
-        ? SourceInfo.fromJSON(object.sourceInfo)
-        : undefined,
+      sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
       exprVersion: isSet(object.exprVersion) ? String(object.exprVersion) : "",
       expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined,
     };
@@ -444,13 +429,9 @@ export const CheckedExpr = {
       });
     }
     message.sourceInfo !== undefined &&
-      (obj.sourceInfo = message.sourceInfo
-        ? SourceInfo.toJSON(message.sourceInfo)
-        : undefined);
-    message.exprVersion !== undefined &&
-      (obj.exprVersion = message.exprVersion);
-    message.expr !== undefined &&
-      (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
+      (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
+    message.exprVersion !== undefined && (obj.exprVersion = message.exprVersion);
+    message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
     return obj;
   },
 };
@@ -470,8 +451,7 @@ export const CheckedExpr_ReferenceMapEntry = {
   toJSON(message: CheckedExpr_ReferenceMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -491,8 +471,7 @@ export const CheckedExpr_TypeMapEntry = {
   toJSON(message: CheckedExpr_TypeMapEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? Type.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Type.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -509,32 +488,17 @@ export const Type = {
         : isSet(object.null)
         ? { $case: "null", null: nullValueFromJSON(object.null) }
         : isSet(object.primitive)
-        ? {
-            $case: "primitive",
-            primitive: type_PrimitiveTypeFromJSON(object.primitive),
-          }
+        ? { $case: "primitive", primitive: type_PrimitiveTypeFromJSON(object.primitive) }
         : isSet(object.wrapper)
-        ? {
-            $case: "wrapper",
-            wrapper: type_PrimitiveTypeFromJSON(object.wrapper),
-          }
+        ? { $case: "wrapper", wrapper: type_PrimitiveTypeFromJSON(object.wrapper) }
         : isSet(object.wellKnown)
-        ? {
-            $case: "wellKnown",
-            wellKnown: type_WellKnownTypeFromJSON(object.wellKnown),
-          }
+        ? { $case: "wellKnown", wellKnown: type_WellKnownTypeFromJSON(object.wellKnown) }
         : isSet(object.listType)
-        ? {
-            $case: "listType",
-            listType: Type_ListType.fromJSON(object.listType),
-          }
+        ? { $case: "listType", listType: Type_ListType.fromJSON(object.listType) }
         : isSet(object.mapType)
         ? { $case: "mapType", mapType: Type_MapType.fromJSON(object.mapType) }
         : isSet(object.function)
-        ? {
-            $case: "function",
-            function: Type_FunctionType.fromJSON(object.function),
-          }
+        ? { $case: "function", function: Type_FunctionType.fromJSON(object.function) }
         : isSet(object.messageType)
         ? { $case: "messageType", messageType: String(object.messageType) }
         : isSet(object.typeParam)
@@ -544,10 +508,7 @@ export const Type = {
         : isSet(object.error)
         ? { $case: "error", error: Empty.fromJSON(object.error) }
         : isSet(object.abstractType)
-        ? {
-            $case: "abstractType",
-            abstractType: Type_AbstractType.fromJSON(object.abstractType),
-          }
+        ? { $case: "abstractType", abstractType: Type_AbstractType.fromJSON(object.abstractType) }
         : undefined,
     };
   },
@@ -555,57 +516,33 @@ export const Type = {
   toJSON(message: Type): unknown {
     const obj: any = {};
     message.typeKind?.$case === "dyn" &&
-      (obj.dyn = message.typeKind?.dyn
-        ? Empty.toJSON(message.typeKind?.dyn)
-        : undefined);
+      (obj.dyn = message.typeKind?.dyn ? Empty.toJSON(message.typeKind?.dyn) : undefined);
     message.typeKind?.$case === "null" &&
-      (obj.null =
-        message.typeKind?.null !== undefined
-          ? nullValueToJSON(message.typeKind?.null)
-          : undefined);
-    message.typeKind?.$case === "primitive" &&
-      (obj.primitive =
-        message.typeKind?.primitive !== undefined
-          ? type_PrimitiveTypeToJSON(message.typeKind?.primitive)
-          : undefined);
-    message.typeKind?.$case === "wrapper" &&
-      (obj.wrapper =
-        message.typeKind?.wrapper !== undefined
-          ? type_PrimitiveTypeToJSON(message.typeKind?.wrapper)
-          : undefined);
-    message.typeKind?.$case === "wellKnown" &&
-      (obj.wellKnown =
-        message.typeKind?.wellKnown !== undefined
-          ? type_WellKnownTypeToJSON(message.typeKind?.wellKnown)
-          : undefined);
+      (obj.null = message.typeKind?.null !== undefined ? nullValueToJSON(message.typeKind?.null) : undefined);
+    message.typeKind?.$case === "primitive" && (obj.primitive = message.typeKind?.primitive !== undefined
+      ? type_PrimitiveTypeToJSON(message.typeKind?.primitive)
+      : undefined);
+    message.typeKind?.$case === "wrapper" && (obj.wrapper = message.typeKind?.wrapper !== undefined
+      ? type_PrimitiveTypeToJSON(message.typeKind?.wrapper)
+      : undefined);
+    message.typeKind?.$case === "wellKnown" && (obj.wellKnown = message.typeKind?.wellKnown !== undefined
+      ? type_WellKnownTypeToJSON(message.typeKind?.wellKnown)
+      : undefined);
     message.typeKind?.$case === "listType" &&
-      (obj.listType = message.typeKind?.listType
-        ? Type_ListType.toJSON(message.typeKind?.listType)
-        : undefined);
+      (obj.listType = message.typeKind?.listType ? Type_ListType.toJSON(message.typeKind?.listType) : undefined);
     message.typeKind?.$case === "mapType" &&
-      (obj.mapType = message.typeKind?.mapType
-        ? Type_MapType.toJSON(message.typeKind?.mapType)
-        : undefined);
+      (obj.mapType = message.typeKind?.mapType ? Type_MapType.toJSON(message.typeKind?.mapType) : undefined);
     message.typeKind?.$case === "function" &&
-      (obj.function = message.typeKind?.function
-        ? Type_FunctionType.toJSON(message.typeKind?.function)
-        : undefined);
-    message.typeKind?.$case === "messageType" &&
-      (obj.messageType = message.typeKind?.messageType);
-    message.typeKind?.$case === "typeParam" &&
-      (obj.typeParam = message.typeKind?.typeParam);
+      (obj.function = message.typeKind?.function ? Type_FunctionType.toJSON(message.typeKind?.function) : undefined);
+    message.typeKind?.$case === "messageType" && (obj.messageType = message.typeKind?.messageType);
+    message.typeKind?.$case === "typeParam" && (obj.typeParam = message.typeKind?.typeParam);
     message.typeKind?.$case === "type" &&
-      (obj.type = message.typeKind?.type
-        ? Type.toJSON(message.typeKind?.type)
-        : undefined);
+      (obj.type = message.typeKind?.type ? Type.toJSON(message.typeKind?.type) : undefined);
     message.typeKind?.$case === "error" &&
-      (obj.error = message.typeKind?.error
-        ? Empty.toJSON(message.typeKind?.error)
-        : undefined);
-    message.typeKind?.$case === "abstractType" &&
-      (obj.abstractType = message.typeKind?.abstractType
-        ? Type_AbstractType.toJSON(message.typeKind?.abstractType)
-        : undefined);
+      (obj.error = message.typeKind?.error ? Empty.toJSON(message.typeKind?.error) : undefined);
+    message.typeKind?.$case === "abstractType" && (obj.abstractType = message.typeKind?.abstractType
+      ? Type_AbstractType.toJSON(message.typeKind?.abstractType)
+      : undefined);
     return obj;
   },
 };
@@ -616,19 +553,12 @@ function createBaseType_ListType(): Type_ListType {
 
 export const Type_ListType = {
   fromJSON(object: any): Type_ListType {
-    return {
-      elemType: isSet(object.elemType)
-        ? Type.fromJSON(object.elemType)
-        : undefined,
-    };
+    return { elemType: isSet(object.elemType) ? Type.fromJSON(object.elemType) : undefined };
   },
 
   toJSON(message: Type_ListType): unknown {
     const obj: any = {};
-    message.elemType !== undefined &&
-      (obj.elemType = message.elemType
-        ? Type.toJSON(message.elemType)
-        : undefined);
+    message.elemType !== undefined && (obj.elemType = message.elemType ? Type.toJSON(message.elemType) : undefined);
     return obj;
   },
 };
@@ -640,25 +570,15 @@ function createBaseType_MapType(): Type_MapType {
 export const Type_MapType = {
   fromJSON(object: any): Type_MapType {
     return {
-      keyType: isSet(object.keyType)
-        ? Type.fromJSON(object.keyType)
-        : undefined,
-      valueType: isSet(object.valueType)
-        ? Type.fromJSON(object.valueType)
-        : undefined,
+      keyType: isSet(object.keyType) ? Type.fromJSON(object.keyType) : undefined,
+      valueType: isSet(object.valueType) ? Type.fromJSON(object.valueType) : undefined,
     };
   },
 
   toJSON(message: Type_MapType): unknown {
     const obj: any = {};
-    message.keyType !== undefined &&
-      (obj.keyType = message.keyType
-        ? Type.toJSON(message.keyType)
-        : undefined);
-    message.valueType !== undefined &&
-      (obj.valueType = message.valueType
-        ? Type.toJSON(message.valueType)
-        : undefined);
+    message.keyType !== undefined && (obj.keyType = message.keyType ? Type.toJSON(message.keyType) : undefined);
+    message.valueType !== undefined && (obj.valueType = message.valueType ? Type.toJSON(message.valueType) : undefined);
     return obj;
   },
 };
@@ -670,25 +590,17 @@ function createBaseType_FunctionType(): Type_FunctionType {
 export const Type_FunctionType = {
   fromJSON(object: any): Type_FunctionType {
     return {
-      resultType: isSet(object.resultType)
-        ? Type.fromJSON(object.resultType)
-        : undefined,
-      argTypes: Array.isArray(object?.argTypes)
-        ? object.argTypes.map((e: any) => Type.fromJSON(e))
-        : [],
+      resultType: isSet(object.resultType) ? Type.fromJSON(object.resultType) : undefined,
+      argTypes: Array.isArray(object?.argTypes) ? object.argTypes.map((e: any) => Type.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: Type_FunctionType): unknown {
     const obj: any = {};
     message.resultType !== undefined &&
-      (obj.resultType = message.resultType
-        ? Type.toJSON(message.resultType)
-        : undefined);
+      (obj.resultType = message.resultType ? Type.toJSON(message.resultType) : undefined);
     if (message.argTypes) {
-      obj.argTypes = message.argTypes.map((e) =>
-        e ? Type.toJSON(e) : undefined
-      );
+      obj.argTypes = message.argTypes.map((e) => e ? Type.toJSON(e) : undefined);
     } else {
       obj.argTypes = [];
     }
@@ -714,9 +626,7 @@ export const Type_AbstractType = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.parameterTypes) {
-      obj.parameterTypes = message.parameterTypes.map((e) =>
-        e ? Type.toJSON(e) : undefined
-      );
+      obj.parameterTypes = message.parameterTypes.map((e) => e ? Type.toJSON(e) : undefined);
     } else {
       obj.parameterTypes = [];
     }
@@ -735,10 +645,7 @@ export const Decl = {
       declKind: isSet(object.ident)
         ? { $case: "ident", ident: Decl_IdentDecl.fromJSON(object.ident) }
         : isSet(object.function)
-        ? {
-            $case: "function",
-            function: Decl_FunctionDecl.fromJSON(object.function),
-          }
+        ? { $case: "function", function: Decl_FunctionDecl.fromJSON(object.function) }
         : undefined,
     };
   },
@@ -747,13 +654,9 @@ export const Decl = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.declKind?.$case === "ident" &&
-      (obj.ident = message.declKind?.ident
-        ? Decl_IdentDecl.toJSON(message.declKind?.ident)
-        : undefined);
+      (obj.ident = message.declKind?.ident ? Decl_IdentDecl.toJSON(message.declKind?.ident) : undefined);
     message.declKind?.$case === "function" &&
-      (obj.function = message.declKind?.function
-        ? Decl_FunctionDecl.toJSON(message.declKind?.function)
-        : undefined);
+      (obj.function = message.declKind?.function ? Decl_FunctionDecl.toJSON(message.declKind?.function) : undefined);
     return obj;
   },
 };
@@ -773,10 +676,8 @@ export const Decl_IdentDecl = {
 
   toJSON(message: Decl_IdentDecl): unknown {
     const obj: any = {};
-    message.type !== undefined &&
-      (obj.type = message.type ? Type.toJSON(message.type) : undefined);
-    message.value !== undefined &&
-      (obj.value = message.value ? Constant.toJSON(message.value) : undefined);
+    message.type !== undefined && (obj.type = message.type ? Type.toJSON(message.type) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Constant.toJSON(message.value) : undefined);
     message.doc !== undefined && (obj.doc = message.doc);
     return obj;
   },
@@ -790,9 +691,7 @@ export const Decl_FunctionDecl = {
   fromJSON(object: any): Decl_FunctionDecl {
     return {
       overloads: Array.isArray(object?.overloads)
-        ? object.overloads.map((e: any) =>
-            Decl_FunctionDecl_Overload.fromJSON(e)
-          )
+        ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromJSON(e))
         : [],
     };
   },
@@ -800,9 +699,7 @@ export const Decl_FunctionDecl = {
   toJSON(message: Decl_FunctionDecl): unknown {
     const obj: any = {};
     if (message.overloads) {
-      obj.overloads = message.overloads.map((e) =>
-        e ? Decl_FunctionDecl_Overload.toJSON(e) : undefined
-      );
+      obj.overloads = message.overloads.map((e) => e ? Decl_FunctionDecl_Overload.toJSON(e) : undefined);
     } else {
       obj.overloads = [];
     }
@@ -811,32 +708,17 @@ export const Decl_FunctionDecl = {
 };
 
 function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
-  return {
-    overloadId: "",
-    params: [],
-    typeParams: [],
-    resultType: undefined,
-    isInstanceFunction: false,
-    doc: "",
-  };
+  return { overloadId: "", params: [], typeParams: [], resultType: undefined, isInstanceFunction: false, doc: "" };
 }
 
 export const Decl_FunctionDecl_Overload = {
   fromJSON(object: any): Decl_FunctionDecl_Overload {
     return {
       overloadId: isSet(object.overloadId) ? String(object.overloadId) : "",
-      params: Array.isArray(object?.params)
-        ? object.params.map((e: any) => Type.fromJSON(e))
-        : [],
-      typeParams: Array.isArray(object?.typeParams)
-        ? object.typeParams.map((e: any) => String(e))
-        : [],
-      resultType: isSet(object.resultType)
-        ? Type.fromJSON(object.resultType)
-        : undefined,
-      isInstanceFunction: isSet(object.isInstanceFunction)
-        ? Boolean(object.isInstanceFunction)
-        : false,
+      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromJSON(e)) : [],
+      typeParams: Array.isArray(object?.typeParams) ? object.typeParams.map((e: any) => String(e)) : [],
+      resultType: isSet(object.resultType) ? Type.fromJSON(object.resultType) : undefined,
+      isInstanceFunction: isSet(object.isInstanceFunction) ? Boolean(object.isInstanceFunction) : false,
       doc: isSet(object.doc) ? String(object.doc) : "",
     };
   },
@@ -845,7 +727,7 @@ export const Decl_FunctionDecl_Overload = {
     const obj: any = {};
     message.overloadId !== undefined && (obj.overloadId = message.overloadId);
     if (message.params) {
-      obj.params = message.params.map((e) => (e ? Type.toJSON(e) : undefined));
+      obj.params = message.params.map((e) => e ? Type.toJSON(e) : undefined);
     } else {
       obj.params = [];
     }
@@ -855,11 +737,8 @@ export const Decl_FunctionDecl_Overload = {
       obj.typeParams = [];
     }
     message.resultType !== undefined &&
-      (obj.resultType = message.resultType
-        ? Type.toJSON(message.resultType)
-        : undefined);
-    message.isInstanceFunction !== undefined &&
-      (obj.isInstanceFunction = message.isInstanceFunction);
+      (obj.resultType = message.resultType ? Type.toJSON(message.resultType) : undefined);
+    message.isInstanceFunction !== undefined && (obj.isInstanceFunction = message.isInstanceFunction);
     message.doc !== undefined && (obj.doc = message.doc);
     return obj;
   },
@@ -873,9 +752,7 @@ export const Reference = {
   fromJSON(object: any): Reference {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      overloadId: Array.isArray(object?.overloadId)
-        ? object.overloadId.map((e: any) => String(e))
-        : [],
+      overloadId: Array.isArray(object?.overloadId) ? object.overloadId.map((e: any) => String(e)) : [],
       value: isSet(object.value) ? Constant.fromJSON(object.value) : undefined,
     };
   },
@@ -888,8 +765,7 @@ export const Reference = {
     } else {
       obj.overloadId = [];
     }
-    message.value !== undefined &&
-      (obj.value = message.value ? Constant.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Constant.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -898,10 +774,18 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
   throw "Unable to locate global object";
 })();
 

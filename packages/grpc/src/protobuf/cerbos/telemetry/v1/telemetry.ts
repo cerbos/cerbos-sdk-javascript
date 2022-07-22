@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import { Duration } from "../../../google/protobuf/duration";
 import _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 
 export const protobufPackage = "cerbos.telemetry.v1";
 
@@ -49,10 +49,10 @@ export interface ServerLaunch_Features_AdminApi {
 
 export interface ServerLaunch_Features_Storage {
   driver: string;
-  store?:
-    | { $case: "disk"; disk: ServerLaunch_Features_Storage_Disk }
-    | { $case: "git"; git: ServerLaunch_Features_Storage_Git }
-    | { $case: "blob"; blob: ServerLaunch_Features_Storage_Blob };
+  store?: { $case: "disk"; disk: ServerLaunch_Features_Storage_Disk } | {
+    $case: "git";
+    git: ServerLaunch_Features_Storage_Git;
+  } | { $case: "blob"; blob: ServerLaunch_Features_Storage_Blob };
 }
 
 export interface ServerLaunch_Features_Storage_Disk {
@@ -123,39 +123,22 @@ export interface Event_ApiActivity {
 }
 
 function createBaseServerLaunch(): ServerLaunch {
-  return {
-    version: "",
-    source: undefined,
-    features: undefined,
-    stats: undefined,
-  };
+  return { version: "", source: undefined, features: undefined, stats: undefined };
 }
 
 export const ServerLaunch = {
-  encode(
-    message: ServerLaunch,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== "") {
       writer.uint32(10).string(message.version);
     }
     if (message.source !== undefined) {
-      ServerLaunch_Source.encode(
-        message.source,
-        writer.uint32(18).fork()
-      ).ldelim();
+      ServerLaunch_Source.encode(message.source, writer.uint32(18).fork()).ldelim();
     }
     if (message.features !== undefined) {
-      ServerLaunch_Features.encode(
-        message.features,
-        writer.uint32(26).fork()
-      ).ldelim();
+      ServerLaunch_Features.encode(message.features, writer.uint32(26).fork()).ldelim();
     }
     if (message.stats !== undefined) {
-      ServerLaunch_Stats.encode(
-        message.stats,
-        writer.uint32(34).fork()
-      ).ldelim();
+      ServerLaunch_Stats.encode(message.stats, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -174,10 +157,7 @@ export const ServerLaunch = {
           message.source = ServerLaunch_Source.decode(reader, reader.uint32());
           break;
         case 3:
-          message.features = ServerLaunch_Features.decode(
-            reader,
-            reader.uint32()
-          );
+          message.features = ServerLaunch_Features.decode(reader, reader.uint32());
           break;
         case 4:
           message.stats = ServerLaunch_Stats.decode(reader, reader.uint32());
@@ -192,20 +172,11 @@ export const ServerLaunch = {
 };
 
 function createBaseServerLaunch_Cerbos(): ServerLaunch_Cerbos {
-  return {
-    version: "",
-    commit: "",
-    buildDate: "",
-    moduleVersion: "",
-    moduleChecksum: "",
-  };
+  return { version: "", commit: "", buildDate: "", moduleVersion: "", moduleChecksum: "" };
 }
 
 export const ServerLaunch_Cerbos = {
-  encode(
-    message: ServerLaunch_Cerbos,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Cerbos, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== "") {
       writer.uint32(10).string(message.version);
     }
@@ -260,15 +231,9 @@ function createBaseServerLaunch_Source(): ServerLaunch_Source {
 }
 
 export const ServerLaunch_Source = {
-  encode(
-    message: ServerLaunch_Source,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Source, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.cerbos !== undefined) {
-      ServerLaunch_Cerbos.encode(
-        message.cerbos,
-        writer.uint32(10).fork()
-      ).ldelim();
+      ServerLaunch_Cerbos.encode(message.cerbos, writer.uint32(10).fork()).ldelim();
     }
     if (message.os !== "") {
       writer.uint32(18).string(message.os);
@@ -311,50 +276,27 @@ export const ServerLaunch_Source = {
 };
 
 function createBaseServerLaunch_Features(): ServerLaunch_Features {
-  return {
-    audit: undefined,
-    schema: undefined,
-    adminApi: undefined,
-    storage: undefined,
-  };
+  return { audit: undefined, schema: undefined, adminApi: undefined, storage: undefined };
 }
 
 export const ServerLaunch_Features = {
-  encode(
-    message: ServerLaunch_Features,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Features, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.audit !== undefined) {
-      ServerLaunch_Features_Audit.encode(
-        message.audit,
-        writer.uint32(10).fork()
-      ).ldelim();
+      ServerLaunch_Features_Audit.encode(message.audit, writer.uint32(10).fork()).ldelim();
     }
     if (message.schema !== undefined) {
-      ServerLaunch_Features_Schema.encode(
-        message.schema,
-        writer.uint32(18).fork()
-      ).ldelim();
+      ServerLaunch_Features_Schema.encode(message.schema, writer.uint32(18).fork()).ldelim();
     }
     if (message.adminApi !== undefined) {
-      ServerLaunch_Features_AdminApi.encode(
-        message.adminApi,
-        writer.uint32(26).fork()
-      ).ldelim();
+      ServerLaunch_Features_AdminApi.encode(message.adminApi, writer.uint32(26).fork()).ldelim();
     }
     if (message.storage !== undefined) {
-      ServerLaunch_Features_Storage.encode(
-        message.storage,
-        writer.uint32(34).fork()
-      ).ldelim();
+      ServerLaunch_Features_Storage.encode(message.storage, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Features {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features();
@@ -362,28 +304,16 @@ export const ServerLaunch_Features = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.audit = ServerLaunch_Features_Audit.decode(
-            reader,
-            reader.uint32()
-          );
+          message.audit = ServerLaunch_Features_Audit.decode(reader, reader.uint32());
           break;
         case 2:
-          message.schema = ServerLaunch_Features_Schema.decode(
-            reader,
-            reader.uint32()
-          );
+          message.schema = ServerLaunch_Features_Schema.decode(reader, reader.uint32());
           break;
         case 3:
-          message.adminApi = ServerLaunch_Features_AdminApi.decode(
-            reader,
-            reader.uint32()
-          );
+          message.adminApi = ServerLaunch_Features_AdminApi.decode(reader, reader.uint32());
           break;
         case 4:
-          message.storage = ServerLaunch_Features_Storage.decode(
-            reader,
-            reader.uint32()
-          );
+          message.storage = ServerLaunch_Features_Storage.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -399,10 +329,7 @@ function createBaseServerLaunch_Features_Audit(): ServerLaunch_Features_Audit {
 }
 
 export const ServerLaunch_Features_Audit = {
-  encode(
-    message: ServerLaunch_Features_Audit,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Features_Audit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
@@ -412,10 +339,7 @@ export const ServerLaunch_Features_Audit = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Features_Audit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Audit {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Audit();
@@ -442,20 +366,14 @@ function createBaseServerLaunch_Features_Schema(): ServerLaunch_Features_Schema 
 }
 
 export const ServerLaunch_Features_Schema = {
-  encode(
-    message: ServerLaunch_Features_Schema,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Features_Schema, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.enforcement !== "") {
       writer.uint32(10).string(message.enforcement);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Features_Schema {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Schema {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Schema();
@@ -479,20 +397,14 @@ function createBaseServerLaunch_Features_AdminApi(): ServerLaunch_Features_Admin
 }
 
 export const ServerLaunch_Features_AdminApi = {
-  encode(
-    message: ServerLaunch_Features_AdminApi,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Features_AdminApi, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Features_AdminApi {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_AdminApi {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_AdminApi();
@@ -516,38 +428,23 @@ function createBaseServerLaunch_Features_Storage(): ServerLaunch_Features_Storag
 }
 
 export const ServerLaunch_Features_Storage = {
-  encode(
-    message: ServerLaunch_Features_Storage,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Features_Storage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.driver !== "") {
       writer.uint32(10).string(message.driver);
     }
     if (message.store?.$case === "disk") {
-      ServerLaunch_Features_Storage_Disk.encode(
-        message.store.disk,
-        writer.uint32(18).fork()
-      ).ldelim();
+      ServerLaunch_Features_Storage_Disk.encode(message.store.disk, writer.uint32(18).fork()).ldelim();
     }
     if (message.store?.$case === "git") {
-      ServerLaunch_Features_Storage_Git.encode(
-        message.store.git,
-        writer.uint32(26).fork()
-      ).ldelim();
+      ServerLaunch_Features_Storage_Git.encode(message.store.git, writer.uint32(26).fork()).ldelim();
     }
     if (message.store?.$case === "blob") {
-      ServerLaunch_Features_Storage_Blob.encode(
-        message.store.blob,
-        writer.uint32(34).fork()
-      ).ldelim();
+      ServerLaunch_Features_Storage_Blob.encode(message.store.blob, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Features_Storage {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Storage {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Storage();
@@ -558,31 +455,13 @@ export const ServerLaunch_Features_Storage = {
           message.driver = reader.string();
           break;
         case 2:
-          message.store = {
-            $case: "disk",
-            disk: ServerLaunch_Features_Storage_Disk.decode(
-              reader,
-              reader.uint32()
-            ),
-          };
+          message.store = { $case: "disk", disk: ServerLaunch_Features_Storage_Disk.decode(reader, reader.uint32()) };
           break;
         case 3:
-          message.store = {
-            $case: "git",
-            git: ServerLaunch_Features_Storage_Git.decode(
-              reader,
-              reader.uint32()
-            ),
-          };
+          message.store = { $case: "git", git: ServerLaunch_Features_Storage_Git.decode(reader, reader.uint32()) };
           break;
         case 4:
-          message.store = {
-            $case: "blob",
-            blob: ServerLaunch_Features_Storage_Blob.decode(
-              reader,
-              reader.uint32()
-            ),
-          };
+          message.store = { $case: "blob", blob: ServerLaunch_Features_Storage_Blob.decode(reader, reader.uint32()) };
           break;
         default:
           reader.skipType(tag & 7);
@@ -598,20 +477,14 @@ function createBaseServerLaunch_Features_Storage_Disk(): ServerLaunch_Features_S
 }
 
 export const ServerLaunch_Features_Storage_Disk = {
-  encode(
-    message: ServerLaunch_Features_Storage_Disk,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Features_Storage_Disk, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.watch === true) {
       writer.uint32(8).bool(message.watch);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Features_Storage_Disk {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Storage_Disk {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Storage_Disk();
@@ -635,10 +508,7 @@ function createBaseServerLaunch_Features_Storage_Git(): ServerLaunch_Features_St
 }
 
 export const ServerLaunch_Features_Storage_Git = {
-  encode(
-    message: ServerLaunch_Features_Storage_Git,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Features_Storage_Git, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.protocol !== "") {
       writer.uint32(10).string(message.protocol);
     }
@@ -651,10 +521,7 @@ export const ServerLaunch_Features_Storage_Git = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Features_Storage_Git {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Storage_Git {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Storage_Git();
@@ -684,10 +551,7 @@ function createBaseServerLaunch_Features_Storage_Blob(): ServerLaunch_Features_S
 }
 
 export const ServerLaunch_Features_Storage_Blob = {
-  encode(
-    message: ServerLaunch_Features_Storage_Blob,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Features_Storage_Blob, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.provider !== "") {
       writer.uint32(10).string(message.provider);
     }
@@ -697,10 +561,7 @@ export const ServerLaunch_Features_Storage_Blob = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Features_Storage_Blob {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Storage_Blob {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Storage_Blob();
@@ -727,21 +588,12 @@ function createBaseServerLaunch_Stats(): ServerLaunch_Stats {
 }
 
 export const ServerLaunch_Stats = {
-  encode(
-    message: ServerLaunch_Stats,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Stats, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.policy !== undefined) {
-      ServerLaunch_Stats_Policy.encode(
-        message.policy,
-        writer.uint32(10).fork()
-      ).ldelim();
+      ServerLaunch_Stats_Policy.encode(message.policy, writer.uint32(10).fork()).ldelim();
     }
     if (message.schema !== undefined) {
-      ServerLaunch_Stats_Schema.encode(
-        message.schema,
-        writer.uint32(18).fork()
-      ).ldelim();
+      ServerLaunch_Stats_Schema.encode(message.schema, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -754,16 +606,10 @@ export const ServerLaunch_Stats = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.policy = ServerLaunch_Stats_Policy.decode(
-            reader,
-            reader.uint32()
-          );
+          message.policy = ServerLaunch_Stats_Policy.decode(reader, reader.uint32());
           break;
         case 2:
-          message.schema = ServerLaunch_Stats_Schema.decode(
-            reader,
-            reader.uint32()
-          );
+          message.schema = ServerLaunch_Stats_Schema.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -779,35 +625,21 @@ function createBaseServerLaunch_Stats_Policy(): ServerLaunch_Stats_Policy {
 }
 
 export const ServerLaunch_Stats_Policy = {
-  encode(
-    message: ServerLaunch_Stats_Policy,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Stats_Policy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.count).forEach(([key, value]) => {
-      ServerLaunch_Stats_Policy_CountEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork()
-      ).ldelim();
+      ServerLaunch_Stats_Policy_CountEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
     });
     Object.entries(message.avgRuleCount).forEach(([key, value]) => {
-      ServerLaunch_Stats_Policy_AvgRuleCountEntry.encode(
-        { key: key as any, value },
-        writer.uint32(18).fork()
-      ).ldelim();
+      ServerLaunch_Stats_Policy_AvgRuleCountEntry.encode({ key: key as any, value }, writer.uint32(18).fork()).ldelim();
     });
     Object.entries(message.avgConditionCount).forEach(([key, value]) => {
-      ServerLaunch_Stats_Policy_AvgConditionCountEntry.encode(
-        { key: key as any, value },
-        writer.uint32(26).fork()
-      ).ldelim();
+      ServerLaunch_Stats_Policy_AvgConditionCountEntry.encode({ key: key as any, value }, writer.uint32(26).fork())
+        .ldelim();
     });
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Stats_Policy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Stats_Policy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Stats_Policy();
@@ -815,29 +647,19 @@ export const ServerLaunch_Stats_Policy = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          const entry1 = ServerLaunch_Stats_Policy_CountEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry1 = ServerLaunch_Stats_Policy_CountEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.count[entry1.key] = entry1.value;
           }
           break;
         case 2:
-          const entry2 = ServerLaunch_Stats_Policy_AvgRuleCountEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry2 = ServerLaunch_Stats_Policy_AvgRuleCountEntry.decode(reader, reader.uint32());
           if (entry2.value !== undefined) {
             message.avgRuleCount[entry2.key] = entry2.value;
           }
           break;
         case 3:
-          const entry3 =
-            ServerLaunch_Stats_Policy_AvgConditionCountEntry.decode(
-              reader,
-              reader.uint32()
-            );
+          const entry3 = ServerLaunch_Stats_Policy_AvgConditionCountEntry.decode(reader, reader.uint32());
           if (entry3.value !== undefined) {
             message.avgConditionCount[entry3.key] = entry3.value;
           }
@@ -856,10 +678,7 @@ function createBaseServerLaunch_Stats_Policy_CountEntry(): ServerLaunch_Stats_Po
 }
 
 export const ServerLaunch_Stats_Policy_CountEntry = {
-  encode(
-    message: ServerLaunch_Stats_Policy_CountEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Stats_Policy_CountEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -869,10 +688,7 @@ export const ServerLaunch_Stats_Policy_CountEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Stats_Policy_CountEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Stats_Policy_CountEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Stats_Policy_CountEntry();
@@ -899,10 +715,7 @@ function createBaseServerLaunch_Stats_Policy_AvgRuleCountEntry(): ServerLaunch_S
 }
 
 export const ServerLaunch_Stats_Policy_AvgRuleCountEntry = {
-  encode(
-    message: ServerLaunch_Stats_Policy_AvgRuleCountEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Stats_Policy_AvgRuleCountEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -912,10 +725,7 @@ export const ServerLaunch_Stats_Policy_AvgRuleCountEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Stats_Policy_AvgRuleCountEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Stats_Policy_AvgRuleCountEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Stats_Policy_AvgRuleCountEntry();
@@ -944,7 +754,7 @@ function createBaseServerLaunch_Stats_Policy_AvgConditionCountEntry(): ServerLau
 export const ServerLaunch_Stats_Policy_AvgConditionCountEntry = {
   encode(
     message: ServerLaunch_Stats_Policy_AvgConditionCountEntry,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -955,14 +765,10 @@ export const ServerLaunch_Stats_Policy_AvgConditionCountEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Stats_Policy_AvgConditionCountEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Stats_Policy_AvgConditionCountEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message =
-      createBaseServerLaunch_Stats_Policy_AvgConditionCountEntry();
+    const message = createBaseServerLaunch_Stats_Policy_AvgConditionCountEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -986,20 +792,14 @@ function createBaseServerLaunch_Stats_Schema(): ServerLaunch_Stats_Schema {
 }
 
 export const ServerLaunch_Stats_Schema = {
-  encode(
-    message: ServerLaunch_Stats_Schema,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerLaunch_Stats_Schema, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.count !== 0) {
       writer.uint32(8).uint32(message.count);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServerLaunch_Stats_Schema {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Stats_Schema {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Stats_Schema();
@@ -1023,10 +823,7 @@ function createBaseServerStop(): ServerStop {
 }
 
 export const ServerStop = {
-  encode(
-    message: ServerStop,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServerStop, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== "") {
       writer.uint32(10).string(message.version);
     }
@@ -1071,10 +868,7 @@ function createBaseEvent(): Event {
 export const Event = {
   encode(message: Event, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data?.$case === "apiActivity") {
-      Event_ApiActivity.encode(
-        message.data.apiActivity,
-        writer.uint32(10).fork()
-      ).ldelim();
+      Event_ApiActivity.encode(message.data.apiActivity, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -1087,10 +881,7 @@ export const Event = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.data = {
-            $case: "apiActivity",
-            apiActivity: Event_ApiActivity.decode(reader, reader.uint32()),
-          };
+          message.data = { $case: "apiActivity", apiActivity: Event_ApiActivity.decode(reader, reader.uint32()) };
           break;
         default:
           reader.skipType(tag & 7);
@@ -1106,10 +897,7 @@ function createBaseEvent_CountStat(): Event_CountStat {
 }
 
 export const Event_CountStat = {
-  encode(
-    message: Event_CountStat,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Event_CountStat, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1146,10 +934,7 @@ function createBaseEvent_ApiActivity(): Event_ApiActivity {
 }
 
 export const Event_ApiActivity = {
-  encode(
-    message: Event_ApiActivity,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Event_ApiActivity, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== "") {
       writer.uint32(10).string(message.version);
     }
@@ -1179,14 +964,10 @@ export const Event_ApiActivity = {
           message.uptime = Duration.decode(reader, reader.uint32());
           break;
         case 3:
-          message.methodCalls.push(
-            Event_CountStat.decode(reader, reader.uint32())
-          );
+          message.methodCalls.push(Event_CountStat.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.userAgents.push(
-            Event_CountStat.decode(reader, reader.uint32())
-          );
+          message.userAgents.push(Event_CountStat.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);

@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export const protobufPackage = "cerbos.schema.v1";
 
 export interface ValidationError {
@@ -13,9 +14,7 @@ export enum ValidationError_Source {
   SOURCE_RESOURCE = 2,
 }
 
-export function validationError_SourceFromJSON(
-  object: any
-): ValidationError_Source {
+export function validationError_SourceFromJSON(object: any): ValidationError_Source {
   switch (object) {
     case 0:
     case "SOURCE_UNSPECIFIED":
@@ -27,15 +26,11 @@ export function validationError_SourceFromJSON(
     case "SOURCE_RESOURCE":
       return ValidationError_Source.SOURCE_RESOURCE;
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum ValidationError_Source"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum ValidationError_Source");
   }
 }
 
-export function validationError_SourceToJSON(
-  object: ValidationError_Source
-): string {
+export function validationError_SourceToJSON(object: ValidationError_Source): string {
   switch (object) {
     case ValidationError_Source.SOURCE_UNSPECIFIED:
       return "SOURCE_UNSPECIFIED";
@@ -44,9 +39,7 @@ export function validationError_SourceToJSON(
     case ValidationError_Source.SOURCE_RESOURCE:
       return "SOURCE_RESOURCE";
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum ValidationError_Source"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum ValidationError_Source");
   }
 }
 
@@ -64,9 +57,7 @@ export const ValidationError = {
     return {
       path: isSet(object.path) ? String(object.path) : "",
       message: isSet(object.message) ? String(object.message) : "",
-      source: isSet(object.source)
-        ? validationError_SourceFromJSON(object.source)
-        : 0,
+      source: isSet(object.source) ? validationError_SourceFromJSON(object.source) : 0,
     };
   },
 
@@ -74,8 +65,7 @@ export const ValidationError = {
     const obj: any = {};
     message.path !== undefined && (obj.path = message.path);
     message.message !== undefined && (obj.message = message.message);
-    message.source !== undefined &&
-      (obj.source = validationError_SourceToJSON(message.source));
+    message.source !== undefined && (obj.source = validationError_SourceToJSON(message.source));
     return obj;
   },
 };
@@ -88,9 +78,7 @@ export const Schema = {
   fromJSON(object: any): Schema {
     return {
       id: isSet(object.id) ? String(object.id) : "",
-      definition: isSet(object.definition)
-        ? bytesFromBase64(object.definition)
-        : new Uint8Array(),
+      definition: isSet(object.definition) ? bytesFromBase64(object.definition) : new Uint8Array(),
     };
   },
 
@@ -98,9 +86,7 @@ export const Schema = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.definition !== undefined &&
-      (obj.definition = base64FromBytes(
-        message.definition !== undefined ? message.definition : new Uint8Array()
-      ));
+      (obj.definition = base64FromBytes(message.definition !== undefined ? message.definition : new Uint8Array()));
     return obj;
   },
 };
@@ -109,10 +95,18 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
   throw "Unable to locate global object";
 })();
 

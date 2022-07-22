@@ -1,10 +1,10 @@
 /* eslint-disable */
-import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
-import { PlanResourcesFilter } from "../../engine/v1/engine";
-import { ValidationError, Schema } from "../../schema/v1/schema";
-import { TestResults, Policy } from "../../policy/v1/policy";
 import { Empty } from "../../../google/protobuf/empty";
 import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
+import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
+import { PlanResourcesFilter } from "../../engine/v1/engine";
+import { Policy, TestResults } from "../../policy/v1/policy";
+import { Schema, ValidationError } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.response.v1";
 
@@ -26,9 +26,7 @@ export interface PlanResourcesResponse_Meta {
 /** Deprecated. See CheckResourcesResponse. */
 export interface CheckResourceSetResponse {
   requestId: string;
-  resourceInstances: {
-    [key: string]: CheckResourceSetResponse_ActionEffectMap;
-  };
+  resourceInstances: { [key: string]: CheckResourceSetResponse_ActionEffectMap };
   meta: CheckResourceSetResponse_Meta | undefined;
 }
 
@@ -43,9 +41,7 @@ export interface CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
 }
 
 export interface CheckResourceSetResponse_Meta {
-  resourceInstances: {
-    [key: string]: CheckResourceSetResponse_Meta_ActionMeta;
-  };
+  resourceInstances: { [key: string]: CheckResourceSetResponse_Meta_ActionMeta };
 }
 
 export interface CheckResourceSetResponse_Meta_EffectMeta {
@@ -110,9 +106,7 @@ export interface CheckResourcesResponse_ResultEntry_Resource {
 }
 
 export interface CheckResourcesResponse_ResultEntry_Meta {
-  actions: {
-    [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta;
-  };
+  actions: { [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta };
   effectiveDerivedRoles: string[];
 }
 
@@ -142,16 +136,15 @@ export interface PlaygroundFailure_Error {
 
 export interface PlaygroundValidateResponse {
   playgroundId: string;
-  outcome?:
-    | { $case: "failure"; failure: PlaygroundFailure }
-    | { $case: "success"; success: Empty };
+  outcome?: { $case: "failure"; failure: PlaygroundFailure } | { $case: "success"; success: Empty };
 }
 
 export interface PlaygroundTestResponse {
   playgroundId: string;
-  outcome?:
-    | { $case: "failure"; failure: PlaygroundFailure }
-    | { $case: "success"; success: PlaygroundTestResponse_TestResults };
+  outcome?: { $case: "failure"; failure: PlaygroundFailure } | {
+    $case: "success";
+    success: PlaygroundTestResponse_TestResults;
+  };
 }
 
 export interface PlaygroundTestResponse_TestResults {
@@ -160,9 +153,10 @@ export interface PlaygroundTestResponse_TestResults {
 
 export interface PlaygroundEvaluateResponse {
   playgroundId: string;
-  outcome?:
-    | { $case: "failure"; failure: PlaygroundFailure }
-    | { $case: "success"; success: PlaygroundEvaluateResponse_EvalResultList };
+  outcome?: { $case: "failure"; failure: PlaygroundFailure } | {
+    $case: "success";
+    success: PlaygroundEvaluateResponse_EvalResultList;
+  };
 }
 
 export interface PlaygroundEvaluateResponse_EvalResult {
@@ -182,10 +176,7 @@ export interface PlaygroundProxyResponse {
   outcome?:
     | { $case: "failure"; failure: PlaygroundFailure }
     | { $case: "checkResourceSet"; checkResourceSet: CheckResourceSetResponse }
-    | {
-        $case: "checkResourceBatch";
-        checkResourceBatch: CheckResourceBatchResponse;
-      }
+    | { $case: "checkResourceBatch"; checkResourceBatch: CheckResourceBatchResponse }
     | { $case: "planResources"; planResources: PlanResourcesResponse }
     | { $case: "checkResources"; checkResources: CheckResourcesResponse };
 }
@@ -195,9 +186,10 @@ export interface AddOrUpdatePolicyResponse {
 }
 
 export interface ListAuditLogEntriesResponse {
-  entry?:
-    | { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry }
-    | { $case: "decisionLogEntry"; decisionLogEntry: DecisionLogEntry };
+  entry?: { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry } | {
+    $case: "decisionLogEntry";
+    decisionLogEntry: DecisionLogEntry;
+  };
 }
 
 export interface ServerInfoResponse {
@@ -214,7 +206,8 @@ export interface GetPolicyResponse {
   policies: Policy[];
 }
 
-export interface AddOrUpdateSchemaResponse {}
+export interface AddOrUpdateSchemaResponse {
+}
 
 export interface ListSchemasResponse {
   schemaIds: string[];
@@ -224,9 +217,11 @@ export interface GetSchemaResponse {
   schemas: Schema[];
 }
 
-export interface DeleteSchemaResponse {}
+export interface DeleteSchemaResponse {
+}
 
-export interface ReloadStoreResponse {}
+export interface ReloadStoreResponse {
+}
 
 function createBasePlanResourcesResponse(): PlanResourcesResponse {
   return {
@@ -245,18 +240,10 @@ export const PlanResourcesResponse = {
     return {
       requestId: isSet(object.requestId) ? String(object.requestId) : "",
       action: isSet(object.action) ? String(object.action) : "",
-      resourceKind: isSet(object.resourceKind)
-        ? String(object.resourceKind)
-        : "",
-      policyVersion: isSet(object.policyVersion)
-        ? String(object.policyVersion)
-        : "",
-      filter: isSet(object.filter)
-        ? PlanResourcesFilter.fromJSON(object.filter)
-        : undefined,
-      meta: isSet(object.meta)
-        ? PlanResourcesResponse_Meta.fromJSON(object.meta)
-        : undefined,
+      resourceKind: isSet(object.resourceKind) ? String(object.resourceKind) : "",
+      policyVersion: isSet(object.policyVersion) ? String(object.policyVersion) : "",
+      filter: isSet(object.filter) ? PlanResourcesFilter.fromJSON(object.filter) : undefined,
+      meta: isSet(object.meta) ? PlanResourcesResponse_Meta.fromJSON(object.meta) : undefined,
       validationErrors: Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
@@ -267,22 +254,14 @@ export const PlanResourcesResponse = {
     const obj: any = {};
     message.requestId !== undefined && (obj.requestId = message.requestId);
     message.action !== undefined && (obj.action = message.action);
-    message.resourceKind !== undefined &&
-      (obj.resourceKind = message.resourceKind);
-    message.policyVersion !== undefined &&
-      (obj.policyVersion = message.policyVersion);
+    message.resourceKind !== undefined && (obj.resourceKind = message.resourceKind);
+    message.policyVersion !== undefined && (obj.policyVersion = message.policyVersion);
     message.filter !== undefined &&
-      (obj.filter = message.filter
-        ? PlanResourcesFilter.toJSON(message.filter)
-        : undefined);
+      (obj.filter = message.filter ? PlanResourcesFilter.toJSON(message.filter) : undefined);
     message.meta !== undefined &&
-      (obj.meta = message.meta
-        ? PlanResourcesResponse_Meta.toJSON(message.meta)
-        : undefined);
+      (obj.meta = message.meta ? PlanResourcesResponse_Meta.toJSON(message.meta) : undefined);
     if (message.validationErrors) {
-      obj.validationErrors = message.validationErrors.map((e) =>
-        e ? ValidationError.toJSON(e) : undefined
-      );
+      obj.validationErrors = message.validationErrors.map((e) => e ? ValidationError.toJSON(e) : undefined);
     } else {
       obj.validationErrors = [];
     }
@@ -298,18 +277,14 @@ export const PlanResourcesResponse_Meta = {
   fromJSON(object: any): PlanResourcesResponse_Meta {
     return {
       filterDebug: isSet(object.filterDebug) ? String(object.filterDebug) : "",
-      matchedScope: isSet(object.matchedScope)
-        ? String(object.matchedScope)
-        : "",
+      matchedScope: isSet(object.matchedScope) ? String(object.matchedScope) : "",
     };
   },
 
   toJSON(message: PlanResourcesResponse_Meta): unknown {
     const obj: any = {};
-    message.filterDebug !== undefined &&
-      (obj.filterDebug = message.filterDebug);
-    message.matchedScope !== undefined &&
-      (obj.matchedScope = message.matchedScope);
+    message.filterDebug !== undefined && (obj.filterDebug = message.filterDebug);
+    message.matchedScope !== undefined && (obj.matchedScope = message.matchedScope);
     return obj;
   },
 };
@@ -323,16 +298,15 @@ export const CheckResourceSetResponse = {
     return {
       requestId: isSet(object.requestId) ? String(object.requestId) : "",
       resourceInstances: isObject(object.resourceInstances)
-        ? Object.entries(object.resourceInstances).reduce<{
-            [key: string]: CheckResourceSetResponse_ActionEffectMap;
-          }>((acc, [key, value]) => {
+        ? Object.entries(object.resourceInstances).reduce<{ [key: string]: CheckResourceSetResponse_ActionEffectMap }>(
+          (acc, [key, value]) => {
             acc[key] = CheckResourceSetResponse_ActionEffectMap.fromJSON(value);
             return acc;
-          }, {})
+          },
+          {},
+        )
         : {},
-      meta: isSet(object.meta)
-        ? CheckResourceSetResponse_Meta.fromJSON(object.meta)
-        : undefined,
+      meta: isSet(object.meta) ? CheckResourceSetResponse_Meta.fromJSON(object.meta) : undefined,
     };
   },
 
@@ -342,14 +316,11 @@ export const CheckResourceSetResponse = {
     obj.resourceInstances = {};
     if (message.resourceInstances) {
       Object.entries(message.resourceInstances).forEach(([k, v]) => {
-        obj.resourceInstances[k] =
-          CheckResourceSetResponse_ActionEffectMap.toJSON(v);
+        obj.resourceInstances[k] = CheckResourceSetResponse_ActionEffectMap.toJSON(v);
       });
     }
     message.meta !== undefined &&
-      (obj.meta = message.meta
-        ? CheckResourceSetResponse_Meta.toJSON(message.meta)
-        : undefined);
+      (obj.meta = message.meta ? CheckResourceSetResponse_Meta.toJSON(message.meta) : undefined);
     return obj;
   },
 };
@@ -362,13 +333,10 @@ export const CheckResourceSetResponse_ActionEffectMap = {
   fromJSON(object: any): CheckResourceSetResponse_ActionEffectMap {
     return {
       actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-            (acc, [key, value]) => {
-              acc[key] = effectFromJSON(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>((acc, [key, value]) => {
+          acc[key] = effectFromJSON(value);
+          return acc;
+        }, {})
         : {},
       validationErrors: Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
@@ -385,9 +353,7 @@ export const CheckResourceSetResponse_ActionEffectMap = {
       });
     }
     if (message.validationErrors) {
-      obj.validationErrors = message.validationErrors.map((e) =>
-        e ? ValidationError.toJSON(e) : undefined
-      );
+      obj.validationErrors = message.validationErrors.map((e) => e ? ValidationError.toJSON(e) : undefined);
     } else {
       obj.validationErrors = [];
     }
@@ -407,9 +373,7 @@ export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry = {
     };
   },
 
-  toJSON(
-    message: CheckResourceSetResponse_ActionEffectMap_ActionsEntry
-  ): unknown {
+  toJSON(message: CheckResourceSetResponse_ActionEffectMap_ActionsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = effectToJSON(message.value));
@@ -425,12 +389,13 @@ export const CheckResourceSetResponse_Meta = {
   fromJSON(object: any): CheckResourceSetResponse_Meta {
     return {
       resourceInstances: isObject(object.resourceInstances)
-        ? Object.entries(object.resourceInstances).reduce<{
-            [key: string]: CheckResourceSetResponse_Meta_ActionMeta;
-          }>((acc, [key, value]) => {
+        ? Object.entries(object.resourceInstances).reduce<{ [key: string]: CheckResourceSetResponse_Meta_ActionMeta }>(
+          (acc, [key, value]) => {
             acc[key] = CheckResourceSetResponse_Meta_ActionMeta.fromJSON(value);
             return acc;
-          }, {})
+          },
+          {},
+        )
         : {},
     };
   },
@@ -440,8 +405,7 @@ export const CheckResourceSetResponse_Meta = {
     obj.resourceInstances = {};
     if (message.resourceInstances) {
       Object.entries(message.resourceInstances).forEach(([k, v]) => {
-        obj.resourceInstances[k] =
-          CheckResourceSetResponse_Meta_ActionMeta.toJSON(v);
+        obj.resourceInstances[k] = CheckResourceSetResponse_Meta_ActionMeta.toJSON(v);
       });
     }
     return obj;
@@ -455,21 +419,15 @@ function createBaseCheckResourceSetResponse_Meta_EffectMeta(): CheckResourceSetR
 export const CheckResourceSetResponse_Meta_EffectMeta = {
   fromJSON(object: any): CheckResourceSetResponse_Meta_EffectMeta {
     return {
-      matchedPolicy: isSet(object.matchedPolicy)
-        ? String(object.matchedPolicy)
-        : "",
-      matchedScope: isSet(object.matchedScope)
-        ? String(object.matchedScope)
-        : "",
+      matchedPolicy: isSet(object.matchedPolicy) ? String(object.matchedPolicy) : "",
+      matchedScope: isSet(object.matchedScope) ? String(object.matchedScope) : "",
     };
   },
 
   toJSON(message: CheckResourceSetResponse_Meta_EffectMeta): unknown {
     const obj: any = {};
-    message.matchedPolicy !== undefined &&
-      (obj.matchedPolicy = message.matchedPolicy);
-    message.matchedScope !== undefined &&
-      (obj.matchedScope = message.matchedScope);
+    message.matchedPolicy !== undefined && (obj.matchedPolicy = message.matchedPolicy);
+    message.matchedScope !== undefined && (obj.matchedScope = message.matchedScope);
     return obj;
   },
 };
@@ -482,12 +440,13 @@ export const CheckResourceSetResponse_Meta_ActionMeta = {
   fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta {
     return {
       actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{
-            [key: string]: CheckResourceSetResponse_Meta_EffectMeta;
-          }>((acc, [key, value]) => {
+        ? Object.entries(object.actions).reduce<{ [key: string]: CheckResourceSetResponse_Meta_EffectMeta }>(
+          (acc, [key, value]) => {
             acc[key] = CheckResourceSetResponse_Meta_EffectMeta.fromJSON(value);
             return acc;
-          }, {})
+          },
+          {},
+        )
         : {},
       effectiveDerivedRoles: Array.isArray(object?.effectiveDerivedRoles)
         ? object.effectiveDerivedRoles.map((e: any) => String(e))
@@ -520,21 +479,15 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
   fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckResourceSetResponse_Meta_EffectMeta.fromJSON(object.value)
-        : undefined,
+      value: isSet(object.value) ? CheckResourceSetResponse_Meta_EffectMeta.fromJSON(object.value) : undefined,
     };
   },
 
-  toJSON(
-    message: CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry
-  ): unknown {
+  toJSON(message: CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined &&
-      (obj.value = message.value
-        ? CheckResourceSetResponse_Meta_EffectMeta.toJSON(message.value)
-        : undefined);
+      (obj.value = message.value ? CheckResourceSetResponse_Meta_EffectMeta.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -547,21 +500,15 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
   fromJSON(object: any): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckResourceSetResponse_Meta_ActionMeta.fromJSON(object.value)
-        : undefined,
+      value: isSet(object.value) ? CheckResourceSetResponse_Meta_ActionMeta.fromJSON(object.value) : undefined,
     };
   },
 
-  toJSON(
-    message: CheckResourceSetResponse_Meta_ResourceInstancesEntry
-  ): unknown {
+  toJSON(message: CheckResourceSetResponse_Meta_ResourceInstancesEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined &&
-      (obj.value = message.value
-        ? CheckResourceSetResponse_Meta_ActionMeta.toJSON(message.value)
-        : undefined);
+      (obj.value = message.value ? CheckResourceSetResponse_Meta_ActionMeta.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -574,9 +521,7 @@ export const CheckResourceSetResponse_ResourceInstancesEntry = {
   fromJSON(object: any): CheckResourceSetResponse_ResourceInstancesEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckResourceSetResponse_ActionEffectMap.fromJSON(object.value)
-        : undefined,
+      value: isSet(object.value) ? CheckResourceSetResponse_ActionEffectMap.fromJSON(object.value) : undefined,
     };
   },
 
@@ -584,9 +529,7 @@ export const CheckResourceSetResponse_ResourceInstancesEntry = {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined &&
-      (obj.value = message.value
-        ? CheckResourceSetResponse_ActionEffectMap.toJSON(message.value)
-        : undefined);
+      (obj.value = message.value ? CheckResourceSetResponse_ActionEffectMap.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -600,9 +543,7 @@ export const CheckResourceBatchResponse = {
     return {
       requestId: isSet(object.requestId) ? String(object.requestId) : "",
       results: Array.isArray(object?.results)
-        ? object.results.map((e: any) =>
-            CheckResourceBatchResponse_ActionEffectMap.fromJSON(e)
-          )
+        ? object.results.map((e: any) => CheckResourceBatchResponse_ActionEffectMap.fromJSON(e))
         : [],
     };
   },
@@ -611,9 +552,7 @@ export const CheckResourceBatchResponse = {
     const obj: any = {};
     message.requestId !== undefined && (obj.requestId = message.requestId);
     if (message.results) {
-      obj.results = message.results.map((e) =>
-        e ? CheckResourceBatchResponse_ActionEffectMap.toJSON(e) : undefined
-      );
+      obj.results = message.results.map((e) => e ? CheckResourceBatchResponse_ActionEffectMap.toJSON(e) : undefined);
     } else {
       obj.results = [];
     }
@@ -630,13 +569,10 @@ export const CheckResourceBatchResponse_ActionEffectMap = {
     return {
       resourceId: isSet(object.resourceId) ? String(object.resourceId) : "",
       actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-            (acc, [key, value]) => {
-              acc[key] = effectFromJSON(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>((acc, [key, value]) => {
+          acc[key] = effectFromJSON(value);
+          return acc;
+        }, {})
         : {},
       validationErrors: Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
@@ -654,9 +590,7 @@ export const CheckResourceBatchResponse_ActionEffectMap = {
       });
     }
     if (message.validationErrors) {
-      obj.validationErrors = message.validationErrors.map((e) =>
-        e ? ValidationError.toJSON(e) : undefined
-      );
+      obj.validationErrors = message.validationErrors.map((e) => e ? ValidationError.toJSON(e) : undefined);
     } else {
       obj.validationErrors = [];
     }
@@ -669,18 +603,14 @@ function createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry(): Ch
 }
 
 export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
-  fromJSON(
-    object: any
-  ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
+  fromJSON(object: any): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? effectFromJSON(object.value) : 0,
     };
   },
 
-  toJSON(
-    message: CheckResourceBatchResponse_ActionEffectMap_ActionsEntry
-  ): unknown {
+  toJSON(message: CheckResourceBatchResponse_ActionEffectMap_ActionsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = effectToJSON(message.value));
@@ -697,9 +627,7 @@ export const CheckResourcesResponse = {
     return {
       requestId: isSet(object.requestId) ? String(object.requestId) : "",
       results: Array.isArray(object?.results)
-        ? object.results.map((e: any) =>
-            CheckResourcesResponse_ResultEntry.fromJSON(e)
-          )
+        ? object.results.map((e: any) => CheckResourcesResponse_ResultEntry.fromJSON(e))
         : [],
     };
   },
@@ -708,9 +636,7 @@ export const CheckResourcesResponse = {
     const obj: any = {};
     message.requestId !== undefined && (obj.requestId = message.requestId);
     if (message.results) {
-      obj.results = message.results.map((e) =>
-        e ? CheckResourcesResponse_ResultEntry.toJSON(e) : undefined
-      );
+      obj.results = message.results.map((e) => e ? CheckResourcesResponse_ResultEntry.toJSON(e) : undefined);
     } else {
       obj.results = [];
     }
@@ -719,12 +645,7 @@ export const CheckResourcesResponse = {
 };
 
 function createBaseCheckResourcesResponse_ResultEntry(): CheckResourcesResponse_ResultEntry {
-  return {
-    resource: undefined,
-    actions: {},
-    validationErrors: [],
-    meta: undefined,
-  };
+  return { resource: undefined, actions: {}, validationErrors: [], meta: undefined };
 }
 
 export const CheckResourcesResponse_ResultEntry = {
@@ -734,29 +655,23 @@ export const CheckResourcesResponse_ResultEntry = {
         ? CheckResourcesResponse_ResultEntry_Resource.fromJSON(object.resource)
         : undefined,
       actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-            (acc, [key, value]) => {
-              acc[key] = effectFromJSON(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>((acc, [key, value]) => {
+          acc[key] = effectFromJSON(value);
+          return acc;
+        }, {})
         : {},
       validationErrors: Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
-      meta: isSet(object.meta)
-        ? CheckResourcesResponse_ResultEntry_Meta.fromJSON(object.meta)
-        : undefined,
+      meta: isSet(object.meta) ? CheckResourcesResponse_ResultEntry_Meta.fromJSON(object.meta) : undefined,
     };
   },
 
   toJSON(message: CheckResourcesResponse_ResultEntry): unknown {
     const obj: any = {};
-    message.resource !== undefined &&
-      (obj.resource = message.resource
-        ? CheckResourcesResponse_ResultEntry_Resource.toJSON(message.resource)
-        : undefined);
+    message.resource !== undefined && (obj.resource = message.resource
+      ? CheckResourcesResponse_ResultEntry_Resource.toJSON(message.resource)
+      : undefined);
     obj.actions = {};
     if (message.actions) {
       Object.entries(message.actions).forEach(([k, v]) => {
@@ -764,16 +679,12 @@ export const CheckResourcesResponse_ResultEntry = {
       });
     }
     if (message.validationErrors) {
-      obj.validationErrors = message.validationErrors.map((e) =>
-        e ? ValidationError.toJSON(e) : undefined
-      );
+      obj.validationErrors = message.validationErrors.map((e) => e ? ValidationError.toJSON(e) : undefined);
     } else {
       obj.validationErrors = [];
     }
     message.meta !== undefined &&
-      (obj.meta = message.meta
-        ? CheckResourcesResponse_ResultEntry_Meta.toJSON(message.meta)
-        : undefined);
+      (obj.meta = message.meta ? CheckResourcesResponse_ResultEntry_Meta.toJSON(message.meta) : undefined);
     return obj;
   },
 };
@@ -787,9 +698,7 @@ export const CheckResourcesResponse_ResultEntry_Resource = {
     return {
       id: isSet(object.id) ? String(object.id) : "",
       kind: isSet(object.kind) ? String(object.kind) : "",
-      policyVersion: isSet(object.policyVersion)
-        ? String(object.policyVersion)
-        : "",
+      policyVersion: isSet(object.policyVersion) ? String(object.policyVersion) : "",
       scope: isSet(object.scope) ? String(object.scope) : "",
     };
   },
@@ -798,8 +707,7 @@ export const CheckResourcesResponse_ResultEntry_Resource = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.kind !== undefined && (obj.kind = message.kind);
-    message.policyVersion !== undefined &&
-      (obj.policyVersion = message.policyVersion);
+    message.policyVersion !== undefined && (obj.policyVersion = message.policyVersion);
     message.scope !== undefined && (obj.scope = message.scope);
     return obj;
   },
@@ -813,15 +721,13 @@ export const CheckResourcesResponse_ResultEntry_Meta = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta {
     return {
       actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{
-            [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta;
-          }>((acc, [key, value]) => {
-            acc[key] =
-              CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
-                value
-              );
+        ? Object.entries(object.actions).reduce<{ [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta }>(
+          (acc, [key, value]) => {
+            acc[key] = CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(value);
             return acc;
-          }, {})
+          },
+          {},
+        )
         : {},
       effectiveDerivedRoles: Array.isArray(object?.effectiveDerivedRoles)
         ? object.effectiveDerivedRoles.map((e: any) => String(e))
@@ -834,8 +740,7 @@ export const CheckResourcesResponse_ResultEntry_Meta = {
     obj.actions = {};
     if (message.actions) {
       Object.entries(message.actions).forEach(([k, v]) => {
-        obj.actions[k] =
-          CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(v);
+        obj.actions[k] = CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(v);
       });
     }
     if (message.effectiveDerivedRoles) {
@@ -854,21 +759,15 @@ function createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta(): CheckRe
 export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
     return {
-      matchedPolicy: isSet(object.matchedPolicy)
-        ? String(object.matchedPolicy)
-        : "",
-      matchedScope: isSet(object.matchedScope)
-        ? String(object.matchedScope)
-        : "",
+      matchedPolicy: isSet(object.matchedPolicy) ? String(object.matchedPolicy) : "",
+      matchedScope: isSet(object.matchedScope) ? String(object.matchedScope) : "",
     };
   },
 
   toJSON(message: CheckResourcesResponse_ResultEntry_Meta_EffectMeta): unknown {
     const obj: any = {};
-    message.matchedPolicy !== undefined &&
-      (obj.matchedPolicy = message.matchedPolicy);
-    message.matchedScope !== undefined &&
-      (obj.matchedScope = message.matchedScope);
+    message.matchedPolicy !== undefined && (obj.matchedPolicy = message.matchedPolicy);
+    message.matchedScope !== undefined && (obj.matchedScope = message.matchedScope);
     return obj;
   },
 };
@@ -882,23 +781,17 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
     return {
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value)
-        ? CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
-            object.value
-          )
+        ? CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(object.value)
         : undefined,
     };
   },
 
-  toJSON(
-    message: CheckResourcesResponse_ResultEntry_Meta_ActionsEntry
-  ): unknown {
+  toJSON(message: CheckResourcesResponse_ResultEntry_Meta_ActionsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined &&
       (obj.value = message.value
-        ? CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(
-            message.value
-          )
+        ? CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(message.value)
         : undefined);
     return obj;
   },
@@ -931,18 +824,14 @@ function createBasePlaygroundFailure(): PlaygroundFailure {
 export const PlaygroundFailure = {
   fromJSON(object: any): PlaygroundFailure {
     return {
-      errors: Array.isArray(object?.errors)
-        ? object.errors.map((e: any) => PlaygroundFailure_Error.fromJSON(e))
-        : [],
+      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => PlaygroundFailure_Error.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: PlaygroundFailure): unknown {
     const obj: any = {};
     if (message.errors) {
-      obj.errors = message.errors.map((e) =>
-        e ? PlaygroundFailure_Error.toJSON(e) : undefined
-      );
+      obj.errors = message.errors.map((e) => e ? PlaygroundFailure_Error.toJSON(e) : undefined);
     } else {
       obj.errors = [];
     }
@@ -977,14 +866,9 @@ function createBasePlaygroundValidateResponse(): PlaygroundValidateResponse {
 export const PlaygroundValidateResponse = {
   fromJSON(object: any): PlaygroundValidateResponse {
     return {
-      playgroundId: isSet(object.playgroundId)
-        ? String(object.playgroundId)
-        : "",
+      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
       outcome: isSet(object.failure)
-        ? {
-            $case: "failure",
-            failure: PlaygroundFailure.fromJSON(object.failure),
-          }
+        ? { $case: "failure", failure: PlaygroundFailure.fromJSON(object.failure) }
         : isSet(object.success)
         ? { $case: "success", success: Empty.fromJSON(object.success) }
         : undefined,
@@ -993,16 +877,11 @@ export const PlaygroundValidateResponse = {
 
   toJSON(message: PlaygroundValidateResponse): unknown {
     const obj: any = {};
-    message.playgroundId !== undefined &&
-      (obj.playgroundId = message.playgroundId);
+    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
     message.outcome?.$case === "failure" &&
-      (obj.failure = message.outcome?.failure
-        ? PlaygroundFailure.toJSON(message.outcome?.failure)
-        : undefined);
+      (obj.failure = message.outcome?.failure ? PlaygroundFailure.toJSON(message.outcome?.failure) : undefined);
     message.outcome?.$case === "success" &&
-      (obj.success = message.outcome?.success
-        ? Empty.toJSON(message.outcome?.success)
-        : undefined);
+      (obj.success = message.outcome?.success ? Empty.toJSON(message.outcome?.success) : undefined);
     return obj;
   },
 };
@@ -1014,37 +893,23 @@ function createBasePlaygroundTestResponse(): PlaygroundTestResponse {
 export const PlaygroundTestResponse = {
   fromJSON(object: any): PlaygroundTestResponse {
     return {
-      playgroundId: isSet(object.playgroundId)
-        ? String(object.playgroundId)
-        : "",
+      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
       outcome: isSet(object.failure)
-        ? {
-            $case: "failure",
-            failure: PlaygroundFailure.fromJSON(object.failure),
-          }
+        ? { $case: "failure", failure: PlaygroundFailure.fromJSON(object.failure) }
         : isSet(object.success)
-        ? {
-            $case: "success",
-            success: PlaygroundTestResponse_TestResults.fromJSON(
-              object.success
-            ),
-          }
+        ? { $case: "success", success: PlaygroundTestResponse_TestResults.fromJSON(object.success) }
         : undefined,
     };
   },
 
   toJSON(message: PlaygroundTestResponse): unknown {
     const obj: any = {};
-    message.playgroundId !== undefined &&
-      (obj.playgroundId = message.playgroundId);
+    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
     message.outcome?.$case === "failure" &&
-      (obj.failure = message.outcome?.failure
-        ? PlaygroundFailure.toJSON(message.outcome?.failure)
-        : undefined);
-    message.outcome?.$case === "success" &&
-      (obj.success = message.outcome?.success
-        ? PlaygroundTestResponse_TestResults.toJSON(message.outcome?.success)
-        : undefined);
+      (obj.failure = message.outcome?.failure ? PlaygroundFailure.toJSON(message.outcome?.failure) : undefined);
+    message.outcome?.$case === "success" && (obj.success = message.outcome?.success
+      ? PlaygroundTestResponse_TestResults.toJSON(message.outcome?.success)
+      : undefined);
     return obj;
   },
 };
@@ -1055,19 +920,12 @@ function createBasePlaygroundTestResponse_TestResults(): PlaygroundTestResponse_
 
 export const PlaygroundTestResponse_TestResults = {
   fromJSON(object: any): PlaygroundTestResponse_TestResults {
-    return {
-      results: isSet(object.results)
-        ? TestResults.fromJSON(object.results)
-        : undefined,
-    };
+    return { results: isSet(object.results) ? TestResults.fromJSON(object.results) : undefined };
   },
 
   toJSON(message: PlaygroundTestResponse_TestResults): unknown {
     const obj: any = {};
-    message.results !== undefined &&
-      (obj.results = message.results
-        ? TestResults.toJSON(message.results)
-        : undefined);
+    message.results !== undefined && (obj.results = message.results ? TestResults.toJSON(message.results) : undefined);
     return obj;
   },
 };
@@ -1079,51 +937,29 @@ function createBasePlaygroundEvaluateResponse(): PlaygroundEvaluateResponse {
 export const PlaygroundEvaluateResponse = {
   fromJSON(object: any): PlaygroundEvaluateResponse {
     return {
-      playgroundId: isSet(object.playgroundId)
-        ? String(object.playgroundId)
-        : "",
+      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
       outcome: isSet(object.failure)
-        ? {
-            $case: "failure",
-            failure: PlaygroundFailure.fromJSON(object.failure),
-          }
+        ? { $case: "failure", failure: PlaygroundFailure.fromJSON(object.failure) }
         : isSet(object.success)
-        ? {
-            $case: "success",
-            success: PlaygroundEvaluateResponse_EvalResultList.fromJSON(
-              object.success
-            ),
-          }
+        ? { $case: "success", success: PlaygroundEvaluateResponse_EvalResultList.fromJSON(object.success) }
         : undefined,
     };
   },
 
   toJSON(message: PlaygroundEvaluateResponse): unknown {
     const obj: any = {};
-    message.playgroundId !== undefined &&
-      (obj.playgroundId = message.playgroundId);
+    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
     message.outcome?.$case === "failure" &&
-      (obj.failure = message.outcome?.failure
-        ? PlaygroundFailure.toJSON(message.outcome?.failure)
-        : undefined);
-    message.outcome?.$case === "success" &&
-      (obj.success = message.outcome?.success
-        ? PlaygroundEvaluateResponse_EvalResultList.toJSON(
-            message.outcome?.success
-          )
-        : undefined);
+      (obj.failure = message.outcome?.failure ? PlaygroundFailure.toJSON(message.outcome?.failure) : undefined);
+    message.outcome?.$case === "success" && (obj.success = message.outcome?.success
+      ? PlaygroundEvaluateResponse_EvalResultList.toJSON(message.outcome?.success)
+      : undefined);
     return obj;
   },
 };
 
 function createBasePlaygroundEvaluateResponse_EvalResult(): PlaygroundEvaluateResponse_EvalResult {
-  return {
-    action: "",
-    effect: 0,
-    policy: "",
-    effectiveDerivedRoles: [],
-    validationErrors: [],
-  };
+  return { action: "", effect: 0, policy: "", effectiveDerivedRoles: [], validationErrors: [] };
 }
 
 export const PlaygroundEvaluateResponse_EvalResult = {
@@ -1152,9 +988,7 @@ export const PlaygroundEvaluateResponse_EvalResult = {
       obj.effectiveDerivedRoles = [];
     }
     if (message.validationErrors) {
-      obj.validationErrors = message.validationErrors.map((e) =>
-        e ? ValidationError.toJSON(e) : undefined
-      );
+      obj.validationErrors = message.validationErrors.map((e) => e ? ValidationError.toJSON(e) : undefined);
     } else {
       obj.validationErrors = [];
     }
@@ -1170,9 +1004,7 @@ export const PlaygroundEvaluateResponse_EvalResultList = {
   fromJSON(object: any): PlaygroundEvaluateResponse_EvalResultList {
     return {
       results: Array.isArray(object?.results)
-        ? object.results.map((e: any) =>
-            PlaygroundEvaluateResponse_EvalResult.fromJSON(e)
-          )
+        ? object.results.map((e: any) => PlaygroundEvaluateResponse_EvalResult.fromJSON(e))
         : [],
     };
   },
@@ -1180,9 +1012,7 @@ export const PlaygroundEvaluateResponse_EvalResultList = {
   toJSON(message: PlaygroundEvaluateResponse_EvalResultList): unknown {
     const obj: any = {};
     if (message.results) {
-      obj.results = message.results.map((e) =>
-        e ? PlaygroundEvaluateResponse_EvalResult.toJSON(e) : undefined
-      );
+      obj.results = message.results.map((e) => e ? PlaygroundEvaluateResponse_EvalResult.toJSON(e) : undefined);
     } else {
       obj.results = [];
     }
@@ -1197,68 +1027,41 @@ function createBasePlaygroundProxyResponse(): PlaygroundProxyResponse {
 export const PlaygroundProxyResponse = {
   fromJSON(object: any): PlaygroundProxyResponse {
     return {
-      playgroundId: isSet(object.playgroundId)
-        ? String(object.playgroundId)
-        : "",
+      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
       outcome: isSet(object.failure)
-        ? {
-            $case: "failure",
-            failure: PlaygroundFailure.fromJSON(object.failure),
-          }
+        ? { $case: "failure", failure: PlaygroundFailure.fromJSON(object.failure) }
         : isSet(object.checkResourceSet)
-        ? {
-            $case: "checkResourceSet",
-            checkResourceSet: CheckResourceSetResponse.fromJSON(
-              object.checkResourceSet
-            ),
-          }
+        ? { $case: "checkResourceSet", checkResourceSet: CheckResourceSetResponse.fromJSON(object.checkResourceSet) }
         : isSet(object.checkResourceBatch)
         ? {
-            $case: "checkResourceBatch",
-            checkResourceBatch: CheckResourceBatchResponse.fromJSON(
-              object.checkResourceBatch
-            ),
-          }
+          $case: "checkResourceBatch",
+          checkResourceBatch: CheckResourceBatchResponse.fromJSON(object.checkResourceBatch),
+        }
         : isSet(object.planResources)
-        ? {
-            $case: "planResources",
-            planResources: PlanResourcesResponse.fromJSON(object.planResources),
-          }
+        ? { $case: "planResources", planResources: PlanResourcesResponse.fromJSON(object.planResources) }
         : isSet(object.checkResources)
-        ? {
-            $case: "checkResources",
-            checkResources: CheckResourcesResponse.fromJSON(
-              object.checkResources
-            ),
-          }
+        ? { $case: "checkResources", checkResources: CheckResourcesResponse.fromJSON(object.checkResources) }
         : undefined,
     };
   },
 
   toJSON(message: PlaygroundProxyResponse): unknown {
     const obj: any = {};
-    message.playgroundId !== undefined &&
-      (obj.playgroundId = message.playgroundId);
+    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
     message.outcome?.$case === "failure" &&
-      (obj.failure = message.outcome?.failure
-        ? PlaygroundFailure.toJSON(message.outcome?.failure)
-        : undefined);
-    message.outcome?.$case === "checkResourceSet" &&
-      (obj.checkResourceSet = message.outcome?.checkResourceSet
-        ? CheckResourceSetResponse.toJSON(message.outcome?.checkResourceSet)
-        : undefined);
-    message.outcome?.$case === "checkResourceBatch" &&
-      (obj.checkResourceBatch = message.outcome?.checkResourceBatch
-        ? CheckResourceBatchResponse.toJSON(message.outcome?.checkResourceBatch)
-        : undefined);
-    message.outcome?.$case === "planResources" &&
-      (obj.planResources = message.outcome?.planResources
-        ? PlanResourcesResponse.toJSON(message.outcome?.planResources)
-        : undefined);
-    message.outcome?.$case === "checkResources" &&
-      (obj.checkResources = message.outcome?.checkResources
-        ? CheckResourcesResponse.toJSON(message.outcome?.checkResources)
-        : undefined);
+      (obj.failure = message.outcome?.failure ? PlaygroundFailure.toJSON(message.outcome?.failure) : undefined);
+    message.outcome?.$case === "checkResourceSet" && (obj.checkResourceSet = message.outcome?.checkResourceSet
+      ? CheckResourceSetResponse.toJSON(message.outcome?.checkResourceSet)
+      : undefined);
+    message.outcome?.$case === "checkResourceBatch" && (obj.checkResourceBatch = message.outcome?.checkResourceBatch
+      ? CheckResourceBatchResponse.toJSON(message.outcome?.checkResourceBatch)
+      : undefined);
+    message.outcome?.$case === "planResources" && (obj.planResources = message.outcome?.planResources
+      ? PlanResourcesResponse.toJSON(message.outcome?.planResources)
+      : undefined);
+    message.outcome?.$case === "checkResources" && (obj.checkResources = message.outcome?.checkResources
+      ? CheckResourcesResponse.toJSON(message.outcome?.checkResources)
+      : undefined);
     return obj;
   },
 };
@@ -1269,19 +1072,12 @@ function createBaseAddOrUpdatePolicyResponse(): AddOrUpdatePolicyResponse {
 
 export const AddOrUpdatePolicyResponse = {
   fromJSON(object: any): AddOrUpdatePolicyResponse {
-    return {
-      success: isSet(object.success)
-        ? Empty.fromJSON(object.success)
-        : undefined,
-    };
+    return { success: isSet(object.success) ? Empty.fromJSON(object.success) : undefined };
   },
 
   toJSON(message: AddOrUpdatePolicyResponse): unknown {
     const obj: any = {};
-    message.success !== undefined &&
-      (obj.success = message.success
-        ? Empty.toJSON(message.success)
-        : undefined);
+    message.success !== undefined && (obj.success = message.success ? Empty.toJSON(message.success) : undefined);
     return obj;
   },
 };
@@ -1294,31 +1090,21 @@ export const ListAuditLogEntriesResponse = {
   fromJSON(object: any): ListAuditLogEntriesResponse {
     return {
       entry: isSet(object.accessLogEntry)
-        ? {
-            $case: "accessLogEntry",
-            accessLogEntry: AccessLogEntry.fromJSON(object.accessLogEntry),
-          }
+        ? { $case: "accessLogEntry", accessLogEntry: AccessLogEntry.fromJSON(object.accessLogEntry) }
         : isSet(object.decisionLogEntry)
-        ? {
-            $case: "decisionLogEntry",
-            decisionLogEntry: DecisionLogEntry.fromJSON(
-              object.decisionLogEntry
-            ),
-          }
+        ? { $case: "decisionLogEntry", decisionLogEntry: DecisionLogEntry.fromJSON(object.decisionLogEntry) }
         : undefined,
     };
   },
 
   toJSON(message: ListAuditLogEntriesResponse): unknown {
     const obj: any = {};
-    message.entry?.$case === "accessLogEntry" &&
-      (obj.accessLogEntry = message.entry?.accessLogEntry
-        ? AccessLogEntry.toJSON(message.entry?.accessLogEntry)
-        : undefined);
-    message.entry?.$case === "decisionLogEntry" &&
-      (obj.decisionLogEntry = message.entry?.decisionLogEntry
-        ? DecisionLogEntry.toJSON(message.entry?.decisionLogEntry)
-        : undefined);
+    message.entry?.$case === "accessLogEntry" && (obj.accessLogEntry = message.entry?.accessLogEntry
+      ? AccessLogEntry.toJSON(message.entry?.accessLogEntry)
+      : undefined);
+    message.entry?.$case === "decisionLogEntry" && (obj.decisionLogEntry = message.entry?.decisionLogEntry
+      ? DecisionLogEntry.toJSON(message.entry?.decisionLogEntry)
+      : undefined);
     return obj;
   },
 };
@@ -1351,11 +1137,7 @@ function createBaseListPoliciesResponse(): ListPoliciesResponse {
 
 export const ListPoliciesResponse = {
   fromJSON(object: any): ListPoliciesResponse {
-    return {
-      policyIds: Array.isArray(object?.policyIds)
-        ? object.policyIds.map((e: any) => String(e))
-        : [],
-    };
+    return { policyIds: Array.isArray(object?.policyIds) ? object.policyIds.map((e: any) => String(e)) : [] };
   },
 
   toJSON(message: ListPoliciesResponse): unknown {
@@ -1375,19 +1157,13 @@ function createBaseGetPolicyResponse(): GetPolicyResponse {
 
 export const GetPolicyResponse = {
   fromJSON(object: any): GetPolicyResponse {
-    return {
-      policies: Array.isArray(object?.policies)
-        ? object.policies.map((e: any) => Policy.fromJSON(e))
-        : [],
-    };
+    return { policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => Policy.fromJSON(e)) : [] };
   },
 
   toJSON(message: GetPolicyResponse): unknown {
     const obj: any = {};
     if (message.policies) {
-      obj.policies = message.policies.map((e) =>
-        e ? Policy.toJSON(e) : undefined
-      );
+      obj.policies = message.policies.map((e) => e ? Policy.toJSON(e) : undefined);
     } else {
       obj.policies = [];
     }
@@ -1416,11 +1192,7 @@ function createBaseListSchemasResponse(): ListSchemasResponse {
 
 export const ListSchemasResponse = {
   fromJSON(object: any): ListSchemasResponse {
-    return {
-      schemaIds: Array.isArray(object?.schemaIds)
-        ? object.schemaIds.map((e: any) => String(e))
-        : [],
-    };
+    return { schemaIds: Array.isArray(object?.schemaIds) ? object.schemaIds.map((e: any) => String(e)) : [] };
   },
 
   toJSON(message: ListSchemasResponse): unknown {
@@ -1440,19 +1212,13 @@ function createBaseGetSchemaResponse(): GetSchemaResponse {
 
 export const GetSchemaResponse = {
   fromJSON(object: any): GetSchemaResponse {
-    return {
-      schemas: Array.isArray(object?.schemas)
-        ? object.schemas.map((e: any) => Schema.fromJSON(e))
-        : [],
-    };
+    return { schemas: Array.isArray(object?.schemas) ? object.schemas.map((e: any) => Schema.fromJSON(e)) : [] };
   },
 
   toJSON(message: GetSchemaResponse): unknown {
     const obj: any = {};
     if (message.schemas) {
-      obj.schemas = message.schemas.map((e) =>
-        e ? Schema.toJSON(e) : undefined
-      );
+      obj.schemas = message.schemas.map((e) => e ? Schema.toJSON(e) : undefined);
     } else {
       obj.schemas = [];
     }

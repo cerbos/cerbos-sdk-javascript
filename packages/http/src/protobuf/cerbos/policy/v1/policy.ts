@@ -1,13 +1,7 @@
 /* eslint-disable */
-import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import {
-  Principal,
-  Resource,
-  AuxData,
-  CheckInput,
-  Trace,
-} from "../../engine/v1/engine";
+import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
+import { AuxData, CheckInput, Principal, Resource, Trace } from "../../engine/v1/engine";
 
 export const protobufPackage = "cerbos.policy.v1";
 
@@ -16,10 +10,10 @@ export interface Policy {
   disabled: boolean;
   description: string;
   metadata: Metadata | undefined;
-  policyType?:
-    | { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy }
-    | { $case: "principalPolicy"; principalPolicy: PrincipalPolicy }
-    | { $case: "derivedRoles"; derivedRoles: DerivedRoles };
+  policyType?: { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy } | {
+    $case: "principalPolicy";
+    principalPolicy: PrincipalPolicy;
+  } | { $case: "derivedRoles"; derivedRoles: DerivedRoles };
   variables: { [key: string]: string };
 }
 
@@ -89,17 +83,14 @@ export interface RoleDef {
 }
 
 export interface Condition {
-  condition?:
-    | { $case: "match"; match: Match }
-    | { $case: "script"; script: string };
+  condition?: { $case: "match"; match: Match } | { $case: "script"; script: string };
 }
 
 export interface Match {
-  op?:
-    | { $case: "all"; all: Match_ExprList }
-    | { $case: "any"; any: Match_ExprList }
-    | { $case: "none"; none: Match_ExprList }
-    | { $case: "expr"; expr: string };
+  op?: { $case: "all"; all: Match_ExprList } | { $case: "any"; any: Match_ExprList } | {
+    $case: "none";
+    none: Match_ExprList;
+  } | { $case: "expr"; expr: string };
 }
 
 export interface Match_ExprList {
@@ -120,7 +111,8 @@ export interface Schemas_Schema {
   ignoreWhen: Schemas_IgnoreWhen | undefined;
 }
 
-export interface TestFixture {}
+export interface TestFixture {
+}
 
 export interface TestFixture_Principals {
   principals: { [key: string]: Principal };
@@ -260,9 +252,7 @@ export function testResults_ResultFromJSON(object: any): TestResults_Result {
     case "RESULT_ERRORED":
       return TestResults_Result.RESULT_ERRORED;
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum TestResults_Result"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum TestResults_Result");
   }
 }
 
@@ -279,9 +269,7 @@ export function testResults_ResultToJSON(object: TestResults_Result): string {
     case TestResults_Result.RESULT_ERRORED:
       return "RESULT_ERRORED";
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum TestResults_Result"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum TestResults_Result");
   }
 }
 
@@ -321,9 +309,7 @@ export interface TestResults_Action {
 
 export interface TestResults_Details {
   result: TestResults_Result;
-  outcome?:
-    | { $case: "failure"; failure: TestResults_Failure }
-    | { $case: "error"; error: string };
+  outcome?: { $case: "failure"; failure: TestResults_Failure } | { $case: "error"; error: string };
   engineTrace: Trace[];
 }
 
@@ -349,33 +335,19 @@ export const Policy = {
       apiVersion: isSet(object.apiVersion) ? String(object.apiVersion) : "",
       disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
       description: isSet(object.description) ? String(object.description) : "",
-      metadata: isSet(object.metadata)
-        ? Metadata.fromJSON(object.metadata)
-        : undefined,
+      metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined,
       policyType: isSet(object.resourcePolicy)
-        ? {
-            $case: "resourcePolicy",
-            resourcePolicy: ResourcePolicy.fromJSON(object.resourcePolicy),
-          }
+        ? { $case: "resourcePolicy", resourcePolicy: ResourcePolicy.fromJSON(object.resourcePolicy) }
         : isSet(object.principalPolicy)
-        ? {
-            $case: "principalPolicy",
-            principalPolicy: PrincipalPolicy.fromJSON(object.principalPolicy),
-          }
+        ? { $case: "principalPolicy", principalPolicy: PrincipalPolicy.fromJSON(object.principalPolicy) }
         : isSet(object.derivedRoles)
-        ? {
-            $case: "derivedRoles",
-            derivedRoles: DerivedRoles.fromJSON(object.derivedRoles),
-          }
+        ? { $case: "derivedRoles", derivedRoles: DerivedRoles.fromJSON(object.derivedRoles) }
         : undefined,
       variables: isObject(object.variables)
-        ? Object.entries(object.variables).reduce<{ [key: string]: string }>(
-            (acc, [key, value]) => {
-              acc[key] = String(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.variables).reduce<{ [key: string]: string }>((acc, [key, value]) => {
+          acc[key] = String(value);
+          return acc;
+        }, {})
         : {},
     };
   },
@@ -384,24 +356,17 @@ export const Policy = {
     const obj: any = {};
     message.apiVersion !== undefined && (obj.apiVersion = message.apiVersion);
     message.disabled !== undefined && (obj.disabled = message.disabled);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.metadata !== undefined &&
-      (obj.metadata = message.metadata
-        ? Metadata.toJSON(message.metadata)
-        : undefined);
-    message.policyType?.$case === "resourcePolicy" &&
-      (obj.resourcePolicy = message.policyType?.resourcePolicy
-        ? ResourcePolicy.toJSON(message.policyType?.resourcePolicy)
-        : undefined);
-    message.policyType?.$case === "principalPolicy" &&
-      (obj.principalPolicy = message.policyType?.principalPolicy
-        ? PrincipalPolicy.toJSON(message.policyType?.principalPolicy)
-        : undefined);
-    message.policyType?.$case === "derivedRoles" &&
-      (obj.derivedRoles = message.policyType?.derivedRoles
-        ? DerivedRoles.toJSON(message.policyType?.derivedRoles)
-        : undefined);
+    message.description !== undefined && (obj.description = message.description);
+    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
+    message.policyType?.$case === "resourcePolicy" && (obj.resourcePolicy = message.policyType?.resourcePolicy
+      ? ResourcePolicy.toJSON(message.policyType?.resourcePolicy)
+      : undefined);
+    message.policyType?.$case === "principalPolicy" && (obj.principalPolicy = message.policyType?.principalPolicy
+      ? PrincipalPolicy.toJSON(message.policyType?.principalPolicy)
+      : undefined);
+    message.policyType?.$case === "derivedRoles" && (obj.derivedRoles = message.policyType?.derivedRoles
+      ? DerivedRoles.toJSON(message.policyType?.derivedRoles)
+      : undefined);
     obj.variables = {};
     if (message.variables) {
       Object.entries(message.variables).forEach(([k, v]) => {
@@ -418,10 +383,7 @@ function createBasePolicy_VariablesEntry(): Policy_VariablesEntry {
 
 export const Policy_VariablesEntry = {
   fromJSON(object: any): Policy_VariablesEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : "",
-    };
+    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? String(object.value) : "" };
   },
 
   toJSON(message: Policy_VariablesEntry): unknown {
@@ -433,12 +395,7 @@ export const Policy_VariablesEntry = {
 };
 
 function createBaseMetadata(): Metadata {
-  return {
-    sourceFile: "",
-    annotations: {},
-    hash: undefined,
-    storeIdentifer: "",
-  };
+  return { sourceFile: "", annotations: {}, hash: undefined, storeIdentifer: "" };
 }
 
 export const Metadata = {
@@ -446,18 +403,13 @@ export const Metadata = {
     return {
       sourceFile: isSet(object.sourceFile) ? String(object.sourceFile) : "",
       annotations: isObject(object.annotations)
-        ? Object.entries(object.annotations).reduce<{ [key: string]: string }>(
-            (acc, [key, value]) => {
-              acc[key] = String(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.annotations).reduce<{ [key: string]: string }>((acc, [key, value]) => {
+          acc[key] = String(value);
+          return acc;
+        }, {})
         : {},
       hash: isSet(object.hash) ? String(object.hash) : undefined,
-      storeIdentifer: isSet(object.storeIdentifer)
-        ? String(object.storeIdentifer)
-        : "",
+      storeIdentifer: isSet(object.storeIdentifer) ? String(object.storeIdentifer) : "",
     };
   },
 
@@ -471,8 +423,7 @@ export const Metadata = {
       });
     }
     message.hash !== undefined && (obj.hash = message.hash);
-    message.storeIdentifer !== undefined &&
-      (obj.storeIdentifer = message.storeIdentifer);
+    message.storeIdentifer !== undefined && (obj.storeIdentifer = message.storeIdentifer);
     return obj;
   },
 };
@@ -483,10 +434,7 @@ function createBaseMetadata_AnnotationsEntry(): Metadata_AnnotationsEntry {
 
 export const Metadata_AnnotationsEntry = {
   fromJSON(object: any): Metadata_AnnotationsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : "",
-    };
+    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? String(object.value) : "" };
   },
 
   toJSON(message: Metadata_AnnotationsEntry): unknown {
@@ -498,14 +446,7 @@ export const Metadata_AnnotationsEntry = {
 };
 
 function createBaseResourcePolicy(): ResourcePolicy {
-  return {
-    resource: "",
-    version: "",
-    importDerivedRoles: [],
-    rules: [],
-    scope: "",
-    schemas: undefined,
-  };
+  return { resource: "", version: "", importDerivedRoles: [], rules: [], scope: "", schemas: undefined };
 }
 
 export const ResourcePolicy = {
@@ -520,9 +461,7 @@ export const ResourcePolicy = {
         ? object.rules.map((e: any) => ResourceRule.fromJSON(e))
         : [],
       scope: isSet(object.scope) ? String(object.scope) : "",
-      schemas: isSet(object.schemas)
-        ? Schemas.fromJSON(object.schemas)
-        : undefined,
+      schemas: isSet(object.schemas) ? Schemas.fromJSON(object.schemas) : undefined,
     };
   },
 
@@ -536,47 +475,27 @@ export const ResourcePolicy = {
       obj.importDerivedRoles = [];
     }
     if (message.rules) {
-      obj.rules = message.rules.map((e) =>
-        e ? ResourceRule.toJSON(e) : undefined
-      );
+      obj.rules = message.rules.map((e) => e ? ResourceRule.toJSON(e) : undefined);
     } else {
       obj.rules = [];
     }
     message.scope !== undefined && (obj.scope = message.scope);
-    message.schemas !== undefined &&
-      (obj.schemas = message.schemas
-        ? Schemas.toJSON(message.schemas)
-        : undefined);
+    message.schemas !== undefined && (obj.schemas = message.schemas ? Schemas.toJSON(message.schemas) : undefined);
     return obj;
   },
 };
 
 function createBaseResourceRule(): ResourceRule {
-  return {
-    actions: [],
-    derivedRoles: [],
-    roles: [],
-    condition: undefined,
-    effect: 0,
-    name: "",
-  };
+  return { actions: [], derivedRoles: [], roles: [], condition: undefined, effect: 0, name: "" };
 }
 
 export const ResourceRule = {
   fromJSON(object: any): ResourceRule {
     return {
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => String(e))
-        : [],
-      derivedRoles: Array.isArray(object?.derivedRoles)
-        ? object.derivedRoles.map((e: any) => String(e))
-        : [],
-      roles: Array.isArray(object?.roles)
-        ? object.roles.map((e: any) => String(e))
-        : [],
-      condition: isSet(object.condition)
-        ? Condition.fromJSON(object.condition)
-        : undefined,
+      actions: Array.isArray(object?.actions) ? object.actions.map((e: any) => String(e)) : [],
+      derivedRoles: Array.isArray(object?.derivedRoles) ? object.derivedRoles.map((e: any) => String(e)) : [],
+      roles: Array.isArray(object?.roles) ? object.roles.map((e: any) => String(e)) : [],
+      condition: isSet(object.condition) ? Condition.fromJSON(object.condition) : undefined,
       effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
       name: isSet(object.name) ? String(object.name) : "",
     };
@@ -600,9 +519,7 @@ export const ResourceRule = {
       obj.roles = [];
     }
     message.condition !== undefined &&
-      (obj.condition = message.condition
-        ? Condition.toJSON(message.condition)
-        : undefined);
+      (obj.condition = message.condition ? Condition.toJSON(message.condition) : undefined);
     message.effect !== undefined && (obj.effect = effectToJSON(message.effect));
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -618,9 +535,7 @@ export const PrincipalPolicy = {
     return {
       principal: isSet(object.principal) ? String(object.principal) : "",
       version: isSet(object.version) ? String(object.version) : "",
-      rules: Array.isArray(object?.rules)
-        ? object.rules.map((e: any) => PrincipalRule.fromJSON(e))
-        : [],
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => PrincipalRule.fromJSON(e)) : [],
       scope: isSet(object.scope) ? String(object.scope) : "",
     };
   },
@@ -630,9 +545,7 @@ export const PrincipalPolicy = {
     message.principal !== undefined && (obj.principal = message.principal);
     message.version !== undefined && (obj.version = message.version);
     if (message.rules) {
-      obj.rules = message.rules.map((e) =>
-        e ? PrincipalRule.toJSON(e) : undefined
-      );
+      obj.rules = message.rules.map((e) => e ? PrincipalRule.toJSON(e) : undefined);
     } else {
       obj.rules = [];
     }
@@ -649,9 +562,7 @@ export const PrincipalRule = {
   fromJSON(object: any): PrincipalRule {
     return {
       resource: isSet(object.resource) ? String(object.resource) : "",
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => PrincipalRule_Action.fromJSON(e))
-        : [],
+      actions: Array.isArray(object?.actions) ? object.actions.map((e: any) => PrincipalRule_Action.fromJSON(e)) : [],
     };
   },
 
@@ -659,9 +570,7 @@ export const PrincipalRule = {
     const obj: any = {};
     message.resource !== undefined && (obj.resource = message.resource);
     if (message.actions) {
-      obj.actions = message.actions.map((e) =>
-        e ? PrincipalRule_Action.toJSON(e) : undefined
-      );
+      obj.actions = message.actions.map((e) => e ? PrincipalRule_Action.toJSON(e) : undefined);
     } else {
       obj.actions = [];
     }
@@ -677,9 +586,7 @@ export const PrincipalRule_Action = {
   fromJSON(object: any): PrincipalRule_Action {
     return {
       action: isSet(object.action) ? String(object.action) : "",
-      condition: isSet(object.condition)
-        ? Condition.fromJSON(object.condition)
-        : undefined,
+      condition: isSet(object.condition) ? Condition.fromJSON(object.condition) : undefined,
       effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
       name: isSet(object.name) ? String(object.name) : "",
     };
@@ -689,9 +596,7 @@ export const PrincipalRule_Action = {
     const obj: any = {};
     message.action !== undefined && (obj.action = message.action);
     message.condition !== undefined &&
-      (obj.condition = message.condition
-        ? Condition.toJSON(message.condition)
-        : undefined);
+      (obj.condition = message.condition ? Condition.toJSON(message.condition) : undefined);
     message.effect !== undefined && (obj.effect = effectToJSON(message.effect));
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -706,9 +611,7 @@ export const DerivedRoles = {
   fromJSON(object: any): DerivedRoles {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      definitions: Array.isArray(object?.definitions)
-        ? object.definitions.map((e: any) => RoleDef.fromJSON(e))
-        : [],
+      definitions: Array.isArray(object?.definitions) ? object.definitions.map((e: any) => RoleDef.fromJSON(e)) : [],
     };
   },
 
@@ -716,9 +619,7 @@ export const DerivedRoles = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.definitions) {
-      obj.definitions = message.definitions.map((e) =>
-        e ? RoleDef.toJSON(e) : undefined
-      );
+      obj.definitions = message.definitions.map((e) => e ? RoleDef.toJSON(e) : undefined);
     } else {
       obj.definitions = [];
     }
@@ -734,12 +635,8 @@ export const RoleDef = {
   fromJSON(object: any): RoleDef {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      parentRoles: Array.isArray(object?.parentRoles)
-        ? object.parentRoles.map((e: any) => String(e))
-        : [],
-      condition: isSet(object.condition)
-        ? Condition.fromJSON(object.condition)
-        : undefined,
+      parentRoles: Array.isArray(object?.parentRoles) ? object.parentRoles.map((e: any) => String(e)) : [],
+      condition: isSet(object.condition) ? Condition.fromJSON(object.condition) : undefined,
     };
   },
 
@@ -752,9 +649,7 @@ export const RoleDef = {
       obj.parentRoles = [];
     }
     message.condition !== undefined &&
-      (obj.condition = message.condition
-        ? Condition.toJSON(message.condition)
-        : undefined);
+      (obj.condition = message.condition ? Condition.toJSON(message.condition) : undefined);
     return obj;
   },
 };
@@ -777,11 +672,8 @@ export const Condition = {
   toJSON(message: Condition): unknown {
     const obj: any = {};
     message.condition?.$case === "match" &&
-      (obj.match = message.condition?.match
-        ? Match.toJSON(message.condition?.match)
-        : undefined);
-    message.condition?.$case === "script" &&
-      (obj.script = message.condition?.script);
+      (obj.match = message.condition?.match ? Match.toJSON(message.condition?.match) : undefined);
+    message.condition?.$case === "script" && (obj.script = message.condition?.script);
     return obj;
   },
 };
@@ -807,18 +699,9 @@ export const Match = {
 
   toJSON(message: Match): unknown {
     const obj: any = {};
-    message.op?.$case === "all" &&
-      (obj.all = message.op?.all
-        ? Match_ExprList.toJSON(message.op?.all)
-        : undefined);
-    message.op?.$case === "any" &&
-      (obj.any = message.op?.any
-        ? Match_ExprList.toJSON(message.op?.any)
-        : undefined);
-    message.op?.$case === "none" &&
-      (obj.none = message.op?.none
-        ? Match_ExprList.toJSON(message.op?.none)
-        : undefined);
+    message.op?.$case === "all" && (obj.all = message.op?.all ? Match_ExprList.toJSON(message.op?.all) : undefined);
+    message.op?.$case === "any" && (obj.any = message.op?.any ? Match_ExprList.toJSON(message.op?.any) : undefined);
+    message.op?.$case === "none" && (obj.none = message.op?.none ? Match_ExprList.toJSON(message.op?.none) : undefined);
     message.op?.$case === "expr" && (obj.expr = message.op?.expr);
     return obj;
   },
@@ -830,17 +713,13 @@ function createBaseMatch_ExprList(): Match_ExprList {
 
 export const Match_ExprList = {
   fromJSON(object: any): Match_ExprList {
-    return {
-      of: Array.isArray(object?.of)
-        ? object.of.map((e: any) => Match.fromJSON(e))
-        : [],
-    };
+    return { of: Array.isArray(object?.of) ? object.of.map((e: any) => Match.fromJSON(e)) : [] };
   },
 
   toJSON(message: Match_ExprList): unknown {
     const obj: any = {};
     if (message.of) {
-      obj.of = message.of.map((e) => (e ? Match.toJSON(e) : undefined));
+      obj.of = message.of.map((e) => e ? Match.toJSON(e) : undefined);
     } else {
       obj.of = [];
     }
@@ -855,25 +734,17 @@ function createBaseSchemas(): Schemas {
 export const Schemas = {
   fromJSON(object: any): Schemas {
     return {
-      principalSchema: isSet(object.principalSchema)
-        ? Schemas_Schema.fromJSON(object.principalSchema)
-        : undefined,
-      resourceSchema: isSet(object.resourceSchema)
-        ? Schemas_Schema.fromJSON(object.resourceSchema)
-        : undefined,
+      principalSchema: isSet(object.principalSchema) ? Schemas_Schema.fromJSON(object.principalSchema) : undefined,
+      resourceSchema: isSet(object.resourceSchema) ? Schemas_Schema.fromJSON(object.resourceSchema) : undefined,
     };
   },
 
   toJSON(message: Schemas): unknown {
     const obj: any = {};
     message.principalSchema !== undefined &&
-      (obj.principalSchema = message.principalSchema
-        ? Schemas_Schema.toJSON(message.principalSchema)
-        : undefined);
+      (obj.principalSchema = message.principalSchema ? Schemas_Schema.toJSON(message.principalSchema) : undefined);
     message.resourceSchema !== undefined &&
-      (obj.resourceSchema = message.resourceSchema
-        ? Schemas_Schema.toJSON(message.resourceSchema)
-        : undefined);
+      (obj.resourceSchema = message.resourceSchema ? Schemas_Schema.toJSON(message.resourceSchema) : undefined);
     return obj;
   },
 };
@@ -884,11 +755,7 @@ function createBaseSchemas_IgnoreWhen(): Schemas_IgnoreWhen {
 
 export const Schemas_IgnoreWhen = {
   fromJSON(object: any): Schemas_IgnoreWhen {
-    return {
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => String(e))
-        : [],
-    };
+    return { actions: Array.isArray(object?.actions) ? object.actions.map((e: any) => String(e)) : [] };
   },
 
   toJSON(message: Schemas_IgnoreWhen): unknown {
@@ -910,9 +777,7 @@ export const Schemas_Schema = {
   fromJSON(object: any): Schemas_Schema {
     return {
       ref: isSet(object.ref) ? String(object.ref) : "",
-      ignoreWhen: isSet(object.ignoreWhen)
-        ? Schemas_IgnoreWhen.fromJSON(object.ignoreWhen)
-        : undefined,
+      ignoreWhen: isSet(object.ignoreWhen) ? Schemas_IgnoreWhen.fromJSON(object.ignoreWhen) : undefined,
     };
   },
 
@@ -920,9 +785,7 @@ export const Schemas_Schema = {
     const obj: any = {};
     message.ref !== undefined && (obj.ref = message.ref);
     message.ignoreWhen !== undefined &&
-      (obj.ignoreWhen = message.ignoreWhen
-        ? Schemas_IgnoreWhen.toJSON(message.ignoreWhen)
-        : undefined);
+      (obj.ignoreWhen = message.ignoreWhen ? Schemas_IgnoreWhen.toJSON(message.ignoreWhen) : undefined);
     return obj;
   },
 };
@@ -950,12 +813,10 @@ export const TestFixture_Principals = {
   fromJSON(object: any): TestFixture_Principals {
     return {
       principals: isObject(object.principals)
-        ? Object.entries(object.principals).reduce<{
-            [key: string]: Principal;
-          }>((acc, [key, value]) => {
-            acc[key] = Principal.fromJSON(value);
-            return acc;
-          }, {})
+        ? Object.entries(object.principals).reduce<{ [key: string]: Principal }>((acc, [key, value]) => {
+          acc[key] = Principal.fromJSON(value);
+          return acc;
+        }, {})
         : {},
     };
   },
@@ -987,8 +848,7 @@ export const TestFixture_Principals_PrincipalsEntry = {
   toJSON(message: TestFixture_Principals_PrincipalsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? Principal.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Principal.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -1001,13 +861,10 @@ export const TestFixture_Resources = {
   fromJSON(object: any): TestFixture_Resources {
     return {
       resources: isObject(object.resources)
-        ? Object.entries(object.resources).reduce<{ [key: string]: Resource }>(
-            (acc, [key, value]) => {
-              acc[key] = Resource.fromJSON(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.resources).reduce<{ [key: string]: Resource }>((acc, [key, value]) => {
+          acc[key] = Resource.fromJSON(value);
+          return acc;
+        }, {})
         : {},
     };
   },
@@ -1039,8 +896,7 @@ export const TestFixture_Resources_ResourcesEntry = {
   toJSON(message: TestFixture_Resources_ResourcesEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? Resource.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Resource.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -1053,13 +909,10 @@ export const TestFixture_AuxData = {
   fromJSON(object: any): TestFixture_AuxData {
     return {
       auxData: isObject(object.auxData)
-        ? Object.entries(object.auxData).reduce<{ [key: string]: AuxData }>(
-            (acc, [key, value]) => {
-              acc[key] = AuxData.fromJSON(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.auxData).reduce<{ [key: string]: AuxData }>((acc, [key, value]) => {
+          acc[key] = AuxData.fromJSON(value);
+          return acc;
+        }, {})
         : {},
     };
   },
@@ -1091,8 +944,7 @@ export const TestFixture_AuxData_AuxDataEntry = {
   toJSON(message: TestFixture_AuxData_AuxDataEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? AuxData.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? AuxData.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -1103,9 +955,7 @@ function createBaseTestOptions(): TestOptions {
 
 export const TestOptions = {
   fromJSON(object: any): TestOptions {
-    return {
-      now: isSet(object.now) ? fromJsonTimestamp(object.now) : undefined,
-    };
+    return { now: isSet(object.now) ? fromJsonTimestamp(object.now) : undefined };
   },
 
   toJSON(message: TestOptions): unknown {
@@ -1136,52 +986,37 @@ export const TestSuite = {
       description: isSet(object.description) ? String(object.description) : "",
       skip: isSet(object.skip) ? Boolean(object.skip) : false,
       skipReason: isSet(object.skipReason) ? String(object.skipReason) : "",
-      tests: Array.isArray(object?.tests)
-        ? object.tests.map((e: any) => TestTable.fromJSON(e))
-        : [],
+      tests: Array.isArray(object?.tests) ? object.tests.map((e: any) => TestTable.fromJSON(e)) : [],
       principals: isObject(object.principals)
-        ? Object.entries(object.principals).reduce<{
-            [key: string]: Principal;
-          }>((acc, [key, value]) => {
-            acc[key] = Principal.fromJSON(value);
-            return acc;
-          }, {})
+        ? Object.entries(object.principals).reduce<{ [key: string]: Principal }>((acc, [key, value]) => {
+          acc[key] = Principal.fromJSON(value);
+          return acc;
+        }, {})
         : {},
       resources: isObject(object.resources)
-        ? Object.entries(object.resources).reduce<{ [key: string]: Resource }>(
-            (acc, [key, value]) => {
-              acc[key] = Resource.fromJSON(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.resources).reduce<{ [key: string]: Resource }>((acc, [key, value]) => {
+          acc[key] = Resource.fromJSON(value);
+          return acc;
+        }, {})
         : {},
       auxData: isObject(object.auxData)
-        ? Object.entries(object.auxData).reduce<{ [key: string]: AuxData }>(
-            (acc, [key, value]) => {
-              acc[key] = AuxData.fromJSON(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.auxData).reduce<{ [key: string]: AuxData }>((acc, [key, value]) => {
+          acc[key] = AuxData.fromJSON(value);
+          return acc;
+        }, {})
         : {},
-      options: isSet(object.options)
-        ? TestOptions.fromJSON(object.options)
-        : undefined,
+      options: isSet(object.options) ? TestOptions.fromJSON(object.options) : undefined,
     };
   },
 
   toJSON(message: TestSuite): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.description !== undefined && (obj.description = message.description);
     message.skip !== undefined && (obj.skip = message.skip);
     message.skipReason !== undefined && (obj.skipReason = message.skipReason);
     if (message.tests) {
-      obj.tests = message.tests.map((e) =>
-        e ? TestTable.toJSON(e) : undefined
-      );
+      obj.tests = message.tests.map((e) => e ? TestTable.toJSON(e) : undefined);
     } else {
       obj.tests = [];
     }
@@ -1203,10 +1038,7 @@ export const TestSuite = {
         obj.auxData[k] = AuxData.toJSON(v);
       });
     }
-    message.options !== undefined &&
-      (obj.options = message.options
-        ? TestOptions.toJSON(message.options)
-        : undefined);
+    message.options !== undefined && (obj.options = message.options ? TestOptions.toJSON(message.options) : undefined);
     return obj;
   },
 };
@@ -1226,8 +1058,7 @@ export const TestSuite_PrincipalsEntry = {
   toJSON(message: TestSuite_PrincipalsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? Principal.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Principal.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -1247,8 +1078,7 @@ export const TestSuite_ResourcesEntry = {
   toJSON(message: TestSuite_ResourcesEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? Resource.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Resource.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -1268,22 +1098,13 @@ export const TestSuite_AuxDataEntry = {
   toJSON(message: TestSuite_AuxDataEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? AuxData.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? AuxData.toJSON(message.value) : undefined);
     return obj;
   },
 };
 
 function createBaseTestTable(): TestTable {
-  return {
-    name: "",
-    description: "",
-    skip: false,
-    skipReason: "",
-    input: undefined,
-    expected: [],
-    options: undefined,
-  };
+  return { name: "", description: "", skip: false, skipReason: "", input: undefined, expected: [], options: undefined };
 }
 
 export const TestTable = {
@@ -1293,40 +1114,27 @@ export const TestTable = {
       description: isSet(object.description) ? String(object.description) : "",
       skip: isSet(object.skip) ? Boolean(object.skip) : false,
       skipReason: isSet(object.skipReason) ? String(object.skipReason) : "",
-      input: isSet(object.input)
-        ? TestTable_Input.fromJSON(object.input)
-        : undefined,
+      input: isSet(object.input) ? TestTable_Input.fromJSON(object.input) : undefined,
       expected: Array.isArray(object?.expected)
         ? object.expected.map((e: any) => TestTable_Expectation.fromJSON(e))
         : [],
-      options: isSet(object.options)
-        ? TestOptions.fromJSON(object.options)
-        : undefined,
+      options: isSet(object.options) ? TestOptions.fromJSON(object.options) : undefined,
     };
   },
 
   toJSON(message: TestTable): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.description !== undefined && (obj.description = message.description);
     message.skip !== undefined && (obj.skip = message.skip);
     message.skipReason !== undefined && (obj.skipReason = message.skipReason);
-    message.input !== undefined &&
-      (obj.input = message.input
-        ? TestTable_Input.toJSON(message.input)
-        : undefined);
+    message.input !== undefined && (obj.input = message.input ? TestTable_Input.toJSON(message.input) : undefined);
     if (message.expected) {
-      obj.expected = message.expected.map((e) =>
-        e ? TestTable_Expectation.toJSON(e) : undefined
-      );
+      obj.expected = message.expected.map((e) => e ? TestTable_Expectation.toJSON(e) : undefined);
     } else {
       obj.expected = [];
     }
-    message.options !== undefined &&
-      (obj.options = message.options
-        ? TestOptions.toJSON(message.options)
-        : undefined);
+    message.options !== undefined && (obj.options = message.options ? TestOptions.toJSON(message.options) : undefined);
     return obj;
   },
 };
@@ -1338,15 +1146,9 @@ function createBaseTestTable_Input(): TestTable_Input {
 export const TestTable_Input = {
   fromJSON(object: any): TestTable_Input {
     return {
-      principals: Array.isArray(object?.principals)
-        ? object.principals.map((e: any) => String(e))
-        : [],
-      resources: Array.isArray(object?.resources)
-        ? object.resources.map((e: any) => String(e))
-        : [],
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => String(e))
-        : [],
+      principals: Array.isArray(object?.principals) ? object.principals.map((e: any) => String(e)) : [],
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => String(e)) : [],
+      actions: Array.isArray(object?.actions) ? object.actions.map((e: any) => String(e)) : [],
       auxData: isSet(object.auxData) ? String(object.auxData) : "",
     };
   },
@@ -1383,13 +1185,10 @@ export const TestTable_Expectation = {
       principal: isSet(object.principal) ? String(object.principal) : "",
       resource: isSet(object.resource) ? String(object.resource) : "",
       actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-            (acc, [key, value]) => {
-              acc[key] = effectFromJSON(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>((acc, [key, value]) => {
+          acc[key] = effectFromJSON(value);
+          return acc;
+        }, {})
         : {},
     };
   },
@@ -1443,54 +1242,35 @@ function createBaseTest(): Test {
 export const Test = {
   fromJSON(object: any): Test {
     return {
-      name: isSet(object.name)
-        ? Test_TestName.fromJSON(object.name)
-        : undefined,
+      name: isSet(object.name) ? Test_TestName.fromJSON(object.name) : undefined,
       description: isSet(object.description) ? String(object.description) : "",
       skip: isSet(object.skip) ? Boolean(object.skip) : false,
       skipReason: isSet(object.skipReason) ? String(object.skipReason) : "",
-      input: isSet(object.input)
-        ? CheckInput.fromJSON(object.input)
-        : undefined,
+      input: isSet(object.input) ? CheckInput.fromJSON(object.input) : undefined,
       expected: isObject(object.expected)
-        ? Object.entries(object.expected).reduce<{ [key: string]: Effect }>(
-            (acc, [key, value]) => {
-              acc[key] = effectFromJSON(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.expected).reduce<{ [key: string]: Effect }>((acc, [key, value]) => {
+          acc[key] = effectFromJSON(value);
+          return acc;
+        }, {})
         : {},
-      options: isSet(object.options)
-        ? TestOptions.fromJSON(object.options)
-        : undefined,
+      options: isSet(object.options) ? TestOptions.fromJSON(object.options) : undefined,
     };
   },
 
   toJSON(message: Test): unknown {
     const obj: any = {};
-    message.name !== undefined &&
-      (obj.name = message.name
-        ? Test_TestName.toJSON(message.name)
-        : undefined);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.name !== undefined && (obj.name = message.name ? Test_TestName.toJSON(message.name) : undefined);
+    message.description !== undefined && (obj.description = message.description);
     message.skip !== undefined && (obj.skip = message.skip);
     message.skipReason !== undefined && (obj.skipReason = message.skipReason);
-    message.input !== undefined &&
-      (obj.input = message.input
-        ? CheckInput.toJSON(message.input)
-        : undefined);
+    message.input !== undefined && (obj.input = message.input ? CheckInput.toJSON(message.input) : undefined);
     obj.expected = {};
     if (message.expected) {
       Object.entries(message.expected).forEach(([k, v]) => {
         obj.expected[k] = effectToJSON(v);
       });
     }
-    message.options !== undefined &&
-      (obj.options = message.options
-        ? TestOptions.toJSON(message.options)
-        : undefined);
+    message.options !== undefined && (obj.options = message.options ? TestOptions.toJSON(message.options) : undefined);
     return obj;
   },
 };
@@ -1502,24 +1282,17 @@ function createBaseTest_TestName(): Test_TestName {
 export const Test_TestName = {
   fromJSON(object: any): Test_TestName {
     return {
-      testTableName: isSet(object.testTableName)
-        ? String(object.testTableName)
-        : "",
-      principalKey: isSet(object.principalKey)
-        ? String(object.principalKey)
-        : "",
+      testTableName: isSet(object.testTableName) ? String(object.testTableName) : "",
+      principalKey: isSet(object.principalKey) ? String(object.principalKey) : "",
       resourceKey: isSet(object.resourceKey) ? String(object.resourceKey) : "",
     };
   },
 
   toJSON(message: Test_TestName): unknown {
     const obj: any = {};
-    message.testTableName !== undefined &&
-      (obj.testTableName = message.testTableName);
-    message.principalKey !== undefined &&
-      (obj.principalKey = message.principalKey);
-    message.resourceKey !== undefined &&
-      (obj.resourceKey = message.resourceKey);
+    message.testTableName !== undefined && (obj.testTableName = message.testTableName);
+    message.principalKey !== undefined && (obj.principalKey = message.principalKey);
+    message.resourceKey !== undefined && (obj.resourceKey = message.resourceKey);
     return obj;
   },
 };
@@ -1551,28 +1324,20 @@ function createBaseTestResults(): TestResults {
 export const TestResults = {
   fromJSON(object: any): TestResults {
     return {
-      suites: Array.isArray(object?.suites)
-        ? object.suites.map((e: any) => TestResults_Suite.fromJSON(e))
-        : [],
-      summary: isSet(object.summary)
-        ? TestResults_Summary.fromJSON(object.summary)
-        : undefined,
+      suites: Array.isArray(object?.suites) ? object.suites.map((e: any) => TestResults_Suite.fromJSON(e)) : [],
+      summary: isSet(object.summary) ? TestResults_Summary.fromJSON(object.summary) : undefined,
     };
   },
 
   toJSON(message: TestResults): unknown {
     const obj: any = {};
     if (message.suites) {
-      obj.suites = message.suites.map((e) =>
-        e ? TestResults_Suite.toJSON(e) : undefined
-      );
+      obj.suites = message.suites.map((e) => e ? TestResults_Suite.toJSON(e) : undefined);
     } else {
       obj.suites = [];
     }
     message.summary !== undefined &&
-      (obj.summary = message.summary
-        ? TestResults_Summary.toJSON(message.summary)
-        : undefined);
+      (obj.summary = message.summary ? TestResults_Summary.toJSON(message.summary) : undefined);
     return obj;
   },
 };
@@ -1584,17 +1349,14 @@ function createBaseTestResults_Tally(): TestResults_Tally {
 export const TestResults_Tally = {
   fromJSON(object: any): TestResults_Tally {
     return {
-      result: isSet(object.result)
-        ? testResults_ResultFromJSON(object.result)
-        : 0,
+      result: isSet(object.result) ? testResults_ResultFromJSON(object.result) : 0,
       count: isSet(object.count) ? Number(object.count) : 0,
     };
   },
 
   toJSON(message: TestResults_Tally): unknown {
     const obj: any = {};
-    message.result !== undefined &&
-      (obj.result = testResults_ResultToJSON(message.result));
+    message.result !== undefined && (obj.result = testResults_ResultToJSON(message.result));
     message.count !== undefined && (obj.count = Math.round(message.count));
     return obj;
   },
@@ -1607,9 +1369,7 @@ function createBaseTestResults_Summary(): TestResults_Summary {
 export const TestResults_Summary = {
   fromJSON(object: any): TestResults_Summary {
     return {
-      overallResult: isSet(object.overallResult)
-        ? testResults_ResultFromJSON(object.overallResult)
-        : 0,
+      overallResult: isSet(object.overallResult) ? testResults_ResultFromJSON(object.overallResult) : 0,
       testsCount: isSet(object.testsCount) ? Number(object.testsCount) : 0,
       resultCounts: Array.isArray(object?.resultCounts)
         ? object.resultCounts.map((e: any) => TestResults_Tally.fromJSON(e))
@@ -1619,14 +1379,10 @@ export const TestResults_Summary = {
 
   toJSON(message: TestResults_Summary): unknown {
     const obj: any = {};
-    message.overallResult !== undefined &&
-      (obj.overallResult = testResults_ResultToJSON(message.overallResult));
-    message.testsCount !== undefined &&
-      (obj.testsCount = Math.round(message.testsCount));
+    message.overallResult !== undefined && (obj.overallResult = testResults_ResultToJSON(message.overallResult));
+    message.testsCount !== undefined && (obj.testsCount = Math.round(message.testsCount));
     if (message.resultCounts) {
-      obj.resultCounts = message.resultCounts.map((e) =>
-        e ? TestResults_Tally.toJSON(e) : undefined
-      );
+      obj.resultCounts = message.resultCounts.map((e) => e ? TestResults_Tally.toJSON(e) : undefined);
     } else {
       obj.resultCounts = [];
     }
@@ -1646,9 +1402,7 @@ export const TestResults_Suite = {
       principals: Array.isArray(object?.principals)
         ? object.principals.map((e: any) => TestResults_Principal.fromJSON(e))
         : [],
-      summary: isSet(object.summary)
-        ? TestResults_Summary.fromJSON(object.summary)
-        : undefined,
+      summary: isSet(object.summary) ? TestResults_Summary.fromJSON(object.summary) : undefined,
       error: isSet(object.error) ? String(object.error) : "",
     };
   },
@@ -1658,16 +1412,12 @@ export const TestResults_Suite = {
     message.file !== undefined && (obj.file = message.file);
     message.name !== undefined && (obj.name = message.name);
     if (message.principals) {
-      obj.principals = message.principals.map((e) =>
-        e ? TestResults_Principal.toJSON(e) : undefined
-      );
+      obj.principals = message.principals.map((e) => e ? TestResults_Principal.toJSON(e) : undefined);
     } else {
       obj.principals = [];
     }
     message.summary !== undefined &&
-      (obj.summary = message.summary
-        ? TestResults_Summary.toJSON(message.summary)
-        : undefined);
+      (obj.summary = message.summary ? TestResults_Summary.toJSON(message.summary) : undefined);
     message.error !== undefined && (obj.error = message.error);
     return obj;
   },
@@ -1691,9 +1441,7 @@ export const TestResults_Principal = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.resources) {
-      obj.resources = message.resources.map((e) =>
-        e ? TestResults_Resource.toJSON(e) : undefined
-      );
+      obj.resources = message.resources.map((e) => e ? TestResults_Resource.toJSON(e) : undefined);
     } else {
       obj.resources = [];
     }
@@ -1709,9 +1457,7 @@ export const TestResults_Resource = {
   fromJSON(object: any): TestResults_Resource {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => TestResults_Action.fromJSON(e))
-        : [],
+      actions: Array.isArray(object?.actions) ? object.actions.map((e: any) => TestResults_Action.fromJSON(e)) : [],
     };
   },
 
@@ -1719,9 +1465,7 @@ export const TestResults_Resource = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.actions) {
-      obj.actions = message.actions.map((e) =>
-        e ? TestResults_Action.toJSON(e) : undefined
-      );
+      obj.actions = message.actions.map((e) => e ? TestResults_Action.toJSON(e) : undefined);
     } else {
       obj.actions = [];
     }
@@ -1737,9 +1481,7 @@ export const TestResults_Action = {
   fromJSON(object: any): TestResults_Action {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      details: isSet(object.details)
-        ? TestResults_Details.fromJSON(object.details)
-        : undefined,
+      details: isSet(object.details) ? TestResults_Details.fromJSON(object.details) : undefined,
     };
   },
 
@@ -1747,9 +1489,7 @@ export const TestResults_Action = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.details !== undefined &&
-      (obj.details = message.details
-        ? TestResults_Details.toJSON(message.details)
-        : undefined);
+      (obj.details = message.details ? TestResults_Details.toJSON(message.details) : undefined);
     return obj;
   },
 };
@@ -1761,14 +1501,9 @@ function createBaseTestResults_Details(): TestResults_Details {
 export const TestResults_Details = {
   fromJSON(object: any): TestResults_Details {
     return {
-      result: isSet(object.result)
-        ? testResults_ResultFromJSON(object.result)
-        : 0,
+      result: isSet(object.result) ? testResults_ResultFromJSON(object.result) : 0,
       outcome: isSet(object.failure)
-        ? {
-            $case: "failure",
-            failure: TestResults_Failure.fromJSON(object.failure),
-          }
+        ? { $case: "failure", failure: TestResults_Failure.fromJSON(object.failure) }
         : isSet(object.error)
         ? { $case: "error", error: String(object.error) }
         : undefined,
@@ -1780,17 +1515,12 @@ export const TestResults_Details = {
 
   toJSON(message: TestResults_Details): unknown {
     const obj: any = {};
-    message.result !== undefined &&
-      (obj.result = testResults_ResultToJSON(message.result));
+    message.result !== undefined && (obj.result = testResults_ResultToJSON(message.result));
     message.outcome?.$case === "failure" &&
-      (obj.failure = message.outcome?.failure
-        ? TestResults_Failure.toJSON(message.outcome?.failure)
-        : undefined);
+      (obj.failure = message.outcome?.failure ? TestResults_Failure.toJSON(message.outcome?.failure) : undefined);
     message.outcome?.$case === "error" && (obj.error = message.outcome?.error);
     if (message.engineTrace) {
-      obj.engineTrace = message.engineTrace.map((e) =>
-        e ? Trace.toJSON(e) : undefined
-      );
+      obj.engineTrace = message.engineTrace.map((e) => e ? Trace.toJSON(e) : undefined);
     } else {
       obj.engineTrace = [];
     }
@@ -1812,8 +1542,7 @@ export const TestResults_Failure = {
 
   toJSON(message: TestResults_Failure): unknown {
     const obj: any = {};
-    message.expected !== undefined &&
-      (obj.expected = effectToJSON(message.expected));
+    message.expected !== undefined && (obj.expected = effectToJSON(message.expected));
     message.actual !== undefined && (obj.actual = effectToJSON(message.actual));
     return obj;
   },
@@ -1823,10 +1552,18 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
   throw "Unable to locate global object";
 })();
 

@@ -1,18 +1,16 @@
 /* eslint-disable */
-import { Timestamp } from "../../../protobuf/timestamp";
-import {
-  NullValue,
-  nullValueToJSON,
-  nullValueFromJSON,
-} from "../../../protobuf/struct";
 import { Duration } from "../../../protobuf/duration";
+import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { Timestamp } from "../../../protobuf/timestamp";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
   /** The parsed expression. */
-  expr: Expr | undefined;
+  expr:
+    | Expr
+    | undefined;
   /** The source info derived from input that generated the parsed `expr`. */
   sourceInfo: SourceInfo | undefined;
 }
@@ -70,7 +68,9 @@ export interface Expr_Select {
    * For example, in the select expression `request.auth`, the `request`
    * portion of the expression is the `operand`.
    */
-  operand: Expr | undefined;
+  operand:
+    | Expr
+    | undefined;
   /**
    * Required. The name of the field to select.
    *
@@ -96,7 +96,9 @@ export interface Expr_Call {
    * The target of an method call-style expression. For example, `x` in
    * `x.f()`.
    */
-  target: Expr | undefined;
+  target:
+    | Expr
+    | undefined;
   /** Required. The name of the function or method being called. */
   function: string;
   /** The arguments. */
@@ -178,24 +180,32 @@ export interface Expr_Comprehension {
   /** The name of the iteration variable. */
   iterVar: string;
   /** The range over which var iterates. */
-  iterRange: Expr | undefined;
+  iterRange:
+    | Expr
+    | undefined;
   /** The name of the variable used for accumulation of the result. */
   accuVar: string;
   /** The initial value of the accumulator. */
-  accuInit: Expr | undefined;
+  accuInit:
+    | Expr
+    | undefined;
   /**
    * An expression which can contain iter_var and accu_var.
    *
    * Returns false when the result has been computed and may be used as
    * a hint to short-circuit the remainder of the comprehension.
    */
-  loopCondition: Expr | undefined;
+  loopCondition:
+    | Expr
+    | undefined;
   /**
    * An expression which can contain iter_var and accu_var.
    *
    * Computes the next value of accu_var.
    */
-  loopStep: Expr | undefined;
+  loopStep:
+    | Expr
+    | undefined;
   /**
    * An expression which can contain accu_var.
    *
@@ -307,20 +317,15 @@ export const ParsedExpr = {
   fromJSON(object: any): ParsedExpr {
     return {
       expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined,
-      sourceInfo: isSet(object.sourceInfo)
-        ? SourceInfo.fromJSON(object.sourceInfo)
-        : undefined,
+      sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
     };
   },
 
   toJSON(message: ParsedExpr): unknown {
     const obj: any = {};
-    message.expr !== undefined &&
-      (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
+    message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
     message.sourceInfo !== undefined &&
-      (obj.sourceInfo = message.sourceInfo
-        ? SourceInfo.toJSON(message.sourceInfo)
-        : undefined);
+      (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
     return obj;
   },
 };
@@ -336,34 +341,17 @@ export const Expr = {
       exprKind: isSet(object.constExpr)
         ? { $case: "constExpr", constExpr: Constant.fromJSON(object.constExpr) }
         : isSet(object.identExpr)
-        ? {
-            $case: "identExpr",
-            identExpr: Expr_Ident.fromJSON(object.identExpr),
-          }
+        ? { $case: "identExpr", identExpr: Expr_Ident.fromJSON(object.identExpr) }
         : isSet(object.selectExpr)
-        ? {
-            $case: "selectExpr",
-            selectExpr: Expr_Select.fromJSON(object.selectExpr),
-          }
+        ? { $case: "selectExpr", selectExpr: Expr_Select.fromJSON(object.selectExpr) }
         : isSet(object.callExpr)
         ? { $case: "callExpr", callExpr: Expr_Call.fromJSON(object.callExpr) }
         : isSet(object.listExpr)
-        ? {
-            $case: "listExpr",
-            listExpr: Expr_CreateList.fromJSON(object.listExpr),
-          }
+        ? { $case: "listExpr", listExpr: Expr_CreateList.fromJSON(object.listExpr) }
         : isSet(object.structExpr)
-        ? {
-            $case: "structExpr",
-            structExpr: Expr_CreateStruct.fromJSON(object.structExpr),
-          }
+        ? { $case: "structExpr", structExpr: Expr_CreateStruct.fromJSON(object.structExpr) }
         : isSet(object.comprehensionExpr)
-        ? {
-            $case: "comprehensionExpr",
-            comprehensionExpr: Expr_Comprehension.fromJSON(
-              object.comprehensionExpr
-            ),
-          }
+        ? { $case: "comprehensionExpr", comprehensionExpr: Expr_Comprehension.fromJSON(object.comprehensionExpr) }
         : undefined,
     };
   },
@@ -372,33 +360,21 @@ export const Expr = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.exprKind?.$case === "constExpr" &&
-      (obj.constExpr = message.exprKind?.constExpr
-        ? Constant.toJSON(message.exprKind?.constExpr)
-        : undefined);
+      (obj.constExpr = message.exprKind?.constExpr ? Constant.toJSON(message.exprKind?.constExpr) : undefined);
     message.exprKind?.$case === "identExpr" &&
-      (obj.identExpr = message.exprKind?.identExpr
-        ? Expr_Ident.toJSON(message.exprKind?.identExpr)
-        : undefined);
+      (obj.identExpr = message.exprKind?.identExpr ? Expr_Ident.toJSON(message.exprKind?.identExpr) : undefined);
     message.exprKind?.$case === "selectExpr" &&
-      (obj.selectExpr = message.exprKind?.selectExpr
-        ? Expr_Select.toJSON(message.exprKind?.selectExpr)
-        : undefined);
+      (obj.selectExpr = message.exprKind?.selectExpr ? Expr_Select.toJSON(message.exprKind?.selectExpr) : undefined);
     message.exprKind?.$case === "callExpr" &&
-      (obj.callExpr = message.exprKind?.callExpr
-        ? Expr_Call.toJSON(message.exprKind?.callExpr)
-        : undefined);
+      (obj.callExpr = message.exprKind?.callExpr ? Expr_Call.toJSON(message.exprKind?.callExpr) : undefined);
     message.exprKind?.$case === "listExpr" &&
-      (obj.listExpr = message.exprKind?.listExpr
-        ? Expr_CreateList.toJSON(message.exprKind?.listExpr)
-        : undefined);
-    message.exprKind?.$case === "structExpr" &&
-      (obj.structExpr = message.exprKind?.structExpr
-        ? Expr_CreateStruct.toJSON(message.exprKind?.structExpr)
-        : undefined);
-    message.exprKind?.$case === "comprehensionExpr" &&
-      (obj.comprehensionExpr = message.exprKind?.comprehensionExpr
-        ? Expr_Comprehension.toJSON(message.exprKind?.comprehensionExpr)
-        : undefined);
+      (obj.listExpr = message.exprKind?.listExpr ? Expr_CreateList.toJSON(message.exprKind?.listExpr) : undefined);
+    message.exprKind?.$case === "structExpr" && (obj.structExpr = message.exprKind?.structExpr
+      ? Expr_CreateStruct.toJSON(message.exprKind?.structExpr)
+      : undefined);
+    message.exprKind?.$case === "comprehensionExpr" && (obj.comprehensionExpr = message.exprKind?.comprehensionExpr
+      ? Expr_Comprehension.toJSON(message.exprKind?.comprehensionExpr)
+      : undefined);
     return obj;
   },
 };
@@ -409,9 +385,7 @@ function createBaseExpr_Ident(): Expr_Ident {
 
 export const Expr_Ident = {
   fromJSON(object: any): Expr_Ident {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-    };
+    return { name: isSet(object.name) ? String(object.name) : "" };
   },
 
   toJSON(message: Expr_Ident): unknown {
@@ -428,9 +402,7 @@ function createBaseExpr_Select(): Expr_Select {
 export const Expr_Select = {
   fromJSON(object: any): Expr_Select {
     return {
-      operand: isSet(object.operand)
-        ? Expr.fromJSON(object.operand)
-        : undefined,
+      operand: isSet(object.operand) ? Expr.fromJSON(object.operand) : undefined,
       field: isSet(object.field) ? String(object.field) : "",
       testOnly: isSet(object.testOnly) ? Boolean(object.testOnly) : false,
     };
@@ -438,10 +410,7 @@ export const Expr_Select = {
 
   toJSON(message: Expr_Select): unknown {
     const obj: any = {};
-    message.operand !== undefined &&
-      (obj.operand = message.operand
-        ? Expr.toJSON(message.operand)
-        : undefined);
+    message.operand !== undefined && (obj.operand = message.operand ? Expr.toJSON(message.operand) : undefined);
     message.field !== undefined && (obj.field = message.field);
     message.testOnly !== undefined && (obj.testOnly = message.testOnly);
     return obj;
@@ -457,19 +426,16 @@ export const Expr_Call = {
     return {
       target: isSet(object.target) ? Expr.fromJSON(object.target) : undefined,
       function: isSet(object.function) ? String(object.function) : "",
-      args: Array.isArray(object?.args)
-        ? object.args.map((e: any) => Expr.fromJSON(e))
-        : [],
+      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: Expr_Call): unknown {
     const obj: any = {};
-    message.target !== undefined &&
-      (obj.target = message.target ? Expr.toJSON(message.target) : undefined);
+    message.target !== undefined && (obj.target = message.target ? Expr.toJSON(message.target) : undefined);
     message.function !== undefined && (obj.function = message.function);
     if (message.args) {
-      obj.args = message.args.map((e) => (e ? Expr.toJSON(e) : undefined));
+      obj.args = message.args.map((e) => e ? Expr.toJSON(e) : undefined);
     } else {
       obj.args = [];
     }
@@ -483,19 +449,13 @@ function createBaseExpr_CreateList(): Expr_CreateList {
 
 export const Expr_CreateList = {
   fromJSON(object: any): Expr_CreateList {
-    return {
-      elements: Array.isArray(object?.elements)
-        ? object.elements.map((e: any) => Expr.fromJSON(e))
-        : [],
-    };
+    return { elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromJSON(e)) : [] };
   },
 
   toJSON(message: Expr_CreateList): unknown {
     const obj: any = {};
     if (message.elements) {
-      obj.elements = message.elements.map((e) =>
-        e ? Expr.toJSON(e) : undefined
-      );
+      obj.elements = message.elements.map((e) => e ? Expr.toJSON(e) : undefined);
     } else {
       obj.elements = [];
     }
@@ -519,12 +479,9 @@ export const Expr_CreateStruct = {
 
   toJSON(message: Expr_CreateStruct): unknown {
     const obj: any = {};
-    message.messageName !== undefined &&
-      (obj.messageName = message.messageName);
+    message.messageName !== undefined && (obj.messageName = message.messageName);
     if (message.entries) {
-      obj.entries = message.entries.map((e) =>
-        e ? Expr_CreateStruct_Entry.toJSON(e) : undefined
-      );
+      obj.entries = message.entries.map((e) => e ? Expr_CreateStruct_Entry.toJSON(e) : undefined);
     } else {
       obj.entries = [];
     }
@@ -552,14 +509,10 @@ export const Expr_CreateStruct_Entry = {
   toJSON(message: Expr_CreateStruct_Entry): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
-    message.keyKind?.$case === "fieldKey" &&
-      (obj.fieldKey = message.keyKind?.fieldKey);
+    message.keyKind?.$case === "fieldKey" && (obj.fieldKey = message.keyKind?.fieldKey);
     message.keyKind?.$case === "mapKey" &&
-      (obj.mapKey = message.keyKind?.mapKey
-        ? Expr.toJSON(message.keyKind?.mapKey)
-        : undefined);
-    message.value !== undefined &&
-      (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
+      (obj.mapKey = message.keyKind?.mapKey ? Expr.toJSON(message.keyKind?.mapKey) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -580,19 +533,11 @@ export const Expr_Comprehension = {
   fromJSON(object: any): Expr_Comprehension {
     return {
       iterVar: isSet(object.iterVar) ? String(object.iterVar) : "",
-      iterRange: isSet(object.iterRange)
-        ? Expr.fromJSON(object.iterRange)
-        : undefined,
+      iterRange: isSet(object.iterRange) ? Expr.fromJSON(object.iterRange) : undefined,
       accuVar: isSet(object.accuVar) ? String(object.accuVar) : "",
-      accuInit: isSet(object.accuInit)
-        ? Expr.fromJSON(object.accuInit)
-        : undefined,
-      loopCondition: isSet(object.loopCondition)
-        ? Expr.fromJSON(object.loopCondition)
-        : undefined,
-      loopStep: isSet(object.loopStep)
-        ? Expr.fromJSON(object.loopStep)
-        : undefined,
+      accuInit: isSet(object.accuInit) ? Expr.fromJSON(object.accuInit) : undefined,
+      loopCondition: isSet(object.loopCondition) ? Expr.fromJSON(object.loopCondition) : undefined,
+      loopStep: isSet(object.loopStep) ? Expr.fromJSON(object.loopStep) : undefined,
       result: isSet(object.result) ? Expr.fromJSON(object.result) : undefined,
     };
   },
@@ -600,25 +545,13 @@ export const Expr_Comprehension = {
   toJSON(message: Expr_Comprehension): unknown {
     const obj: any = {};
     message.iterVar !== undefined && (obj.iterVar = message.iterVar);
-    message.iterRange !== undefined &&
-      (obj.iterRange = message.iterRange
-        ? Expr.toJSON(message.iterRange)
-        : undefined);
+    message.iterRange !== undefined && (obj.iterRange = message.iterRange ? Expr.toJSON(message.iterRange) : undefined);
     message.accuVar !== undefined && (obj.accuVar = message.accuVar);
-    message.accuInit !== undefined &&
-      (obj.accuInit = message.accuInit
-        ? Expr.toJSON(message.accuInit)
-        : undefined);
+    message.accuInit !== undefined && (obj.accuInit = message.accuInit ? Expr.toJSON(message.accuInit) : undefined);
     message.loopCondition !== undefined &&
-      (obj.loopCondition = message.loopCondition
-        ? Expr.toJSON(message.loopCondition)
-        : undefined);
-    message.loopStep !== undefined &&
-      (obj.loopStep = message.loopStep
-        ? Expr.toJSON(message.loopStep)
-        : undefined);
-    message.result !== undefined &&
-      (obj.result = message.result ? Expr.toJSON(message.result) : undefined);
+      (obj.loopCondition = message.loopCondition ? Expr.toJSON(message.loopCondition) : undefined);
+    message.loopStep !== undefined && (obj.loopStep = message.loopStep ? Expr.toJSON(message.loopStep) : undefined);
+    message.result !== undefined && (obj.result = message.result ? Expr.toJSON(message.result) : undefined);
     return obj;
   },
 };
@@ -643,50 +576,31 @@ export const Constant = {
         : isSet(object.stringValue)
         ? { $case: "stringValue", stringValue: String(object.stringValue) }
         : isSet(object.bytesValue)
-        ? {
-            $case: "bytesValue",
-            bytesValue: bytesFromBase64(object.bytesValue),
-          }
+        ? { $case: "bytesValue", bytesValue: bytesFromBase64(object.bytesValue) }
         : isSet(object.durationValue)
-        ? {
-            $case: "durationValue",
-            durationValue: Duration.fromJSON(object.durationValue),
-          }
+        ? { $case: "durationValue", durationValue: Duration.fromJSON(object.durationValue) }
         : isSet(object.timestampValue)
-        ? {
-            $case: "timestampValue",
-            timestampValue: fromJsonTimestamp(object.timestampValue),
-          }
+        ? { $case: "timestampValue", timestampValue: fromJsonTimestamp(object.timestampValue) }
         : undefined,
     };
   },
 
   toJSON(message: Constant): unknown {
     const obj: any = {};
-    message.constantKind?.$case === "nullValue" &&
-      (obj.nullValue =
-        message.constantKind?.nullValue !== undefined
-          ? nullValueToJSON(message.constantKind?.nullValue)
-          : undefined);
-    message.constantKind?.$case === "boolValue" &&
-      (obj.boolValue = message.constantKind?.boolValue);
-    message.constantKind?.$case === "int64Value" &&
-      (obj.int64Value = message.constantKind?.int64Value);
-    message.constantKind?.$case === "uint64Value" &&
-      (obj.uint64Value = message.constantKind?.uint64Value);
-    message.constantKind?.$case === "doubleValue" &&
-      (obj.doubleValue = message.constantKind?.doubleValue);
-    message.constantKind?.$case === "stringValue" &&
-      (obj.stringValue = message.constantKind?.stringValue);
-    message.constantKind?.$case === "bytesValue" &&
-      (obj.bytesValue =
-        message.constantKind?.bytesValue !== undefined
-          ? base64FromBytes(message.constantKind?.bytesValue)
-          : undefined);
-    message.constantKind?.$case === "durationValue" &&
-      (obj.durationValue = message.constantKind?.durationValue
-        ? Duration.toJSON(message.constantKind?.durationValue)
-        : undefined);
+    message.constantKind?.$case === "nullValue" && (obj.nullValue = message.constantKind?.nullValue !== undefined
+      ? nullValueToJSON(message.constantKind?.nullValue)
+      : undefined);
+    message.constantKind?.$case === "boolValue" && (obj.boolValue = message.constantKind?.boolValue);
+    message.constantKind?.$case === "int64Value" && (obj.int64Value = message.constantKind?.int64Value);
+    message.constantKind?.$case === "uint64Value" && (obj.uint64Value = message.constantKind?.uint64Value);
+    message.constantKind?.$case === "doubleValue" && (obj.doubleValue = message.constantKind?.doubleValue);
+    message.constantKind?.$case === "stringValue" && (obj.stringValue = message.constantKind?.stringValue);
+    message.constantKind?.$case === "bytesValue" && (obj.bytesValue = message.constantKind?.bytesValue !== undefined
+      ? base64FromBytes(message.constantKind?.bytesValue)
+      : undefined);
+    message.constantKind?.$case === "durationValue" && (obj.durationValue = message.constantKind?.durationValue
+      ? Duration.toJSON(message.constantKind?.durationValue)
+      : undefined);
     message.constantKind?.$case === "timestampValue" &&
       (obj.timestampValue = message.constantKind?.timestampValue.toISOString());
     return obj;
@@ -694,50 +608,33 @@ export const Constant = {
 };
 
 function createBaseSourceInfo(): SourceInfo {
-  return {
-    syntaxVersion: "",
-    location: "",
-    lineOffsets: [],
-    positions: {},
-    macroCalls: {},
-  };
+  return { syntaxVersion: "", location: "", lineOffsets: [], positions: {}, macroCalls: {} };
 }
 
 export const SourceInfo = {
   fromJSON(object: any): SourceInfo {
     return {
-      syntaxVersion: isSet(object.syntaxVersion)
-        ? String(object.syntaxVersion)
-        : "",
+      syntaxVersion: isSet(object.syntaxVersion) ? String(object.syntaxVersion) : "",
       location: isSet(object.location) ? String(object.location) : "",
-      lineOffsets: Array.isArray(object?.lineOffsets)
-        ? object.lineOffsets.map((e: any) => Number(e))
-        : [],
+      lineOffsets: Array.isArray(object?.lineOffsets) ? object.lineOffsets.map((e: any) => Number(e)) : [],
       positions: isObject(object.positions)
-        ? Object.entries(object.positions).reduce<{ [key: string]: number }>(
-            (acc, [key, value]) => {
-              acc[key] = Number(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.positions).reduce<{ [key: string]: number }>((acc, [key, value]) => {
+          acc[key] = Number(value);
+          return acc;
+        }, {})
         : {},
       macroCalls: isObject(object.macroCalls)
-        ? Object.entries(object.macroCalls).reduce<{ [key: string]: Expr }>(
-            (acc, [key, value]) => {
-              acc[key] = Expr.fromJSON(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.macroCalls).reduce<{ [key: string]: Expr }>((acc, [key, value]) => {
+          acc[key] = Expr.fromJSON(value);
+          return acc;
+        }, {})
         : {},
     };
   },
 
   toJSON(message: SourceInfo): unknown {
     const obj: any = {};
-    message.syntaxVersion !== undefined &&
-      (obj.syntaxVersion = message.syntaxVersion);
+    message.syntaxVersion !== undefined && (obj.syntaxVersion = message.syntaxVersion);
     message.location !== undefined && (obj.location = message.location);
     if (message.lineOffsets) {
       obj.lineOffsets = message.lineOffsets.map((e) => Math.round(e));
@@ -766,10 +663,7 @@ function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
 
 export const SourceInfo_PositionsEntry = {
   fromJSON(object: any): SourceInfo_PositionsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "0",
-      value: isSet(object.value) ? Number(object.value) : 0,
-    };
+    return { key: isSet(object.key) ? String(object.key) : "0", value: isSet(object.value) ? Number(object.value) : 0 };
   },
 
   toJSON(message: SourceInfo_PositionsEntry): unknown {
@@ -795,8 +689,7 @@ export const SourceInfo_MacroCallsEntry = {
   toJSON(message: SourceInfo_MacroCallsEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
     return obj;
   },
 };
@@ -829,10 +722,18 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
   throw "Unable to locate global object";
 })();
 

@@ -1,10 +1,10 @@
 /* eslint-disable */
-import type { Effect } from "../../effect/v1/effect";
-import type { PlanResourcesFilter } from "../../engine/v1/engine";
-import type { ValidationError, Schema } from "../../schema/v1/schema";
-import type { TestResults, Policy } from "../../policy/v1/policy";
 import type { Empty } from "../../../google/protobuf/empty";
 import type { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
+import type { Effect } from "../../effect/v1/effect";
+import type { PlanResourcesFilter } from "../../engine/v1/engine";
+import type { Policy, TestResults } from "../../policy/v1/policy";
+import type { Schema, ValidationError } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.response.v1";
 
@@ -26,9 +26,7 @@ export interface PlanResourcesResponse_Meta {
 /** Deprecated. See CheckResourcesResponse. */
 export interface CheckResourceSetResponse {
   requestId: string;
-  resourceInstances: {
-    [key: string]: CheckResourceSetResponse_ActionEffectMap;
-  };
+  resourceInstances: { [key: string]: CheckResourceSetResponse_ActionEffectMap };
   meta: CheckResourceSetResponse_Meta | undefined;
 }
 
@@ -43,9 +41,7 @@ export interface CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
 }
 
 export interface CheckResourceSetResponse_Meta {
-  resourceInstances: {
-    [key: string]: CheckResourceSetResponse_Meta_ActionMeta;
-  };
+  resourceInstances: { [key: string]: CheckResourceSetResponse_Meta_ActionMeta };
 }
 
 export interface CheckResourceSetResponse_Meta_EffectMeta {
@@ -110,9 +106,7 @@ export interface CheckResourcesResponse_ResultEntry_Resource {
 }
 
 export interface CheckResourcesResponse_ResultEntry_Meta {
-  actions: {
-    [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta;
-  };
+  actions: { [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta };
   effectiveDerivedRoles: string[];
 }
 
@@ -142,16 +136,15 @@ export interface PlaygroundFailure_Error {
 
 export interface PlaygroundValidateResponse {
   playgroundId: string;
-  outcome?:
-    | { $case: "failure"; failure: PlaygroundFailure }
-    | { $case: "success"; success: Empty };
+  outcome?: { $case: "failure"; failure: PlaygroundFailure } | { $case: "success"; success: Empty };
 }
 
 export interface PlaygroundTestResponse {
   playgroundId: string;
-  outcome?:
-    | { $case: "failure"; failure: PlaygroundFailure }
-    | { $case: "success"; success: PlaygroundTestResponse_TestResults };
+  outcome?: { $case: "failure"; failure: PlaygroundFailure } | {
+    $case: "success";
+    success: PlaygroundTestResponse_TestResults;
+  };
 }
 
 export interface PlaygroundTestResponse_TestResults {
@@ -160,9 +153,10 @@ export interface PlaygroundTestResponse_TestResults {
 
 export interface PlaygroundEvaluateResponse {
   playgroundId: string;
-  outcome?:
-    | { $case: "failure"; failure: PlaygroundFailure }
-    | { $case: "success"; success: PlaygroundEvaluateResponse_EvalResultList };
+  outcome?: { $case: "failure"; failure: PlaygroundFailure } | {
+    $case: "success";
+    success: PlaygroundEvaluateResponse_EvalResultList;
+  };
 }
 
 export interface PlaygroundEvaluateResponse_EvalResult {
@@ -182,10 +176,7 @@ export interface PlaygroundProxyResponse {
   outcome?:
     | { $case: "failure"; failure: PlaygroundFailure }
     | { $case: "checkResourceSet"; checkResourceSet: CheckResourceSetResponse }
-    | {
-        $case: "checkResourceBatch";
-        checkResourceBatch: CheckResourceBatchResponse;
-      }
+    | { $case: "checkResourceBatch"; checkResourceBatch: CheckResourceBatchResponse }
     | { $case: "planResources"; planResources: PlanResourcesResponse }
     | { $case: "checkResources"; checkResources: CheckResourcesResponse };
 }
@@ -195,9 +186,10 @@ export interface AddOrUpdatePolicyResponse {
 }
 
 export interface ListAuditLogEntriesResponse {
-  entry?:
-    | { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry }
-    | { $case: "decisionLogEntry"; decisionLogEntry: DecisionLogEntry };
+  entry?: { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry } | {
+    $case: "decisionLogEntry";
+    decisionLogEntry: DecisionLogEntry;
+  };
 }
 
 export interface ServerInfoResponse {
@@ -214,7 +206,8 @@ export interface GetPolicyResponse {
   policies: Policy[];
 }
 
-export interface AddOrUpdateSchemaResponse {}
+export interface AddOrUpdateSchemaResponse {
+}
 
 export interface ListSchemasResponse {
   schemaIds: string[];
@@ -224,6 +217,8 @@ export interface GetSchemaResponse {
   schemas: Schema[];
 }
 
-export interface DeleteSchemaResponse {}
+export interface DeleteSchemaResponse {
+}
 
-export interface ReloadStoreResponse {}
+export interface ReloadStoreResponse {
+}

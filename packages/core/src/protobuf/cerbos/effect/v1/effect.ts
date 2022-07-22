@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export const protobufPackage = "cerbos.effect.v1";
 
 export enum Effect {

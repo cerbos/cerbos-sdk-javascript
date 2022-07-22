@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export const protobufPackage = "google.protobuf";
 
 /**
@@ -10,7 +11,8 @@ export const protobufPackage = "google.protobuf";
  *       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
  *     }
  */
-export interface Empty {}
+export interface Empty {
+}
 
 function createBaseEmpty(): Empty {
   return {};

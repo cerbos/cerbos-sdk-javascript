@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export const protobufPackage = "google.api";
 
 /**
@@ -148,7 +149,6 @@ export interface Http {
  *       string message_id = 1;
  *       string text = 2;
  *     }
- *
  *
  * The following HTTP JSON to RPC mapping is enabled:
  *

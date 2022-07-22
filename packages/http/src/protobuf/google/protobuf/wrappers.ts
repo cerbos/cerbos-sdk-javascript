@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export const protobufPackage = "google.protobuf";
 
 /**
@@ -97,9 +98,7 @@ function createBaseDoubleValue(): DoubleValue {
 
 export const DoubleValue = {
   fromJSON(object: any): DoubleValue {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0,
-    };
+    return { value: isSet(object.value) ? Number(object.value) : 0 };
   },
 
   toJSON(message: DoubleValue): unknown {
@@ -115,9 +114,7 @@ function createBaseFloatValue(): FloatValue {
 
 export const FloatValue = {
   fromJSON(object: any): FloatValue {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0,
-    };
+    return { value: isSet(object.value) ? Number(object.value) : 0 };
   },
 
   toJSON(message: FloatValue): unknown {
@@ -133,9 +130,7 @@ function createBaseInt64Value(): Int64Value {
 
 export const Int64Value = {
   fromJSON(object: any): Int64Value {
-    return {
-      value: isSet(object.value) ? String(object.value) : "0",
-    };
+    return { value: isSet(object.value) ? String(object.value) : "0" };
   },
 
   toJSON(message: Int64Value): unknown {
@@ -151,9 +146,7 @@ function createBaseUInt64Value(): UInt64Value {
 
 export const UInt64Value = {
   fromJSON(object: any): UInt64Value {
-    return {
-      value: isSet(object.value) ? String(object.value) : "0",
-    };
+    return { value: isSet(object.value) ? String(object.value) : "0" };
   },
 
   toJSON(message: UInt64Value): unknown {
@@ -169,9 +162,7 @@ function createBaseInt32Value(): Int32Value {
 
 export const Int32Value = {
   fromJSON(object: any): Int32Value {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0,
-    };
+    return { value: isSet(object.value) ? Number(object.value) : 0 };
   },
 
   toJSON(message: Int32Value): unknown {
@@ -187,9 +178,7 @@ function createBaseUInt32Value(): UInt32Value {
 
 export const UInt32Value = {
   fromJSON(object: any): UInt32Value {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0,
-    };
+    return { value: isSet(object.value) ? Number(object.value) : 0 };
   },
 
   toJSON(message: UInt32Value): unknown {
@@ -205,9 +194,7 @@ function createBaseBoolValue(): BoolValue {
 
 export const BoolValue = {
   fromJSON(object: any): BoolValue {
-    return {
-      value: isSet(object.value) ? Boolean(object.value) : false,
-    };
+    return { value: isSet(object.value) ? Boolean(object.value) : false };
   },
 
   toJSON(message: BoolValue): unknown {
@@ -223,9 +210,7 @@ function createBaseStringValue(): StringValue {
 
 export const StringValue = {
   fromJSON(object: any): StringValue {
-    return {
-      value: isSet(object.value) ? String(object.value) : "",
-    };
+    return { value: isSet(object.value) ? String(object.value) : "" };
   },
 
   toJSON(message: StringValue): unknown {
@@ -241,19 +226,13 @@ function createBaseBytesValue(): BytesValue {
 
 export const BytesValue = {
   fromJSON(object: any): BytesValue {
-    return {
-      value: isSet(object.value)
-        ? bytesFromBase64(object.value)
-        : new Uint8Array(),
-    };
+    return { value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array() };
   },
 
   toJSON(message: BytesValue): unknown {
     const obj: any = {};
     message.value !== undefined &&
-      (obj.value = base64FromBytes(
-        message.value !== undefined ? message.value : new Uint8Array()
-      ));
+      (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
 };
@@ -262,10 +241,18 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
   throw "Unable to locate global object";
 })();
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export const protobufPackage = "google.protobuf";
 
 /**
@@ -18,9 +19,7 @@ export function nullValueFromJSON(object: any): NullValue {
     case "NULL_VALUE":
       return NullValue.NULL_VALUE;
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum NullValue"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum NullValue");
   }
 }
 
@@ -29,9 +28,7 @@ export function nullValueToJSON(object: NullValue): string {
     case NullValue.NULL_VALUE:
       return "NULL_VALUE";
     default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum NullValue"
-      );
+      throw new globalThis.Error("Unrecognized enum value " + object + " for enum NullValue");
   }
 }
 
@@ -91,12 +88,10 @@ export const Struct = {
   fromJSON(object: any): Struct {
     return {
       fields: isObject(object.fields)
-        ? Object.entries(object.fields).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
+        ? Object.entries(object.fields).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
+          acc[key] = value as any | undefined;
+          return acc;
+        }, {})
         : {},
     };
   },
@@ -137,10 +132,7 @@ function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
 
 export const Struct_FieldsEntry = {
   fromJSON(object: any): Struct_FieldsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
+    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
   },
 
   toJSON(message: Struct_FieldsEntry): unknown {
@@ -177,20 +169,12 @@ export const Value = {
   toJSON(message: Value): unknown {
     const obj: any = {};
     message.kind?.$case === "nullValue" &&
-      (obj.nullValue =
-        message.kind?.nullValue !== undefined
-          ? nullValueToJSON(message.kind?.nullValue)
-          : undefined);
-    message.kind?.$case === "numberValue" &&
-      (obj.numberValue = message.kind?.numberValue);
-    message.kind?.$case === "stringValue" &&
-      (obj.stringValue = message.kind?.stringValue);
-    message.kind?.$case === "boolValue" &&
-      (obj.boolValue = message.kind?.boolValue);
-    message.kind?.$case === "structValue" &&
-      (obj.structValue = message.kind?.structValue);
-    message.kind?.$case === "listValue" &&
-      (obj.listValue = message.kind?.listValue);
+      (obj.nullValue = message.kind?.nullValue !== undefined ? nullValueToJSON(message.kind?.nullValue) : undefined);
+    message.kind?.$case === "numberValue" && (obj.numberValue = message.kind?.numberValue);
+    message.kind?.$case === "stringValue" && (obj.stringValue = message.kind?.stringValue);
+    message.kind?.$case === "boolValue" && (obj.boolValue = message.kind?.boolValue);
+    message.kind?.$case === "structValue" && (obj.structValue = message.kind?.structValue);
+    message.kind?.$case === "listValue" && (obj.listValue = message.kind?.listValue);
     return obj;
   },
 
@@ -216,9 +200,7 @@ export const Value = {
     return result;
   },
 
-  unwrap(
-    message: Value
-  ): string | number | boolean | Object | null | Array<any> | undefined {
+  unwrap(message: Value): string | number | boolean | Object | null | Array<any> | undefined {
     if (message.kind?.$case === "nullValue") {
       return null;
     } else if (message.kind?.$case === "numberValue") {
@@ -243,9 +225,7 @@ function createBaseListValue(): ListValue {
 
 export const ListValue = {
   fromJSON(object: any): ListValue {
-    return {
-      values: Array.isArray(object?.values) ? [...object.values] : [],
-    };
+    return { values: Array.isArray(object?.values) ? [...object.values] : [] };
   },
 
   toJSON(message: ListValue): unknown {
@@ -275,10 +255,18 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
   throw "Unable to locate global object";
 })();
 

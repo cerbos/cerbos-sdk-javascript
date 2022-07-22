@@ -1,13 +1,15 @@
 /* eslint-disable */
-import type { NullValue } from "../../../protobuf/struct";
 import type { Duration } from "../../../protobuf/duration";
+import type { NullValue } from "../../../protobuf/struct";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
   /** The parsed expression. */
-  expr: Expr | undefined;
+  expr:
+    | Expr
+    | undefined;
   /** The source info derived from input that generated the parsed `expr`. */
   sourceInfo: SourceInfo | undefined;
 }
@@ -65,7 +67,9 @@ export interface Expr_Select {
    * For example, in the select expression `request.auth`, the `request`
    * portion of the expression is the `operand`.
    */
-  operand: Expr | undefined;
+  operand:
+    | Expr
+    | undefined;
   /**
    * Required. The name of the field to select.
    *
@@ -91,7 +95,9 @@ export interface Expr_Call {
    * The target of an method call-style expression. For example, `x` in
    * `x.f()`.
    */
-  target: Expr | undefined;
+  target:
+    | Expr
+    | undefined;
   /** Required. The name of the function or method being called. */
   function: string;
   /** The arguments. */
@@ -173,24 +179,32 @@ export interface Expr_Comprehension {
   /** The name of the iteration variable. */
   iterVar: string;
   /** The range over which var iterates. */
-  iterRange: Expr | undefined;
+  iterRange:
+    | Expr
+    | undefined;
   /** The name of the variable used for accumulation of the result. */
   accuVar: string;
   /** The initial value of the accumulator. */
-  accuInit: Expr | undefined;
+  accuInit:
+    | Expr
+    | undefined;
   /**
    * An expression which can contain iter_var and accu_var.
    *
    * Returns false when the result has been computed and may be used as
    * a hint to short-circuit the remainder of the comprehension.
    */
-  loopCondition: Expr | undefined;
+  loopCondition:
+    | Expr
+    | undefined;
   /**
    * An expression which can contain iter_var and accu_var.
    *
    * Computes the next value of accu_var.
    */
-  loopStep: Expr | undefined;
+  loopStep:
+    | Expr
+    | undefined;
   /**
    * An expression which can contain accu_var.
    *

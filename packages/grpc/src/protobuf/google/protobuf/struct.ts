@@ -67,16 +67,10 @@ function createBaseStruct(): Struct {
 }
 
 export const Struct = {
-  encode(
-    message: Struct,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Struct, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.fields).forEach(([key, value]) => {
       if (value !== undefined) {
-        Struct_FieldsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(10).fork()
-        ).ldelim();
+        Struct_FieldsEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
       }
     });
     return writer;
@@ -127,18 +121,12 @@ function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
 }
 
 export const Struct_FieldsEntry = {
-  encode(
-    message: Struct_FieldsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Struct_FieldsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(
-        Value.wrap(message.value),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -184,16 +172,10 @@ export const Value = {
       writer.uint32(32).bool(message.kind.boolValue);
     }
     if (message.kind?.$case === "structValue") {
-      Struct.encode(
-        Struct.wrap(message.kind.structValue),
-        writer.uint32(42).fork()
-      ).ldelim();
+      Struct.encode(Struct.wrap(message.kind.structValue), writer.uint32(42).fork()).ldelim();
     }
     if (message.kind?.$case === "listValue") {
-      ListValue.encode(
-        ListValue.wrap(message.kind.listValue),
-        writer.uint32(50).fork()
-      ).ldelim();
+      ListValue.encode(ListValue.wrap(message.kind.listValue), writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -206,10 +188,7 @@ export const Value = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.kind = {
-            $case: "nullValue",
-            nullValue: reader.int32() as any,
-          };
+          message.kind = { $case: "nullValue", nullValue: reader.int32() as any };
           break;
         case 2:
           message.kind = { $case: "numberValue", numberValue: reader.double() };
@@ -221,18 +200,10 @@ export const Value = {
           message.kind = { $case: "boolValue", boolValue: reader.bool() };
           break;
         case 5:
-          message.kind = {
-            $case: "structValue",
-            structValue: Struct.unwrap(Struct.decode(reader, reader.uint32())),
-          };
+          message.kind = { $case: "structValue", structValue: Struct.unwrap(Struct.decode(reader, reader.uint32())) };
           break;
         case 6:
-          message.kind = {
-            $case: "listValue",
-            listValue: ListValue.unwrap(
-              ListValue.decode(reader, reader.uint32())
-            ),
-          };
+          message.kind = { $case: "listValue", listValue: ListValue.unwrap(ListValue.decode(reader, reader.uint32())) };
           break;
         default:
           reader.skipType(tag & 7);
@@ -264,9 +235,7 @@ export const Value = {
     return result;
   },
 
-  unwrap(
-    message: Value
-  ): string | number | boolean | Object | null | Array<any> | undefined {
+  unwrap(message: Value): string | number | boolean | Object | null | Array<any> | undefined {
     if (message.kind?.$case === "nullValue") {
       return null;
     } else if (message.kind?.$case === "numberValue") {
@@ -290,10 +259,7 @@ function createBaseListValue(): ListValue {
 }
 
 export const ListValue = {
-  encode(
-    message: ListValue,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ListValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       Value.encode(Value.wrap(v!), writer.uint32(10).fork()).ldelim();
     }
@@ -308,9 +274,7 @@ export const ListValue = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.values.push(
-            Value.unwrap(Value.decode(reader, reader.uint32()))
-          );
+          message.values.push(Value.unwrap(Value.decode(reader, reader.uint32())));
           break;
         default:
           reader.skipType(tag & 7);

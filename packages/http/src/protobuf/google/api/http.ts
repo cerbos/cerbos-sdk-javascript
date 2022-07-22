@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export const protobufPackage = "google.api";
 
 /**
@@ -148,7 +149,6 @@ export interface Http {
  *       string message_id = 1;
  *       string text = 2;
  *     }
- *
  *
  * The following HTTP JSON to RPC mapping is enabled:
  *
@@ -350,9 +350,7 @@ function createBaseHttp(): Http {
 export const Http = {
   fromJSON(object: any): Http {
     return {
-      rules: Array.isArray(object?.rules)
-        ? object.rules.map((e: any) => HttpRule.fromJSON(e))
-        : [],
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromJSON(e)) : [],
       fullyDecodeReservedExpansion: isSet(object.fullyDecodeReservedExpansion)
         ? Boolean(object.fullyDecodeReservedExpansion)
         : false,
@@ -362,9 +360,7 @@ export const Http = {
   toJSON(message: Http): unknown {
     const obj: any = {};
     if (message.rules) {
-      obj.rules = message.rules.map((e) =>
-        e ? HttpRule.toJSON(e) : undefined
-      );
+      obj.rules = message.rules.map((e) => e ? HttpRule.toJSON(e) : undefined);
     } else {
       obj.rules = [];
     }
@@ -375,13 +371,7 @@ export const Http = {
 };
 
 function createBaseHttpRule(): HttpRule {
-  return {
-    selector: "",
-    pattern: undefined,
-    body: "",
-    responseBody: "",
-    additionalBindings: [],
-  };
+  return { selector: "", pattern: undefined, body: "", responseBody: "", additionalBindings: [] };
 }
 
 export const HttpRule = {
@@ -402,9 +392,7 @@ export const HttpRule = {
         ? { $case: "custom", custom: CustomHttpPattern.fromJSON(object.custom) }
         : undefined,
       body: isSet(object.body) ? String(object.body) : "",
-      responseBody: isSet(object.responseBody)
-        ? String(object.responseBody)
-        : "",
+      responseBody: isSet(object.responseBody) ? String(object.responseBody) : "",
       additionalBindings: Array.isArray(object?.additionalBindings)
         ? object.additionalBindings.map((e: any) => HttpRule.fromJSON(e))
         : [],
@@ -417,20 +405,14 @@ export const HttpRule = {
     message.pattern?.$case === "get" && (obj.get = message.pattern?.get);
     message.pattern?.$case === "put" && (obj.put = message.pattern?.put);
     message.pattern?.$case === "post" && (obj.post = message.pattern?.post);
-    message.pattern?.$case === "delete" &&
-      (obj.delete = message.pattern?.delete);
+    message.pattern?.$case === "delete" && (obj.delete = message.pattern?.delete);
     message.pattern?.$case === "patch" && (obj.patch = message.pattern?.patch);
     message.pattern?.$case === "custom" &&
-      (obj.custom = message.pattern?.custom
-        ? CustomHttpPattern.toJSON(message.pattern?.custom)
-        : undefined);
+      (obj.custom = message.pattern?.custom ? CustomHttpPattern.toJSON(message.pattern?.custom) : undefined);
     message.body !== undefined && (obj.body = message.body);
-    message.responseBody !== undefined &&
-      (obj.responseBody = message.responseBody);
+    message.responseBody !== undefined && (obj.responseBody = message.responseBody);
     if (message.additionalBindings) {
-      obj.additionalBindings = message.additionalBindings.map((e) =>
-        e ? HttpRule.toJSON(e) : undefined
-      );
+      obj.additionalBindings = message.additionalBindings.map((e) => e ? HttpRule.toJSON(e) : undefined);
     } else {
       obj.additionalBindings = [];
     }
@@ -444,10 +426,7 @@ function createBaseCustomHttpPattern(): CustomHttpPattern {
 
 export const CustomHttpPattern = {
   fromJSON(object: any): CustomHttpPattern {
-    return {
-      kind: isSet(object.kind) ? String(object.kind) : "",
-      path: isSet(object.path) ? String(object.path) : "",
-    };
+    return { kind: isSet(object.kind) ? String(object.kind) : "", path: isSet(object.path) ? String(object.path) : "" };
   },
 
   toJSON(message: CustomHttpPattern): unknown {
