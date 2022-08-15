@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "@cerbos/core": "^0.6.0",
-    "@grpc/grpc-js": "^1.6.8",
+    "@grpc/grpc-js": "^1.6.9",
     "long": "^4.0.0",
     "protobufjs": "^6.11.3"
   }
