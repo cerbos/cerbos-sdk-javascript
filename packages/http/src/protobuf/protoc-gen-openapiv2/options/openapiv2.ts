@@ -568,14 +568,14 @@ export interface JSONSchema {
    */
   minimum: number;
   exclusiveMinimum: boolean;
-  maxLength: number;
-  minLength: number;
+  maxLength: string;
+  minLength: string;
   pattern: string;
-  maxItems: number;
-  minItems: number;
+  maxItems: string;
+  minItems: string;
   uniqueItems: boolean;
-  maxProperties: number;
-  minProperties: number;
+  maxProperties: string;
+  minProperties: string;
   required: string[];
   /** Items in 'array' must be unique. */
   array: string[];
@@ -1644,14 +1644,14 @@ function createBaseJSONSchema(): JSONSchema {
     exclusiveMaximum: false,
     minimum: 0,
     exclusiveMinimum: false,
-    maxLength: 0,
-    minLength: 0,
+    maxLength: "0",
+    minLength: "0",
     pattern: "",
-    maxItems: 0,
-    minItems: 0,
+    maxItems: "0",
+    minItems: "0",
     uniqueItems: false,
-    maxProperties: 0,
-    minProperties: 0,
+    maxProperties: "0",
+    minProperties: "0",
     required: [],
     array: [],
     type: [],
@@ -1678,20 +1678,20 @@ export const JSONSchema = {
       exclusiveMinimum: isSet(object.exclusiveMinimum)
         ? Boolean(object.exclusiveMinimum)
         : false,
-      maxLength: isSet(object.maxLength) ? Number(object.maxLength) : 0,
-      minLength: isSet(object.minLength) ? Number(object.minLength) : 0,
+      maxLength: isSet(object.maxLength) ? String(object.maxLength) : "0",
+      minLength: isSet(object.minLength) ? String(object.minLength) : "0",
       pattern: isSet(object.pattern) ? String(object.pattern) : "",
-      maxItems: isSet(object.maxItems) ? Number(object.maxItems) : 0,
-      minItems: isSet(object.minItems) ? Number(object.minItems) : 0,
+      maxItems: isSet(object.maxItems) ? String(object.maxItems) : "0",
+      minItems: isSet(object.minItems) ? String(object.minItems) : "0",
       uniqueItems: isSet(object.uniqueItems)
         ? Boolean(object.uniqueItems)
         : false,
       maxProperties: isSet(object.maxProperties)
-        ? Number(object.maxProperties)
-        : 0,
+        ? String(object.maxProperties)
+        : "0",
       minProperties: isSet(object.minProperties)
-        ? Number(object.minProperties)
-        : 0,
+        ? String(object.minProperties)
+        : "0",
       required: Array.isArray(object?.required)
         ? object.required.map((e: any) => String(e))
         : [],
@@ -1726,21 +1726,17 @@ export const JSONSchema = {
     message.minimum !== undefined && (obj.minimum = message.minimum);
     message.exclusiveMinimum !== undefined &&
       (obj.exclusiveMinimum = message.exclusiveMinimum);
-    message.maxLength !== undefined &&
-      (obj.maxLength = Math.round(message.maxLength));
-    message.minLength !== undefined &&
-      (obj.minLength = Math.round(message.minLength));
+    message.maxLength !== undefined && (obj.maxLength = message.maxLength);
+    message.minLength !== undefined && (obj.minLength = message.minLength);
     message.pattern !== undefined && (obj.pattern = message.pattern);
-    message.maxItems !== undefined &&
-      (obj.maxItems = Math.round(message.maxItems));
-    message.minItems !== undefined &&
-      (obj.minItems = Math.round(message.minItems));
+    message.maxItems !== undefined && (obj.maxItems = message.maxItems);
+    message.minItems !== undefined && (obj.minItems = message.minItems);
     message.uniqueItems !== undefined &&
       (obj.uniqueItems = message.uniqueItems);
     message.maxProperties !== undefined &&
-      (obj.maxProperties = Math.round(message.maxProperties));
+      (obj.maxProperties = message.maxProperties);
     message.minProperties !== undefined &&
-      (obj.minProperties = Math.round(message.minProperties));
+      (obj.minProperties = message.minProperties);
     if (message.required) {
       obj.required = message.required.map((e) => e);
     } else {

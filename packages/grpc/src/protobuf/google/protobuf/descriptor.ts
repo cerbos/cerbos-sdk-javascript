@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "google.protobuf";
 
@@ -661,10 +661,10 @@ export interface UninterpretedOption {
    * identified it as during parsing. Exactly one of these should be set.
    */
   identifierValue: string;
-  positiveIntValue: number;
-  negativeIntValue: number;
+  positiveIntValue: string;
+  negativeIntValue: string;
   doubleValue: number;
-  stringValue: Buffer;
+  stringValue: Uint8Array;
   aggregateValue: string;
 }
 
@@ -2290,10 +2290,10 @@ function createBaseUninterpretedOption(): UninterpretedOption {
   return {
     name: [],
     identifierValue: "",
-    positiveIntValue: 0,
-    negativeIntValue: 0,
+    positiveIntValue: "0",
+    negativeIntValue: "0",
     doubleValue: 0,
-    stringValue: Buffer.alloc(0),
+    stringValue: new Uint8Array(),
     aggregateValue: "",
   };
 }
@@ -2312,10 +2312,10 @@ export const UninterpretedOption = {
     if (message.identifierValue !== "") {
       writer.uint32(26).string(message.identifierValue);
     }
-    if (message.positiveIntValue !== 0) {
+    if (message.positiveIntValue !== "0") {
       writer.uint32(32).uint64(message.positiveIntValue);
     }
-    if (message.negativeIntValue !== 0) {
+    if (message.negativeIntValue !== "0") {
       writer.uint32(40).int64(message.negativeIntValue);
     }
     if (message.doubleValue !== 0) {
@@ -2346,16 +2346,16 @@ export const UninterpretedOption = {
           message.identifierValue = reader.string();
           break;
         case 4:
-          message.positiveIntValue = longToNumber(reader.uint64() as Long);
+          message.positiveIntValue = longToString(reader.uint64() as Long);
           break;
         case 5:
-          message.negativeIntValue = longToNumber(reader.int64() as Long);
+          message.negativeIntValue = longToString(reader.int64() as Long);
           break;
         case 6:
           message.doubleValue = reader.double();
           break;
         case 7:
-          message.stringValue = reader.bytes() as Buffer;
+          message.stringValue = reader.bytes();
           break;
         case 8:
           message.aggregateValue = reader.string();
@@ -2636,22 +2636,8 @@ export const GeneratedCodeInfo_Annotation = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
+function longToString(long: Long) {
+  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

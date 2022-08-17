@@ -67,7 +67,7 @@ export interface Duration {
    * to +315,576,000,000 inclusive. Note: these bounds are computed from:
    * 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
    */
-  seconds: number;
+  seconds: string;
   /**
    * Signed fractions of a second at nanosecond resolution of the span
    * of time. Durations less than one second are represented with a 0
@@ -80,21 +80,20 @@ export interface Duration {
 }
 
 function createBaseDuration(): Duration {
-  return { seconds: 0, nanos: 0 };
+  return { seconds: "0", nanos: 0 };
 }
 
 export const Duration = {
   fromJSON(object: any): Duration {
     return {
-      seconds: isSet(object.seconds) ? Number(object.seconds) : 0,
+      seconds: isSet(object.seconds) ? String(object.seconds) : "0",
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
     };
   },
 
   toJSON(message: Duration): unknown {
     const obj: any = {};
-    message.seconds !== undefined &&
-      (obj.seconds = Math.round(message.seconds));
+    message.seconds !== undefined && (obj.seconds = message.seconds);
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },

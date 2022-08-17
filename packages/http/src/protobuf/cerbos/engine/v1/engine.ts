@@ -1,10 +1,6 @@
 /* eslint-disable */
-import {
-  Effect,
-  effectFromJSON,
-  effectToJSON,
-} from "../../../cerbos/effect/v1/effect";
-import { ValidationError } from "../../../cerbos/schema/v1/schema";
+import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
+import { ValidationError } from "../../schema/v1/schema";
 import { CheckedExpr } from "../../../google/api/expr/v1alpha1/checked";
 
 export const protobufPackage = "cerbos.engine.v1";

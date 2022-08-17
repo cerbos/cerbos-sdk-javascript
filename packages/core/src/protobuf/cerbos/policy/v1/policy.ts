@@ -1,12 +1,12 @@
 /* eslint-disable */
-import type { Effect } from "../../../cerbos/effect/v1/effect";
+import type { Effect } from "../../effect/v1/effect";
 import type {
   Principal,
   Resource,
   AuxData,
   CheckInput,
   Trace,
-} from "../../../cerbos/engine/v1/engine";
+} from "../../engine/v1/engine";
 
 export const protobufPackage = "cerbos.policy.v1";
 
@@ -30,7 +30,7 @@ export interface Policy_VariablesEntry {
 export interface Metadata {
   sourceFile: string;
   annotations: { [key: string]: string };
-  hash: number | undefined;
+  hash: string | undefined;
   storeIdentifer: string;
 }
 
@@ -148,6 +148,10 @@ export interface TestFixture_AuxData_AuxDataEntry {
   value: AuxData | undefined;
 }
 
+export interface TestOptions {
+  now: Date | undefined;
+}
+
 export interface TestSuite {
   name: string;
   description: string;
@@ -157,6 +161,7 @@ export interface TestSuite {
   principals: { [key: string]: Principal };
   resources: { [key: string]: Resource };
   auxData: { [key: string]: AuxData };
+  options: TestOptions | undefined;
 }
 
 export interface TestSuite_PrincipalsEntry {
@@ -181,6 +186,7 @@ export interface TestTable {
   skipReason: string;
   input: TestTable_Input | undefined;
   expected: TestTable_Expectation[];
+  options: TestOptions | undefined;
 }
 
 export interface TestTable_Input {
@@ -208,6 +214,7 @@ export interface Test {
   skipReason: string;
   input: CheckInput | undefined;
   expected: { [key: string]: Effect };
+  options: TestOptions | undefined;
 }
 
 export interface Test_TestName {

@@ -1,6 +1,6 @@
 /* eslint-disable */
-import type { Effect } from "../../../cerbos/effect/v1/effect";
-import type { ValidationError } from "../../../cerbos/schema/v1/schema";
+import type { Effect } from "../../effect/v1/effect";
+import type { ValidationError } from "../../schema/v1/schema";
 import type { CheckedExpr } from "../../../google/api/expr/v1alpha1/checked";
 
 export const protobufPackage = "cerbos.engine.v1";

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
 import { Duration } from "../../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "cerbos.telemetry.v1";
 
@@ -103,7 +103,7 @@ export interface ServerLaunch_Stats_Schema {
 export interface ServerStop {
   version: string;
   uptime: Duration | undefined;
-  requestsTotal: number;
+  requestsTotal: string;
 }
 
 export interface Event {
@@ -112,7 +112,7 @@ export interface Event {
 
 export interface Event_CountStat {
   key: string;
-  count: number;
+  count: string;
 }
 
 export interface Event_ApiActivity {
@@ -1019,7 +1019,7 @@ export const ServerLaunch_Stats_Schema = {
 };
 
 function createBaseServerStop(): ServerStop {
-  return { version: "", uptime: undefined, requestsTotal: 0 };
+  return { version: "", uptime: undefined, requestsTotal: "0" };
 }
 
 export const ServerStop = {
@@ -1033,7 +1033,7 @@ export const ServerStop = {
     if (message.uptime !== undefined) {
       Duration.encode(message.uptime, writer.uint32(18).fork()).ldelim();
     }
-    if (message.requestsTotal !== 0) {
+    if (message.requestsTotal !== "0") {
       writer.uint32(24).uint64(message.requestsTotal);
     }
     return writer;
@@ -1053,7 +1053,7 @@ export const ServerStop = {
           message.uptime = Duration.decode(reader, reader.uint32());
           break;
         case 3:
-          message.requestsTotal = longToNumber(reader.uint64() as Long);
+          message.requestsTotal = longToString(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1102,7 +1102,7 @@ export const Event = {
 };
 
 function createBaseEvent_CountStat(): Event_CountStat {
-  return { key: "", count: 0 };
+  return { key: "", count: "0" };
 }
 
 export const Event_CountStat = {
@@ -1113,7 +1113,7 @@ export const Event_CountStat = {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-    if (message.count !== 0) {
+    if (message.count !== "0") {
       writer.uint32(16).uint64(message.count);
     }
     return writer;
@@ -1130,7 +1130,7 @@ export const Event_CountStat = {
           message.key = reader.string();
           break;
         case 2:
-          message.count = longToNumber(reader.uint64() as Long);
+          message.count = longToString(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1197,22 +1197,8 @@ export const Event_ApiActivity = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
+function longToString(long: Long) {
+  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

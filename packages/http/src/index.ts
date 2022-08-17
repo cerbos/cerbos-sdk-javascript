@@ -9,19 +9,39 @@ import {
   NotOK,
   Options,
   Status,
-  _RPCs,
+  _RPC,
   _Request,
   _Response,
+  _Service,
   _Transport,
 } from "@cerbos/core";
+import { btoa } from "abab";
+import { stringify as queryStringify } from "qs";
 
 import {
+  AddOrUpdatePolicyRequest,
+  AddOrUpdateSchemaRequest,
   CheckResourcesRequest,
+  DeleteSchemaRequest,
+  GetPolicyRequest,
+  GetSchemaRequest,
+  ListPoliciesRequest,
+  ListSchemasRequest,
   PlanResourcesRequest,
+  ReloadStoreRequest,
+  ServerInfoRequest,
 } from "./protobuf/cerbos/request/v1/request";
 import {
+  AddOrUpdatePolicyResponse,
+  AddOrUpdateSchemaResponse,
   CheckResourcesResponse,
+  DeleteSchemaResponse,
+  GetPolicyResponse,
+  GetSchemaResponse,
+  ListPoliciesResponse,
+  ListSchemasResponse,
   PlanResourcesResponse,
+  ReloadStoreResponse,
   ServerInfoResponse,
 } from "./protobuf/cerbos/response/v1/response";
 
@@ -81,57 +101,132 @@ export class HTTP extends Client {
       headers["Playground-Instance"] = playgroundInstance;
     }
 
-    const transport: _Transport = async (rpc, request) => {
-      const { method, path, serializeRequest, deserializeResponse } =
-        service[rpc];
+    const transport: _Transport = async (
+      service,
+      rpc,
+      request,
+      adminCredentials
+    ) => {
+      const { method, path, requestType, responseType } = services[service][
+        rpc
+      ] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
 
-      const response = await fetch(url + path, {
+      const requestProtobuf = requestType.toJSON(request);
+
+      const query =
+        method !== "POST"
+          ? `?${queryStringify(requestProtobuf, { indices: false })}`
+          : "";
+
+      const additionalHeaders: HeadersInit = {};
+
+      if (adminCredentials) {
+        additionalHeaders["Authorization"] = `Basic ${
+          btoa(`${adminCredentials.username}:${adminCredentials.password}`) ??
+          ""
+        }`;
+      }
+
+      const response = await fetch(url + path + query, {
         method,
-        body: serializeRequest(request),
-        headers,
+        body: method !== "POST" ? null : JSON.stringify(requestProtobuf),
+        headers: { ...headers, ...additionalHeaders },
       });
 
       if (!response.ok) {
         throw notOK(await response.text());
       }
 
-      return deserializeResponse(await response.json());
+      return responseType.fromJSON(await response.json());
     };
 
     super(transport, options);
   }
 }
 
-type Service = {
-  [RPC in keyof _RPCs]: {
-    method: "GET" | "POST";
-    path: string;
-    serializeRequest: (request: _Request<RPC>) => string | null;
-    deserializeResponse: (response: unknown) => _Response<RPC>;
+interface Endpoint<Service extends _Service, RPC extends _RPC<Service>> {
+  method: "GET" | "POST" | "DELETE";
+  path: string;
+  requestType: { toJSON: (request: _Request<Service, RPC>) => unknown };
+  responseType: { fromJSON: (response: unknown) => _Response<Service, RPC> };
+}
+
+type Services = {
+  [Service in _Service]: {
+    [RPC in _RPC<Service>]: Endpoint<Service, RPC>;
   };
 };
 
-const service: Service = {
-  checkResources: {
-    method: "POST",
-    path: "/api/check/resources",
-    serializeRequest: (request) =>
-      JSON.stringify(CheckResourcesRequest.toJSON(request)),
-    deserializeResponse: (response) =>
-      CheckResourcesResponse.fromJSON(response),
+const services: Services = {
+  admin: {
+    addOrUpdatePolicy: {
+      method: "POST",
+      path: "/admin/policy",
+      requestType: AddOrUpdatePolicyRequest,
+      responseType: AddOrUpdatePolicyResponse,
+    },
+    addOrUpdateSchema: {
+      method: "POST",
+      path: "/admin/schema",
+      requestType: AddOrUpdateSchemaRequest,
+      responseType: AddOrUpdateSchemaResponse,
+    },
+    deleteSchema: {
+      method: "DELETE",
+      path: "/admin/schema",
+      requestType: DeleteSchemaRequest,
+      responseType: DeleteSchemaResponse,
+    },
+    getPolicy: {
+      method: "GET",
+      path: "/admin/policy",
+      requestType: GetPolicyRequest,
+      responseType: GetPolicyResponse,
+    },
+    getSchema: {
+      method: "GET",
+      path: "/admin/schema",
+      requestType: GetSchemaRequest,
+      responseType: GetSchemaResponse,
+    },
+    listPolicies: {
+      method: "GET",
+      path: "/admin/policies",
+      requestType: ListPoliciesRequest,
+      responseType: ListPoliciesResponse,
+    },
+    listSchemas: {
+      method: "GET",
+      path: "/admin/schemas",
+      requestType: ListSchemasRequest,
+      responseType: ListSchemasResponse,
+    },
+    reloadStore: {
+      method: "GET",
+      path: "/admin/store/reload",
+      requestType: ReloadStoreRequest,
+      responseType: ReloadStoreResponse,
+    },
   },
-  planResources: {
-    method: "POST",
-    path: "/api/plan/resources",
-    serializeRequest: (request) =>
-      JSON.stringify(PlanResourcesRequest.toJSON(request)),
-    deserializeResponse: (response) => PlanResourcesResponse.fromJSON(response),
-  },
-  serverInfo: {
-    method: "GET",
-    path: "/api/server_info",
-    serializeRequest: () => null,
-    deserializeResponse: (response) => ServerInfoResponse.fromJSON(response),
+  cerbos: {
+    checkResources: {
+      method: "POST",
+      path: "/api/check/resources",
+      requestType: CheckResourcesRequest,
+      responseType: CheckResourcesResponse,
+    },
+    planResources: {
+      method: "POST",
+      path: "/api/plan/resources",
+      requestType: PlanResourcesRequest,
+      responseType: PlanResourcesResponse,
+    },
+    serverInfo: {
+      method: "GET",
+      path: "/api/server_info",
+      requestType: ServerInfoRequest,
+      responseType: ServerInfoResponse,
+    },
   },
 };
 

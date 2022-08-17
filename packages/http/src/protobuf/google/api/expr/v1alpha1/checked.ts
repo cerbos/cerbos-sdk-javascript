@@ -1,15 +1,11 @@
 /* eslint-disable */
-import {
-  SourceInfo,
-  Expr,
-  Constant,
-} from "../../../../google/api/expr/v1alpha1/syntax";
-import { Empty } from "../../../../google/protobuf/empty";
+import { SourceInfo, Expr, Constant } from "./syntax";
+import { Empty } from "../../../protobuf/empty";
 import {
   NullValue,
   nullValueToJSON,
   nullValueFromJSON,
-} from "../../../../google/protobuf/struct";
+} from "../../../protobuf/struct";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
@@ -32,7 +28,7 @@ export interface CheckedExpr {
    * - Every CreateStruct expression for a message has an entry, identifying
    *   the message.
    */
-  referenceMap: { [key: number]: Reference };
+  referenceMap: { [key: string]: Reference };
   /**
    * A map from expression ids to types.
    *
@@ -40,7 +36,7 @@ export interface CheckedExpr {
    * here. If an expression has type DYN, it is omitted from this map to save
    * space.
    */
-  typeMap: { [key: number]: Type };
+  typeMap: { [key: string]: Type };
   /**
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
@@ -64,12 +60,12 @@ export interface CheckedExpr {
 }
 
 export interface CheckedExpr_ReferenceMapEntry {
-  key: number;
+  key: string;
   value: Reference | undefined;
 }
 
 export interface CheckedExpr_TypeMapEntry {
-  key: number;
+  key: string;
   value: Type | undefined;
 }
 
@@ -410,16 +406,16 @@ export const CheckedExpr = {
     return {
       referenceMap: isObject(object.referenceMap)
         ? Object.entries(object.referenceMap).reduce<{
-            [key: number]: Reference;
+            [key: string]: Reference;
           }>((acc, [key, value]) => {
-            acc[Number(key)] = Reference.fromJSON(value);
+            acc[key] = Reference.fromJSON(value);
             return acc;
           }, {})
         : {},
       typeMap: isObject(object.typeMap)
-        ? Object.entries(object.typeMap).reduce<{ [key: number]: Type }>(
+        ? Object.entries(object.typeMap).reduce<{ [key: string]: Type }>(
             (acc, [key, value]) => {
-              acc[Number(key)] = Type.fromJSON(value);
+              acc[key] = Type.fromJSON(value);
               return acc;
             },
             {}
@@ -460,20 +456,20 @@ export const CheckedExpr = {
 };
 
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
-  return { key: 0, value: undefined };
+  return { key: "0", value: undefined };
 }
 
 export const CheckedExpr_ReferenceMapEntry = {
   fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
     return {
-      key: isSet(object.key) ? Number(object.key) : 0,
+      key: isSet(object.key) ? String(object.key) : "0",
       value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined,
     };
   },
 
   toJSON(message: CheckedExpr_ReferenceMapEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = Math.round(message.key));
+    message.key !== undefined && (obj.key = message.key);
     message.value !== undefined &&
       (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
     return obj;
@@ -481,20 +477,20 @@ export const CheckedExpr_ReferenceMapEntry = {
 };
 
 function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
-  return { key: 0, value: undefined };
+  return { key: "0", value: undefined };
 }
 
 export const CheckedExpr_TypeMapEntry = {
   fromJSON(object: any): CheckedExpr_TypeMapEntry {
     return {
-      key: isSet(object.key) ? Number(object.key) : 0,
+      key: isSet(object.key) ? String(object.key) : "0",
       value: isSet(object.value) ? Type.fromJSON(object.value) : undefined,
     };
   },
 
   toJSON(message: CheckedExpr_TypeMapEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = Math.round(message.key));
+    message.key !== undefined && (obj.key = message.key);
     message.value !== undefined &&
       (obj.value = message.value ? Type.toJSON(message.value) : undefined);
     return obj;

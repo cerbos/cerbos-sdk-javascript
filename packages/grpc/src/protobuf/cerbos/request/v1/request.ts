@@ -4,11 +4,11 @@ import {
   Principal,
   PlanResourcesInput_Resource,
   Resource,
-} from "../../../cerbos/engine/v1/engine";
-import { Policy } from "../../../cerbos/policy/v1/policy";
-import { Schema } from "../../../cerbos/schema/v1/schema";
+} from "../../engine/v1/engine";
+import { Policy } from "../../policy/v1/policy";
+import { Schema } from "../../schema/v1/schema";
 import { Duration } from "../../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 import { Value } from "../../../google/protobuf/struct";
 
 export const protobufPackage = "cerbos.request.v1";
@@ -91,7 +91,7 @@ export interface AuxData_JWT {
 
 export interface File {
   fileName: string;
-  contents: Buffer;
+  contents: Uint8Array;
 }
 
 export interface PlaygroundValidateRequest {
@@ -823,7 +823,7 @@ export const AuxData_JWT = {
 };
 
 function createBaseFile(): File {
-  return { fileName: "", contents: Buffer.alloc(0) };
+  return { fileName: "", contents: new Uint8Array() };
 }
 
 export const File = {
@@ -848,7 +848,7 @@ export const File = {
           message.fileName = reader.string();
           break;
         case 2:
-          message.contents = reader.bytes() as Buffer;
+          message.contents = reader.bytes();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1540,13 +1540,13 @@ export const ReloadStoreRequest = {
 };
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = date.getTime() / 1_000;
+  const seconds = Math.trunc(date.getTime() / 1_000).toString();
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds * 1_000;
+  let millis = Number(t.seconds) * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }

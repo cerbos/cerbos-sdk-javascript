@@ -1,13 +1,9 @@
 /* eslint-disable */
 import Long from "long";
-import {
-  SourceInfo,
-  Expr,
-  Constant,
-} from "../../../../google/api/expr/v1alpha1/syntax";
-import * as _m0 from "protobufjs/minimal";
-import { Empty } from "../../../../google/protobuf/empty";
-import { NullValue } from "../../../../google/protobuf/struct";
+import { SourceInfo, Expr, Constant } from "./syntax";
+import _m0 from "protobufjs/minimal";
+import { Empty } from "../../../protobuf/empty";
+import { NullValue } from "../../../protobuf/struct";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
@@ -30,7 +26,7 @@ export interface CheckedExpr {
    * - Every CreateStruct expression for a message has an entry, identifying
    *   the message.
    */
-  referenceMap: { [key: number]: Reference };
+  referenceMap: { [key: string]: Reference };
   /**
    * A map from expression ids to types.
    *
@@ -38,7 +34,7 @@ export interface CheckedExpr {
    * here. If an expression has type DYN, it is omitted from this map to save
    * space.
    */
-  typeMap: { [key: number]: Type };
+  typeMap: { [key: string]: Type };
   /**
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
@@ -62,12 +58,12 @@ export interface CheckedExpr {
 }
 
 export interface CheckedExpr_ReferenceMapEntry {
-  key: number;
+  key: string;
   value: Reference | undefined;
 }
 
 export interface CheckedExpr_TypeMapEntry {
-  key: number;
+  key: string;
   value: Type | undefined;
 }
 
@@ -385,7 +381,7 @@ export const CheckedExpr = {
 };
 
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
-  return { key: 0, value: undefined };
+  return { key: "0", value: undefined };
 }
 
 export const CheckedExpr_ReferenceMapEntry = {
@@ -393,7 +389,7 @@ export const CheckedExpr_ReferenceMapEntry = {
     message: CheckedExpr_ReferenceMapEntry,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.key !== 0) {
+    if (message.key !== "0") {
       writer.uint32(8).int64(message.key);
     }
     if (message.value !== undefined) {
@@ -413,7 +409,7 @@ export const CheckedExpr_ReferenceMapEntry = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.key = longToNumber(reader.int64() as Long);
+          message.key = longToString(reader.int64() as Long);
           break;
         case 2:
           message.value = Reference.decode(reader, reader.uint32());
@@ -428,7 +424,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 };
 
 function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
-  return { key: 0, value: undefined };
+  return { key: "0", value: undefined };
 }
 
 export const CheckedExpr_TypeMapEntry = {
@@ -436,7 +432,7 @@ export const CheckedExpr_TypeMapEntry = {
     message: CheckedExpr_TypeMapEntry,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.key !== 0) {
+    if (message.key !== "0") {
       writer.uint32(8).int64(message.key);
     }
     if (message.value !== undefined) {
@@ -456,7 +452,7 @@ export const CheckedExpr_TypeMapEntry = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.key = longToNumber(reader.int64() as Long);
+          message.key = longToString(reader.int64() as Long);
           break;
         case 2:
           message.value = Type.decode(reader, reader.uint32());
@@ -1029,22 +1025,8 @@ export const Reference = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
+function longToString(long: Long) {
+  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

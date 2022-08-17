@@ -1,11 +1,11 @@
 /* eslint-disable */
-import { Timestamp } from "../../../../google/protobuf/timestamp";
+import { Timestamp } from "../../../protobuf/timestamp";
 import {
   NullValue,
   nullValueToJSON,
   nullValueFromJSON,
-} from "../../../../google/protobuf/struct";
-import { Duration } from "../../../../google/protobuf/duration";
+} from "../../../protobuf/struct";
+import { Duration } from "../../../protobuf/duration";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
@@ -40,7 +40,7 @@ export interface Expr {
    * given expression tree. This is used to associate type information and other
    * attributes to a node in the parse tree.
    */
-  id: number;
+  id: string;
   exprKind?:
     | { $case: "constExpr"; constExpr: Constant }
     | { $case: "identExpr"; identExpr: Expr_Ident }
@@ -138,7 +138,7 @@ export interface Expr_CreateStruct_Entry {
    * in a given expression tree. This is used to associate type
    * information and other attributes to the node.
    */
-  id: number;
+  id: string;
   keyKind?:
     | { $case: "fieldKey"; fieldKey: string }
     | { $case: "mapKey"; mapKey: Expr };
@@ -223,8 +223,8 @@ export interface Constant {
   constantKind?:
     | { $case: "nullValue"; nullValue: NullValue }
     | { $case: "boolValue"; boolValue: boolean }
-    | { $case: "int64Value"; int64Value: number }
-    | { $case: "uint64Value"; uint64Value: number }
+    | { $case: "int64Value"; int64Value: string }
+    | { $case: "uint64Value"; uint64Value: string }
     | { $case: "doubleValue"; doubleValue: number }
     | { $case: "stringValue"; stringValue: string }
     | { $case: "bytesValue"; bytesValue: Uint8Array }
@@ -257,7 +257,7 @@ export interface SourceInfo {
    * A map from the parse node id (e.g. `Expr.id`) to the code point offset
    * within the source.
    */
-  positions: { [key: number]: number };
+  positions: { [key: string]: number };
   /**
    * A map from the parse node id where a macro replacement was made to the
    * call `Expr` that resulted in a macro expansion.
@@ -268,16 +268,16 @@ export interface SourceInfo {
    * in the map corresponds to the expression id of the expanded macro, and the
    * value is the call `Expr` that was replaced.
    */
-  macroCalls: { [key: number]: Expr };
+  macroCalls: { [key: string]: Expr };
 }
 
 export interface SourceInfo_PositionsEntry {
-  key: number;
+  key: string;
   value: number;
 }
 
 export interface SourceInfo_MacroCallsEntry {
-  key: number;
+  key: string;
   value: Expr | undefined;
 }
 
@@ -326,13 +326,13 @@ export const ParsedExpr = {
 };
 
 function createBaseExpr(): Expr {
-  return { id: 0, exprKind: undefined };
+  return { id: "0", exprKind: undefined };
 }
 
 export const Expr = {
   fromJSON(object: any): Expr {
     return {
-      id: isSet(object.id) ? Number(object.id) : 0,
+      id: isSet(object.id) ? String(object.id) : "0",
       exprKind: isSet(object.constExpr)
         ? { $case: "constExpr", constExpr: Constant.fromJSON(object.constExpr) }
         : isSet(object.identExpr)
@@ -370,7 +370,7 @@ export const Expr = {
 
   toJSON(message: Expr): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
+    message.id !== undefined && (obj.id = message.id);
     message.exprKind?.$case === "constExpr" &&
       (obj.constExpr = message.exprKind?.constExpr
         ? Constant.toJSON(message.exprKind?.constExpr)
@@ -533,13 +533,13 @@ export const Expr_CreateStruct = {
 };
 
 function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
-  return { id: 0, keyKind: undefined, value: undefined };
+  return { id: "0", keyKind: undefined, value: undefined };
 }
 
 export const Expr_CreateStruct_Entry = {
   fromJSON(object: any): Expr_CreateStruct_Entry {
     return {
-      id: isSet(object.id) ? Number(object.id) : 0,
+      id: isSet(object.id) ? String(object.id) : "0",
       keyKind: isSet(object.fieldKey)
         ? { $case: "fieldKey", fieldKey: String(object.fieldKey) }
         : isSet(object.mapKey)
@@ -551,7 +551,7 @@ export const Expr_CreateStruct_Entry = {
 
   toJSON(message: Expr_CreateStruct_Entry): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
+    message.id !== undefined && (obj.id = message.id);
     message.keyKind?.$case === "fieldKey" &&
       (obj.fieldKey = message.keyKind?.fieldKey);
     message.keyKind?.$case === "mapKey" &&
@@ -635,9 +635,9 @@ export const Constant = {
         : isSet(object.boolValue)
         ? { $case: "boolValue", boolValue: Boolean(object.boolValue) }
         : isSet(object.int64Value)
-        ? { $case: "int64Value", int64Value: Number(object.int64Value) }
+        ? { $case: "int64Value", int64Value: String(object.int64Value) }
         : isSet(object.uint64Value)
-        ? { $case: "uint64Value", uint64Value: Number(object.uint64Value) }
+        ? { $case: "uint64Value", uint64Value: String(object.uint64Value) }
         : isSet(object.doubleValue)
         ? { $case: "doubleValue", doubleValue: Number(object.doubleValue) }
         : isSet(object.stringValue)
@@ -671,9 +671,9 @@ export const Constant = {
     message.constantKind?.$case === "boolValue" &&
       (obj.boolValue = message.constantKind?.boolValue);
     message.constantKind?.$case === "int64Value" &&
-      (obj.int64Value = Math.round(message.constantKind?.int64Value));
+      (obj.int64Value = message.constantKind?.int64Value);
     message.constantKind?.$case === "uint64Value" &&
-      (obj.uint64Value = Math.round(message.constantKind?.uint64Value));
+      (obj.uint64Value = message.constantKind?.uint64Value);
     message.constantKind?.$case === "doubleValue" &&
       (obj.doubleValue = message.constantKind?.doubleValue);
     message.constantKind?.$case === "stringValue" &&
@@ -714,18 +714,18 @@ export const SourceInfo = {
         ? object.lineOffsets.map((e: any) => Number(e))
         : [],
       positions: isObject(object.positions)
-        ? Object.entries(object.positions).reduce<{ [key: number]: number }>(
+        ? Object.entries(object.positions).reduce<{ [key: string]: number }>(
             (acc, [key, value]) => {
-              acc[Number(key)] = Number(value);
+              acc[key] = Number(value);
               return acc;
             },
             {}
           )
         : {},
       macroCalls: isObject(object.macroCalls)
-        ? Object.entries(object.macroCalls).reduce<{ [key: number]: Expr }>(
+        ? Object.entries(object.macroCalls).reduce<{ [key: string]: Expr }>(
             (acc, [key, value]) => {
-              acc[Number(key)] = Expr.fromJSON(value);
+              acc[key] = Expr.fromJSON(value);
               return acc;
             },
             {}
@@ -761,40 +761,40 @@ export const SourceInfo = {
 };
 
 function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
-  return { key: 0, value: 0 };
+  return { key: "0", value: 0 };
 }
 
 export const SourceInfo_PositionsEntry = {
   fromJSON(object: any): SourceInfo_PositionsEntry {
     return {
-      key: isSet(object.key) ? Number(object.key) : 0,
+      key: isSet(object.key) ? String(object.key) : "0",
       value: isSet(object.value) ? Number(object.value) : 0,
     };
   },
 
   toJSON(message: SourceInfo_PositionsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = Math.round(message.key));
+    message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
 };
 
 function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
-  return { key: 0, value: undefined };
+  return { key: "0", value: undefined };
 }
 
 export const SourceInfo_MacroCallsEntry = {
   fromJSON(object: any): SourceInfo_MacroCallsEntry {
     return {
-      key: isSet(object.key) ? Number(object.key) : 0,
+      key: isSet(object.key) ? String(object.key) : "0",
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined,
     };
   },
 
   toJSON(message: SourceInfo_MacroCallsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = Math.round(message.key));
+    message.key !== undefined && (obj.key = message.key);
     message.value !== undefined &&
       (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
     return obj;
@@ -836,31 +836,33 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  ((b64) => globalThis.Buffer.from(b64, "base64").toString("binary"));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = globalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  ((bin) => globalThis.Buffer.from(bin, "binary").toString("base64"));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach((byte) => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
+  }
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds * 1_000;
+  let millis = Number(t.seconds) * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }

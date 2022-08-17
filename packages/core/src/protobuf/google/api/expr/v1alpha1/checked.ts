@@ -1,11 +1,7 @@
 /* eslint-disable */
-import type {
-  SourceInfo,
-  Expr,
-  Constant,
-} from "../../../../google/api/expr/v1alpha1/syntax";
-import type { Empty } from "../../../../google/protobuf/empty";
-import type { NullValue } from "../../../../google/protobuf/struct";
+import type { SourceInfo, Expr, Constant } from "./syntax";
+import type { Empty } from "../../../protobuf/empty";
+import type { NullValue } from "../../../protobuf/struct";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
@@ -28,7 +24,7 @@ export interface CheckedExpr {
    * - Every CreateStruct expression for a message has an entry, identifying
    *   the message.
    */
-  referenceMap: { [key: number]: Reference };
+  referenceMap: { [key: string]: Reference };
   /**
    * A map from expression ids to types.
    *
@@ -36,7 +32,7 @@ export interface CheckedExpr {
    * here. If an expression has type DYN, it is omitted from this map to save
    * space.
    */
-  typeMap: { [key: number]: Type };
+  typeMap: { [key: string]: Type };
   /**
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
@@ -60,12 +56,12 @@ export interface CheckedExpr {
 }
 
 export interface CheckedExpr_ReferenceMapEntry {
-  key: number;
+  key: string;
   value: Reference | undefined;
 }
 
 export interface CheckedExpr_TypeMapEntry {
-  key: number;
+  key: string;
   value: Type | undefined;
 }
 

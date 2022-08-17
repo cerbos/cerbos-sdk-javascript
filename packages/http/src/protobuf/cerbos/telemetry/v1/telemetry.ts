@@ -101,7 +101,7 @@ export interface ServerLaunch_Stats_Schema {
 export interface ServerStop {
   version: string;
   uptime: Duration | undefined;
-  requestsTotal: number;
+  requestsTotal: string;
 }
 
 export interface Event {
@@ -110,7 +110,7 @@ export interface Event {
 
 export interface Event_CountStat {
   key: string;
-  count: number;
+  count: string;
 }
 
 export interface Event_ApiActivity {
@@ -623,7 +623,7 @@ export const ServerLaunch_Stats_Schema = {
 };
 
 function createBaseServerStop(): ServerStop {
-  return { version: "", uptime: undefined, requestsTotal: 0 };
+  return { version: "", uptime: undefined, requestsTotal: "0" };
 }
 
 export const ServerStop = {
@@ -634,8 +634,8 @@ export const ServerStop = {
         ? Duration.fromJSON(object.uptime)
         : undefined,
       requestsTotal: isSet(object.requestsTotal)
-        ? Number(object.requestsTotal)
-        : 0,
+        ? String(object.requestsTotal)
+        : "0",
     };
   },
 
@@ -647,7 +647,7 @@ export const ServerStop = {
         ? Duration.toJSON(message.uptime)
         : undefined);
     message.requestsTotal !== undefined &&
-      (obj.requestsTotal = Math.round(message.requestsTotal));
+      (obj.requestsTotal = message.requestsTotal);
     return obj;
   },
 };
@@ -679,21 +679,21 @@ export const Event = {
 };
 
 function createBaseEvent_CountStat(): Event_CountStat {
-  return { key: "", count: 0 };
+  return { key: "", count: "0" };
 }
 
 export const Event_CountStat = {
   fromJSON(object: any): Event_CountStat {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      count: isSet(object.count) ? Number(object.count) : 0,
+      count: isSet(object.count) ? String(object.count) : "0",
     };
   },
 
   toJSON(message: Event_CountStat): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.count !== undefined && (obj.count = Math.round(message.count));
+    message.count !== undefined && (obj.count = message.count);
     return obj;
   },
 };

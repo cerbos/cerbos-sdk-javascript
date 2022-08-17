@@ -91,3 +91,16 @@ services:
     depends_on:
       certificates:
         condition: service_healthy
+
+  mutable:
+    extends: plaintext
+    environment:
+      - CERBOS_CONFIG=/config/mutable.cerbos.yaml
+    volumes:
+      - type: bind
+        source: tmp/certificates
+        target: /certificates
+        read_only: true
+    depends_on:
+      certificates:
+        condition: service_healthy

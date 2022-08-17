@@ -208,39 +208,39 @@ export interface Int32Rules {
 /** Int64Rules describes the constraints applied to `int64` values */
 export interface Int64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -294,39 +294,39 @@ export interface UInt32Rules {
 /** UInt64Rules describes the constraints applied to `uint64` values */
 export interface UInt64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -380,39 +380,39 @@ export interface SInt32Rules {
 /** SInt64Rules describes the constraints applied to `sint64` values */
 export interface SInt64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -466,39 +466,39 @@ export interface Fixed32Rules {
 /** Fixed64Rules describes the constraints applied to `fixed64` values */
 export interface Fixed64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -552,39 +552,39 @@ export interface SFixed32Rules {
 /** SFixed64Rules describes the constraints applied to `sfixed64` values */
 export interface SFixed64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -607,31 +607,31 @@ export interface StringRules {
    * characters (Unicode code points). Note that the number of
    * characters may differ from the number of bytes in the string.
    */
-  len: number;
+  len: string;
   /**
    * MinLen specifies that this field must be the specified number of
    * characters (Unicode code points) at a minimum. Note that the number of
    * characters may differ from the number of bytes in the string.
    */
-  minLen: number;
+  minLen: string;
   /**
    * MaxLen specifies that this field must be the specified number of
    * characters (Unicode code points) at a maximum. Note that the number of
    * characters may differ from the number of bytes in the string.
    */
-  maxLen: number;
+  maxLen: string;
   /** LenBytes specifies that this field must be the specified number of bytes */
-  lenBytes: number;
+  lenBytes: string;
   /**
    * MinBytes specifies that this field must be the specified number of bytes
    * at a minimum
    */
-  minBytes: number;
+  minBytes: string;
   /**
    * MaxBytes specifies that this field must be the specified number of bytes
    * at a maximum
    */
-  maxBytes: number;
+  maxBytes: string;
   /**
    * Pattern specifes that this field must match against the specified
    * regular expression (RE2 syntax). The included expression should elide
@@ -699,17 +699,17 @@ export interface BytesRules {
   /** Const specifies that this field must be exactly the specified value */
   const: Uint8Array;
   /** Len specifies that this field must be the specified number of bytes */
-  len: number;
+  len: string;
   /**
    * MinLen specifies that this field must be the specified number of bytes
    * at a minimum
    */
-  minLen: number;
+  minLen: string;
   /**
    * MaxLen specifies that this field must be the specified number of bytes
    * at a maximum
    */
-  maxLen: number;
+  maxLen: string;
   /**
    * Pattern specifes that this field must match against the specified
    * regular expression (RE2 syntax). The included expression should elide
@@ -793,12 +793,12 @@ export interface RepeatedRules {
    * MinItems specifies that this field must have the specified number of
    * items at a minimum
    */
-  minItems: number;
+  minItems: string;
   /**
    * MaxItems specifies that this field must have the specified number of
    * items at a maximum
    */
-  maxItems: number;
+  maxItems: string;
   /**
    * Unique specifies that all elements in this field must be unique. This
    * contraint is only applicable to scalar and enum types (messages are not
@@ -824,12 +824,12 @@ export interface MapRules {
    * MinPairs specifies that this field must have the specified number of
    * KVs at a minimum
    */
-  minPairs: number;
+  minPairs: string;
   /**
    * MaxPairs specifies that this field must have the specified number of
    * KVs at a maximum
    */
-  maxPairs: number;
+  maxPairs: string;
   /**
    * NoSparse specifies values in this field cannot be unset. This only
    * applies to map's with message value types.
@@ -1286,11 +1286,11 @@ export const Int32Rules = {
 
 function createBaseInt64Rules(): Int64Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: "0",
+    lt: "0",
+    lte: "0",
+    gt: "0",
+    gte: "0",
     in: [],
     notIn: [],
     ignoreEmpty: false,
@@ -1300,14 +1300,14 @@ function createBaseInt64Rules(): Int64Rules {
 export const Int64Rules = {
   fromJSON(object: any): Int64Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
+      const: isSet(object.const) ? String(object.const) : "0",
+      lt: isSet(object.lt) ? String(object.lt) : "0",
+      lte: isSet(object.lte) ? String(object.lte) : "0",
+      gt: isSet(object.gt) ? String(object.gt) : "0",
+      gte: isSet(object.gte) ? String(object.gte) : "0",
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
       notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+        ? object.notIn.map((e: any) => String(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
         ? Boolean(object.ignoreEmpty)
@@ -1317,18 +1317,18 @@ export const Int64Rules = {
 
   toJSON(message: Int64Rules): unknown {
     const obj: any = {};
-    message.const !== undefined && (obj.const = Math.round(message.const));
-    message.lt !== undefined && (obj.lt = Math.round(message.lt));
-    message.lte !== undefined && (obj.lte = Math.round(message.lte));
-    message.gt !== undefined && (obj.gt = Math.round(message.gt));
-    message.gte !== undefined && (obj.gte = Math.round(message.gte));
+    message.const !== undefined && (obj.const = message.const);
+    message.lt !== undefined && (obj.lt = message.lt);
+    message.lte !== undefined && (obj.lte = message.lte);
+    message.gt !== undefined && (obj.gt = message.gt);
+    message.gte !== undefined && (obj.gte = message.gte);
     if (message.in) {
-      obj.in = message.in.map((e) => Math.round(e));
+      obj.in = message.in.map((e) => e);
     } else {
       obj.in = [];
     }
     if (message.notIn) {
-      obj.notIn = message.notIn.map((e) => Math.round(e));
+      obj.notIn = message.notIn.map((e) => e);
     } else {
       obj.notIn = [];
     }
@@ -1394,11 +1394,11 @@ export const UInt32Rules = {
 
 function createBaseUInt64Rules(): UInt64Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: "0",
+    lt: "0",
+    lte: "0",
+    gt: "0",
+    gte: "0",
     in: [],
     notIn: [],
     ignoreEmpty: false,
@@ -1408,14 +1408,14 @@ function createBaseUInt64Rules(): UInt64Rules {
 export const UInt64Rules = {
   fromJSON(object: any): UInt64Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
+      const: isSet(object.const) ? String(object.const) : "0",
+      lt: isSet(object.lt) ? String(object.lt) : "0",
+      lte: isSet(object.lte) ? String(object.lte) : "0",
+      gt: isSet(object.gt) ? String(object.gt) : "0",
+      gte: isSet(object.gte) ? String(object.gte) : "0",
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
       notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+        ? object.notIn.map((e: any) => String(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
         ? Boolean(object.ignoreEmpty)
@@ -1425,18 +1425,18 @@ export const UInt64Rules = {
 
   toJSON(message: UInt64Rules): unknown {
     const obj: any = {};
-    message.const !== undefined && (obj.const = Math.round(message.const));
-    message.lt !== undefined && (obj.lt = Math.round(message.lt));
-    message.lte !== undefined && (obj.lte = Math.round(message.lte));
-    message.gt !== undefined && (obj.gt = Math.round(message.gt));
-    message.gte !== undefined && (obj.gte = Math.round(message.gte));
+    message.const !== undefined && (obj.const = message.const);
+    message.lt !== undefined && (obj.lt = message.lt);
+    message.lte !== undefined && (obj.lte = message.lte);
+    message.gt !== undefined && (obj.gt = message.gt);
+    message.gte !== undefined && (obj.gte = message.gte);
     if (message.in) {
-      obj.in = message.in.map((e) => Math.round(e));
+      obj.in = message.in.map((e) => e);
     } else {
       obj.in = [];
     }
     if (message.notIn) {
-      obj.notIn = message.notIn.map((e) => Math.round(e));
+      obj.notIn = message.notIn.map((e) => e);
     } else {
       obj.notIn = [];
     }
@@ -1502,11 +1502,11 @@ export const SInt32Rules = {
 
 function createBaseSInt64Rules(): SInt64Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: "0",
+    lt: "0",
+    lte: "0",
+    gt: "0",
+    gte: "0",
     in: [],
     notIn: [],
     ignoreEmpty: false,
@@ -1516,14 +1516,14 @@ function createBaseSInt64Rules(): SInt64Rules {
 export const SInt64Rules = {
   fromJSON(object: any): SInt64Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
+      const: isSet(object.const) ? String(object.const) : "0",
+      lt: isSet(object.lt) ? String(object.lt) : "0",
+      lte: isSet(object.lte) ? String(object.lte) : "0",
+      gt: isSet(object.gt) ? String(object.gt) : "0",
+      gte: isSet(object.gte) ? String(object.gte) : "0",
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
       notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+        ? object.notIn.map((e: any) => String(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
         ? Boolean(object.ignoreEmpty)
@@ -1533,18 +1533,18 @@ export const SInt64Rules = {
 
   toJSON(message: SInt64Rules): unknown {
     const obj: any = {};
-    message.const !== undefined && (obj.const = Math.round(message.const));
-    message.lt !== undefined && (obj.lt = Math.round(message.lt));
-    message.lte !== undefined && (obj.lte = Math.round(message.lte));
-    message.gt !== undefined && (obj.gt = Math.round(message.gt));
-    message.gte !== undefined && (obj.gte = Math.round(message.gte));
+    message.const !== undefined && (obj.const = message.const);
+    message.lt !== undefined && (obj.lt = message.lt);
+    message.lte !== undefined && (obj.lte = message.lte);
+    message.gt !== undefined && (obj.gt = message.gt);
+    message.gte !== undefined && (obj.gte = message.gte);
     if (message.in) {
-      obj.in = message.in.map((e) => Math.round(e));
+      obj.in = message.in.map((e) => e);
     } else {
       obj.in = [];
     }
     if (message.notIn) {
-      obj.notIn = message.notIn.map((e) => Math.round(e));
+      obj.notIn = message.notIn.map((e) => e);
     } else {
       obj.notIn = [];
     }
@@ -1610,11 +1610,11 @@ export const Fixed32Rules = {
 
 function createBaseFixed64Rules(): Fixed64Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: "0",
+    lt: "0",
+    lte: "0",
+    gt: "0",
+    gte: "0",
     in: [],
     notIn: [],
     ignoreEmpty: false,
@@ -1624,14 +1624,14 @@ function createBaseFixed64Rules(): Fixed64Rules {
 export const Fixed64Rules = {
   fromJSON(object: any): Fixed64Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
+      const: isSet(object.const) ? String(object.const) : "0",
+      lt: isSet(object.lt) ? String(object.lt) : "0",
+      lte: isSet(object.lte) ? String(object.lte) : "0",
+      gt: isSet(object.gt) ? String(object.gt) : "0",
+      gte: isSet(object.gte) ? String(object.gte) : "0",
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
       notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+        ? object.notIn.map((e: any) => String(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
         ? Boolean(object.ignoreEmpty)
@@ -1641,18 +1641,18 @@ export const Fixed64Rules = {
 
   toJSON(message: Fixed64Rules): unknown {
     const obj: any = {};
-    message.const !== undefined && (obj.const = Math.round(message.const));
-    message.lt !== undefined && (obj.lt = Math.round(message.lt));
-    message.lte !== undefined && (obj.lte = Math.round(message.lte));
-    message.gt !== undefined && (obj.gt = Math.round(message.gt));
-    message.gte !== undefined && (obj.gte = Math.round(message.gte));
+    message.const !== undefined && (obj.const = message.const);
+    message.lt !== undefined && (obj.lt = message.lt);
+    message.lte !== undefined && (obj.lte = message.lte);
+    message.gt !== undefined && (obj.gt = message.gt);
+    message.gte !== undefined && (obj.gte = message.gte);
     if (message.in) {
-      obj.in = message.in.map((e) => Math.round(e));
+      obj.in = message.in.map((e) => e);
     } else {
       obj.in = [];
     }
     if (message.notIn) {
-      obj.notIn = message.notIn.map((e) => Math.round(e));
+      obj.notIn = message.notIn.map((e) => e);
     } else {
       obj.notIn = [];
     }
@@ -1718,11 +1718,11 @@ export const SFixed32Rules = {
 
 function createBaseSFixed64Rules(): SFixed64Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: "0",
+    lt: "0",
+    lte: "0",
+    gt: "0",
+    gte: "0",
     in: [],
     notIn: [],
     ignoreEmpty: false,
@@ -1732,14 +1732,14 @@ function createBaseSFixed64Rules(): SFixed64Rules {
 export const SFixed64Rules = {
   fromJSON(object: any): SFixed64Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
+      const: isSet(object.const) ? String(object.const) : "0",
+      lt: isSet(object.lt) ? String(object.lt) : "0",
+      lte: isSet(object.lte) ? String(object.lte) : "0",
+      gt: isSet(object.gt) ? String(object.gt) : "0",
+      gte: isSet(object.gte) ? String(object.gte) : "0",
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
       notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+        ? object.notIn.map((e: any) => String(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
         ? Boolean(object.ignoreEmpty)
@@ -1749,18 +1749,18 @@ export const SFixed64Rules = {
 
   toJSON(message: SFixed64Rules): unknown {
     const obj: any = {};
-    message.const !== undefined && (obj.const = Math.round(message.const));
-    message.lt !== undefined && (obj.lt = Math.round(message.lt));
-    message.lte !== undefined && (obj.lte = Math.round(message.lte));
-    message.gt !== undefined && (obj.gt = Math.round(message.gt));
-    message.gte !== undefined && (obj.gte = Math.round(message.gte));
+    message.const !== undefined && (obj.const = message.const);
+    message.lt !== undefined && (obj.lt = message.lt);
+    message.lte !== undefined && (obj.lte = message.lte);
+    message.gt !== undefined && (obj.gt = message.gt);
+    message.gte !== undefined && (obj.gte = message.gte);
     if (message.in) {
-      obj.in = message.in.map((e) => Math.round(e));
+      obj.in = message.in.map((e) => e);
     } else {
       obj.in = [];
     }
     if (message.notIn) {
-      obj.notIn = message.notIn.map((e) => Math.round(e));
+      obj.notIn = message.notIn.map((e) => e);
     } else {
       obj.notIn = [];
     }
@@ -1791,12 +1791,12 @@ export const BoolRules = {
 function createBaseStringRules(): StringRules {
   return {
     const: "",
-    len: 0,
-    minLen: 0,
-    maxLen: 0,
-    lenBytes: 0,
-    minBytes: 0,
-    maxBytes: 0,
+    len: "0",
+    minLen: "0",
+    maxLen: "0",
+    lenBytes: "0",
+    minBytes: "0",
+    maxBytes: "0",
     pattern: "",
     prefix: "",
     suffix: "",
@@ -1814,12 +1814,12 @@ export const StringRules = {
   fromJSON(object: any): StringRules {
     return {
       const: isSet(object.const) ? String(object.const) : "",
-      len: isSet(object.len) ? Number(object.len) : 0,
-      minLen: isSet(object.minLen) ? Number(object.minLen) : 0,
-      maxLen: isSet(object.maxLen) ? Number(object.maxLen) : 0,
-      lenBytes: isSet(object.lenBytes) ? Number(object.lenBytes) : 0,
-      minBytes: isSet(object.minBytes) ? Number(object.minBytes) : 0,
-      maxBytes: isSet(object.maxBytes) ? Number(object.maxBytes) : 0,
+      len: isSet(object.len) ? String(object.len) : "0",
+      minLen: isSet(object.minLen) ? String(object.minLen) : "0",
+      maxLen: isSet(object.maxLen) ? String(object.maxLen) : "0",
+      lenBytes: isSet(object.lenBytes) ? String(object.lenBytes) : "0",
+      minBytes: isSet(object.minBytes) ? String(object.minBytes) : "0",
+      maxBytes: isSet(object.maxBytes) ? String(object.maxBytes) : "0",
       pattern: isSet(object.pattern) ? String(object.pattern) : "",
       prefix: isSet(object.prefix) ? String(object.prefix) : "",
       suffix: isSet(object.suffix) ? String(object.suffix) : "",
@@ -1863,15 +1863,12 @@ export const StringRules = {
   toJSON(message: StringRules): unknown {
     const obj: any = {};
     message.const !== undefined && (obj.const = message.const);
-    message.len !== undefined && (obj.len = Math.round(message.len));
-    message.minLen !== undefined && (obj.minLen = Math.round(message.minLen));
-    message.maxLen !== undefined && (obj.maxLen = Math.round(message.maxLen));
-    message.lenBytes !== undefined &&
-      (obj.lenBytes = Math.round(message.lenBytes));
-    message.minBytes !== undefined &&
-      (obj.minBytes = Math.round(message.minBytes));
-    message.maxBytes !== undefined &&
-      (obj.maxBytes = Math.round(message.maxBytes));
+    message.len !== undefined && (obj.len = message.len);
+    message.minLen !== undefined && (obj.minLen = message.minLen);
+    message.maxLen !== undefined && (obj.maxLen = message.maxLen);
+    message.lenBytes !== undefined && (obj.lenBytes = message.lenBytes);
+    message.minBytes !== undefined && (obj.minBytes = message.minBytes);
+    message.maxBytes !== undefined && (obj.maxBytes = message.maxBytes);
     message.pattern !== undefined && (obj.pattern = message.pattern);
     message.prefix !== undefined && (obj.prefix = message.prefix);
     message.suffix !== undefined && (obj.suffix = message.suffix);
@@ -1916,9 +1913,9 @@ export const StringRules = {
 function createBaseBytesRules(): BytesRules {
   return {
     const: new Uint8Array(),
-    len: 0,
-    minLen: 0,
-    maxLen: 0,
+    len: "0",
+    minLen: "0",
+    maxLen: "0",
     pattern: "",
     prefix: new Uint8Array(),
     suffix: new Uint8Array(),
@@ -1936,9 +1933,9 @@ export const BytesRules = {
       const: isSet(object.const)
         ? bytesFromBase64(object.const)
         : new Uint8Array(),
-      len: isSet(object.len) ? Number(object.len) : 0,
-      minLen: isSet(object.minLen) ? Number(object.minLen) : 0,
-      maxLen: isSet(object.maxLen) ? Number(object.maxLen) : 0,
+      len: isSet(object.len) ? String(object.len) : "0",
+      minLen: isSet(object.minLen) ? String(object.minLen) : "0",
+      maxLen: isSet(object.maxLen) ? String(object.maxLen) : "0",
       pattern: isSet(object.pattern) ? String(object.pattern) : "",
       prefix: isSet(object.prefix)
         ? bytesFromBase64(object.prefix)
@@ -1974,9 +1971,9 @@ export const BytesRules = {
       (obj.const = base64FromBytes(
         message.const !== undefined ? message.const : new Uint8Array()
       ));
-    message.len !== undefined && (obj.len = Math.round(message.len));
-    message.minLen !== undefined && (obj.minLen = Math.round(message.minLen));
-    message.maxLen !== undefined && (obj.maxLen = Math.round(message.maxLen));
+    message.len !== undefined && (obj.len = message.len);
+    message.minLen !== undefined && (obj.minLen = message.minLen);
+    message.maxLen !== undefined && (obj.maxLen = message.maxLen);
     message.pattern !== undefined && (obj.pattern = message.pattern);
     message.prefix !== undefined &&
       (obj.prefix = base64FromBytes(
@@ -2072,8 +2069,8 @@ export const MessageRules = {
 
 function createBaseRepeatedRules(): RepeatedRules {
   return {
-    minItems: 0,
-    maxItems: 0,
+    minItems: "0",
+    maxItems: "0",
     unique: false,
     items: undefined,
     ignoreEmpty: false,
@@ -2083,8 +2080,8 @@ function createBaseRepeatedRules(): RepeatedRules {
 export const RepeatedRules = {
   fromJSON(object: any): RepeatedRules {
     return {
-      minItems: isSet(object.minItems) ? Number(object.minItems) : 0,
-      maxItems: isSet(object.maxItems) ? Number(object.maxItems) : 0,
+      minItems: isSet(object.minItems) ? String(object.minItems) : "0",
+      maxItems: isSet(object.maxItems) ? String(object.maxItems) : "0",
       unique: isSet(object.unique) ? Boolean(object.unique) : false,
       items: isSet(object.items)
         ? FieldRules.fromJSON(object.items)
@@ -2097,10 +2094,8 @@ export const RepeatedRules = {
 
   toJSON(message: RepeatedRules): unknown {
     const obj: any = {};
-    message.minItems !== undefined &&
-      (obj.minItems = Math.round(message.minItems));
-    message.maxItems !== undefined &&
-      (obj.maxItems = Math.round(message.maxItems));
+    message.minItems !== undefined && (obj.minItems = message.minItems);
+    message.maxItems !== undefined && (obj.maxItems = message.maxItems);
     message.unique !== undefined && (obj.unique = message.unique);
     message.items !== undefined &&
       (obj.items = message.items
@@ -2114,8 +2109,8 @@ export const RepeatedRules = {
 
 function createBaseMapRules(): MapRules {
   return {
-    minPairs: 0,
-    maxPairs: 0,
+    minPairs: "0",
+    maxPairs: "0",
     noSparse: false,
     keys: undefined,
     values: undefined,
@@ -2126,8 +2121,8 @@ function createBaseMapRules(): MapRules {
 export const MapRules = {
   fromJSON(object: any): MapRules {
     return {
-      minPairs: isSet(object.minPairs) ? Number(object.minPairs) : 0,
-      maxPairs: isSet(object.maxPairs) ? Number(object.maxPairs) : 0,
+      minPairs: isSet(object.minPairs) ? String(object.minPairs) : "0",
+      maxPairs: isSet(object.maxPairs) ? String(object.maxPairs) : "0",
       noSparse: isSet(object.noSparse) ? Boolean(object.noSparse) : false,
       keys: isSet(object.keys) ? FieldRules.fromJSON(object.keys) : undefined,
       values: isSet(object.values)
@@ -2141,10 +2136,8 @@ export const MapRules = {
 
   toJSON(message: MapRules): unknown {
     const obj: any = {};
-    message.minPairs !== undefined &&
-      (obj.minPairs = Math.round(message.minPairs));
-    message.maxPairs !== undefined &&
-      (obj.maxPairs = Math.round(message.maxPairs));
+    message.minPairs !== undefined && (obj.minPairs = message.minPairs);
+    message.maxPairs !== undefined && (obj.maxPairs = message.maxPairs);
     message.noSparse !== undefined && (obj.noSparse = message.noSparse);
     message.keys !== undefined &&
       (obj.keys = message.keys ? FieldRules.toJSON(message.keys) : undefined);
@@ -2310,31 +2303,33 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  ((b64) => globalThis.Buffer.from(b64, "base64").toString("binary"));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = globalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  ((bin) => globalThis.Buffer.from(bin, "binary").toString("base64"));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach((byte) => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
+  }
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds * 1_000;
+  let millis = Number(t.seconds) * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }

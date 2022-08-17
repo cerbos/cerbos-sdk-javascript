@@ -16,8 +16,13 @@ export interface Ports {
     plaintext: number;
     tls: number;
     mtls: number;
+    mutable: number;
   };
-  http: number;
+  http: {
+    plaintext: number;
+    tls: number;
+    mutable: number;
+  };
 }
 
 interface DockerComposeContainer {
@@ -47,8 +52,13 @@ export const ports = async (): Promise<Ports> => {
       plaintext: port(output, "plaintext", 3593),
       tls: port(output, "tls", 3593),
       mtls: port(output, "mtls", 3593),
+      mutable: port(output, "mutable", 3593),
     },
-    http: port(output, "plaintext", 3592),
+    http: {
+      plaintext: port(output, "plaintext", 3592),
+      tls: port(output, "tls", 3592),
+      mutable: port(output, "mutable", 3592),
+    },
   };
 };
 

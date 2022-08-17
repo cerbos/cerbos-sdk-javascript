@@ -1,31 +1,54 @@
 import {
   checkResourcesResponseFromProtobuf,
+  getPoliciesResponseFromProtobuf,
+  getSchemasResponseFromProtobuf,
+  listPoliciesResponseFromProtobuf,
+  listSchemasResponseFromProtobuf,
   planResourcesResponseFromProtobuf,
 } from "./convert/fromProtobuf";
 import {
+  addOrUpdatePoliciesRequestToProtobuf,
+  addOrUpdateSchemasRequestToProtobuf,
   checkResourcesRequestToProtobuf,
+  deleteSchemasRequestToProtobuf,
+  getPoliciesRequestToProtobuf,
+  getSchemasRequestToProtobuf,
   planResourcesRequestToProtobuf,
 } from "./convert/toProtobuf";
 import { ValidationFailed } from "./errors";
-import type { _RPCs, _Request, _Response } from "./rpcs";
+import type { _RPC, _Request, _Response, _Service } from "./rpcs";
 import type {
+  AddOrUpdatePoliciesRequest,
+  AddOrUpdateSchemasRequest,
   CheckResourceRequest,
   CheckResourcesRequest,
   CheckResourcesResponse,
   CheckResourcesResult,
+  DeleteSchemasRequest,
+  GetPoliciesRequest,
+  GetPoliciesResponse,
+  GetSchemasRequest,
+  GetSchemasResponse,
   IsAllowedRequest,
+  ListPoliciesResponse,
+  ListSchemasResponse,
   PlanResourcesRequest,
   PlanResourcesResponse,
+  Policy,
+  ReloadStoreRequest,
+  Schema,
   ServerInfo,
   ValidationError,
   ValidationFailedCallback,
-} from "./types";
+} from "./types/external";
 
 /** @internal */
-export type _Transport = <RPC extends keyof _RPCs>(
+export type _Transport = <Service extends _Service, RPC extends _RPC<Service>>(
+  service: Service,
   rpc: RPC,
-  request: _Request<RPC>
-) => Promise<_Response<RPC>>;
+  request: _Request<Service, RPC>,
+  adminCredentials?: AdminCredentials
+) => Promise<_Response<Service, RPC>>;
 
 /**
  * Options for creating a new {@link Client}.
@@ -33,6 +56,13 @@ export type _Transport = <RPC extends keyof _RPCs>(
  * @public
  */
 export interface Options {
+  /**
+   * Credentials for the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API}.
+   *
+   * @defaultValue `undefined`
+   */
+  adminCredentials?: AdminCredentials | undefined;
+
   /**
    * Action to take when input fails schema validation.
    *
@@ -58,6 +88,23 @@ export interface Options {
 }
 
 /**
+ * Credentials for the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API}.
+ *
+ * @public
+ */
+export interface AdminCredentials {
+  /**
+   * Username for authenticating to the admin API.
+   */
+  username: string;
+
+  /**
+   * Password for authenticating to the admin API.
+   */
+  password: string;
+}
+
+/**
  * Base implementation of a client for interacting with the Cerbos policy decision point server.
  *
  * @public
@@ -68,6 +115,78 @@ export abstract class Client {
     private readonly transport: _Transport,
     private readonly options: Options
   ) {}
+
+  /**
+   * Add policies, or update existing policies.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * await cerbos.addOrUpdatePolicies({
+   *   policies: [{
+   *     resourcePolicy: {
+   *       resource: "document",
+   *       version: "1",
+   *       rules: [{
+   *         actions: ["*"],
+   *         effect: Effect.ALLOW,
+   *         roles: ["ADMIN"],
+   *       }],
+   *     },
+   *   }],
+   * });
+   * ```
+   */
+  public async addOrUpdatePolicies(
+    request: AddOrUpdatePoliciesRequest
+  ): Promise<void> {
+    await this.admin(
+      "addOrUpdatePolicy",
+      addOrUpdatePoliciesRequestToProtobuf(request)
+    );
+  }
+
+  /**
+   * Add schemas to be used for validating principal or resource attributes, or update existing schemas.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * await cerbos.addOrUpdateSchemas([{
+   *   id: "document.json",
+   *   definition: `{
+   *     "type": "object",
+   *     "properties": {
+   *       "owner": { "type": "string" }
+   *     }
+   *   }`,
+   * }]);
+   * ```
+   */
+  public async addOrUpdateSchemas(
+    request: AddOrUpdateSchemasRequest
+  ): Promise<void> {
+    await this.admin(
+      "addOrUpdateSchema",
+      addOrUpdateSchemasRequestToProtobuf(request)
+    );
+  }
 
   /**
    * Check a principal's permissions on a resource.
@@ -130,7 +249,7 @@ export abstract class Client {
     request: CheckResourcesRequest
   ): Promise<CheckResourcesResponse> {
     const response = checkResourcesResponseFromProtobuf(
-      await this.transport(
+      await this.cerbos(
         "checkResources",
         checkResourcesRequestToProtobuf(request)
       )
@@ -139,6 +258,146 @@ export abstract class Client {
     this.handleValidationErrors(response);
 
     return response;
+  }
+
+  /**
+   * Delete a schema.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * await cerbos.deleteSchema("document.json");
+   * ```
+   */
+  public async deleteSchema(id: string): Promise<void> {
+    await this.deleteSchemas({ ids: [id] });
+  }
+
+  /**
+   * Delete multiple schemas.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * await cerbos.deleteSchemas({
+   *   ids: ["document.json", "image.json"],
+   * });
+   * ```
+   */
+  public async deleteSchemas(request: DeleteSchemasRequest): Promise<void> {
+    await this.admin("deleteSchema", deleteSchemasRequestToProtobuf(request));
+  }
+
+  /**
+   * Fetch multiple policies by ID.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials}, and
+   *
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   *
+   * @example
+   * ```typescript
+   * const policies = await cerbos.getPolicies({
+   *   ids: ["resource.document.v1", "resource.image.v1"],
+   * });
+   * ```
+   */
+  public async getPolicies(
+    request: GetPoliciesRequest
+  ): Promise<GetPoliciesResponse> {
+    return getPoliciesResponseFromProtobuf(
+      await this.admin("getPolicy", getPoliciesRequestToProtobuf(request))
+    );
+  }
+
+  /**
+   * Fetch a policy by ID.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials}, and
+   *
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   *
+   * @example
+   * ```typescript
+   * const policy = await cerbos.getPolicy("resource.document.v1");
+   * ```
+   */
+  public async getPolicy(id: string): Promise<Policy | undefined> {
+    const {
+      policies: [policy],
+    } = await this.getPolicies({ ids: [id] });
+
+    return policy;
+  }
+
+  /**
+   * Fetch a schema by ID.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials}, and
+   *
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   *
+   * @example
+   * ```typescript
+   * const schema = await cerbos.getSchema("document.json");
+   * ```
+   */
+  public async getSchema(id: string): Promise<Schema | undefined> {
+    const {
+      schemas: [schema],
+    } = await this.getSchemas({ ids: [id] });
+
+    return schema;
+  }
+
+  /**
+   * Fetch multiple schemas by ID.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials}, and
+   *
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   *
+   * @example
+   * ```typescript
+   * const schemas = await cerbos.getSchemas({
+   *   ids: ["document.json", "image.json"],
+   * });
+   * ```
+   */
+  public async getSchemas(
+    request: GetSchemasRequest
+  ): Promise<GetSchemasResponse> {
+    return getSchemasResponseFromProtobuf(
+      await this.admin("getSchema", getSchemasRequestToProtobuf(request))
+    );
   }
 
   /**
@@ -166,6 +425,46 @@ export abstract class Client {
   }
 
   /**
+   * List policies.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials}, and
+   *
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   *
+   * @example
+   * ```typescript
+   * const { ids } = await cerbos.listPolicies();
+   * ```
+   */
+  public async listPolicies(): Promise<ListPoliciesResponse> {
+    return listPoliciesResponseFromProtobuf(
+      await this.admin("listPolicies", {})
+    );
+  }
+
+  /**
+   * List schemas.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials}, and
+   *
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   *
+   * @example
+   * ```typescript
+   * const { ids } = await cerbos.listSchemas();
+   * ```
+   */
+  public async listSchemas(): Promise<ListSchemasResponse> {
+    return listSchemasResponseFromProtobuf(await this.admin("listSchemas", {}));
+  }
+
+  /**
    * Produce a query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action.
    *
    * @example
@@ -180,7 +479,7 @@ export abstract class Client {
     request: PlanResourcesRequest
   ): Promise<PlanResourcesResponse> {
     const response = planResourcesResponseFromProtobuf(
-      await this.transport(
+      await this.cerbos(
         "planResources",
         planResourcesRequestToProtobuf(request)
       )
@@ -192,10 +491,45 @@ export abstract class Client {
   }
 
   /**
+   * Reload the store.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API}, and
+   *
+   * - a reloadable {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * await cerbos.reloadStore({ wait: true });
+   * ```
+   */
+  public async reloadStore(request: ReloadStoreRequest): Promise<void> {
+    await this.admin("reloadStore", request);
+  }
+
+  /**
    * Retrieve information about the Cerbos policy decision point server.
    */
   public serverInfo(): Promise<ServerInfo> {
-    return this.transport("serverInfo", {});
+    return this.cerbos("serverInfo", {});
+  }
+
+  private admin<RPC extends _RPC<"admin">>(
+    rpc: RPC,
+    request: _Request<"admin", RPC>
+  ): Promise<_Response<"admin", RPC>> {
+    return this.transport("admin", rpc, request, this.options.adminCredentials);
+  }
+
+  private cerbos<RPC extends _RPC<"cerbos">>(
+    rpc: RPC,
+    request: _Request<"cerbos", RPC>
+  ): Promise<_Response<"cerbos", RPC>> {
+    return this.transport("cerbos", rpc, request);
   }
 
   private handleValidationErrors({

@@ -1,10 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "test": "jest",
+    "test": "NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt jest",
     "test:servers:start": "servers/start",
     "test:servers:stop": "servers/stop",
-    "test:watch": "jest --watch"
+    "test:watch": "NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt jest --watch"
   },
   "dependencies": {
     "@cerbos/grpc": "^0.6.0",

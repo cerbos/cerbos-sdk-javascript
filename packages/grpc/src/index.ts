@@ -7,22 +7,30 @@
 import type { SecureContext } from "tls";
 
 import {
+  AdminCredentials,
   Client,
   Options as CoreOptions,
   NotOK,
   Status,
+  _RPC,
+  _Request,
   _Response,
+  _Service,
   _Transport,
 } from "@cerbos/core";
 import {
   CallCredentials,
+  CallOptions,
   ChannelCredentials,
   Client as GenericClient,
   Metadata,
   MethodDefinition,
 } from "@grpc/grpc-js";
 
-import { CerbosServiceService as cerbosService } from "./protobuf/cerbos/svc/v1/svc";
+import {
+  CerbosAdminServiceService as adminService,
+  CerbosServiceService as cerbosService,
+} from "./protobuf/cerbos/svc/v1/svc";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires -- Can't import package.json because it is outside of the project's rootDir
 const { version } = require("../package.json") as { version: string };
@@ -89,14 +97,22 @@ export class GRPC extends Client {
    * ```
    */
   public constructor(target: string, options: Options) {
-    const client = new GenericClient(target, credentials(options), {
+    const credentials = channelCredentials(options);
+
+    const client = new GenericClient(target, credentials, {
       "grpc.primary_user_agent": `cerbos-sdk-javascript-grpc/${version}`,
     });
 
-    const transport: _Transport = (rpc, request) => {
-      const { path, requestSerialize, responseDeserialize } = cerbosService[
+    const transport: _Transport = (service, rpc, request, adminCredentials) => {
+      const { path, requestSerialize, responseDeserialize } = services[service][
         rpc
-      ] as MethodDefinition<typeof request, _Response<typeof rpc>>; // https://github.com/microsoft/TypeScript/issues/30581
+      ] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
+
+      const callOptions: CallOptions = {};
+
+      if (adminCredentials) {
+        callOptions.credentials = adminCallCredentials(adminCredentials);
+      }
 
       return new Promise((resolve, reject) => {
         client.makeUnaryRequest(
@@ -104,6 +120,7 @@ export class GRPC extends Client {
           requestSerialize,
           responseDeserialize,
           request,
+          callOptions,
           (error, response) => {
             if (error) {
               reject(
@@ -140,7 +157,23 @@ export class GRPC extends Client {
   }
 }
 
-const credentials = ({
+type Endpoint<
+  Service extends _Service,
+  RPC extends _RPC<Service>
+> = MethodDefinition<_Request<Service, RPC>, _Response<Service, RPC>>;
+
+type Services = {
+  [Service in _Service]: {
+    [RPC in _RPC<Service>]: Endpoint<Service, RPC>;
+  };
+};
+
+const services: Services = {
+  admin: adminService,
+  cerbos: cerbosService,
+};
+
+const channelCredentials = ({
   playgroundInstance,
   tls,
 }: Options): ChannelCredentials => {
@@ -163,13 +196,30 @@ const credentials = ({
   }
 
   if (playgroundInstance) {
-    return channelCredentials.compose(callCredentials(playgroundInstance));
+    return channelCredentials.compose(
+      playgroundCallCredentials(playgroundInstance)
+    );
   }
 
   return channelCredentials;
 };
 
-const callCredentials = (playgroundInstance: string): CallCredentials =>
+const adminCallCredentials = ({
+  username,
+  password,
+}: AdminCredentials): CallCredentials =>
+  CallCredentials.createFromMetadataGenerator((_, callback) => {
+    const metadata = new Metadata();
+    metadata.set(
+      "authorization",
+      `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`
+    );
+    callback(null, metadata);
+  });
+
+const playgroundCallCredentials = (
+  playgroundInstance: string
+): CallCredentials =>
   CallCredentials.createFromMetadataGenerator((_, callback) => {
     const metadata = new Metadata();
     metadata.set("playground-instance", playgroundInstance);

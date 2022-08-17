@@ -1,9 +1,9 @@
 /* eslint-disable */
-import { Timestamp } from "../../../../google/protobuf/timestamp";
+import { Timestamp } from "../../../protobuf/timestamp";
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { NullValue } from "../../../../google/protobuf/struct";
-import { Duration } from "../../../../google/protobuf/duration";
+import _m0 from "protobufjs/minimal";
+import { NullValue } from "../../../protobuf/struct";
+import { Duration } from "../../../protobuf/duration";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
@@ -38,7 +38,7 @@ export interface Expr {
    * given expression tree. This is used to associate type information and other
    * attributes to a node in the parse tree.
    */
-  id: number;
+  id: string;
   exprKind?:
     | { $case: "constExpr"; constExpr: Constant }
     | { $case: "identExpr"; identExpr: Expr_Ident }
@@ -136,7 +136,7 @@ export interface Expr_CreateStruct_Entry {
    * in a given expression tree. This is used to associate type
    * information and other attributes to the node.
    */
-  id: number;
+  id: string;
   keyKind?:
     | { $case: "fieldKey"; fieldKey: string }
     | { $case: "mapKey"; mapKey: Expr };
@@ -221,11 +221,11 @@ export interface Constant {
   constantKind?:
     | { $case: "nullValue"; nullValue: NullValue }
     | { $case: "boolValue"; boolValue: boolean }
-    | { $case: "int64Value"; int64Value: number }
-    | { $case: "uint64Value"; uint64Value: number }
+    | { $case: "int64Value"; int64Value: string }
+    | { $case: "uint64Value"; uint64Value: string }
     | { $case: "doubleValue"; doubleValue: number }
     | { $case: "stringValue"; stringValue: string }
-    | { $case: "bytesValue"; bytesValue: Buffer }
+    | { $case: "bytesValue"; bytesValue: Uint8Array }
     | { $case: "durationValue"; durationValue: Duration }
     | { $case: "timestampValue"; timestampValue: Date };
 }
@@ -255,7 +255,7 @@ export interface SourceInfo {
    * A map from the parse node id (e.g. `Expr.id`) to the code point offset
    * within the source.
    */
-  positions: { [key: number]: number };
+  positions: { [key: string]: number };
   /**
    * A map from the parse node id where a macro replacement was made to the
    * call `Expr` that resulted in a macro expansion.
@@ -266,16 +266,16 @@ export interface SourceInfo {
    * in the map corresponds to the expression id of the expanded macro, and the
    * value is the call `Expr` that was replaced.
    */
-  macroCalls: { [key: number]: Expr };
+  macroCalls: { [key: string]: Expr };
 }
 
 export interface SourceInfo_PositionsEntry {
-  key: number;
+  key: string;
   value: number;
 }
 
 export interface SourceInfo_MacroCallsEntry {
-  key: number;
+  key: string;
   value: Expr | undefined;
 }
 
@@ -338,12 +338,12 @@ export const ParsedExpr = {
 };
 
 function createBaseExpr(): Expr {
-  return { id: 0, exprKind: undefined };
+  return { id: "0", exprKind: undefined };
 }
 
 export const Expr = {
   encode(message: Expr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== 0) {
+    if (message.id !== "0") {
       writer.uint32(16).int64(message.id);
     }
     if (message.exprKind?.$case === "constExpr") {
@@ -399,7 +399,7 @@ export const Expr = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.id = longToNumber(reader.int64() as Long);
+          message.id = longToString(reader.int64() as Long);
           break;
         case 3:
           message.exprKind = {
@@ -658,7 +658,7 @@ export const Expr_CreateStruct = {
 };
 
 function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
-  return { id: 0, keyKind: undefined, value: undefined };
+  return { id: "0", keyKind: undefined, value: undefined };
 }
 
 export const Expr_CreateStruct_Entry = {
@@ -666,7 +666,7 @@ export const Expr_CreateStruct_Entry = {
     message: Expr_CreateStruct_Entry,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.id !== 0) {
+    if (message.id !== "0") {
       writer.uint32(8).int64(message.id);
     }
     if (message.keyKind?.$case === "fieldKey") {
@@ -692,7 +692,7 @@ export const Expr_CreateStruct_Entry = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = longToNumber(reader.int64() as Long);
+          message.id = longToString(reader.int64() as Long);
           break;
         case 2:
           message.keyKind = { $case: "fieldKey", fieldKey: reader.string() };
@@ -860,13 +860,13 @@ export const Constant = {
         case 3:
           message.constantKind = {
             $case: "int64Value",
-            int64Value: longToNumber(reader.int64() as Long),
+            int64Value: longToString(reader.int64() as Long),
           };
           break;
         case 4:
           message.constantKind = {
             $case: "uint64Value",
-            uint64Value: longToNumber(reader.uint64() as Long),
+            uint64Value: longToString(reader.uint64() as Long),
           };
           break;
         case 5:
@@ -884,7 +884,7 @@ export const Constant = {
         case 7:
           message.constantKind = {
             $case: "bytesValue",
-            bytesValue: reader.bytes() as Buffer,
+            bytesValue: reader.bytes(),
           };
           break;
         case 8:
@@ -1002,7 +1002,7 @@ export const SourceInfo = {
 };
 
 function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
-  return { key: 0, value: 0 };
+  return { key: "0", value: 0 };
 }
 
 export const SourceInfo_PositionsEntry = {
@@ -1010,7 +1010,7 @@ export const SourceInfo_PositionsEntry = {
     message: SourceInfo_PositionsEntry,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.key !== 0) {
+    if (message.key !== "0") {
       writer.uint32(8).int64(message.key);
     }
     if (message.value !== 0) {
@@ -1030,7 +1030,7 @@ export const SourceInfo_PositionsEntry = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.key = longToNumber(reader.int64() as Long);
+          message.key = longToString(reader.int64() as Long);
           break;
         case 2:
           message.value = reader.int32();
@@ -1045,7 +1045,7 @@ export const SourceInfo_PositionsEntry = {
 };
 
 function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
-  return { key: 0, value: undefined };
+  return { key: "0", value: undefined };
 }
 
 export const SourceInfo_MacroCallsEntry = {
@@ -1053,7 +1053,7 @@ export const SourceInfo_MacroCallsEntry = {
     message: SourceInfo_MacroCallsEntry,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.key !== 0) {
+    if (message.key !== "0") {
       writer.uint32(8).int64(message.key);
     }
     if (message.value !== undefined) {
@@ -1073,7 +1073,7 @@ export const SourceInfo_MacroCallsEntry = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.key = longToNumber(reader.int64() as Long);
+          message.key = longToString(reader.int64() as Long);
           break;
         case 2:
           message.value = Expr.decode(reader, reader.uint32());
@@ -1139,34 +1139,20 @@ export const SourcePosition = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
 function toTimestamp(date: Date): Timestamp {
-  const seconds = date.getTime() / 1_000;
+  const seconds = Math.trunc(date.getTime() / 1_000).toString();
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds * 1_000;
+  let millis = Number(t.seconds) * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
 
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
+function longToString(long: Long) {
+  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

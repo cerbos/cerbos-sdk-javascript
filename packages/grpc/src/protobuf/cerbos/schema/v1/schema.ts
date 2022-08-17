@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "cerbos.schema.v1";
 
@@ -17,7 +17,7 @@ export enum ValidationError_Source {
 
 export interface Schema {
   id: string;
-  definition: Buffer;
+  definition: Uint8Array;
 }
 
 function createBaseValidationError(): ValidationError {
@@ -67,7 +67,7 @@ export const ValidationError = {
 };
 
 function createBaseSchema(): Schema {
-  return { id: "", definition: Buffer.alloc(0) };
+  return { id: "", definition: new Uint8Array() };
 }
 
 export const Schema = {
@@ -95,7 +95,7 @@ export const Schema = {
           message.id = reader.string();
           break;
         case 2:
-          message.definition = reader.bytes() as Buffer;
+          message.definition = reader.bytes();
           break;
         default:
           reader.skipType(tag & 7);

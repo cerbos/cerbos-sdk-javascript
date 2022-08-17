@@ -1,8 +1,8 @@
 /* eslint-disable */
-import { Effect } from "../../../cerbos/effect/v1/effect";
-import { ValidationError } from "../../../cerbos/schema/v1/schema";
+import { Effect } from "../../effect/v1/effect";
+import { ValidationError } from "../../schema/v1/schema";
 import { CheckedExpr } from "../../../google/api/expr/v1alpha1/checked";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 import { Value } from "../../../google/protobuf/struct";
 
 export const protobufPackage = "cerbos.engine.v1";

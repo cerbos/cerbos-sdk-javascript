@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "google.protobuf";
 
@@ -31,7 +31,7 @@ export interface FloatValue {
  */
 export interface Int64Value {
   /** The int64 value. */
-  value: number;
+  value: string;
 }
 
 /**
@@ -41,7 +41,7 @@ export interface Int64Value {
  */
 export interface UInt64Value {
   /** The uint64 value. */
-  value: number;
+  value: string;
 }
 
 /**
@@ -91,7 +91,7 @@ export interface StringValue {
  */
 export interface BytesValue {
   /** The bytes value. */
-  value: Buffer;
+  value: Uint8Array;
 }
 
 function createBaseDoubleValue(): DoubleValue {
@@ -163,7 +163,7 @@ export const FloatValue = {
 };
 
 function createBaseInt64Value(): Int64Value {
-  return { value: 0 };
+  return { value: "0" };
 }
 
 export const Int64Value = {
@@ -171,7 +171,7 @@ export const Int64Value = {
     message: Int64Value,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.value !== 0) {
+    if (message.value !== "0") {
       writer.uint32(8).int64(message.value);
     }
     return writer;
@@ -185,7 +185,7 @@ export const Int64Value = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.value = longToNumber(reader.int64() as Long);
+          message.value = longToString(reader.int64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -197,7 +197,7 @@ export const Int64Value = {
 };
 
 function createBaseUInt64Value(): UInt64Value {
-  return { value: 0 };
+  return { value: "0" };
 }
 
 export const UInt64Value = {
@@ -205,7 +205,7 @@ export const UInt64Value = {
     message: UInt64Value,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.value !== 0) {
+    if (message.value !== "0") {
       writer.uint32(8).uint64(message.value);
     }
     return writer;
@@ -219,7 +219,7 @@ export const UInt64Value = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.value = longToNumber(reader.uint64() as Long);
+          message.value = longToString(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -367,7 +367,7 @@ export const StringValue = {
 };
 
 function createBaseBytesValue(): BytesValue {
-  return { value: Buffer.alloc(0) };
+  return { value: new Uint8Array() };
 }
 
 export const BytesValue = {
@@ -389,7 +389,7 @@ export const BytesValue = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.value = reader.bytes() as Buffer;
+          message.value = reader.bytes();
           break;
         default:
           reader.skipType(tag & 7);
@@ -400,22 +400,8 @@ export const BytesValue = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
+function longToString(long: Long) {
+  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

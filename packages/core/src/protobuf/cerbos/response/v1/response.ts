@@ -1,13 +1,10 @@
 /* eslint-disable */
-import type { Effect } from "../../../cerbos/effect/v1/effect";
-import type { PlanResourcesFilter } from "../../../cerbos/engine/v1/engine";
-import type { ValidationError, Schema } from "../../../cerbos/schema/v1/schema";
-import type { TestResults, Policy } from "../../../cerbos/policy/v1/policy";
+import type { Effect } from "../../effect/v1/effect";
+import type { PlanResourcesFilter } from "../../engine/v1/engine";
+import type { ValidationError, Schema } from "../../schema/v1/schema";
+import type { TestResults, Policy } from "../../policy/v1/policy";
 import type { Empty } from "../../../google/protobuf/empty";
-import type {
-  AccessLogEntry,
-  DecisionLogEntry,
-} from "../../../cerbos/audit/v1/audit";
+import type { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
 
 export const protobufPackage = "cerbos.response.v1";
 

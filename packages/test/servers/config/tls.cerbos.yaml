@@ -6,6 +6,9 @@ schema:
   enforcement: warn
 
 server:
+  adminAPI:
+    enabled: true
+
   tls:
     cert: /certificates/server.crt
     key: /certificates/server.key

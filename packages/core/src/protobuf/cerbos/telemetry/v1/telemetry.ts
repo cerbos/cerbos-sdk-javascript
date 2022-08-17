@@ -101,7 +101,7 @@ export interface ServerLaunch_Stats_Schema {
 export interface ServerStop {
   version: string;
   uptime: Duration | undefined;
-  requestsTotal: number;
+  requestsTotal: string;
 }
 
 export interface Event {
@@ -110,7 +110,7 @@ export interface Event {
 
 export interface Event_CountStat {
   key: string;
-  count: number;
+  count: string;
 }
 
 export interface Event_ApiActivity {

@@ -5,7 +5,7 @@ import {
   CheckOutput,
   PlanResourcesInput,
   PlanResourcesOutput,
-} from "../../../cerbos/engine/v1/engine";
+} from "../../engine/v1/engine";
 
 export const protobufPackage = "cerbos.audit.v1";
 
@@ -343,7 +343,7 @@ export const Peer = {
 };
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds * 1_000;
+  let millis = Number(t.seconds) * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }

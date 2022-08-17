@@ -17,6 +17,7 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [PlanExpression](./core.planexpression.md) | An abstract syntax tree node representing an expression to evaluate. |
 |  [PlanExpressionValue](./core.planexpressionvalue.md) | An abstract syntax tree node representing a constant value. |
 |  [PlanExpressionVariable](./core.planexpressionvariable.md) | An abstract syntax tree node representing a variable whose value was unknown when producing the query plan. |
+|  [SchemaDefinition](./core.schemadefinition.md) | Definition of a JSON schema used to validate principal or resource attributes. |
 |  [ValidationFailed](./core.validationfailed.md) | Error thrown when input fails schema validation, if the [Client](./core.client.md) is configured with [onValidationError](./core.options.onvalidationerror.md) set to <code>&quot;throw&quot;</code>. |
 
 ## Enumerations
@@ -32,23 +33,65 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 
 |  Interface | Description |
 |  --- | --- |
+|  [AddOrUpdatePoliciesRequest](./core.addorupdatepoliciesrequest.md) | Input to [Client.addOrUpdatePolicies()](./core.client.addorupdatepolicies.md)<!-- -->. |
+|  [AddOrUpdateSchemasRequest](./core.addorupdateschemasrequest.md) | Input to [Client.addOrUpdateSchemas()](./core.client.addorupdateschemas.md)<!-- -->. |
+|  [AdminCredentials](./core.admincredentials.md) | Credentials for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html)<!-- -->. |
 |  [AuxData](./core.auxdata.md) | Auxiliary data sources that can be referenced in policy conditions. |
 |  [CheckResourcesRequest](./core.checkresourcesrequest.md) | Input to [Client.checkResources()](./core.client.checkresources.md)<!-- -->. |
 |  [CheckResourcesResultMetadata](./core.checkresourcesresultmetadata.md) | Additional information about how policy decisions were reached. |
 |  [CheckResourcesResultMetadataEffect](./core.checkresourcesresultmetadataeffect.md) | Additional information about how a policy decision was reached. |
 |  [CheckResourcesResultResource](./core.checkresourcesresultresource.md) | A resource that was checked. |
+|  [Condition](./core.condition.md) | A set of expressions that must evaluate to true for a rule to take effect. |
+|  [DeleteSchemasRequest](./core.deleteschemasrequest.md) | Input to [Client.deleteSchemas()](./core.client.deleteschemas.md)<!-- -->. |
+|  [DerivedRoleDefinition](./core.derivedroledefinition.md) | The definition of a [derived role](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html)<!-- -->. |
+|  [DerivedRoles](./core.derivedroles.md) | A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) to augment static RBAC roles with contextual data to provide more fine-grained control at runtime. |
+|  [GetPoliciesRequest](./core.getpoliciesrequest.md) | Input to [Client.getPolicies()](./core.client.getpolicies.md)<!-- -->. |
+|  [GetPoliciesResponse](./core.getpoliciesresponse.md) | Fetched policies. |
+|  [GetSchemasRequest](./core.getschemasrequest.md) | Input to [Client.getSchemas()](./core.client.getschemas.md)<!-- -->. |
+|  [GetSchemasResponse](./core.getschemasresponse.md) | Fetched schemas. |
 |  [JWT](./core.jwt.md) | A JSON Web Token to use as an auxiliary data source, which will be verified against the Cerbos policy decision point (PDP) server's [configured JSON Web Key Sets (JWKS)](https://docs.cerbos.dev/cerbos/latest/configuration/auxdata.html#_jwt) unless verification is disabled on the server. |
+|  [ListPoliciesResponse](./core.listpoliciesresponse.md) | A list of available policy IDs. |
+|  [ListSchemasResponse](./core.listschemasresponse.md) | A list of available schema IDs. |
+|  [MatchAll](./core.matchall.md) | A set of expressions to evaluate in a condition that must all be true. |
+|  [MatchAny](./core.matchany.md) | A set of expressions to evaluate in a condition, at least one of which must be true. |
+|  [Matches](./core.matches.md) | A set of expressions to evaluate in a boolean match. |
+|  [MatchExpr](./core.matchexpr.md) | A single expression to evaluate in a condition. |
+|  [MatchNone](./core.matchnone.md) | A set of expressions to evaluate in a condition that must all be false. |
 |  [Options](./core.options.md) | Options for creating a new [Client](./core.client.md)<!-- -->. |
 |  [PlanResourcesConditionalResponse](./core.planresourcesconditionalresponse.md) | A query plan for when the specified action is conditionally allowed for the principal on resources matching the input. |
 |  [PlanResourcesMetadata](./core.planresourcesmetadata.md) | Additional information about the query plan. |
 |  [PlanResourcesRequest](./core.planresourcesrequest.md) | Input to [Client.planResources()](./core.client.planresources.md)<!-- -->. |
 |  [PlanResourcesResponseBase](./core.planresourcesresponsebase.md) | Common fields between different [PlanResourcesResponse](./core.planresourcesresponse.md) types. |
 |  [PlanResourcesUnconditionalResponse](./core.planresourcesunconditionalresponse.md) | A query plan for when the specified action is always allowed or denied for the principal on resources matching the input. |
+|  [PolicyBase](./core.policybase.md) | Common fields between different [Policy](./core.policy.md) types. |
+|  [PolicyMetadata](./core.policymetadata.md) | Metadata describing a policy. |
 |  [Principal](./core.principal.md) | A principal (often a user, but potentially another actor like a service account) to authorize. |
+|  [PrincipalPolicy](./core.principalpolicy.md) | A [policy](https://docs.cerbos.dev/cerbos/latest/policies/principal_policies.html) defining overrides for a specific user. |
+|  [PrincipalRule](./core.principalrule.md) | A rule defining an override for a specific user. |
+|  [PrincipalRuleAction](./core.principalruleaction.md) | An override for a given action for a specific user. |
+|  [ReloadStoreRequest](./core.reloadstorerequest.md) | Input to [Client.reloadStore()](./core.client.reloadstore.md)<!-- -->. |
 |  [Resource](./core.resource.md) | A resource on which to check a principal's permissions. |
 |  [ResourceCheck](./core.resourcecheck.md) | A [Resource](./core.resource.md) and list of actions on which to check a principal's permissions. |
+|  [ResourcePolicy](./core.resourcepolicy.md) | A [policy](https://docs.cerbos.dev/cerbos/latest/policies/resource_policies.html) defining rules for actions that can be performed on a given resource. |
+|  [ResourceRule](./core.resourcerule.md) | A rule for actions that can be performed on a given resource. |
+|  [Schema](./core.schema.md) | A JSON schema used to validate principal or resource attributes. |
+|  [SchemaInput](./core.schemainput.md) | A JSON schema to be used to validate principal or resource attributes. |
+|  [SchemaRef](./core.schemaref.md) | Reference to a schema to be used to validate principal or resource attributes. |
+|  [SchemaRefs](./core.schemarefs.md) | References to schemas to be used to validate principal and resource attributes. |
 |  [ServerInfo](./core.serverinfo.md) | Information about the Cerbos policy decision point (PDP) server. |
 |  [ValidationError](./core.validationerror.md) | An error that occurred while validating the principal or resource attributes against a schema. |
+
+## Variables
+
+|  Variable | Description |
+|  --- | --- |
+|  [matchIsMatchAll](./core.matchismatchall.md) | Type guard to check if a [Match](./core.match.md) is a [MatchAll](./core.matchall.md)<!-- -->. |
+|  [matchIsMatchAny](./core.matchismatchany.md) | Type guard to check if a [Match](./core.match.md) is a [MatchAny](./core.matchany.md)<!-- -->. |
+|  [matchIsMatchExpr](./core.matchismatchexpr.md) | Type guard to check if a [Match](./core.match.md) is a [MatchExpr](./core.matchexpr.md)<!-- -->. |
+|  [matchIsMatchNone](./core.matchismatchnone.md) | Type guard to check if a [Match](./core.match.md) is a [MatchNone](./core.matchnone.md)<!-- -->. |
+|  [policyIsDerivedRoles](./core.policyisderivedroles.md) | Type guard to check if a [Policy](./core.policy.md) is a set of [DerivedRoles](./core.derivedroles.md)<!-- -->. |
+|  [policyIsPrincipalPolicy](./core.policyisprincipalpolicy.md) | Type guard to check if a [Policy](./core.policy.md) is a [PrincipalPolicy](./core.principalpolicy.md)<!-- -->. |
+|  [policyIsResourcePolicy](./core.policyisresourcepolicy.md) | Type guard to check if a [Policy](./core.policy.md) is a [ResourcePolicy](./core.resourcepolicy.md)<!-- -->. |
 
 ## Type Aliases
 
@@ -56,10 +99,13 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  --- | --- |
 |  [CheckResourceRequest](./core.checkresourcerequest.md) | Input to [Client.checkResource()](./core.client.checkresource.md)<!-- -->. |
 |  [IsAllowedRequest](./core.isallowedrequest.md) | Input to [Client.isAllowed()](./core.client.isallowed.md)<!-- -->. |
+|  [Match](./core.match.md) | Expressions to evaluate in a condition. |
 |  [PlanExpressionOperand](./core.planexpressionoperand.md) | An abstract syntax tree node representing an operand to an expression. |
 |  [PlanResourcesResponse](./core.planresourcesresponse.md) | A query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action. |
+|  [Policy](./core.policy.md) | A [policy](https://docs.cerbos.dev/cerbos/latest/policies/index.html) definition. |
 |  [ResourceQuery](./core.resourcequery.md) | Partial details of resources to be queried. |
 |  [ResourceSearch](./core.resourcesearch.md) | Search criteria to match a resource in results. |
+|  [SchemaDefinitionInput](./core.schemadefinitioninput.md) | Definition of a JSON schema used to validate principal or resource attributes. |
 |  [ValidationFailedCallback](./core.validationfailedcallback.md) | A callback function to be invoked when input fails schema validation. |
 |  [Value](./core.value.md) | Any JSON-serializable value. |
 
