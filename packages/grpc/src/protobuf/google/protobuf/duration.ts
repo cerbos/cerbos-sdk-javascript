@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "google.protobuf";
 
@@ -70,7 +70,7 @@ export interface Duration {
    * to +315,576,000,000 inclusive. Note: these bounds are computed from:
    * 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
    */
-  seconds: number;
+  seconds: string;
   /**
    * Signed fractions of a second at nanosecond resolution of the span
    * of time. Durations less than one second are represented with a 0
@@ -83,7 +83,7 @@ export interface Duration {
 }
 
 function createBaseDuration(): Duration {
-  return { seconds: 0, nanos: 0 };
+  return { seconds: "0", nanos: 0 };
 }
 
 export const Duration = {
@@ -91,7 +91,7 @@ export const Duration = {
     message: Duration,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.seconds !== 0) {
+    if (message.seconds !== "0") {
       writer.uint32(8).int64(message.seconds);
     }
     if (message.nanos !== 0) {
@@ -108,7 +108,7 @@ export const Duration = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.seconds = longToNumber(reader.int64() as Long);
+          message.seconds = longToString(reader.int64() as Long);
           break;
         case 2:
           message.nanos = reader.int32();
@@ -122,22 +122,8 @@ export const Duration = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
+function longToString(long: Long) {
+  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

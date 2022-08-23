@@ -4,7 +4,7 @@ import type {
   CheckOutput,
   PlanResourcesInput,
   PlanResourcesOutput,
-} from "../../../cerbos/engine/v1/engine";
+} from "../../engine/v1/engine";
 
 export const protobufPackage = "cerbos.audit.v1";
 

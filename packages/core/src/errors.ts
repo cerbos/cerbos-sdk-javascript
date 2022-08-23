@@ -1,4 +1,4 @@
-import type { ValidationError } from "./types";
+import type { ValidationError } from "./types/external";
 
 /**
  * Status codes returned by the Cerbos policy decision point server.

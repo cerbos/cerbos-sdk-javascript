@@ -1,16 +1,13 @@
 /* eslint-disable */
-import {
-  Effect,
-  effectFromJSON,
-  effectToJSON,
-} from "../../../cerbos/effect/v1/effect";
+import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import {
   Principal,
   Resource,
   AuxData,
   CheckInput,
   Trace,
-} from "../../../cerbos/engine/v1/engine";
+} from "../../engine/v1/engine";
 
 export const protobufPackage = "cerbos.policy.v1";
 
@@ -34,7 +31,7 @@ export interface Policy_VariablesEntry {
 export interface Metadata {
   sourceFile: string;
   annotations: { [key: string]: string };
-  hash: number | undefined;
+  hash: string | undefined;
   storeIdentifer: string;
 }
 
@@ -152,6 +149,10 @@ export interface TestFixture_AuxData_AuxDataEntry {
   value: AuxData | undefined;
 }
 
+export interface TestOptions {
+  now: Date | undefined;
+}
+
 export interface TestSuite {
   name: string;
   description: string;
@@ -161,6 +162,7 @@ export interface TestSuite {
   principals: { [key: string]: Principal };
   resources: { [key: string]: Resource };
   auxData: { [key: string]: AuxData };
+  options: TestOptions | undefined;
 }
 
 export interface TestSuite_PrincipalsEntry {
@@ -185,6 +187,7 @@ export interface TestTable {
   skipReason: string;
   input: TestTable_Input | undefined;
   expected: TestTable_Expectation[];
+  options: TestOptions | undefined;
 }
 
 export interface TestTable_Input {
@@ -212,6 +215,7 @@ export interface Test {
   skipReason: string;
   input: CheckInput | undefined;
   expected: { [key: string]: Effect };
+  options: TestOptions | undefined;
 }
 
 export interface Test_TestName {
@@ -450,7 +454,7 @@ export const Metadata = {
             {}
           )
         : {},
-      hash: isSet(object.hash) ? Number(object.hash) : undefined,
+      hash: isSet(object.hash) ? String(object.hash) : undefined,
       storeIdentifer: isSet(object.storeIdentifer)
         ? String(object.storeIdentifer)
         : "",
@@ -1093,6 +1097,24 @@ export const TestFixture_AuxData_AuxDataEntry = {
   },
 };
 
+function createBaseTestOptions(): TestOptions {
+  return { now: undefined };
+}
+
+export const TestOptions = {
+  fromJSON(object: any): TestOptions {
+    return {
+      now: isSet(object.now) ? fromJsonTimestamp(object.now) : undefined,
+    };
+  },
+
+  toJSON(message: TestOptions): unknown {
+    const obj: any = {};
+    message.now !== undefined && (obj.now = message.now.toISOString());
+    return obj;
+  },
+};
+
 function createBaseTestSuite(): TestSuite {
   return {
     name: "",
@@ -1103,6 +1125,7 @@ function createBaseTestSuite(): TestSuite {
     principals: {},
     resources: {},
     auxData: {},
+    options: undefined,
   };
 }
 
@@ -1142,6 +1165,9 @@ export const TestSuite = {
             {}
           )
         : {},
+      options: isSet(object.options)
+        ? TestOptions.fromJSON(object.options)
+        : undefined,
     };
   },
 
@@ -1177,6 +1203,10 @@ export const TestSuite = {
         obj.auxData[k] = AuxData.toJSON(v);
       });
     }
+    message.options !== undefined &&
+      (obj.options = message.options
+        ? TestOptions.toJSON(message.options)
+        : undefined);
     return obj;
   },
 };
@@ -1252,6 +1282,7 @@ function createBaseTestTable(): TestTable {
     skipReason: "",
     input: undefined,
     expected: [],
+    options: undefined,
   };
 }
 
@@ -1268,6 +1299,9 @@ export const TestTable = {
       expected: Array.isArray(object?.expected)
         ? object.expected.map((e: any) => TestTable_Expectation.fromJSON(e))
         : [],
+      options: isSet(object.options)
+        ? TestOptions.fromJSON(object.options)
+        : undefined,
     };
   },
 
@@ -1289,6 +1323,10 @@ export const TestTable = {
     } else {
       obj.expected = [];
     }
+    message.options !== undefined &&
+      (obj.options = message.options
+        ? TestOptions.toJSON(message.options)
+        : undefined);
     return obj;
   },
 };
@@ -1398,6 +1436,7 @@ function createBaseTest(): Test {
     skipReason: "",
     input: undefined,
     expected: {},
+    options: undefined,
   };
 }
 
@@ -1422,6 +1461,9 @@ export const Test = {
             {}
           )
         : {},
+      options: isSet(object.options)
+        ? TestOptions.fromJSON(object.options)
+        : undefined,
     };
   },
 
@@ -1445,6 +1487,10 @@ export const Test = {
         obj.expected[k] = effectToJSON(v);
       });
     }
+    message.options !== undefined &&
+      (obj.options = message.options
+        ? TestOptions.toJSON(message.options)
+        : undefined);
     return obj;
   },
 };
@@ -1783,6 +1829,22 @@ var globalThis: any = (() => {
   if (typeof global !== "undefined") return global;
   throw "Unable to locate global object";
 })();
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = Number(t.seconds) * 1_000;
+  millis += t.nanos / 1_000_000;
+  return new Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
 
 function isObject(value: any): boolean {
   return typeof value === "object" && value !== null;

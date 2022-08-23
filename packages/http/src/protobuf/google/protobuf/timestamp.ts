@@ -100,7 +100,7 @@ export interface Timestamp {
    * 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
    * 9999-12-31T23:59:59Z inclusive.
    */
-  seconds: number;
+  seconds: string;
   /**
    * Non-negative fractions of a second at nanosecond resolution. Negative
    * second values with fractions must still have non-negative nanos values
@@ -111,21 +111,20 @@ export interface Timestamp {
 }
 
 function createBaseTimestamp(): Timestamp {
-  return { seconds: 0, nanos: 0 };
+  return { seconds: "0", nanos: 0 };
 }
 
 export const Timestamp = {
   fromJSON(object: any): Timestamp {
     return {
-      seconds: isSet(object.seconds) ? Number(object.seconds) : 0,
+      seconds: isSet(object.seconds) ? String(object.seconds) : "0",
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
     };
   },
 
   toJSON(message: Timestamp): unknown {
     const obj: any = {};
-    message.seconds !== undefined &&
-      (obj.seconds = Math.round(message.seconds));
+    message.seconds !== undefined && (obj.seconds = message.seconds);
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },

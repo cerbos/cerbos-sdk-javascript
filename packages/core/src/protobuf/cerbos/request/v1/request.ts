@@ -3,9 +3,9 @@ import type {
   Principal,
   PlanResourcesInput_Resource,
   Resource,
-} from "../../../cerbos/engine/v1/engine";
-import type { Policy } from "../../../cerbos/policy/v1/policy";
-import type { Schema } from "../../../cerbos/schema/v1/schema";
+} from "../../engine/v1/engine";
+import type { Policy } from "../../policy/v1/policy";
+import type { Schema } from "../../schema/v1/schema";
 import type { Duration } from "../../../google/protobuf/duration";
 
 export const protobufPackage = "cerbos.request.v1";

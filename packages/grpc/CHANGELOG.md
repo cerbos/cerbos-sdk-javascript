@@ -1,6 +1,12 @@
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Support for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html) ([#209](https://github.com/cerbos/cerbos-sdk-javascript/pull/209))
+
+### Changed
+
+- Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.6.10 ([#169](https://github.com/cerbos/cerbos-sdk-javascript/pull/169), [#200](https://github.com/cerbos/cerbos-sdk-javascript/pull/200))
 
 ## [0.6.0] - 2022-07-01
 

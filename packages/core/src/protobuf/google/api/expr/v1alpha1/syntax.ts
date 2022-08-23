@@ -1,6 +1,6 @@
 /* eslint-disable */
-import type { NullValue } from "../../../../google/protobuf/struct";
-import type { Duration } from "../../../../google/protobuf/duration";
+import type { NullValue } from "../../../protobuf/struct";
+import type { Duration } from "../../../protobuf/duration";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
@@ -35,7 +35,7 @@ export interface Expr {
    * given expression tree. This is used to associate type information and other
    * attributes to a node in the parse tree.
    */
-  id: number;
+  id: string;
   exprKind?:
     | { $case: "constExpr"; constExpr: Constant }
     | { $case: "identExpr"; identExpr: Expr_Ident }
@@ -133,7 +133,7 @@ export interface Expr_CreateStruct_Entry {
    * in a given expression tree. This is used to associate type
    * information and other attributes to the node.
    */
-  id: number;
+  id: string;
   keyKind?:
     | { $case: "fieldKey"; fieldKey: string }
     | { $case: "mapKey"; mapKey: Expr };
@@ -218,8 +218,8 @@ export interface Constant {
   constantKind?:
     | { $case: "nullValue"; nullValue: NullValue }
     | { $case: "boolValue"; boolValue: boolean }
-    | { $case: "int64Value"; int64Value: number }
-    | { $case: "uint64Value"; uint64Value: number }
+    | { $case: "int64Value"; int64Value: string }
+    | { $case: "uint64Value"; uint64Value: string }
     | { $case: "doubleValue"; doubleValue: number }
     | { $case: "stringValue"; stringValue: string }
     | { $case: "bytesValue"; bytesValue: Uint8Array }
@@ -252,7 +252,7 @@ export interface SourceInfo {
    * A map from the parse node id (e.g. `Expr.id`) to the code point offset
    * within the source.
    */
-  positions: { [key: number]: number };
+  positions: { [key: string]: number };
   /**
    * A map from the parse node id where a macro replacement was made to the
    * call `Expr` that resulted in a macro expansion.
@@ -263,16 +263,16 @@ export interface SourceInfo {
    * in the map corresponds to the expression id of the expanded macro, and the
    * value is the call `Expr` that was replaced.
    */
-  macroCalls: { [key: number]: Expr };
+  macroCalls: { [key: string]: Expr };
 }
 
 export interface SourceInfo_PositionsEntry {
-  key: number;
+  key: string;
   value: number;
 }
 
 export interface SourceInfo_MacroCallsEntry {
-  key: number;
+  key: string;
   value: Expr | undefined;
 }
 

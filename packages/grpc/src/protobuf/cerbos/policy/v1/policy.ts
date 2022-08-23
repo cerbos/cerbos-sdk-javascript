@@ -1,13 +1,14 @@
 /* eslint-disable */
-import { Effect } from "../../../cerbos/effect/v1/effect";
+import { Effect } from "../../effect/v1/effect";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import {
   Principal,
   Resource,
   AuxData,
   CheckInput,
   Trace,
-} from "../../../cerbos/engine/v1/engine";
-import * as _m0 from "protobufjs/minimal";
+} from "../../engine/v1/engine";
+import _m0 from "protobufjs/minimal";
 import { UInt64Value } from "../../../google/protobuf/wrappers";
 
 export const protobufPackage = "cerbos.policy.v1";
@@ -32,7 +33,7 @@ export interface Policy_VariablesEntry {
 export interface Metadata {
   sourceFile: string;
   annotations: { [key: string]: string };
-  hash: number | undefined;
+  hash: string | undefined;
   storeIdentifer: string;
 }
 
@@ -150,6 +151,10 @@ export interface TestFixture_AuxData_AuxDataEntry {
   value: AuxData | undefined;
 }
 
+export interface TestOptions {
+  now: Date | undefined;
+}
+
 export interface TestSuite {
   name: string;
   description: string;
@@ -159,6 +164,7 @@ export interface TestSuite {
   principals: { [key: string]: Principal };
   resources: { [key: string]: Resource };
   auxData: { [key: string]: AuxData };
+  options: TestOptions | undefined;
 }
 
 export interface TestSuite_PrincipalsEntry {
@@ -183,6 +189,7 @@ export interface TestTable {
   skipReason: string;
   input: TestTable_Input | undefined;
   expected: TestTable_Expectation[];
+  options: TestOptions | undefined;
 }
 
 export interface TestTable_Input {
@@ -210,6 +217,7 @@ export interface Test {
   skipReason: string;
   input: CheckInput | undefined;
   expected: { [key: string]: Effect };
+  options: TestOptions | undefined;
 }
 
 export interface Test_TestName {
@@ -1478,6 +1486,45 @@ export const TestFixture_AuxData_AuxDataEntry = {
   },
 };
 
+function createBaseTestOptions(): TestOptions {
+  return { now: undefined };
+}
+
+export const TestOptions = {
+  encode(
+    message: TestOptions,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.now !== undefined) {
+      Timestamp.encode(
+        toTimestamp(message.now),
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestOptions {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTestOptions();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.now = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32())
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
 function createBaseTestSuite(): TestSuite {
   return {
     name: "",
@@ -1488,6 +1535,7 @@ function createBaseTestSuite(): TestSuite {
     principals: {},
     resources: {},
     auxData: {},
+    options: undefined,
   };
 }
 
@@ -1529,6 +1577,9 @@ export const TestSuite = {
         writer.uint32(66).fork()
       ).ldelim();
     });
+    if (message.options !== undefined) {
+      TestOptions.encode(message.options, writer.uint32(74).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -1577,6 +1628,9 @@ export const TestSuite = {
           if (entry8.value !== undefined) {
             message.auxData[entry8.key] = entry8.value;
           }
+          break;
+        case 9:
+          message.options = TestOptions.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1724,6 +1778,7 @@ function createBaseTestTable(): TestTable {
     skipReason: "",
     input: undefined,
     expected: [],
+    options: undefined,
   };
 }
 
@@ -1749,6 +1804,9 @@ export const TestTable = {
     }
     for (const v of message.expected) {
       TestTable_Expectation.encode(v!, writer.uint32(50).fork()).ldelim();
+    }
+    if (message.options !== undefined) {
+      TestOptions.encode(message.options, writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -1779,6 +1837,9 @@ export const TestTable = {
           message.expected.push(
             TestTable_Expectation.decode(reader, reader.uint32())
           );
+          break;
+        case 7:
+          message.options = TestOptions.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1950,6 +2011,7 @@ function createBaseTest(): Test {
     skipReason: "",
     input: undefined,
     expected: {},
+    options: undefined,
   };
 }
 
@@ -1976,6 +2038,9 @@ export const Test = {
         writer.uint32(50).fork()
       ).ldelim();
     });
+    if (message.options !== undefined) {
+      TestOptions.encode(message.options, writer.uint32(58).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -2006,6 +2071,9 @@ export const Test = {
           if (entry6.value !== undefined) {
             message.expected[entry6.key] = entry6.value;
           }
+          break;
+        case 7:
+          message.options = TestOptions.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2528,3 +2596,15 @@ export const TestResults_Failure = {
     return message;
   },
 };
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const nanos = (date.getTime() % 1_000) * 1_000_000;
+  return { seconds, nanos };
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = Number(t.seconds) * 1_000;
+  millis += t.nanos / 1_000_000;
+  return new Date(millis);
+}

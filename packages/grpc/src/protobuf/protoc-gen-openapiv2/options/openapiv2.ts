@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 import { Value } from "../../google/protobuf/struct";
 
 export const protobufPackage = "grpc.gateway.protoc_gen_openapiv2.options";
@@ -529,14 +529,14 @@ export interface JSONSchema {
    */
   minimum: number;
   exclusiveMinimum: boolean;
-  maxLength: number;
-  minLength: number;
+  maxLength: string;
+  minLength: string;
   pattern: string;
-  maxItems: number;
-  minItems: number;
+  maxItems: string;
+  minItems: string;
   uniqueItems: boolean;
-  maxProperties: number;
-  minProperties: number;
+  maxProperties: string;
+  minProperties: string;
   required: string[];
   /** Items in 'array' must be unique. */
   array: string[];
@@ -1848,14 +1848,14 @@ function createBaseJSONSchema(): JSONSchema {
     exclusiveMaximum: false,
     minimum: 0,
     exclusiveMinimum: false,
-    maxLength: 0,
-    minLength: 0,
+    maxLength: "0",
+    minLength: "0",
     pattern: "",
-    maxItems: 0,
-    minItems: 0,
+    maxItems: "0",
+    minItems: "0",
     uniqueItems: false,
-    maxProperties: 0,
-    minProperties: 0,
+    maxProperties: "0",
+    minProperties: "0",
     required: [],
     array: [],
     type: [],
@@ -1902,28 +1902,28 @@ export const JSONSchema = {
     if (message.exclusiveMinimum === true) {
       writer.uint32(112).bool(message.exclusiveMinimum);
     }
-    if (message.maxLength !== 0) {
+    if (message.maxLength !== "0") {
       writer.uint32(120).uint64(message.maxLength);
     }
-    if (message.minLength !== 0) {
+    if (message.minLength !== "0") {
       writer.uint32(128).uint64(message.minLength);
     }
     if (message.pattern !== "") {
       writer.uint32(138).string(message.pattern);
     }
-    if (message.maxItems !== 0) {
+    if (message.maxItems !== "0") {
       writer.uint32(160).uint64(message.maxItems);
     }
-    if (message.minItems !== 0) {
+    if (message.minItems !== "0") {
       writer.uint32(168).uint64(message.minItems);
     }
     if (message.uniqueItems === true) {
       writer.uint32(176).bool(message.uniqueItems);
     }
-    if (message.maxProperties !== 0) {
+    if (message.maxProperties !== "0") {
       writer.uint32(192).uint64(message.maxProperties);
     }
-    if (message.minProperties !== 0) {
+    if (message.minProperties !== "0") {
       writer.uint32(200).uint64(message.minProperties);
     }
     for (const v of message.required) {
@@ -1987,28 +1987,28 @@ export const JSONSchema = {
           message.exclusiveMinimum = reader.bool();
           break;
         case 15:
-          message.maxLength = longToNumber(reader.uint64() as Long);
+          message.maxLength = longToString(reader.uint64() as Long);
           break;
         case 16:
-          message.minLength = longToNumber(reader.uint64() as Long);
+          message.minLength = longToString(reader.uint64() as Long);
           break;
         case 17:
           message.pattern = reader.string();
           break;
         case 20:
-          message.maxItems = longToNumber(reader.uint64() as Long);
+          message.maxItems = longToString(reader.uint64() as Long);
           break;
         case 21:
-          message.minItems = longToNumber(reader.uint64() as Long);
+          message.minItems = longToString(reader.uint64() as Long);
           break;
         case 22:
           message.uniqueItems = reader.bool();
           break;
         case 24:
-          message.maxProperties = longToNumber(reader.uint64() as Long);
+          message.maxProperties = longToString(reader.uint64() as Long);
           break;
         case 25:
-          message.minProperties = longToNumber(reader.uint64() as Long);
+          message.minProperties = longToString(reader.uint64() as Long);
           break;
         case 26:
           message.required.push(reader.string());
@@ -2528,22 +2528,8 @@ export const Scopes_ScopeEntry = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
+function longToString(long: Long) {
+  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {

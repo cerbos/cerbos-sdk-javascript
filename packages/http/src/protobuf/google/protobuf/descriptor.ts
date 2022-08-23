@@ -963,8 +963,8 @@ export interface UninterpretedOption {
    * identified it as during parsing. Exactly one of these should be set.
    */
   identifierValue: string;
-  positiveIntValue: number;
-  negativeIntValue: number;
+  positiveIntValue: string;
+  negativeIntValue: string;
   doubleValue: number;
   stringValue: Uint8Array;
   aggregateValue: string;
@@ -2177,8 +2177,8 @@ function createBaseUninterpretedOption(): UninterpretedOption {
   return {
     name: [],
     identifierValue: "",
-    positiveIntValue: 0,
-    negativeIntValue: 0,
+    positiveIntValue: "0",
+    negativeIntValue: "0",
     doubleValue: 0,
     stringValue: new Uint8Array(),
     aggregateValue: "",
@@ -2195,11 +2195,11 @@ export const UninterpretedOption = {
         ? String(object.identifierValue)
         : "",
       positiveIntValue: isSet(object.positiveIntValue)
-        ? Number(object.positiveIntValue)
-        : 0,
+        ? String(object.positiveIntValue)
+        : "0",
       negativeIntValue: isSet(object.negativeIntValue)
-        ? Number(object.negativeIntValue)
-        : 0,
+        ? String(object.negativeIntValue)
+        : "0",
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
       stringValue: isSet(object.stringValue)
         ? bytesFromBase64(object.stringValue)
@@ -2222,9 +2222,9 @@ export const UninterpretedOption = {
     message.identifierValue !== undefined &&
       (obj.identifierValue = message.identifierValue);
     message.positiveIntValue !== undefined &&
-      (obj.positiveIntValue = Math.round(message.positiveIntValue));
+      (obj.positiveIntValue = message.positiveIntValue);
     message.negativeIntValue !== undefined &&
-      (obj.negativeIntValue = Math.round(message.negativeIntValue));
+      (obj.negativeIntValue = message.negativeIntValue);
     message.doubleValue !== undefined &&
       (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined &&
@@ -2415,27 +2415,29 @@ var globalThis: any = (() => {
   throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  ((b64) => globalThis.Buffer.from(b64, "base64").toString("binary"));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = globalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  ((bin) => globalThis.Buffer.from(bin, "binary").toString("base64"));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  arr.forEach((byte) => {
-    bin.push(String.fromCharCode(byte));
-  });
-  return btoa(bin.join(""));
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
+  }
 }
 
 function isSet(value: any): boolean {

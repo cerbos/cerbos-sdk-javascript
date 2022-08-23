@@ -174,39 +174,39 @@ export interface Int32Rules {
 /** Int64Rules describes the constraints applied to `int64` values */
 export interface Int64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -260,39 +260,39 @@ export interface UInt32Rules {
 /** UInt64Rules describes the constraints applied to `uint64` values */
 export interface UInt64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -346,39 +346,39 @@ export interface SInt32Rules {
 /** SInt64Rules describes the constraints applied to `sint64` values */
 export interface SInt64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -432,39 +432,39 @@ export interface Fixed32Rules {
 /** Fixed64Rules describes the constraints applied to `fixed64` values */
 export interface Fixed64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -518,39 +518,39 @@ export interface SFixed32Rules {
 /** SFixed64Rules describes the constraints applied to `sfixed64` values */
 export interface SFixed64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -573,31 +573,31 @@ export interface StringRules {
    * characters (Unicode code points). Note that the number of
    * characters may differ from the number of bytes in the string.
    */
-  len: number;
+  len: string;
   /**
    * MinLen specifies that this field must be the specified number of
    * characters (Unicode code points) at a minimum. Note that the number of
    * characters may differ from the number of bytes in the string.
    */
-  minLen: number;
+  minLen: string;
   /**
    * MaxLen specifies that this field must be the specified number of
    * characters (Unicode code points) at a maximum. Note that the number of
    * characters may differ from the number of bytes in the string.
    */
-  maxLen: number;
+  maxLen: string;
   /** LenBytes specifies that this field must be the specified number of bytes */
-  lenBytes: number;
+  lenBytes: string;
   /**
    * MinBytes specifies that this field must be the specified number of bytes
    * at a minimum
    */
-  minBytes: number;
+  minBytes: string;
   /**
    * MaxBytes specifies that this field must be the specified number of bytes
    * at a maximum
    */
-  maxBytes: number;
+  maxBytes: string;
   /**
    * Pattern specifes that this field must match against the specified
    * regular expression (RE2 syntax). The included expression should elide
@@ -665,17 +665,17 @@ export interface BytesRules {
   /** Const specifies that this field must be exactly the specified value */
   const: Uint8Array;
   /** Len specifies that this field must be the specified number of bytes */
-  len: number;
+  len: string;
   /**
    * MinLen specifies that this field must be the specified number of bytes
    * at a minimum
    */
-  minLen: number;
+  minLen: string;
   /**
    * MaxLen specifies that this field must be the specified number of bytes
    * at a maximum
    */
-  maxLen: number;
+  maxLen: string;
   /**
    * Pattern specifes that this field must match against the specified
    * regular expression (RE2 syntax). The included expression should elide
@@ -759,12 +759,12 @@ export interface RepeatedRules {
    * MinItems specifies that this field must have the specified number of
    * items at a minimum
    */
-  minItems: number;
+  minItems: string;
   /**
    * MaxItems specifies that this field must have the specified number of
    * items at a maximum
    */
-  maxItems: number;
+  maxItems: string;
   /**
    * Unique specifies that all elements in this field must be unique. This
    * contraint is only applicable to scalar and enum types (messages are not
@@ -790,12 +790,12 @@ export interface MapRules {
    * MinPairs specifies that this field must have the specified number of
    * KVs at a minimum
    */
-  minPairs: number;
+  minPairs: string;
   /**
    * MaxPairs specifies that this field must have the specified number of
    * KVs at a maximum
    */
-  maxPairs: number;
+  maxPairs: string;
   /**
    * NoSparse specifies values in this field cannot be unset. This only
    * applies to map's with message value types.

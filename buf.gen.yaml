@@ -7,6 +7,7 @@ plugins:
     opt:
       - env=both
       - esModuleInterop=true
+      - forceLong=string
       - oneof=unions
       - onlyTypes=true
       - outputEncodeMethods=false
@@ -20,8 +21,9 @@ plugins:
     out: packages/grpc/src/protobuf
     strategy: all
     opt:
-      - env=node
+      - env=both
       - esModuleInterop=true
+      - forceLong=string
       - oneof=unions
       - onlyTypes=false
       - outputEncodeMethods=true
@@ -37,6 +39,7 @@ plugins:
     opt:
       - env=both
       - esModuleInterop=true
+      - forceLong=string
       - oneof=unions
       - onlyTypes=false
       - outputEncodeMethods=false

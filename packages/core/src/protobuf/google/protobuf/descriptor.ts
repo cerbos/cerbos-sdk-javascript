@@ -658,8 +658,8 @@ export interface UninterpretedOption {
    * identified it as during parsing. Exactly one of these should be set.
    */
   identifierValue: string;
-  positiveIntValue: number;
-  negativeIntValue: number;
+  positiveIntValue: string;
+  negativeIntValue: string;
   doubleValue: number;
   stringValue: Uint8Array;
   aggregateValue: string;

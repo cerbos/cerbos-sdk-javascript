@@ -1,0 +1,15 @@
+server:
+  adminAPI:
+    enabled: true
+
+  tls:
+    cert: /certificates/server.crt
+    key: /certificates/server.key
+
+storage:
+  driver: sqlite3
+  sqlite3:
+    dsn: ":memory:"
+
+telemetry:
+  disabled: true

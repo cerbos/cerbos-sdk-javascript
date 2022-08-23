@@ -1,27 +1,317 @@
 import { v4 as uuidv4 } from "uuid";
 
+import { Effect as EffectProtobuf } from "../protobuf/cerbos/effect/v1/effect";
 import type {
   PlanResourcesInput_Resource,
   Principal as PrincipalProtobuf,
   Resource as ResourceProtobuf,
 } from "../protobuf/cerbos/engine/v1/engine";
 import type {
+  Condition as ConditionProtobuf,
+  DerivedRoles as DerivedRolesProtobuf,
+  Match as MatchProtobuf,
+  Match_ExprList,
+  Policy as PolicyProtobuf,
+  PrincipalPolicy as PrincipalPolicyProtobuf,
+  PrincipalRule as PrincipalRuleProtobuf,
+  PrincipalRule_Action,
+  ResourcePolicy as ResourcePolicyProtobuf,
+  ResourceRule as ResourceRuleProtobuf,
+  RoleDef,
+  Schemas,
+  Schemas_Schema,
+} from "../protobuf/cerbos/policy/v1/policy";
+import type {
+  AddOrUpdatePolicyRequest,
+  AddOrUpdateSchemaRequest,
   AuxData as AuxDataProtobuf,
   AuxData_JWT,
   CheckResourcesRequest as CheckResourcesRequestProtobuf,
   CheckResourcesRequest_ResourceEntry,
+  DeleteSchemaRequest,
+  GetPolicyRequest,
+  GetSchemaRequest,
   PlanResourcesRequest as PlanResourcesRequestProtobuf,
 } from "../protobuf/cerbos/request/v1/request";
-import type {
+import type { Schema } from "../protobuf/cerbos/schema/v1/schema";
+import {
+  AddOrUpdatePoliciesRequest,
+  AddOrUpdateSchemasRequest,
   AuxData,
   CheckResourcesRequest,
+  Condition,
+  DeleteSchemasRequest,
+  DerivedRoleDefinition,
+  DerivedRoles,
+  Effect,
+  GetPoliciesRequest,
   JWT,
+  Match,
+  Matches,
   PlanResourcesRequest,
+  Policy,
   Principal,
+  PrincipalPolicy,
+  PrincipalRule,
+  PrincipalRuleAction,
   Resource,
   ResourceCheck,
+  ResourcePolicy,
   ResourceQuery,
-} from "../types";
+  ResourceRule,
+  SchemaDefinition,
+  SchemaDefinitionInput,
+  SchemaInput,
+  SchemaRef,
+  SchemaRefs,
+  matchIsMatchAll,
+  matchIsMatchAny,
+  matchIsMatchExpr,
+  matchIsMatchNone,
+  policyIsDerivedRoles,
+  policyIsPrincipalPolicy,
+  policyIsResourcePolicy,
+} from "../types/external";
+import type { GetSchemasRequest } from "../types/external/GetSchemasRequest";
+
+const encoder = new TextEncoder();
+
+export const addOrUpdatePoliciesRequestToProtobuf = ({
+  policies,
+}: AddOrUpdatePoliciesRequest): AddOrUpdatePolicyRequest => ({
+  policies: policies.map(policyToProtobuf),
+});
+
+const policyToProtobuf = (policy: Policy): PolicyProtobuf => {
+  const {
+    apiVersion = "api.cerbos.dev/v1",
+    description = "",
+    disabled = false,
+    variables = {},
+  } = policy;
+
+  return {
+    apiVersion,
+    description,
+    disabled,
+    metadata: {
+      annotations: {},
+      hash: undefined,
+      storeIdentifer: "",
+      sourceFile: "",
+    },
+    policyType: policyTypeToProtobuf(policy),
+    variables,
+  };
+};
+
+const policyTypeToProtobuf = (
+  policy: Policy
+): Exclude<PolicyProtobuf["policyType"], undefined> => {
+  if (policyIsDerivedRoles(policy)) {
+    return {
+      $case: "derivedRoles",
+      derivedRoles: derivedRolesToProtobuf(policy),
+    };
+  }
+
+  if (policyIsPrincipalPolicy(policy)) {
+    return {
+      $case: "principalPolicy",
+      principalPolicy: principalPolicyToProtobuf(policy),
+    };
+  }
+
+  if (policyIsResourcePolicy(policy)) {
+    return {
+      $case: "resourcePolicy",
+      resourcePolicy: resourcePolicyToProtobuf(policy),
+    };
+  }
+
+  throw new Error(`Unknown policy type: ${JSON.stringify(policy, null, 2)}`);
+};
+
+const derivedRolesToProtobuf = ({
+  derivedRoles: { name, definitions },
+}: DerivedRoles): DerivedRolesProtobuf => ({
+  name,
+  definitions: definitions.map(derivedRoleDefinitionToProtobuf),
+});
+
+const derivedRoleDefinitionToProtobuf = ({
+  name,
+  parentRoles,
+  condition,
+}: DerivedRoleDefinition): RoleDef => ({
+  name,
+  parentRoles,
+  condition: condition && conditionToProtobuf(condition),
+});
+
+const conditionToProtobuf = ({ match }: Condition): ConditionProtobuf => ({
+  condition: {
+    $case: "match",
+    match: matchToProtobuf(match),
+  },
+});
+
+const matchToProtobuf = (match: Match): MatchProtobuf => {
+  if (matchIsMatchAll(match)) {
+    return {
+      op: {
+        $case: "all",
+        all: matchesToProtobuf(match.all),
+      },
+    };
+  }
+
+  if (matchIsMatchAny(match)) {
+    return {
+      op: {
+        $case: "any",
+        any: matchesToProtobuf(match.any),
+      },
+    };
+  }
+
+  if (matchIsMatchNone(match)) {
+    return {
+      op: {
+        $case: "none",
+        none: matchesToProtobuf(match.none),
+      },
+    };
+  }
+
+  if (matchIsMatchExpr(match)) {
+    return {
+      op: {
+        $case: "expr",
+        expr: match.expr,
+      },
+    };
+  }
+
+  throw new Error(`Unknown match type: ${JSON.stringify(match, null, 2)}`);
+};
+
+const matchesToProtobuf = ({ of }: Matches): Match_ExprList => ({
+  of: of.map(matchToProtobuf),
+});
+
+const principalPolicyToProtobuf = ({
+  principalPolicy: { principal, version, rules, scope = "" },
+}: PrincipalPolicy): PrincipalPolicyProtobuf => ({
+  principal,
+  version,
+  rules: rules.map(principalRuleToProtobuf),
+  scope,
+});
+
+const principalRuleToProtobuf = ({
+  resource,
+  actions,
+}: PrincipalRule): PrincipalRuleProtobuf => ({
+  resource,
+  actions: actions.map(principalRuleActionToProtobuf),
+});
+
+const principalRuleActionToProtobuf = ({
+  action,
+  effect,
+  condition,
+  name = "",
+}: PrincipalRuleAction): PrincipalRule_Action => ({
+  action,
+  effect: effectToProtobuf(effect),
+  condition: condition && conditionToProtobuf(condition),
+  name,
+});
+
+const effectToProtobuf = (effect: Effect): EffectProtobuf =>
+  effect === Effect.ALLOW
+    ? EffectProtobuf.EFFECT_ALLOW
+    : EffectProtobuf.EFFECT_DENY;
+
+const resourcePolicyToProtobuf = ({
+  resourcePolicy: {
+    resource,
+    version,
+    importDerivedRoles = [],
+    rules,
+    scope = "",
+    schemas,
+  },
+}: ResourcePolicy): ResourcePolicyProtobuf => ({
+  resource,
+  version,
+  importDerivedRoles,
+  rules: rules.map(resourceRuleToProtobuf),
+  scope,
+  schemas: schemas && policySchemasToProtobuf(schemas),
+});
+
+const resourceRuleToProtobuf = ({
+  actions,
+  effect,
+  derivedRoles = [],
+  roles = [],
+  condition,
+  name = "",
+}: ResourceRule): ResourceRuleProtobuf => ({
+  actions,
+  effect: effectToProtobuf(effect),
+  derivedRoles,
+  roles,
+  condition: condition && conditionToProtobuf(condition),
+  name,
+});
+
+const policySchemasToProtobuf = ({
+  principalSchema,
+  resourceSchema,
+}: SchemaRefs): Schemas => ({
+  principalSchema: principalSchema && policySchemaToProtobuf(principalSchema),
+  resourceSchema: resourceSchema && policySchemaToProtobuf(resourceSchema),
+});
+
+const policySchemaToProtobuf = ({
+  ref,
+  ignoreWhen,
+}: SchemaRef): Schemas_Schema => ({
+  ref,
+  ignoreWhen,
+});
+
+export const addOrUpdateSchemasRequestToProtobuf = ({
+  schemas,
+}: AddOrUpdateSchemasRequest): AddOrUpdateSchemaRequest => ({
+  schemas: schemas.map(schemaToProtobuf),
+});
+
+const schemaToProtobuf = ({ id, definition }: SchemaInput): Schema => ({
+  id,
+  definition: schemaDefinitionToProtobuf(definition),
+});
+
+const schemaDefinitionToProtobuf = (
+  definition: SchemaDefinitionInput
+): Uint8Array => {
+  if (definition instanceof Uint8Array) {
+    return definition;
+  }
+
+  if (definition instanceof SchemaDefinition) {
+    return definition.bytes;
+  }
+
+  if (typeof definition === "string") {
+    return encoder.encode(definition);
+  }
+
+  return encoder.encode(JSON.stringify(definition));
+};
 
 export const checkResourcesRequestToProtobuf = ({
   principal,
@@ -80,6 +370,24 @@ const auxDataToProtobuf = ({ jwt }: AuxData): AuxDataProtobuf => ({
 const jwtToProtobuf = ({ token, keySetId = "" }: JWT): AuxData_JWT => ({
   token,
   keySetId,
+});
+
+export const deleteSchemasRequestToProtobuf = ({
+  ids,
+}: DeleteSchemasRequest): DeleteSchemaRequest => ({
+  id: ids,
+});
+
+export const getPoliciesRequestToProtobuf = ({
+  ids,
+}: GetPoliciesRequest): GetPolicyRequest => ({
+  id: ids,
+});
+
+export const getSchemasRequestToProtobuf = ({
+  ids,
+}: GetSchemasRequest): GetSchemaRequest => ({
+  id: ids,
 });
 
 export const planResourcesRequestToProtobuf = ({

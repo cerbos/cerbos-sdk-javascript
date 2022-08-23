@@ -525,14 +525,14 @@ export interface JSONSchema {
    */
   minimum: number;
   exclusiveMinimum: boolean;
-  maxLength: number;
-  minLength: number;
+  maxLength: string;
+  minLength: string;
   pattern: string;
-  maxItems: number;
-  minItems: number;
+  maxItems: string;
+  minItems: string;
   uniqueItems: boolean;
-  maxProperties: number;
-  minProperties: number;
+  maxProperties: string;
+  minProperties: string;
   required: string[];
   /** Items in 'array' must be unique. */
   array: string[];

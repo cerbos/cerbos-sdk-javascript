@@ -32,7 +32,7 @@ import {
   PlaygroundTestRequest,
   PlaygroundEvaluateRequest,
   PlaygroundProxyRequest,
-} from "../../../cerbos/request/v1/request";
+} from "../../request/v1/request";
 import {
   CheckResourceSetResponse,
   CheckResourceBatchResponse,
@@ -52,7 +52,7 @@ import {
   PlaygroundTestResponse,
   PlaygroundEvaluateResponse,
   PlaygroundProxyResponse,
-} from "../../../cerbos/response/v1/response";
+} from "../../response/v1/response";
 
 export const protobufPackage = "cerbos.svc.v1";
 

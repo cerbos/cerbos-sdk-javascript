@@ -2,7 +2,7 @@
 import { Timestamp } from "../google/protobuf/timestamp";
 import Long from "long";
 import { Duration } from "../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "validate";
 
@@ -177,39 +177,39 @@ export interface Int32Rules {
 /** Int64Rules describes the constraints applied to `int64` values */
 export interface Int64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -263,39 +263,39 @@ export interface UInt32Rules {
 /** UInt64Rules describes the constraints applied to `uint64` values */
 export interface UInt64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -349,39 +349,39 @@ export interface SInt32Rules {
 /** SInt64Rules describes the constraints applied to `sint64` values */
 export interface SInt64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -435,39 +435,39 @@ export interface Fixed32Rules {
 /** Fixed64Rules describes the constraints applied to `fixed64` values */
 export interface Fixed64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -521,39 +521,39 @@ export interface SFixed32Rules {
 /** SFixed64Rules describes the constraints applied to `sfixed64` values */
 export interface SFixed64Rules {
   /** Const specifies that this field must be exactly the specified value */
-  const: number;
+  const: string;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: number;
+  lt: string;
   /**
    * Lte specifies that this field must be less than or equal to the
    * specified value, inclusive
    */
-  lte: number;
+  lte: string;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    * range is reversed.
    */
-  gt: number;
+  gt: string;
   /**
    * Gte specifies that this field must be greater than or equal to the
    * specified value, inclusive. If the value of Gte is larger than a
    * specified Lt or Lte, the range is reversed.
    */
-  gte: number;
+  gte: string;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: number[];
+  in: string[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: number[];
+  notIn: string[];
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -576,31 +576,31 @@ export interface StringRules {
    * characters (Unicode code points). Note that the number of
    * characters may differ from the number of bytes in the string.
    */
-  len: number;
+  len: string;
   /**
    * MinLen specifies that this field must be the specified number of
    * characters (Unicode code points) at a minimum. Note that the number of
    * characters may differ from the number of bytes in the string.
    */
-  minLen: number;
+  minLen: string;
   /**
    * MaxLen specifies that this field must be the specified number of
    * characters (Unicode code points) at a maximum. Note that the number of
    * characters may differ from the number of bytes in the string.
    */
-  maxLen: number;
+  maxLen: string;
   /** LenBytes specifies that this field must be the specified number of bytes */
-  lenBytes: number;
+  lenBytes: string;
   /**
    * MinBytes specifies that this field must be the specified number of bytes
    * at a minimum
    */
-  minBytes: number;
+  minBytes: string;
   /**
    * MaxBytes specifies that this field must be the specified number of bytes
    * at a maximum
    */
-  maxBytes: number;
+  maxBytes: string;
   /**
    * Pattern specifes that this field must match against the specified
    * regular expression (RE2 syntax). The included expression should elide
@@ -666,19 +666,19 @@ export interface StringRules {
 /** BytesRules describe the constraints applied to `bytes` values */
 export interface BytesRules {
   /** Const specifies that this field must be exactly the specified value */
-  const: Buffer;
+  const: Uint8Array;
   /** Len specifies that this field must be the specified number of bytes */
-  len: number;
+  len: string;
   /**
    * MinLen specifies that this field must be the specified number of bytes
    * at a minimum
    */
-  minLen: number;
+  minLen: string;
   /**
    * MaxLen specifies that this field must be the specified number of bytes
    * at a maximum
    */
-  maxLen: number;
+  maxLen: string;
   /**
    * Pattern specifes that this field must match against the specified
    * regular expression (RE2 syntax). The included expression should elide
@@ -689,27 +689,27 @@ export interface BytesRules {
    * Prefix specifies that this field must have the specified bytes at the
    * beginning of the string.
    */
-  prefix: Buffer;
+  prefix: Uint8Array;
   /**
    * Suffix specifies that this field must have the specified bytes at the
    * end of the string.
    */
-  suffix: Buffer;
+  suffix: Uint8Array;
   /**
    * Contains specifies that this field must have the specified bytes
    * anywhere in the string.
    */
-  contains: Buffer;
+  contains: Uint8Array;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
    */
-  in: Buffer[];
+  in: Uint8Array[];
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    * values
    */
-  notIn: Buffer[];
+  notIn: Uint8Array[];
   wellKnown?:
     | { $case: "ip"; ip: boolean }
     | { $case: "ipv4"; ipv4: boolean }
@@ -762,12 +762,12 @@ export interface RepeatedRules {
    * MinItems specifies that this field must have the specified number of
    * items at a minimum
    */
-  minItems: number;
+  minItems: string;
   /**
    * MaxItems specifies that this field must have the specified number of
    * items at a maximum
    */
-  maxItems: number;
+  maxItems: string;
   /**
    * Unique specifies that all elements in this field must be unique. This
    * contraint is only applicable to scalar and enum types (messages are not
@@ -793,12 +793,12 @@ export interface MapRules {
    * MinPairs specifies that this field must have the specified number of
    * KVs at a minimum
    */
-  minPairs: number;
+  minPairs: string;
   /**
    * MaxPairs specifies that this field must have the specified number of
    * KVs at a maximum
    */
-  maxPairs: number;
+  maxPairs: string;
   /**
    * NoSparse specifies values in this field cannot be unset. This only
    * applies to map's with message value types.
@@ -1499,11 +1499,11 @@ export const Int32Rules = {
 
 function createBaseInt64Rules(): Int64Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: "0",
+    lt: "0",
+    lte: "0",
+    gt: "0",
+    gte: "0",
     in: [],
     notIn: [],
     ignoreEmpty: false,
@@ -1515,19 +1515,19 @@ export const Int64Rules = {
     message: Int64Rules,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== "0") {
       writer.uint32(8).int64(message.const);
     }
-    if (message.lt !== 0) {
+    if (message.lt !== "0") {
       writer.uint32(16).int64(message.lt);
     }
-    if (message.lte !== 0) {
+    if (message.lte !== "0") {
       writer.uint32(24).int64(message.lte);
     }
-    if (message.gt !== 0) {
+    if (message.gt !== "0") {
       writer.uint32(32).int64(message.gt);
     }
-    if (message.gte !== 0) {
+    if (message.gte !== "0") {
       writer.uint32(40).int64(message.gte);
     }
     writer.uint32(50).fork();
@@ -1554,38 +1554,38 @@ export const Int64Rules = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.const = longToNumber(reader.int64() as Long);
+          message.const = longToString(reader.int64() as Long);
           break;
         case 2:
-          message.lt = longToNumber(reader.int64() as Long);
+          message.lt = longToString(reader.int64() as Long);
           break;
         case 3:
-          message.lte = longToNumber(reader.int64() as Long);
+          message.lte = longToString(reader.int64() as Long);
           break;
         case 4:
-          message.gt = longToNumber(reader.int64() as Long);
+          message.gt = longToString(reader.int64() as Long);
           break;
         case 5:
-          message.gte = longToNumber(reader.int64() as Long);
+          message.gte = longToString(reader.int64() as Long);
           break;
         case 6:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(longToNumber(reader.int64() as Long));
+              message.in.push(longToString(reader.int64() as Long));
             }
           } else {
-            message.in.push(longToNumber(reader.int64() as Long));
+            message.in.push(longToString(reader.int64() as Long));
           }
           break;
         case 7:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(longToNumber(reader.int64() as Long));
+              message.notIn.push(longToString(reader.int64() as Long));
             }
           } else {
-            message.notIn.push(longToNumber(reader.int64() as Long));
+            message.notIn.push(longToString(reader.int64() as Long));
           }
           break;
         case 8:
@@ -1705,11 +1705,11 @@ export const UInt32Rules = {
 
 function createBaseUInt64Rules(): UInt64Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: "0",
+    lt: "0",
+    lte: "0",
+    gt: "0",
+    gte: "0",
     in: [],
     notIn: [],
     ignoreEmpty: false,
@@ -1721,19 +1721,19 @@ export const UInt64Rules = {
     message: UInt64Rules,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== "0") {
       writer.uint32(8).uint64(message.const);
     }
-    if (message.lt !== 0) {
+    if (message.lt !== "0") {
       writer.uint32(16).uint64(message.lt);
     }
-    if (message.lte !== 0) {
+    if (message.lte !== "0") {
       writer.uint32(24).uint64(message.lte);
     }
-    if (message.gt !== 0) {
+    if (message.gt !== "0") {
       writer.uint32(32).uint64(message.gt);
     }
-    if (message.gte !== 0) {
+    if (message.gte !== "0") {
       writer.uint32(40).uint64(message.gte);
     }
     writer.uint32(50).fork();
@@ -1760,38 +1760,38 @@ export const UInt64Rules = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.const = longToNumber(reader.uint64() as Long);
+          message.const = longToString(reader.uint64() as Long);
           break;
         case 2:
-          message.lt = longToNumber(reader.uint64() as Long);
+          message.lt = longToString(reader.uint64() as Long);
           break;
         case 3:
-          message.lte = longToNumber(reader.uint64() as Long);
+          message.lte = longToString(reader.uint64() as Long);
           break;
         case 4:
-          message.gt = longToNumber(reader.uint64() as Long);
+          message.gt = longToString(reader.uint64() as Long);
           break;
         case 5:
-          message.gte = longToNumber(reader.uint64() as Long);
+          message.gte = longToString(reader.uint64() as Long);
           break;
         case 6:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(longToNumber(reader.uint64() as Long));
+              message.in.push(longToString(reader.uint64() as Long));
             }
           } else {
-            message.in.push(longToNumber(reader.uint64() as Long));
+            message.in.push(longToString(reader.uint64() as Long));
           }
           break;
         case 7:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(longToNumber(reader.uint64() as Long));
+              message.notIn.push(longToString(reader.uint64() as Long));
             }
           } else {
-            message.notIn.push(longToNumber(reader.uint64() as Long));
+            message.notIn.push(longToString(reader.uint64() as Long));
           }
           break;
         case 8:
@@ -1911,11 +1911,11 @@ export const SInt32Rules = {
 
 function createBaseSInt64Rules(): SInt64Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: "0",
+    lt: "0",
+    lte: "0",
+    gt: "0",
+    gte: "0",
     in: [],
     notIn: [],
     ignoreEmpty: false,
@@ -1927,19 +1927,19 @@ export const SInt64Rules = {
     message: SInt64Rules,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== "0") {
       writer.uint32(8).sint64(message.const);
     }
-    if (message.lt !== 0) {
+    if (message.lt !== "0") {
       writer.uint32(16).sint64(message.lt);
     }
-    if (message.lte !== 0) {
+    if (message.lte !== "0") {
       writer.uint32(24).sint64(message.lte);
     }
-    if (message.gt !== 0) {
+    if (message.gt !== "0") {
       writer.uint32(32).sint64(message.gt);
     }
-    if (message.gte !== 0) {
+    if (message.gte !== "0") {
       writer.uint32(40).sint64(message.gte);
     }
     writer.uint32(50).fork();
@@ -1966,38 +1966,38 @@ export const SInt64Rules = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.const = longToNumber(reader.sint64() as Long);
+          message.const = longToString(reader.sint64() as Long);
           break;
         case 2:
-          message.lt = longToNumber(reader.sint64() as Long);
+          message.lt = longToString(reader.sint64() as Long);
           break;
         case 3:
-          message.lte = longToNumber(reader.sint64() as Long);
+          message.lte = longToString(reader.sint64() as Long);
           break;
         case 4:
-          message.gt = longToNumber(reader.sint64() as Long);
+          message.gt = longToString(reader.sint64() as Long);
           break;
         case 5:
-          message.gte = longToNumber(reader.sint64() as Long);
+          message.gte = longToString(reader.sint64() as Long);
           break;
         case 6:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(longToNumber(reader.sint64() as Long));
+              message.in.push(longToString(reader.sint64() as Long));
             }
           } else {
-            message.in.push(longToNumber(reader.sint64() as Long));
+            message.in.push(longToString(reader.sint64() as Long));
           }
           break;
         case 7:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(longToNumber(reader.sint64() as Long));
+              message.notIn.push(longToString(reader.sint64() as Long));
             }
           } else {
-            message.notIn.push(longToNumber(reader.sint64() as Long));
+            message.notIn.push(longToString(reader.sint64() as Long));
           }
           break;
         case 8:
@@ -2117,11 +2117,11 @@ export const Fixed32Rules = {
 
 function createBaseFixed64Rules(): Fixed64Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: "0",
+    lt: "0",
+    lte: "0",
+    gt: "0",
+    gte: "0",
     in: [],
     notIn: [],
     ignoreEmpty: false,
@@ -2133,19 +2133,19 @@ export const Fixed64Rules = {
     message: Fixed64Rules,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== "0") {
       writer.uint32(9).fixed64(message.const);
     }
-    if (message.lt !== 0) {
+    if (message.lt !== "0") {
       writer.uint32(17).fixed64(message.lt);
     }
-    if (message.lte !== 0) {
+    if (message.lte !== "0") {
       writer.uint32(25).fixed64(message.lte);
     }
-    if (message.gt !== 0) {
+    if (message.gt !== "0") {
       writer.uint32(33).fixed64(message.gt);
     }
-    if (message.gte !== 0) {
+    if (message.gte !== "0") {
       writer.uint32(41).fixed64(message.gte);
     }
     writer.uint32(50).fork();
@@ -2172,38 +2172,38 @@ export const Fixed64Rules = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.const = longToNumber(reader.fixed64() as Long);
+          message.const = longToString(reader.fixed64() as Long);
           break;
         case 2:
-          message.lt = longToNumber(reader.fixed64() as Long);
+          message.lt = longToString(reader.fixed64() as Long);
           break;
         case 3:
-          message.lte = longToNumber(reader.fixed64() as Long);
+          message.lte = longToString(reader.fixed64() as Long);
           break;
         case 4:
-          message.gt = longToNumber(reader.fixed64() as Long);
+          message.gt = longToString(reader.fixed64() as Long);
           break;
         case 5:
-          message.gte = longToNumber(reader.fixed64() as Long);
+          message.gte = longToString(reader.fixed64() as Long);
           break;
         case 6:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(longToNumber(reader.fixed64() as Long));
+              message.in.push(longToString(reader.fixed64() as Long));
             }
           } else {
-            message.in.push(longToNumber(reader.fixed64() as Long));
+            message.in.push(longToString(reader.fixed64() as Long));
           }
           break;
         case 7:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(longToNumber(reader.fixed64() as Long));
+              message.notIn.push(longToString(reader.fixed64() as Long));
             }
           } else {
-            message.notIn.push(longToNumber(reader.fixed64() as Long));
+            message.notIn.push(longToString(reader.fixed64() as Long));
           }
           break;
         case 8:
@@ -2323,11 +2323,11 @@ export const SFixed32Rules = {
 
 function createBaseSFixed64Rules(): SFixed64Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: "0",
+    lt: "0",
+    lte: "0",
+    gt: "0",
+    gte: "0",
     in: [],
     notIn: [],
     ignoreEmpty: false,
@@ -2339,19 +2339,19 @@ export const SFixed64Rules = {
     message: SFixed64Rules,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== "0") {
       writer.uint32(9).sfixed64(message.const);
     }
-    if (message.lt !== 0) {
+    if (message.lt !== "0") {
       writer.uint32(17).sfixed64(message.lt);
     }
-    if (message.lte !== 0) {
+    if (message.lte !== "0") {
       writer.uint32(25).sfixed64(message.lte);
     }
-    if (message.gt !== 0) {
+    if (message.gt !== "0") {
       writer.uint32(33).sfixed64(message.gt);
     }
-    if (message.gte !== 0) {
+    if (message.gte !== "0") {
       writer.uint32(41).sfixed64(message.gte);
     }
     writer.uint32(50).fork();
@@ -2378,38 +2378,38 @@ export const SFixed64Rules = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.const = longToNumber(reader.sfixed64() as Long);
+          message.const = longToString(reader.sfixed64() as Long);
           break;
         case 2:
-          message.lt = longToNumber(reader.sfixed64() as Long);
+          message.lt = longToString(reader.sfixed64() as Long);
           break;
         case 3:
-          message.lte = longToNumber(reader.sfixed64() as Long);
+          message.lte = longToString(reader.sfixed64() as Long);
           break;
         case 4:
-          message.gt = longToNumber(reader.sfixed64() as Long);
+          message.gt = longToString(reader.sfixed64() as Long);
           break;
         case 5:
-          message.gte = longToNumber(reader.sfixed64() as Long);
+          message.gte = longToString(reader.sfixed64() as Long);
           break;
         case 6:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(longToNumber(reader.sfixed64() as Long));
+              message.in.push(longToString(reader.sfixed64() as Long));
             }
           } else {
-            message.in.push(longToNumber(reader.sfixed64() as Long));
+            message.in.push(longToString(reader.sfixed64() as Long));
           }
           break;
         case 7:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(longToNumber(reader.sfixed64() as Long));
+              message.notIn.push(longToString(reader.sfixed64() as Long));
             }
           } else {
-            message.notIn.push(longToNumber(reader.sfixed64() as Long));
+            message.notIn.push(longToString(reader.sfixed64() as Long));
           }
           break;
         case 8:
@@ -2461,12 +2461,12 @@ export const BoolRules = {
 function createBaseStringRules(): StringRules {
   return {
     const: "",
-    len: 0,
-    minLen: 0,
-    maxLen: 0,
-    lenBytes: 0,
-    minBytes: 0,
-    maxBytes: 0,
+    len: "0",
+    minLen: "0",
+    maxLen: "0",
+    lenBytes: "0",
+    minBytes: "0",
+    maxBytes: "0",
     pattern: "",
     prefix: "",
     suffix: "",
@@ -2488,22 +2488,22 @@ export const StringRules = {
     if (message.const !== "") {
       writer.uint32(10).string(message.const);
     }
-    if (message.len !== 0) {
+    if (message.len !== "0") {
       writer.uint32(152).uint64(message.len);
     }
-    if (message.minLen !== 0) {
+    if (message.minLen !== "0") {
       writer.uint32(16).uint64(message.minLen);
     }
-    if (message.maxLen !== 0) {
+    if (message.maxLen !== "0") {
       writer.uint32(24).uint64(message.maxLen);
     }
-    if (message.lenBytes !== 0) {
+    if (message.lenBytes !== "0") {
       writer.uint32(160).uint64(message.lenBytes);
     }
-    if (message.minBytes !== 0) {
+    if (message.minBytes !== "0") {
       writer.uint32(32).uint64(message.minBytes);
     }
-    if (message.maxBytes !== 0) {
+    if (message.maxBytes !== "0") {
       writer.uint32(40).uint64(message.maxBytes);
     }
     if (message.pattern !== "") {
@@ -2577,22 +2577,22 @@ export const StringRules = {
           message.const = reader.string();
           break;
         case 19:
-          message.len = longToNumber(reader.uint64() as Long);
+          message.len = longToString(reader.uint64() as Long);
           break;
         case 2:
-          message.minLen = longToNumber(reader.uint64() as Long);
+          message.minLen = longToString(reader.uint64() as Long);
           break;
         case 3:
-          message.maxLen = longToNumber(reader.uint64() as Long);
+          message.maxLen = longToString(reader.uint64() as Long);
           break;
         case 20:
-          message.lenBytes = longToNumber(reader.uint64() as Long);
+          message.lenBytes = longToString(reader.uint64() as Long);
           break;
         case 4:
-          message.minBytes = longToNumber(reader.uint64() as Long);
+          message.minBytes = longToString(reader.uint64() as Long);
           break;
         case 5:
-          message.maxBytes = longToNumber(reader.uint64() as Long);
+          message.maxBytes = longToString(reader.uint64() as Long);
           break;
         case 6:
           message.pattern = reader.string();
@@ -2665,14 +2665,14 @@ export const StringRules = {
 
 function createBaseBytesRules(): BytesRules {
   return {
-    const: Buffer.alloc(0),
-    len: 0,
-    minLen: 0,
-    maxLen: 0,
+    const: new Uint8Array(),
+    len: "0",
+    minLen: "0",
+    maxLen: "0",
     pattern: "",
-    prefix: Buffer.alloc(0),
-    suffix: Buffer.alloc(0),
-    contains: Buffer.alloc(0),
+    prefix: new Uint8Array(),
+    suffix: new Uint8Array(),
+    contains: new Uint8Array(),
     in: [],
     notIn: [],
     wellKnown: undefined,
@@ -2688,13 +2688,13 @@ export const BytesRules = {
     if (message.const.length !== 0) {
       writer.uint32(10).bytes(message.const);
     }
-    if (message.len !== 0) {
+    if (message.len !== "0") {
       writer.uint32(104).uint64(message.len);
     }
-    if (message.minLen !== 0) {
+    if (message.minLen !== "0") {
       writer.uint32(16).uint64(message.minLen);
     }
-    if (message.maxLen !== 0) {
+    if (message.maxLen !== "0") {
       writer.uint32(24).uint64(message.maxLen);
     }
     if (message.pattern !== "") {
@@ -2738,34 +2738,34 @@ export const BytesRules = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.const = reader.bytes() as Buffer;
+          message.const = reader.bytes();
           break;
         case 13:
-          message.len = longToNumber(reader.uint64() as Long);
+          message.len = longToString(reader.uint64() as Long);
           break;
         case 2:
-          message.minLen = longToNumber(reader.uint64() as Long);
+          message.minLen = longToString(reader.uint64() as Long);
           break;
         case 3:
-          message.maxLen = longToNumber(reader.uint64() as Long);
+          message.maxLen = longToString(reader.uint64() as Long);
           break;
         case 4:
           message.pattern = reader.string();
           break;
         case 5:
-          message.prefix = reader.bytes() as Buffer;
+          message.prefix = reader.bytes();
           break;
         case 6:
-          message.suffix = reader.bytes() as Buffer;
+          message.suffix = reader.bytes();
           break;
         case 7:
-          message.contains = reader.bytes() as Buffer;
+          message.contains = reader.bytes();
           break;
         case 8:
-          message.in.push(reader.bytes() as Buffer);
+          message.in.push(reader.bytes());
           break;
         case 9:
-          message.notIn.push(reader.bytes() as Buffer);
+          message.notIn.push(reader.bytes());
           break;
         case 10:
           message.wellKnown = { $case: "ip", ip: reader.bool() };
@@ -2900,8 +2900,8 @@ export const MessageRules = {
 
 function createBaseRepeatedRules(): RepeatedRules {
   return {
-    minItems: 0,
-    maxItems: 0,
+    minItems: "0",
+    maxItems: "0",
     unique: false,
     items: undefined,
     ignoreEmpty: false,
@@ -2913,10 +2913,10 @@ export const RepeatedRules = {
     message: RepeatedRules,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.minItems !== 0) {
+    if (message.minItems !== "0") {
       writer.uint32(8).uint64(message.minItems);
     }
-    if (message.maxItems !== 0) {
+    if (message.maxItems !== "0") {
       writer.uint32(16).uint64(message.maxItems);
     }
     if (message.unique === true) {
@@ -2939,10 +2939,10 @@ export const RepeatedRules = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.minItems = longToNumber(reader.uint64() as Long);
+          message.minItems = longToString(reader.uint64() as Long);
           break;
         case 2:
-          message.maxItems = longToNumber(reader.uint64() as Long);
+          message.maxItems = longToString(reader.uint64() as Long);
           break;
         case 3:
           message.unique = reader.bool();
@@ -2964,8 +2964,8 @@ export const RepeatedRules = {
 
 function createBaseMapRules(): MapRules {
   return {
-    minPairs: 0,
-    maxPairs: 0,
+    minPairs: "0",
+    maxPairs: "0",
     noSparse: false,
     keys: undefined,
     values: undefined,
@@ -2978,10 +2978,10 @@ export const MapRules = {
     message: MapRules,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.minPairs !== 0) {
+    if (message.minPairs !== "0") {
       writer.uint32(8).uint64(message.minPairs);
     }
-    if (message.maxPairs !== 0) {
+    if (message.maxPairs !== "0") {
       writer.uint32(16).uint64(message.maxPairs);
     }
     if (message.noSparse === true) {
@@ -3007,10 +3007,10 @@ export const MapRules = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.minPairs = longToNumber(reader.uint64() as Long);
+          message.minPairs = longToString(reader.uint64() as Long);
           break;
         case 2:
-          message.maxPairs = longToNumber(reader.uint64() as Long);
+          message.maxPairs = longToString(reader.uint64() as Long);
           break;
         case 3:
           message.noSparse = reader.bool();
@@ -3277,34 +3277,20 @@ export const TimestampRules = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
-
 function toTimestamp(date: Date): Timestamp {
-  const seconds = date.getTime() / 1_000;
+  const seconds = Math.trunc(date.getTime() / 1_000).toString();
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds * 1_000;
+  let millis = Number(t.seconds) * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
 
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
+function longToString(long: Long) {
+  return long.toString();
 }
 
 if (_m0.util.Long !== Long) {
