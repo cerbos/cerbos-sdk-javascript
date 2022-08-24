@@ -7,7 +7,7 @@
     "test:watch": "NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt jest --watch"
   },
   "dependencies": {
-    "@cerbos/grpc": "^0.6.0",
-    "@cerbos/http": "^0.6.0"
+    "@cerbos/grpc": "^0.7.0",
+    "@cerbos/http": "^0.7.0"
   }
 }
