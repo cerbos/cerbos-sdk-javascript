@@ -38,7 +38,7 @@
     "@types/qs": "^6.9.7",
     "@types/semver": "^7.3.12",
     "@types/uuid": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "^5.34.0",
+    "@typescript-eslint/eslint-plugin": "^5.36.0",
     "@typescript-eslint/parser": "^5.34.0",
     "concurrently": "^7.3.0",
     "eslint": "^8.23.0",
