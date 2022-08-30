@@ -2,3 +2,4 @@
 /docs/
 /packages/*/lib/
 /packages/*/src/protobuf/
+/releasing.md
