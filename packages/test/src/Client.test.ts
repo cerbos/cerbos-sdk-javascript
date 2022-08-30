@@ -424,7 +424,7 @@ describe("Client", () => {
             it("throws on validation error", async () => {
               await clients.callbackOnValidationError.checkResources(request);
 
-              expect(validationFailed).toBeCalledWith([
+              expect(validationFailed).toHaveBeenCalledWith([
                 {
                   path: "/country/alpha2",
                   message: "does not match pattern '[A-Z]{2}'",
@@ -557,7 +557,7 @@ describe("Client", () => {
               it("throws on validation error", async () => {
                 await clients.callbackOnValidationError.planResources(request);
 
-                expect(validationFailed).toBeCalledWith([
+                expect(validationFailed).toHaveBeenCalledWith([
                   {
                     path: "/country/alpha2",
                     message: "does not match pattern '[A-Z]{2}'",
