@@ -90,6 +90,8 @@ $ git switch --detach upstream/main
 ```console
 $ npm run clean
 
+$ npm install
+
 $ npm run build
 ```
 
