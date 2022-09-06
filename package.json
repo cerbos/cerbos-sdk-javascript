@@ -10,7 +10,7 @@
     "build:watch": "tsc --build --watch",
     "clean": "rm -rf api packages/*/lib",
     "docs": "npm run docs:extract-api && npm run docs:generate && npm run docs:fixup",
-    "docs:extract-api": "npm --workspace=packages/core --workspace=packages/grpc --workspace=packages/http exec api-extractor run",
+    "docs:extract-api": "npm --workspace=packages/core --workspace=packages/grpc --workspace=packages/http --workspace=packages/lite exec api-extractor run",
     "docs:fixup": "scripts/sed-all docs 's/\\r$//'",
     "docs:generate": "api-documenter markdown --input-folder api --output-folder docs",
     "generate": "npm run generate:clean && npm run generate:buf",

@@ -47,3 +47,18 @@ plugins:
       - outputPartialMethods=false
       - outputServices=false
       - unrecognizedEnum=false
+
+  - name: lite
+    path: node_modules/.bin/protoc-gen-ts_proto
+    out: packages/lite/src/protobuf
+    strategy: all
+    opt:
+      - env=both
+      - esModuleInterop=true
+      - oneof=unions
+      - onlyTypes=false
+      - outputEncodeMethods=false
+      - outputJsonMethods=true
+      - outputPartialMethods=false
+      - outputServices=false
+      - unrecognizedEnum=false
