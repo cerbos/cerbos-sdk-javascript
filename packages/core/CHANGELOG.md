@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.8.0] - 2022-09-08
+
 ### Added
 
 - `NotOK.fromJSON` factory method to parse JSON-serialized unsucessful responses ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
@@ -37,7 +41,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.7.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.8.0...HEAD
+[0.8.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.7.1...@cerbos/core@0.8.0
 [0.7.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.7.0...@cerbos/core@0.7.1
 [0.7.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.6.0...@cerbos/core@0.7.0
 [0.6.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.5.1...@cerbos/core@0.6.0

@@ -26,6 +26,6 @@
     "src/**/*.ts"
   ],
   "dependencies": {
-    "@cerbos/core": "^0.7.1"
+    "@cerbos/core": "^0.8.0"
   }
 }
