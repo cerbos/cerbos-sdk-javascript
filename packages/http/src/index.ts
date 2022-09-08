@@ -4,17 +4,15 @@
  * @packageDocumentation
  */
 
-import {
-  Client,
-  NotOK,
+import type {
   Options,
-  Status,
   _RPC,
   _Request,
   _Response,
   _Service,
   _Transport,
 } from "@cerbos/core";
+import { Client, NotOK } from "@cerbos/core";
 import { btoa } from "abab";
 import { stringify as queryStringify } from "qs";
 
@@ -134,7 +132,7 @@ export class HTTP extends Client {
       });
 
       if (!response.ok) {
-        throw notOK(await response.text());
+        throw NotOK.fromJSON(await response.text());
       }
 
       return responseType.fromJSON(await response.json());
@@ -229,38 +227,3 @@ const services: Services = {
     },
   },
 };
-
-const notOK = (text: string): NotOK => {
-  try {
-    const error: unknown = JSON.parse(text);
-    return new NotOK(code(error), details(error));
-  } catch (_) {
-    return new NotOK(Status.UNKNOWN, text);
-  }
-};
-
-const code = (error: unknown): Status => {
-  if (
-    has(error, "code") &&
-    typeof error.code === "number" &&
-    error.code in Status
-  ) {
-    return error.code || Status.UNKNOWN;
-  }
-
-  throw new Error("Error does not include expected code");
-};
-
-const details = (error: unknown): string => {
-  if (has(error, "message") && typeof error.message === "string") {
-    return error.message;
-  }
-
-  throw new Error("Error does not include expected details");
-};
-
-const has = <K extends string>(
-  object: unknown,
-  property: K
-): object is Record<K, unknown> =>
-  !!object && Object.prototype.hasOwnProperty.call(object, property);

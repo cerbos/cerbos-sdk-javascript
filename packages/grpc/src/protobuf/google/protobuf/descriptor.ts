@@ -32,14 +32,18 @@ export interface FileDescriptorProto {
   enumType: EnumDescriptorProto[];
   service: ServiceDescriptorProto[];
   extension: FieldDescriptorProto[];
-  options: FileOptions | undefined;
+  options:
+    | FileOptions
+    | undefined;
   /**
    * This field contains optional information about the original source code.
    * You may safely remove this entire field without harming runtime
    * functionality of the descriptors -- the information is needed only by
    * development tools.
    */
-  sourceCodeInfo: SourceCodeInfo | undefined;
+  sourceCodeInfo:
+    | SourceCodeInfo
+    | undefined;
   /**
    * The syntax of the proto file.
    * The supported values are "proto2" and "proto3".
@@ -132,7 +136,9 @@ export interface FieldDescriptorProto {
    * it to camelCase.
    */
   jsonName: string;
-  options: FieldOptions | undefined;
+  options:
+    | FieldOptions
+    | undefined;
   /**
    * If true, this is a proto3 "optional". When a proto3 field is optional, it
    * tracks presence regardless of field type.
@@ -219,7 +225,9 @@ export interface OneofDescriptorProto {
 export interface EnumDescriptorProto {
   name: string;
   value: EnumValueDescriptorProto[];
-  options: EnumOptions | undefined;
+  options:
+    | EnumOptions
+    | undefined;
   /**
    * Range of reserved numeric values. Reserved numeric values may not be used
    * by enum values in the same enum declaration. Reserved ranges may not
@@ -271,7 +279,9 @@ export interface MethodDescriptorProto {
    */
   inputType: string;
   outputType: string;
-  options: MethodOptions | undefined;
+  options:
+    | MethodOptions
+    | undefined;
   /** Identifies if client streams multiple client messages */
   clientStreaming: boolean;
   /** Identifies if server streams multiple server messages */
@@ -519,7 +529,6 @@ export interface FieldOptions {
    * interface is not affected by this option; const methods remain safe to
    * call from multiple threads concurrently, while non-const methods continue
    * to require exclusive access.
-   *
    *
    * Note that implementations may choose not to check required fields within
    * a lazy sub-message.  That is, calling IsInitialized() on the outer message
@@ -861,10 +870,7 @@ function createBaseFileDescriptorSet(): FileDescriptorSet {
 }
 
 export const FileDescriptorSet = {
-  encode(
-    message: FileDescriptorSet,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: FileDescriptorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.file) {
       FileDescriptorProto.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -879,9 +885,7 @@ export const FileDescriptorSet = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.file.push(
-            FileDescriptorProto.decode(reader, reader.uint32())
-          );
+          message.file.push(FileDescriptorProto.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -910,10 +914,7 @@ function createBaseFileDescriptorProto(): FileDescriptorProto {
 }
 
 export const FileDescriptorProto = {
-  encode(
-    message: FileDescriptorProto,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: FileDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -949,10 +950,7 @@ export const FileDescriptorProto = {
       FileOptions.encode(message.options, writer.uint32(66).fork()).ldelim();
     }
     if (message.sourceCodeInfo !== undefined) {
-      SourceCodeInfo.encode(
-        message.sourceCodeInfo,
-        writer.uint32(74).fork()
-      ).ldelim();
+      SourceCodeInfo.encode(message.sourceCodeInfo, writer.uint32(74).fork()).ldelim();
     }
     if (message.syntax !== "") {
       writer.uint32(98).string(message.syntax);
@@ -997,33 +995,22 @@ export const FileDescriptorProto = {
           }
           break;
         case 4:
-          message.messageType.push(
-            DescriptorProto.decode(reader, reader.uint32())
-          );
+          message.messageType.push(DescriptorProto.decode(reader, reader.uint32()));
           break;
         case 5:
-          message.enumType.push(
-            EnumDescriptorProto.decode(reader, reader.uint32())
-          );
+          message.enumType.push(EnumDescriptorProto.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.service.push(
-            ServiceDescriptorProto.decode(reader, reader.uint32())
-          );
+          message.service.push(ServiceDescriptorProto.decode(reader, reader.uint32()));
           break;
         case 7:
-          message.extension.push(
-            FieldDescriptorProto.decode(reader, reader.uint32())
-          );
+          message.extension.push(FieldDescriptorProto.decode(reader, reader.uint32()));
           break;
         case 8:
           message.options = FileOptions.decode(reader, reader.uint32());
           break;
         case 9:
-          message.sourceCodeInfo = SourceCodeInfo.decode(
-            reader,
-            reader.uint32()
-          );
+          message.sourceCodeInfo = SourceCodeInfo.decode(reader, reader.uint32());
           break;
         case 12:
           message.syntax = reader.string();
@@ -1053,10 +1040,7 @@ function createBaseDescriptorProto(): DescriptorProto {
 }
 
 export const DescriptorProto = {
-  encode(
-    message: DescriptorProto,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: DescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1073,10 +1057,7 @@ export const DescriptorProto = {
       EnumDescriptorProto.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     for (const v of message.extensionRange) {
-      DescriptorProto_ExtensionRange.encode(
-        v!,
-        writer.uint32(42).fork()
-      ).ldelim();
+      DescriptorProto_ExtensionRange.encode(v!, writer.uint32(42).fork()).ldelim();
     }
     for (const v of message.oneofDecl) {
       OneofDescriptorProto.encode(v!, writer.uint32(66).fork()).ldelim();
@@ -1085,10 +1066,7 @@ export const DescriptorProto = {
       MessageOptions.encode(message.options, writer.uint32(58).fork()).ldelim();
     }
     for (const v of message.reservedRange) {
-      DescriptorProto_ReservedRange.encode(
-        v!,
-        writer.uint32(74).fork()
-      ).ldelim();
+      DescriptorProto_ReservedRange.encode(v!, writer.uint32(74).fork()).ldelim();
     }
     for (const v of message.reservedName) {
       writer.uint32(82).string(v!);
@@ -1107,42 +1085,28 @@ export const DescriptorProto = {
           message.name = reader.string();
           break;
         case 2:
-          message.field.push(
-            FieldDescriptorProto.decode(reader, reader.uint32())
-          );
+          message.field.push(FieldDescriptorProto.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.extension.push(
-            FieldDescriptorProto.decode(reader, reader.uint32())
-          );
+          message.extension.push(FieldDescriptorProto.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.nestedType.push(
-            DescriptorProto.decode(reader, reader.uint32())
-          );
+          message.nestedType.push(DescriptorProto.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.enumType.push(
-            EnumDescriptorProto.decode(reader, reader.uint32())
-          );
+          message.enumType.push(EnumDescriptorProto.decode(reader, reader.uint32()));
           break;
         case 5:
-          message.extensionRange.push(
-            DescriptorProto_ExtensionRange.decode(reader, reader.uint32())
-          );
+          message.extensionRange.push(DescriptorProto_ExtensionRange.decode(reader, reader.uint32()));
           break;
         case 8:
-          message.oneofDecl.push(
-            OneofDescriptorProto.decode(reader, reader.uint32())
-          );
+          message.oneofDecl.push(OneofDescriptorProto.decode(reader, reader.uint32()));
           break;
         case 7:
           message.options = MessageOptions.decode(reader, reader.uint32());
           break;
         case 9:
-          message.reservedRange.push(
-            DescriptorProto_ReservedRange.decode(reader, reader.uint32())
-          );
+          message.reservedRange.push(DescriptorProto_ReservedRange.decode(reader, reader.uint32()));
           break;
         case 10:
           message.reservedName.push(reader.string());
@@ -1161,10 +1125,7 @@ function createBaseDescriptorProto_ExtensionRange(): DescriptorProto_ExtensionRa
 }
 
 export const DescriptorProto_ExtensionRange = {
-  encode(
-    message: DescriptorProto_ExtensionRange,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: DescriptorProto_ExtensionRange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.start !== 0) {
       writer.uint32(8).int32(message.start);
     }
@@ -1172,18 +1133,12 @@ export const DescriptorProto_ExtensionRange = {
       writer.uint32(16).int32(message.end);
     }
     if (message.options !== undefined) {
-      ExtensionRangeOptions.encode(
-        message.options,
-        writer.uint32(26).fork()
-      ).ldelim();
+      ExtensionRangeOptions.encode(message.options, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): DescriptorProto_ExtensionRange {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DescriptorProto_ExtensionRange {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDescriptorProto_ExtensionRange();
@@ -1197,10 +1152,7 @@ export const DescriptorProto_ExtensionRange = {
           message.end = reader.int32();
           break;
         case 3:
-          message.options = ExtensionRangeOptions.decode(
-            reader,
-            reader.uint32()
-          );
+          message.options = ExtensionRangeOptions.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1216,10 +1168,7 @@ function createBaseDescriptorProto_ReservedRange(): DescriptorProto_ReservedRang
 }
 
 export const DescriptorProto_ReservedRange = {
-  encode(
-    message: DescriptorProto_ReservedRange,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: DescriptorProto_ReservedRange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.start !== 0) {
       writer.uint32(8).int32(message.start);
     }
@@ -1229,10 +1178,7 @@ export const DescriptorProto_ReservedRange = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): DescriptorProto_ReservedRange {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DescriptorProto_ReservedRange {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDescriptorProto_ReservedRange();
@@ -1259,20 +1205,14 @@ function createBaseExtensionRangeOptions(): ExtensionRangeOptions {
 }
 
 export const ExtensionRangeOptions = {
-  encode(
-    message: ExtensionRangeOptions,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ExtensionRangeOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ExtensionRangeOptions {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ExtensionRangeOptions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExtensionRangeOptions();
@@ -1280,9 +1220,7 @@ export const ExtensionRangeOptions = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 999:
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32())
-          );
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1310,10 +1248,7 @@ function createBaseFieldDescriptorProto(): FieldDescriptorProto {
 }
 
 export const FieldDescriptorProto = {
-  encode(
-    message: FieldDescriptorProto,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: FieldDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1350,10 +1285,7 @@ export const FieldDescriptorProto = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): FieldDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): FieldDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldDescriptorProto();
@@ -1407,10 +1339,7 @@ function createBaseOneofDescriptorProto(): OneofDescriptorProto {
 }
 
 export const OneofDescriptorProto = {
-  encode(
-    message: OneofDescriptorProto,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: OneofDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1420,10 +1349,7 @@ export const OneofDescriptorProto = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): OneofDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OneofDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOneofDescriptorProto();
@@ -1446,20 +1372,11 @@ export const OneofDescriptorProto = {
 };
 
 function createBaseEnumDescriptorProto(): EnumDescriptorProto {
-  return {
-    name: "",
-    value: [],
-    options: undefined,
-    reservedRange: [],
-    reservedName: [],
-  };
+  return { name: "", value: [], options: undefined, reservedRange: [], reservedName: [] };
 }
 
 export const EnumDescriptorProto = {
-  encode(
-    message: EnumDescriptorProto,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: EnumDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1470,10 +1387,7 @@ export const EnumDescriptorProto = {
       EnumOptions.encode(message.options, writer.uint32(26).fork()).ldelim();
     }
     for (const v of message.reservedRange) {
-      EnumDescriptorProto_EnumReservedRange.encode(
-        v!,
-        writer.uint32(34).fork()
-      ).ldelim();
+      EnumDescriptorProto_EnumReservedRange.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     for (const v of message.reservedName) {
       writer.uint32(42).string(v!);
@@ -1492,20 +1406,13 @@ export const EnumDescriptorProto = {
           message.name = reader.string();
           break;
         case 2:
-          message.value.push(
-            EnumValueDescriptorProto.decode(reader, reader.uint32())
-          );
+          message.value.push(EnumValueDescriptorProto.decode(reader, reader.uint32()));
           break;
         case 3:
           message.options = EnumOptions.decode(reader, reader.uint32());
           break;
         case 4:
-          message.reservedRange.push(
-            EnumDescriptorProto_EnumReservedRange.decode(
-              reader,
-              reader.uint32()
-            )
-          );
+          message.reservedRange.push(EnumDescriptorProto_EnumReservedRange.decode(reader, reader.uint32()));
           break;
         case 5:
           message.reservedName.push(reader.string());
@@ -1524,10 +1431,7 @@ function createBaseEnumDescriptorProto_EnumReservedRange(): EnumDescriptorProto_
 }
 
 export const EnumDescriptorProto_EnumReservedRange = {
-  encode(
-    message: EnumDescriptorProto_EnumReservedRange,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: EnumDescriptorProto_EnumReservedRange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.start !== 0) {
       writer.uint32(8).int32(message.start);
     }
@@ -1537,10 +1441,7 @@ export const EnumDescriptorProto_EnumReservedRange = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): EnumDescriptorProto_EnumReservedRange {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnumDescriptorProto_EnumReservedRange {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumDescriptorProto_EnumReservedRange();
@@ -1567,10 +1468,7 @@ function createBaseEnumValueDescriptorProto(): EnumValueDescriptorProto {
 }
 
 export const EnumValueDescriptorProto = {
-  encode(
-    message: EnumValueDescriptorProto,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: EnumValueDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1578,18 +1476,12 @@ export const EnumValueDescriptorProto = {
       writer.uint32(16).int32(message.number);
     }
     if (message.options !== undefined) {
-      EnumValueOptions.encode(
-        message.options,
-        writer.uint32(26).fork()
-      ).ldelim();
+      EnumValueOptions.encode(message.options, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): EnumValueDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnumValueDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumValueDescriptorProto();
@@ -1619,10 +1511,7 @@ function createBaseServiceDescriptorProto(): ServiceDescriptorProto {
 }
 
 export const ServiceDescriptorProto = {
-  encode(
-    message: ServiceDescriptorProto,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServiceDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1635,10 +1524,7 @@ export const ServiceDescriptorProto = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ServiceDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceDescriptorProto();
@@ -1649,9 +1535,7 @@ export const ServiceDescriptorProto = {
           message.name = reader.string();
           break;
         case 2:
-          message.method.push(
-            MethodDescriptorProto.decode(reader, reader.uint32())
-          );
+          message.method.push(MethodDescriptorProto.decode(reader, reader.uint32()));
           break;
         case 3:
           message.options = ServiceOptions.decode(reader, reader.uint32());
@@ -1677,10 +1561,7 @@ function createBaseMethodDescriptorProto(): MethodDescriptorProto {
 }
 
 export const MethodDescriptorProto = {
-  encode(
-    message: MethodDescriptorProto,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MethodDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1702,10 +1583,7 @@ export const MethodDescriptorProto = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MethodDescriptorProto {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MethodDescriptorProto {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMethodDescriptorProto();
@@ -1766,10 +1644,7 @@ function createBaseFileOptions(): FileOptions {
 }
 
 export const FileOptions = {
-  encode(
-    message: FileOptions,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: FileOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.javaPackage !== "") {
       writer.uint32(10).string(message.javaPackage);
     }
@@ -1904,9 +1779,7 @@ export const FileOptions = {
           message.rubyPackage = reader.string();
           break;
         case 999:
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32())
-          );
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1928,10 +1801,7 @@ function createBaseMessageOptions(): MessageOptions {
 }
 
 export const MessageOptions = {
-  encode(
-    message: MessageOptions,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MessageOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.messageSetWireFormat === true) {
       writer.uint32(8).bool(message.messageSetWireFormat);
     }
@@ -1970,9 +1840,7 @@ export const MessageOptions = {
           message.mapEntry = reader.bool();
           break;
         case 999:
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32())
-          );
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1997,10 +1865,7 @@ function createBaseFieldOptions(): FieldOptions {
 }
 
 export const FieldOptions = {
-  encode(
-    message: FieldOptions,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: FieldOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.ctype !== 0) {
       writer.uint32(8).int32(message.ctype);
     }
@@ -2057,9 +1922,7 @@ export const FieldOptions = {
           message.weak = reader.bool();
           break;
         case 999:
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32())
-          );
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2075,10 +1938,7 @@ function createBaseOneofOptions(): OneofOptions {
 }
 
 export const OneofOptions = {
-  encode(
-    message: OneofOptions,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: OneofOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
     }
@@ -2093,9 +1953,7 @@ export const OneofOptions = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 999:
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32())
-          );
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2111,10 +1969,7 @@ function createBaseEnumOptions(): EnumOptions {
 }
 
 export const EnumOptions = {
-  encode(
-    message: EnumOptions,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: EnumOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.allowAlias === true) {
       writer.uint32(16).bool(message.allowAlias);
     }
@@ -2141,9 +1996,7 @@ export const EnumOptions = {
           message.deprecated = reader.bool();
           break;
         case 999:
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32())
-          );
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2159,10 +2012,7 @@ function createBaseEnumValueOptions(): EnumValueOptions {
 }
 
 export const EnumValueOptions = {
-  encode(
-    message: EnumValueOptions,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: EnumValueOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deprecated === true) {
       writer.uint32(8).bool(message.deprecated);
     }
@@ -2183,9 +2033,7 @@ export const EnumValueOptions = {
           message.deprecated = reader.bool();
           break;
         case 999:
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32())
-          );
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2201,10 +2049,7 @@ function createBaseServiceOptions(): ServiceOptions {
 }
 
 export const ServiceOptions = {
-  encode(
-    message: ServiceOptions,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ServiceOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deprecated === true) {
       writer.uint32(264).bool(message.deprecated);
     }
@@ -2225,9 +2070,7 @@ export const ServiceOptions = {
           message.deprecated = reader.bool();
           break;
         case 999:
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32())
-          );
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2243,10 +2086,7 @@ function createBaseMethodOptions(): MethodOptions {
 }
 
 export const MethodOptions = {
-  encode(
-    message: MethodOptions,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MethodOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deprecated === true) {
       writer.uint32(264).bool(message.deprecated);
     }
@@ -2273,9 +2113,7 @@ export const MethodOptions = {
           message.idempotencyLevel = reader.int32() as any;
           break;
         case 999:
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32())
-          );
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2299,15 +2137,9 @@ function createBaseUninterpretedOption(): UninterpretedOption {
 }
 
 export const UninterpretedOption = {
-  encode(
-    message: UninterpretedOption,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: UninterpretedOption, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.name) {
-      UninterpretedOption_NamePart.encode(
-        v!,
-        writer.uint32(18).fork()
-      ).ldelim();
+      UninterpretedOption_NamePart.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     if (message.identifierValue !== "") {
       writer.uint32(26).string(message.identifierValue);
@@ -2338,9 +2170,7 @@ export const UninterpretedOption = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.name.push(
-            UninterpretedOption_NamePart.decode(reader, reader.uint32())
-          );
+          message.name.push(UninterpretedOption_NamePart.decode(reader, reader.uint32()));
           break;
         case 3:
           message.identifierValue = reader.string();
@@ -2374,10 +2204,7 @@ function createBaseUninterpretedOption_NamePart(): UninterpretedOption_NamePart 
 }
 
 export const UninterpretedOption_NamePart = {
-  encode(
-    message: UninterpretedOption_NamePart,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: UninterpretedOption_NamePart, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.namePart !== "") {
       writer.uint32(10).string(message.namePart);
     }
@@ -2387,10 +2214,7 @@ export const UninterpretedOption_NamePart = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): UninterpretedOption_NamePart {
+  decode(input: _m0.Reader | Uint8Array, length?: number): UninterpretedOption_NamePart {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUninterpretedOption_NamePart();
@@ -2417,10 +2241,7 @@ function createBaseSourceCodeInfo(): SourceCodeInfo {
 }
 
 export const SourceCodeInfo = {
-  encode(
-    message: SourceCodeInfo,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SourceCodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.location) {
       SourceCodeInfo_Location.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2435,9 +2256,7 @@ export const SourceCodeInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.location.push(
-            SourceCodeInfo_Location.decode(reader, reader.uint32())
-          );
+          message.location.push(SourceCodeInfo_Location.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2449,20 +2268,11 @@ export const SourceCodeInfo = {
 };
 
 function createBaseSourceCodeInfo_Location(): SourceCodeInfo_Location {
-  return {
-    path: [],
-    span: [],
-    leadingComments: "",
-    trailingComments: "",
-    leadingDetachedComments: [],
-  };
+  return { path: [], span: [], leadingComments: "", trailingComments: "", leadingDetachedComments: [] };
 }
 
 export const SourceCodeInfo_Location = {
-  encode(
-    message: SourceCodeInfo_Location,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SourceCodeInfo_Location, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.path) {
       writer.int32(v);
@@ -2485,10 +2295,7 @@ export const SourceCodeInfo_Location = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): SourceCodeInfo_Location {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceCodeInfo_Location {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceCodeInfo_Location();
@@ -2538,15 +2345,9 @@ function createBaseGeneratedCodeInfo(): GeneratedCodeInfo {
 }
 
 export const GeneratedCodeInfo = {
-  encode(
-    message: GeneratedCodeInfo,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: GeneratedCodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.annotation) {
-      GeneratedCodeInfo_Annotation.encode(
-        v!,
-        writer.uint32(10).fork()
-      ).ldelim();
+      GeneratedCodeInfo_Annotation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -2559,9 +2360,7 @@ export const GeneratedCodeInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.annotation.push(
-            GeneratedCodeInfo_Annotation.decode(reader, reader.uint32())
-          );
+          message.annotation.push(GeneratedCodeInfo_Annotation.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2577,10 +2376,7 @@ function createBaseGeneratedCodeInfo_Annotation(): GeneratedCodeInfo_Annotation 
 }
 
 export const GeneratedCodeInfo_Annotation = {
-  encode(
-    message: GeneratedCodeInfo_Annotation,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: GeneratedCodeInfo_Annotation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.path) {
       writer.int32(v);
@@ -2598,10 +2394,7 @@ export const GeneratedCodeInfo_Annotation = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): GeneratedCodeInfo_Annotation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GeneratedCodeInfo_Annotation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGeneratedCodeInfo_Annotation();

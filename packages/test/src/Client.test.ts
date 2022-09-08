@@ -4,26 +4,28 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 import { createSecureContext } from "tls";
 
-import {
+import type {
   AdminCredentials,
   CheckResourcesRequest,
-  CheckResourcesResponse,
-  CheckResourcesResult,
   Client,
   DerivedRoles,
+  Options,
+  PlanResourcesRequest,
+  Policy,
+  ValidationFailedCallback,
+} from "@cerbos/core";
+import {
+  CheckResourcesResponse,
+  CheckResourcesResult,
   Effect,
   NotOK,
-  Options,
   PlanExpression,
   PlanExpressionValue,
   PlanExpressionVariable,
   PlanKind,
-  PlanResourcesRequest,
-  Policy,
   Status,
   ValidationErrorSource,
   ValidationFailed,
-  ValidationFailedCallback,
 } from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
@@ -31,8 +33,8 @@ import { afterAll, beforeAll, describe, expect, it, jest } from "@jest/globals";
 import { UnsecuredJWT } from "jose";
 import YAML from "yaml";
 
+import type { Ports } from "./servers";
 import {
-  Ports,
   cerbosVersion,
   cerbosVersionIsAtLeast,
   ports as serverPorts,

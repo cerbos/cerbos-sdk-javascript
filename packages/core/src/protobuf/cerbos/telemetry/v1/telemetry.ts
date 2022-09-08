@@ -47,10 +47,10 @@ export interface ServerLaunch_Features_AdminApi {
 
 export interface ServerLaunch_Features_Storage {
   driver: string;
-  store?:
-    | { $case: "disk"; disk: ServerLaunch_Features_Storage_Disk }
-    | { $case: "git"; git: ServerLaunch_Features_Storage_Git }
-    | { $case: "blob"; blob: ServerLaunch_Features_Storage_Blob };
+  store?: { $case: "disk"; disk: ServerLaunch_Features_Storage_Disk } | {
+    $case: "git";
+    git: ServerLaunch_Features_Storage_Git;
+  } | { $case: "blob"; blob: ServerLaunch_Features_Storage_Blob };
 }
 
 export interface ServerLaunch_Features_Storage_Disk {

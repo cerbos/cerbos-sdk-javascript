@@ -1,9 +1,8 @@
-import {
-  CheckResourcesResponse,
+import type {
   CheckResourcesResultResource,
-  Effect,
   ResourceSearch,
 } from "@cerbos/core";
+import { CheckResourcesResponse, Effect } from "@cerbos/core";
 import { describe, expect, it } from "@jest/globals";
 import { v4 as uuidv4 } from "uuid";
 

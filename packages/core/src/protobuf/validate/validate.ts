@@ -776,7 +776,9 @@ export interface RepeatedRules {
    * Repeated message fields will still execute validation against each item
    * unless skip is specified here.
    */
-  items: FieldRules | undefined;
+  items:
+    | FieldRules
+    | undefined;
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -802,13 +804,17 @@ export interface MapRules {
    */
   noSparse: boolean;
   /** Keys specifies the constraints to be applied to each key in the field. */
-  keys: FieldRules | undefined;
+  keys:
+    | FieldRules
+    | undefined;
   /**
    * Values specifies the constraints to be applied to the value of each key
    * in the field. Message values will still have their validations evaluated
    * unless skip is specified here.
    */
-  values: FieldRules | undefined;
+  values:
+    | FieldRules
+    | undefined;
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    * evaluated only if the field is not empty
@@ -843,27 +849,37 @@ export interface DurationRules {
   /** Required specifies that this field must be set */
   required: boolean;
   /** Const specifies that this field must be exactly the specified value */
-  const: Duration | undefined;
+  const:
+    | Duration
+    | undefined;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: Duration | undefined;
+  lt:
+    | Duration
+    | undefined;
   /**
    * Lt specifies that this field must be less than the specified value,
    * inclusive
    */
-  lte: Duration | undefined;
+  lte:
+    | Duration
+    | undefined;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive
    */
-  gt: Duration | undefined;
+  gt:
+    | Duration
+    | undefined;
   /**
    * Gte specifies that this field must be greater than the specified value,
    * inclusive
    */
-  gte: Duration | undefined;
+  gte:
+    | Duration
+    | undefined;
   /**
    * In specifies that this field must be equal to one of the specified
    * values
@@ -884,27 +900,37 @@ export interface TimestampRules {
   /** Required specifies that this field must be set */
   required: boolean;
   /** Const specifies that this field must be exactly the specified value */
-  const: Date | undefined;
+  const:
+    | Date
+    | undefined;
   /**
    * Lt specifies that this field must be less than the specified value,
    * exclusive
    */
-  lt: Date | undefined;
+  lt:
+    | Date
+    | undefined;
   /**
    * Lte specifies that this field must be less than the specified value,
    * inclusive
    */
-  lte: Date | undefined;
+  lte:
+    | Date
+    | undefined;
   /**
    * Gt specifies that this field must be greater than the specified value,
    * exclusive
    */
-  gt: Date | undefined;
+  gt:
+    | Date
+    | undefined;
   /**
    * Gte specifies that this field must be greater than the specified value,
    * inclusive
    */
-  gte: Date | undefined;
+  gte:
+    | Date
+    | undefined;
   /**
    * LtNow specifies that this must be less than the current time. LtNow
    * can only be used with the Within rule.

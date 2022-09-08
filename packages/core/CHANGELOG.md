@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- `NotOK.fromJSON` factory method to parse JSON-serialized unsucessful responses ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
 ## [0.7.1] - 2022-09-06
 

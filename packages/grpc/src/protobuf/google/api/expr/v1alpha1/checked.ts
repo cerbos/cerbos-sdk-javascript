@@ -1,9 +1,9 @@
 /* eslint-disable */
 import Long from "long";
-import { SourceInfo, Expr, Constant } from "./syntax";
 import _m0 from "protobufjs/minimal";
 import { Empty } from "../../../protobuf/empty";
 import { NullValue } from "../../../protobuf/struct";
+import { Constant, Expr, SourceInfo } from "./syntax";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
@@ -39,7 +39,9 @@ export interface CheckedExpr {
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
    */
-  sourceInfo: SourceInfo | undefined;
+  sourceInfo:
+    | SourceInfo
+    | undefined;
   /**
    * The expr version indicates the major / minor version number of the `expr`
    * representation.
@@ -142,7 +144,9 @@ export interface Type_ListType {
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapType {
   /** The type of the key. */
-  keyType: Type | undefined;
+  keyType:
+    | Type
+    | undefined;
   /** The type of the value. */
   valueType: Type | undefined;
 }
@@ -150,7 +154,9 @@ export interface Type_MapType {
 /** Function type with result and arg types. */
 export interface Type_FunctionType {
   /** Result type of the function. */
-  resultType: Type | undefined;
+  resultType:
+    | Type
+    | undefined;
   /** Argument types of the function. */
   argTypes: Type[];
 }
@@ -181,9 +187,7 @@ export interface Decl {
    * function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].
    */
   name: string;
-  declKind?:
-    | { $case: "ident"; ident: Decl_IdentDecl }
-    | { $case: "function"; function: Decl_FunctionDecl };
+  declKind?: { $case: "ident"; ident: Decl_IdentDecl } | { $case: "function"; function: Decl_FunctionDecl };
 }
 
 /**
@@ -196,12 +200,16 @@ export interface Decl {
  */
 export interface Decl_IdentDecl {
   /** Required. The type of the identifier. */
-  type: Type | undefined;
+  type:
+    | Type
+    | undefined;
   /**
    * The constant value of the identifier. If not specified, the identifier
    * must be supplied at evaluation time.
    */
-  value: Constant | undefined;
+  value:
+    | Constant
+    | undefined;
   /** Documentation string for the identifier. */
   doc: string;
 }
@@ -263,7 +271,9 @@ export interface Decl_FunctionDecl_Overload {
    * Required. The result type of the function. For example, the operator
    * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
    */
-  resultType: Type | undefined;
+  resultType:
+    | Type
+    | undefined;
   /**
    * Whether the function is to be used in a method call-style `x.f(...)`
    * of a function call-style `f(x, ...)`.
@@ -299,31 +309,16 @@ export interface Reference {
 }
 
 function createBaseCheckedExpr(): CheckedExpr {
-  return {
-    referenceMap: {},
-    typeMap: {},
-    sourceInfo: undefined,
-    exprVersion: "",
-    expr: undefined,
-  };
+  return { referenceMap: {}, typeMap: {}, sourceInfo: undefined, exprVersion: "", expr: undefined };
 }
 
 export const CheckedExpr = {
-  encode(
-    message: CheckedExpr,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CheckedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.referenceMap).forEach(([key, value]) => {
-      CheckedExpr_ReferenceMapEntry.encode(
-        { key: key as any, value },
-        writer.uint32(18).fork()
-      ).ldelim();
+      CheckedExpr_ReferenceMapEntry.encode({ key: key as any, value }, writer.uint32(18).fork()).ldelim();
     });
     Object.entries(message.typeMap).forEach(([key, value]) => {
-      CheckedExpr_TypeMapEntry.encode(
-        { key: key as any, value },
-        writer.uint32(26).fork()
-      ).ldelim();
+      CheckedExpr_TypeMapEntry.encode({ key: key as any, value }, writer.uint32(26).fork()).ldelim();
     });
     if (message.sourceInfo !== undefined) {
       SourceInfo.encode(message.sourceInfo, writer.uint32(42).fork()).ldelim();
@@ -345,19 +340,13 @@ export const CheckedExpr = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          const entry2 = CheckedExpr_ReferenceMapEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry2 = CheckedExpr_ReferenceMapEntry.decode(reader, reader.uint32());
           if (entry2.value !== undefined) {
             message.referenceMap[entry2.key] = entry2.value;
           }
           break;
         case 3:
-          const entry3 = CheckedExpr_TypeMapEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry3 = CheckedExpr_TypeMapEntry.decode(reader, reader.uint32());
           if (entry3.value !== undefined) {
             message.typeMap[entry3.key] = entry3.value;
           }
@@ -385,10 +374,7 @@ function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntr
 }
 
 export const CheckedExpr_ReferenceMapEntry = {
-  encode(
-    message: CheckedExpr_ReferenceMapEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CheckedExpr_ReferenceMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "0") {
       writer.uint32(8).int64(message.key);
     }
@@ -398,10 +384,7 @@ export const CheckedExpr_ReferenceMapEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): CheckedExpr_ReferenceMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_ReferenceMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr_ReferenceMapEntry();
@@ -428,10 +411,7 @@ function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
 }
 
 export const CheckedExpr_TypeMapEntry = {
-  encode(
-    message: CheckedExpr_TypeMapEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CheckedExpr_TypeMapEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "0") {
       writer.uint32(8).int64(message.key);
     }
@@ -441,10 +421,7 @@ export const CheckedExpr_TypeMapEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): CheckedExpr_TypeMapEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckedExpr_TypeMapEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr_TypeMapEntry();
@@ -488,22 +465,13 @@ export const Type = {
       writer.uint32(40).int32(message.typeKind.wellKnown);
     }
     if (message.typeKind?.$case === "listType") {
-      Type_ListType.encode(
-        message.typeKind.listType,
-        writer.uint32(50).fork()
-      ).ldelim();
+      Type_ListType.encode(message.typeKind.listType, writer.uint32(50).fork()).ldelim();
     }
     if (message.typeKind?.$case === "mapType") {
-      Type_MapType.encode(
-        message.typeKind.mapType,
-        writer.uint32(58).fork()
-      ).ldelim();
+      Type_MapType.encode(message.typeKind.mapType, writer.uint32(58).fork()).ldelim();
     }
     if (message.typeKind?.$case === "function") {
-      Type_FunctionType.encode(
-        message.typeKind.function,
-        writer.uint32(66).fork()
-      ).ldelim();
+      Type_FunctionType.encode(message.typeKind.function, writer.uint32(66).fork()).ldelim();
     }
     if (message.typeKind?.$case === "messageType") {
       writer.uint32(74).string(message.typeKind.messageType);
@@ -518,10 +486,7 @@ export const Type = {
       Empty.encode(message.typeKind.error, writer.uint32(98).fork()).ldelim();
     }
     if (message.typeKind?.$case === "abstractType") {
-      Type_AbstractType.encode(
-        message.typeKind.abstractType,
-        writer.uint32(114).fork()
-      ).ldelim();
+      Type_AbstractType.encode(message.typeKind.abstractType, writer.uint32(114).fork()).ldelim();
     }
     return writer;
   },
@@ -534,76 +499,43 @@ export const Type = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.typeKind = {
-            $case: "dyn",
-            dyn: Empty.decode(reader, reader.uint32()),
-          };
+          message.typeKind = { $case: "dyn", dyn: Empty.decode(reader, reader.uint32()) };
           break;
         case 2:
           message.typeKind = { $case: "null", null: reader.int32() as any };
           break;
         case 3:
-          message.typeKind = {
-            $case: "primitive",
-            primitive: reader.int32() as any,
-          };
+          message.typeKind = { $case: "primitive", primitive: reader.int32() as any };
           break;
         case 4:
-          message.typeKind = {
-            $case: "wrapper",
-            wrapper: reader.int32() as any,
-          };
+          message.typeKind = { $case: "wrapper", wrapper: reader.int32() as any };
           break;
         case 5:
-          message.typeKind = {
-            $case: "wellKnown",
-            wellKnown: reader.int32() as any,
-          };
+          message.typeKind = { $case: "wellKnown", wellKnown: reader.int32() as any };
           break;
         case 6:
-          message.typeKind = {
-            $case: "listType",
-            listType: Type_ListType.decode(reader, reader.uint32()),
-          };
+          message.typeKind = { $case: "listType", listType: Type_ListType.decode(reader, reader.uint32()) };
           break;
         case 7:
-          message.typeKind = {
-            $case: "mapType",
-            mapType: Type_MapType.decode(reader, reader.uint32()),
-          };
+          message.typeKind = { $case: "mapType", mapType: Type_MapType.decode(reader, reader.uint32()) };
           break;
         case 8:
-          message.typeKind = {
-            $case: "function",
-            function: Type_FunctionType.decode(reader, reader.uint32()),
-          };
+          message.typeKind = { $case: "function", function: Type_FunctionType.decode(reader, reader.uint32()) };
           break;
         case 9:
-          message.typeKind = {
-            $case: "messageType",
-            messageType: reader.string(),
-          };
+          message.typeKind = { $case: "messageType", messageType: reader.string() };
           break;
         case 10:
           message.typeKind = { $case: "typeParam", typeParam: reader.string() };
           break;
         case 11:
-          message.typeKind = {
-            $case: "type",
-            type: Type.decode(reader, reader.uint32()),
-          };
+          message.typeKind = { $case: "type", type: Type.decode(reader, reader.uint32()) };
           break;
         case 12:
-          message.typeKind = {
-            $case: "error",
-            error: Empty.decode(reader, reader.uint32()),
-          };
+          message.typeKind = { $case: "error", error: Empty.decode(reader, reader.uint32()) };
           break;
         case 14:
-          message.typeKind = {
-            $case: "abstractType",
-            abstractType: Type_AbstractType.decode(reader, reader.uint32()),
-          };
+          message.typeKind = { $case: "abstractType", abstractType: Type_AbstractType.decode(reader, reader.uint32()) };
           break;
         default:
           reader.skipType(tag & 7);
@@ -619,10 +551,7 @@ function createBaseType_ListType(): Type_ListType {
 }
 
 export const Type_ListType = {
-  encode(
-    message: Type_ListType,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Type_ListType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.elemType !== undefined) {
       Type.encode(message.elemType, writer.uint32(10).fork()).ldelim();
     }
@@ -653,10 +582,7 @@ function createBaseType_MapType(): Type_MapType {
 }
 
 export const Type_MapType = {
-  encode(
-    message: Type_MapType,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Type_MapType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.keyType !== undefined) {
       Type.encode(message.keyType, writer.uint32(10).fork()).ldelim();
     }
@@ -693,10 +619,7 @@ function createBaseType_FunctionType(): Type_FunctionType {
 }
 
 export const Type_FunctionType = {
-  encode(
-    message: Type_FunctionType,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Type_FunctionType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resultType !== undefined) {
       Type.encode(message.resultType, writer.uint32(10).fork()).ldelim();
     }
@@ -733,10 +656,7 @@ function createBaseType_AbstractType(): Type_AbstractType {
 }
 
 export const Type_AbstractType = {
-  encode(
-    message: Type_AbstractType,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Type_AbstractType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -778,16 +698,10 @@ export const Decl = {
       writer.uint32(10).string(message.name);
     }
     if (message.declKind?.$case === "ident") {
-      Decl_IdentDecl.encode(
-        message.declKind.ident,
-        writer.uint32(18).fork()
-      ).ldelim();
+      Decl_IdentDecl.encode(message.declKind.ident, writer.uint32(18).fork()).ldelim();
     }
     if (message.declKind?.$case === "function") {
-      Decl_FunctionDecl.encode(
-        message.declKind.function,
-        writer.uint32(26).fork()
-      ).ldelim();
+      Decl_FunctionDecl.encode(message.declKind.function, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -803,16 +717,10 @@ export const Decl = {
           message.name = reader.string();
           break;
         case 2:
-          message.declKind = {
-            $case: "ident",
-            ident: Decl_IdentDecl.decode(reader, reader.uint32()),
-          };
+          message.declKind = { $case: "ident", ident: Decl_IdentDecl.decode(reader, reader.uint32()) };
           break;
         case 3:
-          message.declKind = {
-            $case: "function",
-            function: Decl_FunctionDecl.decode(reader, reader.uint32()),
-          };
+          message.declKind = { $case: "function", function: Decl_FunctionDecl.decode(reader, reader.uint32()) };
           break;
         default:
           reader.skipType(tag & 7);
@@ -828,10 +736,7 @@ function createBaseDecl_IdentDecl(): Decl_IdentDecl {
 }
 
 export const Decl_IdentDecl = {
-  encode(
-    message: Decl_IdentDecl,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Decl_IdentDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== undefined) {
       Type.encode(message.type, writer.uint32(10).fork()).ldelim();
     }
@@ -874,10 +779,7 @@ function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
 }
 
 export const Decl_FunctionDecl = {
-  encode(
-    message: Decl_FunctionDecl,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Decl_FunctionDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overloads) {
       Decl_FunctionDecl_Overload.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -892,9 +794,7 @@ export const Decl_FunctionDecl = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.overloads.push(
-            Decl_FunctionDecl_Overload.decode(reader, reader.uint32())
-          );
+          message.overloads.push(Decl_FunctionDecl_Overload.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -906,21 +806,11 @@ export const Decl_FunctionDecl = {
 };
 
 function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
-  return {
-    overloadId: "",
-    params: [],
-    typeParams: [],
-    resultType: undefined,
-    isInstanceFunction: false,
-    doc: "",
-  };
+  return { overloadId: "", params: [], typeParams: [], resultType: undefined, isInstanceFunction: false, doc: "" };
 }
 
 export const Decl_FunctionDecl_Overload = {
-  encode(
-    message: Decl_FunctionDecl_Overload,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Decl_FunctionDecl_Overload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.overloadId !== "") {
       writer.uint32(10).string(message.overloadId);
     }
@@ -942,10 +832,7 @@ export const Decl_FunctionDecl_Overload = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Decl_FunctionDecl_Overload {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Decl_FunctionDecl_Overload {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_FunctionDecl_Overload();
@@ -984,10 +871,7 @@ function createBaseReference(): Reference {
 }
 
 export const Reference = {
-  encode(
-    message: Reference,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Reference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }

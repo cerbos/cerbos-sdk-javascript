@@ -58,6 +58,18 @@ export enum Status {
  * @public
  */
 export class NotOK extends Error {
+  /**
+   * Parse a JSON-serialized unsuccessful response.
+   */
+  public static fromJSON(text: string): NotOK {
+    try {
+      const error: unknown = JSON.parse(text);
+      return new NotOK(code(error), details(error));
+    } catch (_) {
+      return new NotOK(Status.UNKNOWN, text);
+    }
+  }
+
   public constructor(
     /**
      * The status code returned by the Cerbos policy decision point server.
@@ -74,6 +86,32 @@ export class NotOK extends Error {
     Error.captureStackTrace(this, this.constructor);
   }
 }
+
+const code = (error: unknown): Status => {
+  if (
+    has(error, "code") &&
+    typeof error.code === "number" &&
+    error.code in Status
+  ) {
+    return error.code || Status.UNKNOWN;
+  }
+
+  throw new Error("Error does not include expected code");
+};
+
+const details = (error: unknown): string => {
+  if (has(error, "message") && typeof error.message === "string") {
+    return error.message;
+  }
+
+  throw new Error("Error does not include expected details");
+};
+
+const has = <K extends string>(
+  object: unknown,
+  property: K
+): object is Record<K, unknown> =>
+  !!object && Object.prototype.hasOwnProperty.call(object, property);
 
 /**
  * Error thrown when input fails schema validation, if the {@link @cerbos/core#Client} is configured with {@link @cerbos/core#Options.onValidationError | onValidationError} set to `"throw"`.

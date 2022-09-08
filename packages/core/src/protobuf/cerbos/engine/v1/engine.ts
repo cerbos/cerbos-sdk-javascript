@@ -1,7 +1,7 @@
 /* eslint-disable */
+import type { CheckedExpr } from "../../../google/api/expr/v1alpha1/checked";
 import type { Effect } from "../../effect/v1/effect";
 import type { ValidationError } from "../../schema/v1/schema";
-import type { CheckedExpr } from "../../../google/api/expr/v1alpha1/checked";
 
 export const protobufPackage = "cerbos.engine.v1";
 
@@ -31,12 +31,10 @@ export interface PlanResourcesAst {
 }
 
 export interface PlanResourcesAst_Node {
-  node?:
-    | {
-        $case: "logicalOperation";
-        logicalOperation: PlanResourcesAst_LogicalOperation;
-      }
-    | { $case: "expression"; expression: CheckedExpr };
+  node?: { $case: "logicalOperation"; logicalOperation: PlanResourcesAst_LogicalOperation } | {
+    $case: "expression";
+    expression: CheckedExpr;
+  };
 }
 
 export interface PlanResourcesAst_LogicalOperation {
@@ -69,10 +67,10 @@ export interface PlanResourcesFilter_Expression {
 }
 
 export interface PlanResourcesFilter_Expression_Operand {
-  node?:
-    | { $case: "value"; value: any | undefined }
-    | { $case: "expression"; expression: PlanResourcesFilter_Expression }
-    | { $case: "variable"; variable: string };
+  node?: { $case: "value"; value: any | undefined } | {
+    $case: "expression";
+    expression: PlanResourcesFilter_Expression;
+  } | { $case: "variable"; variable: string };
 }
 
 export interface PlanResourcesOutput {

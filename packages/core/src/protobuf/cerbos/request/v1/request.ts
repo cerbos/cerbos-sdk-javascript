@@ -1,12 +1,8 @@
 /* eslint-disable */
-import type {
-  Principal,
-  PlanResourcesInput_Resource,
-  Resource,
-} from "../../engine/v1/engine";
+import type { Duration } from "../../../google/protobuf/duration";
+import type { PlanResourcesInput_Resource, Principal, Resource } from "../../engine/v1/engine";
 import type { Policy } from "../../policy/v1/policy";
 import type { Schema } from "../../schema/v1/schema";
-import type { Duration } from "../../../google/protobuf/duration";
 
 export const protobufPackage = "cerbos.request.v1";
 
@@ -115,10 +111,7 @@ export interface PlaygroundProxyRequest {
   files: File[];
   proxyRequest?:
     | { $case: "checkResourceSet"; checkResourceSet: CheckResourceSetRequest }
-    | {
-        $case: "checkResourceBatch";
-        checkResourceBatch: CheckResourceBatchRequest;
-      }
+    | { $case: "checkResourceBatch"; checkResourceBatch: CheckResourceBatchRequest }
     | { $case: "planResources"; planResources: PlanResourcesRequest }
     | { $case: "checkResources"; checkResources: CheckResourcesRequest };
 }
@@ -129,11 +122,10 @@ export interface AddOrUpdatePolicyRequest {
 
 export interface ListAuditLogEntriesRequest {
   kind: ListAuditLogEntriesRequest_Kind;
-  filter?:
-    | { $case: "tail"; tail: number }
-    | { $case: "between"; between: ListAuditLogEntriesRequest_TimeRange }
-    | { $case: "since"; since: Duration }
-    | { $case: "lookup"; lookup: string };
+  filter?: { $case: "tail"; tail: number } | { $case: "between"; between: ListAuditLogEntriesRequest_TimeRange } | {
+    $case: "since";
+    since: Duration;
+  } | { $case: "lookup"; lookup: string };
 }
 
 export enum ListAuditLogEntriesRequest_Kind {
@@ -147,9 +139,11 @@ export interface ListAuditLogEntriesRequest_TimeRange {
   end: Date | undefined;
 }
 
-export interface ServerInfoRequest {}
+export interface ServerInfoRequest {
+}
 
-export interface ListPoliciesRequest {}
+export interface ListPoliciesRequest {
+}
 
 export interface GetPolicyRequest {
   id: string[];
@@ -159,7 +153,8 @@ export interface AddOrUpdateSchemaRequest {
   schemas: Schema[];
 }
 
-export interface ListSchemasRequest {}
+export interface ListSchemasRequest {
+}
 
 export interface GetSchemaRequest {
   id: string[];

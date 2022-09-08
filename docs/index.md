@@ -11,4 +11,5 @@
 |  [@cerbos/core](./core.md) | Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client libraries. |
 |  [@cerbos/grpc](./grpc.md) | Client library for interacting with the Cerbos policy decision point over gRPC from server-side Node.js applications. |
 |  [@cerbos/http](./http.md) | Client library for interacting with the Cerbos policy decision point over HTTP from browser-based applications. |
+|  [@cerbos/lite](./lite.md) | Client library for interacting with WebAssembly Cerbos policy bundles from server-side Node.js and browser-based applications. |
 

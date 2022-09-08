@@ -47,10 +47,10 @@ export interface ServerLaunch_Features_AdminApi {
 
 export interface ServerLaunch_Features_Storage {
   driver: string;
-  store?:
-    | { $case: "disk"; disk: ServerLaunch_Features_Storage_Disk }
-    | { $case: "git"; git: ServerLaunch_Features_Storage_Git }
-    | { $case: "blob"; blob: ServerLaunch_Features_Storage_Blob };
+  store?: { $case: "disk"; disk: ServerLaunch_Features_Storage_Disk } | {
+    $case: "git";
+    git: ServerLaunch_Features_Storage_Git;
+  } | { $case: "blob"; blob: ServerLaunch_Features_Storage_Blob };
 }
 
 export interface ServerLaunch_Features_Storage_Disk {
@@ -121,27 +121,16 @@ export interface Event_ApiActivity {
 }
 
 function createBaseServerLaunch(): ServerLaunch {
-  return {
-    version: "",
-    source: undefined,
-    features: undefined,
-    stats: undefined,
-  };
+  return { version: "", source: undefined, features: undefined, stats: undefined };
 }
 
 export const ServerLaunch = {
   fromJSON(object: any): ServerLaunch {
     return {
       version: isSet(object.version) ? String(object.version) : "",
-      source: isSet(object.source)
-        ? ServerLaunch_Source.fromJSON(object.source)
-        : undefined,
-      features: isSet(object.features)
-        ? ServerLaunch_Features.fromJSON(object.features)
-        : undefined,
-      stats: isSet(object.stats)
-        ? ServerLaunch_Stats.fromJSON(object.stats)
-        : undefined,
+      source: isSet(object.source) ? ServerLaunch_Source.fromJSON(object.source) : undefined,
+      features: isSet(object.features) ? ServerLaunch_Features.fromJSON(object.features) : undefined,
+      stats: isSet(object.stats) ? ServerLaunch_Stats.fromJSON(object.stats) : undefined,
     };
   },
 
@@ -149,29 +138,16 @@ export const ServerLaunch = {
     const obj: any = {};
     message.version !== undefined && (obj.version = message.version);
     message.source !== undefined &&
-      (obj.source = message.source
-        ? ServerLaunch_Source.toJSON(message.source)
-        : undefined);
+      (obj.source = message.source ? ServerLaunch_Source.toJSON(message.source) : undefined);
     message.features !== undefined &&
-      (obj.features = message.features
-        ? ServerLaunch_Features.toJSON(message.features)
-        : undefined);
-    message.stats !== undefined &&
-      (obj.stats = message.stats
-        ? ServerLaunch_Stats.toJSON(message.stats)
-        : undefined);
+      (obj.features = message.features ? ServerLaunch_Features.toJSON(message.features) : undefined);
+    message.stats !== undefined && (obj.stats = message.stats ? ServerLaunch_Stats.toJSON(message.stats) : undefined);
     return obj;
   },
 };
 
 function createBaseServerLaunch_Cerbos(): ServerLaunch_Cerbos {
-  return {
-    version: "",
-    commit: "",
-    buildDate: "",
-    moduleVersion: "",
-    moduleChecksum: "",
-  };
+  return { version: "", commit: "", buildDate: "", moduleVersion: "", moduleChecksum: "" };
 }
 
 export const ServerLaunch_Cerbos = {
@@ -180,12 +156,8 @@ export const ServerLaunch_Cerbos = {
       version: isSet(object.version) ? String(object.version) : "",
       commit: isSet(object.commit) ? String(object.commit) : "",
       buildDate: isSet(object.buildDate) ? String(object.buildDate) : "",
-      moduleVersion: isSet(object.moduleVersion)
-        ? String(object.moduleVersion)
-        : "",
-      moduleChecksum: isSet(object.moduleChecksum)
-        ? String(object.moduleChecksum)
-        : "",
+      moduleVersion: isSet(object.moduleVersion) ? String(object.moduleVersion) : "",
+      moduleChecksum: isSet(object.moduleChecksum) ? String(object.moduleChecksum) : "",
     };
   },
 
@@ -194,10 +166,8 @@ export const ServerLaunch_Cerbos = {
     message.version !== undefined && (obj.version = message.version);
     message.commit !== undefined && (obj.commit = message.commit);
     message.buildDate !== undefined && (obj.buildDate = message.buildDate);
-    message.moduleVersion !== undefined &&
-      (obj.moduleVersion = message.moduleVersion);
-    message.moduleChecksum !== undefined &&
-      (obj.moduleChecksum = message.moduleChecksum);
+    message.moduleVersion !== undefined && (obj.moduleVersion = message.moduleVersion);
+    message.moduleChecksum !== undefined && (obj.moduleChecksum = message.moduleChecksum);
     return obj;
   },
 };
@@ -209,9 +179,7 @@ function createBaseServerLaunch_Source(): ServerLaunch_Source {
 export const ServerLaunch_Source = {
   fromJSON(object: any): ServerLaunch_Source {
     return {
-      cerbos: isSet(object.cerbos)
-        ? ServerLaunch_Cerbos.fromJSON(object.cerbos)
-        : undefined,
+      cerbos: isSet(object.cerbos) ? ServerLaunch_Cerbos.fromJSON(object.cerbos) : undefined,
       os: isSet(object.os) ? String(object.os) : "",
       arch: isSet(object.arch) ? String(object.arch) : "",
       numCpus: isSet(object.numCpus) ? Number(object.numCpus) : 0,
@@ -221,62 +189,38 @@ export const ServerLaunch_Source = {
   toJSON(message: ServerLaunch_Source): unknown {
     const obj: any = {};
     message.cerbos !== undefined &&
-      (obj.cerbos = message.cerbos
-        ? ServerLaunch_Cerbos.toJSON(message.cerbos)
-        : undefined);
+      (obj.cerbos = message.cerbos ? ServerLaunch_Cerbos.toJSON(message.cerbos) : undefined);
     message.os !== undefined && (obj.os = message.os);
     message.arch !== undefined && (obj.arch = message.arch);
-    message.numCpus !== undefined &&
-      (obj.numCpus = Math.round(message.numCpus));
+    message.numCpus !== undefined && (obj.numCpus = Math.round(message.numCpus));
     return obj;
   },
 };
 
 function createBaseServerLaunch_Features(): ServerLaunch_Features {
-  return {
-    audit: undefined,
-    schema: undefined,
-    adminApi: undefined,
-    storage: undefined,
-  };
+  return { audit: undefined, schema: undefined, adminApi: undefined, storage: undefined };
 }
 
 export const ServerLaunch_Features = {
   fromJSON(object: any): ServerLaunch_Features {
     return {
-      audit: isSet(object.audit)
-        ? ServerLaunch_Features_Audit.fromJSON(object.audit)
-        : undefined,
-      schema: isSet(object.schema)
-        ? ServerLaunch_Features_Schema.fromJSON(object.schema)
-        : undefined,
-      adminApi: isSet(object.adminApi)
-        ? ServerLaunch_Features_AdminApi.fromJSON(object.adminApi)
-        : undefined,
-      storage: isSet(object.storage)
-        ? ServerLaunch_Features_Storage.fromJSON(object.storage)
-        : undefined,
+      audit: isSet(object.audit) ? ServerLaunch_Features_Audit.fromJSON(object.audit) : undefined,
+      schema: isSet(object.schema) ? ServerLaunch_Features_Schema.fromJSON(object.schema) : undefined,
+      adminApi: isSet(object.adminApi) ? ServerLaunch_Features_AdminApi.fromJSON(object.adminApi) : undefined,
+      storage: isSet(object.storage) ? ServerLaunch_Features_Storage.fromJSON(object.storage) : undefined,
     };
   },
 
   toJSON(message: ServerLaunch_Features): unknown {
     const obj: any = {};
     message.audit !== undefined &&
-      (obj.audit = message.audit
-        ? ServerLaunch_Features_Audit.toJSON(message.audit)
-        : undefined);
+      (obj.audit = message.audit ? ServerLaunch_Features_Audit.toJSON(message.audit) : undefined);
     message.schema !== undefined &&
-      (obj.schema = message.schema
-        ? ServerLaunch_Features_Schema.toJSON(message.schema)
-        : undefined);
+      (obj.schema = message.schema ? ServerLaunch_Features_Schema.toJSON(message.schema) : undefined);
     message.adminApi !== undefined &&
-      (obj.adminApi = message.adminApi
-        ? ServerLaunch_Features_AdminApi.toJSON(message.adminApi)
-        : undefined);
+      (obj.adminApi = message.adminApi ? ServerLaunch_Features_AdminApi.toJSON(message.adminApi) : undefined);
     message.storage !== undefined &&
-      (obj.storage = message.storage
-        ? ServerLaunch_Features_Storage.toJSON(message.storage)
-        : undefined);
+      (obj.storage = message.storage ? ServerLaunch_Features_Storage.toJSON(message.storage) : undefined);
     return obj;
   },
 };
@@ -307,15 +251,12 @@ function createBaseServerLaunch_Features_Schema(): ServerLaunch_Features_Schema 
 
 export const ServerLaunch_Features_Schema = {
   fromJSON(object: any): ServerLaunch_Features_Schema {
-    return {
-      enforcement: isSet(object.enforcement) ? String(object.enforcement) : "",
-    };
+    return { enforcement: isSet(object.enforcement) ? String(object.enforcement) : "" };
   },
 
   toJSON(message: ServerLaunch_Features_Schema): unknown {
     const obj: any = {};
-    message.enforcement !== undefined &&
-      (obj.enforcement = message.enforcement);
+    message.enforcement !== undefined && (obj.enforcement = message.enforcement);
     return obj;
   },
 };
@@ -326,9 +267,7 @@ function createBaseServerLaunch_Features_AdminApi(): ServerLaunch_Features_Admin
 
 export const ServerLaunch_Features_AdminApi = {
   fromJSON(object: any): ServerLaunch_Features_AdminApi {
-    return {
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-    };
+    return { enabled: isSet(object.enabled) ? Boolean(object.enabled) : false };
   },
 
   toJSON(message: ServerLaunch_Features_AdminApi): unknown {
@@ -347,20 +286,11 @@ export const ServerLaunch_Features_Storage = {
     return {
       driver: isSet(object.driver) ? String(object.driver) : "",
       store: isSet(object.disk)
-        ? {
-            $case: "disk",
-            disk: ServerLaunch_Features_Storage_Disk.fromJSON(object.disk),
-          }
+        ? { $case: "disk", disk: ServerLaunch_Features_Storage_Disk.fromJSON(object.disk) }
         : isSet(object.git)
-        ? {
-            $case: "git",
-            git: ServerLaunch_Features_Storage_Git.fromJSON(object.git),
-          }
+        ? { $case: "git", git: ServerLaunch_Features_Storage_Git.fromJSON(object.git) }
         : isSet(object.blob)
-        ? {
-            $case: "blob",
-            blob: ServerLaunch_Features_Storage_Blob.fromJSON(object.blob),
-          }
+        ? { $case: "blob", blob: ServerLaunch_Features_Storage_Blob.fromJSON(object.blob) }
         : undefined,
     };
   },
@@ -369,17 +299,11 @@ export const ServerLaunch_Features_Storage = {
     const obj: any = {};
     message.driver !== undefined && (obj.driver = message.driver);
     message.store?.$case === "disk" &&
-      (obj.disk = message.store?.disk
-        ? ServerLaunch_Features_Storage_Disk.toJSON(message.store?.disk)
-        : undefined);
+      (obj.disk = message.store?.disk ? ServerLaunch_Features_Storage_Disk.toJSON(message.store?.disk) : undefined);
     message.store?.$case === "git" &&
-      (obj.git = message.store?.git
-        ? ServerLaunch_Features_Storage_Git.toJSON(message.store?.git)
-        : undefined);
+      (obj.git = message.store?.git ? ServerLaunch_Features_Storage_Git.toJSON(message.store?.git) : undefined);
     message.store?.$case === "blob" &&
-      (obj.blob = message.store?.blob
-        ? ServerLaunch_Features_Storage_Blob.toJSON(message.store?.blob)
-        : undefined);
+      (obj.blob = message.store?.blob ? ServerLaunch_Features_Storage_Blob.toJSON(message.store?.blob) : undefined);
     return obj;
   },
 };
@@ -390,9 +314,7 @@ function createBaseServerLaunch_Features_Storage_Disk(): ServerLaunch_Features_S
 
 export const ServerLaunch_Features_Storage_Disk = {
   fromJSON(object: any): ServerLaunch_Features_Storage_Disk {
-    return {
-      watch: isSet(object.watch) ? Boolean(object.watch) : false,
-    };
+    return { watch: isSet(object.watch) ? Boolean(object.watch) : false };
   },
 
   toJSON(message: ServerLaunch_Features_Storage_Disk): unknown {
@@ -411,9 +333,7 @@ export const ServerLaunch_Features_Storage_Git = {
     return {
       protocol: isSet(object.protocol) ? String(object.protocol) : "",
       auth: isSet(object.auth) ? Boolean(object.auth) : false,
-      pollInterval: isSet(object.pollInterval)
-        ? Duration.fromJSON(object.pollInterval)
-        : undefined,
+      pollInterval: isSet(object.pollInterval) ? Duration.fromJSON(object.pollInterval) : undefined,
     };
   },
 
@@ -422,9 +342,7 @@ export const ServerLaunch_Features_Storage_Git = {
     message.protocol !== undefined && (obj.protocol = message.protocol);
     message.auth !== undefined && (obj.auth = message.auth);
     message.pollInterval !== undefined &&
-      (obj.pollInterval = message.pollInterval
-        ? Duration.toJSON(message.pollInterval)
-        : undefined);
+      (obj.pollInterval = message.pollInterval ? Duration.toJSON(message.pollInterval) : undefined);
     return obj;
   },
 };
@@ -437,9 +355,7 @@ export const ServerLaunch_Features_Storage_Blob = {
   fromJSON(object: any): ServerLaunch_Features_Storage_Blob {
     return {
       provider: isSet(object.provider) ? String(object.provider) : "",
-      pollInterval: isSet(object.pollInterval)
-        ? Duration.fromJSON(object.pollInterval)
-        : undefined,
+      pollInterval: isSet(object.pollInterval) ? Duration.fromJSON(object.pollInterval) : undefined,
     };
   },
 
@@ -447,9 +363,7 @@ export const ServerLaunch_Features_Storage_Blob = {
     const obj: any = {};
     message.provider !== undefined && (obj.provider = message.provider);
     message.pollInterval !== undefined &&
-      (obj.pollInterval = message.pollInterval
-        ? Duration.toJSON(message.pollInterval)
-        : undefined);
+      (obj.pollInterval = message.pollInterval ? Duration.toJSON(message.pollInterval) : undefined);
     return obj;
   },
 };
@@ -461,25 +375,17 @@ function createBaseServerLaunch_Stats(): ServerLaunch_Stats {
 export const ServerLaunch_Stats = {
   fromJSON(object: any): ServerLaunch_Stats {
     return {
-      policy: isSet(object.policy)
-        ? ServerLaunch_Stats_Policy.fromJSON(object.policy)
-        : undefined,
-      schema: isSet(object.schema)
-        ? ServerLaunch_Stats_Schema.fromJSON(object.schema)
-        : undefined,
+      policy: isSet(object.policy) ? ServerLaunch_Stats_Policy.fromJSON(object.policy) : undefined,
+      schema: isSet(object.schema) ? ServerLaunch_Stats_Schema.fromJSON(object.schema) : undefined,
     };
   },
 
   toJSON(message: ServerLaunch_Stats): unknown {
     const obj: any = {};
     message.policy !== undefined &&
-      (obj.policy = message.policy
-        ? ServerLaunch_Stats_Policy.toJSON(message.policy)
-        : undefined);
+      (obj.policy = message.policy ? ServerLaunch_Stats_Policy.toJSON(message.policy) : undefined);
     message.schema !== undefined &&
-      (obj.schema = message.schema
-        ? ServerLaunch_Stats_Schema.toJSON(message.schema)
-        : undefined);
+      (obj.schema = message.schema ? ServerLaunch_Stats_Schema.toJSON(message.schema) : undefined);
     return obj;
   },
 };
@@ -492,30 +398,22 @@ export const ServerLaunch_Stats_Policy = {
   fromJSON(object: any): ServerLaunch_Stats_Policy {
     return {
       count: isObject(object.count)
-        ? Object.entries(object.count).reduce<{ [key: string]: number }>(
-            (acc, [key, value]) => {
-              acc[key] = Number(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.count).reduce<{ [key: string]: number }>((acc, [key, value]) => {
+          acc[key] = Number(value);
+          return acc;
+        }, {})
         : {},
       avgRuleCount: isObject(object.avgRuleCount)
-        ? Object.entries(object.avgRuleCount).reduce<{ [key: string]: number }>(
-            (acc, [key, value]) => {
-              acc[key] = Number(value);
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.avgRuleCount).reduce<{ [key: string]: number }>((acc, [key, value]) => {
+          acc[key] = Number(value);
+          return acc;
+        }, {})
         : {},
       avgConditionCount: isObject(object.avgConditionCount)
-        ? Object.entries(object.avgConditionCount).reduce<{
-            [key: string]: number;
-          }>((acc, [key, value]) => {
-            acc[key] = Number(value);
-            return acc;
-          }, {})
+        ? Object.entries(object.avgConditionCount).reduce<{ [key: string]: number }>((acc, [key, value]) => {
+          acc[key] = Number(value);
+          return acc;
+        }, {})
         : {},
     };
   },
@@ -550,10 +448,7 @@ function createBaseServerLaunch_Stats_Policy_CountEntry(): ServerLaunch_Stats_Po
 
 export const ServerLaunch_Stats_Policy_CountEntry = {
   fromJSON(object: any): ServerLaunch_Stats_Policy_CountEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? Number(object.value) : 0,
-    };
+    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? Number(object.value) : 0 };
   },
 
   toJSON(message: ServerLaunch_Stats_Policy_CountEntry): unknown {
@@ -570,10 +465,7 @@ function createBaseServerLaunch_Stats_Policy_AvgRuleCountEntry(): ServerLaunch_S
 
 export const ServerLaunch_Stats_Policy_AvgRuleCountEntry = {
   fromJSON(object: any): ServerLaunch_Stats_Policy_AvgRuleCountEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? Number(object.value) : 0,
-    };
+    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? Number(object.value) : 0 };
   },
 
   toJSON(message: ServerLaunch_Stats_Policy_AvgRuleCountEntry): unknown {
@@ -590,10 +482,7 @@ function createBaseServerLaunch_Stats_Policy_AvgConditionCountEntry(): ServerLau
 
 export const ServerLaunch_Stats_Policy_AvgConditionCountEntry = {
   fromJSON(object: any): ServerLaunch_Stats_Policy_AvgConditionCountEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? Number(object.value) : 0,
-    };
+    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? Number(object.value) : 0 };
   },
 
   toJSON(message: ServerLaunch_Stats_Policy_AvgConditionCountEntry): unknown {
@@ -610,9 +499,7 @@ function createBaseServerLaunch_Stats_Schema(): ServerLaunch_Stats_Schema {
 
 export const ServerLaunch_Stats_Schema = {
   fromJSON(object: any): ServerLaunch_Stats_Schema {
-    return {
-      count: isSet(object.count) ? Number(object.count) : 0,
-    };
+    return { count: isSet(object.count) ? Number(object.count) : 0 };
   },
 
   toJSON(message: ServerLaunch_Stats_Schema): unknown {
@@ -630,24 +517,16 @@ export const ServerStop = {
   fromJSON(object: any): ServerStop {
     return {
       version: isSet(object.version) ? String(object.version) : "",
-      uptime: isSet(object.uptime)
-        ? Duration.fromJSON(object.uptime)
-        : undefined,
-      requestsTotal: isSet(object.requestsTotal)
-        ? String(object.requestsTotal)
-        : "0",
+      uptime: isSet(object.uptime) ? Duration.fromJSON(object.uptime) : undefined,
+      requestsTotal: isSet(object.requestsTotal) ? String(object.requestsTotal) : "0",
     };
   },
 
   toJSON(message: ServerStop): unknown {
     const obj: any = {};
     message.version !== undefined && (obj.version = message.version);
-    message.uptime !== undefined &&
-      (obj.uptime = message.uptime
-        ? Duration.toJSON(message.uptime)
-        : undefined);
-    message.requestsTotal !== undefined &&
-      (obj.requestsTotal = message.requestsTotal);
+    message.uptime !== undefined && (obj.uptime = message.uptime ? Duration.toJSON(message.uptime) : undefined);
+    message.requestsTotal !== undefined && (obj.requestsTotal = message.requestsTotal);
     return obj;
   },
 };
@@ -660,10 +539,7 @@ export const Event = {
   fromJSON(object: any): Event {
     return {
       data: isSet(object.apiActivity)
-        ? {
-            $case: "apiActivity",
-            apiActivity: Event_ApiActivity.fromJSON(object.apiActivity),
-          }
+        ? { $case: "apiActivity", apiActivity: Event_ApiActivity.fromJSON(object.apiActivity) }
         : undefined,
     };
   },
@@ -671,9 +547,7 @@ export const Event = {
   toJSON(message: Event): unknown {
     const obj: any = {};
     message.data?.$case === "apiActivity" &&
-      (obj.apiActivity = message.data?.apiActivity
-        ? Event_ApiActivity.toJSON(message.data?.apiActivity)
-        : undefined);
+      (obj.apiActivity = message.data?.apiActivity ? Event_ApiActivity.toJSON(message.data?.apiActivity) : undefined);
     return obj;
   },
 };
@@ -706,9 +580,7 @@ export const Event_ApiActivity = {
   fromJSON(object: any): Event_ApiActivity {
     return {
       version: isSet(object.version) ? String(object.version) : "",
-      uptime: isSet(object.uptime)
-        ? Duration.fromJSON(object.uptime)
-        : undefined,
+      uptime: isSet(object.uptime) ? Duration.fromJSON(object.uptime) : undefined,
       methodCalls: Array.isArray(object?.methodCalls)
         ? object.methodCalls.map((e: any) => Event_CountStat.fromJSON(e))
         : [],
@@ -721,21 +593,14 @@ export const Event_ApiActivity = {
   toJSON(message: Event_ApiActivity): unknown {
     const obj: any = {};
     message.version !== undefined && (obj.version = message.version);
-    message.uptime !== undefined &&
-      (obj.uptime = message.uptime
-        ? Duration.toJSON(message.uptime)
-        : undefined);
+    message.uptime !== undefined && (obj.uptime = message.uptime ? Duration.toJSON(message.uptime) : undefined);
     if (message.methodCalls) {
-      obj.methodCalls = message.methodCalls.map((e) =>
-        e ? Event_CountStat.toJSON(e) : undefined
-      );
+      obj.methodCalls = message.methodCalls.map((e) => e ? Event_CountStat.toJSON(e) : undefined);
     } else {
       obj.methodCalls = [];
     }
     if (message.userAgents) {
-      obj.userAgents = message.userAgents.map((e) =>
-        e ? Event_CountStat.toJSON(e) : undefined
-      );
+      obj.userAgents = message.userAgents.map((e) => e ? Event_CountStat.toJSON(e) : undefined);
     } else {
       obj.userAgents = [];
     }

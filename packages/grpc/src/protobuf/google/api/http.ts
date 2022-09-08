@@ -151,7 +151,6 @@ export interface Http {
  *       string text = 2;
  *     }
  *
- *
  * The following HTTP JSON to RPC mapping is enabled:
  *
  * HTTP | gRPC
@@ -383,20 +382,11 @@ export const Http = {
 };
 
 function createBaseHttpRule(): HttpRule {
-  return {
-    selector: "",
-    pattern: undefined,
-    body: "",
-    responseBody: "",
-    additionalBindings: [],
-  };
+  return { selector: "", pattern: undefined, body: "", responseBody: "", additionalBindings: [] };
 }
 
 export const HttpRule = {
-  encode(
-    message: HttpRule,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: HttpRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
@@ -416,10 +406,7 @@ export const HttpRule = {
       writer.uint32(50).string(message.pattern.patch);
     }
     if (message.pattern?.$case === "custom") {
-      CustomHttpPattern.encode(
-        message.pattern.custom,
-        writer.uint32(66).fork()
-      ).ldelim();
+      CustomHttpPattern.encode(message.pattern.custom, writer.uint32(66).fork()).ldelim();
     }
     if (message.body !== "") {
       writer.uint32(58).string(message.body);
@@ -459,10 +446,7 @@ export const HttpRule = {
           message.pattern = { $case: "patch", patch: reader.string() };
           break;
         case 8:
-          message.pattern = {
-            $case: "custom",
-            custom: CustomHttpPattern.decode(reader, reader.uint32()),
-          };
+          message.pattern = { $case: "custom", custom: CustomHttpPattern.decode(reader, reader.uint32()) };
           break;
         case 7:
           message.body = reader.string();
@@ -471,9 +455,7 @@ export const HttpRule = {
           message.responseBody = reader.string();
           break;
         case 11:
-          message.additionalBindings.push(
-            HttpRule.decode(reader, reader.uint32())
-          );
+          message.additionalBindings.push(HttpRule.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -489,10 +471,7 @@ function createBaseCustomHttpPattern(): CustomHttpPattern {
 }
 
 export const CustomHttpPattern = {
-  encode(
-    message: CustomHttpPattern,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CustomHttpPattern, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== "") {
       writer.uint32(10).string(message.kind);
     }

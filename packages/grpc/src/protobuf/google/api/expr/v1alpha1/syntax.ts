@@ -1,16 +1,18 @@
 /* eslint-disable */
-import { Timestamp } from "../../../protobuf/timestamp";
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { NullValue } from "../../../protobuf/struct";
 import { Duration } from "../../../protobuf/duration";
+import { NullValue } from "../../../protobuf/struct";
+import { Timestamp } from "../../../protobuf/timestamp";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
   /** The parsed expression. */
-  expr: Expr | undefined;
+  expr:
+    | Expr
+    | undefined;
   /** The source info derived from input that generated the parsed `expr`. */
   sourceInfo: SourceInfo | undefined;
 }
@@ -68,7 +70,9 @@ export interface Expr_Select {
    * For example, in the select expression `request.auth`, the `request`
    * portion of the expression is the `operand`.
    */
-  operand: Expr | undefined;
+  operand:
+    | Expr
+    | undefined;
   /**
    * Required. The name of the field to select.
    *
@@ -94,7 +98,9 @@ export interface Expr_Call {
    * The target of an method call-style expression. For example, `x` in
    * `x.f()`.
    */
-  target: Expr | undefined;
+  target:
+    | Expr
+    | undefined;
   /** Required. The name of the function or method being called. */
   function: string;
   /** The arguments. */
@@ -176,24 +182,32 @@ export interface Expr_Comprehension {
   /** The name of the iteration variable. */
   iterVar: string;
   /** The range over which var iterates. */
-  iterRange: Expr | undefined;
+  iterRange:
+    | Expr
+    | undefined;
   /** The name of the variable used for accumulation of the result. */
   accuVar: string;
   /** The initial value of the accumulator. */
-  accuInit: Expr | undefined;
+  accuInit:
+    | Expr
+    | undefined;
   /**
    * An expression which can contain iter_var and accu_var.
    *
    * Returns false when the result has been computed and may be used as
    * a hint to short-circuit the remainder of the comprehension.
    */
-  loopCondition: Expr | undefined;
+  loopCondition:
+    | Expr
+    | undefined;
   /**
    * An expression which can contain iter_var and accu_var.
    *
    * Computes the next value of accu_var.
    */
-  loopStep: Expr | undefined;
+  loopStep:
+    | Expr
+    | undefined;
   /**
    * An expression which can contain accu_var.
    *
@@ -302,10 +316,7 @@ function createBaseParsedExpr(): ParsedExpr {
 }
 
 export const ParsedExpr = {
-  encode(
-    message: ParsedExpr,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ParsedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.expr !== undefined) {
       Expr.encode(message.expr, writer.uint32(18).fork()).ldelim();
     }
@@ -347,46 +358,25 @@ export const Expr = {
       writer.uint32(16).int64(message.id);
     }
     if (message.exprKind?.$case === "constExpr") {
-      Constant.encode(
-        message.exprKind.constExpr,
-        writer.uint32(26).fork()
-      ).ldelim();
+      Constant.encode(message.exprKind.constExpr, writer.uint32(26).fork()).ldelim();
     }
     if (message.exprKind?.$case === "identExpr") {
-      Expr_Ident.encode(
-        message.exprKind.identExpr,
-        writer.uint32(34).fork()
-      ).ldelim();
+      Expr_Ident.encode(message.exprKind.identExpr, writer.uint32(34).fork()).ldelim();
     }
     if (message.exprKind?.$case === "selectExpr") {
-      Expr_Select.encode(
-        message.exprKind.selectExpr,
-        writer.uint32(42).fork()
-      ).ldelim();
+      Expr_Select.encode(message.exprKind.selectExpr, writer.uint32(42).fork()).ldelim();
     }
     if (message.exprKind?.$case === "callExpr") {
-      Expr_Call.encode(
-        message.exprKind.callExpr,
-        writer.uint32(50).fork()
-      ).ldelim();
+      Expr_Call.encode(message.exprKind.callExpr, writer.uint32(50).fork()).ldelim();
     }
     if (message.exprKind?.$case === "listExpr") {
-      Expr_CreateList.encode(
-        message.exprKind.listExpr,
-        writer.uint32(58).fork()
-      ).ldelim();
+      Expr_CreateList.encode(message.exprKind.listExpr, writer.uint32(58).fork()).ldelim();
     }
     if (message.exprKind?.$case === "structExpr") {
-      Expr_CreateStruct.encode(
-        message.exprKind.structExpr,
-        writer.uint32(66).fork()
-      ).ldelim();
+      Expr_CreateStruct.encode(message.exprKind.structExpr, writer.uint32(66).fork()).ldelim();
     }
     if (message.exprKind?.$case === "comprehensionExpr") {
-      Expr_Comprehension.encode(
-        message.exprKind.comprehensionExpr,
-        writer.uint32(74).fork()
-      ).ldelim();
+      Expr_Comprehension.encode(message.exprKind.comprehensionExpr, writer.uint32(74).fork()).ldelim();
     }
     return writer;
   },
@@ -402,48 +392,27 @@ export const Expr = {
           message.id = longToString(reader.int64() as Long);
           break;
         case 3:
-          message.exprKind = {
-            $case: "constExpr",
-            constExpr: Constant.decode(reader, reader.uint32()),
-          };
+          message.exprKind = { $case: "constExpr", constExpr: Constant.decode(reader, reader.uint32()) };
           break;
         case 4:
-          message.exprKind = {
-            $case: "identExpr",
-            identExpr: Expr_Ident.decode(reader, reader.uint32()),
-          };
+          message.exprKind = { $case: "identExpr", identExpr: Expr_Ident.decode(reader, reader.uint32()) };
           break;
         case 5:
-          message.exprKind = {
-            $case: "selectExpr",
-            selectExpr: Expr_Select.decode(reader, reader.uint32()),
-          };
+          message.exprKind = { $case: "selectExpr", selectExpr: Expr_Select.decode(reader, reader.uint32()) };
           break;
         case 6:
-          message.exprKind = {
-            $case: "callExpr",
-            callExpr: Expr_Call.decode(reader, reader.uint32()),
-          };
+          message.exprKind = { $case: "callExpr", callExpr: Expr_Call.decode(reader, reader.uint32()) };
           break;
         case 7:
-          message.exprKind = {
-            $case: "listExpr",
-            listExpr: Expr_CreateList.decode(reader, reader.uint32()),
-          };
+          message.exprKind = { $case: "listExpr", listExpr: Expr_CreateList.decode(reader, reader.uint32()) };
           break;
         case 8:
-          message.exprKind = {
-            $case: "structExpr",
-            structExpr: Expr_CreateStruct.decode(reader, reader.uint32()),
-          };
+          message.exprKind = { $case: "structExpr", structExpr: Expr_CreateStruct.decode(reader, reader.uint32()) };
           break;
         case 9:
           message.exprKind = {
             $case: "comprehensionExpr",
-            comprehensionExpr: Expr_Comprehension.decode(
-              reader,
-              reader.uint32()
-            ),
+            comprehensionExpr: Expr_Comprehension.decode(reader, reader.uint32()),
           };
           break;
         default:
@@ -460,10 +429,7 @@ function createBaseExpr_Ident(): Expr_Ident {
 }
 
 export const Expr_Ident = {
-  encode(
-    message: Expr_Ident,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Expr_Ident, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -494,10 +460,7 @@ function createBaseExpr_Select(): Expr_Select {
 }
 
 export const Expr_Select = {
-  encode(
-    message: Expr_Select,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Expr_Select, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operand !== undefined) {
       Expr.encode(message.operand, writer.uint32(10).fork()).ldelim();
     }
@@ -540,10 +503,7 @@ function createBaseExpr_Call(): Expr_Call {
 }
 
 export const Expr_Call = {
-  encode(
-    message: Expr_Call,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Expr_Call, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.target !== undefined) {
       Expr.encode(message.target, writer.uint32(10).fork()).ldelim();
     }
@@ -586,10 +546,7 @@ function createBaseExpr_CreateList(): Expr_CreateList {
 }
 
 export const Expr_CreateList = {
-  encode(
-    message: Expr_CreateList,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Expr_CreateList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.elements) {
       Expr.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -620,10 +577,7 @@ function createBaseExpr_CreateStruct(): Expr_CreateStruct {
 }
 
 export const Expr_CreateStruct = {
-  encode(
-    message: Expr_CreateStruct,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Expr_CreateStruct, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.messageName !== "") {
       writer.uint32(10).string(message.messageName);
     }
@@ -644,9 +598,7 @@ export const Expr_CreateStruct = {
           message.messageName = reader.string();
           break;
         case 2:
-          message.entries.push(
-            Expr_CreateStruct_Entry.decode(reader, reader.uint32())
-          );
+          message.entries.push(Expr_CreateStruct_Entry.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -662,10 +614,7 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
 }
 
 export const Expr_CreateStruct_Entry = {
-  encode(
-    message: Expr_CreateStruct_Entry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Expr_CreateStruct_Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "0") {
       writer.uint32(8).int64(message.id);
     }
@@ -681,10 +630,7 @@ export const Expr_CreateStruct_Entry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Expr_CreateStruct_Entry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Expr_CreateStruct_Entry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateStruct_Entry();
@@ -698,10 +644,7 @@ export const Expr_CreateStruct_Entry = {
           message.keyKind = { $case: "fieldKey", fieldKey: reader.string() };
           break;
         case 3:
-          message.keyKind = {
-            $case: "mapKey",
-            mapKey: Expr.decode(reader, reader.uint32()),
-          };
+          message.keyKind = { $case: "mapKey", mapKey: Expr.decode(reader, reader.uint32()) };
           break;
         case 4:
           message.value = Expr.decode(reader, reader.uint32());
@@ -728,10 +671,7 @@ function createBaseExpr_Comprehension(): Expr_Comprehension {
 }
 
 export const Expr_Comprehension = {
-  encode(
-    message: Expr_Comprehension,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Expr_Comprehension, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.iterVar !== "") {
       writer.uint32(10).string(message.iterVar);
     }
@@ -798,10 +738,7 @@ function createBaseConstant(): Constant {
 }
 
 export const Constant = {
-  encode(
-    message: Constant,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Constant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.constantKind?.$case === "nullValue") {
       writer.uint32(8).int32(message.constantKind.nullValue);
     }
@@ -824,16 +761,10 @@ export const Constant = {
       writer.uint32(58).bytes(message.constantKind.bytesValue);
     }
     if (message.constantKind?.$case === "durationValue") {
-      Duration.encode(
-        message.constantKind.durationValue,
-        writer.uint32(66).fork()
-      ).ldelim();
+      Duration.encode(message.constantKind.durationValue, writer.uint32(66).fork()).ldelim();
     }
     if (message.constantKind?.$case === "timestampValue") {
-      Timestamp.encode(
-        toTimestamp(message.constantKind.timestampValue),
-        writer.uint32(74).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.constantKind.timestampValue), writer.uint32(74).fork()).ldelim();
     }
     return writer;
   },
@@ -846,59 +777,33 @@ export const Constant = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.constantKind = {
-            $case: "nullValue",
-            nullValue: reader.int32() as any,
-          };
+          message.constantKind = { $case: "nullValue", nullValue: reader.int32() as any };
           break;
         case 2:
-          message.constantKind = {
-            $case: "boolValue",
-            boolValue: reader.bool(),
-          };
+          message.constantKind = { $case: "boolValue", boolValue: reader.bool() };
           break;
         case 3:
-          message.constantKind = {
-            $case: "int64Value",
-            int64Value: longToString(reader.int64() as Long),
-          };
+          message.constantKind = { $case: "int64Value", int64Value: longToString(reader.int64() as Long) };
           break;
         case 4:
-          message.constantKind = {
-            $case: "uint64Value",
-            uint64Value: longToString(reader.uint64() as Long),
-          };
+          message.constantKind = { $case: "uint64Value", uint64Value: longToString(reader.uint64() as Long) };
           break;
         case 5:
-          message.constantKind = {
-            $case: "doubleValue",
-            doubleValue: reader.double(),
-          };
+          message.constantKind = { $case: "doubleValue", doubleValue: reader.double() };
           break;
         case 6:
-          message.constantKind = {
-            $case: "stringValue",
-            stringValue: reader.string(),
-          };
+          message.constantKind = { $case: "stringValue", stringValue: reader.string() };
           break;
         case 7:
-          message.constantKind = {
-            $case: "bytesValue",
-            bytesValue: reader.bytes(),
-          };
+          message.constantKind = { $case: "bytesValue", bytesValue: reader.bytes() };
           break;
         case 8:
-          message.constantKind = {
-            $case: "durationValue",
-            durationValue: Duration.decode(reader, reader.uint32()),
-          };
+          message.constantKind = { $case: "durationValue", durationValue: Duration.decode(reader, reader.uint32()) };
           break;
         case 9:
           message.constantKind = {
             $case: "timestampValue",
-            timestampValue: fromTimestamp(
-              Timestamp.decode(reader, reader.uint32())
-            ),
+            timestampValue: fromTimestamp(Timestamp.decode(reader, reader.uint32())),
           };
           break;
         default:
@@ -911,20 +816,11 @@ export const Constant = {
 };
 
 function createBaseSourceInfo(): SourceInfo {
-  return {
-    syntaxVersion: "",
-    location: "",
-    lineOffsets: [],
-    positions: {},
-    macroCalls: {},
-  };
+  return { syntaxVersion: "", location: "", lineOffsets: [], positions: {}, macroCalls: {} };
 }
 
 export const SourceInfo = {
-  encode(
-    message: SourceInfo,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.syntaxVersion !== "") {
       writer.uint32(10).string(message.syntaxVersion);
     }
@@ -937,16 +833,10 @@ export const SourceInfo = {
     }
     writer.ldelim();
     Object.entries(message.positions).forEach(([key, value]) => {
-      SourceInfo_PositionsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(34).fork()
-      ).ldelim();
+      SourceInfo_PositionsEntry.encode({ key: key as any, value }, writer.uint32(34).fork()).ldelim();
     });
     Object.entries(message.macroCalls).forEach(([key, value]) => {
-      SourceInfo_MacroCallsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(42).fork()
-      ).ldelim();
+      SourceInfo_MacroCallsEntry.encode({ key: key as any, value }, writer.uint32(42).fork()).ldelim();
     });
     return writer;
   },
@@ -975,19 +865,13 @@ export const SourceInfo = {
           }
           break;
         case 4:
-          const entry4 = SourceInfo_PositionsEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry4 = SourceInfo_PositionsEntry.decode(reader, reader.uint32());
           if (entry4.value !== undefined) {
             message.positions[entry4.key] = entry4.value;
           }
           break;
         case 5:
-          const entry5 = SourceInfo_MacroCallsEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry5 = SourceInfo_MacroCallsEntry.decode(reader, reader.uint32());
           if (entry5.value !== undefined) {
             message.macroCalls[entry5.key] = entry5.value;
           }
@@ -1006,10 +890,7 @@ function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
 }
 
 export const SourceInfo_PositionsEntry = {
-  encode(
-    message: SourceInfo_PositionsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SourceInfo_PositionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "0") {
       writer.uint32(8).int64(message.key);
     }
@@ -1019,10 +900,7 @@ export const SourceInfo_PositionsEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): SourceInfo_PositionsEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_PositionsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo_PositionsEntry();
@@ -1049,10 +927,7 @@ function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
 }
 
 export const SourceInfo_MacroCallsEntry = {
-  encode(
-    message: SourceInfo_MacroCallsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SourceInfo_MacroCallsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "0") {
       writer.uint32(8).int64(message.key);
     }
@@ -1062,10 +937,7 @@ export const SourceInfo_MacroCallsEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): SourceInfo_MacroCallsEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_MacroCallsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo_MacroCallsEntry();
@@ -1092,10 +964,7 @@ function createBaseSourcePosition(): SourcePosition {
 }
 
 export const SourcePosition = {
-  encode(
-    message: SourcePosition,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SourcePosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);
     }

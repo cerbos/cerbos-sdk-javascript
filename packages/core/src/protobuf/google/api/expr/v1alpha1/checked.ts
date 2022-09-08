@@ -1,7 +1,7 @@
 /* eslint-disable */
-import type { SourceInfo, Expr, Constant } from "./syntax";
 import type { Empty } from "../../../protobuf/empty";
 import type { NullValue } from "../../../protobuf/struct";
+import type { Constant, Expr, SourceInfo } from "./syntax";
 
 export const protobufPackage = "google.api.expr.v1alpha1";
 
@@ -37,7 +37,9 @@ export interface CheckedExpr {
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
    */
-  sourceInfo: SourceInfo | undefined;
+  sourceInfo:
+    | SourceInfo
+    | undefined;
   /**
    * The expr version indicates the major / minor version number of the `expr`
    * representation.
@@ -140,7 +142,9 @@ export interface Type_ListType {
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapType {
   /** The type of the key. */
-  keyType: Type | undefined;
+  keyType:
+    | Type
+    | undefined;
   /** The type of the value. */
   valueType: Type | undefined;
 }
@@ -148,7 +152,9 @@ export interface Type_MapType {
 /** Function type with result and arg types. */
 export interface Type_FunctionType {
   /** Result type of the function. */
-  resultType: Type | undefined;
+  resultType:
+    | Type
+    | undefined;
   /** Argument types of the function. */
   argTypes: Type[];
 }
@@ -179,9 +185,7 @@ export interface Decl {
    * function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].
    */
   name: string;
-  declKind?:
-    | { $case: "ident"; ident: Decl_IdentDecl }
-    | { $case: "function"; function: Decl_FunctionDecl };
+  declKind?: { $case: "ident"; ident: Decl_IdentDecl } | { $case: "function"; function: Decl_FunctionDecl };
 }
 
 /**
@@ -194,12 +198,16 @@ export interface Decl {
  */
 export interface Decl_IdentDecl {
   /** Required. The type of the identifier. */
-  type: Type | undefined;
+  type:
+    | Type
+    | undefined;
   /**
    * The constant value of the identifier. If not specified, the identifier
    * must be supplied at evaluation time.
    */
-  value: Constant | undefined;
+  value:
+    | Constant
+    | undefined;
   /** Documentation string for the identifier. */
   doc: string;
 }
@@ -261,7 +269,9 @@ export interface Decl_FunctionDecl_Overload {
    * Required. The result type of the function. For example, the operator
    * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
    */
-  resultType: Type | undefined;
+  resultType:
+    | Type
+    | undefined;
   /**
    * Whether the function is to be used in a method call-style `x.f(...)`
    * of a function call-style `f(x, ...)`.

@@ -1,15 +1,11 @@
 /* eslint-disable */
+import _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
+import { Value } from "../../../google/protobuf/struct";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import {
-  Principal,
-  PlanResourcesInput_Resource,
-  Resource,
-} from "../../engine/v1/engine";
+import { PlanResourcesInput_Resource, Principal, Resource } from "../../engine/v1/engine";
 import { Policy } from "../../policy/v1/policy";
 import { Schema } from "../../schema/v1/schema";
-import { Duration } from "../../../google/protobuf/duration";
-import _m0 from "protobufjs/minimal";
-import { Value } from "../../../google/protobuf/struct";
 
 export const protobufPackage = "cerbos.request.v1";
 
@@ -118,10 +114,7 @@ export interface PlaygroundProxyRequest {
   files: File[];
   proxyRequest?:
     | { $case: "checkResourceSet"; checkResourceSet: CheckResourceSetRequest }
-    | {
-        $case: "checkResourceBatch";
-        checkResourceBatch: CheckResourceBatchRequest;
-      }
+    | { $case: "checkResourceBatch"; checkResourceBatch: CheckResourceBatchRequest }
     | { $case: "planResources"; planResources: PlanResourcesRequest }
     | { $case: "checkResources"; checkResources: CheckResourcesRequest };
 }
@@ -132,11 +125,10 @@ export interface AddOrUpdatePolicyRequest {
 
 export interface ListAuditLogEntriesRequest {
   kind: ListAuditLogEntriesRequest_Kind;
-  filter?:
-    | { $case: "tail"; tail: number }
-    | { $case: "between"; between: ListAuditLogEntriesRequest_TimeRange }
-    | { $case: "since"; since: Duration }
-    | { $case: "lookup"; lookup: string };
+  filter?: { $case: "tail"; tail: number } | { $case: "between"; between: ListAuditLogEntriesRequest_TimeRange } | {
+    $case: "since";
+    since: Duration;
+  } | { $case: "lookup"; lookup: string };
 }
 
 export enum ListAuditLogEntriesRequest_Kind {
@@ -150,9 +142,11 @@ export interface ListAuditLogEntriesRequest_TimeRange {
   end: Date | undefined;
 }
 
-export interface ServerInfoRequest {}
+export interface ServerInfoRequest {
+}
 
-export interface ListPoliciesRequest {}
+export interface ListPoliciesRequest {
+}
 
 export interface GetPolicyRequest {
   id: string[];
@@ -162,7 +156,8 @@ export interface AddOrUpdateSchemaRequest {
   schemas: Schema[];
 }
 
-export interface ListSchemasRequest {}
+export interface ListSchemasRequest {
+}
 
 export interface GetSchemaRequest {
   id: string[];
@@ -188,10 +183,7 @@ function createBasePlanResourcesRequest(): PlanResourcesRequest {
 }
 
 export const PlanResourcesRequest = {
-  encode(
-    message: PlanResourcesRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: PlanResourcesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -202,10 +194,7 @@ export const PlanResourcesRequest = {
       Principal.encode(message.principal, writer.uint32(26).fork()).ldelim();
     }
     if (message.resource !== undefined) {
-      PlanResourcesInput_Resource.encode(
-        message.resource,
-        writer.uint32(34).fork()
-      ).ldelim();
+      PlanResourcesInput_Resource.encode(message.resource, writer.uint32(34).fork()).ldelim();
     }
     if (message.auxData !== undefined) {
       AuxData.encode(message.auxData, writer.uint32(42).fork()).ldelim();
@@ -216,10 +205,7 @@ export const PlanResourcesRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PlanResourcesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesRequest();
@@ -236,10 +222,7 @@ export const PlanResourcesRequest = {
           message.principal = Principal.decode(reader, reader.uint32());
           break;
         case 4:
-          message.resource = PlanResourcesInput_Resource.decode(
-            reader,
-            reader.uint32()
-          );
+          message.resource = PlanResourcesInput_Resource.decode(reader, reader.uint32());
           break;
         case 5:
           message.auxData = AuxData.decode(reader, reader.uint32());
@@ -268,10 +251,7 @@ function createBaseCheckResourceSetRequest(): CheckResourceSetRequest {
 }
 
 export const CheckResourceSetRequest = {
-  encode(
-    message: CheckResourceSetRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CheckResourceSetRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -293,10 +273,7 @@ export const CheckResourceSetRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): CheckResourceSetRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceSetRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetRequest();
@@ -335,10 +312,7 @@ function createBaseResourceSet(): ResourceSet {
 }
 
 export const ResourceSet = {
-  encode(
-    message: ResourceSet,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ResourceSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== "") {
       writer.uint32(10).string(message.kind);
     }
@@ -346,10 +320,7 @@ export const ResourceSet = {
       writer.uint32(18).string(message.policyVersion);
     }
     Object.entries(message.instances).forEach(([key, value]) => {
-      ResourceSet_InstancesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(26).fork()
-      ).ldelim();
+      ResourceSet_InstancesEntry.encode({ key: key as any, value }, writer.uint32(26).fork()).ldelim();
     });
     if (message.scope !== "") {
       writer.uint32(34).string(message.scope);
@@ -371,10 +342,7 @@ export const ResourceSet = {
           message.policyVersion = reader.string();
           break;
         case 3:
-          const entry3 = ResourceSet_InstancesEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry3 = ResourceSet_InstancesEntry.decode(reader, reader.uint32());
           if (entry3.value !== undefined) {
             message.instances[entry3.key] = entry3.value;
           }
@@ -396,10 +364,7 @@ function createBaseResourceSet_InstancesEntry(): ResourceSet_InstancesEntry {
 }
 
 export const ResourceSet_InstancesEntry = {
-  encode(
-    message: ResourceSet_InstancesEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ResourceSet_InstancesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -409,10 +374,7 @@ export const ResourceSet_InstancesEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ResourceSet_InstancesEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceSet_InstancesEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceSet_InstancesEntry();
@@ -439,16 +401,10 @@ function createBaseAttributesMap(): AttributesMap {
 }
 
 export const AttributesMap = {
-  encode(
-    message: AttributesMap,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: AttributesMap, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.attr).forEach(([key, value]) => {
       if (value !== undefined) {
-        AttributesMap_AttrEntry.encode(
-          { key: key as any, value },
-          writer.uint32(10).fork()
-        ).ldelim();
+        AttributesMap_AttrEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
       }
     });
     return writer;
@@ -462,10 +418,7 @@ export const AttributesMap = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          const entry1 = AttributesMap_AttrEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry1 = AttributesMap_AttrEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.attr[entry1.key] = entry1.value;
           }
@@ -484,26 +437,17 @@ function createBaseAttributesMap_AttrEntry(): AttributesMap_AttrEntry {
 }
 
 export const AttributesMap_AttrEntry = {
-  encode(
-    message: AttributesMap_AttrEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: AttributesMap_AttrEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(
-        Value.wrap(message.value),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): AttributesMap_AttrEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AttributesMap_AttrEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributesMap_AttrEntry();
@@ -526,19 +470,11 @@ export const AttributesMap_AttrEntry = {
 };
 
 function createBaseCheckResourceBatchRequest(): CheckResourceBatchRequest {
-  return {
-    requestId: "",
-    principal: undefined,
-    resources: [],
-    auxData: undefined,
-  };
+  return { requestId: "", principal: undefined, resources: [], auxData: undefined };
 }
 
 export const CheckResourceBatchRequest = {
-  encode(
-    message: CheckResourceBatchRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CheckResourceBatchRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -546,10 +482,7 @@ export const CheckResourceBatchRequest = {
       Principal.encode(message.principal, writer.uint32(18).fork()).ldelim();
     }
     for (const v of message.resources) {
-      CheckResourceBatchRequest_BatchEntry.encode(
-        v!,
-        writer.uint32(26).fork()
-      ).ldelim();
+      CheckResourceBatchRequest_BatchEntry.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.auxData !== undefined) {
       AuxData.encode(message.auxData, writer.uint32(34).fork()).ldelim();
@@ -557,10 +490,7 @@ export const CheckResourceBatchRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): CheckResourceBatchRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceBatchRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceBatchRequest();
@@ -574,9 +504,7 @@ export const CheckResourceBatchRequest = {
           message.principal = Principal.decode(reader, reader.uint32());
           break;
         case 3:
-          message.resources.push(
-            CheckResourceBatchRequest_BatchEntry.decode(reader, reader.uint32())
-          );
+          message.resources.push(CheckResourceBatchRequest_BatchEntry.decode(reader, reader.uint32()));
           break;
         case 4:
           message.auxData = AuxData.decode(reader, reader.uint32());
@@ -595,10 +523,7 @@ function createBaseCheckResourceBatchRequest_BatchEntry(): CheckResourceBatchReq
 }
 
 export const CheckResourceBatchRequest_BatchEntry = {
-  encode(
-    message: CheckResourceBatchRequest_BatchEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CheckResourceBatchRequest_BatchEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.actions) {
       writer.uint32(10).string(v!);
     }
@@ -608,10 +533,7 @@ export const CheckResourceBatchRequest_BatchEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): CheckResourceBatchRequest_BatchEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceBatchRequest_BatchEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceBatchRequest_BatchEntry();
@@ -634,20 +556,11 @@ export const CheckResourceBatchRequest_BatchEntry = {
 };
 
 function createBaseCheckResourcesRequest(): CheckResourcesRequest {
-  return {
-    requestId: "",
-    includeMeta: false,
-    principal: undefined,
-    resources: [],
-    auxData: undefined,
-  };
+  return { requestId: "", includeMeta: false, principal: undefined, resources: [], auxData: undefined };
 }
 
 export const CheckResourcesRequest = {
-  encode(
-    message: CheckResourcesRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CheckResourcesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -658,10 +571,7 @@ export const CheckResourcesRequest = {
       Principal.encode(message.principal, writer.uint32(26).fork()).ldelim();
     }
     for (const v of message.resources) {
-      CheckResourcesRequest_ResourceEntry.encode(
-        v!,
-        writer.uint32(34).fork()
-      ).ldelim();
+      CheckResourcesRequest_ResourceEntry.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     if (message.auxData !== undefined) {
       AuxData.encode(message.auxData, writer.uint32(42).fork()).ldelim();
@@ -669,10 +579,7 @@ export const CheckResourcesRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): CheckResourcesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourcesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesRequest();
@@ -689,9 +596,7 @@ export const CheckResourcesRequest = {
           message.principal = Principal.decode(reader, reader.uint32());
           break;
         case 4:
-          message.resources.push(
-            CheckResourcesRequest_ResourceEntry.decode(reader, reader.uint32())
-          );
+          message.resources.push(CheckResourcesRequest_ResourceEntry.decode(reader, reader.uint32()));
           break;
         case 5:
           message.auxData = AuxData.decode(reader, reader.uint32());
@@ -710,10 +615,7 @@ function createBaseCheckResourcesRequest_ResourceEntry(): CheckResourcesRequest_
 }
 
 export const CheckResourcesRequest_ResourceEntry = {
-  encode(
-    message: CheckResourcesRequest_ResourceEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CheckResourcesRequest_ResourceEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.actions) {
       writer.uint32(10).string(v!);
     }
@@ -723,10 +625,7 @@ export const CheckResourcesRequest_ResourceEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): CheckResourcesRequest_ResourceEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourcesRequest_ResourceEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesRequest_ResourceEntry();
@@ -753,10 +652,7 @@ function createBaseAuxData(): AuxData {
 }
 
 export const AuxData = {
-  encode(
-    message: AuxData,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: AuxData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.jwt !== undefined) {
       AuxData_JWT.encode(message.jwt, writer.uint32(10).fork()).ldelim();
     }
@@ -787,10 +683,7 @@ function createBaseAuxData_JWT(): AuxData_JWT {
 }
 
 export const AuxData_JWT = {
-  encode(
-    message: AuxData_JWT,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: AuxData_JWT, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
@@ -864,10 +757,7 @@ function createBasePlaygroundValidateRequest(): PlaygroundValidateRequest {
 }
 
 export const PlaygroundValidateRequest = {
-  encode(
-    message: PlaygroundValidateRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: PlaygroundValidateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.playgroundId !== "") {
       writer.uint32(10).string(message.playgroundId);
     }
@@ -877,10 +767,7 @@ export const PlaygroundValidateRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PlaygroundValidateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlaygroundValidateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlaygroundValidateRequest();
@@ -907,10 +794,7 @@ function createBasePlaygroundTestRequest(): PlaygroundTestRequest {
 }
 
 export const PlaygroundTestRequest = {
-  encode(
-    message: PlaygroundTestRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: PlaygroundTestRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.playgroundId !== "") {
       writer.uint32(10).string(message.playgroundId);
     }
@@ -920,10 +804,7 @@ export const PlaygroundTestRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PlaygroundTestRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlaygroundTestRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlaygroundTestRequest();
@@ -946,21 +827,11 @@ export const PlaygroundTestRequest = {
 };
 
 function createBasePlaygroundEvaluateRequest(): PlaygroundEvaluateRequest {
-  return {
-    playgroundId: "",
-    files: [],
-    principal: undefined,
-    resource: undefined,
-    actions: [],
-    auxData: undefined,
-  };
+  return { playgroundId: "", files: [], principal: undefined, resource: undefined, actions: [], auxData: undefined };
 }
 
 export const PlaygroundEvaluateRequest = {
-  encode(
-    message: PlaygroundEvaluateRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: PlaygroundEvaluateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.playgroundId !== "") {
       writer.uint32(10).string(message.playgroundId);
     }
@@ -982,10 +853,7 @@ export const PlaygroundEvaluateRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PlaygroundEvaluateRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlaygroundEvaluateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlaygroundEvaluateRequest();
@@ -1024,10 +892,7 @@ function createBasePlaygroundProxyRequest(): PlaygroundProxyRequest {
 }
 
 export const PlaygroundProxyRequest = {
-  encode(
-    message: PlaygroundProxyRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: PlaygroundProxyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.playgroundId !== "") {
       writer.uint32(10).string(message.playgroundId);
     }
@@ -1035,36 +900,21 @@ export const PlaygroundProxyRequest = {
       File.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     if (message.proxyRequest?.$case === "checkResourceSet") {
-      CheckResourceSetRequest.encode(
-        message.proxyRequest.checkResourceSet,
-        writer.uint32(26).fork()
-      ).ldelim();
+      CheckResourceSetRequest.encode(message.proxyRequest.checkResourceSet, writer.uint32(26).fork()).ldelim();
     }
     if (message.proxyRequest?.$case === "checkResourceBatch") {
-      CheckResourceBatchRequest.encode(
-        message.proxyRequest.checkResourceBatch,
-        writer.uint32(34).fork()
-      ).ldelim();
+      CheckResourceBatchRequest.encode(message.proxyRequest.checkResourceBatch, writer.uint32(34).fork()).ldelim();
     }
     if (message.proxyRequest?.$case === "planResources") {
-      PlanResourcesRequest.encode(
-        message.proxyRequest.planResources,
-        writer.uint32(42).fork()
-      ).ldelim();
+      PlanResourcesRequest.encode(message.proxyRequest.planResources, writer.uint32(42).fork()).ldelim();
     }
     if (message.proxyRequest?.$case === "checkResources") {
-      CheckResourcesRequest.encode(
-        message.proxyRequest.checkResources,
-        writer.uint32(50).fork()
-      ).ldelim();
+      CheckResourcesRequest.encode(message.proxyRequest.checkResources, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PlaygroundProxyRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PlaygroundProxyRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlaygroundProxyRequest();
@@ -1080,19 +930,13 @@ export const PlaygroundProxyRequest = {
         case 3:
           message.proxyRequest = {
             $case: "checkResourceSet",
-            checkResourceSet: CheckResourceSetRequest.decode(
-              reader,
-              reader.uint32()
-            ),
+            checkResourceSet: CheckResourceSetRequest.decode(reader, reader.uint32()),
           };
           break;
         case 4:
           message.proxyRequest = {
             $case: "checkResourceBatch",
-            checkResourceBatch: CheckResourceBatchRequest.decode(
-              reader,
-              reader.uint32()
-            ),
+            checkResourceBatch: CheckResourceBatchRequest.decode(reader, reader.uint32()),
           };
           break;
         case 5:
@@ -1104,10 +948,7 @@ export const PlaygroundProxyRequest = {
         case 6:
           message.proxyRequest = {
             $case: "checkResources",
-            checkResources: CheckResourcesRequest.decode(
-              reader,
-              reader.uint32()
-            ),
+            checkResources: CheckResourcesRequest.decode(reader, reader.uint32()),
           };
           break;
         default:
@@ -1124,20 +965,14 @@ function createBaseAddOrUpdatePolicyRequest(): AddOrUpdatePolicyRequest {
 }
 
 export const AddOrUpdatePolicyRequest = {
-  encode(
-    message: AddOrUpdatePolicyRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: AddOrUpdatePolicyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.policies) {
       Policy.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): AddOrUpdatePolicyRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddOrUpdatePolicyRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddOrUpdatePolicyRequest();
@@ -1161,10 +996,7 @@ function createBaseListAuditLogEntriesRequest(): ListAuditLogEntriesRequest {
 }
 
 export const ListAuditLogEntriesRequest = {
-  encode(
-    message: ListAuditLogEntriesRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ListAuditLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
     }
@@ -1172,10 +1004,7 @@ export const ListAuditLogEntriesRequest = {
       writer.uint32(16).uint32(message.filter.tail);
     }
     if (message.filter?.$case === "between") {
-      ListAuditLogEntriesRequest_TimeRange.encode(
-        message.filter.between,
-        writer.uint32(26).fork()
-      ).ldelim();
+      ListAuditLogEntriesRequest_TimeRange.encode(message.filter.between, writer.uint32(26).fork()).ldelim();
     }
     if (message.filter?.$case === "since") {
       Duration.encode(message.filter.since, writer.uint32(34).fork()).ldelim();
@@ -1186,10 +1015,7 @@ export const ListAuditLogEntriesRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ListAuditLogEntriesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListAuditLogEntriesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAuditLogEntriesRequest();
@@ -1205,17 +1031,11 @@ export const ListAuditLogEntriesRequest = {
         case 3:
           message.filter = {
             $case: "between",
-            between: ListAuditLogEntriesRequest_TimeRange.decode(
-              reader,
-              reader.uint32()
-            ),
+            between: ListAuditLogEntriesRequest_TimeRange.decode(reader, reader.uint32()),
           };
           break;
         case 4:
-          message.filter = {
-            $case: "since",
-            since: Duration.decode(reader, reader.uint32()),
-          };
+          message.filter = { $case: "since", since: Duration.decode(reader, reader.uint32()) };
           break;
         case 5:
           message.filter = { $case: "lookup", lookup: reader.string() };
@@ -1234,29 +1054,17 @@ function createBaseListAuditLogEntriesRequest_TimeRange(): ListAuditLogEntriesRe
 }
 
 export const ListAuditLogEntriesRequest_TimeRange = {
-  encode(
-    message: ListAuditLogEntriesRequest_TimeRange,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ListAuditLogEntriesRequest_TimeRange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.start !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.start),
-        writer.uint32(10).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.start), writer.uint32(10).fork()).ldelim();
     }
     if (message.end !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.end),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.end), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): ListAuditLogEntriesRequest_TimeRange {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListAuditLogEntriesRequest_TimeRange {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAuditLogEntriesRequest_TimeRange();
@@ -1264,14 +1072,10 @@ export const ListAuditLogEntriesRequest_TimeRange = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.start = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.start = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.end = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.end = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1287,10 +1091,7 @@ function createBaseServerInfoRequest(): ServerInfoRequest {
 }
 
 export const ServerInfoRequest = {
-  encode(
-    _: ServerInfoRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: ServerInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1315,10 +1116,7 @@ function createBaseListPoliciesRequest(): ListPoliciesRequest {
 }
 
 export const ListPoliciesRequest = {
-  encode(
-    _: ListPoliciesRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: ListPoliciesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1343,10 +1141,7 @@ function createBaseGetPolicyRequest(): GetPolicyRequest {
 }
 
 export const GetPolicyRequest = {
-  encode(
-    message: GetPolicyRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: GetPolicyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.id) {
       writer.uint32(10).string(v!);
     }
@@ -1377,20 +1172,14 @@ function createBaseAddOrUpdateSchemaRequest(): AddOrUpdateSchemaRequest {
 }
 
 export const AddOrUpdateSchemaRequest = {
-  encode(
-    message: AddOrUpdateSchemaRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: AddOrUpdateSchemaRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.schemas) {
       Schema.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): AddOrUpdateSchemaRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddOrUpdateSchemaRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddOrUpdateSchemaRequest();
@@ -1414,10 +1203,7 @@ function createBaseListSchemasRequest(): ListSchemasRequest {
 }
 
 export const ListSchemasRequest = {
-  encode(
-    _: ListSchemasRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: ListSchemasRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1442,10 +1228,7 @@ function createBaseGetSchemaRequest(): GetSchemaRequest {
 }
 
 export const GetSchemaRequest = {
-  encode(
-    message: GetSchemaRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: GetSchemaRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.id) {
       writer.uint32(10).string(v!);
     }
@@ -1476,10 +1259,7 @@ function createBaseDeleteSchemaRequest(): DeleteSchemaRequest {
 }
 
 export const DeleteSchemaRequest = {
-  encode(
-    message: DeleteSchemaRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: DeleteSchemaRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.id) {
       writer.uint32(10).string(v!);
     }
@@ -1510,10 +1290,7 @@ function createBaseReloadStoreRequest(): ReloadStoreRequest {
 }
 
 export const ReloadStoreRequest = {
-  encode(
-    message: ReloadStoreRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ReloadStoreRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.wait === true) {
       writer.uint32(8).bool(message.wait);
     }

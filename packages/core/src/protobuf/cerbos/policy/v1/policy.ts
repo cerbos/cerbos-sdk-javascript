@@ -1,12 +1,6 @@
 /* eslint-disable */
 import type { Effect } from "../../effect/v1/effect";
-import type {
-  Principal,
-  Resource,
-  AuxData,
-  CheckInput,
-  Trace,
-} from "../../engine/v1/engine";
+import type { AuxData, CheckInput, Principal, Resource, Trace } from "../../engine/v1/engine";
 
 export const protobufPackage = "cerbos.policy.v1";
 
@@ -15,10 +9,10 @@ export interface Policy {
   disabled: boolean;
   description: string;
   metadata: Metadata | undefined;
-  policyType?:
-    | { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy }
-    | { $case: "principalPolicy"; principalPolicy: PrincipalPolicy }
-    | { $case: "derivedRoles"; derivedRoles: DerivedRoles };
+  policyType?: { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy } | {
+    $case: "principalPolicy";
+    principalPolicy: PrincipalPolicy;
+  } | { $case: "derivedRoles"; derivedRoles: DerivedRoles };
   variables: { [key: string]: string };
 }
 
@@ -88,17 +82,14 @@ export interface RoleDef {
 }
 
 export interface Condition {
-  condition?:
-    | { $case: "match"; match: Match }
-    | { $case: "script"; script: string };
+  condition?: { $case: "match"; match: Match } | { $case: "script"; script: string };
 }
 
 export interface Match {
-  op?:
-    | { $case: "all"; all: Match_ExprList }
-    | { $case: "any"; any: Match_ExprList }
-    | { $case: "none"; none: Match_ExprList }
-    | { $case: "expr"; expr: string };
+  op?: { $case: "all"; all: Match_ExprList } | { $case: "any"; any: Match_ExprList } | {
+    $case: "none";
+    none: Match_ExprList;
+  } | { $case: "expr"; expr: string };
 }
 
 export interface Match_ExprList {
@@ -119,7 +110,8 @@ export interface Schemas_Schema {
   ignoreWhen: Schemas_IgnoreWhen | undefined;
 }
 
-export interface TestFixture {}
+export interface TestFixture {
+}
 
 export interface TestFixture_Principals {
   principals: { [key: string]: Principal };
@@ -277,9 +269,7 @@ export interface TestResults_Action {
 
 export interface TestResults_Details {
   result: TestResults_Result;
-  outcome?:
-    | { $case: "failure"; failure: TestResults_Failure }
-    | { $case: "error"; error: string };
+  outcome?: { $case: "failure"; failure: TestResults_Failure } | { $case: "error"; error: string };
   engineTrace: Trace[];
 }
 

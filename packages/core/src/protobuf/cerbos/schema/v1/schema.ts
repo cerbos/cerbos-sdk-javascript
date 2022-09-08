@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export const protobufPackage = "cerbos.schema.v1";
 
 export interface ValidationError {

@@ -1,15 +1,9 @@
 /* eslint-disable */
-import { Effect } from "../../effect/v1/effect";
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import {
-  Principal,
-  Resource,
-  AuxData,
-  CheckInput,
-  Trace,
-} from "../../engine/v1/engine";
 import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import { UInt64Value } from "../../../google/protobuf/wrappers";
+import { Effect } from "../../effect/v1/effect";
+import { AuxData, CheckInput, Principal, Resource, Trace } from "../../engine/v1/engine";
 
 export const protobufPackage = "cerbos.policy.v1";
 
@@ -18,10 +12,10 @@ export interface Policy {
   disabled: boolean;
   description: string;
   metadata: Metadata | undefined;
-  policyType?:
-    | { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy }
-    | { $case: "principalPolicy"; principalPolicy: PrincipalPolicy }
-    | { $case: "derivedRoles"; derivedRoles: DerivedRoles };
+  policyType?: { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy } | {
+    $case: "principalPolicy";
+    principalPolicy: PrincipalPolicy;
+  } | { $case: "derivedRoles"; derivedRoles: DerivedRoles };
   variables: { [key: string]: string };
 }
 
@@ -91,17 +85,14 @@ export interface RoleDef {
 }
 
 export interface Condition {
-  condition?:
-    | { $case: "match"; match: Match }
-    | { $case: "script"; script: string };
+  condition?: { $case: "match"; match: Match } | { $case: "script"; script: string };
 }
 
 export interface Match {
-  op?:
-    | { $case: "all"; all: Match_ExprList }
-    | { $case: "any"; any: Match_ExprList }
-    | { $case: "none"; none: Match_ExprList }
-    | { $case: "expr"; expr: string };
+  op?: { $case: "all"; all: Match_ExprList } | { $case: "any"; any: Match_ExprList } | {
+    $case: "none";
+    none: Match_ExprList;
+  } | { $case: "expr"; expr: string };
 }
 
 export interface Match_ExprList {
@@ -122,7 +113,8 @@ export interface Schemas_Schema {
   ignoreWhen: Schemas_IgnoreWhen | undefined;
 }
 
-export interface TestFixture {}
+export interface TestFixture {
+}
 
 export interface TestFixture_Principals {
   principals: { [key: string]: Principal };
@@ -280,9 +272,7 @@ export interface TestResults_Action {
 
 export interface TestResults_Details {
   result: TestResults_Result;
-  outcome?:
-    | { $case: "failure"; failure: TestResults_Failure }
-    | { $case: "error"; error: string };
+  outcome?: { $case: "failure"; failure: TestResults_Failure } | { $case: "error"; error: string };
   engineTrace: Trace[];
 }
 
@@ -303,10 +293,7 @@ function createBasePolicy(): Policy {
 }
 
 export const Policy = {
-  encode(
-    message: Policy,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Policy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.apiVersion !== "") {
       writer.uint32(10).string(message.apiVersion);
     }
@@ -320,28 +307,16 @@ export const Policy = {
       Metadata.encode(message.metadata, writer.uint32(34).fork()).ldelim();
     }
     if (message.policyType?.$case === "resourcePolicy") {
-      ResourcePolicy.encode(
-        message.policyType.resourcePolicy,
-        writer.uint32(42).fork()
-      ).ldelim();
+      ResourcePolicy.encode(message.policyType.resourcePolicy, writer.uint32(42).fork()).ldelim();
     }
     if (message.policyType?.$case === "principalPolicy") {
-      PrincipalPolicy.encode(
-        message.policyType.principalPolicy,
-        writer.uint32(50).fork()
-      ).ldelim();
+      PrincipalPolicy.encode(message.policyType.principalPolicy, writer.uint32(50).fork()).ldelim();
     }
     if (message.policyType?.$case === "derivedRoles") {
-      DerivedRoles.encode(
-        message.policyType.derivedRoles,
-        writer.uint32(58).fork()
-      ).ldelim();
+      DerivedRoles.encode(message.policyType.derivedRoles, writer.uint32(58).fork()).ldelim();
     }
     Object.entries(message.variables).forEach(([key, value]) => {
-      Policy_VariablesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(66).fork()
-      ).ldelim();
+      Policy_VariablesEntry.encode({ key: key as any, value }, writer.uint32(66).fork()).ldelim();
     });
     return writer;
   },
@@ -378,10 +353,7 @@ export const Policy = {
           };
           break;
         case 7:
-          message.policyType = {
-            $case: "derivedRoles",
-            derivedRoles: DerivedRoles.decode(reader, reader.uint32()),
-          };
+          message.policyType = { $case: "derivedRoles", derivedRoles: DerivedRoles.decode(reader, reader.uint32()) };
           break;
         case 8:
           const entry8 = Policy_VariablesEntry.decode(reader, reader.uint32());
@@ -403,10 +375,7 @@ function createBasePolicy_VariablesEntry(): Policy_VariablesEntry {
 }
 
 export const Policy_VariablesEntry = {
-  encode(
-    message: Policy_VariablesEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Policy_VariablesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -416,10 +385,7 @@ export const Policy_VariablesEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Policy_VariablesEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Policy_VariablesEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePolicy_VariablesEntry();
@@ -442,33 +408,19 @@ export const Policy_VariablesEntry = {
 };
 
 function createBaseMetadata(): Metadata {
-  return {
-    sourceFile: "",
-    annotations: {},
-    hash: undefined,
-    storeIdentifer: "",
-  };
+  return { sourceFile: "", annotations: {}, hash: undefined, storeIdentifer: "" };
 }
 
 export const Metadata = {
-  encode(
-    message: Metadata,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sourceFile !== "") {
       writer.uint32(10).string(message.sourceFile);
     }
     Object.entries(message.annotations).forEach(([key, value]) => {
-      Metadata_AnnotationsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(18).fork()
-      ).ldelim();
+      Metadata_AnnotationsEntry.encode({ key: key as any, value }, writer.uint32(18).fork()).ldelim();
     });
     if (message.hash !== undefined) {
-      UInt64Value.encode(
-        { value: message.hash! },
-        writer.uint32(26).fork()
-      ).ldelim();
+      UInt64Value.encode({ value: message.hash! }, writer.uint32(26).fork()).ldelim();
     }
     if (message.storeIdentifer !== "") {
       writer.uint32(34).string(message.storeIdentifer);
@@ -487,10 +439,7 @@ export const Metadata = {
           message.sourceFile = reader.string();
           break;
         case 2:
-          const entry2 = Metadata_AnnotationsEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry2 = Metadata_AnnotationsEntry.decode(reader, reader.uint32());
           if (entry2.value !== undefined) {
             message.annotations[entry2.key] = entry2.value;
           }
@@ -515,10 +464,7 @@ function createBaseMetadata_AnnotationsEntry(): Metadata_AnnotationsEntry {
 }
 
 export const Metadata_AnnotationsEntry = {
-  encode(
-    message: Metadata_AnnotationsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Metadata_AnnotationsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -528,10 +474,7 @@ export const Metadata_AnnotationsEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): Metadata_AnnotationsEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Metadata_AnnotationsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetadata_AnnotationsEntry();
@@ -554,21 +497,11 @@ export const Metadata_AnnotationsEntry = {
 };
 
 function createBaseResourcePolicy(): ResourcePolicy {
-  return {
-    resource: "",
-    version: "",
-    importDerivedRoles: [],
-    rules: [],
-    scope: "",
-    schemas: undefined,
-  };
+  return { resource: "", version: "", importDerivedRoles: [], rules: [], scope: "", schemas: undefined };
 }
 
 export const ResourcePolicy = {
-  encode(
-    message: ResourcePolicy,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ResourcePolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resource !== "") {
       writer.uint32(10).string(message.resource);
     }
@@ -625,21 +558,11 @@ export const ResourcePolicy = {
 };
 
 function createBaseResourceRule(): ResourceRule {
-  return {
-    actions: [],
-    derivedRoles: [],
-    roles: [],
-    condition: undefined,
-    effect: 0,
-    name: "",
-  };
+  return { actions: [], derivedRoles: [], roles: [], condition: undefined, effect: 0, name: "" };
 }
 
 export const ResourceRule = {
-  encode(
-    message: ResourceRule,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ResourceRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.actions) {
       writer.uint32(10).string(v!);
     }
@@ -700,10 +623,7 @@ function createBasePrincipalPolicy(): PrincipalPolicy {
 }
 
 export const PrincipalPolicy = {
-  encode(
-    message: PrincipalPolicy,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: PrincipalPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.principal !== "") {
       writer.uint32(10).string(message.principal);
     }
@@ -752,10 +672,7 @@ function createBasePrincipalRule(): PrincipalRule {
 }
 
 export const PrincipalRule = {
-  encode(
-    message: PrincipalRule,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: PrincipalRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resource !== "") {
       writer.uint32(10).string(message.resource);
     }
@@ -776,9 +693,7 @@ export const PrincipalRule = {
           message.resource = reader.string();
           break;
         case 2:
-          message.actions.push(
-            PrincipalRule_Action.decode(reader, reader.uint32())
-          );
+          message.actions.push(PrincipalRule_Action.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -794,10 +709,7 @@ function createBasePrincipalRule_Action(): PrincipalRule_Action {
 }
 
 export const PrincipalRule_Action = {
-  encode(
-    message: PrincipalRule_Action,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: PrincipalRule_Action, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.action !== "") {
       writer.uint32(10).string(message.action);
     }
@@ -813,10 +725,7 @@ export const PrincipalRule_Action = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PrincipalRule_Action {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PrincipalRule_Action {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrincipalRule_Action();
@@ -849,10 +758,7 @@ function createBaseDerivedRoles(): DerivedRoles {
 }
 
 export const DerivedRoles = {
-  encode(
-    message: DerivedRoles,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: DerivedRoles, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -889,10 +795,7 @@ function createBaseRoleDef(): RoleDef {
 }
 
 export const RoleDef = {
-  encode(
-    message: RoleDef,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: RoleDef, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -935,10 +838,7 @@ function createBaseCondition(): Condition {
 }
 
 export const Condition = {
-  encode(
-    message: Condition,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Condition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.condition?.$case === "match") {
       Match.encode(message.condition.match, writer.uint32(10).fork()).ldelim();
     }
@@ -956,10 +856,7 @@ export const Condition = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.condition = {
-            $case: "match",
-            match: Match.decode(reader, reader.uint32()),
-          };
+          message.condition = { $case: "match", match: Match.decode(reader, reader.uint32()) };
           break;
         case 2:
           message.condition = { $case: "script", script: reader.string() };
@@ -1002,22 +899,13 @@ export const Match = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.op = {
-            $case: "all",
-            all: Match_ExprList.decode(reader, reader.uint32()),
-          };
+          message.op = { $case: "all", all: Match_ExprList.decode(reader, reader.uint32()) };
           break;
         case 2:
-          message.op = {
-            $case: "any",
-            any: Match_ExprList.decode(reader, reader.uint32()),
-          };
+          message.op = { $case: "any", any: Match_ExprList.decode(reader, reader.uint32()) };
           break;
         case 3:
-          message.op = {
-            $case: "none",
-            none: Match_ExprList.decode(reader, reader.uint32()),
-          };
+          message.op = { $case: "none", none: Match_ExprList.decode(reader, reader.uint32()) };
           break;
         case 4:
           message.op = { $case: "expr", expr: reader.string() };
@@ -1036,10 +924,7 @@ function createBaseMatch_ExprList(): Match_ExprList {
 }
 
 export const Match_ExprList = {
-  encode(
-    message: Match_ExprList,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Match_ExprList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.of) {
       Match.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1070,21 +955,12 @@ function createBaseSchemas(): Schemas {
 }
 
 export const Schemas = {
-  encode(
-    message: Schemas,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Schemas, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.principalSchema !== undefined) {
-      Schemas_Schema.encode(
-        message.principalSchema,
-        writer.uint32(10).fork()
-      ).ldelim();
+      Schemas_Schema.encode(message.principalSchema, writer.uint32(10).fork()).ldelim();
     }
     if (message.resourceSchema !== undefined) {
-      Schemas_Schema.encode(
-        message.resourceSchema,
-        writer.uint32(18).fork()
-      ).ldelim();
+      Schemas_Schema.encode(message.resourceSchema, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -1097,16 +973,10 @@ export const Schemas = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.principalSchema = Schemas_Schema.decode(
-            reader,
-            reader.uint32()
-          );
+          message.principalSchema = Schemas_Schema.decode(reader, reader.uint32());
           break;
         case 2:
-          message.resourceSchema = Schemas_Schema.decode(
-            reader,
-            reader.uint32()
-          );
+          message.resourceSchema = Schemas_Schema.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1122,10 +992,7 @@ function createBaseSchemas_IgnoreWhen(): Schemas_IgnoreWhen {
 }
 
 export const Schemas_IgnoreWhen = {
-  encode(
-    message: Schemas_IgnoreWhen,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Schemas_IgnoreWhen, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.actions) {
       writer.uint32(10).string(v!);
     }
@@ -1156,18 +1023,12 @@ function createBaseSchemas_Schema(): Schemas_Schema {
 }
 
 export const Schemas_Schema = {
-  encode(
-    message: Schemas_Schema,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Schemas_Schema, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.ref !== "") {
       writer.uint32(10).string(message.ref);
     }
     if (message.ignoreWhen !== undefined) {
-      Schemas_IgnoreWhen.encode(
-        message.ignoreWhen,
-        writer.uint32(18).fork()
-      ).ldelim();
+      Schemas_IgnoreWhen.encode(message.ignoreWhen, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -1183,10 +1044,7 @@ export const Schemas_Schema = {
           message.ref = reader.string();
           break;
         case 2:
-          message.ignoreWhen = Schemas_IgnoreWhen.decode(
-            reader,
-            reader.uint32()
-          );
+          message.ignoreWhen = Schemas_IgnoreWhen.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1227,23 +1085,14 @@ function createBaseTestFixture_Principals(): TestFixture_Principals {
 }
 
 export const TestFixture_Principals = {
-  encode(
-    message: TestFixture_Principals,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestFixture_Principals, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.principals).forEach(([key, value]) => {
-      TestFixture_Principals_PrincipalsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork()
-      ).ldelim();
+      TestFixture_Principals_PrincipalsEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
     });
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestFixture_Principals {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestFixture_Principals {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestFixture_Principals();
@@ -1251,10 +1100,7 @@ export const TestFixture_Principals = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          const entry1 = TestFixture_Principals_PrincipalsEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry1 = TestFixture_Principals_PrincipalsEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.principals[entry1.key] = entry1.value;
           }
@@ -1273,10 +1119,7 @@ function createBaseTestFixture_Principals_PrincipalsEntry(): TestFixture_Princip
 }
 
 export const TestFixture_Principals_PrincipalsEntry = {
-  encode(
-    message: TestFixture_Principals_PrincipalsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestFixture_Principals_PrincipalsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1286,10 +1129,7 @@ export const TestFixture_Principals_PrincipalsEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestFixture_Principals_PrincipalsEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestFixture_Principals_PrincipalsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestFixture_Principals_PrincipalsEntry();
@@ -1316,23 +1156,14 @@ function createBaseTestFixture_Resources(): TestFixture_Resources {
 }
 
 export const TestFixture_Resources = {
-  encode(
-    message: TestFixture_Resources,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestFixture_Resources, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.resources).forEach(([key, value]) => {
-      TestFixture_Resources_ResourcesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork()
-      ).ldelim();
+      TestFixture_Resources_ResourcesEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
     });
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestFixture_Resources {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestFixture_Resources {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestFixture_Resources();
@@ -1340,10 +1171,7 @@ export const TestFixture_Resources = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          const entry1 = TestFixture_Resources_ResourcesEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry1 = TestFixture_Resources_ResourcesEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.resources[entry1.key] = entry1.value;
           }
@@ -1362,10 +1190,7 @@ function createBaseTestFixture_Resources_ResourcesEntry(): TestFixture_Resources
 }
 
 export const TestFixture_Resources_ResourcesEntry = {
-  encode(
-    message: TestFixture_Resources_ResourcesEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestFixture_Resources_ResourcesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1375,10 +1200,7 @@ export const TestFixture_Resources_ResourcesEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestFixture_Resources_ResourcesEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestFixture_Resources_ResourcesEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestFixture_Resources_ResourcesEntry();
@@ -1405,15 +1227,9 @@ function createBaseTestFixture_AuxData(): TestFixture_AuxData {
 }
 
 export const TestFixture_AuxData = {
-  encode(
-    message: TestFixture_AuxData,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestFixture_AuxData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.auxData).forEach(([key, value]) => {
-      TestFixture_AuxData_AuxDataEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork()
-      ).ldelim();
+      TestFixture_AuxData_AuxDataEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
     });
     return writer;
   },
@@ -1426,10 +1242,7 @@ export const TestFixture_AuxData = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          const entry1 = TestFixture_AuxData_AuxDataEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry1 = TestFixture_AuxData_AuxDataEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.auxData[entry1.key] = entry1.value;
           }
@@ -1448,10 +1261,7 @@ function createBaseTestFixture_AuxData_AuxDataEntry(): TestFixture_AuxData_AuxDa
 }
 
 export const TestFixture_AuxData_AuxDataEntry = {
-  encode(
-    message: TestFixture_AuxData_AuxDataEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestFixture_AuxData_AuxDataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1461,10 +1271,7 @@ export const TestFixture_AuxData_AuxDataEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestFixture_AuxData_AuxDataEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestFixture_AuxData_AuxDataEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestFixture_AuxData_AuxDataEntry();
@@ -1491,15 +1298,9 @@ function createBaseTestOptions(): TestOptions {
 }
 
 export const TestOptions = {
-  encode(
-    message: TestOptions,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.now !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.now),
-        writer.uint32(10).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.now), writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -1512,9 +1313,7 @@ export const TestOptions = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.now = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.now = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1540,10 +1339,7 @@ function createBaseTestSuite(): TestSuite {
 }
 
 export const TestSuite = {
-  encode(
-    message: TestSuite,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestSuite, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1560,22 +1356,13 @@ export const TestSuite = {
       TestTable.encode(v!, writer.uint32(42).fork()).ldelim();
     }
     Object.entries(message.principals).forEach(([key, value]) => {
-      TestSuite_PrincipalsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(50).fork()
-      ).ldelim();
+      TestSuite_PrincipalsEntry.encode({ key: key as any, value }, writer.uint32(50).fork()).ldelim();
     });
     Object.entries(message.resources).forEach(([key, value]) => {
-      TestSuite_ResourcesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(58).fork()
-      ).ldelim();
+      TestSuite_ResourcesEntry.encode({ key: key as any, value }, writer.uint32(58).fork()).ldelim();
     });
     Object.entries(message.auxData).forEach(([key, value]) => {
-      TestSuite_AuxDataEntry.encode(
-        { key: key as any, value },
-        writer.uint32(66).fork()
-      ).ldelim();
+      TestSuite_AuxDataEntry.encode({ key: key as any, value }, writer.uint32(66).fork()).ldelim();
     });
     if (message.options !== undefined) {
       TestOptions.encode(message.options, writer.uint32(74).fork()).ldelim();
@@ -1606,19 +1393,13 @@ export const TestSuite = {
           message.tests.push(TestTable.decode(reader, reader.uint32()));
           break;
         case 6:
-          const entry6 = TestSuite_PrincipalsEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry6 = TestSuite_PrincipalsEntry.decode(reader, reader.uint32());
           if (entry6.value !== undefined) {
             message.principals[entry6.key] = entry6.value;
           }
           break;
         case 7:
-          const entry7 = TestSuite_ResourcesEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry7 = TestSuite_ResourcesEntry.decode(reader, reader.uint32());
           if (entry7.value !== undefined) {
             message.resources[entry7.key] = entry7.value;
           }
@@ -1646,10 +1427,7 @@ function createBaseTestSuite_PrincipalsEntry(): TestSuite_PrincipalsEntry {
 }
 
 export const TestSuite_PrincipalsEntry = {
-  encode(
-    message: TestSuite_PrincipalsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestSuite_PrincipalsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1659,10 +1437,7 @@ export const TestSuite_PrincipalsEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestSuite_PrincipalsEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestSuite_PrincipalsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestSuite_PrincipalsEntry();
@@ -1689,10 +1464,7 @@ function createBaseTestSuite_ResourcesEntry(): TestSuite_ResourcesEntry {
 }
 
 export const TestSuite_ResourcesEntry = {
-  encode(
-    message: TestSuite_ResourcesEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestSuite_ResourcesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1702,10 +1474,7 @@ export const TestSuite_ResourcesEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestSuite_ResourcesEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestSuite_ResourcesEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestSuite_ResourcesEntry();
@@ -1732,10 +1501,7 @@ function createBaseTestSuite_AuxDataEntry(): TestSuite_AuxDataEntry {
 }
 
 export const TestSuite_AuxDataEntry = {
-  encode(
-    message: TestSuite_AuxDataEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestSuite_AuxDataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1745,10 +1511,7 @@ export const TestSuite_AuxDataEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestSuite_AuxDataEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestSuite_AuxDataEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestSuite_AuxDataEntry();
@@ -1771,22 +1534,11 @@ export const TestSuite_AuxDataEntry = {
 };
 
 function createBaseTestTable(): TestTable {
-  return {
-    name: "",
-    description: "",
-    skip: false,
-    skipReason: "",
-    input: undefined,
-    expected: [],
-    options: undefined,
-  };
+  return { name: "", description: "", skip: false, skipReason: "", input: undefined, expected: [], options: undefined };
 }
 
 export const TestTable = {
-  encode(
-    message: TestTable,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestTable, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1834,9 +1586,7 @@ export const TestTable = {
           message.input = TestTable_Input.decode(reader, reader.uint32());
           break;
         case 6:
-          message.expected.push(
-            TestTable_Expectation.decode(reader, reader.uint32())
-          );
+          message.expected.push(TestTable_Expectation.decode(reader, reader.uint32()));
           break;
         case 7:
           message.options = TestOptions.decode(reader, reader.uint32());
@@ -1855,10 +1605,7 @@ function createBaseTestTable_Input(): TestTable_Input {
 }
 
 export const TestTable_Input = {
-  encode(
-    message: TestTable_Input,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestTable_Input, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.principals) {
       writer.uint32(10).string(v!);
     }
@@ -1907,10 +1654,7 @@ function createBaseTestTable_Expectation(): TestTable_Expectation {
 }
 
 export const TestTable_Expectation = {
-  encode(
-    message: TestTable_Expectation,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestTable_Expectation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.principal !== "") {
       writer.uint32(10).string(message.principal);
     }
@@ -1918,18 +1662,12 @@ export const TestTable_Expectation = {
       writer.uint32(18).string(message.resource);
     }
     Object.entries(message.actions).forEach(([key, value]) => {
-      TestTable_Expectation_ActionsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(26).fork()
-      ).ldelim();
+      TestTable_Expectation_ActionsEntry.encode({ key: key as any, value }, writer.uint32(26).fork()).ldelim();
     });
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestTable_Expectation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestTable_Expectation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestTable_Expectation();
@@ -1943,10 +1681,7 @@ export const TestTable_Expectation = {
           message.resource = reader.string();
           break;
         case 3:
-          const entry3 = TestTable_Expectation_ActionsEntry.decode(
-            reader,
-            reader.uint32()
-          );
+          const entry3 = TestTable_Expectation_ActionsEntry.decode(reader, reader.uint32());
           if (entry3.value !== undefined) {
             message.actions[entry3.key] = entry3.value;
           }
@@ -1965,10 +1700,7 @@ function createBaseTestTable_Expectation_ActionsEntry(): TestTable_Expectation_A
 }
 
 export const TestTable_Expectation_ActionsEntry = {
-  encode(
-    message: TestTable_Expectation_ActionsEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestTable_Expectation_ActionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1978,10 +1710,7 @@ export const TestTable_Expectation_ActionsEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestTable_Expectation_ActionsEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestTable_Expectation_ActionsEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestTable_Expectation_ActionsEntry();
@@ -2033,10 +1762,7 @@ export const Test = {
       CheckInput.encode(message.input, writer.uint32(42).fork()).ldelim();
     }
     Object.entries(message.expected).forEach(([key, value]) => {
-      Test_ExpectedEntry.encode(
-        { key: key as any, value },
-        writer.uint32(50).fork()
-      ).ldelim();
+      Test_ExpectedEntry.encode({ key: key as any, value }, writer.uint32(50).fork()).ldelim();
     });
     if (message.options !== undefined) {
       TestOptions.encode(message.options, writer.uint32(58).fork()).ldelim();
@@ -2089,10 +1815,7 @@ function createBaseTest_TestName(): Test_TestName {
 }
 
 export const Test_TestName = {
-  encode(
-    message: Test_TestName,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Test_TestName, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.testTableName !== "") {
       writer.uint32(10).string(message.testTableName);
     }
@@ -2135,10 +1858,7 @@ function createBaseTest_ExpectedEntry(): Test_ExpectedEntry {
 }
 
 export const Test_ExpectedEntry = {
-  encode(
-    message: Test_ExpectedEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Test_ExpectedEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -2175,18 +1895,12 @@ function createBaseTestResults(): TestResults {
 }
 
 export const TestResults = {
-  encode(
-    message: TestResults,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestResults, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.suites) {
       TestResults_Suite.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.summary !== undefined) {
-      TestResults_Summary.encode(
-        message.summary,
-        writer.uint32(18).fork()
-      ).ldelim();
+      TestResults_Summary.encode(message.summary, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -2199,9 +1913,7 @@ export const TestResults = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.suites.push(
-            TestResults_Suite.decode(reader, reader.uint32())
-          );
+          message.suites.push(TestResults_Suite.decode(reader, reader.uint32()));
           break;
         case 2:
           message.summary = TestResults_Summary.decode(reader, reader.uint32());
@@ -2220,10 +1932,7 @@ function createBaseTestResults_Tally(): TestResults_Tally {
 }
 
 export const TestResults_Tally = {
-  encode(
-    message: TestResults_Tally,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestResults_Tally, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(8).int32(message.result);
     }
@@ -2260,10 +1969,7 @@ function createBaseTestResults_Summary(): TestResults_Summary {
 }
 
 export const TestResults_Summary = {
-  encode(
-    message: TestResults_Summary,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestResults_Summary, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.overallResult !== 0) {
       writer.uint32(8).int32(message.overallResult);
     }
@@ -2290,9 +1996,7 @@ export const TestResults_Summary = {
           message.testsCount = reader.uint32();
           break;
         case 3:
-          message.resultCounts.push(
-            TestResults_Tally.decode(reader, reader.uint32())
-          );
+          message.resultCounts.push(TestResults_Tally.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2308,10 +2012,7 @@ function createBaseTestResults_Suite(): TestResults_Suite {
 }
 
 export const TestResults_Suite = {
-  encode(
-    message: TestResults_Suite,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestResults_Suite, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.file !== "") {
       writer.uint32(10).string(message.file);
     }
@@ -2322,10 +2023,7 @@ export const TestResults_Suite = {
       TestResults_Principal.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.summary !== undefined) {
-      TestResults_Summary.encode(
-        message.summary,
-        writer.uint32(34).fork()
-      ).ldelim();
+      TestResults_Summary.encode(message.summary, writer.uint32(34).fork()).ldelim();
     }
     if (message.error !== "") {
       writer.uint32(42).string(message.error);
@@ -2347,9 +2045,7 @@ export const TestResults_Suite = {
           message.name = reader.string();
           break;
         case 3:
-          message.principals.push(
-            TestResults_Principal.decode(reader, reader.uint32())
-          );
+          message.principals.push(TestResults_Principal.decode(reader, reader.uint32()));
           break;
         case 4:
           message.summary = TestResults_Summary.decode(reader, reader.uint32());
@@ -2371,10 +2067,7 @@ function createBaseTestResults_Principal(): TestResults_Principal {
 }
 
 export const TestResults_Principal = {
-  encode(
-    message: TestResults_Principal,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestResults_Principal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2384,10 +2077,7 @@ export const TestResults_Principal = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestResults_Principal {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestResults_Principal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestResults_Principal();
@@ -2398,9 +2088,7 @@ export const TestResults_Principal = {
           message.name = reader.string();
           break;
         case 2:
-          message.resources.push(
-            TestResults_Resource.decode(reader, reader.uint32())
-          );
+          message.resources.push(TestResults_Resource.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2416,10 +2104,7 @@ function createBaseTestResults_Resource(): TestResults_Resource {
 }
 
 export const TestResults_Resource = {
-  encode(
-    message: TestResults_Resource,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestResults_Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2429,10 +2114,7 @@ export const TestResults_Resource = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): TestResults_Resource {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TestResults_Resource {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTestResults_Resource();
@@ -2443,9 +2125,7 @@ export const TestResults_Resource = {
           message.name = reader.string();
           break;
         case 2:
-          message.actions.push(
-            TestResults_Action.decode(reader, reader.uint32())
-          );
+          message.actions.push(TestResults_Action.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2461,18 +2141,12 @@ function createBaseTestResults_Action(): TestResults_Action {
 }
 
 export const TestResults_Action = {
-  encode(
-    message: TestResults_Action,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestResults_Action, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.details !== undefined) {
-      TestResults_Details.encode(
-        message.details,
-        writer.uint32(18).fork()
-      ).ldelim();
+      TestResults_Details.encode(message.details, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -2504,18 +2178,12 @@ function createBaseTestResults_Details(): TestResults_Details {
 }
 
 export const TestResults_Details = {
-  encode(
-    message: TestResults_Details,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestResults_Details, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(8).int32(message.result);
     }
     if (message.outcome?.$case === "failure") {
-      TestResults_Failure.encode(
-        message.outcome.failure,
-        writer.uint32(18).fork()
-      ).ldelim();
+      TestResults_Failure.encode(message.outcome.failure, writer.uint32(18).fork()).ldelim();
     }
     if (message.outcome?.$case === "error") {
       writer.uint32(26).string(message.outcome.error);
@@ -2537,10 +2205,7 @@ export const TestResults_Details = {
           message.result = reader.int32() as any;
           break;
         case 2:
-          message.outcome = {
-            $case: "failure",
-            failure: TestResults_Failure.decode(reader, reader.uint32()),
-          };
+          message.outcome = { $case: "failure", failure: TestResults_Failure.decode(reader, reader.uint32()) };
           break;
         case 3:
           message.outcome = { $case: "error", error: reader.string() };
@@ -2562,10 +2227,7 @@ function createBaseTestResults_Failure(): TestResults_Failure {
 }
 
 export const TestResults_Failure = {
-  encode(
-    message: TestResults_Failure,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TestResults_Failure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.expected !== 0) {
       writer.uint32(8).int32(message.expected);
     }

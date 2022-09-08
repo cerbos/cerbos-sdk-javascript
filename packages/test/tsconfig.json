@@ -3,9 +3,11 @@
   "references": [
     { "path": "../core" },
     { "path": "../grpc" },
-    { "path": "../http" }
+    { "path": "../http" },
+    { "path": "../lite" }
   ],
   "compilerOptions": {
+    "lib": ["ES2020", "DOM"],
     "noEmit": true,
     "tsBuildInfoFile": "lib/test.tsbuildinfo"
   }
