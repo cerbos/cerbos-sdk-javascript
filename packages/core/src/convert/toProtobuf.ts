@@ -34,7 +34,7 @@ import type {
   PlanResourcesRequest as PlanResourcesRequestProtobuf,
 } from "../protobuf/cerbos/request/v1/request";
 import type { Schema } from "../protobuf/cerbos/schema/v1/schema";
-import {
+import type {
   AddOrUpdatePoliciesRequest,
   AddOrUpdateSchemasRequest,
   AuxData,
@@ -43,7 +43,6 @@ import {
   DeleteSchemasRequest,
   DerivedRoleDefinition,
   DerivedRoles,
-  Effect,
   GetPoliciesRequest,
   JWT,
   Match,
@@ -59,11 +58,14 @@ import {
   ResourcePolicy,
   ResourceQuery,
   ResourceRule,
-  SchemaDefinition,
   SchemaDefinitionInput,
   SchemaInput,
   SchemaRef,
   SchemaRefs,
+} from "../types/external";
+import {
+  Effect,
+  SchemaDefinition,
   matchIsMatchAll,
   matchIsMatchAny,
   matchIsMatchExpr,

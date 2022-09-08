@@ -1,8 +1,6 @@
 import { Effect as EffectProtobuf } from "../protobuf/cerbos/effect/v1/effect";
-import {
-  PlanResourcesFilter_Expression_Operand,
-  PlanResourcesFilter_Kind,
-} from "../protobuf/cerbos/engine/v1/engine";
+import type { PlanResourcesFilter_Expression_Operand } from "../protobuf/cerbos/engine/v1/engine";
+import { PlanResourcesFilter_Kind } from "../protobuf/cerbos/engine/v1/engine";
 import type {
   Condition as ConditionProtobuf,
   DerivedRoles as DerivedRolesProtobuf,
@@ -28,28 +26,21 @@ import type {
   PlanResourcesResponse as PlanResourcesResponseProtobuf,
   PlanResourcesResponse_Meta,
 } from "../protobuf/cerbos/response/v1/response";
-import {
+import type {
   Schema as SchemaProtobuf,
   ValidationError as ValidationErrorProtobuf,
-  ValidationError_Source,
 } from "../protobuf/cerbos/schema/v1/schema";
-import {
-  CheckResourcesResponse,
-  CheckResourcesResult,
+import { ValidationError_Source } from "../protobuf/cerbos/schema/v1/schema";
+import type {
   Condition,
   DerivedRoleDefinition,
   DerivedRoles,
-  Effect,
   GetPoliciesResponse,
   ListPoliciesResponse,
   ListSchemasResponse,
   Match,
   Matches,
-  PlanExpression,
   PlanExpressionOperand,
-  PlanExpressionValue,
-  PlanExpressionVariable,
-  PlanKind,
   PlanResourcesMetadata,
   PlanResourcesResponse,
   Policy,
@@ -60,12 +51,21 @@ import {
   ResourcePolicy,
   ResourceRule,
   Schema,
-  SchemaDefinition,
   SchemaRef,
   SchemaRefs,
   ValidationError,
-  ValidationErrorSource,
   Value,
+} from "../types/external";
+import {
+  CheckResourcesResponse,
+  CheckResourcesResult,
+  Effect,
+  PlanExpression,
+  PlanExpressionValue,
+  PlanExpressionVariable,
+  PlanKind,
+  SchemaDefinition,
+  ValidationErrorSource,
 } from "../types/external";
 import type { GetSchemasResponse } from "../types/external/GetSchemasResponse";
 import type { OmitFromEach } from "../types/internal";

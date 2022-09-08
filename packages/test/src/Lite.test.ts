@@ -3,8 +3,8 @@ import "./fetch-polyfill";
 import { readFileSync } from "fs";
 import { resolve } from "path";
 
+import type { CheckResourcesRequest } from "@cerbos/core";
 import {
-  CheckResourcesRequest,
   CheckResourcesResponse,
   CheckResourcesResult,
   Effect,

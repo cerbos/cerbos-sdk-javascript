@@ -4,9 +4,7 @@
  * @packageDocumentation
  */
 
-import {
-  Client,
-  NotOK,
+import type {
   Options,
   _RPC,
   _Request,
@@ -14,6 +12,7 @@ import {
   _Service,
   _Transport,
 } from "@cerbos/core";
+import { Client, NotOK } from "@cerbos/core";
 import { btoa } from "abab";
 import { stringify as queryStringify } from "qs";
 

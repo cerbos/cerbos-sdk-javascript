@@ -1,4 +1,5 @@
-import { Client, _Transport } from "@cerbos/core";
+import type { _Transport } from "@cerbos/core";
+import { Client } from "@cerbos/core";
 
 import { Server } from "./server";
 import type { DecodeJWTPayload } from "./types/external";

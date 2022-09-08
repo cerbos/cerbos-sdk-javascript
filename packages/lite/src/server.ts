@@ -1,12 +1,5 @@
-import {
-  JWT,
-  NotOK,
-  Status,
-  _RPC,
-  _Request,
-  _Response,
-  _Service,
-} from "@cerbos/core";
+import type { JWT, _RPC, _Request, _Response, _Service } from "@cerbos/core";
+import { NotOK, Status } from "@cerbos/core";
 
 import { CheckResourcesRequest } from "./protobuf/cerbos/request/v1/request";
 import { CheckResourcesResponse } from "./protobuf/cerbos/response/v1/response";
