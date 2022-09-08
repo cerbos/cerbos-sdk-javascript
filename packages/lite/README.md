@@ -8,6 +8,8 @@ Client library for interacting with WebAssembly Cerbos policy bundles from serve
 
 - Node.js 14+
 
+  Note that for Node.js 14.x you'll need to pass the `--experimental-wasm-bigint` V8 flag to `node` as a command-line argument (not in the `NODE_OPTIONS` environment variable).
+
 ## Installation
 
 ```console
