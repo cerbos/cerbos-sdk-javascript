@@ -25,7 +25,7 @@ export enum Scheme {
  *    info: {
  *      title: "Echo API";
  *      version: "1.0";
- *      description: ";
+ *      description: "";
  *      contact: {
  *        name: "gRPC-Gateway project";
  *        url: "https://github.com/grpc-ecosystem/grpc-gateway";
@@ -306,7 +306,7 @@ export interface Response_ExtensionsEntry {
  *    info: {
  *      title: "Echo API";
  *      version: "1.0";
- *      description: ";
+ *      description: "";
  *      contact: {
  *        name: "gRPC-Gateway project";
  *        url: "https://github.com/grpc-ecosystem/grpc-gateway";
@@ -558,6 +558,9 @@ export interface JSONSchema {
   format: string;
   /** Items in `enum` must be unique https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.5.1 */
   enum: string[];
+  /** Additional field level properties used when generating the OpenAPI v2 file. */
+  fieldConfiguration: JSONSchema_FieldConfiguration | undefined;
+  extensions: { [key: string]: any | undefined };
 }
 
 export enum JSONSchema_JSONSchemaSimpleTypes {
@@ -569,6 +572,25 @@ export enum JSONSchema_JSONSchemaSimpleTypes {
   NUMBER = 5,
   OBJECT = 6,
   STRING = 7,
+}
+
+/**
+ * 'FieldConfiguration' provides additional field level properties used when generating the OpenAPI v2 file.
+ * These properties are not defined by OpenAPIv2, but they are used to control the generation.
+ */
+export interface JSONSchema_FieldConfiguration {
+  /**
+   * Alternative parameter name when used as path parameter. If set, this will
+   * be used as the complete parameter name when this field is used as a path
+   * parameter. Use this to avoid having auto generated path parameter names
+   * for overlapping paths.
+   */
+  pathParamName: string;
+}
+
+export interface JSONSchema_ExtensionsEntry {
+  key: string;
+  value: any | undefined;
 }
 
 /**

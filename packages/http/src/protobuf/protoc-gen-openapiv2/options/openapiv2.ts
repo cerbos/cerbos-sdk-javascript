@@ -64,7 +64,7 @@ export function schemeToJSON(object: Scheme): string {
  *    info: {
  *      title: "Echo API";
  *      version: "1.0";
- *      description: ";
+ *      description: "";
  *      contact: {
  *        name: "gRPC-Gateway project";
  *        url: "https://github.com/grpc-ecosystem/grpc-gateway";
@@ -345,7 +345,7 @@ export interface Response_ExtensionsEntry {
  *    info: {
  *      title: "Echo API";
  *      version: "1.0";
- *      description: ";
+ *      description: "";
  *      contact: {
  *        name: "gRPC-Gateway project";
  *        url: "https://github.com/grpc-ecosystem/grpc-gateway";
@@ -597,6 +597,9 @@ export interface JSONSchema {
   format: string;
   /** Items in `enum` must be unique https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.5.1 */
   enum: string[];
+  /** Additional field level properties used when generating the OpenAPI v2 file. */
+  fieldConfiguration: JSONSchema_FieldConfiguration | undefined;
+  extensions: { [key: string]: any | undefined };
 }
 
 export enum JSONSchema_JSONSchemaSimpleTypes {
@@ -662,6 +665,25 @@ export function jSONSchema_JSONSchemaSimpleTypesToJSON(object: JSONSchema_JSONSc
     default:
       throw new globalThis.Error("Unrecognized enum value " + object + " for enum JSONSchema_JSONSchemaSimpleTypes");
   }
+}
+
+/**
+ * 'FieldConfiguration' provides additional field level properties used when generating the OpenAPI v2 file.
+ * These properties are not defined by OpenAPIv2, but they are used to control the generation.
+ */
+export interface JSONSchema_FieldConfiguration {
+  /**
+   * Alternative parameter name when used as path parameter. If set, this will
+   * be used as the complete parameter name when this field is used as a path
+   * parameter. Use this to avoid having auto generated path parameter names
+   * for overlapping paths.
+   */
+  pathParamName: string;
+}
+
+export interface JSONSchema_ExtensionsEntry {
+  key: string;
+  value: any | undefined;
 }
 
 /**
@@ -1532,6 +1554,8 @@ function createBaseJSONSchema(): JSONSchema {
     type: [],
     format: "",
     enum: [],
+    fieldConfiguration: undefined,
+    extensions: {},
   };
 }
 
@@ -1564,6 +1588,15 @@ export const JSONSchema = {
       type: Array.isArray(object?.type) ? object.type.map((e: any) => jSONSchema_JSONSchemaSimpleTypesFromJSON(e)) : [],
       format: isSet(object.format) ? String(object.format) : "",
       enum: Array.isArray(object?.enum) ? object.enum.map((e: any) => String(e)) : [],
+      fieldConfiguration: isSet(object.fieldConfiguration)
+        ? JSONSchema_FieldConfiguration.fromJSON(object.fieldConfiguration)
+        : undefined,
+      extensions: isObject(object.extensions)
+        ? Object.entries(object.extensions).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
+          acc[key] = value as any | undefined;
+          return acc;
+        }, {})
+        : {},
     };
   },
 
@@ -1609,6 +1642,48 @@ export const JSONSchema = {
     } else {
       obj.enum = [];
     }
+    message.fieldConfiguration !== undefined && (obj.fieldConfiguration = message.fieldConfiguration
+      ? JSONSchema_FieldConfiguration.toJSON(message.fieldConfiguration)
+      : undefined);
+    obj.extensions = {};
+    if (message.extensions) {
+      Object.entries(message.extensions).forEach(([k, v]) => {
+        obj.extensions[k] = v;
+      });
+    }
+    return obj;
+  },
+};
+
+function createBaseJSONSchema_FieldConfiguration(): JSONSchema_FieldConfiguration {
+  return { pathParamName: "" };
+}
+
+export const JSONSchema_FieldConfiguration = {
+  fromJSON(object: any): JSONSchema_FieldConfiguration {
+    return { pathParamName: isSet(object.pathParamName) ? String(object.pathParamName) : "" };
+  },
+
+  toJSON(message: JSONSchema_FieldConfiguration): unknown {
+    const obj: any = {};
+    message.pathParamName !== undefined && (obj.pathParamName = message.pathParamName);
+    return obj;
+  },
+};
+
+function createBaseJSONSchema_ExtensionsEntry(): JSONSchema_ExtensionsEntry {
+  return { key: "", value: undefined };
+}
+
+export const JSONSchema_ExtensionsEntry = {
+  fromJSON(object: any): JSONSchema_ExtensionsEntry {
+    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+  },
+
+  toJSON(message: JSONSchema_ExtensionsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 };

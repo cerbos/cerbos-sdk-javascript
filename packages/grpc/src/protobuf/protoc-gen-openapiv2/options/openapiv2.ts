@@ -28,7 +28,7 @@ export enum Scheme {
  *    info: {
  *      title: "Echo API";
  *      version: "1.0";
- *      description: ";
+ *      description: "";
  *      contact: {
  *        name: "gRPC-Gateway project";
  *        url: "https://github.com/grpc-ecosystem/grpc-gateway";
@@ -309,7 +309,7 @@ export interface Response_ExtensionsEntry {
  *    info: {
  *      title: "Echo API";
  *      version: "1.0";
- *      description: ";
+ *      description: "";
  *      contact: {
  *        name: "gRPC-Gateway project";
  *        url: "https://github.com/grpc-ecosystem/grpc-gateway";
@@ -561,6 +561,9 @@ export interface JSONSchema {
   format: string;
   /** Items in `enum` must be unique https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.5.1 */
   enum: string[];
+  /** Additional field level properties used when generating the OpenAPI v2 file. */
+  fieldConfiguration: JSONSchema_FieldConfiguration | undefined;
+  extensions: { [key: string]: any | undefined };
 }
 
 export enum JSONSchema_JSONSchemaSimpleTypes {
@@ -572,6 +575,25 @@ export enum JSONSchema_JSONSchemaSimpleTypes {
   NUMBER = 5,
   OBJECT = 6,
   STRING = 7,
+}
+
+/**
+ * 'FieldConfiguration' provides additional field level properties used when generating the OpenAPI v2 file.
+ * These properties are not defined by OpenAPIv2, but they are used to control the generation.
+ */
+export interface JSONSchema_FieldConfiguration {
+  /**
+   * Alternative parameter name when used as path parameter. If set, this will
+   * be used as the complete parameter name when this field is used as a path
+   * parameter. Use this to avoid having auto generated path parameter names
+   * for overlapping paths.
+   */
+  pathParamName: string;
+}
+
+export interface JSONSchema_ExtensionsEntry {
+  key: string;
+  value: any | undefined;
 }
 
 /**
@@ -1709,6 +1731,8 @@ function createBaseJSONSchema(): JSONSchema {
     type: [],
     format: "",
     enum: [],
+    fieldConfiguration: undefined,
+    extensions: {},
   };
 }
 
@@ -1788,6 +1812,14 @@ export const JSONSchema = {
     for (const v of message.enum) {
       writer.uint32(370).string(v!);
     }
+    if (message.fieldConfiguration !== undefined) {
+      JSONSchema_FieldConfiguration.encode(message.fieldConfiguration, writer.uint32(8010).fork()).ldelim();
+    }
+    Object.entries(message.extensions).forEach(([key, value]) => {
+      if (value !== undefined) {
+        JSONSchema_ExtensionsEntry.encode({ key: key as any, value }, writer.uint32(386).fork()).ldelim();
+      }
+    });
     return writer;
   },
 
@@ -1876,6 +1908,83 @@ export const JSONSchema = {
           break;
         case 46:
           message.enum.push(reader.string());
+          break;
+        case 1001:
+          message.fieldConfiguration = JSONSchema_FieldConfiguration.decode(reader, reader.uint32());
+          break;
+        case 48:
+          const entry48 = JSONSchema_ExtensionsEntry.decode(reader, reader.uint32());
+          if (entry48.value !== undefined) {
+            message.extensions[entry48.key] = entry48.value;
+          }
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBaseJSONSchema_FieldConfiguration(): JSONSchema_FieldConfiguration {
+  return { pathParamName: "" };
+}
+
+export const JSONSchema_FieldConfiguration = {
+  encode(message: JSONSchema_FieldConfiguration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.pathParamName !== "") {
+      writer.uint32(378).string(message.pathParamName);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): JSONSchema_FieldConfiguration {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseJSONSchema_FieldConfiguration();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 47:
+          message.pathParamName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBaseJSONSchema_ExtensionsEntry(): JSONSchema_ExtensionsEntry {
+  return { key: "", value: undefined };
+}
+
+export const JSONSchema_ExtensionsEntry = {
+  encode(message: JSONSchema_ExtensionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+    if (message.value !== undefined) {
+      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): JSONSchema_ExtensionsEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseJSONSchema_ExtensionsEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+        case 2:
+          message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
