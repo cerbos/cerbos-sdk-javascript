@@ -54,5 +54,7 @@ matrix = {
   ]
 }
 
-puts "::set-output name=matrix::#{matrix.to_json}"
 puts JSON.pretty_generate(matrix)
+
+output_file = ENV["GITHUB_OUTPUT"]
+File.write output_file, "matrix=#{matrix.to_json}" if output_file
