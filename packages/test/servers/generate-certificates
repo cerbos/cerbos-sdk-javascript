@@ -54,7 +54,3 @@ end
 
 generate_self_signed_certificate "server"
 generate_self_signed_certificate "client"
-
-# `docker compose up --wait` hangs if containers have exited (https://github.com/docker/compose/issues/9273)
-File.write "/healthy", ""
-exec "sleep", "infinity"
