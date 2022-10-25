@@ -1,0 +1,43 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    ":dependencyDashboard",
+    ":gitSignOff",
+    ":ignoreModulesAndTests",
+    ":prConcurrentLimit10",
+    ":prHourlyLimit2",
+    "npm:unpublishSafe",
+    "workarounds:all"
+  ],
+  "packageRules": [
+    {
+      "matchDepTypes": ["dependencies"],
+      "rangeStrategy": "bump",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "rangeStrategy": "pin",
+      "semanticCommitScope": "deps-dev"
+    },
+    {
+      "matchPackageNames": ["@types/node", "node-fetch", "long", "protobufjs"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "matchPackagePrefixes": ["@microsoft/api-"],
+      "groupName": "docs"
+    },
+    {
+      "matchPackagePrefixes": ["@typescript-eslint/", "eslint", "prettier"],
+      "groupName": "lint"
+    },
+    {
+      "matchPackageNames": ["jest", "ts-jest"],
+      "groupName": "test"
+    }
+  ],
+  "reviewers": ["haines"],
+  "semanticCommitType": "chore"
+}
