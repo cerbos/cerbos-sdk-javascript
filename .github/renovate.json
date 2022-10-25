@@ -21,6 +21,10 @@
       "semanticCommitScope": "deps-dev"
     },
     {
+      "matchManagers": ["nodenv"],
+      "semanticCommitScope": "deps-dev"
+    },
+    {
       "matchPackageNames": ["@types/node", "node-fetch", "long", "protobufjs"],
       "matchUpdateTypes": ["major"],
       "enabled": false
