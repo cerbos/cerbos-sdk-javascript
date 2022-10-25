@@ -27,6 +27,6 @@ jobs:
             revert
             test
           requireScope: false
-          subjectPattern: ${{ github.event.pull_request.user.login == 'renovate[bot]' && '' || '^[A-Z].+$' }}
+          subjectPattern: ${{ github.event.pull_request.user.login == 'renovate[bot]' && '^.+$' || '^[A-Z].+$' }}
           subjectPatternError: Subject "{subject}" does not start with an uppercase letter
           validateSingleCommit: true
