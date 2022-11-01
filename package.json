@@ -3,6 +3,10 @@
   "workspaces": [
     "packages/*"
   ],
+  "engines": {
+    "node": "19.0.0",
+    "npm": "8.19.2"
+  },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
     "all:sequential": "concurrently --max-processes=1 --prefix=none",
