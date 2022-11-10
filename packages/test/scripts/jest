@@ -3,8 +3,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+jest=$(which jest)
+
 node_version=$(node --version)
-npm_bin=$(npm bin)
 
 node_command=(node)
 
@@ -16,4 +17,4 @@ esac
 
 export NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt
 
-exec "${node_command[@]}" "${npm_bin}/jest" "$@"
+exec "${node_command[@]}" "${jest}" "$@"
