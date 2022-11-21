@@ -9,7 +9,7 @@ Definition of a JSON schema used to validate principal or resource attributes.
 <b>Signature:</b>
 
 ```typescript
-export declare type SchemaDefinitionInput = string | Uint8Array | Record<string, unknown> | SchemaDefinition;
+export type SchemaDefinitionInput = string | Uint8Array | Record<string, unknown> | SchemaDefinition;
 ```
 <b>References:</b> [SchemaDefinition](./core.schemadefinition.md)
 

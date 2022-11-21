@@ -81,7 +81,7 @@ export class NotOK extends Error {
      */
     public readonly details: string
   ) {
-    super(`gRPC error ${code} (${Status[code] ?? "unrecognized"}): ${details}`);
+    super(`gRPC error ${code} (${Status[code]}): ${details}`);
     this.name = this.constructor.name;
     Error.captureStackTrace(this, this.constructor);
   }

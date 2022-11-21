@@ -9,7 +9,7 @@ A [policy](https://docs.cerbos.dev/cerbos/latest/policies/index.html) definition
 <b>Signature:</b>
 
 ```typescript
-export declare type Policy = DerivedRoles | PrincipalPolicy | ResourcePolicy;
+export type Policy = DerivedRoles | PrincipalPolicy | ResourcePolicy;
 ```
 <b>References:</b> [DerivedRoles](./core.derivedroles.md)<!-- -->, [PrincipalPolicy](./core.principalpolicy.md)<!-- -->, [ResourcePolicy](./core.resourcepolicy.md)
 

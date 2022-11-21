@@ -9,7 +9,7 @@ The decoded payload of a JWT, containing the claims.
 <b>Signature:</b>
 
 ```typescript
-export declare type DecodedJWTPayload = Record<string, Value>;
+export type DecodedJWTPayload = Record<string, Value>;
 ```
 <b>References:</b> [Value](./core.value.md)
 

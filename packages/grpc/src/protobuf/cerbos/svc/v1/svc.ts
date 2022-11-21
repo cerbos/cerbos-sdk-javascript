@@ -2,8 +2,8 @@
 import {
   CallOptions,
   ChannelCredentials,
-  ChannelOptions,
   Client,
+  ClientOptions,
   ClientReadableStream,
   ClientUnaryCall,
   handleServerStreamingCall,
@@ -198,7 +198,7 @@ export const CerbosServiceClient = makeGenericClientConstructor(
   CerbosServiceService,
   "cerbos.svc.v1.CerbosService",
 ) as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ChannelOptions>): CerbosServiceClient;
+  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): CerbosServiceClient;
   service: typeof CerbosServiceService;
 };
 
@@ -439,7 +439,7 @@ export const CerbosAdminServiceClient = makeGenericClientConstructor(
   CerbosAdminServiceService,
   "cerbos.svc.v1.CerbosAdminService",
 ) as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ChannelOptions>): CerbosAdminServiceClient;
+  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): CerbosAdminServiceClient;
   service: typeof CerbosAdminServiceService;
 };
 
@@ -564,7 +564,7 @@ export const CerbosPlaygroundServiceClient = makeGenericClientConstructor(
   new (
     address: string,
     credentials: ChannelCredentials,
-    options?: Partial<ChannelOptions>,
+    options?: Partial<ClientOptions>,
   ): CerbosPlaygroundServiceClient;
   service: typeof CerbosPlaygroundServiceService;
 };

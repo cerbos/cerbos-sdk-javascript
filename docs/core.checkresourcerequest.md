@@ -9,7 +9,7 @@ Input to [Client.checkResource()](./core.client.checkresource.md)<!-- -->.
 <b>Signature:</b>
 
 ```typescript
-export declare type CheckResourceRequest = Omit<CheckResourcesRequest, "resources"> & ResourceCheck;
+export type CheckResourceRequest = Omit<CheckResourcesRequest, "resources"> & ResourceCheck;
 ```
 <b>References:</b> [CheckResourcesRequest](./core.checkresourcesrequest.md)<!-- -->, [ResourceCheck](./core.resourcecheck.md)
 
