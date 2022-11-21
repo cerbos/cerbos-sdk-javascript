@@ -133,7 +133,7 @@ const validationErrorSourceFromProtobuf = (
     default:
       throw new Error(
         `Unexpected validation error source ${source} (${
-          ValidationError_Source[source] ?? "unrecognized"
+          ValidationError_Source[source as number] ?? "unrecognized"
         })`
       );
   }
@@ -410,7 +410,7 @@ const planKindFromProtobuf = (kind: PlanResourcesFilter_Kind): PlanKind => {
     default:
       throw new Error(
         `Unexpected PlanResources filter kind ${kind} (${
-          PlanResourcesFilter_Kind[kind] ?? "unrecognized"
+          PlanResourcesFilter_Kind[kind as number] ?? "unrecognized"
         })`
       );
   }
