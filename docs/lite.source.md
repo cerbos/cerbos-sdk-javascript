@@ -9,5 +9,5 @@ WebAssembly binary code of a policy bundle (or an HTTP response from which to st
 <b>Signature:</b>
 
 ```typescript
-export declare type Source = ArrayBufferView | ArrayBuffer | Response | Promise<Response>;
+export type Source = ArrayBufferView | ArrayBuffer | Response | Promise<Response>;
 ```

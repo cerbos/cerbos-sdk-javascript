@@ -9,7 +9,7 @@ Input to [Client.isAllowed()](./core.client.isallowed.md)<!-- -->.
 <b>Signature:</b>
 
 ```typescript
-export declare type IsAllowedRequest = Omit<CheckResourceRequest, "actions"> & {
+export type IsAllowedRequest = Omit<CheckResourceRequest, "actions"> & {
     action: string;
 };
 ```

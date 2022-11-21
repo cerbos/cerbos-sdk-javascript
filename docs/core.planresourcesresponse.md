@@ -9,7 +9,7 @@ A query plan that can be used to obtain a list of resources on which a principal
 <b>Signature:</b>
 
 ```typescript
-export declare type PlanResourcesResponse = PlanResourcesConditionalResponse | PlanResourcesUnconditionalResponse;
+export type PlanResourcesResponse = PlanResourcesConditionalResponse | PlanResourcesUnconditionalResponse;
 ```
 <b>References:</b> [PlanResourcesConditionalResponse](./core.planresourcesconditionalresponse.md)<!-- -->, [PlanResourcesUnconditionalResponse](./core.planresourcesunconditionalresponse.md)
 

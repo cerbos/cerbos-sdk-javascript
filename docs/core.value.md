@@ -9,7 +9,7 @@ Any JSON-serializable value.
 <b>Signature:</b>
 
 ```typescript
-export declare type Value = string | number | boolean | null | {
+export type Value = string | number | boolean | null | {
     [key: string]: Value;
 } | Value[];
 ```

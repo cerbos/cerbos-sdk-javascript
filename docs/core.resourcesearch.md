@@ -9,7 +9,7 @@ Search criteria to match a resource in results.
 <b>Signature:</b>
 
 ```typescript
-export declare type ResourceSearch = Omit<Resource, "attributes">;
+export type ResourceSearch = Omit<Resource, "attributes">;
 ```
 <b>References:</b> [Resource](./core.resource.md)
 
