@@ -39,8 +39,16 @@ import { HTTP } from "@cerbos/http";
 const cerbos = new HTTP("http://localhost:3592");
 
 await cerbos.isAllowed({
-  principal: { id: "user@example.com", roles: ["USER"] },
-  resource: { kind: "document", id: "1" },
+  principal: {
+    id: "user@example.com",
+    roles: ["USER"],
+    attributes: { tier: "PREMIUM" },
+  },
+  resource: {
+    kind: "document",
+    id: "1",
+    attributes: { owner: "user@example.com" },
+  },
   action: "view",
 }); // => true
 ```

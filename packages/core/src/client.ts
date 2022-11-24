@@ -194,8 +194,16 @@ export abstract class Client {
    * @example
    * ```typescript
    * const decision = await cerbos.checkResource({
-   *   principal: { id: "user@example.com", roles: ["USER"] },
-   *   resource: { kind: "document", id: "1" },
+   *   principal: {
+   *     id: "user@example.com",
+   *     roles: ["USER"],
+   *     attributes: { tier: "PREMIUM" },
+   *   },
+   *   resource: {
+   *     kind: "document",
+   *     id: "1",
+   *     attributes: { owner: "user@example.com" },
+   *   },
    *   actions: ["view", "edit"],
    * });
    *
@@ -226,14 +234,26 @@ export abstract class Client {
    * @example
    * ```typescript
    * const decision = await cerbos.checkResources({
-   *   principal: { id: "user@example.com", roles: ["USER"] },
+   *   principal: {
+   *     id: "user@example.com",
+   *     roles: ["USER"],
+   *     attributes: { tier: "PREMIUM" },
+   *   },
    *   resources: [
    *     {
-   *       resource: { kind: "document", id: "1" },
+   *       resource: {
+   *         kind: "document",
+   *         id: "1",
+   *         attributes: { owner: "user@example.com" },
+   *       },
    *       actions: ["view", "edit"],
    *     },
    *     {
-   *       resource: { kind: "image", id: "1" },
+   *       resource: {
+   *         kind: "image",
+   *         id: "1",
+   *         attributes: { owner: "user@example.com" },
+   *       },
    *       actions: ["delete"],
    *     },
    *   ],
@@ -406,8 +426,16 @@ export abstract class Client {
    * @example
    * ```typescript
    * await cerbos.isAllowed({
-   *   principal: { id: "user@example.com", roles: ["USER"] },
-   *   resource: { kind: "document", id: "1" },
+   *   principal: {
+   *     id: "user@example.com",
+   *     roles: ["USER"],
+   *     attributes: { tier: "PREMIUM" },
+   *   },
+   *   resource: {
+   *     kind: "document",
+   *     id: "1",
+   *     attributes: { owner: "user@example.com" },
+   *   },
    *   action: "view",
    * }); // => true
    * ```
@@ -470,7 +498,11 @@ export abstract class Client {
    * @example
    * ```typescript
    * const plan = await cerbos.planResources({
-   *   principal: { id: "user@example.com", roles: ["USER"] },
+   *   principal: {
+   *     id: "user@example.com",
+   *     roles: ["USER"],
+   *     attributes: { tier: "PREMIUM" },
+   *   },
    *   resource: { kind: "document" },
    * });
    * ```
