@@ -27,14 +27,26 @@ Promise&lt;[CheckResourcesResponse](./core.checkresourcesresponse.md)<!-- -->&gt
 
 ```typescript
 const decision = await cerbos.checkResources({
-  principal: { id: "user@example.com", roles: ["USER"] },
+  principal: {
+    id: "user@example.com",
+    roles: ["USER"],
+    attributes: { tier: "PREMIUM" },
+  },
   resources: [
     {
-      resource: { kind: "document", id: "1" },
+      resource: {
+        kind: "document",
+        id: "1",
+        attributes: { owner: "user@example.com" },
+      },
       actions: ["view", "edit"],
     },
     {
-      resource: { kind: "image", id: "1" },
+      resource: {
+        kind: "image",
+        id: "1",
+        attributes: { owner: "user@example.com" },
+      },
       actions: ["delete"],
     },
   ],

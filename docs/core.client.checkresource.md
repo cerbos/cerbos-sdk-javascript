@@ -27,8 +27,16 @@ Promise&lt;[CheckResourcesResult](./core.checkresourcesresult.md)<!-- -->&gt;
 
 ```typescript
 const decision = await cerbos.checkResource({
-  principal: { id: "user@example.com", roles: ["USER"] },
-  resource: { kind: "document", id: "1" },
+  principal: {
+    id: "user@example.com",
+    roles: ["USER"],
+    attributes: { tier: "PREMIUM" },
+  },
+  resource: {
+    kind: "document",
+    id: "1",
+    attributes: { owner: "user@example.com" },
+  },
   actions: ["view", "edit"],
 });
 

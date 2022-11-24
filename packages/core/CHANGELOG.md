@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Document principal and resource `attributes` fields in examples ([#358](https://github.com/cerbos/cerbos-sdk-javascript/pull/358))
 
 ## [0.8.0] - 2022-09-08
 

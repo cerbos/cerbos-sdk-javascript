@@ -27,7 +27,11 @@ Promise&lt;[PlanResourcesResponse](./core.planresourcesresponse.md)<!-- -->&gt;
 
 ```typescript
 const plan = await cerbos.planResources({
-  principal: { id: "user@example.com", roles: ["USER"] },
+  principal: {
+    id: "user@example.com",
+    roles: ["USER"],
+    attributes: { tier: "PREMIUM" },
+  },
   resource: { kind: "document" },
 });
 ```
