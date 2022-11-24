@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.8.1] - 2022-11-24
+
 ### Changed
 
 - Document principal and resource `attributes` fields in examples ([#358](https://github.com/cerbos/cerbos-sdk-javascript/pull/358))
@@ -43,7 +47,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.8.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.8.1...HEAD
+[0.8.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.8.0...@cerbos/http@0.8.1
 [0.8.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.7.1...@cerbos/http@0.8.0
 [0.7.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.7.0...@cerbos/http@0.7.1
 [0.7.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.6.0...@cerbos/http@0.7.0
