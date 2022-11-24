@@ -7,8 +7,8 @@
     "test:watch": "scripts/jest --watch"
   },
   "dependencies": {
-    "@cerbos/grpc": "^0.8.0",
-    "@cerbos/http": "^0.8.0",
-    "@cerbos/lite": "^0.1.0-alpha"
+    "@cerbos/grpc": "^0.8.1",
+    "@cerbos/http": "^0.8.1",
+    "@cerbos/lite": "^0.1.1-alpha"
   }
 }
