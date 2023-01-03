@@ -33,6 +33,7 @@ export interface DecisionLogEntry {
     $case: "planResources";
     planResources: DecisionLogEntry_PlanResources;
   };
+  metadata: { [key: string]: MetaValues };
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -45,6 +46,11 @@ export interface DecisionLogEntry_PlanResources {
   input: PlanResourcesInput | undefined;
   output: PlanResourcesOutput | undefined;
   error: string;
+}
+
+export interface DecisionLogEntry_MetadataEntry {
+  key: string;
+  value: MetaValues | undefined;
 }
 
 export interface MetaValues {

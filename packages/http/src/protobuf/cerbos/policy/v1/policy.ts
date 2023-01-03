@@ -252,7 +252,7 @@ export function testResults_ResultFromJSON(object: any): TestResults_Result {
     case "RESULT_ERRORED":
       return TestResults_Result.RESULT_ERRORED;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum TestResults_Result");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum TestResults_Result");
   }
 }
 
@@ -269,7 +269,7 @@ export function testResults_ResultToJSON(object: TestResults_Result): string {
     case TestResults_Result.RESULT_ERRORED:
       return "RESULT_ERRORED";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum TestResults_Result");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum TestResults_Result");
   }
 }
 
@@ -1551,7 +1551,7 @@ export const TestResults_Failure = {
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
+var tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
