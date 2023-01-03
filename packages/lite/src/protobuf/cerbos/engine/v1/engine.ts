@@ -66,7 +66,7 @@ export function planResourcesAst_LogicalOperation_OperatorFromJSON(
     case "OPERATOR_NOT":
       return PlanResourcesAst_LogicalOperation_Operator.OPERATOR_NOT;
     default:
-      throw new globalThis.Error(
+      throw new tsProtoGlobalThis.Error(
         "Unrecognized enum value " + object + " for enum PlanResourcesAst_LogicalOperation_Operator",
       );
   }
@@ -85,7 +85,7 @@ export function planResourcesAst_LogicalOperation_OperatorToJSON(
     case PlanResourcesAst_LogicalOperation_Operator.OPERATOR_NOT:
       return "OPERATOR_NOT";
     default:
-      throw new globalThis.Error(
+      throw new tsProtoGlobalThis.Error(
         "Unrecognized enum value " + object + " for enum PlanResourcesAst_LogicalOperation_Operator",
       );
   }
@@ -118,7 +118,7 @@ export function planResourcesFilter_KindFromJSON(object: any): PlanResourcesFilt
     case "KIND_CONDITIONAL":
       return PlanResourcesFilter_Kind.KIND_CONDITIONAL;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlanResourcesFilter_Kind");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum PlanResourcesFilter_Kind");
   }
 }
 
@@ -133,7 +133,7 @@ export function planResourcesFilter_KindToJSON(object: PlanResourcesFilter_Kind)
     case PlanResourcesFilter_Kind.KIND_CONDITIONAL:
       return "KIND_CONDITIONAL";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum PlanResourcesFilter_Kind");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum PlanResourcesFilter_Kind");
   }
 }
 
@@ -303,7 +303,7 @@ export function trace_Component_KindFromJSON(object: any): Trace_Component_Kind 
     case "KIND_VARIABLES":
       return Trace_Component_Kind.KIND_VARIABLES;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Trace_Component_Kind");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Trace_Component_Kind");
   }
 }
 
@@ -338,7 +338,7 @@ export function trace_Component_KindToJSON(object: Trace_Component_Kind): string
     case Trace_Component_Kind.KIND_VARIABLES:
       return "KIND_VARIABLES";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Trace_Component_Kind");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Trace_Component_Kind");
   }
 }
 
@@ -373,7 +373,7 @@ export function trace_Event_StatusFromJSON(object: any): Trace_Event_Status {
     case "STATUS_SKIPPED":
       return Trace_Event_Status.STATUS_SKIPPED;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Trace_Event_Status");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Trace_Event_Status");
   }
 }
 
@@ -386,7 +386,7 @@ export function trace_Event_StatusToJSON(object: Trace_Event_Status): string {
     case Trace_Event_Status.STATUS_SKIPPED:
       return "STATUS_SKIPPED";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Trace_Event_Status");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Trace_Event_Status");
   }
 }
 
@@ -1074,7 +1074,7 @@ export const Trace_Event = {
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
+var tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }

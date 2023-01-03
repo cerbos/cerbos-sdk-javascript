@@ -35,6 +35,7 @@ export interface DecisionLogEntry {
     $case: "planResources";
     planResources: DecisionLogEntry_PlanResources;
   };
+  metadata: { [key: string]: MetaValues };
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -47,6 +48,11 @@ export interface DecisionLogEntry_PlanResources {
   input: PlanResourcesInput | undefined;
   output: PlanResourcesOutput | undefined;
   error: string;
+}
+
+export interface DecisionLogEntry_MetadataEntry {
+  key: string;
+  value: MetaValues | undefined;
 }
 
 export interface MetaValues {
@@ -162,7 +168,16 @@ export const AccessLogEntry_MetadataEntry = {
 };
 
 function createBaseDecisionLogEntry(): DecisionLogEntry {
-  return { callId: "", timestamp: undefined, peer: undefined, inputs: [], outputs: [], error: "", method: undefined };
+  return {
+    callId: "",
+    timestamp: undefined,
+    peer: undefined,
+    inputs: [],
+    outputs: [],
+    error: "",
+    method: undefined,
+    metadata: {},
+  };
 }
 
 export const DecisionLogEntry = {
@@ -191,6 +206,9 @@ export const DecisionLogEntry = {
     if (message.method?.$case === "planResources") {
       DecisionLogEntry_PlanResources.encode(message.method.planResources, writer.uint32(66).fork()).ldelim();
     }
+    Object.entries(message.metadata).forEach(([key, value]) => {
+      DecisionLogEntry_MetadataEntry.encode({ key: key as any, value }, writer.uint32(122).fork()).ldelim();
+    });
     return writer;
   },
 
@@ -230,6 +248,12 @@ export const DecisionLogEntry = {
             $case: "planResources",
             planResources: DecisionLogEntry_PlanResources.decode(reader, reader.uint32()),
           };
+          break;
+        case 15:
+          const entry15 = DecisionLogEntry_MetadataEntry.decode(reader, reader.uint32());
+          if (entry15.value !== undefined) {
+            message.metadata[entry15.key] = entry15.value;
+          }
           break;
         default:
           reader.skipType(tag & 7);
@@ -316,6 +340,43 @@ export const DecisionLogEntry_PlanResources = {
           break;
         case 3:
           message.error = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBaseDecisionLogEntry_MetadataEntry(): DecisionLogEntry_MetadataEntry {
+  return { key: "", value: undefined };
+}
+
+export const DecisionLogEntry_MetadataEntry = {
+  encode(message: DecisionLogEntry_MetadataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+    if (message.value !== undefined) {
+      MetaValues.encode(message.value, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): DecisionLogEntry_MetadataEntry {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDecisionLogEntry_MetadataEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.string();
+          break;
+        case 2:
+          message.value = MetaValues.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);

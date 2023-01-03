@@ -19,7 +19,7 @@ export function nullValueFromJSON(object: any): NullValue {
     case "NULL_VALUE":
       return NullValue.NULL_VALUE;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum NullValue");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum NullValue");
   }
 }
 
@@ -28,7 +28,7 @@ export function nullValueToJSON(object: NullValue): string {
     case NullValue.NULL_VALUE:
       return "NULL_VALUE";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum NullValue");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum NullValue");
   }
 }
 
@@ -254,7 +254,7 @@ export const ListValue = {
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
+var tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }

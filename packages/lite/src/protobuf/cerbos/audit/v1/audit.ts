@@ -34,6 +34,7 @@ export interface DecisionLogEntry {
     $case: "planResources";
     planResources: DecisionLogEntry_PlanResources;
   };
+  metadata: { [key: string]: MetaValues };
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -46,6 +47,11 @@ export interface DecisionLogEntry_PlanResources {
   input: PlanResourcesInput | undefined;
   output: PlanResourcesOutput | undefined;
   error: string;
+}
+
+export interface DecisionLogEntry_MetadataEntry {
+  key: string;
+  value: MetaValues | undefined;
 }
 
 export interface MetaValues {
@@ -118,7 +124,16 @@ export const AccessLogEntry_MetadataEntry = {
 };
 
 function createBaseDecisionLogEntry(): DecisionLogEntry {
-  return { callId: "", timestamp: undefined, peer: undefined, inputs: [], outputs: [], error: "", method: undefined };
+  return {
+    callId: "",
+    timestamp: undefined,
+    peer: undefined,
+    inputs: [],
+    outputs: [],
+    error: "",
+    method: undefined,
+    metadata: {},
+  };
 }
 
 export const DecisionLogEntry = {
@@ -135,6 +150,12 @@ export const DecisionLogEntry = {
         : isSet(object.planResources)
         ? { $case: "planResources", planResources: DecisionLogEntry_PlanResources.fromJSON(object.planResources) }
         : undefined,
+      metadata: isObject(object.metadata)
+        ? Object.entries(object.metadata).reduce<{ [key: string]: MetaValues }>((acc, [key, value]) => {
+          acc[key] = MetaValues.fromJSON(value);
+          return acc;
+        }, {})
+        : {},
     };
   },
 
@@ -160,6 +181,12 @@ export const DecisionLogEntry = {
     message.method?.$case === "planResources" && (obj.planResources = message.method?.planResources
       ? DecisionLogEntry_PlanResources.toJSON(message.method?.planResources)
       : undefined);
+    obj.metadata = {};
+    if (message.metadata) {
+      Object.entries(message.metadata).forEach(([k, v]) => {
+        obj.metadata[k] = MetaValues.toJSON(v);
+      });
+    }
     return obj;
   },
 };
@@ -213,6 +240,26 @@ export const DecisionLogEntry_PlanResources = {
     message.output !== undefined &&
       (obj.output = message.output ? PlanResourcesOutput.toJSON(message.output) : undefined);
     message.error !== undefined && (obj.error = message.error);
+    return obj;
+  },
+};
+
+function createBaseDecisionLogEntry_MetadataEntry(): DecisionLogEntry_MetadataEntry {
+  return { key: "", value: undefined };
+}
+
+export const DecisionLogEntry_MetadataEntry = {
+  fromJSON(object: any): DecisionLogEntry_MetadataEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? MetaValues.fromJSON(object.value) : undefined,
+    };
+  },
+
+  toJSON(message: DecisionLogEntry_MetadataEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value ? MetaValues.toJSON(message.value) : undefined);
     return obj;
   },
 };

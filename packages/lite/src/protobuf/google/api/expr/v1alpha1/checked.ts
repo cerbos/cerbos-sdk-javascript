@@ -139,7 +139,7 @@ export function type_PrimitiveTypeFromJSON(object: any): Type_PrimitiveType {
     case "BYTES":
       return Type_PrimitiveType.BYTES;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Type_PrimitiveType");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Type_PrimitiveType");
   }
 }
 
@@ -160,7 +160,7 @@ export function type_PrimitiveTypeToJSON(object: Type_PrimitiveType): string {
     case Type_PrimitiveType.BYTES:
       return "BYTES";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Type_PrimitiveType");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Type_PrimitiveType");
   }
 }
 
@@ -197,7 +197,7 @@ export function type_WellKnownTypeFromJSON(object: any): Type_WellKnownType {
     case "DURATION":
       return Type_WellKnownType.DURATION;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Type_WellKnownType");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Type_WellKnownType");
   }
 }
 
@@ -212,7 +212,7 @@ export function type_WellKnownTypeToJSON(object: Type_WellKnownType): string {
     case Type_WellKnownType.DURATION:
       return "DURATION";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Type_WellKnownType");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Type_WellKnownType");
   }
 }
 
@@ -773,7 +773,7 @@ export const Reference = {
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
+var tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }

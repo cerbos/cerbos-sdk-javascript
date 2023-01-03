@@ -32,7 +32,7 @@ export function schemeFromJSON(object: any): Scheme {
     case "WSS":
       return Scheme.WSS;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Scheme");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Scheme");
   }
 }
 
@@ -49,7 +49,7 @@ export function schemeToJSON(object: Scheme): string {
     case Scheme.WSS:
       return "WSS";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum Scheme");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Scheme");
   }
 }
 
@@ -640,7 +640,9 @@ export function jSONSchema_JSONSchemaSimpleTypesFromJSON(object: any): JSONSchem
     case "STRING":
       return JSONSchema_JSONSchemaSimpleTypes.STRING;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum JSONSchema_JSONSchemaSimpleTypes");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum JSONSchema_JSONSchemaSimpleTypes",
+      );
   }
 }
 
@@ -663,7 +665,9 @@ export function jSONSchema_JSONSchemaSimpleTypesToJSON(object: JSONSchema_JSONSc
     case JSONSchema_JSONSchemaSimpleTypes.STRING:
       return "STRING";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum JSONSchema_JSONSchemaSimpleTypes");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum JSONSchema_JSONSchemaSimpleTypes",
+      );
   }
 }
 
@@ -806,7 +810,7 @@ export function securityScheme_TypeFromJSON(object: any): SecurityScheme_Type {
     case "TYPE_OAUTH2":
       return SecurityScheme_Type.TYPE_OAUTH2;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Type");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Type");
   }
 }
 
@@ -821,7 +825,7 @@ export function securityScheme_TypeToJSON(object: SecurityScheme_Type): string {
     case SecurityScheme_Type.TYPE_OAUTH2:
       return "TYPE_OAUTH2";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Type");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Type");
   }
 }
 
@@ -844,7 +848,7 @@ export function securityScheme_InFromJSON(object: any): SecurityScheme_In {
     case "IN_HEADER":
       return SecurityScheme_In.IN_HEADER;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_In");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_In");
   }
 }
 
@@ -857,7 +861,7 @@ export function securityScheme_InToJSON(object: SecurityScheme_In): string {
     case SecurityScheme_In.IN_HEADER:
       return "IN_HEADER";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_In");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_In");
   }
 }
 
@@ -891,7 +895,7 @@ export function securityScheme_FlowFromJSON(object: any): SecurityScheme_Flow {
     case "FLOW_ACCESS_CODE":
       return SecurityScheme_Flow.FLOW_ACCESS_CODE;
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Flow");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Flow");
   }
 }
 
@@ -908,7 +912,7 @@ export function securityScheme_FlowToJSON(object: SecurityScheme_Flow): string {
     case SecurityScheme_Flow.FLOW_ACCESS_CODE:
       return "FLOW_ACCESS_CODE";
     default:
-      throw new globalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Flow");
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Flow");
   }
 }
 
@@ -1947,7 +1951,7 @@ export const Scopes_ScopeEntry = {
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
+var tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }
