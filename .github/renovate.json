@@ -26,7 +26,8 @@
       "matchFiles": [".node-version", "package.json"],
       "rangeStrategy": "pin",
       "semanticCommitScope": "deps-dev",
-      "versioning": "npm"
+      "versioning": "npm",
+      "extractVersion": "^v(?<version>.*)$"
     },
     {
       "matchPackageNames": ["@types/node", "node-fetch", "long", "protobufjs"],
