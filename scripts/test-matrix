@@ -25,6 +25,7 @@ Net::HTTP.start "api.github.com", 443, use_ssl: true do |http|
   until available_cerbos_versions.include?(minimum_cerbos_version)
     request = Net::HTTP::Get.new("/repos/cerbos/cerbos/releases?page=#{page}&per_page=100")
     request["Accept"] = "application/vnd.github.v3+json"
+    request["Authorization"] = "Bearer #{ENV["GITHUB_TOKEN"]}" if ENV["GITHUB_TOKEN"]
 
     response = http.request(request)
     response.value
