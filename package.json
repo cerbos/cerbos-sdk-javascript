@@ -53,7 +53,7 @@
     "jest": "29.3.1",
     "jose": "4.11.2",
     "node-fetch": "2.6.7",
-    "prettier": "2.8.1",
+    "prettier": "2.8.2",
     "prettier-plugin-pkg": "0.17.1",
     "semver": "7.3.8",
     "ts-jest": "29.0.3",
