@@ -52,6 +52,8 @@ jobs:
       - id: test-matrix
         name: Generate test matrix
         run: scripts/test-matrix
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
   test:
     name: Test (Cerbos ${{ matrix.cerbos }} | Node ${{ matrix.node }})

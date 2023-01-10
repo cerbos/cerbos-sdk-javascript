@@ -23,6 +23,7 @@
     {
       "matchManagers": ["nodenv", "npm"],
       "matchPackageNames": ["node", "npm"],
+      "matchFiles": [".node-version", "package.json"],
       "rangeStrategy": "pin",
       "semanticCommitScope": "deps-dev"
     },
