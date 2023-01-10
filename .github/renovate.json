@@ -21,7 +21,8 @@
       "semanticCommitScope": "deps-dev"
     },
     {
-      "matchManagers": ["nodenv"],
+      "matchManagers": ["nodenv", "npm"],
+      "matchPackageNames": ["node", "npm"],
       "rangeStrategy": "pin",
       "semanticCommitScope": "deps-dev"
     },
