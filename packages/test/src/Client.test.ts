@@ -107,7 +107,7 @@ describe("Client", () => {
 
     describe.each(cases)(
       "$type",
-      ({ client: factory }: typeof cases[number]) => {
+      ({ client: factory }: (typeof cases)[number]) => {
         let clients: {
           default: Client;
           throwOnValidationError: Client;
@@ -616,7 +616,7 @@ describe("Client", () => {
     const cases = [
       {
         type: "gRPC",
-        client: (port: keyof typeof ports["grpc"]): Client =>
+        client: (port: keyof (typeof ports)["grpc"]): Client =>
           new GRPC(`localhost:${ports.grpc[port]}`, {
             adminCredentials,
             tls: createSecureContext({ ca }),
@@ -624,7 +624,7 @@ describe("Client", () => {
       },
       {
         type: "HTTP",
-        client: (port: keyof typeof ports["http"]): Client =>
+        client: (port: keyof (typeof ports)["http"]): Client =>
           new HTTP(`https://localhost:${ports.http[port]}`, {
             adminCredentials,
           }),
