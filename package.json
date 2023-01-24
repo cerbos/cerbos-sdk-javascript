@@ -4,8 +4,8 @@
     "packages/*"
   ],
   "engines": {
-    "node": "19.4.0",
-    "npm": "9.2.0"
+    "node": "19.5.0",
+    "npm": "9.3.1"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
