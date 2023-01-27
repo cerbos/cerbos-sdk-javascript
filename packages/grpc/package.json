@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/grpc",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Client library for interacting with the Cerbos policy decision point over gRPC from server-side Node.js applications",
   "repository": {
     "type": "git",
