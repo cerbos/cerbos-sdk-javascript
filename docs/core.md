@@ -12,13 +12,18 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  --- | --- |
 |  [CheckResourcesResponse](./core.checkresourcesresponse.md) | The outcome of checking a principal's permissions on a set of resources. |
 |  [CheckResourcesResult](./core.checkresourcesresult.md) | The outcome of checking a principal's permissions on single resource. |
-|  [Client](./core.client.md) | Base implementation of a client for interacting with the Cerbos policy decision point server. |
 |  [NotOK](./core.notok.md) | Error thrown when the Cerbos policy decision point server returns an unsuccessful response. |
 |  [PlanExpression](./core.planexpression.md) | An abstract syntax tree node representing an expression to evaluate. |
 |  [PlanExpressionValue](./core.planexpressionvalue.md) | An abstract syntax tree node representing a constant value. |
 |  [PlanExpressionVariable](./core.planexpressionvariable.md) | An abstract syntax tree node representing a variable whose value was unknown when producing the query plan. |
 |  [SchemaDefinition](./core.schemadefinition.md) | Definition of a JSON schema used to validate principal or resource attributes. |
 |  [ValidationFailed](./core.validationfailed.md) | Error thrown when input fails schema validation, if the [Client](./core.client.md) is configured with [onValidationError](./core.options.onvalidationerror.md) set to <code>&quot;throw&quot;</code>. |
+
+## Abstract Classes
+
+|  Abstract Class | Description |
+|  --- | --- |
+|  [Client](./core.client.md) | Base implementation of a client for interacting with the Cerbos policy decision point server. |
 
 ## Enumerations
 
