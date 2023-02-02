@@ -6,7 +6,7 @@
 
 The effect of the rule.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 effect: Effect;

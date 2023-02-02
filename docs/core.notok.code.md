@@ -6,7 +6,7 @@
 
 The status code returned by the Cerbos policy decision point server.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly code: Status;

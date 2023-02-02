@@ -6,7 +6,7 @@
 
 A JSON Web Token to use as an auxiliary data source, which will be verified against the Cerbos policy decision point (PDP) server's [configured JSON Web Key Sets (JWKS)](https://docs.cerbos.dev/cerbos/latest/configuration/auxdata.html#_jwt) unless verification is disabled on the server.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface JWT 
@@ -16,6 +16,6 @@ export interface JWT
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [keySetId?](./core.jwt.keysetid.md) |  | string | <i>(Optional)</i> The ID of the JWKS to be used by the PDP server to verify the JWT. |
+|  [keySetId?](./core.jwt.keysetid.md) |  | string | _(Optional)_ The ID of the JWKS to be used by the PDP server to verify the JWT. |
 |  [token](./core.jwt.token.md) |  | string | The encoded JWT. |
 

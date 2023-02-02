@@ -6,7 +6,7 @@
 
 Information about the Cerbos policy decision point (PDP) server.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ServerInfo 

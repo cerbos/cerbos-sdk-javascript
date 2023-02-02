@@ -6,7 +6,7 @@
 
 A rule defining an override for a specific user.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PrincipalRule 

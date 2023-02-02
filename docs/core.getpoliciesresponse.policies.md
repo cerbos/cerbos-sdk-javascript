@@ -4,7 +4,7 @@
 
 ## GetPoliciesResponse.policies property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 policies: Policy[];

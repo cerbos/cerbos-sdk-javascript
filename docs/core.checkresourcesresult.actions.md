@@ -6,7 +6,7 @@
 
 The policy decisions for each action.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 actions: Record<string, Effect | undefined>;

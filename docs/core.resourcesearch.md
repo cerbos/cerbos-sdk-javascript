@@ -6,12 +6,12 @@
 
 Search criteria to match a resource in results.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type ResourceSearch = Omit<Resource, "attributes">;
 ```
-<b>References:</b> [Resource](./core.resource.md)
+**References:** [Resource](./core.resource.md)
 
 ## Remarks
 

@@ -6,7 +6,7 @@
 
 Produce a query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 planResources(request: PlanResourcesRequest): Promise<PlanResourcesResponse>;
@@ -18,7 +18,7 @@ planResources(request: PlanResourcesRequest): Promise<PlanResourcesResponse>;
 |  --- | --- | --- |
 |  request | [PlanResourcesRequest](./core.planresourcesrequest.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[PlanResourcesResponse](./core.planresourcesresponse.md)<!-- -->&gt;
 

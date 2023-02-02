@@ -6,7 +6,7 @@
 
 The query condition abstract syntax tree rendered as a human-readable string, to help with debugging.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 conditionString: string;

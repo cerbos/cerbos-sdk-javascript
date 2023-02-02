@@ -6,7 +6,7 @@
 
 Constructs a new instance of the `CheckResourcesResult` class
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor({ resource, actions, validationErrors, metadata, }: Pick<CheckResourcesResult, "resource" | "actions" | "validationErrors" | "metadata">);

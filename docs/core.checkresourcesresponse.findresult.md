@@ -6,7 +6,7 @@
 
 Find an item from [results](./core.checkresourcesresponse.results.md) by resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 findResult(resource: ResourceSearch): CheckResourcesResult | undefined;
@@ -18,7 +18,7 @@ findResult(resource: ResourceSearch): CheckResourcesResult | undefined;
 |  --- | --- | --- |
 |  resource | [ResourceSearch](./core.resourcesearch.md) | the resource search criteria. |
 
-<b>Returns:</b>
+**Returns:**
 
 [CheckResourcesResult](./core.checkresourcesresult.md) \| undefined
 

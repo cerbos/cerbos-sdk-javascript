@@ -4,7 +4,7 @@
 
 ## PolicyBase.variables property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 variables?: Record<string, string>;

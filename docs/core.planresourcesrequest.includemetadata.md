@@ -6,7 +6,7 @@
 
 Include [additional metadata](./core.planresourcesmetadata.md) in the plan?
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 includeMetadata?: boolean;

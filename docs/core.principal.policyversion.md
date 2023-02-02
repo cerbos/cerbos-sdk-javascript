@@ -6,7 +6,7 @@
 
 The policy version to use when authorizing the principal.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 policyVersion?: string;

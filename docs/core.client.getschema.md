@@ -6,7 +6,7 @@
 
 Fetch a schema by ID.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getSchema(id: string): Promise<Schema | undefined>;
@@ -18,7 +18,7 @@ getSchema(id: string): Promise<Schema | undefined>;
 |  --- | --- | --- |
 |  id | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[Schema](./core.schema.md) \| undefined&gt;
 

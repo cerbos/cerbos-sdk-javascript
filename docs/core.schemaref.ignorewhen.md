@@ -6,7 +6,7 @@
 
 Options for ignoring schema validation.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ignoreWhen?: {

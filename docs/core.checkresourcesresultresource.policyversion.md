@@ -6,7 +6,7 @@
 
 The policy version against which the check was performed.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 policyVersion: string;

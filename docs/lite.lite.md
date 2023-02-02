@@ -6,12 +6,12 @@
 
 A client for interacting with a WebAssembly Cerbos policy bundle.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class Lite extends Client 
 ```
-<b>Extends:</b> [Client](./core.client.md)
+**Extends:** [Client](./core.client.md)
 
 ## Remarks
 

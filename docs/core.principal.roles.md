@@ -6,7 +6,7 @@
 
 The roles held by the principal.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 roles: string[];

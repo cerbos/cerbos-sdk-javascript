@@ -6,7 +6,7 @@
 
 Unique ID for the schema, to be used to reference the schema from policies and from other schemas.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 id: string;

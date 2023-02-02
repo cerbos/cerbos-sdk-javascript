@@ -6,7 +6,7 @@
 
 Check if the policy decision was that all input actions should be allowed for a resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 allAllowed(resource: ResourceSearch): boolean | undefined;
@@ -18,7 +18,7 @@ allAllowed(resource: ResourceSearch): boolean | undefined;
 |  --- | --- | --- |
 |  resource | [ResourceSearch](./core.resourcesearch.md) | the resource search criteria. |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean \| undefined
 

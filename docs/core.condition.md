@@ -6,7 +6,7 @@
 
 A set of expressions that must evaluate to true for a rule to take effect.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Condition 

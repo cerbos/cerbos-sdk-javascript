@@ -6,7 +6,7 @@
 
 The root node of the query condition abstract syntax tree.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 condition: PlanExpressionOperand;

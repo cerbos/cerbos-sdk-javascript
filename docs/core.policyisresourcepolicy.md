@@ -6,7 +6,7 @@
 
 Type guard to check if a [Policy](./core.policy.md) is a [ResourcePolicy](./core.resourcepolicy.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 policyIsResourcePolicy: (policy: Policy) => policy is ResourcePolicy

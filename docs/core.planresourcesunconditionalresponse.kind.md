@@ -6,7 +6,7 @@
 
 The type of plan.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 kind: PlanKind.ALWAYS_ALLOWED | PlanKind.ALWAYS_DENIED;

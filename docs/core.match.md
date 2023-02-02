@@ -6,10 +6,10 @@
 
 Expressions to evaluate in a condition.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type Match = MatchAll | MatchAny | MatchNone | MatchExpr;
 ```
-<b>References:</b> [MatchAll](./core.matchall.md)<!-- -->, [MatchAny](./core.matchany.md)<!-- -->, [MatchNone](./core.matchnone.md)<!-- -->, [MatchExpr](./core.matchexpr.md)
+**References:** [MatchAll](./core.matchall.md)<!-- -->, [MatchAny](./core.matchany.md)<!-- -->, [MatchNone](./core.matchnone.md)<!-- -->, [MatchExpr](./core.matchexpr.md)
 

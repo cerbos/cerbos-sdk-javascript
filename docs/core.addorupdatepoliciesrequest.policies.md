@@ -6,7 +6,7 @@
 
 A set of policies to add or update.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 policies: OmitFromEach<Policy, "metadata">[];

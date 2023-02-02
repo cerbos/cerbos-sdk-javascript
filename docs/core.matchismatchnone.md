@@ -6,7 +6,7 @@
 
 Type guard to check if a [Match](./core.match.md) is a [MatchNone](./core.matchnone.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 matchIsMatchNone: (match: Match) => match is MatchNone

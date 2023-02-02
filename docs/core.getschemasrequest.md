@@ -6,7 +6,7 @@
 
 Input to [Client.getSchemas()](./core.client.getschemas.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetSchemasRequest 

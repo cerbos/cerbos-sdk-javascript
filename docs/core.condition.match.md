@@ -6,7 +6,7 @@
 
 The expressions to evaluate.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 match: Match;

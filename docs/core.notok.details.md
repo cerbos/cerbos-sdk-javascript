@@ -6,7 +6,7 @@
 
 Additional error details.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly details: string;

@@ -6,7 +6,7 @@
 
 Status codes returned by the Cerbos policy decision point server.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare enum Status 

@@ -6,7 +6,7 @@
 
 Available schema IDs.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ids: string[];

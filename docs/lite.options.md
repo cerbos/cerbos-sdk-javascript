@@ -6,7 +6,7 @@
 
 Options for creating a new [Lite](./lite.lite.md) client.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Options 
@@ -16,6 +16,6 @@ export interface Options
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [decodeJWTPayload?](./lite.options.decodejwtpayload.md) |  | [DecodeJWTPayload](./lite.decodejwtpayload.md) | <i>(Optional)</i> Function to verify and decode JWTs passed as auxiliary data, returning the JWT payload. |
-|  [now?](./lite.options.now.md) |  | () =&gt; Date \| number | <i>(Optional)</i> Function returning the current time, to be used when evaluating policy conditions. |
+|  [decodeJWTPayload?](./lite.options.decodejwtpayload.md) |  | [DecodeJWTPayload](./lite.decodejwtpayload.md) | _(Optional)_ Function to verify and decode JWTs passed as auxiliary data, returning the JWT payload. |
+|  [now?](./lite.options.now.md) |  | () =&gt; Date \| number | _(Optional)_ Function returning the current time, to be used when evaluating policy conditions. |
 

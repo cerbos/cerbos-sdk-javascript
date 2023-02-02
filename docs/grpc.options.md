@@ -6,12 +6,12 @@
 
 Options for creating a new [GRPC](./grpc.grpc.md) client.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Options extends CoreOptions 
 ```
-<b>Extends:</b> [CoreOptions](./core.options.md)
+**Extends:** [CoreOptions](./core.options.md)
 
 ## Properties
 

@@ -6,7 +6,7 @@
 
 Check if a principal is allowed to perform an action on a resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 isAllowed(request: IsAllowedRequest): Promise<boolean>;
@@ -18,7 +18,7 @@ isAllowed(request: IsAllowedRequest): Promise<boolean>;
 |  --- | --- | --- |
 |  request | [IsAllowedRequest](./core.isallowedrequest.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;boolean&gt;
 

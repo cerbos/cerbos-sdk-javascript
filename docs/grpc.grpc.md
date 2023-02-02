@@ -6,12 +6,12 @@
 
 A client for interacting with the Cerbos policy decision point server over gRPC.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class GRPC extends Client 
 ```
-<b>Extends:</b> [Client](./core.client.md)
+**Extends:** [Client](./core.client.md)
 
 ## Remarks
 

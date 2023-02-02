@@ -6,7 +6,7 @@
 
 Input to [Client.reloadStore()](./core.client.reloadstore.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ReloadStoreRequest 

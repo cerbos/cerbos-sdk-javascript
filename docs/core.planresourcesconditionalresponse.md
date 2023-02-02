@@ -6,12 +6,12 @@
 
 A query plan for when the specified action is conditionally allowed for the principal on resources matching the input.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PlanResourcesConditionalResponse extends PlanResourcesResponseBase 
 ```
-<b>Extends:</b> [PlanResourcesResponseBase](./core.planresourcesresponsebase.md)
+**Extends:** [PlanResourcesResponseBase](./core.planresourcesresponsebase.md)
 
 ## Properties
 

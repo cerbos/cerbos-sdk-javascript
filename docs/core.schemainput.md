@@ -6,7 +6,7 @@
 
 A JSON schema to be used to validate principal or resource attributes.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SchemaInput 

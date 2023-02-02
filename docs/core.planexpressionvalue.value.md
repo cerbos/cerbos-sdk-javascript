@@ -6,7 +6,7 @@
 
 The constant value.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 value: Value;

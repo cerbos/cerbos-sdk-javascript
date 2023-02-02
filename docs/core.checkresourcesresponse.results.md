@@ -6,7 +6,7 @@
 
 The outcomes of the permission checks for each resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 results: CheckResourcesResult[];

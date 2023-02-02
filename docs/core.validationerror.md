@@ -6,7 +6,7 @@
 
 An error that occurred while validating the principal or resource attributes against a schema.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ValidationError 

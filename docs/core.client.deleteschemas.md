@@ -6,7 +6,7 @@
 
 Delete multiple schemas.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 deleteSchemas(request: DeleteSchemasRequest): Promise<void>;
@@ -18,7 +18,7 @@ deleteSchemas(request: DeleteSchemasRequest): Promise<void>;
 |  --- | --- | --- |
 |  request | [DeleteSchemasRequest](./core.deleteschemasrequest.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

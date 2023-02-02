@@ -6,7 +6,7 @@
 
 The time at which the PDP server binary was built.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 buildDate: string;

@@ -6,7 +6,7 @@
 
 Definition of a JSON schema used to validate principal or resource attributes.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class SchemaDefinition 

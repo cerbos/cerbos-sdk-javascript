@@ -6,12 +6,12 @@
 
 The parsed schema definition.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 toObject(): Record<string, unknown>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Record&lt;string, unknown&gt;
 

@@ -6,7 +6,7 @@
 
 Encrypt the gRPC connection with TLS.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 tls: boolean | SecureContext;

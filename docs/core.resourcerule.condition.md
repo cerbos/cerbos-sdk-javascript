@@ -6,7 +6,7 @@
 
 The condition that must be met for the rule to apply.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 condition?: Condition | undefined;

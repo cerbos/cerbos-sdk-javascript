@@ -6,7 +6,7 @@
 
 WebAssembly binary code of a policy bundle (or an HTTP response from which to stream it).
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type Source = ArrayBufferView | ArrayBuffer | Response | Promise<Response>;

@@ -6,7 +6,7 @@
 
 A list of available schema IDs.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ListSchemasResponse 

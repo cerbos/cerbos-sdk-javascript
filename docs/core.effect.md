@@ -6,7 +6,7 @@
 
 Outcomes of policy decisions.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare enum Effect 

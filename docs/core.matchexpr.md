@@ -6,7 +6,7 @@
 
 A single expression to evaluate in a condition.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MatchExpr 

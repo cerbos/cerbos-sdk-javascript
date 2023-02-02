@@ -6,12 +6,12 @@
 
 A function to verify and decode a JWT, returning its payload.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type DecodeJWTPayload = (jwt: JWT) => DecodedJWTPayload | Promise<DecodedJWTPayload>;
 ```
-<b>References:</b> [JWT](./core.jwt.md)<!-- -->, [DecodedJWTPayload](./lite.decodedjwtpayload.md)
+**References:** [JWT](./core.jwt.md)<!-- -->, [DecodedJWTPayload](./lite.decodedjwtpayload.md)
 
 ## Example
 

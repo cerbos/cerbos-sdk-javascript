@@ -6,7 +6,7 @@
 
 The policy body.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 principalPolicy: {

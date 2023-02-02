@@ -6,7 +6,7 @@
 
 Function returning the current time, to be used when evaluating policy conditions.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 now?: () => Date | number;

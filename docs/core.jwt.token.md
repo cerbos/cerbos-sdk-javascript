@@ -6,7 +6,7 @@
 
 The encoded JWT.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 token: string;

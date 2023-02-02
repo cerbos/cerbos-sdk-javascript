@@ -6,7 +6,7 @@
 
 Sources of invalid attributes.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare enum ValidationErrorSource 

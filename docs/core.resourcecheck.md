@@ -6,7 +6,7 @@
 
 A [Resource](./core.resource.md) and list of actions on which to check a principal's permissions.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ResourceCheck 

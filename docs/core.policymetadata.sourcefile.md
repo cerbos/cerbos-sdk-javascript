@@ -4,7 +4,7 @@
 
 ## PolicyMetadata.sourceFile property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 sourceFile: string;

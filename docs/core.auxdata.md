@@ -6,7 +6,7 @@
 
 Auxiliary data sources that can be referenced in policy conditions.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface AuxData 
@@ -16,5 +16,5 @@ export interface AuxData
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [jwt?](./core.auxdata.jwt.md) |  | [JWT](./core.jwt.md) | <i>(Optional)</i> A JSON Web Token (JWT) to use as an auxiliary data source. |
+|  [jwt?](./core.auxdata.jwt.md) |  | [JWT](./core.jwt.md) | _(Optional)_ A JSON Web Token (JWT) to use as an auxiliary data source. |
 

@@ -6,7 +6,7 @@
 
 A rule for actions that can be performed on a given resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ResourceRule 
@@ -17,9 +17,9 @@ export interface ResourceRule
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [actions](./core.resourcerule.actions.md) |  | string\[\] | The actions to which the rule applies. |
-|  [condition?](./core.resourcerule.condition.md) |  | [Condition](./core.condition.md) \| undefined | <i>(Optional)</i> The condition that must be met for the rule to apply. |
-|  [derivedRoles?](./core.resourcerule.derivedroles.md) |  | string\[\] | <i>(Optional)</i> Derived roles to which the rule applies. |
+|  [condition?](./core.resourcerule.condition.md) |  | [Condition](./core.condition.md) \| undefined | _(Optional)_ The condition that must be met for the rule to apply. |
+|  [derivedRoles?](./core.resourcerule.derivedroles.md) |  | string\[\] | _(Optional)_ Derived roles to which the rule applies. |
 |  [effect](./core.resourcerule.effect.md) |  | [Effect](./core.effect.md) | The effect of the rule. |
-|  [name?](./core.resourcerule.name.md) |  | string | <i>(Optional)</i> A descriptive name for the rule. |
-|  [roles?](./core.resourcerule.roles.md) |  | string\[\] | <i>(Optional)</i> Static roles to which the rule applies. |
+|  [name?](./core.resourcerule.name.md) |  | string | _(Optional)_ A descriptive name for the rule. |
+|  [roles?](./core.resourcerule.roles.md) |  | string\[\] | _(Optional)_ Static roles to which the rule applies. |
 

@@ -6,7 +6,7 @@
 
 Auxiliary data.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 auxData?: AuxData;

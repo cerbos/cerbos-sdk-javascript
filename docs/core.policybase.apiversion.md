@@ -4,7 +4,7 @@
 
 ## PolicyBase.apiVersion property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 apiVersion?: string;

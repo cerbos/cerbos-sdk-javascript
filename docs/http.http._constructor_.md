@@ -6,7 +6,7 @@
 
 Create a client for interacting with the Cerbos policy decision point (PDP) server over HTTP.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(url: string, options?: Options);
@@ -17,7 +17,7 @@ constructor(url: string, options?: Options);
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  url | string | base Cerbos PDP server URL (the Cerbos REST API must be available at <code>${url}/api/</code>). |
-|  options | [Options](./core.options.md) | <i>(Optional)</i> additional client settings. |
+|  options | [Options](./core.options.md) | _(Optional)_ additional client settings. |
 
 ## Example 1
 

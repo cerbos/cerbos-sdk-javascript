@@ -6,7 +6,7 @@
 
 Reload the store.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 reloadStore(request: ReloadStoreRequest): Promise<void>;
@@ -18,7 +18,7 @@ reloadStore(request: ReloadStoreRequest): Promise<void>;
 |  --- | --- | --- |
 |  request | [ReloadStoreRequest](./core.reloadstorerequest.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

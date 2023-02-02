@@ -6,7 +6,7 @@
 
 The type of resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 kind: string;

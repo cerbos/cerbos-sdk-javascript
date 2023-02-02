@@ -6,7 +6,7 @@
 
 Username for authenticating to the admin API.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 username: string;

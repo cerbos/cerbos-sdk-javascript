@@ -6,7 +6,7 @@
 
 Fetch multiple policies by ID.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getPolicies(request: GetPoliciesRequest): Promise<GetPoliciesResponse>;
@@ -18,7 +18,7 @@ getPolicies(request: GetPoliciesRequest): Promise<GetPoliciesResponse>;
 |  --- | --- | --- |
 |  request | [GetPoliciesRequest](./core.getpoliciesrequest.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[GetPoliciesResponse](./core.getpoliciesresponse.md)<!-- -->&gt;
 

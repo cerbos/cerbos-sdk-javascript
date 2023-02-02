@@ -6,7 +6,7 @@
 
 Additional information about the query plan.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 metadata: PlanResourcesMetadata | undefined;

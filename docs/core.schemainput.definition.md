@@ -6,7 +6,7 @@
 
 Definition of the schema.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 definition: SchemaDefinitionInput;

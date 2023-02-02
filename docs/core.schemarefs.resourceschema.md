@@ -6,7 +6,7 @@
 
 Reference to a schema to be used to validate resource attributes.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resourceSchema?: SchemaRef | undefined;

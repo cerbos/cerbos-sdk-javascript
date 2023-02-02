@@ -6,7 +6,7 @@
 
 The version of the PDP server.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 version: string;

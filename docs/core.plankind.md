@@ -6,7 +6,7 @@
 
 Types of query plans.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare enum PlanKind 

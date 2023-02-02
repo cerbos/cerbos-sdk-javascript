@@ -6,7 +6,7 @@
 
 Any schema validation errors for the principal or resource attributes.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 validationErrors: ValidationError[];

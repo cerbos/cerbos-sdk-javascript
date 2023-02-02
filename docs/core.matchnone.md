@@ -6,7 +6,7 @@
 
 A set of expressions to evaluate in a condition that must all be false.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MatchNone 

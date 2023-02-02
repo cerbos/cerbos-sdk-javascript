@@ -4,7 +4,7 @@
 
 ## PlanResourcesRequest.requestId property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 requestId?: string;

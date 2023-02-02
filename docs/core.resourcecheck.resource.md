@@ -6,7 +6,7 @@
 
 The resource to check.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resource: Resource;

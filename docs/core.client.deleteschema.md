@@ -6,7 +6,7 @@
 
 Delete a schema.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 deleteSchema(id: string): Promise<void>;
@@ -18,7 +18,7 @@ deleteSchema(id: string): Promise<void>;
 |  --- | --- | --- |
 |  id | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

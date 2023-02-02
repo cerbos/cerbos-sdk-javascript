@@ -6,7 +6,7 @@
 
 The actions to check.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 actions: string[];

@@ -6,12 +6,12 @@
 
 Disconnect from the Cerbos policy decision point server and clean up resources.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 close(): void;
 ```
-<b>Returns:</b>
+**Returns:**
 
 void
 

@@ -6,7 +6,7 @@
 
 Type guard to check if a [Policy](./core.policy.md) is a set of [DerivedRoles](./core.derivedroles.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 policyIsDerivedRoles: (policy: Policy) => policy is DerivedRoles

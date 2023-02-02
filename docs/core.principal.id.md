@@ -6,7 +6,7 @@
 
 A unique identifier for the principal.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 id: string;

@@ -6,7 +6,7 @@
 
 The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) to use when checking the principal's permissions on the resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 scope?: string;

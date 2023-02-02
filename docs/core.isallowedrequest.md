@@ -6,12 +6,12 @@
 
 Input to [Client.isAllowed()](./core.client.isallowed.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type IsAllowedRequest = Omit<CheckResourceRequest, "actions"> & {
     action: string;
 };
 ```
-<b>References:</b> [CheckResourceRequest](./core.checkresourcerequest.md)
+**References:** [CheckResourceRequest](./core.checkresourcerequest.md)
 

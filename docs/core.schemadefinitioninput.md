@@ -6,10 +6,10 @@
 
 Definition of a JSON schema used to validate principal or resource attributes.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type SchemaDefinitionInput = string | Uint8Array | Record<string, unknown> | SchemaDefinition;
 ```
-<b>References:</b> [SchemaDefinition](./core.schemadefinition.md)
+**References:** [SchemaDefinition](./core.schemadefinition.md)
 
