@@ -6,7 +6,7 @@
 
 A set of expressions to evaluate in a boolean match.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Matches 

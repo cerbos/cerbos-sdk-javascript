@@ -6,12 +6,12 @@
 
 List the actions that should be allowed for the resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 allowedActions(): string[];
 ```
-<b>Returns:</b>
+**Returns:**
 
 string\[\]
 

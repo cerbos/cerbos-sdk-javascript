@@ -6,7 +6,7 @@
 
 Add schemas to be used for validating principal or resource attributes, or update existing schemas.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addOrUpdateSchemas(request: AddOrUpdateSchemasRequest): Promise<void>;
@@ -18,7 +18,7 @@ addOrUpdateSchemas(request: AddOrUpdateSchemasRequest): Promise<void>;
 |  --- | --- | --- |
 |  request | [AddOrUpdateSchemasRequest](./core.addorupdateschemasrequest.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

@@ -6,7 +6,7 @@
 
 The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) against which the check was performed.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 scope: string;

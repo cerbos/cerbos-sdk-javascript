@@ -6,7 +6,7 @@
 
 The policy that was used to make the decision.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 matchedPolicy: string;

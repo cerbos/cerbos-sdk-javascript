@@ -6,7 +6,7 @@
 
 The actions to which the rule applies.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 actions: string[];

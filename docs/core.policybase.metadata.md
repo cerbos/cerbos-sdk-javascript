@@ -4,7 +4,7 @@
 
 ## PolicyBase.metadata property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 metadata?: PolicyMetadata | undefined;

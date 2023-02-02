@@ -6,10 +6,10 @@
 
 Input to [Client.checkResource()](./core.client.checkresource.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type CheckResourceRequest = Omit<CheckResourcesRequest, "resources"> & ResourceCheck;
 ```
-<b>References:</b> [CheckResourcesRequest](./core.checkresourcesrequest.md)<!-- -->, [ResourceCheck](./core.resourcecheck.md)
+**References:** [CheckResourcesRequest](./core.checkresourcesrequest.md)<!-- -->, [ResourceCheck](./core.resourcecheck.md)
 

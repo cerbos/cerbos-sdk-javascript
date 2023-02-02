@@ -6,7 +6,7 @@
 
 The policy version to use when checking the principal's permissions on the resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 policyVersion?: string;

@@ -6,7 +6,7 @@
 
 A set of expressions to evaluate in a condition, at least one of which must be true.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface MatchAny 

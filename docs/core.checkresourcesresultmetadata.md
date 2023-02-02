@@ -6,7 +6,7 @@
 
 Additional information about how policy decisions were reached.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CheckResourcesResultMetadata 

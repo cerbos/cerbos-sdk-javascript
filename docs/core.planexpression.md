@@ -6,7 +6,7 @@
 
 An abstract syntax tree node representing an expression to evaluate.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class PlanExpression 

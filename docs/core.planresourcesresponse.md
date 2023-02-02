@@ -6,10 +6,10 @@
 
 A query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type PlanResourcesResponse = PlanResourcesConditionalResponse | PlanResourcesUnconditionalResponse;
 ```
-<b>References:</b> [PlanResourcesConditionalResponse](./core.planresourcesconditionalresponse.md)<!-- -->, [PlanResourcesUnconditionalResponse](./core.planresourcesunconditionalresponse.md)
+**References:** [PlanResourcesConditionalResponse](./core.planresourcesconditionalresponse.md)<!-- -->, [PlanResourcesUnconditionalResponse](./core.planresourcesunconditionalresponse.md)
 

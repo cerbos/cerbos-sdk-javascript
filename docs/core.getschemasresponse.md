@@ -6,7 +6,7 @@
 
 Fetched schemas.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetSchemasResponse 

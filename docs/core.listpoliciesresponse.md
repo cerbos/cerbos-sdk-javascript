@@ -6,7 +6,7 @@
 
 A list of available policy IDs.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ListPoliciesResponse 

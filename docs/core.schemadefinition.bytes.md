@@ -6,7 +6,7 @@
 
 The UTF-8 bytes of the JSON-serialized schema definition.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly bytes: Uint8Array;

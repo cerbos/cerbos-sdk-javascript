@@ -6,7 +6,7 @@
 
 The actions to which the override applies.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 actions: PrincipalRuleAction[];

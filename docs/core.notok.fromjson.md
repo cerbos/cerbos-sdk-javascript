@@ -6,7 +6,7 @@
 
 Parse a JSON-serialized unsuccessful response.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 static fromJSON(text: string): NotOK;
@@ -18,7 +18,7 @@ static fromJSON(text: string): NotOK;
 |  --- | --- | --- |
 |  text | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 [NotOK](./core.notok.md)
 

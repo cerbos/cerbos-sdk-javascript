@@ -6,7 +6,7 @@
 
 Action to take when input fails schema validation.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 onValidationError?: "throw" | ValidationFailedCallback | undefined;

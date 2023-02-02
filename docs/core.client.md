@@ -6,7 +6,7 @@
 
 Base implementation of a client for interacting with the Cerbos policy decision point server.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare abstract class Client 

@@ -6,7 +6,7 @@
 
 Options for creating a new [Client](./core.client.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface Options 
@@ -16,7 +16,7 @@ export interface Options
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [adminCredentials?](./core.options.admincredentials.md) |  | [AdminCredentials](./core.admincredentials.md) \| undefined | <i>(Optional)</i> Credentials for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html)<!-- -->. |
-|  [onValidationError?](./core.options.onvalidationerror.md) |  | "throw" \| [ValidationFailedCallback](./core.validationfailedcallback.md) \| undefined | <i>(Optional)</i> Action to take when input fails schema validation. |
-|  [playgroundInstance?](./core.options.playgroundinstance.md) |  | string \| undefined | <i>(Optional)</i> Identifier of the playground instance to use when prototyping against the hosted demo policy decision point. |
+|  [adminCredentials?](./core.options.admincredentials.md) |  | [AdminCredentials](./core.admincredentials.md) \| undefined | _(Optional)_ Credentials for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html)<!-- -->. |
+|  [onValidationError?](./core.options.onvalidationerror.md) |  | "throw" \| [ValidationFailedCallback](./core.validationfailedcallback.md) \| undefined | _(Optional)_ Action to take when input fails schema validation. |
+|  [playgroundInstance?](./core.options.playgroundinstance.md) |  | string \| undefined | _(Optional)_ Identifier of the playground instance to use when prototyping against the hosted demo policy decision point. |
 

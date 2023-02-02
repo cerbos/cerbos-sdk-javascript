@@ -6,7 +6,7 @@
 
 The outcome of checking a principal's permissions on single resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class CheckResourcesResult 

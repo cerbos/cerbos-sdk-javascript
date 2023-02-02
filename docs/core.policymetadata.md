@@ -6,7 +6,7 @@
 
 Metadata describing a policy.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PolicyMetadata 

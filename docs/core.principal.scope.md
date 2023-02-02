@@ -6,7 +6,7 @@
 
 The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) to use when authorizing the principal.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 scope?: string;

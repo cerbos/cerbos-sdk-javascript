@@ -4,7 +4,7 @@
 
 ## PolicyMetadata.hash property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 hash: string | undefined;

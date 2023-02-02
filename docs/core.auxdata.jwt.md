@@ -6,7 +6,7 @@
 
 A JSON Web Token (JWT) to use as an auxiliary data source.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 jwt?: JWT;

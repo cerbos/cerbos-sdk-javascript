@@ -6,7 +6,7 @@
 
 Create a client for interacting with the Cerbos policy decision point (PDP) server over gRPC.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(target: string, options: Options);

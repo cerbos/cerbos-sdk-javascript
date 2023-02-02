@@ -6,7 +6,7 @@
 
 The [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) that were applied to the principal for the resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 effectiveDerivedRoles: string[];

@@ -6,7 +6,7 @@
 
 References to schemas to be used to validate principal and resource attributes.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SchemaRefs 
@@ -16,6 +16,6 @@ export interface SchemaRefs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [principalSchema?](./core.schemarefs.principalschema.md) |  | [SchemaRef](./core.schemaref.md) \| undefined | <i>(Optional)</i> Reference to a schema to be used to validate principal attributes. |
-|  [resourceSchema?](./core.schemarefs.resourceschema.md) |  | [SchemaRef](./core.schemaref.md) \| undefined | <i>(Optional)</i> Reference to a schema to be used to validate resource attributes. |
+|  [principalSchema?](./core.schemarefs.principalschema.md) |  | [SchemaRef](./core.schemaref.md) \| undefined | _(Optional)_ Reference to a schema to be used to validate principal attributes. |
+|  [resourceSchema?](./core.schemarefs.resourceschema.md) |  | [SchemaRef](./core.schemaref.md) \| undefined | _(Optional)_ Reference to a schema to be used to validate resource attributes. |
 

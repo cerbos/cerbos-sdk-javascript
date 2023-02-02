@@ -6,7 +6,7 @@
 
 Input to [Client.getPolicies()](./core.client.getpolicies.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetPoliciesRequest 

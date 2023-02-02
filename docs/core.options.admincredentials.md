@@ -6,7 +6,7 @@
 
 Credentials for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 adminCredentials?: AdminCredentials | undefined;

@@ -6,10 +6,10 @@
 
 A [policy](https://docs.cerbos.dev/cerbos/latest/policies/index.html) definition.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type Policy = DerivedRoles | PrincipalPolicy | ResourcePolicy;
 ```
-<b>References:</b> [DerivedRoles](./core.derivedroles.md)<!-- -->, [PrincipalPolicy](./core.principalpolicy.md)<!-- -->, [ResourcePolicy](./core.resourcepolicy.md)
+**References:** [DerivedRoles](./core.derivedroles.md)<!-- -->, [PrincipalPolicy](./core.principalpolicy.md)<!-- -->, [ResourcePolicy](./core.resourcepolicy.md)
 

@@ -6,7 +6,7 @@
 
 Available policy IDs.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ids: string[];

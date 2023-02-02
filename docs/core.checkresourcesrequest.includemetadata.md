@@ -6,7 +6,7 @@
 
 Include [additional metadata](./core.checkresourcesresultmetadata.md) in the results?
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 includeMetadata?: boolean;

@@ -6,7 +6,7 @@
 
 Input to [Client.deleteSchemas()](./core.client.deleteschemas.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface DeleteSchemasRequest 

@@ -6,7 +6,7 @@
 
 IDs of policies to fetch.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ids: string[];

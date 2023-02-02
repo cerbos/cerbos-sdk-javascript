@@ -6,7 +6,7 @@
 
 Derived roles to which the rule applies.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 derivedRoles?: string[];

@@ -6,7 +6,7 @@
 
 The source of the invalid attributes.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 source: ValidationErrorSource;

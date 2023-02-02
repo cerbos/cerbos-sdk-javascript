@@ -4,7 +4,7 @@
 
 ## PolicyBase.disabled property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 disabled?: boolean;

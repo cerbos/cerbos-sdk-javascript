@@ -6,7 +6,7 @@
 
 The identifier for tracing the request.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 requestId: string;

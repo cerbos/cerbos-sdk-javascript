@@ -6,7 +6,7 @@
 
 The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) that was used to plan the query.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 matchedScope: string;

@@ -6,7 +6,7 @@
 
 The validation errors that occurred.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 readonly validationErrors: ValidationError[];

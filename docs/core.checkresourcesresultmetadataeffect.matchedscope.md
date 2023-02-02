@@ -6,7 +6,7 @@
 
 The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) that was used to make the decision.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 matchedScope: string;

@@ -6,7 +6,7 @@
 
 Check if the policy decision was that a given action should be allowed for the resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 isAllowed(action: string): boolean | undefined;
@@ -18,7 +18,7 @@ isAllowed(action: string): boolean | undefined;
 |  --- | --- | --- |
 |  action | string | the action to check. |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean \| undefined
 

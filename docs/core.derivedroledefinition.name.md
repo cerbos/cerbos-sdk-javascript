@@ -6,7 +6,7 @@
 
 A descriptive name for the derived role.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 name: string;

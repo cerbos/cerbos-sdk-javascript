@@ -4,7 +4,7 @@
 
 ## PolicyMetadata.annotations property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 annotations: Record<string, string | undefined>;

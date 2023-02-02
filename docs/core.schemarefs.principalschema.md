@@ -6,7 +6,7 @@
 
 Reference to a schema to be used to validate principal attributes.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 principalSchema?: SchemaRef | undefined;

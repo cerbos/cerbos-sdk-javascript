@@ -6,7 +6,7 @@
 
 Type guard to check if a [Match](./core.match.md) is a [MatchAll](./core.matchall.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 matchIsMatchAll: (match: Match) => match is MatchAll

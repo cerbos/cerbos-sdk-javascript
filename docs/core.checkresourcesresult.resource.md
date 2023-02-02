@@ -6,7 +6,7 @@
 
 The resource that was checked.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resource: CheckResourcesResultResource;

@@ -6,7 +6,7 @@
 
 ID of the schema.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ref: string;

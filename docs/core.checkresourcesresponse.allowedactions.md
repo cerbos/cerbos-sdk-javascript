@@ -6,7 +6,7 @@
 
 List the actions that should be allowed for a resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 allowedActions(resource: ResourceSearch): string[] | undefined;
@@ -18,7 +18,7 @@ allowedActions(resource: ResourceSearch): string[] | undefined;
 |  --- | --- | --- |
 |  resource | [ResourceSearch](./core.resourcesearch.md) | the resource search criteria. |
 
-<b>Returns:</b>
+**Returns:**
 
 string\[\] \| undefined
 

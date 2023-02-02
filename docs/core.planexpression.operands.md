@@ -6,7 +6,7 @@
 
 The operands on which to invoke the operator.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 operands: PlanExpressionOperand[];

@@ -6,7 +6,7 @@
 
 The expressions, at least one of which must be true.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 any: Matches;

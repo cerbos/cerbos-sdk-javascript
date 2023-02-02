@@ -6,7 +6,7 @@
 
 The definition of a [derived role](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface DerivedRoleDefinition 
@@ -16,7 +16,7 @@ export interface DerivedRoleDefinition
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [condition?](./core.derivedroledefinition.condition.md) |  | [Condition](./core.condition.md) \| undefined | <i>(Optional)</i> A set of expressions that must evaluate to true to activate the derived role. |
+|  [condition?](./core.derivedroledefinition.condition.md) |  | [Condition](./core.condition.md) \| undefined | _(Optional)_ A set of expressions that must evaluate to true to activate the derived role. |
 |  [name](./core.derivedroledefinition.name.md) |  | string | A descriptive name for the derived role. |
 |  [parentRoles](./core.derivedroledefinition.parentroles.md) |  | string\[\] | The static roles (from the identity provider) to which this derived role applies. |
 

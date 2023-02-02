@@ -6,12 +6,12 @@
 
 Any JSON-serializable value.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type Value = string | number | boolean | null | {
     [key: string]: Value;
 } | Value[];
 ```
-<b>References:</b> [Value](./core.value.md)
+**References:** [Value](./core.value.md)
 

@@ -6,7 +6,7 @@
 
 Type guard to check if a [Match](./core.match.md) is a [MatchExpr](./core.matchexpr.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 matchIsMatchExpr: (match: Match) => match is MatchExpr

@@ -6,12 +6,12 @@
 
 A [policy](https://docs.cerbos.dev/cerbos/latest/policies/resource_policies.html) defining rules for actions that can be performed on a given resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface ResourcePolicy extends PolicyBase 
 ```
-<b>Extends:</b> [PolicyBase](./core.policybase.md)
+**Extends:** [PolicyBase](./core.policybase.md)
 
 ## Properties
 

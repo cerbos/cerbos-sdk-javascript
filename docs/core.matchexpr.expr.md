@@ -6,7 +6,7 @@
 
 A [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/conditions.html) expression to evaluate.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 expr: string;

@@ -6,7 +6,7 @@
 
 Common fields between different [PlanResourcesResponse](./core.planresourcesresponse.md) types.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PlanResourcesResponseBase 

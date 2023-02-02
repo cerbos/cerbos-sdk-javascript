@@ -6,7 +6,7 @@
 
 The resource to which the override applies.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resource: string;

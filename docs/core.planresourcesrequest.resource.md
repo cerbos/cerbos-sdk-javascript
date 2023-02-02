@@ -6,7 +6,7 @@
 
 Partial details of the resources for which to plan.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 resource: ResourceQuery;

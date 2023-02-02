@@ -6,7 +6,7 @@
 
 A set of schemas to add or update.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 schemas: SchemaInput[];

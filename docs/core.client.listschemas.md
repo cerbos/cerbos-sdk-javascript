@@ -6,12 +6,12 @@
 
 List schemas.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 listSchemas(): Promise<ListSchemasResponse>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[ListSchemasResponse](./core.listschemasresponse.md)<!-- -->&gt;
 

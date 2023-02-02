@@ -6,12 +6,12 @@
 
 A [policy](https://docs.cerbos.dev/cerbos/latest/policies/principal_policies.html) defining overrides for a specific user.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PrincipalPolicy extends PolicyBase 
 ```
-<b>Extends:</b> [PolicyBase](./core.policybase.md)
+**Extends:** [PolicyBase](./core.policybase.md)
 
 ## Properties
 

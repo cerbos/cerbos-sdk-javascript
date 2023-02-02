@@ -6,7 +6,7 @@
 
 Check if the policy decision was that an action should be allowed for a resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 isAllowed(check: {
@@ -21,7 +21,7 @@ isAllowed(check: {
 |  --- | --- | --- |
 |  check | { resource: [ResourceSearch](./core.resourcesearch.md)<!-- -->; action: string; } | the resource search criteria and action to check. |
 
-<b>Returns:</b>
+**Returns:**
 
 boolean \| undefined
 

@@ -6,10 +6,10 @@
 
 An abstract syntax tree node representing an operand to an expression.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type PlanExpressionOperand = PlanExpression | PlanExpressionValue | PlanExpressionVariable;
 ```
-<b>References:</b> [PlanExpression](./core.planexpression.md)<!-- -->, [PlanExpressionValue](./core.planexpressionvalue.md)<!-- -->, [PlanExpressionVariable](./core.planexpressionvariable.md)
+**References:** [PlanExpression](./core.planexpression.md)<!-- -->, [PlanExpressionValue](./core.planexpressionvalue.md)<!-- -->, [PlanExpressionVariable](./core.planexpressionvariable.md)
 

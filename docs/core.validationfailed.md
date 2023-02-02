@@ -6,12 +6,12 @@
 
 Error thrown when input fails schema validation, if the [Client](./core.client.md) is configured with [onValidationError](./core.options.onvalidationerror.md) set to `"throw"`<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class ValidationFailed extends Error 
 ```
-<b>Extends:</b> Error
+**Extends:** Error
 
 ## Constructors
 

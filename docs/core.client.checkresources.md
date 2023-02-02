@@ -6,7 +6,7 @@
 
 Check a principal's permissions on a set of resources.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 checkResources(request: CheckResourcesRequest): Promise<CheckResourcesResponse>;
@@ -18,7 +18,7 @@ checkResources(request: CheckResourcesRequest): Promise<CheckResourcesResponse>;
 |  --- | --- | --- |
 |  request | [CheckResourcesRequest](./core.checkresourcesrequest.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[CheckResourcesResponse](./core.checkresourcesresponse.md)<!-- -->&gt;
 

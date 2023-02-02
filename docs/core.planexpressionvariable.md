@@ -6,7 +6,7 @@
 
 An abstract syntax tree node representing a variable whose value was unknown when producing the query plan.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class PlanExpressionVariable 

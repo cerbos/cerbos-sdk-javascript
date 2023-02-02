@@ -6,7 +6,7 @@
 
 The static roles (from the identity provider) to which this derived role applies.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 parentRoles: string[];

@@ -6,7 +6,7 @@
 
 The action for which to plan.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 action: string;

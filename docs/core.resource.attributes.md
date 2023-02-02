@@ -6,7 +6,7 @@
 
 Application-specific attributes describing the resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 attributes?: Record<string, Value>;

@@ -6,7 +6,7 @@
 
 A resource that was checked.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface CheckResourcesResultResource 

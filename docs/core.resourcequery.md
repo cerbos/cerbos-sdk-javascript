@@ -6,10 +6,10 @@
 
 Partial details of resources to be queried.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type ResourceQuery = Omit<Resource, "id">;
 ```
-<b>References:</b> [Resource](./core.resource.md)
+**References:** [Resource](./core.resource.md)
 

@@ -6,12 +6,12 @@
 
 Check if the policy decision was that all input actions should be allowed for the resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 allAllowed(): boolean;
 ```
-<b>Returns:</b>
+**Returns:**
 
 boolean
 

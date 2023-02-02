@@ -6,7 +6,7 @@
 
 Reference to a schema to be used to validate principal or resource attributes.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface SchemaRef 
@@ -16,6 +16,6 @@ export interface SchemaRef
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [ignoreWhen?](./core.schemaref.ignorewhen.md) |  | { actions: string\[\]; } \| undefined | <i>(Optional)</i> Options for ignoring schema validation. |
+|  [ignoreWhen?](./core.schemaref.ignorewhen.md) |  | { actions: string\[\]; } \| undefined | _(Optional)_ Options for ignoring schema validation. |
 |  [ref](./core.schemaref.ref.md) |  | string | ID of the schema. |
 

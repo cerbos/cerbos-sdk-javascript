@@ -6,12 +6,12 @@
 
 A client for interacting with the Cerbos policy decision point server over HTTP.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class HTTP extends Client 
 ```
-<b>Extends:</b> [Client](./core.client.md)
+**Extends:** [Client](./core.client.md)
 
 ## Remarks
 

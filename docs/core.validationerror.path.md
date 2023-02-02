@@ -6,7 +6,7 @@
 
 The path to the attribute that failed validation.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 path: string;

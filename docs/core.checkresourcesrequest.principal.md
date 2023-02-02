@@ -6,7 +6,7 @@
 
 The principal to check.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 principal: Principal;

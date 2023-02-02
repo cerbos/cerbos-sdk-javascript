@@ -6,7 +6,7 @@
 
 The IDs of the schemas to delete.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 ids: string[];

@@ -6,7 +6,7 @@
 
 Add policies, or update existing policies.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 addOrUpdatePolicies(request: AddOrUpdatePoliciesRequest): Promise<void>;
@@ -18,7 +18,7 @@ addOrUpdatePolicies(request: AddOrUpdatePoliciesRequest): Promise<void>;
 |  --- | --- | --- |
 |  request | [AddOrUpdatePoliciesRequest](./core.addorupdatepoliciesrequest.md) |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;void&gt;
 

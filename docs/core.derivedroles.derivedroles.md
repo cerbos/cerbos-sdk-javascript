@@ -6,7 +6,7 @@
 
 A set of derived roles.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 derivedRoles: {

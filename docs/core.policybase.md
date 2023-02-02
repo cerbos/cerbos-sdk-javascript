@@ -6,7 +6,7 @@
 
 Common fields between different [Policy](./core.policy.md) types.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PolicyBase 
@@ -16,9 +16,9 @@ export interface PolicyBase
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [apiVersion?](./core.policybase.apiversion.md) |  | string | <i>(Optional)</i> |
-|  [description?](./core.policybase.description.md) |  | string | <i>(Optional)</i> |
-|  [disabled?](./core.policybase.disabled.md) |  | boolean | <i>(Optional)</i> |
-|  [metadata?](./core.policybase.metadata.md) |  | [PolicyMetadata](./core.policymetadata.md) \| undefined | <i>(Optional)</i> |
-|  [variables?](./core.policybase.variables.md) |  | Record&lt;string, string&gt; | <i>(Optional)</i> |
+|  [apiVersion?](./core.policybase.apiversion.md) |  | string | _(Optional)_ |
+|  [description?](./core.policybase.description.md) |  | string | _(Optional)_ |
+|  [disabled?](./core.policybase.disabled.md) |  | boolean | _(Optional)_ |
+|  [metadata?](./core.policybase.metadata.md) |  | [PolicyMetadata](./core.policymetadata.md) \| undefined | _(Optional)_ |
+|  [variables?](./core.policybase.variables.md) |  | Record&lt;string, string&gt; | _(Optional)_ |
 

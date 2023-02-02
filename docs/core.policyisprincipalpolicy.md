@@ -6,7 +6,7 @@
 
 Type guard to check if a [Policy](./core.policy.md) is a [PrincipalPolicy](./core.principalpolicy.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 policyIsPrincipalPolicy: (policy: Policy) => policy is PrincipalPolicy

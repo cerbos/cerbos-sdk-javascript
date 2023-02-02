@@ -6,12 +6,12 @@
 
 Error thrown when the Cerbos policy decision point server returns an unsuccessful response.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class NotOK extends Error 
 ```
-<b>Extends:</b> Error
+**Extends:** Error
 
 ## Constructors
 

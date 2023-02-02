@@ -6,7 +6,7 @@
 
 A set of expressions that must evaluate to true to activate the derived role.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 condition?: Condition | undefined;

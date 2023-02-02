@@ -6,12 +6,12 @@
 
 Retrieve information about the Cerbos policy decision point server.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 serverInfo(): Promise<ServerInfo>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[ServerInfo](./core.serverinfo.md)<!-- -->&gt;
 

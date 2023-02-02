@@ -6,12 +6,12 @@
 
 List policies.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 listPolicies(): Promise<ListPoliciesResponse>;
 ```
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[ListPoliciesResponse](./core.listpoliciesresponse.md)<!-- -->&gt;
 

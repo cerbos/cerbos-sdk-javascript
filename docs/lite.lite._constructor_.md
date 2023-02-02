@@ -6,7 +6,7 @@
 
 Create a client for interacting with a WebAssembly Cerbos policy bundle.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(source: Source, options?: Options);
@@ -17,7 +17,7 @@ constructor(source: Source, options?: Options);
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  source | [Source](./lite.source.md) | WebAssembly binary code of a policy bundle (or an HTTP response from which to stream it). |
-|  options | [Options](./lite.options.md) | <i>(Optional)</i> additional client settings. |
+|  options | [Options](./lite.options.md) | _(Optional)_ additional client settings. |
 
 ## Example 1
 

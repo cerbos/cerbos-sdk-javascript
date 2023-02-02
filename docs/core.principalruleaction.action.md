@@ -6,7 +6,7 @@
 
 The action to override.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 action: string;

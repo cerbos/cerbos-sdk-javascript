@@ -6,7 +6,7 @@
 
 The operator to invoke.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 operator: string;

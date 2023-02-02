@@ -6,7 +6,7 @@
 
 An abstract syntax tree node representing a constant value.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class PlanExpressionValue 

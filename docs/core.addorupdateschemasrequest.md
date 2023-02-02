@@ -6,7 +6,7 @@
 
 Input to [Client.addOrUpdateSchemas()](./core.client.addorupdateschemas.md)<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface AddOrUpdateSchemasRequest 

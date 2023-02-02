@@ -6,10 +6,10 @@
 
 A callback function to be invoked when input fails schema validation.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export type ValidationFailedCallback = (validationErrors: ValidationError[]) => void;
 ```
-<b>References:</b> [ValidationError](./core.validationerror.md)
+**References:** [ValidationError](./core.validationerror.md)
 

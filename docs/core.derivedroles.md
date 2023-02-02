@@ -6,12 +6,12 @@
 
 A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) to augment static RBAC roles with contextual data to provide more fine-grained control at runtime.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface DerivedRoles extends PolicyBase 
 ```
-<b>Extends:</b> [PolicyBase](./core.policybase.md)
+**Extends:** [PolicyBase](./core.policybase.md)
 
 ## Properties
 

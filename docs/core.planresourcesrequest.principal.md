@@ -6,7 +6,7 @@
 
 The principal for whom to plan.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 principal: Principal;

@@ -6,7 +6,7 @@
 
 Identifier of the playground instance to use when prototyping against the hosted demo policy decision point.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 playgroundInstance?: string | undefined;

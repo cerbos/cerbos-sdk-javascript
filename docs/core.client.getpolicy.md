@@ -6,7 +6,7 @@
 
 Fetch a policy by ID.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 getPolicy(id: string): Promise<Policy | undefined>;
@@ -18,7 +18,7 @@ getPolicy(id: string): Promise<Policy | undefined>;
 |  --- | --- | --- |
 |  id | string |  |
 
-<b>Returns:</b>
+**Returns:**
 
 Promise&lt;[Policy](./core.policy.md) \| undefined&gt;
 

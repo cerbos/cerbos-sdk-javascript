@@ -6,7 +6,7 @@
 
 The unique identifier of the resource.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 id: string;

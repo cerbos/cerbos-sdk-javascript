@@ -4,7 +4,7 @@
 
 ## GetSchemasResponse.schemas property
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 schemas: Schema[];

@@ -6,7 +6,7 @@
 
 Additional information about how the policy decision was reached for each action.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 actions: Record<string, CheckResourcesResultMetadataEffect | undefined>;

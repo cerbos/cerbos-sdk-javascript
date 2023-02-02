@@ -6,12 +6,12 @@
 
 A query plan for when the specified action is always allowed or denied for the principal on resources matching the input.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface PlanResourcesUnconditionalResponse extends PlanResourcesResponseBase 
 ```
-<b>Extends:</b> [PlanResourcesResponseBase](./core.planresourcesresponsebase.md)
+**Extends:** [PlanResourcesResponseBase](./core.planresourcesresponsebase.md)
 
 ## Properties
 

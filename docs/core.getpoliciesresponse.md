@@ -6,7 +6,7 @@
 
 Fetched policies.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GetPoliciesResponse 
