@@ -449,44 +449,46 @@ function createBaseType(): Type {
 
 export const Type = {
   encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.typeKind?.$case === "dyn") {
-      Empty.encode(message.typeKind.dyn, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.typeKind?.$case === "null") {
-      writer.uint32(16).int32(message.typeKind.null);
-    }
-    if (message.typeKind?.$case === "primitive") {
-      writer.uint32(24).int32(message.typeKind.primitive);
-    }
-    if (message.typeKind?.$case === "wrapper") {
-      writer.uint32(32).int32(message.typeKind.wrapper);
-    }
-    if (message.typeKind?.$case === "wellKnown") {
-      writer.uint32(40).int32(message.typeKind.wellKnown);
-    }
-    if (message.typeKind?.$case === "listType") {
-      Type_ListType.encode(message.typeKind.listType, writer.uint32(50).fork()).ldelim();
-    }
-    if (message.typeKind?.$case === "mapType") {
-      Type_MapType.encode(message.typeKind.mapType, writer.uint32(58).fork()).ldelim();
-    }
-    if (message.typeKind?.$case === "function") {
-      Type_FunctionType.encode(message.typeKind.function, writer.uint32(66).fork()).ldelim();
-    }
-    if (message.typeKind?.$case === "messageType") {
-      writer.uint32(74).string(message.typeKind.messageType);
-    }
-    if (message.typeKind?.$case === "typeParam") {
-      writer.uint32(82).string(message.typeKind.typeParam);
-    }
-    if (message.typeKind?.$case === "type") {
-      Type.encode(message.typeKind.type, writer.uint32(90).fork()).ldelim();
-    }
-    if (message.typeKind?.$case === "error") {
-      Empty.encode(message.typeKind.error, writer.uint32(98).fork()).ldelim();
-    }
-    if (message.typeKind?.$case === "abstractType") {
-      Type_AbstractType.encode(message.typeKind.abstractType, writer.uint32(114).fork()).ldelim();
+    switch (message.typeKind?.$case) {
+      case "dyn":
+        Empty.encode(message.typeKind.dyn, writer.uint32(10).fork()).ldelim();
+        break;
+      case "null":
+        writer.uint32(16).int32(message.typeKind.null);
+        break;
+      case "primitive":
+        writer.uint32(24).int32(message.typeKind.primitive);
+        break;
+      case "wrapper":
+        writer.uint32(32).int32(message.typeKind.wrapper);
+        break;
+      case "wellKnown":
+        writer.uint32(40).int32(message.typeKind.wellKnown);
+        break;
+      case "listType":
+        Type_ListType.encode(message.typeKind.listType, writer.uint32(50).fork()).ldelim();
+        break;
+      case "mapType":
+        Type_MapType.encode(message.typeKind.mapType, writer.uint32(58).fork()).ldelim();
+        break;
+      case "function":
+        Type_FunctionType.encode(message.typeKind.function, writer.uint32(66).fork()).ldelim();
+        break;
+      case "messageType":
+        writer.uint32(74).string(message.typeKind.messageType);
+        break;
+      case "typeParam":
+        writer.uint32(82).string(message.typeKind.typeParam);
+        break;
+      case "type":
+        Type.encode(message.typeKind.type, writer.uint32(90).fork()).ldelim();
+        break;
+      case "error":
+        Empty.encode(message.typeKind.error, writer.uint32(98).fork()).ldelim();
+        break;
+      case "abstractType":
+        Type_AbstractType.encode(message.typeKind.abstractType, writer.uint32(114).fork()).ldelim();
+        break;
     }
     return writer;
   },
@@ -697,11 +699,13 @@ export const Decl = {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.declKind?.$case === "ident") {
-      Decl_IdentDecl.encode(message.declKind.ident, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.declKind?.$case === "function") {
-      Decl_FunctionDecl.encode(message.declKind.function, writer.uint32(26).fork()).ldelim();
+    switch (message.declKind?.$case) {
+      case "ident":
+        Decl_IdentDecl.encode(message.declKind.ident, writer.uint32(18).fork()).ldelim();
+        break;
+      case "function":
+        Decl_FunctionDecl.encode(message.declKind.function, writer.uint32(26).fork()).ldelim();
+        break;
     }
     return writer;
   },

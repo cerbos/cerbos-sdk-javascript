@@ -390,17 +390,6 @@ export function trace_Event_StatusToJSON(object: Trace_Event_Status): string {
   }
 }
 
-function createBasePlanResourcesInput(): PlanResourcesInput {
-  return {
-    requestId: "",
-    action: "",
-    principal: undefined,
-    resource: undefined,
-    auxData: undefined,
-    includeMeta: false,
-  };
-}
-
 export const PlanResourcesInput = {
   fromJSON(object: any): PlanResourcesInput {
     return {
@@ -426,10 +415,6 @@ export const PlanResourcesInput = {
     return obj;
   },
 };
-
-function createBasePlanResourcesInput_Resource(): PlanResourcesInput_Resource {
-  return { kind: "", attr: {}, policyVersion: "", scope: "" };
-}
 
 export const PlanResourcesInput_Resource = {
   fromJSON(object: any): PlanResourcesInput_Resource {
@@ -461,10 +446,6 @@ export const PlanResourcesInput_Resource = {
   },
 };
 
-function createBasePlanResourcesInput_Resource_AttrEntry(): PlanResourcesInput_Resource_AttrEntry {
-  return { key: "", value: undefined };
-}
-
 export const PlanResourcesInput_Resource_AttrEntry = {
   fromJSON(object: any): PlanResourcesInput_Resource_AttrEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
@@ -478,10 +459,6 @@ export const PlanResourcesInput_Resource_AttrEntry = {
   },
 };
 
-function createBasePlanResourcesAst(): PlanResourcesAst {
-  return { filterAst: undefined };
-}
-
 export const PlanResourcesAst = {
   fromJSON(object: any): PlanResourcesAst {
     return { filterAst: isSet(object.filterAst) ? PlanResourcesAst_Node.fromJSON(object.filterAst) : undefined };
@@ -494,10 +471,6 @@ export const PlanResourcesAst = {
     return obj;
   },
 };
-
-function createBasePlanResourcesAst_Node(): PlanResourcesAst_Node {
-  return { node: undefined };
-}
 
 export const PlanResourcesAst_Node = {
   fromJSON(object: any): PlanResourcesAst_Node {
@@ -524,10 +497,6 @@ export const PlanResourcesAst_Node = {
   },
 };
 
-function createBasePlanResourcesAst_LogicalOperation(): PlanResourcesAst_LogicalOperation {
-  return { operator: 0, nodes: [] };
-}
-
 export const PlanResourcesAst_LogicalOperation = {
   fromJSON(object: any): PlanResourcesAst_LogicalOperation {
     return {
@@ -548,10 +517,6 @@ export const PlanResourcesAst_LogicalOperation = {
     return obj;
   },
 };
-
-function createBasePlanResourcesFilter(): PlanResourcesFilter {
-  return { kind: 0, condition: undefined };
-}
 
 export const PlanResourcesFilter = {
   fromJSON(object: any): PlanResourcesFilter {
@@ -574,10 +539,6 @@ export const PlanResourcesFilter = {
   },
 };
 
-function createBasePlanResourcesFilter_Expression(): PlanResourcesFilter_Expression {
-  return { operator: "", operands: [] };
-}
-
 export const PlanResourcesFilter_Expression = {
   fromJSON(object: any): PlanResourcesFilter_Expression {
     return {
@@ -599,10 +560,6 @@ export const PlanResourcesFilter_Expression = {
     return obj;
   },
 };
-
-function createBasePlanResourcesFilter_Expression_Operand(): PlanResourcesFilter_Expression_Operand {
-  return { node: undefined };
-}
 
 export const PlanResourcesFilter_Expression_Operand = {
   fromJSON(object: any): PlanResourcesFilter_Expression_Operand {
@@ -627,19 +584,6 @@ export const PlanResourcesFilter_Expression_Operand = {
     return obj;
   },
 };
-
-function createBasePlanResourcesOutput(): PlanResourcesOutput {
-  return {
-    requestId: "",
-    action: "",
-    kind: "",
-    policyVersion: "",
-    scope: "",
-    filter: undefined,
-    filterDebug: "",
-    validationErrors: [],
-  };
-}
 
 export const PlanResourcesOutput = {
   fromJSON(object: any): PlanResourcesOutput {
@@ -676,10 +620,6 @@ export const PlanResourcesOutput = {
   },
 };
 
-function createBaseCheckInput(): CheckInput {
-  return { requestId: "", resource: undefined, principal: undefined, actions: [], auxData: undefined };
-}
-
 export const CheckInput = {
   fromJSON(object: any): CheckInput {
     return {
@@ -706,10 +646,6 @@ export const CheckInput = {
     return obj;
   },
 };
-
-function createBaseCheckOutput(): CheckOutput {
-  return { requestId: "", resourceId: "", actions: {}, effectiveDerivedRoles: [], validationErrors: [] };
-}
 
 export const CheckOutput = {
   fromJSON(object: any): CheckOutput {
@@ -755,10 +691,6 @@ export const CheckOutput = {
   },
 };
 
-function createBaseCheckOutput_ActionEffect(): CheckOutput_ActionEffect {
-  return { effect: 0, policy: "", scope: "" };
-}
-
 export const CheckOutput_ActionEffect = {
   fromJSON(object: any): CheckOutput_ActionEffect {
     return {
@@ -777,10 +709,6 @@ export const CheckOutput_ActionEffect = {
   },
 };
 
-function createBaseCheckOutput_ActionsEntry(): CheckOutput_ActionsEntry {
-  return { key: "", value: undefined };
-}
-
 export const CheckOutput_ActionsEntry = {
   fromJSON(object: any): CheckOutput_ActionsEntry {
     return {
@@ -797,10 +725,6 @@ export const CheckOutput_ActionsEntry = {
     return obj;
   },
 };
-
-function createBaseResource(): Resource {
-  return { kind: "", policyVersion: "", id: "", attr: {}, scope: "" };
-}
 
 export const Resource = {
   fromJSON(object: any): Resource {
@@ -834,10 +758,6 @@ export const Resource = {
   },
 };
 
-function createBaseResource_AttrEntry(): Resource_AttrEntry {
-  return { key: "", value: undefined };
-}
-
 export const Resource_AttrEntry = {
   fromJSON(object: any): Resource_AttrEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
@@ -850,10 +770,6 @@ export const Resource_AttrEntry = {
     return obj;
   },
 };
-
-function createBasePrincipal(): Principal {
-  return { id: "", policyVersion: "", roles: [], attr: {}, scope: "" };
-}
 
 export const Principal = {
   fromJSON(object: any): Principal {
@@ -891,10 +807,6 @@ export const Principal = {
   },
 };
 
-function createBasePrincipal_AttrEntry(): Principal_AttrEntry {
-  return { key: "", value: undefined };
-}
-
 export const Principal_AttrEntry = {
   fromJSON(object: any): Principal_AttrEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
@@ -907,10 +819,6 @@ export const Principal_AttrEntry = {
     return obj;
   },
 };
-
-function createBaseAuxData(): AuxData {
-  return { jwt: {} };
-}
 
 export const AuxData = {
   fromJSON(object: any): AuxData {
@@ -936,10 +844,6 @@ export const AuxData = {
   },
 };
 
-function createBaseAuxData_JwtEntry(): AuxData_JwtEntry {
-  return { key: "", value: undefined };
-}
-
 export const AuxData_JwtEntry = {
   fromJSON(object: any): AuxData_JwtEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
@@ -952,10 +856,6 @@ export const AuxData_JwtEntry = {
     return obj;
   },
 };
-
-function createBaseTrace(): Trace {
-  return { components: [], event: undefined };
-}
 
 export const Trace = {
   fromJSON(object: any): Trace {
@@ -978,10 +878,6 @@ export const Trace = {
     return obj;
   },
 };
-
-function createBaseTrace_Component(): Trace_Component {
-  return { kind: 0, details: undefined };
-}
 
 export const Trace_Component = {
   fromJSON(object: any): Trace_Component {
@@ -1028,10 +924,6 @@ export const Trace_Component = {
   },
 };
 
-function createBaseTrace_Component_Variable(): Trace_Component_Variable {
-  return { name: "", expr: "" };
-}
-
 export const Trace_Component_Variable = {
   fromJSON(object: any): Trace_Component_Variable {
     return { name: isSet(object.name) ? String(object.name) : "", expr: isSet(object.expr) ? String(object.expr) : "" };
@@ -1044,10 +936,6 @@ export const Trace_Component_Variable = {
     return obj;
   },
 };
-
-function createBaseTrace_Event(): Trace_Event {
-  return { status: 0, effect: 0, error: "", message: "", result: undefined };
-}
 
 export const Trace_Event = {
   fromJSON(object: any): Trace_Event {

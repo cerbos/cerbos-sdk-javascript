@@ -389,10 +389,6 @@ export interface Reference {
   value: Constant | undefined;
 }
 
-function createBaseCheckedExpr(): CheckedExpr {
-  return { referenceMap: {}, typeMap: {}, sourceInfo: undefined, exprVersion: "", expr: undefined };
-}
-
 export const CheckedExpr = {
   fromJSON(object: any): CheckedExpr {
     return {
@@ -436,10 +432,6 @@ export const CheckedExpr = {
   },
 };
 
-function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
-  return { key: 0, value: undefined };
-}
-
 export const CheckedExpr_ReferenceMapEntry = {
   fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
     return {
@@ -456,10 +448,6 @@ export const CheckedExpr_ReferenceMapEntry = {
   },
 };
 
-function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
-  return { key: 0, value: undefined };
-}
-
 export const CheckedExpr_TypeMapEntry = {
   fromJSON(object: any): CheckedExpr_TypeMapEntry {
     return {
@@ -475,10 +463,6 @@ export const CheckedExpr_TypeMapEntry = {
     return obj;
   },
 };
-
-function createBaseType(): Type {
-  return { typeKind: undefined };
-}
 
 export const Type = {
   fromJSON(object: any): Type {
@@ -547,10 +531,6 @@ export const Type = {
   },
 };
 
-function createBaseType_ListType(): Type_ListType {
-  return { elemType: undefined };
-}
-
 export const Type_ListType = {
   fromJSON(object: any): Type_ListType {
     return { elemType: isSet(object.elemType) ? Type.fromJSON(object.elemType) : undefined };
@@ -562,10 +542,6 @@ export const Type_ListType = {
     return obj;
   },
 };
-
-function createBaseType_MapType(): Type_MapType {
-  return { keyType: undefined, valueType: undefined };
-}
 
 export const Type_MapType = {
   fromJSON(object: any): Type_MapType {
@@ -582,10 +558,6 @@ export const Type_MapType = {
     return obj;
   },
 };
-
-function createBaseType_FunctionType(): Type_FunctionType {
-  return { resultType: undefined, argTypes: [] };
-}
 
 export const Type_FunctionType = {
   fromJSON(object: any): Type_FunctionType {
@@ -608,10 +580,6 @@ export const Type_FunctionType = {
   },
 };
 
-function createBaseType_AbstractType(): Type_AbstractType {
-  return { name: "", parameterTypes: [] };
-}
-
 export const Type_AbstractType = {
   fromJSON(object: any): Type_AbstractType {
     return {
@@ -633,10 +601,6 @@ export const Type_AbstractType = {
     return obj;
   },
 };
-
-function createBaseDecl(): Decl {
-  return { name: "", declKind: undefined };
-}
 
 export const Decl = {
   fromJSON(object: any): Decl {
@@ -661,10 +625,6 @@ export const Decl = {
   },
 };
 
-function createBaseDecl_IdentDecl(): Decl_IdentDecl {
-  return { type: undefined, value: undefined, doc: "" };
-}
-
 export const Decl_IdentDecl = {
   fromJSON(object: any): Decl_IdentDecl {
     return {
@@ -682,10 +642,6 @@ export const Decl_IdentDecl = {
     return obj;
   },
 };
-
-function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
-  return { overloads: [] };
-}
 
 export const Decl_FunctionDecl = {
   fromJSON(object: any): Decl_FunctionDecl {
@@ -706,10 +662,6 @@ export const Decl_FunctionDecl = {
     return obj;
   },
 };
-
-function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
-  return { overloadId: "", params: [], typeParams: [], resultType: undefined, isInstanceFunction: false, doc: "" };
-}
 
 export const Decl_FunctionDecl_Overload = {
   fromJSON(object: any): Decl_FunctionDecl_Overload {
@@ -743,10 +695,6 @@ export const Decl_FunctionDecl_Overload = {
     return obj;
   },
 };
-
-function createBaseReference(): Reference {
-  return { name: "", overloadId: [], value: undefined };
-}
 
 export const Reference = {
   fromJSON(object: any): Reference {

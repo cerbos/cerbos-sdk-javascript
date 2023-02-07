@@ -399,11 +399,13 @@ function createBasePlanResourcesAst_Node(): PlanResourcesAst_Node {
 
 export const PlanResourcesAst_Node = {
   encode(message: PlanResourcesAst_Node, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.node?.$case === "logicalOperation") {
-      PlanResourcesAst_LogicalOperation.encode(message.node.logicalOperation, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.node?.$case === "expression") {
-      CheckedExpr.encode(message.node.expression, writer.uint32(18).fork()).ldelim();
+    switch (message.node?.$case) {
+      case "logicalOperation":
+        PlanResourcesAst_LogicalOperation.encode(message.node.logicalOperation, writer.uint32(10).fork()).ldelim();
+        break;
+      case "expression":
+        CheckedExpr.encode(message.node.expression, writer.uint32(18).fork()).ldelim();
+        break;
     }
     return writer;
   },
@@ -550,14 +552,16 @@ function createBasePlanResourcesFilter_Expression_Operand(): PlanResourcesFilter
 
 export const PlanResourcesFilter_Expression_Operand = {
   encode(message: PlanResourcesFilter_Expression_Operand, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.node?.$case === "value") {
-      Value.encode(Value.wrap(message.node.value), writer.uint32(10).fork()).ldelim();
-    }
-    if (message.node?.$case === "expression") {
-      PlanResourcesFilter_Expression.encode(message.node.expression, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.node?.$case === "variable") {
-      writer.uint32(26).string(message.node.variable);
+    switch (message.node?.$case) {
+      case "value":
+        Value.encode(Value.wrap(message.node.value), writer.uint32(10).fork()).ldelim();
+        break;
+      case "expression":
+        PlanResourcesFilter_Expression.encode(message.node.expression, writer.uint32(18).fork()).ldelim();
+        break;
+      case "variable":
+        writer.uint32(26).string(message.node.variable);
+        break;
     }
     return writer;
   },
@@ -1178,32 +1182,34 @@ export const Trace_Component = {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
     }
-    if (message.details?.$case === "action") {
-      writer.uint32(18).string(message.details.action);
-    }
-    if (message.details?.$case === "derivedRole") {
-      writer.uint32(26).string(message.details.derivedRole);
-    }
-    if (message.details?.$case === "expr") {
-      writer.uint32(34).string(message.details.expr);
-    }
-    if (message.details?.$case === "index") {
-      writer.uint32(40).uint32(message.details.index);
-    }
-    if (message.details?.$case === "policy") {
-      writer.uint32(50).string(message.details.policy);
-    }
-    if (message.details?.$case === "resource") {
-      writer.uint32(58).string(message.details.resource);
-    }
-    if (message.details?.$case === "rule") {
-      writer.uint32(66).string(message.details.rule);
-    }
-    if (message.details?.$case === "scope") {
-      writer.uint32(74).string(message.details.scope);
-    }
-    if (message.details?.$case === "variable") {
-      Trace_Component_Variable.encode(message.details.variable, writer.uint32(82).fork()).ldelim();
+    switch (message.details?.$case) {
+      case "action":
+        writer.uint32(18).string(message.details.action);
+        break;
+      case "derivedRole":
+        writer.uint32(26).string(message.details.derivedRole);
+        break;
+      case "expr":
+        writer.uint32(34).string(message.details.expr);
+        break;
+      case "index":
+        writer.uint32(40).uint32(message.details.index);
+        break;
+      case "policy":
+        writer.uint32(50).string(message.details.policy);
+        break;
+      case "resource":
+        writer.uint32(58).string(message.details.resource);
+        break;
+      case "rule":
+        writer.uint32(66).string(message.details.rule);
+        break;
+      case "scope":
+        writer.uint32(74).string(message.details.scope);
+        break;
+      case "variable":
+        Trace_Component_Variable.encode(message.details.variable, writer.uint32(82).fork()).ldelim();
+        break;
     }
     return writer;
   },

@@ -357,26 +357,28 @@ export const Expr = {
     if (message.id !== "0") {
       writer.uint32(16).int64(message.id);
     }
-    if (message.exprKind?.$case === "constExpr") {
-      Constant.encode(message.exprKind.constExpr, writer.uint32(26).fork()).ldelim();
-    }
-    if (message.exprKind?.$case === "identExpr") {
-      Expr_Ident.encode(message.exprKind.identExpr, writer.uint32(34).fork()).ldelim();
-    }
-    if (message.exprKind?.$case === "selectExpr") {
-      Expr_Select.encode(message.exprKind.selectExpr, writer.uint32(42).fork()).ldelim();
-    }
-    if (message.exprKind?.$case === "callExpr") {
-      Expr_Call.encode(message.exprKind.callExpr, writer.uint32(50).fork()).ldelim();
-    }
-    if (message.exprKind?.$case === "listExpr") {
-      Expr_CreateList.encode(message.exprKind.listExpr, writer.uint32(58).fork()).ldelim();
-    }
-    if (message.exprKind?.$case === "structExpr") {
-      Expr_CreateStruct.encode(message.exprKind.structExpr, writer.uint32(66).fork()).ldelim();
-    }
-    if (message.exprKind?.$case === "comprehensionExpr") {
-      Expr_Comprehension.encode(message.exprKind.comprehensionExpr, writer.uint32(74).fork()).ldelim();
+    switch (message.exprKind?.$case) {
+      case "constExpr":
+        Constant.encode(message.exprKind.constExpr, writer.uint32(26).fork()).ldelim();
+        break;
+      case "identExpr":
+        Expr_Ident.encode(message.exprKind.identExpr, writer.uint32(34).fork()).ldelim();
+        break;
+      case "selectExpr":
+        Expr_Select.encode(message.exprKind.selectExpr, writer.uint32(42).fork()).ldelim();
+        break;
+      case "callExpr":
+        Expr_Call.encode(message.exprKind.callExpr, writer.uint32(50).fork()).ldelim();
+        break;
+      case "listExpr":
+        Expr_CreateList.encode(message.exprKind.listExpr, writer.uint32(58).fork()).ldelim();
+        break;
+      case "structExpr":
+        Expr_CreateStruct.encode(message.exprKind.structExpr, writer.uint32(66).fork()).ldelim();
+        break;
+      case "comprehensionExpr":
+        Expr_Comprehension.encode(message.exprKind.comprehensionExpr, writer.uint32(74).fork()).ldelim();
+        break;
     }
     return writer;
   },
@@ -618,11 +620,13 @@ export const Expr_CreateStruct_Entry = {
     if (message.id !== "0") {
       writer.uint32(8).int64(message.id);
     }
-    if (message.keyKind?.$case === "fieldKey") {
-      writer.uint32(18).string(message.keyKind.fieldKey);
-    }
-    if (message.keyKind?.$case === "mapKey") {
-      Expr.encode(message.keyKind.mapKey, writer.uint32(26).fork()).ldelim();
+    switch (message.keyKind?.$case) {
+      case "fieldKey":
+        writer.uint32(18).string(message.keyKind.fieldKey);
+        break;
+      case "mapKey":
+        Expr.encode(message.keyKind.mapKey, writer.uint32(26).fork()).ldelim();
+        break;
     }
     if (message.value !== undefined) {
       Expr.encode(message.value, writer.uint32(34).fork()).ldelim();
@@ -739,32 +743,34 @@ function createBaseConstant(): Constant {
 
 export const Constant = {
   encode(message: Constant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.constantKind?.$case === "nullValue") {
-      writer.uint32(8).int32(message.constantKind.nullValue);
-    }
-    if (message.constantKind?.$case === "boolValue") {
-      writer.uint32(16).bool(message.constantKind.boolValue);
-    }
-    if (message.constantKind?.$case === "int64Value") {
-      writer.uint32(24).int64(message.constantKind.int64Value);
-    }
-    if (message.constantKind?.$case === "uint64Value") {
-      writer.uint32(32).uint64(message.constantKind.uint64Value);
-    }
-    if (message.constantKind?.$case === "doubleValue") {
-      writer.uint32(41).double(message.constantKind.doubleValue);
-    }
-    if (message.constantKind?.$case === "stringValue") {
-      writer.uint32(50).string(message.constantKind.stringValue);
-    }
-    if (message.constantKind?.$case === "bytesValue") {
-      writer.uint32(58).bytes(message.constantKind.bytesValue);
-    }
-    if (message.constantKind?.$case === "durationValue") {
-      Duration.encode(message.constantKind.durationValue, writer.uint32(66).fork()).ldelim();
-    }
-    if (message.constantKind?.$case === "timestampValue") {
-      Timestamp.encode(toTimestamp(message.constantKind.timestampValue), writer.uint32(74).fork()).ldelim();
+    switch (message.constantKind?.$case) {
+      case "nullValue":
+        writer.uint32(8).int32(message.constantKind.nullValue);
+        break;
+      case "boolValue":
+        writer.uint32(16).bool(message.constantKind.boolValue);
+        break;
+      case "int64Value":
+        writer.uint32(24).int64(message.constantKind.int64Value);
+        break;
+      case "uint64Value":
+        writer.uint32(32).uint64(message.constantKind.uint64Value);
+        break;
+      case "doubleValue":
+        writer.uint32(41).double(message.constantKind.doubleValue);
+        break;
+      case "stringValue":
+        writer.uint32(50).string(message.constantKind.stringValue);
+        break;
+      case "bytesValue":
+        writer.uint32(58).bytes(message.constantKind.bytesValue);
+        break;
+      case "durationValue":
+        Duration.encode(message.constantKind.durationValue, writer.uint32(66).fork()).ldelim();
+        break;
+      case "timestampValue":
+        Timestamp.encode(toTimestamp(message.constantKind.timestampValue), writer.uint32(74).fork()).ldelim();
+        break;
     }
     return writer;
   },

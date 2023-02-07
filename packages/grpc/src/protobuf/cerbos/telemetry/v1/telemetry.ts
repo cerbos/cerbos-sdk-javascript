@@ -432,14 +432,16 @@ export const ServerLaunch_Features_Storage = {
     if (message.driver !== "") {
       writer.uint32(10).string(message.driver);
     }
-    if (message.store?.$case === "disk") {
-      ServerLaunch_Features_Storage_Disk.encode(message.store.disk, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.store?.$case === "git") {
-      ServerLaunch_Features_Storage_Git.encode(message.store.git, writer.uint32(26).fork()).ldelim();
-    }
-    if (message.store?.$case === "blob") {
-      ServerLaunch_Features_Storage_Blob.encode(message.store.blob, writer.uint32(34).fork()).ldelim();
+    switch (message.store?.$case) {
+      case "disk":
+        ServerLaunch_Features_Storage_Disk.encode(message.store.disk, writer.uint32(18).fork()).ldelim();
+        break;
+      case "git":
+        ServerLaunch_Features_Storage_Git.encode(message.store.git, writer.uint32(26).fork()).ldelim();
+        break;
+      case "blob":
+        ServerLaunch_Features_Storage_Blob.encode(message.store.blob, writer.uint32(34).fork()).ldelim();
+        break;
     }
     return writer;
   },
@@ -867,8 +869,10 @@ function createBaseEvent(): Event {
 
 export const Event = {
   encode(message: Event, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.data?.$case === "apiActivity") {
-      Event_ApiActivity.encode(message.data.apiActivity, writer.uint32(10).fork()).ldelim();
+    switch (message.data?.$case) {
+      case "apiActivity":
+        Event_ApiActivity.encode(message.data.apiActivity, writer.uint32(10).fork()).ldelim();
+        break;
     }
     return writer;
   },

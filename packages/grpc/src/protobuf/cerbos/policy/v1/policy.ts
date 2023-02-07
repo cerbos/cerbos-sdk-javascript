@@ -306,14 +306,16 @@ export const Policy = {
     if (message.metadata !== undefined) {
       Metadata.encode(message.metadata, writer.uint32(34).fork()).ldelim();
     }
-    if (message.policyType?.$case === "resourcePolicy") {
-      ResourcePolicy.encode(message.policyType.resourcePolicy, writer.uint32(42).fork()).ldelim();
-    }
-    if (message.policyType?.$case === "principalPolicy") {
-      PrincipalPolicy.encode(message.policyType.principalPolicy, writer.uint32(50).fork()).ldelim();
-    }
-    if (message.policyType?.$case === "derivedRoles") {
-      DerivedRoles.encode(message.policyType.derivedRoles, writer.uint32(58).fork()).ldelim();
+    switch (message.policyType?.$case) {
+      case "resourcePolicy":
+        ResourcePolicy.encode(message.policyType.resourcePolicy, writer.uint32(42).fork()).ldelim();
+        break;
+      case "principalPolicy":
+        PrincipalPolicy.encode(message.policyType.principalPolicy, writer.uint32(50).fork()).ldelim();
+        break;
+      case "derivedRoles":
+        DerivedRoles.encode(message.policyType.derivedRoles, writer.uint32(58).fork()).ldelim();
+        break;
     }
     Object.entries(message.variables).forEach(([key, value]) => {
       Policy_VariablesEntry.encode({ key: key as any, value }, writer.uint32(66).fork()).ldelim();
@@ -839,11 +841,13 @@ function createBaseCondition(): Condition {
 
 export const Condition = {
   encode(message: Condition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.condition?.$case === "match") {
-      Match.encode(message.condition.match, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.condition?.$case === "script") {
-      writer.uint32(18).string(message.condition.script);
+    switch (message.condition?.$case) {
+      case "match":
+        Match.encode(message.condition.match, writer.uint32(10).fork()).ldelim();
+        break;
+      case "script":
+        writer.uint32(18).string(message.condition.script);
+        break;
     }
     return writer;
   },
@@ -876,17 +880,19 @@ function createBaseMatch(): Match {
 
 export const Match = {
   encode(message: Match, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.op?.$case === "all") {
-      Match_ExprList.encode(message.op.all, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.op?.$case === "any") {
-      Match_ExprList.encode(message.op.any, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.op?.$case === "none") {
-      Match_ExprList.encode(message.op.none, writer.uint32(26).fork()).ldelim();
-    }
-    if (message.op?.$case === "expr") {
-      writer.uint32(34).string(message.op.expr);
+    switch (message.op?.$case) {
+      case "all":
+        Match_ExprList.encode(message.op.all, writer.uint32(10).fork()).ldelim();
+        break;
+      case "any":
+        Match_ExprList.encode(message.op.any, writer.uint32(18).fork()).ldelim();
+        break;
+      case "none":
+        Match_ExprList.encode(message.op.none, writer.uint32(26).fork()).ldelim();
+        break;
+      case "expr":
+        writer.uint32(34).string(message.op.expr);
+        break;
     }
     return writer;
   },
@@ -2182,11 +2188,13 @@ export const TestResults_Details = {
     if (message.result !== 0) {
       writer.uint32(8).int32(message.result);
     }
-    if (message.outcome?.$case === "failure") {
-      TestResults_Failure.encode(message.outcome.failure, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.outcome?.$case === "error") {
-      writer.uint32(26).string(message.outcome.error);
+    switch (message.outcome?.$case) {
+      case "failure":
+        TestResults_Failure.encode(message.outcome.failure, writer.uint32(18).fork()).ldelim();
+        break;
+      case "error":
+        writer.uint32(26).string(message.outcome.error);
+        break;
     }
     for (const v of message.engineTrace) {
       Trace.encode(v!, writer.uint32(34).fork()).ldelim();

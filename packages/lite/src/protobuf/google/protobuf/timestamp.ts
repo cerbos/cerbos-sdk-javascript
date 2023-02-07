@@ -109,10 +109,6 @@ export interface Timestamp {
   nanos: number;
 }
 
-function createBaseTimestamp(): Timestamp {
-  return { seconds: 0, nanos: 0 };
-}
-
 export const Timestamp = {
   fromJSON(object: any): Timestamp {
     return {

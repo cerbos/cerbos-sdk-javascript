@@ -1,4 +1,5 @@
 /* eslint-disable */
+import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Empty } from "../../../google/protobuf/empty";
 import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
@@ -205,6 +206,10 @@ export interface ListPoliciesResponse {
 
 export interface GetPolicyResponse {
   policies: Policy[];
+}
+
+export interface DisablePolicyResponse {
+  disabledPolicies: string;
 }
 
 export interface AddOrUpdateSchemaResponse {
@@ -1200,11 +1205,13 @@ export const PlaygroundValidateResponse = {
     if (message.playgroundId !== "") {
       writer.uint32(10).string(message.playgroundId);
     }
-    if (message.outcome?.$case === "failure") {
-      PlaygroundFailure.encode(message.outcome.failure, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.outcome?.$case === "success") {
-      Empty.encode(message.outcome.success, writer.uint32(26).fork()).ldelim();
+    switch (message.outcome?.$case) {
+      case "failure":
+        PlaygroundFailure.encode(message.outcome.failure, writer.uint32(18).fork()).ldelim();
+        break;
+      case "success":
+        Empty.encode(message.outcome.success, writer.uint32(26).fork()).ldelim();
+        break;
     }
     return writer;
   },
@@ -1243,11 +1250,13 @@ export const PlaygroundTestResponse = {
     if (message.playgroundId !== "") {
       writer.uint32(10).string(message.playgroundId);
     }
-    if (message.outcome?.$case === "failure") {
-      PlaygroundFailure.encode(message.outcome.failure, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.outcome?.$case === "success") {
-      PlaygroundTestResponse_TestResults.encode(message.outcome.success, writer.uint32(26).fork()).ldelim();
+    switch (message.outcome?.$case) {
+      case "failure":
+        PlaygroundFailure.encode(message.outcome.failure, writer.uint32(18).fork()).ldelim();
+        break;
+      case "success":
+        PlaygroundTestResponse_TestResults.encode(message.outcome.success, writer.uint32(26).fork()).ldelim();
+        break;
     }
     return writer;
   },
@@ -1320,11 +1329,13 @@ export const PlaygroundEvaluateResponse = {
     if (message.playgroundId !== "") {
       writer.uint32(10).string(message.playgroundId);
     }
-    if (message.outcome?.$case === "failure") {
-      PlaygroundFailure.encode(message.outcome.failure, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.outcome?.$case === "success") {
-      PlaygroundEvaluateResponse_EvalResultList.encode(message.outcome.success, writer.uint32(26).fork()).ldelim();
+    switch (message.outcome?.$case) {
+      case "failure":
+        PlaygroundFailure.encode(message.outcome.failure, writer.uint32(18).fork()).ldelim();
+        break;
+      case "success":
+        PlaygroundEvaluateResponse_EvalResultList.encode(message.outcome.success, writer.uint32(26).fork()).ldelim();
+        break;
     }
     return writer;
   },
@@ -1452,20 +1463,22 @@ export const PlaygroundProxyResponse = {
     if (message.playgroundId !== "") {
       writer.uint32(10).string(message.playgroundId);
     }
-    if (message.outcome?.$case === "failure") {
-      PlaygroundFailure.encode(message.outcome.failure, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.outcome?.$case === "checkResourceSet") {
-      CheckResourceSetResponse.encode(message.outcome.checkResourceSet, writer.uint32(26).fork()).ldelim();
-    }
-    if (message.outcome?.$case === "checkResourceBatch") {
-      CheckResourceBatchResponse.encode(message.outcome.checkResourceBatch, writer.uint32(34).fork()).ldelim();
-    }
-    if (message.outcome?.$case === "planResources") {
-      PlanResourcesResponse.encode(message.outcome.planResources, writer.uint32(42).fork()).ldelim();
-    }
-    if (message.outcome?.$case === "checkResources") {
-      CheckResourcesResponse.encode(message.outcome.checkResources, writer.uint32(50).fork()).ldelim();
+    switch (message.outcome?.$case) {
+      case "failure":
+        PlaygroundFailure.encode(message.outcome.failure, writer.uint32(18).fork()).ldelim();
+        break;
+      case "checkResourceSet":
+        CheckResourceSetResponse.encode(message.outcome.checkResourceSet, writer.uint32(26).fork()).ldelim();
+        break;
+      case "checkResourceBatch":
+        CheckResourceBatchResponse.encode(message.outcome.checkResourceBatch, writer.uint32(34).fork()).ldelim();
+        break;
+      case "planResources":
+        PlanResourcesResponse.encode(message.outcome.planResources, writer.uint32(42).fork()).ldelim();
+        break;
+      case "checkResources":
+        CheckResourcesResponse.encode(message.outcome.checkResources, writer.uint32(50).fork()).ldelim();
+        break;
     }
     return writer;
   },
@@ -1553,11 +1566,13 @@ function createBaseListAuditLogEntriesResponse(): ListAuditLogEntriesResponse {
 
 export const ListAuditLogEntriesResponse = {
   encode(message: ListAuditLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.entry?.$case === "accessLogEntry") {
-      AccessLogEntry.encode(message.entry.accessLogEntry, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.entry?.$case === "decisionLogEntry") {
-      DecisionLogEntry.encode(message.entry.decisionLogEntry, writer.uint32(18).fork()).ldelim();
+    switch (message.entry?.$case) {
+      case "accessLogEntry":
+        AccessLogEntry.encode(message.entry.accessLogEntry, writer.uint32(10).fork()).ldelim();
+        break;
+      case "decisionLogEntry":
+        DecisionLogEntry.encode(message.entry.decisionLogEntry, writer.uint32(18).fork()).ldelim();
+        break;
     }
     return writer;
   },
@@ -1682,6 +1697,37 @@ export const GetPolicyResponse = {
       switch (tag >>> 3) {
         case 1:
           message.policies.push(Policy.decode(reader, reader.uint32()));
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBaseDisablePolicyResponse(): DisablePolicyResponse {
+  return { disabledPolicies: "0" };
+}
+
+export const DisablePolicyResponse = {
+  encode(message: DisablePolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.disabledPolicies !== "0") {
+      writer.uint32(8).int64(message.disabledPolicies);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): DisablePolicyResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDisablePolicyResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.disabledPolicies = longToString(reader.int64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1828,3 +1874,12 @@ export const ReloadStoreResponse = {
     return message;
   },
 };
+
+function longToString(long: Long) {
+  return long.toString();
+}
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}

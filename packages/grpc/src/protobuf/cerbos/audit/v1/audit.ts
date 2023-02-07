@@ -200,11 +200,13 @@ export const DecisionLogEntry = {
     if (message.error !== "") {
       writer.uint32(50).string(message.error);
     }
-    if (message.method?.$case === "checkResources") {
-      DecisionLogEntry_CheckResources.encode(message.method.checkResources, writer.uint32(58).fork()).ldelim();
-    }
-    if (message.method?.$case === "planResources") {
-      DecisionLogEntry_PlanResources.encode(message.method.planResources, writer.uint32(66).fork()).ldelim();
+    switch (message.method?.$case) {
+      case "checkResources":
+        DecisionLogEntry_CheckResources.encode(message.method.checkResources, writer.uint32(58).fork()).ldelim();
+        break;
+      case "planResources":
+        DecisionLogEntry_PlanResources.encode(message.method.planResources, writer.uint32(66).fork()).ldelim();
+        break;
     }
     Object.entries(message.metadata).forEach(([key, value]) => {
       DecisionLogEntry_MetadataEntry.encode({ key: key as any, value }, writer.uint32(122).fork()).ldelim();

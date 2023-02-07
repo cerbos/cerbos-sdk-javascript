@@ -206,6 +206,10 @@ export interface GetPolicyResponse {
   policies: Policy[];
 }
 
+export interface DisablePolicyResponse {
+  disabledPolicies: number;
+}
+
 export interface AddOrUpdateSchemaResponse {
 }
 
@@ -221,18 +225,6 @@ export interface DeleteSchemaResponse {
 }
 
 export interface ReloadStoreResponse {
-}
-
-function createBasePlanResourcesResponse(): PlanResourcesResponse {
-  return {
-    requestId: "",
-    action: "",
-    resourceKind: "",
-    policyVersion: "",
-    filter: undefined,
-    meta: undefined,
-    validationErrors: [],
-  };
 }
 
 export const PlanResourcesResponse = {
@@ -269,10 +261,6 @@ export const PlanResourcesResponse = {
   },
 };
 
-function createBasePlanResourcesResponse_Meta(): PlanResourcesResponse_Meta {
-  return { filterDebug: "", matchedScope: "" };
-}
-
 export const PlanResourcesResponse_Meta = {
   fromJSON(object: any): PlanResourcesResponse_Meta {
     return {
@@ -288,10 +276,6 @@ export const PlanResourcesResponse_Meta = {
     return obj;
   },
 };
-
-function createBaseCheckResourceSetResponse(): CheckResourceSetResponse {
-  return { requestId: "", resourceInstances: {}, meta: undefined };
-}
 
 export const CheckResourceSetResponse = {
   fromJSON(object: any): CheckResourceSetResponse {
@@ -325,10 +309,6 @@ export const CheckResourceSetResponse = {
   },
 };
 
-function createBaseCheckResourceSetResponse_ActionEffectMap(): CheckResourceSetResponse_ActionEffectMap {
-  return { actions: {}, validationErrors: [] };
-}
-
 export const CheckResourceSetResponse_ActionEffectMap = {
   fromJSON(object: any): CheckResourceSetResponse_ActionEffectMap {
     return {
@@ -361,10 +341,6 @@ export const CheckResourceSetResponse_ActionEffectMap = {
   },
 };
 
-function createBaseCheckResourceSetResponse_ActionEffectMap_ActionsEntry(): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
-  return { key: "", value: 0 };
-}
-
 export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry = {
   fromJSON(object: any): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
     return {
@@ -380,10 +356,6 @@ export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry = {
     return obj;
   },
 };
-
-function createBaseCheckResourceSetResponse_Meta(): CheckResourceSetResponse_Meta {
-  return { resourceInstances: {} };
-}
 
 export const CheckResourceSetResponse_Meta = {
   fromJSON(object: any): CheckResourceSetResponse_Meta {
@@ -412,10 +384,6 @@ export const CheckResourceSetResponse_Meta = {
   },
 };
 
-function createBaseCheckResourceSetResponse_Meta_EffectMeta(): CheckResourceSetResponse_Meta_EffectMeta {
-  return { matchedPolicy: "", matchedScope: "" };
-}
-
 export const CheckResourceSetResponse_Meta_EffectMeta = {
   fromJSON(object: any): CheckResourceSetResponse_Meta_EffectMeta {
     return {
@@ -431,10 +399,6 @@ export const CheckResourceSetResponse_Meta_EffectMeta = {
     return obj;
   },
 };
-
-function createBaseCheckResourceSetResponse_Meta_ActionMeta(): CheckResourceSetResponse_Meta_ActionMeta {
-  return { actions: {}, effectiveDerivedRoles: [] };
-}
 
 export const CheckResourceSetResponse_Meta_ActionMeta = {
   fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta {
@@ -471,10 +435,6 @@ export const CheckResourceSetResponse_Meta_ActionMeta = {
   },
 };
 
-function createBaseCheckResourceSetResponse_Meta_ActionMeta_ActionsEntry(): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
-  return { key: "", value: undefined };
-}
-
 export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
   fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
     return {
@@ -491,10 +451,6 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
     return obj;
   },
 };
-
-function createBaseCheckResourceSetResponse_Meta_ResourceInstancesEntry(): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
-  return { key: "", value: undefined };
-}
 
 export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
   fromJSON(object: any): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
@@ -513,10 +469,6 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
   },
 };
 
-function createBaseCheckResourceSetResponse_ResourceInstancesEntry(): CheckResourceSetResponse_ResourceInstancesEntry {
-  return { key: "", value: undefined };
-}
-
 export const CheckResourceSetResponse_ResourceInstancesEntry = {
   fromJSON(object: any): CheckResourceSetResponse_ResourceInstancesEntry {
     return {
@@ -533,10 +485,6 @@ export const CheckResourceSetResponse_ResourceInstancesEntry = {
     return obj;
   },
 };
-
-function createBaseCheckResourceBatchResponse(): CheckResourceBatchResponse {
-  return { requestId: "", results: [] };
-}
 
 export const CheckResourceBatchResponse = {
   fromJSON(object: any): CheckResourceBatchResponse {
@@ -559,10 +507,6 @@ export const CheckResourceBatchResponse = {
     return obj;
   },
 };
-
-function createBaseCheckResourceBatchResponse_ActionEffectMap(): CheckResourceBatchResponse_ActionEffectMap {
-  return { resourceId: "", actions: {}, validationErrors: [] };
-}
 
 export const CheckResourceBatchResponse_ActionEffectMap = {
   fromJSON(object: any): CheckResourceBatchResponse_ActionEffectMap {
@@ -598,10 +542,6 @@ export const CheckResourceBatchResponse_ActionEffectMap = {
   },
 };
 
-function createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry(): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
-  return { key: "", value: 0 };
-}
-
 export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
   fromJSON(object: any): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
     return {
@@ -617,10 +557,6 @@ export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
     return obj;
   },
 };
-
-function createBaseCheckResourcesResponse(): CheckResourcesResponse {
-  return { requestId: "", results: [] };
-}
 
 export const CheckResourcesResponse = {
   fromJSON(object: any): CheckResourcesResponse {
@@ -643,10 +579,6 @@ export const CheckResourcesResponse = {
     return obj;
   },
 };
-
-function createBaseCheckResourcesResponse_ResultEntry(): CheckResourcesResponse_ResultEntry {
-  return { resource: undefined, actions: {}, validationErrors: [], meta: undefined };
-}
 
 export const CheckResourcesResponse_ResultEntry = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry {
@@ -689,10 +621,6 @@ export const CheckResourcesResponse_ResultEntry = {
   },
 };
 
-function createBaseCheckResourcesResponse_ResultEntry_Resource(): CheckResourcesResponse_ResultEntry_Resource {
-  return { id: "", kind: "", policyVersion: "", scope: "" };
-}
-
 export const CheckResourcesResponse_ResultEntry_Resource = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry_Resource {
     return {
@@ -712,10 +640,6 @@ export const CheckResourcesResponse_ResultEntry_Resource = {
     return obj;
   },
 };
-
-function createBaseCheckResourcesResponse_ResultEntry_Meta(): CheckResourcesResponse_ResultEntry_Meta {
-  return { actions: {}, effectiveDerivedRoles: [] };
-}
 
 export const CheckResourcesResponse_ResultEntry_Meta = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta {
@@ -752,10 +676,6 @@ export const CheckResourcesResponse_ResultEntry_Meta = {
   },
 };
 
-function createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta(): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
-  return { matchedPolicy: "", matchedScope: "" };
-}
-
 export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
     return {
@@ -771,10 +691,6 @@ export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
     return obj;
   },
 };
-
-function createBaseCheckResourcesResponse_ResultEntry_Meta_ActionsEntry(): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
-  return { key: "", value: undefined };
-}
 
 export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
@@ -797,10 +713,6 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
   },
 };
 
-function createBaseCheckResourcesResponse_ResultEntry_ActionsEntry(): CheckResourcesResponse_ResultEntry_ActionsEntry {
-  return { key: "", value: 0 };
-}
-
 export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry_ActionsEntry {
     return {
@@ -816,10 +728,6 @@ export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
     return obj;
   },
 };
-
-function createBasePlaygroundFailure(): PlaygroundFailure {
-  return { errors: [] };
-}
 
 export const PlaygroundFailure = {
   fromJSON(object: any): PlaygroundFailure {
@@ -839,10 +747,6 @@ export const PlaygroundFailure = {
   },
 };
 
-function createBasePlaygroundFailure_Error(): PlaygroundFailure_Error {
-  return { file: "", error: "" };
-}
-
 export const PlaygroundFailure_Error = {
   fromJSON(object: any): PlaygroundFailure_Error {
     return {
@@ -858,10 +762,6 @@ export const PlaygroundFailure_Error = {
     return obj;
   },
 };
-
-function createBasePlaygroundValidateResponse(): PlaygroundValidateResponse {
-  return { playgroundId: "", outcome: undefined };
-}
 
 export const PlaygroundValidateResponse = {
   fromJSON(object: any): PlaygroundValidateResponse {
@@ -885,10 +785,6 @@ export const PlaygroundValidateResponse = {
     return obj;
   },
 };
-
-function createBasePlaygroundTestResponse(): PlaygroundTestResponse {
-  return { playgroundId: "", outcome: undefined };
-}
 
 export const PlaygroundTestResponse = {
   fromJSON(object: any): PlaygroundTestResponse {
@@ -914,10 +810,6 @@ export const PlaygroundTestResponse = {
   },
 };
 
-function createBasePlaygroundTestResponse_TestResults(): PlaygroundTestResponse_TestResults {
-  return { results: undefined };
-}
-
 export const PlaygroundTestResponse_TestResults = {
   fromJSON(object: any): PlaygroundTestResponse_TestResults {
     return { results: isSet(object.results) ? TestResults.fromJSON(object.results) : undefined };
@@ -929,10 +821,6 @@ export const PlaygroundTestResponse_TestResults = {
     return obj;
   },
 };
-
-function createBasePlaygroundEvaluateResponse(): PlaygroundEvaluateResponse {
-  return { playgroundId: "", outcome: undefined };
-}
 
 export const PlaygroundEvaluateResponse = {
   fromJSON(object: any): PlaygroundEvaluateResponse {
@@ -957,10 +845,6 @@ export const PlaygroundEvaluateResponse = {
     return obj;
   },
 };
-
-function createBasePlaygroundEvaluateResponse_EvalResult(): PlaygroundEvaluateResponse_EvalResult {
-  return { action: "", effect: 0, policy: "", effectiveDerivedRoles: [], validationErrors: [] };
-}
 
 export const PlaygroundEvaluateResponse_EvalResult = {
   fromJSON(object: any): PlaygroundEvaluateResponse_EvalResult {
@@ -996,10 +880,6 @@ export const PlaygroundEvaluateResponse_EvalResult = {
   },
 };
 
-function createBasePlaygroundEvaluateResponse_EvalResultList(): PlaygroundEvaluateResponse_EvalResultList {
-  return { results: [] };
-}
-
 export const PlaygroundEvaluateResponse_EvalResultList = {
   fromJSON(object: any): PlaygroundEvaluateResponse_EvalResultList {
     return {
@@ -1019,10 +899,6 @@ export const PlaygroundEvaluateResponse_EvalResultList = {
     return obj;
   },
 };
-
-function createBasePlaygroundProxyResponse(): PlaygroundProxyResponse {
-  return { playgroundId: "", outcome: undefined };
-}
 
 export const PlaygroundProxyResponse = {
   fromJSON(object: any): PlaygroundProxyResponse {
@@ -1066,10 +942,6 @@ export const PlaygroundProxyResponse = {
   },
 };
 
-function createBaseAddOrUpdatePolicyResponse(): AddOrUpdatePolicyResponse {
-  return { success: undefined };
-}
-
 export const AddOrUpdatePolicyResponse = {
   fromJSON(object: any): AddOrUpdatePolicyResponse {
     return { success: isSet(object.success) ? Empty.fromJSON(object.success) : undefined };
@@ -1081,10 +953,6 @@ export const AddOrUpdatePolicyResponse = {
     return obj;
   },
 };
-
-function createBaseListAuditLogEntriesResponse(): ListAuditLogEntriesResponse {
-  return { entry: undefined };
-}
 
 export const ListAuditLogEntriesResponse = {
   fromJSON(object: any): ListAuditLogEntriesResponse {
@@ -1109,10 +977,6 @@ export const ListAuditLogEntriesResponse = {
   },
 };
 
-function createBaseServerInfoResponse(): ServerInfoResponse {
-  return { version: "", commit: "", buildDate: "" };
-}
-
 export const ServerInfoResponse = {
   fromJSON(object: any): ServerInfoResponse {
     return {
@@ -1131,10 +995,6 @@ export const ServerInfoResponse = {
   },
 };
 
-function createBaseListPoliciesResponse(): ListPoliciesResponse {
-  return { policyIds: [] };
-}
-
 export const ListPoliciesResponse = {
   fromJSON(object: any): ListPoliciesResponse {
     return { policyIds: Array.isArray(object?.policyIds) ? object.policyIds.map((e: any) => String(e)) : [] };
@@ -1150,10 +1010,6 @@ export const ListPoliciesResponse = {
     return obj;
   },
 };
-
-function createBaseGetPolicyResponse(): GetPolicyResponse {
-  return { policies: [] };
-}
 
 export const GetPolicyResponse = {
   fromJSON(object: any): GetPolicyResponse {
@@ -1171,9 +1027,17 @@ export const GetPolicyResponse = {
   },
 };
 
-function createBaseAddOrUpdateSchemaResponse(): AddOrUpdateSchemaResponse {
-  return {};
-}
+export const DisablePolicyResponse = {
+  fromJSON(object: any): DisablePolicyResponse {
+    return { disabledPolicies: isSet(object.disabledPolicies) ? Number(object.disabledPolicies) : 0 };
+  },
+
+  toJSON(message: DisablePolicyResponse): unknown {
+    const obj: any = {};
+    message.disabledPolicies !== undefined && (obj.disabledPolicies = Math.round(message.disabledPolicies));
+    return obj;
+  },
+};
 
 export const AddOrUpdateSchemaResponse = {
   fromJSON(_: any): AddOrUpdateSchemaResponse {
@@ -1185,10 +1049,6 @@ export const AddOrUpdateSchemaResponse = {
     return obj;
   },
 };
-
-function createBaseListSchemasResponse(): ListSchemasResponse {
-  return { schemaIds: [] };
-}
 
 export const ListSchemasResponse = {
   fromJSON(object: any): ListSchemasResponse {
@@ -1206,10 +1066,6 @@ export const ListSchemasResponse = {
   },
 };
 
-function createBaseGetSchemaResponse(): GetSchemaResponse {
-  return { schemas: [] };
-}
-
 export const GetSchemaResponse = {
   fromJSON(object: any): GetSchemaResponse {
     return { schemas: Array.isArray(object?.schemas) ? object.schemas.map((e: any) => Schema.fromJSON(e)) : [] };
@@ -1226,10 +1082,6 @@ export const GetSchemaResponse = {
   },
 };
 
-function createBaseDeleteSchemaResponse(): DeleteSchemaResponse {
-  return {};
-}
-
 export const DeleteSchemaResponse = {
   fromJSON(_: any): DeleteSchemaResponse {
     return {};
@@ -1240,10 +1092,6 @@ export const DeleteSchemaResponse = {
     return obj;
   },
 };
-
-function createBaseReloadStoreResponse(): ReloadStoreResponse {
-  return {};
-}
 
 export const ReloadStoreResponse = {
   fromJSON(_: any): ReloadStoreResponse {

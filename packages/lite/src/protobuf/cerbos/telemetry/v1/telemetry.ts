@@ -120,10 +120,6 @@ export interface Event_ApiActivity {
   userAgents: Event_CountStat[];
 }
 
-function createBaseServerLaunch(): ServerLaunch {
-  return { version: "", source: undefined, features: undefined, stats: undefined };
-}
-
 export const ServerLaunch = {
   fromJSON(object: any): ServerLaunch {
     return {
@@ -145,10 +141,6 @@ export const ServerLaunch = {
     return obj;
   },
 };
-
-function createBaseServerLaunch_Cerbos(): ServerLaunch_Cerbos {
-  return { version: "", commit: "", buildDate: "", moduleVersion: "", moduleChecksum: "" };
-}
 
 export const ServerLaunch_Cerbos = {
   fromJSON(object: any): ServerLaunch_Cerbos {
@@ -172,10 +164,6 @@ export const ServerLaunch_Cerbos = {
   },
 };
 
-function createBaseServerLaunch_Source(): ServerLaunch_Source {
-  return { cerbos: undefined, os: "", arch: "", numCpus: 0 };
-}
-
 export const ServerLaunch_Source = {
   fromJSON(object: any): ServerLaunch_Source {
     return {
@@ -196,10 +184,6 @@ export const ServerLaunch_Source = {
     return obj;
   },
 };
-
-function createBaseServerLaunch_Features(): ServerLaunch_Features {
-  return { audit: undefined, schema: undefined, adminApi: undefined, storage: undefined };
-}
 
 export const ServerLaunch_Features = {
   fromJSON(object: any): ServerLaunch_Features {
@@ -225,10 +209,6 @@ export const ServerLaunch_Features = {
   },
 };
 
-function createBaseServerLaunch_Features_Audit(): ServerLaunch_Features_Audit {
-  return { enabled: false, backend: "" };
-}
-
 export const ServerLaunch_Features_Audit = {
   fromJSON(object: any): ServerLaunch_Features_Audit {
     return {
@@ -245,10 +225,6 @@ export const ServerLaunch_Features_Audit = {
   },
 };
 
-function createBaseServerLaunch_Features_Schema(): ServerLaunch_Features_Schema {
-  return { enforcement: "" };
-}
-
 export const ServerLaunch_Features_Schema = {
   fromJSON(object: any): ServerLaunch_Features_Schema {
     return { enforcement: isSet(object.enforcement) ? String(object.enforcement) : "" };
@@ -261,10 +237,6 @@ export const ServerLaunch_Features_Schema = {
   },
 };
 
-function createBaseServerLaunch_Features_AdminApi(): ServerLaunch_Features_AdminApi {
-  return { enabled: false };
-}
-
 export const ServerLaunch_Features_AdminApi = {
   fromJSON(object: any): ServerLaunch_Features_AdminApi {
     return { enabled: isSet(object.enabled) ? Boolean(object.enabled) : false };
@@ -276,10 +248,6 @@ export const ServerLaunch_Features_AdminApi = {
     return obj;
   },
 };
-
-function createBaseServerLaunch_Features_Storage(): ServerLaunch_Features_Storage {
-  return { driver: "", store: undefined };
-}
 
 export const ServerLaunch_Features_Storage = {
   fromJSON(object: any): ServerLaunch_Features_Storage {
@@ -308,10 +276,6 @@ export const ServerLaunch_Features_Storage = {
   },
 };
 
-function createBaseServerLaunch_Features_Storage_Disk(): ServerLaunch_Features_Storage_Disk {
-  return { watch: false };
-}
-
 export const ServerLaunch_Features_Storage_Disk = {
   fromJSON(object: any): ServerLaunch_Features_Storage_Disk {
     return { watch: isSet(object.watch) ? Boolean(object.watch) : false };
@@ -323,10 +287,6 @@ export const ServerLaunch_Features_Storage_Disk = {
     return obj;
   },
 };
-
-function createBaseServerLaunch_Features_Storage_Git(): ServerLaunch_Features_Storage_Git {
-  return { protocol: "", auth: false, pollInterval: undefined };
-}
 
 export const ServerLaunch_Features_Storage_Git = {
   fromJSON(object: any): ServerLaunch_Features_Storage_Git {
@@ -347,10 +307,6 @@ export const ServerLaunch_Features_Storage_Git = {
   },
 };
 
-function createBaseServerLaunch_Features_Storage_Blob(): ServerLaunch_Features_Storage_Blob {
-  return { provider: "", pollInterval: undefined };
-}
-
 export const ServerLaunch_Features_Storage_Blob = {
   fromJSON(object: any): ServerLaunch_Features_Storage_Blob {
     return {
@@ -367,10 +323,6 @@ export const ServerLaunch_Features_Storage_Blob = {
     return obj;
   },
 };
-
-function createBaseServerLaunch_Stats(): ServerLaunch_Stats {
-  return { policy: undefined, schema: undefined };
-}
 
 export const ServerLaunch_Stats = {
   fromJSON(object: any): ServerLaunch_Stats {
@@ -389,10 +341,6 @@ export const ServerLaunch_Stats = {
     return obj;
   },
 };
-
-function createBaseServerLaunch_Stats_Policy(): ServerLaunch_Stats_Policy {
-  return { count: {}, avgRuleCount: {}, avgConditionCount: {} };
-}
 
 export const ServerLaunch_Stats_Policy = {
   fromJSON(object: any): ServerLaunch_Stats_Policy {
@@ -442,10 +390,6 @@ export const ServerLaunch_Stats_Policy = {
   },
 };
 
-function createBaseServerLaunch_Stats_Policy_CountEntry(): ServerLaunch_Stats_Policy_CountEntry {
-  return { key: "", value: 0 };
-}
-
 export const ServerLaunch_Stats_Policy_CountEntry = {
   fromJSON(object: any): ServerLaunch_Stats_Policy_CountEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? Number(object.value) : 0 };
@@ -458,10 +402,6 @@ export const ServerLaunch_Stats_Policy_CountEntry = {
     return obj;
   },
 };
-
-function createBaseServerLaunch_Stats_Policy_AvgRuleCountEntry(): ServerLaunch_Stats_Policy_AvgRuleCountEntry {
-  return { key: "", value: 0 };
-}
 
 export const ServerLaunch_Stats_Policy_AvgRuleCountEntry = {
   fromJSON(object: any): ServerLaunch_Stats_Policy_AvgRuleCountEntry {
@@ -476,10 +416,6 @@ export const ServerLaunch_Stats_Policy_AvgRuleCountEntry = {
   },
 };
 
-function createBaseServerLaunch_Stats_Policy_AvgConditionCountEntry(): ServerLaunch_Stats_Policy_AvgConditionCountEntry {
-  return { key: "", value: 0 };
-}
-
 export const ServerLaunch_Stats_Policy_AvgConditionCountEntry = {
   fromJSON(object: any): ServerLaunch_Stats_Policy_AvgConditionCountEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? Number(object.value) : 0 };
@@ -493,10 +429,6 @@ export const ServerLaunch_Stats_Policy_AvgConditionCountEntry = {
   },
 };
 
-function createBaseServerLaunch_Stats_Schema(): ServerLaunch_Stats_Schema {
-  return { count: 0 };
-}
-
 export const ServerLaunch_Stats_Schema = {
   fromJSON(object: any): ServerLaunch_Stats_Schema {
     return { count: isSet(object.count) ? Number(object.count) : 0 };
@@ -508,10 +440,6 @@ export const ServerLaunch_Stats_Schema = {
     return obj;
   },
 };
-
-function createBaseServerStop(): ServerStop {
-  return { version: "", uptime: undefined, requestsTotal: 0 };
-}
 
 export const ServerStop = {
   fromJSON(object: any): ServerStop {
@@ -531,10 +459,6 @@ export const ServerStop = {
   },
 };
 
-function createBaseEvent(): Event {
-  return { data: undefined };
-}
-
 export const Event = {
   fromJSON(object: any): Event {
     return {
@@ -552,10 +476,6 @@ export const Event = {
   },
 };
 
-function createBaseEvent_CountStat(): Event_CountStat {
-  return { key: "", count: 0 };
-}
-
 export const Event_CountStat = {
   fromJSON(object: any): Event_CountStat {
     return { key: isSet(object.key) ? String(object.key) : "", count: isSet(object.count) ? Number(object.count) : 0 };
@@ -568,10 +488,6 @@ export const Event_CountStat = {
     return obj;
   },
 };
-
-function createBaseEvent_ApiActivity(): Event_ApiActivity {
-  return { version: "", uptime: undefined, methodCalls: [], userAgents: [] };
-}
 
 export const Event_ApiActivity = {
   fromJSON(object: any): Event_ApiActivity {

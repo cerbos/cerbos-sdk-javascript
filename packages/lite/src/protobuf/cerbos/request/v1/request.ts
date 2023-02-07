@@ -183,6 +183,10 @@ export interface GetPolicyRequest {
   id: string[];
 }
 
+export interface DisablePolicyRequest {
+  id: string[];
+}
+
 export interface AddOrUpdateSchemaRequest {
   schemas: Schema[];
 }
@@ -200,17 +204,6 @@ export interface DeleteSchemaRequest {
 
 export interface ReloadStoreRequest {
   wait: boolean;
-}
-
-function createBasePlanResourcesRequest(): PlanResourcesRequest {
-  return {
-    requestId: "",
-    action: "",
-    principal: undefined,
-    resource: undefined,
-    auxData: undefined,
-    includeMeta: false,
-  };
 }
 
 export const PlanResourcesRequest = {
@@ -238,17 +231,6 @@ export const PlanResourcesRequest = {
     return obj;
   },
 };
-
-function createBaseCheckResourceSetRequest(): CheckResourceSetRequest {
-  return {
-    requestId: "",
-    actions: [],
-    principal: undefined,
-    resource: undefined,
-    includeMeta: false,
-    auxData: undefined,
-  };
-}
 
 export const CheckResourceSetRequest = {
   fromJSON(object: any): CheckResourceSetRequest {
@@ -280,10 +262,6 @@ export const CheckResourceSetRequest = {
   },
 };
 
-function createBaseResourceSet(): ResourceSet {
-  return { kind: "", policyVersion: "", instances: {}, scope: "" };
-}
-
 export const ResourceSet = {
   fromJSON(object: any): ResourceSet {
     return {
@@ -314,10 +292,6 @@ export const ResourceSet = {
   },
 };
 
-function createBaseResourceSet_InstancesEntry(): ResourceSet_InstancesEntry {
-  return { key: "", value: undefined };
-}
-
 export const ResourceSet_InstancesEntry = {
   fromJSON(object: any): ResourceSet_InstancesEntry {
     return {
@@ -333,10 +307,6 @@ export const ResourceSet_InstancesEntry = {
     return obj;
   },
 };
-
-function createBaseAttributesMap(): AttributesMap {
-  return { attr: {} };
-}
 
 export const AttributesMap = {
   fromJSON(object: any): AttributesMap {
@@ -362,10 +332,6 @@ export const AttributesMap = {
   },
 };
 
-function createBaseAttributesMap_AttrEntry(): AttributesMap_AttrEntry {
-  return { key: "", value: undefined };
-}
-
 export const AttributesMap_AttrEntry = {
   fromJSON(object: any): AttributesMap_AttrEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
@@ -378,10 +344,6 @@ export const AttributesMap_AttrEntry = {
     return obj;
   },
 };
-
-function createBaseCheckResourceBatchRequest(): CheckResourceBatchRequest {
-  return { requestId: "", principal: undefined, resources: [], auxData: undefined };
-}
 
 export const CheckResourceBatchRequest = {
   fromJSON(object: any): CheckResourceBatchRequest {
@@ -410,10 +372,6 @@ export const CheckResourceBatchRequest = {
   },
 };
 
-function createBaseCheckResourceBatchRequest_BatchEntry(): CheckResourceBatchRequest_BatchEntry {
-  return { actions: [], resource: undefined };
-}
-
 export const CheckResourceBatchRequest_BatchEntry = {
   fromJSON(object: any): CheckResourceBatchRequest_BatchEntry {
     return {
@@ -433,10 +391,6 @@ export const CheckResourceBatchRequest_BatchEntry = {
     return obj;
   },
 };
-
-function createBaseCheckResourcesRequest(): CheckResourcesRequest {
-  return { requestId: "", includeMeta: false, principal: undefined, resources: [], auxData: undefined };
-}
 
 export const CheckResourcesRequest = {
   fromJSON(object: any): CheckResourcesRequest {
@@ -467,10 +421,6 @@ export const CheckResourcesRequest = {
   },
 };
 
-function createBaseCheckResourcesRequest_ResourceEntry(): CheckResourcesRequest_ResourceEntry {
-  return { actions: [], resource: undefined };
-}
-
 export const CheckResourcesRequest_ResourceEntry = {
   fromJSON(object: any): CheckResourcesRequest_ResourceEntry {
     return {
@@ -491,10 +441,6 @@ export const CheckResourcesRequest_ResourceEntry = {
   },
 };
 
-function createBaseAuxData(): AuxData {
-  return { jwt: undefined };
-}
-
 export const AuxData = {
   fromJSON(object: any): AuxData {
     return { jwt: isSet(object.jwt) ? AuxData_JWT.fromJSON(object.jwt) : undefined };
@@ -506,10 +452,6 @@ export const AuxData = {
     return obj;
   },
 };
-
-function createBaseAuxData_JWT(): AuxData_JWT {
-  return { token: "", keySetId: "" };
-}
 
 export const AuxData_JWT = {
   fromJSON(object: any): AuxData_JWT {
@@ -527,10 +469,6 @@ export const AuxData_JWT = {
   },
 };
 
-function createBaseFile(): File {
-  return { fileName: "", contents: new Uint8Array() };
-}
-
 export const File = {
   fromJSON(object: any): File {
     return {
@@ -547,10 +485,6 @@ export const File = {
     return obj;
   },
 };
-
-function createBasePlaygroundValidateRequest(): PlaygroundValidateRequest {
-  return { playgroundId: "", files: [] };
-}
 
 export const PlaygroundValidateRequest = {
   fromJSON(object: any): PlaygroundValidateRequest {
@@ -572,10 +506,6 @@ export const PlaygroundValidateRequest = {
   },
 };
 
-function createBasePlaygroundTestRequest(): PlaygroundTestRequest {
-  return { playgroundId: "", files: [] };
-}
-
 export const PlaygroundTestRequest = {
   fromJSON(object: any): PlaygroundTestRequest {
     return {
@@ -595,10 +525,6 @@ export const PlaygroundTestRequest = {
     return obj;
   },
 };
-
-function createBasePlaygroundEvaluateRequest(): PlaygroundEvaluateRequest {
-  return { playgroundId: "", files: [], principal: undefined, resource: undefined, actions: [], auxData: undefined };
-}
 
 export const PlaygroundEvaluateRequest = {
   fromJSON(object: any): PlaygroundEvaluateRequest {
@@ -632,10 +558,6 @@ export const PlaygroundEvaluateRequest = {
     return obj;
   },
 };
-
-function createBasePlaygroundProxyRequest(): PlaygroundProxyRequest {
-  return { playgroundId: "", files: [], proxyRequest: undefined };
-}
 
 export const PlaygroundProxyRequest = {
   fromJSON(object: any): PlaygroundProxyRequest {
@@ -682,10 +604,6 @@ export const PlaygroundProxyRequest = {
   },
 };
 
-function createBaseAddOrUpdatePolicyRequest(): AddOrUpdatePolicyRequest {
-  return { policies: [] };
-}
-
 export const AddOrUpdatePolicyRequest = {
   fromJSON(object: any): AddOrUpdatePolicyRequest {
     return { policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => Policy.fromJSON(e)) : [] };
@@ -701,10 +619,6 @@ export const AddOrUpdatePolicyRequest = {
     return obj;
   },
 };
-
-function createBaseListAuditLogEntriesRequest(): ListAuditLogEntriesRequest {
-  return { kind: 0, filter: undefined };
-}
 
 export const ListAuditLogEntriesRequest = {
   fromJSON(object: any): ListAuditLogEntriesRequest {
@@ -736,10 +650,6 @@ export const ListAuditLogEntriesRequest = {
   },
 };
 
-function createBaseListAuditLogEntriesRequest_TimeRange(): ListAuditLogEntriesRequest_TimeRange {
-  return { start: undefined, end: undefined };
-}
-
 export const ListAuditLogEntriesRequest_TimeRange = {
   fromJSON(object: any): ListAuditLogEntriesRequest_TimeRange {
     return {
@@ -756,10 +666,6 @@ export const ListAuditLogEntriesRequest_TimeRange = {
   },
 };
 
-function createBaseServerInfoRequest(): ServerInfoRequest {
-  return {};
-}
-
 export const ServerInfoRequest = {
   fromJSON(_: any): ServerInfoRequest {
     return {};
@@ -771,10 +677,6 @@ export const ServerInfoRequest = {
   },
 };
 
-function createBaseListPoliciesRequest(): ListPoliciesRequest {
-  return {};
-}
-
 export const ListPoliciesRequest = {
   fromJSON(_: any): ListPoliciesRequest {
     return {};
@@ -785,10 +687,6 @@ export const ListPoliciesRequest = {
     return obj;
   },
 };
-
-function createBaseGetPolicyRequest(): GetPolicyRequest {
-  return { id: [] };
-}
 
 export const GetPolicyRequest = {
   fromJSON(object: any): GetPolicyRequest {
@@ -806,9 +704,21 @@ export const GetPolicyRequest = {
   },
 };
 
-function createBaseAddOrUpdateSchemaRequest(): AddOrUpdateSchemaRequest {
-  return { schemas: [] };
-}
+export const DisablePolicyRequest = {
+  fromJSON(object: any): DisablePolicyRequest {
+    return { id: Array.isArray(object?.id) ? object.id.map((e: any) => String(e)) : [] };
+  },
+
+  toJSON(message: DisablePolicyRequest): unknown {
+    const obj: any = {};
+    if (message.id) {
+      obj.id = message.id.map((e) => e);
+    } else {
+      obj.id = [];
+    }
+    return obj;
+  },
+};
 
 export const AddOrUpdateSchemaRequest = {
   fromJSON(object: any): AddOrUpdateSchemaRequest {
@@ -826,10 +736,6 @@ export const AddOrUpdateSchemaRequest = {
   },
 };
 
-function createBaseListSchemasRequest(): ListSchemasRequest {
-  return {};
-}
-
 export const ListSchemasRequest = {
   fromJSON(_: any): ListSchemasRequest {
     return {};
@@ -840,10 +746,6 @@ export const ListSchemasRequest = {
     return obj;
   },
 };
-
-function createBaseGetSchemaRequest(): GetSchemaRequest {
-  return { id: [] };
-}
 
 export const GetSchemaRequest = {
   fromJSON(object: any): GetSchemaRequest {
@@ -861,10 +763,6 @@ export const GetSchemaRequest = {
   },
 };
 
-function createBaseDeleteSchemaRequest(): DeleteSchemaRequest {
-  return { id: [] };
-}
-
 export const DeleteSchemaRequest = {
   fromJSON(object: any): DeleteSchemaRequest {
     return { id: Array.isArray(object?.id) ? object.id.map((e: any) => String(e)) : [] };
@@ -880,10 +778,6 @@ export const DeleteSchemaRequest = {
     return obj;
   },
 };
-
-function createBaseReloadStoreRequest(): ReloadStoreRequest {
-  return { wait: false };
-}
 
 export const ReloadStoreRequest = {
   fromJSON(object: any): ReloadStoreRequest {

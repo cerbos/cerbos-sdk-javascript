@@ -152,6 +152,10 @@ export interface GetPolicyRequest {
   id: string[];
 }
 
+export interface DisablePolicyRequest {
+  id: string[];
+}
+
 export interface AddOrUpdateSchemaRequest {
   schemas: Schema[];
 }
@@ -899,17 +903,19 @@ export const PlaygroundProxyRequest = {
     for (const v of message.files) {
       File.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.proxyRequest?.$case === "checkResourceSet") {
-      CheckResourceSetRequest.encode(message.proxyRequest.checkResourceSet, writer.uint32(26).fork()).ldelim();
-    }
-    if (message.proxyRequest?.$case === "checkResourceBatch") {
-      CheckResourceBatchRequest.encode(message.proxyRequest.checkResourceBatch, writer.uint32(34).fork()).ldelim();
-    }
-    if (message.proxyRequest?.$case === "planResources") {
-      PlanResourcesRequest.encode(message.proxyRequest.planResources, writer.uint32(42).fork()).ldelim();
-    }
-    if (message.proxyRequest?.$case === "checkResources") {
-      CheckResourcesRequest.encode(message.proxyRequest.checkResources, writer.uint32(50).fork()).ldelim();
+    switch (message.proxyRequest?.$case) {
+      case "checkResourceSet":
+        CheckResourceSetRequest.encode(message.proxyRequest.checkResourceSet, writer.uint32(26).fork()).ldelim();
+        break;
+      case "checkResourceBatch":
+        CheckResourceBatchRequest.encode(message.proxyRequest.checkResourceBatch, writer.uint32(34).fork()).ldelim();
+        break;
+      case "planResources":
+        PlanResourcesRequest.encode(message.proxyRequest.planResources, writer.uint32(42).fork()).ldelim();
+        break;
+      case "checkResources":
+        CheckResourcesRequest.encode(message.proxyRequest.checkResources, writer.uint32(50).fork()).ldelim();
+        break;
     }
     return writer;
   },
@@ -1000,17 +1006,19 @@ export const ListAuditLogEntriesRequest = {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
     }
-    if (message.filter?.$case === "tail") {
-      writer.uint32(16).uint32(message.filter.tail);
-    }
-    if (message.filter?.$case === "between") {
-      ListAuditLogEntriesRequest_TimeRange.encode(message.filter.between, writer.uint32(26).fork()).ldelim();
-    }
-    if (message.filter?.$case === "since") {
-      Duration.encode(message.filter.since, writer.uint32(34).fork()).ldelim();
-    }
-    if (message.filter?.$case === "lookup") {
-      writer.uint32(42).string(message.filter.lookup);
+    switch (message.filter?.$case) {
+      case "tail":
+        writer.uint32(16).uint32(message.filter.tail);
+        break;
+      case "between":
+        ListAuditLogEntriesRequest_TimeRange.encode(message.filter.between, writer.uint32(26).fork()).ldelim();
+        break;
+      case "since":
+        Duration.encode(message.filter.since, writer.uint32(34).fork()).ldelim();
+        break;
+      case "lookup":
+        writer.uint32(42).string(message.filter.lookup);
+        break;
     }
     return writer;
   },
@@ -1152,6 +1160,37 @@ export const GetPolicyRequest = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetPolicyRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.id.push(reader.string());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+};
+
+function createBaseDisablePolicyRequest(): DisablePolicyRequest {
+  return { id: [] };
+}
+
+export const DisablePolicyRequest = {
+  encode(message: DisablePolicyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.id) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): DisablePolicyRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDisablePolicyRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {

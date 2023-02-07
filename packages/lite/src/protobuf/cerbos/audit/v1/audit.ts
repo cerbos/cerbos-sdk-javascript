@@ -65,10 +65,6 @@ export interface Peer {
   forwardedFor: string;
 }
 
-function createBaseAccessLogEntry(): AccessLogEntry {
-  return { callId: "", timestamp: undefined, peer: undefined, metadata: {}, method: "", statusCode: 0 };
-}
-
 export const AccessLogEntry = {
   fromJSON(object: any): AccessLogEntry {
     return {
@@ -103,10 +99,6 @@ export const AccessLogEntry = {
   },
 };
 
-function createBaseAccessLogEntry_MetadataEntry(): AccessLogEntry_MetadataEntry {
-  return { key: "", value: undefined };
-}
-
 export const AccessLogEntry_MetadataEntry = {
   fromJSON(object: any): AccessLogEntry_MetadataEntry {
     return {
@@ -122,19 +114,6 @@ export const AccessLogEntry_MetadataEntry = {
     return obj;
   },
 };
-
-function createBaseDecisionLogEntry(): DecisionLogEntry {
-  return {
-    callId: "",
-    timestamp: undefined,
-    peer: undefined,
-    inputs: [],
-    outputs: [],
-    error: "",
-    method: undefined,
-    metadata: {},
-  };
-}
 
 export const DecisionLogEntry = {
   fromJSON(object: any): DecisionLogEntry {
@@ -191,10 +170,6 @@ export const DecisionLogEntry = {
   },
 };
 
-function createBaseDecisionLogEntry_CheckResources(): DecisionLogEntry_CheckResources {
-  return { inputs: [], outputs: [], error: "" };
-}
-
 export const DecisionLogEntry_CheckResources = {
   fromJSON(object: any): DecisionLogEntry_CheckResources {
     return {
@@ -221,10 +196,6 @@ export const DecisionLogEntry_CheckResources = {
   },
 };
 
-function createBaseDecisionLogEntry_PlanResources(): DecisionLogEntry_PlanResources {
-  return { input: undefined, output: undefined, error: "" };
-}
-
 export const DecisionLogEntry_PlanResources = {
   fromJSON(object: any): DecisionLogEntry_PlanResources {
     return {
@@ -244,10 +215,6 @@ export const DecisionLogEntry_PlanResources = {
   },
 };
 
-function createBaseDecisionLogEntry_MetadataEntry(): DecisionLogEntry_MetadataEntry {
-  return { key: "", value: undefined };
-}
-
 export const DecisionLogEntry_MetadataEntry = {
   fromJSON(object: any): DecisionLogEntry_MetadataEntry {
     return {
@@ -264,10 +231,6 @@ export const DecisionLogEntry_MetadataEntry = {
   },
 };
 
-function createBaseMetaValues(): MetaValues {
-  return { values: [] };
-}
-
 export const MetaValues = {
   fromJSON(object: any): MetaValues {
     return { values: Array.isArray(object?.values) ? object.values.map((e: any) => String(e)) : [] };
@@ -283,10 +246,6 @@ export const MetaValues = {
     return obj;
   },
 };
-
-function createBasePeer(): Peer {
-  return { address: "", authInfo: "", userAgent: "", forwardedFor: "" };
-}
 
 export const Peer = {
   fromJSON(object: any): Peer {

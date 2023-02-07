@@ -20,6 +20,7 @@ import {
   CheckResourceSetRequest,
   CheckResourcesRequest,
   DeleteSchemaRequest,
+  DisablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
   ListAuditLogEntriesRequest,
@@ -40,6 +41,7 @@ import {
   CheckResourceSetResponse,
   CheckResourcesResponse,
   DeleteSchemaResponse,
+  DisablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
   ListAuditLogEntriesResponse,
@@ -232,6 +234,15 @@ export const CerbosAdminServiceService = {
     responseSerialize: (value: GetPolicyResponse) => Buffer.from(GetPolicyResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer) => GetPolicyResponse.decode(value),
   },
+  disablePolicy: {
+    path: "/cerbos.svc.v1.CerbosAdminService/DisablePolicy",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: DisablePolicyRequest) => Buffer.from(DisablePolicyRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => DisablePolicyRequest.decode(value),
+    responseSerialize: (value: DisablePolicyResponse) => Buffer.from(DisablePolicyResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => DisablePolicyResponse.decode(value),
+  },
   listAuditLogEntries: {
     path: "/cerbos.svc.v1.CerbosAdminService/ListAuditLogEntries",
     requestStream: false,
@@ -295,6 +306,7 @@ export interface CerbosAdminServiceServer extends UntypedServiceImplementation {
   addOrUpdatePolicy: handleUnaryCall<AddOrUpdatePolicyRequest, AddOrUpdatePolicyResponse>;
   listPolicies: handleUnaryCall<ListPoliciesRequest, ListPoliciesResponse>;
   getPolicy: handleUnaryCall<GetPolicyRequest, GetPolicyResponse>;
+  disablePolicy: handleUnaryCall<DisablePolicyRequest, DisablePolicyResponse>;
   listAuditLogEntries: handleServerStreamingCall<ListAuditLogEntriesRequest, ListAuditLogEntriesResponse>;
   addOrUpdateSchema: handleUnaryCall<AddOrUpdateSchemaRequest, AddOrUpdateSchemaResponse>;
   listSchemas: handleUnaryCall<ListSchemasRequest, ListSchemasResponse>;
@@ -348,6 +360,21 @@ export interface CerbosAdminServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: GetPolicyResponse) => void,
+  ): ClientUnaryCall;
+  disablePolicy(
+    request: DisablePolicyRequest,
+    callback: (error: ServiceError | null, response: DisablePolicyResponse) => void,
+  ): ClientUnaryCall;
+  disablePolicy(
+    request: DisablePolicyRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: DisablePolicyResponse) => void,
+  ): ClientUnaryCall;
+  disablePolicy(
+    request: DisablePolicyRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: DisablePolicyResponse) => void,
   ): ClientUnaryCall;
   listAuditLogEntries(
     request: ListAuditLogEntriesRequest,

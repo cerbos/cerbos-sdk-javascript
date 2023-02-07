@@ -318,17 +318,6 @@ export interface TestResults_Failure {
   actual: Effect;
 }
 
-function createBasePolicy(): Policy {
-  return {
-    apiVersion: "",
-    disabled: false,
-    description: "",
-    metadata: undefined,
-    policyType: undefined,
-    variables: {},
-  };
-}
-
 export const Policy = {
   fromJSON(object: any): Policy {
     return {
@@ -377,10 +366,6 @@ export const Policy = {
   },
 };
 
-function createBasePolicy_VariablesEntry(): Policy_VariablesEntry {
-  return { key: "", value: "" };
-}
-
 export const Policy_VariablesEntry = {
   fromJSON(object: any): Policy_VariablesEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? String(object.value) : "" };
@@ -393,10 +378,6 @@ export const Policy_VariablesEntry = {
     return obj;
   },
 };
-
-function createBaseMetadata(): Metadata {
-  return { sourceFile: "", annotations: {}, hash: undefined, storeIdentifer: "" };
-}
 
 export const Metadata = {
   fromJSON(object: any): Metadata {
@@ -428,10 +409,6 @@ export const Metadata = {
   },
 };
 
-function createBaseMetadata_AnnotationsEntry(): Metadata_AnnotationsEntry {
-  return { key: "", value: "" };
-}
-
 export const Metadata_AnnotationsEntry = {
   fromJSON(object: any): Metadata_AnnotationsEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? String(object.value) : "" };
@@ -444,10 +421,6 @@ export const Metadata_AnnotationsEntry = {
     return obj;
   },
 };
-
-function createBaseResourcePolicy(): ResourcePolicy {
-  return { resource: "", version: "", importDerivedRoles: [], rules: [], scope: "", schemas: undefined };
-}
 
 export const ResourcePolicy = {
   fromJSON(object: any): ResourcePolicy {
@@ -484,10 +457,6 @@ export const ResourcePolicy = {
     return obj;
   },
 };
-
-function createBaseResourceRule(): ResourceRule {
-  return { actions: [], derivedRoles: [], roles: [], condition: undefined, effect: 0, name: "" };
-}
 
 export const ResourceRule = {
   fromJSON(object: any): ResourceRule {
@@ -526,10 +495,6 @@ export const ResourceRule = {
   },
 };
 
-function createBasePrincipalPolicy(): PrincipalPolicy {
-  return { principal: "", version: "", rules: [], scope: "" };
-}
-
 export const PrincipalPolicy = {
   fromJSON(object: any): PrincipalPolicy {
     return {
@@ -554,10 +519,6 @@ export const PrincipalPolicy = {
   },
 };
 
-function createBasePrincipalRule(): PrincipalRule {
-  return { resource: "", actions: [] };
-}
-
 export const PrincipalRule = {
   fromJSON(object: any): PrincipalRule {
     return {
@@ -577,10 +538,6 @@ export const PrincipalRule = {
     return obj;
   },
 };
-
-function createBasePrincipalRule_Action(): PrincipalRule_Action {
-  return { action: "", condition: undefined, effect: 0, name: "" };
-}
 
 export const PrincipalRule_Action = {
   fromJSON(object: any): PrincipalRule_Action {
@@ -603,10 +560,6 @@ export const PrincipalRule_Action = {
   },
 };
 
-function createBaseDerivedRoles(): DerivedRoles {
-  return { name: "", definitions: [] };
-}
-
 export const DerivedRoles = {
   fromJSON(object: any): DerivedRoles {
     return {
@@ -626,10 +579,6 @@ export const DerivedRoles = {
     return obj;
   },
 };
-
-function createBaseRoleDef(): RoleDef {
-  return { name: "", parentRoles: [], condition: undefined };
-}
 
 export const RoleDef = {
   fromJSON(object: any): RoleDef {
@@ -654,10 +603,6 @@ export const RoleDef = {
   },
 };
 
-function createBaseCondition(): Condition {
-  return { condition: undefined };
-}
-
 export const Condition = {
   fromJSON(object: any): Condition {
     return {
@@ -677,10 +622,6 @@ export const Condition = {
     return obj;
   },
 };
-
-function createBaseMatch(): Match {
-  return { op: undefined };
-}
 
 export const Match = {
   fromJSON(object: any): Match {
@@ -707,10 +648,6 @@ export const Match = {
   },
 };
 
-function createBaseMatch_ExprList(): Match_ExprList {
-  return { of: [] };
-}
-
 export const Match_ExprList = {
   fromJSON(object: any): Match_ExprList {
     return { of: Array.isArray(object?.of) ? object.of.map((e: any) => Match.fromJSON(e)) : [] };
@@ -726,10 +663,6 @@ export const Match_ExprList = {
     return obj;
   },
 };
-
-function createBaseSchemas(): Schemas {
-  return { principalSchema: undefined, resourceSchema: undefined };
-}
 
 export const Schemas = {
   fromJSON(object: any): Schemas {
@@ -749,10 +682,6 @@ export const Schemas = {
   },
 };
 
-function createBaseSchemas_IgnoreWhen(): Schemas_IgnoreWhen {
-  return { actions: [] };
-}
-
 export const Schemas_IgnoreWhen = {
   fromJSON(object: any): Schemas_IgnoreWhen {
     return { actions: Array.isArray(object?.actions) ? object.actions.map((e: any) => String(e)) : [] };
@@ -768,10 +697,6 @@ export const Schemas_IgnoreWhen = {
     return obj;
   },
 };
-
-function createBaseSchemas_Schema(): Schemas_Schema {
-  return { ref: "", ignoreWhen: undefined };
-}
 
 export const Schemas_Schema = {
   fromJSON(object: any): Schemas_Schema {
@@ -790,10 +715,6 @@ export const Schemas_Schema = {
   },
 };
 
-function createBaseTestFixture(): TestFixture {
-  return {};
-}
-
 export const TestFixture = {
   fromJSON(_: any): TestFixture {
     return {};
@@ -804,10 +725,6 @@ export const TestFixture = {
     return obj;
   },
 };
-
-function createBaseTestFixture_Principals(): TestFixture_Principals {
-  return { principals: {} };
-}
 
 export const TestFixture_Principals = {
   fromJSON(object: any): TestFixture_Principals {
@@ -833,10 +750,6 @@ export const TestFixture_Principals = {
   },
 };
 
-function createBaseTestFixture_Principals_PrincipalsEntry(): TestFixture_Principals_PrincipalsEntry {
-  return { key: "", value: undefined };
-}
-
 export const TestFixture_Principals_PrincipalsEntry = {
   fromJSON(object: any): TestFixture_Principals_PrincipalsEntry {
     return {
@@ -852,10 +765,6 @@ export const TestFixture_Principals_PrincipalsEntry = {
     return obj;
   },
 };
-
-function createBaseTestFixture_Resources(): TestFixture_Resources {
-  return { resources: {} };
-}
 
 export const TestFixture_Resources = {
   fromJSON(object: any): TestFixture_Resources {
@@ -881,10 +790,6 @@ export const TestFixture_Resources = {
   },
 };
 
-function createBaseTestFixture_Resources_ResourcesEntry(): TestFixture_Resources_ResourcesEntry {
-  return { key: "", value: undefined };
-}
-
 export const TestFixture_Resources_ResourcesEntry = {
   fromJSON(object: any): TestFixture_Resources_ResourcesEntry {
     return {
@@ -900,10 +805,6 @@ export const TestFixture_Resources_ResourcesEntry = {
     return obj;
   },
 };
-
-function createBaseTestFixture_AuxData(): TestFixture_AuxData {
-  return { auxData: {} };
-}
 
 export const TestFixture_AuxData = {
   fromJSON(object: any): TestFixture_AuxData {
@@ -929,10 +830,6 @@ export const TestFixture_AuxData = {
   },
 };
 
-function createBaseTestFixture_AuxData_AuxDataEntry(): TestFixture_AuxData_AuxDataEntry {
-  return { key: "", value: undefined };
-}
-
 export const TestFixture_AuxData_AuxDataEntry = {
   fromJSON(object: any): TestFixture_AuxData_AuxDataEntry {
     return {
@@ -949,10 +846,6 @@ export const TestFixture_AuxData_AuxDataEntry = {
   },
 };
 
-function createBaseTestOptions(): TestOptions {
-  return { now: undefined };
-}
-
 export const TestOptions = {
   fromJSON(object: any): TestOptions {
     return { now: isSet(object.now) ? fromJsonTimestamp(object.now) : undefined };
@@ -964,20 +857,6 @@ export const TestOptions = {
     return obj;
   },
 };
-
-function createBaseTestSuite(): TestSuite {
-  return {
-    name: "",
-    description: "",
-    skip: false,
-    skipReason: "",
-    tests: [],
-    principals: {},
-    resources: {},
-    auxData: {},
-    options: undefined,
-  };
-}
 
 export const TestSuite = {
   fromJSON(object: any): TestSuite {
@@ -1043,10 +922,6 @@ export const TestSuite = {
   },
 };
 
-function createBaseTestSuite_PrincipalsEntry(): TestSuite_PrincipalsEntry {
-  return { key: "", value: undefined };
-}
-
 export const TestSuite_PrincipalsEntry = {
   fromJSON(object: any): TestSuite_PrincipalsEntry {
     return {
@@ -1062,10 +937,6 @@ export const TestSuite_PrincipalsEntry = {
     return obj;
   },
 };
-
-function createBaseTestSuite_ResourcesEntry(): TestSuite_ResourcesEntry {
-  return { key: "", value: undefined };
-}
 
 export const TestSuite_ResourcesEntry = {
   fromJSON(object: any): TestSuite_ResourcesEntry {
@@ -1083,10 +954,6 @@ export const TestSuite_ResourcesEntry = {
   },
 };
 
-function createBaseTestSuite_AuxDataEntry(): TestSuite_AuxDataEntry {
-  return { key: "", value: undefined };
-}
-
 export const TestSuite_AuxDataEntry = {
   fromJSON(object: any): TestSuite_AuxDataEntry {
     return {
@@ -1102,10 +969,6 @@ export const TestSuite_AuxDataEntry = {
     return obj;
   },
 };
-
-function createBaseTestTable(): TestTable {
-  return { name: "", description: "", skip: false, skipReason: "", input: undefined, expected: [], options: undefined };
-}
 
 export const TestTable = {
   fromJSON(object: any): TestTable {
@@ -1139,10 +1002,6 @@ export const TestTable = {
   },
 };
 
-function createBaseTestTable_Input(): TestTable_Input {
-  return { principals: [], resources: [], actions: [], auxData: "" };
-}
-
 export const TestTable_Input = {
   fromJSON(object: any): TestTable_Input {
     return {
@@ -1175,10 +1034,6 @@ export const TestTable_Input = {
   },
 };
 
-function createBaseTestTable_Expectation(): TestTable_Expectation {
-  return { principal: "", resource: "", actions: {} };
-}
-
 export const TestTable_Expectation = {
   fromJSON(object: any): TestTable_Expectation {
     return {
@@ -1207,10 +1062,6 @@ export const TestTable_Expectation = {
   },
 };
 
-function createBaseTestTable_Expectation_ActionsEntry(): TestTable_Expectation_ActionsEntry {
-  return { key: "", value: 0 };
-}
-
 export const TestTable_Expectation_ActionsEntry = {
   fromJSON(object: any): TestTable_Expectation_ActionsEntry {
     return {
@@ -1226,18 +1077,6 @@ export const TestTable_Expectation_ActionsEntry = {
     return obj;
   },
 };
-
-function createBaseTest(): Test {
-  return {
-    name: undefined,
-    description: "",
-    skip: false,
-    skipReason: "",
-    input: undefined,
-    expected: {},
-    options: undefined,
-  };
-}
 
 export const Test = {
   fromJSON(object: any): Test {
@@ -1275,10 +1114,6 @@ export const Test = {
   },
 };
 
-function createBaseTest_TestName(): Test_TestName {
-  return { testTableName: "", principalKey: "", resourceKey: "" };
-}
-
 export const Test_TestName = {
   fromJSON(object: any): Test_TestName {
     return {
@@ -1297,10 +1132,6 @@ export const Test_TestName = {
   },
 };
 
-function createBaseTest_ExpectedEntry(): Test_ExpectedEntry {
-  return { key: "", value: 0 };
-}
-
 export const Test_ExpectedEntry = {
   fromJSON(object: any): Test_ExpectedEntry {
     return {
@@ -1316,10 +1147,6 @@ export const Test_ExpectedEntry = {
     return obj;
   },
 };
-
-function createBaseTestResults(): TestResults {
-  return { suites: [], summary: undefined };
-}
 
 export const TestResults = {
   fromJSON(object: any): TestResults {
@@ -1342,10 +1169,6 @@ export const TestResults = {
   },
 };
 
-function createBaseTestResults_Tally(): TestResults_Tally {
-  return { result: 0, count: 0 };
-}
-
 export const TestResults_Tally = {
   fromJSON(object: any): TestResults_Tally {
     return {
@@ -1361,10 +1184,6 @@ export const TestResults_Tally = {
     return obj;
   },
 };
-
-function createBaseTestResults_Summary(): TestResults_Summary {
-  return { overallResult: 0, testsCount: 0, resultCounts: [] };
-}
 
 export const TestResults_Summary = {
   fromJSON(object: any): TestResults_Summary {
@@ -1389,10 +1208,6 @@ export const TestResults_Summary = {
     return obj;
   },
 };
-
-function createBaseTestResults_Suite(): TestResults_Suite {
-  return { file: "", name: "", principals: [], summary: undefined, error: "" };
-}
 
 export const TestResults_Suite = {
   fromJSON(object: any): TestResults_Suite {
@@ -1423,10 +1238,6 @@ export const TestResults_Suite = {
   },
 };
 
-function createBaseTestResults_Principal(): TestResults_Principal {
-  return { name: "", resources: [] };
-}
-
 export const TestResults_Principal = {
   fromJSON(object: any): TestResults_Principal {
     return {
@@ -1449,10 +1260,6 @@ export const TestResults_Principal = {
   },
 };
 
-function createBaseTestResults_Resource(): TestResults_Resource {
-  return { name: "", actions: [] };
-}
-
 export const TestResults_Resource = {
   fromJSON(object: any): TestResults_Resource {
     return {
@@ -1473,10 +1280,6 @@ export const TestResults_Resource = {
   },
 };
 
-function createBaseTestResults_Action(): TestResults_Action {
-  return { name: "", details: undefined };
-}
-
 export const TestResults_Action = {
   fromJSON(object: any): TestResults_Action {
     return {
@@ -1493,10 +1296,6 @@ export const TestResults_Action = {
     return obj;
   },
 };
-
-function createBaseTestResults_Details(): TestResults_Details {
-  return { result: 0, outcome: undefined, engineTrace: [] };
-}
 
 export const TestResults_Details = {
   fromJSON(object: any): TestResults_Details {
@@ -1527,10 +1326,6 @@ export const TestResults_Details = {
     return obj;
   },
 };
-
-function createBaseTestResults_Failure(): TestResults_Failure {
-  return { expected: 0, actual: 0 };
-}
 
 export const TestResults_Failure = {
   fromJSON(object: any): TestResults_Failure {
