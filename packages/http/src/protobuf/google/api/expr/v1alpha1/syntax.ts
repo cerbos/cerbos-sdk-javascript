@@ -309,10 +309,6 @@ export interface SourcePosition {
   column: number;
 }
 
-function createBaseParsedExpr(): ParsedExpr {
-  return { expr: undefined, sourceInfo: undefined };
-}
-
 export const ParsedExpr = {
   fromJSON(object: any): ParsedExpr {
     return {
@@ -329,10 +325,6 @@ export const ParsedExpr = {
     return obj;
   },
 };
-
-function createBaseExpr(): Expr {
-  return { id: "0", exprKind: undefined };
-}
 
 export const Expr = {
   fromJSON(object: any): Expr {
@@ -379,10 +371,6 @@ export const Expr = {
   },
 };
 
-function createBaseExpr_Ident(): Expr_Ident {
-  return { name: "" };
-}
-
 export const Expr_Ident = {
   fromJSON(object: any): Expr_Ident {
     return { name: isSet(object.name) ? String(object.name) : "" };
@@ -394,10 +382,6 @@ export const Expr_Ident = {
     return obj;
   },
 };
-
-function createBaseExpr_Select(): Expr_Select {
-  return { operand: undefined, field: "", testOnly: false };
-}
 
 export const Expr_Select = {
   fromJSON(object: any): Expr_Select {
@@ -416,10 +400,6 @@ export const Expr_Select = {
     return obj;
   },
 };
-
-function createBaseExpr_Call(): Expr_Call {
-  return { target: undefined, function: "", args: [] };
-}
 
 export const Expr_Call = {
   fromJSON(object: any): Expr_Call {
@@ -443,10 +423,6 @@ export const Expr_Call = {
   },
 };
 
-function createBaseExpr_CreateList(): Expr_CreateList {
-  return { elements: [] };
-}
-
 export const Expr_CreateList = {
   fromJSON(object: any): Expr_CreateList {
     return { elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromJSON(e)) : [] };
@@ -462,10 +438,6 @@ export const Expr_CreateList = {
     return obj;
   },
 };
-
-function createBaseExpr_CreateStruct(): Expr_CreateStruct {
-  return { messageName: "", entries: [] };
-}
 
 export const Expr_CreateStruct = {
   fromJSON(object: any): Expr_CreateStruct {
@@ -488,10 +460,6 @@ export const Expr_CreateStruct = {
     return obj;
   },
 };
-
-function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
-  return { id: "0", keyKind: undefined, value: undefined };
-}
 
 export const Expr_CreateStruct_Entry = {
   fromJSON(object: any): Expr_CreateStruct_Entry {
@@ -516,18 +484,6 @@ export const Expr_CreateStruct_Entry = {
     return obj;
   },
 };
-
-function createBaseExpr_Comprehension(): Expr_Comprehension {
-  return {
-    iterVar: "",
-    iterRange: undefined,
-    accuVar: "",
-    accuInit: undefined,
-    loopCondition: undefined,
-    loopStep: undefined,
-    result: undefined,
-  };
-}
 
 export const Expr_Comprehension = {
   fromJSON(object: any): Expr_Comprehension {
@@ -555,10 +511,6 @@ export const Expr_Comprehension = {
     return obj;
   },
 };
-
-function createBaseConstant(): Constant {
-  return { constantKind: undefined };
-}
 
 export const Constant = {
   fromJSON(object: any): Constant {
@@ -607,10 +559,6 @@ export const Constant = {
   },
 };
 
-function createBaseSourceInfo(): SourceInfo {
-  return { syntaxVersion: "", location: "", lineOffsets: [], positions: {}, macroCalls: {} };
-}
-
 export const SourceInfo = {
   fromJSON(object: any): SourceInfo {
     return {
@@ -657,10 +605,6 @@ export const SourceInfo = {
   },
 };
 
-function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
-  return { key: "0", value: 0 };
-}
-
 export const SourceInfo_PositionsEntry = {
   fromJSON(object: any): SourceInfo_PositionsEntry {
     return { key: isSet(object.key) ? String(object.key) : "0", value: isSet(object.value) ? Number(object.value) : 0 };
@@ -673,10 +617,6 @@ export const SourceInfo_PositionsEntry = {
     return obj;
   },
 };
-
-function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
-  return { key: "0", value: undefined };
-}
 
 export const SourceInfo_MacroCallsEntry = {
   fromJSON(object: any): SourceInfo_MacroCallsEntry {
@@ -693,10 +633,6 @@ export const SourceInfo_MacroCallsEntry = {
     return obj;
   },
 };
-
-function createBaseSourcePosition(): SourcePosition {
-  return { location: "", offset: 0, line: 0, column: 0 };
-}
 
 export const SourcePosition = {
   fromJSON(object: any): SourcePosition {

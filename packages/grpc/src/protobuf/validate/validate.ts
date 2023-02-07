@@ -961,68 +961,70 @@ export const FieldRules = {
     if (message.message !== undefined) {
       MessageRules.encode(message.message, writer.uint32(138).fork()).ldelim();
     }
-    if (message.type?.$case === "float") {
-      FloatRules.encode(message.type.float, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.type?.$case === "double") {
-      DoubleRules.encode(message.type.double, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.type?.$case === "int32") {
-      Int32Rules.encode(message.type.int32, writer.uint32(26).fork()).ldelim();
-    }
-    if (message.type?.$case === "int64") {
-      Int64Rules.encode(message.type.int64, writer.uint32(34).fork()).ldelim();
-    }
-    if (message.type?.$case === "uint32") {
-      UInt32Rules.encode(message.type.uint32, writer.uint32(42).fork()).ldelim();
-    }
-    if (message.type?.$case === "uint64") {
-      UInt64Rules.encode(message.type.uint64, writer.uint32(50).fork()).ldelim();
-    }
-    if (message.type?.$case === "sint32") {
-      SInt32Rules.encode(message.type.sint32, writer.uint32(58).fork()).ldelim();
-    }
-    if (message.type?.$case === "sint64") {
-      SInt64Rules.encode(message.type.sint64, writer.uint32(66).fork()).ldelim();
-    }
-    if (message.type?.$case === "fixed32") {
-      Fixed32Rules.encode(message.type.fixed32, writer.uint32(74).fork()).ldelim();
-    }
-    if (message.type?.$case === "fixed64") {
-      Fixed64Rules.encode(message.type.fixed64, writer.uint32(82).fork()).ldelim();
-    }
-    if (message.type?.$case === "sfixed32") {
-      SFixed32Rules.encode(message.type.sfixed32, writer.uint32(90).fork()).ldelim();
-    }
-    if (message.type?.$case === "sfixed64") {
-      SFixed64Rules.encode(message.type.sfixed64, writer.uint32(98).fork()).ldelim();
-    }
-    if (message.type?.$case === "bool") {
-      BoolRules.encode(message.type.bool, writer.uint32(106).fork()).ldelim();
-    }
-    if (message.type?.$case === "string") {
-      StringRules.encode(message.type.string, writer.uint32(114).fork()).ldelim();
-    }
-    if (message.type?.$case === "bytes") {
-      BytesRules.encode(message.type.bytes, writer.uint32(122).fork()).ldelim();
-    }
-    if (message.type?.$case === "enum") {
-      EnumRules.encode(message.type.enum, writer.uint32(130).fork()).ldelim();
-    }
-    if (message.type?.$case === "repeated") {
-      RepeatedRules.encode(message.type.repeated, writer.uint32(146).fork()).ldelim();
-    }
-    if (message.type?.$case === "map") {
-      MapRules.encode(message.type.map, writer.uint32(154).fork()).ldelim();
-    }
-    if (message.type?.$case === "any") {
-      AnyRules.encode(message.type.any, writer.uint32(162).fork()).ldelim();
-    }
-    if (message.type?.$case === "duration") {
-      DurationRules.encode(message.type.duration, writer.uint32(170).fork()).ldelim();
-    }
-    if (message.type?.$case === "timestamp") {
-      TimestampRules.encode(message.type.timestamp, writer.uint32(178).fork()).ldelim();
+    switch (message.type?.$case) {
+      case "float":
+        FloatRules.encode(message.type.float, writer.uint32(10).fork()).ldelim();
+        break;
+      case "double":
+        DoubleRules.encode(message.type.double, writer.uint32(18).fork()).ldelim();
+        break;
+      case "int32":
+        Int32Rules.encode(message.type.int32, writer.uint32(26).fork()).ldelim();
+        break;
+      case "int64":
+        Int64Rules.encode(message.type.int64, writer.uint32(34).fork()).ldelim();
+        break;
+      case "uint32":
+        UInt32Rules.encode(message.type.uint32, writer.uint32(42).fork()).ldelim();
+        break;
+      case "uint64":
+        UInt64Rules.encode(message.type.uint64, writer.uint32(50).fork()).ldelim();
+        break;
+      case "sint32":
+        SInt32Rules.encode(message.type.sint32, writer.uint32(58).fork()).ldelim();
+        break;
+      case "sint64":
+        SInt64Rules.encode(message.type.sint64, writer.uint32(66).fork()).ldelim();
+        break;
+      case "fixed32":
+        Fixed32Rules.encode(message.type.fixed32, writer.uint32(74).fork()).ldelim();
+        break;
+      case "fixed64":
+        Fixed64Rules.encode(message.type.fixed64, writer.uint32(82).fork()).ldelim();
+        break;
+      case "sfixed32":
+        SFixed32Rules.encode(message.type.sfixed32, writer.uint32(90).fork()).ldelim();
+        break;
+      case "sfixed64":
+        SFixed64Rules.encode(message.type.sfixed64, writer.uint32(98).fork()).ldelim();
+        break;
+      case "bool":
+        BoolRules.encode(message.type.bool, writer.uint32(106).fork()).ldelim();
+        break;
+      case "string":
+        StringRules.encode(message.type.string, writer.uint32(114).fork()).ldelim();
+        break;
+      case "bytes":
+        BytesRules.encode(message.type.bytes, writer.uint32(122).fork()).ldelim();
+        break;
+      case "enum":
+        EnumRules.encode(message.type.enum, writer.uint32(130).fork()).ldelim();
+        break;
+      case "repeated":
+        RepeatedRules.encode(message.type.repeated, writer.uint32(146).fork()).ldelim();
+        break;
+      case "map":
+        MapRules.encode(message.type.map, writer.uint32(154).fork()).ldelim();
+        break;
+      case "any":
+        AnyRules.encode(message.type.any, writer.uint32(162).fork()).ldelim();
+        break;
+      case "duration":
+        DurationRules.encode(message.type.duration, writer.uint32(170).fork()).ldelim();
+        break;
+      case "timestamp":
+        TimestampRules.encode(message.type.timestamp, writer.uint32(178).fork()).ldelim();
+        break;
     }
     return writer;
   },
@@ -2298,35 +2300,37 @@ export const StringRules = {
     for (const v of message.notIn) {
       writer.uint32(90).string(v!);
     }
-    if (message.wellKnown?.$case === "email") {
-      writer.uint32(96).bool(message.wellKnown.email);
-    }
-    if (message.wellKnown?.$case === "hostname") {
-      writer.uint32(104).bool(message.wellKnown.hostname);
-    }
-    if (message.wellKnown?.$case === "ip") {
-      writer.uint32(112).bool(message.wellKnown.ip);
-    }
-    if (message.wellKnown?.$case === "ipv4") {
-      writer.uint32(120).bool(message.wellKnown.ipv4);
-    }
-    if (message.wellKnown?.$case === "ipv6") {
-      writer.uint32(128).bool(message.wellKnown.ipv6);
-    }
-    if (message.wellKnown?.$case === "uri") {
-      writer.uint32(136).bool(message.wellKnown.uri);
-    }
-    if (message.wellKnown?.$case === "uriRef") {
-      writer.uint32(144).bool(message.wellKnown.uriRef);
-    }
-    if (message.wellKnown?.$case === "address") {
-      writer.uint32(168).bool(message.wellKnown.address);
-    }
-    if (message.wellKnown?.$case === "uuid") {
-      writer.uint32(176).bool(message.wellKnown.uuid);
-    }
-    if (message.wellKnown?.$case === "wellKnownRegex") {
-      writer.uint32(192).int32(message.wellKnown.wellKnownRegex);
+    switch (message.wellKnown?.$case) {
+      case "email":
+        writer.uint32(96).bool(message.wellKnown.email);
+        break;
+      case "hostname":
+        writer.uint32(104).bool(message.wellKnown.hostname);
+        break;
+      case "ip":
+        writer.uint32(112).bool(message.wellKnown.ip);
+        break;
+      case "ipv4":
+        writer.uint32(120).bool(message.wellKnown.ipv4);
+        break;
+      case "ipv6":
+        writer.uint32(128).bool(message.wellKnown.ipv6);
+        break;
+      case "uri":
+        writer.uint32(136).bool(message.wellKnown.uri);
+        break;
+      case "uriRef":
+        writer.uint32(144).bool(message.wellKnown.uriRef);
+        break;
+      case "address":
+        writer.uint32(168).bool(message.wellKnown.address);
+        break;
+      case "uuid":
+        writer.uint32(176).bool(message.wellKnown.uuid);
+        break;
+      case "wellKnownRegex":
+        writer.uint32(192).int32(message.wellKnown.wellKnownRegex);
+        break;
     }
     if (message.strict === true) {
       writer.uint32(200).bool(message.strict);
@@ -2480,14 +2484,16 @@ export const BytesRules = {
     for (const v of message.notIn) {
       writer.uint32(74).bytes(v!);
     }
-    if (message.wellKnown?.$case === "ip") {
-      writer.uint32(80).bool(message.wellKnown.ip);
-    }
-    if (message.wellKnown?.$case === "ipv4") {
-      writer.uint32(88).bool(message.wellKnown.ipv4);
-    }
-    if (message.wellKnown?.$case === "ipv6") {
-      writer.uint32(96).bool(message.wellKnown.ipv6);
+    switch (message.wellKnown?.$case) {
+      case "ip":
+        writer.uint32(80).bool(message.wellKnown.ip);
+        break;
+      case "ipv4":
+        writer.uint32(88).bool(message.wellKnown.ipv4);
+        break;
+      case "ipv6":
+        writer.uint32(96).bool(message.wellKnown.ipv6);
+        break;
     }
     if (message.ignoreEmpty === true) {
       writer.uint32(112).bool(message.ignoreEmpty);

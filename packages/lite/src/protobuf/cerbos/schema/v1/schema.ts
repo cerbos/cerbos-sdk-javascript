@@ -48,10 +48,6 @@ export interface Schema {
   definition: Uint8Array;
 }
 
-function createBaseValidationError(): ValidationError {
-  return { path: "", message: "", source: 0 };
-}
-
 export const ValidationError = {
   fromJSON(object: any): ValidationError {
     return {
@@ -69,10 +65,6 @@ export const ValidationError = {
     return obj;
   },
 };
-
-function createBaseSchema(): Schema {
-  return { id: "", definition: new Uint8Array() };
-}
 
 export const Schema = {
   fromJSON(object: any): Schema {

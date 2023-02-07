@@ -149,6 +149,10 @@ export interface GetPolicyRequest {
   id: string[];
 }
 
+export interface DisablePolicyRequest {
+  id: string[];
+}
+
 export interface AddOrUpdateSchemaRequest {
   schemas: Schema[];
 }

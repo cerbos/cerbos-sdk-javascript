@@ -979,10 +979,6 @@ export interface TimestampRules {
   within: Duration | undefined;
 }
 
-function createBaseFieldRules(): FieldRules {
-  return { message: undefined, type: undefined };
-}
-
 export const FieldRules = {
   fromJSON(object: any): FieldRules {
     return {
@@ -1080,10 +1076,6 @@ export const FieldRules = {
   },
 };
 
-function createBaseFloatRules(): FloatRules {
-  return { const: 0, lt: 0, lte: 0, gt: 0, gte: 0, in: [], notIn: [], ignoreEmpty: false };
-}
-
 export const FloatRules = {
   fromJSON(object: any): FloatRules {
     return {
@@ -1123,10 +1115,6 @@ export const FloatRules = {
     return obj;
   },
 };
-
-function createBaseDoubleRules(): DoubleRules {
-  return { const: 0, lt: 0, lte: 0, gt: 0, gte: 0, in: [], notIn: [], ignoreEmpty: false };
-}
 
 export const DoubleRules = {
   fromJSON(object: any): DoubleRules {
@@ -1168,10 +1156,6 @@ export const DoubleRules = {
   },
 };
 
-function createBaseInt32Rules(): Int32Rules {
-  return { const: 0, lt: 0, lte: 0, gt: 0, gte: 0, in: [], notIn: [], ignoreEmpty: false };
-}
-
 export const Int32Rules = {
   fromJSON(object: any): Int32Rules {
     return {
@@ -1211,10 +1195,6 @@ export const Int32Rules = {
     return obj;
   },
 };
-
-function createBaseInt64Rules(): Int64Rules {
-  return { const: "0", lt: "0", lte: "0", gt: "0", gte: "0", in: [], notIn: [], ignoreEmpty: false };
-}
 
 export const Int64Rules = {
   fromJSON(object: any): Int64Rules {
@@ -1256,10 +1236,6 @@ export const Int64Rules = {
   },
 };
 
-function createBaseUInt32Rules(): UInt32Rules {
-  return { const: 0, lt: 0, lte: 0, gt: 0, gte: 0, in: [], notIn: [], ignoreEmpty: false };
-}
-
 export const UInt32Rules = {
   fromJSON(object: any): UInt32Rules {
     return {
@@ -1299,10 +1275,6 @@ export const UInt32Rules = {
     return obj;
   },
 };
-
-function createBaseUInt64Rules(): UInt64Rules {
-  return { const: "0", lt: "0", lte: "0", gt: "0", gte: "0", in: [], notIn: [], ignoreEmpty: false };
-}
 
 export const UInt64Rules = {
   fromJSON(object: any): UInt64Rules {
@@ -1344,10 +1316,6 @@ export const UInt64Rules = {
   },
 };
 
-function createBaseSInt32Rules(): SInt32Rules {
-  return { const: 0, lt: 0, lte: 0, gt: 0, gte: 0, in: [], notIn: [], ignoreEmpty: false };
-}
-
 export const SInt32Rules = {
   fromJSON(object: any): SInt32Rules {
     return {
@@ -1387,10 +1355,6 @@ export const SInt32Rules = {
     return obj;
   },
 };
-
-function createBaseSInt64Rules(): SInt64Rules {
-  return { const: "0", lt: "0", lte: "0", gt: "0", gte: "0", in: [], notIn: [], ignoreEmpty: false };
-}
 
 export const SInt64Rules = {
   fromJSON(object: any): SInt64Rules {
@@ -1432,10 +1396,6 @@ export const SInt64Rules = {
   },
 };
 
-function createBaseFixed32Rules(): Fixed32Rules {
-  return { const: 0, lt: 0, lte: 0, gt: 0, gte: 0, in: [], notIn: [], ignoreEmpty: false };
-}
-
 export const Fixed32Rules = {
   fromJSON(object: any): Fixed32Rules {
     return {
@@ -1475,10 +1435,6 @@ export const Fixed32Rules = {
     return obj;
   },
 };
-
-function createBaseFixed64Rules(): Fixed64Rules {
-  return { const: "0", lt: "0", lte: "0", gt: "0", gte: "0", in: [], notIn: [], ignoreEmpty: false };
-}
 
 export const Fixed64Rules = {
   fromJSON(object: any): Fixed64Rules {
@@ -1520,10 +1476,6 @@ export const Fixed64Rules = {
   },
 };
 
-function createBaseSFixed32Rules(): SFixed32Rules {
-  return { const: 0, lt: 0, lte: 0, gt: 0, gte: 0, in: [], notIn: [], ignoreEmpty: false };
-}
-
 export const SFixed32Rules = {
   fromJSON(object: any): SFixed32Rules {
     return {
@@ -1563,10 +1515,6 @@ export const SFixed32Rules = {
     return obj;
   },
 };
-
-function createBaseSFixed64Rules(): SFixed64Rules {
-  return { const: "0", lt: "0", lte: "0", gt: "0", gte: "0", in: [], notIn: [], ignoreEmpty: false };
-}
 
 export const SFixed64Rules = {
   fromJSON(object: any): SFixed64Rules {
@@ -1608,10 +1556,6 @@ export const SFixed64Rules = {
   },
 };
 
-function createBaseBoolRules(): BoolRules {
-  return { const: false };
-}
-
 export const BoolRules = {
   fromJSON(object: any): BoolRules {
     return { const: isSet(object.const) ? Boolean(object.const) : false };
@@ -1623,28 +1567,6 @@ export const BoolRules = {
     return obj;
   },
 };
-
-function createBaseStringRules(): StringRules {
-  return {
-    const: "",
-    len: "0",
-    minLen: "0",
-    maxLen: "0",
-    lenBytes: "0",
-    minBytes: "0",
-    maxBytes: "0",
-    pattern: "",
-    prefix: "",
-    suffix: "",
-    contains: "",
-    notContains: "",
-    in: [],
-    notIn: [],
-    wellKnown: undefined,
-    strict: false,
-    ignoreEmpty: false,
-  };
-}
 
 export const StringRules = {
   fromJSON(object: any): StringRules {
@@ -1734,23 +1656,6 @@ export const StringRules = {
   },
 };
 
-function createBaseBytesRules(): BytesRules {
-  return {
-    const: new Uint8Array(),
-    len: "0",
-    minLen: "0",
-    maxLen: "0",
-    pattern: "",
-    prefix: new Uint8Array(),
-    suffix: new Uint8Array(),
-    contains: new Uint8Array(),
-    in: [],
-    notIn: [],
-    wellKnown: undefined,
-    ignoreEmpty: false,
-  };
-}
-
 export const BytesRules = {
   fromJSON(object: any): BytesRules {
     return {
@@ -1809,10 +1714,6 @@ export const BytesRules = {
   },
 };
 
-function createBaseEnumRules(): EnumRules {
-  return { const: 0, definedOnly: false, in: [], notIn: [] };
-}
-
 export const EnumRules = {
   fromJSON(object: any): EnumRules {
     return {
@@ -1841,10 +1742,6 @@ export const EnumRules = {
   },
 };
 
-function createBaseMessageRules(): MessageRules {
-  return { skip: false, required: false };
-}
-
 export const MessageRules = {
   fromJSON(object: any): MessageRules {
     return {
@@ -1860,10 +1757,6 @@ export const MessageRules = {
     return obj;
   },
 };
-
-function createBaseRepeatedRules(): RepeatedRules {
-  return { minItems: "0", maxItems: "0", unique: false, items: undefined, ignoreEmpty: false };
-}
 
 export const RepeatedRules = {
   fromJSON(object: any): RepeatedRules {
@@ -1886,10 +1779,6 @@ export const RepeatedRules = {
     return obj;
   },
 };
-
-function createBaseMapRules(): MapRules {
-  return { minPairs: "0", maxPairs: "0", noSparse: false, keys: undefined, values: undefined, ignoreEmpty: false };
-}
 
 export const MapRules = {
   fromJSON(object: any): MapRules {
@@ -1914,10 +1803,6 @@ export const MapRules = {
     return obj;
   },
 };
-
-function createBaseAnyRules(): AnyRules {
-  return { required: false, in: [], notIn: [] };
-}
 
 export const AnyRules = {
   fromJSON(object: any): AnyRules {
@@ -1944,19 +1829,6 @@ export const AnyRules = {
     return obj;
   },
 };
-
-function createBaseDurationRules(): DurationRules {
-  return {
-    required: false,
-    const: undefined,
-    lt: undefined,
-    lte: undefined,
-    gt: undefined,
-    gte: undefined,
-    in: [],
-    notIn: [],
-  };
-}
 
 export const DurationRules = {
   fromJSON(object: any): DurationRules {
@@ -1993,20 +1865,6 @@ export const DurationRules = {
     return obj;
   },
 };
-
-function createBaseTimestampRules(): TimestampRules {
-  return {
-    required: false,
-    const: undefined,
-    lt: undefined,
-    lte: undefined,
-    gt: undefined,
-    gte: undefined,
-    ltNow: false,
-    gtNow: false,
-    within: undefined,
-  };
-}
 
 export const TimestampRules = {
   fromJSON(object: any): TimestampRules {

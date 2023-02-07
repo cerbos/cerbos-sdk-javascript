@@ -14,10 +14,6 @@ export const protobufPackage = "google.protobuf";
 export interface Empty {
 }
 
-function createBaseEmpty(): Empty {
-  return {};
-}
-
 export const Empty = {
   fromJSON(_: any): Empty {
     return {};

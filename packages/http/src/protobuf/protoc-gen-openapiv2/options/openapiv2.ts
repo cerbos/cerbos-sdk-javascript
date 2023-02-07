@@ -978,23 +978,6 @@ export interface Scopes_ScopeEntry {
   value: string;
 }
 
-function createBaseSwagger(): Swagger {
-  return {
-    swagger: "",
-    info: undefined,
-    host: "",
-    basePath: "",
-    schemes: [],
-    consumes: [],
-    produces: [],
-    responses: {},
-    securityDefinitions: undefined,
-    security: [],
-    externalDocs: undefined,
-    extensions: {},
-  };
-}
-
 export const Swagger = {
   fromJSON(object: any): Swagger {
     return {
@@ -1074,10 +1057,6 @@ export const Swagger = {
   },
 };
 
-function createBaseSwagger_ResponsesEntry(): Swagger_ResponsesEntry {
-  return { key: "", value: undefined };
-}
-
 export const Swagger_ResponsesEntry = {
   fromJSON(object: any): Swagger_ResponsesEntry {
     return {
@@ -1094,10 +1073,6 @@ export const Swagger_ResponsesEntry = {
   },
 };
 
-function createBaseSwagger_ExtensionsEntry(): Swagger_ExtensionsEntry {
-  return { key: "", value: undefined };
-}
-
 export const Swagger_ExtensionsEntry = {
   fromJSON(object: any): Swagger_ExtensionsEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
@@ -1110,23 +1085,6 @@ export const Swagger_ExtensionsEntry = {
     return obj;
   },
 };
-
-function createBaseOperation(): Operation {
-  return {
-    tags: [],
-    summary: "",
-    description: "",
-    externalDocs: undefined,
-    operationId: "",
-    consumes: [],
-    produces: [],
-    responses: {},
-    schemes: [],
-    deprecated: false,
-    security: [],
-    extensions: {},
-  };
-}
 
 export const Operation = {
   fromJSON(object: any): Operation {
@@ -1207,10 +1165,6 @@ export const Operation = {
   },
 };
 
-function createBaseOperation_ResponsesEntry(): Operation_ResponsesEntry {
-  return { key: "", value: undefined };
-}
-
 export const Operation_ResponsesEntry = {
   fromJSON(object: any): Operation_ResponsesEntry {
     return {
@@ -1227,10 +1181,6 @@ export const Operation_ResponsesEntry = {
   },
 };
 
-function createBaseOperation_ExtensionsEntry(): Operation_ExtensionsEntry {
-  return { key: "", value: undefined };
-}
-
 export const Operation_ExtensionsEntry = {
   fromJSON(object: any): Operation_ExtensionsEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
@@ -1243,10 +1193,6 @@ export const Operation_ExtensionsEntry = {
     return obj;
   },
 };
-
-function createBaseHeader(): Header {
-  return { description: "", type: "", format: "", default: "", pattern: "" };
-}
 
 export const Header = {
   fromJSON(object: any): Header {
@@ -1269,10 +1215,6 @@ export const Header = {
     return obj;
   },
 };
-
-function createBaseResponse(): Response {
-  return { description: "", schema: undefined, headers: {}, examples: {}, extensions: {} };
-}
 
 export const Response = {
   fromJSON(object: any): Response {
@@ -1326,10 +1268,6 @@ export const Response = {
   },
 };
 
-function createBaseResponse_HeadersEntry(): Response_HeadersEntry {
-  return { key: "", value: undefined };
-}
-
 export const Response_HeadersEntry = {
   fromJSON(object: any): Response_HeadersEntry {
     return {
@@ -1346,10 +1284,6 @@ export const Response_HeadersEntry = {
   },
 };
 
-function createBaseResponse_ExamplesEntry(): Response_ExamplesEntry {
-  return { key: "", value: "" };
-}
-
 export const Response_ExamplesEntry = {
   fromJSON(object: any): Response_ExamplesEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? String(object.value) : "" };
@@ -1363,10 +1297,6 @@ export const Response_ExamplesEntry = {
   },
 };
 
-function createBaseResponse_ExtensionsEntry(): Response_ExtensionsEntry {
-  return { key: "", value: undefined };
-}
-
 export const Response_ExtensionsEntry = {
   fromJSON(object: any): Response_ExtensionsEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
@@ -1379,18 +1309,6 @@ export const Response_ExtensionsEntry = {
     return obj;
   },
 };
-
-function createBaseInfo(): Info {
-  return {
-    title: "",
-    description: "",
-    termsOfService: "",
-    contact: undefined,
-    license: undefined,
-    version: "",
-    extensions: {},
-  };
-}
 
 export const Info = {
   fromJSON(object: any): Info {
@@ -1428,10 +1346,6 @@ export const Info = {
   },
 };
 
-function createBaseInfo_ExtensionsEntry(): Info_ExtensionsEntry {
-  return { key: "", value: undefined };
-}
-
 export const Info_ExtensionsEntry = {
   fromJSON(object: any): Info_ExtensionsEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
@@ -1444,10 +1358,6 @@ export const Info_ExtensionsEntry = {
     return obj;
   },
 };
-
-function createBaseContact(): Contact {
-  return { name: "", url: "", email: "" };
-}
 
 export const Contact = {
   fromJSON(object: any): Contact {
@@ -1467,10 +1377,6 @@ export const Contact = {
   },
 };
 
-function createBaseLicense(): License {
-  return { name: "", url: "" };
-}
-
 export const License = {
   fromJSON(object: any): License {
     return { name: isSet(object.name) ? String(object.name) : "", url: isSet(object.url) ? String(object.url) : "" };
@@ -1483,10 +1389,6 @@ export const License = {
     return obj;
   },
 };
-
-function createBaseExternalDocumentation(): ExternalDocumentation {
-  return { description: "", url: "" };
-}
 
 export const ExternalDocumentation = {
   fromJSON(object: any): ExternalDocumentation {
@@ -1503,10 +1405,6 @@ export const ExternalDocumentation = {
     return obj;
   },
 };
-
-function createBaseSchema(): Schema {
-  return { jsonSchema: undefined, discriminator: "", readOnly: false, externalDocs: undefined, example: "" };
-}
 
 export const Schema = {
   fromJSON(object: any): Schema {
@@ -1531,37 +1429,6 @@ export const Schema = {
     return obj;
   },
 };
-
-function createBaseJSONSchema(): JSONSchema {
-  return {
-    ref: "",
-    title: "",
-    description: "",
-    default: "",
-    readOnly: false,
-    example: "",
-    multipleOf: 0,
-    maximum: 0,
-    exclusiveMaximum: false,
-    minimum: 0,
-    exclusiveMinimum: false,
-    maxLength: "0",
-    minLength: "0",
-    pattern: "",
-    maxItems: "0",
-    minItems: "0",
-    uniqueItems: false,
-    maxProperties: "0",
-    minProperties: "0",
-    required: [],
-    array: [],
-    type: [],
-    format: "",
-    enum: [],
-    fieldConfiguration: undefined,
-    extensions: {},
-  };
-}
 
 export const JSONSchema = {
   fromJSON(object: any): JSONSchema {
@@ -1659,10 +1526,6 @@ export const JSONSchema = {
   },
 };
 
-function createBaseJSONSchema_FieldConfiguration(): JSONSchema_FieldConfiguration {
-  return { pathParamName: "" };
-}
-
 export const JSONSchema_FieldConfiguration = {
   fromJSON(object: any): JSONSchema_FieldConfiguration {
     return { pathParamName: isSet(object.pathParamName) ? String(object.pathParamName) : "" };
@@ -1674,10 +1537,6 @@ export const JSONSchema_FieldConfiguration = {
     return obj;
   },
 };
-
-function createBaseJSONSchema_ExtensionsEntry(): JSONSchema_ExtensionsEntry {
-  return { key: "", value: undefined };
-}
 
 export const JSONSchema_ExtensionsEntry = {
   fromJSON(object: any): JSONSchema_ExtensionsEntry {
@@ -1691,10 +1550,6 @@ export const JSONSchema_ExtensionsEntry = {
     return obj;
   },
 };
-
-function createBaseTag(): Tag {
-  return { description: "", externalDocs: undefined };
-}
 
 export const Tag = {
   fromJSON(object: any): Tag {
@@ -1712,10 +1567,6 @@ export const Tag = {
     return obj;
   },
 };
-
-function createBaseSecurityDefinitions(): SecurityDefinitions {
-  return { security: {} };
-}
 
 export const SecurityDefinitions = {
   fromJSON(object: any): SecurityDefinitions {
@@ -1741,10 +1592,6 @@ export const SecurityDefinitions = {
   },
 };
 
-function createBaseSecurityDefinitions_SecurityEntry(): SecurityDefinitions_SecurityEntry {
-  return { key: "", value: undefined };
-}
-
 export const SecurityDefinitions_SecurityEntry = {
   fromJSON(object: any): SecurityDefinitions_SecurityEntry {
     return {
@@ -1760,20 +1607,6 @@ export const SecurityDefinitions_SecurityEntry = {
     return obj;
   },
 };
-
-function createBaseSecurityScheme(): SecurityScheme {
-  return {
-    type: 0,
-    description: "",
-    name: "",
-    in: 0,
-    flow: 0,
-    authorizationUrl: "",
-    tokenUrl: "",
-    scopes: undefined,
-    extensions: {},
-  };
-}
 
 export const SecurityScheme = {
   fromJSON(object: any): SecurityScheme {
@@ -1815,10 +1648,6 @@ export const SecurityScheme = {
   },
 };
 
-function createBaseSecurityScheme_ExtensionsEntry(): SecurityScheme_ExtensionsEntry {
-  return { key: "", value: undefined };
-}
-
 export const SecurityScheme_ExtensionsEntry = {
   fromJSON(object: any): SecurityScheme_ExtensionsEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
@@ -1831,10 +1660,6 @@ export const SecurityScheme_ExtensionsEntry = {
     return obj;
   },
 };
-
-function createBaseSecurityRequirement(): SecurityRequirement {
-  return { securityRequirement: {} };
-}
 
 export const SecurityRequirement = {
   fromJSON(object: any): SecurityRequirement {
@@ -1862,10 +1687,6 @@ export const SecurityRequirement = {
   },
 };
 
-function createBaseSecurityRequirement_SecurityRequirementValue(): SecurityRequirement_SecurityRequirementValue {
-  return { scope: [] };
-}
-
 export const SecurityRequirement_SecurityRequirementValue = {
   fromJSON(object: any): SecurityRequirement_SecurityRequirementValue {
     return { scope: Array.isArray(object?.scope) ? object.scope.map((e: any) => String(e)) : [] };
@@ -1881,10 +1702,6 @@ export const SecurityRequirement_SecurityRequirementValue = {
     return obj;
   },
 };
-
-function createBaseSecurityRequirement_SecurityRequirementEntry(): SecurityRequirement_SecurityRequirementEntry {
-  return { key: "", value: undefined };
-}
 
 export const SecurityRequirement_SecurityRequirementEntry = {
   fromJSON(object: any): SecurityRequirement_SecurityRequirementEntry {
@@ -1902,10 +1719,6 @@ export const SecurityRequirement_SecurityRequirementEntry = {
     return obj;
   },
 };
-
-function createBaseScopes(): Scopes {
-  return { scope: {} };
-}
 
 export const Scopes = {
   fromJSON(object: any): Scopes {
@@ -1930,10 +1743,6 @@ export const Scopes = {
     return obj;
   },
 };
-
-function createBaseScopes_ScopeEntry(): Scopes_ScopeEntry {
-  return { key: "", value: "" };
-}
 
 export const Scopes_ScopeEntry = {
   fromJSON(object: any): Scopes_ScopeEntry {

@@ -1116,10 +1116,6 @@ export interface GeneratedCodeInfo_Annotation {
   end: number;
 }
 
-function createBaseFileDescriptorSet(): FileDescriptorSet {
-  return { file: [] };
-}
-
 export const FileDescriptorSet = {
   fromJSON(object: any): FileDescriptorSet {
     return { file: Array.isArray(object?.file) ? object.file.map((e: any) => FileDescriptorProto.fromJSON(e)) : [] };
@@ -1135,23 +1131,6 @@ export const FileDescriptorSet = {
     return obj;
   },
 };
-
-function createBaseFileDescriptorProto(): FileDescriptorProto {
-  return {
-    name: "",
-    package: "",
-    dependency: [],
-    publicDependency: [],
-    weakDependency: [],
-    messageType: [],
-    enumType: [],
-    service: [],
-    extension: [],
-    options: undefined,
-    sourceCodeInfo: undefined,
-    syntax: "",
-  };
-}
 
 export const FileDescriptorProto = {
   fromJSON(object: any): FileDescriptorProto {
@@ -1223,21 +1202,6 @@ export const FileDescriptorProto = {
     return obj;
   },
 };
-
-function createBaseDescriptorProto(): DescriptorProto {
-  return {
-    name: "",
-    field: [],
-    extension: [],
-    nestedType: [],
-    enumType: [],
-    extensionRange: [],
-    oneofDecl: [],
-    options: undefined,
-    reservedRange: [],
-    reservedName: [],
-  };
-}
 
 export const DescriptorProto = {
   fromJSON(object: any): DescriptorProto {
@@ -1314,10 +1278,6 @@ export const DescriptorProto = {
   },
 };
 
-function createBaseDescriptorProto_ExtensionRange(): DescriptorProto_ExtensionRange {
-  return { start: 0, end: 0, options: undefined };
-}
-
 export const DescriptorProto_ExtensionRange = {
   fromJSON(object: any): DescriptorProto_ExtensionRange {
     return {
@@ -1337,10 +1297,6 @@ export const DescriptorProto_ExtensionRange = {
   },
 };
 
-function createBaseDescriptorProto_ReservedRange(): DescriptorProto_ReservedRange {
-  return { start: 0, end: 0 };
-}
-
 export const DescriptorProto_ReservedRange = {
   fromJSON(object: any): DescriptorProto_ReservedRange {
     return { start: isSet(object.start) ? Number(object.start) : 0, end: isSet(object.end) ? Number(object.end) : 0 };
@@ -1353,10 +1309,6 @@ export const DescriptorProto_ReservedRange = {
     return obj;
   },
 };
-
-function createBaseExtensionRangeOptions(): ExtensionRangeOptions {
-  return { uninterpretedOption: [] };
-}
 
 export const ExtensionRangeOptions = {
   fromJSON(object: any): ExtensionRangeOptions {
@@ -1377,22 +1329,6 @@ export const ExtensionRangeOptions = {
     return obj;
   },
 };
-
-function createBaseFieldDescriptorProto(): FieldDescriptorProto {
-  return {
-    name: "",
-    number: 0,
-    label: 1,
-    type: 1,
-    typeName: "",
-    extendee: "",
-    defaultValue: "",
-    oneofIndex: 0,
-    jsonName: "",
-    options: undefined,
-    proto3Optional: false,
-  };
-}
 
 export const FieldDescriptorProto = {
   fromJSON(object: any): FieldDescriptorProto {
@@ -1428,10 +1364,6 @@ export const FieldDescriptorProto = {
   },
 };
 
-function createBaseOneofDescriptorProto(): OneofDescriptorProto {
-  return { name: "", options: undefined };
-}
-
 export const OneofDescriptorProto = {
   fromJSON(object: any): OneofDescriptorProto {
     return {
@@ -1447,10 +1379,6 @@ export const OneofDescriptorProto = {
     return obj;
   },
 };
-
-function createBaseEnumDescriptorProto(): EnumDescriptorProto {
-  return { name: "", value: [], options: undefined, reservedRange: [], reservedName: [] };
-}
 
 export const EnumDescriptorProto = {
   fromJSON(object: any): EnumDescriptorProto {
@@ -1492,10 +1420,6 @@ export const EnumDescriptorProto = {
   },
 };
 
-function createBaseEnumDescriptorProto_EnumReservedRange(): EnumDescriptorProto_EnumReservedRange {
-  return { start: 0, end: 0 };
-}
-
 export const EnumDescriptorProto_EnumReservedRange = {
   fromJSON(object: any): EnumDescriptorProto_EnumReservedRange {
     return { start: isSet(object.start) ? Number(object.start) : 0, end: isSet(object.end) ? Number(object.end) : 0 };
@@ -1508,10 +1432,6 @@ export const EnumDescriptorProto_EnumReservedRange = {
     return obj;
   },
 };
-
-function createBaseEnumValueDescriptorProto(): EnumValueDescriptorProto {
-  return { name: "", number: 0, options: undefined };
-}
 
 export const EnumValueDescriptorProto = {
   fromJSON(object: any): EnumValueDescriptorProto {
@@ -1531,10 +1451,6 @@ export const EnumValueDescriptorProto = {
     return obj;
   },
 };
-
-function createBaseServiceDescriptorProto(): ServiceDescriptorProto {
-  return { name: "", method: [], options: undefined };
-}
 
 export const ServiceDescriptorProto = {
   fromJSON(object: any): ServiceDescriptorProto {
@@ -1558,17 +1474,6 @@ export const ServiceDescriptorProto = {
     return obj;
   },
 };
-
-function createBaseMethodDescriptorProto(): MethodDescriptorProto {
-  return {
-    name: "",
-    inputType: "",
-    outputType: "",
-    options: undefined,
-    clientStreaming: false,
-    serverStreaming: false,
-  };
-}
 
 export const MethodDescriptorProto = {
   fromJSON(object: any): MethodDescriptorProto {
@@ -1594,32 +1499,6 @@ export const MethodDescriptorProto = {
     return obj;
   },
 };
-
-function createBaseFileOptions(): FileOptions {
-  return {
-    javaPackage: "",
-    javaOuterClassname: "",
-    javaMultipleFiles: false,
-    javaGenerateEqualsAndHash: false,
-    javaStringCheckUtf8: false,
-    optimizeFor: 1,
-    goPackage: "",
-    ccGenericServices: false,
-    javaGenericServices: false,
-    pyGenericServices: false,
-    phpGenericServices: false,
-    deprecated: false,
-    ccEnableArenas: false,
-    objcClassPrefix: "",
-    csharpNamespace: "",
-    swiftPrefix: "",
-    phpClassPrefix: "",
-    phpNamespace: "",
-    phpMetadataNamespace: "",
-    rubyPackage: "",
-    uninterpretedOption: [],
-  };
-}
 
 export const FileOptions = {
   fromJSON(object: any): FileOptions {
@@ -1684,16 +1563,6 @@ export const FileOptions = {
   },
 };
 
-function createBaseMessageOptions(): MessageOptions {
-  return {
-    messageSetWireFormat: false,
-    noStandardDescriptorAccessor: false,
-    deprecated: false,
-    mapEntry: false,
-    uninterpretedOption: [],
-  };
-}
-
 export const MessageOptions = {
   fromJSON(object: any): MessageOptions {
     return {
@@ -1724,19 +1593,6 @@ export const MessageOptions = {
     return obj;
   },
 };
-
-function createBaseFieldOptions(): FieldOptions {
-  return {
-    ctype: 0,
-    packed: false,
-    jstype: 0,
-    lazy: false,
-    unverifiedLazy: false,
-    deprecated: false,
-    weak: false,
-    uninterpretedOption: [],
-  };
-}
 
 export const FieldOptions = {
   fromJSON(object: any): FieldOptions {
@@ -1772,10 +1628,6 @@ export const FieldOptions = {
   },
 };
 
-function createBaseOneofOptions(): OneofOptions {
-  return { uninterpretedOption: [] };
-}
-
 export const OneofOptions = {
   fromJSON(object: any): OneofOptions {
     return {
@@ -1795,10 +1647,6 @@ export const OneofOptions = {
     return obj;
   },
 };
-
-function createBaseEnumOptions(): EnumOptions {
-  return { allowAlias: false, deprecated: false, uninterpretedOption: [] };
-}
 
 export const EnumOptions = {
   fromJSON(object: any): EnumOptions {
@@ -1824,10 +1672,6 @@ export const EnumOptions = {
   },
 };
 
-function createBaseEnumValueOptions(): EnumValueOptions {
-  return { deprecated: false, uninterpretedOption: [] };
-}
-
 export const EnumValueOptions = {
   fromJSON(object: any): EnumValueOptions {
     return {
@@ -1850,10 +1694,6 @@ export const EnumValueOptions = {
   },
 };
 
-function createBaseServiceOptions(): ServiceOptions {
-  return { deprecated: false, uninterpretedOption: [] };
-}
-
 export const ServiceOptions = {
   fromJSON(object: any): ServiceOptions {
     return {
@@ -1875,10 +1715,6 @@ export const ServiceOptions = {
     return obj;
   },
 };
-
-function createBaseMethodOptions(): MethodOptions {
-  return { deprecated: false, idempotencyLevel: 0, uninterpretedOption: [] };
-}
 
 export const MethodOptions = {
   fromJSON(object: any): MethodOptions {
@@ -1906,18 +1742,6 @@ export const MethodOptions = {
     return obj;
   },
 };
-
-function createBaseUninterpretedOption(): UninterpretedOption {
-  return {
-    name: [],
-    identifierValue: "",
-    positiveIntValue: 0,
-    negativeIntValue: 0,
-    doubleValue: 0,
-    stringValue: new Uint8Array(),
-    aggregateValue: "",
-  };
-}
 
 export const UninterpretedOption = {
   fromJSON(object: any): UninterpretedOption {
@@ -1950,10 +1774,6 @@ export const UninterpretedOption = {
   },
 };
 
-function createBaseUninterpretedOption_NamePart(): UninterpretedOption_NamePart {
-  return { namePart: "", isExtension: false };
-}
-
 export const UninterpretedOption_NamePart = {
   fromJSON(object: any): UninterpretedOption_NamePart {
     return {
@@ -1969,10 +1789,6 @@ export const UninterpretedOption_NamePart = {
     return obj;
   },
 };
-
-function createBaseSourceCodeInfo(): SourceCodeInfo {
-  return { location: [] };
-}
 
 export const SourceCodeInfo = {
   fromJSON(object: any): SourceCodeInfo {
@@ -1993,10 +1809,6 @@ export const SourceCodeInfo = {
     return obj;
   },
 };
-
-function createBaseSourceCodeInfo_Location(): SourceCodeInfo_Location {
-  return { path: [], span: [], leadingComments: "", trailingComments: "", leadingDetachedComments: [] };
-}
 
 export const SourceCodeInfo_Location = {
   fromJSON(object: any): SourceCodeInfo_Location {
@@ -2034,10 +1846,6 @@ export const SourceCodeInfo_Location = {
   },
 };
 
-function createBaseGeneratedCodeInfo(): GeneratedCodeInfo {
-  return { annotation: [] };
-}
-
 export const GeneratedCodeInfo = {
   fromJSON(object: any): GeneratedCodeInfo {
     return {
@@ -2057,10 +1865,6 @@ export const GeneratedCodeInfo = {
     return obj;
   },
 };
-
-function createBaseGeneratedCodeInfo_Annotation(): GeneratedCodeInfo_Annotation {
-  return { path: [], sourceFile: "", begin: 0, end: 0 };
-}
 
 export const GeneratedCodeInfo_Annotation = {
   fromJSON(object: any): GeneratedCodeInfo_Annotation {

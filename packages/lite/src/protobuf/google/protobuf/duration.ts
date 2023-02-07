@@ -80,10 +80,6 @@ export interface Duration {
   nanos: number;
 }
 
-function createBaseDuration(): Duration {
-  return { seconds: 0, nanos: 0 };
-}
-
 export const Duration = {
   fromJSON(object: any): Duration {
     return {

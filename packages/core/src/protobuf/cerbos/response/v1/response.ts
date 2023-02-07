@@ -206,6 +206,10 @@ export interface GetPolicyResponse {
   policies: Policy[];
 }
 
+export interface DisablePolicyResponse {
+  disabledPolicies: string;
+}
+
 export interface AddOrUpdateSchemaResponse {
 }
 

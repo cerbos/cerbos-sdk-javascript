@@ -343,10 +343,6 @@ export interface CustomHttpPattern {
   path: string;
 }
 
-function createBaseHttp(): Http {
-  return { rules: [], fullyDecodeReservedExpansion: false };
-}
-
 export const Http = {
   fromJSON(object: any): Http {
     return {
@@ -369,10 +365,6 @@ export const Http = {
     return obj;
   },
 };
-
-function createBaseHttpRule(): HttpRule {
-  return { selector: "", pattern: undefined, body: "", responseBody: "", additionalBindings: [] };
-}
 
 export const HttpRule = {
   fromJSON(object: any): HttpRule {
@@ -419,10 +411,6 @@ export const HttpRule = {
     return obj;
   },
 };
-
-function createBaseCustomHttpPattern(): CustomHttpPattern {
-  return { kind: "", path: "" };
-}
 
 export const CustomHttpPattern = {
   fromJSON(object: any): CustomHttpPattern {

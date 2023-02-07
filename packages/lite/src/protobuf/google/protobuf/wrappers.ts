@@ -92,10 +92,6 @@ export interface BytesValue {
   value: Uint8Array;
 }
 
-function createBaseDoubleValue(): DoubleValue {
-  return { value: 0 };
-}
-
 export const DoubleValue = {
   fromJSON(object: any): DoubleValue {
     return { value: isSet(object.value) ? Number(object.value) : 0 };
@@ -107,10 +103,6 @@ export const DoubleValue = {
     return obj;
   },
 };
-
-function createBaseFloatValue(): FloatValue {
-  return { value: 0 };
-}
 
 export const FloatValue = {
   fromJSON(object: any): FloatValue {
@@ -124,10 +116,6 @@ export const FloatValue = {
   },
 };
 
-function createBaseInt64Value(): Int64Value {
-  return { value: 0 };
-}
-
 export const Int64Value = {
   fromJSON(object: any): Int64Value {
     return { value: isSet(object.value) ? Number(object.value) : 0 };
@@ -139,10 +127,6 @@ export const Int64Value = {
     return obj;
   },
 };
-
-function createBaseUInt64Value(): UInt64Value {
-  return { value: 0 };
-}
 
 export const UInt64Value = {
   fromJSON(object: any): UInt64Value {
@@ -156,10 +140,6 @@ export const UInt64Value = {
   },
 };
 
-function createBaseInt32Value(): Int32Value {
-  return { value: 0 };
-}
-
 export const Int32Value = {
   fromJSON(object: any): Int32Value {
     return { value: isSet(object.value) ? Number(object.value) : 0 };
@@ -171,10 +151,6 @@ export const Int32Value = {
     return obj;
   },
 };
-
-function createBaseUInt32Value(): UInt32Value {
-  return { value: 0 };
-}
 
 export const UInt32Value = {
   fromJSON(object: any): UInt32Value {
@@ -188,10 +164,6 @@ export const UInt32Value = {
   },
 };
 
-function createBaseBoolValue(): BoolValue {
-  return { value: false };
-}
-
 export const BoolValue = {
   fromJSON(object: any): BoolValue {
     return { value: isSet(object.value) ? Boolean(object.value) : false };
@@ -204,10 +176,6 @@ export const BoolValue = {
   },
 };
 
-function createBaseStringValue(): StringValue {
-  return { value: "" };
-}
-
 export const StringValue = {
   fromJSON(object: any): StringValue {
     return { value: isSet(object.value) ? String(object.value) : "" };
@@ -219,10 +187,6 @@ export const StringValue = {
     return obj;
   },
 };
-
-function createBaseBytesValue(): BytesValue {
-  return { value: new Uint8Array() };
-}
 
 export const BytesValue = {
   fromJSON(object: any): BytesValue {

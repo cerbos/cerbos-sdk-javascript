@@ -390,23 +390,25 @@ export const HttpRule = {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
-    if (message.pattern?.$case === "get") {
-      writer.uint32(18).string(message.pattern.get);
-    }
-    if (message.pattern?.$case === "put") {
-      writer.uint32(26).string(message.pattern.put);
-    }
-    if (message.pattern?.$case === "post") {
-      writer.uint32(34).string(message.pattern.post);
-    }
-    if (message.pattern?.$case === "delete") {
-      writer.uint32(42).string(message.pattern.delete);
-    }
-    if (message.pattern?.$case === "patch") {
-      writer.uint32(50).string(message.pattern.patch);
-    }
-    if (message.pattern?.$case === "custom") {
-      CustomHttpPattern.encode(message.pattern.custom, writer.uint32(66).fork()).ldelim();
+    switch (message.pattern?.$case) {
+      case "get":
+        writer.uint32(18).string(message.pattern.get);
+        break;
+      case "put":
+        writer.uint32(26).string(message.pattern.put);
+        break;
+      case "post":
+        writer.uint32(34).string(message.pattern.post);
+        break;
+      case "delete":
+        writer.uint32(42).string(message.pattern.delete);
+        break;
+      case "patch":
+        writer.uint32(50).string(message.pattern.patch);
+        break;
+      case "custom":
+        CustomHttpPattern.encode(message.pattern.custom, writer.uint32(66).fork()).ldelim();
+        break;
     }
     if (message.body !== "") {
       writer.uint32(58).string(message.body);
