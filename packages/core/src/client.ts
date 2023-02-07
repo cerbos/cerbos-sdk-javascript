@@ -1,5 +1,6 @@
 import {
   checkResourcesResponseFromProtobuf,
+  disablePoliciesResponseFromProtobuf,
   getPoliciesResponseFromProtobuf,
   getSchemasResponseFromProtobuf,
   listPoliciesResponseFromProtobuf,
@@ -11,6 +12,7 @@ import {
   addOrUpdateSchemasRequestToProtobuf,
   checkResourcesRequestToProtobuf,
   deleteSchemasRequestToProtobuf,
+  disablePoliciesRequestToProtobuf,
   getPoliciesRequestToProtobuf,
   getSchemasRequestToProtobuf,
   planResourcesRequestToProtobuf,
@@ -25,6 +27,8 @@ import type {
   CheckResourcesResponse,
   CheckResourcesResult,
   DeleteSchemasRequest,
+  DisablePoliciesRequest,
+  DisablePoliciesResponse,
   GetPoliciesRequest,
   GetPoliciesResponse,
   GetSchemasRequest,
@@ -322,6 +326,58 @@ export abstract class Client {
    */
   public async deleteSchemas(request: DeleteSchemasRequest): Promise<void> {
     await this.admin("deleteSchema", deleteSchemasRequestToProtobuf(request));
+  }
+
+  /**
+   * Disable multiple policies.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be at least v0.25 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * const result = await cerbos.disablePolicies({
+   *   ids: ["resource.document.v1", "resource.image.v1"],
+   * });
+   * ```
+   */
+  public async disablePolicies(
+    request: DisablePoliciesRequest
+  ): Promise<DisablePoliciesResponse> {
+    return disablePoliciesResponseFromProtobuf(
+      await this.admin(
+        "disablePolicy",
+        disablePoliciesRequestToProtobuf(request)
+      )
+    );
+  }
+
+  /**
+   * Disable a policy.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be at least v0.25 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * const disabled = await cerbos.disablePolicy("resource.document.v1");
+   * ```
+   */
+  public async disablePolicy(id: string): Promise<boolean> {
+    const { disabledPolicies } = await this.disablePolicies({ ids: [id] });
+    return disabledPolicies === 1;
   }
 
   /**

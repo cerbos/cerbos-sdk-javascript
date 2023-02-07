@@ -12,6 +12,8 @@ export * from "./Condition";
 export * from "./DeleteSchemasRequest";
 export * from "./DerivedRoleDefinition";
 export * from "./DerivedRoles";
+export * from "./DisablePoliciesRequest";
+export * from "./DisablePoliciesResponse";
 export * from "./Effect";
 export * from "./GetPoliciesRequest";
 export * from "./GetPoliciesResponse";

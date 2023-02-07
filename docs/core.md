@@ -50,6 +50,8 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [DeleteSchemasRequest](./core.deleteschemasrequest.md) | Input to [Client.deleteSchemas()](./core.client.deleteschemas.md)<!-- -->. |
 |  [DerivedRoleDefinition](./core.derivedroledefinition.md) | The definition of a [derived role](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html)<!-- -->. |
 |  [DerivedRoles](./core.derivedroles.md) | A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) to augment static RBAC roles with contextual data to provide more fine-grained control at runtime. |
+|  [DisablePoliciesRequest](./core.disablepoliciesrequest.md) | Input to [Client.disablePolicies()](./core.client.disablepolicies.md)<!-- -->. |
+|  [DisablePoliciesResponse](./core.disablepoliciesresponse.md) | The outcome of disabling policies. |
 |  [GetPoliciesRequest](./core.getpoliciesrequest.md) | Input to [Client.getPolicies()](./core.client.getpolicies.md)<!-- -->. |
 |  [GetPoliciesResponse](./core.getpoliciesresponse.md) | Fetched policies. |
 |  [GetSchemasRequest](./core.getschemasrequest.md) | Input to [Client.getSchemas()](./core.client.getschemas.md)<!-- -->. |

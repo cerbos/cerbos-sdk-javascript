@@ -1,6 +1,10 @@
 ## [Unreleased]
 
-No notable changes.
+## Added
+
+- [`Client.disablePolicy`](../../docs/core.client.disablepolicy.md) and [`Client.disablePolicies`](../../docs/core.client.disablepolicies.md) methods to disable policies ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
+
+  Requires a policy decision point server running Cerbos 0.25+.
 
 ## [0.8.1] - 2022-11-24
 

@@ -21,6 +21,7 @@ import {
   AddOrUpdateSchemaRequest,
   CheckResourcesRequest,
   DeleteSchemaRequest,
+  DisablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
   ListPoliciesRequest,
@@ -34,6 +35,7 @@ import {
   AddOrUpdateSchemaResponse,
   CheckResourcesResponse,
   DeleteSchemaResponse,
+  DisablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
   ListPoliciesResponse,
@@ -174,6 +176,12 @@ const services: Services = {
       path: "/admin/schema",
       requestType: DeleteSchemaRequest,
       responseType: DeleteSchemaResponse,
+    },
+    disablePolicy: {
+      method: "DELETE",
+      path: "/admin/policy",
+      requestType: DisablePolicyRequest,
+      responseType: DisablePolicyResponse,
     },
     getPolicy: {
       method: "GET",

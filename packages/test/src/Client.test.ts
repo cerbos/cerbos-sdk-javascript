@@ -520,7 +520,7 @@ describe("Client", () => {
                 new PlanExpressionVariable("request.resource.attr.owner"),
                 new PlanExpressionValue("me@example.com"),
               ]),
-              validationErrors: cerbosVersionIsAtLeast("0.19.0-prerelease")
+              validationErrors: cerbosVersionIsAtLeast("0.19.0")
                 ? [
                     {
                       path: "/country/alpha2",
@@ -538,7 +538,7 @@ describe("Client", () => {
             });
           });
 
-          if (cerbosVersionIsAtLeast("0.19.0-prerelease")) {
+          if (cerbosVersionIsAtLeast("0.19.0")) {
             describe("when configured to throw on validation error", () => {
               it("throws on validation error", async () => {
                 await expect(
@@ -640,7 +640,7 @@ describe("Client", () => {
         reloadable = factory("tls");
       });
 
-      describe("addOrUpdatePolicies / listPolicies / getPolicy", () => {
+      describe("addOrUpdatePolicies / listPolicies / getPolicy / disablePolicy", () => {
         const inlinePolicy: DerivedRoles = {
           derivedRoles: {
             name: "owner",
@@ -688,6 +688,14 @@ describe("Client", () => {
 
           const roundTrippedPolicy = await mutable.getPolicy(id);
           expect(roundTrippedPolicy).toMatchObject({ ...policy });
+
+          if (cerbosVersionIsAtLeast("0.25.0-prerelease")) {
+            const disabled = await mutable.disablePolicy(id);
+            expect(disabled).toBe(true); // eslint-disable-line jest/no-conditional-expect
+
+            const { ids: remainingIds } = await mutable.listPolicies();
+            expect(remainingIds).not.toContain(id); // eslint-disable-line jest/no-conditional-expect
+          }
         });
       });
 

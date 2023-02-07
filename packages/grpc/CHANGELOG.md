@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## Added
+
+- [`Client.disablePolicy`](../../docs/core.client.disablepolicy.md) and [`Client.disablePolicies`](../../docs/core.client.disablepolicies.md) methods to disable policies ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
+
+  Requires a policy decision point server running Cerbos 0.25+.
+
 ### Changed
 
 - Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.8.7 ([#419](https://github.com/cerbos/cerbos-sdk-javascript/pull/419))

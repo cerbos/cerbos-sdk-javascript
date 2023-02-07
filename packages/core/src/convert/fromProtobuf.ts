@@ -19,6 +19,7 @@ import type {
 import type {
   CheckResourcesResponse as CheckResourcesResponseProtobuf,
   CheckResourcesResponse_ResultEntry,
+  DisablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
   ListPoliciesResponse as ListPoliciesResponseProtobuf,
@@ -35,6 +36,7 @@ import type {
   Condition,
   DerivedRoleDefinition,
   DerivedRoles,
+  DisablePoliciesResponse,
   GetPoliciesResponse,
   ListPoliciesResponse,
   ListSchemasResponse,
@@ -138,6 +140,12 @@ const validationErrorSourceFromProtobuf = (
       );
   }
 };
+
+export const disablePoliciesResponseFromProtobuf = ({
+  disabledPolicies,
+}: DisablePolicyResponse): DisablePoliciesResponse => ({
+  disabledPolicies,
+});
 
 export const getPoliciesResponseFromProtobuf = ({
   policies,
