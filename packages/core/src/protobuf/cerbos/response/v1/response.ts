@@ -207,7 +207,7 @@ export interface GetPolicyResponse {
 }
 
 export interface DisablePolicyResponse {
-  disabledPolicies: string;
+  disabledPolicies: number;
 }
 
 export interface AddOrUpdateSchemaResponse {
@@ -222,6 +222,7 @@ export interface GetSchemaResponse {
 }
 
 export interface DeleteSchemaResponse {
+  deletedSchemas: number;
 }
 
 export interface ReloadStoreResponse {

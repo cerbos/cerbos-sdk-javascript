@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Empty } from "../../../google/protobuf/empty";
 import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
@@ -209,7 +208,7 @@ export interface GetPolicyResponse {
 }
 
 export interface DisablePolicyResponse {
-  disabledPolicies: string;
+  disabledPolicies: number;
 }
 
 export interface AddOrUpdateSchemaResponse {
@@ -224,6 +223,7 @@ export interface GetSchemaResponse {
 }
 
 export interface DeleteSchemaResponse {
+  deletedSchemas: number;
 }
 
 export interface ReloadStoreResponse {
@@ -1708,13 +1708,13 @@ export const GetPolicyResponse = {
 };
 
 function createBaseDisablePolicyResponse(): DisablePolicyResponse {
-  return { disabledPolicies: "0" };
+  return { disabledPolicies: 0 };
 }
 
 export const DisablePolicyResponse = {
   encode(message: DisablePolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.disabledPolicies !== "0") {
-      writer.uint32(8).int64(message.disabledPolicies);
+    if (message.disabledPolicies !== 0) {
+      writer.uint32(8).uint32(message.disabledPolicies);
     }
     return writer;
   },
@@ -1727,7 +1727,7 @@ export const DisablePolicyResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.disabledPolicies = longToString(reader.int64() as Long);
+          message.disabledPolicies = reader.uint32();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1826,11 +1826,14 @@ export const GetSchemaResponse = {
 };
 
 function createBaseDeleteSchemaResponse(): DeleteSchemaResponse {
-  return {};
+  return { deletedSchemas: 0 };
 }
 
 export const DeleteSchemaResponse = {
-  encode(_: DeleteSchemaResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: DeleteSchemaResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.deletedSchemas !== 0) {
+      writer.uint32(8).uint32(message.deletedSchemas);
+    }
     return writer;
   },
 
@@ -1841,6 +1844,9 @@ export const DeleteSchemaResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.deletedSchemas = reader.uint32();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1874,12 +1880,3 @@ export const ReloadStoreResponse = {
     return message;
   },
 };
-
-function longToString(long: Long) {
-  return long.toString();
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}

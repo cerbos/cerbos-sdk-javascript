@@ -207,7 +207,7 @@ export interface GetPolicyResponse {
 }
 
 export interface DisablePolicyResponse {
-  disabledPolicies: string;
+  disabledPolicies: number;
 }
 
 export interface AddOrUpdateSchemaResponse {
@@ -222,6 +222,7 @@ export interface GetSchemaResponse {
 }
 
 export interface DeleteSchemaResponse {
+  deletedSchemas: number;
 }
 
 export interface ReloadStoreResponse {
@@ -1029,12 +1030,12 @@ export const GetPolicyResponse = {
 
 export const DisablePolicyResponse = {
   fromJSON(object: any): DisablePolicyResponse {
-    return { disabledPolicies: isSet(object.disabledPolicies) ? String(object.disabledPolicies) : "0" };
+    return { disabledPolicies: isSet(object.disabledPolicies) ? Number(object.disabledPolicies) : 0 };
   },
 
   toJSON(message: DisablePolicyResponse): unknown {
     const obj: any = {};
-    message.disabledPolicies !== undefined && (obj.disabledPolicies = message.disabledPolicies);
+    message.disabledPolicies !== undefined && (obj.disabledPolicies = Math.round(message.disabledPolicies));
     return obj;
   },
 };
@@ -1083,12 +1084,13 @@ export const GetSchemaResponse = {
 };
 
 export const DeleteSchemaResponse = {
-  fromJSON(_: any): DeleteSchemaResponse {
-    return {};
+  fromJSON(object: any): DeleteSchemaResponse {
+    return { deletedSchemas: isSet(object.deletedSchemas) ? Number(object.deletedSchemas) : 0 };
   },
 
-  toJSON(_: DeleteSchemaResponse): unknown {
+  toJSON(message: DeleteSchemaResponse): unknown {
     const obj: any = {};
+    message.deletedSchemas !== undefined && (obj.deletedSchemas = Math.round(message.deletedSchemas));
     return obj;
   },
 };

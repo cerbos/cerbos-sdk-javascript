@@ -222,6 +222,7 @@ export interface GetSchemaResponse {
 }
 
 export interface DeleteSchemaResponse {
+  deletedSchemas: number;
 }
 
 export interface ReloadStoreResponse {
@@ -1083,12 +1084,13 @@ export const GetSchemaResponse = {
 };
 
 export const DeleteSchemaResponse = {
-  fromJSON(_: any): DeleteSchemaResponse {
-    return {};
+  fromJSON(object: any): DeleteSchemaResponse {
+    return { deletedSchemas: isSet(object.deletedSchemas) ? Number(object.deletedSchemas) : 0 };
   },
 
-  toJSON(_: DeleteSchemaResponse): unknown {
+  toJSON(message: DeleteSchemaResponse): unknown {
     const obj: any = {};
+    message.deletedSchemas !== undefined && (obj.deletedSchemas = Math.round(message.deletedSchemas));
     return obj;
   },
 };
