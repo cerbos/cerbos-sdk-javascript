@@ -22,7 +22,7 @@
 
 ### Changed
 
-- Use `NotOK.fromJSON` factory method to parse JSON-serialized unsucessful responses ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
+- Use [`NotOK.fromJSON`](../../docs/core.notok.fromjson.md) factory method to parse JSON-serialized unsucessful responses ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
 ## [0.7.1] - 2022-09-06
 
@@ -40,10 +40,10 @@
 
 ### Added
 
-- Support for schema validation in `Client#planResources` ([#123](https://github.com/cerbos/cerbos-sdk-javascript/pull/123))
+- Support for schema validation in [`Client.planResources`](../../docs/core.client.planresources.md) ([#123](https://github.com/cerbos/cerbos-sdk-javascript/pull/123))
 
-  Requires Cerbos 0.19+.
-  `PlanResourcesResponse#validationErrors` will always return an empty array if the client is connected to an earlier version of Cerbos.
+  Requires a policy decision point server running Cerbos 0.19+.
+  [`PlanResourcesResponse.validationErrors`](../../docs/core.planresourcesresponsebase.validationerrors.md) will always be an empty array if the client is connected to an earlier version of Cerbos.
 
 ## [0.5.1] - 2022-06-09
 
