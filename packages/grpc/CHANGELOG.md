@@ -1,8 +1,17 @@
 ## [Unreleased]
 
+## Added
+
+- [`Client.disablePolicy`](../../docs/core.client.disablepolicy.md) and [`Client.disablePolicies`](../../docs/core.client.disablepolicies.md) methods to disable policies ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
+
+  Requires a policy decision point server running Cerbos 0.25+.
+
 ### Changed
 
 - Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.8.7 ([#419](https://github.com/cerbos/cerbos-sdk-javascript/pull/419))
+- [`Client.deleteSchema`](../../docs/core.client.deleteschema.md) and [`Client.deleteSchemas`](../../docs/core.client.deleteschemas.md) now return whether schemas were deleted ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
+
+  Requires a policy decision point server running Cerbos 0.25+.
 
 ## [0.8.2] - 2023-01-27
 
@@ -44,10 +53,10 @@
 
 ### Added
 
-- Support for schema validation in `Client#planResources` ([#123](https://github.com/cerbos/cerbos-sdk-javascript/pull/123))
+- Support for schema validation in [`Client.planResources`](../../docs/core.client.planresources.md) ([#123](https://github.com/cerbos/cerbos-sdk-javascript/pull/123))
 
-  Requires Cerbos 0.19+.
-  `PlanResourcesResponse#validationErrors` will always return an empty array if the client is connected to an earlier version of Cerbos.
+  Requires a policy decision point server running Cerbos 0.19+.
+  [`PlanResourcesResponse.validationErrors`](../../docs/core.planresourcesresponsebase.validationerrors.md) will always be an empty array if the client is connected to an earlier version of Cerbos.
 
 ## [0.5.2] - 2022-06-09
 

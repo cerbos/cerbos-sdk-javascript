@@ -26,6 +26,8 @@ The constructor for this class is marked as internal. Third-party code should no
 |  [checkResources(request)](./core.client.checkresources.md) |  | Check a principal's permissions on a set of resources. |
 |  [deleteSchema(id)](./core.client.deleteschema.md) |  | Delete a schema. |
 |  [deleteSchemas(request)](./core.client.deleteschemas.md) |  | Delete multiple schemas. |
+|  [disablePolicies(request)](./core.client.disablepolicies.md) |  | Disable multiple policies. |
+|  [disablePolicy(id)](./core.client.disablepolicy.md) |  | Disable a policy. |
 |  [getPolicies(request)](./core.client.getpolicies.md) |  | Fetch multiple policies by ID. |
 |  [getPolicy(id)](./core.client.getpolicy.md) |  | Fetch a policy by ID. |
 |  [getSchema(id)](./core.client.getschema.md) |  | Fetch a schema by ID. |

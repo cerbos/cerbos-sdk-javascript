@@ -29,6 +29,7 @@ import type {
   CheckResourcesRequest as CheckResourcesRequestProtobuf,
   CheckResourcesRequest_ResourceEntry,
   DeleteSchemaRequest,
+  DisablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
   PlanResourcesRequest as PlanResourcesRequestProtobuf,
@@ -74,6 +75,7 @@ import {
   policyIsPrincipalPolicy,
   policyIsResourcePolicy,
 } from "../types/external";
+import type { DisablePoliciesRequest } from "../types/external/DisablePoliciesRequest";
 import type { GetSchemasRequest } from "../types/external/GetSchemasRequest";
 
 const encoder = new TextEncoder();
@@ -377,6 +379,12 @@ const jwtToProtobuf = ({ token, keySetId = "" }: JWT): AuxData_JWT => ({
 export const deleteSchemasRequestToProtobuf = ({
   ids,
 }: DeleteSchemasRequest): DeleteSchemaRequest => ({
+  id: ids,
+});
+
+export const disablePoliciesRequestToProtobuf = ({
+  ids,
+}: DisablePoliciesRequest): DisablePolicyRequest => ({
   id: ids,
 });
 

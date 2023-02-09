@@ -1,4 +1,5 @@
 {
+  "name": "cerbos-sdk-javascript",
   "private": true,
   "workspaces": [
     "packages/*"
