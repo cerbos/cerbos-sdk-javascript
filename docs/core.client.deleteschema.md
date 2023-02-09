@@ -9,7 +9,7 @@ Delete a schema.
 **Signature:**
 
 ```typescript
-deleteSchema(id: string): Promise<void>;
+deleteSchema(id: string): Promise<boolean>;
 ```
 
 ## Parameters
@@ -20,7 +20,7 @@ deleteSchema(id: string): Promise<void>;
 
 **Returns:**
 
-Promise&lt;void&gt;
+Promise&lt;boolean&gt;
 
 ## Remarks
 
@@ -28,14 +28,16 @@ Requires
 
 - the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->,
 
-- the Cerbos policy decision point server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html) enabled, and
+- the Cerbos policy decision point (PDP) server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html) enabled, and
 
 - a dynamic [storage backend](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html)<!-- -->.
+
+The way this method handles failure depends on the version of the connected PDP server. When the server is running Cerbos v0.25 or later, it returns `true` if the schema was deleted and `false` if the schema was not found. With earlier versions of Cerbos, it throws an error if the schema was not found, and returns successfully if the schema was deleted; the returned value should be ignored.
 
 ## Example
 
 
 ```typescript
-await cerbos.deleteSchema("document.json");
+const deleted = await cerbos.deleteSchema("document.json");
 ```
 

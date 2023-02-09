@@ -735,7 +735,9 @@ describe("Client", () => {
             type: "object",
           });
 
-          await mutable.deleteSchema(id);
+          const deleted = await mutable.deleteSchema(id);
+          expect(deleted).toBe(cerbosVersionIsAtLeast("0.25.0-prerelease"));
+
           const { ids: remainingIds } = await mutable.listSchemas();
           expect(remainingIds).not.toContain(id);
         });

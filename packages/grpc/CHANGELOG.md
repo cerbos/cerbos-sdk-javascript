@@ -9,6 +9,9 @@
 ### Changed
 
 - Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.8.7 ([#419](https://github.com/cerbos/cerbos-sdk-javascript/pull/419))
+- [`Client.deleteSchema`](../../docs/core.client.deleteschema.md) and [`Client.deleteSchemas`](../../docs/core.client.deleteschemas.md) now return whether schemas were deleted ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
+
+  Requires a policy decision point server running Cerbos 0.25+.
 
 ## [0.8.2] - 2023-01-27
 

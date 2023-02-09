@@ -10,6 +10,7 @@ export * from "./CheckResourcesResultMetadataEffect";
 export * from "./CheckResourcesResultResource";
 export * from "./Condition";
 export * from "./DeleteSchemasRequest";
+export * from "./DeleteSchemasResponse";
 export * from "./DerivedRoleDefinition";
 export * from "./DerivedRoles";
 export * from "./DisablePoliciesRequest";

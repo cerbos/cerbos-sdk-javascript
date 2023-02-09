@@ -19,6 +19,7 @@ import type {
 import type {
   CheckResourcesResponse as CheckResourcesResponseProtobuf,
   CheckResourcesResponse_ResultEntry,
+  DeleteSchemaResponse,
   DisablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
@@ -69,6 +70,7 @@ import {
   SchemaDefinition,
   ValidationErrorSource,
 } from "../types/external";
+import type { DeleteSchemasResponse } from "../types/external/DeleteSchemasResponse";
 import type { GetSchemasResponse } from "../types/external/GetSchemasResponse";
 import type { OmitFromEach } from "../types/internal";
 
@@ -140,6 +142,12 @@ const validationErrorSourceFromProtobuf = (
       );
   }
 };
+
+export const deleteSchemasResponseFromProtobuf = ({
+  deletedSchemas,
+}: DeleteSchemaResponse): DeleteSchemasResponse => ({
+  deletedSchemas,
+});
 
 export const disablePoliciesResponseFromProtobuf = ({
   disabledPolicies,

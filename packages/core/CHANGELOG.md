@@ -6,6 +6,12 @@
 
   Requires a policy decision point server running Cerbos 0.25+.
 
+### Changed
+
+- [`Client.deleteSchema`](../../docs/core.client.deleteschema.md) and [`Client.deleteSchemas`](../../docs/core.client.deleteschemas.md) now return whether schemas were deleted ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
+
+  Requires a policy decision point server running Cerbos 0.25+.
+
 ## [0.8.1] - 2022-11-24
 
 ### Changed

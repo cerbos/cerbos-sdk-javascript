@@ -1,5 +1,6 @@
 import {
   checkResourcesResponseFromProtobuf,
+  deleteSchemasResponseFromProtobuf,
   disablePoliciesResponseFromProtobuf,
   getPoliciesResponseFromProtobuf,
   getSchemasResponseFromProtobuf,
@@ -27,6 +28,7 @@ import type {
   CheckResourcesResponse,
   CheckResourcesResult,
   DeleteSchemasRequest,
+  DeleteSchemasResponse,
   DisablePoliciesRequest,
   DisablePoliciesResponse,
   GetPoliciesRequest,
@@ -292,17 +294,22 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials},
    *
-   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   * - the Cerbos policy decision point (PDP) server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
    *
    * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
    *
+   * The way this method handles failure depends on the version of the connected PDP server.
+   * When the server is running Cerbos v0.25 or later, it returns `true` if the schema was deleted and `false` if the schema was not found.
+   * With earlier versions of Cerbos, it throws an error if the schema was not found, and returns successfully if the schema was deleted; the returned value should be ignored.
+   *
    * @example
    * ```typescript
-   * await cerbos.deleteSchema("document.json");
+   * const deleted = await cerbos.deleteSchema("document.json");
    * ```
    */
-  public async deleteSchema(id: string): Promise<void> {
-    await this.deleteSchemas({ ids: [id] });
+  public async deleteSchema(id: string): Promise<boolean> {
+    const { deletedSchemas } = await this.deleteSchemas({ ids: [id] });
+    return deletedSchemas === 1;
   }
 
   /**
@@ -313,19 +320,27 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials},
    *
-   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   * - the Cerbos policy decision point (PDP) server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
    *
    * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
    *
+   * The way this method handles failure depends on the version of the connected PDP server.
+   * When the server is running Cerbos v0.25 or later, it returns a {@link DeleteSchemasResponse} that includes the number of schemas that were deleted.
+   * With earlier versions of Cerbos, it throws an error if no schemas were found, and returns successfully if at least one schema was deleted; the returned value should be ignored.
+   *
    * @example
    * ```typescript
-   * await cerbos.deleteSchemas({
+   * const result = await cerbos.deleteSchemas({
    *   ids: ["document.json", "image.json"],
    * });
    * ```
    */
-  public async deleteSchemas(request: DeleteSchemasRequest): Promise<void> {
-    await this.admin("deleteSchema", deleteSchemasRequestToProtobuf(request));
+  public async deleteSchemas(
+    request: DeleteSchemasRequest
+  ): Promise<DeleteSchemasResponse> {
+    return deleteSchemasResponseFromProtobuf(
+      await this.admin("deleteSchema", deleteSchemasRequestToProtobuf(request))
+    );
   }
 
   /**

@@ -48,6 +48,7 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [CheckResourcesResultResource](./core.checkresourcesresultresource.md) | A resource that was checked. |
 |  [Condition](./core.condition.md) | A set of expressions that must evaluate to true for a rule to take effect. |
 |  [DeleteSchemasRequest](./core.deleteschemasrequest.md) | Input to [Client.deleteSchemas()](./core.client.deleteschemas.md)<!-- -->. |
+|  [DeleteSchemasResponse](./core.deleteschemasresponse.md) | The outcome of deleting schemas. |
 |  [DerivedRoleDefinition](./core.derivedroledefinition.md) | The definition of a [derived role](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html)<!-- -->. |
 |  [DerivedRoles](./core.derivedroles.md) | A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) to augment static RBAC roles with contextual data to provide more fine-grained control at runtime. |
 |  [DisablePoliciesRequest](./core.disablepoliciesrequest.md) | Input to [Client.disablePolicies()](./core.client.disablepolicies.md)<!-- -->. |
