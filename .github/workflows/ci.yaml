@@ -17,15 +17,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          cache: npm
-          node-version-file: .node-version
-
-      - name: Install dependencies
-        run: |
-          npm install --global npm@$(jq --raw-output .engines.npm < package.json)
-          npm ci
+        uses: ./.github/actions/setup-node
 
       - name: Lint code
         run: npm run lint
@@ -73,15 +65,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          cache: npm
-          node-version: ${{ matrix.node }}
-
-      - name: Install dependencies
-        run: |
-          npm install --global npm@$(jq --raw-output .engines.npm < package.json)
-          npm ci
+        uses: ./.github/actions/setup-node
 
       - name: Start test servers
         run: npm run test:servers:start

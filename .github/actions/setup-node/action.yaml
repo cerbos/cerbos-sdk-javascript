@@ -1,0 +1,19 @@
+name: Set up Node.js
+
+description: Install Node.js and npm dependencies
+
+runs:
+  using: composite
+
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        cache: npm
+        node-version-file: .node-version
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        npm install --global npm@$(jq --raw-output .engines.npm < package.json)
+        npm ci
