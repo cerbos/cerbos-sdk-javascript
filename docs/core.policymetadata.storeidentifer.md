@@ -4,6 +4,11 @@
 
 ## PolicyMetadata.storeIdentifer property
 
+> Warning: This API is now obsolete.
+> 
+> Use [PolicyMetadata.storeIdentifier](./core.policymetadata.storeidentifier.md) instead.
+> 
+
 **Signature:**
 
 ```typescript

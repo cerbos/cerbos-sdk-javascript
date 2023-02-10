@@ -20,4 +20,5 @@ export interface PolicyMetadata
 |  [hash](./core.policymetadata.hash.md) |  | string \| undefined |  |
 |  [sourceFile](./core.policymetadata.sourcefile.md) |  | string |  |
 |  [storeIdentifer](./core.policymetadata.storeidentifer.md) |  | string |  |
+|  [storeIdentifier](./core.policymetadata.storeidentifier.md) |  | string |  |
 

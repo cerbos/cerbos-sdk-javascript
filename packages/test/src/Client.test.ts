@@ -687,7 +687,13 @@ describe("Client", () => {
           expect(ids).toContain(id);
 
           const roundTrippedPolicy = await mutable.getPolicy(id);
-          expect(roundTrippedPolicy).toMatchObject({ ...policy });
+          expect(roundTrippedPolicy).toMatchObject({
+            metadata: {
+              storeIdentifer: id,
+              storeIdentifier: id,
+            },
+            ...policy,
+          });
 
           if (cerbosVersionIsAtLeast("0.25.0-prerelease")) {
             const disabled = await mutable.disablePolicy(id);
