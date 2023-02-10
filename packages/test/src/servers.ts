@@ -39,7 +39,7 @@ export const ports = async (): Promise<Ports> => {
   const { stdout } = await execFile("docker", [
     "compose",
     "--file",
-    resolve(__dirname, "../servers/docker-compose.yml"),
+    resolve(__dirname, "../servers/docker-compose.yaml"),
     "ps",
     "--format",
     "json",
