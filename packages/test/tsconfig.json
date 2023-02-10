@@ -4,7 +4,8 @@
     { "path": "../core" },
     { "path": "../grpc" },
     { "path": "../http" },
-    { "path": "../lite" }
+    { "path": "../lite" },
+    { "path": "../opentelemetry" }
   ],
   "compilerOptions": {
     "lib": ["ES2020", "DOM"],

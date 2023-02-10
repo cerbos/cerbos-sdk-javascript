@@ -56,6 +56,21 @@ export type _Transport = <Service extends _Service, RPC extends _RPC<Service>>(
   adminCredentials?: AdminCredentials
 ) => Promise<_Response<Service, RPC>>;
 
+/** @internal */
+export type _Instrumenter = (transport: _Transport) => _Transport;
+
+const instrumenters = new Set<_Instrumenter>();
+
+/** @internal */
+export const _addInstrumenter = (instrumenter: _Instrumenter): void => {
+  instrumenters.add(instrumenter);
+};
+
+/** @internal */
+export const _removeInstrumenter = (instrumenter: _Instrumenter): void => {
+  instrumenters.delete(instrumenter);
+};
+
 /**
  * Options for creating a new {@link Client}.
  *
@@ -116,11 +131,18 @@ export interface AdminCredentials {
  * @public
  */
 export abstract class Client {
+  private readonly transport: _Transport;
+
   /** @internal */
   protected constructor(
-    private readonly transport: _Transport,
+    transport: _Transport,
     private readonly options: Options
-  ) {}
+  ) {
+    this.transport = transport;
+    for (const instrumenter of instrumenters) {
+      this.transport = instrumenter(this.transport);
+    }
+  }
 
   /**
    * Add policies, or update existing policies.

@@ -13,6 +13,8 @@ For browser-based applications, the [@cerbos/http](/packages/http/README.md) lib
 
 Both clients extend the base [`Client`](/docs/core.client.md) class from [@cerbos/core](/packages/core/README.md), so they can be used interchangeably in isomorphic applications.
 
+To instrument the clients with [OpenTelemetry](http://opentelemetry.io), use the [@cerbos/opentelemetry](/packages/opentelemetry/README.md) library.
+
 ## Further reading
 
 - [API reference](/docs/index.md)

@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.strict.json",
+  "include": ["src"],
+  "references": [{ "path": "../core" }],
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "tsBuildInfoFile": "lib/core.tsbuildinfo"
+  }
+}
