@@ -4,6 +4,8 @@
 
 ## PolicyBase.disabled property
 
+Whether the policy is ignored by the Cerbos engine.
+
 **Signature:**
 
 ```typescript

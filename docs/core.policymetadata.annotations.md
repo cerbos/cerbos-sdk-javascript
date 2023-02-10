@@ -4,6 +4,8 @@
 
 ## PolicyMetadata.annotations property
 
+Free-form data, for auditing purposes.
+
 **Signature:**
 
 ```typescript

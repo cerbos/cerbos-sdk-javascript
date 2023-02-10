@@ -4,6 +4,8 @@
 
 ## PolicyBase.apiVersion property
 
+API version of the policy.
+
 **Signature:**
 
 ```typescript

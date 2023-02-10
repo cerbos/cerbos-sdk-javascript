@@ -4,6 +4,8 @@
 
 ## PolicyMetadata.storeIdentifier property
 
+The policy's identifier in the backend store.
+
 **Signature:**
 
 ```typescript

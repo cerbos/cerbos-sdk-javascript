@@ -4,6 +4,8 @@
 
 ## PolicyMetadata.sourceFile property
 
+The source of the policy, for auditing purposes.
+
 **Signature:**
 
 ```typescript

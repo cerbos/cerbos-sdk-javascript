@@ -9,6 +9,8 @@
 > Use [PolicyMetadata.storeIdentifier](./core.policymetadata.storeidentifier.md) instead.
 > 
 
+Deprecated.
+
 **Signature:**
 
 ```typescript

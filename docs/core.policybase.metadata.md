@@ -4,6 +4,8 @@
 
 ## PolicyBase.metadata property
 
+Metadata about the policy.
+
 **Signature:**
 
 ```typescript

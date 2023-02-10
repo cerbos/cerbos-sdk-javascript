@@ -4,6 +4,8 @@
 
 ## PolicyBase.description property
 
+Description of the policy.
+
 **Signature:**
 
 ```typescript
