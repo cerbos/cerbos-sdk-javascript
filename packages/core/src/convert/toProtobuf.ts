@@ -98,12 +98,7 @@ const policyToProtobuf = (policy: Policy): PolicyProtobuf => {
     apiVersion,
     description,
     disabled,
-    metadata: {
-      annotations: {},
-      hash: undefined,
-      storeIdentifer: "",
-      sourceFile: "",
-    },
+    metadata: undefined,
     policyType: policyTypeToProtobuf(policy),
     variables,
   };
