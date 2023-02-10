@@ -25,8 +25,12 @@ export interface Policy_VariablesEntry {
 export interface Metadata {
   sourceFile: string;
   annotations: { [key: string]: string };
-  hash: string | undefined;
+  hash:
+    | string
+    | undefined;
+  /** @deprecated */
   storeIdentifer: string;
+  storeIdentifier: string;
 }
 
 export interface Metadata_AnnotationsEntry {
@@ -391,6 +395,7 @@ export const Metadata = {
         : {},
       hash: isSet(object.hash) ? String(object.hash) : undefined,
       storeIdentifer: isSet(object.storeIdentifer) ? String(object.storeIdentifer) : "",
+      storeIdentifier: isSet(object.storeIdentifier) ? String(object.storeIdentifier) : "",
     };
   },
 
@@ -405,6 +410,7 @@ export const Metadata = {
     }
     message.hash !== undefined && (obj.hash = message.hash);
     message.storeIdentifer !== undefined && (obj.storeIdentifer = message.storeIdentifer);
+    message.storeIdentifier !== undefined && (obj.storeIdentifier = message.storeIdentifier);
     return obj;
   },
 };

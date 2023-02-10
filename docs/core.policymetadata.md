@@ -16,8 +16,9 @@ export interface PolicyMetadata
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [annotations](./core.policymetadata.annotations.md) |  | Record&lt;string, string \| undefined&gt; |  |
-|  [hash](./core.policymetadata.hash.md) |  | string \| undefined |  |
-|  [sourceFile](./core.policymetadata.sourcefile.md) |  | string |  |
-|  [storeIdentifer](./core.policymetadata.storeidentifer.md) |  | string |  |
+|  [annotations](./core.policymetadata.annotations.md) |  | Record&lt;string, string \| undefined&gt; | Free-form data, for auditing purposes. |
+|  [hash](./core.policymetadata.hash.md) |  | string \| undefined | Hash of policy contents. |
+|  [sourceFile](./core.policymetadata.sourcefile.md) |  | string | The source of the policy, for auditing purposes. |
+|  [storeIdentifer](./core.policymetadata.storeidentifer.md) |  | string | Deprecated. |
+|  [storeIdentifier](./core.policymetadata.storeidentifier.md) |  | string | The policy's identifier in the backend store. |
 

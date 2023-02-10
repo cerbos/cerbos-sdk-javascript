@@ -27,8 +27,12 @@ export interface Policy_VariablesEntry {
 export interface Metadata {
   sourceFile: string;
   annotations: { [key: string]: string };
-  hash: string | undefined;
+  hash:
+    | string
+    | undefined;
+  /** @deprecated */
   storeIdentifer: string;
+  storeIdentifier: string;
 }
 
 export interface Metadata_AnnotationsEntry {
@@ -410,7 +414,7 @@ export const Policy_VariablesEntry = {
 };
 
 function createBaseMetadata(): Metadata {
-  return { sourceFile: "", annotations: {}, hash: undefined, storeIdentifer: "" };
+  return { sourceFile: "", annotations: {}, hash: undefined, storeIdentifer: "", storeIdentifier: "" };
 }
 
 export const Metadata = {
@@ -426,6 +430,9 @@ export const Metadata = {
     }
     if (message.storeIdentifer !== "") {
       writer.uint32(34).string(message.storeIdentifer);
+    }
+    if (message.storeIdentifier !== "") {
+      writer.uint32(42).string(message.storeIdentifier);
     }
     return writer;
   },
@@ -451,6 +458,9 @@ export const Metadata = {
           break;
         case 4:
           message.storeIdentifer = reader.string();
+          break;
+        case 5:
+          message.storeIdentifier = reader.string();
           break;
         default:
           reader.skipType(tag & 7);

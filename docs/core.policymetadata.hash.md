@@ -4,6 +4,8 @@
 
 ## PolicyMetadata.hash property
 
+Hash of policy contents.
+
 **Signature:**
 
 ```typescript

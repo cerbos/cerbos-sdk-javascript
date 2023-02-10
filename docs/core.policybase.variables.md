@@ -4,8 +4,15 @@
 
 ## PolicyBase.variables property
 
+Variable expressions defined for the policy.
+
 **Signature:**
 
 ```typescript
 variables?: Record<string, string>;
 ```
+
+## Remarks
+
+Each variable is evaluated before any rule condition. A variable expression can contain anything that condition expression can have.
+

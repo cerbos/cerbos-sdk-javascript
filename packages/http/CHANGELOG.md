@@ -12,6 +12,8 @@
 
   Requires a policy decision point server running Cerbos 0.25+.
 
+- [`Policy.metadata.storeIdentifer`](../../docs/core.policymetadata.storeidentifer.md) is now deprecated, replaced by [`Policy.metadata.storeIdentifier`](../../docs/core.policymetadata.storeidentifier.md) ([#439](https://github.com/cerbos/cerbos-sdk-javascript/pull/439))
+
 ## [0.8.1] - 2022-11-24
 
 ### Changed

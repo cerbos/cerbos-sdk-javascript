@@ -6,6 +6,7 @@ import type {
   DerivedRoles as DerivedRolesProtobuf,
   Match as MatchProtobuf,
   Match_ExprList,
+  Metadata,
   Policy as PolicyProtobuf,
   PrincipalPolicy as PrincipalPolicyProtobuf,
   PrincipalRule as PrincipalRuleProtobuf,
@@ -48,6 +49,7 @@ import type {
   PlanResourcesResponse,
   Policy,
   PolicyBase,
+  PolicyMetadata,
   PrincipalPolicy,
   PrincipalRule,
   PrincipalRuleAction,
@@ -172,9 +174,23 @@ const policyFromProtobuf = ({
   apiVersion,
   description,
   disabled,
-  metadata,
+  metadata: metadata && policyMetadataFromProtobuf(metadata),
   variables,
   ...policyTypeFromProtobuf(policyType),
+});
+
+const policyMetadataFromProtobuf = ({
+  annotations,
+  hash,
+  sourceFile,
+  storeIdentifer,
+  storeIdentifier,
+}: Metadata): PolicyMetadata => ({
+  annotations,
+  hash,
+  sourceFile,
+  storeIdentifer: storeIdentifier || storeIdentifer,
+  storeIdentifier: storeIdentifier || storeIdentifer,
 });
 
 type OmitPolicyBase<T extends Policy> = OmitFromEach<T, keyof PolicyBase>;

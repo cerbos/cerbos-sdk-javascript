@@ -24,8 +24,12 @@ export interface Policy_VariablesEntry {
 export interface Metadata {
   sourceFile: string;
   annotations: { [key: string]: string };
-  hash: string | undefined;
+  hash:
+    | string
+    | undefined;
+  /** @deprecated */
   storeIdentifer: string;
+  storeIdentifier: string;
 }
 
 export interface Metadata_AnnotationsEntry {
