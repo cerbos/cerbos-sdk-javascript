@@ -1,0 +1,17 @@
+name: Cache dependencies
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cache:
+    name: Cache dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Cache dependencies
+        uses: ./.github/actions/setup-node

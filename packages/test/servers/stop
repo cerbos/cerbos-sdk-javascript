@@ -5,4 +5,4 @@ set -o pipefail
 
 export CERBOS_VERSION=""
 
-docker compose --file=servers/docker-compose.yml down
+docker compose --file=servers/docker-compose.yaml down
