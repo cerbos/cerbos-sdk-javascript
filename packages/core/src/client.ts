@@ -575,6 +575,7 @@ export abstract class Client {
    *     attributes: { tier: "PREMIUM" },
    *   },
    *   resource: { kind: "document" },
+   *   action: "view",
    * });
    * ```
    */

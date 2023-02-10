@@ -33,6 +33,7 @@ const plan = await cerbos.planResources({
     attributes: { tier: "PREMIUM" },
   },
   resource: { kind: "document" },
+  action: "view",
 });
 ```
 
