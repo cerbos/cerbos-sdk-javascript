@@ -7,10 +7,10 @@
     "test:watch": "scripts/jest --watch"
   },
   "devDependencies": {
-    "@cerbos/core": "0.8.1",
-    "@cerbos/grpc": "0.8.2",
-    "@cerbos/http": "0.8.1",
-    "@cerbos/lite": "0.1.1-alpha",
+    "@cerbos/core": "0.9.0",
+    "@cerbos/grpc": "0.9.0",
+    "@cerbos/http": "0.9.0",
+    "@cerbos/lite": "0.2.0-alpha",
     "@cerbos/opentelemetry": "0.1.0",
     "@jest/globals": "29.4.2",
     "@jest/types": "29.4.2",
