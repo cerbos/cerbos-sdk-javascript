@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.9.0] - 2023-02-15
+
 ## Added
 
 - [`Client.disablePolicy`](../../docs/core.client.disablepolicy.md) and [`Client.disablePolicies`](../../docs/core.client.disablepolicies.md) methods to disable policies ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
@@ -61,7 +65,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.8.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.9.0...HEAD
+[0.9.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.8.1...@cerbos/http@0.9.0
 [0.8.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.8.0...@cerbos/http@0.8.1
 [0.8.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.7.1...@cerbos/http@0.8.0
 [0.7.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.7.0...@cerbos/http@0.7.1

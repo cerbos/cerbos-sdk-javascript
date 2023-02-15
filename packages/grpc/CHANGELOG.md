@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.9.0] - 2023-02-15
+
 ## Added
 
 - [`Client.disablePolicy`](../../docs/core.client.disablepolicy.md) and [`Client.disablePolicies`](../../docs/core.client.disablepolicies.md) methods to disable policies ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
@@ -80,7 +84,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.8.2...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.9.0...HEAD
+[0.9.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.8.2...@cerbos/grpc@0.9.0
 [0.8.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.8.1...@cerbos/grpc@0.8.2
 [0.8.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.8.0...@cerbos/grpc@0.8.1
 [0.8.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.7.1...@cerbos/grpc@0.8.0
