@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [OpenTelemetry](https://opentelemetry.io) support ([#438](https://github.com/cerbos/cerbos-sdk-javascript/pull/438))
 
 ## [0.1.1-alpha] - 2022-11-24
 

@@ -695,7 +695,7 @@ describe("Client", () => {
             ...policy,
           });
 
-          if (cerbosVersionIsAtLeast("0.25.0-prerelease")) {
+          if (cerbosVersionIsAtLeast("0.25.0")) {
             const disabled = await mutable.disablePolicy(id);
             expect(disabled).toBe(true); // eslint-disable-line jest/no-conditional-expect
 
@@ -742,7 +742,7 @@ describe("Client", () => {
           });
 
           const deleted = await mutable.deleteSchema(id);
-          expect(deleted).toBe(cerbosVersionIsAtLeast("0.25.0-prerelease"));
+          expect(deleted).toBe(cerbosVersionIsAtLeast("0.25.0"));
 
           const { ids: remainingIds } = await mutable.listSchemas();
           expect(remainingIds).not.toContain(id);

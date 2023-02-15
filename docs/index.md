@@ -12,4 +12,5 @@
 |  [@cerbos/grpc](./grpc.md) | Client library for interacting with the Cerbos policy decision point over gRPC from server-side Node.js applications. |
 |  [@cerbos/http](./http.md) | Client library for interacting with the Cerbos policy decision point over HTTP from browser-based applications. |
 |  [@cerbos/lite](./lite.md) | Client library for interacting with WebAssembly Cerbos policy bundles from server-side Node.js and browser-based applications. |
+|  [@cerbos/opentelemetry](./opentelemetry.md) | OpenTelemetry instrumentation for the [gRPC](./grpc.md) and [HTTP](./http.md) client libraries. |
 

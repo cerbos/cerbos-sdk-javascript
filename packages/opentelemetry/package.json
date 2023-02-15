@@ -1,0 +1,34 @@
+{
+  "name": "@cerbos/opentelemetry",
+  "version": "0.1.0",
+  "description": "OpenTelemetry instrumentation for the @cerbos/grpc and @cerbos/http client libraries",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cerbos/cerbos-sdk-javascript.git",
+    "directory": "packages/opentelemetry"
+  },
+  "homepage": "https://github.com/cerbos/cerbos-sdk-javascript/tree/main/packages/opentelemetry#readme",
+  "bugs": {
+    "url": "https://github.com/cerbos/cerbos-sdk-javascript/issues"
+  },
+  "author": "Cerbos <help@cerbos.dev> (https://cerbos.dev)",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 14"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib/**/*.d.ts",
+    "lib/**/*.d.ts.map",
+    "lib/**/*.js",
+    "lib/**/*.js.map",
+    "src/**/*.ts"
+  ],
+  "dependencies": {
+    "@cerbos/core": "^0.8.1",
+    "@opentelemetry/api": "^1.4.0",
+    "@opentelemetry/instrumentation": "^0.35.1",
+    "@opentelemetry/semantic-conventions": "^1.9.1"
+  }
+}
