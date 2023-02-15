@@ -86,18 +86,20 @@ describe("CerbosInstrumentation", () => {
       });
 
       it("records spans for successful calls", async () => {
-        const [result, span] = await captureSpan(spanExporter, () =>
-          client.isAllowed({
-            principal: {
-              id: "someone@example.com",
-              roles: ["USER"],
-            },
-            resource: {
-              kind: "folder",
-              id: "test",
-            },
-            action: "edit",
-          })
+        const [result, span] = await captureSpan(
+          spanExporter,
+          async () =>
+            await client.isAllowed({
+              principal: {
+                id: "someone@example.com",
+                roles: ["USER"],
+              },
+              resource: {
+                kind: "folder",
+                id: "test",
+              },
+              action: "edit",
+            })
         );
 
         expect(result).toEqual({ value: false });
@@ -118,18 +120,20 @@ describe("CerbosInstrumentation", () => {
       // Lite policy bundles don't produce invalid argument errors
       if (type !== "Lite") {
         it("records spans for unsuccessful calls", async () => {
-          const [result, span] = await captureSpan(spanExporter, () =>
-            client.isAllowed({
-              principal: {
-                id: "someone@example.com",
-                roles: ["USER"],
-              },
-              resource: {
-                kind: "folder",
-                id: "test",
-              },
-              action: "",
-            })
+          const [result, span] = await captureSpan(
+            spanExporter,
+            async () =>
+              await client.isAllowed({
+                principal: {
+                  id: "someone@example.com",
+                  roles: ["USER"],
+                },
+                resource: {
+                  kind: "folder",
+                  id: "test",
+                },
+                action: "",
+              })
           );
 
           expect(result).toEqual({
