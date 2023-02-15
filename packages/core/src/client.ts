@@ -640,22 +640,27 @@ export abstract class Client {
   /**
    * Retrieve information about the Cerbos policy decision point server.
    */
-  public serverInfo(): Promise<ServerInfo> {
-    return this.cerbos("serverInfo", {});
+  public async serverInfo(): Promise<ServerInfo> {
+    return await this.cerbos("serverInfo", {});
   }
 
-  private admin<RPC extends _RPC<"admin">>(
+  private async admin<RPC extends _RPC<"admin">>(
     rpc: RPC,
     request: _Request<"admin", RPC>
   ): Promise<_Response<"admin", RPC>> {
-    return this.transport("admin", rpc, request, this.options.adminCredentials);
+    return await this.transport(
+      "admin",
+      rpc,
+      request,
+      this.options.adminCredentials
+    );
   }
 
-  private cerbos<RPC extends _RPC<"cerbos">>(
+  private async cerbos<RPC extends _RPC<"cerbos">>(
     rpc: RPC,
     request: _Request<"cerbos", RPC>
   ): Promise<_Response<"cerbos", RPC>> {
-    return this.transport("cerbos", rpc, request);
+    return await this.transport("cerbos", rpc, request);
   }
 
   private handleValidationErrors({

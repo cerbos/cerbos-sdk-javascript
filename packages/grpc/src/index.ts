@@ -100,7 +100,12 @@ export class GRPC extends Client {
       "grpc.primary_user_agent": `cerbos-sdk-javascript-grpc/${version}`,
     });
 
-    const transport: _Transport = (service, rpc, request, adminCredentials) => {
+    const transport: _Transport = async (
+      service,
+      rpc,
+      request,
+      adminCredentials
+    ) => {
       const { path, requestSerialize, responseDeserialize } = services[service][
         rpc
       ] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
@@ -111,7 +116,7 @@ export class GRPC extends Client {
         callOptions.credentials = adminCallCredentials(adminCredentials);
       }
 
-      return new Promise((resolve, reject) => {
+      return await new Promise((resolve, reject) => {
         client.makeUnaryRequest(
           path,
           requestSerialize,

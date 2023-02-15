@@ -4,7 +4,6 @@ import type {
 } from "@cerbos/core";
 import { CheckResourcesResponse, Effect } from "@cerbos/core";
 import { describe, expect, it } from "@jest/globals";
-import { v4 as uuidv4 } from "uuid";
 
 import { buildResult, buildResultsForResources, shuffle } from "./helpers";
 
@@ -25,7 +24,7 @@ describe("CheckResourcesResponse", () => {
 
       describe("when all actions are allowed", () => {
         const response = new CheckResourcesResponse({
-          requestId: uuidv4(),
+          requestId: "fb39aa60-120e-44da-a312-a2381718c1be",
           results: [
             buildResult({
               resource,
@@ -44,7 +43,7 @@ describe("CheckResourcesResponse", () => {
 
       describe("when some actions are denied", () => {
         const response = new CheckResourcesResponse({
-          requestId: uuidv4(),
+          requestId: "eda6ee1d-982c-4d47-b5f0-118f48eec2f1",
           results: [
             buildResult({
               resource,
@@ -64,7 +63,7 @@ describe("CheckResourcesResponse", () => {
 
     describe("when the resource is not found", () => {
       const response = new CheckResourcesResponse({
-        requestId: uuidv4(),
+        requestId: "6f954ec6-4eb4-45ad-9cb6-f5462b02d99d",
         results: [
           buildResult({
             resource,
@@ -86,7 +85,7 @@ describe("CheckResourcesResponse", () => {
 
   describe("#allowedActions", () => {
     const response = new CheckResourcesResponse({
-      requestId: uuidv4(),
+      requestId: "9d2434c6-4ac0-4088-8ed9-9ed217c43c1d",
       results: [
         buildResult({
           resource: {
@@ -122,7 +121,7 @@ describe("CheckResourcesResponse", () => {
 
   describe("#isAllowed", () => {
     const response = new CheckResourcesResponse({
-      requestId: uuidv4(),
+      requestId: "cf702390-0dfc-4de0-b272-4a2de1c56684",
       results: [
         buildResult({
           resource: {
@@ -184,7 +183,7 @@ describe("CheckResourcesResponse", () => {
 
   describe("#findResult", () => {
     const response = new CheckResourcesResponse({
-      requestId: uuidv4(),
+      requestId: "316efdc4-7cc6-44d6-a1a2-e70c1ceb6ca3",
       results: shuffle([
         ...buildResultsForResources({
           id: "kind_and_id",

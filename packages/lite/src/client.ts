@@ -72,7 +72,7 @@ export class Lite extends Client {
    */
   public constructor(source: Source, options: Options = {}) {
     const transport: _Transport = async (service, rpc, request) =>
-      (await this.server).perform(service, rpc, request);
+      await (await this.server).perform(service, rpc, request);
 
     super(transport, {});
 
@@ -109,10 +109,10 @@ const instantiate = async (
   const resolvedSource = await source;
 
   if (resolvedSource instanceof Response) {
-    return WebAssembly.instantiateStreaming(resolvedSource, imports);
+    return await WebAssembly.instantiateStreaming(resolvedSource, imports);
   }
 
-  return WebAssembly.instantiate(resolvedSource, imports);
+  return await WebAssembly.instantiate(resolvedSource, imports);
 };
 
 const secondsSinceUnixEpoch = (date: Date | number): bigint => {
