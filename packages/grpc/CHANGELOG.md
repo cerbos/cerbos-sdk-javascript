@@ -2,7 +2,7 @@
 
 ### Changed
 
-- Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.8.9 ([#449](https://github.com/cerbos/cerbos-sdk-javascript/pull/449))
+- Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.8.11 ([#449](https://github.com/cerbos/cerbos-sdk-javascript/pull/449), [#452](https://github.com/cerbos/cerbos-sdk-javascript/pull/452))
 
 ## [0.9.0] - 2023-02-15
 
