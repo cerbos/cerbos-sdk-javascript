@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+## Changed
+
+- Bump dependency on [qs](https://github.com/ljharb/qs) to 6.11.1 ([#459](https://github.com/cerbos/cerbos-sdk-javascript/pull/459))
 
 ## [0.9.0] - 2023-02-15
 
