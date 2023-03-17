@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependencies on [@opentelemetry/api](https://github.com/open-telemetry/opentelemetry-js/tree/main/api) to 1.4.1, [@opentelemetry/instrumentation](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation) to 0.36.0, and [@opentelemetry/semantic-conventions](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-semantic-conventions) to 1.10.0 ([#464](https://github.com/cerbos/cerbos-sdk-javascript/pull/464))
 
 ## [0.1.0] - 2023-02-15
 
