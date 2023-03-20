@@ -5,7 +5,7 @@
  */
 
 import type {
-  Options,
+  Options as CoreOptions,
   _RPC,
   _Request,
   _Response,
@@ -48,7 +48,17 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-var-requires -- Can't import package.json because it is outside of the project's rootDir
 const { version } = require("../package.json") as { version: string };
 
-export type { Options } from "@cerbos/core";
+export interface Options extends CoreOptions {
+  /**
+   * Pass through Header parameter for authentication through Api Gateways
+   *
+   * @defaultValue `undefined`
+   */
+  passThroughHeaders?: Record<string,string> | undefined
+}
+
+
+
 
 /**
  * A client for interacting with the Cerbos policy decision point server over HTTP.
@@ -91,6 +101,7 @@ export class HTTP extends Client {
    * ```
    */
   public constructor(url: string, options: Options = {}) {
+
     const { playgroundInstance, passThroughHeaders } = options;
 
     const headers: HeadersInit = {
@@ -105,7 +116,7 @@ export class HTTP extends Client {
       const tempHeaders: Record<string,string> = passThroughHeaders
       for (const headerKey of Object.keys(tempHeaders)) {
         if(tempHeaders[headerKey]){
-          headers[headerKey] = tempHeaders[headerKey]
+          headers[headerKey] = tempHeaders[headerKey] ?? ""
         }
       }
     }
