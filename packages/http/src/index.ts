@@ -91,7 +91,7 @@ export class HTTP extends Client {
    * ```
    */
   public constructor(url: string, options: Options = {}) {
-    const { playgroundInstance } = options;
+    const { playgroundInstance, passThroughHeaders } = options;
 
     const headers: HeadersInit = {
       "User-Agent": `cerbos-sdk-javascript-http/${version}`,
@@ -99,6 +99,15 @@ export class HTTP extends Client {
 
     if (playgroundInstance) {
       headers["Playground-Instance"] = playgroundInstance;
+    }
+
+    if (passThroughHeaders) {
+      const tempHeaders: Record<string,string> = passThroughHeaders
+      for (const headerKey of Object.keys(tempHeaders)) {
+        if(tempHeaders[headerKey]){
+          headers[headerKey] = tempHeaders[headerKey]
+        }
+      }
     }
 
     const transport: _Transport = async (

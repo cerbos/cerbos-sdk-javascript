@@ -106,6 +106,14 @@ export interface Options {
    * @defaultValue `undefined`
    */
   playgroundInstance?: string | undefined;
+
+  /**
+   * Pass through Header parameter for authentication through Api Gateways
+   *
+   * @defaultValue `undefined`
+   */
+  passThroughHeaders?: Record<string,string> | undefined
+
 }
 
 /**
