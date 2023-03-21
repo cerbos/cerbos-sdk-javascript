@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.10.0] - 2023-03-21
+
 ## Added
 
 - [`headers`](../../docs/http.options.headers.md) option to add headers to every request ([#471](https://github.com/cerbos/cerbos-sdk-javascript/pull/471))
@@ -71,7 +75,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.9.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.10.0...HEAD
+[0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.9.0...@cerbos/http@0.10.0
 [0.9.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.8.1...@cerbos/http@0.9.0
 [0.8.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.8.0...@cerbos/http@0.8.1
 [0.8.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.7.1...@cerbos/http@0.8.0
