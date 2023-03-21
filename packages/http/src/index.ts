@@ -5,6 +5,7 @@
  */
 
 import type {
+  AdminCredentials,
   Options as CoreOptions,
   _RPC,
   _Request,
@@ -48,17 +49,19 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-var-requires -- Can't import package.json because it is outside of the project's rootDir
 const { version } = require("../package.json") as { version: string };
 
+/**
+ * Options for creating a new {@link HTTP} client.
+ *
+ * @public
+ */
 export interface Options extends CoreOptions {
   /**
-   * Pass through Header parameter for authentication through Api Gateways
+   * Headers to add to every request.
    *
    * @defaultValue `undefined`
    */
-  passThroughHeaders?: Record<string,string> | undefined
+  headers?: HeadersInit | (() => HeadersInit) | undefined;
 }
-
-
-
 
 /**
  * A client for interacting with the Cerbos policy decision point server over HTTP.
@@ -101,26 +104,6 @@ export class HTTP extends Client {
    * ```
    */
   public constructor(url: string, options: Options = {}) {
-
-    const { playgroundInstance, passThroughHeaders } = options;
-
-    const headers: HeadersInit = {
-      "User-Agent": `cerbos-sdk-javascript-http/${version}`,
-    };
-
-    if (playgroundInstance) {
-      headers["Playground-Instance"] = playgroundInstance;
-    }
-
-    if (passThroughHeaders) {
-      const tempHeaders: Record<string,string> = passThroughHeaders
-      for (const headerKey of Object.keys(tempHeaders)) {
-        if(tempHeaders[headerKey]){
-          headers[headerKey] = tempHeaders[headerKey] ?? ""
-        }
-      }
-    }
-
     const transport: _Transport = async (
       service,
       rpc,
@@ -138,19 +121,10 @@ export class HTTP extends Client {
           ? `?${queryStringify(requestProtobuf, { indices: false })}`
           : "";
 
-      const additionalHeaders: HeadersInit = {};
-
-      if (adminCredentials) {
-        additionalHeaders["Authorization"] = `Basic ${
-          btoa(`${adminCredentials.username}:${adminCredentials.password}`) ??
-          ""
-        }`;
-      }
-
       const response = await fetch(url + path + query, {
         method,
         body: method !== "POST" ? null : JSON.stringify(requestProtobuf),
-        headers: { ...headers, ...additionalHeaders },
+        headers: headers(options, adminCredentials),
       });
 
       if (!response.ok) {
@@ -254,4 +228,30 @@ const services: Services = {
       responseType: ServerInfoResponse,
     },
   },
+};
+
+const headers = (
+  { headers: optionalHeaders, playgroundInstance }: Options,
+  adminCredentials: AdminCredentials | undefined
+): Headers => {
+  const headers = new Headers(
+    typeof optionalHeaders === "function" ? optionalHeaders() : optionalHeaders
+  );
+
+  headers.append("User-Agent", `cerbos-sdk-javascript-http/${version}`);
+
+  if (adminCredentials) {
+    headers.set(
+      "Authorization",
+      `Basic ${
+        btoa(`${adminCredentials.username}:${adminCredentials.password}`) ?? ""
+      }`
+    );
+  }
+
+  if (playgroundInstance) {
+    headers.set("Playground-Instance", playgroundInstance);
+  }
+
+  return headers;
 };
