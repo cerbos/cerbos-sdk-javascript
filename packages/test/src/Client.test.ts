@@ -709,6 +709,12 @@ describe("Client", () => {
                 includeDisabled: true,
               });
               expect(disabledIds).toContain(id);
+
+              const enabled = await mutable.enablePolicy(id);
+              expect(enabled).toBe(true);
+
+              const { ids: enabledIds } = await mutable.listPolicies();
+              expect(enabledIds).toContain(id);
             }
           }
         });

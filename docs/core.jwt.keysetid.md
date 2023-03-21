@@ -14,5 +14,5 @@ keySetId?: string;
 
 ## Remarks
 
-Optional if the PDP server only has one JWKS configured or verification disabled
+Optional if the PDP server only has one JWKS configured or verification disabled.
 

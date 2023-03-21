@@ -16,6 +16,8 @@ export * from "./DerivedRoles";
 export * from "./DisablePoliciesRequest";
 export * from "./DisablePoliciesResponse";
 export * from "./Effect";
+export * from "./EnablePoliciesRequest";
+export * from "./EnablePoliciesResponse";
 export * from "./GetPoliciesRequest";
 export * from "./GetPoliciesResponse";
 export * from "./GetSchemasRequest";

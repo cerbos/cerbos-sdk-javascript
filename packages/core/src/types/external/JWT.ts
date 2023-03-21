@@ -13,7 +13,7 @@ export interface JWT {
    * The ID of the JWKS to be used by the PDP server to verify the JWT.
    *
    * @remarks
-   * Optional if the PDP server only has one JWKS configured or verification disabled
+   * Optional if the PDP server only has one JWKS configured or verification disabled.
    */
   keySetId?: string;
 }

@@ -14,5 +14,5 @@ ids: string[];
 
 ## Remarks
 
-Available schema IDs can be listed with [Client.listSchemas()](./core.client.listschemas.md)
+Available schema IDs can be listed with [Client.listSchemas()](./core.client.listschemas.md)<!-- -->.
 

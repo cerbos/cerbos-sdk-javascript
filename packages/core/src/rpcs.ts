@@ -4,6 +4,7 @@ import type {
   CheckResourcesRequest,
   DeleteSchemaRequest,
   DisablePolicyRequest,
+  EnablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
   ListPoliciesRequest,
@@ -18,6 +19,7 @@ import type {
   CheckResourcesResponse,
   DeleteSchemaResponse,
   DisablePolicyResponse,
+  EnablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
   ListPoliciesResponse,
@@ -34,6 +36,7 @@ export interface _Services {
     addOrUpdateSchema: [AddOrUpdateSchemaRequest, AddOrUpdateSchemaResponse];
     deleteSchema: [DeleteSchemaRequest, DeleteSchemaResponse];
     disablePolicy: [DisablePolicyRequest, DisablePolicyResponse];
+    enablePolicy: [EnablePolicyRequest, EnablePolicyResponse];
     getPolicy: [GetPolicyRequest, GetPolicyResponse];
     getSchema: [GetSchemaRequest, GetSchemaResponse];
     listPolicies: [ListPoliciesRequest, ListPoliciesResponse];

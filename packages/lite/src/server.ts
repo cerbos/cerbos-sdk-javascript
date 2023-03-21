@@ -28,6 +28,7 @@ const services: Services = {
     addOrUpdateSchema: undefined,
     deleteSchema: undefined,
     disablePolicy: undefined,
+    enablePolicy: undefined,
     getPolicy: undefined,
     getSchema: undefined,
     listPolicies: undefined,

@@ -2,6 +2,7 @@ import {
   checkResourcesResponseFromProtobuf,
   deleteSchemasResponseFromProtobuf,
   disablePoliciesResponseFromProtobuf,
+  enablePoliciesResponseFromProtobuf,
   getPoliciesResponseFromProtobuf,
   getSchemasResponseFromProtobuf,
   listPoliciesResponseFromProtobuf,
@@ -14,6 +15,7 @@ import {
   checkResourcesRequestToProtobuf,
   deleteSchemasRequestToProtobuf,
   disablePoliciesRequestToProtobuf,
+  enablePoliciesRequestToProtobuf,
   getPoliciesRequestToProtobuf,
   getSchemasRequestToProtobuf,
   listPoliciesRequestToProtobuf,
@@ -32,6 +34,8 @@ import type {
   DeleteSchemasResponse,
   DisablePoliciesRequest,
   DisablePoliciesResponse,
+  EnablePoliciesRequest,
+  EnablePoliciesResponse,
   GetPoliciesRequest,
   GetPoliciesResponse,
   GetSchemasRequest,
@@ -417,6 +421,55 @@ export abstract class Client {
   public async disablePolicy(id: string): Promise<boolean> {
     const { disabledPolicies } = await this.disablePolicies({ ids: [id] });
     return disabledPolicies === 1;
+  }
+
+  /**
+   * Enable multiple policies.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be at least v0.26 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * const result = await cerbos.enablePolicies({
+   *   ids: ["resource.document.v1", "resource.image.v1"],
+   * });
+   * ```
+   */
+  public async enablePolicies(
+    request: EnablePoliciesRequest
+  ): Promise<EnablePoliciesResponse> {
+    return enablePoliciesResponseFromProtobuf(
+      await this.admin("enablePolicy", enablePoliciesRequestToProtobuf(request))
+    );
+  }
+
+  /**
+   * Enable a policy.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be at least v0.26 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * const enabled = await cerbos.enablePolicy("resource.document.v1");
+   * ```
+   */
+  public async enablePolicy(id: string): Promise<boolean> {
+    const { enabledPolicies } = await this.enablePolicies({ ids: [id] });
+    return enabledPolicies === 1;
   }
 
   /**

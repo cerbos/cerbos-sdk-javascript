@@ -23,6 +23,7 @@ import {
   CheckResourcesRequest,
   DeleteSchemaRequest,
   DisablePolicyRequest,
+  EnablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
   ListPoliciesRequest,
@@ -37,6 +38,7 @@ import {
   CheckResourcesResponse,
   DeleteSchemaResponse,
   DisablePolicyResponse,
+  EnablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
   ListPoliciesResponse,
@@ -112,20 +114,20 @@ export class HTTP extends Client {
       request,
       adminCredentials
     ) => {
-      const { method, path, requestType, responseType } = services[service][
-        rpc
-      ] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
+      const { method, path, requestType, responseType, serializeRequest } =
+        services[service][rpc] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
 
       const requestProtobuf = requestType.toJSON(request);
 
       const query =
-        method !== "POST"
+        serializeRequest === "query"
           ? `?${queryStringify(requestProtobuf, { indices: false })}`
           : "";
 
       const response = await fetch(url + path + query, {
         method,
-        body: method !== "POST" ? null : JSON.stringify(requestProtobuf),
+        body:
+          serializeRequest === "body" ? JSON.stringify(requestProtobuf) : null,
         headers: headers(options, adminCredentials),
       });
 
@@ -145,6 +147,7 @@ interface Endpoint<Service extends _Service, RPC extends _RPC<Service>> {
   path: string;
   requestType: { toJSON: (request: _Request<Service, RPC>) => unknown };
   responseType: { fromJSON: (response: unknown) => _Response<Service, RPC> };
+  serializeRequest: "body" | "query";
 }
 
 type Services = {
@@ -160,54 +163,70 @@ const services: Services = {
       path: "/admin/policy",
       requestType: AddOrUpdatePolicyRequest,
       responseType: AddOrUpdatePolicyResponse,
+      serializeRequest: "body",
     },
     addOrUpdateSchema: {
       method: "POST",
       path: "/admin/schema",
       requestType: AddOrUpdateSchemaRequest,
       responseType: AddOrUpdateSchemaResponse,
+      serializeRequest: "body",
     },
     deleteSchema: {
       method: "DELETE",
       path: "/admin/schema",
       requestType: DeleteSchemaRequest,
       responseType: DeleteSchemaResponse,
+      serializeRequest: "query",
     },
     disablePolicy: {
       method: "DELETE",
       path: "/admin/policy",
       requestType: DisablePolicyRequest,
       responseType: DisablePolicyResponse,
+      serializeRequest: "query",
+    },
+    enablePolicy: {
+      method: "POST",
+      path: "/admin/policy/enable",
+      requestType: EnablePolicyRequest,
+      responseType: EnablePolicyResponse,
+      serializeRequest: "query",
     },
     getPolicy: {
       method: "GET",
       path: "/admin/policy",
       requestType: GetPolicyRequest,
       responseType: GetPolicyResponse,
+      serializeRequest: "query",
     },
     getSchema: {
       method: "GET",
       path: "/admin/schema",
       requestType: GetSchemaRequest,
       responseType: GetSchemaResponse,
+      serializeRequest: "query",
     },
     listPolicies: {
       method: "GET",
       path: "/admin/policies",
       requestType: ListPoliciesRequest,
       responseType: ListPoliciesResponse,
+      serializeRequest: "query",
     },
     listSchemas: {
       method: "GET",
       path: "/admin/schemas",
       requestType: ListSchemasRequest,
       responseType: ListSchemasResponse,
+      serializeRequest: "query",
     },
     reloadStore: {
       method: "GET",
       path: "/admin/store/reload",
       requestType: ReloadStoreRequest,
       responseType: ReloadStoreResponse,
+      serializeRequest: "query",
     },
   },
   cerbos: {
@@ -216,18 +235,21 @@ const services: Services = {
       path: "/api/check/resources",
       requestType: CheckResourcesRequest,
       responseType: CheckResourcesResponse,
+      serializeRequest: "body",
     },
     planResources: {
       method: "POST",
       path: "/api/plan/resources",
       requestType: PlanResourcesRequest,
       responseType: PlanResourcesResponse,
+      serializeRequest: "body",
     },
     serverInfo: {
       method: "GET",
       path: "/api/server_info",
       requestType: ServerInfoRequest,
       responseType: ServerInfoResponse,
+      serializeRequest: "query",
     },
   },
 };

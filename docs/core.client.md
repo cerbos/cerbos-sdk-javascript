@@ -28,6 +28,8 @@ The constructor for this class is marked as internal. Third-party code should no
 |  [deleteSchemas(request)](./core.client.deleteschemas.md) |  | Delete multiple schemas. |
 |  [disablePolicies(request)](./core.client.disablepolicies.md) |  | Disable multiple policies. |
 |  [disablePolicy(id)](./core.client.disablepolicy.md) |  | Disable a policy. |
+|  [enablePolicies(request)](./core.client.enablepolicies.md) |  | Enable multiple policies. |
+|  [enablePolicy(id)](./core.client.enablepolicy.md) |  | Enable a policy. |
 |  [getPolicies(request)](./core.client.getpolicies.md) |  | Fetch multiple policies by ID. |
 |  [getPolicy(id)](./core.client.getpolicy.md) |  | Fetch a policy by ID. |
 |  [getSchema(id)](./core.client.getschema.md) |  | Fetch a schema by ID. |

@@ -30,6 +30,7 @@ import type {
   CheckResourcesRequest_ResourceEntry,
   DeleteSchemaRequest,
   DisablePolicyRequest,
+  EnablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
   ListPoliciesRequest as ListPoliciesRequestProtobuf,
@@ -45,6 +46,7 @@ import type {
   DeleteSchemasRequest,
   DerivedRoleDefinition,
   DerivedRoles,
+  EnablePoliciesRequest,
   GetPoliciesRequest,
   JWT,
   ListPoliciesRequest,
@@ -382,6 +384,12 @@ export const deleteSchemasRequestToProtobuf = ({
 export const disablePoliciesRequestToProtobuf = ({
   ids,
 }: DisablePoliciesRequest): DisablePolicyRequest => ({
+  id: ids,
+});
+
+export const enablePoliciesRequestToProtobuf = ({
+  ids,
+}: EnablePoliciesRequest): EnablePolicyRequest => ({
   id: ids,
 });
 

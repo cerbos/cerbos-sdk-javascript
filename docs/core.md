@@ -53,6 +53,8 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [DerivedRoles](./core.derivedroles.md) | A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) to augment static RBAC roles with contextual data to provide more fine-grained control at runtime. |
 |  [DisablePoliciesRequest](./core.disablepoliciesrequest.md) | Input to [Client.disablePolicies()](./core.client.disablepolicies.md)<!-- -->. |
 |  [DisablePoliciesResponse](./core.disablepoliciesresponse.md) | The outcome of disabling policies. |
+|  [EnablePoliciesRequest](./core.enablepoliciesrequest.md) | Input to [Client.enablePolicies()](./core.client.enablepolicies.md)<!-- -->. |
+|  [EnablePoliciesResponse](./core.enablepoliciesresponse.md) | The outcome of enabling policies. |
 |  [GetPoliciesRequest](./core.getpoliciesrequest.md) | Input to [Client.getPolicies()](./core.client.getpolicies.md)<!-- -->. |
 |  [GetPoliciesResponse](./core.getpoliciesresponse.md) | Fetched policies. |
 |  [GetSchemasRequest](./core.getschemasrequest.md) | Input to [Client.getSchemas()](./core.client.getschemas.md)<!-- -->. |
