@@ -28,7 +28,7 @@
   "dependencies": {
     "@cerbos/core": "^0.9.0",
     "@opentelemetry/api": "^1.4.1",
-    "@opentelemetry/instrumentation": "^0.36.0",
-    "@opentelemetry/semantic-conventions": "^1.10.0"
+    "@opentelemetry/instrumentation": "^0.36.1",
+    "@opentelemetry/semantic-conventions": "^1.10.1"
   }
 }
