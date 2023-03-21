@@ -17,7 +17,7 @@ constructor(url: string, options?: Options);
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  url | string | base Cerbos PDP server URL (the Cerbos REST API must be available at <code>${url}/api/</code>). |
-|  options | [Options](./core.options.md) | _(Optional)_ additional client settings. |
+|  options | [Options](./http.options.md) | _(Optional)_ additional client settings. |
 
 ## Example 1
 

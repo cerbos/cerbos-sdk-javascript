@@ -12,3 +12,9 @@ Client library for interacting with the Cerbos policy decision point over HTTP f
 |  --- | --- |
 |  [HTTP](./http.http.md) | A client for interacting with the Cerbos policy decision point server over HTTP. |
 
+## Interfaces
+
+|  Interface | Description |
+|  --- | --- |
+|  [Options](./http.options.md) | Options for creating a new [HTTP](./http.http.md) client. |
+

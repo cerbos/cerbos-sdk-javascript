@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## Added
+
+- [`headers`](../../docs/http.options.headers.md) option to add headers to every request ([#471](https://github.com/cerbos/cerbos-sdk-javascript/pull/471))
+
 ## Changed
 
 - Bump dependency on [qs](https://github.com/ljharb/qs) to 6.11.1 ([#459](https://github.com/cerbos/cerbos-sdk-javascript/pull/459))
