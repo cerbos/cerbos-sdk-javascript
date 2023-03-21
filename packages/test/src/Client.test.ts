@@ -1,3 +1,5 @@
+/* eslint-disable jest/no-conditional-expect */
+
 import "./fetch-polyfill";
 
 import { readFileSync } from "fs";
@@ -697,10 +699,17 @@ describe("Client", () => {
 
           if (cerbosVersionIsAtLeast("0.25.0")) {
             const disabled = await mutable.disablePolicy(id);
-            expect(disabled).toBe(true); // eslint-disable-line jest/no-conditional-expect
+            expect(disabled).toBe(true);
 
             const { ids: remainingIds } = await mutable.listPolicies();
-            expect(remainingIds).not.toContain(id); // eslint-disable-line jest/no-conditional-expect
+            expect(remainingIds).not.toContain(id);
+
+            if (cerbosVersionIsAtLeast("0.26.0")) {
+              const { ids: disabledIds } = await mutable.listPolicies({
+                includeDisabled: true,
+              });
+              expect(disabledIds).toContain(id);
+            }
           }
         });
       });

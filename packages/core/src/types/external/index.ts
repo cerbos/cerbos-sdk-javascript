@@ -22,6 +22,7 @@ export * from "./GetSchemasRequest";
 export * from "./GetSchemasResponse";
 export * from "./IsAllowedRequest";
 export * from "./JWT";
+export * from "./ListPoliciesRequest";
 export * from "./ListPoliciesResponse";
 export * from "./ListSchemasResponse";
 export * from "./Match";

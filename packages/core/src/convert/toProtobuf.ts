@@ -32,6 +32,7 @@ import type {
   DisablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
+  ListPoliciesRequest as ListPoliciesRequestProtobuf,
   PlanResourcesRequest as PlanResourcesRequestProtobuf,
 } from "../protobuf/cerbos/request/v1/request";
 import type { Schema } from "../protobuf/cerbos/schema/v1/schema";
@@ -46,6 +47,7 @@ import type {
   DerivedRoles,
   GetPoliciesRequest,
   JWT,
+  ListPoliciesRequest,
   Match,
   Matches,
   PlanResourcesRequest,
@@ -393,6 +395,12 @@ export const getSchemasRequestToProtobuf = ({
   ids,
 }: GetSchemasRequest): GetSchemaRequest => ({
   id: ids,
+});
+
+export const listPoliciesRequestToProtobuf = ({
+  includeDisabled = false,
+}: ListPoliciesRequest): ListPoliciesRequestProtobuf => ({
+  includeDisabled,
 });
 
 export const planResourcesRequestToProtobuf = ({

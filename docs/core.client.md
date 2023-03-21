@@ -33,7 +33,7 @@ The constructor for this class is marked as internal. Third-party code should no
 |  [getSchema(id)](./core.client.getschema.md) |  | Fetch a schema by ID. |
 |  [getSchemas(request)](./core.client.getschemas.md) |  | Fetch multiple schemas by ID. |
 |  [isAllowed(request)](./core.client.isallowed.md) |  | Check if a principal is allowed to perform an action on a resource. |
-|  [listPolicies()](./core.client.listpolicies.md) |  | List policies. |
+|  [listPolicies(request)](./core.client.listpolicies.md) |  | List policies. |
 |  [listSchemas()](./core.client.listschemas.md) |  | List schemas. |
 |  [planResources(request)](./core.client.planresources.md) |  | Produce a query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action. |
 |  [reloadStore(request)](./core.client.reloadstore.md) |  | Reload the store. |

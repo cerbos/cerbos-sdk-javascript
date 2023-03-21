@@ -9,7 +9,7 @@ const execFile = promisify(execFileCallback);
 export const cerbosVersion = process.env["CERBOS_VERSION"] ?? "0.16.0";
 
 export const cerbosVersionIsAtLeast = (version: string): boolean =>
-  semverGte(cerbosVersion, version);
+  semverGte(cerbosVersion, `${version}-prerelease`);
 
 export interface Ports {
   grpc: {

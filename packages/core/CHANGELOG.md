@@ -1,6 +1,10 @@
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [`includeDisabled`](../../docs/core.listpoliciesrequest.includedisabled.md) option to [`Client.listPolicies`](../../docs/core.client.listpolicies.md) method to include disabled policies in the list ([#475](https://github.com/cerbos/cerbos-sdk-javascript/pull/475))
+
+  Requires a policy decision point server running Cerbos 0.26+.
 
 ## [0.9.1] - 2023-03-23
 

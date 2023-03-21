@@ -16,6 +16,7 @@ import {
   disablePoliciesRequestToProtobuf,
   getPoliciesRequestToProtobuf,
   getSchemasRequestToProtobuf,
+  listPoliciesRequestToProtobuf,
   planResourcesRequestToProtobuf,
 } from "./convert/toProtobuf";
 import { ValidationFailed } from "./errors";
@@ -36,6 +37,7 @@ import type {
   GetSchemasRequest,
   GetSchemasResponse,
   IsAllowedRequest,
+  ListPoliciesRequest,
   ListPoliciesResponse,
   ListSchemasResponse,
   PlanResourcesRequest,
@@ -560,11 +562,11 @@ export abstract class Client {
    * const { ids } = await cerbos.listPolicies();
    * ```
    */
-  public async listPolicies(): Promise<ListPoliciesResponse> {
+  public async listPolicies(
+    request: ListPoliciesRequest = {}
+  ): Promise<ListPoliciesResponse> {
     return listPoliciesResponseFromProtobuf(
-      await this.admin("listPolicies", {
-        includeDisabled: false,
-      })
+      await this.admin("listPolicies", listPoliciesRequestToProtobuf(request))
     );
   }
 

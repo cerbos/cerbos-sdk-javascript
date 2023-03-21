@@ -58,6 +58,7 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [GetSchemasRequest](./core.getschemasrequest.md) | Input to [Client.getSchemas()](./core.client.getschemas.md)<!-- -->. |
 |  [GetSchemasResponse](./core.getschemasresponse.md) | Fetched schemas. |
 |  [JWT](./core.jwt.md) | A JSON Web Token to use as an auxiliary data source, which will be verified against the Cerbos policy decision point (PDP) server's [configured JSON Web Key Sets (JWKS)](https://docs.cerbos.dev/cerbos/latest/configuration/auxdata.html#_jwt) unless verification is disabled on the server. |
+|  [ListPoliciesRequest](./core.listpoliciesrequest.md) | Input to [Client.listPolicies()](./core.client.listpolicies.md)<!-- -->. |
 |  [ListPoliciesResponse](./core.listpoliciesresponse.md) | A list of available policy IDs. |
 |  [ListSchemasResponse](./core.listschemasresponse.md) | A list of available schema IDs. |
 |  [MatchAll](./core.matchall.md) | A set of expressions to evaluate in a condition that must all be true. |
