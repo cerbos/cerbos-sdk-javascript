@@ -3,7 +3,7 @@ import type { Empty } from "../../../google/protobuf/empty";
 import type { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
 import type { Effect } from "../../effect/v1/effect";
 import type { PlanResourcesFilter } from "../../engine/v1/engine";
-import type { Policy, TestResults } from "../../policy/v1/policy";
+import type { Policy } from "../../policy/v1/policy";
 import type { Schema, ValidationError } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.response.v1";
@@ -23,7 +23,6 @@ export interface PlanResourcesResponse_Meta {
   matchedScope: string;
 }
 
-/** Deprecated. See CheckResourcesResponse. */
 export interface CheckResourceSetResponse {
   requestId: string;
   resourceInstances: { [key: string]: CheckResourceSetResponse_ActionEffectMap };
@@ -69,7 +68,6 @@ export interface CheckResourceSetResponse_ResourceInstancesEntry {
   value: CheckResourceSetResponse_ActionEffectMap | undefined;
 }
 
-/** Deprecated. See CheckResourcesResponse. */
 export interface CheckResourceBatchResponse {
   requestId: string;
   results: CheckResourceBatchResponse_ActionEffectMap[];
@@ -123,62 +121,6 @@ export interface CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
 export interface CheckResourcesResponse_ResultEntry_ActionsEntry {
   key: string;
   value: Effect;
-}
-
-export interface PlaygroundFailure {
-  errors: PlaygroundFailure_Error[];
-}
-
-export interface PlaygroundFailure_Error {
-  file: string;
-  error: string;
-}
-
-export interface PlaygroundValidateResponse {
-  playgroundId: string;
-  outcome?: { $case: "failure"; failure: PlaygroundFailure } | { $case: "success"; success: Empty };
-}
-
-export interface PlaygroundTestResponse {
-  playgroundId: string;
-  outcome?: { $case: "failure"; failure: PlaygroundFailure } | {
-    $case: "success";
-    success: PlaygroundTestResponse_TestResults;
-  };
-}
-
-export interface PlaygroundTestResponse_TestResults {
-  results: TestResults | undefined;
-}
-
-export interface PlaygroundEvaluateResponse {
-  playgroundId: string;
-  outcome?: { $case: "failure"; failure: PlaygroundFailure } | {
-    $case: "success";
-    success: PlaygroundEvaluateResponse_EvalResultList;
-  };
-}
-
-export interface PlaygroundEvaluateResponse_EvalResult {
-  action: string;
-  effect: Effect;
-  policy: string;
-  effectiveDerivedRoles: string[];
-  validationErrors: ValidationError[];
-}
-
-export interface PlaygroundEvaluateResponse_EvalResultList {
-  results: PlaygroundEvaluateResponse_EvalResult[];
-}
-
-export interface PlaygroundProxyResponse {
-  playgroundId: string;
-  outcome?:
-    | { $case: "failure"; failure: PlaygroundFailure }
-    | { $case: "checkResourceSet"; checkResourceSet: CheckResourceSetResponse }
-    | { $case: "checkResourceBatch"; checkResourceBatch: CheckResourceBatchResponse }
-    | { $case: "planResources"; planResources: PlanResourcesResponse }
-    | { $case: "checkResources"; checkResources: CheckResourcesResponse };
 }
 
 export interface AddOrUpdatePolicyResponse {

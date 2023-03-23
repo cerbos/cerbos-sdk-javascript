@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Removed
+
+- Unused generated code ([#480](https://github.com/cerbos/cerbos-sdk-javascript/pull/480))
 
 ## [0.2.0-alpha] - 2023-02-15
 

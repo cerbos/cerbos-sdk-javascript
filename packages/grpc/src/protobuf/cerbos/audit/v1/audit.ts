@@ -22,14 +22,9 @@ export interface AccessLogEntry_MetadataEntry {
 export interface DecisionLogEntry {
   callId: string;
   timestamp: Date | undefined;
-  peer:
-    | Peer
-    | undefined;
-  /** Deprecated. Use method.check_resources.inputs instead. */
+  peer: Peer | undefined;
   inputs: CheckInput[];
-  /** Deprecated. Use method.check_resources.outputs instead. */
   outputs: CheckOutput[];
-  /** Deprecated. Use method.check_resources.error instead. */
   error: string;
   method?: { $case: "checkResources"; checkResources: DecisionLogEntry_CheckResources } | {
     $case: "planResources";

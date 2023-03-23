@@ -28,10 +28,6 @@ import {
   ListPoliciesRequest,
   ListSchemasRequest,
   PlanResourcesRequest,
-  PlaygroundEvaluateRequest,
-  PlaygroundProxyRequest,
-  PlaygroundTestRequest,
-  PlaygroundValidateRequest,
   ReloadStoreRequest,
   ServerInfoRequest,
 } from "../../request/v1/request";
@@ -50,10 +46,6 @@ import {
   ListPoliciesResponse,
   ListSchemasResponse,
   PlanResourcesResponse,
-  PlaygroundEvaluateResponse,
-  PlaygroundProxyResponse,
-  PlaygroundTestResponse,
-  PlaygroundValidateResponse,
   ReloadStoreResponse,
   ServerInfoResponse,
 } from "../../response/v1/response";
@@ -495,130 +487,4 @@ export const CerbosAdminServiceClient = makeGenericClientConstructor(
 ) as unknown as {
   new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): CerbosAdminServiceClient;
   service: typeof CerbosAdminServiceService;
-};
-
-export type CerbosPlaygroundServiceService = typeof CerbosPlaygroundServiceService;
-export const CerbosPlaygroundServiceService = {
-  playgroundValidate: {
-    path: "/cerbos.svc.v1.CerbosPlaygroundService/PlaygroundValidate",
-    requestStream: false,
-    responseStream: false,
-    requestSerialize: (value: PlaygroundValidateRequest) =>
-      Buffer.from(PlaygroundValidateRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => PlaygroundValidateRequest.decode(value),
-    responseSerialize: (value: PlaygroundValidateResponse) =>
-      Buffer.from(PlaygroundValidateResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => PlaygroundValidateResponse.decode(value),
-  },
-  playgroundTest: {
-    path: "/cerbos.svc.v1.CerbosPlaygroundService/PlaygroundTest",
-    requestStream: false,
-    responseStream: false,
-    requestSerialize: (value: PlaygroundTestRequest) => Buffer.from(PlaygroundTestRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => PlaygroundTestRequest.decode(value),
-    responseSerialize: (value: PlaygroundTestResponse) => Buffer.from(PlaygroundTestResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => PlaygroundTestResponse.decode(value),
-  },
-  playgroundEvaluate: {
-    path: "/cerbos.svc.v1.CerbosPlaygroundService/PlaygroundEvaluate",
-    requestStream: false,
-    responseStream: false,
-    requestSerialize: (value: PlaygroundEvaluateRequest) =>
-      Buffer.from(PlaygroundEvaluateRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => PlaygroundEvaluateRequest.decode(value),
-    responseSerialize: (value: PlaygroundEvaluateResponse) =>
-      Buffer.from(PlaygroundEvaluateResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => PlaygroundEvaluateResponse.decode(value),
-  },
-  playgroundProxy: {
-    path: "/cerbos.svc.v1.CerbosPlaygroundService/PlaygroundProxy",
-    requestStream: false,
-    responseStream: false,
-    requestSerialize: (value: PlaygroundProxyRequest) => Buffer.from(PlaygroundProxyRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => PlaygroundProxyRequest.decode(value),
-    responseSerialize: (value: PlaygroundProxyResponse) => Buffer.from(PlaygroundProxyResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => PlaygroundProxyResponse.decode(value),
-  },
-} as const;
-
-export interface CerbosPlaygroundServiceServer extends UntypedServiceImplementation {
-  playgroundValidate: handleUnaryCall<PlaygroundValidateRequest, PlaygroundValidateResponse>;
-  playgroundTest: handleUnaryCall<PlaygroundTestRequest, PlaygroundTestResponse>;
-  playgroundEvaluate: handleUnaryCall<PlaygroundEvaluateRequest, PlaygroundEvaluateResponse>;
-  playgroundProxy: handleUnaryCall<PlaygroundProxyRequest, PlaygroundProxyResponse>;
-}
-
-export interface CerbosPlaygroundServiceClient extends Client {
-  playgroundValidate(
-    request: PlaygroundValidateRequest,
-    callback: (error: ServiceError | null, response: PlaygroundValidateResponse) => void,
-  ): ClientUnaryCall;
-  playgroundValidate(
-    request: PlaygroundValidateRequest,
-    metadata: Metadata,
-    callback: (error: ServiceError | null, response: PlaygroundValidateResponse) => void,
-  ): ClientUnaryCall;
-  playgroundValidate(
-    request: PlaygroundValidateRequest,
-    metadata: Metadata,
-    options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: PlaygroundValidateResponse) => void,
-  ): ClientUnaryCall;
-  playgroundTest(
-    request: PlaygroundTestRequest,
-    callback: (error: ServiceError | null, response: PlaygroundTestResponse) => void,
-  ): ClientUnaryCall;
-  playgroundTest(
-    request: PlaygroundTestRequest,
-    metadata: Metadata,
-    callback: (error: ServiceError | null, response: PlaygroundTestResponse) => void,
-  ): ClientUnaryCall;
-  playgroundTest(
-    request: PlaygroundTestRequest,
-    metadata: Metadata,
-    options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: PlaygroundTestResponse) => void,
-  ): ClientUnaryCall;
-  playgroundEvaluate(
-    request: PlaygroundEvaluateRequest,
-    callback: (error: ServiceError | null, response: PlaygroundEvaluateResponse) => void,
-  ): ClientUnaryCall;
-  playgroundEvaluate(
-    request: PlaygroundEvaluateRequest,
-    metadata: Metadata,
-    callback: (error: ServiceError | null, response: PlaygroundEvaluateResponse) => void,
-  ): ClientUnaryCall;
-  playgroundEvaluate(
-    request: PlaygroundEvaluateRequest,
-    metadata: Metadata,
-    options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: PlaygroundEvaluateResponse) => void,
-  ): ClientUnaryCall;
-  playgroundProxy(
-    request: PlaygroundProxyRequest,
-    callback: (error: ServiceError | null, response: PlaygroundProxyResponse) => void,
-  ): ClientUnaryCall;
-  playgroundProxy(
-    request: PlaygroundProxyRequest,
-    metadata: Metadata,
-    callback: (error: ServiceError | null, response: PlaygroundProxyResponse) => void,
-  ): ClientUnaryCall;
-  playgroundProxy(
-    request: PlaygroundProxyRequest,
-    metadata: Metadata,
-    options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: PlaygroundProxyResponse) => void,
-  ): ClientUnaryCall;
-}
-
-export const CerbosPlaygroundServiceClient = makeGenericClientConstructor(
-  CerbosPlaygroundServiceService,
-  "cerbos.svc.v1.CerbosPlaygroundService",
-) as unknown as {
-  new (
-    address: string,
-    credentials: ChannelCredentials,
-    options?: Partial<ClientOptions>,
-  ): CerbosPlaygroundServiceClient;
-  service: typeof CerbosPlaygroundServiceService;
 };

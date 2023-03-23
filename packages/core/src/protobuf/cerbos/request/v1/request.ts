@@ -15,7 +15,6 @@ export interface PlanResourcesRequest {
   includeMeta: boolean;
 }
 
-/** Deprecated. See CheckResourcesRequest. */
 export interface CheckResourceSetRequest {
   requestId: string;
   actions: string[];
@@ -46,7 +45,6 @@ export interface AttributesMap_AttrEntry {
   value: any | undefined;
 }
 
-/** Deprecated. See CheckResourcesRequest. */
 export interface CheckResourceBatchRequest {
   requestId: string;
   principal: Principal | undefined;
@@ -59,7 +57,6 @@ export interface CheckResourceBatchRequest_BatchEntry {
   resource: Resource | undefined;
 }
 
-/** Structure of the request for the check resources API call. */
 export interface CheckResourcesRequest {
   requestId: string;
   includeMeta: boolean;
@@ -80,40 +77,6 @@ export interface AuxData {
 export interface AuxData_JWT {
   token: string;
   keySetId: string;
-}
-
-export interface File {
-  fileName: string;
-  contents: Uint8Array;
-}
-
-export interface PlaygroundValidateRequest {
-  playgroundId: string;
-  files: File[];
-}
-
-export interface PlaygroundTestRequest {
-  playgroundId: string;
-  files: File[];
-}
-
-export interface PlaygroundEvaluateRequest {
-  playgroundId: string;
-  files: File[];
-  principal: Principal | undefined;
-  resource: Resource | undefined;
-  actions: string[];
-  auxData: AuxData | undefined;
-}
-
-export interface PlaygroundProxyRequest {
-  playgroundId: string;
-  files: File[];
-  proxyRequest?:
-    | { $case: "checkResourceSet"; checkResourceSet: CheckResourceSetRequest }
-    | { $case: "checkResourceBatch"; checkResourceBatch: CheckResourceBatchRequest }
-    | { $case: "planResources"; planResources: PlanResourcesRequest }
-    | { $case: "checkResources"; checkResources: CheckResourcesRequest };
 }
 
 export interface AddOrUpdatePolicyRequest {
