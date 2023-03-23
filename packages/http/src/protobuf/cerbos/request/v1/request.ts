@@ -16,7 +16,6 @@ export interface PlanResourcesRequest {
   includeMeta: boolean;
 }
 
-/** Deprecated. See CheckResourcesRequest. */
 export interface CheckResourceSetRequest {
   requestId: string;
   actions: string[];
@@ -47,7 +46,6 @@ export interface AttributesMap_AttrEntry {
   value: any | undefined;
 }
 
-/** Deprecated. See CheckResourcesRequest. */
 export interface CheckResourceBatchRequest {
   requestId: string;
   principal: Principal | undefined;
@@ -60,7 +58,6 @@ export interface CheckResourceBatchRequest_BatchEntry {
   resource: Resource | undefined;
 }
 
-/** Structure of the request for the check resources API call. */
 export interface CheckResourcesRequest {
   requestId: string;
   includeMeta: boolean;
@@ -81,40 +78,6 @@ export interface AuxData {
 export interface AuxData_JWT {
   token: string;
   keySetId: string;
-}
-
-export interface File {
-  fileName: string;
-  contents: Uint8Array;
-}
-
-export interface PlaygroundValidateRequest {
-  playgroundId: string;
-  files: File[];
-}
-
-export interface PlaygroundTestRequest {
-  playgroundId: string;
-  files: File[];
-}
-
-export interface PlaygroundEvaluateRequest {
-  playgroundId: string;
-  files: File[];
-  principal: Principal | undefined;
-  resource: Resource | undefined;
-  actions: string[];
-  auxData: AuxData | undefined;
-}
-
-export interface PlaygroundProxyRequest {
-  playgroundId: string;
-  files: File[];
-  proxyRequest?:
-    | { $case: "checkResourceSet"; checkResourceSet: CheckResourceSetRequest }
-    | { $case: "checkResourceBatch"; checkResourceBatch: CheckResourceBatchRequest }
-    | { $case: "planResources"; planResources: PlanResourcesRequest }
-    | { $case: "checkResources"; checkResources: CheckResourcesRequest };
 }
 
 export interface AddOrUpdatePolicyRequest {
@@ -474,141 +437,6 @@ export const AuxData_JWT = {
   },
 };
 
-export const File = {
-  fromJSON(object: any): File {
-    return {
-      fileName: isSet(object.fileName) ? String(object.fileName) : "",
-      contents: isSet(object.contents) ? bytesFromBase64(object.contents) : new Uint8Array(),
-    };
-  },
-
-  toJSON(message: File): unknown {
-    const obj: any = {};
-    message.fileName !== undefined && (obj.fileName = message.fileName);
-    message.contents !== undefined &&
-      (obj.contents = base64FromBytes(message.contents !== undefined ? message.contents : new Uint8Array()));
-    return obj;
-  },
-};
-
-export const PlaygroundValidateRequest = {
-  fromJSON(object: any): PlaygroundValidateRequest {
-    return {
-      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
-      files: Array.isArray(object?.files) ? object.files.map((e: any) => File.fromJSON(e)) : [],
-    };
-  },
-
-  toJSON(message: PlaygroundValidateRequest): unknown {
-    const obj: any = {};
-    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
-    if (message.files) {
-      obj.files = message.files.map((e) => e ? File.toJSON(e) : undefined);
-    } else {
-      obj.files = [];
-    }
-    return obj;
-  },
-};
-
-export const PlaygroundTestRequest = {
-  fromJSON(object: any): PlaygroundTestRequest {
-    return {
-      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
-      files: Array.isArray(object?.files) ? object.files.map((e: any) => File.fromJSON(e)) : [],
-    };
-  },
-
-  toJSON(message: PlaygroundTestRequest): unknown {
-    const obj: any = {};
-    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
-    if (message.files) {
-      obj.files = message.files.map((e) => e ? File.toJSON(e) : undefined);
-    } else {
-      obj.files = [];
-    }
-    return obj;
-  },
-};
-
-export const PlaygroundEvaluateRequest = {
-  fromJSON(object: any): PlaygroundEvaluateRequest {
-    return {
-      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
-      files: Array.isArray(object?.files) ? object.files.map((e: any) => File.fromJSON(e)) : [],
-      principal: isSet(object.principal) ? Principal.fromJSON(object.principal) : undefined,
-      resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined,
-      actions: Array.isArray(object?.actions) ? object.actions.map((e: any) => String(e)) : [],
-      auxData: isSet(object.auxData) ? AuxData.fromJSON(object.auxData) : undefined,
-    };
-  },
-
-  toJSON(message: PlaygroundEvaluateRequest): unknown {
-    const obj: any = {};
-    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
-    if (message.files) {
-      obj.files = message.files.map((e) => e ? File.toJSON(e) : undefined);
-    } else {
-      obj.files = [];
-    }
-    message.principal !== undefined &&
-      (obj.principal = message.principal ? Principal.toJSON(message.principal) : undefined);
-    message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
-    if (message.actions) {
-      obj.actions = message.actions.map((e) => e);
-    } else {
-      obj.actions = [];
-    }
-    message.auxData !== undefined && (obj.auxData = message.auxData ? AuxData.toJSON(message.auxData) : undefined);
-    return obj;
-  },
-};
-
-export const PlaygroundProxyRequest = {
-  fromJSON(object: any): PlaygroundProxyRequest {
-    return {
-      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
-      files: Array.isArray(object?.files) ? object.files.map((e: any) => File.fromJSON(e)) : [],
-      proxyRequest: isSet(object.checkResourceSet)
-        ? { $case: "checkResourceSet", checkResourceSet: CheckResourceSetRequest.fromJSON(object.checkResourceSet) }
-        : isSet(object.checkResourceBatch)
-        ? {
-          $case: "checkResourceBatch",
-          checkResourceBatch: CheckResourceBatchRequest.fromJSON(object.checkResourceBatch),
-        }
-        : isSet(object.planResources)
-        ? { $case: "planResources", planResources: PlanResourcesRequest.fromJSON(object.planResources) }
-        : isSet(object.checkResources)
-        ? { $case: "checkResources", checkResources: CheckResourcesRequest.fromJSON(object.checkResources) }
-        : undefined,
-    };
-  },
-
-  toJSON(message: PlaygroundProxyRequest): unknown {
-    const obj: any = {};
-    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
-    if (message.files) {
-      obj.files = message.files.map((e) => e ? File.toJSON(e) : undefined);
-    } else {
-      obj.files = [];
-    }
-    message.proxyRequest?.$case === "checkResourceSet" && (obj.checkResourceSet = message.proxyRequest?.checkResourceSet
-      ? CheckResourceSetRequest.toJSON(message.proxyRequest?.checkResourceSet)
-      : undefined);
-    message.proxyRequest?.$case === "checkResourceBatch" &&
-      (obj.checkResourceBatch = message.proxyRequest?.checkResourceBatch
-        ? CheckResourceBatchRequest.toJSON(message.proxyRequest?.checkResourceBatch)
-        : undefined);
-    message.proxyRequest?.$case === "planResources" && (obj.planResources = message.proxyRequest?.planResources
-      ? PlanResourcesRequest.toJSON(message.proxyRequest?.planResources)
-      : undefined);
-    message.proxyRequest?.$case === "checkResources" && (obj.checkResources = message.proxyRequest?.checkResources
-      ? CheckResourcesRequest.toJSON(message.proxyRequest?.checkResources)
-      : undefined);
-    return obj;
-  },
-};
-
 export const AddOrUpdatePolicyRequest = {
   fromJSON(object: any): AddOrUpdatePolicyRequest {
     return { policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => Policy.fromJSON(e)) : [] };
@@ -831,31 +659,6 @@ var tsProtoGlobalThis: any = (() => {
   }
   throw "Unable to locate global object";
 })();
-
-function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
-  } else {
-    const bin = tsProtoGlobalThis.atob(b64);
-    const arr = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; ++i) {
-      arr[i] = bin.charCodeAt(i);
-    }
-    return arr;
-  }
-}
-
-function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
-  } else {
-    const bin: string[] = [];
-    arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
-    });
-    return tsProtoGlobalThis.btoa(bin.join(""));
-  }
-}
 
 function fromTimestamp(t: Timestamp): Date {
   let millis = Number(t.seconds) * 1_000;

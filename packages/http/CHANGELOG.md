@@ -1,20 +1,22 @@
 ## [Unreleased]
 
-No notable changes.
+### Removed
+
+- Unused generated code ([#480](https://github.com/cerbos/cerbos-sdk-javascript/pull/480))
 
 ## [0.10.0] - 2023-03-21
 
-## Added
+### Added
 
 - [`headers`](../../docs/http.options.headers.md) option to add headers to every request ([#471](https://github.com/cerbos/cerbos-sdk-javascript/pull/471))
 
-## Changed
+### Changed
 
 - Bump dependency on [qs](https://github.com/ljharb/qs) to 6.11.1 ([#459](https://github.com/cerbos/cerbos-sdk-javascript/pull/459))
 
 ## [0.9.0] - 2023-02-15
 
-## Added
+### Added
 
 - [`Client.disablePolicy`](../../docs/core.client.disablepolicy.md) and [`Client.disablePolicies`](../../docs/core.client.disablepolicies.md) methods to disable policies ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
 

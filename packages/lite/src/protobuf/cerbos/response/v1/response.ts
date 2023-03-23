@@ -3,7 +3,7 @@ import { Empty } from "../../../google/protobuf/empty";
 import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
 import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
 import { PlanResourcesFilter } from "../../engine/v1/engine";
-import { Policy, TestResults } from "../../policy/v1/policy";
+import { Policy } from "../../policy/v1/policy";
 import { Schema, ValidationError } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.response.v1";
@@ -23,7 +23,6 @@ export interface PlanResourcesResponse_Meta {
   matchedScope: string;
 }
 
-/** Deprecated. See CheckResourcesResponse. */
 export interface CheckResourceSetResponse {
   requestId: string;
   resourceInstances: { [key: string]: CheckResourceSetResponse_ActionEffectMap };
@@ -69,7 +68,6 @@ export interface CheckResourceSetResponse_ResourceInstancesEntry {
   value: CheckResourceSetResponse_ActionEffectMap | undefined;
 }
 
-/** Deprecated. See CheckResourcesResponse. */
 export interface CheckResourceBatchResponse {
   requestId: string;
   results: CheckResourceBatchResponse_ActionEffectMap[];
@@ -123,62 +121,6 @@ export interface CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
 export interface CheckResourcesResponse_ResultEntry_ActionsEntry {
   key: string;
   value: Effect;
-}
-
-export interface PlaygroundFailure {
-  errors: PlaygroundFailure_Error[];
-}
-
-export interface PlaygroundFailure_Error {
-  file: string;
-  error: string;
-}
-
-export interface PlaygroundValidateResponse {
-  playgroundId: string;
-  outcome?: { $case: "failure"; failure: PlaygroundFailure } | { $case: "success"; success: Empty };
-}
-
-export interface PlaygroundTestResponse {
-  playgroundId: string;
-  outcome?: { $case: "failure"; failure: PlaygroundFailure } | {
-    $case: "success";
-    success: PlaygroundTestResponse_TestResults;
-  };
-}
-
-export interface PlaygroundTestResponse_TestResults {
-  results: TestResults | undefined;
-}
-
-export interface PlaygroundEvaluateResponse {
-  playgroundId: string;
-  outcome?: { $case: "failure"; failure: PlaygroundFailure } | {
-    $case: "success";
-    success: PlaygroundEvaluateResponse_EvalResultList;
-  };
-}
-
-export interface PlaygroundEvaluateResponse_EvalResult {
-  action: string;
-  effect: Effect;
-  policy: string;
-  effectiveDerivedRoles: string[];
-  validationErrors: ValidationError[];
-}
-
-export interface PlaygroundEvaluateResponse_EvalResultList {
-  results: PlaygroundEvaluateResponse_EvalResult[];
-}
-
-export interface PlaygroundProxyResponse {
-  playgroundId: string;
-  outcome?:
-    | { $case: "failure"; failure: PlaygroundFailure }
-    | { $case: "checkResourceSet"; checkResourceSet: CheckResourceSetResponse }
-    | { $case: "checkResourceBatch"; checkResourceBatch: CheckResourceBatchResponse }
-    | { $case: "planResources"; planResources: PlanResourcesResponse }
-    | { $case: "checkResources"; checkResources: CheckResourcesResponse };
 }
 
 export interface AddOrUpdatePolicyResponse {
@@ -730,219 +672,6 @@ export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = effectToJSON(message.value));
-    return obj;
-  },
-};
-
-export const PlaygroundFailure = {
-  fromJSON(object: any): PlaygroundFailure {
-    return {
-      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => PlaygroundFailure_Error.fromJSON(e)) : [],
-    };
-  },
-
-  toJSON(message: PlaygroundFailure): unknown {
-    const obj: any = {};
-    if (message.errors) {
-      obj.errors = message.errors.map((e) => e ? PlaygroundFailure_Error.toJSON(e) : undefined);
-    } else {
-      obj.errors = [];
-    }
-    return obj;
-  },
-};
-
-export const PlaygroundFailure_Error = {
-  fromJSON(object: any): PlaygroundFailure_Error {
-    return {
-      file: isSet(object.file) ? String(object.file) : "",
-      error: isSet(object.error) ? String(object.error) : "",
-    };
-  },
-
-  toJSON(message: PlaygroundFailure_Error): unknown {
-    const obj: any = {};
-    message.file !== undefined && (obj.file = message.file);
-    message.error !== undefined && (obj.error = message.error);
-    return obj;
-  },
-};
-
-export const PlaygroundValidateResponse = {
-  fromJSON(object: any): PlaygroundValidateResponse {
-    return {
-      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
-      outcome: isSet(object.failure)
-        ? { $case: "failure", failure: PlaygroundFailure.fromJSON(object.failure) }
-        : isSet(object.success)
-        ? { $case: "success", success: Empty.fromJSON(object.success) }
-        : undefined,
-    };
-  },
-
-  toJSON(message: PlaygroundValidateResponse): unknown {
-    const obj: any = {};
-    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
-    message.outcome?.$case === "failure" &&
-      (obj.failure = message.outcome?.failure ? PlaygroundFailure.toJSON(message.outcome?.failure) : undefined);
-    message.outcome?.$case === "success" &&
-      (obj.success = message.outcome?.success ? Empty.toJSON(message.outcome?.success) : undefined);
-    return obj;
-  },
-};
-
-export const PlaygroundTestResponse = {
-  fromJSON(object: any): PlaygroundTestResponse {
-    return {
-      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
-      outcome: isSet(object.failure)
-        ? { $case: "failure", failure: PlaygroundFailure.fromJSON(object.failure) }
-        : isSet(object.success)
-        ? { $case: "success", success: PlaygroundTestResponse_TestResults.fromJSON(object.success) }
-        : undefined,
-    };
-  },
-
-  toJSON(message: PlaygroundTestResponse): unknown {
-    const obj: any = {};
-    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
-    message.outcome?.$case === "failure" &&
-      (obj.failure = message.outcome?.failure ? PlaygroundFailure.toJSON(message.outcome?.failure) : undefined);
-    message.outcome?.$case === "success" && (obj.success = message.outcome?.success
-      ? PlaygroundTestResponse_TestResults.toJSON(message.outcome?.success)
-      : undefined);
-    return obj;
-  },
-};
-
-export const PlaygroundTestResponse_TestResults = {
-  fromJSON(object: any): PlaygroundTestResponse_TestResults {
-    return { results: isSet(object.results) ? TestResults.fromJSON(object.results) : undefined };
-  },
-
-  toJSON(message: PlaygroundTestResponse_TestResults): unknown {
-    const obj: any = {};
-    message.results !== undefined && (obj.results = message.results ? TestResults.toJSON(message.results) : undefined);
-    return obj;
-  },
-};
-
-export const PlaygroundEvaluateResponse = {
-  fromJSON(object: any): PlaygroundEvaluateResponse {
-    return {
-      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
-      outcome: isSet(object.failure)
-        ? { $case: "failure", failure: PlaygroundFailure.fromJSON(object.failure) }
-        : isSet(object.success)
-        ? { $case: "success", success: PlaygroundEvaluateResponse_EvalResultList.fromJSON(object.success) }
-        : undefined,
-    };
-  },
-
-  toJSON(message: PlaygroundEvaluateResponse): unknown {
-    const obj: any = {};
-    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
-    message.outcome?.$case === "failure" &&
-      (obj.failure = message.outcome?.failure ? PlaygroundFailure.toJSON(message.outcome?.failure) : undefined);
-    message.outcome?.$case === "success" && (obj.success = message.outcome?.success
-      ? PlaygroundEvaluateResponse_EvalResultList.toJSON(message.outcome?.success)
-      : undefined);
-    return obj;
-  },
-};
-
-export const PlaygroundEvaluateResponse_EvalResult = {
-  fromJSON(object: any): PlaygroundEvaluateResponse_EvalResult {
-    return {
-      action: isSet(object.action) ? String(object.action) : "",
-      effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
-      policy: isSet(object.policy) ? String(object.policy) : "",
-      effectiveDerivedRoles: Array.isArray(object?.effectiveDerivedRoles)
-        ? object.effectiveDerivedRoles.map((e: any) => String(e))
-        : [],
-      validationErrors: Array.isArray(object?.validationErrors)
-        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: PlaygroundEvaluateResponse_EvalResult): unknown {
-    const obj: any = {};
-    message.action !== undefined && (obj.action = message.action);
-    message.effect !== undefined && (obj.effect = effectToJSON(message.effect));
-    message.policy !== undefined && (obj.policy = message.policy);
-    if (message.effectiveDerivedRoles) {
-      obj.effectiveDerivedRoles = message.effectiveDerivedRoles.map((e) => e);
-    } else {
-      obj.effectiveDerivedRoles = [];
-    }
-    if (message.validationErrors) {
-      obj.validationErrors = message.validationErrors.map((e) => e ? ValidationError.toJSON(e) : undefined);
-    } else {
-      obj.validationErrors = [];
-    }
-    return obj;
-  },
-};
-
-export const PlaygroundEvaluateResponse_EvalResultList = {
-  fromJSON(object: any): PlaygroundEvaluateResponse_EvalResultList {
-    return {
-      results: Array.isArray(object?.results)
-        ? object.results.map((e: any) => PlaygroundEvaluateResponse_EvalResult.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: PlaygroundEvaluateResponse_EvalResultList): unknown {
-    const obj: any = {};
-    if (message.results) {
-      obj.results = message.results.map((e) => e ? PlaygroundEvaluateResponse_EvalResult.toJSON(e) : undefined);
-    } else {
-      obj.results = [];
-    }
-    return obj;
-  },
-};
-
-export const PlaygroundProxyResponse = {
-  fromJSON(object: any): PlaygroundProxyResponse {
-    return {
-      playgroundId: isSet(object.playgroundId) ? String(object.playgroundId) : "",
-      outcome: isSet(object.failure)
-        ? { $case: "failure", failure: PlaygroundFailure.fromJSON(object.failure) }
-        : isSet(object.checkResourceSet)
-        ? { $case: "checkResourceSet", checkResourceSet: CheckResourceSetResponse.fromJSON(object.checkResourceSet) }
-        : isSet(object.checkResourceBatch)
-        ? {
-          $case: "checkResourceBatch",
-          checkResourceBatch: CheckResourceBatchResponse.fromJSON(object.checkResourceBatch),
-        }
-        : isSet(object.planResources)
-        ? { $case: "planResources", planResources: PlanResourcesResponse.fromJSON(object.planResources) }
-        : isSet(object.checkResources)
-        ? { $case: "checkResources", checkResources: CheckResourcesResponse.fromJSON(object.checkResources) }
-        : undefined,
-    };
-  },
-
-  toJSON(message: PlaygroundProxyResponse): unknown {
-    const obj: any = {};
-    message.playgroundId !== undefined && (obj.playgroundId = message.playgroundId);
-    message.outcome?.$case === "failure" &&
-      (obj.failure = message.outcome?.failure ? PlaygroundFailure.toJSON(message.outcome?.failure) : undefined);
-    message.outcome?.$case === "checkResourceSet" && (obj.checkResourceSet = message.outcome?.checkResourceSet
-      ? CheckResourceSetResponse.toJSON(message.outcome?.checkResourceSet)
-      : undefined);
-    message.outcome?.$case === "checkResourceBatch" && (obj.checkResourceBatch = message.outcome?.checkResourceBatch
-      ? CheckResourceBatchResponse.toJSON(message.outcome?.checkResourceBatch)
-      : undefined);
-    message.outcome?.$case === "planResources" && (obj.planResources = message.outcome?.planResources
-      ? PlanResourcesResponse.toJSON(message.outcome?.planResources)
-      : undefined);
-    message.outcome?.$case === "checkResources" && (obj.checkResources = message.outcome?.checkResources
-      ? CheckResourcesResponse.toJSON(message.outcome?.checkResources)
-      : undefined);
     return obj;
   },
 };

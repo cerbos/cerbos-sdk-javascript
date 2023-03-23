@@ -1,4 +1,10 @@
 version: v1
+
+types:
+  include:
+    - cerbos.svc.v1.CerbosService
+    - cerbos.svc.v1.CerbosAdminService
+
 plugins:
   - name: core
     path: node_modules/.bin/protoc-gen-ts_proto

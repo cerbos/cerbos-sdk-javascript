@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Removed
+
+- Unused generated code ([#480](https://github.com/cerbos/cerbos-sdk-javascript/pull/480))
 
 ## [0.9.1] - 2023-03-21
 
@@ -10,7 +12,7 @@ No notable changes.
 
 ## [0.9.0] - 2023-02-15
 
-## Added
+### Added
 
 - [`Client.disablePolicy`](../../docs/core.client.disablepolicy.md) and [`Client.disablePolicies`](../../docs/core.client.disablepolicies.md) methods to disable policies ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
 
