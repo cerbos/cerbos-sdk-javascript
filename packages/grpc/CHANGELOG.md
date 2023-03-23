@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.9.2] - 2023-03-23
+
 ### Removed
 
 - Unused generated code ([#480](https://github.com/cerbos/cerbos-sdk-javascript/pull/480))
@@ -92,7 +96,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.9.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.9.2...HEAD
+[0.9.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.9.1...@cerbos/grpc@0.9.2
 [0.9.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.9.0...@cerbos/grpc@0.9.1
 [0.9.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.8.2...@cerbos/grpc@0.9.0
 [0.8.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.8.1...@cerbos/grpc@0.8.2
