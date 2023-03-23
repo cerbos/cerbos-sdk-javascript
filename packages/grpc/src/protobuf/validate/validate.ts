@@ -1030,82 +1030,171 @@ export const FieldRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): FieldRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 17:
+          if (tag != 138) {
+            break;
+          }
+
           message.message = MessageRules.decode(reader, reader.uint32());
-          break;
+          continue;
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.type = { $case: "float", float: FloatRules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.type = { $case: "double", double: DoubleRules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.type = { $case: "int32", int32: Int32Rules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.type = { $case: "int64", int64: Int64Rules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.type = { $case: "uint32", uint32: UInt32Rules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.type = { $case: "uint64", uint64: UInt64Rules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 7:
+          if (tag != 58) {
+            break;
+          }
+
           message.type = { $case: "sint32", sint32: SInt32Rules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 8:
+          if (tag != 66) {
+            break;
+          }
+
           message.type = { $case: "sint64", sint64: SInt64Rules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 9:
+          if (tag != 74) {
+            break;
+          }
+
           message.type = { $case: "fixed32", fixed32: Fixed32Rules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 10:
+          if (tag != 82) {
+            break;
+          }
+
           message.type = { $case: "fixed64", fixed64: Fixed64Rules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 11:
+          if (tag != 90) {
+            break;
+          }
+
           message.type = { $case: "sfixed32", sfixed32: SFixed32Rules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 12:
+          if (tag != 98) {
+            break;
+          }
+
           message.type = { $case: "sfixed64", sfixed64: SFixed64Rules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 13:
+          if (tag != 106) {
+            break;
+          }
+
           message.type = { $case: "bool", bool: BoolRules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 14:
+          if (tag != 114) {
+            break;
+          }
+
           message.type = { $case: "string", string: StringRules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 15:
+          if (tag != 122) {
+            break;
+          }
+
           message.type = { $case: "bytes", bytes: BytesRules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 16:
+          if (tag != 130) {
+            break;
+          }
+
           message.type = { $case: "enum", enum: EnumRules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 18:
+          if (tag != 146) {
+            break;
+          }
+
           message.type = { $case: "repeated", repeated: RepeatedRules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 19:
+          if (tag != 154) {
+            break;
+          }
+
           message.type = { $case: "map", map: MapRules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 20:
+          if (tag != 162) {
+            break;
+          }
+
           message.type = { $case: "any", any: AnyRules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 21:
+          if (tag != 170) {
+            break;
+          }
+
           message.type = { $case: "duration", duration: DurationRules.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 22:
+          if (tag != 178) {
+            break;
+          }
+
           message.type = { $case: "timestamp", timestamp: TimestampRules.decode(reader, reader.uint32()) };
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1149,54 +1238,91 @@ export const FloatRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): FloatRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFloatRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 13) {
+            break;
+          }
+
           message.const = reader.float();
-          break;
+          continue;
         case 2:
+          if (tag != 21) {
+            break;
+          }
+
           message.lt = reader.float();
-          break;
+          continue;
         case 3:
+          if (tag != 29) {
+            break;
+          }
+
           message.lte = reader.float();
-          break;
+          continue;
         case 4:
+          if (tag != 37) {
+            break;
+          }
+
           message.gt = reader.float();
-          break;
+          continue;
         case 5:
+          if (tag != 45) {
+            break;
+          }
+
           message.gte = reader.float();
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 53) {
+            message.in.push(reader.float());
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(reader.float());
             }
-          } else {
-            message.in.push(reader.float());
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 61) {
+            message.notIn.push(reader.float());
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(reader.float());
             }
-          } else {
-            message.notIn.push(reader.float());
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1240,54 +1366,91 @@ export const DoubleRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DoubleRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDoubleRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 9) {
+            break;
+          }
+
           message.const = reader.double();
-          break;
+          continue;
         case 2:
+          if (tag != 17) {
+            break;
+          }
+
           message.lt = reader.double();
-          break;
+          continue;
         case 3:
+          if (tag != 25) {
+            break;
+          }
+
           message.lte = reader.double();
-          break;
+          continue;
         case 4:
+          if (tag != 33) {
+            break;
+          }
+
           message.gt = reader.double();
-          break;
+          continue;
         case 5:
+          if (tag != 41) {
+            break;
+          }
+
           message.gte = reader.double();
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 49) {
+            message.in.push(reader.double());
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(reader.double());
             }
-          } else {
-            message.in.push(reader.double());
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 57) {
+            message.notIn.push(reader.double());
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(reader.double());
             }
-          } else {
-            message.notIn.push(reader.double());
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1331,54 +1494,91 @@ export const Int32Rules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Int32Rules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt32Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.const = reader.int32();
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.lt = reader.int32();
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.lte = reader.int32();
-          break;
+          continue;
         case 4:
+          if (tag != 32) {
+            break;
+          }
+
           message.gt = reader.int32();
-          break;
+          continue;
         case 5:
+          if (tag != 40) {
+            break;
+          }
+
           message.gte = reader.int32();
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 48) {
+            message.in.push(reader.int32());
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(reader.int32());
             }
-          } else {
-            message.in.push(reader.int32());
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 56) {
+            message.notIn.push(reader.int32());
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(reader.int32());
             }
-          } else {
-            message.notIn.push(reader.int32());
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1422,54 +1622,91 @@ export const Int64Rules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Int64Rules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt64Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.const = longToString(reader.int64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.lt = longToString(reader.int64() as Long);
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.lte = longToString(reader.int64() as Long);
-          break;
+          continue;
         case 4:
+          if (tag != 32) {
+            break;
+          }
+
           message.gt = longToString(reader.int64() as Long);
-          break;
+          continue;
         case 5:
+          if (tag != 40) {
+            break;
+          }
+
           message.gte = longToString(reader.int64() as Long);
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 48) {
+            message.in.push(longToString(reader.int64() as Long));
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(longToString(reader.int64() as Long));
             }
-          } else {
-            message.in.push(longToString(reader.int64() as Long));
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 56) {
+            message.notIn.push(longToString(reader.int64() as Long));
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(longToString(reader.int64() as Long));
             }
-          } else {
-            message.notIn.push(longToString(reader.int64() as Long));
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1513,54 +1750,91 @@ export const UInt32Rules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): UInt32Rules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt32Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.const = reader.uint32();
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.lt = reader.uint32();
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.lte = reader.uint32();
-          break;
+          continue;
         case 4:
+          if (tag != 32) {
+            break;
+          }
+
           message.gt = reader.uint32();
-          break;
+          continue;
         case 5:
+          if (tag != 40) {
+            break;
+          }
+
           message.gte = reader.uint32();
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 48) {
+            message.in.push(reader.uint32());
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(reader.uint32());
             }
-          } else {
-            message.in.push(reader.uint32());
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 56) {
+            message.notIn.push(reader.uint32());
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(reader.uint32());
             }
-          } else {
-            message.notIn.push(reader.uint32());
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1604,54 +1878,91 @@ export const UInt64Rules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): UInt64Rules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt64Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.const = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.lt = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.lte = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 4:
+          if (tag != 32) {
+            break;
+          }
+
           message.gt = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 5:
+          if (tag != 40) {
+            break;
+          }
+
           message.gte = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 48) {
+            message.in.push(longToString(reader.uint64() as Long));
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(longToString(reader.uint64() as Long));
             }
-          } else {
-            message.in.push(longToString(reader.uint64() as Long));
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 56) {
+            message.notIn.push(longToString(reader.uint64() as Long));
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(longToString(reader.uint64() as Long));
             }
-          } else {
-            message.notIn.push(longToString(reader.uint64() as Long));
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1695,54 +2006,91 @@ export const SInt32Rules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): SInt32Rules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSInt32Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.const = reader.sint32();
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.lt = reader.sint32();
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.lte = reader.sint32();
-          break;
+          continue;
         case 4:
+          if (tag != 32) {
+            break;
+          }
+
           message.gt = reader.sint32();
-          break;
+          continue;
         case 5:
+          if (tag != 40) {
+            break;
+          }
+
           message.gte = reader.sint32();
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 48) {
+            message.in.push(reader.sint32());
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(reader.sint32());
             }
-          } else {
-            message.in.push(reader.sint32());
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 56) {
+            message.notIn.push(reader.sint32());
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(reader.sint32());
             }
-          } else {
-            message.notIn.push(reader.sint32());
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1786,54 +2134,91 @@ export const SInt64Rules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): SInt64Rules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSInt64Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.const = longToString(reader.sint64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.lt = longToString(reader.sint64() as Long);
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.lte = longToString(reader.sint64() as Long);
-          break;
+          continue;
         case 4:
+          if (tag != 32) {
+            break;
+          }
+
           message.gt = longToString(reader.sint64() as Long);
-          break;
+          continue;
         case 5:
+          if (tag != 40) {
+            break;
+          }
+
           message.gte = longToString(reader.sint64() as Long);
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 48) {
+            message.in.push(longToString(reader.sint64() as Long));
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(longToString(reader.sint64() as Long));
             }
-          } else {
-            message.in.push(longToString(reader.sint64() as Long));
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 56) {
+            message.notIn.push(longToString(reader.sint64() as Long));
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(longToString(reader.sint64() as Long));
             }
-          } else {
-            message.notIn.push(longToString(reader.sint64() as Long));
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1877,54 +2262,91 @@ export const Fixed32Rules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Fixed32Rules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFixed32Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 13) {
+            break;
+          }
+
           message.const = reader.fixed32();
-          break;
+          continue;
         case 2:
+          if (tag != 21) {
+            break;
+          }
+
           message.lt = reader.fixed32();
-          break;
+          continue;
         case 3:
+          if (tag != 29) {
+            break;
+          }
+
           message.lte = reader.fixed32();
-          break;
+          continue;
         case 4:
+          if (tag != 37) {
+            break;
+          }
+
           message.gt = reader.fixed32();
-          break;
+          continue;
         case 5:
+          if (tag != 45) {
+            break;
+          }
+
           message.gte = reader.fixed32();
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 53) {
+            message.in.push(reader.fixed32());
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(reader.fixed32());
             }
-          } else {
-            message.in.push(reader.fixed32());
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 61) {
+            message.notIn.push(reader.fixed32());
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(reader.fixed32());
             }
-          } else {
-            message.notIn.push(reader.fixed32());
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -1968,54 +2390,91 @@ export const Fixed64Rules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Fixed64Rules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFixed64Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 9) {
+            break;
+          }
+
           message.const = longToString(reader.fixed64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 17) {
+            break;
+          }
+
           message.lt = longToString(reader.fixed64() as Long);
-          break;
+          continue;
         case 3:
+          if (tag != 25) {
+            break;
+          }
+
           message.lte = longToString(reader.fixed64() as Long);
-          break;
+          continue;
         case 4:
+          if (tag != 33) {
+            break;
+          }
+
           message.gt = longToString(reader.fixed64() as Long);
-          break;
+          continue;
         case 5:
+          if (tag != 41) {
+            break;
+          }
+
           message.gte = longToString(reader.fixed64() as Long);
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 49) {
+            message.in.push(longToString(reader.fixed64() as Long));
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(longToString(reader.fixed64() as Long));
             }
-          } else {
-            message.in.push(longToString(reader.fixed64() as Long));
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 57) {
+            message.notIn.push(longToString(reader.fixed64() as Long));
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(longToString(reader.fixed64() as Long));
             }
-          } else {
-            message.notIn.push(longToString(reader.fixed64() as Long));
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2059,54 +2518,91 @@ export const SFixed32Rules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): SFixed32Rules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSFixed32Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 13) {
+            break;
+          }
+
           message.const = reader.sfixed32();
-          break;
+          continue;
         case 2:
+          if (tag != 21) {
+            break;
+          }
+
           message.lt = reader.sfixed32();
-          break;
+          continue;
         case 3:
+          if (tag != 29) {
+            break;
+          }
+
           message.lte = reader.sfixed32();
-          break;
+          continue;
         case 4:
+          if (tag != 37) {
+            break;
+          }
+
           message.gt = reader.sfixed32();
-          break;
+          continue;
         case 5:
+          if (tag != 45) {
+            break;
+          }
+
           message.gte = reader.sfixed32();
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 53) {
+            message.in.push(reader.sfixed32());
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(reader.sfixed32());
             }
-          } else {
-            message.in.push(reader.sfixed32());
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 61) {
+            message.notIn.push(reader.sfixed32());
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(reader.sfixed32());
             }
-          } else {
-            message.notIn.push(reader.sfixed32());
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2150,54 +2646,91 @@ export const SFixed64Rules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): SFixed64Rules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSFixed64Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 9) {
+            break;
+          }
+
           message.const = longToString(reader.sfixed64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 17) {
+            break;
+          }
+
           message.lt = longToString(reader.sfixed64() as Long);
-          break;
+          continue;
         case 3:
+          if (tag != 25) {
+            break;
+          }
+
           message.lte = longToString(reader.sfixed64() as Long);
-          break;
+          continue;
         case 4:
+          if (tag != 33) {
+            break;
+          }
+
           message.gt = longToString(reader.sfixed64() as Long);
-          break;
+          continue;
         case 5:
+          if (tag != 41) {
+            break;
+          }
+
           message.gte = longToString(reader.sfixed64() as Long);
-          break;
+          continue;
         case 6:
-          if ((tag & 7) === 2) {
+          if (tag == 49) {
+            message.in.push(longToString(reader.sfixed64() as Long));
+            continue;
+          }
+
+          if (tag == 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(longToString(reader.sfixed64() as Long));
             }
-          } else {
-            message.in.push(longToString(reader.sfixed64() as Long));
+
+            continue;
           }
+
           break;
         case 7:
-          if ((tag & 7) === 2) {
+          if (tag == 57) {
+            message.notIn.push(longToString(reader.sfixed64() as Long));
+            continue;
+          }
+
+          if (tag == 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(longToString(reader.sfixed64() as Long));
             }
-          } else {
-            message.notIn.push(longToString(reader.sfixed64() as Long));
+
+            continue;
           }
+
           break;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2216,19 +2749,24 @@ export const BoolRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): BoolRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBoolRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.const = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2342,94 +2880,199 @@ export const StringRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): StringRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStringRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.const = reader.string();
-          break;
+          continue;
         case 19:
+          if (tag != 152) {
+            break;
+          }
+
           message.len = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.minLen = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.maxLen = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 20:
+          if (tag != 160) {
+            break;
+          }
+
           message.lenBytes = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 4:
+          if (tag != 32) {
+            break;
+          }
+
           message.minBytes = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 5:
+          if (tag != 40) {
+            break;
+          }
+
           message.maxBytes = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.pattern = reader.string();
-          break;
+          continue;
         case 7:
+          if (tag != 58) {
+            break;
+          }
+
           message.prefix = reader.string();
-          break;
+          continue;
         case 8:
+          if (tag != 66) {
+            break;
+          }
+
           message.suffix = reader.string();
-          break;
+          continue;
         case 9:
+          if (tag != 74) {
+            break;
+          }
+
           message.contains = reader.string();
-          break;
+          continue;
         case 23:
+          if (tag != 186) {
+            break;
+          }
+
           message.notContains = reader.string();
-          break;
+          continue;
         case 10:
+          if (tag != 82) {
+            break;
+          }
+
           message.in.push(reader.string());
-          break;
+          continue;
         case 11:
+          if (tag != 90) {
+            break;
+          }
+
           message.notIn.push(reader.string());
-          break;
+          continue;
         case 12:
+          if (tag != 96) {
+            break;
+          }
+
           message.wellKnown = { $case: "email", email: reader.bool() };
-          break;
+          continue;
         case 13:
+          if (tag != 104) {
+            break;
+          }
+
           message.wellKnown = { $case: "hostname", hostname: reader.bool() };
-          break;
+          continue;
         case 14:
+          if (tag != 112) {
+            break;
+          }
+
           message.wellKnown = { $case: "ip", ip: reader.bool() };
-          break;
+          continue;
         case 15:
+          if (tag != 120) {
+            break;
+          }
+
           message.wellKnown = { $case: "ipv4", ipv4: reader.bool() };
-          break;
+          continue;
         case 16:
+          if (tag != 128) {
+            break;
+          }
+
           message.wellKnown = { $case: "ipv6", ipv6: reader.bool() };
-          break;
+          continue;
         case 17:
+          if (tag != 136) {
+            break;
+          }
+
           message.wellKnown = { $case: "uri", uri: reader.bool() };
-          break;
+          continue;
         case 18:
+          if (tag != 144) {
+            break;
+          }
+
           message.wellKnown = { $case: "uriRef", uriRef: reader.bool() };
-          break;
+          continue;
         case 21:
+          if (tag != 168) {
+            break;
+          }
+
           message.wellKnown = { $case: "address", address: reader.bool() };
-          break;
+          continue;
         case 22:
+          if (tag != 176) {
+            break;
+          }
+
           message.wellKnown = { $case: "uuid", uuid: reader.bool() };
-          break;
+          continue;
         case 24:
+          if (tag != 192) {
+            break;
+          }
+
           message.wellKnown = { $case: "wellKnownRegex", wellKnownRegex: reader.int32() as any };
-          break;
+          continue;
         case 25:
+          if (tag != 200) {
+            break;
+          }
+
           message.strict = reader.bool();
-          break;
+          continue;
         case 26:
+          if (tag != 208) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2502,58 +3145,115 @@ export const BytesRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): BytesRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBytesRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.const = reader.bytes();
-          break;
+          continue;
         case 13:
+          if (tag != 104) {
+            break;
+          }
+
           message.len = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.minLen = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.maxLen = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.pattern = reader.string();
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.prefix = reader.bytes();
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.suffix = reader.bytes();
-          break;
+          continue;
         case 7:
+          if (tag != 58) {
+            break;
+          }
+
           message.contains = reader.bytes();
-          break;
+          continue;
         case 8:
+          if (tag != 66) {
+            break;
+          }
+
           message.in.push(reader.bytes());
-          break;
+          continue;
         case 9:
+          if (tag != 74) {
+            break;
+          }
+
           message.notIn.push(reader.bytes());
-          break;
+          continue;
         case 10:
+          if (tag != 80) {
+            break;
+          }
+
           message.wellKnown = { $case: "ip", ip: reader.bool() };
-          break;
+          continue;
         case 11:
+          if (tag != 88) {
+            break;
+          }
+
           message.wellKnown = { $case: "ipv4", ipv4: reader.bool() };
-          break;
+          continue;
         case 12:
+          if (tag != 96) {
+            break;
+          }
+
           message.wellKnown = { $case: "ipv6", ipv6: reader.bool() };
-          break;
+          continue;
         case 14:
+          if (tag != 112) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2585,42 +3285,63 @@ export const EnumRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): EnumRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.const = reader.int32();
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.definedOnly = reader.bool();
-          break;
+          continue;
         case 3:
-          if ((tag & 7) === 2) {
+          if (tag == 24) {
+            message.in.push(reader.int32());
+            continue;
+          }
+
+          if (tag == 26) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.in.push(reader.int32());
             }
-          } else {
-            message.in.push(reader.int32());
+
+            continue;
           }
+
           break;
         case 4:
-          if ((tag & 7) === 2) {
+          if (tag == 32) {
+            message.notIn.push(reader.int32());
+            continue;
+          }
+
+          if (tag == 34) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.notIn.push(reader.int32());
             }
-          } else {
-            message.notIn.push(reader.int32());
+
+            continue;
           }
-          break;
-        default:
-          reader.skipType(tag & 7);
+
           break;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2642,22 +3363,31 @@ export const MessageRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MessageRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessageRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.skip = reader.bool();
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.required = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2688,31 +3418,52 @@ export const RepeatedRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): RepeatedRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRepeatedRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.minItems = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.maxItems = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.unique = reader.bool();
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.items = FieldRules.decode(reader, reader.uint32());
-          break;
+          continue;
         case 5:
+          if (tag != 40) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2746,34 +3497,59 @@ export const MapRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MapRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.minPairs = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.maxPairs = longToString(reader.uint64() as Long);
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.noSparse = reader.bool();
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.keys = FieldRules.decode(reader, reader.uint32());
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.values = FieldRules.decode(reader, reader.uint32());
-          break;
+          continue;
         case 6:
+          if (tag != 48) {
+            break;
+          }
+
           message.ignoreEmpty = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2798,25 +3574,38 @@ export const AnyRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): AnyRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAnyRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.required = reader.bool();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.in.push(reader.string());
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.notIn.push(reader.string());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2865,40 +3654,73 @@ export const DurationRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DurationRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDurationRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.required = reader.bool();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.const = Duration.decode(reader, reader.uint32());
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.lt = Duration.decode(reader, reader.uint32());
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.lte = Duration.decode(reader, reader.uint32());
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.gt = Duration.decode(reader, reader.uint32());
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.gte = Duration.decode(reader, reader.uint32());
-          break;
+          continue;
         case 7:
+          if (tag != 58) {
+            break;
+          }
+
           message.in.push(Duration.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 8:
+          if (tag != 66) {
+            break;
+          }
+
           message.notIn.push(Duration.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -2951,43 +3773,80 @@ export const TimestampRules = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): TimestampRules {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTimestampRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.required = reader.bool();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.const = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.lt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.lte = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.gt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.gte = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 7:
+          if (tag != 56) {
+            break;
+          }
+
           message.ltNow = reader.bool();
-          break;
+          continue;
         case 8:
+          if (tag != 64) {
+            break;
+          }
+
           message.gtNow = reader.bool();
-          break;
+          continue;
         case 9:
+          if (tag != 74) {
+            break;
+          }
+
           message.within = Duration.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },

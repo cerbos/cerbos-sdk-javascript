@@ -21,6 +21,7 @@ import {
   CheckResourcesRequest,
   DeleteSchemaRequest,
   DisablePolicyRequest,
+  EnablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
   ListAuditLogEntriesRequest,
@@ -42,6 +43,7 @@ import {
   CheckResourcesResponse,
   DeleteSchemaResponse,
   DisablePolicyResponse,
+  EnablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
   ListAuditLogEntriesResponse,
@@ -243,6 +245,15 @@ export const CerbosAdminServiceService = {
     responseSerialize: (value: DisablePolicyResponse) => Buffer.from(DisablePolicyResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer) => DisablePolicyResponse.decode(value),
   },
+  enablePolicy: {
+    path: "/cerbos.svc.v1.CerbosAdminService/EnablePolicy",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: EnablePolicyRequest) => Buffer.from(EnablePolicyRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => EnablePolicyRequest.decode(value),
+    responseSerialize: (value: EnablePolicyResponse) => Buffer.from(EnablePolicyResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => EnablePolicyResponse.decode(value),
+  },
   listAuditLogEntries: {
     path: "/cerbos.svc.v1.CerbosAdminService/ListAuditLogEntries",
     requestStream: false,
@@ -307,6 +318,7 @@ export interface CerbosAdminServiceServer extends UntypedServiceImplementation {
   listPolicies: handleUnaryCall<ListPoliciesRequest, ListPoliciesResponse>;
   getPolicy: handleUnaryCall<GetPolicyRequest, GetPolicyResponse>;
   disablePolicy: handleUnaryCall<DisablePolicyRequest, DisablePolicyResponse>;
+  enablePolicy: handleUnaryCall<EnablePolicyRequest, EnablePolicyResponse>;
   listAuditLogEntries: handleServerStreamingCall<ListAuditLogEntriesRequest, ListAuditLogEntriesResponse>;
   addOrUpdateSchema: handleUnaryCall<AddOrUpdateSchemaRequest, AddOrUpdateSchemaResponse>;
   listSchemas: handleUnaryCall<ListSchemasRequest, ListSchemasResponse>;
@@ -375,6 +387,21 @@ export interface CerbosAdminServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: DisablePolicyResponse) => void,
+  ): ClientUnaryCall;
+  enablePolicy(
+    request: EnablePolicyRequest,
+    callback: (error: ServiceError | null, response: EnablePolicyResponse) => void,
+  ): ClientUnaryCall;
+  enablePolicy(
+    request: EnablePolicyRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: EnablePolicyResponse) => void,
+  ): ClientUnaryCall;
+  enablePolicy(
+    request: EnablePolicyRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: EnablePolicyResponse) => void,
   ): ClientUnaryCall;
   listAuditLogEntries(
     request: ListAuditLogEntriesRequest,

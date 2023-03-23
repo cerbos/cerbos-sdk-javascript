@@ -327,22 +327,31 @@ export const ParsedExpr = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ParsedExpr {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParsedExpr();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.expr = Expr.decode(reader, reader.uint32());
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.sourceInfo = SourceInfo.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -384,43 +393,76 @@ export const Expr = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.id = longToString(reader.int64() as Long);
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.exprKind = { $case: "constExpr", constExpr: Constant.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.exprKind = { $case: "identExpr", identExpr: Expr_Ident.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.exprKind = { $case: "selectExpr", selectExpr: Expr_Select.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.exprKind = { $case: "callExpr", callExpr: Expr_Call.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 7:
+          if (tag != 58) {
+            break;
+          }
+
           message.exprKind = { $case: "listExpr", listExpr: Expr_CreateList.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 8:
+          if (tag != 66) {
+            break;
+          }
+
           message.exprKind = { $case: "structExpr", structExpr: Expr_CreateStruct.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 9:
+          if (tag != 74) {
+            break;
+          }
+
           message.exprKind = {
             $case: "comprehensionExpr",
             comprehensionExpr: Expr_Comprehension.decode(reader, reader.uint32()),
           };
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -439,19 +481,24 @@ export const Expr_Ident = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Ident {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Ident();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.name = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -476,25 +523,38 @@ export const Expr_Select = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Select {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Select();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.operand = Expr.decode(reader, reader.uint32());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.field = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.testOnly = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -519,25 +579,38 @@ export const Expr_Call = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Call {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Call();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.target = Expr.decode(reader, reader.uint32());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.function = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.args.push(Expr.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -556,19 +629,24 @@ export const Expr_CreateList = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_CreateList {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateList();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.elements.push(Expr.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -590,22 +668,31 @@ export const Expr_CreateStruct = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_CreateStruct {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateStruct();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.messageName = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.entries.push(Expr_CreateStruct_Entry.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -635,28 +722,45 @@ export const Expr_CreateStruct_Entry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_CreateStruct_Entry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateStruct_Entry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.id = longToString(reader.int64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.keyKind = { $case: "fieldKey", fieldKey: reader.string() };
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.keyKind = { $case: "mapKey", mapKey: Expr.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.value = Expr.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -701,37 +805,66 @@ export const Expr_Comprehension = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Expr_Comprehension {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Comprehension();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.iterVar = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.iterRange = Expr.decode(reader, reader.uint32());
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.accuVar = reader.string();
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.accuInit = Expr.decode(reader, reader.uint32());
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.loopCondition = Expr.decode(reader, reader.uint32());
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.loopStep = Expr.decode(reader, reader.uint32());
-          break;
+          continue;
         case 7:
+          if (tag != 58) {
+            break;
+          }
+
           message.result = Expr.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -776,46 +909,83 @@ export const Constant = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Constant {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConstant();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.constantKind = { $case: "nullValue", nullValue: reader.int32() as any };
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.constantKind = { $case: "boolValue", boolValue: reader.bool() };
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.constantKind = { $case: "int64Value", int64Value: longToString(reader.int64() as Long) };
-          break;
+          continue;
         case 4:
+          if (tag != 32) {
+            break;
+          }
+
           message.constantKind = { $case: "uint64Value", uint64Value: longToString(reader.uint64() as Long) };
-          break;
+          continue;
         case 5:
+          if (tag != 41) {
+            break;
+          }
+
           message.constantKind = { $case: "doubleValue", doubleValue: reader.double() };
-          break;
+          continue;
         case 6:
+          if (tag != 50) {
+            break;
+          }
+
           message.constantKind = { $case: "stringValue", stringValue: reader.string() };
-          break;
+          continue;
         case 7:
+          if (tag != 58) {
+            break;
+          }
+
           message.constantKind = { $case: "bytesValue", bytesValue: reader.bytes() };
-          break;
+          continue;
         case 8:
+          if (tag != 66) {
+            break;
+          }
+
           message.constantKind = { $case: "durationValue", durationValue: Duration.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 9:
+          if (tag != 74) {
+            break;
+          }
+
           message.constantKind = {
             $case: "timestampValue",
             timestampValue: fromTimestamp(Timestamp.decode(reader, reader.uint32())),
           };
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -848,44 +1018,67 @@ export const SourceInfo = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.syntaxVersion = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.location = reader.string();
-          break;
+          continue;
         case 3:
-          if ((tag & 7) === 2) {
+          if (tag == 24) {
+            message.lineOffsets.push(reader.int32());
+            continue;
+          }
+
+          if (tag == 26) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.lineOffsets.push(reader.int32());
             }
-          } else {
-            message.lineOffsets.push(reader.int32());
+
+            continue;
           }
+
           break;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           const entry4 = SourceInfo_PositionsEntry.decode(reader, reader.uint32());
           if (entry4.value !== undefined) {
             message.positions[entry4.key] = entry4.value;
           }
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           const entry5 = SourceInfo_MacroCallsEntry.decode(reader, reader.uint32());
           if (entry5.value !== undefined) {
             message.macroCalls[entry5.key] = entry5.value;
           }
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -907,22 +1100,31 @@ export const SourceInfo_PositionsEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_PositionsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo_PositionsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.key = longToString(reader.int64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.value = reader.int32();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -944,22 +1146,31 @@ export const SourceInfo_MacroCallsEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): SourceInfo_MacroCallsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo_MacroCallsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.key = longToString(reader.int64() as Long);
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.value = Expr.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -987,28 +1198,45 @@ export const SourcePosition = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): SourcePosition {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourcePosition();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.location = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.offset = reader.int32();
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.line = reader.int32();
-          break;
+          continue;
         case 4:
+          if (tag != 32) {
+            break;
+          }
+
           message.column = reader.int32();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },

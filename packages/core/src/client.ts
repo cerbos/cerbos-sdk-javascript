@@ -562,7 +562,9 @@ export abstract class Client {
    */
   public async listPolicies(): Promise<ListPoliciesResponse> {
     return listPoliciesResponseFromProtobuf(
-      await this.admin("listPolicies", {})
+      await this.admin("listPolicies", {
+        includeDisabled: false,
+      })
     );
   }
 
