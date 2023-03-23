@@ -144,28 +144,45 @@ export const ServerLaunch = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.version = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.source = ServerLaunch_Source.decode(reader, reader.uint32());
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.features = ServerLaunch_Features.decode(reader, reader.uint32());
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.stats = ServerLaunch_Stats.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -196,31 +213,52 @@ export const ServerLaunch_Cerbos = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Cerbos {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Cerbos();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.version = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.commit = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.buildDate = reader.string();
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.moduleVersion = reader.string();
-          break;
+          continue;
         case 5:
+          if (tag != 42) {
+            break;
+          }
+
           message.moduleChecksum = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -248,28 +286,45 @@ export const ServerLaunch_Source = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Source {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Source();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.cerbos = ServerLaunch_Cerbos.decode(reader, reader.uint32());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.os = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.arch = reader.string();
-          break;
+          continue;
         case 4:
+          if (tag != 32) {
+            break;
+          }
+
           message.numCpus = reader.uint32();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -297,28 +352,45 @@ export const ServerLaunch_Features = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.audit = ServerLaunch_Features_Audit.decode(reader, reader.uint32());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.schema = ServerLaunch_Features_Schema.decode(reader, reader.uint32());
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.adminApi = ServerLaunch_Features_AdminApi.decode(reader, reader.uint32());
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.storage = ServerLaunch_Features_Storage.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -340,22 +412,31 @@ export const ServerLaunch_Features_Audit = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Audit {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Audit();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.enabled = reader.bool();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.backend = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -374,19 +455,24 @@ export const ServerLaunch_Features_Schema = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Schema {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Schema();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.enforcement = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -405,19 +491,24 @@ export const ServerLaunch_Features_AdminApi = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_AdminApi {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_AdminApi();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.enabled = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -447,28 +538,45 @@ export const ServerLaunch_Features_Storage = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Storage {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Storage();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.driver = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.store = { $case: "disk", disk: ServerLaunch_Features_Storage_Disk.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.store = { $case: "git", git: ServerLaunch_Features_Storage_Git.decode(reader, reader.uint32()) };
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.store = { $case: "blob", blob: ServerLaunch_Features_Storage_Blob.decode(reader, reader.uint32()) };
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -487,19 +595,24 @@ export const ServerLaunch_Features_Storage_Disk = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Storage_Disk {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Storage_Disk();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.watch = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -524,25 +637,38 @@ export const ServerLaunch_Features_Storage_Git = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Storage_Git {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Storage_Git();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.protocol = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.auth = reader.bool();
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.pollInterval = Duration.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -564,22 +690,31 @@ export const ServerLaunch_Features_Storage_Blob = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Features_Storage_Blob {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Features_Storage_Blob();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.provider = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.pollInterval = Duration.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -601,22 +736,31 @@ export const ServerLaunch_Stats = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Stats {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Stats();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.policy = ServerLaunch_Stats_Policy.decode(reader, reader.uint32());
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.schema = ServerLaunch_Stats_Schema.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -642,34 +786,47 @@ export const ServerLaunch_Stats_Policy = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Stats_Policy {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Stats_Policy();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           const entry1 = ServerLaunch_Stats_Policy_CountEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.count[entry1.key] = entry1.value;
           }
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           const entry2 = ServerLaunch_Stats_Policy_AvgRuleCountEntry.decode(reader, reader.uint32());
           if (entry2.value !== undefined) {
             message.avgRuleCount[entry2.key] = entry2.value;
           }
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           const entry3 = ServerLaunch_Stats_Policy_AvgConditionCountEntry.decode(reader, reader.uint32());
           if (entry3.value !== undefined) {
             message.avgConditionCount[entry3.key] = entry3.value;
           }
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -691,22 +848,31 @@ export const ServerLaunch_Stats_Policy_CountEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Stats_Policy_CountEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Stats_Policy_CountEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.key = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.value = reader.uint32();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -728,22 +894,31 @@ export const ServerLaunch_Stats_Policy_AvgRuleCountEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Stats_Policy_AvgRuleCountEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Stats_Policy_AvgRuleCountEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.key = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 17) {
+            break;
+          }
+
           message.value = reader.double();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -768,22 +943,31 @@ export const ServerLaunch_Stats_Policy_AvgConditionCountEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Stats_Policy_AvgConditionCountEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Stats_Policy_AvgConditionCountEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.key = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 17) {
+            break;
+          }
+
           message.value = reader.double();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -802,19 +986,24 @@ export const ServerLaunch_Stats_Schema = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerLaunch_Stats_Schema {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerLaunch_Stats_Schema();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 8) {
+            break;
+          }
+
           message.count = reader.uint32();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -839,25 +1028,38 @@ export const ServerStop = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerStop {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerStop();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.version = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.uptime = Duration.decode(reader, reader.uint32());
-          break;
+          continue;
         case 3:
+          if (tag != 24) {
+            break;
+          }
+
           message.requestsTotal = longToString(reader.uint64() as Long);
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -878,19 +1080,24 @@ export const Event = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Event {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvent();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.data = { $case: "apiActivity", apiActivity: Event_ApiActivity.decode(reader, reader.uint32()) };
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -912,22 +1119,31 @@ export const Event_CountStat = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Event_CountStat {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvent_CountStat();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.key = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 16) {
+            break;
+          }
+
           message.count = longToString(reader.uint64() as Long);
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -955,28 +1171,45 @@ export const Event_ApiActivity = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Event_ApiActivity {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvent_ApiActivity();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag != 10) {
+            break;
+          }
+
           message.version = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag != 18) {
+            break;
+          }
+
           message.uptime = Duration.decode(reader, reader.uint32());
-          break;
+          continue;
         case 3:
+          if (tag != 26) {
+            break;
+          }
+
           message.methodCalls.push(Event_CountStat.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 4:
+          if (tag != 34) {
+            break;
+          }
+
           message.userAgents.push(Event_CountStat.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) == 4 || tag == 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },

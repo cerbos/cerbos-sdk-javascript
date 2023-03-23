@@ -251,9 +251,16 @@ export interface TestResults_Summary {
 export interface TestResults_Suite {
   file: string;
   name: string;
+  /** @deprecated */
   principals: TestResults_Principal[];
   summary: TestResults_Summary | undefined;
   error: string;
+  testCases: TestResults_TestCase[];
+}
+
+export interface TestResults_TestCase {
+  name: string;
+  principals: TestResults_Principal[];
 }
 
 export interface TestResults_Principal {

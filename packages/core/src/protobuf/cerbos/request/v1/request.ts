@@ -143,6 +143,7 @@ export interface ServerInfoRequest {
 }
 
 export interface ListPoliciesRequest {
+  includeDisabled: boolean;
 }
 
 export interface GetPolicyRequest {
@@ -150,6 +151,10 @@ export interface GetPolicyRequest {
 }
 
 export interface DisablePolicyRequest {
+  id: string[];
+}
+
+export interface EnablePolicyRequest {
   id: string[];
 }
 

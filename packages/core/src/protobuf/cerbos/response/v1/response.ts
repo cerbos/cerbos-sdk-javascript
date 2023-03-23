@@ -210,6 +210,10 @@ export interface DisablePolicyResponse {
   disabledPolicies: number;
 }
 
+export interface EnablePolicyResponse {
+  enabledPolicies: number;
+}
+
 export interface AddOrUpdateSchemaResponse {
 }
 

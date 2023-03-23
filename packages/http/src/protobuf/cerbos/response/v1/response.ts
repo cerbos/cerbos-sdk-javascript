@@ -210,6 +210,10 @@ export interface DisablePolicyResponse {
   disabledPolicies: number;
 }
 
+export interface EnablePolicyResponse {
+  enabledPolicies: number;
+}
+
 export interface AddOrUpdateSchemaResponse {
 }
 
@@ -1036,6 +1040,18 @@ export const DisablePolicyResponse = {
   toJSON(message: DisablePolicyResponse): unknown {
     const obj: any = {};
     message.disabledPolicies !== undefined && (obj.disabledPolicies = Math.round(message.disabledPolicies));
+    return obj;
+  },
+};
+
+export const EnablePolicyResponse = {
+  fromJSON(object: any): EnablePolicyResponse {
+    return { enabledPolicies: isSet(object.enabledPolicies) ? Number(object.enabledPolicies) : 0 };
+  },
+
+  toJSON(message: EnablePolicyResponse): unknown {
+    const obj: any = {};
+    message.enabledPolicies !== undefined && (obj.enabledPolicies = Math.round(message.enabledPolicies));
     return obj;
   },
 };

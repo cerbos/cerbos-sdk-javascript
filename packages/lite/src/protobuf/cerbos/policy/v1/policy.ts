@@ -291,9 +291,16 @@ export interface TestResults_Summary {
 export interface TestResults_Suite {
   file: string;
   name: string;
+  /** @deprecated */
   principals: TestResults_Principal[];
   summary: TestResults_Summary | undefined;
   error: string;
+  testCases: TestResults_TestCase[];
+}
+
+export interface TestResults_TestCase {
+  name: string;
+  principals: TestResults_Principal[];
 }
 
 export interface TestResults_Principal {
@@ -1225,6 +1232,9 @@ export const TestResults_Suite = {
         : [],
       summary: isSet(object.summary) ? TestResults_Summary.fromJSON(object.summary) : undefined,
       error: isSet(object.error) ? String(object.error) : "",
+      testCases: Array.isArray(object?.testCases)
+        ? object.testCases.map((e: any) => TestResults_TestCase.fromJSON(e))
+        : [],
     };
   },
 
@@ -1240,6 +1250,33 @@ export const TestResults_Suite = {
     message.summary !== undefined &&
       (obj.summary = message.summary ? TestResults_Summary.toJSON(message.summary) : undefined);
     message.error !== undefined && (obj.error = message.error);
+    if (message.testCases) {
+      obj.testCases = message.testCases.map((e) => e ? TestResults_TestCase.toJSON(e) : undefined);
+    } else {
+      obj.testCases = [];
+    }
+    return obj;
+  },
+};
+
+export const TestResults_TestCase = {
+  fromJSON(object: any): TestResults_TestCase {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      principals: Array.isArray(object?.principals)
+        ? object.principals.map((e: any) => TestResults_Principal.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: TestResults_TestCase): unknown {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    if (message.principals) {
+      obj.principals = message.principals.map((e) => e ? TestResults_Principal.toJSON(e) : undefined);
+    } else {
+      obj.principals = [];
+    }
     return obj;
   },
 };

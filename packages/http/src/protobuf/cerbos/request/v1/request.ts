@@ -177,6 +177,7 @@ export interface ServerInfoRequest {
 }
 
 export interface ListPoliciesRequest {
+  includeDisabled: boolean;
 }
 
 export interface GetPolicyRequest {
@@ -184,6 +185,10 @@ export interface GetPolicyRequest {
 }
 
 export interface DisablePolicyRequest {
+  id: string[];
+}
+
+export interface EnablePolicyRequest {
   id: string[];
 }
 
@@ -678,12 +683,13 @@ export const ServerInfoRequest = {
 };
 
 export const ListPoliciesRequest = {
-  fromJSON(_: any): ListPoliciesRequest {
-    return {};
+  fromJSON(object: any): ListPoliciesRequest {
+    return { includeDisabled: isSet(object.includeDisabled) ? Boolean(object.includeDisabled) : false };
   },
 
-  toJSON(_: ListPoliciesRequest): unknown {
+  toJSON(message: ListPoliciesRequest): unknown {
     const obj: any = {};
+    message.includeDisabled !== undefined && (obj.includeDisabled = message.includeDisabled);
     return obj;
   },
 };
@@ -710,6 +716,22 @@ export const DisablePolicyRequest = {
   },
 
   toJSON(message: DisablePolicyRequest): unknown {
+    const obj: any = {};
+    if (message.id) {
+      obj.id = message.id.map((e) => e);
+    } else {
+      obj.id = [];
+    }
+    return obj;
+  },
+};
+
+export const EnablePolicyRequest = {
+  fromJSON(object: any): EnablePolicyRequest {
+    return { id: Array.isArray(object?.id) ? object.id.map((e: any) => String(e)) : [] };
+  },
+
+  toJSON(message: EnablePolicyRequest): unknown {
     const obj: any = {};
     if (message.id) {
       obj.id = message.id.map((e) => e);
