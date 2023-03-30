@@ -38,8 +38,6 @@ export interface MessageOptions {
   noStandardDescriptorAccessor: boolean;
   deprecated: boolean;
   mapEntry: boolean;
-  /** @deprecated */
-  deprecatedLegacyJsonFieldConflicts: boolean;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -51,9 +49,6 @@ export interface FieldOptions {
   unverifiedLazy: boolean;
   deprecated: boolean;
   weak: boolean;
-  debugRedact: boolean;
-  retention: FieldOptions_OptionRetention;
-  target: FieldOptions_OptionTargetType;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -67,25 +62,6 @@ export enum FieldOptions_JSType {
   JS_NORMAL = 0,
   JS_STRING = 1,
   JS_NUMBER = 2,
-}
-
-export enum FieldOptions_OptionRetention {
-  RETENTION_UNKNOWN = 0,
-  RETENTION_RUNTIME = 1,
-  RETENTION_SOURCE = 2,
-}
-
-export enum FieldOptions_OptionTargetType {
-  TARGET_TYPE_UNKNOWN = 0,
-  TARGET_TYPE_FILE = 1,
-  TARGET_TYPE_EXTENSION_RANGE = 2,
-  TARGET_TYPE_MESSAGE = 3,
-  TARGET_TYPE_FIELD = 4,
-  TARGET_TYPE_ONEOF = 5,
-  TARGET_TYPE_ENUM = 6,
-  TARGET_TYPE_ENUM_ENTRY = 7,
-  TARGET_TYPE_SERVICE = 8,
-  TARGET_TYPE_METHOD = 9,
 }
 
 export interface OneofOptions {
