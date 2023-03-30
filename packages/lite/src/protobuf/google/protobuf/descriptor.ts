@@ -67,8 +67,6 @@ export interface MessageOptions {
   noStandardDescriptorAccessor: boolean;
   deprecated: boolean;
   mapEntry: boolean;
-  /** @deprecated */
-  deprecatedLegacyJsonFieldConflicts: boolean;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -80,9 +78,6 @@ export interface FieldOptions {
   unverifiedLazy: boolean;
   deprecated: boolean;
   weak: boolean;
-  debugRedact: boolean;
-  retention: FieldOptions_OptionRetention;
-  target: FieldOptions_OptionTargetType;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -153,122 +148,6 @@ export function fieldOptions_JSTypeToJSON(object: FieldOptions_JSType): string {
       return "JS_NUMBER";
     default:
       throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FieldOptions_JSType");
-  }
-}
-
-export enum FieldOptions_OptionRetention {
-  RETENTION_UNKNOWN = 0,
-  RETENTION_RUNTIME = 1,
-  RETENTION_SOURCE = 2,
-}
-
-export function fieldOptions_OptionRetentionFromJSON(object: any): FieldOptions_OptionRetention {
-  switch (object) {
-    case 0:
-    case "RETENTION_UNKNOWN":
-      return FieldOptions_OptionRetention.RETENTION_UNKNOWN;
-    case 1:
-    case "RETENTION_RUNTIME":
-      return FieldOptions_OptionRetention.RETENTION_RUNTIME;
-    case 2:
-    case "RETENTION_SOURCE":
-      return FieldOptions_OptionRetention.RETENTION_SOURCE;
-    default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FieldOptions_OptionRetention");
-  }
-}
-
-export function fieldOptions_OptionRetentionToJSON(object: FieldOptions_OptionRetention): string {
-  switch (object) {
-    case FieldOptions_OptionRetention.RETENTION_UNKNOWN:
-      return "RETENTION_UNKNOWN";
-    case FieldOptions_OptionRetention.RETENTION_RUNTIME:
-      return "RETENTION_RUNTIME";
-    case FieldOptions_OptionRetention.RETENTION_SOURCE:
-      return "RETENTION_SOURCE";
-    default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FieldOptions_OptionRetention");
-  }
-}
-
-export enum FieldOptions_OptionTargetType {
-  TARGET_TYPE_UNKNOWN = 0,
-  TARGET_TYPE_FILE = 1,
-  TARGET_TYPE_EXTENSION_RANGE = 2,
-  TARGET_TYPE_MESSAGE = 3,
-  TARGET_TYPE_FIELD = 4,
-  TARGET_TYPE_ONEOF = 5,
-  TARGET_TYPE_ENUM = 6,
-  TARGET_TYPE_ENUM_ENTRY = 7,
-  TARGET_TYPE_SERVICE = 8,
-  TARGET_TYPE_METHOD = 9,
-}
-
-export function fieldOptions_OptionTargetTypeFromJSON(object: any): FieldOptions_OptionTargetType {
-  switch (object) {
-    case 0:
-    case "TARGET_TYPE_UNKNOWN":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_UNKNOWN;
-    case 1:
-    case "TARGET_TYPE_FILE":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_FILE;
-    case 2:
-    case "TARGET_TYPE_EXTENSION_RANGE":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_EXTENSION_RANGE;
-    case 3:
-    case "TARGET_TYPE_MESSAGE":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_MESSAGE;
-    case 4:
-    case "TARGET_TYPE_FIELD":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_FIELD;
-    case 5:
-    case "TARGET_TYPE_ONEOF":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_ONEOF;
-    case 6:
-    case "TARGET_TYPE_ENUM":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_ENUM;
-    case 7:
-    case "TARGET_TYPE_ENUM_ENTRY":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_ENUM_ENTRY;
-    case 8:
-    case "TARGET_TYPE_SERVICE":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_SERVICE;
-    case 9:
-    case "TARGET_TYPE_METHOD":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_METHOD;
-    default:
-      throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum FieldOptions_OptionTargetType",
-      );
-  }
-}
-
-export function fieldOptions_OptionTargetTypeToJSON(object: FieldOptions_OptionTargetType): string {
-  switch (object) {
-    case FieldOptions_OptionTargetType.TARGET_TYPE_UNKNOWN:
-      return "TARGET_TYPE_UNKNOWN";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_FILE:
-      return "TARGET_TYPE_FILE";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_EXTENSION_RANGE:
-      return "TARGET_TYPE_EXTENSION_RANGE";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_MESSAGE:
-      return "TARGET_TYPE_MESSAGE";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_FIELD:
-      return "TARGET_TYPE_FIELD";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_ONEOF:
-      return "TARGET_TYPE_ONEOF";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_ENUM:
-      return "TARGET_TYPE_ENUM";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_ENUM_ENTRY:
-      return "TARGET_TYPE_ENUM_ENTRY";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_SERVICE:
-      return "TARGET_TYPE_SERVICE";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_METHOD:
-      return "TARGET_TYPE_METHOD";
-    default:
-      throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum FieldOptions_OptionTargetType",
-      );
   }
 }
 
@@ -413,9 +292,6 @@ export const MessageOptions = {
         : false,
       deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
       mapEntry: isSet(object.mapEntry) ? Boolean(object.mapEntry) : false,
-      deprecatedLegacyJsonFieldConflicts: isSet(object.deprecatedLegacyJsonFieldConflicts)
-        ? Boolean(object.deprecatedLegacyJsonFieldConflicts)
-        : false,
       uninterpretedOption: Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
@@ -429,8 +305,6 @@ export const MessageOptions = {
       (obj.noStandardDescriptorAccessor = message.noStandardDescriptorAccessor);
     message.deprecated !== undefined && (obj.deprecated = message.deprecated);
     message.mapEntry !== undefined && (obj.mapEntry = message.mapEntry);
-    message.deprecatedLegacyJsonFieldConflicts !== undefined &&
-      (obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts);
     if (message.uninterpretedOption) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
     } else {
@@ -450,9 +324,6 @@ export const FieldOptions = {
       unverifiedLazy: isSet(object.unverifiedLazy) ? Boolean(object.unverifiedLazy) : false,
       deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
       weak: isSet(object.weak) ? Boolean(object.weak) : false,
-      debugRedact: isSet(object.debugRedact) ? Boolean(object.debugRedact) : false,
-      retention: isSet(object.retention) ? fieldOptions_OptionRetentionFromJSON(object.retention) : 0,
-      target: isSet(object.target) ? fieldOptions_OptionTargetTypeFromJSON(object.target) : 0,
       uninterpretedOption: Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
@@ -468,9 +339,6 @@ export const FieldOptions = {
     message.unverifiedLazy !== undefined && (obj.unverifiedLazy = message.unverifiedLazy);
     message.deprecated !== undefined && (obj.deprecated = message.deprecated);
     message.weak !== undefined && (obj.weak = message.weak);
-    message.debugRedact !== undefined && (obj.debugRedact = message.debugRedact);
-    message.retention !== undefined && (obj.retention = fieldOptions_OptionRetentionToJSON(message.retention));
-    message.target !== undefined && (obj.target = fieldOptions_OptionTargetTypeToJSON(message.target));
     if (message.uninterpretedOption) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
     } else {
