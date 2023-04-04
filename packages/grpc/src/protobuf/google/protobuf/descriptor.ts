@@ -40,6 +40,8 @@ export interface MessageOptions {
   noStandardDescriptorAccessor: boolean;
   deprecated: boolean;
   mapEntry: boolean;
+  /** @deprecated */
+  deprecatedLegacyJsonFieldConflicts: boolean;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -51,6 +53,9 @@ export interface FieldOptions {
   unverifiedLazy: boolean;
   deprecated: boolean;
   weak: boolean;
+  debugRedact: boolean;
+  retention: FieldOptions_OptionRetention;
+  target: FieldOptions_OptionTargetType;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -64,6 +69,25 @@ export enum FieldOptions_JSType {
   JS_NORMAL = 0,
   JS_STRING = 1,
   JS_NUMBER = 2,
+}
+
+export enum FieldOptions_OptionRetention {
+  RETENTION_UNKNOWN = 0,
+  RETENTION_RUNTIME = 1,
+  RETENTION_SOURCE = 2,
+}
+
+export enum FieldOptions_OptionTargetType {
+  TARGET_TYPE_UNKNOWN = 0,
+  TARGET_TYPE_FILE = 1,
+  TARGET_TYPE_EXTENSION_RANGE = 2,
+  TARGET_TYPE_MESSAGE = 3,
+  TARGET_TYPE_FIELD = 4,
+  TARGET_TYPE_ONEOF = 5,
+  TARGET_TYPE_ENUM = 6,
+  TARGET_TYPE_ENUM_ENTRY = 7,
+  TARGET_TYPE_SERVICE = 8,
+  TARGET_TYPE_METHOD = 9,
 }
 
 export interface OneofOptions {
@@ -366,6 +390,7 @@ function createBaseMessageOptions(): MessageOptions {
     noStandardDescriptorAccessor: false,
     deprecated: false,
     mapEntry: false,
+    deprecatedLegacyJsonFieldConflicts: false,
     uninterpretedOption: [],
   };
 }
@@ -383,6 +408,9 @@ export const MessageOptions = {
     }
     if (message.mapEntry === true) {
       writer.uint32(56).bool(message.mapEntry);
+    }
+    if (message.deprecatedLegacyJsonFieldConflicts === true) {
+      writer.uint32(88).bool(message.deprecatedLegacyJsonFieldConflicts);
     }
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
@@ -425,6 +453,13 @@ export const MessageOptions = {
 
           message.mapEntry = reader.bool();
           continue;
+        case 11:
+          if (tag != 88) {
+            break;
+          }
+
+          message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+          continue;
         case 999:
           if (tag != 7994) {
             break;
@@ -451,6 +486,9 @@ function createBaseFieldOptions(): FieldOptions {
     unverifiedLazy: false,
     deprecated: false,
     weak: false,
+    debugRedact: false,
+    retention: 0,
+    target: 0,
     uninterpretedOption: [],
   };
 }
@@ -477,6 +515,15 @@ export const FieldOptions = {
     }
     if (message.weak === true) {
       writer.uint32(80).bool(message.weak);
+    }
+    if (message.debugRedact === true) {
+      writer.uint32(128).bool(message.debugRedact);
+    }
+    if (message.retention !== 0) {
+      writer.uint32(136).int32(message.retention);
+    }
+    if (message.target !== 0) {
+      writer.uint32(144).int32(message.target);
     }
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
@@ -539,6 +586,27 @@ export const FieldOptions = {
           }
 
           message.weak = reader.bool();
+          continue;
+        case 16:
+          if (tag != 128) {
+            break;
+          }
+
+          message.debugRedact = reader.bool();
+          continue;
+        case 17:
+          if (tag != 136) {
+            break;
+          }
+
+          message.retention = reader.int32() as any;
+          continue;
+        case 18:
+          if (tag != 144) {
+            break;
+          }
+
+          message.target = reader.int32() as any;
           continue;
         case 999:
           if (tag != 7994) {
