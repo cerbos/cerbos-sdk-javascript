@@ -50,7 +50,7 @@
     "prettier-plugin-pkg": "0.17.1",
     "ts-jest": "29.0.5",
     "ts-node": "10.9.1",
-    "ts-proto": "1.145.0",
+    "ts-proto": "1.146.0",
     "typescript": "5.0.3"
   }
 }
