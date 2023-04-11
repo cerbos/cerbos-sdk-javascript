@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": "19.8.1",
+    "node": "19.9.0",
     "npm": "9.6.2"
   },
   "scripts": {
