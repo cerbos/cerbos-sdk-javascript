@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Space-separate the `User-Agent` header for `node-fetch` compatibility ([#505](https://github.com/cerbos/cerbos-sdk-javascript/pull/505))
 
 ## [0.10.1] - 2023-03-23
 

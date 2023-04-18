@@ -49,6 +49,8 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-var-requires -- Can't import package.json because it is outside of the project's rootDir
 const { version } = require("../package.json") as { version: string };
 
+const defaultUserAgent = `cerbos-sdk-javascript-http/${version}`;
+
 /**
  * Options for creating a new {@link HTTP} client.
  *
@@ -238,7 +240,10 @@ const headers = (
     typeof optionalHeaders === "function" ? optionalHeaders() : optionalHeaders
   );
 
-  headers.append("User-Agent", `cerbos-sdk-javascript-http/${version}`);
+  headers.set(
+    "User-Agent",
+    headers.get("User-Agent")?.concat(" ", defaultUserAgent) ?? defaultUserAgent
+  );
 
   if (adminCredentials) {
     headers.set(
