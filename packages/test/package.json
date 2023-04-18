@@ -21,7 +21,7 @@
     "@types/node-fetch": "2.6.3",
     "@types/semver": "7.3.13",
     "jest": "29.5.0",
-    "jose": "4.11.4",
+    "jose": "4.14.0",
     "node-fetch": "2.6.9",
     "semver": "7.3.8",
     "yaml": "2.2.1"
