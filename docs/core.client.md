@@ -28,12 +28,14 @@ The constructor for this class is marked as internal. Third-party code should no
 |  [deleteSchemas(request)](./core.client.deleteschemas.md) |  | Delete multiple schemas. |
 |  [disablePolicies(request)](./core.client.disablepolicies.md) |  | Disable multiple policies. |
 |  [disablePolicy(id)](./core.client.disablepolicy.md) |  | Disable a policy. |
+|  [enablePolicies(request)](./core.client.enablepolicies.md) |  | Enable multiple policies. |
+|  [enablePolicy(id)](./core.client.enablepolicy.md) |  | Enable a policy. |
 |  [getPolicies(request)](./core.client.getpolicies.md) |  | Fetch multiple policies by ID. |
 |  [getPolicy(id)](./core.client.getpolicy.md) |  | Fetch a policy by ID. |
 |  [getSchema(id)](./core.client.getschema.md) |  | Fetch a schema by ID. |
 |  [getSchemas(request)](./core.client.getschemas.md) |  | Fetch multiple schemas by ID. |
 |  [isAllowed(request)](./core.client.isallowed.md) |  | Check if a principal is allowed to perform an action on a resource. |
-|  [listPolicies()](./core.client.listpolicies.md) |  | List policies. |
+|  [listPolicies(request)](./core.client.listpolicies.md) |  | List policies. |
 |  [listSchemas()](./core.client.listschemas.md) |  | List schemas. |
 |  [planResources(request)](./core.client.planresources.md) |  | Produce a query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action. |
 |  [reloadStore(request)](./core.client.reloadstore.md) |  | Reload the store. |

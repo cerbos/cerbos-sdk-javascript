@@ -22,6 +22,7 @@ import type {
   CheckResourcesResponse_ResultEntry,
   DeleteSchemaResponse,
   DisablePolicyResponse,
+  EnablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
   ListPoliciesResponse as ListPoliciesResponseProtobuf,
@@ -39,6 +40,7 @@ import type {
   DerivedRoleDefinition,
   DerivedRoles,
   DisablePoliciesResponse,
+  EnablePoliciesResponse,
   GetPoliciesResponse,
   ListPoliciesResponse,
   ListSchemasResponse,
@@ -155,6 +157,12 @@ export const disablePoliciesResponseFromProtobuf = ({
   disabledPolicies,
 }: DisablePolicyResponse): DisablePoliciesResponse => ({
   disabledPolicies,
+});
+
+export const enablePoliciesResponseFromProtobuf = ({
+  enabledPolicies,
+}: EnablePolicyResponse): EnablePoliciesResponse => ({
+  enabledPolicies,
 });
 
 export const getPoliciesResponseFromProtobuf = ({

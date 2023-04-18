@@ -1,5 +1,15 @@
 ## [Unreleased]
 
+### Added
+
+- [`includeDisabled`](../../docs/core.listpoliciesrequest.includedisabled.md) option to [`Client.listPolicies`](../../docs/core.client.listpolicies.md) method to include disabled policies in the list ([#475](https://github.com/cerbos/cerbos-sdk-javascript/pull/475))
+
+  Requires a policy decision point server running Cerbos 0.26+.
+
+- [`Client.enablePolicy`](../../docs/core.client.enablepolicy.md) and [`Client.enablePolicies`](../../docs/core.client.enablepolicies.md) methods to enable policies ([#475](https://github.com/cerbos/cerbos-sdk-javascript/pull/475))
+
+  Requires a policy decision point server running Cerbos 0.26+.
+
 ### Changed
 
 - Space-separate the `User-Agent` header for `node-fetch` compatibility ([#505](https://github.com/cerbos/cerbos-sdk-javascript/pull/505))

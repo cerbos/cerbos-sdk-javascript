@@ -9,8 +9,15 @@ List policies.
 **Signature:**
 
 ```typescript
-listPolicies(): Promise<ListPoliciesResponse>;
+listPolicies(request?: ListPoliciesRequest): Promise<ListPoliciesResponse>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  request | [ListPoliciesRequest](./core.listpoliciesrequest.md) | _(Optional)_ |
+
 **Returns:**
 
 Promise&lt;[ListPoliciesResponse](./core.listpoliciesresponse.md)<!-- -->&gt;
