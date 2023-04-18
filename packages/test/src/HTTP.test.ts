@@ -1,3 +1,5 @@
+import "./fetch-polyfill";
+
 import type { IncomingHttpHeaders } from "http";
 import { createServer } from "http";
 import type { AddressInfo } from "net";
