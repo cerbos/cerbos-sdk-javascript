@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.10.0] - 2023-04-18
+
 ### Added
 
 - [`includeDisabled`](../../docs/core.listpoliciesrequest.includedisabled.md) option to [`Client.listPolicies`](../../docs/core.client.listpolicies.md) method to include disabled policies in the list ([#475](https://github.com/cerbos/cerbos-sdk-javascript/pull/475))
@@ -79,7 +83,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.9.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.10.0...HEAD
+[0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.9.1...@cerbos/core@0.10.0
 [0.9.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.9.0...@cerbos/core@0.9.1
 [0.9.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.8.1...@cerbos/core@0.9.0
 [0.8.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.8.0...@cerbos/core@0.8.1
