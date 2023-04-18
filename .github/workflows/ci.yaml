@@ -66,6 +66,8 @@ jobs:
 
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
+        with:
+          node-version: ${{ matrix.node }}
 
       - name: Start test servers
         run: npm run test:servers:start

@@ -1,3 +1,5 @@
+import "./fetch-polyfill";
+
 import type { IncomingHttpHeaders } from "http";
 import { createServer } from "http";
 import type { AddressInfo } from "net";
@@ -18,7 +20,7 @@ describe("HTTP", () => {
       },
       expected: {
         foo: "bar",
-        "user-agent": `test/9000, cerbos-sdk-javascript-http/${version}`,
+        "user-agent": `test/9000 cerbos-sdk-javascript-http/${version}`,
       },
     },
     {
@@ -29,7 +31,7 @@ describe("HTTP", () => {
       }),
       expected: {
         foo: "bar",
-        "user-agent": `test/9000, cerbos-sdk-javascript-http/${version}`,
+        "user-agent": `test/9000 cerbos-sdk-javascript-http/${version}`,
       },
     },
     {

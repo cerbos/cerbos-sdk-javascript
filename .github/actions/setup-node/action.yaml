@@ -2,6 +2,10 @@ name: Set up Node.js
 
 description: Install Node.js and npm dependencies
 
+inputs:
+  node-version:
+    description: Version of Node.js to install
+
 runs:
   using: composite
 
@@ -10,6 +14,7 @@ runs:
       uses: actions/setup-node@v3
       with:
         cache: npm
+        node-version: ${{ inputs.node-version }}
         node-version-file: .node-version
 
     - name: Install dependencies
