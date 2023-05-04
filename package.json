@@ -6,7 +6,7 @@
   ],
   "engines": {
     "node": "20.1.0",
-    "npm": "9.6.4"
+    "npm": "9.6.6"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
