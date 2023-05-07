@@ -34,8 +34,8 @@
     "test:watch": "npm run --workspace=packages/test test:watch"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "7.22.3",
-    "@microsoft/api-extractor": "7.34.7",
+    "@microsoft/api-documenter": "7.22.4",
+    "@microsoft/api-extractor": "7.34.8",
     "@tsconfig/node14": "1.0.3",
     "@types/node": "14.18.43",
     "@typescript-eslint/eslint-plugin": "5.59.2",
