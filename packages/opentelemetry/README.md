@@ -6,7 +6,7 @@
 
 ## Prerequisites
 
-- Node.js 14+
+- Node.js 16+
 
 ## Installation
 

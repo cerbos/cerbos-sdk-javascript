@@ -7,7 +7,7 @@ Client library for interacting with the Cerbos policy decision point over gRPC f
 ## Prerequisites
 
 - Cerbos 0.16+
-- Node.js 14+
+- Node.js 16+
 
 ## Installation
 

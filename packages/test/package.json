@@ -1,10 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "test": "scripts/jest",
+    "test": "NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt jest",
     "test:servers:start": "servers/start",
     "test:servers:stop": "servers/stop",
-    "test:watch": "scripts/jest --watch"
+    "test:watch": "NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt jest --watch"
   },
   "devDependencies": {
     "@cerbos/core": "0.10.0",
