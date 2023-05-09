@@ -16,7 +16,7 @@ You can use it in server-side Node.js applications, but the [gRPC client](../grp
 ## Prerequisites
 
 - Cerbos 0.16+
-- Node.js 14+
+- Node.js 16+
 - `fetch`
 
 ## Installation
