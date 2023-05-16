@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Changed
+
+- Bump dependencies on [@opentelemetry/instrumentation](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation) to 0.39.1 and [@opentelemetry/semantic-conventions](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-semantic-conventions) to 1.13.0 ([#525](https://github.com/cerbos/cerbos-sdk-javascript/pull/525))
+
 ### Removed
 
 - Support for Node.js 14, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#521](https://github.com/cerbos/cerbos-sdk-javascript/pull/521))
