@@ -21,6 +21,7 @@ export interface Swagger {
   responses: { [key: string]: Response };
   securityDefinitions: SecurityDefinitions | undefined;
   security: SecurityRequirement[];
+  tags: Tag[];
   externalDocs: ExternalDocumentation | undefined;
   extensions: { [key: string]: any | undefined };
 }
@@ -48,6 +49,7 @@ export interface Operation {
   deprecated: boolean;
   security: SecurityRequirement[];
   extensions: { [key: string]: any | undefined };
+  parameters: Parameters | undefined;
 }
 
 export interface Operation_ResponsesEntry {
@@ -58,6 +60,26 @@ export interface Operation_ResponsesEntry {
 export interface Operation_ExtensionsEntry {
   key: string;
   value: any | undefined;
+}
+
+export interface Parameters {
+  headers: HeaderParameter[];
+}
+
+export interface HeaderParameter {
+  name: string;
+  description: string;
+  type: HeaderParameter_Type;
+  format: string;
+  required: boolean;
+}
+
+export enum HeaderParameter_Type {
+  UNKNOWN = 0,
+  STRING = 1,
+  NUMBER = 2,
+  INTEGER = 3,
+  BOOLEAN = 4,
 }
 
 export interface Header {
@@ -180,8 +202,15 @@ export interface JSONSchema_ExtensionsEntry {
 }
 
 export interface Tag {
+  name: string;
   description: string;
   externalDocs: ExternalDocumentation | undefined;
+  extensions: { [key: string]: any | undefined };
+}
+
+export interface Tag_ExtensionsEntry {
+  key: string;
+  value: any | undefined;
 }
 
 export interface SecurityDefinitions {
