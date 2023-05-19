@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Changed
+
+- Bump dependency on [qs](https://github.com/ljharb/qs) to 6.11.2 ([#530](https://github.com/cerbos/cerbos-sdk-javascript/pull/530))
+
 ### Removed
 
 - Support for Node.js 14, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#521](https://github.com/cerbos/cerbos-sdk-javascript/pull/521))
