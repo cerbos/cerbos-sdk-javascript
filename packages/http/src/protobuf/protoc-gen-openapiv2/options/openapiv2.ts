@@ -60,6 +60,7 @@ export interface Swagger {
   responses: { [key: string]: Response };
   securityDefinitions: SecurityDefinitions | undefined;
   security: SecurityRequirement[];
+  tags: Tag[];
   externalDocs: ExternalDocumentation | undefined;
   extensions: { [key: string]: any | undefined };
 }
@@ -87,6 +88,7 @@ export interface Operation {
   deprecated: boolean;
   security: SecurityRequirement[];
   extensions: { [key: string]: any | undefined };
+  parameters: Parameters | undefined;
 }
 
 export interface Operation_ResponsesEntry {
@@ -97,6 +99,65 @@ export interface Operation_ResponsesEntry {
 export interface Operation_ExtensionsEntry {
   key: string;
   value: any | undefined;
+}
+
+export interface Parameters {
+  headers: HeaderParameter[];
+}
+
+export interface HeaderParameter {
+  name: string;
+  description: string;
+  type: HeaderParameter_Type;
+  format: string;
+  required: boolean;
+}
+
+export enum HeaderParameter_Type {
+  UNKNOWN = 0,
+  STRING = 1,
+  NUMBER = 2,
+  INTEGER = 3,
+  BOOLEAN = 4,
+}
+
+export function headerParameter_TypeFromJSON(object: any): HeaderParameter_Type {
+  switch (object) {
+    case 0:
+    case "UNKNOWN":
+      return HeaderParameter_Type.UNKNOWN;
+    case 1:
+    case "STRING":
+      return HeaderParameter_Type.STRING;
+    case 2:
+    case "NUMBER":
+      return HeaderParameter_Type.NUMBER;
+    case 3:
+    case "INTEGER":
+      return HeaderParameter_Type.INTEGER;
+    case 4:
+    case "BOOLEAN":
+      return HeaderParameter_Type.BOOLEAN;
+    default:
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum HeaderParameter_Type");
+  }
+}
+
+export function headerParameter_TypeToJSON(object: HeaderParameter_Type): string {
+  switch (object) {
+    case HeaderParameter_Type.UNKNOWN:
+      return "UNKNOWN";
+    case HeaderParameter_Type.STRING:
+      return "STRING";
+    case HeaderParameter_Type.NUMBER:
+      return "NUMBER";
+    case HeaderParameter_Type.INTEGER:
+      return "INTEGER";
+    case HeaderParameter_Type.BOOLEAN:
+      return "BOOLEAN";
+    default:
+      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum HeaderParameter_Type");
+  }
 }
 
 export interface Header {
@@ -277,8 +338,15 @@ export interface JSONSchema_ExtensionsEntry {
 }
 
 export interface Tag {
+  name: string;
   description: string;
   externalDocs: ExternalDocumentation | undefined;
+  extensions: { [key: string]: any | undefined };
+}
+
+export interface Tag_ExtensionsEntry {
+  key: string;
+  value: any | undefined;
 }
 
 export interface SecurityDefinitions {
@@ -474,6 +542,9 @@ export const Swagger = {
       security: Array.isArray(object?.security)
         ? object.security.map((e: any) => SecurityRequirement.fromJSON(e))
         : [],
+      tags: Array.isArray(object?.tags)
+        ? object.tags.map((e: any) => Tag.fromJSON(e))
+        : [],
       externalDocs: isSet(object.externalDocs) ? ExternalDocumentation.fromJSON(object.externalDocs) : undefined,
       extensions: isObject(object.extensions)
         ? Object.entries(object.extensions).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
@@ -518,6 +589,11 @@ export const Swagger = {
       obj.security = message.security.map((e) => e ? SecurityRequirement.toJSON(e) : undefined);
     } else {
       obj.security = [];
+    }
+    if (message.tags) {
+      obj.tags = message.tags.map((e) => e ? Tag.toJSON(e) : undefined);
+    } else {
+      obj.tags = [];
     }
     message.externalDocs !== undefined &&
       (obj.externalDocs = message.externalDocs ? ExternalDocumentation.toJSON(message.externalDocs) : undefined);
@@ -587,6 +663,7 @@ export const Operation = {
           return acc;
         }, {})
         : {},
+      parameters: isSet(object.parameters) ? Parameters.fromJSON(object.parameters) : undefined,
     };
   },
 
@@ -635,6 +712,8 @@ export const Operation = {
         obj.extensions[k] = v;
       });
     }
+    message.parameters !== undefined &&
+      (obj.parameters = message.parameters ? Parameters.toJSON(message.parameters) : undefined);
     return obj;
   },
 };
@@ -664,6 +743,46 @@ export const Operation_ExtensionsEntry = {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+};
+
+export const Parameters = {
+  fromJSON(object: any): Parameters {
+    return {
+      headers: Array.isArray(object?.headers) ? object.headers.map((e: any) => HeaderParameter.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: Parameters): unknown {
+    const obj: any = {};
+    if (message.headers) {
+      obj.headers = message.headers.map((e) => e ? HeaderParameter.toJSON(e) : undefined);
+    } else {
+      obj.headers = [];
+    }
+    return obj;
+  },
+};
+
+export const HeaderParameter = {
+  fromJSON(object: any): HeaderParameter {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      type: isSet(object.type) ? headerParameter_TypeFromJSON(object.type) : 0,
+      format: isSet(object.format) ? String(object.format) : "",
+      required: isSet(object.required) ? Boolean(object.required) : false,
+    };
+  },
+
+  toJSON(message: HeaderParameter): unknown {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.description !== undefined && (obj.description = message.description);
+    message.type !== undefined && (obj.type = headerParameter_TypeToJSON(message.type));
+    message.format !== undefined && (obj.format = message.format);
+    message.required !== undefined && (obj.required = message.required);
     return obj;
   },
 };
@@ -1028,16 +1147,43 @@ export const JSONSchema_ExtensionsEntry = {
 export const Tag = {
   fromJSON(object: any): Tag {
     return {
+      name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
       externalDocs: isSet(object.externalDocs) ? ExternalDocumentation.fromJSON(object.externalDocs) : undefined,
+      extensions: isObject(object.extensions)
+        ? Object.entries(object.extensions).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
+          acc[key] = value as any | undefined;
+          return acc;
+        }, {})
+        : {},
     };
   },
 
   toJSON(message: Tag): unknown {
     const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
     message.externalDocs !== undefined &&
       (obj.externalDocs = message.externalDocs ? ExternalDocumentation.toJSON(message.externalDocs) : undefined);
+    obj.extensions = {};
+    if (message.extensions) {
+      Object.entries(message.extensions).forEach(([k, v]) => {
+        obj.extensions[k] = v;
+      });
+    }
+    return obj;
+  },
+};
+
+export const Tag_ExtensionsEntry = {
+  fromJSON(object: any): Tag_ExtensionsEntry {
+    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+  },
+
+  toJSON(message: Tag_ExtensionsEntry): unknown {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 };
