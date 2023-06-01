@@ -177,7 +177,7 @@ describe("Client", () => {
             const outputs: OutputResult[] = cerbosVersionIsAtLeast("0.27.0")
               ? [
                   {
-                    source: "cerbos.resource.document.v1#delete",
+                    source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
                 ]
@@ -293,7 +293,7 @@ describe("Client", () => {
             const outputs: OutputResult[] = cerbosVersionIsAtLeast("0.27.0")
               ? [
                   {
-                    source: "cerbos.resource.document.v1#delete",
+                    source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
                 ]
