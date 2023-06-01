@@ -2,7 +2,7 @@
 import { Empty } from "../../../google/protobuf/empty";
 import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
 import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
-import { PlanResourcesFilter } from "../../engine/v1/engine";
+import { OutputEntry, PlanResourcesFilter } from "../../engine/v1/engine";
 import { Policy } from "../../policy/v1/policy";
 import { Schema, ValidationError } from "../../schema/v1/schema";
 
@@ -94,6 +94,7 @@ export interface CheckResourcesResponse_ResultEntry {
   actions: { [key: string]: Effect };
   validationErrors: ValidationError[];
   meta: CheckResourcesResponse_ResultEntry_Meta | undefined;
+  outputs: OutputEntry[];
 }
 
 export interface CheckResourcesResponse_ResultEntry_Resource {
@@ -543,6 +544,9 @@ export const CheckResourcesResponse_ResultEntry = {
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
       meta: isSet(object.meta) ? CheckResourcesResponse_ResultEntry_Meta.fromJSON(object.meta) : undefined,
+      outputs: Array.isArray(object?.outputs)
+        ? object.outputs.map((e: any) => OutputEntry.fromJSON(e))
+        : [],
     };
   },
 
@@ -564,6 +568,11 @@ export const CheckResourcesResponse_ResultEntry = {
     }
     message.meta !== undefined &&
       (obj.meta = message.meta ? CheckResourcesResponse_ResultEntry_Meta.toJSON(message.meta) : undefined);
+    if (message.outputs) {
+      obj.outputs = message.outputs.map((e) => e ? OutputEntry.toJSON(e) : undefined);
+    } else {
+      obj.outputs = [];
+    }
     return obj;
   },
 };

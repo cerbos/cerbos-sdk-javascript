@@ -74,6 +74,7 @@ export interface CheckOutput {
   actions: { [key: string]: CheckOutput_ActionEffect };
   effectiveDerivedRoles: string[];
   validationErrors: ValidationError[];
+  outputs: OutputEntry[];
 }
 
 export interface CheckOutput_ActionEffect {
@@ -85,6 +86,11 @@ export interface CheckOutput_ActionEffect {
 export interface CheckOutput_ActionsEntry {
   key: string;
   value: CheckOutput_ActionEffect | undefined;
+}
+
+export interface OutputEntry {
+  src: string;
+  val: any | undefined;
 }
 
 export interface Resource {

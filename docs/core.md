@@ -69,6 +69,8 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [MatchExpr](./core.matchexpr.md) | A single expression to evaluate in a condition. |
 |  [MatchNone](./core.matchnone.md) | A set of expressions to evaluate in a condition that must all be false. |
 |  [Options](./core.options.md) | Options for creating a new [Client](./core.client.md)<!-- -->. |
+|  [Output](./core.output.md) | User-defined output to be produced when evaluating a policy rule. |
+|  [OutputResult](./core.outputresult.md) | User-defined output from a policy rule evaluation. |
 |  [PlanResourcesConditionalResponse](./core.planresourcesconditionalresponse.md) | A query plan for when the specified action is conditionally allowed for the principal on resources matching the input. |
 |  [PlanResourcesMetadata](./core.planresourcesmetadata.md) | Additional information about the query plan. |
 |  [PlanResourcesRequest](./core.planresourcesrequest.md) | Input to [Client.planResources()](./core.client.planresources.md)<!-- -->. |

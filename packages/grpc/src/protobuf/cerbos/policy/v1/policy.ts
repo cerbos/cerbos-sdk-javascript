@@ -54,6 +54,7 @@ export interface ResourceRule {
   condition: Condition | undefined;
   effect: Effect;
   name: string;
+  output: Output | undefined;
 }
 
 export interface PrincipalPolicy {
@@ -73,6 +74,7 @@ export interface PrincipalRule_Action {
   condition: Condition | undefined;
   effect: Effect;
   name: string;
+  output: Output | undefined;
 }
 
 export interface DerivedRoles {
@@ -99,6 +101,10 @@ export interface Match {
 
 export interface Match_ExprList {
   of: Match[];
+}
+
+export interface Output {
+  expr: string;
 }
 
 export interface Schemas {
@@ -497,7 +503,7 @@ export const ResourcePolicy = {
 };
 
 function createBaseResourceRule(): ResourceRule {
-  return { actions: [], derivedRoles: [], roles: [], condition: undefined, effect: 0, name: "" };
+  return { actions: [], derivedRoles: [], roles: [], condition: undefined, effect: 0, name: "", output: undefined };
 }
 
 export const ResourceRule = {
@@ -519,6 +525,9 @@ export const ResourceRule = {
     }
     if (message.name !== "") {
       writer.uint32(50).string(message.name);
+    }
+    if (message.output !== undefined) {
+      Output.encode(message.output, writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -571,6 +580,13 @@ export const ResourceRule = {
           }
 
           message.name = reader.string();
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.output = Output.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -695,7 +711,7 @@ export const PrincipalRule = {
 };
 
 function createBasePrincipalRule_Action(): PrincipalRule_Action {
-  return { action: "", condition: undefined, effect: 0, name: "" };
+  return { action: "", condition: undefined, effect: 0, name: "", output: undefined };
 }
 
 export const PrincipalRule_Action = {
@@ -711,6 +727,9 @@ export const PrincipalRule_Action = {
     }
     if (message.name !== "") {
       writer.uint32(34).string(message.name);
+    }
+    if (message.output !== undefined) {
+      Output.encode(message.output, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -749,6 +768,13 @@ export const PrincipalRule_Action = {
           }
 
           message.name = reader.string();
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.output = Output.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1003,6 +1029,42 @@ export const Match_ExprList = {
           }
 
           message.of.push(Match.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseOutput(): Output {
+  return { expr: "" };
+}
+
+export const Output = {
+  encode(message: Output, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.expr !== "") {
+      writer.uint32(10).string(message.expr);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Output {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseOutput();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.expr = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {

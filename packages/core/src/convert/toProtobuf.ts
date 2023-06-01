@@ -11,6 +11,7 @@ import type {
   DerivedRoles as DerivedRolesProtobuf,
   Match as MatchProtobuf,
   Match_ExprList,
+  Output as OutputProtobuf,
   Policy as PolicyProtobuf,
   PrincipalPolicy as PrincipalPolicyProtobuf,
   PrincipalRule as PrincipalRuleProtobuf,
@@ -52,6 +53,7 @@ import type {
   ListPoliciesRequest,
   Match,
   Matches,
+  Output,
   PlanResourcesRequest,
   Policy,
   Principal,
@@ -225,17 +227,21 @@ const principalRuleActionToProtobuf = ({
   effect,
   condition,
   name = "",
+  output,
 }: PrincipalRuleAction): PrincipalRule_Action => ({
   action,
   effect: effectToProtobuf(effect),
   condition: condition && conditionToProtobuf(condition),
   name,
+  output: output && outputToProtobuf(output),
 });
 
 const effectToProtobuf = (effect: Effect): EffectProtobuf =>
   effect === Effect.ALLOW
     ? EffectProtobuf.EFFECT_ALLOW
     : EffectProtobuf.EFFECT_DENY;
+
+const outputToProtobuf = ({ expr }: Output): OutputProtobuf => ({ expr });
 
 const resourcePolicyToProtobuf = ({
   resourcePolicy: {
@@ -262,6 +268,7 @@ const resourceRuleToProtobuf = ({
   roles = [],
   condition,
   name = "",
+  output,
 }: ResourceRule): ResourceRuleProtobuf => ({
   actions,
   effect: effectToProtobuf(effect),
@@ -269,6 +276,7 @@ const resourceRuleToProtobuf = ({
   roles,
   condition: condition && conditionToProtobuf(condition),
   name,
+  output: output && outputToProtobuf(output),
 });
 
 const policySchemasToProtobuf = ({

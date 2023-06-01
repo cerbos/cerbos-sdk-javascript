@@ -52,6 +52,7 @@ export interface ResourceRule {
   condition: Condition | undefined;
   effect: Effect;
   name: string;
+  output: Output | undefined;
 }
 
 export interface PrincipalPolicy {
@@ -71,6 +72,7 @@ export interface PrincipalRule_Action {
   condition: Condition | undefined;
   effect: Effect;
   name: string;
+  output: Output | undefined;
 }
 
 export interface DerivedRoles {
@@ -97,6 +99,10 @@ export interface Match {
 
 export interface Match_ExprList {
   of: Match[];
+}
+
+export interface Output {
+  expr: string;
 }
 
 export interface Schemas {
@@ -264,6 +270,7 @@ export const ResourceRule = {
       condition: isSet(object.condition) ? Condition.fromJSON(object.condition) : undefined,
       effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
       name: isSet(object.name) ? String(object.name) : "",
+      output: isSet(object.output) ? Output.fromJSON(object.output) : undefined,
     };
   },
 
@@ -288,6 +295,7 @@ export const ResourceRule = {
       (obj.condition = message.condition ? Condition.toJSON(message.condition) : undefined);
     message.effect !== undefined && (obj.effect = effectToJSON(message.effect));
     message.name !== undefined && (obj.name = message.name);
+    message.output !== undefined && (obj.output = message.output ? Output.toJSON(message.output) : undefined);
     return obj;
   },
 };
@@ -343,6 +351,7 @@ export const PrincipalRule_Action = {
       condition: isSet(object.condition) ? Condition.fromJSON(object.condition) : undefined,
       effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
       name: isSet(object.name) ? String(object.name) : "",
+      output: isSet(object.output) ? Output.fromJSON(object.output) : undefined,
     };
   },
 
@@ -353,6 +362,7 @@ export const PrincipalRule_Action = {
       (obj.condition = message.condition ? Condition.toJSON(message.condition) : undefined);
     message.effect !== undefined && (obj.effect = effectToJSON(message.effect));
     message.name !== undefined && (obj.name = message.name);
+    message.output !== undefined && (obj.output = message.output ? Output.toJSON(message.output) : undefined);
     return obj;
   },
 };
@@ -457,6 +467,18 @@ export const Match_ExprList = {
     } else {
       obj.of = [];
     }
+    return obj;
+  },
+};
+
+export const Output = {
+  fromJSON(object: any): Output {
+    return { expr: isSet(object.expr) ? String(object.expr) : "" };
+  },
+
+  toJSON(message: Output): unknown {
+    const obj: any = {};
+    message.expr !== undefined && (obj.expr = message.expr);
     return obj;
   },
 };

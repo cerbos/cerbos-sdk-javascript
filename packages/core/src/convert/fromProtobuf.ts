@@ -1,5 +1,8 @@
 import { Effect as EffectProtobuf } from "../protobuf/cerbos/effect/v1/effect";
-import type { PlanResourcesFilter_Expression_Operand } from "../protobuf/cerbos/engine/v1/engine";
+import type {
+  OutputEntry as OutputEntry,
+  PlanResourcesFilter_Expression_Operand,
+} from "../protobuf/cerbos/engine/v1/engine";
 import { PlanResourcesFilter_Kind } from "../protobuf/cerbos/engine/v1/engine";
 import type {
   Condition as ConditionProtobuf,
@@ -46,6 +49,7 @@ import type {
   ListSchemasResponse,
   Match,
   Matches,
+  OutputResult,
   PlanExpressionOperand,
   PlanResourcesMetadata,
   PlanResourcesResponse,
@@ -92,6 +96,7 @@ const checkResourcesResultFromProtobuf = ({
   actions,
   validationErrors,
   meta,
+  outputs,
 }: CheckResourcesResponse_ResultEntry): CheckResourcesResult => {
   if (!resource) {
     throw new Error("Missing resource on CheckResources result");
@@ -102,6 +107,7 @@ const checkResourcesResultFromProtobuf = ({
     actions: actionsFromProtobuf(actions),
     validationErrors: validationErrors.map(validationErrorFromProtobuf),
     metadata: meta,
+    outputs: outputs.map(outputResultFromProtobuf),
   });
 };
 
@@ -146,6 +152,11 @@ const validationErrorSourceFromProtobuf = (
       );
   }
 };
+
+const outputResultFromProtobuf = ({ src, val }: OutputEntry): OutputResult => ({
+  source: src,
+  value: val as Value | undefined,
+});
 
 export const deleteSchemasResponseFromProtobuf = ({
   deletedSchemas,

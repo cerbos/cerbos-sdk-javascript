@@ -35,6 +35,7 @@ export const buildResult = (
     actions: {},
     validationErrors: [],
     metadata: undefined,
+    outputs: [],
     ...result,
   });
 

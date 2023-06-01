@@ -89,6 +89,7 @@ describe("Lite", () => {
               },
               effectiveDerivedRoles: [],
             },
+            outputs: [],
           })
         );
       });
@@ -192,6 +193,7 @@ describe("Lite", () => {
                   },
                   effectiveDerivedRoles: [],
                 },
+                outputs: [],
               }),
               new CheckResourcesResult({
                 resource: {
@@ -223,6 +225,7 @@ describe("Lite", () => {
                   },
                   effectiveDerivedRoles: [],
                 },
+                outputs: [],
               }),
               new CheckResourcesResult({
                 resource: {
@@ -254,6 +257,7 @@ describe("Lite", () => {
                   },
                   effectiveDerivedRoles: [],
                 },
+                outputs: [],
               }),
             ],
           })

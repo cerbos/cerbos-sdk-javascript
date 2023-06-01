@@ -9,10 +9,17 @@ if [[ "${CERBOS_VERSION}" = *-prerelease ]]; then
   export CERBOS_IMAGE_TAG="${CERBOS_IMAGE_TAG:-dev}"
 fi
 
+while IFS= read -r -d "" policies_dir; do
+  policies_version="${policies_dir#servers/policies/}"
+  if [[ "${policies_version}" < "${CERBOS_VERSION}" ]]; then
+    export POLICIES_VERSION="${policies_version}"
+  fi
+done < <(find servers/policies -type d -mindepth 1 -maxdepth 1 -print0 | sort -z)
+
 uid=$(id -u)
 gid=$(id -g)
 export USER="${uid}:${gid}"
 
 mkdir -p servers/tmp/certificates servers/tmp/socket
 
-docker compose --file=servers/docker-compose.yaml up --wait
+exec docker compose --file=servers/docker-compose.yaml up --wait

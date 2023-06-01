@@ -2,7 +2,7 @@
 import type { Empty } from "../../../google/protobuf/empty";
 import type { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
 import type { Effect } from "../../effect/v1/effect";
-import type { PlanResourcesFilter } from "../../engine/v1/engine";
+import type { OutputEntry, PlanResourcesFilter } from "../../engine/v1/engine";
 import type { Policy } from "../../policy/v1/policy";
 import type { Schema, ValidationError } from "../../schema/v1/schema";
 
@@ -94,6 +94,7 @@ export interface CheckResourcesResponse_ResultEntry {
   actions: { [key: string]: Effect };
   validationErrors: ValidationError[];
   meta: CheckResourcesResponse_ResultEntry_Meta | undefined;
+  outputs: OutputEntry[];
 }
 
 export interface CheckResourcesResponse_ResultEntry_Resource {

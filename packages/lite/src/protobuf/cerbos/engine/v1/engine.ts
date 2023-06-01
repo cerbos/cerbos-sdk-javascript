@@ -108,6 +108,7 @@ export interface CheckOutput {
   actions: { [key: string]: CheckOutput_ActionEffect };
   effectiveDerivedRoles: string[];
   validationErrors: ValidationError[];
+  outputs: OutputEntry[];
 }
 
 export interface CheckOutput_ActionEffect {
@@ -119,6 +120,11 @@ export interface CheckOutput_ActionEffect {
 export interface CheckOutput_ActionsEntry {
   key: string;
   value: CheckOutput_ActionEffect | undefined;
+}
+
+export interface OutputEntry {
+  src: string;
+  val: any | undefined;
 }
 
 export interface Resource {
@@ -371,6 +377,7 @@ export const CheckOutput = {
       validationErrors: Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
+      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => OutputEntry.fromJSON(e)) : [],
     };
   },
 
@@ -393,6 +400,11 @@ export const CheckOutput = {
       obj.validationErrors = message.validationErrors.map((e) => e ? ValidationError.toJSON(e) : undefined);
     } else {
       obj.validationErrors = [];
+    }
+    if (message.outputs) {
+      obj.outputs = message.outputs.map((e) => e ? OutputEntry.toJSON(e) : undefined);
+    } else {
+      obj.outputs = [];
     }
     return obj;
   },
@@ -429,6 +441,19 @@ export const CheckOutput_ActionsEntry = {
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined &&
       (obj.value = message.value ? CheckOutput_ActionEffect.toJSON(message.value) : undefined);
+    return obj;
+  },
+};
+
+export const OutputEntry = {
+  fromJSON(object: any): OutputEntry {
+    return { src: isSet(object.src) ? String(object.src) : "", val: isSet(object?.val) ? object.val : undefined };
+  },
+
+  toJSON(message: OutputEntry): unknown {
+    const obj: any = {};
+    message.src !== undefined && (obj.src = message.src);
+    message.val !== undefined && (obj.val = message.val);
     return obj;
   },
 };

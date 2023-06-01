@@ -20,4 +20,5 @@ export interface PrincipalRuleAction
 |  [condition?](./core.principalruleaction.condition.md) |  | [Condition](./core.condition.md) \| undefined | _(Optional)_ The condition that must be met for the override to apply. |
 |  [effect](./core.principalruleaction.effect.md) |  | [Effect](./core.effect.md) | The effect of the override. |
 |  [name?](./core.principalruleaction.name.md) |  | string | _(Optional)_ A descriptive name for the rule. |
+|  [output?](./core.principalruleaction.output.md) |  | [Output](./core.output.md) \| undefined | _(Optional)_ User-defined output to be produced when evaluating the rule. |
 

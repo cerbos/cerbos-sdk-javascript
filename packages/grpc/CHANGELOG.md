@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+### Added
+
+- Support for user-defined policy rule outputs ([#542](https://github.com/cerbos/cerbos-sdk-javascript/pull/542))
+
+  Requires a policy decision point server running Cerbos 0.27+.
+
 ### Removed
 
 - Support for Node.js 14, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#521](https://github.com/cerbos/cerbos-sdk-javascript/pull/521))

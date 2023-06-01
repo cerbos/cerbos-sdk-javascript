@@ -2,7 +2,7 @@
 
 import "./fetch-polyfill";
 
-import { readFileSync } from "fs";
+import { readFileSync, readdirSync } from "fs";
 import { resolve } from "path";
 import { createSecureContext } from "tls";
 
@@ -12,6 +12,7 @@ import type {
   Client,
   DerivedRoles,
   Options,
+  OutputResult,
   PlanResourcesRequest,
   Policy,
   ValidationFailedCallback,
@@ -33,6 +34,7 @@ import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
 import { afterAll, beforeAll, describe, expect, it, jest } from "@jest/globals";
 import { UnsecuredJWT } from "jose";
+import { compare as semverCompare, lte as semverLte } from "semver";
 import YAML from "yaml";
 
 import type { Ports } from "./servers";
@@ -172,6 +174,15 @@ describe("Client", () => {
               requestId: "42",
             });
 
+            const outputs: OutputResult[] = cerbosVersionIsAtLeast("0.27.0")
+              ? [
+                  {
+                    source: "cerbos.resource.document.v1#delete",
+                    value: "delete_allowed:me@example.com",
+                  },
+                ]
+              : [];
+
             expect(result).toEqual(
               new CheckResourcesResult({
                 resource: {
@@ -209,6 +220,7 @@ describe("Client", () => {
                   },
                   effectiveDerivedRoles: ["OWNER"],
                 },
+                outputs,
               })
             );
           });
@@ -278,6 +290,15 @@ describe("Client", () => {
           it("checks a principal's permissions on a set of resources", async () => {
             const response = await clients.default.checkResources(request);
 
+            const outputs: OutputResult[] = cerbosVersionIsAtLeast("0.27.0")
+              ? [
+                  {
+                    source: "cerbos.resource.document.v1#delete",
+                    value: "delete_allowed:me@example.com",
+                  },
+                ]
+              : [];
+
             expect(response).toEqual(
               new CheckResourcesResponse({
                 requestId: "42",
@@ -318,6 +339,7 @@ describe("Client", () => {
                       },
                       effectiveDerivedRoles: ["OWNER"],
                     },
+                    outputs,
                   }),
                   new CheckResourcesResult({
                     resource: {
@@ -355,6 +377,7 @@ describe("Client", () => {
                       },
                       effectiveDerivedRoles: [],
                     },
+                    outputs,
                   }),
                   new CheckResourcesResult({
                     resource: {
@@ -397,6 +420,7 @@ describe("Client", () => {
                       },
                       effectiveDerivedRoles: [],
                     },
+                    outputs,
                   }),
                 ],
               })
@@ -660,9 +684,21 @@ describe("Client", () => {
           },
         };
 
+        const policiesDirectory = resolve(__dirname, "../servers/policies");
+
+        const policiesVersion = readdirSync(policiesDirectory)
+          .sort((a, b) => semverCompare(`${b}.0`, `${a}.0`))
+          .find((version) => semverLte(`${version}.0`, cerbosVersion));
+
+        if (!policiesVersion) {
+          throw new Error(
+            `Couldn't determine policies version for Cerbos version ${cerbosVersion}`
+          );
+        }
+
         const policyFromFile = YAML.parse(
           readFileSync(
-            resolve(__dirname, "../servers/policies/document.yaml"),
+            `${policiesDirectory}/${policiesVersion}/document.yaml`,
             {
               encoding: "utf-8",
             }

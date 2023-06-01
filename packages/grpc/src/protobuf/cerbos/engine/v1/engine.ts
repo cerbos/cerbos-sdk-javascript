@@ -76,6 +76,7 @@ export interface CheckOutput {
   actions: { [key: string]: CheckOutput_ActionEffect };
   effectiveDerivedRoles: string[];
   validationErrors: ValidationError[];
+  outputs: OutputEntry[];
 }
 
 export interface CheckOutput_ActionEffect {
@@ -87,6 +88,11 @@ export interface CheckOutput_ActionEffect {
 export interface CheckOutput_ActionsEntry {
   key: string;
   value: CheckOutput_ActionEffect | undefined;
+}
+
+export interface OutputEntry {
+  src: string;
+  val: any | undefined;
 }
 
 export interface Resource {
@@ -679,7 +685,7 @@ export const CheckInput = {
 };
 
 function createBaseCheckOutput(): CheckOutput {
-  return { requestId: "", resourceId: "", actions: {}, effectiveDerivedRoles: [], validationErrors: [] };
+  return { requestId: "", resourceId: "", actions: {}, effectiveDerivedRoles: [], validationErrors: [], outputs: [] };
 }
 
 export const CheckOutput = {
@@ -698,6 +704,9 @@ export const CheckOutput = {
     }
     for (const v of message.validationErrors) {
       ValidationError.encode(v!, writer.uint32(42).fork()).ldelim();
+    }
+    for (const v of message.outputs) {
+      OutputEntry.encode(v!, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -746,6 +755,13 @@ export const CheckOutput = {
           }
 
           message.validationErrors.push(ValidationError.decode(reader, reader.uint32()));
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.outputs.push(OutputEntry.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -848,6 +864,52 @@ export const CheckOutput_ActionsEntry = {
           }
 
           message.value = CheckOutput_ActionEffect.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseOutputEntry(): OutputEntry {
+  return { src: "", val: undefined };
+}
+
+export const OutputEntry = {
+  encode(message: OutputEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.src !== "") {
+      writer.uint32(10).string(message.src);
+    }
+    if (message.val !== undefined) {
+      Value.encode(Value.wrap(message.val), writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): OutputEntry {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseOutputEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.src = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.val = Value.unwrap(Value.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {

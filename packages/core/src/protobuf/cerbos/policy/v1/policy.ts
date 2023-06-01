@@ -52,6 +52,7 @@ export interface ResourceRule {
   condition: Condition | undefined;
   effect: Effect;
   name: string;
+  output: Output | undefined;
 }
 
 export interface PrincipalPolicy {
@@ -71,6 +72,7 @@ export interface PrincipalRule_Action {
   condition: Condition | undefined;
   effect: Effect;
   name: string;
+  output: Output | undefined;
 }
 
 export interface DerivedRoles {
@@ -97,6 +99,10 @@ export interface Match {
 
 export interface Match_ExprList {
   of: Match[];
+}
+
+export interface Output {
+  expr: string;
 }
 
 export interface Schemas {
