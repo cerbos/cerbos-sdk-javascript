@@ -4,5 +4,6 @@ set -o nounset
 set -o pipefail
 
 export CERBOS_VERSION=""
+export POLICIES_VERSION=""
 
 docker compose --file=servers/docker-compose.yaml down

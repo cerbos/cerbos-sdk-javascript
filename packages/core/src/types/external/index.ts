@@ -33,6 +33,8 @@ export * from "./MatchAny";
 export * from "./MatchExpr";
 export * from "./MatchNone";
 export * from "./Matches";
+export * from "./Output";
+export * from "./OutputResult";
 export * from "./PlanExpression";
 export * from "./PlanExpressionOperand";
 export * from "./PlanExpressionValue";

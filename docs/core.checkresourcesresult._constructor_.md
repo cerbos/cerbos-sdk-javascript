@@ -9,12 +9,12 @@ Constructs a new instance of the `CheckResourcesResult` class
 **Signature:**
 
 ```typescript
-constructor({ resource, actions, validationErrors, metadata, }: Pick<CheckResourcesResult, "resource" | "actions" | "validationErrors" | "metadata">);
+constructor({ resource, actions, validationErrors, metadata, outputs, }: Pick<CheckResourcesResult, "resource" | "actions" | "validationErrors" | "metadata" | "outputs">);
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  { resource, actions, validationErrors, metadata, } | Pick&lt;[CheckResourcesResult](./core.checkresourcesresult.md)<!-- -->, "resource" \| "actions" \| "validationErrors" \| "metadata"&gt; |  |
+|  { resource, actions, validationErrors, metadata, outputs, } | Pick&lt;[CheckResourcesResult](./core.checkresourcesresult.md)<!-- -->, "resource" \| "actions" \| "validationErrors" \| "metadata" \| "outputs"&gt; |  |
 

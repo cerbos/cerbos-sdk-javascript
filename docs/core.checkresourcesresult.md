@@ -16,7 +16,7 @@ export declare class CheckResourcesResult
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)({ resource, actions, validationErrors, metadata, })](./core.checkresourcesresult._constructor_.md) |  | Constructs a new instance of the <code>CheckResourcesResult</code> class |
+|  [(constructor)({ resource, actions, validationErrors, metadata, outputs, })](./core.checkresourcesresult._constructor_.md) |  | Constructs a new instance of the <code>CheckResourcesResult</code> class |
 
 ## Properties
 
@@ -24,6 +24,7 @@ export declare class CheckResourcesResult
 |  --- | --- | --- | --- |
 |  [actions](./core.checkresourcesresult.actions.md) |  | Record&lt;string, [Effect](./core.effect.md) \| undefined&gt; | The policy decisions for each action. |
 |  [metadata](./core.checkresourcesresult.metadata.md) |  | [CheckResourcesResultMetadata](./core.checkresourcesresultmetadata.md) \| undefined | Additional information about how the policy decisions were reached. |
+|  [outputs](./core.checkresourcesresult.outputs.md) |  | [OutputResult](./core.outputresult.md)<!-- -->\[\] | User-defined outputs from policy rule evaluations. |
 |  [resource](./core.checkresourcesresult.resource.md) |  | [CheckResourcesResultResource](./core.checkresourcesresultresource.md) | The resource that was checked. |
 |  [validationErrors](./core.checkresourcesresult.validationerrors.md) |  | [ValidationError](./core.validationerror.md)<!-- -->\[\] | Any schema validation errors for the principal or resource attributes. |
 
@@ -34,4 +35,5 @@ export declare class CheckResourcesResult
 |  [allAllowed()](./core.checkresourcesresult.allallowed.md) |  | Check if the policy decision was that all input actions should be allowed for the resource. |
 |  [allowedActions()](./core.checkresourcesresult.allowedactions.md) |  | List the actions that should be allowed for the resource. |
 |  [isAllowed(action)](./core.checkresourcesresult.isallowed.md) |  | Check if the policy decision was that a given action should be allowed for the resource. |
+|  [output(source)](./core.checkresourcesresult.output.md) |  | Find the value of the user-defined output for a particular policy rule. |
 

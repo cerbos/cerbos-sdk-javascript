@@ -1,18 +1,25 @@
+# yaml-language-server: $schema=https://api.cerbos.dev/latest/cerbos/policy/v1/Policy.schema.json
 apiVersion: api.cerbos.dev/v1
 resourcePolicy:
   resource: document
   version: "1"
+  scope: test
   schemas:
     principalSchema:
       ref: cerbos:///principal.json
     resourceSchema:
       ref: cerbos:///document.json
+  importDerivedRoles:
+    - owner
   rules:
     - actions:
-        - delete
+        - view
       effect: EFFECT_ALLOW
       roles:
         - USER
-      condition:
-        match:
-          expr: request.aux_data.jwt.delete
+
+    - actions:
+        - edit
+      effect: EFFECT_ALLOW
+      derivedRoles:
+        - OWNER

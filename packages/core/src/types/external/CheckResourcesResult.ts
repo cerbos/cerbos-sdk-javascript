@@ -1,7 +1,9 @@
 import type { CheckResourcesResultMetadata } from "./CheckResourcesResultMetadata";
 import type { CheckResourcesResultResource } from "./CheckResourcesResultResource";
 import { Effect } from "./Effect";
+import type { OutputResult } from "./OutputResult";
 import type { ValidationError } from "./ValidationError";
+import type { Value } from "./Value";
 
 /**
  * The outcome of checking a principal's permissions on single resource.
@@ -32,19 +34,29 @@ export class CheckResourcesResult {
    */
   public metadata: CheckResourcesResultMetadata | undefined;
 
+  /**
+   * User-defined outputs from policy rule evaluations.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.27.
+   */
+  public outputs: OutputResult[];
+
   public constructor({
     resource,
     actions,
     validationErrors,
     metadata,
+    outputs,
   }: Pick<
     CheckResourcesResult,
-    "resource" | "actions" | "validationErrors" | "metadata"
+    "resource" | "actions" | "validationErrors" | "metadata" | "outputs"
   >) {
     this.resource = resource;
     this.actions = actions;
     this.validationErrors = validationErrors;
     this.metadata = metadata;
+    this.outputs = outputs;
   }
 
   /**
@@ -82,5 +94,18 @@ export class CheckResourcesResult {
       default:
         return undefined;
     }
+  }
+
+  /**
+   * Find the value of the user-defined output for a particular policy rule.
+   *
+   * @param source - the identifier of the policy rule that produced the output.
+   * @returns `undefined` if the result does not include an output for the source.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.27.
+   */
+  public output(source: string): Value | undefined {
+    return this.outputs.find((output) => output.source === source)?.value;
   }
 }

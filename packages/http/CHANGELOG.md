@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+### Added
+
+- Support for user-defined policy rule outputs ([#542](https://github.com/cerbos/cerbos-sdk-javascript/pull/542))
+
+  Requires a policy decision point server running Cerbos 0.27+.
+
 ### Changed
 
 - Bump dependency on [qs](https://github.com/ljharb/qs) to 6.11.2 ([#530](https://github.com/cerbos/cerbos-sdk-javascript/pull/530))

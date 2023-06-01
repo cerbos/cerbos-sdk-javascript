@@ -3,7 +3,7 @@ import _m0 from "protobufjs/minimal";
 import { Empty } from "../../../google/protobuf/empty";
 import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
 import { Effect } from "../../effect/v1/effect";
-import { PlanResourcesFilter } from "../../engine/v1/engine";
+import { OutputEntry, PlanResourcesFilter } from "../../engine/v1/engine";
 import { Policy } from "../../policy/v1/policy";
 import { Schema, ValidationError } from "../../schema/v1/schema";
 
@@ -95,6 +95,7 @@ export interface CheckResourcesResponse_ResultEntry {
   actions: { [key: string]: Effect };
   validationErrors: ValidationError[];
   meta: CheckResourcesResponse_ResultEntry_Meta | undefined;
+  outputs: OutputEntry[];
 }
 
 export interface CheckResourcesResponse_ResultEntry_Resource {
@@ -971,7 +972,7 @@ export const CheckResourcesResponse = {
 };
 
 function createBaseCheckResourcesResponse_ResultEntry(): CheckResourcesResponse_ResultEntry {
-  return { resource: undefined, actions: {}, validationErrors: [], meta: undefined };
+  return { resource: undefined, actions: {}, validationErrors: [], meta: undefined, outputs: [] };
 }
 
 export const CheckResourcesResponse_ResultEntry = {
@@ -988,6 +989,9 @@ export const CheckResourcesResponse_ResultEntry = {
     }
     if (message.meta !== undefined) {
       CheckResourcesResponse_ResultEntry_Meta.encode(message.meta, writer.uint32(34).fork()).ldelim();
+    }
+    for (const v of message.outputs) {
+      OutputEntry.encode(v!, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -1029,6 +1033,13 @@ export const CheckResourcesResponse_ResultEntry = {
           }
 
           message.meta = CheckResourcesResponse_ResultEntry_Meta.decode(reader, reader.uint32());
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.outputs.push(OutputEntry.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
