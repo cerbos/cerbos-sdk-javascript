@@ -80,24 +80,18 @@ describe("CheckResourcesResult", () => {
 
   describe("#output", () => {
     const result = buildResult({
-      outputs: [
-        { source: "cerbos.resource.document.v1/scope#rule", value: 42 },
-      ],
+      outputs: [{ source: "resource.document.v1/scope#rule", value: 42 }],
     });
 
     describe("when the output is found", () => {
       it("returns the value", () => {
-        expect(result.output("cerbos.resource.document.v1/scope#rule")).toEqual(
-          42
-        );
+        expect(result.output("resource.document.v1/scope#rule")).toEqual(42);
       });
     });
 
     describe("when the output is not found", () => {
       it("returns undefined", () => {
-        expect(
-          result.output("cerbos.resource.wat.v1/scope#rule")
-        ).toBeUndefined();
+        expect(result.output("resource.wat.v1/scope#rule")).toBeUndefined();
       });
     });
   });
