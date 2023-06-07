@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.12.0] - 2023-06-07
+
 ### Added
 
 - Support for user-defined policy rule outputs ([#542](https://github.com/cerbos/cerbos-sdk-javascript/pull/542), [#543](https://github.com/cerbos/cerbos-sdk-javascript/pull/543), [#551](https://github.com/cerbos/cerbos-sdk-javascript/pull/551))
@@ -109,7 +113,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.11.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.12.0...HEAD
+[0.12.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.11.0...@cerbos/http@0.12.0
 [0.11.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.10.1...@cerbos/http@0.11.0
 [0.10.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.10.0...@cerbos/http@0.10.1
 [0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.9.0...@cerbos/http@0.10.0

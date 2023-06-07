@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.11.0] - 2023-06-07
+
 ### Added
 
 - Support for user-defined policy rule outputs ([#542](https://github.com/cerbos/cerbos-sdk-javascript/pull/542), [#543](https://github.com/cerbos/cerbos-sdk-javascript/pull/543), [#551](https://github.com/cerbos/cerbos-sdk-javascript/pull/551))
@@ -120,7 +124,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.10.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.11.0...HEAD
+[0.11.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.10.0...@cerbos/grpc@0.11.0
 [0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.9.2...@cerbos/grpc@0.10.0
 [0.9.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.9.1...@cerbos/grpc@0.9.2
 [0.9.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.9.0...@cerbos/grpc@0.9.1
