@@ -10,6 +10,7 @@ import type {
   Match as MatchProtobuf,
   Match_ExprList,
   Metadata,
+  Output as OutputProtobuf,
   Policy as PolicyProtobuf,
   PrincipalPolicy as PrincipalPolicyProtobuf,
   PrincipalRule as PrincipalRuleProtobuf,
@@ -49,6 +50,7 @@ import type {
   ListSchemasResponse,
   Match,
   Matches,
+  Output,
   OutputResult,
   PlanExpressionOperand,
   PlanResourcesMetadata,
@@ -330,12 +332,16 @@ const principalRuleActionFromProtobuf = ({
   effect,
   condition,
   name,
+  output,
 }: PrincipalRule_Action): PrincipalRuleAction => ({
   action,
   effect: effectFromProtobuf(effect),
   condition: condition && conditionFromProtobuf(condition),
   name,
+  output: output && outputFromProtobuf(output),
 });
+
+const outputFromProtobuf = ({ expr }: OutputProtobuf): Output => ({ expr });
 
 const resourcePolicyFromProtobuf = ({
   resource,
@@ -362,6 +368,7 @@ const resourceRuleFromProtobuf = ({
   roles,
   condition,
   name,
+  output,
 }: ResourceRuleProtobuf): ResourceRule => ({
   actions,
   effect: effectFromProtobuf(effect),
@@ -369,6 +376,7 @@ const resourceRuleFromProtobuf = ({
   roles,
   condition: condition && conditionFromProtobuf(condition),
   name,
+  output: output && outputFromProtobuf(output),
 });
 
 const schemaRefsFromProtobuf = ({

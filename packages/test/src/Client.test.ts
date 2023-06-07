@@ -688,7 +688,7 @@ describe("Client", () => {
 
         const policiesVersion = readdirSync(policiesDirectory)
           .sort((a, b) => semverCompare(`${b}.0`, `${a}.0`))
-          .find((version) => semverLte(`${version}.0`, cerbosVersion));
+          .find((version) => semverLte(`${version}.0-prelease`, cerbosVersion));
 
         if (!policiesVersion) {
           throw new Error(
