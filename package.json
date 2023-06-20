@@ -37,7 +37,7 @@
     "@microsoft/api-documenter": "7.22.20",
     "@microsoft/api-extractor": "7.35.4",
     "@tsconfig/node16": "1.0.4",
-    "@types/node": "16.18.35",
+    "@types/node": "16.18.36",
     "@typescript-eslint/eslint-plugin": "5.59.11",
     "@typescript-eslint/parser": "5.59.11",
     "concurrently": "8.2.0",
