@@ -1,6 +1,10 @@
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy name, scope, and version ([#568](https://github.com/cerbos/cerbos-sdk-javascript/pull/568))
+
+  Requires a policy decision point server running Cerbos 0.29+.
 
 ## [0.12.0] - 2023-06-07
 
