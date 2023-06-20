@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+### Added
+
+- Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy name, scope, and version ([#568](https://github.com/cerbos/cerbos-sdk-javascript/pull/568))
+
+  Requires a policy decision point server running Cerbos 0.29+.
+
 ### Changed
 
 - Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.8.15 ([#555](https://github.com/cerbos/cerbos-sdk-javascript/pull/555))
