@@ -415,8 +415,14 @@ export const getSchemasRequestToProtobuf = ({
 
 export const listPoliciesRequestToProtobuf = ({
   includeDisabled = false,
+  nameRegexp = "",
+  scopeRegexp = "",
+  versionRegexp = "",
 }: ListPoliciesRequest): ListPoliciesRequestProtobuf => ({
   includeDisabled,
+  nameRegexp,
+  scopeRegexp,
+  versionRegexp,
 });
 
 export const planResourcesRequestToProtobuf = ({

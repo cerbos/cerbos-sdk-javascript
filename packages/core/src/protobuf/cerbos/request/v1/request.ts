@@ -107,6 +107,9 @@ export interface ServerInfoRequest {
 
 export interface ListPoliciesRequest {
   includeDisabled: boolean;
+  nameRegexp: string;
+  scopeRegexp: string;
+  versionRegexp: string;
 }
 
 export interface GetPolicyRequest {

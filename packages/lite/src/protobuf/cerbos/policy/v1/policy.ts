@@ -23,10 +23,7 @@ export interface Policy_VariablesEntry {
 export interface Metadata {
   sourceFile: string;
   annotations: { [key: string]: string };
-  hash:
-    | number
-    | undefined;
-  /** @deprecated */
+  hash: number | undefined;
   storeIdentifer: string;
   storeIdentifier: string;
 }

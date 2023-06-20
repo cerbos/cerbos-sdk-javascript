@@ -110,6 +110,9 @@ export interface ServerInfoRequest {
 
 export interface ListPoliciesRequest {
   includeDisabled: boolean;
+  nameRegexp: string;
+  scopeRegexp: string;
+  versionRegexp: string;
 }
 
 export interface GetPolicyRequest {
@@ -1037,13 +1040,22 @@ export const ServerInfoRequest = {
 };
 
 function createBaseListPoliciesRequest(): ListPoliciesRequest {
-  return { includeDisabled: false };
+  return { includeDisabled: false, nameRegexp: "", scopeRegexp: "", versionRegexp: "" };
 }
 
 export const ListPoliciesRequest = {
   encode(message: ListPoliciesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.includeDisabled === true) {
       writer.uint32(8).bool(message.includeDisabled);
+    }
+    if (message.nameRegexp !== "") {
+      writer.uint32(18).string(message.nameRegexp);
+    }
+    if (message.scopeRegexp !== "") {
+      writer.uint32(26).string(message.scopeRegexp);
+    }
+    if (message.versionRegexp !== "") {
+      writer.uint32(34).string(message.versionRegexp);
     }
     return writer;
   },
@@ -1061,6 +1073,27 @@ export const ListPoliciesRequest = {
           }
 
           message.includeDisabled = reader.bool();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.nameRegexp = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.scopeRegexp = reader.string();
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.versionRegexp = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {

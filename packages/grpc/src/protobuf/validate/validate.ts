@@ -2429,14 +2429,14 @@ export const StringRules = {
 
 function createBaseBytesRules(): BytesRules {
   return {
-    const: new Uint8Array(),
+    const: new Uint8Array(0),
     len: "0",
     minLen: "0",
     maxLen: "0",
     pattern: "",
-    prefix: new Uint8Array(),
-    suffix: new Uint8Array(),
-    contains: new Uint8Array(),
+    prefix: new Uint8Array(0),
+    suffix: new Uint8Array(0),
+    contains: new Uint8Array(0),
     in: [],
     notIn: [],
     wellKnown: undefined,

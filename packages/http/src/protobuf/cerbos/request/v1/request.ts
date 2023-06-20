@@ -141,6 +141,9 @@ export interface ServerInfoRequest {
 
 export interface ListPoliciesRequest {
   includeDisabled: boolean;
+  nameRegexp: string;
+  scopeRegexp: string;
+  versionRegexp: string;
 }
 
 export interface GetPolicyRequest {
@@ -512,12 +515,20 @@ export const ServerInfoRequest = {
 
 export const ListPoliciesRequest = {
   fromJSON(object: any): ListPoliciesRequest {
-    return { includeDisabled: isSet(object.includeDisabled) ? Boolean(object.includeDisabled) : false };
+    return {
+      includeDisabled: isSet(object.includeDisabled) ? Boolean(object.includeDisabled) : false,
+      nameRegexp: isSet(object.nameRegexp) ? String(object.nameRegexp) : "",
+      scopeRegexp: isSet(object.scopeRegexp) ? String(object.scopeRegexp) : "",
+      versionRegexp: isSet(object.versionRegexp) ? String(object.versionRegexp) : "",
+    };
   },
 
   toJSON(message: ListPoliciesRequest): unknown {
     const obj: any = {};
     message.includeDisabled !== undefined && (obj.includeDisabled = message.includeDisabled);
+    message.nameRegexp !== undefined && (obj.nameRegexp = message.nameRegexp);
+    message.scopeRegexp !== undefined && (obj.scopeRegexp = message.scopeRegexp);
+    message.versionRegexp !== undefined && (obj.versionRegexp = message.versionRegexp);
     return obj;
   },
 };
