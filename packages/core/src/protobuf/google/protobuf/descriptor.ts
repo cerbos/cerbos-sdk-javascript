@@ -6,7 +6,6 @@ export interface FileOptions {
   javaPackage: string;
   javaOuterClassname: string;
   javaMultipleFiles: boolean;
-  /** @deprecated */
   javaGenerateEqualsAndHash: boolean;
   javaStringCheckUtf8: boolean;
   optimizeFor: FileOptions_OptimizeMode;
@@ -38,7 +37,6 @@ export interface MessageOptions {
   noStandardDescriptorAccessor: boolean;
   deprecated: boolean;
   mapEntry: boolean;
-  /** @deprecated */
   deprecatedLegacyJsonFieldConflicts: boolean;
   uninterpretedOption: UninterpretedOption[];
 }

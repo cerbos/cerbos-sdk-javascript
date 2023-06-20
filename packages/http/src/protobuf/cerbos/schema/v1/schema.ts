@@ -70,7 +70,7 @@ export const Schema = {
   fromJSON(object: any): Schema {
     return {
       id: isSet(object.id) ? String(object.id) : "",
-      definition: isSet(object.definition) ? bytesFromBase64(object.definition) : new Uint8Array(),
+      definition: isSet(object.definition) ? bytesFromBase64(object.definition) : new Uint8Array(0),
     };
   },
 
@@ -78,7 +78,7 @@ export const Schema = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.definition !== undefined &&
-      (obj.definition = base64FromBytes(message.definition !== undefined ? message.definition : new Uint8Array()));
+      (obj.definition = base64FromBytes(message.definition !== undefined ? message.definition : new Uint8Array(0)));
     return obj;
   },
 };

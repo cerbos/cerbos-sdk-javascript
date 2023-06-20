@@ -8,7 +8,6 @@ export interface FileOptions {
   javaPackage: string;
   javaOuterClassname: string;
   javaMultipleFiles: boolean;
-  /** @deprecated */
   javaGenerateEqualsAndHash: boolean;
   javaStringCheckUtf8: boolean;
   optimizeFor: FileOptions_OptimizeMode;
@@ -40,7 +39,6 @@ export interface MessageOptions {
   noStandardDescriptorAccessor: boolean;
   deprecated: boolean;
   mapEntry: boolean;
-  /** @deprecated */
   deprecatedLegacyJsonFieldConflicts: boolean;
   uninterpretedOption: UninterpretedOption[];
 }
@@ -770,7 +768,7 @@ function createBaseUninterpretedOption(): UninterpretedOption {
     positiveIntValue: "0",
     negativeIntValue: "0",
     doubleValue: 0,
-    stringValue: new Uint8Array(),
+    stringValue: new Uint8Array(0),
     aggregateValue: "",
   };
 }

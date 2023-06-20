@@ -77,7 +77,7 @@ export const ValidationError = {
 };
 
 function createBaseSchema(): Schema {
-  return { id: "", definition: new Uint8Array() };
+  return { id: "", definition: new Uint8Array(0) };
 }
 
 export const Schema = {
