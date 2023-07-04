@@ -49,7 +49,7 @@
     "patch-package": "7.0.0",
     "prettier": "2.8.8",
     "prettier-plugin-pkg": "0.17.1",
-    "ts-jest": "29.1.0",
+    "ts-jest": "29.1.1",
     "ts-node": "10.9.1",
     "ts-proto": "1.150.1",
     "typescript": "5.1.6"
