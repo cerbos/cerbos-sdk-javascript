@@ -52,6 +52,6 @@
     "ts-jest": "29.1.0",
     "ts-node": "10.9.1",
     "ts-proto": "1.150.1",
-    "typescript": "5.1.3"
+    "typescript": "5.1.6"
   }
 }
