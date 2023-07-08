@@ -51,7 +51,7 @@
     "prettier-plugin-pkg": "0.18.0",
     "ts-jest": "29.1.1",
     "ts-node": "10.9.1",
-    "ts-proto": "1.150.1",
+    "ts-proto": "1.151.1",
     "typescript": "5.1.6"
   },
   "overrides": {
