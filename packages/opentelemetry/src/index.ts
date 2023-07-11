@@ -94,7 +94,7 @@ export class CerbosInstrumentation implements Instrumentation {
         service: Service,
         rpc: RPC,
         request: _Request<Service, RPC>,
-        adminCredentials?: AdminCredentials
+        adminCredentials?: AdminCredentials,
       ): Promise<_Response<Service, RPC>> => {
         const span = this.tracer
           .startSpan(`cerbos.rpc.${service}.${rpc}`, { kind: SpanKind.CLIENT })
@@ -112,7 +112,7 @@ export class CerbosInstrumentation implements Instrumentation {
             service,
             rpc,
             request,
-            adminCredentials
+            adminCredentials,
           )) as _Response<Service, RPC>;
 
           span.setAttribute(SemanticAttributes.RPC_GRPC_STATUS_CODE, 0);
@@ -128,7 +128,7 @@ export class CerbosInstrumentation implements Instrumentation {
             if (error instanceof NotOK) {
               span.setAttribute(
                 SemanticAttributes.RPC_GRPC_STATUS_CODE,
-                error.code
+                error.code,
               );
             }
           }

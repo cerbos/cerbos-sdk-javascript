@@ -7,7 +7,7 @@ export class Slice {
   private constructor(
     { memory, deallocate }: Exports,
     public readonly offset: number,
-    public readonly length: number
+    public readonly length: number,
   ) {
     this.memory = memory;
     this._deallocate = deallocate;
@@ -21,7 +21,7 @@ export class Slice {
     return new Slice(
       exports,
       Number(offsetAndLength >> BigInt(32)),
-      Number(offsetAndLength & BigInt(0xffffffff))
+      Number(offsetAndLength & BigInt(0xffffffff)),
     );
   }
 

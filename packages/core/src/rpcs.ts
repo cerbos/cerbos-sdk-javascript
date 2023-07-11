@@ -61,7 +61,7 @@ export type _RPC<Service> = Service extends _Service
 /** @internal */
 export type _Request<
   Service extends _Service,
-  RPC extends _RPC<Service>
+  RPC extends _RPC<Service>,
 > = _Services[Service][RPC] extends unknown[]
   ? _Services[Service][RPC][0]
   : never;
@@ -69,7 +69,7 @@ export type _Request<
 /** @internal */
 export type _Response<
   Service extends _Service,
-  RPC extends _RPC<Service>
+  RPC extends _RPC<Service>,
 > = _Services[Service][RPC] extends unknown[]
   ? _Services[Service][RPC][1]
   : never;

@@ -112,7 +112,7 @@ export class HTTP extends Client {
       service,
       rpc,
       request,
-      adminCredentials
+      adminCredentials,
     ) => {
       const { method, path, requestType, responseType, serializeRequest } =
         services[service][rpc] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
@@ -256,15 +256,16 @@ const services: Services = {
 
 const headers = (
   { headers: optionalHeaders, playgroundInstance }: Options,
-  adminCredentials: AdminCredentials | undefined
+  adminCredentials: AdminCredentials | undefined,
 ): Headers => {
   const headers = new Headers(
-    typeof optionalHeaders === "function" ? optionalHeaders() : optionalHeaders
+    typeof optionalHeaders === "function" ? optionalHeaders() : optionalHeaders,
   );
 
   headers.set(
     "User-Agent",
-    headers.get("User-Agent")?.concat(" ", defaultUserAgent) ?? defaultUserAgent
+    headers.get("User-Agent")?.concat(" ", defaultUserAgent) ??
+      defaultUserAgent,
   );
 
   if (adminCredentials) {
@@ -272,7 +273,7 @@ const headers = (
       "Authorization",
       `Basic ${
         btoa(`${adminCredentials.username}:${adminCredentials.password}`) ?? ""
-      }`
+      }`,
     );
   }
 

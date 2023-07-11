@@ -15,6 +15,6 @@ export class PlanExpression {
     /**
      * The operands on which to invoke the operator.
      */
-    public operands: PlanExpressionOperand[]
+    public operands: PlanExpressionOperand[],
   ) {}
 }

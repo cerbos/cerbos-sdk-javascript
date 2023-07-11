@@ -101,7 +101,7 @@ describe("CerbosInstrumentation", () => {
                 id: "test",
               },
               action: "edit",
-            })
+            }),
         );
 
         expect(result).toEqual({ value: false });
@@ -135,7 +135,7 @@ describe("CerbosInstrumentation", () => {
                   id: "test",
                 },
                 action: "",
-              })
+              }),
           );
 
           expect(result).toEqual({
@@ -155,7 +155,7 @@ describe("CerbosInstrumentation", () => {
               [SemanticAttributes.RPC_GRPC_STATUS_CODE]:
                 Status.INVALID_ARGUMENT,
               "cerbos.error": expect.stringContaining(
-                "invalid CheckResourcesRequest"
+                "invalid CheckResourcesRequest",
               ),
             },
             status: {
@@ -164,6 +164,6 @@ describe("CerbosInstrumentation", () => {
           });
         });
       }
-    }
+    },
   );
 });

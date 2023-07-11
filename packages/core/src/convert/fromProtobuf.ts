@@ -114,13 +114,13 @@ const checkResourcesResultFromProtobuf = ({
 };
 
 const actionsFromProtobuf = (
-  actions: Record<string, EffectProtobuf>
+  actions: Record<string, EffectProtobuf>,
 ): Record<string, Effect | undefined> =>
   Object.fromEntries(
     Object.entries(actions).map(([action, effect]) => [
       action,
       effectFromProtobuf(effect),
-    ])
+    ]),
   );
 
 const effectFromProtobuf = (effect: EffectProtobuf): Effect =>
@@ -137,7 +137,7 @@ const validationErrorFromProtobuf = ({
 });
 
 const validationErrorSourceFromProtobuf = (
-  source: ValidationError_Source
+  source: ValidationError_Source,
 ): ValidationErrorSource => {
   switch (source) {
     case ValidationError_Source.SOURCE_PRINCIPAL:
@@ -150,7 +150,7 @@ const validationErrorSourceFromProtobuf = (
       throw new Error(
         `Unexpected validation error source ${source} (${
           ValidationError_Source[source as number] ?? "unrecognized"
-        })`
+        })`,
       );
   }
 };
@@ -217,7 +217,7 @@ const policyMetadataFromProtobuf = ({
 type OmitPolicyBase<T extends Policy> = OmitFromEach<T, keyof PolicyBase>;
 
 const policyTypeFromProtobuf = (
-  policyType: PolicyProtobuf["policyType"]
+  policyType: PolicyProtobuf["policyType"],
 ): OmitPolicyBase<Policy> => {
   if (!policyType) {
     throw new Error("Unknown policy type: undefined");
@@ -235,7 +235,7 @@ const policyTypeFromProtobuf = (
 
     default:
       throw new Error(
-        `Unknown policy type: ${JSON.stringify(policyType, null, 2)}`
+        `Unknown policy type: ${JSON.stringify(policyType, null, 2)}`,
       );
   }
 };
@@ -269,7 +269,7 @@ const conditionFromProtobuf = ({ condition }: ConditionProtobuf): Condition => {
 
     default:
       throw new Error(
-        `Unknown condition type: ${JSON.stringify(condition, null, 2)}`
+        `Unknown condition type: ${JSON.stringify(condition, null, 2)}`,
       );
   }
 };
@@ -470,7 +470,7 @@ const planKindFromProtobuf = (kind: PlanResourcesFilter_Kind): PlanKind => {
       throw new Error(
         `Unexpected PlanResources filter kind ${kind} (${
           PlanResourcesFilter_Kind[kind as number] ?? "unrecognized"
-        })`
+        })`,
       );
   }
 };
@@ -486,7 +486,7 @@ const planOperandFromProtobuf = ({
     case "expression":
       return new PlanExpression(
         node.expression.operator,
-        node.expression.operands.map(planOperandFromProtobuf)
+        node.expression.operands.map(planOperandFromProtobuf),
       );
 
     case "value":

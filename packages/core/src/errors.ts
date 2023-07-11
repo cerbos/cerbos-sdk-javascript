@@ -79,7 +79,7 @@ export class NotOK extends Error {
     /**
      * Additional error details.
      */
-    public readonly details: string
+    public readonly details: string,
   ) {
     super(`gRPC error ${code} (${Status[code]}): ${details}`);
     this.name = this.constructor.name;
@@ -109,7 +109,7 @@ const details = (error: unknown): string => {
 
 const has = <K extends string>(
   object: unknown,
-  property: K
+  property: K,
 ): object is Record<K, unknown> =>
   !!object && Object.prototype.hasOwnProperty.call(object, property);
 
@@ -123,7 +123,7 @@ export class ValidationFailed extends Error {
     /**
      * The validation errors that occurred.
      */
-    public readonly validationErrors: ValidationError[]
+    public readonly validationErrors: ValidationError[],
   ) {
     super("Input failed schema validation");
     this.name = this.constructor.name;
