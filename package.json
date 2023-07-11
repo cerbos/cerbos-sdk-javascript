@@ -53,5 +53,13 @@
     "ts-node": "10.9.1",
     "ts-proto": "1.150.1",
     "typescript": "5.1.6"
+  },
+  "overrides": {
+    "@microsoft/api-extractor@7.36.1": {
+      "semver": "7.5.4"
+    },
+    "@rushstack/node-core-library@3.59.5": {
+      "semver": "7.5.4"
+    }
   }
 }
