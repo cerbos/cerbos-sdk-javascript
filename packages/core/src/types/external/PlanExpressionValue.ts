@@ -10,6 +10,6 @@ export class PlanExpressionValue {
     /**
      * The constant value.
      */
-    public value: Value
+    public value: Value,
   ) {}
 }

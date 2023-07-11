@@ -12,7 +12,7 @@ export class SchemaDefinition {
     /**
      * The UTF-8 bytes of the JSON-serialized schema definition.
      */
-    public readonly bytes: Uint8Array
+    public readonly bytes: Uint8Array,
   ) {}
 
   /**

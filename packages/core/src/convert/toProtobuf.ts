@@ -111,7 +111,7 @@ const policyToProtobuf = (policy: Policy): PolicyProtobuf => {
 };
 
 const policyTypeToProtobuf = (
-  policy: Policy
+  policy: Policy,
 ): Exclude<PolicyProtobuf["policyType"], undefined> => {
   if (policyIsDerivedRoles(policy)) {
     return {
@@ -307,7 +307,7 @@ const schemaToProtobuf = ({ id, definition }: SchemaInput): Schema => ({
 });
 
 const schemaDefinitionToProtobuf = (
-  definition: SchemaDefinitionInput
+  definition: SchemaDefinitionInput,
 ): Uint8Array => {
   if (definition instanceof Uint8Array) {
     return definition;

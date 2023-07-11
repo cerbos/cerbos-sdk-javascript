@@ -104,7 +104,7 @@ describe("Client", () => {
             {
               tls: false,
               ...options,
-            }
+            },
           ),
       });
     }
@@ -221,7 +221,7 @@ describe("Client", () => {
                   effectiveDerivedRoles: ["OWNER"],
                 },
                 outputs,
-              })
+              }),
             );
           });
         });
@@ -423,14 +423,14 @@ describe("Client", () => {
                     outputs,
                   }),
                 ],
-              })
+              }),
             );
           });
 
           describe("when configured to throw on validation error", () => {
             it("throws on validation error", async () => {
               await expect(
-                clients.throwOnValidationError.checkResources(request)
+                clients.throwOnValidationError.checkResources(request),
               ).rejects.toThrow(
                 new ValidationFailed([
                   {
@@ -443,7 +443,7 @@ describe("Client", () => {
                     message: "expected string, but got number",
                     source: ValidationErrorSource.RESOURCE,
                   },
-                ])
+                ]),
               );
             });
           });
@@ -568,7 +568,7 @@ describe("Client", () => {
             describe("when configured to throw on validation error", () => {
               it("throws on validation error", async () => {
                 await expect(
-                  clients.throwOnValidationError.planResources(request)
+                  clients.throwOnValidationError.planResources(request),
                 ).rejects.toThrow(
                   new ValidationFailed([
                     {
@@ -576,7 +576,7 @@ describe("Client", () => {
                       message: "does not match pattern '[A-Z]{2}'",
                       source: ValidationErrorSource.PRINCIPAL,
                     },
-                  ])
+                  ]),
                 );
               });
             });
@@ -603,7 +603,7 @@ describe("Client", () => {
 
             expect(result).toEqual({
               buildDate: expect.stringMatching(
-                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/,
               ) as unknown,
               commit: expect.stringMatching(/^[0-9a-f]{40}$/) as unknown,
               version: cerbosVersion,
@@ -619,15 +619,15 @@ describe("Client", () => {
                 roles: [],
               },
               resources: [],
-            })
+            }),
           ).rejects.toThrow(
             new NotOK(
               Status.INVALID_ARGUMENT,
-              "invalid CheckResourcesRequest.Principal: embedded message failed validation | caused by: invalid Principal.Id: value length must be at least 1 runes"
-            )
+              "invalid CheckResourcesRequest.Principal: embedded message failed validation | caused by: invalid Principal.Id: value length must be at least 1 runes",
+            ),
           );
         });
-      }
+      },
     );
   });
 
@@ -692,7 +692,7 @@ describe("Client", () => {
 
         if (!policiesVersion) {
           throw new Error(
-            `Couldn't determine policies version for Cerbos version ${cerbosVersion}`
+            `Couldn't determine policies version for Cerbos version ${cerbosVersion}`,
           );
         }
 
@@ -701,8 +701,8 @@ describe("Client", () => {
             `${policiesDirectory}/${policiesVersion}/document.yaml`,
             {
               encoding: "utf-8",
-            }
-          )
+            },
+          ),
         ) as Policy;
 
         it.each([
@@ -803,7 +803,7 @@ describe("Client", () => {
       describe("reloadStore", () => {
         it("reloads the store", async () => {
           await expect(
-            reloadable.reloadStore({ wait: true })
+            reloadable.reloadStore({ wait: true }),
           ).resolves.toBeUndefined();
         });
       });

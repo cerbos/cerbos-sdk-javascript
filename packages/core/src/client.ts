@@ -59,7 +59,7 @@ export type _Transport = <Service extends _Service, RPC extends _RPC<Service>>(
   service: Service,
   rpc: RPC,
   request: _Request<Service, RPC>,
-  adminCredentials?: AdminCredentials
+  adminCredentials?: AdminCredentials,
 ) => Promise<_Response<Service, RPC>>;
 
 /** @internal */
@@ -142,7 +142,7 @@ export abstract class Client {
   /** @internal */
   protected constructor(
     transport: _Transport,
-    private readonly options: Options
+    private readonly options: Options,
   ) {
     this.transport = transport;
     for (const instrumenter of instrumenters) {
@@ -180,11 +180,11 @@ export abstract class Client {
    * ```
    */
   public async addOrUpdatePolicies(
-    request: AddOrUpdatePoliciesRequest
+    request: AddOrUpdatePoliciesRequest,
   ): Promise<void> {
     await this.admin(
       "addOrUpdatePolicy",
-      addOrUpdatePoliciesRequestToProtobuf(request)
+      addOrUpdatePoliciesRequestToProtobuf(request),
     );
   }
 
@@ -214,11 +214,11 @@ export abstract class Client {
    * ```
    */
   public async addOrUpdateSchemas(
-    request: AddOrUpdateSchemasRequest
+    request: AddOrUpdateSchemasRequest,
   ): Promise<void> {
     await this.admin(
       "addOrUpdateSchema",
-      addOrUpdateSchemasRequestToProtobuf(request)
+      addOrUpdateSchemasRequestToProtobuf(request),
     );
   }
 
@@ -245,7 +245,7 @@ export abstract class Client {
    * ```
    */
   public async checkResource(
-    request: CheckResourceRequest
+    request: CheckResourceRequest,
   ): Promise<CheckResourcesResult> {
     const { resource, actions, ...rest } = request;
 
@@ -300,13 +300,13 @@ export abstract class Client {
    * ```
    */
   public async checkResources(
-    request: CheckResourcesRequest
+    request: CheckResourcesRequest,
   ): Promise<CheckResourcesResponse> {
     const response = checkResourcesResponseFromProtobuf(
       await this.cerbos(
         "checkResources",
-        checkResourcesRequestToProtobuf(request)
-      )
+        checkResourcesRequestToProtobuf(request),
+      ),
     );
 
     this.handleValidationErrors(response);
@@ -364,10 +364,10 @@ export abstract class Client {
    * ```
    */
   public async deleteSchemas(
-    request: DeleteSchemasRequest
+    request: DeleteSchemasRequest,
   ): Promise<DeleteSchemasResponse> {
     return deleteSchemasResponseFromProtobuf(
-      await this.admin("deleteSchema", deleteSchemasRequestToProtobuf(request))
+      await this.admin("deleteSchema", deleteSchemasRequestToProtobuf(request)),
     );
   }
 
@@ -391,13 +391,13 @@ export abstract class Client {
    * ```
    */
   public async disablePolicies(
-    request: DisablePoliciesRequest
+    request: DisablePoliciesRequest,
   ): Promise<DisablePoliciesResponse> {
     return disablePoliciesResponseFromProtobuf(
       await this.admin(
         "disablePolicy",
-        disablePoliciesRequestToProtobuf(request)
-      )
+        disablePoliciesRequestToProtobuf(request),
+      ),
     );
   }
 
@@ -443,10 +443,13 @@ export abstract class Client {
    * ```
    */
   public async enablePolicies(
-    request: EnablePoliciesRequest
+    request: EnablePoliciesRequest,
   ): Promise<EnablePoliciesResponse> {
     return enablePoliciesResponseFromProtobuf(
-      await this.admin("enablePolicy", enablePoliciesRequestToProtobuf(request))
+      await this.admin(
+        "enablePolicy",
+        enablePoliciesRequestToProtobuf(request),
+      ),
     );
   }
 
@@ -490,10 +493,10 @@ export abstract class Client {
    * ```
    */
   public async getPolicies(
-    request: GetPoliciesRequest
+    request: GetPoliciesRequest,
   ): Promise<GetPoliciesResponse> {
     return getPoliciesResponseFromProtobuf(
-      await this.admin("getPolicy", getPoliciesRequestToProtobuf(request))
+      await this.admin("getPolicy", getPoliciesRequestToProtobuf(request)),
     );
   }
 
@@ -561,10 +564,10 @@ export abstract class Client {
    * ```
    */
   public async getSchemas(
-    request: GetSchemasRequest
+    request: GetSchemasRequest,
   ): Promise<GetSchemasResponse> {
     return getSchemasResponseFromProtobuf(
-      await this.admin("getSchema", getSchemasRequestToProtobuf(request))
+      await this.admin("getSchema", getSchemasRequestToProtobuf(request)),
     );
   }
 
@@ -616,10 +619,10 @@ export abstract class Client {
    * ```
    */
   public async listPolicies(
-    request: ListPoliciesRequest = {}
+    request: ListPoliciesRequest = {},
   ): Promise<ListPoliciesResponse> {
     return listPoliciesResponseFromProtobuf(
-      await this.admin("listPolicies", listPoliciesRequestToProtobuf(request))
+      await this.admin("listPolicies", listPoliciesRequestToProtobuf(request)),
     );
   }
 
@@ -659,13 +662,13 @@ export abstract class Client {
    * ```
    */
   public async planResources(
-    request: PlanResourcesRequest
+    request: PlanResourcesRequest,
   ): Promise<PlanResourcesResponse> {
     const response = planResourcesResponseFromProtobuf(
       await this.cerbos(
         "planResources",
-        planResourcesRequestToProtobuf(request)
-      )
+        planResourcesRequestToProtobuf(request),
+      ),
     );
 
     this.handleValidationErrors(response);
@@ -703,19 +706,19 @@ export abstract class Client {
 
   private async admin<RPC extends _RPC<"admin">>(
     rpc: RPC,
-    request: _Request<"admin", RPC>
+    request: _Request<"admin", RPC>,
   ): Promise<_Response<"admin", RPC>> {
     return await this.transport(
       "admin",
       rpc,
       request,
-      this.options.adminCredentials
+      this.options.adminCredentials,
     );
   }
 
   private async cerbos<RPC extends _RPC<"cerbos">>(
     rpc: RPC,
-    request: _Request<"cerbos", RPC>
+    request: _Request<"cerbos", RPC>,
   ): Promise<_Response<"cerbos", RPC>> {
     return await this.transport("cerbos", rpc, request);
   }

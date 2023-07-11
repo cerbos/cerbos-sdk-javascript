@@ -66,7 +66,7 @@ export class CheckResourcesResponse {
    * @returns `undefined` if the resource is not present in the results.
    */
   public findResult(
-    resource: ResourceSearch
+    resource: ResourceSearch,
   ): CheckResourcesResult | undefined {
     const { kind, id, policyVersion, scope } = resource;
 
@@ -76,7 +76,7 @@ export class CheckResourcesResponse {
         resource.id === id &&
         (policyVersion === undefined ||
           resource.policyVersion === policyVersion) &&
-        (scope === undefined || resource.scope === scope)
+        (scope === undefined || resource.scope === scope),
     );
   }
 

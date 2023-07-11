@@ -62,5 +62,5 @@ export type DecodedJWTPayload = Record<string, Value>;
  * @public
  */
 export type DecodeJWTPayload = (
-  jwt: JWT
+  jwt: JWT,
 ) => DecodedJWTPayload | Promise<DecodedJWTPayload>;

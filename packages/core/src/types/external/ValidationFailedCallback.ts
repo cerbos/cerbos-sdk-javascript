@@ -6,5 +6,5 @@ import type { ValidationError } from "./ValidationError";
  * @public
  */
 export type ValidationFailedCallback = (
-  validationErrors: ValidationError[]
+  validationErrors: ValidationError[],
 ) => void;

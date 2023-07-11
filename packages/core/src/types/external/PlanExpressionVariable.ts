@@ -8,6 +8,6 @@ export class PlanExpressionVariable {
     /**
      * The name of the variable.
      */
-    public name: string
+    public name: string,
   ) {}
 }

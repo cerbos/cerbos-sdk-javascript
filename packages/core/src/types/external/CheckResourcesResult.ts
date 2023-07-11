@@ -64,7 +64,7 @@ export class CheckResourcesResult {
    */
   public allAllowed(): boolean {
     return Object.values(this.actions).every(
-      (effect) => effect === Effect.ALLOW
+      (effect) => effect === Effect.ALLOW,
     );
   }
 
@@ -73,7 +73,7 @@ export class CheckResourcesResult {
    */
   public allowedActions(): string[] {
     return Object.keys(this.actions).filter(
-      (action) => this.actions[action] === Effect.ALLOW
+      (action) => this.actions[action] === Effect.ALLOW,
     );
   }
 

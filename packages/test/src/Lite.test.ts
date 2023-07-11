@@ -21,7 +21,7 @@ describe("Lite", () => {
       {
         decodeJWTPayload: ({ token }): DecodedJWTPayload =>
           UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
-      }
+      },
     );
 
     describe("checkResource", () => {
@@ -90,7 +90,7 @@ describe("Lite", () => {
               effectiveDerivedRoles: [],
             },
             outputs: [],
-          })
+          }),
         );
       });
     });
@@ -260,7 +260,7 @@ describe("Lite", () => {
                 outputs: [],
               }),
             ],
-          })
+          }),
         );
       });
 

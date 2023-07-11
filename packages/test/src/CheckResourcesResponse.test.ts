@@ -77,7 +77,7 @@ describe("CheckResourcesResponse", () => {
 
       it("returns undefined", () => {
         expect(
-          response.allAllowed({ kind: "document", id: "not_found" })
+          response.allAllowed({ kind: "document", id: "not_found" }),
         ).toBeUndefined();
       });
     });
@@ -105,7 +105,7 @@ describe("CheckResourcesResponse", () => {
     describe("when the resource is found", () => {
       it("returns a list of allowed actions", () => {
         expect(
-          response.allowedActions({ kind: "document", id: "found" })
+          response.allowedActions({ kind: "document", id: "found" }),
         ).toEqual(["allowed"]);
       });
     });
@@ -113,7 +113,7 @@ describe("CheckResourcesResponse", () => {
     describe("when the resource is not found", () => {
       it("returns undefined", () => {
         expect(
-          response.allowedActions({ kind: "document", id: "not_found" })
+          response.allowedActions({ kind: "document", id: "not_found" }),
         ).toBeUndefined();
       });
     });
@@ -147,7 +147,7 @@ describe("CheckResourcesResponse", () => {
       describe("when the action is allowed", () => {
         it("returns true", () => {
           expect(
-            response.isAllowed({ resource: search, action: "allowed" })
+            response.isAllowed({ resource: search, action: "allowed" }),
           ).toBe(true);
         });
       });
@@ -155,7 +155,7 @@ describe("CheckResourcesResponse", () => {
       describe("when the action is denied", () => {
         it("returns false", () => {
           expect(
-            response.isAllowed({ resource: search, action: "denied" })
+            response.isAllowed({ resource: search, action: "denied" }),
           ).toBe(false);
         });
       });
@@ -163,7 +163,7 @@ describe("CheckResourcesResponse", () => {
       describe("when the action is not present", () => {
         it("returns undefined", () => {
           expect(
-            response.isAllowed({ resource: search, action: "unknown" })
+            response.isAllowed({ resource: search, action: "unknown" }),
           ).toBeUndefined();
         });
       });
@@ -175,7 +175,7 @@ describe("CheckResourcesResponse", () => {
           response.isAllowed({
             resource: { kind: "document", id: "not_found" },
             action: "any",
-          })
+          }),
         ).toBeUndefined();
       });
     });
@@ -218,7 +218,7 @@ describe("CheckResourcesResponse", () => {
         expect(response.findResult(search)).toEqual(
           buildResult({
             resource: { ...search, policyVersion: "default", scope: "" },
-          })
+          }),
         );
       });
     });
@@ -232,7 +232,7 @@ describe("CheckResourcesResponse", () => {
 
       it("finds a matching result", () => {
         expect(response.findResult(search)).toEqual(
-          buildResult({ resource: { ...search, scope: "" } })
+          buildResult({ resource: { ...search, scope: "" } }),
         );
       });
     });
@@ -246,7 +246,7 @@ describe("CheckResourcesResponse", () => {
 
       it("finds a matching result", () => {
         expect(response.findResult(search)).toEqual(
-          buildResult({ resource: { ...search, policyVersion: "default" } })
+          buildResult({ resource: { ...search, policyVersion: "default" } }),
         );
       });
     });
@@ -261,7 +261,7 @@ describe("CheckResourcesResponse", () => {
 
       it("finds a matching result", () => {
         expect(response.findResult(search)).toEqual(
-          buildResult({ resource: search })
+          buildResult({ resource: search }),
         );
       });
     });
@@ -269,7 +269,7 @@ describe("CheckResourcesResponse", () => {
     describe("without a match", () => {
       it("returns undefined", () => {
         expect(
-          response.findResult({ kind: "unknown", id: "missing" })
+          response.findResult({ kind: "unknown", id: "missing" }),
         ).toBeUndefined();
       });
     });

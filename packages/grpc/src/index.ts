@@ -104,7 +104,7 @@ export class GRPC extends Client {
       service,
       rpc,
       request,
-      adminCredentials
+      adminCredentials,
     ) => {
       const { path, requestSerialize, responseDeserialize } = services[service][
         rpc
@@ -128,15 +128,15 @@ export class GRPC extends Client {
               reject(
                 new NotOK(
                   (error.code || Status.UNKNOWN) as Status,
-                  error.details
-                )
+                  error.details,
+                ),
               );
             } else if (!response) {
               reject(new NotOK(Status.UNKNOWN, "No response received"));
             } else {
               resolve(response);
             }
-          }
+          },
         );
       });
     };
@@ -161,7 +161,7 @@ export class GRPC extends Client {
 
 type Endpoint<
   Service extends _Service,
-  RPC extends _RPC<Service>
+  RPC extends _RPC<Service>,
 > = MethodDefinition<_Request<Service, RPC>, _Response<Service, RPC>>;
 
 type Services = {
@@ -182,7 +182,7 @@ const channelCredentials = ({
   if (!tls) {
     if (playgroundInstance) {
       throw new Error(
-        "TLS is required when connecting to a playground instance"
+        "TLS is required when connecting to a playground instance",
       );
     }
 
@@ -199,7 +199,7 @@ const channelCredentials = ({
 
   if (playgroundInstance) {
     return channelCredentials.compose(
-      playgroundCallCredentials(playgroundInstance)
+      playgroundCallCredentials(playgroundInstance),
     );
   }
 
@@ -214,13 +214,13 @@ const adminCallCredentials = ({
     const metadata = new Metadata();
     metadata.set(
       "authorization",
-      `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`
+      `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`,
     );
     callback(null, metadata);
   });
 
 const playgroundCallCredentials = (
-  playgroundInstance: string
+  playgroundInstance: string,
 ): CallCredentials =>
   CallCredentials.createFromMetadataGenerator((_, callback) => {
     const metadata = new Metadata();

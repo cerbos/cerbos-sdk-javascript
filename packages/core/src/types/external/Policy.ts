@@ -23,7 +23,7 @@ export const policyIsDerivedRoles = (policy: Policy): policy is DerivedRoles =>
  * @public
  */
 export const policyIsPrincipalPolicy = (
-  policy: Policy
+  policy: Policy,
 ): policy is PrincipalPolicy => "principalPolicy" in policy;
 
 /**
@@ -32,5 +32,5 @@ export const policyIsPrincipalPolicy = (
  * @public
  */
 export const policyIsResourcePolicy = (
-  policy: Policy
+  policy: Policy,
 ): policy is ResourcePolicy => "resourcePolicy" in policy;

@@ -11,7 +11,7 @@ interface Implementation<Service extends _Service, RPC extends _RPC<Service>> {
   method: keyof RPCs;
   transformRequest: (
     request: _Request<Service, RPC>,
-    decodeJWTPayload: DecodeJWTPayload
+    decodeJWTPayload: DecodeJWTPayload,
   ) => Promise<unknown>;
   transformResponse: (response: unknown) => _Response<Service, RPC>;
 }
@@ -70,7 +70,7 @@ export class Server {
 
   public constructor(
     { instance }: WebAssembly.WebAssemblyInstantiatedSource,
-    private readonly decodeJWTPayload: DecodeJWTPayload
+    private readonly decodeJWTPayload: DecodeJWTPayload,
   ) {
     this.exports = instance.exports as Exports;
   }
@@ -78,7 +78,7 @@ export class Server {
   public async perform<Service extends _Service, RPC extends _RPC<Service>>(
     service: Service,
     rpc: RPC,
-    request: _Request<Service, RPC>
+    request: _Request<Service, RPC>,
   ): Promise<_Response<Service, RPC>> {
     const implementation = services[service][rpc] as
       | Implementation<typeof service, typeof rpc>
@@ -87,14 +87,14 @@ export class Server {
     if (!implementation) {
       throw new NotOK(
         Status.UNIMPLEMENTED,
-        `${rpc} is not yet implemented in Cerbos Lite`
+        `${rpc} is not yet implemented in Cerbos Lite`,
       );
     }
 
     const { method, transformRequest, transformResponse } = implementation;
 
     const requestBytes = new TextEncoder().encode(
-      JSON.stringify(await transformRequest(request, this.decodeJWTPayload))
+      JSON.stringify(await transformRequest(request, this.decodeJWTPayload)),
     );
 
     const requestSlice = Slice.allocate(this.exports, requestBytes.length);

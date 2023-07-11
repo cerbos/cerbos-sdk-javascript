@@ -78,27 +78,27 @@ export class Lite extends Client {
 
     this.server = server(
       instantiate(source, options),
-      options.decodeJWTPayload ?? cannotDecodeJWTPayload
+      options.decodeJWTPayload ?? cannotDecodeJWTPayload,
     );
   }
 }
 
 const cannotDecodeJWTPayload: DecodeJWTPayload = () => {
   throw new Error(
-    "Received a JWT in auxiliary data, but a `decodeJWTPayload` function was not provided to the Lite client constructor"
+    "Received a JWT in auxiliary data, but a `decodeJWTPayload` function was not provided to the Lite client constructor",
   );
 };
 
 const server = async (
   instantiatedSource: Promise<WebAssembly.WebAssemblyInstantiatedSource>,
-  decodeJWTPayload: DecodeJWTPayload
+  decodeJWTPayload: DecodeJWTPayload,
 ): Promise<Server> => {
   return new Server(await instantiatedSource, decodeJWTPayload);
 };
 
 const instantiate = async (
   source: Source,
-  { now = Date.now }: Options
+  { now = Date.now }: Options,
 ): Promise<WebAssembly.WebAssemblyInstantiatedSource> => {
   const imports = {
     env: {

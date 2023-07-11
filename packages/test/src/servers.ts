@@ -65,10 +65,10 @@ export const ports = async (): Promise<Ports> => {
 const port = (
   containers: DockerComposeContainer[],
   service: string,
-  targetPort: number
+  targetPort: number,
 ): number => {
   const container = containers.find(
-    (container) => container.Service === service
+    (container) => container.Service === service,
   );
 
   if (!container) {
@@ -76,12 +76,12 @@ const port = (
   }
 
   const publisher = (container.Publishers ?? []).find(
-    (publisher) => publisher.TargetPort === targetPort
+    (publisher) => publisher.TargetPort === targetPort,
   );
 
   if (!publisher || publisher.PublishedPort === 0) {
     throw new Error(
-      `Couldn't find published port ${targetPort} for ${service} service`
+      `Couldn't find published port ${targetPort} for ${service} service`,
     );
   }
 

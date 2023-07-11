@@ -17,13 +17,13 @@ export const buildResultsForResources = ({
   ["document", "image"].flatMap((kind) =>
     policyVersions.flatMap((policyVersion) =>
       scopes.map((scope) =>
-        buildResult({ resource: { kind, id, policyVersion, scope } })
-      )
-    )
+        buildResult({ resource: { kind, id, policyVersion, scope } }),
+      ),
+    ),
   );
 
 export const buildResult = (
-  result: Partial<ConstructorParameters<typeof CheckResourcesResult>[0]>
+  result: Partial<ConstructorParameters<typeof CheckResourcesResult>[0]>,
 ): CheckResourcesResult =>
   new CheckResourcesResult({
     resource: {
@@ -49,7 +49,7 @@ type Result<T> = { value: T } | { error: unknown };
 
 export const captureSpan = async <T>(
   spanExporter: InMemorySpanExporter,
-  fn: () => Promise<T>
+  fn: () => Promise<T>,
 ): Promise<[Result<T>, ReadableSpan]> => {
   const parentSpan = trace
     .getTracer("@cerbos/test")
@@ -65,7 +65,7 @@ export const captureSpan = async <T>(
       } finally {
         parentSpan.end();
       }
-    }
+    },
   );
 
   const childSpan = spanExporter
