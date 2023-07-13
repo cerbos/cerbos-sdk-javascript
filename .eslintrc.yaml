@@ -40,6 +40,7 @@ rules:
     - error
     - alphabetize:
         order: asc
+        orderImportKind: asc
         caseInsensitive: true
       newlines-between: always
   no-console: error
