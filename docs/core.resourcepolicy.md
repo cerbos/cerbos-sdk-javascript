@@ -17,5 +17,5 @@ export interface ResourcePolicy extends PolicyBase
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [resourcePolicy](./core.resourcepolicy.resourcepolicy.md) |  | { resource: string; version: string; importDerivedRoles?: string\[\]; rules: [ResourceRule](./core.resourcerule.md)<!-- -->\[\]; scope?: string; schemas?: [SchemaRefs](./core.schemarefs.md) \| undefined; variables?: [Variables](./core.variables.md) \| undefined; } | The policy body. |
+|  [resourcePolicy](./core.resourcepolicy.resourcepolicy.md) |  | [ResourcePolicyBody](./core.resourcepolicybody.md) | The policy body. |
 

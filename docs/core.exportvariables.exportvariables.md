@@ -9,8 +9,5 @@ A set of exported variables.
 **Signature:**
 
 ```typescript
-exportVariables: {
-        name: string;
-        definitions: Record<string, string>;
-    };
+exportVariables: ExportVariablesBody;
 ```

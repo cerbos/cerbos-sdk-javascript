@@ -9,11 +9,5 @@ The policy body.
 **Signature:**
 
 ```typescript
-principalPolicy: {
-        principal: string;
-        version: string;
-        rules: PrincipalRule[];
-        scope?: string;
-        variables?: Variables | undefined;
-    };
+principalPolicy: PrincipalPolicyBody;
 ```

@@ -1,6 +1,3 @@
-import type { ExportVariablesBody } from "./ExportVariablesBody";
-import type { PolicyBase } from "./PolicyBase";
-
 /**
  * A set of {@link https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html#export | exported variables}
  * to be reused in other policies.
@@ -10,9 +7,14 @@ import type { PolicyBase } from "./PolicyBase";
  *
  * @public
  */
-export interface ExportVariables extends PolicyBase {
+export interface ExportVariablesBody {
   /**
-   * A set of exported variables.
+   * The name to use when importing the set of variables.
    */
-  exportVariables: ExportVariablesBody;
+  name: string;
+
+  /**
+   * Variable expressions.
+   */
+  definitions: Record<string, string>;
 }

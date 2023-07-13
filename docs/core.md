@@ -51,11 +51,13 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [DeleteSchemasResponse](./core.deleteschemasresponse.md) | The outcome of deleting schemas. |
 |  [DerivedRoleDefinition](./core.derivedroledefinition.md) | The definition of a [derived role](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html)<!-- -->. |
 |  [DerivedRoles](./core.derivedroles.md) | A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) to augment static RBAC roles with contextual data to provide more fine-grained control at runtime. |
+|  [DerivedRolesBody](./core.derivedrolesbody.md) | A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) to augment static RBAC roles with contextual data to provide more fine-grained control at runtime. |
 |  [DisablePoliciesRequest](./core.disablepoliciesrequest.md) | Input to [Client.disablePolicies()](./core.client.disablepolicies.md)<!-- -->. |
 |  [DisablePoliciesResponse](./core.disablepoliciesresponse.md) | The outcome of disabling policies. |
 |  [EnablePoliciesRequest](./core.enablepoliciesrequest.md) | Input to [Client.enablePolicies()](./core.client.enablepolicies.md)<!-- -->. |
 |  [EnablePoliciesResponse](./core.enablepoliciesresponse.md) | The outcome of enabling policies. |
 |  [ExportVariables](./core.exportvariables.md) | A set of [exported variables](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html#export) to be reused in other policies. |
+|  [ExportVariablesBody](./core.exportvariablesbody.md) | A set of [exported variables](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html#export) to be reused in other policies. |
 |  [GetPoliciesRequest](./core.getpoliciesrequest.md) | Input to [Client.getPolicies()](./core.client.getpolicies.md)<!-- -->. |
 |  [GetPoliciesResponse](./core.getpoliciesresponse.md) | Fetched policies. |
 |  [GetSchemasRequest](./core.getschemasrequest.md) | Input to [Client.getSchemas()](./core.client.getschemas.md)<!-- -->. |
@@ -81,12 +83,14 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [PolicyMetadata](./core.policymetadata.md) | Metadata describing a policy. |
 |  [Principal](./core.principal.md) | A principal (often a user, but potentially another actor like a service account) to authorize. |
 |  [PrincipalPolicy](./core.principalpolicy.md) | A [policy](https://docs.cerbos.dev/cerbos/latest/policies/principal_policies.html) defining overrides for a specific user. |
+|  [PrincipalPolicyBody](./core.principalpolicybody.md) | A [policy](https://docs.cerbos.dev/cerbos/latest/policies/principal_policies.html) defining overrides for a specific user. |
 |  [PrincipalRule](./core.principalrule.md) | A rule defining an override for a specific user. |
 |  [PrincipalRuleAction](./core.principalruleaction.md) | An override for a given action for a specific user. |
 |  [ReloadStoreRequest](./core.reloadstorerequest.md) | Input to [Client.reloadStore()](./core.client.reloadstore.md)<!-- -->. |
 |  [Resource](./core.resource.md) | A resource on which to check a principal's permissions. |
 |  [ResourceCheck](./core.resourcecheck.md) | A [Resource](./core.resource.md) and list of actions on which to check a principal's permissions. |
 |  [ResourcePolicy](./core.resourcepolicy.md) | A [policy](https://docs.cerbos.dev/cerbos/latest/policies/resource_policies.html) defining rules for actions that can be performed on a given resource. |
+|  [ResourcePolicyBody](./core.resourcepolicybody.md) | A [policy](https://docs.cerbos.dev/cerbos/latest/policies/resource_policies.html) defining rules for actions that can be performed on a given resource. |
 |  [ResourceRule](./core.resourcerule.md) | A rule for actions that can be performed on a given resource. |
 |  [Schema](./core.schema.md) | A JSON schema used to validate principal or resource attributes. |
 |  [SchemaInput](./core.schemainput.md) | A JSON schema to be used to validate principal or resource attributes. |
