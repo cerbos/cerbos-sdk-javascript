@@ -1,5 +1,6 @@
 import type { DerivedRoleDefinition } from "./DerivedRoleDefinition";
 import type { PolicyBase } from "./PolicyBase";
+import type { Variables } from "./Variables";
 
 /**
  * A set of {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html | derived roles}
@@ -21,5 +22,13 @@ export interface DerivedRoles extends PolicyBase {
      * The definitions of the derived roles.
      */
     definitions: DerivedRoleDefinition[];
+
+    /**
+     * {@link https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html | Variables} defined for use in conditions.
+     *
+     * @remarks
+     * Requires the Cerbos policy decision point server to be at least v0.29.
+     */
+    variables?: Variables | undefined;
   };
 }

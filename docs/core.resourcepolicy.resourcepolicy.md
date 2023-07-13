@@ -16,5 +16,6 @@ resourcePolicy: {
         rules: ResourceRule[];
         scope?: string;
         schemas?: SchemaRefs | undefined;
+        variables?: Variables | undefined;
     };
 ```

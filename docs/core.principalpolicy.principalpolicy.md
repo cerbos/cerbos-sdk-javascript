@@ -14,5 +14,6 @@ principalPolicy: {
         version: string;
         rules: PrincipalRule[];
         scope?: string;
+        variables?: Variables | undefined;
     };
 ```

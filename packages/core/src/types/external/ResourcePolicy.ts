@@ -1,6 +1,7 @@
 import type { PolicyBase } from "./PolicyBase";
 import type { ResourceRule } from "./ResourceRule";
 import type { SchemaRefs } from "./SchemaRefs";
+import type { Variables } from "./Variables";
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/resource_policies.html | policy} defining rules for actions that can be performed on a given resource.
@@ -46,5 +47,13 @@ export interface ResourcePolicy extends PolicyBase {
      * {@link https://docs.cerbos.dev/cerbos/latest/policies/schemas.html | Schemas} for principal and resource attributes.
      */
     schemas?: SchemaRefs | undefined;
+
+    /**
+     * {@link https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html | Variables} defined for use in conditions.
+     *
+     * @remarks
+     * Requires the Cerbos policy decision point server to be at least v0.29.
+     */
+    variables?: Variables | undefined;
   };
 }

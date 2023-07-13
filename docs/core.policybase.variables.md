@@ -4,6 +4,11 @@
 
 ## PolicyBase.variables property
 
+> Warning: This API is now obsolete.
+> 
+> Define variables within the policy body instead (provided the Cerbos policy decision point server is at least v0.29).
+> 
+
 Variable expressions defined for the policy.
 
 **Signature:**

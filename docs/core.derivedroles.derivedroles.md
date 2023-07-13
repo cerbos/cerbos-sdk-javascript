@@ -12,5 +12,6 @@ A set of derived roles.
 derivedRoles: {
         name: string;
         definitions: DerivedRoleDefinition[];
+        variables?: Variables | undefined;
     };
 ```

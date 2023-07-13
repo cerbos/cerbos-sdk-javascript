@@ -1,5 +1,6 @@
 import type { PolicyBase } from "./PolicyBase";
 import type { PrincipalRule } from "./PrincipalRule";
+import type { Variables } from "./Variables";
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/principal_policies.html | policy} defining overrides for a specific user.
@@ -35,5 +36,13 @@ export interface PrincipalPolicy extends PolicyBase {
      * {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html | Scope} of the policy.
      */
     scope?: string;
+
+    /**
+     * {@link https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html | Variables} defined for use in conditions.
+     *
+     * @remarks
+     * Requires the Cerbos policy decision point server to be at least v0.29.
+     */
+    variables?: Variables | undefined;
   };
 }
