@@ -88,10 +88,12 @@ export interface AddOrUpdatePolicyRequest {
 
 export interface ListAuditLogEntriesRequest {
   kind: ListAuditLogEntriesRequest_Kind;
-  filter?: { $case: "tail"; tail: number } | { $case: "between"; between: ListAuditLogEntriesRequest_TimeRange } | {
-    $case: "since";
-    since: Duration;
-  } | { $case: "lookup"; lookup: string };
+  filter?:
+    | { $case: "tail"; tail: number }
+    | { $case: "between"; between: ListAuditLogEntriesRequest_TimeRange }
+    | { $case: "since"; since: Duration }
+    | { $case: "lookup"; lookup: string }
+    | undefined;
 }
 
 export enum ListAuditLogEntriesRequest_Kind {

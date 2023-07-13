@@ -77,10 +77,11 @@ export interface PlanResourcesFilter_Expression {
 }
 
 export interface PlanResourcesFilter_Expression_Operand {
-  node?: { $case: "value"; value: any | undefined } | {
-    $case: "expression";
-    expression: PlanResourcesFilter_Expression;
-  } | { $case: "variable"; variable: string };
+  node?:
+    | { $case: "value"; value: any | undefined }
+    | { $case: "expression"; expression: PlanResourcesFilter_Expression }
+    | { $case: "variable"; variable: string }
+    | undefined;
 }
 
 export interface PlanResourcesOutput {
@@ -589,10 +590,10 @@ export const AuxData_JwtEntry = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
+declare const self: any | undefined;
+declare const window: any | undefined;
+declare const global: any | undefined;
+const tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }

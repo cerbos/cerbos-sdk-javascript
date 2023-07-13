@@ -62,7 +62,8 @@ export interface FieldRules {
     | { $case: "map"; map: MapRules }
     | { $case: "any"; any: AnyRules }
     | { $case: "duration"; duration: DurationRules }
-    | { $case: "timestamp"; timestamp: TimestampRules };
+    | { $case: "timestamp"; timestamp: TimestampRules }
+    | undefined;
 }
 
 export interface FloatRules {
@@ -226,7 +227,8 @@ export interface StringRules {
     | { $case: "uriRef"; uriRef: boolean }
     | { $case: "address"; address: boolean }
     | { $case: "uuid"; uuid: boolean }
-    | { $case: "wellKnownRegex"; wellKnownRegex: KnownRegex };
+    | { $case: "wellKnownRegex"; wellKnownRegex: KnownRegex }
+    | undefined;
   strict: boolean;
   ignoreEmpty: boolean;
 }
@@ -242,7 +244,11 @@ export interface BytesRules {
   contains: Uint8Array;
   in: Uint8Array[];
   notIn: Uint8Array[];
-  wellKnown?: { $case: "ip"; ip: boolean } | { $case: "ipv4"; ipv4: boolean } | { $case: "ipv6"; ipv6: boolean };
+  wellKnown?:
+    | { $case: "ip"; ip: boolean }
+    | { $case: "ipv4"; ipv4: boolean }
+    | { $case: "ipv6"; ipv6: boolean }
+    | undefined;
   ignoreEmpty: boolean;
 }
 
@@ -1221,10 +1227,10 @@ export const TimestampRules = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
+declare const self: any | undefined;
+declare const window: any | undefined;
+declare const global: any | undefined;
+const tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }

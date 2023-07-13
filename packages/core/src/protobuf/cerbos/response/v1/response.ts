@@ -132,7 +132,7 @@ export interface ListAuditLogEntriesResponse {
   entry?: { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry } | {
     $case: "decisionLogEntry";
     decisionLogEntry: DecisionLogEntry;
-  };
+  } | undefined;
 }
 
 export interface ServerInfoResponse {

@@ -11,7 +11,8 @@ export interface HttpRule {
     | { $case: "post"; post: string }
     | { $case: "delete"; delete: string }
     | { $case: "patch"; patch: string }
-    | { $case: "custom"; custom: CustomHttpPattern };
+    | { $case: "custom"; custom: CustomHttpPattern }
+    | undefined;
   body: string;
   responseBody: string;
   additionalBindings: HttpRule[];

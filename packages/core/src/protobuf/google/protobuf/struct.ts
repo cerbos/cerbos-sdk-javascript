@@ -22,7 +22,8 @@ export interface Value {
     | { $case: "stringValue"; stringValue: string }
     | { $case: "boolValue"; boolValue: boolean }
     | { $case: "structValue"; structValue: { [key: string]: any } | undefined }
-    | { $case: "listValue"; listValue: Array<any> | undefined };
+    | { $case: "listValue"; listValue: Array<any> | undefined }
+    | undefined;
 }
 
 export interface ListValue {

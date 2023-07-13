@@ -45,10 +45,11 @@ export interface PlanResourcesFilter_Expression {
 }
 
 export interface PlanResourcesFilter_Expression_Operand {
-  node?: { $case: "value"; value: any | undefined } | {
-    $case: "expression";
-    expression: PlanResourcesFilter_Expression;
-  } | { $case: "variable"; variable: string };
+  node?:
+    | { $case: "value"; value: any | undefined }
+    | { $case: "expression"; expression: PlanResourcesFilter_Expression }
+    | { $case: "variable"; variable: string }
+    | undefined;
 }
 
 export interface PlanResourcesOutput {

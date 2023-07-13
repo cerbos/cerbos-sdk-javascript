@@ -86,10 +86,12 @@ export interface AddOrUpdatePolicyRequest {
 
 export interface ListAuditLogEntriesRequest {
   kind: ListAuditLogEntriesRequest_Kind;
-  filter?: { $case: "tail"; tail: number } | { $case: "between"; between: ListAuditLogEntriesRequest_TimeRange } | {
-    $case: "since";
-    since: Duration;
-  } | { $case: "lookup"; lookup: string };
+  filter?:
+    | { $case: "tail"; tail: number }
+    | { $case: "between"; between: ListAuditLogEntriesRequest_TimeRange }
+    | { $case: "since"; since: Duration }
+    | { $case: "lookup"; lookup: string }
+    | undefined;
 }
 
 export enum ListAuditLogEntriesRequest_Kind {
@@ -652,10 +654,10 @@ export const ReloadStoreRequest = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
+declare const self: any | undefined;
+declare const window: any | undefined;
+declare const global: any | undefined;
+const tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }

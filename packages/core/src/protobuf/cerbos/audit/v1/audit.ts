@@ -27,7 +27,7 @@ export interface DecisionLogEntry {
   method?: { $case: "checkResources"; checkResources: DecisionLogEntry_CheckResources } | {
     $case: "planResources";
     planResources: DecisionLogEntry_PlanResources;
-  };
+  } | undefined;
   metadata: { [key: string]: MetaValues };
 }
 
