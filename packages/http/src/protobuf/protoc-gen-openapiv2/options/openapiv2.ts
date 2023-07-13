@@ -604,57 +604,58 @@ export const Swagger = {
 
   toJSON(message: Swagger): unknown {
     const obj: any = {};
-    message.swagger !== undefined && (obj.swagger = message.swagger);
-    message.info !== undefined &&
-      (obj.info = message.info ? Info.toJSON(message.info) : undefined);
-    message.host !== undefined && (obj.host = message.host);
-    message.basePath !== undefined && (obj.basePath = message.basePath);
-    if (message.schemes) {
+    if (message.swagger !== "") {
+      obj.swagger = message.swagger;
+    }
+    if (message.info !== undefined) {
+      obj.info = Info.toJSON(message.info);
+    }
+    if (message.host !== "") {
+      obj.host = message.host;
+    }
+    if (message.basePath !== "") {
+      obj.basePath = message.basePath;
+    }
+    if (message.schemes?.length) {
       obj.schemes = message.schemes.map((e) => schemeToJSON(e));
-    } else {
-      obj.schemes = [];
     }
-    if (message.consumes) {
-      obj.consumes = message.consumes.map((e) => e);
-    } else {
-      obj.consumes = [];
+    if (message.consumes?.length) {
+      obj.consumes = message.consumes;
     }
-    if (message.produces) {
-      obj.produces = message.produces.map((e) => e);
-    } else {
-      obj.produces = [];
+    if (message.produces?.length) {
+      obj.produces = message.produces;
     }
-    obj.responses = {};
     if (message.responses) {
-      Object.entries(message.responses).forEach(([k, v]) => {
-        obj.responses[k] = Response.toJSON(v);
-      });
+      const entries = Object.entries(message.responses);
+      if (entries.length > 0) {
+        obj.responses = {};
+        entries.forEach(([k, v]) => {
+          obj.responses[k] = Response.toJSON(v);
+        });
+      }
     }
-    message.securityDefinitions !== undefined &&
-      (obj.securityDefinitions = message.securityDefinitions
-        ? SecurityDefinitions.toJSON(message.securityDefinitions)
-        : undefined);
-    if (message.security) {
-      obj.security = message.security.map((e) =>
-        e ? SecurityRequirement.toJSON(e) : undefined,
+    if (message.securityDefinitions !== undefined) {
+      obj.securityDefinitions = SecurityDefinitions.toJSON(
+        message.securityDefinitions,
       );
-    } else {
-      obj.security = [];
     }
-    if (message.tags) {
-      obj.tags = message.tags.map((e) => (e ? Tag.toJSON(e) : undefined));
-    } else {
-      obj.tags = [];
+    if (message.security?.length) {
+      obj.security = message.security.map((e) => SecurityRequirement.toJSON(e));
     }
-    message.externalDocs !== undefined &&
-      (obj.externalDocs = message.externalDocs
-        ? ExternalDocumentation.toJSON(message.externalDocs)
-        : undefined);
-    obj.extensions = {};
+    if (message.tags?.length) {
+      obj.tags = message.tags.map((e) => Tag.toJSON(e));
+    }
+    if (message.externalDocs !== undefined) {
+      obj.externalDocs = ExternalDocumentation.toJSON(message.externalDocs);
+    }
     if (message.extensions) {
-      Object.entries(message.extensions).forEach(([k, v]) => {
-        obj.extensions[k] = v;
-      });
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -670,9 +671,12 @@ export const Swagger_ResponsesEntry = {
 
   toJSON(message: Swagger_ResponsesEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? Response.toJSON(message.value) : undefined);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = Response.toJSON(message.value);
+    }
     return obj;
   },
 };
@@ -687,8 +691,12 @@ export const Swagger_ExtensionsEntry = {
 
   toJSON(message: Swagger_ExtensionsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -743,59 +751,57 @@ export const Operation = {
 
   toJSON(message: Operation): unknown {
     const obj: any = {};
-    if (message.tags) {
-      obj.tags = message.tags.map((e) => e);
-    } else {
-      obj.tags = [];
+    if (message.tags?.length) {
+      obj.tags = message.tags;
     }
-    message.summary !== undefined && (obj.summary = message.summary);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.externalDocs !== undefined &&
-      (obj.externalDocs = message.externalDocs
-        ? ExternalDocumentation.toJSON(message.externalDocs)
-        : undefined);
-    message.operationId !== undefined &&
-      (obj.operationId = message.operationId);
-    if (message.consumes) {
-      obj.consumes = message.consumes.map((e) => e);
-    } else {
-      obj.consumes = [];
+    if (message.summary !== "") {
+      obj.summary = message.summary;
     }
-    if (message.produces) {
-      obj.produces = message.produces.map((e) => e);
-    } else {
-      obj.produces = [];
+    if (message.description !== "") {
+      obj.description = message.description;
     }
-    obj.responses = {};
+    if (message.externalDocs !== undefined) {
+      obj.externalDocs = ExternalDocumentation.toJSON(message.externalDocs);
+    }
+    if (message.operationId !== "") {
+      obj.operationId = message.operationId;
+    }
+    if (message.consumes?.length) {
+      obj.consumes = message.consumes;
+    }
+    if (message.produces?.length) {
+      obj.produces = message.produces;
+    }
     if (message.responses) {
-      Object.entries(message.responses).forEach(([k, v]) => {
-        obj.responses[k] = Response.toJSON(v);
-      });
+      const entries = Object.entries(message.responses);
+      if (entries.length > 0) {
+        obj.responses = {};
+        entries.forEach(([k, v]) => {
+          obj.responses[k] = Response.toJSON(v);
+        });
+      }
     }
-    if (message.schemes) {
+    if (message.schemes?.length) {
       obj.schemes = message.schemes.map((e) => schemeToJSON(e));
-    } else {
-      obj.schemes = [];
     }
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-    if (message.security) {
-      obj.security = message.security.map((e) =>
-        e ? SecurityRequirement.toJSON(e) : undefined,
-      );
-    } else {
-      obj.security = [];
+    if (message.deprecated === true) {
+      obj.deprecated = message.deprecated;
     }
-    obj.extensions = {};
+    if (message.security?.length) {
+      obj.security = message.security.map((e) => SecurityRequirement.toJSON(e));
+    }
     if (message.extensions) {
-      Object.entries(message.extensions).forEach(([k, v]) => {
-        obj.extensions[k] = v;
-      });
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
     }
-    message.parameters !== undefined &&
-      (obj.parameters = message.parameters
-        ? Parameters.toJSON(message.parameters)
-        : undefined);
+    if (message.parameters !== undefined) {
+      obj.parameters = Parameters.toJSON(message.parameters);
+    }
     return obj;
   },
 };
@@ -810,9 +816,12 @@ export const Operation_ResponsesEntry = {
 
   toJSON(message: Operation_ResponsesEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? Response.toJSON(message.value) : undefined);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = Response.toJSON(message.value);
+    }
     return obj;
   },
 };
@@ -827,8 +836,12 @@ export const Operation_ExtensionsEntry = {
 
   toJSON(message: Operation_ExtensionsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -844,12 +857,8 @@ export const Parameters = {
 
   toJSON(message: Parameters): unknown {
     const obj: any = {};
-    if (message.headers) {
-      obj.headers = message.headers.map((e) =>
-        e ? HeaderParameter.toJSON(e) : undefined,
-      );
-    } else {
-      obj.headers = [];
+    if (message.headers?.length) {
+      obj.headers = message.headers.map((e) => HeaderParameter.toJSON(e));
     }
     return obj;
   },
@@ -868,13 +877,21 @@ export const HeaderParameter = {
 
   toJSON(message: HeaderParameter): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.type !== undefined &&
-      (obj.type = headerParameter_TypeToJSON(message.type));
-    message.format !== undefined && (obj.format = message.format);
-    message.required !== undefined && (obj.required = message.required);
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.type !== 0) {
+      obj.type = headerParameter_TypeToJSON(message.type);
+    }
+    if (message.format !== "") {
+      obj.format = message.format;
+    }
+    if (message.required === true) {
+      obj.required = message.required;
+    }
     return obj;
   },
 };
@@ -892,12 +909,21 @@ export const Header = {
 
   toJSON(message: Header): unknown {
     const obj: any = {};
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.type !== undefined && (obj.type = message.type);
-    message.format !== undefined && (obj.format = message.format);
-    message.default !== undefined && (obj.default = message.default);
-    message.pattern !== undefined && (obj.pattern = message.pattern);
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.type !== "") {
+      obj.type = message.type;
+    }
+    if (message.format !== "") {
+      obj.format = message.format;
+    }
+    if (message.default !== "") {
+      obj.default = message.default;
+    }
+    if (message.pattern !== "") {
+      obj.pattern = message.pattern;
+    }
     return obj;
   },
 };
@@ -938,27 +964,38 @@ export const Response = {
 
   toJSON(message: Response): unknown {
     const obj: any = {};
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.schema !== undefined &&
-      (obj.schema = message.schema ? Schema.toJSON(message.schema) : undefined);
-    obj.headers = {};
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.schema !== undefined) {
+      obj.schema = Schema.toJSON(message.schema);
+    }
     if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = Header.toJSON(v);
-      });
+      const entries = Object.entries(message.headers);
+      if (entries.length > 0) {
+        obj.headers = {};
+        entries.forEach(([k, v]) => {
+          obj.headers[k] = Header.toJSON(v);
+        });
+      }
     }
-    obj.examples = {};
     if (message.examples) {
-      Object.entries(message.examples).forEach(([k, v]) => {
-        obj.examples[k] = v;
-      });
+      const entries = Object.entries(message.examples);
+      if (entries.length > 0) {
+        obj.examples = {};
+        entries.forEach(([k, v]) => {
+          obj.examples[k] = v;
+        });
+      }
     }
-    obj.extensions = {};
     if (message.extensions) {
-      Object.entries(message.extensions).forEach(([k, v]) => {
-        obj.extensions[k] = v;
-      });
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -974,9 +1011,12 @@ export const Response_HeadersEntry = {
 
   toJSON(message: Response_HeadersEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? Header.toJSON(message.value) : undefined);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = Header.toJSON(message.value);
+    }
     return obj;
   },
 };
@@ -991,8 +1031,12 @@ export const Response_ExamplesEntry = {
 
   toJSON(message: Response_ExamplesEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -1007,8 +1051,12 @@ export const Response_ExtensionsEntry = {
 
   toJSON(message: Response_ExtensionsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -1041,25 +1089,32 @@ export const Info = {
 
   toJSON(message: Info): unknown {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.termsOfService !== undefined &&
-      (obj.termsOfService = message.termsOfService);
-    message.contact !== undefined &&
-      (obj.contact = message.contact
-        ? Contact.toJSON(message.contact)
-        : undefined);
-    message.license !== undefined &&
-      (obj.license = message.license
-        ? License.toJSON(message.license)
-        : undefined);
-    message.version !== undefined && (obj.version = message.version);
-    obj.extensions = {};
+    if (message.title !== "") {
+      obj.title = message.title;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.termsOfService !== "") {
+      obj.termsOfService = message.termsOfService;
+    }
+    if (message.contact !== undefined) {
+      obj.contact = Contact.toJSON(message.contact);
+    }
+    if (message.license !== undefined) {
+      obj.license = License.toJSON(message.license);
+    }
+    if (message.version !== "") {
+      obj.version = message.version;
+    }
     if (message.extensions) {
-      Object.entries(message.extensions).forEach(([k, v]) => {
-        obj.extensions[k] = v;
-      });
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -1075,8 +1130,12 @@ export const Info_ExtensionsEntry = {
 
   toJSON(message: Info_ExtensionsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -1092,9 +1151,15 @@ export const Contact = {
 
   toJSON(message: Contact): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.url !== undefined && (obj.url = message.url);
-    message.email !== undefined && (obj.email = message.email);
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.url !== "") {
+      obj.url = message.url;
+    }
+    if (message.email !== "") {
+      obj.email = message.email;
+    }
     return obj;
   },
 };
@@ -1109,8 +1174,12 @@ export const License = {
 
   toJSON(message: License): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.url !== undefined && (obj.url = message.url);
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.url !== "") {
+      obj.url = message.url;
+    }
     return obj;
   },
 };
@@ -1125,9 +1194,12 @@ export const ExternalDocumentation = {
 
   toJSON(message: ExternalDocumentation): unknown {
     const obj: any = {};
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.url !== undefined && (obj.url = message.url);
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.url !== "") {
+      obj.url = message.url;
+    }
     return obj;
   },
 };
@@ -1151,18 +1223,21 @@ export const Schema = {
 
   toJSON(message: Schema): unknown {
     const obj: any = {};
-    message.jsonSchema !== undefined &&
-      (obj.jsonSchema = message.jsonSchema
-        ? JSONSchema.toJSON(message.jsonSchema)
-        : undefined);
-    message.discriminator !== undefined &&
-      (obj.discriminator = message.discriminator);
-    message.readOnly !== undefined && (obj.readOnly = message.readOnly);
-    message.externalDocs !== undefined &&
-      (obj.externalDocs = message.externalDocs
-        ? ExternalDocumentation.toJSON(message.externalDocs)
-        : undefined);
-    message.example !== undefined && (obj.example = message.example);
+    if (message.jsonSchema !== undefined) {
+      obj.jsonSchema = JSONSchema.toJSON(message.jsonSchema);
+    }
+    if (message.discriminator !== "") {
+      obj.discriminator = message.discriminator;
+    }
+    if (message.readOnly === true) {
+      obj.readOnly = message.readOnly;
+    }
+    if (message.externalDocs !== undefined) {
+      obj.externalDocs = ExternalDocumentation.toJSON(message.externalDocs);
+    }
+    if (message.example !== "") {
+      obj.example = message.example;
+    }
     return obj;
   },
 };
@@ -1230,63 +1305,93 @@ export const JSONSchema = {
 
   toJSON(message: JSONSchema): unknown {
     const obj: any = {};
-    message.ref !== undefined && (obj.ref = message.ref);
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.default !== undefined && (obj.default = message.default);
-    message.readOnly !== undefined && (obj.readOnly = message.readOnly);
-    message.example !== undefined && (obj.example = message.example);
-    message.multipleOf !== undefined && (obj.multipleOf = message.multipleOf);
-    message.maximum !== undefined && (obj.maximum = message.maximum);
-    message.exclusiveMaximum !== undefined &&
-      (obj.exclusiveMaximum = message.exclusiveMaximum);
-    message.minimum !== undefined && (obj.minimum = message.minimum);
-    message.exclusiveMinimum !== undefined &&
-      (obj.exclusiveMinimum = message.exclusiveMinimum);
-    message.maxLength !== undefined && (obj.maxLength = message.maxLength);
-    message.minLength !== undefined && (obj.minLength = message.minLength);
-    message.pattern !== undefined && (obj.pattern = message.pattern);
-    message.maxItems !== undefined && (obj.maxItems = message.maxItems);
-    message.minItems !== undefined && (obj.minItems = message.minItems);
-    message.uniqueItems !== undefined &&
-      (obj.uniqueItems = message.uniqueItems);
-    message.maxProperties !== undefined &&
-      (obj.maxProperties = message.maxProperties);
-    message.minProperties !== undefined &&
-      (obj.minProperties = message.minProperties);
-    if (message.required) {
-      obj.required = message.required.map((e) => e);
-    } else {
-      obj.required = [];
+    if (message.ref !== "") {
+      obj.ref = message.ref;
     }
-    if (message.array) {
-      obj.array = message.array.map((e) => e);
-    } else {
-      obj.array = [];
+    if (message.title !== "") {
+      obj.title = message.title;
     }
-    if (message.type) {
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.default !== "") {
+      obj.default = message.default;
+    }
+    if (message.readOnly === true) {
+      obj.readOnly = message.readOnly;
+    }
+    if (message.example !== "") {
+      obj.example = message.example;
+    }
+    if (message.multipleOf !== 0) {
+      obj.multipleOf = message.multipleOf;
+    }
+    if (message.maximum !== 0) {
+      obj.maximum = message.maximum;
+    }
+    if (message.exclusiveMaximum === true) {
+      obj.exclusiveMaximum = message.exclusiveMaximum;
+    }
+    if (message.minimum !== 0) {
+      obj.minimum = message.minimum;
+    }
+    if (message.exclusiveMinimum === true) {
+      obj.exclusiveMinimum = message.exclusiveMinimum;
+    }
+    if (message.maxLength !== "0") {
+      obj.maxLength = message.maxLength;
+    }
+    if (message.minLength !== "0") {
+      obj.minLength = message.minLength;
+    }
+    if (message.pattern !== "") {
+      obj.pattern = message.pattern;
+    }
+    if (message.maxItems !== "0") {
+      obj.maxItems = message.maxItems;
+    }
+    if (message.minItems !== "0") {
+      obj.minItems = message.minItems;
+    }
+    if (message.uniqueItems === true) {
+      obj.uniqueItems = message.uniqueItems;
+    }
+    if (message.maxProperties !== "0") {
+      obj.maxProperties = message.maxProperties;
+    }
+    if (message.minProperties !== "0") {
+      obj.minProperties = message.minProperties;
+    }
+    if (message.required?.length) {
+      obj.required = message.required;
+    }
+    if (message.array?.length) {
+      obj.array = message.array;
+    }
+    if (message.type?.length) {
       obj.type = message.type.map((e) =>
         jSONSchema_JSONSchemaSimpleTypesToJSON(e),
       );
-    } else {
-      obj.type = [];
     }
-    message.format !== undefined && (obj.format = message.format);
-    if (message.enum) {
-      obj.enum = message.enum.map((e) => e);
-    } else {
-      obj.enum = [];
+    if (message.format !== "") {
+      obj.format = message.format;
     }
-    message.fieldConfiguration !== undefined &&
-      (obj.fieldConfiguration = message.fieldConfiguration
-        ? JSONSchema_FieldConfiguration.toJSON(message.fieldConfiguration)
-        : undefined);
-    obj.extensions = {};
+    if (message.enum?.length) {
+      obj.enum = message.enum;
+    }
+    if (message.fieldConfiguration !== undefined) {
+      obj.fieldConfiguration = JSONSchema_FieldConfiguration.toJSON(
+        message.fieldConfiguration,
+      );
+    }
     if (message.extensions) {
-      Object.entries(message.extensions).forEach(([k, v]) => {
-        obj.extensions[k] = v;
-      });
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -1303,8 +1408,9 @@ export const JSONSchema_FieldConfiguration = {
 
   toJSON(message: JSONSchema_FieldConfiguration): unknown {
     const obj: any = {};
-    message.pathParamName !== undefined &&
-      (obj.pathParamName = message.pathParamName);
+    if (message.pathParamName !== "") {
+      obj.pathParamName = message.pathParamName;
+    }
     return obj;
   },
 };
@@ -1319,8 +1425,12 @@ export const JSONSchema_ExtensionsEntry = {
 
   toJSON(message: JSONSchema_ExtensionsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -1346,18 +1456,23 @@ export const Tag = {
 
   toJSON(message: Tag): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.externalDocs !== undefined &&
-      (obj.externalDocs = message.externalDocs
-        ? ExternalDocumentation.toJSON(message.externalDocs)
-        : undefined);
-    obj.extensions = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.externalDocs !== undefined) {
+      obj.externalDocs = ExternalDocumentation.toJSON(message.externalDocs);
+    }
     if (message.extensions) {
-      Object.entries(message.extensions).forEach(([k, v]) => {
-        obj.extensions[k] = v;
-      });
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -1373,8 +1488,12 @@ export const Tag_ExtensionsEntry = {
 
   toJSON(message: Tag_ExtensionsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -1395,11 +1514,14 @@ export const SecurityDefinitions = {
 
   toJSON(message: SecurityDefinitions): unknown {
     const obj: any = {};
-    obj.security = {};
     if (message.security) {
-      Object.entries(message.security).forEach(([k, v]) => {
-        obj.security[k] = SecurityScheme.toJSON(v);
-      });
+      const entries = Object.entries(message.security);
+      if (entries.length > 0) {
+        obj.security = {};
+        entries.forEach(([k, v]) => {
+          obj.security[k] = SecurityScheme.toJSON(v);
+        });
+      }
     }
     return obj;
   },
@@ -1417,11 +1539,12 @@ export const SecurityDefinitions_SecurityEntry = {
 
   toJSON(message: SecurityDefinitions_SecurityEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value
-        ? SecurityScheme.toJSON(message.value)
-        : undefined);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = SecurityScheme.toJSON(message.value);
+    }
     return obj;
   },
 };
@@ -1452,24 +1575,38 @@ export const SecurityScheme = {
 
   toJSON(message: SecurityScheme): unknown {
     const obj: any = {};
-    message.type !== undefined &&
-      (obj.type = securityScheme_TypeToJSON(message.type));
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.name !== undefined && (obj.name = message.name);
-    message.in !== undefined && (obj.in = securityScheme_InToJSON(message.in));
-    message.flow !== undefined &&
-      (obj.flow = securityScheme_FlowToJSON(message.flow));
-    message.authorizationUrl !== undefined &&
-      (obj.authorizationUrl = message.authorizationUrl);
-    message.tokenUrl !== undefined && (obj.tokenUrl = message.tokenUrl);
-    message.scopes !== undefined &&
-      (obj.scopes = message.scopes ? Scopes.toJSON(message.scopes) : undefined);
-    obj.extensions = {};
+    if (message.type !== 0) {
+      obj.type = securityScheme_TypeToJSON(message.type);
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.in !== 0) {
+      obj.in = securityScheme_InToJSON(message.in);
+    }
+    if (message.flow !== 0) {
+      obj.flow = securityScheme_FlowToJSON(message.flow);
+    }
+    if (message.authorizationUrl !== "") {
+      obj.authorizationUrl = message.authorizationUrl;
+    }
+    if (message.tokenUrl !== "") {
+      obj.tokenUrl = message.tokenUrl;
+    }
+    if (message.scopes !== undefined) {
+      obj.scopes = Scopes.toJSON(message.scopes);
+    }
     if (message.extensions) {
-      Object.entries(message.extensions).forEach(([k, v]) => {
-        obj.extensions[k] = v;
-      });
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -1485,8 +1622,12 @@ export const SecurityScheme_ExtensionsEntry = {
 
   toJSON(message: SecurityScheme_ExtensionsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -1508,12 +1649,15 @@ export const SecurityRequirement = {
 
   toJSON(message: SecurityRequirement): unknown {
     const obj: any = {};
-    obj.securityRequirement = {};
     if (message.securityRequirement) {
-      Object.entries(message.securityRequirement).forEach(([k, v]) => {
-        obj.securityRequirement[k] =
-          SecurityRequirement_SecurityRequirementValue.toJSON(v);
-      });
+      const entries = Object.entries(message.securityRequirement);
+      if (entries.length > 0) {
+        obj.securityRequirement = {};
+        entries.forEach(([k, v]) => {
+          obj.securityRequirement[k] =
+            SecurityRequirement_SecurityRequirementValue.toJSON(v);
+        });
+      }
     }
     return obj;
   },
@@ -1530,10 +1674,8 @@ export const SecurityRequirement_SecurityRequirementValue = {
 
   toJSON(message: SecurityRequirement_SecurityRequirementValue): unknown {
     const obj: any = {};
-    if (message.scope) {
-      obj.scope = message.scope.map((e) => e);
-    } else {
-      obj.scope = [];
+    if (message.scope?.length) {
+      obj.scope = message.scope;
     }
     return obj;
   },
@@ -1551,11 +1693,14 @@ export const SecurityRequirement_SecurityRequirementEntry = {
 
   toJSON(message: SecurityRequirement_SecurityRequirementEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value
-        ? SecurityRequirement_SecurityRequirementValue.toJSON(message.value)
-        : undefined);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = SecurityRequirement_SecurityRequirementValue.toJSON(
+        message.value,
+      );
+    }
     return obj;
   },
 };
@@ -1577,11 +1722,14 @@ export const Scopes = {
 
   toJSON(message: Scopes): unknown {
     const obj: any = {};
-    obj.scope = {};
     if (message.scope) {
-      Object.entries(message.scope).forEach(([k, v]) => {
-        obj.scope[k] = v;
-      });
+      const entries = Object.entries(message.scope);
+      if (entries.length > 0) {
+        obj.scope = {};
+        entries.forEach(([k, v]) => {
+          obj.scope[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -1597,8 +1745,12 @@ export const Scopes_ScopeEntry = {
 
   toJSON(message: Scopes_ScopeEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
