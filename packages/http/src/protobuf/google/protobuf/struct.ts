@@ -12,7 +12,9 @@ export function nullValueFromJSON(object: any): NullValue {
     case "NULL_VALUE":
       return NullValue.NULL_VALUE;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum NullValue");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum NullValue",
+      );
   }
 }
 
@@ -21,7 +23,9 @@ export function nullValueToJSON(object: NullValue): string {
     case NullValue.NULL_VALUE:
       return "NULL_VALUE";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum NullValue");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum NullValue",
+      );
   }
 }
 
@@ -57,10 +61,12 @@ export const Struct = {
   fromJSON(object: any): Struct {
     return {
       fields: isObject(object.fields)
-        ? Object.entries(object.fields).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.fields).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
     };
   },
@@ -99,7 +105,10 @@ export const Struct = {
 
 export const Struct_FieldsEntry = {
   fromJSON(object: any): Struct_FieldsEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: Struct_FieldsEntry): unknown {
@@ -136,12 +145,20 @@ export const Value = {
   toJSON(message: Value): unknown {
     const obj: any = {};
     message.kind?.$case === "nullValue" &&
-      (obj.nullValue = message.kind?.nullValue !== undefined ? nullValueToJSON(message.kind?.nullValue) : undefined);
-    message.kind?.$case === "numberValue" && (obj.numberValue = message.kind?.numberValue);
-    message.kind?.$case === "stringValue" && (obj.stringValue = message.kind?.stringValue);
-    message.kind?.$case === "boolValue" && (obj.boolValue = message.kind?.boolValue);
-    message.kind?.$case === "structValue" && (obj.structValue = message.kind?.structValue);
-    message.kind?.$case === "listValue" && (obj.listValue = message.kind?.listValue);
+      (obj.nullValue =
+        message.kind?.nullValue !== undefined
+          ? nullValueToJSON(message.kind?.nullValue)
+          : undefined);
+    message.kind?.$case === "numberValue" &&
+      (obj.numberValue = message.kind?.numberValue);
+    message.kind?.$case === "stringValue" &&
+      (obj.stringValue = message.kind?.stringValue);
+    message.kind?.$case === "boolValue" &&
+      (obj.boolValue = message.kind?.boolValue);
+    message.kind?.$case === "structValue" &&
+      (obj.structValue = message.kind?.structValue);
+    message.kind?.$case === "listValue" &&
+      (obj.listValue = message.kind?.listValue);
     return obj;
   },
 
@@ -165,7 +182,9 @@ export const Value = {
     return result;
   },
 
-  unwrap(message: Value): string | number | boolean | Object | null | Array<any> | undefined {
+  unwrap(
+    message: Value,
+  ): string | number | boolean | Object | null | Array<any> | undefined {
     if (message.kind?.$case === "nullValue") {
       return null;
     } else if (message.kind?.$case === "numberValue") {

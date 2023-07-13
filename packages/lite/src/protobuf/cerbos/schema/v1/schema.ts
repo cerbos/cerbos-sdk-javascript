@@ -14,7 +14,9 @@ export enum ValidationError_Source {
   SOURCE_RESOURCE = 2,
 }
 
-export function validationError_SourceFromJSON(object: any): ValidationError_Source {
+export function validationError_SourceFromJSON(
+  object: any,
+): ValidationError_Source {
   switch (object) {
     case 0:
     case "SOURCE_UNSPECIFIED":
@@ -26,11 +28,17 @@ export function validationError_SourceFromJSON(object: any): ValidationError_Sou
     case "SOURCE_RESOURCE":
       return ValidationError_Source.SOURCE_RESOURCE;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum ValidationError_Source");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum ValidationError_Source",
+      );
   }
 }
 
-export function validationError_SourceToJSON(object: ValidationError_Source): string {
+export function validationError_SourceToJSON(
+  object: ValidationError_Source,
+): string {
   switch (object) {
     case ValidationError_Source.SOURCE_UNSPECIFIED:
       return "SOURCE_UNSPECIFIED";
@@ -39,7 +47,11 @@ export function validationError_SourceToJSON(object: ValidationError_Source): st
     case ValidationError_Source.SOURCE_RESOURCE:
       return "SOURCE_RESOURCE";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum ValidationError_Source");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum ValidationError_Source",
+      );
   }
 }
 
@@ -53,7 +65,9 @@ export const ValidationError = {
     return {
       path: isSet(object.path) ? String(object.path) : "",
       message: isSet(object.message) ? String(object.message) : "",
-      source: isSet(object.source) ? validationError_SourceFromJSON(object.source) : 0,
+      source: isSet(object.source)
+        ? validationError_SourceFromJSON(object.source)
+        : 0,
     };
   },
 
@@ -61,7 +75,8 @@ export const ValidationError = {
     const obj: any = {};
     message.path !== undefined && (obj.path = message.path);
     message.message !== undefined && (obj.message = message.message);
-    message.source !== undefined && (obj.source = validationError_SourceToJSON(message.source));
+    message.source !== undefined &&
+      (obj.source = validationError_SourceToJSON(message.source));
     return obj;
   },
 };
@@ -70,7 +85,9 @@ export const Schema = {
   fromJSON(object: any): Schema {
     return {
       id: isSet(object.id) ? String(object.id) : "",
-      definition: isSet(object.definition) ? bytesFromBase64(object.definition) : new Uint8Array(0),
+      definition: isSet(object.definition)
+        ? bytesFromBase64(object.definition)
+        : new Uint8Array(0),
     };
   },
 
@@ -78,7 +95,11 @@ export const Schema = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.definition !== undefined &&
-      (obj.definition = base64FromBytes(message.definition !== undefined ? message.definition : new Uint8Array(0)));
+      (obj.definition = base64FromBytes(
+        message.definition !== undefined
+          ? message.definition
+          : new Uint8Array(0),
+      ));
     return obj;
   },
 };

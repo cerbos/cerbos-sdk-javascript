@@ -22,7 +22,9 @@ export function knownRegexFromJSON(object: any): KnownRegex {
     case "HTTP_HEADER_VALUE":
       return KnownRegex.HTTP_HEADER_VALUE;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum KnownRegex");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum KnownRegex",
+      );
   }
 }
 
@@ -35,7 +37,9 @@ export function knownRegexToJSON(object: KnownRegex): string {
     case KnownRegex.HTTP_HEADER_VALUE:
       return "HTTP_HEADER_VALUE";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum KnownRegex");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum KnownRegex",
+      );
   }
 }
 
@@ -313,7 +317,9 @@ export interface TimestampRules {
 export const FieldRules = {
   fromJSON(object: any): FieldRules {
     return {
-      message: isSet(object.message) ? MessageRules.fromJSON(object.message) : undefined,
+      message: isSet(object.message)
+        ? MessageRules.fromJSON(object.message)
+        : undefined,
       type: isSet(object.float)
         ? { $case: "float", float: FloatRules.fromJSON(object.float) }
         : isSet(object.double)
@@ -335,9 +341,15 @@ export const FieldRules = {
         : isSet(object.fixed64)
         ? { $case: "fixed64", fixed64: Fixed64Rules.fromJSON(object.fixed64) }
         : isSet(object.sfixed32)
-        ? { $case: "sfixed32", sfixed32: SFixed32Rules.fromJSON(object.sfixed32) }
+        ? {
+            $case: "sfixed32",
+            sfixed32: SFixed32Rules.fromJSON(object.sfixed32),
+          }
         : isSet(object.sfixed64)
-        ? { $case: "sfixed64", sfixed64: SFixed64Rules.fromJSON(object.sfixed64) }
+        ? {
+            $case: "sfixed64",
+            sfixed64: SFixed64Rules.fromJSON(object.sfixed64),
+          }
         : isSet(object.bool)
         ? { $case: "bool", bool: BoolRules.fromJSON(object.bool) }
         : isSet(object.string)
@@ -347,62 +359,118 @@ export const FieldRules = {
         : isSet(object.enum)
         ? { $case: "enum", enum: EnumRules.fromJSON(object.enum) }
         : isSet(object.repeated)
-        ? { $case: "repeated", repeated: RepeatedRules.fromJSON(object.repeated) }
+        ? {
+            $case: "repeated",
+            repeated: RepeatedRules.fromJSON(object.repeated),
+          }
         : isSet(object.map)
         ? { $case: "map", map: MapRules.fromJSON(object.map) }
         : isSet(object.any)
         ? { $case: "any", any: AnyRules.fromJSON(object.any) }
         : isSet(object.duration)
-        ? { $case: "duration", duration: DurationRules.fromJSON(object.duration) }
+        ? {
+            $case: "duration",
+            duration: DurationRules.fromJSON(object.duration),
+          }
         : isSet(object.timestamp)
-        ? { $case: "timestamp", timestamp: TimestampRules.fromJSON(object.timestamp) }
+        ? {
+            $case: "timestamp",
+            timestamp: TimestampRules.fromJSON(object.timestamp),
+          }
         : undefined,
     };
   },
 
   toJSON(message: FieldRules): unknown {
     const obj: any = {};
-    message.message !== undefined && (obj.message = message.message ? MessageRules.toJSON(message.message) : undefined);
+    message.message !== undefined &&
+      (obj.message = message.message
+        ? MessageRules.toJSON(message.message)
+        : undefined);
     message.type?.$case === "float" &&
-      (obj.float = message.type?.float ? FloatRules.toJSON(message.type?.float) : undefined);
+      (obj.float = message.type?.float
+        ? FloatRules.toJSON(message.type?.float)
+        : undefined);
     message.type?.$case === "double" &&
-      (obj.double = message.type?.double ? DoubleRules.toJSON(message.type?.double) : undefined);
+      (obj.double = message.type?.double
+        ? DoubleRules.toJSON(message.type?.double)
+        : undefined);
     message.type?.$case === "int32" &&
-      (obj.int32 = message.type?.int32 ? Int32Rules.toJSON(message.type?.int32) : undefined);
+      (obj.int32 = message.type?.int32
+        ? Int32Rules.toJSON(message.type?.int32)
+        : undefined);
     message.type?.$case === "int64" &&
-      (obj.int64 = message.type?.int64 ? Int64Rules.toJSON(message.type?.int64) : undefined);
+      (obj.int64 = message.type?.int64
+        ? Int64Rules.toJSON(message.type?.int64)
+        : undefined);
     message.type?.$case === "uint32" &&
-      (obj.uint32 = message.type?.uint32 ? UInt32Rules.toJSON(message.type?.uint32) : undefined);
+      (obj.uint32 = message.type?.uint32
+        ? UInt32Rules.toJSON(message.type?.uint32)
+        : undefined);
     message.type?.$case === "uint64" &&
-      (obj.uint64 = message.type?.uint64 ? UInt64Rules.toJSON(message.type?.uint64) : undefined);
+      (obj.uint64 = message.type?.uint64
+        ? UInt64Rules.toJSON(message.type?.uint64)
+        : undefined);
     message.type?.$case === "sint32" &&
-      (obj.sint32 = message.type?.sint32 ? SInt32Rules.toJSON(message.type?.sint32) : undefined);
+      (obj.sint32 = message.type?.sint32
+        ? SInt32Rules.toJSON(message.type?.sint32)
+        : undefined);
     message.type?.$case === "sint64" &&
-      (obj.sint64 = message.type?.sint64 ? SInt64Rules.toJSON(message.type?.sint64) : undefined);
+      (obj.sint64 = message.type?.sint64
+        ? SInt64Rules.toJSON(message.type?.sint64)
+        : undefined);
     message.type?.$case === "fixed32" &&
-      (obj.fixed32 = message.type?.fixed32 ? Fixed32Rules.toJSON(message.type?.fixed32) : undefined);
+      (obj.fixed32 = message.type?.fixed32
+        ? Fixed32Rules.toJSON(message.type?.fixed32)
+        : undefined);
     message.type?.$case === "fixed64" &&
-      (obj.fixed64 = message.type?.fixed64 ? Fixed64Rules.toJSON(message.type?.fixed64) : undefined);
+      (obj.fixed64 = message.type?.fixed64
+        ? Fixed64Rules.toJSON(message.type?.fixed64)
+        : undefined);
     message.type?.$case === "sfixed32" &&
-      (obj.sfixed32 = message.type?.sfixed32 ? SFixed32Rules.toJSON(message.type?.sfixed32) : undefined);
+      (obj.sfixed32 = message.type?.sfixed32
+        ? SFixed32Rules.toJSON(message.type?.sfixed32)
+        : undefined);
     message.type?.$case === "sfixed64" &&
-      (obj.sfixed64 = message.type?.sfixed64 ? SFixed64Rules.toJSON(message.type?.sfixed64) : undefined);
+      (obj.sfixed64 = message.type?.sfixed64
+        ? SFixed64Rules.toJSON(message.type?.sfixed64)
+        : undefined);
     message.type?.$case === "bool" &&
-      (obj.bool = message.type?.bool ? BoolRules.toJSON(message.type?.bool) : undefined);
+      (obj.bool = message.type?.bool
+        ? BoolRules.toJSON(message.type?.bool)
+        : undefined);
     message.type?.$case === "string" &&
-      (obj.string = message.type?.string ? StringRules.toJSON(message.type?.string) : undefined);
+      (obj.string = message.type?.string
+        ? StringRules.toJSON(message.type?.string)
+        : undefined);
     message.type?.$case === "bytes" &&
-      (obj.bytes = message.type?.bytes ? BytesRules.toJSON(message.type?.bytes) : undefined);
+      (obj.bytes = message.type?.bytes
+        ? BytesRules.toJSON(message.type?.bytes)
+        : undefined);
     message.type?.$case === "enum" &&
-      (obj.enum = message.type?.enum ? EnumRules.toJSON(message.type?.enum) : undefined);
+      (obj.enum = message.type?.enum
+        ? EnumRules.toJSON(message.type?.enum)
+        : undefined);
     message.type?.$case === "repeated" &&
-      (obj.repeated = message.type?.repeated ? RepeatedRules.toJSON(message.type?.repeated) : undefined);
-    message.type?.$case === "map" && (obj.map = message.type?.map ? MapRules.toJSON(message.type?.map) : undefined);
-    message.type?.$case === "any" && (obj.any = message.type?.any ? AnyRules.toJSON(message.type?.any) : undefined);
+      (obj.repeated = message.type?.repeated
+        ? RepeatedRules.toJSON(message.type?.repeated)
+        : undefined);
+    message.type?.$case === "map" &&
+      (obj.map = message.type?.map
+        ? MapRules.toJSON(message.type?.map)
+        : undefined);
+    message.type?.$case === "any" &&
+      (obj.any = message.type?.any
+        ? AnyRules.toJSON(message.type?.any)
+        : undefined);
     message.type?.$case === "duration" &&
-      (obj.duration = message.type?.duration ? DurationRules.toJSON(message.type?.duration) : undefined);
+      (obj.duration = message.type?.duration
+        ? DurationRules.toJSON(message.type?.duration)
+        : undefined);
     message.type?.$case === "timestamp" &&
-      (obj.timestamp = message.type?.timestamp ? TimestampRules.toJSON(message.type?.timestamp) : undefined);
+      (obj.timestamp = message.type?.timestamp
+        ? TimestampRules.toJSON(message.type?.timestamp)
+        : undefined);
     return obj;
   },
 };
@@ -415,13 +483,13 @@ export const FloatRules = {
       lte: isSet(object.lte) ? Number(object.lte) : 0,
       gt: isSet(object.gt) ? Number(object.gt) : 0,
       gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => Number(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => Number(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -442,7 +510,8 @@ export const FloatRules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -455,13 +524,13 @@ export const DoubleRules = {
       lte: isSet(object.lte) ? Number(object.lte) : 0,
       gt: isSet(object.gt) ? Number(object.gt) : 0,
       gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => Number(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => Number(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -482,7 +551,8 @@ export const DoubleRules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -495,13 +565,13 @@ export const Int32Rules = {
       lte: isSet(object.lte) ? Number(object.lte) : 0,
       gt: isSet(object.gt) ? Number(object.gt) : 0,
       gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => Number(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => Number(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -522,7 +592,8 @@ export const Int32Rules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -535,13 +606,13 @@ export const Int64Rules = {
       lte: isSet(object.lte) ? String(object.lte) : "0",
       gt: isSet(object.gt) ? String(object.gt) : "0",
       gte: isSet(object.gte) ? String(object.gte) : "0",
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => String(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => String(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -562,7 +633,8 @@ export const Int64Rules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -575,13 +647,13 @@ export const UInt32Rules = {
       lte: isSet(object.lte) ? Number(object.lte) : 0,
       gt: isSet(object.gt) ? Number(object.gt) : 0,
       gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => Number(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => Number(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -602,7 +674,8 @@ export const UInt32Rules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -615,13 +688,13 @@ export const UInt64Rules = {
       lte: isSet(object.lte) ? String(object.lte) : "0",
       gt: isSet(object.gt) ? String(object.gt) : "0",
       gte: isSet(object.gte) ? String(object.gte) : "0",
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => String(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => String(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -642,7 +715,8 @@ export const UInt64Rules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -655,13 +729,13 @@ export const SInt32Rules = {
       lte: isSet(object.lte) ? Number(object.lte) : 0,
       gt: isSet(object.gt) ? Number(object.gt) : 0,
       gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => Number(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => Number(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -682,7 +756,8 @@ export const SInt32Rules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -695,13 +770,13 @@ export const SInt64Rules = {
       lte: isSet(object.lte) ? String(object.lte) : "0",
       gt: isSet(object.gt) ? String(object.gt) : "0",
       gte: isSet(object.gte) ? String(object.gte) : "0",
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => String(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => String(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -722,7 +797,8 @@ export const SInt64Rules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -735,13 +811,13 @@ export const Fixed32Rules = {
       lte: isSet(object.lte) ? Number(object.lte) : 0,
       gt: isSet(object.gt) ? Number(object.gt) : 0,
       gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => Number(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => Number(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -762,7 +838,8 @@ export const Fixed32Rules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -775,13 +852,13 @@ export const Fixed64Rules = {
       lte: isSet(object.lte) ? String(object.lte) : "0",
       gt: isSet(object.gt) ? String(object.gt) : "0",
       gte: isSet(object.gte) ? String(object.gte) : "0",
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => String(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => String(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -802,7 +879,8 @@ export const Fixed64Rules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -815,13 +893,13 @@ export const SFixed32Rules = {
       lte: isSet(object.lte) ? Number(object.lte) : 0,
       gt: isSet(object.gt) ? Number(object.gt) : 0,
       gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => Number(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => Number(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -842,7 +920,8 @@ export const SFixed32Rules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -855,13 +934,13 @@ export const SFixed64Rules = {
       lte: isSet(object.lte) ? String(object.lte) : "0",
       gt: isSet(object.gt) ? String(object.gt) : "0",
       gte: isSet(object.gte) ? String(object.gte) : "0",
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => String(e))
-        : [],
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
       notIn: Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => String(e))
         : [],
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -882,7 +961,8 @@ export const SFixed64Rules = {
     } else {
       obj.notIn = [];
     }
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -914,10 +994,10 @@ export const StringRules = {
       suffix: isSet(object.suffix) ? String(object.suffix) : "",
       contains: isSet(object.contains) ? String(object.contains) : "",
       notContains: isSet(object.notContains) ? String(object.notContains) : "",
-      in: Array.isArray(object?.in)
-        ? object.in.map((e: any) => String(e))
+      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
+      notIn: Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => String(e))
         : [],
-      notIn: Array.isArray(object?.notIn) ? object.notIn.map((e: any) => String(e)) : [],
       wellKnown: isSet(object.email)
         ? { $case: "email", email: Boolean(object.email) }
         : isSet(object.hostname)
@@ -937,10 +1017,15 @@ export const StringRules = {
         : isSet(object.uuid)
         ? { $case: "uuid", uuid: Boolean(object.uuid) }
         : isSet(object.wellKnownRegex)
-        ? { $case: "wellKnownRegex", wellKnownRegex: knownRegexFromJSON(object.wellKnownRegex) }
+        ? {
+            $case: "wellKnownRegex",
+            wellKnownRegex: knownRegexFromJSON(object.wellKnownRegex),
+          }
         : undefined,
       strict: isSet(object.strict) ? Boolean(object.strict) : false,
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -957,7 +1042,8 @@ export const StringRules = {
     message.prefix !== undefined && (obj.prefix = message.prefix);
     message.suffix !== undefined && (obj.suffix = message.suffix);
     message.contains !== undefined && (obj.contains = message.contains);
-    message.notContains !== undefined && (obj.notContains = message.notContains);
+    message.notContains !== undefined &&
+      (obj.notContains = message.notContains);
     if (message.in) {
       obj.in = message.in.map((e) => e);
     } else {
@@ -968,21 +1054,27 @@ export const StringRules = {
     } else {
       obj.notIn = [];
     }
-    message.wellKnown?.$case === "email" && (obj.email = message.wellKnown?.email);
-    message.wellKnown?.$case === "hostname" && (obj.hostname = message.wellKnown?.hostname);
+    message.wellKnown?.$case === "email" &&
+      (obj.email = message.wellKnown?.email);
+    message.wellKnown?.$case === "hostname" &&
+      (obj.hostname = message.wellKnown?.hostname);
     message.wellKnown?.$case === "ip" && (obj.ip = message.wellKnown?.ip);
     message.wellKnown?.$case === "ipv4" && (obj.ipv4 = message.wellKnown?.ipv4);
     message.wellKnown?.$case === "ipv6" && (obj.ipv6 = message.wellKnown?.ipv6);
     message.wellKnown?.$case === "uri" && (obj.uri = message.wellKnown?.uri);
-    message.wellKnown?.$case === "uriRef" && (obj.uriRef = message.wellKnown?.uriRef);
-    message.wellKnown?.$case === "address" && (obj.address = message.wellKnown?.address);
+    message.wellKnown?.$case === "uriRef" &&
+      (obj.uriRef = message.wellKnown?.uriRef);
+    message.wellKnown?.$case === "address" &&
+      (obj.address = message.wellKnown?.address);
     message.wellKnown?.$case === "uuid" && (obj.uuid = message.wellKnown?.uuid);
     message.wellKnown?.$case === "wellKnownRegex" &&
-      (obj.wellKnownRegex = message.wellKnown?.wellKnownRegex !== undefined
-        ? knownRegexToJSON(message.wellKnown?.wellKnownRegex)
-        : undefined);
+      (obj.wellKnownRegex =
+        message.wellKnown?.wellKnownRegex !== undefined
+          ? knownRegexToJSON(message.wellKnown?.wellKnownRegex)
+          : undefined);
     message.strict !== undefined && (obj.strict = message.strict);
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -990,18 +1082,28 @@ export const StringRules = {
 export const BytesRules = {
   fromJSON(object: any): BytesRules {
     return {
-      const: isSet(object.const) ? bytesFromBase64(object.const) : new Uint8Array(0),
+      const: isSet(object.const)
+        ? bytesFromBase64(object.const)
+        : new Uint8Array(0),
       len: isSet(object.len) ? String(object.len) : "0",
       minLen: isSet(object.minLen) ? String(object.minLen) : "0",
       maxLen: isSet(object.maxLen) ? String(object.maxLen) : "0",
       pattern: isSet(object.pattern) ? String(object.pattern) : "",
-      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array(0),
-      suffix: isSet(object.suffix) ? bytesFromBase64(object.suffix) : new Uint8Array(0),
-      contains: isSet(object.contains) ? bytesFromBase64(object.contains) : new Uint8Array(0),
+      prefix: isSet(object.prefix)
+        ? bytesFromBase64(object.prefix)
+        : new Uint8Array(0),
+      suffix: isSet(object.suffix)
+        ? bytesFromBase64(object.suffix)
+        : new Uint8Array(0),
+      contains: isSet(object.contains)
+        ? bytesFromBase64(object.contains)
+        : new Uint8Array(0),
       in: Array.isArray(object?.in)
         ? object.in.map((e: any) => bytesFromBase64(e))
         : [],
-      notIn: Array.isArray(object?.notIn) ? object.notIn.map((e: any) => bytesFromBase64(e)) : [],
+      notIn: Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => bytesFromBase64(e))
+        : [],
       wellKnown: isSet(object.ip)
         ? { $case: "ip", ip: Boolean(object.ip) }
         : isSet(object.ipv4)
@@ -1009,38 +1111,53 @@ export const BytesRules = {
         : isSet(object.ipv6)
         ? { $case: "ipv6", ipv6: Boolean(object.ipv6) }
         : undefined,
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
   toJSON(message: BytesRules): unknown {
     const obj: any = {};
     message.const !== undefined &&
-      (obj.const = base64FromBytes(message.const !== undefined ? message.const : new Uint8Array(0)));
+      (obj.const = base64FromBytes(
+        message.const !== undefined ? message.const : new Uint8Array(0),
+      ));
     message.len !== undefined && (obj.len = message.len);
     message.minLen !== undefined && (obj.minLen = message.minLen);
     message.maxLen !== undefined && (obj.maxLen = message.maxLen);
     message.pattern !== undefined && (obj.pattern = message.pattern);
     message.prefix !== undefined &&
-      (obj.prefix = base64FromBytes(message.prefix !== undefined ? message.prefix : new Uint8Array(0)));
+      (obj.prefix = base64FromBytes(
+        message.prefix !== undefined ? message.prefix : new Uint8Array(0),
+      ));
     message.suffix !== undefined &&
-      (obj.suffix = base64FromBytes(message.suffix !== undefined ? message.suffix : new Uint8Array(0)));
+      (obj.suffix = base64FromBytes(
+        message.suffix !== undefined ? message.suffix : new Uint8Array(0),
+      ));
     message.contains !== undefined &&
-      (obj.contains = base64FromBytes(message.contains !== undefined ? message.contains : new Uint8Array(0)));
+      (obj.contains = base64FromBytes(
+        message.contains !== undefined ? message.contains : new Uint8Array(0),
+      ));
     if (message.in) {
-      obj.in = message.in.map((e) => base64FromBytes(e !== undefined ? e : new Uint8Array(0)));
+      obj.in = message.in.map((e) =>
+        base64FromBytes(e !== undefined ? e : new Uint8Array(0)),
+      );
     } else {
       obj.in = [];
     }
     if (message.notIn) {
-      obj.notIn = message.notIn.map((e) => base64FromBytes(e !== undefined ? e : new Uint8Array(0)));
+      obj.notIn = message.notIn.map((e) =>
+        base64FromBytes(e !== undefined ? e : new Uint8Array(0)),
+      );
     } else {
       obj.notIn = [];
     }
     message.wellKnown?.$case === "ip" && (obj.ip = message.wellKnown?.ip);
     message.wellKnown?.$case === "ipv4" && (obj.ipv4 = message.wellKnown?.ipv4);
     message.wellKnown?.$case === "ipv6" && (obj.ipv6 = message.wellKnown?.ipv6);
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -1049,16 +1166,21 @@ export const EnumRules = {
   fromJSON(object: any): EnumRules {
     return {
       const: isSet(object.const) ? Number(object.const) : 0,
-      definedOnly: isSet(object.definedOnly) ? Boolean(object.definedOnly) : false,
+      definedOnly: isSet(object.definedOnly)
+        ? Boolean(object.definedOnly)
+        : false,
       in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn) ? object.notIn.map((e: any) => Number(e)) : [],
+      notIn: Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => Number(e))
+        : [],
     };
   },
 
   toJSON(message: EnumRules): unknown {
     const obj: any = {};
     message.const !== undefined && (obj.const = Math.round(message.const));
-    message.definedOnly !== undefined && (obj.definedOnly = message.definedOnly);
+    message.definedOnly !== undefined &&
+      (obj.definedOnly = message.definedOnly);
     if (message.in) {
       obj.in = message.in.map((e) => Math.round(e));
     } else {
@@ -1095,8 +1217,12 @@ export const RepeatedRules = {
       minItems: isSet(object.minItems) ? String(object.minItems) : "0",
       maxItems: isSet(object.maxItems) ? String(object.maxItems) : "0",
       unique: isSet(object.unique) ? Boolean(object.unique) : false,
-      items: isSet(object.items) ? FieldRules.fromJSON(object.items) : undefined,
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      items: isSet(object.items)
+        ? FieldRules.fromJSON(object.items)
+        : undefined,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -1105,8 +1231,12 @@ export const RepeatedRules = {
     message.minItems !== undefined && (obj.minItems = message.minItems);
     message.maxItems !== undefined && (obj.maxItems = message.maxItems);
     message.unique !== undefined && (obj.unique = message.unique);
-    message.items !== undefined && (obj.items = message.items ? FieldRules.toJSON(message.items) : undefined);
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.items !== undefined &&
+      (obj.items = message.items
+        ? FieldRules.toJSON(message.items)
+        : undefined);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -1118,8 +1248,12 @@ export const MapRules = {
       maxPairs: isSet(object.maxPairs) ? String(object.maxPairs) : "0",
       noSparse: isSet(object.noSparse) ? Boolean(object.noSparse) : false,
       keys: isSet(object.keys) ? FieldRules.fromJSON(object.keys) : undefined,
-      values: isSet(object.values) ? FieldRules.fromJSON(object.values) : undefined,
-      ignoreEmpty: isSet(object.ignoreEmpty) ? Boolean(object.ignoreEmpty) : false,
+      values: isSet(object.values)
+        ? FieldRules.fromJSON(object.values)
+        : undefined,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -1128,9 +1262,14 @@ export const MapRules = {
     message.minPairs !== undefined && (obj.minPairs = message.minPairs);
     message.maxPairs !== undefined && (obj.maxPairs = message.maxPairs);
     message.noSparse !== undefined && (obj.noSparse = message.noSparse);
-    message.keys !== undefined && (obj.keys = message.keys ? FieldRules.toJSON(message.keys) : undefined);
-    message.values !== undefined && (obj.values = message.values ? FieldRules.toJSON(message.values) : undefined);
-    message.ignoreEmpty !== undefined && (obj.ignoreEmpty = message.ignoreEmpty);
+    message.keys !== undefined &&
+      (obj.keys = message.keys ? FieldRules.toJSON(message.keys) : undefined);
+    message.values !== undefined &&
+      (obj.values = message.values
+        ? FieldRules.toJSON(message.values)
+        : undefined);
+    message.ignoreEmpty !== undefined &&
+      (obj.ignoreEmpty = message.ignoreEmpty);
     return obj;
   },
 };
@@ -1140,7 +1279,9 @@ export const AnyRules = {
     return {
       required: isSet(object.required) ? Boolean(object.required) : false,
       in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
-      notIn: Array.isArray(object?.notIn) ? object.notIn.map((e: any) => String(e)) : [],
+      notIn: Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => String(e))
+        : [],
     };
   },
 
@@ -1170,26 +1311,37 @@ export const DurationRules = {
       lte: isSet(object.lte) ? Duration.fromJSON(object.lte) : undefined,
       gt: isSet(object.gt) ? Duration.fromJSON(object.gt) : undefined,
       gte: isSet(object.gte) ? Duration.fromJSON(object.gte) : undefined,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Duration.fromJSON(e)) : [],
-      notIn: Array.isArray(object?.notIn) ? object.notIn.map((e: any) => Duration.fromJSON(e)) : [],
+      in: Array.isArray(object?.in)
+        ? object.in.map((e: any) => Duration.fromJSON(e))
+        : [],
+      notIn: Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => Duration.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: DurationRules): unknown {
     const obj: any = {};
     message.required !== undefined && (obj.required = message.required);
-    message.const !== undefined && (obj.const = message.const ? Duration.toJSON(message.const) : undefined);
-    message.lt !== undefined && (obj.lt = message.lt ? Duration.toJSON(message.lt) : undefined);
-    message.lte !== undefined && (obj.lte = message.lte ? Duration.toJSON(message.lte) : undefined);
-    message.gt !== undefined && (obj.gt = message.gt ? Duration.toJSON(message.gt) : undefined);
-    message.gte !== undefined && (obj.gte = message.gte ? Duration.toJSON(message.gte) : undefined);
+    message.const !== undefined &&
+      (obj.const = message.const ? Duration.toJSON(message.const) : undefined);
+    message.lt !== undefined &&
+      (obj.lt = message.lt ? Duration.toJSON(message.lt) : undefined);
+    message.lte !== undefined &&
+      (obj.lte = message.lte ? Duration.toJSON(message.lte) : undefined);
+    message.gt !== undefined &&
+      (obj.gt = message.gt ? Duration.toJSON(message.gt) : undefined);
+    message.gte !== undefined &&
+      (obj.gte = message.gte ? Duration.toJSON(message.gte) : undefined);
     if (message.in) {
-      obj.in = message.in.map((e) => e ? Duration.toJSON(e) : undefined);
+      obj.in = message.in.map((e) => (e ? Duration.toJSON(e) : undefined));
     } else {
       obj.in = [];
     }
     if (message.notIn) {
-      obj.notIn = message.notIn.map((e) => e ? Duration.toJSON(e) : undefined);
+      obj.notIn = message.notIn.map((e) =>
+        e ? Duration.toJSON(e) : undefined,
+      );
     } else {
       obj.notIn = [];
     }
@@ -1208,7 +1360,9 @@ export const TimestampRules = {
       gte: isSet(object.gte) ? fromJsonTimestamp(object.gte) : undefined,
       ltNow: isSet(object.ltNow) ? Boolean(object.ltNow) : false,
       gtNow: isSet(object.gtNow) ? Boolean(object.gtNow) : false,
-      within: isSet(object.within) ? Duration.fromJSON(object.within) : undefined,
+      within: isSet(object.within)
+        ? Duration.fromJSON(object.within)
+        : undefined,
     };
   },
 
@@ -1222,7 +1376,10 @@ export const TimestampRules = {
     message.gte !== undefined && (obj.gte = message.gte.toISOString());
     message.ltNow !== undefined && (obj.ltNow = message.ltNow);
     message.gtNow !== undefined && (obj.gtNow = message.gtNow);
-    message.within !== undefined && (obj.within = message.within ? Duration.toJSON(message.within) : undefined);
+    message.within !== undefined &&
+      (obj.within = message.within
+        ? Duration.toJSON(message.within)
+        : undefined);
     return obj;
   },
 };

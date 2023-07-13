@@ -25,7 +25,10 @@ function createBaseValidationError(): ValidationError {
 }
 
 export const ValidationError = {
-  encode(message: ValidationError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ValidationError,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);
     }
@@ -39,7 +42,8 @@ export const ValidationError = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ValidationError {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidationError();
     while (reader.pos < end) {
@@ -81,7 +85,10 @@ function createBaseSchema(): Schema {
 }
 
 export const Schema = {
-  encode(message: Schema, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Schema,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -92,7 +99,8 @@ export const Schema = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Schema {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSchema();
     while (reader.pos < end) {

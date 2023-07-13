@@ -87,7 +87,10 @@ export interface RoleDef {
 }
 
 export interface Condition {
-  condition?: { $case: "match"; match: Match } | { $case: "script"; script: string } | undefined;
+  condition?:
+    | { $case: "match"; match: Match }
+    | { $case: "script"; script: string }
+    | undefined;
 }
 
 export interface Match {
@@ -133,7 +136,10 @@ function createBasePolicy(): Policy {
 }
 
 export const Policy = {
-  encode(message: Policy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Policy,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.apiVersion !== "") {
       writer.uint32(10).string(message.apiVersion);
     }
@@ -148,23 +154,36 @@ export const Policy = {
     }
     switch (message.policyType?.$case) {
       case "resourcePolicy":
-        ResourcePolicy.encode(message.policyType.resourcePolicy, writer.uint32(42).fork()).ldelim();
+        ResourcePolicy.encode(
+          message.policyType.resourcePolicy,
+          writer.uint32(42).fork(),
+        ).ldelim();
         break;
       case "principalPolicy":
-        PrincipalPolicy.encode(message.policyType.principalPolicy, writer.uint32(50).fork()).ldelim();
+        PrincipalPolicy.encode(
+          message.policyType.principalPolicy,
+          writer.uint32(50).fork(),
+        ).ldelim();
         break;
       case "derivedRoles":
-        DerivedRoles.encode(message.policyType.derivedRoles, writer.uint32(58).fork()).ldelim();
+        DerivedRoles.encode(
+          message.policyType.derivedRoles,
+          writer.uint32(58).fork(),
+        ).ldelim();
         break;
     }
     Object.entries(message.variables).forEach(([key, value]) => {
-      Policy_VariablesEntry.encode({ key: key as any, value }, writer.uint32(66).fork()).ldelim();
+      Policy_VariablesEntry.encode(
+        { key: key as any, value },
+        writer.uint32(66).fork(),
+      ).ldelim();
     });
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Policy {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePolicy();
     while (reader.pos < end) {
@@ -223,7 +242,10 @@ export const Policy = {
             break;
           }
 
-          message.policyType = { $case: "derivedRoles", derivedRoles: DerivedRoles.decode(reader, reader.uint32()) };
+          message.policyType = {
+            $case: "derivedRoles",
+            derivedRoles: DerivedRoles.decode(reader, reader.uint32()),
+          };
           continue;
         case 8:
           if (tag !== 66) {
@@ -250,7 +272,10 @@ function createBasePolicy_VariablesEntry(): Policy_VariablesEntry {
 }
 
 export const Policy_VariablesEntry = {
-  encode(message: Policy_VariablesEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Policy_VariablesEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -260,8 +285,12 @@ export const Policy_VariablesEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Policy_VariablesEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Policy_VariablesEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePolicy_VariablesEntry();
     while (reader.pos < end) {
@@ -292,19 +321,34 @@ export const Policy_VariablesEntry = {
 };
 
 function createBaseMetadata(): Metadata {
-  return { sourceFile: "", annotations: {}, hash: undefined, storeIdentifer: "", storeIdentifier: "" };
+  return {
+    sourceFile: "",
+    annotations: {},
+    hash: undefined,
+    storeIdentifer: "",
+    storeIdentifier: "",
+  };
 }
 
 export const Metadata = {
-  encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Metadata,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.sourceFile !== "") {
       writer.uint32(10).string(message.sourceFile);
     }
     Object.entries(message.annotations).forEach(([key, value]) => {
-      Metadata_AnnotationsEntry.encode({ key: key as any, value }, writer.uint32(18).fork()).ldelim();
+      Metadata_AnnotationsEntry.encode(
+        { key: key as any, value },
+        writer.uint32(18).fork(),
+      ).ldelim();
     });
     if (message.hash !== undefined) {
-      UInt64Value.encode({ value: message.hash! }, writer.uint32(26).fork()).ldelim();
+      UInt64Value.encode(
+        { value: message.hash! },
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.storeIdentifer !== "") {
       writer.uint32(34).string(message.storeIdentifer);
@@ -316,7 +360,8 @@ export const Metadata = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Metadata {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetadata();
     while (reader.pos < end) {
@@ -334,7 +379,10 @@ export const Metadata = {
             break;
           }
 
-          const entry2 = Metadata_AnnotationsEntry.decode(reader, reader.uint32());
+          const entry2 = Metadata_AnnotationsEntry.decode(
+            reader,
+            reader.uint32(),
+          );
           if (entry2.value !== undefined) {
             message.annotations[entry2.key] = entry2.value;
           }
@@ -375,7 +423,10 @@ function createBaseMetadata_AnnotationsEntry(): Metadata_AnnotationsEntry {
 }
 
 export const Metadata_AnnotationsEntry = {
-  encode(message: Metadata_AnnotationsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Metadata_AnnotationsEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -385,8 +436,12 @@ export const Metadata_AnnotationsEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Metadata_AnnotationsEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Metadata_AnnotationsEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetadata_AnnotationsEntry();
     while (reader.pos < end) {
@@ -417,11 +472,21 @@ export const Metadata_AnnotationsEntry = {
 };
 
 function createBaseResourcePolicy(): ResourcePolicy {
-  return { resource: "", version: "", importDerivedRoles: [], rules: [], scope: "", schemas: undefined };
+  return {
+    resource: "",
+    version: "",
+    importDerivedRoles: [],
+    rules: [],
+    scope: "",
+    schemas: undefined,
+  };
 }
 
 export const ResourcePolicy = {
-  encode(message: ResourcePolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ResourcePolicy,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.resource !== "") {
       writer.uint32(10).string(message.resource);
     }
@@ -444,7 +509,8 @@ export const ResourcePolicy = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ResourcePolicy {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourcePolicy();
     while (reader.pos < end) {
@@ -503,11 +569,22 @@ export const ResourcePolicy = {
 };
 
 function createBaseResourceRule(): ResourceRule {
-  return { actions: [], derivedRoles: [], roles: [], condition: undefined, effect: 0, name: "", output: undefined };
+  return {
+    actions: [],
+    derivedRoles: [],
+    roles: [],
+    condition: undefined,
+    effect: 0,
+    name: "",
+    output: undefined,
+  };
 }
 
 export const ResourceRule = {
-  encode(message: ResourceRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ResourceRule,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.actions) {
       writer.uint32(10).string(v!);
     }
@@ -533,7 +610,8 @@ export const ResourceRule = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ResourceRule {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceRule();
     while (reader.pos < end) {
@@ -603,7 +681,10 @@ function createBasePrincipalPolicy(): PrincipalPolicy {
 }
 
 export const PrincipalPolicy = {
-  encode(message: PrincipalPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PrincipalPolicy,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.principal !== "") {
       writer.uint32(10).string(message.principal);
     }
@@ -620,7 +701,8 @@ export const PrincipalPolicy = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): PrincipalPolicy {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrincipalPolicy();
     while (reader.pos < end) {
@@ -669,7 +751,10 @@ function createBasePrincipalRule(): PrincipalRule {
 }
 
 export const PrincipalRule = {
-  encode(message: PrincipalRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PrincipalRule,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.resource !== "") {
       writer.uint32(10).string(message.resource);
     }
@@ -680,7 +765,8 @@ export const PrincipalRule = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): PrincipalRule {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrincipalRule();
     while (reader.pos < end) {
@@ -698,7 +784,9 @@ export const PrincipalRule = {
             break;
           }
 
-          message.actions.push(PrincipalRule_Action.decode(reader, reader.uint32()));
+          message.actions.push(
+            PrincipalRule_Action.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -711,11 +799,20 @@ export const PrincipalRule = {
 };
 
 function createBasePrincipalRule_Action(): PrincipalRule_Action {
-  return { action: "", condition: undefined, effect: 0, name: "", output: undefined };
+  return {
+    action: "",
+    condition: undefined,
+    effect: 0,
+    name: "",
+    output: undefined,
+  };
 }
 
 export const PrincipalRule_Action = {
-  encode(message: PrincipalRule_Action, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PrincipalRule_Action,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.action !== "") {
       writer.uint32(10).string(message.action);
     }
@@ -734,8 +831,12 @@ export const PrincipalRule_Action = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): PrincipalRule_Action {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): PrincipalRule_Action {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrincipalRule_Action();
     while (reader.pos < end) {
@@ -791,7 +892,10 @@ function createBaseDerivedRoles(): DerivedRoles {
 }
 
 export const DerivedRoles = {
-  encode(message: DerivedRoles, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DerivedRoles,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -802,7 +906,8 @@ export const DerivedRoles = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DerivedRoles {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDerivedRoles();
     while (reader.pos < end) {
@@ -837,7 +942,10 @@ function createBaseRoleDef(): RoleDef {
 }
 
 export const RoleDef = {
-  encode(message: RoleDef, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: RoleDef,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -851,7 +959,8 @@ export const RoleDef = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): RoleDef {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRoleDef();
     while (reader.pos < end) {
@@ -893,10 +1002,16 @@ function createBaseCondition(): Condition {
 }
 
 export const Condition = {
-  encode(message: Condition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Condition,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     switch (message.condition?.$case) {
       case "match":
-        Match.encode(message.condition.match, writer.uint32(10).fork()).ldelim();
+        Match.encode(
+          message.condition.match,
+          writer.uint32(10).fork(),
+        ).ldelim();
         break;
       case "script":
         writer.uint32(18).string(message.condition.script);
@@ -906,7 +1021,8 @@ export const Condition = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Condition {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCondition();
     while (reader.pos < end) {
@@ -917,7 +1033,10 @@ export const Condition = {
             break;
           }
 
-          message.condition = { $case: "match", match: Match.decode(reader, reader.uint32()) };
+          message.condition = {
+            $case: "match",
+            match: Match.decode(reader, reader.uint32()),
+          };
           continue;
         case 2:
           if (tag !== 18) {
@@ -944,13 +1063,22 @@ export const Match = {
   encode(message: Match, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     switch (message.op?.$case) {
       case "all":
-        Match_ExprList.encode(message.op.all, writer.uint32(10).fork()).ldelim();
+        Match_ExprList.encode(
+          message.op.all,
+          writer.uint32(10).fork(),
+        ).ldelim();
         break;
       case "any":
-        Match_ExprList.encode(message.op.any, writer.uint32(18).fork()).ldelim();
+        Match_ExprList.encode(
+          message.op.any,
+          writer.uint32(18).fork(),
+        ).ldelim();
         break;
       case "none":
-        Match_ExprList.encode(message.op.none, writer.uint32(26).fork()).ldelim();
+        Match_ExprList.encode(
+          message.op.none,
+          writer.uint32(26).fork(),
+        ).ldelim();
         break;
       case "expr":
         writer.uint32(34).string(message.op.expr);
@@ -960,7 +1088,8 @@ export const Match = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Match {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMatch();
     while (reader.pos < end) {
@@ -971,21 +1100,30 @@ export const Match = {
             break;
           }
 
-          message.op = { $case: "all", all: Match_ExprList.decode(reader, reader.uint32()) };
+          message.op = {
+            $case: "all",
+            all: Match_ExprList.decode(reader, reader.uint32()),
+          };
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.op = { $case: "any", any: Match_ExprList.decode(reader, reader.uint32()) };
+          message.op = {
+            $case: "any",
+            any: Match_ExprList.decode(reader, reader.uint32()),
+          };
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.op = { $case: "none", none: Match_ExprList.decode(reader, reader.uint32()) };
+          message.op = {
+            $case: "none",
+            none: Match_ExprList.decode(reader, reader.uint32()),
+          };
           continue;
         case 4:
           if (tag !== 34) {
@@ -1009,7 +1147,10 @@ function createBaseMatch_ExprList(): Match_ExprList {
 }
 
 export const Match_ExprList = {
-  encode(message: Match_ExprList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Match_ExprList,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.of) {
       Match.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1017,7 +1158,8 @@ export const Match_ExprList = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Match_ExprList {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMatch_ExprList();
     while (reader.pos < end) {
@@ -1045,7 +1187,10 @@ function createBaseOutput(): Output {
 }
 
 export const Output = {
-  encode(message: Output, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Output,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.expr !== "") {
       writer.uint32(10).string(message.expr);
     }
@@ -1053,7 +1198,8 @@ export const Output = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Output {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOutput();
     while (reader.pos < end) {
@@ -1081,18 +1227,28 @@ function createBaseSchemas(): Schemas {
 }
 
 export const Schemas = {
-  encode(message: Schemas, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Schemas,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.principalSchema !== undefined) {
-      Schemas_Schema.encode(message.principalSchema, writer.uint32(10).fork()).ldelim();
+      Schemas_Schema.encode(
+        message.principalSchema,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.resourceSchema !== undefined) {
-      Schemas_Schema.encode(message.resourceSchema, writer.uint32(18).fork()).ldelim();
+      Schemas_Schema.encode(
+        message.resourceSchema,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Schemas {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSchemas();
     while (reader.pos < end) {
@@ -1103,14 +1259,20 @@ export const Schemas = {
             break;
           }
 
-          message.principalSchema = Schemas_Schema.decode(reader, reader.uint32());
+          message.principalSchema = Schemas_Schema.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.resourceSchema = Schemas_Schema.decode(reader, reader.uint32());
+          message.resourceSchema = Schemas_Schema.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1127,7 +1289,10 @@ function createBaseSchemas_IgnoreWhen(): Schemas_IgnoreWhen {
 }
 
 export const Schemas_IgnoreWhen = {
-  encode(message: Schemas_IgnoreWhen, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Schemas_IgnoreWhen,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.actions) {
       writer.uint32(10).string(v!);
     }
@@ -1135,7 +1300,8 @@ export const Schemas_IgnoreWhen = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Schemas_IgnoreWhen {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSchemas_IgnoreWhen();
     while (reader.pos < end) {
@@ -1163,18 +1329,25 @@ function createBaseSchemas_Schema(): Schemas_Schema {
 }
 
 export const Schemas_Schema = {
-  encode(message: Schemas_Schema, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Schemas_Schema,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.ref !== "") {
       writer.uint32(10).string(message.ref);
     }
     if (message.ignoreWhen !== undefined) {
-      Schemas_IgnoreWhen.encode(message.ignoreWhen, writer.uint32(18).fork()).ldelim();
+      Schemas_IgnoreWhen.encode(
+        message.ignoreWhen,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Schemas_Schema {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSchemas_Schema();
     while (reader.pos < end) {
@@ -1192,7 +1365,10 @@ export const Schemas_Schema = {
             break;
           }
 
-          message.ignoreWhen = Schemas_IgnoreWhen.decode(reader, reader.uint32());
+          message.ignoreWhen = Schemas_IgnoreWhen.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {

@@ -3,8 +3,7 @@ import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "google.protobuf";
 
-export interface Empty {
-}
+export interface Empty {}
 
 function createBaseEmpty(): Empty {
   return {};
@@ -16,7 +15,8 @@ export const Empty = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Empty {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEmpty();
     while (reader.pos < end) {

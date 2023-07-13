@@ -2,8 +2,7 @@
 
 export const protobufPackage = "google.protobuf";
 
-export interface Empty {
-}
+export interface Empty {}
 
 export const Empty = {
   fromJSON(_: any): Empty {

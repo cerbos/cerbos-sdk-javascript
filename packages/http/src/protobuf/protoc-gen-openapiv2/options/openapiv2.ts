@@ -28,7 +28,9 @@ export function schemeFromJSON(object: any): Scheme {
     case "WSS":
       return Scheme.WSS;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Scheme");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum Scheme",
+      );
   }
 }
 
@@ -45,7 +47,9 @@ export function schemeToJSON(object: Scheme): string {
     case Scheme.WSS:
       return "WSS";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Scheme");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum Scheme",
+      );
   }
 }
 
@@ -121,7 +125,9 @@ export enum HeaderParameter_Type {
   BOOLEAN = 4,
 }
 
-export function headerParameter_TypeFromJSON(object: any): HeaderParameter_Type {
+export function headerParameter_TypeFromJSON(
+  object: any,
+): HeaderParameter_Type {
   switch (object) {
     case 0:
     case "UNKNOWN":
@@ -139,11 +145,15 @@ export function headerParameter_TypeFromJSON(object: any): HeaderParameter_Type 
     case "BOOLEAN":
       return HeaderParameter_Type.BOOLEAN;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum HeaderParameter_Type");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum HeaderParameter_Type",
+      );
   }
 }
 
-export function headerParameter_TypeToJSON(object: HeaderParameter_Type): string {
+export function headerParameter_TypeToJSON(
+  object: HeaderParameter_Type,
+): string {
   switch (object) {
     case HeaderParameter_Type.UNKNOWN:
       return "UNKNOWN";
@@ -156,7 +166,9 @@ export function headerParameter_TypeToJSON(object: HeaderParameter_Type): string
     case HeaderParameter_Type.BOOLEAN:
       return "BOOLEAN";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum HeaderParameter_Type");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum HeaderParameter_Type",
+      );
   }
 }
 
@@ -270,7 +282,9 @@ export enum JSONSchema_JSONSchemaSimpleTypes {
   STRING = 7,
 }
 
-export function jSONSchema_JSONSchemaSimpleTypesFromJSON(object: any): JSONSchema_JSONSchemaSimpleTypes {
+export function jSONSchema_JSONSchemaSimpleTypesFromJSON(
+  object: any,
+): JSONSchema_JSONSchemaSimpleTypes {
   switch (object) {
     case 0:
     case "UNKNOWN":
@@ -298,12 +312,16 @@ export function jSONSchema_JSONSchemaSimpleTypesFromJSON(object: any): JSONSchem
       return JSONSchema_JSONSchemaSimpleTypes.STRING;
     default:
       throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum JSONSchema_JSONSchemaSimpleTypes",
+        "Unrecognized enum value " +
+          object +
+          " for enum JSONSchema_JSONSchemaSimpleTypes",
       );
   }
 }
 
-export function jSONSchema_JSONSchemaSimpleTypesToJSON(object: JSONSchema_JSONSchemaSimpleTypes): string {
+export function jSONSchema_JSONSchemaSimpleTypesToJSON(
+  object: JSONSchema_JSONSchemaSimpleTypes,
+): string {
   switch (object) {
     case JSONSchema_JSONSchemaSimpleTypes.UNKNOWN:
       return "UNKNOWN";
@@ -323,7 +341,9 @@ export function jSONSchema_JSONSchemaSimpleTypesToJSON(object: JSONSchema_JSONSc
       return "STRING";
     default:
       throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum JSONSchema_JSONSchemaSimpleTypes",
+        "Unrecognized enum value " +
+          object +
+          " for enum JSONSchema_JSONSchemaSimpleTypes",
       );
   }
 }
@@ -392,7 +412,9 @@ export function securityScheme_TypeFromJSON(object: any): SecurityScheme_Type {
     case "TYPE_OAUTH2":
       return SecurityScheme_Type.TYPE_OAUTH2;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Type");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum SecurityScheme_Type",
+      );
   }
 }
 
@@ -407,7 +429,9 @@ export function securityScheme_TypeToJSON(object: SecurityScheme_Type): string {
     case SecurityScheme_Type.TYPE_OAUTH2:
       return "TYPE_OAUTH2";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Type");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum SecurityScheme_Type",
+      );
   }
 }
 
@@ -429,7 +453,9 @@ export function securityScheme_InFromJSON(object: any): SecurityScheme_In {
     case "IN_HEADER":
       return SecurityScheme_In.IN_HEADER;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_In");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum SecurityScheme_In",
+      );
   }
 }
 
@@ -442,7 +468,9 @@ export function securityScheme_InToJSON(object: SecurityScheme_In): string {
     case SecurityScheme_In.IN_HEADER:
       return "IN_HEADER";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_In");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum SecurityScheme_In",
+      );
   }
 }
 
@@ -472,7 +500,9 @@ export function securityScheme_FlowFromJSON(object: any): SecurityScheme_Flow {
     case "FLOW_ACCESS_CODE":
       return SecurityScheme_Flow.FLOW_ACCESS_CODE;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Flow");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum SecurityScheme_Flow",
+      );
   }
 }
 
@@ -489,7 +519,9 @@ export function securityScheme_FlowToJSON(object: SecurityScheme_Flow): string {
     case SecurityScheme_Flow.FLOW_ACCESS_CODE:
       return "FLOW_ACCESS_CODE";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum SecurityScheme_Flow");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum SecurityScheme_Flow",
+      );
   }
 }
 
@@ -499,7 +531,9 @@ export interface SecurityScheme_ExtensionsEntry {
 }
 
 export interface SecurityRequirement {
-  securityRequirement: { [key: string]: SecurityRequirement_SecurityRequirementValue };
+  securityRequirement: {
+    [key: string]: SecurityRequirement_SecurityRequirementValue;
+  };
 }
 
 export interface SecurityRequirement_SecurityRequirementValue {
@@ -527,14 +561,23 @@ export const Swagger = {
       info: isSet(object.info) ? Info.fromJSON(object.info) : undefined,
       host: isSet(object.host) ? String(object.host) : "",
       basePath: isSet(object.basePath) ? String(object.basePath) : "",
-      schemes: Array.isArray(object?.schemes) ? object.schemes.map((e: any) => schemeFromJSON(e)) : [],
-      consumes: Array.isArray(object?.consumes) ? object.consumes.map((e: any) => String(e)) : [],
-      produces: Array.isArray(object?.produces) ? object.produces.map((e: any) => String(e)) : [],
+      schemes: Array.isArray(object?.schemes)
+        ? object.schemes.map((e: any) => schemeFromJSON(e))
+        : [],
+      consumes: Array.isArray(object?.consumes)
+        ? object.consumes.map((e: any) => String(e))
+        : [],
+      produces: Array.isArray(object?.produces)
+        ? object.produces.map((e: any) => String(e))
+        : [],
       responses: isObject(object.responses)
-        ? Object.entries(object.responses).reduce<{ [key: string]: Response }>((acc, [key, value]) => {
-          acc[key] = Response.fromJSON(value);
-          return acc;
-        }, {})
+        ? Object.entries(object.responses).reduce<{ [key: string]: Response }>(
+            (acc, [key, value]) => {
+              acc[key] = Response.fromJSON(value);
+              return acc;
+            },
+            {},
+          )
         : {},
       securityDefinitions: isSet(object.securityDefinitions)
         ? SecurityDefinitions.fromJSON(object.securityDefinitions)
@@ -545,12 +588,16 @@ export const Swagger = {
       tags: Array.isArray(object?.tags)
         ? object.tags.map((e: any) => Tag.fromJSON(e))
         : [],
-      externalDocs: isSet(object.externalDocs) ? ExternalDocumentation.fromJSON(object.externalDocs) : undefined,
+      externalDocs: isSet(object.externalDocs)
+        ? ExternalDocumentation.fromJSON(object.externalDocs)
+        : undefined,
       extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.extensions).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
     };
   },
@@ -558,7 +605,8 @@ export const Swagger = {
   toJSON(message: Swagger): unknown {
     const obj: any = {};
     message.swagger !== undefined && (obj.swagger = message.swagger);
-    message.info !== undefined && (obj.info = message.info ? Info.toJSON(message.info) : undefined);
+    message.info !== undefined &&
+      (obj.info = message.info ? Info.toJSON(message.info) : undefined);
     message.host !== undefined && (obj.host = message.host);
     message.basePath !== undefined && (obj.basePath = message.basePath);
     if (message.schemes) {
@@ -582,21 +630,26 @@ export const Swagger = {
         obj.responses[k] = Response.toJSON(v);
       });
     }
-    message.securityDefinitions !== undefined && (obj.securityDefinitions = message.securityDefinitions
-      ? SecurityDefinitions.toJSON(message.securityDefinitions)
-      : undefined);
+    message.securityDefinitions !== undefined &&
+      (obj.securityDefinitions = message.securityDefinitions
+        ? SecurityDefinitions.toJSON(message.securityDefinitions)
+        : undefined);
     if (message.security) {
-      obj.security = message.security.map((e) => e ? SecurityRequirement.toJSON(e) : undefined);
+      obj.security = message.security.map((e) =>
+        e ? SecurityRequirement.toJSON(e) : undefined,
+      );
     } else {
       obj.security = [];
     }
     if (message.tags) {
-      obj.tags = message.tags.map((e) => e ? Tag.toJSON(e) : undefined);
+      obj.tags = message.tags.map((e) => (e ? Tag.toJSON(e) : undefined));
     } else {
       obj.tags = [];
     }
     message.externalDocs !== undefined &&
-      (obj.externalDocs = message.externalDocs ? ExternalDocumentation.toJSON(message.externalDocs) : undefined);
+      (obj.externalDocs = message.externalDocs
+        ? ExternalDocumentation.toJSON(message.externalDocs)
+        : undefined);
     obj.extensions = {};
     if (message.extensions) {
       Object.entries(message.extensions).forEach(([k, v]) => {
@@ -618,14 +671,18 @@ export const Swagger_ResponsesEntry = {
   toJSON(message: Swagger_ResponsesEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? Response.toJSON(message.value) : undefined);
+    message.value !== undefined &&
+      (obj.value = message.value ? Response.toJSON(message.value) : undefined);
     return obj;
   },
 };
 
 export const Swagger_ExtensionsEntry = {
   fromJSON(object: any): Swagger_ExtensionsEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: Swagger_ExtensionsEntry): unknown {
@@ -639,31 +696,48 @@ export const Swagger_ExtensionsEntry = {
 export const Operation = {
   fromJSON(object: any): Operation {
     return {
-      tags: Array.isArray(object?.tags) ? object.tags.map((e: any) => String(e)) : [],
+      tags: Array.isArray(object?.tags)
+        ? object.tags.map((e: any) => String(e))
+        : [],
       summary: isSet(object.summary) ? String(object.summary) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      externalDocs: isSet(object.externalDocs) ? ExternalDocumentation.fromJSON(object.externalDocs) : undefined,
+      externalDocs: isSet(object.externalDocs)
+        ? ExternalDocumentation.fromJSON(object.externalDocs)
+        : undefined,
       operationId: isSet(object.operationId) ? String(object.operationId) : "",
-      consumes: Array.isArray(object?.consumes) ? object.consumes.map((e: any) => String(e)) : [],
-      produces: Array.isArray(object?.produces) ? object.produces.map((e: any) => String(e)) : [],
+      consumes: Array.isArray(object?.consumes)
+        ? object.consumes.map((e: any) => String(e))
+        : [],
+      produces: Array.isArray(object?.produces)
+        ? object.produces.map((e: any) => String(e))
+        : [],
       responses: isObject(object.responses)
-        ? Object.entries(object.responses).reduce<{ [key: string]: Response }>((acc, [key, value]) => {
-          acc[key] = Response.fromJSON(value);
-          return acc;
-        }, {})
+        ? Object.entries(object.responses).reduce<{ [key: string]: Response }>(
+            (acc, [key, value]) => {
+              acc[key] = Response.fromJSON(value);
+              return acc;
+            },
+            {},
+          )
         : {},
       schemes: Array.isArray(object?.schemes)
         ? object.schemes.map((e: any) => schemeFromJSON(e))
         : [],
       deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      security: Array.isArray(object?.security) ? object.security.map((e: any) => SecurityRequirement.fromJSON(e)) : [],
+      security: Array.isArray(object?.security)
+        ? object.security.map((e: any) => SecurityRequirement.fromJSON(e))
+        : [],
       extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.extensions).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
-      parameters: isSet(object.parameters) ? Parameters.fromJSON(object.parameters) : undefined,
+      parameters: isSet(object.parameters)
+        ? Parameters.fromJSON(object.parameters)
+        : undefined,
     };
   },
 
@@ -675,10 +749,14 @@ export const Operation = {
       obj.tags = [];
     }
     message.summary !== undefined && (obj.summary = message.summary);
-    message.description !== undefined && (obj.description = message.description);
+    message.description !== undefined &&
+      (obj.description = message.description);
     message.externalDocs !== undefined &&
-      (obj.externalDocs = message.externalDocs ? ExternalDocumentation.toJSON(message.externalDocs) : undefined);
-    message.operationId !== undefined && (obj.operationId = message.operationId);
+      (obj.externalDocs = message.externalDocs
+        ? ExternalDocumentation.toJSON(message.externalDocs)
+        : undefined);
+    message.operationId !== undefined &&
+      (obj.operationId = message.operationId);
     if (message.consumes) {
       obj.consumes = message.consumes.map((e) => e);
     } else {
@@ -702,7 +780,9 @@ export const Operation = {
     }
     message.deprecated !== undefined && (obj.deprecated = message.deprecated);
     if (message.security) {
-      obj.security = message.security.map((e) => e ? SecurityRequirement.toJSON(e) : undefined);
+      obj.security = message.security.map((e) =>
+        e ? SecurityRequirement.toJSON(e) : undefined,
+      );
     } else {
       obj.security = [];
     }
@@ -713,7 +793,9 @@ export const Operation = {
       });
     }
     message.parameters !== undefined &&
-      (obj.parameters = message.parameters ? Parameters.toJSON(message.parameters) : undefined);
+      (obj.parameters = message.parameters
+        ? Parameters.toJSON(message.parameters)
+        : undefined);
     return obj;
   },
 };
@@ -729,14 +811,18 @@ export const Operation_ResponsesEntry = {
   toJSON(message: Operation_ResponsesEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? Response.toJSON(message.value) : undefined);
+    message.value !== undefined &&
+      (obj.value = message.value ? Response.toJSON(message.value) : undefined);
     return obj;
   },
 };
 
 export const Operation_ExtensionsEntry = {
   fromJSON(object: any): Operation_ExtensionsEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: Operation_ExtensionsEntry): unknown {
@@ -750,14 +836,18 @@ export const Operation_ExtensionsEntry = {
 export const Parameters = {
   fromJSON(object: any): Parameters {
     return {
-      headers: Array.isArray(object?.headers) ? object.headers.map((e: any) => HeaderParameter.fromJSON(e)) : [],
+      headers: Array.isArray(object?.headers)
+        ? object.headers.map((e: any) => HeaderParameter.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: Parameters): unknown {
     const obj: any = {};
     if (message.headers) {
-      obj.headers = message.headers.map((e) => e ? HeaderParameter.toJSON(e) : undefined);
+      obj.headers = message.headers.map((e) =>
+        e ? HeaderParameter.toJSON(e) : undefined,
+      );
     } else {
       obj.headers = [];
     }
@@ -779,8 +869,10 @@ export const HeaderParameter = {
   toJSON(message: HeaderParameter): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.type !== undefined && (obj.type = headerParameter_TypeToJSON(message.type));
+    message.description !== undefined &&
+      (obj.description = message.description);
+    message.type !== undefined &&
+      (obj.type = headerParameter_TypeToJSON(message.type));
     message.format !== undefined && (obj.format = message.format);
     message.required !== undefined && (obj.required = message.required);
     return obj;
@@ -800,7 +892,8 @@ export const Header = {
 
   toJSON(message: Header): unknown {
     const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
+    message.description !== undefined &&
+      (obj.description = message.description);
     message.type !== undefined && (obj.type = message.type);
     message.format !== undefined && (obj.format = message.format);
     message.default !== undefined && (obj.default = message.default);
@@ -815,30 +908,40 @@ export const Response = {
       description: isSet(object.description) ? String(object.description) : "",
       schema: isSet(object.schema) ? Schema.fromJSON(object.schema) : undefined,
       headers: isObject(object.headers)
-        ? Object.entries(object.headers).reduce<{ [key: string]: Header }>((acc, [key, value]) => {
-          acc[key] = Header.fromJSON(value);
-          return acc;
-        }, {})
+        ? Object.entries(object.headers).reduce<{ [key: string]: Header }>(
+            (acc, [key, value]) => {
+              acc[key] = Header.fromJSON(value);
+              return acc;
+            },
+            {},
+          )
         : {},
       examples: isObject(object.examples)
-        ? Object.entries(object.examples).reduce<{ [key: string]: string }>((acc, [key, value]) => {
-          acc[key] = String(value);
-          return acc;
-        }, {})
+        ? Object.entries(object.examples).reduce<{ [key: string]: string }>(
+            (acc, [key, value]) => {
+              acc[key] = String(value);
+              return acc;
+            },
+            {},
+          )
         : {},
       extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.extensions).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
     };
   },
 
   toJSON(message: Response): unknown {
     const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
-    message.schema !== undefined && (obj.schema = message.schema ? Schema.toJSON(message.schema) : undefined);
+    message.description !== undefined &&
+      (obj.description = message.description);
+    message.schema !== undefined &&
+      (obj.schema = message.schema ? Schema.toJSON(message.schema) : undefined);
     obj.headers = {};
     if (message.headers) {
       Object.entries(message.headers).forEach(([k, v]) => {
@@ -872,14 +975,18 @@ export const Response_HeadersEntry = {
   toJSON(message: Response_HeadersEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? Header.toJSON(message.value) : undefined);
+    message.value !== undefined &&
+      (obj.value = message.value ? Header.toJSON(message.value) : undefined);
     return obj;
   },
 };
 
 export const Response_ExamplesEntry = {
   fromJSON(object: any): Response_ExamplesEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? String(object.value) : "" };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : "",
+    };
   },
 
   toJSON(message: Response_ExamplesEntry): unknown {
@@ -892,7 +999,10 @@ export const Response_ExamplesEntry = {
 
 export const Response_ExtensionsEntry = {
   fromJSON(object: any): Response_ExtensionsEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: Response_ExtensionsEntry): unknown {
@@ -908,15 +1018,23 @@ export const Info = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      termsOfService: isSet(object.termsOfService) ? String(object.termsOfService) : "",
-      contact: isSet(object.contact) ? Contact.fromJSON(object.contact) : undefined,
-      license: isSet(object.license) ? License.fromJSON(object.license) : undefined,
+      termsOfService: isSet(object.termsOfService)
+        ? String(object.termsOfService)
+        : "",
+      contact: isSet(object.contact)
+        ? Contact.fromJSON(object.contact)
+        : undefined,
+      license: isSet(object.license)
+        ? License.fromJSON(object.license)
+        : undefined,
       version: isSet(object.version) ? String(object.version) : "",
       extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.extensions).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
     };
   },
@@ -924,10 +1042,18 @@ export const Info = {
   toJSON(message: Info): unknown {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.termsOfService !== undefined && (obj.termsOfService = message.termsOfService);
-    message.contact !== undefined && (obj.contact = message.contact ? Contact.toJSON(message.contact) : undefined);
-    message.license !== undefined && (obj.license = message.license ? License.toJSON(message.license) : undefined);
+    message.description !== undefined &&
+      (obj.description = message.description);
+    message.termsOfService !== undefined &&
+      (obj.termsOfService = message.termsOfService);
+    message.contact !== undefined &&
+      (obj.contact = message.contact
+        ? Contact.toJSON(message.contact)
+        : undefined);
+    message.license !== undefined &&
+      (obj.license = message.license
+        ? License.toJSON(message.license)
+        : undefined);
     message.version !== undefined && (obj.version = message.version);
     obj.extensions = {};
     if (message.extensions) {
@@ -941,7 +1067,10 @@ export const Info = {
 
 export const Info_ExtensionsEntry = {
   fromJSON(object: any): Info_ExtensionsEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: Info_ExtensionsEntry): unknown {
@@ -972,7 +1101,10 @@ export const Contact = {
 
 export const License = {
   fromJSON(object: any): License {
-    return { name: isSet(object.name) ? String(object.name) : "", url: isSet(object.url) ? String(object.url) : "" };
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      url: isSet(object.url) ? String(object.url) : "",
+    };
   },
 
   toJSON(message: License): unknown {
@@ -993,7 +1125,8 @@ export const ExternalDocumentation = {
 
   toJSON(message: ExternalDocumentation): unknown {
     const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
+    message.description !== undefined &&
+      (obj.description = message.description);
     message.url !== undefined && (obj.url = message.url);
     return obj;
   },
@@ -1002,10 +1135,16 @@ export const ExternalDocumentation = {
 export const Schema = {
   fromJSON(object: any): Schema {
     return {
-      jsonSchema: isSet(object.jsonSchema) ? JSONSchema.fromJSON(object.jsonSchema) : undefined,
-      discriminator: isSet(object.discriminator) ? String(object.discriminator) : "",
+      jsonSchema: isSet(object.jsonSchema)
+        ? JSONSchema.fromJSON(object.jsonSchema)
+        : undefined,
+      discriminator: isSet(object.discriminator)
+        ? String(object.discriminator)
+        : "",
       readOnly: isSet(object.readOnly) ? Boolean(object.readOnly) : false,
-      externalDocs: isSet(object.externalDocs) ? ExternalDocumentation.fromJSON(object.externalDocs) : undefined,
+      externalDocs: isSet(object.externalDocs)
+        ? ExternalDocumentation.fromJSON(object.externalDocs)
+        : undefined,
       example: isSet(object.example) ? String(object.example) : "",
     };
   },
@@ -1013,11 +1152,16 @@ export const Schema = {
   toJSON(message: Schema): unknown {
     const obj: any = {};
     message.jsonSchema !== undefined &&
-      (obj.jsonSchema = message.jsonSchema ? JSONSchema.toJSON(message.jsonSchema) : undefined);
-    message.discriminator !== undefined && (obj.discriminator = message.discriminator);
+      (obj.jsonSchema = message.jsonSchema
+        ? JSONSchema.toJSON(message.jsonSchema)
+        : undefined);
+    message.discriminator !== undefined &&
+      (obj.discriminator = message.discriminator);
     message.readOnly !== undefined && (obj.readOnly = message.readOnly);
     message.externalDocs !== undefined &&
-      (obj.externalDocs = message.externalDocs ? ExternalDocumentation.toJSON(message.externalDocs) : undefined);
+      (obj.externalDocs = message.externalDocs
+        ? ExternalDocumentation.toJSON(message.externalDocs)
+        : undefined);
     message.example !== undefined && (obj.example = message.example);
     return obj;
   },
@@ -1034,32 +1178,52 @@ export const JSONSchema = {
       example: isSet(object.example) ? String(object.example) : "",
       multipleOf: isSet(object.multipleOf) ? Number(object.multipleOf) : 0,
       maximum: isSet(object.maximum) ? Number(object.maximum) : 0,
-      exclusiveMaximum: isSet(object.exclusiveMaximum) ? Boolean(object.exclusiveMaximum) : false,
+      exclusiveMaximum: isSet(object.exclusiveMaximum)
+        ? Boolean(object.exclusiveMaximum)
+        : false,
       minimum: isSet(object.minimum) ? Number(object.minimum) : 0,
-      exclusiveMinimum: isSet(object.exclusiveMinimum) ? Boolean(object.exclusiveMinimum) : false,
+      exclusiveMinimum: isSet(object.exclusiveMinimum)
+        ? Boolean(object.exclusiveMinimum)
+        : false,
       maxLength: isSet(object.maxLength) ? String(object.maxLength) : "0",
       minLength: isSet(object.minLength) ? String(object.minLength) : "0",
       pattern: isSet(object.pattern) ? String(object.pattern) : "",
       maxItems: isSet(object.maxItems) ? String(object.maxItems) : "0",
       minItems: isSet(object.minItems) ? String(object.minItems) : "0",
-      uniqueItems: isSet(object.uniqueItems) ? Boolean(object.uniqueItems) : false,
-      maxProperties: isSet(object.maxProperties) ? String(object.maxProperties) : "0",
-      minProperties: isSet(object.minProperties) ? String(object.minProperties) : "0",
+      uniqueItems: isSet(object.uniqueItems)
+        ? Boolean(object.uniqueItems)
+        : false,
+      maxProperties: isSet(object.maxProperties)
+        ? String(object.maxProperties)
+        : "0",
+      minProperties: isSet(object.minProperties)
+        ? String(object.minProperties)
+        : "0",
       required: Array.isArray(object?.required)
         ? object.required.map((e: any) => String(e))
         : [],
-      array: Array.isArray(object?.array) ? object.array.map((e: any) => String(e)) : [],
-      type: Array.isArray(object?.type) ? object.type.map((e: any) => jSONSchema_JSONSchemaSimpleTypesFromJSON(e)) : [],
+      array: Array.isArray(object?.array)
+        ? object.array.map((e: any) => String(e))
+        : [],
+      type: Array.isArray(object?.type)
+        ? object.type.map((e: any) =>
+            jSONSchema_JSONSchemaSimpleTypesFromJSON(e),
+          )
+        : [],
       format: isSet(object.format) ? String(object.format) : "",
-      enum: Array.isArray(object?.enum) ? object.enum.map((e: any) => String(e)) : [],
+      enum: Array.isArray(object?.enum)
+        ? object.enum.map((e: any) => String(e))
+        : [],
       fieldConfiguration: isSet(object.fieldConfiguration)
         ? JSONSchema_FieldConfiguration.fromJSON(object.fieldConfiguration)
         : undefined,
       extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.extensions).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
     };
   },
@@ -1068,23 +1232,29 @@ export const JSONSchema = {
     const obj: any = {};
     message.ref !== undefined && (obj.ref = message.ref);
     message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
+    message.description !== undefined &&
+      (obj.description = message.description);
     message.default !== undefined && (obj.default = message.default);
     message.readOnly !== undefined && (obj.readOnly = message.readOnly);
     message.example !== undefined && (obj.example = message.example);
     message.multipleOf !== undefined && (obj.multipleOf = message.multipleOf);
     message.maximum !== undefined && (obj.maximum = message.maximum);
-    message.exclusiveMaximum !== undefined && (obj.exclusiveMaximum = message.exclusiveMaximum);
+    message.exclusiveMaximum !== undefined &&
+      (obj.exclusiveMaximum = message.exclusiveMaximum);
     message.minimum !== undefined && (obj.minimum = message.minimum);
-    message.exclusiveMinimum !== undefined && (obj.exclusiveMinimum = message.exclusiveMinimum);
+    message.exclusiveMinimum !== undefined &&
+      (obj.exclusiveMinimum = message.exclusiveMinimum);
     message.maxLength !== undefined && (obj.maxLength = message.maxLength);
     message.minLength !== undefined && (obj.minLength = message.minLength);
     message.pattern !== undefined && (obj.pattern = message.pattern);
     message.maxItems !== undefined && (obj.maxItems = message.maxItems);
     message.minItems !== undefined && (obj.minItems = message.minItems);
-    message.uniqueItems !== undefined && (obj.uniqueItems = message.uniqueItems);
-    message.maxProperties !== undefined && (obj.maxProperties = message.maxProperties);
-    message.minProperties !== undefined && (obj.minProperties = message.minProperties);
+    message.uniqueItems !== undefined &&
+      (obj.uniqueItems = message.uniqueItems);
+    message.maxProperties !== undefined &&
+      (obj.maxProperties = message.maxProperties);
+    message.minProperties !== undefined &&
+      (obj.minProperties = message.minProperties);
     if (message.required) {
       obj.required = message.required.map((e) => e);
     } else {
@@ -1096,7 +1266,9 @@ export const JSONSchema = {
       obj.array = [];
     }
     if (message.type) {
-      obj.type = message.type.map((e) => jSONSchema_JSONSchemaSimpleTypesToJSON(e));
+      obj.type = message.type.map((e) =>
+        jSONSchema_JSONSchemaSimpleTypesToJSON(e),
+      );
     } else {
       obj.type = [];
     }
@@ -1106,9 +1278,10 @@ export const JSONSchema = {
     } else {
       obj.enum = [];
     }
-    message.fieldConfiguration !== undefined && (obj.fieldConfiguration = message.fieldConfiguration
-      ? JSONSchema_FieldConfiguration.toJSON(message.fieldConfiguration)
-      : undefined);
+    message.fieldConfiguration !== undefined &&
+      (obj.fieldConfiguration = message.fieldConfiguration
+        ? JSONSchema_FieldConfiguration.toJSON(message.fieldConfiguration)
+        : undefined);
     obj.extensions = {};
     if (message.extensions) {
       Object.entries(message.extensions).forEach(([k, v]) => {
@@ -1121,19 +1294,27 @@ export const JSONSchema = {
 
 export const JSONSchema_FieldConfiguration = {
   fromJSON(object: any): JSONSchema_FieldConfiguration {
-    return { pathParamName: isSet(object.pathParamName) ? String(object.pathParamName) : "" };
+    return {
+      pathParamName: isSet(object.pathParamName)
+        ? String(object.pathParamName)
+        : "",
+    };
   },
 
   toJSON(message: JSONSchema_FieldConfiguration): unknown {
     const obj: any = {};
-    message.pathParamName !== undefined && (obj.pathParamName = message.pathParamName);
+    message.pathParamName !== undefined &&
+      (obj.pathParamName = message.pathParamName);
     return obj;
   },
 };
 
 export const JSONSchema_ExtensionsEntry = {
   fromJSON(object: any): JSONSchema_ExtensionsEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: JSONSchema_ExtensionsEntry): unknown {
@@ -1149,12 +1330,16 @@ export const Tag = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      externalDocs: isSet(object.externalDocs) ? ExternalDocumentation.fromJSON(object.externalDocs) : undefined,
+      externalDocs: isSet(object.externalDocs)
+        ? ExternalDocumentation.fromJSON(object.externalDocs)
+        : undefined,
       extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.extensions).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
     };
   },
@@ -1162,9 +1347,12 @@ export const Tag = {
   toJSON(message: Tag): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
+    message.description !== undefined &&
+      (obj.description = message.description);
     message.externalDocs !== undefined &&
-      (obj.externalDocs = message.externalDocs ? ExternalDocumentation.toJSON(message.externalDocs) : undefined);
+      (obj.externalDocs = message.externalDocs
+        ? ExternalDocumentation.toJSON(message.externalDocs)
+        : undefined);
     obj.extensions = {};
     if (message.extensions) {
       Object.entries(message.extensions).forEach(([k, v]) => {
@@ -1177,7 +1365,10 @@ export const Tag = {
 
 export const Tag_ExtensionsEntry = {
   fromJSON(object: any): Tag_ExtensionsEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: Tag_ExtensionsEntry): unknown {
@@ -1192,10 +1383,12 @@ export const SecurityDefinitions = {
   fromJSON(object: any): SecurityDefinitions {
     return {
       security: isObject(object.security)
-        ? Object.entries(object.security).reduce<{ [key: string]: SecurityScheme }>((acc, [key, value]) => {
-          acc[key] = SecurityScheme.fromJSON(value);
-          return acc;
-        }, {})
+        ? Object.entries(object.security).reduce<{
+            [key: string]: SecurityScheme;
+          }>((acc, [key, value]) => {
+            acc[key] = SecurityScheme.fromJSON(value);
+            return acc;
+          }, {})
         : {},
     };
   },
@@ -1216,14 +1409,19 @@ export const SecurityDefinitions_SecurityEntry = {
   fromJSON(object: any): SecurityDefinitions_SecurityEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? SecurityScheme.fromJSON(object.value) : undefined,
+      value: isSet(object.value)
+        ? SecurityScheme.fromJSON(object.value)
+        : undefined,
     };
   },
 
   toJSON(message: SecurityDefinitions_SecurityEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? SecurityScheme.toJSON(message.value) : undefined);
+    message.value !== undefined &&
+      (obj.value = message.value
+        ? SecurityScheme.toJSON(message.value)
+        : undefined);
     return obj;
   },
 };
@@ -1236,28 +1434,37 @@ export const SecurityScheme = {
       name: isSet(object.name) ? String(object.name) : "",
       in: isSet(object.in) ? securityScheme_InFromJSON(object.in) : 0,
       flow: isSet(object.flow) ? securityScheme_FlowFromJSON(object.flow) : 0,
-      authorizationUrl: isSet(object.authorizationUrl) ? String(object.authorizationUrl) : "",
+      authorizationUrl: isSet(object.authorizationUrl)
+        ? String(object.authorizationUrl)
+        : "",
       tokenUrl: isSet(object.tokenUrl) ? String(object.tokenUrl) : "",
       scopes: isSet(object.scopes) ? Scopes.fromJSON(object.scopes) : undefined,
       extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.extensions).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
     };
   },
 
   toJSON(message: SecurityScheme): unknown {
     const obj: any = {};
-    message.type !== undefined && (obj.type = securityScheme_TypeToJSON(message.type));
-    message.description !== undefined && (obj.description = message.description);
+    message.type !== undefined &&
+      (obj.type = securityScheme_TypeToJSON(message.type));
+    message.description !== undefined &&
+      (obj.description = message.description);
     message.name !== undefined && (obj.name = message.name);
     message.in !== undefined && (obj.in = securityScheme_InToJSON(message.in));
-    message.flow !== undefined && (obj.flow = securityScheme_FlowToJSON(message.flow));
-    message.authorizationUrl !== undefined && (obj.authorizationUrl = message.authorizationUrl);
+    message.flow !== undefined &&
+      (obj.flow = securityScheme_FlowToJSON(message.flow));
+    message.authorizationUrl !== undefined &&
+      (obj.authorizationUrl = message.authorizationUrl);
     message.tokenUrl !== undefined && (obj.tokenUrl = message.tokenUrl);
-    message.scopes !== undefined && (obj.scopes = message.scopes ? Scopes.toJSON(message.scopes) : undefined);
+    message.scopes !== undefined &&
+      (obj.scopes = message.scopes ? Scopes.toJSON(message.scopes) : undefined);
     obj.extensions = {};
     if (message.extensions) {
       Object.entries(message.extensions).forEach(([k, v]) => {
@@ -1270,7 +1477,10 @@ export const SecurityScheme = {
 
 export const SecurityScheme_ExtensionsEntry = {
   fromJSON(object: any): SecurityScheme_ExtensionsEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: SecurityScheme_ExtensionsEntry): unknown {
@@ -1285,12 +1495,13 @@ export const SecurityRequirement = {
   fromJSON(object: any): SecurityRequirement {
     return {
       securityRequirement: isObject(object.securityRequirement)
-        ? Object.entries(object.securityRequirement).reduce<
-          { [key: string]: SecurityRequirement_SecurityRequirementValue }
-        >((acc, [key, value]) => {
-          acc[key] = SecurityRequirement_SecurityRequirementValue.fromJSON(value);
-          return acc;
-        }, {})
+        ? Object.entries(object.securityRequirement).reduce<{
+            [key: string]: SecurityRequirement_SecurityRequirementValue;
+          }>((acc, [key, value]) => {
+            acc[key] =
+              SecurityRequirement_SecurityRequirementValue.fromJSON(value);
+            return acc;
+          }, {})
         : {},
     };
   },
@@ -1300,7 +1511,8 @@ export const SecurityRequirement = {
     obj.securityRequirement = {};
     if (message.securityRequirement) {
       Object.entries(message.securityRequirement).forEach(([k, v]) => {
-        obj.securityRequirement[k] = SecurityRequirement_SecurityRequirementValue.toJSON(v);
+        obj.securityRequirement[k] =
+          SecurityRequirement_SecurityRequirementValue.toJSON(v);
       });
     }
     return obj;
@@ -1309,7 +1521,11 @@ export const SecurityRequirement = {
 
 export const SecurityRequirement_SecurityRequirementValue = {
   fromJSON(object: any): SecurityRequirement_SecurityRequirementValue {
-    return { scope: Array.isArray(object?.scope) ? object.scope.map((e: any) => String(e)) : [] };
+    return {
+      scope: Array.isArray(object?.scope)
+        ? object.scope.map((e: any) => String(e))
+        : [],
+    };
   },
 
   toJSON(message: SecurityRequirement_SecurityRequirementValue): unknown {
@@ -1327,7 +1543,9 @@ export const SecurityRequirement_SecurityRequirementEntry = {
   fromJSON(object: any): SecurityRequirement_SecurityRequirementEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? SecurityRequirement_SecurityRequirementValue.fromJSON(object.value) : undefined,
+      value: isSet(object.value)
+        ? SecurityRequirement_SecurityRequirementValue.fromJSON(object.value)
+        : undefined,
     };
   },
 
@@ -1335,7 +1553,9 @@ export const SecurityRequirement_SecurityRequirementEntry = {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined &&
-      (obj.value = message.value ? SecurityRequirement_SecurityRequirementValue.toJSON(message.value) : undefined);
+      (obj.value = message.value
+        ? SecurityRequirement_SecurityRequirementValue.toJSON(message.value)
+        : undefined);
     return obj;
   },
 };
@@ -1344,10 +1564,13 @@ export const Scopes = {
   fromJSON(object: any): Scopes {
     return {
       scope: isObject(object.scope)
-        ? Object.entries(object.scope).reduce<{ [key: string]: string }>((acc, [key, value]) => {
-          acc[key] = String(value);
-          return acc;
-        }, {})
+        ? Object.entries(object.scope).reduce<{ [key: string]: string }>(
+            (acc, [key, value]) => {
+              acc[key] = String(value);
+              return acc;
+            },
+            {},
+          )
         : {},
     };
   },
@@ -1366,7 +1589,10 @@ export const Scopes = {
 
 export const Scopes_ScopeEntry = {
   fromJSON(object: any): Scopes_ScopeEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? String(object.value) : "" };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : "",
+    };
   },
 
   toJSON(message: Scopes_ScopeEntry): unknown {

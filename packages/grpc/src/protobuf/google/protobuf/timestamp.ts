@@ -14,7 +14,10 @@ function createBaseTimestamp(): Timestamp {
 }
 
 export const Timestamp = {
-  encode(message: Timestamp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Timestamp,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.seconds !== "0") {
       writer.uint32(8).int64(message.seconds);
     }
@@ -25,7 +28,8 @@ export const Timestamp = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Timestamp {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTimestamp();
     while (reader.pos < end) {

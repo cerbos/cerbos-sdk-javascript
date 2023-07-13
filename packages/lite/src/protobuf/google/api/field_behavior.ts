@@ -40,7 +40,9 @@ export function fieldBehaviorFromJSON(object: any): FieldBehavior {
     case "NON_EMPTY_DEFAULT":
       return FieldBehavior.NON_EMPTY_DEFAULT;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FieldBehavior");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum FieldBehavior",
+      );
   }
 }
 
@@ -63,7 +65,9 @@ export function fieldBehaviorToJSON(object: FieldBehavior): string {
     case FieldBehavior.NON_EMPTY_DEFAULT:
       return "NON_EMPTY_DEFAULT";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FieldBehavior");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum FieldBehavior",
+      );
   }
 }
 

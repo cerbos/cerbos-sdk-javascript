@@ -85,7 +85,10 @@ export interface RoleDef {
 }
 
 export interface Condition {
-  condition?: { $case: "match"; match: Match } | { $case: "script"; script: string } | undefined;
+  condition?:
+    | { $case: "match"; match: Match }
+    | { $case: "script"; script: string }
+    | undefined;
 }
 
 export interface Match {
