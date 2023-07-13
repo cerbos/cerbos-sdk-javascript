@@ -12,8 +12,10 @@ export interface Policy {
     | { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy }
     | { $case: "principalPolicy"; principalPolicy: PrincipalPolicy }
     | { $case: "derivedRoles"; derivedRoles: DerivedRoles }
+    | { $case: "exportVariables"; exportVariables: ExportVariables }
     | undefined;
   variables: { [key: string]: string };
+  jsonSchema: string;
 }
 
 export interface Policy_VariablesEntry {
@@ -41,6 +43,7 @@ export interface ResourcePolicy {
   rules: ResourceRule[];
   scope: string;
   schemas: Schemas | undefined;
+  variables: Variables | undefined;
 }
 
 export interface ResourceRule {
@@ -58,6 +61,7 @@ export interface PrincipalPolicy {
   version: string;
   rules: PrincipalRule[];
   scope: string;
+  variables: Variables | undefined;
 }
 
 export interface PrincipalRule {
@@ -76,12 +80,33 @@ export interface PrincipalRule_Action {
 export interface DerivedRoles {
   name: string;
   definitions: RoleDef[];
+  variables: Variables | undefined;
 }
 
 export interface RoleDef {
   name: string;
   parentRoles: string[];
   condition: Condition | undefined;
+}
+
+export interface ExportVariables {
+  name: string;
+  definitions: { [key: string]: string };
+}
+
+export interface ExportVariables_DefinitionsEntry {
+  key: string;
+  value: string;
+}
+
+export interface Variables {
+  import: string[];
+  local: { [key: string]: string };
+}
+
+export interface Variables_LocalEntry {
+  key: string;
+  value: string;
 }
 
 export interface Condition {
