@@ -8,10 +8,11 @@ export interface Policy {
   disabled: boolean;
   description: string;
   metadata: Metadata | undefined;
-  policyType?: { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy } | {
-    $case: "principalPolicy";
-    principalPolicy: PrincipalPolicy;
-  } | { $case: "derivedRoles"; derivedRoles: DerivedRoles };
+  policyType?:
+    | { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy }
+    | { $case: "principalPolicy"; principalPolicy: PrincipalPolicy }
+    | { $case: "derivedRoles"; derivedRoles: DerivedRoles }
+    | undefined;
   variables: { [key: string]: string };
 }
 
@@ -84,14 +85,19 @@ export interface RoleDef {
 }
 
 export interface Condition {
-  condition?: { $case: "match"; match: Match } | { $case: "script"; script: string };
+  condition?:
+    | { $case: "match"; match: Match }
+    | { $case: "script"; script: string }
+    | undefined;
 }
 
 export interface Match {
-  op?: { $case: "all"; all: Match_ExprList } | { $case: "any"; any: Match_ExprList } | {
-    $case: "none";
-    none: Match_ExprList;
-  } | { $case: "expr"; expr: string };
+  op?:
+    | { $case: "all"; all: Match_ExprList }
+    | { $case: "any"; any: Match_ExprList }
+    | { $case: "none"; none: Match_ExprList }
+    | { $case: "expr"; expr: string }
+    | undefined;
 }
 
 export interface Match_ExprList {

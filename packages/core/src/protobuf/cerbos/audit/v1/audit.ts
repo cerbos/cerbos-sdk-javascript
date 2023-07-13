@@ -1,5 +1,10 @@
 /* eslint-disable */
-import type { CheckInput, CheckOutput, PlanResourcesInput, PlanResourcesOutput } from "../../engine/v1/engine";
+import type {
+  CheckInput,
+  CheckOutput,
+  PlanResourcesInput,
+  PlanResourcesOutput,
+} from "../../engine/v1/engine";
 
 export const protobufPackage = "cerbos.audit.v1";
 
@@ -24,10 +29,16 @@ export interface DecisionLogEntry {
   inputs: CheckInput[];
   outputs: CheckOutput[];
   error: string;
-  method?: { $case: "checkResources"; checkResources: DecisionLogEntry_CheckResources } | {
-    $case: "planResources";
-    planResources: DecisionLogEntry_PlanResources;
-  };
+  method?:
+    | {
+        $case: "checkResources";
+        checkResources: DecisionLogEntry_CheckResources;
+      }
+    | {
+        $case: "planResources";
+        planResources: DecisionLogEntry_PlanResources;
+      }
+    | undefined;
   metadata: { [key: string]: MetaValues };
 }
 

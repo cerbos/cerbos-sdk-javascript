@@ -10,7 +10,8 @@ export interface HttpRule {
     | { $case: "post"; post: string }
     | { $case: "delete"; delete: string }
     | { $case: "patch"; patch: string }
-    | { $case: "custom"; custom: CustomHttpPattern };
+    | { $case: "custom"; custom: CustomHttpPattern }
+    | undefined;
   body: string;
   responseBody: string;
   additionalBindings: HttpRule[];
@@ -39,7 +40,9 @@ export const HttpRule = {
         ? { $case: "custom", custom: CustomHttpPattern.fromJSON(object.custom) }
         : undefined,
       body: isSet(object.body) ? String(object.body) : "",
-      responseBody: isSet(object.responseBody) ? String(object.responseBody) : "",
+      responseBody: isSet(object.responseBody)
+        ? String(object.responseBody)
+        : "",
       additionalBindings: Array.isArray(object?.additionalBindings)
         ? object.additionalBindings.map((e: any) => HttpRule.fromJSON(e))
         : [],
@@ -52,14 +55,20 @@ export const HttpRule = {
     message.pattern?.$case === "get" && (obj.get = message.pattern?.get);
     message.pattern?.$case === "put" && (obj.put = message.pattern?.put);
     message.pattern?.$case === "post" && (obj.post = message.pattern?.post);
-    message.pattern?.$case === "delete" && (obj.delete = message.pattern?.delete);
+    message.pattern?.$case === "delete" &&
+      (obj.delete = message.pattern?.delete);
     message.pattern?.$case === "patch" && (obj.patch = message.pattern?.patch);
     message.pattern?.$case === "custom" &&
-      (obj.custom = message.pattern?.custom ? CustomHttpPattern.toJSON(message.pattern?.custom) : undefined);
+      (obj.custom = message.pattern?.custom
+        ? CustomHttpPattern.toJSON(message.pattern?.custom)
+        : undefined);
     message.body !== undefined && (obj.body = message.body);
-    message.responseBody !== undefined && (obj.responseBody = message.responseBody);
+    message.responseBody !== undefined &&
+      (obj.responseBody = message.responseBody);
     if (message.additionalBindings) {
-      obj.additionalBindings = message.additionalBindings.map((e) => e ? HttpRule.toJSON(e) : undefined);
+      obj.additionalBindings = message.additionalBindings.map((e) =>
+        e ? HttpRule.toJSON(e) : undefined,
+      );
     } else {
       obj.additionalBindings = [];
     }
@@ -69,7 +78,10 @@ export const HttpRule = {
 
 export const CustomHttpPattern = {
   fromJSON(object: any): CustomHttpPattern {
-    return { kind: isSet(object.kind) ? String(object.kind) : "", path: isSet(object.path) ? String(object.path) : "" };
+    return {
+      kind: isSet(object.kind) ? String(object.kind) : "",
+      path: isSet(object.path) ? String(object.path) : "",
+    };
   },
 
   toJSON(message: CustomHttpPattern): unknown {

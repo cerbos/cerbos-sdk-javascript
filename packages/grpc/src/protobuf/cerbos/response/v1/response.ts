@@ -26,7 +26,9 @@ export interface PlanResourcesResponse_Meta {
 
 export interface CheckResourceSetResponse {
   requestId: string;
-  resourceInstances: { [key: string]: CheckResourceSetResponse_ActionEffectMap };
+  resourceInstances: {
+    [key: string]: CheckResourceSetResponse_ActionEffectMap;
+  };
   meta: CheckResourceSetResponse_Meta | undefined;
 }
 
@@ -41,7 +43,9 @@ export interface CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
 }
 
 export interface CheckResourceSetResponse_Meta {
-  resourceInstances: { [key: string]: CheckResourceSetResponse_Meta_ActionMeta };
+  resourceInstances: {
+    [key: string]: CheckResourceSetResponse_Meta_ActionMeta;
+  };
 }
 
 export interface CheckResourceSetResponse_Meta_EffectMeta {
@@ -106,7 +110,9 @@ export interface CheckResourcesResponse_ResultEntry_Resource {
 }
 
 export interface CheckResourcesResponse_ResultEntry_Meta {
-  actions: { [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta };
+  actions: {
+    [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta;
+  };
   effectiveDerivedRoles: string[];
 }
 
@@ -130,10 +136,13 @@ export interface AddOrUpdatePolicyResponse {
 }
 
 export interface ListAuditLogEntriesResponse {
-  entry?: { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry } | {
-    $case: "decisionLogEntry";
-    decisionLogEntry: DecisionLogEntry;
-  };
+  entry?:
+    | { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry }
+    | {
+        $case: "decisionLogEntry";
+        decisionLogEntry: DecisionLogEntry;
+      }
+    | undefined;
 }
 
 export interface ServerInfoResponse {
@@ -158,8 +167,7 @@ export interface EnablePolicyResponse {
   enabledPolicies: number;
 }
 
-export interface AddOrUpdateSchemaResponse {
-}
+export interface AddOrUpdateSchemaResponse {}
 
 export interface ListSchemasResponse {
   schemaIds: string[];
@@ -173,8 +181,7 @@ export interface DeleteSchemaResponse {
   deletedSchemas: number;
 }
 
-export interface ReloadStoreResponse {
-}
+export interface ReloadStoreResponse {}
 
 function createBasePlanResourcesResponse(): PlanResourcesResponse {
   return {
@@ -189,7 +196,10 @@ function createBasePlanResourcesResponse(): PlanResourcesResponse {
 }
 
 export const PlanResourcesResponse = {
-  encode(message: PlanResourcesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PlanResourcesResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -203,10 +213,16 @@ export const PlanResourcesResponse = {
       writer.uint32(34).string(message.policyVersion);
     }
     if (message.filter !== undefined) {
-      PlanResourcesFilter.encode(message.filter, writer.uint32(42).fork()).ldelim();
+      PlanResourcesFilter.encode(
+        message.filter,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.meta !== undefined) {
-      PlanResourcesResponse_Meta.encode(message.meta, writer.uint32(50).fork()).ldelim();
+      PlanResourcesResponse_Meta.encode(
+        message.meta,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     for (const v of message.validationErrors) {
       ValidationError.encode(v!, writer.uint32(58).fork()).ldelim();
@@ -214,8 +230,12 @@ export const PlanResourcesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): PlanResourcesResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesResponse();
     while (reader.pos < end) {
@@ -261,14 +281,19 @@ export const PlanResourcesResponse = {
             break;
           }
 
-          message.meta = PlanResourcesResponse_Meta.decode(reader, reader.uint32());
+          message.meta = PlanResourcesResponse_Meta.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 7:
           if (tag !== 58) {
             break;
           }
 
-          message.validationErrors.push(ValidationError.decode(reader, reader.uint32()));
+          message.validationErrors.push(
+            ValidationError.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -285,7 +310,10 @@ function createBasePlanResourcesResponse_Meta(): PlanResourcesResponse_Meta {
 }
 
 export const PlanResourcesResponse_Meta = {
-  encode(message: PlanResourcesResponse_Meta, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PlanResourcesResponse_Meta,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.filterDebug !== "") {
       writer.uint32(10).string(message.filterDebug);
     }
@@ -295,8 +323,12 @@ export const PlanResourcesResponse_Meta = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesResponse_Meta {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): PlanResourcesResponse_Meta {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesResponse_Meta();
     while (reader.pos < end) {
@@ -331,22 +363,34 @@ function createBaseCheckResourceSetResponse(): CheckResourceSetResponse {
 }
 
 export const CheckResourceSetResponse = {
-  encode(message: CheckResourceSetResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckResourceSetResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
     Object.entries(message.resourceInstances).forEach(([key, value]) => {
-      CheckResourceSetResponse_ResourceInstancesEntry.encode({ key: key as any, value }, writer.uint32(18).fork())
-        .ldelim();
+      CheckResourceSetResponse_ResourceInstancesEntry.encode(
+        { key: key as any, value },
+        writer.uint32(18).fork(),
+      ).ldelim();
     });
     if (message.meta !== undefined) {
-      CheckResourceSetResponse_Meta.encode(message.meta, writer.uint32(26).fork()).ldelim();
+      CheckResourceSetResponse_Meta.encode(
+        message.meta,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceSetResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceSetResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse();
     while (reader.pos < end) {
@@ -364,7 +408,10 @@ export const CheckResourceSetResponse = {
             break;
           }
 
-          const entry2 = CheckResourceSetResponse_ResourceInstancesEntry.decode(reader, reader.uint32());
+          const entry2 = CheckResourceSetResponse_ResourceInstancesEntry.decode(
+            reader,
+            reader.uint32(),
+          );
           if (entry2.value !== undefined) {
             message.resourceInstances[entry2.key] = entry2.value;
           }
@@ -374,7 +421,10 @@ export const CheckResourceSetResponse = {
             break;
           }
 
-          message.meta = CheckResourceSetResponse_Meta.decode(reader, reader.uint32());
+          message.meta = CheckResourceSetResponse_Meta.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -391,10 +441,15 @@ function createBaseCheckResourceSetResponse_ActionEffectMap(): CheckResourceSetR
 }
 
 export const CheckResourceSetResponse_ActionEffectMap = {
-  encode(message: CheckResourceSetResponse_ActionEffectMap, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckResourceSetResponse_ActionEffectMap,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     Object.entries(message.actions).forEach(([key, value]) => {
-      CheckResourceSetResponse_ActionEffectMap_ActionsEntry.encode({ key: key as any, value }, writer.uint32(10).fork())
-        .ldelim();
+      CheckResourceSetResponse_ActionEffectMap_ActionsEntry.encode(
+        { key: key as any, value },
+        writer.uint32(10).fork(),
+      ).ldelim();
     });
     for (const v of message.validationErrors) {
       ValidationError.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -402,8 +457,12 @@ export const CheckResourceSetResponse_ActionEffectMap = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceSetResponse_ActionEffectMap {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceSetResponse_ActionEffectMap {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse_ActionEffectMap();
     while (reader.pos < end) {
@@ -414,7 +473,11 @@ export const CheckResourceSetResponse_ActionEffectMap = {
             break;
           }
 
-          const entry1 = CheckResourceSetResponse_ActionEffectMap_ActionsEntry.decode(reader, reader.uint32());
+          const entry1 =
+            CheckResourceSetResponse_ActionEffectMap_ActionsEntry.decode(
+              reader,
+              reader.uint32(),
+            );
           if (entry1.value !== undefined) {
             message.actions[entry1.key] = entry1.value;
           }
@@ -424,7 +487,9 @@ export const CheckResourceSetResponse_ActionEffectMap = {
             break;
           }
 
-          message.validationErrors.push(ValidationError.decode(reader, reader.uint32()));
+          message.validationErrors.push(
+            ValidationError.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -454,10 +519,15 @@ export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceSetResponse_ActionEffectMap_ActionsEntry();
+    const message =
+      createBaseCheckResourceSetResponse_ActionEffectMap_ActionsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -490,16 +560,25 @@ function createBaseCheckResourceSetResponse_Meta(): CheckResourceSetResponse_Met
 }
 
 export const CheckResourceSetResponse_Meta = {
-  encode(message: CheckResourceSetResponse_Meta, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckResourceSetResponse_Meta,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     Object.entries(message.resourceInstances).forEach(([key, value]) => {
-      CheckResourceSetResponse_Meta_ResourceInstancesEntry.encode({ key: key as any, value }, writer.uint32(10).fork())
-        .ldelim();
+      CheckResourceSetResponse_Meta_ResourceInstancesEntry.encode(
+        { key: key as any, value },
+        writer.uint32(10).fork(),
+      ).ldelim();
     });
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceSetResponse_Meta {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceSetResponse_Meta {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse_Meta();
     while (reader.pos < end) {
@@ -510,7 +589,11 @@ export const CheckResourceSetResponse_Meta = {
             break;
           }
 
-          const entry1 = CheckResourceSetResponse_Meta_ResourceInstancesEntry.decode(reader, reader.uint32());
+          const entry1 =
+            CheckResourceSetResponse_Meta_ResourceInstancesEntry.decode(
+              reader,
+              reader.uint32(),
+            );
           if (entry1.value !== undefined) {
             message.resourceInstances[entry1.key] = entry1.value;
           }
@@ -530,7 +613,10 @@ function createBaseCheckResourceSetResponse_Meta_EffectMeta(): CheckResourceSetR
 }
 
 export const CheckResourceSetResponse_Meta_EffectMeta = {
-  encode(message: CheckResourceSetResponse_Meta_EffectMeta, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckResourceSetResponse_Meta_EffectMeta,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.matchedPolicy !== "") {
       writer.uint32(10).string(message.matchedPolicy);
     }
@@ -540,8 +626,12 @@ export const CheckResourceSetResponse_Meta_EffectMeta = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceSetResponse_Meta_EffectMeta {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceSetResponse_Meta_EffectMeta {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse_Meta_EffectMeta();
     while (reader.pos < end) {
@@ -576,10 +666,15 @@ function createBaseCheckResourceSetResponse_Meta_ActionMeta(): CheckResourceSetR
 }
 
 export const CheckResourceSetResponse_Meta_ActionMeta = {
-  encode(message: CheckResourceSetResponse_Meta_ActionMeta, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckResourceSetResponse_Meta_ActionMeta,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     Object.entries(message.actions).forEach(([key, value]) => {
-      CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.encode({ key: key as any, value }, writer.uint32(10).fork())
-        .ldelim();
+      CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.encode(
+        { key: key as any, value },
+        writer.uint32(10).fork(),
+      ).ldelim();
     });
     for (const v of message.effectiveDerivedRoles) {
       writer.uint32(18).string(v!);
@@ -587,8 +682,12 @@ export const CheckResourceSetResponse_Meta_ActionMeta = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceSetResponse_Meta_ActionMeta {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceSetResponse_Meta_ActionMeta {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse_Meta_ActionMeta();
     while (reader.pos < end) {
@@ -599,7 +698,11 @@ export const CheckResourceSetResponse_Meta_ActionMeta = {
             break;
           }
 
-          const entry1 = CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.decode(reader, reader.uint32());
+          const entry1 =
+            CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.decode(
+              reader,
+              reader.uint32(),
+            );
           if (entry1.value !== undefined) {
             message.actions[entry1.key] = entry1.value;
           }
@@ -634,15 +737,23 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      CheckResourceSetResponse_Meta_EffectMeta.encode(message.value, writer.uint32(18).fork()).ldelim();
+      CheckResourceSetResponse_Meta_EffectMeta.encode(
+        message.value,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceSetResponse_Meta_ActionMeta_ActionsEntry();
+    const message =
+      createBaseCheckResourceSetResponse_Meta_ActionMeta_ActionsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -658,7 +769,10 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
             break;
           }
 
-          message.value = CheckResourceSetResponse_Meta_EffectMeta.decode(reader, reader.uint32());
+          message.value = CheckResourceSetResponse_Meta_EffectMeta.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -683,15 +797,23 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      CheckResourceSetResponse_Meta_ActionMeta.encode(message.value, writer.uint32(18).fork()).ldelim();
+      CheckResourceSetResponse_Meta_ActionMeta.encode(
+        message.value,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceSetResponse_Meta_ResourceInstancesEntry();
+    const message =
+      createBaseCheckResourceSetResponse_Meta_ResourceInstancesEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -707,7 +829,10 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
             break;
           }
 
-          message.value = CheckResourceSetResponse_Meta_ActionMeta.decode(reader, reader.uint32());
+          message.value = CheckResourceSetResponse_Meta_ActionMeta.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -732,13 +857,20 @@ export const CheckResourceSetResponse_ResourceInstancesEntry = {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      CheckResourceSetResponse_ActionEffectMap.encode(message.value, writer.uint32(18).fork()).ldelim();
+      CheckResourceSetResponse_ActionEffectMap.encode(
+        message.value,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceSetResponse_ResourceInstancesEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceSetResponse_ResourceInstancesEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse_ResourceInstancesEntry();
     while (reader.pos < end) {
@@ -756,7 +888,10 @@ export const CheckResourceSetResponse_ResourceInstancesEntry = {
             break;
           }
 
-          message.value = CheckResourceSetResponse_ActionEffectMap.decode(reader, reader.uint32());
+          message.value = CheckResourceSetResponse_ActionEffectMap.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -773,18 +908,28 @@ function createBaseCheckResourceBatchResponse(): CheckResourceBatchResponse {
 }
 
 export const CheckResourceBatchResponse = {
-  encode(message: CheckResourceBatchResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckResourceBatchResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
     for (const v of message.results) {
-      CheckResourceBatchResponse_ActionEffectMap.encode(v!, writer.uint32(18).fork()).ldelim();
+      CheckResourceBatchResponse_ActionEffectMap.encode(
+        v!,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceBatchResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceBatchResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceBatchResponse();
     while (reader.pos < end) {
@@ -802,7 +947,12 @@ export const CheckResourceBatchResponse = {
             break;
           }
 
-          message.results.push(CheckResourceBatchResponse_ActionEffectMap.decode(reader, reader.uint32()));
+          message.results.push(
+            CheckResourceBatchResponse_ActionEffectMap.decode(
+              reader,
+              reader.uint32(),
+            ),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -819,7 +969,10 @@ function createBaseCheckResourceBatchResponse_ActionEffectMap(): CheckResourceBa
 }
 
 export const CheckResourceBatchResponse_ActionEffectMap = {
-  encode(message: CheckResourceBatchResponse_ActionEffectMap, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckResourceBatchResponse_ActionEffectMap,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.resourceId !== "") {
       writer.uint32(10).string(message.resourceId);
     }
@@ -835,8 +988,12 @@ export const CheckResourceBatchResponse_ActionEffectMap = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceBatchResponse_ActionEffectMap {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceBatchResponse_ActionEffectMap {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceBatchResponse_ActionEffectMap();
     while (reader.pos < end) {
@@ -854,7 +1011,11 @@ export const CheckResourceBatchResponse_ActionEffectMap = {
             break;
           }
 
-          const entry2 = CheckResourceBatchResponse_ActionEffectMap_ActionsEntry.decode(reader, reader.uint32());
+          const entry2 =
+            CheckResourceBatchResponse_ActionEffectMap_ActionsEntry.decode(
+              reader,
+              reader.uint32(),
+            );
           if (entry2.value !== undefined) {
             message.actions[entry2.key] = entry2.value;
           }
@@ -864,7 +1025,9 @@ export const CheckResourceBatchResponse_ActionEffectMap = {
             break;
           }
 
-          message.validationErrors.push(ValidationError.decode(reader, reader.uint32()));
+          message.validationErrors.push(
+            ValidationError.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -894,10 +1057,15 @@ export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry();
+    const message =
+      createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -930,18 +1098,28 @@ function createBaseCheckResourcesResponse(): CheckResourcesResponse {
 }
 
 export const CheckResourcesResponse = {
-  encode(message: CheckResourcesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckResourcesResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
     for (const v of message.results) {
-      CheckResourcesResponse_ResultEntry.encode(v!, writer.uint32(18).fork()).ldelim();
+      CheckResourcesResponse_ResultEntry.encode(
+        v!,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourcesResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourcesResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesResponse();
     while (reader.pos < end) {
@@ -959,7 +1137,9 @@ export const CheckResourcesResponse = {
             break;
           }
 
-          message.results.push(CheckResourcesResponse_ResultEntry.decode(reader, reader.uint32()));
+          message.results.push(
+            CheckResourcesResponse_ResultEntry.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -972,23 +1152,40 @@ export const CheckResourcesResponse = {
 };
 
 function createBaseCheckResourcesResponse_ResultEntry(): CheckResourcesResponse_ResultEntry {
-  return { resource: undefined, actions: {}, validationErrors: [], meta: undefined, outputs: [] };
+  return {
+    resource: undefined,
+    actions: {},
+    validationErrors: [],
+    meta: undefined,
+    outputs: [],
+  };
 }
 
 export const CheckResourcesResponse_ResultEntry = {
-  encode(message: CheckResourcesResponse_ResultEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckResourcesResponse_ResultEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.resource !== undefined) {
-      CheckResourcesResponse_ResultEntry_Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
+      CheckResourcesResponse_ResultEntry_Resource.encode(
+        message.resource,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     Object.entries(message.actions).forEach(([key, value]) => {
-      CheckResourcesResponse_ResultEntry_ActionsEntry.encode({ key: key as any, value }, writer.uint32(18).fork())
-        .ldelim();
+      CheckResourcesResponse_ResultEntry_ActionsEntry.encode(
+        { key: key as any, value },
+        writer.uint32(18).fork(),
+      ).ldelim();
     });
     for (const v of message.validationErrors) {
       ValidationError.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.meta !== undefined) {
-      CheckResourcesResponse_ResultEntry_Meta.encode(message.meta, writer.uint32(34).fork()).ldelim();
+      CheckResourcesResponse_ResultEntry_Meta.encode(
+        message.meta,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     for (const v of message.outputs) {
       OutputEntry.encode(v!, writer.uint32(42).fork()).ldelim();
@@ -996,8 +1193,12 @@ export const CheckResourcesResponse_ResultEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourcesResponse_ResultEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourcesResponse_ResultEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesResponse_ResultEntry();
     while (reader.pos < end) {
@@ -1008,14 +1209,20 @@ export const CheckResourcesResponse_ResultEntry = {
             break;
           }
 
-          message.resource = CheckResourcesResponse_ResultEntry_Resource.decode(reader, reader.uint32());
+          message.resource = CheckResourcesResponse_ResultEntry_Resource.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          const entry2 = CheckResourcesResponse_ResultEntry_ActionsEntry.decode(reader, reader.uint32());
+          const entry2 = CheckResourcesResponse_ResultEntry_ActionsEntry.decode(
+            reader,
+            reader.uint32(),
+          );
           if (entry2.value !== undefined) {
             message.actions[entry2.key] = entry2.value;
           }
@@ -1025,14 +1232,19 @@ export const CheckResourcesResponse_ResultEntry = {
             break;
           }
 
-          message.validationErrors.push(ValidationError.decode(reader, reader.uint32()));
+          message.validationErrors.push(
+            ValidationError.decode(reader, reader.uint32()),
+          );
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.meta = CheckResourcesResponse_ResultEntry_Meta.decode(reader, reader.uint32());
+          message.meta = CheckResourcesResponse_ResultEntry_Meta.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 5:
           if (tag !== 42) {
@@ -1056,7 +1268,10 @@ function createBaseCheckResourcesResponse_ResultEntry_Resource(): CheckResources
 }
 
 export const CheckResourcesResponse_ResultEntry_Resource = {
-  encode(message: CheckResourcesResponse_ResultEntry_Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckResourcesResponse_ResultEntry_Resource,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -1072,8 +1287,12 @@ export const CheckResourcesResponse_ResultEntry_Resource = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourcesResponse_ResultEntry_Resource {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourcesResponse_ResultEntry_Resource {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesResponse_ResultEntry_Resource();
     while (reader.pos < end) {
@@ -1122,10 +1341,15 @@ function createBaseCheckResourcesResponse_ResultEntry_Meta(): CheckResourcesResp
 }
 
 export const CheckResourcesResponse_ResultEntry_Meta = {
-  encode(message: CheckResourcesResponse_ResultEntry_Meta, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckResourcesResponse_ResultEntry_Meta,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     Object.entries(message.actions).forEach(([key, value]) => {
-      CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.encode({ key: key as any, value }, writer.uint32(10).fork())
-        .ldelim();
+      CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.encode(
+        { key: key as any, value },
+        writer.uint32(10).fork(),
+      ).ldelim();
     });
     for (const v of message.effectiveDerivedRoles) {
       writer.uint32(18).string(v!);
@@ -1133,8 +1357,12 @@ export const CheckResourcesResponse_ResultEntry_Meta = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourcesResponse_ResultEntry_Meta {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourcesResponse_ResultEntry_Meta {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesResponse_ResultEntry_Meta();
     while (reader.pos < end) {
@@ -1145,7 +1373,11 @@ export const CheckResourcesResponse_ResultEntry_Meta = {
             break;
           }
 
-          const entry1 = CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.decode(reader, reader.uint32());
+          const entry1 =
+            CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.decode(
+              reader,
+              reader.uint32(),
+            );
           if (entry1.value !== undefined) {
             message.actions[entry1.key] = entry1.value;
           }
@@ -1185,10 +1417,15 @@ export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta();
+    const message =
+      createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1229,15 +1466,23 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      CheckResourcesResponse_ResultEntry_Meta_EffectMeta.encode(message.value, writer.uint32(18).fork()).ldelim();
+      CheckResourcesResponse_ResultEntry_Meta_EffectMeta.encode(
+        message.value,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourcesResponse_ResultEntry_Meta_ActionsEntry();
+    const message =
+      createBaseCheckResourcesResponse_ResultEntry_Meta_ActionsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1253,7 +1498,11 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
             break;
           }
 
-          message.value = CheckResourcesResponse_ResultEntry_Meta_EffectMeta.decode(reader, reader.uint32());
+          message.value =
+            CheckResourcesResponse_ResultEntry_Meta_EffectMeta.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1283,8 +1532,12 @@ export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResourcesResponse_ResultEntry_ActionsEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckResourcesResponse_ResultEntry_ActionsEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesResponse_ResultEntry_ActionsEntry();
     while (reader.pos < end) {
@@ -1319,15 +1572,22 @@ function createBaseAddOrUpdatePolicyResponse(): AddOrUpdatePolicyResponse {
 }
 
 export const AddOrUpdatePolicyResponse = {
-  encode(message: AddOrUpdatePolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: AddOrUpdatePolicyResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.success !== undefined) {
       Empty.encode(message.success, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AddOrUpdatePolicyResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): AddOrUpdatePolicyResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddOrUpdatePolicyResponse();
     while (reader.pos < end) {
@@ -1355,20 +1615,33 @@ function createBaseListAuditLogEntriesResponse(): ListAuditLogEntriesResponse {
 }
 
 export const ListAuditLogEntriesResponse = {
-  encode(message: ListAuditLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ListAuditLogEntriesResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     switch (message.entry?.$case) {
       case "accessLogEntry":
-        AccessLogEntry.encode(message.entry.accessLogEntry, writer.uint32(10).fork()).ldelim();
+        AccessLogEntry.encode(
+          message.entry.accessLogEntry,
+          writer.uint32(10).fork(),
+        ).ldelim();
         break;
       case "decisionLogEntry":
-        DecisionLogEntry.encode(message.entry.decisionLogEntry, writer.uint32(18).fork()).ldelim();
+        DecisionLogEntry.encode(
+          message.entry.decisionLogEntry,
+          writer.uint32(18).fork(),
+        ).ldelim();
         break;
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListAuditLogEntriesResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ListAuditLogEntriesResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAuditLogEntriesResponse();
     while (reader.pos < end) {
@@ -1379,7 +1652,10 @@ export const ListAuditLogEntriesResponse = {
             break;
           }
 
-          message.entry = { $case: "accessLogEntry", accessLogEntry: AccessLogEntry.decode(reader, reader.uint32()) };
+          message.entry = {
+            $case: "accessLogEntry",
+            accessLogEntry: AccessLogEntry.decode(reader, reader.uint32()),
+          };
           continue;
         case 2:
           if (tag !== 18) {
@@ -1406,7 +1682,10 @@ function createBaseServerInfoResponse(): ServerInfoResponse {
 }
 
 export const ServerInfoResponse = {
-  encode(message: ServerInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ServerInfoResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.version !== "") {
       writer.uint32(10).string(message.version);
     }
@@ -1420,7 +1699,8 @@ export const ServerInfoResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ServerInfoResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerInfoResponse();
     while (reader.pos < end) {
@@ -1462,15 +1742,22 @@ function createBaseListPoliciesResponse(): ListPoliciesResponse {
 }
 
 export const ListPoliciesResponse = {
-  encode(message: ListPoliciesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ListPoliciesResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.policyIds) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListPoliciesResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ListPoliciesResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListPoliciesResponse();
     while (reader.pos < end) {
@@ -1498,7 +1785,10 @@ function createBaseGetPolicyResponse(): GetPolicyResponse {
 }
 
 export const GetPolicyResponse = {
-  encode(message: GetPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: GetPolicyResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.policies) {
       Policy.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1506,7 +1796,8 @@ export const GetPolicyResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): GetPolicyResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetPolicyResponse();
     while (reader.pos < end) {
@@ -1534,15 +1825,22 @@ function createBaseDisablePolicyResponse(): DisablePolicyResponse {
 }
 
 export const DisablePolicyResponse = {
-  encode(message: DisablePolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DisablePolicyResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.disabledPolicies !== 0) {
       writer.uint32(8).uint32(message.disabledPolicies);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DisablePolicyResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DisablePolicyResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDisablePolicyResponse();
     while (reader.pos < end) {
@@ -1570,15 +1868,22 @@ function createBaseEnablePolicyResponse(): EnablePolicyResponse {
 }
 
 export const EnablePolicyResponse = {
-  encode(message: EnablePolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: EnablePolicyResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.enabledPolicies !== 0) {
       writer.uint32(8).uint32(message.enabledPolicies);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): EnablePolicyResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): EnablePolicyResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnablePolicyResponse();
     while (reader.pos < end) {
@@ -1606,12 +1911,19 @@ function createBaseAddOrUpdateSchemaResponse(): AddOrUpdateSchemaResponse {
 }
 
 export const AddOrUpdateSchemaResponse = {
-  encode(_: AddOrUpdateSchemaResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: AddOrUpdateSchemaResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AddOrUpdateSchemaResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): AddOrUpdateSchemaResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddOrUpdateSchemaResponse();
     while (reader.pos < end) {
@@ -1632,7 +1944,10 @@ function createBaseListSchemasResponse(): ListSchemasResponse {
 }
 
 export const ListSchemasResponse = {
-  encode(message: ListSchemasResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ListSchemasResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.schemaIds) {
       writer.uint32(10).string(v!);
     }
@@ -1640,7 +1955,8 @@ export const ListSchemasResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ListSchemasResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSchemasResponse();
     while (reader.pos < end) {
@@ -1668,7 +1984,10 @@ function createBaseGetSchemaResponse(): GetSchemaResponse {
 }
 
 export const GetSchemaResponse = {
-  encode(message: GetSchemaResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: GetSchemaResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.schemas) {
       Schema.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1676,7 +1995,8 @@ export const GetSchemaResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): GetSchemaResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSchemaResponse();
     while (reader.pos < end) {
@@ -1704,15 +2024,22 @@ function createBaseDeleteSchemaResponse(): DeleteSchemaResponse {
 }
 
 export const DeleteSchemaResponse = {
-  encode(message: DeleteSchemaResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DeleteSchemaResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.deletedSchemas !== 0) {
       writer.uint32(8).uint32(message.deletedSchemas);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteSchemaResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DeleteSchemaResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteSchemaResponse();
     while (reader.pos < end) {
@@ -1740,12 +2067,16 @@ function createBaseReloadStoreResponse(): ReloadStoreResponse {
 }
 
 export const ReloadStoreResponse = {
-  encode(_: ReloadStoreResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: ReloadStoreResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ReloadStoreResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReloadStoreResponse();
     while (reader.pos < end) {

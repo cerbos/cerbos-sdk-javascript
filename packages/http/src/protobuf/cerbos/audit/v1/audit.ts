@@ -1,6 +1,11 @@
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { CheckInput, CheckOutput, PlanResourcesInput, PlanResourcesOutput } from "../../engine/v1/engine";
+import {
+  CheckInput,
+  CheckOutput,
+  PlanResourcesInput,
+  PlanResourcesOutput,
+} from "../../engine/v1/engine";
 
 export const protobufPackage = "cerbos.audit.v1";
 
@@ -25,10 +30,16 @@ export interface DecisionLogEntry {
   inputs: CheckInput[];
   outputs: CheckOutput[];
   error: string;
-  method?: { $case: "checkResources"; checkResources: DecisionLogEntry_CheckResources } | {
-    $case: "planResources";
-    planResources: DecisionLogEntry_PlanResources;
-  };
+  method?:
+    | {
+        $case: "checkResources";
+        checkResources: DecisionLogEntry_CheckResources;
+      }
+    | {
+        $case: "planResources";
+        planResources: DecisionLogEntry_PlanResources;
+      }
+    | undefined;
   metadata: { [key: string]: MetaValues };
 }
 
@@ -64,13 +75,18 @@ export const AccessLogEntry = {
   fromJSON(object: any): AccessLogEntry {
     return {
       callId: isSet(object.callId) ? String(object.callId) : "",
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      timestamp: isSet(object.timestamp)
+        ? fromJsonTimestamp(object.timestamp)
+        : undefined,
       peer: isSet(object.peer) ? Peer.fromJSON(object.peer) : undefined,
       metadata: isObject(object.metadata)
-        ? Object.entries(object.metadata).reduce<{ [key: string]: MetaValues }>((acc, [key, value]) => {
-          acc[key] = MetaValues.fromJSON(value);
-          return acc;
-        }, {})
+        ? Object.entries(object.metadata).reduce<{ [key: string]: MetaValues }>(
+            (acc, [key, value]) => {
+              acc[key] = MetaValues.fromJSON(value);
+              return acc;
+            },
+            {},
+          )
         : {},
       method: isSet(object.method) ? String(object.method) : "",
       statusCode: isSet(object.statusCode) ? Number(object.statusCode) : 0,
@@ -80,8 +96,10 @@ export const AccessLogEntry = {
   toJSON(message: AccessLogEntry): unknown {
     const obj: any = {};
     message.callId !== undefined && (obj.callId = message.callId);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
-    message.peer !== undefined && (obj.peer = message.peer ? Peer.toJSON(message.peer) : undefined);
+    message.timestamp !== undefined &&
+      (obj.timestamp = message.timestamp.toISOString());
+    message.peer !== undefined &&
+      (obj.peer = message.peer ? Peer.toJSON(message.peer) : undefined);
     obj.metadata = {};
     if (message.metadata) {
       Object.entries(message.metadata).forEach(([k, v]) => {
@@ -89,7 +107,8 @@ export const AccessLogEntry = {
       });
     }
     message.method !== undefined && (obj.method = message.method);
-    message.statusCode !== undefined && (obj.statusCode = Math.round(message.statusCode));
+    message.statusCode !== undefined &&
+      (obj.statusCode = Math.round(message.statusCode));
     return obj;
   },
 };
@@ -98,14 +117,19 @@ export const AccessLogEntry_MetadataEntry = {
   fromJSON(object: any): AccessLogEntry_MetadataEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? MetaValues.fromJSON(object.value) : undefined,
+      value: isSet(object.value)
+        ? MetaValues.fromJSON(object.value)
+        : undefined,
     };
   },
 
   toJSON(message: AccessLogEntry_MetadataEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? MetaValues.toJSON(message.value) : undefined);
+    message.value !== undefined &&
+      (obj.value = message.value
+        ? MetaValues.toJSON(message.value)
+        : undefined);
     return obj;
   },
 };
@@ -114,21 +138,40 @@ export const DecisionLogEntry = {
   fromJSON(object: any): DecisionLogEntry {
     return {
       callId: isSet(object.callId) ? String(object.callId) : "",
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      timestamp: isSet(object.timestamp)
+        ? fromJsonTimestamp(object.timestamp)
+        : undefined,
       peer: isSet(object.peer) ? Peer.fromJSON(object.peer) : undefined,
-      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => CheckInput.fromJSON(e)) : [],
-      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => CheckOutput.fromJSON(e)) : [],
+      inputs: Array.isArray(object?.inputs)
+        ? object.inputs.map((e: any) => CheckInput.fromJSON(e))
+        : [],
+      outputs: Array.isArray(object?.outputs)
+        ? object.outputs.map((e: any) => CheckOutput.fromJSON(e))
+        : [],
       error: isSet(object.error) ? String(object.error) : "",
       method: isSet(object.checkResources)
-        ? { $case: "checkResources", checkResources: DecisionLogEntry_CheckResources.fromJSON(object.checkResources) }
+        ? {
+            $case: "checkResources",
+            checkResources: DecisionLogEntry_CheckResources.fromJSON(
+              object.checkResources,
+            ),
+          }
         : isSet(object.planResources)
-        ? { $case: "planResources", planResources: DecisionLogEntry_PlanResources.fromJSON(object.planResources) }
+        ? {
+            $case: "planResources",
+            planResources: DecisionLogEntry_PlanResources.fromJSON(
+              object.planResources,
+            ),
+          }
         : undefined,
       metadata: isObject(object.metadata)
-        ? Object.entries(object.metadata).reduce<{ [key: string]: MetaValues }>((acc, [key, value]) => {
-          acc[key] = MetaValues.fromJSON(value);
-          return acc;
-        }, {})
+        ? Object.entries(object.metadata).reduce<{ [key: string]: MetaValues }>(
+            (acc, [key, value]) => {
+              acc[key] = MetaValues.fromJSON(value);
+              return acc;
+            },
+            {},
+          )
         : {},
     };
   },
@@ -136,25 +179,33 @@ export const DecisionLogEntry = {
   toJSON(message: DecisionLogEntry): unknown {
     const obj: any = {};
     message.callId !== undefined && (obj.callId = message.callId);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
-    message.peer !== undefined && (obj.peer = message.peer ? Peer.toJSON(message.peer) : undefined);
+    message.timestamp !== undefined &&
+      (obj.timestamp = message.timestamp.toISOString());
+    message.peer !== undefined &&
+      (obj.peer = message.peer ? Peer.toJSON(message.peer) : undefined);
     if (message.inputs) {
-      obj.inputs = message.inputs.map((e) => e ? CheckInput.toJSON(e) : undefined);
+      obj.inputs = message.inputs.map((e) =>
+        e ? CheckInput.toJSON(e) : undefined,
+      );
     } else {
       obj.inputs = [];
     }
     if (message.outputs) {
-      obj.outputs = message.outputs.map((e) => e ? CheckOutput.toJSON(e) : undefined);
+      obj.outputs = message.outputs.map((e) =>
+        e ? CheckOutput.toJSON(e) : undefined,
+      );
     } else {
       obj.outputs = [];
     }
     message.error !== undefined && (obj.error = message.error);
-    message.method?.$case === "checkResources" && (obj.checkResources = message.method?.checkResources
-      ? DecisionLogEntry_CheckResources.toJSON(message.method?.checkResources)
-      : undefined);
-    message.method?.$case === "planResources" && (obj.planResources = message.method?.planResources
-      ? DecisionLogEntry_PlanResources.toJSON(message.method?.planResources)
-      : undefined);
+    message.method?.$case === "checkResources" &&
+      (obj.checkResources = message.method?.checkResources
+        ? DecisionLogEntry_CheckResources.toJSON(message.method?.checkResources)
+        : undefined);
+    message.method?.$case === "planResources" &&
+      (obj.planResources = message.method?.planResources
+        ? DecisionLogEntry_PlanResources.toJSON(message.method?.planResources)
+        : undefined);
     obj.metadata = {};
     if (message.metadata) {
       Object.entries(message.metadata).forEach(([k, v]) => {
@@ -168,8 +219,12 @@ export const DecisionLogEntry = {
 export const DecisionLogEntry_CheckResources = {
   fromJSON(object: any): DecisionLogEntry_CheckResources {
     return {
-      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => CheckInput.fromJSON(e)) : [],
-      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => CheckOutput.fromJSON(e)) : [],
+      inputs: Array.isArray(object?.inputs)
+        ? object.inputs.map((e: any) => CheckInput.fromJSON(e))
+        : [],
+      outputs: Array.isArray(object?.outputs)
+        ? object.outputs.map((e: any) => CheckOutput.fromJSON(e))
+        : [],
       error: isSet(object.error) ? String(object.error) : "",
     };
   },
@@ -177,12 +232,16 @@ export const DecisionLogEntry_CheckResources = {
   toJSON(message: DecisionLogEntry_CheckResources): unknown {
     const obj: any = {};
     if (message.inputs) {
-      obj.inputs = message.inputs.map((e) => e ? CheckInput.toJSON(e) : undefined);
+      obj.inputs = message.inputs.map((e) =>
+        e ? CheckInput.toJSON(e) : undefined,
+      );
     } else {
       obj.inputs = [];
     }
     if (message.outputs) {
-      obj.outputs = message.outputs.map((e) => e ? CheckOutput.toJSON(e) : undefined);
+      obj.outputs = message.outputs.map((e) =>
+        e ? CheckOutput.toJSON(e) : undefined,
+      );
     } else {
       obj.outputs = [];
     }
@@ -194,17 +253,26 @@ export const DecisionLogEntry_CheckResources = {
 export const DecisionLogEntry_PlanResources = {
   fromJSON(object: any): DecisionLogEntry_PlanResources {
     return {
-      input: isSet(object.input) ? PlanResourcesInput.fromJSON(object.input) : undefined,
-      output: isSet(object.output) ? PlanResourcesOutput.fromJSON(object.output) : undefined,
+      input: isSet(object.input)
+        ? PlanResourcesInput.fromJSON(object.input)
+        : undefined,
+      output: isSet(object.output)
+        ? PlanResourcesOutput.fromJSON(object.output)
+        : undefined,
       error: isSet(object.error) ? String(object.error) : "",
     };
   },
 
   toJSON(message: DecisionLogEntry_PlanResources): unknown {
     const obj: any = {};
-    message.input !== undefined && (obj.input = message.input ? PlanResourcesInput.toJSON(message.input) : undefined);
+    message.input !== undefined &&
+      (obj.input = message.input
+        ? PlanResourcesInput.toJSON(message.input)
+        : undefined);
     message.output !== undefined &&
-      (obj.output = message.output ? PlanResourcesOutput.toJSON(message.output) : undefined);
+      (obj.output = message.output
+        ? PlanResourcesOutput.toJSON(message.output)
+        : undefined);
     message.error !== undefined && (obj.error = message.error);
     return obj;
   },
@@ -214,21 +282,30 @@ export const DecisionLogEntry_MetadataEntry = {
   fromJSON(object: any): DecisionLogEntry_MetadataEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? MetaValues.fromJSON(object.value) : undefined,
+      value: isSet(object.value)
+        ? MetaValues.fromJSON(object.value)
+        : undefined,
     };
   },
 
   toJSON(message: DecisionLogEntry_MetadataEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? MetaValues.toJSON(message.value) : undefined);
+    message.value !== undefined &&
+      (obj.value = message.value
+        ? MetaValues.toJSON(message.value)
+        : undefined);
     return obj;
   },
 };
 
 export const MetaValues = {
   fromJSON(object: any): MetaValues {
-    return { values: Array.isArray(object?.values) ? object.values.map((e: any) => String(e)) : [] };
+    return {
+      values: Array.isArray(object?.values)
+        ? object.values.map((e: any) => String(e))
+        : [],
+    };
   },
 
   toJSON(message: MetaValues): unknown {
@@ -248,7 +325,9 @@ export const Peer = {
       address: isSet(object.address) ? String(object.address) : "",
       authInfo: isSet(object.authInfo) ? String(object.authInfo) : "",
       userAgent: isSet(object.userAgent) ? String(object.userAgent) : "",
-      forwardedFor: isSet(object.forwardedFor) ? String(object.forwardedFor) : "",
+      forwardedFor: isSet(object.forwardedFor)
+        ? String(object.forwardedFor)
+        : "",
     };
   },
 
@@ -257,7 +336,8 @@ export const Peer = {
     message.address !== undefined && (obj.address = message.address);
     message.authInfo !== undefined && (obj.authInfo = message.authInfo);
     message.userAgent !== undefined && (obj.userAgent = message.userAgent);
-    message.forwardedFor !== undefined && (obj.forwardedFor = message.forwardedFor);
+    message.forwardedFor !== undefined &&
+      (obj.forwardedFor = message.forwardedFor);
     return obj;
   },
 };

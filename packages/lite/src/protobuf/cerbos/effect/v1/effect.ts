@@ -24,7 +24,9 @@ export function effectFromJSON(object: any): Effect {
     case "EFFECT_NO_MATCH":
       return Effect.EFFECT_NO_MATCH;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Effect");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum Effect",
+      );
   }
 }
 
@@ -39,14 +41,16 @@ export function effectToJSON(object: Effect): string {
     case Effect.EFFECT_NO_MATCH:
       return "EFFECT_NO_MATCH";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum Effect");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum Effect",
+      );
   }
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
+declare const self: any | undefined;
+declare const window: any | undefined;
+declare const global: any | undefined;
+const tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }

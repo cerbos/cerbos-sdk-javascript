@@ -17,7 +17,8 @@ export const Timestamp = {
 
   toJSON(message: Timestamp): unknown {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = Math.round(message.seconds));
+    message.seconds !== undefined &&
+      (obj.seconds = Math.round(message.seconds));
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },

@@ -18,9 +18,10 @@
     "docs:extract-api": "npm --workspace=packages/core --workspace=packages/grpc --workspace=packages/http --workspace=packages/lite --workspace=packages/opentelemetry exec api-extractor run",
     "docs:fixup": "scripts/sed-all docs 's/\\r$//'",
     "docs:generate": "api-documenter markdown --input-folder api --output-folder docs",
-    "generate": "npm run generate:clean && npm run generate:buf",
+    "generate": "npm run generate:clean && npm run generate:buf && npm run generate:format",
     "generate:buf": "buf generate --include-imports buf.build/cerbos/cerbos-api",
     "generate:clean": "rm -rf packages/*/src/protobuf",
+    "generate:format": "prettier --write packages/*/src/protobuf",
     "lint": "npm run all:parallel 'npm:lint:check:*'",
     "lint:check:eslint": "eslint --max-warnings=0 .",
     "lint:check:prettier": "prettier --check .",
@@ -51,7 +52,7 @@
     "prettier-plugin-pkg": "0.18.0",
     "ts-jest": "29.1.1",
     "ts-node": "10.9.1",
-    "ts-proto": "1.151.1",
+    "ts-proto": "1.153.2",
     "typescript": "5.1.6"
   },
   "overrides": {

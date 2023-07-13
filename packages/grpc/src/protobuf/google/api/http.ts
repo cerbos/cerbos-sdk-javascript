@@ -11,7 +11,8 @@ export interface HttpRule {
     | { $case: "post"; post: string }
     | { $case: "delete"; delete: string }
     | { $case: "patch"; patch: string }
-    | { $case: "custom"; custom: CustomHttpPattern };
+    | { $case: "custom"; custom: CustomHttpPattern }
+    | undefined;
   body: string;
   responseBody: string;
   additionalBindings: HttpRule[];
@@ -23,11 +24,20 @@ export interface CustomHttpPattern {
 }
 
 function createBaseHttpRule(): HttpRule {
-  return { selector: "", pattern: undefined, body: "", responseBody: "", additionalBindings: [] };
+  return {
+    selector: "",
+    pattern: undefined,
+    body: "",
+    responseBody: "",
+    additionalBindings: [],
+  };
 }
 
 export const HttpRule = {
-  encode(message: HttpRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: HttpRule,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
@@ -48,7 +58,10 @@ export const HttpRule = {
         writer.uint32(50).string(message.pattern.patch);
         break;
       case "custom":
-        CustomHttpPattern.encode(message.pattern.custom, writer.uint32(66).fork()).ldelim();
+        CustomHttpPattern.encode(
+          message.pattern.custom,
+          writer.uint32(66).fork(),
+        ).ldelim();
         break;
     }
     if (message.body !== "") {
@@ -64,7 +77,8 @@ export const HttpRule = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): HttpRule {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpRule();
     while (reader.pos < end) {
@@ -117,7 +131,10 @@ export const HttpRule = {
             break;
           }
 
-          message.pattern = { $case: "custom", custom: CustomHttpPattern.decode(reader, reader.uint32()) };
+          message.pattern = {
+            $case: "custom",
+            custom: CustomHttpPattern.decode(reader, reader.uint32()),
+          };
           continue;
         case 7:
           if (tag !== 58) {
@@ -138,7 +155,9 @@ export const HttpRule = {
             break;
           }
 
-          message.additionalBindings.push(HttpRule.decode(reader, reader.uint32()));
+          message.additionalBindings.push(
+            HttpRule.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -155,7 +174,10 @@ function createBaseCustomHttpPattern(): CustomHttpPattern {
 }
 
 export const CustomHttpPattern = {
-  encode(message: CustomHttpPattern, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CustomHttpPattern,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.kind !== "") {
       writer.uint32(10).string(message.kind);
     }
@@ -166,7 +188,8 @@ export const CustomHttpPattern = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): CustomHttpPattern {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCustomHttpPattern();
     while (reader.pos < end) {

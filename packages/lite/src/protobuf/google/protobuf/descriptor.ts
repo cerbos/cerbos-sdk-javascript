@@ -32,7 +32,9 @@ export enum FileOptions_OptimizeMode {
   LITE_RUNTIME = 3,
 }
 
-export function fileOptions_OptimizeModeFromJSON(object: any): FileOptions_OptimizeMode {
+export function fileOptions_OptimizeModeFromJSON(
+  object: any,
+): FileOptions_OptimizeMode {
   switch (object) {
     case 1:
     case "SPEED":
@@ -44,11 +46,17 @@ export function fileOptions_OptimizeModeFromJSON(object: any): FileOptions_Optim
     case "LITE_RUNTIME":
       return FileOptions_OptimizeMode.LITE_RUNTIME;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FileOptions_OptimizeMode");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FileOptions_OptimizeMode",
+      );
   }
 }
 
-export function fileOptions_OptimizeModeToJSON(object: FileOptions_OptimizeMode): string {
+export function fileOptions_OptimizeModeToJSON(
+  object: FileOptions_OptimizeMode,
+): string {
   switch (object) {
     case FileOptions_OptimizeMode.SPEED:
       return "SPEED";
@@ -57,7 +65,11 @@ export function fileOptions_OptimizeModeToJSON(object: FileOptions_OptimizeMode)
     case FileOptions_OptimizeMode.LITE_RUNTIME:
       return "LITE_RUNTIME";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FileOptions_OptimizeMode");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FileOptions_OptimizeMode",
+      );
   }
 }
 
@@ -102,7 +114,9 @@ export function fieldOptions_CTypeFromJSON(object: any): FieldOptions_CType {
     case "STRING_PIECE":
       return FieldOptions_CType.STRING_PIECE;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FieldOptions_CType");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum FieldOptions_CType",
+      );
   }
 }
 
@@ -115,7 +129,9 @@ export function fieldOptions_CTypeToJSON(object: FieldOptions_CType): string {
     case FieldOptions_CType.STRING_PIECE:
       return "STRING_PIECE";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FieldOptions_CType");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum FieldOptions_CType",
+      );
   }
 }
 
@@ -137,7 +153,9 @@ export function fieldOptions_JSTypeFromJSON(object: any): FieldOptions_JSType {
     case "JS_NUMBER":
       return FieldOptions_JSType.JS_NUMBER;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FieldOptions_JSType");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum FieldOptions_JSType",
+      );
   }
 }
 
@@ -150,7 +168,9 @@ export function fieldOptions_JSTypeToJSON(object: FieldOptions_JSType): string {
     case FieldOptions_JSType.JS_NUMBER:
       return "JS_NUMBER";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FieldOptions_JSType");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " + object + " for enum FieldOptions_JSType",
+      );
   }
 }
 
@@ -160,7 +180,9 @@ export enum FieldOptions_OptionRetention {
   RETENTION_SOURCE = 2,
 }
 
-export function fieldOptions_OptionRetentionFromJSON(object: any): FieldOptions_OptionRetention {
+export function fieldOptions_OptionRetentionFromJSON(
+  object: any,
+): FieldOptions_OptionRetention {
   switch (object) {
     case 0:
     case "RETENTION_UNKNOWN":
@@ -172,11 +194,17 @@ export function fieldOptions_OptionRetentionFromJSON(object: any): FieldOptions_
     case "RETENTION_SOURCE":
       return FieldOptions_OptionRetention.RETENTION_SOURCE;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FieldOptions_OptionRetention");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FieldOptions_OptionRetention",
+      );
   }
 }
 
-export function fieldOptions_OptionRetentionToJSON(object: FieldOptions_OptionRetention): string {
+export function fieldOptions_OptionRetentionToJSON(
+  object: FieldOptions_OptionRetention,
+): string {
   switch (object) {
     case FieldOptions_OptionRetention.RETENTION_UNKNOWN:
       return "RETENTION_UNKNOWN";
@@ -185,7 +213,11 @@ export function fieldOptions_OptionRetentionToJSON(object: FieldOptions_OptionRe
     case FieldOptions_OptionRetention.RETENTION_SOURCE:
       return "RETENTION_SOURCE";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum FieldOptions_OptionRetention");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FieldOptions_OptionRetention",
+      );
   }
 }
 
@@ -202,7 +234,9 @@ export enum FieldOptions_OptionTargetType {
   TARGET_TYPE_METHOD = 9,
 }
 
-export function fieldOptions_OptionTargetTypeFromJSON(object: any): FieldOptions_OptionTargetType {
+export function fieldOptions_OptionTargetTypeFromJSON(
+  object: any,
+): FieldOptions_OptionTargetType {
   switch (object) {
     case 0:
     case "TARGET_TYPE_UNKNOWN":
@@ -236,12 +270,16 @@ export function fieldOptions_OptionTargetTypeFromJSON(object: any): FieldOptions
       return FieldOptions_OptionTargetType.TARGET_TYPE_METHOD;
     default:
       throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum FieldOptions_OptionTargetType",
+        "Unrecognized enum value " +
+          object +
+          " for enum FieldOptions_OptionTargetType",
       );
   }
 }
 
-export function fieldOptions_OptionTargetTypeToJSON(object: FieldOptions_OptionTargetType): string {
+export function fieldOptions_OptionTargetTypeToJSON(
+  object: FieldOptions_OptionTargetType,
+): string {
   switch (object) {
     case FieldOptions_OptionTargetType.TARGET_TYPE_UNKNOWN:
       return "TARGET_TYPE_UNKNOWN";
@@ -265,7 +303,9 @@ export function fieldOptions_OptionTargetTypeToJSON(object: FieldOptions_OptionT
       return "TARGET_TYPE_METHOD";
     default:
       throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum FieldOptions_OptionTargetType",
+        "Unrecognized enum value " +
+          object +
+          " for enum FieldOptions_OptionTargetType",
       );
   }
 }
@@ -291,7 +331,9 @@ export enum MethodOptions_IdempotencyLevel {
   IDEMPOTENT = 2,
 }
 
-export function methodOptions_IdempotencyLevelFromJSON(object: any): MethodOptions_IdempotencyLevel {
+export function methodOptions_IdempotencyLevelFromJSON(
+  object: any,
+): MethodOptions_IdempotencyLevel {
   switch (object) {
     case 0:
     case "IDEMPOTENCY_UNKNOWN":
@@ -304,12 +346,16 @@ export function methodOptions_IdempotencyLevelFromJSON(object: any): MethodOptio
       return MethodOptions_IdempotencyLevel.IDEMPOTENT;
     default:
       throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum MethodOptions_IdempotencyLevel",
+        "Unrecognized enum value " +
+          object +
+          " for enum MethodOptions_IdempotencyLevel",
       );
   }
 }
 
-export function methodOptions_IdempotencyLevelToJSON(object: MethodOptions_IdempotencyLevel): string {
+export function methodOptions_IdempotencyLevelToJSON(
+  object: MethodOptions_IdempotencyLevel,
+): string {
   switch (object) {
     case MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN:
       return "IDEMPOTENCY_UNKNOWN";
@@ -319,7 +365,9 @@ export function methodOptions_IdempotencyLevelToJSON(object: MethodOptions_Idemp
       return "IDEMPOTENT";
     default:
       throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum MethodOptions_IdempotencyLevel",
+        "Unrecognized enum value " +
+          object +
+          " for enum MethodOptions_IdempotencyLevel",
       );
   }
 }
@@ -343,58 +391,107 @@ export const FileOptions = {
   fromJSON(object: any): FileOptions {
     return {
       javaPackage: isSet(object.javaPackage) ? String(object.javaPackage) : "",
-      javaOuterClassname: isSet(object.javaOuterClassname) ? String(object.javaOuterClassname) : "",
-      javaMultipleFiles: isSet(object.javaMultipleFiles) ? Boolean(object.javaMultipleFiles) : false,
+      javaOuterClassname: isSet(object.javaOuterClassname)
+        ? String(object.javaOuterClassname)
+        : "",
+      javaMultipleFiles: isSet(object.javaMultipleFiles)
+        ? Boolean(object.javaMultipleFiles)
+        : false,
       javaGenerateEqualsAndHash: isSet(object.javaGenerateEqualsAndHash)
         ? Boolean(object.javaGenerateEqualsAndHash)
         : false,
-      javaStringCheckUtf8: isSet(object.javaStringCheckUtf8) ? Boolean(object.javaStringCheckUtf8) : false,
-      optimizeFor: isSet(object.optimizeFor) ? fileOptions_OptimizeModeFromJSON(object.optimizeFor) : 1,
+      javaStringCheckUtf8: isSet(object.javaStringCheckUtf8)
+        ? Boolean(object.javaStringCheckUtf8)
+        : false,
+      optimizeFor: isSet(object.optimizeFor)
+        ? fileOptions_OptimizeModeFromJSON(object.optimizeFor)
+        : 1,
       goPackage: isSet(object.goPackage) ? String(object.goPackage) : "",
-      ccGenericServices: isSet(object.ccGenericServices) ? Boolean(object.ccGenericServices) : false,
-      javaGenericServices: isSet(object.javaGenericServices) ? Boolean(object.javaGenericServices) : false,
-      pyGenericServices: isSet(object.pyGenericServices) ? Boolean(object.pyGenericServices) : false,
-      phpGenericServices: isSet(object.phpGenericServices) ? Boolean(object.phpGenericServices) : false,
+      ccGenericServices: isSet(object.ccGenericServices)
+        ? Boolean(object.ccGenericServices)
+        : false,
+      javaGenericServices: isSet(object.javaGenericServices)
+        ? Boolean(object.javaGenericServices)
+        : false,
+      pyGenericServices: isSet(object.pyGenericServices)
+        ? Boolean(object.pyGenericServices)
+        : false,
+      phpGenericServices: isSet(object.phpGenericServices)
+        ? Boolean(object.phpGenericServices)
+        : false,
       deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      ccEnableArenas: isSet(object.ccEnableArenas) ? Boolean(object.ccEnableArenas) : false,
-      objcClassPrefix: isSet(object.objcClassPrefix) ? String(object.objcClassPrefix) : "",
-      csharpNamespace: isSet(object.csharpNamespace) ? String(object.csharpNamespace) : "",
+      ccEnableArenas: isSet(object.ccEnableArenas)
+        ? Boolean(object.ccEnableArenas)
+        : false,
+      objcClassPrefix: isSet(object.objcClassPrefix)
+        ? String(object.objcClassPrefix)
+        : "",
+      csharpNamespace: isSet(object.csharpNamespace)
+        ? String(object.csharpNamespace)
+        : "",
       swiftPrefix: isSet(object.swiftPrefix) ? String(object.swiftPrefix) : "",
-      phpClassPrefix: isSet(object.phpClassPrefix) ? String(object.phpClassPrefix) : "",
-      phpNamespace: isSet(object.phpNamespace) ? String(object.phpNamespace) : "",
-      phpMetadataNamespace: isSet(object.phpMetadataNamespace) ? String(object.phpMetadataNamespace) : "",
+      phpClassPrefix: isSet(object.phpClassPrefix)
+        ? String(object.phpClassPrefix)
+        : "",
+      phpNamespace: isSet(object.phpNamespace)
+        ? String(object.phpNamespace)
+        : "",
+      phpMetadataNamespace: isSet(object.phpMetadataNamespace)
+        ? String(object.phpMetadataNamespace)
+        : "",
       rubyPackage: isSet(object.rubyPackage) ? String(object.rubyPackage) : "",
       uninterpretedOption: Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
+        ? object.uninterpretedOption.map((e: any) =>
+            UninterpretedOption.fromJSON(e),
+          )
         : [],
     };
   },
 
   toJSON(message: FileOptions): unknown {
     const obj: any = {};
-    message.javaPackage !== undefined && (obj.javaPackage = message.javaPackage);
-    message.javaOuterClassname !== undefined && (obj.javaOuterClassname = message.javaOuterClassname);
-    message.javaMultipleFiles !== undefined && (obj.javaMultipleFiles = message.javaMultipleFiles);
+    message.javaPackage !== undefined &&
+      (obj.javaPackage = message.javaPackage);
+    message.javaOuterClassname !== undefined &&
+      (obj.javaOuterClassname = message.javaOuterClassname);
+    message.javaMultipleFiles !== undefined &&
+      (obj.javaMultipleFiles = message.javaMultipleFiles);
     message.javaGenerateEqualsAndHash !== undefined &&
       (obj.javaGenerateEqualsAndHash = message.javaGenerateEqualsAndHash);
-    message.javaStringCheckUtf8 !== undefined && (obj.javaStringCheckUtf8 = message.javaStringCheckUtf8);
-    message.optimizeFor !== undefined && (obj.optimizeFor = fileOptions_OptimizeModeToJSON(message.optimizeFor));
+    message.javaStringCheckUtf8 !== undefined &&
+      (obj.javaStringCheckUtf8 = message.javaStringCheckUtf8);
+    message.optimizeFor !== undefined &&
+      (obj.optimizeFor = fileOptions_OptimizeModeToJSON(message.optimizeFor));
     message.goPackage !== undefined && (obj.goPackage = message.goPackage);
-    message.ccGenericServices !== undefined && (obj.ccGenericServices = message.ccGenericServices);
-    message.javaGenericServices !== undefined && (obj.javaGenericServices = message.javaGenericServices);
-    message.pyGenericServices !== undefined && (obj.pyGenericServices = message.pyGenericServices);
-    message.phpGenericServices !== undefined && (obj.phpGenericServices = message.phpGenericServices);
+    message.ccGenericServices !== undefined &&
+      (obj.ccGenericServices = message.ccGenericServices);
+    message.javaGenericServices !== undefined &&
+      (obj.javaGenericServices = message.javaGenericServices);
+    message.pyGenericServices !== undefined &&
+      (obj.pyGenericServices = message.pyGenericServices);
+    message.phpGenericServices !== undefined &&
+      (obj.phpGenericServices = message.phpGenericServices);
     message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-    message.ccEnableArenas !== undefined && (obj.ccEnableArenas = message.ccEnableArenas);
-    message.objcClassPrefix !== undefined && (obj.objcClassPrefix = message.objcClassPrefix);
-    message.csharpNamespace !== undefined && (obj.csharpNamespace = message.csharpNamespace);
-    message.swiftPrefix !== undefined && (obj.swiftPrefix = message.swiftPrefix);
-    message.phpClassPrefix !== undefined && (obj.phpClassPrefix = message.phpClassPrefix);
-    message.phpNamespace !== undefined && (obj.phpNamespace = message.phpNamespace);
-    message.phpMetadataNamespace !== undefined && (obj.phpMetadataNamespace = message.phpMetadataNamespace);
-    message.rubyPackage !== undefined && (obj.rubyPackage = message.rubyPackage);
+    message.ccEnableArenas !== undefined &&
+      (obj.ccEnableArenas = message.ccEnableArenas);
+    message.objcClassPrefix !== undefined &&
+      (obj.objcClassPrefix = message.objcClassPrefix);
+    message.csharpNamespace !== undefined &&
+      (obj.csharpNamespace = message.csharpNamespace);
+    message.swiftPrefix !== undefined &&
+      (obj.swiftPrefix = message.swiftPrefix);
+    message.phpClassPrefix !== undefined &&
+      (obj.phpClassPrefix = message.phpClassPrefix);
+    message.phpNamespace !== undefined &&
+      (obj.phpNamespace = message.phpNamespace);
+    message.phpMetadataNamespace !== undefined &&
+      (obj.phpMetadataNamespace = message.phpMetadataNamespace);
+    message.rubyPackage !== undefined &&
+      (obj.rubyPackage = message.rubyPackage);
     if (message.uninterpretedOption) {
-      obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+      obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+        e ? UninterpretedOption.toJSON(e) : undefined,
+      );
     } else {
       obj.uninterpretedOption = [];
     }
@@ -405,32 +502,42 @@ export const FileOptions = {
 export const MessageOptions = {
   fromJSON(object: any): MessageOptions {
     return {
-      messageSetWireFormat: isSet(object.messageSetWireFormat) ? Boolean(object.messageSetWireFormat) : false,
+      messageSetWireFormat: isSet(object.messageSetWireFormat)
+        ? Boolean(object.messageSetWireFormat)
+        : false,
       noStandardDescriptorAccessor: isSet(object.noStandardDescriptorAccessor)
         ? Boolean(object.noStandardDescriptorAccessor)
         : false,
       deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
       mapEntry: isSet(object.mapEntry) ? Boolean(object.mapEntry) : false,
-      deprecatedLegacyJsonFieldConflicts: isSet(object.deprecatedLegacyJsonFieldConflicts)
+      deprecatedLegacyJsonFieldConflicts: isSet(
+        object.deprecatedLegacyJsonFieldConflicts,
+      )
         ? Boolean(object.deprecatedLegacyJsonFieldConflicts)
         : false,
       uninterpretedOption: Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
+        ? object.uninterpretedOption.map((e: any) =>
+            UninterpretedOption.fromJSON(e),
+          )
         : [],
     };
   },
 
   toJSON(message: MessageOptions): unknown {
     const obj: any = {};
-    message.messageSetWireFormat !== undefined && (obj.messageSetWireFormat = message.messageSetWireFormat);
+    message.messageSetWireFormat !== undefined &&
+      (obj.messageSetWireFormat = message.messageSetWireFormat);
     message.noStandardDescriptorAccessor !== undefined &&
       (obj.noStandardDescriptorAccessor = message.noStandardDescriptorAccessor);
     message.deprecated !== undefined && (obj.deprecated = message.deprecated);
     message.mapEntry !== undefined && (obj.mapEntry = message.mapEntry);
     message.deprecatedLegacyJsonFieldConflicts !== undefined &&
-      (obj.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts);
+      (obj.deprecatedLegacyJsonFieldConflicts =
+        message.deprecatedLegacyJsonFieldConflicts);
     if (message.uninterpretedOption) {
-      obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+      obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+        e ? UninterpretedOption.toJSON(e) : undefined,
+      );
     } else {
       obj.uninterpretedOption = [];
     }
@@ -443,34 +550,54 @@ export const FieldOptions = {
     return {
       ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
       packed: isSet(object.packed) ? Boolean(object.packed) : false,
-      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
+      jstype: isSet(object.jstype)
+        ? fieldOptions_JSTypeFromJSON(object.jstype)
+        : 0,
       lazy: isSet(object.lazy) ? Boolean(object.lazy) : false,
-      unverifiedLazy: isSet(object.unverifiedLazy) ? Boolean(object.unverifiedLazy) : false,
+      unverifiedLazy: isSet(object.unverifiedLazy)
+        ? Boolean(object.unverifiedLazy)
+        : false,
       deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
       weak: isSet(object.weak) ? Boolean(object.weak) : false,
-      debugRedact: isSet(object.debugRedact) ? Boolean(object.debugRedact) : false,
-      retention: isSet(object.retention) ? fieldOptions_OptionRetentionFromJSON(object.retention) : 0,
-      target: isSet(object.target) ? fieldOptions_OptionTargetTypeFromJSON(object.target) : 0,
+      debugRedact: isSet(object.debugRedact)
+        ? Boolean(object.debugRedact)
+        : false,
+      retention: isSet(object.retention)
+        ? fieldOptions_OptionRetentionFromJSON(object.retention)
+        : 0,
+      target: isSet(object.target)
+        ? fieldOptions_OptionTargetTypeFromJSON(object.target)
+        : 0,
       uninterpretedOption: Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
+        ? object.uninterpretedOption.map((e: any) =>
+            UninterpretedOption.fromJSON(e),
+          )
         : [],
     };
   },
 
   toJSON(message: FieldOptions): unknown {
     const obj: any = {};
-    message.ctype !== undefined && (obj.ctype = fieldOptions_CTypeToJSON(message.ctype));
+    message.ctype !== undefined &&
+      (obj.ctype = fieldOptions_CTypeToJSON(message.ctype));
     message.packed !== undefined && (obj.packed = message.packed);
-    message.jstype !== undefined && (obj.jstype = fieldOptions_JSTypeToJSON(message.jstype));
+    message.jstype !== undefined &&
+      (obj.jstype = fieldOptions_JSTypeToJSON(message.jstype));
     message.lazy !== undefined && (obj.lazy = message.lazy);
-    message.unverifiedLazy !== undefined && (obj.unverifiedLazy = message.unverifiedLazy);
+    message.unverifiedLazy !== undefined &&
+      (obj.unverifiedLazy = message.unverifiedLazy);
     message.deprecated !== undefined && (obj.deprecated = message.deprecated);
     message.weak !== undefined && (obj.weak = message.weak);
-    message.debugRedact !== undefined && (obj.debugRedact = message.debugRedact);
-    message.retention !== undefined && (obj.retention = fieldOptions_OptionRetentionToJSON(message.retention));
-    message.target !== undefined && (obj.target = fieldOptions_OptionTargetTypeToJSON(message.target));
+    message.debugRedact !== undefined &&
+      (obj.debugRedact = message.debugRedact);
+    message.retention !== undefined &&
+      (obj.retention = fieldOptions_OptionRetentionToJSON(message.retention));
+    message.target !== undefined &&
+      (obj.target = fieldOptions_OptionTargetTypeToJSON(message.target));
     if (message.uninterpretedOption) {
-      obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+      obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+        e ? UninterpretedOption.toJSON(e) : undefined,
+      );
     } else {
       obj.uninterpretedOption = [];
     }
@@ -482,7 +609,9 @@ export const OneofOptions = {
   fromJSON(object: any): OneofOptions {
     return {
       uninterpretedOption: Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
+        ? object.uninterpretedOption.map((e: any) =>
+            UninterpretedOption.fromJSON(e),
+          )
         : [],
     };
   },
@@ -490,7 +619,9 @@ export const OneofOptions = {
   toJSON(message: OneofOptions): unknown {
     const obj: any = {};
     if (message.uninterpretedOption) {
-      obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+      obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+        e ? UninterpretedOption.toJSON(e) : undefined,
+      );
     } else {
       obj.uninterpretedOption = [];
     }
@@ -503,7 +634,9 @@ export const ServiceOptions = {
     return {
       deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
       uninterpretedOption: Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
+        ? object.uninterpretedOption.map((e: any) =>
+            UninterpretedOption.fromJSON(e),
+          )
         : [],
     };
   },
@@ -512,7 +645,9 @@ export const ServiceOptions = {
     const obj: any = {};
     message.deprecated !== undefined && (obj.deprecated = message.deprecated);
     if (message.uninterpretedOption) {
-      obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+      obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+        e ? UninterpretedOption.toJSON(e) : undefined,
+      );
     } else {
       obj.uninterpretedOption = [];
     }
@@ -528,7 +663,9 @@ export const MethodOptions = {
         ? methodOptions_IdempotencyLevelFromJSON(object.idempotencyLevel)
         : 0,
       uninterpretedOption: Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) => UninterpretedOption.fromJSON(e))
+        ? object.uninterpretedOption.map((e: any) =>
+            UninterpretedOption.fromJSON(e),
+          )
         : [],
     };
   },
@@ -537,9 +674,13 @@ export const MethodOptions = {
     const obj: any = {};
     message.deprecated !== undefined && (obj.deprecated = message.deprecated);
     message.idempotencyLevel !== undefined &&
-      (obj.idempotencyLevel = methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel));
+      (obj.idempotencyLevel = methodOptions_IdempotencyLevelToJSON(
+        message.idempotencyLevel,
+      ));
     if (message.uninterpretedOption) {
-      obj.uninterpretedOption = message.uninterpretedOption.map((e) => e ? UninterpretedOption.toJSON(e) : undefined);
+      obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+        e ? UninterpretedOption.toJSON(e) : undefined,
+      );
     } else {
       obj.uninterpretedOption = [];
     }
@@ -550,30 +691,53 @@ export const MethodOptions = {
 export const UninterpretedOption = {
   fromJSON(object: any): UninterpretedOption {
     return {
-      name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e)) : [],
-      identifierValue: isSet(object.identifierValue) ? String(object.identifierValue) : "",
-      positiveIntValue: isSet(object.positiveIntValue) ? Number(object.positiveIntValue) : 0,
-      negativeIntValue: isSet(object.negativeIntValue) ? Number(object.negativeIntValue) : 0,
+      name: Array.isArray(object?.name)
+        ? object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e))
+        : [],
+      identifierValue: isSet(object.identifierValue)
+        ? String(object.identifierValue)
+        : "",
+      positiveIntValue: isSet(object.positiveIntValue)
+        ? Number(object.positiveIntValue)
+        : 0,
+      negativeIntValue: isSet(object.negativeIntValue)
+        ? Number(object.negativeIntValue)
+        : 0,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
-      stringValue: isSet(object.stringValue) ? bytesFromBase64(object.stringValue) : new Uint8Array(0),
-      aggregateValue: isSet(object.aggregateValue) ? String(object.aggregateValue) : "",
+      stringValue: isSet(object.stringValue)
+        ? bytesFromBase64(object.stringValue)
+        : new Uint8Array(0),
+      aggregateValue: isSet(object.aggregateValue)
+        ? String(object.aggregateValue)
+        : "",
     };
   },
 
   toJSON(message: UninterpretedOption): unknown {
     const obj: any = {};
     if (message.name) {
-      obj.name = message.name.map((e) => e ? UninterpretedOption_NamePart.toJSON(e) : undefined);
+      obj.name = message.name.map((e) =>
+        e ? UninterpretedOption_NamePart.toJSON(e) : undefined,
+      );
     } else {
       obj.name = [];
     }
-    message.identifierValue !== undefined && (obj.identifierValue = message.identifierValue);
-    message.positiveIntValue !== undefined && (obj.positiveIntValue = Math.round(message.positiveIntValue));
-    message.negativeIntValue !== undefined && (obj.negativeIntValue = Math.round(message.negativeIntValue));
-    message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
+    message.identifierValue !== undefined &&
+      (obj.identifierValue = message.identifierValue);
+    message.positiveIntValue !== undefined &&
+      (obj.positiveIntValue = Math.round(message.positiveIntValue));
+    message.negativeIntValue !== undefined &&
+      (obj.negativeIntValue = Math.round(message.negativeIntValue));
+    message.doubleValue !== undefined &&
+      (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined &&
-      (obj.stringValue = base64FromBytes(message.stringValue !== undefined ? message.stringValue : new Uint8Array(0)));
-    message.aggregateValue !== undefined && (obj.aggregateValue = message.aggregateValue);
+      (obj.stringValue = base64FromBytes(
+        message.stringValue !== undefined
+          ? message.stringValue
+          : new Uint8Array(0),
+      ));
+    message.aggregateValue !== undefined &&
+      (obj.aggregateValue = message.aggregateValue);
     return obj;
   },
 };
@@ -582,22 +746,25 @@ export const UninterpretedOption_NamePart = {
   fromJSON(object: any): UninterpretedOption_NamePart {
     return {
       namePart: isSet(object.namePart) ? String(object.namePart) : "",
-      isExtension: isSet(object.isExtension) ? Boolean(object.isExtension) : false,
+      isExtension: isSet(object.isExtension)
+        ? Boolean(object.isExtension)
+        : false,
     };
   },
 
   toJSON(message: UninterpretedOption_NamePart): unknown {
     const obj: any = {};
     message.namePart !== undefined && (obj.namePart = message.namePart);
-    message.isExtension !== undefined && (obj.isExtension = message.isExtension);
+    message.isExtension !== undefined &&
+      (obj.isExtension = message.isExtension);
     return obj;
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
+declare const self: any | undefined;
+declare const window: any | undefined;
+declare const global: any | undefined;
+const tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }

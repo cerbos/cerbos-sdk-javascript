@@ -261,7 +261,9 @@ export interface SecurityScheme_ExtensionsEntry {
 }
 
 export interface SecurityRequirement {
-  securityRequirement: { [key: string]: SecurityRequirement_SecurityRequirementValue };
+  securityRequirement: {
+    [key: string]: SecurityRequirement_SecurityRequirementValue;
+  };
 }
 
 export interface SecurityRequirement_SecurityRequirementValue {

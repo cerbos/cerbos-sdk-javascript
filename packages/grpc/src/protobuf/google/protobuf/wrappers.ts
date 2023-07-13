@@ -13,7 +13,10 @@ function createBaseUInt64Value(): UInt64Value {
 }
 
 export const UInt64Value = {
-  encode(message: UInt64Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: UInt64Value,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.value !== "0") {
       writer.uint32(8).uint64(message.value);
     }
@@ -21,7 +24,8 @@ export const UInt64Value = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): UInt64Value {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt64Value();
     while (reader.pos < end) {

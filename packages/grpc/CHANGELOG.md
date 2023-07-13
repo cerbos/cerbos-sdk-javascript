@@ -9,6 +9,8 @@
 ### Changed
 
 - Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.8.17 ([#555](https://github.com/cerbos/cerbos-sdk-javascript/pull/555), [#575](https://github.com/cerbos/cerbos-sdk-javascript/pull/575), [#578](https://github.com/cerbos/cerbos-sdk-javascript/pull/578))
+- Bump dependency on [protobufjs](https://github.com/protobufjs/protobuf.js) to 7.2.4 ([#596](https://github.com/cerbos/cerbos-sdk-javascript/pull/596))
+- Bump dependency on [long](https://github.com/dcodeIO/long.js) to 5.2.3 ([#596](https://github.com/cerbos/cerbos-sdk-javascript/pull/596))
 
 ## [0.11.0] - 2023-06-07
 

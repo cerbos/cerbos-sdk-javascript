@@ -25,7 +25,9 @@ export interface PlanResourcesResponse_Meta {
 
 export interface CheckResourceSetResponse {
   requestId: string;
-  resourceInstances: { [key: string]: CheckResourceSetResponse_ActionEffectMap };
+  resourceInstances: {
+    [key: string]: CheckResourceSetResponse_ActionEffectMap;
+  };
   meta: CheckResourceSetResponse_Meta | undefined;
 }
 
@@ -40,7 +42,9 @@ export interface CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
 }
 
 export interface CheckResourceSetResponse_Meta {
-  resourceInstances: { [key: string]: CheckResourceSetResponse_Meta_ActionMeta };
+  resourceInstances: {
+    [key: string]: CheckResourceSetResponse_Meta_ActionMeta;
+  };
 }
 
 export interface CheckResourceSetResponse_Meta_EffectMeta {
@@ -105,7 +109,9 @@ export interface CheckResourcesResponse_ResultEntry_Resource {
 }
 
 export interface CheckResourcesResponse_ResultEntry_Meta {
-  actions: { [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta };
+  actions: {
+    [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta;
+  };
   effectiveDerivedRoles: string[];
 }
 
@@ -129,10 +135,13 @@ export interface AddOrUpdatePolicyResponse {
 }
 
 export interface ListAuditLogEntriesResponse {
-  entry?: { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry } | {
-    $case: "decisionLogEntry";
-    decisionLogEntry: DecisionLogEntry;
-  };
+  entry?:
+    | { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry }
+    | {
+        $case: "decisionLogEntry";
+        decisionLogEntry: DecisionLogEntry;
+      }
+    | undefined;
 }
 
 export interface ServerInfoResponse {
@@ -157,8 +166,7 @@ export interface EnablePolicyResponse {
   enabledPolicies: number;
 }
 
-export interface AddOrUpdateSchemaResponse {
-}
+export interface AddOrUpdateSchemaResponse {}
 
 export interface ListSchemasResponse {
   schemaIds: string[];
@@ -172,5 +180,4 @@ export interface DeleteSchemaResponse {
   deletedSchemas: number;
 }
 
-export interface ReloadStoreResponse {
-}
+export interface ReloadStoreResponse {}

@@ -45,10 +45,11 @@ export interface PlanResourcesFilter_Expression {
 }
 
 export interface PlanResourcesFilter_Expression_Operand {
-  node?: { $case: "value"; value: any | undefined } | {
-    $case: "expression";
-    expression: PlanResourcesFilter_Expression;
-  } | { $case: "variable"; variable: string };
+  node?:
+    | { $case: "value"; value: any | undefined }
+    | { $case: "expression"; expression: PlanResourcesFilter_Expression }
+    | { $case: "variable"; variable: string }
+    | undefined;
 }
 
 export interface PlanResourcesOutput {
@@ -142,7 +143,10 @@ function createBasePlanResourcesInput(): PlanResourcesInput {
 }
 
 export const PlanResourcesInput = {
-  encode(message: PlanResourcesInput, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PlanResourcesInput,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -153,7 +157,10 @@ export const PlanResourcesInput = {
       Principal.encode(message.principal, writer.uint32(26).fork()).ldelim();
     }
     if (message.resource !== undefined) {
-      PlanResourcesInput_Resource.encode(message.resource, writer.uint32(34).fork()).ldelim();
+      PlanResourcesInput_Resource.encode(
+        message.resource,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.auxData !== undefined) {
       AuxData.encode(message.auxData, writer.uint32(42).fork()).ldelim();
@@ -165,7 +172,8 @@ export const PlanResourcesInput = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesInput {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesInput();
     while (reader.pos < end) {
@@ -197,7 +205,10 @@ export const PlanResourcesInput = {
             break;
           }
 
-          message.resource = PlanResourcesInput_Resource.decode(reader, reader.uint32());
+          message.resource = PlanResourcesInput_Resource.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 5:
           if (tag !== 42) {
@@ -228,13 +239,19 @@ function createBasePlanResourcesInput_Resource(): PlanResourcesInput_Resource {
 }
 
 export const PlanResourcesInput_Resource = {
-  encode(message: PlanResourcesInput_Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PlanResourcesInput_Resource,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.kind !== "") {
       writer.uint32(10).string(message.kind);
     }
     Object.entries(message.attr).forEach(([key, value]) => {
       if (value !== undefined) {
-        PlanResourcesInput_Resource_AttrEntry.encode({ key: key as any, value }, writer.uint32(18).fork()).ldelim();
+        PlanResourcesInput_Resource_AttrEntry.encode(
+          { key: key as any, value },
+          writer.uint32(18).fork(),
+        ).ldelim();
       }
     });
     if (message.policyVersion !== "") {
@@ -246,8 +263,12 @@ export const PlanResourcesInput_Resource = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesInput_Resource {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): PlanResourcesInput_Resource {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesInput_Resource();
     while (reader.pos < end) {
@@ -265,7 +286,10 @@ export const PlanResourcesInput_Resource = {
             break;
           }
 
-          const entry2 = PlanResourcesInput_Resource_AttrEntry.decode(reader, reader.uint32());
+          const entry2 = PlanResourcesInput_Resource_AttrEntry.decode(
+            reader,
+            reader.uint32(),
+          );
           if (entry2.value !== undefined) {
             message.attr[entry2.key] = entry2.value;
           }
@@ -299,18 +323,28 @@ function createBasePlanResourcesInput_Resource_AttrEntry(): PlanResourcesInput_R
 }
 
 export const PlanResourcesInput_Resource_AttrEntry = {
-  encode(message: PlanResourcesInput_Resource_AttrEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PlanResourcesInput_Resource_AttrEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
+      Value.encode(
+        Value.wrap(message.value),
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesInput_Resource_AttrEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): PlanResourcesInput_Resource_AttrEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesInput_Resource_AttrEntry();
     while (reader.pos < end) {
@@ -345,18 +379,25 @@ function createBasePlanResourcesFilter(): PlanResourcesFilter {
 }
 
 export const PlanResourcesFilter = {
-  encode(message: PlanResourcesFilter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PlanResourcesFilter,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
     }
     if (message.condition !== undefined) {
-      PlanResourcesFilter_Expression_Operand.encode(message.condition, writer.uint32(18).fork()).ldelim();
+      PlanResourcesFilter_Expression_Operand.encode(
+        message.condition,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesFilter {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesFilter();
     while (reader.pos < end) {
@@ -374,7 +415,10 @@ export const PlanResourcesFilter = {
             break;
           }
 
-          message.condition = PlanResourcesFilter_Expression_Operand.decode(reader, reader.uint32());
+          message.condition = PlanResourcesFilter_Expression_Operand.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -391,18 +435,28 @@ function createBasePlanResourcesFilter_Expression(): PlanResourcesFilter_Express
 }
 
 export const PlanResourcesFilter_Expression = {
-  encode(message: PlanResourcesFilter_Expression, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PlanResourcesFilter_Expression,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.operator !== "") {
       writer.uint32(10).string(message.operator);
     }
     for (const v of message.operands) {
-      PlanResourcesFilter_Expression_Operand.encode(v!, writer.uint32(18).fork()).ldelim();
+      PlanResourcesFilter_Expression_Operand.encode(
+        v!,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesFilter_Expression {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): PlanResourcesFilter_Expression {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesFilter_Expression();
     while (reader.pos < end) {
@@ -420,7 +474,12 @@ export const PlanResourcesFilter_Expression = {
             break;
           }
 
-          message.operands.push(PlanResourcesFilter_Expression_Operand.decode(reader, reader.uint32()));
+          message.operands.push(
+            PlanResourcesFilter_Expression_Operand.decode(
+              reader,
+              reader.uint32(),
+            ),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -437,13 +496,22 @@ function createBasePlanResourcesFilter_Expression_Operand(): PlanResourcesFilter
 }
 
 export const PlanResourcesFilter_Expression_Operand = {
-  encode(message: PlanResourcesFilter_Expression_Operand, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PlanResourcesFilter_Expression_Operand,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     switch (message.node?.$case) {
       case "value":
-        Value.encode(Value.wrap(message.node.value), writer.uint32(10).fork()).ldelim();
+        Value.encode(
+          Value.wrap(message.node.value),
+          writer.uint32(10).fork(),
+        ).ldelim();
         break;
       case "expression":
-        PlanResourcesFilter_Expression.encode(message.node.expression, writer.uint32(18).fork()).ldelim();
+        PlanResourcesFilter_Expression.encode(
+          message.node.expression,
+          writer.uint32(18).fork(),
+        ).ldelim();
         break;
       case "variable":
         writer.uint32(26).string(message.node.variable);
@@ -452,8 +520,12 @@ export const PlanResourcesFilter_Expression_Operand = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesFilter_Expression_Operand {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): PlanResourcesFilter_Expression_Operand {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesFilter_Expression_Operand();
     while (reader.pos < end) {
@@ -464,7 +536,10 @@ export const PlanResourcesFilter_Expression_Operand = {
             break;
           }
 
-          message.node = { $case: "value", value: Value.unwrap(Value.decode(reader, reader.uint32())) };
+          message.node = {
+            $case: "value",
+            value: Value.unwrap(Value.decode(reader, reader.uint32())),
+          };
           continue;
         case 2:
           if (tag !== 18) {
@@ -473,7 +548,10 @@ export const PlanResourcesFilter_Expression_Operand = {
 
           message.node = {
             $case: "expression",
-            expression: PlanResourcesFilter_Expression.decode(reader, reader.uint32()),
+            expression: PlanResourcesFilter_Expression.decode(
+              reader,
+              reader.uint32(),
+            ),
           };
           continue;
         case 3:
@@ -507,7 +585,10 @@ function createBasePlanResourcesOutput(): PlanResourcesOutput {
 }
 
 export const PlanResourcesOutput = {
-  encode(message: PlanResourcesOutput, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PlanResourcesOutput,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -524,7 +605,10 @@ export const PlanResourcesOutput = {
       writer.uint32(42).string(message.scope);
     }
     if (message.filter !== undefined) {
-      PlanResourcesFilter.encode(message.filter, writer.uint32(50).fork()).ldelim();
+      PlanResourcesFilter.encode(
+        message.filter,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     if (message.filterDebug !== "") {
       writer.uint32(58).string(message.filterDebug);
@@ -536,7 +620,8 @@ export const PlanResourcesOutput = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): PlanResourcesOutput {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesOutput();
     while (reader.pos < end) {
@@ -596,7 +681,9 @@ export const PlanResourcesOutput = {
             break;
           }
 
-          message.validationErrors.push(ValidationError.decode(reader, reader.uint32()));
+          message.validationErrors.push(
+            ValidationError.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -609,11 +696,20 @@ export const PlanResourcesOutput = {
 };
 
 function createBaseCheckInput(): CheckInput {
-  return { requestId: "", resource: undefined, principal: undefined, actions: [], auxData: undefined };
+  return {
+    requestId: "",
+    resource: undefined,
+    principal: undefined,
+    actions: [],
+    auxData: undefined,
+  };
 }
 
 export const CheckInput = {
-  encode(message: CheckInput, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckInput,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -633,7 +729,8 @@ export const CheckInput = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): CheckInput {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckInput();
     while (reader.pos < end) {
@@ -685,11 +782,21 @@ export const CheckInput = {
 };
 
 function createBaseCheckOutput(): CheckOutput {
-  return { requestId: "", resourceId: "", actions: {}, effectiveDerivedRoles: [], validationErrors: [], outputs: [] };
+  return {
+    requestId: "",
+    resourceId: "",
+    actions: {},
+    effectiveDerivedRoles: [],
+    validationErrors: [],
+    outputs: [],
+  };
 }
 
 export const CheckOutput = {
-  encode(message: CheckOutput, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckOutput,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -697,7 +804,10 @@ export const CheckOutput = {
       writer.uint32(18).string(message.resourceId);
     }
     Object.entries(message.actions).forEach(([key, value]) => {
-      CheckOutput_ActionsEntry.encode({ key: key as any, value }, writer.uint32(26).fork()).ldelim();
+      CheckOutput_ActionsEntry.encode(
+        { key: key as any, value },
+        writer.uint32(26).fork(),
+      ).ldelim();
     });
     for (const v of message.effectiveDerivedRoles) {
       writer.uint32(34).string(v!);
@@ -712,7 +822,8 @@ export const CheckOutput = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): CheckOutput {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckOutput();
     while (reader.pos < end) {
@@ -737,7 +848,10 @@ export const CheckOutput = {
             break;
           }
 
-          const entry3 = CheckOutput_ActionsEntry.decode(reader, reader.uint32());
+          const entry3 = CheckOutput_ActionsEntry.decode(
+            reader,
+            reader.uint32(),
+          );
           if (entry3.value !== undefined) {
             message.actions[entry3.key] = entry3.value;
           }
@@ -754,7 +868,9 @@ export const CheckOutput = {
             break;
           }
 
-          message.validationErrors.push(ValidationError.decode(reader, reader.uint32()));
+          message.validationErrors.push(
+            ValidationError.decode(reader, reader.uint32()),
+          );
           continue;
         case 6:
           if (tag !== 50) {
@@ -778,7 +894,10 @@ function createBaseCheckOutput_ActionEffect(): CheckOutput_ActionEffect {
 }
 
 export const CheckOutput_ActionEffect = {
-  encode(message: CheckOutput_ActionEffect, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckOutput_ActionEffect,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.effect !== 0) {
       writer.uint32(8).int32(message.effect);
     }
@@ -791,8 +910,12 @@ export const CheckOutput_ActionEffect = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckOutput_ActionEffect {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckOutput_ActionEffect {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckOutput_ActionEffect();
     while (reader.pos < end) {
@@ -834,18 +957,28 @@ function createBaseCheckOutput_ActionsEntry(): CheckOutput_ActionsEntry {
 }
 
 export const CheckOutput_ActionsEntry = {
-  encode(message: CheckOutput_ActionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CheckOutput_ActionsEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      CheckOutput_ActionEffect.encode(message.value, writer.uint32(18).fork()).ldelim();
+      CheckOutput_ActionEffect.encode(
+        message.value,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckOutput_ActionsEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CheckOutput_ActionsEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckOutput_ActionsEntry();
     while (reader.pos < end) {
@@ -863,7 +996,10 @@ export const CheckOutput_ActionsEntry = {
             break;
           }
 
-          message.value = CheckOutput_ActionEffect.decode(reader, reader.uint32());
+          message.value = CheckOutput_ActionEffect.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -880,7 +1016,10 @@ function createBaseOutputEntry(): OutputEntry {
 }
 
 export const OutputEntry = {
-  encode(message: OutputEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: OutputEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.src !== "") {
       writer.uint32(10).string(message.src);
     }
@@ -891,7 +1030,8 @@ export const OutputEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): OutputEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOutputEntry();
     while (reader.pos < end) {
@@ -926,7 +1066,10 @@ function createBaseResource(): Resource {
 }
 
 export const Resource = {
-  encode(message: Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Resource,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.kind !== "") {
       writer.uint32(10).string(message.kind);
     }
@@ -938,7 +1081,10 @@ export const Resource = {
     }
     Object.entries(message.attr).forEach(([key, value]) => {
       if (value !== undefined) {
-        Resource_AttrEntry.encode({ key: key as any, value }, writer.uint32(34).fork()).ldelim();
+        Resource_AttrEntry.encode(
+          { key: key as any, value },
+          writer.uint32(34).fork(),
+        ).ldelim();
       }
     });
     if (message.scope !== "") {
@@ -948,7 +1094,8 @@ export const Resource = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Resource {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResource();
     while (reader.pos < end) {
@@ -1007,18 +1154,25 @@ function createBaseResource_AttrEntry(): Resource_AttrEntry {
 }
 
 export const Resource_AttrEntry = {
-  encode(message: Resource_AttrEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Resource_AttrEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
+      Value.encode(
+        Value.wrap(message.value),
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Resource_AttrEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResource_AttrEntry();
     while (reader.pos < end) {
@@ -1053,7 +1207,10 @@ function createBasePrincipal(): Principal {
 }
 
 export const Principal = {
-  encode(message: Principal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Principal,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -1065,7 +1222,10 @@ export const Principal = {
     }
     Object.entries(message.attr).forEach(([key, value]) => {
       if (value !== undefined) {
-        Principal_AttrEntry.encode({ key: key as any, value }, writer.uint32(34).fork()).ldelim();
+        Principal_AttrEntry.encode(
+          { key: key as any, value },
+          writer.uint32(34).fork(),
+        ).ldelim();
       }
     });
     if (message.scope !== "") {
@@ -1075,7 +1235,8 @@ export const Principal = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Principal {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrincipal();
     while (reader.pos < end) {
@@ -1134,18 +1295,25 @@ function createBasePrincipal_AttrEntry(): Principal_AttrEntry {
 }
 
 export const Principal_AttrEntry = {
-  encode(message: Principal_AttrEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Principal_AttrEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
+      Value.encode(
+        Value.wrap(message.value),
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Principal_AttrEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrincipal_AttrEntry();
     while (reader.pos < end) {
@@ -1180,17 +1348,24 @@ function createBaseAuxData(): AuxData {
 }
 
 export const AuxData = {
-  encode(message: AuxData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: AuxData,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     Object.entries(message.jwt).forEach(([key, value]) => {
       if (value !== undefined) {
-        AuxData_JwtEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
+        AuxData_JwtEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).ldelim();
       }
     });
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): AuxData {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuxData();
     while (reader.pos < end) {
@@ -1221,18 +1396,25 @@ function createBaseAuxData_JwtEntry(): AuxData_JwtEntry {
 }
 
 export const AuxData_JwtEntry = {
-  encode(message: AuxData_JwtEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: AuxData_JwtEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
+      Value.encode(
+        Value.wrap(message.value),
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): AuxData_JwtEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuxData_JwtEntry();
     while (reader.pos < end) {

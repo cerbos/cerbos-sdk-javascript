@@ -37,7 +37,9 @@ export enum PlanResourcesFilter_Kind {
   KIND_CONDITIONAL = 3,
 }
 
-export function planResourcesFilter_KindFromJSON(object: any): PlanResourcesFilter_Kind {
+export function planResourcesFilter_KindFromJSON(
+  object: any,
+): PlanResourcesFilter_Kind {
   switch (object) {
     case 0:
     case "KIND_UNSPECIFIED":
@@ -52,11 +54,17 @@ export function planResourcesFilter_KindFromJSON(object: any): PlanResourcesFilt
     case "KIND_CONDITIONAL":
       return PlanResourcesFilter_Kind.KIND_CONDITIONAL;
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum PlanResourcesFilter_Kind");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum PlanResourcesFilter_Kind",
+      );
   }
 }
 
-export function planResourcesFilter_KindToJSON(object: PlanResourcesFilter_Kind): string {
+export function planResourcesFilter_KindToJSON(
+  object: PlanResourcesFilter_Kind,
+): string {
   switch (object) {
     case PlanResourcesFilter_Kind.KIND_UNSPECIFIED:
       return "KIND_UNSPECIFIED";
@@ -67,7 +75,11 @@ export function planResourcesFilter_KindToJSON(object: PlanResourcesFilter_Kind)
     case PlanResourcesFilter_Kind.KIND_CONDITIONAL:
       return "KIND_CONDITIONAL";
     default:
-      throw new tsProtoGlobalThis.Error("Unrecognized enum value " + object + " for enum PlanResourcesFilter_Kind");
+      throw new tsProtoGlobalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum PlanResourcesFilter_Kind",
+      );
   }
 }
 
@@ -77,10 +89,11 @@ export interface PlanResourcesFilter_Expression {
 }
 
 export interface PlanResourcesFilter_Expression_Operand {
-  node?: { $case: "value"; value: any | undefined } | {
-    $case: "expression";
-    expression: PlanResourcesFilter_Expression;
-  } | { $case: "variable"; variable: string };
+  node?:
+    | { $case: "value"; value: any | undefined }
+    | { $case: "expression"; expression: PlanResourcesFilter_Expression }
+    | { $case: "variable"; variable: string }
+    | undefined;
 }
 
 export interface PlanResourcesOutput {
@@ -167,10 +180,18 @@ export const PlanResourcesInput = {
     return {
       requestId: isSet(object.requestId) ? String(object.requestId) : "",
       action: isSet(object.action) ? String(object.action) : "",
-      principal: isSet(object.principal) ? Principal.fromJSON(object.principal) : undefined,
-      resource: isSet(object.resource) ? PlanResourcesInput_Resource.fromJSON(object.resource) : undefined,
-      auxData: isSet(object.auxData) ? AuxData.fromJSON(object.auxData) : undefined,
-      includeMeta: isSet(object.includeMeta) ? Boolean(object.includeMeta) : false,
+      principal: isSet(object.principal)
+        ? Principal.fromJSON(object.principal)
+        : undefined,
+      resource: isSet(object.resource)
+        ? PlanResourcesInput_Resource.fromJSON(object.resource)
+        : undefined,
+      auxData: isSet(object.auxData)
+        ? AuxData.fromJSON(object.auxData)
+        : undefined,
+      includeMeta: isSet(object.includeMeta)
+        ? Boolean(object.includeMeta)
+        : false,
     };
   },
 
@@ -179,11 +200,19 @@ export const PlanResourcesInput = {
     message.requestId !== undefined && (obj.requestId = message.requestId);
     message.action !== undefined && (obj.action = message.action);
     message.principal !== undefined &&
-      (obj.principal = message.principal ? Principal.toJSON(message.principal) : undefined);
+      (obj.principal = message.principal
+        ? Principal.toJSON(message.principal)
+        : undefined);
     message.resource !== undefined &&
-      (obj.resource = message.resource ? PlanResourcesInput_Resource.toJSON(message.resource) : undefined);
-    message.auxData !== undefined && (obj.auxData = message.auxData ? AuxData.toJSON(message.auxData) : undefined);
-    message.includeMeta !== undefined && (obj.includeMeta = message.includeMeta);
+      (obj.resource = message.resource
+        ? PlanResourcesInput_Resource.toJSON(message.resource)
+        : undefined);
+    message.auxData !== undefined &&
+      (obj.auxData = message.auxData
+        ? AuxData.toJSON(message.auxData)
+        : undefined);
+    message.includeMeta !== undefined &&
+      (obj.includeMeta = message.includeMeta);
     return obj;
   },
 };
@@ -193,12 +222,16 @@ export const PlanResourcesInput_Resource = {
     return {
       kind: isSet(object.kind) ? String(object.kind) : "",
       attr: isObject(object.attr)
-        ? Object.entries(object.attr).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.attr).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
-      policyVersion: isSet(object.policyVersion) ? String(object.policyVersion) : "",
+      policyVersion: isSet(object.policyVersion)
+        ? String(object.policyVersion)
+        : "",
       scope: isSet(object.scope) ? String(object.scope) : "",
     };
   },
@@ -212,7 +245,8 @@ export const PlanResourcesInput_Resource = {
         obj.attr[k] = v;
       });
     }
-    message.policyVersion !== undefined && (obj.policyVersion = message.policyVersion);
+    message.policyVersion !== undefined &&
+      (obj.policyVersion = message.policyVersion);
     message.scope !== undefined && (obj.scope = message.scope);
     return obj;
   },
@@ -220,7 +254,10 @@ export const PlanResourcesInput_Resource = {
 
 export const PlanResourcesInput_Resource_AttrEntry = {
   fromJSON(object: any): PlanResourcesInput_Resource_AttrEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: PlanResourcesInput_Resource_AttrEntry): unknown {
@@ -234,7 +271,9 @@ export const PlanResourcesInput_Resource_AttrEntry = {
 export const PlanResourcesFilter = {
   fromJSON(object: any): PlanResourcesFilter {
     return {
-      kind: isSet(object.kind) ? planResourcesFilter_KindFromJSON(object.kind) : 0,
+      kind: isSet(object.kind)
+        ? planResourcesFilter_KindFromJSON(object.kind)
+        : 0,
       condition: isSet(object.condition)
         ? PlanResourcesFilter_Expression_Operand.fromJSON(object.condition)
         : undefined,
@@ -243,7 +282,8 @@ export const PlanResourcesFilter = {
 
   toJSON(message: PlanResourcesFilter): unknown {
     const obj: any = {};
-    message.kind !== undefined && (obj.kind = planResourcesFilter_KindToJSON(message.kind));
+    message.kind !== undefined &&
+      (obj.kind = planResourcesFilter_KindToJSON(message.kind));
     message.condition !== undefined &&
       (obj.condition = message.condition
         ? PlanResourcesFilter_Expression_Operand.toJSON(message.condition)
@@ -257,7 +297,9 @@ export const PlanResourcesFilter_Expression = {
     return {
       operator: isSet(object.operator) ? String(object.operator) : "",
       operands: Array.isArray(object?.operands)
-        ? object.operands.map((e: any) => PlanResourcesFilter_Expression_Operand.fromJSON(e))
+        ? object.operands.map((e: any) =>
+            PlanResourcesFilter_Expression_Operand.fromJSON(e),
+          )
         : [],
     };
   },
@@ -266,7 +308,9 @@ export const PlanResourcesFilter_Expression = {
     const obj: any = {};
     message.operator !== undefined && (obj.operator = message.operator);
     if (message.operands) {
-      obj.operands = message.operands.map((e) => e ? PlanResourcesFilter_Expression_Operand.toJSON(e) : undefined);
+      obj.operands = message.operands.map((e) =>
+        e ? PlanResourcesFilter_Expression_Operand.toJSON(e) : undefined,
+      );
     } else {
       obj.operands = [];
     }
@@ -280,7 +324,12 @@ export const PlanResourcesFilter_Expression_Operand = {
       node: isSet(object.value)
         ? { $case: "value", value: object.value }
         : isSet(object.expression)
-        ? { $case: "expression", expression: PlanResourcesFilter_Expression.fromJSON(object.expression) }
+        ? {
+            $case: "expression",
+            expression: PlanResourcesFilter_Expression.fromJSON(
+              object.expression,
+            ),
+          }
         : isSet(object.variable)
         ? { $case: "variable", variable: String(object.variable) }
         : undefined,
@@ -290,10 +339,12 @@ export const PlanResourcesFilter_Expression_Operand = {
   toJSON(message: PlanResourcesFilter_Expression_Operand): unknown {
     const obj: any = {};
     message.node?.$case === "value" && (obj.value = message.node?.value);
-    message.node?.$case === "expression" && (obj.expression = message.node?.expression
-      ? PlanResourcesFilter_Expression.toJSON(message.node?.expression)
-      : undefined);
-    message.node?.$case === "variable" && (obj.variable = message.node?.variable);
+    message.node?.$case === "expression" &&
+      (obj.expression = message.node?.expression
+        ? PlanResourcesFilter_Expression.toJSON(message.node?.expression)
+        : undefined);
+    message.node?.$case === "variable" &&
+      (obj.variable = message.node?.variable);
     return obj;
   },
 };
@@ -304,9 +355,13 @@ export const PlanResourcesOutput = {
       requestId: isSet(object.requestId) ? String(object.requestId) : "",
       action: isSet(object.action) ? String(object.action) : "",
       kind: isSet(object.kind) ? String(object.kind) : "",
-      policyVersion: isSet(object.policyVersion) ? String(object.policyVersion) : "",
+      policyVersion: isSet(object.policyVersion)
+        ? String(object.policyVersion)
+        : "",
       scope: isSet(object.scope) ? String(object.scope) : "",
-      filter: isSet(object.filter) ? PlanResourcesFilter.fromJSON(object.filter) : undefined,
+      filter: isSet(object.filter)
+        ? PlanResourcesFilter.fromJSON(object.filter)
+        : undefined,
       filterDebug: isSet(object.filterDebug) ? String(object.filterDebug) : "",
       validationErrors: Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
@@ -319,13 +374,19 @@ export const PlanResourcesOutput = {
     message.requestId !== undefined && (obj.requestId = message.requestId);
     message.action !== undefined && (obj.action = message.action);
     message.kind !== undefined && (obj.kind = message.kind);
-    message.policyVersion !== undefined && (obj.policyVersion = message.policyVersion);
+    message.policyVersion !== undefined &&
+      (obj.policyVersion = message.policyVersion);
     message.scope !== undefined && (obj.scope = message.scope);
     message.filter !== undefined &&
-      (obj.filter = message.filter ? PlanResourcesFilter.toJSON(message.filter) : undefined);
-    message.filterDebug !== undefined && (obj.filterDebug = message.filterDebug);
+      (obj.filter = message.filter
+        ? PlanResourcesFilter.toJSON(message.filter)
+        : undefined);
+    message.filterDebug !== undefined &&
+      (obj.filterDebug = message.filterDebug);
     if (message.validationErrors) {
-      obj.validationErrors = message.validationErrors.map((e) => e ? ValidationError.toJSON(e) : undefined);
+      obj.validationErrors = message.validationErrors.map((e) =>
+        e ? ValidationError.toJSON(e) : undefined,
+      );
     } else {
       obj.validationErrors = [];
     }
@@ -337,25 +398,41 @@ export const CheckInput = {
   fromJSON(object: any): CheckInput {
     return {
       requestId: isSet(object.requestId) ? String(object.requestId) : "",
-      resource: isSet(object.resource) ? Resource.fromJSON(object.resource) : undefined,
-      principal: isSet(object.principal) ? Principal.fromJSON(object.principal) : undefined,
-      actions: Array.isArray(object?.actions) ? object.actions.map((e: any) => String(e)) : [],
-      auxData: isSet(object.auxData) ? AuxData.fromJSON(object.auxData) : undefined,
+      resource: isSet(object.resource)
+        ? Resource.fromJSON(object.resource)
+        : undefined,
+      principal: isSet(object.principal)
+        ? Principal.fromJSON(object.principal)
+        : undefined,
+      actions: Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => String(e))
+        : [],
+      auxData: isSet(object.auxData)
+        ? AuxData.fromJSON(object.auxData)
+        : undefined,
     };
   },
 
   toJSON(message: CheckInput): unknown {
     const obj: any = {};
     message.requestId !== undefined && (obj.requestId = message.requestId);
-    message.resource !== undefined && (obj.resource = message.resource ? Resource.toJSON(message.resource) : undefined);
+    message.resource !== undefined &&
+      (obj.resource = message.resource
+        ? Resource.toJSON(message.resource)
+        : undefined);
     message.principal !== undefined &&
-      (obj.principal = message.principal ? Principal.toJSON(message.principal) : undefined);
+      (obj.principal = message.principal
+        ? Principal.toJSON(message.principal)
+        : undefined);
     if (message.actions) {
       obj.actions = message.actions.map((e) => e);
     } else {
       obj.actions = [];
     }
-    message.auxData !== undefined && (obj.auxData = message.auxData ? AuxData.toJSON(message.auxData) : undefined);
+    message.auxData !== undefined &&
+      (obj.auxData = message.auxData
+        ? AuxData.toJSON(message.auxData)
+        : undefined);
     return obj;
   },
 };
@@ -366,10 +443,12 @@ export const CheckOutput = {
       requestId: isSet(object.requestId) ? String(object.requestId) : "",
       resourceId: isSet(object.resourceId) ? String(object.resourceId) : "",
       actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{ [key: string]: CheckOutput_ActionEffect }>((acc, [key, value]) => {
-          acc[key] = CheckOutput_ActionEffect.fromJSON(value);
-          return acc;
-        }, {})
+        ? Object.entries(object.actions).reduce<{
+            [key: string]: CheckOutput_ActionEffect;
+          }>((acc, [key, value]) => {
+            acc[key] = CheckOutput_ActionEffect.fromJSON(value);
+            return acc;
+          }, {})
         : {},
       effectiveDerivedRoles: Array.isArray(object?.effectiveDerivedRoles)
         ? object.effectiveDerivedRoles.map((e: any) => String(e))
@@ -377,7 +456,9 @@ export const CheckOutput = {
       validationErrors: Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
-      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => OutputEntry.fromJSON(e)) : [],
+      outputs: Array.isArray(object?.outputs)
+        ? object.outputs.map((e: any) => OutputEntry.fromJSON(e))
+        : [],
     };
   },
 
@@ -397,12 +478,16 @@ export const CheckOutput = {
       obj.effectiveDerivedRoles = [];
     }
     if (message.validationErrors) {
-      obj.validationErrors = message.validationErrors.map((e) => e ? ValidationError.toJSON(e) : undefined);
+      obj.validationErrors = message.validationErrors.map((e) =>
+        e ? ValidationError.toJSON(e) : undefined,
+      );
     } else {
       obj.validationErrors = [];
     }
     if (message.outputs) {
-      obj.outputs = message.outputs.map((e) => e ? OutputEntry.toJSON(e) : undefined);
+      obj.outputs = message.outputs.map((e) =>
+        e ? OutputEntry.toJSON(e) : undefined,
+      );
     } else {
       obj.outputs = [];
     }
@@ -432,7 +517,9 @@ export const CheckOutput_ActionsEntry = {
   fromJSON(object: any): CheckOutput_ActionsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? CheckOutput_ActionEffect.fromJSON(object.value) : undefined,
+      value: isSet(object.value)
+        ? CheckOutput_ActionEffect.fromJSON(object.value)
+        : undefined,
     };
   },
 
@@ -440,14 +527,19 @@ export const CheckOutput_ActionsEntry = {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined &&
-      (obj.value = message.value ? CheckOutput_ActionEffect.toJSON(message.value) : undefined);
+      (obj.value = message.value
+        ? CheckOutput_ActionEffect.toJSON(message.value)
+        : undefined);
     return obj;
   },
 };
 
 export const OutputEntry = {
   fromJSON(object: any): OutputEntry {
-    return { src: isSet(object.src) ? String(object.src) : "", val: isSet(object?.val) ? object.val : undefined };
+    return {
+      src: isSet(object.src) ? String(object.src) : "",
+      val: isSet(object?.val) ? object.val : undefined,
+    };
   },
 
   toJSON(message: OutputEntry): unknown {
@@ -462,13 +554,17 @@ export const Resource = {
   fromJSON(object: any): Resource {
     return {
       kind: isSet(object.kind) ? String(object.kind) : "",
-      policyVersion: isSet(object.policyVersion) ? String(object.policyVersion) : "",
+      policyVersion: isSet(object.policyVersion)
+        ? String(object.policyVersion)
+        : "",
       id: isSet(object.id) ? String(object.id) : "",
       attr: isObject(object.attr)
-        ? Object.entries(object.attr).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.attr).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
       scope: isSet(object.scope) ? String(object.scope) : "",
     };
@@ -477,7 +573,8 @@ export const Resource = {
   toJSON(message: Resource): unknown {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = message.kind);
-    message.policyVersion !== undefined && (obj.policyVersion = message.policyVersion);
+    message.policyVersion !== undefined &&
+      (obj.policyVersion = message.policyVersion);
     message.id !== undefined && (obj.id = message.id);
     obj.attr = {};
     if (message.attr) {
@@ -492,7 +589,10 @@ export const Resource = {
 
 export const Resource_AttrEntry = {
   fromJSON(object: any): Resource_AttrEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: Resource_AttrEntry): unknown {
@@ -507,13 +607,19 @@ export const Principal = {
   fromJSON(object: any): Principal {
     return {
       id: isSet(object.id) ? String(object.id) : "",
-      policyVersion: isSet(object.policyVersion) ? String(object.policyVersion) : "",
-      roles: Array.isArray(object?.roles) ? object.roles.map((e: any) => String(e)) : [],
+      policyVersion: isSet(object.policyVersion)
+        ? String(object.policyVersion)
+        : "",
+      roles: Array.isArray(object?.roles)
+        ? object.roles.map((e: any) => String(e))
+        : [],
       attr: isObject(object.attr)
-        ? Object.entries(object.attr).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.attr).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
       scope: isSet(object.scope) ? String(object.scope) : "",
     };
@@ -522,7 +628,8 @@ export const Principal = {
   toJSON(message: Principal): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
-    message.policyVersion !== undefined && (obj.policyVersion = message.policyVersion);
+    message.policyVersion !== undefined &&
+      (obj.policyVersion = message.policyVersion);
     if (message.roles) {
       obj.roles = message.roles.map((e) => e);
     } else {
@@ -541,7 +648,10 @@ export const Principal = {
 
 export const Principal_AttrEntry = {
   fromJSON(object: any): Principal_AttrEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: Principal_AttrEntry): unknown {
@@ -556,10 +666,13 @@ export const AuxData = {
   fromJSON(object: any): AuxData {
     return {
       jwt: isObject(object.jwt)
-        ? Object.entries(object.jwt).reduce<{ [key: string]: any | undefined }>((acc, [key, value]) => {
-          acc[key] = value as any | undefined;
-          return acc;
-        }, {})
+        ? Object.entries(object.jwt).reduce<{ [key: string]: any | undefined }>(
+            (acc, [key, value]) => {
+              acc[key] = value as any | undefined;
+              return acc;
+            },
+            {},
+          )
         : {},
     };
   },
@@ -578,7 +691,10 @@ export const AuxData = {
 
 export const AuxData_JwtEntry = {
   fromJSON(object: any): AuxData_JwtEntry {
-    return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object?.value) ? object.value : undefined };
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
   },
 
   toJSON(message: AuxData_JwtEntry): unknown {
@@ -589,10 +705,10 @@ export const AuxData_JwtEntry = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
+declare const self: any | undefined;
+declare const window: any | undefined;
+declare const global: any | undefined;
+const tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }

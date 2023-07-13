@@ -23,7 +23,8 @@ export interface Value {
     | { $case: "stringValue"; stringValue: string }
     | { $case: "boolValue"; boolValue: boolean }
     | { $case: "structValue"; structValue: { [key: string]: any } | undefined }
-    | { $case: "listValue"; listValue: Array<any> | undefined };
+    | { $case: "listValue"; listValue: Array<any> | undefined }
+    | undefined;
 }
 
 export interface ListValue {
@@ -35,17 +36,24 @@ function createBaseStruct(): Struct {
 }
 
 export const Struct = {
-  encode(message: Struct, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Struct,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     Object.entries(message.fields).forEach(([key, value]) => {
       if (value !== undefined) {
-        Struct_FieldsEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
+        Struct_FieldsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).ldelim();
       }
     });
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Struct {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct();
     while (reader.pos < end) {
@@ -96,18 +104,25 @@ function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
 }
 
 export const Struct_FieldsEntry = {
-  encode(message: Struct_FieldsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Struct_FieldsEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).ldelim();
+      Value.encode(
+        Value.wrap(message.value),
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Struct_FieldsEntry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct_FieldsEntry();
     while (reader.pos < end) {
@@ -157,17 +172,24 @@ export const Value = {
         writer.uint32(32).bool(message.kind.boolValue);
         break;
       case "structValue":
-        Struct.encode(Struct.wrap(message.kind.structValue), writer.uint32(42).fork()).ldelim();
+        Struct.encode(
+          Struct.wrap(message.kind.structValue),
+          writer.uint32(42).fork(),
+        ).ldelim();
         break;
       case "listValue":
-        ListValue.encode(ListValue.wrap(message.kind.listValue), writer.uint32(50).fork()).ldelim();
+        ListValue.encode(
+          ListValue.wrap(message.kind.listValue),
+          writer.uint32(50).fork(),
+        ).ldelim();
         break;
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Value {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValue();
     while (reader.pos < end) {
@@ -178,7 +200,10 @@ export const Value = {
             break;
           }
 
-          message.kind = { $case: "nullValue", nullValue: reader.int32() as any };
+          message.kind = {
+            $case: "nullValue",
+            nullValue: reader.int32() as any,
+          };
           continue;
         case 2:
           if (tag !== 17) {
@@ -206,14 +231,22 @@ export const Value = {
             break;
           }
 
-          message.kind = { $case: "structValue", structValue: Struct.unwrap(Struct.decode(reader, reader.uint32())) };
+          message.kind = {
+            $case: "structValue",
+            structValue: Struct.unwrap(Struct.decode(reader, reader.uint32())),
+          };
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.kind = { $case: "listValue", listValue: ListValue.unwrap(ListValue.decode(reader, reader.uint32())) };
+          message.kind = {
+            $case: "listValue",
+            listValue: ListValue.unwrap(
+              ListValue.decode(reader, reader.uint32()),
+            ),
+          };
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -244,7 +277,9 @@ export const Value = {
     return result;
   },
 
-  unwrap(message: Value): string | number | boolean | Object | null | Array<any> | undefined {
+  unwrap(
+    message: Value,
+  ): string | number | boolean | Object | null | Array<any> | undefined {
     if (message.kind?.$case === "nullValue") {
       return null;
     } else if (message.kind?.$case === "numberValue") {
@@ -268,7 +303,10 @@ function createBaseListValue(): ListValue {
 }
 
 export const ListValue = {
-  encode(message: ListValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ListValue,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.values) {
       Value.encode(Value.wrap(v!), writer.uint32(10).fork()).ldelim();
     }
@@ -276,7 +314,8 @@ export const ListValue = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ListValue {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListValue();
     while (reader.pos < end) {
@@ -287,7 +326,9 @@ export const ListValue = {
             break;
           }
 
-          message.values.push(Value.unwrap(Value.decode(reader, reader.uint32())));
+          message.values.push(
+            Value.unwrap(Value.decode(reader, reader.uint32())),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
