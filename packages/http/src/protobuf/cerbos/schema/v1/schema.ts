@@ -73,10 +73,15 @@ export const ValidationError = {
 
   toJSON(message: ValidationError): unknown {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.message !== undefined && (obj.message = message.message);
-    message.source !== undefined &&
-      (obj.source = validationError_SourceToJSON(message.source));
+    if (message.path !== "") {
+      obj.path = message.path;
+    }
+    if (message.message !== "") {
+      obj.message = message.message;
+    }
+    if (message.source !== 0) {
+      obj.source = validationError_SourceToJSON(message.source);
+    }
     return obj;
   },
 };
@@ -93,13 +98,12 @@ export const Schema = {
 
   toJSON(message: Schema): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.definition !== undefined &&
-      (obj.definition = base64FromBytes(
-        message.definition !== undefined
-          ? message.definition
-          : new Uint8Array(0),
-      ));
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.definition.length !== 0) {
+      obj.definition = base64FromBytes(message.definition);
+    }
     return obj;
   },
 };

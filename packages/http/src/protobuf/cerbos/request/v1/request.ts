@@ -211,22 +211,24 @@ export const PlanResourcesRequest = {
 
   toJSON(message: PlanResourcesRequest): unknown {
     const obj: any = {};
-    message.requestId !== undefined && (obj.requestId = message.requestId);
-    message.action !== undefined && (obj.action = message.action);
-    message.principal !== undefined &&
-      (obj.principal = message.principal
-        ? Principal.toJSON(message.principal)
-        : undefined);
-    message.resource !== undefined &&
-      (obj.resource = message.resource
-        ? PlanResourcesInput_Resource.toJSON(message.resource)
-        : undefined);
-    message.auxData !== undefined &&
-      (obj.auxData = message.auxData
-        ? AuxData.toJSON(message.auxData)
-        : undefined);
-    message.includeMeta !== undefined &&
-      (obj.includeMeta = message.includeMeta);
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.action !== "") {
+      obj.action = message.action;
+    }
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.resource !== undefined) {
+      obj.resource = PlanResourcesInput_Resource.toJSON(message.resource);
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
+    if (message.includeMeta === true) {
+      obj.includeMeta = message.includeMeta;
+    }
     return obj;
   },
 };
@@ -255,26 +257,24 @@ export const CheckResourceSetRequest = {
 
   toJSON(message: CheckResourceSetRequest): unknown {
     const obj: any = {};
-    message.requestId !== undefined && (obj.requestId = message.requestId);
-    if (message.actions) {
-      obj.actions = message.actions.map((e) => e);
-    } else {
-      obj.actions = [];
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
     }
-    message.principal !== undefined &&
-      (obj.principal = message.principal
-        ? Principal.toJSON(message.principal)
-        : undefined);
-    message.resource !== undefined &&
-      (obj.resource = message.resource
-        ? ResourceSet.toJSON(message.resource)
-        : undefined);
-    message.includeMeta !== undefined &&
-      (obj.includeMeta = message.includeMeta);
-    message.auxData !== undefined &&
-      (obj.auxData = message.auxData
-        ? AuxData.toJSON(message.auxData)
-        : undefined);
+    if (message.actions?.length) {
+      obj.actions = message.actions;
+    }
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.resource !== undefined) {
+      obj.resource = ResourceSet.toJSON(message.resource);
+    }
+    if (message.includeMeta === true) {
+      obj.includeMeta = message.includeMeta;
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
     return obj;
   },
 };
@@ -300,16 +300,24 @@ export const ResourceSet = {
 
   toJSON(message: ResourceSet): unknown {
     const obj: any = {};
-    message.kind !== undefined && (obj.kind = message.kind);
-    message.policyVersion !== undefined &&
-      (obj.policyVersion = message.policyVersion);
-    obj.instances = {};
-    if (message.instances) {
-      Object.entries(message.instances).forEach(([k, v]) => {
-        obj.instances[k] = AttributesMap.toJSON(v);
-      });
+    if (message.kind !== "") {
+      obj.kind = message.kind;
     }
-    message.scope !== undefined && (obj.scope = message.scope);
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.instances) {
+      const entries = Object.entries(message.instances);
+      if (entries.length > 0) {
+        obj.instances = {};
+        entries.forEach(([k, v]) => {
+          obj.instances[k] = AttributesMap.toJSON(v);
+        });
+      }
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
     return obj;
   },
 };
@@ -326,11 +334,12 @@ export const ResourceSet_InstancesEntry = {
 
   toJSON(message: ResourceSet_InstancesEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value
-        ? AttributesMap.toJSON(message.value)
-        : undefined);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = AttributesMap.toJSON(message.value);
+    }
     return obj;
   },
 };
@@ -351,11 +360,14 @@ export const AttributesMap = {
 
   toJSON(message: AttributesMap): unknown {
     const obj: any = {};
-    obj.attr = {};
     if (message.attr) {
-      Object.entries(message.attr).forEach(([k, v]) => {
-        obj.attr[k] = v;
-      });
+      const entries = Object.entries(message.attr);
+      if (entries.length > 0) {
+        obj.attr = {};
+        entries.forEach(([k, v]) => {
+          obj.attr[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -371,8 +383,12 @@ export const AttributesMap_AttrEntry = {
 
   toJSON(message: AttributesMap_AttrEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -397,22 +413,20 @@ export const CheckResourceBatchRequest = {
 
   toJSON(message: CheckResourceBatchRequest): unknown {
     const obj: any = {};
-    message.requestId !== undefined && (obj.requestId = message.requestId);
-    message.principal !== undefined &&
-      (obj.principal = message.principal
-        ? Principal.toJSON(message.principal)
-        : undefined);
-    if (message.resources) {
-      obj.resources = message.resources.map((e) =>
-        e ? CheckResourceBatchRequest_BatchEntry.toJSON(e) : undefined,
-      );
-    } else {
-      obj.resources = [];
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
     }
-    message.auxData !== undefined &&
-      (obj.auxData = message.auxData
-        ? AuxData.toJSON(message.auxData)
-        : undefined);
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) =>
+        CheckResourceBatchRequest_BatchEntry.toJSON(e),
+      );
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
     return obj;
   },
 };
@@ -431,15 +445,12 @@ export const CheckResourceBatchRequest_BatchEntry = {
 
   toJSON(message: CheckResourceBatchRequest_BatchEntry): unknown {
     const obj: any = {};
-    if (message.actions) {
-      obj.actions = message.actions.map((e) => e);
-    } else {
-      obj.actions = [];
+    if (message.actions?.length) {
+      obj.actions = message.actions;
     }
-    message.resource !== undefined &&
-      (obj.resource = message.resource
-        ? Resource.toJSON(message.resource)
-        : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
     return obj;
   },
 };
@@ -467,24 +478,23 @@ export const CheckResourcesRequest = {
 
   toJSON(message: CheckResourcesRequest): unknown {
     const obj: any = {};
-    message.requestId !== undefined && (obj.requestId = message.requestId);
-    message.includeMeta !== undefined &&
-      (obj.includeMeta = message.includeMeta);
-    message.principal !== undefined &&
-      (obj.principal = message.principal
-        ? Principal.toJSON(message.principal)
-        : undefined);
-    if (message.resources) {
-      obj.resources = message.resources.map((e) =>
-        e ? CheckResourcesRequest_ResourceEntry.toJSON(e) : undefined,
-      );
-    } else {
-      obj.resources = [];
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
     }
-    message.auxData !== undefined &&
-      (obj.auxData = message.auxData
-        ? AuxData.toJSON(message.auxData)
-        : undefined);
+    if (message.includeMeta === true) {
+      obj.includeMeta = message.includeMeta;
+    }
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) =>
+        CheckResourcesRequest_ResourceEntry.toJSON(e),
+      );
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
     return obj;
   },
 };
@@ -503,15 +513,12 @@ export const CheckResourcesRequest_ResourceEntry = {
 
   toJSON(message: CheckResourcesRequest_ResourceEntry): unknown {
     const obj: any = {};
-    if (message.actions) {
-      obj.actions = message.actions.map((e) => e);
-    } else {
-      obj.actions = [];
+    if (message.actions?.length) {
+      obj.actions = message.actions;
     }
-    message.resource !== undefined &&
-      (obj.resource = message.resource
-        ? Resource.toJSON(message.resource)
-        : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
     return obj;
   },
 };
@@ -525,8 +532,9 @@ export const AuxData = {
 
   toJSON(message: AuxData): unknown {
     const obj: any = {};
-    message.jwt !== undefined &&
-      (obj.jwt = message.jwt ? AuxData_JWT.toJSON(message.jwt) : undefined);
+    if (message.jwt !== undefined) {
+      obj.jwt = AuxData_JWT.toJSON(message.jwt);
+    }
     return obj;
   },
 };
@@ -541,8 +549,12 @@ export const AuxData_JWT = {
 
   toJSON(message: AuxData_JWT): unknown {
     const obj: any = {};
-    message.token !== undefined && (obj.token = message.token);
-    message.keySetId !== undefined && (obj.keySetId = message.keySetId);
+    if (message.token !== "") {
+      obj.token = message.token;
+    }
+    if (message.keySetId !== "") {
+      obj.keySetId = message.keySetId;
+    }
     return obj;
   },
 };
@@ -558,12 +570,8 @@ export const AddOrUpdatePolicyRequest = {
 
   toJSON(message: AddOrUpdatePolicyRequest): unknown {
     const obj: any = {};
-    if (message.policies) {
-      obj.policies = message.policies.map((e) =>
-        e ? Policy.toJSON(e) : undefined,
-      );
-    } else {
-      obj.policies = [];
+    if (message.policies?.length) {
+      obj.policies = message.policies.map((e) => Policy.toJSON(e));
     }
     return obj;
   },
@@ -594,19 +602,23 @@ export const ListAuditLogEntriesRequest = {
 
   toJSON(message: ListAuditLogEntriesRequest): unknown {
     const obj: any = {};
-    message.kind !== undefined &&
-      (obj.kind = listAuditLogEntriesRequest_KindToJSON(message.kind));
-    message.filter?.$case === "tail" &&
-      (obj.tail = Math.round(message.filter?.tail));
-    message.filter?.$case === "between" &&
-      (obj.between = message.filter?.between
-        ? ListAuditLogEntriesRequest_TimeRange.toJSON(message.filter?.between)
-        : undefined);
-    message.filter?.$case === "since" &&
-      (obj.since = message.filter?.since
-        ? Duration.toJSON(message.filter?.since)
-        : undefined);
-    message.filter?.$case === "lookup" && (obj.lookup = message.filter?.lookup);
+    if (message.kind !== 0) {
+      obj.kind = listAuditLogEntriesRequest_KindToJSON(message.kind);
+    }
+    if (message.filter?.$case === "tail") {
+      obj.tail = Math.round(message.filter.tail);
+    }
+    if (message.filter?.$case === "between") {
+      obj.between = ListAuditLogEntriesRequest_TimeRange.toJSON(
+        message.filter.between,
+      );
+    }
+    if (message.filter?.$case === "since") {
+      obj.since = Duration.toJSON(message.filter.since);
+    }
+    if (message.filter?.$case === "lookup") {
+      obj.lookup = message.filter.lookup;
+    }
     return obj;
   },
 };
@@ -621,8 +633,12 @@ export const ListAuditLogEntriesRequest_TimeRange = {
 
   toJSON(message: ListAuditLogEntriesRequest_TimeRange): unknown {
     const obj: any = {};
-    message.start !== undefined && (obj.start = message.start.toISOString());
-    message.end !== undefined && (obj.end = message.end.toISOString());
+    if (message.start !== undefined) {
+      obj.start = message.start.toISOString();
+    }
+    if (message.end !== undefined) {
+      obj.end = message.end.toISOString();
+    }
     return obj;
   },
 };
@@ -654,13 +670,18 @@ export const ListPoliciesRequest = {
 
   toJSON(message: ListPoliciesRequest): unknown {
     const obj: any = {};
-    message.includeDisabled !== undefined &&
-      (obj.includeDisabled = message.includeDisabled);
-    message.nameRegexp !== undefined && (obj.nameRegexp = message.nameRegexp);
-    message.scopeRegexp !== undefined &&
-      (obj.scopeRegexp = message.scopeRegexp);
-    message.versionRegexp !== undefined &&
-      (obj.versionRegexp = message.versionRegexp);
+    if (message.includeDisabled === true) {
+      obj.includeDisabled = message.includeDisabled;
+    }
+    if (message.nameRegexp !== "") {
+      obj.nameRegexp = message.nameRegexp;
+    }
+    if (message.scopeRegexp !== "") {
+      obj.scopeRegexp = message.scopeRegexp;
+    }
+    if (message.versionRegexp !== "") {
+      obj.versionRegexp = message.versionRegexp;
+    }
     return obj;
   },
 };
@@ -674,10 +695,8 @@ export const GetPolicyRequest = {
 
   toJSON(message: GetPolicyRequest): unknown {
     const obj: any = {};
-    if (message.id) {
-      obj.id = message.id.map((e) => e);
-    } else {
-      obj.id = [];
+    if (message.id?.length) {
+      obj.id = message.id;
     }
     return obj;
   },
@@ -692,10 +711,8 @@ export const DisablePolicyRequest = {
 
   toJSON(message: DisablePolicyRequest): unknown {
     const obj: any = {};
-    if (message.id) {
-      obj.id = message.id.map((e) => e);
-    } else {
-      obj.id = [];
+    if (message.id?.length) {
+      obj.id = message.id;
     }
     return obj;
   },
@@ -710,10 +727,8 @@ export const EnablePolicyRequest = {
 
   toJSON(message: EnablePolicyRequest): unknown {
     const obj: any = {};
-    if (message.id) {
-      obj.id = message.id.map((e) => e);
-    } else {
-      obj.id = [];
+    if (message.id?.length) {
+      obj.id = message.id;
     }
     return obj;
   },
@@ -730,12 +745,8 @@ export const AddOrUpdateSchemaRequest = {
 
   toJSON(message: AddOrUpdateSchemaRequest): unknown {
     const obj: any = {};
-    if (message.schemas) {
-      obj.schemas = message.schemas.map((e) =>
-        e ? Schema.toJSON(e) : undefined,
-      );
-    } else {
-      obj.schemas = [];
+    if (message.schemas?.length) {
+      obj.schemas = message.schemas.map((e) => Schema.toJSON(e));
     }
     return obj;
   },
@@ -761,10 +772,8 @@ export const GetSchemaRequest = {
 
   toJSON(message: GetSchemaRequest): unknown {
     const obj: any = {};
-    if (message.id) {
-      obj.id = message.id.map((e) => e);
-    } else {
-      obj.id = [];
+    if (message.id?.length) {
+      obj.id = message.id;
     }
     return obj;
   },
@@ -779,10 +788,8 @@ export const DeleteSchemaRequest = {
 
   toJSON(message: DeleteSchemaRequest): unknown {
     const obj: any = {};
-    if (message.id) {
-      obj.id = message.id.map((e) => e);
-    } else {
-      obj.id = [];
+    if (message.id?.length) {
+      obj.id = message.id;
     }
     return obj;
   },
@@ -795,7 +802,9 @@ export const ReloadStoreRequest = {
 
   toJSON(message: ReloadStoreRequest): unknown {
     const obj: any = {};
-    message.wait !== undefined && (obj.wait = message.wait);
+    if (message.wait === true) {
+      obj.wait = message.wait;
+    }
     return obj;
   },
 };

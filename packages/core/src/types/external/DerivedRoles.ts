@@ -1,4 +1,4 @@
-import type { DerivedRoleDefinition } from "./DerivedRoleDefinition";
+import type { DerivedRolesBody } from "./DerivedRolesBody";
 import type { PolicyBase } from "./PolicyBase";
 
 /**
@@ -11,15 +11,5 @@ export interface DerivedRoles extends PolicyBase {
   /**
    * A set of derived roles.
    */
-  derivedRoles: {
-    /**
-     * The name to use when importing the set of derived roles.
-     */
-    name: string;
-
-    /**
-     * The definitions of the derived roles.
-     */
-    definitions: DerivedRoleDefinition[];
-  };
+  derivedRoles: DerivedRolesBody;
 }

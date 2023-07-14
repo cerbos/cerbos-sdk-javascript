@@ -1,4 +1,5 @@
 import type { DerivedRoles } from "./DerivedRoles";
+import type { ExportVariables } from "./ExportVariables";
 import type { PrincipalPolicy } from "./PrincipalPolicy";
 import type { ResourcePolicy } from "./ResourcePolicy";
 
@@ -7,7 +8,11 @@ import type { ResourcePolicy } from "./ResourcePolicy";
  *
  * @public
  */
-export type Policy = DerivedRoles | PrincipalPolicy | ResourcePolicy;
+export type Policy =
+  | DerivedRoles
+  | ExportVariables
+  | PrincipalPolicy
+  | ResourcePolicy;
 
 /**
  * Type guard to check if a {@link Policy} is a set of {@link DerivedRoles}.
@@ -16,6 +21,15 @@ export type Policy = DerivedRoles | PrincipalPolicy | ResourcePolicy;
  */
 export const policyIsDerivedRoles = (policy: Policy): policy is DerivedRoles =>
   "derivedRoles" in policy;
+
+/**
+ * Type guard to check if a {@link Policy} is a set of {@link ExportVariables}.
+ *
+ * @public
+ */
+export const policyIsExportVariables = (
+  policy: Policy,
+): policy is ExportVariables => "exportVariables" in policy;
 
 /**
  * Type guard to check if a {@link Policy} is a {@link PrincipalPolicy}.

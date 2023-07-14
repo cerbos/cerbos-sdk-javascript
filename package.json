@@ -14,7 +14,7 @@
     "build": "tsc --build",
     "build:watch": "tsc --build --watch",
     "clean": "rm -rf api packages/*/lib",
-    "docs": "npm run docs:extract-api && npm run docs:generate && npm run docs:fixup",
+    "docs": "npm run build && npm run docs:extract-api && npm run docs:generate && npm run docs:fixup",
     "docs:extract-api": "npm --workspace=packages/core --workspace=packages/grpc --workspace=packages/http --workspace=packages/lite --workspace=packages/opentelemetry exec api-extractor run",
     "docs:fixup": "scripts/sed-all docs 's/\\r$//'",
     "docs:generate": "api-documenter markdown --input-folder api --output-folder docs",

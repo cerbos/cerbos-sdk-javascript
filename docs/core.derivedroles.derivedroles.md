@@ -9,8 +9,5 @@ A set of derived roles.
 **Signature:**
 
 ```typescript
-derivedRoles: {
-        name: string;
-        definitions: DerivedRoleDefinition[];
-    };
+derivedRoles: DerivedRolesBody;
 ```

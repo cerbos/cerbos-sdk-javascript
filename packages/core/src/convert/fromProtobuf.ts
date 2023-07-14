@@ -7,6 +7,7 @@ import { PlanResourcesFilter_Kind } from "../protobuf/cerbos/engine/v1/engine";
 import type {
   Condition as ConditionProtobuf,
   DerivedRoles as DerivedRolesProtobuf,
+  ExportVariables as ExportVariablesProtobuf,
   Match as MatchProtobuf,
   Match_ExprList,
   Metadata,
@@ -20,6 +21,7 @@ import type {
   RoleDef,
   Schemas,
   Schemas_Schema,
+  Variables as VariablesProtobuf,
 } from "../protobuf/cerbos/policy/v1/policy";
 import type {
   CheckResourcesResponse as CheckResourcesResponseProtobuf,
@@ -45,6 +47,7 @@ import type {
   DerivedRoles,
   DisablePoliciesResponse,
   EnablePoliciesResponse,
+  ExportVariables,
   GetPoliciesResponse,
   ListPoliciesResponse,
   ListSchemasResponse,
@@ -68,6 +71,7 @@ import type {
   SchemaRefs,
   ValidationError,
   Value,
+  Variables,
 } from "../types/external";
 import {
   CheckResourcesResponse,
@@ -227,6 +231,9 @@ const policyTypeFromProtobuf = (
     case "derivedRoles":
       return derivedRolesFromProtobuf(policyType.derivedRoles);
 
+    case "exportVariables":
+      return exportVariablesFromProtobuf(policyType.exportVariables);
+
     case "principalPolicy":
       return principalPolicyFromProtobuf(policyType.principalPolicy);
 
@@ -243,10 +250,12 @@ const policyTypeFromProtobuf = (
 const derivedRolesFromProtobuf = ({
   name,
   definitions,
+  variables,
 }: DerivedRolesProtobuf): OmitPolicyBase<DerivedRoles> => ({
   derivedRoles: {
     name,
     definitions: definitions.map(derivedRoleDefinitionFromProtobuf),
+    variables: variables && variablesFromProtobuf(variables),
   },
 });
 
@@ -305,17 +314,37 @@ const matchesFromProtobuf = ({ of }: Match_ExprList): Matches => ({
   of: of.map(matchFromProtobuf),
 });
 
+const variablesFromProtobuf = ({
+  import: imports,
+  local,
+}: VariablesProtobuf): Variables => ({
+  import: imports,
+  local,
+});
+
+const exportVariablesFromProtobuf = ({
+  name,
+  definitions,
+}: ExportVariablesProtobuf): OmitPolicyBase<ExportVariables> => ({
+  exportVariables: {
+    name,
+    definitions,
+  },
+});
+
 const principalPolicyFromProtobuf = ({
   principal,
   version,
   rules,
   scope,
+  variables,
 }: PrincipalPolicyProtobuf): OmitPolicyBase<PrincipalPolicy> => ({
   principalPolicy: {
     principal,
     version,
     rules: rules.map(principalRuleFromProtobuf),
     scope,
+    variables: variables && variablesFromProtobuf(variables),
   },
 });
 
@@ -350,6 +379,7 @@ const resourcePolicyFromProtobuf = ({
   rules,
   schemas,
   scope,
+  variables,
 }: ResourcePolicyProtobuf): OmitPolicyBase<ResourcePolicy> => ({
   resourcePolicy: {
     resource,
@@ -358,6 +388,7 @@ const resourcePolicyFromProtobuf = ({
     rules: rules.map(resourceRuleFromProtobuf),
     schemas: schemas && schemaRefsFromProtobuf(schemas),
     scope,
+    variables: variables && variablesFromProtobuf(variables),
   },
 });
 

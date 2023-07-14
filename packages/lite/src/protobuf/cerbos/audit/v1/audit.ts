@@ -95,20 +95,30 @@ export const AccessLogEntry = {
 
   toJSON(message: AccessLogEntry): unknown {
     const obj: any = {};
-    message.callId !== undefined && (obj.callId = message.callId);
-    message.timestamp !== undefined &&
-      (obj.timestamp = message.timestamp.toISOString());
-    message.peer !== undefined &&
-      (obj.peer = message.peer ? Peer.toJSON(message.peer) : undefined);
-    obj.metadata = {};
-    if (message.metadata) {
-      Object.entries(message.metadata).forEach(([k, v]) => {
-        obj.metadata[k] = MetaValues.toJSON(v);
-      });
+    if (message.callId !== "") {
+      obj.callId = message.callId;
     }
-    message.method !== undefined && (obj.method = message.method);
-    message.statusCode !== undefined &&
-      (obj.statusCode = Math.round(message.statusCode));
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
+    }
+    if (message.peer !== undefined) {
+      obj.peer = Peer.toJSON(message.peer);
+    }
+    if (message.metadata) {
+      const entries = Object.entries(message.metadata);
+      if (entries.length > 0) {
+        obj.metadata = {};
+        entries.forEach(([k, v]) => {
+          obj.metadata[k] = MetaValues.toJSON(v);
+        });
+      }
+    }
+    if (message.method !== "") {
+      obj.method = message.method;
+    }
+    if (message.statusCode !== 0) {
+      obj.statusCode = Math.round(message.statusCode);
+    }
     return obj;
   },
 };
@@ -125,11 +135,12 @@ export const AccessLogEntry_MetadataEntry = {
 
   toJSON(message: AccessLogEntry_MetadataEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value
-        ? MetaValues.toJSON(message.value)
-        : undefined);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = MetaValues.toJSON(message.value);
+    }
     return obj;
   },
 };
@@ -178,39 +189,42 @@ export const DecisionLogEntry = {
 
   toJSON(message: DecisionLogEntry): unknown {
     const obj: any = {};
-    message.callId !== undefined && (obj.callId = message.callId);
-    message.timestamp !== undefined &&
-      (obj.timestamp = message.timestamp.toISOString());
-    message.peer !== undefined &&
-      (obj.peer = message.peer ? Peer.toJSON(message.peer) : undefined);
-    if (message.inputs) {
-      obj.inputs = message.inputs.map((e) =>
-        e ? CheckInput.toJSON(e) : undefined,
-      );
-    } else {
-      obj.inputs = [];
+    if (message.callId !== "") {
+      obj.callId = message.callId;
     }
-    if (message.outputs) {
-      obj.outputs = message.outputs.map((e) =>
-        e ? CheckOutput.toJSON(e) : undefined,
-      );
-    } else {
-      obj.outputs = [];
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
     }
-    message.error !== undefined && (obj.error = message.error);
-    message.method?.$case === "checkResources" &&
-      (obj.checkResources = message.method?.checkResources
-        ? DecisionLogEntry_CheckResources.toJSON(message.method?.checkResources)
-        : undefined);
-    message.method?.$case === "planResources" &&
-      (obj.planResources = message.method?.planResources
-        ? DecisionLogEntry_PlanResources.toJSON(message.method?.planResources)
-        : undefined);
-    obj.metadata = {};
+    if (message.peer !== undefined) {
+      obj.peer = Peer.toJSON(message.peer);
+    }
+    if (message.inputs?.length) {
+      obj.inputs = message.inputs.map((e) => CheckInput.toJSON(e));
+    }
+    if (message.outputs?.length) {
+      obj.outputs = message.outputs.map((e) => CheckOutput.toJSON(e));
+    }
+    if (message.error !== "") {
+      obj.error = message.error;
+    }
+    if (message.method?.$case === "checkResources") {
+      obj.checkResources = DecisionLogEntry_CheckResources.toJSON(
+        message.method.checkResources,
+      );
+    }
+    if (message.method?.$case === "planResources") {
+      obj.planResources = DecisionLogEntry_PlanResources.toJSON(
+        message.method.planResources,
+      );
+    }
     if (message.metadata) {
-      Object.entries(message.metadata).forEach(([k, v]) => {
-        obj.metadata[k] = MetaValues.toJSON(v);
-      });
+      const entries = Object.entries(message.metadata);
+      if (entries.length > 0) {
+        obj.metadata = {};
+        entries.forEach(([k, v]) => {
+          obj.metadata[k] = MetaValues.toJSON(v);
+        });
+      }
     }
     return obj;
   },
@@ -231,21 +245,15 @@ export const DecisionLogEntry_CheckResources = {
 
   toJSON(message: DecisionLogEntry_CheckResources): unknown {
     const obj: any = {};
-    if (message.inputs) {
-      obj.inputs = message.inputs.map((e) =>
-        e ? CheckInput.toJSON(e) : undefined,
-      );
-    } else {
-      obj.inputs = [];
+    if (message.inputs?.length) {
+      obj.inputs = message.inputs.map((e) => CheckInput.toJSON(e));
     }
-    if (message.outputs) {
-      obj.outputs = message.outputs.map((e) =>
-        e ? CheckOutput.toJSON(e) : undefined,
-      );
-    } else {
-      obj.outputs = [];
+    if (message.outputs?.length) {
+      obj.outputs = message.outputs.map((e) => CheckOutput.toJSON(e));
     }
-    message.error !== undefined && (obj.error = message.error);
+    if (message.error !== "") {
+      obj.error = message.error;
+    }
     return obj;
   },
 };
@@ -265,15 +273,15 @@ export const DecisionLogEntry_PlanResources = {
 
   toJSON(message: DecisionLogEntry_PlanResources): unknown {
     const obj: any = {};
-    message.input !== undefined &&
-      (obj.input = message.input
-        ? PlanResourcesInput.toJSON(message.input)
-        : undefined);
-    message.output !== undefined &&
-      (obj.output = message.output
-        ? PlanResourcesOutput.toJSON(message.output)
-        : undefined);
-    message.error !== undefined && (obj.error = message.error);
+    if (message.input !== undefined) {
+      obj.input = PlanResourcesInput.toJSON(message.input);
+    }
+    if (message.output !== undefined) {
+      obj.output = PlanResourcesOutput.toJSON(message.output);
+    }
+    if (message.error !== "") {
+      obj.error = message.error;
+    }
     return obj;
   },
 };
@@ -290,11 +298,12 @@ export const DecisionLogEntry_MetadataEntry = {
 
   toJSON(message: DecisionLogEntry_MetadataEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value
-        ? MetaValues.toJSON(message.value)
-        : undefined);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = MetaValues.toJSON(message.value);
+    }
     return obj;
   },
 };
@@ -310,10 +319,8 @@ export const MetaValues = {
 
   toJSON(message: MetaValues): unknown {
     const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map((e) => e);
-    } else {
-      obj.values = [];
+    if (message.values?.length) {
+      obj.values = message.values;
     }
     return obj;
   },
@@ -333,11 +340,18 @@ export const Peer = {
 
   toJSON(message: Peer): unknown {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.authInfo !== undefined && (obj.authInfo = message.authInfo);
-    message.userAgent !== undefined && (obj.userAgent = message.userAgent);
-    message.forwardedFor !== undefined &&
-      (obj.forwardedFor = message.forwardedFor);
+    if (message.address !== "") {
+      obj.address = message.address;
+    }
+    if (message.authInfo !== "") {
+      obj.authInfo = message.authInfo;
+    }
+    if (message.userAgent !== "") {
+      obj.userAgent = message.userAgent;
+    }
+    if (message.forwardedFor !== "") {
+      obj.forwardedFor = message.forwardedFor;
+    }
     return obj;
   },
 };

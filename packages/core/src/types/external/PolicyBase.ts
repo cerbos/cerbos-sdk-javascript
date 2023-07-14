@@ -32,6 +32,8 @@ export interface PolicyBase {
    * @remarks
    * Each variable is evaluated before any rule condition.
    * A variable expression can contain anything that condition expression can have.
+   *
+   * @deprecated Define variables within the policy body instead, provided the Cerbos policy decision point server is at least v0.29 ({@link DerivedRolesBody.variables}, {@link PrincipalPolicyBody.variables}, or {@link ResourcePolicyBody.variables}).
    */
   variables?: Record<string, string>;
 }

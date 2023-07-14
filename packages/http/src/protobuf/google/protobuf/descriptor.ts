@@ -450,50 +450,70 @@ export const FileOptions = {
 
   toJSON(message: FileOptions): unknown {
     const obj: any = {};
-    message.javaPackage !== undefined &&
-      (obj.javaPackage = message.javaPackage);
-    message.javaOuterClassname !== undefined &&
-      (obj.javaOuterClassname = message.javaOuterClassname);
-    message.javaMultipleFiles !== undefined &&
-      (obj.javaMultipleFiles = message.javaMultipleFiles);
-    message.javaGenerateEqualsAndHash !== undefined &&
-      (obj.javaGenerateEqualsAndHash = message.javaGenerateEqualsAndHash);
-    message.javaStringCheckUtf8 !== undefined &&
-      (obj.javaStringCheckUtf8 = message.javaStringCheckUtf8);
-    message.optimizeFor !== undefined &&
-      (obj.optimizeFor = fileOptions_OptimizeModeToJSON(message.optimizeFor));
-    message.goPackage !== undefined && (obj.goPackage = message.goPackage);
-    message.ccGenericServices !== undefined &&
-      (obj.ccGenericServices = message.ccGenericServices);
-    message.javaGenericServices !== undefined &&
-      (obj.javaGenericServices = message.javaGenericServices);
-    message.pyGenericServices !== undefined &&
-      (obj.pyGenericServices = message.pyGenericServices);
-    message.phpGenericServices !== undefined &&
-      (obj.phpGenericServices = message.phpGenericServices);
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-    message.ccEnableArenas !== undefined &&
-      (obj.ccEnableArenas = message.ccEnableArenas);
-    message.objcClassPrefix !== undefined &&
-      (obj.objcClassPrefix = message.objcClassPrefix);
-    message.csharpNamespace !== undefined &&
-      (obj.csharpNamespace = message.csharpNamespace);
-    message.swiftPrefix !== undefined &&
-      (obj.swiftPrefix = message.swiftPrefix);
-    message.phpClassPrefix !== undefined &&
-      (obj.phpClassPrefix = message.phpClassPrefix);
-    message.phpNamespace !== undefined &&
-      (obj.phpNamespace = message.phpNamespace);
-    message.phpMetadataNamespace !== undefined &&
-      (obj.phpMetadataNamespace = message.phpMetadataNamespace);
-    message.rubyPackage !== undefined &&
-      (obj.rubyPackage = message.rubyPackage);
-    if (message.uninterpretedOption) {
+    if (message.javaPackage !== "") {
+      obj.javaPackage = message.javaPackage;
+    }
+    if (message.javaOuterClassname !== "") {
+      obj.javaOuterClassname = message.javaOuterClassname;
+    }
+    if (message.javaMultipleFiles === true) {
+      obj.javaMultipleFiles = message.javaMultipleFiles;
+    }
+    if (message.javaGenerateEqualsAndHash === true) {
+      obj.javaGenerateEqualsAndHash = message.javaGenerateEqualsAndHash;
+    }
+    if (message.javaStringCheckUtf8 === true) {
+      obj.javaStringCheckUtf8 = message.javaStringCheckUtf8;
+    }
+    if (message.optimizeFor !== 1) {
+      obj.optimizeFor = fileOptions_OptimizeModeToJSON(message.optimizeFor);
+    }
+    if (message.goPackage !== "") {
+      obj.goPackage = message.goPackage;
+    }
+    if (message.ccGenericServices === true) {
+      obj.ccGenericServices = message.ccGenericServices;
+    }
+    if (message.javaGenericServices === true) {
+      obj.javaGenericServices = message.javaGenericServices;
+    }
+    if (message.pyGenericServices === true) {
+      obj.pyGenericServices = message.pyGenericServices;
+    }
+    if (message.phpGenericServices === true) {
+      obj.phpGenericServices = message.phpGenericServices;
+    }
+    if (message.deprecated === true) {
+      obj.deprecated = message.deprecated;
+    }
+    if (message.ccEnableArenas === true) {
+      obj.ccEnableArenas = message.ccEnableArenas;
+    }
+    if (message.objcClassPrefix !== "") {
+      obj.objcClassPrefix = message.objcClassPrefix;
+    }
+    if (message.csharpNamespace !== "") {
+      obj.csharpNamespace = message.csharpNamespace;
+    }
+    if (message.swiftPrefix !== "") {
+      obj.swiftPrefix = message.swiftPrefix;
+    }
+    if (message.phpClassPrefix !== "") {
+      obj.phpClassPrefix = message.phpClassPrefix;
+    }
+    if (message.phpNamespace !== "") {
+      obj.phpNamespace = message.phpNamespace;
+    }
+    if (message.phpMetadataNamespace !== "") {
+      obj.phpMetadataNamespace = message.phpMetadataNamespace;
+    }
+    if (message.rubyPackage !== "") {
+      obj.rubyPackage = message.rubyPackage;
+    }
+    if (message.uninterpretedOption?.length) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
-        e ? UninterpretedOption.toJSON(e) : undefined,
+        UninterpretedOption.toJSON(e),
       );
-    } else {
-      obj.uninterpretedOption = [];
     }
     return obj;
   },
@@ -525,21 +545,26 @@ export const MessageOptions = {
 
   toJSON(message: MessageOptions): unknown {
     const obj: any = {};
-    message.messageSetWireFormat !== undefined &&
-      (obj.messageSetWireFormat = message.messageSetWireFormat);
-    message.noStandardDescriptorAccessor !== undefined &&
-      (obj.noStandardDescriptorAccessor = message.noStandardDescriptorAccessor);
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-    message.mapEntry !== undefined && (obj.mapEntry = message.mapEntry);
-    message.deprecatedLegacyJsonFieldConflicts !== undefined &&
-      (obj.deprecatedLegacyJsonFieldConflicts =
-        message.deprecatedLegacyJsonFieldConflicts);
-    if (message.uninterpretedOption) {
+    if (message.messageSetWireFormat === true) {
+      obj.messageSetWireFormat = message.messageSetWireFormat;
+    }
+    if (message.noStandardDescriptorAccessor === true) {
+      obj.noStandardDescriptorAccessor = message.noStandardDescriptorAccessor;
+    }
+    if (message.deprecated === true) {
+      obj.deprecated = message.deprecated;
+    }
+    if (message.mapEntry === true) {
+      obj.mapEntry = message.mapEntry;
+    }
+    if (message.deprecatedLegacyJsonFieldConflicts === true) {
+      obj.deprecatedLegacyJsonFieldConflicts =
+        message.deprecatedLegacyJsonFieldConflicts;
+    }
+    if (message.uninterpretedOption?.length) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
-        e ? UninterpretedOption.toJSON(e) : undefined,
+        UninterpretedOption.toJSON(e),
       );
-    } else {
-      obj.uninterpretedOption = [];
     }
     return obj;
   },
@@ -578,28 +603,40 @@ export const FieldOptions = {
 
   toJSON(message: FieldOptions): unknown {
     const obj: any = {};
-    message.ctype !== undefined &&
-      (obj.ctype = fieldOptions_CTypeToJSON(message.ctype));
-    message.packed !== undefined && (obj.packed = message.packed);
-    message.jstype !== undefined &&
-      (obj.jstype = fieldOptions_JSTypeToJSON(message.jstype));
-    message.lazy !== undefined && (obj.lazy = message.lazy);
-    message.unverifiedLazy !== undefined &&
-      (obj.unverifiedLazy = message.unverifiedLazy);
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-    message.weak !== undefined && (obj.weak = message.weak);
-    message.debugRedact !== undefined &&
-      (obj.debugRedact = message.debugRedact);
-    message.retention !== undefined &&
-      (obj.retention = fieldOptions_OptionRetentionToJSON(message.retention));
-    message.target !== undefined &&
-      (obj.target = fieldOptions_OptionTargetTypeToJSON(message.target));
-    if (message.uninterpretedOption) {
+    if (message.ctype !== 0) {
+      obj.ctype = fieldOptions_CTypeToJSON(message.ctype);
+    }
+    if (message.packed === true) {
+      obj.packed = message.packed;
+    }
+    if (message.jstype !== 0) {
+      obj.jstype = fieldOptions_JSTypeToJSON(message.jstype);
+    }
+    if (message.lazy === true) {
+      obj.lazy = message.lazy;
+    }
+    if (message.unverifiedLazy === true) {
+      obj.unverifiedLazy = message.unverifiedLazy;
+    }
+    if (message.deprecated === true) {
+      obj.deprecated = message.deprecated;
+    }
+    if (message.weak === true) {
+      obj.weak = message.weak;
+    }
+    if (message.debugRedact === true) {
+      obj.debugRedact = message.debugRedact;
+    }
+    if (message.retention !== 0) {
+      obj.retention = fieldOptions_OptionRetentionToJSON(message.retention);
+    }
+    if (message.target !== 0) {
+      obj.target = fieldOptions_OptionTargetTypeToJSON(message.target);
+    }
+    if (message.uninterpretedOption?.length) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
-        e ? UninterpretedOption.toJSON(e) : undefined,
+        UninterpretedOption.toJSON(e),
       );
-    } else {
-      obj.uninterpretedOption = [];
     }
     return obj;
   },
@@ -618,12 +655,10 @@ export const OneofOptions = {
 
   toJSON(message: OneofOptions): unknown {
     const obj: any = {};
-    if (message.uninterpretedOption) {
+    if (message.uninterpretedOption?.length) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
-        e ? UninterpretedOption.toJSON(e) : undefined,
+        UninterpretedOption.toJSON(e),
       );
-    } else {
-      obj.uninterpretedOption = [];
     }
     return obj;
   },
@@ -643,13 +678,13 @@ export const ServiceOptions = {
 
   toJSON(message: ServiceOptions): unknown {
     const obj: any = {};
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-    if (message.uninterpretedOption) {
+    if (message.deprecated === true) {
+      obj.deprecated = message.deprecated;
+    }
+    if (message.uninterpretedOption?.length) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
-        e ? UninterpretedOption.toJSON(e) : undefined,
+        UninterpretedOption.toJSON(e),
       );
-    } else {
-      obj.uninterpretedOption = [];
     }
     return obj;
   },
@@ -672,17 +707,18 @@ export const MethodOptions = {
 
   toJSON(message: MethodOptions): unknown {
     const obj: any = {};
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-    message.idempotencyLevel !== undefined &&
-      (obj.idempotencyLevel = methodOptions_IdempotencyLevelToJSON(
+    if (message.deprecated === true) {
+      obj.deprecated = message.deprecated;
+    }
+    if (message.idempotencyLevel !== 0) {
+      obj.idempotencyLevel = methodOptions_IdempotencyLevelToJSON(
         message.idempotencyLevel,
-      ));
-    if (message.uninterpretedOption) {
-      obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
-        e ? UninterpretedOption.toJSON(e) : undefined,
       );
-    } else {
-      obj.uninterpretedOption = [];
+    }
+    if (message.uninterpretedOption?.length) {
+      obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+        UninterpretedOption.toJSON(e),
+      );
     }
     return obj;
   },
@@ -715,29 +751,29 @@ export const UninterpretedOption = {
 
   toJSON(message: UninterpretedOption): unknown {
     const obj: any = {};
-    if (message.name) {
+    if (message.name?.length) {
       obj.name = message.name.map((e) =>
-        e ? UninterpretedOption_NamePart.toJSON(e) : undefined,
+        UninterpretedOption_NamePart.toJSON(e),
       );
-    } else {
-      obj.name = [];
     }
-    message.identifierValue !== undefined &&
-      (obj.identifierValue = message.identifierValue);
-    message.positiveIntValue !== undefined &&
-      (obj.positiveIntValue = message.positiveIntValue);
-    message.negativeIntValue !== undefined &&
-      (obj.negativeIntValue = message.negativeIntValue);
-    message.doubleValue !== undefined &&
-      (obj.doubleValue = message.doubleValue);
-    message.stringValue !== undefined &&
-      (obj.stringValue = base64FromBytes(
-        message.stringValue !== undefined
-          ? message.stringValue
-          : new Uint8Array(0),
-      ));
-    message.aggregateValue !== undefined &&
-      (obj.aggregateValue = message.aggregateValue);
+    if (message.identifierValue !== "") {
+      obj.identifierValue = message.identifierValue;
+    }
+    if (message.positiveIntValue !== "0") {
+      obj.positiveIntValue = message.positiveIntValue;
+    }
+    if (message.negativeIntValue !== "0") {
+      obj.negativeIntValue = message.negativeIntValue;
+    }
+    if (message.doubleValue !== 0) {
+      obj.doubleValue = message.doubleValue;
+    }
+    if (message.stringValue.length !== 0) {
+      obj.stringValue = base64FromBytes(message.stringValue);
+    }
+    if (message.aggregateValue !== "") {
+      obj.aggregateValue = message.aggregateValue;
+    }
     return obj;
   },
 };
@@ -754,9 +790,12 @@ export const UninterpretedOption_NamePart = {
 
   toJSON(message: UninterpretedOption_NamePart): unknown {
     const obj: any = {};
-    message.namePart !== undefined && (obj.namePart = message.namePart);
-    message.isExtension !== undefined &&
-      (obj.isExtension = message.isExtension);
+    if (message.namePart !== "") {
+      obj.namePart = message.namePart;
+    }
+    if (message.isExtension === true) {
+      obj.isExtension = message.isExtension;
+    }
     return obj;
   },
 };

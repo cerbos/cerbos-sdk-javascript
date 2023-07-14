@@ -197,22 +197,24 @@ export const PlanResourcesInput = {
 
   toJSON(message: PlanResourcesInput): unknown {
     const obj: any = {};
-    message.requestId !== undefined && (obj.requestId = message.requestId);
-    message.action !== undefined && (obj.action = message.action);
-    message.principal !== undefined &&
-      (obj.principal = message.principal
-        ? Principal.toJSON(message.principal)
-        : undefined);
-    message.resource !== undefined &&
-      (obj.resource = message.resource
-        ? PlanResourcesInput_Resource.toJSON(message.resource)
-        : undefined);
-    message.auxData !== undefined &&
-      (obj.auxData = message.auxData
-        ? AuxData.toJSON(message.auxData)
-        : undefined);
-    message.includeMeta !== undefined &&
-      (obj.includeMeta = message.includeMeta);
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.action !== "") {
+      obj.action = message.action;
+    }
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.resource !== undefined) {
+      obj.resource = PlanResourcesInput_Resource.toJSON(message.resource);
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
+    if (message.includeMeta === true) {
+      obj.includeMeta = message.includeMeta;
+    }
     return obj;
   },
 };
@@ -238,16 +240,24 @@ export const PlanResourcesInput_Resource = {
 
   toJSON(message: PlanResourcesInput_Resource): unknown {
     const obj: any = {};
-    message.kind !== undefined && (obj.kind = message.kind);
-    obj.attr = {};
-    if (message.attr) {
-      Object.entries(message.attr).forEach(([k, v]) => {
-        obj.attr[k] = v;
-      });
+    if (message.kind !== "") {
+      obj.kind = message.kind;
     }
-    message.policyVersion !== undefined &&
-      (obj.policyVersion = message.policyVersion);
-    message.scope !== undefined && (obj.scope = message.scope);
+    if (message.attr) {
+      const entries = Object.entries(message.attr);
+      if (entries.length > 0) {
+        obj.attr = {};
+        entries.forEach(([k, v]) => {
+          obj.attr[k] = v;
+        });
+      }
+    }
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
     return obj;
   },
 };
@@ -262,8 +272,12 @@ export const PlanResourcesInput_Resource_AttrEntry = {
 
   toJSON(message: PlanResourcesInput_Resource_AttrEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -282,12 +296,14 @@ export const PlanResourcesFilter = {
 
   toJSON(message: PlanResourcesFilter): unknown {
     const obj: any = {};
-    message.kind !== undefined &&
-      (obj.kind = planResourcesFilter_KindToJSON(message.kind));
-    message.condition !== undefined &&
-      (obj.condition = message.condition
-        ? PlanResourcesFilter_Expression_Operand.toJSON(message.condition)
-        : undefined);
+    if (message.kind !== 0) {
+      obj.kind = planResourcesFilter_KindToJSON(message.kind);
+    }
+    if (message.condition !== undefined) {
+      obj.condition = PlanResourcesFilter_Expression_Operand.toJSON(
+        message.condition,
+      );
+    }
     return obj;
   },
 };
@@ -306,13 +322,13 @@ export const PlanResourcesFilter_Expression = {
 
   toJSON(message: PlanResourcesFilter_Expression): unknown {
     const obj: any = {};
-    message.operator !== undefined && (obj.operator = message.operator);
-    if (message.operands) {
+    if (message.operator !== "") {
+      obj.operator = message.operator;
+    }
+    if (message.operands?.length) {
       obj.operands = message.operands.map((e) =>
-        e ? PlanResourcesFilter_Expression_Operand.toJSON(e) : undefined,
+        PlanResourcesFilter_Expression_Operand.toJSON(e),
       );
-    } else {
-      obj.operands = [];
     }
     return obj;
   },
@@ -338,13 +354,17 @@ export const PlanResourcesFilter_Expression_Operand = {
 
   toJSON(message: PlanResourcesFilter_Expression_Operand): unknown {
     const obj: any = {};
-    message.node?.$case === "value" && (obj.value = message.node?.value);
-    message.node?.$case === "expression" &&
-      (obj.expression = message.node?.expression
-        ? PlanResourcesFilter_Expression.toJSON(message.node?.expression)
-        : undefined);
-    message.node?.$case === "variable" &&
-      (obj.variable = message.node?.variable);
+    if (message.node?.$case === "value") {
+      obj.value = message.node.value;
+    }
+    if (message.node?.$case === "expression") {
+      obj.expression = PlanResourcesFilter_Expression.toJSON(
+        message.node.expression,
+      );
+    }
+    if (message.node?.$case === "variable") {
+      obj.variable = message.node.variable;
+    }
     return obj;
   },
 };
@@ -371,24 +391,31 @@ export const PlanResourcesOutput = {
 
   toJSON(message: PlanResourcesOutput): unknown {
     const obj: any = {};
-    message.requestId !== undefined && (obj.requestId = message.requestId);
-    message.action !== undefined && (obj.action = message.action);
-    message.kind !== undefined && (obj.kind = message.kind);
-    message.policyVersion !== undefined &&
-      (obj.policyVersion = message.policyVersion);
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.filter !== undefined &&
-      (obj.filter = message.filter
-        ? PlanResourcesFilter.toJSON(message.filter)
-        : undefined);
-    message.filterDebug !== undefined &&
-      (obj.filterDebug = message.filterDebug);
-    if (message.validationErrors) {
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.action !== "") {
+      obj.action = message.action;
+    }
+    if (message.kind !== "") {
+      obj.kind = message.kind;
+    }
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    if (message.filter !== undefined) {
+      obj.filter = PlanResourcesFilter.toJSON(message.filter);
+    }
+    if (message.filterDebug !== "") {
+      obj.filterDebug = message.filterDebug;
+    }
+    if (message.validationErrors?.length) {
       obj.validationErrors = message.validationErrors.map((e) =>
-        e ? ValidationError.toJSON(e) : undefined,
+        ValidationError.toJSON(e),
       );
-    } else {
-      obj.validationErrors = [];
     }
     return obj;
   },
@@ -415,24 +442,21 @@ export const CheckInput = {
 
   toJSON(message: CheckInput): unknown {
     const obj: any = {};
-    message.requestId !== undefined && (obj.requestId = message.requestId);
-    message.resource !== undefined &&
-      (obj.resource = message.resource
-        ? Resource.toJSON(message.resource)
-        : undefined);
-    message.principal !== undefined &&
-      (obj.principal = message.principal
-        ? Principal.toJSON(message.principal)
-        : undefined);
-    if (message.actions) {
-      obj.actions = message.actions.map((e) => e);
-    } else {
-      obj.actions = [];
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
     }
-    message.auxData !== undefined &&
-      (obj.auxData = message.auxData
-        ? AuxData.toJSON(message.auxData)
-        : undefined);
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions;
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
     return obj;
   },
 };
@@ -464,32 +488,31 @@ export const CheckOutput = {
 
   toJSON(message: CheckOutput): unknown {
     const obj: any = {};
-    message.requestId !== undefined && (obj.requestId = message.requestId);
-    message.resourceId !== undefined && (obj.resourceId = message.resourceId);
-    obj.actions = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.resourceId !== "") {
+      obj.resourceId = message.resourceId;
+    }
     if (message.actions) {
-      Object.entries(message.actions).forEach(([k, v]) => {
-        obj.actions[k] = CheckOutput_ActionEffect.toJSON(v);
-      });
+      const entries = Object.entries(message.actions);
+      if (entries.length > 0) {
+        obj.actions = {};
+        entries.forEach(([k, v]) => {
+          obj.actions[k] = CheckOutput_ActionEffect.toJSON(v);
+        });
+      }
     }
-    if (message.effectiveDerivedRoles) {
-      obj.effectiveDerivedRoles = message.effectiveDerivedRoles.map((e) => e);
-    } else {
-      obj.effectiveDerivedRoles = [];
+    if (message.effectiveDerivedRoles?.length) {
+      obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
     }
-    if (message.validationErrors) {
+    if (message.validationErrors?.length) {
       obj.validationErrors = message.validationErrors.map((e) =>
-        e ? ValidationError.toJSON(e) : undefined,
+        ValidationError.toJSON(e),
       );
-    } else {
-      obj.validationErrors = [];
     }
-    if (message.outputs) {
-      obj.outputs = message.outputs.map((e) =>
-        e ? OutputEntry.toJSON(e) : undefined,
-      );
-    } else {
-      obj.outputs = [];
+    if (message.outputs?.length) {
+      obj.outputs = message.outputs.map((e) => OutputEntry.toJSON(e));
     }
     return obj;
   },
@@ -506,9 +529,15 @@ export const CheckOutput_ActionEffect = {
 
   toJSON(message: CheckOutput_ActionEffect): unknown {
     const obj: any = {};
-    message.effect !== undefined && (obj.effect = effectToJSON(message.effect));
-    message.policy !== undefined && (obj.policy = message.policy);
-    message.scope !== undefined && (obj.scope = message.scope);
+    if (message.effect !== 0) {
+      obj.effect = effectToJSON(message.effect);
+    }
+    if (message.policy !== "") {
+      obj.policy = message.policy;
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
     return obj;
   },
 };
@@ -525,11 +554,12 @@ export const CheckOutput_ActionsEntry = {
 
   toJSON(message: CheckOutput_ActionsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value
-        ? CheckOutput_ActionEffect.toJSON(message.value)
-        : undefined);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = CheckOutput_ActionEffect.toJSON(message.value);
+    }
     return obj;
   },
 };
@@ -544,8 +574,12 @@ export const OutputEntry = {
 
   toJSON(message: OutputEntry): unknown {
     const obj: any = {};
-    message.src !== undefined && (obj.src = message.src);
-    message.val !== undefined && (obj.val = message.val);
+    if (message.src !== "") {
+      obj.src = message.src;
+    }
+    if (message.val !== undefined) {
+      obj.val = message.val;
+    }
     return obj;
   },
 };
@@ -572,17 +606,27 @@ export const Resource = {
 
   toJSON(message: Resource): unknown {
     const obj: any = {};
-    message.kind !== undefined && (obj.kind = message.kind);
-    message.policyVersion !== undefined &&
-      (obj.policyVersion = message.policyVersion);
-    message.id !== undefined && (obj.id = message.id);
-    obj.attr = {};
-    if (message.attr) {
-      Object.entries(message.attr).forEach(([k, v]) => {
-        obj.attr[k] = v;
-      });
+    if (message.kind !== "") {
+      obj.kind = message.kind;
     }
-    message.scope !== undefined && (obj.scope = message.scope);
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.attr) {
+      const entries = Object.entries(message.attr);
+      if (entries.length > 0) {
+        obj.attr = {};
+        entries.forEach(([k, v]) => {
+          obj.attr[k] = v;
+        });
+      }
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
     return obj;
   },
 };
@@ -597,8 +641,12 @@ export const Resource_AttrEntry = {
 
   toJSON(message: Resource_AttrEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -627,21 +675,27 @@ export const Principal = {
 
   toJSON(message: Principal): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.policyVersion !== undefined &&
-      (obj.policyVersion = message.policyVersion);
-    if (message.roles) {
-      obj.roles = message.roles.map((e) => e);
-    } else {
-      obj.roles = [];
+    if (message.id !== "") {
+      obj.id = message.id;
     }
-    obj.attr = {};
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.roles?.length) {
+      obj.roles = message.roles;
+    }
     if (message.attr) {
-      Object.entries(message.attr).forEach(([k, v]) => {
-        obj.attr[k] = v;
-      });
+      const entries = Object.entries(message.attr);
+      if (entries.length > 0) {
+        obj.attr = {};
+        entries.forEach(([k, v]) => {
+          obj.attr[k] = v;
+        });
+      }
     }
-    message.scope !== undefined && (obj.scope = message.scope);
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
     return obj;
   },
 };
@@ -656,8 +710,12 @@ export const Principal_AttrEntry = {
 
   toJSON(message: Principal_AttrEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -679,11 +737,14 @@ export const AuxData = {
 
   toJSON(message: AuxData): unknown {
     const obj: any = {};
-    obj.jwt = {};
     if (message.jwt) {
-      Object.entries(message.jwt).forEach(([k, v]) => {
-        obj.jwt[k] = v;
-      });
+      const entries = Object.entries(message.jwt);
+      if (entries.length > 0) {
+        obj.jwt = {};
+        entries.forEach(([k, v]) => {
+          obj.jwt[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -699,8 +760,12 @@ export const AuxData_JwtEntry = {
 
   toJSON(message: AuxData_JwtEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
     return obj;
   },
 };

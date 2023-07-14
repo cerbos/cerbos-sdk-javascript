@@ -14,8 +14,10 @@ export interface Policy {
     | { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy }
     | { $case: "principalPolicy"; principalPolicy: PrincipalPolicy }
     | { $case: "derivedRoles"; derivedRoles: DerivedRoles }
+    | { $case: "exportVariables"; exportVariables: ExportVariables }
     | undefined;
   variables: { [key: string]: string };
+  jsonSchema: string;
 }
 
 export interface Policy_VariablesEntry {
@@ -43,6 +45,7 @@ export interface ResourcePolicy {
   rules: ResourceRule[];
   scope: string;
   schemas: Schemas | undefined;
+  variables: Variables | undefined;
 }
 
 export interface ResourceRule {
@@ -60,6 +63,7 @@ export interface PrincipalPolicy {
   version: string;
   rules: PrincipalRule[];
   scope: string;
+  variables: Variables | undefined;
 }
 
 export interface PrincipalRule {
@@ -78,12 +82,33 @@ export interface PrincipalRule_Action {
 export interface DerivedRoles {
   name: string;
   definitions: RoleDef[];
+  variables: Variables | undefined;
 }
 
 export interface RoleDef {
   name: string;
   parentRoles: string[];
   condition: Condition | undefined;
+}
+
+export interface ExportVariables {
+  name: string;
+  definitions: { [key: string]: string };
+}
+
+export interface ExportVariables_DefinitionsEntry {
+  key: string;
+  value: string;
+}
+
+export interface Variables {
+  import: string[];
+  local: { [key: string]: string };
+}
+
+export interface Variables_LocalEntry {
+  key: string;
+  value: string;
 }
 
 export interface Condition {
@@ -132,6 +157,7 @@ function createBasePolicy(): Policy {
     metadata: undefined,
     policyType: undefined,
     variables: {},
+    jsonSchema: "",
   };
 }
 
@@ -171,6 +197,12 @@ export const Policy = {
           writer.uint32(58).fork(),
         ).ldelim();
         break;
+      case "exportVariables":
+        ExportVariables.encode(
+          message.policyType.exportVariables,
+          writer.uint32(82).fork(),
+        ).ldelim();
+        break;
     }
     Object.entries(message.variables).forEach(([key, value]) => {
       Policy_VariablesEntry.encode(
@@ -178,6 +210,9 @@ export const Policy = {
         writer.uint32(66).fork(),
       ).ldelim();
     });
+    if (message.jsonSchema !== "") {
+      writer.uint32(74).string(message.jsonSchema);
+    }
     return writer;
   },
 
@@ -247,6 +282,16 @@ export const Policy = {
             derivedRoles: DerivedRoles.decode(reader, reader.uint32()),
           };
           continue;
+        case 10:
+          if (tag !== 82) {
+            break;
+          }
+
+          message.policyType = {
+            $case: "exportVariables",
+            exportVariables: ExportVariables.decode(reader, reader.uint32()),
+          };
+          continue;
         case 8:
           if (tag !== 66) {
             break;
@@ -256,6 +301,13 @@ export const Policy = {
           if (entry8.value !== undefined) {
             message.variables[entry8.key] = entry8.value;
           }
+          continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.jsonSchema = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -479,6 +531,7 @@ function createBaseResourcePolicy(): ResourcePolicy {
     rules: [],
     scope: "",
     schemas: undefined,
+    variables: undefined,
   };
 }
 
@@ -504,6 +557,9 @@ export const ResourcePolicy = {
     }
     if (message.schemas !== undefined) {
       Schemas.encode(message.schemas, writer.uint32(50).fork()).ldelim();
+    }
+    if (message.variables !== undefined) {
+      Variables.encode(message.variables, writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -557,6 +613,13 @@ export const ResourcePolicy = {
           }
 
           message.schemas = Schemas.decode(reader, reader.uint32());
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.variables = Variables.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -677,7 +740,13 @@ export const ResourceRule = {
 };
 
 function createBasePrincipalPolicy(): PrincipalPolicy {
-  return { principal: "", version: "", rules: [], scope: "" };
+  return {
+    principal: "",
+    version: "",
+    rules: [],
+    scope: "",
+    variables: undefined,
+  };
 }
 
 export const PrincipalPolicy = {
@@ -696,6 +765,9 @@ export const PrincipalPolicy = {
     }
     if (message.scope !== "") {
       writer.uint32(34).string(message.scope);
+    }
+    if (message.variables !== undefined) {
+      Variables.encode(message.variables, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -735,6 +807,13 @@ export const PrincipalPolicy = {
           }
 
           message.scope = reader.string();
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.variables = Variables.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -888,7 +967,7 @@ export const PrincipalRule_Action = {
 };
 
 function createBaseDerivedRoles(): DerivedRoles {
-  return { name: "", definitions: [] };
+  return { name: "", definitions: [], variables: undefined };
 }
 
 export const DerivedRoles = {
@@ -901,6 +980,9 @@ export const DerivedRoles = {
     }
     for (const v of message.definitions) {
       RoleDef.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    if (message.variables !== undefined) {
+      Variables.encode(message.variables, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -926,6 +1008,13 @@ export const DerivedRoles = {
           }
 
           message.definitions.push(RoleDef.decode(reader, reader.uint32()));
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.variables = Variables.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -986,6 +1075,227 @@ export const RoleDef = {
           }
 
           message.condition = Condition.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseExportVariables(): ExportVariables {
+  return { name: "", definitions: {} };
+}
+
+export const ExportVariables = {
+  encode(
+    message: ExportVariables,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
+    }
+    Object.entries(message.definitions).forEach(([key, value]) => {
+      ExportVariables_DefinitionsEntry.encode(
+        { key: key as any, value },
+        writer.uint32(18).fork(),
+      ).ldelim();
+    });
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ExportVariables {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseExportVariables();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          const entry2 = ExportVariables_DefinitionsEntry.decode(
+            reader,
+            reader.uint32(),
+          );
+          if (entry2.value !== undefined) {
+            message.definitions[entry2.key] = entry2.value;
+          }
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseExportVariables_DefinitionsEntry(): ExportVariables_DefinitionsEntry {
+  return { key: "", value: "" };
+}
+
+export const ExportVariables_DefinitionsEntry = {
+  encode(
+    message: ExportVariables_DefinitionsEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ExportVariables_DefinitionsEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseExportVariables_DefinitionsEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.key = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.value = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseVariables(): Variables {
+  return { import: [], local: {} };
+}
+
+export const Variables = {
+  encode(
+    message: Variables,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.import) {
+      writer.uint32(10).string(v!);
+    }
+    Object.entries(message.local).forEach(([key, value]) => {
+      Variables_LocalEntry.encode(
+        { key: key as any, value },
+        writer.uint32(18).fork(),
+      ).ldelim();
+    });
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Variables {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVariables();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.import.push(reader.string());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          const entry2 = Variables_LocalEntry.decode(reader, reader.uint32());
+          if (entry2.value !== undefined) {
+            message.local[entry2.key] = entry2.value;
+          }
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseVariables_LocalEntry(): Variables_LocalEntry {
+  return { key: "", value: "" };
+}
+
+export const Variables_LocalEntry = {
+  encode(
+    message: Variables_LocalEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Variables_LocalEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVariables_LocalEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.key = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.value = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {

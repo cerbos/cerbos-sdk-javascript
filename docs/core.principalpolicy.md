@@ -17,5 +17,5 @@ export interface PrincipalPolicy extends PolicyBase
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [principalPolicy](./core.principalpolicy.principalpolicy.md) |  | { principal: string; version: string; rules: [PrincipalRule](./core.principalrule.md)<!-- -->\[\]; scope?: string; } | The policy body. |
+|  [principalPolicy](./core.principalpolicy.principalpolicy.md) |  | [PrincipalPolicyBody](./core.principalpolicybody.md) | The policy body. |
 

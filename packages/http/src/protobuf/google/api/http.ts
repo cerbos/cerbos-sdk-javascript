@@ -51,26 +51,37 @@ export const HttpRule = {
 
   toJSON(message: HttpRule): unknown {
     const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.pattern?.$case === "get" && (obj.get = message.pattern?.get);
-    message.pattern?.$case === "put" && (obj.put = message.pattern?.put);
-    message.pattern?.$case === "post" && (obj.post = message.pattern?.post);
-    message.pattern?.$case === "delete" &&
-      (obj.delete = message.pattern?.delete);
-    message.pattern?.$case === "patch" && (obj.patch = message.pattern?.patch);
-    message.pattern?.$case === "custom" &&
-      (obj.custom = message.pattern?.custom
-        ? CustomHttpPattern.toJSON(message.pattern?.custom)
-        : undefined);
-    message.body !== undefined && (obj.body = message.body);
-    message.responseBody !== undefined &&
-      (obj.responseBody = message.responseBody);
-    if (message.additionalBindings) {
+    if (message.selector !== "") {
+      obj.selector = message.selector;
+    }
+    if (message.pattern?.$case === "get") {
+      obj.get = message.pattern.get;
+    }
+    if (message.pattern?.$case === "put") {
+      obj.put = message.pattern.put;
+    }
+    if (message.pattern?.$case === "post") {
+      obj.post = message.pattern.post;
+    }
+    if (message.pattern?.$case === "delete") {
+      obj.delete = message.pattern.delete;
+    }
+    if (message.pattern?.$case === "patch") {
+      obj.patch = message.pattern.patch;
+    }
+    if (message.pattern?.$case === "custom") {
+      obj.custom = CustomHttpPattern.toJSON(message.pattern.custom);
+    }
+    if (message.body !== "") {
+      obj.body = message.body;
+    }
+    if (message.responseBody !== "") {
+      obj.responseBody = message.responseBody;
+    }
+    if (message.additionalBindings?.length) {
       obj.additionalBindings = message.additionalBindings.map((e) =>
-        e ? HttpRule.toJSON(e) : undefined,
+        HttpRule.toJSON(e),
       );
-    } else {
-      obj.additionalBindings = [];
     }
     return obj;
   },
@@ -86,8 +97,12 @@ export const CustomHttpPattern = {
 
   toJSON(message: CustomHttpPattern): unknown {
     const obj: any = {};
-    message.kind !== undefined && (obj.kind = message.kind);
-    message.path !== undefined && (obj.path = message.path);
+    if (message.kind !== "") {
+      obj.kind = message.kind;
+    }
+    if (message.path !== "") {
+      obj.path = message.path;
+    }
     return obj;
   },
 };

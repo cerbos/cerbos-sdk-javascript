@@ -12,8 +12,10 @@ export interface Policy {
     | { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy }
     | { $case: "principalPolicy"; principalPolicy: PrincipalPolicy }
     | { $case: "derivedRoles"; derivedRoles: DerivedRoles }
+    | { $case: "exportVariables"; exportVariables: ExportVariables }
     | undefined;
   variables: { [key: string]: string };
+  jsonSchema: string;
 }
 
 export interface Policy_VariablesEntry {
@@ -41,6 +43,7 @@ export interface ResourcePolicy {
   rules: ResourceRule[];
   scope: string;
   schemas: Schemas | undefined;
+  variables: Variables | undefined;
 }
 
 export interface ResourceRule {
@@ -58,6 +61,7 @@ export interface PrincipalPolicy {
   version: string;
   rules: PrincipalRule[];
   scope: string;
+  variables: Variables | undefined;
 }
 
 export interface PrincipalRule {
@@ -76,12 +80,33 @@ export interface PrincipalRule_Action {
 export interface DerivedRoles {
   name: string;
   definitions: RoleDef[];
+  variables: Variables | undefined;
 }
 
 export interface RoleDef {
   name: string;
   parentRoles: string[];
   condition: Condition | undefined;
+}
+
+export interface ExportVariables {
+  name: string;
+  definitions: { [key: string]: string };
+}
+
+export interface ExportVariables_DefinitionsEntry {
+  key: string;
+  value: string;
+}
+
+export interface Variables {
+  import: string[];
+  local: { [key: string]: string };
+}
+
+export interface Variables_LocalEntry {
+  key: string;
+  value: string;
 }
 
 export interface Condition {
@@ -146,6 +171,11 @@ export const Policy = {
             $case: "derivedRoles",
             derivedRoles: DerivedRoles.fromJSON(object.derivedRoles),
           }
+        : isSet(object.exportVariables)
+        ? {
+            $case: "exportVariables",
+            exportVariables: ExportVariables.fromJSON(object.exportVariables),
+          }
         : undefined,
       variables: isObject(object.variables)
         ? Object.entries(object.variables).reduce<{ [key: string]: string }>(
@@ -156,36 +186,53 @@ export const Policy = {
             {},
           )
         : {},
+      jsonSchema: isSet(object.$schema) ? String(object.$schema) : "",
     };
   },
 
   toJSON(message: Policy): unknown {
     const obj: any = {};
-    message.apiVersion !== undefined && (obj.apiVersion = message.apiVersion);
-    message.disabled !== undefined && (obj.disabled = message.disabled);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.metadata !== undefined &&
-      (obj.metadata = message.metadata
-        ? Metadata.toJSON(message.metadata)
-        : undefined);
-    message.policyType?.$case === "resourcePolicy" &&
-      (obj.resourcePolicy = message.policyType?.resourcePolicy
-        ? ResourcePolicy.toJSON(message.policyType?.resourcePolicy)
-        : undefined);
-    message.policyType?.$case === "principalPolicy" &&
-      (obj.principalPolicy = message.policyType?.principalPolicy
-        ? PrincipalPolicy.toJSON(message.policyType?.principalPolicy)
-        : undefined);
-    message.policyType?.$case === "derivedRoles" &&
-      (obj.derivedRoles = message.policyType?.derivedRoles
-        ? DerivedRoles.toJSON(message.policyType?.derivedRoles)
-        : undefined);
-    obj.variables = {};
+    if (message.apiVersion !== "") {
+      obj.apiVersion = message.apiVersion;
+    }
+    if (message.disabled === true) {
+      obj.disabled = message.disabled;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = Metadata.toJSON(message.metadata);
+    }
+    if (message.policyType?.$case === "resourcePolicy") {
+      obj.resourcePolicy = ResourcePolicy.toJSON(
+        message.policyType.resourcePolicy,
+      );
+    }
+    if (message.policyType?.$case === "principalPolicy") {
+      obj.principalPolicy = PrincipalPolicy.toJSON(
+        message.policyType.principalPolicy,
+      );
+    }
+    if (message.policyType?.$case === "derivedRoles") {
+      obj.derivedRoles = DerivedRoles.toJSON(message.policyType.derivedRoles);
+    }
+    if (message.policyType?.$case === "exportVariables") {
+      obj.exportVariables = ExportVariables.toJSON(
+        message.policyType.exportVariables,
+      );
+    }
     if (message.variables) {
-      Object.entries(message.variables).forEach(([k, v]) => {
-        obj.variables[k] = v;
-      });
+      const entries = Object.entries(message.variables);
+      if (entries.length > 0) {
+        obj.variables = {};
+        entries.forEach(([k, v]) => {
+          obj.variables[k] = v;
+        });
+      }
+    }
+    if (message.jsonSchema !== "") {
+      obj.$schema = message.jsonSchema;
     }
     return obj;
   },
@@ -201,8 +248,12 @@ export const Policy_VariablesEntry = {
 
   toJSON(message: Policy_VariablesEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -232,18 +283,27 @@ export const Metadata = {
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    message.sourceFile !== undefined && (obj.sourceFile = message.sourceFile);
-    obj.annotations = {};
-    if (message.annotations) {
-      Object.entries(message.annotations).forEach(([k, v]) => {
-        obj.annotations[k] = v;
-      });
+    if (message.sourceFile !== "") {
+      obj.sourceFile = message.sourceFile;
     }
-    message.hash !== undefined && (obj.hash = message.hash);
-    message.storeIdentifer !== undefined &&
-      (obj.storeIdentifer = message.storeIdentifer);
-    message.storeIdentifier !== undefined &&
-      (obj.storeIdentifier = message.storeIdentifier);
+    if (message.annotations) {
+      const entries = Object.entries(message.annotations);
+      if (entries.length > 0) {
+        obj.annotations = {};
+        entries.forEach(([k, v]) => {
+          obj.annotations[k] = v;
+        });
+      }
+    }
+    if (message.hash !== undefined) {
+      obj.hash = message.hash;
+    }
+    if (message.storeIdentifer !== "") {
+      obj.storeIdentifer = message.storeIdentifer;
+    }
+    if (message.storeIdentifier !== "") {
+      obj.storeIdentifier = message.storeIdentifier;
+    }
     return obj;
   },
 };
@@ -258,8 +318,12 @@ export const Metadata_AnnotationsEntry = {
 
   toJSON(message: Metadata_AnnotationsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -279,30 +343,35 @@ export const ResourcePolicy = {
       schemas: isSet(object.schemas)
         ? Schemas.fromJSON(object.schemas)
         : undefined,
+      variables: isSet(object.variables)
+        ? Variables.fromJSON(object.variables)
+        : undefined,
     };
   },
 
   toJSON(message: ResourcePolicy): unknown {
     const obj: any = {};
-    message.resource !== undefined && (obj.resource = message.resource);
-    message.version !== undefined && (obj.version = message.version);
-    if (message.importDerivedRoles) {
-      obj.importDerivedRoles = message.importDerivedRoles.map((e) => e);
-    } else {
-      obj.importDerivedRoles = [];
+    if (message.resource !== "") {
+      obj.resource = message.resource;
     }
-    if (message.rules) {
-      obj.rules = message.rules.map((e) =>
-        e ? ResourceRule.toJSON(e) : undefined,
-      );
-    } else {
-      obj.rules = [];
+    if (message.version !== "") {
+      obj.version = message.version;
     }
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.schemas !== undefined &&
-      (obj.schemas = message.schemas
-        ? Schemas.toJSON(message.schemas)
-        : undefined);
+    if (message.importDerivedRoles?.length) {
+      obj.importDerivedRoles = message.importDerivedRoles;
+    }
+    if (message.rules?.length) {
+      obj.rules = message.rules.map((e) => ResourceRule.toJSON(e));
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    if (message.schemas !== undefined) {
+      obj.schemas = Schemas.toJSON(message.schemas);
+    }
+    if (message.variables !== undefined) {
+      obj.variables = Variables.toJSON(message.variables);
+    }
     return obj;
   },
 };
@@ -330,29 +399,27 @@ export const ResourceRule = {
 
   toJSON(message: ResourceRule): unknown {
     const obj: any = {};
-    if (message.actions) {
-      obj.actions = message.actions.map((e) => e);
-    } else {
-      obj.actions = [];
+    if (message.actions?.length) {
+      obj.actions = message.actions;
     }
-    if (message.derivedRoles) {
-      obj.derivedRoles = message.derivedRoles.map((e) => e);
-    } else {
-      obj.derivedRoles = [];
+    if (message.derivedRoles?.length) {
+      obj.derivedRoles = message.derivedRoles;
     }
-    if (message.roles) {
-      obj.roles = message.roles.map((e) => e);
-    } else {
-      obj.roles = [];
+    if (message.roles?.length) {
+      obj.roles = message.roles;
     }
-    message.condition !== undefined &&
-      (obj.condition = message.condition
-        ? Condition.toJSON(message.condition)
-        : undefined);
-    message.effect !== undefined && (obj.effect = effectToJSON(message.effect));
-    message.name !== undefined && (obj.name = message.name);
-    message.output !== undefined &&
-      (obj.output = message.output ? Output.toJSON(message.output) : undefined);
+    if (message.condition !== undefined) {
+      obj.condition = Condition.toJSON(message.condition);
+    }
+    if (message.effect !== 0) {
+      obj.effect = effectToJSON(message.effect);
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.output !== undefined) {
+      obj.output = Output.toJSON(message.output);
+    }
     return obj;
   },
 };
@@ -366,21 +433,29 @@ export const PrincipalPolicy = {
         ? object.rules.map((e: any) => PrincipalRule.fromJSON(e))
         : [],
       scope: isSet(object.scope) ? String(object.scope) : "",
+      variables: isSet(object.variables)
+        ? Variables.fromJSON(object.variables)
+        : undefined,
     };
   },
 
   toJSON(message: PrincipalPolicy): unknown {
     const obj: any = {};
-    message.principal !== undefined && (obj.principal = message.principal);
-    message.version !== undefined && (obj.version = message.version);
-    if (message.rules) {
-      obj.rules = message.rules.map((e) =>
-        e ? PrincipalRule.toJSON(e) : undefined,
-      );
-    } else {
-      obj.rules = [];
+    if (message.principal !== "") {
+      obj.principal = message.principal;
     }
-    message.scope !== undefined && (obj.scope = message.scope);
+    if (message.version !== "") {
+      obj.version = message.version;
+    }
+    if (message.rules?.length) {
+      obj.rules = message.rules.map((e) => PrincipalRule.toJSON(e));
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    if (message.variables !== undefined) {
+      obj.variables = Variables.toJSON(message.variables);
+    }
     return obj;
   },
 };
@@ -397,13 +472,11 @@ export const PrincipalRule = {
 
   toJSON(message: PrincipalRule): unknown {
     const obj: any = {};
-    message.resource !== undefined && (obj.resource = message.resource);
-    if (message.actions) {
-      obj.actions = message.actions.map((e) =>
-        e ? PrincipalRule_Action.toJSON(e) : undefined,
-      );
-    } else {
-      obj.actions = [];
+    if (message.resource !== "") {
+      obj.resource = message.resource;
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions.map((e) => PrincipalRule_Action.toJSON(e));
     }
     return obj;
   },
@@ -424,15 +497,21 @@ export const PrincipalRule_Action = {
 
   toJSON(message: PrincipalRule_Action): unknown {
     const obj: any = {};
-    message.action !== undefined && (obj.action = message.action);
-    message.condition !== undefined &&
-      (obj.condition = message.condition
-        ? Condition.toJSON(message.condition)
-        : undefined);
-    message.effect !== undefined && (obj.effect = effectToJSON(message.effect));
-    message.name !== undefined && (obj.name = message.name);
-    message.output !== undefined &&
-      (obj.output = message.output ? Output.toJSON(message.output) : undefined);
+    if (message.action !== "") {
+      obj.action = message.action;
+    }
+    if (message.condition !== undefined) {
+      obj.condition = Condition.toJSON(message.condition);
+    }
+    if (message.effect !== 0) {
+      obj.effect = effectToJSON(message.effect);
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.output !== undefined) {
+      obj.output = Output.toJSON(message.output);
+    }
     return obj;
   },
 };
@@ -444,18 +523,22 @@ export const DerivedRoles = {
       definitions: Array.isArray(object?.definitions)
         ? object.definitions.map((e: any) => RoleDef.fromJSON(e))
         : [],
+      variables: isSet(object.variables)
+        ? Variables.fromJSON(object.variables)
+        : undefined,
     };
   },
 
   toJSON(message: DerivedRoles): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.definitions) {
-      obj.definitions = message.definitions.map((e) =>
-        e ? RoleDef.toJSON(e) : undefined,
-      );
-    } else {
-      obj.definitions = [];
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.definitions?.length) {
+      obj.definitions = message.definitions.map((e) => RoleDef.toJSON(e));
+    }
+    if (message.variables !== undefined) {
+      obj.variables = Variables.toJSON(message.variables);
     }
     return obj;
   },
@@ -476,16 +559,125 @@ export const RoleDef = {
 
   toJSON(message: RoleDef): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.parentRoles) {
-      obj.parentRoles = message.parentRoles.map((e) => e);
-    } else {
-      obj.parentRoles = [];
+    if (message.name !== "") {
+      obj.name = message.name;
     }
-    message.condition !== undefined &&
-      (obj.condition = message.condition
-        ? Condition.toJSON(message.condition)
-        : undefined);
+    if (message.parentRoles?.length) {
+      obj.parentRoles = message.parentRoles;
+    }
+    if (message.condition !== undefined) {
+      obj.condition = Condition.toJSON(message.condition);
+    }
+    return obj;
+  },
+};
+
+export const ExportVariables = {
+  fromJSON(object: any): ExportVariables {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      definitions: isObject(object.definitions)
+        ? Object.entries(object.definitions).reduce<{ [key: string]: string }>(
+            (acc, [key, value]) => {
+              acc[key] = String(value);
+              return acc;
+            },
+            {},
+          )
+        : {},
+    };
+  },
+
+  toJSON(message: ExportVariables): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.definitions) {
+      const entries = Object.entries(message.definitions);
+      if (entries.length > 0) {
+        obj.definitions = {};
+        entries.forEach(([k, v]) => {
+          obj.definitions[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
+};
+
+export const ExportVariables_DefinitionsEntry = {
+  fromJSON(object: any): ExportVariables_DefinitionsEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : "",
+    };
+  },
+
+  toJSON(message: ExportVariables_DefinitionsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
+    return obj;
+  },
+};
+
+export const Variables = {
+  fromJSON(object: any): Variables {
+    return {
+      import: Array.isArray(object?.import)
+        ? object.import.map((e: any) => String(e))
+        : [],
+      local: isObject(object.local)
+        ? Object.entries(object.local).reduce<{ [key: string]: string }>(
+            (acc, [key, value]) => {
+              acc[key] = String(value);
+              return acc;
+            },
+            {},
+          )
+        : {},
+    };
+  },
+
+  toJSON(message: Variables): unknown {
+    const obj: any = {};
+    if (message.import?.length > 0) {
+      obj.import = message.import;
+    }
+    if (message.local) {
+      const entries = Object.entries(message.local);
+      if (entries.length > 0) {
+        obj.local = {};
+        entries.forEach(([k, v]) => {
+          obj.local[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
+};
+
+export const Variables_LocalEntry = {
+  fromJSON(object: any): Variables_LocalEntry {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : "",
+    };
+  },
+
+  toJSON(message: Variables_LocalEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
     return obj;
   },
 };
@@ -503,12 +695,12 @@ export const Condition = {
 
   toJSON(message: Condition): unknown {
     const obj: any = {};
-    message.condition?.$case === "match" &&
-      (obj.match = message.condition?.match
-        ? Match.toJSON(message.condition?.match)
-        : undefined);
-    message.condition?.$case === "script" &&
-      (obj.script = message.condition?.script);
+    if (message.condition?.$case === "match") {
+      obj.match = Match.toJSON(message.condition.match);
+    }
+    if (message.condition?.$case === "script") {
+      obj.script = message.condition.script;
+    }
     return obj;
   },
 };
@@ -530,19 +722,18 @@ export const Match = {
 
   toJSON(message: Match): unknown {
     const obj: any = {};
-    message.op?.$case === "all" &&
-      (obj.all = message.op?.all
-        ? Match_ExprList.toJSON(message.op?.all)
-        : undefined);
-    message.op?.$case === "any" &&
-      (obj.any = message.op?.any
-        ? Match_ExprList.toJSON(message.op?.any)
-        : undefined);
-    message.op?.$case === "none" &&
-      (obj.none = message.op?.none
-        ? Match_ExprList.toJSON(message.op?.none)
-        : undefined);
-    message.op?.$case === "expr" && (obj.expr = message.op?.expr);
+    if (message.op?.$case === "all") {
+      obj.all = Match_ExprList.toJSON(message.op.all);
+    }
+    if (message.op?.$case === "any") {
+      obj.any = Match_ExprList.toJSON(message.op.any);
+    }
+    if (message.op?.$case === "none") {
+      obj.none = Match_ExprList.toJSON(message.op.none);
+    }
+    if (message.op?.$case === "expr") {
+      obj.expr = message.op.expr;
+    }
     return obj;
   },
 };
@@ -558,10 +749,8 @@ export const Match_ExprList = {
 
   toJSON(message: Match_ExprList): unknown {
     const obj: any = {};
-    if (message.of) {
-      obj.of = message.of.map((e) => (e ? Match.toJSON(e) : undefined));
-    } else {
-      obj.of = [];
+    if (message.of?.length) {
+      obj.of = message.of.map((e) => Match.toJSON(e));
     }
     return obj;
   },
@@ -574,7 +763,9 @@ export const Output = {
 
   toJSON(message: Output): unknown {
     const obj: any = {};
-    message.expr !== undefined && (obj.expr = message.expr);
+    if (message.expr !== "") {
+      obj.expr = message.expr;
+    }
     return obj;
   },
 };
@@ -593,14 +784,12 @@ export const Schemas = {
 
   toJSON(message: Schemas): unknown {
     const obj: any = {};
-    message.principalSchema !== undefined &&
-      (obj.principalSchema = message.principalSchema
-        ? Schemas_Schema.toJSON(message.principalSchema)
-        : undefined);
-    message.resourceSchema !== undefined &&
-      (obj.resourceSchema = message.resourceSchema
-        ? Schemas_Schema.toJSON(message.resourceSchema)
-        : undefined);
+    if (message.principalSchema !== undefined) {
+      obj.principalSchema = Schemas_Schema.toJSON(message.principalSchema);
+    }
+    if (message.resourceSchema !== undefined) {
+      obj.resourceSchema = Schemas_Schema.toJSON(message.resourceSchema);
+    }
     return obj;
   },
 };
@@ -616,10 +805,8 @@ export const Schemas_IgnoreWhen = {
 
   toJSON(message: Schemas_IgnoreWhen): unknown {
     const obj: any = {};
-    if (message.actions) {
-      obj.actions = message.actions.map((e) => e);
-    } else {
-      obj.actions = [];
+    if (message.actions?.length) {
+      obj.actions = message.actions;
     }
     return obj;
   },
@@ -637,11 +824,12 @@ export const Schemas_Schema = {
 
   toJSON(message: Schemas_Schema): unknown {
     const obj: any = {};
-    message.ref !== undefined && (obj.ref = message.ref);
-    message.ignoreWhen !== undefined &&
-      (obj.ignoreWhen = message.ignoreWhen
-        ? Schemas_IgnoreWhen.toJSON(message.ignoreWhen)
-        : undefined);
+    if (message.ref !== "") {
+      obj.ref = message.ref;
+    }
+    if (message.ignoreWhen !== undefined) {
+      obj.ignoreWhen = Schemas_IgnoreWhen.toJSON(message.ignoreWhen);
+    }
     return obj;
   },
 };

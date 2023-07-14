@@ -9,12 +9,5 @@ The policy body.
 **Signature:**
 
 ```typescript
-resourcePolicy: {
-        resource: string;
-        version: string;
-        importDerivedRoles?: string[];
-        rules: ResourceRule[];
-        scope?: string;
-        schemas?: SchemaRefs | undefined;
-    };
+resourcePolicy: ResourcePolicyBody;
 ```

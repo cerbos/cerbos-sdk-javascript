@@ -17,5 +17,5 @@ export interface DerivedRoles extends PolicyBase
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [derivedRoles](./core.derivedroles.derivedroles.md) |  | { name: string; definitions: [DerivedRoleDefinition](./core.derivedroledefinition.md)<!-- -->\[\]; } | A set of derived roles. |
+|  [derivedRoles](./core.derivedroles.derivedroles.md) |  | [DerivedRolesBody](./core.derivedrolesbody.md) | A set of derived roles. |
 

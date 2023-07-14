@@ -9,6 +9,7 @@ import type {
 import type {
   Condition as ConditionProtobuf,
   DerivedRoles as DerivedRolesProtobuf,
+  ExportVariables as ExportVariablesProtobuf,
   Match as MatchProtobuf,
   Match_ExprList,
   Output as OutputProtobuf,
@@ -21,6 +22,7 @@ import type {
   RoleDef,
   Schemas,
   Schemas_Schema,
+  Variables as VariablesProtobuf,
 } from "../protobuf/cerbos/policy/v1/policy";
 import type {
   AddOrUpdatePolicyRequest,
@@ -48,6 +50,7 @@ import type {
   DerivedRoleDefinition,
   DerivedRoles,
   EnablePoliciesRequest,
+  ExportVariables,
   GetPoliciesRequest,
   JWT,
   ListPoliciesRequest,
@@ -69,6 +72,7 @@ import type {
   SchemaInput,
   SchemaRef,
   SchemaRefs,
+  Variables,
 } from "../types/external";
 import {
   Effect,
@@ -78,6 +82,7 @@ import {
   matchIsMatchExpr,
   matchIsMatchNone,
   policyIsDerivedRoles,
+  policyIsExportVariables,
   policyIsPrincipalPolicy,
   policyIsResourcePolicy,
 } from "../types/external";
@@ -104,6 +109,7 @@ const policyToProtobuf = (policy: Policy): PolicyProtobuf => {
     apiVersion,
     description,
     disabled,
+    jsonSchema: "",
     metadata: undefined,
     policyType: policyTypeToProtobuf(policy),
     variables,
@@ -117,6 +123,13 @@ const policyTypeToProtobuf = (
     return {
       $case: "derivedRoles",
       derivedRoles: derivedRolesToProtobuf(policy),
+    };
+  }
+
+  if (policyIsExportVariables(policy)) {
+    return {
+      $case: "exportVariables",
+      exportVariables: exportVariablesToProtobuf(policy),
     };
   }
 
@@ -138,10 +151,11 @@ const policyTypeToProtobuf = (
 };
 
 const derivedRolesToProtobuf = ({
-  derivedRoles: { name, definitions },
+  derivedRoles: { name, definitions, variables },
 }: DerivedRoles): DerivedRolesProtobuf => ({
   name,
   definitions: definitions.map(derivedRoleDefinitionToProtobuf),
+  variables: variables && variablesToProtobuf(variables),
 });
 
 const derivedRoleDefinitionToProtobuf = ({
@@ -205,13 +219,29 @@ const matchesToProtobuf = ({ of }: Matches): Match_ExprList => ({
   of: of.map(matchToProtobuf),
 });
 
+const variablesToProtobuf = ({
+  import: imports = [],
+  local = {},
+}: Variables): VariablesProtobuf => ({
+  import: imports,
+  local,
+});
+
+const exportVariablesToProtobuf = ({
+  exportVariables: { name, definitions },
+}: ExportVariables): ExportVariablesProtobuf => ({
+  name,
+  definitions,
+});
+
 const principalPolicyToProtobuf = ({
-  principalPolicy: { principal, version, rules, scope = "" },
+  principalPolicy: { principal, version, rules, scope = "", variables },
 }: PrincipalPolicy): PrincipalPolicyProtobuf => ({
   principal,
   version,
   rules: rules.map(principalRuleToProtobuf),
   scope,
+  variables: variables && variablesToProtobuf(variables),
 });
 
 const principalRuleToProtobuf = ({
@@ -251,6 +281,7 @@ const resourcePolicyToProtobuf = ({
     rules,
     scope = "",
     schemas,
+    variables,
   },
 }: ResourcePolicy): ResourcePolicyProtobuf => ({
   resource,
@@ -259,6 +290,7 @@ const resourcePolicyToProtobuf = ({
   rules: rules.map(resourceRuleToProtobuf),
   scope,
   schemas: schemas && policySchemasToProtobuf(schemas),
+  variables: variables && variablesToProtobuf(variables),
 });
 
 const resourceRuleToProtobuf = ({

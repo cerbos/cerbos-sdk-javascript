@@ -6,6 +6,10 @@
 
   Requires a policy decision point server running Cerbos 0.29+.
 
+- Support for [exporting and importing variable sets](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html) in policies ([#598](https://github.com/cerbos/cerbos-sdk-javascript/pull/598))
+
+  Requires a policy decision point server running Cerbos 0.29+.
+
 ### Changed
 
 - Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.8.17 ([#555](https://github.com/cerbos/cerbos-sdk-javascript/pull/555), [#575](https://github.com/cerbos/cerbos-sdk-javascript/pull/575), [#578](https://github.com/cerbos/cerbos-sdk-javascript/pull/578))
