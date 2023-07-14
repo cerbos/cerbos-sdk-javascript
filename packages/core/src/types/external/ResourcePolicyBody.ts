@@ -44,7 +44,7 @@ export interface ResourcePolicyBody {
   schemas?: SchemaRefs | undefined;
 
   /**
-   * {@link https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html | Variables} defined for use in conditions.
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables.html | Variables} defined for use in conditions.
    *
    * @remarks
    * Requires the Cerbos policy decision point server to be at least v0.29.

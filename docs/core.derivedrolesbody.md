@@ -18,5 +18,5 @@ export interface DerivedRolesBody
 |  --- | --- | --- | --- |
 |  [definitions](./core.derivedrolesbody.definitions.md) |  | [DerivedRoleDefinition](./core.derivedroledefinition.md)<!-- -->\[\] | The definitions of the derived roles. |
 |  [name](./core.derivedrolesbody.name.md) |  | string | The name to use when importing the set of derived roles. |
-|  [variables?](./core.derivedrolesbody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html) defined for use in conditions. |
+|  [variables?](./core.derivedrolesbody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables.html) defined for use in conditions. |
 

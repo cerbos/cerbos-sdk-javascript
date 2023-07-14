@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.3.1-alpha] - 2023-07-18
+
 ### Removed
 
 - Unused generated code ([#606](https://github.com/cerbos/cerbos-sdk-javascript/pull/606))
@@ -40,7 +44,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.3.0-alpha...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.3.1-alpha...HEAD
+[0.3.1-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.3.0-alpha...@cerbos/lite@0.3.1-alpha
 [0.3.0-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.2.2-alpha...@cerbos/lite@0.3.0-alpha
 [0.2.2-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.2.1-alpha...@cerbos/lite@0.2.2-alpha
 [0.2.1-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.2.0-alpha...@cerbos/lite@0.2.1-alpha

@@ -19,6 +19,6 @@ export interface PrincipalPolicyBody
 |  [principal](./core.principalpolicybody.principal.md) |  | string | The ID of the principal to whom the policy applies. |
 |  [rules](./core.principalpolicybody.rules.md) |  | [PrincipalRule](./core.principalrule.md)<!-- -->\[\] | Rules defining the overrides that apply to the principal. |
 |  [scope?](./core.principalpolicybody.scope.md) |  | string | _(Optional)_ [Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) of the policy. |
-|  [variables?](./core.principalpolicybody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html) defined for use in conditions. |
+|  [variables?](./core.principalpolicybody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables.html) defined for use in conditions. |
 |  [version](./core.principalpolicybody.version.md) |  | string | The version of the policy. |
 
