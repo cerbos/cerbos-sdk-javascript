@@ -185,10 +185,11 @@ export const enablePoliciesResponseFromProtobuf = ({
 export const getPoliciesResponseFromProtobuf = ({
   policies,
 }: GetPolicyResponse): GetPoliciesResponse => ({
-  policies: policies.map(policyFromProtobuf),
+  policies: policies.map(_policyFromProtobuf),
 });
 
-const policyFromProtobuf = ({
+/** @internal */
+export const _policyFromProtobuf = ({
   apiVersion,
   description,
   disabled,
