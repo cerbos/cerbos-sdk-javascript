@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/lite",
-  "version": "0.3.0-alpha",
+  "version": "0.3.1-alpha",
   "description": "Client library for interacting with WebAssembly Cerbos policy bundles from server-side Node.js and browser-based applications",
   "repository": {
     "type": "git",
@@ -26,6 +26,6 @@
     "src/**/*.ts"
   ],
   "dependencies": {
-    "@cerbos/core": "^0.11.0"
+    "@cerbos/core": "^0.12.0"
   }
 }

@@ -4,7 +4,7 @@
 
 ## ResourcePolicyBody.variables property
 
-[Variables](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html) defined for use in conditions.
+[Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables.html) defined for use in conditions.
 
 **Signature:**
 

@@ -2,7 +2,7 @@ import type { ExportVariablesBody } from "./ExportVariablesBody";
 import type { PolicyBase } from "./PolicyBase";
 
 /**
- * A set of {@link https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html#export | exported variables}
+ * A set of {@link https://docs.cerbos.dev/cerbos/latest/policies/variables.html#export | exported variables}
  * to be reused in other policies.
  *
  * @remarks

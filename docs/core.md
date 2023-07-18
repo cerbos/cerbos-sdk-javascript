@@ -56,8 +56,8 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [DisablePoliciesResponse](./core.disablepoliciesresponse.md) | The outcome of disabling policies. |
 |  [EnablePoliciesRequest](./core.enablepoliciesrequest.md) | Input to [Client.enablePolicies()](./core.client.enablepolicies.md)<!-- -->. |
 |  [EnablePoliciesResponse](./core.enablepoliciesresponse.md) | The outcome of enabling policies. |
-|  [ExportVariables](./core.exportvariables.md) | A set of [exported variables](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html#export) to be reused in other policies. |
-|  [ExportVariablesBody](./core.exportvariablesbody.md) | A set of [exported variables](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html#export) to be reused in other policies. |
+|  [ExportVariables](./core.exportvariables.md) | A set of [exported variables](https://docs.cerbos.dev/cerbos/latest/policies/variables.html#export) to be reused in other policies. |
+|  [ExportVariablesBody](./core.exportvariablesbody.md) | A set of [exported variables](https://docs.cerbos.dev/cerbos/latest/policies/variables.html#export) to be reused in other policies. |
 |  [GetPoliciesRequest](./core.getpoliciesrequest.md) | Input to [Client.getPolicies()](./core.client.getpolicies.md)<!-- -->. |
 |  [GetPoliciesResponse](./core.getpoliciesresponse.md) | Fetched policies. |
 |  [GetSchemasRequest](./core.getschemasrequest.md) | Input to [Client.getSchemas()](./core.client.getschemas.md)<!-- -->. |
@@ -98,7 +98,7 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [SchemaRefs](./core.schemarefs.md) | References to schemas to be used to validate principal and resource attributes. |
 |  [ServerInfo](./core.serverinfo.md) | Information about the Cerbos policy decision point (PDP) server. |
 |  [ValidationError](./core.validationerror.md) | An error that occurred while validating the principal or resource attributes against a schema. |
-|  [Variables](./core.variables.md) | [Variables](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html) defined for use in policy conditions. |
+|  [Variables](./core.variables.md) | [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables.html) defined for use in policy conditions. |
 
 ## Variables
 

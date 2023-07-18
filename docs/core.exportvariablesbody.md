@@ -4,7 +4,7 @@
 
 ## ExportVariablesBody interface
 
-A set of [exported variables](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html#export) to be reused in other policies.
+A set of [exported variables](https://docs.cerbos.dev/cerbos/latest/policies/variables.html#export) to be reused in other policies.
 
 **Signature:**
 

@@ -21,6 +21,6 @@ export interface ResourcePolicyBody
 |  [rules](./core.resourcepolicybody.rules.md) |  | [ResourceRule](./core.resourcerule.md)<!-- -->\[\] | Rules defining the actions that can be performed on the resource. |
 |  [schemas?](./core.resourcepolicybody.schemas.md) |  | [SchemaRefs](./core.schemarefs.md) \| undefined | _(Optional)_ [Schemas](https://docs.cerbos.dev/cerbos/latest/policies/schemas.html) for principal and resource attributes. |
 |  [scope?](./core.resourcepolicybody.scope.md) |  | string | _(Optional)_ [Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) of the policy. |
-|  [variables?](./core.resourcepolicybody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html) defined for use in conditions. |
+|  [variables?](./core.resourcepolicybody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables.html) defined for use in conditions. |
 |  [version](./core.resourcepolicybody.version.md) |  | string | The version of the policy. |
 

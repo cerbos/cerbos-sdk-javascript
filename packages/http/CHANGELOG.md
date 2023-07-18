@@ -1,12 +1,16 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.13.0] - 2023-07-18
+
 ### Added
 
 - Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy name, scope, and version ([#568](https://github.com/cerbos/cerbos-sdk-javascript/pull/568))
 
   Requires a policy decision point server running Cerbos 0.29+.
 
-- Support for [exporting and importing variable sets](https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html) in policies ([#598](https://github.com/cerbos/cerbos-sdk-javascript/pull/598))
+- Support for [exporting and importing variable sets](https://docs.cerbos.dev/cerbos/latest/policies/variables.html) in policies ([#598](https://github.com/cerbos/cerbos-sdk-javascript/pull/598))
 
   Requires a policy decision point server running Cerbos 0.29+.
 
@@ -121,7 +125,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.12.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.13.0...HEAD
+[0.13.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.12.0...@cerbos/http@0.13.0
 [0.12.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.11.0...@cerbos/http@0.12.0
 [0.11.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.10.1...@cerbos/http@0.11.0
 [0.10.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.10.0...@cerbos/http@0.10.1

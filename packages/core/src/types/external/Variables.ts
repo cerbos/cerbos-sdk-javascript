@@ -1,5 +1,5 @@
 /**
- * {@link https://docs.cerbos.dev/cerbos/prerelease/policies/variables.html | Variables} defined for use in policy conditions.
+ * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables.html | Variables} defined for use in policy conditions.
  *
  * @public
  */
