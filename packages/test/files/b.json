@@ -1,0 +1,19 @@
+{
+  "$schema": "https://api.cerbos.dev/latest/cerbos/policy/v1/Policy.schema.json",
+  "apiVersion": "api.cerbos.dev/v1",
+  "principalPolicy": {
+    "principal": "b",
+    "version": "default",
+    "rules": [
+      {
+        "resource": "a",
+        "actions": [
+          {
+            "action": "foo",
+            "effect": "EFFECT_DENY"
+          }
+        ]
+      }
+    ]
+  }
+}

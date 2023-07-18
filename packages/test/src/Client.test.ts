@@ -14,7 +14,6 @@ import type {
   Options,
   OutputResult,
   PlanResourcesRequest,
-  Policy,
   ValidationFailedCallback,
 } from "@cerbos/core";
 import {
@@ -30,12 +29,12 @@ import {
   ValidationErrorSource,
   ValidationFailed,
 } from "@cerbos/core";
+import { readPolicy, readSchema } from "@cerbos/files";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
 import { afterAll, beforeAll, describe, expect, it, jest } from "@jest/globals";
 import { UnsecuredJWT } from "jose";
 import { compare as semverCompare, lte as semverLte } from "semver";
-import YAML from "yaml";
 
 import type { Ports } from "./servers";
 import {
@@ -43,6 +42,18 @@ import {
   cerbosVersionIsAtLeast,
   ports as serverPorts,
 } from "./servers";
+
+const policiesDirectory = resolve(__dirname, "../servers/policies");
+
+const policiesVersion = readdirSync(policiesDirectory)
+  .sort((a, b) => semverCompare(`${b}.0`, `${a}.0`))
+  .find((version) => semverLte(`${version}.0-prelease`, cerbosVersion));
+
+if (!policiesVersion) {
+  throw new Error(
+    `Couldn't determine policies version for Cerbos version ${cerbosVersion}`,
+  );
+}
 
 function readPEM(filename: string): string {
   return readFileSync(
@@ -669,58 +680,37 @@ describe("Client", () => {
       });
 
       describe("addOrUpdatePolicies / listPolicies / getPolicy / disablePolicy", () => {
-        const inlinePolicy: DerivedRoles = {
-          derivedRoles: {
-            name: "owner",
-            definitions: [
-              {
-                name: "OWNER",
-                parentRoles: ["USER"],
-                condition: {
-                  match: {
-                    expr: "request.resource.attr.owner == request.principal.id",
-                  },
-                },
-              },
-            ],
-          },
-        };
-
-        const policiesDirectory = resolve(__dirname, "../servers/policies");
-
-        const policiesVersion = readdirSync(policiesDirectory)
-          .sort((a, b) => semverCompare(`${b}.0`, `${a}.0`))
-          .find((version) => semverLte(`${version}.0-prelease`, cerbosVersion));
-
-        if (!policiesVersion) {
-          throw new Error(
-            `Couldn't determine policies version for Cerbos version ${cerbosVersion}`,
-          );
-        }
-
-        const policyFromFile = YAML.parse(
-          readFileSync(
-            `${policiesDirectory}/${policiesVersion}/document.yaml`,
-            {
-              encoding: "utf-8",
-            },
-          ),
-        ) as Policy;
-
         it.each([
           {
             source: "defined inline",
             id: "derived_roles.owner",
-            policy: inlinePolicy,
+            policy: {
+              derivedRoles: {
+                name: "owner",
+                definitions: [
+                  {
+                    name: "OWNER",
+                    parentRoles: ["USER"],
+                    condition: {
+                      match: {
+                        expr: "request.resource.attr.owner == request.principal.id",
+                      },
+                    },
+                  },
+                ],
+              },
+            } satisfies DerivedRoles,
           },
           {
             source: "parsed from YAML",
             id: "resource.document.v1",
-            policy: policyFromFile,
+            policy: readPolicy(
+              `${policiesDirectory}/${policiesVersion}/document.yaml`,
+            ),
           },
         ])("round-trips a policy $source", async ({ id, policy }) => {
           await mutable.addOrUpdatePolicies({
-            policies: [policy],
+            policies: [await policy],
           });
 
           const { ids } = await mutable.listPolicies();
@@ -728,11 +718,11 @@ describe("Client", () => {
 
           const roundTrippedPolicy = await mutable.getPolicy(id);
           expect(roundTrippedPolicy).toMatchObject({
+            ...(await policy),
             metadata: {
               storeIdentifer: id,
               storeIdentifier: id,
             },
-            ...policy,
           });
 
           if (cerbosVersionIsAtLeast("0.25.0")) {
@@ -759,40 +749,55 @@ describe("Client", () => {
       });
 
       describe("addOrUpdateSchema / listSchemas / getSchema / deleteSchema", () => {
+        const definition = {
+          $schema: "https://json-schema.org/draft/2020-12/schema",
+          type: "object",
+          properties: {
+            owner: { type: "string" },
+          },
+        };
+
         it.each([
           {
             source: "defined inline",
-            input: {
-              type: "object",
+            schema: {
+              id: "inline",
+              definition,
             },
           },
           {
             source: "from a string",
-            input: `{ "type": "object" }`,
+            schema: {
+              id: "string",
+              definition: JSON.stringify(definition),
+            },
           },
           {
             source: "from a buffer",
-            input: Buffer.from(`{ "type": "object" }`),
+            schema: {
+              id: "buffer",
+              definition: Buffer.from(JSON.stringify(definition)),
+            },
           },
-        ])("round-trips a schema $source", async ({ input }) => {
-          const id = "object";
+          {
+            source: "from a file",
+            schema: readSchema(
+              `${policiesDirectory}/${policiesVersion}/_schemas/document.json`,
+              { id: "file" },
+            ),
+          },
+        ])("round-trips a schema $source", async ({ schema }) => {
+          const { id } = await schema;
           await mutable.addOrUpdateSchemas({
-            schemas: [
-              {
-                id,
-                definition: input,
-              },
-            ],
+            schemas: [await schema],
           });
 
           const { ids } = await mutable.listSchemas();
           expect(ids).toContain(id);
 
-          const schema = await mutable.getSchema(id);
-          expect(schema?.id).toEqual(id);
-          expect(schema?.definition.toObject()).toEqual({
-            type: "object",
-          });
+          const roundTrippedSchema = await mutable.getSchema(id);
+          expect(roundTrippedSchema?.id).toEqual(id);
+          expect(roundTrippedSchema?.definition.toObject()).toEqual(definition);
 
           const deleted = await mutable.deleteSchema(id);
           expect(deleted).toBe(cerbosVersionIsAtLeast("0.25.0"));

@@ -32,18 +32,47 @@ Requires
 
 - a dynamic [storage backend](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html)<!-- -->.
 
-## Example
+## Example 1
 
+Create a schema in code:
 
 ```typescript
-await cerbos.addOrUpdateSchemas([{
-  id: "document.json",
-  definition: `{
-    "type": "object",
-    "properties": {
-      "owner": { "type": "string" }
-    }
-  }`,
-}]);
+
+await cerbos.addOrUpdateSchemas({
+  schemas: [{
+    id: "document.json",
+    definition: {
+      type: "object",
+      properties: {
+        owner: { type: "string" }
+      }
+    },
+  }],
+});
+```
+
+## Example 2
+
+Load a schema from a JSON file with [readSchema()](./files.readschema.md)<!-- -->:
+
+```typescript
+import { readSchema } from "@cerbos/files";
+
+await cerbos.addOrUpdateSchemas({
+  schemas: [await readSchema("_schemas/path/to/schema.json")],
+});
+```
+
+## Example 3
+
+Load policies and schemas from a directory with [readDirectory()](./files.readdirectory.md)<!-- -->:
+
+```typescript
+import { readDirectory } from "@cerbos/files";
+
+const { policies, schemas } = await readDirectory("path/to/directory");
+
+await cerbos.addOrUpdateSchemas({ schemas });
+await cerbos.addOrUpdatePolicies({ policies });
 ```
 
