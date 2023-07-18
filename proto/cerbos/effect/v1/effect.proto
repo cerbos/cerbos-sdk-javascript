@@ -1,0 +1,17 @@
+// Copyright 2021-2023 Zenauth Ltd.
+// SPDX-License-Identifier: Apache-2.0
+
+syntax = "proto3";
+
+package cerbos.effect.v1;
+
+option csharp_namespace = "Cerbos.Api.V1.Effect";
+option go_package = "github.com/cerbos/cerbos/api/genpb/cerbos/effect/v1;effectv1";
+option java_package = "dev.cerbos.api.v1.effect";
+
+enum Effect {
+  EFFECT_UNSPECIFIED = 0;
+  EFFECT_ALLOW = 1;
+  EFFECT_DENY = 2;
+  EFFECT_NO_MATCH = 3;
+}

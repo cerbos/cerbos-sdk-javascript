@@ -310,10 +310,6 @@ export function fieldOptions_OptionTargetTypeToJSON(
   }
 }
 
-export interface OneofOptions {
-  uninterpretedOption: UninterpretedOption[];
-}
-
 export interface ServiceOptions {
   deprecated: boolean;
   uninterpretedOption: UninterpretedOption[];
@@ -633,28 +629,6 @@ export const FieldOptions = {
     if (message.target !== 0) {
       obj.target = fieldOptions_OptionTargetTypeToJSON(message.target);
     }
-    if (message.uninterpretedOption?.length) {
-      obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
-        UninterpretedOption.toJSON(e),
-      );
-    }
-    return obj;
-  },
-};
-
-export const OneofOptions = {
-  fromJSON(object: any): OneofOptions {
-    return {
-      uninterpretedOption: Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) =>
-            UninterpretedOption.fromJSON(e),
-          )
-        : [],
-    };
-  },
-
-  toJSON(message: OneofOptions): unknown {
-    const obj: any = {};
     if (message.uninterpretedOption?.length) {
       obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
         UninterpretedOption.toJSON(e),

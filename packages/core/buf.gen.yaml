@@ -1,0 +1,23 @@
+version: v1
+
+types:
+  include:
+    - cerbos.svc.v1.CerbosService
+    - cerbos.svc.v1.CerbosAdminService
+
+plugins:
+  - name: core
+    path: node_modules/.bin/protoc-gen-ts_proto
+    out: packages/core/src/protobuf
+    strategy: all
+    opt:
+      - env=both
+      - esModuleInterop=true
+      - forceLong=string
+      - oneof=unions
+      - onlyTypes=true
+      - outputEncodeMethods=false
+      - outputJsonMethods=false
+      - outputPartialMethods=false
+      - outputServices=false
+      - unrecognizedEnum=false

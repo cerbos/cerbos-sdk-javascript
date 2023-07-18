@@ -1,10 +1,7 @@
 /* eslint-disable */
-import { Empty } from "../../../google/protobuf/empty";
-import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
 import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
 import { OutputEntry, PlanResourcesFilter } from "../../engine/v1/engine";
-import { Policy } from "../../policy/v1/policy";
-import { Schema, ValidationError } from "../../schema/v1/schema";
+import { ValidationError } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.response.v1";
 
@@ -130,57 +127,11 @@ export interface CheckResourcesResponse_ResultEntry_ActionsEntry {
   value: Effect;
 }
 
-export interface AddOrUpdatePolicyResponse {
-  success: Empty | undefined;
-}
-
-export interface ListAuditLogEntriesResponse {
-  entry?:
-    | { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry }
-    | {
-        $case: "decisionLogEntry";
-        decisionLogEntry: DecisionLogEntry;
-      }
-    | undefined;
-}
-
 export interface ServerInfoResponse {
   version: string;
   commit: string;
   buildDate: string;
 }
-
-export interface ListPoliciesResponse {
-  policyIds: string[];
-}
-
-export interface GetPolicyResponse {
-  policies: Policy[];
-}
-
-export interface DisablePolicyResponse {
-  disabledPolicies: number;
-}
-
-export interface EnablePolicyResponse {
-  enabledPolicies: number;
-}
-
-export interface AddOrUpdateSchemaResponse {}
-
-export interface ListSchemasResponse {
-  schemaIds: string[];
-}
-
-export interface GetSchemaResponse {
-  schemas: Schema[];
-}
-
-export interface DeleteSchemaResponse {
-  deletedSchemas: number;
-}
-
-export interface ReloadStoreResponse {}
 
 export const PlanResourcesResponse = {
   fromJSON(object: any): PlanResourcesResponse {
@@ -838,57 +789,6 @@ export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
   },
 };
 
-export const AddOrUpdatePolicyResponse = {
-  fromJSON(object: any): AddOrUpdatePolicyResponse {
-    return {
-      success: isSet(object.success)
-        ? Empty.fromJSON(object.success)
-        : undefined,
-    };
-  },
-
-  toJSON(message: AddOrUpdatePolicyResponse): unknown {
-    const obj: any = {};
-    if (message.success !== undefined) {
-      obj.success = Empty.toJSON(message.success);
-    }
-    return obj;
-  },
-};
-
-export const ListAuditLogEntriesResponse = {
-  fromJSON(object: any): ListAuditLogEntriesResponse {
-    return {
-      entry: isSet(object.accessLogEntry)
-        ? {
-            $case: "accessLogEntry",
-            accessLogEntry: AccessLogEntry.fromJSON(object.accessLogEntry),
-          }
-        : isSet(object.decisionLogEntry)
-        ? {
-            $case: "decisionLogEntry",
-            decisionLogEntry: DecisionLogEntry.fromJSON(
-              object.decisionLogEntry,
-            ),
-          }
-        : undefined,
-    };
-  },
-
-  toJSON(message: ListAuditLogEntriesResponse): unknown {
-    const obj: any = {};
-    if (message.entry?.$case === "accessLogEntry") {
-      obj.accessLogEntry = AccessLogEntry.toJSON(message.entry.accessLogEntry);
-    }
-    if (message.entry?.$case === "decisionLogEntry") {
-      obj.decisionLogEntry = DecisionLogEntry.toJSON(
-        message.entry.decisionLogEntry,
-      );
-    }
-    return obj;
-  },
-};
-
 export const ServerInfoResponse = {
   fromJSON(object: any): ServerInfoResponse {
     return {
@@ -909,154 +809,6 @@ export const ServerInfoResponse = {
     if (message.buildDate !== "") {
       obj.buildDate = message.buildDate;
     }
-    return obj;
-  },
-};
-
-export const ListPoliciesResponse = {
-  fromJSON(object: any): ListPoliciesResponse {
-    return {
-      policyIds: Array.isArray(object?.policyIds)
-        ? object.policyIds.map((e: any) => String(e))
-        : [],
-    };
-  },
-
-  toJSON(message: ListPoliciesResponse): unknown {
-    const obj: any = {};
-    if (message.policyIds?.length) {
-      obj.policyIds = message.policyIds;
-    }
-    return obj;
-  },
-};
-
-export const GetPolicyResponse = {
-  fromJSON(object: any): GetPolicyResponse {
-    return {
-      policies: Array.isArray(object?.policies)
-        ? object.policies.map((e: any) => Policy.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: GetPolicyResponse): unknown {
-    const obj: any = {};
-    if (message.policies?.length) {
-      obj.policies = message.policies.map((e) => Policy.toJSON(e));
-    }
-    return obj;
-  },
-};
-
-export const DisablePolicyResponse = {
-  fromJSON(object: any): DisablePolicyResponse {
-    return {
-      disabledPolicies: isSet(object.disabledPolicies)
-        ? Number(object.disabledPolicies)
-        : 0,
-    };
-  },
-
-  toJSON(message: DisablePolicyResponse): unknown {
-    const obj: any = {};
-    if (message.disabledPolicies !== 0) {
-      obj.disabledPolicies = Math.round(message.disabledPolicies);
-    }
-    return obj;
-  },
-};
-
-export const EnablePolicyResponse = {
-  fromJSON(object: any): EnablePolicyResponse {
-    return {
-      enabledPolicies: isSet(object.enabledPolicies)
-        ? Number(object.enabledPolicies)
-        : 0,
-    };
-  },
-
-  toJSON(message: EnablePolicyResponse): unknown {
-    const obj: any = {};
-    if (message.enabledPolicies !== 0) {
-      obj.enabledPolicies = Math.round(message.enabledPolicies);
-    }
-    return obj;
-  },
-};
-
-export const AddOrUpdateSchemaResponse = {
-  fromJSON(_: any): AddOrUpdateSchemaResponse {
-    return {};
-  },
-
-  toJSON(_: AddOrUpdateSchemaResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-};
-
-export const ListSchemasResponse = {
-  fromJSON(object: any): ListSchemasResponse {
-    return {
-      schemaIds: Array.isArray(object?.schemaIds)
-        ? object.schemaIds.map((e: any) => String(e))
-        : [],
-    };
-  },
-
-  toJSON(message: ListSchemasResponse): unknown {
-    const obj: any = {};
-    if (message.schemaIds?.length) {
-      obj.schemaIds = message.schemaIds;
-    }
-    return obj;
-  },
-};
-
-export const GetSchemaResponse = {
-  fromJSON(object: any): GetSchemaResponse {
-    return {
-      schemas: Array.isArray(object?.schemas)
-        ? object.schemas.map((e: any) => Schema.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: GetSchemaResponse): unknown {
-    const obj: any = {};
-    if (message.schemas?.length) {
-      obj.schemas = message.schemas.map((e) => Schema.toJSON(e));
-    }
-    return obj;
-  },
-};
-
-export const DeleteSchemaResponse = {
-  fromJSON(object: any): DeleteSchemaResponse {
-    return {
-      deletedSchemas: isSet(object.deletedSchemas)
-        ? Number(object.deletedSchemas)
-        : 0,
-    };
-  },
-
-  toJSON(message: DeleteSchemaResponse): unknown {
-    const obj: any = {};
-    if (message.deletedSchemas !== 0) {
-      obj.deletedSchemas = Math.round(message.deletedSchemas);
-    }
-    return obj;
-  },
-};
-
-export const ReloadStoreResponse = {
-  fromJSON(_: any): ReloadStoreResponse {
-    return {};
-  },
-
-  toJSON(_: ReloadStoreResponse): unknown {
-    const obj: any = {};
     return obj;
   },
 };
