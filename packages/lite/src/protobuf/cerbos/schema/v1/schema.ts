@@ -55,11 +55,6 @@ export function validationError_SourceToJSON(
   }
 }
 
-export interface Schema {
-  id: string;
-  definition: Uint8Array;
-}
-
 export const ValidationError = {
   fromJSON(object: any): ValidationError {
     return {
@@ -86,28 +81,6 @@ export const ValidationError = {
   },
 };
 
-export const Schema = {
-  fromJSON(object: any): Schema {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      definition: isSet(object.definition)
-        ? bytesFromBase64(object.definition)
-        : new Uint8Array(0),
-    };
-  },
-
-  toJSON(message: Schema): unknown {
-    const obj: any = {};
-    if (message.id !== "") {
-      obj.id = message.id;
-    }
-    if (message.definition.length !== 0) {
-      obj.definition = base64FromBytes(message.definition);
-    }
-    return obj;
-  },
-};
-
 declare const self: any | undefined;
 declare const window: any | undefined;
 declare const global: any | undefined;
@@ -126,31 +99,6 @@ const tsProtoGlobalThis: any = (() => {
   }
   throw "Unable to locate global object";
 })();
-
-function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
-  } else {
-    const bin = tsProtoGlobalThis.atob(b64);
-    const arr = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; ++i) {
-      arr[i] = bin.charCodeAt(i);
-    }
-    return arr;
-  }
-}
-
-function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
-  } else {
-    const bin: string[] = [];
-    arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
-    });
-    return tsProtoGlobalThis.btoa(bin.join(""));
-  }
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

@@ -5,6 +5,7 @@
  */
 
 export * from "./client";
+export { _policyFromProtobuf } from "./convert/fromProtobuf";
 export * from "./errors";
 export * from "./rpcs";
 export * from "./types/external";

@@ -16,11 +16,17 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
+      - name: Install Buf
+        uses: bufbuild/buf-setup-action@v1.25.0
+
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
 
       - name: Lint code
         run: npm run lint
+
+      - name: Generate protobuf code
+        run: npm run generate
 
       - name: Generate docs
         run: npm run docs
