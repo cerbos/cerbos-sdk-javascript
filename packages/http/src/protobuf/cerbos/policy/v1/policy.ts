@@ -646,7 +646,7 @@ export const Variables = {
 
   toJSON(message: Variables): unknown {
     const obj: any = {};
-    if (message.import?.length > 0) {
+    if (message.import?.length) {
       obj.import = message.import;
     }
     if (message.local) {
