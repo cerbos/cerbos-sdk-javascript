@@ -91,13 +91,15 @@ import type { GetSchemasRequest } from "../types/external/GetSchemasRequest";
 
 const encoder = new TextEncoder();
 
-export const addOrUpdatePoliciesRequestToProtobuf = ({
+export function addOrUpdatePoliciesRequestToProtobuf({
   policies,
-}: AddOrUpdatePoliciesRequest): AddOrUpdatePolicyRequest => ({
-  policies: policies.map(policyToProtobuf),
-});
+}: AddOrUpdatePoliciesRequest): AddOrUpdatePolicyRequest {
+  return {
+    policies: policies.map(policyToProtobuf),
+  };
+}
 
-const policyToProtobuf = (policy: Policy): PolicyProtobuf => {
+function policyToProtobuf(policy: Policy): PolicyProtobuf {
   const {
     apiVersion = "api.cerbos.dev/v1",
     description = "",
@@ -114,11 +116,11 @@ const policyToProtobuf = (policy: Policy): PolicyProtobuf => {
     policyType: policyTypeToProtobuf(policy),
     variables,
   };
-};
+}
 
-const policyTypeToProtobuf = (
+function policyTypeToProtobuf(
   policy: Policy,
-): Exclude<PolicyProtobuf["policyType"], undefined> => {
+): Exclude<PolicyProtobuf["policyType"], undefined> {
   if (policyIsDerivedRoles(policy)) {
     return {
       $case: "derivedRoles",
@@ -148,34 +150,40 @@ const policyTypeToProtobuf = (
   }
 
   throw new Error(`Unknown policy type: ${JSON.stringify(policy, null, 2)}`);
-};
+}
 
-const derivedRolesToProtobuf = ({
+function derivedRolesToProtobuf({
   derivedRoles: { name, definitions, variables },
-}: DerivedRoles): DerivedRolesProtobuf => ({
-  name,
-  definitions: definitions.map(derivedRoleDefinitionToProtobuf),
-  variables: variables && variablesToProtobuf(variables),
-});
+}: DerivedRoles): DerivedRolesProtobuf {
+  return {
+    name,
+    definitions: definitions.map(derivedRoleDefinitionToProtobuf),
+    variables: variables && variablesToProtobuf(variables),
+  };
+}
 
-const derivedRoleDefinitionToProtobuf = ({
+function derivedRoleDefinitionToProtobuf({
   name,
   parentRoles,
   condition,
-}: DerivedRoleDefinition): RoleDef => ({
-  name,
-  parentRoles,
-  condition: condition && conditionToProtobuf(condition),
-});
+}: DerivedRoleDefinition): RoleDef {
+  return {
+    name,
+    parentRoles,
+    condition: condition && conditionToProtobuf(condition),
+  };
+}
 
-const conditionToProtobuf = ({ match }: Condition): ConditionProtobuf => ({
-  condition: {
-    $case: "match",
-    match: matchToProtobuf(match),
-  },
-});
+function conditionToProtobuf({ match }: Condition): ConditionProtobuf {
+  return {
+    condition: {
+      $case: "match",
+      match: matchToProtobuf(match),
+    },
+  };
+}
 
-const matchToProtobuf = (match: Match): MatchProtobuf => {
+function matchToProtobuf(match: Match): MatchProtobuf {
   if (matchIsMatchAll(match)) {
     return {
       op: {
@@ -213,67 +221,82 @@ const matchToProtobuf = (match: Match): MatchProtobuf => {
   }
 
   throw new Error(`Unknown match type: ${JSON.stringify(match, null, 2)}`);
-};
+}
 
-const matchesToProtobuf = ({ of }: Matches): Match_ExprList => ({
-  of: of.map(matchToProtobuf),
-});
+function matchesToProtobuf({ of }: Matches): Match_ExprList {
+  return {
+    of: of.map(matchToProtobuf),
+  };
+}
 
-const variablesToProtobuf = ({
+function variablesToProtobuf({
   import: imports = [],
   local = {},
-}: Variables): VariablesProtobuf => ({
-  import: imports,
-  local,
-});
+}: Variables): VariablesProtobuf {
+  return {
+    import: imports,
+    local,
+  };
+}
 
-const exportVariablesToProtobuf = ({
+function exportVariablesToProtobuf({
   exportVariables: { name, definitions },
-}: ExportVariables): ExportVariablesProtobuf => ({
-  name,
-  definitions,
-});
+}: ExportVariables): ExportVariablesProtobuf {
+  return {
+    name,
+    definitions,
+  };
+}
 
-const principalPolicyToProtobuf = ({
+function principalPolicyToProtobuf({
   principalPolicy: { principal, version, rules, scope = "", variables },
-}: PrincipalPolicy): PrincipalPolicyProtobuf => ({
-  principal,
-  version,
-  rules: rules.map(principalRuleToProtobuf),
-  scope,
-  variables: variables && variablesToProtobuf(variables),
-});
+}: PrincipalPolicy): PrincipalPolicyProtobuf {
+  return {
+    principal,
+    version,
+    rules: rules.map(principalRuleToProtobuf),
+    scope,
+    variables: variables && variablesToProtobuf(variables),
+  };
+}
 
-const principalRuleToProtobuf = ({
+function principalRuleToProtobuf({
   resource,
   actions,
-}: PrincipalRule): PrincipalRuleProtobuf => ({
-  resource,
-  actions: actions.map(principalRuleActionToProtobuf),
-});
+}: PrincipalRule): PrincipalRuleProtobuf {
+  return {
+    resource,
+    actions: actions.map(principalRuleActionToProtobuf),
+  };
+}
 
-const principalRuleActionToProtobuf = ({
+function principalRuleActionToProtobuf({
   action,
   effect,
   condition,
   name = "",
   output,
-}: PrincipalRuleAction): PrincipalRule_Action => ({
-  action,
-  effect: effectToProtobuf(effect),
-  condition: condition && conditionToProtobuf(condition),
-  name,
-  output: output && outputToProtobuf(output),
-});
+}: PrincipalRuleAction): PrincipalRule_Action {
+  return {
+    action,
+    effect: effectToProtobuf(effect),
+    condition: condition && conditionToProtobuf(condition),
+    name,
+    output: output && outputToProtobuf(output),
+  };
+}
 
-const effectToProtobuf = (effect: Effect): EffectProtobuf =>
-  effect === Effect.ALLOW
+function effectToProtobuf(effect: Effect): EffectProtobuf {
+  return effect === Effect.ALLOW
     ? EffectProtobuf.EFFECT_ALLOW
     : EffectProtobuf.EFFECT_DENY;
+}
 
-const outputToProtobuf = ({ expr }: Output): OutputProtobuf => ({ expr });
+function outputToProtobuf({ expr }: Output): OutputProtobuf {
+  return { expr };
+}
 
-const resourcePolicyToProtobuf = ({
+function resourcePolicyToProtobuf({
   resourcePolicy: {
     resource,
     version,
@@ -283,17 +306,19 @@ const resourcePolicyToProtobuf = ({
     schemas,
     variables,
   },
-}: ResourcePolicy): ResourcePolicyProtobuf => ({
-  resource,
-  version,
-  importDerivedRoles,
-  rules: rules.map(resourceRuleToProtobuf),
-  scope,
-  schemas: schemas && policySchemasToProtobuf(schemas),
-  variables: variables && variablesToProtobuf(variables),
-});
+}: ResourcePolicy): ResourcePolicyProtobuf {
+  return {
+    resource,
+    version,
+    importDerivedRoles,
+    rules: rules.map(resourceRuleToProtobuf),
+    scope,
+    schemas: schemas && policySchemasToProtobuf(schemas),
+    variables: variables && variablesToProtobuf(variables),
+  };
+}
 
-const resourceRuleToProtobuf = ({
+function resourceRuleToProtobuf({
   actions,
   effect,
   derivedRoles = [],
@@ -301,46 +326,56 @@ const resourceRuleToProtobuf = ({
   condition,
   name = "",
   output,
-}: ResourceRule): ResourceRuleProtobuf => ({
-  actions,
-  effect: effectToProtobuf(effect),
-  derivedRoles,
-  roles,
-  condition: condition && conditionToProtobuf(condition),
-  name,
-  output: output && outputToProtobuf(output),
-});
+}: ResourceRule): ResourceRuleProtobuf {
+  return {
+    actions,
+    effect: effectToProtobuf(effect),
+    derivedRoles,
+    roles,
+    condition: condition && conditionToProtobuf(condition),
+    name,
+    output: output && outputToProtobuf(output),
+  };
+}
 
-const policySchemasToProtobuf = ({
+function policySchemasToProtobuf({
   principalSchema,
   resourceSchema,
-}: SchemaRefs): Schemas => ({
-  principalSchema: principalSchema && policySchemaToProtobuf(principalSchema),
-  resourceSchema: resourceSchema && policySchemaToProtobuf(resourceSchema),
-});
+}: SchemaRefs): Schemas {
+  return {
+    principalSchema: principalSchema && policySchemaToProtobuf(principalSchema),
+    resourceSchema: resourceSchema && policySchemaToProtobuf(resourceSchema),
+  };
+}
 
-const policySchemaToProtobuf = ({
+function policySchemaToProtobuf({
   ref,
   ignoreWhen,
-}: SchemaRef): Schemas_Schema => ({
-  ref,
-  ignoreWhen,
-});
+}: SchemaRef): Schemas_Schema {
+  return {
+    ref,
+    ignoreWhen,
+  };
+}
 
-export const addOrUpdateSchemasRequestToProtobuf = ({
+export function addOrUpdateSchemasRequestToProtobuf({
   schemas,
-}: AddOrUpdateSchemasRequest): AddOrUpdateSchemaRequest => ({
-  schemas: schemas.map(schemaToProtobuf),
-});
+}: AddOrUpdateSchemasRequest): AddOrUpdateSchemaRequest {
+  return {
+    schemas: schemas.map(schemaToProtobuf),
+  };
+}
 
-const schemaToProtobuf = ({ id, definition }: SchemaInput): Schema => ({
-  id,
-  definition: schemaDefinitionToProtobuf(definition),
-});
+function schemaToProtobuf({ id, definition }: SchemaInput): Schema {
+  return {
+    id,
+    definition: schemaDefinitionToProtobuf(definition),
+  };
+}
 
-const schemaDefinitionToProtobuf = (
+function schemaDefinitionToProtobuf(
   definition: SchemaDefinitionInput,
-): Uint8Array => {
+): Uint8Array {
   if (definition instanceof Uint8Array) {
     return definition;
   }
@@ -354,133 +389,161 @@ const schemaDefinitionToProtobuf = (
   }
 
   return encoder.encode(JSON.stringify(definition));
-};
+}
 
-export const checkResourcesRequestToProtobuf = ({
+export function checkResourcesRequestToProtobuf({
   principal,
   resources,
   auxData,
   includeMetadata = false,
   requestId = uuidv4(),
-}: CheckResourcesRequest): CheckResourcesRequestProtobuf => ({
-  principal: principalToProtobuf(principal),
-  resources: resources.map(resourceCheckToProtobuf),
-  auxData: auxData && auxDataToProtobuf(auxData),
-  includeMeta: includeMetadata,
-  requestId,
-});
+}: CheckResourcesRequest): CheckResourcesRequestProtobuf {
+  return {
+    principal: principalToProtobuf(principal),
+    resources: resources.map(resourceCheckToProtobuf),
+    auxData: auxData && auxDataToProtobuf(auxData),
+    includeMeta: includeMetadata,
+    requestId,
+  };
+}
 
-const principalToProtobuf = ({
+function principalToProtobuf({
   id,
   roles,
   attributes = {},
   policyVersion = "",
   scope = "",
-}: Principal): PrincipalProtobuf => ({
-  id,
-  roles,
-  attr: attributes,
-  policyVersion,
-  scope,
-});
+}: Principal): PrincipalProtobuf {
+  return {
+    id,
+    roles,
+    attr: attributes,
+    policyVersion,
+    scope,
+  };
+}
 
-const resourceCheckToProtobuf = ({
+function resourceCheckToProtobuf({
   resource,
   actions,
-}: ResourceCheck): CheckResourcesRequest_ResourceEntry => ({
-  resource: resourceToProtobuf(resource),
-  actions,
-});
+}: ResourceCheck): CheckResourcesRequest_ResourceEntry {
+  return {
+    resource: resourceToProtobuf(resource),
+    actions,
+  };
+}
 
-const resourceToProtobuf = ({
+function resourceToProtobuf({
   kind,
   id,
   attributes = {},
   policyVersion = "",
   scope = "",
-}: Resource): ResourceProtobuf => ({
-  kind,
-  id,
-  attr: attributes,
-  policyVersion,
-  scope,
-});
+}: Resource): ResourceProtobuf {
+  return {
+    kind,
+    id,
+    attr: attributes,
+    policyVersion,
+    scope,
+  };
+}
 
-const auxDataToProtobuf = ({ jwt }: AuxData): AuxDataProtobuf => ({
-  jwt: jwt && jwtToProtobuf(jwt),
-});
+function auxDataToProtobuf({ jwt }: AuxData): AuxDataProtobuf {
+  return {
+    jwt: jwt && jwtToProtobuf(jwt),
+  };
+}
 
-const jwtToProtobuf = ({ token, keySetId = "" }: JWT): AuxData_JWT => ({
-  token,
-  keySetId,
-});
+function jwtToProtobuf({ token, keySetId = "" }: JWT): AuxData_JWT {
+  return {
+    token,
+    keySetId,
+  };
+}
 
-export const deleteSchemasRequestToProtobuf = ({
+export function deleteSchemasRequestToProtobuf({
   ids,
-}: DeleteSchemasRequest): DeleteSchemaRequest => ({
-  id: ids,
-});
+}: DeleteSchemasRequest): DeleteSchemaRequest {
+  return {
+    id: ids,
+  };
+}
 
-export const disablePoliciesRequestToProtobuf = ({
+export function disablePoliciesRequestToProtobuf({
   ids,
-}: DisablePoliciesRequest): DisablePolicyRequest => ({
-  id: ids,
-});
+}: DisablePoliciesRequest): DisablePolicyRequest {
+  return {
+    id: ids,
+  };
+}
 
-export const enablePoliciesRequestToProtobuf = ({
+export function enablePoliciesRequestToProtobuf({
   ids,
-}: EnablePoliciesRequest): EnablePolicyRequest => ({
-  id: ids,
-});
+}: EnablePoliciesRequest): EnablePolicyRequest {
+  return {
+    id: ids,
+  };
+}
 
-export const getPoliciesRequestToProtobuf = ({
+export function getPoliciesRequestToProtobuf({
   ids,
-}: GetPoliciesRequest): GetPolicyRequest => ({
-  id: ids,
-});
+}: GetPoliciesRequest): GetPolicyRequest {
+  return {
+    id: ids,
+  };
+}
 
-export const getSchemasRequestToProtobuf = ({
+export function getSchemasRequestToProtobuf({
   ids,
-}: GetSchemasRequest): GetSchemaRequest => ({
-  id: ids,
-});
+}: GetSchemasRequest): GetSchemaRequest {
+  return {
+    id: ids,
+  };
+}
 
-export const listPoliciesRequestToProtobuf = ({
+export function listPoliciesRequestToProtobuf({
   includeDisabled = false,
   nameRegexp = "",
   scopeRegexp = "",
   versionRegexp = "",
-}: ListPoliciesRequest): ListPoliciesRequestProtobuf => ({
-  includeDisabled,
-  nameRegexp,
-  scopeRegexp,
-  versionRegexp,
-});
+}: ListPoliciesRequest): ListPoliciesRequestProtobuf {
+  return {
+    includeDisabled,
+    nameRegexp,
+    scopeRegexp,
+    versionRegexp,
+  };
+}
 
-export const planResourcesRequestToProtobuf = ({
+export function planResourcesRequestToProtobuf({
   principal,
   resource,
   action,
   auxData,
   includeMetadata = false,
   requestId = uuidv4(),
-}: PlanResourcesRequest): PlanResourcesRequestProtobuf => ({
-  principal: principalToProtobuf(principal),
-  resource: resourceQueryToProtobuf(resource),
-  action,
-  auxData: auxData && auxDataToProtobuf(auxData),
-  includeMeta: includeMetadata,
-  requestId,
-});
+}: PlanResourcesRequest): PlanResourcesRequestProtobuf {
+  return {
+    principal: principalToProtobuf(principal),
+    resource: resourceQueryToProtobuf(resource),
+    action,
+    auxData: auxData && auxDataToProtobuf(auxData),
+    includeMeta: includeMetadata,
+    requestId,
+  };
+}
 
-const resourceQueryToProtobuf = ({
+function resourceQueryToProtobuf({
   kind,
   attributes = {},
   policyVersion = "",
   scope = "",
-}: ResourceQuery): PlanResourcesInput_Resource => ({
-  kind,
-  attr: attributes,
-  policyVersion,
-  scope,
-});
+}: ResourceQuery): PlanResourcesInput_Resource {
+  return {
+    kind,
+    attr: attributes,
+    policyVersion,
+    scope,
+  };
+}

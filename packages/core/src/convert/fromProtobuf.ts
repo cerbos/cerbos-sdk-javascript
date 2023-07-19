@@ -88,22 +88,23 @@ import type { DeleteSchemasResponse } from "../types/external/DeleteSchemasRespo
 import type { GetSchemasResponse } from "../types/external/GetSchemasResponse";
 import type { OmitFromEach } from "../types/internal";
 
-export const checkResourcesResponseFromProtobuf = ({
+export function checkResourcesResponseFromProtobuf({
   requestId,
   results,
-}: CheckResourcesResponseProtobuf): CheckResourcesResponse =>
-  new CheckResourcesResponse({
+}: CheckResourcesResponseProtobuf): CheckResourcesResponse {
+  return new CheckResourcesResponse({
     requestId,
     results: results.map(checkResourcesResultFromProtobuf),
   });
+}
 
-const checkResourcesResultFromProtobuf = ({
+function checkResourcesResultFromProtobuf({
   resource,
   actions,
   validationErrors,
   meta,
   outputs,
-}: CheckResourcesResponse_ResultEntry): CheckResourcesResult => {
+}: CheckResourcesResponse_ResultEntry): CheckResourcesResult {
   if (!resource) {
     throw new Error("Missing resource on CheckResources result");
   }
@@ -115,34 +116,38 @@ const checkResourcesResultFromProtobuf = ({
     metadata: meta,
     outputs: outputs.map(outputResultFromProtobuf),
   });
-};
+}
 
-const actionsFromProtobuf = (
+function actionsFromProtobuf(
   actions: Record<string, EffectProtobuf>,
-): Record<string, Effect | undefined> =>
-  Object.fromEntries(
+): Record<string, Effect | undefined> {
+  return Object.fromEntries(
     Object.entries(actions).map(([action, effect]) => [
       action,
       effectFromProtobuf(effect),
     ]),
   );
+}
 
-const effectFromProtobuf = (effect: EffectProtobuf): Effect =>
-  effect === EffectProtobuf.EFFECT_ALLOW ? Effect.ALLOW : Effect.DENY;
+function effectFromProtobuf(effect: EffectProtobuf): Effect {
+  return effect === EffectProtobuf.EFFECT_ALLOW ? Effect.ALLOW : Effect.DENY;
+}
 
-const validationErrorFromProtobuf = ({
+function validationErrorFromProtobuf({
   path,
   message,
   source,
-}: ValidationErrorProtobuf): ValidationError => ({
-  path,
-  message,
-  source: validationErrorSourceFromProtobuf(source),
-});
+}: ValidationErrorProtobuf): ValidationError {
+  return {
+    path,
+    message,
+    source: validationErrorSourceFromProtobuf(source),
+  };
+}
 
-const validationErrorSourceFromProtobuf = (
+function validationErrorSourceFromProtobuf(
   source: ValidationError_Source,
-): ValidationErrorSource => {
+): ValidationErrorSource {
   switch (source) {
     case ValidationError_Source.SOURCE_PRINCIPAL:
       return ValidationErrorSource.PRINCIPAL;
@@ -157,73 +162,87 @@ const validationErrorSourceFromProtobuf = (
         })`,
       );
   }
-};
+}
 
-const outputResultFromProtobuf = ({ src, val }: OutputEntry): OutputResult => ({
-  source: src,
-  value: val as Value | undefined,
-});
+function outputResultFromProtobuf({ src, val }: OutputEntry): OutputResult {
+  return {
+    source: src,
+    value: val as Value | undefined,
+  };
+}
 
-export const deleteSchemasResponseFromProtobuf = ({
+export function deleteSchemasResponseFromProtobuf({
   deletedSchemas,
-}: DeleteSchemaResponse): DeleteSchemasResponse => ({
-  deletedSchemas,
-});
+}: DeleteSchemaResponse): DeleteSchemasResponse {
+  return {
+    deletedSchemas,
+  };
+}
 
-export const disablePoliciesResponseFromProtobuf = ({
+export function disablePoliciesResponseFromProtobuf({
   disabledPolicies,
-}: DisablePolicyResponse): DisablePoliciesResponse => ({
-  disabledPolicies,
-});
+}: DisablePolicyResponse): DisablePoliciesResponse {
+  return {
+    disabledPolicies,
+  };
+}
 
-export const enablePoliciesResponseFromProtobuf = ({
+export function enablePoliciesResponseFromProtobuf({
   enabledPolicies,
-}: EnablePolicyResponse): EnablePoliciesResponse => ({
-  enabledPolicies,
-});
+}: EnablePolicyResponse): EnablePoliciesResponse {
+  return {
+    enabledPolicies,
+  };
+}
 
-export const getPoliciesResponseFromProtobuf = ({
+export function getPoliciesResponseFromProtobuf({
   policies,
-}: GetPolicyResponse): GetPoliciesResponse => ({
-  policies: policies.map(_policyFromProtobuf),
-});
+}: GetPolicyResponse): GetPoliciesResponse {
+  return {
+    policies: policies.map(_policyFromProtobuf),
+  };
+}
 
 /** @internal */
-export const _policyFromProtobuf = ({
+export function _policyFromProtobuf({
   apiVersion,
   description,
   disabled,
   metadata,
   variables,
   policyType,
-}: PolicyProtobuf): Policy => ({
-  apiVersion,
-  description,
-  disabled,
-  metadata: metadata && policyMetadataFromProtobuf(metadata),
-  variables,
-  ...policyTypeFromProtobuf(policyType),
-});
+}: PolicyProtobuf): Policy {
+  return {
+    apiVersion,
+    description,
+    disabled,
+    metadata: metadata && policyMetadataFromProtobuf(metadata),
+    variables,
+    ...policyTypeFromProtobuf(policyType),
+  };
+}
 
-const policyMetadataFromProtobuf = ({
+function policyMetadataFromProtobuf({
   annotations,
   hash,
   sourceFile,
   storeIdentifer,
   storeIdentifier,
-}: Metadata): PolicyMetadata => ({
-  annotations,
-  hash,
-  sourceFile,
-  storeIdentifer: storeIdentifier || storeIdentifer,
-  storeIdentifier: storeIdentifier || storeIdentifer,
-});
+}: Metadata): PolicyMetadata {
+  return {
+    annotations,
+    hash,
+    sourceFile,
+    storeIdentifer: storeIdentifier || storeIdentifer,
+    storeIdentifier: storeIdentifier || storeIdentifer,
+  };
+}
 
 type OmitPolicyBase<T extends Policy> = OmitFromEach<T, keyof PolicyBase>;
 
-const policyTypeFromProtobuf = (
+function policyTypeFromProtobuf(
   policyType: PolicyProtobuf["policyType"],
-): OmitPolicyBase<Policy> => {
+): OmitPolicyBase<Policy> {
   if (!policyType) {
     throw new Error("Unknown policy type: undefined");
   }
@@ -246,31 +265,35 @@ const policyTypeFromProtobuf = (
         `Unknown policy type: ${JSON.stringify(policyType, null, 2)}`,
       );
   }
-};
+}
 
-const derivedRolesFromProtobuf = ({
+function derivedRolesFromProtobuf({
   name,
   definitions,
   variables,
-}: DerivedRolesProtobuf): OmitPolicyBase<DerivedRoles> => ({
-  derivedRoles: {
-    name,
-    definitions: definitions.map(derivedRoleDefinitionFromProtobuf),
-    variables: variables && variablesFromProtobuf(variables),
-  },
-});
+}: DerivedRolesProtobuf): OmitPolicyBase<DerivedRoles> {
+  return {
+    derivedRoles: {
+      name,
+      definitions: definitions.map(derivedRoleDefinitionFromProtobuf),
+      variables: variables && variablesFromProtobuf(variables),
+    },
+  };
+}
 
-const derivedRoleDefinitionFromProtobuf = ({
+function derivedRoleDefinitionFromProtobuf({
   name,
   parentRoles,
   condition,
-}: RoleDef): DerivedRoleDefinition => ({
-  name,
-  parentRoles,
-  condition: condition && conditionFromProtobuf(condition),
-});
+}: RoleDef): DerivedRoleDefinition {
+  return {
+    name,
+    parentRoles,
+    condition: condition && conditionFromProtobuf(condition),
+  };
+}
 
-const conditionFromProtobuf = ({ condition }: ConditionProtobuf): Condition => {
+function conditionFromProtobuf({ condition }: ConditionProtobuf): Condition {
   switch (condition?.$case) {
     case "match":
       return {
@@ -282,9 +305,9 @@ const conditionFromProtobuf = ({ condition }: ConditionProtobuf): Condition => {
         `Unknown condition type: ${JSON.stringify(condition, null, 2)}`,
       );
   }
-};
+}
 
-const matchFromProtobuf = ({ op }: MatchProtobuf): Match => {
+function matchFromProtobuf({ op }: MatchProtobuf): Match {
   switch (op?.$case) {
     case "all":
       return {
@@ -309,71 +332,85 @@ const matchFromProtobuf = ({ op }: MatchProtobuf): Match => {
     default:
       throw new Error(`Unknown match type: ${JSON.stringify(op, null, 2)}`);
   }
-};
+}
 
-const matchesFromProtobuf = ({ of }: Match_ExprList): Matches => ({
-  of: of.map(matchFromProtobuf),
-});
+function matchesFromProtobuf({ of }: Match_ExprList): Matches {
+  return {
+    of: of.map(matchFromProtobuf),
+  };
+}
 
-const variablesFromProtobuf = ({
+function variablesFromProtobuf({
   import: imports,
   local,
-}: VariablesProtobuf): Variables => ({
-  import: imports,
-  local,
-});
+}: VariablesProtobuf): Variables {
+  return {
+    import: imports,
+    local,
+  };
+}
 
-const exportVariablesFromProtobuf = ({
+function exportVariablesFromProtobuf({
   name,
   definitions,
-}: ExportVariablesProtobuf): OmitPolicyBase<ExportVariables> => ({
-  exportVariables: {
-    name,
-    definitions,
-  },
-});
+}: ExportVariablesProtobuf): OmitPolicyBase<ExportVariables> {
+  return {
+    exportVariables: {
+      name,
+      definitions,
+    },
+  };
+}
 
-const principalPolicyFromProtobuf = ({
+function principalPolicyFromProtobuf({
   principal,
   version,
   rules,
   scope,
   variables,
-}: PrincipalPolicyProtobuf): OmitPolicyBase<PrincipalPolicy> => ({
-  principalPolicy: {
-    principal,
-    version,
-    rules: rules.map(principalRuleFromProtobuf),
-    scope,
-    variables: variables && variablesFromProtobuf(variables),
-  },
-});
+}: PrincipalPolicyProtobuf): OmitPolicyBase<PrincipalPolicy> {
+  return {
+    principalPolicy: {
+      principal,
+      version,
+      rules: rules.map(principalRuleFromProtobuf),
+      scope,
+      variables: variables && variablesFromProtobuf(variables),
+    },
+  };
+}
 
-const principalRuleFromProtobuf = ({
+function principalRuleFromProtobuf({
   resource,
   actions,
-}: PrincipalRuleProtobuf): PrincipalRule => ({
-  resource,
-  actions: actions.map(principalRuleActionFromProtobuf),
-});
+}: PrincipalRuleProtobuf): PrincipalRule {
+  return {
+    resource,
+    actions: actions.map(principalRuleActionFromProtobuf),
+  };
+}
 
-const principalRuleActionFromProtobuf = ({
+function principalRuleActionFromProtobuf({
   action,
   effect,
   condition,
   name,
   output,
-}: PrincipalRule_Action): PrincipalRuleAction => ({
-  action,
-  effect: effectFromProtobuf(effect),
-  condition: condition && conditionFromProtobuf(condition),
-  name,
-  output: output && outputFromProtobuf(output),
-});
+}: PrincipalRule_Action): PrincipalRuleAction {
+  return {
+    action,
+    effect: effectFromProtobuf(effect),
+    condition: condition && conditionFromProtobuf(condition),
+    name,
+    output: output && outputFromProtobuf(output),
+  };
+}
 
-const outputFromProtobuf = ({ expr }: OutputProtobuf): Output => ({ expr });
+function outputFromProtobuf({ expr }: OutputProtobuf): Output {
+  return { expr };
+}
 
-const resourcePolicyFromProtobuf = ({
+function resourcePolicyFromProtobuf({
   resource,
   version,
   importDerivedRoles,
@@ -381,19 +418,21 @@ const resourcePolicyFromProtobuf = ({
   schemas,
   scope,
   variables,
-}: ResourcePolicyProtobuf): OmitPolicyBase<ResourcePolicy> => ({
-  resourcePolicy: {
-    resource,
-    version,
-    importDerivedRoles,
-    rules: rules.map(resourceRuleFromProtobuf),
-    schemas: schemas && schemaRefsFromProtobuf(schemas),
-    scope,
-    variables: variables && variablesFromProtobuf(variables),
-  },
-});
+}: ResourcePolicyProtobuf): OmitPolicyBase<ResourcePolicy> {
+  return {
+    resourcePolicy: {
+      resource,
+      version,
+      importDerivedRoles,
+      rules: rules.map(resourceRuleFromProtobuf),
+      schemas: schemas && schemaRefsFromProtobuf(schemas),
+      scope,
+      variables: variables && variablesFromProtobuf(variables),
+    },
+  };
+}
 
-const resourceRuleFromProtobuf = ({
+function resourceRuleFromProtobuf({
   actions,
   effect,
   derivedRoles,
@@ -401,63 +440,74 @@ const resourceRuleFromProtobuf = ({
   condition,
   name,
   output,
-}: ResourceRuleProtobuf): ResourceRule => ({
-  actions,
-  effect: effectFromProtobuf(effect),
-  derivedRoles,
-  roles,
-  condition: condition && conditionFromProtobuf(condition),
-  name,
-  output: output && outputFromProtobuf(output),
-});
+}: ResourceRuleProtobuf): ResourceRule {
+  return {
+    actions,
+    effect: effectFromProtobuf(effect),
+    derivedRoles,
+    roles,
+    condition: condition && conditionFromProtobuf(condition),
+    name,
+    output: output && outputFromProtobuf(output),
+  };
+}
 
-const schemaRefsFromProtobuf = ({
+function schemaRefsFromProtobuf({
   principalSchema,
   resourceSchema,
-}: Schemas): SchemaRefs => ({
-  principalSchema: principalSchema && schemaRefFromProtobuf(principalSchema),
-  resourceSchema: resourceSchema && schemaRefFromProtobuf(resourceSchema),
-});
+}: Schemas): SchemaRefs {
+  return {
+    principalSchema: principalSchema && schemaRefFromProtobuf(principalSchema),
+    resourceSchema: resourceSchema && schemaRefFromProtobuf(resourceSchema),
+  };
+}
 
-const schemaRefFromProtobuf = ({
-  ref,
-  ignoreWhen,
-}: Schemas_Schema): SchemaRef => ({
-  ref,
-  ignoreWhen: ignoreWhen && {
-    actions: ignoreWhen.actions,
-  },
-});
+function schemaRefFromProtobuf({ ref, ignoreWhen }: Schemas_Schema): SchemaRef {
+  return {
+    ref,
+    ignoreWhen: ignoreWhen && {
+      actions: ignoreWhen.actions,
+    },
+  };
+}
 
-export const getSchemasResponseFromProtobuf = ({
+export function getSchemasResponseFromProtobuf({
   schemas,
-}: GetSchemaResponse): GetSchemasResponse => ({
-  schemas: schemas.map(schemaFromProtobuf),
-});
+}: GetSchemaResponse): GetSchemasResponse {
+  return {
+    schemas: schemas.map(schemaFromProtobuf),
+  };
+}
 
-const schemaFromProtobuf = ({ id, definition }: SchemaProtobuf): Schema => ({
-  id,
-  definition: new SchemaDefinition(definition),
-});
+function schemaFromProtobuf({ id, definition }: SchemaProtobuf): Schema {
+  return {
+    id,
+    definition: new SchemaDefinition(definition),
+  };
+}
 
-export const listPoliciesResponseFromProtobuf = ({
+export function listPoliciesResponseFromProtobuf({
   policyIds,
-}: ListPoliciesResponseProtobuf): ListPoliciesResponse => ({
-  ids: policyIds,
-});
+}: ListPoliciesResponseProtobuf): ListPoliciesResponse {
+  return {
+    ids: policyIds,
+  };
+}
 
-export const listSchemasResponseFromProtobuf = ({
+export function listSchemasResponseFromProtobuf({
   schemaIds,
-}: ListSchemasResponseProtobuf): ListSchemasResponse => ({
-  ids: schemaIds,
-});
+}: ListSchemasResponseProtobuf): ListSchemasResponse {
+  return {
+    ids: schemaIds,
+  };
+}
 
-export const planResourcesResponseFromProtobuf = ({
+export function planResourcesResponseFromProtobuf({
   requestId,
   filter,
   validationErrors,
   meta,
-}: PlanResourcesResponseProtobuf): PlanResourcesResponse => {
+}: PlanResourcesResponseProtobuf): PlanResourcesResponse {
   if (!filter) {
     throw new Error("Missing filter on PlanResources response");
   }
@@ -485,9 +535,9 @@ export const planResourcesResponseFromProtobuf = ({
     validationErrors: validationErrors.map(validationErrorFromProtobuf),
     metadata,
   };
-};
+}
 
-const planKindFromProtobuf = (kind: PlanResourcesFilter_Kind): PlanKind => {
+function planKindFromProtobuf(kind: PlanResourcesFilter_Kind): PlanKind {
   switch (kind) {
     case PlanResourcesFilter_Kind.KIND_ALWAYS_ALLOWED:
       return PlanKind.ALWAYS_ALLOWED;
@@ -505,11 +555,11 @@ const planKindFromProtobuf = (kind: PlanResourcesFilter_Kind): PlanKind => {
         })`,
       );
   }
-};
+}
 
-const planOperandFromProtobuf = ({
+function planOperandFromProtobuf({
   node,
-}: PlanResourcesFilter_Expression_Operand): PlanExpressionOperand => {
+}: PlanResourcesFilter_Expression_Operand): PlanExpressionOperand {
   if (!node) {
     throw new Error("Missing node on PlanResources expression operand");
   }
@@ -527,12 +577,14 @@ const planOperandFromProtobuf = ({
     case "variable":
       return new PlanExpressionVariable(node.variable);
   }
-};
+}
 
-const planResourcesMetadataFromProtobuf = ({
+function planResourcesMetadataFromProtobuf({
   filterDebug,
   matchedScope,
-}: PlanResourcesResponse_Meta): PlanResourcesMetadata => ({
-  conditionString: filterDebug,
-  matchedScope,
-});
+}: PlanResourcesResponse_Meta): PlanResourcesMetadata {
+  return {
+    conditionString: filterDebug,
+    matchedScope,
+  };
+}

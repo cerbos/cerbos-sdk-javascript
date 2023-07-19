@@ -87,7 +87,7 @@ export class NotOK extends Error {
   }
 }
 
-const code = (error: unknown): Status => {
+function code(error: unknown): Status {
   if (
     has(error, "code") &&
     typeof error.code === "number" &&
@@ -97,21 +97,22 @@ const code = (error: unknown): Status => {
   }
 
   throw new Error("Error does not include expected code");
-};
+}
 
-const details = (error: unknown): string => {
+function details(error: unknown): string {
   if (has(error, "message") && typeof error.message === "string") {
     return error.message;
   }
 
   throw new Error("Error does not include expected details");
-};
+}
 
-const has = <K extends string>(
+function has<K extends string>(
   object: unknown,
   property: K,
-): object is Record<K, unknown> =>
-  !!object && Object.prototype.hasOwnProperty.call(object, property);
+): object is Record<K, unknown> {
+  return !!object && Object.prototype.hasOwnProperty.call(object, property);
+}
 
 /**
  * Error thrown when input fails schema validation, if the {@link @cerbos/core#Client} is configured with {@link @cerbos/core#Options.onValidationError | onValidationError} set to `"throw"`.

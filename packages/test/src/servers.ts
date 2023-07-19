@@ -8,8 +8,9 @@ const execFile = promisify(execFileCallback);
 
 export const cerbosVersion = process.env["CERBOS_VERSION"] ?? "0.16.0";
 
-export const cerbosVersionIsAtLeast = (version: string): boolean =>
-  semverGte(cerbosVersion, `${version}-prerelease`);
+export function cerbosVersionIsAtLeast(version: string): boolean {
+  return semverGte(cerbosVersion, `${version}-prerelease`);
+}
 
 export interface Ports {
   grpc: {
@@ -35,7 +36,7 @@ interface DockerComposeContainer {
     | null;
 }
 
-export const ports = async (): Promise<Ports> => {
+export async function ports(): Promise<Ports> {
   const { stdout } = await execFile("docker", [
     "compose",
     "--file",
@@ -60,13 +61,13 @@ export const ports = async (): Promise<Ports> => {
       mutable: port(output, "mutable", 3592),
     },
   };
-};
+}
 
-const port = (
+function port(
   containers: DockerComposeContainer[],
   service: string,
   targetPort: number,
-): number => {
+): number {
   const container = containers.find(
     (container) => container.Service === service,
   );
@@ -86,4 +87,4 @@ const port = (
   }
 
   return publisher.PublishedPort;
-};
+}

@@ -2,12 +2,23 @@
 
 [Home](./index.md) &gt; [@cerbos/core](./core.md) &gt; [matchIsMatchAny](./core.matchismatchany.md)
 
-## matchIsMatchAny variable
+## matchIsMatchAny() function
 
 Type guard to check if a [Match](./core.match.md) is a [MatchAny](./core.matchany.md)<!-- -->.
 
 **Signature:**
 
 ```typescript
-matchIsMatchAny: (match: Match) => match is MatchAny
+export declare function matchIsMatchAny(match: Match): match is MatchAny;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  match | [Match](./core.match.md) |  |
+
+**Returns:**
+
+match is [MatchAny](./core.matchany.md)
+

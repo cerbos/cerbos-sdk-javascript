@@ -19,32 +19,39 @@ export type Policy =
  *
  * @public
  */
-export const policyIsDerivedRoles = (policy: Policy): policy is DerivedRoles =>
-  "derivedRoles" in policy;
+export function policyIsDerivedRoles(policy: Policy): policy is DerivedRoles {
+  return "derivedRoles" in policy;
+}
 
 /**
  * Type guard to check if a {@link Policy} is a set of {@link ExportVariables}.
  *
  * @public
  */
-export const policyIsExportVariables = (
+export function policyIsExportVariables(
   policy: Policy,
-): policy is ExportVariables => "exportVariables" in policy;
+): policy is ExportVariables {
+  return "exportVariables" in policy;
+}
 
 /**
  * Type guard to check if a {@link Policy} is a {@link PrincipalPolicy}.
  *
  * @public
  */
-export const policyIsPrincipalPolicy = (
+export function policyIsPrincipalPolicy(
   policy: Policy,
-): policy is PrincipalPolicy => "principalPolicy" in policy;
+): policy is PrincipalPolicy {
+  return "principalPolicy" in policy;
+}
 
 /**
  * Type guard to check if a {@link Policy} is a {@link ResourcePolicy}.
  *
  * @public
  */
-export const policyIsResourcePolicy = (
+export function policyIsResourcePolicy(
   policy: Policy,
-): policy is ResourcePolicy => "resourcePolicy" in policy;
+): policy is ResourcePolicy {
+  return "resourcePolicy" in policy;
+}

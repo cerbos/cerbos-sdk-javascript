@@ -44,10 +44,12 @@ import {
   ports as serverPorts,
 } from "./servers";
 
-const readPEM = (filename: string): string =>
-  readFileSync(resolve(__dirname, "../servers/tmp/certificates", filename), {
-    encoding: "utf-8",
-  });
+function readPEM(filename: string): string {
+  return readFileSync(
+    resolve(__dirname, "../servers/tmp/certificates", filename),
+    { encoding: "utf-8" },
+  );
+}
 
 describe("Client", () => {
   let ports: Ports;

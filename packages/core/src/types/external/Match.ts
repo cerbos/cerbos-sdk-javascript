@@ -15,29 +15,33 @@ export type Match = MatchAll | MatchAny | MatchNone | MatchExpr;
  *
  * @public
  */
-export const matchIsMatchAll = (match: Match): match is MatchAll =>
-  "all" in match;
+export function matchIsMatchAll(match: Match): match is MatchAll {
+  return "all" in match;
+}
 
 /**
  * Type guard to check if a {@link Match} is a {@link MatchAny}.
  *
  * @public
  */
-export const matchIsMatchAny = (match: Match): match is MatchAny =>
-  "any" in match;
+export function matchIsMatchAny(match: Match): match is MatchAny {
+  return "any" in match;
+}
 
 /**
  * Type guard to check if a {@link Match} is a {@link MatchNone}.
  *
  * @public
  */
-export const matchIsMatchNone = (match: Match): match is MatchNone =>
-  "none" in match;
+export function matchIsMatchNone(match: Match): match is MatchNone {
+  return "none" in match;
+}
 
 /**
  * Type guard to check if a {@link Match} is a {@link MatchExpr}.
  *
  * @public
  */
-export const matchIsMatchExpr = (match: Match): match is MatchExpr =>
-  "expr" in match;
+export function matchIsMatchExpr(match: Match): match is MatchExpr {
+  return "expr" in match;
+}
