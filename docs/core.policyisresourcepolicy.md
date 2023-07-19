@@ -2,12 +2,23 @@
 
 [Home](./index.md) &gt; [@cerbos/core](./core.md) &gt; [policyIsResourcePolicy](./core.policyisresourcepolicy.md)
 
-## policyIsResourcePolicy variable
+## policyIsResourcePolicy() function
 
 Type guard to check if a [Policy](./core.policy.md) is a [ResourcePolicy](./core.resourcepolicy.md)<!-- -->.
 
 **Signature:**
 
 ```typescript
-policyIsResourcePolicy: (policy: Policy) => policy is ResourcePolicy
+export declare function policyIsResourcePolicy(policy: Policy): policy is ResourcePolicy;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  policy | [Policy](./core.policy.md) |  |
+
+**Returns:**
+
+policy is [ResourcePolicy](./core.resourcepolicy.md)
+

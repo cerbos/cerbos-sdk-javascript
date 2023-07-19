@@ -2,12 +2,23 @@
 
 [Home](./index.md) &gt; [@cerbos/core](./core.md) &gt; [policyIsExportVariables](./core.policyisexportvariables.md)
 
-## policyIsExportVariables variable
+## policyIsExportVariables() function
 
 Type guard to check if a [Policy](./core.policy.md) is a set of [ExportVariables](./core.exportvariables.md)<!-- -->.
 
 **Signature:**
 
 ```typescript
-policyIsExportVariables: (policy: Policy) => policy is ExportVariables
+export declare function policyIsExportVariables(policy: Policy): policy is ExportVariables;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  policy | [Policy](./core.policy.md) |  |
+
+**Returns:**
+
+policy is [ExportVariables](./core.exportvariables.md)
+

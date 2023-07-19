@@ -28,6 +28,9 @@ rules:
     - error
     - always
   curly: error
+  func-style:
+    - error
+    - declaration
   import/no-duplicates: error
   import/no-extraneous-dependencies:
     - error

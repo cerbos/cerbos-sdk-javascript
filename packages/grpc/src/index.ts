@@ -13,7 +13,6 @@ import type {
   _Request,
   _Response,
   _Service,
-  _Transport,
 } from "@cerbos/core";
 import { Client, NotOK, Status } from "@cerbos/core";
 import type { CallOptions, MethodDefinition } from "@grpc/grpc-js";
@@ -100,12 +99,7 @@ export class GRPC extends Client {
       "grpc.primary_user_agent": `cerbos-sdk-javascript-grpc/${version}`,
     });
 
-    const transport: _Transport = async (
-      service,
-      rpc,
-      request,
-      adminCredentials,
-    ) => {
+    super(async (service, rpc, request, adminCredentials) => {
       const { path, requestSerialize, responseDeserialize } = services[service][
         rpc
       ] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
@@ -139,9 +133,7 @@ export class GRPC extends Client {
           },
         );
       });
-    };
-
-    super(transport, options);
+    }, options);
 
     this.client = client;
   }
@@ -175,10 +167,10 @@ const services: Services = {
   cerbos: cerbosService,
 };
 
-const channelCredentials = ({
+function channelCredentials({
   playgroundInstance,
   tls,
-}: Options): ChannelCredentials => {
+}: Options): ChannelCredentials {
   if (!tls) {
     if (playgroundInstance) {
       throw new Error(
@@ -204,13 +196,13 @@ const channelCredentials = ({
   }
 
   return channelCredentials;
-};
+}
 
-const adminCallCredentials = ({
+function adminCallCredentials({
   username,
   password,
-}: AdminCredentials): CallCredentials =>
-  CallCredentials.createFromMetadataGenerator((_, callback) => {
+}: AdminCredentials): CallCredentials {
+  return CallCredentials.createFromMetadataGenerator((_, callback) => {
     const metadata = new Metadata();
     metadata.set(
       "authorization",
@@ -218,12 +210,14 @@ const adminCallCredentials = ({
     );
     callback(null, metadata);
   });
+}
 
-const playgroundCallCredentials = (
+function playgroundCallCredentials(
   playgroundInstance: string,
-): CallCredentials =>
-  CallCredentials.createFromMetadataGenerator((_, callback) => {
+): CallCredentials {
+  return CallCredentials.createFromMetadataGenerator((_, callback) => {
     const metadata = new Metadata();
     metadata.set("playground-instance", playgroundInstance);
     callback(null, metadata);
   });
+}

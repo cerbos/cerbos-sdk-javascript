@@ -34,6 +34,19 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [Status](./core.status.md) | Status codes returned by the Cerbos policy decision point server. |
 |  [ValidationErrorSource](./core.validationerrorsource.md) | Sources of invalid attributes. |
 
+## Functions
+
+|  Function | Description |
+|  --- | --- |
+|  [matchIsMatchAll(match)](./core.matchismatchall.md) | Type guard to check if a [Match](./core.match.md) is a [MatchAll](./core.matchall.md)<!-- -->. |
+|  [matchIsMatchAny(match)](./core.matchismatchany.md) | Type guard to check if a [Match](./core.match.md) is a [MatchAny](./core.matchany.md)<!-- -->. |
+|  [matchIsMatchExpr(match)](./core.matchismatchexpr.md) | Type guard to check if a [Match](./core.match.md) is a [MatchExpr](./core.matchexpr.md)<!-- -->. |
+|  [matchIsMatchNone(match)](./core.matchismatchnone.md) | Type guard to check if a [Match](./core.match.md) is a [MatchNone](./core.matchnone.md)<!-- -->. |
+|  [policyIsDerivedRoles(policy)](./core.policyisderivedroles.md) | Type guard to check if a [Policy](./core.policy.md) is a set of [DerivedRoles](./core.derivedroles.md)<!-- -->. |
+|  [policyIsExportVariables(policy)](./core.policyisexportvariables.md) | Type guard to check if a [Policy](./core.policy.md) is a set of [ExportVariables](./core.exportvariables.md)<!-- -->. |
+|  [policyIsPrincipalPolicy(policy)](./core.policyisprincipalpolicy.md) | Type guard to check if a [Policy](./core.policy.md) is a [PrincipalPolicy](./core.principalpolicy.md)<!-- -->. |
+|  [policyIsResourcePolicy(policy)](./core.policyisresourcepolicy.md) | Type guard to check if a [Policy](./core.policy.md) is a [ResourcePolicy](./core.resourcepolicy.md)<!-- -->. |
+
 ## Interfaces
 
 |  Interface | Description |
@@ -99,19 +112,6 @@ Common types used by the [gRPC](./grpc.md) and [HTTP](./http.md) client librarie
 |  [ServerInfo](./core.serverinfo.md) | Information about the Cerbos policy decision point (PDP) server. |
 |  [ValidationError](./core.validationerror.md) | An error that occurred while validating the principal or resource attributes against a schema. |
 |  [Variables](./core.variables.md) | [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables.html) defined for use in policy conditions. |
-
-## Variables
-
-|  Variable | Description |
-|  --- | --- |
-|  [matchIsMatchAll](./core.matchismatchall.md) | Type guard to check if a [Match](./core.match.md) is a [MatchAll](./core.matchall.md)<!-- -->. |
-|  [matchIsMatchAny](./core.matchismatchany.md) | Type guard to check if a [Match](./core.match.md) is a [MatchAny](./core.matchany.md)<!-- -->. |
-|  [matchIsMatchExpr](./core.matchismatchexpr.md) | Type guard to check if a [Match](./core.match.md) is a [MatchExpr](./core.matchexpr.md)<!-- -->. |
-|  [matchIsMatchNone](./core.matchismatchnone.md) | Type guard to check if a [Match](./core.match.md) is a [MatchNone](./core.matchnone.md)<!-- -->. |
-|  [policyIsDerivedRoles](./core.policyisderivedroles.md) | Type guard to check if a [Policy](./core.policy.md) is a set of [DerivedRoles](./core.derivedroles.md)<!-- -->. |
-|  [policyIsExportVariables](./core.policyisexportvariables.md) | Type guard to check if a [Policy](./core.policy.md) is a set of [ExportVariables](./core.exportvariables.md)<!-- -->. |
-|  [policyIsPrincipalPolicy](./core.policyisprincipalpolicy.md) | Type guard to check if a [Policy](./core.policy.md) is a [PrincipalPolicy](./core.principalpolicy.md)<!-- -->. |
-|  [policyIsResourcePolicy](./core.policyisresourcepolicy.md) | Type guard to check if a [Policy](./core.policy.md) is a [ResourcePolicy](./core.resourcepolicy.md)<!-- -->. |
 
 ## Type Aliases
 

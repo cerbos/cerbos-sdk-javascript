@@ -11,7 +11,6 @@ import type {
   _Request,
   _Response,
   _Service,
-  _Transport,
 } from "@cerbos/core";
 import { Client, NotOK } from "@cerbos/core";
 import { btoa } from "abab";
@@ -108,12 +107,7 @@ export class HTTP extends Client {
    * ```
    */
   public constructor(url: string, options: Options = {}) {
-    const transport: _Transport = async (
-      service,
-      rpc,
-      request,
-      adminCredentials,
-    ) => {
+    super(async (service, rpc, request, adminCredentials) => {
       const { method, path, requestType, responseType, serializeRequest } =
         services[service][rpc] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
 
@@ -136,9 +130,7 @@ export class HTTP extends Client {
       }
 
       return responseType.fromJSON(await response.json());
-    };
-
-    super(transport, options);
+    }, options);
   }
 }
 
@@ -254,10 +246,10 @@ const services: Services = {
   },
 };
 
-const headers = (
+function headers(
   { headers: optionalHeaders, playgroundInstance }: Options,
   adminCredentials: AdminCredentials | undefined,
-): Headers => {
+): Headers {
   const headers = new Headers(
     typeof optionalHeaders === "function" ? optionalHeaders() : optionalHeaders,
   );
@@ -282,4 +274,4 @@ const headers = (
   }
 
   return headers;
-};
+}

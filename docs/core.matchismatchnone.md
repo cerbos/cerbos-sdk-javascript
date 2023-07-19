@@ -2,12 +2,23 @@
 
 [Home](./index.md) &gt; [@cerbos/core](./core.md) &gt; [matchIsMatchNone](./core.matchismatchnone.md)
 
-## matchIsMatchNone variable
+## matchIsMatchNone() function
 
 Type guard to check if a [Match](./core.match.md) is a [MatchNone](./core.matchnone.md)<!-- -->.
 
 **Signature:**
 
 ```typescript
-matchIsMatchNone: (match: Match) => match is MatchNone
+export declare function matchIsMatchNone(match: Match): match is MatchNone;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  match | [Match](./core.match.md) |  |
+
+**Returns:**
+
+match is [MatchNone](./core.matchnone.md)
+

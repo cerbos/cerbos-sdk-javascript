@@ -5,7 +5,7 @@ import type {
   ReadableSpan,
 } from "@opentelemetry/sdk-trace-base";
 
-export const buildResultsForResources = ({
+export function buildResultsForResources({
   id,
   policyVersions,
   scopes,
@@ -13,19 +13,20 @@ export const buildResultsForResources = ({
   id: string;
   policyVersions: string[];
   scopes: string[];
-}): CheckResourcesResult[] =>
-  ["document", "image"].flatMap((kind) =>
+}): CheckResourcesResult[] {
+  return ["document", "image"].flatMap((kind) =>
     policyVersions.flatMap((policyVersion) =>
       scopes.map((scope) =>
         buildResult({ resource: { kind, id, policyVersion, scope } }),
       ),
     ),
   );
+}
 
-export const buildResult = (
+export function buildResult(
   result: Partial<ConstructorParameters<typeof CheckResourcesResult>[0]>,
-): CheckResourcesResult =>
-  new CheckResourcesResult({
+): CheckResourcesResult {
+  return new CheckResourcesResult({
     resource: {
       kind: "document",
       id: "1",
@@ -38,19 +39,21 @@ export const buildResult = (
     outputs: [],
     ...result,
   });
+}
 
-export const shuffle = <T>(values: T[]): T[] =>
-  values
+export function shuffle<T>(values: T[]): T[] {
+  return values
     .map((value) => ({ value, order: Math.random() }))
     .sort((a, b) => a.order - b.order)
     .map(({ value }) => value);
+}
 
 type Result<T> = { value: T } | { error: unknown };
 
-export const captureSpan = async <T>(
+export async function captureSpan<T>(
   spanExporter: InMemorySpanExporter,
   fn: () => Promise<T>,
-): Promise<[Result<T>, ReadableSpan]> => {
+): Promise<[Result<T>, ReadableSpan]> {
   const parentSpan = trace
     .getTracer("@cerbos/test")
     .startSpan("cerbos.test.parent");
@@ -77,4 +80,4 @@ export const captureSpan = async <T>(
   }
 
   return [result, childSpan];
-};
+}

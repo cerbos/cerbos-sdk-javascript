@@ -1,4 +1,3 @@
-import type { _Transport } from "@cerbos/core";
 import { Client } from "@cerbos/core";
 
 import { Server } from "./server";
@@ -71,10 +70,11 @@ export class Lite extends Client {
    * ```
    */
   public constructor(source: Source, options: Options = {}) {
-    const transport: _Transport = async (service, rpc, request) =>
-      await (await this.server).perform(service, rpc, request);
-
-    super(transport, {});
+    super(
+      async (service, rpc, request) =>
+        await (await this.server).perform(service, rpc, request),
+      {},
+    );
 
     this.server = server(
       instantiate(source, options),
@@ -83,23 +83,23 @@ export class Lite extends Client {
   }
 }
 
-const cannotDecodeJWTPayload: DecodeJWTPayload = () => {
+function cannotDecodeJWTPayload(): never {
   throw new Error(
     "Received a JWT in auxiliary data, but a `decodeJWTPayload` function was not provided to the Lite client constructor",
   );
-};
+}
 
-const server = async (
+async function server(
   instantiatedSource: Promise<WebAssembly.WebAssemblyInstantiatedSource>,
   decodeJWTPayload: DecodeJWTPayload,
-): Promise<Server> => {
+): Promise<Server> {
   return new Server(await instantiatedSource, decodeJWTPayload);
-};
+}
 
-const instantiate = async (
+async function instantiate(
   source: Source,
   { now = Date.now }: Options,
-): Promise<WebAssembly.WebAssemblyInstantiatedSource> => {
+): Promise<WebAssembly.WebAssemblyInstantiatedSource> {
   const imports = {
     env: {
       now: () => secondsSinceUnixEpoch(now()),
@@ -113,11 +113,11 @@ const instantiate = async (
   }
 
   return await WebAssembly.instantiate(resolvedSource, imports);
-};
+}
 
-const secondsSinceUnixEpoch = (date: Date | number): bigint => {
+function secondsSinceUnixEpoch(date: Date | number): bigint {
   const millisecondsSinceUnixEpoch =
     date instanceof Date ? date.getTime() : date;
 
   return BigInt(Math.floor(millisecondsSinceUnixEpoch / 1000));
-};
+}

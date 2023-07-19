@@ -2,12 +2,23 @@
 
 [Home](./index.md) &gt; [@cerbos/core](./core.md) &gt; [policyIsDerivedRoles](./core.policyisderivedroles.md)
 
-## policyIsDerivedRoles variable
+## policyIsDerivedRoles() function
 
 Type guard to check if a [Policy](./core.policy.md) is a set of [DerivedRoles](./core.derivedroles.md)<!-- -->.
 
 **Signature:**
 
 ```typescript
-policyIsDerivedRoles: (policy: Policy) => policy is DerivedRoles
+export declare function policyIsDerivedRoles(policy: Policy): policy is DerivedRoles;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  policy | [Policy](./core.policy.md) |  |
+
+**Returns:**
+
+policy is [DerivedRoles](./core.derivedroles.md)
+

@@ -2,12 +2,23 @@
 
 [Home](./index.md) &gt; [@cerbos/core](./core.md) &gt; [policyIsPrincipalPolicy](./core.policyisprincipalpolicy.md)
 
-## policyIsPrincipalPolicy variable
+## policyIsPrincipalPolicy() function
 
 Type guard to check if a [Policy](./core.policy.md) is a [PrincipalPolicy](./core.principalpolicy.md)<!-- -->.
 
 **Signature:**
 
 ```typescript
-policyIsPrincipalPolicy: (policy: Policy) => policy is PrincipalPolicy
+export declare function policyIsPrincipalPolicy(policy: Policy): policy is PrincipalPolicy;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  policy | [Policy](./core.policy.md) |  |
+
+**Returns:**
+
+policy is [PrincipalPolicy](./core.principalpolicy.md)
+

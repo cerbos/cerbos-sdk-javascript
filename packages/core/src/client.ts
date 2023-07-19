@@ -68,14 +68,14 @@ export type _Instrumenter = (transport: _Transport) => _Transport;
 const instrumenters = new Set<_Instrumenter>();
 
 /** @internal */
-export const _addInstrumenter = (instrumenter: _Instrumenter): void => {
+export function _addInstrumenter(instrumenter: _Instrumenter): void {
   instrumenters.add(instrumenter);
-};
+}
 
 /** @internal */
-export const _removeInstrumenter = (instrumenter: _Instrumenter): void => {
+export function _removeInstrumenter(instrumenter: _Instrumenter): void {
   instrumenters.delete(instrumenter);
-};
+}
 
 /**
  * Options for creating a new {@link Client}.

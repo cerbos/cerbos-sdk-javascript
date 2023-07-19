@@ -2,12 +2,23 @@
 
 [Home](./index.md) &gt; [@cerbos/core](./core.md) &gt; [matchIsMatchExpr](./core.matchismatchexpr.md)
 
-## matchIsMatchExpr variable
+## matchIsMatchExpr() function
 
 Type guard to check if a [Match](./core.match.md) is a [MatchExpr](./core.matchexpr.md)<!-- -->.
 
 **Signature:**
 
 ```typescript
-matchIsMatchExpr: (match: Match) => match is MatchExpr
+export declare function matchIsMatchExpr(match: Match): match is MatchExpr;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  match | [Match](./core.match.md) |  |
+
+**Returns:**
+
+match is [MatchExpr](./core.matchexpr.md)
+
