@@ -32,7 +32,7 @@
     "lint:fix": "npm run all:serial 'npm:lint:fix:*'",
     "lint:fix:eslint": "eslint --fix --max-warnings=0 .",
     "lint:fix:prettier": "prettier --write .",
-    "postinstall": "patch-package && npm run build",
+    "postinstall": "patch-package --error-on-warn --error-on-fail && npm run build",
     "proto": "npm run proto:clean && npm run proto:export",
     "proto:clean": "rm -rf proto",
     "proto:export": "buf export --output=proto buf.build/cerbos/cerbos-api",
