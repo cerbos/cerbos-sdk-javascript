@@ -62,9 +62,11 @@ export interface ReadSchemaOptions {
   /**
    * Unique ID for the schema, to be used to reference the schema from policies and from other schemas.
    *
-   * @defaultValue Inferred from the schema file path.
-   * If the schema is nested under a directory called `_schemas`, the ID will be the file path relative to the `_schemas` directory.
-   * Otherwise, the ID will be the file's basename.
+   * @defaultValue (inferred from the schema file path)
+   *
+   * @remarks
+   * If the schema is nested under a directory called `_schemas`, the default ID will be the file path
+   * relative to the `_schemas` directory. Otherwise, the default ID will be the file's basename.
    */
   id?: string | undefined;
 }

@@ -11,3 +11,8 @@ Unique ID for the schema, to be used to reference the schema from policies and f
 ```typescript
 id?: string | undefined;
 ```
+
+## Remarks
+
+If the schema is nested under a directory called `_schemas`<!-- -->, the default ID will be the file path relative to the `_schemas` directory. Otherwise, the default ID will be the file's basename.
+
