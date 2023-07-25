@@ -35,6 +35,8 @@ services:
 
   socket:
     extends: plaintext
+    profiles:
+      - linux
     environment:
       - CERBOS_CONFIG=/config/socket.cerbos.yaml
     volumes:

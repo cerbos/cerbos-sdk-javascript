@@ -9,6 +9,10 @@ if [[ "${CERBOS_VERSION}" = *-prerelease ]]; then
   export CERBOS_IMAGE_TAG="${CERBOS_IMAGE_TAG:-dev}"
 fi
 
+if [[ $(uname -s) = Linux ]]; then
+  export COMPOSE_PROFILES=linux
+fi
+
 while IFS= read -r -d "" policies_dir; do
   policies_version="${policies_dir#servers/policies/}"
   if [[ "${policies_version}" < "${CERBOS_VERSION}" ]]; then
