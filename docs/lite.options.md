@@ -17,5 +17,6 @@ export interface Options
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [decodeJWTPayload?](./lite.options.decodejwtpayload.md) |  | [DecodeJWTPayload](./lite.decodejwtpayload.md) | _(Optional)_ Function to verify and decode JWTs passed as auxiliary data, returning the JWT payload. |
+|  [globals?](./lite.options.globals.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; | _(Optional)_ [Global variables](https://docs.cerbos.dev/cerbos/latest/configuration/engine.html#globals) to pass environment-specific information to policy conditions. |
 |  [now?](./lite.options.now.md) |  | () =&gt; Date \| number | _(Optional)_ Function returning the current time, to be used when evaluating policy conditions. |
 

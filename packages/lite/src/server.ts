@@ -1,4 +1,11 @@
-import type { JWT, _RPC, _Request, _Response, _Service } from "@cerbos/core";
+import type {
+  JWT,
+  Value,
+  _RPC,
+  _Request,
+  _Response,
+  _Service,
+} from "@cerbos/core";
 import { NotOK, Status } from "@cerbos/core";
 
 import { CheckResourcesRequest } from "./protobuf/cerbos/request/v1/request";
@@ -71,8 +78,13 @@ export class Server {
   public constructor(
     { instance }: WebAssembly.WebAssemblyInstantiatedSource,
     private readonly decodeJWTPayload: DecodeJWTPayload,
+    globals: Record<string, Value> | undefined,
   ) {
     this.exports = instance.exports as Exports;
+
+    if (globals) {
+      this.setGlobals(globals);
+    }
   }
 
   public async perform<Service extends _Service, RPC extends _RPC<Service>>(
@@ -93,21 +105,19 @@ export class Server {
 
     const { method, transformRequest, transformResponse } = implementation;
 
-    const requestBytes = new TextEncoder().encode(
-      JSON.stringify(await transformRequest(request, this.decodeJWTPayload)),
+    const requestSlice = Slice.ofJSON(
+      this.exports,
+      await transformRequest(request, this.decodeJWTPayload),
     );
 
-    const requestSlice = Slice.allocate(this.exports, requestBytes.length);
     let responseSlice: Slice;
-    let responseText: string;
-
     try {
-      requestSlice.copy(requestBytes);
       responseSlice = this.call(method, requestSlice);
     } finally {
       requestSlice.deallocate();
     }
 
+    let responseText: string;
     try {
       responseText = responseSlice.text();
     } finally {
@@ -118,6 +128,16 @@ export class Server {
       return transformResponse(JSON.parse(responseText));
     } catch (_) {
       throw NotOK.fromJSON(responseText);
+    }
+  }
+
+  private setGlobals(globals: Record<string, Value>): void {
+    const globalsSlice = Slice.ofJSON(this.exports, globals);
+
+    try {
+      this.exports.set_globals(globalsSlice.offset, globalsSlice.length);
+    } finally {
+      globalsSlice.deallocate();
     }
   }
 

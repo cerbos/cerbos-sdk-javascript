@@ -21,6 +21,9 @@ describe("Lite", () => {
       {
         decodeJWTPayload: ({ token }): DecodedJWTPayload =>
           UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
+        globals: {
+          allow_deletion: true,
+        },
       },
     );
 
