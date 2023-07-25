@@ -32,8 +32,9 @@ Requires
 
 - a dynamic [storage backend](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html)<!-- -->.
 
-## Example
+## Example 1
 
+Create a policy in code:
 
 ```typescript
 await cerbos.addOrUpdatePolicies({
@@ -49,5 +50,30 @@ await cerbos.addOrUpdatePolicies({
     },
   }],
 });
+```
+
+## Example 2
+
+Load a policy from a YAML or JSON file with [readPolicy()](./files.readpolicy.md)<!-- -->:
+
+```typescript
+import { readPolicy } from "@cerbos/files";
+
+await cerbos.addOrUpdatePolicies({
+  policies: [await readPolicy("path/to/policy.yaml")],
+});
+```
+
+## Example 3
+
+Load policies and schemas from a directory with [readDirectory()](./files.readdirectory.md)<!-- -->:
+
+```typescript
+import { readDirectory } from "@cerbos/files";
+
+const { policies, schemas } = await readDirectory("path/to/directory");
+
+await cerbos.addOrUpdateSchemas({ schemas });
+await cerbos.addOrUpdatePolicies({ policies });
 ```
 

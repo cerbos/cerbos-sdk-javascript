@@ -20,7 +20,7 @@ The [history for the `packages` directory](https://github.com/cerbos/cerbos-sdk-
 
 ### Bump versions
 
-If the `core` package has changed, bump its version, and update the `@cerbos/core` dependency in the `grpc`, `http`, and `lite` packages to match.
+If the `core` package has changed, bump its version, and update the `@cerbos/core` dependency in the other packages to match.
 
 If another package (except `test`) has changed (including if only its `@cerbos/core` dependency has increased), bump its version and update the relevant dependency in the `test` package.
 Note that the version numbers do not have to match, and we don't have to release packages that haven't changed.

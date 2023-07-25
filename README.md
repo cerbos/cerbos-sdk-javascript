@@ -7,13 +7,15 @@ The Cerbos JavaScript SDK makes it easy to interact with the Cerbos PDP from you
 
 ## Packages
 
-For server-side Node.js applications, the [@cerbos/grpc](/packages/grpc/README.md) library provides a client ([`GRPC`](/docs/grpc.grpc.md)) for interacting with the Cerbos PDP over gRPC.
+For server-side Node.js applications, the [@cerbos/grpc](/packages/grpc/README.md) package provides a client ([`GRPC`](/docs/grpc.grpc.md)) for interacting with the Cerbos PDP over gRPC.
 
-For browser-based applications, the [@cerbos/http](/packages/http/README.md) library provides a client ([`HTTP`](/docs/http.http.md)) for interacting with the Cerbos PDP over HTTP.
+For browser-based applications, the [@cerbos/http](/packages/http/README.md) package provides a client ([`HTTP`](/docs/http.http.md)) for interacting with the Cerbos PDP over HTTP.
 
 Both clients extend the base [`Client`](/docs/core.client.md) class from [@cerbos/core](/packages/core/README.md), so they can be used interchangeably in isomorphic applications.
 
-To instrument the clients with [OpenTelemetry](http://opentelemetry.io), use the [@cerbos/opentelemetry](/packages/opentelemetry/README.md) library.
+To instrument the clients with [OpenTelemetry](http://opentelemetry.io), use the [@cerbos/opentelemetry](/packages/opentelemetry/README.md) package.
+
+To load Cerbos policies from YAML or JSON files, use the [@cerbos/files](/packages/files/README.md) package.
 
 ## Further reading
 

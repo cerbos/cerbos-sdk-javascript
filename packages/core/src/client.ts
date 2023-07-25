@@ -163,6 +163,8 @@ export abstract class Client {
    * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
    *
    * @example
+   * Create a policy in code:
+   *
    * ```typescript
    * await cerbos.addOrUpdatePolicies({
    *   policies: [{
@@ -177,6 +179,29 @@ export abstract class Client {
    *     },
    *   }],
    * });
+   * ```
+   *
+   * @example
+   * Load a policy from a YAML or JSON file with {@link @cerbos/files#readPolicy}:
+   *
+   * ```typescript
+   * import { readPolicy } from "@cerbos/files";
+   *
+   * await cerbos.addOrUpdatePolicies({
+   *   policies: [await readPolicy("path/to/policy.yaml")],
+   * });
+   * ```
+   *
+   * @example
+   * Load policies and schemas from a directory with {@link @cerbos/files#readDirectory}:
+   *
+   * ```typescript
+   * import { readDirectory } from "@cerbos/files";
+   *
+   * const { policies, schemas } = await readDirectory("path/to/directory");
+   *
+   * await cerbos.addOrUpdateSchemas({ schemas });
+   * await cerbos.addOrUpdatePolicies({ policies });
    * ```
    */
   public async addOrUpdatePolicies(
@@ -201,16 +226,44 @@ export abstract class Client {
    * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
    *
    * @example
+   * Create a schema in code:
+   *
    * ```typescript
-   * await cerbos.addOrUpdateSchemas([{
-   *   id: "document.json",
-   *   definition: `{
-   *     "type": "object",
-   *     "properties": {
-   *       "owner": { "type": "string" }
-   *     }
-   *   }`,
-   * }]);
+   *
+   * await cerbos.addOrUpdateSchemas({
+   *   schemas: [{
+   *     id: "document.json",
+   *     definition: {
+   *       type: "object",
+   *       properties: {
+   *         owner: { type: "string" }
+   *       }
+   *     },
+   *   }],
+   * });
+   * ```
+   *
+   * @example
+   * Load a schema from a JSON file with {@link @cerbos/files#readSchema}:
+   *
+   * ```typescript
+   * import { readSchema } from "@cerbos/files";
+   *
+   * await cerbos.addOrUpdateSchemas({
+   *   schemas: [await readSchema("_schemas/path/to/schema.json")],
+   * });
+   * ```
+   *
+   * @example
+   * Load policies and schemas from a directory with {@link @cerbos/files#readDirectory}:
+   *
+   * ```typescript
+   * import { readDirectory } from "@cerbos/files";
+   *
+   * const { policies, schemas } = await readDirectory("path/to/directory");
+   *
+   * await cerbos.addOrUpdateSchemas({ schemas });
+   * await cerbos.addOrUpdatePolicies({ policies });
    * ```
    */
   public async addOrUpdateSchemas(

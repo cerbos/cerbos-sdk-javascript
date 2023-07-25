@@ -2,6 +2,7 @@
   "extends": "../tsconfig.strict.json",
   "references": [
     { "path": "../core" },
+    { "path": "../files" },
     { "path": "../grpc" },
     { "path": "../http" },
     { "path": "../lite" },

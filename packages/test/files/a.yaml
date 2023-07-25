@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://api.cerbos.dev/latest/cerbos/policy/v1/Policy.schema.json
+apiVersion: api.cerbos.dev/v1
+resourcePolicy:
+  resource: a
+  version: default
+  rules:
+    - actions:
+        - foo
+      effect: EFFECT_ALLOW
+      roles:
+        - bar

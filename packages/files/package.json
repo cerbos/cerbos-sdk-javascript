@@ -1,0 +1,32 @@
+{
+  "name": "@cerbos/files",
+  "version": "0.1.0",
+  "description": "Load Cerbos policies from YAML or JSON files",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cerbos/cerbos-sdk-javascript.git",
+    "directory": "packages/files"
+  },
+  "homepage": "https://github.com/cerbos/cerbos-sdk-javascript/tree/main/packages/files#readme",
+  "bugs": {
+    "url": "https://github.com/cerbos/cerbos-sdk-javascript/issues"
+  },
+  "author": "Cerbos <help@cerbos.dev> (https://cerbos.dev)",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 16"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib/**/*.d.ts",
+    "lib/**/*.d.ts.map",
+    "lib/**/*.js",
+    "lib/**/*.js.map",
+    "src/**/*.ts"
+  ],
+  "dependencies": {
+    "@cerbos/core": "^0.12.0",
+    "yaml": "^2.3.1"
+  }
+}
