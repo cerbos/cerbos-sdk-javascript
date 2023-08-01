@@ -1,3 +1,4 @@
+import type { Value } from "@cerbos/core";
 import { Client } from "@cerbos/core";
 
 import { Server } from "./server";
@@ -26,6 +27,13 @@ export interface Options {
    * @defaultValue (throw an error if a JWT is passed)
    */
   decodeJWTPayload?: DecodeJWTPayload;
+
+  /**
+   * {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine.html#globals | Global variables} to pass environment-specific information to policy conditions.
+   *
+   * @defaultValue `{}`
+   */
+  globals?: Record<string, Value>;
 
   /**
    * Function returning the current time, to be used when evaluating policy conditions.
@@ -79,6 +87,7 @@ export class Lite extends Client {
     this.server = server(
       instantiate(source, options),
       options.decodeJWTPayload ?? cannotDecodeJWTPayload,
+      options.globals,
     );
   }
 }
@@ -92,8 +101,9 @@ function cannotDecodeJWTPayload(): never {
 async function server(
   instantiatedSource: Promise<WebAssembly.WebAssemblyInstantiatedSource>,
   decodeJWTPayload: DecodeJWTPayload,
+  globals: Record<string, Value> | undefined,
 ): Promise<Server> {
-  return new Server(await instantiatedSource, decodeJWTPayload);
+  return new Server(await instantiatedSource, decodeJWTPayload, globals);
 }
 
 async function instantiate(

@@ -13,8 +13,22 @@ export class Slice {
     this._deallocate = deallocate;
   }
 
-  public static allocate(exports: Exports, length: number): Slice {
-    return new Slice(exports, Number(exports.allocate(length)), length);
+  public static ofJSON(exports: Exports, data: unknown): Slice {
+    const bytes = new TextEncoder().encode(JSON.stringify(data));
+
+    const slice = new Slice(
+      exports,
+      Number(exports.allocate(bytes.length)),
+      bytes.length,
+    );
+
+    try {
+      slice.copy(bytes);
+      return slice;
+    } catch (error) {
+      slice.deallocate();
+      throw error;
+    }
   }
 
   public static from(exports: Exports, offsetAndLength: bigint): Slice {

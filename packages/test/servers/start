@@ -9,6 +9,17 @@ if [[ "${CERBOS_VERSION}" = *-prerelease ]]; then
   export CERBOS_IMAGE_TAG="${CERBOS_IMAGE_TAG:-dev}"
 fi
 
+if [[ $(uname -s) = Linux ]]; then
+  export COMPOSE_PROFILES=linux
+fi
+
+while IFS= read -r -d "" config_dir; do
+  config_version="${config_dir#servers/config/cerbos/}"
+  if [[ "${config_version}" < "${CERBOS_VERSION}" ]]; then
+    export CONFIG_VERSION="${config_version}"
+  fi
+done < <(find servers/config/cerbos -type d -mindepth 1 -maxdepth 1 -print0 | sort -z)
+
 while IFS= read -r -d "" policies_dir; do
   policies_version="${policies_dir#servers/policies/}"
   if [[ "${policies_version}" < "${CERBOS_VERSION}" ]]; then

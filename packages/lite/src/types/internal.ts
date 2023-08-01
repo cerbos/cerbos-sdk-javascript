@@ -9,4 +9,5 @@ export type Exports = WebAssembly.Exports &
     memory: WebAssembly.Memory;
     allocate: (length: number) => bigint;
     deallocate: (offset: number, length: number) => void;
+    set_globals: (offset: number, length: number) => void;
   };
