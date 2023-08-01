@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.4.0-beta] - 2023-08-01
+
 ### Added
 
 - Support for [globals](https://docs.cerbos.dev/cerbos/latest/configuration/engine.html#globals) ([#619](https://github.com/cerbos/cerbos-sdk-javascript/pull/619))
@@ -46,7 +50,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.3.1-alpha...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.4.0-beta...HEAD
+[0.4.0-beta]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.3.1-alpha...@cerbos/lite@0.4.0-beta
 [0.3.1-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.3.0-alpha...@cerbos/lite@0.3.1-alpha
 [0.3.0-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.2.2-alpha...@cerbos/lite@0.3.0-alpha
 [0.2.2-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.2.1-alpha...@cerbos/lite@0.2.2-alpha
