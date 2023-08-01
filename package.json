@@ -49,7 +49,7 @@
     "test:watch": "npm run --workspace=packages/test test:watch"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "7.22.30",
+    "@microsoft/api-documenter": "7.22.31",
     "@microsoft/api-extractor": "7.36.3",
     "@tsconfig/node16": "16.1.0",
     "@types/node": "16.18.39",
