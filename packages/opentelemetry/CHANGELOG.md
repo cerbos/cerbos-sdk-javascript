@@ -2,7 +2,7 @@
 
 ### Changed
 
-- Bump dependencies on [@opentelemetry/instrumentation](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation) to 0.41.1 and [@opentelemetry/semantic-conventions](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-semantic-conventions) to 1.15.1 ([#614](https://github.com/cerbos/cerbos-sdk-javascript/pull/614))
+- Bump dependencies on [@opentelemetry/instrumentation](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation) to 0.41.2 and [@opentelemetry/semantic-conventions](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-semantic-conventions) to 1.15.2 ([#614](https://github.com/cerbos/cerbos-sdk-javascript/pull/614), [#635](https://github.com/cerbos/cerbos-sdk-javascript/pull/635))
 
 ## [0.2.1] - 2023-07-18
 
