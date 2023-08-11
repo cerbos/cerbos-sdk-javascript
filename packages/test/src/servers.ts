@@ -18,12 +18,15 @@ export interface Ports {
     tls: number;
     mtls: number;
     mutable: number;
+    tracing: number;
   };
   http: {
     plaintext: number;
     tls: number;
     mutable: number;
+    tracing: number;
   };
+  otelcol: number;
 }
 
 interface DockerComposeContainer {
@@ -54,11 +57,20 @@ export async function ports(): Promise<Ports> {
       tls: port(output, "tls", 3593),
       mtls: port(output, "mtls", 3593),
       mutable: port(output, "mutable", 3593),
+      get tracing(): number {
+        return port(output, "tracing", 3593);
+      },
     },
     http: {
       plaintext: port(output, "plaintext", 3592),
       tls: port(output, "tls", 3592),
       mutable: port(output, "mutable", 3592),
+      get tracing(): number {
+        return port(output, "tracing", 3592);
+      },
+    },
+    get otelcol(): number {
+      return port(output, "otelcol-test", 8080);
     },
   };
 }

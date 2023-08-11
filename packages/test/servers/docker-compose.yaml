@@ -34,9 +34,9 @@ services:
         read_only: true
 
   socket:
-    extends: plaintext
     profiles:
       - linux
+    extends: plaintext
     environment:
       - CERBOS_CONFIG=/config/socket.yaml
     volumes:
@@ -98,3 +98,18 @@ services:
     depends_on:
       certificates:
         condition: service_completed_successfully
+
+  tracing:
+    profiles:
+      - tracing
+    extends: plaintext
+    environment:
+      - CERBOS_CONFIG=/config/tracing.yaml
+
+  otelcol-test:
+    profiles:
+      - tracing
+    build:
+      context: ../opentelemetry-collector-test
+    ports:
+      - 8080

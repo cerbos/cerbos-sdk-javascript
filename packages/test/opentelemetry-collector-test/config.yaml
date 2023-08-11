@@ -1,0 +1,20 @@
+extensions:
+  health_check:
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+
+exporters:
+  test:
+
+service:
+  extensions:
+    - health_check
+  pipelines:
+    traces:
+      receivers:
+        - otlp
+      exporters:
+        - test

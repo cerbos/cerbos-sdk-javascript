@@ -25,6 +25,7 @@ import {
   SpanStatusCode,
   context,
   diag,
+  propagation,
   trace,
 } from "@opentelemetry/api";
 import type {
@@ -37,6 +38,11 @@ import { SemanticAttributes } from "@opentelemetry/semantic-conventions";
 const { name, version } = require("../package.json") as {
   name: string;
   version: string;
+};
+
+const serviceNames: Record<_Service, string> = {
+  admin: "cerbos.svc.v1.CerbosAdminService",
+  cerbos: "cerbos.svc.v1.CerbosService",
 };
 
 /**
@@ -95,24 +101,34 @@ export class CerbosInstrumentation implements Instrumentation {
         rpc: RPC,
         request: _Request<Service, RPC>,
         adminCredentials?: AdminCredentials,
+        metadata: Record<string, string> = {},
       ): Promise<_Response<Service, RPC>> => {
+        const serviceName = serviceNames[service];
+        const methodName = rpcMethodName(rpc);
+
         const span = this.tracer
-          .startSpan(`cerbos.rpc.${service}.${rpc}`, { kind: SpanKind.CLIENT })
+          .startSpan(`${serviceName}/${methodName}`, {
+            kind: SpanKind.CLIENT,
+          })
           .setAttributes({
             [SemanticAttributes.RPC_SYSTEM]: "grpc",
-            [SemanticAttributes.RPC_SERVICE]: service,
-            [SemanticAttributes.RPC_METHOD]: rpc,
+            [SemanticAttributes.RPC_SERVICE]: serviceName,
+            [SemanticAttributes.RPC_METHOD]: methodName,
           });
+
+        const activeContext = trace.setSpan(context.active(), span);
+        propagation.inject(activeContext, metadata);
 
         try {
           const response = (await context.with(
-            trace.setSpan(context.active(), span),
+            activeContext,
             transport,
             undefined,
             service,
             rpc,
             request,
             adminCredentials,
+            metadata,
           )) as _Response<Service, RPC>;
 
           span.setAttribute(SemanticAttributes.RPC_GRPC_STATUS_CODE, 0);
@@ -191,4 +207,8 @@ export class CerbosInstrumentation implements Instrumentation {
     this.diag.debug("Disabling Cerbos client instrumentation");
     _removeInstrumenter(this.instrumenter);
   }
+}
+
+function rpcMethodName(rpc: _RPC<_Service>): string {
+  return `${rpc.charAt(0).toUpperCase()}${rpc.slice(1)}`;
 }

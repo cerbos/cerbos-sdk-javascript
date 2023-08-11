@@ -106,7 +106,7 @@ export class HTTP extends Client {
    * ```
    */
   public constructor(url: string, options: Options = {}) {
-    super(async (service, rpc, request, adminCredentials) => {
+    super(async (service, rpc, request, adminCredentials, metadata = {}) => {
       const { method, path, requestType, responseType, serializeRequest } =
         services[service][rpc] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
 
@@ -121,7 +121,7 @@ export class HTTP extends Client {
         method,
         body:
           serializeRequest === "body" ? JSON.stringify(requestProtobuf) : null,
-        headers: headers(options, adminCredentials),
+        headers: headers(options, adminCredentials, metadata),
       });
 
       if (!response.ok) {
@@ -248,6 +248,7 @@ const services: Services = {
 function headers(
   { headers: optionalHeaders, playgroundInstance }: Options,
   adminCredentials: AdminCredentials | undefined,
+  metadata: Record<string, string>,
 ): Headers {
   const headers = new Headers(
     typeof optionalHeaders === "function" ? optionalHeaders() : optionalHeaders,
@@ -270,6 +271,10 @@ function headers(
 
   if (playgroundInstance) {
     headers.set("Playground-Instance", playgroundInstance);
+  }
+
+  for (const [key, value] of Object.entries(metadata)) {
+    headers.set(key, value);
   }
 
   return headers;

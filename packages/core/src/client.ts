@@ -60,6 +60,7 @@ export type _Transport = <Service extends _Service, RPC extends _RPC<Service>>(
   rpc: RPC,
   request: _Request<Service, RPC>,
   adminCredentials?: AdminCredentials,
+  metadata?: Record<string, string>,
 ) => Promise<_Response<Service, RPC>>;
 
 /** @internal */
