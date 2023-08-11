@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Removed
+
+- Dependency on [abab](https://github.com/jsdom/abab), which is no longer necessary since dropping support for Node.js 14. The `btoa` global function is [supported in Node.js 16+ and all browsers](https://developer.mozilla.org/en-US/docs/Web/API/btoa#browser_compatibility).
 
 ## [0.13.0] - 2023-07-18
 

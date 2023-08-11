@@ -13,7 +13,6 @@ import type {
   _Service,
 } from "@cerbos/core";
 import { Client, NotOK } from "@cerbos/core";
-import { btoa } from "abab";
 import { stringify as queryStringify } from "qs";
 
 import {
