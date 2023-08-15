@@ -11,4 +11,4 @@ tracing:
   sampleProbability: 1.0
   exporter: otlp
   otlp:
-    collectorEndpoint: otelcol-test:4317
+    collectorEndpoint: jaeger:4317

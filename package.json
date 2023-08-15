@@ -45,6 +45,7 @@
     "proto:clean": "rm -rf proto",
     "proto:export": "npm run all:parallel 'npm:proto:export:*'",
     "proto:export:cerbos": "buf export --output=proto buf.build/cerbos/cerbos-api",
+    "proto:export:jaeger": "buf export --exclude-imports --output=proto/jaeger --path=proto/api_v3/query_service.proto https://github.com/jaegertracing/jaeger-idl.git",
     "proto:export:opentelemetry": "buf export --output=proto 'https://github.com/open-telemetry/opentelemetry-proto.git#tag=v1.0.0'",
     "test": "npm run --workspace=packages/test test",
     "test:servers:start": "npm run --workspace=packages/test test:servers:start",

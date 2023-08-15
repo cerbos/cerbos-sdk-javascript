@@ -26,7 +26,7 @@ export interface Ports {
     mutable: number;
     tracing: number;
   };
-  otelcol: number;
+  jaeger: number;
 }
 
 interface DockerComposeContainer {
@@ -69,8 +69,8 @@ export async function ports(): Promise<Ports> {
         return port(output, "tracing", 3592);
       },
     },
-    get otelcol(): number {
-      return port(output, "otelcol-test", 8080);
+    get jaeger(): number {
+      return port(output, "jaeger", 16685);
     },
   };
 }

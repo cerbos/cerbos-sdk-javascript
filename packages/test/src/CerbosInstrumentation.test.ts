@@ -12,6 +12,7 @@ import { HTTP } from "@cerbos/http";
 import type { DecodedJWTPayload } from "@cerbos/lite";
 import { Lite } from "@cerbos/lite";
 import { CerbosInstrumentation } from "@cerbos/opentelemetry";
+import { ChannelCredentials } from "@grpc/grpc-js";
 import {
   afterAll,
   beforeAll,
@@ -31,13 +32,11 @@ import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
 import { SemanticAttributes } from "@opentelemetry/semantic-conventions";
 import { UnsecuredJWT } from "jose";
 
-import { captureSpan } from "./helpers";
+import { captureSpan, fetchSpans } from "./helpers";
+import { QueryServiceClient } from "./protobuf/jaeger/proto/api_v3/query_service";
 import type { KeyValue as KeyValueProto } from "./protobuf/opentelemetry/proto/common/v1/common";
-import {
-  Span_SpanKind as SpanKindProto,
-  Span as SpanProto,
-  Status_StatusCode as SpanStatusCodeProto,
-} from "./protobuf/opentelemetry/proto/trace/v1/trace";
+import type { Span as SpanProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
+import { Span_SpanKind as SpanKindProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
 import type { Ports } from "./servers";
 import { cerbosVersionIsAtLeast, ports as serverPorts } from "./servers";
 
@@ -144,19 +143,12 @@ describe("CerbosInstrumentation", () => {
 
         // Lite policy bundles don't produce server spans, and Cerbos didn't include the otelgrpc interceptors until 0.30.0.
         if (type !== "Lite" && cerbosVersionIsAtLeast("0.30.0")) {
-          const response = await fetch(
-            `http://localhost:${ports.otelcol}/${span.spanContext().traceId}`,
+          const jaeger = new QueryServiceClient(
+            `localhost:${ports.jaeger}`,
+            ChannelCredentials.createInsecure(),
           );
 
-          if (!response.ok) {
-            throw new Error(
-              `Failed to get spans from OpenTelemetry collector: HTTP ${response.status} ${response.statusText}`,
-            );
-          }
-
-          const spans = (
-            (await response.json()) as { spans: unknown[] }
-          ).spans.map((span) => SpanProto.fromJSON(span));
+          const spans = await fetchSpans(jaeger, span.spanContext().traceId);
 
           expect(spans).toContainEqual(
             expect.objectContaining({
@@ -194,10 +186,6 @@ describe("CerbosInstrumentation", () => {
                   },
                 },
               ] satisfies KeyValueProto[]) as unknown as KeyValueProto[],
-              status: {
-                code: SpanStatusCodeProto.STATUS_CODE_UNSET,
-                message: "",
-              },
             } satisfies Partial<SpanProto>),
           );
         }

@@ -41,4 +41,4 @@ export USER="${uid}:${gid}"
 
 mkdir -p servers/tmp/certificates servers/tmp/socket
 
-exec docker compose --file=servers/docker-compose.yaml up --build --wait
+exec docker compose --file=servers/docker-compose.yaml up --wait

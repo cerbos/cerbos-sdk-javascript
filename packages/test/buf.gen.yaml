@@ -2,7 +2,7 @@ version: v1
 
 types:
   include:
-    - opentelemetry.proto.trace.v1.Span
+    - jaeger.api_v3.QueryService
 
 plugins:
   - name: test
@@ -15,8 +15,8 @@ plugins:
       - forceLong=string
       - oneof=unions
       - onlyTypes=false
-      - outputEncodeMethods=false
-      - outputJsonMethods=from-only
+      - outputEncodeMethods=true
+      - outputJsonMethods=false
       - outputPartialMethods=false
-      - outputServices=false
+      - outputServices=grpc-js
       - unrecognizedEnum=false
