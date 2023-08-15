@@ -9,10 +9,6 @@ if [[ "${CERBOS_VERSION}" = *-prerelease ]]; then
   export CERBOS_IMAGE_TAG="${CERBOS_IMAGE_TAG:-dev}"
 fi
 
-if [[ $(uname -s) = Linux ]]; then
-  export COMPOSE_PROFILES=linux
-fi
-
 while IFS= read -r -d "" config_dir; do
   config_version="${config_dir#servers/config/cerbos/}"
   if [[ "${config_version}" < "${CERBOS_VERSION}" ]]; then
@@ -26,6 +22,18 @@ while IFS= read -r -d "" policies_dir; do
     export POLICIES_VERSION="${policies_version}"
   fi
 done < <(find servers/policies -type d -mindepth 1 -maxdepth 1 -print0 | sort -z)
+
+compose_profiles=()
+
+if [[ $(uname -s) = Linux ]]; then
+  compose_profiles+=(linux)
+fi
+
+if [[ -f "servers/config/cerbos/${CONFIG_VERSION}/tracing.yaml" ]]; then
+  compose_profiles+=(tracing)
+fi
+
+export COMPOSE_PROFILES=$(IFS=,; echo "${compose_profiles[*]:-}")
 
 uid=$(id -u)
 gid=$(id -g)

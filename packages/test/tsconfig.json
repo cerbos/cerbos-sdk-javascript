@@ -1,12 +1,15 @@
 {
   "extends": "../tsconfig.strict.json",
+  "include": ["src", "jest.config.ts"],
+  "exclude": ["src/protobuf"],
   "references": [
     { "path": "../core" },
     { "path": "../files" },
     { "path": "../grpc" },
     { "path": "../http" },
     { "path": "../lite" },
-    { "path": "../opentelemetry" }
+    { "path": "../opentelemetry" },
+    { "path": "./tsconfig.protobuf.json" }
   ],
   "compilerOptions": {
     "lib": ["ES2020", "DOM"],

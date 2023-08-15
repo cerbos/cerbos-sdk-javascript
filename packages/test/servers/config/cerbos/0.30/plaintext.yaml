@@ -1,0 +1,18 @@
+auxData:
+  jwt:
+    disableVerification: true
+
+engine:
+  globals:
+    allow_deletion: true
+
+schema:
+  enforcement: warn
+
+storage:
+  driver: disk
+  disk:
+    directory: /policies
+
+telemetry:
+  disabled: true

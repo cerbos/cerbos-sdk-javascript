@@ -34,9 +34,9 @@ services:
         read_only: true
 
   socket:
-    extends: plaintext
     profiles:
       - linux
+    extends: plaintext
     environment:
       - CERBOS_CONFIG=/config/socket.yaml
     volumes:
@@ -98,3 +98,32 @@ services:
     depends_on:
       certificates:
         condition: service_completed_successfully
+
+  tracing:
+    profiles:
+      - tracing
+    extends: plaintext
+    environment:
+      - CERBOS_CONFIG=/config/tracing.yaml
+
+  jaeger:
+    profiles:
+      - tracing
+    image: jaegertracing/all-in-one:1.47
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+      - JAEGER_DISABLED=true
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --no-verbose
+        - --spider
+        - --tries=1
+        - http://localhost:14269
+      interval: 2s
+      timeout: 1s
+      retries: 3
+      start_period: 5s
+    ports:
+      - 16685

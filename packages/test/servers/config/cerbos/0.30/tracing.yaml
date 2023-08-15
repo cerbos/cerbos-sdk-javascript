@@ -1,0 +1,14 @@
+storage:
+  driver: disk
+  disk:
+    directory: /policies
+
+telemetry:
+  disabled: true
+
+tracing:
+  serviceName: cerbos
+  sampleProbability: 1.0
+  exporter: otlp
+  otlp:
+    collectorEndpoint: jaeger:4317

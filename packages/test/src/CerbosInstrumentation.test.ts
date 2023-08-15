@@ -1,3 +1,5 @@
+/* eslint-disable jest/no-conditional-expect */
+
 import "./fetch-polyfill";
 
 import { readFileSync } from "fs";
@@ -10,6 +12,7 @@ import { HTTP } from "@cerbos/http";
 import type { DecodedJWTPayload } from "@cerbos/lite";
 import { Lite } from "@cerbos/lite";
 import { CerbosInstrumentation } from "@cerbos/opentelemetry";
+import { ChannelCredentials } from "@grpc/grpc-js";
 import {
   afterAll,
   beforeAll,
@@ -18,7 +21,9 @@ import {
   expect,
   it,
 } from "@jest/globals";
-import { SpanStatusCode } from "@opentelemetry/api";
+import type { AttributeValue } from "@opentelemetry/api";
+import { SpanKind, SpanStatusCode } from "@opentelemetry/api";
+import type { ReadableSpan } from "@opentelemetry/sdk-trace-base";
 import {
   InMemorySpanExporter,
   SimpleSpanProcessor,
@@ -27,9 +32,13 @@ import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
 import { SemanticAttributes } from "@opentelemetry/semantic-conventions";
 import { UnsecuredJWT } from "jose";
 
-import { captureSpan } from "./helpers";
+import { captureSpan, fetchSpans } from "./helpers";
+import { QueryServiceClient } from "./protobuf/jaeger/proto/api_v3/query_service";
+import type { KeyValue as KeyValueProto } from "./protobuf/opentelemetry/proto/common/v1/common";
+import type { Span as SpanProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
+import { Span_SpanKind as SpanKindProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
 import type { Ports } from "./servers";
-import { ports as serverPorts } from "./servers";
+import { cerbosVersionIsAtLeast, ports as serverPorts } from "./servers";
 
 describe("CerbosInstrumentation", () => {
   let ports: Ports;
@@ -61,12 +70,25 @@ describe("CerbosInstrumentation", () => {
     {
       type: "gRPC",
       client: (): Client =>
-        new GRPC(`localhost:${ports.grpc.plaintext}`, { tls: false }),
+        new GRPC(
+          `localhost:${
+            cerbosVersionIsAtLeast("0.30.0")
+              ? ports.grpc.tracing
+              : ports.grpc.plaintext
+          }`,
+          { tls: false },
+        ),
     },
     {
       type: "HTTP",
       client: (): Client =>
-        new HTTP(`http://localhost:${ports.http.plaintext}`),
+        new HTTP(
+          `http://localhost:${
+            cerbosVersionIsAtLeast("0.30.0")
+              ? ports.http.tracing
+              : ports.http.plaintext
+          }`,
+        ),
     },
     {
       type: "Lite",
@@ -106,17 +128,67 @@ describe("CerbosInstrumentation", () => {
 
         expect(result).toEqual({ value: false });
         expect(span).toMatchObject({
-          name: "cerbos.rpc.cerbos.checkResources",
+          name: "cerbos.svc.v1.CerbosService/CheckResources",
+          kind: SpanKind.CLIENT,
           attributes: {
             [SemanticAttributes.RPC_SYSTEM]: "grpc",
-            [SemanticAttributes.RPC_SERVICE]: "cerbos",
-            [SemanticAttributes.RPC_METHOD]: "checkResources",
+            [SemanticAttributes.RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
+            [SemanticAttributes.RPC_METHOD]: "CheckResources",
             [SemanticAttributes.RPC_GRPC_STATUS_CODE]: 0,
           },
           status: {
             code: SpanStatusCode.UNSET,
           },
-        });
+        } satisfies Partial<ReadableSpan>);
+
+        // Lite policy bundles don't produce server spans, and Cerbos didn't include the otelgrpc interceptors until 0.30.0.
+        if (type !== "Lite" && cerbosVersionIsAtLeast("0.30.0")) {
+          const jaeger = new QueryServiceClient(
+            `localhost:${ports.jaeger}`,
+            ChannelCredentials.createInsecure(),
+          );
+
+          const spans = await fetchSpans(jaeger, span.spanContext().traceId);
+
+          expect(spans).toContainEqual(
+            expect.objectContaining({
+              name: "cerbos.svc.v1.CerbosService/CheckResources",
+              kind: SpanKindProto.SPAN_KIND_SERVER,
+              attributes: expect.arrayContaining([
+                {
+                  key: SemanticAttributes.RPC_SYSTEM,
+                  value: {
+                    value: { $case: "stringValue", stringValue: "grpc" },
+                  },
+                },
+                {
+                  key: SemanticAttributes.RPC_SERVICE,
+                  value: {
+                    value: {
+                      $case: "stringValue",
+                      stringValue: "cerbos.svc.v1.CerbosService",
+                    },
+                  },
+                },
+                {
+                  key: SemanticAttributes.RPC_METHOD,
+                  value: {
+                    value: {
+                      $case: "stringValue",
+                      stringValue: "CheckResources",
+                    },
+                  },
+                },
+                {
+                  key: SemanticAttributes.RPC_GRPC_STATUS_CODE,
+                  value: {
+                    value: { $case: "intValue", intValue: "0" },
+                  },
+                },
+              ] satisfies KeyValueProto[]) as unknown as KeyValueProto[],
+            } satisfies Partial<SpanProto>),
+          );
+        }
       });
 
       // Lite policy bundles don't produce invalid argument errors
@@ -147,21 +219,22 @@ describe("CerbosInstrumentation", () => {
           });
 
           expect(span).toMatchObject({
-            name: "cerbos.rpc.cerbos.checkResources",
+            name: "cerbos.svc.v1.CerbosService/CheckResources",
+            kind: SpanKind.CLIENT,
             attributes: {
               [SemanticAttributes.RPC_SYSTEM]: "grpc",
-              [SemanticAttributes.RPC_SERVICE]: "cerbos",
-              [SemanticAttributes.RPC_METHOD]: "checkResources",
+              [SemanticAttributes.RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
+              [SemanticAttributes.RPC_METHOD]: "CheckResources",
               [SemanticAttributes.RPC_GRPC_STATUS_CODE]:
                 Status.INVALID_ARGUMENT,
               "cerbos.error": expect.stringContaining(
                 "invalid CheckResourcesRequest",
-              ),
+              ) as unknown as AttributeValue,
             },
             status: {
               code: SpanStatusCode.ERROR,
             },
-          });
+          } satisfies Partial<ReadableSpan>);
         });
       }
     },
