@@ -4,19 +4,19 @@
 
 ## CerbosInstrumentation.setMeterProvider() method
 
-No-op to implement the [Instrumentation](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_instrumentation.Instrumentation.html) interface.
+Override the meter provider, which otherwise defaults to the global meter provider.
 
 **Signature:**
 
 ```typescript
-setMeterProvider(_meterProvider: MeterProvider): void;
+setMeterProvider(meterProvider: MeterProvider): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  \_meterProvider | MeterProvider |  |
+|  meterProvider | MeterProvider |  |
 
 **Returns:**
 

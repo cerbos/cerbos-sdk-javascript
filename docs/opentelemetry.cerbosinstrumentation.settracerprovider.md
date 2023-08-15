@@ -4,7 +4,7 @@
 
 ## CerbosInstrumentation.setTracerProvider() method
 
-Override the tracer provider, which otherwise defaults to the global trace provider.
+Override the tracer provider, which otherwise defaults to the global tracer provider.
 
 **Signature:**
 

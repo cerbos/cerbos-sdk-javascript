@@ -14,7 +14,9 @@ import type {
 } from "@cerbos/core";
 import { NotOK, _addInstrumenter, _removeInstrumenter } from "@cerbos/core";
 import type {
+  Attributes,
   DiagLogger,
+  Histogram,
   MeterProvider,
   SpanStatus,
   Tracer,
@@ -25,6 +27,7 @@ import {
   SpanStatusCode,
   context,
   diag,
+  metrics,
   propagation,
   trace,
 } from "@opentelemetry/api";
@@ -84,6 +87,7 @@ export class CerbosInstrumentation implements Instrumentation {
   private readonly diag: DiagLogger;
   private readonly instrumenter: _Instrumenter;
   private config: CerbosInstrumentationConfig;
+  private _instruments: Instruments | undefined;
   private tracer: Tracer;
 
   public constructor(config: CerbosInstrumentationConfig = {}) {
@@ -103,18 +107,20 @@ export class CerbosInstrumentation implements Instrumentation {
         adminCredentials?: AdminCredentials,
         metadata: Record<string, string> = {},
       ): Promise<_Response<Service, RPC>> => {
+        const startTime = performance.now();
+
         const serviceName = serviceNames[service];
         const methodName = rpcMethodName(rpc);
+        const attributes: Attributes = {
+          [SemanticAttributes.RPC_SYSTEM]: "grpc",
+          [SemanticAttributes.RPC_SERVICE]: serviceName,
+          [SemanticAttributes.RPC_METHOD]: methodName,
+        };
 
-        const span = this.tracer
-          .startSpan(`${serviceName}/${methodName}`, {
-            kind: SpanKind.CLIENT,
-          })
-          .setAttributes({
-            [SemanticAttributes.RPC_SYSTEM]: "grpc",
-            [SemanticAttributes.RPC_SERVICE]: serviceName,
-            [SemanticAttributes.RPC_METHOD]: methodName,
-          });
+        const span = this.tracer.startSpan(`${serviceName}/${methodName}`, {
+          kind: SpanKind.CLIENT,
+          startTime,
+        });
 
         const activeContext = trace.setSpan(context.active(), span);
         propagation.inject(activeContext, metadata);
@@ -131,7 +137,7 @@ export class CerbosInstrumentation implements Instrumentation {
             metadata,
           )) as _Response<Service, RPC>;
 
-          span.setAttribute(SemanticAttributes.RPC_GRPC_STATUS_CODE, 0);
+          attributes[SemanticAttributes.RPC_GRPC_STATUS_CODE] = 0;
 
           return response;
         } catch (error) {
@@ -139,13 +145,10 @@ export class CerbosInstrumentation implements Instrumentation {
 
           if (error instanceof Error) {
             status.message = error.message;
-            span.setAttribute("cerbos.error", error.message);
+            attributes["cerbos.error"] = error.message;
 
             if (error instanceof NotOK) {
-              span.setAttribute(
-                SemanticAttributes.RPC_GRPC_STATUS_CODE,
-                error.code,
-              );
+              attributes[SemanticAttributes.RPC_GRPC_STATUS_CODE] = error.code;
             }
           }
 
@@ -153,7 +156,10 @@ export class CerbosInstrumentation implements Instrumentation {
 
           throw error;
         } finally {
-          span.end();
+          const endTime = performance.now();
+          span.setAttributes(attributes);
+          span.end(endTime);
+          this.instruments.duration.record(endTime - startTime, attributes);
         }
       };
 
@@ -181,12 +187,14 @@ export class CerbosInstrumentation implements Instrumentation {
   }
 
   /**
-   * No-op to implement the {@link https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_instrumentation.Instrumentation.html | Instrumentation} interface.
+   * Override the meter provider, which otherwise defaults to the global meter provider.
    */
-  public setMeterProvider(_meterProvider: MeterProvider): void {} // eslint-disable-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
+  public setMeterProvider(meterProvider: MeterProvider): void {
+    this._instruments = new Instruments(meterProvider);
+  }
 
   /**
-   * Override the tracer provider, which otherwise defaults to the global trace provider.
+   * Override the tracer provider, which otherwise defaults to the global tracer provider.
    */
   public setTracerProvider(tracerProvider: TracerProvider): void {
     this.tracer = tracerProvider.getTracer(name, version);
@@ -207,8 +215,27 @@ export class CerbosInstrumentation implements Instrumentation {
     this.diag.debug("Disabling Cerbos client instrumentation");
     _removeInstrumenter(this.instrumenter);
   }
+
+  private get instruments(): Instruments {
+    if (!this._instruments) {
+      this._instruments = new Instruments(metrics);
+    }
+
+    return this._instruments;
+  }
 }
 
 function rpcMethodName(rpc: _RPC<_Service>): string {
   return `${rpc.charAt(0).toUpperCase()}${rpc.slice(1)}`;
+}
+
+class Instruments {
+  public readonly duration: Histogram;
+
+  public constructor(meterProvider: MeterProvider) {
+    const meter = meterProvider.getMeter(name, version);
+    this.duration = meter.createHistogram("rpc.client.duration", {
+      unit: "ms",
+    });
+  }
 }
