@@ -21,8 +21,10 @@ import {
   expect,
   it,
 } from "@jest/globals";
-import type { AttributeValue } from "@opentelemetry/api";
-import { SpanKind, SpanStatusCode } from "@opentelemetry/api";
+import type { AttributeValue, Attributes } from "@opentelemetry/api";
+import { SpanKind, SpanStatusCode, metrics } from "@opentelemetry/api";
+import type { MetricReader } from "@opentelemetry/sdk-metrics";
+import { MeterProvider } from "@opentelemetry/sdk-metrics";
 import type { ReadableSpan } from "@opentelemetry/sdk-trace-base";
 import {
   InMemorySpanExporter,
@@ -32,7 +34,12 @@ import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
 import { SemanticAttributes } from "@opentelemetry/semantic-conventions";
 import { UnsecuredJWT } from "jose";
 
-import { captureSpan, fetchSpans } from "./helpers";
+import {
+  TestMetricReader,
+  captureSpan,
+  expectMetrics,
+  fetchSpans,
+} from "./helpers";
 import { QueryServiceClient } from "./protobuf/jaeger/proto/api_v3/query_service";
 import type { KeyValue as KeyValueProto } from "./protobuf/opentelemetry/proto/common/v1/common";
 import type { Span as SpanProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
@@ -42,18 +49,24 @@ import { cerbosVersionIsAtLeast, ports as serverPorts } from "./servers";
 
 describe("CerbosInstrumentation", () => {
   let ports: Ports;
+  let metricReader: MetricReader;
   let spanExporter: InMemorySpanExporter;
+
   const cerbosInstrumentation = new CerbosInstrumentation({ enabled: false });
 
   beforeAll(async () => {
     ports = await serverPorts();
 
-    spanExporter = new InMemorySpanExporter();
+    metricReader = new TestMetricReader();
+    const meterProvider = new MeterProvider();
+    meterProvider.addMetricReader(metricReader);
+    metrics.setGlobalMeterProvider(meterProvider);
 
+    spanExporter = new InMemorySpanExporter();
     const tracerProvider = new NodeTracerProvider();
     tracerProvider.addSpanProcessor(new SimpleSpanProcessor(spanExporter));
-
     tracerProvider.register();
+
     cerbosInstrumentation.enable();
   });
 
@@ -126,20 +139,24 @@ describe("CerbosInstrumentation", () => {
             }),
         );
 
+        const attributes: Attributes = {
+          [SemanticAttributes.RPC_SYSTEM]: "grpc",
+          [SemanticAttributes.RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
+          [SemanticAttributes.RPC_METHOD]: "CheckResources",
+          [SemanticAttributes.RPC_GRPC_STATUS_CODE]: 0,
+        };
+
         expect(result).toEqual({ value: false });
         expect(span).toMatchObject({
           name: "cerbos.svc.v1.CerbosService/CheckResources",
           kind: SpanKind.CLIENT,
-          attributes: {
-            [SemanticAttributes.RPC_SYSTEM]: "grpc",
-            [SemanticAttributes.RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
-            [SemanticAttributes.RPC_METHOD]: "CheckResources",
-            [SemanticAttributes.RPC_GRPC_STATUS_CODE]: 0,
-          },
+          attributes,
           status: {
             code: SpanStatusCode.UNSET,
           },
         } satisfies Partial<ReadableSpan>);
+
+        await expectMetrics(metricReader, attributes, span.duration);
 
         // Lite policy bundles don't produce server spans, and Cerbos didn't include the otelgrpc interceptors until 0.30.0.
         if (type !== "Lite" && cerbosVersionIsAtLeast("0.30.0")) {
@@ -210,6 +227,16 @@ describe("CerbosInstrumentation", () => {
               }),
           );
 
+          const attributes: Attributes = {
+            [SemanticAttributes.RPC_SYSTEM]: "grpc",
+            [SemanticAttributes.RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
+            [SemanticAttributes.RPC_METHOD]: "CheckResources",
+            [SemanticAttributes.RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
+            "cerbos.error": expect.stringContaining(
+              "invalid CheckResourcesRequest",
+            ) as unknown as AttributeValue,
+          };
+
           expect(result).toEqual({
             error: expect.objectContaining({
               constructor: NotOK,
@@ -221,20 +248,13 @@ describe("CerbosInstrumentation", () => {
           expect(span).toMatchObject({
             name: "cerbos.svc.v1.CerbosService/CheckResources",
             kind: SpanKind.CLIENT,
-            attributes: {
-              [SemanticAttributes.RPC_SYSTEM]: "grpc",
-              [SemanticAttributes.RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
-              [SemanticAttributes.RPC_METHOD]: "CheckResources",
-              [SemanticAttributes.RPC_GRPC_STATUS_CODE]:
-                Status.INVALID_ARGUMENT,
-              "cerbos.error": expect.stringContaining(
-                "invalid CheckResourcesRequest",
-              ) as unknown as AttributeValue,
-            },
+            attributes,
             status: {
               code: SpanStatusCode.ERROR,
             },
           } satisfies Partial<ReadableSpan>);
+
+          await expectMetrics(metricReader, attributes, span.duration);
         });
       }
     },

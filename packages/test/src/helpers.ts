@@ -4,7 +4,19 @@ import { setTimeout } from "timers/promises";
 import { CheckResourcesResult } from "@cerbos/core";
 import type { ServiceError } from "@grpc/grpc-js";
 import { Metadata } from "@grpc/grpc-js";
-import { context, trace } from "@opentelemetry/api";
+import { expect } from "@jest/globals";
+import type { Attributes, HrTime } from "@opentelemetry/api";
+import { ValueType, context, trace } from "@opentelemetry/api";
+import type {
+  Histogram,
+  InstrumentDescriptor,
+} from "@opentelemetry/sdk-metrics";
+import {
+  AggregationTemporality,
+  DataPointType,
+  InstrumentType,
+  MetricReader,
+} from "@opentelemetry/sdk-metrics";
 import type {
   InMemorySpanExporter,
   ReadableSpan,
@@ -144,4 +156,47 @@ function isServiceError(error: unknown): error is ServiceError {
 
 function secondsSince(start: bigint): number {
   return Number(hrtime.bigint() - start) / 1e9;
+}
+
+export class TestMetricReader extends MetricReader {
+  public constructor() {
+    super({
+      aggregationTemporalitySelector: () => AggregationTemporality.DELTA,
+    });
+  }
+
+  protected override async onForceFlush(): Promise<void> {}
+  protected override async onShutdown(): Promise<void> {}
+}
+
+export async function expectMetrics(
+  metricReader: MetricReader,
+  attributes: Attributes,
+  duration: HrTime,
+): Promise<void> {
+  const { resourceMetrics } = await metricReader.collect();
+  const metric = resourceMetrics.scopeMetrics[0]?.metrics[0];
+  expect(metric?.dataPointType).toEqual(DataPointType.HISTOGRAM);
+  expect(metric?.descriptor).toEqual({
+    name: "rpc.client.duration",
+    description: "",
+    type: InstrumentType.HISTOGRAM,
+    valueType: ValueType.DOUBLE,
+    unit: "ms",
+  } satisfies InstrumentDescriptor);
+
+  const dataPoint = metric?.dataPoints[0];
+  expect(dataPoint?.attributes).toEqual(attributes);
+
+  const durationMilliseconds = hrTimeToMilliseconds(duration);
+
+  const value = dataPoint?.value as Histogram;
+  expect(value.count).toEqual(1);
+  expect(value.min).toBeCloseTo(durationMilliseconds, 5);
+  expect(value.max).toBeCloseTo(durationMilliseconds, 5);
+  expect(value.sum).toBeCloseTo(durationMilliseconds, 5);
+}
+
+function hrTimeToMilliseconds([seconds, nanoseconds]: HrTime): number {
+  return seconds * 1e3 + nanoseconds * 1e-6;
 }

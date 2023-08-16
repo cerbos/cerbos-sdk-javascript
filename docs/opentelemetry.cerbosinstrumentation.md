@@ -46,6 +46,6 @@ registerInstrumentations({
 |  [enable()](./opentelemetry.cerbosinstrumentation.enable.md) |  | Enables the instrumentation. |
 |  [getConfig()](./opentelemetry.cerbosinstrumentation.getconfig.md) |  | Gets the instrumentation configuration. |
 |  [setConfig(config)](./opentelemetry.cerbosinstrumentation.setconfig.md) |  | Sets the instrumentation configuration. |
-|  [setMeterProvider(\_meterProvider)](./opentelemetry.cerbosinstrumentation.setmeterprovider.md) |  | No-op to implement the [Instrumentation](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_instrumentation.Instrumentation.html) interface. |
-|  [setTracerProvider(tracerProvider)](./opentelemetry.cerbosinstrumentation.settracerprovider.md) |  | Override the tracer provider, which otherwise defaults to the global trace provider. |
+|  [setMeterProvider(meterProvider)](./opentelemetry.cerbosinstrumentation.setmeterprovider.md) |  | Override the meter provider, which otherwise defaults to the global meter provider. |
+|  [setTracerProvider(tracerProvider)](./opentelemetry.cerbosinstrumentation.settracerprovider.md) |  | Override the tracer provider, which otherwise defaults to the global tracer provider. |
 

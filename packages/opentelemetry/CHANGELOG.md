@@ -6,6 +6,8 @@
 
   Requires a policy decision point server running Cerbos 0.30+, and [@cerbos/grpc] 0.13+ or [@cerbos/http] 0.14+.
 
+- `rpc.client.duration` metric ([#644](https://github.com/cerbos/cerbos-sdk-javascript/pull/644))
+
 ### Changed
 
 - Bump dependencies on [@opentelemetry/instrumentation](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation) to 0.41.2 and [@opentelemetry/semantic-conventions](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-semantic-conventions) to 1.15.2 ([#614](https://github.com/cerbos/cerbos-sdk-javascript/pull/614), [#635](https://github.com/cerbos/cerbos-sdk-javascript/pull/635))

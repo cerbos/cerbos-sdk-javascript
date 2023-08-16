@@ -1,4 +1,4 @@
-// https://github.com/DefinitelyTyped/DefinitelyTyped/discussions/60038
+// https://github.com/DefinitelyTyped/DefinitelyTyped/pull/66392
 
 import type {
   TextDecoder as TextDecoderConstructor,
