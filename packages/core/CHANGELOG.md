@@ -2,6 +2,14 @@
 
 No notable changes.
 
+## [0.13.0] - 2023-08-16
+
+### Added
+
+- Support for OpenTelemetry span context propagation ([#638](https://github.com/cerbos/cerbos-sdk-javascript/pull/638))
+
+  Requires a policy decision point server running Cerbos 0.30+, and [@cerbos/opentelemetry](../opentelemetry/README.md) 0.3+.
+
 ## [0.12.0] - 2023-07-18
 
 ### Added
@@ -107,7 +115,8 @@ No notable changes.
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.12.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.13.0...HEAD
+[0.13.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.12.0...@cerbos/core@0.13.0
 [0.12.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.11.0...@cerbos/core@0.12.0
 [0.11.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.10.0...@cerbos/core@0.11.0
 [0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.9.1...@cerbos/core@0.10.0
