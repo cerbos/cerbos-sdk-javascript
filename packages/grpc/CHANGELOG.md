@@ -1,5 +1,15 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.13.0] - 2023-08-16
+
+### Added
+
+- Support for OpenTelemetry span context propagation ([#638](https://github.com/cerbos/cerbos-sdk-javascript/pull/638))
+
+  Requires a policy decision point server running Cerbos 0.30+, and [@cerbos/opentelemetry] 0.3+.
+
 ### Changed
 
 - Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.9.0 ([#613](https://github.com/cerbos/cerbos-sdk-javascript/pull/613), [#618](https://github.com/cerbos/cerbos-sdk-javascript/pull/618), [#622](https://github.com/cerbos/cerbos-sdk-javascript/pull/622), [#629](https://github.com/cerbos/cerbos-sdk-javascript/pull/629))
@@ -144,7 +154,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.12.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.13.0...HEAD
+[0.13.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.12.0...@cerbos/grpc@0.13.0
 [0.12.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.11.0...@cerbos/grpc@0.12.0
 [0.11.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.10.0...@cerbos/grpc@0.11.0
 [0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.9.2...@cerbos/grpc@0.10.0

@@ -1,8 +1,18 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.14.0] - 2023-08-16
+
+### Added
+
+- Support for OpenTelemetry span context propagation ([#638](https://github.com/cerbos/cerbos-sdk-javascript/pull/638))
+
+  Requires a policy decision point server running Cerbos 0.30+, and [@cerbos/opentelemetry] 0.3+.
+
 ### Removed
 
-- Dependency on [abab](https://github.com/jsdom/abab), which is no longer necessary since dropping support for Node.js 14. The `btoa` global function is [supported in Node.js 16+ and all browsers](https://developer.mozilla.org/en-US/docs/Web/API/btoa#browser_compatibility).
+- Dependency on [abab](https://github.com/jsdom/abab), which is no longer necessary since dropping support for Node.js 14. The `btoa` global function is [supported in Node.js 16+ and all modern browsers](https://developer.mozilla.org/en-US/docs/Web/API/btoa#browser_compatibility).
 
 ## [0.13.0] - 2023-07-18
 
@@ -127,7 +137,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.13.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.14.0...HEAD
+[0.14.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.13.0...@cerbos/http@0.14.0
 [0.13.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.12.0...@cerbos/http@0.13.0
 [0.12.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.11.0...@cerbos/http@0.12.0
 [0.11.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.10.1...@cerbos/http@0.11.0
