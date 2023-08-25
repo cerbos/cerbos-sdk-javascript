@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependency on [protobufjs](https://github.com/protobufjs/protobuf.js) to 7.2.5 ([#651](https://github.com/cerbos/cerbos-sdk-javascript/pull/651))
 
 ## [0.13.0] - 2023-08-16
 
