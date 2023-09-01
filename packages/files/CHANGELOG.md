@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependency on [yaml](https://github.com/eemeli/yaml) to 2.3.2 ([#658](https://github.com/cerbos/cerbos-sdk-javascript/pull/658))
 
 ## [0.1.1] - 2023-08-16
 
