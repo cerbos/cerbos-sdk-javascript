@@ -37,6 +37,7 @@ import {
   captureSpan,
   expectMetrics,
   fetchSpans,
+  invalidArgumentDetails,
 } from "./helpers";
 import { QueryServiceClient } from "./protobuf/jaeger/proto/api_v3/query_service";
 import type { KeyValue as KeyValueProto } from "./protobuf/opentelemetry/proto/common/v1/common";
@@ -230,16 +231,14 @@ describe("CerbosInstrumentation", () => {
             [SemanticAttributes.RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
             [SemanticAttributes.RPC_METHOD]: "CheckResources",
             [SemanticAttributes.RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
-            "cerbos.error": expect.stringContaining(
-              "invalid CheckResourcesRequest",
-            ) as unknown as AttributeValue,
+            "cerbos.error": invalidArgumentDetails as unknown as AttributeValue,
           };
 
           expect(result).toEqual({
             error: expect.objectContaining({
               constructor: NotOK,
               code: Status.INVALID_ARGUMENT,
-              details: expect.stringContaining("invalid CheckResourcesRequest"),
+              details: invalidArgumentDetails,
             }),
           });
 
