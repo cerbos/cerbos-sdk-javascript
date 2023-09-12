@@ -1,7 +1,5 @@
 /* eslint-disable jest/no-conditional-expect */
 
-import "./fetch-polyfill";
-
 import { readFileSync, readdirSync } from "fs";
 import { resolve } from "path";
 import { createSecureContext } from "tls";
@@ -36,6 +34,7 @@ import { afterAll, beforeAll, describe, expect, it, jest } from "@jest/globals";
 import { UnsecuredJWT } from "jose";
 import { compare as semverCompare, lte as semverLte } from "semver";
 
+import { invalidArgumentDetails as invalidArgumentDetails } from "./helpers";
 import type { Ports } from "./servers";
 import {
   cerbosVersion,
@@ -625,20 +624,23 @@ describe("Client", () => {
         });
 
         it("handles errors", async () => {
-          await expect(
-            clients.default.checkResources({
+          try {
+            await clients.default.checkResources({
               principal: {
                 id: "",
                 roles: [],
               },
               resources: [],
-            }),
-          ).rejects.toThrow(
-            new NotOK(
-              Status.INVALID_ARGUMENT,
-              "invalid CheckResourcesRequest.Principal: embedded message failed validation | caused by: invalid Principal.Id: value length must be at least 1 runes",
-            ),
-          );
+            });
+
+            throw new Error("expected an error to be thrown");
+          } catch (error) {
+            expect(error).toMatchObject({
+              constructor: NotOK,
+              code: Status.INVALID_ARGUMENT,
+              details: invalidArgumentDetails,
+            });
+          }
         });
       },
     );

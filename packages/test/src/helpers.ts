@@ -27,6 +27,7 @@ import type {
   SpansResponseChunk,
 } from "./protobuf/jaeger/proto/api_v3/query_service";
 import type { Span as SpanProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
+import { cerbosVersionIsAtLeast } from "./servers";
 
 export function buildResultsForResources({
   id,
@@ -200,3 +201,9 @@ export async function expectMetrics(
 function hrTimeToMilliseconds([seconds, nanoseconds]: HrTime): number {
   return seconds * 1e3 + nanoseconds * 1e-6;
 }
+
+export const invalidArgumentDetails = expect.stringContaining(
+  cerbosVersionIsAtLeast("0.30.0")
+    ? "validation error"
+    : "invalid CheckResourcesRequest",
+);

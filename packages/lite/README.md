@@ -6,18 +6,12 @@ Client library for interacting with WebAssembly Cerbos policy bundles from serve
 
 ## Prerequisites
 
-- Node.js 16+
+- Node.js 18+
 
 ## Installation
 
 ```console
 $ npm install @cerbos/lite
-```
-
-or
-
-```console
-$ yarn add @cerbos/lite
 ```
 
 ## Example usage

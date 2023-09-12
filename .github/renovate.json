@@ -30,7 +30,7 @@
       "extractVersion": "^v(?<version>.*)$"
     },
     {
-      "matchPackageNames": ["@types/node", "node-fetch", "long", "protobufjs"],
+      "matchPackageNames": ["@types/node", "long", "protobufjs"],
       "matchUpdateTypes": ["major"],
       "enabled": false
     },

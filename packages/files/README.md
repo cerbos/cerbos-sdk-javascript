@@ -6,18 +6,12 @@ Load Cerbos policies from YAML or JSON files.
 
 ## Prerequisites
 
-- Node.js 16+
+- Node.js 18+
 
 ## Installation
 
 ```console
 $ npm install @cerbos/files
-```
-
-or
-
-```console
-$ yarn add @cerbos/files
 ```
 
 ## Example usage
