@@ -49,28 +49,34 @@ export async function ports(): Promise<Ports> {
     "json",
   ]);
 
-  const output = JSON.parse(stdout) as DockerComposeContainer[];
+  const containers = stdout
+    .split("\n")
+    .filter((line) => line !== "")
+    .flatMap(
+      (line) =>
+        JSON.parse(line) as DockerComposeContainer | DockerComposeContainer[],
+    );
 
   return {
     grpc: {
-      plaintext: port(output, "plaintext", 3593),
-      tls: port(output, "tls", 3593),
-      mtls: port(output, "mtls", 3593),
-      mutable: port(output, "mutable", 3593),
+      plaintext: port(containers, "plaintext", 3593),
+      tls: port(containers, "tls", 3593),
+      mtls: port(containers, "mtls", 3593),
+      mutable: port(containers, "mutable", 3593),
       get tracing(): number {
-        return port(output, "tracing", 3593);
+        return port(containers, "tracing", 3593);
       },
     },
     http: {
-      plaintext: port(output, "plaintext", 3592),
-      tls: port(output, "tls", 3592),
-      mutable: port(output, "mutable", 3592),
+      plaintext: port(containers, "plaintext", 3592),
+      tls: port(containers, "tls", 3592),
+      mutable: port(containers, "mutable", 3592),
       get tracing(): number {
-        return port(output, "tracing", 3592);
+        return port(containers, "tracing", 3592);
       },
     },
     get jaeger(): number {
-      return port(output, "jaeger", 16685);
+      return port(containers, "jaeger", 16685);
     },
   };
 }
