@@ -28,21 +28,6 @@ export function knownRegexFromJSON(object: any): KnownRegex {
   }
 }
 
-export function knownRegexToJSON(object: KnownRegex): string {
-  switch (object) {
-    case KnownRegex.UNKNOWN:
-      return "UNKNOWN";
-    case KnownRegex.HTTP_HEADER_NAME:
-      return "HTTP_HEADER_NAME";
-    case KnownRegex.HTTP_HEADER_VALUE:
-      return "HTTP_HEADER_VALUE";
-    default:
-      throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum KnownRegex",
-      );
-  }
-}
-
 export interface FieldRules {
   message: MessageRules | undefined;
   type?:

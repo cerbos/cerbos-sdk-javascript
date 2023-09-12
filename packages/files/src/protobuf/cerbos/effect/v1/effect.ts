@@ -30,23 +30,6 @@ export function effectFromJSON(object: any): Effect {
   }
 }
 
-export function effectToJSON(object: Effect): string {
-  switch (object) {
-    case Effect.EFFECT_UNSPECIFIED:
-      return "EFFECT_UNSPECIFIED";
-    case Effect.EFFECT_ALLOW:
-      return "EFFECT_ALLOW";
-    case Effect.EFFECT_DENY:
-      return "EFFECT_DENY";
-    case Effect.EFFECT_NO_MATCH:
-      return "EFFECT_NO_MATCH";
-    default:
-      throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum Effect",
-      );
-  }
-}
-
 declare const self: any | undefined;
 declare const window: any | undefined;
 declare const global: any | undefined;

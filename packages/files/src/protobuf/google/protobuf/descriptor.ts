@@ -40,21 +40,6 @@ export function fieldOptions_CTypeFromJSON(object: any): FieldOptions_CType {
   }
 }
 
-export function fieldOptions_CTypeToJSON(object: FieldOptions_CType): string {
-  switch (object) {
-    case FieldOptions_CType.STRING:
-      return "STRING";
-    case FieldOptions_CType.CORD:
-      return "CORD";
-    case FieldOptions_CType.STRING_PIECE:
-      return "STRING_PIECE";
-    default:
-      throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum FieldOptions_CType",
-      );
-  }
-}
-
 export enum FieldOptions_JSType {
   JS_NORMAL = 0,
   JS_STRING = 1,
@@ -72,21 +57,6 @@ export function fieldOptions_JSTypeFromJSON(object: any): FieldOptions_JSType {
     case 2:
     case "JS_NUMBER":
       return FieldOptions_JSType.JS_NUMBER;
-    default:
-      throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " + object + " for enum FieldOptions_JSType",
-      );
-  }
-}
-
-export function fieldOptions_JSTypeToJSON(object: FieldOptions_JSType): string {
-  switch (object) {
-    case FieldOptions_JSType.JS_NORMAL:
-      return "JS_NORMAL";
-    case FieldOptions_JSType.JS_STRING:
-      return "JS_STRING";
-    case FieldOptions_JSType.JS_NUMBER:
-      return "JS_NUMBER";
     default:
       throw new tsProtoGlobalThis.Error(
         "Unrecognized enum value " + object + " for enum FieldOptions_JSType",
@@ -113,25 +83,6 @@ export function fieldOptions_OptionRetentionFromJSON(
     case 2:
     case "RETENTION_SOURCE":
       return FieldOptions_OptionRetention.RETENTION_SOURCE;
-    default:
-      throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum FieldOptions_OptionRetention",
-      );
-  }
-}
-
-export function fieldOptions_OptionRetentionToJSON(
-  object: FieldOptions_OptionRetention,
-): string {
-  switch (object) {
-    case FieldOptions_OptionRetention.RETENTION_UNKNOWN:
-      return "RETENTION_UNKNOWN";
-    case FieldOptions_OptionRetention.RETENTION_RUNTIME:
-      return "RETENTION_RUNTIME";
-    case FieldOptions_OptionRetention.RETENTION_SOURCE:
-      return "RETENTION_SOURCE";
     default:
       throw new tsProtoGlobalThis.Error(
         "Unrecognized enum value " +
@@ -188,39 +139,6 @@ export function fieldOptions_OptionTargetTypeFromJSON(
     case 9:
     case "TARGET_TYPE_METHOD":
       return FieldOptions_OptionTargetType.TARGET_TYPE_METHOD;
-    default:
-      throw new tsProtoGlobalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum FieldOptions_OptionTargetType",
-      );
-  }
-}
-
-export function fieldOptions_OptionTargetTypeToJSON(
-  object: FieldOptions_OptionTargetType,
-): string {
-  switch (object) {
-    case FieldOptions_OptionTargetType.TARGET_TYPE_UNKNOWN:
-      return "TARGET_TYPE_UNKNOWN";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_FILE:
-      return "TARGET_TYPE_FILE";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_EXTENSION_RANGE:
-      return "TARGET_TYPE_EXTENSION_RANGE";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_MESSAGE:
-      return "TARGET_TYPE_MESSAGE";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_FIELD:
-      return "TARGET_TYPE_FIELD";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_ONEOF:
-      return "TARGET_TYPE_ONEOF";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_ENUM:
-      return "TARGET_TYPE_ENUM";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_ENUM_ENTRY:
-      return "TARGET_TYPE_ENUM_ENTRY";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_SERVICE:
-      return "TARGET_TYPE_SERVICE";
-    case FieldOptions_OptionTargetType.TARGET_TYPE_METHOD:
-      return "TARGET_TYPE_METHOD";
     default:
       throw new tsProtoGlobalThis.Error(
         "Unrecognized enum value " +
