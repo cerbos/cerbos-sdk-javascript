@@ -4,6 +4,10 @@
 
 - Bump dependency on [yaml](https://github.com/eemeli/yaml) to 2.3.2 ([#658](https://github.com/cerbos/cerbos-sdk-javascript/pull/658))
 
+### Removed
+
+- Support for Node.js 16, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
+
 ## [0.1.1] - 2023-08-16
 
 ### Changed

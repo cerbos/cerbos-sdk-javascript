@@ -6,18 +6,12 @@
 
 ## Prerequisites
 
-- Node.js 16+
+- Node.js 18+
 
 ## Installation
 
 ```console
 $ npm install @cerbos/opentelemetry
-```
-
-or
-
-```console
-$ yarn add @cerbos/opentelemetry
 ```
 
 ## Example usage

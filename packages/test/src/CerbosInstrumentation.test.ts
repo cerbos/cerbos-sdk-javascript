@@ -1,7 +1,5 @@
 /* eslint-disable jest/no-conditional-expect */
 
-import "./fetch-polyfill";
-
 import { readFileSync } from "fs";
 import { resolve } from "path";
 

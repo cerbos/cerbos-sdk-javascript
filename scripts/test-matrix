@@ -12,7 +12,7 @@ response.value
 schedule = JSON.parse(response.body)
 
 node_versions = schedule.filter_map do |version, dates|
-  version.delete_prefix("v") if (Date.iso8601(dates.fetch("start"))...Date.iso8601(dates.fetch("end"))).include?(Date.today - 7)
+  version.delete_prefix("v") if (Date.iso8601(dates.fetch("start"))...Date.iso8601(dates.fetch("end"))).include?(Date.today)
 end
 
 latest_node_version = node_versions.last

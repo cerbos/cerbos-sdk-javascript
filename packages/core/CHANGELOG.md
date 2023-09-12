@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Removed
+
+- Support for Node.js 16, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
 
 ## [0.13.0] - 2023-08-16
 

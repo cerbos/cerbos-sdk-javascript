@@ -5,6 +5,10 @@
 - Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.9.1 ([#654](https://github.com/cerbos/cerbos-sdk-javascript/pull/654))
 - Bump dependency on [protobufjs](https://github.com/protobufjs/protobuf.js) to 7.2.5 ([#651](https://github.com/cerbos/cerbos-sdk-javascript/pull/651))
 
+### Removed
+
+- Support for Node.js 16, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
+
 ## [0.13.0] - 2023-08-16
 
 ### Added

@@ -21,11 +21,9 @@
     "@opentelemetry/sdk-trace-base": "1.15.2",
     "@opentelemetry/sdk-trace-node": "1.15.2",
     "@opentelemetry/semantic-conventions": "1.15.2",
-    "@types/node-fetch": "2.6.4",
     "@types/semver": "7.5.0",
     "jest": "29.6.4",
     "jose": "4.14.4",
-    "node-fetch": "2.6.12",
     "semver": "7.5.4"
   }
 }
