@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Changed
+
+- Bump dependencies on [@opentelemetry/api](https://github.com/open-telemetry/opentelemetry-js/tree/main/api) to 1.6.0, [@opentelemetry/instrumentation](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation) to 0.43.0, and [@opentelemetry/semantic-conventions](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-semantic-conventions) to 1.17.0 ([#670](https://github.com/cerbos/cerbos-sdk-javascript/pull/670))
+
 ### Removed
 
 - Support for Node.js 16, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
