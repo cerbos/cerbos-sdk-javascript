@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Changed
+
+- Bump dependency on [uuid](https://github.com/uuidjs/uuid) to 9.0.1 ([#672](https://github.com/cerbos/cerbos-sdk-javascript/pull/672))
+
 ### Removed
 
 - Support for Node.js 16, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
