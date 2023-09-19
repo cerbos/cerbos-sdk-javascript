@@ -2,7 +2,7 @@
 
 ### Changed
 
-- Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.9.2 ([#654](https://github.com/cerbos/cerbos-sdk-javascript/pull/654), [#663](https://github.com/cerbos/cerbos-sdk-javascript/pull/663))
+- Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.9.3 ([#654](https://github.com/cerbos/cerbos-sdk-javascript/pull/654), [#663](https://github.com/cerbos/cerbos-sdk-javascript/pull/663), [#666](https://github.com/cerbos/cerbos-sdk-javascript/pull/666))
 - Bump dependency on [protobufjs](https://github.com/protobufjs/protobuf.js) to 7.2.5 ([#651](https://github.com/cerbos/cerbos-sdk-javascript/pull/651))
 
 ### Removed
