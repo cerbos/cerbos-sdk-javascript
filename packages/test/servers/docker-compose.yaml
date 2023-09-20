@@ -20,8 +20,12 @@ services:
     healthcheck:
       interval: 2s
     ports:
-      - 3592
-      - 3593
+      - protocol: tcp
+        target: 3592
+        host_ip: "::1"
+      - protocol: tcp
+        target: 3593
+        host_ip: "::1"
     user: ${USER}
     volumes:
       - type: bind
@@ -72,7 +76,9 @@ services:
         - healthcheck
         - --ping
     ports:
-      - 3593
+      - protocol: tcp
+        target: 3593
+        host_ip: "::1"
     volumes:
       - type: bind
         source: tmp/certificates
@@ -126,4 +132,6 @@ services:
       retries: 3
       start_period: 5s
     ports:
-      - 16685
+      - protocol: tcp
+        target: 16685
+        host_ip: "::1"
