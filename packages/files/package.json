@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/files",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Load Cerbos policies from YAML or JSON files",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "src/**/*.ts"
   ],
   "dependencies": {
-    "@cerbos/core": "^0.13.0",
+    "@cerbos/core": "^0.14.0",
     "yaml": "^2.3.2"
   }
 }

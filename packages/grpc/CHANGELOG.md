@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.14.0] - 2023-10-02
+
 ### Changed
 
 - Use `attr` for principal and resource attributes ([#694](https://github.com/cerbos/cerbos-sdk-javascript/pull/694))
@@ -166,7 +170,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.13.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.14.0...HEAD
+[0.14.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.13.0...@cerbos/grpc@0.14.0
 [0.13.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.12.0...@cerbos/grpc@0.13.0
 [0.12.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.11.0...@cerbos/grpc@0.12.0
 [0.11.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.10.0...@cerbos/grpc@0.11.0
