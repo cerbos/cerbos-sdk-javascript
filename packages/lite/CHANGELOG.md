@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.5.0-beta] - 2023-10-02
+
 ### Changed
 
 - Use `attr` for principal and resource attributes ([#694](https://github.com/cerbos/cerbos-sdk-javascript/pull/694))
@@ -65,7 +69,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.4.1-beta...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.5.0-beta...HEAD
+[0.5.0-beta]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.4.1-beta...@cerbos/lite@0.5.0-beta
 [0.4.1-beta]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.4.0-beta...@cerbos/lite@0.4.1-beta
 [0.4.0-beta]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.3.1-alpha...@cerbos/lite@0.4.0-beta
 [0.3.1-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.3.0-alpha...@cerbos/lite@0.3.1-alpha

@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.2.0] - 2023-10-02
+
 ### Changed
 
 - Bump dependency on [yaml](https://github.com/eemeli/yaml) to 2.3.2 ([#658](https://github.com/cerbos/cerbos-sdk-javascript/pull/658))
@@ -20,6 +24,7 @@
 
 - A package to load Cerbos policies from YAML or JSON files ([#611](https://github.com/cerbos/cerbos-sdk-javascript/pull/611))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.1.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.0...HEAD
+[0.2.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.1.1...@cerbos/files@0.2.0
 [0.1.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.1.0...@cerbos/files@0.1.1
 [0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/ffc411436a2c64e97cd2f5f8789490eb800c3b3d...@cerbos/files@0.1.0
