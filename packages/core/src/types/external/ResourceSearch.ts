@@ -8,4 +8,4 @@ import type { Resource } from "./Resource";
  *
  * @public
  */
-export type ResourceSearch = Omit<Resource, "attributes">;
+export type ResourceSearch = Omit<Resource, "attr" | "attributes">;

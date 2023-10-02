@@ -33,7 +33,7 @@ describe("Lite", () => {
             policyVersion: "1",
             scope: "test",
             roles: ["USER"],
-            attributes: {
+            attr: {
               country: {
                 alpha2: "",
                 alpha3: "NZL",
@@ -45,7 +45,7 @@ describe("Lite", () => {
             id: "mine",
             policyVersion: "1",
             scope: "test",
-            attributes: {
+            attr: {
               owner: "me@example.com",
             },
           },
@@ -103,7 +103,7 @@ describe("Lite", () => {
           policyVersion: "1",
           scope: "test",
           roles: ["USER"],
-          attributes: {
+          attr: {
             country: {
               alpha2: "",
               alpha3: "NZL",
@@ -117,7 +117,7 @@ describe("Lite", () => {
               id: "mine",
               policyVersion: "1",
               scope: "test",
-              attributes: {
+              attr: {
                 owner: "me@example.com",
               },
             },
@@ -129,7 +129,7 @@ describe("Lite", () => {
               id: "theirs",
               policyVersion: "1",
               scope: "test",
-              attributes: {
+              attr: {
                 owner: "them@example.com",
               },
             },
@@ -141,7 +141,7 @@ describe("Lite", () => {
               id: "invalid",
               policyVersion: "1",
               scope: "test",
-              attributes: {
+              attr: {
                 owner: 123,
               },
             },
@@ -273,7 +273,7 @@ describe("Lite", () => {
               policyVersion: "1",
               scope: "test",
               roles: ["USER"],
-              attributes: {
+              attr: {
                 country: {
                   alpha2: "",
                   alpha3: "NZL",
@@ -285,7 +285,7 @@ describe("Lite", () => {
               id: "mine",
               policyVersion: "1",
               scope: "test",
-              attributes: {
+              attr: {
                 owner: "me@example.com",
               },
             },

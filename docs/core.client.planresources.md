@@ -30,7 +30,7 @@ const plan = await cerbos.planResources({
   principal: {
     id: "user@example.com",
     roles: ["USER"],
-    attributes: { tier: "PREMIUM" },
+    attr: { tier: "PREMIUM" },
   },
   resource: { kind: "document" },
   action: "view",

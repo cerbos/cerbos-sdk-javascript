@@ -285,12 +285,12 @@ export abstract class Client {
    *   principal: {
    *     id: "user@example.com",
    *     roles: ["USER"],
-   *     attributes: { tier: "PREMIUM" },
+   *     attr: { tier: "PREMIUM" },
    *   },
    *   resource: {
    *     kind: "document",
    *     id: "1",
-   *     attributes: { owner: "user@example.com" },
+   *     attr: { owner: "user@example.com" },
    *   },
    *   actions: ["view", "edit"],
    * });
@@ -325,14 +325,14 @@ export abstract class Client {
    *   principal: {
    *     id: "user@example.com",
    *     roles: ["USER"],
-   *     attributes: { tier: "PREMIUM" },
+   *     attr: { tier: "PREMIUM" },
    *   },
    *   resources: [
    *     {
    *       resource: {
    *         kind: "document",
    *         id: "1",
-   *         attributes: { owner: "user@example.com" },
+   *         attr: { owner: "user@example.com" },
    *       },
    *       actions: ["view", "edit"],
    *     },
@@ -340,7 +340,7 @@ export abstract class Client {
    *       resource: {
    *         kind: "image",
    *         id: "1",
-   *         attributes: { owner: "user@example.com" },
+   *         attr: { owner: "user@example.com" },
    *       },
    *       actions: ["delete"],
    *     },
@@ -634,12 +634,12 @@ export abstract class Client {
    *   principal: {
    *     id: "user@example.com",
    *     roles: ["USER"],
-   *     attributes: { tier: "PREMIUM" },
+   *     attr: { tier: "PREMIUM" },
    *   },
    *   resource: {
    *     kind: "document",
    *     id: "1",
-   *     attributes: { owner: "user@example.com" },
+   *     attr: { owner: "user@example.com" },
    *   },
    *   action: "view",
    * }); // => true
@@ -708,7 +708,7 @@ export abstract class Client {
    *   principal: {
    *     id: "user@example.com",
    *     roles: ["USER"],
-   *     attributes: { tier: "PREMIUM" },
+   *     attr: { tier: "PREMIUM" },
    *   },
    *   resource: { kind: "document" },
    *   action: "view",

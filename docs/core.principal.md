@@ -16,7 +16,8 @@ export interface Principal
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [attributes?](./core.principal.attributes.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; | _(Optional)_ Application-specific attributes describing the principal. |
+|  [attr?](./core.principal.attr.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; | _(Optional)_ Application-specific attributes describing the principal. |
+|  [attributes?](./core.principal.attributes.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; | _(Optional)_ Application-specific attributes describing the principal (deprecated). |
 |  [id](./core.principal.id.md) |  | string | A unique identifier for the principal. |
 |  [policyVersion?](./core.principal.policyversion.md) |  | string | _(Optional)_ The policy version to use when authorizing the principal. |
 |  [roles](./core.principal.roles.md) |  | string\[\] | The roles held by the principal. |

@@ -160,7 +160,7 @@ describe("Client", () => {
                 policyVersion: "1",
                 scope: "test",
                 roles: ["USER"],
-                attributes: {
+                attr: {
                   country: {
                     alpha2: "",
                     alpha3: "NZL",
@@ -172,7 +172,7 @@ describe("Client", () => {
                 id: "mine",
                 policyVersion: "1",
                 scope: "test",
-                attributes: {
+                attr: {
                   owner: "me@example.com",
                 },
               },
@@ -245,7 +245,7 @@ describe("Client", () => {
               policyVersion: "1",
               scope: "test",
               roles: ["USER"],
-              attributes: {
+              attr: {
                 country: {
                   alpha2: "",
                   alpha3: "NZL",
@@ -259,7 +259,7 @@ describe("Client", () => {
                   id: "mine",
                   policyVersion: "1",
                   scope: "test",
-                  attributes: {
+                  attr: {
                     owner: "me@example.com",
                   },
                 },
@@ -271,7 +271,7 @@ describe("Client", () => {
                   id: "theirs",
                   policyVersion: "1",
                   scope: "test",
-                  attributes: {
+                  attr: {
                     owner: "them@example.com",
                   },
                 },
@@ -283,7 +283,7 @@ describe("Client", () => {
                   id: "invalid",
                   policyVersion: "1",
                   scope: "test",
-                  attributes: {
+                  attr: {
                     owner: 123,
                   },
                 },
@@ -488,7 +488,7 @@ describe("Client", () => {
                 policyVersion: "1",
                 scope: "test",
                 roles: ["USER"],
-                attributes: {
+                attr: {
                   country: {
                     alpha2: "",
                     alpha3: "NZL",
@@ -500,7 +500,7 @@ describe("Client", () => {
                 id: "mine",
                 policyVersion: "1",
                 scope: "test",
-                attributes: {
+                attr: {
                   owner: "me@example.com",
                 },
               },
@@ -525,7 +525,7 @@ describe("Client", () => {
               policyVersion: "1",
               scope: "test",
               roles: ["USER"],
-              attributes: {
+              attr: {
                 country: {
                   alpha2: "",
                   alpha3: "NZL",
@@ -536,7 +536,7 @@ describe("Client", () => {
               kind: "document",
               policyVersion: "1",
               scope: "test",
-              attributes: {},
+              attr: {},
             },
             action: "edit",
             auxData: {

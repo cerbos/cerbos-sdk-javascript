@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+### Changed
+
+- Use `attr` for principal and resource attributes ([#694](https://github.com/cerbos/cerbos-sdk-javascript/pull/694))
+
+  This makes the API consistent with policy expressions.
+  `attributes` is still supported for backwards compatibility, but is now deprecated.
+
 ### Removed
 
 - Support for Node.js 16, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
