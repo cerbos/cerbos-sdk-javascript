@@ -2,6 +2,11 @@
 
 ### Changed
 
+- Use `attr` for principal and resource attributes ([#694](https://github.com/cerbos/cerbos-sdk-javascript/pull/694))
+
+  This makes the API consistent with policy expressions.
+  `attributes` is still supported for backwards compatibility, but is now deprecated.
+
 - Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.9.4 ([#654](https://github.com/cerbos/cerbos-sdk-javascript/pull/654), [#663](https://github.com/cerbos/cerbos-sdk-javascript/pull/663), [#666](https://github.com/cerbos/cerbos-sdk-javascript/pull/666), [#693](https://github.com/cerbos/cerbos-sdk-javascript/pull/693))
 - Bump dependency on [protobufjs](https://github.com/protobufjs/protobuf.js) to 7.2.5 ([#651](https://github.com/cerbos/cerbos-sdk-javascript/pull/651))
 

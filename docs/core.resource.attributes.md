@@ -4,7 +4,12 @@
 
 ## Resource.attributes property
 
-Application-specific attributes describing the resource.
+> Warning: This API is now obsolete.
+> 
+> Use [Resource.attr](./core.resource.attr.md) instead, for consistency with policy expressions.
+> 
+
+Application-specific attributes describing the resource (deprecated).
 
 **Signature:**
 

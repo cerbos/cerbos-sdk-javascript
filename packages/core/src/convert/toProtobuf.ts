@@ -410,6 +410,7 @@ export function checkResourcesRequestToProtobuf({
 function principalToProtobuf({
   id,
   roles,
+  attr = {},
   attributes = {},
   policyVersion = "",
   scope = "",
@@ -417,7 +418,10 @@ function principalToProtobuf({
   return {
     id,
     roles,
-    attr: attributes,
+    attr: {
+      ...attributes,
+      ...attr,
+    },
     policyVersion,
     scope,
   };
@@ -436,6 +440,7 @@ function resourceCheckToProtobuf({
 function resourceToProtobuf({
   kind,
   id,
+  attr = {},
   attributes = {},
   policyVersion = "",
   scope = "",
@@ -443,7 +448,10 @@ function resourceToProtobuf({
   return {
     kind,
     id,
-    attr: attributes,
+    attr: {
+      ...attributes,
+      ...attr,
+    },
     policyVersion,
     scope,
   };
@@ -536,13 +544,17 @@ export function planResourcesRequestToProtobuf({
 
 function resourceQueryToProtobuf({
   kind,
+  attr = {},
   attributes = {},
   policyVersion = "",
   scope = "",
 }: ResourceQuery): PlanResourcesInput_Resource {
   return {
     kind,
-    attr: attributes,
+    attr: {
+      ...attributes,
+      ...attr,
+    },
     policyVersion,
     scope,
   };

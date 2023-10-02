@@ -21,6 +21,14 @@ export interface Resource {
    *
    * @defaultValue `{}`
    */
+  attr?: Record<string, Value>;
+
+  /**
+   * Application-specific attributes describing the resource (deprecated).
+   *
+   * @defaultValue `{}`
+   * @deprecated Use {@link Resource.attr} instead, for consistency with policy expressions.
+   */
   attributes?: Record<string, Value>;
 
   /**

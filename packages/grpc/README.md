@@ -26,12 +26,12 @@ await cerbos.isAllowed({
   principal: {
     id: "user@example.com",
     roles: ["USER"],
-    attributes: { tier: "PREMIUM" },
+    attr: { tier: "PREMIUM" },
   },
   resource: {
     kind: "document",
     id: "1",
-    attributes: { owner: "user@example.com" },
+    attr: { owner: "user@example.com" },
   },
   action: "view",
 }); // => true
