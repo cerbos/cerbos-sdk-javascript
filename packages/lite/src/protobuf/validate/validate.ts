@@ -22,7 +22,7 @@ export function knownRegexFromJSON(object: any): KnownRegex {
     case "HTTP_HEADER_VALUE":
       return KnownRegex.HTTP_HEADER_VALUE;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum KnownRegex",
       );
   }
@@ -37,7 +37,7 @@ export function knownRegexToJSON(object: KnownRegex): string {
     case KnownRegex.HTTP_HEADER_VALUE:
       return "HTTP_HEADER_VALUE";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum KnownRegex",
       );
   }
@@ -456,17 +456,19 @@ export const FieldRules = {
 export const FloatRules = {
   fromJSON(object: any): FloatRules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -504,17 +506,19 @@ export const FloatRules = {
 export const DoubleRules = {
   fromJSON(object: any): DoubleRules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -552,17 +556,19 @@ export const DoubleRules = {
 export const Int32Rules = {
   fromJSON(object: any): Int32Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -600,17 +606,19 @@ export const Int32Rules = {
 export const Int64Rules = {
   fromJSON(object: any): Int64Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -648,17 +656,19 @@ export const Int64Rules = {
 export const UInt32Rules = {
   fromJSON(object: any): UInt32Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -696,17 +706,19 @@ export const UInt32Rules = {
 export const UInt64Rules = {
   fromJSON(object: any): UInt64Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -744,17 +756,19 @@ export const UInt64Rules = {
 export const SInt32Rules = {
   fromJSON(object: any): SInt32Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -792,17 +806,19 @@ export const SInt32Rules = {
 export const SInt64Rules = {
   fromJSON(object: any): SInt64Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -840,17 +856,19 @@ export const SInt64Rules = {
 export const Fixed32Rules = {
   fromJSON(object: any): Fixed32Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -888,17 +906,19 @@ export const Fixed32Rules = {
 export const Fixed64Rules = {
   fromJSON(object: any): Fixed64Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -936,17 +956,19 @@ export const Fixed64Rules = {
 export const SFixed32Rules = {
   fromJSON(object: any): SFixed32Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -984,17 +1006,19 @@ export const SFixed32Rules = {
 export const SFixed64Rules = {
   fromJSON(object: any): SFixed64Rules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
-      lt: isSet(object.lt) ? Number(object.lt) : 0,
-      lte: isSet(object.lte) ? Number(object.lte) : 0,
-      gt: isSet(object.gt) ? Number(object.gt) : 0,
-      gte: isSet(object.gte) ? Number(object.gte) : 0,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
+      lt: isSet(object.lt) ? globalThis.Number(object.lt) : 0,
+      lte: isSet(object.lte) ? globalThis.Number(object.lte) : 0,
+      gt: isSet(object.gt) ? globalThis.Number(object.gt) : 0,
+      gte: isSet(object.gte) ? globalThis.Number(object.gte) : 0,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -1031,7 +1055,9 @@ export const SFixed64Rules = {
 
 export const BoolRules = {
   fromJSON(object: any): BoolRules {
-    return { const: isSet(object.const) ? Boolean(object.const) : false };
+    return {
+      const: isSet(object.const) ? globalThis.Boolean(object.const) : false,
+    };
   },
 
   toJSON(message: BoolRules): unknown {
@@ -1046,49 +1072,55 @@ export const BoolRules = {
 export const StringRules = {
   fromJSON(object: any): StringRules {
     return {
-      const: isSet(object.const) ? String(object.const) : "",
-      len: isSet(object.len) ? Number(object.len) : 0,
-      minLen: isSet(object.minLen) ? Number(object.minLen) : 0,
-      maxLen: isSet(object.maxLen) ? Number(object.maxLen) : 0,
-      lenBytes: isSet(object.lenBytes) ? Number(object.lenBytes) : 0,
-      minBytes: isSet(object.minBytes) ? Number(object.minBytes) : 0,
-      maxBytes: isSet(object.maxBytes) ? Number(object.maxBytes) : 0,
-      pattern: isSet(object.pattern) ? String(object.pattern) : "",
-      prefix: isSet(object.prefix) ? String(object.prefix) : "",
-      suffix: isSet(object.suffix) ? String(object.suffix) : "",
-      contains: isSet(object.contains) ? String(object.contains) : "",
-      notContains: isSet(object.notContains) ? String(object.notContains) : "",
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => String(e))
+      const: isSet(object.const) ? globalThis.String(object.const) : "",
+      len: isSet(object.len) ? globalThis.Number(object.len) : 0,
+      minLen: isSet(object.minLen) ? globalThis.Number(object.minLen) : 0,
+      maxLen: isSet(object.maxLen) ? globalThis.Number(object.maxLen) : 0,
+      lenBytes: isSet(object.lenBytes) ? globalThis.Number(object.lenBytes) : 0,
+      minBytes: isSet(object.minBytes) ? globalThis.Number(object.minBytes) : 0,
+      maxBytes: isSet(object.maxBytes) ? globalThis.Number(object.maxBytes) : 0,
+      pattern: isSet(object.pattern) ? globalThis.String(object.pattern) : "",
+      prefix: isSet(object.prefix) ? globalThis.String(object.prefix) : "",
+      suffix: isSet(object.suffix) ? globalThis.String(object.suffix) : "",
+      contains: isSet(object.contains)
+        ? globalThis.String(object.contains)
+        : "",
+      notContains: isSet(object.notContains)
+        ? globalThis.String(object.notContains)
+        : "",
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.String(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.String(e))
         : [],
       wellKnown: isSet(object.email)
-        ? { $case: "email", email: Boolean(object.email) }
+        ? { $case: "email", email: globalThis.Boolean(object.email) }
         : isSet(object.hostname)
-        ? { $case: "hostname", hostname: Boolean(object.hostname) }
+        ? { $case: "hostname", hostname: globalThis.Boolean(object.hostname) }
         : isSet(object.ip)
-        ? { $case: "ip", ip: Boolean(object.ip) }
+        ? { $case: "ip", ip: globalThis.Boolean(object.ip) }
         : isSet(object.ipv4)
-        ? { $case: "ipv4", ipv4: Boolean(object.ipv4) }
+        ? { $case: "ipv4", ipv4: globalThis.Boolean(object.ipv4) }
         : isSet(object.ipv6)
-        ? { $case: "ipv6", ipv6: Boolean(object.ipv6) }
+        ? { $case: "ipv6", ipv6: globalThis.Boolean(object.ipv6) }
         : isSet(object.uri)
-        ? { $case: "uri", uri: Boolean(object.uri) }
+        ? { $case: "uri", uri: globalThis.Boolean(object.uri) }
         : isSet(object.uriRef)
-        ? { $case: "uriRef", uriRef: Boolean(object.uriRef) }
+        ? { $case: "uriRef", uriRef: globalThis.Boolean(object.uriRef) }
         : isSet(object.address)
-        ? { $case: "address", address: Boolean(object.address) }
+        ? { $case: "address", address: globalThis.Boolean(object.address) }
         : isSet(object.uuid)
-        ? { $case: "uuid", uuid: Boolean(object.uuid) }
+        ? { $case: "uuid", uuid: globalThis.Boolean(object.uuid) }
         : isSet(object.wellKnownRegex)
         ? {
             $case: "wellKnownRegex",
             wellKnownRegex: knownRegexFromJSON(object.wellKnownRegex),
           }
         : undefined,
-      strict: isSet(object.strict) ? Boolean(object.strict) : false,
+      strict: isSet(object.strict) ? globalThis.Boolean(object.strict) : false,
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -1183,10 +1215,10 @@ export const BytesRules = {
       const: isSet(object.const)
         ? bytesFromBase64(object.const)
         : new Uint8Array(0),
-      len: isSet(object.len) ? Number(object.len) : 0,
-      minLen: isSet(object.minLen) ? Number(object.minLen) : 0,
-      maxLen: isSet(object.maxLen) ? Number(object.maxLen) : 0,
-      pattern: isSet(object.pattern) ? String(object.pattern) : "",
+      len: isSet(object.len) ? globalThis.Number(object.len) : 0,
+      minLen: isSet(object.minLen) ? globalThis.Number(object.minLen) : 0,
+      maxLen: isSet(object.maxLen) ? globalThis.Number(object.maxLen) : 0,
+      pattern: isSet(object.pattern) ? globalThis.String(object.pattern) : "",
       prefix: isSet(object.prefix)
         ? bytesFromBase64(object.prefix)
         : new Uint8Array(0),
@@ -1196,21 +1228,21 @@ export const BytesRules = {
       contains: isSet(object.contains)
         ? bytesFromBase64(object.contains)
         : new Uint8Array(0),
-      in: Array.isArray(object?.in)
+      in: globalThis.Array.isArray(object?.in)
         ? object.in.map((e: any) => bytesFromBase64(e))
         : [],
-      notIn: Array.isArray(object?.notIn)
+      notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => bytesFromBase64(e))
         : [],
       wellKnown: isSet(object.ip)
-        ? { $case: "ip", ip: Boolean(object.ip) }
+        ? { $case: "ip", ip: globalThis.Boolean(object.ip) }
         : isSet(object.ipv4)
-        ? { $case: "ipv4", ipv4: Boolean(object.ipv4) }
+        ? { $case: "ipv4", ipv4: globalThis.Boolean(object.ipv4) }
         : isSet(object.ipv6)
-        ? { $case: "ipv6", ipv6: Boolean(object.ipv6) }
+        ? { $case: "ipv6", ipv6: globalThis.Boolean(object.ipv6) }
         : undefined,
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -1266,13 +1298,15 @@ export const BytesRules = {
 export const EnumRules = {
   fromJSON(object: any): EnumRules {
     return {
-      const: isSet(object.const) ? Number(object.const) : 0,
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
       definedOnly: isSet(object.definedOnly)
-        ? Boolean(object.definedOnly)
+        ? globalThis.Boolean(object.definedOnly)
         : false,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => Number(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Number(e))
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.Number(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
     };
   },
@@ -1298,8 +1332,10 @@ export const EnumRules = {
 export const MessageRules = {
   fromJSON(object: any): MessageRules {
     return {
-      skip: isSet(object.skip) ? Boolean(object.skip) : false,
-      required: isSet(object.required) ? Boolean(object.required) : false,
+      skip: isSet(object.skip) ? globalThis.Boolean(object.skip) : false,
+      required: isSet(object.required)
+        ? globalThis.Boolean(object.required)
+        : false,
     };
   },
 
@@ -1318,14 +1354,14 @@ export const MessageRules = {
 export const RepeatedRules = {
   fromJSON(object: any): RepeatedRules {
     return {
-      minItems: isSet(object.minItems) ? Number(object.minItems) : 0,
-      maxItems: isSet(object.maxItems) ? Number(object.maxItems) : 0,
-      unique: isSet(object.unique) ? Boolean(object.unique) : false,
+      minItems: isSet(object.minItems) ? globalThis.Number(object.minItems) : 0,
+      maxItems: isSet(object.maxItems) ? globalThis.Number(object.maxItems) : 0,
+      unique: isSet(object.unique) ? globalThis.Boolean(object.unique) : false,
       items: isSet(object.items)
         ? FieldRules.fromJSON(object.items)
         : undefined,
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -1354,15 +1390,17 @@ export const RepeatedRules = {
 export const MapRules = {
   fromJSON(object: any): MapRules {
     return {
-      minPairs: isSet(object.minPairs) ? Number(object.minPairs) : 0,
-      maxPairs: isSet(object.maxPairs) ? Number(object.maxPairs) : 0,
-      noSparse: isSet(object.noSparse) ? Boolean(object.noSparse) : false,
+      minPairs: isSet(object.minPairs) ? globalThis.Number(object.minPairs) : 0,
+      maxPairs: isSet(object.maxPairs) ? globalThis.Number(object.maxPairs) : 0,
+      noSparse: isSet(object.noSparse)
+        ? globalThis.Boolean(object.noSparse)
+        : false,
       keys: isSet(object.keys) ? FieldRules.fromJSON(object.keys) : undefined,
       values: isSet(object.values)
         ? FieldRules.fromJSON(object.values)
         : undefined,
       ignoreEmpty: isSet(object.ignoreEmpty)
-        ? Boolean(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
         : false,
     };
   },
@@ -1394,10 +1432,14 @@ export const MapRules = {
 export const AnyRules = {
   fromJSON(object: any): AnyRules {
     return {
-      required: isSet(object.required) ? Boolean(object.required) : false,
-      in: Array.isArray(object?.in) ? object.in.map((e: any) => String(e)) : [],
-      notIn: Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => String(e))
+      required: isSet(object.required)
+        ? globalThis.Boolean(object.required)
+        : false,
+      in: globalThis.Array.isArray(object?.in)
+        ? object.in.map((e: any) => globalThis.String(e))
+        : [],
+      notIn: globalThis.Array.isArray(object?.notIn)
+        ? object.notIn.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -1420,16 +1462,18 @@ export const AnyRules = {
 export const DurationRules = {
   fromJSON(object: any): DurationRules {
     return {
-      required: isSet(object.required) ? Boolean(object.required) : false,
+      required: isSet(object.required)
+        ? globalThis.Boolean(object.required)
+        : false,
       const: isSet(object.const) ? Duration.fromJSON(object.const) : undefined,
       lt: isSet(object.lt) ? Duration.fromJSON(object.lt) : undefined,
       lte: isSet(object.lte) ? Duration.fromJSON(object.lte) : undefined,
       gt: isSet(object.gt) ? Duration.fromJSON(object.gt) : undefined,
       gte: isSet(object.gte) ? Duration.fromJSON(object.gte) : undefined,
-      in: Array.isArray(object?.in)
+      in: globalThis.Array.isArray(object?.in)
         ? object.in.map((e: any) => Duration.fromJSON(e))
         : [],
-      notIn: Array.isArray(object?.notIn)
+      notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => Duration.fromJSON(e))
         : [],
     };
@@ -1468,14 +1512,16 @@ export const DurationRules = {
 export const TimestampRules = {
   fromJSON(object: any): TimestampRules {
     return {
-      required: isSet(object.required) ? Boolean(object.required) : false,
+      required: isSet(object.required)
+        ? globalThis.Boolean(object.required)
+        : false,
       const: isSet(object.const) ? fromJsonTimestamp(object.const) : undefined,
       lt: isSet(object.lt) ? fromJsonTimestamp(object.lt) : undefined,
       lte: isSet(object.lte) ? fromJsonTimestamp(object.lte) : undefined,
       gt: isSet(object.gt) ? fromJsonTimestamp(object.gt) : undefined,
       gte: isSet(object.gte) ? fromJsonTimestamp(object.gte) : undefined,
-      ltNow: isSet(object.ltNow) ? Boolean(object.ltNow) : false,
-      gtNow: isSet(object.gtNow) ? Boolean(object.gtNow) : false,
+      ltNow: isSet(object.ltNow) ? globalThis.Boolean(object.ltNow) : false,
+      gtNow: isSet(object.gtNow) ? globalThis.Boolean(object.gtNow) : false,
       within: isSet(object.within)
         ? Duration.fromJSON(object.within)
         : undefined,
@@ -1515,30 +1561,11 @@ export const TimestampRules = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -1548,28 +1575,28 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 function fromTimestamp(t: Timestamp): Date {
   let millis = (t.seconds || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }

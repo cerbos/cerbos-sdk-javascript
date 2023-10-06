@@ -85,8 +85,10 @@ export interface ServerInfoRequest {}
 export const PlanResourcesRequest = {
   fromJSON(object: any): PlanResourcesRequest {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
-      action: isSet(object.action) ? String(object.action) : "",
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
+      action: isSet(object.action) ? globalThis.String(object.action) : "",
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
         : undefined,
@@ -97,7 +99,7 @@ export const PlanResourcesRequest = {
         ? AuxData.fromJSON(object.auxData)
         : undefined,
       includeMeta: isSet(object.includeMeta)
-        ? Boolean(object.includeMeta)
+        ? globalThis.Boolean(object.includeMeta)
         : false,
     };
   },
@@ -129,9 +131,11 @@ export const PlanResourcesRequest = {
 export const CheckResourceSetRequest = {
   fromJSON(object: any): CheckResourceSetRequest {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => String(e))
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
         : [],
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
@@ -140,7 +144,7 @@ export const CheckResourceSetRequest = {
         ? ResourceSet.fromJSON(object.resource)
         : undefined,
       includeMeta: isSet(object.includeMeta)
-        ? Boolean(object.includeMeta)
+        ? globalThis.Boolean(object.includeMeta)
         : false,
       auxData: isSet(object.auxData)
         ? AuxData.fromJSON(object.auxData)
@@ -175,9 +179,9 @@ export const CheckResourceSetRequest = {
 export const ResourceSet = {
   fromJSON(object: any): ResourceSet {
     return {
-      kind: isSet(object.kind) ? String(object.kind) : "",
+      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
       policyVersion: isSet(object.policyVersion)
-        ? String(object.policyVersion)
+        ? globalThis.String(object.policyVersion)
         : "",
       instances: isObject(object.instances)
         ? Object.entries(object.instances).reduce<{
@@ -187,7 +191,7 @@ export const ResourceSet = {
             return acc;
           }, {})
         : {},
-      scope: isSet(object.scope) ? String(object.scope) : "",
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
   },
 
@@ -218,7 +222,7 @@ export const ResourceSet = {
 export const ResourceSet_InstancesEntry = {
   fromJSON(object: any): ResourceSet_InstancesEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value)
         ? AttributesMap.fromJSON(object.value)
         : undefined,
@@ -269,7 +273,7 @@ export const AttributesMap = {
 export const AttributesMap_AttrEntry = {
   fromJSON(object: any): AttributesMap_AttrEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -289,11 +293,13 @@ export const AttributesMap_AttrEntry = {
 export const CheckResourceBatchRequest = {
   fromJSON(object: any): CheckResourceBatchRequest {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
         : undefined,
-      resources: Array.isArray(object?.resources)
+      resources: globalThis.Array.isArray(object?.resources)
         ? object.resources.map((e: any) =>
             CheckResourceBatchRequest_BatchEntry.fromJSON(e),
           )
@@ -327,8 +333,8 @@ export const CheckResourceBatchRequest = {
 export const CheckResourceBatchRequest_BatchEntry = {
   fromJSON(object: any): CheckResourceBatchRequest_BatchEntry {
     return {
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => String(e))
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
         : [],
       resource: isSet(object.resource)
         ? Resource.fromJSON(object.resource)
@@ -351,14 +357,16 @@ export const CheckResourceBatchRequest_BatchEntry = {
 export const CheckResourcesRequest = {
   fromJSON(object: any): CheckResourcesRequest {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
       includeMeta: isSet(object.includeMeta)
-        ? Boolean(object.includeMeta)
+        ? globalThis.Boolean(object.includeMeta)
         : false,
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
         : undefined,
-      resources: Array.isArray(object?.resources)
+      resources: globalThis.Array.isArray(object?.resources)
         ? object.resources.map((e: any) =>
             CheckResourcesRequest_ResourceEntry.fromJSON(e),
           )
@@ -395,8 +403,8 @@ export const CheckResourcesRequest = {
 export const CheckResourcesRequest_ResourceEntry = {
   fromJSON(object: any): CheckResourcesRequest_ResourceEntry {
     return {
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => String(e))
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
         : [],
       resource: isSet(object.resource)
         ? Resource.fromJSON(object.resource)
@@ -435,8 +443,10 @@ export const AuxData = {
 export const AuxData_JWT = {
   fromJSON(object: any): AuxData_JWT {
     return {
-      token: isSet(object.token) ? String(object.token) : "",
-      keySetId: isSet(object.keySetId) ? String(object.keySetId) : "",
+      token: isSet(object.token) ? globalThis.String(object.token) : "",
+      keySetId: isSet(object.keySetId)
+        ? globalThis.String(object.keySetId)
+        : "",
     };
   },
 

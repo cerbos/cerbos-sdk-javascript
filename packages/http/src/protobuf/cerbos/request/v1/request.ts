@@ -118,7 +118,7 @@ export function listAuditLogEntriesRequest_KindFromJSON(
     case "KIND_DECISION":
       return ListAuditLogEntriesRequest_Kind.KIND_DECISION;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum ListAuditLogEntriesRequest_Kind",
@@ -137,7 +137,7 @@ export function listAuditLogEntriesRequest_KindToJSON(
     case ListAuditLogEntriesRequest_Kind.KIND_DECISION:
       return "KIND_DECISION";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum ListAuditLogEntriesRequest_Kind",
@@ -192,8 +192,10 @@ export interface ReloadStoreRequest {
 export const PlanResourcesRequest = {
   fromJSON(object: any): PlanResourcesRequest {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
-      action: isSet(object.action) ? String(object.action) : "",
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
+      action: isSet(object.action) ? globalThis.String(object.action) : "",
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
         : undefined,
@@ -204,7 +206,7 @@ export const PlanResourcesRequest = {
         ? AuxData.fromJSON(object.auxData)
         : undefined,
       includeMeta: isSet(object.includeMeta)
-        ? Boolean(object.includeMeta)
+        ? globalThis.Boolean(object.includeMeta)
         : false,
     };
   },
@@ -236,9 +238,11 @@ export const PlanResourcesRequest = {
 export const CheckResourceSetRequest = {
   fromJSON(object: any): CheckResourceSetRequest {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => String(e))
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
         : [],
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
@@ -247,7 +251,7 @@ export const CheckResourceSetRequest = {
         ? ResourceSet.fromJSON(object.resource)
         : undefined,
       includeMeta: isSet(object.includeMeta)
-        ? Boolean(object.includeMeta)
+        ? globalThis.Boolean(object.includeMeta)
         : false,
       auxData: isSet(object.auxData)
         ? AuxData.fromJSON(object.auxData)
@@ -282,9 +286,9 @@ export const CheckResourceSetRequest = {
 export const ResourceSet = {
   fromJSON(object: any): ResourceSet {
     return {
-      kind: isSet(object.kind) ? String(object.kind) : "",
+      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
       policyVersion: isSet(object.policyVersion)
-        ? String(object.policyVersion)
+        ? globalThis.String(object.policyVersion)
         : "",
       instances: isObject(object.instances)
         ? Object.entries(object.instances).reduce<{
@@ -294,7 +298,7 @@ export const ResourceSet = {
             return acc;
           }, {})
         : {},
-      scope: isSet(object.scope) ? String(object.scope) : "",
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
   },
 
@@ -325,7 +329,7 @@ export const ResourceSet = {
 export const ResourceSet_InstancesEntry = {
   fromJSON(object: any): ResourceSet_InstancesEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value)
         ? AttributesMap.fromJSON(object.value)
         : undefined,
@@ -376,7 +380,7 @@ export const AttributesMap = {
 export const AttributesMap_AttrEntry = {
   fromJSON(object: any): AttributesMap_AttrEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -396,11 +400,13 @@ export const AttributesMap_AttrEntry = {
 export const CheckResourceBatchRequest = {
   fromJSON(object: any): CheckResourceBatchRequest {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
         : undefined,
-      resources: Array.isArray(object?.resources)
+      resources: globalThis.Array.isArray(object?.resources)
         ? object.resources.map((e: any) =>
             CheckResourceBatchRequest_BatchEntry.fromJSON(e),
           )
@@ -434,8 +440,8 @@ export const CheckResourceBatchRequest = {
 export const CheckResourceBatchRequest_BatchEntry = {
   fromJSON(object: any): CheckResourceBatchRequest_BatchEntry {
     return {
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => String(e))
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
         : [],
       resource: isSet(object.resource)
         ? Resource.fromJSON(object.resource)
@@ -458,14 +464,16 @@ export const CheckResourceBatchRequest_BatchEntry = {
 export const CheckResourcesRequest = {
   fromJSON(object: any): CheckResourcesRequest {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
       includeMeta: isSet(object.includeMeta)
-        ? Boolean(object.includeMeta)
+        ? globalThis.Boolean(object.includeMeta)
         : false,
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
         : undefined,
-      resources: Array.isArray(object?.resources)
+      resources: globalThis.Array.isArray(object?.resources)
         ? object.resources.map((e: any) =>
             CheckResourcesRequest_ResourceEntry.fromJSON(e),
           )
@@ -502,8 +510,8 @@ export const CheckResourcesRequest = {
 export const CheckResourcesRequest_ResourceEntry = {
   fromJSON(object: any): CheckResourcesRequest_ResourceEntry {
     return {
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => String(e))
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
         : [],
       resource: isSet(object.resource)
         ? Resource.fromJSON(object.resource)
@@ -542,8 +550,10 @@ export const AuxData = {
 export const AuxData_JWT = {
   fromJSON(object: any): AuxData_JWT {
     return {
-      token: isSet(object.token) ? String(object.token) : "",
-      keySetId: isSet(object.keySetId) ? String(object.keySetId) : "",
+      token: isSet(object.token) ? globalThis.String(object.token) : "",
+      keySetId: isSet(object.keySetId)
+        ? globalThis.String(object.keySetId)
+        : "",
     };
   },
 
@@ -562,7 +572,7 @@ export const AuxData_JWT = {
 export const AddOrUpdatePolicyRequest = {
   fromJSON(object: any): AddOrUpdatePolicyRequest {
     return {
-      policies: Array.isArray(object?.policies)
+      policies: globalThis.Array.isArray(object?.policies)
         ? object.policies.map((e: any) => Policy.fromJSON(e))
         : [],
     };
@@ -584,7 +594,7 @@ export const ListAuditLogEntriesRequest = {
         ? listAuditLogEntriesRequest_KindFromJSON(object.kind)
         : 0,
       filter: isSet(object.tail)
-        ? { $case: "tail", tail: Number(object.tail) }
+        ? { $case: "tail", tail: globalThis.Number(object.tail) }
         : isSet(object.between)
         ? {
             $case: "between",
@@ -595,7 +605,7 @@ export const ListAuditLogEntriesRequest = {
         : isSet(object.since)
         ? { $case: "since", since: Duration.fromJSON(object.since) }
         : isSet(object.lookup)
-        ? { $case: "lookup", lookup: String(object.lookup) }
+        ? { $case: "lookup", lookup: globalThis.String(object.lookup) }
         : undefined,
     };
   },
@@ -658,12 +668,16 @@ export const ListPoliciesRequest = {
   fromJSON(object: any): ListPoliciesRequest {
     return {
       includeDisabled: isSet(object.includeDisabled)
-        ? Boolean(object.includeDisabled)
+        ? globalThis.Boolean(object.includeDisabled)
         : false,
-      nameRegexp: isSet(object.nameRegexp) ? String(object.nameRegexp) : "",
-      scopeRegexp: isSet(object.scopeRegexp) ? String(object.scopeRegexp) : "",
+      nameRegexp: isSet(object.nameRegexp)
+        ? globalThis.String(object.nameRegexp)
+        : "",
+      scopeRegexp: isSet(object.scopeRegexp)
+        ? globalThis.String(object.scopeRegexp)
+        : "",
       versionRegexp: isSet(object.versionRegexp)
-        ? String(object.versionRegexp)
+        ? globalThis.String(object.versionRegexp)
         : "",
     };
   },
@@ -689,7 +703,9 @@ export const ListPoliciesRequest = {
 export const GetPolicyRequest = {
   fromJSON(object: any): GetPolicyRequest {
     return {
-      id: Array.isArray(object?.id) ? object.id.map((e: any) => String(e)) : [],
+      id: globalThis.Array.isArray(object?.id)
+        ? object.id.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -705,7 +721,9 @@ export const GetPolicyRequest = {
 export const DisablePolicyRequest = {
   fromJSON(object: any): DisablePolicyRequest {
     return {
-      id: Array.isArray(object?.id) ? object.id.map((e: any) => String(e)) : [],
+      id: globalThis.Array.isArray(object?.id)
+        ? object.id.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -721,7 +739,9 @@ export const DisablePolicyRequest = {
 export const EnablePolicyRequest = {
   fromJSON(object: any): EnablePolicyRequest {
     return {
-      id: Array.isArray(object?.id) ? object.id.map((e: any) => String(e)) : [],
+      id: globalThis.Array.isArray(object?.id)
+        ? object.id.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -737,7 +757,7 @@ export const EnablePolicyRequest = {
 export const AddOrUpdateSchemaRequest = {
   fromJSON(object: any): AddOrUpdateSchemaRequest {
     return {
-      schemas: Array.isArray(object?.schemas)
+      schemas: globalThis.Array.isArray(object?.schemas)
         ? object.schemas.map((e: any) => Schema.fromJSON(e))
         : [],
     };
@@ -766,7 +786,9 @@ export const ListSchemasRequest = {
 export const GetSchemaRequest = {
   fromJSON(object: any): GetSchemaRequest {
     return {
-      id: Array.isArray(object?.id) ? object.id.map((e: any) => String(e)) : [],
+      id: globalThis.Array.isArray(object?.id)
+        ? object.id.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -782,7 +804,9 @@ export const GetSchemaRequest = {
 export const DeleteSchemaRequest = {
   fromJSON(object: any): DeleteSchemaRequest {
     return {
-      id: Array.isArray(object?.id) ? object.id.map((e: any) => String(e)) : [],
+      id: globalThis.Array.isArray(object?.id)
+        ? object.id.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -797,7 +821,9 @@ export const DeleteSchemaRequest = {
 
 export const ReloadStoreRequest = {
   fromJSON(object: any): ReloadStoreRequest {
-    return { wait: isSet(object.wait) ? Boolean(object.wait) : false };
+    return {
+      wait: isSet(object.wait) ? globalThis.Boolean(object.wait) : false,
+    };
   },
 
   toJSON(message: ReloadStoreRequest): unknown {
@@ -809,36 +835,17 @@ export const ReloadStoreRequest = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }

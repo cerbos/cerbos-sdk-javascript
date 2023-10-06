@@ -28,7 +28,7 @@ export function schemeFromJSON(object: any): Scheme {
     case "WSS":
       return Scheme.WSS;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum Scheme",
       );
   }
@@ -47,7 +47,7 @@ export function schemeToJSON(object: Scheme): string {
     case Scheme.WSS:
       return "WSS";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum Scheme",
       );
   }
@@ -145,7 +145,7 @@ export function headerParameter_TypeFromJSON(
     case "BOOLEAN":
       return HeaderParameter_Type.BOOLEAN;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum HeaderParameter_Type",
       );
   }
@@ -166,7 +166,7 @@ export function headerParameter_TypeToJSON(
     case HeaderParameter_Type.BOOLEAN:
       return "BOOLEAN";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum HeaderParameter_Type",
       );
   }
@@ -311,7 +311,7 @@ export function jSONSchema_JSONSchemaSimpleTypesFromJSON(
     case "STRING":
       return JSONSchema_JSONSchemaSimpleTypes.STRING;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum JSONSchema_JSONSchemaSimpleTypes",
@@ -340,7 +340,7 @@ export function jSONSchema_JSONSchemaSimpleTypesToJSON(
     case JSONSchema_JSONSchemaSimpleTypes.STRING:
       return "STRING";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum JSONSchema_JSONSchemaSimpleTypes",
@@ -412,7 +412,7 @@ export function securityScheme_TypeFromJSON(object: any): SecurityScheme_Type {
     case "TYPE_OAUTH2":
       return SecurityScheme_Type.TYPE_OAUTH2;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum SecurityScheme_Type",
       );
   }
@@ -429,7 +429,7 @@ export function securityScheme_TypeToJSON(object: SecurityScheme_Type): string {
     case SecurityScheme_Type.TYPE_OAUTH2:
       return "TYPE_OAUTH2";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum SecurityScheme_Type",
       );
   }
@@ -453,7 +453,7 @@ export function securityScheme_InFromJSON(object: any): SecurityScheme_In {
     case "IN_HEADER":
       return SecurityScheme_In.IN_HEADER;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum SecurityScheme_In",
       );
   }
@@ -468,7 +468,7 @@ export function securityScheme_InToJSON(object: SecurityScheme_In): string {
     case SecurityScheme_In.IN_HEADER:
       return "IN_HEADER";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum SecurityScheme_In",
       );
   }
@@ -500,7 +500,7 @@ export function securityScheme_FlowFromJSON(object: any): SecurityScheme_Flow {
     case "FLOW_ACCESS_CODE":
       return SecurityScheme_Flow.FLOW_ACCESS_CODE;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum SecurityScheme_Flow",
       );
   }
@@ -519,7 +519,7 @@ export function securityScheme_FlowToJSON(object: SecurityScheme_Flow): string {
     case SecurityScheme_Flow.FLOW_ACCESS_CODE:
       return "FLOW_ACCESS_CODE";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum SecurityScheme_Flow",
       );
   }
@@ -557,18 +557,20 @@ export interface Scopes_ScopeEntry {
 export const Swagger = {
   fromJSON(object: any): Swagger {
     return {
-      swagger: isSet(object.swagger) ? String(object.swagger) : "",
+      swagger: isSet(object.swagger) ? globalThis.String(object.swagger) : "",
       info: isSet(object.info) ? Info.fromJSON(object.info) : undefined,
-      host: isSet(object.host) ? String(object.host) : "",
-      basePath: isSet(object.basePath) ? String(object.basePath) : "",
-      schemes: Array.isArray(object?.schemes)
+      host: isSet(object.host) ? globalThis.String(object.host) : "",
+      basePath: isSet(object.basePath)
+        ? globalThis.String(object.basePath)
+        : "",
+      schemes: globalThis.Array.isArray(object?.schemes)
         ? object.schemes.map((e: any) => schemeFromJSON(e))
         : [],
-      consumes: Array.isArray(object?.consumes)
-        ? object.consumes.map((e: any) => String(e))
+      consumes: globalThis.Array.isArray(object?.consumes)
+        ? object.consumes.map((e: any) => globalThis.String(e))
         : [],
-      produces: Array.isArray(object?.produces)
-        ? object.produces.map((e: any) => String(e))
+      produces: globalThis.Array.isArray(object?.produces)
+        ? object.produces.map((e: any) => globalThis.String(e))
         : [],
       responses: isObject(object.responses)
         ? Object.entries(object.responses).reduce<{ [key: string]: Response }>(
@@ -582,10 +584,10 @@ export const Swagger = {
       securityDefinitions: isSet(object.securityDefinitions)
         ? SecurityDefinitions.fromJSON(object.securityDefinitions)
         : undefined,
-      security: Array.isArray(object?.security)
+      security: globalThis.Array.isArray(object?.security)
         ? object.security.map((e: any) => SecurityRequirement.fromJSON(e))
         : [],
-      tags: Array.isArray(object?.tags)
+      tags: globalThis.Array.isArray(object?.tags)
         ? object.tags.map((e: any) => Tag.fromJSON(e))
         : [],
       externalDocs: isSet(object.externalDocs)
@@ -664,7 +666,7 @@ export const Swagger = {
 export const Swagger_ResponsesEntry = {
   fromJSON(object: any): Swagger_ResponsesEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? Response.fromJSON(object.value) : undefined,
     };
   },
@@ -684,7 +686,7 @@ export const Swagger_ResponsesEntry = {
 export const Swagger_ExtensionsEntry = {
   fromJSON(object: any): Swagger_ExtensionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -704,20 +706,24 @@ export const Swagger_ExtensionsEntry = {
 export const Operation = {
   fromJSON(object: any): Operation {
     return {
-      tags: Array.isArray(object?.tags)
-        ? object.tags.map((e: any) => String(e))
+      tags: globalThis.Array.isArray(object?.tags)
+        ? object.tags.map((e: any) => globalThis.String(e))
         : [],
-      summary: isSet(object.summary) ? String(object.summary) : "",
-      description: isSet(object.description) ? String(object.description) : "",
+      summary: isSet(object.summary) ? globalThis.String(object.summary) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
       externalDocs: isSet(object.externalDocs)
         ? ExternalDocumentation.fromJSON(object.externalDocs)
         : undefined,
-      operationId: isSet(object.operationId) ? String(object.operationId) : "",
-      consumes: Array.isArray(object?.consumes)
-        ? object.consumes.map((e: any) => String(e))
+      operationId: isSet(object.operationId)
+        ? globalThis.String(object.operationId)
+        : "",
+      consumes: globalThis.Array.isArray(object?.consumes)
+        ? object.consumes.map((e: any) => globalThis.String(e))
         : [],
-      produces: Array.isArray(object?.produces)
-        ? object.produces.map((e: any) => String(e))
+      produces: globalThis.Array.isArray(object?.produces)
+        ? object.produces.map((e: any) => globalThis.String(e))
         : [],
       responses: isObject(object.responses)
         ? Object.entries(object.responses).reduce<{ [key: string]: Response }>(
@@ -728,11 +734,13 @@ export const Operation = {
             {},
           )
         : {},
-      schemes: Array.isArray(object?.schemes)
+      schemes: globalThis.Array.isArray(object?.schemes)
         ? object.schemes.map((e: any) => schemeFromJSON(e))
         : [],
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      security: Array.isArray(object?.security)
+      deprecated: isSet(object.deprecated)
+        ? globalThis.Boolean(object.deprecated)
+        : false,
+      security: globalThis.Array.isArray(object?.security)
         ? object.security.map((e: any) => SecurityRequirement.fromJSON(e))
         : [],
       extensions: isObject(object.extensions)
@@ -809,7 +817,7 @@ export const Operation = {
 export const Operation_ResponsesEntry = {
   fromJSON(object: any): Operation_ResponsesEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? Response.fromJSON(object.value) : undefined,
     };
   },
@@ -829,7 +837,7 @@ export const Operation_ResponsesEntry = {
 export const Operation_ExtensionsEntry = {
   fromJSON(object: any): Operation_ExtensionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -849,7 +857,7 @@ export const Operation_ExtensionsEntry = {
 export const Parameters = {
   fromJSON(object: any): Parameters {
     return {
-      headers: Array.isArray(object?.headers)
+      headers: globalThis.Array.isArray(object?.headers)
         ? object.headers.map((e: any) => HeaderParameter.fromJSON(e))
         : [],
     };
@@ -867,11 +875,15 @@ export const Parameters = {
 export const HeaderParameter = {
   fromJSON(object: any): HeaderParameter {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
       type: isSet(object.type) ? headerParameter_TypeFromJSON(object.type) : 0,
-      format: isSet(object.format) ? String(object.format) : "",
-      required: isSet(object.required) ? Boolean(object.required) : false,
+      format: isSet(object.format) ? globalThis.String(object.format) : "",
+      required: isSet(object.required)
+        ? globalThis.Boolean(object.required)
+        : false,
     };
   },
 
@@ -899,11 +911,13 @@ export const HeaderParameter = {
 export const Header = {
   fromJSON(object: any): Header {
     return {
-      description: isSet(object.description) ? String(object.description) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      format: isSet(object.format) ? String(object.format) : "",
-      default: isSet(object.default) ? String(object.default) : "",
-      pattern: isSet(object.pattern) ? String(object.pattern) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
+      type: isSet(object.type) ? globalThis.String(object.type) : "",
+      format: isSet(object.format) ? globalThis.String(object.format) : "",
+      default: isSet(object.default) ? globalThis.String(object.default) : "",
+      pattern: isSet(object.pattern) ? globalThis.String(object.pattern) : "",
     };
   },
 
@@ -931,7 +945,9 @@ export const Header = {
 export const Response = {
   fromJSON(object: any): Response {
     return {
-      description: isSet(object.description) ? String(object.description) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
       schema: isSet(object.schema) ? Schema.fromJSON(object.schema) : undefined,
       headers: isObject(object.headers)
         ? Object.entries(object.headers).reduce<{ [key: string]: Header }>(
@@ -1004,7 +1020,7 @@ export const Response = {
 export const Response_HeadersEntry = {
   fromJSON(object: any): Response_HeadersEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? Header.fromJSON(object.value) : undefined,
     };
   },
@@ -1024,8 +1040,8 @@ export const Response_HeadersEntry = {
 export const Response_ExamplesEntry = {
   fromJSON(object: any): Response_ExamplesEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
   },
 
@@ -1044,7 +1060,7 @@ export const Response_ExamplesEntry = {
 export const Response_ExtensionsEntry = {
   fromJSON(object: any): Response_ExtensionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -1064,10 +1080,12 @@ export const Response_ExtensionsEntry = {
 export const Info = {
   fromJSON(object: any): Info {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
       termsOfService: isSet(object.termsOfService)
-        ? String(object.termsOfService)
+        ? globalThis.String(object.termsOfService)
         : "",
       contact: isSet(object.contact)
         ? Contact.fromJSON(object.contact)
@@ -1075,7 +1093,7 @@ export const Info = {
       license: isSet(object.license)
         ? License.fromJSON(object.license)
         : undefined,
-      version: isSet(object.version) ? String(object.version) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
       extensions: isObject(object.extensions)
         ? Object.entries(object.extensions).reduce<{
             [key: string]: any | undefined;
@@ -1123,7 +1141,7 @@ export const Info = {
 export const Info_ExtensionsEntry = {
   fromJSON(object: any): Info_ExtensionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -1143,9 +1161,9 @@ export const Info_ExtensionsEntry = {
 export const Contact = {
   fromJSON(object: any): Contact {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      url: isSet(object.url) ? String(object.url) : "",
-      email: isSet(object.email) ? String(object.email) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      url: isSet(object.url) ? globalThis.String(object.url) : "",
+      email: isSet(object.email) ? globalThis.String(object.email) : "",
     };
   },
 
@@ -1167,8 +1185,8 @@ export const Contact = {
 export const License = {
   fromJSON(object: any): License {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      url: isSet(object.url) ? String(object.url) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      url: isSet(object.url) ? globalThis.String(object.url) : "",
     };
   },
 
@@ -1187,8 +1205,10 @@ export const License = {
 export const ExternalDocumentation = {
   fromJSON(object: any): ExternalDocumentation {
     return {
-      description: isSet(object.description) ? String(object.description) : "",
-      url: isSet(object.url) ? String(object.url) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
+      url: isSet(object.url) ? globalThis.String(object.url) : "",
     };
   },
 
@@ -1211,13 +1231,15 @@ export const Schema = {
         ? JSONSchema.fromJSON(object.jsonSchema)
         : undefined,
       discriminator: isSet(object.discriminator)
-        ? String(object.discriminator)
+        ? globalThis.String(object.discriminator)
         : "",
-      readOnly: isSet(object.readOnly) ? Boolean(object.readOnly) : false,
+      readOnly: isSet(object.readOnly)
+        ? globalThis.Boolean(object.readOnly)
+        : false,
       externalDocs: isSet(object.externalDocs)
         ? ExternalDocumentation.fromJSON(object.externalDocs)
         : undefined,
-      example: isSet(object.example) ? String(object.example) : "",
+      example: isSet(object.example) ? globalThis.String(object.example) : "",
     };
   },
 
@@ -1245,49 +1267,63 @@ export const Schema = {
 export const JSONSchema = {
   fromJSON(object: any): JSONSchema {
     return {
-      ref: isSet(object.ref) ? String(object.ref) : "",
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      default: isSet(object.default) ? String(object.default) : "",
-      readOnly: isSet(object.readOnly) ? Boolean(object.readOnly) : false,
-      example: isSet(object.example) ? String(object.example) : "",
-      multipleOf: isSet(object.multipleOf) ? Number(object.multipleOf) : 0,
-      maximum: isSet(object.maximum) ? Number(object.maximum) : 0,
+      ref: isSet(object.ref) ? globalThis.String(object.ref) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
+      default: isSet(object.default) ? globalThis.String(object.default) : "",
+      readOnly: isSet(object.readOnly)
+        ? globalThis.Boolean(object.readOnly)
+        : false,
+      example: isSet(object.example) ? globalThis.String(object.example) : "",
+      multipleOf: isSet(object.multipleOf)
+        ? globalThis.Number(object.multipleOf)
+        : 0,
+      maximum: isSet(object.maximum) ? globalThis.Number(object.maximum) : 0,
       exclusiveMaximum: isSet(object.exclusiveMaximum)
-        ? Boolean(object.exclusiveMaximum)
+        ? globalThis.Boolean(object.exclusiveMaximum)
         : false,
-      minimum: isSet(object.minimum) ? Number(object.minimum) : 0,
+      minimum: isSet(object.minimum) ? globalThis.Number(object.minimum) : 0,
       exclusiveMinimum: isSet(object.exclusiveMinimum)
-        ? Boolean(object.exclusiveMinimum)
+        ? globalThis.Boolean(object.exclusiveMinimum)
         : false,
-      maxLength: isSet(object.maxLength) ? String(object.maxLength) : "0",
-      minLength: isSet(object.minLength) ? String(object.minLength) : "0",
-      pattern: isSet(object.pattern) ? String(object.pattern) : "",
-      maxItems: isSet(object.maxItems) ? String(object.maxItems) : "0",
-      minItems: isSet(object.minItems) ? String(object.minItems) : "0",
+      maxLength: isSet(object.maxLength)
+        ? globalThis.String(object.maxLength)
+        : "0",
+      minLength: isSet(object.minLength)
+        ? globalThis.String(object.minLength)
+        : "0",
+      pattern: isSet(object.pattern) ? globalThis.String(object.pattern) : "",
+      maxItems: isSet(object.maxItems)
+        ? globalThis.String(object.maxItems)
+        : "0",
+      minItems: isSet(object.minItems)
+        ? globalThis.String(object.minItems)
+        : "0",
       uniqueItems: isSet(object.uniqueItems)
-        ? Boolean(object.uniqueItems)
+        ? globalThis.Boolean(object.uniqueItems)
         : false,
       maxProperties: isSet(object.maxProperties)
-        ? String(object.maxProperties)
+        ? globalThis.String(object.maxProperties)
         : "0",
       minProperties: isSet(object.minProperties)
-        ? String(object.minProperties)
+        ? globalThis.String(object.minProperties)
         : "0",
-      required: Array.isArray(object?.required)
-        ? object.required.map((e: any) => String(e))
+      required: globalThis.Array.isArray(object?.required)
+        ? object.required.map((e: any) => globalThis.String(e))
         : [],
-      array: Array.isArray(object?.array)
-        ? object.array.map((e: any) => String(e))
+      array: globalThis.Array.isArray(object?.array)
+        ? object.array.map((e: any) => globalThis.String(e))
         : [],
-      type: Array.isArray(object?.type)
+      type: globalThis.Array.isArray(object?.type)
         ? object.type.map((e: any) =>
             jSONSchema_JSONSchemaSimpleTypesFromJSON(e),
           )
         : [],
-      format: isSet(object.format) ? String(object.format) : "",
-      enum: Array.isArray(object?.enum)
-        ? object.enum.map((e: any) => String(e))
+      format: isSet(object.format) ? globalThis.String(object.format) : "",
+      enum: globalThis.Array.isArray(object?.enum)
+        ? object.enum.map((e: any) => globalThis.String(e))
         : [],
       fieldConfiguration: isSet(object.fieldConfiguration)
         ? JSONSchema_FieldConfiguration.fromJSON(object.fieldConfiguration)
@@ -1401,7 +1437,7 @@ export const JSONSchema_FieldConfiguration = {
   fromJSON(object: any): JSONSchema_FieldConfiguration {
     return {
       pathParamName: isSet(object.pathParamName)
-        ? String(object.pathParamName)
+        ? globalThis.String(object.pathParamName)
         : "",
     };
   },
@@ -1418,7 +1454,7 @@ export const JSONSchema_FieldConfiguration = {
 export const JSONSchema_ExtensionsEntry = {
   fromJSON(object: any): JSONSchema_ExtensionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -1438,8 +1474,10 @@ export const JSONSchema_ExtensionsEntry = {
 export const Tag = {
   fromJSON(object: any): Tag {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
       externalDocs: isSet(object.externalDocs)
         ? ExternalDocumentation.fromJSON(object.externalDocs)
         : undefined,
@@ -1481,7 +1519,7 @@ export const Tag = {
 export const Tag_ExtensionsEntry = {
   fromJSON(object: any): Tag_ExtensionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -1530,7 +1568,7 @@ export const SecurityDefinitions = {
 export const SecurityDefinitions_SecurityEntry = {
   fromJSON(object: any): SecurityDefinitions_SecurityEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value)
         ? SecurityScheme.fromJSON(object.value)
         : undefined,
@@ -1553,14 +1591,18 @@ export const SecurityScheme = {
   fromJSON(object: any): SecurityScheme {
     return {
       type: isSet(object.type) ? securityScheme_TypeFromJSON(object.type) : 0,
-      description: isSet(object.description) ? String(object.description) : "",
-      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
       in: isSet(object.in) ? securityScheme_InFromJSON(object.in) : 0,
       flow: isSet(object.flow) ? securityScheme_FlowFromJSON(object.flow) : 0,
       authorizationUrl: isSet(object.authorizationUrl)
-        ? String(object.authorizationUrl)
+        ? globalThis.String(object.authorizationUrl)
         : "",
-      tokenUrl: isSet(object.tokenUrl) ? String(object.tokenUrl) : "",
+      tokenUrl: isSet(object.tokenUrl)
+        ? globalThis.String(object.tokenUrl)
+        : "",
       scopes: isSet(object.scopes) ? Scopes.fromJSON(object.scopes) : undefined,
       extensions: isObject(object.extensions)
         ? Object.entries(object.extensions).reduce<{
@@ -1615,7 +1657,7 @@ export const SecurityScheme = {
 export const SecurityScheme_ExtensionsEntry = {
   fromJSON(object: any): SecurityScheme_ExtensionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -1666,8 +1708,8 @@ export const SecurityRequirement = {
 export const SecurityRequirement_SecurityRequirementValue = {
   fromJSON(object: any): SecurityRequirement_SecurityRequirementValue {
     return {
-      scope: Array.isArray(object?.scope)
-        ? object.scope.map((e: any) => String(e))
+      scope: globalThis.Array.isArray(object?.scope)
+        ? object.scope.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -1684,7 +1726,7 @@ export const SecurityRequirement_SecurityRequirementValue = {
 export const SecurityRequirement_SecurityRequirementEntry = {
   fromJSON(object: any): SecurityRequirement_SecurityRequirementEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value)
         ? SecurityRequirement_SecurityRequirementValue.fromJSON(object.value)
         : undefined,
@@ -1738,8 +1780,8 @@ export const Scopes = {
 export const Scopes_ScopeEntry = {
   fromJSON(object: any): Scopes_ScopeEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
   },
 
@@ -1754,25 +1796,6 @@ export const Scopes_ScopeEntry = {
     return obj;
   },
 };
-
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
 
 function isObject(value: any): boolean {
   return typeof value === "object" && value !== null;

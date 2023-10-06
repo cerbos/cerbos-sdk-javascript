@@ -150,9 +150,15 @@ export interface Schemas_Schema {
 export const Policy = {
   fromJSON(object: any): Policy {
     return {
-      apiVersion: isSet(object.apiVersion) ? String(object.apiVersion) : "",
-      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
-      description: isSet(object.description) ? String(object.description) : "",
+      apiVersion: isSet(object.apiVersion)
+        ? globalThis.String(object.apiVersion)
+        : "",
+      disabled: isSet(object.disabled)
+        ? globalThis.Boolean(object.disabled)
+        : false,
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
       metadata: isSet(object.metadata)
         ? Metadata.fromJSON(object.metadata)
         : undefined,
@@ -186,7 +192,9 @@ export const Policy = {
             {},
           )
         : {},
-      jsonSchema: isSet(object.$schema) ? String(object.$schema) : "",
+      jsonSchema: isSet(object.$schema)
+        ? globalThis.String(object.$schema)
+        : "",
     };
   },
 
@@ -241,8 +249,8 @@ export const Policy = {
 export const Policy_VariablesEntry = {
   fromJSON(object: any): Policy_VariablesEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
   },
 
@@ -261,7 +269,9 @@ export const Policy_VariablesEntry = {
 export const Metadata = {
   fromJSON(object: any): Metadata {
     return {
-      sourceFile: isSet(object.sourceFile) ? String(object.sourceFile) : "",
+      sourceFile: isSet(object.sourceFile)
+        ? globalThis.String(object.sourceFile)
+        : "",
       annotations: isObject(object.annotations)
         ? Object.entries(object.annotations).reduce<{ [key: string]: string }>(
             (acc, [key, value]) => {
@@ -273,10 +283,10 @@ export const Metadata = {
         : {},
       hash: isSet(object.hash) ? String(object.hash) : undefined,
       storeIdentifer: isSet(object.storeIdentifer)
-        ? String(object.storeIdentifer)
+        ? globalThis.String(object.storeIdentifer)
         : "",
       storeIdentifier: isSet(object.storeIdentifier)
-        ? String(object.storeIdentifier)
+        ? globalThis.String(object.storeIdentifier)
         : "",
     };
   },
@@ -311,8 +321,8 @@ export const Metadata = {
 export const Metadata_AnnotationsEntry = {
   fromJSON(object: any): Metadata_AnnotationsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
   },
 
@@ -331,15 +341,17 @@ export const Metadata_AnnotationsEntry = {
 export const ResourcePolicy = {
   fromJSON(object: any): ResourcePolicy {
     return {
-      resource: isSet(object.resource) ? String(object.resource) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      importDerivedRoles: Array.isArray(object?.importDerivedRoles)
-        ? object.importDerivedRoles.map((e: any) => String(e))
+      resource: isSet(object.resource)
+        ? globalThis.String(object.resource)
+        : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
+      importDerivedRoles: globalThis.Array.isArray(object?.importDerivedRoles)
+        ? object.importDerivedRoles.map((e: any) => globalThis.String(e))
         : [],
-      rules: Array.isArray(object?.rules)
+      rules: globalThis.Array.isArray(object?.rules)
         ? object.rules.map((e: any) => ResourceRule.fromJSON(e))
         : [],
-      scope: isSet(object.scope) ? String(object.scope) : "",
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
       schemas: isSet(object.schemas)
         ? Schemas.fromJSON(object.schemas)
         : undefined,
@@ -379,20 +391,20 @@ export const ResourcePolicy = {
 export const ResourceRule = {
   fromJSON(object: any): ResourceRule {
     return {
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => String(e))
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
         : [],
-      derivedRoles: Array.isArray(object?.derivedRoles)
-        ? object.derivedRoles.map((e: any) => String(e))
+      derivedRoles: globalThis.Array.isArray(object?.derivedRoles)
+        ? object.derivedRoles.map((e: any) => globalThis.String(e))
         : [],
-      roles: Array.isArray(object?.roles)
-        ? object.roles.map((e: any) => String(e))
+      roles: globalThis.Array.isArray(object?.roles)
+        ? object.roles.map((e: any) => globalThis.String(e))
         : [],
       condition: isSet(object.condition)
         ? Condition.fromJSON(object.condition)
         : undefined,
       effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
       output: isSet(object.output) ? Output.fromJSON(object.output) : undefined,
     };
   },
@@ -427,12 +439,14 @@ export const ResourceRule = {
 export const PrincipalPolicy = {
   fromJSON(object: any): PrincipalPolicy {
     return {
-      principal: isSet(object.principal) ? String(object.principal) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      rules: Array.isArray(object?.rules)
+      principal: isSet(object.principal)
+        ? globalThis.String(object.principal)
+        : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
+      rules: globalThis.Array.isArray(object?.rules)
         ? object.rules.map((e: any) => PrincipalRule.fromJSON(e))
         : [],
-      scope: isSet(object.scope) ? String(object.scope) : "",
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
       variables: isSet(object.variables)
         ? Variables.fromJSON(object.variables)
         : undefined,
@@ -463,8 +477,10 @@ export const PrincipalPolicy = {
 export const PrincipalRule = {
   fromJSON(object: any): PrincipalRule {
     return {
-      resource: isSet(object.resource) ? String(object.resource) : "",
-      actions: Array.isArray(object?.actions)
+      resource: isSet(object.resource)
+        ? globalThis.String(object.resource)
+        : "",
+      actions: globalThis.Array.isArray(object?.actions)
         ? object.actions.map((e: any) => PrincipalRule_Action.fromJSON(e))
         : [],
     };
@@ -485,12 +501,12 @@ export const PrincipalRule = {
 export const PrincipalRule_Action = {
   fromJSON(object: any): PrincipalRule_Action {
     return {
-      action: isSet(object.action) ? String(object.action) : "",
+      action: isSet(object.action) ? globalThis.String(object.action) : "",
       condition: isSet(object.condition)
         ? Condition.fromJSON(object.condition)
         : undefined,
       effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
       output: isSet(object.output) ? Output.fromJSON(object.output) : undefined,
     };
   },
@@ -519,8 +535,8 @@ export const PrincipalRule_Action = {
 export const DerivedRoles = {
   fromJSON(object: any): DerivedRoles {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      definitions: Array.isArray(object?.definitions)
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      definitions: globalThis.Array.isArray(object?.definitions)
         ? object.definitions.map((e: any) => RoleDef.fromJSON(e))
         : [],
       variables: isSet(object.variables)
@@ -547,9 +563,9 @@ export const DerivedRoles = {
 export const RoleDef = {
   fromJSON(object: any): RoleDef {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      parentRoles: Array.isArray(object?.parentRoles)
-        ? object.parentRoles.map((e: any) => String(e))
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      parentRoles: globalThis.Array.isArray(object?.parentRoles)
+        ? object.parentRoles.map((e: any) => globalThis.String(e))
         : [],
       condition: isSet(object.condition)
         ? Condition.fromJSON(object.condition)
@@ -575,7 +591,7 @@ export const RoleDef = {
 export const ExportVariables = {
   fromJSON(object: any): ExportVariables {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
       definitions: isObject(object.definitions)
         ? Object.entries(object.definitions).reduce<{ [key: string]: string }>(
             (acc, [key, value]) => {
@@ -609,8 +625,8 @@ export const ExportVariables = {
 export const ExportVariables_DefinitionsEntry = {
   fromJSON(object: any): ExportVariables_DefinitionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
   },
 
@@ -629,8 +645,8 @@ export const ExportVariables_DefinitionsEntry = {
 export const Variables = {
   fromJSON(object: any): Variables {
     return {
-      import: Array.isArray(object?.import)
-        ? object.import.map((e: any) => String(e))
+      import: globalThis.Array.isArray(object?.import)
+        ? object.import.map((e: any) => globalThis.String(e))
         : [],
       local: isObject(object.local)
         ? Object.entries(object.local).reduce<{ [key: string]: string }>(
@@ -665,8 +681,8 @@ export const Variables = {
 export const Variables_LocalEntry = {
   fromJSON(object: any): Variables_LocalEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
   },
 
@@ -688,7 +704,7 @@ export const Condition = {
       condition: isSet(object.match)
         ? { $case: "match", match: Match.fromJSON(object.match) }
         : isSet(object.script)
-        ? { $case: "script", script: String(object.script) }
+        ? { $case: "script", script: globalThis.String(object.script) }
         : undefined,
     };
   },
@@ -715,7 +731,7 @@ export const Match = {
         : isSet(object.none)
         ? { $case: "none", none: Match_ExprList.fromJSON(object.none) }
         : isSet(object.expr)
-        ? { $case: "expr", expr: String(object.expr) }
+        ? { $case: "expr", expr: globalThis.String(object.expr) }
         : undefined,
     };
   },
@@ -741,7 +757,7 @@ export const Match = {
 export const Match_ExprList = {
   fromJSON(object: any): Match_ExprList {
     return {
-      of: Array.isArray(object?.of)
+      of: globalThis.Array.isArray(object?.of)
         ? object.of.map((e: any) => Match.fromJSON(e))
         : [],
     };
@@ -758,7 +774,7 @@ export const Match_ExprList = {
 
 export const Output = {
   fromJSON(object: any): Output {
-    return { expr: isSet(object.expr) ? String(object.expr) : "" };
+    return { expr: isSet(object.expr) ? globalThis.String(object.expr) : "" };
   },
 
   toJSON(message: Output): unknown {
@@ -797,8 +813,8 @@ export const Schemas = {
 export const Schemas_IgnoreWhen = {
   fromJSON(object: any): Schemas_IgnoreWhen {
     return {
-      actions: Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => String(e))
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -815,7 +831,7 @@ export const Schemas_IgnoreWhen = {
 export const Schemas_Schema = {
   fromJSON(object: any): Schemas_Schema {
     return {
-      ref: isSet(object.ref) ? String(object.ref) : "",
+      ref: isSet(object.ref) ? globalThis.String(object.ref) : "",
       ignoreWhen: isSet(object.ignoreWhen)
         ? Schemas_IgnoreWhen.fromJSON(object.ignoreWhen)
         : undefined,
