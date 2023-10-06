@@ -10,8 +10,8 @@ export interface Duration {
 export const Duration = {
   fromJSON(object: any): Duration {
     return {
-      seconds: isSet(object.seconds) ? String(object.seconds) : "0",
-      nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
+      seconds: isSet(object.seconds) ? globalThis.String(object.seconds) : "0",
+      nanos: isSet(object.nanos) ? globalThis.Number(object.nanos) : 0,
     };
   },
 };

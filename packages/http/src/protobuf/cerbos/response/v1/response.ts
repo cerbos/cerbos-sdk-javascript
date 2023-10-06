@@ -185,13 +185,15 @@ export interface ReloadStoreResponse {}
 export const PlanResourcesResponse = {
   fromJSON(object: any): PlanResourcesResponse {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
-      action: isSet(object.action) ? String(object.action) : "",
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
+      action: isSet(object.action) ? globalThis.String(object.action) : "",
       resourceKind: isSet(object.resourceKind)
-        ? String(object.resourceKind)
+        ? globalThis.String(object.resourceKind)
         : "",
       policyVersion: isSet(object.policyVersion)
-        ? String(object.policyVersion)
+        ? globalThis.String(object.policyVersion)
         : "",
       filter: isSet(object.filter)
         ? PlanResourcesFilter.fromJSON(object.filter)
@@ -199,7 +201,7 @@ export const PlanResourcesResponse = {
       meta: isSet(object.meta)
         ? PlanResourcesResponse_Meta.fromJSON(object.meta)
         : undefined,
-      validationErrors: Array.isArray(object?.validationErrors)
+      validationErrors: globalThis.Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
     };
@@ -237,9 +239,11 @@ export const PlanResourcesResponse = {
 export const PlanResourcesResponse_Meta = {
   fromJSON(object: any): PlanResourcesResponse_Meta {
     return {
-      filterDebug: isSet(object.filterDebug) ? String(object.filterDebug) : "",
+      filterDebug: isSet(object.filterDebug)
+        ? globalThis.String(object.filterDebug)
+        : "",
       matchedScope: isSet(object.matchedScope)
-        ? String(object.matchedScope)
+        ? globalThis.String(object.matchedScope)
         : "",
     };
   },
@@ -259,7 +263,9 @@ export const PlanResourcesResponse_Meta = {
 export const CheckResourceSetResponse = {
   fromJSON(object: any): CheckResourceSetResponse {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
       resourceInstances: isObject(object.resourceInstances)
         ? Object.entries(object.resourceInstances).reduce<{
             [key: string]: CheckResourceSetResponse_ActionEffectMap;
@@ -308,7 +314,7 @@ export const CheckResourceSetResponse_ActionEffectMap = {
             {},
           )
         : {},
-      validationErrors: Array.isArray(object?.validationErrors)
+      validationErrors: globalThis.Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
     };
@@ -337,7 +343,7 @@ export const CheckResourceSetResponse_ActionEffectMap = {
 export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry = {
   fromJSON(object: any): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? effectFromJSON(object.value) : 0,
     };
   },
@@ -390,10 +396,10 @@ export const CheckResourceSetResponse_Meta_EffectMeta = {
   fromJSON(object: any): CheckResourceSetResponse_Meta_EffectMeta {
     return {
       matchedPolicy: isSet(object.matchedPolicy)
-        ? String(object.matchedPolicy)
+        ? globalThis.String(object.matchedPolicy)
         : "",
       matchedScope: isSet(object.matchedScope)
-        ? String(object.matchedScope)
+        ? globalThis.String(object.matchedScope)
         : "",
     };
   },
@@ -421,8 +427,10 @@ export const CheckResourceSetResponse_Meta_ActionMeta = {
             return acc;
           }, {})
         : {},
-      effectiveDerivedRoles: Array.isArray(object?.effectiveDerivedRoles)
-        ? object.effectiveDerivedRoles.map((e: any) => String(e))
+      effectiveDerivedRoles: globalThis.Array.isArray(
+        object?.effectiveDerivedRoles,
+      )
+        ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -448,7 +456,7 @@ export const CheckResourceSetResponse_Meta_ActionMeta = {
 export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
   fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value)
         ? CheckResourceSetResponse_Meta_EffectMeta.fromJSON(object.value)
         : undefined,
@@ -474,7 +482,7 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
 export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
   fromJSON(object: any): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value)
         ? CheckResourceSetResponse_Meta_ActionMeta.fromJSON(object.value)
         : undefined,
@@ -500,7 +508,7 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
 export const CheckResourceSetResponse_ResourceInstancesEntry = {
   fromJSON(object: any): CheckResourceSetResponse_ResourceInstancesEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value)
         ? CheckResourceSetResponse_ActionEffectMap.fromJSON(object.value)
         : undefined,
@@ -524,8 +532,10 @@ export const CheckResourceSetResponse_ResourceInstancesEntry = {
 export const CheckResourceBatchResponse = {
   fromJSON(object: any): CheckResourceBatchResponse {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
-      results: Array.isArray(object?.results)
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
+      results: globalThis.Array.isArray(object?.results)
         ? object.results.map((e: any) =>
             CheckResourceBatchResponse_ActionEffectMap.fromJSON(e),
           )
@@ -550,7 +560,9 @@ export const CheckResourceBatchResponse = {
 export const CheckResourceBatchResponse_ActionEffectMap = {
   fromJSON(object: any): CheckResourceBatchResponse_ActionEffectMap {
     return {
-      resourceId: isSet(object.resourceId) ? String(object.resourceId) : "",
+      resourceId: isSet(object.resourceId)
+        ? globalThis.String(object.resourceId)
+        : "",
       actions: isObject(object.actions)
         ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
             (acc, [key, value]) => {
@@ -560,7 +572,7 @@ export const CheckResourceBatchResponse_ActionEffectMap = {
             {},
           )
         : {},
-      validationErrors: Array.isArray(object?.validationErrors)
+      validationErrors: globalThis.Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
     };
@@ -594,7 +606,7 @@ export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
     object: any,
   ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? effectFromJSON(object.value) : 0,
     };
   },
@@ -616,8 +628,10 @@ export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
 export const CheckResourcesResponse = {
   fromJSON(object: any): CheckResourcesResponse {
     return {
-      requestId: isSet(object.requestId) ? String(object.requestId) : "",
-      results: Array.isArray(object?.results)
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
+      results: globalThis.Array.isArray(object?.results)
         ? object.results.map((e: any) =>
             CheckResourcesResponse_ResultEntry.fromJSON(e),
           )
@@ -654,13 +668,13 @@ export const CheckResourcesResponse_ResultEntry = {
             {},
           )
         : {},
-      validationErrors: Array.isArray(object?.validationErrors)
+      validationErrors: globalThis.Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
       meta: isSet(object.meta)
         ? CheckResourcesResponse_ResultEntry_Meta.fromJSON(object.meta)
         : undefined,
-      outputs: Array.isArray(object?.outputs)
+      outputs: globalThis.Array.isArray(object?.outputs)
         ? object.outputs.map((e: any) => OutputEntry.fromJSON(e))
         : [],
     };
@@ -700,12 +714,12 @@ export const CheckResourcesResponse_ResultEntry = {
 export const CheckResourcesResponse_ResultEntry_Resource = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry_Resource {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      kind: isSet(object.kind) ? String(object.kind) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
       policyVersion: isSet(object.policyVersion)
-        ? String(object.policyVersion)
+        ? globalThis.String(object.policyVersion)
         : "",
-      scope: isSet(object.scope) ? String(object.scope) : "",
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
   },
 
@@ -741,8 +755,10 @@ export const CheckResourcesResponse_ResultEntry_Meta = {
             return acc;
           }, {})
         : {},
-      effectiveDerivedRoles: Array.isArray(object?.effectiveDerivedRoles)
-        ? object.effectiveDerivedRoles.map((e: any) => String(e))
+      effectiveDerivedRoles: globalThis.Array.isArray(
+        object?.effectiveDerivedRoles,
+      )
+        ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -770,10 +786,10 @@ export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
     return {
       matchedPolicy: isSet(object.matchedPolicy)
-        ? String(object.matchedPolicy)
+        ? globalThis.String(object.matchedPolicy)
         : "",
       matchedScope: isSet(object.matchedScope)
-        ? String(object.matchedScope)
+        ? globalThis.String(object.matchedScope)
         : "",
     };
   },
@@ -793,7 +809,7 @@ export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
 export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value)
         ? CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
             object.value,
@@ -821,7 +837,7 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
 export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
   fromJSON(object: any): CheckResourcesResponse_ResultEntry_ActionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? effectFromJSON(object.value) : 0,
     };
   },
@@ -892,9 +908,11 @@ export const ListAuditLogEntriesResponse = {
 export const ServerInfoResponse = {
   fromJSON(object: any): ServerInfoResponse {
     return {
-      version: isSet(object.version) ? String(object.version) : "",
-      commit: isSet(object.commit) ? String(object.commit) : "",
-      buildDate: isSet(object.buildDate) ? String(object.buildDate) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
+      commit: isSet(object.commit) ? globalThis.String(object.commit) : "",
+      buildDate: isSet(object.buildDate)
+        ? globalThis.String(object.buildDate)
+        : "",
     };
   },
 
@@ -916,8 +934,8 @@ export const ServerInfoResponse = {
 export const ListPoliciesResponse = {
   fromJSON(object: any): ListPoliciesResponse {
     return {
-      policyIds: Array.isArray(object?.policyIds)
-        ? object.policyIds.map((e: any) => String(e))
+      policyIds: globalThis.Array.isArray(object?.policyIds)
+        ? object.policyIds.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -934,7 +952,7 @@ export const ListPoliciesResponse = {
 export const GetPolicyResponse = {
   fromJSON(object: any): GetPolicyResponse {
     return {
-      policies: Array.isArray(object?.policies)
+      policies: globalThis.Array.isArray(object?.policies)
         ? object.policies.map((e: any) => Policy.fromJSON(e))
         : [],
     };
@@ -953,7 +971,7 @@ export const DisablePolicyResponse = {
   fromJSON(object: any): DisablePolicyResponse {
     return {
       disabledPolicies: isSet(object.disabledPolicies)
-        ? Number(object.disabledPolicies)
+        ? globalThis.Number(object.disabledPolicies)
         : 0,
     };
   },
@@ -971,7 +989,7 @@ export const EnablePolicyResponse = {
   fromJSON(object: any): EnablePolicyResponse {
     return {
       enabledPolicies: isSet(object.enabledPolicies)
-        ? Number(object.enabledPolicies)
+        ? globalThis.Number(object.enabledPolicies)
         : 0,
     };
   },
@@ -999,8 +1017,8 @@ export const AddOrUpdateSchemaResponse = {
 export const ListSchemasResponse = {
   fromJSON(object: any): ListSchemasResponse {
     return {
-      schemaIds: Array.isArray(object?.schemaIds)
-        ? object.schemaIds.map((e: any) => String(e))
+      schemaIds: globalThis.Array.isArray(object?.schemaIds)
+        ? object.schemaIds.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -1017,7 +1035,7 @@ export const ListSchemasResponse = {
 export const GetSchemaResponse = {
   fromJSON(object: any): GetSchemaResponse {
     return {
-      schemas: Array.isArray(object?.schemas)
+      schemas: globalThis.Array.isArray(object?.schemas)
         ? object.schemas.map((e: any) => Schema.fromJSON(e))
         : [],
     };
@@ -1036,7 +1054,7 @@ export const DeleteSchemaResponse = {
   fromJSON(object: any): DeleteSchemaResponse {
     return {
       deletedSchemas: isSet(object.deletedSchemas)
-        ? Number(object.deletedSchemas)
+        ? globalThis.Number(object.deletedSchemas)
         : 0,
     };
   },

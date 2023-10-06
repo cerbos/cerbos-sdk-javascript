@@ -40,7 +40,7 @@ export function fieldBehaviorFromJSON(object: any): FieldBehavior {
     case "NON_EMPTY_DEFAULT":
       return FieldBehavior.NON_EMPTY_DEFAULT;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FieldBehavior",
       );
   }
@@ -65,27 +65,8 @@ export function fieldBehaviorToJSON(object: FieldBehavior): string {
     case FieldBehavior.NON_EMPTY_DEFAULT:
       return "NON_EMPTY_DEFAULT";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FieldBehavior",
       );
   }
 }
-
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();

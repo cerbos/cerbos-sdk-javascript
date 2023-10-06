@@ -8,7 +8,9 @@ export interface UInt64Value {
 
 export const UInt64Value = {
   fromJSON(object: any): UInt64Value {
-    return { value: isSet(object.value) ? String(object.value) : "0" };
+    return {
+      value: isSet(object.value) ? globalThis.String(object.value) : "0",
+    };
   },
 
   toJSON(message: UInt64Value): unknown {

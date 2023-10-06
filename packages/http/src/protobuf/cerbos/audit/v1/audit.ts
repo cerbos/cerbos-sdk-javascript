@@ -74,7 +74,7 @@ export interface Peer {
 export const AccessLogEntry = {
   fromJSON(object: any): AccessLogEntry {
     return {
-      callId: isSet(object.callId) ? String(object.callId) : "",
+      callId: isSet(object.callId) ? globalThis.String(object.callId) : "",
       timestamp: isSet(object.timestamp)
         ? fromJsonTimestamp(object.timestamp)
         : undefined,
@@ -88,8 +88,10 @@ export const AccessLogEntry = {
             {},
           )
         : {},
-      method: isSet(object.method) ? String(object.method) : "",
-      statusCode: isSet(object.statusCode) ? Number(object.statusCode) : 0,
+      method: isSet(object.method) ? globalThis.String(object.method) : "",
+      statusCode: isSet(object.statusCode)
+        ? globalThis.Number(object.statusCode)
+        : 0,
     };
   },
 
@@ -126,7 +128,7 @@ export const AccessLogEntry = {
 export const AccessLogEntry_MetadataEntry = {
   fromJSON(object: any): AccessLogEntry_MetadataEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value)
         ? MetaValues.fromJSON(object.value)
         : undefined,
@@ -148,18 +150,18 @@ export const AccessLogEntry_MetadataEntry = {
 export const DecisionLogEntry = {
   fromJSON(object: any): DecisionLogEntry {
     return {
-      callId: isSet(object.callId) ? String(object.callId) : "",
+      callId: isSet(object.callId) ? globalThis.String(object.callId) : "",
       timestamp: isSet(object.timestamp)
         ? fromJsonTimestamp(object.timestamp)
         : undefined,
       peer: isSet(object.peer) ? Peer.fromJSON(object.peer) : undefined,
-      inputs: Array.isArray(object?.inputs)
+      inputs: globalThis.Array.isArray(object?.inputs)
         ? object.inputs.map((e: any) => CheckInput.fromJSON(e))
         : [],
-      outputs: Array.isArray(object?.outputs)
+      outputs: globalThis.Array.isArray(object?.outputs)
         ? object.outputs.map((e: any) => CheckOutput.fromJSON(e))
         : [],
-      error: isSet(object.error) ? String(object.error) : "",
+      error: isSet(object.error) ? globalThis.String(object.error) : "",
       method: isSet(object.checkResources)
         ? {
             $case: "checkResources",
@@ -233,13 +235,13 @@ export const DecisionLogEntry = {
 export const DecisionLogEntry_CheckResources = {
   fromJSON(object: any): DecisionLogEntry_CheckResources {
     return {
-      inputs: Array.isArray(object?.inputs)
+      inputs: globalThis.Array.isArray(object?.inputs)
         ? object.inputs.map((e: any) => CheckInput.fromJSON(e))
         : [],
-      outputs: Array.isArray(object?.outputs)
+      outputs: globalThis.Array.isArray(object?.outputs)
         ? object.outputs.map((e: any) => CheckOutput.fromJSON(e))
         : [],
-      error: isSet(object.error) ? String(object.error) : "",
+      error: isSet(object.error) ? globalThis.String(object.error) : "",
     };
   },
 
@@ -267,7 +269,7 @@ export const DecisionLogEntry_PlanResources = {
       output: isSet(object.output)
         ? PlanResourcesOutput.fromJSON(object.output)
         : undefined,
-      error: isSet(object.error) ? String(object.error) : "",
+      error: isSet(object.error) ? globalThis.String(object.error) : "",
     };
   },
 
@@ -289,7 +291,7 @@ export const DecisionLogEntry_PlanResources = {
 export const DecisionLogEntry_MetadataEntry = {
   fromJSON(object: any): DecisionLogEntry_MetadataEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value)
         ? MetaValues.fromJSON(object.value)
         : undefined,
@@ -311,8 +313,8 @@ export const DecisionLogEntry_MetadataEntry = {
 export const MetaValues = {
   fromJSON(object: any): MetaValues {
     return {
-      values: Array.isArray(object?.values)
-        ? object.values.map((e: any) => String(e))
+      values: globalThis.Array.isArray(object?.values)
+        ? object.values.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -329,11 +331,15 @@ export const MetaValues = {
 export const Peer = {
   fromJSON(object: any): Peer {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      authInfo: isSet(object.authInfo) ? String(object.authInfo) : "",
-      userAgent: isSet(object.userAgent) ? String(object.userAgent) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      authInfo: isSet(object.authInfo)
+        ? globalThis.String(object.authInfo)
+        : "",
+      userAgent: isSet(object.userAgent)
+        ? globalThis.String(object.userAgent)
+        : "",
       forwardedFor: isSet(object.forwardedFor)
-        ? String(object.forwardedFor)
+        ? globalThis.String(object.forwardedFor)
         : "",
     };
   },
@@ -357,16 +363,16 @@ export const Peer = {
 };
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }

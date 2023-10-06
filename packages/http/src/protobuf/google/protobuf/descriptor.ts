@@ -46,7 +46,7 @@ export function fileOptions_OptimizeModeFromJSON(
     case "LITE_RUNTIME":
       return FileOptions_OptimizeMode.LITE_RUNTIME;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum FileOptions_OptimizeMode",
@@ -65,7 +65,7 @@ export function fileOptions_OptimizeModeToJSON(
     case FileOptions_OptimizeMode.LITE_RUNTIME:
       return "LITE_RUNTIME";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum FileOptions_OptimizeMode",
@@ -114,7 +114,7 @@ export function fieldOptions_CTypeFromJSON(object: any): FieldOptions_CType {
     case "STRING_PIECE":
       return FieldOptions_CType.STRING_PIECE;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FieldOptions_CType",
       );
   }
@@ -129,7 +129,7 @@ export function fieldOptions_CTypeToJSON(object: FieldOptions_CType): string {
     case FieldOptions_CType.STRING_PIECE:
       return "STRING_PIECE";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FieldOptions_CType",
       );
   }
@@ -153,7 +153,7 @@ export function fieldOptions_JSTypeFromJSON(object: any): FieldOptions_JSType {
     case "JS_NUMBER":
       return FieldOptions_JSType.JS_NUMBER;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FieldOptions_JSType",
       );
   }
@@ -168,7 +168,7 @@ export function fieldOptions_JSTypeToJSON(object: FieldOptions_JSType): string {
     case FieldOptions_JSType.JS_NUMBER:
       return "JS_NUMBER";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FieldOptions_JSType",
       );
   }
@@ -194,7 +194,7 @@ export function fieldOptions_OptionRetentionFromJSON(
     case "RETENTION_SOURCE":
       return FieldOptions_OptionRetention.RETENTION_SOURCE;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum FieldOptions_OptionRetention",
@@ -213,7 +213,7 @@ export function fieldOptions_OptionRetentionToJSON(
     case FieldOptions_OptionRetention.RETENTION_SOURCE:
       return "RETENTION_SOURCE";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum FieldOptions_OptionRetention",
@@ -269,7 +269,7 @@ export function fieldOptions_OptionTargetTypeFromJSON(
     case "TARGET_TYPE_METHOD":
       return FieldOptions_OptionTargetType.TARGET_TYPE_METHOD;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum FieldOptions_OptionTargetType",
@@ -302,7 +302,7 @@ export function fieldOptions_OptionTargetTypeToJSON(
     case FieldOptions_OptionTargetType.TARGET_TYPE_METHOD:
       return "TARGET_TYPE_METHOD";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum FieldOptions_OptionTargetType",
@@ -345,7 +345,7 @@ export function methodOptions_IdempotencyLevelFromJSON(
     case "IDEMPOTENT":
       return MethodOptions_IdempotencyLevel.IDEMPOTENT;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum MethodOptions_IdempotencyLevel",
@@ -364,7 +364,7 @@ export function methodOptions_IdempotencyLevelToJSON(
     case MethodOptions_IdempotencyLevel.IDEMPOTENT:
       return "IDEMPOTENT";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum MethodOptions_IdempotencyLevel",
@@ -390,57 +390,67 @@ export interface UninterpretedOption_NamePart {
 export const FileOptions = {
   fromJSON(object: any): FileOptions {
     return {
-      javaPackage: isSet(object.javaPackage) ? String(object.javaPackage) : "",
+      javaPackage: isSet(object.javaPackage)
+        ? globalThis.String(object.javaPackage)
+        : "",
       javaOuterClassname: isSet(object.javaOuterClassname)
-        ? String(object.javaOuterClassname)
+        ? globalThis.String(object.javaOuterClassname)
         : "",
       javaMultipleFiles: isSet(object.javaMultipleFiles)
-        ? Boolean(object.javaMultipleFiles)
+        ? globalThis.Boolean(object.javaMultipleFiles)
         : false,
       javaGenerateEqualsAndHash: isSet(object.javaGenerateEqualsAndHash)
-        ? Boolean(object.javaGenerateEqualsAndHash)
+        ? globalThis.Boolean(object.javaGenerateEqualsAndHash)
         : false,
       javaStringCheckUtf8: isSet(object.javaStringCheckUtf8)
-        ? Boolean(object.javaStringCheckUtf8)
+        ? globalThis.Boolean(object.javaStringCheckUtf8)
         : false,
       optimizeFor: isSet(object.optimizeFor)
         ? fileOptions_OptimizeModeFromJSON(object.optimizeFor)
         : 1,
-      goPackage: isSet(object.goPackage) ? String(object.goPackage) : "",
+      goPackage: isSet(object.goPackage)
+        ? globalThis.String(object.goPackage)
+        : "",
       ccGenericServices: isSet(object.ccGenericServices)
-        ? Boolean(object.ccGenericServices)
+        ? globalThis.Boolean(object.ccGenericServices)
         : false,
       javaGenericServices: isSet(object.javaGenericServices)
-        ? Boolean(object.javaGenericServices)
+        ? globalThis.Boolean(object.javaGenericServices)
         : false,
       pyGenericServices: isSet(object.pyGenericServices)
-        ? Boolean(object.pyGenericServices)
+        ? globalThis.Boolean(object.pyGenericServices)
         : false,
       phpGenericServices: isSet(object.phpGenericServices)
-        ? Boolean(object.phpGenericServices)
+        ? globalThis.Boolean(object.phpGenericServices)
         : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      deprecated: isSet(object.deprecated)
+        ? globalThis.Boolean(object.deprecated)
+        : false,
       ccEnableArenas: isSet(object.ccEnableArenas)
-        ? Boolean(object.ccEnableArenas)
+        ? globalThis.Boolean(object.ccEnableArenas)
         : false,
       objcClassPrefix: isSet(object.objcClassPrefix)
-        ? String(object.objcClassPrefix)
+        ? globalThis.String(object.objcClassPrefix)
         : "",
       csharpNamespace: isSet(object.csharpNamespace)
-        ? String(object.csharpNamespace)
+        ? globalThis.String(object.csharpNamespace)
         : "",
-      swiftPrefix: isSet(object.swiftPrefix) ? String(object.swiftPrefix) : "",
+      swiftPrefix: isSet(object.swiftPrefix)
+        ? globalThis.String(object.swiftPrefix)
+        : "",
       phpClassPrefix: isSet(object.phpClassPrefix)
-        ? String(object.phpClassPrefix)
+        ? globalThis.String(object.phpClassPrefix)
         : "",
       phpNamespace: isSet(object.phpNamespace)
-        ? String(object.phpNamespace)
+        ? globalThis.String(object.phpNamespace)
         : "",
       phpMetadataNamespace: isSet(object.phpMetadataNamespace)
-        ? String(object.phpMetadataNamespace)
+        ? globalThis.String(object.phpMetadataNamespace)
         : "",
-      rubyPackage: isSet(object.rubyPackage) ? String(object.rubyPackage) : "",
-      uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+      rubyPackage: isSet(object.rubyPackage)
+        ? globalThis.String(object.rubyPackage)
+        : "",
+      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) =>
             UninterpretedOption.fromJSON(e),
           )
@@ -523,19 +533,23 @@ export const MessageOptions = {
   fromJSON(object: any): MessageOptions {
     return {
       messageSetWireFormat: isSet(object.messageSetWireFormat)
-        ? Boolean(object.messageSetWireFormat)
+        ? globalThis.Boolean(object.messageSetWireFormat)
         : false,
       noStandardDescriptorAccessor: isSet(object.noStandardDescriptorAccessor)
-        ? Boolean(object.noStandardDescriptorAccessor)
+        ? globalThis.Boolean(object.noStandardDescriptorAccessor)
         : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      mapEntry: isSet(object.mapEntry) ? Boolean(object.mapEntry) : false,
+      deprecated: isSet(object.deprecated)
+        ? globalThis.Boolean(object.deprecated)
+        : false,
+      mapEntry: isSet(object.mapEntry)
+        ? globalThis.Boolean(object.mapEntry)
+        : false,
       deprecatedLegacyJsonFieldConflicts: isSet(
         object.deprecatedLegacyJsonFieldConflicts,
       )
-        ? Boolean(object.deprecatedLegacyJsonFieldConflicts)
+        ? globalThis.Boolean(object.deprecatedLegacyJsonFieldConflicts)
         : false,
-      uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) =>
             UninterpretedOption.fromJSON(e),
           )
@@ -574,18 +588,20 @@ export const FieldOptions = {
   fromJSON(object: any): FieldOptions {
     return {
       ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
-      packed: isSet(object.packed) ? Boolean(object.packed) : false,
+      packed: isSet(object.packed) ? globalThis.Boolean(object.packed) : false,
       jstype: isSet(object.jstype)
         ? fieldOptions_JSTypeFromJSON(object.jstype)
         : 0,
-      lazy: isSet(object.lazy) ? Boolean(object.lazy) : false,
+      lazy: isSet(object.lazy) ? globalThis.Boolean(object.lazy) : false,
       unverifiedLazy: isSet(object.unverifiedLazy)
-        ? Boolean(object.unverifiedLazy)
+        ? globalThis.Boolean(object.unverifiedLazy)
         : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      weak: isSet(object.weak) ? Boolean(object.weak) : false,
+      deprecated: isSet(object.deprecated)
+        ? globalThis.Boolean(object.deprecated)
+        : false,
+      weak: isSet(object.weak) ? globalThis.Boolean(object.weak) : false,
       debugRedact: isSet(object.debugRedact)
-        ? Boolean(object.debugRedact)
+        ? globalThis.Boolean(object.debugRedact)
         : false,
       retention: isSet(object.retention)
         ? fieldOptions_OptionRetentionFromJSON(object.retention)
@@ -593,7 +609,7 @@ export const FieldOptions = {
       target: isSet(object.target)
         ? fieldOptions_OptionTargetTypeFromJSON(object.target)
         : 0,
-      uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) =>
             UninterpretedOption.fromJSON(e),
           )
@@ -645,7 +661,7 @@ export const FieldOptions = {
 export const OneofOptions = {
   fromJSON(object: any): OneofOptions {
     return {
-      uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) =>
             UninterpretedOption.fromJSON(e),
           )
@@ -667,8 +683,10 @@ export const OneofOptions = {
 export const ServiceOptions = {
   fromJSON(object: any): ServiceOptions {
     return {
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+      deprecated: isSet(object.deprecated)
+        ? globalThis.Boolean(object.deprecated)
+        : false,
+      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) =>
             UninterpretedOption.fromJSON(e),
           )
@@ -693,11 +711,13 @@ export const ServiceOptions = {
 export const MethodOptions = {
   fromJSON(object: any): MethodOptions {
     return {
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      deprecated: isSet(object.deprecated)
+        ? globalThis.Boolean(object.deprecated)
+        : false,
       idempotencyLevel: isSet(object.idempotencyLevel)
         ? methodOptions_IdempotencyLevelFromJSON(object.idempotencyLevel)
         : 0,
-      uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) =>
             UninterpretedOption.fromJSON(e),
           )
@@ -727,24 +747,26 @@ export const MethodOptions = {
 export const UninterpretedOption = {
   fromJSON(object: any): UninterpretedOption {
     return {
-      name: Array.isArray(object?.name)
+      name: globalThis.Array.isArray(object?.name)
         ? object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e))
         : [],
       identifierValue: isSet(object.identifierValue)
-        ? String(object.identifierValue)
+        ? globalThis.String(object.identifierValue)
         : "",
       positiveIntValue: isSet(object.positiveIntValue)
-        ? String(object.positiveIntValue)
+        ? globalThis.String(object.positiveIntValue)
         : "0",
       negativeIntValue: isSet(object.negativeIntValue)
-        ? String(object.negativeIntValue)
+        ? globalThis.String(object.negativeIntValue)
         : "0",
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
+      doubleValue: isSet(object.doubleValue)
+        ? globalThis.Number(object.doubleValue)
+        : 0,
       stringValue: isSet(object.stringValue)
         ? bytesFromBase64(object.stringValue)
         : new Uint8Array(0),
       aggregateValue: isSet(object.aggregateValue)
-        ? String(object.aggregateValue)
+        ? globalThis.String(object.aggregateValue)
         : "",
     };
   },
@@ -781,9 +803,11 @@ export const UninterpretedOption = {
 export const UninterpretedOption_NamePart = {
   fromJSON(object: any): UninterpretedOption_NamePart {
     return {
-      namePart: isSet(object.namePart) ? String(object.namePart) : "",
+      namePart: isSet(object.namePart)
+        ? globalThis.String(object.namePart)
+        : "",
       isExtension: isSet(object.isExtension)
-        ? Boolean(object.isExtension)
+        ? globalThis.Boolean(object.isExtension)
         : false,
     };
   },
@@ -800,30 +824,11 @@ export const UninterpretedOption_NamePart = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -833,14 +838,14 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 

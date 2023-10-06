@@ -45,7 +45,7 @@ export function planResourcesFilter_KindFromJSON(
     case "KIND_CONDITIONAL":
       return PlanResourcesFilter_Kind.KIND_CONDITIONAL;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum PlanResourcesFilter_Kind",
@@ -66,7 +66,7 @@ export function planResourcesFilter_KindToJSON(
     case PlanResourcesFilter_Kind.KIND_CONDITIONAL:
       return "KIND_CONDITIONAL";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum PlanResourcesFilter_Kind",
@@ -132,7 +132,7 @@ export const PlanResourcesInput = {
 export const PlanResourcesInput_Resource = {
   fromJSON(object: any): PlanResourcesInput_Resource {
     return {
-      kind: isSet(object.kind) ? String(object.kind) : "",
+      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
       attr: isObject(object.attr)
         ? Object.entries(object.attr).reduce<{
             [key: string]: any | undefined;
@@ -142,9 +142,9 @@ export const PlanResourcesInput_Resource = {
           }, {})
         : {},
       policyVersion: isSet(object.policyVersion)
-        ? String(object.policyVersion)
+        ? globalThis.String(object.policyVersion)
         : "",
-      scope: isSet(object.scope) ? String(object.scope) : "",
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
   },
 
@@ -175,7 +175,7 @@ export const PlanResourcesInput_Resource = {
 export const PlanResourcesInput_Resource_AttrEntry = {
   fromJSON(object: any): PlanResourcesInput_Resource_AttrEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -221,8 +221,10 @@ export const PlanResourcesFilter = {
 export const PlanResourcesFilter_Expression = {
   fromJSON(object: any): PlanResourcesFilter_Expression {
     return {
-      operator: isSet(object.operator) ? String(object.operator) : "",
-      operands: Array.isArray(object?.operands)
+      operator: isSet(object.operator)
+        ? globalThis.String(object.operator)
+        : "",
+      operands: globalThis.Array.isArray(object?.operands)
         ? object.operands.map((e: any) =>
             PlanResourcesFilter_Expression_Operand.fromJSON(e),
           )
@@ -257,7 +259,7 @@ export const PlanResourcesFilter_Expression_Operand = {
             ),
           }
         : isSet(object.variable)
-        ? { $case: "variable", variable: String(object.variable) }
+        ? { $case: "variable", variable: globalThis.String(object.variable) }
         : undefined,
     };
   },
@@ -282,7 +284,7 @@ export const PlanResourcesFilter_Expression_Operand = {
 export const OutputEntry = {
   fromJSON(object: any): OutputEntry {
     return {
-      src: isSet(object.src) ? String(object.src) : "",
+      src: isSet(object.src) ? globalThis.String(object.src) : "",
       val: isSet(object?.val) ? object.val : undefined,
     };
   },
@@ -302,11 +304,11 @@ export const OutputEntry = {
 export const Resource = {
   fromJSON(object: any): Resource {
     return {
-      kind: isSet(object.kind) ? String(object.kind) : "",
+      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
       policyVersion: isSet(object.policyVersion)
-        ? String(object.policyVersion)
+        ? globalThis.String(object.policyVersion)
         : "",
-      id: isSet(object.id) ? String(object.id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
       attr: isObject(object.attr)
         ? Object.entries(object.attr).reduce<{
             [key: string]: any | undefined;
@@ -315,7 +317,7 @@ export const Resource = {
             return acc;
           }, {})
         : {},
-      scope: isSet(object.scope) ? String(object.scope) : "",
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
   },
 
@@ -349,7 +351,7 @@ export const Resource = {
 export const Resource_AttrEntry = {
   fromJSON(object: any): Resource_AttrEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -369,12 +371,12 @@ export const Resource_AttrEntry = {
 export const Principal = {
   fromJSON(object: any): Principal {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
       policyVersion: isSet(object.policyVersion)
-        ? String(object.policyVersion)
+        ? globalThis.String(object.policyVersion)
         : "",
-      roles: Array.isArray(object?.roles)
-        ? object.roles.map((e: any) => String(e))
+      roles: globalThis.Array.isArray(object?.roles)
+        ? object.roles.map((e: any) => globalThis.String(e))
         : [],
       attr: isObject(object.attr)
         ? Object.entries(object.attr).reduce<{
@@ -384,7 +386,7 @@ export const Principal = {
             return acc;
           }, {})
         : {},
-      scope: isSet(object.scope) ? String(object.scope) : "",
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
   },
 
@@ -418,7 +420,7 @@ export const Principal = {
 export const Principal_AttrEntry = {
   fromJSON(object: any): Principal_AttrEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
@@ -434,25 +436,6 @@ export const Principal_AttrEntry = {
     return obj;
   },
 };
-
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
 
 function isObject(value: any): boolean {
   return typeof value === "object" && value !== null;

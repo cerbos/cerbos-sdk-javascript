@@ -25,25 +25,27 @@ export interface CustomHttpPattern {
 export const HttpRule = {
   fromJSON(object: any): HttpRule {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
+      selector: isSet(object.selector)
+        ? globalThis.String(object.selector)
+        : "",
       pattern: isSet(object.get)
-        ? { $case: "get", get: String(object.get) }
+        ? { $case: "get", get: globalThis.String(object.get) }
         : isSet(object.put)
-        ? { $case: "put", put: String(object.put) }
+        ? { $case: "put", put: globalThis.String(object.put) }
         : isSet(object.post)
-        ? { $case: "post", post: String(object.post) }
+        ? { $case: "post", post: globalThis.String(object.post) }
         : isSet(object.delete)
-        ? { $case: "delete", delete: String(object.delete) }
+        ? { $case: "delete", delete: globalThis.String(object.delete) }
         : isSet(object.patch)
-        ? { $case: "patch", patch: String(object.patch) }
+        ? { $case: "patch", patch: globalThis.String(object.patch) }
         : isSet(object.custom)
         ? { $case: "custom", custom: CustomHttpPattern.fromJSON(object.custom) }
         : undefined,
-      body: isSet(object.body) ? String(object.body) : "",
+      body: isSet(object.body) ? globalThis.String(object.body) : "",
       responseBody: isSet(object.responseBody)
-        ? String(object.responseBody)
+        ? globalThis.String(object.responseBody)
         : "",
-      additionalBindings: Array.isArray(object?.additionalBindings)
+      additionalBindings: globalThis.Array.isArray(object?.additionalBindings)
         ? object.additionalBindings.map((e: any) => HttpRule.fromJSON(e))
         : [],
     };
@@ -90,8 +92,8 @@ export const HttpRule = {
 export const CustomHttpPattern = {
   fromJSON(object: any): CustomHttpPattern {
     return {
-      kind: isSet(object.kind) ? String(object.kind) : "",
-      path: isSet(object.path) ? String(object.path) : "",
+      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
+      path: isSet(object.path) ? globalThis.String(object.path) : "",
     };
   },
 

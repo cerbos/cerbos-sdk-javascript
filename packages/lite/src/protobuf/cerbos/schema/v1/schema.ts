@@ -28,7 +28,7 @@ export function validationError_SourceFromJSON(
     case "SOURCE_RESOURCE":
       return ValidationError_Source.SOURCE_RESOURCE;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum ValidationError_Source",
@@ -47,7 +47,7 @@ export function validationError_SourceToJSON(
     case ValidationError_Source.SOURCE_RESOURCE:
       return "SOURCE_RESOURCE";
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum ValidationError_Source",
@@ -58,8 +58,8 @@ export function validationError_SourceToJSON(
 export const ValidationError = {
   fromJSON(object: any): ValidationError {
     return {
-      path: isSet(object.path) ? String(object.path) : "",
-      message: isSet(object.message) ? String(object.message) : "",
+      path: isSet(object.path) ? globalThis.String(object.path) : "",
+      message: isSet(object.message) ? globalThis.String(object.message) : "",
       source: isSet(object.source)
         ? validationError_SourceFromJSON(object.source)
         : 0,
@@ -80,25 +80,6 @@ export const ValidationError = {
     return obj;
   },
 };
-
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

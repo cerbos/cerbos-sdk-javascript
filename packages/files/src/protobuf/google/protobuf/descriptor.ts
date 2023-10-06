@@ -34,7 +34,7 @@ export function fieldOptions_CTypeFromJSON(object: any): FieldOptions_CType {
     case "STRING_PIECE":
       return FieldOptions_CType.STRING_PIECE;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FieldOptions_CType",
       );
   }
@@ -58,7 +58,7 @@ export function fieldOptions_JSTypeFromJSON(object: any): FieldOptions_JSType {
     case "JS_NUMBER":
       return FieldOptions_JSType.JS_NUMBER;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FieldOptions_JSType",
       );
   }
@@ -84,7 +84,7 @@ export function fieldOptions_OptionRetentionFromJSON(
     case "RETENTION_SOURCE":
       return FieldOptions_OptionRetention.RETENTION_SOURCE;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum FieldOptions_OptionRetention",
@@ -140,7 +140,7 @@ export function fieldOptions_OptionTargetTypeFromJSON(
     case "TARGET_TYPE_METHOD":
       return FieldOptions_OptionTargetType.TARGET_TYPE_METHOD;
     default:
-      throw new tsProtoGlobalThis.Error(
+      throw new globalThis.Error(
         "Unrecognized enum value " +
           object +
           " for enum FieldOptions_OptionTargetType",
@@ -171,18 +171,20 @@ export const FieldOptions = {
   fromJSON(object: any): FieldOptions {
     return {
       ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
-      packed: isSet(object.packed) ? Boolean(object.packed) : false,
+      packed: isSet(object.packed) ? globalThis.Boolean(object.packed) : false,
       jstype: isSet(object.jstype)
         ? fieldOptions_JSTypeFromJSON(object.jstype)
         : 0,
-      lazy: isSet(object.lazy) ? Boolean(object.lazy) : false,
+      lazy: isSet(object.lazy) ? globalThis.Boolean(object.lazy) : false,
       unverifiedLazy: isSet(object.unverifiedLazy)
-        ? Boolean(object.unverifiedLazy)
+        ? globalThis.Boolean(object.unverifiedLazy)
         : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      weak: isSet(object.weak) ? Boolean(object.weak) : false,
+      deprecated: isSet(object.deprecated)
+        ? globalThis.Boolean(object.deprecated)
+        : false,
+      weak: isSet(object.weak) ? globalThis.Boolean(object.weak) : false,
       debugRedact: isSet(object.debugRedact)
-        ? Boolean(object.debugRedact)
+        ? globalThis.Boolean(object.debugRedact)
         : false,
       retention: isSet(object.retention)
         ? fieldOptions_OptionRetentionFromJSON(object.retention)
@@ -190,7 +192,7 @@ export const FieldOptions = {
       target: isSet(object.target)
         ? fieldOptions_OptionTargetTypeFromJSON(object.target)
         : 0,
-      uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) =>
             UninterpretedOption.fromJSON(e),
           )
@@ -202,7 +204,7 @@ export const FieldOptions = {
 export const OneofOptions = {
   fromJSON(object: any): OneofOptions {
     return {
-      uninterpretedOption: Array.isArray(object?.uninterpretedOption)
+      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) =>
             UninterpretedOption.fromJSON(e),
           )
@@ -214,24 +216,26 @@ export const OneofOptions = {
 export const UninterpretedOption = {
   fromJSON(object: any): UninterpretedOption {
     return {
-      name: Array.isArray(object?.name)
+      name: globalThis.Array.isArray(object?.name)
         ? object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e))
         : [],
       identifierValue: isSet(object.identifierValue)
-        ? String(object.identifierValue)
+        ? globalThis.String(object.identifierValue)
         : "",
       positiveIntValue: isSet(object.positiveIntValue)
-        ? String(object.positiveIntValue)
+        ? globalThis.String(object.positiveIntValue)
         : "0",
       negativeIntValue: isSet(object.negativeIntValue)
-        ? String(object.negativeIntValue)
+        ? globalThis.String(object.negativeIntValue)
         : "0",
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : 0,
+      doubleValue: isSet(object.doubleValue)
+        ? globalThis.Number(object.doubleValue)
+        : 0,
       stringValue: isSet(object.stringValue)
         ? bytesFromBase64(object.stringValue)
         : new Uint8Array(0),
       aggregateValue: isSet(object.aggregateValue)
-        ? String(object.aggregateValue)
+        ? globalThis.String(object.aggregateValue)
         : "",
     };
   },
@@ -240,38 +244,21 @@ export const UninterpretedOption = {
 export const UninterpretedOption_NamePart = {
   fromJSON(object: any): UninterpretedOption_NamePart {
     return {
-      namePart: isSet(object.namePart) ? String(object.namePart) : "",
+      namePart: isSet(object.namePart)
+        ? globalThis.String(object.namePart)
+        : "",
       isExtension: isSet(object.isExtension)
-        ? Boolean(object.isExtension)
+        ? globalThis.Boolean(object.isExtension)
         : false,
     };
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
