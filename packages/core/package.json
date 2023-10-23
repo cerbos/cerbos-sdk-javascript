@@ -29,6 +29,6 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@types/uuid": "9.0.5"
+    "@types/uuid": "9.0.6"
   }
 }
