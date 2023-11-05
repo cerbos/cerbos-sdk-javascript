@@ -53,8 +53,8 @@
     "test:watch": "npm run --workspace=packages/test test:watch"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "7.23.9",
-    "@microsoft/api-extractor": "7.38.0",
+    "@microsoft/api-documenter": "7.23.11",
+    "@microsoft/api-extractor": "7.38.2",
     "@tsconfig/node18": "18.2.2",
     "@types/node": "18.18.7",
     "@typescript-eslint/eslint-plugin": "6.9.0",
