@@ -2,6 +2,54 @@
 
 export const protobufPackage = "google.protobuf";
 
+export enum Edition {
+  EDITION_UNKNOWN = 0,
+  EDITION_PROTO2 = 998,
+  EDITION_PROTO3 = 999,
+  EDITION_2023 = 1000,
+  EDITION_1_TEST_ONLY = 1,
+  EDITION_2_TEST_ONLY = 2,
+  EDITION_99997_TEST_ONLY = 99997,
+  EDITION_99998_TEST_ONLY = 99998,
+  EDITION_99999_TEST_ONLY = 99999,
+}
+
+export function editionFromJSON(object: any): Edition {
+  switch (object) {
+    case 0:
+    case "EDITION_UNKNOWN":
+      return Edition.EDITION_UNKNOWN;
+    case 998:
+    case "EDITION_PROTO2":
+      return Edition.EDITION_PROTO2;
+    case 999:
+    case "EDITION_PROTO3":
+      return Edition.EDITION_PROTO3;
+    case 1000:
+    case "EDITION_2023":
+      return Edition.EDITION_2023;
+    case 1:
+    case "EDITION_1_TEST_ONLY":
+      return Edition.EDITION_1_TEST_ONLY;
+    case 2:
+    case "EDITION_2_TEST_ONLY":
+      return Edition.EDITION_2_TEST_ONLY;
+    case 99997:
+    case "EDITION_99997_TEST_ONLY":
+      return Edition.EDITION_99997_TEST_ONLY;
+    case 99998:
+    case "EDITION_99998_TEST_ONLY":
+      return Edition.EDITION_99998_TEST_ONLY;
+    case 99999:
+    case "EDITION_99999_TEST_ONLY":
+      return Edition.EDITION_99999_TEST_ONLY;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum Edition",
+      );
+  }
+}
+
 export interface FieldOptions {
   ctype: FieldOptions_CType;
   packed: boolean;
@@ -12,7 +60,9 @@ export interface FieldOptions {
   weak: boolean;
   debugRedact: boolean;
   retention: FieldOptions_OptionRetention;
-  target: FieldOptions_OptionTargetType;
+  targets: FieldOptions_OptionTargetType[];
+  editionDefaults: FieldOptions_EditionDefault[];
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -148,7 +198,13 @@ export function fieldOptions_OptionTargetTypeFromJSON(
   }
 }
 
+export interface FieldOptions_EditionDefault {
+  edition: Edition;
+  value: string;
+}
+
 export interface OneofOptions {
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -165,6 +221,181 @@ export interface UninterpretedOption {
 export interface UninterpretedOption_NamePart {
   namePart: string;
   isExtension: boolean;
+}
+
+export interface FeatureSet {
+  fieldPresence: FeatureSet_FieldPresence;
+  enumType: FeatureSet_EnumType;
+  repeatedFieldEncoding: FeatureSet_RepeatedFieldEncoding;
+  utf8Validation: FeatureSet_Utf8Validation;
+  messageEncoding: FeatureSet_MessageEncoding;
+  jsonFormat: FeatureSet_JsonFormat;
+}
+
+export enum FeatureSet_FieldPresence {
+  FIELD_PRESENCE_UNKNOWN = 0,
+  EXPLICIT = 1,
+  IMPLICIT = 2,
+  LEGACY_REQUIRED = 3,
+}
+
+export function featureSet_FieldPresenceFromJSON(
+  object: any,
+): FeatureSet_FieldPresence {
+  switch (object) {
+    case 0:
+    case "FIELD_PRESENCE_UNKNOWN":
+      return FeatureSet_FieldPresence.FIELD_PRESENCE_UNKNOWN;
+    case 1:
+    case "EXPLICIT":
+      return FeatureSet_FieldPresence.EXPLICIT;
+    case 2:
+    case "IMPLICIT":
+      return FeatureSet_FieldPresence.IMPLICIT;
+    case 3:
+    case "LEGACY_REQUIRED":
+      return FeatureSet_FieldPresence.LEGACY_REQUIRED;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_FieldPresence",
+      );
+  }
+}
+
+export enum FeatureSet_EnumType {
+  ENUM_TYPE_UNKNOWN = 0,
+  OPEN = 1,
+  CLOSED = 2,
+}
+
+export function featureSet_EnumTypeFromJSON(object: any): FeatureSet_EnumType {
+  switch (object) {
+    case 0:
+    case "ENUM_TYPE_UNKNOWN":
+      return FeatureSet_EnumType.ENUM_TYPE_UNKNOWN;
+    case 1:
+    case "OPEN":
+      return FeatureSet_EnumType.OPEN;
+    case 2:
+    case "CLOSED":
+      return FeatureSet_EnumType.CLOSED;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum FeatureSet_EnumType",
+      );
+  }
+}
+
+export enum FeatureSet_RepeatedFieldEncoding {
+  REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+  PACKED = 1,
+  EXPANDED = 2,
+}
+
+export function featureSet_RepeatedFieldEncodingFromJSON(
+  object: any,
+): FeatureSet_RepeatedFieldEncoding {
+  switch (object) {
+    case 0:
+    case "REPEATED_FIELD_ENCODING_UNKNOWN":
+      return FeatureSet_RepeatedFieldEncoding.REPEATED_FIELD_ENCODING_UNKNOWN;
+    case 1:
+    case "PACKED":
+      return FeatureSet_RepeatedFieldEncoding.PACKED;
+    case 2:
+    case "EXPANDED":
+      return FeatureSet_RepeatedFieldEncoding.EXPANDED;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_RepeatedFieldEncoding",
+      );
+  }
+}
+
+export enum FeatureSet_Utf8Validation {
+  UTF8_VALIDATION_UNKNOWN = 0,
+  NONE = 1,
+  VERIFY = 2,
+}
+
+export function featureSet_Utf8ValidationFromJSON(
+  object: any,
+): FeatureSet_Utf8Validation {
+  switch (object) {
+    case 0:
+    case "UTF8_VALIDATION_UNKNOWN":
+      return FeatureSet_Utf8Validation.UTF8_VALIDATION_UNKNOWN;
+    case 1:
+    case "NONE":
+      return FeatureSet_Utf8Validation.NONE;
+    case 2:
+    case "VERIFY":
+      return FeatureSet_Utf8Validation.VERIFY;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_Utf8Validation",
+      );
+  }
+}
+
+export enum FeatureSet_MessageEncoding {
+  MESSAGE_ENCODING_UNKNOWN = 0,
+  LENGTH_PREFIXED = 1,
+  DELIMITED = 2,
+}
+
+export function featureSet_MessageEncodingFromJSON(
+  object: any,
+): FeatureSet_MessageEncoding {
+  switch (object) {
+    case 0:
+    case "MESSAGE_ENCODING_UNKNOWN":
+      return FeatureSet_MessageEncoding.MESSAGE_ENCODING_UNKNOWN;
+    case 1:
+    case "LENGTH_PREFIXED":
+      return FeatureSet_MessageEncoding.LENGTH_PREFIXED;
+    case 2:
+    case "DELIMITED":
+      return FeatureSet_MessageEncoding.DELIMITED;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_MessageEncoding",
+      );
+  }
+}
+
+export enum FeatureSet_JsonFormat {
+  JSON_FORMAT_UNKNOWN = 0,
+  ALLOW = 1,
+  LEGACY_BEST_EFFORT = 2,
+}
+
+export function featureSet_JsonFormatFromJSON(
+  object: any,
+): FeatureSet_JsonFormat {
+  switch (object) {
+    case 0:
+    case "JSON_FORMAT_UNKNOWN":
+      return FeatureSet_JsonFormat.JSON_FORMAT_UNKNOWN;
+    case 1:
+    case "ALLOW":
+      return FeatureSet_JsonFormat.ALLOW;
+    case 2:
+    case "LEGACY_BEST_EFFORT":
+      return FeatureSet_JsonFormat.LEGACY_BEST_EFFORT;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum FeatureSet_JsonFormat",
+      );
+  }
 }
 
 export const FieldOptions = {
@@ -189,9 +420,19 @@ export const FieldOptions = {
       retention: isSet(object.retention)
         ? fieldOptions_OptionRetentionFromJSON(object.retention)
         : 0,
-      target: isSet(object.target)
-        ? fieldOptions_OptionTargetTypeFromJSON(object.target)
-        : 0,
+      targets: globalThis.Array.isArray(object?.targets)
+        ? object.targets.map((e: any) =>
+            fieldOptions_OptionTargetTypeFromJSON(e),
+          )
+        : [],
+      editionDefaults: globalThis.Array.isArray(object?.editionDefaults)
+        ? object.editionDefaults.map((e: any) =>
+            FieldOptions_EditionDefault.fromJSON(e),
+          )
+        : [],
+      features: isSet(object.features)
+        ? FeatureSet.fromJSON(object.features)
+        : undefined,
       uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) =>
             UninterpretedOption.fromJSON(e),
@@ -201,9 +442,21 @@ export const FieldOptions = {
   },
 };
 
+export const FieldOptions_EditionDefault = {
+  fromJSON(object: any): FieldOptions_EditionDefault {
+    return {
+      edition: isSet(object.edition) ? editionFromJSON(object.edition) : 0,
+      value: isSet(object.value) ? globalThis.String(object.value) : "",
+    };
+  },
+};
+
 export const OneofOptions = {
   fromJSON(object: any): OneofOptions {
     return {
+      features: isSet(object.features)
+        ? FeatureSet.fromJSON(object.features)
+        : undefined,
       uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
         ? object.uninterpretedOption.map((e: any) =>
             UninterpretedOption.fromJSON(e),
@@ -250,6 +503,31 @@ export const UninterpretedOption_NamePart = {
       isExtension: isSet(object.isExtension)
         ? globalThis.Boolean(object.isExtension)
         : false,
+    };
+  },
+};
+
+export const FeatureSet = {
+  fromJSON(object: any): FeatureSet {
+    return {
+      fieldPresence: isSet(object.fieldPresence)
+        ? featureSet_FieldPresenceFromJSON(object.fieldPresence)
+        : 0,
+      enumType: isSet(object.enumType)
+        ? featureSet_EnumTypeFromJSON(object.enumType)
+        : 0,
+      repeatedFieldEncoding: isSet(object.repeatedFieldEncoding)
+        ? featureSet_RepeatedFieldEncodingFromJSON(object.repeatedFieldEncoding)
+        : 0,
+      utf8Validation: isSet(object.utf8Validation)
+        ? featureSet_Utf8ValidationFromJSON(object.utf8Validation)
+        : 0,
+      messageEncoding: isSet(object.messageEncoding)
+        ? featureSet_MessageEncodingFromJSON(object.messageEncoding)
+        : 0,
+      jsonFormat: isSet(object.jsonFormat)
+        ? featureSet_JsonFormatFromJSON(object.jsonFormat)
+        : 0,
     };
   },
 };
