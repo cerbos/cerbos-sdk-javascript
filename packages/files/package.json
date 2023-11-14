@@ -27,6 +27,6 @@
   ],
   "dependencies": {
     "@cerbos/core": "^0.14.0",
-    "yaml": "^2.3.3"
+    "yaml": "^2.3.4"
   }
 }
