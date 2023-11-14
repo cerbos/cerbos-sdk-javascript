@@ -4,6 +4,18 @@ import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "google.protobuf";
 
+export enum Edition {
+  EDITION_UNKNOWN = 0,
+  EDITION_PROTO2 = 998,
+  EDITION_PROTO3 = 999,
+  EDITION_2023 = 1000,
+  EDITION_1_TEST_ONLY = 1,
+  EDITION_2_TEST_ONLY = 2,
+  EDITION_99997_TEST_ONLY = 99997,
+  EDITION_99998_TEST_ONLY = 99998,
+  EDITION_99999_TEST_ONLY = 99999,
+}
+
 export interface FileOptions {
   javaPackage: string;
   javaOuterClassname: string;
@@ -25,6 +37,7 @@ export interface FileOptions {
   phpNamespace: string;
   phpMetadataNamespace: string;
   rubyPackage: string;
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -40,6 +53,7 @@ export interface MessageOptions {
   deprecated: boolean;
   mapEntry: boolean;
   deprecatedLegacyJsonFieldConflicts: boolean;
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -53,7 +67,9 @@ export interface FieldOptions {
   weak: boolean;
   debugRedact: boolean;
   retention: FieldOptions_OptionRetention;
-  target: FieldOptions_OptionTargetType;
+  targets: FieldOptions_OptionTargetType[];
+  editionDefaults: FieldOptions_EditionDefault[];
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -88,11 +104,18 @@ export enum FieldOptions_OptionTargetType {
   TARGET_TYPE_METHOD = 9,
 }
 
+export interface FieldOptions_EditionDefault {
+  edition: Edition;
+  value: string;
+}
+
 export interface OneofOptions {
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
 export interface ServiceOptions {
+  features: FeatureSet | undefined;
   deprecated: boolean;
   uninterpretedOption: UninterpretedOption[];
 }
@@ -100,6 +123,7 @@ export interface ServiceOptions {
 export interface MethodOptions {
   deprecated: boolean;
   idempotencyLevel: MethodOptions_IdempotencyLevel;
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -124,6 +148,52 @@ export interface UninterpretedOption_NamePart {
   isExtension: boolean;
 }
 
+export interface FeatureSet {
+  fieldPresence: FeatureSet_FieldPresence;
+  enumType: FeatureSet_EnumType;
+  repeatedFieldEncoding: FeatureSet_RepeatedFieldEncoding;
+  utf8Validation: FeatureSet_Utf8Validation;
+  messageEncoding: FeatureSet_MessageEncoding;
+  jsonFormat: FeatureSet_JsonFormat;
+}
+
+export enum FeatureSet_FieldPresence {
+  FIELD_PRESENCE_UNKNOWN = 0,
+  EXPLICIT = 1,
+  IMPLICIT = 2,
+  LEGACY_REQUIRED = 3,
+}
+
+export enum FeatureSet_EnumType {
+  ENUM_TYPE_UNKNOWN = 0,
+  OPEN = 1,
+  CLOSED = 2,
+}
+
+export enum FeatureSet_RepeatedFieldEncoding {
+  REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+  PACKED = 1,
+  EXPANDED = 2,
+}
+
+export enum FeatureSet_Utf8Validation {
+  UTF8_VALIDATION_UNKNOWN = 0,
+  NONE = 1,
+  VERIFY = 2,
+}
+
+export enum FeatureSet_MessageEncoding {
+  MESSAGE_ENCODING_UNKNOWN = 0,
+  LENGTH_PREFIXED = 1,
+  DELIMITED = 2,
+}
+
+export enum FeatureSet_JsonFormat {
+  JSON_FORMAT_UNKNOWN = 0,
+  ALLOW = 1,
+  LEGACY_BEST_EFFORT = 2,
+}
+
 function createBaseFileOptions(): FileOptions {
   return {
     javaPackage: "",
@@ -146,6 +216,7 @@ function createBaseFileOptions(): FileOptions {
     phpNamespace: "",
     phpMetadataNamespace: "",
     rubyPackage: "",
+    features: undefined,
     uninterpretedOption: [],
   };
 }
@@ -214,6 +285,9 @@ export const FileOptions = {
     }
     if (message.rubyPackage !== "") {
       writer.uint32(362).string(message.rubyPackage);
+    }
+    if (message.features !== undefined) {
+      FeatureSet.encode(message.features, writer.uint32(402).fork()).ldelim();
     }
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
@@ -369,6 +443,13 @@ export const FileOptions = {
 
           message.rubyPackage = reader.string();
           continue;
+        case 50:
+          if (tag !== 402) {
+            break;
+          }
+
+          message.features = FeatureSet.decode(reader, reader.uint32());
+          continue;
         case 999:
           if (tag !== 7994) {
             break;
@@ -395,6 +476,7 @@ function createBaseMessageOptions(): MessageOptions {
     deprecated: false,
     mapEntry: false,
     deprecatedLegacyJsonFieldConflicts: false,
+    features: undefined,
     uninterpretedOption: [],
   };
 }
@@ -418,6 +500,9 @@ export const MessageOptions = {
     }
     if (message.deprecatedLegacyJsonFieldConflicts === true) {
       writer.uint32(88).bool(message.deprecatedLegacyJsonFieldConflicts);
+    }
+    if (message.features !== undefined) {
+      FeatureSet.encode(message.features, writer.uint32(98).fork()).ldelim();
     }
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
@@ -468,6 +553,13 @@ export const MessageOptions = {
 
           message.deprecatedLegacyJsonFieldConflicts = reader.bool();
           continue;
+        case 12:
+          if (tag !== 98) {
+            break;
+          }
+
+          message.features = FeatureSet.decode(reader, reader.uint32());
+          continue;
         case 999:
           if (tag !== 7994) {
             break;
@@ -498,7 +590,9 @@ function createBaseFieldOptions(): FieldOptions {
     weak: false,
     debugRedact: false,
     retention: 0,
-    target: 0,
+    targets: [],
+    editionDefaults: [],
+    features: undefined,
     uninterpretedOption: [],
   };
 }
@@ -535,8 +629,19 @@ export const FieldOptions = {
     if (message.retention !== 0) {
       writer.uint32(136).int32(message.retention);
     }
-    if (message.target !== 0) {
-      writer.uint32(144).int32(message.target);
+    writer.uint32(154).fork();
+    for (const v of message.targets) {
+      writer.int32(v);
+    }
+    writer.ldelim();
+    for (const v of message.editionDefaults) {
+      FieldOptions_EditionDefault.encode(
+        v!,
+        writer.uint32(162).fork(),
+      ).ldelim();
+    }
+    if (message.features !== undefined) {
+      FeatureSet.encode(message.features, writer.uint32(170).fork()).ldelim();
     }
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
@@ -615,12 +720,38 @@ export const FieldOptions = {
 
           message.retention = reader.int32() as any;
           continue;
-        case 18:
-          if (tag !== 144) {
+        case 19:
+          if (tag === 152) {
+            message.targets.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 154) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.targets.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
+        case 20:
+          if (tag !== 162) {
             break;
           }
 
-          message.target = reader.int32() as any;
+          message.editionDefaults.push(
+            FieldOptions_EditionDefault.decode(reader, reader.uint32()),
+          );
+          continue;
+        case 21:
+          if (tag !== 170) {
+            break;
+          }
+
+          message.features = FeatureSet.decode(reader, reader.uint32());
           continue;
         case 999:
           if (tag !== 7994) {
@@ -641,8 +772,61 @@ export const FieldOptions = {
   },
 };
 
+function createBaseFieldOptions_EditionDefault(): FieldOptions_EditionDefault {
+  return { edition: 0, value: "" };
+}
+
+export const FieldOptions_EditionDefault = {
+  encode(
+    message: FieldOptions_EditionDefault,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.edition !== 0) {
+      writer.uint32(24).int32(message.edition);
+    }
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): FieldOptions_EditionDefault {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFieldOptions_EditionDefault();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.edition = reader.int32() as any;
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.value = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
 function createBaseOneofOptions(): OneofOptions {
-  return { uninterpretedOption: [] };
+  return { features: undefined, uninterpretedOption: [] };
 }
 
 export const OneofOptions = {
@@ -650,6 +834,9 @@ export const OneofOptions = {
     message: OneofOptions,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
+    if (message.features !== undefined) {
+      FeatureSet.encode(message.features, writer.uint32(10).fork()).ldelim();
+    }
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
     }
@@ -664,6 +851,13 @@ export const OneofOptions = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.features = FeatureSet.decode(reader, reader.uint32());
+          continue;
         case 999:
           if (tag !== 7994) {
             break;
@@ -684,7 +878,7 @@ export const OneofOptions = {
 };
 
 function createBaseServiceOptions(): ServiceOptions {
-  return { deprecated: false, uninterpretedOption: [] };
+  return { features: undefined, deprecated: false, uninterpretedOption: [] };
 }
 
 export const ServiceOptions = {
@@ -692,6 +886,9 @@ export const ServiceOptions = {
     message: ServiceOptions,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
+    if (message.features !== undefined) {
+      FeatureSet.encode(message.features, writer.uint32(274).fork()).ldelim();
+    }
     if (message.deprecated === true) {
       writer.uint32(264).bool(message.deprecated);
     }
@@ -709,6 +906,13 @@ export const ServiceOptions = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 34:
+          if (tag !== 274) {
+            break;
+          }
+
+          message.features = FeatureSet.decode(reader, reader.uint32());
+          continue;
         case 33:
           if (tag !== 264) {
             break;
@@ -736,7 +940,12 @@ export const ServiceOptions = {
 };
 
 function createBaseMethodOptions(): MethodOptions {
-  return { deprecated: false, idempotencyLevel: 0, uninterpretedOption: [] };
+  return {
+    deprecated: false,
+    idempotencyLevel: 0,
+    features: undefined,
+    uninterpretedOption: [],
+  };
 }
 
 export const MethodOptions = {
@@ -749,6 +958,9 @@ export const MethodOptions = {
     }
     if (message.idempotencyLevel !== 0) {
       writer.uint32(272).int32(message.idempotencyLevel);
+    }
+    if (message.features !== undefined) {
+      FeatureSet.encode(message.features, writer.uint32(282).fork()).ldelim();
     }
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
@@ -777,6 +989,13 @@ export const MethodOptions = {
           }
 
           message.idempotencyLevel = reader.int32() as any;
+          continue;
+        case 35:
+          if (tag !== 282) {
+            break;
+          }
+
+          message.features = FeatureSet.decode(reader, reader.uint32());
           continue;
         case 999:
           if (tag !== 7994) {
@@ -952,6 +1171,103 @@ export const UninterpretedOption_NamePart = {
           }
 
           message.isExtension = reader.bool();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseFeatureSet(): FeatureSet {
+  return {
+    fieldPresence: 0,
+    enumType: 0,
+    repeatedFieldEncoding: 0,
+    utf8Validation: 0,
+    messageEncoding: 0,
+    jsonFormat: 0,
+  };
+}
+
+export const FeatureSet = {
+  encode(
+    message: FeatureSet,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.fieldPresence !== 0) {
+      writer.uint32(8).int32(message.fieldPresence);
+    }
+    if (message.enumType !== 0) {
+      writer.uint32(16).int32(message.enumType);
+    }
+    if (message.repeatedFieldEncoding !== 0) {
+      writer.uint32(24).int32(message.repeatedFieldEncoding);
+    }
+    if (message.utf8Validation !== 0) {
+      writer.uint32(32).int32(message.utf8Validation);
+    }
+    if (message.messageEncoding !== 0) {
+      writer.uint32(40).int32(message.messageEncoding);
+    }
+    if (message.jsonFormat !== 0) {
+      writer.uint32(48).int32(message.jsonFormat);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): FeatureSet {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFeatureSet();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.fieldPresence = reader.int32() as any;
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.enumType = reader.int32() as any;
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.repeatedFieldEncoding = reader.int32() as any;
+          continue;
+        case 4:
+          if (tag !== 32) {
+            break;
+          }
+
+          message.utf8Validation = reader.int32() as any;
+          continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.messageEncoding = reader.int32() as any;
+          continue;
+        case 6:
+          if (tag !== 48) {
+            break;
+          }
+
+          message.jsonFormat = reader.int32() as any;
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {

@@ -2,6 +2,18 @@
 
 export const protobufPackage = "google.protobuf";
 
+export enum Edition {
+  EDITION_UNKNOWN = 0,
+  EDITION_PROTO2 = 998,
+  EDITION_PROTO3 = 999,
+  EDITION_2023 = 1000,
+  EDITION_1_TEST_ONLY = 1,
+  EDITION_2_TEST_ONLY = 2,
+  EDITION_99997_TEST_ONLY = 99997,
+  EDITION_99998_TEST_ONLY = 99998,
+  EDITION_99999_TEST_ONLY = 99999,
+}
+
 export interface FileOptions {
   javaPackage: string;
   javaOuterClassname: string;
@@ -23,6 +35,7 @@ export interface FileOptions {
   phpNamespace: string;
   phpMetadataNamespace: string;
   rubyPackage: string;
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -38,6 +51,7 @@ export interface MessageOptions {
   deprecated: boolean;
   mapEntry: boolean;
   deprecatedLegacyJsonFieldConflicts: boolean;
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -51,7 +65,9 @@ export interface FieldOptions {
   weak: boolean;
   debugRedact: boolean;
   retention: FieldOptions_OptionRetention;
-  target: FieldOptions_OptionTargetType;
+  targets: FieldOptions_OptionTargetType[];
+  editionDefaults: FieldOptions_EditionDefault[];
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -86,11 +102,18 @@ export enum FieldOptions_OptionTargetType {
   TARGET_TYPE_METHOD = 9,
 }
 
+export interface FieldOptions_EditionDefault {
+  edition: Edition;
+  value: string;
+}
+
 export interface OneofOptions {
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
 export interface ServiceOptions {
+  features: FeatureSet | undefined;
   deprecated: boolean;
   uninterpretedOption: UninterpretedOption[];
 }
@@ -98,6 +121,7 @@ export interface ServiceOptions {
 export interface MethodOptions {
   deprecated: boolean;
   idempotencyLevel: MethodOptions_IdempotencyLevel;
+  features: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -120,4 +144,50 @@ export interface UninterpretedOption {
 export interface UninterpretedOption_NamePart {
   namePart: string;
   isExtension: boolean;
+}
+
+export interface FeatureSet {
+  fieldPresence: FeatureSet_FieldPresence;
+  enumType: FeatureSet_EnumType;
+  repeatedFieldEncoding: FeatureSet_RepeatedFieldEncoding;
+  utf8Validation: FeatureSet_Utf8Validation;
+  messageEncoding: FeatureSet_MessageEncoding;
+  jsonFormat: FeatureSet_JsonFormat;
+}
+
+export enum FeatureSet_FieldPresence {
+  FIELD_PRESENCE_UNKNOWN = 0,
+  EXPLICIT = 1,
+  IMPLICIT = 2,
+  LEGACY_REQUIRED = 3,
+}
+
+export enum FeatureSet_EnumType {
+  ENUM_TYPE_UNKNOWN = 0,
+  OPEN = 1,
+  CLOSED = 2,
+}
+
+export enum FeatureSet_RepeatedFieldEncoding {
+  REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+  PACKED = 1,
+  EXPANDED = 2,
+}
+
+export enum FeatureSet_Utf8Validation {
+  UTF8_VALIDATION_UNKNOWN = 0,
+  NONE = 1,
+  VERIFY = 2,
+}
+
+export enum FeatureSet_MessageEncoding {
+  MESSAGE_ENCODING_UNKNOWN = 0,
+  LENGTH_PREFIXED = 1,
+  DELIMITED = 2,
+}
+
+export enum FeatureSet_JsonFormat {
+  JSON_FORMAT_UNKNOWN = 0,
+  ALLOW = 1,
+  LEGACY_BEST_EFFORT = 2,
 }
