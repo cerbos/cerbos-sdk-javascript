@@ -7,10 +7,7 @@ import { Metadata } from "@grpc/grpc-js";
 import { expect } from "@jest/globals";
 import type { Attributes, HrTime } from "@opentelemetry/api";
 import { ValueType, context, trace } from "@opentelemetry/api";
-import type {
-  Histogram,
-  InstrumentDescriptor,
-} from "@opentelemetry/sdk-metrics";
+import type { Histogram, MetricDescriptor } from "@opentelemetry/sdk-metrics";
 import {
   AggregationTemporality,
   DataPointType,
@@ -178,13 +175,13 @@ export async function expectMetrics(
   const { resourceMetrics } = await metricReader.collect();
   const metric = resourceMetrics.scopeMetrics[0]?.metrics[0];
   expect(metric?.dataPointType).toEqual(DataPointType.HISTOGRAM);
-  expect(metric?.descriptor).toEqual({
+  expect(metric?.descriptor).toMatchObject({
     name: "rpc.client.duration",
     description: "",
     type: InstrumentType.HISTOGRAM,
     valueType: ValueType.DOUBLE,
     unit: "ms",
-  } satisfies InstrumentDescriptor);
+  } satisfies MetricDescriptor);
 
   const dataPoint = metric?.dataPoints[0];
   expect(dataPoint?.attributes).toEqual(attributes);
