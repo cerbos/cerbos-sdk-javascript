@@ -31,16 +31,19 @@ export const HttpRule = {
       pattern: isSet(object.get)
         ? { $case: "get", get: globalThis.String(object.get) }
         : isSet(object.put)
-        ? { $case: "put", put: globalThis.String(object.put) }
-        : isSet(object.post)
-        ? { $case: "post", post: globalThis.String(object.post) }
-        : isSet(object.delete)
-        ? { $case: "delete", delete: globalThis.String(object.delete) }
-        : isSet(object.patch)
-        ? { $case: "patch", patch: globalThis.String(object.patch) }
-        : isSet(object.custom)
-        ? { $case: "custom", custom: CustomHttpPattern.fromJSON(object.custom) }
-        : undefined,
+          ? { $case: "put", put: globalThis.String(object.put) }
+          : isSet(object.post)
+            ? { $case: "post", post: globalThis.String(object.post) }
+            : isSet(object.delete)
+              ? { $case: "delete", delete: globalThis.String(object.delete) }
+              : isSet(object.patch)
+                ? { $case: "patch", patch: globalThis.String(object.patch) }
+                : isSet(object.custom)
+                  ? {
+                      $case: "custom",
+                      custom: CustomHttpPattern.fromJSON(object.custom),
+                    }
+                  : undefined,
       body: isSet(object.body) ? globalThis.String(object.body) : "",
       responseBody: isSet(object.responseBody)
         ? globalThis.String(object.responseBody)

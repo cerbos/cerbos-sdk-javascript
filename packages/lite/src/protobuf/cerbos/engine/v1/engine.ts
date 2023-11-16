@@ -252,15 +252,18 @@ export const PlanResourcesFilter_Expression_Operand = {
       node: isSet(object.value)
         ? { $case: "value", value: object.value }
         : isSet(object.expression)
-        ? {
-            $case: "expression",
-            expression: PlanResourcesFilter_Expression.fromJSON(
-              object.expression,
-            ),
-          }
-        : isSet(object.variable)
-        ? { $case: "variable", variable: globalThis.String(object.variable) }
-        : undefined,
+          ? {
+              $case: "expression",
+              expression: PlanResourcesFilter_Expression.fromJSON(
+                object.expression,
+              ),
+            }
+          : isSet(object.variable)
+            ? {
+                $case: "variable",
+                variable: globalThis.String(object.variable),
+              }
+            : undefined,
     };
   },
 

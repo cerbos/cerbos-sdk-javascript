@@ -323,61 +323,117 @@ export const FieldRules = {
       type: isSet(object.float)
         ? { $case: "float", float: FloatRules.fromJSON(object.float) }
         : isSet(object.double)
-        ? { $case: "double", double: DoubleRules.fromJSON(object.double) }
-        : isSet(object.int32)
-        ? { $case: "int32", int32: Int32Rules.fromJSON(object.int32) }
-        : isSet(object.int64)
-        ? { $case: "int64", int64: Int64Rules.fromJSON(object.int64) }
-        : isSet(object.uint32)
-        ? { $case: "uint32", uint32: UInt32Rules.fromJSON(object.uint32) }
-        : isSet(object.uint64)
-        ? { $case: "uint64", uint64: UInt64Rules.fromJSON(object.uint64) }
-        : isSet(object.sint32)
-        ? { $case: "sint32", sint32: SInt32Rules.fromJSON(object.sint32) }
-        : isSet(object.sint64)
-        ? { $case: "sint64", sint64: SInt64Rules.fromJSON(object.sint64) }
-        : isSet(object.fixed32)
-        ? { $case: "fixed32", fixed32: Fixed32Rules.fromJSON(object.fixed32) }
-        : isSet(object.fixed64)
-        ? { $case: "fixed64", fixed64: Fixed64Rules.fromJSON(object.fixed64) }
-        : isSet(object.sfixed32)
-        ? {
-            $case: "sfixed32",
-            sfixed32: SFixed32Rules.fromJSON(object.sfixed32),
-          }
-        : isSet(object.sfixed64)
-        ? {
-            $case: "sfixed64",
-            sfixed64: SFixed64Rules.fromJSON(object.sfixed64),
-          }
-        : isSet(object.bool)
-        ? { $case: "bool", bool: BoolRules.fromJSON(object.bool) }
-        : isSet(object.string)
-        ? { $case: "string", string: StringRules.fromJSON(object.string) }
-        : isSet(object.bytes)
-        ? { $case: "bytes", bytes: BytesRules.fromJSON(object.bytes) }
-        : isSet(object.enum)
-        ? { $case: "enum", enum: EnumRules.fromJSON(object.enum) }
-        : isSet(object.repeated)
-        ? {
-            $case: "repeated",
-            repeated: RepeatedRules.fromJSON(object.repeated),
-          }
-        : isSet(object.map)
-        ? { $case: "map", map: MapRules.fromJSON(object.map) }
-        : isSet(object.any)
-        ? { $case: "any", any: AnyRules.fromJSON(object.any) }
-        : isSet(object.duration)
-        ? {
-            $case: "duration",
-            duration: DurationRules.fromJSON(object.duration),
-          }
-        : isSet(object.timestamp)
-        ? {
-            $case: "timestamp",
-            timestamp: TimestampRules.fromJSON(object.timestamp),
-          }
-        : undefined,
+          ? { $case: "double", double: DoubleRules.fromJSON(object.double) }
+          : isSet(object.int32)
+            ? { $case: "int32", int32: Int32Rules.fromJSON(object.int32) }
+            : isSet(object.int64)
+              ? { $case: "int64", int64: Int64Rules.fromJSON(object.int64) }
+              : isSet(object.uint32)
+                ? {
+                    $case: "uint32",
+                    uint32: UInt32Rules.fromJSON(object.uint32),
+                  }
+                : isSet(object.uint64)
+                  ? {
+                      $case: "uint64",
+                      uint64: UInt64Rules.fromJSON(object.uint64),
+                    }
+                  : isSet(object.sint32)
+                    ? {
+                        $case: "sint32",
+                        sint32: SInt32Rules.fromJSON(object.sint32),
+                      }
+                    : isSet(object.sint64)
+                      ? {
+                          $case: "sint64",
+                          sint64: SInt64Rules.fromJSON(object.sint64),
+                        }
+                      : isSet(object.fixed32)
+                        ? {
+                            $case: "fixed32",
+                            fixed32: Fixed32Rules.fromJSON(object.fixed32),
+                          }
+                        : isSet(object.fixed64)
+                          ? {
+                              $case: "fixed64",
+                              fixed64: Fixed64Rules.fromJSON(object.fixed64),
+                            }
+                          : isSet(object.sfixed32)
+                            ? {
+                                $case: "sfixed32",
+                                sfixed32: SFixed32Rules.fromJSON(
+                                  object.sfixed32,
+                                ),
+                              }
+                            : isSet(object.sfixed64)
+                              ? {
+                                  $case: "sfixed64",
+                                  sfixed64: SFixed64Rules.fromJSON(
+                                    object.sfixed64,
+                                  ),
+                                }
+                              : isSet(object.bool)
+                                ? {
+                                    $case: "bool",
+                                    bool: BoolRules.fromJSON(object.bool),
+                                  }
+                                : isSet(object.string)
+                                  ? {
+                                      $case: "string",
+                                      string: StringRules.fromJSON(
+                                        object.string,
+                                      ),
+                                    }
+                                  : isSet(object.bytes)
+                                    ? {
+                                        $case: "bytes",
+                                        bytes: BytesRules.fromJSON(
+                                          object.bytes,
+                                        ),
+                                      }
+                                    : isSet(object.enum)
+                                      ? {
+                                          $case: "enum",
+                                          enum: EnumRules.fromJSON(object.enum),
+                                        }
+                                      : isSet(object.repeated)
+                                        ? {
+                                            $case: "repeated",
+                                            repeated: RepeatedRules.fromJSON(
+                                              object.repeated,
+                                            ),
+                                          }
+                                        : isSet(object.map)
+                                          ? {
+                                              $case: "map",
+                                              map: MapRules.fromJSON(
+                                                object.map,
+                                              ),
+                                            }
+                                          : isSet(object.any)
+                                            ? {
+                                                $case: "any",
+                                                any: AnyRules.fromJSON(
+                                                  object.any,
+                                                ),
+                                              }
+                                            : isSet(object.duration)
+                                              ? {
+                                                  $case: "duration",
+                                                  duration:
+                                                    DurationRules.fromJSON(
+                                                      object.duration,
+                                                    ),
+                                                }
+                                              : isSet(object.timestamp)
+                                                ? {
+                                                    $case: "timestamp",
+                                                    timestamp:
+                                                      TimestampRules.fromJSON(
+                                                        object.timestamp,
+                                                      ),
+                                                  }
+                                                : undefined,
     };
   },
 
@@ -1097,27 +1153,38 @@ export const StringRules = {
       wellKnown: isSet(object.email)
         ? { $case: "email", email: globalThis.Boolean(object.email) }
         : isSet(object.hostname)
-        ? { $case: "hostname", hostname: globalThis.Boolean(object.hostname) }
-        : isSet(object.ip)
-        ? { $case: "ip", ip: globalThis.Boolean(object.ip) }
-        : isSet(object.ipv4)
-        ? { $case: "ipv4", ipv4: globalThis.Boolean(object.ipv4) }
-        : isSet(object.ipv6)
-        ? { $case: "ipv6", ipv6: globalThis.Boolean(object.ipv6) }
-        : isSet(object.uri)
-        ? { $case: "uri", uri: globalThis.Boolean(object.uri) }
-        : isSet(object.uriRef)
-        ? { $case: "uriRef", uriRef: globalThis.Boolean(object.uriRef) }
-        : isSet(object.address)
-        ? { $case: "address", address: globalThis.Boolean(object.address) }
-        : isSet(object.uuid)
-        ? { $case: "uuid", uuid: globalThis.Boolean(object.uuid) }
-        : isSet(object.wellKnownRegex)
-        ? {
-            $case: "wellKnownRegex",
-            wellKnownRegex: knownRegexFromJSON(object.wellKnownRegex),
-          }
-        : undefined,
+          ? { $case: "hostname", hostname: globalThis.Boolean(object.hostname) }
+          : isSet(object.ip)
+            ? { $case: "ip", ip: globalThis.Boolean(object.ip) }
+            : isSet(object.ipv4)
+              ? { $case: "ipv4", ipv4: globalThis.Boolean(object.ipv4) }
+              : isSet(object.ipv6)
+                ? { $case: "ipv6", ipv6: globalThis.Boolean(object.ipv6) }
+                : isSet(object.uri)
+                  ? { $case: "uri", uri: globalThis.Boolean(object.uri) }
+                  : isSet(object.uriRef)
+                    ? {
+                        $case: "uriRef",
+                        uriRef: globalThis.Boolean(object.uriRef),
+                      }
+                    : isSet(object.address)
+                      ? {
+                          $case: "address",
+                          address: globalThis.Boolean(object.address),
+                        }
+                      : isSet(object.uuid)
+                        ? {
+                            $case: "uuid",
+                            uuid: globalThis.Boolean(object.uuid),
+                          }
+                        : isSet(object.wellKnownRegex)
+                          ? {
+                              $case: "wellKnownRegex",
+                              wellKnownRegex: knownRegexFromJSON(
+                                object.wellKnownRegex,
+                              ),
+                            }
+                          : undefined,
       strict: isSet(object.strict) ? globalThis.Boolean(object.strict) : false,
       ignoreEmpty: isSet(object.ignoreEmpty)
         ? globalThis.Boolean(object.ignoreEmpty)
@@ -1237,10 +1304,10 @@ export const BytesRules = {
       wellKnown: isSet(object.ip)
         ? { $case: "ip", ip: globalThis.Boolean(object.ip) }
         : isSet(object.ipv4)
-        ? { $case: "ipv4", ipv4: globalThis.Boolean(object.ipv4) }
-        : isSet(object.ipv6)
-        ? { $case: "ipv6", ipv6: globalThis.Boolean(object.ipv6) }
-        : undefined,
+          ? { $case: "ipv4", ipv4: globalThis.Boolean(object.ipv4) }
+          : isSet(object.ipv6)
+            ? { $case: "ipv6", ipv6: globalThis.Boolean(object.ipv6) }
+            : undefined,
       ignoreEmpty: isSet(object.ignoreEmpty)
         ? globalThis.Boolean(object.ignoreEmpty)
         : false,

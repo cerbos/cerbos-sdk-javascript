@@ -136,25 +136,25 @@ export const Value = {
       kind: isSet(object.nullValue)
         ? { $case: "nullValue", nullValue: nullValueFromJSON(object.nullValue) }
         : isSet(object.numberValue)
-        ? {
-            $case: "numberValue",
-            numberValue: globalThis.Number(object.numberValue),
-          }
-        : isSet(object.stringValue)
-        ? {
-            $case: "stringValue",
-            stringValue: globalThis.String(object.stringValue),
-          }
-        : isSet(object.boolValue)
-        ? {
-            $case: "boolValue",
-            boolValue: globalThis.Boolean(object.boolValue),
-          }
-        : isSet(object.structValue)
-        ? { $case: "structValue", structValue: object.structValue }
-        : isSet(object.listValue)
-        ? { $case: "listValue", listValue: [...object.listValue] }
-        : undefined,
+          ? {
+              $case: "numberValue",
+              numberValue: globalThis.Number(object.numberValue),
+            }
+          : isSet(object.stringValue)
+            ? {
+                $case: "stringValue",
+                stringValue: globalThis.String(object.stringValue),
+              }
+            : isSet(object.boolValue)
+              ? {
+                  $case: "boolValue",
+                  boolValue: globalThis.Boolean(object.boolValue),
+                }
+              : isSet(object.structValue)
+                ? { $case: "structValue", structValue: object.structValue }
+                : isSet(object.listValue)
+                  ? { $case: "listValue", listValue: [...object.listValue] }
+                  : undefined,
     };
   },
 

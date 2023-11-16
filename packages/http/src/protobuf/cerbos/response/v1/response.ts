@@ -881,13 +881,13 @@ export const ListAuditLogEntriesResponse = {
             accessLogEntry: AccessLogEntry.fromJSON(object.accessLogEntry),
           }
         : isSet(object.decisionLogEntry)
-        ? {
-            $case: "decisionLogEntry",
-            decisionLogEntry: DecisionLogEntry.fromJSON(
-              object.decisionLogEntry,
-            ),
-          }
-        : undefined,
+          ? {
+              $case: "decisionLogEntry",
+              decisionLogEntry: DecisionLogEntry.fromJSON(
+                object.decisionLogEntry,
+              ),
+            }
+          : undefined,
     };
   },
 

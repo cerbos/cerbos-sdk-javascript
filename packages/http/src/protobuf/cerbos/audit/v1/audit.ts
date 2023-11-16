@@ -170,13 +170,13 @@ export const DecisionLogEntry = {
             ),
           }
         : isSet(object.planResources)
-        ? {
-            $case: "planResources",
-            planResources: DecisionLogEntry_PlanResources.fromJSON(
-              object.planResources,
-            ),
-          }
-        : undefined,
+          ? {
+              $case: "planResources",
+              planResources: DecisionLogEntry_PlanResources.fromJSON(
+                object.planResources,
+              ),
+            }
+          : undefined,
       metadata: isObject(object.metadata)
         ? Object.entries(object.metadata).reduce<{ [key: string]: MetaValues }>(
             (acc, [key, value]) => {

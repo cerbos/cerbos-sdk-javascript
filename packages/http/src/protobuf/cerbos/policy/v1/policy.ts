@@ -168,21 +168,23 @@ export const Policy = {
             resourcePolicy: ResourcePolicy.fromJSON(object.resourcePolicy),
           }
         : isSet(object.principalPolicy)
-        ? {
-            $case: "principalPolicy",
-            principalPolicy: PrincipalPolicy.fromJSON(object.principalPolicy),
-          }
-        : isSet(object.derivedRoles)
-        ? {
-            $case: "derivedRoles",
-            derivedRoles: DerivedRoles.fromJSON(object.derivedRoles),
-          }
-        : isSet(object.exportVariables)
-        ? {
-            $case: "exportVariables",
-            exportVariables: ExportVariables.fromJSON(object.exportVariables),
-          }
-        : undefined,
+          ? {
+              $case: "principalPolicy",
+              principalPolicy: PrincipalPolicy.fromJSON(object.principalPolicy),
+            }
+          : isSet(object.derivedRoles)
+            ? {
+                $case: "derivedRoles",
+                derivedRoles: DerivedRoles.fromJSON(object.derivedRoles),
+              }
+            : isSet(object.exportVariables)
+              ? {
+                  $case: "exportVariables",
+                  exportVariables: ExportVariables.fromJSON(
+                    object.exportVariables,
+                  ),
+                }
+              : undefined,
       variables: isObject(object.variables)
         ? Object.entries(object.variables).reduce<{ [key: string]: string }>(
             (acc, [key, value]) => {
@@ -704,8 +706,8 @@ export const Condition = {
       condition: isSet(object.match)
         ? { $case: "match", match: Match.fromJSON(object.match) }
         : isSet(object.script)
-        ? { $case: "script", script: globalThis.String(object.script) }
-        : undefined,
+          ? { $case: "script", script: globalThis.String(object.script) }
+          : undefined,
     };
   },
 
@@ -727,12 +729,12 @@ export const Match = {
       op: isSet(object.all)
         ? { $case: "all", all: Match_ExprList.fromJSON(object.all) }
         : isSet(object.any)
-        ? { $case: "any", any: Match_ExprList.fromJSON(object.any) }
-        : isSet(object.none)
-        ? { $case: "none", none: Match_ExprList.fromJSON(object.none) }
-        : isSet(object.expr)
-        ? { $case: "expr", expr: globalThis.String(object.expr) }
-        : undefined,
+          ? { $case: "any", any: Match_ExprList.fromJSON(object.any) }
+          : isSet(object.none)
+            ? { $case: "none", none: Match_ExprList.fromJSON(object.none) }
+            : isSet(object.expr)
+              ? { $case: "expr", expr: globalThis.String(object.expr) }
+              : undefined,
     };
   },
 
