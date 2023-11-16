@@ -596,17 +596,17 @@ export const ListAuditLogEntriesRequest = {
       filter: isSet(object.tail)
         ? { $case: "tail", tail: globalThis.Number(object.tail) }
         : isSet(object.between)
-        ? {
-            $case: "between",
-            between: ListAuditLogEntriesRequest_TimeRange.fromJSON(
-              object.between,
-            ),
-          }
-        : isSet(object.since)
-        ? { $case: "since", since: Duration.fromJSON(object.since) }
-        : isSet(object.lookup)
-        ? { $case: "lookup", lookup: globalThis.String(object.lookup) }
-        : undefined,
+          ? {
+              $case: "between",
+              between: ListAuditLogEntriesRequest_TimeRange.fromJSON(
+                object.between,
+              ),
+            }
+          : isSet(object.since)
+            ? { $case: "since", since: Duration.fromJSON(object.since) }
+            : isSet(object.lookup)
+              ? { $case: "lookup", lookup: globalThis.String(object.lookup) }
+              : undefined,
     };
   },
 
