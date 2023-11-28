@@ -12,22 +12,25 @@ export function cerbosVersionIsAtLeast(version: string): boolean {
   return semverGte(cerbosVersion, `${version}-prerelease`);
 }
 
-export interface Ports {
-  grpc: {
-    plaintext: number;
-    tls: number;
-    mtls: number;
-    mutable: number;
-    tracing: number;
-  };
-  http: {
-    plaintext: number;
-    tls: number;
-    mutable: number;
-    tracing: number;
-  };
-  jaeger: number;
+export interface CerbosPorts {
+  grpc: number;
+  http: number;
 }
+
+export interface Ports {
+  jaeger: number;
+  mtls: number;
+  mutable: CerbosPorts;
+  plaintext: CerbosPorts;
+  tls: CerbosPorts;
+  tracing: CerbosPorts;
+}
+
+export type CerbosService = keyof {
+  [Service in keyof Ports as Ports[Service] extends CerbosPorts
+    ? Service
+    : never]: true;
+};
 
 interface DockerComposeContainer {
   Service: string;
@@ -58,25 +61,13 @@ export async function ports(): Promise<Ports> {
     );
 
   return {
-    grpc: {
-      plaintext: port(containers, "plaintext", 3593),
-      tls: port(containers, "tls", 3593),
-      mtls: port(containers, "mtls", 3593),
-      mutable: port(containers, "mutable", 3593),
-      get tracing(): number {
-        return port(containers, "tracing", 3593);
-      },
-    },
-    http: {
-      plaintext: port(containers, "plaintext", 3592),
-      tls: port(containers, "tls", 3592),
-      mutable: port(containers, "mutable", 3592),
-      get tracing(): number {
-        return port(containers, "tracing", 3592);
-      },
-    },
-    get jaeger(): number {
-      return port(containers, "jaeger", 16685);
+    jaeger: port(containers, "jaeger", 16685),
+    mtls: port(containers, "mtls", 3593),
+    mutable: cerbosPorts(containers, "mutable"),
+    plaintext: cerbosPorts(containers, "plaintext"),
+    tls: cerbosPorts(containers, "tls"),
+    get tracing(): CerbosPorts {
+      return cerbosPorts(containers, "tracing");
     },
   };
 }
@@ -105,4 +96,14 @@ function port(
   }
 
   return publisher.PublishedPort;
+}
+
+function cerbosPorts(
+  containers: DockerComposeContainer[],
+  service: string,
+): CerbosPorts {
+  return {
+    grpc: port(containers, service, 3593),
+    http: port(containers, service, 3592),
+  };
 }
