@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.strict.json",
-  "include": ["src", "jest.config.ts"],
+  "include": ["src", "jest.config.js"],
   "exclude": ["src/protobuf"],
   "references": [
     { "path": "../core" },
@@ -12,6 +12,7 @@
     { "path": "./tsconfig.protobuf.json" }
   ],
   "compilerOptions": {
+    "checkJs": true,
     "lib": ["ES2020", "DOM"],
     "noEmit": true,
     "tsBuildInfoFile": "lib/test.tsbuildinfo"
