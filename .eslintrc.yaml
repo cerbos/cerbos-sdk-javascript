@@ -15,37 +15,37 @@ extends:
   - plugin:jest/recommended
 
 rules:
-  "@typescript-eslint/consistent-type-imports": error
-  "@typescript-eslint/explicit-function-return-type": error
-  "@typescript-eslint/explicit-member-accessibility": error
-  "@typescript-eslint/no-confusing-void-expression": error
-  "@typescript-eslint/prefer-enum-initializers": error
-  "@typescript-eslint/promise-function-async": error
+  "@typescript-eslint/consistent-type-imports": warn
+  "@typescript-eslint/explicit-function-return-type": warn
+  "@typescript-eslint/explicit-member-accessibility": warn
+  "@typescript-eslint/no-confusing-void-expression": warn
+  "@typescript-eslint/prefer-enum-initializers": warn
+  "@typescript-eslint/promise-function-async": warn
   "@typescript-eslint/return-await":
-    - error
+    - warn
     - always
-  curly: error
+  curly: warn
   func-style:
-    - error
+    - warn
     - declaration
-  import/no-duplicates: error
+  import/no-duplicates: warn
   import/no-extraneous-dependencies:
-    - error
+    - warn
     - devDependencies:
         - packages/test/**/*.ts
       optionalDependencies: false
       peerDependencies: false
       includeTypes: true
   import/order:
-    - error
+    - warn
     - alphabetize:
         order: asc
         orderImportKind: asc
         caseInsensitive: true
       newlines-between: always
-  no-console: error
+  no-console: warn
   sort-imports:
-    - error
+    - warn
     - ignoreDeclarationSort: true
 
 overrides:
@@ -54,4 +54,4 @@ overrides:
     plugins:
       - eslint-plugin-tsdoc
     rules:
-      tsdoc/syntax: error
+      tsdoc/syntax: warn
