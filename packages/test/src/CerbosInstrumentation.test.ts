@@ -43,18 +43,24 @@ import { QueryServiceClient } from "./protobuf/jaeger/proto/api_v3/query_service
 import type { KeyValue as KeyValueProto } from "./protobuf/opentelemetry/proto/common/v1/common";
 import type { Span as SpanProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
 import { Span_SpanKind as SpanKindProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
-import type { Ports } from "./servers";
+import type { CerbosPorts } from "./servers";
 import { cerbosVersionIsAtLeast, ports as serverPorts } from "./servers";
 
 describe("CerbosInstrumentation", () => {
-  let ports: Ports;
+  let jaegerPort: number;
+  let cerbosPorts: CerbosPorts;
   let metricReader: MetricReader;
   let spanExporter: InMemorySpanExporter;
 
   const cerbosInstrumentation = new CerbosInstrumentation({ enabled: false });
 
   beforeAll(async () => {
-    ports = await serverPorts();
+    const ports = await serverPorts();
+    jaegerPort = ports.jaeger;
+    cerbosPorts =
+      cerbosVersionIsAtLeast("0.30.0") && !cerbosVersionIsAtLeast("0.32.0")
+        ? ports.tracing
+        : ports.plaintext;
 
     metricReader = new TestMetricReader();
     const meterProvider = new MeterProvider();
@@ -82,25 +88,11 @@ describe("CerbosInstrumentation", () => {
     {
       type: "gRPC",
       client: (): Client =>
-        new GRPC(
-          `localhost:${
-            cerbosVersionIsAtLeast("0.30.0")
-              ? ports.grpc.tracing
-              : ports.grpc.plaintext
-          }`,
-          { tls: false },
-        ),
+        new GRPC(`localhost:${cerbosPorts.grpc}`, { tls: false }),
     },
     {
       type: "HTTP",
-      client: (): Client =>
-        new HTTP(
-          `http://localhost:${
-            cerbosVersionIsAtLeast("0.30.0")
-              ? ports.http.tracing
-              : ports.http.plaintext
-          }`,
-        ),
+      client: (): Client => new HTTP(`http://localhost:${cerbosPorts.http}`),
     },
     {
       type: "Lite",
@@ -160,7 +152,7 @@ describe("CerbosInstrumentation", () => {
         // Lite policy bundles don't produce server spans, and Cerbos didn't include the otelgrpc interceptors until 0.30.0.
         if (type !== "Lite" && cerbosVersionIsAtLeast("0.30.0")) {
           const jaeger = new QueryServiceClient(
-            `localhost:${ports.jaeger}`,
+            `localhost:${jaegerPort}`,
             ChannelCredentials.createInsecure(),
           );
 

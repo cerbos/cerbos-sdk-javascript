@@ -35,7 +35,7 @@ import { UnsecuredJWT } from "jose";
 import { compare as semverCompare, lte as semverLte } from "semver";
 
 import { invalidArgumentDetails as invalidArgumentDetails } from "./helpers";
-import type { Ports } from "./servers";
+import type { CerbosService, Ports } from "./servers";
 import {
   cerbosVersion,
   cerbosVersionIsAtLeast,
@@ -73,7 +73,7 @@ describe("Client", () => {
       {
         type: "gRPC | TCP | plaintext",
         client: (options: Options = {}): Client =>
-          new GRPC(`localhost:${ports.grpc.plaintext}`, {
+          new GRPC(`localhost:${ports.plaintext.grpc}`, {
             tls: false,
             ...options,
           }),
@@ -81,7 +81,7 @@ describe("Client", () => {
       {
         type: "gRPC | TCP | TLS",
         client: (options: Options = {}): Client =>
-          new GRPC(`localhost:${ports.grpc.tls}`, {
+          new GRPC(`localhost:${ports.tls.grpc}`, {
             tls: createSecureContext({
               ca: readPEM("server.root.crt"),
             }),
@@ -91,7 +91,7 @@ describe("Client", () => {
       {
         type: "gRPC | TCP | mTLS",
         client: (options: Options = {}): Client =>
-          new GRPC(`localhost:${ports.grpc.mtls}`, {
+          new GRPC(`localhost:${ports.mtls}`, {
             tls: createSecureContext({
               ca: readPEM("server.root.crt"),
               cert: readPEM("client.crt"),
@@ -103,7 +103,7 @@ describe("Client", () => {
       {
         type: "HTTP",
         client: (options: Options = {}): Client =>
-          new HTTP(`http://localhost:${ports.http.plaintext}`, options),
+          new HTTP(`http://localhost:${ports.plaintext.http}`, options),
       },
     ];
 
@@ -657,16 +657,16 @@ describe("Client", () => {
     const cases = [
       {
         type: "gRPC",
-        client: (port: keyof (typeof ports)["grpc"]): Client =>
-          new GRPC(`localhost:${ports.grpc[port]}`, {
+        client: (service: CerbosService): Client =>
+          new GRPC(`localhost:${ports[service].grpc}`, {
             adminCredentials,
             tls: createSecureContext({ ca }),
           }),
       },
       {
         type: "HTTP",
-        client: (port: keyof (typeof ports)["http"]): Client =>
-          new HTTP(`https://localhost:${ports.http[port]}`, {
+        client: (service: CerbosService): Client =>
+          new HTTP(`https://localhost:${ports[service].http}`, {
             adminCredentials,
           }),
       },
