@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@cerbos/grpc?style=flat-square)](https://www.npmjs.com/package/@cerbos/grpc)
 
-Client library for interacting with the Cerbos policy decision point over gRPC from server-side Node.js applications.
+Client library for interacting with the Cerbos policy decision point service over gRPC from server-side Node.js applications.
 
 ## Prerequisites
 
