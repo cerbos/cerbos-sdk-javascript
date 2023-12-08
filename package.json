@@ -6,7 +6,7 @@
   ],
   "engines": {
     "node": "21.4.0",
-    "npm": "10.2.3"
+    "npm": "10.2.5"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
@@ -69,7 +69,7 @@
     "prettier": "3.1.0",
     "prettier-plugin-pkg": "0.18.0",
     "ts-jest": "29.1.1",
-    "ts-proto": "1.164.1",
+    "ts-proto": "1.165.0",
     "typescript": "5.3.2"
   }
 }
