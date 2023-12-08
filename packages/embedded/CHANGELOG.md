@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Renamed package from `@cerbos/lite` to `@cerbos/embedded`, and client class from `Lite` to `Embedded` ([#755](https://github.com/cerbos/cerbos-sdk-javascript/pull/755))
 
 ## [0.5.0-beta] - 2023-10-02
 

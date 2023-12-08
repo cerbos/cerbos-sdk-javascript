@@ -4,10 +4,10 @@
   "exclude": ["src/protobuf"],
   "references": [
     { "path": "../core" },
+    { "path": "../embedded" },
     { "path": "../files" },
     { "path": "../grpc" },
     { "path": "../http" },
-    { "path": "../lite" },
     { "path": "../opentelemetry" },
     { "path": "./tsconfig.protobuf.json" }
   ],
