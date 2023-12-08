@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@cerbos/http?style=flat-square)](https://www.npmjs.com/package/@cerbos/http)
 
-Client library for interacting with the Cerbos policy decision point over HTTP.
+Client library for interacting with the Cerbos policy decision point service over HTTP.
 
 This is primarily intended for use in browsers, and requires `fetch` to be available globally.
 If you're targeting [old browsers](https://caniuse.com/fetch), you'll need to apply [a polyfill](https://www.npmjs.com/package/whatwg-fetch).
