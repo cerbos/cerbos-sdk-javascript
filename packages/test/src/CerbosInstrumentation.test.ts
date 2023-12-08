@@ -5,10 +5,10 @@ import { resolve } from "path";
 
 import type { Client } from "@cerbos/core";
 import { NotOK, Status } from "@cerbos/core";
+import type { DecodedJWTPayload } from "@cerbos/embedded";
+import { Embedded } from "@cerbos/embedded";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
-import type { DecodedJWTPayload } from "@cerbos/lite";
-import { Lite } from "@cerbos/lite";
 import { CerbosInstrumentation } from "@cerbos/opentelemetry";
 import { ChannelCredentials } from "@grpc/grpc-js";
 import {
@@ -95,12 +95,15 @@ describe("CerbosInstrumentation", () => {
       client: (): Client => new HTTP(`http://localhost:${cerbosPorts.http}`),
     },
     {
-      type: "Lite",
+      type: "Embedded",
       client: (): Client =>
-        new Lite(readFileSync(resolve(__dirname, "../servers/policies.wasm")), {
-          decodeJWTPayload: ({ token }): DecodedJWTPayload =>
-            UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
-        }),
+        new Embedded(
+          readFileSync(resolve(__dirname, "../servers/policies.wasm")),
+          {
+            decodeJWTPayload: ({ token }): DecodedJWTPayload =>
+              UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
+          },
+        ),
     },
   ] as const;
 
@@ -149,8 +152,8 @@ describe("CerbosInstrumentation", () => {
 
         await expectMetrics(metricReader, attributes, span.duration);
 
-        // Lite policy bundles don't produce server spans, and Cerbos didn't include the otelgrpc interceptors until 0.30.0.
-        if (type !== "Lite" && cerbosVersionIsAtLeast("0.30.0")) {
+        // Embedded policy bundles don't produce server spans, and Cerbos didn't include the otelgrpc interceptors until 0.30.0.
+        if (type !== "Embedded" && cerbosVersionIsAtLeast("0.30.0")) {
           const jaeger = new QueryServiceClient(
             `localhost:${jaegerPort}`,
             ChannelCredentials.createInsecure(),
@@ -199,8 +202,8 @@ describe("CerbosInstrumentation", () => {
         }
       });
 
-      // Lite policy bundles don't produce invalid argument errors
-      if (type !== "Lite") {
+      // Embedded policy bundles don't produce invalid argument errors
+      if (type !== "Embedded") {
         it("records spans for unsuccessful calls", async () => {
           const [result, span] = await captureSpan(
             spanExporter,

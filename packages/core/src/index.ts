@@ -1,5 +1,5 @@
 /**
- * Common types used by the {@link @cerbos/grpc# | gRPC} and {@link @cerbos/http# | HTTP} client libraries.
+ * Common types used by the {@link @cerbos/grpc# | gRPC}, {@link @cerbos/http# | HTTP}, and {@link @cerbos/embedded# | embedded} client libraries.
  *
  * @packageDocumentation
  */

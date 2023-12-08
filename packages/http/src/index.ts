@@ -1,5 +1,5 @@
 /**
- * Client library for interacting with the Cerbos policy decision point over HTTP from browser-based applications.
+ * Client library for interacting with the Cerbos policy decision point service over HTTP from browser-based applications.
  *
  * @packageDocumentation
  */

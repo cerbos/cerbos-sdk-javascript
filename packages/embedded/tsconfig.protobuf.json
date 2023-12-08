@@ -4,6 +4,6 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
-    "tsBuildInfoFile": "lib/lite.protobuf.tsbuildinfo"
+    "tsBuildInfoFile": "lib/embedded.protobuf.tsbuildinfo"
   }
 }

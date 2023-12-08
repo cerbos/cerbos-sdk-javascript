@@ -7,14 +7,14 @@ import {
   CheckResourcesResult,
   Effect,
 } from "@cerbos/core";
-import type { DecodedJWTPayload } from "@cerbos/lite";
-import { Lite } from "@cerbos/lite";
+import type { DecodedJWTPayload } from "@cerbos/embedded";
+import { Embedded } from "@cerbos/embedded";
 import { describe, expect, it } from "@jest/globals";
 import { UnsecuredJWT } from "jose";
 
-describe("Lite", () => {
+describe("Embedded", () => {
   describe("cerbos", () => {
-    const client = new Lite(
+    const client = new Embedded(
       readFileSync(resolve(__dirname, "../servers/policies.wasm")),
       {
         decodeJWTPayload: ({ token }): DecodedJWTPayload =>

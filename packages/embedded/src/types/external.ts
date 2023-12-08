@@ -14,7 +14,7 @@ export type DecodedJWTPayload = Record<string, Value>;
  * Using {@link https://www.npmjs.com/package/jose | jose}:
  *
  * ```typescript
- * import type { DecodeJWTPayload, DecodedJWTPayload } from "@cerbos/lite";
+ * import type { DecodeJWTPayload, DecodedJWTPayload } from "@cerbos/embedded";
  * import { JWTVerifyGetKey, createRemoteJWKSet, jwtVerify } from "jose";
  *
  * interface KeySet {

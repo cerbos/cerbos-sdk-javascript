@@ -99,7 +99,7 @@ export class Server {
     if (!implementation) {
       throw new NotOK(
         Status.UNIMPLEMENTED,
-        `${rpc} is not yet implemented in Cerbos Lite`,
+        `${rpc} is not yet implemented in embedded policy decision points`,
       );
     }
 
