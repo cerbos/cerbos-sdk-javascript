@@ -771,6 +771,7 @@ export const QueryServiceClient = makeGenericClientConstructor(
     options?: Partial<ClientOptions>,
   ): QueryServiceClient;
   service: typeof QueryServiceService;
+  serviceName: string;
 };
 
 function toTimestamp(date: Date): Timestamp {

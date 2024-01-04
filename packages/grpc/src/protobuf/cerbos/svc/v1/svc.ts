@@ -268,6 +268,7 @@ export const CerbosServiceClient = makeGenericClientConstructor(
     options?: Partial<ClientOptions>,
   ): CerbosServiceClient;
   service: typeof CerbosServiceService;
+  serviceName: string;
 };
 
 export type CerbosAdminServiceService = typeof CerbosAdminServiceService;
@@ -668,4 +669,5 @@ export const CerbosAdminServiceClient = makeGenericClientConstructor(
     options?: Partial<ClientOptions>,
   ): CerbosAdminServiceClient;
   service: typeof CerbosAdminServiceService;
+  serviceName: string;
 };
