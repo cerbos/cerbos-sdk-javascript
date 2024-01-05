@@ -13,7 +13,7 @@
     "@cerbos/grpc": "0.14.1",
     "@cerbos/http": "0.15.0",
     "@cerbos/opentelemetry": "0.4.1",
-    "@grpc/grpc-js": "1.9.12",
+    "@grpc/grpc-js": "1.9.13",
     "@jest/globals": "29.7.0",
     "@opentelemetry/api": "1.7.0",
     "@opentelemetry/sdk-metrics": "1.18.1",
