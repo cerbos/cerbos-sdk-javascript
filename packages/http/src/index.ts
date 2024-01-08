@@ -74,12 +74,6 @@ export interface Options extends CoreOptions {
  *
  * You can use it in server-side Node.js applications, but the {@link @cerbos/grpc#GRPC | gRPC client} might be more appropriate.
  *
- * - For Node.js up to 17.4, you'll need {@link https://www.npmjs.com/package/cross-fetch | a polyfill} to make `fetch` happen.
- *
- * - From Node.js 17.5, you can instead enable the {@link https://nodejs.org/dist/latest-v17.x/docs/api/cli.html#--experimental-fetch | --experimental-fetch} option at the command line or via `NODE_OPTIONS`.
- *
- * - From Node.js 18 onwards `fetch` is available without any additional configuration.
- *
  * See {@link @cerbos/core#Client | the parent class} for available methods.
  *
  * @public
