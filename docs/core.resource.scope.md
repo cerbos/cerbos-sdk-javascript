@@ -4,7 +4,7 @@
 
 ## Resource.scope property
 
-The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) to use when checking the principal's permissions on the resource.
+The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) to use when checking the principal's permissions on the resource.
 
 **Signature:**
 

@@ -19,5 +19,5 @@ export interface CheckResourcesResultResource
 |  [id](./core.checkresourcesresultresource.id.md) |  | string | The unique identifier of the resource. |
 |  [kind](./core.checkresourcesresultresource.kind.md) |  | string | The type of resource. |
 |  [policyVersion](./core.checkresourcesresultresource.policyversion.md) |  | string | The policy version against which the check was performed. |
-|  [scope](./core.checkresourcesresultresource.scope.md) |  | string | The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) against which the check was performed. |
+|  [scope](./core.checkresourcesresultresource.scope.md) |  | string | The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) against which the check was performed. |
 

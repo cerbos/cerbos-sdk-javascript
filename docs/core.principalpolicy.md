@@ -4,7 +4,7 @@
 
 ## PrincipalPolicy interface
 
-A [policy](https://docs.cerbos.dev/cerbos/latest/policies/principal_policies.html) defining overrides for a specific user.
+A [policy](https://docs.cerbos.dev/cerbos/latest/policies/principal_policies) defining overrides for a specific user.
 
 **Signature:**
 

@@ -4,7 +4,7 @@
 
 ## ResourcePolicyBody.schemas property
 
-[Schemas](https://docs.cerbos.dev/cerbos/latest/policies/schemas.html) for principal and resource attributes.
+[Schemas](https://docs.cerbos.dev/cerbos/latest/policies/schemas) for principal and resource attributes.
 
 **Signature:**
 

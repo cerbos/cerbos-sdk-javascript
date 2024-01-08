@@ -148,7 +148,7 @@ const fileHandlers = {
  *
  * @remarks
  * This function looks for policies and schemas stored in the
- * {@link https://docs.cerbos.dev/cerbos/latest/policies/best_practices.html#_policy_repository_layout | standard Cerbos directory layout}.
+ * {@link https://docs.cerbos.dev/cerbos/latest/policies/best_practices#_policy_repository_layout | standard Cerbos directory layout}.
  *
  * @public
  */

@@ -31,7 +31,7 @@ No notable changes.
 
 ### Added
 
-- Support for [globals](https://docs.cerbos.dev/cerbos/latest/configuration/engine.html#globals) ([#619](https://github.com/cerbos/cerbos-sdk-javascript/pull/619))
+- Support for [globals](https://docs.cerbos.dev/cerbos/latest/configuration/engine#globals) ([#619](https://github.com/cerbos/cerbos-sdk-javascript/pull/619))
 
 ## [0.3.1-alpha] - 2023-07-18
 

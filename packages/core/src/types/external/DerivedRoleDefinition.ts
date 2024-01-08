@@ -1,7 +1,7 @@
 import type { Condition } from "./Condition";
 
 /**
- * The definition of a {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html | derived role}.
+ * The definition of a {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles | derived role}.
  *
  * @public
  */

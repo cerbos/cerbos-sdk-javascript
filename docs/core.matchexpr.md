@@ -16,5 +16,5 @@ export interface MatchExpr
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [expr](./core.matchexpr.expr.md) |  | string | A [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/conditions.html) expression to evaluate. |
+|  [expr](./core.matchexpr.expr.md) |  | string | A [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/conditions) expression to evaluate. |
 

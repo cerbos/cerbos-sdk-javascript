@@ -4,7 +4,7 @@
 
 ## PrincipalPolicyBody.scope property
 
-[Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) of the policy.
+[Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) of the policy.
 
 **Signature:**
 

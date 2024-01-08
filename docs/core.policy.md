@@ -4,7 +4,7 @@
 
 ## Policy type
 
-A [policy](https://docs.cerbos.dev/cerbos/latest/policies/index.html) definition.
+A [policy](https://docs.cerbos.dev/cerbos/latest/policies/) definition.
 
 **Signature:**
 

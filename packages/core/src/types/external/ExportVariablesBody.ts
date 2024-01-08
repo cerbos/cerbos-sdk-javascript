@@ -1,5 +1,5 @@
 /**
- * A set of {@link https://docs.cerbos.dev/cerbos/latest/policies/variables.html#export | exported variables}
+ * A set of {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#export | exported variables}
  * to be reused in other policies.
  *
  * @remarks

@@ -35,7 +35,7 @@ No notable changes.
 
   Requires a policy decision point server running Cerbos 0.29+.
 
-- Support for [exporting and importing variable sets](https://docs.cerbos.dev/cerbos/latest/policies/variables.html) in policies ([#598](https://github.com/cerbos/cerbos-sdk-javascript/pull/598))
+- Support for [exporting and importing variable sets](https://docs.cerbos.dev/cerbos/latest/policies/variables) in policies ([#598](https://github.com/cerbos/cerbos-sdk-javascript/pull/598))
 
   Requires a policy decision point server running Cerbos 0.29+.
 
@@ -127,7 +127,7 @@ No notable changes.
 
 ### Added
 
-- Support for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html) ([#209](https://github.com/cerbos/cerbos-sdk-javascript/pull/209))
+- Support for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) ([#209](https://github.com/cerbos/cerbos-sdk-javascript/pull/209))
 
 ## [0.6.0] - 2022-07-01
 

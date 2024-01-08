@@ -12,7 +12,7 @@ export interface CheckResourcesResultMetadata {
   actions: Record<string, CheckResourcesResultMetadataEffect | undefined>;
 
   /**
-   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html | derived roles} that were applied to the principal for the resource.
+   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles | derived roles} that were applied to the principal for the resource.
    */
   effectiveDerivedRoles: string[];
 }

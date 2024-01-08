@@ -85,7 +85,7 @@ export function _removeInstrumenter(instrumenter: _Instrumenter): void {
  */
 export interface Options {
   /**
-   * Credentials for the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API}.
+   * Credentials for the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API}.
    *
    * @defaultValue `undefined`
    */
@@ -116,7 +116,7 @@ export interface Options {
 }
 
 /**
- * Credentials for the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API}.
+ * Credentials for the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API}.
  *
  * @public
  */
@@ -159,9 +159,9 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials},
    *
-   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
    *
-   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
    *
    * @example
    * Create a policy in code:
@@ -222,9 +222,9 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials},
    *
-   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
    *
-   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
    *
    * @example
    * Create a schema in code:
@@ -376,9 +376,9 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials},
    *
-   * - the Cerbos policy decision point (PDP) server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   * - the Cerbos policy decision point (PDP) server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
    *
-   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
    *
    * The way this method handles failure depends on the version of the connected PDP server.
    * When the server is running Cerbos v0.25 or later, it returns `true` if the schema was deleted and `false` if the schema was not found.
@@ -402,9 +402,9 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials},
    *
-   * - the Cerbos policy decision point (PDP) server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   * - the Cerbos policy decision point (PDP) server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
    *
-   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
    *
    * The way this method handles failure depends on the version of the connected PDP server.
    * When the server is running Cerbos v0.25 or later, it returns a {@link DeleteSchemasResponse} that includes the number of schemas that were deleted.
@@ -433,9 +433,9 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials},
    *
-   * - the Cerbos policy decision point server to be at least v0.25 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   * - the Cerbos policy decision point server to be at least v0.25 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
    *
-   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
    *
    * @example
    * ```typescript
@@ -463,9 +463,9 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials},
    *
-   * - the Cerbos policy decision point server to be at least v0.25 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   * - the Cerbos policy decision point server to be at least v0.25 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
    *
-   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
    *
    * @example
    * ```typescript
@@ -485,9 +485,9 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials},
    *
-   * - the Cerbos policy decision point server to be at least v0.26 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   * - the Cerbos policy decision point server to be at least v0.26 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
    *
-   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
    *
    * @example
    * ```typescript
@@ -515,9 +515,9 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials},
    *
-   * - the Cerbos policy decision point server to be at least v0.26 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled, and
+   * - the Cerbos policy decision point server to be at least v0.26 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
    *
-   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
    *
    * @example
    * ```typescript
@@ -537,7 +537,7 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials}, and
    *
-   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled.
    *
    * @example
    * ```typescript
@@ -562,7 +562,7 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials}, and
    *
-   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled.
    *
    * @example
    * ```typescript
@@ -585,7 +585,7 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials}, and
    *
-   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled.
    *
    * @example
    * ```typescript
@@ -608,7 +608,7 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials}, and
    *
-   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled.
    *
    * @example
    * ```typescript
@@ -665,7 +665,7 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials}, and
    *
-   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled.
    *
    * @example
    * ```typescript
@@ -688,7 +688,7 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials}, and
    *
-   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API} enabled.
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled.
    *
    * @example
    * ```typescript
@@ -738,9 +738,9 @@ export abstract class Client {
    *
    * - the client to be configured with {@link Options.adminCredentials},
    *
-   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api.html | admin API}, and
+   * - the Cerbos policy decision point server to be configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API}, and
    *
-   * - a reloadable {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html | storage backend}.
+   * - a reloadable {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
    *
    * @example
    * ```typescript

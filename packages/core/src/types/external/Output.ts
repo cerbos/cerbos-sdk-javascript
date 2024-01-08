@@ -5,7 +5,7 @@
  */
 export interface Output {
   /**
-   * A {@link https://docs.cerbos.dev/cerbos/latest/policies/conditions.html | Common Expression Language} expression to evaluate.
+   * A {@link https://docs.cerbos.dev/cerbos/latest/policies/conditions | Common Expression Language} expression to evaluate.
    */
   expr: string;
 }

@@ -2,7 +2,7 @@ import type { PrincipalRule } from "./PrincipalRule";
 import type { Variables } from "./Variables";
 
 /**
- * A {@link https://docs.cerbos.dev/cerbos/latest/policies/principal_policies.html | policy} defining overrides for a specific user.
+ * A {@link https://docs.cerbos.dev/cerbos/latest/policies/principal_policies | policy} defining overrides for a specific user.
  *
  * @public
  */
@@ -28,12 +28,12 @@ export interface PrincipalPolicyBody {
   rules: PrincipalRule[];
 
   /**
-   * {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html | Scope} of the policy.
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies | Scope} of the policy.
    */
   scope?: string;
 
   /**
-   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables.html | Variables} defined for use in conditions.
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables | Variables} defined for use in conditions.
    *
    * @remarks
    * Requires the Cerbos policy decision point server to be at least v0.29.

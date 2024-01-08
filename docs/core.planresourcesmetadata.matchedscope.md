@@ -4,7 +4,7 @@
 
 ## PlanResourcesMetadata.matchedScope property
 
-The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) that was used to plan the query.
+The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) that was used to plan the query.
 
 **Signature:**
 

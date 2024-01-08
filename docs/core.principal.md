@@ -21,5 +21,5 @@ export interface Principal
 |  [id](./core.principal.id.md) |  | string | A unique identifier for the principal. |
 |  [policyVersion?](./core.principal.policyversion.md) |  | string | _(Optional)_ The policy version to use when authorizing the principal. |
 |  [roles](./core.principal.roles.md) |  | string\[\] | The roles held by the principal. |
-|  [scope?](./core.principal.scope.md) |  | string | _(Optional)_ The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) to use when authorizing the principal. |
+|  [scope?](./core.principal.scope.md) |  | string | _(Optional)_ The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) to use when authorizing the principal. |
 

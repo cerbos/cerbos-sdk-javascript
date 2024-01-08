@@ -4,7 +4,7 @@
 
 ## DerivedRoleDefinition interface
 
-The definition of a [derived role](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html)<!-- -->.
+The definition of a [derived role](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles)<!-- -->.
 
 **Signature:**
 

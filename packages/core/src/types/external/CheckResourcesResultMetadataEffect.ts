@@ -10,7 +10,7 @@ export interface CheckResourcesResultMetadataEffect {
   matchedPolicy: string;
 
   /**
-   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html | policy scope} that was used to make the decision.
+   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies | policy scope} that was used to make the decision.
    */
   matchedScope: string;
 }
