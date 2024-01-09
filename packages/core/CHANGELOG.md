@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [`headers`](../../docs/core.options.headers.md) and [`userAgent`](../../docs/core.options.useragent.md) options to `Client` constructor, and [`headers`](../../docs/core.requestoptions.headers.md) option to all methods ([#776](https://github.com/cerbos/cerbos-sdk-javascript/pull/776))
 
 ## [0.14.0] - 2023-10-02
 

@@ -9,7 +9,7 @@ Disable multiple policies.
 **Signature:**
 
 ```typescript
-disablePolicies(request: DisablePoliciesRequest): Promise<DisablePoliciesResponse>;
+disablePolicies(request: DisablePoliciesRequest, options?: RequestOptions): Promise<DisablePoliciesResponse>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ disablePolicies(request: DisablePoliciesRequest): Promise<DisablePoliciesRespons
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [DisablePoliciesRequest](./core.disablepoliciesrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

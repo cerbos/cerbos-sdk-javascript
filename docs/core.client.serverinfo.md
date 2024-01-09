@@ -9,8 +9,15 @@ Retrieve information about the Cerbos policy decision point server.
 **Signature:**
 
 ```typescript
-serverInfo(): Promise<ServerInfo>;
+serverInfo(options?: RequestOptions): Promise<ServerInfo>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
+
 **Returns:**
 
 Promise&lt;[ServerInfo](./core.serverinfo.md)<!-- -->&gt;

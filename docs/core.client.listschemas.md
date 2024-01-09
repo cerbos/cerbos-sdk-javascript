@@ -9,8 +9,15 @@ List schemas.
 **Signature:**
 
 ```typescript
-listSchemas(): Promise<ListSchemasResponse>;
+listSchemas(options?: RequestOptions): Promise<ListSchemasResponse>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
+
 **Returns:**
 
 Promise&lt;[ListSchemasResponse](./core.listschemasresponse.md)<!-- -->&gt;

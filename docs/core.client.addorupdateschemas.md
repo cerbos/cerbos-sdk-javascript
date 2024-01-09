@@ -9,7 +9,7 @@ Add schemas to be used for validating principal or resource attributes, or updat
 **Signature:**
 
 ```typescript
-addOrUpdateSchemas(request: AddOrUpdateSchemasRequest): Promise<void>;
+addOrUpdateSchemas(request: AddOrUpdateSchemasRequest, options?: RequestOptions): Promise<void>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ addOrUpdateSchemas(request: AddOrUpdateSchemasRequest): Promise<void>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [AddOrUpdateSchemasRequest](./core.addorupdateschemasrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

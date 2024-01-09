@@ -9,7 +9,7 @@ Delete a schema.
 **Signature:**
 
 ```typescript
-deleteSchema(id: string): Promise<boolean>;
+deleteSchema(id: string, options?: RequestOptions): Promise<boolean>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ deleteSchema(id: string): Promise<boolean>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  id | string |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

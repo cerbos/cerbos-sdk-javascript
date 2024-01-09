@@ -9,7 +9,7 @@ Fetch a policy by ID.
 **Signature:**
 
 ```typescript
-getPolicy(id: string): Promise<Policy | undefined>;
+getPolicy(id: string, options?: RequestOptions): Promise<Policy | undefined>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ getPolicy(id: string): Promise<Policy | undefined>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  id | string |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

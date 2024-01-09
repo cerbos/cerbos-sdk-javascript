@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Added
+
+- [`headers`](../../docs/core.options.headers.md) and [`userAgent`](../../docs/core.options.useragent.md) options to `GRPC` constructor, and [`headers`](../../docs/core.requestoptions.headers.md) option to all methods ([#776](https://github.com/cerbos/cerbos-sdk-javascript/pull/776))
+
 ### Changed
 
 - Bump dependency on [@grpc/grpc-js](https://github.com/grpc/grpc-node) to 1.9.13 ([#770](https://github.com/cerbos/cerbos-sdk-javascript/pull/770))

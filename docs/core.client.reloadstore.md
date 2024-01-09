@@ -9,7 +9,7 @@ Reload the store.
 **Signature:**
 
 ```typescript
-reloadStore(request: ReloadStoreRequest): Promise<void>;
+reloadStore(request: ReloadStoreRequest, options?: RequestOptions): Promise<void>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ reloadStore(request: ReloadStoreRequest): Promise<void>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [ReloadStoreRequest](./core.reloadstorerequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

@@ -1,6 +1,10 @@
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [`userAgent`](../../docs/core.options.useragent.md) option to `HTTP` constructor, and [`headers`](../../docs/core.requestoptions.headers.md) option to all methods ([#776](https://github.com/cerbos/cerbos-sdk-javascript/pull/776))
+
+  Note that if you were previously setting the `User-Agent` header via the `headers` option, you'll now need to do so using the dedicated `userAgent` option.
 
 ## [0.15.0] - 2023-10-02
 

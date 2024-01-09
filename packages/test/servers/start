@@ -39,6 +39,6 @@ uid=$(id -u)
 gid=$(id -g)
 export USER="${uid}:${gid}"
 
-mkdir -p servers/tmp/certificates servers/tmp/socket
+mkdir -p servers/tmp/{audit,certificates,socket}
 
 exec docker compose --file=servers/docker-compose.yaml up --wait

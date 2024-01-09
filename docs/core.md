@@ -100,6 +100,7 @@ Common types used by the [gRPC](./grpc.md)<!-- -->, [HTTP](./http.md)<!-- -->, a
 |  [PrincipalRule](./core.principalrule.md) | A rule defining an override for a specific user. |
 |  [PrincipalRuleAction](./core.principalruleaction.md) | An override for a given action for a specific user. |
 |  [ReloadStoreRequest](./core.reloadstorerequest.md) | Input to [Client.reloadStore()](./core.client.reloadstore.md)<!-- -->. |
+|  [RequestOptions](./core.requestoptions.md) | Options for sending a request to the policy decision point. |
 |  [Resource](./core.resource.md) | A resource on which to check a principal's permissions. |
 |  [ResourceCheck](./core.resourcecheck.md) | A [Resource](./core.resource.md) and list of actions on which to check a principal's permissions. |
 |  [ResourcePolicy](./core.resourcepolicy.md) | A [policy](https://docs.cerbos.dev/cerbos/latest/policies/resource_policies) defining rules for actions that can be performed on a given resource. |
@@ -118,6 +119,7 @@ Common types used by the [gRPC](./grpc.md)<!-- -->, [HTTP](./http.md)<!-- -->, a
 |  Type Alias | Description |
 |  --- | --- |
 |  [CheckResourceRequest](./core.checkresourcerequest.md) | Input to [Client.checkResource()](./core.client.checkresource.md)<!-- -->. |
+|  [HeadersInit](./core.headersinit.md) | HTTP headers from which to construct a [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) object. |
 |  [IsAllowedRequest](./core.isallowedrequest.md) | Input to [Client.isAllowed()](./core.client.isallowed.md)<!-- -->. |
 |  [Match](./core.match.md) | Expressions to evaluate in a condition. |
 |  [PlanExpressionOperand](./core.planexpressionoperand.md) | An abstract syntax tree node representing an operand to an expression. |

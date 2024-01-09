@@ -9,7 +9,7 @@ Enable a policy.
 **Signature:**
 
 ```typescript
-enablePolicy(id: string): Promise<boolean>;
+enablePolicy(id: string, options?: RequestOptions): Promise<boolean>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ enablePolicy(id: string): Promise<boolean>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  id | string |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

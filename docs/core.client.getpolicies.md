@@ -9,7 +9,7 @@ Fetch multiple policies by ID.
 **Signature:**
 
 ```typescript
-getPolicies(request: GetPoliciesRequest): Promise<GetPoliciesResponse>;
+getPolicies(request: GetPoliciesRequest, options?: RequestOptions): Promise<GetPoliciesResponse>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ getPolicies(request: GetPoliciesRequest): Promise<GetPoliciesResponse>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [GetPoliciesRequest](./core.getpoliciesrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

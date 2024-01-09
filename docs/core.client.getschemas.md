@@ -9,7 +9,7 @@ Fetch multiple schemas by ID.
 **Signature:**
 
 ```typescript
-getSchemas(request: GetSchemasRequest): Promise<GetSchemasResponse>;
+getSchemas(request: GetSchemasRequest, options?: RequestOptions): Promise<GetSchemasResponse>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ getSchemas(request: GetSchemasRequest): Promise<GetSchemasResponse>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [GetSchemasRequest](./core.getschemasrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

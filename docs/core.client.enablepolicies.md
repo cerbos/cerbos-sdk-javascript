@@ -9,7 +9,7 @@ Enable multiple policies.
 **Signature:**
 
 ```typescript
-enablePolicies(request: EnablePoliciesRequest): Promise<EnablePoliciesResponse>;
+enablePolicies(request: EnablePoliciesRequest, options?: RequestOptions): Promise<EnablePoliciesResponse>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ enablePolicies(request: EnablePoliciesRequest): Promise<EnablePoliciesResponse>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [EnablePoliciesRequest](./core.enablepoliciesrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

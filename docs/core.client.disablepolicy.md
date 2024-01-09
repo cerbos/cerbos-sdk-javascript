@@ -9,7 +9,7 @@ Disable a policy.
 **Signature:**
 
 ```typescript
-disablePolicy(id: string): Promise<boolean>;
+disablePolicy(id: string, options?: RequestOptions): Promise<boolean>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ disablePolicy(id: string): Promise<boolean>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  id | string |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

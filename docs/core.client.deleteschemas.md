@@ -9,7 +9,7 @@ Delete multiple schemas.
 **Signature:**
 
 ```typescript
-deleteSchemas(request: DeleteSchemasRequest): Promise<DeleteSchemasResponse>;
+deleteSchemas(request: DeleteSchemasRequest, options?: RequestOptions): Promise<DeleteSchemasResponse>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ deleteSchemas(request: DeleteSchemasRequest): Promise<DeleteSchemasResponse>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [DeleteSchemasRequest](./core.deleteschemasrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

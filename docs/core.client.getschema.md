@@ -9,7 +9,7 @@ Fetch a schema by ID.
 **Signature:**
 
 ```typescript
-getSchema(id: string): Promise<Schema | undefined>;
+getSchema(id: string, options?: RequestOptions): Promise<Schema | undefined>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ getSchema(id: string): Promise<Schema | undefined>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  id | string |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

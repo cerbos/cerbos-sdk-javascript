@@ -9,7 +9,7 @@ Add policies, or update existing policies.
 **Signature:**
 
 ```typescript
-addOrUpdatePolicies(request: AddOrUpdatePoliciesRequest): Promise<void>;
+addOrUpdatePolicies(request: AddOrUpdatePoliciesRequest, options?: RequestOptions): Promise<void>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ addOrUpdatePolicies(request: AddOrUpdatePoliciesRequest): Promise<void>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [AddOrUpdatePoliciesRequest](./core.addorupdatepoliciesrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 
