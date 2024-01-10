@@ -9,7 +9,7 @@ Produce a query plan that can be used to obtain a list of resources on which a p
 **Signature:**
 
 ```typescript
-planResources(request: PlanResourcesRequest): Promise<PlanResourcesResponse>;
+planResources(request: PlanResourcesRequest, options?: RequestOptions): Promise<PlanResourcesResponse>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ planResources(request: PlanResourcesRequest): Promise<PlanResourcesResponse>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [PlanResourcesRequest](./core.planresourcesrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

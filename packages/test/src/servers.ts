@@ -1,7 +1,9 @@
 import { execFile as execFileCallback } from "child_process";
+import { readFileSync } from "fs";
 import { resolve } from "path";
 import { promisify } from "util";
 
+import type { AdminCredentials } from "@cerbos/core";
 import { gte as semverGte } from "semver";
 
 const execFile = promisify(execFileCallback);
@@ -107,3 +109,17 @@ function cerbosPorts(
     http: port(containers, service, 3592),
   };
 }
+
+export function readPEM(filename: string): string {
+  return readFileSync(
+    resolve(__dirname, "../servers/tmp/certificates", filename),
+    { encoding: "utf-8" },
+  );
+}
+
+export const ca = readPEM("server.root.crt");
+
+export const adminCredentials: AdminCredentials = {
+  username: "cerbos",
+  password: "cerbosAdmin",
+};

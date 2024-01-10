@@ -24,5 +24,5 @@ Promise&lt;[DirectoryContents](./files.directorycontents.md)<!-- -->&gt;
 
 ## Remarks
 
-This function looks for policies and schemas stored in the [standard Cerbos directory layout](https://docs.cerbos.dev/cerbos/latest/policies/best_practices.html#_policy_repository_layout)<!-- -->.
+This function looks for policies and schemas stored in the [standard Cerbos directory layout](https://docs.cerbos.dev/cerbos/latest/policies/best_practices#_policy_repository_layout)<!-- -->.
 

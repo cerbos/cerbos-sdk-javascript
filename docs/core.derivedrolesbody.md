@@ -4,7 +4,7 @@
 
 ## DerivedRolesBody interface
 
-A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) to augment static RBAC roles with contextual data to provide more fine-grained control at runtime.
+A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) to augment static RBAC roles with contextual data to provide more fine-grained control at runtime.
 
 **Signature:**
 
@@ -18,5 +18,5 @@ export interface DerivedRolesBody
 |  --- | --- | --- | --- |
 |  [definitions](./core.derivedrolesbody.definitions.md) |  | [DerivedRoleDefinition](./core.derivedroledefinition.md)<!-- -->\[\] | The definitions of the derived roles. |
 |  [name](./core.derivedrolesbody.name.md) |  | string | The name to use when importing the set of derived roles. |
-|  [variables?](./core.derivedrolesbody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables.html) defined for use in conditions. |
+|  [variables?](./core.derivedrolesbody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in conditions. |
 

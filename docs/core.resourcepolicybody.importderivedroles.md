@@ -4,7 +4,7 @@
 
 ## ResourcePolicyBody.importDerivedRoles property
 
-Name of a set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) to import.
+Name of a set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) to import.
 
 **Signature:**
 

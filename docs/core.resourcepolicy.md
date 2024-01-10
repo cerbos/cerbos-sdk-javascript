@@ -4,7 +4,7 @@
 
 ## ResourcePolicy interface
 
-A [policy](https://docs.cerbos.dev/cerbos/latest/policies/resource_policies.html) defining rules for actions that can be performed on a given resource.
+A [policy](https://docs.cerbos.dev/cerbos/latest/policies/resource_policies) defining rules for actions that can be performed on a given resource.
 
 **Signature:**
 

@@ -4,7 +4,7 @@ import type { PrincipalPolicy } from "./PrincipalPolicy";
 import type { ResourcePolicy } from "./ResourcePolicy";
 
 /**
- * A {@link https://docs.cerbos.dev/cerbos/latest/policies/index.html | policy} definition.
+ * A {@link https://docs.cerbos.dev/cerbos/latest/policies/ | policy} definition.
  *
  * @public
  */

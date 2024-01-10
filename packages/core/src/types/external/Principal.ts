@@ -39,7 +39,7 @@ export interface Principal {
   policyVersion?: string;
 
   /**
-   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html | policy scope} to use when authorizing the principal.
+   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies | policy scope} to use when authorizing the principal.
    *
    * @defaultValue `""`
    */

@@ -9,7 +9,7 @@ Reload the store.
 **Signature:**
 
 ```typescript
-reloadStore(request: ReloadStoreRequest): Promise<void>;
+reloadStore(request: ReloadStoreRequest, options?: RequestOptions): Promise<void>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ reloadStore(request: ReloadStoreRequest): Promise<void>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [ReloadStoreRequest](./core.reloadstorerequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 
@@ -28,9 +29,9 @@ Requires
 
 - the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->,
 
-- the Cerbos policy decision point server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html)<!-- -->, and
+- the Cerbos policy decision point server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api)<!-- -->, and
 
-- a reloadable [storage backend](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html)<!-- -->.
+- a reloadable [storage backend](https://docs.cerbos.dev/cerbos/latest/configuration/storage)<!-- -->.
 
 ## Example
 

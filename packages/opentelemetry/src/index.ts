@@ -5,7 +5,6 @@
  */
 
 import type {
-  AdminCredentials,
   _Instrumenter,
   _RPC,
   _Request,
@@ -104,8 +103,7 @@ export class CerbosInstrumentation implements Instrumentation {
         service: Service,
         rpc: RPC,
         request: _Request<Service, RPC>,
-        adminCredentials?: AdminCredentials,
-        metadata: Record<string, string> = {},
+        headers: Headers,
       ): Promise<_Response<Service, RPC>> => {
         const startTime = performance.now();
 
@@ -123,7 +121,11 @@ export class CerbosInstrumentation implements Instrumentation {
         });
 
         const activeContext = trace.setSpan(context.active(), span);
-        propagation.inject(activeContext, metadata);
+        propagation.inject(activeContext, headers, {
+          set(carrier, key, value) {
+            carrier.set(key, value);
+          },
+        });
 
         try {
           const response = (await context.with(
@@ -133,8 +135,7 @@ export class CerbosInstrumentation implements Instrumentation {
             service,
             rpc,
             request,
-            adminCredentials,
-            metadata,
+            headers,
           )) as _Response<Service, RPC>;
 
           attributes[SemanticAttributes.RPC_GRPC_STATUS_CODE] = 0;

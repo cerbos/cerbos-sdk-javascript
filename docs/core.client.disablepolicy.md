@@ -9,7 +9,7 @@ Disable a policy.
 **Signature:**
 
 ```typescript
-disablePolicy(id: string): Promise<boolean>;
+disablePolicy(id: string, options?: RequestOptions): Promise<boolean>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ disablePolicy(id: string): Promise<boolean>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  id | string |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 
@@ -28,9 +29,9 @@ Requires
 
 - the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->,
 
-- the Cerbos policy decision point server to be at least v0.25 and configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html) enabled, and
+- the Cerbos policy decision point server to be at least v0.25 and configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) enabled, and
 
-- a dynamic [storage backend](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html)<!-- -->.
+- a dynamic [storage backend](https://docs.cerbos.dev/cerbos/latest/configuration/storage)<!-- -->.
 
 ## Example
 

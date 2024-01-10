@@ -4,7 +4,7 @@
 
 ## Principal.scope property
 
-The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) to use when authorizing the principal.
+The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) to use when authorizing the principal.
 
 **Signature:**
 

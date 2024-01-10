@@ -2,20 +2,14 @@
 
 [Home](./index.md) &gt; [@cerbos/http](./http.md) &gt; [Options](./http.options.md)
 
-## Options interface
+## Options type
 
 Options for creating a new [HTTP](./http.http.md) client.
 
 **Signature:**
 
 ```typescript
-export interface Options extends CoreOptions 
+export type Options = CoreOptions;
 ```
-**Extends:** [CoreOptions](./core.options.md)
-
-## Properties
-
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [headers?](./http.options.headers.md) |  | HeadersInit \| (() =&gt; HeadersInit) \| undefined | _(Optional)_ Headers to add to every request. |
+**References:** [CoreOptions](./core.options.md)
 

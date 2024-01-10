@@ -9,7 +9,7 @@ Fetch a policy by ID.
 **Signature:**
 
 ```typescript
-getPolicy(id: string): Promise<Policy | undefined>;
+getPolicy(id: string, options?: RequestOptions): Promise<Policy | undefined>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ getPolicy(id: string): Promise<Policy | undefined>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  id | string |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 
@@ -28,7 +29,7 @@ Requires
 
 - the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->, and
 
-- the Cerbos policy decision point server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html) enabled.
+- the Cerbos policy decision point server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) enabled.
 
 ## Example
 

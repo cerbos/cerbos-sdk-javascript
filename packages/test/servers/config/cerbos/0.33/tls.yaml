@@ -1,0 +1,39 @@
+audit:
+  enabled: true
+  accessLogsEnabled: false
+  decisionLogsEnabled: true
+  includeMetadataKeys:
+    - foo
+    - bar
+  backend: local
+  local:
+    storagePath: /audit
+    advanced:
+      flushInterval: 1s
+
+auxData:
+  jwt:
+    disableVerification: true
+
+engine:
+  globals:
+    allow_deletion: true
+
+schema:
+  enforcement: warn
+
+server:
+  adminAPI:
+    enabled: true
+
+  tls:
+    cert: /certificates/server.crt
+    key: /certificates/server.key
+
+storage:
+  driver: disk
+  disk:
+    directory: /policies
+
+telemetry:
+  disabled: true

@@ -9,7 +9,7 @@ Fetch multiple schemas by ID.
 **Signature:**
 
 ```typescript
-getSchemas(request: GetSchemasRequest): Promise<GetSchemasResponse>;
+getSchemas(request: GetSchemasRequest, options?: RequestOptions): Promise<GetSchemasResponse>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ getSchemas(request: GetSchemasRequest): Promise<GetSchemasResponse>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [GetSchemasRequest](./core.getschemasrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 
@@ -28,7 +29,7 @@ Requires
 
 - the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->, and
 
-- the Cerbos policy decision point server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html) enabled.
+- the Cerbos policy decision point server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) enabled.
 
 ## Example
 

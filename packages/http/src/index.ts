@@ -5,7 +5,6 @@
  */
 
 import type {
-  AdminCredentials,
   Options as CoreOptions,
   _RPC,
   _Request,
@@ -56,14 +55,7 @@ const defaultUserAgent = `cerbos-sdk-javascript-http/${version}`;
  *
  * @public
  */
-export interface Options extends CoreOptions {
-  /**
-   * Headers to add to every request.
-   *
-   * @defaultValue `undefined`
-   */
-  headers?: HeadersInit | (() => HeadersInit) | undefined;
-}
+export type Options = CoreOptions;
 
 /**
  * A client for interacting with the Cerbos policy decision point server over HTTP.
@@ -73,12 +65,6 @@ export interface Options extends CoreOptions {
  * If you're targeting {@link https://caniuse.com/fetch | old browsers}, you'll need to apply {@link https://www.npmjs.com/package/whatwg-fetch | a polyfill}.
  *
  * You can use it in server-side Node.js applications, but the {@link @cerbos/grpc#GRPC | gRPC client} might be more appropriate.
- *
- * - For Node.js up to 17.4, you'll need {@link https://www.npmjs.com/package/cross-fetch | a polyfill} to make `fetch` happen.
- *
- * - From Node.js 17.5, you can instead enable the {@link https://nodejs.org/dist/latest-v17.x/docs/api/cli.html#--experimental-fetch | --experimental-fetch} option at the command line or via `NODE_OPTIONS`.
- *
- * - From Node.js 18 onwards `fetch` is available without any additional configuration.
  *
  * See {@link @cerbos/core#Client | the parent class} for available methods.
  *
@@ -106,7 +92,11 @@ export class HTTP extends Client {
    * ```
    */
   public constructor(url: string, options: Options = {}) {
-    super(async (service, rpc, request, adminCredentials, metadata = {}) => {
+    const userAgent = `${
+      options.userAgent ? `${options.userAgent} ` : ""
+    }${defaultUserAgent}`;
+
+    super(async (service, rpc, request, headers) => {
       const { method, path, requestType, responseType, serializeRequest } =
         services[service][rpc] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
 
@@ -117,11 +107,13 @@ export class HTTP extends Client {
           ? `?${queryStringify(requestProtobuf, { indices: false })}`
           : "";
 
+      headers.set("User-Agent", userAgent);
+
       const response = await fetch(url + path + query, {
         method,
         body:
           serializeRequest === "body" ? JSON.stringify(requestProtobuf) : null,
-        headers: headers(options, adminCredentials, metadata),
+        headers,
       });
 
       if (!response.ok) {
@@ -244,38 +236,3 @@ const services: Services = {
     },
   },
 };
-
-function headers(
-  { headers: optionalHeaders, playgroundInstance }: Options,
-  adminCredentials: AdminCredentials | undefined,
-  metadata: Record<string, string>,
-): Headers {
-  const headers = new Headers(
-    typeof optionalHeaders === "function" ? optionalHeaders() : optionalHeaders,
-  );
-
-  headers.set(
-    "User-Agent",
-    headers.get("User-Agent")?.concat(" ", defaultUserAgent) ??
-      defaultUserAgent,
-  );
-
-  if (adminCredentials) {
-    headers.set(
-      "Authorization",
-      `Basic ${
-        btoa(`${adminCredentials.username}:${adminCredentials.password}`) ?? ""
-      }`,
-    );
-  }
-
-  if (playgroundInstance) {
-    headers.set("Playground-Instance", playgroundInstance);
-  }
-
-  for (const [key, value] of Object.entries(metadata)) {
-    headers.set(key, value);
-  }
-
-  return headers;
-}

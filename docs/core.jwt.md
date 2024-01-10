@@ -4,7 +4,7 @@
 
 ## JWT interface
 
-A JSON Web Token to use as an auxiliary data source, which will be verified against the Cerbos policy decision point (PDP) server's [configured JSON Web Key Sets (JWKS)](https://docs.cerbos.dev/cerbos/latest/configuration/auxdata.html#_jwt) unless verification is disabled on the server.
+A JSON Web Token to use as an auxiliary data source, which will be verified against the Cerbos policy decision point (PDP) server's [configured JSON Web Key Sets (JWKS)](https://docs.cerbos.dev/cerbos/latest/configuration/auxdata#_jwt) unless verification is disabled on the server.
 
 **Signature:**
 

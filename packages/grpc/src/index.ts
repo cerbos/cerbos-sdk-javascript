@@ -7,7 +7,6 @@
 import type { SecureContext } from "tls";
 
 import type {
-  AdminCredentials,
   Options as CoreOptions,
   _RPC,
   _Request,
@@ -17,7 +16,6 @@ import type {
 import { Client, NotOK, Status } from "@cerbos/core";
 import type { CallOptions, MethodDefinition } from "@grpc/grpc-js";
 import {
-  CallCredentials,
   ChannelCredentials,
   Client as GenericClient,
   Metadata,
@@ -30,6 +28,8 @@ import {
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires -- Can't import package.json because it is outside of the project's rootDir
 const { version } = require("../package.json") as { version: string };
+
+const defaultUserAgent = `cerbos-sdk-javascript-grpc/${version}`;
 
 /**
  * Options for creating a new {@link GRPC} client.
@@ -96,23 +96,21 @@ export class GRPC extends Client {
     const credentials = channelCredentials(options);
 
     const client = new GenericClient(target, credentials, {
-      "grpc.primary_user_agent": `cerbos-sdk-javascript-grpc/${version}`,
+      "grpc.primary_user_agent": `${
+        options.userAgent ? `${options.userAgent} ` : ""
+      }${defaultUserAgent}`,
     });
 
-    super(async (service, rpc, request, adminCredentials, meta = {}) => {
+    super(async (service, rpc, request, headers) => {
       const { path, requestSerialize, responseDeserialize } = services[service][
         rpc
       ] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
 
       const callOptions: CallOptions = {};
 
-      if (adminCredentials) {
-        callOptions.credentials = adminCallCredentials(adminCredentials);
-      }
-
       const metadata = new Metadata();
-      for (const [key, value] of Object.entries(meta)) {
-        metadata.set(key, value);
+      for (const [hame, value] of headers) {
+        metadata.set(hame, value);
       }
 
       return await new Promise((resolve, reject) => {
@@ -187,43 +185,9 @@ function channelCredentials({
     return ChannelCredentials.createInsecure();
   }
 
-  let channelCredentials: ChannelCredentials;
-
   if (tls === true) {
-    channelCredentials = ChannelCredentials.createSsl();
-  } else {
-    channelCredentials = ChannelCredentials.createFromSecureContext(tls);
+    return ChannelCredentials.createSsl();
   }
 
-  if (playgroundInstance) {
-    return channelCredentials.compose(
-      playgroundCallCredentials(playgroundInstance),
-    );
-  }
-
-  return channelCredentials;
-}
-
-function adminCallCredentials({
-  username,
-  password,
-}: AdminCredentials): CallCredentials {
-  return CallCredentials.createFromMetadataGenerator((_, callback) => {
-    const metadata = new Metadata();
-    metadata.set(
-      "authorization",
-      `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`,
-    );
-    callback(null, metadata);
-  });
-}
-
-function playgroundCallCredentials(
-  playgroundInstance: string,
-): CallCredentials {
-  return CallCredentials.createFromMetadataGenerator((_, callback) => {
-    const metadata = new Metadata();
-    metadata.set("playground-instance", playgroundInstance);
-    callback(null, metadata);
-  });
+  return ChannelCredentials.createFromSecureContext(tls);
 }

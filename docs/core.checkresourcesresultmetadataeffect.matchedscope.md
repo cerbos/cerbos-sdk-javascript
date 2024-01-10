@@ -4,7 +4,7 @@
 
 ## CheckResourcesResultMetadataEffect.matchedScope property
 
-The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) that was used to make the decision.
+The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) that was used to make the decision.
 
 **Signature:**
 

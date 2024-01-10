@@ -4,7 +4,7 @@
 
 ## DerivedRoles interface
 
-A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) to augment static RBAC roles with contextual data to provide more fine-grained control at runtime.
+A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) to augment static RBAC roles with contextual data to provide more fine-grained control at runtime.
 
 **Signature:**
 

@@ -9,7 +9,7 @@ Fetch multiple policies by ID.
 **Signature:**
 
 ```typescript
-getPolicies(request: GetPoliciesRequest): Promise<GetPoliciesResponse>;
+getPolicies(request: GetPoliciesRequest, options?: RequestOptions): Promise<GetPoliciesResponse>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ getPolicies(request: GetPoliciesRequest): Promise<GetPoliciesResponse>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [GetPoliciesRequest](./core.getpoliciesrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 
@@ -28,7 +29,7 @@ Requires
 
 - the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->, and
 
-- the Cerbos policy decision point server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html) enabled.
+- the Cerbos policy decision point server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) enabled.
 
 ## Example
 

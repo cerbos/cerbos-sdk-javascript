@@ -4,7 +4,7 @@ import { setTimeout } from "timers/promises";
 import { CheckResourcesResult } from "@cerbos/core";
 import type { ServiceError } from "@grpc/grpc-js";
 import { Metadata } from "@grpc/grpc-js";
-import { expect } from "@jest/globals";
+import { describe, expect } from "@jest/globals";
 import type { Attributes, HrTime } from "@opentelemetry/api";
 import { ValueType, context, trace } from "@opentelemetry/api";
 import type { Histogram, MetricDescriptor } from "@opentelemetry/sdk-metrics";
@@ -19,12 +19,15 @@ import type {
   ReadableSpan,
 } from "@opentelemetry/sdk-trace-base";
 
+import type { DecisionLogEntry } from "./protobuf/cerbos/audit/v1/audit";
+import { ListAuditLogEntriesResponse } from "./protobuf/cerbos/response/v1/response";
 import type {
   QueryServiceClient,
   SpansResponseChunk,
 } from "./protobuf/jaeger/proto/api_v3/query_service";
 import type { Span as SpanProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
-import { cerbosVersionIsAtLeast } from "./servers";
+import type { CerbosPorts } from "./servers";
+import { adminCredentials, cerbosVersionIsAtLeast } from "./servers";
 
 export function buildResultsForResources({
   id,
@@ -204,3 +207,59 @@ export const invalidArgumentDetails = expect.stringContaining(
     ? "validation error"
     : "invalid CheckResourcesRequest",
 );
+
+export async function fetchDecisionLogEntry(
+  ports: CerbosPorts,
+  requestId: string,
+): Promise<DecisionLogEntry> {
+  for (let attempt = 1; attempt <= 10; attempt++) {
+    await setTimeout(250);
+
+    const response = await fetch(
+      `https://localhost:${ports.http}/admin/auditlog/list/KIND_DECISION?since=1h`,
+      {
+        headers: {
+          Authorization: `Basic ${btoa(
+            `${adminCredentials.username}:${adminCredentials.password}`,
+          )}`,
+        },
+      },
+    );
+
+    const body = await response.text();
+
+    for (const line of body.split("\n")) {
+      if (line === "") {
+        continue;
+      }
+
+      const chunk = JSON.parse(line) as { result: unknown; error: unknown };
+      if (chunk.error) {
+        throw new Error(`Error streaming decision logs: ${line}`);
+      }
+
+      const response = ListAuditLogEntriesResponse.fromJSON(chunk.result);
+
+      if (
+        response.entry?.$case === "decisionLogEntry" &&
+        response.entry.decisionLogEntry.method?.$case === "checkResources" &&
+        response.entry.decisionLogEntry.method.checkResources.inputs[0]
+          ?.requestId === requestId
+      ) {
+        return response.entry.decisionLogEntry;
+      }
+    }
+  }
+
+  throw new Error(`Didn't find a decision log entry for request ${requestId}`);
+}
+
+export function describeIfCerbosVersionIsAtLeast(
+  version: string,
+): (typeof describe)["skip"] {
+  if (cerbosVersionIsAtLeast(version)) {
+    return describe;
+  }
+
+  return describe.skip;
+}

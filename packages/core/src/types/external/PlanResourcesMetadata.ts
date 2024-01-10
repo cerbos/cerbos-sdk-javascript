@@ -10,7 +10,7 @@ export interface PlanResourcesMetadata {
   conditionString: string;
 
   /**
-   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html | policy scope} that was used to plan the query.
+   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies | policy scope} that was used to plan the query.
    */
   matchedScope: string;
 }

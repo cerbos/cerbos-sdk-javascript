@@ -57,6 +57,13 @@ export const Duration = {
     }
     return message;
   },
+
+  fromJSON(object: any): Duration {
+    return {
+      seconds: isSet(object.seconds) ? globalThis.String(object.seconds) : "0",
+      nanos: isSet(object.nanos) ? globalThis.Number(object.nanos) : 0,
+    };
+  },
 };
 
 function longToString(long: Long) {
@@ -66,4 +73,8 @@ function longToString(long: Long) {
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

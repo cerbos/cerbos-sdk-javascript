@@ -20,7 +20,7 @@ export interface CheckResourcesResultResource {
   policyVersion: string;
 
   /**
-   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html | policy scope} against which the check was performed.
+   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies | policy scope} against which the check was performed.
    */
   scope: string;
 }

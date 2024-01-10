@@ -157,6 +157,47 @@ export const AnyValue = {
     }
     return message;
   },
+
+  fromJSON(object: any): AnyValue {
+    return {
+      value: isSet(object.stringValue)
+        ? {
+            $case: "stringValue",
+            stringValue: globalThis.String(object.stringValue),
+          }
+        : isSet(object.boolValue)
+          ? {
+              $case: "boolValue",
+              boolValue: globalThis.Boolean(object.boolValue),
+            }
+          : isSet(object.intValue)
+            ? {
+                $case: "intValue",
+                intValue: globalThis.String(object.intValue),
+              }
+            : isSet(object.doubleValue)
+              ? {
+                  $case: "doubleValue",
+                  doubleValue: globalThis.Number(object.doubleValue),
+                }
+              : isSet(object.arrayValue)
+                ? {
+                    $case: "arrayValue",
+                    arrayValue: ArrayValue.fromJSON(object.arrayValue),
+                  }
+                : isSet(object.kvlistValue)
+                  ? {
+                      $case: "kvlistValue",
+                      kvlistValue: KeyValueList.fromJSON(object.kvlistValue),
+                    }
+                  : isSet(object.bytesValue)
+                    ? {
+                        $case: "bytesValue",
+                        bytesValue: bytesFromBase64(object.bytesValue),
+                      }
+                    : undefined,
+    };
+  },
 };
 
 function createBaseArrayValue(): ArrayValue {
@@ -197,6 +238,14 @@ export const ArrayValue = {
     }
     return message;
   },
+
+  fromJSON(object: any): ArrayValue {
+    return {
+      values: globalThis.Array.isArray(object?.values)
+        ? object.values.map((e: any) => AnyValue.fromJSON(e))
+        : [],
+    };
+  },
 };
 
 function createBaseKeyValueList(): KeyValueList {
@@ -236,6 +285,14 @@ export const KeyValueList = {
       reader.skipType(tag & 7);
     }
     return message;
+  },
+
+  fromJSON(object: any): KeyValueList {
+    return {
+      values: globalThis.Array.isArray(object?.values)
+        ? object.values.map((e: any) => KeyValue.fromJSON(e))
+        : [],
+    };
   },
 };
 
@@ -286,6 +343,13 @@ export const KeyValue = {
       reader.skipType(tag & 7);
     }
     return message;
+  },
+
+  fromJSON(object: any): KeyValue {
+    return {
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object.value) ? AnyValue.fromJSON(object.value) : undefined,
+    };
   },
 };
 
@@ -360,7 +424,33 @@ export const InstrumentationScope = {
     }
     return message;
   },
+
+  fromJSON(object: any): InstrumentationScope {
+    return {
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
+      attributes: globalThis.Array.isArray(object?.attributes)
+        ? object.attributes.map((e: any) => KeyValue.fromJSON(e))
+        : [],
+      droppedAttributesCount: isSet(object.droppedAttributesCount)
+        ? globalThis.Number(object.droppedAttributesCount)
+        : 0,
+    };
+  },
 };
+
+function bytesFromBase64(b64: string): Uint8Array {
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = globalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
+  }
+}
 
 function longToString(long: Long) {
   return long.toString();
@@ -369,4 +459,8 @@ function longToString(long: Long) {
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

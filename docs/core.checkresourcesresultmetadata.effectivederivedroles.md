@@ -4,7 +4,7 @@
 
 ## CheckResourcesResultMetadata.effectiveDerivedRoles property
 
-The [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html) that were applied to the principal for the resource.
+The [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) that were applied to the principal for the resource.
 
 **Signature:**
 

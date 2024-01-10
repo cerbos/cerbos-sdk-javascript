@@ -20,24 +20,24 @@ The constructor for this class is marked as internal. Third-party code should no
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [addOrUpdatePolicies(request)](./core.client.addorupdatepolicies.md) |  | Add policies, or update existing policies. |
-|  [addOrUpdateSchemas(request)](./core.client.addorupdateschemas.md) |  | Add schemas to be used for validating principal or resource attributes, or update existing schemas. |
-|  [checkResource(request)](./core.client.checkresource.md) |  | Check a principal's permissions on a resource. |
-|  [checkResources(request)](./core.client.checkresources.md) |  | Check a principal's permissions on a set of resources. |
-|  [deleteSchema(id)](./core.client.deleteschema.md) |  | Delete a schema. |
-|  [deleteSchemas(request)](./core.client.deleteschemas.md) |  | Delete multiple schemas. |
-|  [disablePolicies(request)](./core.client.disablepolicies.md) |  | Disable multiple policies. |
-|  [disablePolicy(id)](./core.client.disablepolicy.md) |  | Disable a policy. |
-|  [enablePolicies(request)](./core.client.enablepolicies.md) |  | Enable multiple policies. |
-|  [enablePolicy(id)](./core.client.enablepolicy.md) |  | Enable a policy. |
-|  [getPolicies(request)](./core.client.getpolicies.md) |  | Fetch multiple policies by ID. |
-|  [getPolicy(id)](./core.client.getpolicy.md) |  | Fetch a policy by ID. |
-|  [getSchema(id)](./core.client.getschema.md) |  | Fetch a schema by ID. |
-|  [getSchemas(request)](./core.client.getschemas.md) |  | Fetch multiple schemas by ID. |
-|  [isAllowed(request)](./core.client.isallowed.md) |  | Check if a principal is allowed to perform an action on a resource. |
-|  [listPolicies(request)](./core.client.listpolicies.md) |  | List policies. |
-|  [listSchemas()](./core.client.listschemas.md) |  | List schemas. |
-|  [planResources(request)](./core.client.planresources.md) |  | Produce a query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action. |
-|  [reloadStore(request)](./core.client.reloadstore.md) |  | Reload the store. |
-|  [serverInfo()](./core.client.serverinfo.md) |  | Retrieve information about the Cerbos policy decision point server. |
+|  [addOrUpdatePolicies(request, options)](./core.client.addorupdatepolicies.md) |  | Add policies, or update existing policies. |
+|  [addOrUpdateSchemas(request, options)](./core.client.addorupdateschemas.md) |  | Add schemas to be used for validating principal or resource attributes, or update existing schemas. |
+|  [checkResource(request, options)](./core.client.checkresource.md) |  | Check a principal's permissions on a resource. |
+|  [checkResources(request, options)](./core.client.checkresources.md) |  | Check a principal's permissions on a set of resources. |
+|  [deleteSchema(id, options)](./core.client.deleteschema.md) |  | Delete a schema. |
+|  [deleteSchemas(request, options)](./core.client.deleteschemas.md) |  | Delete multiple schemas. |
+|  [disablePolicies(request, options)](./core.client.disablepolicies.md) |  | Disable multiple policies. |
+|  [disablePolicy(id, options)](./core.client.disablepolicy.md) |  | Disable a policy. |
+|  [enablePolicies(request, options)](./core.client.enablepolicies.md) |  | Enable multiple policies. |
+|  [enablePolicy(id, options)](./core.client.enablepolicy.md) |  | Enable a policy. |
+|  [getPolicies(request, options)](./core.client.getpolicies.md) |  | Fetch multiple policies by ID. |
+|  [getPolicy(id, options)](./core.client.getpolicy.md) |  | Fetch a policy by ID. |
+|  [getSchema(id, options)](./core.client.getschema.md) |  | Fetch a schema by ID. |
+|  [getSchemas(request, options)](./core.client.getschemas.md) |  | Fetch multiple schemas by ID. |
+|  [isAllowed(request, options)](./core.client.isallowed.md) |  | Check if a principal is allowed to perform an action on a resource. |
+|  [listPolicies(request, options)](./core.client.listpolicies.md) |  | List policies. |
+|  [listSchemas(options)](./core.client.listschemas.md) |  | List schemas. |
+|  [planResources(request, options)](./core.client.planresources.md) |  | Produce a query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action. |
+|  [reloadStore(request, options)](./core.client.reloadstore.md) |  | Reload the store. |
+|  [serverInfo(options)](./core.client.serverinfo.md) |  | Retrieve information about the Cerbos policy decision point server. |
 

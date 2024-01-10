@@ -15,7 +15,7 @@ runs:
       with:
         cache: npm
         node-version: ${{ inputs.node-version }}
-        node-version-file: .node-version
+        node-version-file: ${{ inputs.node-version == '' && '.node-version' || '' }}
 
     - name: Install dependencies
       shell: bash

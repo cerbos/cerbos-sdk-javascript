@@ -39,7 +39,7 @@ export interface Resource {
   policyVersion?: string;
 
   /**
-   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html | policy scope} to use when checking the principal's permissions on the resource.
+   * The {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies | policy scope} to use when checking the principal's permissions on the resource.
    *
    * @defaultValue `""`
    */

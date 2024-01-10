@@ -17,5 +17,5 @@ export interface CheckResourcesResultMetadataEffect
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [matchedPolicy](./core.checkresourcesresultmetadataeffect.matchedpolicy.md) |  | string | The policy that was used to make the decision. |
-|  [matchedScope](./core.checkresourcesresultmetadataeffect.matchedscope.md) |  | string | The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) that was used to make the decision. |
+|  [matchedScope](./core.checkresourcesresultmetadataeffect.matchedscope.md) |  | string | The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) that was used to make the decision. |
 

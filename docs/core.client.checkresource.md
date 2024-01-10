@@ -9,7 +9,7 @@ Check a principal's permissions on a resource.
 **Signature:**
 
 ```typescript
-checkResource(request: CheckResourceRequest): Promise<CheckResourcesResult>;
+checkResource(request: CheckResourceRequest, options?: RequestOptions): Promise<CheckResourcesResult>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ checkResource(request: CheckResourceRequest): Promise<CheckResourcesResult>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [CheckResourceRequest](./core.checkresourcerequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

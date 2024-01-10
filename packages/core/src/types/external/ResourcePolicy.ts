@@ -2,7 +2,7 @@ import type { PolicyBase } from "./PolicyBase";
 import type { ResourcePolicyBody } from "./ResourcePolicyBody";
 
 /**
- * A {@link https://docs.cerbos.dev/cerbos/latest/policies/resource_policies.html | policy} defining rules for actions that can be performed on a given resource.
+ * A {@link https://docs.cerbos.dev/cerbos/latest/policies/resource_policies | policy} defining rules for actions that can be performed on a given resource.
  *
  * @public
  */

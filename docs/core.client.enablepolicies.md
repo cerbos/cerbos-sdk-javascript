@@ -9,7 +9,7 @@ Enable multiple policies.
 **Signature:**
 
 ```typescript
-enablePolicies(request: EnablePoliciesRequest): Promise<EnablePoliciesResponse>;
+enablePolicies(request: EnablePoliciesRequest, options?: RequestOptions): Promise<EnablePoliciesResponse>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ enablePolicies(request: EnablePoliciesRequest): Promise<EnablePoliciesResponse>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [EnablePoliciesRequest](./core.enablepoliciesrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 
@@ -28,9 +29,9 @@ Requires
 
 - the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->,
 
-- the Cerbos policy decision point server to be at least v0.26 and configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html) enabled, and
+- the Cerbos policy decision point server to be at least v0.26 and configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) enabled, and
 
-- a dynamic [storage backend](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html)<!-- -->.
+- a dynamic [storage backend](https://docs.cerbos.dev/cerbos/latest/configuration/storage)<!-- -->.
 
 ## Example
 

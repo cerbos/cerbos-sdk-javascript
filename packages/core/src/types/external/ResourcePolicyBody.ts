@@ -3,7 +3,7 @@ import type { SchemaRefs } from "./SchemaRefs";
 import type { Variables } from "./Variables";
 
 /**
- * A {@link https://docs.cerbos.dev/cerbos/latest/policies/resource_policies.html | policy} defining rules for actions that can be performed on a given resource.
+ * A {@link https://docs.cerbos.dev/cerbos/latest/policies/resource_policies | policy} defining rules for actions that can be performed on a given resource.
  *
  * @public
  */
@@ -24,7 +24,7 @@ export interface ResourcePolicyBody {
   version: string;
 
   /**
-   * Name of a set of {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles.html | derived roles} to import.
+   * Name of a set of {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles | derived roles} to import.
    */
   importDerivedRoles?: string[];
 
@@ -34,17 +34,17 @@ export interface ResourcePolicyBody {
   rules: ResourceRule[];
 
   /**
-   * {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html | Scope} of the policy.
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies | Scope} of the policy.
    */
   scope?: string;
 
   /**
-   * {@link https://docs.cerbos.dev/cerbos/latest/policies/schemas.html | Schemas} for principal and resource attributes.
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/schemas | Schemas} for principal and resource attributes.
    */
   schemas?: SchemaRefs | undefined;
 
   /**
-   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables.html | Variables} defined for use in conditions.
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables | Variables} defined for use in conditions.
    *
    * @remarks
    * Requires the Cerbos policy decision point server to be at least v0.29.

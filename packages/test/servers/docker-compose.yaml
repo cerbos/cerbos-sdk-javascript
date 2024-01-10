@@ -55,6 +55,9 @@ services:
       - CERBOS_CONFIG=/config/tls.yaml
     volumes:
       - type: bind
+        source: tmp/audit
+        target: /audit
+      - type: bind
         source: tmp/certificates
         target: /certificates
         read_only: true

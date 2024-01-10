@@ -4,7 +4,6 @@
   "exclude": ["src/protobuf"],
   "references": [{ "path": "../core" }, { "path": "./tsconfig.protobuf.json" }],
   "compilerOptions": {
-    "lib": ["DOM"],
     "outDir": "lib",
     "rootDir": "src",
     "tsBuildInfoFile": "lib/http.tsbuildinfo"

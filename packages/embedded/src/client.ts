@@ -29,7 +29,7 @@ export interface Options {
   decodeJWTPayload?: DecodeJWTPayload;
 
   /**
-   * {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine.html#globals | Global variables} to pass environment-specific information to policy conditions.
+   * {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine#globals | Global variables} to pass environment-specific information to policy conditions.
    *
    * @defaultValue `{}`
    */

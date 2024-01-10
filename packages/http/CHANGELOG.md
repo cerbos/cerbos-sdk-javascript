@@ -1,6 +1,10 @@
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [`userAgent`](../../docs/core.options.useragent.md) option to `HTTP` constructor, and [`headers`](../../docs/core.requestoptions.headers.md) option to all methods ([#776](https://github.com/cerbos/cerbos-sdk-javascript/pull/776))
+
+  Note that if you were previously setting the `User-Agent` header via the `headers` option, you'll now need to do so using the dedicated `userAgent` option.
 
 ## [0.15.0] - 2023-10-02
 
@@ -35,7 +39,7 @@ No notable changes.
 
   Requires a policy decision point server running Cerbos 0.29+.
 
-- Support for [exporting and importing variable sets](https://docs.cerbos.dev/cerbos/latest/policies/variables.html) in policies ([#598](https://github.com/cerbos/cerbos-sdk-javascript/pull/598))
+- Support for [exporting and importing variable sets](https://docs.cerbos.dev/cerbos/latest/policies/variables) in policies ([#598](https://github.com/cerbos/cerbos-sdk-javascript/pull/598))
 
   Requires a policy decision point server running Cerbos 0.29+.
 
@@ -127,7 +131,7 @@ No notable changes.
 
 ### Added
 
-- Support for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html) ([#209](https://github.com/cerbos/cerbos-sdk-javascript/pull/209))
+- Support for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) ([#209](https://github.com/cerbos/cerbos-sdk-javascript/pull/209))
 
 ## [0.6.0] - 2022-07-01
 

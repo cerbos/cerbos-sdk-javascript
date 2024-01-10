@@ -4,7 +4,7 @@
 
 ## Options.globals property
 
-[Global variables](https://docs.cerbos.dev/cerbos/latest/configuration/engine.html#globals) to pass environment-specific information to policy conditions.
+[Global variables](https://docs.cerbos.dev/cerbos/latest/configuration/engine#globals) to pass environment-specific information to policy conditions.
 
 **Signature:**
 

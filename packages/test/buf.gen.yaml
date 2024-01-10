@@ -2,6 +2,7 @@ version: v1
 
 types:
   include:
+    - cerbos.response.v1.ListAuditLogEntriesResponse
     - jaeger.api_v3.QueryService
 
 plugins:
@@ -16,7 +17,7 @@ plugins:
       - oneof=unions
       - onlyTypes=false
       - outputEncodeMethods=true
-      - outputJsonMethods=false
+      - outputJsonMethods=from-only
       - outputPartialMethods=false
       - outputServices=grpc-js
       - unrecognizedEnum=false

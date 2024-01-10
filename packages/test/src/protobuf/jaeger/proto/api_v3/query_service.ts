@@ -140,6 +140,18 @@ export const GetTraceRequest = {
     }
     return message;
   },
+
+  fromJSON(object: any): GetTraceRequest {
+    return {
+      traceId: isSet(object.traceId) ? globalThis.String(object.traceId) : "",
+      startTime: isSet(object.startTime)
+        ? fromJsonTimestamp(object.startTime)
+        : undefined,
+      endTime: isSet(object.endTime)
+        ? fromJsonTimestamp(object.endTime)
+        : undefined,
+    };
+  },
 };
 
 function createBaseSpansResponseChunk(): SpansResponseChunk {
@@ -181,6 +193,14 @@ export const SpansResponseChunk = {
       reader.skipType(tag & 7);
     }
     return message;
+  },
+
+  fromJSON(object: any): SpansResponseChunk {
+    return {
+      resourceSpans: globalThis.Array.isArray(object?.resourceSpans)
+        ? object.resourceSpans.map((e: any) => ResourceSpans.fromJSON(e))
+        : [],
+    };
   },
 };
 
@@ -323,6 +343,41 @@ export const TraceQueryParameters = {
     }
     return message;
   },
+
+  fromJSON(object: any): TraceQueryParameters {
+    return {
+      serviceName: isSet(object.serviceName)
+        ? globalThis.String(object.serviceName)
+        : "",
+      operationName: isSet(object.operationName)
+        ? globalThis.String(object.operationName)
+        : "",
+      attributes: isObject(object.attributes)
+        ? Object.entries(object.attributes).reduce<{ [key: string]: string }>(
+            (acc, [key, value]) => {
+              acc[key] = String(value);
+              return acc;
+            },
+            {},
+          )
+        : {},
+      startTimeMin: isSet(object.startTimeMin)
+        ? fromJsonTimestamp(object.startTimeMin)
+        : undefined,
+      startTimeMax: isSet(object.startTimeMax)
+        ? fromJsonTimestamp(object.startTimeMax)
+        : undefined,
+      durationMin: isSet(object.durationMin)
+        ? Duration.fromJSON(object.durationMin)
+        : undefined,
+      durationMax: isSet(object.durationMax)
+        ? Duration.fromJSON(object.durationMax)
+        : undefined,
+      numTraces: isSet(object.numTraces)
+        ? globalThis.Number(object.numTraces)
+        : 0,
+    };
+  },
 };
 
 function createBaseTraceQueryParameters_AttributesEntry(): TraceQueryParameters_AttributesEntry {
@@ -376,6 +431,13 @@ export const TraceQueryParameters_AttributesEntry = {
     }
     return message;
   },
+
+  fromJSON(object: any): TraceQueryParameters_AttributesEntry {
+    return {
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object.value) ? globalThis.String(object.value) : "",
+    };
+  },
 };
 
 function createBaseFindTracesRequest(): FindTracesRequest {
@@ -419,6 +481,14 @@ export const FindTracesRequest = {
     }
     return message;
   },
+
+  fromJSON(object: any): FindTracesRequest {
+    return {
+      query: isSet(object.query)
+        ? TraceQueryParameters.fromJSON(object.query)
+        : undefined,
+    };
+  },
 };
 
 function createBaseGetServicesRequest(): GetServicesRequest {
@@ -448,6 +518,10 @@ export const GetServicesRequest = {
       reader.skipType(tag & 7);
     }
     return message;
+  },
+
+  fromJSON(_: any): GetServicesRequest {
+    return {};
   },
 };
 
@@ -488,6 +562,14 @@ export const GetServicesResponse = {
       reader.skipType(tag & 7);
     }
     return message;
+  },
+
+  fromJSON(object: any): GetServicesResponse {
+    return {
+      services: globalThis.Array.isArray(object?.services)
+        ? object.services.map((e: any) => globalThis.String(e))
+        : [],
+    };
   },
 };
 
@@ -542,6 +624,15 @@ export const GetOperationsRequest = {
     }
     return message;
   },
+
+  fromJSON(object: any): GetOperationsRequest {
+    return {
+      service: isSet(object.service) ? globalThis.String(object.service) : "",
+      spanKind: isSet(object.spanKind)
+        ? globalThis.String(object.spanKind)
+        : "",
+    };
+  },
 };
 
 function createBaseOperation(): Operation {
@@ -592,6 +683,15 @@ export const Operation = {
     }
     return message;
   },
+
+  fromJSON(object: any): Operation {
+    return {
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      spanKind: isSet(object.spanKind)
+        ? globalThis.String(object.spanKind)
+        : "",
+    };
+  },
 };
 
 function createBaseGetOperationsResponse(): GetOperationsResponse {
@@ -634,6 +734,14 @@ export const GetOperationsResponse = {
       reader.skipType(tag & 7);
     }
     return message;
+  },
+
+  fromJSON(object: any): GetOperationsResponse {
+    return {
+      operations: globalThis.Array.isArray(object?.operations)
+        ? object.operations.map((e: any) => Operation.fromJSON(e))
+        : [],
+    };
   },
 };
 
@@ -784,4 +892,22 @@ function fromTimestamp(t: Timestamp): Date {
   let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
   return new globalThis.Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof globalThis.Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new globalThis.Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
+
+function isObject(value: any): boolean {
+  return typeof value === "object" && value !== null;
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

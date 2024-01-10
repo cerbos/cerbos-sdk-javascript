@@ -4,7 +4,7 @@
 
 ## Output.expr property
 
-A [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/conditions.html) expression to evaluate.
+A [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/conditions) expression to evaluate.
 
 **Signature:**
 

@@ -12,9 +12,9 @@ Client library for interacting with the Cerbos policy decision point service ove
 |  --- | --- |
 |  [HTTP](./http.http.md) | A client for interacting with the Cerbos policy decision point server over HTTP. |
 
-## Interfaces
+## Type Aliases
 
-|  Interface | Description |
+|  Type Alias | Description |
 |  --- | --- |
 |  [Options](./http.options.md) | Options for creating a new [HTTP](./http.http.md) client. |
 

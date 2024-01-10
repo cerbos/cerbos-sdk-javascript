@@ -57,4 +57,19 @@ export const Resource = {
     }
     return message;
   },
+
+  fromJSON(object: any): Resource {
+    return {
+      attributes: globalThis.Array.isArray(object?.attributes)
+        ? object.attributes.map((e: any) => KeyValue.fromJSON(e))
+        : [],
+      droppedAttributesCount: isSet(object.droppedAttributesCount)
+        ? globalThis.Number(object.droppedAttributesCount)
+        : 0,
+    };
+  },
 };
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}

@@ -4,7 +4,7 @@
 
 ## Options.adminCredentials property
 
-Credentials for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api.html)<!-- -->.
+Credentials for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api)<!-- -->.
 
 **Signature:**
 

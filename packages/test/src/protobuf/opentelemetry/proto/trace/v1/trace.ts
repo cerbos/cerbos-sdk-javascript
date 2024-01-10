@@ -45,6 +45,33 @@ export enum Span_SpanKind {
   SPAN_KIND_CONSUMER = 5,
 }
 
+export function span_SpanKindFromJSON(object: any): Span_SpanKind {
+  switch (object) {
+    case 0:
+    case "SPAN_KIND_UNSPECIFIED":
+      return Span_SpanKind.SPAN_KIND_UNSPECIFIED;
+    case 1:
+    case "SPAN_KIND_INTERNAL":
+      return Span_SpanKind.SPAN_KIND_INTERNAL;
+    case 2:
+    case "SPAN_KIND_SERVER":
+      return Span_SpanKind.SPAN_KIND_SERVER;
+    case 3:
+    case "SPAN_KIND_CLIENT":
+      return Span_SpanKind.SPAN_KIND_CLIENT;
+    case 4:
+    case "SPAN_KIND_PRODUCER":
+      return Span_SpanKind.SPAN_KIND_PRODUCER;
+    case 5:
+    case "SPAN_KIND_CONSUMER":
+      return Span_SpanKind.SPAN_KIND_CONSUMER;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum Span_SpanKind",
+      );
+  }
+}
+
 export interface Span_Event {
   timeUnixNano: string;
   name: string;
@@ -69,6 +96,24 @@ export enum Status_StatusCode {
   STATUS_CODE_UNSET = 0,
   STATUS_CODE_OK = 1,
   STATUS_CODE_ERROR = 2,
+}
+
+export function status_StatusCodeFromJSON(object: any): Status_StatusCode {
+  switch (object) {
+    case 0:
+    case "STATUS_CODE_UNSET":
+      return Status_StatusCode.STATUS_CODE_UNSET;
+    case 1:
+    case "STATUS_CODE_OK":
+      return Status_StatusCode.STATUS_CODE_OK;
+    case 2:
+    case "STATUS_CODE_ERROR":
+      return Status_StatusCode.STATUS_CODE_ERROR;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum Status_StatusCode",
+      );
+  }
 }
 
 function createBaseResourceSpans(): ResourceSpans {
@@ -128,6 +173,20 @@ export const ResourceSpans = {
       reader.skipType(tag & 7);
     }
     return message;
+  },
+
+  fromJSON(object: any): ResourceSpans {
+    return {
+      resource: isSet(object.resource)
+        ? Resource.fromJSON(object.resource)
+        : undefined,
+      scopeSpans: globalThis.Array.isArray(object?.scopeSpans)
+        ? object.scopeSpans.map((e: any) => ScopeSpans.fromJSON(e))
+        : [],
+      schemaUrl: isSet(object.schemaUrl)
+        ? globalThis.String(object.schemaUrl)
+        : "",
+    };
   },
 };
 
@@ -191,6 +250,20 @@ export const ScopeSpans = {
       reader.skipType(tag & 7);
     }
     return message;
+  },
+
+  fromJSON(object: any): ScopeSpans {
+    return {
+      scope: isSet(object.scope)
+        ? InstrumentationScope.fromJSON(object.scope)
+        : undefined,
+      spans: globalThis.Array.isArray(object?.spans)
+        ? object.spans.map((e: any) => Span.fromJSON(e))
+        : [],
+      schemaUrl: isSet(object.schemaUrl)
+        ? globalThis.String(object.schemaUrl)
+        : "",
+    };
   },
 };
 
@@ -385,6 +458,50 @@ export const Span = {
     }
     return message;
   },
+
+  fromJSON(object: any): Span {
+    return {
+      traceId: isSet(object.traceId)
+        ? bytesFromBase64(object.traceId)
+        : new Uint8Array(0),
+      spanId: isSet(object.spanId)
+        ? bytesFromBase64(object.spanId)
+        : new Uint8Array(0),
+      traceState: isSet(object.traceState)
+        ? globalThis.String(object.traceState)
+        : "",
+      parentSpanId: isSet(object.parentSpanId)
+        ? bytesFromBase64(object.parentSpanId)
+        : new Uint8Array(0),
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      kind: isSet(object.kind) ? span_SpanKindFromJSON(object.kind) : 0,
+      startTimeUnixNano: isSet(object.startTimeUnixNano)
+        ? globalThis.String(object.startTimeUnixNano)
+        : "0",
+      endTimeUnixNano: isSet(object.endTimeUnixNano)
+        ? globalThis.String(object.endTimeUnixNano)
+        : "0",
+      attributes: globalThis.Array.isArray(object?.attributes)
+        ? object.attributes.map((e: any) => KeyValue.fromJSON(e))
+        : [],
+      droppedAttributesCount: isSet(object.droppedAttributesCount)
+        ? globalThis.Number(object.droppedAttributesCount)
+        : 0,
+      events: globalThis.Array.isArray(object?.events)
+        ? object.events.map((e: any) => Span_Event.fromJSON(e))
+        : [],
+      droppedEventsCount: isSet(object.droppedEventsCount)
+        ? globalThis.Number(object.droppedEventsCount)
+        : 0,
+      links: globalThis.Array.isArray(object?.links)
+        ? object.links.map((e: any) => Span_Link.fromJSON(e))
+        : [],
+      droppedLinksCount: isSet(object.droppedLinksCount)
+        ? globalThis.Number(object.droppedLinksCount)
+        : 0,
+      status: isSet(object.status) ? Status.fromJSON(object.status) : undefined,
+    };
+  },
 };
 
 function createBaseSpan_Event(): Span_Event {
@@ -459,6 +576,21 @@ export const Span_Event = {
       reader.skipType(tag & 7);
     }
     return message;
+  },
+
+  fromJSON(object: any): Span_Event {
+    return {
+      timeUnixNano: isSet(object.timeUnixNano)
+        ? globalThis.String(object.timeUnixNano)
+        : "0",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      attributes: globalThis.Array.isArray(object?.attributes)
+        ? object.attributes.map((e: any) => KeyValue.fromJSON(e))
+        : [],
+      droppedAttributesCount: isSet(object.droppedAttributesCount)
+        ? globalThis.Number(object.droppedAttributesCount)
+        : 0,
+    };
   },
 };
 
@@ -546,6 +678,26 @@ export const Span_Link = {
     }
     return message;
   },
+
+  fromJSON(object: any): Span_Link {
+    return {
+      traceId: isSet(object.traceId)
+        ? bytesFromBase64(object.traceId)
+        : new Uint8Array(0),
+      spanId: isSet(object.spanId)
+        ? bytesFromBase64(object.spanId)
+        : new Uint8Array(0),
+      traceState: isSet(object.traceState)
+        ? globalThis.String(object.traceState)
+        : "",
+      attributes: globalThis.Array.isArray(object?.attributes)
+        ? object.attributes.map((e: any) => KeyValue.fromJSON(e))
+        : [],
+      droppedAttributesCount: isSet(object.droppedAttributesCount)
+        ? globalThis.Number(object.droppedAttributesCount)
+        : 0,
+    };
+  },
 };
 
 function createBaseStatus(): Status {
@@ -596,7 +748,27 @@ export const Status = {
     }
     return message;
   },
+
+  fromJSON(object: any): Status {
+    return {
+      message: isSet(object.message) ? globalThis.String(object.message) : "",
+      code: isSet(object.code) ? status_StatusCodeFromJSON(object.code) : 0,
+    };
+  },
 };
+
+function bytesFromBase64(b64: string): Uint8Array {
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = globalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
+  }
+}
 
 function longToString(long: Long) {
   return long.toString();
@@ -605,4 +777,8 @@ function longToString(long: Long) {
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

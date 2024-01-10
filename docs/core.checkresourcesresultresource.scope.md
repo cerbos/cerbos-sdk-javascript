@@ -4,7 +4,7 @@
 
 ## CheckResourcesResultResource.scope property
 
-The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html) against which the check was performed.
+The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) against which the check was performed.
 
 **Signature:**
 

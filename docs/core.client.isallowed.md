@@ -9,7 +9,7 @@ Check if a principal is allowed to perform an action on a resource.
 **Signature:**
 
 ```typescript
-isAllowed(request: IsAllowedRequest): Promise<boolean>;
+isAllowed(request: IsAllowedRequest, options?: RequestOptions): Promise<boolean>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ isAllowed(request: IsAllowedRequest): Promise<boolean>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [IsAllowedRequest](./core.isallowedrequest.md) |  |
+|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 
