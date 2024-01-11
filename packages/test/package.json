@@ -7,12 +7,12 @@
     "test:watch": "NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt jest --watch"
   },
   "devDependencies": {
-    "@cerbos/core": "0.14.0",
-    "@cerbos/embedded": "0.6.0",
-    "@cerbos/files": "0.2.1",
-    "@cerbos/grpc": "0.14.1",
-    "@cerbos/http": "0.15.0",
-    "@cerbos/opentelemetry": "0.4.1",
+    "@cerbos/core": "0.15.0",
+    "@cerbos/embedded": "0.6.1",
+    "@cerbos/files": "0.2.2",
+    "@cerbos/grpc": "0.15.0",
+    "@cerbos/http": "0.16.0",
+    "@cerbos/opentelemetry": "0.4.2",
     "@grpc/grpc-js": "1.9.13",
     "@jest/globals": "29.7.0",
     "@opentelemetry/api": "1.7.0",

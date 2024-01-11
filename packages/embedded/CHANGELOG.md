@@ -2,6 +2,12 @@
 
 No notable changes.
 
+## [0.6.1] - 2024-01-11
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.15.0 ([#781](https://github.com/cerbos/cerbos-sdk-javascript/pull/781))
+
 ## [0.6.0] - 2023-12-08
 
 ### Changed
@@ -17,9 +23,11 @@ No notable changes.
   This makes the API consistent with policy expressions.
   `attributes` is still supported for backwards compatibility, but is now deprecated.
 
+- Bump dependency on [@cerbos/core] to 0.14.0 ([#695](https://github.com/cerbos/cerbos-sdk-javascript/pull/695))
+
 ### Removed
 
-- Support for Node.js 16, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
+- Support for Node.js 16, which is now [end-of-life][nodejs-eol] ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
 
 ## [0.4.1-beta] - 2023-08-16
 
@@ -35,15 +43,23 @@ No notable changes.
 
 ## [0.3.1-alpha] - 2023-07-18
 
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.12.0 ([#599](https://github.com/cerbos/cerbos-sdk-javascript/pull/599))
+
 ### Removed
 
 - Unused generated code ([#606](https://github.com/cerbos/cerbos-sdk-javascript/pull/606))
 
 ## [0.3.0-alpha] - 2023-06-07
 
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.11.0 ([#550](https://github.com/cerbos/cerbos-sdk-javascript/pull/550))
+
 ### Removed
 
-- Support for Node.js 14, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#521](https://github.com/cerbos/cerbos-sdk-javascript/pull/521))
+- Support for Node.js 14, which is now [end-of-life][nodejs-eol] ([#521](https://github.com/cerbos/cerbos-sdk-javascript/pull/521))
 
 ## [0.2.2-alpha] - 2023-04-18
 
@@ -52,6 +68,10 @@ No notable changes.
 - Bump dependency on [@cerbos/core] to 0.10.0 ([#506](https://github.com/cerbos/cerbos-sdk-javascript/pull/506))
 
 ## [0.2.1-alpha] - 2023-03-23
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.9.1 ([#481](https://github.com/cerbos/cerbos-sdk-javascript/pull/481))
 
 ### Removed
 
@@ -63,11 +83,17 @@ No notable changes.
 
 - [OpenTelemetry](https://opentelemetry.io) support ([#438](https://github.com/cerbos/cerbos-sdk-javascript/pull/438))
 
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.9.0 ([#481](https://github.com/cerbos/cerbos-sdk-javascript/pull/446))
+
 ## [0.1.1-alpha] - 2022-11-24
 
 ### Changed
 
 - Document principal and resource `attributes` fields in examples ([#358](https://github.com/cerbos/cerbos-sdk-javascript/pull/358))
+
+- Bump dependency on [@cerbos/core] to 0.8.1 ([#359](https://github.com/cerbos/cerbos-sdk-javascript/pull/359))
 
 ## [0.1.0-alpha] - 2022-09-08
 
@@ -75,7 +101,8 @@ No notable changes.
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.6.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.6.1...HEAD
+[0.6.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.6.0...@cerbos/embedded@0.6.1
 [0.6.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.5.0-beta...@cerbos/embedded@0.6.0
 [0.5.0-beta]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.4.1-beta...@cerbos/lite@0.5.0-beta
 [0.4.1-beta]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.4.0-beta...@cerbos/lite@0.4.1-beta
@@ -88,3 +115,4 @@ No notable changes.
 [0.1.1-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.1.0-alpha...@cerbos/lite@0.1.1-alpha
 [0.1.0-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/a3dcb572e0eeff4c4d86c9cc66c1d0c7e59c4853...@cerbos/lite@0.1.0-alpha
 [@cerbos/core]: ../core/README.md
+[nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases

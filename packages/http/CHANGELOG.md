@@ -1,10 +1,18 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.16.0] - 2024-01-11
+
 ### Added
 
 - [`userAgent`](../../docs/core.options.useragent.md) option to `HTTP` constructor, and [`headers`](../../docs/core.requestoptions.headers.md) option to all methods ([#776](https://github.com/cerbos/cerbos-sdk-javascript/pull/776))
 
   Note that if you were previously setting the `User-Agent` header via the `headers` option, you'll now need to do so using the dedicated `userAgent` option.
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.15.0 ([#781](https://github.com/cerbos/cerbos-sdk-javascript/pull/781))
 
 ## [0.15.0] - 2023-10-02
 
@@ -15,9 +23,11 @@
   This makes the API consistent with policy expressions.
   `attributes` is still supported for backwards compatibility, but is now deprecated.
 
+- Bump dependency on [@cerbos/core] to 0.14.0 ([#695](https://github.com/cerbos/cerbos-sdk-javascript/pull/695))
+
 ### Removed
 
-- Support for Node.js 16, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
+- Support for Node.js 16, which is now [end-of-life][nodejs-eol] ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
 
 ## [0.14.0] - 2023-08-16
 
@@ -26,6 +36,10 @@
 - Support for OpenTelemetry span context propagation ([#638](https://github.com/cerbos/cerbos-sdk-javascript/pull/638))
 
   Requires a policy decision point server running Cerbos 0.30+, and [@cerbos/opentelemetry] 0.3+.
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.13.0 ([#645](https://github.com/cerbos/cerbos-sdk-javascript/pull/645))
 
 ### Removed
 
@@ -43,6 +57,10 @@
 
   Requires a policy decision point server running Cerbos 0.29+.
 
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.12.0 ([#599](https://github.com/cerbos/cerbos-sdk-javascript/pull/599))
+
 ## [0.12.0] - 2023-06-07
 
 ### Added
@@ -53,11 +71,13 @@
 
 ### Changed
 
-- Bump dependency on [qs](https://github.com/ljharb/qs) to 6.11.2 ([#530](https://github.com/cerbos/cerbos-sdk-javascript/pull/530))
+- Bump dependency on [@cerbos/core] to 0.11.0 ([#550](https://github.com/cerbos/cerbos-sdk-javascript/pull/550))
+
+- Bump dependency on [qs] to 6.11.2 ([#530](https://github.com/cerbos/cerbos-sdk-javascript/pull/530))
 
 ### Removed
 
-- Support for Node.js 14, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#521](https://github.com/cerbos/cerbos-sdk-javascript/pull/521))
+- Support for Node.js 14, which is now [end-of-life][nodejs-eol] ([#521](https://github.com/cerbos/cerbos-sdk-javascript/pull/521))
 
 ## [0.11.0] - 2023-04-18
 
@@ -73,9 +93,15 @@
 
 ### Changed
 
+- Bump dependency on [@cerbos/core] to 0.10.0 ([#506](https://github.com/cerbos/cerbos-sdk-javascript/pull/506))
+
 - Space-separate the `User-Agent` header for `node-fetch` compatibility ([#505](https://github.com/cerbos/cerbos-sdk-javascript/pull/505))
 
 ## [0.10.1] - 2023-03-23
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.9.1 ([#481](https://github.com/cerbos/cerbos-sdk-javascript/pull/481))
 
 ### Removed
 
@@ -89,7 +115,7 @@
 
 ### Changed
 
-- Bump dependency on [qs](https://github.com/ljharb/qs) to 6.11.1 ([#459](https://github.com/cerbos/cerbos-sdk-javascript/pull/459))
+- Bump dependency on [qs] to 6.11.1 ([#459](https://github.com/cerbos/cerbos-sdk-javascript/pull/459))
 
 ## [0.9.0] - 2023-02-15
 
@@ -109,11 +135,15 @@
 
 - [`Policy.metadata.storeIdentifer`](../../docs/core.policymetadata.storeidentifer.md) is now deprecated, replaced by [`Policy.metadata.storeIdentifier`](../../docs/core.policymetadata.storeidentifier.md) ([#439](https://github.com/cerbos/cerbos-sdk-javascript/pull/439))
 
+- Bump dependency on [@cerbos/core] to 0.9.0 ([#481](https://github.com/cerbos/cerbos-sdk-javascript/pull/446))
+
 ## [0.8.1] - 2022-11-24
 
 ### Changed
 
 - Document principal and resource `attributes` fields in examples ([#358](https://github.com/cerbos/cerbos-sdk-javascript/pull/358))
+
+- Bump dependency on [@cerbos/core] to 0.8.1 ([#359](https://github.com/cerbos/cerbos-sdk-javascript/pull/359))
 
 ## [0.8.0] - 2022-09-08
 
@@ -121,17 +151,23 @@
 
 - Use [`NotOK.fromJSON`](../../docs/core.notok.fromjson.md) factory method to parse JSON-serialized unsucessful responses ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
+- Bump dependency on [@cerbos/core] to 0.8.0 ([#250](https://github.com/cerbos/cerbos-sdk-javascript/pull/250))
+
 ## [0.7.1] - 2022-09-06
 
 ### Changed
 
-- Bump dependency on [uuid](https://github.com/uuidjs/uuid) to 9.0.0 ([#245](https://github.com/cerbos/cerbos-sdk-javascript/pull/245))
+- Bump dependency on [@cerbos/core] to 0.7.1 ([#246](https://github.com/cerbos/cerbos-sdk-javascript/pull/246))
 
 ## [0.7.0] - 2022-08-24
 
 ### Added
 
 - Support for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) ([#209](https://github.com/cerbos/cerbos-sdk-javascript/pull/209))
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.7.0 ([#221](https://github.com/cerbos/cerbos-sdk-javascript/pull/221))
 
 ## [0.6.0] - 2022-07-01
 
@@ -142,11 +178,17 @@
   Requires a policy decision point server running Cerbos 0.19+.
   [`PlanResourcesResponse.validationErrors`](../../docs/core.planresourcesresponsebase.validationerrors.md) will always be an empty array if the client is connected to an earlier version of Cerbos.
 
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.6.0 ([#136](https://github.com/cerbos/cerbos-sdk-javascript/pull/136))
+
 ## [0.5.1] - 2022-06-09
 
 ### Changed
 
 - Make README links relative to file to fix broken links on npmjs.com ([#103](https://github.com/cerbos/cerbos-sdk-javascript/pull/103))
+
+- Bump dependency on [@cerbos/core] to 0.5.1 ([#104](https://github.com/cerbos/cerbos-sdk-javascript/pull/104))
 
 ## [0.5.0] - 2022-06-07
 
@@ -154,7 +196,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.15.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.16.0...HEAD
+[0.16.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.15.0...@cerbos/http@0.16.0
 [0.15.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.14.0...@cerbos/http@0.15.0
 [0.14.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.13.0...@cerbos/http@0.14.0
 [0.13.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.12.0...@cerbos/http@0.13.0
@@ -170,3 +213,7 @@
 [0.6.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.5.1...@cerbos/http@0.6.0
 [0.5.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.5.0...@cerbos/http@0.5.1
 [0.5.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/138ce112e6b775902ddd3791faa8a763dad8614f...@cerbos/http@0.5.0
+[@cerbos/core]: ../core/README.md
+[@cerbos/opentelemetry]: ../opentelemetry/README.md
+[nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases
+[qs]: https://github.com/ljharb/qs
