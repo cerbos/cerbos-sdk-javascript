@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.15.0] - 2024-01-11
+
 ### Added
 
 - [`headers`](../../docs/core.options.headers.md) and [`userAgent`](../../docs/core.options.useragent.md) options to `Client` constructor, and [`headers`](../../docs/core.requestoptions.headers.md) option to all methods ([#776](https://github.com/cerbos/cerbos-sdk-javascript/pull/776))
@@ -13,11 +17,11 @@
   This makes the API consistent with policy expressions.
   `attributes` is still supported for backwards compatibility, but is now deprecated.
 
-- Bump dependency on [uuid](https://github.com/uuidjs/uuid) to 9.0.1 ([#672](https://github.com/cerbos/cerbos-sdk-javascript/pull/672))
+- Bump dependency on [uuid] to 9.0.1 ([#672](https://github.com/cerbos/cerbos-sdk-javascript/pull/672))
 
 ### Removed
 
-- Support for Node.js 16, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
+- Support for Node.js 16, which is now [end-of-life][nodejs-eol] ([#669](https://github.com/cerbos/cerbos-sdk-javascript/pull/669))
 
 ## [0.13.0] - 2023-08-16
 
@@ -49,7 +53,7 @@
 
 ### Removed
 
-- Support for Node.js 14, which is now [end-of-life](https://github.com/nodejs/release#end-of-life-releases) ([#521](https://github.com/cerbos/cerbos-sdk-javascript/pull/521))
+- Support for Node.js 14, which is now [end-of-life][nodejs-eol] ([#521](https://github.com/cerbos/cerbos-sdk-javascript/pull/521))
 
 ## [0.10.0] - 2023-04-18
 
@@ -103,7 +107,7 @@
 
 ### Changed
 
-- Bump dependency on [uuid](https://github.com/uuidjs/uuid) to 9.0.0 ([#245](https://github.com/cerbos/cerbos-sdk-javascript/pull/245))
+- Bump dependency on [uuid] to 9.0.0 ([#245](https://github.com/cerbos/cerbos-sdk-javascript/pull/245))
 
 ## [0.7.0] - 2022-08-24
 
@@ -132,7 +136,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.14.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.15.0...HEAD
+[0.15.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.14.0...@cerbos/core@0.15.0
 [0.14.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.13.0...@cerbos/core@0.14.0
 [0.13.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.12.0...@cerbos/core@0.13.0
 [0.12.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.11.0...@cerbos/core@0.12.0
@@ -147,3 +152,5 @@
 [0.6.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.5.1...@cerbos/core@0.6.0
 [0.5.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.5.0...@cerbos/core@0.5.1
 [0.5.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/138ce112e6b775902ddd3791faa8a763dad8614f...@cerbos/core@0.5.0
+[nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases
+[uuid]: https://github.com/uuidjs/uuid
