@@ -5,8 +5,8 @@
     "packages/*"
   ],
   "engines": {
-    "node": "21.5.0",
-    "npm": "10.2.5"
+    "node": "21.6.0",
+    "npm": "10.3.0"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
