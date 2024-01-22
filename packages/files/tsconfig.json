@@ -7,6 +7,6 @@
     "lib": ["DOM"],
     "outDir": "lib",
     "rootDir": "src",
-    "tsBuildInfoFile": "lib/files.tsbuildinfo"
-  }
+    "tsBuildInfoFile": "lib/files.tsbuildinfo",
+  },
 }
