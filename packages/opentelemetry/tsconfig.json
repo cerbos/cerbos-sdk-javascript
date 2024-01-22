@@ -5,6 +5,6 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
-    "tsBuildInfoFile": "lib/core.tsbuildinfo"
-  }
+    "tsBuildInfoFile": "lib/core.tsbuildinfo",
+  },
 }

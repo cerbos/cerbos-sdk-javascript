@@ -9,12 +9,12 @@
     { "path": "../grpc" },
     { "path": "../http" },
     { "path": "../opentelemetry" },
-    { "path": "./tsconfig.protobuf.json" }
+    { "path": "./tsconfig.protobuf.json" },
   ],
   "compilerOptions": {
     "checkJs": true,
     "lib": ["ES2020", "DOM"],
     "noEmit": true,
-    "tsBuildInfoFile": "lib/test.tsbuildinfo"
-  }
+    "tsBuildInfoFile": "lib/test.tsbuildinfo",
+  },
 }
