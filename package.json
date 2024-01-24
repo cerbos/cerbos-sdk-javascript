@@ -40,7 +40,7 @@
     "lint:fix": "npm run all:serial 'npm:lint:fix:*'",
     "lint:fix:eslint": "eslint --fix --max-warnings=0 .",
     "lint:fix:prettier": "prettier --write .",
-    "postinstall": "patch-package --error-on-warn --error-on-fail && npm run build",
+    "postinstall": "npm run build",
     "proto": "npm run proto:clean && npm run proto:export",
     "proto:clean": "rm -rf proto",
     "proto:export": "npm run all:parallel 'npm:proto:export:*'",
@@ -65,11 +65,10 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jest": "27.6.3",
     "eslint-plugin-tsdoc": "0.2.17",
-    "patch-package": "8.0.0",
     "prettier": "3.2.4",
     "prettier-plugin-pkg": "0.18.1",
     "ts-jest": "29.1.1",
-    "ts-proto": "1.166.3",
+    "ts-proto": "1.167.0",
     "typescript": "5.3.3"
   }
 }
