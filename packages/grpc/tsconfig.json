@@ -6,6 +6,6 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
-    "tsBuildInfoFile": "lib/grpc.tsbuildinfo",
-  },
+    "tsBuildInfoFile": "lib/grpc.tsbuildinfo"
+  }
 }

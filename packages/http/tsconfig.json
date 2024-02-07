@@ -6,6 +6,6 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
-    "tsBuildInfoFile": "lib/http.tsbuildinfo",
-  },
+    "tsBuildInfoFile": "lib/http.tsbuildinfo"
+  }
 }
