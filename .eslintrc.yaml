@@ -5,14 +5,14 @@ parserOptions:
   project:
     - packages/*/tsconfig.json
 
+plugins:
+  - import
+
 extends:
   - eslint:recommended
-  - plugin:@typescript-eslint/recommended
-  - plugin:@typescript-eslint/recommended-requiring-type-checking
-  - plugin:@typescript-eslint/strict
-  - plugin:import/recommended
+  - plugin:@typescript-eslint/strict-type-checked
+  - plugin:@typescript-eslint/stylistic-type-checked
   - plugin:import/typescript
-  - plugin:jest/recommended
 
 rules:
   "@typescript-eslint/consistent-type-imports": warn
@@ -20,6 +20,7 @@ rules:
   "@typescript-eslint/explicit-member-accessibility": warn
   "@typescript-eslint/no-confusing-void-expression": warn
   "@typescript-eslint/prefer-enum-initializers": warn
+  "@typescript-eslint/prefer-nullish-coalescing": warn
   "@typescript-eslint/promise-function-async": warn
   "@typescript-eslint/return-await":
     - warn
@@ -28,6 +29,8 @@ rules:
   func-style:
     - warn
     - declaration
+  import/export: warn
+  import/newline-after-import: warn
   import/no-duplicates: warn
   import/no-extraneous-dependencies:
     - warn
@@ -36,6 +39,7 @@ rules:
       optionalDependencies: false
       peerDependencies: false
       includeTypes: true
+  import/no-named-as-default: warn
   import/order:
     - warn
     - alphabetize:
@@ -43,6 +47,9 @@ rules:
         orderImportKind: asc
         caseInsensitive: true
       newlines-between: always
+  import/consistent-type-specifier-style:
+    - warn
+    - prefer-top-level
   no-console: warn
   sort-imports:
     - warn
@@ -55,3 +62,13 @@ overrides:
       - eslint-plugin-tsdoc
     rules:
       tsdoc/syntax: warn
+
+  - files:
+      - packages/test/src/**/*.test.ts
+      - packages/test/src/helpers.ts
+    extends:
+      - plugin:vitest/recommended
+    rules:
+      "@typescript-eslint/no-unsafe-assignment": off
+      "@typescript-eslint/no-unsafe-member-access": off
+      "@typescript-eslint/no-unsafe-argument": off

@@ -10,15 +10,16 @@ runs:
   using: composite
 
   steps:
+    - name: Set up pnpm
+      uses: pnpm/action-setup@v3
+
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        cache: npm
+        cache: pnpm
         node-version: ${{ inputs.node-version }}
         node-version-file: ${{ inputs.node-version == '' && '.node-version' || '' }}
 
     - name: Install dependencies
       shell: bash
-      run: |
-        npm install --global npm@$(jq --raw-output .engines.npm < package.json)
-        npm ci
+      run: pnpm install --frozen-lockfile

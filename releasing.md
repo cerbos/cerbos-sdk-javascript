@@ -42,10 +42,10 @@ However, we should stick with the convention of
 
 ### Update lockfile
 
-Update `package-lock.json` to reflect the new versions.
+Update `pnpm-lock.yaml` to reflect the new versions.
 
 ```console
-$ npm install
+$ pnpm install
 ```
 
 ### Update the changelogs
@@ -96,11 +96,11 @@ $ git switch --detach upstream/main
 ### Make a clean build
 
 ```console
-$ npm run clean
+$ pnpm run clean
 
-$ npm install
+$ pnpm install
 
-$ npm run build
+$ pnpm run build
 ```
 
 ### Push release tags to GitHub
@@ -116,5 +116,5 @@ $ git push upstream @cerbos/${package}@${version}
 ### Publish changed packages to npm
 
 ```console
-$ npm publish --workspace="packages/${package}"
+$ pnpm --filter="./packages/${package}" publish
 ```

@@ -25,13 +25,13 @@ jobs:
         uses: ./.github/actions/setup-node
 
       - name: Lint code
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Generate protobuf code
-        run: npm run generate
+        run: pnpm run generate
 
       - name: Generate docs
-        run: npm run docs
+        run: pnpm run docs
 
       - name: Check for uncommitted changes
         run: |-
@@ -78,10 +78,10 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Start test servers
-        run: npm run test:servers:start
+        run: pnpm run test:servers:start
 
       - name: Run tests
-        run: npm test
+        run: pnpm test
 
   test-results:
     name: Check test results

@@ -4,7 +4,7 @@ import { createSecureContext } from "tls";
 import type { Client, Options } from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
-import { beforeAll, describe, expect, it } from "@jest/globals";
+import { beforeAll, describe, expect, it } from "vitest";
 
 import {
   describeIfCerbosVersionIsAtLeast,

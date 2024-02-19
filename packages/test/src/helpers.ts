@@ -4,7 +4,6 @@ import { setTimeout } from "timers/promises";
 import { CheckResourcesResult } from "@cerbos/core";
 import type { ServiceError } from "@grpc/grpc-js";
 import { Metadata } from "@grpc/grpc-js";
-import { describe, expect } from "@jest/globals";
 import type { Attributes, HrTime } from "@opentelemetry/api";
 import { ValueType, context, trace } from "@opentelemetry/api";
 import type { Histogram, MetricDescriptor } from "@opentelemetry/sdk-metrics";
@@ -18,6 +17,7 @@ import type {
   InMemorySpanExporter,
   ReadableSpan,
 } from "@opentelemetry/sdk-trace-base";
+import { describe, expect } from "vitest";
 
 import type { DecisionLogEntry } from "./protobuf/cerbos/audit/v1/audit";
 import { ListAuditLogEntriesResponse } from "./protobuf/cerbos/response/v1/response";
@@ -166,8 +166,13 @@ export class TestMetricReader extends MetricReader {
     });
   }
 
-  protected override async onForceFlush(): Promise<void> {}
-  protected override async onShutdown(): Promise<void> {}
+  protected override async onForceFlush(): Promise<void> {
+    // no-op
+  }
+
+  protected override async onShutdown(): Promise<void> {
+    // no-op
+  }
 }
 
 export async function expectMetrics(

@@ -3,7 +3,7 @@ import type {
   ResourceSearch,
 } from "@cerbos/core";
 import { CheckResourcesResponse, Effect } from "@cerbos/core";
-import { describe, expect, it } from "@jest/globals";
+import { describe, expect, it } from "vitest";
 
 import { buildResult, buildResultsForResources, shuffle } from "./helpers";
 
