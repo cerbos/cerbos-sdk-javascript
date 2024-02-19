@@ -47,6 +47,7 @@
       "groupName": "opentelemetry"
     }
   ],
+  "postUpdateOptions": ["pnpmDedupe"],
   "reviewers": ["haines"],
   "semanticCommitType": "chore"
 }
