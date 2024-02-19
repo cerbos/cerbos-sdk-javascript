@@ -22,7 +22,7 @@
     },
     {
       "matchManagers": ["nodenv", "npm"],
-      "matchPackageNames": ["node", "npm"],
+      "matchPackageNames": ["node", "pnpm"],
       "matchFiles": [".node-version", "package.json"],
       "rangeStrategy": "pin",
       "semanticCommitScope": "deps-dev",
