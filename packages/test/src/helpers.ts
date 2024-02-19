@@ -166,8 +166,13 @@ export class TestMetricReader extends MetricReader {
     });
   }
 
-  protected override async onForceFlush(): Promise<void> {}
-  protected override async onShutdown(): Promise<void> {}
+  protected override async onForceFlush(): Promise<void> {
+    // no-op
+  }
+
+  protected override async onShutdown(): Promise<void> {
+    // no-op
+  }
 }
 
 export async function expectMetrics(
