@@ -1,5 +1,3 @@
-/* eslint-disable jest/no-conditional-expect */
-
 import { resolve } from "path";
 import { createSecureContext } from "tls";
 
@@ -26,8 +24,8 @@ import {
 } from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
-import { afterAll, beforeAll, describe, expect, it, jest } from "@jest/globals";
 import { UnsecuredJWT } from "jose";
+import { afterAll, beforeAll, describe, expect, it, vitest } from "vitest";
 
 import {
   describeIfCerbosVersionIsAtLeast,
@@ -111,7 +109,10 @@ describe("Client", () => {
           callbackOnValidationError: Client;
         };
 
-        const validationFailed = jest.fn<ValidationFailedCallback>();
+        const validationFailed = vitest.fn<
+          Parameters<ValidationFailedCallback>,
+          ReturnType<ValidationFailedCallback>
+        >();
 
         beforeAll(() => {
           clients = {

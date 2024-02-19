@@ -45,10 +45,6 @@
     {
       "matchPackagePrefixes": ["@opentelemetry/"],
       "groupName": "opentelemetry"
-    },
-    {
-      "matchPackageNames": ["jest", "ts-jest"],
-      "groupName": "test"
     }
   ],
   "reviewers": ["haines"],

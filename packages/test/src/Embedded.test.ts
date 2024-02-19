@@ -9,8 +9,8 @@ import {
 } from "@cerbos/core";
 import type { DecodedJWTPayload } from "@cerbos/embedded";
 import { Embedded } from "@cerbos/embedded";
-import { describe, expect, it } from "@jest/globals";
 import { UnsecuredJWT } from "jose";
+import { describe, expect, it } from "vitest";
 
 describe("Embedded", () => {
   describe("cerbos", () => {

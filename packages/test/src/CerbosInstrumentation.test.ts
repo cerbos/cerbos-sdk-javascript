@@ -1,5 +1,3 @@
-/* eslint-disable jest/no-conditional-expect */
-
 import { readFileSync } from "fs";
 import { resolve } from "path";
 
@@ -11,14 +9,6 @@ import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
 import { CerbosInstrumentation } from "@cerbos/opentelemetry";
 import { ChannelCredentials } from "@grpc/grpc-js";
-import {
-  afterAll,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-} from "@jest/globals";
 import type { AttributeValue, Attributes } from "@opentelemetry/api";
 import { SpanKind, SpanStatusCode, metrics } from "@opentelemetry/api";
 import type { MetricReader } from "@opentelemetry/sdk-metrics";
@@ -31,6 +21,7 @@ import {
 import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
 import { SemanticAttributes } from "@opentelemetry/semantic-conventions";
 import { UnsecuredJWT } from "jose";
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 
 import {
   TestMetricReader,
