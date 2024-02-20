@@ -51,8 +51,8 @@ importers:
         specifier: 0.18.1
         version: 0.18.1(prettier@3.2.5)
       ts-proto:
-        specifier: 1.167.5
-        version: 1.167.5
+        specifier: 1.167.6
+        version: 1.167.6
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -3516,8 +3516,8 @@ packages:
       protobufjs: 7.2.6
     dev: true
 
-  /ts-proto@1.167.5:
-    resolution: {integrity: sha512-46ci2eWiLk+rA9rwYya98eUivYP3VRi+978yzt15I34BvPlQlfplMxW2bWJa3yJgdGtNWdT1WLkGn53uhSpjCw==}
+  /ts-proto@1.167.6:
+    resolution: {integrity: sha512-4RQ9USdMDd46al2dsYhEgMnoUnMT9vrRrXA0Ylg+PLjlyciwXGC58vmZnmcqrTOQ8YdE9/XjAl+/YQ17mb9AIw==}
     hasBin: true
     dependencies:
       case-anything: 2.1.13
