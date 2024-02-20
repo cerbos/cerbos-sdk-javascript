@@ -48,8 +48,8 @@
     "test:watch": "pnpm run --filter=./packages/test test:watch"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "7.23.23",
-    "@microsoft/api-extractor": "7.40.1",
+    "@microsoft/api-documenter": "7.23.24",
+    "@microsoft/api-extractor": "7.40.2",
     "@tsconfig/node18": "18.2.2",
     "@types/node": "18.19.17",
     "@typescript-eslint/eslint-plugin": "7.0.1",
