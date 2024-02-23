@@ -18,7 +18,7 @@ import type {
 import _m0 from "protobufjs/minimal";
 import { Duration } from "../../../google/protobuf/duration";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { ResourceSpans } from "../../../opentelemetry/proto/trace/v1/trace";
+import { TracesData } from "../../../opentelemetry/proto/trace/v1/trace";
 
 export const protobufPackage = "jaeger.api_v3";
 
@@ -26,10 +26,6 @@ export interface GetTraceRequest {
   traceId: string;
   startTime: Date | undefined;
   endTime: Date | undefined;
-}
-
-export interface SpansResponseChunk {
-  resourceSpans: ResourceSpans[];
 }
 
 export interface TraceQueryParameters {
@@ -150,56 +146,6 @@ export const GetTraceRequest = {
       endTime: isSet(object.endTime)
         ? fromJsonTimestamp(object.endTime)
         : undefined,
-    };
-  },
-};
-
-function createBaseSpansResponseChunk(): SpansResponseChunk {
-  return { resourceSpans: [] };
-}
-
-export const SpansResponseChunk = {
-  encode(
-    message: SpansResponseChunk,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    for (const v of message.resourceSpans) {
-      ResourceSpans.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): SpansResponseChunk {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSpansResponseChunk();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.resourceSpans.push(
-            ResourceSpans.decode(reader, reader.uint32()),
-          );
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): SpansResponseChunk {
-    return {
-      resourceSpans: globalThis.Array.isArray(object?.resourceSpans)
-        ? object.resourceSpans.map((e: any) => ResourceSpans.fromJSON(e))
-        : [],
     };
   },
 };
@@ -754,9 +700,9 @@ export const QueryServiceService = {
     requestSerialize: (value: GetTraceRequest) =>
       Buffer.from(GetTraceRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer) => GetTraceRequest.decode(value),
-    responseSerialize: (value: SpansResponseChunk) =>
-      Buffer.from(SpansResponseChunk.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => SpansResponseChunk.decode(value),
+    responseSerialize: (value: TracesData) =>
+      Buffer.from(TracesData.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => TracesData.decode(value),
   },
   findTraces: {
     path: "/jaeger.api_v3.QueryService/FindTraces",
@@ -765,9 +711,9 @@ export const QueryServiceService = {
     requestSerialize: (value: FindTracesRequest) =>
       Buffer.from(FindTracesRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer) => FindTracesRequest.decode(value),
-    responseSerialize: (value: SpansResponseChunk) =>
-      Buffer.from(SpansResponseChunk.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => SpansResponseChunk.decode(value),
+    responseSerialize: (value: TracesData) =>
+      Buffer.from(TracesData.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => TracesData.decode(value),
   },
   getServices: {
     path: "/jaeger.api_v3.QueryService/GetServices",
@@ -794,8 +740,8 @@ export const QueryServiceService = {
 } as const;
 
 export interface QueryServiceServer extends UntypedServiceImplementation {
-  getTrace: handleServerStreamingCall<GetTraceRequest, SpansResponseChunk>;
-  findTraces: handleServerStreamingCall<FindTracesRequest, SpansResponseChunk>;
+  getTrace: handleServerStreamingCall<GetTraceRequest, TracesData>;
+  findTraces: handleServerStreamingCall<FindTracesRequest, TracesData>;
   getServices: handleUnaryCall<GetServicesRequest, GetServicesResponse>;
   getOperations: handleUnaryCall<GetOperationsRequest, GetOperationsResponse>;
 }
@@ -804,21 +750,21 @@ export interface QueryServiceClient extends Client {
   getTrace(
     request: GetTraceRequest,
     options?: Partial<CallOptions>,
-  ): ClientReadableStream<SpansResponseChunk>;
+  ): ClientReadableStream<TracesData>;
   getTrace(
     request: GetTraceRequest,
     metadata?: Metadata,
     options?: Partial<CallOptions>,
-  ): ClientReadableStream<SpansResponseChunk>;
+  ): ClientReadableStream<TracesData>;
   findTraces(
     request: FindTracesRequest,
     options?: Partial<CallOptions>,
-  ): ClientReadableStream<SpansResponseChunk>;
+  ): ClientReadableStream<TracesData>;
   findTraces(
     request: FindTracesRequest,
     metadata?: Metadata,
     options?: Partial<CallOptions>,
-  ): ClientReadableStream<SpansResponseChunk>;
+  ): ClientReadableStream<TracesData>;
   getServices(
     request: GetServicesRequest,
     callback: (

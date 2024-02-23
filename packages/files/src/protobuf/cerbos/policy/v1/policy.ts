@@ -23,12 +23,22 @@ export interface Policy_VariablesEntry {
   value: string;
 }
 
+export interface SourceAttributes {
+  attributes: { [key: string]: any | undefined };
+}
+
+export interface SourceAttributes_AttributesEntry {
+  key: string;
+  value: any | undefined;
+}
+
 export interface Metadata {
   sourceFile: string;
   annotations: { [key: string]: string };
   hash: string | undefined;
   storeIdentifer: string;
   storeIdentifier: string;
+  sourceAttributes: SourceAttributes | undefined;
 }
 
 export interface Metadata_AnnotationsEntry {
@@ -131,6 +141,12 @@ export interface Match_ExprList {
 
 export interface Output {
   expr: string;
+  when: Output_When | undefined;
+}
+
+export interface Output_When {
+  ruleActivated: string;
+  conditionNotMet: string;
 }
 
 export interface Schemas {
@@ -210,6 +226,30 @@ export const Policy_VariablesEntry = {
   },
 };
 
+export const SourceAttributes = {
+  fromJSON(object: any): SourceAttributes {
+    return {
+      attributes: isObject(object.attributes)
+        ? Object.entries(object.attributes).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
+        : {},
+    };
+  },
+};
+
+export const SourceAttributes_AttributesEntry = {
+  fromJSON(object: any): SourceAttributes_AttributesEntry {
+    return {
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
+  },
+};
+
 export const Metadata = {
   fromJSON(object: any): Metadata {
     return {
@@ -232,6 +272,9 @@ export const Metadata = {
       storeIdentifier: isSet(object.storeIdentifier)
         ? globalThis.String(object.storeIdentifier)
         : "",
+      sourceAttributes: isSet(object.sourceAttributes)
+        ? SourceAttributes.fromJSON(object.sourceAttributes)
+        : undefined,
     };
   },
 };
@@ -458,7 +501,23 @@ export const Match_ExprList = {
 
 export const Output = {
   fromJSON(object: any): Output {
-    return { expr: isSet(object.expr) ? globalThis.String(object.expr) : "" };
+    return {
+      expr: isSet(object.expr) ? globalThis.String(object.expr) : "",
+      when: isSet(object.when) ? Output_When.fromJSON(object.when) : undefined,
+    };
+  },
+};
+
+export const Output_When = {
+  fromJSON(object: any): Output_When {
+    return {
+      ruleActivated: isSet(object.ruleActivated)
+        ? globalThis.String(object.ruleActivated)
+        : "",
+      conditionNotMet: isSet(object.conditionNotMet)
+        ? globalThis.String(object.conditionNotMet)
+        : "",
+    };
   },
 };
 

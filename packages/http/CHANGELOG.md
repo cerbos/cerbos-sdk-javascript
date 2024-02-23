@@ -1,6 +1,10 @@
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [`Output.when`](../../docs/core.output.when.md) to define [conditional policy rule outputs](https://docs.cerbos.dev/cerbos/latest/policies/outputs) using the Admin API ([#829](https://github.com/cerbos/cerbos-sdk-javascript/pull/829))
+
+  Requires a policy decision point server running Cerbos 0.33+.
 
 ## [0.16.0] - 2024-01-11
 

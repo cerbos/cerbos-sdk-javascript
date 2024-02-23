@@ -1,5 +1,6 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { Value } from "../../../google/protobuf/struct";
 import { UInt64Value } from "../../../google/protobuf/wrappers";
 import { Effect } from "../../effect/v1/effect";
 
@@ -25,12 +26,22 @@ export interface Policy_VariablesEntry {
   value: string;
 }
 
+export interface SourceAttributes {
+  attributes: { [key: string]: any | undefined };
+}
+
+export interface SourceAttributes_AttributesEntry {
+  key: string;
+  value: any | undefined;
+}
+
 export interface Metadata {
   sourceFile: string;
   annotations: { [key: string]: string };
   hash: string | undefined;
   storeIdentifer: string;
   storeIdentifier: string;
+  sourceAttributes: SourceAttributes | undefined;
 }
 
 export interface Metadata_AnnotationsEntry {
@@ -133,6 +144,12 @@ export interface Match_ExprList {
 
 export interface Output {
   expr: string;
+  when: Output_When | undefined;
+}
+
+export interface Output_When {
+  ruleActivated: string;
+  conditionNotMet: string;
 }
 
 export interface Schemas {
@@ -372,6 +389,113 @@ export const Policy_VariablesEntry = {
   },
 };
 
+function createBaseSourceAttributes(): SourceAttributes {
+  return { attributes: {} };
+}
+
+export const SourceAttributes = {
+  encode(
+    message: SourceAttributes,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    Object.entries(message.attributes).forEach(([key, value]) => {
+      if (value !== undefined) {
+        SourceAttributes_AttributesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).ldelim();
+      }
+    });
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SourceAttributes {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSourceAttributes();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          const entry1 = SourceAttributes_AttributesEntry.decode(
+            reader,
+            reader.uint32(),
+          );
+          if (entry1.value !== undefined) {
+            message.attributes[entry1.key] = entry1.value;
+          }
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseSourceAttributes_AttributesEntry(): SourceAttributes_AttributesEntry {
+  return { key: "", value: undefined };
+}
+
+export const SourceAttributes_AttributesEntry = {
+  encode(
+    message: SourceAttributes_AttributesEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+    if (message.value !== undefined) {
+      Value.encode(
+        Value.wrap(message.value),
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): SourceAttributes_AttributesEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSourceAttributes_AttributesEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.key = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
 function createBaseMetadata(): Metadata {
   return {
     sourceFile: "",
@@ -379,6 +503,7 @@ function createBaseMetadata(): Metadata {
     hash: undefined,
     storeIdentifer: "",
     storeIdentifier: "",
+    sourceAttributes: undefined,
   };
 }
 
@@ -407,6 +532,12 @@ export const Metadata = {
     }
     if (message.storeIdentifier !== "") {
       writer.uint32(42).string(message.storeIdentifier);
+    }
+    if (message.sourceAttributes !== undefined) {
+      SourceAttributes.encode(
+        message.sourceAttributes,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     return writer;
   },
@@ -459,6 +590,16 @@ export const Metadata = {
           }
 
           message.storeIdentifier = reader.string();
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.sourceAttributes = SourceAttributes.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1493,7 +1634,7 @@ export const Match_ExprList = {
 };
 
 function createBaseOutput(): Output {
-  return { expr: "" };
+  return { expr: "", when: undefined };
 }
 
 export const Output = {
@@ -1503,6 +1644,9 @@ export const Output = {
   ): _m0.Writer {
     if (message.expr !== "") {
       writer.uint32(10).string(message.expr);
+    }
+    if (message.when !== undefined) {
+      Output_When.encode(message.when, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -1521,6 +1665,63 @@ export const Output = {
           }
 
           message.expr = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.when = Output_When.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseOutput_When(): Output_When {
+  return { ruleActivated: "", conditionNotMet: "" };
+}
+
+export const Output_When = {
+  encode(
+    message: Output_When,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.ruleActivated !== "") {
+      writer.uint32(10).string(message.ruleActivated);
+    }
+    if (message.conditionNotMet !== "") {
+      writer.uint32(18).string(message.conditionNotMet);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Output_When {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseOutput_When();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.ruleActivated = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.conditionNotMet = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {

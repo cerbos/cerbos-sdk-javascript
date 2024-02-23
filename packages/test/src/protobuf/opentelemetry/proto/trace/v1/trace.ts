@@ -6,6 +6,10 @@ import { Resource } from "../../resource/v1/resource";
 
 export const protobufPackage = "opentelemetry.proto.trace.v1";
 
+export interface TracesData {
+  resourceSpans: ResourceSpans[];
+}
+
 export interface ResourceSpans {
   resource: Resource | undefined;
   scopeSpans: ScopeSpans[];
@@ -23,6 +27,7 @@ export interface Span {
   spanId: Uint8Array;
   traceState: string;
   parentSpanId: Uint8Array;
+  flags: number;
   name: string;
   kind: Span_SpanKind;
   startTimeUnixNano: string;
@@ -85,6 +90,7 @@ export interface Span_Link {
   traceState: string;
   attributes: KeyValue[];
   droppedAttributesCount: number;
+  flags: number;
 }
 
 export interface Status {
@@ -115,6 +121,56 @@ export function status_StatusCodeFromJSON(object: any): Status_StatusCode {
       );
   }
 }
+
+function createBaseTracesData(): TracesData {
+  return { resourceSpans: [] };
+}
+
+export const TracesData = {
+  encode(
+    message: TracesData,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.resourceSpans) {
+      ResourceSpans.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): TracesData {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTracesData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.resourceSpans.push(
+            ResourceSpans.decode(reader, reader.uint32()),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TracesData {
+    return {
+      resourceSpans: globalThis.Array.isArray(object?.resourceSpans)
+        ? object.resourceSpans.map((e: any) => ResourceSpans.fromJSON(e))
+        : [],
+    };
+  },
+};
 
 function createBaseResourceSpans(): ResourceSpans {
   return { resource: undefined, scopeSpans: [], schemaUrl: "" };
@@ -273,6 +329,7 @@ function createBaseSpan(): Span {
     spanId: new Uint8Array(0),
     traceState: "",
     parentSpanId: new Uint8Array(0),
+    flags: 0,
     name: "",
     kind: 0,
     startTimeUnixNano: "0",
@@ -300,6 +357,9 @@ export const Span = {
     }
     if (message.parentSpanId.length !== 0) {
       writer.uint32(34).bytes(message.parentSpanId);
+    }
+    if (message.flags !== 0) {
+      writer.uint32(133).fixed32(message.flags);
     }
     if (message.name !== "") {
       writer.uint32(42).string(message.name);
@@ -372,6 +432,13 @@ export const Span = {
           }
 
           message.parentSpanId = reader.bytes();
+          continue;
+        case 16:
+          if (tag !== 133) {
+            break;
+          }
+
+          message.flags = reader.fixed32();
           continue;
         case 5:
           if (tag !== 42) {
@@ -473,6 +540,7 @@ export const Span = {
       parentSpanId: isSet(object.parentSpanId)
         ? bytesFromBase64(object.parentSpanId)
         : new Uint8Array(0),
+      flags: isSet(object.flags) ? globalThis.Number(object.flags) : 0,
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       kind: isSet(object.kind) ? span_SpanKindFromJSON(object.kind) : 0,
       startTimeUnixNano: isSet(object.startTimeUnixNano)
@@ -601,6 +669,7 @@ function createBaseSpan_Link(): Span_Link {
     traceState: "",
     attributes: [],
     droppedAttributesCount: 0,
+    flags: 0,
   };
 }
 
@@ -623,6 +692,9 @@ export const Span_Link = {
     }
     if (message.droppedAttributesCount !== 0) {
       writer.uint32(40).uint32(message.droppedAttributesCount);
+    }
+    if (message.flags !== 0) {
+      writer.uint32(53).fixed32(message.flags);
     }
     return writer;
   },
@@ -670,6 +742,13 @@ export const Span_Link = {
 
           message.droppedAttributesCount = reader.uint32();
           continue;
+        case 6:
+          if (tag !== 53) {
+            break;
+          }
+
+          message.flags = reader.fixed32();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -696,6 +775,7 @@ export const Span_Link = {
       droppedAttributesCount: isSet(object.droppedAttributesCount)
         ? globalThis.Number(object.droppedAttributesCount)
         : 0,
+      flags: isSet(object.flags) ? globalThis.Number(object.flags) : 0,
     };
   },
 };
