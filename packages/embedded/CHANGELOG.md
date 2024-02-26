@@ -1,6 +1,8 @@
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Allow promises of binary data in [Source](../../docs/embedded.source.md) type ([#824](https://github.com/cerbos/cerbos-sdk-javascript/pull/824))
 
 ## [0.6.1] - 2024-01-11
 

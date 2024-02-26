@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFile } from "fs/promises";
 import { resolve } from "path";
 
 import type { CheckResourcesRequest } from "@cerbos/core";
@@ -15,7 +15,7 @@ import { describe, expect, it } from "vitest";
 describe("Embedded", () => {
   describe("cerbos", () => {
     const client = new Embedded(
-      readFileSync(resolve(__dirname, "../servers/policies.wasm")),
+      readFile(resolve(__dirname, "../servers/policies.wasm")),
       {
         decodeJWTPayload: ({ token }): DecodedJWTPayload =>
           UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
