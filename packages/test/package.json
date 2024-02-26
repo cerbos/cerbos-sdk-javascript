@@ -6,12 +6,12 @@
     "test:servers:stop": "servers/stop"
   },
   "devDependencies": {
-    "@cerbos/core": "0.15.0",
-    "@cerbos/embedded": "0.6.1",
-    "@cerbos/files": "0.2.2",
-    "@cerbos/grpc": "0.15.0",
-    "@cerbos/http": "0.16.0",
-    "@cerbos/opentelemetry": "0.4.2",
+    "@cerbos/core": "workspace:*",
+    "@cerbos/embedded": "workspace:*",
+    "@cerbos/files": "workspace:*",
+    "@cerbos/grpc": "workspace:*",
+    "@cerbos/http": "workspace:*",
+    "@cerbos/opentelemetry": "workspace:*",
     "@grpc/grpc-js": "1.10.1",
     "@opentelemetry/api": "1.7.0",
     "@opentelemetry/sdk-metrics": "1.21.0",

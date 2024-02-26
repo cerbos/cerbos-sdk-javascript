@@ -30,7 +30,7 @@ Add a changelog entry to the other packages.
 
 ```
 
-If another package (except `test`) has changed (including if only its `@cerbos/core` dependency has increased), bump its version and update the relevant dependency in the `test` package.
+If another package (except `test`) has changed (including if only its `@cerbos/core` dependency has increased), bump its version.
 Note that the version numbers do not have to match, and we don't have to release packages that haven't changed.
 Development dependency updates don't require a release.
 
@@ -99,8 +99,6 @@ $ git switch --detach upstream/main
 $ pnpm run clean
 
 $ pnpm install
-
-$ pnpm run build
 ```
 
 ### Push release tags to GitHub
