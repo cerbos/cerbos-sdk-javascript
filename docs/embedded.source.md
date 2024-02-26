@@ -9,5 +9,5 @@ WebAssembly binary code of an embedded policy decision point bundle (or an HTTP 
 **Signature:**
 
 ```typescript
-export type Source = ArrayBufferView | ArrayBuffer | Response | Promise<Response>;
+export type Source = ArrayBufferView | ArrayBuffer | Response | Promise<ArrayBufferView | ArrayBuffer | Response>;
 ```

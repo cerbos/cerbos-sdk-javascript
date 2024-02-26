@@ -13,7 +13,7 @@ export type Source =
   | ArrayBufferView
   | ArrayBuffer
   | Response
-  | Promise<Response>;
+  | Promise<ArrayBufferView | ArrayBuffer | Response>;
 
 /**
  * Options for creating a new {@link Embedded} client.
