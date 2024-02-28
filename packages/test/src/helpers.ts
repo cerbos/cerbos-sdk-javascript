@@ -21,11 +21,11 @@ import { describe, expect } from "vitest";
 
 import type { DecisionLogEntry } from "./protobuf/cerbos/audit/v1/audit";
 import { ListAuditLogEntriesResponse } from "./protobuf/cerbos/response/v1/response";
+import type { QueryServiceClient } from "./protobuf/jaeger/proto/api_v3/query_service";
 import type {
-  QueryServiceClient,
-  SpansResponseChunk,
-} from "./protobuf/jaeger/proto/api_v3/query_service";
-import type { Span as SpanProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
+  Span as SpanProto,
+  TracesData,
+} from "./protobuf/opentelemetry/proto/trace/v1/trace";
 import type { CerbosPorts } from "./servers";
 import { adminCredentials, cerbosVersionIsAtLeast } from "./servers";
 
@@ -122,7 +122,7 @@ export async function fetchSpans(
       });
 
       for await (const chunk of stream) {
-        const { resourceSpans } = chunk as SpansResponseChunk;
+        const { resourceSpans } = chunk as TracesData;
         for (const resourceSpan of resourceSpans) {
           for (const scopeSpan of resourceSpan.scopeSpans) {
             spans.push(...scopeSpan.spans);

@@ -7,6 +7,7 @@ import {
   PlanResourcesInput,
   PlanResourcesOutput,
 } from "../../engine/v1/engine";
+import { SourceAttributes } from "../../policy/v1/policy";
 
 export const protobufPackage = "cerbos.audit.v1";
 
@@ -42,6 +43,7 @@ export interface DecisionLogEntry {
       }
     | undefined;
   metadata: { [key: string]: MetaValues };
+  auditTrail: AuditTrail | undefined;
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -70,6 +72,15 @@ export interface Peer {
   authInfo: string;
   userAgent: string;
   forwardedFor: string;
+}
+
+export interface AuditTrail {
+  effectivePolicies: { [key: string]: SourceAttributes };
+}
+
+export interface AuditTrail_EffectivePoliciesEntry {
+  key: string;
+  value: SourceAttributes | undefined;
 }
 
 function createBaseAccessLogEntry(): AccessLogEntry {
@@ -246,6 +257,7 @@ function createBaseDecisionLogEntry(): DecisionLogEntry {
     error: "",
     method: undefined,
     metadata: {},
+    auditTrail: undefined,
   };
 }
 
@@ -295,6 +307,9 @@ export const DecisionLogEntry = {
         writer.uint32(122).fork(),
       ).ldelim();
     });
+    if (message.auditTrail !== undefined) {
+      AuditTrail.encode(message.auditTrail, writer.uint32(130).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -388,6 +403,13 @@ export const DecisionLogEntry = {
           if (entry15.value !== undefined) {
             message.metadata[entry15.key] = entry15.value;
           }
+          continue;
+        case 16:
+          if (tag !== 130) {
+            break;
+          }
+
+          message.auditTrail = AuditTrail.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -680,6 +702,108 @@ export const Peer = {
           }
 
           message.forwardedFor = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseAuditTrail(): AuditTrail {
+  return { effectivePolicies: {} };
+}
+
+export const AuditTrail = {
+  encode(
+    message: AuditTrail,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    Object.entries(message.effectivePolicies).forEach(([key, value]) => {
+      AuditTrail_EffectivePoliciesEntry.encode(
+        { key: key as any, value },
+        writer.uint32(10).fork(),
+      ).ldelim();
+    });
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): AuditTrail {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAuditTrail();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          const entry1 = AuditTrail_EffectivePoliciesEntry.decode(
+            reader,
+            reader.uint32(),
+          );
+          if (entry1.value !== undefined) {
+            message.effectivePolicies[entry1.key] = entry1.value;
+          }
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseAuditTrail_EffectivePoliciesEntry(): AuditTrail_EffectivePoliciesEntry {
+  return { key: "", value: undefined };
+}
+
+export const AuditTrail_EffectivePoliciesEntry = {
+  encode(
+    message: AuditTrail_EffectivePoliciesEntry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+    if (message.value !== undefined) {
+      SourceAttributes.encode(message.value, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): AuditTrail_EffectivePoliciesEntry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAuditTrail_EffectivePoliciesEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.key = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.value = SourceAttributes.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {

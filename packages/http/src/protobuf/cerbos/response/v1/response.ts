@@ -16,6 +16,7 @@ export interface PlanResourcesResponse {
   filter: PlanResourcesFilter | undefined;
   meta: PlanResourcesResponse_Meta | undefined;
   validationErrors: ValidationError[];
+  cerbosCallId: string;
 }
 
 export interface PlanResourcesResponse_Meta {
@@ -91,6 +92,7 @@ export interface CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
 export interface CheckResourcesResponse {
   requestId: string;
   results: CheckResourcesResponse_ResultEntry[];
+  cerbosCallId: string;
 }
 
 export interface CheckResourcesResponse_ResultEntry {
@@ -204,6 +206,9 @@ export const PlanResourcesResponse = {
       validationErrors: globalThis.Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
+      cerbosCallId: isSet(object.cerbosCallId)
+        ? globalThis.String(object.cerbosCallId)
+        : "",
     };
   },
 
@@ -231,6 +236,9 @@ export const PlanResourcesResponse = {
       obj.validationErrors = message.validationErrors.map((e) =>
         ValidationError.toJSON(e),
       );
+    }
+    if (message.cerbosCallId !== "") {
+      obj.cerbosCallId = message.cerbosCallId;
     }
     return obj;
   },
@@ -636,6 +644,9 @@ export const CheckResourcesResponse = {
             CheckResourcesResponse_ResultEntry.fromJSON(e),
           )
         : [],
+      cerbosCallId: isSet(object.cerbosCallId)
+        ? globalThis.String(object.cerbosCallId)
+        : "",
     };
   },
 
@@ -648,6 +659,9 @@ export const CheckResourcesResponse = {
       obj.results = message.results.map((e) =>
         CheckResourcesResponse_ResultEntry.toJSON(e),
       );
+    }
+    if (message.cerbosCallId !== "") {
+      obj.cerbosCallId = message.cerbosCallId;
     }
     return obj;
   },

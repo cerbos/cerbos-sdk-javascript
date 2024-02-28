@@ -5,6 +5,7 @@ import type {
   PlanResourcesInput,
   PlanResourcesOutput,
 } from "../../engine/v1/engine";
+import type { SourceAttributes } from "../../policy/v1/policy";
 
 export const protobufPackage = "cerbos.audit.v1";
 
@@ -40,6 +41,7 @@ export interface DecisionLogEntry {
       }
     | undefined;
   metadata: { [key: string]: MetaValues };
+  auditTrail: AuditTrail | undefined;
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -68,4 +70,13 @@ export interface Peer {
   authInfo: string;
   userAgent: string;
   forwardedFor: string;
+}
+
+export interface AuditTrail {
+  effectivePolicies: { [key: string]: SourceAttributes };
+}
+
+export interface AuditTrail_EffectivePoliciesEntry {
+  key: string;
+  value: SourceAttributes | undefined;
 }

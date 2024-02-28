@@ -6,6 +6,7 @@ import {
   PlanResourcesInput,
   PlanResourcesOutput,
 } from "../../engine/v1/engine";
+import { SourceAttributes } from "../../policy/v1/policy";
 
 export const protobufPackage = "cerbos.audit.v1";
 
@@ -41,6 +42,7 @@ export interface DecisionLogEntry {
       }
     | undefined;
   metadata: { [key: string]: MetaValues };
+  auditTrail: AuditTrail | undefined;
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -69,6 +71,15 @@ export interface Peer {
   authInfo: string;
   userAgent: string;
   forwardedFor: string;
+}
+
+export interface AuditTrail {
+  effectivePolicies: { [key: string]: SourceAttributes };
+}
+
+export interface AuditTrail_EffectivePoliciesEntry {
+  key: string;
+  value: SourceAttributes | undefined;
 }
 
 export const AccessLogEntry = {
@@ -186,6 +197,9 @@ export const DecisionLogEntry = {
             {},
           )
         : {},
+      auditTrail: isSet(object.auditTrail)
+        ? AuditTrail.fromJSON(object.auditTrail)
+        : undefined,
     };
   },
 
@@ -227,6 +241,9 @@ export const DecisionLogEntry = {
           obj.metadata[k] = MetaValues.toJSON(v);
         });
       }
+    }
+    if (message.auditTrail !== undefined) {
+      obj.auditTrail = AuditTrail.toJSON(message.auditTrail);
     }
     return obj;
   },
@@ -357,6 +374,57 @@ export const Peer = {
     }
     if (message.forwardedFor !== "") {
       obj.forwardedFor = message.forwardedFor;
+    }
+    return obj;
+  },
+};
+
+export const AuditTrail = {
+  fromJSON(object: any): AuditTrail {
+    return {
+      effectivePolicies: isObject(object.effectivePolicies)
+        ? Object.entries(object.effectivePolicies).reduce<{
+            [key: string]: SourceAttributes;
+          }>((acc, [key, value]) => {
+            acc[key] = SourceAttributes.fromJSON(value);
+            return acc;
+          }, {})
+        : {},
+    };
+  },
+
+  toJSON(message: AuditTrail): unknown {
+    const obj: any = {};
+    if (message.effectivePolicies) {
+      const entries = Object.entries(message.effectivePolicies);
+      if (entries.length > 0) {
+        obj.effectivePolicies = {};
+        entries.forEach(([k, v]) => {
+          obj.effectivePolicies[k] = SourceAttributes.toJSON(v);
+        });
+      }
+    }
+    return obj;
+  },
+};
+
+export const AuditTrail_EffectivePoliciesEntry = {
+  fromJSON(object: any): AuditTrail_EffectivePoliciesEntry {
+    return {
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object.value)
+        ? SourceAttributes.fromJSON(object.value)
+        : undefined,
+    };
+  },
+
+  toJSON(message: AuditTrail_EffectivePoliciesEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = SourceAttributes.toJSON(message.value);
     }
     return obj;
   },

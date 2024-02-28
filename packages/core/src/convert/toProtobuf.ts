@@ -13,6 +13,7 @@ import type {
   Match as MatchProtobuf,
   Match_ExprList,
   Output as OutputProtobuf,
+  Output_When,
   Policy as PolicyProtobuf,
   PrincipalPolicy as PrincipalPolicyProtobuf,
   PrincipalRule as PrincipalRuleProtobuf,
@@ -57,6 +58,7 @@ import type {
   Match,
   Matches,
   Output,
+  OutputExpressions,
   PlanResourcesRequest,
   Policy,
   Principal,
@@ -292,8 +294,21 @@ function effectToProtobuf(effect: Effect): EffectProtobuf {
     : EffectProtobuf.EFFECT_DENY;
 }
 
-function outputToProtobuf({ expr }: Output): OutputProtobuf {
-  return { expr };
+function outputToProtobuf({ expr = "", when }: Output): OutputProtobuf {
+  return {
+    expr,
+    when: when && outputExpressionsToProtobuf(when),
+  };
+}
+
+function outputExpressionsToProtobuf({
+  ruleActivated = "",
+  conditionNotMet = "",
+}: OutputExpressions): Output_When {
+  return {
+    ruleActivated,
+    conditionNotMet,
+  };
 }
 
 function resourcePolicyToProtobuf({

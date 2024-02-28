@@ -1,19 +1,27 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { Duration } from "../google/protobuf/duration";
-import { Timestamp } from "../google/protobuf/timestamp";
+import { Duration } from "../../google/protobuf/duration";
+import { Timestamp } from "../../google/protobuf/timestamp";
+import { Constraint } from "./expression";
 
-export const protobufPackage = "validate";
+export const protobufPackage = "buf.validate";
 
 export enum KnownRegex {
-  UNKNOWN = 0,
-  HTTP_HEADER_NAME = 1,
-  HTTP_HEADER_VALUE = 2,
+  KNOWN_REGEX_UNSPECIFIED = 0,
+  KNOWN_REGEX_HTTP_HEADER_NAME = 1,
+  KNOWN_REGEX_HTTP_HEADER_VALUE = 2,
 }
 
-export interface FieldRules {
-  message: MessageRules | undefined;
+export interface OneofConstraints {
+  required?: boolean | undefined;
+}
+
+export interface FieldConstraints {
+  cel: Constraint[];
+  skipped: boolean;
+  required: boolean;
+  ignoreEmpty: boolean;
   type?:
     | { $case: "float"; float: FloatRules }
     | { $case: "double"; double: DoubleRules }
@@ -40,154 +48,192 @@ export interface FieldRules {
 }
 
 export interface FloatRules {
-  const: number;
-  lt: number;
-  lte: number;
-  gt: number;
-  gte: number;
+  const?: number | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: number }
+    | { $case: "lte"; lte: number }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: number }
+    | { $case: "gte"; gte: number }
+    | undefined;
   in: number[];
   notIn: number[];
-  ignoreEmpty: boolean;
+  finite: boolean;
 }
 
 export interface DoubleRules {
-  const: number;
-  lt: number;
-  lte: number;
-  gt: number;
-  gte: number;
+  const?: number | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: number }
+    | { $case: "lte"; lte: number }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: number }
+    | { $case: "gte"; gte: number }
+    | undefined;
   in: number[];
   notIn: number[];
-  ignoreEmpty: boolean;
+  finite: boolean;
 }
 
 export interface Int32Rules {
-  const: number;
-  lt: number;
-  lte: number;
-  gt: number;
-  gte: number;
+  const?: number | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: number }
+    | { $case: "lte"; lte: number }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: number }
+    | { $case: "gte"; gte: number }
+    | undefined;
   in: number[];
   notIn: number[];
-  ignoreEmpty: boolean;
 }
 
 export interface Int64Rules {
-  const: string;
-  lt: string;
-  lte: string;
-  gt: string;
-  gte: string;
+  const?: string | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: string }
+    | { $case: "lte"; lte: string }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: string }
+    | { $case: "gte"; gte: string }
+    | undefined;
   in: string[];
   notIn: string[];
-  ignoreEmpty: boolean;
 }
 
 export interface UInt32Rules {
-  const: number;
-  lt: number;
-  lte: number;
-  gt: number;
-  gte: number;
+  const?: number | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: number }
+    | { $case: "lte"; lte: number }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: number }
+    | { $case: "gte"; gte: number }
+    | undefined;
   in: number[];
   notIn: number[];
-  ignoreEmpty: boolean;
 }
 
 export interface UInt64Rules {
-  const: string;
-  lt: string;
-  lte: string;
-  gt: string;
-  gte: string;
+  const?: string | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: string }
+    | { $case: "lte"; lte: string }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: string }
+    | { $case: "gte"; gte: string }
+    | undefined;
   in: string[];
   notIn: string[];
-  ignoreEmpty: boolean;
 }
 
 export interface SInt32Rules {
-  const: number;
-  lt: number;
-  lte: number;
-  gt: number;
-  gte: number;
+  const?: number | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: number }
+    | { $case: "lte"; lte: number }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: number }
+    | { $case: "gte"; gte: number }
+    | undefined;
   in: number[];
   notIn: number[];
-  ignoreEmpty: boolean;
 }
 
 export interface SInt64Rules {
-  const: string;
-  lt: string;
-  lte: string;
-  gt: string;
-  gte: string;
+  const?: string | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: string }
+    | { $case: "lte"; lte: string }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: string }
+    | { $case: "gte"; gte: string }
+    | undefined;
   in: string[];
   notIn: string[];
-  ignoreEmpty: boolean;
 }
 
 export interface Fixed32Rules {
-  const: number;
-  lt: number;
-  lte: number;
-  gt: number;
-  gte: number;
+  const?: number | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: number }
+    | { $case: "lte"; lte: number }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: number }
+    | { $case: "gte"; gte: number }
+    | undefined;
   in: number[];
   notIn: number[];
-  ignoreEmpty: boolean;
 }
 
 export interface Fixed64Rules {
-  const: string;
-  lt: string;
-  lte: string;
-  gt: string;
-  gte: string;
+  const?: string | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: string }
+    | { $case: "lte"; lte: string }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: string }
+    | { $case: "gte"; gte: string }
+    | undefined;
   in: string[];
   notIn: string[];
-  ignoreEmpty: boolean;
 }
 
 export interface SFixed32Rules {
-  const: number;
-  lt: number;
-  lte: number;
-  gt: number;
-  gte: number;
+  const?: number | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: number }
+    | { $case: "lte"; lte: number }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: number }
+    | { $case: "gte"; gte: number }
+    | undefined;
   in: number[];
   notIn: number[];
-  ignoreEmpty: boolean;
 }
 
 export interface SFixed64Rules {
-  const: string;
-  lt: string;
-  lte: string;
-  gt: string;
-  gte: string;
+  const?: string | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: string }
+    | { $case: "lte"; lte: string }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: string }
+    | { $case: "gte"; gte: string }
+    | undefined;
   in: string[];
   notIn: string[];
-  ignoreEmpty: boolean;
 }
 
 export interface BoolRules {
-  const: boolean;
+  const?: boolean | undefined;
 }
 
 export interface StringRules {
-  const: string;
-  len: string;
-  minLen: string;
-  maxLen: string;
-  lenBytes: string;
-  minBytes: string;
-  maxBytes: string;
-  pattern: string;
-  prefix: string;
-  suffix: string;
-  contains: string;
-  notContains: string;
+  const?: string | undefined;
+  len?: string | undefined;
+  minLen?: string | undefined;
+  maxLen?: string | undefined;
+  lenBytes?: string | undefined;
+  minBytes?: string | undefined;
+  maxBytes?: string | undefined;
+  pattern?: string | undefined;
+  prefix?: string | undefined;
+  suffix?: string | undefined;
+  contains?: string | undefined;
+  notContains?: string | undefined;
   in: string[];
   notIn: string[];
   wellKnown?:
@@ -200,21 +246,26 @@ export interface StringRules {
     | { $case: "uriRef"; uriRef: boolean }
     | { $case: "address"; address: boolean }
     | { $case: "uuid"; uuid: boolean }
+    | { $case: "ipWithPrefixlen"; ipWithPrefixlen: boolean }
+    | { $case: "ipv4WithPrefixlen"; ipv4WithPrefixlen: boolean }
+    | { $case: "ipv6WithPrefixlen"; ipv6WithPrefixlen: boolean }
+    | { $case: "ipPrefix"; ipPrefix: boolean }
+    | { $case: "ipv4Prefix"; ipv4Prefix: boolean }
+    | { $case: "ipv6Prefix"; ipv6Prefix: boolean }
     | { $case: "wellKnownRegex"; wellKnownRegex: KnownRegex }
     | undefined;
-  strict: boolean;
-  ignoreEmpty: boolean;
+  strict?: boolean | undefined;
 }
 
 export interface BytesRules {
-  const: Uint8Array;
-  len: string;
-  minLen: string;
-  maxLen: string;
-  pattern: string;
-  prefix: Uint8Array;
-  suffix: Uint8Array;
-  contains: Uint8Array;
+  const?: Uint8Array | undefined;
+  len?: string | undefined;
+  minLen?: string | undefined;
+  maxLen?: string | undefined;
+  pattern?: string | undefined;
+  prefix?: Uint8Array | undefined;
+  suffix?: Uint8Array | undefined;
+  contains?: Uint8Array | undefined;
   in: Uint8Array[];
   notIn: Uint8Array[];
   wellKnown?:
@@ -222,78 +273,129 @@ export interface BytesRules {
     | { $case: "ipv4"; ipv4: boolean }
     | { $case: "ipv6"; ipv6: boolean }
     | undefined;
-  ignoreEmpty: boolean;
 }
 
 export interface EnumRules {
-  const: number;
-  definedOnly: boolean;
+  const?: number | undefined;
+  definedOnly?: boolean | undefined;
   in: number[];
   notIn: number[];
 }
 
-export interface MessageRules {
-  skip: boolean;
-  required: boolean;
-}
-
 export interface RepeatedRules {
-  minItems: string;
-  maxItems: string;
-  unique: boolean;
-  items: FieldRules | undefined;
-  ignoreEmpty: boolean;
+  minItems?: string | undefined;
+  maxItems?: string | undefined;
+  unique?: boolean | undefined;
+  items?: FieldConstraints | undefined;
 }
 
 export interface MapRules {
-  minPairs: string;
-  maxPairs: string;
-  noSparse: boolean;
-  keys: FieldRules | undefined;
-  values: FieldRules | undefined;
-  ignoreEmpty: boolean;
+  minPairs?: string | undefined;
+  maxPairs?: string | undefined;
+  keys?: FieldConstraints | undefined;
+  values?: FieldConstraints | undefined;
 }
 
 export interface AnyRules {
-  required: boolean;
   in: string[];
   notIn: string[];
 }
 
 export interface DurationRules {
-  required: boolean;
-  const: Duration | undefined;
-  lt: Duration | undefined;
-  lte: Duration | undefined;
-  gt: Duration | undefined;
-  gte: Duration | undefined;
+  const?: Duration | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: Duration }
+    | { $case: "lte"; lte: Duration }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: Duration }
+    | { $case: "gte"; gte: Duration }
+    | undefined;
   in: Duration[];
   notIn: Duration[];
 }
 
 export interface TimestampRules {
-  required: boolean;
-  const: Date | undefined;
-  lt: Date | undefined;
-  lte: Date | undefined;
-  gt: Date | undefined;
-  gte: Date | undefined;
-  ltNow: boolean;
-  gtNow: boolean;
-  within: Duration | undefined;
+  const?: Date | undefined;
+  lessThan?:
+    | { $case: "lt"; lt: Date }
+    | { $case: "lte"; lte: Date }
+    | { $case: "ltNow"; ltNow: boolean }
+    | undefined;
+  greaterThan?:
+    | { $case: "gt"; gt: Date }
+    | { $case: "gte"; gte: Date }
+    | { $case: "gtNow"; gtNow: boolean }
+    | undefined;
+  within?: Duration | undefined;
 }
 
-function createBaseFieldRules(): FieldRules {
-  return { message: undefined, type: undefined };
+function createBaseOneofConstraints(): OneofConstraints {
+  return { required: undefined };
 }
 
-export const FieldRules = {
+export const OneofConstraints = {
   encode(
-    message: FieldRules,
+    message: OneofConstraints,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.message !== undefined) {
-      MessageRules.encode(message.message, writer.uint32(138).fork()).ldelim();
+    if (message.required !== undefined) {
+      writer.uint32(8).bool(message.required);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): OneofConstraints {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseOneofConstraints();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.required = reader.bool();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseFieldConstraints(): FieldConstraints {
+  return {
+    cel: [],
+    skipped: false,
+    required: false,
+    ignoreEmpty: false,
+    type: undefined,
+  };
+}
+
+export const FieldConstraints = {
+  encode(
+    message: FieldConstraints,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.cel) {
+      Constraint.encode(v!, writer.uint32(186).fork()).ldelim();
+    }
+    if (message.skipped === true) {
+      writer.uint32(192).bool(message.skipped);
+    }
+    if (message.required === true) {
+      writer.uint32(200).bool(message.required);
+    }
+    if (message.ignoreEmpty === true) {
+      writer.uint32(208).bool(message.ignoreEmpty);
     }
     switch (message.type?.$case) {
       case "float":
@@ -414,20 +516,41 @@ export const FieldRules = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): FieldRules {
+  decode(input: _m0.Reader | Uint8Array, length?: number): FieldConstraints {
     const reader =
       input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseFieldRules();
+    const message = createBaseFieldConstraints();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 17:
-          if (tag !== 138) {
+        case 23:
+          if (tag !== 186) {
             break;
           }
 
-          message.message = MessageRules.decode(reader, reader.uint32());
+          message.cel.push(Constraint.decode(reader, reader.uint32()));
+          continue;
+        case 24:
+          if (tag !== 192) {
+            break;
+          }
+
+          message.skipped = reader.bool();
+          continue;
+        case 25:
+          if (tag !== 200) {
+            break;
+          }
+
+          message.required = reader.bool();
+          continue;
+        case 26:
+          if (tag !== 208) {
+            break;
+          }
+
+          message.ignoreEmpty = reader.bool();
           continue;
         case 1:
           if (tag !== 10) {
@@ -651,14 +774,12 @@ export const FieldRules = {
 
 function createBaseFloatRules(): FloatRules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
+    finite: false,
   };
 }
 
@@ -667,20 +788,24 @@ export const FloatRules = {
     message: FloatRules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== undefined) {
       writer.uint32(13).float(message.const);
     }
-    if (message.lt !== 0) {
-      writer.uint32(21).float(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(21).float(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(29).float(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== 0) {
-      writer.uint32(29).float(message.lte);
-    }
-    if (message.gt !== 0) {
-      writer.uint32(37).float(message.gt);
-    }
-    if (message.gte !== 0) {
-      writer.uint32(45).float(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(37).float(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(45).float(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -692,8 +817,8 @@ export const FloatRules = {
       writer.float(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
+    if (message.finite === true) {
+      writer.uint32(64).bool(message.finite);
     }
     return writer;
   },
@@ -718,28 +843,28 @@ export const FloatRules = {
             break;
           }
 
-          message.lt = reader.float();
+          message.lessThan = { $case: "lt", lt: reader.float() };
           continue;
         case 3:
           if (tag !== 29) {
             break;
           }
 
-          message.lte = reader.float();
+          message.lessThan = { $case: "lte", lte: reader.float() };
           continue;
         case 4:
           if (tag !== 37) {
             break;
           }
 
-          message.gt = reader.float();
+          message.greaterThan = { $case: "gt", gt: reader.float() };
           continue;
         case 5:
           if (tag !== 45) {
             break;
           }
 
-          message.gte = reader.float();
+          message.greaterThan = { $case: "gte", gte: reader.float() };
           continue;
         case 6:
           if (tag === 53) {
@@ -780,7 +905,7 @@ export const FloatRules = {
             break;
           }
 
-          message.ignoreEmpty = reader.bool();
+          message.finite = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -794,14 +919,12 @@ export const FloatRules = {
 
 function createBaseDoubleRules(): DoubleRules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
+    finite: false,
   };
 }
 
@@ -810,20 +933,24 @@ export const DoubleRules = {
     message: DoubleRules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== undefined) {
       writer.uint32(9).double(message.const);
     }
-    if (message.lt !== 0) {
-      writer.uint32(17).double(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(17).double(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(25).double(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== 0) {
-      writer.uint32(25).double(message.lte);
-    }
-    if (message.gt !== 0) {
-      writer.uint32(33).double(message.gt);
-    }
-    if (message.gte !== 0) {
-      writer.uint32(41).double(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(33).double(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(41).double(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -835,8 +962,8 @@ export const DoubleRules = {
       writer.double(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
+    if (message.finite === true) {
+      writer.uint32(64).bool(message.finite);
     }
     return writer;
   },
@@ -861,28 +988,28 @@ export const DoubleRules = {
             break;
           }
 
-          message.lt = reader.double();
+          message.lessThan = { $case: "lt", lt: reader.double() };
           continue;
         case 3:
           if (tag !== 25) {
             break;
           }
 
-          message.lte = reader.double();
+          message.lessThan = { $case: "lte", lte: reader.double() };
           continue;
         case 4:
           if (tag !== 33) {
             break;
           }
 
-          message.gt = reader.double();
+          message.greaterThan = { $case: "gt", gt: reader.double() };
           continue;
         case 5:
           if (tag !== 41) {
             break;
           }
 
-          message.gte = reader.double();
+          message.greaterThan = { $case: "gte", gte: reader.double() };
           continue;
         case 6:
           if (tag === 49) {
@@ -923,7 +1050,7 @@ export const DoubleRules = {
             break;
           }
 
-          message.ignoreEmpty = reader.bool();
+          message.finite = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -937,14 +1064,11 @@ export const DoubleRules = {
 
 function createBaseInt32Rules(): Int32Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
   };
 }
 
@@ -953,20 +1077,24 @@ export const Int32Rules = {
     message: Int32Rules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== undefined) {
       writer.uint32(8).int32(message.const);
     }
-    if (message.lt !== 0) {
-      writer.uint32(16).int32(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(16).int32(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(24).int32(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== 0) {
-      writer.uint32(24).int32(message.lte);
-    }
-    if (message.gt !== 0) {
-      writer.uint32(32).int32(message.gt);
-    }
-    if (message.gte !== 0) {
-      writer.uint32(40).int32(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(32).int32(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(40).int32(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -978,9 +1106,6 @@ export const Int32Rules = {
       writer.int32(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
-    }
     return writer;
   },
 
@@ -1004,28 +1129,28 @@ export const Int32Rules = {
             break;
           }
 
-          message.lt = reader.int32();
+          message.lessThan = { $case: "lt", lt: reader.int32() };
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.lte = reader.int32();
+          message.lessThan = { $case: "lte", lte: reader.int32() };
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.gt = reader.int32();
+          message.greaterThan = { $case: "gt", gt: reader.int32() };
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.gte = reader.int32();
+          message.greaterThan = { $case: "gte", gte: reader.int32() };
           continue;
         case 6:
           if (tag === 48) {
@@ -1061,13 +1186,6 @@ export const Int32Rules = {
           }
 
           break;
-        case 8:
-          if (tag !== 64) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1080,14 +1198,11 @@ export const Int32Rules = {
 
 function createBaseInt64Rules(): Int64Rules {
   return {
-    const: "0",
-    lt: "0",
-    lte: "0",
-    gt: "0",
-    gte: "0",
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
   };
 }
 
@@ -1096,20 +1211,24 @@ export const Int64Rules = {
     message: Int64Rules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== "0") {
+    if (message.const !== undefined) {
       writer.uint32(8).int64(message.const);
     }
-    if (message.lt !== "0") {
-      writer.uint32(16).int64(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(16).int64(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(24).int64(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== "0") {
-      writer.uint32(24).int64(message.lte);
-    }
-    if (message.gt !== "0") {
-      writer.uint32(32).int64(message.gt);
-    }
-    if (message.gte !== "0") {
-      writer.uint32(40).int64(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(32).int64(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(40).int64(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -1121,9 +1240,6 @@ export const Int64Rules = {
       writer.int64(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
-    }
     return writer;
   },
 
@@ -1147,28 +1263,40 @@ export const Int64Rules = {
             break;
           }
 
-          message.lt = longToString(reader.int64() as Long);
+          message.lessThan = {
+            $case: "lt",
+            lt: longToString(reader.int64() as Long),
+          };
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.lte = longToString(reader.int64() as Long);
+          message.lessThan = {
+            $case: "lte",
+            lte: longToString(reader.int64() as Long),
+          };
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.gt = longToString(reader.int64() as Long);
+          message.greaterThan = {
+            $case: "gt",
+            gt: longToString(reader.int64() as Long),
+          };
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.gte = longToString(reader.int64() as Long);
+          message.greaterThan = {
+            $case: "gte",
+            gte: longToString(reader.int64() as Long),
+          };
           continue;
         case 6:
           if (tag === 48) {
@@ -1204,13 +1332,6 @@ export const Int64Rules = {
           }
 
           break;
-        case 8:
-          if (tag !== 64) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1223,14 +1344,11 @@ export const Int64Rules = {
 
 function createBaseUInt32Rules(): UInt32Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
   };
 }
 
@@ -1239,20 +1357,24 @@ export const UInt32Rules = {
     message: UInt32Rules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== undefined) {
       writer.uint32(8).uint32(message.const);
     }
-    if (message.lt !== 0) {
-      writer.uint32(16).uint32(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(16).uint32(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(24).uint32(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== 0) {
-      writer.uint32(24).uint32(message.lte);
-    }
-    if (message.gt !== 0) {
-      writer.uint32(32).uint32(message.gt);
-    }
-    if (message.gte !== 0) {
-      writer.uint32(40).uint32(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(32).uint32(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(40).uint32(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -1264,9 +1386,6 @@ export const UInt32Rules = {
       writer.uint32(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
-    }
     return writer;
   },
 
@@ -1290,28 +1409,28 @@ export const UInt32Rules = {
             break;
           }
 
-          message.lt = reader.uint32();
+          message.lessThan = { $case: "lt", lt: reader.uint32() };
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.lte = reader.uint32();
+          message.lessThan = { $case: "lte", lte: reader.uint32() };
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.gt = reader.uint32();
+          message.greaterThan = { $case: "gt", gt: reader.uint32() };
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.gte = reader.uint32();
+          message.greaterThan = { $case: "gte", gte: reader.uint32() };
           continue;
         case 6:
           if (tag === 48) {
@@ -1347,13 +1466,6 @@ export const UInt32Rules = {
           }
 
           break;
-        case 8:
-          if (tag !== 64) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1366,14 +1478,11 @@ export const UInt32Rules = {
 
 function createBaseUInt64Rules(): UInt64Rules {
   return {
-    const: "0",
-    lt: "0",
-    lte: "0",
-    gt: "0",
-    gte: "0",
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
   };
 }
 
@@ -1382,20 +1491,24 @@ export const UInt64Rules = {
     message: UInt64Rules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== "0") {
+    if (message.const !== undefined) {
       writer.uint32(8).uint64(message.const);
     }
-    if (message.lt !== "0") {
-      writer.uint32(16).uint64(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(16).uint64(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(24).uint64(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== "0") {
-      writer.uint32(24).uint64(message.lte);
-    }
-    if (message.gt !== "0") {
-      writer.uint32(32).uint64(message.gt);
-    }
-    if (message.gte !== "0") {
-      writer.uint32(40).uint64(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(32).uint64(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(40).uint64(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -1407,9 +1520,6 @@ export const UInt64Rules = {
       writer.uint64(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
-    }
     return writer;
   },
 
@@ -1433,28 +1543,40 @@ export const UInt64Rules = {
             break;
           }
 
-          message.lt = longToString(reader.uint64() as Long);
+          message.lessThan = {
+            $case: "lt",
+            lt: longToString(reader.uint64() as Long),
+          };
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.lte = longToString(reader.uint64() as Long);
+          message.lessThan = {
+            $case: "lte",
+            lte: longToString(reader.uint64() as Long),
+          };
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.gt = longToString(reader.uint64() as Long);
+          message.greaterThan = {
+            $case: "gt",
+            gt: longToString(reader.uint64() as Long),
+          };
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.gte = longToString(reader.uint64() as Long);
+          message.greaterThan = {
+            $case: "gte",
+            gte: longToString(reader.uint64() as Long),
+          };
           continue;
         case 6:
           if (tag === 48) {
@@ -1490,13 +1612,6 @@ export const UInt64Rules = {
           }
 
           break;
-        case 8:
-          if (tag !== 64) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1509,14 +1624,11 @@ export const UInt64Rules = {
 
 function createBaseSInt32Rules(): SInt32Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
   };
 }
 
@@ -1525,20 +1637,24 @@ export const SInt32Rules = {
     message: SInt32Rules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== undefined) {
       writer.uint32(8).sint32(message.const);
     }
-    if (message.lt !== 0) {
-      writer.uint32(16).sint32(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(16).sint32(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(24).sint32(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== 0) {
-      writer.uint32(24).sint32(message.lte);
-    }
-    if (message.gt !== 0) {
-      writer.uint32(32).sint32(message.gt);
-    }
-    if (message.gte !== 0) {
-      writer.uint32(40).sint32(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(32).sint32(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(40).sint32(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -1550,9 +1666,6 @@ export const SInt32Rules = {
       writer.sint32(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
-    }
     return writer;
   },
 
@@ -1576,28 +1689,28 @@ export const SInt32Rules = {
             break;
           }
 
-          message.lt = reader.sint32();
+          message.lessThan = { $case: "lt", lt: reader.sint32() };
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.lte = reader.sint32();
+          message.lessThan = { $case: "lte", lte: reader.sint32() };
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.gt = reader.sint32();
+          message.greaterThan = { $case: "gt", gt: reader.sint32() };
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.gte = reader.sint32();
+          message.greaterThan = { $case: "gte", gte: reader.sint32() };
           continue;
         case 6:
           if (tag === 48) {
@@ -1633,13 +1746,6 @@ export const SInt32Rules = {
           }
 
           break;
-        case 8:
-          if (tag !== 64) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1652,14 +1758,11 @@ export const SInt32Rules = {
 
 function createBaseSInt64Rules(): SInt64Rules {
   return {
-    const: "0",
-    lt: "0",
-    lte: "0",
-    gt: "0",
-    gte: "0",
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
   };
 }
 
@@ -1668,20 +1771,24 @@ export const SInt64Rules = {
     message: SInt64Rules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== "0") {
+    if (message.const !== undefined) {
       writer.uint32(8).sint64(message.const);
     }
-    if (message.lt !== "0") {
-      writer.uint32(16).sint64(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(16).sint64(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(24).sint64(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== "0") {
-      writer.uint32(24).sint64(message.lte);
-    }
-    if (message.gt !== "0") {
-      writer.uint32(32).sint64(message.gt);
-    }
-    if (message.gte !== "0") {
-      writer.uint32(40).sint64(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(32).sint64(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(40).sint64(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -1693,9 +1800,6 @@ export const SInt64Rules = {
       writer.sint64(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
-    }
     return writer;
   },
 
@@ -1719,28 +1823,40 @@ export const SInt64Rules = {
             break;
           }
 
-          message.lt = longToString(reader.sint64() as Long);
+          message.lessThan = {
+            $case: "lt",
+            lt: longToString(reader.sint64() as Long),
+          };
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.lte = longToString(reader.sint64() as Long);
+          message.lessThan = {
+            $case: "lte",
+            lte: longToString(reader.sint64() as Long),
+          };
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.gt = longToString(reader.sint64() as Long);
+          message.greaterThan = {
+            $case: "gt",
+            gt: longToString(reader.sint64() as Long),
+          };
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.gte = longToString(reader.sint64() as Long);
+          message.greaterThan = {
+            $case: "gte",
+            gte: longToString(reader.sint64() as Long),
+          };
           continue;
         case 6:
           if (tag === 48) {
@@ -1776,13 +1892,6 @@ export const SInt64Rules = {
           }
 
           break;
-        case 8:
-          if (tag !== 64) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1795,14 +1904,11 @@ export const SInt64Rules = {
 
 function createBaseFixed32Rules(): Fixed32Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
   };
 }
 
@@ -1811,20 +1917,24 @@ export const Fixed32Rules = {
     message: Fixed32Rules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== undefined) {
       writer.uint32(13).fixed32(message.const);
     }
-    if (message.lt !== 0) {
-      writer.uint32(21).fixed32(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(21).fixed32(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(29).fixed32(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== 0) {
-      writer.uint32(29).fixed32(message.lte);
-    }
-    if (message.gt !== 0) {
-      writer.uint32(37).fixed32(message.gt);
-    }
-    if (message.gte !== 0) {
-      writer.uint32(45).fixed32(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(37).fixed32(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(45).fixed32(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -1836,9 +1946,6 @@ export const Fixed32Rules = {
       writer.fixed32(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
-    }
     return writer;
   },
 
@@ -1862,28 +1969,28 @@ export const Fixed32Rules = {
             break;
           }
 
-          message.lt = reader.fixed32();
+          message.lessThan = { $case: "lt", lt: reader.fixed32() };
           continue;
         case 3:
           if (tag !== 29) {
             break;
           }
 
-          message.lte = reader.fixed32();
+          message.lessThan = { $case: "lte", lte: reader.fixed32() };
           continue;
         case 4:
           if (tag !== 37) {
             break;
           }
 
-          message.gt = reader.fixed32();
+          message.greaterThan = { $case: "gt", gt: reader.fixed32() };
           continue;
         case 5:
           if (tag !== 45) {
             break;
           }
 
-          message.gte = reader.fixed32();
+          message.greaterThan = { $case: "gte", gte: reader.fixed32() };
           continue;
         case 6:
           if (tag === 53) {
@@ -1919,13 +2026,6 @@ export const Fixed32Rules = {
           }
 
           break;
-        case 8:
-          if (tag !== 64) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1938,14 +2038,11 @@ export const Fixed32Rules = {
 
 function createBaseFixed64Rules(): Fixed64Rules {
   return {
-    const: "0",
-    lt: "0",
-    lte: "0",
-    gt: "0",
-    gte: "0",
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
   };
 }
 
@@ -1954,20 +2051,24 @@ export const Fixed64Rules = {
     message: Fixed64Rules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== "0") {
+    if (message.const !== undefined) {
       writer.uint32(9).fixed64(message.const);
     }
-    if (message.lt !== "0") {
-      writer.uint32(17).fixed64(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(17).fixed64(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(25).fixed64(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== "0") {
-      writer.uint32(25).fixed64(message.lte);
-    }
-    if (message.gt !== "0") {
-      writer.uint32(33).fixed64(message.gt);
-    }
-    if (message.gte !== "0") {
-      writer.uint32(41).fixed64(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(33).fixed64(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(41).fixed64(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -1979,9 +2080,6 @@ export const Fixed64Rules = {
       writer.fixed64(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
-    }
     return writer;
   },
 
@@ -2005,28 +2103,40 @@ export const Fixed64Rules = {
             break;
           }
 
-          message.lt = longToString(reader.fixed64() as Long);
+          message.lessThan = {
+            $case: "lt",
+            lt: longToString(reader.fixed64() as Long),
+          };
           continue;
         case 3:
           if (tag !== 25) {
             break;
           }
 
-          message.lte = longToString(reader.fixed64() as Long);
+          message.lessThan = {
+            $case: "lte",
+            lte: longToString(reader.fixed64() as Long),
+          };
           continue;
         case 4:
           if (tag !== 33) {
             break;
           }
 
-          message.gt = longToString(reader.fixed64() as Long);
+          message.greaterThan = {
+            $case: "gt",
+            gt: longToString(reader.fixed64() as Long),
+          };
           continue;
         case 5:
           if (tag !== 41) {
             break;
           }
 
-          message.gte = longToString(reader.fixed64() as Long);
+          message.greaterThan = {
+            $case: "gte",
+            gte: longToString(reader.fixed64() as Long),
+          };
           continue;
         case 6:
           if (tag === 49) {
@@ -2062,13 +2172,6 @@ export const Fixed64Rules = {
           }
 
           break;
-        case 8:
-          if (tag !== 64) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2081,14 +2184,11 @@ export const Fixed64Rules = {
 
 function createBaseSFixed32Rules(): SFixed32Rules {
   return {
-    const: 0,
-    lt: 0,
-    lte: 0,
-    gt: 0,
-    gte: 0,
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
   };
 }
 
@@ -2097,20 +2197,24 @@ export const SFixed32Rules = {
     message: SFixed32Rules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== undefined) {
       writer.uint32(13).sfixed32(message.const);
     }
-    if (message.lt !== 0) {
-      writer.uint32(21).sfixed32(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(21).sfixed32(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(29).sfixed32(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== 0) {
-      writer.uint32(29).sfixed32(message.lte);
-    }
-    if (message.gt !== 0) {
-      writer.uint32(37).sfixed32(message.gt);
-    }
-    if (message.gte !== 0) {
-      writer.uint32(45).sfixed32(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(37).sfixed32(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(45).sfixed32(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -2122,9 +2226,6 @@ export const SFixed32Rules = {
       writer.sfixed32(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
-    }
     return writer;
   },
 
@@ -2148,28 +2249,28 @@ export const SFixed32Rules = {
             break;
           }
 
-          message.lt = reader.sfixed32();
+          message.lessThan = { $case: "lt", lt: reader.sfixed32() };
           continue;
         case 3:
           if (tag !== 29) {
             break;
           }
 
-          message.lte = reader.sfixed32();
+          message.lessThan = { $case: "lte", lte: reader.sfixed32() };
           continue;
         case 4:
           if (tag !== 37) {
             break;
           }
 
-          message.gt = reader.sfixed32();
+          message.greaterThan = { $case: "gt", gt: reader.sfixed32() };
           continue;
         case 5:
           if (tag !== 45) {
             break;
           }
 
-          message.gte = reader.sfixed32();
+          message.greaterThan = { $case: "gte", gte: reader.sfixed32() };
           continue;
         case 6:
           if (tag === 53) {
@@ -2205,13 +2306,6 @@ export const SFixed32Rules = {
           }
 
           break;
-        case 8:
-          if (tag !== 64) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2224,14 +2318,11 @@ export const SFixed32Rules = {
 
 function createBaseSFixed64Rules(): SFixed64Rules {
   return {
-    const: "0",
-    lt: "0",
-    lte: "0",
-    gt: "0",
-    gte: "0",
+    const: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
-    ignoreEmpty: false,
   };
 }
 
@@ -2240,20 +2331,24 @@ export const SFixed64Rules = {
     message: SFixed64Rules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== "0") {
+    if (message.const !== undefined) {
       writer.uint32(9).sfixed64(message.const);
     }
-    if (message.lt !== "0") {
-      writer.uint32(17).sfixed64(message.lt);
+    switch (message.lessThan?.$case) {
+      case "lt":
+        writer.uint32(17).sfixed64(message.lessThan.lt);
+        break;
+      case "lte":
+        writer.uint32(25).sfixed64(message.lessThan.lte);
+        break;
     }
-    if (message.lte !== "0") {
-      writer.uint32(25).sfixed64(message.lte);
-    }
-    if (message.gt !== "0") {
-      writer.uint32(33).sfixed64(message.gt);
-    }
-    if (message.gte !== "0") {
-      writer.uint32(41).sfixed64(message.gte);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        writer.uint32(33).sfixed64(message.greaterThan.gt);
+        break;
+      case "gte":
+        writer.uint32(41).sfixed64(message.greaterThan.gte);
+        break;
     }
     writer.uint32(50).fork();
     for (const v of message.in) {
@@ -2265,9 +2360,6 @@ export const SFixed64Rules = {
       writer.sfixed64(v);
     }
     writer.ldelim();
-    if (message.ignoreEmpty === true) {
-      writer.uint32(64).bool(message.ignoreEmpty);
-    }
     return writer;
   },
 
@@ -2291,28 +2383,40 @@ export const SFixed64Rules = {
             break;
           }
 
-          message.lt = longToString(reader.sfixed64() as Long);
+          message.lessThan = {
+            $case: "lt",
+            lt: longToString(reader.sfixed64() as Long),
+          };
           continue;
         case 3:
           if (tag !== 25) {
             break;
           }
 
-          message.lte = longToString(reader.sfixed64() as Long);
+          message.lessThan = {
+            $case: "lte",
+            lte: longToString(reader.sfixed64() as Long),
+          };
           continue;
         case 4:
           if (tag !== 33) {
             break;
           }
 
-          message.gt = longToString(reader.sfixed64() as Long);
+          message.greaterThan = {
+            $case: "gt",
+            gt: longToString(reader.sfixed64() as Long),
+          };
           continue;
         case 5:
           if (tag !== 41) {
             break;
           }
 
-          message.gte = longToString(reader.sfixed64() as Long);
+          message.greaterThan = {
+            $case: "gte",
+            gte: longToString(reader.sfixed64() as Long),
+          };
           continue;
         case 6:
           if (tag === 49) {
@@ -2348,13 +2452,6 @@ export const SFixed64Rules = {
           }
 
           break;
-        case 8:
-          if (tag !== 64) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2366,7 +2463,7 @@ export const SFixed64Rules = {
 };
 
 function createBaseBoolRules(): BoolRules {
-  return { const: false };
+  return { const: undefined };
 }
 
 export const BoolRules = {
@@ -2374,7 +2471,7 @@ export const BoolRules = {
     message: BoolRules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const === true) {
+    if (message.const !== undefined) {
       writer.uint32(8).bool(message.const);
     }
     return writer;
@@ -2407,23 +2504,22 @@ export const BoolRules = {
 
 function createBaseStringRules(): StringRules {
   return {
-    const: "",
-    len: "0",
-    minLen: "0",
-    maxLen: "0",
-    lenBytes: "0",
-    minBytes: "0",
-    maxBytes: "0",
-    pattern: "",
-    prefix: "",
-    suffix: "",
-    contains: "",
-    notContains: "",
+    const: undefined,
+    len: undefined,
+    minLen: undefined,
+    maxLen: undefined,
+    lenBytes: undefined,
+    minBytes: undefined,
+    maxBytes: undefined,
+    pattern: undefined,
+    prefix: undefined,
+    suffix: undefined,
+    contains: undefined,
+    notContains: undefined,
     in: [],
     notIn: [],
     wellKnown: undefined,
-    strict: false,
-    ignoreEmpty: false,
+    strict: undefined,
   };
 }
 
@@ -2432,40 +2528,40 @@ export const StringRules = {
     message: StringRules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== "") {
+    if (message.const !== undefined) {
       writer.uint32(10).string(message.const);
     }
-    if (message.len !== "0") {
+    if (message.len !== undefined) {
       writer.uint32(152).uint64(message.len);
     }
-    if (message.minLen !== "0") {
+    if (message.minLen !== undefined) {
       writer.uint32(16).uint64(message.minLen);
     }
-    if (message.maxLen !== "0") {
+    if (message.maxLen !== undefined) {
       writer.uint32(24).uint64(message.maxLen);
     }
-    if (message.lenBytes !== "0") {
+    if (message.lenBytes !== undefined) {
       writer.uint32(160).uint64(message.lenBytes);
     }
-    if (message.minBytes !== "0") {
+    if (message.minBytes !== undefined) {
       writer.uint32(32).uint64(message.minBytes);
     }
-    if (message.maxBytes !== "0") {
+    if (message.maxBytes !== undefined) {
       writer.uint32(40).uint64(message.maxBytes);
     }
-    if (message.pattern !== "") {
+    if (message.pattern !== undefined) {
       writer.uint32(50).string(message.pattern);
     }
-    if (message.prefix !== "") {
+    if (message.prefix !== undefined) {
       writer.uint32(58).string(message.prefix);
     }
-    if (message.suffix !== "") {
+    if (message.suffix !== undefined) {
       writer.uint32(66).string(message.suffix);
     }
-    if (message.contains !== "") {
+    if (message.contains !== undefined) {
       writer.uint32(74).string(message.contains);
     }
-    if (message.notContains !== "") {
+    if (message.notContains !== undefined) {
       writer.uint32(186).string(message.notContains);
     }
     for (const v of message.in) {
@@ -2502,15 +2598,30 @@ export const StringRules = {
       case "uuid":
         writer.uint32(176).bool(message.wellKnown.uuid);
         break;
+      case "ipWithPrefixlen":
+        writer.uint32(208).bool(message.wellKnown.ipWithPrefixlen);
+        break;
+      case "ipv4WithPrefixlen":
+        writer.uint32(216).bool(message.wellKnown.ipv4WithPrefixlen);
+        break;
+      case "ipv6WithPrefixlen":
+        writer.uint32(224).bool(message.wellKnown.ipv6WithPrefixlen);
+        break;
+      case "ipPrefix":
+        writer.uint32(232).bool(message.wellKnown.ipPrefix);
+        break;
+      case "ipv4Prefix":
+        writer.uint32(240).bool(message.wellKnown.ipv4Prefix);
+        break;
+      case "ipv6Prefix":
+        writer.uint32(248).bool(message.wellKnown.ipv6Prefix);
+        break;
       case "wellKnownRegex":
         writer.uint32(192).int32(message.wellKnown.wellKnownRegex);
         break;
     }
-    if (message.strict === true) {
+    if (message.strict !== undefined) {
       writer.uint32(200).bool(message.strict);
-    }
-    if (message.ignoreEmpty === true) {
-      writer.uint32(208).bool(message.ignoreEmpty);
     }
     return writer;
   },
@@ -2684,6 +2795,63 @@ export const StringRules = {
 
           message.wellKnown = { $case: "uuid", uuid: reader.bool() };
           continue;
+        case 26:
+          if (tag !== 208) {
+            break;
+          }
+
+          message.wellKnown = {
+            $case: "ipWithPrefixlen",
+            ipWithPrefixlen: reader.bool(),
+          };
+          continue;
+        case 27:
+          if (tag !== 216) {
+            break;
+          }
+
+          message.wellKnown = {
+            $case: "ipv4WithPrefixlen",
+            ipv4WithPrefixlen: reader.bool(),
+          };
+          continue;
+        case 28:
+          if (tag !== 224) {
+            break;
+          }
+
+          message.wellKnown = {
+            $case: "ipv6WithPrefixlen",
+            ipv6WithPrefixlen: reader.bool(),
+          };
+          continue;
+        case 29:
+          if (tag !== 232) {
+            break;
+          }
+
+          message.wellKnown = { $case: "ipPrefix", ipPrefix: reader.bool() };
+          continue;
+        case 30:
+          if (tag !== 240) {
+            break;
+          }
+
+          message.wellKnown = {
+            $case: "ipv4Prefix",
+            ipv4Prefix: reader.bool(),
+          };
+          continue;
+        case 31:
+          if (tag !== 248) {
+            break;
+          }
+
+          message.wellKnown = {
+            $case: "ipv6Prefix",
+            ipv6Prefix: reader.bool(),
+          };
+          continue;
         case 24:
           if (tag !== 192) {
             break;
@@ -2701,13 +2869,6 @@ export const StringRules = {
 
           message.strict = reader.bool();
           continue;
-        case 26:
-          if (tag !== 208) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2720,18 +2881,17 @@ export const StringRules = {
 
 function createBaseBytesRules(): BytesRules {
   return {
-    const: new Uint8Array(0),
-    len: "0",
-    minLen: "0",
-    maxLen: "0",
-    pattern: "",
-    prefix: new Uint8Array(0),
-    suffix: new Uint8Array(0),
-    contains: new Uint8Array(0),
+    const: undefined,
+    len: undefined,
+    minLen: undefined,
+    maxLen: undefined,
+    pattern: undefined,
+    prefix: undefined,
+    suffix: undefined,
+    contains: undefined,
     in: [],
     notIn: [],
     wellKnown: undefined,
-    ignoreEmpty: false,
   };
 }
 
@@ -2740,28 +2900,28 @@ export const BytesRules = {
     message: BytesRules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const.length !== 0) {
+    if (message.const !== undefined) {
       writer.uint32(10).bytes(message.const);
     }
-    if (message.len !== "0") {
+    if (message.len !== undefined) {
       writer.uint32(104).uint64(message.len);
     }
-    if (message.minLen !== "0") {
+    if (message.minLen !== undefined) {
       writer.uint32(16).uint64(message.minLen);
     }
-    if (message.maxLen !== "0") {
+    if (message.maxLen !== undefined) {
       writer.uint32(24).uint64(message.maxLen);
     }
-    if (message.pattern !== "") {
+    if (message.pattern !== undefined) {
       writer.uint32(34).string(message.pattern);
     }
-    if (message.prefix.length !== 0) {
+    if (message.prefix !== undefined) {
       writer.uint32(42).bytes(message.prefix);
     }
-    if (message.suffix.length !== 0) {
+    if (message.suffix !== undefined) {
       writer.uint32(50).bytes(message.suffix);
     }
-    if (message.contains.length !== 0) {
+    if (message.contains !== undefined) {
       writer.uint32(58).bytes(message.contains);
     }
     for (const v of message.in) {
@@ -2780,9 +2940,6 @@ export const BytesRules = {
       case "ipv6":
         writer.uint32(96).bool(message.wellKnown.ipv6);
         break;
-    }
-    if (message.ignoreEmpty === true) {
-      writer.uint32(112).bool(message.ignoreEmpty);
     }
     return writer;
   },
@@ -2886,13 +3043,6 @@ export const BytesRules = {
 
           message.wellKnown = { $case: "ipv6", ipv6: reader.bool() };
           continue;
-        case 14:
-          if (tag !== 112) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2904,7 +3054,7 @@ export const BytesRules = {
 };
 
 function createBaseEnumRules(): EnumRules {
-  return { const: 0, definedOnly: false, in: [], notIn: [] };
+  return { const: undefined, definedOnly: undefined, in: [], notIn: [] };
 }
 
 export const EnumRules = {
@@ -2912,10 +3062,10 @@ export const EnumRules = {
     message: EnumRules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.const !== 0) {
+    if (message.const !== undefined) {
       writer.uint32(8).int32(message.const);
     }
-    if (message.definedOnly === true) {
+    if (message.definedOnly !== undefined) {
       writer.uint32(16).bool(message.definedOnly);
     }
     writer.uint32(26).fork();
@@ -2997,63 +3147,12 @@ export const EnumRules = {
   },
 };
 
-function createBaseMessageRules(): MessageRules {
-  return { skip: false, required: false };
-}
-
-export const MessageRules = {
-  encode(
-    message: MessageRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.skip === true) {
-      writer.uint32(8).bool(message.skip);
-    }
-    if (message.required === true) {
-      writer.uint32(16).bool(message.required);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): MessageRules {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMessageRules();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.skip = reader.bool();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.required = reader.bool();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-};
-
 function createBaseRepeatedRules(): RepeatedRules {
   return {
-    minItems: "0",
-    maxItems: "0",
-    unique: false,
+    minItems: undefined,
+    maxItems: undefined,
+    unique: undefined,
     items: undefined,
-    ignoreEmpty: false,
   };
 }
 
@@ -3062,20 +3161,17 @@ export const RepeatedRules = {
     message: RepeatedRules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.minItems !== "0") {
+    if (message.minItems !== undefined) {
       writer.uint32(8).uint64(message.minItems);
     }
-    if (message.maxItems !== "0") {
+    if (message.maxItems !== undefined) {
       writer.uint32(16).uint64(message.maxItems);
     }
-    if (message.unique === true) {
+    if (message.unique !== undefined) {
       writer.uint32(24).bool(message.unique);
     }
     if (message.items !== undefined) {
-      FieldRules.encode(message.items, writer.uint32(34).fork()).ldelim();
-    }
-    if (message.ignoreEmpty === true) {
-      writer.uint32(40).bool(message.ignoreEmpty);
+      FieldConstraints.encode(message.items, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -3114,14 +3210,7 @@ export const RepeatedRules = {
             break;
           }
 
-          message.items = FieldRules.decode(reader, reader.uint32());
-          continue;
-        case 5:
-          if (tag !== 40) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
+          message.items = FieldConstraints.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -3135,12 +3224,10 @@ export const RepeatedRules = {
 
 function createBaseMapRules(): MapRules {
   return {
-    minPairs: "0",
-    maxPairs: "0",
-    noSparse: false,
+    minPairs: undefined,
+    maxPairs: undefined,
     keys: undefined,
     values: undefined,
-    ignoreEmpty: false,
   };
 }
 
@@ -3149,23 +3236,20 @@ export const MapRules = {
     message: MapRules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.minPairs !== "0") {
+    if (message.minPairs !== undefined) {
       writer.uint32(8).uint64(message.minPairs);
     }
-    if (message.maxPairs !== "0") {
+    if (message.maxPairs !== undefined) {
       writer.uint32(16).uint64(message.maxPairs);
     }
-    if (message.noSparse === true) {
-      writer.uint32(24).bool(message.noSparse);
-    }
     if (message.keys !== undefined) {
-      FieldRules.encode(message.keys, writer.uint32(34).fork()).ldelim();
+      FieldConstraints.encode(message.keys, writer.uint32(34).fork()).ldelim();
     }
     if (message.values !== undefined) {
-      FieldRules.encode(message.values, writer.uint32(42).fork()).ldelim();
-    }
-    if (message.ignoreEmpty === true) {
-      writer.uint32(48).bool(message.ignoreEmpty);
+      FieldConstraints.encode(
+        message.values,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     return writer;
   },
@@ -3192,33 +3276,19 @@ export const MapRules = {
 
           message.maxPairs = longToString(reader.uint64() as Long);
           continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.noSparse = reader.bool();
-          continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.keys = FieldRules.decode(reader, reader.uint32());
+          message.keys = FieldConstraints.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.values = FieldRules.decode(reader, reader.uint32());
-          continue;
-        case 6:
-          if (tag !== 48) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
+          message.values = FieldConstraints.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -3231,7 +3301,7 @@ export const MapRules = {
 };
 
 function createBaseAnyRules(): AnyRules {
-  return { required: false, in: [], notIn: [] };
+  return { in: [], notIn: [] };
 }
 
 export const AnyRules = {
@@ -3239,9 +3309,6 @@ export const AnyRules = {
     message: AnyRules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.required === true) {
-      writer.uint32(8).bool(message.required);
-    }
     for (const v of message.in) {
       writer.uint32(18).string(v!);
     }
@@ -3259,13 +3326,6 @@ export const AnyRules = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.required = reader.bool();
-          continue;
         case 2:
           if (tag !== 18) {
             break;
@@ -3292,12 +3352,9 @@ export const AnyRules = {
 
 function createBaseDurationRules(): DurationRules {
   return {
-    required: false,
     const: undefined,
-    lt: undefined,
-    lte: undefined,
-    gt: undefined,
-    gte: undefined,
+    lessThan: undefined,
+    greaterThan: undefined,
     in: [],
     notIn: [],
   };
@@ -3308,23 +3365,33 @@ export const DurationRules = {
     message: DurationRules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.required === true) {
-      writer.uint32(8).bool(message.required);
-    }
     if (message.const !== undefined) {
       Duration.encode(message.const, writer.uint32(18).fork()).ldelim();
     }
-    if (message.lt !== undefined) {
-      Duration.encode(message.lt, writer.uint32(26).fork()).ldelim();
+    switch (message.lessThan?.$case) {
+      case "lt":
+        Duration.encode(message.lessThan.lt, writer.uint32(26).fork()).ldelim();
+        break;
+      case "lte":
+        Duration.encode(
+          message.lessThan.lte,
+          writer.uint32(34).fork(),
+        ).ldelim();
+        break;
     }
-    if (message.lte !== undefined) {
-      Duration.encode(message.lte, writer.uint32(34).fork()).ldelim();
-    }
-    if (message.gt !== undefined) {
-      Duration.encode(message.gt, writer.uint32(42).fork()).ldelim();
-    }
-    if (message.gte !== undefined) {
-      Duration.encode(message.gte, writer.uint32(50).fork()).ldelim();
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        Duration.encode(
+          message.greaterThan.gt,
+          writer.uint32(42).fork(),
+        ).ldelim();
+        break;
+      case "gte":
+        Duration.encode(
+          message.greaterThan.gte,
+          writer.uint32(50).fork(),
+        ).ldelim();
+        break;
     }
     for (const v of message.in) {
       Duration.encode(v!, writer.uint32(58).fork()).ldelim();
@@ -3343,13 +3410,6 @@ export const DurationRules = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.required = reader.bool();
-          continue;
         case 2:
           if (tag !== 18) {
             break;
@@ -3362,28 +3422,40 @@ export const DurationRules = {
             break;
           }
 
-          message.lt = Duration.decode(reader, reader.uint32());
+          message.lessThan = {
+            $case: "lt",
+            lt: Duration.decode(reader, reader.uint32()),
+          };
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.lte = Duration.decode(reader, reader.uint32());
+          message.lessThan = {
+            $case: "lte",
+            lte: Duration.decode(reader, reader.uint32()),
+          };
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.gt = Duration.decode(reader, reader.uint32());
+          message.greaterThan = {
+            $case: "gt",
+            gt: Duration.decode(reader, reader.uint32()),
+          };
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.gte = Duration.decode(reader, reader.uint32());
+          message.greaterThan = {
+            $case: "gte",
+            gte: Duration.decode(reader, reader.uint32()),
+          };
           continue;
         case 7:
           if (tag !== 58) {
@@ -3411,14 +3483,9 @@ export const DurationRules = {
 
 function createBaseTimestampRules(): TimestampRules {
   return {
-    required: false,
     const: undefined,
-    lt: undefined,
-    lte: undefined,
-    gt: undefined,
-    gte: undefined,
-    ltNow: false,
-    gtNow: false,
+    lessThan: undefined,
+    greaterThan: undefined,
     within: undefined,
   };
 }
@@ -3428,44 +3495,45 @@ export const TimestampRules = {
     message: TimestampRules,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.required === true) {
-      writer.uint32(8).bool(message.required);
-    }
     if (message.const !== undefined) {
       Timestamp.encode(
         toTimestamp(message.const),
         writer.uint32(18).fork(),
       ).ldelim();
     }
-    if (message.lt !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.lt),
-        writer.uint32(26).fork(),
-      ).ldelim();
+    switch (message.lessThan?.$case) {
+      case "lt":
+        Timestamp.encode(
+          toTimestamp(message.lessThan.lt),
+          writer.uint32(26).fork(),
+        ).ldelim();
+        break;
+      case "lte":
+        Timestamp.encode(
+          toTimestamp(message.lessThan.lte),
+          writer.uint32(34).fork(),
+        ).ldelim();
+        break;
+      case "ltNow":
+        writer.uint32(56).bool(message.lessThan.ltNow);
+        break;
     }
-    if (message.lte !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.lte),
-        writer.uint32(34).fork(),
-      ).ldelim();
-    }
-    if (message.gt !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.gt),
-        writer.uint32(42).fork(),
-      ).ldelim();
-    }
-    if (message.gte !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.gte),
-        writer.uint32(50).fork(),
-      ).ldelim();
-    }
-    if (message.ltNow === true) {
-      writer.uint32(56).bool(message.ltNow);
-    }
-    if (message.gtNow === true) {
-      writer.uint32(64).bool(message.gtNow);
+    switch (message.greaterThan?.$case) {
+      case "gt":
+        Timestamp.encode(
+          toTimestamp(message.greaterThan.gt),
+          writer.uint32(42).fork(),
+        ).ldelim();
+        break;
+      case "gte":
+        Timestamp.encode(
+          toTimestamp(message.greaterThan.gte),
+          writer.uint32(50).fork(),
+        ).ldelim();
+        break;
+      case "gtNow":
+        writer.uint32(64).bool(message.greaterThan.gtNow);
+        break;
     }
     if (message.within !== undefined) {
       Duration.encode(message.within, writer.uint32(74).fork()).ldelim();
@@ -3481,13 +3549,6 @@ export const TimestampRules = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.required = reader.bool();
-          continue;
         case 2:
           if (tag !== 18) {
             break;
@@ -3502,46 +3563,54 @@ export const TimestampRules = {
             break;
           }
 
-          message.lt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.lessThan = {
+            $case: "lt",
+            lt: fromTimestamp(Timestamp.decode(reader, reader.uint32())),
+          };
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.lte = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
-          continue;
-        case 5:
-          if (tag !== 42) {
-            break;
-          }
-
-          message.gt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        case 6:
-          if (tag !== 50) {
-            break;
-          }
-
-          message.gte = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.lessThan = {
+            $case: "lte",
+            lte: fromTimestamp(Timestamp.decode(reader, reader.uint32())),
+          };
           continue;
         case 7:
           if (tag !== 56) {
             break;
           }
 
-          message.ltNow = reader.bool();
+          message.lessThan = { $case: "ltNow", ltNow: reader.bool() };
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.greaterThan = {
+            $case: "gt",
+            gt: fromTimestamp(Timestamp.decode(reader, reader.uint32())),
+          };
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.greaterThan = {
+            $case: "gte",
+            gte: fromTimestamp(Timestamp.decode(reader, reader.uint32())),
+          };
           continue;
         case 8:
           if (tag !== 64) {
             break;
           }
 
-          message.gtNow = reader.bool();
+          message.greaterThan = { $case: "gtNow", gtNow: reader.bool() };
           continue;
         case 9:
           if (tag !== 74) {

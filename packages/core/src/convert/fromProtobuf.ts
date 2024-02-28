@@ -406,8 +406,18 @@ function principalRuleActionFromProtobuf({
   };
 }
 
-function outputFromProtobuf({ expr }: OutputProtobuf): Output {
-  return { expr };
+function outputFromProtobuf({ expr, when }: OutputProtobuf): Output {
+  const output: Output = {};
+
+  if (expr) {
+    output.expr = expr;
+  }
+
+  if (when) {
+    output.when = when;
+  }
+
+  return output;
 }
 
 function resourcePolicyFromProtobuf({

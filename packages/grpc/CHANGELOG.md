@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+### Added
+
+- [`Output.when`](../../docs/core.output.when.md) to define [conditional policy rule outputs](https://docs.cerbos.dev/cerbos/latest/policies/outputs) using the Admin API ([#829](https://github.com/cerbos/cerbos-sdk-javascript/pull/829))
+
+  Requires a policy decision point server running Cerbos 0.33+.
+
 ### Changed
 
 - Bump dependency on [@grpc/grpc-js] to 1.10.1 ([#789](https://github.com/cerbos/cerbos-sdk-javascript/pull/789), [#809](https://github.com/cerbos/cerbos-sdk-javascript/pull/809), [#816](https://github.com/cerbos/cerbos-sdk-javascript/pull/816))

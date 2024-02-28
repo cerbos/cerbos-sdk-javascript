@@ -11,6 +11,7 @@ export enum FieldBehavior {
   IMMUTABLE = 5,
   UNORDERED_LIST = 6,
   NON_EMPTY_DEFAULT = 7,
+  IDENTIFIER = 8,
 }
 
 export function fieldBehaviorFromJSON(object: any): FieldBehavior {
@@ -39,6 +40,9 @@ export function fieldBehaviorFromJSON(object: any): FieldBehavior {
     case 7:
     case "NON_EMPTY_DEFAULT":
       return FieldBehavior.NON_EMPTY_DEFAULT;
+    case 8:
+    case "IDENTIFIER":
+      return FieldBehavior.IDENTIFIER;
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FieldBehavior",

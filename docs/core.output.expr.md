@@ -4,10 +4,15 @@
 
 ## Output.expr property
 
-A [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/conditions) expression to evaluate.
+> Warning: This API is now obsolete.
+> 
+> Use [Output.when](./core.output.when.md) instead.
+> 
+
+A [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/conditions) expression to evaluate when the policy rule is fully activated (action, roles, and derived roles match, and condition is met).
 
 **Signature:**
 
 ```typescript
-expr: string;
+expr?: string;
 ```

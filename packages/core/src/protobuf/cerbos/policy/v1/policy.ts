@@ -23,12 +23,22 @@ export interface Policy_VariablesEntry {
   value: string;
 }
 
+export interface SourceAttributes {
+  attributes: { [key: string]: any | undefined };
+}
+
+export interface SourceAttributes_AttributesEntry {
+  key: string;
+  value: any | undefined;
+}
+
 export interface Metadata {
   sourceFile: string;
   annotations: { [key: string]: string };
   hash: string | undefined;
   storeIdentifer: string;
   storeIdentifier: string;
+  sourceAttributes: SourceAttributes | undefined;
 }
 
 export interface Metadata_AnnotationsEntry {
@@ -131,6 +141,12 @@ export interface Match_ExprList {
 
 export interface Output {
   expr: string;
+  when: Output_When | undefined;
+}
+
+export interface Output_When {
+  ruleActivated: string;
+  conditionNotMet: string;
 }
 
 export interface Schemas {

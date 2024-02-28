@@ -17,6 +17,7 @@ export interface PlanResourcesResponse {
   filter: PlanResourcesFilter | undefined;
   meta: PlanResourcesResponse_Meta | undefined;
   validationErrors: ValidationError[];
+  cerbosCallId: string;
 }
 
 export interface PlanResourcesResponse_Meta {
@@ -92,6 +93,7 @@ export interface CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
 export interface CheckResourcesResponse {
   requestId: string;
   results: CheckResourcesResponse_ResultEntry[];
+  cerbosCallId: string;
 }
 
 export interface CheckResourcesResponse_ResultEntry {
@@ -192,6 +194,7 @@ function createBasePlanResourcesResponse(): PlanResourcesResponse {
     filter: undefined,
     meta: undefined,
     validationErrors: [],
+    cerbosCallId: "",
   };
 }
 
@@ -226,6 +229,9 @@ export const PlanResourcesResponse = {
     }
     for (const v of message.validationErrors) {
       ValidationError.encode(v!, writer.uint32(58).fork()).ldelim();
+    }
+    if (message.cerbosCallId !== "") {
+      writer.uint32(66).string(message.cerbosCallId);
     }
     return writer;
   },
@@ -294,6 +300,13 @@ export const PlanResourcesResponse = {
           message.validationErrors.push(
             ValidationError.decode(reader, reader.uint32()),
           );
+          continue;
+        case 8:
+          if (tag !== 66) {
+            break;
+          }
+
+          message.cerbosCallId = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1094,7 +1107,7 @@ export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
 };
 
 function createBaseCheckResourcesResponse(): CheckResourcesResponse {
-  return { requestId: "", results: [] };
+  return { requestId: "", results: [], cerbosCallId: "" };
 }
 
 export const CheckResourcesResponse = {
@@ -1110,6 +1123,9 @@ export const CheckResourcesResponse = {
         v!,
         writer.uint32(18).fork(),
       ).ldelim();
+    }
+    if (message.cerbosCallId !== "") {
+      writer.uint32(26).string(message.cerbosCallId);
     }
     return writer;
   },
@@ -1140,6 +1156,13 @@ export const CheckResourcesResponse = {
           message.results.push(
             CheckResourcesResponse_ResultEntry.decode(reader, reader.uint32()),
           );
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.cerbosCallId = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {

@@ -37,6 +37,7 @@ export * from "./MatchExpr";
 export * from "./MatchNone";
 export * from "./Matches";
 export * from "./Output";
+export * from "./OutputExpressions";
 export * from "./OutputResult";
 export * from "./PlanExpression";
 export * from "./PlanExpressionOperand";

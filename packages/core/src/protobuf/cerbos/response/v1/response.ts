@@ -16,6 +16,7 @@ export interface PlanResourcesResponse {
   filter: PlanResourcesFilter | undefined;
   meta: PlanResourcesResponse_Meta | undefined;
   validationErrors: ValidationError[];
+  cerbosCallId: string;
 }
 
 export interface PlanResourcesResponse_Meta {
@@ -91,6 +92,7 @@ export interface CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
 export interface CheckResourcesResponse {
   requestId: string;
   results: CheckResourcesResponse_ResultEntry[];
+  cerbosCallId: string;
 }
 
 export interface CheckResourcesResponse_ResultEntry {
