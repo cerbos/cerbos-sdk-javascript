@@ -63,7 +63,7 @@
     "eslint-plugin-vitest": "0.3.22",
     "prettier": "3.2.5",
     "prettier-plugin-pkg": "0.18.1",
-    "ts-proto": "1.167.6",
+    "ts-proto": "1.167.8",
     "typescript": "5.3.3"
   }
 }
