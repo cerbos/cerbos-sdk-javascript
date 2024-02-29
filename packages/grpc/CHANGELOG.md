@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+No notable changes.
+
+## [0.16.0] - 2024-02-29
+
 ### Added
 
 - [`Output.when`](../../docs/core.output.when.md) to define [conditional policy rule outputs](https://docs.cerbos.dev/cerbos/latest/policies/outputs) using the Admin API ([#829](https://github.com/cerbos/cerbos-sdk-javascript/pull/829))
@@ -7,6 +11,8 @@
   Requires a policy decision point server running Cerbos 0.33+.
 
 ### Changed
+
+- Bump dependency on [@cerbos/core] to 0.16.0 ([#835](https://github.com/cerbos/cerbos-sdk-javascript/pull/835))
 
 - Bump dependency on [@grpc/grpc-js] to 1.10.1 ([#789](https://github.com/cerbos/cerbos-sdk-javascript/pull/789), [#809](https://github.com/cerbos/cerbos-sdk-javascript/pull/809), [#816](https://github.com/cerbos/cerbos-sdk-javascript/pull/816))
 
@@ -232,7 +238,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.15.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.16.0...HEAD
+[0.16.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.15.0...@cerbos/grpc@0.16.0
 [0.15.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.14.1...@cerbos/grpc@0.15.0
 [0.14.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.14.0...@cerbos/grpc@0.14.1
 [0.14.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.13.0...@cerbos/grpc@0.14.0
