@@ -52,7 +52,7 @@
     "@microsoft/api-documenter": "7.23.34",
     "@microsoft/api-extractor": "7.42.1",
     "@tsconfig/node18": "18.2.2",
-    "@types/node": "18.19.20",
+    "@types/node": "18.19.21",
     "@typescript-eslint/eslint-plugin": "7.1.0",
     "@typescript-eslint/parser": "7.1.0",
     "concurrently": "8.2.2",
