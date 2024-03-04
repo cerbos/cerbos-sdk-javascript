@@ -132,7 +132,7 @@ export async function fetchSpans(
 
       return spans;
     } catch (error) {
-      if (!(isServiceError(error) && error.details === "trace not found")) {
+      if (!isTraceNotFound(error)) {
         throw error;
       }
 
@@ -152,6 +152,13 @@ function isServiceError(error: unknown): error is ServiceError {
     typeof error.details === "string" &&
     "metadata" in error &&
     error.metadata instanceof Metadata
+  );
+}
+
+function isTraceNotFound(error: unknown): error is ServiceError {
+  return (
+    isServiceError(error) &&
+    error.details === "cannot retrieve trace: trace not found"
   );
 }
 
