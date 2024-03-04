@@ -2,7 +2,7 @@ name: cerbos-sdk-javascript-test
 
 services:
   certificates:
-    image: ruby:3.2-alpine
+    image: ruby:3.3-alpine
     entrypoint: /generate-certificates
     volumes:
       - type: bind
