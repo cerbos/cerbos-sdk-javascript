@@ -66,7 +66,7 @@ services:
         condition: service_completed_successfully
 
   mtls:
-    image: traefik:2.11
+    image: traefik:3.0
     command:
       - --entrypoints.grpc.address=:3593
       - --ping
