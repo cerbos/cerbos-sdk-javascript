@@ -3,7 +3,6 @@
   "extends": [
     ":dependencyDashboard",
     ":gitSignOff",
-    ":ignoreModulesAndTests",
     ":prConcurrentLimit10",
     ":prHourlyLimit2",
     "npm:unpublishSafe",
