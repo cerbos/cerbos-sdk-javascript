@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+unscoped_tag="${GITHUB_REF_NAME#@cerbos/}"
+package_name="${unscoped_tag%@*}"
+package_dir="./packages/${package_name}"
+expected_version="${unscoped_tag#*@}"
+actual_version=$(jq --raw-output .version < "${package_dir}/package.json")
+
+printf "Publishing \e[1;36m%s@%s\e[0m\n" "${package_name}" "${expected_version}"
+
+if [[ "${expected_version}" != "${actual_version}" ]]; then
+  printf "\e[31mTagged version (%s) does not match package version (%s)\e[0m\n" "${expected_version}" "${actual_version}" >&2
+  exit 1
+fi
+
+pnpm --filter="${package_dir}" publish --no-git-checks

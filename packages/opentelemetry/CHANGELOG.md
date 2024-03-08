@@ -2,6 +2,8 @@
 
 ### Changed
 
+- Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements) ([#852](https://github.com/cerbos/cerbos-sdk-javascript/pull/852))
+
 - Bump dependencies on [@opentelemetry/api] to 1.8.0, [@opentelemetry/instrumentation] to 0.49.1, and [@opentelemetry/semantic-conventions] to 1.22.0 ([#836](https://github.com/cerbos/cerbos-sdk-javascript/pull/836))
 
 ## [0.4.3] - 2024-02-29
