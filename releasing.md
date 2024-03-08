@@ -85,20 +85,10 @@ $ git push --set-upstream origin prepare-release
 
 ### Merge the pull request
 
-### Check out latest main
+### Fetch latest main
 
 ```console
 $ git fetch upstream
-
-$ git switch --detach upstream/main
-```
-
-### Make a clean build
-
-```console
-$ pnpm run clean
-
-$ pnpm install
 ```
 
 ### Push release tags to GitHub
@@ -106,13 +96,9 @@ $ pnpm install
 For each changed package, create a signed release tag (see [GitHub's documentation about GPG signature verification](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification#gpg-commit-signature-verification)).
 
 ```console
-$ git tag --sign --message="@cerbos/${package}@${version}" @cerbos/${package}@${version}
+$ git tag --sign --message="@cerbos/${package}@${version}" @cerbos/${package}@${version} upstream/main
 
 $ git push upstream @cerbos/${package}@${version}
 ```
 
-### Publish changed packages to npm
-
-```console
-$ pnpm --filter="./packages/${package}" publish
-```
+Pushing a tag triggers GitHub Actions to publish the corresponding package to the npm registry.

@@ -31,5 +31,9 @@
   },
   "devDependencies": {
     "@types/qs": "6.9.12"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

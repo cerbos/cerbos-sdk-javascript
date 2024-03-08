@@ -27,5 +27,9 @@
   ],
   "dependencies": {
     "@cerbos/core": "^0.16.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

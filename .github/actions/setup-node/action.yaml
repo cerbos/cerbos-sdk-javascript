@@ -19,6 +19,7 @@ runs:
         cache: pnpm
         node-version: ${{ inputs.node-version }}
         node-version-file: ${{ inputs.node-version == '' && '.node-version' || '' }}
+        registry-url: https://registry.npmjs.com
 
     - name: Install dependencies
       shell: bash
