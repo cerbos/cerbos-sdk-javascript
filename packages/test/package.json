@@ -19,7 +19,7 @@
     "@opentelemetry/sdk-trace-node": "1.22.0",
     "@opentelemetry/semantic-conventions": "1.22.0",
     "@types/semver": "7.5.8",
-    "jose": "5.2.2",
+    "jose": "5.2.3",
     "long": "5.2.3",
     "protobufjs": "7.2.6",
     "semver": "7.6.0",
