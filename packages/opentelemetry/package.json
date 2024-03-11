@@ -25,6 +25,25 @@
     "lib/**/*.js.map",
     "src/**/*.ts"
   ],
+  "keywords": [
+    "Cerbos",
+    "authorization",
+    "access control",
+    "roles",
+    "permissions",
+    "policy",
+    "security",
+    "role-based access control",
+    "RBAC",
+    "attribute-based access control",
+    "ABAC",
+    "policy decision point",
+    "PDP",
+    "OpenTelemetry",
+    "instrumentation",
+    "tracing",
+    "metrics"
+  ],
   "dependencies": {
     "@cerbos/core": "^0.16.0",
     "@opentelemetry/api": "^1.8.0",

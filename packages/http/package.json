@@ -25,6 +25,24 @@
     "lib/**/*.js.map",
     "src/**/*.ts"
   ],
+  "keywords": [
+    "Cerbos",
+    "authorization",
+    "access control",
+    "roles",
+    "permissions",
+    "policy",
+    "security",
+    "role-based access control",
+    "RBAC",
+    "attribute-based access control",
+    "ABAC",
+    "policy decision point",
+    "PDP",
+    "HTTP",
+    "REST",
+    "browser"
+  ],
   "dependencies": {
     "@cerbos/core": "^0.16.0",
     "qs": "^6.11.2"
