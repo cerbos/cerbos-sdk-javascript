@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "@cerbos/core": "^0.16.0",
-    "qs": "^6.11.2"
+    "qs": "^6.12.0"
   },
   "devDependencies": {
     "@types/qs": "6.9.12"
