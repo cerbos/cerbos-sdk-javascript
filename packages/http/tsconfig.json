@@ -1,8 +1,7 @@
 {
-  "extends": "../tsconfig.strict.json",
+  "extends": "../tsconfig.base.json",
   "include": ["src"],
-  "exclude": ["src/protobuf"],
-  "references": [{ "path": "../core" }, { "path": "./tsconfig.protobuf.json" }],
+  "references": [{ "path": "../core" }],
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",

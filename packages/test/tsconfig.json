@@ -1,15 +1,13 @@
 {
-  "extends": "../tsconfig.strict.json",
+  "extends": "../tsconfig.base.json",
   "include": ["src", "vitest.config.mts"],
-  "exclude": ["src/protobuf"],
   "references": [
     { "path": "../core" },
     { "path": "../embedded" },
     { "path": "../files" },
     { "path": "../grpc" },
     { "path": "../http" },
-    { "path": "../opentelemetry" },
-    { "path": "./tsconfig.protobuf.json" }
+    { "path": "../opentelemetry" }
   ],
   "compilerOptions": {
     "lib": ["ES2020", "DOM"],

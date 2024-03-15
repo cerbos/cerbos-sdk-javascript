@@ -17,6 +17,9 @@ importers:
       '@tsconfig/node18':
         specifier: 18.2.2
         version: 18.2.2
+      '@tsconfig/strictest':
+        specifier: 2.0.3
+        version: 2.0.3
       '@types/node':
         specifier: 18.19.24
         version: 18.19.24
@@ -1017,6 +1020,10 @@ packages:
 
   /@tsconfig/node18@18.2.2:
     resolution: {integrity: sha512-d6McJeGsuoRlwWZmVIeE8CUA27lu6jLjvv1JzqmpsytOYYbVi1tHZEnwCNVOXnj4pyLvneZlFlpXUK+X9wBWyw==}
+    dev: true
+
+  /@tsconfig/strictest@2.0.3:
+    resolution: {integrity: sha512-MroLvRhMbqtXI5WBSwoomro6OQS4xnCoudUrMb20JO0vLKUs0bAaCEcvM/immEBSJjFAK1l6jW1oAO8q3Ancrg==}
     dev: true
 
   /@types/argparse@1.0.38:
