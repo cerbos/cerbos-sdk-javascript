@@ -6,6 +6,7 @@ parserOptions:
     - packages/*/tsconfig.json
 
 plugins:
+  - eslint-plugin-tsdoc
   - import
 
 extends:
@@ -29,6 +30,9 @@ rules:
   func-style:
     - warn
     - declaration
+  import/consistent-type-specifier-style:
+    - warn
+    - prefer-top-level
   import/export: warn
   import/newline-after-import: warn
   import/no-duplicates: warn
@@ -47,27 +51,21 @@ rules:
         orderImportKind: asc
         caseInsensitive: true
       newlines-between: always
-  import/consistent-type-specifier-style:
-    - warn
-    - prefer-top-level
   no-console: warn
   sort-imports:
     - warn
     - ignoreDeclarationSort: true
+  tsdoc/syntax: warn
 
 overrides:
-  - files:
-      - "**/*.ts"
-    plugins:
-      - eslint-plugin-tsdoc
-    rules:
-      tsdoc/syntax: warn
-
   - files:
       - packages/test/src/**/*.test.ts
       - packages/test/src/helpers.ts
     extends:
       - plugin:vitest/recommended
+    settings:
+      vitest:
+        typecheck: true
     rules:
       "@typescript-eslint/no-unsafe-assignment": off
       "@typescript-eslint/no-unsafe-member-access": off
