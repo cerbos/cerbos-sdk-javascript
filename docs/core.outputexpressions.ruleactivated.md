@@ -9,5 +9,5 @@
 **Signature:**
 
 ```typescript
-ruleActivated?: string;
+ruleActivated?: string | undefined;
 ```

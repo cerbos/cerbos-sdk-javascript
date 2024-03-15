@@ -23,19 +23,19 @@ export interface CheckResourcesRequest {
    *
    * @defaultValue `{}`
    */
-  auxData?: AuxData;
+  auxData?: AuxData | undefined;
 
   /**
    * Include {@link CheckResourcesResultMetadata | additional metadata} in the results?
    *
    * @defaultValue `false`
    */
-  includeMetadata?: boolean;
+  includeMetadata?: boolean | undefined;
 
   /**
    * An identifier for tracing the request.
    *
    * @defaultValue A randomly-generated UUID.
    */
-  requestId?: string;
+  requestId?: string | undefined;
 }

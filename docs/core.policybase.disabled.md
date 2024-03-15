@@ -9,5 +9,5 @@ Whether the policy is ignored by the Cerbos engine.
 **Signature:**
 
 ```typescript
-disabled?: boolean;
+disabled?: boolean | undefined;
 ```

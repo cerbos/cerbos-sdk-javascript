@@ -9,5 +9,5 @@ Application-specific attributes describing the principal.
 **Signature:**
 
 ```typescript
-attr?: Record<string, Value>;
+attr?: Record<string, Value> | undefined;
 ```

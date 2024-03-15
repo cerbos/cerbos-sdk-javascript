@@ -9,5 +9,5 @@ The policy version to use when authorizing the principal.
 **Signature:**
 
 ```typescript
-policyVersion?: string;
+policyVersion?: string | undefined;
 ```

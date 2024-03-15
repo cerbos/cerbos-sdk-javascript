@@ -9,5 +9,5 @@ A JSON Web Token (JWT) to use as an auxiliary data source.
 **Signature:**
 
 ```typescript
-jwt?: JWT;
+jwt?: JWT | undefined;
 ```

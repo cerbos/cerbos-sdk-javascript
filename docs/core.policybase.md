@@ -16,9 +16,9 @@ export interface PolicyBase
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [apiVersion?](./core.policybase.apiversion.md) |  | string | _(Optional)_ API version of the policy. |
-|  [description?](./core.policybase.description.md) |  | string | _(Optional)_ Description of the policy. |
-|  [disabled?](./core.policybase.disabled.md) |  | boolean | _(Optional)_ Whether the policy is ignored by the Cerbos engine. |
+|  [apiVersion?](./core.policybase.apiversion.md) |  | string \| undefined | _(Optional)_ API version of the policy. |
+|  [description?](./core.policybase.description.md) |  | string \| undefined | _(Optional)_ Description of the policy. |
+|  [disabled?](./core.policybase.disabled.md) |  | boolean \| undefined | _(Optional)_ Whether the policy is ignored by the Cerbos engine. |
 |  [metadata?](./core.policybase.metadata.md) |  | [PolicyMetadata](./core.policymetadata.md) \| undefined | _(Optional)_ Metadata about the policy. |
-|  [variables?](./core.policybase.variables.md) |  | Record&lt;string, string&gt; | _(Optional)_ Variable expressions defined for the policy. |
+|  [variables?](./core.policybase.variables.md) |  | Record&lt;string, string&gt; \| undefined | _(Optional)_ Variable expressions defined for the policy. |
 

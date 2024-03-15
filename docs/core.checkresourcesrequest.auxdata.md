@@ -9,5 +9,5 @@ Auxiliary data.
 **Signature:**
 
 ```typescript
-auxData?: AuxData;
+auxData?: AuxData | undefined;
 ```

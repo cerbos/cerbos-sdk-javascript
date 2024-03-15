@@ -7,10 +7,10 @@ export interface Variables {
   /**
    * Names of variable sets to import.
    */
-  import?: string[];
+  import?: string[] | undefined;
 
   /**
    * Variable expressions defined for the policy.
    */
-  local?: Record<string, string>;
+  local?: Record<string, string> | undefined;
 }

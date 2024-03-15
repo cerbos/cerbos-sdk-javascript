@@ -9,5 +9,5 @@ An identifier for tracing the request.
 **Signature:**
 
 ```typescript
-requestId?: string;
+requestId?: string | undefined;
 ```

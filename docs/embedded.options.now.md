@@ -9,7 +9,7 @@ Function returning the current time, to be used when evaluating policy condition
 **Signature:**
 
 ```typescript
-now?: () => Date | number;
+now?: (() => Date | number) | undefined;
 ```
 
 ## Remarks

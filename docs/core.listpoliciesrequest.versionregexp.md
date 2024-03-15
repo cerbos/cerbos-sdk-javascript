@@ -9,7 +9,7 @@ Only include policies with a version matching the given regular expression.
 **Signature:**
 
 ```typescript
-versionRegexp?: string;
+versionRegexp?: string | undefined;
 ```
 
 ## Remarks

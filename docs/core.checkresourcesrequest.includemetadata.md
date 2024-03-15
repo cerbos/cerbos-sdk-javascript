@@ -9,5 +9,5 @@ Include [additional metadata](./core.checkresourcesresultmetadata.md) in the res
 **Signature:**
 
 ```typescript
-includeMetadata?: boolean;
+includeMetadata?: boolean | undefined;
 ```

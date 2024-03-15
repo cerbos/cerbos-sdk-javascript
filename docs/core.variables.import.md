@@ -9,5 +9,5 @@ Names of variable sets to import.
 **Signature:**
 
 ```typescript
-import?: string[];
+import?: string[] | undefined;
 ```

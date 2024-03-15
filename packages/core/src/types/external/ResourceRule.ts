@@ -24,7 +24,7 @@ export interface ResourceRule {
   /**
    * Derived roles to which the rule applies.
    */
-  derivedRoles?: string[];
+  derivedRoles?: string[] | undefined;
 
   /**
    * Static roles to which the rule applies.
@@ -32,7 +32,7 @@ export interface ResourceRule {
    * @remarks
    * The special value `*` can be used to disregard roles when evaluating the rule.
    */
-  roles?: string[];
+  roles?: string[] | undefined;
 
   /**
    * The condition that must be met for the rule to apply.
@@ -42,7 +42,7 @@ export interface ResourceRule {
   /**
    * A descriptive name for the rule.
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * User-defined output to be produced when evaluating the rule.

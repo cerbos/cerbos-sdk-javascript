@@ -9,7 +9,7 @@ Static roles to which the rule applies.
 **Signature:**
 
 ```typescript
-roles?: string[];
+roles?: string[] | undefined;
 ```
 
 ## Remarks

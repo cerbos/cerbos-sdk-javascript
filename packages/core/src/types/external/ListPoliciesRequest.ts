@@ -12,7 +12,7 @@ export interface ListPoliciesRequest {
    *
    * @defaultValue `false`
    */
-  includeDisabled?: boolean;
+  includeDisabled?: boolean | undefined;
 
   /**
    * Only include policies with a name matching the given regular expression.
@@ -23,7 +23,7 @@ export interface ListPoliciesRequest {
    *
    * Requires the Cerbos policy decision point server to be at least v0.29.
    */
-  nameRegexp?: string;
+  nameRegexp?: string | undefined;
 
   /**
    * Only include policies with a scope matching the given regular expression.
@@ -34,7 +34,7 @@ export interface ListPoliciesRequest {
    *
    * Requires the Cerbos policy decision point server to be at least v0.29.
    */
-  scopeRegexp?: string;
+  scopeRegexp?: string | undefined;
 
   /**
    * Only include policies with a version matching the given regular expression.
@@ -45,5 +45,5 @@ export interface ListPoliciesRequest {
    *
    * Requires the Cerbos policy decision point server to be at least v0.29.
    */
-  versionRegexp?: string;
+  versionRegexp?: string | undefined;
 }

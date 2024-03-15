@@ -26,7 +26,7 @@ export interface ResourcePolicyBody {
   /**
    * Name of a set of {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles | derived roles} to import.
    */
-  importDerivedRoles?: string[];
+  importDerivedRoles?: string[] | undefined;
 
   /**
    * Rules defining the actions that can be performed on the resource.
@@ -36,7 +36,7 @@ export interface ResourcePolicyBody {
   /**
    * {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies | Scope} of the policy.
    */
-  scope?: string;
+  scope?: string | undefined;
 
   /**
    * {@link https://docs.cerbos.dev/cerbos/latest/policies/schemas | Schemas} for principal and resource attributes.

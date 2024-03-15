@@ -9,5 +9,5 @@ Variable expressions defined for the policy.
 **Signature:**
 
 ```typescript
-local?: Record<string, string>;
+local?: Record<string, string> | undefined;
 ```

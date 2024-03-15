@@ -14,5 +14,5 @@ Application-specific attributes describing the resource (deprecated).
 **Signature:**
 
 ```typescript
-attributes?: Record<string, Value>;
+attributes?: Record<string, Value> | undefined;
 ```

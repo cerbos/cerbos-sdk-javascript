@@ -30,7 +30,7 @@ export interface PrincipalPolicyBody {
   /**
    * {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies | Scope} of the policy.
    */
-  scope?: string;
+  scope?: string | undefined;
 
   /**
    * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables | Variables} defined for use in conditions.

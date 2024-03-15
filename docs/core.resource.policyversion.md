@@ -9,5 +9,5 @@ The policy version to use when checking the principal's permissions on the resou
 **Signature:**
 
 ```typescript
-policyVersion?: string;
+policyVersion?: string | undefined;
 ```

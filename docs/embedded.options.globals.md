@@ -9,5 +9,5 @@
 **Signature:**
 
 ```typescript
-globals?: Record<string, Value>;
+globals?: Record<string, Value> | undefined;
 ```

@@ -9,5 +9,5 @@ Include [additional metadata](./core.planresourcesmetadata.md) in the plan?
 **Signature:**
 
 ```typescript
-includeMetadata?: boolean;
+includeMetadata?: boolean | undefined;
 ```

@@ -29,7 +29,7 @@ export interface PrincipalRuleAction {
   /**
    * A descriptive name for the rule.
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * User-defined output to be produced when evaluating the rule.

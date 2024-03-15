@@ -9,5 +9,5 @@ The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policie
 **Signature:**
 
 ```typescript
-scope?: string;
+scope?: string | undefined;
 ```

@@ -15,5 +15,5 @@ export interface JWT {
    * @remarks
    * Optional if the PDP server only has one JWKS configured or verification disabled.
    */
-  keySetId?: string;
+  keySetId?: string | undefined;
 }

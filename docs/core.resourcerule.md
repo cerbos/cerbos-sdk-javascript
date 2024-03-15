@@ -18,9 +18,9 @@ export interface ResourceRule
 |  --- | --- | --- | --- |
 |  [actions](./core.resourcerule.actions.md) |  | string\[\] | The actions to which the rule applies. |
 |  [condition?](./core.resourcerule.condition.md) |  | [Condition](./core.condition.md) \| undefined | _(Optional)_ The condition that must be met for the rule to apply. |
-|  [derivedRoles?](./core.resourcerule.derivedroles.md) |  | string\[\] | _(Optional)_ Derived roles to which the rule applies. |
+|  [derivedRoles?](./core.resourcerule.derivedroles.md) |  | string\[\] \| undefined | _(Optional)_ Derived roles to which the rule applies. |
 |  [effect](./core.resourcerule.effect.md) |  | [Effect](./core.effect.md) | The effect of the rule. |
-|  [name?](./core.resourcerule.name.md) |  | string | _(Optional)_ A descriptive name for the rule. |
+|  [name?](./core.resourcerule.name.md) |  | string \| undefined | _(Optional)_ A descriptive name for the rule. |
 |  [output?](./core.resourcerule.output.md) |  | [Output](./core.output.md) \| undefined | _(Optional)_ User-defined output to be produced when evaluating the rule. |
-|  [roles?](./core.resourcerule.roles.md) |  | string\[\] | _(Optional)_ Static roles to which the rule applies. |
+|  [roles?](./core.resourcerule.roles.md) |  | string\[\] \| undefined | _(Optional)_ Static roles to which the rule applies. |
 

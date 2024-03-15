@@ -16,6 +16,6 @@ export interface Variables
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [import?](./core.variables.import.md) |  | string\[\] | _(Optional)_ Names of variable sets to import. |
-|  [local?](./core.variables.local.md) |  | Record&lt;string, string&gt; | _(Optional)_ Variable expressions defined for the policy. |
+|  [import?](./core.variables.import.md) |  | string\[\] \| undefined | _(Optional)_ Names of variable sets to import. |
+|  [local?](./core.variables.local.md) |  | Record&lt;string, string&gt; \| undefined | _(Optional)_ Variable expressions defined for the policy. |
 

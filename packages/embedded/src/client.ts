@@ -26,14 +26,14 @@ export interface Options {
    *
    * @defaultValue (throw an error if a JWT is passed)
    */
-  decodeJWTPayload?: DecodeJWTPayload;
+  decodeJWTPayload?: DecodeJWTPayload | undefined;
 
   /**
    * {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine#globals | Global variables} to pass environment-specific information to policy conditions.
    *
    * @defaultValue `{}`
    */
-  globals?: Record<string, Value>;
+  globals?: Record<string, Value> | undefined;
 
   /**
    * Function returning the current time, to be used when evaluating policy conditions.
@@ -43,7 +43,7 @@ export interface Options {
    *
    * @defaultValue `Date.now`
    */
-  now?: () => Date | number;
+  now?: (() => Date | number) | undefined;
 }
 
 /**

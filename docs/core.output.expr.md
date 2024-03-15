@@ -14,5 +14,5 @@ A [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/co
 **Signature:**
 
 ```typescript
-expr?: string;
+expr?: string | undefined;
 ```
