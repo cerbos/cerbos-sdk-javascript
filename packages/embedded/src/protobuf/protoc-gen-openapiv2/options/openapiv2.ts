@@ -792,7 +792,7 @@ export const Operation = {
     if (message.schemes?.length) {
       obj.schemes = message.schemes.map((e) => schemeToJSON(e));
     }
-    if (message.deprecated === true) {
+    if (message.deprecated !== false) {
       obj.deprecated = message.deprecated;
     }
     if (message.security?.length) {
@@ -901,7 +901,7 @@ export const HeaderParameter = {
     if (message.format !== "") {
       obj.format = message.format;
     }
-    if (message.required === true) {
+    if (message.required !== false) {
       obj.required = message.required;
     }
     return obj;
@@ -1251,7 +1251,7 @@ export const Schema = {
     if (message.discriminator !== "") {
       obj.discriminator = message.discriminator;
     }
-    if (message.readOnly === true) {
+    if (message.readOnly !== false) {
       obj.readOnly = message.readOnly;
     }
     if (message.externalDocs !== undefined) {
@@ -1349,7 +1349,7 @@ export const JSONSchema = {
     if (message.default !== "") {
       obj.default = message.default;
     }
-    if (message.readOnly === true) {
+    if (message.readOnly !== false) {
       obj.readOnly = message.readOnly;
     }
     if (message.example !== "") {
@@ -1361,13 +1361,13 @@ export const JSONSchema = {
     if (message.maximum !== 0) {
       obj.maximum = message.maximum;
     }
-    if (message.exclusiveMaximum === true) {
+    if (message.exclusiveMaximum !== false) {
       obj.exclusiveMaximum = message.exclusiveMaximum;
     }
     if (message.minimum !== 0) {
       obj.minimum = message.minimum;
     }
-    if (message.exclusiveMinimum === true) {
+    if (message.exclusiveMinimum !== false) {
       obj.exclusiveMinimum = message.exclusiveMinimum;
     }
     if (message.maxLength !== 0) {
@@ -1385,7 +1385,7 @@ export const JSONSchema = {
     if (message.minItems !== 0) {
       obj.minItems = Math.round(message.minItems);
     }
-    if (message.uniqueItems === true) {
+    if (message.uniqueItems !== false) {
       obj.uniqueItems = message.uniqueItems;
     }
     if (message.maxProperties !== 0) {

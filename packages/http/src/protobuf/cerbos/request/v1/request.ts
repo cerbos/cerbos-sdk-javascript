@@ -228,7 +228,7 @@ export const PlanResourcesRequest = {
     if (message.auxData !== undefined) {
       obj.auxData = AuxData.toJSON(message.auxData);
     }
-    if (message.includeMeta === true) {
+    if (message.includeMeta !== false) {
       obj.includeMeta = message.includeMeta;
     }
     return obj;
@@ -273,7 +273,7 @@ export const CheckResourceSetRequest = {
     if (message.resource !== undefined) {
       obj.resource = ResourceSet.toJSON(message.resource);
     }
-    if (message.includeMeta === true) {
+    if (message.includeMeta !== false) {
       obj.includeMeta = message.includeMeta;
     }
     if (message.auxData !== undefined) {
@@ -489,7 +489,7 @@ export const CheckResourcesRequest = {
     if (message.requestId !== "") {
       obj.requestId = message.requestId;
     }
-    if (message.includeMeta === true) {
+    if (message.includeMeta !== false) {
       obj.includeMeta = message.includeMeta;
     }
     if (message.principal !== undefined) {
@@ -684,7 +684,7 @@ export const ListPoliciesRequest = {
 
   toJSON(message: ListPoliciesRequest): unknown {
     const obj: any = {};
-    if (message.includeDisabled === true) {
+    if (message.includeDisabled !== false) {
       obj.includeDisabled = message.includeDisabled;
     }
     if (message.nameRegexp !== "") {
@@ -828,7 +828,7 @@ export const ReloadStoreRequest = {
 
   toJSON(message: ReloadStoreRequest): unknown {
     const obj: any = {};
-    if (message.wait === true) {
+    if (message.wait !== false) {
       obj.wait = message.wait;
     }
     return obj;

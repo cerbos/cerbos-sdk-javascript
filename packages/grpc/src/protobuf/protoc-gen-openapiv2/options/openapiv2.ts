@@ -674,7 +674,7 @@ export const Operation = {
       writer.int32(v);
     }
     writer.ldelim();
-    if (message.deprecated === true) {
+    if (message.deprecated !== false) {
       writer.uint32(88).bool(message.deprecated);
     }
     for (const v of message.security) {
@@ -1000,7 +1000,7 @@ export const HeaderParameter = {
     if (message.format !== "") {
       writer.uint32(34).string(message.format);
     }
-    if (message.required === true) {
+    if (message.required !== false) {
       writer.uint32(40).bool(message.required);
     }
     return writer;
@@ -1763,7 +1763,7 @@ export const Schema = {
     if (message.discriminator !== "") {
       writer.uint32(18).string(message.discriminator);
     }
-    if (message.readOnly === true) {
+    if (message.readOnly !== false) {
       writer.uint32(24).bool(message.readOnly);
     }
     if (message.externalDocs !== undefined) {
@@ -1882,7 +1882,7 @@ export const JSONSchema = {
     if (message.default !== "") {
       writer.uint32(58).string(message.default);
     }
-    if (message.readOnly === true) {
+    if (message.readOnly !== false) {
       writer.uint32(64).bool(message.readOnly);
     }
     if (message.example !== "") {
@@ -1894,13 +1894,13 @@ export const JSONSchema = {
     if (message.maximum !== 0) {
       writer.uint32(89).double(message.maximum);
     }
-    if (message.exclusiveMaximum === true) {
+    if (message.exclusiveMaximum !== false) {
       writer.uint32(96).bool(message.exclusiveMaximum);
     }
     if (message.minimum !== 0) {
       writer.uint32(105).double(message.minimum);
     }
-    if (message.exclusiveMinimum === true) {
+    if (message.exclusiveMinimum !== false) {
       writer.uint32(112).bool(message.exclusiveMinimum);
     }
     if (message.maxLength !== "0") {
@@ -1918,7 +1918,7 @@ export const JSONSchema = {
     if (message.minItems !== "0") {
       writer.uint32(168).uint64(message.minItems);
     }
-    if (message.uniqueItems === true) {
+    if (message.uniqueItems !== false) {
       writer.uint32(176).bool(message.uniqueItems);
     }
     if (message.maxProperties !== "0") {

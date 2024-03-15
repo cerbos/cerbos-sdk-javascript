@@ -221,7 +221,7 @@ export const Policy = {
     if (message.apiVersion !== "") {
       obj.apiVersion = message.apiVersion;
     }
-    if (message.disabled === true) {
+    if (message.disabled !== false) {
       obj.disabled = message.disabled;
     }
     if (message.description !== "") {

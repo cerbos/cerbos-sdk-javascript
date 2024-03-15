@@ -15,27 +15,27 @@ export enum Edition {
 }
 
 export interface FileOptions {
-  javaPackage: string;
-  javaOuterClassname: string;
-  javaMultipleFiles: boolean;
-  javaGenerateEqualsAndHash: boolean;
-  javaStringCheckUtf8: boolean;
-  optimizeFor: FileOptions_OptimizeMode;
-  goPackage: string;
-  ccGenericServices: boolean;
-  javaGenericServices: boolean;
-  pyGenericServices: boolean;
-  phpGenericServices: boolean;
-  deprecated: boolean;
-  ccEnableArenas: boolean;
-  objcClassPrefix: string;
-  csharpNamespace: string;
-  swiftPrefix: string;
-  phpClassPrefix: string;
-  phpNamespace: string;
-  phpMetadataNamespace: string;
-  rubyPackage: string;
-  features: FeatureSet | undefined;
+  javaPackage?: string | undefined;
+  javaOuterClassname?: string | undefined;
+  javaMultipleFiles?: boolean | undefined;
+  javaGenerateEqualsAndHash?: boolean | undefined;
+  javaStringCheckUtf8?: boolean | undefined;
+  optimizeFor?: FileOptions_OptimizeMode | undefined;
+  goPackage?: string | undefined;
+  ccGenericServices?: boolean | undefined;
+  javaGenericServices?: boolean | undefined;
+  pyGenericServices?: boolean | undefined;
+  phpGenericServices?: boolean | undefined;
+  deprecated?: boolean | undefined;
+  ccEnableArenas?: boolean | undefined;
+  objcClassPrefix?: string | undefined;
+  csharpNamespace?: string | undefined;
+  swiftPrefix?: string | undefined;
+  phpClassPrefix?: string | undefined;
+  phpNamespace?: string | undefined;
+  phpMetadataNamespace?: string | undefined;
+  rubyPackage?: string | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -46,28 +46,28 @@ export enum FileOptions_OptimizeMode {
 }
 
 export interface MessageOptions {
-  messageSetWireFormat: boolean;
-  noStandardDescriptorAccessor: boolean;
-  deprecated: boolean;
-  mapEntry: boolean;
-  deprecatedLegacyJsonFieldConflicts: boolean;
-  features: FeatureSet | undefined;
+  messageSetWireFormat?: boolean | undefined;
+  noStandardDescriptorAccessor?: boolean | undefined;
+  deprecated?: boolean | undefined;
+  mapEntry?: boolean | undefined;
+  deprecatedLegacyJsonFieldConflicts?: boolean | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
 export interface FieldOptions {
-  ctype: FieldOptions_CType;
-  packed: boolean;
-  jstype: FieldOptions_JSType;
-  lazy: boolean;
-  unverifiedLazy: boolean;
-  deprecated: boolean;
-  weak: boolean;
-  debugRedact: boolean;
-  retention: FieldOptions_OptionRetention;
+  ctype?: FieldOptions_CType | undefined;
+  packed?: boolean | undefined;
+  jstype?: FieldOptions_JSType | undefined;
+  lazy?: boolean | undefined;
+  unverifiedLazy?: boolean | undefined;
+  deprecated?: boolean | undefined;
+  weak?: boolean | undefined;
+  debugRedact?: boolean | undefined;
+  retention?: FieldOptions_OptionRetention | undefined;
   targets: FieldOptions_OptionTargetType[];
   editionDefaults: FieldOptions_EditionDefault[];
-  features: FeatureSet | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -103,25 +103,25 @@ export enum FieldOptions_OptionTargetType {
 }
 
 export interface FieldOptions_EditionDefault {
-  edition: Edition;
-  value: string;
+  edition?: Edition | undefined;
+  value?: string | undefined;
 }
 
 export interface OneofOptions {
-  features: FeatureSet | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
 export interface ServiceOptions {
-  features: FeatureSet | undefined;
-  deprecated: boolean;
+  features?: FeatureSet | undefined;
+  deprecated?: boolean | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
 export interface MethodOptions {
-  deprecated: boolean;
-  idempotencyLevel: MethodOptions_IdempotencyLevel;
-  features: FeatureSet | undefined;
+  deprecated?: boolean | undefined;
+  idempotencyLevel?: MethodOptions_IdempotencyLevel | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -133,12 +133,12 @@ export enum MethodOptions_IdempotencyLevel {
 
 export interface UninterpretedOption {
   name: UninterpretedOption_NamePart[];
-  identifierValue: string;
-  positiveIntValue: string;
-  negativeIntValue: string;
-  doubleValue: number;
-  stringValue: Uint8Array;
-  aggregateValue: string;
+  identifierValue?: string | undefined;
+  positiveIntValue?: string | undefined;
+  negativeIntValue?: string | undefined;
+  doubleValue?: number | undefined;
+  stringValue?: Uint8Array | undefined;
+  aggregateValue?: string | undefined;
 }
 
 export interface UninterpretedOption_NamePart {
@@ -147,12 +147,12 @@ export interface UninterpretedOption_NamePart {
 }
 
 export interface FeatureSet {
-  fieldPresence: FeatureSet_FieldPresence;
-  enumType: FeatureSet_EnumType;
-  repeatedFieldEncoding: FeatureSet_RepeatedFieldEncoding;
-  utf8Validation: FeatureSet_Utf8Validation;
-  messageEncoding: FeatureSet_MessageEncoding;
-  jsonFormat: FeatureSet_JsonFormat;
+  fieldPresence?: FeatureSet_FieldPresence | undefined;
+  enumType?: FeatureSet_EnumType | undefined;
+  repeatedFieldEncoding?: FeatureSet_RepeatedFieldEncoding | undefined;
+  utf8Validation?: FeatureSet_Utf8Validation | undefined;
+  messageEncoding?: FeatureSet_MessageEncoding | undefined;
+  jsonFormat?: FeatureSet_JsonFormat | undefined;
 }
 
 export enum FeatureSet_FieldPresence {

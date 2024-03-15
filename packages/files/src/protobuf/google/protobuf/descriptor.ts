@@ -51,18 +51,18 @@ export function editionFromJSON(object: any): Edition {
 }
 
 export interface FieldOptions {
-  ctype: FieldOptions_CType;
-  packed: boolean;
-  jstype: FieldOptions_JSType;
-  lazy: boolean;
-  unverifiedLazy: boolean;
-  deprecated: boolean;
-  weak: boolean;
-  debugRedact: boolean;
-  retention: FieldOptions_OptionRetention;
+  ctype?: FieldOptions_CType | undefined;
+  packed?: boolean | undefined;
+  jstype?: FieldOptions_JSType | undefined;
+  lazy?: boolean | undefined;
+  unverifiedLazy?: boolean | undefined;
+  deprecated?: boolean | undefined;
+  weak?: boolean | undefined;
+  debugRedact?: boolean | undefined;
+  retention?: FieldOptions_OptionRetention | undefined;
   targets: FieldOptions_OptionTargetType[];
   editionDefaults: FieldOptions_EditionDefault[];
-  features: FeatureSet | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -199,23 +199,23 @@ export function fieldOptions_OptionTargetTypeFromJSON(
 }
 
 export interface FieldOptions_EditionDefault {
-  edition: Edition;
-  value: string;
+  edition?: Edition | undefined;
+  value?: string | undefined;
 }
 
 export interface OneofOptions {
-  features: FeatureSet | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
 export interface UninterpretedOption {
   name: UninterpretedOption_NamePart[];
-  identifierValue: string;
-  positiveIntValue: string;
-  negativeIntValue: string;
-  doubleValue: number;
-  stringValue: Uint8Array;
-  aggregateValue: string;
+  identifierValue?: string | undefined;
+  positiveIntValue?: string | undefined;
+  negativeIntValue?: string | undefined;
+  doubleValue?: number | undefined;
+  stringValue?: Uint8Array | undefined;
+  aggregateValue?: string | undefined;
 }
 
 export interface UninterpretedOption_NamePart {
@@ -224,12 +224,12 @@ export interface UninterpretedOption_NamePart {
 }
 
 export interface FeatureSet {
-  fieldPresence: FeatureSet_FieldPresence;
-  enumType: FeatureSet_EnumType;
-  repeatedFieldEncoding: FeatureSet_RepeatedFieldEncoding;
-  utf8Validation: FeatureSet_Utf8Validation;
-  messageEncoding: FeatureSet_MessageEncoding;
-  jsonFormat: FeatureSet_JsonFormat;
+  fieldPresence?: FeatureSet_FieldPresence | undefined;
+  enumType?: FeatureSet_EnumType | undefined;
+  repeatedFieldEncoding?: FeatureSet_RepeatedFieldEncoding | undefined;
+  utf8Validation?: FeatureSet_Utf8Validation | undefined;
+  messageEncoding?: FeatureSet_MessageEncoding | undefined;
+  jsonFormat?: FeatureSet_JsonFormat | undefined;
 }
 
 export enum FeatureSet_FieldPresence {

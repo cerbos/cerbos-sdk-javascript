@@ -362,13 +362,13 @@ export const FieldConstraints = {
     for (const v of message.cel) {
       Constraint.encode(v!, writer.uint32(186).fork()).ldelim();
     }
-    if (message.skipped === true) {
+    if (message.skipped !== false) {
       writer.uint32(192).bool(message.skipped);
     }
-    if (message.required === true) {
+    if (message.required !== false) {
       writer.uint32(200).bool(message.required);
     }
-    if (message.ignoreEmpty === true) {
+    if (message.ignoreEmpty !== false) {
       writer.uint32(208).bool(message.ignoreEmpty);
     }
     switch (message.type?.$case) {
@@ -922,7 +922,7 @@ export const FloatRules = {
       writer.float(v);
     }
     writer.ldelim();
-    if (message.finite === true) {
+    if (message.finite !== false) {
       writer.uint32(64).bool(message.finite);
     }
     return writer;
@@ -1090,7 +1090,7 @@ export const DoubleRules = {
       writer.double(v);
     }
     writer.ldelim();
-    if (message.finite === true) {
+    if (message.finite !== false) {
       writer.uint32(64).bool(message.finite);
     }
     return writer;
