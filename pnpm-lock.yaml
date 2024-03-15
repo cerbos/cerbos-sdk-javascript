@@ -88,8 +88,8 @@ importers:
         specifier: ^0.16.0
         version: link:../core
       '@grpc/grpc-js':
-        specifier: ^1.10.1
-        version: 1.10.1
+        specifier: ^1.10.2
+        version: 1.10.2
       long:
         specifier: ^5.2.3
         version: 5.2.3
@@ -146,8 +146,8 @@ importers:
         specifier: workspace:*
         version: link:../opentelemetry
       '@grpc/grpc-js':
-        specifier: 1.10.1
-        version: 1.10.1
+        specifier: 1.10.2
+        version: 1.10.2
       '@opentelemetry/api':
         specifier: 1.8.0
         version: 1.8.0
@@ -548,12 +548,12 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@grpc/grpc-js@1.10.1:
-    resolution: {integrity: sha512-55ONqFytZExfOIjF1RjXPcVmT/jJqFzbbDqxK9jmRV4nxiYWtL9hENSW1Jfx0SdZfrvoqd44YJ/GJTqfRrawSQ==}
-    engines: {node: ^8.13.0 || >=10.10.0}
+  /@grpc/grpc-js@1.10.2:
+    resolution: {integrity: sha512-lSbgu8iayAod8O0YcoXK3+bMFGThY2svtN35Zlm9VepsB3jfyIcoupKknEht7Kh9Q8ITjsp0J4KpYo9l4+FhNg==}
+    engines: {node: '>=12.10.0'}
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 18.19.23
+      '@js-sdsl/ordered-map': 4.4.2
 
   /@grpc/proto-loader@0.7.10:
     resolution: {integrity: sha512-CAqDfoaQ8ykFd9zqBDn4k6iWT9loLAlc2ETmDFS9JCD70gDcnA4L3AFEo2iV7KyAtAAHFW9ftq1Fz+Vsgq80RQ==}
@@ -621,6 +621,9 @@ packages:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
+
+  /@js-sdsl/ordered-map@4.4.2:
+    resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
 
   /@microsoft/api-documenter@7.23.37(@types/node@18.19.23):
     resolution: {integrity: sha512-8StaLn4tLGllcgXCNGnqQRLFcWT9JILv5dHm2rYDdMWDQulInNKJnc2P9rpcI5mrO+cKcIRl75kdq4QrI9zunw==}
