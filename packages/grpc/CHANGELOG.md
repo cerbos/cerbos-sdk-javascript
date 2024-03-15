@@ -4,6 +4,8 @@
 
 - Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements) ([#852](https://github.com/cerbos/cerbos-sdk-javascript/pull/852))
 
+- Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
+
 - Bump dependency on [@grpc/grpc-js] to 1.10.2 ([#864](https://github.com/cerbos/cerbos-sdk-javascript/pull/864))
 
 ## [0.16.0] - 2024-02-29

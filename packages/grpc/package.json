@@ -16,8 +16,12 @@
   "engines": {
     "node": ">= 18"
   },
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
   "files": [
     "lib/**/*.d.ts",
     "lib/**/*.d.ts.map",
