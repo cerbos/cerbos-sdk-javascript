@@ -494,13 +494,13 @@ export const FieldConstraints = {
     if (message.cel?.length) {
       obj.cel = message.cel.map((e) => Constraint.toJSON(e));
     }
-    if (message.skipped === true) {
+    if (message.skipped !== false) {
       obj.skipped = message.skipped;
     }
-    if (message.required === true) {
+    if (message.required !== false) {
       obj.required = message.required;
     }
-    if (message.ignoreEmpty === true) {
+    if (message.ignoreEmpty !== false) {
       obj.ignoreEmpty = message.ignoreEmpty;
     }
     if (message.type?.$case === "float") {
@@ -617,7 +617,7 @@ export const FloatRules = {
     if (message.notIn?.length) {
       obj.notIn = message.notIn;
     }
-    if (message.finite === true) {
+    if (message.finite !== false) {
       obj.finite = message.finite;
     }
     return obj;
@@ -671,7 +671,7 @@ export const DoubleRules = {
     if (message.notIn?.length) {
       obj.notIn = message.notIn;
     }
-    if (message.finite === true) {
+    if (message.finite !== false) {
       obj.finite = message.finite;
     }
     return obj;

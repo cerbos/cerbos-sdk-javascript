@@ -78,27 +78,27 @@ export function editionToJSON(object: Edition): string {
 }
 
 export interface FileOptions {
-  javaPackage: string;
-  javaOuterClassname: string;
-  javaMultipleFiles: boolean;
-  javaGenerateEqualsAndHash: boolean;
-  javaStringCheckUtf8: boolean;
-  optimizeFor: FileOptions_OptimizeMode;
-  goPackage: string;
-  ccGenericServices: boolean;
-  javaGenericServices: boolean;
-  pyGenericServices: boolean;
-  phpGenericServices: boolean;
-  deprecated: boolean;
-  ccEnableArenas: boolean;
-  objcClassPrefix: string;
-  csharpNamespace: string;
-  swiftPrefix: string;
-  phpClassPrefix: string;
-  phpNamespace: string;
-  phpMetadataNamespace: string;
-  rubyPackage: string;
-  features: FeatureSet | undefined;
+  javaPackage?: string | undefined;
+  javaOuterClassname?: string | undefined;
+  javaMultipleFiles?: boolean | undefined;
+  javaGenerateEqualsAndHash?: boolean | undefined;
+  javaStringCheckUtf8?: boolean | undefined;
+  optimizeFor?: FileOptions_OptimizeMode | undefined;
+  goPackage?: string | undefined;
+  ccGenericServices?: boolean | undefined;
+  javaGenericServices?: boolean | undefined;
+  pyGenericServices?: boolean | undefined;
+  phpGenericServices?: boolean | undefined;
+  deprecated?: boolean | undefined;
+  ccEnableArenas?: boolean | undefined;
+  objcClassPrefix?: string | undefined;
+  csharpNamespace?: string | undefined;
+  swiftPrefix?: string | undefined;
+  phpClassPrefix?: string | undefined;
+  phpNamespace?: string | undefined;
+  phpMetadataNamespace?: string | undefined;
+  rubyPackage?: string | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -150,28 +150,28 @@ export function fileOptions_OptimizeModeToJSON(
 }
 
 export interface MessageOptions {
-  messageSetWireFormat: boolean;
-  noStandardDescriptorAccessor: boolean;
-  deprecated: boolean;
-  mapEntry: boolean;
-  deprecatedLegacyJsonFieldConflicts: boolean;
-  features: FeatureSet | undefined;
+  messageSetWireFormat?: boolean | undefined;
+  noStandardDescriptorAccessor?: boolean | undefined;
+  deprecated?: boolean | undefined;
+  mapEntry?: boolean | undefined;
+  deprecatedLegacyJsonFieldConflicts?: boolean | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
 export interface FieldOptions {
-  ctype: FieldOptions_CType;
-  packed: boolean;
-  jstype: FieldOptions_JSType;
-  lazy: boolean;
-  unverifiedLazy: boolean;
-  deprecated: boolean;
-  weak: boolean;
-  debugRedact: boolean;
-  retention: FieldOptions_OptionRetention;
+  ctype?: FieldOptions_CType | undefined;
+  packed?: boolean | undefined;
+  jstype?: FieldOptions_JSType | undefined;
+  lazy?: boolean | undefined;
+  unverifiedLazy?: boolean | undefined;
+  deprecated?: boolean | undefined;
+  weak?: boolean | undefined;
+  debugRedact?: boolean | undefined;
+  retention?: FieldOptions_OptionRetention | undefined;
   targets: FieldOptions_OptionTargetType[];
   editionDefaults: FieldOptions_EditionDefault[];
-  features: FeatureSet | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -390,20 +390,20 @@ export function fieldOptions_OptionTargetTypeToJSON(
 }
 
 export interface FieldOptions_EditionDefault {
-  edition: Edition;
-  value: string;
+  edition?: Edition | undefined;
+  value?: string | undefined;
 }
 
 export interface ServiceOptions {
-  features: FeatureSet | undefined;
-  deprecated: boolean;
+  features?: FeatureSet | undefined;
+  deprecated?: boolean | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
 export interface MethodOptions {
-  deprecated: boolean;
-  idempotencyLevel: MethodOptions_IdempotencyLevel;
-  features: FeatureSet | undefined;
+  deprecated?: boolean | undefined;
+  idempotencyLevel?: MethodOptions_IdempotencyLevel | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -456,12 +456,12 @@ export function methodOptions_IdempotencyLevelToJSON(
 
 export interface UninterpretedOption {
   name: UninterpretedOption_NamePart[];
-  identifierValue: string;
-  positiveIntValue: number;
-  negativeIntValue: number;
-  doubleValue: number;
-  stringValue: Uint8Array;
-  aggregateValue: string;
+  identifierValue?: string | undefined;
+  positiveIntValue?: number | undefined;
+  negativeIntValue?: number | undefined;
+  doubleValue?: number | undefined;
+  stringValue?: Uint8Array | undefined;
+  aggregateValue?: string | undefined;
 }
 
 export interface UninterpretedOption_NamePart {
@@ -470,12 +470,12 @@ export interface UninterpretedOption_NamePart {
 }
 
 export interface FeatureSet {
-  fieldPresence: FeatureSet_FieldPresence;
-  enumType: FeatureSet_EnumType;
-  repeatedFieldEncoding: FeatureSet_RepeatedFieldEncoding;
-  utf8Validation: FeatureSet_Utf8Validation;
-  messageEncoding: FeatureSet_MessageEncoding;
-  jsonFormat: FeatureSet_JsonFormat;
+  fieldPresence?: FeatureSet_FieldPresence | undefined;
+  enumType?: FeatureSet_EnumType | undefined;
+  repeatedFieldEncoding?: FeatureSet_RepeatedFieldEncoding | undefined;
+  utf8Validation?: FeatureSet_Utf8Validation | undefined;
+  messageEncoding?: FeatureSet_MessageEncoding | undefined;
+  jsonFormat?: FeatureSet_JsonFormat | undefined;
 }
 
 export enum FeatureSet_FieldPresence {
@@ -795,7 +795,7 @@ export const FileOptions = {
         : false,
       ccEnableArenas: isSet(object.ccEnableArenas)
         ? globalThis.Boolean(object.ccEnableArenas)
-        : false,
+        : true,
       objcClassPrefix: isSet(object.objcClassPrefix)
         ? globalThis.String(object.objcClassPrefix)
         : "",
@@ -830,64 +830,100 @@ export const FileOptions = {
 
   toJSON(message: FileOptions): unknown {
     const obj: any = {};
-    if (message.javaPackage !== "") {
+    if (message.javaPackage !== undefined && message.javaPackage !== "") {
       obj.javaPackage = message.javaPackage;
     }
-    if (message.javaOuterClassname !== "") {
+    if (
+      message.javaOuterClassname !== undefined &&
+      message.javaOuterClassname !== ""
+    ) {
       obj.javaOuterClassname = message.javaOuterClassname;
     }
-    if (message.javaMultipleFiles === true) {
+    if (
+      message.javaMultipleFiles !== undefined &&
+      message.javaMultipleFiles !== false
+    ) {
       obj.javaMultipleFiles = message.javaMultipleFiles;
     }
-    if (message.javaGenerateEqualsAndHash === true) {
+    if (
+      message.javaGenerateEqualsAndHash !== undefined &&
+      message.javaGenerateEqualsAndHash !== false
+    ) {
       obj.javaGenerateEqualsAndHash = message.javaGenerateEqualsAndHash;
     }
-    if (message.javaStringCheckUtf8 === true) {
+    if (
+      message.javaStringCheckUtf8 !== undefined &&
+      message.javaStringCheckUtf8 !== false
+    ) {
       obj.javaStringCheckUtf8 = message.javaStringCheckUtf8;
     }
-    if (message.optimizeFor !== 1) {
+    if (message.optimizeFor !== undefined && message.optimizeFor !== 1) {
       obj.optimizeFor = fileOptions_OptimizeModeToJSON(message.optimizeFor);
     }
-    if (message.goPackage !== "") {
+    if (message.goPackage !== undefined && message.goPackage !== "") {
       obj.goPackage = message.goPackage;
     }
-    if (message.ccGenericServices === true) {
+    if (
+      message.ccGenericServices !== undefined &&
+      message.ccGenericServices !== false
+    ) {
       obj.ccGenericServices = message.ccGenericServices;
     }
-    if (message.javaGenericServices === true) {
+    if (
+      message.javaGenericServices !== undefined &&
+      message.javaGenericServices !== false
+    ) {
       obj.javaGenericServices = message.javaGenericServices;
     }
-    if (message.pyGenericServices === true) {
+    if (
+      message.pyGenericServices !== undefined &&
+      message.pyGenericServices !== false
+    ) {
       obj.pyGenericServices = message.pyGenericServices;
     }
-    if (message.phpGenericServices === true) {
+    if (
+      message.phpGenericServices !== undefined &&
+      message.phpGenericServices !== false
+    ) {
       obj.phpGenericServices = message.phpGenericServices;
     }
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined && message.deprecated !== false) {
       obj.deprecated = message.deprecated;
     }
-    if (message.ccEnableArenas === true) {
+    if (
+      message.ccEnableArenas !== undefined &&
+      message.ccEnableArenas !== true
+    ) {
       obj.ccEnableArenas = message.ccEnableArenas;
     }
-    if (message.objcClassPrefix !== "") {
+    if (
+      message.objcClassPrefix !== undefined &&
+      message.objcClassPrefix !== ""
+    ) {
       obj.objcClassPrefix = message.objcClassPrefix;
     }
-    if (message.csharpNamespace !== "") {
+    if (
+      message.csharpNamespace !== undefined &&
+      message.csharpNamespace !== ""
+    ) {
       obj.csharpNamespace = message.csharpNamespace;
     }
-    if (message.swiftPrefix !== "") {
+    if (message.swiftPrefix !== undefined && message.swiftPrefix !== "") {
       obj.swiftPrefix = message.swiftPrefix;
     }
-    if (message.phpClassPrefix !== "") {
+    if (message.phpClassPrefix !== undefined && message.phpClassPrefix !== "") {
       obj.phpClassPrefix = message.phpClassPrefix;
     }
-    if (message.phpNamespace !== "") {
+    if (message.phpNamespace !== undefined && message.phpNamespace !== "") {
       obj.phpNamespace = message.phpNamespace;
     }
-    if (message.phpMetadataNamespace !== "") {
+    if (
+      message.phpMetadataNamespace !== undefined &&
+      message.phpMetadataNamespace !== ""
+    ) {
       obj.phpMetadataNamespace = message.phpMetadataNamespace;
     }
-    if (message.rubyPackage !== "") {
+    if (message.rubyPackage !== undefined && message.rubyPackage !== "") {
       obj.rubyPackage = message.rubyPackage;
     }
     if (message.features !== undefined) {
@@ -935,19 +971,28 @@ export const MessageOptions = {
 
   toJSON(message: MessageOptions): unknown {
     const obj: any = {};
-    if (message.messageSetWireFormat === true) {
+    if (
+      message.messageSetWireFormat !== undefined &&
+      message.messageSetWireFormat !== false
+    ) {
       obj.messageSetWireFormat = message.messageSetWireFormat;
     }
-    if (message.noStandardDescriptorAccessor === true) {
+    if (
+      message.noStandardDescriptorAccessor !== undefined &&
+      message.noStandardDescriptorAccessor !== false
+    ) {
       obj.noStandardDescriptorAccessor = message.noStandardDescriptorAccessor;
     }
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined && message.deprecated !== false) {
       obj.deprecated = message.deprecated;
     }
-    if (message.mapEntry === true) {
+    if (message.mapEntry !== undefined && message.mapEntry !== false) {
       obj.mapEntry = message.mapEntry;
     }
-    if (message.deprecatedLegacyJsonFieldConflicts === true) {
+    if (
+      message.deprecatedLegacyJsonFieldConflicts !== undefined &&
+      message.deprecatedLegacyJsonFieldConflicts !== false
+    ) {
       obj.deprecatedLegacyJsonFieldConflicts =
         message.deprecatedLegacyJsonFieldConflicts;
     }
@@ -1008,31 +1053,34 @@ export const FieldOptions = {
 
   toJSON(message: FieldOptions): unknown {
     const obj: any = {};
-    if (message.ctype !== 0) {
+    if (message.ctype !== undefined && message.ctype !== 0) {
       obj.ctype = fieldOptions_CTypeToJSON(message.ctype);
     }
-    if (message.packed === true) {
+    if (message.packed !== undefined && message.packed !== false) {
       obj.packed = message.packed;
     }
-    if (message.jstype !== 0) {
+    if (message.jstype !== undefined && message.jstype !== 0) {
       obj.jstype = fieldOptions_JSTypeToJSON(message.jstype);
     }
-    if (message.lazy === true) {
+    if (message.lazy !== undefined && message.lazy !== false) {
       obj.lazy = message.lazy;
     }
-    if (message.unverifiedLazy === true) {
+    if (
+      message.unverifiedLazy !== undefined &&
+      message.unverifiedLazy !== false
+    ) {
       obj.unverifiedLazy = message.unverifiedLazy;
     }
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined && message.deprecated !== false) {
       obj.deprecated = message.deprecated;
     }
-    if (message.weak === true) {
+    if (message.weak !== undefined && message.weak !== false) {
       obj.weak = message.weak;
     }
-    if (message.debugRedact === true) {
+    if (message.debugRedact !== undefined && message.debugRedact !== false) {
       obj.debugRedact = message.debugRedact;
     }
-    if (message.retention !== 0) {
+    if (message.retention !== undefined && message.retention !== 0) {
       obj.retention = fieldOptions_OptionRetentionToJSON(message.retention);
     }
     if (message.targets?.length) {
@@ -1067,10 +1115,10 @@ export const FieldOptions_EditionDefault = {
 
   toJSON(message: FieldOptions_EditionDefault): unknown {
     const obj: any = {};
-    if (message.edition !== 0) {
+    if (message.edition !== undefined && message.edition !== 0) {
       obj.edition = editionToJSON(message.edition);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined && message.value !== "") {
       obj.value = message.value;
     }
     return obj;
@@ -1099,7 +1147,7 @@ export const ServiceOptions = {
     if (message.features !== undefined) {
       obj.features = FeatureSet.toJSON(message.features);
     }
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined && message.deprecated !== false) {
       obj.deprecated = message.deprecated;
     }
     if (message.uninterpretedOption?.length) {
@@ -1133,10 +1181,13 @@ export const MethodOptions = {
 
   toJSON(message: MethodOptions): unknown {
     const obj: any = {};
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined && message.deprecated !== false) {
       obj.deprecated = message.deprecated;
     }
-    if (message.idempotencyLevel !== 0) {
+    if (
+      message.idempotencyLevel !== undefined &&
+      message.idempotencyLevel !== 0
+    ) {
       obj.idempotencyLevel = methodOptions_IdempotencyLevelToJSON(
         message.idempotencyLevel,
       );
@@ -1187,22 +1238,31 @@ export const UninterpretedOption = {
         UninterpretedOption_NamePart.toJSON(e),
       );
     }
-    if (message.identifierValue !== "") {
+    if (
+      message.identifierValue !== undefined &&
+      message.identifierValue !== ""
+    ) {
       obj.identifierValue = message.identifierValue;
     }
-    if (message.positiveIntValue !== 0) {
+    if (
+      message.positiveIntValue !== undefined &&
+      message.positiveIntValue !== 0
+    ) {
       obj.positiveIntValue = Math.round(message.positiveIntValue);
     }
-    if (message.negativeIntValue !== 0) {
+    if (
+      message.negativeIntValue !== undefined &&
+      message.negativeIntValue !== 0
+    ) {
       obj.negativeIntValue = Math.round(message.negativeIntValue);
     }
-    if (message.doubleValue !== 0) {
+    if (message.doubleValue !== undefined && message.doubleValue !== 0) {
       obj.doubleValue = message.doubleValue;
     }
-    if (message.stringValue.length !== 0) {
+    if (message.stringValue !== undefined && message.stringValue.length !== 0) {
       obj.stringValue = base64FromBytes(message.stringValue);
     }
-    if (message.aggregateValue !== "") {
+    if (message.aggregateValue !== undefined && message.aggregateValue !== "") {
       obj.aggregateValue = message.aggregateValue;
     }
     return obj;
@@ -1226,7 +1286,7 @@ export const UninterpretedOption_NamePart = {
     if (message.namePart !== "") {
       obj.namePart = message.namePart;
     }
-    if (message.isExtension === true) {
+    if (message.isExtension !== false) {
       obj.isExtension = message.isExtension;
     }
     return obj;
@@ -1259,28 +1319,34 @@ export const FeatureSet = {
 
   toJSON(message: FeatureSet): unknown {
     const obj: any = {};
-    if (message.fieldPresence !== 0) {
+    if (message.fieldPresence !== undefined && message.fieldPresence !== 0) {
       obj.fieldPresence = featureSet_FieldPresenceToJSON(message.fieldPresence);
     }
-    if (message.enumType !== 0) {
+    if (message.enumType !== undefined && message.enumType !== 0) {
       obj.enumType = featureSet_EnumTypeToJSON(message.enumType);
     }
-    if (message.repeatedFieldEncoding !== 0) {
+    if (
+      message.repeatedFieldEncoding !== undefined &&
+      message.repeatedFieldEncoding !== 0
+    ) {
       obj.repeatedFieldEncoding = featureSet_RepeatedFieldEncodingToJSON(
         message.repeatedFieldEncoding,
       );
     }
-    if (message.utf8Validation !== 0) {
+    if (message.utf8Validation !== undefined && message.utf8Validation !== 0) {
       obj.utf8Validation = featureSet_Utf8ValidationToJSON(
         message.utf8Validation,
       );
     }
-    if (message.messageEncoding !== 0) {
+    if (
+      message.messageEncoding !== undefined &&
+      message.messageEncoding !== 0
+    ) {
       obj.messageEncoding = featureSet_MessageEncodingToJSON(
         message.messageEncoding,
       );
     }
-    if (message.jsonFormat !== 0) {
+    if (message.jsonFormat !== undefined && message.jsonFormat !== 0) {
       obj.jsonFormat = featureSet_JsonFormatToJSON(message.jsonFormat);
     }
     return obj;

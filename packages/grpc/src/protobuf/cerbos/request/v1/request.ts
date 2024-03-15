@@ -184,7 +184,7 @@ export const PlanResourcesRequest = {
     if (message.auxData !== undefined) {
       AuxData.encode(message.auxData, writer.uint32(42).fork()).ldelim();
     }
-    if (message.includeMeta === true) {
+    if (message.includeMeta !== false) {
       writer.uint32(48).bool(message.includeMeta);
     }
     return writer;
@@ -284,7 +284,7 @@ export const CheckResourceSetRequest = {
     if (message.resource !== undefined) {
       ResourceSet.encode(message.resource, writer.uint32(34).fork()).ldelim();
     }
-    if (message.includeMeta === true) {
+    if (message.includeMeta !== false) {
       writer.uint32(40).bool(message.includeMeta);
     }
     if (message.auxData !== undefined) {
@@ -752,7 +752,7 @@ export const CheckResourcesRequest = {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
-    if (message.includeMeta === true) {
+    if (message.includeMeta !== false) {
       writer.uint32(16).bool(message.includeMeta);
     }
     if (message.principal !== undefined) {
@@ -1221,7 +1221,7 @@ export const ListPoliciesRequest = {
     message: ListPoliciesRequest,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.includeDisabled === true) {
+    if (message.includeDisabled !== false) {
       writer.uint32(8).bool(message.includeDisabled);
     }
     if (message.nameRegexp !== "") {
@@ -1567,7 +1567,7 @@ export const ReloadStoreRequest = {
     message: ReloadStoreRequest,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.wait === true) {
+    if (message.wait !== false) {
       writer.uint32(8).bool(message.wait);
     }
     return writer;

@@ -187,7 +187,7 @@ export const Schema = {
     if (message.discriminator !== "") {
       writer.uint32(18).string(message.discriminator);
     }
-    if (message.readOnly === true) {
+    if (message.readOnly !== false) {
       writer.uint32(24).bool(message.readOnly);
     }
     if (message.externalDocs !== undefined) {
@@ -324,7 +324,7 @@ export const JSONSchema = {
     if (message.default !== "") {
       writer.uint32(58).string(message.default);
     }
-    if (message.readOnly === true) {
+    if (message.readOnly !== false) {
       writer.uint32(64).bool(message.readOnly);
     }
     if (message.example !== "") {
@@ -336,13 +336,13 @@ export const JSONSchema = {
     if (message.maximum !== 0) {
       writer.uint32(89).double(message.maximum);
     }
-    if (message.exclusiveMaximum === true) {
+    if (message.exclusiveMaximum !== false) {
       writer.uint32(96).bool(message.exclusiveMaximum);
     }
     if (message.minimum !== 0) {
       writer.uint32(105).double(message.minimum);
     }
-    if (message.exclusiveMinimum === true) {
+    if (message.exclusiveMinimum !== false) {
       writer.uint32(112).bool(message.exclusiveMinimum);
     }
     if (message.maxLength !== "0") {
@@ -360,7 +360,7 @@ export const JSONSchema = {
     if (message.minItems !== "0") {
       writer.uint32(168).uint64(message.minItems);
     }
-    if (message.uniqueItems === true) {
+    if (message.uniqueItems !== false) {
       writer.uint32(176).bool(message.uniqueItems);
     }
     if (message.maxProperties !== "0") {

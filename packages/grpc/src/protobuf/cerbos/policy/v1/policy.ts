@@ -186,7 +186,7 @@ export const Policy = {
     if (message.apiVersion !== "") {
       writer.uint32(10).string(message.apiVersion);
     }
-    if (message.disabled === true) {
+    if (message.disabled !== false) {
       writer.uint32(16).bool(message.disabled);
     }
     if (message.description !== "") {

@@ -214,7 +214,7 @@ export const PlanResourcesInput = {
     if (message.auxData !== undefined) {
       obj.auxData = AuxData.toJSON(message.auxData);
     }
-    if (message.includeMeta === true) {
+    if (message.includeMeta !== false) {
       obj.includeMeta = message.includeMeta;
     }
     return obj;

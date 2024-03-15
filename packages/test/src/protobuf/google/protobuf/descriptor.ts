@@ -53,28 +53,28 @@ export function editionFromJSON(object: any): Edition {
 }
 
 export interface MessageOptions {
-  messageSetWireFormat: boolean;
-  noStandardDescriptorAccessor: boolean;
-  deprecated: boolean;
-  mapEntry: boolean;
-  deprecatedLegacyJsonFieldConflicts: boolean;
-  features: FeatureSet | undefined;
+  messageSetWireFormat?: boolean | undefined;
+  noStandardDescriptorAccessor?: boolean | undefined;
+  deprecated?: boolean | undefined;
+  mapEntry?: boolean | undefined;
+  deprecatedLegacyJsonFieldConflicts?: boolean | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
 export interface FieldOptions {
-  ctype: FieldOptions_CType;
-  packed: boolean;
-  jstype: FieldOptions_JSType;
-  lazy: boolean;
-  unverifiedLazy: boolean;
-  deprecated: boolean;
-  weak: boolean;
-  debugRedact: boolean;
-  retention: FieldOptions_OptionRetention;
+  ctype?: FieldOptions_CType | undefined;
+  packed?: boolean | undefined;
+  jstype?: FieldOptions_JSType | undefined;
+  lazy?: boolean | undefined;
+  unverifiedLazy?: boolean | undefined;
+  deprecated?: boolean | undefined;
+  weak?: boolean | undefined;
+  debugRedact?: boolean | undefined;
+  retention?: FieldOptions_OptionRetention | undefined;
   targets: FieldOptions_OptionTargetType[];
   editionDefaults: FieldOptions_EditionDefault[];
-  features: FeatureSet | undefined;
+  features?: FeatureSet | undefined;
   uninterpretedOption: UninterpretedOption[];
 }
 
@@ -211,18 +211,18 @@ export function fieldOptions_OptionTargetTypeFromJSON(
 }
 
 export interface FieldOptions_EditionDefault {
-  edition: Edition;
-  value: string;
+  edition?: Edition | undefined;
+  value?: string | undefined;
 }
 
 export interface UninterpretedOption {
   name: UninterpretedOption_NamePart[];
-  identifierValue: string;
-  positiveIntValue: string;
-  negativeIntValue: string;
-  doubleValue: number;
-  stringValue: Uint8Array;
-  aggregateValue: string;
+  identifierValue?: string | undefined;
+  positiveIntValue?: string | undefined;
+  negativeIntValue?: string | undefined;
+  doubleValue?: number | undefined;
+  stringValue?: Uint8Array | undefined;
+  aggregateValue?: string | undefined;
 }
 
 export interface UninterpretedOption_NamePart {
@@ -231,12 +231,12 @@ export interface UninterpretedOption_NamePart {
 }
 
 export interface FeatureSet {
-  fieldPresence: FeatureSet_FieldPresence;
-  enumType: FeatureSet_EnumType;
-  repeatedFieldEncoding: FeatureSet_RepeatedFieldEncoding;
-  utf8Validation: FeatureSet_Utf8Validation;
-  messageEncoding: FeatureSet_MessageEncoding;
-  jsonFormat: FeatureSet_JsonFormat;
+  fieldPresence?: FeatureSet_FieldPresence | undefined;
+  enumType?: FeatureSet_EnumType | undefined;
+  repeatedFieldEncoding?: FeatureSet_RepeatedFieldEncoding | undefined;
+  utf8Validation?: FeatureSet_Utf8Validation | undefined;
+  messageEncoding?: FeatureSet_MessageEncoding | undefined;
+  jsonFormat?: FeatureSet_JsonFormat | undefined;
 }
 
 export enum FeatureSet_FieldPresence {
@@ -422,19 +422,28 @@ export const MessageOptions = {
     message: MessageOptions,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.messageSetWireFormat === true) {
+    if (
+      message.messageSetWireFormat !== undefined &&
+      message.messageSetWireFormat !== false
+    ) {
       writer.uint32(8).bool(message.messageSetWireFormat);
     }
-    if (message.noStandardDescriptorAccessor === true) {
+    if (
+      message.noStandardDescriptorAccessor !== undefined &&
+      message.noStandardDescriptorAccessor !== false
+    ) {
       writer.uint32(16).bool(message.noStandardDescriptorAccessor);
     }
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined && message.deprecated !== false) {
       writer.uint32(24).bool(message.deprecated);
     }
-    if (message.mapEntry === true) {
+    if (message.mapEntry !== undefined && message.mapEntry !== false) {
       writer.uint32(56).bool(message.mapEntry);
     }
-    if (message.deprecatedLegacyJsonFieldConflicts === true) {
+    if (
+      message.deprecatedLegacyJsonFieldConflicts !== undefined &&
+      message.deprecatedLegacyJsonFieldConflicts !== false
+    ) {
       writer.uint32(88).bool(message.deprecatedLegacyJsonFieldConflicts);
     }
     if (message.features !== undefined) {
@@ -568,31 +577,34 @@ export const FieldOptions = {
     message: FieldOptions,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.ctype !== 0) {
+    if (message.ctype !== undefined && message.ctype !== 0) {
       writer.uint32(8).int32(message.ctype);
     }
-    if (message.packed === true) {
+    if (message.packed !== undefined && message.packed !== false) {
       writer.uint32(16).bool(message.packed);
     }
-    if (message.jstype !== 0) {
+    if (message.jstype !== undefined && message.jstype !== 0) {
       writer.uint32(48).int32(message.jstype);
     }
-    if (message.lazy === true) {
+    if (message.lazy !== undefined && message.lazy !== false) {
       writer.uint32(40).bool(message.lazy);
     }
-    if (message.unverifiedLazy === true) {
+    if (
+      message.unverifiedLazy !== undefined &&
+      message.unverifiedLazy !== false
+    ) {
       writer.uint32(120).bool(message.unverifiedLazy);
     }
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined && message.deprecated !== false) {
       writer.uint32(24).bool(message.deprecated);
     }
-    if (message.weak === true) {
+    if (message.weak !== undefined && message.weak !== false) {
       writer.uint32(80).bool(message.weak);
     }
-    if (message.debugRedact === true) {
+    if (message.debugRedact !== undefined && message.debugRedact !== false) {
       writer.uint32(128).bool(message.debugRedact);
     }
-    if (message.retention !== 0) {
+    if (message.retention !== undefined && message.retention !== 0) {
       writer.uint32(136).int32(message.retention);
     }
     writer.uint32(154).fork();
@@ -789,10 +801,10 @@ export const FieldOptions_EditionDefault = {
     message: FieldOptions_EditionDefault,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.edition !== 0) {
+    if (message.edition !== undefined && message.edition !== 0) {
       writer.uint32(24).int32(message.edition);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined && message.value !== "") {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -863,22 +875,31 @@ export const UninterpretedOption = {
         writer.uint32(18).fork(),
       ).ldelim();
     }
-    if (message.identifierValue !== "") {
+    if (
+      message.identifierValue !== undefined &&
+      message.identifierValue !== ""
+    ) {
       writer.uint32(26).string(message.identifierValue);
     }
-    if (message.positiveIntValue !== "0") {
+    if (
+      message.positiveIntValue !== undefined &&
+      message.positiveIntValue !== "0"
+    ) {
       writer.uint32(32).uint64(message.positiveIntValue);
     }
-    if (message.negativeIntValue !== "0") {
+    if (
+      message.negativeIntValue !== undefined &&
+      message.negativeIntValue !== "0"
+    ) {
       writer.uint32(40).int64(message.negativeIntValue);
     }
-    if (message.doubleValue !== 0) {
+    if (message.doubleValue !== undefined && message.doubleValue !== 0) {
       writer.uint32(49).double(message.doubleValue);
     }
-    if (message.stringValue.length !== 0) {
+    if (message.stringValue !== undefined && message.stringValue.length !== 0) {
       writer.uint32(58).bytes(message.stringValue);
     }
-    if (message.aggregateValue !== "") {
+    if (message.aggregateValue !== undefined && message.aggregateValue !== "") {
       writer.uint32(66).string(message.aggregateValue);
     }
     return writer;
@@ -991,7 +1012,7 @@ export const UninterpretedOption_NamePart = {
     if (message.namePart !== "") {
       writer.uint32(10).string(message.namePart);
     }
-    if (message.isExtension === true) {
+    if (message.isExtension !== false) {
       writer.uint32(16).bool(message.isExtension);
     }
     return writer;
@@ -1059,22 +1080,28 @@ export const FeatureSet = {
     message: FeatureSet,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.fieldPresence !== 0) {
+    if (message.fieldPresence !== undefined && message.fieldPresence !== 0) {
       writer.uint32(8).int32(message.fieldPresence);
     }
-    if (message.enumType !== 0) {
+    if (message.enumType !== undefined && message.enumType !== 0) {
       writer.uint32(16).int32(message.enumType);
     }
-    if (message.repeatedFieldEncoding !== 0) {
+    if (
+      message.repeatedFieldEncoding !== undefined &&
+      message.repeatedFieldEncoding !== 0
+    ) {
       writer.uint32(24).int32(message.repeatedFieldEncoding);
     }
-    if (message.utf8Validation !== 0) {
+    if (message.utf8Validation !== undefined && message.utf8Validation !== 0) {
       writer.uint32(32).int32(message.utf8Validation);
     }
-    if (message.messageEncoding !== 0) {
+    if (
+      message.messageEncoding !== undefined &&
+      message.messageEncoding !== 0
+    ) {
       writer.uint32(40).int32(message.messageEncoding);
     }
-    if (message.jsonFormat !== 0) {
+    if (message.jsonFormat !== undefined && message.jsonFormat !== 0) {
       writer.uint32(48).int32(message.jsonFormat);
     }
     return writer;

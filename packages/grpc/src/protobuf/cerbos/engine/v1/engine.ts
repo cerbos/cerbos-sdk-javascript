@@ -165,7 +165,7 @@ export const PlanResourcesInput = {
     if (message.auxData !== undefined) {
       AuxData.encode(message.auxData, writer.uint32(42).fork()).ldelim();
     }
-    if (message.includeMeta === true) {
+    if (message.includeMeta !== false) {
       writer.uint32(48).bool(message.includeMeta);
     }
     return writer;
