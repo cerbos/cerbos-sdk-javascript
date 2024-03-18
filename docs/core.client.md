@@ -40,4 +40,5 @@ The constructor for this class is marked as internal. Third-party code should no
 |  [planResources(request, options)](./core.client.planresources.md) |  | Produce a query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action. |
 |  [reloadStore(request, options)](./core.client.reloadstore.md) |  | Reload the store. |
 |  [serverInfo(options)](./core.client.serverinfo.md) |  | Retrieve information about the Cerbos policy decision point server. |
+|  [withPrincipal(principal, auxData)](./core.client.withprincipal.md) |  | Create a client instance with a pre-specified principal. |
 

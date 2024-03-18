@@ -21,7 +21,7 @@ export interface Principal {
    *
    * @defaultValue `{}`
    */
-  attr?: Record<string, Value>;
+  attr?: Record<string, Value> | undefined;
 
   /**
    * Application-specific attributes describing the principal (deprecated).
@@ -29,19 +29,19 @@ export interface Principal {
    * @defaultValue `{}`
    * @deprecated Use {@link Principal.attr} instead, for consistency with policy expressions.
    */
-  attributes?: Record<string, Value>;
+  attributes?: Record<string, Value> | undefined;
 
   /**
    * The policy version to use when authorizing the principal.
    *
    * @defaultValue The Cerbos policy decision point server's configured default version.
    */
-  policyVersion?: string;
+  policyVersion?: string | undefined;
 
   /**
    * The {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies | policy scope} to use when authorizing the principal.
    *
    * @defaultValue `""`
    */
-  scope?: string;
+  scope?: string | undefined;
 }

@@ -9,5 +9,5 @@
 **Signature:**
 
 ```typescript
-scope?: string;
+scope?: string | undefined;
 ```

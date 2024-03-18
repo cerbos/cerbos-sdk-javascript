@@ -9,5 +9,5 @@ Derived roles to which the rule applies.
 **Signature:**
 
 ```typescript
-derivedRoles?: string[];
+derivedRoles?: string[] | undefined;
 ```

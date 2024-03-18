@@ -9,5 +9,5 @@ Description of the policy.
 **Signature:**
 
 ```typescript
-description?: string;
+description?: string | undefined;
 ```

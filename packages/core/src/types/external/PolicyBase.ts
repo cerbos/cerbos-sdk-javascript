@@ -9,17 +9,17 @@ export interface PolicyBase {
   /**
    * API version of the policy.
    */
-  apiVersion?: string;
+  apiVersion?: string | undefined;
 
   /**
    * Description of the policy.
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
    * Whether the policy is ignored by the Cerbos engine.
    */
-  disabled?: boolean;
+  disabled?: boolean | undefined;
 
   /**
    * Metadata about the policy.
@@ -35,5 +35,5 @@ export interface PolicyBase {
    *
    * @deprecated Define variables within the policy body instead, provided the Cerbos policy decision point server is at least v0.29 ({@link DerivedRolesBody.variables}, {@link PrincipalPolicyBody.variables}, or {@link ResourcePolicyBody.variables}).
    */
-  variables?: Record<string, string>;
+  variables?: Record<string, string> | undefined;
 }

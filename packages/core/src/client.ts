@@ -26,6 +26,7 @@ import type { _RPC, _Request, _Response, _Service } from "./rpcs";
 import type {
   AddOrUpdatePoliciesRequest,
   AddOrUpdateSchemasRequest,
+  AuxData,
   CheckResourceRequest,
   CheckResourcesRequest,
   CheckResourcesResponse,
@@ -47,6 +48,7 @@ import type {
   PlanResourcesRequest,
   PlanResourcesResponse,
   Policy,
+  Principal,
   ReloadStoreRequest,
   Schema,
   ServerInfo,
@@ -873,6 +875,16 @@ export abstract class Client {
     return await this.cerbos("serverInfo", {}, options);
   }
 
+  /**
+   * Create a client instance with a pre-specified principal.
+   */
+  public withPrincipal(
+    principal: Principal,
+    auxData: Pick<AuxData, "jwt"> = {},
+  ): ClientWithPrincipal<this> {
+    return new ClientWithPrincipal(this, principal, auxData);
+  }
+
   private async admin<RPC extends _RPC<"admin">>(
     rpc: RPC,
     request: _Request<"admin", RPC>,
@@ -958,5 +970,89 @@ export abstract class Client {
         onValidationError(validationErrors);
       }
     }
+  }
+}
+
+/**
+ * A client instance with a pre-specified principal.
+ *
+ * @public
+ */
+export class ClientWithPrincipal<ClientType extends Client> {
+  /** @internal */
+  public constructor(
+    /**
+     * The client from which this instance was created.
+     */
+    public readonly client: ClientType,
+
+    /**
+     * The principal for whom this instance was created.
+     */
+    public readonly principal: Principal,
+
+    /**
+     * Auxiliary data related to the principal for whom this instance was created.
+     *
+     * @defaultValue `{}`
+     */
+    public readonly auxData: Pick<AuxData, "jwt"> = {},
+  ) {}
+
+  /**
+   * Check the principal's permissions on a resource.
+   * See {@link Client.checkResource} for details.
+   */
+  public async checkResource(
+    request: Omit<CheckResourceRequest, "principal">,
+    options?: RequestOptions,
+  ): Promise<CheckResourcesResult> {
+    return await this.client.checkResource(this.merge(request), options);
+  }
+
+  /**
+   * Check the principal's permissions on a set of resources.
+   * See {@link Client.checkResources} for details.
+   */
+  public async checkResources(
+    request: Omit<CheckResourcesRequest, "principal">,
+    options?: RequestOptions,
+  ): Promise<CheckResourcesResponse> {
+    return await this.client.checkResources(this.merge(request), options);
+  }
+
+  /**
+   * Check if the principal is allowed to perform an action on a resource.
+   * See {@link Client.isAllowed} for details.
+   */
+  public async isAllowed(
+    request: Omit<IsAllowedRequest, "principal">,
+    options?: RequestOptions,
+  ): Promise<boolean> {
+    return await this.client.isAllowed(this.merge(request), options);
+  }
+
+  /**
+   * Produce a query plan that can be used to obtain a list of resources on which the principal is allowed to perform a particular action.
+   * See {@link Client.planResources} for details.
+   */
+  public async planResources(
+    request: Omit<PlanResourcesRequest, "principal">,
+    options?: RequestOptions,
+  ): Promise<PlanResourcesResponse> {
+    return await this.client.planResources(this.merge(request), options);
+  }
+
+  private merge<
+    Request extends { principal: Principal; auxData?: AuxData | undefined },
+  >({ auxData = {}, ...rest }: Omit<Request, "principal">): Request {
+    return {
+      principal: this.principal,
+      auxData: {
+        ...this.auxData,
+        ...auxData,
+      },
+      ...rest,
+    } as Request;
   }
 }

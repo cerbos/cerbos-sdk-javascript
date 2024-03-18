@@ -9,7 +9,7 @@ Only include policies with a name matching the given regular expression.
 **Signature:**
 
 ```typescript
-nameRegexp?: string;
+nameRegexp?: string | undefined;
 ```
 
 ## Remarks

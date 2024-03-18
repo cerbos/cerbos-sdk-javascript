@@ -12,7 +12,7 @@ export interface Output {
    *
    * @deprecated Use {@link Output.when} instead.
    */
-  expr?: string;
+  expr?: string | undefined;
 
   /**
    * {@link https://docs.cerbos.dev/cerbos/latest/policies/conditions | Common Expression Language} expressions to evaluate.
@@ -20,5 +20,5 @@ export interface Output {
    * @remarks
    * Requires the Cerbos policy decision point server to be at least v0.33.
    */
-  when?: OutputExpressions;
+  when?: OutputExpressions | undefined;
 }

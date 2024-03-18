@@ -16,10 +16,10 @@ export interface Resource
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [attr?](./core.resource.attr.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; | _(Optional)_ Application-specific attributes describing the resource. |
-|  [attributes?](./core.resource.attributes.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; | _(Optional)_ Application-specific attributes describing the resource (deprecated). |
+|  [attr?](./core.resource.attr.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; \| undefined | _(Optional)_ Application-specific attributes describing the resource. |
+|  [attributes?](./core.resource.attributes.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; \| undefined | _(Optional)_ Application-specific attributes describing the resource (deprecated). |
 |  [id](./core.resource.id.md) |  | string | A unique identifier for the resource. |
 |  [kind](./core.resource.kind.md) |  | string | The type of resource. |
-|  [policyVersion?](./core.resource.policyversion.md) |  | string | _(Optional)_ The policy version to use when checking the principal's permissions on the resource. |
-|  [scope?](./core.resource.scope.md) |  | string | _(Optional)_ The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) to use when checking the principal's permissions on the resource. |
+|  [policyVersion?](./core.resource.policyversion.md) |  | string \| undefined | _(Optional)_ The policy version to use when checking the principal's permissions on the resource. |
+|  [scope?](./core.resource.scope.md) |  | string \| undefined | _(Optional)_ The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) to use when checking the principal's permissions on the resource. |
 

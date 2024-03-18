@@ -28,17 +28,19 @@ export interface PlanResourcesRequest {
    *
    * @defaultValue `{}`
    */
-  auxData?: AuxData;
+  auxData?: AuxData | undefined;
 
   /**
    * Include {@link PlanResourcesMetadata | additional metadata} in the plan?
    *
    * @defaultValue `false`
    */
-  includeMetadata?: boolean;
+  includeMetadata?: boolean | undefined;
 
   /**
+   * The identifier for tracing the request.
+   *
    * @defaultValue A randomly-generated UUID.
    */
-  requestId?: string;
+  requestId?: string | undefined;
 }

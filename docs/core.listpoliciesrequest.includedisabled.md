@@ -9,7 +9,7 @@ Include disabled policies in the list?
 **Signature:**
 
 ```typescript
-includeDisabled?: boolean;
+includeDisabled?: boolean | undefined;
 ```
 
 ## Remarks

@@ -16,9 +16,9 @@ export interface CheckResourcesRequest
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [auxData?](./core.checkresourcesrequest.auxdata.md) |  | [AuxData](./core.auxdata.md) | _(Optional)_ Auxiliary data. |
-|  [includeMetadata?](./core.checkresourcesrequest.includemetadata.md) |  | boolean | _(Optional)_ Include [additional metadata](./core.checkresourcesresultmetadata.md) in the results? |
+|  [auxData?](./core.checkresourcesrequest.auxdata.md) |  | [AuxData](./core.auxdata.md) \| undefined | _(Optional)_ Auxiliary data. |
+|  [includeMetadata?](./core.checkresourcesrequest.includemetadata.md) |  | boolean \| undefined | _(Optional)_ Include [additional metadata](./core.checkresourcesresultmetadata.md) in the results? |
 |  [principal](./core.checkresourcesrequest.principal.md) |  | [Principal](./core.principal.md) | The principal to check. |
-|  [requestId?](./core.checkresourcesrequest.requestid.md) |  | string | _(Optional)_ An identifier for tracing the request. |
+|  [requestId?](./core.checkresourcesrequest.requestid.md) |  | string \| undefined | _(Optional)_ An identifier for tracing the request. |
 |  [resources](./core.checkresourcesrequest.resources.md) |  | [ResourceCheck](./core.resourcecheck.md)<!-- -->\[\] | The resources and actions to check. |
 

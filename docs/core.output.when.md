@@ -9,7 +9,7 @@
 **Signature:**
 
 ```typescript
-when?: OutputExpressions;
+when?: OutputExpressions | undefined;
 ```
 
 ## Remarks

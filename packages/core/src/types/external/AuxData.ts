@@ -9,5 +9,5 @@ export interface AuxData {
   /**
    * A JSON Web Token (JWT) to use as an auxiliary data source.
    */
-  jwt?: JWT;
+  jwt?: JWT | undefined;
 }

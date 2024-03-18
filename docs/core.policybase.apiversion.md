@@ -9,5 +9,5 @@ API version of the policy.
 **Signature:**
 
 ```typescript
-apiVersion?: string;
+apiVersion?: string | undefined;
 ```

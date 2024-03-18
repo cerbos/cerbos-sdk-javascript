@@ -9,5 +9,5 @@ Application-specific attributes describing the resource.
 **Signature:**
 
 ```typescript
-attr?: Record<string, Value>;
+attr?: Record<string, Value> | undefined;
 ```

@@ -9,5 +9,5 @@
 **Signature:**
 
 ```typescript
-conditionNotMet?: string;
+conditionNotMet?: string | undefined;
 ```

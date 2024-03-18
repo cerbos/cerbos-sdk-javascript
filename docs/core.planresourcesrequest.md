@@ -17,9 +17,9 @@ export interface PlanResourcesRequest
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [action](./core.planresourcesrequest.action.md) |  | string | The action for which to plan. |
-|  [auxData?](./core.planresourcesrequest.auxdata.md) |  | [AuxData](./core.auxdata.md) | _(Optional)_ Auxiliary data. |
-|  [includeMetadata?](./core.planresourcesrequest.includemetadata.md) |  | boolean | _(Optional)_ Include [additional metadata](./core.planresourcesmetadata.md) in the plan? |
+|  [auxData?](./core.planresourcesrequest.auxdata.md) |  | [AuxData](./core.auxdata.md) \| undefined | _(Optional)_ Auxiliary data. |
+|  [includeMetadata?](./core.planresourcesrequest.includemetadata.md) |  | boolean \| undefined | _(Optional)_ Include [additional metadata](./core.planresourcesmetadata.md) in the plan? |
 |  [principal](./core.planresourcesrequest.principal.md) |  | [Principal](./core.principal.md) | The principal for whom to plan. |
-|  [requestId?](./core.planresourcesrequest.requestid.md) |  | string | _(Optional)_ |
+|  [requestId?](./core.planresourcesrequest.requestid.md) |  | string \| undefined | _(Optional)_ The identifier for tracing the request. |
 |  [resource](./core.planresourcesrequest.resource.md) |  | [ResourceQuery](./core.resourcequery.md) | Partial details of the resources for which to plan. |
 

@@ -9,5 +9,5 @@ Function to verify and decode JWTs passed as auxiliary data, returning the JWT p
 **Signature:**
 
 ```typescript
-decodeJWTPayload?: DecodeJWTPayload;
+decodeJWTPayload?: DecodeJWTPayload | undefined;
 ```

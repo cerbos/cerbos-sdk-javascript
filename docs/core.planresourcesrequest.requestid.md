@@ -4,8 +4,10 @@
 
 ## PlanResourcesRequest.requestId property
 
+The identifier for tracing the request.
+
 **Signature:**
 
 ```typescript
-requestId?: string;
+requestId?: string | undefined;
 ```

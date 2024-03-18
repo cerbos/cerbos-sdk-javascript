@@ -9,7 +9,7 @@ The ID of the JWKS to be used by the PDP server to verify the JWT.
 **Signature:**
 
 ```typescript
-keySetId?: string;
+keySetId?: string | undefined;
 ```
 
 ## Remarks

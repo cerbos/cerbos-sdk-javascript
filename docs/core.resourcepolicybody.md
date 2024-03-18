@@ -16,11 +16,11 @@ export interface ResourcePolicyBody
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [importDerivedRoles?](./core.resourcepolicybody.importderivedroles.md) |  | string\[\] | _(Optional)_ Name of a set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) to import. |
+|  [importDerivedRoles?](./core.resourcepolicybody.importderivedroles.md) |  | string\[\] \| undefined | _(Optional)_ Name of a set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) to import. |
 |  [resource](./core.resourcepolicybody.resource.md) |  | string | The name of the resource to which the policy applies. |
 |  [rules](./core.resourcepolicybody.rules.md) |  | [ResourceRule](./core.resourcerule.md)<!-- -->\[\] | Rules defining the actions that can be performed on the resource. |
 |  [schemas?](./core.resourcepolicybody.schemas.md) |  | [SchemaRefs](./core.schemarefs.md) \| undefined | _(Optional)_ [Schemas](https://docs.cerbos.dev/cerbos/latest/policies/schemas) for principal and resource attributes. |
-|  [scope?](./core.resourcepolicybody.scope.md) |  | string | _(Optional)_ [Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) of the policy. |
+|  [scope?](./core.resourcepolicybody.scope.md) |  | string \| undefined | _(Optional)_ [Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) of the policy. |
 |  [variables?](./core.resourcepolicybody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in conditions. |
 |  [version](./core.resourcepolicybody.version.md) |  | string | The version of the policy. |
 

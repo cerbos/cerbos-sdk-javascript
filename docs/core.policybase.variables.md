@@ -14,7 +14,7 @@ Variable expressions defined for the policy.
 **Signature:**
 
 ```typescript
-variables?: Record<string, string>;
+variables?: Record<string, string> | undefined;
 ```
 
 ## Remarks

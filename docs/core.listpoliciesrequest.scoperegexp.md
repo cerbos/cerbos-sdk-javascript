@@ -9,7 +9,7 @@ Only include policies with a scope matching the given regular expression.
 **Signature:**
 
 ```typescript
-scopeRegexp?: string;
+scopeRegexp?: string | undefined;
 ```
 
 ## Remarks

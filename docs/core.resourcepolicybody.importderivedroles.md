@@ -9,5 +9,5 @@ Name of a set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/
 **Signature:**
 
 ```typescript
-importDerivedRoles?: string[];
+importDerivedRoles?: string[] | undefined;
 ```

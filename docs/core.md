@@ -12,6 +12,7 @@ Common types used by the [gRPC](./grpc.md)<!-- -->, [HTTP](./http.md)<!-- -->, a
 |  --- | --- |
 |  [CheckResourcesResponse](./core.checkresourcesresponse.md) | The outcome of checking a principal's permissions on a set of resources. |
 |  [CheckResourcesResult](./core.checkresourcesresult.md) | The outcome of checking a principal's permissions on single resource. |
+|  [ClientWithPrincipal](./core.clientwithprincipal.md) | A client instance with a pre-specified principal. |
 |  [NotOK](./core.notok.md) | Error thrown when the Cerbos policy decision point server returns an unsuccessful response. |
 |  [PlanExpression](./core.planexpression.md) | An abstract syntax tree node representing an expression to evaluate. |
 |  [PlanExpressionValue](./core.planexpressionvalue.md) | An abstract syntax tree node representing a constant value. |
