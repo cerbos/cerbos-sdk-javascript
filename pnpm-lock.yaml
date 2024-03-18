@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@microsoft/api-documenter':
-        specifier: 7.23.37
-        version: 7.23.37(@types/node@18.19.24)
+        specifier: 7.23.38
+        version: 7.23.38(@types/node@18.19.24)
       '@microsoft/api-extractor':
         specifier: 7.42.3
         version: 7.42.3(@types/node@18.19.24)
@@ -625,8 +625,8 @@ packages:
   /@js-sdsl/ordered-map@4.4.2:
     resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
 
-  /@microsoft/api-documenter@7.23.37(@types/node@18.19.24):
-    resolution: {integrity: sha512-8StaLn4tLGllcgXCNGnqQRLFcWT9JILv5dHm2rYDdMWDQulInNKJnc2P9rpcI5mrO+cKcIRl75kdq4QrI9zunw==}
+  /@microsoft/api-documenter@7.23.38(@types/node@18.19.24):
+    resolution: {integrity: sha512-2uvz4456atUkm9BDfN4YnSsBtZtkvQUYos7/TSdADwlzDHNA+0KGuKS9+722O7zGvHZG5qHfoNi/mlQrxhi47w==}
     hasBin: true
     dependencies:
       '@microsoft/api-extractor-model': 7.28.13(@types/node@18.19.24)
