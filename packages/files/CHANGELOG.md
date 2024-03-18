@@ -4,6 +4,8 @@
 
 - Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements) ([#852](https://github.com/cerbos/cerbos-sdk-javascript/pull/852))
 
+- Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
+
 - Bump dependency on [yaml] to 2.4.1 ([#854](https://github.com/cerbos/cerbos-sdk-javascript/pull/854))
 
 ## [0.2.3] - 2024-02-29
