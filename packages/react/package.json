@@ -1,0 +1,66 @@
+{
+  "name": "@cerbos/react",
+  "version": "0.1.0",
+  "description": "A collection of React hooks for interacting with the Cerbos policy decision point service",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cerbos/cerbos-sdk-javascript.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/cerbos/cerbos-sdk-javascript/tree/main/packages/react#readme",
+  "bugs": {
+    "url": "https://github.com/cerbos/cerbos-sdk-javascript/issues"
+  },
+  "author": "Cerbos <help@cerbos.dev> (https://cerbos.dev)",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 18"
+  },
+  "exports": {
+    ".": {
+      "default": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
+  "files": [
+    "lib/**/*.d.ts",
+    "lib/**/*.d.ts.map",
+    "lib/**/*.js",
+    "lib/**/*.js.map",
+    "src/**/*.ts"
+  ],
+  "keywords": [
+    "Cerbos",
+    "authorization",
+    "access control",
+    "roles",
+    "permissions",
+    "policy",
+    "security",
+    "role-based access control",
+    "RBAC",
+    "attribute-based access control",
+    "ABAC",
+    "policy decision point",
+    "PDP",
+    "React"
+  ],
+  "peerDependencies": {
+    "lodash": "^4.17.21",
+    "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "@cerbos/core": "^0.16.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.0",
+    "@types/qs": "6.9.12",
+    "@types/react": "18.2.67",
+    "lodash": "4.17.21",
+    "react": "18.2.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
