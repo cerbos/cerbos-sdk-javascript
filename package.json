@@ -49,7 +49,7 @@
     "test:watch": "pnpm run --filter=./packages/test test:watch"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "7.23.38",
+    "@microsoft/api-documenter": "7.24.0",
     "@microsoft/api-extractor": "7.42.3",
     "@tsconfig/node18": "18.2.2",
     "@tsconfig/strictest": "2.0.3",
