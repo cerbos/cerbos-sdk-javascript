@@ -14,9 +14,68 @@ export declare enum PlanKind
 
 ## Enumeration Members
 
-|  Member | Value | Description |
-|  --- | --- | --- |
-|  ALWAYS\_ALLOWED | <code>&quot;KIND_ALWAYS_ALLOWED&quot;</code> | The specified action is always allowed for the principal on resources matching the input. |
-|  ALWAYS\_DENIED | <code>&quot;KIND_ALWAYS_DENIED&quot;</code> | The specified action is always denied for the principal on resources matching the input. |
-|  CONDITIONAL | <code>&quot;KIND_CONDITIONAL&quot;</code> | The specified action is conditionally allowed for the principal on resources matching the input. |
+<table><thead><tr><th>
 
+Member
+
+
+</th><th>
+
+Value
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+ALWAYS\_ALLOWED
+
+
+</td><td>
+
+`"KIND_ALWAYS_ALLOWED"`
+
+
+</td><td>
+
+The specified action is always allowed for the principal on resources matching the input.
+
+
+</td></tr>
+<tr><td>
+
+ALWAYS\_DENIED
+
+
+</td><td>
+
+`"KIND_ALWAYS_DENIED"`
+
+
+</td><td>
+
+The specified action is always denied for the principal on resources matching the input.
+
+
+</td></tr>
+<tr><td>
+
+CONDITIONAL
+
+
+</td><td>
+
+`"KIND_CONDITIONAL"`
+
+
+</td><td>
+
+The specified action is conditionally allowed for the principal on resources matching the input.
+
+
+</td></tr>
+</tbody></table>

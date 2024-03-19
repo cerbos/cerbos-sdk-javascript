@@ -8,18 +8,107 @@ Load Cerbos policies from YAML or JSON files.
 
 ## Functions
 
-|  Function | Description |
-|  --- | --- |
-|  [parsePolicy(contents)](./files.parsepolicy.md) | Parse a policy from a YAML- or JSON-encoded string. |
-|  [readDirectory(path)](./files.readdirectory.md) | Read the policy and schema files in a directory and its subdirectories. |
-|  [readPolicy(path)](./files.readpolicy.md) | Read a policy from a YAML or JSON file. |
-|  [readSchema(path, options)](./files.readschema.md) | Read a schema from a JSON file. |
+<table><thead><tr><th>
+
+Function
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[parsePolicy(contents)](./files.parsepolicy.md)
+
+
+</td><td>
+
+Parse a policy from a YAML- or JSON-encoded string.
+
+
+</td></tr>
+<tr><td>
+
+[readDirectory(path)](./files.readdirectory.md)
+
+
+</td><td>
+
+Read the policy and schema files in a directory and its subdirectories.
+
+
+</td></tr>
+<tr><td>
+
+[readPolicy(path)](./files.readpolicy.md)
+
+
+</td><td>
+
+Read a policy from a YAML or JSON file.
+
+
+</td></tr>
+<tr><td>
+
+[readSchema(path, options)](./files.readschema.md)
+
+
+</td><td>
+
+Read a schema from a JSON file.
+
+
+</td></tr>
+</tbody></table>
 
 ## Interfaces
 
-|  Interface | Description |
-|  --- | --- |
-|  [DirectoryContents](./files.directorycontents.md) | The contents of a directory, returned by [readDirectory()](./files.readdirectory.md)<!-- -->. |
-|  [ReadSchemaOptions](./files.readschemaoptions.md) | Options for [readSchema()](./files.readschema.md)<!-- -->. |
-|  [Schema](./files.schema.md) | A JSON schema to be used to validate principal or resource attributes. |
+<table><thead><tr><th>
 
+Interface
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[DirectoryContents](./files.directorycontents.md)
+
+
+</td><td>
+
+The contents of a directory, returned by [readDirectory()](./files.readdirectory.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[ReadSchemaOptions](./files.readschemaoptions.md)
+
+
+</td><td>
+
+Options for [readSchema()](./files.readschema.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[Schema](./files.schema.md)
+
+
+</td><td>
+
+A JSON schema to be used to validate principal or resource attributes.
+
+
+</td></tr>
+</tbody></table>

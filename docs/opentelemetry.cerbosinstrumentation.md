@@ -27,25 +27,205 @@ registerInstrumentations({
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(config)](./opentelemetry.cerbosinstrumentation._constructor_.md) |  | Constructs a new instance of the <code>CerbosInstrumentation</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(config)](./opentelemetry.cerbosinstrumentation._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `CerbosInstrumentation` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [instrumentationName](./opentelemetry.cerbosinstrumentation.instrumentationname.md) | <code>readonly</code> | string | Name of the instrumentation. |
-|  [instrumentationVersion](./opentelemetry.cerbosinstrumentation.instrumentationversion.md) | <code>readonly</code> | string | Version of the instrumentation. |
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[instrumentationName](./opentelemetry.cerbosinstrumentation.instrumentationname.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+Name of the instrumentation.
+
+
+</td></tr>
+<tr><td>
+
+[instrumentationVersion](./opentelemetry.cerbosinstrumentation.instrumentationversion.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+Version of the instrumentation.
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [disable()](./opentelemetry.cerbosinstrumentation.disable.md) |  | Disables the instrumentation. |
-|  [enable()](./opentelemetry.cerbosinstrumentation.enable.md) |  | Enables the instrumentation. |
-|  [getConfig()](./opentelemetry.cerbosinstrumentation.getconfig.md) |  | Gets the instrumentation configuration. |
-|  [setConfig(config)](./opentelemetry.cerbosinstrumentation.setconfig.md) |  | Sets the instrumentation configuration. |
-|  [setMeterProvider(meterProvider)](./opentelemetry.cerbosinstrumentation.setmeterprovider.md) |  | Override the meter provider, which otherwise defaults to the global meter provider. |
-|  [setTracerProvider(tracerProvider)](./opentelemetry.cerbosinstrumentation.settracerprovider.md) |  | Override the tracer provider, which otherwise defaults to the global tracer provider. |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[disable()](./opentelemetry.cerbosinstrumentation.disable.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Disables the instrumentation.
+
+
+</td></tr>
+<tr><td>
+
+[enable()](./opentelemetry.cerbosinstrumentation.enable.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Enables the instrumentation.
+
+
+</td></tr>
+<tr><td>
+
+[getConfig()](./opentelemetry.cerbosinstrumentation.getconfig.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Gets the instrumentation configuration.
+
+
+</td></tr>
+<tr><td>
+
+[setConfig(config)](./opentelemetry.cerbosinstrumentation.setconfig.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the instrumentation configuration.
+
+
+</td></tr>
+<tr><td>
+
+[setMeterProvider(meterProvider)](./opentelemetry.cerbosinstrumentation.setmeterprovider.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Override the meter provider, which otherwise defaults to the global meter provider.
+
+
+</td></tr>
+<tr><td>
+
+[setTracerProvider(tracerProvider)](./opentelemetry.cerbosinstrumentation.settracerprovider.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Override the tracer provider, which otherwise defaults to the global tracer provider.
+
+
+</td></tr>
+</tbody></table>

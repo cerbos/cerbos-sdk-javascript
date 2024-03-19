@@ -14,10 +14,39 @@ isAllowed(action: string): boolean | undefined;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  action | string | the action to check. |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+action
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+the action to check.
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 boolean \| undefined

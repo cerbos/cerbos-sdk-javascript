@@ -19,7 +19,34 @@ See [the parent class](./core.client.md) for available methods.
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(source, options)](./embedded.embedded._constructor_.md) |  | Create a client for interacting with an embedded Cerbos policy decision point (PDP). |
+<table><thead><tr><th>
 
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(source, options)](./embedded.embedded._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Create a client for interacting with an embedded Cerbos policy decision point (PDP).
+
+
+</td></tr>
+</tbody></table>

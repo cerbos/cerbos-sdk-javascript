@@ -14,13 +14,78 @@ export declare class PlanExpressionValue
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(value)](./core.planexpressionvalue._constructor_.md) |  | Constructs a new instance of the <code>PlanExpressionValue</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(value)](./core.planexpressionvalue._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `PlanExpressionValue` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [value](./core.planexpressionvalue.value.md) |  | [Value](./core.value.md) | The constant value. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[value](./core.planexpressionvalue.value.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Value](./core.value.md)
+
+
+</td><td>
+
+The constant value.
+
+
+</td></tr>
+</tbody></table>

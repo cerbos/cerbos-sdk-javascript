@@ -14,10 +14,39 @@ export declare function parsePolicy(contents: string): Policy;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  contents | string | the YAML- or JSON-encoded policy definition. |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+contents
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+the YAML- or JSON-encoded policy definition.
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 [Policy](./core.policy.md)

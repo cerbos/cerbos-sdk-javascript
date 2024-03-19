@@ -14,9 +14,82 @@ export interface DerivedRolesBody
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [definitions](./core.derivedrolesbody.definitions.md) |  | [DerivedRoleDefinition](./core.derivedroledefinition.md)<!-- -->\[\] | The definitions of the derived roles. |
-|  [name](./core.derivedrolesbody.name.md) |  | string | The name to use when importing the set of derived roles. |
-|  [variables?](./core.derivedrolesbody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in conditions. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[definitions](./core.derivedrolesbody.definitions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[DerivedRoleDefinition](./core.derivedroledefinition.md)<!-- -->\[\]
+
+
+</td><td>
+
+The definitions of the derived roles.
+
+
+</td></tr>
+<tr><td>
+
+[name](./core.derivedrolesbody.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The name to use when importing the set of derived roles.
+
+
+</td></tr>
+<tr><td>
+
+[variables?](./core.derivedrolesbody.variables.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Variables](./core.variables.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in conditions.
+
+
+</td></tr>
+</tbody></table>

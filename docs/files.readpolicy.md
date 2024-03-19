@@ -14,10 +14,39 @@ export declare function readPolicy(path: string): Promise<Policy>;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  path | string | the path to the policy file. |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+path
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+the path to the policy file.
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[Policy](./core.policy.md)<!-- -->&gt;

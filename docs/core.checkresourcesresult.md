@@ -14,26 +14,230 @@ export declare class CheckResourcesResult
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)({ resource, actions, validationErrors, metadata, outputs, })](./core.checkresourcesresult._constructor_.md) |  | Constructs a new instance of the <code>CheckResourcesResult</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)({ resource, actions, validationErrors, metadata, outputs, })](./core.checkresourcesresult._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `CheckResourcesResult` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [actions](./core.checkresourcesresult.actions.md) |  | Record&lt;string, [Effect](./core.effect.md) \| undefined&gt; | The policy decisions for each action. |
-|  [metadata](./core.checkresourcesresult.metadata.md) |  | [CheckResourcesResultMetadata](./core.checkresourcesresultmetadata.md) \| undefined | Additional information about how the policy decisions were reached. |
-|  [outputs](./core.checkresourcesresult.outputs.md) |  | [OutputResult](./core.outputresult.md)<!-- -->\[\] | User-defined outputs from policy rule evaluations. |
-|  [resource](./core.checkresourcesresult.resource.md) |  | [CheckResourcesResultResource](./core.checkresourcesresultresource.md) | The resource that was checked. |
-|  [validationErrors](./core.checkresourcesresult.validationerrors.md) |  | [ValidationError](./core.validationerror.md)<!-- -->\[\] | Any schema validation errors for the principal or resource attributes. |
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[actions](./core.checkresourcesresult.actions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, [Effect](./core.effect.md) \| undefined&gt;
+
+
+</td><td>
+
+The policy decisions for each action.
+
+
+</td></tr>
+<tr><td>
+
+[metadata](./core.checkresourcesresult.metadata.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[CheckResourcesResultMetadata](./core.checkresourcesresultmetadata.md) \| undefined
+
+
+</td><td>
+
+Additional information about how the policy decisions were reached.
+
+
+</td></tr>
+<tr><td>
+
+[outputs](./core.checkresourcesresult.outputs.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[OutputResult](./core.outputresult.md)<!-- -->\[\]
+
+
+</td><td>
+
+User-defined outputs from policy rule evaluations.
+
+
+</td></tr>
+<tr><td>
+
+[resource](./core.checkresourcesresult.resource.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[CheckResourcesResultResource](./core.checkresourcesresultresource.md)
+
+
+</td><td>
+
+The resource that was checked.
+
+
+</td></tr>
+<tr><td>
+
+[validationErrors](./core.checkresourcesresult.validationerrors.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ValidationError](./core.validationerror.md)<!-- -->\[\]
+
+
+</td><td>
+
+Any schema validation errors for the principal or resource attributes.
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [allAllowed()](./core.checkresourcesresult.allallowed.md) |  | Check if the policy decision was that all input actions should be allowed for the resource. |
-|  [allowedActions()](./core.checkresourcesresult.allowedactions.md) |  | List the actions that should be allowed for the resource. |
-|  [isAllowed(action)](./core.checkresourcesresult.isallowed.md) |  | Check if the policy decision was that a given action should be allowed for the resource. |
-|  [output(source)](./core.checkresourcesresult.output.md) |  | Find the value of the user-defined output for a particular policy rule. |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[allAllowed()](./core.checkresourcesresult.allallowed.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Check if the policy decision was that all input actions should be allowed for the resource.
+
+
+</td></tr>
+<tr><td>
+
+[allowedActions()](./core.checkresourcesresult.allowedactions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+List the actions that should be allowed for the resource.
+
+
+</td></tr>
+<tr><td>
+
+[isAllowed(action)](./core.checkresourcesresult.isallowed.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Check if the policy decision was that a given action should be allowed for the resource.
+
+
+</td></tr>
+<tr><td>
+
+[output(source)](./core.checkresourcesresult.output.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Find the value of the user-defined output for a particular policy rule.
+
+
+</td></tr>
+</tbody></table>

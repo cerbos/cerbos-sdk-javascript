@@ -14,10 +14,55 @@ constructor(source: Source, options?: Options);
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  source | [Source](./embedded.source.md) | WebAssembly binary code of an embedded PDP bundle (or an HTTP response from which to stream it). |
-|  options | [Options](./embedded.options.md) | _(Optional)_ additional client settings. |
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+source
+
+
+</td><td>
+
+[Source](./embedded.source.md)
+
+
+</td><td>
+
+WebAssembly binary code of an embedded PDP bundle (or an HTTP response from which to stream it).
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+[Options](./embedded.options.md)
+
+
+</td><td>
+
+_(Optional)_ additional client settings.
+
+
+</td></tr>
+</tbody></table>
 
 ## Example 1
 

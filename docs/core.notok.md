@@ -15,20 +15,137 @@ export declare class NotOK extends Error
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(code, details)](./core.notok._constructor_.md) |  | Constructs a new instance of the <code>NotOK</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(code, details)](./core.notok._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `NotOK` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [code](./core.notok.code.md) | <code>readonly</code> | [Status](./core.status.md) | The status code returned by the Cerbos policy decision point server. |
-|  [details](./core.notok.details.md) | <code>readonly</code> | string | Additional error details. |
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[code](./core.notok.code.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[Status](./core.status.md)
+
+
+</td><td>
+
+The status code returned by the Cerbos policy decision point server.
+
+
+</td></tr>
+<tr><td>
+
+[details](./core.notok.details.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+Additional error details.
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [fromJSON(text)](./core.notok.fromjson.md) | <code>static</code> | Parse a JSON-serialized unsuccessful response. |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[fromJSON(text)](./core.notok.fromjson.md)
+
+
+</td><td>
+
+`static`
+
+
+</td><td>
+
+Parse a JSON-serialized unsuccessful response.
+
+
+</td></tr>
+</tbody></table>

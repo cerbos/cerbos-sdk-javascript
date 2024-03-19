@@ -14,7 +14,44 @@ export interface ReadSchemaOptions
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [id?](./files.readschemaoptions.id.md) |  | string \| undefined | _(Optional)_ Unique ID for the schema, to be used to reference the schema from policies and from other schemas. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[id?](./files.readschemaoptions.id.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ Unique ID for the schema, to be used to reference the schema from policies and from other schemas.
+
+
+</td></tr>
+</tbody></table>

@@ -14,11 +14,55 @@ listPolicies(request?: ListPoliciesRequest, options?: RequestOptions): Promise<L
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  request | [ListPoliciesRequest](./core.listpoliciesrequest.md) | _(Optional)_ |
-|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+request
+
+
+</td><td>
+
+[ListPoliciesRequest](./core.listpoliciesrequest.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+[RequestOptions](./core.requestoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[ListPoliciesResponse](./core.listpoliciesresponse.md)<!-- -->&gt;

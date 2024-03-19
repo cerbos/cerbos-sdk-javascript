@@ -14,8 +14,63 @@ export interface DirectoryContents
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [policies](./files.directorycontents.policies.md) |  | [Policy](./core.policy.md)<!-- -->\[\] | The policies found in the directory. |
-|  [schemas](./files.directorycontents.schemas.md) |  | [Schema](./files.schema.md)<!-- -->\[\] | The schemas found in the directory's <code>_schemas</code> subdirectory. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[policies](./files.directorycontents.policies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Policy](./core.policy.md)<!-- -->\[\]
+
+
+</td><td>
+
+The policies found in the directory.
+
+
+</td></tr>
+<tr><td>
+
+[schemas](./files.directorycontents.schemas.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Schema](./files.schema.md)<!-- -->\[\]
+
+
+</td><td>
+
+The schemas found in the directory's `_schemas` subdirectory.
+
+
+</td></tr>
+</tbody></table>

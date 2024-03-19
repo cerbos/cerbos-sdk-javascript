@@ -18,18 +18,164 @@ The constructor for this class is marked as internal. Third-party code should no
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [auxData](./core.clientwithprincipal.auxdata.md) | <code>readonly</code> | Pick&lt;[AuxData](./core.auxdata.md)<!-- -->, "jwt"&gt; | Auxiliary data related to the principal for whom this instance was created. |
-|  [client](./core.clientwithprincipal.client.md) | <code>readonly</code> | ClientType | The client from which this instance was created. |
-|  [principal](./core.clientwithprincipal.principal.md) | <code>readonly</code> | [Principal](./core.principal.md) | The principal for whom this instance was created. |
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[auxData](./core.clientwithprincipal.auxdata.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Pick&lt;[AuxData](./core.auxdata.md)<!-- -->, "jwt"&gt;
+
+
+</td><td>
+
+Auxiliary data related to the principal for whom this instance was created.
+
+
+</td></tr>
+<tr><td>
+
+[client](./core.clientwithprincipal.client.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+ClientType
+
+
+</td><td>
+
+The client from which this instance was created.
+
+
+</td></tr>
+<tr><td>
+
+[principal](./core.clientwithprincipal.principal.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[Principal](./core.principal.md)
+
+
+</td><td>
+
+The principal for whom this instance was created.
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [checkResource(request, options)](./core.clientwithprincipal.checkresource.md) |  | Check the principal's permissions on a resource. See [Client.checkResource()](./core.client.checkresource.md) for details. |
-|  [checkResources(request, options)](./core.clientwithprincipal.checkresources.md) |  | Check the principal's permissions on a set of resources. See [Client.checkResources()](./core.client.checkresources.md) for details. |
-|  [isAllowed(request, options)](./core.clientwithprincipal.isallowed.md) |  | Check if the principal is allowed to perform an action on a resource. See [Client.isAllowed()](./core.client.isallowed.md) for details. |
-|  [planResources(request, options)](./core.clientwithprincipal.planresources.md) |  | Produce a query plan that can be used to obtain a list of resources on which the principal is allowed to perform a particular action. See [Client.planResources()](./core.client.planresources.md) for details. |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[checkResource(request, options)](./core.clientwithprincipal.checkresource.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Check the principal's permissions on a resource. See [Client.checkResource()](./core.client.checkresource.md) for details.
+
+
+</td></tr>
+<tr><td>
+
+[checkResources(request, options)](./core.clientwithprincipal.checkresources.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Check the principal's permissions on a set of resources. See [Client.checkResources()](./core.client.checkresources.md) for details.
+
+
+</td></tr>
+<tr><td>
+
+[isAllowed(request, options)](./core.clientwithprincipal.isallowed.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Check if the principal is allowed to perform an action on a resource. See [Client.isAllowed()](./core.client.isallowed.md) for details.
+
+
+</td></tr>
+<tr><td>
+
+[planResources(request, options)](./core.clientwithprincipal.planresources.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Produce a query plan that can be used to obtain a list of resources on which the principal is allowed to perform a particular action. See [Client.planResources()](./core.client.planresources.md) for details.
+
+
+</td></tr>
+</tbody></table>

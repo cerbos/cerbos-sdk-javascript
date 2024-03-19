@@ -15,13 +15,80 @@ export declare class ValidationFailed extends Error
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(validationErrors)](./core.validationfailed._constructor_.md) |  | Constructs a new instance of the <code>ValidationFailed</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(validationErrors)](./core.validationfailed._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `ValidationFailed` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [validationErrors](./core.validationfailed.validationerrors.md) | <code>readonly</code> | [ValidationError](./core.validationerror.md)<!-- -->\[\] | The validation errors that occurred. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[validationErrors](./core.validationfailed.validationerrors.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[ValidationError](./core.validationerror.md)<!-- -->\[\]
+
+
+</td><td>
+
+The validation errors that occurred.
+
+
+</td></tr>
+</tbody></table>

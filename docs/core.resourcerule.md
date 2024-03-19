@@ -14,13 +14,158 @@ export interface ResourceRule
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [actions](./core.resourcerule.actions.md) |  | string\[\] | The actions to which the rule applies. |
-|  [condition?](./core.resourcerule.condition.md) |  | [Condition](./core.condition.md) \| undefined | _(Optional)_ The condition that must be met for the rule to apply. |
-|  [derivedRoles?](./core.resourcerule.derivedroles.md) |  | string\[\] \| undefined | _(Optional)_ Derived roles to which the rule applies. |
-|  [effect](./core.resourcerule.effect.md) |  | [Effect](./core.effect.md) | The effect of the rule. |
-|  [name?](./core.resourcerule.name.md) |  | string \| undefined | _(Optional)_ A descriptive name for the rule. |
-|  [output?](./core.resourcerule.output.md) |  | [Output](./core.output.md) \| undefined | _(Optional)_ User-defined output to be produced when evaluating the rule. |
-|  [roles?](./core.resourcerule.roles.md) |  | string\[\] \| undefined | _(Optional)_ Static roles to which the rule applies. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[actions](./core.resourcerule.actions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The actions to which the rule applies.
+
+
+</td></tr>
+<tr><td>
+
+[condition?](./core.resourcerule.condition.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Condition](./core.condition.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ The condition that must be met for the rule to apply.
+
+
+</td></tr>
+<tr><td>
+
+[derivedRoles?](./core.resourcerule.derivedroles.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\] \| undefined
+
+
+</td><td>
+
+_(Optional)_ Derived roles to which the rule applies.
+
+
+</td></tr>
+<tr><td>
+
+[effect](./core.resourcerule.effect.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Effect](./core.effect.md)
+
+
+</td><td>
+
+The effect of the rule.
+
+
+</td></tr>
+<tr><td>
+
+[name?](./core.resourcerule.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ A descriptive name for the rule.
+
+
+</td></tr>
+<tr><td>
+
+[output?](./core.resourcerule.output.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Output](./core.output.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ User-defined output to be produced when evaluating the rule.
+
+
+</td></tr>
+<tr><td>
+
+[roles?](./core.resourcerule.roles.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\] \| undefined
+
+
+</td><td>
+
+_(Optional)_ Static roles to which the rule applies.
+
+
+</td></tr>
+</tbody></table>

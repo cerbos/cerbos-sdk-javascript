@@ -14,8 +14,63 @@ export interface ResourceCheck
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [actions](./core.resourcecheck.actions.md) |  | string\[\] | The actions to check. |
-|  [resource](./core.resourcecheck.resource.md) |  | [Resource](./core.resource.md) | The resource to check. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[actions](./core.resourcecheck.actions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The actions to check.
+
+
+</td></tr>
+<tr><td>
+
+[resource](./core.resourcecheck.resource.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Resource](./core.resource.md)
+
+
+</td><td>
+
+The resource to check.
+
+
+</td></tr>
+</tbody></table>

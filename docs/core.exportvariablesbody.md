@@ -18,8 +18,63 @@ Requires the Cerbos policy decision point server to be at least v0.29.
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [definitions](./core.exportvariablesbody.definitions.md) |  | Record&lt;string, string&gt; | Variable expressions. |
-|  [name](./core.exportvariablesbody.name.md) |  | string | The name to use when importing the set of variables. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[definitions](./core.exportvariablesbody.definitions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string&gt;
+
+
+</td><td>
+
+Variable expressions.
+
+
+</td></tr>
+<tr><td>
+
+[name](./core.exportvariablesbody.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The name to use when importing the set of variables.
+
+
+</td></tr>
+</tbody></table>

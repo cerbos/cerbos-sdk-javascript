@@ -14,10 +14,37 @@ export declare function policyIsPrincipalPolicy(policy: Policy): policy is Princ
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  policy | [Policy](./core.policy.md) |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+policy
+
+
+</td><td>
+
+[Policy](./core.policy.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 policy is [PrincipalPolicy](./core.principalpolicy.md)

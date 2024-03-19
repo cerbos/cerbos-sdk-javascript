@@ -14,7 +14,34 @@ constructor({ requestId, results, }: Pick<CheckResourcesResponse, "requestId" | 
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  { requestId, results, } | Pick&lt;[CheckResourcesResponse](./core.checkresourcesresponse.md)<!-- -->, "requestId" \| "results"&gt; |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+{ requestId, results, }
+
+
+</td><td>
+
+Pick&lt;[CheckResourcesResponse](./core.checkresourcesresponse.md)<!-- -->, "requestId" \| "results"&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

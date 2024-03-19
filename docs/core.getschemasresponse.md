@@ -14,7 +14,42 @@ export interface GetSchemasResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [schemas](./core.getschemasresponse.schemas.md) |  | [Schema](./core.schema.md)<!-- -->\[\] |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[schemas](./core.getschemasresponse.schemas.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Schema](./core.schema.md)<!-- -->\[\]
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

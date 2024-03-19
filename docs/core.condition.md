@@ -14,7 +14,44 @@ export interface Condition
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [match](./core.condition.match.md) |  | [Match](./core.match.md) | The expressions to evaluate. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[match](./core.condition.match.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Match](./core.match.md)
+
+
+</td><td>
+
+The expressions to evaluate.
+
+
+</td></tr>
+</tbody></table>

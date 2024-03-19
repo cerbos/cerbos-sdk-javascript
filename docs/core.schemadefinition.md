@@ -14,20 +14,128 @@ export declare class SchemaDefinition
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(bytes)](./core.schemadefinition._constructor_.md) |  | Constructs a new instance of the <code>SchemaDefinition</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(bytes)](./core.schemadefinition._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `SchemaDefinition` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [bytes](./core.schemadefinition.bytes.md) | <code>readonly</code> | Uint8Array | The UTF-8 bytes of the JSON-serialized schema definition. |
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[bytes](./core.schemadefinition.bytes.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Uint8Array
+
+
+</td><td>
+
+The UTF-8 bytes of the JSON-serialized schema definition.
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [toObject()](./core.schemadefinition.toobject.md) |  | The parsed schema definition. |
-|  [toString()](./core.schemadefinition.tostring.md) |  | The JSON-serialized schema definition. |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[toObject()](./core.schemadefinition.toobject.md)
+
+
+</td><td>
+
+
+</td><td>
+
+The parsed schema definition.
+
+
+</td></tr>
+<tr><td>
+
+[toString()](./core.schemadefinition.tostring.md)
+
+
+</td><td>
+
+
+</td><td>
+
+The JSON-serialized schema definition.
+
+
+</td></tr>
+</tbody></table>

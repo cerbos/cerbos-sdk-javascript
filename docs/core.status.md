@@ -14,15 +14,164 @@ export declare enum Status
 
 ## Enumeration Members
 
-|  Member | Value | Description |
-|  --- | --- | --- |
-|  CANCELLED | <code>1</code> | The operation was cancelled. |
-|  DEADLINE\_EXCEEDED | <code>4</code> | The operation timed out. |
-|  INTERNAL | <code>13</code> | The operation failed due to an internal error. |
-|  INVALID\_ARGUMENT | <code>3</code> | The operation was rejected because an argument was invalid. |
-|  RESOURCE\_EXHAUSTED | <code>8</code> | The operation failed because a resource has been exhausted. |
-|  UNAUTHENTICATED | <code>16</code> | The operation was rejected because it did not have valid authentication credentials. |
-|  UNAVAILABLE | <code>14</code> | The operation was rejected because it did not have valid authentication credentials. |
-|  UNIMPLEMENTED | <code>12</code> | The operation is not supported. |
-|  UNKNOWN | <code>2</code> | An unknown error occurred. |
+<table><thead><tr><th>
 
+Member
+
+
+</th><th>
+
+Value
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+CANCELLED
+
+
+</td><td>
+
+`1`
+
+
+</td><td>
+
+The operation was cancelled.
+
+
+</td></tr>
+<tr><td>
+
+DEADLINE\_EXCEEDED
+
+
+</td><td>
+
+`4`
+
+
+</td><td>
+
+The operation timed out.
+
+
+</td></tr>
+<tr><td>
+
+INTERNAL
+
+
+</td><td>
+
+`13`
+
+
+</td><td>
+
+The operation failed due to an internal error.
+
+
+</td></tr>
+<tr><td>
+
+INVALID\_ARGUMENT
+
+
+</td><td>
+
+`3`
+
+
+</td><td>
+
+The operation was rejected because an argument was invalid.
+
+
+</td></tr>
+<tr><td>
+
+RESOURCE\_EXHAUSTED
+
+
+</td><td>
+
+`8`
+
+
+</td><td>
+
+The operation failed because a resource has been exhausted.
+
+
+</td></tr>
+<tr><td>
+
+UNAUTHENTICATED
+
+
+</td><td>
+
+`16`
+
+
+</td><td>
+
+The operation was rejected because it did not have valid authentication credentials.
+
+
+</td></tr>
+<tr><td>
+
+UNAVAILABLE
+
+
+</td><td>
+
+`14`
+
+
+</td><td>
+
+The operation was rejected because it did not have valid authentication credentials.
+
+
+</td></tr>
+<tr><td>
+
+UNIMPLEMENTED
+
+
+</td><td>
+
+`12`
+
+
+</td><td>
+
+The operation is not supported.
+
+
+</td></tr>
+<tr><td>
+
+UNKNOWN
+
+
+</td><td>
+
+`2`
+
+
+</td><td>
+
+An unknown error occurred.
+
+
+</td></tr>
+</tbody></table>

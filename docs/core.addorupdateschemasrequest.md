@@ -14,7 +14,44 @@ export interface AddOrUpdateSchemasRequest
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [schemas](./core.addorupdateschemasrequest.schemas.md) |  | [SchemaInput](./core.schemainput.md)<!-- -->\[\] | A set of schemas to add or update. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[schemas](./core.addorupdateschemasrequest.schemas.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SchemaInput](./core.schemainput.md)<!-- -->\[\]
+
+
+</td><td>
+
+A set of schemas to add or update.
+
+
+</td></tr>
+</tbody></table>

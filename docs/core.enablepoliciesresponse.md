@@ -14,7 +14,44 @@ export interface EnablePoliciesResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [enabledPolicies](./core.enablepoliciesresponse.enabledpolicies.md) |  | number | Number of policies enabled. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[enabledPolicies](./core.enablepoliciesresponse.enabledpolicies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+Number of policies enabled.
+
+
+</td></tr>
+</tbody></table>

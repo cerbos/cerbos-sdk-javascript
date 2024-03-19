@@ -14,8 +14,63 @@ export interface OutputResult
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [source](./core.outputresult.source.md) |  | string | The identifier of the policy rule that produced the output. |
-|  [value](./core.outputresult.value.md) |  | [Value](./core.value.md) \| undefined | The result of evaluating the output expression. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[source](./core.outputresult.source.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The identifier of the policy rule that produced the output.
+
+
+</td></tr>
+<tr><td>
+
+[value](./core.outputresult.value.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Value](./core.value.md) \| undefined
+
+
+</td><td>
+
+The result of evaluating the output expression.
+
+
+</td></tr>
+</tbody></table>

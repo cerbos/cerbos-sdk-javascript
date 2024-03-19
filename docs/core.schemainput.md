@@ -14,8 +14,63 @@ export interface SchemaInput
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [definition](./core.schemainput.definition.md) |  | [SchemaDefinitionInput](./core.schemadefinitioninput.md) | Definition of the schema. |
-|  [id](./core.schemainput.id.md) |  | string | Unique ID for the schema, to be used to reference the schema from policies and from other schemas. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[definition](./core.schemainput.definition.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SchemaDefinitionInput](./core.schemadefinitioninput.md)
+
+
+</td><td>
+
+Definition of the schema.
+
+
+</td></tr>
+<tr><td>
+
+[id](./core.schemainput.id.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+Unique ID for the schema, to be used to reference the schema from policies and from other schemas.
+
+
+</td></tr>
+</tbody></table>

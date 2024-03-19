@@ -14,11 +14,53 @@ checkResource(request: Omit<CheckResourceRequest, "principal">, options?: Reques
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  request | Omit&lt;[CheckResourceRequest](./core.checkresourcerequest.md)<!-- -->, "principal"&gt; |  |
-|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+request
+
+
+</td><td>
+
+Omit&lt;[CheckResourceRequest](./core.checkresourcerequest.md)<!-- -->, "principal"&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+[RequestOptions](./core.requestoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[CheckResourcesResult](./core.checkresourcesresult.md)<!-- -->&gt;

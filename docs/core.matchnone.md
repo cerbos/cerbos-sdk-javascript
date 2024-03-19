@@ -14,7 +14,44 @@ export interface MatchNone
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [none](./core.matchnone.none.md) |  | [Matches](./core.matches.md) | The expressions that must all be false. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[none](./core.matchnone.none.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Matches](./core.matches.md)
+
+
+</td><td>
+
+The expressions that must all be false.
+
+
+</td></tr>
+</tbody></table>

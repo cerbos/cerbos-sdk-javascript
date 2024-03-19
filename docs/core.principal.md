@@ -14,12 +14,139 @@ export interface Principal
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [attr?](./core.principal.attr.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; \| undefined | _(Optional)_ Application-specific attributes describing the principal. |
-|  [attributes?](./core.principal.attributes.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; \| undefined | _(Optional)_ Application-specific attributes describing the principal (deprecated). |
-|  [id](./core.principal.id.md) |  | string | A unique identifier for the principal. |
-|  [policyVersion?](./core.principal.policyversion.md) |  | string \| undefined | _(Optional)_ The policy version to use when authorizing the principal. |
-|  [roles](./core.principal.roles.md) |  | string\[\] | The roles held by the principal. |
-|  [scope?](./core.principal.scope.md) |  | string \| undefined | _(Optional)_ The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) to use when authorizing the principal. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[attr?](./core.principal.attr.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, [Value](./core.value.md)<!-- -->&gt; \| undefined
+
+
+</td><td>
+
+_(Optional)_ Application-specific attributes describing the principal.
+
+
+</td></tr>
+<tr><td>
+
+[attributes?](./core.principal.attributes.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, [Value](./core.value.md)<!-- -->&gt; \| undefined
+
+
+</td><td>
+
+_(Optional)_ Application-specific attributes describing the principal (deprecated).
+
+
+</td></tr>
+<tr><td>
+
+[id](./core.principal.id.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+A unique identifier for the principal.
+
+
+</td></tr>
+<tr><td>
+
+[policyVersion?](./core.principal.policyversion.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ The policy version to use when authorizing the principal.
+
+
+</td></tr>
+<tr><td>
+
+[roles](./core.principal.roles.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The roles held by the principal.
+
+
+</td></tr>
+<tr><td>
+
+[scope?](./core.principal.scope.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) to use when authorizing the principal.
+
+
+</td></tr>
+</tbody></table>

@@ -14,8 +14,63 @@ export interface PrincipalRule
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [actions](./core.principalrule.actions.md) |  | [PrincipalRuleAction](./core.principalruleaction.md)<!-- -->\[\] | The actions to which the override applies. |
-|  [resource](./core.principalrule.resource.md) |  | string | The resource to which the override applies. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[actions](./core.principalrule.actions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[PrincipalRuleAction](./core.principalruleaction.md)<!-- -->\[\]
+
+
+</td><td>
+
+The actions to which the override applies.
+
+
+</td></tr>
+<tr><td>
+
+[resource](./core.principalrule.resource.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The resource to which the override applies.
+
+
+</td></tr>
+</tbody></table>

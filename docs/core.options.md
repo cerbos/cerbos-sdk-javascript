@@ -14,11 +14,120 @@ export interface Options
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [adminCredentials?](./core.options.admincredentials.md) |  | [AdminCredentials](./core.admincredentials.md) \| undefined | _(Optional)_ Credentials for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api)<!-- -->. |
-|  [headers?](./core.options.headers.md) |  | [HeadersInit](./core.headersinit.md) \| (() =&gt; [HeadersInit](./core.headersinit.md) \| Promise&lt;[HeadersInit](./core.headersinit.md)<!-- -->&gt;) \| undefined | _(Optional)_ Headers to add to every request to the policy decision point. |
-|  [onValidationError?](./core.options.onvalidationerror.md) |  | "throw" \| [ValidationFailedCallback](./core.validationfailedcallback.md) \| undefined | _(Optional)_ Action to take when input fails schema validation. |
-|  [playgroundInstance?](./core.options.playgroundinstance.md) |  | string \| undefined | _(Optional)_ Identifier of the playground instance to use when prototyping against the hosted demo policy decision point. |
-|  [userAgent?](./core.options.useragent.md) |  | string \| undefined | _(Optional)_ Custom user agent to prepend to the built-in value. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[adminCredentials?](./core.options.admincredentials.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[AdminCredentials](./core.admincredentials.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Credentials for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[headers?](./core.options.headers.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[HeadersInit](./core.headersinit.md) \| (() =&gt; [HeadersInit](./core.headersinit.md) \| Promise&lt;[HeadersInit](./core.headersinit.md)<!-- -->&gt;) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Headers to add to every request to the policy decision point.
+
+
+</td></tr>
+<tr><td>
+
+[onValidationError?](./core.options.onvalidationerror.md)
+
+
+</td><td>
+
+
+</td><td>
+
+"throw" \| [ValidationFailedCallback](./core.validationfailedcallback.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Action to take when input fails schema validation.
+
+
+</td></tr>
+<tr><td>
+
+[playgroundInstance?](./core.options.playgroundinstance.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ Identifier of the playground instance to use when prototyping against the hosted demo policy decision point.
+
+
+</td></tr>
+<tr><td>
+
+[userAgent?](./core.options.useragent.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ Custom user agent to prepend to the built-in value.
+
+
+</td></tr>
+</tbody></table>

@@ -14,11 +14,53 @@ isAllowed(request: Omit<IsAllowedRequest, "principal">, options?: RequestOptions
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  request | Omit&lt;[IsAllowedRequest](./core.isallowedrequest.md)<!-- -->, "principal"&gt; |  |
-|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+request
+
+
+</td><td>
+
+Omit&lt;[IsAllowedRequest](./core.isallowedrequest.md)<!-- -->, "principal"&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+[RequestOptions](./core.requestoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;boolean&gt;

@@ -14,10 +14,39 @@ export declare function readDirectory(path: string): Promise<DirectoryContents>;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  path | string | the path to the directory. |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+path
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+the path to the directory.
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[DirectoryContents](./files.directorycontents.md)<!-- -->&gt;

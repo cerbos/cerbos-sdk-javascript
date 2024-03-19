@@ -21,13 +21,68 @@ See [the parent class](./core.client.md) for available methods.
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(target, options)](./grpc.grpc._constructor_.md) |  | Create a client for interacting with the Cerbos policy decision point (PDP) server over gRPC. |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(target, options)](./grpc.grpc._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Create a client for interacting with the Cerbos policy decision point (PDP) server over gRPC.
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [close()](./grpc.grpc.close.md) |  | Disconnect from the Cerbos policy decision point server and clean up resources. |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[close()](./grpc.grpc.close.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Disconnect from the Cerbos policy decision point server and clean up resources.
+
+
+</td></tr>
+</tbody></table>

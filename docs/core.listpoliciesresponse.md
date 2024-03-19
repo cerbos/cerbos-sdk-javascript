@@ -14,7 +14,44 @@ export interface ListPoliciesResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [ids](./core.listpoliciesresponse.ids.md) |  | string\[\] | Available policy IDs. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[ids](./core.listpoliciesresponse.ids.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+Available policy IDs.
+
+
+</td></tr>
+</tbody></table>

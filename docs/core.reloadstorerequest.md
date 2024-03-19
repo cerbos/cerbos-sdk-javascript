@@ -14,7 +14,44 @@ export interface ReloadStoreRequest
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [wait](./core.reloadstorerequest.wait.md) |  | boolean | <code>true</code> to block until the reload completes, and throw an error if it fails. <code>false</code> to return as soon as the reload is initiated. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[wait](./core.reloadstorerequest.wait.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+`true` to block until the reload completes, and throw an error if it fails. `false` to return as soon as the reload is initiated.
+
+
+</td></tr>
+</tbody></table>

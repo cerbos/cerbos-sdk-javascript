@@ -14,10 +14,39 @@ output(source: string): Value | undefined;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  source | string | the identifier of the policy rule that produced the output. |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+source
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+the identifier of the policy rule that produced the output.
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 [Value](./core.value.md) \| undefined

@@ -14,7 +14,44 @@ export interface DeleteSchemasResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [deletedSchemas](./core.deleteschemasresponse.deletedschemas.md) |  | number | Number of schemas deleted. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[deletedSchemas](./core.deleteschemasresponse.deletedschemas.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+Number of schemas deleted.
+
+
+</td></tr>
+</tbody></table>

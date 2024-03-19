@@ -14,8 +14,52 @@ export declare enum ValidationErrorSource
 
 ## Enumeration Members
 
-|  Member | Value | Description |
-|  --- | --- | --- |
-|  PRINCIPAL | <code>&quot;SOURCE_PRINCIPAL&quot;</code> | The principal's attributes failed schema validation. |
-|  RESOURCE | <code>&quot;SOURCE_RESOURCE&quot;</code> | The resource's attributes failed schema validation. |
+<table><thead><tr><th>
 
+Member
+
+
+</th><th>
+
+Value
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+PRINCIPAL
+
+
+</td><td>
+
+`"SOURCE_PRINCIPAL"`
+
+
+</td><td>
+
+The principal's attributes failed schema validation.
+
+
+</td></tr>
+<tr><td>
+
+RESOURCE
+
+
+</td><td>
+
+`"SOURCE_RESOURCE"`
+
+
+</td><td>
+
+The resource's attributes failed schema validation.
+
+
+</td></tr>
+</tbody></table>

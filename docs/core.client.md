@@ -18,27 +18,314 @@ The constructor for this class is marked as internal. Third-party code should no
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [addOrUpdatePolicies(request, options)](./core.client.addorupdatepolicies.md) |  | Add policies, or update existing policies. |
-|  [addOrUpdateSchemas(request, options)](./core.client.addorupdateschemas.md) |  | Add schemas to be used for validating principal or resource attributes, or update existing schemas. |
-|  [checkResource(request, options)](./core.client.checkresource.md) |  | Check a principal's permissions on a resource. |
-|  [checkResources(request, options)](./core.client.checkresources.md) |  | Check a principal's permissions on a set of resources. |
-|  [deleteSchema(id, options)](./core.client.deleteschema.md) |  | Delete a schema. |
-|  [deleteSchemas(request, options)](./core.client.deleteschemas.md) |  | Delete multiple schemas. |
-|  [disablePolicies(request, options)](./core.client.disablepolicies.md) |  | Disable multiple policies. |
-|  [disablePolicy(id, options)](./core.client.disablepolicy.md) |  | Disable a policy. |
-|  [enablePolicies(request, options)](./core.client.enablepolicies.md) |  | Enable multiple policies. |
-|  [enablePolicy(id, options)](./core.client.enablepolicy.md) |  | Enable a policy. |
-|  [getPolicies(request, options)](./core.client.getpolicies.md) |  | Fetch multiple policies by ID. |
-|  [getPolicy(id, options)](./core.client.getpolicy.md) |  | Fetch a policy by ID. |
-|  [getSchema(id, options)](./core.client.getschema.md) |  | Fetch a schema by ID. |
-|  [getSchemas(request, options)](./core.client.getschemas.md) |  | Fetch multiple schemas by ID. |
-|  [isAllowed(request, options)](./core.client.isallowed.md) |  | Check if a principal is allowed to perform an action on a resource. |
-|  [listPolicies(request, options)](./core.client.listpolicies.md) |  | List policies. |
-|  [listSchemas(options)](./core.client.listschemas.md) |  | List schemas. |
-|  [planResources(request, options)](./core.client.planresources.md) |  | Produce a query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action. |
-|  [reloadStore(request, options)](./core.client.reloadstore.md) |  | Reload the store. |
-|  [serverInfo(options)](./core.client.serverinfo.md) |  | Retrieve information about the Cerbos policy decision point server. |
-|  [withPrincipal(principal, auxData)](./core.client.withprincipal.md) |  | Create a client instance with a pre-specified principal. |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[addOrUpdatePolicies(request, options)](./core.client.addorupdatepolicies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Add policies, or update existing policies.
+
+
+</td></tr>
+<tr><td>
+
+[addOrUpdateSchemas(request, options)](./core.client.addorupdateschemas.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Add schemas to be used for validating principal or resource attributes, or update existing schemas.
+
+
+</td></tr>
+<tr><td>
+
+[checkResource(request, options)](./core.client.checkresource.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Check a principal's permissions on a resource.
+
+
+</td></tr>
+<tr><td>
+
+[checkResources(request, options)](./core.client.checkresources.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Check a principal's permissions on a set of resources.
+
+
+</td></tr>
+<tr><td>
+
+[deleteSchema(id, options)](./core.client.deleteschema.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Delete a schema.
+
+
+</td></tr>
+<tr><td>
+
+[deleteSchemas(request, options)](./core.client.deleteschemas.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Delete multiple schemas.
+
+
+</td></tr>
+<tr><td>
+
+[disablePolicies(request, options)](./core.client.disablepolicies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Disable multiple policies.
+
+
+</td></tr>
+<tr><td>
+
+[disablePolicy(id, options)](./core.client.disablepolicy.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Disable a policy.
+
+
+</td></tr>
+<tr><td>
+
+[enablePolicies(request, options)](./core.client.enablepolicies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Enable multiple policies.
+
+
+</td></tr>
+<tr><td>
+
+[enablePolicy(id, options)](./core.client.enablepolicy.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Enable a policy.
+
+
+</td></tr>
+<tr><td>
+
+[getPolicies(request, options)](./core.client.getpolicies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Fetch multiple policies by ID.
+
+
+</td></tr>
+<tr><td>
+
+[getPolicy(id, options)](./core.client.getpolicy.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Fetch a policy by ID.
+
+
+</td></tr>
+<tr><td>
+
+[getSchema(id, options)](./core.client.getschema.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Fetch a schema by ID.
+
+
+</td></tr>
+<tr><td>
+
+[getSchemas(request, options)](./core.client.getschemas.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Fetch multiple schemas by ID.
+
+
+</td></tr>
+<tr><td>
+
+[isAllowed(request, options)](./core.client.isallowed.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Check if a principal is allowed to perform an action on a resource.
+
+
+</td></tr>
+<tr><td>
+
+[listPolicies(request, options)](./core.client.listpolicies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+List policies.
+
+
+</td></tr>
+<tr><td>
+
+[listSchemas(options)](./core.client.listschemas.md)
+
+
+</td><td>
+
+
+</td><td>
+
+List schemas.
+
+
+</td></tr>
+<tr><td>
+
+[planResources(request, options)](./core.client.planresources.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Produce a query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action.
+
+
+</td></tr>
+<tr><td>
+
+[reloadStore(request, options)](./core.client.reloadstore.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Reload the store.
+
+
+</td></tr>
+<tr><td>
+
+[serverInfo(options)](./core.client.serverinfo.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Retrieve information about the Cerbos policy decision point server.
+
+
+</td></tr>
+<tr><td>
+
+[withPrincipal(principal, auxData)](./core.client.withprincipal.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Create a client instance with a pre-specified principal.
+
+
+</td></tr>
+</tbody></table>

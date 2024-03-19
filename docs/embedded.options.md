@@ -14,9 +14,82 @@ export interface Options
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [decodeJWTPayload?](./embedded.options.decodejwtpayload.md) |  | [DecodeJWTPayload](./embedded.decodejwtpayload.md) \| undefined | _(Optional)_ Function to verify and decode JWTs passed as auxiliary data, returning the JWT payload. |
-|  [globals?](./embedded.options.globals.md) |  | Record&lt;string, [Value](./core.value.md)<!-- -->&gt; \| undefined | _(Optional)_ [Global variables](https://docs.cerbos.dev/cerbos/latest/configuration/engine#globals) to pass environment-specific information to policy conditions. |
-|  [now?](./embedded.options.now.md) |  | (() =&gt; Date \| number) \| undefined | _(Optional)_ Function returning the current time, to be used when evaluating policy conditions. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[decodeJWTPayload?](./embedded.options.decodejwtpayload.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[DecodeJWTPayload](./embedded.decodejwtpayload.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Function to verify and decode JWTs passed as auxiliary data, returning the JWT payload.
+
+
+</td></tr>
+<tr><td>
+
+[globals?](./embedded.options.globals.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, [Value](./core.value.md)<!-- -->&gt; \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Global variables](https://docs.cerbos.dev/cerbos/latest/configuration/engine#globals) to pass environment-specific information to policy conditions.
+
+
+</td></tr>
+<tr><td>
+
+[now?](./embedded.options.now.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(() =&gt; Date \| number) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Function returning the current time, to be used when evaluating policy conditions.
+
+
+</td></tr>
+</tbody></table>

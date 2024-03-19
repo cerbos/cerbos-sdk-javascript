@@ -14,9 +14,82 @@ export interface DerivedRoleDefinition
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [condition?](./core.derivedroledefinition.condition.md) |  | [Condition](./core.condition.md) \| undefined | _(Optional)_ A set of expressions that must evaluate to true to activate the derived role. |
-|  [name](./core.derivedroledefinition.name.md) |  | string | A descriptive name for the derived role. |
-|  [parentRoles](./core.derivedroledefinition.parentroles.md) |  | string\[\] | The static roles (from the identity provider) to which this derived role applies. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[condition?](./core.derivedroledefinition.condition.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Condition](./core.condition.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ A set of expressions that must evaluate to true to activate the derived role.
+
+
+</td></tr>
+<tr><td>
+
+[name](./core.derivedroledefinition.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+A descriptive name for the derived role.
+
+
+</td></tr>
+<tr><td>
+
+[parentRoles](./core.derivedroledefinition.parentroles.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The static roles (from the identity provider) to which this derived role applies.
+
+
+</td></tr>
+</tbody></table>

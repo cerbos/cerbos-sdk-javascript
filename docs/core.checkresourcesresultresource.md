@@ -14,10 +14,101 @@ export interface CheckResourcesResultResource
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [id](./core.checkresourcesresultresource.id.md) |  | string | The unique identifier of the resource. |
-|  [kind](./core.checkresourcesresultresource.kind.md) |  | string | The type of resource. |
-|  [policyVersion](./core.checkresourcesresultresource.policyversion.md) |  | string | The policy version against which the check was performed. |
-|  [scope](./core.checkresourcesresultresource.scope.md) |  | string | The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) against which the check was performed. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[id](./core.checkresourcesresultresource.id.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The unique identifier of the resource.
+
+
+</td></tr>
+<tr><td>
+
+[kind](./core.checkresourcesresultresource.kind.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The type of resource.
+
+
+</td></tr>
+<tr><td>
+
+[policyVersion](./core.checkresourcesresultresource.policyversion.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The policy version against which the check was performed.
+
+
+</td></tr>
+<tr><td>
+
+[scope](./core.checkresourcesresultresource.scope.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) against which the check was performed.
+
+
+</td></tr>
+</tbody></table>

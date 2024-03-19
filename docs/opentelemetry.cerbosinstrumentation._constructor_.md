@@ -14,7 +14,36 @@ constructor(config?: CerbosInstrumentationConfig);
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  config | [CerbosInstrumentationConfig](./opentelemetry.cerbosinstrumentationconfig.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+config
+
+
+</td><td>
+
+[CerbosInstrumentationConfig](./opentelemetry.cerbosinstrumentationconfig.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

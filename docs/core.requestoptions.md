@@ -14,7 +14,44 @@ export interface RequestOptions
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [headers?](./core.requestoptions.headers.md) |  | [HeadersInit](./core.headersinit.md) \| undefined | _(Optional)_ Headers to add to the request. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[headers?](./core.requestoptions.headers.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[HeadersInit](./core.headersinit.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Headers to add to the request.
+
+
+</td></tr>
+</tbody></table>

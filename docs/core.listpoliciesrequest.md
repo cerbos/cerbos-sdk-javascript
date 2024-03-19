@@ -14,10 +14,101 @@ export interface ListPoliciesRequest
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [includeDisabled?](./core.listpoliciesrequest.includedisabled.md) |  | boolean \| undefined | _(Optional)_ Include disabled policies in the list? |
-|  [nameRegexp?](./core.listpoliciesrequest.nameregexp.md) |  | string \| undefined | _(Optional)_ Only include policies with a name matching the given regular expression. |
-|  [scopeRegexp?](./core.listpoliciesrequest.scoperegexp.md) |  | string \| undefined | _(Optional)_ Only include policies with a scope matching the given regular expression. |
-|  [versionRegexp?](./core.listpoliciesrequest.versionregexp.md) |  | string \| undefined | _(Optional)_ Only include policies with a version matching the given regular expression. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[includeDisabled?](./core.listpoliciesrequest.includedisabled.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean \| undefined
+
+
+</td><td>
+
+_(Optional)_ Include disabled policies in the list?
+
+
+</td></tr>
+<tr><td>
+
+[nameRegexp?](./core.listpoliciesrequest.nameregexp.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ Only include policies with a name matching the given regular expression.
+
+
+</td></tr>
+<tr><td>
+
+[scopeRegexp?](./core.listpoliciesrequest.scoperegexp.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ Only include policies with a scope matching the given regular expression.
+
+
+</td></tr>
+<tr><td>
+
+[versionRegexp?](./core.listpoliciesrequest.versionregexp.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ Only include policies with a version matching the given regular expression.
+
+
+</td></tr>
+</tbody></table>

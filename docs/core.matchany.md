@@ -14,7 +14,44 @@ export interface MatchAny
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [any](./core.matchany.any.md) |  | [Matches](./core.matches.md) | The expressions, at least one of which must be true. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[any](./core.matchany.any.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Matches](./core.matches.md)
+
+
+</td><td>
+
+The expressions, at least one of which must be true.
+
+
+</td></tr>
+</tbody></table>
