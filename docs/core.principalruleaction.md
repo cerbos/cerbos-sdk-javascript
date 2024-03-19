@@ -14,11 +14,120 @@ export interface PrincipalRuleAction
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [action](./core.principalruleaction.action.md) |  | string | The action to override. |
-|  [condition?](./core.principalruleaction.condition.md) |  | [Condition](./core.condition.md) \| undefined | _(Optional)_ The condition that must be met for the override to apply. |
-|  [effect](./core.principalruleaction.effect.md) |  | [Effect](./core.effect.md) | The effect of the override. |
-|  [name?](./core.principalruleaction.name.md) |  | string \| undefined | _(Optional)_ A descriptive name for the rule. |
-|  [output?](./core.principalruleaction.output.md) |  | [Output](./core.output.md) \| undefined | _(Optional)_ User-defined output to be produced when evaluating the rule. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[action](./core.principalruleaction.action.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The action to override.
+
+
+</td></tr>
+<tr><td>
+
+[condition?](./core.principalruleaction.condition.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Condition](./core.condition.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ The condition that must be met for the override to apply.
+
+
+</td></tr>
+<tr><td>
+
+[effect](./core.principalruleaction.effect.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Effect](./core.effect.md)
+
+
+</td><td>
+
+The effect of the override.
+
+
+</td></tr>
+<tr><td>
+
+[name?](./core.principalruleaction.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ A descriptive name for the rule.
+
+
+</td></tr>
+<tr><td>
+
+[output?](./core.principalruleaction.output.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Output](./core.output.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ User-defined output to be produced when evaluating the rule.
+
+
+</td></tr>
+</tbody></table>

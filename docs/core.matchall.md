@@ -14,7 +14,44 @@ export interface MatchAll
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [all](./core.matchall.all.md) |  | [Matches](./core.matches.md) | The expressions that must all be true. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[all](./core.matchall.all.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Matches](./core.matches.md)
+
+
+</td><td>
+
+The expressions that must all be true.
+
+
+</td></tr>
+</tbody></table>

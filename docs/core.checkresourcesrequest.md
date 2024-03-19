@@ -14,11 +14,120 @@ export interface CheckResourcesRequest
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [auxData?](./core.checkresourcesrequest.auxdata.md) |  | [AuxData](./core.auxdata.md) \| undefined | _(Optional)_ Auxiliary data. |
-|  [includeMetadata?](./core.checkresourcesrequest.includemetadata.md) |  | boolean \| undefined | _(Optional)_ Include [additional metadata](./core.checkresourcesresultmetadata.md) in the results? |
-|  [principal](./core.checkresourcesrequest.principal.md) |  | [Principal](./core.principal.md) | The principal to check. |
-|  [requestId?](./core.checkresourcesrequest.requestid.md) |  | string \| undefined | _(Optional)_ An identifier for tracing the request. |
-|  [resources](./core.checkresourcesrequest.resources.md) |  | [ResourceCheck](./core.resourcecheck.md)<!-- -->\[\] | The resources and actions to check. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[auxData?](./core.checkresourcesrequest.auxdata.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[AuxData](./core.auxdata.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Auxiliary data.
+
+
+</td></tr>
+<tr><td>
+
+[includeMetadata?](./core.checkresourcesrequest.includemetadata.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean \| undefined
+
+
+</td><td>
+
+_(Optional)_ Include [additional metadata](./core.checkresourcesresultmetadata.md) in the results?
+
+
+</td></tr>
+<tr><td>
+
+[principal](./core.checkresourcesrequest.principal.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Principal](./core.principal.md)
+
+
+</td><td>
+
+The principal to check.
+
+
+</td></tr>
+<tr><td>
+
+[requestId?](./core.checkresourcesrequest.requestid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ An identifier for tracing the request.
+
+
+</td></tr>
+<tr><td>
+
+[resources](./core.checkresourcesrequest.resources.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ResourceCheck](./core.resourcecheck.md)<!-- -->\[\]
+
+
+</td><td>
+
+The resources and actions to check.
+
+
+</td></tr>
+</tbody></table>

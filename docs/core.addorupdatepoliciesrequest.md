@@ -14,7 +14,44 @@ export interface AddOrUpdatePoliciesRequest
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [policies](./core.addorupdatepoliciesrequest.policies.md) |  | OmitFromEach&lt;[Policy](./core.policy.md)<!-- -->, "metadata"&gt;\[\] | A set of policies to add or update. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[policies](./core.addorupdatepoliciesrequest.policies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+OmitFromEach&lt;[Policy](./core.policy.md)<!-- -->, "metadata"&gt;\[\]
+
+
+</td><td>
+
+A set of policies to add or update.
+
+
+</td></tr>
+</tbody></table>

@@ -14,12 +14,139 @@ export interface PlanResourcesRequest
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [action](./core.planresourcesrequest.action.md) |  | string | The action for which to plan. |
-|  [auxData?](./core.planresourcesrequest.auxdata.md) |  | [AuxData](./core.auxdata.md) \| undefined | _(Optional)_ Auxiliary data. |
-|  [includeMetadata?](./core.planresourcesrequest.includemetadata.md) |  | boolean \| undefined | _(Optional)_ Include [additional metadata](./core.planresourcesmetadata.md) in the plan? |
-|  [principal](./core.planresourcesrequest.principal.md) |  | [Principal](./core.principal.md) | The principal for whom to plan. |
-|  [requestId?](./core.planresourcesrequest.requestid.md) |  | string \| undefined | _(Optional)_ The identifier for tracing the request. |
-|  [resource](./core.planresourcesrequest.resource.md) |  | [ResourceQuery](./core.resourcequery.md) | Partial details of the resources for which to plan. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[action](./core.planresourcesrequest.action.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The action for which to plan.
+
+
+</td></tr>
+<tr><td>
+
+[auxData?](./core.planresourcesrequest.auxdata.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[AuxData](./core.auxdata.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Auxiliary data.
+
+
+</td></tr>
+<tr><td>
+
+[includeMetadata?](./core.planresourcesrequest.includemetadata.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean \| undefined
+
+
+</td><td>
+
+_(Optional)_ Include [additional metadata](./core.planresourcesmetadata.md) in the plan?
+
+
+</td></tr>
+<tr><td>
+
+[principal](./core.planresourcesrequest.principal.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Principal](./core.principal.md)
+
+
+</td><td>
+
+The principal for whom to plan.
+
+
+</td></tr>
+<tr><td>
+
+[requestId?](./core.planresourcesrequest.requestid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ The identifier for tracing the request.
+
+
+</td></tr>
+<tr><td>
+
+[resource](./core.planresourcesrequest.resource.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ResourceQuery](./core.resourcequery.md)
+
+
+</td><td>
+
+Partial details of the resources for which to plan.
+
+
+</td></tr>
+</tbody></table>

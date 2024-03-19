@@ -14,7 +14,44 @@ export interface Matches
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [of](./core.matches.of.md) |  | [Match](./core.match.md)<!-- -->\[\] | The expressions to evaluate. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[of](./core.matches.of.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Match](./core.match.md)<!-- -->\[\]
+
+
+</td><td>
+
+The expressions to evaluate.
+
+
+</td></tr>
+</tbody></table>

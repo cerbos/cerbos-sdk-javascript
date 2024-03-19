@@ -14,11 +14,120 @@ export interface PolicyMetadata
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [annotations](./core.policymetadata.annotations.md) |  | Record&lt;string, string \| undefined&gt; | Free-form data, for auditing purposes. |
-|  [hash](./core.policymetadata.hash.md) |  | string \| undefined | Hash of policy contents. |
-|  [sourceFile](./core.policymetadata.sourcefile.md) |  | string | The source of the policy, for auditing purposes. |
-|  [storeIdentifer](./core.policymetadata.storeidentifer.md) |  | string | Deprecated. |
-|  [storeIdentifier](./core.policymetadata.storeidentifier.md) |  | string | The policy's identifier in the backend store. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[annotations](./core.policymetadata.annotations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string \| undefined&gt;
+
+
+</td><td>
+
+Free-form data, for auditing purposes.
+
+
+</td></tr>
+<tr><td>
+
+[hash](./core.policymetadata.hash.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+Hash of policy contents.
+
+
+</td></tr>
+<tr><td>
+
+[sourceFile](./core.policymetadata.sourcefile.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The source of the policy, for auditing purposes.
+
+
+</td></tr>
+<tr><td>
+
+[storeIdentifer](./core.policymetadata.storeidentifer.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+Deprecated.
+
+
+</td></tr>
+<tr><td>
+
+[storeIdentifier](./core.policymetadata.storeidentifier.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The policy's identifier in the backend store.
+
+
+</td></tr>
+</tbody></table>

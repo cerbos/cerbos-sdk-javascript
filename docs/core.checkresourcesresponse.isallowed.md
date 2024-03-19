@@ -17,10 +17,39 @@ isAllowed(check: {
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  check | { resource: [ResourceSearch](./core.resourcesearch.md)<!-- -->; action: string; } | the resource search criteria and action to check. |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+check
+
+
+</td><td>
+
+{ resource: [ResourceSearch](./core.resourcesearch.md)<!-- -->; action: string; }
+
+
+</td><td>
+
+the resource search criteria and action to check.
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 boolean \| undefined

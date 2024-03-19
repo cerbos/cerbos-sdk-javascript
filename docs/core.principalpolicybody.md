@@ -14,11 +14,120 @@ export interface PrincipalPolicyBody
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [principal](./core.principalpolicybody.principal.md) |  | string | The ID of the principal to whom the policy applies. |
-|  [rules](./core.principalpolicybody.rules.md) |  | [PrincipalRule](./core.principalrule.md)<!-- -->\[\] | Rules defining the overrides that apply to the principal. |
-|  [scope?](./core.principalpolicybody.scope.md) |  | string \| undefined | _(Optional)_ [Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) of the policy. |
-|  [variables?](./core.principalpolicybody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in conditions. |
-|  [version](./core.principalpolicybody.version.md) |  | string | The version of the policy. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[principal](./core.principalpolicybody.principal.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The ID of the principal to whom the policy applies.
+
+
+</td></tr>
+<tr><td>
+
+[rules](./core.principalpolicybody.rules.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[PrincipalRule](./core.principalrule.md)<!-- -->\[\]
+
+
+</td><td>
+
+Rules defining the overrides that apply to the principal.
+
+
+</td></tr>
+<tr><td>
+
+[scope?](./core.principalpolicybody.scope.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) of the policy.
+
+
+</td></tr>
+<tr><td>
+
+[variables?](./core.principalpolicybody.variables.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Variables](./core.variables.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in conditions.
+
+
+</td></tr>
+<tr><td>
+
+[version](./core.principalpolicybody.version.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The version of the policy.
+
+
+</td></tr>
+</tbody></table>

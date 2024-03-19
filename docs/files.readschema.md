@@ -14,11 +14,55 @@ export declare function readSchema(path: string, options?: ReadSchemaOptions): P
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  path | string | the path to the schema file. |
-|  options | [ReadSchemaOptions](./files.readschemaoptions.md) | _(Optional)_ additional settings. |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+path
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+the path to the schema file.
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+[ReadSchemaOptions](./files.readschemaoptions.md)
+
+
+</td><td>
+
+_(Optional)_ additional settings.
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[Schema](./files.schema.md)<!-- -->&gt;

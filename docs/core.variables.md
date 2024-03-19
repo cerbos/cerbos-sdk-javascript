@@ -14,8 +14,63 @@ export interface Variables
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [import?](./core.variables.import.md) |  | string\[\] \| undefined | _(Optional)_ Names of variable sets to import. |
-|  [local?](./core.variables.local.md) |  | Record&lt;string, string&gt; \| undefined | _(Optional)_ Variable expressions defined for the policy. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[import?](./core.variables.import.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\] \| undefined
+
+
+</td><td>
+
+_(Optional)_ Names of variable sets to import.
+
+
+</td></tr>
+<tr><td>
+
+[local?](./core.variables.local.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string&gt; \| undefined
+
+
+</td><td>
+
+_(Optional)_ Variable expressions defined for the policy.
+
+
+</td></tr>
+</tbody></table>

@@ -14,7 +14,44 @@ export interface DisablePoliciesResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [disabledPolicies](./core.disablepoliciesresponse.disabledpolicies.md) |  | number | Number of policies disabled. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[disabledPolicies](./core.disablepoliciesresponse.disabledpolicies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+Number of policies disabled.
+
+
+</td></tr>
+</tbody></table>

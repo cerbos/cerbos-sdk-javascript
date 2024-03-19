@@ -14,8 +14,63 @@ export interface AdminCredentials
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [password](./core.admincredentials.password.md) |  | string | Password for authenticating to the admin API. |
-|  [username](./core.admincredentials.username.md) |  | string | Username for authenticating to the admin API. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[password](./core.admincredentials.password.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+Password for authenticating to the admin API.
+
+
+</td></tr>
+<tr><td>
+
+[username](./core.admincredentials.username.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+Username for authenticating to the admin API.
+
+
+</td></tr>
+</tbody></table>

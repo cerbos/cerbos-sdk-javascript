@@ -14,13 +14,158 @@ export interface ResourcePolicyBody
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [importDerivedRoles?](./core.resourcepolicybody.importderivedroles.md) |  | string\[\] \| undefined | _(Optional)_ Name of a set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) to import. |
-|  [resource](./core.resourcepolicybody.resource.md) |  | string | The name of the resource to which the policy applies. |
-|  [rules](./core.resourcepolicybody.rules.md) |  | [ResourceRule](./core.resourcerule.md)<!-- -->\[\] | Rules defining the actions that can be performed on the resource. |
-|  [schemas?](./core.resourcepolicybody.schemas.md) |  | [SchemaRefs](./core.schemarefs.md) \| undefined | _(Optional)_ [Schemas](https://docs.cerbos.dev/cerbos/latest/policies/schemas) for principal and resource attributes. |
-|  [scope?](./core.resourcepolicybody.scope.md) |  | string \| undefined | _(Optional)_ [Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) of the policy. |
-|  [variables?](./core.resourcepolicybody.variables.md) |  | [Variables](./core.variables.md) \| undefined | _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in conditions. |
-|  [version](./core.resourcepolicybody.version.md) |  | string | The version of the policy. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[importDerivedRoles?](./core.resourcepolicybody.importderivedroles.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\] \| undefined
+
+
+</td><td>
+
+_(Optional)_ Name of a set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) to import.
+
+
+</td></tr>
+<tr><td>
+
+[resource](./core.resourcepolicybody.resource.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The name of the resource to which the policy applies.
+
+
+</td></tr>
+<tr><td>
+
+[rules](./core.resourcepolicybody.rules.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ResourceRule](./core.resourcerule.md)<!-- -->\[\]
+
+
+</td><td>
+
+Rules defining the actions that can be performed on the resource.
+
+
+</td></tr>
+<tr><td>
+
+[schemas?](./core.resourcepolicybody.schemas.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SchemaRefs](./core.schemarefs.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Schemas](https://docs.cerbos.dev/cerbos/latest/policies/schemas) for principal and resource attributes.
+
+
+</td></tr>
+<tr><td>
+
+[scope?](./core.resourcepolicybody.scope.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) of the policy.
+
+
+</td></tr>
+<tr><td>
+
+[variables?](./core.resourcepolicybody.variables.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Variables](./core.variables.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in conditions.
+
+
+</td></tr>
+<tr><td>
+
+[version](./core.resourcepolicybody.version.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The version of the policy.
+
+
+</td></tr>
+</tbody></table>

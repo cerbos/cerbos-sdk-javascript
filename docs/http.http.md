@@ -23,7 +23,34 @@ See [the parent class](./core.client.md) for available methods.
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(url, options)](./http.http._constructor_.md) |  | Create a client for interacting with the Cerbos policy decision point (PDP) server over HTTP. |
+<table><thead><tr><th>
 
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(url, options)](./http.http._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Create a client for interacting with the Cerbos policy decision point (PDP) server over HTTP.
+
+
+</td></tr>
+</tbody></table>

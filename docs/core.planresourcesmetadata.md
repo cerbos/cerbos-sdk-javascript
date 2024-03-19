@@ -14,8 +14,63 @@ export interface PlanResourcesMetadata
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [conditionString](./core.planresourcesmetadata.conditionstring.md) |  | string | The query condition abstract syntax tree rendered as a human-readable string, to help with debugging. |
-|  [matchedScope](./core.planresourcesmetadata.matchedscope.md) |  | string | The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) that was used to plan the query. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[conditionString](./core.planresourcesmetadata.conditionstring.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The query condition abstract syntax tree rendered as a human-readable string, to help with debugging.
+
+
+</td></tr>
+<tr><td>
+
+[matchedScope](./core.planresourcesmetadata.matchedscope.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) that was used to plan the query.
+
+
+</td></tr>
+</tbody></table>

@@ -16,8 +16,48 @@ constructor(
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  code | [Status](./core.status.md) |  |
-|  details | string |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+code
+
+
+</td><td>
+
+[Status](./core.status.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+details
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

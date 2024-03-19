@@ -14,8 +14,63 @@ export interface CheckResourcesResultMetadata
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [actions](./core.checkresourcesresultmetadata.actions.md) |  | Record&lt;string, [CheckResourcesResultMetadataEffect](./core.checkresourcesresultmetadataeffect.md) \| undefined&gt; | Additional information about how the policy decision was reached for each action. |
-|  [effectiveDerivedRoles](./core.checkresourcesresultmetadata.effectivederivedroles.md) |  | string\[\] | The [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) that were applied to the principal for the resource. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[actions](./core.checkresourcesresultmetadata.actions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, [CheckResourcesResultMetadataEffect](./core.checkresourcesresultmetadataeffect.md) \| undefined&gt;
+
+
+</td><td>
+
+Additional information about how the policy decision was reached for each action.
+
+
+</td></tr>
+<tr><td>
+
+[effectiveDerivedRoles](./core.checkresourcesresultmetadata.effectivederivedroles.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) that were applied to the principal for the resource.
+
+
+</td></tr>
+</tbody></table>

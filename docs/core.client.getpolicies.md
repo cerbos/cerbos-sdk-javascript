@@ -14,11 +14,53 @@ getPolicies(request: GetPoliciesRequest, options?: RequestOptions): Promise<GetP
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  request | [GetPoliciesRequest](./core.getpoliciesrequest.md) |  |
-|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+request
+
+
+</td><td>
+
+[GetPoliciesRequest](./core.getpoliciesrequest.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+[RequestOptions](./core.requestoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[GetPoliciesResponse](./core.getpoliciesresponse.md)<!-- -->&gt;

@@ -8,13 +8,52 @@ OpenTelemetry instrumentation for the [gRPC](./grpc.md) and [HTTP](./http.md) cl
 
 ## Classes
 
-|  Class | Description |
-|  --- | --- |
-|  [CerbosInstrumentation](./opentelemetry.cerbosinstrumentation.md) | OpenTelemetry instrumentation for Cerbos clients. |
+<table><thead><tr><th>
+
+Class
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[CerbosInstrumentation](./opentelemetry.cerbosinstrumentation.md)
+
+
+</td><td>
+
+OpenTelemetry instrumentation for Cerbos clients.
+
+
+</td></tr>
+</tbody></table>
 
 ## Type Aliases
 
-|  Type Alias | Description |
-|  --- | --- |
-|  [CerbosInstrumentationConfig](./opentelemetry.cerbosinstrumentationconfig.md) | Configuration for OpenTelemetry instrumentation of Cerbos clients. |
+<table><thead><tr><th>
 
+Type Alias
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[CerbosInstrumentationConfig](./opentelemetry.cerbosinstrumentationconfig.md)
+
+
+</td><td>
+
+Configuration for OpenTelemetry instrumentation of Cerbos clients.
+
+
+</td></tr>
+</tbody></table>

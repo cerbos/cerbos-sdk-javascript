@@ -14,10 +14,55 @@ constructor(target: string, options: Options);
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  target | string | Cerbos PDP server address (<code>&quot;host&quot;</code>, <code>&quot;host:port&quot;</code>, or <code>&quot;unix:/path/to/socket&quot;</code>). |
-|  options | [Options](./grpc.options.md) | additional client settings. |
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+target
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+Cerbos PDP server address (`"host"`<!-- -->, `"host:port"`<!-- -->, or `"unix:/path/to/socket"`<!-- -->).
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+[Options](./grpc.options.md)
+
+
+</td><td>
+
+additional client settings.
+
+
+</td></tr>
+</tbody></table>
 
 ## Example 1
 

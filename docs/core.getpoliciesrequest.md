@@ -14,7 +14,44 @@ export interface GetPoliciesRequest
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [ids](./core.getpoliciesrequest.ids.md) |  | string\[\] | IDs of policies to fetch. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[ids](./core.getpoliciesrequest.ids.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+IDs of policies to fetch.
+
+
+</td></tr>
+</tbody></table>

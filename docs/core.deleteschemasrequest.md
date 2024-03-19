@@ -14,7 +14,44 @@ export interface DeleteSchemasRequest
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [ids](./core.deleteschemasrequest.ids.md) |  | string\[\] | The IDs of the schemas to delete. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[ids](./core.deleteschemasrequest.ids.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The IDs of the schemas to delete.
+
+
+</td></tr>
+</tbody></table>

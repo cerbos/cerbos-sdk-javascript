@@ -14,11 +14,53 @@ disablePolicies(request: DisablePoliciesRequest, options?: RequestOptions): Prom
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  request | [DisablePoliciesRequest](./core.disablepoliciesrequest.md) |  |
-|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+request
+
+
+</td><td>
+
+[DisablePoliciesRequest](./core.disablepoliciesrequest.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+[RequestOptions](./core.requestoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[DisablePoliciesResponse](./core.disablepoliciesresponse.md)<!-- -->&gt;

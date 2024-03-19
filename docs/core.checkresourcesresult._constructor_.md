@@ -14,7 +14,34 @@ constructor({ resource, actions, validationErrors, metadata, outputs, }: Pick<Ch
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  { resource, actions, validationErrors, metadata, outputs, } | Pick&lt;[CheckResourcesResult](./core.checkresourcesresult.md)<!-- -->, "resource" \| "actions" \| "validationErrors" \| "metadata" \| "outputs"&gt; |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+{ resource, actions, validationErrors, metadata, outputs, }
+
+
+</td><td>
+
+Pick&lt;[CheckResourcesResult](./core.checkresourcesresult.md)<!-- -->, "resource" \| "actions" \| "validationErrors" \| "metadata" \| "outputs"&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

@@ -15,7 +15,44 @@ export interface ResourcePolicy extends PolicyBase
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [resourcePolicy](./core.resourcepolicy.resourcepolicy.md) |  | [ResourcePolicyBody](./core.resourcepolicybody.md) | The policy body. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[resourcePolicy](./core.resourcepolicy.resourcepolicy.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ResourcePolicyBody](./core.resourcepolicybody.md)
+
+
+</td><td>
+
+The policy body.
+
+
+</td></tr>
+</tbody></table>

@@ -14,10 +14,39 @@ findResult(resource: ResourceSearch): CheckResourcesResult | undefined;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  resource | [ResourceSearch](./core.resourcesearch.md) | the resource search criteria. |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+resource
+
+
+</td><td>
+
+[ResourceSearch](./core.resourcesearch.md)
+
+
+</td><td>
+
+the resource search criteria.
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 [CheckResourcesResult](./core.checkresourcesresult.md) \| undefined

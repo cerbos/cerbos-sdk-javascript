@@ -14,11 +14,53 @@ addOrUpdatePolicies(request: AddOrUpdatePoliciesRequest, options?: RequestOption
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  request | [AddOrUpdatePoliciesRequest](./core.addorupdatepoliciesrequest.md) |  |
-|  options | [RequestOptions](./core.requestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+request
+
+
+</td><td>
+
+[AddOrUpdatePoliciesRequest](./core.addorupdatepoliciesrequest.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+[RequestOptions](./core.requestoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;void&gt;

@@ -14,11 +14,53 @@ withPrincipal(principal: Principal, auxData?: Pick<AuxData, "jwt">): ClientWithP
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  principal | [Principal](./core.principal.md) |  |
-|  auxData | Pick&lt;[AuxData](./core.auxdata.md)<!-- -->, "jwt"&gt; | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+principal
+
+
+</td><td>
+
+[Principal](./core.principal.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+auxData
+
+
+</td><td>
+
+Pick&lt;[AuxData](./core.auxdata.md)<!-- -->, "jwt"&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 [ClientWithPrincipal](./core.clientwithprincipal.md)<!-- -->&lt;this&gt;

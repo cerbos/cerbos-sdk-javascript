@@ -14,8 +14,63 @@ export interface SchemaRefs
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [principalSchema?](./core.schemarefs.principalschema.md) |  | [SchemaRef](./core.schemaref.md) \| undefined | _(Optional)_ Reference to a schema to be used to validate principal attributes. |
-|  [resourceSchema?](./core.schemarefs.resourceschema.md) |  | [SchemaRef](./core.schemaref.md) \| undefined | _(Optional)_ Reference to a schema to be used to validate resource attributes. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[principalSchema?](./core.schemarefs.principalschema.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SchemaRef](./core.schemaref.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Reference to a schema to be used to validate principal attributes.
+
+
+</td></tr>
+<tr><td>
+
+[resourceSchema?](./core.schemarefs.resourceschema.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SchemaRef](./core.schemaref.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Reference to a schema to be used to validate resource attributes.
+
+
+</td></tr>
+</tbody></table>

@@ -14,8 +14,52 @@ export declare enum Effect
 
 ## Enumeration Members
 
-|  Member | Value | Description |
-|  --- | --- | --- |
-|  ALLOW | <code>&quot;EFFECT_ALLOW&quot;</code> | The action should be allowed. |
-|  DENY | <code>&quot;EFFECT_DENY&quot;</code> | The action should be denied. |
+<table><thead><tr><th>
 
+Member
+
+
+</th><th>
+
+Value
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+ALLOW
+
+
+</td><td>
+
+`"EFFECT_ALLOW"`
+
+
+</td><td>
+
+The action should be allowed.
+
+
+</td></tr>
+<tr><td>
+
+DENY
+
+
+</td><td>
+
+`"EFFECT_DENY"`
+
+
+</td><td>
+
+The action should be denied.
+
+
+</td></tr>
+</tbody></table>

@@ -14,10 +14,37 @@ export declare function policyIsExportVariables(policy: Policy): policy is Expor
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  policy | [Policy](./core.policy.md) |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+policy
+
+
+</td><td>
+
+[Policy](./core.policy.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 policy is [ExportVariables](./core.exportvariables.md)

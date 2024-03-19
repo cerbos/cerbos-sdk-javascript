@@ -14,10 +14,37 @@ export declare function matchIsMatchAny(match: Match): match is MatchAny;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  match | [Match](./core.match.md) |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+match
+
+
+</td><td>
+
+[Match](./core.match.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 match is [MatchAny](./core.matchany.md)

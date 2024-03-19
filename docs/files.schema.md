@@ -15,7 +15,44 @@ export interface Schema extends SchemaInput
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [definition](./files.schema.definition.md) |  | string | Definition of the schema. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[definition](./files.schema.definition.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+Definition of the schema.
+
+
+</td></tr>
+</tbody></table>

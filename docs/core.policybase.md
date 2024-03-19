@@ -14,11 +14,120 @@ export interface PolicyBase
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [apiVersion?](./core.policybase.apiversion.md) |  | string \| undefined | _(Optional)_ API version of the policy. |
-|  [description?](./core.policybase.description.md) |  | string \| undefined | _(Optional)_ Description of the policy. |
-|  [disabled?](./core.policybase.disabled.md) |  | boolean \| undefined | _(Optional)_ Whether the policy is ignored by the Cerbos engine. |
-|  [metadata?](./core.policybase.metadata.md) |  | [PolicyMetadata](./core.policymetadata.md) \| undefined | _(Optional)_ Metadata about the policy. |
-|  [variables?](./core.policybase.variables.md) |  | Record&lt;string, string&gt; \| undefined | _(Optional)_ Variable expressions defined for the policy. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[apiVersion?](./core.policybase.apiversion.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ API version of the policy.
+
+
+</td></tr>
+<tr><td>
+
+[description?](./core.policybase.description.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ Description of the policy.
+
+
+</td></tr>
+<tr><td>
+
+[disabled?](./core.policybase.disabled.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean \| undefined
+
+
+</td><td>
+
+_(Optional)_ Whether the policy is ignored by the Cerbos engine.
+
+
+</td></tr>
+<tr><td>
+
+[metadata?](./core.policybase.metadata.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[PolicyMetadata](./core.policymetadata.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Metadata about the policy.
+
+
+</td></tr>
+<tr><td>
+
+[variables?](./core.policybase.variables.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string&gt; \| undefined
+
+
+</td><td>
+
+_(Optional)_ Variable expressions defined for the policy.
+
+
+</td></tr>
+</tbody></table>

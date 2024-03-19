@@ -14,7 +14,42 @@ export interface GetPoliciesResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [policies](./core.getpoliciesresponse.policies.md) |  | [Policy](./core.policy.md)<!-- -->\[\] |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[policies](./core.getpoliciesresponse.policies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Policy](./core.policy.md)<!-- -->\[\]
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

@@ -14,8 +14,63 @@ export interface Schema
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [definition](./core.schema.definition.md) |  | [SchemaDefinition](./core.schemadefinition.md) | Definition of the schema. |
-|  [id](./core.schema.id.md) |  | string | Unique ID for the schema, used to reference the schema from policies and from other schemas. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[definition](./core.schema.definition.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SchemaDefinition](./core.schemadefinition.md)
+
+
+</td><td>
+
+Definition of the schema.
+
+
+</td></tr>
+<tr><td>
+
+[id](./core.schema.id.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+Unique ID for the schema, used to reference the schema from policies and from other schemas.
+
+
+</td></tr>
+</tbody></table>

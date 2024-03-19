@@ -14,8 +14,63 @@ export interface SchemaRef
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [ignoreWhen?](./core.schemaref.ignorewhen.md) |  | { actions: string\[\]; } \| undefined | _(Optional)_ Options for ignoring schema validation. |
-|  [ref](./core.schemaref.ref.md) |  | string | ID of the schema. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[ignoreWhen?](./core.schemaref.ignorewhen.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ actions: string\[\]; } \| undefined
+
+
+</td><td>
+
+_(Optional)_ Options for ignoring schema validation.
+
+
+</td></tr>
+<tr><td>
+
+[ref](./core.schemaref.ref.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+ID of the schema.
+
+
+</td></tr>
+</tbody></table>

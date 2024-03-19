@@ -8,13 +8,52 @@ Client library for interacting with the Cerbos policy decision point service ove
 
 ## Classes
 
-|  Class | Description |
-|  --- | --- |
-|  [GRPC](./grpc.grpc.md) | A client for interacting with the Cerbos policy decision point server over gRPC. |
+<table><thead><tr><th>
+
+Class
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[GRPC](./grpc.grpc.md)
+
+
+</td><td>
+
+A client for interacting with the Cerbos policy decision point server over gRPC.
+
+
+</td></tr>
+</tbody></table>
 
 ## Interfaces
 
-|  Interface | Description |
-|  --- | --- |
-|  [Options](./grpc.options.md) | Options for creating a new [GRPC](./grpc.grpc.md) client. |
+<table><thead><tr><th>
 
+Interface
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[Options](./grpc.options.md)
+
+
+</td><td>
+
+Options for creating a new [GRPC](./grpc.grpc.md) client.
+
+
+</td></tr>
+</tbody></table>

@@ -14,9 +14,82 @@ export interface PlanResourcesResponseBase
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [metadata](./core.planresourcesresponsebase.metadata.md) |  | [PlanResourcesMetadata](./core.planresourcesmetadata.md) \| undefined | Additional information about the query plan. |
-|  [requestId](./core.planresourcesresponsebase.requestid.md) |  | string | The identifier for tracing the request. |
-|  [validationErrors](./core.planresourcesresponsebase.validationerrors.md) |  | [ValidationError](./core.validationerror.md)<!-- -->\[\] | Any schema validation errors for the principal or resource attributes. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[metadata](./core.planresourcesresponsebase.metadata.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[PlanResourcesMetadata](./core.planresourcesmetadata.md) \| undefined
+
+
+</td><td>
+
+Additional information about the query plan.
+
+
+</td></tr>
+<tr><td>
+
+[requestId](./core.planresourcesresponsebase.requestid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The identifier for tracing the request.
+
+
+</td></tr>
+<tr><td>
+
+[validationErrors](./core.planresourcesresponsebase.validationerrors.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ValidationError](./core.validationerror.md)<!-- -->\[\]
+
+
+</td><td>
+
+Any schema validation errors for the principal or resource attributes.
+
+
+</td></tr>
+</tbody></table>

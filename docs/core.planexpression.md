@@ -14,14 +14,97 @@ export declare class PlanExpression
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(operator, operands)](./core.planexpression._constructor_.md) |  | Constructs a new instance of the <code>PlanExpression</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(operator, operands)](./core.planexpression._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `PlanExpression` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [operands](./core.planexpression.operands.md) |  | [PlanExpressionOperand](./core.planexpressionoperand.md)<!-- -->\[\] | The operands on which to invoke the operator. |
-|  [operator](./core.planexpression.operator.md) |  | string | The operator to invoke. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[operands](./core.planexpression.operands.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[PlanExpressionOperand](./core.planexpressionoperand.md)<!-- -->\[\]
+
+
+</td><td>
+
+The operands on which to invoke the operator.
+
+
+</td></tr>
+<tr><td>
+
+[operator](./core.planexpression.operator.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The operator to invoke.
+
+
+</td></tr>
+</tbody></table>

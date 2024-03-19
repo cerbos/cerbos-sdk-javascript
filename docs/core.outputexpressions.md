@@ -14,8 +14,63 @@ export interface OutputExpressions
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [conditionNotMet?](./core.outputexpressions.conditionnotmet.md) |  | string \| undefined | _(Optional)_ [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/conditions) expression to evaluate when the policy rule is partially activated (action, roles, and derived roles match, but condition is not met). |
-|  [ruleActivated?](./core.outputexpressions.ruleactivated.md) |  | string \| undefined | _(Optional)_ [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/conditions) expression to evaluate when the policy rule is fully activated (action, roles, and derived roles match, and condition is met). |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[conditionNotMet?](./core.outputexpressions.conditionnotmet.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/conditions) expression to evaluate when the policy rule is partially activated (action, roles, and derived roles match, but condition is not met).
+
+
+</td></tr>
+<tr><td>
+
+[ruleActivated?](./core.outputexpressions.ruleactivated.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Common Expression Language](https://docs.cerbos.dev/cerbos/latest/policies/conditions) expression to evaluate when the policy rule is fully activated (action, roles, and derived roles match, and condition is met).
+
+
+</td></tr>
+</tbody></table>
