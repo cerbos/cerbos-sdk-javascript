@@ -978,7 +978,7 @@ export abstract class Client {
  *
  * @public
  */
-export class ClientWithPrincipal<ClientType extends Client> {
+export class ClientWithPrincipal<ClientType extends Client = Client> {
   /** @internal */
   public constructor(
     /**
