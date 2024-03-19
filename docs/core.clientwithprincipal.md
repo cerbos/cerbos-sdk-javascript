@@ -9,7 +9,7 @@ A client instance with a pre-specified principal.
 **Signature:**
 
 ```typescript
-export declare class ClientWithPrincipal<ClientType extends Client> 
+export declare class ClientWithPrincipal<ClientType extends Client = Client> 
 ```
 
 ## Remarks
