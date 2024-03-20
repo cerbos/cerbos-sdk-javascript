@@ -1,9 +1,6 @@
 {
   "name": "cerbos-sdk-javascript",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "packageManager": "pnpm@8.15.5",
   "engines": {
     "node": "21.7.1",
