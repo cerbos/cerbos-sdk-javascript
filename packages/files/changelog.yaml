@@ -1,0 +1,81 @@
+unreleased:
+  type: patch
+
+  changed:
+    - summary: Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements)
+      pull: 852
+
+    - summary: Prevent importing package internals
+      pull: 867
+
+  bumped:
+    yaml:
+      to: 2.4.1
+      pull: 854
+
+releases:
+  - version: 0.2.3
+    date: 2024-02-29
+
+    bumped:
+      "@cerbos/core":
+        to: 0.16.0
+        pull: 835
+
+      yaml:
+        to: 2.4.0
+        pull: 828
+
+  - version: 0.2.2
+    date: 2024-01-11
+
+    bumped:
+      "@cerbos/core":
+        to: 0.15.0
+        pull: 781
+
+  - version: 0.2.1
+    date: 2023-12-08
+
+    bumped:
+      yaml:
+        to: 2.3.4
+        pulls: [714, 738]
+
+  - version: 0.2.0
+    date: 2023-10-02
+
+    bumped:
+      "@cerbos/core":
+        to: 0.14.0
+        pull: 695
+
+      yaml:
+        to: 2.3.2
+        pull: 658
+
+    removed:
+      - summary: Support for Node.js 16, which is now [end-of-life][nodejs-eol]
+        pull: 669
+
+  - version: 0.1.1
+    date: 2023-08-16
+
+    bumped:
+      "@cerbos/core":
+        to: 0.13.0
+        pull: 645
+
+  - version: 0.1.0
+    date: 2023-07-25
+
+    added:
+      - summary: A package to load Cerbos policies from YAML or JSON files
+        pull: 611
+
+references:
+  "@cerbos/core": ../core/README.md
+  nodejs-eol: https://github.com/nodejs/release#end-of-life-releases
+  yaml: https://github.com/eemeli/yaml
+
+initialCommit: ffc411436a2c64e97cd2f5f8789490eb800c3b3d

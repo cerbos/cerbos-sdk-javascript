@@ -1,0 +1,334 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: "[`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal"
+      pulls: [868, 877]
+
+  changed:
+    - summary: Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements)
+      pull: 852
+
+    - summary: Prevent importing package internals
+      pull: 867
+
+  bumped:
+    "@grpc/grpc-js":
+      to: 1.10.3
+      pulls: [864, 874]
+
+releases:
+  - version: 0.16.0
+    date: 2024-02-29
+
+    added:
+      - summary: "[`Output.when`](../../docs/core.output.when.md) to define [conditional policy rule outputs](https://docs.cerbos.dev/cerbos/latest/policies/outputs) using the Admin API"
+        details: Requires a policy decision point server running Cerbos 0.33+.
+        pull: 829
+
+    bumped:
+      "@cerbos/core":
+        to: 0.16.0
+        pull: 835
+
+      "@grpc/grpc-js":
+        to: 1.10.1
+        pulls: [789, 809, 816]
+
+      protobufjs:
+        to: 7.2.6
+        pull: 790
+
+  - version: 0.15.0
+    date: 2024-01-11
+
+    added:
+      - summary: "[`headers`](../../docs/core.options.headers.md) and [`userAgent`](../../docs/core.options.useragent.md) options to `GRPC` constructor, and [`headers`](../../docs/core.requestoptions.headers.md) option to all methods"
+        pull: 776
+
+    bumped:
+      "@cerbos/core":
+        to: 0.15.0
+        pull: 781
+
+      "@grpc/grpc-js":
+        to: 1.9.13
+        pull: 770
+
+  - version: 0.14.1
+    date: 2023-12-08
+
+    bumped:
+      "@grpc/grpc-js":
+        to: 1.9.12
+        pulls: [702, 719, 733, 749]
+
+  - version: 0.14.0
+    date: 2023-10-02
+
+    changed:
+      - summary: Use `attr` for principal and resource attributes
+        details: |-
+          This makes the API consistent with policy expressions.
+          `attributes` is still supported for backwards compatibility, but is now deprecated.
+        pull: 694
+
+    bumped:
+      "@cerbos/core":
+        to: 0.14.0
+        pull: 695
+
+      "@grpc/grpc-js":
+        to: 1.9.4
+        pulls: [654, 663, 666, 693]
+
+      protobufjs:
+        to: 7.2.5
+        pull: 651
+
+    removed:
+      - summary: Support for Node.js 16, which is now [end-of-life][nodejs-eol]
+        pull: 669
+
+  - version: 0.13.0
+    date: 2023-08-16
+
+    added:
+      - summary: Support for OpenTelemetry span context propagation
+        details: Requires a policy decision point server running Cerbos 0.30+, and [@cerbos/opentelemetry] 0.3+.
+        pull: 638
+
+    bumped:
+      "@cerbos/core":
+        to: 0.13.0
+        pull: 645
+
+      "@grpc/grpc-js":
+        to: 1.9.0
+        pulls: [613, 618, 622, 629]
+
+  - version: 0.12.0
+    date: 2023-07-18
+
+    added:
+      - summary: Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy name, scope, and version
+        details: Requires a policy decision point server running Cerbos 0.29+.
+        pull: 568
+
+      - summary: Support for [exporting and importing variable sets](https://docs.cerbos.dev/cerbos/latest/policies/variables) in policies
+        details: Requires a policy decision point server running Cerbos 0.29+.
+        pull: 598
+
+    bumped:
+      "@cerbos/core":
+        to: 0.12.0
+        pull: 599
+
+      "@grpc/grpc-js":
+        to: 1.8.18
+        pulls: [555, 575, 578, 600]
+
+      long:
+        to: 5.2.3
+        pull: 596
+
+      protobufjs:
+        to: 7.2.4
+        pull: 596
+
+  - version: 0.11.0
+    date: 2023-06-07
+
+    added:
+      - summary: Support for user-defined policy rule outputs
+        details: Requires a policy decision point server running Cerbos 0.27+.
+        pulls: [542, 543, 551]
+
+    bumped:
+      "@cerbos/core":
+        to: 0.11.0
+        pull: 550
+
+    removed:
+      - summary: Support for Node.js 14, which is now [end-of-life][nodejs-eol]
+        pull: 521
+
+  - version: 0.10.0
+    date: 2023-04-18
+
+    added:
+      - summary: "[`includeDisabled`](../../docs/core.listpoliciesrequest.includedisabled.md) option to [`Client.listPolicies`](../../docs/core.client.listpolicies.md) method to include disabled policies in the list"
+        details: Requires a policy decision point server running Cerbos 0.26+.
+        pull: 475
+
+      - summary: "[`Client.enablePolicy`](../../docs/core.client.enablepolicy.md) and [`Client.enablePolicies`](../../docs/core.client.enablepolicies.md) methods to enable policies"
+        details: Requires a policy decision point server running Cerbos 0.26+.
+        pull: 475
+
+    bumped:
+      "@cerbos/core":
+        to: 0.10.0
+        pull: 506
+
+      "@grpc/grpc-js":
+        to: 1.8.14
+        pulls: [485, 502]
+
+  - version: 0.9.2
+    date: 2023-03-23
+
+    bumped:
+      "@cerbos/core":
+        to: 0.9.1
+        pull: 481
+
+    removed:
+      - summary: Unused generated code
+        pull: 480
+
+  - version: 0.9.1
+    date: 2023-03-21
+
+    bumped:
+      "@grpc/grpc-js":
+        to: 1.8.12
+        pulls: [449, 452, 460]
+
+  - version: 0.9.0
+    date: 2023-02-15
+
+    added:
+      - summary: "[`Client.disablePolicy`](../../docs/core.client.disablepolicy.md) and [`Client.disablePolicies`](../../docs/core.client.disablepolicies.md) methods to disable policies"
+        details: Requires a policy decision point server running Cerbos 0.25+.
+        pull: 429
+
+      - summary: "[OpenTelemetry](https://opentelemetry.io) support"
+        pull: 438
+
+    changed:
+      - summary: "[`Client.deleteSchema`](../../docs/core.client.deleteschema.md) and [`Client.deleteSchemas`](../../docs/core.client.deleteschemas.md) now return whether schemas were deleted"
+        details: Requires a policy decision point server running Cerbos 0.25+.
+        pull: 429
+
+      - summary: "[`Policy.metadata.storeIdentifer`](../../docs/core.policymetadata.storeidentifer.md) is now deprecated, replaced by [`Policy.metadata.storeIdentifier`](../../docs/core.policymetadata.storeidentifier.md)"
+        pull: 439
+
+    bumped:
+      "@cerbos/core":
+        to: 0.9.0
+        pull: 446
+
+      "@grpc/grpc-js":
+        to: 1.8.8
+        pulls: [419, 442]
+
+  - version: 0.8.2
+    date: 2023-01-27
+
+    bumped:
+      "@grpc/grpc-js":
+        to: 1.8.5
+        pulls: [372, 391, 404, 407, 415]
+
+  - version: 0.8.1
+    date: 2022-11-24
+
+    changed:
+      - summary: Document principal and resource `attributes` fields in examples
+        pull: 358
+
+    bumped:
+      "@cerbos/core":
+        to: 0.8.1
+        pull: 359
+
+      "@grpc/grpc-js":
+        to: 1.7.3
+        pulls: [254, 273, 298, 323]
+
+  - version: 0.8.0
+    date: 2022-09-08
+
+    bumped:
+      "@cerbos/core":
+        to: 0.8.0
+        pull: 250
+
+  - version: 0.7.1
+    date: 2022-09-06
+
+    bumped:
+      "@cerbos/core":
+        to: 0.7.1
+        pull: 246
+
+      "@grpc/grpc-js":
+        to: 1.6.12
+        pulls: [231, 242]
+
+  - version: 0.7.0
+    date: 2022-08-24
+
+    added:
+      - summary: Support for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api)
+        pull: 209
+
+    bumped:
+      "@cerbos/core":
+        to: 0.7.0
+        pull: 221
+
+      "@grpc/grpc-js":
+        to: 1.6.10
+        pulls: [169, 200]
+
+  - version: 0.6.0
+    date: 2022-07-01
+
+    added:
+      - summary: Support for schema validation in [`Client.planResources`](../../docs/core.client.planresources.md)
+        details: |-
+          Requires a policy decision point server running Cerbos 0.19+.
+          [`PlanResourcesResponse.validationErrors`](../../docs/core.planresourcesresponsebase.validationerrors.md) will always be an empty array if the client is connected to an earlier version of Cerbos.
+        pull: 123
+
+    bumped:
+      "@cerbos/core":
+        to: 0.6.0
+        pull: 136
+
+  - version: 0.5.2
+    date: 2022-06-09
+
+    changed:
+      - summary: Make README links relative to file to fix broken links on npmjs.com
+        pull: 103
+
+    bumped:
+      "@cerbos/core":
+        to: 0.5.1
+        pull: 104
+
+  - version: 0.5.1
+    date: 2022-06-07
+
+    added:
+      - summary: Explicit dependency on [long]
+        pull: 100
+
+  - version: 0.5.0
+    date: 2022-06-07
+
+    added:
+      - summary: Separate gRPC client for server-side Node.js applications
+        pull: 73
+
+references:
+  "@cerbos/core": ../core/README.md
+  "@cerbos/opentelemetry": ../opentelemetry/README.md
+  "@grpc/grpc-js": https://github.com/grpc/grpc-node
+  long: https://github.com/dcodeIO/long.js
+  nodejs-eol: https://github.com/nodejs/release#end-of-life-releases
+  protobufjs: https://github.com/protobufjs/protobuf.js
+
+initialCommit: 138ce112e6b775902ddd3791faa8a763dad8614f
