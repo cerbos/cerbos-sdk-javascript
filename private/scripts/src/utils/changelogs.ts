@@ -1,0 +1,281 @@
+import { join } from "path";
+
+import { compare as semverCompare } from "semver";
+import type { YAMLMap, YAMLSeq } from "yaml";
+import {
+  Document,
+  isCollection,
+  isNode,
+  isScalar,
+  isSeq,
+  parse as parseYaml,
+  visit,
+} from "yaml";
+import { ZodIssueCode, z } from "zod";
+
+import { read, write } from "./files.js";
+import type { Package } from "./packages.js";
+import {
+  isoDateSchema,
+  semverSchema,
+  sortedArray,
+  sortedRecord,
+} from "./schemas.js";
+
+const pullOrPulls = z
+  .object({ pull: z.number().int() })
+  .or(z.object({ pulls: sortedArray(z.number().int()) }));
+
+const entrySchema = z
+  .object({
+    summary: z.string(),
+    details: z.string().optional(),
+  })
+  .and(pullOrPulls);
+
+export type Entry = z.infer<typeof entrySchema>;
+
+const bumpSchema = z.object({ to: z.string() }).and(pullOrPulls);
+
+export type Bump = z.infer<typeof bumpSchema>;
+
+const packageRenameSchema = z.object({ from: z.string() }).and(pullOrPulls);
+
+export type PackageRename = z.infer<typeof packageRenameSchema>;
+
+const entriesSchema = z.object({
+  added: z.array(entrySchema).min(1).optional(),
+  changed: z.array(entrySchema).min(1).optional(),
+  bumped: sortedRecord(bumpSchema).optional(),
+  removed: z.array(entrySchema).min(1).optional(),
+  renamedPackage: packageRenameSchema.optional(),
+});
+
+export type Entries = z.infer<typeof entriesSchema>;
+
+const releaseSchema = z
+  .object({
+    version: semverSchema,
+    date: isoDateSchema,
+  })
+  .and(entriesSchema);
+
+export type Release = z.infer<typeof releaseSchema>;
+
+function compareReleases(a: Release, b: Release): number {
+  return b.date.localeCompare(a.date) || semverCompare(b.version, a.version);
+}
+
+const releaseTypeSchema = z.enum(["major", "minor", "patch"]);
+
+export type ReleaseType = z.infer<typeof releaseTypeSchema>;
+
+const unreleasedChangesSchema = z
+  .object({ type: releaseTypeSchema })
+  .and(entriesSchema);
+
+export type UnreleasedChanges = z.infer<typeof unreleasedChangesSchema>;
+
+const changelogSchema = z
+  .object({
+    unreleased: unreleasedChangesSchema.optional(),
+    releases: sortedArray(releaseSchema, compareReleases).optional(),
+    references: sortedRecord(z.string()).optional(),
+    initialCommit: z.string(),
+  })
+  .superRefine(({ unreleased, releases = [], references = {} }, ctx) => {
+    const entries: Entries[] = [unreleased ?? {}, ...releases];
+
+    const dependencies = new Set(
+      entries.flatMap(({ bumped = {} }) => Object.keys(bumped)),
+    );
+
+    for (const dependency of dependencies) {
+      if (!references[dependency]) {
+        ctx.addIssue({
+          code: ZodIssueCode.custom,
+          message: `Provide a URL for dependency "${dependency}"`,
+          path: ["references"],
+        });
+      }
+    }
+  });
+
+export type Changelog = z.infer<typeof changelogSchema>;
+
+const repositoryUrl = "https://github.com/cerbos/cerbos-sdk-javascript";
+
+export async function readChangelog({ path }: Package): Promise<Changelog> {
+  return changelogSchema.parse(
+    parseYaml(await read(join(path, "changelog.yaml"))),
+  );
+}
+
+export async function writeChangelog(
+  { name, path }: Package,
+  changelog: Changelog,
+): Promise<void> {
+  await Promise.all([
+    write(join(path, "changelog.yaml"), changelogToYaml(changelog)),
+    write(join(path, "CHANGELOG.md"), changelogToMarkdown(name, changelog)),
+  ]);
+}
+
+function changelogToYaml(changelog: Changelog): string {
+  const document = new Document(changelog, {
+    aliasDuplicateObjects: false,
+  });
+
+  visit(document, {
+    Map(_, node) {
+      for (const [previous, current] of eachSlice(node.items, 2)) {
+        if (isScalar(current.key)) {
+          if (current.key.value === "pulls" && isSeq(current.value)) {
+            current.value.flow = true;
+          }
+
+          current.key.spaceBefore =
+            isBlockCollection(previous.value) ||
+            isBlockCollection(current.value);
+        }
+      }
+    },
+    Seq(_, node) {
+      for (const [previous, current] of eachSlice(node.items, 2)) {
+        if (isNode(current)) {
+          current.spaceBefore =
+            isBlockCollection(previous) || isBlockCollection(current);
+        }
+      }
+    },
+  });
+
+  return document.toString({
+    blockQuote: "literal",
+    lineWidth: 0,
+  });
+}
+
+type Tuple<T, N, A extends readonly T[] = []> = A["length"] extends N
+  ? A
+  : Tuple<T, N, readonly [...A, T]>;
+
+function* eachSlice<T, N extends number>(
+  array: readonly T[],
+  length: N,
+): Iterable<Tuple<T, N>> {
+  for (let i = 0; i + length <= array.length; i++) {
+    yield array.slice(i, i + length) as Tuple<T, N>;
+  }
+}
+
+function isBlockCollection(node: unknown): node is YAMLMap | YAMLSeq {
+  return isCollection(node) && !node.flow;
+}
+
+function changelogToMarkdown(
+  packageName: string,
+  { unreleased, releases = [], references = {}, initialCommit }: Changelog,
+): string {
+  let markdown =
+    "<!-- Do not edit this file. It is automatically generated from changelog.yaml. -->\n\n";
+
+  markdown += `## [Unreleased]\n\n${entriesToMarkdown(packageName, unreleased ?? {})}\n\n`;
+
+  const taggedReleases: (Release & { tag: string })[] = [];
+  let releasePackageName = packageName;
+  for (const release of releases) {
+    markdown += `## [${release.version}] - ${release.date}\n\n${entriesToMarkdown(releasePackageName, release)}\n\n`;
+
+    taggedReleases.push({
+      ...release,
+      tag: `${releasePackageName}@${release.version}`,
+    });
+
+    if (release.renamedPackage) {
+      releasePackageName = release.renamedPackage.from;
+    }
+  }
+
+  function releaseTag(index: number): string {
+    return taggedReleases[index]?.tag ?? initialCommit;
+  }
+
+  markdown += diffReference("unreleased", releaseTag(0), "HEAD");
+
+  for (const [i, release] of taggedReleases.entries()) {
+    markdown += diffReference(release.version, releaseTag(i + 1), release.tag);
+  }
+
+  for (const [name, url] of Object.entries(references)) {
+    markdown += `[${name}]: ${url}\n`;
+  }
+
+  return markdown;
+}
+
+function entriesToMarkdown(
+  packageName: string,
+  {
+    added = [],
+    changed = [],
+    bumped = {},
+    removed = [],
+    renamedPackage,
+  }: Entries,
+): string {
+  let markdown = "";
+
+  if (added.length > 0) {
+    markdown += `### Added\n\n${entryListToMarkdown(added)}\n\n`;
+  }
+
+  const changes = [
+    ...changed,
+    ...Object.entries(bumped).map(([dependency, { to, ...pullOrPulls }]) => ({
+      summary: `Bump dependency on [${dependency}] to ${to}`,
+      ...pullOrPulls,
+    })),
+  ];
+
+  if (renamedPackage) {
+    const { from, ...pullOrPulls } = renamedPackage;
+    changes.unshift({
+      summary: `Renamed package from \`${from}\` to \`${packageName}\``,
+      ...pullOrPulls,
+    });
+  }
+
+  if (changes.length > 0) {
+    markdown += `### Changed\n\n${entryListToMarkdown(changes)}\n\n`;
+  }
+
+  if (removed.length > 0) {
+    markdown += `### Removed\n\n${entryListToMarkdown(removed)}\n\n`;
+  }
+
+  if (markdown === "") {
+    return "No notable changes.\n\n";
+  }
+
+  return markdown;
+}
+
+function entryListToMarkdown(entries: Entry[]): string {
+  return entries.map(entryToMarkdown).join("\n\n");
+}
+
+function entryToMarkdown({ summary, details, ...pullOrPulls }: Entry): string {
+  const pulls = "pull" in pullOrPulls ? [pullOrPulls.pull] : pullOrPulls.pulls;
+  let markdown = `- ${summary} (${pulls.map((pull) => `[#${pull}](${repositoryUrl}/pull/${pull})`).join(", ")})\n\n`;
+
+  if (details) {
+    markdown += `${details.replaceAll(/^(?!\n)/gm, "  ")}\n\n`;
+  }
+
+  return markdown;
+}
+
+function diffReference(version: string, from: string, to: string): string {
+  return `[${version}]: ${repositoryUrl}/compare/${from}...${to}\n`;
+}
