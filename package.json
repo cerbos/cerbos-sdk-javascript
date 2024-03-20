@@ -6,7 +6,7 @@
   ],
   "packageManager": "pnpm@8.15.4",
   "engines": {
-    "node": "21.6.2",
+    "node": "21.7.1",
     "pnpm": "8.15.4"
   },
   "scripts": {
