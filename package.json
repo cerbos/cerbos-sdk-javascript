@@ -4,10 +4,10 @@
   "workspaces": [
     "packages/*"
   ],
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@8.15.5",
   "engines": {
     "node": "21.7.1",
-    "pnpm": "8.15.4"
+    "pnpm": "8.15.5"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
