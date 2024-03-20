@@ -23,6 +23,7 @@
     "generate:buf:grpc": "buf generate --template=packages/grpc/buf.gen.yaml proto",
     "generate:buf:http": "buf generate --template=packages/http/buf.gen.yaml proto",
     "generate:buf:test": "buf generate --template=packages/test/buf.gen.yaml proto",
+    "generate:changelogs": "tsx packages/scripts/src/generate-changelogs.ts",
     "generate:clean": "rm -rf packages/*/src/protobuf",
     "generate:format": "prettier --write packages/*/src/protobuf",
     "lint": "pnpm run all:parallel 'pnpm:lint:check:*'",
@@ -58,10 +59,10 @@
     "eslint": "8.57.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-tsdoc": "0.2.17",
-    "eslint-plugin-vitest": "0.3.26",
     "prettier": "3.2.5",
     "prettier-plugin-pkg": "0.18.1",
     "ts-proto": "1.169.1",
+    "tsx": "4.7.1",
     "typescript": "5.4.2"
   }
 }

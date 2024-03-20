@@ -1,0 +1,217 @@
+unreleased:
+  type: patch
+
+  changed:
+    - summary: Prevent importing package internals
+      pull: 867
+
+releases:
+  - version: 0.4.4
+    date: 2024-04-08
+
+    changed:
+      - summary: Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements)
+        pull: 852
+
+    bumped:
+      "@opentelemetry/api":
+        to: 1.8.0
+        pull: 836
+
+      "@opentelemetry/instrumentation":
+        to: 0.49.1
+        pull: 836
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.22.0
+        pull: 836
+
+  - version: 0.4.3
+    date: 2024-02-29
+
+    bumped:
+      "@cerbos/core":
+        to: 0.16.0
+        pull: 835
+
+      "@opentelemetry/instrumentation":
+        to: 0.48.0
+        pulls: [786, 801]
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.21.0
+        pulls: [786, 801]
+
+  - version: 0.4.2
+    date: 2024-01-11
+
+    bumped:
+      "@cerbos/core":
+        to: 0.15.0
+        pull: 781
+
+      "@opentelemetry/instrumentation":
+        to: 0.46.0
+        pull: 771
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.19.0
+        pull: 771
+
+  - version: 0.4.1
+    date: 2023-12-08
+
+    bumped:
+      "@opentelemetry/api":
+        to: 1.7.0
+        pulls: [710, 740]
+
+      "@opentelemetry/instrumentation":
+        to: 0.45.1
+        pulls: [710, 740]
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.18.1
+        pulls: [710, 740]
+
+  - version: 0.4.0
+    date: 2023-10-02
+
+    bumped:
+      "@cerbos/core":
+        to: 0.14.0
+        pull: 695
+
+      "@opentelemetry/api":
+        to: 1.6.0
+        pull: 670
+
+      "@opentelemetry/instrumentation":
+        to: 0.43.0
+        pull: 670
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.17.0
+        pull: 670
+
+    removed:
+      - summary: Support for Node.js 16, which is now [end-of-life][nodejs-eol]
+        pull: 669
+
+  - version: 0.3.0
+    date: 2023-08-16
+
+    added:
+      - summary: Span context propagation
+        details: Requires a policy decision point server running Cerbos 0.30+, and [@cerbos/grpc] 0.13+ or [@cerbos/http] 0.14+.
+        pull: 638
+
+      - summary: "`rpc.client.duration` metric"
+        pull: 644
+
+    bumped:
+      "@cerbos/core":
+        to: 0.13.0
+        pull: 645
+
+      "@opentelemetry/instrumentation":
+        to: 0.41.2
+        pulls: [614, 635]
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.15.2
+        pulls: [614, 635]
+
+  - version: 0.2.1
+    date: 2023-07-18
+
+    bumped:
+      "@cerbos/core":
+        to: 0.12.0
+        pull: 599
+
+      "@opentelemetry/instrumentation":
+        to: 0.41.0
+        pulls: [557, 590]
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.15.0
+        pulls: [557, 590]
+
+  - version: 0.2.0
+    date: 2023-06-07
+
+    bumped:
+      "@cerbos/core":
+        to: 0.11.0
+        pull: 550
+
+      "@opentelemetry/instrumentation":
+        to: 0.39.1
+        pull: 525
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.13.0
+        pull: 525
+
+    removed:
+      - summary: Support for Node.js 14, which is now [end-of-life][nodejs-eol]
+        pull: 521
+
+  - version: 0.1.3
+    date: 2023-04-18
+
+    bumped:
+      "@cerbos/core":
+        to: 0.10.0
+        pull: 506
+
+      "@opentelemetry/instrumentation":
+        to: 0.38.0
+        pulls: [493, 503]
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.12.0
+        pulls: [493, 503]
+
+  - version: 0.1.2
+    date: 2023-03-23
+
+    bumped:
+      "@cerbos/core":
+        to: 0.9.1
+        pull: 481
+
+  - version: 0.1.1
+    date: 2023-03-21
+
+    bumped:
+      "@opentelemetry/api":
+        to: 1.4.1
+        pulls: [464, 473]
+
+      "@opentelemetry/instrumentation":
+        to: 0.36.1
+        pulls: [464, 473]
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.10.1
+        pulls: [464, 473]
+
+  - version: 0.1.0
+    date: 2023-02-15
+
+    added:
+      - summary: "[OpenTelemetry](https://opentelemetry.io) instrumentation for the [@cerbos/grpc] and [@cerbos/http] client libraries"
+        pull: 438
+
+references:
+  "@cerbos/core": ../core/README.md
+  "@cerbos/grpc": ../grpc/README.md
+  "@cerbos/http": ../http/README.md
+  "@opentelemetry/api": https://github.com/open-telemetry/opentelemetry-js/tree/main/api
+  "@opentelemetry/instrumentation": https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation
+  "@opentelemetry/semantic-conventions": https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-semantic-conventions
+  nodejs-eol: https://github.com/nodejs/release#end-of-life-releases
+
+initialCommit: a3dcb572e0eeff4c4d86c9cc66c1d0c7e59c4853

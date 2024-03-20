@@ -1,0 +1,163 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: "[`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal"
+      pulls: [868, 877]
+
+  changed:
+    - summary: Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements)
+      pull: 852
+
+    - summary: Prevent importing package internals
+      pull: 867
+
+releases:
+  - version: 0.6.3
+    date: 2024-02-29
+
+    bumped:
+      "@cerbos/core":
+        to: 0.16.0
+        pull: 835
+
+  - version: 0.6.2
+    date: 2024-02-26
+
+    changed:
+      - summary: Allow promises of binary data in [Source](../../docs/embedded.source.md) type
+        pull: 824
+
+  - version: 0.6.1
+    date: 2024-01-11
+
+    bumped:
+      "@cerbos/core":
+        to: 0.15.0
+        pull: 781
+
+  - version: 0.6.0
+    date: 2023-12-08
+
+    changed:
+      - summary: Renamed client class from `Lite` to `Embedded`
+        pull: 755
+
+    renamedPackage:
+      from: "@cerbos/lite"
+      pull: 755
+
+  - version: 0.5.0-beta
+    date: 2023-10-02
+
+    changed:
+      - summary: Use `attr` for principal and resource attributes
+        details: |-
+          This makes the API consistent with policy expressions.
+          `attributes` is still supported for backwards compatibility, but is now deprecated.
+        pull: 694
+
+    bumped:
+      "@cerbos/core":
+        to: 0.14.0
+        pull: 695
+
+    removed:
+      - summary: Support for Node.js 16, which is now [end-of-life][nodejs-eol]
+        pull: 669
+
+  - version: 0.4.1-beta
+    date: 2023-08-16
+
+    bumped:
+      "@cerbos/core":
+        to: 0.13.0
+        pull: 645
+
+  - version: 0.4.0-beta
+    date: 2023-08-01
+
+    added:
+      - summary: Support for [globals](https://docs.cerbos.dev/cerbos/latest/configuration/engine#globals)
+        pull: 619
+
+  - version: 0.3.1-alpha
+    date: 2023-07-18
+
+    bumped:
+      "@cerbos/core":
+        to: 0.12.0
+        pull: 599
+
+    removed:
+      - summary: Unused generated code
+        pull: 606
+
+  - version: 0.3.0-alpha
+    date: 2023-06-07
+
+    bumped:
+      "@cerbos/core":
+        to: 0.11.0
+        pull: 550
+
+    removed:
+      - summary: Support for Node.js 14, which is now [end-of-life][nodejs-eol]
+        pull: 521
+
+  - version: 0.2.2-alpha
+    date: 2023-04-18
+
+    bumped:
+      "@cerbos/core":
+        to: 0.10.0
+        pull: 506
+
+  - version: 0.2.1-alpha
+    date: 2023-03-23
+
+    bumped:
+      "@cerbos/core":
+        to: 0.9.1
+        pull: 481
+
+    removed:
+      - summary: Unused generated code
+        pull: 480
+
+  - version: 0.2.0-alpha
+    date: 2023-02-15
+
+    added:
+      - summary: "[OpenTelemetry](https://opentelemetry.io) support"
+        pull: 438
+
+    bumped:
+      "@cerbos/core":
+        to: 0.9.0
+        pull: 446
+
+  - version: 0.1.1-alpha
+    date: 2022-11-24
+
+    changed:
+      - summary: Document principal and resource `attributes` fields in examples
+        pull: 358
+
+    bumped:
+      "@cerbos/core":
+        to: 0.8.1
+        pull: 359
+
+  - version: 0.1.0-alpha
+    date: 2022-09-08
+
+    added:
+      - summary: Lite client for interacting with a WebAssembly Cerbos policy bundle
+        pull: 249
+
+references:
+  "@cerbos/core": ../core/README.md
+  nodejs-eol: https://github.com/nodejs/release#end-of-life-releases
+
+initialCommit: a3dcb572e0eeff4c4d86c9cc66c1d0c7e59c4853
