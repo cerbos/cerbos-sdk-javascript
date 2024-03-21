@@ -1,23 +1,35 @@
-import type { Client, ClientWithPrincipal } from "@cerbos/core";
-// eslint-disable-next-line import/no-extraneous-dependencies -- TODO: not sure about this rule, maybe importing from peer deps should be allowed?
+import type {
+  AuxData,
+  Client,
+  ClientWithPrincipal,
+  Principal,
+} from "@cerbos/core";
 import type { ReactElement, ReactNode } from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies -- TODO: not sure about this rule, maybe importing from peer deps should be allowed?
-import { createContext } from "react";
+import { createContext, useMemo } from "react";
 
-export const CerbosContext = createContext<
-  ClientWithPrincipal<Client> | undefined
->(undefined);
+export const CerbosContext = createContext<ClientWithPrincipal | undefined>(
+  undefined,
+);
 
 export interface CerbosProviderProps {
   children: ReactNode;
-  cerbos: ClientWithPrincipal<Client>;
+  client: Client;
+  principal: Principal;
+  auxData?: Pick<AuxData, "jwt"> | undefined;
 }
 
 export function CerbosProvider({
   children,
-  cerbos,
+  client,
+  principal,
+  auxData,
 }: CerbosProviderProps): ReactElement {
+  const value = useMemo(
+    () => client.withPrincipal(principal, auxData),
+    [auxData, client, principal],
+  );
+
   return (
-    <CerbosContext.Provider value={cerbos}>{children}</CerbosContext.Provider>
+    <CerbosContext.Provider value={value}>{children}</CerbosContext.Provider>
   );
 }

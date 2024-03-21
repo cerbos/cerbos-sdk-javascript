@@ -7,14 +7,12 @@ parserOptions:
 plugins:
   - eslint-plugin-tsdoc
   - import
-  - react-hooks
 
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/strict-type-checked
   - plugin:@typescript-eslint/stylistic-type-checked
   - plugin:import/typescript
-  - plugin:react-hooks/recommended
 
 rules:
   "@typescript-eslint/consistent-type-imports": warn
@@ -48,7 +46,6 @@ rules:
     - devDependencies:
         - private/**
       optionalDependencies: false
-      peerDependencies: false
       includeTypes: true
   import/no-named-as-default: warn
   import/order:

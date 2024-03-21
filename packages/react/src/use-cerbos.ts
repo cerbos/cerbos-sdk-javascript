@@ -1,10 +1,9 @@
-import type { Client, ClientWithPrincipal } from "@cerbos/core";
-// eslint-disable-next-line import/no-extraneous-dependencies -- TODO: not sure about this rule, maybe importing from peer deps should be allowed?
+import type { ClientWithPrincipal } from "@cerbos/core";
 import { useContext } from "react";
 
 import { CerbosContext } from "./cerbos-provider";
 
-export function useCerbos(): ClientWithPrincipal<Client> {
+export function useCerbos(): ClientWithPrincipal {
   const value = useContext(CerbosContext);
 
   if (!value) {
