@@ -19,6 +19,9 @@ rules:
   "@typescript-eslint/explicit-function-return-type": warn
   "@typescript-eslint/explicit-member-accessibility": warn
   "@typescript-eslint/no-confusing-void-expression": warn
+  "@typescript-eslint/no-unused-vars":
+    - warn
+    - ignoreRestSiblings: true
   "@typescript-eslint/prefer-enum-initializers": warn
   "@typescript-eslint/prefer-nullish-coalescing": warn
   "@typescript-eslint/promise-function-async": warn
@@ -51,6 +54,10 @@ rules:
         caseInsensitive: true
       newlines-between: always
   no-console: warn
+  quotes:
+    - error
+    - double
+    - avoidEscape: true
   sort-imports:
     - warn
     - ignoreDeclarationSort: true

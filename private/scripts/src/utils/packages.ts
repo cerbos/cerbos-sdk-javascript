@@ -1,5 +1,9 @@
+import { join } from "path";
+
 import { execa } from "execa";
 import { z } from "zod";
+
+import { read, write } from "./files.js";
 
 const packageSchema = z.object({
   name: z.string(),
@@ -20,4 +24,20 @@ export async function listPackages(): Promise<Package[]> {
   ]);
 
   return packagesSchema.parse(JSON.parse(stdout));
+}
+
+export interface PackageJson {
+  version: string;
+  dependencies?: Record<string, string>;
+}
+
+export async function readPackageJson({ path }: Package): Promise<PackageJson> {
+  return JSON.parse(await read(join(path, "package.json"))) as PackageJson;
+}
+
+export async function writePackageJson(
+  { path }: Package,
+  manifest: PackageJson,
+): Promise<void> {
+  await write(join(path, "package.json"), JSON.stringify(manifest, null, 2));
 }

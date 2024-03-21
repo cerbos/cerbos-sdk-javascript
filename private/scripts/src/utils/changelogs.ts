@@ -14,6 +14,7 @@ import {
 import { ZodIssueCode, z } from "zod";
 
 import { read, write } from "./files.js";
+import { repositoryUrl } from "./git.js";
 import type { Package } from "./packages.js";
 import {
   isoDateSchema,
@@ -103,8 +104,6 @@ const changelogSchema = z
 
 export type Changelog = z.infer<typeof changelogSchema>;
 
-const repositoryUrl = "https://github.com/cerbos/cerbos-sdk-javascript";
-
 export async function readChangelog({ path }: Package): Promise<Changelog> {
   return changelogSchema.parse(
     parseYaml(await read(join(path, "changelog.yaml"))),
@@ -115,9 +114,11 @@ export async function writeChangelog(
   { name, path }: Package,
   changelog: Changelog,
 ): Promise<void> {
+  const validated = changelogSchema.parse(changelog);
+
   await Promise.all([
-    write(join(path, "changelog.yaml"), changelogToYaml(changelog)),
-    write(join(path, "CHANGELOG.md"), changelogToMarkdown(name, changelog)),
+    write(join(path, "changelog.yaml"), changelogToYaml(validated)),
+    write(join(path, "CHANGELOG.md"), changelogToMarkdown(name, validated)),
   ]);
 }
 
