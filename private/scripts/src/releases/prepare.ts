@@ -1,11 +1,7 @@
 import { gh, git, parsePullRequestUrl } from "../utils/git.js";
+import { abort } from "../utils/logging.js";
 import { listPackages } from "../utils/packages.js";
 import { planReleases, prepareReleases } from "../utils/releases.js";
-
-function abort(message: string): never {
-  console.error(`\x1b[31m${message}\x1b[0m`);
-  process.exit(1);
-}
 
 const packages = await planReleases(await listPackages());
 
