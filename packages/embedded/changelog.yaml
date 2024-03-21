@@ -1,18 +1,23 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal"
-      pulls: [868, 877]
-
-  changed:
-    - summary: Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements)
-      pull: 852
-
-    - summary: Prevent importing package internals
-      pull: 867
-
 releases:
+  - version: 0.7.0
+    date: 2024-03-21
+
+    added:
+      - summary: "[`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal"
+        pulls: [868, 877]
+
+    changed:
+      - summary: Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements)
+        pull: 852
+
+      - summary: Prevent importing package internals
+        pull: 867
+
+    bumped:
+      "@cerbos/core":
+        to: 0.17.0
+        pull: 880
+
   - version: 0.6.3
     date: 2024-02-29
 

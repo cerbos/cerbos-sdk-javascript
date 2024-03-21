@@ -1,11 +1,16 @@
-unreleased:
-  type: patch
-
-  changed:
-    - summary: Prevent importing package internals
-      pull: 867
-
 releases:
+  - version: 0.4.5
+    date: 2024-03-21
+
+    changed:
+      - summary: Prevent importing package internals
+        pull: 867
+
+    bumped:
+      "@cerbos/core":
+        to: 0.17.0
+        pull: 880
+
   - version: 0.4.4
     date: 2024-04-08
 

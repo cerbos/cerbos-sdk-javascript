@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.17.0] - 2024-03-21
+
 ### Added
 
 - [`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal ([#868](https://github.com/cerbos/cerbos-sdk-javascript/pull/868), [#877](https://github.com/cerbos/cerbos-sdk-javascript/pull/877))
@@ -13,6 +17,8 @@
 - Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
 
 - Bump dependency on [@grpc/grpc-js] to 1.10.3 ([#864](https://github.com/cerbos/cerbos-sdk-javascript/pull/864), [#874](https://github.com/cerbos/cerbos-sdk-javascript/pull/874))
+
+- Bump dependency on [@cerbos/core] to 0.17.0 ([#880](https://github.com/cerbos/cerbos-sdk-javascript/pull/880))
 
 ## [0.16.0] - 2024-02-29
 
@@ -250,7 +256,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.16.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.17.0...HEAD
+[0.17.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.16.0...@cerbos/grpc@0.17.0
 [0.16.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.15.0...@cerbos/grpc@0.16.0
 [0.15.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.14.1...@cerbos/grpc@0.15.0
 [0.14.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.14.0...@cerbos/grpc@0.14.1
