@@ -4,7 +4,7 @@ import { git, repositoryUrl } from "../utils/git.js";
 import { abort } from "../utils/logging.js";
 import { listPackages } from "../utils/packages.js";
 
-const remote = "upstream";
+const remote = "origin";
 const branch = "main";
 
 const packages = await listPackages();

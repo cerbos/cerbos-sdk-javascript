@@ -16,7 +16,7 @@ if (await git("status", "--porcelain")) {
 const releaseOrReleases = `release${packages.length > 1 ? "s" : ""}`;
 
 const baseRemote = "upstream";
-const baseBranch = "main";
+const baseBranch = "test";
 const headRemote = "origin";
 const headBranch = `prepare-${releaseOrReleases}`;
 
