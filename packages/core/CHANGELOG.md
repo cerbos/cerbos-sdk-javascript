@@ -12,6 +12,18 @@
 
 - Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
 
+## [0.17.0] - 2024-03-21
+
+### Added
+
+- [`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal ([#868](https://github.com/cerbos/cerbos-sdk-javascript/pull/868), [#877](https://github.com/cerbos/cerbos-sdk-javascript/pull/877))
+
+### Changed
+
+- Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements) ([#852](https://github.com/cerbos/cerbos-sdk-javascript/pull/852))
+
+- Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
+
 ## [0.16.0] - 2024-02-29
 
 ### Added
@@ -154,7 +166,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.16.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.17.0...HEAD
+[0.17.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.16.0...@cerbos/core@0.17.0
 [0.16.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.15.0...@cerbos/core@0.16.0
 [0.15.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.14.0...@cerbos/core@0.15.0
 [0.14.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.13.0...@cerbos/core@0.14.0

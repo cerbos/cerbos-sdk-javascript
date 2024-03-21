@@ -14,6 +14,24 @@
 
 - Bump dependency on [qs] to 6.12.0 ([#856](https://github.com/cerbos/cerbos-sdk-javascript/pull/856))
 
+- Bump dependency on [@cerbos/core] to 0.17.0 ([#879](https://github.com/cerbos/cerbos-sdk-javascript/pull/879))
+
+## [0.18.0] - 2024-03-21
+
+### Added
+
+- [`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal ([#868](https://github.com/cerbos/cerbos-sdk-javascript/pull/868), [#877](https://github.com/cerbos/cerbos-sdk-javascript/pull/877))
+
+### Changed
+
+- Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements) ([#852](https://github.com/cerbos/cerbos-sdk-javascript/pull/852))
+
+- Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
+
+- Bump dependency on [qs] to 6.12.0 ([#856](https://github.com/cerbos/cerbos-sdk-javascript/pull/856))
+
+- Bump dependency on [@cerbos/core] to 0.17.0 ([#879](https://github.com/cerbos/cerbos-sdk-javascript/pull/879))
+
 ## [0.17.0] - 2024-02-29
 
 ### Added
@@ -222,7 +240,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.17.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.0...HEAD
+[0.18.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.17.0...@cerbos/http@0.18.0
 [0.17.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.16.0...@cerbos/http@0.17.0
 [0.16.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.15.0...@cerbos/http@0.16.0
 [0.15.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.14.0...@cerbos/http@0.15.0
