@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.7.0] - 2024-03-21
+
 ### Added
 
 - [`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal ([#868](https://github.com/cerbos/cerbos-sdk-javascript/pull/868), [#877](https://github.com/cerbos/cerbos-sdk-javascript/pull/877))
@@ -11,6 +15,8 @@
 - Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements) ([#852](https://github.com/cerbos/cerbos-sdk-javascript/pull/852))
 
 - Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
+
+- Bump dependency on [@cerbos/core] to 0.17.0 ([#881](https://github.com/cerbos/cerbos-sdk-javascript/pull/881))
 
 ## [0.6.3] - 2024-02-29
 
@@ -125,7 +131,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.6.3...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.0...HEAD
+[0.7.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.6.3...@cerbos/embedded@0.7.0
 [0.6.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.6.2...@cerbos/embedded@0.6.3
 [0.6.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.6.1...@cerbos/embedded@0.6.2
 [0.6.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.6.0...@cerbos/embedded@0.6.1
