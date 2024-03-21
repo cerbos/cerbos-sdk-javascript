@@ -134,9 +134,6 @@ importers:
         specifier: ^0.16.0
         version: link:../core
     devDependencies:
-      '@types/qs':
-        specifier: 6.9.12
-        version: 6.9.12
       '@types/react':
         specifier: 18.2.67
         version: 18.2.67
