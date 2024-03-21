@@ -10,6 +10,8 @@
 
 - Bump dependency on [yaml] to 2.4.1 ([#854](https://github.com/cerbos/cerbos-sdk-javascript/pull/854))
 
+- Bump dependency on [@cerbos/core] to 0.17.0 ([#878](https://github.com/cerbos/cerbos-sdk-javascript/pull/878))
+
 ## [0.2.3] - 2024-02-29
 
 ### Changed
@@ -54,13 +56,26 @@
 
 - A package to load Cerbos policies from YAML or JSON files ([#611](https://github.com/cerbos/cerbos-sdk-javascript/pull/611))
 
+## [0.2.4] - 2024-03-21
+
+### Changed
+
+- Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements) ([#852](https://github.com/cerbos/cerbos-sdk-javascript/pull/852))
+
+- Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
+
+- Bump dependency on [yaml] to 2.4.1 ([#854](https://github.com/cerbos/cerbos-sdk-javascript/pull/854))
+
+- Bump dependency on [@cerbos/core] to 0.17.0 ([#878](https://github.com/cerbos/cerbos-sdk-javascript/pull/878))
+
 [unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.3...HEAD
 [0.2.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.2...@cerbos/files@0.2.3
 [0.2.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.1...@cerbos/files@0.2.2
 [0.2.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.0...@cerbos/files@0.2.1
 [0.2.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.1.1...@cerbos/files@0.2.0
 [0.1.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.1.0...@cerbos/files@0.1.1
-[0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/ffc411436a2c64e97cd2f5f8789490eb800c3b3d...@cerbos/files@0.1.0
+[0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.4...@cerbos/files@0.1.0
+[0.2.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/ffc411436a2c64e97cd2f5f8789490eb800c3b3d...@cerbos/files@0.2.4
 [@cerbos/core]: ../core/README.md
 [nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases
 [yaml]: https://github.com/eemeli/yaml

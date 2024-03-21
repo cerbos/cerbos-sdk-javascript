@@ -170,6 +170,20 @@ releases:
       - summary: Common types for gRPC and HTTP clients
         pull: 73
 
+  - version: 0.17.0
+    date: 2024-03-21
+
+    added:
+      - summary: "[`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal"
+        pulls: [868, 877]
+
+    changed:
+      - summary: Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements)
+        pull: 852
+
+      - summary: Prevent importing package internals
+        pull: 867
+
 references:
   nodejs-eol: https://github.com/nodejs/release#end-of-life-releases
   uuid: https://github.com/uuidjs/uuid

@@ -5,6 +5,11 @@ unreleased:
     - summary: Prevent importing package internals
       pull: 867
 
+  bumped:
+    "@cerbos/core":
+      to: 0.17.0
+      pull: 878
+
 releases:
   - version: 0.4.4
     date: 2024-04-08
@@ -204,6 +209,18 @@ releases:
     added:
       - summary: "[OpenTelemetry](https://opentelemetry.io) instrumentation for the [@cerbos/grpc] and [@cerbos/http] client libraries"
         pull: 438
+
+  - version: 0.4.5
+    date: 2024-03-21
+
+    changed:
+      - summary: Prevent importing package internals
+        pull: 867
+
+    bumped:
+      "@cerbos/core":
+        to: 0.17.0
+        pull: 878
 
 references:
   "@cerbos/core": ../core/README.md

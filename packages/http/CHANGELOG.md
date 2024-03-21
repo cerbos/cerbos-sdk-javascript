@@ -14,6 +14,8 @@
 
 - Bump dependency on [qs] to 6.12.0 ([#856](https://github.com/cerbos/cerbos-sdk-javascript/pull/856))
 
+- Bump dependency on [@cerbos/core] to 0.17.0 ([#878](https://github.com/cerbos/cerbos-sdk-javascript/pull/878))
+
 ## [0.17.0] - 2024-02-29
 
 ### Added
@@ -222,6 +224,22 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
+## [0.18.0] - 2024-03-21
+
+### Added
+
+- [`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal ([#868](https://github.com/cerbos/cerbos-sdk-javascript/pull/868), [#877](https://github.com/cerbos/cerbos-sdk-javascript/pull/877))
+
+### Changed
+
+- Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements) ([#852](https://github.com/cerbos/cerbos-sdk-javascript/pull/852))
+
+- Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
+
+- Bump dependency on [qs] to 6.12.0 ([#856](https://github.com/cerbos/cerbos-sdk-javascript/pull/856))
+
+- Bump dependency on [@cerbos/core] to 0.17.0 ([#878](https://github.com/cerbos/cerbos-sdk-javascript/pull/878))
+
 [unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.17.0...HEAD
 [0.17.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.16.0...@cerbos/http@0.17.0
 [0.16.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.15.0...@cerbos/http@0.16.0
@@ -239,7 +257,8 @@
 [0.7.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.6.0...@cerbos/http@0.7.0
 [0.6.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.5.1...@cerbos/http@0.6.0
 [0.5.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.5.0...@cerbos/http@0.5.1
-[0.5.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/138ce112e6b775902ddd3791faa8a763dad8614f...@cerbos/http@0.5.0
+[0.5.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.0...@cerbos/http@0.5.0
+[0.18.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/138ce112e6b775902ddd3791faa8a763dad8614f...@cerbos/http@0.18.0
 [@cerbos/core]: ../core/README.md
 [@cerbos/opentelemetry]: ../opentelemetry/README.md
 [nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases

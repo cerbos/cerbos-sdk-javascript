@@ -6,6 +6,8 @@
 
 - Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
 
+- Bump dependency on [@cerbos/core] to 0.17.0 ([#878](https://github.com/cerbos/cerbos-sdk-javascript/pull/878))
+
 ## [0.4.4] - 2024-04-08
 
 ### Changed
@@ -138,6 +140,14 @@
 
 - [OpenTelemetry](https://opentelemetry.io) instrumentation for the [@cerbos/grpc] and [@cerbos/http] client libraries ([#438](https://github.com/cerbos/cerbos-sdk-javascript/pull/438))
 
+## [0.4.5] - 2024-03-21
+
+### Changed
+
+- Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
+
+- Bump dependency on [@cerbos/core] to 0.17.0 ([#878](https://github.com/cerbos/cerbos-sdk-javascript/pull/878))
+
 [unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.4.4...HEAD
 [0.4.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.4.3...@cerbos/opentelemetry@0.4.4
 [0.4.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.4.2...@cerbos/opentelemetry@0.4.3
@@ -150,7 +160,8 @@
 [0.1.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.1.2...@cerbos/opentelemetry@0.1.3
 [0.1.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.1.1...@cerbos/opentelemetry@0.1.2
 [0.1.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.1.0...@cerbos/opentelemetry@0.1.1
-[0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/a3dcb572e0eeff4c4d86c9cc66c1d0c7e59c4853...@cerbos/opentelemetry@0.1.0
+[0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.4.5...@cerbos/opentelemetry@0.1.0
+[0.4.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/a3dcb572e0eeff4c4d86c9cc66c1d0c7e59c4853...@cerbos/opentelemetry@0.4.5
 [@cerbos/core]: ../core/README.md
 [@cerbos/grpc]: ../grpc/README.md
 [@cerbos/http]: ../http/README.md
