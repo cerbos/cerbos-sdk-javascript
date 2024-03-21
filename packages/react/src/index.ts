@@ -6,3 +6,4 @@ export {
   useCheckResources,
   useIsAllowed,
 } from "./use-cerbos-request";
+export type { AsyncResult } from "./use-cerbos-request";

@@ -83,4 +83,13 @@ OpenTelemetry instrumentation for the [gRPC](./grpc.md) and [HTTP](./http.md) cl
 
 
 </td></tr>
+<tr><td>
+
+[@cerbos/react](./react.md)
+
+
+</td><td>
+
+
+</td></tr>
 </tbody></table>

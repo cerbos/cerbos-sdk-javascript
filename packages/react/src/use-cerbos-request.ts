@@ -10,8 +10,16 @@ import type {
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { isEqual } from "./is-equal";
-import type { AsyncResult } from "./types";
 import { useCerbos } from "./use-cerbos";
+
+/**
+ * @public
+ */
+export interface AsyncResult<T> {
+  isLoading: boolean;
+  data: T | undefined;
+  error: Error | undefined;
+}
 
 function useCerbosRequest<
   TRequest extends keyof Pick<
@@ -81,6 +89,24 @@ function useCerbosRequest<
   };
 }
 
+/**
+ * Check a principal's permissions on a resource.
+ *
+ * @example
+ * ```typescript
+ * const {isLoading, data:decision, error} = useCheckResource({
+ *   resource: {
+ *     kind: "document",
+ *     id: "1",
+ *     attr: { owner: "user@example.com" },
+ *   },
+ *   actions: ["view", "edit"],
+ * });
+ *
+ * decision?.isAllowed("view"); // => true
+ * ```
+ * @public
+ */
 export function useCheckResource(
   request: Omit<CheckResourceRequest, "principal">,
   options?: RequestOptions,
@@ -88,6 +114,39 @@ export function useCheckResource(
   return useCerbosRequest("checkResource", request, options);
 }
 
+/**
+ * Check a principal's permissions on a set of resources.
+ *
+ * @example
+ * ```typescript
+ * const {isLoading, data:decision, error} = useCheckResources({
+ *   resources: [
+ *     {
+ *       resource: {
+ *         kind: "document",
+ *         id: "1",
+ *         attr: { owner: "user@example.com" },
+ *       },
+ *       actions: ["view", "edit"],
+ *     },
+ *     {
+ *       resource: {
+ *         kind: "image",
+ *         id: "1",
+ *         attr: { owner: "user@example.com" },
+ *       },
+ *       actions: ["delete"],
+ *     },
+ *   ],
+ * });
+ *
+ * decision?.isAllowed({
+ *   resource: { kind: "document", id: "1" },
+ *   action: "view",
+ * }); // => true
+ * ```
+ * @public
+ */
 export function useCheckResources(
   request: Omit<CheckResourcesRequest, "principal">,
   options?: RequestOptions,
@@ -95,6 +154,26 @@ export function useCheckResources(
   return useCerbosRequest("checkResources", request, options);
 }
 
+/**
+ * Check if a principal is allowed to perform an action on a resource.
+ *
+ * @example
+ * ```typescript
+ * const {
+ *     isLoading,
+ *     data:decision, // => true
+ *     error
+ * } = useIsAllowed({
+ *   resource: {
+ *     kind: "document",
+ *     id: "1",
+ *     attr: { owner: "user@example.com" },
+ *   },
+ *   action: "view",
+ * });
+ * ```
+ * @public
+ */
 export function useIsAllowed(
   request: Omit<IsAllowedRequest, "principal">,
   options?: RequestOptions,
