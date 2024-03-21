@@ -54,6 +54,7 @@
   "devDependencies": {
     "@types/qs": "6.9.12",
     "@types/react": "18.2.67",
+    "eslint-plugin-react-hooks": "4.6.0",
     "react": "18.2.0"
   },
   "publishConfig": {
