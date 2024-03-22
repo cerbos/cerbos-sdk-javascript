@@ -69,17 +69,29 @@ _(Optional)_
 
 
 ```typescript
-const {
-    isLoading,
-    data:decision, // => true
-    error
-} = useIsAllowed({
-  resource: {
-    kind: "document",
-    id: "1",
-    attr: { owner: "user@example.com" },
-  },
-  action: "view",
-});
+import { useIsAllowed } from "@cerbos/react";
+
+function SomeComponent() {
+  const check = useIsAllowed({
+    resource: {
+      kind: "document",
+      id: "1",
+      attr: { owner: "user@example.com" },
+    },
+    action: "view",
+  });
+
+  if (check.isLoading) {
+    // show spinner
+    return "Loading...";
+  }
+
+  if (check.error) {
+    // handle error
+    return "Error...";
+  }
+
+  return <div>{check.data && <button>a button document 1</button>}</div>;
+}
 ```
 

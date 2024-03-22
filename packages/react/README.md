@@ -16,29 +16,54 @@ $ npm install @cerbos/react
 
 ## Example usage
 
-/////TODO////
+First initialize a Cerbos client and provide it down the tree by using CerbosProvider
 
 ```typescript
-import { HTTP } from "@cerbos/http";
+import { Embedded as Cerbos } from "@cerbos/embedded";
+import { CerbosProvider } from "@cerbos/react";
 
-const cerbos = new HTTP("http://localhost:3592");
+// Initialize the Cerbos client using any of the client libraries
+// that fit the needs of your application. In this example we are
+// using the client from `@cerbos/embedded`.
+const client = new Cerbos();
 
-await cerbos.isAllowed({
-  principal: {
-    id: "user@example.com",
-    roles: ["USER"],
-    attr: { tier: "PREMIUM" },
-  },
-  resource: {
-    kind: "document",
-    id: "1",
-    attr: { owner: "user@example.com" },
-  },
-  action: "view",
-}); // => true
+function MyApp({ children }) {
+  const user = useUser();
+  return (
+    <CerbosProvider
+      client={client}
+      principal={
+        user
+          ? {  // the user is authenticated
+              id: user.id,
+              roles: user.roles,
+            }
+          : {  // the user is not authenticated
+              id: "###ANONYMOUS_USER###", // Define an arbitrary ID for anonymous users.
+              roles: ["anonymous"], // Pass a role that represents an anonymous user, at least one is required.
+            }
+      }
+    >
+      {children}
+    </CerbosProvider>
+  );
+}
 ```
 
-For more details, [see the `HTTP` class documentation](../../docs/http.http.md).
+For more details, [see the `CerbosProvider` component documentation](../../docs/react.cerbosprovider.md).
+
+Then consume the client as you need, using one of the provided hooks
+
+```typescript
+import { useCerbos } from "@cerbos/react";
+
+function SomeComponent() {
+    const cerbos = useCerbos();
+
+    ...
+    ...
+}
+```
 
 ## Further reading
 

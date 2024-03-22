@@ -4,7 +4,7 @@
 
 ## useCerbos() function
 
-Hook to access the provided Cerbos client. It is perfectly fine to access the client directly, however, consider using one of [useCheckResource()](./react.usecheckresource.md)<!-- -->,[useCheckResources()](./react.usecheckresources.md) or [useIsAllowed()](./react.useisallowed.md) instead. The API they provide might be simpler for your use case as the handle the Async logic for you.
+Hook to access the provided Cerbos client. It is perfectly fine to access the client directly, especially when an Async function is required for the check, however, consider using one of [useCheckResource()](./react.usecheckresource.md)<!-- -->,[useCheckResources()](./react.usecheckresources.md) or [useIsAllowed()](./react.useisallowed.md) instead. The API they provide might be simpler for your use case as the handle the Async logic for you.
 
 **Signature:**
 
@@ -19,27 +19,30 @@ export declare function useCerbos(): ClientWithPrincipal;
 
 
 ```typescript
-function SomeFunction() {
+import { useCerbos } from "@cerbos/react";
+
+function SomeComponent() {
   const cerbos = useCerbos();
 
-  const handleClick = async ()=>{
+  const handleClick = async () => {
     const decision = await cerbos.checkResource({
-        resource: {
-           kind: "document",
-           id: "1",
-           attr: { owner: "user@example.com" },
-         },
-         actions: ["view", "edit"],
+      resource: {
+        kind: "document",
+        id: "1",
+        attr: { owner: "user@example.com" },
+      },
+      actions: ["view", "edit"],
     });
 
-    if(decision.allAllowed()){
+    if (decision.allAllowed()) {
       // do something
-    }else if(decision.allowedActions().includes('view')){
+    } else if (decision.allowedActions().includes("view")) {
       // do something else
     }
-  }
+    ...
+  };
 
-  return <button onClick={handleClick}>...</div>
+  return <button onClick={handleClick}>...</button>;
 }
 ```
 

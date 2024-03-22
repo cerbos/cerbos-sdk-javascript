@@ -82,16 +82,35 @@ function useCerbosRequest<Method extends Methods>(
  *
  * @example
  * ```typescript
- * const {isLoading, data:decision, error} = useCheckResource({
- *   resource: {
- *     kind: "document",
- *     id: "1",
- *     attr: { owner: "user@example.com" },
- *   },
- *   actions: ["view", "edit"],
- * });
+ * import { useCheckResource } from "@cerbos/react";
  *
- * decision?.isAllowed("view"); // => true
+ * function SomeComponent() {
+ *   const check = useCheckResource({
+ *     resource: {
+ *       kind: "document",
+ *       id: "1",
+ *       attr: { owner: "user@example.com" },
+ *     },
+ *     actions: ["view", "edit"],
+ *   });
+ *
+ *   if (check.isLoading) {
+ *     // show spinner
+ *     return "Loading...";
+ *   }
+ *
+ *   if (check.error) {
+ *     // handle error
+ *     return "Error...";
+ *   }
+ *
+ *   return (
+ *     <div>
+ *       {check.data.allAllowed() && <button>a button</button>}
+ *       {check.data.isAllowed("view") && <button>another button</button>}
+ *     </div>
+ *   );
+ * }
  * ```
  * @public
  */
@@ -107,31 +126,61 @@ export function useCheckResource(
  *
  * @example
  * ```typescript
- * const {isLoading, data:decision, error} = useCheckResources({
- *   resources: [
- *     {
- *       resource: {
+ * import { useCheckResources } from "@cerbos/react";
+ *
+ * function SomeComponent() {
+ *   const check = useCheckResources({
+ *     resources: [
+ *       {
+ *         resource: {
+ *           kind: "document",
+ *           id: "1",
+ *           attr: { owner: "user@example.com" },
+ *         },
+ *         actions: ["view", "edit"],
+ *       },
+ *       {
+ *         resource: {
+ *           kind: "document",
+ *           id: "2",
+ *           attr: { owner: "another-user@example.com" },
+ *         },
+ *         actions: ["view", "edit"],
+ *       },
+ *     ],
+ *   });
+ *
+ *   if (check.isLoading) {
+ *     // show spinner
+ *     return "Loading...";
+ *   }
+ *
+ *   if (check.error) {
+ *     // handle error
+ *     return "Error...";
+ *   }
+ *
+ *   return (
+ *     <div>
+ *       {check.data.allAllowed({
  *         kind: "document",
  *         id: "1",
- *         attr: { owner: "user@example.com" },
- *       },
- *       actions: ["view", "edit"],
- *     },
- *     {
- *       resource: {
- *         kind: "image",
- *         id: "1",
- *         attr: { owner: "user@example.com" },
- *       },
- *       actions: ["delete"],
- *     },
- *   ],
- * });
- *
- * decision?.isAllowed({
- *   resource: { kind: "document", id: "1" },
- *   action: "view",
- * }); // => true
+ *       }) && <button>a button document 1</button>}
+ *       {check.data.allAllowed({
+ *         kind: "document",
+ *         id: "2",
+ *       }) && <button>a button document 2</button>}
+ *       {check.data.isAllowed({
+ *         resource: { kind: "document", id: "1" },
+ *         action: "edit",
+ *       }) && <button>another button for document 1</button>}
+ *       {check.data.isAllowed({
+ *         resource: { kind: "document", id: "2" },
+ *         action: "edit",
+ *       }) && <button>another button for document 2</button>}
+ *     </div>
+ *   );
+ * }
  * ```
  * @public
  */
@@ -147,18 +196,30 @@ export function useCheckResources(
  *
  * @example
  * ```typescript
- * const {
- *     isLoading,
- *     data:decision, // => true
- *     error
- * } = useIsAllowed({
- *   resource: {
- *     kind: "document",
- *     id: "1",
- *     attr: { owner: "user@example.com" },
- *   },
- *   action: "view",
- * });
+ * import { useIsAllowed } from "@cerbos/react";
+ *
+ * function SomeComponent() {
+ *   const check = useIsAllowed({
+ *     resource: {
+ *       kind: "document",
+ *       id: "1",
+ *       attr: { owner: "user@example.com" },
+ *     },
+ *     action: "view",
+ *   });
+ *
+ *   if (check.isLoading) {
+ *     // show spinner
+ *     return "Loading...";
+ *   }
+ *
+ *   if (check.error) {
+ *     // handle error
+ *     return "Error...";
+ *   }
+ *
+ *   return <div>{check.data && <button>a button document 1</button>}</div>;
+ * }
  * ```
  * @public
  */

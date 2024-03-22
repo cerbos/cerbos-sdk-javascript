@@ -35,7 +35,7 @@ Component to provide the Cerbos client to down the component tree, should be pla
 
 </td><td>
 
-Hook to access the provided Cerbos client. It is perfectly fine to access the client directly, however, consider using one of [useCheckResource()](./react.usecheckresource.md)<!-- -->,[useCheckResources()](./react.usecheckresources.md) or [useIsAllowed()](./react.useisallowed.md) instead. The API they provide might be simpler for your use case as the handle the Async logic for you.
+Hook to access the provided Cerbos client. It is perfectly fine to access the client directly, especially when an Async function is required for the check, however, consider using one of [useCheckResource()](./react.usecheckresource.md)<!-- -->,[useCheckResources()](./react.usecheckresources.md) or [useIsAllowed()](./react.useisallowed.md) instead. The API they provide might be simpler for your use case as the handle the Async logic for you.
 
 
 </td></tr>
