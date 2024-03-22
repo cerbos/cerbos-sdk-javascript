@@ -6,6 +6,8 @@
 
 - Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
 
+- Use individually-exported semantic attributes values to improve minification ([#889](https://github.com/cerbos/cerbos-sdk-javascript/pull/889))
+
 ## [0.4.4] - 2024-04-08
 
 ### Changed

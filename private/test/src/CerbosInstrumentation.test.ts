@@ -19,7 +19,12 @@ import {
   SimpleSpanProcessor,
 } from "@opentelemetry/sdk-trace-base";
 import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
-import { SemanticAttributes } from "@opentelemetry/semantic-conventions";
+import {
+  SEMATTRS_RPC_GRPC_STATUS_CODE,
+  SEMATTRS_RPC_METHOD,
+  SEMATTRS_RPC_SERVICE,
+  SEMATTRS_RPC_SYSTEM,
+} from "@opentelemetry/semantic-conventions";
 import { UnsecuredJWT } from "jose";
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 
@@ -125,10 +130,10 @@ describe("CerbosInstrumentation", () => {
         );
 
         const attributes: Attributes = {
-          [SemanticAttributes.RPC_SYSTEM]: "grpc",
-          [SemanticAttributes.RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
-          [SemanticAttributes.RPC_METHOD]: "CheckResources",
-          [SemanticAttributes.RPC_GRPC_STATUS_CODE]: 0,
+          [SEMATTRS_RPC_SYSTEM]: "grpc",
+          [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
+          [SEMATTRS_RPC_METHOD]: "CheckResources",
+          [SEMATTRS_RPC_GRPC_STATUS_CODE]: 0,
         };
 
         expect(result).toEqual({ value: false });
@@ -158,13 +163,13 @@ describe("CerbosInstrumentation", () => {
               kind: SpanKindProto.SPAN_KIND_SERVER,
               attributes: expect.arrayContaining([
                 {
-                  key: SemanticAttributes.RPC_SYSTEM,
+                  key: SEMATTRS_RPC_SYSTEM,
                   value: {
                     value: { $case: "stringValue", stringValue: "grpc" },
                   },
                 },
                 {
-                  key: SemanticAttributes.RPC_SERVICE,
+                  key: SEMATTRS_RPC_SERVICE,
                   value: {
                     value: {
                       $case: "stringValue",
@@ -173,7 +178,7 @@ describe("CerbosInstrumentation", () => {
                   },
                 },
                 {
-                  key: SemanticAttributes.RPC_METHOD,
+                  key: SEMATTRS_RPC_METHOD,
                   value: {
                     value: {
                       $case: "stringValue",
@@ -182,7 +187,7 @@ describe("CerbosInstrumentation", () => {
                   },
                 },
                 {
-                  key: SemanticAttributes.RPC_GRPC_STATUS_CODE,
+                  key: SEMATTRS_RPC_GRPC_STATUS_CODE,
                   value: {
                     value: { $case: "intValue", intValue: "0" },
                   },
@@ -213,10 +218,10 @@ describe("CerbosInstrumentation", () => {
           );
 
           const attributes: Attributes = {
-            [SemanticAttributes.RPC_SYSTEM]: "grpc",
-            [SemanticAttributes.RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
-            [SemanticAttributes.RPC_METHOD]: "CheckResources",
-            [SemanticAttributes.RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
+            [SEMATTRS_RPC_SYSTEM]: "grpc",
+            [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
+            [SEMATTRS_RPC_METHOD]: "CheckResources",
+            [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
             "cerbos.error": invalidArgumentDetails as unknown as AttributeValue,
           };
 
