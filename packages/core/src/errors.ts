@@ -82,8 +82,7 @@ export class NotOK extends Error {
     public readonly details: string,
   ) {
     super(`gRPC error ${code} (${Status[code]}): ${details}`);
-    this.name = this.constructor.name;
-    Error.captureStackTrace(this, this.constructor);
+    setNameAndStack(this);
   }
 }
 
@@ -127,7 +126,11 @@ export class ValidationFailed extends Error {
     public readonly validationErrors: ValidationError[],
   ) {
     super("Input failed schema validation");
-    this.name = this.constructor.name;
-    Error.captureStackTrace(this, this.constructor);
+    setNameAndStack(this);
   }
+}
+
+function setNameAndStack(error: Error): void {
+  error.name = error.constructor.name;
+  Error.captureStackTrace?.(error, error.constructor); // eslint-disable-line @typescript-eslint/no-unnecessary-condition -- `Error.captureStackTrace` is not available in all browsers
 }
