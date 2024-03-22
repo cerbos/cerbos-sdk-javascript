@@ -89,7 +89,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[AsyncResult](./react.asyncresult.md)
+[CerbosProviderProps](./react.cerbosproviderprops.md)
 
 
 </td><td>
@@ -97,9 +97,24 @@ Description
 
 
 </td></tr>
-<tr><td>
+</tbody></table>
 
-[CerbosProviderProps](./react.cerbosproviderprops.md)
+## Type Aliases
+
+<table><thead><tr><th>
+
+Type Alias
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[AsyncResult](./react.asyncresult.md)
 
 
 </td><td>

@@ -7,6 +7,8 @@ import type {
 import type { ReactElement, ReactNode } from "react";
 import { createContext, useMemo } from "react";
 
+import { useDeepEqualMemo } from "./use-deep-equal-memo";
+
 export const CerbosContext = createContext<ClientWithPrincipal | undefined>(
   undefined,
 );
@@ -63,9 +65,12 @@ export function CerbosProvider({
   principal,
   auxData,
 }: CerbosProviderProps): ReactElement {
+  const principalMemo = useDeepEqualMemo(principal);
+  const auxDataMemo = useDeepEqualMemo(auxData);
+
   const value = useMemo(
-    () => client.withPrincipal(principal, auxData),
-    [auxData, client, principal],
+    () => client.withPrincipal(principalMemo, auxDataMemo),
+    [client, principalMemo, auxDataMemo],
   );
 
   return (

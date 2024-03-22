@@ -3,9 +3,9 @@
   "include": ["src"],
   "references": [],
   "compilerOptions": {
+    "jsx": "react-jsx",
     "outDir": "lib",
     "rootDir": "src",
-    "tsBuildInfoFile": "lib/react.tsbuildinfo",
-    "jsx": "react-jsx"
+    "tsBuildInfoFile": "lib/react.tsbuildinfo"
   }
 }

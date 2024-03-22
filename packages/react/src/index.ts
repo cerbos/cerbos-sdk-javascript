@@ -1,9 +1,8 @@
-export { CerbosProvider } from "./cerbos-provider";
-export type { CerbosProviderProps } from "./cerbos-provider";
+export { type CerbosProviderProps, CerbosProvider } from "./cerbos-provider";
 export { useCerbos } from "./use-cerbos";
 export {
+  type AsyncResult,
   useCheckResource,
   useCheckResources,
   useIsAllowed,
 } from "./use-cerbos-request";
-export type { AsyncResult } from "./use-cerbos-request";

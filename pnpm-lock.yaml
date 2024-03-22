@@ -133,6 +133,9 @@ importers:
       '@cerbos/core':
         specifier: ^0.16.0
         version: link:../core
+      react:
+        specifier: '>=16.8.0'
+        version: 18.2.0
     devDependencies:
       '@types/react':
         specifier: 18.2.67
@@ -140,9 +143,6 @@ importers:
       eslint-plugin-react-hooks:
         specifier: 4.6.0
         version: 4.6.0(eslint@8.57.0)
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
 
   private/scripts:
     devDependencies:
@@ -2711,7 +2711,6 @@ packages:
 
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
-    dev: true
 
   /js-tokens@8.0.3:
     resolution: {integrity: sha512-UfJMcSJc+SEXEl9lH/VLHSZbThQyLpw1vLO1Lb+j4RWDvG3N2f7yj3PVQA3cmkTBNldJ9eFnM+xEXxHIXrYiJw==}
@@ -2845,7 +2844,7 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
-    dev: true
+    dev: false
 
   /loupe@2.3.7:
     resolution: {integrity: sha512-zSMINGVYkdpYSOBmLi0D1Uo7JU9nVdQKrHxC8eYlV+9YKK9WePqAlL7lSlorG/U2Fw1w0hTBmaa/jrQ3UbPHtA==}
@@ -3215,7 +3214,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
-    dev: true
+    dev: false
 
   /readdirp@3.6.0:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}

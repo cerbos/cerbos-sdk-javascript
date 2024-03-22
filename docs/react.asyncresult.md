@@ -2,87 +2,23 @@
 
 [Home](./index.md) &gt; [@cerbos/react](./react.md) &gt; [AsyncResult](./react.asyncresult.md)
 
-## AsyncResult interface
+## AsyncResult type
 
 
 **Signature:**
 
 ```typescript
-export interface AsyncResult<T> 
+export type AsyncResult<T> = {
+    isLoading: true;
+    data: undefined;
+    error: undefined;
+} | {
+    isLoading: false;
+    data: T;
+    error: undefined;
+} | {
+    isLoading: false;
+    data: undefined;
+    error: Error;
+};
 ```
-
-## Properties
-
-<table><thead><tr><th>
-
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[data](./react.asyncresult.data.md)
-
-
-</td><td>
-
-
-</td><td>
-
-T \| undefined
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[error](./react.asyncresult.error.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Error \| undefined
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[isLoading](./react.asyncresult.isloading.md)
-
-
-</td><td>
-
-
-</td><td>
-
-boolean
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>
