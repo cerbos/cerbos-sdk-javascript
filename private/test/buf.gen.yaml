@@ -8,7 +8,7 @@ types:
 plugins:
   - name: test
     path: node_modules/.bin/protoc-gen-ts_proto
-    out: packages/test/src/protobuf
+    out: private/test/src/protobuf
     strategy: all
     opt:
       - comments=false
