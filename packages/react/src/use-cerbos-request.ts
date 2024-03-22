@@ -8,9 +8,9 @@ import type {
   RequestOptions,
 } from "@cerbos/core";
 import { useCallback, useEffect, useState } from "react";
+import { useDeepCompareMemoize } from "use-deep-compare-effect";
 
 import { useCerbos } from "./use-cerbos";
-import { useDeepEqualMemo } from "./use-deep-equal-memo";
 
 /**
  * @public
@@ -35,7 +35,7 @@ function useCerbosRequest<Method extends Methods>(
   const [error, setError] = useState<Error>();
 
   const client = useCerbos();
-  const paramsMemo = useDeepEqualMemo(params);
+  const paramsMemo = useDeepCompareMemoize(params);
 
   const load = useCallback<() => Promise<Result<Method>>>(
     // @ts-expect-error -- https://github.com/microsoft/TypeScript/issues/30581

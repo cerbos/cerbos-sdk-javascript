@@ -6,8 +6,7 @@ import type {
 } from "@cerbos/core";
 import type { ReactElement, ReactNode } from "react";
 import { createContext, useMemo } from "react";
-
-import { useDeepEqualMemo } from "./use-deep-equal-memo";
+import { useDeepCompareMemoize } from "use-deep-compare-effect";
 
 export const CerbosContext = createContext<ClientWithPrincipal | undefined>(
   undefined,
@@ -65,8 +64,8 @@ export function CerbosProvider({
   principal,
   auxData,
 }: CerbosProviderProps): ReactElement {
-  const principalMemo = useDeepEqualMemo(principal);
-  const auxDataMemo = useDeepEqualMemo(auxData);
+  const principalMemo = useDeepCompareMemoize(principal);
+  const auxDataMemo = useDeepCompareMemoize(auxData);
 
   const value = useMemo(
     () => client.withPrincipal(principalMemo, auxDataMemo),

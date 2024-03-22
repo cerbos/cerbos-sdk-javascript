@@ -46,10 +46,11 @@
     "React"
   ],
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">=16.13.0"
   },
   "dependencies": {
-    "@cerbos/core": "^0.16.0"
+    "@cerbos/core": "^0.16.0",
+    "use-deep-compare-effect": "^1.8.1"
   },
   "devDependencies": {
     "@types/react": "18.2.67",
