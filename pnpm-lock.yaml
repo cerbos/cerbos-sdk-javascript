@@ -44,9 +44,6 @@ importers:
       eslint-plugin-tsdoc:
         specifier: 0.2.17
         version: 0.2.17
-      eslint-plugin-vitest:
-        specifier: 0.3.26
-        version: 0.3.26(@typescript-eslint/eslint-plugin@7.2.0)(eslint@8.57.0)(typescript@5.4.2)
       prettier:
         specifier: 3.2.5
         version: 3.2.5
@@ -128,26 +125,26 @@ importers:
         specifier: ^1.22.0
         version: 1.22.0
 
-  packages/test:
+  private/test:
     devDependencies:
       '@cerbos/core':
         specifier: workspace:*
-        version: link:../core
+        version: link:../../packages/core
       '@cerbos/embedded':
         specifier: workspace:*
-        version: link:../embedded
+        version: link:../../packages/embedded
       '@cerbos/files':
         specifier: workspace:*
-        version: link:../files
+        version: link:../../packages/files
       '@cerbos/grpc':
         specifier: workspace:*
-        version: link:../grpc
+        version: link:../../packages/grpc
       '@cerbos/http':
         specifier: workspace:*
-        version: link:../http
+        version: link:../../packages/http
       '@cerbos/opentelemetry':
         specifier: workspace:*
-        version: link:../opentelemetry
+        version: link:../../packages/opentelemetry
       '@grpc/grpc-js':
         specifier: 1.10.3
         version: 1.10.3
@@ -169,6 +166,9 @@ importers:
       '@types/semver':
         specifier: 7.5.8
         version: 7.5.8
+      eslint-plugin-vitest:
+        specifier: 0.3.26
+        version: 0.3.26(@typescript-eslint/eslint-plugin@7.2.0)(eslint@8.57.0)(typescript@5.4.2)(vitest@1.4.0)
       jose:
         specifier: 5.2.3
         version: 5.2.3
@@ -1976,7 +1976,7 @@ packages:
       '@microsoft/tsdoc-config': 0.16.2
     dev: true
 
-  /eslint-plugin-vitest@0.3.26(@typescript-eslint/eslint-plugin@7.2.0)(eslint@8.57.0)(typescript@5.4.2):
+  /eslint-plugin-vitest@0.3.26(@typescript-eslint/eslint-plugin@7.2.0)(eslint@8.57.0)(typescript@5.4.2)(vitest@1.4.0):
     resolution: {integrity: sha512-oxe5JSPgRjco8caVLTh7Ti8PxpwJdhSV0hTQAmkFcNcmy/9DnqLB/oNVRA11RmVRP//2+jIIT6JuBEcpW3obYg==}
     engines: {node: ^18.0.0 || >= 20.0.0}
     peerDependencies:
@@ -1992,6 +1992,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 7.2.0(@typescript-eslint/parser@7.2.0)(eslint@8.57.0)(typescript@5.4.2)
       '@typescript-eslint/utils': 7.2.0(eslint@8.57.0)(typescript@5.4.2)
       eslint: 8.57.0
+      vitest: 1.4.0(@types/node@18.19.24)
     transitivePeerDependencies:
       - supports-color
       - typescript

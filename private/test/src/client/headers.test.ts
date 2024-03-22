@@ -15,13 +15,11 @@ import type { Ports } from "../servers";
 import { ca, ports as serverPorts } from "../servers";
 
 /* eslint-disable @typescript-eslint/no-var-requires -- Can't import package.json files because they're outside of the project's rootDir */
-const { version: grpcSdkVersion } = require("../../../grpc/package.json") as {
-  version: string;
-};
+const { version: grpcSdkVersion } =
+  require("../../../../packages/grpc/package.json") as { version: string };
 
-const { version: httpSdkVersion } = require("../../../http/package.json") as {
-  version: string;
-};
+const { version: httpSdkVersion } =
+  require("../../../../packages/http/package.json") as { version: string };
 
 const {
   devDependencies: { "@grpc/grpc-js": grpcJsVersion },

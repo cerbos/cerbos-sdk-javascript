@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.base.json",
+  "include": ["src", "vitest.config.mts"],
+  "references": [
+    { "path": "../../packages/core" },
+    { "path": "../../packages/embedded" },
+    { "path": "../../packages/files" },
+    { "path": "../../packages/grpc" },
+    { "path": "../../packages/http" },
+    { "path": "../../packages/opentelemetry" }
+  ],
+  "compilerOptions": {
+    "lib": ["ES2020", "DOM"]
+  }
+}
