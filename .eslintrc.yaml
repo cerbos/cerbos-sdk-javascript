@@ -23,6 +23,9 @@ rules:
   "@typescript-eslint/prefer-enum-initializers": warn
   "@typescript-eslint/prefer-nullish-coalescing": warn
   "@typescript-eslint/promise-function-async": warn
+  "@typescript-eslint/restrict-template-expressions":
+    - warn
+    - allowNumber: true
   "@typescript-eslint/return-await":
     - warn
     - always
