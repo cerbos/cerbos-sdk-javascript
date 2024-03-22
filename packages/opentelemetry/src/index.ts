@@ -34,7 +34,12 @@ import type {
   Instrumentation,
   InstrumentationConfig,
 } from "@opentelemetry/instrumentation";
-import { SemanticAttributes } from "@opentelemetry/semantic-conventions";
+import {
+  SEMATTRS_RPC_GRPC_STATUS_CODE,
+  SEMATTRS_RPC_METHOD,
+  SEMATTRS_RPC_SERVICE,
+  SEMATTRS_RPC_SYSTEM,
+} from "@opentelemetry/semantic-conventions";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires -- Can't import package.json because it is outside of the project's rootDir
 const { name, version } = require("../package.json") as {
@@ -110,9 +115,9 @@ export class CerbosInstrumentation implements Instrumentation {
         const serviceName = serviceNames[service];
         const methodName = rpcMethodName(rpc);
         const attributes: Attributes = {
-          [SemanticAttributes.RPC_SYSTEM]: "grpc",
-          [SemanticAttributes.RPC_SERVICE]: serviceName,
-          [SemanticAttributes.RPC_METHOD]: methodName,
+          [SEMATTRS_RPC_SYSTEM]: "grpc",
+          [SEMATTRS_RPC_SERVICE]: serviceName,
+          [SEMATTRS_RPC_METHOD]: methodName,
         };
 
         const span = this.tracer.startSpan(`${serviceName}/${methodName}`, {
@@ -138,7 +143,7 @@ export class CerbosInstrumentation implements Instrumentation {
             headers,
           )) as _Response<Service, RPC>;
 
-          attributes[SemanticAttributes.RPC_GRPC_STATUS_CODE] = 0;
+          attributes[SEMATTRS_RPC_GRPC_STATUS_CODE] = 0;
 
           return response;
         } catch (error) {
@@ -149,7 +154,7 @@ export class CerbosInstrumentation implements Instrumentation {
             attributes["cerbos.error"] = error.message;
 
             if (error instanceof NotOK) {
-              attributes[SemanticAttributes.RPC_GRPC_STATUS_CODE] = error.code;
+              attributes[SEMATTRS_RPC_GRPC_STATUS_CODE] = error.code;
             }
           }
 
