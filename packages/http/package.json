@@ -52,7 +52,7 @@
     "qs": "^6.12.0"
   },
   "devDependencies": {
-    "@types/qs": "6.9.13"
+    "@types/qs": "6.9.14"
   },
   "publishConfig": {
     "access": "public",
