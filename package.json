@@ -63,6 +63,6 @@
     "prettier-plugin-pkg": "0.18.1",
     "ts-proto": "1.169.1",
     "tsx": "4.7.1",
-    "typescript": "5.4.2"
+    "typescript": "5.4.3"
   }
 }
