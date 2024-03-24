@@ -2,11 +2,12 @@
 
 [![npm](https://img.shields.io/npm/v/@cerbos/react?style=flat-square)](https://www.npmjs.com/package/@cerbos/react)
 
-A collection of React hooks for interacting with the Cerbos policy decision point service.
+A collection of React hooks for interacting with Cerbos policy decision points.
 
 ## Prerequisites
 
 - Cerbos 0.16+
+- React 16.13+
 
 ## Installation
 
@@ -16,31 +17,32 @@ $ npm install @cerbos/react
 
 ## Example usage
 
-First initialize a Cerbos client and provide it down the tree by using CerbosProvider
+First, create an [HTTP](../http/README.md) or [embedded](../embedded/README.md) Cerbos client, and provide it to your application's components using [`CerbosProvider`](../../docs/react.cerbosprovider.md):
 
 ```typescript
 import { Embedded as Cerbos } from "@cerbos/embedded";
+// or, import { HTTP as Cerbos } from "@cerbos/http";
 import { CerbosProvider } from "@cerbos/react";
 
-// Initialize the Cerbos client using any of the client libraries
-// that fit the needs of your application. In this example we are
-// using the client from `@cerbos/embedded`.
 const client = new Cerbos();
 
 function MyApp({ children }) {
-  const user = useUser();
+  const user = useYourAuthenticationLogic(...);
+
   return (
     <CerbosProvider
       client={client}
       principal={
         user
-          ? {  // the user is authenticated
+          ? {
               id: user.id,
               roles: user.roles,
             }
-          : {  // the user is not authenticated
-              id: "###ANONYMOUS_USER###", // Define an arbitrary ID for anonymous users.
-              roles: ["anonymous"], // Pass a role that represents an anonymous user, at least one is required.
+          : {
+              // Define an arbitrary ID for unauthenticated users.
+              id: "###ANONYMOUS_USER###",
+              // Define a role that represents unauthenticated users (at least one is required).
+              roles: ["anonymous"],
             }
       }
     >
@@ -50,19 +52,37 @@ function MyApp({ children }) {
 }
 ```
 
-For more details, [see the `CerbosProvider` component documentation](../../docs/react.cerbosprovider.md).
+Then, use the client to perform permission checks in your components, using one of the provided hooks:
 
-Then consume the client as you need, using one of the provided hooks
+- [`useCerbos`](../../docs/react.usecerbos.md)
+- [`useCheckResource`](../../docs/react.usecheckresource.md)
+- [`useCheckResources`](../../docs/react.usecheckresources.md)
+- [`useIsAllowed`](../../docs/react.useisallowed.md)
 
 ```typescript
-import { useCerbos } from "@cerbos/react";
+import { useIsAllowed } from "@cerbos/react";
 
 function SomeComponent() {
-    const cerbos = useCerbos();
+  const check = useIsAllowed({
+    resource: {
+      kind: "document",
+      id: "1",
+      attr: { owner: "user@example.com" },
+    },
+    action: "view",
+  });
 
-    ...
-    ...
-}
+  if (check.isLoading) {
+    // show spinner
+    return "Loading...";
+  }
+
+  if (check.error) {
+    // handle error
+    return "Error...";
+  }
+
+  return <div>{check.data && <button>a button document 1</button>}</div>;
 ```
 
 ## Further reading

@@ -24,7 +24,7 @@ Description
 
 </td><td>
 
-Component to provide the Cerbos client to down the component tree, should be placed closer to the root of the application. The principal is required but can be an anonymous user in case your application requires authorization checks for unauthenticated users.
+A component to provide a Cerbos client to your application's components.
 
 
 </td></tr>
@@ -35,7 +35,7 @@ Component to provide the Cerbos client to down the component tree, should be pla
 
 </td><td>
 
-Hook to access the provided Cerbos client. It is perfectly fine to access the client directly, especially when an Async function is required for the check, however, consider using one of [useCheckResource()](./react.usecheckresource.md)<!-- -->,[useCheckResources()](./react.usecheckresources.md) or [useIsAllowed()](./react.useisallowed.md) instead. The API they provide might be simpler for your use case as the handle the Async logic for you.
+A hook to access the Cerbos client passed down by the [CerbosProvider()](./react.cerbosprovider.md)<!-- -->.
 
 
 </td></tr>
@@ -46,7 +46,7 @@ Hook to access the provided Cerbos client. It is perfectly fine to access the cl
 
 </td><td>
 
-Check a principal's permissions on a resource.
+Check the principal's permissions on a resource.
 
 
 </td></tr>
@@ -57,7 +57,7 @@ Check a principal's permissions on a resource.
 
 </td><td>
 
-Check a principal's permissions on a set of resources.
+Check the principal's permissions on a set of resources.
 
 
 </td></tr>
@@ -68,7 +68,7 @@ Check a principal's permissions on a set of resources.
 
 </td><td>
 
-Check if a principal is allowed to perform an action on a resource.
+Check if the principal is allowed to perform an action on a resource.
 
 
 </td></tr>
@@ -94,6 +94,7 @@ Description
 
 </td><td>
 
+Props for the [CerbosProvider()](./react.cerbosprovider.md) component.
 
 
 </td></tr>
@@ -119,6 +120,7 @@ Description
 
 </td><td>
 
+The result of calling an async method on a client.
 
 
 </td></tr>

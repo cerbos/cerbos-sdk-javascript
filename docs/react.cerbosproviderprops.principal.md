@@ -4,8 +4,15 @@
 
 ## CerbosProviderProps.principal property
 
+The principal to check.
+
 **Signature:**
 
 ```typescript
 principal: Principal;
 ```
+
+## Remarks
+
+This is required, but can describe an anonymous user so that you can perform permission checks for unauthenticated users.
+

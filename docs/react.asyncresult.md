@@ -4,6 +4,7 @@
 
 ## AsyncResult type
 
+The result of calling an async method on a client.
 
 **Signature:**
 

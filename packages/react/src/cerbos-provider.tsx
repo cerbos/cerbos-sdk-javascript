@@ -11,25 +11,56 @@ import { useDeepCompareMemoize } from "use-deep-compare-effect";
 export const CerbosContext = createContext<ClientWithPrincipal | undefined>(
   undefined,
 );
+
 /**
+ * Props for the {@link CerbosProvider} component.
+ *
  * @public
  */
 export interface CerbosProviderProps {
+  /**
+   * Your application's component tree.
+   */
   children: ReactNode;
+  /**
+   * The Cerbos client to provide.
+   */
   client: Client;
+  /**
+   * The principal to check.
+   *
+   * @remarks
+   * This is required, but can describe an anonymous user so that you can perform permission checks for unauthenticated users.
+   */
   principal: Principal;
+  /**
+   * Auxiliary data related to the principal.
+   *
+   * @remarks
+   * You can read claims directly from a JWT in your authorization policies by configuring
+   * {@link https://docs.cerbos.dev/cerbos/latest/configuration/auxdata.html | the Cerbos policy decision point (PDP) service} or
+   * {@link https://github.com/cerbos/cerbos-sdk-javascript/blob/main/docs/embedded.options.md | an embedded PDP client }
+   * to decode the token.
+   */
   auxData?: Pick<AuxData, "jwt"> | undefined;
 }
 
 /**
- * Component to provide the Cerbos client to down the component tree, should
- * be placed closer to the root of the application. The principal is required
- * but can be an anonymous user in case your application requires authorization
- * checks for unauthenticated users.
+ * A component to provide a Cerbos client to your application's components.
+ *
+ * @remarks
+ * The provider should be placed close to the root of your application.
+ *
+ * You need to provide a principal, but it can describe an anonymous user so that you can perform permission checks for unauthenticated users.
+ * You could use a single hardcoded ID for all anonymous users, or store a unique identifier in the session.
+ *
+ * You can use whichever of the {@link https://github.com/cerbos/cerbos-sdk-javascript/blob/main/packages/http/README.md | HTTP} or
+ * {@link https://github.com/cerbos/cerbos-sdk-javascript/blob/main/packages/embedded/README.md | embedded} client libraries best fit your needs.
  *
  * @example
  * ```typescript
  * import { Embedded as Cerbos } from "@cerbos/embedded";
+ * * // or, import { HTTP as Cerbos } from "@cerbos/http";
  * import { CerbosProvider } from "@cerbos/react";
  *
  * // Initialize the Cerbos client using any of the client libraries
@@ -38,20 +69,22 @@ export interface CerbosProviderProps {
  * const client = new Cerbos();
  *
  * function MyApp({ children }) {
- *   const user = useUser();
+ *   const user = useYourAuthenticationLogic(...);
  *
  *   return (
  *     <CerbosProvider
  *       client={client}
  *       principal={
  *         user
- *           ? {  // the user is authenticated
+ *           ? {
  *               id: user.id,
  *               roles: user.roles,
  *             }
- *           : {  // the user is not authenticated
- *               id: "###ANONYMOUS_USER###", // Define an arbitrary ID for anonymous users.
- *               roles: ["anonymous"], // Pass a role that represents an anonymous user, at least one is required.
+ *           : {
+ *               // Define an arbitrary ID for unauthenticated users.
+ *               id: "###ANONYMOUS_USER###",
+ *               // Define a role that represents unauthenticated users (at least one is required).
+ *               roles: ["anonymous"],
  *             }
  *       }
  *     >

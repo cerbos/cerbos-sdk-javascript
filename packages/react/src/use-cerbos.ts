@@ -1,22 +1,26 @@
 import type { ClientWithPrincipal } from "@cerbos/core";
 import { useContext } from "react";
 
-import { CerbosContext } from "./cerbos-provider";
 import {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- used for docs link
-  useCheckResource,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- used for docs link
-  useCheckResources,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- used for docs link
-  useIsAllowed,
+  CerbosContext,
+  CerbosProvider, // eslint-disable-line @typescript-eslint/no-unused-vars -- used for docs link
+} from "./cerbos-provider";
+import type {
+  AsyncResult, // eslint-disable-line @typescript-eslint/no-unused-vars -- used for docs link
+} from "./use-cerbos-request";
+import {
+  useCheckResource, // eslint-disable-line @typescript-eslint/no-unused-vars -- used for docs link
+  useCheckResources, // eslint-disable-line @typescript-eslint/no-unused-vars -- used for docs link
+  useIsAllowed, // eslint-disable-line @typescript-eslint/no-unused-vars -- used for docs links
 } from "./use-cerbos-request";
 
 /**
- * Hook to access the provided Cerbos client. It is perfectly fine to access the client
- * directly, especially when an Async function is required for the check, however,
- * consider using one of {@link useCheckResource},{@link useCheckResources} or
- * {@link useIsAllowed} instead. The API they provide might be simpler for your use
- * case as the handle the Async logic for you.
+ * A hook to access the Cerbos client passed down by the {@link CerbosProvider}.
+ *
+ * @remarks
+ * The client's methods are asynchronous, so depending on your use case it may be easier to
+ * use one of the higher-level hooks ({@link useCheckResource}, {@link useCheckResources}, or
+ * {@link useIsAllowed}), which convert the resulting promises into {@link AsyncResult}s.
  *
  *
  * @example

@@ -4,7 +4,7 @@
 
 ## CerbosProvider() function
 
-Component to provide the Cerbos client to down the component tree, should be placed closer to the root of the application. The principal is required but can be an anonymous user in case your application requires authorization checks for unauthenticated users.
+A component to provide a Cerbos client to your application's components.
 
 **Signature:**
 
@@ -49,11 +49,20 @@ Description
 
 ReactElement
 
+## Remarks
+
+The provider should be placed close to the root of your application.
+
+You need to provide a principal, but it can describe an anonymous user so that you can perform permission checks for unauthenticated users. You could use a single hardcoded ID for all anonymous users, or store a unique identifier in the session.
+
+You can use whichever of the [HTTP](https://github.com/cerbos/cerbos-sdk-javascript/blob/main/packages/http/README.md) or [embedded](https://github.com/cerbos/cerbos-sdk-javascript/blob/main/packages/embedded/README.md) client libraries best fit your needs.
+
 ## Example
 
 
 ```typescript
 import { Embedded as Cerbos } from "@cerbos/embedded";
+* // or, import { HTTP as Cerbos } from "@cerbos/http";
 import { CerbosProvider } from "@cerbos/react";
 
 // Initialize the Cerbos client using any of the client libraries
@@ -62,20 +71,22 @@ import { CerbosProvider } from "@cerbos/react";
 const client = new Cerbos();
 
 function MyApp({ children }) {
-  const user = useUser();
+  const user = useYourAuthenticationLogic(...);
 
   return (
     <CerbosProvider
       client={client}
       principal={
         user
-          ? {  // the user is authenticated
+          ? {
               id: user.id,
               roles: user.roles,
             }
-          : {  // the user is not authenticated
-              id: "###ANONYMOUS_USER###", // Define an arbitrary ID for anonymous users.
-              roles: ["anonymous"], // Pass a role that represents an anonymous user, at least one is required.
+          : {
+              // Define an arbitrary ID for unauthenticated users.
+              id: "###ANONYMOUS_USER###",
+              // Define a role that represents unauthenticated users (at least one is required).
+              roles: ["anonymous"],
             }
       }
     >

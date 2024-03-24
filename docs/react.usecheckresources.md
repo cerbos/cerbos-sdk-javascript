@@ -4,7 +4,7 @@
 
 ## useCheckResources() function
 
-Check a principal's permissions on a set of resources.
+Check the principal's permissions on a set of resources.
 
 **Signature:**
 

@@ -16,6 +16,8 @@ The [@cerbos/embedded](/packages/embedded/README.md) package provides a client (
 
 All clients extend the base [`Client`](/docs/core.client.md) class from [@cerbos/core](/packages/core/README.md), so they can be used interchangeably in isomorphic applications.
 
+In React applications, you can use the [@cerbos/react](/packages/react/README.md) package to use an [`HTTP`](/docs/http.http.md) or [`Embedded`](/docs/embedded.embedded.md) client in your components via hooks.
+
 To instrument the clients with [OpenTelemetry](http://opentelemetry.io), use the [@cerbos/opentelemetry](/packages/opentelemetry/README.md) package.
 
 To load Cerbos policies from YAML or JSON files, use the [@cerbos/files](/packages/files/README.md) package.

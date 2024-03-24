@@ -13,6 +13,8 @@ import { useDeepCompareMemoize } from "use-deep-compare-effect";
 import { useCerbos } from "./use-cerbos";
 
 /**
+ * The result of calling an async method on a client.
+ *
  * @public
  */
 export type AsyncResult<T> =
@@ -78,7 +80,7 @@ function useCerbosRequest<Method extends Methods>(
 }
 
 /**
- * Check a principal's permissions on a resource.
+ * Check the principal's permissions on a resource.
  *
  * @example
  * ```typescript
@@ -122,7 +124,7 @@ export function useCheckResource(
 }
 
 /**
- * Check a principal's permissions on a set of resources.
+ * Check the principal's permissions on a set of resources.
  *
  * @example
  * ```typescript
@@ -192,7 +194,7 @@ export function useCheckResources(
 }
 
 /**
- * Check if a principal is allowed to perform an action on a resource.
+ * Check if the principal is allowed to perform an action on a resource.
  *
  * @example
  * ```typescript

@@ -4,7 +4,7 @@
 
 ## useCerbos() function
 
-Hook to access the provided Cerbos client. It is perfectly fine to access the client directly, especially when an Async function is required for the check, however, consider using one of [useCheckResource()](./react.usecheckresource.md)<!-- -->,[useCheckResources()](./react.usecheckresources.md) or [useIsAllowed()](./react.useisallowed.md) instead. The API they provide might be simpler for your use case as the handle the Async logic for you.
+A hook to access the Cerbos client passed down by the [CerbosProvider()](./react.cerbosprovider.md)<!-- -->.
 
 **Signature:**
 
@@ -14,6 +14,10 @@ export declare function useCerbos(): ClientWithPrincipal;
 **Returns:**
 
 [ClientWithPrincipal](./core.clientwithprincipal.md)
+
+## Remarks
+
+The client's methods are asynchronous, so depending on your use case it may be easier to use one of the higher-level hooks ([useCheckResource()](./react.usecheckresource.md)<!-- -->, [useCheckResources()](./react.usecheckresources.md)<!-- -->, or [useIsAllowed()](./react.useisallowed.md)<!-- -->), which convert the resulting promises into [AsyncResult](./react.asyncresult.md)<!-- -->s.
 
 ## Example
 

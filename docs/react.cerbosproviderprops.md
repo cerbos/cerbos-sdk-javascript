@@ -4,6 +4,7 @@
 
 ## CerbosProviderProps interface
 
+Props for the [CerbosProvider()](./react.cerbosprovider.md) component.
 
 **Signature:**
 
@@ -49,7 +50,7 @@ Pick&lt;[AuxData](./core.auxdata.md)<!-- -->, "jwt"&gt; \| undefined
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Auxiliary data related to the principal.
 
 
 </td></tr>
@@ -68,6 +69,8 @@ ReactNode
 
 </td><td>
 
+Your application's component tree.
+
 
 </td></tr>
 <tr><td>
@@ -85,6 +88,8 @@ ReactNode
 
 </td><td>
 
+The Cerbos client to provide.
+
 
 </td></tr>
 <tr><td>
@@ -101,6 +106,8 @@ ReactNode
 
 
 </td><td>
+
+The principal to check.
 
 
 </td></tr>

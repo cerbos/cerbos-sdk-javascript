@@ -4,6 +4,8 @@
 
 ## CerbosProviderProps.children property
 
+Your application's component tree.
+
 **Signature:**
 
 ```typescript

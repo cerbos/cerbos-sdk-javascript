@@ -4,7 +4,7 @@
 
 ## useIsAllowed() function
 
-Check if a principal is allowed to perform an action on a resource.
+Check if the principal is allowed to perform an action on a resource.
 
 **Signature:**
 

@@ -4,6 +4,8 @@
 
 ## CerbosProviderProps.client property
 
+The Cerbos client to provide.
+
 **Signature:**
 
 ```typescript
