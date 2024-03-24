@@ -1,3 +1,5 @@
+// @vitest-environment jsdom
+
 import type { Client, ClientWithPrincipal } from "@cerbos/core";
 import type { AsyncResult } from "@cerbos/react";
 import {

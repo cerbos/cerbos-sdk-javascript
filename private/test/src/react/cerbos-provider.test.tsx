@@ -1,3 +1,5 @@
+// @vitest-environment jsdom
+
 import type { AuxData, Client, Principal } from "@cerbos/core";
 import { CerbosProvider, useCerbos } from "@cerbos/react";
 import { getByText, renderHook } from "@testing-library/react";
