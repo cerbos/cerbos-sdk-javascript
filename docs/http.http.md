@@ -41,7 +41,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[(constructor)(url, options)](./http.http._constructor_.md)
+[(constructor)(baseUrl, options)](./http.http._constructor_.md)
 
 
 </td><td>

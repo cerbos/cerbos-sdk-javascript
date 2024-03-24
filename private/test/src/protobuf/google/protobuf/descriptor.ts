@@ -52,6 +52,59 @@ export function editionFromJSON(object: any): Edition {
   }
 }
 
+export interface FileOptions {
+  javaPackage?: string | undefined;
+  javaOuterClassname?: string | undefined;
+  javaMultipleFiles?: boolean | undefined;
+  javaGenerateEqualsAndHash?: boolean | undefined;
+  javaStringCheckUtf8?: boolean | undefined;
+  optimizeFor?: FileOptions_OptimizeMode | undefined;
+  goPackage?: string | undefined;
+  ccGenericServices?: boolean | undefined;
+  javaGenericServices?: boolean | undefined;
+  pyGenericServices?: boolean | undefined;
+  phpGenericServices?: boolean | undefined;
+  deprecated?: boolean | undefined;
+  ccEnableArenas?: boolean | undefined;
+  objcClassPrefix?: string | undefined;
+  csharpNamespace?: string | undefined;
+  swiftPrefix?: string | undefined;
+  phpClassPrefix?: string | undefined;
+  phpNamespace?: string | undefined;
+  phpMetadataNamespace?: string | undefined;
+  rubyPackage?: string | undefined;
+  features?: FeatureSet | undefined;
+  uninterpretedOption: UninterpretedOption[];
+}
+
+export enum FileOptions_OptimizeMode {
+  SPEED = 1,
+  CODE_SIZE = 2,
+  LITE_RUNTIME = 3,
+}
+
+export function fileOptions_OptimizeModeFromJSON(
+  object: any,
+): FileOptions_OptimizeMode {
+  switch (object) {
+    case 1:
+    case "SPEED":
+      return FileOptions_OptimizeMode.SPEED;
+    case 2:
+    case "CODE_SIZE":
+      return FileOptions_OptimizeMode.CODE_SIZE;
+    case 3:
+    case "LITE_RUNTIME":
+      return FileOptions_OptimizeMode.LITE_RUNTIME;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FileOptions_OptimizeMode",
+      );
+  }
+}
+
 export interface MessageOptions {
   messageSetWireFormat?: boolean | undefined;
   noStandardDescriptorAccessor?: boolean | undefined;
@@ -213,6 +266,47 @@ export function fieldOptions_OptionTargetTypeFromJSON(
 export interface FieldOptions_EditionDefault {
   edition?: Edition | undefined;
   value?: string | undefined;
+}
+
+export interface ServiceOptions {
+  features?: FeatureSet | undefined;
+  deprecated?: boolean | undefined;
+  uninterpretedOption: UninterpretedOption[];
+}
+
+export interface MethodOptions {
+  deprecated?: boolean | undefined;
+  idempotencyLevel?: MethodOptions_IdempotencyLevel | undefined;
+  features?: FeatureSet | undefined;
+  uninterpretedOption: UninterpretedOption[];
+}
+
+export enum MethodOptions_IdempotencyLevel {
+  IDEMPOTENCY_UNKNOWN = 0,
+  NO_SIDE_EFFECTS = 1,
+  IDEMPOTENT = 2,
+}
+
+export function methodOptions_IdempotencyLevelFromJSON(
+  object: any,
+): MethodOptions_IdempotencyLevel {
+  switch (object) {
+    case 0:
+    case "IDEMPOTENCY_UNKNOWN":
+      return MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN;
+    case 1:
+    case "NO_SIDE_EFFECTS":
+      return MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS;
+    case 2:
+    case "IDEMPOTENT":
+      return MethodOptions_IdempotencyLevel.IDEMPOTENT;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum MethodOptions_IdempotencyLevel",
+      );
+  }
 }
 
 export interface UninterpretedOption {
@@ -404,6 +498,390 @@ export function featureSet_JsonFormatFromJSON(
       );
   }
 }
+
+function createBaseFileOptions(): FileOptions {
+  return {
+    javaPackage: "",
+    javaOuterClassname: "",
+    javaMultipleFiles: false,
+    javaGenerateEqualsAndHash: false,
+    javaStringCheckUtf8: false,
+    optimizeFor: 1,
+    goPackage: "",
+    ccGenericServices: false,
+    javaGenericServices: false,
+    pyGenericServices: false,
+    phpGenericServices: false,
+    deprecated: false,
+    ccEnableArenas: true,
+    objcClassPrefix: "",
+    csharpNamespace: "",
+    swiftPrefix: "",
+    phpClassPrefix: "",
+    phpNamespace: "",
+    phpMetadataNamespace: "",
+    rubyPackage: "",
+    features: undefined,
+    uninterpretedOption: [],
+  };
+}
+
+export const FileOptions = {
+  encode(
+    message: FileOptions,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.javaPackage !== undefined && message.javaPackage !== "") {
+      writer.uint32(10).string(message.javaPackage);
+    }
+    if (
+      message.javaOuterClassname !== undefined &&
+      message.javaOuterClassname !== ""
+    ) {
+      writer.uint32(66).string(message.javaOuterClassname);
+    }
+    if (
+      message.javaMultipleFiles !== undefined &&
+      message.javaMultipleFiles !== false
+    ) {
+      writer.uint32(80).bool(message.javaMultipleFiles);
+    }
+    if (
+      message.javaGenerateEqualsAndHash !== undefined &&
+      message.javaGenerateEqualsAndHash !== false
+    ) {
+      writer.uint32(160).bool(message.javaGenerateEqualsAndHash);
+    }
+    if (
+      message.javaStringCheckUtf8 !== undefined &&
+      message.javaStringCheckUtf8 !== false
+    ) {
+      writer.uint32(216).bool(message.javaStringCheckUtf8);
+    }
+    if (message.optimizeFor !== undefined && message.optimizeFor !== 1) {
+      writer.uint32(72).int32(message.optimizeFor);
+    }
+    if (message.goPackage !== undefined && message.goPackage !== "") {
+      writer.uint32(90).string(message.goPackage);
+    }
+    if (
+      message.ccGenericServices !== undefined &&
+      message.ccGenericServices !== false
+    ) {
+      writer.uint32(128).bool(message.ccGenericServices);
+    }
+    if (
+      message.javaGenericServices !== undefined &&
+      message.javaGenericServices !== false
+    ) {
+      writer.uint32(136).bool(message.javaGenericServices);
+    }
+    if (
+      message.pyGenericServices !== undefined &&
+      message.pyGenericServices !== false
+    ) {
+      writer.uint32(144).bool(message.pyGenericServices);
+    }
+    if (
+      message.phpGenericServices !== undefined &&
+      message.phpGenericServices !== false
+    ) {
+      writer.uint32(336).bool(message.phpGenericServices);
+    }
+    if (message.deprecated !== undefined && message.deprecated !== false) {
+      writer.uint32(184).bool(message.deprecated);
+    }
+    if (
+      message.ccEnableArenas !== undefined &&
+      message.ccEnableArenas !== true
+    ) {
+      writer.uint32(248).bool(message.ccEnableArenas);
+    }
+    if (
+      message.objcClassPrefix !== undefined &&
+      message.objcClassPrefix !== ""
+    ) {
+      writer.uint32(290).string(message.objcClassPrefix);
+    }
+    if (
+      message.csharpNamespace !== undefined &&
+      message.csharpNamespace !== ""
+    ) {
+      writer.uint32(298).string(message.csharpNamespace);
+    }
+    if (message.swiftPrefix !== undefined && message.swiftPrefix !== "") {
+      writer.uint32(314).string(message.swiftPrefix);
+    }
+    if (message.phpClassPrefix !== undefined && message.phpClassPrefix !== "") {
+      writer.uint32(322).string(message.phpClassPrefix);
+    }
+    if (message.phpNamespace !== undefined && message.phpNamespace !== "") {
+      writer.uint32(330).string(message.phpNamespace);
+    }
+    if (
+      message.phpMetadataNamespace !== undefined &&
+      message.phpMetadataNamespace !== ""
+    ) {
+      writer.uint32(354).string(message.phpMetadataNamespace);
+    }
+    if (message.rubyPackage !== undefined && message.rubyPackage !== "") {
+      writer.uint32(362).string(message.rubyPackage);
+    }
+    if (message.features !== undefined) {
+      FeatureSet.encode(message.features, writer.uint32(402).fork()).ldelim();
+    }
+    for (const v of message.uninterpretedOption) {
+      UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): FileOptions {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFileOptions();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.javaPackage = reader.string();
+          continue;
+        case 8:
+          if (tag !== 66) {
+            break;
+          }
+
+          message.javaOuterClassname = reader.string();
+          continue;
+        case 10:
+          if (tag !== 80) {
+            break;
+          }
+
+          message.javaMultipleFiles = reader.bool();
+          continue;
+        case 20:
+          if (tag !== 160) {
+            break;
+          }
+
+          message.javaGenerateEqualsAndHash = reader.bool();
+          continue;
+        case 27:
+          if (tag !== 216) {
+            break;
+          }
+
+          message.javaStringCheckUtf8 = reader.bool();
+          continue;
+        case 9:
+          if (tag !== 72) {
+            break;
+          }
+
+          message.optimizeFor = reader.int32() as any;
+          continue;
+        case 11:
+          if (tag !== 90) {
+            break;
+          }
+
+          message.goPackage = reader.string();
+          continue;
+        case 16:
+          if (tag !== 128) {
+            break;
+          }
+
+          message.ccGenericServices = reader.bool();
+          continue;
+        case 17:
+          if (tag !== 136) {
+            break;
+          }
+
+          message.javaGenericServices = reader.bool();
+          continue;
+        case 18:
+          if (tag !== 144) {
+            break;
+          }
+
+          message.pyGenericServices = reader.bool();
+          continue;
+        case 42:
+          if (tag !== 336) {
+            break;
+          }
+
+          message.phpGenericServices = reader.bool();
+          continue;
+        case 23:
+          if (tag !== 184) {
+            break;
+          }
+
+          message.deprecated = reader.bool();
+          continue;
+        case 31:
+          if (tag !== 248) {
+            break;
+          }
+
+          message.ccEnableArenas = reader.bool();
+          continue;
+        case 36:
+          if (tag !== 290) {
+            break;
+          }
+
+          message.objcClassPrefix = reader.string();
+          continue;
+        case 37:
+          if (tag !== 298) {
+            break;
+          }
+
+          message.csharpNamespace = reader.string();
+          continue;
+        case 39:
+          if (tag !== 314) {
+            break;
+          }
+
+          message.swiftPrefix = reader.string();
+          continue;
+        case 40:
+          if (tag !== 322) {
+            break;
+          }
+
+          message.phpClassPrefix = reader.string();
+          continue;
+        case 41:
+          if (tag !== 330) {
+            break;
+          }
+
+          message.phpNamespace = reader.string();
+          continue;
+        case 44:
+          if (tag !== 354) {
+            break;
+          }
+
+          message.phpMetadataNamespace = reader.string();
+          continue;
+        case 45:
+          if (tag !== 362) {
+            break;
+          }
+
+          message.rubyPackage = reader.string();
+          continue;
+        case 50:
+          if (tag !== 402) {
+            break;
+          }
+
+          message.features = FeatureSet.decode(reader, reader.uint32());
+          continue;
+        case 999:
+          if (tag !== 7994) {
+            break;
+          }
+
+          message.uninterpretedOption.push(
+            UninterpretedOption.decode(reader, reader.uint32()),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FileOptions {
+    return {
+      javaPackage: isSet(object.javaPackage)
+        ? globalThis.String(object.javaPackage)
+        : "",
+      javaOuterClassname: isSet(object.javaOuterClassname)
+        ? globalThis.String(object.javaOuterClassname)
+        : "",
+      javaMultipleFiles: isSet(object.javaMultipleFiles)
+        ? globalThis.Boolean(object.javaMultipleFiles)
+        : false,
+      javaGenerateEqualsAndHash: isSet(object.javaGenerateEqualsAndHash)
+        ? globalThis.Boolean(object.javaGenerateEqualsAndHash)
+        : false,
+      javaStringCheckUtf8: isSet(object.javaStringCheckUtf8)
+        ? globalThis.Boolean(object.javaStringCheckUtf8)
+        : false,
+      optimizeFor: isSet(object.optimizeFor)
+        ? fileOptions_OptimizeModeFromJSON(object.optimizeFor)
+        : 1,
+      goPackage: isSet(object.goPackage)
+        ? globalThis.String(object.goPackage)
+        : "",
+      ccGenericServices: isSet(object.ccGenericServices)
+        ? globalThis.Boolean(object.ccGenericServices)
+        : false,
+      javaGenericServices: isSet(object.javaGenericServices)
+        ? globalThis.Boolean(object.javaGenericServices)
+        : false,
+      pyGenericServices: isSet(object.pyGenericServices)
+        ? globalThis.Boolean(object.pyGenericServices)
+        : false,
+      phpGenericServices: isSet(object.phpGenericServices)
+        ? globalThis.Boolean(object.phpGenericServices)
+        : false,
+      deprecated: isSet(object.deprecated)
+        ? globalThis.Boolean(object.deprecated)
+        : false,
+      ccEnableArenas: isSet(object.ccEnableArenas)
+        ? globalThis.Boolean(object.ccEnableArenas)
+        : true,
+      objcClassPrefix: isSet(object.objcClassPrefix)
+        ? globalThis.String(object.objcClassPrefix)
+        : "",
+      csharpNamespace: isSet(object.csharpNamespace)
+        ? globalThis.String(object.csharpNamespace)
+        : "",
+      swiftPrefix: isSet(object.swiftPrefix)
+        ? globalThis.String(object.swiftPrefix)
+        : "",
+      phpClassPrefix: isSet(object.phpClassPrefix)
+        ? globalThis.String(object.phpClassPrefix)
+        : "",
+      phpNamespace: isSet(object.phpNamespace)
+        ? globalThis.String(object.phpNamespace)
+        : "",
+      phpMetadataNamespace: isSet(object.phpMetadataNamespace)
+        ? globalThis.String(object.phpMetadataNamespace)
+        : "",
+      rubyPackage: isSet(object.rubyPackage)
+        ? globalThis.String(object.rubyPackage)
+        : "",
+      features: isSet(object.features)
+        ? FeatureSet.fromJSON(object.features)
+        : undefined,
+      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
+        ? object.uninterpretedOption.map((e: any) =>
+            UninterpretedOption.fromJSON(e),
+          )
+        : [],
+    };
+  },
+};
 
 function createBaseMessageOptions(): MessageOptions {
   return {
@@ -848,6 +1326,183 @@ export const FieldOptions_EditionDefault = {
     return {
       edition: isSet(object.edition) ? editionFromJSON(object.edition) : 0,
       value: isSet(object.value) ? globalThis.String(object.value) : "",
+    };
+  },
+};
+
+function createBaseServiceOptions(): ServiceOptions {
+  return { features: undefined, deprecated: false, uninterpretedOption: [] };
+}
+
+export const ServiceOptions = {
+  encode(
+    message: ServiceOptions,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.features !== undefined) {
+      FeatureSet.encode(message.features, writer.uint32(274).fork()).ldelim();
+    }
+    if (message.deprecated !== undefined && message.deprecated !== false) {
+      writer.uint32(264).bool(message.deprecated);
+    }
+    for (const v of message.uninterpretedOption) {
+      UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceOptions {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseServiceOptions();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 34:
+          if (tag !== 274) {
+            break;
+          }
+
+          message.features = FeatureSet.decode(reader, reader.uint32());
+          continue;
+        case 33:
+          if (tag !== 264) {
+            break;
+          }
+
+          message.deprecated = reader.bool();
+          continue;
+        case 999:
+          if (tag !== 7994) {
+            break;
+          }
+
+          message.uninterpretedOption.push(
+            UninterpretedOption.decode(reader, reader.uint32()),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ServiceOptions {
+    return {
+      features: isSet(object.features)
+        ? FeatureSet.fromJSON(object.features)
+        : undefined,
+      deprecated: isSet(object.deprecated)
+        ? globalThis.Boolean(object.deprecated)
+        : false,
+      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
+        ? object.uninterpretedOption.map((e: any) =>
+            UninterpretedOption.fromJSON(e),
+          )
+        : [],
+    };
+  },
+};
+
+function createBaseMethodOptions(): MethodOptions {
+  return {
+    deprecated: false,
+    idempotencyLevel: 0,
+    features: undefined,
+    uninterpretedOption: [],
+  };
+}
+
+export const MethodOptions = {
+  encode(
+    message: MethodOptions,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.deprecated !== undefined && message.deprecated !== false) {
+      writer.uint32(264).bool(message.deprecated);
+    }
+    if (
+      message.idempotencyLevel !== undefined &&
+      message.idempotencyLevel !== 0
+    ) {
+      writer.uint32(272).int32(message.idempotencyLevel);
+    }
+    if (message.features !== undefined) {
+      FeatureSet.encode(message.features, writer.uint32(282).fork()).ldelim();
+    }
+    for (const v of message.uninterpretedOption) {
+      UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MethodOptions {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMethodOptions();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 33:
+          if (tag !== 264) {
+            break;
+          }
+
+          message.deprecated = reader.bool();
+          continue;
+        case 34:
+          if (tag !== 272) {
+            break;
+          }
+
+          message.idempotencyLevel = reader.int32() as any;
+          continue;
+        case 35:
+          if (tag !== 282) {
+            break;
+          }
+
+          message.features = FeatureSet.decode(reader, reader.uint32());
+          continue;
+        case 999:
+          if (tag !== 7994) {
+            break;
+          }
+
+          message.uninterpretedOption.push(
+            UninterpretedOption.decode(reader, reader.uint32()),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MethodOptions {
+    return {
+      deprecated: isSet(object.deprecated)
+        ? globalThis.Boolean(object.deprecated)
+        : false,
+      idempotencyLevel: isSet(object.idempotencyLevel)
+        ? methodOptions_IdempotencyLevelFromJSON(object.idempotencyLevel)
+        : 0,
+      features: isSet(object.features)
+        ? FeatureSet.fromJSON(object.features)
+        : undefined,
+      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
+        ? object.uninterpretedOption.map((e: any) =>
+            UninterpretedOption.fromJSON(e),
+          )
+        : [],
     };
   },
 };

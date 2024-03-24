@@ -53,6 +53,18 @@ export enum Status {
 }
 
 /**
+ * Options for creating an error.
+ *
+ * @public
+ */
+export interface ErrorOptions {
+  /**
+   * The original error that caused this one.
+   */
+  cause?: unknown;
+}
+
+/**
  * Error thrown when the Cerbos policy decision point server returns an unsuccessful response.
  *
  * @public
@@ -80,8 +92,10 @@ export class NotOK extends Error {
      * Additional error details.
      */
     public readonly details: string,
+
+    options?: ErrorOptions,
   ) {
-    super(`gRPC error ${code} (${Status[code]}): ${details}`);
+    super(`gRPC error ${code} (${Status[code]}): ${details}`, options);
     setNameAndStack(this);
   }
 }

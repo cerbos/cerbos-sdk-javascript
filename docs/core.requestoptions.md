@@ -54,4 +54,23 @@ _(Optional)_ Headers to add to the request.
 
 
 </td></tr>
+<tr><td>
+
+[signal?](./core.requestoptions.signal.md)
+
+
+</td><td>
+
+
+</td><td>
+
+AbortSignal \| undefined
+
+
+</td><td>
+
+_(Optional)_ A [signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) to abort the request.
+
+
+</td></tr>
 </tbody></table>

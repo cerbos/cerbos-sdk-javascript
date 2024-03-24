@@ -521,6 +521,17 @@ The outcome of enabling policies.
 </td></tr>
 <tr><td>
 
+[ErrorOptions](./core.erroroptions.md)
+
+
+</td><td>
+
+Options for creating an error.
+
+
+</td></tr>
+<tr><td>
+
 [ExportVariables](./core.exportvariables.md)
 
 

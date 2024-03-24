@@ -5,6 +5,7 @@
  */
 
 import type {
+  _AbortHandler,
   _Instrumenter,
   _RPC,
   _Request,
@@ -109,6 +110,7 @@ export class CerbosInstrumentation implements Instrumentation {
         rpc: RPC,
         request: _Request<Service, RPC>,
         headers: Headers,
+        abortHandler: _AbortHandler,
       ): Promise<_Response<Service, RPC>> => {
         const startTime = performance.now();
 
@@ -141,6 +143,7 @@ export class CerbosInstrumentation implements Instrumentation {
             rpc,
             request,
             headers,
+            abortHandler,
           )) as _Response<Service, RPC>;
 
           attributes[SEMATTRS_RPC_GRPC_STATUS_CODE] = 0;

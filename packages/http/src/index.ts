@@ -11,7 +11,7 @@ import type {
   _Response,
   _Service,
 } from "@cerbos/core";
-import { Client, NotOK } from "@cerbos/core";
+import { Client, NotOK, Status } from "@cerbos/core";
 import { stringify as queryStringify } from "qs";
 
 import {
@@ -74,7 +74,7 @@ export class HTTP extends Client {
   /**
    * Create a client for interacting with the Cerbos policy decision point (PDP) server over HTTP.
    *
-   * @param url - base Cerbos PDP server URL (the Cerbos REST API must be available at `${url}/api/`).
+   * @param baseUrl - base Cerbos PDP server URL (the Cerbos REST API must be available at `${baseUrl}/api/`).
    * @param options - additional client settings.
    *
    * @example
@@ -91,30 +91,49 @@ export class HTTP extends Client {
    * const cerbos = new HTTP("https://demo-pdp.cerbos.cloud", { playgroundInstance: "gE623b0180QlsG5a4QIN6UOZ6f3iSFW2" });
    * ```
    */
-  public constructor(url: string, options: Options = {}) {
+  public constructor(baseUrl: string, options: Options = {}) {
     const userAgent = `${
       options.userAgent ? `${options.userAgent} ` : ""
     }${defaultUserAgent}`;
 
-    super(async (service, rpc, request, headers) => {
+    super(async (service, rpc, request, headers, abortHandler) => {
       const { method, path, requestType, responseType, serializeRequest } =
         services[service][rpc] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
 
-      const requestProtobuf = requestType.toJSON(request);
-
-      const query =
-        serializeRequest === "query"
-          ? `?${queryStringify(requestProtobuf, { indices: false })}`
-          : "";
-
       headers.set("User-Agent", userAgent);
 
-      const response = await fetch(url + path + query, {
-        method,
-        body:
-          serializeRequest === "body" ? JSON.stringify(requestProtobuf) : null,
-        headers,
-      });
+      let url = baseUrl + path;
+      const init: RequestInit = { method, headers };
+
+      const requestProtobuf = requestType.toJSON(request);
+      switch (serializeRequest) {
+        case "body":
+          init.body = JSON.stringify(requestProtobuf);
+          break;
+
+        case "query":
+          url += `?${queryStringify(requestProtobuf, { indices: false })}`;
+          break;
+      }
+
+      if (abortHandler.signal) {
+        init.signal = abortHandler.signal;
+      }
+
+      let response: Response;
+      try {
+        response = await fetch(url, init);
+      } catch (error) {
+        abortHandler.throwIfAborted();
+
+        throw new NotOK(
+          Status.UNKNOWN,
+          error instanceof Error
+            ? `Request failed: ${error.message}`
+            : "Request failed",
+          { cause: error },
+        );
+      }
 
       if (!response.ok) {
         throw NotOK.fromJSON(await response.text());
