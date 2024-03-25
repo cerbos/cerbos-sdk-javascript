@@ -1,24 +1,27 @@
-import type { Exports } from "./types/internal";
+export interface Allocator {
+  memory: WebAssembly.Memory;
+  allocate: (length: number) => bigint;
+  deallocate: (offset: number, length: number) => void;
+}
+
+const utf8Decoder = new TextDecoder("utf-8", { fatal: true });
+const utf8Encoder = new TextEncoder();
 
 export class Slice {
-  private readonly memory: WebAssembly.Memory;
-  private readonly _deallocate: Exports["deallocate"];
-
-  private constructor(
-    { memory, deallocate }: Exports,
-    public readonly offset: number,
-    public readonly length: number,
-  ) {
-    this.memory = memory;
-    this._deallocate = deallocate;
+  public static from(allocator: Allocator, offsetAndLength: bigint): Slice {
+    return new Slice(
+      allocator,
+      Number(offsetAndLength >> BigInt(32)),
+      Number(offsetAndLength & BigInt(0xffffffff)),
+    );
   }
 
-  public static ofJSON(exports: Exports, data: unknown): Slice {
-    const bytes = new TextEncoder().encode(JSON.stringify(data));
+  public static ofJSON(allocator: Allocator, data: unknown): Slice {
+    const bytes = utf8Encoder.encode(JSON.stringify(data));
 
     const slice = new Slice(
-      exports,
-      Number(exports.allocate(bytes.length)),
+      allocator,
+      Number(allocator.allocate(bytes.length)),
       bytes.length,
     );
 
@@ -31,27 +34,26 @@ export class Slice {
     }
   }
 
-  public static from(exports: Exports, offsetAndLength: bigint): Slice {
-    return new Slice(
-      exports,
-      Number(offsetAndLength >> BigInt(32)),
-      Number(offsetAndLength & BigInt(0xffffffff)),
-    );
-  }
+  public readonly deallocate: () => void;
+  private readonly bytes: Uint8Array;
 
-  public bytes(): Uint8Array {
-    return new Uint8Array(this.memory.buffer, this.offset, this.length);
-  }
+  private constructor(
+    { memory, deallocate }: Allocator,
+    public readonly offset: number,
+    public readonly length: number,
+  ) {
+    this.deallocate = (): void => {
+      deallocate(offset, length);
+    };
 
-  public copy(bytes: Uint8Array): void {
-    new Uint8Array(this.memory.buffer, this.offset, this.length).set(bytes);
-  }
-
-  public deallocate(): void {
-    this._deallocate(this.offset, this.length);
+    this.bytes = new Uint8Array(memory.buffer, offset, length);
   }
 
   public text(): string {
-    return new TextDecoder("utf-8").decode(this.bytes());
+    return utf8Decoder.decode(this.bytes);
+  }
+
+  private copy(bytes: Uint8Array): void {
+    this.bytes.set(bytes);
   }
 }

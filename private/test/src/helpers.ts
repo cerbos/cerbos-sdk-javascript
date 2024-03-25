@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import { hrtime } from "process";
 import { setTimeout } from "timers/promises";
 
@@ -275,4 +276,10 @@ export function describeIfCerbosVersionIsAtLeast(
   }
 
   return describe.skip;
+}
+
+export function bundleFilePath(
+  commit = "f1ed7491836a1df278d762f9438809a02409a341",
+): string {
+  return resolve(__dirname, `../bundles/${commit}.wasm`);
 }

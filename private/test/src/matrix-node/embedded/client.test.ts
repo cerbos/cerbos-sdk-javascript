@@ -1,5 +1,4 @@
 import { readFile } from "fs/promises";
-import { resolve } from "path";
 
 import { UnsecuredJWT } from "jose";
 import { describe, expect, it } from "vitest";
@@ -13,18 +12,17 @@ import {
 import type { DecodedJWTPayload } from "@cerbos/embedded";
 import { Embedded } from "@cerbos/embedded";
 
+import { bundleFilePath } from "../../helpers";
+
 describe("Embedded", () => {
   describe("cerbos", () => {
-    const client = new Embedded(
-      readFile(resolve(__dirname, "../../servers/policies.wasm")),
-      {
-        decodeJWTPayload: ({ token }): DecodedJWTPayload =>
-          UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
-        globals: {
-          allow_deletion: true,
-        },
+    const client = new Embedded(readFile(bundleFilePath()), {
+      decodeJWTPayload: ({ token }): DecodedJWTPayload =>
+        UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
+      globals: {
+        allow_deletion: true,
       },
-    );
+    });
 
     describe("checkResource", () => {
       it("checks a principal's permissions on a resource", async () => {

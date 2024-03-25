@@ -4,7 +4,7 @@
 
 ## Options.decodeJWTPayload property
 
-Function to verify and decode JWTs passed as auxiliary data, returning the JWT payload.
+A function to verify and decode JWTs passed as auxiliary data, returning the JWT payload.
 
 **Signature:**
 

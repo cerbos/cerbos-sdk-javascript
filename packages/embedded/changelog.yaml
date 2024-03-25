@@ -5,6 +5,9 @@ unreleased:
     - summary: "[`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal"
       pulls: [868, 877]
 
+    - summary: "[`AutoUpdatingLoader`](../../docs/embedded.autoupdatingloader.md) class to automatically update embedded policy decision point bundles"
+      pull: 915
+
   changed:
     - summary: Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements)
       pull: 852

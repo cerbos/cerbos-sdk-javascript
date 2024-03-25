@@ -1,5 +1,4 @@
 import { readFileSync } from "fs";
-import { resolve } from "path";
 
 import { ChannelCredentials } from "@grpc/grpc-js";
 import type { AttributeValue, Attributes } from "@opentelemetry/api";
@@ -31,6 +30,7 @@ import { CerbosInstrumentation } from "@cerbos/opentelemetry";
 
 import {
   TestMetricReader,
+  bundleFilePath,
   captureSpan,
   expectMetrics,
   fetchSpans,
@@ -94,13 +94,10 @@ describe("CerbosInstrumentation", () => {
     {
       type: "Embedded",
       client: (): Client =>
-        new Embedded(
-          readFileSync(resolve(__dirname, "../../servers/policies.wasm")),
-          {
-            decodeJWTPayload: ({ token }): DecodedJWTPayload =>
-              UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
-          },
-        ),
+        new Embedded(readFileSync(bundleFilePath()), {
+          decodeJWTPayload: ({ token }): DecodedJWTPayload =>
+            UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
+        }),
     },
   ] as const;
 

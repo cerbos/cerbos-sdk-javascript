@@ -96,7 +96,7 @@ export class NotOK extends Error {
     options?: ErrorOptions,
   ) {
     super(`gRPC error ${code} (${Status[code]}): ${details}`, options);
-    setNameAndStack(this);
+    _setErrorNameAndStack(this);
   }
 }
 
@@ -140,11 +140,12 @@ export class ValidationFailed extends Error {
     public readonly validationErrors: ValidationError[],
   ) {
     super("Input failed schema validation");
-    setNameAndStack(this);
+    _setErrorNameAndStack(this);
   }
 }
 
-function setNameAndStack(error: Error): void {
+/** @internal */
+export function _setErrorNameAndStack(error: Error): void {
   error.name = error.constructor.name;
 
   // `Error.captureStackTrace` is not available in all browsers
