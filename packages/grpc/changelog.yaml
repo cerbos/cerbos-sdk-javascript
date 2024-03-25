@@ -5,6 +5,9 @@ unreleased:
     - summary: "[`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal"
       pulls: [868, 877]
 
+    - summary: "[`signal`](../../docs/core.requestoptions.signal.md) option to all methods, so that requests can be aborted using an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)"
+      pull: 894
+
   changed:
     - summary: Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements)
       pull: 852

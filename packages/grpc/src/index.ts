@@ -101,7 +101,7 @@ export class GRPC extends Client {
       }${defaultUserAgent}`,
     });
 
-    super(async (service, rpc, request, headers) => {
+    super(async (service, rpc, request, headers, abortHandler) => {
       const { path, requestSerialize, responseDeserialize } = services[service][
         rpc
       ] as Endpoint<typeof service, typeof rpc>; // https://github.com/microsoft/TypeScript/issues/30581
@@ -114,7 +114,9 @@ export class GRPC extends Client {
       }
 
       return await new Promise((resolve, reject) => {
-        client.makeUnaryRequest(
+        abortHandler.throwIfAborted();
+
+        const call = client.makeUnaryRequest(
           path,
           requestSerialize,
           responseDeserialize,
@@ -136,6 +138,11 @@ export class GRPC extends Client {
             }
           },
         );
+
+        abortHandler.onAbort((error) => {
+          reject(error);
+          call.cancel();
+        });
       });
     }, options);
 

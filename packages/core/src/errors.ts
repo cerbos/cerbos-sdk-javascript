@@ -53,6 +53,18 @@ export enum Status {
 }
 
 /**
+ * Options for creating an error.
+ *
+ * @public
+ */
+export interface ErrorOptions {
+  /**
+   * The original error that caused this one.
+   */
+  cause?: unknown;
+}
+
+/**
  * Error thrown when the Cerbos policy decision point server returns an unsuccessful response.
  *
  * @public
@@ -80,10 +92,11 @@ export class NotOK extends Error {
      * Additional error details.
      */
     public readonly details: string,
+
+    options?: ErrorOptions,
   ) {
-    super(`gRPC error ${code} (${Status[code]}): ${details}`);
-    this.name = this.constructor.name;
-    Error.captureStackTrace(this, this.constructor);
+    super(`gRPC error ${code} (${Status[code]}): ${details}`, options);
+    setNameAndStack(this);
   }
 }
 
@@ -127,7 +140,15 @@ export class ValidationFailed extends Error {
     public readonly validationErrors: ValidationError[],
   ) {
     super("Input failed schema validation");
-    this.name = this.constructor.name;
-    Error.captureStackTrace(this, this.constructor);
+    setNameAndStack(this);
+  }
+}
+
+function setNameAndStack(error: Error): void {
+  error.name = error.constructor.name;
+
+  // `Error.captureStackTrace` is not available in all browsers
+  if ("captureStackTrace" in Error) {
+    Error.captureStackTrace(error, error.constructor);
   }
 }

@@ -1,5 +1,4 @@
 /api/
 /docs/
 /packages/*/lib/
-/releasing.md
 /pnpm-lock.yaml

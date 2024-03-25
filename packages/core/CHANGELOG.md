@@ -6,6 +6,8 @@
 
 - [`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal ([#868](https://github.com/cerbos/cerbos-sdk-javascript/pull/868), [#877](https://github.com/cerbos/cerbos-sdk-javascript/pull/877))
 
+- [`signal`](../../docs/core.requestoptions.signal.md) option to all methods, so that requests can be aborted using an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) ([#894](https://github.com/cerbos/cerbos-sdk-javascript/pull/894))
+
 ### Changed
 
 - Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements) ([#852](https://github.com/cerbos/cerbos-sdk-javascript/pull/852))

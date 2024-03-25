@@ -1608,23 +1608,19 @@ describe("Client", () => {
         });
 
         it("handles errors", async () => {
-          try {
-            await clients.default.checkResources({
+          await expect(
+            clients.default.checkResources({
               principal: {
                 id: "",
                 roles: [],
               },
               resources: [],
-            });
-
-            throw new Error("expected an error to be thrown");
-          } catch (error) {
-            expect(error).toMatchObject({
-              constructor: NotOK,
-              code: Status.INVALID_ARGUMENT,
-              details: invalidArgumentDetails,
-            });
-          }
+            }),
+          ).rejects.toMatchObject({
+            constructor: NotOK,
+            code: Status.INVALID_ARGUMENT,
+            details: invalidArgumentDetails,
+          });
         });
       },
     );

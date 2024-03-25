@@ -11,7 +11,7 @@ Constructs a new instance of the `NotOK` class
 ```typescript
 constructor(
     code: Status, 
-    details: string);
+    details: string, options?: ErrorOptions);
 ```
 
 ## Parameters
@@ -57,6 +57,22 @@ string
 
 
 </td><td>
+
+
+</td></tr>
+<tr><td>
+
+options
+
+
+</td><td>
+
+[ErrorOptions](./core.erroroptions.md)
+
+
+</td><td>
+
+_(Optional)_
 
 
 </td></tr>

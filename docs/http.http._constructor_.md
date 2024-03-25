@@ -9,7 +9,7 @@ Create a client for interacting with the Cerbos policy decision point (PDP) serv
 **Signature:**
 
 ```typescript
-constructor(url: string, options?: Options);
+constructor(baseUrl: string, options?: Options);
 ```
 
 ## Parameters
@@ -32,7 +32,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-url
+baseUrl
 
 
 </td><td>
@@ -42,7 +42,7 @@ string
 
 </td><td>
 
-base Cerbos PDP server URL (the Cerbos REST API must be available at `${url}/api/`<!-- -->).
+base Cerbos PDP server URL (the Cerbos REST API must be available at `${baseUrl}/api/`<!-- -->).
 
 
 </td></tr>

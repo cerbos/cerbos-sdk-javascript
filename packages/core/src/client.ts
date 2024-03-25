@@ -21,7 +21,7 @@ import {
   listPoliciesRequestToProtobuf,
   planResourcesRequestToProtobuf,
 } from "./convert/toProtobuf";
-import { ValidationFailed } from "./errors";
+import { NotOK, Status, ValidationFailed } from "./errors";
 import type { _RPC, _Request, _Response, _Service } from "./rpcs";
 import type {
   AddOrUpdatePoliciesRequest,
@@ -57,11 +57,39 @@ import type {
 } from "./types/external";
 
 /** @internal */
+export class _AbortHandler {
+  public constructor(public readonly signal: AbortSignal | undefined) {}
+
+  public throwIfAborted(): void {
+    if (this.signal?.aborted) {
+      throw this.error();
+    }
+  }
+
+  public onAbort(listener: (error: NotOK) => void): void {
+    this.signal?.addEventListener("abort", () => {
+      listener(this.error());
+    });
+  }
+
+  private error(): NotOK {
+    const reason = this.signal?.reason as unknown;
+
+    return new NotOK(
+      Status.CANCELLED,
+      reason instanceof Error ? `Aborted: ${reason.message}` : "Aborted",
+      { cause: reason },
+    );
+  }
+}
+
+/** @internal */
 export type _Transport = <Service extends _Service, RPC extends _RPC<Service>>(
   service: Service,
   rpc: RPC,
   request: _Request<Service, RPC>,
   headers: Headers,
+  abortHandler: _AbortHandler,
 ) => Promise<_Response<Service, RPC>>;
 
 /** @internal */
@@ -181,6 +209,13 @@ export interface RequestOptions {
    * @defaultValue `undefined`
    */
   headers?: HeadersInit | undefined;
+
+  /**
+   * A {@link https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal | signal} to abort the request.
+   *
+   * @defaultValue `undefined`
+   */
+  signal?: AbortSignal | undefined;
 }
 
 /**
@@ -912,13 +947,14 @@ export abstract class Client {
     rpc: RPC,
     request: _Request<Service, RPC>,
     adminCredentials: AdminCredentials | undefined,
-    { headers }: RequestOptions = {},
+    { headers, signal }: RequestOptions = {},
   ): Promise<_Response<Service, RPC>> {
     return await this.transport(
       service,
       rpc,
       request,
       await this.mergeHeaders(headers, adminCredentials),
+      new _AbortHandler(signal),
     );
   }
 

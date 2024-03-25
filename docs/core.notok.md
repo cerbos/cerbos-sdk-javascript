@@ -33,7 +33,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[(constructor)(code, details)](./core.notok._constructor_.md)
+[(constructor)(code, details, options)](./core.notok._constructor_.md)
 
 
 </td><td>
