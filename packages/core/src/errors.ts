@@ -146,5 +146,9 @@ export class ValidationFailed extends Error {
 
 function setNameAndStack(error: Error): void {
   error.name = error.constructor.name;
-  Error.captureStackTrace?.(error, error.constructor); // eslint-disable-line @typescript-eslint/no-unnecessary-condition -- `Error.captureStackTrace` is not available in all browsers
+
+  // `Error.captureStackTrace` is not available in all browsers
+  if ("captureStackTrace" in Error) {
+    Error.captureStackTrace(error, error.constructor);
+  }
 }
