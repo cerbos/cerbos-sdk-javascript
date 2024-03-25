@@ -9,7 +9,7 @@ Check the principal's permissions on a resource.
 **Signature:**
 
 ```typescript
-export declare function useCheckResource(request: Omit<CheckResourceRequest, "principal">, options?: RequestOptions): AsyncResult<CheckResourcesResult>;
+export declare function useCheckResource(request: Omit<CheckResourceRequest, "principal">, options?: Omit<RequestOptions, "signal">): AsyncResult<CheckResourcesResult>;
 ```
 
 ## Parameters
@@ -51,7 +51,7 @@ options
 
 </td><td>
 
-[RequestOptions](./core.requestoptions.md)
+Omit&lt;[RequestOptions](./core.requestoptions.md)<!-- -->, "signal"&gt;
 
 
 </td><td>

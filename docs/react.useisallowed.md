@@ -9,7 +9,7 @@ Check if the principal is allowed to perform an action on a resource.
 **Signature:**
 
 ```typescript
-export declare function useIsAllowed(request: Omit<IsAllowedRequest, "principal">, options?: RequestOptions): AsyncResult<boolean>;
+export declare function useIsAllowed(request: Omit<IsAllowedRequest, "principal">, options?: Omit<RequestOptions, "signal">): AsyncResult<boolean>;
 ```
 
 ## Parameters
@@ -51,7 +51,7 @@ options
 
 </td><td>
 
-[RequestOptions](./core.requestoptions.md)
+Omit&lt;[RequestOptions](./core.requestoptions.md)<!-- -->, "signal"&gt;
 
 
 </td><td>

@@ -4,6 +4,8 @@
 
 ## react package
 
+A collection of React hooks for interacting with Cerbos policy decision points.
+
 ## Functions
 
 <table><thead><tr><th>
