@@ -60,9 +60,11 @@ function useCerbosRequest<Method extends Methods>(
 
     load(abortController.signal)
       .then((data) => {
-        setIsLoading(false);
-        setData(data);
-        setError(undefined);
+        if (!abortController.signal.aborted) {
+          setIsLoading(false);
+          setData(data);
+          setError(undefined);
+        }
       })
       .catch((error: unknown) => {
         if (!abortController.signal.aborted) {
