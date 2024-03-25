@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import type { Client, ClientWithPrincipal } from "@cerbos/core";
+import type { Client, ClientWithPrincipal, RequestOptions } from "@cerbos/core";
 import type { AsyncResult } from "@cerbos/react";
 import {
   CerbosProvider,
@@ -39,7 +39,7 @@ afterAll(() => {
   vi.useRealTimers();
 });
 
-describe("cerbos hooks", () => {
+describe("react hooks", () => {
   testCerbosHook(
     "useCheckResource",
     useCheckResource,
@@ -127,6 +127,10 @@ function App({ children }: PropsWithChildren<object>): ReactElement {
   );
 }
 
+const expectedRequestOptions: RequestOptions = expect.objectContaining({
+  signal: expect.any(AbortSignal) as AbortSignal,
+}) as RequestOptions;
+
 function testCerbosHook<TParams>(
   describeText: string,
   hook: (params: TParams) => AsyncResult<unknown>,
@@ -159,7 +163,10 @@ function testCerbosHook<TParams>(
     it("initially returns loading AsyncState", () => {
       const { result, unmount } = render();
 
-      expect(clientFn).toHaveBeenLastCalledWith(initialParams, undefined);
+      expect(clientFn).toHaveBeenLastCalledWith(
+        initialParams,
+        expectedRequestOptions,
+      );
       expect(clientFn).toHaveBeenCalledTimes(1);
 
       expect(result.current.isLoading).toBe(true);
@@ -198,7 +205,10 @@ function testCerbosHook<TParams>(
       await act(async () => await vi.advanceTimersByTimeAsync(300));
 
       rerender(nextParams);
-      expect(clientFn).toHaveBeenLastCalledWith(nextParams, undefined);
+      expect(clientFn).toHaveBeenLastCalledWith(
+        nextParams,
+        expectedRequestOptions,
+      );
       expect(clientFn).toHaveBeenCalledTimes(2);
       expect(result.current.isLoading).toBe(true);
       await act(async () => await vi.advanceTimersByTimeAsync(300));
@@ -207,8 +217,23 @@ function testCerbosHook<TParams>(
       expect(result.current.error).toBeUndefined();
     });
 
-    it("aborts incomplete Cerbos requests when unmounted", async () => {
-      //TODO
+    it("aborts request when unmounted", () => {
+      let abortSignal: AbortSignal | undefined = undefined;
+
+      clientFn.mockImplementation((_, opt: RequestOptions) => {
+        abortSignal = opt.signal;
+      });
+
+      const { unmount } = render();
+
+      expect(abortSignal).toBeInstanceOf(AbortSignal);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      expect(abortSignal!.aborted).toBe(false);
+
+      unmount();
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      expect(abortSignal!.aborted).toBe(true);
     });
   });
 }

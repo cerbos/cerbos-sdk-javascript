@@ -30,37 +30,42 @@ type Result<Method extends Methods> = Awaited<
 
 function useCerbosRequest<Method extends Methods>(
   method: Method,
-  ...params: Parameters<ClientWithPrincipal[Method]>
+  request: Parameters<ClientWithPrincipal[Method]>[0],
+  options?: Omit<RequestOptions, "signal">,
 ): AsyncResult<Result<Method>> {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<Result<Method>>();
   const [error, setError] = useState<Error>();
 
   const client = useCerbos();
-  const paramsMemo = useDeepCompareMemoize(params);
+  const requestMemo = useDeepCompareMemoize(request);
+  const optionsMemo = useDeepCompareMemoize(options);
 
-  const load = useCallback<() => Promise<Result<Method>>>(
-    // @ts-expect-error -- https://github.com/microsoft/TypeScript/issues/30581
-    async () => await client[method](...paramsMemo),
-    [client, method, paramsMemo],
+  const load = useCallback<(signal: AbortSignal) => Promise<Result<Method>>>(
+    async (signal: AbortSignal): Promise<Result<Method>> =>
+      // @ts-expect-error -- https://github.com/microsoft/TypeScript/issues/30581
+      await client[method](requestMemo, {
+        ...optionsMemo,
+        signal,
+      }),
+    [client, method, optionsMemo, requestMemo],
   );
 
   useEffect(() => {
-    let aborted = false;
     setIsLoading(true);
     setData(undefined);
     setError(undefined);
 
-    load()
+    const abortController = new AbortController();
+
+    load(abortController.signal)
       .then((data) => {
-        if (!aborted) {
-          setIsLoading(false);
-          setData(data);
-          setError(undefined);
-        }
+        setIsLoading(false);
+        setData(data);
+        setError(undefined);
       })
       .catch((error: unknown) => {
-        if (!aborted) {
+        if (!abortController.signal.aborted) {
           setIsLoading(false);
           setData(undefined);
           setError(
@@ -72,7 +77,7 @@ function useCerbosRequest<Method extends Methods>(
       });
 
     return () => {
-      aborted = true;
+      abortController.abort();
     };
   }, [load]);
 
@@ -118,7 +123,7 @@ function useCerbosRequest<Method extends Methods>(
  */
 export function useCheckResource(
   request: Omit<CheckResourceRequest, "principal">,
-  options?: RequestOptions,
+  options?: Omit<RequestOptions, "signal">,
 ): AsyncResult<CheckResourcesResult> {
   return useCerbosRequest("checkResource", request, options);
 }
@@ -188,7 +193,7 @@ export function useCheckResource(
  */
 export function useCheckResources(
   request: Omit<CheckResourcesRequest, "principal">,
-  options?: RequestOptions,
+  options?: Omit<RequestOptions, "signal">,
 ): AsyncResult<CheckResourcesResponse> {
   return useCerbosRequest("checkResources", request, options);
 }
@@ -227,7 +232,7 @@ export function useCheckResources(
  */
 export function useIsAllowed(
   request: Omit<IsAllowedRequest, "principal">,
-  options?: RequestOptions,
+  options?: Omit<RequestOptions, "signal">,
 ): AsyncResult<boolean> {
   return useCerbosRequest("isAllowed", request, options);
 }
