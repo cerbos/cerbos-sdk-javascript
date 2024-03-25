@@ -42,16 +42,11 @@ describe("aborting requests", () => {
         signal: controller.signal,
       });
 
-      try {
-        await response;
-        throw new Error("expected an error to be thrown");
-      } catch (error) {
-        expect(error).toMatchObject({
-          constructor: NotOK,
-          code: Status.CANCELLED,
-          cause: reason,
-        });
-      }
+      await expect(response).rejects.toMatchObject({
+        constructor: NotOK,
+        code: Status.CANCELLED,
+        cause: reason,
+      });
 
       expect(dummyServer.request).toEqual("pending");
     });
@@ -68,16 +63,11 @@ describe("aborting requests", () => {
 
       controller.abort(reason);
 
-      try {
-        await response;
-        throw new Error("expected an error to be thrown");
-      } catch (error) {
-        expect(error).toMatchObject({
-          constructor: NotOK,
-          code: Status.CANCELLED,
-          cause: reason,
-        });
-      }
+      await expect(response).rejects.toMatchObject({
+        constructor: NotOK,
+        code: Status.CANCELLED,
+        cause: reason,
+      });
 
       expect(await dummyServer.request).toEqual("cancelled");
     });
