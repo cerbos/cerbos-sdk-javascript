@@ -2,9 +2,8 @@
 
 ## [Unreleased]
 
-### Changed
+### Added
 
-- Initialize @cerbos/react, A collection of React hooks for interacting with Cerbos policy decision points. ([#876](https://github.com/cerbos/cerbos-sdk-javascript/pull/876))
+- A collection of React hooks for interacting with Cerbos policy decision points ([#876](https://github.com/cerbos/cerbos-sdk-javascript/pull/876))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/a3dcb572e0eeff4c4d86c9cc66c1d0c7e59c4853...HEAD
-[nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/68337848cb3f987627da7381653d82c6d4e368a5...HEAD
