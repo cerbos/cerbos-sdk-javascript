@@ -1,0 +1,8 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: A collection of React hooks for interacting with Cerbos policy decision points
+      pull: 876
+
+initialCommit: 68337848cb3f987627da7381653d82c6d4e368a5

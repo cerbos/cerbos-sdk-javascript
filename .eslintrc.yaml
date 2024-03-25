@@ -46,7 +46,6 @@ rules:
     - devDependencies:
         - private/**
       optionalDependencies: false
-      peerDependencies: false
       includeTypes: true
   import/no-named-as-default: warn
   import/order:

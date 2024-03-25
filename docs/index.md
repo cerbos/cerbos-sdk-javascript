@@ -83,4 +83,15 @@ OpenTelemetry instrumentation for the [gRPC](./grpc.md) and [HTTP](./http.md) cl
 
 
 </td></tr>
+<tr><td>
+
+[@cerbos/react](./react.md)
+
+
+</td><td>
+
+A collection of React hooks for interacting with Cerbos policy decision points.
+
+
+</td></tr>
 </tbody></table>

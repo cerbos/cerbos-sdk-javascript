@@ -1,0 +1,64 @@
+{
+  "name": "@cerbos/react",
+  "version": "0.0.1",
+  "description": "A collection of React hooks for interacting with Cerbos policy decision points",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cerbos/cerbos-sdk-javascript.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/cerbos/cerbos-sdk-javascript/tree/main/packages/react#readme",
+  "bugs": {
+    "url": "https://github.com/cerbos/cerbos-sdk-javascript/issues"
+  },
+  "author": "Cerbos <help@cerbos.dev> (https://cerbos.dev)",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 18"
+  },
+  "exports": {
+    ".": {
+      "default": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
+  "files": [
+    "lib/**/*.d.ts",
+    "lib/**/*.d.ts.map",
+    "lib/**/*.js",
+    "lib/**/*.js.map",
+    "src/**/*.ts"
+  ],
+  "keywords": [
+    "Cerbos",
+    "authorization",
+    "access control",
+    "roles",
+    "permissions",
+    "policy",
+    "security",
+    "role-based access control",
+    "RBAC",
+    "attribute-based access control",
+    "ABAC",
+    "policy decision point",
+    "PDP",
+    "React",
+    "hooks"
+  ],
+  "peerDependencies": {
+    "react": ">=16.13.0"
+  },
+  "dependencies": {
+    "@cerbos/core": "^0.16.0",
+    "use-deep-compare-effect": "^1.8.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.67",
+    "eslint-plugin-react-hooks": "4.6.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
