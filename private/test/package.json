@@ -23,7 +23,7 @@
     "@testing-library/user-event": "14.5.2",
     "@types/react": "18.2.70",
     "@types/semver": "7.5.8",
-    "eslint-plugin-vitest": "0.3.26",
+    "eslint-plugin-vitest": "0.4.0",
     "jose": "5.2.3",
     "jsdom": "24.0.0",
     "long": "5.2.3",
