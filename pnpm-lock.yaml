@@ -91,8 +91,8 @@ importers:
         specifier: ^0.16.0
         version: link:../core
       '@grpc/grpc-js':
-        specifier: ^1.10.3
-        version: 1.10.3
+        specifier: ^1.10.4
+        version: 1.10.4
       long:
         specifier: ^5.2.3
         version: 5.2.3
@@ -195,8 +195,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/react
       '@grpc/grpc-js':
-        specifier: 1.10.3
-        version: 1.10.3
+        specifier: 1.10.4
+        version: 1.10.4
       '@opentelemetry/api':
         specifier: 1.8.0
         version: 1.8.0
@@ -617,8 +617,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@grpc/grpc-js@1.10.3:
-    resolution: {integrity: sha512-qiO9MNgYnwbvZ8MK0YLWbnGrNX3zTcj6/Ef7UHu5ZofER3e2nF3Y35GaPo9qNJJ/UJQKa4KL+z/F4Q8Q+uCdUQ==}
+  /@grpc/grpc-js@1.10.4:
+    resolution: {integrity: sha512-MqBisuxTkYvPFnEiu+dag3xG/NBUDzSbAFAWlzfkGnQkjVZ6by3h4atbBc+Ikqup1z5BfB4BN18gKWR1YyppNw==}
     engines: {node: '>=12.10.0'}
     dependencies:
       '@grpc/proto-loader': 0.7.10
