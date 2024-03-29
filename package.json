@@ -62,7 +62,7 @@
     "eslint-plugin-tsdoc": "0.2.17",
     "prettier": "3.2.5",
     "prettier-plugin-pkg": "0.18.1",
-    "ts-proto": "1.169.1",
+    "ts-proto": "1.170.0",
     "tsx": "4.7.1",
     "typescript": "5.4.3"
   }
