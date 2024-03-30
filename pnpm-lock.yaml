@@ -15,8 +15,8 @@ importers:
         specifier: 7.43.0
         version: 7.43.0(@types/node@18.19.26)
       '@tsconfig/node18':
-        specifier: 18.2.3
-        version: 18.2.3
+        specifier: 18.2.4
+        version: 18.2.4
       '@tsconfig/strictest':
         specifier: 2.0.4
         version: 2.0.4
@@ -1121,8 +1121,8 @@ packages:
       '@testing-library/dom': 9.3.4
     dev: true
 
-  /@tsconfig/node18@18.2.3:
-    resolution: {integrity: sha512-5GKTU9bfn4L37G9IdK8wcHfvyMijzw1uKNCd2Rs75V7fZK/l2OjGJ8Aa2myqNnESjekm/udpCnFH9qR9yPCtmw==}
+  /@tsconfig/node18@18.2.4:
+    resolution: {integrity: sha512-5xxU8vVs9/FNcvm3gE07fPbn9tl6tqGGWA9tSlwsUEkBxtRnTsNmwrV8gasZ9F/EobaSv9+nu8AxUKccw77JpQ==}
     dev: true
 
   /@tsconfig/strictest@2.0.4:
