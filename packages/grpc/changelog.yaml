@@ -17,8 +17,8 @@ unreleased:
 
   bumped:
     "@grpc/grpc-js":
-      to: 1.10.3
-      pulls: [864, 874]
+      to: 1.10.4
+      pulls: [864, 874, 911]
 
 releases:
   - version: 0.16.0
