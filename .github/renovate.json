@@ -10,6 +10,11 @@
   ],
   "packageRules": [
     {
+      "matchDepTypes": ["dependencies"],
+      "rangeStrategy": "bump",
+      "semanticCommitScope": "deps"
+    },
+    {
       "matchDepTypes": ["devDependencies"],
       "groupName": "development dependencies",
       "rangeStrategy": "pin",
@@ -29,17 +34,14 @@
       "semanticCommitScope": "deps-dev"
     },
     {
-      "matchDepTypes": ["dependencies"],
-      "rangeStrategy": "bump",
+      "matchPackageNames": ["@grpc/grpc-js", "long", "protobufjs"],
+      "groupName": "grpc",
       "semanticCommitScope": "deps"
     },
     {
-      "matchPackageNames": ["@grpc/grpc-js", "long", "protobufjs"],
-      "groupName": "grpc"
-    },
-    {
       "matchPackagePrefixes": ["@opentelemetry/"],
-      "groupName": "opentelemetry"
+      "groupName": "opentelemetry",
+      "semanticCommitScope": "deps"
     },
     {
       "matchPackageNames": ["@types/node", "long", "protobufjs"],
