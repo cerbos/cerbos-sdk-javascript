@@ -10,11 +10,6 @@
   ],
   "packageRules": [
     {
-      "matchDepTypes": ["dependencies"],
-      "rangeStrategy": "bump",
-      "semanticCommitScope": "deps"
-    },
-    {
       "matchDepTypes": ["devDependencies"],
       "groupName": "development dependencies",
       "rangeStrategy": "pin",
@@ -32,6 +27,11 @@
       "groupName": "development dependencies",
       "rangeStrategy": "pin",
       "semanticCommitScope": "deps-dev"
+    },
+    {
+      "matchDepTypes": ["dependencies"],
+      "rangeStrategy": "bump",
+      "semanticCommitScope": "deps"
     },
     {
       "matchPackageNames": ["@grpc/grpc-js", "long", "protobufjs"],
