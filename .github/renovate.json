@@ -16,35 +16,35 @@
     },
     {
       "matchDepTypes": ["devDependencies"],
-      "groupName": "devDependencies",
+      "groupName": "development dependencies",
       "rangeStrategy": "pin",
       "semanticCommitScope": "deps-dev"
     },
     {
-      "matchManagers": ["nodenv"],
-      "groupName": "devDependencies",
+      "matchDepTypes": ["engines", "packageManager"],
+      "matchFileNames": ["package.json"],
+      "groupName": "development dependencies",
       "rangeStrategy": "pin",
       "semanticCommitScope": "deps-dev"
     },
     {
-      "matchFiles": ["package.json"],
-      "matchPackageNames": ["node", "pnpm"],
-      "groupName": "devDependencies",
+      "matchManagers": ["docker-compose", "github-actions", "nodenv"],
+      "groupName": "development dependencies",
       "rangeStrategy": "pin",
       "semanticCommitScope": "deps-dev"
+    },
+    {
+      "matchPackageNames": ["@grpc/grpc-js", "long", "protobufjs"],
+      "groupName": "grpc"
+    },
+    {
+      "matchPackagePrefixes": ["@opentelemetry/"],
+      "groupName": "opentelemetry"
     },
     {
       "matchPackageNames": ["@types/node", "long", "protobufjs"],
       "matchUpdateTypes": ["major"],
       "enabled": false
-    },
-    {
-      "matchPackageNames": ["@grpc/grpc-js", "long", "protobufjs"],
-      "groupName": "gRPC"
-    },
-    {
-      "matchPackagePrefixes": ["@opentelemetry/"],
-      "groupName": "OpenTelemetry"
     }
   ],
   "postUpdateOptions": ["pnpmDedupe"],
