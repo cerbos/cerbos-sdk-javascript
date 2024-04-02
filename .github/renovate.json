@@ -3,9 +3,9 @@
   "extends": [
     ":dependencyDashboard",
     ":gitSignOff",
-    ":prConcurrentLimit10",
-    ":prHourlyLimit2",
+    ":prConcurrentLimitNone",
     "npm:unpublishSafe",
+    "schedule:weekly",
     "workarounds:all"
   ],
   "packageRules": [
@@ -16,17 +16,22 @@
     },
     {
       "matchDepTypes": ["devDependencies"],
+      "groupName": "devDependencies",
       "rangeStrategy": "pin",
       "semanticCommitScope": "deps-dev"
     },
     {
-      "matchManagers": ["nodenv", "npm"],
-      "matchPackageNames": ["node", "pnpm"],
-      "matchFiles": [".node-version", "package.json"],
+      "matchManagers": ["nodenv"],
+      "groupName": "devDependencies",
       "rangeStrategy": "pin",
-      "semanticCommitScope": "deps-dev",
-      "versioning": "npm",
-      "extractVersion": "^v(?<version>.*)$"
+      "semanticCommitScope": "deps-dev"
+    },
+    {
+      "matchFiles": ["package.json"],
+      "matchPackageNames": ["node", "pnpm"],
+      "groupName": "devDependencies",
+      "rangeStrategy": "pin",
+      "semanticCommitScope": "deps-dev"
     },
     {
       "matchPackageNames": ["@types/node", "long", "protobufjs"],
@@ -34,16 +39,12 @@
       "enabled": false
     },
     {
-      "matchPackagePrefixes": ["@microsoft/api-"],
-      "groupName": "docs"
-    },
-    {
-      "matchPackagePrefixes": ["@typescript-eslint/", "eslint", "prettier"],
-      "groupName": "lint"
+      "matchPackageNames": ["@grpc/grpc-js", "long", "protobufjs"],
+      "groupName": "gRPC"
     },
     {
       "matchPackagePrefixes": ["@opentelemetry/"],
-      "groupName": "opentelemetry"
+      "groupName": "OpenTelemetry"
     }
   ],
   "postUpdateOptions": ["pnpmDedupe"],
