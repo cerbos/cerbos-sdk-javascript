@@ -50,11 +50,11 @@
   "devDependencies": {
     "@microsoft/api-documenter": "7.24.1",
     "@microsoft/api-extractor": "7.43.0",
-    "@tsconfig/node18": "18.2.3",
-    "@tsconfig/strictest": "2.0.4",
-    "@types/node": "18.19.26",
-    "@typescript-eslint/eslint-plugin": "7.3.1",
-    "@typescript-eslint/parser": "7.3.1",
+    "@tsconfig/node18": "18.2.4",
+    "@tsconfig/strictest": "2.0.5",
+    "@types/node": "18.19.28",
+    "@typescript-eslint/eslint-plugin": "7.4.0",
+    "@typescript-eslint/parser": "7.4.0",
     "concurrently": "8.2.2",
     "depcheck": "1.4.7",
     "eslint": "8.57.0",
@@ -62,7 +62,7 @@
     "eslint-plugin-tsdoc": "0.2.17",
     "prettier": "3.2.5",
     "prettier-plugin-pkg": "0.18.1",
-    "ts-proto": "1.169.1",
+    "ts-proto": "1.170.0",
     "tsx": "4.7.1",
     "typescript": "5.4.3"
   }
