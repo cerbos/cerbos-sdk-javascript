@@ -5,8 +5,9 @@ import type { SecureContext } from "tls";
 import { createSecureContext } from "tls";
 import { promisify } from "util";
 
-import type { AdminCredentials } from "@cerbos/core";
 import { gte as semverGte } from "semver";
+
+import type { AdminCredentials } from "@cerbos/core";
 
 const execFile = promisify(execFileCallback);
 

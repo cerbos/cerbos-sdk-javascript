@@ -1,5 +1,8 @@
 import { resolve } from "path";
 
+import { UnsecuredJWT } from "jose";
+import { afterAll, beforeAll, describe, expect, it, vitest } from "vitest";
+
 import type {
   CheckResourcesRequest,
   Client,
@@ -23,8 +26,6 @@ import {
 } from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
-import { UnsecuredJWT } from "jose";
-import { afterAll, beforeAll, describe, expect, it, vitest } from "vitest";
 
 import {
   describeIfCerbosVersionIsAtLeast,

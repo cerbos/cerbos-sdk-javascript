@@ -1,6 +1,9 @@
 import { readFile } from "fs/promises";
 import { resolve } from "path";
 
+import { UnsecuredJWT } from "jose";
+import { describe, expect, it } from "vitest";
+
 import type { CheckResourcesRequest } from "@cerbos/core";
 import {
   CheckResourcesResponse,
@@ -9,8 +12,6 @@ import {
 } from "@cerbos/core";
 import type { DecodedJWTPayload } from "@cerbos/embedded";
 import { Embedded } from "@cerbos/embedded";
-import { UnsecuredJWT } from "jose";
-import { describe, expect, it } from "vitest";
 
 describe("Embedded", () => {
   describe("cerbos", () => {

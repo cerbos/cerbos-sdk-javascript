@@ -1,5 +1,6 @@
-import type { ClientWithPrincipal } from "@cerbos/core";
 import { useContext } from "react";
+
+import type { ClientWithPrincipal } from "@cerbos/core";
 
 import {
   CerbosContext,

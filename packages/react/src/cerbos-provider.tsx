@@ -1,12 +1,13 @@
+import type { ReactElement, ReactNode } from "react";
+import { createContext, useMemo } from "react";
+import { useDeepCompareMemoize } from "use-deep-compare-effect";
+
 import type {
   AuxData,
   Client,
   ClientWithPrincipal,
   Principal,
 } from "@cerbos/core";
-import type { ReactElement, ReactNode } from "react";
-import { createContext, useMemo } from "react";
-import { useDeepCompareMemoize } from "use-deep-compare-effect";
 
 export const CerbosContext = createContext<ClientWithPrincipal | undefined>(
   undefined,

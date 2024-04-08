@@ -1,13 +1,5 @@
 // @vitest-environment jsdom
 
-import type { Client, ClientWithPrincipal, RequestOptions } from "@cerbos/core";
-import type { AsyncResult } from "@cerbos/react";
-import {
-  CerbosProvider,
-  useCheckResource,
-  useCheckResources,
-  useIsAllowed,
-} from "@cerbos/react";
 import { act, cleanup, renderHook } from "@testing-library/react";
 import type { PropsWithChildren, ReactElement } from "react";
 import type { Mock } from "vitest";
@@ -21,6 +13,15 @@ import {
   it,
   vi,
 } from "vitest";
+
+import type { Client, ClientWithPrincipal, RequestOptions } from "@cerbos/core";
+import type { AsyncResult } from "@cerbos/react";
+import {
+  CerbosProvider,
+  useCheckResource,
+  useCheckResources,
+  useIsAllowed,
+} from "@cerbos/react";
 
 const clientWithPrincipal: Pick<
   ClientWithPrincipal,

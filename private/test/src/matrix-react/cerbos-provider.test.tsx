@@ -1,12 +1,13 @@
 // @vitest-environment jsdom
 
-import type { AuxData, Client, Principal } from "@cerbos/core";
-import { CerbosProvider, useCerbos } from "@cerbos/react";
 import { getByText, renderHook } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import type { PropsWithChildren, ReactElement } from "react";
 import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
+
+import type { AuxData, Client, Principal } from "@cerbos/core";
+import { CerbosProvider, useCerbos } from "@cerbos/react";
 
 const client: Partial<Client> = {
   withPrincipal: vi.fn().mockReturnValue({

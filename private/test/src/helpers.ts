@@ -1,7 +1,6 @@
 import { hrtime } from "process";
 import { setTimeout } from "timers/promises";
 
-import { CheckResourcesResult } from "@cerbos/core";
 import type { ServiceError } from "@grpc/grpc-js";
 import { Metadata } from "@grpc/grpc-js";
 import type { Attributes, HrTime } from "@opentelemetry/api";
@@ -18,6 +17,8 @@ import type {
   ReadableSpan,
 } from "@opentelemetry/sdk-trace-base";
 import { describe, expect } from "vitest";
+
+import { CheckResourcesResult } from "@cerbos/core";
 
 import type { DecisionLogEntry } from "./protobuf/cerbos/audit/v1/audit";
 import { ListAuditLogEntriesResponse } from "./protobuf/cerbos/response/v1/response";

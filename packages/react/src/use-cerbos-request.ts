@@ -1,3 +1,6 @@
+import { useCallback, useEffect, useState } from "react";
+import { useDeepCompareMemoize } from "use-deep-compare-effect";
+
 import type {
   CheckResourceRequest,
   CheckResourcesRequest,
@@ -7,8 +10,6 @@ import type {
   IsAllowedRequest,
   RequestOptions,
 } from "@cerbos/core";
-import { useCallback, useEffect, useState } from "react";
-import { useDeepCompareMemoize } from "use-deep-compare-effect";
 
 import { useCerbos } from "./use-cerbos";
 
