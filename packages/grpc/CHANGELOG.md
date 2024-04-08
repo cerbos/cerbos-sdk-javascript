@@ -14,7 +14,7 @@
 
 - Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
 
-- Bump dependency on [@grpc/grpc-js] to 1.10.4 ([#864](https://github.com/cerbos/cerbos-sdk-javascript/pull/864), [#874](https://github.com/cerbos/cerbos-sdk-javascript/pull/874), [#911](https://github.com/cerbos/cerbos-sdk-javascript/pull/911))
+- Bump dependency on [@grpc/grpc-js] to 1.10.6 ([#864](https://github.com/cerbos/cerbos-sdk-javascript/pull/864), [#874](https://github.com/cerbos/cerbos-sdk-javascript/pull/874), [#911](https://github.com/cerbos/cerbos-sdk-javascript/pull/911), [#912](https://github.com/cerbos/cerbos-sdk-javascript/pull/912))
 
 ## [0.16.0] - 2024-02-29
 
