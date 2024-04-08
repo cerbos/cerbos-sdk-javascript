@@ -8,6 +8,10 @@
 
 - Use individually-exported semantic attributes values to improve minification ([#889](https://github.com/cerbos/cerbos-sdk-javascript/pull/889))
 
+- Bump dependency on [@opentelemetry/instrumentation] to 0.50.0 ([#914](https://github.com/cerbos/cerbos-sdk-javascript/pull/914))
+
+- Bump dependency on [@opentelemetry/semantic-conventions] to 1.23.0 ([#914](https://github.com/cerbos/cerbos-sdk-javascript/pull/914))
+
 ## [0.4.4] - 2024-04-08
 
 ### Changed
