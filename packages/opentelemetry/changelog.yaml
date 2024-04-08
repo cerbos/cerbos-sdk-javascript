@@ -8,6 +8,15 @@ unreleased:
     - summary: Use individually-exported semantic attributes values to improve minification
       pull: 889
 
+  bumped:
+    "@opentelemetry/instrumentation":
+      to: 0.50.0
+      pull: 914
+
+    "@opentelemetry/semantic-conventions":
+      to: 1.23.0
+      pull: 914
+
 releases:
   - version: 0.4.4
     date: 2024-04-08
