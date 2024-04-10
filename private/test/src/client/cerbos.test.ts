@@ -874,6 +874,87 @@ describe("Client", () => {
                 }),
               );
             });
+
+            it("works without a JWT", async () => {
+              const result = await clients.default
+                .withPrincipal({
+                  id: "me@example.com",
+                  policyVersion: "1",
+                  scope: "test",
+                  roles: ["USER"],
+                  attr: {
+                    country: {
+                      alpha2: "",
+                      alpha3: "NZL",
+                    },
+                  },
+                })
+                .checkResource({
+                  resource: {
+                    kind: "document",
+                    id: "mine",
+                    policyVersion: "1",
+                    scope: "test",
+                    attr: {
+                      owner: "me@example.com",
+                    },
+                  },
+                  actions: ["view", "edit", "delete"],
+                  includeMetadata: true,
+                  requestId: "42",
+                });
+
+              const outputs: OutputResult[] =
+                cerbosVersion === "0.27.0"
+                  ? [
+                      {
+                        source: "resource.document.v1#delete",
+                        value: "delete_allowed:me@example.com",
+                      },
+                    ]
+                  : [];
+
+              expect(result).toEqual(
+                new CheckResourcesResult({
+                  resource: {
+                    kind: "document",
+                    id: "mine",
+                    policyVersion: "1",
+                    scope: "test",
+                  },
+                  actions: {
+                    view: Effect.ALLOW,
+                    edit: Effect.ALLOW,
+                    delete: Effect.DENY,
+                  },
+                  validationErrors: [
+                    {
+                      path: "/country/alpha2",
+                      message: "does not match pattern '[A-Z]{2}'",
+                      source: ValidationErrorSource.PRINCIPAL,
+                    },
+                  ],
+                  metadata: {
+                    actions: {
+                      view: {
+                        matchedPolicy: "resource.document.v1/test",
+                        matchedScope: "test",
+                      },
+                      edit: {
+                        matchedPolicy: "resource.document.v1/test",
+                        matchedScope: "test",
+                      },
+                      delete: {
+                        matchedPolicy: "resource.document.v1/test",
+                        matchedScope: "",
+                      },
+                    },
+                    effectiveDerivedRoles: ["OWNER"],
+                  },
+                  outputs,
+                }),
+              );
+            });
           });
 
           describe("checkResources", () => {
@@ -1482,6 +1563,201 @@ describe("Client", () => {
                 }),
               );
             });
+
+            it("works without a JWT", async () => {
+              const response = await clients.default
+                .withPrincipal({
+                  id: "me@example.com",
+                  policyVersion: "1",
+                  scope: "test",
+                  roles: ["USER"],
+                  attr: {
+                    country: {
+                      alpha2: "",
+                      alpha3: "NZL",
+                    },
+                  },
+                })
+                .checkResources({
+                  resources: [
+                    {
+                      resource: {
+                        kind: "document",
+                        id: "mine",
+                        policyVersion: "1",
+                        scope: "test",
+                        attr: {
+                          owner: "me@example.com",
+                        },
+                      },
+                      actions: ["view", "edit", "delete"],
+                    },
+                    {
+                      resource: {
+                        kind: "document",
+                        id: "theirs",
+                        policyVersion: "1",
+                        scope: "test",
+                        attr: {
+                          owner: "them@example.com",
+                        },
+                      },
+                      actions: ["view", "edit", "delete"],
+                    },
+                    {
+                      resource: {
+                        kind: "document",
+                        id: "invalid",
+                        policyVersion: "1",
+                        scope: "test",
+                        attr: {
+                          owner: 123,
+                        },
+                      },
+                      actions: ["view", "edit", "delete"],
+                    },
+                  ],
+                  includeMetadata: true,
+                  requestId: "42",
+                });
+
+              const outputs: OutputResult[] =
+                cerbosVersion === "0.27.0"
+                  ? [
+                      {
+                        source: "resource.document.v1#delete",
+                        value: "delete_allowed:me@example.com",
+                      },
+                    ]
+                  : [];
+
+              expect(response).toEqual(
+                new CheckResourcesResponse({
+                  requestId: "42",
+                  results: [
+                    new CheckResourcesResult({
+                      resource: {
+                        kind: "document",
+                        id: "mine",
+                        policyVersion: "1",
+                        scope: "test",
+                      },
+                      actions: {
+                        view: Effect.ALLOW,
+                        edit: Effect.ALLOW,
+                        delete: Effect.DENY,
+                      },
+                      validationErrors: [
+                        {
+                          path: "/country/alpha2",
+                          message: "does not match pattern '[A-Z]{2}'",
+                          source: ValidationErrorSource.PRINCIPAL,
+                        },
+                      ],
+                      metadata: {
+                        actions: {
+                          view: {
+                            matchedPolicy: "resource.document.v1/test",
+                            matchedScope: "test",
+                          },
+                          edit: {
+                            matchedPolicy: "resource.document.v1/test",
+                            matchedScope: "test",
+                          },
+                          delete: {
+                            matchedPolicy: "resource.document.v1/test",
+                            matchedScope: "",
+                          },
+                        },
+                        effectiveDerivedRoles: ["OWNER"],
+                      },
+                      outputs,
+                    }),
+                    new CheckResourcesResult({
+                      resource: {
+                        kind: "document",
+                        id: "theirs",
+                        policyVersion: "1",
+                        scope: "test",
+                      },
+                      actions: {
+                        view: Effect.ALLOW,
+                        edit: Effect.DENY,
+                        delete: Effect.DENY,
+                      },
+                      validationErrors: [
+                        {
+                          path: "/country/alpha2",
+                          message: "does not match pattern '[A-Z]{2}'",
+                          source: ValidationErrorSource.PRINCIPAL,
+                        },
+                      ],
+                      metadata: {
+                        actions: {
+                          view: {
+                            matchedPolicy: "resource.document.v1/test",
+                            matchedScope: "test",
+                          },
+                          edit: {
+                            matchedPolicy: "resource.document.v1/test",
+                            matchedScope: "",
+                          },
+                          delete: {
+                            matchedPolicy: "resource.document.v1/test",
+                            matchedScope: "",
+                          },
+                        },
+                        effectiveDerivedRoles: [],
+                      },
+                      outputs,
+                    }),
+                    new CheckResourcesResult({
+                      resource: {
+                        kind: "document",
+                        id: "invalid",
+                        policyVersion: "1",
+                        scope: "test",
+                      },
+                      actions: {
+                        view: Effect.ALLOW,
+                        edit: Effect.DENY,
+                        delete: Effect.DENY,
+                      },
+                      validationErrors: [
+                        {
+                          path: "/country/alpha2",
+                          message: "does not match pattern '[A-Z]{2}'",
+                          source: ValidationErrorSource.PRINCIPAL,
+                        },
+                        {
+                          path: "/owner",
+                          message: "expected string, but got number",
+                          source: ValidationErrorSource.RESOURCE,
+                        },
+                      ],
+                      metadata: {
+                        actions: {
+                          view: {
+                            matchedPolicy: "resource.document.v1/test",
+                            matchedScope: "test",
+                          },
+                          edit: {
+                            matchedPolicy: "resource.document.v1/test",
+                            matchedScope: "",
+                          },
+                          delete: {
+                            matchedPolicy: "resource.document.v1/test",
+                            matchedScope: "",
+                          },
+                        },
+                        effectiveDerivedRoles: [],
+                      },
+                      outputs,
+                    }),
+                  ],
+                }),
+              );
+            });
           });
 
           describe("isAllowed", () => {
@@ -1603,6 +1879,38 @@ describe("Client", () => {
                 });
 
               expect(allowed).toBe(true);
+            });
+
+            it("works without a JWT", async () => {
+              const allowed = await clients.default
+                .withPrincipal({
+                  id: "me@example.com",
+                  policyVersion: "1",
+                  scope: "test",
+                  roles: ["USER"],
+                  attr: {
+                    country: {
+                      alpha2: "",
+                      alpha3: "NZL",
+                    },
+                  },
+                })
+                .isAllowed({
+                  resource: {
+                    kind: "document",
+                    id: "mine",
+                    policyVersion: "1",
+                    scope: "test",
+                    attr: {
+                      owner: "me@example.com",
+                    },
+                  },
+                  action: "delete",
+                  includeMetadata: true,
+                  requestId: "42",
+                });
+
+              expect(allowed).toBe(false);
             });
           });
         });
