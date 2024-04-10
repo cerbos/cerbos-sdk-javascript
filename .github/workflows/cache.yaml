@@ -9,9 +9,17 @@ jobs:
   cache:
     name: Cache dependencies
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        only-scripts:
+          - true
+          - false
     steps:
       - name: Check out code
         uses: actions/checkout@v4
 
       - name: Cache dependencies
         uses: ./.github/actions/setup-node
+        with:
+          only-scripts: ${{ matrix.only-scripts }}

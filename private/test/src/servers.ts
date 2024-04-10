@@ -1,6 +1,8 @@
 import { execFile as execFileCallback } from "child_process";
 import { readFileSync } from "fs";
 import { resolve } from "path";
+import type { SecureContext } from "tls";
+import { createSecureContext } from "tls";
 import { promisify } from "util";
 
 import type { AdminCredentials } from "@cerbos/core";
@@ -110,14 +112,26 @@ function cerbosPorts(
   };
 }
 
-export function readPEM(filename: string): string {
+function readPEM(filename: string): string {
   return readFileSync(
     resolve(__dirname, "../servers/tmp/certificates", filename),
-    { encoding: "utf-8" },
+    { encoding: "utf8" },
   );
 }
 
-export const ca = readPEM("server.root.crt");
+export function tls(): SecureContext {
+  return createSecureContext({
+    ca: readPEM("server.root.crt"),
+  });
+}
+
+export function mtls(): SecureContext {
+  return createSecureContext({
+    ca: readPEM("server.root.crt"),
+    cert: readPEM("client.crt"),
+    key: readPEM("client.key"),
+  });
+}
 
 export const adminCredentials: AdminCredentials = {
   username: "cerbos",

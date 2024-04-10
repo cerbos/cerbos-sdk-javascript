@@ -1,7 +1,7 @@
 import { Effect } from "@cerbos/core";
 import { describe, expect, it } from "vitest";
 
-import { buildResult } from "./helpers";
+import { buildResult } from "../helpers";
 
 describe("CheckResourcesResult", () => {
   describe("#allAllowed", () => {

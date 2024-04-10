@@ -2,7 +2,7 @@ import { readFile, writeFile } from "fs/promises";
 
 import { format } from "prettier";
 
-export async function read(path: string): Promise<string> {
+export async function read(path: string | URL): Promise<string> {
   return await readFile(path, { encoding: "utf8" });
 }
 

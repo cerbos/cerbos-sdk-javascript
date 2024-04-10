@@ -1,5 +1,4 @@
 import { randomUUID } from "crypto";
-import { createSecureContext } from "tls";
 
 import type { Client, Options } from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
@@ -12,7 +11,7 @@ import {
 } from "../helpers";
 import type { DecisionLogEntry } from "../protobuf/cerbos/audit/v1/audit";
 import type { Ports } from "../servers";
-import { ca, ports as serverPorts } from "../servers";
+import { ports as serverPorts, tls } from "../servers";
 
 /* eslint-disable @typescript-eslint/no-var-requires -- Can't import package.json files because they're outside of the project's rootDir */
 const { version: grpcSdkVersion } =
@@ -41,7 +40,7 @@ describeIfCerbosVersionIsAtLeast("0.33.0")("Client", () => {
         type: "gRPC with default user agent",
         client: (headers: Options["headers"]): Client =>
           new GRPC(`localhost:${ports.tls.grpc}`, {
-            tls: createSecureContext({ ca }),
+            tls: tls(),
             headers,
           }),
         expectedUserAgent: `cerbos-sdk-javascript-grpc/${grpcSdkVersion} grpc-node-js/${grpcJsVersion}`,
@@ -50,7 +49,7 @@ describeIfCerbosVersionIsAtLeast("0.33.0")("Client", () => {
         type: "gRPC with custom user agent",
         client: (headers: Options["headers"]): Client =>
           new GRPC(`localhost:${ports.tls.grpc}`, {
-            tls: createSecureContext({ ca }),
+            tls: tls(),
             headers,
             userAgent: "test/9000",
           }),

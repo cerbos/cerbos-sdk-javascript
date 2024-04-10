@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "postinstall": "pnpm --workspace-root run build",
     "test": "NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt vitest",
     "test:servers:start": "servers/start",
     "test:servers:stop": "servers/stop"

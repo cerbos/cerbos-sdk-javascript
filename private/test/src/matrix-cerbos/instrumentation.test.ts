@@ -34,13 +34,13 @@ import {
   expectMetrics,
   fetchSpans,
   invalidArgumentDetails,
-} from "./helpers";
-import { QueryServiceClient } from "./protobuf/jaeger/proto/api_v3/query_service";
-import type { KeyValue as KeyValueProto } from "./protobuf/opentelemetry/proto/common/v1/common";
-import type { Span as SpanProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
-import { Span_SpanKind as SpanKindProto } from "./protobuf/opentelemetry/proto/trace/v1/trace";
-import type { CerbosPorts } from "./servers";
-import { cerbosVersionIsAtLeast, ports as serverPorts } from "./servers";
+} from "../helpers";
+import { QueryServiceClient } from "../protobuf/jaeger/proto/api_v3/query_service";
+import type { KeyValue as KeyValueProto } from "../protobuf/opentelemetry/proto/common/v1/common";
+import type { Span as SpanProto } from "../protobuf/opentelemetry/proto/trace/v1/trace";
+import { Span_SpanKind as SpanKindProto } from "../protobuf/opentelemetry/proto/trace/v1/trace";
+import type { CerbosPorts } from "../servers";
+import { cerbosVersionIsAtLeast, ports as serverPorts } from "../servers";
 
 describe("CerbosInstrumentation", () => {
   let jaegerPort: number;
@@ -94,7 +94,7 @@ describe("CerbosInstrumentation", () => {
       type: "Embedded",
       client: (): Client =>
         new Embedded(
-          readFileSync(resolve(__dirname, "../servers/policies.wasm")),
+          readFileSync(resolve(__dirname, "../../servers/policies.wasm")),
           {
             decodeJWTPayload: ({ token }): DecodedJWTPayload =>
               UnsecuredJWT.decode(token).payload as DecodedJWTPayload,

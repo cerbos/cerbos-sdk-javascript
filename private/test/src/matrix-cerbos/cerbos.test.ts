@@ -1,5 +1,4 @@
 import { resolve } from "path";
-import { createSecureContext } from "tls";
 
 import type {
   CheckResourcesRequest,
@@ -33,11 +32,11 @@ import {
 } from "../helpers";
 import type { Ports } from "../servers";
 import {
-  ca,
   cerbosVersion,
   cerbosVersionIsAtLeast,
-  readPEM,
+  mtls,
   ports as serverPorts,
+  tls,
 } from "../servers";
 
 describe("Client", () => {
@@ -61,9 +60,7 @@ describe("Client", () => {
         type: "gRPC | TCP | TLS",
         client: (options: Options = {}): Client =>
           new GRPC(`localhost:${ports.tls.grpc}`, {
-            tls: createSecureContext({
-              ca,
-            }),
+            tls: tls(),
             ...options,
           }),
       },
@@ -71,11 +68,7 @@ describe("Client", () => {
         type: "gRPC | TCP | mTLS",
         client: (options: Options = {}): Client =>
           new GRPC(`localhost:${ports.mtls}`, {
-            tls: createSecureContext({
-              ca,
-              cert: readPEM("client.crt"),
-              key: readPEM("client.key"),
-            }),
+            tls: mtls(),
             ...options,
           }),
       },

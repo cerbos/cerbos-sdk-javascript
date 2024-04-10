@@ -1,6 +1,5 @@
 import { readdirSync } from "fs";
 import { resolve } from "path";
-import { createSecureContext } from "tls";
 
 import type { Client, DerivedRoles } from "@cerbos/core";
 import { readPolicy, readSchema } from "@cerbos/files";
@@ -12,10 +11,10 @@ import { beforeAll, describe, expect, it } from "vitest";
 import type { CerbosService, Ports } from "../servers";
 import {
   adminCredentials,
-  ca,
   cerbosVersion,
   cerbosVersionIsAtLeast,
   ports as serverPorts,
+  tls,
 } from "../servers";
 
 const policiesDirectory = resolve(__dirname, "../../servers/policies");
@@ -44,7 +43,7 @@ describe("Client", () => {
         client: (service: CerbosService): Client =>
           new GRPC(`localhost:${ports[service].grpc}`, {
             adminCredentials,
-            tls: createSecureContext({ ca }),
+            tls: tls(),
           }),
       },
       {

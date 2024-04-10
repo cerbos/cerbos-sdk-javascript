@@ -4,6 +4,6 @@
 
 ### Added
 
-- A collection of React hooks for interacting with Cerbos policy decision points ([#876](https://github.com/cerbos/cerbos-sdk-javascript/pull/876))
+- A collection of React hooks for interacting with Cerbos policy decision points ([#876](https://github.com/cerbos/cerbos-sdk-javascript/pull/876), [#918](https://github.com/cerbos/cerbos-sdk-javascript/pull/918))
 
 [unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/68337848cb3f987627da7381653d82c6d4e368a5...HEAD

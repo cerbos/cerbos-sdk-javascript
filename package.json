@@ -33,7 +33,6 @@
     "lint:fix": "pnpm run lint:fix:eslint && pnpm run lint:fix:prettier",
     "lint:fix:eslint": "eslint --fix --max-warnings=0 .",
     "lint:fix:prettier": "prettier --write .",
-    "postinstall": "pnpm run build",
     "proto": "pnpm run proto:clean && pnpm run proto:export",
     "proto:clean": "rm -rf proto",
     "proto:export": "pnpm run all:parallel 'pnpm:proto:export:*'",
@@ -44,6 +43,7 @@
     "releases:prepare": "tsx private/scripts/src/releases/prepare.ts",
     "releases:tag": "tsx private/scripts/src/releases/tag.ts",
     "test": "pnpm run --filter=./private/test test",
+    "test:matrix": "tsx private/scripts/src/test/matrix.ts",
     "test:servers:start": "pnpm run --filter=./private/test test:servers:start",
     "test:servers:stop": "pnpm run --filter=./private/test test:servers:stop"
   },

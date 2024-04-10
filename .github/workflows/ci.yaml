@@ -51,18 +51,21 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: ./.github/actions/setup-node
+        with:
+          only-scripts: true
+
       - id: test-matrix
         name: Generate test matrix
-        run: scripts/test-matrix
+        run: pnpm run test:matrix
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
   test:
-    name: Test (Cerbos ${{ matrix.cerbos }} | Node ${{ matrix.node }})
+    name: Test (${{ matrix.title }})
     runs-on: ubuntu-latest
-    continue-on-error: ${{ endsWith(matrix.cerbos, '-prerelease') }}
-    env:
-      CERBOS_VERSION: ${{ matrix.cerbos }}
+    continue-on-error: ${{ !matrix.required }}
     needs:
       - test-matrix
     strategy:
@@ -76,12 +79,14 @@ jobs:
         uses: ./.github/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
+          save-cache: false
 
-      - name: Start test servers
-        run: pnpm run test:servers:start
+      - name: Set up tests
+        if: matrix.setup
+        run: ${{ matrix.setup }}
 
       - name: Run tests
-        run: pnpm test
+        run: ${{ matrix.test }}
 
   test-results:
     name: Check test results
