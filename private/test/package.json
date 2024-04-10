@@ -24,7 +24,7 @@
     "@types/react": "18.2.74",
     "@types/semver": "7.5.8",
     "eslint-plugin-vitest": "0.4.1",
-    "jose": "5.2.3",
+    "jose": "5.2.4",
     "jsdom": "24.0.0",
     "long": "5.2.3",
     "protobufjs": "7.2.6",
