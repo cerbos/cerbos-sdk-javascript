@@ -5,22 +5,52 @@ description: Install Node.js and npm dependencies
 inputs:
   node-version:
     description: Version of Node.js to install
+    required: false
+
+  only-scripts:
+    description: Only install dependencies for running scripts?
+    required: false
+    default: "false"
+
+  save-cache:
+    description: Save cache?
+    required: false
+    default: "true"
 
 runs:
   using: composite
 
   steps:
-    - name: Set up pnpm
-      uses: pnpm/action-setup@v3
-
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        cache: pnpm
         node-version: ${{ inputs.node-version }}
         node-version-file: ${{ inputs.node-version == '' && '.node-version' || '' }}
         registry-url: https://registry.npmjs.com
 
+    - name: Set up pnpm
+      uses: pnpm/action-setup@v3
+
+    - name: Get pnpm store path
+      id: pnpm-store
+      shell: bash
+      run: printf "path=%s\n" $(pnpm store path --silent) >> "${GITHUB_OUTPUT}"
+
+    - name: Restore cached dependencies
+      id: restore-cache
+      uses: actions/cache/restore@v4
+      with:
+        path: ${{ steps.pnpm-store.outputs.path }}
+        key: pnpm-${{ runner.os }}-${{ inputs.only-scripts }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: pnpm-${{ runner.os }}-${{ inputs.only-scripts }}-
+
     - name: Install dependencies
       shell: bash
-      run: pnpm install --frozen-lockfile
+      run: pnpm install --frozen-lockfile${{ inputs.only-scripts == 'true' && ' --config.dedupe-peer-dependents=false --filter=./private/scripts' || '' }}
+
+    - name: Cache dependencies
+      if: inputs.save-cache == 'true' && steps.restore-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: ${{ steps.pnpm-store.outputs.path }}
+        key: ${{ steps.restore-cache.outputs.cache-primary-key }}

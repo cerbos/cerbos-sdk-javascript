@@ -124,7 +124,7 @@ describe("readDirectory", () => {
       ],
     };
 
-    const path = resolve(__dirname, "../files");
+    const path = resolve(__dirname, "../../files");
 
     expect(await readDirectory(path)).toEqual(expected);
   });

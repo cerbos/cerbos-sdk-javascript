@@ -47,7 +47,7 @@
     "hooks"
   ],
   "peerDependencies": {
-    "react": ">=16.13.0"
+    "react": ">=18.0.0"
   },
   "dependencies": {
     "@cerbos/core": "^0.16.0",
