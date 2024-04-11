@@ -560,7 +560,7 @@ describe("Embedded", () => {
           );
         });
 
-        it.todo("works without a JWT", async () => {
+        it("works without a JWT", async () => {
           const result = await client
             .withPrincipal({
               id: "me@example.com",
@@ -1182,7 +1182,7 @@ describe("Embedded", () => {
           );
         });
 
-        it.todo("works without a JWT", async () => {
+        it("works without a JWT", async () => {
           const response = await client
             .withPrincipal({
               id: "me@example.com",
@@ -1466,7 +1466,7 @@ describe("Embedded", () => {
           expect(allowed).toBe(true);
         });
 
-        it.todo("works without a JWT", async () => {
+        it("works without a JWT", async () => {
           const allowed = await client
             .withPrincipal({
               id: "me@example.com",
