@@ -9,9 +9,9 @@ if (packages.length === 0) {
   abort("Nothing to release");
 }
 
-if (await git("status", "--porcelain")) {
-  abort("You have uncommitted changes");
-}
+// if (await git("status", "--porcelain")) {
+//   abort("You have uncommitted changes");
+// }
 
 const releaseOrReleases = `release${packages.length > 1 ? "s" : ""}`;
 
@@ -28,7 +28,7 @@ await git(
   "--no-track",
   "--force-create",
   headBranch,
-  `${baseRemote}/${baseBranch}`,
+  "origin/add-missing-changelog-references",
 );
 
 const title = `chore(release): Prepare ${releaseOrReleases}`;

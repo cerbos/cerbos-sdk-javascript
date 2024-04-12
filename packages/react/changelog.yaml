@@ -1,8 +1,17 @@
-unreleased:
-  type: minor
+releases:
+  - version: 0.1.0
+    date: 2024-04-12
 
-  added:
-    - summary: A collection of React hooks for interacting with Cerbos policy decision points
-      pulls: [876, 918]
+    added:
+      - summary: A collection of React hooks for interacting with Cerbos policy decision points
+        pulls: [876, 918]
+
+    bumped:
+      "@cerbos/core":
+        to: 0.17.0
+        pull: 926
+
+references:
+  "@cerbos/core": ../core/README.md
 
 initialCommit: 68337848cb3f987627da7381653d82c6d4e368a5
