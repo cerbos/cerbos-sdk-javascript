@@ -114,10 +114,14 @@ async function prepareRelease(
   if (pkg.manifest.dependencies) {
     for (const [dependency, newVersion] of pkg.dependenciesToBump) {
       pkg.manifest.dependencies[dependency] = `^${newVersion}`;
+
       (pkg.unreleased.bumped ??= {})[dependency] = {
         to: newVersion,
         pull: pullRequest,
       };
+
+      (pkg.changelog.references ??= {})[dependency] =
+        `../${dependency.replace("@cerbos/", "")}/README.md`;
     }
   }
 
