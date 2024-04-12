@@ -1,3 +1,5 @@
+import { execa } from "execa";
+
 import { gh, git, parsePullRequestUrl } from "../utils/git.js";
 import { abort } from "../utils/logging.js";
 import { listPackages } from "../utils/packages.js";
@@ -57,6 +59,8 @@ const pullRequestUrl = await gh(
 );
 
 await prepareReleases(packages, parsePullRequestUrl(pullRequestUrl));
+
+await execa("pnpm", ["install"]);
 
 await git("commit", "--quiet", "--all", "--amend", "--no-edit");
 
