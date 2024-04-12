@@ -4,12 +4,12 @@
 
 ## Embedded.(constructor)
 
-Create a client for interacting with an embedded Cerbos policy decision point (PDP).
+Create a client for interacting with an embedded Cerbos policy decision point (PDP), using a specified [Loader](./embedded.loader.md) to load the embedded PDP bundle.
 
 **Signature:**
 
 ```typescript
-constructor(source: Source, options?: Options);
+constructor(loader: Loader);
 ```
 
 ## Parameters
@@ -32,52 +32,30 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-source
+loader
 
 
 </td><td>
 
-[Source](./embedded.source.md)
+[Loader](./embedded.loader.md)
 
 
 </td><td>
-
-WebAssembly binary code of an embedded PDP bundle (or an HTTP response from which to stream it).
-
-
-</td></tr>
-<tr><td>
-
-options
-
-
-</td><td>
-
-[Options](./embedded.options.md)
-
-
-</td><td>
-
-_(Optional)_ additional client settings.
 
 
 </td></tr>
 </tbody></table>
 
-## Example 1
+## Remarks
 
-Fetch an embedded PDP bundle via HTTP in a [supported browser](https://caniuse.com/wasm) or Node.js 18.1+:
+Bundle download URLs are available in the "Embedded" section of the "Decision points" page of your Cerbos Hub workspace.
 
-```typescript
-const cerbos = new Embedded(fetch("https://lite.cerbos.cloud/bundle?workspace=...&label=..."));
-```
-URLs to download embedded PDP bundles are available from the "Decision points" section of your Cerbos Hub workspace.
+## Example
 
-## Example 2
-
-Read a policy bundle from disk in Node.js:
+Fetch an embedded PDP bundle via HTTP in a [supported browser](https://caniuse.com/wasm) or Node.js 18.1+, and [automatically update](./embedded.autoupdatingloader.md) the bundle when newer versions become available:
 
 ```typescript
-const cerbos = new Embedded(fs.readFileSync("policies.wasm"));
+const loader = new AutoUpdatingLoader("https://lite.cerbos.cloud/bundle?workspace=...&label=...");
+const cerbos = new Embedded(loader);
 ```
 

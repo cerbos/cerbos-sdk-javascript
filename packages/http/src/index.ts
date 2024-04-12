@@ -4,6 +4,8 @@
  * @packageDocumentation
  */
 
+import { stringify as queryStringify } from "qs";
+
 import type {
   Options as CoreOptions,
   _RPC,
@@ -12,7 +14,6 @@ import type {
   _Service,
 } from "@cerbos/core";
 import { Client, NotOK, Status } from "@cerbos/core";
-import { stringify as queryStringify } from "qs";
 
 import {
   AddOrUpdatePolicyRequest,

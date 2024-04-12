@@ -1,13 +1,5 @@
 import { readFileSync } from "fs";
-import { resolve } from "path";
 
-import type { Client } from "@cerbos/core";
-import { NotOK, Status } from "@cerbos/core";
-import type { DecodedJWTPayload } from "@cerbos/embedded";
-import { Embedded } from "@cerbos/embedded";
-import { GRPC } from "@cerbos/grpc";
-import { HTTP } from "@cerbos/http";
-import { CerbosInstrumentation } from "@cerbos/opentelemetry";
 import { ChannelCredentials } from "@grpc/grpc-js";
 import type { AttributeValue, Attributes } from "@opentelemetry/api";
 import { SpanKind, SpanStatusCode, metrics } from "@opentelemetry/api";
@@ -28,8 +20,17 @@ import {
 import { UnsecuredJWT } from "jose";
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 
+import type { Client } from "@cerbos/core";
+import { NotOK, Status } from "@cerbos/core";
+import type { DecodedJWTPayload } from "@cerbos/embedded";
+import { Embedded } from "@cerbos/embedded";
+import { GRPC } from "@cerbos/grpc";
+import { HTTP } from "@cerbos/http";
+import { CerbosInstrumentation } from "@cerbos/opentelemetry";
+
 import {
   TestMetricReader,
+  bundleFilePath,
   captureSpan,
   expectMetrics,
   fetchSpans,
@@ -93,13 +94,10 @@ describe("CerbosInstrumentation", () => {
     {
       type: "Embedded",
       client: (): Client =>
-        new Embedded(
-          readFileSync(resolve(__dirname, "../../servers/policies.wasm")),
-          {
-            decodeJWTPayload: ({ token }): DecodedJWTPayload =>
-              UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
-          },
-        ),
+        new Embedded(readFileSync(bundleFilePath()), {
+          decodeJWTPayload: ({ token }): DecodedJWTPayload =>
+            UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
+        }),
     },
   ] as const;
 

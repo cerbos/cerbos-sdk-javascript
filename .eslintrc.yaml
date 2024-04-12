@@ -14,6 +14,9 @@ extends:
   - plugin:@typescript-eslint/stylistic-type-checked
   - plugin:import/typescript
 
+settings:
+  import/internal-regex: ^@cerbos/
+
 rules:
   "@typescript-eslint/consistent-type-imports": warn
   "@typescript-eslint/explicit-function-return-type": warn
@@ -21,7 +24,8 @@ rules:
   "@typescript-eslint/no-confusing-void-expression": warn
   "@typescript-eslint/no-unused-vars":
     - warn
-    - ignoreRestSiblings: true
+    - argsIgnorePattern: ^_
+      ignoreRestSiblings: true
   "@typescript-eslint/prefer-enum-initializers": warn
   "@typescript-eslint/prefer-nullish-coalescing": warn
   "@typescript-eslint/promise-function-async": warn
@@ -54,6 +58,13 @@ rules:
         order: asc
         orderImportKind: asc
         caseInsensitive: true
+      groups:
+        - builtin
+        - external
+        - internal
+        - parent
+        - sibling
+        - index
       newlines-between: always
   no-console: warn
   quotes:

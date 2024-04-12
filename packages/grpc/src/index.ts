@@ -6,6 +6,13 @@
 
 import type { SecureContext } from "tls";
 
+import type { CallOptions, MethodDefinition } from "@grpc/grpc-js";
+import {
+  ChannelCredentials,
+  Client as GenericClient,
+  Metadata,
+} from "@grpc/grpc-js";
+
 import type {
   Options as CoreOptions,
   _RPC,
@@ -14,12 +21,6 @@ import type {
   _Service,
 } from "@cerbos/core";
 import { Client, NotOK, Status } from "@cerbos/core";
-import type { CallOptions, MethodDefinition } from "@grpc/grpc-js";
-import {
-  ChannelCredentials,
-  Client as GenericClient,
-  Metadata,
-} from "@grpc/grpc-js";
 
 import {
   CerbosAdminServiceService as adminService,

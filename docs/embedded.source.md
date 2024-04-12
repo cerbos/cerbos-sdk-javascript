@@ -4,10 +4,10 @@
 
 ## Source type
 
-WebAssembly binary code of an embedded policy decision point bundle (or an HTTP response from which to stream it).
+WebAssembly binary code of an embedded policy decision point bundle, or a URL or HTTP response from which to stream it.
 
 **Signature:**
 
 ```typescript
-export type Source = ArrayBufferView | ArrayBuffer | Response | Promise<ArrayBufferView | ArrayBuffer | Response>;
+export type Source = string | URL | ArrayBufferView | ArrayBuffer | Response | Promise<ArrayBufferView | ArrayBuffer | Response>;
 ```

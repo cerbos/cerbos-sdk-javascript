@@ -4,7 +4,7 @@
 
 ## Options interface
 
-Options for creating a new [Embedded](./embedded.embedded.md) client.
+Options for creating a new [Embedded](./embedded.embedded.md) client or [Loader](./embedded.loader.md)<!-- -->.
 
 **Signature:**
 
@@ -50,7 +50,7 @@ Description
 
 </td><td>
 
-_(Optional)_ Function to verify and decode JWTs passed as auxiliary data, returning the JWT payload.
+_(Optional)_ A function to verify and decode JWTs passed as auxiliary data, returning the JWT payload.
 
 
 </td></tr>
@@ -88,7 +88,45 @@ _(Optional)_ [Global variables](https://docs.cerbos.dev/cerbos/latest/configurat
 
 </td><td>
 
-_(Optional)_ Function returning the current time, to be used when evaluating policy conditions.
+_(Optional)_ A function returning the current time, to be used when evaluating policy conditions.
+
+
+</td></tr>
+<tr><td>
+
+[onError?](./embedded.options.onerror.md)
+
+
+</td><td>
+
+
+</td><td>
+
+((error: [LoadError](./embedded.loaderror.md)<!-- -->) =&gt; void) \| undefined
+
+
+</td><td>
+
+_(Optional)_ A callback to invoke when the embedded policy decision point bundle has failed to load.
+
+
+</td></tr>
+<tr><td>
+
+[onLoad?](./embedded.options.onload.md)
+
+
+</td><td>
+
+
+</td><td>
+
+((metadata: [BundleMetadata](./embedded.bundlemetadata.md)<!-- -->) =&gt; void) \| undefined
+
+
+</td><td>
+
+_(Optional)_ A callback to invoke when the embedded policy decision point bundle has been loaded.
 
 
 </td></tr>

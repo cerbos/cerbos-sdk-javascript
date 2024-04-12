@@ -7,6 +7,8 @@
 import { opendir, readFile } from "fs/promises";
 import { basename, extname, join, resolve, sep } from "path";
 
+import { parse } from "yaml";
+
 import type { Policy, SchemaInput } from "@cerbos/core";
 import {
   _policyFromProtobuf,
@@ -15,7 +17,6 @@ import {
   policyIsPrincipalPolicy,
   policyIsResourcePolicy,
 } from "@cerbos/core";
-import { parse } from "yaml";
 
 import { Policy as PolicyProtobuf } from "./protobuf/cerbos/policy/v1/policy";
 

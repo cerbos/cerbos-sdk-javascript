@@ -1,13 +1,5 @@
 // @vitest-environment jsdom
 
-import type { Client, ClientWithPrincipal, RequestOptions } from "@cerbos/core";
-import type { AsyncResult } from "@cerbos/react";
-import {
-  CerbosProvider,
-  useCheckResource,
-  useCheckResources,
-  useIsAllowed,
-} from "@cerbos/react";
 import { act, cleanup, renderHook } from "@testing-library/react";
 import type { PropsWithChildren, ReactElement } from "react";
 import type { Mock } from "vitest";
@@ -21,6 +13,16 @@ import {
   it,
   vi,
 } from "vitest";
+
+import type { Client, ClientWithPrincipal, RequestOptions } from "@cerbos/core";
+import type { Embedded, Loader } from "@cerbos/embedded";
+import type { AsyncResult } from "@cerbos/react";
+import {
+  CerbosProvider,
+  useCheckResource,
+  useCheckResources,
+  useIsAllowed,
+} from "@cerbos/react";
 
 const clientWithPrincipal: Pick<
   ClientWithPrincipal,
@@ -109,23 +111,14 @@ describe("react hooks", () => {
   );
 });
 
-const client: Partial<Client> = {
-  withPrincipal: vi.fn().mockReturnValue(clientWithPrincipal),
+const client: Pick<Client, "withPrincipal"> = {
+  withPrincipal() {
+    return {
+      client: this,
+      ...clientWithPrincipal,
+    } as ClientWithPrincipal;
+  },
 };
-
-function App({ children }: PropsWithChildren<object>): ReactElement {
-  return (
-    <CerbosProvider
-      client={client as Client}
-      principal={{
-        id: "test-user-1",
-        roles: ["role-1", "role-2"],
-      }}
-    >
-      {children}
-    </CerbosProvider>
-  );
-}
 
 const expectedRequestOptions: RequestOptions = expect.objectContaining({
   signal: expect.any(AbortSignal) as AbortSignal,
@@ -151,17 +144,32 @@ function testCerbosHook<TParams>(
       vi.clearAllMocks();
     });
 
-    function render(): ReturnType<
-      typeof renderHook<AsyncResult<unknown>, TParams>
-    > {
+    function render(
+      client: Pick<Client, "withPrincipal">,
+    ): ReturnType<typeof renderHook<AsyncResult<unknown>, TParams>> {
+      function App({ children }: PropsWithChildren<object>): ReactElement {
+        return (
+          <CerbosProvider
+            client={client as Client}
+            principal={{
+              id: "test-user-1",
+              roles: ["role-1", "role-2"],
+            }}
+          >
+            {children}
+          </CerbosProvider>
+        );
+      }
+
       return renderHook(hook, {
         wrapper: App,
+
         initialProps: initialParams,
       });
     }
 
     it("initially returns loading AsyncState", () => {
-      const { result, unmount } = render();
+      const { result, unmount } = render(client);
 
       expect(clientFn).toHaveBeenLastCalledWith(
         initialParams,
@@ -177,7 +185,7 @@ function testCerbosHook<TParams>(
     });
 
     it("returns data after loading", async () => {
-      const { result } = render();
+      const { result } = render(client);
 
       await act(async () => await vi.advanceTimersByTimeAsync(300));
       expect(clientFn).toHaveBeenCalledTimes(1);
@@ -187,7 +195,7 @@ function testCerbosHook<TParams>(
     });
 
     it("avoids unnecessary calls on Cerbos Client when rerendered with the values that match", async () => {
-      const { rerender, result } = render();
+      const { rerender, result } = render(client);
       await act(async () => await vi.advanceTimersByTimeAsync(300));
 
       rerender(
@@ -200,7 +208,7 @@ function testCerbosHook<TParams>(
     });
 
     it("calls Cerbos Client with new values when rerendered with different values", async () => {
-      const { rerender, result } = render();
+      const { rerender, result } = render(client);
 
       await act(async () => await vi.advanceTimersByTimeAsync(300));
 
@@ -217,6 +225,34 @@ function testCerbosHook<TParams>(
       expect(result.current.error).toBeUndefined();
     });
 
+    it("calls Cerbos Client again when a new embedded bundle is activated", async () => {
+      const loader = { _active: Symbol("old LoadResult") };
+
+      const embedded: Pick<Embedded, "loader" | "withPrincipal"> = {
+        loader: loader as unknown as Loader,
+        withPrincipal() {
+          return {
+            client: this,
+            ...clientWithPrincipal,
+          } as ClientWithPrincipal<Embedded>;
+        },
+      };
+
+      const { rerender, result } = render(embedded);
+
+      await act(async () => await vi.advanceTimersByTimeAsync(300));
+
+      loader._active = Symbol("new LoadResult");
+      rerender(initialParams);
+
+      expect(clientFn).toHaveBeenCalledTimes(2);
+      expect(result.current.isLoading).toBe(true);
+      await act(async () => await vi.advanceTimersByTimeAsync(300));
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.data).toBe(value);
+      expect(result.current.error).toBeUndefined();
+    });
+
     it("aborts request when unmounted", () => {
       let abortSignal: AbortSignal | undefined = undefined;
 
@@ -224,7 +260,7 @@ function testCerbosHook<TParams>(
         abortSignal = opt.signal;
       });
 
-      const { unmount } = render();
+      const { unmount } = render(client);
 
       expect(abortSignal).toBeInstanceOf(AbortSignal);
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

@@ -1,5 +1,6 @@
-import { Effect } from "@cerbos/core";
 import { describe, expect, it } from "vitest";
+
+import { Effect } from "@cerbos/core";
 
 import { buildResult } from "../helpers";
 

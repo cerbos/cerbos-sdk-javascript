@@ -1,3 +1,6 @@
+import { useCallback, useEffect, useState } from "react";
+import { useDeepCompareMemoize } from "use-deep-compare-effect";
+
 import type {
   CheckResourceRequest,
   CheckResourcesRequest,
@@ -7,8 +10,6 @@ import type {
   IsAllowedRequest,
   RequestOptions,
 } from "@cerbos/core";
-import { useCallback, useEffect, useState } from "react";
-import { useDeepCompareMemoize } from "use-deep-compare-effect";
 
 import { useCerbos } from "./use-cerbos";
 
@@ -51,6 +52,8 @@ function useCerbosRequest<Method extends Methods>(
     [client, method, optionsMemo, requestMemo],
   );
 
+  const bundle = activeEmbeddedBundle(client);
+
   useEffect(() => {
     setIsLoading(true);
     setData(undefined);
@@ -81,9 +84,18 @@ function useCerbosRequest<Method extends Methods>(
     return () => {
       abortController.abort();
     };
-  }, [load]);
+  }, [load, bundle]);
 
   return { isLoading, data, error } as AsyncResult<Result<Method>>;
+}
+
+function activeEmbeddedBundle({ client }: ClientWithPrincipal): unknown {
+  return "loader" in client &&
+    typeof client.loader === "object" &&
+    client.loader &&
+    "_active" in client.loader
+    ? client.loader._active
+    : undefined;
 }
 
 /**

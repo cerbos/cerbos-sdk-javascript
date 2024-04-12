@@ -1,9 +1,10 @@
 import { randomUUID } from "crypto";
 
+import { beforeAll, describe, expect, it } from "vitest";
+
 import type { Client, Options } from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
-import { beforeAll, describe, expect, it } from "vitest";
 
 import {
   describeIfCerbosVersionIsAtLeast,

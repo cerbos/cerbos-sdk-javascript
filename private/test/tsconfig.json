@@ -11,7 +11,7 @@
     { "path": "../../packages/react" }
   ],
   "compilerOptions": {
-    "lib": ["ES2020", "DOM"],
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM"]
   }
 }

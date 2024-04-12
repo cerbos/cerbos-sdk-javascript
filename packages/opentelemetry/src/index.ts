@@ -5,15 +5,6 @@
  */
 
 import type {
-  _AbortHandler,
-  _Instrumenter,
-  _RPC,
-  _Request,
-  _Response,
-  _Service,
-} from "@cerbos/core";
-import { NotOK, _addInstrumenter, _removeInstrumenter } from "@cerbos/core";
-import type {
   Attributes,
   DiagLogger,
   Histogram,
@@ -41,6 +32,16 @@ import {
   SEMATTRS_RPC_SERVICE,
   SEMATTRS_RPC_SYSTEM,
 } from "@opentelemetry/semantic-conventions";
+
+import type {
+  _AbortHandler,
+  _Instrumenter,
+  _RPC,
+  _Request,
+  _Response,
+  _Service,
+} from "@cerbos/core";
+import { NotOK, _addInstrumenter, _removeInstrumenter } from "@cerbos/core";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires -- Can't import package.json because it is outside of the project's rootDir
 const { name, version } = require("../package.json") as {

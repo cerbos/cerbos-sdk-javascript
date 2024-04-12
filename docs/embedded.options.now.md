@@ -4,7 +4,7 @@
 
 ## Options.now property
 
-Function returning the current time, to be used when evaluating policy conditions.
+A function returning the current time, to be used when evaluating policy conditions.
 
 **Signature:**
 
@@ -14,5 +14,5 @@ now?: (() => Date | number) | undefined;
 
 ## Remarks
 
-Numeric values correspond to milliseconds elapsed since the Unix epoch.
+The function can either return a [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) or a number of milliseconds elapsed since the Unix epoch.
 

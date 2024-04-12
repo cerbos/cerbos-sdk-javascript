@@ -1,9 +1,10 @@
+import { describe, expect, it } from "vitest";
+
 import type {
   CheckResourcesResultResource,
   ResourceSearch,
 } from "@cerbos/core";
 import { CheckResourcesResponse, Effect } from "@cerbos/core";
-import { describe, expect, it } from "vitest";
 
 import { buildResult, buildResultsForResources, shuffle } from "../helpers";
 

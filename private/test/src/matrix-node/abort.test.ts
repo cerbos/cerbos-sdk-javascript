@@ -1,12 +1,13 @@
 import { createServer as createHTTPServer } from "http";
 import type { AddressInfo } from "net";
 
+import { Server as GRPCServer, ServerCredentials } from "@grpc/grpc-js";
+import { beforeAll, beforeEach, describe, expect, test } from "vitest";
+
 import type { Client } from "@cerbos/core";
 import { NotOK, Status } from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
-import { Server as GRPCServer, ServerCredentials } from "@grpc/grpc-js";
-import { beforeAll, beforeEach, describe, expect, test } from "vitest";
 
 import type { ServerInfoResponse } from "../protobuf/cerbos/response/v1/response";
 import type { CerbosServiceServer } from "../protobuf/cerbos/svc/v1/svc";

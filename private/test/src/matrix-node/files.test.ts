@@ -1,9 +1,10 @@
 import { resolve } from "path";
 
+import { describe, expect, it } from "vitest";
+
 import { Effect } from "@cerbos/core";
 import type { DirectoryContents } from "@cerbos/files";
 import { readDirectory } from "@cerbos/files";
-import { describe, expect, it } from "vitest";
 
 describe("readDirectory", () => {
   it("reads policy and schema files from a directory", async () => {

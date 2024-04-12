@@ -1,12 +1,13 @@
 import { readdirSync } from "fs";
 import { resolve } from "path";
 
+import { compare as semverCompare, lte as semverLte } from "semver";
+import { beforeAll, describe, expect, it } from "vitest";
+
 import type { Client, DerivedRoles } from "@cerbos/core";
 import { readPolicy, readSchema } from "@cerbos/files";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
-import { compare as semverCompare, lte as semverLte } from "semver";
-import { beforeAll, describe, expect, it } from "vitest";
 
 import type { CerbosService, Ports } from "../servers";
 import {
