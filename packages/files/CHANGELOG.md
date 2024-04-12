@@ -2,11 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.2.4] - 2024-04-12
+
 ### Changed
 
 - Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements) ([#852](https://github.com/cerbos/cerbos-sdk-javascript/pull/852))
 
 - Prevent importing package internals ([#867](https://github.com/cerbos/cerbos-sdk-javascript/pull/867))
+
+- Bump dependency on [@cerbos/core] to 0.17.0 ([#927](https://github.com/cerbos/cerbos-sdk-javascript/pull/927))
 
 - Bump dependency on [yaml] to 2.4.1 ([#854](https://github.com/cerbos/cerbos-sdk-javascript/pull/854))
 
@@ -54,7 +60,8 @@
 
 - A package to load Cerbos policies from YAML or JSON files ([#611](https://github.com/cerbos/cerbos-sdk-javascript/pull/611))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.3...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.4...HEAD
+[0.2.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.3...@cerbos/files@0.2.4
 [0.2.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.2...@cerbos/files@0.2.3
 [0.2.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.1...@cerbos/files@0.2.2
 [0.2.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.0...@cerbos/files@0.2.1
