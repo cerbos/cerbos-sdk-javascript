@@ -50,6 +50,12 @@
       "enabled": false
     },
     {
+      "description": "eslint v9 is not widely supported by plugins yet",
+      "matchPackageNames": ["eslint"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
       "description": "eslint-plugin-vitest only supports flat config from v0.5.0 (https://github.com/veritem/eslint-plugin-vitest/issues/414).",
       "matchPackageNames": ["eslint-plugin-vitest"],
       "matchUpdateTypes": ["minor"],
