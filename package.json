@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@8.15.6",
   "engines": {
-    "node": "21.7.2",
+    "node": "21.7.3",
     "pnpm": "8.15.6"
   },
   "scripts": {
@@ -48,8 +48,8 @@
     "test:servers:stop": "pnpm run --filter=./private/test test:servers:stop"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "7.24.1",
-    "@microsoft/api-extractor": "7.43.0",
+    "@microsoft/api-documenter": "7.24.2",
+    "@microsoft/api-extractor": "7.43.1",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
     "@types/node": "18.19.31",
@@ -64,6 +64,6 @@
     "prettier-plugin-pkg": "0.18.1",
     "ts-proto": "1.171.0",
     "tsx": "4.7.2",
-    "typescript": "5.4.4"
+    "typescript": "5.4.5"
   }
 }
