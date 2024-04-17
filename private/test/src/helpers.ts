@@ -279,7 +279,7 @@ export function describeIfCerbosVersionIsAtLeast(
 }
 
 export function bundleFilePath(
-  commit = "f1ed7491836a1df278d762f9438809a02409a341",
+  commit = "68337848cb3f987627da7381653d82c6d4e368a5",
 ): string {
   return resolve(__dirname, `../bundles/${commit}.wasm`);
 }
