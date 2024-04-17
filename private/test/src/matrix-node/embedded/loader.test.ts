@@ -25,10 +25,10 @@ interface Bundle {
 }
 
 const first: Bundle = {
-  etag: '"c2064c2131d380814f16c5578177fc0c"',
+  etag: '"9017f17ef4224dc634cf33b25201d463"',
   metadata: {
-    builtAt: new Date(Date.UTC(2024, 3, 11, 9, 51, 0)),
-    commit: "f1ed7491836a1df278d762f9438809a02409a341",
+    builtAt: new Date(Date.UTC(2024, 2, 25, 11, 45, 14)),
+    commit: "68337848cb3f987627da7381653d82c6d4e368a5",
     policies: [
       "cerbos.resource.document.v1",
       "cerbos.resource.document.v1/test",

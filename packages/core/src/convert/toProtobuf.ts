@@ -472,9 +472,13 @@ function resourceToProtobuf({
   };
 }
 
-function auxDataToProtobuf({ jwt }: AuxData): AuxDataProtobuf {
+function auxDataToProtobuf({ jwt }: AuxData): AuxDataProtobuf | undefined {
+  if (!jwt) {
+    return undefined;
+  }
+
   return {
-    jwt: jwt && jwtToProtobuf(jwt),
+    jwt: jwtToProtobuf(jwt),
   };
 }
 
