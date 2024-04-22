@@ -65,7 +65,7 @@ jobs:
   test:
     name: Test (${{ matrix.title }})
     runs-on: ubuntu-latest
-    continue-on-error: ${{ !matrix.required }}
+    continue-on-error: ${{ github.event_name != 'schedule' && !matrix.required }}
     needs:
       - test-matrix
     strategy:
