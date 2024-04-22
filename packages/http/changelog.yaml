@@ -1,3 +1,11 @@
+unreleased:
+  type: patch
+
+  bumped:
+    qs:
+      to: 6.12.1
+      pull: 933
+
 releases:
   - version: 0.18.0
     date: 2024-04-12
