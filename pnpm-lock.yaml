@@ -74,13 +74,13 @@ importers:
     dependencies:
       '@cerbos/core':
         specifier: ^0.17.0
-        version: 0.17.0
+        version: link:../core
 
   packages/files:
     dependencies:
       '@cerbos/core':
         specifier: ^0.17.0
-        version: 0.17.0
+        version: link:../core
       yaml:
         specifier: ^2.4.1
         version: 2.4.1
@@ -89,7 +89,7 @@ importers:
     dependencies:
       '@cerbos/core':
         specifier: ^0.17.0
-        version: 0.17.0
+        version: link:../core
       '@grpc/grpc-js':
         specifier: ^1.10.6
         version: 1.10.6
@@ -104,7 +104,7 @@ importers:
     dependencies:
       '@cerbos/core':
         specifier: ^0.17.0
-        version: 0.17.0
+        version: link:../core
       qs:
         specifier: ^6.12.1
         version: 6.12.1
@@ -117,7 +117,7 @@ importers:
     dependencies:
       '@cerbos/core':
         specifier: ^0.17.0
-        version: 0.17.0
+        version: link:../core
       '@opentelemetry/api':
         specifier: ^1.8.0
         version: 1.8.0
@@ -132,7 +132,7 @@ importers:
     dependencies:
       '@cerbos/core':
         specifier: ^0.17.0
-        version: 0.17.0
+        version: link:../core
       react:
         specifier: '>=18.0.0'
         version: 18.2.0
@@ -314,10 +314,6 @@ packages:
   '@babel/types@7.24.0':
     resolution: {integrity: sha512-+j7a5c253RfKh8iABBhywc8NSfP5LURe7Uh4qpsh6jc+aLJguvmIUBdjSdEMQv2bENrCR5MfRdjGo7vzS/ob7w==}
     engines: {node: '>=6.9.0'}
-
-  '@cerbos/core@0.17.0':
-    resolution: {integrity: sha512-2Q4RtOLokpg228+uS5jZinHS5Hxr4wd3V9eJanThOeeB4xxWrl45gY6N6vw+ZJRDfW9lV9CfcBbSplM9LPng1A==}
-    engines: {node: '>= 18'}
 
   '@esbuild/aix-ppc64@0.19.12':
     resolution: {integrity: sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==}
@@ -2801,10 +2797,6 @@ snapshots:
       '@babel/helper-string-parser': 7.24.1
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
-
-  '@cerbos/core@0.17.0':
-    dependencies:
-      uuid: 9.0.1
 
   '@esbuild/aix-ppc64@0.19.12':
     optional: true
