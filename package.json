@@ -1,10 +1,10 @@
 {
   "name": "cerbos-sdk-javascript",
   "private": true,
-  "packageManager": "pnpm@8.15.6",
+  "packageManager": "pnpm@8.15.7",
   "engines": {
     "node": "21.7.3",
-    "pnpm": "8.15.6"
+    "pnpm": "8.15.7"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
@@ -53,8 +53,8 @@
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
     "@types/node": "18.19.31",
-    "@typescript-eslint/eslint-plugin": "7.6.0",
-    "@typescript-eslint/parser": "7.6.0",
+    "@typescript-eslint/eslint-plugin": "7.7.0",
+    "@typescript-eslint/parser": "7.7.0",
     "concurrently": "8.2.2",
     "depcheck": "1.4.7",
     "eslint": "8.57.0",
@@ -62,7 +62,7 @@
     "eslint-plugin-tsdoc": "0.2.17",
     "prettier": "3.2.5",
     "prettier-plugin-pkg": "0.18.1",
-    "ts-proto": "1.171.0",
+    "ts-proto": "1.172.0",
     "tsx": "4.7.2",
     "typescript": "5.4.5"
   }
