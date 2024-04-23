@@ -30,6 +30,7 @@
     "lint:check:depcheck": "pnpm --recursive --include-workspace-root exec depcheck --ignore-patterns=/lib/ --quiet --skip-missing",
     "lint:check:eslint": "eslint --max-warnings=0 .",
     "lint:check:prettier": "prettier --check .",
+    "lint:check:types": "pnpm --recursive --filter='./packages/*' exec attw --pack .",
     "lint:fix": "pnpm run lint:fix:eslint && pnpm run lint:fix:prettier",
     "lint:fix:eslint": "eslint --fix --max-warnings=0 .",
     "lint:fix:prettier": "prettier --write .",
@@ -48,6 +49,7 @@
     "test:servers:stop": "pnpm run --filter=./private/test test:servers:stop"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "0.15.3",
     "@microsoft/api-documenter": "7.24.2",
     "@microsoft/api-extractor": "7.43.1",
     "@tsconfig/node18": "18.2.4",

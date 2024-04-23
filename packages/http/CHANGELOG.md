@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Support legacy Node.js module resolution and place `default` export last ([#937](https://github.com/cerbos/cerbos-sdk-javascript/pull/937))
+
 - Bump dependency on [qs] to 6.12.1 ([#933](https://github.com/cerbos/cerbos-sdk-javascript/pull/933))
 
 ## [0.18.0] - 2024-04-12

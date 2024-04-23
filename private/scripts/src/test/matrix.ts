@@ -67,7 +67,7 @@ async function fetchNodeVersions(): Promise<string[]> {
   const versions: string[] = [];
 
   for (const [version, { start, end }] of Object.entries(schedule)) {
-    if (start <= today && today <= end) {
+    if (start < today && today <= end) {
       versions.push(version);
     }
   }
