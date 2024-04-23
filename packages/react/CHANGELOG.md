@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Support legacy Node.js module resolution and place `default` export last ([#937](https://github.com/cerbos/cerbos-sdk-javascript/pull/937))
 
 ## [0.1.0] - 2024-04-12
 

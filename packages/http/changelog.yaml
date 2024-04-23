@@ -1,6 +1,10 @@
 unreleased:
   type: patch
 
+  changed:
+    - summary: Support legacy Node.js module resolution and place `default` export last
+      pull: 937
+
   bumped:
     qs:
       to: 6.12.1
