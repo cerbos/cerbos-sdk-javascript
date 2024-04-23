@@ -1,16 +1,20 @@
-unreleased:
-  type: patch
-
-  changed:
-    - summary: Support legacy Node.js module resolution and place `default` export last
-      pull: 937
-
-  bumped:
-    qs:
-      to: 6.12.1
-      pull: 933
-
 releases:
+  - version: 0.18.1
+    date: 2024-04-23
+
+    changed:
+      - summary: Support legacy Node.js module resolution and place `default` export last
+        pull: 937
+
+    bumped:
+      "@cerbos/core":
+        to: 0.17.1
+        pull: 938
+
+      qs:
+        to: 6.12.1
+        pull: 933
+
   - version: 0.18.0
     date: 2024-04-12
 

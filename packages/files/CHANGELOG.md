@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.2.5] - 2024-04-23
+
 ### Changed
 
 - Support legacy Node.js module resolution and place `default` export last ([#937](https://github.com/cerbos/cerbos-sdk-javascript/pull/937))
+
+- Bump dependency on [@cerbos/core] to 0.17.1 ([#938](https://github.com/cerbos/cerbos-sdk-javascript/pull/938))
 
 ## [0.2.4] - 2024-04-12
 
@@ -62,7 +68,8 @@
 
 - A package to load Cerbos policies from YAML or JSON files ([#611](https://github.com/cerbos/cerbos-sdk-javascript/pull/611))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.4...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.5...HEAD
+[0.2.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.4...@cerbos/files@0.2.5
 [0.2.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.3...@cerbos/files@0.2.4
 [0.2.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.2...@cerbos/files@0.2.3
 [0.2.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.1...@cerbos/files@0.2.2
