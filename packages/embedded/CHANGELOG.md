@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.7.1] - 2024-04-23
+
 ### Changed
 
 - Support legacy Node.js module resolution and place `default` export last ([#937](https://github.com/cerbos/cerbos-sdk-javascript/pull/937))
+
+- Bump dependency on [@cerbos/core] to 0.17.1 ([#938](https://github.com/cerbos/cerbos-sdk-javascript/pull/938))
 
 ## [0.7.0] - 2024-04-12
 
@@ -135,7 +141,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.1...HEAD
+[0.7.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.0...@cerbos/embedded@0.7.1
 [0.7.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.6.3...@cerbos/embedded@0.7.0
 [0.6.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.6.2...@cerbos/embedded@0.6.3
 [0.6.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.6.1...@cerbos/embedded@0.6.2

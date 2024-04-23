@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.18.1] - 2024-04-23
+
 ### Changed
 
 - Support legacy Node.js module resolution and place `default` export last ([#937](https://github.com/cerbos/cerbos-sdk-javascript/pull/937))
+
+- Bump dependency on [@cerbos/core] to 0.17.1 ([#938](https://github.com/cerbos/cerbos-sdk-javascript/pull/938))
 
 - Bump dependency on [qs] to 6.12.1 ([#933](https://github.com/cerbos/cerbos-sdk-javascript/pull/933))
 
@@ -234,7 +240,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.1...HEAD
+[0.18.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.0...@cerbos/http@0.18.1
 [0.18.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.17.0...@cerbos/http@0.18.0
 [0.17.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.16.0...@cerbos/http@0.17.0
 [0.16.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.15.0...@cerbos/http@0.16.0

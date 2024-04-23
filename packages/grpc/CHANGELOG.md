@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.17.1] - 2024-04-23
+
 ### Changed
 
 - Support legacy Node.js module resolution and place `default` export last ([#937](https://github.com/cerbos/cerbos-sdk-javascript/pull/937))
+
+- Bump dependency on [@cerbos/core] to 0.17.1 ([#938](https://github.com/cerbos/cerbos-sdk-javascript/pull/938))
 
 ## [0.17.0] - 2024-04-12
 
@@ -260,7 +266,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.17.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.17.1...HEAD
+[0.17.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.17.0...@cerbos/grpc@0.17.1
 [0.17.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.16.0...@cerbos/grpc@0.17.0
 [0.16.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.15.0...@cerbos/grpc@0.16.0
 [0.15.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.14.1...@cerbos/grpc@0.15.0

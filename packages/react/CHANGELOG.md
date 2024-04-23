@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.1.1] - 2024-04-23
+
 ### Changed
 
 - Support legacy Node.js module resolution and place `default` export last ([#937](https://github.com/cerbos/cerbos-sdk-javascript/pull/937))
+
+- Bump dependency on [@cerbos/core] to 0.17.1 ([#938](https://github.com/cerbos/cerbos-sdk-javascript/pull/938))
 
 ## [0.1.0] - 2024-04-12
 
@@ -12,5 +18,7 @@
 
 - A collection of React hooks for interacting with Cerbos policy decision points ([#876](https://github.com/cerbos/cerbos-sdk-javascript/pull/876), [#918](https://github.com/cerbos/cerbos-sdk-javascript/pull/918))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.1.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.1.1...HEAD
+[0.1.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.1.0...@cerbos/react@0.1.1
 [0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/68337848cb3f987627da7381653d82c6d4e368a5...@cerbos/react@0.1.0
+[@cerbos/core]: ../core/README.md
