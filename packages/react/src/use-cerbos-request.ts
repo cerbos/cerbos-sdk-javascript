@@ -81,7 +81,7 @@ function useCerbosRequest<Method extends Methods>(
         }
       });
 
-    return () => {
+    return (): void => {
       abortController.abort();
     };
   }, [load, bundle]);
