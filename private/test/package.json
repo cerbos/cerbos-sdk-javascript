@@ -20,18 +20,18 @@
     "@opentelemetry/sdk-trace-base": "1.23.0",
     "@opentelemetry/sdk-trace-node": "1.23.0",
     "@opentelemetry/semantic-conventions": "1.23.0",
-    "@testing-library/react": "15.0.2",
+    "@testing-library/react": "15.0.4",
     "@testing-library/user-event": "14.5.2",
-    "@types/react": "18.2.79",
+    "@types/react": "18.3.0",
     "@types/semver": "7.5.8",
     "eslint-plugin-vitest": "0.4.1",
     "jose": "5.2.4",
     "jsdom": "24.0.0",
     "long": "5.2.3",
     "protobufjs": "7.2.6",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "18.3.0",
+    "react-dom": "18.3.0",
     "semver": "7.6.0",
-    "vitest": "1.5.0"
+    "vitest": "1.5.2"
   }
 }
