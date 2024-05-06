@@ -85,8 +85,8 @@ importers:
         specifier: ^0.17.1
         version: link:../core
       yaml:
-        specifier: ^2.4.1
-        version: 2.4.1
+        specifier: ^2.4.2
+        version: 2.4.2
 
   packages/grpc:
     dependencies:
@@ -2790,6 +2790,11 @@ packages:
     engines: {node: '>= 14'}
     hasBin: true
 
+  yaml@2.4.2:
+    resolution: {integrity: sha512-B3VqDZ+JAg1nZpaEmWtTXUlBneoGx6CPM9b0TENK6aoSu5t73dItudwdgmi6tHlIZZId4dZ9skcAQ2UbcyAeVA==}
+    engines: {node: '>= 14'}
+    hasBin: true
+
   yargs-parser@20.2.9:
     resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
     engines: {node: '>=10'}
@@ -5484,6 +5489,8 @@ snapshots:
   yaml@1.10.2: {}
 
   yaml@2.4.1: {}
+
+  yaml@2.4.2: {}
 
   yargs-parser@20.2.9: {}
 
