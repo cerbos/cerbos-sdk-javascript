@@ -25,6 +25,17 @@ export function nullValueFromJSON(object: any): NullValue {
   }
 }
 
+export function nullValueToJSON(object: NullValue): string {
+  switch (object) {
+    case NullValue.NULL_VALUE:
+      return "NULL_VALUE";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum NullValue",
+      );
+  }
+}
+
 export interface Struct {
   fields: { [key: string]: any | undefined };
 }
@@ -109,6 +120,20 @@ export const Struct = {
     };
   },
 
+  toJSON(message: Struct): unknown {
+    const obj: any = {};
+    if (message.fields) {
+      const entries = Object.entries(message.fields);
+      if (entries.length > 0) {
+        obj.fields = {};
+        entries.forEach(([k, v]) => {
+          obj.fields[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
+
   wrap(object: { [key: string]: any } | undefined): Struct {
     const struct = createBaseStruct();
 
@@ -188,6 +213,17 @@ export const Struct_FieldsEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: Struct_FieldsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -323,6 +359,29 @@ export const Value = {
     };
   },
 
+  toJSON(message: Value): unknown {
+    const obj: any = {};
+    if (message.kind?.$case === "nullValue") {
+      obj.nullValue = nullValueToJSON(message.kind.nullValue);
+    }
+    if (message.kind?.$case === "numberValue") {
+      obj.numberValue = message.kind.numberValue;
+    }
+    if (message.kind?.$case === "stringValue") {
+      obj.stringValue = message.kind.stringValue;
+    }
+    if (message.kind?.$case === "boolValue") {
+      obj.boolValue = message.kind.boolValue;
+    }
+    if (message.kind?.$case === "structValue") {
+      obj.structValue = message.kind.structValue;
+    }
+    if (message.kind?.$case === "listValue") {
+      obj.listValue = message.kind.listValue;
+    }
+    return obj;
+  },
+
   wrap(value: any): Value {
     const result = createBaseValue();
     if (value === null) {
@@ -411,6 +470,14 @@ export const ListValue = {
         ? [...object.values]
         : [],
     };
+  },
+
+  toJSON(message: ListValue): unknown {
+    const obj: any = {};
+    if (message.values?.length) {
+      obj.values = message.values;
+    }
+    return obj;
   },
 
   wrap(array: Array<any> | undefined): ListValue {

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Instrumentation for server streams ([#945](https://github.com/cerbos/cerbos-sdk-javascript/pull/945))
+
 ### Changed
 
 - Bump dependency on [@opentelemetry/instrumentation] to 0.51.1 ([#940](https://github.com/cerbos/cerbos-sdk-javascript/pull/940), [#947](https://github.com/cerbos/cerbos-sdk-javascript/pull/947))

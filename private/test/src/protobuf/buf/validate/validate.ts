@@ -37,6 +37,25 @@ export function knownRegexFromJSON(object: any): KnownRegex {
   }
 }
 
+export function knownRegexToJSON(object: KnownRegex): string {
+  switch (object) {
+    case KnownRegex.KNOWN_REGEX_UNSPECIFIED:
+      return "KNOWN_REGEX_UNSPECIFIED";
+    case KnownRegex.KNOWN_REGEX_HTTP_HEADER_NAME:
+      return "KNOWN_REGEX_HTTP_HEADER_NAME";
+    case KnownRegex.KNOWN_REGEX_HTTP_HEADER_VALUE:
+      return "KNOWN_REGEX_HTTP_HEADER_VALUE";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum KnownRegex",
+      );
+  }
+}
+
+export interface OneofConstraints {
+  required?: boolean | undefined;
+}
+
 export interface FieldConstraints {
   cel: Constraint[];
   skipped: boolean;
@@ -349,6 +368,62 @@ export interface TimestampRules {
     | undefined;
   within?: Duration | undefined;
 }
+
+function createBaseOneofConstraints(): OneofConstraints {
+  return { required: undefined };
+}
+
+export const OneofConstraints = {
+  encode(
+    message: OneofConstraints,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.required !== undefined) {
+      writer.uint32(8).bool(message.required);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): OneofConstraints {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseOneofConstraints();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.required = reader.bool();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): OneofConstraints {
+    return {
+      required: isSet(object.required)
+        ? globalThis.Boolean(object.required)
+        : undefined,
+    };
+  },
+
+  toJSON(message: OneofConstraints): unknown {
+    const obj: any = {};
+    if (message.required !== undefined) {
+      obj.required = message.required;
+    }
+    return obj;
+  },
+};
 
 function createBaseFieldConstraints(): FieldConstraints {
   return {
@@ -881,6 +956,86 @@ export const FieldConstraints = {
                                                 : undefined,
     };
   },
+
+  toJSON(message: FieldConstraints): unknown {
+    const obj: any = {};
+    if (message.cel?.length) {
+      obj.cel = message.cel.map((e) => Constraint.toJSON(e));
+    }
+    if (message.skipped !== false) {
+      obj.skipped = message.skipped;
+    }
+    if (message.required !== false) {
+      obj.required = message.required;
+    }
+    if (message.ignoreEmpty !== false) {
+      obj.ignoreEmpty = message.ignoreEmpty;
+    }
+    if (message.type?.$case === "float") {
+      obj.float = FloatRules.toJSON(message.type.float);
+    }
+    if (message.type?.$case === "double") {
+      obj.double = DoubleRules.toJSON(message.type.double);
+    }
+    if (message.type?.$case === "int32") {
+      obj.int32 = Int32Rules.toJSON(message.type.int32);
+    }
+    if (message.type?.$case === "int64") {
+      obj.int64 = Int64Rules.toJSON(message.type.int64);
+    }
+    if (message.type?.$case === "uint32") {
+      obj.uint32 = UInt32Rules.toJSON(message.type.uint32);
+    }
+    if (message.type?.$case === "uint64") {
+      obj.uint64 = UInt64Rules.toJSON(message.type.uint64);
+    }
+    if (message.type?.$case === "sint32") {
+      obj.sint32 = SInt32Rules.toJSON(message.type.sint32);
+    }
+    if (message.type?.$case === "sint64") {
+      obj.sint64 = SInt64Rules.toJSON(message.type.sint64);
+    }
+    if (message.type?.$case === "fixed32") {
+      obj.fixed32 = Fixed32Rules.toJSON(message.type.fixed32);
+    }
+    if (message.type?.$case === "fixed64") {
+      obj.fixed64 = Fixed64Rules.toJSON(message.type.fixed64);
+    }
+    if (message.type?.$case === "sfixed32") {
+      obj.sfixed32 = SFixed32Rules.toJSON(message.type.sfixed32);
+    }
+    if (message.type?.$case === "sfixed64") {
+      obj.sfixed64 = SFixed64Rules.toJSON(message.type.sfixed64);
+    }
+    if (message.type?.$case === "bool") {
+      obj.bool = BoolRules.toJSON(message.type.bool);
+    }
+    if (message.type?.$case === "string") {
+      obj.string = StringRules.toJSON(message.type.string);
+    }
+    if (message.type?.$case === "bytes") {
+      obj.bytes = BytesRules.toJSON(message.type.bytes);
+    }
+    if (message.type?.$case === "enum") {
+      obj.enum = EnumRules.toJSON(message.type.enum);
+    }
+    if (message.type?.$case === "repeated") {
+      obj.repeated = RepeatedRules.toJSON(message.type.repeated);
+    }
+    if (message.type?.$case === "map") {
+      obj.map = MapRules.toJSON(message.type.map);
+    }
+    if (message.type?.$case === "any") {
+      obj.any = AnyRules.toJSON(message.type.any);
+    }
+    if (message.type?.$case === "duration") {
+      obj.duration = DurationRules.toJSON(message.type.duration);
+    }
+    if (message.type?.$case === "timestamp") {
+      obj.timestamp = TimestampRules.toJSON(message.type.timestamp);
+    }
+    return obj;
+  },
 };
 
 function createBaseFloatRules(): FloatRules {
@@ -1048,6 +1203,35 @@ export const FloatRules = {
         : [],
       finite: isSet(object.finite) ? globalThis.Boolean(object.finite) : false,
     };
+  },
+
+  toJSON(message: FloatRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    if (message.finite !== false) {
+      obj.finite = message.finite;
+    }
+    return obj;
   },
 };
 
@@ -1217,6 +1401,35 @@ export const DoubleRules = {
       finite: isSet(object.finite) ? globalThis.Boolean(object.finite) : false,
     };
   },
+
+  toJSON(message: DoubleRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    if (message.finite !== false) {
+      obj.finite = message.finite;
+    }
+    return obj;
+  },
 };
 
 function createBaseInt32Rules(): Int32Rules {
@@ -1372,6 +1585,32 @@ export const Int32Rules = {
         ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
     };
+  },
+
+  toJSON(message: Int32Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Math.round(message.lessThan.lt);
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = Math.round(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Math.round(message.greaterThan.gt);
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = Math.round(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    return obj;
   },
 };
 
@@ -1541,6 +1780,32 @@ export const Int64Rules = {
         : [],
     };
   },
+
+  toJSON(message: Int64Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    return obj;
+  },
 };
 
 function createBaseUInt32Rules(): UInt32Rules {
@@ -1696,6 +1961,32 @@ export const UInt32Rules = {
         ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
     };
+  },
+
+  toJSON(message: UInt32Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Math.round(message.lessThan.lt);
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = Math.round(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Math.round(message.greaterThan.gt);
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = Math.round(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    return obj;
   },
 };
 
@@ -1865,6 +2156,32 @@ export const UInt64Rules = {
         : [],
     };
   },
+
+  toJSON(message: UInt64Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    return obj;
+  },
 };
 
 function createBaseSInt32Rules(): SInt32Rules {
@@ -2020,6 +2337,32 @@ export const SInt32Rules = {
         ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
     };
+  },
+
+  toJSON(message: SInt32Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Math.round(message.lessThan.lt);
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = Math.round(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Math.round(message.greaterThan.gt);
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = Math.round(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    return obj;
   },
 };
 
@@ -2189,6 +2532,32 @@ export const SInt64Rules = {
         : [],
     };
   },
+
+  toJSON(message: SInt64Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    return obj;
+  },
 };
 
 function createBaseFixed32Rules(): Fixed32Rules {
@@ -2344,6 +2713,32 @@ export const Fixed32Rules = {
         ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
     };
+  },
+
+  toJSON(message: Fixed32Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Math.round(message.lessThan.lt);
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = Math.round(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Math.round(message.greaterThan.gt);
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = Math.round(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    return obj;
   },
 };
 
@@ -2513,6 +2908,32 @@ export const Fixed64Rules = {
         : [],
     };
   },
+
+  toJSON(message: Fixed64Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    return obj;
+  },
 };
 
 function createBaseSFixed32Rules(): SFixed32Rules {
@@ -2668,6 +3089,32 @@ export const SFixed32Rules = {
         ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
     };
+  },
+
+  toJSON(message: SFixed32Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Math.round(message.lessThan.lt);
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = Math.round(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Math.round(message.greaterThan.gt);
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = Math.round(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    return obj;
   },
 };
 
@@ -2837,6 +3284,32 @@ export const SFixed64Rules = {
         : [],
     };
   },
+
+  toJSON(message: SFixed64Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    return obj;
+  },
 };
 
 function createBaseBoolRules(): BoolRules {
@@ -2882,6 +3355,14 @@ export const BoolRules = {
     return {
       const: isSet(object.const) ? globalThis.Boolean(object.const) : undefined,
     };
+  },
+
+  toJSON(message: BoolRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = message.const;
+    }
+    return obj;
   },
 };
 
@@ -3383,6 +3864,104 @@ export const StringRules = {
         : undefined,
     };
   },
+
+  toJSON(message: StringRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = message.const;
+    }
+    if (message.len !== undefined) {
+      obj.len = message.len;
+    }
+    if (message.minLen !== undefined) {
+      obj.minLen = message.minLen;
+    }
+    if (message.maxLen !== undefined) {
+      obj.maxLen = message.maxLen;
+    }
+    if (message.lenBytes !== undefined) {
+      obj.lenBytes = message.lenBytes;
+    }
+    if (message.minBytes !== undefined) {
+      obj.minBytes = message.minBytes;
+    }
+    if (message.maxBytes !== undefined) {
+      obj.maxBytes = message.maxBytes;
+    }
+    if (message.pattern !== undefined) {
+      obj.pattern = message.pattern;
+    }
+    if (message.prefix !== undefined) {
+      obj.prefix = message.prefix;
+    }
+    if (message.suffix !== undefined) {
+      obj.suffix = message.suffix;
+    }
+    if (message.contains !== undefined) {
+      obj.contains = message.contains;
+    }
+    if (message.notContains !== undefined) {
+      obj.notContains = message.notContains;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    if (message.wellKnown?.$case === "email") {
+      obj.email = message.wellKnown.email;
+    }
+    if (message.wellKnown?.$case === "hostname") {
+      obj.hostname = message.wellKnown.hostname;
+    }
+    if (message.wellKnown?.$case === "ip") {
+      obj.ip = message.wellKnown.ip;
+    }
+    if (message.wellKnown?.$case === "ipv4") {
+      obj.ipv4 = message.wellKnown.ipv4;
+    }
+    if (message.wellKnown?.$case === "ipv6") {
+      obj.ipv6 = message.wellKnown.ipv6;
+    }
+    if (message.wellKnown?.$case === "uri") {
+      obj.uri = message.wellKnown.uri;
+    }
+    if (message.wellKnown?.$case === "uriRef") {
+      obj.uriRef = message.wellKnown.uriRef;
+    }
+    if (message.wellKnown?.$case === "address") {
+      obj.address = message.wellKnown.address;
+    }
+    if (message.wellKnown?.$case === "uuid") {
+      obj.uuid = message.wellKnown.uuid;
+    }
+    if (message.wellKnown?.$case === "ipWithPrefixlen") {
+      obj.ipWithPrefixlen = message.wellKnown.ipWithPrefixlen;
+    }
+    if (message.wellKnown?.$case === "ipv4WithPrefixlen") {
+      obj.ipv4WithPrefixlen = message.wellKnown.ipv4WithPrefixlen;
+    }
+    if (message.wellKnown?.$case === "ipv6WithPrefixlen") {
+      obj.ipv6WithPrefixlen = message.wellKnown.ipv6WithPrefixlen;
+    }
+    if (message.wellKnown?.$case === "ipPrefix") {
+      obj.ipPrefix = message.wellKnown.ipPrefix;
+    }
+    if (message.wellKnown?.$case === "ipv4Prefix") {
+      obj.ipv4Prefix = message.wellKnown.ipv4Prefix;
+    }
+    if (message.wellKnown?.$case === "ipv6Prefix") {
+      obj.ipv6Prefix = message.wellKnown.ipv6Prefix;
+    }
+    if (message.wellKnown?.$case === "wellKnownRegex") {
+      obj.wellKnownRegex = knownRegexToJSON(message.wellKnown.wellKnownRegex);
+    }
+    if (message.strict !== undefined) {
+      obj.strict = message.strict;
+    }
+    return obj;
+  },
 };
 
 function createBaseBytesRules(): BytesRules {
@@ -3591,6 +4170,50 @@ export const BytesRules = {
             : undefined,
     };
   },
+
+  toJSON(message: BytesRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = base64FromBytes(message.const);
+    }
+    if (message.len !== undefined) {
+      obj.len = message.len;
+    }
+    if (message.minLen !== undefined) {
+      obj.minLen = message.minLen;
+    }
+    if (message.maxLen !== undefined) {
+      obj.maxLen = message.maxLen;
+    }
+    if (message.pattern !== undefined) {
+      obj.pattern = message.pattern;
+    }
+    if (message.prefix !== undefined) {
+      obj.prefix = base64FromBytes(message.prefix);
+    }
+    if (message.suffix !== undefined) {
+      obj.suffix = base64FromBytes(message.suffix);
+    }
+    if (message.contains !== undefined) {
+      obj.contains = base64FromBytes(message.contains);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => base64FromBytes(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => base64FromBytes(e));
+    }
+    if (message.wellKnown?.$case === "ip") {
+      obj.ip = message.wellKnown.ip;
+    }
+    if (message.wellKnown?.$case === "ipv4") {
+      obj.ipv4 = message.wellKnown.ipv4;
+    }
+    if (message.wellKnown?.$case === "ipv6") {
+      obj.ipv6 = message.wellKnown.ipv6;
+    }
+    return obj;
+  },
 };
 
 function createBaseEnumRules(): EnumRules {
@@ -3700,6 +4323,23 @@ export const EnumRules = {
         : [],
     };
   },
+
+  toJSON(message: EnumRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.definedOnly !== undefined) {
+      obj.definedOnly = message.definedOnly;
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    return obj;
+  },
 };
 
 function createBaseRepeatedRules(): RepeatedRules {
@@ -3791,6 +4431,23 @@ export const RepeatedRules = {
         ? FieldConstraints.fromJSON(object.items)
         : undefined,
     };
+  },
+
+  toJSON(message: RepeatedRules): unknown {
+    const obj: any = {};
+    if (message.minItems !== undefined) {
+      obj.minItems = message.minItems;
+    }
+    if (message.maxItems !== undefined) {
+      obj.maxItems = message.maxItems;
+    }
+    if (message.unique !== undefined) {
+      obj.unique = message.unique;
+    }
+    if (message.items !== undefined) {
+      obj.items = FieldConstraints.toJSON(message.items);
+    }
+    return obj;
   },
 };
 
@@ -3887,6 +4544,23 @@ export const MapRules = {
         : undefined,
     };
   },
+
+  toJSON(message: MapRules): unknown {
+    const obj: any = {};
+    if (message.minPairs !== undefined) {
+      obj.minPairs = message.minPairs;
+    }
+    if (message.maxPairs !== undefined) {
+      obj.maxPairs = message.maxPairs;
+    }
+    if (message.keys !== undefined) {
+      obj.keys = FieldConstraints.toJSON(message.keys);
+    }
+    if (message.values !== undefined) {
+      obj.values = FieldConstraints.toJSON(message.values);
+    }
+    return obj;
+  },
 };
 
 function createBaseAnyRules(): AnyRules {
@@ -3947,6 +4621,17 @@ export const AnyRules = {
         ? object.notIn.map((e: any) => globalThis.String(e))
         : [],
     };
+  },
+
+  toJSON(message: AnyRules): unknown {
+    const obj: any = {};
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    return obj;
   },
 };
 
@@ -4100,6 +4785,32 @@ export const DurationRules = {
         ? object.notIn.map((e: any) => Duration.fromJSON(e))
         : [],
     };
+  },
+
+  toJSON(message: DurationRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = Duration.toJSON(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Duration.toJSON(message.lessThan.lt);
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = Duration.toJSON(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Duration.toJSON(message.greaterThan.gt);
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = Duration.toJSON(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Duration.toJSON(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Duration.toJSON(e));
+    }
+    return obj;
   },
 };
 
@@ -4272,6 +4983,35 @@ export const TimestampRules = {
         : undefined,
     };
   },
+
+  toJSON(message: TimestampRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = message.const.toISOString();
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt.toISOString();
+    }
+    if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte.toISOString();
+    }
+    if (message.lessThan?.$case === "ltNow") {
+      obj.ltNow = message.lessThan.ltNow;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt.toISOString();
+    }
+    if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte.toISOString();
+    }
+    if (message.greaterThan?.$case === "gtNow") {
+      obj.gtNow = message.greaterThan.gtNow;
+    }
+    if (message.within !== undefined) {
+      obj.within = Duration.toJSON(message.within);
+    }
+    return obj;
+  },
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
@@ -4284,6 +5024,18 @@ function bytesFromBase64(b64: string): Uint8Array {
       arr[i] = bin.charCodeAt(i);
     }
     return arr;
+  }
+}
+
+function base64FromBytes(arr: Uint8Array): string {
+  if ((globalThis as any).Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(globalThis.String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
   }
 }
 

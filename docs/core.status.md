@@ -96,6 +96,22 @@ The operation was rejected because an argument was invalid.
 </td></tr>
 <tr><td>
 
+OK
+
+
+</td><td>
+
+`0`
+
+
+</td><td>
+
+The operation completed successfully.
+
+
+</td></tr>
+<tr><td>
+
 RESOURCE\_EXHAUSTED
 
 
@@ -138,7 +154,7 @@ UNAVAILABLE
 
 </td><td>
 
-The operation was rejected because it did not have valid authentication credentials.
+The operation failed because the service is unavailable.
 
 
 </td></tr>

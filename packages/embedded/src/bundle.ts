@@ -1,5 +1,5 @@
-import type { JWT, _RPC, _Request, _Response, _Service } from "@cerbos/core";
-import { NotOK, Status } from "@cerbos/core";
+import type { JWT } from "@cerbos/core";
+import { NotOK } from "@cerbos/core";
 
 import type {
   BundleMetadata,
@@ -13,74 +13,11 @@ import { CheckResourcesResponse } from "./protobuf/cerbos/response/v1/response";
 import type { Allocator } from "./slice";
 import { Slice } from "./slice";
 
-type RPC = (offset: number, length: number) => bigint;
-
-interface RPCs {
-  check: RPC;
-}
-
-interface Exports extends WebAssembly.Exports, Allocator, RPCs {
+interface Exports extends WebAssembly.Exports, Allocator {
+  check: (offset: number, length: number) => bigint;
   metadata: () => bigint;
   set_globals: (offset: number, length: number) => void;
 }
-
-interface Implementation<Service extends _Service, RPC extends _RPC<Service>> {
-  method: keyof RPCs;
-  transformRequest: (
-    request: _Request<Service, RPC>,
-    decodeJWTPayload: DecodeJWTPayload,
-  ) => Promise<unknown>;
-  transformResponse: (response: unknown) => _Response<Service, RPC>;
-}
-
-type Services = {
-  [Service in _Service]: {
-    [RPC in _RPC<Service>]: Implementation<Service, RPC> | undefined;
-  };
-};
-
-const services: Services = {
-  admin: {
-    addOrUpdatePolicy: undefined,
-    addOrUpdateSchema: undefined,
-    deleteSchema: undefined,
-    disablePolicy: undefined,
-    enablePolicy: undefined,
-    getPolicy: undefined,
-    getSchema: undefined,
-    listPolicies: undefined,
-    listSchemas: undefined,
-    reloadStore: undefined,
-  },
-  cerbos: {
-    checkResources: {
-      method: "check",
-      transformRequest: async (request, decodeJWTPayload) => {
-        const transformedRequest = CheckResourcesRequest.toJSON(request) as {
-          auxData?: {
-            jwt?: unknown;
-          };
-        };
-
-        if (transformedRequest.auxData?.jwt) {
-          const jwt = transformedRequest.auxData.jwt as JWT;
-          if (!jwt.keySetId) {
-            delete jwt.keySetId;
-          }
-
-          (transformedRequest.auxData as { jwt: DecodedJWTPayload }).jwt =
-            await decodeJWTPayload(jwt);
-        }
-
-        return transformedRequest;
-      },
-      transformResponse: (response) =>
-        CheckResourcesResponse.fromJSON(response),
-    },
-    planResources: undefined,
-    serverInfo: undefined,
-  },
-};
 
 export class Bundle {
   public static async from(
@@ -145,32 +82,31 @@ export class Bundle {
     return this._metadata;
   }
 
-  public async perform<Service extends _Service, RPC extends _RPC<Service>>(
-    service: Service,
-    rpc: RPC,
-    request: _Request<Service, RPC>,
-  ): Promise<_Response<Service, RPC>> {
-    const implementation = services[service][rpc] as
-      | Implementation<typeof service, typeof rpc>
-      | undefined; // https://github.com/microsoft/TypeScript/issues/30581;
+  public async checkResources(
+    request: CheckResourcesRequest,
+  ): Promise<CheckResourcesResponse> {
+    const requestJSON = CheckResourcesRequest.toJSON(request) as {
+      auxData?: { jwt?: unknown };
+    };
 
-    if (!implementation) {
-      throw new NotOK(
-        Status.UNIMPLEMENTED,
-        `${rpc} is not implemented in embedded policy decision points`,
-      );
+    if (requestJSON.auxData?.jwt) {
+      const jwt = requestJSON.auxData.jwt as JWT;
+      if (!jwt.keySetId) {
+        delete jwt.keySetId;
+      }
+
+      (requestJSON.auxData as { jwt: DecodedJWTPayload }).jwt =
+        await this.decodeJWTPayload(jwt);
     }
 
-    const { method, transformRequest, transformResponse } = implementation;
-
-    const requestSlice = Slice.ofJSON(
-      this.exports,
-      await transformRequest(request, this.decodeJWTPayload),
-    );
+    const requestSlice = Slice.ofJSON(this.exports, requestJSON);
 
     let responseSlice: Slice;
     try {
-      responseSlice = this.call(method, requestSlice);
+      responseSlice = Slice.from(
+        this.exports,
+        this.exports.check(requestSlice.offset, requestSlice.length),
+      );
     } finally {
       requestSlice.deallocate();
     }
@@ -183,14 +119,10 @@ export class Bundle {
     }
 
     try {
-      return transformResponse(JSON.parse(responseText));
+      return CheckResourcesResponse.fromJSON(JSON.parse(responseText));
     } catch (_) {
       throw NotOK.fromJSON(responseText);
     }
-  }
-
-  private call(method: keyof RPCs, { offset, length }: Slice): Slice {
-    return Slice.from(this.exports, this.exports[method](offset, length));
   }
 }
 

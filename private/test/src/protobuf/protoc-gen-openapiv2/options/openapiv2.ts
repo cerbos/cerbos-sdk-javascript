@@ -43,6 +43,25 @@ export function schemeFromJSON(object: any): Scheme {
   }
 }
 
+export function schemeToJSON(object: Scheme): string {
+  switch (object) {
+    case Scheme.UNKNOWN:
+      return "UNKNOWN";
+    case Scheme.HTTP:
+      return "HTTP";
+    case Scheme.HTTPS:
+      return "HTTPS";
+    case Scheme.WS:
+      return "WS";
+    case Scheme.WSS:
+      return "WSS";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum Scheme",
+      );
+  }
+}
+
 export interface Swagger {
   swagger: string;
   info: Info | undefined;
@@ -134,6 +153,27 @@ export function headerParameter_TypeFromJSON(
     case 4:
     case "BOOLEAN":
       return HeaderParameter_Type.BOOLEAN;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum HeaderParameter_Type",
+      );
+  }
+}
+
+export function headerParameter_TypeToJSON(
+  object: HeaderParameter_Type,
+): string {
+  switch (object) {
+    case HeaderParameter_Type.UNKNOWN:
+      return "UNKNOWN";
+    case HeaderParameter_Type.STRING:
+      return "STRING";
+    case HeaderParameter_Type.NUMBER:
+      return "NUMBER";
+    case HeaderParameter_Type.INTEGER:
+      return "INTEGER";
+    case HeaderParameter_Type.BOOLEAN:
+      return "BOOLEAN";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum HeaderParameter_Type",
@@ -288,6 +328,35 @@ export function jSONSchema_JSONSchemaSimpleTypesFromJSON(
   }
 }
 
+export function jSONSchema_JSONSchemaSimpleTypesToJSON(
+  object: JSONSchema_JSONSchemaSimpleTypes,
+): string {
+  switch (object) {
+    case JSONSchema_JSONSchemaSimpleTypes.UNKNOWN:
+      return "UNKNOWN";
+    case JSONSchema_JSONSchemaSimpleTypes.ARRAY:
+      return "ARRAY";
+    case JSONSchema_JSONSchemaSimpleTypes.BOOLEAN:
+      return "BOOLEAN";
+    case JSONSchema_JSONSchemaSimpleTypes.INTEGER:
+      return "INTEGER";
+    case JSONSchema_JSONSchemaSimpleTypes.NULL:
+      return "NULL";
+    case JSONSchema_JSONSchemaSimpleTypes.NUMBER:
+      return "NUMBER";
+    case JSONSchema_JSONSchemaSimpleTypes.OBJECT:
+      return "OBJECT";
+    case JSONSchema_JSONSchemaSimpleTypes.STRING:
+      return "STRING";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum JSONSchema_JSONSchemaSimpleTypes",
+      );
+  }
+}
+
 export interface JSONSchema_FieldConfiguration {
   pathParamName: string;
 }
@@ -358,6 +427,23 @@ export function securityScheme_TypeFromJSON(object: any): SecurityScheme_Type {
   }
 }
 
+export function securityScheme_TypeToJSON(object: SecurityScheme_Type): string {
+  switch (object) {
+    case SecurityScheme_Type.TYPE_INVALID:
+      return "TYPE_INVALID";
+    case SecurityScheme_Type.TYPE_BASIC:
+      return "TYPE_BASIC";
+    case SecurityScheme_Type.TYPE_API_KEY:
+      return "TYPE_API_KEY";
+    case SecurityScheme_Type.TYPE_OAUTH2:
+      return "TYPE_OAUTH2";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum SecurityScheme_Type",
+      );
+  }
+}
+
 export enum SecurityScheme_In {
   IN_INVALID = 0,
   IN_QUERY = 1,
@@ -375,6 +461,21 @@ export function securityScheme_InFromJSON(object: any): SecurityScheme_In {
     case 2:
     case "IN_HEADER":
       return SecurityScheme_In.IN_HEADER;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum SecurityScheme_In",
+      );
+  }
+}
+
+export function securityScheme_InToJSON(object: SecurityScheme_In): string {
+  switch (object) {
+    case SecurityScheme_In.IN_INVALID:
+      return "IN_INVALID";
+    case SecurityScheme_In.IN_QUERY:
+      return "IN_QUERY";
+    case SecurityScheme_In.IN_HEADER:
+      return "IN_HEADER";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum SecurityScheme_In",
@@ -407,6 +508,25 @@ export function securityScheme_FlowFromJSON(object: any): SecurityScheme_Flow {
     case 4:
     case "FLOW_ACCESS_CODE":
       return SecurityScheme_Flow.FLOW_ACCESS_CODE;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum SecurityScheme_Flow",
+      );
+  }
+}
+
+export function securityScheme_FlowToJSON(object: SecurityScheme_Flow): string {
+  switch (object) {
+    case SecurityScheme_Flow.FLOW_INVALID:
+      return "FLOW_INVALID";
+    case SecurityScheme_Flow.FLOW_IMPLICIT:
+      return "FLOW_IMPLICIT";
+    case SecurityScheme_Flow.FLOW_PASSWORD:
+      return "FLOW_PASSWORD";
+    case SecurityScheme_Flow.FLOW_APPLICATION:
+      return "FLOW_APPLICATION";
+    case SecurityScheme_Flow.FLOW_ACCESS_CODE:
+      return "FLOW_ACCESS_CODE";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum SecurityScheme_Flow",
@@ -710,6 +830,64 @@ export const Swagger = {
         : {},
     };
   },
+
+  toJSON(message: Swagger): unknown {
+    const obj: any = {};
+    if (message.swagger !== "") {
+      obj.swagger = message.swagger;
+    }
+    if (message.info !== undefined) {
+      obj.info = Info.toJSON(message.info);
+    }
+    if (message.host !== "") {
+      obj.host = message.host;
+    }
+    if (message.basePath !== "") {
+      obj.basePath = message.basePath;
+    }
+    if (message.schemes?.length) {
+      obj.schemes = message.schemes.map((e) => schemeToJSON(e));
+    }
+    if (message.consumes?.length) {
+      obj.consumes = message.consumes;
+    }
+    if (message.produces?.length) {
+      obj.produces = message.produces;
+    }
+    if (message.responses) {
+      const entries = Object.entries(message.responses);
+      if (entries.length > 0) {
+        obj.responses = {};
+        entries.forEach(([k, v]) => {
+          obj.responses[k] = Response.toJSON(v);
+        });
+      }
+    }
+    if (message.securityDefinitions !== undefined) {
+      obj.securityDefinitions = SecurityDefinitions.toJSON(
+        message.securityDefinitions,
+      );
+    }
+    if (message.security?.length) {
+      obj.security = message.security.map((e) => SecurityRequirement.toJSON(e));
+    }
+    if (message.tags?.length) {
+      obj.tags = message.tags.map((e) => Tag.toJSON(e));
+    }
+    if (message.externalDocs !== undefined) {
+      obj.externalDocs = ExternalDocumentation.toJSON(message.externalDocs);
+    }
+    if (message.extensions) {
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseSwagger_ResponsesEntry(): Swagger_ResponsesEntry {
@@ -769,6 +947,17 @@ export const Swagger_ResponsesEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? Response.fromJSON(object.value) : undefined,
     };
+  },
+
+  toJSON(message: Swagger_ResponsesEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = Response.toJSON(message.value);
+    }
+    return obj;
   },
 };
 
@@ -832,6 +1021,17 @@ export const Swagger_ExtensionsEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: Swagger_ExtensionsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -1100,6 +1300,62 @@ export const Operation = {
         : undefined,
     };
   },
+
+  toJSON(message: Operation): unknown {
+    const obj: any = {};
+    if (message.tags?.length) {
+      obj.tags = message.tags;
+    }
+    if (message.summary !== "") {
+      obj.summary = message.summary;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.externalDocs !== undefined) {
+      obj.externalDocs = ExternalDocumentation.toJSON(message.externalDocs);
+    }
+    if (message.operationId !== "") {
+      obj.operationId = message.operationId;
+    }
+    if (message.consumes?.length) {
+      obj.consumes = message.consumes;
+    }
+    if (message.produces?.length) {
+      obj.produces = message.produces;
+    }
+    if (message.responses) {
+      const entries = Object.entries(message.responses);
+      if (entries.length > 0) {
+        obj.responses = {};
+        entries.forEach(([k, v]) => {
+          obj.responses[k] = Response.toJSON(v);
+        });
+      }
+    }
+    if (message.schemes?.length) {
+      obj.schemes = message.schemes.map((e) => schemeToJSON(e));
+    }
+    if (message.deprecated !== false) {
+      obj.deprecated = message.deprecated;
+    }
+    if (message.security?.length) {
+      obj.security = message.security.map((e) => SecurityRequirement.toJSON(e));
+    }
+    if (message.extensions) {
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
+    }
+    if (message.parameters !== undefined) {
+      obj.parameters = Parameters.toJSON(message.parameters);
+    }
+    return obj;
+  },
 };
 
 function createBaseOperation_ResponsesEntry(): Operation_ResponsesEntry {
@@ -1159,6 +1415,17 @@ export const Operation_ResponsesEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? Response.fromJSON(object.value) : undefined,
     };
+  },
+
+  toJSON(message: Operation_ResponsesEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = Response.toJSON(message.value);
+    }
+    return obj;
   },
 };
 
@@ -1223,6 +1490,17 @@ export const Operation_ExtensionsEntry = {
       value: isSet(object?.value) ? object.value : undefined,
     };
   },
+
+  toJSON(message: Operation_ExtensionsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
+  },
 };
 
 function createBaseParameters(): Parameters {
@@ -1270,6 +1548,14 @@ export const Parameters = {
         ? object.headers.map((e: any) => HeaderParameter.fromJSON(e))
         : [],
     };
+  },
+
+  toJSON(message: Parameters): unknown {
+    const obj: any = {};
+    if (message.headers?.length) {
+      obj.headers = message.headers.map((e) => HeaderParameter.toJSON(e));
+    }
+    return obj;
   },
 };
 
@@ -1365,6 +1651,26 @@ export const HeaderParameter = {
         : false,
     };
   },
+
+  toJSON(message: HeaderParameter): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.type !== 0) {
+      obj.type = headerParameter_TypeToJSON(message.type);
+    }
+    if (message.format !== "") {
+      obj.format = message.format;
+    }
+    if (message.required !== false) {
+      obj.required = message.required;
+    }
+    return obj;
+  },
 };
 
 function createBaseHeader(): Header {
@@ -1456,6 +1762,26 @@ export const Header = {
       default: isSet(object.default) ? globalThis.String(object.default) : "",
       pattern: isSet(object.pattern) ? globalThis.String(object.pattern) : "",
     };
+  },
+
+  toJSON(message: Header): unknown {
+    const obj: any = {};
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.type !== "") {
+      obj.type = message.type;
+    }
+    if (message.format !== "") {
+      obj.format = message.format;
+    }
+    if (message.default !== "") {
+      obj.default = message.default;
+    }
+    if (message.pattern !== "") {
+      obj.pattern = message.pattern;
+    }
+    return obj;
   },
 };
 
@@ -1601,6 +1927,44 @@ export const Response = {
         : {},
     };
   },
+
+  toJSON(message: Response): unknown {
+    const obj: any = {};
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.schema !== undefined) {
+      obj.schema = Schema.toJSON(message.schema);
+    }
+    if (message.headers) {
+      const entries = Object.entries(message.headers);
+      if (entries.length > 0) {
+        obj.headers = {};
+        entries.forEach(([k, v]) => {
+          obj.headers[k] = Header.toJSON(v);
+        });
+      }
+    }
+    if (message.examples) {
+      const entries = Object.entries(message.examples);
+      if (entries.length > 0) {
+        obj.examples = {};
+        entries.forEach(([k, v]) => {
+          obj.examples[k] = v;
+        });
+      }
+    }
+    if (message.extensions) {
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseResponse_HeadersEntry(): Response_HeadersEntry {
@@ -1661,6 +2025,17 @@ export const Response_HeadersEntry = {
       value: isSet(object.value) ? Header.fromJSON(object.value) : undefined,
     };
   },
+
+  toJSON(message: Response_HeadersEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = Header.toJSON(message.value);
+    }
+    return obj;
+  },
 };
 
 function createBaseResponse_ExamplesEntry(): Response_ExamplesEntry {
@@ -1720,6 +2095,17 @@ export const Response_ExamplesEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
+  },
+
+  toJSON(message: Response_ExamplesEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -1783,6 +2169,17 @@ export const Response_ExtensionsEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: Response_ExtensionsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -1924,6 +2321,38 @@ export const Info = {
         : {},
     };
   },
+
+  toJSON(message: Info): unknown {
+    const obj: any = {};
+    if (message.title !== "") {
+      obj.title = message.title;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.termsOfService !== "") {
+      obj.termsOfService = message.termsOfService;
+    }
+    if (message.contact !== undefined) {
+      obj.contact = Contact.toJSON(message.contact);
+    }
+    if (message.license !== undefined) {
+      obj.license = License.toJSON(message.license);
+    }
+    if (message.version !== "") {
+      obj.version = message.version;
+    }
+    if (message.extensions) {
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseInfo_ExtensionsEntry(): Info_ExtensionsEntry {
@@ -1986,6 +2415,17 @@ export const Info_ExtensionsEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: Info_ExtensionsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -2055,6 +2495,20 @@ export const Contact = {
       email: isSet(object.email) ? globalThis.String(object.email) : "",
     };
   },
+
+  toJSON(message: Contact): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.url !== "") {
+      obj.url = message.url;
+    }
+    if (message.email !== "") {
+      obj.email = message.email;
+    }
+    return obj;
+  },
 };
 
 function createBaseLicense(): License {
@@ -2111,6 +2565,17 @@ export const License = {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       url: isSet(object.url) ? globalThis.String(object.url) : "",
     };
+  },
+
+  toJSON(message: License): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.url !== "") {
+      obj.url = message.url;
+    }
+    return obj;
   },
 };
 
@@ -2173,6 +2638,17 @@ export const ExternalDocumentation = {
         : "",
       url: isSet(object.url) ? globalThis.String(object.url) : "",
     };
+  },
+
+  toJSON(message: ExternalDocumentation): unknown {
+    const obj: any = {};
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.url !== "") {
+      obj.url = message.url;
+    }
+    return obj;
   },
 };
 
@@ -2283,6 +2759,26 @@ export const Schema = {
         : undefined,
       example: isSet(object.example) ? globalThis.String(object.example) : "",
     };
+  },
+
+  toJSON(message: Schema): unknown {
+    const obj: any = {};
+    if (message.jsonSchema !== undefined) {
+      obj.jsonSchema = JSONSchema.toJSON(message.jsonSchema);
+    }
+    if (message.discriminator !== "") {
+      obj.discriminator = message.discriminator;
+    }
+    if (message.readOnly !== false) {
+      obj.readOnly = message.readOnly;
+    }
+    if (message.externalDocs !== undefined) {
+      obj.externalDocs = ExternalDocumentation.toJSON(message.externalDocs);
+    }
+    if (message.example !== "") {
+      obj.example = message.example;
+    }
+    return obj;
   },
 };
 
@@ -2704,6 +3200,99 @@ export const JSONSchema = {
         : {},
     };
   },
+
+  toJSON(message: JSONSchema): unknown {
+    const obj: any = {};
+    if (message.ref !== "") {
+      obj.ref = message.ref;
+    }
+    if (message.title !== "") {
+      obj.title = message.title;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.default !== "") {
+      obj.default = message.default;
+    }
+    if (message.readOnly !== false) {
+      obj.readOnly = message.readOnly;
+    }
+    if (message.example !== "") {
+      obj.example = message.example;
+    }
+    if (message.multipleOf !== 0) {
+      obj.multipleOf = message.multipleOf;
+    }
+    if (message.maximum !== 0) {
+      obj.maximum = message.maximum;
+    }
+    if (message.exclusiveMaximum !== false) {
+      obj.exclusiveMaximum = message.exclusiveMaximum;
+    }
+    if (message.minimum !== 0) {
+      obj.minimum = message.minimum;
+    }
+    if (message.exclusiveMinimum !== false) {
+      obj.exclusiveMinimum = message.exclusiveMinimum;
+    }
+    if (message.maxLength !== "0") {
+      obj.maxLength = message.maxLength;
+    }
+    if (message.minLength !== "0") {
+      obj.minLength = message.minLength;
+    }
+    if (message.pattern !== "") {
+      obj.pattern = message.pattern;
+    }
+    if (message.maxItems !== "0") {
+      obj.maxItems = message.maxItems;
+    }
+    if (message.minItems !== "0") {
+      obj.minItems = message.minItems;
+    }
+    if (message.uniqueItems !== false) {
+      obj.uniqueItems = message.uniqueItems;
+    }
+    if (message.maxProperties !== "0") {
+      obj.maxProperties = message.maxProperties;
+    }
+    if (message.minProperties !== "0") {
+      obj.minProperties = message.minProperties;
+    }
+    if (message.required?.length) {
+      obj.required = message.required;
+    }
+    if (message.array?.length) {
+      obj.array = message.array;
+    }
+    if (message.type?.length) {
+      obj.type = message.type.map((e) =>
+        jSONSchema_JSONSchemaSimpleTypesToJSON(e),
+      );
+    }
+    if (message.format !== "") {
+      obj.format = message.format;
+    }
+    if (message.enum?.length) {
+      obj.enum = message.enum;
+    }
+    if (message.fieldConfiguration !== undefined) {
+      obj.fieldConfiguration = JSONSchema_FieldConfiguration.toJSON(
+        message.fieldConfiguration,
+      );
+    }
+    if (message.extensions) {
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseJSONSchema_FieldConfiguration(): JSONSchema_FieldConfiguration {
@@ -2754,6 +3343,14 @@ export const JSONSchema_FieldConfiguration = {
         ? globalThis.String(object.pathParamName)
         : "",
     };
+  },
+
+  toJSON(message: JSONSchema_FieldConfiguration): unknown {
+    const obj: any = {};
+    if (message.pathParamName !== "") {
+      obj.pathParamName = message.pathParamName;
+    }
+    return obj;
   },
 };
 
@@ -2817,6 +3414,17 @@ export const JSONSchema_ExtensionsEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: JSONSchema_ExtensionsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -2919,6 +3527,29 @@ export const Tag = {
         : {},
     };
   },
+
+  toJSON(message: Tag): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.externalDocs !== undefined) {
+      obj.externalDocs = ExternalDocumentation.toJSON(message.externalDocs);
+    }
+    if (message.extensions) {
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseTag_ExtensionsEntry(): Tag_ExtensionsEntry {
@@ -2978,6 +3609,17 @@ export const Tag_ExtensionsEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: Tag_ExtensionsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -3041,6 +3683,20 @@ export const SecurityDefinitions = {
         : {},
     };
   },
+
+  toJSON(message: SecurityDefinitions): unknown {
+    const obj: any = {};
+    if (message.security) {
+      const entries = Object.entries(message.security);
+      if (entries.length > 0) {
+        obj.security = {};
+        entries.forEach(([k, v]) => {
+          obj.security[k] = SecurityScheme.toJSON(v);
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseSecurityDefinitions_SecurityEntry(): SecurityDefinitions_SecurityEntry {
@@ -3102,6 +3758,17 @@ export const SecurityDefinitions_SecurityEntry = {
         ? SecurityScheme.fromJSON(object.value)
         : undefined,
     };
+  },
+
+  toJSON(message: SecurityDefinitions_SecurityEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = SecurityScheme.toJSON(message.value);
+    }
+    return obj;
   },
 };
 
@@ -3271,6 +3938,44 @@ export const SecurityScheme = {
         : {},
     };
   },
+
+  toJSON(message: SecurityScheme): unknown {
+    const obj: any = {};
+    if (message.type !== 0) {
+      obj.type = securityScheme_TypeToJSON(message.type);
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.in !== 0) {
+      obj.in = securityScheme_InToJSON(message.in);
+    }
+    if (message.flow !== 0) {
+      obj.flow = securityScheme_FlowToJSON(message.flow);
+    }
+    if (message.authorizationUrl !== "") {
+      obj.authorizationUrl = message.authorizationUrl;
+    }
+    if (message.tokenUrl !== "") {
+      obj.tokenUrl = message.tokenUrl;
+    }
+    if (message.scopes !== undefined) {
+      obj.scopes = Scopes.toJSON(message.scopes);
+    }
+    if (message.extensions) {
+      const entries = Object.entries(message.extensions);
+      if (entries.length > 0) {
+        obj.extensions = {};
+        entries.forEach(([k, v]) => {
+          obj.extensions[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseSecurityScheme_ExtensionsEntry(): SecurityScheme_ExtensionsEntry {
@@ -3333,6 +4038,17 @@ export const SecurityScheme_ExtensionsEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: SecurityScheme_ExtensionsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -3397,6 +4113,21 @@ export const SecurityRequirement = {
         : {},
     };
   },
+
+  toJSON(message: SecurityRequirement): unknown {
+    const obj: any = {};
+    if (message.securityRequirement) {
+      const entries = Object.entries(message.securityRequirement);
+      if (entries.length > 0) {
+        obj.securityRequirement = {};
+        entries.forEach(([k, v]) => {
+          obj.securityRequirement[k] =
+            SecurityRequirement_SecurityRequirementValue.toJSON(v);
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseSecurityRequirement_SecurityRequirementValue(): SecurityRequirement_SecurityRequirementValue {
@@ -3447,6 +4178,14 @@ export const SecurityRequirement_SecurityRequirementValue = {
         ? object.scope.map((e: any) => globalThis.String(e))
         : [],
     };
+  },
+
+  toJSON(message: SecurityRequirement_SecurityRequirementValue): unknown {
+    const obj: any = {};
+    if (message.scope?.length) {
+      obj.scope = message.scope;
+    }
+    return obj;
   },
 };
 
@@ -3516,6 +4255,19 @@ export const SecurityRequirement_SecurityRequirementEntry = {
         : undefined,
     };
   },
+
+  toJSON(message: SecurityRequirement_SecurityRequirementEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = SecurityRequirement_SecurityRequirementValue.toJSON(
+        message.value,
+      );
+    }
+    return obj;
+  },
 };
 
 function createBaseScopes(): Scopes {
@@ -3576,6 +4328,20 @@ export const Scopes = {
         : {},
     };
   },
+
+  toJSON(message: Scopes): unknown {
+    const obj: any = {};
+    if (message.scope) {
+      const entries = Object.entries(message.scope);
+      if (entries.length > 0) {
+        obj.scope = {};
+        entries.forEach(([k, v]) => {
+          obj.scope[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseScopes_ScopeEntry(): Scopes_ScopeEntry {
@@ -3632,6 +4398,17 @@ export const Scopes_ScopeEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
+  },
+
+  toJSON(message: Scopes_ScopeEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 

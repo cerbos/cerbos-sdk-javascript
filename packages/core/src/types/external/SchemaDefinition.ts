@@ -1,6 +1,6 @@
-import { isObject } from "../internal";
+import { _isObject } from "./_isObject";
 
-const decoder = new TextDecoder();
+const utf8Decoder = new TextDecoder("utf-8", { fatal: true });
 
 /**
  * Definition of a JSON schema used to validate principal or resource attributes.
@@ -21,7 +21,7 @@ export class SchemaDefinition {
   public toObject(): Record<string, unknown> {
     const object = JSON.parse(this.toString()) as unknown;
 
-    if (!isObject(object)) {
+    if (!_isObject(object)) {
       throw new Error("Schema definition is not an object");
     }
 
@@ -32,6 +32,6 @@ export class SchemaDefinition {
    * The JSON-serialized schema definition.
    */
   public toString(): string {
-    return decoder.decode(this.bytes);
+    return utf8Decoder.decode(this.bytes);
   }
 }

@@ -75,6 +75,25 @@ Hash of policy contents.
 </td></tr>
 <tr><td>
 
+[sourceAttributes](./core.policymetadata.sourceattributes.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SourceAttributes](./core.sourceattributes.md)
+
+
+</td><td>
+
+More details about the source of the policy, for auditing purposes.
+
+
+</td></tr>
+<tr><td>
+
 [sourceFile](./core.policymetadata.sourcefile.md)
 
 

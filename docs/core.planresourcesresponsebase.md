@@ -37,6 +37,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[cerbosCallId](./core.planresourcesresponsebase.cerboscallid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The unique identifier for the request used in audit logs.
+
+
+</td></tr>
+<tr><td>
+
 [metadata](./core.planresourcesresponsebase.metadata.md)
 
 

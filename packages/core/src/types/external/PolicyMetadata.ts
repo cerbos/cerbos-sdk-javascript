@@ -1,3 +1,5 @@
+import type { SourceAttributes } from "./SourceAttributes";
+
 /**
  * Metadata describing a policy.
  *
@@ -8,6 +10,11 @@ export interface PolicyMetadata {
    * The source of the policy, for auditing purposes.
    */
   sourceFile: string;
+
+  /**
+   * More details about the source of the policy, for auditing purposes.
+   */
+  sourceAttributes: SourceAttributes;
 
   /**
    * Free-form data, for auditing purposes.

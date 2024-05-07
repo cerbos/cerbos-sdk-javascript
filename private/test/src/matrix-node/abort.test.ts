@@ -4,20 +4,48 @@ import type { AddressInfo } from "net";
 import { Server as GRPCServer, ServerCredentials } from "@grpc/grpc-js";
 import { beforeAll, beforeEach, describe, expect, test } from "vitest";
 
-import type { Client } from "@cerbos/core";
+import type { AccessLogEntry, Client } from "@cerbos/core";
 import { NotOK, Status } from "@cerbos/core";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
 
-import type { ServerInfoResponse } from "../protobuf/cerbos/response/v1/response";
-import type { CerbosServiceServer } from "../protobuf/cerbos/svc/v1/svc";
-import { CerbosServiceService as CerbosService } from "../protobuf/cerbos/svc/v1/svc";
+import {
+  ListAuditLogEntriesResponse,
+  ServerInfoResponse,
+} from "../protobuf/cerbos/response/v1/response";
+import type {
+  CerbosAdminServiceServer as AdminServiceServer,
+  CerbosServiceServer,
+} from "../protobuf/cerbos/svc/v1/svc";
+import {
+  CerbosAdminServiceService as AdminService,
+  CerbosServiceService as CerbosService,
+} from "../protobuf/cerbos/svc/v1/svc";
 
-const dummyResponse: ServerInfoResponse = {
+const dummyUnaryResponse: ServerInfoResponse = {
   version: "test",
   commit: "",
   buildDate: "",
 };
+
+const dummyServerStreamResponse = {
+  entry: {
+    $case: "accessLogEntry",
+    accessLogEntry: {
+      callId: "01HXVAJQTJHBHDZ3SMP1GH9E1Y",
+      timestamp: new Date(),
+      peer: {
+        address: "1.2.3.4:5678",
+        authInfo: "",
+        forwardedFor: "1.1.1.1, 2.2.2.2",
+        userAgent: "test/9000",
+      },
+      metadata: {},
+      method: "cerbos.svc.v1.CerbosService/ServerInfo",
+      statusCode: Status.OK,
+    },
+  },
+} satisfies ListAuditLogEntriesResponse;
 
 describe("aborting requests", () => {
   describe.each([
@@ -34,56 +62,141 @@ describe("aborting requests", () => {
       dummyServer.reset();
     });
 
-    test("before sending the request", async () => {
-      const controller = new AbortController();
-      const reason = new Error("Don't even");
-      controller.abort(reason);
+    describe("unary", () => {
+      test("before sending the request", async () => {
+        const controller = new AbortController();
+        const reason = new Error("Don't even");
+        controller.abort(reason);
 
-      const response = client.serverInfo({
-        signal: controller.signal,
+        const response = client.serverInfo({
+          signal: controller.signal,
+        });
+
+        await expect(response).rejects.toMatchObject({
+          constructor: NotOK,
+          code: Status.CANCELLED,
+          details: "Aborted: Don't even",
+          cause: reason,
+        });
+
+        expect(await dummyServer.request).toEqual("pending");
       });
 
-      await expect(response).rejects.toMatchObject({
-        constructor: NotOK,
-        code: Status.CANCELLED,
-        cause: reason,
+      test("while in flight", async () => {
+        const controller = new AbortController();
+        const reason = new Error("Never mind");
+
+        const response = client.serverInfo({
+          signal: controller.signal,
+        });
+
+        await dummyServer.received;
+
+        controller.abort(reason);
+
+        await expect(response).rejects.toMatchObject({
+          constructor: NotOK,
+          code: Status.CANCELLED,
+          details: "Aborted: Never mind",
+          cause: reason,
+        });
+
+        expect(await dummyServer.request).toEqual("cancelled");
       });
 
-      expect(dummyServer.request).toEqual("pending");
+      test("after completion", async () => {
+        const controller = new AbortController();
+
+        const response = await client.serverInfo({
+          signal: controller.signal,
+        });
+
+        controller.abort(new Error("Too late"));
+
+        expect(response).toEqual(dummyUnaryResponse);
+        expect(await dummyServer.request).toEqual("completed");
+      });
     });
 
-    test("while in flight", async () => {
-      const controller = new AbortController();
-      const reason = new Error("Never mind");
+    describe("serverStream", () => {
+      test("before sending the request", async () => {
+        const controller = new AbortController();
+        const reason = new Error("Don't even");
+        controller.abort(reason);
 
-      const response = client.serverInfo({
-        signal: controller.signal,
+        const stream = client.listAccessLogEntries(
+          { filter: { tail: 10 } },
+          { signal: controller.signal },
+        );
+
+        await expect(stream.next()).rejects.toMatchObject({
+          constructor: NotOK,
+          code: Status.CANCELLED,
+          details: "Aborted: Don't even",
+          cause: reason,
+        });
+
+        expect(await dummyServer.request).toEqual("pending");
       });
 
-      await dummyServer.received;
+      test("while in flight", async () => {
+        const controller = new AbortController();
+        const reason = new Error("Never mind");
 
-      controller.abort(reason);
+        const stream = client.listAccessLogEntries(
+          { filter: { tail: 10 } },
+          { signal: controller.signal },
+        );
 
-      await expect(response).rejects.toMatchObject({
-        constructor: NotOK,
-        code: Status.CANCELLED,
-        cause: reason,
+        expect(await stream.next()).toEqual({
+          done: false,
+          value: dummyServerStreamResponse.entry.accessLogEntry,
+        } satisfies IteratorResult<AccessLogEntry, void>);
+
+        controller.abort(reason);
+
+        await expect(stream.next()).rejects.toMatchObject({
+          constructor: NotOK,
+          code: Status.CANCELLED,
+          details: "Aborted: Never mind",
+          cause: reason,
+        });
+
+        expect(await dummyServer.request).toEqual("cancelled");
       });
 
-      expect(await dummyServer.request).toEqual("cancelled");
-    });
+      test("after completion", async () => {
+        const controller = new AbortController();
 
-    test("after completion", async () => {
-      const controller = new AbortController();
+        for await (const response of client.listAccessLogEntries(
+          { filter: { tail: 10 } },
+          { signal: controller.signal },
+        )) {
+          expect(response).toEqual(
+            dummyServerStreamResponse.entry.accessLogEntry,
+          );
+        }
 
-      const response = await client.serverInfo({
-        signal: controller.signal,
+        controller.abort(new Error("Too late"));
+
+        expect(await dummyServer.request).toEqual("completed");
       });
 
-      controller.abort(new Error("Too late"));
+      test("automatically after stopping consuming the stream", async () => {
+        const controller = new AbortController();
 
-      expect(response).toEqual(dummyResponse);
-      expect(await dummyServer.request).toEqual("completed");
+        for await (const response of client.listAccessLogEntries(
+          { filter: { tail: 10 } },
+          { signal: controller.signal },
+        )) {
+          expect(response).toEqual(
+            dummyServerStreamResponse.entry.accessLogEntry,
+          );
+          break;
+        }
+
+        expect(await dummyServer.request).toEqual("cancelled");
+      });
     });
   });
 });
@@ -124,7 +237,7 @@ abstract class DummyServer {
 
   public abstract stop(): Promise<void>;
 
-  protected handle(cancelled: () => boolean, respond: () => void): void {
+  protected handleUnary(cancelled: () => boolean, respond: () => void): void {
     this.request = new Promise((resolve) => {
       setTimeout(() => {
         if (cancelled()) {
@@ -138,18 +251,56 @@ abstract class DummyServer {
 
     this.onReceive();
   }
+
+  protected handleServerStream(
+    cancelled: () => boolean,
+    respond: (first: boolean) => void,
+  ): void {
+    this.request = new Promise((resolve) => {
+      let responses = 0;
+      const timeout = setTimeout(() => {
+        if (cancelled()) {
+          resolve("cancelled");
+        } else {
+          responses++;
+          respond(responses === 1);
+          if (responses === 2) {
+            resolve("completed");
+          } else {
+            timeout.refresh();
+          }
+        }
+      }, 50);
+    });
+
+    this.onReceive();
+  }
 }
 
 class DummyGRPCServer extends DummyServer {
   private readonly server = new GRPCServer();
 
   public override async start(): Promise<Client> {
+    this.server.addService(AdminService, {
+      listAuditLogEntries: (call): void => {
+        this.handleServerStream(
+          () => call.cancelled,
+          (first) => {
+            call.write(dummyServerStreamResponse);
+            if (!first) {
+              call.end();
+            }
+          },
+        );
+      },
+    } satisfies Pick<AdminServiceServer, "listAuditLogEntries">);
+
     this.server.addService(CerbosService, {
       serverInfo: (call, callback): void => {
-        this.handle(
+        this.handleUnary(
           () => call.cancelled,
           () => {
-            callback(null, dummyResponse);
+            callback(null, dummyUnaryResponse);
           },
         );
       },
@@ -189,12 +340,37 @@ class DummyGRPCServer extends DummyServer {
 
 class DummyHTTPServer extends DummyServer {
   private readonly server = createHTTPServer((request, response) => {
-    this.handle(
-      () => request.destroyed,
-      () => {
-        response.writeHead(200).end(JSON.stringify(dummyResponse));
-      },
-    );
+    if (request.url === "/api/server_info") {
+      this.handleUnary(
+        () => request.destroyed,
+        () => {
+          response
+            .writeHead(200)
+            .end(JSON.stringify(ServerInfoResponse.toJSON(dummyUnaryResponse)));
+        },
+      );
+    } else {
+      this.handleServerStream(
+        () => request.destroyed,
+        (first) => {
+          if (first) {
+            response.writeHead(200);
+          }
+
+          response.write(
+            JSON.stringify({
+              result: ListAuditLogEntriesResponse.toJSON(
+                dummyServerStreamResponse,
+              ),
+            }) + "\n",
+          );
+
+          if (!first) {
+            response.end();
+          }
+        },
+      );
+    }
   });
 
   public override async start(): Promise<Client> {

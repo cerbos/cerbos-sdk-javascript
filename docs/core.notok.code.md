@@ -9,5 +9,5 @@ The status code returned by the Cerbos policy decision point server.
 **Signature:**
 
 ```typescript
-readonly code: Status;
+readonly code: Exclude<Status, Status.OK>;
 ```

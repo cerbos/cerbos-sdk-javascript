@@ -25,6 +25,7 @@
     "generate:buf:test": "buf generate --template=private/test/buf.gen.yaml proto",
     "generate:changelogs": "tsx private/scripts/src/generate/changelogs.ts",
     "generate:clean": "rm -rf packages/*/src/protobuf private/*/src/protobuf",
+    "generate:external-types-index": "scripts/generate-external-types-index",
     "generate:format": "prettier --write packages/*/src/protobuf private/*/src/protobuf",
     "lint": "pnpm run all:parallel 'pnpm:lint:check:*'",
     "lint:check:depcheck": "pnpm --recursive --include-workspace-root exec depcheck --ignore-patterns=/lib/ --quiet --skip-missing",

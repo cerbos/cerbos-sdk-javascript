@@ -19,17 +19,29 @@ import type {
 } from "@opentelemetry/sdk-trace-base";
 import { describe, expect } from "vitest";
 
+import type { Client, DecisionLogEntry } from "@cerbos/core";
 import { CheckResourcesResult } from "@cerbos/core";
 
-import type { DecisionLogEntry } from "./protobuf/cerbos/audit/v1/audit";
-import { ListAuditLogEntriesResponse } from "./protobuf/cerbos/response/v1/response";
 import type { QueryServiceClient } from "./protobuf/jaeger/proto/api_v3/query_service";
 import type {
   Span as SpanProto,
   TracesData,
 } from "./protobuf/opentelemetry/proto/trace/v1/trace";
-import type { CerbosPorts } from "./servers";
-import { adminCredentials, cerbosVersionIsAtLeast } from "./servers";
+import { cerbosVersionIsAtLeast } from "./servers";
+
+/* eslint-disable @typescript-eslint/no-var-requires -- Can't import package.json files because they're outside of the project's rootDir */
+const { version: grpcSdkVersion } =
+  require("../../../packages/grpc/package.json") as { version: string };
+
+const { version: httpSdkVersion } =
+  require("../../../packages/http/package.json") as { version: string };
+
+const {
+  devDependencies: { "@grpc/grpc-js": grpcJsVersion },
+} = require("../package.json") as {
+  devDependencies: { "@grpc/grpc-js": string };
+};
+/* eslint-enable @typescript-eslint/no-var-requires */
 
 export function buildResultsForResources({
   id,
@@ -176,7 +188,7 @@ export class TestMetricReader extends MetricReader {
   }
 
   protected override async onForceFlush(): Promise<void> {
-    // no-op
+    await this.collect();
   }
 
   protected override async onShutdown(): Promise<void> {
@@ -222,52 +234,6 @@ export const invalidArgumentDetails = expect.stringContaining(
     : "invalid CheckResourcesRequest",
 );
 
-export async function fetchDecisionLogEntry(
-  ports: CerbosPorts,
-  requestId: string,
-): Promise<DecisionLogEntry> {
-  for (let attempt = 1; attempt <= 10; attempt++) {
-    await setTimeout(250);
-
-    const response = await fetch(
-      `https://localhost:${ports.http}/admin/auditlog/list/KIND_DECISION?since=1h`,
-      {
-        headers: {
-          Authorization: `Basic ${btoa(
-            `${adminCredentials.username}:${adminCredentials.password}`,
-          )}`,
-        },
-      },
-    );
-
-    const body = await response.text();
-
-    for (const line of body.split("\n")) {
-      if (line === "") {
-        continue;
-      }
-
-      const chunk = JSON.parse(line) as { result: unknown; error: unknown };
-      if (chunk.error) {
-        throw new Error(`Error streaming decision logs: ${line}`);
-      }
-
-      const response = ListAuditLogEntriesResponse.fromJSON(chunk.result);
-
-      if (
-        response.entry?.$case === "decisionLogEntry" &&
-        response.entry.decisionLogEntry.method?.$case === "checkResources" &&
-        response.entry.decisionLogEntry.method.checkResources.inputs[0]
-          ?.requestId === requestId
-      ) {
-        return response.entry.decisionLogEntry;
-      }
-    }
-  }
-
-  throw new Error(`Didn't find a decision log entry for request ${requestId}`);
-}
-
 export function describeIfCerbosVersionIsAtLeast(
   version: string,
 ): (typeof describe)["skip"] {
@@ -282,4 +248,49 @@ export function bundleFilePath(
   commit = "68337848cb3f987627da7381653d82c6d4e368a5",
 ): string {
   return resolve(__dirname, `../bundles/${commit}.wasm`);
+}
+
+export const callIdMatcher = expect.stringMatching(
+  // cerbosCallId was not available on API responses before 0.33.0
+  cerbosVersionIsAtLeast("0.33.0")
+    ? /^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$/
+    : /^$/,
+);
+
+export async function retry<T>(
+  { attempts, delay }: { attempts: number; delay: number },
+  fn: () => Promise<T>,
+): Promise<T> {
+  let attempt = 1;
+  while (true) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (attempt < attempts) {
+        attempt++;
+        await setTimeout(delay);
+      } else {
+        throw error;
+      }
+    }
+  }
+}
+
+export const grpcUserAgent = `cerbos-sdk-javascript-grpc/${grpcSdkVersion} grpc-node-js/${grpcJsVersion}`;
+
+export const httpUserAgent = `cerbos-sdk-javascript-http/${httpSdkVersion}`;
+
+export async function getDecisionLogEntry(
+  client: Client,
+  callId: string,
+): Promise<DecisionLogEntry> {
+  return await retry({ attempts: 10, delay: 250 }, async () => {
+    const entry = await client.getDecisionLogEntry(callId);
+
+    if (!entry) {
+      throw new Error(`Decision log entry with call ID ${callId} not found`);
+    }
+
+    return entry;
+  });
 }

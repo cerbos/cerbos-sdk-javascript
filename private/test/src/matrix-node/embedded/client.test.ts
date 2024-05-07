@@ -166,6 +166,7 @@ describe("Embedded", () => {
 
         expect(response).toEqual(
           new CheckResourcesResponse({
+            cerbosCallId: "",
             requestId: "42",
             results: [
               new CheckResourcesResult({
@@ -690,6 +691,7 @@ describe("Embedded", () => {
 
           expect(response).toEqual(
             new CheckResourcesResponse({
+              cerbosCallId: "",
               requestId: "42",
               results: [
                 new CheckResourcesResult({
@@ -874,6 +876,7 @@ describe("Embedded", () => {
 
           expect(response).toEqual(
             new CheckResourcesResponse({
+              cerbosCallId: "",
               requestId: "42",
               results: [
                 new CheckResourcesResult({
@@ -1063,6 +1066,7 @@ describe("Embedded", () => {
 
           expect(response).toEqual(
             new CheckResourcesResponse({
+              cerbosCallId: "",
               requestId: "42",
               results: [
                 new CheckResourcesResult({
@@ -1240,6 +1244,7 @@ describe("Embedded", () => {
 
           expect(response).toEqual(
             new CheckResourcesResponse({
+              cerbosCallId: "",
               requestId: "42",
               results: [
                 new CheckResourcesResult({

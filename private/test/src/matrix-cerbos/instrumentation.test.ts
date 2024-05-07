@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 
 import { ChannelCredentials } from "@grpc/grpc-js";
-import type { AttributeValue, Attributes } from "@opentelemetry/api";
+import type { Attributes } from "@opentelemetry/api";
 import { SpanKind, SpanStatusCode, metrics } from "@opentelemetry/api";
 import type { MetricReader } from "@opentelemetry/sdk-metrics";
 import { MeterProvider } from "@opentelemetry/sdk-metrics";
@@ -20,7 +20,7 @@ import {
 import { UnsecuredJWT } from "jose";
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 
-import type { Client } from "@cerbos/core";
+import type { Client, DecisionLogEntry } from "@cerbos/core";
 import { NotOK, Status } from "@cerbos/core";
 import type { DecodedJWTPayload } from "@cerbos/embedded";
 import { Embedded } from "@cerbos/embedded";
@@ -32,8 +32,10 @@ import {
   TestMetricReader,
   bundleFilePath,
   captureSpan,
+  describeIfCerbosVersionIsAtLeast,
   expectMetrics,
   fetchSpans,
+  getDecisionLogEntry,
   invalidArgumentDetails,
 } from "../helpers";
 import { QueryServiceClient } from "../protobuf/jaeger/proto/api_v3/query_service";
@@ -41,7 +43,20 @@ import type { KeyValue as KeyValueProto } from "../protobuf/opentelemetry/proto/
 import type { Span as SpanProto } from "../protobuf/opentelemetry/proto/trace/v1/trace";
 import { Span_SpanKind as SpanKindProto } from "../protobuf/opentelemetry/proto/trace/v1/trace";
 import type { CerbosPorts } from "../servers";
-import { cerbosVersionIsAtLeast, ports as serverPorts } from "../servers";
+import {
+  adminCredentials,
+  cerbosVersionIsAtLeast,
+  ports as serverPorts,
+  tls,
+} from "../servers";
+
+interface ExpectedAttributes extends Attributes {
+  [SEMATTRS_RPC_SYSTEM]: string;
+  [SEMATTRS_RPC_SERVICE]: string;
+  [SEMATTRS_RPC_METHOD]: string;
+  [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status;
+  "cerbos.error"?: string;
+}
 
 describe("CerbosInstrumentation", () => {
   let jaegerPort: number;
@@ -57,12 +72,12 @@ describe("CerbosInstrumentation", () => {
     cerbosPorts =
       cerbosVersionIsAtLeast("0.30.0") && !cerbosVersionIsAtLeast("0.32.0")
         ? ports.tracing
-        : ports.plaintext;
+        : ports.tls;
 
     metricReader = new TestMetricReader();
-    const meterProvider = new MeterProvider();
-    meterProvider.addMetricReader(metricReader);
-    metrics.setGlobalMeterProvider(meterProvider);
+    metrics.setGlobalMeterProvider(
+      new MeterProvider({ readers: [metricReader] }),
+    );
 
     spanExporter = new InMemorySpanExporter();
     const tracerProvider = new NodeTracerProvider();
@@ -72,7 +87,8 @@ describe("CerbosInstrumentation", () => {
     cerbosInstrumentation.enable();
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    await metricReader.forceFlush();
     spanExporter.reset();
   });
 
@@ -85,11 +101,15 @@ describe("CerbosInstrumentation", () => {
     {
       type: "gRPC",
       client: (): Client =>
-        new GRPC(`localhost:${cerbosPorts.grpc}`, { tls: false }),
+        new GRPC(`localhost:${cerbosPorts.grpc}`, {
+          tls: tls(),
+          adminCredentials,
+        }),
     },
     {
       type: "HTTP",
-      client: (): Client => new HTTP(`http://localhost:${cerbosPorts.http}`),
+      client: (): Client =>
+        new HTTP(`https://localhost:${cerbosPorts.http}`, { adminCredentials }),
     },
     {
       type: "Embedded",
@@ -110,95 +130,8 @@ describe("CerbosInstrumentation", () => {
         client = factory();
       });
 
-      it("records spans for successful calls", async () => {
-        const [result, span] = await captureSpan(
-          spanExporter,
-          async () =>
-            await client.isAllowed({
-              principal: {
-                id: "someone@example.com",
-                roles: ["USER"],
-              },
-              resource: {
-                kind: "folder",
-                id: "test",
-              },
-              action: "edit",
-            }),
-        );
-
-        const attributes: Attributes = {
-          [SEMATTRS_RPC_SYSTEM]: "grpc",
-          [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
-          [SEMATTRS_RPC_METHOD]: "CheckResources",
-          [SEMATTRS_RPC_GRPC_STATUS_CODE]: 0,
-        };
-
-        expect(result).toEqual({ value: false });
-        expect(span).toMatchObject({
-          name: "cerbos.svc.v1.CerbosService/CheckResources",
-          kind: SpanKind.CLIENT,
-          attributes,
-          status: {
-            code: SpanStatusCode.UNSET,
-          },
-        } satisfies Partial<ReadableSpan>);
-
-        await expectMetrics(metricReader, attributes, span.duration);
-
-        // Embedded policy bundles don't produce server spans, and Cerbos didn't include the otelgrpc interceptors until 0.30.0.
-        if (type !== "Embedded" && cerbosVersionIsAtLeast("0.30.0")) {
-          const jaeger = new QueryServiceClient(
-            `localhost:${jaegerPort}`,
-            ChannelCredentials.createInsecure(),
-          );
-
-          const spans = await fetchSpans(jaeger, span.spanContext().traceId);
-
-          expect(spans).toContainEqual(
-            expect.objectContaining({
-              name: "cerbos.svc.v1.CerbosService/CheckResources",
-              kind: SpanKindProto.SPAN_KIND_SERVER,
-              attributes: expect.arrayContaining([
-                {
-                  key: SEMATTRS_RPC_SYSTEM,
-                  value: {
-                    value: { $case: "stringValue", stringValue: "grpc" },
-                  },
-                },
-                {
-                  key: SEMATTRS_RPC_SERVICE,
-                  value: {
-                    value: {
-                      $case: "stringValue",
-                      stringValue: "cerbos.svc.v1.CerbosService",
-                    },
-                  },
-                },
-                {
-                  key: SEMATTRS_RPC_METHOD,
-                  value: {
-                    value: {
-                      $case: "stringValue",
-                      stringValue: "CheckResources",
-                    },
-                  },
-                },
-                {
-                  key: SEMATTRS_RPC_GRPC_STATUS_CODE,
-                  value: {
-                    value: { $case: "intValue", intValue: "0" },
-                  },
-                },
-              ] satisfies KeyValueProto[]) as unknown as KeyValueProto[],
-            } satisfies Partial<SpanProto>),
-          );
-        }
-      });
-
-      // Embedded policy bundles don't produce invalid argument errors
-      if (type !== "Embedded") {
-        it("records spans for unsuccessful calls", async () => {
+      describe("unary", () => {
+        it("records spans for successful calls", async () => {
           const [result, span] = await captureSpan(
             spanExporter,
             async () =>
@@ -211,37 +144,306 @@ describe("CerbosInstrumentation", () => {
                   kind: "folder",
                   id: "test",
                 },
-                action: "",
+                action: "edit",
               }),
           );
 
-          const attributes: Attributes = {
+          const attributes: ExpectedAttributes = {
             [SEMATTRS_RPC_SYSTEM]: "grpc",
             [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
             [SEMATTRS_RPC_METHOD]: "CheckResources",
-            [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
-            "cerbos.error": invalidArgumentDetails as unknown as AttributeValue,
+            [SEMATTRS_RPC_GRPC_STATUS_CODE]: 0,
           };
 
-          expect(result).toEqual({
-            error: expect.objectContaining({
-              constructor: NotOK,
-              code: Status.INVALID_ARGUMENT,
-              details: invalidArgumentDetails,
-            }),
-          });
+          expect(result).toEqual({ value: false });
 
           expect(span).toMatchObject({
             name: "cerbos.svc.v1.CerbosService/CheckResources",
             kind: SpanKind.CLIENT,
             attributes,
             status: {
-              code: SpanStatusCode.ERROR,
+              code: SpanStatusCode.UNSET,
             },
           } satisfies Partial<ReadableSpan>);
 
           await expectMetrics(metricReader, attributes, span.duration);
+
+          await expectServerSpan(span, attributes);
         });
+
+        // Embedded policy bundles don't produce invalid argument errors
+        if (type !== "Embedded") {
+          it("records spans for unsuccessful calls", async () => {
+            const [result, span] = await captureSpan(
+              spanExporter,
+              async () =>
+                await client.isAllowed({
+                  principal: {
+                    id: "someone@example.com",
+                    roles: ["USER"],
+                  },
+                  resource: {
+                    kind: "folder",
+                    id: "test",
+                  },
+                  action: "",
+                }),
+            );
+
+            const attributes: ExpectedAttributes = {
+              [SEMATTRS_RPC_SYSTEM]: "grpc",
+              [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
+              [SEMATTRS_RPC_METHOD]: "CheckResources",
+              [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
+              "cerbos.error": invalidArgumentDetails,
+            };
+
+            expect(result).toEqual({
+              error: expect.objectContaining({
+                constructor: NotOK,
+                code: Status.INVALID_ARGUMENT,
+                details: invalidArgumentDetails,
+              }),
+            });
+
+            expect(span).toMatchObject({
+              name: "cerbos.svc.v1.CerbosService/CheckResources",
+              kind: SpanKind.CLIENT,
+              attributes,
+              status: {
+                code: SpanStatusCode.ERROR,
+              },
+            } satisfies Partial<ReadableSpan>);
+
+            await expectMetrics(metricReader, attributes, span.duration);
+
+            await expectServerSpan(span, attributes);
+          });
+        }
+      });
+
+      // Embedded policy bundles don't implement server streams
+      if (type !== "Embedded") {
+        // Prior to 0.33.0, the minimum flushInterval for audit logs was 5s, which makes this painfully slow.
+        describeIfCerbosVersionIsAtLeast("0.33.0")("serverStream", () => {
+          it("records spans for successful calls", async () => {
+            const { cerbosCallId: callId } = await client.checkResources({
+              principal: {
+                id: "someone@example.com",
+                roles: ["USER"],
+              },
+              resources: [
+                {
+                  resource: {
+                    kind: "folder",
+                    id: "test",
+                  },
+                  actions: ["edit"],
+                },
+              ],
+            });
+
+            const entry = await getDecisionLogEntry(client, callId);
+
+            await metricReader.forceFlush();
+
+            const [result, span] = await captureSpan(spanExporter, async () => {
+              let result: DecisionLogEntry | undefined = undefined;
+
+              for await (const entry of client.listDecisionLogEntries({
+                filter: { tail: 10 },
+              })) {
+                if (entry.callId === callId) {
+                  result = entry;
+                }
+              }
+
+              if (!result) {
+                throw new Error(
+                  `Decision log entry with call ID ${callId} not found`,
+                );
+              }
+
+              return result;
+            });
+
+            const attributes: ExpectedAttributes = {
+              [SEMATTRS_RPC_SYSTEM]: "grpc",
+              [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
+              [SEMATTRS_RPC_METHOD]: "ListAuditLogEntries",
+              [SEMATTRS_RPC_GRPC_STATUS_CODE]: 0,
+            };
+
+            expect(result).toEqual({ value: entry });
+
+            expect(span).toMatchObject({
+              name: "cerbos.svc.v1.CerbosAdminService/ListAuditLogEntries",
+              kind: SpanKind.CLIENT,
+              attributes,
+              status: {
+                code: SpanStatusCode.UNSET,
+              },
+            } satisfies Partial<ReadableSpan>);
+
+            await expectMetrics(metricReader, attributes, span.duration);
+
+            await expectServerSpan(span, attributes);
+          });
+
+          it("records spans for unsuccessful calls", async () => {
+            const [result, span] = await captureSpan(
+              spanExporter,
+              async () => await client.getDecisionLogEntry("wat"),
+            );
+
+            const attributes: ExpectedAttributes = {
+              [SEMATTRS_RPC_SYSTEM]: "grpc",
+              [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
+              [SEMATTRS_RPC_METHOD]: "ListAuditLogEntries",
+              [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
+              "cerbos.error": invalidArgumentDetails,
+            };
+
+            expect(result).toEqual({
+              error: expect.objectContaining({
+                constructor: NotOK,
+                code: Status.INVALID_ARGUMENT,
+                details: invalidArgumentDetails,
+              }),
+            });
+
+            expect(span).toMatchObject({
+              name: "cerbos.svc.v1.CerbosAdminService/ListAuditLogEntries",
+              kind: SpanKind.CLIENT,
+              attributes,
+              status: {
+                code: SpanStatusCode.ERROR,
+              },
+            } satisfies Partial<ReadableSpan>);
+
+            await expectMetrics(metricReader, attributes, span.duration);
+
+            await expectServerSpan(span, attributes);
+          });
+
+          it("records spans for internally-aborted calls", async () => {
+            const { cerbosCallId: callId } = await client.checkResources({
+              principal: {
+                id: "someone@example.com",
+                roles: ["USER"],
+              },
+              resources: [
+                {
+                  resource: {
+                    kind: "folder",
+                    id: "test",
+                  },
+                  actions: ["edit"],
+                },
+              ],
+            });
+
+            const entry = await getDecisionLogEntry(client, callId);
+
+            await metricReader.forceFlush();
+
+            const [result, span] = await captureSpan(
+              spanExporter,
+              async () => await client.getDecisionLogEntry(callId),
+            );
+
+            const attributes = {
+              [SEMATTRS_RPC_SYSTEM]: "grpc",
+              [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
+              [SEMATTRS_RPC_METHOD]: "ListAuditLogEntries",
+              [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status.CANCELLED,
+              "cerbos.error": expect.stringContaining("Aborted"),
+            } satisfies Attributes;
+
+            expect(result).toEqual({ value: entry });
+
+            expect(span).toMatchObject({
+              name: "cerbos.svc.v1.CerbosAdminService/ListAuditLogEntries",
+              kind: SpanKind.CLIENT,
+              attributes,
+              status: {
+                code: SpanStatusCode.ERROR,
+              },
+            } satisfies Partial<ReadableSpan>);
+
+            await expectMetrics(metricReader, attributes, span.duration);
+
+            await expectServerSpan(span, {
+              ...attributes,
+              [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status.OK, // Although the call is aborted after returning early from for-await on the client, it completes successfully on the server
+            });
+          });
+        });
+      }
+
+      async function expectServerSpan(
+        clientSpan: ReadableSpan,
+        attributes: ExpectedAttributes,
+      ): Promise<void> {
+        // Embedded policy bundles don't produce server spans, and Cerbos didn't include the otelgrpc interceptors until 0.30.0.
+        if (type === "Embedded" || !cerbosVersionIsAtLeast("0.30.0")) {
+          return;
+        }
+        const jaeger = new QueryServiceClient(
+          `localhost:${jaegerPort}`,
+          ChannelCredentials.createInsecure(),
+        );
+
+        const spans = await fetchSpans(
+          jaeger,
+          clientSpan.spanContext().traceId,
+        );
+
+        expect(spans).toContainEqual(
+          expect.objectContaining({
+            name: clientSpan.name,
+            kind: SpanKindProto.SPAN_KIND_SERVER,
+            attributes: expect.arrayContaining([
+              {
+                key: SEMATTRS_RPC_SYSTEM,
+                value: {
+                  value: {
+                    $case: "stringValue",
+                    stringValue: attributes[SEMATTRS_RPC_SYSTEM],
+                  },
+                },
+              },
+              {
+                key: SEMATTRS_RPC_SERVICE,
+                value: {
+                  value: {
+                    $case: "stringValue",
+                    stringValue: attributes[SEMATTRS_RPC_SERVICE],
+                  },
+                },
+              },
+              {
+                key: SEMATTRS_RPC_METHOD,
+                value: {
+                  value: {
+                    $case: "stringValue",
+                    stringValue: attributes[SEMATTRS_RPC_METHOD],
+                  },
+                },
+              },
+              {
+                key: SEMATTRS_RPC_GRPC_STATUS_CODE,
+                value: {
+                  value: {
+                    $case: "intValue",
+                    intValue:
+                      attributes[SEMATTRS_RPC_GRPC_STATUS_CODE].toString(),
+                  },
+                },
+              },
+            ] satisfies KeyValueProto[]),
+          } satisfies Partial<SpanProto>),
+        );
       }
     },
   );

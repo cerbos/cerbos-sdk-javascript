@@ -32,7 +32,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[(constructor)({ requestId, results, })](./core.checkresourcesresponse._constructor_.md)
+[(constructor)({ cerbosCallId, requestId, results, })](./core.checkresourcesresponse._constructor_.md)
 
 
 </td><td>
@@ -70,6 +70,25 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[cerbosCallId](./core.checkresourcesresponse.cerboscallid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The unique identifier for the request used in audit logs.
+
+
+</td></tr>
+<tr><td>
 
 [requestId](./core.checkresourcesresponse.requestid.md)
 

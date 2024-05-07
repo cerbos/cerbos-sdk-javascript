@@ -6,10 +6,12 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { Empty } from "../../../google/protobuf/empty";
 import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
-import { Effect, effectFromJSON } from "../../effect/v1/effect";
+import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
 import { OutputEntry, PlanResourcesFilter } from "../../engine/v1/engine";
-import { ValidationError } from "../../schema/v1/schema";
+import { Policy } from "../../policy/v1/policy";
+import { Schema, ValidationError } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.response.v1";
 
@@ -137,6 +139,10 @@ export interface CheckResourcesResponse_ResultEntry_ActionsEntry {
   value: Effect;
 }
 
+export interface AddOrUpdatePolicyResponse {
+  success: Empty | undefined;
+}
+
 export interface ListAuditLogEntriesResponse {
   entry?:
     | { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry }
@@ -152,6 +158,38 @@ export interface ServerInfoResponse {
   commit: string;
   buildDate: string;
 }
+
+export interface ListPoliciesResponse {
+  policyIds: string[];
+}
+
+export interface GetPolicyResponse {
+  policies: Policy[];
+}
+
+export interface DisablePolicyResponse {
+  disabledPolicies: number;
+}
+
+export interface EnablePolicyResponse {
+  enabledPolicies: number;
+}
+
+export interface AddOrUpdateSchemaResponse {}
+
+export interface ListSchemasResponse {
+  schemaIds: string[];
+}
+
+export interface GetSchemaResponse {
+  schemas: Schema[];
+}
+
+export interface DeleteSchemaResponse {
+  deletedSchemas: number;
+}
+
+export interface ReloadStoreResponse {}
 
 function createBasePlanResourcesResponse(): PlanResourcesResponse {
   return {
@@ -311,6 +349,37 @@ export const PlanResourcesResponse = {
         : "",
     };
   },
+
+  toJSON(message: PlanResourcesResponse): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.action !== "") {
+      obj.action = message.action;
+    }
+    if (message.resourceKind !== "") {
+      obj.resourceKind = message.resourceKind;
+    }
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.filter !== undefined) {
+      obj.filter = PlanResourcesFilter.toJSON(message.filter);
+    }
+    if (message.meta !== undefined) {
+      obj.meta = PlanResourcesResponse_Meta.toJSON(message.meta);
+    }
+    if (message.validationErrors?.length) {
+      obj.validationErrors = message.validationErrors.map((e) =>
+        ValidationError.toJSON(e),
+      );
+    }
+    if (message.cerbosCallId !== "") {
+      obj.cerbosCallId = message.cerbosCallId;
+    }
+    return obj;
+  },
 };
 
 function createBasePlanResourcesResponse_Meta(): PlanResourcesResponse_Meta {
@@ -374,6 +443,17 @@ export const PlanResourcesResponse_Meta = {
         ? globalThis.String(object.matchedScope)
         : "",
     };
+  },
+
+  toJSON(message: PlanResourcesResponse_Meta): unknown {
+    const obj: any = {};
+    if (message.filterDebug !== "") {
+      obj.filterDebug = message.filterDebug;
+    }
+    if (message.matchedScope !== "") {
+      obj.matchedScope = message.matchedScope;
+    }
+    return obj;
   },
 };
 
@@ -472,6 +552,27 @@ export const CheckResourceSetResponse = {
         : undefined,
     };
   },
+
+  toJSON(message: CheckResourceSetResponse): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.resourceInstances) {
+      const entries = Object.entries(message.resourceInstances);
+      if (entries.length > 0) {
+        obj.resourceInstances = {};
+        entries.forEach(([k, v]) => {
+          obj.resourceInstances[k] =
+            CheckResourceSetResponse_ActionEffectMap.toJSON(v);
+        });
+      }
+    }
+    if (message.meta !== undefined) {
+      obj.meta = CheckResourceSetResponse_Meta.toJSON(message.meta);
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourceSetResponse_ActionEffectMap(): CheckResourceSetResponse_ActionEffectMap {
@@ -554,6 +655,25 @@ export const CheckResourceSetResponse_ActionEffectMap = {
         : [],
     };
   },
+
+  toJSON(message: CheckResourceSetResponse_ActionEffectMap): unknown {
+    const obj: any = {};
+    if (message.actions) {
+      const entries = Object.entries(message.actions);
+      if (entries.length > 0) {
+        obj.actions = {};
+        entries.forEach(([k, v]) => {
+          obj.actions[k] = effectToJSON(v);
+        });
+      }
+    }
+    if (message.validationErrors?.length) {
+      obj.validationErrors = message.validationErrors.map((e) =>
+        ValidationError.toJSON(e),
+      );
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourceSetResponse_ActionEffectMap_ActionsEntry(): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
@@ -614,6 +734,19 @@ export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? effectFromJSON(object.value) : 0,
     };
+  },
+
+  toJSON(
+    message: CheckResourceSetResponse_ActionEffectMap_ActionsEntry,
+  ): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== 0) {
+      obj.value = effectToJSON(message.value);
+    }
+    return obj;
   },
 };
 
@@ -681,6 +814,21 @@ export const CheckResourceSetResponse_Meta = {
         : {},
     };
   },
+
+  toJSON(message: CheckResourceSetResponse_Meta): unknown {
+    const obj: any = {};
+    if (message.resourceInstances) {
+      const entries = Object.entries(message.resourceInstances);
+      if (entries.length > 0) {
+        obj.resourceInstances = {};
+        entries.forEach(([k, v]) => {
+          obj.resourceInstances[k] =
+            CheckResourceSetResponse_Meta_ActionMeta.toJSON(v);
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourceSetResponse_Meta_EffectMeta(): CheckResourceSetResponse_Meta_EffectMeta {
@@ -744,6 +892,17 @@ export const CheckResourceSetResponse_Meta_EffectMeta = {
         ? globalThis.String(object.matchedScope)
         : "",
     };
+  },
+
+  toJSON(message: CheckResourceSetResponse_Meta_EffectMeta): unknown {
+    const obj: any = {};
+    if (message.matchedPolicy !== "") {
+      obj.matchedPolicy = message.matchedPolicy;
+    }
+    if (message.matchedScope !== "") {
+      obj.matchedScope = message.matchedScope;
+    }
+    return obj;
   },
 };
 
@@ -826,6 +985,23 @@ export const CheckResourceSetResponse_Meta_ActionMeta = {
         : [],
     };
   },
+
+  toJSON(message: CheckResourceSetResponse_Meta_ActionMeta): unknown {
+    const obj: any = {};
+    if (message.actions) {
+      const entries = Object.entries(message.actions);
+      if (entries.length > 0) {
+        obj.actions = {};
+        entries.forEach(([k, v]) => {
+          obj.actions[k] = CheckResourceSetResponse_Meta_EffectMeta.toJSON(v);
+        });
+      }
+    }
+    if (message.effectiveDerivedRoles?.length) {
+      obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourceSetResponse_Meta_ActionMeta_ActionsEntry(): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
@@ -894,6 +1070,21 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
         ? CheckResourceSetResponse_Meta_EffectMeta.fromJSON(object.value)
         : undefined,
     };
+  },
+
+  toJSON(
+    message: CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry,
+  ): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = CheckResourceSetResponse_Meta_EffectMeta.toJSON(
+        message.value,
+      );
+    }
+    return obj;
   },
 };
 
@@ -964,6 +1155,21 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
         : undefined,
     };
   },
+
+  toJSON(
+    message: CheckResourceSetResponse_Meta_ResourceInstancesEntry,
+  ): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = CheckResourceSetResponse_Meta_ActionMeta.toJSON(
+        message.value,
+      );
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourceSetResponse_ResourceInstancesEntry(): CheckResourceSetResponse_ResourceInstancesEntry {
@@ -1031,6 +1237,19 @@ export const CheckResourceSetResponse_ResourceInstancesEntry = {
         ? CheckResourceSetResponse_ActionEffectMap.fromJSON(object.value)
         : undefined,
     };
+  },
+
+  toJSON(message: CheckResourceSetResponse_ResourceInstancesEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = CheckResourceSetResponse_ActionEffectMap.toJSON(
+        message.value,
+      );
+    }
+    return obj;
   },
 };
 
@@ -1105,6 +1324,19 @@ export const CheckResourceBatchResponse = {
           )
         : [],
     };
+  },
+
+  toJSON(message: CheckResourceBatchResponse): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.results?.length) {
+      obj.results = message.results.map((e) =>
+        CheckResourceBatchResponse_ActionEffectMap.toJSON(e),
+      );
+    }
+    return obj;
   },
 };
 
@@ -1201,6 +1433,28 @@ export const CheckResourceBatchResponse_ActionEffectMap = {
         : [],
     };
   },
+
+  toJSON(message: CheckResourceBatchResponse_ActionEffectMap): unknown {
+    const obj: any = {};
+    if (message.resourceId !== "") {
+      obj.resourceId = message.resourceId;
+    }
+    if (message.actions) {
+      const entries = Object.entries(message.actions);
+      if (entries.length > 0) {
+        obj.actions = {};
+        entries.forEach(([k, v]) => {
+          obj.actions[k] = effectToJSON(v);
+        });
+      }
+    }
+    if (message.validationErrors?.length) {
+      obj.validationErrors = message.validationErrors.map((e) =>
+        ValidationError.toJSON(e),
+      );
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry(): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
@@ -1263,6 +1517,19 @@ export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? effectFromJSON(object.value) : 0,
     };
+  },
+
+  toJSON(
+    message: CheckResourceBatchResponse_ActionEffectMap_ActionsEntry,
+  ): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== 0) {
+      obj.value = effectToJSON(message.value);
+    }
+    return obj;
   },
 };
 
@@ -1347,6 +1614,22 @@ export const CheckResourcesResponse = {
         ? globalThis.String(object.cerbosCallId)
         : "",
     };
+  },
+
+  toJSON(message: CheckResourcesResponse): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.results?.length) {
+      obj.results = message.results.map((e) =>
+        CheckResourcesResponse_ResultEntry.toJSON(e),
+      );
+    }
+    if (message.cerbosCallId !== "") {
+      obj.cerbosCallId = message.cerbosCallId;
+    }
+    return obj;
   },
 };
 
@@ -1486,6 +1769,36 @@ export const CheckResourcesResponse_ResultEntry = {
         : [],
     };
   },
+
+  toJSON(message: CheckResourcesResponse_ResultEntry): unknown {
+    const obj: any = {};
+    if (message.resource !== undefined) {
+      obj.resource = CheckResourcesResponse_ResultEntry_Resource.toJSON(
+        message.resource,
+      );
+    }
+    if (message.actions) {
+      const entries = Object.entries(message.actions);
+      if (entries.length > 0) {
+        obj.actions = {};
+        entries.forEach(([k, v]) => {
+          obj.actions[k] = effectToJSON(v);
+        });
+      }
+    }
+    if (message.validationErrors?.length) {
+      obj.validationErrors = message.validationErrors.map((e) =>
+        ValidationError.toJSON(e),
+      );
+    }
+    if (message.meta !== undefined) {
+      obj.meta = CheckResourcesResponse_ResultEntry_Meta.toJSON(message.meta);
+    }
+    if (message.outputs?.length) {
+      obj.outputs = message.outputs.map((e) => OutputEntry.toJSON(e));
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourcesResponse_ResultEntry_Resource(): CheckResourcesResponse_ResultEntry_Resource {
@@ -1569,6 +1882,23 @@ export const CheckResourcesResponse_ResultEntry_Resource = {
         : "",
       scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
+  },
+
+  toJSON(message: CheckResourcesResponse_ResultEntry_Resource): unknown {
+    const obj: any = {};
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.kind !== "") {
+      obj.kind = message.kind;
+    }
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    return obj;
   },
 };
 
@@ -1654,6 +1984,24 @@ export const CheckResourcesResponse_ResultEntry_Meta = {
         : [],
     };
   },
+
+  toJSON(message: CheckResourcesResponse_ResultEntry_Meta): unknown {
+    const obj: any = {};
+    if (message.actions) {
+      const entries = Object.entries(message.actions);
+      if (entries.length > 0) {
+        obj.actions = {};
+        entries.forEach(([k, v]) => {
+          obj.actions[k] =
+            CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(v);
+        });
+      }
+    }
+    if (message.effectiveDerivedRoles?.length) {
+      obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta(): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
@@ -1718,6 +2066,17 @@ export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
         ? globalThis.String(object.matchedScope)
         : "",
     };
+  },
+
+  toJSON(message: CheckResourcesResponse_ResultEntry_Meta_EffectMeta): unknown {
+    const obj: any = {};
+    if (message.matchedPolicy !== "") {
+      obj.matchedPolicy = message.matchedPolicy;
+    }
+    if (message.matchedScope !== "") {
+      obj.matchedScope = message.matchedScope;
+    }
+    return obj;
   },
 };
 
@@ -1791,6 +2150,21 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
         : undefined,
     };
   },
+
+  toJSON(
+    message: CheckResourcesResponse_ResultEntry_Meta_ActionsEntry,
+  ): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(
+        message.value,
+      );
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourcesResponse_ResultEntry_ActionsEntry(): CheckResourcesResponse_ResultEntry_ActionsEntry {
@@ -1850,6 +2224,76 @@ export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? effectFromJSON(object.value) : 0,
     };
+  },
+
+  toJSON(message: CheckResourcesResponse_ResultEntry_ActionsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== 0) {
+      obj.value = effectToJSON(message.value);
+    }
+    return obj;
+  },
+};
+
+function createBaseAddOrUpdatePolicyResponse(): AddOrUpdatePolicyResponse {
+  return { success: undefined };
+}
+
+export const AddOrUpdatePolicyResponse = {
+  encode(
+    message: AddOrUpdatePolicyResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.success !== undefined) {
+      Empty.encode(message.success, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): AddOrUpdatePolicyResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAddOrUpdatePolicyResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.success = Empty.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AddOrUpdatePolicyResponse {
+    return {
+      success: isSet(object.success)
+        ? Empty.fromJSON(object.success)
+        : undefined,
+    };
+  },
+
+  toJSON(message: AddOrUpdatePolicyResponse): unknown {
+    const obj: any = {};
+    if (message.success !== undefined) {
+      obj.success = Empty.toJSON(message.success);
+    }
+    return obj;
   },
 };
 
@@ -1936,6 +2380,19 @@ export const ListAuditLogEntriesResponse = {
           : undefined,
     };
   },
+
+  toJSON(message: ListAuditLogEntriesResponse): unknown {
+    const obj: any = {};
+    if (message.entry?.$case === "accessLogEntry") {
+      obj.accessLogEntry = AccessLogEntry.toJSON(message.entry.accessLogEntry);
+    }
+    if (message.entry?.$case === "decisionLogEntry") {
+      obj.decisionLogEntry = DecisionLogEntry.toJSON(
+        message.entry.decisionLogEntry,
+      );
+    }
+    return obj;
+  },
 };
 
 function createBaseServerInfoResponse(): ServerInfoResponse {
@@ -2005,6 +2462,505 @@ export const ServerInfoResponse = {
         ? globalThis.String(object.buildDate)
         : "",
     };
+  },
+
+  toJSON(message: ServerInfoResponse): unknown {
+    const obj: any = {};
+    if (message.version !== "") {
+      obj.version = message.version;
+    }
+    if (message.commit !== "") {
+      obj.commit = message.commit;
+    }
+    if (message.buildDate !== "") {
+      obj.buildDate = message.buildDate;
+    }
+    return obj;
+  },
+};
+
+function createBaseListPoliciesResponse(): ListPoliciesResponse {
+  return { policyIds: [] };
+}
+
+export const ListPoliciesResponse = {
+  encode(
+    message: ListPoliciesResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.policyIds) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ListPoliciesResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListPoliciesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.policyIds.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ListPoliciesResponse {
+    return {
+      policyIds: globalThis.Array.isArray(object?.policyIds)
+        ? object.policyIds.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: ListPoliciesResponse): unknown {
+    const obj: any = {};
+    if (message.policyIds?.length) {
+      obj.policyIds = message.policyIds;
+    }
+    return obj;
+  },
+};
+
+function createBaseGetPolicyResponse(): GetPolicyResponse {
+  return { policies: [] };
+}
+
+export const GetPolicyResponse = {
+  encode(
+    message: GetPolicyResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.policies) {
+      Policy.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetPolicyResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetPolicyResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.policies.push(Policy.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetPolicyResponse {
+    return {
+      policies: globalThis.Array.isArray(object?.policies)
+        ? object.policies.map((e: any) => Policy.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: GetPolicyResponse): unknown {
+    const obj: any = {};
+    if (message.policies?.length) {
+      obj.policies = message.policies.map((e) => Policy.toJSON(e));
+    }
+    return obj;
+  },
+};
+
+function createBaseDisablePolicyResponse(): DisablePolicyResponse {
+  return { disabledPolicies: 0 };
+}
+
+export const DisablePolicyResponse = {
+  encode(
+    message: DisablePolicyResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.disabledPolicies !== 0) {
+      writer.uint32(8).uint32(message.disabledPolicies);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DisablePolicyResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDisablePolicyResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.disabledPolicies = reader.uint32();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DisablePolicyResponse {
+    return {
+      disabledPolicies: isSet(object.disabledPolicies)
+        ? globalThis.Number(object.disabledPolicies)
+        : 0,
+    };
+  },
+
+  toJSON(message: DisablePolicyResponse): unknown {
+    const obj: any = {};
+    if (message.disabledPolicies !== 0) {
+      obj.disabledPolicies = Math.round(message.disabledPolicies);
+    }
+    return obj;
+  },
+};
+
+function createBaseEnablePolicyResponse(): EnablePolicyResponse {
+  return { enabledPolicies: 0 };
+}
+
+export const EnablePolicyResponse = {
+  encode(
+    message: EnablePolicyResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.enabledPolicies !== 0) {
+      writer.uint32(8).uint32(message.enabledPolicies);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): EnablePolicyResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnablePolicyResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.enabledPolicies = reader.uint32();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnablePolicyResponse {
+    return {
+      enabledPolicies: isSet(object.enabledPolicies)
+        ? globalThis.Number(object.enabledPolicies)
+        : 0,
+    };
+  },
+
+  toJSON(message: EnablePolicyResponse): unknown {
+    const obj: any = {};
+    if (message.enabledPolicies !== 0) {
+      obj.enabledPolicies = Math.round(message.enabledPolicies);
+    }
+    return obj;
+  },
+};
+
+function createBaseAddOrUpdateSchemaResponse(): AddOrUpdateSchemaResponse {
+  return {};
+}
+
+export const AddOrUpdateSchemaResponse = {
+  encode(
+    _: AddOrUpdateSchemaResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): AddOrUpdateSchemaResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAddOrUpdateSchemaResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): AddOrUpdateSchemaResponse {
+    return {};
+  },
+
+  toJSON(_: AddOrUpdateSchemaResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+};
+
+function createBaseListSchemasResponse(): ListSchemasResponse {
+  return { schemaIds: [] };
+}
+
+export const ListSchemasResponse = {
+  encode(
+    message: ListSchemasResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.schemaIds) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListSchemasResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListSchemasResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.schemaIds.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ListSchemasResponse {
+    return {
+      schemaIds: globalThis.Array.isArray(object?.schemaIds)
+        ? object.schemaIds.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: ListSchemasResponse): unknown {
+    const obj: any = {};
+    if (message.schemaIds?.length) {
+      obj.schemaIds = message.schemaIds;
+    }
+    return obj;
+  },
+};
+
+function createBaseGetSchemaResponse(): GetSchemaResponse {
+  return { schemas: [] };
+}
+
+export const GetSchemaResponse = {
+  encode(
+    message: GetSchemaResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.schemas) {
+      Schema.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetSchemaResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetSchemaResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.schemas.push(Schema.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetSchemaResponse {
+    return {
+      schemas: globalThis.Array.isArray(object?.schemas)
+        ? object.schemas.map((e: any) => Schema.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: GetSchemaResponse): unknown {
+    const obj: any = {};
+    if (message.schemas?.length) {
+      obj.schemas = message.schemas.map((e) => Schema.toJSON(e));
+    }
+    return obj;
+  },
+};
+
+function createBaseDeleteSchemaResponse(): DeleteSchemaResponse {
+  return { deletedSchemas: 0 };
+}
+
+export const DeleteSchemaResponse = {
+  encode(
+    message: DeleteSchemaResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.deletedSchemas !== 0) {
+      writer.uint32(8).uint32(message.deletedSchemas);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DeleteSchemaResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDeleteSchemaResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.deletedSchemas = reader.uint32();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DeleteSchemaResponse {
+    return {
+      deletedSchemas: isSet(object.deletedSchemas)
+        ? globalThis.Number(object.deletedSchemas)
+        : 0,
+    };
+  },
+
+  toJSON(message: DeleteSchemaResponse): unknown {
+    const obj: any = {};
+    if (message.deletedSchemas !== 0) {
+      obj.deletedSchemas = Math.round(message.deletedSchemas);
+    }
+    return obj;
+  },
+};
+
+function createBaseReloadStoreResponse(): ReloadStoreResponse {
+  return {};
+}
+
+export const ReloadStoreResponse = {
+  encode(
+    _: ReloadStoreResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ReloadStoreResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseReloadStoreResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): ReloadStoreResponse {
+    return {};
+  },
+
+  toJSON(_: ReloadStoreResponse): unknown {
+    const obj: any = {};
+    return obj;
   },
 };
 

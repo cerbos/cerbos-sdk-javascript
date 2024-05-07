@@ -65,6 +65,14 @@ export const FieldConstraints = {
         : [],
     };
   },
+
+  toJSON(message: FieldConstraints): unknown {
+    const obj: any = {};
+    if (message.cel?.length) {
+      obj.cel = message.cel.map((e) => Constraint.toJSON(e));
+    }
+    return obj;
+  },
 };
 
 function createBaseConstraint(): Constraint {
@@ -134,6 +142,20 @@ export const Constraint = {
         ? globalThis.String(object.expression)
         : "",
     };
+  },
+
+  toJSON(message: Constraint): unknown {
+    const obj: any = {};
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.message !== "") {
+      obj.message = message.message;
+    }
+    if (message.expression !== "") {
+      obj.expression = message.expression;
+    }
+    return obj;
   },
 };
 

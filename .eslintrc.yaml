@@ -22,6 +22,9 @@ rules:
   "@typescript-eslint/explicit-function-return-type": warn
   "@typescript-eslint/explicit-member-accessibility": warn
   "@typescript-eslint/no-confusing-void-expression": warn
+  "@typescript-eslint/no-unnecessary-condition":
+    - warn
+    - allowConstantLoopConditions: true
   "@typescript-eslint/no-unused-vars":
     - warn
     - argsIgnorePattern: ^_
@@ -67,8 +70,11 @@ rules:
         - index
       newlines-between: always
   no-console: warn
+  no-constant-condition:
+    - warn
+    - checkLoops: false
   quotes:
-    - error
+    - warn
     - double
     - avoidEscape: true
   sort-imports:

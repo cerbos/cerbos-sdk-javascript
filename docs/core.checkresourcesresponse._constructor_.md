@@ -9,7 +9,7 @@ Constructs a new instance of the `CheckResourcesResponse` class
 **Signature:**
 
 ```typescript
-constructor({ requestId, results, }: Pick<CheckResourcesResponse, "requestId" | "results">);
+constructor({ cerbosCallId, requestId, results, }: Pick<CheckResourcesResponse, "cerbosCallId" | "requestId" | "results">);
 ```
 
 ## Parameters
@@ -32,12 +32,12 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-{ requestId, results, }
+{ cerbosCallId, requestId, results, }
 
 
 </td><td>
 
-Pick&lt;[CheckResourcesResponse](./core.checkresourcesresponse.md)<!-- -->, "requestId" \| "results"&gt;
+Pick&lt;[CheckResourcesResponse](./core.checkresourcesresponse.md)<!-- -->, "cerbosCallId" \| "requestId" \| "results"&gt;
 
 
 </td><td>

@@ -112,7 +112,7 @@ services:
   tracing:
     profiles:
       - tracing
-    extends: plaintext
+    extends: tls
     environment:
       - CERBOS_CONFIG=/config/tracing.yaml
 

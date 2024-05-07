@@ -204,6 +204,32 @@ export const AnyValue = {
                     : undefined,
     };
   },
+
+  toJSON(message: AnyValue): unknown {
+    const obj: any = {};
+    if (message.value?.$case === "stringValue") {
+      obj.stringValue = message.value.stringValue;
+    }
+    if (message.value?.$case === "boolValue") {
+      obj.boolValue = message.value.boolValue;
+    }
+    if (message.value?.$case === "intValue") {
+      obj.intValue = message.value.intValue;
+    }
+    if (message.value?.$case === "doubleValue") {
+      obj.doubleValue = message.value.doubleValue;
+    }
+    if (message.value?.$case === "arrayValue") {
+      obj.arrayValue = ArrayValue.toJSON(message.value.arrayValue);
+    }
+    if (message.value?.$case === "kvlistValue") {
+      obj.kvlistValue = KeyValueList.toJSON(message.value.kvlistValue);
+    }
+    if (message.value?.$case === "bytesValue") {
+      obj.bytesValue = base64FromBytes(message.value.bytesValue);
+    }
+    return obj;
+  },
 };
 
 function createBaseArrayValue(): ArrayValue {
@@ -252,6 +278,14 @@ export const ArrayValue = {
         : [],
     };
   },
+
+  toJSON(message: ArrayValue): unknown {
+    const obj: any = {};
+    if (message.values?.length) {
+      obj.values = message.values.map((e) => AnyValue.toJSON(e));
+    }
+    return obj;
+  },
 };
 
 function createBaseKeyValueList(): KeyValueList {
@@ -299,6 +333,14 @@ export const KeyValueList = {
         ? object.values.map((e: any) => KeyValue.fromJSON(e))
         : [],
     };
+  },
+
+  toJSON(message: KeyValueList): unknown {
+    const obj: any = {};
+    if (message.values?.length) {
+      obj.values = message.values.map((e) => KeyValue.toJSON(e));
+    }
+    return obj;
   },
 };
 
@@ -356,6 +398,17 @@ export const KeyValue = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? AnyValue.fromJSON(object.value) : undefined,
     };
+  },
+
+  toJSON(message: KeyValue): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = AnyValue.toJSON(message.value);
+    }
+    return obj;
   },
 };
 
@@ -443,6 +496,23 @@ export const InstrumentationScope = {
         : 0,
     };
   },
+
+  toJSON(message: InstrumentationScope): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.version !== "") {
+      obj.version = message.version;
+    }
+    if (message.attributes?.length) {
+      obj.attributes = message.attributes.map((e) => KeyValue.toJSON(e));
+    }
+    if (message.droppedAttributesCount !== 0) {
+      obj.droppedAttributesCount = Math.round(message.droppedAttributesCount);
+    }
+    return obj;
+  },
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
@@ -455,6 +525,18 @@ function bytesFromBase64(b64: string): Uint8Array {
       arr[i] = bin.charCodeAt(i);
     }
     return arr;
+  }
+}
+
+function base64FromBytes(arr: Uint8Array): string {
+  if ((globalThis as any).Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(globalThis.String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
   }
 }
 

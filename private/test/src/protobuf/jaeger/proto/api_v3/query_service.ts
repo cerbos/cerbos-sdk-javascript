@@ -154,6 +154,20 @@ export const GetTraceRequest = {
         : undefined,
     };
   },
+
+  toJSON(message: GetTraceRequest): unknown {
+    const obj: any = {};
+    if (message.traceId !== "") {
+      obj.traceId = message.traceId;
+    }
+    if (message.startTime !== undefined) {
+      obj.startTime = message.startTime.toISOString();
+    }
+    if (message.endTime !== undefined) {
+      obj.endTime = message.endTime.toISOString();
+    }
+    return obj;
+  },
 };
 
 function createBaseTraceQueryParameters(): TraceQueryParameters {
@@ -330,6 +344,41 @@ export const TraceQueryParameters = {
         : 0,
     };
   },
+
+  toJSON(message: TraceQueryParameters): unknown {
+    const obj: any = {};
+    if (message.serviceName !== "") {
+      obj.serviceName = message.serviceName;
+    }
+    if (message.operationName !== "") {
+      obj.operationName = message.operationName;
+    }
+    if (message.attributes) {
+      const entries = Object.entries(message.attributes);
+      if (entries.length > 0) {
+        obj.attributes = {};
+        entries.forEach(([k, v]) => {
+          obj.attributes[k] = v;
+        });
+      }
+    }
+    if (message.startTimeMin !== undefined) {
+      obj.startTimeMin = message.startTimeMin.toISOString();
+    }
+    if (message.startTimeMax !== undefined) {
+      obj.startTimeMax = message.startTimeMax.toISOString();
+    }
+    if (message.durationMin !== undefined) {
+      obj.durationMin = Duration.toJSON(message.durationMin);
+    }
+    if (message.durationMax !== undefined) {
+      obj.durationMax = Duration.toJSON(message.durationMax);
+    }
+    if (message.numTraces !== 0) {
+      obj.numTraces = Math.round(message.numTraces);
+    }
+    return obj;
+  },
 };
 
 function createBaseTraceQueryParameters_AttributesEntry(): TraceQueryParameters_AttributesEntry {
@@ -390,6 +439,17 @@ export const TraceQueryParameters_AttributesEntry = {
       value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
   },
+
+  toJSON(message: TraceQueryParameters_AttributesEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
+    return obj;
+  },
 };
 
 function createBaseFindTracesRequest(): FindTracesRequest {
@@ -441,6 +501,14 @@ export const FindTracesRequest = {
         : undefined,
     };
   },
+
+  toJSON(message: FindTracesRequest): unknown {
+    const obj: any = {};
+    if (message.query !== undefined) {
+      obj.query = TraceQueryParameters.toJSON(message.query);
+    }
+    return obj;
+  },
 };
 
 function createBaseGetServicesRequest(): GetServicesRequest {
@@ -474,6 +542,11 @@ export const GetServicesRequest = {
 
   fromJSON(_: any): GetServicesRequest {
     return {};
+  },
+
+  toJSON(_: GetServicesRequest): unknown {
+    const obj: any = {};
+    return obj;
   },
 };
 
@@ -522,6 +595,14 @@ export const GetServicesResponse = {
         ? object.services.map((e: any) => globalThis.String(e))
         : [],
     };
+  },
+
+  toJSON(message: GetServicesResponse): unknown {
+    const obj: any = {};
+    if (message.services?.length) {
+      obj.services = message.services;
+    }
+    return obj;
   },
 };
 
@@ -585,6 +666,17 @@ export const GetOperationsRequest = {
         : "",
     };
   },
+
+  toJSON(message: GetOperationsRequest): unknown {
+    const obj: any = {};
+    if (message.service !== "") {
+      obj.service = message.service;
+    }
+    if (message.spanKind !== "") {
+      obj.spanKind = message.spanKind;
+    }
+    return obj;
+  },
 };
 
 function createBaseOperation(): Operation {
@@ -644,6 +736,17 @@ export const Operation = {
         : "",
     };
   },
+
+  toJSON(message: Operation): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.spanKind !== "") {
+      obj.spanKind = message.spanKind;
+    }
+    return obj;
+  },
 };
 
 function createBaseGetOperationsResponse(): GetOperationsResponse {
@@ -694,6 +797,14 @@ export const GetOperationsResponse = {
         ? object.operations.map((e: any) => Operation.fromJSON(e))
         : [],
     };
+  },
+
+  toJSON(message: GetOperationsResponse): unknown {
+    const obj: any = {};
+    if (message.operations?.length) {
+      obj.operations = message.operations.map((e) => Operation.toJSON(e));
+    }
+    return obj;
   },
 };
 

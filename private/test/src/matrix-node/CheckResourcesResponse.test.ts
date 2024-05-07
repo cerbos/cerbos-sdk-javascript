@@ -25,6 +25,7 @@ describe("CheckResourcesResponse", () => {
 
       describe("when all actions are allowed", () => {
         const response = new CheckResourcesResponse({
+          cerbosCallId: "01HXGVCW7GFFKYSYEW3TVHVDVY",
           requestId: "fb39aa60-120e-44da-a312-a2381718c1be",
           results: [
             buildResult({
@@ -44,6 +45,7 @@ describe("CheckResourcesResponse", () => {
 
       describe("when some actions are denied", () => {
         const response = new CheckResourcesResponse({
+          cerbosCallId: "01HXGVF7Q3MF12D2DRZ7HEKTAP",
           requestId: "eda6ee1d-982c-4d47-b5f0-118f48eec2f1",
           results: [
             buildResult({
@@ -64,6 +66,7 @@ describe("CheckResourcesResponse", () => {
 
     describe("when the resource is not found", () => {
       const response = new CheckResourcesResponse({
+        cerbosCallId: "01HXGVFP7V099DA6DF6YJD1B6N",
         requestId: "6f954ec6-4eb4-45ad-9cb6-f5462b02d99d",
         results: [
           buildResult({
@@ -86,6 +89,7 @@ describe("CheckResourcesResponse", () => {
 
   describe("#allowedActions", () => {
     const response = new CheckResourcesResponse({
+      cerbosCallId: "01HXGVG1VC283AXJB08VPMNJ02",
       requestId: "9d2434c6-4ac0-4088-8ed9-9ed217c43c1d",
       results: [
         buildResult({
@@ -122,6 +126,7 @@ describe("CheckResourcesResponse", () => {
 
   describe("#isAllowed", () => {
     const response = new CheckResourcesResponse({
+      cerbosCallId: "01HXGVGCE4282S36DQM0BSMSVR",
       requestId: "cf702390-0dfc-4de0-b272-4a2de1c56684",
       results: [
         buildResult({
@@ -184,6 +189,7 @@ describe("CheckResourcesResponse", () => {
 
   describe("#findResult", () => {
     const response = new CheckResourcesResponse({
+      cerbosCallId: "01HXGVGRG1K8GB63893WKVVG4K",
       requestId: "316efdc4-7cc6-44d6-a1a2-e70c1ceb6ca3",
       results: shuffle([
         ...buildResultsForResources({

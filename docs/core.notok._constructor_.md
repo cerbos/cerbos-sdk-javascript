@@ -10,7 +10,7 @@ Constructs a new instance of the `NotOK` class
 
 ```typescript
 constructor(
-    code: Status, 
+    code: Exclude<Status, Status.OK>, 
     details: string, options?: ErrorOptions);
 ```
 
@@ -39,7 +39,7 @@ code
 
 </td><td>
 
-[Status](./core.status.md)
+Exclude&lt;[Status](./core.status.md)<!-- -->, [Status.OK](./core.status.md)<!-- -->&gt;
 
 
 </td><td>

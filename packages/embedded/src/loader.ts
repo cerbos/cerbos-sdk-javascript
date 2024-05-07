@@ -1,8 +1,9 @@
-import type { JWT, Value, _Transport } from "@cerbos/core";
+import type { JWT, Value } from "@cerbos/core";
 import { _setErrorNameAndStack } from "@cerbos/core";
 
 import { Bundle, download } from "./bundle";
 import { constrainAutoUpdateInterval } from "./interval";
+import { Transport } from "./transport";
 
 type LoadResult =
   | {
@@ -246,8 +247,9 @@ export class Loader {
   }
 
   /** @internal */
-  public readonly _transport: _Transport = async (service, rpc, request) =>
-    await (await resolve(this._active)).perform(service, rpc, request);
+  public readonly _transport = new Transport(
+    async () => await resolve(this._active),
+  );
 
   /** @internal */
   protected async _load(source: Source, initial = false): Promise<LoadResult> {

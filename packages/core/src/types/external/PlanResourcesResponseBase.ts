@@ -8,6 +8,14 @@ import type { ValidationError } from "./ValidationError";
  */
 export interface PlanResourcesResponseBase {
   /**
+   * The unique identifier for the request used in audit logs.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.33.
+   */
+  cerbosCallId: string;
+
+  /**
    * The identifier for tracing the request.
    */
   requestId: string;

@@ -1,3 +1,17 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: Support for fetching audit logs
+      details: |-
+        - [`Client.getAccessLogEntry`](../../docs/core.client.getaccesslogentry.md) method
+        - [`Client.getDecisionLogEntry`](../../docs/core.client.getdecisionlogentry.md) method
+        - [`Client.listAccessLogEntries`](../../docs/core.client.listaccesslogentries.md) method
+        - [`Client.listDecisionLogEntries`](../../docs/core.client.listdecisionlogentries.md) method
+        - [`CheckResourcesResponse.cerbosCallId`](../../docs/core.checkresourcesresponse.cerboscallid.md) property
+        - [`PlanResourcesResponse.cerbosCallId`](../../docs/core.planresourcesresponsebase.cerboscallid.md) property
+      pull: 945
+
 releases:
   - version: 0.18.1
     date: 2024-04-23

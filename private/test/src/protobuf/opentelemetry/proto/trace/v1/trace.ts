@@ -83,6 +83,27 @@ export function span_SpanKindFromJSON(object: any): Span_SpanKind {
   }
 }
 
+export function span_SpanKindToJSON(object: Span_SpanKind): string {
+  switch (object) {
+    case Span_SpanKind.SPAN_KIND_UNSPECIFIED:
+      return "SPAN_KIND_UNSPECIFIED";
+    case Span_SpanKind.SPAN_KIND_INTERNAL:
+      return "SPAN_KIND_INTERNAL";
+    case Span_SpanKind.SPAN_KIND_SERVER:
+      return "SPAN_KIND_SERVER";
+    case Span_SpanKind.SPAN_KIND_CLIENT:
+      return "SPAN_KIND_CLIENT";
+    case Span_SpanKind.SPAN_KIND_PRODUCER:
+      return "SPAN_KIND_PRODUCER";
+    case Span_SpanKind.SPAN_KIND_CONSUMER:
+      return "SPAN_KIND_CONSUMER";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum Span_SpanKind",
+      );
+  }
+}
+
 export interface Span_Event {
   timeUnixNano: string;
   name: string;
@@ -121,6 +142,21 @@ export function status_StatusCodeFromJSON(object: any): Status_StatusCode {
     case 2:
     case "STATUS_CODE_ERROR":
       return Status_StatusCode.STATUS_CODE_ERROR;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum Status_StatusCode",
+      );
+  }
+}
+
+export function status_StatusCodeToJSON(object: Status_StatusCode): string {
+  switch (object) {
+    case Status_StatusCode.STATUS_CODE_UNSET:
+      return "STATUS_CODE_UNSET";
+    case Status_StatusCode.STATUS_CODE_OK:
+      return "STATUS_CODE_OK";
+    case Status_StatusCode.STATUS_CODE_ERROR:
+      return "STATUS_CODE_ERROR";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum Status_StatusCode",
@@ -175,6 +211,16 @@ export const TracesData = {
         ? object.resourceSpans.map((e: any) => ResourceSpans.fromJSON(e))
         : [],
     };
+  },
+
+  toJSON(message: TracesData): unknown {
+    const obj: any = {};
+    if (message.resourceSpans?.length) {
+      obj.resourceSpans = message.resourceSpans.map((e) =>
+        ResourceSpans.toJSON(e),
+      );
+    }
+    return obj;
   },
 };
 
@@ -249,6 +295,20 @@ export const ResourceSpans = {
         ? globalThis.String(object.schemaUrl)
         : "",
     };
+  },
+
+  toJSON(message: ResourceSpans): unknown {
+    const obj: any = {};
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
+    if (message.scopeSpans?.length) {
+      obj.scopeSpans = message.scopeSpans.map((e) => ScopeSpans.toJSON(e));
+    }
+    if (message.schemaUrl !== "") {
+      obj.schemaUrl = message.schemaUrl;
+    }
+    return obj;
   },
 };
 
@@ -326,6 +386,20 @@ export const ScopeSpans = {
         ? globalThis.String(object.schemaUrl)
         : "",
     };
+  },
+
+  toJSON(message: ScopeSpans): unknown {
+    const obj: any = {};
+    if (message.scope !== undefined) {
+      obj.scope = InstrumentationScope.toJSON(message.scope);
+    }
+    if (message.spans?.length) {
+      obj.spans = message.spans.map((e) => Span.toJSON(e));
+    }
+    if (message.schemaUrl !== "") {
+      obj.schemaUrl = message.schemaUrl;
+    }
+    return obj;
   },
 };
 
@@ -576,6 +650,59 @@ export const Span = {
       status: isSet(object.status) ? Status.fromJSON(object.status) : undefined,
     };
   },
+
+  toJSON(message: Span): unknown {
+    const obj: any = {};
+    if (message.traceId.length !== 0) {
+      obj.traceId = base64FromBytes(message.traceId);
+    }
+    if (message.spanId.length !== 0) {
+      obj.spanId = base64FromBytes(message.spanId);
+    }
+    if (message.traceState !== "") {
+      obj.traceState = message.traceState;
+    }
+    if (message.parentSpanId.length !== 0) {
+      obj.parentSpanId = base64FromBytes(message.parentSpanId);
+    }
+    if (message.flags !== 0) {
+      obj.flags = Math.round(message.flags);
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.kind !== 0) {
+      obj.kind = span_SpanKindToJSON(message.kind);
+    }
+    if (message.startTimeUnixNano !== "0") {
+      obj.startTimeUnixNano = message.startTimeUnixNano;
+    }
+    if (message.endTimeUnixNano !== "0") {
+      obj.endTimeUnixNano = message.endTimeUnixNano;
+    }
+    if (message.attributes?.length) {
+      obj.attributes = message.attributes.map((e) => KeyValue.toJSON(e));
+    }
+    if (message.droppedAttributesCount !== 0) {
+      obj.droppedAttributesCount = Math.round(message.droppedAttributesCount);
+    }
+    if (message.events?.length) {
+      obj.events = message.events.map((e) => Span_Event.toJSON(e));
+    }
+    if (message.droppedEventsCount !== 0) {
+      obj.droppedEventsCount = Math.round(message.droppedEventsCount);
+    }
+    if (message.links?.length) {
+      obj.links = message.links.map((e) => Span_Link.toJSON(e));
+    }
+    if (message.droppedLinksCount !== 0) {
+      obj.droppedLinksCount = Math.round(message.droppedLinksCount);
+    }
+    if (message.status !== undefined) {
+      obj.status = Status.toJSON(message.status);
+    }
+    return obj;
+  },
 };
 
 function createBaseSpan_Event(): Span_Event {
@@ -665,6 +792,23 @@ export const Span_Event = {
         ? globalThis.Number(object.droppedAttributesCount)
         : 0,
     };
+  },
+
+  toJSON(message: Span_Event): unknown {
+    const obj: any = {};
+    if (message.timeUnixNano !== "0") {
+      obj.timeUnixNano = message.timeUnixNano;
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.attributes?.length) {
+      obj.attributes = message.attributes.map((e) => KeyValue.toJSON(e));
+    }
+    if (message.droppedAttributesCount !== 0) {
+      obj.droppedAttributesCount = Math.round(message.droppedAttributesCount);
+    }
+    return obj;
   },
 };
 
@@ -784,6 +928,29 @@ export const Span_Link = {
       flags: isSet(object.flags) ? globalThis.Number(object.flags) : 0,
     };
   },
+
+  toJSON(message: Span_Link): unknown {
+    const obj: any = {};
+    if (message.traceId.length !== 0) {
+      obj.traceId = base64FromBytes(message.traceId);
+    }
+    if (message.spanId.length !== 0) {
+      obj.spanId = base64FromBytes(message.spanId);
+    }
+    if (message.traceState !== "") {
+      obj.traceState = message.traceState;
+    }
+    if (message.attributes?.length) {
+      obj.attributes = message.attributes.map((e) => KeyValue.toJSON(e));
+    }
+    if (message.droppedAttributesCount !== 0) {
+      obj.droppedAttributesCount = Math.round(message.droppedAttributesCount);
+    }
+    if (message.flags !== 0) {
+      obj.flags = Math.round(message.flags);
+    }
+    return obj;
+  },
 };
 
 function createBaseStatus(): Status {
@@ -841,6 +1008,17 @@ export const Status = {
       code: isSet(object.code) ? status_StatusCodeFromJSON(object.code) : 0,
     };
   },
+
+  toJSON(message: Status): unknown {
+    const obj: any = {};
+    if (message.message !== "") {
+      obj.message = message.message;
+    }
+    if (message.code !== 0) {
+      obj.code = status_StatusCodeToJSON(message.code);
+    }
+    return obj;
+  },
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
@@ -853,6 +1031,18 @@ function bytesFromBase64(b64: string): Uint8Array {
       arr[i] = bin.charCodeAt(i);
     }
     return arr;
+  }
+}
+
+function base64FromBytes(arr: Uint8Array): string {
+  if ((globalThis as any).Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(globalThis.String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
   }
 }
 
