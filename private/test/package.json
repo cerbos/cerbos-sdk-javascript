@@ -14,7 +14,7 @@
     "@cerbos/http": "workspace:*",
     "@cerbos/opentelemetry": "workspace:*",
     "@cerbos/react": "workspace:*",
-    "@grpc/grpc-js": "1.10.6",
+    "@grpc/grpc-js": "1.10.7",
     "@opentelemetry/api": "1.8.0",
     "@opentelemetry/sdk-metrics": "1.24.0",
     "@opentelemetry/sdk-trace-base": "1.24.0",
