@@ -1,3 +1,11 @@
+unreleased:
+  type: patch
+
+  bumped:
+    yaml:
+      to: 2.4.2
+      pull: 943
+
 releases:
   - version: 0.2.5
     date: 2024-04-23

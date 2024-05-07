@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependency on [yaml] to 2.4.2 ([#943](https://github.com/cerbos/cerbos-sdk-javascript/pull/943))
 
 ## [0.2.5] - 2024-04-23
 
