@@ -52,7 +52,7 @@
     "@cerbos/core": "^0.17.1",
     "@grpc/grpc-js": "^1.10.7",
     "long": "^5.2.3",
-    "protobufjs": "^7.2.6"
+    "protobufjs": "^7.3.0"
   },
   "publishConfig": {
     "access": "public",

@@ -6,6 +6,10 @@ unreleased:
       to: 1.10.7
       pull: 942
 
+    protobufjs:
+      to: 7.3.0
+      pull: 949
+
 releases:
   - version: 0.17.1
     date: 2024-04-23

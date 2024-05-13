@@ -100,8 +100,8 @@ importers:
         specifier: ^5.2.3
         version: 5.2.3
       protobufjs:
-        specifier: ^7.2.6
-        version: 7.2.6
+        specifier: ^7.3.0
+        version: 7.3.0
 
   packages/http:
     dependencies:
@@ -240,8 +240,8 @@ importers:
         specifier: 5.2.3
         version: 5.2.3
       protobufjs:
-        specifier: 7.2.6
-        version: 7.2.6
+        specifier: 7.3.0
+        version: 7.3.0
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -2093,8 +2093,8 @@ packages:
     resolution: {integrity: sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  protobufjs@7.2.6:
-    resolution: {integrity: sha512-dgJaEDDL6x8ASUZ1YqWciTRrdOuYNzoOf27oHNfdyvKqHr5i0FV7FSLU+aIeFjyFgVxrpTOtQUi0BLLBymZaBw==}
+  protobufjs@7.3.0:
+    resolution: {integrity: sha512-YWD03n3shzV9ImZRX3ccbjqLxj7NokGN0V/ESiBV5xWqrommYHYiihuIyavq03pWSGqlyvYUFmfoMKd+1rPA/g==}
     engines: {node: '>=12.0.0'}
 
   psl@1.9.0:
@@ -2885,7 +2885,7 @@ snapshots:
     dependencies:
       lodash.camelcase: 4.3.0
       long: 5.2.3
-      protobufjs: 7.2.6
+      protobufjs: 7.3.0
       yargs: 17.7.2
 
   '@humanwhocodes/config-array@0.11.14':
@@ -4690,7 +4690,7 @@ snapshots:
       ansi-styles: 5.2.0
       react-is: 18.2.0
 
-  protobufjs@7.2.6:
+  protobufjs@7.3.0:
     dependencies:
       '@protobufjs/aspromise': 1.1.2
       '@protobufjs/base64': 1.1.2
@@ -5012,12 +5012,12 @@ snapshots:
   ts-proto-descriptors@1.15.0:
     dependencies:
       long: 5.2.3
-      protobufjs: 7.2.6
+      protobufjs: 7.3.0
 
   ts-proto@1.174.0:
     dependencies:
       case-anything: 2.1.13
-      protobufjs: 7.2.6
+      protobufjs: 7.3.0
       ts-poet: 6.8.1
       ts-proto-descriptors: 1.15.0
 
