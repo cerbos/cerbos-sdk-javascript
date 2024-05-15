@@ -55,3 +55,30 @@ export function fieldBehaviorFromJSON(object: any): FieldBehavior {
       );
   }
 }
+
+export function fieldBehaviorToJSON(object: FieldBehavior): string {
+  switch (object) {
+    case FieldBehavior.FIELD_BEHAVIOR_UNSPECIFIED:
+      return "FIELD_BEHAVIOR_UNSPECIFIED";
+    case FieldBehavior.OPTIONAL:
+      return "OPTIONAL";
+    case FieldBehavior.REQUIRED:
+      return "REQUIRED";
+    case FieldBehavior.OUTPUT_ONLY:
+      return "OUTPUT_ONLY";
+    case FieldBehavior.INPUT_ONLY:
+      return "INPUT_ONLY";
+    case FieldBehavior.IMMUTABLE:
+      return "IMMUTABLE";
+    case FieldBehavior.UNORDERED_LIST:
+      return "UNORDERED_LIST";
+    case FieldBehavior.NON_EMPTY_DEFAULT:
+      return "NON_EMPTY_DEFAULT";
+    case FieldBehavior.IDENTIFIER:
+      return "IDENTIFIER";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum FieldBehavior",
+      );
+  }
+}

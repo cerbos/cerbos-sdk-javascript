@@ -220,6 +220,61 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[auditLogFilterIsBetween(filter)](./core.auditlogfilterisbetween.md)
+
+
+</td><td>
+
+Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [AuditLogFilterBetween](./core.auditlogfilterbetween.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[auditLogFilterIsSince(filter)](./core.auditlogfilterissince.md)
+
+
+</td><td>
+
+Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [AuditLogFilterSince](./core.auditlogfiltersince.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[auditLogFilterIsTail(filter)](./core.auditlogfilteristail.md)
+
+
+</td><td>
+
+Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [AuditLogFilterTail](./core.auditlogfiltertail.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[decisionLogEntryMethodIsCheckResources(method)](./core.decisionlogentrymethodischeckresources.md)
+
+
+</td><td>
+
+Type guard to check if a [DecisionLogEntryMethod](./core.decisionlogentrymethod.md) is a [DecisionLogEntryCheckResources](./core.decisionlogentrycheckresources.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[decisionLogEntryMethodIsPlanResources(method)](./core.decisionlogentrymethodisplanresources.md)
+
+
+</td><td>
+
+Type guard to check if a [DecisionLogEntryMethod](./core.decisionlogentrymethod.md) is a [DecisionLogEntryPlanResources](./core.decisionlogentryplanresources.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
 [matchIsMatchAll(match)](./core.matchismatchall.md)
 
 
@@ -259,6 +314,50 @@ Type guard to check if a [Match](./core.match.md) is a [MatchExpr](./core.matche
 </td><td>
 
 Type guard to check if a [Match](./core.match.md) is a [MatchNone](./core.matchnone.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[planResourcesOutputIsConditional(output)](./core.planresourcesoutputisconditional.md)
+
+
+</td><td>
+
+Type guard to check if a [PlanResourcesOutput](./core.planresourcesoutput.md) is a [PlanResourcesConditionalOutput](./core.planresourcesconditionaloutput.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[planResourcesOutputIsUnconditional(output)](./core.planresourcesoutputisunconditional.md)
+
+
+</td><td>
+
+Type guard to check if a [PlanResourcesOutput](./core.planresourcesoutput.md) is a [PlanResourcesUnconditionalOutput](./core.planresourcesunconditionaloutput.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[planResourcesResponseIsConditional(output)](./core.planresourcesresponseisconditional.md)
+
+
+</td><td>
+
+Type guard to check if a [PlanResourcesResponse](./core.planresourcesresponse.md) is a [PlanResourcesConditionalResponse](./core.planresourcesconditionalresponse.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[planResourcesResponseIsUnconditional(output)](./core.planresourcesresponseisunconditional.md)
+
+
+</td><td>
+
+Type guard to check if a [PlanResourcesResponse](./core.planresourcesresponse.md) is a [PlanResourcesUnconditionalResponse](./core.planresourcesunconditionalresponse.md)<!-- -->.
 
 
 </td></tr>
@@ -323,6 +422,17 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[AccessLogEntry](./core.accesslogentry.md)
+
+
+</td><td>
+
+An access log entry in the policy decision point's audit log.
+
+
+</td></tr>
+<tr><td>
+
 [AddOrUpdatePoliciesRequest](./core.addorupdatepoliciesrequest.md)
 
 
@@ -356,12 +466,89 @@ Credentials for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_
 </td></tr>
 <tr><td>
 
+[AuditLogFilterBetween](./core.auditlogfilterbetween.md)
+
+
+</td><td>
+
+Match audit log entries captured between two timestamps.
+
+
+</td></tr>
+<tr><td>
+
+[AuditLogFilterSince](./core.auditlogfiltersince.md)
+
+
+</td><td>
+
+Match the audit log entries captured since N seconds ago.
+
+
+</td></tr>
+<tr><td>
+
+[AuditLogFilterTail](./core.auditlogfiltertail.md)
+
+
+</td><td>
+
+Match the last N audit log entries.
+
+
+</td></tr>
+<tr><td>
+
+[AuditTrail](./core.audittrail.md)
+
+
+</td><td>
+
+Details about how a policy decision was reached.
+
+
+</td></tr>
+<tr><td>
+
 [AuxData](./core.auxdata.md)
 
 
 </td><td>
 
 Auxiliary data sources that can be referenced in policy conditions.
+
+
+</td></tr>
+<tr><td>
+
+[CheckInput](./core.checkinput.md)
+
+
+</td><td>
+
+Input to a `CheckResources` decision.
+
+
+</td></tr>
+<tr><td>
+
+[CheckOutput](./core.checkoutput.md)
+
+
+</td><td>
+
+Output from a `CheckResources` decision.
+
+
+</td></tr>
+<tr><td>
+
+[CheckOutputActionEffect](./core.checkoutputactioneffect.md)
+
+
+</td><td>
+
+The `CheckResources` decision made for an action.
 
 
 </td></tr>
@@ -417,6 +604,50 @@ A resource that was checked.
 </td><td>
 
 A set of expressions that must evaluate to true for a rule to take effect.
+
+
+</td></tr>
+<tr><td>
+
+[DecisionLogEntry](./core.decisionlogentry.md)
+
+
+</td><td>
+
+A decision log entry in the policy decision point's audit log.
+
+
+</td></tr>
+<tr><td>
+
+[DecisionLogEntryCheckResources](./core.decisionlogentrycheckresources.md)
+
+
+</td><td>
+
+The outcome of a `CheckResources` decision made by the policy decision point server.
+
+
+</td></tr>
+<tr><td>
+
+[DecisionLogEntryPlanResources](./core.decisionlogentryplanresources.md)
+
+
+</td><td>
+
+The outcome of a `PlanResources` decision made by the policy decision point server.
+
+
+</td></tr>
+<tr><td>
+
+[DecodedAuxData](./core.decodedauxdata.md)
+
+
+</td><td>
+
+Auxiliary data after decoding the JSON Web Token.
 
 
 </td></tr>
@@ -609,6 +840,28 @@ A JSON Web Token to use as an auxiliary data source, which will be verified agai
 </td></tr>
 <tr><td>
 
+[ListAccessLogEntriesRequest](./core.listaccesslogentriesrequest.md)
+
+
+</td><td>
+
+Input to [Client.listAccessLogEntries()](./core.client.listaccesslogentries.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[ListDecisionLogEntriesRequest](./core.listdecisionlogentriesrequest.md)
+
+
+</td><td>
+
+Input to [Client.listDecisionLogEntries()](./core.client.listdecisionlogentries.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
 [ListPoliciesRequest](./core.listpoliciesrequest.md)
 
 
@@ -741,6 +994,28 @@ User-defined output from a policy rule evaluation.
 </td></tr>
 <tr><td>
 
+[Peer](./core.peer.md)
+
+
+</td><td>
+
+Details of the client who made a request to the policy decision point server.
+
+
+</td></tr>
+<tr><td>
+
+[PlanResourcesConditionalOutput](./core.planresourcesconditionaloutput.md)
+
+
+</td><td>
+
+A query plan for when the specified action is conditionally allowed for the principal on resources matching the input.
+
+
+</td></tr>
+<tr><td>
+
 [PlanResourcesConditionalResponse](./core.planresourcesconditionalresponse.md)
 
 
@@ -752,12 +1027,34 @@ A query plan for when the specified action is conditionally allowed for the prin
 </td></tr>
 <tr><td>
 
+[PlanResourcesInput](./core.planresourcesinput.md)
+
+
+</td><td>
+
+Input to a `PlanResources` invocation.
+
+
+</td></tr>
+<tr><td>
+
 [PlanResourcesMetadata](./core.planresourcesmetadata.md)
 
 
 </td><td>
 
 Additional information about the query plan.
+
+
+</td></tr>
+<tr><td>
+
+[PlanResourcesOutputBase](./core.planresourcesoutputbase.md)
+
+
+</td><td>
+
+Common fields between different [PlanResourcesOutput](./core.planresourcesoutput.md) types.
 
 
 </td></tr>
@@ -780,6 +1077,17 @@ Input to [Client.planResources()](./core.client.planresources.md)<!-- -->.
 </td><td>
 
 Common fields between different [PlanResourcesResponse](./core.planresourcesresponse.md) types.
+
+
+</td></tr>
+<tr><td>
+
+[PlanResourcesUnconditionalOutput](./core.planresourcesunconditionaloutput.md)
+
+
+</td><td>
+
+A query plan for when the specified action is always allowed or denied for the principal on resources matching the input.
 
 
 </td></tr>
@@ -1042,12 +1350,34 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[AuditLogFilter](./core.auditlogfilter.md)
+
+
+</td><td>
+
+Criteria to match audit log entries.
+
+
+</td></tr>
+<tr><td>
+
 [CheckResourceRequest](./core.checkresourcerequest.md)
 
 
 </td><td>
 
 Input to [Client.checkResource()](./core.client.checkresource.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[DecisionLogEntryMethod](./core.decisionlogentrymethod.md)
+
+
+</td><td>
+
+The outcome of a decision made by the policy decision point server.
 
 
 </td></tr>
@@ -1092,6 +1422,17 @@ Expressions to evaluate in a condition.
 </td><td>
 
 An abstract syntax tree node representing an operand to an expression.
+
+
+</td></tr>
+<tr><td>
+
+[PlanResourcesOutput](./core.planresourcesoutput.md)
+
+
+</td><td>
+
+Output from a `PlanResources` invocation.
 
 
 </td></tr>
@@ -1147,6 +1488,17 @@ Search criteria to match a resource in results.
 </td><td>
 
 Definition of a JSON schema used to validate principal or resource attributes.
+
+
+</td></tr>
+<tr><td>
+
+[SourceAttributes](./core.sourceattributes.md)
+
+
+</td><td>
+
+Metadata about the source of a policy.
 
 
 </td></tr>

@@ -74,6 +74,17 @@ export const Resource = {
         : 0,
     };
   },
+
+  toJSON(message: Resource): unknown {
+    const obj: any = {};
+    if (message.attributes?.length) {
+      obj.attributes = message.attributes.map((e) => KeyValue.toJSON(e));
+    }
+    if (message.droppedAttributesCount !== 0) {
+      obj.droppedAttributesCount = Math.round(message.droppedAttributesCount);
+    }
+    return obj;
+  },
 };
 
 function isSet(value: any): boolean {

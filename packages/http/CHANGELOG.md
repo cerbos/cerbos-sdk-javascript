@@ -2,7 +2,16 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Support for fetching audit logs ([#945](https://github.com/cerbos/cerbos-sdk-javascript/pull/945))
+
+  - [`Client.getAccessLogEntry`](../../docs/core.client.getaccesslogentry.md) method
+  - [`Client.getDecisionLogEntry`](../../docs/core.client.getdecisionlogentry.md) method
+  - [`Client.listAccessLogEntries`](../../docs/core.client.listaccesslogentries.md) method
+  - [`Client.listDecisionLogEntries`](../../docs/core.client.listdecisionlogentries.md) method
+  - [`CheckResourcesResponse.cerbosCallId`](../../docs/core.checkresourcesresponse.cerboscallid.md) property
+  - [`PlanResourcesResponse.cerbosCallId`](../../docs/core.planresourcesresponsebase.cerboscallid.md) property
 
 ## [0.18.1] - 2024-04-23
 

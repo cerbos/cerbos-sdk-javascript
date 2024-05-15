@@ -1,56 +1,5 @@
 import type { ValidationError } from "./types/external";
-
-/**
- * Status codes returned by the Cerbos policy decision point server.
- *
- * @public
- */
-export enum Status {
-  /**
-   * The operation was cancelled.
-   */
-  CANCELLED = 1,
-
-  /**
-   * The operation timed out.
-   */
-  DEADLINE_EXCEEDED = 4,
-
-  /**
-   * The operation failed due to an internal error.
-   */
-  INTERNAL = 13,
-
-  /**
-   * The operation was rejected because an argument was invalid.
-   */
-  INVALID_ARGUMENT = 3,
-
-  /**
-   * The operation failed because a resource has been exhausted.
-   */
-  RESOURCE_EXHAUSTED = 8,
-
-  /**
-   * The operation was rejected because it did not have valid authentication credentials.
-   */
-  UNAUTHENTICATED = 16,
-
-  /**
-   * The operation was rejected because it did not have valid authentication credentials.
-   */
-  UNAVAILABLE = 14,
-
-  /**
-   * The operation is not supported.
-   */
-  UNIMPLEMENTED = 12,
-
-  /**
-   * An unknown error occurred.
-   */
-  UNKNOWN = 2,
-}
+import { Status } from "./types/external";
 
 /**
  * Options for creating an error.
@@ -86,7 +35,7 @@ export class NotOK extends Error {
     /**
      * The status code returned by the Cerbos policy decision point server.
      */
-    public readonly code: Status,
+    public readonly code: Exclude<Status, Status.OK>,
 
     /**
      * Additional error details.
@@ -100,7 +49,7 @@ export class NotOK extends Error {
   }
 }
 
-function code(error: unknown): Status {
+function code(error: unknown): Exclude<Status, Status.OK> {
   if (
     has(error, "code") &&
     typeof error.code === "number" &&

@@ -176,6 +176,34 @@ Enable a policy.
 </td></tr>
 <tr><td>
 
+[getAccessLogEntry(callId, options)](./core.client.getaccesslogentry.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Fetch an access log entry by call ID from the policy decision point server's audit log.
+
+
+</td></tr>
+<tr><td>
+
+[getDecisionLogEntry(callId, options)](./core.client.getdecisionlogentry.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Fetch a decision log entry by call ID from the policy decision point server's audit log.
+
+
+</td></tr>
+<tr><td>
+
 [getPolicies(request, options)](./core.client.getpolicies.md)
 
 
@@ -241,6 +269,34 @@ Fetch multiple schemas by ID.
 </td><td>
 
 Check if a principal is allowed to perform an action on a resource.
+
+
+</td></tr>
+<tr><td>
+
+[listAccessLogEntries(request, options)](./core.client.listaccesslogentries.md)
+
+
+</td><td>
+
+
+</td><td>
+
+List access log entries from the policy decision point server's audit log.
+
+
+</td></tr>
+<tr><td>
+
+[listDecisionLogEntries(request, options)](./core.client.listdecisionlogentries.md)
+
+
+</td><td>
+
+
+</td><td>
+
+List decision log entries from the policy decision point server's audit log.
 
 
 </td></tr>

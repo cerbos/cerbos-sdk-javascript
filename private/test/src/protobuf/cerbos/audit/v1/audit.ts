@@ -221,6 +221,35 @@ export const AccessLogEntry = {
         : 0,
     };
   },
+
+  toJSON(message: AccessLogEntry): unknown {
+    const obj: any = {};
+    if (message.callId !== "") {
+      obj.callId = message.callId;
+    }
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
+    }
+    if (message.peer !== undefined) {
+      obj.peer = Peer.toJSON(message.peer);
+    }
+    if (message.metadata) {
+      const entries = Object.entries(message.metadata);
+      if (entries.length > 0) {
+        obj.metadata = {};
+        entries.forEach(([k, v]) => {
+          obj.metadata[k] = MetaValues.toJSON(v);
+        });
+      }
+    }
+    if (message.method !== "") {
+      obj.method = message.method;
+    }
+    if (message.statusCode !== 0) {
+      obj.statusCode = Math.round(message.statusCode);
+    }
+    return obj;
+  },
 };
 
 function createBaseAccessLogEntry_MetadataEntry(): AccessLogEntry_MetadataEntry {
@@ -282,6 +311,17 @@ export const AccessLogEntry_MetadataEntry = {
         ? MetaValues.fromJSON(object.value)
         : undefined,
     };
+  },
+
+  toJSON(message: AccessLogEntry_MetadataEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = MetaValues.toJSON(message.value);
+    }
+    return obj;
   },
 };
 
@@ -501,6 +541,51 @@ export const DecisionLogEntry = {
         : undefined,
     };
   },
+
+  toJSON(message: DecisionLogEntry): unknown {
+    const obj: any = {};
+    if (message.callId !== "") {
+      obj.callId = message.callId;
+    }
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
+    }
+    if (message.peer !== undefined) {
+      obj.peer = Peer.toJSON(message.peer);
+    }
+    if (message.inputs?.length) {
+      obj.inputs = message.inputs.map((e) => CheckInput.toJSON(e));
+    }
+    if (message.outputs?.length) {
+      obj.outputs = message.outputs.map((e) => CheckOutput.toJSON(e));
+    }
+    if (message.error !== "") {
+      obj.error = message.error;
+    }
+    if (message.method?.$case === "checkResources") {
+      obj.checkResources = DecisionLogEntry_CheckResources.toJSON(
+        message.method.checkResources,
+      );
+    }
+    if (message.method?.$case === "planResources") {
+      obj.planResources = DecisionLogEntry_PlanResources.toJSON(
+        message.method.planResources,
+      );
+    }
+    if (message.metadata) {
+      const entries = Object.entries(message.metadata);
+      if (entries.length > 0) {
+        obj.metadata = {};
+        entries.forEach(([k, v]) => {
+          obj.metadata[k] = MetaValues.toJSON(v);
+        });
+      }
+    }
+    if (message.auditTrail !== undefined) {
+      obj.auditTrail = AuditTrail.toJSON(message.auditTrail);
+    }
+    return obj;
+  },
 };
 
 function createBaseDecisionLogEntry_CheckResources(): DecisionLogEntry_CheckResources {
@@ -575,6 +660,20 @@ export const DecisionLogEntry_CheckResources = {
         : [],
       error: isSet(object.error) ? globalThis.String(object.error) : "",
     };
+  },
+
+  toJSON(message: DecisionLogEntry_CheckResources): unknown {
+    const obj: any = {};
+    if (message.inputs?.length) {
+      obj.inputs = message.inputs.map((e) => CheckInput.toJSON(e));
+    }
+    if (message.outputs?.length) {
+      obj.outputs = message.outputs.map((e) => CheckOutput.toJSON(e));
+    }
+    if (message.error !== "") {
+      obj.error = message.error;
+    }
+    return obj;
   },
 };
 
@@ -657,6 +756,20 @@ export const DecisionLogEntry_PlanResources = {
       error: isSet(object.error) ? globalThis.String(object.error) : "",
     };
   },
+
+  toJSON(message: DecisionLogEntry_PlanResources): unknown {
+    const obj: any = {};
+    if (message.input !== undefined) {
+      obj.input = PlanResourcesInput.toJSON(message.input);
+    }
+    if (message.output !== undefined) {
+      obj.output = PlanResourcesOutput.toJSON(message.output);
+    }
+    if (message.error !== "") {
+      obj.error = message.error;
+    }
+    return obj;
+  },
 };
 
 function createBaseDecisionLogEntry_MetadataEntry(): DecisionLogEntry_MetadataEntry {
@@ -719,6 +832,17 @@ export const DecisionLogEntry_MetadataEntry = {
         : undefined,
     };
   },
+
+  toJSON(message: DecisionLogEntry_MetadataEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = MetaValues.toJSON(message.value);
+    }
+    return obj;
+  },
 };
 
 function createBaseMetaValues(): MetaValues {
@@ -766,6 +890,14 @@ export const MetaValues = {
         ? object.values.map((e: any) => globalThis.String(e))
         : [],
     };
+  },
+
+  toJSON(message: MetaValues): unknown {
+    const obj: any = {};
+    if (message.values?.length) {
+      obj.values = message.values;
+    }
+    return obj;
   },
 };
 
@@ -849,6 +981,23 @@ export const Peer = {
         : "",
     };
   },
+
+  toJSON(message: Peer): unknown {
+    const obj: any = {};
+    if (message.address !== "") {
+      obj.address = message.address;
+    }
+    if (message.authInfo !== "") {
+      obj.authInfo = message.authInfo;
+    }
+    if (message.userAgent !== "") {
+      obj.userAgent = message.userAgent;
+    }
+    if (message.forwardedFor !== "") {
+      obj.forwardedFor = message.forwardedFor;
+    }
+    return obj;
+  },
 };
 
 function createBaseAuditTrail(): AuditTrail {
@@ -911,6 +1060,20 @@ export const AuditTrail = {
         : {},
     };
   },
+
+  toJSON(message: AuditTrail): unknown {
+    const obj: any = {};
+    if (message.effectivePolicies) {
+      const entries = Object.entries(message.effectivePolicies);
+      if (entries.length > 0) {
+        obj.effectivePolicies = {};
+        entries.forEach(([k, v]) => {
+          obj.effectivePolicies[k] = SourceAttributes.toJSON(v);
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseAuditTrail_EffectivePoliciesEntry(): AuditTrail_EffectivePoliciesEntry {
@@ -972,6 +1135,17 @@ export const AuditTrail_EffectivePoliciesEntry = {
         ? SourceAttributes.fromJSON(object.value)
         : undefined,
     };
+  },
+
+  toJSON(message: AuditTrail_EffectivePoliciesEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = SourceAttributes.toJSON(message.value);
+    }
+    return obj;
   },
 };
 

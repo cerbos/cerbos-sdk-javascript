@@ -9,6 +9,14 @@ import type { ValidationError } from "./ValidationError";
  */
 export class CheckResourcesResponse {
   /**
+   * The unique identifier for the request used in audit logs.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.33.
+   */
+  public cerbosCallId: string;
+
+  /**
    * The identifier for tracing the request.
    */
   public requestId: string;
@@ -19,9 +27,11 @@ export class CheckResourcesResponse {
   public results: CheckResourcesResult[];
 
   public constructor({
+    cerbosCallId,
     requestId,
     results,
-  }: Pick<CheckResourcesResponse, "requestId" | "results">) {
+  }: Pick<CheckResourcesResponse, "cerbosCallId" | "requestId" | "results">) {
+    this.cerbosCallId = cerbosCallId;
     this.requestId = requestId;
     this.results = results;
   }

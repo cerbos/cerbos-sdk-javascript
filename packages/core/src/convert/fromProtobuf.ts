@@ -1,7 +1,24 @@
+import type {
+  AuditTrail as AuditTrailProtobuf,
+  DecisionLogEntry as DecisionLogEntryProtobuf,
+  DecisionLogEntry_CheckResources,
+  DecisionLogEntry_PlanResources,
+  MetaValues,
+  Peer as PeerProtobuf,
+} from "../protobuf/cerbos/audit/v1/audit";
 import { Effect as EffectProtobuf } from "../protobuf/cerbos/effect/v1/effect";
 import type {
+  AuxData as AuxDataProtobuf,
+  CheckInput as CheckInputProtobuf,
+  CheckOutput as CheckOutputProtobuf,
+  CheckOutput_ActionEffect,
   OutputEntry as OutputEntry,
   PlanResourcesFilter_Expression_Operand,
+  PlanResourcesInput as PlanResourcesInputProtobuf,
+  PlanResourcesInput_Resource,
+  PlanResourcesOutput as PlanResourcesOutputProtobuf,
+  Principal as PrincipalProtobuf,
+  Resource as ResourceProtobuf,
 } from "../protobuf/cerbos/engine/v1/engine";
 import { PlanResourcesFilter_Kind } from "../protobuf/cerbos/engine/v1/engine";
 import type {
@@ -21,6 +38,7 @@ import type {
   RoleDef,
   Schemas,
   Schemas_Schema,
+  SourceAttributes as SourceAttributesProtobuf,
   Variables as VariablesProtobuf,
 } from "../protobuf/cerbos/policy/v1/policy";
 import type {
@@ -31,6 +49,7 @@ import type {
   EnablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
+  ListAuditLogEntriesResponse,
   ListPoliciesResponse as ListPoliciesResponseProtobuf,
   ListSchemasResponse as ListSchemasResponseProtobuf,
   PlanResourcesResponse as PlanResourcesResponseProtobuf,
@@ -42,33 +61,54 @@ import type {
 } from "../protobuf/cerbos/schema/v1/schema";
 import { ValidationError_Source } from "../protobuf/cerbos/schema/v1/schema";
 import type {
+  AccessLogEntry,
+  AuditTrail,
+  CheckInput,
+  CheckOutput,
+  CheckOutputActionEffect,
   Condition,
+  DecisionLogEntry,
+  DecisionLogEntryCheckResources,
+  DecisionLogEntryMethod,
+  DecisionLogEntryPlanResources,
+  DecodedAuxData,
+  DeleteSchemasResponse,
   DerivedRoleDefinition,
   DerivedRoles,
   DisablePoliciesResponse,
   EnablePoliciesResponse,
   ExportVariables,
   GetPoliciesResponse,
+  GetSchemasResponse,
   ListPoliciesResponse,
   ListSchemasResponse,
   Match,
   Matches,
   Output,
   OutputResult,
+  Peer,
   PlanExpressionOperand,
+  PlanResourcesInput,
   PlanResourcesMetadata,
+  PlanResourcesOutput,
+  PlanResourcesOutputBase,
   PlanResourcesResponse,
+  PlanResourcesResponseBase,
   Policy,
   PolicyBase,
   PolicyMetadata,
+  Principal,
   PrincipalPolicy,
   PrincipalRule,
   PrincipalRuleAction,
+  Resource,
   ResourcePolicy,
+  ResourceQuery,
   ResourceRule,
   Schema,
   SchemaRef,
   SchemaRefs,
+  SourceAttributes,
   ValidationError,
   Value,
   Variables,
@@ -84,15 +124,291 @@ import {
   SchemaDefinition,
   ValidationErrorSource,
 } from "../types/external";
-import type { DeleteSchemasResponse } from "../types/external/DeleteSchemasResponse";
-import type { GetSchemasResponse } from "../types/external/GetSchemasResponse";
 import type { OmitFromEach } from "../types/internal";
 
+export function accessLogEntryFromProtobuf({
+  entry,
+}: ListAuditLogEntriesResponse): AccessLogEntry {
+  requireOneOf("ListAuditLogEntriesResponse.entry", entry, "accessLogEntry");
+
+  const { callId, timestamp, peer, metadata, method, statusCode } =
+    entry.accessLogEntry;
+
+  requireField("AccessLogEntry.timestamp", timestamp);
+  requireField("AccessLogEntry.peer", peer);
+
+  return {
+    callId,
+    timestamp,
+    peer: peerFromProtobuf(peer),
+    metadata: auditLogMetadataFromProtobuf(metadata),
+    method,
+    statusCode,
+  };
+}
+
+export function decisionLogEntryFromProtobuf({
+  entry,
+}: ListAuditLogEntriesResponse): DecisionLogEntry {
+  requireOneOf("ListAuditLogEntriesResponse.entry", entry, "decisionLogEntry");
+
+  const { callId, timestamp, peer, metadata, auditTrail, method } =
+    entry.decisionLogEntry;
+
+  requireField("DecisionLogEntry.timestamp", timestamp);
+  requireField("DecisionLogEntry.peer", peer);
+
+  return {
+    callId,
+    timestamp,
+    peer: peerFromProtobuf(peer),
+    metadata: auditLogMetadataFromProtobuf(metadata),
+    auditTrail: auditTrailFromProtobuf(auditTrail),
+    method: decisionLogEntryMethodFromProtobuf(method),
+  };
+}
+
+function peerFromProtobuf({
+  address,
+  authInfo,
+  userAgent,
+  forwardedFor,
+}: PeerProtobuf): Peer {
+  return {
+    address,
+    authInfo,
+    userAgent,
+    forwardedFor,
+  };
+}
+
+function auditLogMetadataFromProtobuf(
+  metadata: Record<string, MetaValues>,
+): Record<string, string[]> {
+  return Object.fromEntries(
+    Object.entries(metadata).map(([key, { values }]) => [key, values]),
+  );
+}
+
+function auditTrailFromProtobuf(
+  { effectivePolicies }: AuditTrailProtobuf = { effectivePolicies: {} },
+): AuditTrail {
+  return {
+    effectivePolicies: Object.fromEntries(
+      Object.entries(effectivePolicies).map(([policyId, sourceAttributes]) => [
+        policyId,
+        sourceAttributesFromProtobuf(sourceAttributes),
+      ]),
+    ),
+  };
+}
+
+function decisionLogEntryMethodFromProtobuf(
+  method: DecisionLogEntryProtobuf["method"],
+): DecisionLogEntryMethod {
+  return transformOneOf("DecisionLogEntry.method", method, {
+    checkResources: ({ checkResources }) =>
+      decisionLogEntryCheckResourcesFromProtobuf(checkResources),
+
+    planResources: ({ planResources }) =>
+      decisionLogEntryPlanResourcesFromProtobuf(planResources),
+  });
+}
+
+function decisionLogEntryCheckResourcesFromProtobuf({
+  inputs,
+  outputs,
+  error,
+}: DecisionLogEntry_CheckResources): DecisionLogEntryCheckResources {
+  return {
+    name: "CheckResources",
+    inputs: inputs.map(checkInputFromProtobuf),
+    outputs: outputs.map(checkOutputFromProtobuf),
+    error: error || undefined,
+  };
+}
+
+function checkInputFromProtobuf({
+  requestId,
+  principal,
+  resource,
+  actions,
+  auxData,
+}: CheckInputProtobuf): CheckInput {
+  requireField("CheckInput.principal", principal);
+  requireField("CheckInput.resource", resource);
+
+  return {
+    requestId,
+    principal: principalFromProtobuf(principal),
+    resource: resourceFromProtobuf(resource),
+    actions,
+    auxData: auxData && decodedAuxDataFromProtobuf(auxData),
+  };
+}
+
+function principalFromProtobuf({
+  id,
+  roles,
+  attr,
+  policyVersion,
+  scope,
+}: PrincipalProtobuf): Required<Omit<Principal, "attributes">> {
+  return {
+    id,
+    roles,
+    attr,
+    policyVersion,
+    scope,
+  };
+}
+
+function resourceFromProtobuf({
+  kind,
+  id,
+  attr,
+  policyVersion,
+  scope,
+}: ResourceProtobuf): Required<Omit<Resource, "attributes">> {
+  return {
+    kind,
+    id,
+    attr,
+    policyVersion,
+    scope,
+  };
+}
+
+function decodedAuxDataFromProtobuf({ jwt }: AuxDataProtobuf): DecodedAuxData {
+  return { jwt };
+}
+
+function checkOutputFromProtobuf({
+  requestId,
+  resourceId,
+  actions,
+  effectiveDerivedRoles,
+  validationErrors,
+  outputs,
+}: CheckOutputProtobuf): CheckOutput {
+  return {
+    requestId,
+    resourceId,
+    actions: Object.fromEntries(
+      Object.entries(actions).map(([action, effect]) => [
+        action,
+        checkOutputActionEffectFromProtobuf(effect),
+      ]),
+    ),
+    effectiveDerivedRoles,
+    validationErrors: validationErrors.map(validationErrorFromProtobuf),
+    outputs: outputs.map(outputResultFromProtobuf),
+  };
+}
+
+function checkOutputActionEffectFromProtobuf({
+  effect,
+  policy,
+  scope,
+}: CheckOutput_ActionEffect): CheckOutputActionEffect {
+  return {
+    effect: effectFromProtobuf(effect),
+    policy,
+    scope,
+  };
+}
+
+function decisionLogEntryPlanResourcesFromProtobuf({
+  input,
+  output,
+  error,
+}: DecisionLogEntry_PlanResources): DecisionLogEntryPlanResources {
+  requireField("DecisionLogEntry.PlanResources.input", input);
+  requireField("DecisionLogEntry.PlanResources.output", output);
+
+  return {
+    name: "PlanResources",
+    input: planResourcesInputFromProtobuf(input),
+    output: planResourcesOutputFromProtobuf(output),
+    error: error || undefined,
+  };
+}
+
+function planResourcesInputFromProtobuf({
+  requestId,
+  principal,
+  resource,
+  action,
+  auxData,
+}: PlanResourcesInputProtobuf): PlanResourcesInput {
+  requireField("PlanResourcesInput.principal", principal);
+  requireField("PlanResourcesInput.resource", resource);
+
+  return {
+    requestId,
+    principal: principalFromProtobuf(principal),
+    resource: resourceQueryFromProtobuf(resource),
+    action,
+    auxData: auxData && decodedAuxDataFromProtobuf(auxData),
+  };
+}
+
+function resourceQueryFromProtobuf({
+  kind,
+  attr,
+  policyVersion,
+  scope,
+}: PlanResourcesInput_Resource): Required<Omit<ResourceQuery, "attributes">> {
+  return {
+    kind,
+    attr,
+    policyVersion,
+    scope,
+  };
+}
+
+function planResourcesOutputFromProtobuf({
+  requestId,
+  filter,
+  filterDebug,
+  action,
+  policyVersion,
+  scope,
+  validationErrors,
+}: PlanResourcesOutputProtobuf): PlanResourcesOutput {
+  const base: PlanResourcesOutputBase = {
+    requestId,
+    action,
+    policyVersion,
+    scope,
+    validationErrors: validationErrors.map(validationErrorFromProtobuf),
+  };
+
+  requireField("PlanResourcesOutput.filter", filter);
+
+  const kind = planKindFromProtobuf(filter.kind);
+
+  if (kind !== PlanKind.CONDITIONAL) {
+    return { ...base, kind };
+  }
+
+  requireField("PlanResourcesFilter.condition", filter.condition);
+
+  return {
+    ...base,
+    kind,
+    condition: planOperandFromProtobuf(filter.condition),
+    conditionString: filterDebug,
+  };
+}
+
 export function checkResourcesResponseFromProtobuf({
+  cerbosCallId,
   requestId,
   results,
 }: CheckResourcesResponseProtobuf): CheckResourcesResponse {
   return new CheckResourcesResponse({
+    cerbosCallId,
     requestId,
     results: results.map(checkResourcesResultFromProtobuf),
   });
@@ -105,9 +421,7 @@ function checkResourcesResultFromProtobuf({
   meta,
   outputs,
 }: CheckResourcesResponse_ResultEntry): CheckResourcesResult {
-  if (!resource) {
-    throw new Error("Missing resource on CheckResources result");
-  }
+  requireField("CheckResourcesResponse.ResultEntry", resource);
 
   return new CheckResourcesResult({
     resource,
@@ -148,20 +462,17 @@ function validationErrorFromProtobuf({
 function validationErrorSourceFromProtobuf(
   source: ValidationError_Source,
 ): ValidationErrorSource {
-  switch (source) {
-    case ValidationError_Source.SOURCE_PRINCIPAL:
-      return ValidationErrorSource.PRINCIPAL;
-
-    case ValidationError_Source.SOURCE_RESOURCE:
-      return ValidationErrorSource.RESOURCE;
-
-    default:
-      throw new Error(
-        `Unexpected validation error source ${source} (${
-          ValidationError_Source[source as number] ?? "unrecognized"
-        })`,
-      );
-  }
+  return translateEnum(
+    "ValidationError.Source",
+    ValidationError_Source,
+    source,
+    {
+      [ValidationError_Source.SOURCE_UNSPECIFIED]: unexpected,
+      [ValidationError_Source.SOURCE_PRINCIPAL]:
+        ValidationErrorSource.PRINCIPAL,
+      [ValidationError_Source.SOURCE_RESOURCE]: ValidationErrorSource.RESOURCE,
+    },
+  );
 }
 
 function outputResultFromProtobuf({ src, val }: OutputEntry): OutputResult {
@@ -174,33 +485,25 @@ function outputResultFromProtobuf({ src, val }: OutputEntry): OutputResult {
 export function deleteSchemasResponseFromProtobuf({
   deletedSchemas,
 }: DeleteSchemaResponse): DeleteSchemasResponse {
-  return {
-    deletedSchemas,
-  };
+  return { deletedSchemas };
 }
 
 export function disablePoliciesResponseFromProtobuf({
   disabledPolicies,
 }: DisablePolicyResponse): DisablePoliciesResponse {
-  return {
-    disabledPolicies,
-  };
+  return { disabledPolicies };
 }
 
 export function enablePoliciesResponseFromProtobuf({
   enabledPolicies,
 }: EnablePolicyResponse): EnablePoliciesResponse {
-  return {
-    enabledPolicies,
-  };
+  return { enabledPolicies };
 }
 
 export function getPoliciesResponseFromProtobuf({
   policies,
 }: GetPolicyResponse): GetPoliciesResponse {
-  return {
-    policies: policies.map(_policyFromProtobuf),
-  };
+  return { policies: policies.map(_policyFromProtobuf) };
 }
 
 /** @internal */
@@ -225,6 +528,7 @@ export function _policyFromProtobuf({
 function policyMetadataFromProtobuf({
   annotations,
   hash,
+  sourceAttributes,
   sourceFile,
   storeIdentifer,
   storeIdentifier,
@@ -232,10 +536,17 @@ function policyMetadataFromProtobuf({
   return {
     annotations,
     hash,
+    sourceAttributes: sourceAttributesFromProtobuf(sourceAttributes),
     sourceFile,
     storeIdentifer: storeIdentifier || storeIdentifer,
     storeIdentifier: storeIdentifier || storeIdentifer,
   };
+}
+
+function sourceAttributesFromProtobuf(
+  { attributes }: SourceAttributesProtobuf = { attributes: {} },
+): SourceAttributes {
+  return attributes;
 }
 
 type OmitPolicyBase<T extends Policy> = OmitFromEach<T, keyof PolicyBase>;
@@ -243,28 +554,18 @@ type OmitPolicyBase<T extends Policy> = OmitFromEach<T, keyof PolicyBase>;
 function policyTypeFromProtobuf(
   policyType: PolicyProtobuf["policyType"],
 ): OmitPolicyBase<Policy> {
-  if (!policyType) {
-    throw new Error("Unknown policy type: undefined");
-  }
+  return transformOneOf("Policy.policyType", policyType, {
+    derivedRoles: ({ derivedRoles }) => derivedRolesFromProtobuf(derivedRoles),
 
-  switch (policyType.$case) {
-    case "derivedRoles":
-      return derivedRolesFromProtobuf(policyType.derivedRoles);
+    exportVariables: ({ exportVariables }) =>
+      exportVariablesFromProtobuf(exportVariables),
 
-    case "exportVariables":
-      return exportVariablesFromProtobuf(policyType.exportVariables);
+    principalPolicy: ({ principalPolicy }) =>
+      principalPolicyFromProtobuf(principalPolicy),
 
-    case "principalPolicy":
-      return principalPolicyFromProtobuf(policyType.principalPolicy);
-
-    case "resourcePolicy":
-      return resourcePolicyFromProtobuf(policyType.resourcePolicy);
-
-    default:
-      throw new Error(
-        `Unknown policy type: ${JSON.stringify(policyType, null, 2)}`,
-      );
-  }
+    resourcePolicy: ({ resourcePolicy }) =>
+      resourcePolicyFromProtobuf(resourcePolicy),
+  });
 }
 
 function derivedRolesFromProtobuf({
@@ -294,50 +595,21 @@ function derivedRoleDefinitionFromProtobuf({
 }
 
 function conditionFromProtobuf({ condition }: ConditionProtobuf): Condition {
-  switch (condition?.$case) {
-    case "match":
-      return {
-        match: matchFromProtobuf(condition.match),
-      };
-
-    default:
-      throw new Error(
-        `Unknown condition type: ${JSON.stringify(condition, null, 2)}`,
-      );
-  }
+  requireOneOf("Condition.condition", condition, "match");
+  return { match: matchFromProtobuf(condition.match) };
 }
 
 function matchFromProtobuf({ op }: MatchProtobuf): Match {
-  switch (op?.$case) {
-    case "all":
-      return {
-        all: matchesFromProtobuf(op.all),
-      };
-
-    case "any":
-      return {
-        any: matchesFromProtobuf(op.any),
-      };
-
-    case "none":
-      return {
-        none: matchesFromProtobuf(op.none),
-      };
-
-    case "expr":
-      return {
-        expr: op.expr,
-      };
-
-    default:
-      throw new Error(`Unknown match type: ${JSON.stringify(op, null, 2)}`);
-  }
+  return transformOneOf("Match.op", op, {
+    all: ({ all }) => ({ all: matchesFromProtobuf(all) }),
+    any: ({ any }) => ({ any: matchesFromProtobuf(any) }),
+    none: ({ none }) => ({ none: matchesFromProtobuf(none) }),
+    expr: ({ expr }) => ({ expr }),
+  });
 }
 
 function matchesFromProtobuf({ of }: Match_ExprList): Matches {
-  return {
-    of: of.map(matchFromProtobuf),
-  };
+  return { of: of.map(matchFromProtobuf) };
 }
 
 function variablesFromProtobuf({
@@ -475,18 +747,14 @@ function schemaRefsFromProtobuf({
 function schemaRefFromProtobuf({ ref, ignoreWhen }: Schemas_Schema): SchemaRef {
   return {
     ref,
-    ignoreWhen: ignoreWhen && {
-      actions: ignoreWhen.actions,
-    },
+    ignoreWhen: ignoreWhen && { actions: ignoreWhen.actions },
   };
 }
 
 export function getSchemasResponseFromProtobuf({
   schemas,
 }: GetSchemaResponse): GetSchemasResponse {
-  return {
-    schemas: schemas.map(schemaFromProtobuf),
-  };
+  return { schemas: schemas.map(schemaFromProtobuf) };
 }
 
 function schemaFromProtobuf({ id, definition }: SchemaProtobuf): Schema {
@@ -499,94 +767,72 @@ function schemaFromProtobuf({ id, definition }: SchemaProtobuf): Schema {
 export function listPoliciesResponseFromProtobuf({
   policyIds,
 }: ListPoliciesResponseProtobuf): ListPoliciesResponse {
-  return {
-    ids: policyIds,
-  };
+  return { ids: policyIds };
 }
 
 export function listSchemasResponseFromProtobuf({
   schemaIds,
 }: ListSchemasResponseProtobuf): ListSchemasResponse {
-  return {
-    ids: schemaIds,
-  };
+  return { ids: schemaIds };
 }
 
 export function planResourcesResponseFromProtobuf({
+  cerbosCallId,
   requestId,
   filter,
   validationErrors,
   meta,
 }: PlanResourcesResponseProtobuf): PlanResourcesResponse {
-  if (!filter) {
-    throw new Error("Missing filter on PlanResources response");
-  }
+  const base: PlanResourcesResponseBase = {
+    cerbosCallId,
+    requestId,
+    validationErrors: validationErrors.map(validationErrorFromProtobuf),
+    metadata: meta && planResourcesMetadataFromProtobuf(meta),
+  };
+
+  requireField("PlanResourcesResponse.filter", filter);
 
   const kind = planKindFromProtobuf(filter.kind);
-  const metadata = meta && planResourcesMetadataFromProtobuf(meta);
 
-  if (kind === PlanKind.CONDITIONAL) {
-    if (!filter.condition) {
-      throw new Error("Missing filter condition on PlanResources response");
-    }
-
-    return {
-      requestId,
-      kind,
-      condition: planOperandFromProtobuf(filter.condition),
-      validationErrors: validationErrors.map(validationErrorFromProtobuf),
-      metadata,
-    };
+  if (kind !== PlanKind.CONDITIONAL) {
+    return { ...base, kind };
   }
 
+  requireField("PlanResourcesFilter.condition", filter.condition);
+
   return {
-    requestId,
+    ...base,
     kind,
-    validationErrors: validationErrors.map(validationErrorFromProtobuf),
-    metadata,
+    condition: planOperandFromProtobuf(filter.condition),
   };
 }
 
 function planKindFromProtobuf(kind: PlanResourcesFilter_Kind): PlanKind {
-  switch (kind) {
-    case PlanResourcesFilter_Kind.KIND_ALWAYS_ALLOWED:
-      return PlanKind.ALWAYS_ALLOWED;
-
-    case PlanResourcesFilter_Kind.KIND_ALWAYS_DENIED:
-      return PlanKind.ALWAYS_DENIED;
-
-    case PlanResourcesFilter_Kind.KIND_CONDITIONAL:
-      return PlanKind.CONDITIONAL;
-
-    default:
-      throw new Error(
-        `Unexpected PlanResources filter kind ${kind} (${
-          PlanResourcesFilter_Kind[kind as number] ?? "unrecognized"
-        })`,
-      );
-  }
+  return translateEnum(
+    "PlanResourcesFilter.Kind",
+    PlanResourcesFilter_Kind,
+    kind,
+    {
+      [PlanResourcesFilter_Kind.KIND_UNSPECIFIED]: unexpected,
+      [PlanResourcesFilter_Kind.KIND_ALWAYS_ALLOWED]: PlanKind.ALWAYS_ALLOWED,
+      [PlanResourcesFilter_Kind.KIND_ALWAYS_DENIED]: PlanKind.ALWAYS_DENIED,
+      [PlanResourcesFilter_Kind.KIND_CONDITIONAL]: PlanKind.CONDITIONAL,
+    },
+  );
 }
 
 function planOperandFromProtobuf({
   node,
 }: PlanResourcesFilter_Expression_Operand): PlanExpressionOperand {
-  if (!node) {
-    throw new Error("Missing node on PlanResources expression operand");
-  }
-
-  switch (node.$case) {
-    case "expression":
-      return new PlanExpression(
-        node.expression.operator,
-        node.expression.operands.map(planOperandFromProtobuf),
-      );
-
-    case "value":
-      return new PlanExpressionValue((node.value ?? null) as Value);
-
-    case "variable":
-      return new PlanExpressionVariable(node.variable);
-  }
+  return transformOneOf("PlanResourcesFilter.Expression.Operand.node", node, {
+    expression: ({ expression }) =>
+      new PlanExpression(
+        expression.operator,
+        expression.operands.map(planOperandFromProtobuf),
+      ),
+    value: ({ value }) => new PlanExpressionValue((value ?? null) as Value),
+    variable: ({ variable }) => new PlanExpressionVariable(variable),
+  });
 }
 
 function planResourcesMetadataFromProtobuf({
@@ -597,4 +843,93 @@ function planResourcesMetadataFromProtobuf({
     conditionString: filterDebug,
     matchedScope,
   };
+}
+
+const unexpected = Symbol("unexpected");
+type Unexpected = typeof unexpected;
+
+function isUnexpected<T>(
+  value: T | Unexpected | undefined,
+): value is Unexpected | undefined {
+  return value === unexpected || value === undefined;
+}
+
+function translateEnum<
+  Enum extends Record<string | number, number | string>,
+  Result,
+>(
+  descriptor: string,
+  source: Enum,
+  value: Enum[keyof Enum],
+  translate: Record<Enum[keyof Enum], Result | Unexpected>,
+): Result {
+  const result = translate[value] as Result | Unexpected | undefined;
+
+  if (isUnexpected(result)) {
+    const wanted = Object.entries(source)
+      .filter(
+        ([, value]) =>
+          typeof value === "number" &&
+          !isUnexpected(translate[value as Enum[keyof Enum]]),
+      )
+      .map(([key, value]) => `${key}:${value}`)
+      .join("|");
+
+    const got = source[value] ? `${source[value]}:${value}` : value;
+
+    throw new Error(`Unexpected ${descriptor}: wanted ${wanted}, got ${got}`);
+  }
+
+  return result;
+}
+
+function transformOneOf<OneOf extends { $case: string }, Result>(
+  descriptor: string,
+  oneOf: OneOf | undefined,
+  transforms: {
+    [Case in OneOf["$case"]]:
+      | ((oneOf: Extract<OneOf, { $case: Case }>) => Result)
+      | Unexpected;
+  },
+): Result {
+  requireField(descriptor, oneOf);
+
+  const transform = transforms[oneOf.$case as OneOf["$case"]] as
+    | ((oneOf: OneOf) => Result)
+    | Unexpected
+    | undefined;
+
+  if (isUnexpected(transform)) {
+    throw new Error(
+      `Unexpected ${descriptor}: wanted ${Object.keys(transforms).join("|")}, got ${oneOf.$case}`,
+    );
+  }
+
+  return transform(oneOf);
+}
+
+function requireOneOf<
+  OneOf extends { $case: string },
+  Case extends OneOf["$case"],
+>(
+  descriptor: string,
+  oneOf: OneOf | undefined,
+  $case: Case,
+): asserts oneOf is Extract<OneOf, { $case: Case }> {
+  requireField(descriptor, oneOf);
+
+  if (oneOf.$case !== $case) {
+    throw new Error(
+      `Unexpected ${descriptor}: wanted ${$case}, got ${oneOf.$case}`,
+    );
+  }
+}
+
+function requireField<T>(
+  descriptor: string,
+  value: T | undefined,
+): asserts value is T {
+  if (value === undefined) {
+    throw new Error(`Missing ${descriptor}`);
+  }
 }

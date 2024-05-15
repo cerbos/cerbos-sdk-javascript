@@ -3,6 +3,7 @@ version: v1
 types:
   include:
     - cerbos.response.v1.ListAuditLogEntriesResponse
+    - cerbos.svc.v1.CerbosAdminService
     - cerbos.svc.v1.CerbosService
     - jaeger.api_v3.QueryService
 
@@ -19,7 +20,7 @@ plugins:
       - oneof=unions
       - onlyTypes=false
       - outputEncodeMethods=true
-      - outputJsonMethods=from-only
+      - outputJsonMethods=true
       - outputPartialMethods=false
       - outputServices=grpc-js
       - unrecognizedEnum=false

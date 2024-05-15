@@ -7,6 +7,7 @@ import type {
   EnablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
+  ListAuditLogEntriesRequest,
   ListPoliciesRequest,
   ListSchemasRequest,
   PlanResourcesRequest,
@@ -22,6 +23,7 @@ import type {
   EnablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
+  ListAuditLogEntriesResponse,
   ListPoliciesResponse,
   ListSchemasResponse,
   PlanResourcesResponse,
@@ -32,21 +34,32 @@ import type {
 /** @internal */
 export interface _Services {
   admin: {
-    addOrUpdatePolicy: [AddOrUpdatePolicyRequest, AddOrUpdatePolicyResponse];
-    addOrUpdateSchema: [AddOrUpdateSchemaRequest, AddOrUpdateSchemaResponse];
-    deleteSchema: [DeleteSchemaRequest, DeleteSchemaResponse];
-    disablePolicy: [DisablePolicyRequest, DisablePolicyResponse];
-    enablePolicy: [EnablePolicyRequest, EnablePolicyResponse];
-    getPolicy: [GetPolicyRequest, GetPolicyResponse];
-    getSchema: [GetSchemaRequest, GetSchemaResponse];
-    listPolicies: [ListPoliciesRequest, ListPoliciesResponse];
-    listSchemas: [ListSchemasRequest, ListSchemasResponse];
-    reloadStore: [ReloadStoreRequest, ReloadStoreResponse];
+    unary: {
+      addOrUpdatePolicy: [AddOrUpdatePolicyRequest, AddOrUpdatePolicyResponse];
+      addOrUpdateSchema: [AddOrUpdateSchemaRequest, AddOrUpdateSchemaResponse];
+      deleteSchema: [DeleteSchemaRequest, DeleteSchemaResponse];
+      disablePolicy: [DisablePolicyRequest, DisablePolicyResponse];
+      enablePolicy: [EnablePolicyRequest, EnablePolicyResponse];
+      getPolicy: [GetPolicyRequest, GetPolicyResponse];
+      getSchema: [GetSchemaRequest, GetSchemaResponse];
+      listPolicies: [ListPoliciesRequest, ListPoliciesResponse];
+      listSchemas: [ListSchemasRequest, ListSchemasResponse];
+      reloadStore: [ReloadStoreRequest, ReloadStoreResponse];
+    };
+    serverStream: {
+      listAuditLogEntries: [
+        ListAuditLogEntriesRequest,
+        ListAuditLogEntriesResponse,
+      ];
+    };
   };
   cerbos: {
-    checkResources: [CheckResourcesRequest, CheckResourcesResponse];
-    planResources: [PlanResourcesRequest, PlanResourcesResponse];
-    serverInfo: [ServerInfoRequest, ServerInfoResponse];
+    unary: {
+      checkResources: [CheckResourcesRequest, CheckResourcesResponse];
+      planResources: [PlanResourcesRequest, PlanResourcesResponse];
+      serverInfo: [ServerInfoRequest, ServerInfoResponse];
+    };
+    serverStream: Record<string, never>;
   };
 }
 
@@ -54,22 +67,28 @@ export interface _Services {
 export type _Service = keyof _Services;
 
 /** @internal */
-export type _RPC<Service> = Service extends _Service
-  ? keyof _Services[Service]
-  : never;
+export type _MethodKind = "unary" | "serverStream";
+
+/** @internal */
+export type _Method<
+  Service extends _Service,
+  MethodKind extends _MethodKind,
+> = Exclude<keyof _Services[Service][MethodKind], number | symbol>;
 
 /** @internal */
 export type _Request<
   Service extends _Service,
-  RPC extends _RPC<Service>,
-> = _Services[Service][RPC] extends unknown[]
-  ? _Services[Service][RPC][0]
+  MethodKind extends _MethodKind,
+  Method extends _Method<Service, MethodKind>,
+> = _Services[Service][MethodKind][Method] extends unknown[]
+  ? _Services[Service][MethodKind][Method][0]
   : never;
 
 /** @internal */
 export type _Response<
   Service extends _Service,
-  RPC extends _RPC<Service>,
-> = _Services[Service][RPC] extends unknown[]
-  ? _Services[Service][RPC][1]
+  MethodKind extends _MethodKind,
+  Method extends _Method<Service, MethodKind>,
+> = _Services[Service][MethodKind][Method] extends unknown[]
+  ? _Services[Service][MethodKind][Method][1]
   : never;

@@ -83,6 +83,20 @@ export const Constraint = {
         : "",
     };
   },
+
+  toJSON(message: Constraint): unknown {
+    const obj: any = {};
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.message !== "") {
+      obj.message = message.message;
+    }
+    if (message.expression !== "") {
+      obj.expression = message.expression;
+    }
+    return obj;
+  },
 };
 
 function isSet(value: any): boolean {

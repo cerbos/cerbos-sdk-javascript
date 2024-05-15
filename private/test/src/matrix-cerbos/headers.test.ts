@@ -1,5 +1,3 @@
-import { randomUUID } from "crypto";
-
 import { beforeAll, describe, expect, it } from "vitest";
 
 import type { Client, Options } from "@cerbos/core";
@@ -8,35 +6,87 @@ import { HTTP } from "@cerbos/http";
 
 import {
   describeIfCerbosVersionIsAtLeast,
-  fetchDecisionLogEntry,
+  getDecisionLogEntry,
+  grpcUserAgent,
+  httpUserAgent,
 } from "../helpers";
-import type { DecisionLogEntry } from "../protobuf/cerbos/audit/v1/audit";
 import type { Ports } from "../servers";
-import { ports as serverPorts, tls } from "../servers";
+import { adminCredentials, ports as serverPorts, tls } from "../servers";
 
-/* eslint-disable @typescript-eslint/no-var-requires -- Can't import package.json files because they're outside of the project's rootDir */
-const { version: grpcSdkVersion } =
-  require("../../../../packages/grpc/package.json") as { version: string };
-
-const { version: httpSdkVersion } =
-  require("../../../../packages/http/package.json") as { version: string };
-
-const {
-  devDependencies: { "@grpc/grpc-js": grpcJsVersion },
-} = require("../../package.json") as {
-  devDependencies: { "@grpc/grpc-js": string };
-};
-/* eslint-enable @typescript-eslint/no-var-requires */
-
+// Prior to 0.33.0, the minimum flushInterval for audit logs was 5s, which makes this painfully slow.
 describeIfCerbosVersionIsAtLeast("0.33.0")("Client", () => {
   let ports: Ports;
+  let admin: Client;
 
   beforeAll(async () => {
     ports = await serverPorts();
+    admin = new GRPC(`localhost:${ports.tls.grpc}`, {
+      tls: tls(),
+      adminCredentials,
+    });
   });
 
   describe("headers", () => {
-    describe.each([
+    const clientHeadersTestCases = [
+      {
+        description: "an object",
+        clientHeaders: {
+          Foo: "42",
+          "User-Agent": "ignored",
+        },
+        expectedFoo: "42",
+      },
+      {
+        description: "a function",
+        clientHeaders: (): HeadersInit => ({
+          Foo: "42",
+          "User-Agent": "ignored",
+        }),
+        expectedFoo: "42",
+      },
+      {
+        description: "an async function",
+        clientHeaders: async (): Promise<HeadersInit> =>
+          await Promise.resolve({
+            Foo: "42",
+            "User-Agent": "ignored",
+          }),
+        expectedFoo: "42",
+      },
+      {
+        description: "undefined",
+        clientHeaders: undefined,
+        expectedFoo: undefined,
+      },
+    ];
+
+    const requestHeadersTestCases = [
+      {
+        title: "sets client-wide headers on all requests",
+        requestHeaders: undefined,
+        expectedBar: undefined,
+      },
+      {
+        title: "adds per-request headers",
+        requestHeaders: {
+          Bar: "99",
+          "User-Agent": "ignored again",
+        },
+        expectedBar: "99",
+      },
+      {
+        title: "overrides client-wide headers with per-request headers",
+        requestHeaders: {
+          Foo: "43",
+          Bar: "99",
+          "User-Agent": "ignored again",
+        },
+        expectedFoo: "43",
+        expectedBar: "99",
+      },
+    ];
+
+    const clientTestCases = [
       {
         type: "gRPC with default user agent",
         client: (headers: Options["headers"]): Client =>
@@ -44,7 +94,7 @@ describeIfCerbosVersionIsAtLeast("0.33.0")("Client", () => {
             tls: tls(),
             headers,
           }),
-        expectedUserAgent: `cerbos-sdk-javascript-grpc/${grpcSdkVersion} grpc-node-js/${grpcJsVersion}`,
+        expectedUserAgent: grpcUserAgent,
       },
       {
         type: "gRPC with custom user agent",
@@ -54,7 +104,7 @@ describeIfCerbosVersionIsAtLeast("0.33.0")("Client", () => {
             headers,
             userAgent: "test/9000",
           }),
-        expectedUserAgent: `test/9000 cerbos-sdk-javascript-grpc/${grpcSdkVersion} grpc-node-js/${grpcJsVersion}`,
+        expectedUserAgent: `test/9000 ${grpcUserAgent}`,
       },
       {
         type: "HTTP with default user agent",
@@ -62,7 +112,7 @@ describeIfCerbosVersionIsAtLeast("0.33.0")("Client", () => {
           new HTTP(`https://localhost:${ports.tls.http}`, {
             headers,
           }),
-        expectedUserAgent: `cerbos-sdk-javascript-http/${httpSdkVersion}`,
+        expectedUserAgent: httpUserAgent,
       },
       {
         type: "HTTP with custom user agent",
@@ -71,111 +121,91 @@ describeIfCerbosVersionIsAtLeast("0.33.0")("Client", () => {
             headers,
             userAgent: "test/9000",
           }),
-        expectedUserAgent: `test/9000 cerbos-sdk-javascript-http/${httpSdkVersion}`,
+        expectedUserAgent: `test/9000 ${httpUserAgent}`,
       },
-    ])("$type", ({ client: factory, expectedUserAgent }) => {
-      describe.each([
-        {
-          description: "an object",
-          clientHeaders: {
-            Foo: "42",
-            "User-Agent": "ignored",
-          },
-          expectedFoo: "42",
-        },
-        {
-          description: "a function",
-          clientHeaders: (): HeadersInit => ({
-            Foo: "42",
-            "User-Agent": "ignored",
-          }),
-          expectedFoo: "42",
-        },
-        {
-          description: "an async function",
-          clientHeaders: async (): Promise<HeadersInit> =>
-            await Promise.resolve({
-              Foo: "42",
-              "User-Agent": "ignored",
+    ].map((clientTestCase) => ({
+      ...clientTestCase,
+      clientHeadersTestCases: clientHeadersTestCases.map(
+        (clientHeadersTestCase) => ({
+          ...clientHeadersTestCase,
+          requestHeadersTestCases: requestHeadersTestCases.map(
+            (requestHeadersTestCase) => ({
+              ...requestHeadersTestCase,
+              callId: "",
             }),
-          expectedFoo: "42",
-        },
-        {
-          description: "undefined",
-          clientHeaders: undefined,
-          expectedFoo: undefined,
-        },
-      ])(
-        "with headers option set to $description",
-        ({ clientHeaders, expectedFoo }) => {
-          let client: Client;
+          ),
+        }),
+      ),
+    }));
 
-          beforeAll(() => {
-            client = factory(clientHeaders);
-          });
+    beforeAll(async () => {
+      await Promise.all(
+        clientTestCases.flatMap(({ client: factory, clientHeadersTestCases }) =>
+          clientHeadersTestCases.flatMap(
+            ({ clientHeaders, requestHeadersTestCases }) => {
+              const client = factory(clientHeaders);
+              return requestHeadersTestCases.map(async (testCase) => {
+                const { cerbosCallId } = await client.checkResources(
+                  {
+                    principal: {
+                      id: "me@example.com",
+                      roles: ["USER"],
+                    },
+                    resources: [
+                      {
+                        resource: {
+                          kind: "document",
+                          id: "test",
+                        },
+                        actions: ["edit"],
+                      },
+                    ],
+                  },
+                  { headers: testCase.requestHeaders },
+                );
 
-          it.each([
-            {
-              title: "sets client-wide headers on all requests",
-              requestHeaders: undefined,
-              expectedFoo,
-              expectedBar: undefined,
+                testCase.callId = cerbosCallId;
+              });
             },
-            {
-              title: "adds per-request headers",
-              requestHeaders: {
-                Bar: "99",
-                "User-Agent": "ignored again",
-              },
-              expectedFoo,
-              expectedBar: "99",
-            },
-            {
-              title: "overrides client-wide headers with per-request headers",
-              requestHeaders: {
-                Foo: "43",
-                Bar: "99",
-                "User-Agent": "ignored again",
-              },
-              expectedFoo: "43",
-              expectedBar: "99",
-            },
-          ])("$title", async ({ requestHeaders, expectedFoo, expectedBar }) => {
-            const requestId = randomUUID();
-
-            await client.isAllowed(
-              {
-                requestId,
-                principal: {
-                  id: "me@example.com",
-                  roles: ["USER"],
-                },
-                resource: {
-                  kind: "document",
-                  id: "test",
-                },
-                action: "edit",
-              },
-              { headers: requestHeaders },
-            );
-
-            const entry = await fetchDecisionLogEntry(ports.tls, requestId);
-
-            const expectedMetadata: DecisionLogEntry["metadata"] = {};
-
-            if (expectedFoo) {
-              expectedMetadata["foo"] = { values: [expectedFoo] };
-            }
-
-            if (expectedBar) {
-              expectedMetadata["bar"] = { values: [expectedBar] };
-            }
-
-            expect(entry.metadata).toEqual(expectedMetadata);
-            expect(entry.peer?.userAgent).toEqual(expectedUserAgent);
-          });
-        },
+          ),
+        ),
       );
     });
+
+    describe.each(clientTestCases)(
+      "$type",
+      ({ clientHeadersTestCases, expectedUserAgent }) => {
+        describe.each(clientHeadersTestCases)(
+          "with headers option set to $description",
+          ({ requestHeadersTestCases, expectedFoo }) => {
+            it.each(requestHeadersTestCases)(
+              "$title",
+              async ({
+                callId,
+                expectedFoo: expectedFooOverride,
+                expectedBar,
+              }) => {
+                const entry = await getDecisionLogEntry(admin, callId);
+
+                const expectedMetadata: Record<string, string[]> = {};
+
+                if (expectedFooOverride) {
+                  expectedMetadata["foo"] = [expectedFooOverride];
+                } else if (expectedFoo) {
+                  expectedMetadata["foo"] = [expectedFoo];
+                }
+
+                if (expectedBar) {
+                  expectedMetadata["bar"] = [expectedBar];
+                }
+
+                expect(entry.metadata).toEqual(expectedMetadata);
+                expect(entry.peer.userAgent).toEqual(expectedUserAgent);
+              },
+            );
+          },
+        );
+      },
+    );
   });
 });

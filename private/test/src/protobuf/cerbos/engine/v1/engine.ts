@@ -7,7 +7,7 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
 import { Value } from "../../../google/protobuf/struct";
-import { Effect, effectFromJSON } from "../../effect/v1/effect";
+import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
 import { ValidationError } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.engine.v1";
@@ -61,6 +61,27 @@ export function planResourcesFilter_KindFromJSON(
     case 3:
     case "KIND_CONDITIONAL":
       return PlanResourcesFilter_Kind.KIND_CONDITIONAL;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum PlanResourcesFilter_Kind",
+      );
+  }
+}
+
+export function planResourcesFilter_KindToJSON(
+  object: PlanResourcesFilter_Kind,
+): string {
+  switch (object) {
+    case PlanResourcesFilter_Kind.KIND_UNSPECIFIED:
+      return "KIND_UNSPECIFIED";
+    case PlanResourcesFilter_Kind.KIND_ALWAYS_ALLOWED:
+      return "KIND_ALWAYS_ALLOWED";
+    case PlanResourcesFilter_Kind.KIND_ALWAYS_DENIED:
+      return "KIND_ALWAYS_DENIED";
+    case PlanResourcesFilter_Kind.KIND_CONDITIONAL:
+      return "KIND_CONDITIONAL";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " +
@@ -284,6 +305,29 @@ export const PlanResourcesInput = {
         : false,
     };
   },
+
+  toJSON(message: PlanResourcesInput): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.action !== "") {
+      obj.action = message.action;
+    }
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.resource !== undefined) {
+      obj.resource = PlanResourcesInput_Resource.toJSON(message.resource);
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
+    if (message.includeMeta !== false) {
+      obj.includeMeta = message.includeMeta;
+    }
+    return obj;
+  },
 };
 
 function createBasePlanResourcesInput_Resource(): PlanResourcesInput_Resource {
@@ -386,6 +430,29 @@ export const PlanResourcesInput_Resource = {
       scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
   },
+
+  toJSON(message: PlanResourcesInput_Resource): unknown {
+    const obj: any = {};
+    if (message.kind !== "") {
+      obj.kind = message.kind;
+    }
+    if (message.attr) {
+      const entries = Object.entries(message.attr);
+      if (entries.length > 0) {
+        obj.attr = {};
+        entries.forEach(([k, v]) => {
+          obj.attr[k] = v;
+        });
+      }
+    }
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    return obj;
+  },
 };
 
 function createBasePlanResourcesInput_Resource_AttrEntry(): PlanResourcesInput_Resource_AttrEntry {
@@ -448,6 +515,17 @@ export const PlanResourcesInput_Resource_AttrEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: PlanResourcesInput_Resource_AttrEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -515,6 +593,19 @@ export const PlanResourcesFilter = {
         ? PlanResourcesFilter_Expression_Operand.fromJSON(object.condition)
         : undefined,
     };
+  },
+
+  toJSON(message: PlanResourcesFilter): unknown {
+    const obj: any = {};
+    if (message.kind !== 0) {
+      obj.kind = planResourcesFilter_KindToJSON(message.kind);
+    }
+    if (message.condition !== undefined) {
+      obj.condition = PlanResourcesFilter_Expression_Operand.toJSON(
+        message.condition,
+      );
+    }
+    return obj;
   },
 };
 
@@ -589,6 +680,19 @@ export const PlanResourcesFilter_Expression = {
           )
         : [],
     };
+  },
+
+  toJSON(message: PlanResourcesFilter_Expression): unknown {
+    const obj: any = {};
+    if (message.operator !== "") {
+      obj.operator = message.operator;
+    }
+    if (message.operands?.length) {
+      obj.operands = message.operands.map((e) =>
+        PlanResourcesFilter_Expression_Operand.toJSON(e),
+      );
+    }
+    return obj;
   },
 };
 
@@ -689,6 +793,22 @@ export const PlanResourcesFilter_Expression_Operand = {
               }
             : undefined,
     };
+  },
+
+  toJSON(message: PlanResourcesFilter_Expression_Operand): unknown {
+    const obj: any = {};
+    if (message.node?.$case === "value") {
+      obj.value = message.node.value;
+    }
+    if (message.node?.$case === "expression") {
+      obj.expression = PlanResourcesFilter_Expression.toJSON(
+        message.node.expression,
+      );
+    }
+    if (message.node?.$case === "variable") {
+      obj.variable = message.node.variable;
+    }
+    return obj;
   },
 };
 
@@ -837,6 +957,37 @@ export const PlanResourcesOutput = {
         : [],
     };
   },
+
+  toJSON(message: PlanResourcesOutput): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.action !== "") {
+      obj.action = message.action;
+    }
+    if (message.kind !== "") {
+      obj.kind = message.kind;
+    }
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    if (message.filter !== undefined) {
+      obj.filter = PlanResourcesFilter.toJSON(message.filter);
+    }
+    if (message.filterDebug !== "") {
+      obj.filterDebug = message.filterDebug;
+    }
+    if (message.validationErrors?.length) {
+      obj.validationErrors = message.validationErrors.map((e) =>
+        ValidationError.toJSON(e),
+      );
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckInput(): CheckInput {
@@ -942,6 +1093,26 @@ export const CheckInput = {
         ? AuxData.fromJSON(object.auxData)
         : undefined,
     };
+  },
+
+  toJSON(message: CheckInput): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions;
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
+    return obj;
   },
 };
 
@@ -1081,6 +1252,37 @@ export const CheckOutput = {
         : [],
     };
   },
+
+  toJSON(message: CheckOutput): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.resourceId !== "") {
+      obj.resourceId = message.resourceId;
+    }
+    if (message.actions) {
+      const entries = Object.entries(message.actions);
+      if (entries.length > 0) {
+        obj.actions = {};
+        entries.forEach(([k, v]) => {
+          obj.actions[k] = CheckOutput_ActionEffect.toJSON(v);
+        });
+      }
+    }
+    if (message.effectiveDerivedRoles?.length) {
+      obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
+    }
+    if (message.validationErrors?.length) {
+      obj.validationErrors = message.validationErrors.map((e) =>
+        ValidationError.toJSON(e),
+      );
+    }
+    if (message.outputs?.length) {
+      obj.outputs = message.outputs.map((e) => OutputEntry.toJSON(e));
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckOutput_ActionEffect(): CheckOutput_ActionEffect {
@@ -1152,6 +1354,20 @@ export const CheckOutput_ActionEffect = {
       scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
   },
+
+  toJSON(message: CheckOutput_ActionEffect): unknown {
+    const obj: any = {};
+    if (message.effect !== 0) {
+      obj.effect = effectToJSON(message.effect);
+    }
+    if (message.policy !== "") {
+      obj.policy = message.policy;
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckOutput_ActionsEntry(): CheckOutput_ActionsEntry {
@@ -1220,6 +1436,17 @@ export const CheckOutput_ActionsEntry = {
         : undefined,
     };
   },
+
+  toJSON(message: CheckOutput_ActionsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = CheckOutput_ActionEffect.toJSON(message.value);
+    }
+    return obj;
+  },
 };
 
 function createBaseOutputEntry(): OutputEntry {
@@ -1276,6 +1503,17 @@ export const OutputEntry = {
       src: isSet(object.src) ? globalThis.String(object.src) : "",
       val: isSet(object?.val) ? object.val : undefined,
     };
+  },
+
+  toJSON(message: OutputEntry): unknown {
+    const obj: any = {};
+    if (message.src !== "") {
+      obj.src = message.src;
+    }
+    if (message.val !== undefined) {
+      obj.val = message.val;
+    }
+    return obj;
   },
 };
 
@@ -1384,6 +1622,32 @@ export const Resource = {
       scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
   },
+
+  toJSON(message: Resource): unknown {
+    const obj: any = {};
+    if (message.kind !== "") {
+      obj.kind = message.kind;
+    }
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.attr) {
+      const entries = Object.entries(message.attr);
+      if (entries.length > 0) {
+        obj.attr = {};
+        entries.forEach(([k, v]) => {
+          obj.attr[k] = v;
+        });
+      }
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    return obj;
+  },
 };
 
 function createBaseResource_AttrEntry(): Resource_AttrEntry {
@@ -1443,6 +1707,17 @@ export const Resource_AttrEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: Resource_AttrEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -1553,6 +1828,32 @@ export const Principal = {
       scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
   },
+
+  toJSON(message: Principal): unknown {
+    const obj: any = {};
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.roles?.length) {
+      obj.roles = message.roles;
+    }
+    if (message.attr) {
+      const entries = Object.entries(message.attr);
+      if (entries.length > 0) {
+        obj.attr = {};
+        entries.forEach(([k, v]) => {
+          obj.attr[k] = v;
+        });
+      }
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    return obj;
+  },
 };
 
 function createBasePrincipal_AttrEntry(): Principal_AttrEntry {
@@ -1612,6 +1913,17 @@ export const Principal_AttrEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: Principal_AttrEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -1675,6 +1987,20 @@ export const AuxData = {
         : {},
     };
   },
+
+  toJSON(message: AuxData): unknown {
+    const obj: any = {};
+    if (message.jwt) {
+      const entries = Object.entries(message.jwt);
+      if (entries.length > 0) {
+        obj.jwt = {};
+        entries.forEach(([k, v]) => {
+          obj.jwt[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseAuxData_JwtEntry(): AuxData_JwtEntry {
@@ -1734,6 +2060,17 @@ export const AuxData_JwtEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: AuxData_JwtEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 

@@ -6,12 +6,16 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 import { Value } from "../../../google/protobuf/struct";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import {
   PlanResourcesInput_Resource,
   Principal,
   Resource,
 } from "../../engine/v1/engine";
+import { Policy } from "../../policy/v1/policy";
+import { Schema } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.request.v1";
 
@@ -88,7 +92,110 @@ export interface AuxData_JWT {
   keySetId: string;
 }
 
+export interface AddOrUpdatePolicyRequest {
+  policies: Policy[];
+}
+
+export interface ListAuditLogEntriesRequest {
+  kind: ListAuditLogEntriesRequest_Kind;
+  filter?:
+    | { $case: "tail"; tail: number }
+    | { $case: "between"; between: ListAuditLogEntriesRequest_TimeRange }
+    | { $case: "since"; since: Duration }
+    | { $case: "lookup"; lookup: string }
+    | undefined;
+}
+
+export enum ListAuditLogEntriesRequest_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_ACCESS = 1,
+  KIND_DECISION = 2,
+}
+
+export function listAuditLogEntriesRequest_KindFromJSON(
+  object: any,
+): ListAuditLogEntriesRequest_Kind {
+  switch (object) {
+    case 0:
+    case "KIND_UNSPECIFIED":
+      return ListAuditLogEntriesRequest_Kind.KIND_UNSPECIFIED;
+    case 1:
+    case "KIND_ACCESS":
+      return ListAuditLogEntriesRequest_Kind.KIND_ACCESS;
+    case 2:
+    case "KIND_DECISION":
+      return ListAuditLogEntriesRequest_Kind.KIND_DECISION;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum ListAuditLogEntriesRequest_Kind",
+      );
+  }
+}
+
+export function listAuditLogEntriesRequest_KindToJSON(
+  object: ListAuditLogEntriesRequest_Kind,
+): string {
+  switch (object) {
+    case ListAuditLogEntriesRequest_Kind.KIND_UNSPECIFIED:
+      return "KIND_UNSPECIFIED";
+    case ListAuditLogEntriesRequest_Kind.KIND_ACCESS:
+      return "KIND_ACCESS";
+    case ListAuditLogEntriesRequest_Kind.KIND_DECISION:
+      return "KIND_DECISION";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum ListAuditLogEntriesRequest_Kind",
+      );
+  }
+}
+
+export interface ListAuditLogEntriesRequest_TimeRange {
+  start: Date | undefined;
+  end: Date | undefined;
+}
+
 export interface ServerInfoRequest {}
+
+export interface ListPoliciesRequest {
+  includeDisabled: boolean;
+  nameRegexp: string;
+  scopeRegexp: string;
+  versionRegexp: string;
+}
+
+export interface GetPolicyRequest {
+  id: string[];
+}
+
+export interface DisablePolicyRequest {
+  id: string[];
+}
+
+export interface EnablePolicyRequest {
+  id: string[];
+}
+
+export interface AddOrUpdateSchemaRequest {
+  schemas: Schema[];
+}
+
+export interface ListSchemasRequest {}
+
+export interface GetSchemaRequest {
+  id: string[];
+}
+
+export interface DeleteSchemaRequest {
+  id: string[];
+}
+
+export interface ReloadStoreRequest {
+  wait: boolean;
+}
 
 function createBasePlanResourcesRequest(): PlanResourcesRequest {
   return {
@@ -215,6 +322,29 @@ export const PlanResourcesRequest = {
         : false,
     };
   },
+
+  toJSON(message: PlanResourcesRequest): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.action !== "") {
+      obj.action = message.action;
+    }
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.resource !== undefined) {
+      obj.resource = PlanResourcesInput_Resource.toJSON(message.resource);
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
+    if (message.includeMeta !== false) {
+      obj.includeMeta = message.includeMeta;
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourceSetRequest(): CheckResourceSetRequest {
@@ -338,6 +468,29 @@ export const CheckResourceSetRequest = {
         : undefined,
     };
   },
+
+  toJSON(message: CheckResourceSetRequest): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions;
+    }
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.resource !== undefined) {
+      obj.resource = ResourceSet.toJSON(message.resource);
+    }
+    if (message.includeMeta !== false) {
+      obj.includeMeta = message.includeMeta;
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
+    return obj;
+  },
 };
 
 function createBaseResourceSet(): ResourceSet {
@@ -435,6 +588,29 @@ export const ResourceSet = {
       scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
     };
   },
+
+  toJSON(message: ResourceSet): unknown {
+    const obj: any = {};
+    if (message.kind !== "") {
+      obj.kind = message.kind;
+    }
+    if (message.policyVersion !== "") {
+      obj.policyVersion = message.policyVersion;
+    }
+    if (message.instances) {
+      const entries = Object.entries(message.instances);
+      if (entries.length > 0) {
+        obj.instances = {};
+        entries.forEach(([k, v]) => {
+          obj.instances[k] = AttributesMap.toJSON(v);
+        });
+      }
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    return obj;
+  },
 };
 
 function createBaseResourceSet_InstancesEntry(): ResourceSet_InstancesEntry {
@@ -496,6 +672,17 @@ export const ResourceSet_InstancesEntry = {
         ? AttributesMap.fromJSON(object.value)
         : undefined,
     };
+  },
+
+  toJSON(message: ResourceSet_InstancesEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = AttributesMap.toJSON(message.value);
+    }
+    return obj;
   },
 };
 
@@ -561,6 +748,20 @@ export const AttributesMap = {
         : {},
     };
   },
+
+  toJSON(message: AttributesMap): unknown {
+    const obj: any = {};
+    if (message.attr) {
+      const entries = Object.entries(message.attr);
+      if (entries.length > 0) {
+        obj.attr = {};
+        entries.forEach(([k, v]) => {
+          obj.attr[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 function createBaseAttributesMap_AttrEntry(): AttributesMap_AttrEntry {
@@ -623,6 +824,17 @@ export const AttributesMap_AttrEntry = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: AttributesMap_AttrEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -729,6 +941,25 @@ export const CheckResourceBatchRequest = {
         : undefined,
     };
   },
+
+  toJSON(message: CheckResourceBatchRequest): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) =>
+        CheckResourceBatchRequest_BatchEntry.toJSON(e),
+      );
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourceBatchRequest_BatchEntry(): CheckResourceBatchRequest_BatchEntry {
@@ -792,6 +1023,17 @@ export const CheckResourceBatchRequest_BatchEntry = {
         ? Resource.fromJSON(object.resource)
         : undefined,
     };
+  },
+
+  toJSON(message: CheckResourceBatchRequest_BatchEntry): unknown {
+    const obj: any = {};
+    if (message.actions?.length) {
+      obj.actions = message.actions;
+    }
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
+    return obj;
   },
 };
 
@@ -909,6 +1151,28 @@ export const CheckResourcesRequest = {
         : undefined,
     };
   },
+
+  toJSON(message: CheckResourcesRequest): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.includeMeta !== false) {
+      obj.includeMeta = message.includeMeta;
+    }
+    if (message.principal !== undefined) {
+      obj.principal = Principal.toJSON(message.principal);
+    }
+    if (message.resources?.length) {
+      obj.resources = message.resources.map((e) =>
+        CheckResourcesRequest_ResourceEntry.toJSON(e),
+      );
+    }
+    if (message.auxData !== undefined) {
+      obj.auxData = AuxData.toJSON(message.auxData);
+    }
+    return obj;
+  },
 };
 
 function createBaseCheckResourcesRequest_ResourceEntry(): CheckResourcesRequest_ResourceEntry {
@@ -973,6 +1237,17 @@ export const CheckResourcesRequest_ResourceEntry = {
         : undefined,
     };
   },
+
+  toJSON(message: CheckResourcesRequest_ResourceEntry): unknown {
+    const obj: any = {};
+    if (message.actions?.length) {
+      obj.actions = message.actions;
+    }
+    if (message.resource !== undefined) {
+      obj.resource = Resource.toJSON(message.resource);
+    }
+    return obj;
+  },
 };
 
 function createBaseAuxData(): AuxData {
@@ -1018,6 +1293,14 @@ export const AuxData = {
     return {
       jwt: isSet(object.jwt) ? AuxData_JWT.fromJSON(object.jwt) : undefined,
     };
+  },
+
+  toJSON(message: AuxData): unknown {
+    const obj: any = {};
+    if (message.jwt !== undefined) {
+      obj.jwt = AuxData_JWT.toJSON(message.jwt);
+    }
+    return obj;
   },
 };
 
@@ -1078,6 +1361,301 @@ export const AuxData_JWT = {
         : "",
     };
   },
+
+  toJSON(message: AuxData_JWT): unknown {
+    const obj: any = {};
+    if (message.token !== "") {
+      obj.token = message.token;
+    }
+    if (message.keySetId !== "") {
+      obj.keySetId = message.keySetId;
+    }
+    return obj;
+  },
+};
+
+function createBaseAddOrUpdatePolicyRequest(): AddOrUpdatePolicyRequest {
+  return { policies: [] };
+}
+
+export const AddOrUpdatePolicyRequest = {
+  encode(
+    message: AddOrUpdatePolicyRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.policies) {
+      Policy.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): AddOrUpdatePolicyRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAddOrUpdatePolicyRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.policies.push(Policy.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AddOrUpdatePolicyRequest {
+    return {
+      policies: globalThis.Array.isArray(object?.policies)
+        ? object.policies.map((e: any) => Policy.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: AddOrUpdatePolicyRequest): unknown {
+    const obj: any = {};
+    if (message.policies?.length) {
+      obj.policies = message.policies.map((e) => Policy.toJSON(e));
+    }
+    return obj;
+  },
+};
+
+function createBaseListAuditLogEntriesRequest(): ListAuditLogEntriesRequest {
+  return { kind: 0, filter: undefined };
+}
+
+export const ListAuditLogEntriesRequest = {
+  encode(
+    message: ListAuditLogEntriesRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.kind !== 0) {
+      writer.uint32(8).int32(message.kind);
+    }
+    switch (message.filter?.$case) {
+      case "tail":
+        writer.uint32(16).uint32(message.filter.tail);
+        break;
+      case "between":
+        ListAuditLogEntriesRequest_TimeRange.encode(
+          message.filter.between,
+          writer.uint32(26).fork(),
+        ).ldelim();
+        break;
+      case "since":
+        Duration.encode(
+          message.filter.since,
+          writer.uint32(34).fork(),
+        ).ldelim();
+        break;
+      case "lookup":
+        writer.uint32(42).string(message.filter.lookup);
+        break;
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ListAuditLogEntriesRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListAuditLogEntriesRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.kind = reader.int32() as any;
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.filter = { $case: "tail", tail: reader.uint32() };
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.filter = {
+            $case: "between",
+            between: ListAuditLogEntriesRequest_TimeRange.decode(
+              reader,
+              reader.uint32(),
+            ),
+          };
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.filter = {
+            $case: "since",
+            since: Duration.decode(reader, reader.uint32()),
+          };
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.filter = { $case: "lookup", lookup: reader.string() };
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ListAuditLogEntriesRequest {
+    return {
+      kind: isSet(object.kind)
+        ? listAuditLogEntriesRequest_KindFromJSON(object.kind)
+        : 0,
+      filter: isSet(object.tail)
+        ? { $case: "tail", tail: globalThis.Number(object.tail) }
+        : isSet(object.between)
+          ? {
+              $case: "between",
+              between: ListAuditLogEntriesRequest_TimeRange.fromJSON(
+                object.between,
+              ),
+            }
+          : isSet(object.since)
+            ? { $case: "since", since: Duration.fromJSON(object.since) }
+            : isSet(object.lookup)
+              ? { $case: "lookup", lookup: globalThis.String(object.lookup) }
+              : undefined,
+    };
+  },
+
+  toJSON(message: ListAuditLogEntriesRequest): unknown {
+    const obj: any = {};
+    if (message.kind !== 0) {
+      obj.kind = listAuditLogEntriesRequest_KindToJSON(message.kind);
+    }
+    if (message.filter?.$case === "tail") {
+      obj.tail = Math.round(message.filter.tail);
+    }
+    if (message.filter?.$case === "between") {
+      obj.between = ListAuditLogEntriesRequest_TimeRange.toJSON(
+        message.filter.between,
+      );
+    }
+    if (message.filter?.$case === "since") {
+      obj.since = Duration.toJSON(message.filter.since);
+    }
+    if (message.filter?.$case === "lookup") {
+      obj.lookup = message.filter.lookup;
+    }
+    return obj;
+  },
+};
+
+function createBaseListAuditLogEntriesRequest_TimeRange(): ListAuditLogEntriesRequest_TimeRange {
+  return { start: undefined, end: undefined };
+}
+
+export const ListAuditLogEntriesRequest_TimeRange = {
+  encode(
+    message: ListAuditLogEntriesRequest_TimeRange,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.start !== undefined) {
+      Timestamp.encode(
+        toTimestamp(message.start),
+        writer.uint32(10).fork(),
+      ).ldelim();
+    }
+    if (message.end !== undefined) {
+      Timestamp.encode(
+        toTimestamp(message.end),
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ListAuditLogEntriesRequest_TimeRange {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListAuditLogEntriesRequest_TimeRange();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.start = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32()),
+          );
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.end = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32()),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ListAuditLogEntriesRequest_TimeRange {
+    return {
+      start: isSet(object.start) ? fromJsonTimestamp(object.start) : undefined,
+      end: isSet(object.end) ? fromJsonTimestamp(object.end) : undefined,
+    };
+  },
+
+  toJSON(message: ListAuditLogEntriesRequest_TimeRange): unknown {
+    const obj: any = {};
+    if (message.start !== undefined) {
+      obj.start = message.start.toISOString();
+    }
+    if (message.end !== undefined) {
+      obj.end = message.end.toISOString();
+    }
+    return obj;
+  },
 };
 
 function createBaseServerInfoRequest(): ServerInfoRequest {
@@ -1112,7 +1690,578 @@ export const ServerInfoRequest = {
   fromJSON(_: any): ServerInfoRequest {
     return {};
   },
+
+  toJSON(_: ServerInfoRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
 };
+
+function createBaseListPoliciesRequest(): ListPoliciesRequest {
+  return {
+    includeDisabled: false,
+    nameRegexp: "",
+    scopeRegexp: "",
+    versionRegexp: "",
+  };
+}
+
+export const ListPoliciesRequest = {
+  encode(
+    message: ListPoliciesRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.includeDisabled !== false) {
+      writer.uint32(8).bool(message.includeDisabled);
+    }
+    if (message.nameRegexp !== "") {
+      writer.uint32(18).string(message.nameRegexp);
+    }
+    if (message.scopeRegexp !== "") {
+      writer.uint32(26).string(message.scopeRegexp);
+    }
+    if (message.versionRegexp !== "") {
+      writer.uint32(34).string(message.versionRegexp);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListPoliciesRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListPoliciesRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.includeDisabled = reader.bool();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.nameRegexp = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.scopeRegexp = reader.string();
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.versionRegexp = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ListPoliciesRequest {
+    return {
+      includeDisabled: isSet(object.includeDisabled)
+        ? globalThis.Boolean(object.includeDisabled)
+        : false,
+      nameRegexp: isSet(object.nameRegexp)
+        ? globalThis.String(object.nameRegexp)
+        : "",
+      scopeRegexp: isSet(object.scopeRegexp)
+        ? globalThis.String(object.scopeRegexp)
+        : "",
+      versionRegexp: isSet(object.versionRegexp)
+        ? globalThis.String(object.versionRegexp)
+        : "",
+    };
+  },
+
+  toJSON(message: ListPoliciesRequest): unknown {
+    const obj: any = {};
+    if (message.includeDisabled !== false) {
+      obj.includeDisabled = message.includeDisabled;
+    }
+    if (message.nameRegexp !== "") {
+      obj.nameRegexp = message.nameRegexp;
+    }
+    if (message.scopeRegexp !== "") {
+      obj.scopeRegexp = message.scopeRegexp;
+    }
+    if (message.versionRegexp !== "") {
+      obj.versionRegexp = message.versionRegexp;
+    }
+    return obj;
+  },
+};
+
+function createBaseGetPolicyRequest(): GetPolicyRequest {
+  return { id: [] };
+}
+
+export const GetPolicyRequest = {
+  encode(
+    message: GetPolicyRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.id) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetPolicyRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetPolicyRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetPolicyRequest {
+    return {
+      id: globalThis.Array.isArray(object?.id)
+        ? object.id.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: GetPolicyRequest): unknown {
+    const obj: any = {};
+    if (message.id?.length) {
+      obj.id = message.id;
+    }
+    return obj;
+  },
+};
+
+function createBaseDisablePolicyRequest(): DisablePolicyRequest {
+  return { id: [] };
+}
+
+export const DisablePolicyRequest = {
+  encode(
+    message: DisablePolicyRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.id) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DisablePolicyRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDisablePolicyRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DisablePolicyRequest {
+    return {
+      id: globalThis.Array.isArray(object?.id)
+        ? object.id.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: DisablePolicyRequest): unknown {
+    const obj: any = {};
+    if (message.id?.length) {
+      obj.id = message.id;
+    }
+    return obj;
+  },
+};
+
+function createBaseEnablePolicyRequest(): EnablePolicyRequest {
+  return { id: [] };
+}
+
+export const EnablePolicyRequest = {
+  encode(
+    message: EnablePolicyRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.id) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EnablePolicyRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnablePolicyRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnablePolicyRequest {
+    return {
+      id: globalThis.Array.isArray(object?.id)
+        ? object.id.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: EnablePolicyRequest): unknown {
+    const obj: any = {};
+    if (message.id?.length) {
+      obj.id = message.id;
+    }
+    return obj;
+  },
+};
+
+function createBaseAddOrUpdateSchemaRequest(): AddOrUpdateSchemaRequest {
+  return { schemas: [] };
+}
+
+export const AddOrUpdateSchemaRequest = {
+  encode(
+    message: AddOrUpdateSchemaRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.schemas) {
+      Schema.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): AddOrUpdateSchemaRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAddOrUpdateSchemaRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.schemas.push(Schema.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AddOrUpdateSchemaRequest {
+    return {
+      schemas: globalThis.Array.isArray(object?.schemas)
+        ? object.schemas.map((e: any) => Schema.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: AddOrUpdateSchemaRequest): unknown {
+    const obj: any = {};
+    if (message.schemas?.length) {
+      obj.schemas = message.schemas.map((e) => Schema.toJSON(e));
+    }
+    return obj;
+  },
+};
+
+function createBaseListSchemasRequest(): ListSchemasRequest {
+  return {};
+}
+
+export const ListSchemasRequest = {
+  encode(
+    _: ListSchemasRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListSchemasRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseListSchemasRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): ListSchemasRequest {
+    return {};
+  },
+
+  toJSON(_: ListSchemasRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+};
+
+function createBaseGetSchemaRequest(): GetSchemaRequest {
+  return { id: [] };
+}
+
+export const GetSchemaRequest = {
+  encode(
+    message: GetSchemaRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.id) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetSchemaRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetSchemaRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetSchemaRequest {
+    return {
+      id: globalThis.Array.isArray(object?.id)
+        ? object.id.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: GetSchemaRequest): unknown {
+    const obj: any = {};
+    if (message.id?.length) {
+      obj.id = message.id;
+    }
+    return obj;
+  },
+};
+
+function createBaseDeleteSchemaRequest(): DeleteSchemaRequest {
+  return { id: [] };
+}
+
+export const DeleteSchemaRequest = {
+  encode(
+    message: DeleteSchemaRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.id) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteSchemaRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDeleteSchemaRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DeleteSchemaRequest {
+    return {
+      id: globalThis.Array.isArray(object?.id)
+        ? object.id.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: DeleteSchemaRequest): unknown {
+    const obj: any = {};
+    if (message.id?.length) {
+      obj.id = message.id;
+    }
+    return obj;
+  },
+};
+
+function createBaseReloadStoreRequest(): ReloadStoreRequest {
+  return { wait: false };
+}
+
+export const ReloadStoreRequest = {
+  encode(
+    message: ReloadStoreRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.wait !== false) {
+      writer.uint32(8).bool(message.wait);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ReloadStoreRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseReloadStoreRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.wait = reader.bool();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ReloadStoreRequest {
+    return {
+      wait: isSet(object.wait) ? globalThis.Boolean(object.wait) : false,
+    };
+  },
+
+  toJSON(message: ReloadStoreRequest): unknown {
+    const obj: any = {};
+    if (message.wait !== false) {
+      obj.wait = message.wait;
+    }
+    return obj;
+  },
+};
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const nanos = (date.getTime() % 1_000) * 1_000_000;
+  return { seconds, nanos };
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
+  millis += (t.nanos || 0) / 1_000_000;
+  return new globalThis.Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof globalThis.Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new globalThis.Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
 
 function isObject(value: any): boolean {
   return typeof value === "object" && value !== null;

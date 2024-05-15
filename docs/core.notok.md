@@ -82,7 +82,7 @@ Description
 
 </td><td>
 
-[Status](./core.status.md)
+Exclude&lt;[Status](./core.status.md)<!-- -->, [Status.OK](./core.status.md)<!-- -->&gt;
 
 
 </td><td>

@@ -1,6 +1,6 @@
 audit:
   enabled: true
-  accessLogsEnabled: false
+  accessLogsEnabled: true
   decisionLogsEnabled: true
   includeMetadataKeys:
     - foo

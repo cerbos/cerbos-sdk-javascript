@@ -37,23 +37,31 @@ import type {
   EnablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
+  ListAuditLogEntriesRequest,
   ListPoliciesRequest as ListPoliciesRequestProtobuf,
   PlanResourcesRequest as PlanResourcesRequestProtobuf,
 } from "../protobuf/cerbos/request/v1/request";
+import { ListAuditLogEntriesRequest_Kind } from "../protobuf/cerbos/request/v1/request";
 import type { Schema } from "../protobuf/cerbos/schema/v1/schema";
+import type { Duration } from "../protobuf/google/protobuf/duration";
 import type {
   AddOrUpdatePoliciesRequest,
   AddOrUpdateSchemasRequest,
+  AuditLogFilter,
   AuxData,
   CheckResourcesRequest,
   Condition,
   DeleteSchemasRequest,
   DerivedRoleDefinition,
   DerivedRoles,
+  DisablePoliciesRequest,
   EnablePoliciesRequest,
   ExportVariables,
   GetPoliciesRequest,
+  GetSchemasRequest,
   JWT,
+  ListAccessLogEntriesRequest,
+  ListDecisionLogEntriesRequest,
   ListPoliciesRequest,
   Match,
   Matches,
@@ -79,6 +87,9 @@ import type {
 import {
   Effect,
   SchemaDefinition,
+  auditLogFilterIsBetween,
+  auditLogFilterIsSince,
+  auditLogFilterIsTail,
   matchIsMatchAll,
   matchIsMatchAny,
   matchIsMatchExpr,
@@ -88,8 +99,6 @@ import {
   policyIsPrincipalPolicy,
   policyIsResourcePolicy,
 } from "../types/external";
-import type { DisablePoliciesRequest } from "../types/external/DisablePoliciesRequest";
-import type { GetSchemasRequest } from "../types/external/GetSchemasRequest";
 
 const encoder = new TextEncoder();
 
@@ -526,6 +535,63 @@ export function getSchemasRequestToProtobuf({
 }: GetSchemasRequest): GetSchemaRequest {
   return {
     id: ids,
+  };
+}
+
+export function listAccessLogEntriesRequestToProtobuf({
+  filter,
+}: ListAccessLogEntriesRequest): ListAuditLogEntriesRequest {
+  return {
+    kind: ListAuditLogEntriesRequest_Kind.KIND_ACCESS,
+    filter: auditLogFilterToProtobuf(filter),
+  };
+}
+
+export function listDecisionLogEntriesRequestToProtobuf({
+  filter,
+}: ListDecisionLogEntriesRequest): ListAuditLogEntriesRequest {
+  return {
+    kind: ListAuditLogEntriesRequest_Kind.KIND_DECISION,
+    filter: auditLogFilterToProtobuf(filter),
+  };
+}
+
+function auditLogFilterToProtobuf(
+  filter: AuditLogFilter,
+): ListAuditLogEntriesRequest["filter"] {
+  if (auditLogFilterIsBetween(filter)) {
+    return {
+      $case: "between",
+      between: { start: filter.start, end: filter.end },
+    };
+  }
+
+  if (auditLogFilterIsSince(filter)) {
+    return {
+      $case: "since",
+      since: durationToProtobuf(filter.since),
+    };
+  }
+
+  if (auditLogFilterIsTail(filter)) {
+    return {
+      $case: "tail",
+      tail: filter.tail,
+    };
+  }
+
+  return undefined;
+}
+
+function durationToProtobuf(duration: number): Duration {
+  const [seconds, nanos] = duration.toFixed(9).split(".", 2) as [
+    string,
+    string,
+  ];
+
+  return {
+    seconds,
+    nanos: parseInt(nanos, 10),
   };
 }
 

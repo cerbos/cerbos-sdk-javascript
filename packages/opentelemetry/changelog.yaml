@@ -1,5 +1,9 @@
 unreleased:
-  type: patch
+  type: minor
+
+  added:
+    - summary: Instrumentation for server streams
+      pull: 945
 
   bumped:
     "@opentelemetry/instrumentation":

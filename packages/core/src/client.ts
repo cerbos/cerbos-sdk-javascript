@@ -1,5 +1,7 @@
 import {
+  accessLogEntryFromProtobuf,
   checkResourcesResponseFromProtobuf,
+  decisionLogEntryFromProtobuf,
   deleteSchemasResponseFromProtobuf,
   disablePoliciesResponseFromProtobuf,
   enablePoliciesResponseFromProtobuf,
@@ -18,12 +20,16 @@ import {
   enablePoliciesRequestToProtobuf,
   getPoliciesRequestToProtobuf,
   getSchemasRequestToProtobuf,
+  listAccessLogEntriesRequestToProtobuf,
+  listDecisionLogEntriesRequestToProtobuf,
   listPoliciesRequestToProtobuf,
   planResourcesRequestToProtobuf,
 } from "./convert/toProtobuf";
-import { NotOK, Status, ValidationFailed } from "./errors";
-import type { _RPC, _Request, _Response, _Service } from "./rpcs";
+import { NotOK, ValidationFailed } from "./errors";
+import { ListAuditLogEntriesRequest_Kind } from "./protobuf/cerbos/request/v1/request";
+import type { _Method, _Request, _Response, _Service } from "./rpcs";
 import type {
+  AccessLogEntry,
   AddOrUpdatePoliciesRequest,
   AddOrUpdateSchemasRequest,
   AuxData,
@@ -31,6 +37,7 @@ import type {
   CheckResourcesRequest,
   CheckResourcesResponse,
   CheckResourcesResult,
+  DecisionLogEntry,
   DeleteSchemasRequest,
   DeleteSchemasResponse,
   DisablePoliciesRequest,
@@ -42,6 +49,8 @@ import type {
   GetSchemasRequest,
   GetSchemasResponse,
   IsAllowedRequest,
+  ListAccessLogEntriesRequest,
+  ListDecisionLogEntriesRequest,
   ListPoliciesRequest,
   ListPoliciesResponse,
   ListSchemasResponse,
@@ -55,6 +64,7 @@ import type {
   ValidationError,
   ValidationFailedCallback,
 } from "./types/external";
+import { Status } from "./types/external";
 
 /** @internal */
 export class _AbortHandler {
@@ -67,12 +77,16 @@ export class _AbortHandler {
   }
 
   public onAbort(listener: (error: NotOK) => void): void {
-    this.signal?.addEventListener("abort", () => {
-      listener(this.error());
-    });
+    this.signal?.addEventListener(
+      "abort",
+      () => {
+        listener(this.error());
+      },
+      { once: true },
+    );
   }
 
-  private error(): NotOK {
+  public error(): NotOK {
     const reason = this.signal?.reason as unknown;
 
     return new NotOK(
@@ -84,13 +98,30 @@ export class _AbortHandler {
 }
 
 /** @internal */
-export type _Transport = <Service extends _Service, RPC extends _RPC<Service>>(
-  service: Service,
-  rpc: RPC,
-  request: _Request<Service, RPC>,
-  headers: Headers,
-  abortHandler: _AbortHandler,
-) => Promise<_Response<Service, RPC>>;
+export interface _Transport {
+  unary<Service extends _Service, Method extends _Method<Service, "unary">>(
+    service: Service,
+    method: Method,
+    request: _Request<Service, "unary", Method>,
+    headers: Headers,
+    abortHandler: _AbortHandler,
+  ): Promise<_Response<Service, "unary", Method>>;
+
+  serverStream<
+    Service extends _Service,
+    Method extends _Method<Service, "serverStream">,
+  >(
+    service: Service,
+    method: Method,
+    request: _Request<Service, "serverStream", Method>,
+    headers: Headers,
+    abortHandler: _AbortHandler,
+  ): AsyncGenerator<
+    _Response<Service, "serverStream", Method>,
+    void,
+    undefined
+  >;
+}
 
 /** @internal */
 export type _Instrumenter = (transport: _Transport) => _Transport;
@@ -292,7 +323,8 @@ export abstract class Client {
     request: AddOrUpdatePoliciesRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    await this.admin(
+    await this.unary(
+      "admin",
       "addOrUpdatePolicy",
       addOrUpdatePoliciesRequestToProtobuf(request),
       options,
@@ -356,7 +388,8 @@ export abstract class Client {
     request: AddOrUpdateSchemasRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    await this.admin(
+    await this.unary(
+      "admin",
       "addOrUpdateSchema",
       addOrUpdateSchemasRequestToProtobuf(request),
       options,
@@ -446,7 +479,8 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<CheckResourcesResponse> {
     const response = checkResourcesResponseFromProtobuf(
-      await this.cerbos(
+      await this.unary(
+        "cerbos",
         "checkResources",
         checkResourcesRequestToProtobuf(request),
         options,
@@ -515,7 +549,8 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<DeleteSchemasResponse> {
     return deleteSchemasResponseFromProtobuf(
-      await this.admin(
+      await this.unary(
+        "admin",
         "deleteSchema",
         deleteSchemasRequestToProtobuf(request),
         options,
@@ -547,7 +582,8 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<DisablePoliciesResponse> {
     return disablePoliciesResponseFromProtobuf(
-      await this.admin(
+      await this.unary(
+        "admin",
         "disablePolicy",
         disablePoliciesRequestToProtobuf(request),
         options,
@@ -608,7 +644,8 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<EnablePoliciesResponse> {
     return enablePoliciesResponseFromProtobuf(
-      await this.admin(
+      await this.unary(
+        "admin",
         "enablePolicy",
         enablePoliciesRequestToProtobuf(request),
         options,
@@ -646,6 +683,86 @@ export abstract class Client {
   }
 
   /**
+   * Fetch an access log entry by call ID from the policy decision point server's audit log.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials}; and
+   *
+   * - the Cerbos policy decision point server to be configured with
+   *
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled
+   *
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#_local_backend | local audit logging backend}, and
+   *
+   *   - {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit | access logs} enabled.
+   *
+   * @example
+   * ```typescript
+   * const entry = await cerbos.getAccessLogEntry("01F9VS1N77S83MTSBBX44GYSJ6");
+   * ```
+   */
+  public async getAccessLogEntry(
+    callId: string,
+    options?: RequestOptions,
+  ): Promise<AccessLogEntry | undefined> {
+    for await (const entry of this.serverStream(
+      "admin",
+      "listAuditLogEntries",
+      {
+        kind: ListAuditLogEntriesRequest_Kind.KIND_ACCESS,
+        filter: { $case: "lookup", lookup: callId },
+      },
+      options,
+    )) {
+      return accessLogEntryFromProtobuf(entry);
+    }
+
+    return undefined;
+  }
+
+  /**
+   * Fetch a decision log entry by call ID from the policy decision point server's audit log.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials}; and
+   *
+   * - the Cerbos policy decision point server to be at least v0.18 and configured with
+   *
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled
+   *
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#_local_backend | local audit logging backend}, and
+   *
+   *   - {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit | decision logs} enabled.
+   *
+   * @example
+   * ```typescript
+   * const entry = await cerbos.getDecisionLogEntry("01F9VS1N77S83MTSBBX44GYSJ6");
+   * ```
+   */
+  public async getDecisionLogEntry(
+    callId: string,
+    options?: RequestOptions,
+  ): Promise<DecisionLogEntry | undefined> {
+    for await (const entry of this.serverStream(
+      "admin",
+      "listAuditLogEntries",
+      {
+        kind: ListAuditLogEntriesRequest_Kind.KIND_DECISION,
+        filter: { $case: "lookup", lookup: callId },
+      },
+      options,
+    )) {
+      return decisionLogEntryFromProtobuf(entry);
+    }
+
+    return undefined;
+  }
+
+  /**
    * Fetch multiple policies by ID.
    *
    * @remarks
@@ -667,7 +784,8 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<GetPoliciesResponse> {
     return getPoliciesResponseFromProtobuf(
-      await this.admin(
+      await this.unary(
+        "admin",
         "getPolicy",
         getPoliciesRequestToProtobuf(request),
         options,
@@ -749,7 +867,8 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<GetSchemasResponse> {
     return getSchemasResponseFromProtobuf(
-      await this.admin(
+      await this.unary(
+        "admin",
         "getSchema",
         getSchemasRequestToProtobuf(request),
         options,
@@ -796,6 +915,80 @@ export abstract class Client {
   }
 
   /**
+   * List access log entries from the policy decision point server's audit log.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials}; and
+   *
+   * - the Cerbos policy decision point server to be configured with
+   *
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled
+   *
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#_local_backend | local audit logging backend}, and
+   *
+   *   - {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit | access logs} enabled.
+   *
+   * @example
+   * ```typescript
+   * for await (const entry of cerbos.listAccessLogEntries({ filter: { tail: 5 } })) {
+   *   console.log(entry);
+   * }
+   * ```
+   */
+  public async *listAccessLogEntries(
+    request: ListAccessLogEntriesRequest,
+    options?: RequestOptions,
+  ): AsyncGenerator<AccessLogEntry, void, undefined> {
+    for await (const entry of this.serverStream(
+      "admin",
+      "listAuditLogEntries",
+      listAccessLogEntriesRequestToProtobuf(request),
+      options,
+    )) {
+      yield accessLogEntryFromProtobuf(entry);
+    }
+  }
+
+  /**
+   * List decision log entries from the policy decision point server's audit log.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials}; and
+   *
+   * - the Cerbos policy decision point server to be configured with
+   *
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled
+   *
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#_local_backend | local audit logging backend}, and
+   *
+   *   - {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit | decision logs} enabled.
+   *
+   * @example
+   * ```typescript
+   * for await (const entry of cerbos.listDecisionLogEntries({ filter: { tail: 5 } })) {
+   *   console.log(entry);
+   * }
+   * ```
+   */
+  public async *listDecisionLogEntries(
+    request: ListDecisionLogEntriesRequest,
+    options?: RequestOptions,
+  ): AsyncGenerator<DecisionLogEntry, void, undefined> {
+    for await (const entry of this.serverStream(
+      "admin",
+      "listAuditLogEntries",
+      listDecisionLogEntriesRequestToProtobuf(request),
+      options,
+    )) {
+      yield decisionLogEntryFromProtobuf(entry);
+    }
+  }
+
+  /**
    * List policies.
    *
    * @remarks
@@ -815,7 +1008,8 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<ListPoliciesResponse> {
     return listPoliciesResponseFromProtobuf(
-      await this.admin(
+      await this.unary(
+        "admin",
         "listPolicies",
         listPoliciesRequestToProtobuf(request),
         options,
@@ -842,7 +1036,7 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<ListSchemasResponse> {
     return listSchemasResponseFromProtobuf(
-      await this.admin("listSchemas", {}, options),
+      await this.unary("admin", "listSchemas", {}, options),
     );
   }
 
@@ -867,7 +1061,8 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<PlanResourcesResponse> {
     const response = planResourcesResponseFromProtobuf(
-      await this.cerbos(
+      await this.unary(
+        "cerbos",
         "planResources",
         planResourcesRequestToProtobuf(request),
         options,
@@ -900,14 +1095,14 @@ export abstract class Client {
     request: ReloadStoreRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    await this.admin("reloadStore", request, options);
+    await this.unary("admin", "reloadStore", request, options);
   }
 
   /**
    * Retrieve information about the Cerbos policy decision point server.
    */
   public async serverInfo(options?: RequestOptions): Promise<ServerInfo> {
-    return await this.cerbos("serverInfo", {}, options);
+    return await this.unary("cerbos", "serverInfo", {}, options);
   }
 
   /**
@@ -920,47 +1115,67 @@ export abstract class Client {
     return new ClientWithPrincipal(this, principal, auxData);
   }
 
-  private async admin<RPC extends _RPC<"admin">>(
-    rpc: RPC,
-    request: _Request<"admin", RPC>,
-    options: RequestOptions | undefined,
-  ): Promise<_Response<"admin", RPC>> {
-    return await this.send(
-      "admin",
-      rpc,
-      request,
-      this.options.adminCredentials,
-      options,
-    );
-  }
-
-  private async cerbos<RPC extends _RPC<"cerbos">>(
-    rpc: RPC,
-    request: _Request<"cerbos", RPC>,
-    options: RequestOptions | undefined,
-  ): Promise<_Response<"cerbos", RPC>> {
-    return await this.send("cerbos", rpc, request, undefined, options);
-  }
-
-  private async send<Service extends _Service, RPC extends _RPC<Service>>(
+  private async unary<
+    Service extends _Service,
+    Method extends _Method<Service, "unary">,
+  >(
     service: Service,
-    rpc: RPC,
-    request: _Request<Service, RPC>,
-    adminCredentials: AdminCredentials | undefined,
+    method: Method,
+    request: _Request<Service, "unary", Method>,
     { headers, signal }: RequestOptions = {},
-  ): Promise<_Response<Service, RPC>> {
-    return await this.transport(
+  ): Promise<_Response<Service, "unary", Method>> {
+    return await this.transport.unary(
       service,
-      rpc,
+      method,
       request,
-      await this.mergeHeaders(headers, adminCredentials),
+      await this.mergeHeaders(headers, service),
       new _AbortHandler(signal),
     );
   }
 
+  private async *serverStream<
+    Service extends _Service,
+    Method extends _Method<Service, "serverStream">,
+  >(
+    service: Service,
+    method: Method,
+    request: _Request<Service, "serverStream", Method>,
+    { headers, signal }: RequestOptions = {},
+  ): AsyncGenerator<
+    _Response<Service, "serverStream", Method>,
+    void,
+    undefined
+  > {
+    const abortController = new AbortController();
+
+    signal?.addEventListener(
+      "abort",
+      () => {
+        abortController.abort(signal.reason);
+      },
+      { once: true },
+    );
+
+    if (signal?.aborted) {
+      abortController.abort(signal.reason);
+    }
+
+    try {
+      yield* this.transport.serverStream(
+        service,
+        method,
+        request,
+        await this.mergeHeaders(headers, service),
+        new _AbortHandler(abortController.signal),
+      );
+    } finally {
+      abortController.abort();
+    }
+  }
+
   private async mergeHeaders(
     override: HeadersInit | undefined,
-    adminCredentials: AdminCredentials | undefined,
+    service: _Service,
   ): Promise<Headers> {
     const init = this.options.headers;
 
@@ -968,13 +1183,9 @@ export abstract class Client {
       typeof init === "function" ? await init() : init,
     );
 
-    if (adminCredentials) {
-      headers.set(
-        "Authorization",
-        `Basic ${btoa(
-          `${adminCredentials.username}:${adminCredentials.password}`,
-        )}`,
-      );
+    if (service === "admin" && this.options.adminCredentials) {
+      const { username, password } = this.options.adminCredentials;
+      headers.set("Authorization", `Basic ${btoa(`${username}:${password}`)}`);
     }
 
     if (this.options.playgroundInstance) {

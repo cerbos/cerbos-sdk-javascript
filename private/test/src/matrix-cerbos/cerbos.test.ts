@@ -9,6 +9,9 @@ import type {
   Options,
   OutputResult,
   PlanResourcesRequest,
+  PlanResourcesResponse,
+  ServerInfo,
+  ValidationError,
   ValidationFailedCallback,
 } from "@cerbos/core";
 import {
@@ -28,6 +31,7 @@ import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
 
 import {
+  callIdMatcher,
   describeIfCerbosVersionIsAtLeast,
   invalidArgumentDetails,
 } from "../helpers";
@@ -289,6 +293,7 @@ describe("Client", () => {
 
             expect(response).toEqual(
               new CheckResourcesResponse({
+                cerbosCallId: callIdMatcher,
                 requestId: "42",
                 results: [
                   new CheckResourcesResult({
@@ -528,6 +533,7 @@ describe("Client", () => {
             const response = await clients.default.planResources(request);
 
             expect(response).toEqual({
+              cerbosCallId: callIdMatcher,
               requestId: "42",
               kind: PlanKind.CONDITIONAL,
               condition: new PlanExpression("eq", [
@@ -549,7 +555,7 @@ describe("Client", () => {
                   : '(request.resource.attr.owner == "me@example.com")',
                 matchedScope: "test",
               },
-            });
+            } satisfies PlanResourcesResponse);
           });
 
           describeIfCerbosVersionIsAtLeast("0.19.0")(
@@ -564,7 +570,7 @@ describe("Client", () => {
                       path: "/country/alpha2",
                       message: "does not match pattern '[A-Z]{2}'",
                       source: ValidationErrorSource.PRINCIPAL,
-                    },
+                    } satisfies ValidationError,
                   ]),
                 );
               });
@@ -582,7 +588,7 @@ describe("Client", () => {
                     path: "/country/alpha2",
                     message: "does not match pattern '[A-Z]{2}'",
                     source: ValidationErrorSource.PRINCIPAL,
-                  },
+                  } satisfies ValidationError,
                 ]);
               });
             },
@@ -596,10 +602,10 @@ describe("Client", () => {
             expect(result).toEqual({
               buildDate: expect.stringMatching(
                 /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/,
-              ) as unknown,
-              commit: expect.stringMatching(/^[0-9a-f]{40}$/) as unknown,
+              ),
+              commit: expect.stringMatching(/^[0-9a-f]{40}$/),
               version: cerbosVersion,
-            });
+            } satisfies ServerInfo);
           });
         });
 
@@ -1025,6 +1031,7 @@ describe("Client", () => {
 
               expect(response).toEqual(
                 new CheckResourcesResponse({
+                  cerbosCallId: callIdMatcher,
                   requestId: "42",
                   results: [
                     new CheckResourcesResult({
@@ -1226,6 +1233,7 @@ describe("Client", () => {
 
               expect(response).toEqual(
                 new CheckResourcesResponse({
+                  cerbosCallId: callIdMatcher,
                   requestId: "42",
                   results: [
                     new CheckResourcesResult({
@@ -1432,6 +1440,7 @@ describe("Client", () => {
 
               expect(response).toEqual(
                 new CheckResourcesResponse({
+                  cerbosCallId: callIdMatcher,
                   requestId: "42",
                   results: [
                     new CheckResourcesResult({
@@ -1627,6 +1636,7 @@ describe("Client", () => {
 
               expect(response).toEqual(
                 new CheckResourcesResponse({
+                  cerbosCallId: callIdMatcher,
                   requestId: "42",
                   results: [
                     new CheckResourcesResult({
