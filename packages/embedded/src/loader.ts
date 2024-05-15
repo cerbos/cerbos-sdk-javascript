@@ -220,7 +220,7 @@ export class Loader {
    * Fetch an embedded PDP bundle via HTTP in a {@link https://caniuse.com/wasm | supported browser} or Node.js 18.1+:
    *
    * ```typescript
-   * const cerbos = new Loader("https://lite.cerbos.cloud/bundle?workspace=...&label=...");
+   * const loader = new Loader("https://lite.cerbos.cloud/bundle?workspace=...&label=...");
    * ```
    *
    * @example
@@ -229,7 +229,7 @@ export class Loader {
    * ```typescript
    * import { readFile } from "fs/promises";
    *
-   * const cerbos = new Loader(readFile("policies.wasm"));
+   * const loader = new Loader(readFile("policies.wasm"));
    * ```
    */
   public constructor(

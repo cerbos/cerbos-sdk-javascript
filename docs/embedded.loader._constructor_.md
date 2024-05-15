@@ -75,7 +75,7 @@ The bundle will be loaded in the background when the loader is created. If loadi
 Fetch an embedded PDP bundle via HTTP in a [supported browser](https://caniuse.com/wasm) or Node.js 18.1+:
 
 ```typescript
-const cerbos = new Loader("https://lite.cerbos.cloud/bundle?workspace=...&label=...");
+const loader = new Loader("https://lite.cerbos.cloud/bundle?workspace=...&label=...");
 ```
 
 ## Example 2
@@ -85,6 +85,6 @@ Read an embedded PDP bundle from disk in Node.js:
 ```typescript
 import { readFile } from "fs/promises";
 
-const cerbos = new Loader(readFile("policies.wasm"));
+const loader = new Loader(readFile("policies.wasm"));
 ```
 
