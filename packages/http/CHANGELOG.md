@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.19.0] - 2024-05-15
+
 ### Added
 
 - Support for fetching audit logs ([#945](https://github.com/cerbos/cerbos-sdk-javascript/pull/945))
@@ -12,6 +16,10 @@
   - [`Client.listDecisionLogEntries`](../../docs/core.client.listdecisionlogentries.md) method
   - [`CheckResourcesResponse.cerbosCallId`](../../docs/core.checkresourcesresponse.cerboscallid.md) property
   - [`PlanResourcesResponse.cerbosCallId`](../../docs/core.planresourcesresponsebase.cerboscallid.md) property
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.18.0 ([#951](https://github.com/cerbos/cerbos-sdk-javascript/pull/951))
 
 ## [0.18.1] - 2024-04-23
 
@@ -249,7 +257,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.0...HEAD
+[0.19.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.1...@cerbos/http@0.19.0
 [0.18.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.0...@cerbos/http@0.18.1
 [0.18.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.17.0...@cerbos/http@0.18.0
 [0.17.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.16.0...@cerbos/http@0.17.0

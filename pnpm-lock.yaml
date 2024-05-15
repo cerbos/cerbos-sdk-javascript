@@ -76,13 +76,13 @@ importers:
   packages/embedded:
     dependencies:
       '@cerbos/core':
-        specifier: ^0.17.1
+        specifier: ^0.18.0
         version: link:../core
 
   packages/files:
     dependencies:
       '@cerbos/core':
-        specifier: ^0.17.1
+        specifier: ^0.18.0
         version: link:../core
       yaml:
         specifier: ^2.4.2
@@ -91,7 +91,7 @@ importers:
   packages/grpc:
     dependencies:
       '@cerbos/core':
-        specifier: ^0.17.1
+        specifier: ^0.18.0
         version: link:../core
       '@grpc/grpc-js':
         specifier: ^1.10.7
@@ -106,7 +106,7 @@ importers:
   packages/http:
     dependencies:
       '@cerbos/core':
-        specifier: ^0.17.1
+        specifier: ^0.18.0
         version: link:../core
       qs:
         specifier: ^6.12.1
@@ -119,7 +119,7 @@ importers:
   packages/opentelemetry:
     dependencies:
       '@cerbos/core':
-        specifier: ^0.17.1
+        specifier: ^0.18.0
         version: link:../core
       '@opentelemetry/api':
         specifier: ^1.8.0
@@ -134,7 +134,7 @@ importers:
   packages/react:
     dependencies:
       '@cerbos/core':
-        specifier: ^0.17.1
+        specifier: ^0.18.0
         version: link:../core
       react:
         specifier: '>=18.0.0'

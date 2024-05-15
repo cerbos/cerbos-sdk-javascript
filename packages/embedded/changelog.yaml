@@ -1,7 +1,12 @@
-unreleased:
-  type: patch
-
 releases:
+  - version: 0.7.2
+    date: 2024-05-15
+
+    bumped:
+      "@cerbos/core":
+        to: 0.18.0
+        pull: 951
+
   - version: 0.7.1
     date: 2024-04-23
 
