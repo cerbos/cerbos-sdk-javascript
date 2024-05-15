@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.18.0] - 2024-05-15
+
 ### Added
 
 - Support for fetching audit logs ([#945](https://github.com/cerbos/cerbos-sdk-javascript/pull/945))
@@ -175,7 +179,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.17.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.18.0...HEAD
+[0.18.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.17.1...@cerbos/core@0.18.0
 [0.17.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.17.0...@cerbos/core@0.17.1
 [0.17.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.16.0...@cerbos/core@0.17.0
 [0.16.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.15.0...@cerbos/core@0.16.0

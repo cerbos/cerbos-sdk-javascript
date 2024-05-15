@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.18.0] - 2024-05-15
+
 ### Added
 
 - Support for fetching audit logs ([#945](https://github.com/cerbos/cerbos-sdk-javascript/pull/945))
@@ -14,6 +18,8 @@
   - [`PlanResourcesResponse.cerbosCallId`](../../docs/core.planresourcesresponsebase.cerboscallid.md) property
 
 ### Changed
+
+- Bump dependency on [@cerbos/core] to 0.18.0 ([#951](https://github.com/cerbos/cerbos-sdk-javascript/pull/951))
 
 - Bump dependency on [@grpc/grpc-js] to 1.10.7 ([#942](https://github.com/cerbos/cerbos-sdk-javascript/pull/942))
 
@@ -281,7 +287,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.17.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.18.0...HEAD
+[0.18.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.17.1...@cerbos/grpc@0.18.0
 [0.17.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.17.0...@cerbos/grpc@0.17.1
 [0.17.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.16.0...@cerbos/grpc@0.17.0
 [0.16.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.15.0...@cerbos/grpc@0.16.0
