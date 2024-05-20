@@ -11,6 +11,7 @@ plugins:
     out: packages/grpc/src/protobuf
     strategy: all
     opt:
+      - annotateFilesWithVersion=false
       - comments=false
       - env=both
       - esModuleInterop=true
