@@ -10,6 +10,7 @@ plugins:
     out: packages/embedded/src/protobuf
     strategy: all
     opt:
+      - annotateFilesWithVersion=false
       - comments=false
       - env=both
       - esModuleInterop=true
