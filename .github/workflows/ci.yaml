@@ -27,7 +27,7 @@ jobs:
       - name: Lint code
         run: pnpm run lint
 
-      - name: Generate protobuf code
+      - name: Generate code
         run: pnpm run generate
 
       - name: Generate docs
