@@ -35,10 +35,9 @@ jobs:
 
       - name: Check for uncommitted changes
         run: |-
-          git_status=$(git status --porcelain)
-          if [[ -n "${git_status}" ]]; then
+          if [[ -n $(git status --porcelain) ]]; then
             echo "::error::Uncommitted changes detected"
-            printf "%s\n" "${git_status}"
+            git -c color.ui=always status -vv
             exit 1
           fi
 
