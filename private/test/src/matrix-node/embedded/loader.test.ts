@@ -273,6 +273,7 @@ class DummyServer {
 
   public async stop(): Promise<void> {
     await new Promise<void>((resolve) => {
+      this.server.closeIdleConnections();
       this.server.close(() => {
         resolve();
       });
