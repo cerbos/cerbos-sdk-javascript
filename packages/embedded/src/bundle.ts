@@ -10,6 +10,7 @@ import type {
 } from "./loader";
 import { CheckResourcesRequest } from "./protobuf/cerbos/request/v1/request";
 import { CheckResourcesResponse } from "./protobuf/cerbos/response/v1/response";
+import { cancelBody } from "./response";
 import type { Allocator } from "./slice";
 import { Slice } from "./slice";
 
@@ -170,6 +171,7 @@ async function instantiateStreaming(
   imports: WebAssembly.Imports,
 ): Promise<Exports> {
   if (!response.ok) {
+    cancelBody(response);
     throw new Error(
       `Failed to download from ${response.url}: HTTP ${response.status}`,
     );

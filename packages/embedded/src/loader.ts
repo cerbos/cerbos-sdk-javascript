@@ -3,6 +3,7 @@ import { _setErrorNameAndStack } from "@cerbos/core";
 
 import { Bundle, download } from "./bundle";
 import { constrainAutoUpdateInterval } from "./interval";
+import { cancelBody } from "./response";
 import { Transport } from "./transport";
 
 type LoadResult =
@@ -437,6 +438,7 @@ export class AutoUpdatingLoader extends Loader {
     const response = await download(this.url, request);
 
     if (response.status === 304) {
+      cancelBody(response);
       throw notModified;
     }
 

@@ -284,6 +284,10 @@ export class Transport implements _Transport {
         yield responseType.fromJSON(result);
       }
     } catch (error) {
+      response.body?.cancel().catch(() => {
+        // ignore failure to cancel
+      });
+
       abortHandler.throwIfAborted();
 
       if (error instanceof NotOK) {

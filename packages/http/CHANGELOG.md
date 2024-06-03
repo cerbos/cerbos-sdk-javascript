@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Cancel unused response bodies ([#956](https://github.com/cerbos/cerbos-sdk-javascript/pull/956))
 
 ## [0.19.0] - 2024-05-15
 

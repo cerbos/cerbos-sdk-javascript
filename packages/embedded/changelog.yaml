@@ -1,3 +1,10 @@
+unreleased:
+  type: patch
+
+  changed:
+    - summary: Cancel unused response bodies
+      pull: 956
+
 releases:
   - version: 0.7.2
     date: 2024-05-15
