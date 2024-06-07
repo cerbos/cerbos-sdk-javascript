@@ -1,12 +1,12 @@
-version: v1
+version: v2
 
-types:
-  include:
-    - cerbos.svc.v1.CerbosService
+inputs:
+  - directory: proto
+    types:
+      - cerbos.svc.v1.CerbosService
 
 plugins:
-  - name: embedded
-    path: node_modules/.bin/protoc-gen-ts_proto
+  - local: node_modules/.bin/protoc-gen-ts_proto
     out: packages/embedded/src/protobuf
     strategy: all
     opt:
