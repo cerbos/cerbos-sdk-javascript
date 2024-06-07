@@ -1,12 +1,12 @@
-version: v1
+version: v2
 
-types:
-  include:
-    - cerbos.policy.v1.Policy
+inputs:
+  - directory: proto
+    types:
+      - cerbos.policy.v1.Policy
 
 plugins:
-  - name: files
-    path: node_modules/.bin/protoc-gen-ts_proto
+  - local: node_modules/.bin/protoc-gen-ts_proto
     out: packages/files/src/protobuf
     strategy: all
     opt:

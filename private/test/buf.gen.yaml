@@ -1,15 +1,15 @@
-version: v1
+version: v2
 
-types:
-  include:
-    - cerbos.response.v1.ListAuditLogEntriesResponse
-    - cerbos.svc.v1.CerbosAdminService
-    - cerbos.svc.v1.CerbosService
-    - jaeger.api_v3.QueryService
+inputs:
+  - directory: proto
+    types:
+      - cerbos.response.v1.ListAuditLogEntriesResponse
+      - cerbos.svc.v1.CerbosAdminService
+      - cerbos.svc.v1.CerbosService
+      - jaeger.api_v3.QueryService
 
 plugins:
-  - name: test
-    path: node_modules/.bin/protoc-gen-ts_proto
+  - local: node_modules/.bin/protoc-gen-ts_proto
     out: private/test/src/protobuf
     strategy: all
     opt:
