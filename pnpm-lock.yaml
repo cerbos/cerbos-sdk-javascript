@@ -54,11 +54,11 @@ importers:
         specifier: 0.18.1
         version: 0.18.1(prettier@3.3.1)
       ts-proto:
-        specifier: 1.176.2
-        version: 1.176.2
+        specifier: 1.178.0
+        version: 1.178.0
       tsx:
-        specifier: 4.13.0
-        version: 4.13.0
+        specifier: 4.13.3
+        version: 4.13.3
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -2468,8 +2468,8 @@ packages:
   ts-proto-descriptors@1.16.0:
     resolution: {integrity: sha512-3yKuzMLpltdpcyQji1PJZRfoo4OJjNieKTYkQY8pF7xGKsYz/RHe3aEe4KiRxcinoBmnEhmuI+yJTxLb922ULA==}
 
-  ts-proto@1.176.2:
-    resolution: {integrity: sha512-lISYoJeutvl79MEJhAafdXbad9L48FjSuy+pg3YlAtX7ZY8LBfu4Wh00ac7DWC9GREzS0SfXeCqWbS2Rb4wEGQ==}
+  ts-proto@1.178.0:
+    resolution: {integrity: sha512-HQ3IZOldIz1V6+iCGMvOy60BbZ5Wn0XKTm0C+vJrzD9MtmCxur2mpb+Xaro5FEwjCFT794yAXmfJXbm8M+a5tw==}
     hasBin: true
 
   tsconfig-paths@3.15.0:
@@ -2478,8 +2478,8 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  tsx@4.13.0:
-    resolution: {integrity: sha512-kNY70P2aLMdVBii1Err5ENxDhQ6Vz2PbQGX68DcvzY2/PWK5NLBO6vI7lPr1/2xG3IKSt2MN+KOAyWDQSRlbCA==}
+  tsx@4.13.3:
+    resolution: {integrity: sha512-FTAJJLQCMiIbt78kD5qhLjHIR5NOQDKC63wcdelWRDBE+d1xSrXYhXq4DzejnC2tGhFZHpDy2Ika0Ugf7sK8gA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -5124,7 +5124,7 @@ snapshots:
       long: 5.2.3
       protobufjs: 7.3.0
 
-  ts-proto@1.176.2:
+  ts-proto@1.178.0:
     dependencies:
       case-anything: 2.1.13
       protobufjs: 7.3.0
@@ -5140,7 +5140,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsx@4.13.0:
+  tsx@4.13.3:
     dependencies:
       esbuild: 0.20.2
       get-tsconfig: 4.7.5
