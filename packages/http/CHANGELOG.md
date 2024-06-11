@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.19.1] - 2024-06-11
+
 ### Changed
 
 - Cancel unused response bodies ([#956](https://github.com/cerbos/cerbos-sdk-javascript/pull/956))
@@ -259,7 +263,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.1...HEAD
+[0.19.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.0...@cerbos/http@0.19.1
 [0.19.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.1...@cerbos/http@0.19.0
 [0.18.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.0...@cerbos/http@0.18.1
 [0.18.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.17.0...@cerbos/http@0.18.0
