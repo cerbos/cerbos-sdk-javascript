@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.18.1] - 2024-06-11
+
 ### Changed
 
 - Bump dependency on [uuid] to 10.0.0 ([#965](https://github.com/cerbos/cerbos-sdk-javascript/pull/965))
@@ -181,7 +185,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.18.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.18.1...HEAD
+[0.18.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.18.0...@cerbos/core@0.18.1
 [0.18.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.17.1...@cerbos/core@0.18.0
 [0.17.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.17.0...@cerbos/core@0.17.1
 [0.17.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.16.0...@cerbos/core@0.17.0
