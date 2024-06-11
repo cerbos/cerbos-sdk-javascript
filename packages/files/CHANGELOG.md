@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Bump dependency on [yaml] to 2.4.3 ([#958](https://github.com/cerbos/cerbos-sdk-javascript/pull/958))
+- Bump dependency on [yaml] to 2.4.5 ([#958](https://github.com/cerbos/cerbos-sdk-javascript/pull/958), [#962](https://github.com/cerbos/cerbos-sdk-javascript/pull/962))
 
 ## [0.2.6] - 2024-05-15
 
