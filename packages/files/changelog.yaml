@@ -1,12 +1,16 @@
-unreleased:
-  type: patch
-
-  bumped:
-    yaml:
-      to: 2.4.5
-      pulls: [958, 962]
-
 releases:
+  - version: 0.2.7
+    date: 2024-06-11
+
+    bumped:
+      "@cerbos/core":
+        to: 0.18.1
+        pull: 969
+
+      yaml:
+        to: 2.4.5
+        pulls: [958, 962]
+
   - version: 0.2.6
     date: 2024-05-15
 

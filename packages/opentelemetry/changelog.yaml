@@ -1,20 +1,24 @@
-unreleased:
-  type: patch
-
-  bumped:
-    "@opentelemetry/api":
-      to: 1.9.0
-      pull: 963
-
-    "@opentelemetry/instrumentation":
-      to: 0.52.0
-      pull: 963
-
-    "@opentelemetry/semantic-conventions":
-      to: 1.25.0
-      pull: 963
-
 releases:
+  - version: 0.5.1
+    date: 2024-06-11
+
+    bumped:
+      "@cerbos/core":
+        to: 0.18.1
+        pull: 969
+
+      "@opentelemetry/api":
+        to: 1.9.0
+        pull: 963
+
+      "@opentelemetry/instrumentation":
+        to: 0.52.0
+        pull: 963
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.25.0
+        pull: 963
+
   - version: 0.5.0
     date: 2024-05-15
 
