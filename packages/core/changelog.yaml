@@ -1,3 +1,11 @@
+unreleased:
+  type: patch
+
+  bumped:
+    uuid:
+      to: 10.0.0
+      pull: 965
+
 releases:
   - version: 0.18.0
     date: 2024-05-15
