@@ -28,7 +28,7 @@
     "jose": "5.4.0",
     "jsdom": "24.1.0",
     "long": "5.2.3",
-    "protobufjs": "7.3.0",
+    "protobufjs": "7.3.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "semver": "7.6.2",
