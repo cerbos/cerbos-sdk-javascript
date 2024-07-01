@@ -2,6 +2,10 @@ unreleased:
   type: patch
 
   bumped:
+    "@grpc/grpc-js":
+      to: 1.10.10
+      pull: 974
+
     protobufjs:
       to: 7.3.2
       pull: 970
