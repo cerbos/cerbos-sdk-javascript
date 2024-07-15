@@ -107,10 +107,7 @@ describe("Client", () => {
           callbackOnValidationError: Client;
         };
 
-        const validationFailed = vitest.fn<
-          Parameters<ValidationFailedCallback>,
-          ReturnType<ValidationFailedCallback>
-        >();
+        const validationFailed = vitest.fn<ValidationFailedCallback>();
 
         beforeAll(() => {
           clients = {
