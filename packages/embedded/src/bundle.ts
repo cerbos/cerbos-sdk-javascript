@@ -37,7 +37,7 @@ export class Bundle {
 
     const etag =
       source instanceof Response
-        ? source.headers.get("ETag") ?? undefined
+        ? (source.headers.get("ETag") ?? undefined)
         : undefined;
 
     const exports = await instantiate(source, {
