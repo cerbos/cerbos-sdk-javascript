@@ -3,8 +3,8 @@ unreleased:
 
   bumped:
     "@grpc/grpc-js":
-      to: 1.10.11
-      pulls: [974, 979]
+      to: 1.11.1
+      pulls: [974, 979, 981]
 
     protobufjs:
       to: 7.3.2
