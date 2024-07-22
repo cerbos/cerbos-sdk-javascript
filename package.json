@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@9.5.0",
   "engines": {
-    "node": "22.4.1",
+    "node": "22.5.1",
     "pnpm": "9.5.0"
   },
   "scripts": {
@@ -51,21 +51,21 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.15.3",
-    "@microsoft/api-documenter": "7.25.4",
-    "@microsoft/api-extractor": "7.47.0",
+    "@microsoft/api-documenter": "7.25.7",
+    "@microsoft/api-extractor": "7.47.2",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
-    "@types/node": "18.19.39",
-    "@typescript-eslint/eslint-plugin": "7.16.0",
-    "@typescript-eslint/parser": "7.16.0",
+    "@types/node": "18.19.41",
+    "@typescript-eslint/eslint-plugin": "7.16.1",
+    "@typescript-eslint/parser": "7.16.1",
     "concurrently": "8.2.2",
     "depcheck": "1.4.7",
     "eslint": "8.57.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-tsdoc": "0.3.0",
-    "prettier": "3.3.2",
+    "prettier": "3.3.3",
     "prettier-plugin-pkg": "0.18.1",
-    "ts-proto": "1.181.0",
+    "ts-proto": "1.181.1",
     "tsx": "4.16.2",
     "typescript": "5.5.3"
   }
