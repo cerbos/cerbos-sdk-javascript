@@ -121,7 +121,7 @@ export class Bundle {
 
     try {
       return CheckResourcesResponse.fromJSON(JSON.parse(responseText));
-    } catch (_) {
+    } catch {
       throw NotOK.fromJSON(responseText);
     }
   }

@@ -26,7 +26,7 @@ export class NotOK extends Error {
     try {
       const error: unknown = JSON.parse(text);
       return new NotOK(code(error), details(error));
-    } catch (_) {
+    } catch {
       return new NotOK(Status.UNKNOWN, text);
     }
   }

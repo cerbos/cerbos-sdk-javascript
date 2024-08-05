@@ -32,10 +32,10 @@ export class Transport implements _Transport {
     notImplemented(method);
   }
 
-  public serverStream<
-    Service extends _Service,
-    Method extends _Method<Service, "serverStream">,
-  >(_: Service, method: Method): never {
+  public serverStream<Service extends _Service>(
+    _: Service,
+    method: _Method<Service, "serverStream">,
+  ): never {
     notImplemented(method);
   }
 }
