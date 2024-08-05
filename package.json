@@ -51,13 +51,13 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.15.3",
-    "@microsoft/api-documenter": "7.25.8",
-    "@microsoft/api-extractor": "7.47.3",
+    "@microsoft/api-documenter": "7.25.9",
+    "@microsoft/api-extractor": "7.47.4",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
-    "@types/node": "18.19.42",
-    "@typescript-eslint/eslint-plugin": "7.17.0",
-    "@typescript-eslint/parser": "7.17.0",
+    "@types/node": "18.19.43",
+    "@typescript-eslint/eslint-plugin": "7.18.0",
+    "@typescript-eslint/parser": "7.18.0",
     "concurrently": "8.2.2",
     "depcheck": "1.4.7",
     "eslint": "8.57.0",
@@ -66,7 +66,7 @@
     "prettier": "3.3.3",
     "prettier-plugin-pkg": "0.18.1",
     "ts-proto": "1.181.1",
-    "tsx": "4.16.2",
+    "tsx": "4.16.5",
     "typescript": "5.5.4"
   }
 }
