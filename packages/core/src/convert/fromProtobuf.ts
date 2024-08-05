@@ -848,9 +848,7 @@ function planResourcesMetadataFromProtobuf({
 const unexpected = Symbol("unexpected");
 type Unexpected = typeof unexpected;
 
-function isUnexpected<T>(
-  value: T | Unexpected | undefined,
-): value is Unexpected | undefined {
+function isUnexpected(value: unknown): value is Unexpected | undefined {
   return value === unexpected || value === undefined;
 }
 

@@ -2,7 +2,7 @@ root: true
 
 parser: "@typescript-eslint/parser"
 parserOptions:
-  project: true
+  projectService: true
 
 plugins:
   - eslint-plugin-tsdoc
@@ -22,6 +22,10 @@ rules:
   "@typescript-eslint/explicit-function-return-type": warn
   "@typescript-eslint/explicit-member-accessibility": warn
   "@typescript-eslint/no-confusing-void-expression": warn
+  "@typescript-eslint/no-require-imports":
+    - warn
+    - allow:
+        - /package\.json$
   "@typescript-eslint/no-unnecessary-condition":
     - warn
     - allowConstantLoopConditions: true

@@ -47,7 +47,7 @@ export const isoDateSchema = z.string().refine(
   (value) => {
     try {
       return value === formatISO(parseISO(value), { representation: "date" });
-    } catch (error) {
+    } catch {
       return false;
     }
   },
