@@ -3,8 +3,8 @@ unreleased:
 
   bumped:
     qs:
-      to: 6.12.3
-      pull: 976
+      to: 6.13.0
+      pulls: [976, 985]
 
 releases:
   - version: 0.19.1
