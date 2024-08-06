@@ -1,5 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "configMigration": true,
   "extends": [
     ":dependencyDashboard",
     ":gitSignOff",
@@ -39,7 +40,7 @@
       "semanticCommitScope": "deps"
     },
     {
-      "matchPackagePrefixes": ["@opentelemetry/"],
+      "matchPackageNames": ["@opentelemetry/*"],
       "groupName": "opentelemetry",
       "semanticCommitScope": "deps"
     },
