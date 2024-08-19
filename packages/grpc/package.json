@@ -49,10 +49,9 @@
     "server-side"
   ],
   "dependencies": {
+    "@bufbuild/protobuf": "^2.0.0",
     "@cerbos/core": "^0.18.1",
-    "@grpc/grpc-js": "^1.11.1",
-    "long": "^5.2.3",
-    "protobufjs": "^7.3.2"
+    "@grpc/grpc-js": "^1.11.1"
   },
   "publishConfig": {
     "access": "public",

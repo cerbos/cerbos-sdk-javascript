@@ -1,14 +1,14 @@
 unreleased:
   type: patch
 
+  changed:
+    - summary: Replace dependency on [protobufjs] with [@bufbuild/protobuf]
+      pull: 990
+
   bumped:
     "@grpc/grpc-js":
       to: 1.11.1
       pulls: [974, 979, 981]
-
-    protobufjs:
-      to: 7.3.2
-      pull: 970
 
 releases:
   - version: 0.18.1
@@ -394,6 +394,7 @@ releases:
         pull: 73
 
 references:
+  "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es
   "@cerbos/core": ../core/README.md
   "@cerbos/opentelemetry": ../opentelemetry/README.md
   "@grpc/grpc-js": https://github.com/grpc/grpc-node
