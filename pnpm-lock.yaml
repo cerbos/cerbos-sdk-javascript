@@ -54,8 +54,8 @@ importers:
         specifier: 0.18.1
         version: 0.18.1(prettier@3.3.3)
       ts-proto:
-        specifier: 1.181.2
-        version: 1.181.2
+        specifier: 2.0.2
+        version: 2.0.2
       tsx:
         specifier: 4.17.0
         version: 4.17.0
@@ -313,6 +313,9 @@ packages:
   '@babel/types@7.25.2':
     resolution: {integrity: sha512-YTnYtra7W9e6/oAZEHj0bJehPRUlLH9/fbpT5LfB0NhQXyALCRkRs3zH9v07IYhkgpqX6Z78FnuccZr/l4Fs4Q==}
     engines: {node: '>=6.9.0'}
+
+  '@bufbuild/protobuf@2.0.0':
+    resolution: {integrity: sha512-sw2JhwJyvyL0zlhG61aDzOVryEfJg2PDZFSV7i7IdC7nAE41WuXCru3QWLGiP87At0BMzKOoKO/FqEGoKygGZQ==}
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -2631,8 +2634,8 @@ packages:
   ts-proto-descriptors@1.16.0:
     resolution: {integrity: sha512-3yKuzMLpltdpcyQji1PJZRfoo4OJjNieKTYkQY8pF7xGKsYz/RHe3aEe4KiRxcinoBmnEhmuI+yJTxLb922ULA==}
 
-  ts-proto@1.181.2:
-    resolution: {integrity: sha512-knJ8dtjn2Pd0c5ZGZG8z9DMiD4PUY8iGI9T9tb8DvGdWRMkLpf0WcPO7G+7cmbZyxvNTAG6ci3fybEaFgMZIvg==}
+  ts-proto@2.0.2:
+    resolution: {integrity: sha512-O+UZouRUx0d8w2Rn2ezSIHCed+Rl5teeqfDNc4pPRVxksi3Um0rUkWA/vd6W8Ga199atfFy9jp2dfySxfT1q9g==}
     hasBin: true
 
   tsconfig-paths@3.15.0:
@@ -2980,6 +2983,8 @@ snapshots:
       '@babel/helper-string-parser': 7.24.8
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
+
+  '@bufbuild/protobuf@2.0.0': {}
 
   '@colors/colors@1.5.0':
     optional: true
@@ -5382,10 +5387,10 @@ snapshots:
       long: 5.2.3
       protobufjs: 7.3.2
 
-  ts-proto@1.181.2:
+  ts-proto@2.0.2:
     dependencies:
+      '@bufbuild/protobuf': 2.0.0
       case-anything: 2.1.13
-      protobufjs: 7.3.2
       ts-poet: 6.9.0
       ts-proto-descriptors: 1.16.0
 
