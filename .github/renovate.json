@@ -42,18 +42,13 @@
       "semanticCommitScope": "deps-dev"
     },
     {
-      "matchPackageNames": ["@grpc/grpc-js", "long", "protobufjs"],
-      "groupName": "grpc",
-      "semanticCommitScope": "deps"
-    },
-    {
       "matchPackageNames": ["@opentelemetry/*"],
       "groupName": "opentelemetry",
       "semanticCommitScope": "deps"
     },
     {
-      "description": "@types/node should match the Node.js version. long and protobufjs should match @grpc/grpc-js's dependencies.",
-      "matchPackageNames": ["@types/node", "long", "protobufjs"],
+      "description": "@types/node should match the Node.js version",
+      "matchPackageNames": ["@types/node"],
       "matchUpdateTypes": ["major"],
       "enabled": false
     },
@@ -64,7 +59,7 @@
       "enabled": false
     },
     {
-      "description": "eslint-plugin-vitest only supports flat config from v0.5.0 (https://github.com/veritem/eslint-plugin-vitest/issues/414).",
+      "description": "eslint-plugin-vitest only supports flat config from v0.5.0 (https://github.com/veritem/eslint-plugin-vitest/issues/414)",
       "matchPackageNames": ["eslint-plugin-vitest"],
       "matchUpdateTypes": ["minor"],
       "enabled": false

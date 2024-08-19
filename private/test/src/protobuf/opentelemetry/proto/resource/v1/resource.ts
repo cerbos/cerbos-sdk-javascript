@@ -2,7 +2,7 @@
 // source: opentelemetry/proto/resource/v1/resource.proto
 
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { KeyValue } from "../../common/v1/common";
 
 export const protobufPackage = "opentelemetry.proto.resource.v1";
@@ -19,10 +19,10 @@ function createBaseResource(): Resource {
 export const Resource = {
   encode(
     message: Resource,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.attributes) {
-      KeyValue.encode(v!, writer.uint32(10).fork()).ldelim();
+      KeyValue.encode(v!, writer.uint32(10).fork()).join();
     }
     if (message.droppedAttributesCount !== 0) {
       writer.uint32(16).uint32(message.droppedAttributesCount);
@@ -30,9 +30,9 @@ export const Resource = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Resource {
+  decode(input: BinaryReader | Uint8Array, length?: number): Resource {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResource();
     while (reader.pos < end) {
@@ -56,7 +56,7 @@ export const Resource = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },

@@ -2,7 +2,7 @@
 // source: cerbos/request/v1/request.proto
 
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { Duration } from "../../../google/protobuf/duration";
 import { Value } from "../../../google/protobuf/struct";
 import { Timestamp } from "../../../google/protobuf/timestamp";
@@ -208,8 +208,8 @@ function createBasePlanResourcesRequest(): PlanResourcesRequest {
 export const PlanResourcesRequest = {
   encode(
     message: PlanResourcesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -217,16 +217,16 @@ export const PlanResourcesRequest = {
       writer.uint32(18).string(message.action);
     }
     if (message.principal !== undefined) {
-      Principal.encode(message.principal, writer.uint32(26).fork()).ldelim();
+      Principal.encode(message.principal, writer.uint32(26).fork()).join();
     }
     if (message.resource !== undefined) {
       PlanResourcesInput_Resource.encode(
         message.resource,
         writer.uint32(34).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.auxData !== undefined) {
-      AuxData.encode(message.auxData, writer.uint32(42).fork()).ldelim();
+      AuxData.encode(message.auxData, writer.uint32(42).fork()).join();
     }
     if (message.includeMeta !== false) {
       writer.uint32(48).bool(message.includeMeta);
@@ -235,11 +235,11 @@ export const PlanResourcesRequest = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): PlanResourcesRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesRequest();
     while (reader.pos < end) {
@@ -294,7 +294,7 @@ export const PlanResourcesRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -358,8 +358,8 @@ function createBaseCheckResourceSetRequest(): CheckResourceSetRequest {
 export const CheckResourceSetRequest = {
   encode(
     message: CheckResourceSetRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -367,26 +367,26 @@ export const CheckResourceSetRequest = {
       writer.uint32(18).string(v!);
     }
     if (message.principal !== undefined) {
-      Principal.encode(message.principal, writer.uint32(26).fork()).ldelim();
+      Principal.encode(message.principal, writer.uint32(26).fork()).join();
     }
     if (message.resource !== undefined) {
-      ResourceSet.encode(message.resource, writer.uint32(34).fork()).ldelim();
+      ResourceSet.encode(message.resource, writer.uint32(34).fork()).join();
     }
     if (message.includeMeta !== false) {
       writer.uint32(40).bool(message.includeMeta);
     }
     if (message.auxData !== undefined) {
-      AuxData.encode(message.auxData, writer.uint32(50).fork()).ldelim();
+      AuxData.encode(message.auxData, writer.uint32(50).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceSetRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetRequest();
     while (reader.pos < end) {
@@ -438,7 +438,7 @@ export const CheckResourceSetRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -497,8 +497,8 @@ function createBaseResourceSet(): ResourceSet {
 export const ResourceSet = {
   encode(
     message: ResourceSet,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.kind !== "") {
       writer.uint32(10).string(message.kind);
     }
@@ -509,7 +509,7 @@ export const ResourceSet = {
       ResourceSet_InstancesEntry.encode(
         { key: key as any, value },
         writer.uint32(26).fork(),
-      ).ldelim();
+      ).join();
     });
     if (message.scope !== "") {
       writer.uint32(34).string(message.scope);
@@ -517,9 +517,9 @@ export const ResourceSet = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceSet {
+  decode(input: BinaryReader | Uint8Array, length?: number): ResourceSet {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceSet();
     while (reader.pos < end) {
@@ -563,7 +563,7 @@ export const ResourceSet = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -617,23 +617,23 @@ function createBaseResourceSet_InstancesEntry(): ResourceSet_InstancesEntry {
 export const ResourceSet_InstancesEntry = {
   encode(
     message: ResourceSet_InstancesEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      AttributesMap.encode(message.value, writer.uint32(18).fork()).ldelim();
+      AttributesMap.encode(message.value, writer.uint32(18).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): ResourceSet_InstancesEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceSet_InstancesEntry();
     while (reader.pos < end) {
@@ -657,7 +657,7 @@ export const ResourceSet_InstancesEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -690,22 +690,22 @@ function createBaseAttributesMap(): AttributesMap {
 export const AttributesMap = {
   encode(
     message: AttributesMap,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     Object.entries(message.attr).forEach(([key, value]) => {
       if (value !== undefined) {
         AttributesMap_AttrEntry.encode(
           { key: key as any, value },
           writer.uint32(10).fork(),
-        ).ldelim();
+        ).join();
       }
     });
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AttributesMap {
+  decode(input: BinaryReader | Uint8Array, length?: number): AttributesMap {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributesMap();
     while (reader.pos < end) {
@@ -728,7 +728,7 @@ export const AttributesMap = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -768,26 +768,23 @@ function createBaseAttributesMap_AttrEntry(): AttributesMap_AttrEntry {
 export const AttributesMap_AttrEntry = {
   encode(
     message: AttributesMap_AttrEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(
-        Value.wrap(message.value),
-        writer.uint32(18).fork(),
-      ).ldelim();
+      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): AttributesMap_AttrEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributesMap_AttrEntry();
     while (reader.pos < end) {
@@ -811,7 +808,7 @@ export const AttributesMap_AttrEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -847,32 +844,32 @@ function createBaseCheckResourceBatchRequest(): CheckResourceBatchRequest {
 export const CheckResourceBatchRequest = {
   encode(
     message: CheckResourceBatchRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
     if (message.principal !== undefined) {
-      Principal.encode(message.principal, writer.uint32(18).fork()).ldelim();
+      Principal.encode(message.principal, writer.uint32(18).fork()).join();
     }
     for (const v of message.resources) {
       CheckResourceBatchRequest_BatchEntry.encode(
         v!,
         writer.uint32(26).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.auxData !== undefined) {
-      AuxData.encode(message.auxData, writer.uint32(34).fork()).ldelim();
+      AuxData.encode(message.auxData, writer.uint32(34).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceBatchRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceBatchRequest();
     while (reader.pos < end) {
@@ -915,7 +912,7 @@ export const CheckResourceBatchRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -966,23 +963,23 @@ function createBaseCheckResourceBatchRequest_BatchEntry(): CheckResourceBatchReq
 export const CheckResourceBatchRequest_BatchEntry = {
   encode(
     message: CheckResourceBatchRequest_BatchEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.actions) {
       writer.uint32(10).string(v!);
     }
     if (message.resource !== undefined) {
-      Resource.encode(message.resource, writer.uint32(18).fork()).ldelim();
+      Resource.encode(message.resource, writer.uint32(18).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceBatchRequest_BatchEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceBatchRequest_BatchEntry();
     while (reader.pos < end) {
@@ -1006,7 +1003,7 @@ export const CheckResourceBatchRequest_BatchEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1047,8 +1044,8 @@ function createBaseCheckResourcesRequest(): CheckResourcesRequest {
 export const CheckResourcesRequest = {
   encode(
     message: CheckResourcesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -1056,26 +1053,26 @@ export const CheckResourcesRequest = {
       writer.uint32(16).bool(message.includeMeta);
     }
     if (message.principal !== undefined) {
-      Principal.encode(message.principal, writer.uint32(26).fork()).ldelim();
+      Principal.encode(message.principal, writer.uint32(26).fork()).join();
     }
     for (const v of message.resources) {
       CheckResourcesRequest_ResourceEntry.encode(
         v!,
         writer.uint32(34).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.auxData !== undefined) {
-      AuxData.encode(message.auxData, writer.uint32(42).fork()).ldelim();
+      AuxData.encode(message.auxData, writer.uint32(42).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourcesRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesRequest();
     while (reader.pos < end) {
@@ -1122,7 +1119,7 @@ export const CheckResourcesRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1179,23 +1176,23 @@ function createBaseCheckResourcesRequest_ResourceEntry(): CheckResourcesRequest_
 export const CheckResourcesRequest_ResourceEntry = {
   encode(
     message: CheckResourcesRequest_ResourceEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.actions) {
       writer.uint32(10).string(v!);
     }
     if (message.resource !== undefined) {
-      Resource.encode(message.resource, writer.uint32(18).fork()).ldelim();
+      Resource.encode(message.resource, writer.uint32(18).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourcesRequest_ResourceEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesRequest_ResourceEntry();
     while (reader.pos < end) {
@@ -1219,7 +1216,7 @@ export const CheckResourcesRequest_ResourceEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1254,17 +1251,17 @@ function createBaseAuxData(): AuxData {
 export const AuxData = {
   encode(
     message: AuxData,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.jwt !== undefined) {
-      AuxData_JWT.encode(message.jwt, writer.uint32(10).fork()).ldelim();
+      AuxData_JWT.encode(message.jwt, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AuxData {
+  decode(input: BinaryReader | Uint8Array, length?: number): AuxData {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuxData();
     while (reader.pos < end) {
@@ -1281,7 +1278,7 @@ export const AuxData = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1308,8 +1305,8 @@ function createBaseAuxData_JWT(): AuxData_JWT {
 export const AuxData_JWT = {
   encode(
     message: AuxData_JWT,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.token !== "") {
       writer.uint32(10).string(message.token);
     }
@@ -1319,9 +1316,9 @@ export const AuxData_JWT = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AuxData_JWT {
+  decode(input: BinaryReader | Uint8Array, length?: number): AuxData_JWT {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuxData_JWT();
     while (reader.pos < end) {
@@ -1345,7 +1342,7 @@ export const AuxData_JWT = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1378,20 +1375,20 @@ function createBaseAddOrUpdatePolicyRequest(): AddOrUpdatePolicyRequest {
 export const AddOrUpdatePolicyRequest = {
   encode(
     message: AddOrUpdatePolicyRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.policies) {
-      Policy.encode(v!, writer.uint32(10).fork()).ldelim();
+      Policy.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): AddOrUpdatePolicyRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddOrUpdatePolicyRequest();
     while (reader.pos < end) {
@@ -1408,7 +1405,7 @@ export const AddOrUpdatePolicyRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1437,8 +1434,8 @@ function createBaseListAuditLogEntriesRequest(): ListAuditLogEntriesRequest {
 export const ListAuditLogEntriesRequest = {
   encode(
     message: ListAuditLogEntriesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
     }
@@ -1450,13 +1447,10 @@ export const ListAuditLogEntriesRequest = {
         ListAuditLogEntriesRequest_TimeRange.encode(
           message.filter.between,
           writer.uint32(26).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "since":
-        Duration.encode(
-          message.filter.since,
-          writer.uint32(34).fork(),
-        ).ldelim();
+        Duration.encode(message.filter.since, writer.uint32(34).fork()).join();
         break;
       case "lookup":
         writer.uint32(42).string(message.filter.lookup);
@@ -1466,11 +1460,11 @@ export const ListAuditLogEntriesRequest = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): ListAuditLogEntriesRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAuditLogEntriesRequest();
     while (reader.pos < end) {
@@ -1524,7 +1518,7 @@ export const ListAuditLogEntriesRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1581,29 +1575,29 @@ function createBaseListAuditLogEntriesRequest_TimeRange(): ListAuditLogEntriesRe
 export const ListAuditLogEntriesRequest_TimeRange = {
   encode(
     message: ListAuditLogEntriesRequest_TimeRange,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.start !== undefined) {
       Timestamp.encode(
         toTimestamp(message.start),
         writer.uint32(10).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.end !== undefined) {
       Timestamp.encode(
         toTimestamp(message.end),
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): ListAuditLogEntriesRequest_TimeRange {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAuditLogEntriesRequest_TimeRange();
     while (reader.pos < end) {
@@ -1631,7 +1625,7 @@ export const ListAuditLogEntriesRequest_TimeRange = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1662,14 +1656,14 @@ function createBaseServerInfoRequest(): ServerInfoRequest {
 export const ServerInfoRequest = {
   encode(
     _: ServerInfoRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ServerInfoRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): ServerInfoRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerInfoRequest();
     while (reader.pos < end) {
@@ -1679,7 +1673,7 @@ export const ServerInfoRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1706,8 +1700,8 @@ function createBaseListPoliciesRequest(): ListPoliciesRequest {
 export const ListPoliciesRequest = {
   encode(
     message: ListPoliciesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.includeDisabled !== false) {
       writer.uint32(8).bool(message.includeDisabled);
     }
@@ -1723,9 +1717,12 @@ export const ListPoliciesRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListPoliciesRequest {
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): ListPoliciesRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListPoliciesRequest();
     while (reader.pos < end) {
@@ -1763,7 +1760,7 @@ export const ListPoliciesRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1810,17 +1807,17 @@ function createBaseGetPolicyRequest(): GetPolicyRequest {
 export const GetPolicyRequest = {
   encode(
     message: GetPolicyRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.id) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetPolicyRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): GetPolicyRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetPolicyRequest();
     while (reader.pos < end) {
@@ -1837,7 +1834,7 @@ export const GetPolicyRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1866,8 +1863,8 @@ function createBaseDisablePolicyRequest(): DisablePolicyRequest {
 export const DisablePolicyRequest = {
   encode(
     message: DisablePolicyRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.id) {
       writer.uint32(10).string(v!);
     }
@@ -1875,11 +1872,11 @@ export const DisablePolicyRequest = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): DisablePolicyRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDisablePolicyRequest();
     while (reader.pos < end) {
@@ -1896,7 +1893,7 @@ export const DisablePolicyRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1925,17 +1922,20 @@ function createBaseEnablePolicyRequest(): EnablePolicyRequest {
 export const EnablePolicyRequest = {
   encode(
     message: EnablePolicyRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.id) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): EnablePolicyRequest {
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): EnablePolicyRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnablePolicyRequest();
     while (reader.pos < end) {
@@ -1952,7 +1952,7 @@ export const EnablePolicyRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1981,20 +1981,20 @@ function createBaseAddOrUpdateSchemaRequest(): AddOrUpdateSchemaRequest {
 export const AddOrUpdateSchemaRequest = {
   encode(
     message: AddOrUpdateSchemaRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.schemas) {
-      Schema.encode(v!, writer.uint32(10).fork()).ldelim();
+      Schema.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): AddOrUpdateSchemaRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddOrUpdateSchemaRequest();
     while (reader.pos < end) {
@@ -2011,7 +2011,7 @@ export const AddOrUpdateSchemaRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2040,14 +2040,17 @@ function createBaseListSchemasRequest(): ListSchemasRequest {
 export const ListSchemasRequest = {
   encode(
     _: ListSchemasRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListSchemasRequest {
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): ListSchemasRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSchemasRequest();
     while (reader.pos < end) {
@@ -2057,7 +2060,7 @@ export const ListSchemasRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2079,17 +2082,17 @@ function createBaseGetSchemaRequest(): GetSchemaRequest {
 export const GetSchemaRequest = {
   encode(
     message: GetSchemaRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.id) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetSchemaRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): GetSchemaRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSchemaRequest();
     while (reader.pos < end) {
@@ -2106,7 +2109,7 @@ export const GetSchemaRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2135,17 +2138,20 @@ function createBaseDeleteSchemaRequest(): DeleteSchemaRequest {
 export const DeleteSchemaRequest = {
   encode(
     message: DeleteSchemaRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.id) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DeleteSchemaRequest {
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DeleteSchemaRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteSchemaRequest();
     while (reader.pos < end) {
@@ -2162,7 +2168,7 @@ export const DeleteSchemaRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2191,17 +2197,20 @@ function createBaseReloadStoreRequest(): ReloadStoreRequest {
 export const ReloadStoreRequest = {
   encode(
     message: ReloadStoreRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.wait !== false) {
       writer.uint32(8).bool(message.wait);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ReloadStoreRequest {
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): ReloadStoreRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReloadStoreRequest();
     while (reader.pos < end) {
@@ -2218,7 +2227,7 @@ export const ReloadStoreRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },

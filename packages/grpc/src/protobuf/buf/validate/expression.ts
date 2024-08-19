@@ -2,7 +2,7 @@
 // source: buf/validate/expression.proto
 
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "buf.validate";
 
@@ -19,8 +19,8 @@ function createBaseConstraint(): Constraint {
 export const Constraint = {
   encode(
     message: Constraint,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -33,9 +33,9 @@ export const Constraint = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Constraint {
+  decode(input: BinaryReader | Uint8Array, length?: number): Constraint {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConstraint();
     while (reader.pos < end) {
@@ -66,7 +66,7 @@ export const Constraint = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },

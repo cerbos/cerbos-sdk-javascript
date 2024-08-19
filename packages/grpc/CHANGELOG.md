@@ -4,9 +4,9 @@
 
 ### Changed
 
-- Bump dependency on [@grpc/grpc-js] to 1.11.1 ([#974](https://github.com/cerbos/cerbos-sdk-javascript/pull/974), [#979](https://github.com/cerbos/cerbos-sdk-javascript/pull/979), [#981](https://github.com/cerbos/cerbos-sdk-javascript/pull/981))
+- Replace dependency on [protobufjs] with [@bufbuild/protobuf] ([#990](https://github.com/cerbos/cerbos-sdk-javascript/pull/990))
 
-- Bump dependency on [protobufjs] to 7.3.2 ([#970](https://github.com/cerbos/cerbos-sdk-javascript/pull/970))
+- Bump dependency on [@grpc/grpc-js] to 1.11.1 ([#974](https://github.com/cerbos/cerbos-sdk-javascript/pull/974), [#979](https://github.com/cerbos/cerbos-sdk-javascript/pull/979), [#981](https://github.com/cerbos/cerbos-sdk-javascript/pull/981))
 
 ## [0.18.1] - 2024-06-11
 
@@ -324,6 +324,7 @@
 [0.5.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.5.1...@cerbos/grpc@0.5.2
 [0.5.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.5.0...@cerbos/grpc@0.5.1
 [0.5.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/138ce112e6b775902ddd3791faa8a763dad8614f...@cerbos/grpc@0.5.0
+[@bufbuild/protobuf]: https://github.com/bufbuild/protobuf-es
 [@cerbos/core]: ../core/README.md
 [@cerbos/opentelemetry]: ../opentelemetry/README.md
 [@grpc/grpc-js]: https://github.com/grpc/grpc-node

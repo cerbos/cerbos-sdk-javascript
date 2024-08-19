@@ -2,8 +2,7 @@
 // source: google/protobuf/duration.proto
 
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "google.protobuf";
 
@@ -19,8 +18,8 @@ function createBaseDuration(): Duration {
 export const Duration = {
   encode(
     message: Duration,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.seconds !== "0") {
       writer.uint32(8).int64(message.seconds);
     }
@@ -30,9 +29,9 @@ export const Duration = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Duration {
+  decode(input: BinaryReader | Uint8Array, length?: number): Duration {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDuration();
     while (reader.pos < end) {
@@ -43,7 +42,7 @@ export const Duration = {
             break;
           }
 
-          message.seconds = longToString(reader.int64() as Long);
+          message.seconds = reader.int64().toString();
           continue;
         case 2:
           if (tag !== 16) {
@@ -56,17 +55,8 @@ export const Duration = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
 };
-
-function longToString(long: Long) {
-  return long.toString();
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}

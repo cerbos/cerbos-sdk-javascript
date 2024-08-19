@@ -2,7 +2,7 @@
 // source: cerbos/response/v1/response.proto
 
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { Empty } from "../../../google/protobuf/empty";
 import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
 import { Effect } from "../../effect/v1/effect";
@@ -204,8 +204,8 @@ function createBasePlanResourcesResponse(): PlanResourcesResponse {
 export const PlanResourcesResponse = {
   encode(
     message: PlanResourcesResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -222,16 +222,16 @@ export const PlanResourcesResponse = {
       PlanResourcesFilter.encode(
         message.filter,
         writer.uint32(42).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.meta !== undefined) {
       PlanResourcesResponse_Meta.encode(
         message.meta,
         writer.uint32(50).fork(),
-      ).ldelim();
+      ).join();
     }
     for (const v of message.validationErrors) {
-      ValidationError.encode(v!, writer.uint32(58).fork()).ldelim();
+      ValidationError.encode(v!, writer.uint32(58).fork()).join();
     }
     if (message.cerbosCallId !== "") {
       writer.uint32(66).string(message.cerbosCallId);
@@ -240,11 +240,11 @@ export const PlanResourcesResponse = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): PlanResourcesResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesResponse();
     while (reader.pos < end) {
@@ -315,7 +315,7 @@ export const PlanResourcesResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -328,8 +328,8 @@ function createBasePlanResourcesResponse_Meta(): PlanResourcesResponse_Meta {
 export const PlanResourcesResponse_Meta = {
   encode(
     message: PlanResourcesResponse_Meta,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.filterDebug !== "") {
       writer.uint32(10).string(message.filterDebug);
     }
@@ -340,11 +340,11 @@ export const PlanResourcesResponse_Meta = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): PlanResourcesResponse_Meta {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlanResourcesResponse_Meta();
     while (reader.pos < end) {
@@ -368,7 +368,7 @@ export const PlanResourcesResponse_Meta = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -381,8 +381,8 @@ function createBaseCheckResourceSetResponse(): CheckResourceSetResponse {
 export const CheckResourceSetResponse = {
   encode(
     message: CheckResourceSetResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -390,23 +390,23 @@ export const CheckResourceSetResponse = {
       CheckResourceSetResponse_ResourceInstancesEntry.encode(
         { key: key as any, value },
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     });
     if (message.meta !== undefined) {
       CheckResourceSetResponse_Meta.encode(
         message.meta,
         writer.uint32(26).fork(),
-      ).ldelim();
+      ).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceSetResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse();
     while (reader.pos < end) {
@@ -446,7 +446,7 @@ export const CheckResourceSetResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -459,26 +459,26 @@ function createBaseCheckResourceSetResponse_ActionEffectMap(): CheckResourceSetR
 export const CheckResourceSetResponse_ActionEffectMap = {
   encode(
     message: CheckResourceSetResponse_ActionEffectMap,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     Object.entries(message.actions).forEach(([key, value]) => {
       CheckResourceSetResponse_ActionEffectMap_ActionsEntry.encode(
         { key: key as any, value },
         writer.uint32(10).fork(),
-      ).ldelim();
+      ).join();
     });
     for (const v of message.validationErrors) {
-      ValidationError.encode(v!, writer.uint32(18).fork()).ldelim();
+      ValidationError.encode(v!, writer.uint32(18).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceSetResponse_ActionEffectMap {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse_ActionEffectMap();
     while (reader.pos < end) {
@@ -511,7 +511,7 @@ export const CheckResourceSetResponse_ActionEffectMap = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -524,8 +524,8 @@ function createBaseCheckResourceSetResponse_ActionEffectMap_ActionsEntry(): Chec
 export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry = {
   encode(
     message: CheckResourceSetResponse_ActionEffectMap_ActionsEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -536,11 +536,11 @@ export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message =
       createBaseCheckResourceSetResponse_ActionEffectMap_ActionsEntry();
@@ -565,7 +565,7 @@ export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -578,23 +578,23 @@ function createBaseCheckResourceSetResponse_Meta(): CheckResourceSetResponse_Met
 export const CheckResourceSetResponse_Meta = {
   encode(
     message: CheckResourceSetResponse_Meta,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     Object.entries(message.resourceInstances).forEach(([key, value]) => {
       CheckResourceSetResponse_Meta_ResourceInstancesEntry.encode(
         { key: key as any, value },
         writer.uint32(10).fork(),
-      ).ldelim();
+      ).join();
     });
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceSetResponse_Meta {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse_Meta();
     while (reader.pos < end) {
@@ -618,7 +618,7 @@ export const CheckResourceSetResponse_Meta = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -631,8 +631,8 @@ function createBaseCheckResourceSetResponse_Meta_EffectMeta(): CheckResourceSetR
 export const CheckResourceSetResponse_Meta_EffectMeta = {
   encode(
     message: CheckResourceSetResponse_Meta_EffectMeta,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.matchedPolicy !== "") {
       writer.uint32(10).string(message.matchedPolicy);
     }
@@ -643,11 +643,11 @@ export const CheckResourceSetResponse_Meta_EffectMeta = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceSetResponse_Meta_EffectMeta {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse_Meta_EffectMeta();
     while (reader.pos < end) {
@@ -671,7 +671,7 @@ export const CheckResourceSetResponse_Meta_EffectMeta = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -684,13 +684,13 @@ function createBaseCheckResourceSetResponse_Meta_ActionMeta(): CheckResourceSetR
 export const CheckResourceSetResponse_Meta_ActionMeta = {
   encode(
     message: CheckResourceSetResponse_Meta_ActionMeta,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     Object.entries(message.actions).forEach(([key, value]) => {
       CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.encode(
         { key: key as any, value },
         writer.uint32(10).fork(),
-      ).ldelim();
+      ).join();
     });
     for (const v of message.effectiveDerivedRoles) {
       writer.uint32(18).string(v!);
@@ -699,11 +699,11 @@ export const CheckResourceSetResponse_Meta_ActionMeta = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceSetResponse_Meta_ActionMeta {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse_Meta_ActionMeta();
     while (reader.pos < end) {
@@ -734,7 +734,7 @@ export const CheckResourceSetResponse_Meta_ActionMeta = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -747,8 +747,8 @@ function createBaseCheckResourceSetResponse_Meta_ActionMeta_ActionsEntry(): Chec
 export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
   encode(
     message: CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -756,17 +756,17 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
       CheckResourceSetResponse_Meta_EffectMeta.encode(
         message.value,
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message =
       createBaseCheckResourceSetResponse_Meta_ActionMeta_ActionsEntry();
@@ -794,7 +794,7 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -807,8 +807,8 @@ function createBaseCheckResourceSetResponse_Meta_ResourceInstancesEntry(): Check
 export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
   encode(
     message: CheckResourceSetResponse_Meta_ResourceInstancesEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -816,17 +816,17 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
       CheckResourceSetResponse_Meta_ActionMeta.encode(
         message.value,
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message =
       createBaseCheckResourceSetResponse_Meta_ResourceInstancesEntry();
@@ -854,7 +854,7 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -867,8 +867,8 @@ function createBaseCheckResourceSetResponse_ResourceInstancesEntry(): CheckResou
 export const CheckResourceSetResponse_ResourceInstancesEntry = {
   encode(
     message: CheckResourceSetResponse_ResourceInstancesEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -876,17 +876,17 @@ export const CheckResourceSetResponse_ResourceInstancesEntry = {
       CheckResourceSetResponse_ActionEffectMap.encode(
         message.value,
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceSetResponse_ResourceInstancesEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceSetResponse_ResourceInstancesEntry();
     while (reader.pos < end) {
@@ -913,7 +913,7 @@ export const CheckResourceSetResponse_ResourceInstancesEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -926,8 +926,8 @@ function createBaseCheckResourceBatchResponse(): CheckResourceBatchResponse {
 export const CheckResourceBatchResponse = {
   encode(
     message: CheckResourceBatchResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -935,17 +935,17 @@ export const CheckResourceBatchResponse = {
       CheckResourceBatchResponse_ActionEffectMap.encode(
         v!,
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceBatchResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceBatchResponse();
     while (reader.pos < end) {
@@ -974,7 +974,7 @@ export const CheckResourceBatchResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -987,8 +987,8 @@ function createBaseCheckResourceBatchResponse_ActionEffectMap(): CheckResourceBa
 export const CheckResourceBatchResponse_ActionEffectMap = {
   encode(
     message: CheckResourceBatchResponse_ActionEffectMap,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.resourceId !== "") {
       writer.uint32(10).string(message.resourceId);
     }
@@ -996,20 +996,20 @@ export const CheckResourceBatchResponse_ActionEffectMap = {
       CheckResourceBatchResponse_ActionEffectMap_ActionsEntry.encode(
         { key: key as any, value },
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     });
     for (const v of message.validationErrors) {
-      ValidationError.encode(v!, writer.uint32(26).fork()).ldelim();
+      ValidationError.encode(v!, writer.uint32(26).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceBatchResponse_ActionEffectMap {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourceBatchResponse_ActionEffectMap();
     while (reader.pos < end) {
@@ -1049,7 +1049,7 @@ export const CheckResourceBatchResponse_ActionEffectMap = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1062,8 +1062,8 @@ function createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry(): Ch
 export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
   encode(
     message: CheckResourceBatchResponse_ActionEffectMap_ActionsEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1074,11 +1074,11 @@ export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message =
       createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry();
@@ -1103,7 +1103,7 @@ export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1116,8 +1116,8 @@ function createBaseCheckResourcesResponse(): CheckResourcesResponse {
 export const CheckResourcesResponse = {
   encode(
     message: CheckResourcesResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
@@ -1125,7 +1125,7 @@ export const CheckResourcesResponse = {
       CheckResourcesResponse_ResultEntry.encode(
         v!,
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.cerbosCallId !== "") {
       writer.uint32(26).string(message.cerbosCallId);
@@ -1134,11 +1134,11 @@ export const CheckResourcesResponse = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourcesResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesResponse();
     while (reader.pos < end) {
@@ -1171,7 +1171,7 @@ export const CheckResourcesResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1190,41 +1190,41 @@ function createBaseCheckResourcesResponse_ResultEntry(): CheckResourcesResponse_
 export const CheckResourcesResponse_ResultEntry = {
   encode(
     message: CheckResourcesResponse_ResultEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.resource !== undefined) {
       CheckResourcesResponse_ResultEntry_Resource.encode(
         message.resource,
         writer.uint32(10).fork(),
-      ).ldelim();
+      ).join();
     }
     Object.entries(message.actions).forEach(([key, value]) => {
       CheckResourcesResponse_ResultEntry_ActionsEntry.encode(
         { key: key as any, value },
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     });
     for (const v of message.validationErrors) {
-      ValidationError.encode(v!, writer.uint32(26).fork()).ldelim();
+      ValidationError.encode(v!, writer.uint32(26).fork()).join();
     }
     if (message.meta !== undefined) {
       CheckResourcesResponse_ResultEntry_Meta.encode(
         message.meta,
         writer.uint32(34).fork(),
-      ).ldelim();
+      ).join();
     }
     for (const v of message.outputs) {
-      OutputEntry.encode(v!, writer.uint32(42).fork()).ldelim();
+      OutputEntry.encode(v!, writer.uint32(42).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourcesResponse_ResultEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesResponse_ResultEntry();
     while (reader.pos < end) {
@@ -1283,7 +1283,7 @@ export const CheckResourcesResponse_ResultEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1296,8 +1296,8 @@ function createBaseCheckResourcesResponse_ResultEntry_Resource(): CheckResources
 export const CheckResourcesResponse_ResultEntry_Resource = {
   encode(
     message: CheckResourcesResponse_ResultEntry_Resource,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -1314,11 +1314,11 @@ export const CheckResourcesResponse_ResultEntry_Resource = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourcesResponse_ResultEntry_Resource {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesResponse_ResultEntry_Resource();
     while (reader.pos < end) {
@@ -1356,7 +1356,7 @@ export const CheckResourcesResponse_ResultEntry_Resource = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1369,13 +1369,13 @@ function createBaseCheckResourcesResponse_ResultEntry_Meta(): CheckResourcesResp
 export const CheckResourcesResponse_ResultEntry_Meta = {
   encode(
     message: CheckResourcesResponse_ResultEntry_Meta,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     Object.entries(message.actions).forEach(([key, value]) => {
       CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.encode(
         { key: key as any, value },
         writer.uint32(10).fork(),
-      ).ldelim();
+      ).join();
     });
     for (const v of message.effectiveDerivedRoles) {
       writer.uint32(18).string(v!);
@@ -1384,11 +1384,11 @@ export const CheckResourcesResponse_ResultEntry_Meta = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourcesResponse_ResultEntry_Meta {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesResponse_ResultEntry_Meta();
     while (reader.pos < end) {
@@ -1419,7 +1419,7 @@ export const CheckResourcesResponse_ResultEntry_Meta = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1432,8 +1432,8 @@ function createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta(): CheckRe
 export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
   encode(
     message: CheckResourcesResponse_ResultEntry_Meta_EffectMeta,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.matchedPolicy !== "") {
       writer.uint32(10).string(message.matchedPolicy);
     }
@@ -1444,11 +1444,11 @@ export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message =
       createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta();
@@ -1473,7 +1473,7 @@ export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1486,8 +1486,8 @@ function createBaseCheckResourcesResponse_ResultEntry_Meta_ActionsEntry(): Check
 export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
   encode(
     message: CheckResourcesResponse_ResultEntry_Meta_ActionsEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1495,17 +1495,17 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
       CheckResourcesResponse_ResultEntry_Meta_EffectMeta.encode(
         message.value,
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message =
       createBaseCheckResourcesResponse_ResultEntry_Meta_ActionsEntry();
@@ -1534,7 +1534,7 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1547,8 +1547,8 @@ function createBaseCheckResourcesResponse_ResultEntry_ActionsEntry(): CheckResou
 export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
   encode(
     message: CheckResourcesResponse_ResultEntry_ActionsEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1559,11 +1559,11 @@ export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): CheckResourcesResponse_ResultEntry_ActionsEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResourcesResponse_ResultEntry_ActionsEntry();
     while (reader.pos < end) {
@@ -1587,7 +1587,7 @@ export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1600,20 +1600,20 @@ function createBaseAddOrUpdatePolicyResponse(): AddOrUpdatePolicyResponse {
 export const AddOrUpdatePolicyResponse = {
   encode(
     message: AddOrUpdatePolicyResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.success !== undefined) {
-      Empty.encode(message.success, writer.uint32(10).fork()).ldelim();
+      Empty.encode(message.success, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): AddOrUpdatePolicyResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddOrUpdatePolicyResponse();
     while (reader.pos < end) {
@@ -1630,7 +1630,7 @@ export const AddOrUpdatePolicyResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1643,31 +1643,31 @@ function createBaseListAuditLogEntriesResponse(): ListAuditLogEntriesResponse {
 export const ListAuditLogEntriesResponse = {
   encode(
     message: ListAuditLogEntriesResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     switch (message.entry?.$case) {
       case "accessLogEntry":
         AccessLogEntry.encode(
           message.entry.accessLogEntry,
           writer.uint32(10).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "decisionLogEntry":
         DecisionLogEntry.encode(
           message.entry.decisionLogEntry,
           writer.uint32(18).fork(),
-        ).ldelim();
+        ).join();
         break;
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): ListAuditLogEntriesResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAuditLogEntriesResponse();
     while (reader.pos < end) {
@@ -1697,7 +1697,7 @@ export const ListAuditLogEntriesResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1710,8 +1710,8 @@ function createBaseServerInfoResponse(): ServerInfoResponse {
 export const ServerInfoResponse = {
   encode(
     message: ServerInfoResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.version !== "") {
       writer.uint32(10).string(message.version);
     }
@@ -1724,9 +1724,12 @@ export const ServerInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ServerInfoResponse {
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): ServerInfoResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServerInfoResponse();
     while (reader.pos < end) {
@@ -1757,7 +1760,7 @@ export const ServerInfoResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1770,8 +1773,8 @@ function createBaseListPoliciesResponse(): ListPoliciesResponse {
 export const ListPoliciesResponse = {
   encode(
     message: ListPoliciesResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.policyIds) {
       writer.uint32(10).string(v!);
     }
@@ -1779,11 +1782,11 @@ export const ListPoliciesResponse = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): ListPoliciesResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListPoliciesResponse();
     while (reader.pos < end) {
@@ -1800,7 +1803,7 @@ export const ListPoliciesResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1813,17 +1816,17 @@ function createBaseGetPolicyResponse(): GetPolicyResponse {
 export const GetPolicyResponse = {
   encode(
     message: GetPolicyResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.policies) {
-      Policy.encode(v!, writer.uint32(10).fork()).ldelim();
+      Policy.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetPolicyResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): GetPolicyResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetPolicyResponse();
     while (reader.pos < end) {
@@ -1840,7 +1843,7 @@ export const GetPolicyResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1853,8 +1856,8 @@ function createBaseDisablePolicyResponse(): DisablePolicyResponse {
 export const DisablePolicyResponse = {
   encode(
     message: DisablePolicyResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.disabledPolicies !== 0) {
       writer.uint32(8).uint32(message.disabledPolicies);
     }
@@ -1862,11 +1865,11 @@ export const DisablePolicyResponse = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): DisablePolicyResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDisablePolicyResponse();
     while (reader.pos < end) {
@@ -1883,7 +1886,7 @@ export const DisablePolicyResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1896,8 +1899,8 @@ function createBaseEnablePolicyResponse(): EnablePolicyResponse {
 export const EnablePolicyResponse = {
   encode(
     message: EnablePolicyResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.enabledPolicies !== 0) {
       writer.uint32(8).uint32(message.enabledPolicies);
     }
@@ -1905,11 +1908,11 @@ export const EnablePolicyResponse = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): EnablePolicyResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnablePolicyResponse();
     while (reader.pos < end) {
@@ -1926,7 +1929,7 @@ export const EnablePolicyResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1939,17 +1942,17 @@ function createBaseAddOrUpdateSchemaResponse(): AddOrUpdateSchemaResponse {
 export const AddOrUpdateSchemaResponse = {
   encode(
     _: AddOrUpdateSchemaResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): AddOrUpdateSchemaResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddOrUpdateSchemaResponse();
     while (reader.pos < end) {
@@ -1959,7 +1962,7 @@ export const AddOrUpdateSchemaResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1972,17 +1975,20 @@ function createBaseListSchemasResponse(): ListSchemasResponse {
 export const ListSchemasResponse = {
   encode(
     message: ListSchemasResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.schemaIds) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListSchemasResponse {
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): ListSchemasResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSchemasResponse();
     while (reader.pos < end) {
@@ -1999,7 +2005,7 @@ export const ListSchemasResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2012,17 +2018,17 @@ function createBaseGetSchemaResponse(): GetSchemaResponse {
 export const GetSchemaResponse = {
   encode(
     message: GetSchemaResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.schemas) {
-      Schema.encode(v!, writer.uint32(10).fork()).ldelim();
+      Schema.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetSchemaResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): GetSchemaResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSchemaResponse();
     while (reader.pos < end) {
@@ -2039,7 +2045,7 @@ export const GetSchemaResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2052,8 +2058,8 @@ function createBaseDeleteSchemaResponse(): DeleteSchemaResponse {
 export const DeleteSchemaResponse = {
   encode(
     message: DeleteSchemaResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.deletedSchemas !== 0) {
       writer.uint32(8).uint32(message.deletedSchemas);
     }
@@ -2061,11 +2067,11 @@ export const DeleteSchemaResponse = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): DeleteSchemaResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteSchemaResponse();
     while (reader.pos < end) {
@@ -2082,7 +2088,7 @@ export const DeleteSchemaResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2095,14 +2101,17 @@ function createBaseReloadStoreResponse(): ReloadStoreResponse {
 export const ReloadStoreResponse = {
   encode(
     _: ReloadStoreResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ReloadStoreResponse {
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): ReloadStoreResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReloadStoreResponse();
     while (reader.pos < end) {
@@ -2112,7 +2121,7 @@ export const ReloadStoreResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },

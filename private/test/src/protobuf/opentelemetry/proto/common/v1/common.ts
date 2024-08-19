@@ -2,8 +2,7 @@
 // source: opentelemetry/proto/common/v1/common.proto
 
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "opentelemetry.proto.common.v1";
 
@@ -46,8 +45,8 @@ function createBaseAnyValue(): AnyValue {
 export const AnyValue = {
   encode(
     message: AnyValue,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     switch (message.value?.$case) {
       case "stringValue":
         writer.uint32(10).string(message.value.stringValue);
@@ -65,13 +64,13 @@ export const AnyValue = {
         ArrayValue.encode(
           message.value.arrayValue,
           writer.uint32(42).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "kvlistValue":
         KeyValueList.encode(
           message.value.kvlistValue,
           writer.uint32(50).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "bytesValue":
         writer.uint32(58).bytes(message.value.bytesValue);
@@ -80,9 +79,9 @@ export const AnyValue = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AnyValue {
+  decode(input: BinaryReader | Uint8Array, length?: number): AnyValue {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAnyValue();
     while (reader.pos < end) {
@@ -112,7 +111,7 @@ export const AnyValue = {
 
           message.value = {
             $case: "intValue",
-            intValue: longToString(reader.int64() as Long),
+            intValue: reader.int64().toString(),
           };
           continue;
         case 4:
@@ -156,7 +155,7 @@ export const AnyValue = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -236,17 +235,17 @@ function createBaseArrayValue(): ArrayValue {
 export const ArrayValue = {
   encode(
     message: ArrayValue,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.values) {
-      AnyValue.encode(v!, writer.uint32(10).fork()).ldelim();
+      AnyValue.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ArrayValue {
+  decode(input: BinaryReader | Uint8Array, length?: number): ArrayValue {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArrayValue();
     while (reader.pos < end) {
@@ -263,7 +262,7 @@ export const ArrayValue = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -292,17 +291,17 @@ function createBaseKeyValueList(): KeyValueList {
 export const KeyValueList = {
   encode(
     message: KeyValueList,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.values) {
-      KeyValue.encode(v!, writer.uint32(10).fork()).ldelim();
+      KeyValue.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): KeyValueList {
+  decode(input: BinaryReader | Uint8Array, length?: number): KeyValueList {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseKeyValueList();
     while (reader.pos < end) {
@@ -319,7 +318,7 @@ export const KeyValueList = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -348,20 +347,20 @@ function createBaseKeyValue(): KeyValue {
 export const KeyValue = {
   encode(
     message: KeyValue,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      AnyValue.encode(message.value, writer.uint32(18).fork()).ldelim();
+      AnyValue.encode(message.value, writer.uint32(18).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): KeyValue {
+  decode(input: BinaryReader | Uint8Array, length?: number): KeyValue {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseKeyValue();
     while (reader.pos < end) {
@@ -385,7 +384,7 @@ export const KeyValue = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -416,8 +415,8 @@ function createBaseInstrumentationScope(): InstrumentationScope {
 export const InstrumentationScope = {
   encode(
     message: InstrumentationScope,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -425,7 +424,7 @@ export const InstrumentationScope = {
       writer.uint32(18).string(message.version);
     }
     for (const v of message.attributes) {
-      KeyValue.encode(v!, writer.uint32(26).fork()).ldelim();
+      KeyValue.encode(v!, writer.uint32(26).fork()).join();
     }
     if (message.droppedAttributesCount !== 0) {
       writer.uint32(32).uint32(message.droppedAttributesCount);
@@ -434,11 +433,11 @@ export const InstrumentationScope = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): InstrumentationScope {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInstrumentationScope();
     while (reader.pos < end) {
@@ -476,7 +475,7 @@ export const InstrumentationScope = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -535,15 +534,6 @@ function base64FromBytes(arr: Uint8Array): string {
     });
     return globalThis.btoa(bin.join(""));
   }
-}
-
-function longToString(long: Long) {
-  return long.toString();
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
 }
 
 function isSet(value: any): boolean {
