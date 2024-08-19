@@ -1,12 +1,12 @@
-unreleased:
-  type: patch
-
-  bumped:
-    yaml:
-      to: 2.5.0
-      pull: 983
-
 releases:
+  - version: 0.2.8
+    date: 2024-08-19
+
+    bumped:
+      yaml:
+        to: 2.5.0
+        pull: 983
+
   - version: 0.2.7
     date: 2024-06-11
 

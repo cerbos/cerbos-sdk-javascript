@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.19.2] - 2024-08-19
+
 ### Changed
 
 - Bump dependency on [qs] to 6.13.0 ([#976](https://github.com/cerbos/cerbos-sdk-javascript/pull/976), [#985](https://github.com/cerbos/cerbos-sdk-javascript/pull/985))
@@ -267,7 +271,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.2...HEAD
+[0.19.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.1...@cerbos/http@0.19.2
 [0.19.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.0...@cerbos/http@0.19.1
 [0.19.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.1...@cerbos/http@0.19.0
 [0.18.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.0...@cerbos/http@0.18.1
