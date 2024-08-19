@@ -1,12 +1,12 @@
-unreleased:
-  type: patch
-
-  bumped:
-    qs:
-      to: 6.13.0
-      pulls: [976, 985]
-
 releases:
+  - version: 0.19.2
+    date: 2024-08-19
+
+    bumped:
+      qs:
+        to: 6.13.0
+        pulls: [976, 985]
+
   - version: 0.19.1
     date: 2024-06-11
 

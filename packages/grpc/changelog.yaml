@@ -1,16 +1,16 @@
-unreleased:
-  type: patch
-
-  changed:
-    - summary: Replace dependency on [protobufjs] with [@bufbuild/protobuf]
-      pull: 990
-
-  bumped:
-    "@grpc/grpc-js":
-      to: 1.11.1
-      pulls: [974, 979, 981]
-
 releases:
+  - version: 0.18.2
+    date: 2024-08-19
+
+    changed:
+      - summary: Replace dependency on [protobufjs] with [@bufbuild/protobuf]
+        pull: 990
+
+    bumped:
+      "@grpc/grpc-js":
+        to: 1.11.1
+        pulls: [974, 979, 981]
+
   - version: 0.18.1
     date: 2024-06-11
 

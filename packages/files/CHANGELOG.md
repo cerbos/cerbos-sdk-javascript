@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.2.8] - 2024-08-19
+
 ### Changed
 
 - Bump dependency on [yaml] to 2.5.0 ([#983](https://github.com/cerbos/cerbos-sdk-javascript/pull/983))
@@ -86,7 +90,8 @@
 
 - A package to load Cerbos policies from YAML or JSON files ([#611](https://github.com/cerbos/cerbos-sdk-javascript/pull/611))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.7...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.8...HEAD
+[0.2.8]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.7...@cerbos/files@0.2.8
 [0.2.7]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.6...@cerbos/files@0.2.7
 [0.2.6]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.5...@cerbos/files@0.2.6
 [0.2.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.2.4...@cerbos/files@0.2.5
