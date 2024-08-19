@@ -9,6 +9,9 @@
     "schedule:weekly",
     "workarounds:all"
   ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "packageRules": [
     {
       "matchDepTypes": ["dependencies"],
@@ -19,6 +22,10 @@
       "matchDepTypes": ["devDependencies"],
       "groupName": "development dependencies",
       "rangeStrategy": "pin",
+      "semanticCommitScope": "deps-dev"
+    },
+    {
+      "matchUpdateTypes": ["lockFileMaintenance"],
       "semanticCommitScope": "deps-dev"
     },
     {
