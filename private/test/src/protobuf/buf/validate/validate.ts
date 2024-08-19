@@ -2,8 +2,7 @@
 // source: buf/validate/validate.proto
 
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { Duration } from "../../google/protobuf/duration";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Constraint } from "./expression";
@@ -373,17 +372,17 @@ function createBaseOneofConstraints(): OneofConstraints {
 export const OneofConstraints = {
   encode(
     message: OneofConstraints,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.required !== undefined) {
       writer.uint32(8).bool(message.required);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): OneofConstraints {
+  decode(input: BinaryReader | Uint8Array, length?: number): OneofConstraints {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOneofConstraints();
     while (reader.pos < end) {
@@ -400,7 +399,7 @@ export const OneofConstraints = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -435,10 +434,10 @@ function createBaseFieldConstraints(): FieldConstraints {
 export const FieldConstraints = {
   encode(
     message: FieldConstraints,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.cel) {
-      Constraint.encode(v!, writer.uint32(186).fork()).ldelim();
+      Constraint.encode(v!, writer.uint32(186).fork()).join();
     }
     if (message.skipped !== false) {
       writer.uint32(192).bool(message.skipped);
@@ -451,126 +450,114 @@ export const FieldConstraints = {
     }
     switch (message.type?.$case) {
       case "float":
-        FloatRules.encode(
-          message.type.float,
-          writer.uint32(10).fork(),
-        ).ldelim();
+        FloatRules.encode(message.type.float, writer.uint32(10).fork()).join();
         break;
       case "double":
         DoubleRules.encode(
           message.type.double,
           writer.uint32(18).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "int32":
-        Int32Rules.encode(
-          message.type.int32,
-          writer.uint32(26).fork(),
-        ).ldelim();
+        Int32Rules.encode(message.type.int32, writer.uint32(26).fork()).join();
         break;
       case "int64":
-        Int64Rules.encode(
-          message.type.int64,
-          writer.uint32(34).fork(),
-        ).ldelim();
+        Int64Rules.encode(message.type.int64, writer.uint32(34).fork()).join();
         break;
       case "uint32":
         UInt32Rules.encode(
           message.type.uint32,
           writer.uint32(42).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "uint64":
         UInt64Rules.encode(
           message.type.uint64,
           writer.uint32(50).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "sint32":
         SInt32Rules.encode(
           message.type.sint32,
           writer.uint32(58).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "sint64":
         SInt64Rules.encode(
           message.type.sint64,
           writer.uint32(66).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "fixed32":
         Fixed32Rules.encode(
           message.type.fixed32,
           writer.uint32(74).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "fixed64":
         Fixed64Rules.encode(
           message.type.fixed64,
           writer.uint32(82).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "sfixed32":
         SFixed32Rules.encode(
           message.type.sfixed32,
           writer.uint32(90).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "sfixed64":
         SFixed64Rules.encode(
           message.type.sfixed64,
           writer.uint32(98).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "bool":
-        BoolRules.encode(message.type.bool, writer.uint32(106).fork()).ldelim();
+        BoolRules.encode(message.type.bool, writer.uint32(106).fork()).join();
         break;
       case "string":
         StringRules.encode(
           message.type.string,
           writer.uint32(114).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "bytes":
-        BytesRules.encode(
-          message.type.bytes,
-          writer.uint32(122).fork(),
-        ).ldelim();
+        BytesRules.encode(message.type.bytes, writer.uint32(122).fork()).join();
         break;
       case "enum":
-        EnumRules.encode(message.type.enum, writer.uint32(130).fork()).ldelim();
+        EnumRules.encode(message.type.enum, writer.uint32(130).fork()).join();
         break;
       case "repeated":
         RepeatedRules.encode(
           message.type.repeated,
           writer.uint32(146).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "map":
-        MapRules.encode(message.type.map, writer.uint32(154).fork()).ldelim();
+        MapRules.encode(message.type.map, writer.uint32(154).fork()).join();
         break;
       case "any":
-        AnyRules.encode(message.type.any, writer.uint32(162).fork()).ldelim();
+        AnyRules.encode(message.type.any, writer.uint32(162).fork()).join();
         break;
       case "duration":
         DurationRules.encode(
           message.type.duration,
           writer.uint32(170).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "timestamp":
         TimestampRules.encode(
           message.type.timestamp,
           writer.uint32(178).fork(),
-        ).ldelim();
+        ).join();
         break;
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): FieldConstraints {
+  decode(input: BinaryReader | Uint8Array, length?: number): FieldConstraints {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldConstraints();
     while (reader.pos < end) {
@@ -818,7 +805,7 @@ export const FieldConstraints = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1049,8 +1036,8 @@ function createBaseFloatRules(): FloatRules {
 export const FloatRules = {
   encode(
     message: FloatRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(13).float(message.const);
     }
@@ -1074,21 +1061,21 @@ export const FloatRules = {
     for (const v of message.in) {
       writer.float(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.float(v);
     }
-    writer.ldelim();
+    writer.join();
     if (message.finite !== false) {
       writer.uint32(64).bool(message.finite);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): FloatRules {
+  decode(input: BinaryReader | Uint8Array, length?: number): FloatRules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFloatRules();
     while (reader.pos < end) {
@@ -1174,7 +1161,7 @@ export const FloatRules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1246,8 +1233,8 @@ function createBaseDoubleRules(): DoubleRules {
 export const DoubleRules = {
   encode(
     message: DoubleRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(9).double(message.const);
     }
@@ -1271,21 +1258,21 @@ export const DoubleRules = {
     for (const v of message.in) {
       writer.double(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.double(v);
     }
-    writer.ldelim();
+    writer.join();
     if (message.finite !== false) {
       writer.uint32(64).bool(message.finite);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DoubleRules {
+  decode(input: BinaryReader | Uint8Array, length?: number): DoubleRules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDoubleRules();
     while (reader.pos < end) {
@@ -1371,7 +1358,7 @@ export const DoubleRules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1442,8 +1429,8 @@ function createBaseInt32Rules(): Int32Rules {
 export const Int32Rules = {
   encode(
     message: Int32Rules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(8).int32(message.const);
     }
@@ -1467,18 +1454,18 @@ export const Int32Rules = {
     for (const v of message.in) {
       writer.int32(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.int32(v);
     }
-    writer.ldelim();
+    writer.join();
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Int32Rules {
+  decode(input: BinaryReader | Uint8Array, length?: number): Int32Rules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt32Rules();
     while (reader.pos < end) {
@@ -1557,7 +1544,7 @@ export const Int32Rules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1624,8 +1611,8 @@ function createBaseInt64Rules(): Int64Rules {
 export const Int64Rules = {
   encode(
     message: Int64Rules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(8).int64(message.const);
     }
@@ -1649,18 +1636,18 @@ export const Int64Rules = {
     for (const v of message.in) {
       writer.int64(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.int64(v);
     }
-    writer.ldelim();
+    writer.join();
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Int64Rules {
+  decode(input: BinaryReader | Uint8Array, length?: number): Int64Rules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt64Rules();
     while (reader.pos < end) {
@@ -1671,37 +1658,28 @@ export const Int64Rules = {
             break;
           }
 
-          message.const = longToString(reader.int64() as Long);
+          message.const = reader.int64().toString();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.lessThan = {
-            $case: "lt",
-            lt: longToString(reader.int64() as Long),
-          };
+          message.lessThan = { $case: "lt", lt: reader.int64().toString() };
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.lessThan = {
-            $case: "lte",
-            lte: longToString(reader.int64() as Long),
-          };
+          message.lessThan = { $case: "lte", lte: reader.int64().toString() };
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.greaterThan = {
-            $case: "gt",
-            gt: longToString(reader.int64() as Long),
-          };
+          message.greaterThan = { $case: "gt", gt: reader.int64().toString() };
           continue;
         case 5:
           if (tag !== 40) {
@@ -1710,12 +1688,12 @@ export const Int64Rules = {
 
           message.greaterThan = {
             $case: "gte",
-            gte: longToString(reader.int64() as Long),
+            gte: reader.int64().toString(),
           };
           continue;
         case 6:
           if (tag === 48) {
-            message.in.push(longToString(reader.int64() as Long));
+            message.in.push(reader.int64().toString());
 
             continue;
           }
@@ -1723,7 +1701,7 @@ export const Int64Rules = {
           if (tag === 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(longToString(reader.int64() as Long));
+              message.in.push(reader.int64().toString());
             }
 
             continue;
@@ -1732,7 +1710,7 @@ export const Int64Rules = {
           break;
         case 7:
           if (tag === 56) {
-            message.notIn.push(longToString(reader.int64() as Long));
+            message.notIn.push(reader.int64().toString());
 
             continue;
           }
@@ -1740,7 +1718,7 @@ export const Int64Rules = {
           if (tag === 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(longToString(reader.int64() as Long));
+              message.notIn.push(reader.int64().toString());
             }
 
             continue;
@@ -1751,7 +1729,7 @@ export const Int64Rules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1818,8 +1796,8 @@ function createBaseUInt32Rules(): UInt32Rules {
 export const UInt32Rules = {
   encode(
     message: UInt32Rules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(8).uint32(message.const);
     }
@@ -1843,18 +1821,18 @@ export const UInt32Rules = {
     for (const v of message.in) {
       writer.uint32(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.uint32(v);
     }
-    writer.ldelim();
+    writer.join();
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): UInt32Rules {
+  decode(input: BinaryReader | Uint8Array, length?: number): UInt32Rules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt32Rules();
     while (reader.pos < end) {
@@ -1933,7 +1911,7 @@ export const UInt32Rules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2000,8 +1978,8 @@ function createBaseUInt64Rules(): UInt64Rules {
 export const UInt64Rules = {
   encode(
     message: UInt64Rules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(8).uint64(message.const);
     }
@@ -2025,18 +2003,18 @@ export const UInt64Rules = {
     for (const v of message.in) {
       writer.uint64(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.uint64(v);
     }
-    writer.ldelim();
+    writer.join();
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): UInt64Rules {
+  decode(input: BinaryReader | Uint8Array, length?: number): UInt64Rules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt64Rules();
     while (reader.pos < end) {
@@ -2047,37 +2025,28 @@ export const UInt64Rules = {
             break;
           }
 
-          message.const = longToString(reader.uint64() as Long);
+          message.const = reader.uint64().toString();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.lessThan = {
-            $case: "lt",
-            lt: longToString(reader.uint64() as Long),
-          };
+          message.lessThan = { $case: "lt", lt: reader.uint64().toString() };
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.lessThan = {
-            $case: "lte",
-            lte: longToString(reader.uint64() as Long),
-          };
+          message.lessThan = { $case: "lte", lte: reader.uint64().toString() };
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.greaterThan = {
-            $case: "gt",
-            gt: longToString(reader.uint64() as Long),
-          };
+          message.greaterThan = { $case: "gt", gt: reader.uint64().toString() };
           continue;
         case 5:
           if (tag !== 40) {
@@ -2086,12 +2055,12 @@ export const UInt64Rules = {
 
           message.greaterThan = {
             $case: "gte",
-            gte: longToString(reader.uint64() as Long),
+            gte: reader.uint64().toString(),
           };
           continue;
         case 6:
           if (tag === 48) {
-            message.in.push(longToString(reader.uint64() as Long));
+            message.in.push(reader.uint64().toString());
 
             continue;
           }
@@ -2099,7 +2068,7 @@ export const UInt64Rules = {
           if (tag === 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(longToString(reader.uint64() as Long));
+              message.in.push(reader.uint64().toString());
             }
 
             continue;
@@ -2108,7 +2077,7 @@ export const UInt64Rules = {
           break;
         case 7:
           if (tag === 56) {
-            message.notIn.push(longToString(reader.uint64() as Long));
+            message.notIn.push(reader.uint64().toString());
 
             continue;
           }
@@ -2116,7 +2085,7 @@ export const UInt64Rules = {
           if (tag === 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(longToString(reader.uint64() as Long));
+              message.notIn.push(reader.uint64().toString());
             }
 
             continue;
@@ -2127,7 +2096,7 @@ export const UInt64Rules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2194,8 +2163,8 @@ function createBaseSInt32Rules(): SInt32Rules {
 export const SInt32Rules = {
   encode(
     message: SInt32Rules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(8).sint32(message.const);
     }
@@ -2219,18 +2188,18 @@ export const SInt32Rules = {
     for (const v of message.in) {
       writer.sint32(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.sint32(v);
     }
-    writer.ldelim();
+    writer.join();
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SInt32Rules {
+  decode(input: BinaryReader | Uint8Array, length?: number): SInt32Rules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSInt32Rules();
     while (reader.pos < end) {
@@ -2309,7 +2278,7 @@ export const SInt32Rules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2376,8 +2345,8 @@ function createBaseSInt64Rules(): SInt64Rules {
 export const SInt64Rules = {
   encode(
     message: SInt64Rules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(8).sint64(message.const);
     }
@@ -2401,18 +2370,18 @@ export const SInt64Rules = {
     for (const v of message.in) {
       writer.sint64(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.sint64(v);
     }
-    writer.ldelim();
+    writer.join();
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SInt64Rules {
+  decode(input: BinaryReader | Uint8Array, length?: number): SInt64Rules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSInt64Rules();
     while (reader.pos < end) {
@@ -2423,37 +2392,28 @@ export const SInt64Rules = {
             break;
           }
 
-          message.const = longToString(reader.sint64() as Long);
+          message.const = reader.sint64().toString();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.lessThan = {
-            $case: "lt",
-            lt: longToString(reader.sint64() as Long),
-          };
+          message.lessThan = { $case: "lt", lt: reader.sint64().toString() };
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.lessThan = {
-            $case: "lte",
-            lte: longToString(reader.sint64() as Long),
-          };
+          message.lessThan = { $case: "lte", lte: reader.sint64().toString() };
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.greaterThan = {
-            $case: "gt",
-            gt: longToString(reader.sint64() as Long),
-          };
+          message.greaterThan = { $case: "gt", gt: reader.sint64().toString() };
           continue;
         case 5:
           if (tag !== 40) {
@@ -2462,12 +2422,12 @@ export const SInt64Rules = {
 
           message.greaterThan = {
             $case: "gte",
-            gte: longToString(reader.sint64() as Long),
+            gte: reader.sint64().toString(),
           };
           continue;
         case 6:
           if (tag === 48) {
-            message.in.push(longToString(reader.sint64() as Long));
+            message.in.push(reader.sint64().toString());
 
             continue;
           }
@@ -2475,7 +2435,7 @@ export const SInt64Rules = {
           if (tag === 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(longToString(reader.sint64() as Long));
+              message.in.push(reader.sint64().toString());
             }
 
             continue;
@@ -2484,7 +2444,7 @@ export const SInt64Rules = {
           break;
         case 7:
           if (tag === 56) {
-            message.notIn.push(longToString(reader.sint64() as Long));
+            message.notIn.push(reader.sint64().toString());
 
             continue;
           }
@@ -2492,7 +2452,7 @@ export const SInt64Rules = {
           if (tag === 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(longToString(reader.sint64() as Long));
+              message.notIn.push(reader.sint64().toString());
             }
 
             continue;
@@ -2503,7 +2463,7 @@ export const SInt64Rules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2570,8 +2530,8 @@ function createBaseFixed32Rules(): Fixed32Rules {
 export const Fixed32Rules = {
   encode(
     message: Fixed32Rules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(13).fixed32(message.const);
     }
@@ -2595,18 +2555,18 @@ export const Fixed32Rules = {
     for (const v of message.in) {
       writer.fixed32(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.fixed32(v);
     }
-    writer.ldelim();
+    writer.join();
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Fixed32Rules {
+  decode(input: BinaryReader | Uint8Array, length?: number): Fixed32Rules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFixed32Rules();
     while (reader.pos < end) {
@@ -2685,7 +2645,7 @@ export const Fixed32Rules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2752,8 +2712,8 @@ function createBaseFixed64Rules(): Fixed64Rules {
 export const Fixed64Rules = {
   encode(
     message: Fixed64Rules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(9).fixed64(message.const);
     }
@@ -2777,18 +2737,18 @@ export const Fixed64Rules = {
     for (const v of message.in) {
       writer.fixed64(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.fixed64(v);
     }
-    writer.ldelim();
+    writer.join();
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Fixed64Rules {
+  decode(input: BinaryReader | Uint8Array, length?: number): Fixed64Rules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFixed64Rules();
     while (reader.pos < end) {
@@ -2799,27 +2759,21 @@ export const Fixed64Rules = {
             break;
           }
 
-          message.const = longToString(reader.fixed64() as Long);
+          message.const = reader.fixed64().toString();
           continue;
         case 2:
           if (tag !== 17) {
             break;
           }
 
-          message.lessThan = {
-            $case: "lt",
-            lt: longToString(reader.fixed64() as Long),
-          };
+          message.lessThan = { $case: "lt", lt: reader.fixed64().toString() };
           continue;
         case 3:
           if (tag !== 25) {
             break;
           }
 
-          message.lessThan = {
-            $case: "lte",
-            lte: longToString(reader.fixed64() as Long),
-          };
+          message.lessThan = { $case: "lte", lte: reader.fixed64().toString() };
           continue;
         case 4:
           if (tag !== 33) {
@@ -2828,7 +2782,7 @@ export const Fixed64Rules = {
 
           message.greaterThan = {
             $case: "gt",
-            gt: longToString(reader.fixed64() as Long),
+            gt: reader.fixed64().toString(),
           };
           continue;
         case 5:
@@ -2838,12 +2792,12 @@ export const Fixed64Rules = {
 
           message.greaterThan = {
             $case: "gte",
-            gte: longToString(reader.fixed64() as Long),
+            gte: reader.fixed64().toString(),
           };
           continue;
         case 6:
           if (tag === 49) {
-            message.in.push(longToString(reader.fixed64() as Long));
+            message.in.push(reader.fixed64().toString());
 
             continue;
           }
@@ -2851,7 +2805,7 @@ export const Fixed64Rules = {
           if (tag === 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(longToString(reader.fixed64() as Long));
+              message.in.push(reader.fixed64().toString());
             }
 
             continue;
@@ -2860,7 +2814,7 @@ export const Fixed64Rules = {
           break;
         case 7:
           if (tag === 57) {
-            message.notIn.push(longToString(reader.fixed64() as Long));
+            message.notIn.push(reader.fixed64().toString());
 
             continue;
           }
@@ -2868,7 +2822,7 @@ export const Fixed64Rules = {
           if (tag === 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(longToString(reader.fixed64() as Long));
+              message.notIn.push(reader.fixed64().toString());
             }
 
             continue;
@@ -2879,7 +2833,7 @@ export const Fixed64Rules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -2946,8 +2900,8 @@ function createBaseSFixed32Rules(): SFixed32Rules {
 export const SFixed32Rules = {
   encode(
     message: SFixed32Rules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(13).sfixed32(message.const);
     }
@@ -2971,18 +2925,18 @@ export const SFixed32Rules = {
     for (const v of message.in) {
       writer.sfixed32(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.sfixed32(v);
     }
-    writer.ldelim();
+    writer.join();
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SFixed32Rules {
+  decode(input: BinaryReader | Uint8Array, length?: number): SFixed32Rules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSFixed32Rules();
     while (reader.pos < end) {
@@ -3061,7 +3015,7 @@ export const SFixed32Rules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -3128,8 +3082,8 @@ function createBaseSFixed64Rules(): SFixed64Rules {
 export const SFixed64Rules = {
   encode(
     message: SFixed64Rules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(9).sfixed64(message.const);
     }
@@ -3153,18 +3107,18 @@ export const SFixed64Rules = {
     for (const v of message.in) {
       writer.sfixed64(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(58).fork();
     for (const v of message.notIn) {
       writer.sfixed64(v);
     }
-    writer.ldelim();
+    writer.join();
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SFixed64Rules {
+  decode(input: BinaryReader | Uint8Array, length?: number): SFixed64Rules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSFixed64Rules();
     while (reader.pos < end) {
@@ -3175,17 +3129,14 @@ export const SFixed64Rules = {
             break;
           }
 
-          message.const = longToString(reader.sfixed64() as Long);
+          message.const = reader.sfixed64().toString();
           continue;
         case 2:
           if (tag !== 17) {
             break;
           }
 
-          message.lessThan = {
-            $case: "lt",
-            lt: longToString(reader.sfixed64() as Long),
-          };
+          message.lessThan = { $case: "lt", lt: reader.sfixed64().toString() };
           continue;
         case 3:
           if (tag !== 25) {
@@ -3194,7 +3145,7 @@ export const SFixed64Rules = {
 
           message.lessThan = {
             $case: "lte",
-            lte: longToString(reader.sfixed64() as Long),
+            lte: reader.sfixed64().toString(),
           };
           continue;
         case 4:
@@ -3204,7 +3155,7 @@ export const SFixed64Rules = {
 
           message.greaterThan = {
             $case: "gt",
-            gt: longToString(reader.sfixed64() as Long),
+            gt: reader.sfixed64().toString(),
           };
           continue;
         case 5:
@@ -3214,12 +3165,12 @@ export const SFixed64Rules = {
 
           message.greaterThan = {
             $case: "gte",
-            gte: longToString(reader.sfixed64() as Long),
+            gte: reader.sfixed64().toString(),
           };
           continue;
         case 6:
           if (tag === 49) {
-            message.in.push(longToString(reader.sfixed64() as Long));
+            message.in.push(reader.sfixed64().toString());
 
             continue;
           }
@@ -3227,7 +3178,7 @@ export const SFixed64Rules = {
           if (tag === 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(longToString(reader.sfixed64() as Long));
+              message.in.push(reader.sfixed64().toString());
             }
 
             continue;
@@ -3236,7 +3187,7 @@ export const SFixed64Rules = {
           break;
         case 7:
           if (tag === 57) {
-            message.notIn.push(longToString(reader.sfixed64() as Long));
+            message.notIn.push(reader.sfixed64().toString());
 
             continue;
           }
@@ -3244,7 +3195,7 @@ export const SFixed64Rules = {
           if (tag === 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(longToString(reader.sfixed64() as Long));
+              message.notIn.push(reader.sfixed64().toString());
             }
 
             continue;
@@ -3255,7 +3206,7 @@ export const SFixed64Rules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -3316,17 +3267,17 @@ function createBaseBoolRules(): BoolRules {
 export const BoolRules = {
   encode(
     message: BoolRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(8).bool(message.const);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): BoolRules {
+  decode(input: BinaryReader | Uint8Array, length?: number): BoolRules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBoolRules();
     while (reader.pos < end) {
@@ -3343,7 +3294,7 @@ export const BoolRules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -3387,8 +3338,8 @@ function createBaseStringRules(): StringRules {
 export const StringRules = {
   encode(
     message: StringRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(10).string(message.const);
     }
@@ -3487,9 +3438,9 @@ export const StringRules = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): StringRules {
+  decode(input: BinaryReader | Uint8Array, length?: number): StringRules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStringRules();
     while (reader.pos < end) {
@@ -3507,42 +3458,42 @@ export const StringRules = {
             break;
           }
 
-          message.len = longToString(reader.uint64() as Long);
+          message.len = reader.uint64().toString();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.minLen = longToString(reader.uint64() as Long);
+          message.minLen = reader.uint64().toString();
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.maxLen = longToString(reader.uint64() as Long);
+          message.maxLen = reader.uint64().toString();
           continue;
         case 20:
           if (tag !== 160) {
             break;
           }
 
-          message.lenBytes = longToString(reader.uint64() as Long);
+          message.lenBytes = reader.uint64().toString();
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.minBytes = longToString(reader.uint64() as Long);
+          message.minBytes = reader.uint64().toString();
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.maxBytes = longToString(reader.uint64() as Long);
+          message.maxBytes = reader.uint64().toString();
           continue;
         case 6:
           if (tag !== 50) {
@@ -3734,7 +3685,7 @@ export const StringRules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -3980,8 +3931,8 @@ function createBaseBytesRules(): BytesRules {
 export const BytesRules = {
   encode(
     message: BytesRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(10).bytes(message.const);
     }
@@ -4026,9 +3977,9 @@ export const BytesRules = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): BytesRules {
+  decode(input: BinaryReader | Uint8Array, length?: number): BytesRules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBytesRules();
     while (reader.pos < end) {
@@ -4046,21 +3997,21 @@ export const BytesRules = {
             break;
           }
 
-          message.len = longToString(reader.uint64() as Long);
+          message.len = reader.uint64().toString();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.minLen = longToString(reader.uint64() as Long);
+          message.minLen = reader.uint64().toString();
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.maxLen = longToString(reader.uint64() as Long);
+          message.maxLen = reader.uint64().toString();
           continue;
         case 4:
           if (tag !== 34) {
@@ -4129,7 +4080,7 @@ export const BytesRules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -4220,8 +4171,8 @@ function createBaseEnumRules(): EnumRules {
 export const EnumRules = {
   encode(
     message: EnumRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       writer.uint32(8).int32(message.const);
     }
@@ -4232,18 +4183,18 @@ export const EnumRules = {
     for (const v of message.in) {
       writer.int32(v);
     }
-    writer.ldelim();
+    writer.join();
     writer.uint32(34).fork();
     for (const v of message.notIn) {
       writer.int32(v);
     }
-    writer.ldelim();
+    writer.join();
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): EnumRules {
+  decode(input: BinaryReader | Uint8Array, length?: number): EnumRules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumRules();
     while (reader.pos < end) {
@@ -4301,7 +4252,7 @@ export const EnumRules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -4351,8 +4302,8 @@ function createBaseRepeatedRules(): RepeatedRules {
 export const RepeatedRules = {
   encode(
     message: RepeatedRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.minItems !== undefined) {
       writer.uint32(8).uint64(message.minItems);
     }
@@ -4363,14 +4314,14 @@ export const RepeatedRules = {
       writer.uint32(24).bool(message.unique);
     }
     if (message.items !== undefined) {
-      FieldConstraints.encode(message.items, writer.uint32(34).fork()).ldelim();
+      FieldConstraints.encode(message.items, writer.uint32(34).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): RepeatedRules {
+  decode(input: BinaryReader | Uint8Array, length?: number): RepeatedRules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRepeatedRules();
     while (reader.pos < end) {
@@ -4381,14 +4332,14 @@ export const RepeatedRules = {
             break;
           }
 
-          message.minItems = longToString(reader.uint64() as Long);
+          message.minItems = reader.uint64().toString();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.maxItems = longToString(reader.uint64() as Long);
+          message.maxItems = reader.uint64().toString();
           continue;
         case 3:
           if (tag !== 24) {
@@ -4408,7 +4359,7 @@ export const RepeatedRules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -4460,8 +4411,8 @@ function createBaseMapRules(): MapRules {
 export const MapRules = {
   encode(
     message: MapRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.minPairs !== undefined) {
       writer.uint32(8).uint64(message.minPairs);
     }
@@ -4469,20 +4420,17 @@ export const MapRules = {
       writer.uint32(16).uint64(message.maxPairs);
     }
     if (message.keys !== undefined) {
-      FieldConstraints.encode(message.keys, writer.uint32(34).fork()).ldelim();
+      FieldConstraints.encode(message.keys, writer.uint32(34).fork()).join();
     }
     if (message.values !== undefined) {
-      FieldConstraints.encode(
-        message.values,
-        writer.uint32(42).fork(),
-      ).ldelim();
+      FieldConstraints.encode(message.values, writer.uint32(42).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MapRules {
+  decode(input: BinaryReader | Uint8Array, length?: number): MapRules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapRules();
     while (reader.pos < end) {
@@ -4493,14 +4441,14 @@ export const MapRules = {
             break;
           }
 
-          message.minPairs = longToString(reader.uint64() as Long);
+          message.minPairs = reader.uint64().toString();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.maxPairs = longToString(reader.uint64() as Long);
+          message.maxPairs = reader.uint64().toString();
           continue;
         case 4:
           if (tag !== 34) {
@@ -4520,7 +4468,7 @@ export const MapRules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -4567,8 +4515,8 @@ function createBaseAnyRules(): AnyRules {
 export const AnyRules = {
   encode(
     message: AnyRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.in) {
       writer.uint32(18).string(v!);
     }
@@ -4578,9 +4526,9 @@ export const AnyRules = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AnyRules {
+  decode(input: BinaryReader | Uint8Array, length?: number): AnyRules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAnyRules();
     while (reader.pos < end) {
@@ -4604,7 +4552,7 @@ export const AnyRules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -4645,20 +4593,17 @@ function createBaseDurationRules(): DurationRules {
 export const DurationRules = {
   encode(
     message: DurationRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
-      Duration.encode(message.const, writer.uint32(18).fork()).ldelim();
+      Duration.encode(message.const, writer.uint32(18).fork()).join();
     }
     switch (message.lessThan?.$case) {
       case "lt":
-        Duration.encode(message.lessThan.lt, writer.uint32(26).fork()).ldelim();
+        Duration.encode(message.lessThan.lt, writer.uint32(26).fork()).join();
         break;
       case "lte":
-        Duration.encode(
-          message.lessThan.lte,
-          writer.uint32(34).fork(),
-        ).ldelim();
+        Duration.encode(message.lessThan.lte, writer.uint32(34).fork()).join();
         break;
     }
     switch (message.greaterThan?.$case) {
@@ -4666,27 +4611,27 @@ export const DurationRules = {
         Duration.encode(
           message.greaterThan.gt,
           writer.uint32(42).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "gte":
         Duration.encode(
           message.greaterThan.gte,
           writer.uint32(50).fork(),
-        ).ldelim();
+        ).join();
         break;
     }
     for (const v of message.in) {
-      Duration.encode(v!, writer.uint32(58).fork()).ldelim();
+      Duration.encode(v!, writer.uint32(58).fork()).join();
     }
     for (const v of message.notIn) {
-      Duration.encode(v!, writer.uint32(66).fork()).ldelim();
+      Duration.encode(v!, writer.uint32(66).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DurationRules {
+  decode(input: BinaryReader | Uint8Array, length?: number): DurationRules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDurationRules();
     while (reader.pos < end) {
@@ -4757,7 +4702,7 @@ export const DurationRules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -4823,26 +4768,26 @@ function createBaseTimestampRules(): TimestampRules {
 export const TimestampRules = {
   encode(
     message: TimestampRules,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.const !== undefined) {
       Timestamp.encode(
         toTimestamp(message.const),
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     switch (message.lessThan?.$case) {
       case "lt":
         Timestamp.encode(
           toTimestamp(message.lessThan.lt),
           writer.uint32(26).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "lte":
         Timestamp.encode(
           toTimestamp(message.lessThan.lte),
           writer.uint32(34).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "ltNow":
         writer.uint32(56).bool(message.lessThan.ltNow);
@@ -4853,27 +4798,27 @@ export const TimestampRules = {
         Timestamp.encode(
           toTimestamp(message.greaterThan.gt),
           writer.uint32(42).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "gte":
         Timestamp.encode(
           toTimestamp(message.greaterThan.gte),
           writer.uint32(50).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "gtNow":
         writer.uint32(64).bool(message.greaterThan.gtNow);
         break;
     }
     if (message.within !== undefined) {
-      Duration.encode(message.within, writer.uint32(74).fork()).ldelim();
+      Duration.encode(message.within, writer.uint32(74).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): TimestampRules {
+  decode(input: BinaryReader | Uint8Array, length?: number): TimestampRules {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTimestampRules();
     while (reader.pos < end) {
@@ -4953,7 +4898,7 @@ export const TimestampRules = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -5056,15 +5001,6 @@ function fromJsonTimestamp(o: any): Date {
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function longToString(long: Long) {
-  return long.toString();
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
 }
 
 function isSet(value: any): boolean {

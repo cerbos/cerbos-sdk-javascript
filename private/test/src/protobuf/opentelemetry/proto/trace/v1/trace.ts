@@ -2,8 +2,7 @@
 // source: opentelemetry/proto/trace/v1/trace.proto
 
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { InstrumentationScope, KeyValue } from "../../common/v1/common";
 import { Resource } from "../../resource/v1/resource";
 
@@ -168,17 +167,17 @@ function createBaseTracesData(): TracesData {
 export const TracesData = {
   encode(
     message: TracesData,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.resourceSpans) {
-      ResourceSpans.encode(v!, writer.uint32(10).fork()).ldelim();
+      ResourceSpans.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): TracesData {
+  decode(input: BinaryReader | Uint8Array, length?: number): TracesData {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTracesData();
     while (reader.pos < end) {
@@ -197,7 +196,7 @@ export const TracesData = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -228,13 +227,13 @@ function createBaseResourceSpans(): ResourceSpans {
 export const ResourceSpans = {
   encode(
     message: ResourceSpans,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.resource !== undefined) {
-      Resource.encode(message.resource, writer.uint32(10).fork()).ldelim();
+      Resource.encode(message.resource, writer.uint32(10).fork()).join();
     }
     for (const v of message.scopeSpans) {
-      ScopeSpans.encode(v!, writer.uint32(18).fork()).ldelim();
+      ScopeSpans.encode(v!, writer.uint32(18).fork()).join();
     }
     if (message.schemaUrl !== "") {
       writer.uint32(26).string(message.schemaUrl);
@@ -242,9 +241,9 @@ export const ResourceSpans = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResourceSpans {
+  decode(input: BinaryReader | Uint8Array, length?: number): ResourceSpans {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceSpans();
     while (reader.pos < end) {
@@ -275,7 +274,7 @@ export const ResourceSpans = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -316,16 +315,16 @@ function createBaseScopeSpans(): ScopeSpans {
 export const ScopeSpans = {
   encode(
     message: ScopeSpans,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.scope !== undefined) {
       InstrumentationScope.encode(
         message.scope,
         writer.uint32(10).fork(),
-      ).ldelim();
+      ).join();
     }
     for (const v of message.spans) {
-      Span.encode(v!, writer.uint32(18).fork()).ldelim();
+      Span.encode(v!, writer.uint32(18).fork()).join();
     }
     if (message.schemaUrl !== "") {
       writer.uint32(26).string(message.schemaUrl);
@@ -333,9 +332,9 @@ export const ScopeSpans = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ScopeSpans {
+  decode(input: BinaryReader | Uint8Array, length?: number): ScopeSpans {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseScopeSpans();
     while (reader.pos < end) {
@@ -366,7 +365,7 @@ export const ScopeSpans = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -422,7 +421,10 @@ function createBaseSpan(): Span {
 }
 
 export const Span = {
-  encode(message: Span, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Span,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.traceId.length !== 0) {
       writer.uint32(10).bytes(message.traceId);
     }
@@ -451,32 +453,32 @@ export const Span = {
       writer.uint32(65).fixed64(message.endTimeUnixNano);
     }
     for (const v of message.attributes) {
-      KeyValue.encode(v!, writer.uint32(74).fork()).ldelim();
+      KeyValue.encode(v!, writer.uint32(74).fork()).join();
     }
     if (message.droppedAttributesCount !== 0) {
       writer.uint32(80).uint32(message.droppedAttributesCount);
     }
     for (const v of message.events) {
-      Span_Event.encode(v!, writer.uint32(90).fork()).ldelim();
+      Span_Event.encode(v!, writer.uint32(90).fork()).join();
     }
     if (message.droppedEventsCount !== 0) {
       writer.uint32(96).uint32(message.droppedEventsCount);
     }
     for (const v of message.links) {
-      Span_Link.encode(v!, writer.uint32(106).fork()).ldelim();
+      Span_Link.encode(v!, writer.uint32(106).fork()).join();
     }
     if (message.droppedLinksCount !== 0) {
       writer.uint32(112).uint32(message.droppedLinksCount);
     }
     if (message.status !== undefined) {
-      Status.encode(message.status, writer.uint32(122).fork()).ldelim();
+      Status.encode(message.status, writer.uint32(122).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Span {
+  decode(input: BinaryReader | Uint8Array, length?: number): Span {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpan();
     while (reader.pos < end) {
@@ -536,14 +538,14 @@ export const Span = {
             break;
           }
 
-          message.startTimeUnixNano = longToString(reader.fixed64() as Long);
+          message.startTimeUnixNano = reader.fixed64().toString();
           continue;
         case 8:
           if (tag !== 65) {
             break;
           }
 
-          message.endTimeUnixNano = longToString(reader.fixed64() as Long);
+          message.endTimeUnixNano = reader.fixed64().toString();
           continue;
         case 9:
           if (tag !== 74) {
@@ -598,7 +600,7 @@ export const Span = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -714,8 +716,8 @@ function createBaseSpan_Event(): Span_Event {
 export const Span_Event = {
   encode(
     message: Span_Event,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.timeUnixNano !== "0") {
       writer.uint32(9).fixed64(message.timeUnixNano);
     }
@@ -723,7 +725,7 @@ export const Span_Event = {
       writer.uint32(18).string(message.name);
     }
     for (const v of message.attributes) {
-      KeyValue.encode(v!, writer.uint32(26).fork()).ldelim();
+      KeyValue.encode(v!, writer.uint32(26).fork()).join();
     }
     if (message.droppedAttributesCount !== 0) {
       writer.uint32(32).uint32(message.droppedAttributesCount);
@@ -731,9 +733,9 @@ export const Span_Event = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Span_Event {
+  decode(input: BinaryReader | Uint8Array, length?: number): Span_Event {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpan_Event();
     while (reader.pos < end) {
@@ -744,7 +746,7 @@ export const Span_Event = {
             break;
           }
 
-          message.timeUnixNano = longToString(reader.fixed64() as Long);
+          message.timeUnixNano = reader.fixed64().toString();
           continue;
         case 2:
           if (tag !== 18) {
@@ -771,7 +773,7 @@ export const Span_Event = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -823,8 +825,8 @@ function createBaseSpan_Link(): Span_Link {
 export const Span_Link = {
   encode(
     message: Span_Link,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.traceId.length !== 0) {
       writer.uint32(10).bytes(message.traceId);
     }
@@ -835,7 +837,7 @@ export const Span_Link = {
       writer.uint32(26).string(message.traceState);
     }
     for (const v of message.attributes) {
-      KeyValue.encode(v!, writer.uint32(34).fork()).ldelim();
+      KeyValue.encode(v!, writer.uint32(34).fork()).join();
     }
     if (message.droppedAttributesCount !== 0) {
       writer.uint32(40).uint32(message.droppedAttributesCount);
@@ -846,9 +848,9 @@ export const Span_Link = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Span_Link {
+  decode(input: BinaryReader | Uint8Array, length?: number): Span_Link {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpan_Link();
     while (reader.pos < end) {
@@ -900,7 +902,7 @@ export const Span_Link = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -957,8 +959,8 @@ function createBaseStatus(): Status {
 export const Status = {
   encode(
     message: Status,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.message !== "") {
       writer.uint32(18).string(message.message);
     }
@@ -968,9 +970,9 @@ export const Status = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Status {
+  decode(input: BinaryReader | Uint8Array, length?: number): Status {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStatus();
     while (reader.pos < end) {
@@ -994,7 +996,7 @@ export const Status = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -1041,15 +1043,6 @@ function base64FromBytes(arr: Uint8Array): string {
     });
     return globalThis.btoa(bin.join(""));
   }
-}
-
-function longToString(long: Long) {
-  return long.toString();
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
 }
 
 function isSet(value: any): boolean {

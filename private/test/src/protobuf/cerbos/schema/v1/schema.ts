@@ -2,7 +2,7 @@
 // source: cerbos/schema/v1/schema.proto
 
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "cerbos.schema.v1";
 
@@ -71,8 +71,8 @@ function createBaseValidationError(): ValidationError {
 export const ValidationError = {
   encode(
     message: ValidationError,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);
     }
@@ -85,9 +85,9 @@ export const ValidationError = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ValidationError {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidationError {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidationError();
     while (reader.pos < end) {
@@ -118,7 +118,7 @@ export const ValidationError = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -155,8 +155,8 @@ function createBaseSchema(): Schema {
 export const Schema = {
   encode(
     message: Schema,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -166,9 +166,9 @@ export const Schema = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Schema {
+  decode(input: BinaryReader | Uint8Array, length?: number): Schema {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSchema();
     while (reader.pos < end) {
@@ -192,7 +192,7 @@ export const Schema = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },

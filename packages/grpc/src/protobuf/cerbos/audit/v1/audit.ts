@@ -2,7 +2,7 @@
 // source: cerbos/audit/v1/audit.proto
 
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import {
   CheckInput,
@@ -100,8 +100,8 @@ function createBaseAccessLogEntry(): AccessLogEntry {
 export const AccessLogEntry = {
   encode(
     message: AccessLogEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.callId !== "") {
       writer.uint32(10).string(message.callId);
     }
@@ -109,16 +109,16 @@ export const AccessLogEntry = {
       Timestamp.encode(
         toTimestamp(message.timestamp),
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.peer !== undefined) {
-      Peer.encode(message.peer, writer.uint32(26).fork()).ldelim();
+      Peer.encode(message.peer, writer.uint32(26).fork()).join();
     }
     Object.entries(message.metadata).forEach(([key, value]) => {
       AccessLogEntry_MetadataEntry.encode(
         { key: key as any, value },
         writer.uint32(34).fork(),
-      ).ldelim();
+      ).join();
     });
     if (message.method !== "") {
       writer.uint32(42).string(message.method);
@@ -129,9 +129,9 @@ export const AccessLogEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccessLogEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccessLogEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessLogEntry();
     while (reader.pos < end) {
@@ -191,7 +191,7 @@ export const AccessLogEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -204,23 +204,23 @@ function createBaseAccessLogEntry_MetadataEntry(): AccessLogEntry_MetadataEntry 
 export const AccessLogEntry_MetadataEntry = {
   encode(
     message: AccessLogEntry_MetadataEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      MetaValues.encode(message.value, writer.uint32(18).fork()).ldelim();
+      MetaValues.encode(message.value, writer.uint32(18).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): AccessLogEntry_MetadataEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessLogEntry_MetadataEntry();
     while (reader.pos < end) {
@@ -244,7 +244,7 @@ export const AccessLogEntry_MetadataEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -267,8 +267,8 @@ function createBaseDecisionLogEntry(): DecisionLogEntry {
 export const DecisionLogEntry = {
   encode(
     message: DecisionLogEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.callId !== "") {
       writer.uint32(10).string(message.callId);
     }
@@ -276,16 +276,16 @@ export const DecisionLogEntry = {
       Timestamp.encode(
         toTimestamp(message.timestamp),
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.peer !== undefined) {
-      Peer.encode(message.peer, writer.uint32(26).fork()).ldelim();
+      Peer.encode(message.peer, writer.uint32(26).fork()).join();
     }
     for (const v of message.inputs) {
-      CheckInput.encode(v!, writer.uint32(34).fork()).ldelim();
+      CheckInput.encode(v!, writer.uint32(34).fork()).join();
     }
     for (const v of message.outputs) {
-      CheckOutput.encode(v!, writer.uint32(42).fork()).ldelim();
+      CheckOutput.encode(v!, writer.uint32(42).fork()).join();
     }
     if (message.error !== "") {
       writer.uint32(50).string(message.error);
@@ -295,30 +295,30 @@ export const DecisionLogEntry = {
         DecisionLogEntry_CheckResources.encode(
           message.method.checkResources,
           writer.uint32(58).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "planResources":
         DecisionLogEntry_PlanResources.encode(
           message.method.planResources,
           writer.uint32(66).fork(),
-        ).ldelim();
+        ).join();
         break;
     }
     Object.entries(message.metadata).forEach(([key, value]) => {
       DecisionLogEntry_MetadataEntry.encode(
         { key: key as any, value },
         writer.uint32(122).fork(),
-      ).ldelim();
+      ).join();
     });
     if (message.auditTrail !== undefined) {
-      AuditTrail.encode(message.auditTrail, writer.uint32(130).fork()).ldelim();
+      AuditTrail.encode(message.auditTrail, writer.uint32(130).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DecisionLogEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number): DecisionLogEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecisionLogEntry();
     while (reader.pos < end) {
@@ -418,7 +418,7 @@ export const DecisionLogEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -431,13 +431,13 @@ function createBaseDecisionLogEntry_CheckResources(): DecisionLogEntry_CheckReso
 export const DecisionLogEntry_CheckResources = {
   encode(
     message: DecisionLogEntry_CheckResources,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.inputs) {
-      CheckInput.encode(v!, writer.uint32(10).fork()).ldelim();
+      CheckInput.encode(v!, writer.uint32(10).fork()).join();
     }
     for (const v of message.outputs) {
-      CheckOutput.encode(v!, writer.uint32(18).fork()).ldelim();
+      CheckOutput.encode(v!, writer.uint32(18).fork()).join();
     }
     if (message.error !== "") {
       writer.uint32(26).string(message.error);
@@ -446,11 +446,11 @@ export const DecisionLogEntry_CheckResources = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): DecisionLogEntry_CheckResources {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecisionLogEntry_CheckResources();
     while (reader.pos < end) {
@@ -481,7 +481,7 @@ export const DecisionLogEntry_CheckResources = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -494,19 +494,16 @@ function createBaseDecisionLogEntry_PlanResources(): DecisionLogEntry_PlanResour
 export const DecisionLogEntry_PlanResources = {
   encode(
     message: DecisionLogEntry_PlanResources,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.input !== undefined) {
-      PlanResourcesInput.encode(
-        message.input,
-        writer.uint32(10).fork(),
-      ).ldelim();
+      PlanResourcesInput.encode(message.input, writer.uint32(10).fork()).join();
     }
     if (message.output !== undefined) {
       PlanResourcesOutput.encode(
         message.output,
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.error !== "") {
       writer.uint32(26).string(message.error);
@@ -515,11 +512,11 @@ export const DecisionLogEntry_PlanResources = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): DecisionLogEntry_PlanResources {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecisionLogEntry_PlanResources();
     while (reader.pos < end) {
@@ -550,7 +547,7 @@ export const DecisionLogEntry_PlanResources = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -563,23 +560,23 @@ function createBaseDecisionLogEntry_MetadataEntry(): DecisionLogEntry_MetadataEn
 export const DecisionLogEntry_MetadataEntry = {
   encode(
     message: DecisionLogEntry_MetadataEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      MetaValues.encode(message.value, writer.uint32(18).fork()).ldelim();
+      MetaValues.encode(message.value, writer.uint32(18).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): DecisionLogEntry_MetadataEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecisionLogEntry_MetadataEntry();
     while (reader.pos < end) {
@@ -603,7 +600,7 @@ export const DecisionLogEntry_MetadataEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -616,17 +613,17 @@ function createBaseMetaValues(): MetaValues {
 export const MetaValues = {
   encode(
     message: MetaValues,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.values) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MetaValues {
+  decode(input: BinaryReader | Uint8Array, length?: number): MetaValues {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetaValues();
     while (reader.pos < end) {
@@ -643,7 +640,7 @@ export const MetaValues = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -654,7 +651,10 @@ function createBasePeer(): Peer {
 }
 
 export const Peer = {
-  encode(message: Peer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Peer,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -670,9 +670,9 @@ export const Peer = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Peer {
+  decode(input: BinaryReader | Uint8Array, length?: number): Peer {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeer();
     while (reader.pos < end) {
@@ -710,7 +710,7 @@ export const Peer = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -723,20 +723,20 @@ function createBaseAuditTrail(): AuditTrail {
 export const AuditTrail = {
   encode(
     message: AuditTrail,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     Object.entries(message.effectivePolicies).forEach(([key, value]) => {
       AuditTrail_EffectivePoliciesEntry.encode(
         { key: key as any, value },
         writer.uint32(10).fork(),
-      ).ldelim();
+      ).join();
     });
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AuditTrail {
+  decode(input: BinaryReader | Uint8Array, length?: number): AuditTrail {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuditTrail();
     while (reader.pos < end) {
@@ -759,7 +759,7 @@ export const AuditTrail = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -772,23 +772,23 @@ function createBaseAuditTrail_EffectivePoliciesEntry(): AuditTrail_EffectivePoli
 export const AuditTrail_EffectivePoliciesEntry = {
   encode(
     message: AuditTrail_EffectivePoliciesEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      SourceAttributes.encode(message.value, writer.uint32(18).fork()).ldelim();
+      SourceAttributes.encode(message.value, writer.uint32(18).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): AuditTrail_EffectivePoliciesEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuditTrail_EffectivePoliciesEntry();
     while (reader.pos < end) {
@@ -812,7 +812,7 @@ export const AuditTrail_EffectivePoliciesEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },

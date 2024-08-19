@@ -2,7 +2,7 @@
 // source: google/protobuf/struct.proto
 
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "google.protobuf";
 
@@ -41,22 +41,22 @@ function createBaseStruct(): Struct {
 export const Struct = {
   encode(
     message: Struct,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     Object.entries(message.fields).forEach(([key, value]) => {
       if (value !== undefined) {
         Struct_FieldsEntry.encode(
           { key: key as any, value },
           writer.uint32(10).fork(),
-        ).ldelim();
+        ).join();
       }
     });
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Struct {
+  decode(input: BinaryReader | Uint8Array, length?: number): Struct {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct();
     while (reader.pos < end) {
@@ -76,7 +76,7 @@ export const Struct = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -110,23 +110,23 @@ function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
 export const Struct_FieldsEntry = {
   encode(
     message: Struct_FieldsEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
-      Value.encode(
-        Value.wrap(message.value),
-        writer.uint32(18).fork(),
-      ).ldelim();
+      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Struct_FieldsEntry {
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): Struct_FieldsEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct_FieldsEntry();
     while (reader.pos < end) {
@@ -150,7 +150,7 @@ export const Struct_FieldsEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -161,7 +161,10 @@ function createBaseValue(): Value {
 }
 
 export const Value = {
-  encode(message: Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Value,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     switch (message.kind?.$case) {
       case "nullValue":
         writer.uint32(8).int32(message.kind.nullValue);
@@ -179,21 +182,21 @@ export const Value = {
         Struct.encode(
           Struct.wrap(message.kind.structValue),
           writer.uint32(42).fork(),
-        ).ldelim();
+        ).join();
         break;
       case "listValue":
         ListValue.encode(
           ListValue.wrap(message.kind.listValue),
           writer.uint32(50).fork(),
-        ).ldelim();
+        ).join();
         break;
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Value {
+  decode(input: BinaryReader | Uint8Array, length?: number): Value {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValue();
     while (reader.pos < end) {
@@ -256,7 +259,7 @@ export const Value = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -309,17 +312,17 @@ function createBaseListValue(): ListValue {
 export const ListValue = {
   encode(
     message: ListValue,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.values) {
-      Value.encode(Value.wrap(v!), writer.uint32(10).fork()).ldelim();
+      Value.encode(Value.wrap(v!), writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListValue {
+  decode(input: BinaryReader | Uint8Array, length?: number): ListValue {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListValue();
     while (reader.pos < end) {
@@ -338,7 +341,7 @@ export const ListValue = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },

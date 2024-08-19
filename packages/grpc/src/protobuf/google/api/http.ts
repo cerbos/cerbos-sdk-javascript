@@ -2,7 +2,7 @@
 // source: google/api/http.proto
 
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "google.api";
 
@@ -39,8 +39,8 @@ function createBaseHttpRule(): HttpRule {
 export const HttpRule = {
   encode(
     message: HttpRule,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
@@ -64,7 +64,7 @@ export const HttpRule = {
         CustomHttpPattern.encode(
           message.pattern.custom,
           writer.uint32(66).fork(),
-        ).ldelim();
+        ).join();
         break;
     }
     if (message.body !== "") {
@@ -74,14 +74,14 @@ export const HttpRule = {
       writer.uint32(98).string(message.responseBody);
     }
     for (const v of message.additionalBindings) {
-      HttpRule.encode(v!, writer.uint32(90).fork()).ldelim();
+      HttpRule.encode(v!, writer.uint32(90).fork()).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): HttpRule {
+  decode(input: BinaryReader | Uint8Array, length?: number): HttpRule {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpRule();
     while (reader.pos < end) {
@@ -166,7 +166,7 @@ export const HttpRule = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -179,8 +179,8 @@ function createBaseCustomHttpPattern(): CustomHttpPattern {
 export const CustomHttpPattern = {
   encode(
     message: CustomHttpPattern,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.kind !== "") {
       writer.uint32(10).string(message.kind);
     }
@@ -190,9 +190,9 @@ export const CustomHttpPattern = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CustomHttpPattern {
+  decode(input: BinaryReader | Uint8Array, length?: number): CustomHttpPattern {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCustomHttpPattern();
     while (reader.pos < end) {
@@ -216,7 +216,7 @@ export const CustomHttpPattern = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },

@@ -2,6 +2,7 @@
 // source: jaeger/proto/api_v3/query_service.proto
 
 /* eslint-disable */
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import {
   type CallOptions,
   ChannelCredentials,
@@ -16,7 +17,6 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import _m0 from "protobufjs/minimal";
 import { Duration } from "../../../google/protobuf/duration";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { TracesData } from "../../../opentelemetry/proto/trace/v1/trace";
@@ -76,8 +76,8 @@ function createBaseGetTraceRequest(): GetTraceRequest {
 export const GetTraceRequest = {
   encode(
     message: GetTraceRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.traceId !== "") {
       writer.uint32(10).string(message.traceId);
     }
@@ -85,20 +85,20 @@ export const GetTraceRequest = {
       Timestamp.encode(
         toTimestamp(message.startTime),
         writer.uint32(18).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.endTime !== undefined) {
       Timestamp.encode(
         toTimestamp(message.endTime),
         writer.uint32(26).fork(),
-      ).ldelim();
+      ).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetTraceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): GetTraceRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTraceRequest();
     while (reader.pos < end) {
@@ -133,7 +133,7 @@ export const GetTraceRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -181,8 +181,8 @@ function createBaseTraceQueryParameters(): TraceQueryParameters {
 export const TraceQueryParameters = {
   encode(
     message: TraceQueryParameters,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
@@ -193,25 +193,25 @@ export const TraceQueryParameters = {
       TraceQueryParameters_AttributesEntry.encode(
         { key: key as any, value },
         writer.uint32(26).fork(),
-      ).ldelim();
+      ).join();
     });
     if (message.startTimeMin !== undefined) {
       Timestamp.encode(
         toTimestamp(message.startTimeMin),
         writer.uint32(34).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.startTimeMax !== undefined) {
       Timestamp.encode(
         toTimestamp(message.startTimeMax),
         writer.uint32(42).fork(),
-      ).ldelim();
+      ).join();
     }
     if (message.durationMin !== undefined) {
-      Duration.encode(message.durationMin, writer.uint32(50).fork()).ldelim();
+      Duration.encode(message.durationMin, writer.uint32(50).fork()).join();
     }
     if (message.durationMax !== undefined) {
-      Duration.encode(message.durationMax, writer.uint32(58).fork()).ldelim();
+      Duration.encode(message.durationMax, writer.uint32(58).fork()).join();
     }
     if (message.numTraces !== 0) {
       writer.uint32(64).int32(message.numTraces);
@@ -220,11 +220,11 @@ export const TraceQueryParameters = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): TraceQueryParameters {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTraceQueryParameters();
     while (reader.pos < end) {
@@ -300,7 +300,7 @@ export const TraceQueryParameters = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -383,8 +383,8 @@ function createBaseTraceQueryParameters_AttributesEntry(): TraceQueryParameters_
 export const TraceQueryParameters_AttributesEntry = {
   encode(
     message: TraceQueryParameters_AttributesEntry,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -395,11 +395,11 @@ export const TraceQueryParameters_AttributesEntry = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): TraceQueryParameters_AttributesEntry {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTraceQueryParameters_AttributesEntry();
     while (reader.pos < end) {
@@ -423,7 +423,7 @@ export const TraceQueryParameters_AttributesEntry = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -454,20 +454,20 @@ function createBaseFindTracesRequest(): FindTracesRequest {
 export const FindTracesRequest = {
   encode(
     message: FindTracesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.query !== undefined) {
       TraceQueryParameters.encode(
         message.query,
         writer.uint32(10).fork(),
-      ).ldelim();
+      ).join();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): FindTracesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): FindTracesRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFindTracesRequest();
     while (reader.pos < end) {
@@ -484,7 +484,7 @@ export const FindTracesRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -513,14 +513,17 @@ function createBaseGetServicesRequest(): GetServicesRequest {
 export const GetServicesRequest = {
   encode(
     _: GetServicesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetServicesRequest {
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): GetServicesRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServicesRequest();
     while (reader.pos < end) {
@@ -530,7 +533,7 @@ export const GetServicesRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -552,17 +555,20 @@ function createBaseGetServicesResponse(): GetServicesResponse {
 export const GetServicesResponse = {
   encode(
     message: GetServicesResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.services) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetServicesResponse {
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): GetServicesResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServicesResponse();
     while (reader.pos < end) {
@@ -579,7 +585,7 @@ export const GetServicesResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -608,8 +614,8 @@ function createBaseGetOperationsRequest(): GetOperationsRequest {
 export const GetOperationsRequest = {
   encode(
     message: GetOperationsRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.service !== "") {
       writer.uint32(10).string(message.service);
     }
@@ -620,11 +626,11 @@ export const GetOperationsRequest = {
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): GetOperationsRequest {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetOperationsRequest();
     while (reader.pos < end) {
@@ -648,7 +654,7 @@ export const GetOperationsRequest = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -681,8 +687,8 @@ function createBaseOperation(): Operation {
 export const Operation = {
   encode(
     message: Operation,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -692,9 +698,9 @@ export const Operation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Operation {
+  decode(input: BinaryReader | Uint8Array, length?: number): Operation {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
     while (reader.pos < end) {
@@ -718,7 +724,7 @@ export const Operation = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
@@ -751,20 +757,20 @@ function createBaseGetOperationsResponse(): GetOperationsResponse {
 export const GetOperationsResponse = {
   encode(
     message: GetOperationsResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     for (const v of message.operations) {
-      Operation.encode(v!, writer.uint32(10).fork()).ldelim();
+      Operation.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
   decode(
-    input: _m0.Reader | Uint8Array,
+    input: BinaryReader | Uint8Array,
     length?: number,
   ): GetOperationsResponse {
     const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetOperationsResponse();
     while (reader.pos < end) {
@@ -781,7 +787,7 @@ export const GetOperationsResponse = {
       if ((tag & 7) === 4 || tag === 0) {
         break;
       }
-      reader.skipType(tag & 7);
+      reader.skip(tag & 7);
     }
     return message;
   },
