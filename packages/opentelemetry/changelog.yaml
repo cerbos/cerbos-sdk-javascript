@@ -1,3 +1,11 @@
+unreleased:
+  type: patch
+
+  bumped:
+    "@opentelemetry/semantic-conventions":
+      to: 1.26.0
+      pull: 994
+
 releases:
   - version: 0.5.2
     date: 2024-08-19
