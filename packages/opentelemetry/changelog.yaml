@@ -2,9 +2,13 @@ unreleased:
   type: patch
 
   bumped:
+    "@opentelemetry/instrumentation":
+      to: 0.53.0
+      pull: 997
+
     "@opentelemetry/semantic-conventions":
-      to: 1.26.0
-      pull: 994
+      to: 1.27.0
+      pulls: [994, 997]
 
 releases:
   - version: 0.5.2
