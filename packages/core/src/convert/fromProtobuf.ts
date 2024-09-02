@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import type {
   AuditTrail as AuditTrailProtobuf,
   DecisionLogEntry as DecisionLogEntryProtobuf,

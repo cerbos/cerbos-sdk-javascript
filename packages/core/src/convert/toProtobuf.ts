@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
+
 import { v4 as uuidv4 } from "uuid";
 
 import { Effect as EffectProtobuf } from "../protobuf/cerbos/effect/v1/effect";
