@@ -27,7 +27,7 @@
     "@types/semver": "7.5.8",
     "eslint-plugin-vitest": "0.4.1",
     "jose": "5.7.0",
-    "jsdom": "24.1.1",
+    "jsdom": "25.0.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "semver": "7.6.3",
