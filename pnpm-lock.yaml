@@ -229,13 +229,13 @@ importers:
         version: 7.5.8
       eslint-plugin-vitest:
         specifier: 0.4.1
-        version: 0.4.1(@typescript-eslint/eslint-plugin@8.2.0(@typescript-eslint/parser@8.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@18.19.45)(jsdom@24.1.1))
+        version: 0.4.1(@typescript-eslint/eslint-plugin@8.2.0(@typescript-eslint/parser@8.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@18.19.45)(jsdom@25.0.0))
       jose:
         specifier: 5.7.0
         version: 5.7.0
       jsdom:
-        specifier: 24.1.1
-        version: 24.1.1
+        specifier: 25.0.0
+        version: 25.0.0
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -247,7 +247,7 @@ importers:
         version: 7.6.3
       vitest:
         specifier: 2.0.5
-        version: 2.0.5(@types/node@18.19.45)(jsdom@24.1.1)
+        version: 2.0.5(@types/node@18.19.45)(jsdom@25.0.0)
 
 packages:
 
@@ -1986,8 +1986,8 @@ packages:
     resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
     hasBin: true
 
-  jsdom@24.1.1:
-    resolution: {integrity: sha512-5O1wWV99Jhq4DV7rCLIoZ/UIhyQeDR7wHVyZAHAshbrvZsLs+Xzz7gtwnlJTJDjleiTKh54F4dXrX70vJQTyJQ==}
+  jsdom@25.0.0:
+    resolution: {integrity: sha512-OhoFVT59T7aEq75TVw9xxEfkXgacpqAhQaYgP9y/fDqWQCMB/b1H66RfmPm/MaeaAIU9nDwMOVTlPN51+ao6CQ==}
     engines: {node: '>=18'}
     peerDependencies:
       canvas: ^2.11.2
@@ -4261,13 +4261,13 @@ snapshots:
       '@microsoft/tsdoc': 0.15.0
       '@microsoft/tsdoc-config': 0.17.0
 
-  eslint-plugin-vitest@0.4.1(@typescript-eslint/eslint-plugin@8.2.0(@typescript-eslint/parser@8.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@18.19.45)(jsdom@24.1.1)):
+  eslint-plugin-vitest@0.4.1(@typescript-eslint/eslint-plugin@8.2.0(@typescript-eslint/parser@8.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@18.19.45)(jsdom@25.0.0)):
     dependencies:
       '@typescript-eslint/utils': 7.18.0(eslint@8.57.0)(typescript@5.5.4)
       eslint: 8.57.0
     optionalDependencies:
       '@typescript-eslint/eslint-plugin': 8.2.0(@typescript-eslint/parser@8.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
-      vitest: 2.0.5(@types/node@18.19.45)(jsdom@24.1.1)
+      vitest: 2.0.5(@types/node@18.19.45)(jsdom@25.0.0)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -4747,7 +4747,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  jsdom@24.1.1:
+  jsdom@25.0.0:
     dependencies:
       cssstyle: 4.0.1
       data-urls: 5.0.0
@@ -5509,7 +5509,7 @@ snapshots:
       '@types/node': 18.19.45
       fsevents: 2.3.3
 
-  vitest@2.0.5(@types/node@18.19.45)(jsdom@24.1.1):
+  vitest@2.0.5(@types/node@18.19.45)(jsdom@25.0.0):
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@vitest/expect': 2.0.5
@@ -5532,7 +5532,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 18.19.45
-      jsdom: 24.1.1
+      jsdom: 25.0.0
     transitivePeerDependencies:
       - less
       - lightningcss
