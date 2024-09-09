@@ -85,7 +85,7 @@ export interface AuxData_JWT {
 
 export interface ServerInfoRequest {}
 
-export const PlanResourcesRequest = {
+export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
   fromJSON(object: any): PlanResourcesRequest {
     return {
       requestId: isSet(object.requestId)
@@ -131,7 +131,7 @@ export const PlanResourcesRequest = {
   },
 };
 
-export const CheckResourceSetRequest = {
+export const CheckResourceSetRequest: MessageFns<CheckResourceSetRequest> = {
   fromJSON(object: any): CheckResourceSetRequest {
     return {
       requestId: isSet(object.requestId)
@@ -179,7 +179,7 @@ export const CheckResourceSetRequest = {
   },
 };
 
-export const ResourceSet = {
+export const ResourceSet: MessageFns<ResourceSet> = {
   fromJSON(object: any): ResourceSet {
     return {
       kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
@@ -222,29 +222,30 @@ export const ResourceSet = {
   },
 };
 
-export const ResourceSet_InstancesEntry = {
-  fromJSON(object: any): ResourceSet_InstancesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? AttributesMap.fromJSON(object.value)
-        : undefined,
-    };
-  },
+export const ResourceSet_InstancesEntry: MessageFns<ResourceSet_InstancesEntry> =
+  {
+    fromJSON(object: any): ResourceSet_InstancesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? AttributesMap.fromJSON(object.value)
+          : undefined,
+      };
+    },
 
-  toJSON(message: ResourceSet_InstancesEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = AttributesMap.toJSON(message.value);
-    }
-    return obj;
-  },
-};
+    toJSON(message: ResourceSet_InstancesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = AttributesMap.toJSON(message.value);
+      }
+      return obj;
+    },
+  };
 
-export const AttributesMap = {
+export const AttributesMap: MessageFns<AttributesMap> = {
   fromJSON(object: any): AttributesMap {
     return {
       attr: isObject(object.attr)
@@ -273,7 +274,7 @@ export const AttributesMap = {
   },
 };
 
-export const AttributesMap_AttrEntry = {
+export const AttributesMap_AttrEntry: MessageFns<AttributesMap_AttrEntry> = {
   fromJSON(object: any): AttributesMap_AttrEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -293,71 +294,73 @@ export const AttributesMap_AttrEntry = {
   },
 };
 
-export const CheckResourceBatchRequest = {
-  fromJSON(object: any): CheckResourceBatchRequest {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      principal: isSet(object.principal)
-        ? Principal.fromJSON(object.principal)
-        : undefined,
-      resources: globalThis.Array.isArray(object?.resources)
-        ? object.resources.map((e: any) =>
-            CheckResourceBatchRequest_BatchEntry.fromJSON(e),
-          )
-        : [],
-      auxData: isSet(object.auxData)
-        ? AuxData.fromJSON(object.auxData)
-        : undefined,
-    };
-  },
+export const CheckResourceBatchRequest: MessageFns<CheckResourceBatchRequest> =
+  {
+    fromJSON(object: any): CheckResourceBatchRequest {
+      return {
+        requestId: isSet(object.requestId)
+          ? globalThis.String(object.requestId)
+          : "",
+        principal: isSet(object.principal)
+          ? Principal.fromJSON(object.principal)
+          : undefined,
+        resources: globalThis.Array.isArray(object?.resources)
+          ? object.resources.map((e: any) =>
+              CheckResourceBatchRequest_BatchEntry.fromJSON(e),
+            )
+          : [],
+        auxData: isSet(object.auxData)
+          ? AuxData.fromJSON(object.auxData)
+          : undefined,
+      };
+    },
 
-  toJSON(message: CheckResourceBatchRequest): unknown {
-    const obj: any = {};
-    if (message.requestId !== "") {
-      obj.requestId = message.requestId;
-    }
-    if (message.principal !== undefined) {
-      obj.principal = Principal.toJSON(message.principal);
-    }
-    if (message.resources?.length) {
-      obj.resources = message.resources.map((e) =>
-        CheckResourceBatchRequest_BatchEntry.toJSON(e),
-      );
-    }
-    if (message.auxData !== undefined) {
-      obj.auxData = AuxData.toJSON(message.auxData);
-    }
-    return obj;
-  },
-};
+    toJSON(message: CheckResourceBatchRequest): unknown {
+      const obj: any = {};
+      if (message.requestId !== "") {
+        obj.requestId = message.requestId;
+      }
+      if (message.principal !== undefined) {
+        obj.principal = Principal.toJSON(message.principal);
+      }
+      if (message.resources?.length) {
+        obj.resources = message.resources.map((e) =>
+          CheckResourceBatchRequest_BatchEntry.toJSON(e),
+        );
+      }
+      if (message.auxData !== undefined) {
+        obj.auxData = AuxData.toJSON(message.auxData);
+      }
+      return obj;
+    },
+  };
 
-export const CheckResourceBatchRequest_BatchEntry = {
-  fromJSON(object: any): CheckResourceBatchRequest_BatchEntry {
-    return {
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-      resource: isSet(object.resource)
-        ? Resource.fromJSON(object.resource)
-        : undefined,
-    };
-  },
+export const CheckResourceBatchRequest_BatchEntry: MessageFns<CheckResourceBatchRequest_BatchEntry> =
+  {
+    fromJSON(object: any): CheckResourceBatchRequest_BatchEntry {
+      return {
+        actions: globalThis.Array.isArray(object?.actions)
+          ? object.actions.map((e: any) => globalThis.String(e))
+          : [],
+        resource: isSet(object.resource)
+          ? Resource.fromJSON(object.resource)
+          : undefined,
+      };
+    },
 
-  toJSON(message: CheckResourceBatchRequest_BatchEntry): unknown {
-    const obj: any = {};
-    if (message.actions?.length) {
-      obj.actions = message.actions;
-    }
-    if (message.resource !== undefined) {
-      obj.resource = Resource.toJSON(message.resource);
-    }
-    return obj;
-  },
-};
+    toJSON(message: CheckResourceBatchRequest_BatchEntry): unknown {
+      const obj: any = {};
+      if (message.actions?.length) {
+        obj.actions = message.actions;
+      }
+      if (message.resource !== undefined) {
+        obj.resource = Resource.toJSON(message.resource);
+      }
+      return obj;
+    },
+  };
 
-export const CheckResourcesRequest = {
+export const CheckResourcesRequest: MessageFns<CheckResourcesRequest> = {
   fromJSON(object: any): CheckResourcesRequest {
     return {
       requestId: isSet(object.requestId)
@@ -403,31 +406,32 @@ export const CheckResourcesRequest = {
   },
 };
 
-export const CheckResourcesRequest_ResourceEntry = {
-  fromJSON(object: any): CheckResourcesRequest_ResourceEntry {
-    return {
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-      resource: isSet(object.resource)
-        ? Resource.fromJSON(object.resource)
-        : undefined,
-    };
-  },
+export const CheckResourcesRequest_ResourceEntry: MessageFns<CheckResourcesRequest_ResourceEntry> =
+  {
+    fromJSON(object: any): CheckResourcesRequest_ResourceEntry {
+      return {
+        actions: globalThis.Array.isArray(object?.actions)
+          ? object.actions.map((e: any) => globalThis.String(e))
+          : [],
+        resource: isSet(object.resource)
+          ? Resource.fromJSON(object.resource)
+          : undefined,
+      };
+    },
 
-  toJSON(message: CheckResourcesRequest_ResourceEntry): unknown {
-    const obj: any = {};
-    if (message.actions?.length) {
-      obj.actions = message.actions;
-    }
-    if (message.resource !== undefined) {
-      obj.resource = Resource.toJSON(message.resource);
-    }
-    return obj;
-  },
-};
+    toJSON(message: CheckResourcesRequest_ResourceEntry): unknown {
+      const obj: any = {};
+      if (message.actions?.length) {
+        obj.actions = message.actions;
+      }
+      if (message.resource !== undefined) {
+        obj.resource = Resource.toJSON(message.resource);
+      }
+      return obj;
+    },
+  };
 
-export const AuxData = {
+export const AuxData: MessageFns<AuxData> = {
   fromJSON(object: any): AuxData {
     return {
       jwt: isSet(object.jwt) ? AuxData_JWT.fromJSON(object.jwt) : undefined,
@@ -443,7 +447,7 @@ export const AuxData = {
   },
 };
 
-export const AuxData_JWT = {
+export const AuxData_JWT: MessageFns<AuxData_JWT> = {
   fromJSON(object: any): AuxData_JWT {
     return {
       token: isSet(object.token) ? globalThis.String(object.token) : "",
@@ -465,7 +469,7 @@ export const AuxData_JWT = {
   },
 };
 
-export const ServerInfoRequest = {
+export const ServerInfoRequest: MessageFns<ServerInfoRequest> = {
   fromJSON(_: any): ServerInfoRequest {
     return {};
   },
@@ -482,4 +486,9 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

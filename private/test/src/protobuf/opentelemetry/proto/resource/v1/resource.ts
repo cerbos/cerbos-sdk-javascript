@@ -16,7 +16,7 @@ function createBaseResource(): Resource {
   return { attributes: [], droppedAttributesCount: 0 };
 }
 
-export const Resource = {
+export const Resource: MessageFns<Resource> = {
   encode(
     message: Resource,
     writer: BinaryWriter = new BinaryWriter(),
@@ -86,4 +86,11 @@ export const Resource = {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

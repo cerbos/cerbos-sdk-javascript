@@ -192,7 +192,7 @@ export interface ReloadStoreRequest {
   wait: boolean;
 }
 
-export const PlanResourcesRequest = {
+export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
   fromJSON(object: any): PlanResourcesRequest {
     return {
       requestId: isSet(object.requestId)
@@ -238,7 +238,7 @@ export const PlanResourcesRequest = {
   },
 };
 
-export const CheckResourceSetRequest = {
+export const CheckResourceSetRequest: MessageFns<CheckResourceSetRequest> = {
   fromJSON(object: any): CheckResourceSetRequest {
     return {
       requestId: isSet(object.requestId)
@@ -286,7 +286,7 @@ export const CheckResourceSetRequest = {
   },
 };
 
-export const ResourceSet = {
+export const ResourceSet: MessageFns<ResourceSet> = {
   fromJSON(object: any): ResourceSet {
     return {
       kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
@@ -329,29 +329,30 @@ export const ResourceSet = {
   },
 };
 
-export const ResourceSet_InstancesEntry = {
-  fromJSON(object: any): ResourceSet_InstancesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? AttributesMap.fromJSON(object.value)
-        : undefined,
-    };
-  },
+export const ResourceSet_InstancesEntry: MessageFns<ResourceSet_InstancesEntry> =
+  {
+    fromJSON(object: any): ResourceSet_InstancesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? AttributesMap.fromJSON(object.value)
+          : undefined,
+      };
+    },
 
-  toJSON(message: ResourceSet_InstancesEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = AttributesMap.toJSON(message.value);
-    }
-    return obj;
-  },
-};
+    toJSON(message: ResourceSet_InstancesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = AttributesMap.toJSON(message.value);
+      }
+      return obj;
+    },
+  };
 
-export const AttributesMap = {
+export const AttributesMap: MessageFns<AttributesMap> = {
   fromJSON(object: any): AttributesMap {
     return {
       attr: isObject(object.attr)
@@ -380,7 +381,7 @@ export const AttributesMap = {
   },
 };
 
-export const AttributesMap_AttrEntry = {
+export const AttributesMap_AttrEntry: MessageFns<AttributesMap_AttrEntry> = {
   fromJSON(object: any): AttributesMap_AttrEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -400,71 +401,73 @@ export const AttributesMap_AttrEntry = {
   },
 };
 
-export const CheckResourceBatchRequest = {
-  fromJSON(object: any): CheckResourceBatchRequest {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      principal: isSet(object.principal)
-        ? Principal.fromJSON(object.principal)
-        : undefined,
-      resources: globalThis.Array.isArray(object?.resources)
-        ? object.resources.map((e: any) =>
-            CheckResourceBatchRequest_BatchEntry.fromJSON(e),
-          )
-        : [],
-      auxData: isSet(object.auxData)
-        ? AuxData.fromJSON(object.auxData)
-        : undefined,
-    };
-  },
+export const CheckResourceBatchRequest: MessageFns<CheckResourceBatchRequest> =
+  {
+    fromJSON(object: any): CheckResourceBatchRequest {
+      return {
+        requestId: isSet(object.requestId)
+          ? globalThis.String(object.requestId)
+          : "",
+        principal: isSet(object.principal)
+          ? Principal.fromJSON(object.principal)
+          : undefined,
+        resources: globalThis.Array.isArray(object?.resources)
+          ? object.resources.map((e: any) =>
+              CheckResourceBatchRequest_BatchEntry.fromJSON(e),
+            )
+          : [],
+        auxData: isSet(object.auxData)
+          ? AuxData.fromJSON(object.auxData)
+          : undefined,
+      };
+    },
 
-  toJSON(message: CheckResourceBatchRequest): unknown {
-    const obj: any = {};
-    if (message.requestId !== "") {
-      obj.requestId = message.requestId;
-    }
-    if (message.principal !== undefined) {
-      obj.principal = Principal.toJSON(message.principal);
-    }
-    if (message.resources?.length) {
-      obj.resources = message.resources.map((e) =>
-        CheckResourceBatchRequest_BatchEntry.toJSON(e),
-      );
-    }
-    if (message.auxData !== undefined) {
-      obj.auxData = AuxData.toJSON(message.auxData);
-    }
-    return obj;
-  },
-};
+    toJSON(message: CheckResourceBatchRequest): unknown {
+      const obj: any = {};
+      if (message.requestId !== "") {
+        obj.requestId = message.requestId;
+      }
+      if (message.principal !== undefined) {
+        obj.principal = Principal.toJSON(message.principal);
+      }
+      if (message.resources?.length) {
+        obj.resources = message.resources.map((e) =>
+          CheckResourceBatchRequest_BatchEntry.toJSON(e),
+        );
+      }
+      if (message.auxData !== undefined) {
+        obj.auxData = AuxData.toJSON(message.auxData);
+      }
+      return obj;
+    },
+  };
 
-export const CheckResourceBatchRequest_BatchEntry = {
-  fromJSON(object: any): CheckResourceBatchRequest_BatchEntry {
-    return {
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-      resource: isSet(object.resource)
-        ? Resource.fromJSON(object.resource)
-        : undefined,
-    };
-  },
+export const CheckResourceBatchRequest_BatchEntry: MessageFns<CheckResourceBatchRequest_BatchEntry> =
+  {
+    fromJSON(object: any): CheckResourceBatchRequest_BatchEntry {
+      return {
+        actions: globalThis.Array.isArray(object?.actions)
+          ? object.actions.map((e: any) => globalThis.String(e))
+          : [],
+        resource: isSet(object.resource)
+          ? Resource.fromJSON(object.resource)
+          : undefined,
+      };
+    },
 
-  toJSON(message: CheckResourceBatchRequest_BatchEntry): unknown {
-    const obj: any = {};
-    if (message.actions?.length) {
-      obj.actions = message.actions;
-    }
-    if (message.resource !== undefined) {
-      obj.resource = Resource.toJSON(message.resource);
-    }
-    return obj;
-  },
-};
+    toJSON(message: CheckResourceBatchRequest_BatchEntry): unknown {
+      const obj: any = {};
+      if (message.actions?.length) {
+        obj.actions = message.actions;
+      }
+      if (message.resource !== undefined) {
+        obj.resource = Resource.toJSON(message.resource);
+      }
+      return obj;
+    },
+  };
 
-export const CheckResourcesRequest = {
+export const CheckResourcesRequest: MessageFns<CheckResourcesRequest> = {
   fromJSON(object: any): CheckResourcesRequest {
     return {
       requestId: isSet(object.requestId)
@@ -510,31 +513,32 @@ export const CheckResourcesRequest = {
   },
 };
 
-export const CheckResourcesRequest_ResourceEntry = {
-  fromJSON(object: any): CheckResourcesRequest_ResourceEntry {
-    return {
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-      resource: isSet(object.resource)
-        ? Resource.fromJSON(object.resource)
-        : undefined,
-    };
-  },
+export const CheckResourcesRequest_ResourceEntry: MessageFns<CheckResourcesRequest_ResourceEntry> =
+  {
+    fromJSON(object: any): CheckResourcesRequest_ResourceEntry {
+      return {
+        actions: globalThis.Array.isArray(object?.actions)
+          ? object.actions.map((e: any) => globalThis.String(e))
+          : [],
+        resource: isSet(object.resource)
+          ? Resource.fromJSON(object.resource)
+          : undefined,
+      };
+    },
 
-  toJSON(message: CheckResourcesRequest_ResourceEntry): unknown {
-    const obj: any = {};
-    if (message.actions?.length) {
-      obj.actions = message.actions;
-    }
-    if (message.resource !== undefined) {
-      obj.resource = Resource.toJSON(message.resource);
-    }
-    return obj;
-  },
-};
+    toJSON(message: CheckResourcesRequest_ResourceEntry): unknown {
+      const obj: any = {};
+      if (message.actions?.length) {
+        obj.actions = message.actions;
+      }
+      if (message.resource !== undefined) {
+        obj.resource = Resource.toJSON(message.resource);
+      }
+      return obj;
+    },
+  };
 
-export const AuxData = {
+export const AuxData: MessageFns<AuxData> = {
   fromJSON(object: any): AuxData {
     return {
       jwt: isSet(object.jwt) ? AuxData_JWT.fromJSON(object.jwt) : undefined,
@@ -550,7 +554,7 @@ export const AuxData = {
   },
 };
 
-export const AuxData_JWT = {
+export const AuxData_JWT: MessageFns<AuxData_JWT> = {
   fromJSON(object: any): AuxData_JWT {
     return {
       token: isSet(object.token) ? globalThis.String(object.token) : "",
@@ -572,7 +576,7 @@ export const AuxData_JWT = {
   },
 };
 
-export const AddOrUpdatePolicyRequest = {
+export const AddOrUpdatePolicyRequest: MessageFns<AddOrUpdatePolicyRequest> = {
   fromJSON(object: any): AddOrUpdatePolicyRequest {
     return {
       policies: globalThis.Array.isArray(object?.policies)
@@ -590,73 +594,77 @@ export const AddOrUpdatePolicyRequest = {
   },
 };
 
-export const ListAuditLogEntriesRequest = {
-  fromJSON(object: any): ListAuditLogEntriesRequest {
-    return {
-      kind: isSet(object.kind)
-        ? listAuditLogEntriesRequest_KindFromJSON(object.kind)
-        : 0,
-      filter: isSet(object.tail)
-        ? { $case: "tail", tail: globalThis.Number(object.tail) }
-        : isSet(object.between)
-          ? {
-              $case: "between",
-              between: ListAuditLogEntriesRequest_TimeRange.fromJSON(
-                object.between,
-              ),
-            }
-          : isSet(object.since)
-            ? { $case: "since", since: Duration.fromJSON(object.since) }
-            : isSet(object.lookup)
-              ? { $case: "lookup", lookup: globalThis.String(object.lookup) }
-              : undefined,
-    };
-  },
+export const ListAuditLogEntriesRequest: MessageFns<ListAuditLogEntriesRequest> =
+  {
+    fromJSON(object: any): ListAuditLogEntriesRequest {
+      return {
+        kind: isSet(object.kind)
+          ? listAuditLogEntriesRequest_KindFromJSON(object.kind)
+          : 0,
+        filter: isSet(object.tail)
+          ? { $case: "tail", tail: globalThis.Number(object.tail) }
+          : isSet(object.between)
+            ? {
+                $case: "between",
+                between: ListAuditLogEntriesRequest_TimeRange.fromJSON(
+                  object.between,
+                ),
+              }
+            : isSet(object.since)
+              ? { $case: "since", since: Duration.fromJSON(object.since) }
+              : isSet(object.lookup)
+                ? { $case: "lookup", lookup: globalThis.String(object.lookup) }
+                : undefined,
+      };
+    },
 
-  toJSON(message: ListAuditLogEntriesRequest): unknown {
-    const obj: any = {};
-    if (message.kind !== 0) {
-      obj.kind = listAuditLogEntriesRequest_KindToJSON(message.kind);
-    }
-    if (message.filter?.$case === "tail") {
-      obj.tail = Math.round(message.filter.tail);
-    }
-    if (message.filter?.$case === "between") {
-      obj.between = ListAuditLogEntriesRequest_TimeRange.toJSON(
-        message.filter.between,
-      );
-    }
-    if (message.filter?.$case === "since") {
-      obj.since = Duration.toJSON(message.filter.since);
-    }
-    if (message.filter?.$case === "lookup") {
-      obj.lookup = message.filter.lookup;
-    }
-    return obj;
-  },
-};
+    toJSON(message: ListAuditLogEntriesRequest): unknown {
+      const obj: any = {};
+      if (message.kind !== 0) {
+        obj.kind = listAuditLogEntriesRequest_KindToJSON(message.kind);
+      }
+      if (message.filter?.$case === "tail") {
+        obj.tail = Math.round(message.filter.tail);
+      }
+      if (message.filter?.$case === "between") {
+        obj.between = ListAuditLogEntriesRequest_TimeRange.toJSON(
+          message.filter.between,
+        );
+      }
+      if (message.filter?.$case === "since") {
+        obj.since = Duration.toJSON(message.filter.since);
+      }
+      if (message.filter?.$case === "lookup") {
+        obj.lookup = message.filter.lookup;
+      }
+      return obj;
+    },
+  };
 
-export const ListAuditLogEntriesRequest_TimeRange = {
-  fromJSON(object: any): ListAuditLogEntriesRequest_TimeRange {
-    return {
-      start: isSet(object.start) ? fromJsonTimestamp(object.start) : undefined,
-      end: isSet(object.end) ? fromJsonTimestamp(object.end) : undefined,
-    };
-  },
+export const ListAuditLogEntriesRequest_TimeRange: MessageFns<ListAuditLogEntriesRequest_TimeRange> =
+  {
+    fromJSON(object: any): ListAuditLogEntriesRequest_TimeRange {
+      return {
+        start: isSet(object.start)
+          ? fromJsonTimestamp(object.start)
+          : undefined,
+        end: isSet(object.end) ? fromJsonTimestamp(object.end) : undefined,
+      };
+    },
 
-  toJSON(message: ListAuditLogEntriesRequest_TimeRange): unknown {
-    const obj: any = {};
-    if (message.start !== undefined) {
-      obj.start = message.start.toISOString();
-    }
-    if (message.end !== undefined) {
-      obj.end = message.end.toISOString();
-    }
-    return obj;
-  },
-};
+    toJSON(message: ListAuditLogEntriesRequest_TimeRange): unknown {
+      const obj: any = {};
+      if (message.start !== undefined) {
+        obj.start = message.start.toISOString();
+      }
+      if (message.end !== undefined) {
+        obj.end = message.end.toISOString();
+      }
+      return obj;
+    },
+  };
 
-export const ServerInfoRequest = {
+export const ServerInfoRequest: MessageFns<ServerInfoRequest> = {
   fromJSON(_: any): ServerInfoRequest {
     return {};
   },
@@ -667,7 +675,7 @@ export const ServerInfoRequest = {
   },
 };
 
-export const ListPoliciesRequest = {
+export const ListPoliciesRequest: MessageFns<ListPoliciesRequest> = {
   fromJSON(object: any): ListPoliciesRequest {
     return {
       includeDisabled: isSet(object.includeDisabled)
@@ -703,7 +711,7 @@ export const ListPoliciesRequest = {
   },
 };
 
-export const GetPolicyRequest = {
+export const GetPolicyRequest: MessageFns<GetPolicyRequest> = {
   fromJSON(object: any): GetPolicyRequest {
     return {
       id: globalThis.Array.isArray(object?.id)
@@ -721,7 +729,7 @@ export const GetPolicyRequest = {
   },
 };
 
-export const DisablePolicyRequest = {
+export const DisablePolicyRequest: MessageFns<DisablePolicyRequest> = {
   fromJSON(object: any): DisablePolicyRequest {
     return {
       id: globalThis.Array.isArray(object?.id)
@@ -739,7 +747,7 @@ export const DisablePolicyRequest = {
   },
 };
 
-export const EnablePolicyRequest = {
+export const EnablePolicyRequest: MessageFns<EnablePolicyRequest> = {
   fromJSON(object: any): EnablePolicyRequest {
     return {
       id: globalThis.Array.isArray(object?.id)
@@ -757,7 +765,7 @@ export const EnablePolicyRequest = {
   },
 };
 
-export const AddOrUpdateSchemaRequest = {
+export const AddOrUpdateSchemaRequest: MessageFns<AddOrUpdateSchemaRequest> = {
   fromJSON(object: any): AddOrUpdateSchemaRequest {
     return {
       schemas: globalThis.Array.isArray(object?.schemas)
@@ -775,7 +783,7 @@ export const AddOrUpdateSchemaRequest = {
   },
 };
 
-export const ListSchemasRequest = {
+export const ListSchemasRequest: MessageFns<ListSchemasRequest> = {
   fromJSON(_: any): ListSchemasRequest {
     return {};
   },
@@ -786,7 +794,7 @@ export const ListSchemasRequest = {
   },
 };
 
-export const GetSchemaRequest = {
+export const GetSchemaRequest: MessageFns<GetSchemaRequest> = {
   fromJSON(object: any): GetSchemaRequest {
     return {
       id: globalThis.Array.isArray(object?.id)
@@ -804,7 +812,7 @@ export const GetSchemaRequest = {
   },
 };
 
-export const DeleteSchemaRequest = {
+export const DeleteSchemaRequest: MessageFns<DeleteSchemaRequest> = {
   fromJSON(object: any): DeleteSchemaRequest {
     return {
       id: globalThis.Array.isArray(object?.id)
@@ -822,7 +830,7 @@ export const DeleteSchemaRequest = {
   },
 };
 
-export const ReloadStoreRequest = {
+export const ReloadStoreRequest: MessageFns<ReloadStoreRequest> = {
   fromJSON(object: any): ReloadStoreRequest {
     return {
       wait: isSet(object.wait) ? globalThis.Boolean(object.wait) : false,
@@ -860,4 +868,9 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

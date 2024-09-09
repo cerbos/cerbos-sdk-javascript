@@ -12,7 +12,7 @@ function createBaseEmpty(): Empty {
   return {};
 }
 
-export const Empty = {
+export const Empty: MessageFns<Empty> = {
   encode(_: Empty, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     return writer;
   },
@@ -43,3 +43,10 @@ export const Empty = {
     return obj;
   },
 };
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+}

@@ -85,7 +85,7 @@ export interface AuditTrail_EffectivePoliciesEntry {
   value: SourceAttributes | undefined;
 }
 
-export const AccessLogEntry = {
+export const AccessLogEntry: MessageFns<AccessLogEntry> = {
   fromJSON(object: any): AccessLogEntry {
     return {
       callId: isSet(object.callId) ? globalThis.String(object.callId) : "",
@@ -139,29 +139,30 @@ export const AccessLogEntry = {
   },
 };
 
-export const AccessLogEntry_MetadataEntry = {
-  fromJSON(object: any): AccessLogEntry_MetadataEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? MetaValues.fromJSON(object.value)
-        : undefined,
-    };
-  },
+export const AccessLogEntry_MetadataEntry: MessageFns<AccessLogEntry_MetadataEntry> =
+  {
+    fromJSON(object: any): AccessLogEntry_MetadataEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? MetaValues.fromJSON(object.value)
+          : undefined,
+      };
+    },
 
-  toJSON(message: AccessLogEntry_MetadataEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = MetaValues.toJSON(message.value);
-    }
-    return obj;
-  },
-};
+    toJSON(message: AccessLogEntry_MetadataEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = MetaValues.toJSON(message.value);
+      }
+      return obj;
+    },
+  };
 
-export const DecisionLogEntry = {
+export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
   fromJSON(object: any): DecisionLogEntry {
     return {
       callId: isSet(object.callId) ? globalThis.String(object.callId) : "",
@@ -252,85 +253,88 @@ export const DecisionLogEntry = {
   },
 };
 
-export const DecisionLogEntry_CheckResources = {
-  fromJSON(object: any): DecisionLogEntry_CheckResources {
-    return {
-      inputs: globalThis.Array.isArray(object?.inputs)
-        ? object.inputs.map((e: any) => CheckInput.fromJSON(e))
-        : [],
-      outputs: globalThis.Array.isArray(object?.outputs)
-        ? object.outputs.map((e: any) => CheckOutput.fromJSON(e))
-        : [],
-      error: isSet(object.error) ? globalThis.String(object.error) : "",
-    };
-  },
+export const DecisionLogEntry_CheckResources: MessageFns<DecisionLogEntry_CheckResources> =
+  {
+    fromJSON(object: any): DecisionLogEntry_CheckResources {
+      return {
+        inputs: globalThis.Array.isArray(object?.inputs)
+          ? object.inputs.map((e: any) => CheckInput.fromJSON(e))
+          : [],
+        outputs: globalThis.Array.isArray(object?.outputs)
+          ? object.outputs.map((e: any) => CheckOutput.fromJSON(e))
+          : [],
+        error: isSet(object.error) ? globalThis.String(object.error) : "",
+      };
+    },
 
-  toJSON(message: DecisionLogEntry_CheckResources): unknown {
-    const obj: any = {};
-    if (message.inputs?.length) {
-      obj.inputs = message.inputs.map((e) => CheckInput.toJSON(e));
-    }
-    if (message.outputs?.length) {
-      obj.outputs = message.outputs.map((e) => CheckOutput.toJSON(e));
-    }
-    if (message.error !== "") {
-      obj.error = message.error;
-    }
-    return obj;
-  },
-};
+    toJSON(message: DecisionLogEntry_CheckResources): unknown {
+      const obj: any = {};
+      if (message.inputs?.length) {
+        obj.inputs = message.inputs.map((e) => CheckInput.toJSON(e));
+      }
+      if (message.outputs?.length) {
+        obj.outputs = message.outputs.map((e) => CheckOutput.toJSON(e));
+      }
+      if (message.error !== "") {
+        obj.error = message.error;
+      }
+      return obj;
+    },
+  };
 
-export const DecisionLogEntry_PlanResources = {
-  fromJSON(object: any): DecisionLogEntry_PlanResources {
-    return {
-      input: isSet(object.input)
-        ? PlanResourcesInput.fromJSON(object.input)
-        : undefined,
-      output: isSet(object.output)
-        ? PlanResourcesOutput.fromJSON(object.output)
-        : undefined,
-      error: isSet(object.error) ? globalThis.String(object.error) : "",
-    };
-  },
+export const DecisionLogEntry_PlanResources: MessageFns<DecisionLogEntry_PlanResources> =
+  {
+    fromJSON(object: any): DecisionLogEntry_PlanResources {
+      return {
+        input: isSet(object.input)
+          ? PlanResourcesInput.fromJSON(object.input)
+          : undefined,
+        output: isSet(object.output)
+          ? PlanResourcesOutput.fromJSON(object.output)
+          : undefined,
+        error: isSet(object.error) ? globalThis.String(object.error) : "",
+      };
+    },
 
-  toJSON(message: DecisionLogEntry_PlanResources): unknown {
-    const obj: any = {};
-    if (message.input !== undefined) {
-      obj.input = PlanResourcesInput.toJSON(message.input);
-    }
-    if (message.output !== undefined) {
-      obj.output = PlanResourcesOutput.toJSON(message.output);
-    }
-    if (message.error !== "") {
-      obj.error = message.error;
-    }
-    return obj;
-  },
-};
+    toJSON(message: DecisionLogEntry_PlanResources): unknown {
+      const obj: any = {};
+      if (message.input !== undefined) {
+        obj.input = PlanResourcesInput.toJSON(message.input);
+      }
+      if (message.output !== undefined) {
+        obj.output = PlanResourcesOutput.toJSON(message.output);
+      }
+      if (message.error !== "") {
+        obj.error = message.error;
+      }
+      return obj;
+    },
+  };
 
-export const DecisionLogEntry_MetadataEntry = {
-  fromJSON(object: any): DecisionLogEntry_MetadataEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? MetaValues.fromJSON(object.value)
-        : undefined,
-    };
-  },
+export const DecisionLogEntry_MetadataEntry: MessageFns<DecisionLogEntry_MetadataEntry> =
+  {
+    fromJSON(object: any): DecisionLogEntry_MetadataEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? MetaValues.fromJSON(object.value)
+          : undefined,
+      };
+    },
 
-  toJSON(message: DecisionLogEntry_MetadataEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = MetaValues.toJSON(message.value);
-    }
-    return obj;
-  },
-};
+    toJSON(message: DecisionLogEntry_MetadataEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = MetaValues.toJSON(message.value);
+      }
+      return obj;
+    },
+  };
 
-export const MetaValues = {
+export const MetaValues: MessageFns<MetaValues> = {
   fromJSON(object: any): MetaValues {
     return {
       values: globalThis.Array.isArray(object?.values)
@@ -348,7 +352,7 @@ export const MetaValues = {
   },
 };
 
-export const Peer = {
+export const Peer: MessageFns<Peer> = {
   fromJSON(object: any): Peer {
     return {
       address: isSet(object.address) ? globalThis.String(object.address) : "",
@@ -382,7 +386,7 @@ export const Peer = {
   },
 };
 
-export const AuditTrail = {
+export const AuditTrail: MessageFns<AuditTrail> = {
   fromJSON(object: any): AuditTrail {
     return {
       effectivePolicies: isObject(object.effectivePolicies)
@@ -411,27 +415,28 @@ export const AuditTrail = {
   },
 };
 
-export const AuditTrail_EffectivePoliciesEntry = {
-  fromJSON(object: any): AuditTrail_EffectivePoliciesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? SourceAttributes.fromJSON(object.value)
-        : undefined,
-    };
-  },
+export const AuditTrail_EffectivePoliciesEntry: MessageFns<AuditTrail_EffectivePoliciesEntry> =
+  {
+    fromJSON(object: any): AuditTrail_EffectivePoliciesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? SourceAttributes.fromJSON(object.value)
+          : undefined,
+      };
+    },
 
-  toJSON(message: AuditTrail_EffectivePoliciesEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = SourceAttributes.toJSON(message.value);
-    }
-    return obj;
-  },
-};
+    toJSON(message: AuditTrail_EffectivePoliciesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = SourceAttributes.toJSON(message.value);
+      }
+      return obj;
+    },
+  };
 
 function fromTimestamp(t: Timestamp): Date {
   let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
@@ -455,4 +460,9 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

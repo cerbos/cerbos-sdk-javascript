@@ -15,7 +15,7 @@ function createBaseTimestamp(): Timestamp {
   return { seconds: "0", nanos: 0 };
 }
 
-export const Timestamp = {
+export const Timestamp: MessageFns<Timestamp> = {
   encode(
     message: Timestamp,
     writer: BinaryWriter = new BinaryWriter(),
@@ -81,4 +81,11 @@ export const Timestamp = {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

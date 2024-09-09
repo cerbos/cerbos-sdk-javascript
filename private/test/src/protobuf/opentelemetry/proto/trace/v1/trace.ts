@@ -164,7 +164,7 @@ function createBaseTracesData(): TracesData {
   return { resourceSpans: [] };
 }
 
-export const TracesData = {
+export const TracesData: MessageFns<TracesData> = {
   encode(
     message: TracesData,
     writer: BinaryWriter = new BinaryWriter(),
@@ -224,7 +224,7 @@ function createBaseResourceSpans(): ResourceSpans {
   return { resource: undefined, scopeSpans: [], schemaUrl: "" };
 }
 
-export const ResourceSpans = {
+export const ResourceSpans: MessageFns<ResourceSpans> = {
   encode(
     message: ResourceSpans,
     writer: BinaryWriter = new BinaryWriter(),
@@ -312,7 +312,7 @@ function createBaseScopeSpans(): ScopeSpans {
   return { scope: undefined, spans: [], schemaUrl: "" };
 }
 
-export const ScopeSpans = {
+export const ScopeSpans: MessageFns<ScopeSpans> = {
   encode(
     message: ScopeSpans,
     writer: BinaryWriter = new BinaryWriter(),
@@ -420,7 +420,7 @@ function createBaseSpan(): Span {
   };
 }
 
-export const Span = {
+export const Span: MessageFns<Span> = {
   encode(
     message: Span,
     writer: BinaryWriter = new BinaryWriter(),
@@ -713,7 +713,7 @@ function createBaseSpan_Event(): Span_Event {
   };
 }
 
-export const Span_Event = {
+export const Span_Event: MessageFns<Span_Event> = {
   encode(
     message: Span_Event,
     writer: BinaryWriter = new BinaryWriter(),
@@ -822,7 +822,7 @@ function createBaseSpan_Link(): Span_Link {
   };
 }
 
-export const Span_Link = {
+export const Span_Link: MessageFns<Span_Link> = {
   encode(
     message: Span_Link,
     writer: BinaryWriter = new BinaryWriter(),
@@ -956,7 +956,7 @@ function createBaseStatus(): Status {
   return { message: "", code: 0 };
 }
 
-export const Status = {
+export const Status: MessageFns<Status> = {
   encode(
     message: Status,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1047,4 +1047,11 @@ function base64FromBytes(arr: Uint8Array): string {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

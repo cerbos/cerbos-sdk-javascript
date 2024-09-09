@@ -201,7 +201,7 @@ function createBasePlanResourcesResponse(): PlanResourcesResponse {
   };
 }
 
-export const PlanResourcesResponse = {
+export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
   encode(
     message: PlanResourcesResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -383,82 +383,83 @@ function createBasePlanResourcesResponse_Meta(): PlanResourcesResponse_Meta {
   return { filterDebug: "", matchedScope: "" };
 }
 
-export const PlanResourcesResponse_Meta = {
-  encode(
-    message: PlanResourcesResponse_Meta,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.filterDebug !== "") {
-      writer.uint32(10).string(message.filterDebug);
-    }
-    if (message.matchedScope !== "") {
-      writer.uint32(18).string(message.matchedScope);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): PlanResourcesResponse_Meta {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesResponse_Meta();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.filterDebug = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.matchedScope = reader.string();
-          continue;
+export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> =
+  {
+    encode(
+      message: PlanResourcesResponse_Meta,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.filterDebug !== "") {
+        writer.uint32(10).string(message.filterDebug);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.matchedScope !== "") {
+        writer.uint32(18).string(message.matchedScope);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): PlanResourcesResponse_Meta {
-    return {
-      filterDebug: isSet(object.filterDebug)
-        ? globalThis.String(object.filterDebug)
-        : "",
-      matchedScope: isSet(object.matchedScope)
-        ? globalThis.String(object.matchedScope)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PlanResourcesResponse_Meta {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePlanResourcesResponse_Meta();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: PlanResourcesResponse_Meta): unknown {
-    const obj: any = {};
-    if (message.filterDebug !== "") {
-      obj.filterDebug = message.filterDebug;
-    }
-    if (message.matchedScope !== "") {
-      obj.matchedScope = message.matchedScope;
-    }
-    return obj;
-  },
-};
+            message.filterDebug = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.matchedScope = reader.string();
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): PlanResourcesResponse_Meta {
+      return {
+        filterDebug: isSet(object.filterDebug)
+          ? globalThis.String(object.filterDebug)
+          : "",
+        matchedScope: isSet(object.matchedScope)
+          ? globalThis.String(object.matchedScope)
+          : "",
+      };
+    },
+
+    toJSON(message: PlanResourcesResponse_Meta): unknown {
+      const obj: any = {};
+      if (message.filterDebug !== "") {
+        obj.filterDebug = message.filterDebug;
+      }
+      if (message.matchedScope !== "") {
+        obj.matchedScope = message.matchedScope;
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceSetResponse(): CheckResourceSetResponse {
   return { requestId: "", resourceInstances: {}, meta: undefined };
 }
 
-export const CheckResourceSetResponse = {
+export const CheckResourceSetResponse: MessageFns<CheckResourceSetResponse> = {
   encode(
     message: CheckResourceSetResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -576,965 +577,985 @@ function createBaseCheckResourceSetResponse_ActionEffectMap(): CheckResourceSetR
   return { actions: {}, validationErrors: [] };
 }
 
-export const CheckResourceSetResponse_ActionEffectMap = {
-  encode(
-    message: CheckResourceSetResponse_ActionEffectMap,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    Object.entries(message.actions).forEach(([key, value]) => {
-      CheckResourceSetResponse_ActionEffectMap_ActionsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork(),
-      ).join();
-    });
-    for (const v of message.validationErrors) {
-      ValidationError.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
+export const CheckResourceSetResponse_ActionEffectMap: MessageFns<CheckResourceSetResponse_ActionEffectMap> =
+  {
+    encode(
+      message: CheckResourceSetResponse_ActionEffectMap,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      Object.entries(message.actions).forEach(([key, value]) => {
+        CheckResourceSetResponse_ActionEffectMap_ActionsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).join();
+      });
+      for (const v of message.validationErrors) {
+        ValidationError.encode(v!, writer.uint32(18).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceSetResponse_ActionEffectMap {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceSetResponse_ActionEffectMap();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceSetResponse_ActionEffectMap {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourceSetResponse_ActionEffectMap();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-          const entry1 =
-            CheckResourceSetResponse_ActionEffectMap_ActionsEntry.decode(
-              reader,
-              reader.uint32(),
+            const entry1 =
+              CheckResourceSetResponse_ActionEffectMap_ActionsEntry.decode(
+                reader,
+                reader.uint32(),
+              );
+            if (entry1.value !== undefined) {
+              message.actions[entry1.key] = entry1.value;
+            }
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.validationErrors.push(
+              ValidationError.decode(reader, reader.uint32()),
             );
-          if (entry1.value !== undefined) {
-            message.actions[entry1.key] = entry1.value;
-          }
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.validationErrors.push(
-            ValidationError.decode(reader, reader.uint32()),
-          );
-          continue;
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(object: any): CheckResourceSetResponse_ActionEffectMap {
-    return {
-      actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-            (acc, [key, value]) => {
-              acc[key] = effectFromJSON(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-      validationErrors: globalThis.Array.isArray(object?.validationErrors)
-        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-        : [],
-    };
-  },
+    fromJSON(object: any): CheckResourceSetResponse_ActionEffectMap {
+      return {
+        actions: isObject(object.actions)
+          ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
+              (acc, [key, value]) => {
+                acc[key] = effectFromJSON(value);
+                return acc;
+              },
+              {},
+            )
+          : {},
+        validationErrors: globalThis.Array.isArray(object?.validationErrors)
+          ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
+          : [],
+      };
+    },
 
-  toJSON(message: CheckResourceSetResponse_ActionEffectMap): unknown {
-    const obj: any = {};
-    if (message.actions) {
-      const entries = Object.entries(message.actions);
-      if (entries.length > 0) {
-        obj.actions = {};
-        entries.forEach(([k, v]) => {
-          obj.actions[k] = effectToJSON(v);
-        });
+    toJSON(message: CheckResourceSetResponse_ActionEffectMap): unknown {
+      const obj: any = {};
+      if (message.actions) {
+        const entries = Object.entries(message.actions);
+        if (entries.length > 0) {
+          obj.actions = {};
+          entries.forEach(([k, v]) => {
+            obj.actions[k] = effectToJSON(v);
+          });
+        }
       }
-    }
-    if (message.validationErrors?.length) {
-      obj.validationErrors = message.validationErrors.map((e) =>
-        ValidationError.toJSON(e),
-      );
-    }
-    return obj;
-  },
-};
+      if (message.validationErrors?.length) {
+        obj.validationErrors = message.validationErrors.map((e) =>
+          ValidationError.toJSON(e),
+        );
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceSetResponse_ActionEffectMap_ActionsEntry(): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
   return { key: "", value: 0 };
 }
 
-export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry = {
-  encode(
-    message: CheckResourceSetResponse_ActionEffectMap_ActionsEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== 0) {
-      writer.uint32(16).int32(message.value);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message =
-      createBaseCheckResourceSetResponse_ActionEffectMap_ActionsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.value = reader.int32() as any;
-          continue;
+export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry: MessageFns<CheckResourceSetResponse_ActionEffectMap_ActionsEntry> =
+  {
+    encode(
+      message: CheckResourceSetResponse_ActionEffectMap_ActionsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== 0) {
+        writer.uint32(16).int32(message.value);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? effectFromJSON(object.value) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseCheckResourceSetResponse_ActionEffectMap_ActionsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(
-    message: CheckResourceSetResponse_ActionEffectMap_ActionsEntry,
-  ): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== 0) {
-      obj.value = effectToJSON(message.value);
-    }
-    return obj;
-  },
-};
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 16) {
+              break;
+            }
+
+            message.value = reader.int32() as any;
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(
+      object: any,
+    ): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? effectFromJSON(object.value) : 0,
+      };
+    },
+
+    toJSON(
+      message: CheckResourceSetResponse_ActionEffectMap_ActionsEntry,
+    ): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== 0) {
+        obj.value = effectToJSON(message.value);
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceSetResponse_Meta(): CheckResourceSetResponse_Meta {
   return { resourceInstances: {} };
 }
 
-export const CheckResourceSetResponse_Meta = {
-  encode(
-    message: CheckResourceSetResponse_Meta,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    Object.entries(message.resourceInstances).forEach(([key, value]) => {
-      CheckResourceSetResponse_Meta_ResourceInstancesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork(),
-      ).join();
-    });
-    return writer;
-  },
+export const CheckResourceSetResponse_Meta: MessageFns<CheckResourceSetResponse_Meta> =
+  {
+    encode(
+      message: CheckResourceSetResponse_Meta,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      Object.entries(message.resourceInstances).forEach(([key, value]) => {
+        CheckResourceSetResponse_Meta_ResourceInstancesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).join();
+      });
+      return writer;
+    },
 
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceSetResponse_Meta {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceSetResponse_Meta();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceSetResponse_Meta {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourceSetResponse_Meta();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-          const entry1 =
-            CheckResourceSetResponse_Meta_ResourceInstancesEntry.decode(
-              reader,
-              reader.uint32(),
-            );
-          if (entry1.value !== undefined) {
-            message.resourceInstances[entry1.key] = entry1.value;
-          }
-          continue;
+            const entry1 =
+              CheckResourceSetResponse_Meta_ResourceInstancesEntry.decode(
+                reader,
+                reader.uint32(),
+              );
+            if (entry1.value !== undefined) {
+              message.resourceInstances[entry1.key] = entry1.value;
+            }
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(object: any): CheckResourceSetResponse_Meta {
-    return {
-      resourceInstances: isObject(object.resourceInstances)
-        ? Object.entries(object.resourceInstances).reduce<{
-            [key: string]: CheckResourceSetResponse_Meta_ActionMeta;
-          }>((acc, [key, value]) => {
-            acc[key] = CheckResourceSetResponse_Meta_ActionMeta.fromJSON(value);
-            return acc;
-          }, {})
-        : {},
-    };
-  },
+    fromJSON(object: any): CheckResourceSetResponse_Meta {
+      return {
+        resourceInstances: isObject(object.resourceInstances)
+          ? Object.entries(object.resourceInstances).reduce<{
+              [key: string]: CheckResourceSetResponse_Meta_ActionMeta;
+            }>((acc, [key, value]) => {
+              acc[key] =
+                CheckResourceSetResponse_Meta_ActionMeta.fromJSON(value);
+              return acc;
+            }, {})
+          : {},
+      };
+    },
 
-  toJSON(message: CheckResourceSetResponse_Meta): unknown {
-    const obj: any = {};
-    if (message.resourceInstances) {
-      const entries = Object.entries(message.resourceInstances);
-      if (entries.length > 0) {
-        obj.resourceInstances = {};
-        entries.forEach(([k, v]) => {
-          obj.resourceInstances[k] =
-            CheckResourceSetResponse_Meta_ActionMeta.toJSON(v);
-        });
+    toJSON(message: CheckResourceSetResponse_Meta): unknown {
+      const obj: any = {};
+      if (message.resourceInstances) {
+        const entries = Object.entries(message.resourceInstances);
+        if (entries.length > 0) {
+          obj.resourceInstances = {};
+          entries.forEach(([k, v]) => {
+            obj.resourceInstances[k] =
+              CheckResourceSetResponse_Meta_ActionMeta.toJSON(v);
+          });
+        }
       }
-    }
-    return obj;
-  },
-};
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceSetResponse_Meta_EffectMeta(): CheckResourceSetResponse_Meta_EffectMeta {
   return { matchedPolicy: "", matchedScope: "" };
 }
 
-export const CheckResourceSetResponse_Meta_EffectMeta = {
-  encode(
-    message: CheckResourceSetResponse_Meta_EffectMeta,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.matchedPolicy !== "") {
-      writer.uint32(10).string(message.matchedPolicy);
-    }
-    if (message.matchedScope !== "") {
-      writer.uint32(18).string(message.matchedScope);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceSetResponse_Meta_EffectMeta {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceSetResponse_Meta_EffectMeta();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.matchedPolicy = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.matchedScope = reader.string();
-          continue;
+export const CheckResourceSetResponse_Meta_EffectMeta: MessageFns<CheckResourceSetResponse_Meta_EffectMeta> =
+  {
+    encode(
+      message: CheckResourceSetResponse_Meta_EffectMeta,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.matchedPolicy !== "") {
+        writer.uint32(10).string(message.matchedPolicy);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.matchedScope !== "") {
+        writer.uint32(18).string(message.matchedScope);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourceSetResponse_Meta_EffectMeta {
-    return {
-      matchedPolicy: isSet(object.matchedPolicy)
-        ? globalThis.String(object.matchedPolicy)
-        : "",
-      matchedScope: isSet(object.matchedScope)
-        ? globalThis.String(object.matchedScope)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceSetResponse_Meta_EffectMeta {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourceSetResponse_Meta_EffectMeta();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CheckResourceSetResponse_Meta_EffectMeta): unknown {
-    const obj: any = {};
-    if (message.matchedPolicy !== "") {
-      obj.matchedPolicy = message.matchedPolicy;
-    }
-    if (message.matchedScope !== "") {
-      obj.matchedScope = message.matchedScope;
-    }
-    return obj;
-  },
-};
+            message.matchedPolicy = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.matchedScope = reader.string();
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourceSetResponse_Meta_EffectMeta {
+      return {
+        matchedPolicy: isSet(object.matchedPolicy)
+          ? globalThis.String(object.matchedPolicy)
+          : "",
+        matchedScope: isSet(object.matchedScope)
+          ? globalThis.String(object.matchedScope)
+          : "",
+      };
+    },
+
+    toJSON(message: CheckResourceSetResponse_Meta_EffectMeta): unknown {
+      const obj: any = {};
+      if (message.matchedPolicy !== "") {
+        obj.matchedPolicy = message.matchedPolicy;
+      }
+      if (message.matchedScope !== "") {
+        obj.matchedScope = message.matchedScope;
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceSetResponse_Meta_ActionMeta(): CheckResourceSetResponse_Meta_ActionMeta {
   return { actions: {}, effectiveDerivedRoles: [] };
 }
 
-export const CheckResourceSetResponse_Meta_ActionMeta = {
-  encode(
-    message: CheckResourceSetResponse_Meta_ActionMeta,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    Object.entries(message.actions).forEach(([key, value]) => {
-      CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork(),
-      ).join();
-    });
-    for (const v of message.effectiveDerivedRoles) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceSetResponse_Meta_ActionMeta {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceSetResponse_Meta_ActionMeta();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          const entry1 =
-            CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.decode(
-              reader,
-              reader.uint32(),
-            );
-          if (entry1.value !== undefined) {
-            message.actions[entry1.key] = entry1.value;
-          }
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.effectiveDerivedRoles.push(reader.string());
-          continue;
+export const CheckResourceSetResponse_Meta_ActionMeta: MessageFns<CheckResourceSetResponse_Meta_ActionMeta> =
+  {
+    encode(
+      message: CheckResourceSetResponse_Meta_ActionMeta,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      Object.entries(message.actions).forEach(([key, value]) => {
+        CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).join();
+      });
+      for (const v of message.effectiveDerivedRoles) {
+        writer.uint32(18).string(v!);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta {
-    return {
-      actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{
-            [key: string]: CheckResourceSetResponse_Meta_EffectMeta;
-          }>((acc, [key, value]) => {
-            acc[key] = CheckResourceSetResponse_Meta_EffectMeta.fromJSON(value);
-            return acc;
-          }, {})
-        : {},
-      effectiveDerivedRoles: globalThis.Array.isArray(
-        object?.effectiveDerivedRoles,
-      )
-        ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceSetResponse_Meta_ActionMeta {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourceSetResponse_Meta_ActionMeta();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CheckResourceSetResponse_Meta_ActionMeta): unknown {
-    const obj: any = {};
-    if (message.actions) {
-      const entries = Object.entries(message.actions);
-      if (entries.length > 0) {
-        obj.actions = {};
-        entries.forEach(([k, v]) => {
-          obj.actions[k] = CheckResourceSetResponse_Meta_EffectMeta.toJSON(v);
-        });
+            const entry1 =
+              CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.decode(
+                reader,
+                reader.uint32(),
+              );
+            if (entry1.value !== undefined) {
+              message.actions[entry1.key] = entry1.value;
+            }
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.effectiveDerivedRoles.push(reader.string());
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-    }
-    if (message.effectiveDerivedRoles?.length) {
-      obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
-    }
-    return obj;
-  },
-};
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta {
+      return {
+        actions: isObject(object.actions)
+          ? Object.entries(object.actions).reduce<{
+              [key: string]: CheckResourceSetResponse_Meta_EffectMeta;
+            }>((acc, [key, value]) => {
+              acc[key] =
+                CheckResourceSetResponse_Meta_EffectMeta.fromJSON(value);
+              return acc;
+            }, {})
+          : {},
+        effectiveDerivedRoles: globalThis.Array.isArray(
+          object?.effectiveDerivedRoles,
+        )
+          ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
+          : [],
+      };
+    },
+
+    toJSON(message: CheckResourceSetResponse_Meta_ActionMeta): unknown {
+      const obj: any = {};
+      if (message.actions) {
+        const entries = Object.entries(message.actions);
+        if (entries.length > 0) {
+          obj.actions = {};
+          entries.forEach(([k, v]) => {
+            obj.actions[k] = CheckResourceSetResponse_Meta_EffectMeta.toJSON(v);
+          });
+        }
+      }
+      if (message.effectiveDerivedRoles?.length) {
+        obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceSetResponse_Meta_ActionMeta_ActionsEntry(): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
   return { key: "", value: undefined };
 }
 
-export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
-  encode(
-    message: CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      CheckResourceSetResponse_Meta_EffectMeta.encode(
-        message.value,
-        writer.uint32(18).fork(),
-      ).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message =
-      createBaseCheckResourceSetResponse_Meta_ActionMeta_ActionsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = CheckResourceSetResponse_Meta_EffectMeta.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
+export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry: MessageFns<CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry> =
+  {
+    encode(
+      message: CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        CheckResourceSetResponse_Meta_EffectMeta.encode(
+          message.value,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckResourceSetResponse_Meta_EffectMeta.fromJSON(object.value)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseCheckResourceSetResponse_Meta_ActionMeta_ActionsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(
-    message: CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry,
-  ): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = CheckResourceSetResponse_Meta_EffectMeta.toJSON(
-        message.value,
-      );
-    }
-    return obj;
-  },
-};
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = CheckResourceSetResponse_Meta_EffectMeta.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(
+      object: any,
+    ): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? CheckResourceSetResponse_Meta_EffectMeta.fromJSON(object.value)
+          : undefined,
+      };
+    },
+
+    toJSON(
+      message: CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry,
+    ): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = CheckResourceSetResponse_Meta_EffectMeta.toJSON(
+          message.value,
+        );
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceSetResponse_Meta_ResourceInstancesEntry(): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
   return { key: "", value: undefined };
 }
 
-export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
-  encode(
-    message: CheckResourceSetResponse_Meta_ResourceInstancesEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      CheckResourceSetResponse_Meta_ActionMeta.encode(
-        message.value,
-        writer.uint32(18).fork(),
-      ).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message =
-      createBaseCheckResourceSetResponse_Meta_ResourceInstancesEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = CheckResourceSetResponse_Meta_ActionMeta.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
+export const CheckResourceSetResponse_Meta_ResourceInstancesEntry: MessageFns<CheckResourceSetResponse_Meta_ResourceInstancesEntry> =
+  {
+    encode(
+      message: CheckResourceSetResponse_Meta_ResourceInstancesEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        CheckResourceSetResponse_Meta_ActionMeta.encode(
+          message.value,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckResourceSetResponse_Meta_ActionMeta.fromJSON(object.value)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseCheckResourceSetResponse_Meta_ResourceInstancesEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(
-    message: CheckResourceSetResponse_Meta_ResourceInstancesEntry,
-  ): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = CheckResourceSetResponse_Meta_ActionMeta.toJSON(
-        message.value,
-      );
-    }
-    return obj;
-  },
-};
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = CheckResourceSetResponse_Meta_ActionMeta.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(
+      object: any,
+    ): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? CheckResourceSetResponse_Meta_ActionMeta.fromJSON(object.value)
+          : undefined,
+      };
+    },
+
+    toJSON(
+      message: CheckResourceSetResponse_Meta_ResourceInstancesEntry,
+    ): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = CheckResourceSetResponse_Meta_ActionMeta.toJSON(
+          message.value,
+        );
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceSetResponse_ResourceInstancesEntry(): CheckResourceSetResponse_ResourceInstancesEntry {
   return { key: "", value: undefined };
 }
 
-export const CheckResourceSetResponse_ResourceInstancesEntry = {
-  encode(
-    message: CheckResourceSetResponse_ResourceInstancesEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      CheckResourceSetResponse_ActionEffectMap.encode(
-        message.value,
-        writer.uint32(18).fork(),
-      ).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceSetResponse_ResourceInstancesEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceSetResponse_ResourceInstancesEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = CheckResourceSetResponse_ActionEffectMap.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
+export const CheckResourceSetResponse_ResourceInstancesEntry: MessageFns<CheckResourceSetResponse_ResourceInstancesEntry> =
+  {
+    encode(
+      message: CheckResourceSetResponse_ResourceInstancesEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        CheckResourceSetResponse_ActionEffectMap.encode(
+          message.value,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourceSetResponse_ResourceInstancesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckResourceSetResponse_ActionEffectMap.fromJSON(object.value)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceSetResponse_ResourceInstancesEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseCheckResourceSetResponse_ResourceInstancesEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CheckResourceSetResponse_ResourceInstancesEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = CheckResourceSetResponse_ActionEffectMap.toJSON(
-        message.value,
-      );
-    }
-    return obj;
-  },
-};
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = CheckResourceSetResponse_ActionEffectMap.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourceSetResponse_ResourceInstancesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? CheckResourceSetResponse_ActionEffectMap.fromJSON(object.value)
+          : undefined,
+      };
+    },
+
+    toJSON(message: CheckResourceSetResponse_ResourceInstancesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = CheckResourceSetResponse_ActionEffectMap.toJSON(
+          message.value,
+        );
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceBatchResponse(): CheckResourceBatchResponse {
   return { requestId: "", results: [] };
 }
 
-export const CheckResourceBatchResponse = {
-  encode(
-    message: CheckResourceBatchResponse,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.requestId !== "") {
-      writer.uint32(10).string(message.requestId);
-    }
-    for (const v of message.results) {
-      CheckResourceBatchResponse_ActionEffectMap.encode(
-        v!,
-        writer.uint32(18).fork(),
-      ).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceBatchResponse {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceBatchResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.requestId = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.results.push(
-            CheckResourceBatchResponse_ActionEffectMap.decode(
-              reader,
-              reader.uint32(),
-            ),
-          );
-          continue;
+export const CheckResourceBatchResponse: MessageFns<CheckResourceBatchResponse> =
+  {
+    encode(
+      message: CheckResourceBatchResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.requestId !== "") {
+        writer.uint32(10).string(message.requestId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.results) {
+        CheckResourceBatchResponse_ActionEffectMap.encode(
+          v!,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourceBatchResponse {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      results: globalThis.Array.isArray(object?.results)
-        ? object.results.map((e: any) =>
-            CheckResourceBatchResponse_ActionEffectMap.fromJSON(e),
-          )
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceBatchResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourceBatchResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CheckResourceBatchResponse): unknown {
-    const obj: any = {};
-    if (message.requestId !== "") {
-      obj.requestId = message.requestId;
-    }
-    if (message.results?.length) {
-      obj.results = message.results.map((e) =>
-        CheckResourceBatchResponse_ActionEffectMap.toJSON(e),
-      );
-    }
-    return obj;
-  },
-};
+            message.requestId = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.results.push(
+              CheckResourceBatchResponse_ActionEffectMap.decode(
+                reader,
+                reader.uint32(),
+              ),
+            );
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourceBatchResponse {
+      return {
+        requestId: isSet(object.requestId)
+          ? globalThis.String(object.requestId)
+          : "",
+        results: globalThis.Array.isArray(object?.results)
+          ? object.results.map((e: any) =>
+              CheckResourceBatchResponse_ActionEffectMap.fromJSON(e),
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: CheckResourceBatchResponse): unknown {
+      const obj: any = {};
+      if (message.requestId !== "") {
+        obj.requestId = message.requestId;
+      }
+      if (message.results?.length) {
+        obj.results = message.results.map((e) =>
+          CheckResourceBatchResponse_ActionEffectMap.toJSON(e),
+        );
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceBatchResponse_ActionEffectMap(): CheckResourceBatchResponse_ActionEffectMap {
   return { resourceId: "", actions: {}, validationErrors: [] };
 }
 
-export const CheckResourceBatchResponse_ActionEffectMap = {
-  encode(
-    message: CheckResourceBatchResponse_ActionEffectMap,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.resourceId !== "") {
-      writer.uint32(10).string(message.resourceId);
-    }
-    Object.entries(message.actions).forEach(([key, value]) => {
-      CheckResourceBatchResponse_ActionEffectMap_ActionsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(18).fork(),
-      ).join();
-    });
-    for (const v of message.validationErrors) {
-      ValidationError.encode(v!, writer.uint32(26).fork()).join();
-    }
-    return writer;
-  },
+export const CheckResourceBatchResponse_ActionEffectMap: MessageFns<CheckResourceBatchResponse_ActionEffectMap> =
+  {
+    encode(
+      message: CheckResourceBatchResponse_ActionEffectMap,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.resourceId !== "") {
+        writer.uint32(10).string(message.resourceId);
+      }
+      Object.entries(message.actions).forEach(([key, value]) => {
+        CheckResourceBatchResponse_ActionEffectMap_ActionsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(18).fork(),
+        ).join();
+      });
+      for (const v of message.validationErrors) {
+        ValidationError.encode(v!, writer.uint32(26).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceBatchResponse_ActionEffectMap {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceBatchResponse_ActionEffectMap();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceBatchResponse_ActionEffectMap {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourceBatchResponse_ActionEffectMap();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-          message.resourceId = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
+            message.resourceId = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
 
-          const entry2 =
-            CheckResourceBatchResponse_ActionEffectMap_ActionsEntry.decode(
-              reader,
-              reader.uint32(),
+            const entry2 =
+              CheckResourceBatchResponse_ActionEffectMap_ActionsEntry.decode(
+                reader,
+                reader.uint32(),
+              );
+            if (entry2.value !== undefined) {
+              message.actions[entry2.key] = entry2.value;
+            }
+            continue;
+          case 3:
+            if (tag !== 26) {
+              break;
+            }
+
+            message.validationErrors.push(
+              ValidationError.decode(reader, reader.uint32()),
             );
-          if (entry2.value !== undefined) {
-            message.actions[entry2.key] = entry2.value;
-          }
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.validationErrors.push(
-            ValidationError.decode(reader, reader.uint32()),
-          );
-          continue;
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(object: any): CheckResourceBatchResponse_ActionEffectMap {
-    return {
-      resourceId: isSet(object.resourceId)
-        ? globalThis.String(object.resourceId)
-        : "",
-      actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-            (acc, [key, value]) => {
-              acc[key] = effectFromJSON(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-      validationErrors: globalThis.Array.isArray(object?.validationErrors)
-        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-        : [],
-    };
-  },
+    fromJSON(object: any): CheckResourceBatchResponse_ActionEffectMap {
+      return {
+        resourceId: isSet(object.resourceId)
+          ? globalThis.String(object.resourceId)
+          : "",
+        actions: isObject(object.actions)
+          ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
+              (acc, [key, value]) => {
+                acc[key] = effectFromJSON(value);
+                return acc;
+              },
+              {},
+            )
+          : {},
+        validationErrors: globalThis.Array.isArray(object?.validationErrors)
+          ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
+          : [],
+      };
+    },
 
-  toJSON(message: CheckResourceBatchResponse_ActionEffectMap): unknown {
-    const obj: any = {};
-    if (message.resourceId !== "") {
-      obj.resourceId = message.resourceId;
-    }
-    if (message.actions) {
-      const entries = Object.entries(message.actions);
-      if (entries.length > 0) {
-        obj.actions = {};
-        entries.forEach(([k, v]) => {
-          obj.actions[k] = effectToJSON(v);
-        });
+    toJSON(message: CheckResourceBatchResponse_ActionEffectMap): unknown {
+      const obj: any = {};
+      if (message.resourceId !== "") {
+        obj.resourceId = message.resourceId;
       }
-    }
-    if (message.validationErrors?.length) {
-      obj.validationErrors = message.validationErrors.map((e) =>
-        ValidationError.toJSON(e),
-      );
-    }
-    return obj;
-  },
-};
+      if (message.actions) {
+        const entries = Object.entries(message.actions);
+        if (entries.length > 0) {
+          obj.actions = {};
+          entries.forEach(([k, v]) => {
+            obj.actions[k] = effectToJSON(v);
+          });
+        }
+      }
+      if (message.validationErrors?.length) {
+        obj.validationErrors = message.validationErrors.map((e) =>
+          ValidationError.toJSON(e),
+        );
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry(): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
   return { key: "", value: 0 };
 }
 
-export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
-  encode(
-    message: CheckResourceBatchResponse_ActionEffectMap_ActionsEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== 0) {
-      writer.uint32(16).int32(message.value);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message =
-      createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.value = reader.int32() as any;
-          continue;
+export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry: MessageFns<CheckResourceBatchResponse_ActionEffectMap_ActionsEntry> =
+  {
+    encode(
+      message: CheckResourceBatchResponse_ActionEffectMap_ActionsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== 0) {
+        writer.uint32(16).int32(message.value);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(
-    object: any,
-  ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? effectFromJSON(object.value) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(
-    message: CheckResourceBatchResponse_ActionEffectMap_ActionsEntry,
-  ): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== 0) {
-      obj.value = effectToJSON(message.value);
-    }
-    return obj;
-  },
-};
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 16) {
+              break;
+            }
+
+            message.value = reader.int32() as any;
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(
+      object: any,
+    ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? effectFromJSON(object.value) : 0,
+      };
+    },
+
+    toJSON(
+      message: CheckResourceBatchResponse_ActionEffectMap_ActionsEntry,
+    ): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== 0) {
+        obj.value = effectToJSON(message.value);
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourcesResponse(): CheckResourcesResponse {
   return { requestId: "", results: [], cerbosCallId: "" };
 }
 
-export const CheckResourcesResponse = {
+export const CheckResourcesResponse: MessageFns<CheckResourcesResponse> = {
   encode(
     message: CheckResourcesResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1640,763 +1661,785 @@ function createBaseCheckResourcesResponse_ResultEntry(): CheckResourcesResponse_
   };
 }
 
-export const CheckResourcesResponse_ResultEntry = {
-  encode(
-    message: CheckResourcesResponse_ResultEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.resource !== undefined) {
-      CheckResourcesResponse_ResultEntry_Resource.encode(
-        message.resource,
-        writer.uint32(10).fork(),
-      ).join();
-    }
-    Object.entries(message.actions).forEach(([key, value]) => {
-      CheckResourcesResponse_ResultEntry_ActionsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(18).fork(),
-      ).join();
-    });
-    for (const v of message.validationErrors) {
-      ValidationError.encode(v!, writer.uint32(26).fork()).join();
-    }
-    if (message.meta !== undefined) {
-      CheckResourcesResponse_ResultEntry_Meta.encode(
-        message.meta,
-        writer.uint32(34).fork(),
-      ).join();
-    }
-    for (const v of message.outputs) {
-      OutputEntry.encode(v!, writer.uint32(42).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourcesResponse_ResultEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourcesResponse_ResultEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.resource = CheckResourcesResponse_ResultEntry_Resource.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          const entry2 = CheckResourcesResponse_ResultEntry_ActionsEntry.decode(
-            reader,
-            reader.uint32(),
-          );
-          if (entry2.value !== undefined) {
-            message.actions[entry2.key] = entry2.value;
-          }
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.validationErrors.push(
-            ValidationError.decode(reader, reader.uint32()),
-          );
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.meta = CheckResourcesResponse_ResultEntry_Meta.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 5:
-          if (tag !== 42) {
-            break;
-          }
-
-          message.outputs.push(OutputEntry.decode(reader, reader.uint32()));
-          continue;
+export const CheckResourcesResponse_ResultEntry: MessageFns<CheckResourcesResponse_ResultEntry> =
+  {
+    encode(
+      message: CheckResourcesResponse_ResultEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.resource !== undefined) {
+        CheckResourcesResponse_ResultEntry_Resource.encode(
+          message.resource,
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      Object.entries(message.actions).forEach(([key, value]) => {
+        CheckResourcesResponse_ResultEntry_ActionsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(18).fork(),
+        ).join();
+      });
+      for (const v of message.validationErrors) {
+        ValidationError.encode(v!, writer.uint32(26).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry {
-    return {
-      resource: isSet(object.resource)
-        ? CheckResourcesResponse_ResultEntry_Resource.fromJSON(object.resource)
-        : undefined,
-      actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-            (acc, [key, value]) => {
-              acc[key] = effectFromJSON(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-      validationErrors: globalThis.Array.isArray(object?.validationErrors)
-        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-        : [],
-      meta: isSet(object.meta)
-        ? CheckResourcesResponse_ResultEntry_Meta.fromJSON(object.meta)
-        : undefined,
-      outputs: globalThis.Array.isArray(object?.outputs)
-        ? object.outputs.map((e: any) => OutputEntry.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: CheckResourcesResponse_ResultEntry): unknown {
-    const obj: any = {};
-    if (message.resource !== undefined) {
-      obj.resource = CheckResourcesResponse_ResultEntry_Resource.toJSON(
-        message.resource,
-      );
-    }
-    if (message.actions) {
-      const entries = Object.entries(message.actions);
-      if (entries.length > 0) {
-        obj.actions = {};
-        entries.forEach(([k, v]) => {
-          obj.actions[k] = effectToJSON(v);
-        });
+      if (message.meta !== undefined) {
+        CheckResourcesResponse_ResultEntry_Meta.encode(
+          message.meta,
+          writer.uint32(34).fork(),
+        ).join();
       }
-    }
-    if (message.validationErrors?.length) {
-      obj.validationErrors = message.validationErrors.map((e) =>
-        ValidationError.toJSON(e),
-      );
-    }
-    if (message.meta !== undefined) {
-      obj.meta = CheckResourcesResponse_ResultEntry_Meta.toJSON(message.meta);
-    }
-    if (message.outputs?.length) {
-      obj.outputs = message.outputs.map((e) => OutputEntry.toJSON(e));
-    }
-    return obj;
-  },
-};
+      for (const v of message.outputs) {
+        OutputEntry.encode(v!, writer.uint32(42).fork()).join();
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourcesResponse_ResultEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourcesResponse_ResultEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            message.resource =
+              CheckResourcesResponse_ResultEntry_Resource.decode(
+                reader,
+                reader.uint32(),
+              );
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            const entry2 =
+              CheckResourcesResponse_ResultEntry_ActionsEntry.decode(
+                reader,
+                reader.uint32(),
+              );
+            if (entry2.value !== undefined) {
+              message.actions[entry2.key] = entry2.value;
+            }
+            continue;
+          case 3:
+            if (tag !== 26) {
+              break;
+            }
+
+            message.validationErrors.push(
+              ValidationError.decode(reader, reader.uint32()),
+            );
+            continue;
+          case 4:
+            if (tag !== 34) {
+              break;
+            }
+
+            message.meta = CheckResourcesResponse_ResultEntry_Meta.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          case 5:
+            if (tag !== 42) {
+              break;
+            }
+
+            message.outputs.push(OutputEntry.decode(reader, reader.uint32()));
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourcesResponse_ResultEntry {
+      return {
+        resource: isSet(object.resource)
+          ? CheckResourcesResponse_ResultEntry_Resource.fromJSON(
+              object.resource,
+            )
+          : undefined,
+        actions: isObject(object.actions)
+          ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
+              (acc, [key, value]) => {
+                acc[key] = effectFromJSON(value);
+                return acc;
+              },
+              {},
+            )
+          : {},
+        validationErrors: globalThis.Array.isArray(object?.validationErrors)
+          ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
+          : [],
+        meta: isSet(object.meta)
+          ? CheckResourcesResponse_ResultEntry_Meta.fromJSON(object.meta)
+          : undefined,
+        outputs: globalThis.Array.isArray(object?.outputs)
+          ? object.outputs.map((e: any) => OutputEntry.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: CheckResourcesResponse_ResultEntry): unknown {
+      const obj: any = {};
+      if (message.resource !== undefined) {
+        obj.resource = CheckResourcesResponse_ResultEntry_Resource.toJSON(
+          message.resource,
+        );
+      }
+      if (message.actions) {
+        const entries = Object.entries(message.actions);
+        if (entries.length > 0) {
+          obj.actions = {};
+          entries.forEach(([k, v]) => {
+            obj.actions[k] = effectToJSON(v);
+          });
+        }
+      }
+      if (message.validationErrors?.length) {
+        obj.validationErrors = message.validationErrors.map((e) =>
+          ValidationError.toJSON(e),
+        );
+      }
+      if (message.meta !== undefined) {
+        obj.meta = CheckResourcesResponse_ResultEntry_Meta.toJSON(message.meta);
+      }
+      if (message.outputs?.length) {
+        obj.outputs = message.outputs.map((e) => OutputEntry.toJSON(e));
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourcesResponse_ResultEntry_Resource(): CheckResourcesResponse_ResultEntry_Resource {
   return { id: "", kind: "", policyVersion: "", scope: "" };
 }
 
-export const CheckResourcesResponse_ResultEntry_Resource = {
-  encode(
-    message: CheckResourcesResponse_ResultEntry_Resource,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.id !== "") {
-      writer.uint32(10).string(message.id);
-    }
-    if (message.kind !== "") {
-      writer.uint32(18).string(message.kind);
-    }
-    if (message.policyVersion !== "") {
-      writer.uint32(26).string(message.policyVersion);
-    }
-    if (message.scope !== "") {
-      writer.uint32(34).string(message.scope);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourcesResponse_ResultEntry_Resource {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourcesResponse_ResultEntry_Resource();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.id = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.kind = reader.string();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.policyVersion = reader.string();
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.scope = reader.string();
-          continue;
+export const CheckResourcesResponse_ResultEntry_Resource: MessageFns<CheckResourcesResponse_ResultEntry_Resource> =
+  {
+    encode(
+      message: CheckResourcesResponse_ResultEntry_Resource,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.id !== "") {
+        writer.uint32(10).string(message.id);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.kind !== "") {
+        writer.uint32(18).string(message.kind);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.policyVersion !== "") {
+        writer.uint32(26).string(message.policyVersion);
+      }
+      if (message.scope !== "") {
+        writer.uint32(34).string(message.scope);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry_Resource {
-    return {
-      id: isSet(object.id) ? globalThis.String(object.id) : "",
-      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
-      policyVersion: isSet(object.policyVersion)
-        ? globalThis.String(object.policyVersion)
-        : "",
-      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourcesResponse_ResultEntry_Resource {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourcesResponse_ResultEntry_Resource();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CheckResourcesResponse_ResultEntry_Resource): unknown {
-    const obj: any = {};
-    if (message.id !== "") {
-      obj.id = message.id;
-    }
-    if (message.kind !== "") {
-      obj.kind = message.kind;
-    }
-    if (message.policyVersion !== "") {
-      obj.policyVersion = message.policyVersion;
-    }
-    if (message.scope !== "") {
-      obj.scope = message.scope;
-    }
-    return obj;
-  },
-};
+            message.id = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.kind = reader.string();
+            continue;
+          case 3:
+            if (tag !== 26) {
+              break;
+            }
+
+            message.policyVersion = reader.string();
+            continue;
+          case 4:
+            if (tag !== 34) {
+              break;
+            }
+
+            message.scope = reader.string();
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourcesResponse_ResultEntry_Resource {
+      return {
+        id: isSet(object.id) ? globalThis.String(object.id) : "",
+        kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
+        policyVersion: isSet(object.policyVersion)
+          ? globalThis.String(object.policyVersion)
+          : "",
+        scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
+      };
+    },
+
+    toJSON(message: CheckResourcesResponse_ResultEntry_Resource): unknown {
+      const obj: any = {};
+      if (message.id !== "") {
+        obj.id = message.id;
+      }
+      if (message.kind !== "") {
+        obj.kind = message.kind;
+      }
+      if (message.policyVersion !== "") {
+        obj.policyVersion = message.policyVersion;
+      }
+      if (message.scope !== "") {
+        obj.scope = message.scope;
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourcesResponse_ResultEntry_Meta(): CheckResourcesResponse_ResultEntry_Meta {
   return { actions: {}, effectiveDerivedRoles: [] };
 }
 
-export const CheckResourcesResponse_ResultEntry_Meta = {
-  encode(
-    message: CheckResourcesResponse_ResultEntry_Meta,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    Object.entries(message.actions).forEach(([key, value]) => {
-      CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork(),
-      ).join();
-    });
-    for (const v of message.effectiveDerivedRoles) {
-      writer.uint32(18).string(v!);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourcesResponse_ResultEntry_Meta {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourcesResponse_ResultEntry_Meta();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          const entry1 =
-            CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.decode(
-              reader,
-              reader.uint32(),
-            );
-          if (entry1.value !== undefined) {
-            message.actions[entry1.key] = entry1.value;
-          }
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.effectiveDerivedRoles.push(reader.string());
-          continue;
+export const CheckResourcesResponse_ResultEntry_Meta: MessageFns<CheckResourcesResponse_ResultEntry_Meta> =
+  {
+    encode(
+      message: CheckResourcesResponse_ResultEntry_Meta,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      Object.entries(message.actions).forEach(([key, value]) => {
+        CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).join();
+      });
+      for (const v of message.effectiveDerivedRoles) {
+        writer.uint32(18).string(v!);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta {
-    return {
-      actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{
-            [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta;
-          }>((acc, [key, value]) => {
-            acc[key] =
-              CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
-                value,
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourcesResponse_ResultEntry_Meta {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourcesResponse_ResultEntry_Meta();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            const entry1 =
+              CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.decode(
+                reader,
+                reader.uint32(),
               );
-            return acc;
-          }, {})
-        : {},
-      effectiveDerivedRoles: globalThis.Array.isArray(
-        object?.effectiveDerivedRoles,
-      )
-        ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+            if (entry1.value !== undefined) {
+              message.actions[entry1.key] = entry1.value;
+            }
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
 
-  toJSON(message: CheckResourcesResponse_ResultEntry_Meta): unknown {
-    const obj: any = {};
-    if (message.actions) {
-      const entries = Object.entries(message.actions);
-      if (entries.length > 0) {
-        obj.actions = {};
-        entries.forEach(([k, v]) => {
-          obj.actions[k] =
-            CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(v);
-        });
+            message.effectiveDerivedRoles.push(reader.string());
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-    }
-    if (message.effectiveDerivedRoles?.length) {
-      obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
-    }
-    return obj;
-  },
-};
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta {
+      return {
+        actions: isObject(object.actions)
+          ? Object.entries(object.actions).reduce<{
+              [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta;
+            }>((acc, [key, value]) => {
+              acc[key] =
+                CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
+                  value,
+                );
+              return acc;
+            }, {})
+          : {},
+        effectiveDerivedRoles: globalThis.Array.isArray(
+          object?.effectiveDerivedRoles,
+        )
+          ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
+          : [],
+      };
+    },
+
+    toJSON(message: CheckResourcesResponse_ResultEntry_Meta): unknown {
+      const obj: any = {};
+      if (message.actions) {
+        const entries = Object.entries(message.actions);
+        if (entries.length > 0) {
+          obj.actions = {};
+          entries.forEach(([k, v]) => {
+            obj.actions[k] =
+              CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(v);
+          });
+        }
+      }
+      if (message.effectiveDerivedRoles?.length) {
+        obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta(): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
   return { matchedPolicy: "", matchedScope: "" };
 }
 
-export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
-  encode(
-    message: CheckResourcesResponse_ResultEntry_Meta_EffectMeta,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.matchedPolicy !== "") {
-      writer.uint32(10).string(message.matchedPolicy);
-    }
-    if (message.matchedScope !== "") {
-      writer.uint32(18).string(message.matchedScope);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message =
-      createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.matchedPolicy = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.matchedScope = reader.string();
-          continue;
+export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta: MessageFns<CheckResourcesResponse_ResultEntry_Meta_EffectMeta> =
+  {
+    encode(
+      message: CheckResourcesResponse_ResultEntry_Meta_EffectMeta,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.matchedPolicy !== "") {
+        writer.uint32(10).string(message.matchedPolicy);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.matchedScope !== "") {
+        writer.uint32(18).string(message.matchedScope);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
-    return {
-      matchedPolicy: isSet(object.matchedPolicy)
-        ? globalThis.String(object.matchedPolicy)
-        : "",
-      matchedScope: isSet(object.matchedScope)
-        ? globalThis.String(object.matchedScope)
-        : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CheckResourcesResponse_ResultEntry_Meta_EffectMeta): unknown {
-    const obj: any = {};
-    if (message.matchedPolicy !== "") {
-      obj.matchedPolicy = message.matchedPolicy;
-    }
-    if (message.matchedScope !== "") {
-      obj.matchedScope = message.matchedScope;
-    }
-    return obj;
-  },
-};
+            message.matchedPolicy = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.matchedScope = reader.string();
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
+      return {
+        matchedPolicy: isSet(object.matchedPolicy)
+          ? globalThis.String(object.matchedPolicy)
+          : "",
+        matchedScope: isSet(object.matchedScope)
+          ? globalThis.String(object.matchedScope)
+          : "",
+      };
+    },
+
+    toJSON(
+      message: CheckResourcesResponse_ResultEntry_Meta_EffectMeta,
+    ): unknown {
+      const obj: any = {};
+      if (message.matchedPolicy !== "") {
+        obj.matchedPolicy = message.matchedPolicy;
+      }
+      if (message.matchedScope !== "") {
+        obj.matchedScope = message.matchedScope;
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourcesResponse_ResultEntry_Meta_ActionsEntry(): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
   return { key: "", value: undefined };
 }
 
-export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
-  encode(
-    message: CheckResourcesResponse_ResultEntry_Meta_ActionsEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      CheckResourcesResponse_ResultEntry_Meta_EffectMeta.encode(
-        message.value,
-        writer.uint32(18).fork(),
-      ).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message =
-      createBaseCheckResourcesResponse_ResultEntry_Meta_ActionsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value =
-            CheckResourcesResponse_ResultEntry_Meta_EffectMeta.decode(
-              reader,
-              reader.uint32(),
-            );
-          continue;
+export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry: MessageFns<CheckResourcesResponse_ResultEntry_Meta_ActionsEntry> =
+  {
+    encode(
+      message: CheckResourcesResponse_ResultEntry_Meta_ActionsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        CheckResourcesResponse_ResultEntry_Meta_EffectMeta.encode(
+          message.value,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
-            object.value,
-          )
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseCheckResourcesResponse_ResultEntry_Meta_ActionsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(
-    message: CheckResourcesResponse_ResultEntry_Meta_ActionsEntry,
-  ): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(
-        message.value,
-      );
-    }
-    return obj;
-  },
-};
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value =
+              CheckResourcesResponse_ResultEntry_Meta_EffectMeta.decode(
+                reader,
+                reader.uint32(),
+              );
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(
+      object: any,
+    ): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
+              object.value,
+            )
+          : undefined,
+      };
+    },
+
+    toJSON(
+      message: CheckResourcesResponse_ResultEntry_Meta_ActionsEntry,
+    ): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(
+          message.value,
+        );
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourcesResponse_ResultEntry_ActionsEntry(): CheckResourcesResponse_ResultEntry_ActionsEntry {
   return { key: "", value: 0 };
 }
 
-export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
-  encode(
-    message: CheckResourcesResponse_ResultEntry_ActionsEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== 0) {
-      writer.uint32(16).int32(message.value);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourcesResponse_ResultEntry_ActionsEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourcesResponse_ResultEntry_ActionsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.value = reader.int32() as any;
-          continue;
+export const CheckResourcesResponse_ResultEntry_ActionsEntry: MessageFns<CheckResourcesResponse_ResultEntry_ActionsEntry> =
+  {
+    encode(
+      message: CheckResourcesResponse_ResultEntry_ActionsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== 0) {
+        writer.uint32(16).int32(message.value);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry_ActionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? effectFromJSON(object.value) : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourcesResponse_ResultEntry_ActionsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message =
+        createBaseCheckResourcesResponse_ResultEntry_ActionsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CheckResourcesResponse_ResultEntry_ActionsEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== 0) {
-      obj.value = effectToJSON(message.value);
-    }
-    return obj;
-  },
-};
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 16) {
+              break;
+            }
+
+            message.value = reader.int32() as any;
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourcesResponse_ResultEntry_ActionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? effectFromJSON(object.value) : 0,
+      };
+    },
+
+    toJSON(message: CheckResourcesResponse_ResultEntry_ActionsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== 0) {
+        obj.value = effectToJSON(message.value);
+      }
+      return obj;
+    },
+  };
 
 function createBaseAddOrUpdatePolicyResponse(): AddOrUpdatePolicyResponse {
   return { success: undefined };
 }
 
-export const AddOrUpdatePolicyResponse = {
-  encode(
-    message: AddOrUpdatePolicyResponse,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.success !== undefined) {
-      Empty.encode(message.success, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): AddOrUpdatePolicyResponse {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAddOrUpdatePolicyResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.success = Empty.decode(reader, reader.uint32());
-          continue;
+export const AddOrUpdatePolicyResponse: MessageFns<AddOrUpdatePolicyResponse> =
+  {
+    encode(
+      message: AddOrUpdatePolicyResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.success !== undefined) {
+        Empty.encode(message.success, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): AddOrUpdatePolicyResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseAddOrUpdatePolicyResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            message.success = Empty.decode(reader, reader.uint32());
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(object: any): AddOrUpdatePolicyResponse {
-    return {
-      success: isSet(object.success)
-        ? Empty.fromJSON(object.success)
-        : undefined,
-    };
-  },
+    fromJSON(object: any): AddOrUpdatePolicyResponse {
+      return {
+        success: isSet(object.success)
+          ? Empty.fromJSON(object.success)
+          : undefined,
+      };
+    },
 
-  toJSON(message: AddOrUpdatePolicyResponse): unknown {
-    const obj: any = {};
-    if (message.success !== undefined) {
-      obj.success = Empty.toJSON(message.success);
-    }
-    return obj;
-  },
-};
+    toJSON(message: AddOrUpdatePolicyResponse): unknown {
+      const obj: any = {};
+      if (message.success !== undefined) {
+        obj.success = Empty.toJSON(message.success);
+      }
+      return obj;
+    },
+  };
 
 function createBaseListAuditLogEntriesResponse(): ListAuditLogEntriesResponse {
   return { entry: undefined };
 }
 
-export const ListAuditLogEntriesResponse = {
-  encode(
-    message: ListAuditLogEntriesResponse,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    switch (message.entry?.$case) {
-      case "accessLogEntry":
-        AccessLogEntry.encode(
-          message.entry.accessLogEntry,
-          writer.uint32(10).fork(),
-        ).join();
-        break;
-      case "decisionLogEntry":
-        DecisionLogEntry.encode(
-          message.entry.decisionLogEntry,
-          writer.uint32(18).fork(),
-        ).join();
-        break;
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): ListAuditLogEntriesResponse {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseListAuditLogEntriesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.entry = {
-            $case: "accessLogEntry",
-            accessLogEntry: AccessLogEntry.decode(reader, reader.uint32()),
-          };
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.entry = {
-            $case: "decisionLogEntry",
-            decisionLogEntry: DecisionLogEntry.decode(reader, reader.uint32()),
-          };
-          continue;
+export const ListAuditLogEntriesResponse: MessageFns<ListAuditLogEntriesResponse> =
+  {
+    encode(
+      message: ListAuditLogEntriesResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      switch (message.entry?.$case) {
+        case "accessLogEntry":
+          AccessLogEntry.encode(
+            message.entry.accessLogEntry,
+            writer.uint32(10).fork(),
+          ).join();
+          break;
+        case "decisionLogEntry":
+          DecisionLogEntry.encode(
+            message.entry.decisionLogEntry,
+            writer.uint32(18).fork(),
+          ).join();
+          break;
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): ListAuditLogEntriesResponse {
-    return {
-      entry: isSet(object.accessLogEntry)
-        ? {
-            $case: "accessLogEntry",
-            accessLogEntry: AccessLogEntry.fromJSON(object.accessLogEntry),
-          }
-        : isSet(object.decisionLogEntry)
-          ? {
-              $case: "decisionLogEntry",
-              decisionLogEntry: DecisionLogEntry.fromJSON(
-                object.decisionLogEntry,
-              ),
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): ListAuditLogEntriesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseListAuditLogEntriesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
             }
-          : undefined,
-    };
-  },
 
-  toJSON(message: ListAuditLogEntriesResponse): unknown {
-    const obj: any = {};
-    if (message.entry?.$case === "accessLogEntry") {
-      obj.accessLogEntry = AccessLogEntry.toJSON(message.entry.accessLogEntry);
-    }
-    if (message.entry?.$case === "decisionLogEntry") {
-      obj.decisionLogEntry = DecisionLogEntry.toJSON(
-        message.entry.decisionLogEntry,
-      );
-    }
-    return obj;
-  },
-};
+            message.entry = {
+              $case: "accessLogEntry",
+              accessLogEntry: AccessLogEntry.decode(reader, reader.uint32()),
+            };
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.entry = {
+              $case: "decisionLogEntry",
+              decisionLogEntry: DecisionLogEntry.decode(
+                reader,
+                reader.uint32(),
+              ),
+            };
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): ListAuditLogEntriesResponse {
+      return {
+        entry: isSet(object.accessLogEntry)
+          ? {
+              $case: "accessLogEntry",
+              accessLogEntry: AccessLogEntry.fromJSON(object.accessLogEntry),
+            }
+          : isSet(object.decisionLogEntry)
+            ? {
+                $case: "decisionLogEntry",
+                decisionLogEntry: DecisionLogEntry.fromJSON(
+                  object.decisionLogEntry,
+                ),
+              }
+            : undefined,
+      };
+    },
+
+    toJSON(message: ListAuditLogEntriesResponse): unknown {
+      const obj: any = {};
+      if (message.entry?.$case === "accessLogEntry") {
+        obj.accessLogEntry = AccessLogEntry.toJSON(
+          message.entry.accessLogEntry,
+        );
+      }
+      if (message.entry?.$case === "decisionLogEntry") {
+        obj.decisionLogEntry = DecisionLogEntry.toJSON(
+          message.entry.decisionLogEntry,
+        );
+      }
+      return obj;
+    },
+  };
 
 function createBaseServerInfoResponse(): ServerInfoResponse {
   return { version: "", commit: "", buildDate: "" };
 }
 
-export const ServerInfoResponse = {
+export const ServerInfoResponse: MessageFns<ServerInfoResponse> = {
   encode(
     message: ServerInfoResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2483,7 +2526,7 @@ function createBaseListPoliciesResponse(): ListPoliciesResponse {
   return { policyIds: [] };
 }
 
-export const ListPoliciesResponse = {
+export const ListPoliciesResponse: MessageFns<ListPoliciesResponse> = {
   encode(
     message: ListPoliciesResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2542,7 +2585,7 @@ function createBaseGetPolicyResponse(): GetPolicyResponse {
   return { policies: [] };
 }
 
-export const GetPolicyResponse = {
+export const GetPolicyResponse: MessageFns<GetPolicyResponse> = {
   encode(
     message: GetPolicyResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2598,7 +2641,7 @@ function createBaseDisablePolicyResponse(): DisablePolicyResponse {
   return { disabledPolicies: 0 };
 }
 
-export const DisablePolicyResponse = {
+export const DisablePolicyResponse: MessageFns<DisablePolicyResponse> = {
   encode(
     message: DisablePolicyResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2657,7 +2700,7 @@ function createBaseEnablePolicyResponse(): EnablePolicyResponse {
   return { enabledPolicies: 0 };
 }
 
-export const EnablePolicyResponse = {
+export const EnablePolicyResponse: MessageFns<EnablePolicyResponse> = {
   encode(
     message: EnablePolicyResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2716,49 +2759,50 @@ function createBaseAddOrUpdateSchemaResponse(): AddOrUpdateSchemaResponse {
   return {};
 }
 
-export const AddOrUpdateSchemaResponse = {
-  encode(
-    _: AddOrUpdateSchemaResponse,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    return writer;
-  },
+export const AddOrUpdateSchemaResponse: MessageFns<AddOrUpdateSchemaResponse> =
+  {
+    encode(
+      _: AddOrUpdateSchemaResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
 
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): AddOrUpdateSchemaResponse {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseAddOrUpdateSchemaResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): AddOrUpdateSchemaResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseAddOrUpdateSchemaResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return message;
+    },
 
-  fromJSON(_: any): AddOrUpdateSchemaResponse {
-    return {};
-  },
+    fromJSON(_: any): AddOrUpdateSchemaResponse {
+      return {};
+    },
 
-  toJSON(_: AddOrUpdateSchemaResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-};
+    toJSON(_: AddOrUpdateSchemaResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
+  };
 
 function createBaseListSchemasResponse(): ListSchemasResponse {
   return { schemaIds: [] };
 }
 
-export const ListSchemasResponse = {
+export const ListSchemasResponse: MessageFns<ListSchemasResponse> = {
   encode(
     message: ListSchemasResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2817,7 +2861,7 @@ function createBaseGetSchemaResponse(): GetSchemaResponse {
   return { schemas: [] };
 }
 
-export const GetSchemaResponse = {
+export const GetSchemaResponse: MessageFns<GetSchemaResponse> = {
   encode(
     message: GetSchemaResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2873,7 +2917,7 @@ function createBaseDeleteSchemaResponse(): DeleteSchemaResponse {
   return { deletedSchemas: 0 };
 }
 
-export const DeleteSchemaResponse = {
+export const DeleteSchemaResponse: MessageFns<DeleteSchemaResponse> = {
   encode(
     message: DeleteSchemaResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2932,7 +2976,7 @@ function createBaseReloadStoreResponse(): ReloadStoreResponse {
   return {};
 }
 
-export const ReloadStoreResponse = {
+export const ReloadStoreResponse: MessageFns<ReloadStoreResponse> = {
   encode(
     _: ReloadStoreResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2976,4 +3020,11 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

@@ -10,7 +10,7 @@ export interface Timestamp {
   nanos: number;
 }
 
-export const Timestamp = {
+export const Timestamp: MessageFns<Timestamp> = {
   fromJSON(object: any): Timestamp {
     return {
       seconds: isSet(object.seconds) ? globalThis.String(object.seconds) : "0",
@@ -32,4 +32,9 @@ export const Timestamp = {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

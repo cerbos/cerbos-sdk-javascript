@@ -814,7 +814,7 @@ function createBaseFileOptions(): FileOptions {
   };
 }
 
-export const FileOptions = {
+export const FileOptions: MessageFns<FileOptions> = {
   encode(
     message: FileOptions,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1270,7 +1270,7 @@ function createBaseMessageOptions(): MessageOptions {
   };
 }
 
-export const MessageOptions = {
+export const MessageOptions: MessageFns<MessageOptions> = {
   encode(
     message: MessageOptions,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1464,7 +1464,7 @@ function createBaseFieldOptions(): FieldOptions {
   };
 }
 
-export const FieldOptions = {
+export const FieldOptions: MessageFns<FieldOptions> = {
   encode(
     message: FieldOptions,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1762,72 +1762,73 @@ function createBaseFieldOptions_EditionDefault(): FieldOptions_EditionDefault {
   return { edition: 0, value: "" };
 }
 
-export const FieldOptions_EditionDefault = {
-  encode(
-    message: FieldOptions_EditionDefault,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.edition !== undefined && message.edition !== 0) {
-      writer.uint32(24).int32(message.edition);
-    }
-    if (message.value !== undefined && message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): FieldOptions_EditionDefault {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseFieldOptions_EditionDefault();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.edition = reader.int32() as any;
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = reader.string();
-          continue;
+export const FieldOptions_EditionDefault: MessageFns<FieldOptions_EditionDefault> =
+  {
+    encode(
+      message: FieldOptions_EditionDefault,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.edition !== undefined && message.edition !== 0) {
+        writer.uint32(24).int32(message.edition);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined && message.value !== "") {
+        writer.uint32(18).string(message.value);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): FieldOptions_EditionDefault {
-    return {
-      edition: isSet(object.edition) ? editionFromJSON(object.edition) : 0,
-      value: isSet(object.value) ? globalThis.String(object.value) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): FieldOptions_EditionDefault {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseFieldOptions_EditionDefault();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 3:
+            if (tag !== 24) {
+              break;
+            }
 
-  toJSON(message: FieldOptions_EditionDefault): unknown {
-    const obj: any = {};
-    if (message.edition !== undefined && message.edition !== 0) {
-      obj.edition = editionToJSON(message.edition);
-    }
-    if (message.value !== undefined && message.value !== "") {
-      obj.value = message.value;
-    }
-    return obj;
-  },
-};
+            message.edition = reader.int32() as any;
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = reader.string();
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): FieldOptions_EditionDefault {
+      return {
+        edition: isSet(object.edition) ? editionFromJSON(object.edition) : 0,
+        value: isSet(object.value) ? globalThis.String(object.value) : "",
+      };
+    },
+
+    toJSON(message: FieldOptions_EditionDefault): unknown {
+      const obj: any = {};
+      if (message.edition !== undefined && message.edition !== 0) {
+        obj.edition = editionToJSON(message.edition);
+      }
+      if (message.value !== undefined && message.value !== "") {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
 function createBaseFieldOptions_FeatureSupport(): FieldOptions_FeatureSupport {
   return {
@@ -1838,132 +1839,139 @@ function createBaseFieldOptions_FeatureSupport(): FieldOptions_FeatureSupport {
   };
 }
 
-export const FieldOptions_FeatureSupport = {
-  encode(
-    message: FieldOptions_FeatureSupport,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (
-      message.editionIntroduced !== undefined &&
-      message.editionIntroduced !== 0
-    ) {
-      writer.uint32(8).int32(message.editionIntroduced);
-    }
-    if (
-      message.editionDeprecated !== undefined &&
-      message.editionDeprecated !== 0
-    ) {
-      writer.uint32(16).int32(message.editionDeprecated);
-    }
-    if (
-      message.deprecationWarning !== undefined &&
-      message.deprecationWarning !== ""
-    ) {
-      writer.uint32(26).string(message.deprecationWarning);
-    }
-    if (message.editionRemoved !== undefined && message.editionRemoved !== 0) {
-      writer.uint32(32).int32(message.editionRemoved);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): FieldOptions_FeatureSupport {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseFieldOptions_FeatureSupport();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.editionIntroduced = reader.int32() as any;
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.editionDeprecated = reader.int32() as any;
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.deprecationWarning = reader.string();
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.editionRemoved = reader.int32() as any;
-          continue;
+export const FieldOptions_FeatureSupport: MessageFns<FieldOptions_FeatureSupport> =
+  {
+    encode(
+      message: FieldOptions_FeatureSupport,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (
+        message.editionIntroduced !== undefined &&
+        message.editionIntroduced !== 0
+      ) {
+        writer.uint32(8).int32(message.editionIntroduced);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (
+        message.editionDeprecated !== undefined &&
+        message.editionDeprecated !== 0
+      ) {
+        writer.uint32(16).int32(message.editionDeprecated);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (
+        message.deprecationWarning !== undefined &&
+        message.deprecationWarning !== ""
+      ) {
+        writer.uint32(26).string(message.deprecationWarning);
+      }
+      if (
+        message.editionRemoved !== undefined &&
+        message.editionRemoved !== 0
+      ) {
+        writer.uint32(32).int32(message.editionRemoved);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): FieldOptions_FeatureSupport {
-    return {
-      editionIntroduced: isSet(object.editionIntroduced)
-        ? editionFromJSON(object.editionIntroduced)
-        : 0,
-      editionDeprecated: isSet(object.editionDeprecated)
-        ? editionFromJSON(object.editionDeprecated)
-        : 0,
-      deprecationWarning: isSet(object.deprecationWarning)
-        ? globalThis.String(object.deprecationWarning)
-        : "",
-      editionRemoved: isSet(object.editionRemoved)
-        ? editionFromJSON(object.editionRemoved)
-        : 0,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): FieldOptions_FeatureSupport {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseFieldOptions_FeatureSupport();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 8) {
+              break;
+            }
 
-  toJSON(message: FieldOptions_FeatureSupport): unknown {
-    const obj: any = {};
-    if (
-      message.editionIntroduced !== undefined &&
-      message.editionIntroduced !== 0
-    ) {
-      obj.editionIntroduced = editionToJSON(message.editionIntroduced);
-    }
-    if (
-      message.editionDeprecated !== undefined &&
-      message.editionDeprecated !== 0
-    ) {
-      obj.editionDeprecated = editionToJSON(message.editionDeprecated);
-    }
-    if (
-      message.deprecationWarning !== undefined &&
-      message.deprecationWarning !== ""
-    ) {
-      obj.deprecationWarning = message.deprecationWarning;
-    }
-    if (message.editionRemoved !== undefined && message.editionRemoved !== 0) {
-      obj.editionRemoved = editionToJSON(message.editionRemoved);
-    }
-    return obj;
-  },
-};
+            message.editionIntroduced = reader.int32() as any;
+            continue;
+          case 2:
+            if (tag !== 16) {
+              break;
+            }
+
+            message.editionDeprecated = reader.int32() as any;
+            continue;
+          case 3:
+            if (tag !== 26) {
+              break;
+            }
+
+            message.deprecationWarning = reader.string();
+            continue;
+          case 4:
+            if (tag !== 32) {
+              break;
+            }
+
+            message.editionRemoved = reader.int32() as any;
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): FieldOptions_FeatureSupport {
+      return {
+        editionIntroduced: isSet(object.editionIntroduced)
+          ? editionFromJSON(object.editionIntroduced)
+          : 0,
+        editionDeprecated: isSet(object.editionDeprecated)
+          ? editionFromJSON(object.editionDeprecated)
+          : 0,
+        deprecationWarning: isSet(object.deprecationWarning)
+          ? globalThis.String(object.deprecationWarning)
+          : "",
+        editionRemoved: isSet(object.editionRemoved)
+          ? editionFromJSON(object.editionRemoved)
+          : 0,
+      };
+    },
+
+    toJSON(message: FieldOptions_FeatureSupport): unknown {
+      const obj: any = {};
+      if (
+        message.editionIntroduced !== undefined &&
+        message.editionIntroduced !== 0
+      ) {
+        obj.editionIntroduced = editionToJSON(message.editionIntroduced);
+      }
+      if (
+        message.editionDeprecated !== undefined &&
+        message.editionDeprecated !== 0
+      ) {
+        obj.editionDeprecated = editionToJSON(message.editionDeprecated);
+      }
+      if (
+        message.deprecationWarning !== undefined &&
+        message.deprecationWarning !== ""
+      ) {
+        obj.deprecationWarning = message.deprecationWarning;
+      }
+      if (
+        message.editionRemoved !== undefined &&
+        message.editionRemoved !== 0
+      ) {
+        obj.editionRemoved = editionToJSON(message.editionRemoved);
+      }
+      return obj;
+    },
+  };
 
 function createBaseOneofOptions(): OneofOptions {
   return { features: undefined, uninterpretedOption: [] };
 }
 
-export const OneofOptions = {
+export const OneofOptions: MessageFns<OneofOptions> = {
   encode(
     message: OneofOptions,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2041,7 +2049,7 @@ function createBaseServiceOptions(): ServiceOptions {
   return { features: undefined, deprecated: false, uninterpretedOption: [] };
 }
 
-export const ServiceOptions = {
+export const ServiceOptions: MessageFns<ServiceOptions> = {
   encode(
     message: ServiceOptions,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2140,7 +2148,7 @@ function createBaseMethodOptions(): MethodOptions {
   };
 }
 
-export const MethodOptions = {
+export const MethodOptions: MessageFns<MethodOptions> = {
   encode(
     message: MethodOptions,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2266,7 +2274,7 @@ function createBaseUninterpretedOption(): UninterpretedOption {
   };
 }
 
-export const UninterpretedOption = {
+export const UninterpretedOption: MessageFns<UninterpretedOption> = {
   encode(
     message: UninterpretedOption,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2443,76 +2451,77 @@ function createBaseUninterpretedOption_NamePart(): UninterpretedOption_NamePart 
   return { namePart: "", isExtension: false };
 }
 
-export const UninterpretedOption_NamePart = {
-  encode(
-    message: UninterpretedOption_NamePart,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.namePart !== "") {
-      writer.uint32(10).string(message.namePart);
-    }
-    if (message.isExtension !== false) {
-      writer.uint32(16).bool(message.isExtension);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): UninterpretedOption_NamePart {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseUninterpretedOption_NamePart();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.namePart = reader.string();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.isExtension = reader.bool();
-          continue;
+export const UninterpretedOption_NamePart: MessageFns<UninterpretedOption_NamePart> =
+  {
+    encode(
+      message: UninterpretedOption_NamePart,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.namePart !== "") {
+        writer.uint32(10).string(message.namePart);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.isExtension !== false) {
+        writer.uint32(16).bool(message.isExtension);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): UninterpretedOption_NamePart {
-    return {
-      namePart: isSet(object.namePart)
-        ? globalThis.String(object.namePart)
-        : "",
-      isExtension: isSet(object.isExtension)
-        ? globalThis.Boolean(object.isExtension)
-        : false,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): UninterpretedOption_NamePart {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseUninterpretedOption_NamePart();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: UninterpretedOption_NamePart): unknown {
-    const obj: any = {};
-    if (message.namePart !== "") {
-      obj.namePart = message.namePart;
-    }
-    if (message.isExtension !== false) {
-      obj.isExtension = message.isExtension;
-    }
-    return obj;
-  },
-};
+            message.namePart = reader.string();
+            continue;
+          case 2:
+            if (tag !== 16) {
+              break;
+            }
+
+            message.isExtension = reader.bool();
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): UninterpretedOption_NamePart {
+      return {
+        namePart: isSet(object.namePart)
+          ? globalThis.String(object.namePart)
+          : "",
+        isExtension: isSet(object.isExtension)
+          ? globalThis.Boolean(object.isExtension)
+          : false,
+      };
+    },
+
+    toJSON(message: UninterpretedOption_NamePart): unknown {
+      const obj: any = {};
+      if (message.namePart !== "") {
+        obj.namePart = message.namePart;
+      }
+      if (message.isExtension !== false) {
+        obj.isExtension = message.isExtension;
+      }
+      return obj;
+    },
+  };
 
 function createBaseFeatureSet(): FeatureSet {
   return {
@@ -2525,7 +2534,7 @@ function createBaseFeatureSet(): FeatureSet {
   };
 }
 
-export const FeatureSet = {
+export const FeatureSet: MessageFns<FeatureSet> = {
   encode(
     message: FeatureSet,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2702,4 +2711,11 @@ function base64FromBytes(arr: Uint8Array): string {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

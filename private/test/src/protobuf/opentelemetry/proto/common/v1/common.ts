@@ -42,7 +42,7 @@ function createBaseAnyValue(): AnyValue {
   return { value: undefined };
 }
 
-export const AnyValue = {
+export const AnyValue: MessageFns<AnyValue> = {
   encode(
     message: AnyValue,
     writer: BinaryWriter = new BinaryWriter(),
@@ -232,7 +232,7 @@ function createBaseArrayValue(): ArrayValue {
   return { values: [] };
 }
 
-export const ArrayValue = {
+export const ArrayValue: MessageFns<ArrayValue> = {
   encode(
     message: ArrayValue,
     writer: BinaryWriter = new BinaryWriter(),
@@ -288,7 +288,7 @@ function createBaseKeyValueList(): KeyValueList {
   return { values: [] };
 }
 
-export const KeyValueList = {
+export const KeyValueList: MessageFns<KeyValueList> = {
   encode(
     message: KeyValueList,
     writer: BinaryWriter = new BinaryWriter(),
@@ -344,7 +344,7 @@ function createBaseKeyValue(): KeyValue {
   return { key: "", value: undefined };
 }
 
-export const KeyValue = {
+export const KeyValue: MessageFns<KeyValue> = {
   encode(
     message: KeyValue,
     writer: BinaryWriter = new BinaryWriter(),
@@ -412,7 +412,7 @@ function createBaseInstrumentationScope(): InstrumentationScope {
   return { name: "", version: "", attributes: [], droppedAttributesCount: 0 };
 }
 
-export const InstrumentationScope = {
+export const InstrumentationScope: MessageFns<InstrumentationScope> = {
   encode(
     message: InstrumentationScope,
     writer: BinaryWriter = new BinaryWriter(),
@@ -538,4 +538,11 @@ function base64FromBytes(arr: Uint8Array): string {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

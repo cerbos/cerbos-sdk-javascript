@@ -349,7 +349,7 @@ export interface TimestampRules {
   within?: Duration | undefined;
 }
 
-export const OneofConstraints = {
+export const OneofConstraints: MessageFns<OneofConstraints> = {
   fromJSON(object: any): OneofConstraints {
     return {
       required: isSet(object.required)
@@ -359,7 +359,7 @@ export const OneofConstraints = {
   },
 };
 
-export const FieldConstraints = {
+export const FieldConstraints: MessageFns<FieldConstraints> = {
   fromJSON(object: any): FieldConstraints {
     return {
       cel: globalThis.Array.isArray(object?.cel)
@@ -492,7 +492,7 @@ export const FieldConstraints = {
   },
 };
 
-export const FloatRules = {
+export const FloatRules: MessageFns<FloatRules> = {
   fromJSON(object: any): FloatRules {
     return {
       const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
@@ -517,7 +517,7 @@ export const FloatRules = {
   },
 };
 
-export const DoubleRules = {
+export const DoubleRules: MessageFns<DoubleRules> = {
   fromJSON(object: any): DoubleRules {
     return {
       const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
@@ -542,7 +542,7 @@ export const DoubleRules = {
   },
 };
 
-export const Int32Rules = {
+export const Int32Rules: MessageFns<Int32Rules> = {
   fromJSON(object: any): Int32Rules {
     return {
       const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
@@ -566,7 +566,7 @@ export const Int32Rules = {
   },
 };
 
-export const Int64Rules = {
+export const Int64Rules: MessageFns<Int64Rules> = {
   fromJSON(object: any): Int64Rules {
     return {
       const: isSet(object.const) ? globalThis.String(object.const) : undefined,
@@ -590,7 +590,7 @@ export const Int64Rules = {
   },
 };
 
-export const UInt32Rules = {
+export const UInt32Rules: MessageFns<UInt32Rules> = {
   fromJSON(object: any): UInt32Rules {
     return {
       const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
@@ -614,7 +614,7 @@ export const UInt32Rules = {
   },
 };
 
-export const UInt64Rules = {
+export const UInt64Rules: MessageFns<UInt64Rules> = {
   fromJSON(object: any): UInt64Rules {
     return {
       const: isSet(object.const) ? globalThis.String(object.const) : undefined,
@@ -638,7 +638,7 @@ export const UInt64Rules = {
   },
 };
 
-export const SInt32Rules = {
+export const SInt32Rules: MessageFns<SInt32Rules> = {
   fromJSON(object: any): SInt32Rules {
     return {
       const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
@@ -662,7 +662,7 @@ export const SInt32Rules = {
   },
 };
 
-export const SInt64Rules = {
+export const SInt64Rules: MessageFns<SInt64Rules> = {
   fromJSON(object: any): SInt64Rules {
     return {
       const: isSet(object.const) ? globalThis.String(object.const) : undefined,
@@ -686,7 +686,7 @@ export const SInt64Rules = {
   },
 };
 
-export const Fixed32Rules = {
+export const Fixed32Rules: MessageFns<Fixed32Rules> = {
   fromJSON(object: any): Fixed32Rules {
     return {
       const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
@@ -710,7 +710,7 @@ export const Fixed32Rules = {
   },
 };
 
-export const Fixed64Rules = {
+export const Fixed64Rules: MessageFns<Fixed64Rules> = {
   fromJSON(object: any): Fixed64Rules {
     return {
       const: isSet(object.const) ? globalThis.String(object.const) : undefined,
@@ -734,7 +734,7 @@ export const Fixed64Rules = {
   },
 };
 
-export const SFixed32Rules = {
+export const SFixed32Rules: MessageFns<SFixed32Rules> = {
   fromJSON(object: any): SFixed32Rules {
     return {
       const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
@@ -758,7 +758,7 @@ export const SFixed32Rules = {
   },
 };
 
-export const SFixed64Rules = {
+export const SFixed64Rules: MessageFns<SFixed64Rules> = {
   fromJSON(object: any): SFixed64Rules {
     return {
       const: isSet(object.const) ? globalThis.String(object.const) : undefined,
@@ -782,7 +782,7 @@ export const SFixed64Rules = {
   },
 };
 
-export const BoolRules = {
+export const BoolRules: MessageFns<BoolRules> = {
   fromJSON(object: any): BoolRules {
     return {
       const: isSet(object.const) ? globalThis.Boolean(object.const) : undefined,
@@ -790,7 +790,7 @@ export const BoolRules = {
   },
 };
 
-export const StringRules = {
+export const StringRules: MessageFns<StringRules> = {
   fromJSON(object: any): StringRules {
     return {
       const: isSet(object.const) ? globalThis.String(object.const) : undefined,
@@ -915,7 +915,7 @@ export const StringRules = {
   },
 };
 
-export const BytesRules = {
+export const BytesRules: MessageFns<BytesRules> = {
   fromJSON(object: any): BytesRules {
     return {
       const: isSet(object.const) ? bytesFromBase64(object.const) : undefined,
@@ -951,7 +951,7 @@ export const BytesRules = {
   },
 };
 
-export const EnumRules = {
+export const EnumRules: MessageFns<EnumRules> = {
   fromJSON(object: any): EnumRules {
     return {
       const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
@@ -968,7 +968,7 @@ export const EnumRules = {
   },
 };
 
-export const RepeatedRules = {
+export const RepeatedRules: MessageFns<RepeatedRules> = {
   fromJSON(object: any): RepeatedRules {
     return {
       minItems: isSet(object.minItems)
@@ -987,7 +987,7 @@ export const RepeatedRules = {
   },
 };
 
-export const MapRules = {
+export const MapRules: MessageFns<MapRules> = {
   fromJSON(object: any): MapRules {
     return {
       minPairs: isSet(object.minPairs)
@@ -1006,7 +1006,7 @@ export const MapRules = {
   },
 };
 
-export const AnyRules = {
+export const AnyRules: MessageFns<AnyRules> = {
   fromJSON(object: any): AnyRules {
     return {
       in: globalThis.Array.isArray(object?.in)
@@ -1019,7 +1019,7 @@ export const AnyRules = {
   },
 };
 
-export const DurationRules = {
+export const DurationRules: MessageFns<DurationRules> = {
   fromJSON(object: any): DurationRules {
     return {
       const: isSet(object.const) ? Duration.fromJSON(object.const) : undefined,
@@ -1043,7 +1043,7 @@ export const DurationRules = {
   },
 };
 
-export const TimestampRules = {
+export const TimestampRules: MessageFns<TimestampRules> = {
   fromJSON(object: any): TimestampRules {
     return {
       const: isSet(object.const) ? fromJsonTimestamp(object.const) : undefined,
@@ -1099,4 +1099,8 @@ function fromJsonTimestamp(o: any): Date {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
 }

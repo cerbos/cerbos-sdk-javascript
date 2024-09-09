@@ -191,7 +191,7 @@ function createBasePlanResourcesInput(): PlanResourcesInput {
   };
 }
 
-export const PlanResourcesInput = {
+export const PlanResourcesInput: MessageFns<PlanResourcesInput> = {
   encode(
     message: PlanResourcesInput,
     writer: BinaryWriter = new BinaryWriter(),
@@ -334,203 +334,208 @@ function createBasePlanResourcesInput_Resource(): PlanResourcesInput_Resource {
   return { kind: "", attr: {}, policyVersion: "", scope: "" };
 }
 
-export const PlanResourcesInput_Resource = {
-  encode(
-    message: PlanResourcesInput_Resource,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.kind !== "") {
-      writer.uint32(10).string(message.kind);
-    }
-    Object.entries(message.attr).forEach(([key, value]) => {
-      if (value !== undefined) {
-        PlanResourcesInput_Resource_AttrEntry.encode(
-          { key: key as any, value },
-          writer.uint32(18).fork(),
-        ).join();
+export const PlanResourcesInput_Resource: MessageFns<PlanResourcesInput_Resource> =
+  {
+    encode(
+      message: PlanResourcesInput_Resource,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.kind !== "") {
+        writer.uint32(10).string(message.kind);
       }
-    });
-    if (message.policyVersion !== "") {
-      writer.uint32(26).string(message.policyVersion);
-    }
-    if (message.scope !== "") {
-      writer.uint32(34).string(message.scope);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): PlanResourcesInput_Resource {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesInput_Resource();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.kind = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          const entry2 = PlanResourcesInput_Resource_AttrEntry.decode(
-            reader,
-            reader.uint32(),
-          );
-          if (entry2.value !== undefined) {
-            message.attr[entry2.key] = entry2.value;
-          }
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.policyVersion = reader.string();
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.scope = reader.string();
-          continue;
+      Object.entries(message.attr).forEach(([key, value]) => {
+        if (value !== undefined) {
+          PlanResourcesInput_Resource_AttrEntry.encode(
+            { key: key as any, value },
+            writer.uint32(18).fork(),
+          ).join();
+        }
+      });
+      if (message.policyVersion !== "") {
+        writer.uint32(26).string(message.policyVersion);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.scope !== "") {
+        writer.uint32(34).string(message.scope);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): PlanResourcesInput_Resource {
-    return {
-      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
-      attr: isObject(object.attr)
-        ? Object.entries(object.attr).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-      policyVersion: isSet(object.policyVersion)
-        ? globalThis.String(object.policyVersion)
-        : "",
-      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PlanResourcesInput_Resource {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePlanResourcesInput_Resource();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: PlanResourcesInput_Resource): unknown {
-    const obj: any = {};
-    if (message.kind !== "") {
-      obj.kind = message.kind;
-    }
-    if (message.attr) {
-      const entries = Object.entries(message.attr);
-      if (entries.length > 0) {
-        obj.attr = {};
-        entries.forEach(([k, v]) => {
-          obj.attr[k] = v;
-        });
+            message.kind = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            const entry2 = PlanResourcesInput_Resource_AttrEntry.decode(
+              reader,
+              reader.uint32(),
+            );
+            if (entry2.value !== undefined) {
+              message.attr[entry2.key] = entry2.value;
+            }
+            continue;
+          case 3:
+            if (tag !== 26) {
+              break;
+            }
+
+            message.policyVersion = reader.string();
+            continue;
+          case 4:
+            if (tag !== 34) {
+              break;
+            }
+
+            message.scope = reader.string();
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-    }
-    if (message.policyVersion !== "") {
-      obj.policyVersion = message.policyVersion;
-    }
-    if (message.scope !== "") {
-      obj.scope = message.scope;
-    }
-    return obj;
-  },
-};
+      return message;
+    },
+
+    fromJSON(object: any): PlanResourcesInput_Resource {
+      return {
+        kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
+        attr: isObject(object.attr)
+          ? Object.entries(object.attr).reduce<{
+              [key: string]: any | undefined;
+            }>((acc, [key, value]) => {
+              acc[key] = value as any | undefined;
+              return acc;
+            }, {})
+          : {},
+        policyVersion: isSet(object.policyVersion)
+          ? globalThis.String(object.policyVersion)
+          : "",
+        scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
+      };
+    },
+
+    toJSON(message: PlanResourcesInput_Resource): unknown {
+      const obj: any = {};
+      if (message.kind !== "") {
+        obj.kind = message.kind;
+      }
+      if (message.attr) {
+        const entries = Object.entries(message.attr);
+        if (entries.length > 0) {
+          obj.attr = {};
+          entries.forEach(([k, v]) => {
+            obj.attr[k] = v;
+          });
+        }
+      }
+      if (message.policyVersion !== "") {
+        obj.policyVersion = message.policyVersion;
+      }
+      if (message.scope !== "") {
+        obj.scope = message.scope;
+      }
+      return obj;
+    },
+  };
 
 function createBasePlanResourcesInput_Resource_AttrEntry(): PlanResourcesInput_Resource_AttrEntry {
   return { key: "", value: undefined };
 }
 
-export const PlanResourcesInput_Resource_AttrEntry = {
-  encode(
-    message: PlanResourcesInput_Resource_AttrEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): PlanResourcesInput_Resource_AttrEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesInput_Resource_AttrEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
-          continue;
+export const PlanResourcesInput_Resource_AttrEntry: MessageFns<PlanResourcesInput_Resource_AttrEntry> =
+  {
+    encode(
+      message: PlanResourcesInput_Resource_AttrEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        Value.encode(
+          Value.wrap(message.value),
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): PlanResourcesInput_Resource_AttrEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PlanResourcesInput_Resource_AttrEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePlanResourcesInput_Resource_AttrEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: PlanResourcesInput_Resource_AttrEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = message.value;
-    }
-    return obj;
-  },
-};
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): PlanResourcesInput_Resource_AttrEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object?.value) ? object.value : undefined,
+      };
+    },
+
+    toJSON(message: PlanResourcesInput_Resource_AttrEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
 function createBasePlanResourcesFilter(): PlanResourcesFilter {
   return { kind: 0, condition: undefined };
 }
 
-export const PlanResourcesFilter = {
+export const PlanResourcesFilter: MessageFns<PlanResourcesFilter> = {
   encode(
     message: PlanResourcesFilter,
     writer: BinaryWriter = new BinaryWriter(),
@@ -613,204 +618,206 @@ function createBasePlanResourcesFilter_Expression(): PlanResourcesFilter_Express
   return { operator: "", operands: [] };
 }
 
-export const PlanResourcesFilter_Expression = {
-  encode(
-    message: PlanResourcesFilter_Expression,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.operator !== "") {
-      writer.uint32(10).string(message.operator);
-    }
-    for (const v of message.operands) {
-      PlanResourcesFilter_Expression_Operand.encode(
-        v!,
-        writer.uint32(18).fork(),
-      ).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): PlanResourcesFilter_Expression {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesFilter_Expression();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.operator = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.operands.push(
-            PlanResourcesFilter_Expression_Operand.decode(
-              reader,
-              reader.uint32(),
-            ),
-          );
-          continue;
+export const PlanResourcesFilter_Expression: MessageFns<PlanResourcesFilter_Expression> =
+  {
+    encode(
+      message: PlanResourcesFilter_Expression,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.operator !== "") {
+        writer.uint32(10).string(message.operator);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.operands) {
+        PlanResourcesFilter_Expression_Operand.encode(
+          v!,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): PlanResourcesFilter_Expression {
-    return {
-      operator: isSet(object.operator)
-        ? globalThis.String(object.operator)
-        : "",
-      operands: globalThis.Array.isArray(object?.operands)
-        ? object.operands.map((e: any) =>
-            PlanResourcesFilter_Expression_Operand.fromJSON(e),
-          )
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PlanResourcesFilter_Expression {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePlanResourcesFilter_Expression();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: PlanResourcesFilter_Expression): unknown {
-    const obj: any = {};
-    if (message.operator !== "") {
-      obj.operator = message.operator;
-    }
-    if (message.operands?.length) {
-      obj.operands = message.operands.map((e) =>
-        PlanResourcesFilter_Expression_Operand.toJSON(e),
-      );
-    }
-    return obj;
-  },
-};
+            message.operator = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.operands.push(
+              PlanResourcesFilter_Expression_Operand.decode(
+                reader,
+                reader.uint32(),
+              ),
+            );
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): PlanResourcesFilter_Expression {
+      return {
+        operator: isSet(object.operator)
+          ? globalThis.String(object.operator)
+          : "",
+        operands: globalThis.Array.isArray(object?.operands)
+          ? object.operands.map((e: any) =>
+              PlanResourcesFilter_Expression_Operand.fromJSON(e),
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: PlanResourcesFilter_Expression): unknown {
+      const obj: any = {};
+      if (message.operator !== "") {
+        obj.operator = message.operator;
+      }
+      if (message.operands?.length) {
+        obj.operands = message.operands.map((e) =>
+          PlanResourcesFilter_Expression_Operand.toJSON(e),
+        );
+      }
+      return obj;
+    },
+  };
 
 function createBasePlanResourcesFilter_Expression_Operand(): PlanResourcesFilter_Expression_Operand {
   return { node: undefined };
 }
 
-export const PlanResourcesFilter_Expression_Operand = {
-  encode(
-    message: PlanResourcesFilter_Expression_Operand,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    switch (message.node?.$case) {
-      case "value":
-        Value.encode(
-          Value.wrap(message.node.value),
-          writer.uint32(10).fork(),
-        ).join();
-        break;
-      case "expression":
-        PlanResourcesFilter_Expression.encode(
-          message.node.expression,
-          writer.uint32(18).fork(),
-        ).join();
-        break;
-      case "variable":
-        writer.uint32(26).string(message.node.variable);
-        break;
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): PlanResourcesFilter_Expression_Operand {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesFilter_Expression_Operand();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.node = {
-            $case: "value",
-            value: Value.unwrap(Value.decode(reader, reader.uint32())),
-          };
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.node = {
-            $case: "expression",
-            expression: PlanResourcesFilter_Expression.decode(
-              reader,
-              reader.uint32(),
-            ),
-          };
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.node = { $case: "variable", variable: reader.string() };
-          continue;
+export const PlanResourcesFilter_Expression_Operand: MessageFns<PlanResourcesFilter_Expression_Operand> =
+  {
+    encode(
+      message: PlanResourcesFilter_Expression_Operand,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      switch (message.node?.$case) {
+        case "value":
+          Value.encode(
+            Value.wrap(message.node.value),
+            writer.uint32(10).fork(),
+          ).join();
+          break;
+        case "expression":
+          PlanResourcesFilter_Expression.encode(
+            message.node.expression,
+            writer.uint32(18).fork(),
+          ).join();
+          break;
+        case "variable":
+          writer.uint32(26).string(message.node.variable);
+          break;
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): PlanResourcesFilter_Expression_Operand {
-    return {
-      node: isSet(object.value)
-        ? { $case: "value", value: object.value }
-        : isSet(object.expression)
-          ? {
-              $case: "expression",
-              expression: PlanResourcesFilter_Expression.fromJSON(
-                object.expression,
-              ),
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PlanResourcesFilter_Expression_Operand {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePlanResourcesFilter_Expression_Operand();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
             }
-          : isSet(object.variable)
-            ? {
-                $case: "variable",
-                variable: globalThis.String(object.variable),
-              }
-            : undefined,
-    };
-  },
 
-  toJSON(message: PlanResourcesFilter_Expression_Operand): unknown {
-    const obj: any = {};
-    if (message.node?.$case === "value") {
-      obj.value = message.node.value;
-    }
-    if (message.node?.$case === "expression") {
-      obj.expression = PlanResourcesFilter_Expression.toJSON(
-        message.node.expression,
-      );
-    }
-    if (message.node?.$case === "variable") {
-      obj.variable = message.node.variable;
-    }
-    return obj;
-  },
-};
+            message.node = {
+              $case: "value",
+              value: Value.unwrap(Value.decode(reader, reader.uint32())),
+            };
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.node = {
+              $case: "expression",
+              expression: PlanResourcesFilter_Expression.decode(
+                reader,
+                reader.uint32(),
+              ),
+            };
+            continue;
+          case 3:
+            if (tag !== 26) {
+              break;
+            }
+
+            message.node = { $case: "variable", variable: reader.string() };
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): PlanResourcesFilter_Expression_Operand {
+      return {
+        node: isSet(object.value)
+          ? { $case: "value", value: object.value }
+          : isSet(object.expression)
+            ? {
+                $case: "expression",
+                expression: PlanResourcesFilter_Expression.fromJSON(
+                  object.expression,
+                ),
+              }
+            : isSet(object.variable)
+              ? {
+                  $case: "variable",
+                  variable: globalThis.String(object.variable),
+                }
+              : undefined,
+      };
+    },
+
+    toJSON(message: PlanResourcesFilter_Expression_Operand): unknown {
+      const obj: any = {};
+      if (message.node?.$case === "value") {
+        obj.value = message.node.value;
+      }
+      if (message.node?.$case === "expression") {
+        obj.expression = PlanResourcesFilter_Expression.toJSON(
+          message.node.expression,
+        );
+      }
+      if (message.node?.$case === "variable") {
+        obj.variable = message.node.variable;
+      }
+      return obj;
+    },
+  };
 
 function createBasePlanResourcesOutput(): PlanResourcesOutput {
   return {
@@ -825,7 +832,7 @@ function createBasePlanResourcesOutput(): PlanResourcesOutput {
   };
 }
 
-export const PlanResourcesOutput = {
+export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
   encode(
     message: PlanResourcesOutput,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1003,7 +1010,7 @@ function createBaseCheckInput(): CheckInput {
   };
 }
 
-export const CheckInput = {
+export const CheckInput: MessageFns<CheckInput> = {
   encode(
     message: CheckInput,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1130,7 +1137,7 @@ function createBaseCheckOutput(): CheckOutput {
   };
 }
 
-export const CheckOutput = {
+export const CheckOutput: MessageFns<CheckOutput> = {
   encode(
     message: CheckOutput,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1292,7 +1299,7 @@ function createBaseCheckOutput_ActionEffect(): CheckOutput_ActionEffect {
   return { effect: 0, policy: "", scope: "" };
 }
 
-export const CheckOutput_ActionEffect = {
+export const CheckOutput_ActionEffect: MessageFns<CheckOutput_ActionEffect> = {
   encode(
     message: CheckOutput_ActionEffect,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1377,7 +1384,7 @@ function createBaseCheckOutput_ActionsEntry(): CheckOutput_ActionsEntry {
   return { key: "", value: undefined };
 }
 
-export const CheckOutput_ActionsEntry = {
+export const CheckOutput_ActionsEntry: MessageFns<CheckOutput_ActionsEntry> = {
   encode(
     message: CheckOutput_ActionsEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1456,7 +1463,7 @@ function createBaseOutputEntry(): OutputEntry {
   return { src: "", val: undefined };
 }
 
-export const OutputEntry = {
+export const OutputEntry: MessageFns<OutputEntry> = {
   encode(
     message: OutputEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1524,7 +1531,7 @@ function createBaseResource(): Resource {
   return { kind: "", policyVersion: "", id: "", attr: {}, scope: "" };
 }
 
-export const Resource = {
+export const Resource: MessageFns<Resource> = {
   encode(
     message: Resource,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1657,7 +1664,7 @@ function createBaseResource_AttrEntry(): Resource_AttrEntry {
   return { key: "", value: undefined };
 }
 
-export const Resource_AttrEntry = {
+export const Resource_AttrEntry: MessageFns<Resource_AttrEntry> = {
   encode(
     message: Resource_AttrEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1728,7 +1735,7 @@ function createBasePrincipal(): Principal {
   return { id: "", policyVersion: "", roles: [], attr: {}, scope: "" };
 }
 
-export const Principal = {
+export const Principal: MessageFns<Principal> = {
   encode(
     message: Principal,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1863,7 +1870,7 @@ function createBasePrincipal_AttrEntry(): Principal_AttrEntry {
   return { key: "", value: undefined };
 }
 
-export const Principal_AttrEntry = {
+export const Principal_AttrEntry: MessageFns<Principal_AttrEntry> = {
   encode(
     message: Principal_AttrEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1934,7 +1941,7 @@ function createBaseAuxData(): AuxData {
   return { jwt: {} };
 }
 
-export const AuxData = {
+export const AuxData: MessageFns<AuxData> = {
   encode(
     message: AuxData,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2010,7 +2017,7 @@ function createBaseAuxData_JwtEntry(): AuxData_JwtEntry {
   return { key: "", value: undefined };
 }
 
-export const AuxData_JwtEntry = {
+export const AuxData_JwtEntry: MessageFns<AuxData_JwtEntry> = {
   encode(
     message: AuxData_JwtEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2080,4 +2087,11 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

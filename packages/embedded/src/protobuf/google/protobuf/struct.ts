@@ -60,7 +60,7 @@ function createBaseStruct(): Struct {
   return { fields: {} };
 }
 
-export const Struct = {
+export const Struct: MessageFns<Struct> & StructWrapperFns = {
   fromJSON(object: any): Struct {
     return {
       fields: isObject(object.fields)
@@ -110,7 +110,7 @@ export const Struct = {
   },
 };
 
-export const Struct_FieldsEntry = {
+export const Struct_FieldsEntry: MessageFns<Struct_FieldsEntry> = {
   fromJSON(object: any): Struct_FieldsEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -134,7 +134,7 @@ function createBaseValue(): Value {
   return { kind: undefined };
 }
 
-export const Value = {
+export const Value: MessageFns<Value> & AnyValueWrapperFns = {
   fromJSON(object: any): Value {
     return {
       kind: isSet(object.nullValue)
@@ -230,7 +230,7 @@ function createBaseListValue(): ListValue {
   return { values: [] };
 }
 
-export const ListValue = {
+export const ListValue: MessageFns<ListValue> & ListValueWrapperFns = {
   fromJSON(object: any): ListValue {
     return {
       values: globalThis.Array.isArray(object?.values)
@@ -271,4 +271,26 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+}
+
+export interface StructWrapperFns {
+  wrap(object: { [key: string]: any } | undefined): Struct;
+  unwrap(message: Struct): { [key: string]: any };
+}
+
+export interface AnyValueWrapperFns {
+  wrap(value: any): Value;
+  unwrap(
+    message: any,
+  ): string | number | boolean | Object | null | Array<any> | undefined;
+}
+
+export interface ListValueWrapperFns {
+  wrap(array: Array<any> | undefined): ListValue;
+  unwrap(message: ListValue): Array<any>;
 }

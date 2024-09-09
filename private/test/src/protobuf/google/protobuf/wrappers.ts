@@ -14,7 +14,7 @@ function createBaseUInt64Value(): UInt64Value {
   return { value: "0" };
 }
 
-export const UInt64Value = {
+export const UInt64Value: MessageFns<UInt64Value> = {
   encode(
     message: UInt64Value,
     writer: BinaryWriter = new BinaryWriter(),
@@ -66,4 +66,11 @@ export const UInt64Value = {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

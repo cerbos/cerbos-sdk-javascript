@@ -205,7 +205,7 @@ function createBasePlanResourcesRequest(): PlanResourcesRequest {
   };
 }
 
-export const PlanResourcesRequest = {
+export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
   encode(
     message: PlanResourcesRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -355,7 +355,7 @@ function createBaseCheckResourceSetRequest(): CheckResourceSetRequest {
   };
 }
 
-export const CheckResourceSetRequest = {
+export const CheckResourceSetRequest: MessageFns<CheckResourceSetRequest> = {
   encode(
     message: CheckResourceSetRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -494,7 +494,7 @@ function createBaseResourceSet(): ResourceSet {
   return { kind: "", policyVersion: "", instances: {}, scope: "" };
 }
 
-export const ResourceSet = {
+export const ResourceSet: MessageFns<ResourceSet> = {
   encode(
     message: ResourceSet,
     writer: BinaryWriter = new BinaryWriter(),
@@ -614,80 +614,81 @@ function createBaseResourceSet_InstancesEntry(): ResourceSet_InstancesEntry {
   return { key: "", value: undefined };
 }
 
-export const ResourceSet_InstancesEntry = {
-  encode(
-    message: ResourceSet_InstancesEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      AttributesMap.encode(message.value, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): ResourceSet_InstancesEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseResourceSet_InstancesEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = AttributesMap.decode(reader, reader.uint32());
-          continue;
+export const ResourceSet_InstancesEntry: MessageFns<ResourceSet_InstancesEntry> =
+  {
+    encode(
+      message: ResourceSet_InstancesEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        AttributesMap.encode(message.value, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): ResourceSet_InstancesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? AttributesMap.fromJSON(object.value)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): ResourceSet_InstancesEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseResourceSet_InstancesEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: ResourceSet_InstancesEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = AttributesMap.toJSON(message.value);
-    }
-    return obj;
-  },
-};
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = AttributesMap.decode(reader, reader.uint32());
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): ResourceSet_InstancesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? AttributesMap.fromJSON(object.value)
+          : undefined,
+      };
+    },
+
+    toJSON(message: ResourceSet_InstancesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = AttributesMap.toJSON(message.value);
+      }
+      return obj;
+    },
+  };
 
 function createBaseAttributesMap(): AttributesMap {
   return { attr: {} };
 }
 
-export const AttributesMap = {
+export const AttributesMap: MessageFns<AttributesMap> = {
   encode(
     message: AttributesMap,
     writer: BinaryWriter = new BinaryWriter(),
@@ -765,7 +766,7 @@ function createBaseAttributesMap_AttrEntry(): AttributesMap_AttrEntry {
   return { key: "", value: undefined };
 }
 
-export const AttributesMap_AttrEntry = {
+export const AttributesMap_AttrEntry: MessageFns<AttributesMap_AttrEntry> = {
   encode(
     message: AttributesMap_AttrEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -841,195 +842,197 @@ function createBaseCheckResourceBatchRequest(): CheckResourceBatchRequest {
   };
 }
 
-export const CheckResourceBatchRequest = {
-  encode(
-    message: CheckResourceBatchRequest,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.requestId !== "") {
-      writer.uint32(10).string(message.requestId);
-    }
-    if (message.principal !== undefined) {
-      Principal.encode(message.principal, writer.uint32(18).fork()).join();
-    }
-    for (const v of message.resources) {
-      CheckResourceBatchRequest_BatchEntry.encode(
-        v!,
-        writer.uint32(26).fork(),
-      ).join();
-    }
-    if (message.auxData !== undefined) {
-      AuxData.encode(message.auxData, writer.uint32(34).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceBatchRequest {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceBatchRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.requestId = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.principal = Principal.decode(reader, reader.uint32());
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.resources.push(
-            CheckResourceBatchRequest_BatchEntry.decode(
-              reader,
-              reader.uint32(),
-            ),
-          );
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.auxData = AuxData.decode(reader, reader.uint32());
-          continue;
+export const CheckResourceBatchRequest: MessageFns<CheckResourceBatchRequest> =
+  {
+    encode(
+      message: CheckResourceBatchRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.requestId !== "") {
+        writer.uint32(10).string(message.requestId);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.principal !== undefined) {
+        Principal.encode(message.principal, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      for (const v of message.resources) {
+        CheckResourceBatchRequest_BatchEntry.encode(
+          v!,
+          writer.uint32(26).fork(),
+        ).join();
+      }
+      if (message.auxData !== undefined) {
+        AuxData.encode(message.auxData, writer.uint32(34).fork()).join();
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourceBatchRequest {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      principal: isSet(object.principal)
-        ? Principal.fromJSON(object.principal)
-        : undefined,
-      resources: globalThis.Array.isArray(object?.resources)
-        ? object.resources.map((e: any) =>
-            CheckResourceBatchRequest_BatchEntry.fromJSON(e),
-          )
-        : [],
-      auxData: isSet(object.auxData)
-        ? AuxData.fromJSON(object.auxData)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceBatchRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourceBatchRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CheckResourceBatchRequest): unknown {
-    const obj: any = {};
-    if (message.requestId !== "") {
-      obj.requestId = message.requestId;
-    }
-    if (message.principal !== undefined) {
-      obj.principal = Principal.toJSON(message.principal);
-    }
-    if (message.resources?.length) {
-      obj.resources = message.resources.map((e) =>
-        CheckResourceBatchRequest_BatchEntry.toJSON(e),
-      );
-    }
-    if (message.auxData !== undefined) {
-      obj.auxData = AuxData.toJSON(message.auxData);
-    }
-    return obj;
-  },
-};
+            message.requestId = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.principal = Principal.decode(reader, reader.uint32());
+            continue;
+          case 3:
+            if (tag !== 26) {
+              break;
+            }
+
+            message.resources.push(
+              CheckResourceBatchRequest_BatchEntry.decode(
+                reader,
+                reader.uint32(),
+              ),
+            );
+            continue;
+          case 4:
+            if (tag !== 34) {
+              break;
+            }
+
+            message.auxData = AuxData.decode(reader, reader.uint32());
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourceBatchRequest {
+      return {
+        requestId: isSet(object.requestId)
+          ? globalThis.String(object.requestId)
+          : "",
+        principal: isSet(object.principal)
+          ? Principal.fromJSON(object.principal)
+          : undefined,
+        resources: globalThis.Array.isArray(object?.resources)
+          ? object.resources.map((e: any) =>
+              CheckResourceBatchRequest_BatchEntry.fromJSON(e),
+            )
+          : [],
+        auxData: isSet(object.auxData)
+          ? AuxData.fromJSON(object.auxData)
+          : undefined,
+      };
+    },
+
+    toJSON(message: CheckResourceBatchRequest): unknown {
+      const obj: any = {};
+      if (message.requestId !== "") {
+        obj.requestId = message.requestId;
+      }
+      if (message.principal !== undefined) {
+        obj.principal = Principal.toJSON(message.principal);
+      }
+      if (message.resources?.length) {
+        obj.resources = message.resources.map((e) =>
+          CheckResourceBatchRequest_BatchEntry.toJSON(e),
+        );
+      }
+      if (message.auxData !== undefined) {
+        obj.auxData = AuxData.toJSON(message.auxData);
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourceBatchRequest_BatchEntry(): CheckResourceBatchRequest_BatchEntry {
   return { actions: [], resource: undefined };
 }
 
-export const CheckResourceBatchRequest_BatchEntry = {
-  encode(
-    message: CheckResourceBatchRequest_BatchEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    for (const v of message.actions) {
-      writer.uint32(10).string(v!);
-    }
-    if (message.resource !== undefined) {
-      Resource.encode(message.resource, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourceBatchRequest_BatchEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceBatchRequest_BatchEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.actions.push(reader.string());
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.resource = Resource.decode(reader, reader.uint32());
-          continue;
+export const CheckResourceBatchRequest_BatchEntry: MessageFns<CheckResourceBatchRequest_BatchEntry> =
+  {
+    encode(
+      message: CheckResourceBatchRequest_BatchEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.actions) {
+        writer.uint32(10).string(v!);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.resource !== undefined) {
+        Resource.encode(message.resource, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourceBatchRequest_BatchEntry {
-    return {
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-      resource: isSet(object.resource)
-        ? Resource.fromJSON(object.resource)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourceBatchRequest_BatchEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourceBatchRequest_BatchEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CheckResourceBatchRequest_BatchEntry): unknown {
-    const obj: any = {};
-    if (message.actions?.length) {
-      obj.actions = message.actions;
-    }
-    if (message.resource !== undefined) {
-      obj.resource = Resource.toJSON(message.resource);
-    }
-    return obj;
-  },
-};
+            message.actions.push(reader.string());
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.resource = Resource.decode(reader, reader.uint32());
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourceBatchRequest_BatchEntry {
+      return {
+        actions: globalThis.Array.isArray(object?.actions)
+          ? object.actions.map((e: any) => globalThis.String(e))
+          : [],
+        resource: isSet(object.resource)
+          ? Resource.fromJSON(object.resource)
+          : undefined,
+      };
+    },
+
+    toJSON(message: CheckResourceBatchRequest_BatchEntry): unknown {
+      const obj: any = {};
+      if (message.actions?.length) {
+        obj.actions = message.actions;
+      }
+      if (message.resource !== undefined) {
+        obj.resource = Resource.toJSON(message.resource);
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckResourcesRequest(): CheckResourcesRequest {
   return {
@@ -1041,7 +1044,7 @@ function createBaseCheckResourcesRequest(): CheckResourcesRequest {
   };
 }
 
-export const CheckResourcesRequest = {
+export const CheckResourcesRequest: MessageFns<CheckResourcesRequest> = {
   encode(
     message: CheckResourcesRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1173,82 +1176,83 @@ function createBaseCheckResourcesRequest_ResourceEntry(): CheckResourcesRequest_
   return { actions: [], resource: undefined };
 }
 
-export const CheckResourcesRequest_ResourceEntry = {
-  encode(
-    message: CheckResourcesRequest_ResourceEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    for (const v of message.actions) {
-      writer.uint32(10).string(v!);
-    }
-    if (message.resource !== undefined) {
-      Resource.encode(message.resource, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): CheckResourcesRequest_ResourceEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourcesRequest_ResourceEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.actions.push(reader.string());
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.resource = Resource.decode(reader, reader.uint32());
-          continue;
+export const CheckResourcesRequest_ResourceEntry: MessageFns<CheckResourcesRequest_ResourceEntry> =
+  {
+    encode(
+      message: CheckResourcesRequest_ResourceEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.actions) {
+        writer.uint32(10).string(v!);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.resource !== undefined) {
+        Resource.encode(message.resource, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): CheckResourcesRequest_ResourceEntry {
-    return {
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-      resource: isSet(object.resource)
-        ? Resource.fromJSON(object.resource)
-        : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): CheckResourcesRequest_ResourceEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourcesRequest_ResourceEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: CheckResourcesRequest_ResourceEntry): unknown {
-    const obj: any = {};
-    if (message.actions?.length) {
-      obj.actions = message.actions;
-    }
-    if (message.resource !== undefined) {
-      obj.resource = Resource.toJSON(message.resource);
-    }
-    return obj;
-  },
-};
+            message.actions.push(reader.string());
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.resource = Resource.decode(reader, reader.uint32());
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): CheckResourcesRequest_ResourceEntry {
+      return {
+        actions: globalThis.Array.isArray(object?.actions)
+          ? object.actions.map((e: any) => globalThis.String(e))
+          : [],
+        resource: isSet(object.resource)
+          ? Resource.fromJSON(object.resource)
+          : undefined,
+      };
+    },
+
+    toJSON(message: CheckResourcesRequest_ResourceEntry): unknown {
+      const obj: any = {};
+      if (message.actions?.length) {
+        obj.actions = message.actions;
+      }
+      if (message.resource !== undefined) {
+        obj.resource = Resource.toJSON(message.resource);
+      }
+      return obj;
+    },
+  };
 
 function createBaseAuxData(): AuxData {
   return { jwt: undefined };
 }
 
-export const AuxData = {
+export const AuxData: MessageFns<AuxData> = {
   encode(
     message: AuxData,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1302,7 +1306,7 @@ function createBaseAuxData_JWT(): AuxData_JWT {
   return { token: "", keySetId: "" };
 }
 
-export const AuxData_JWT = {
+export const AuxData_JWT: MessageFns<AuxData_JWT> = {
   encode(
     message: AuxData_JWT,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1372,7 +1376,7 @@ function createBaseAddOrUpdatePolicyRequest(): AddOrUpdatePolicyRequest {
   return { policies: [] };
 }
 
-export const AddOrUpdatePolicyRequest = {
+export const AddOrUpdatePolicyRequest: MessageFns<AddOrUpdatePolicyRequest> = {
   encode(
     message: AddOrUpdatePolicyRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1431,229 +1435,236 @@ function createBaseListAuditLogEntriesRequest(): ListAuditLogEntriesRequest {
   return { kind: 0, filter: undefined };
 }
 
-export const ListAuditLogEntriesRequest = {
-  encode(
-    message: ListAuditLogEntriesRequest,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.kind !== 0) {
-      writer.uint32(8).int32(message.kind);
-    }
-    switch (message.filter?.$case) {
-      case "tail":
-        writer.uint32(16).uint32(message.filter.tail);
-        break;
-      case "between":
-        ListAuditLogEntriesRequest_TimeRange.encode(
-          message.filter.between,
-          writer.uint32(26).fork(),
-        ).join();
-        break;
-      case "since":
-        Duration.encode(message.filter.since, writer.uint32(34).fork()).join();
-        break;
-      case "lookup":
-        writer.uint32(42).string(message.filter.lookup);
-        break;
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): ListAuditLogEntriesRequest {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseListAuditLogEntriesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.kind = reader.int32() as any;
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.filter = { $case: "tail", tail: reader.uint32() };
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.filter = {
-            $case: "between",
-            between: ListAuditLogEntriesRequest_TimeRange.decode(
-              reader,
-              reader.uint32(),
-            ),
-          };
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.filter = {
-            $case: "since",
-            since: Duration.decode(reader, reader.uint32()),
-          };
-          continue;
-        case 5:
-          if (tag !== 42) {
-            break;
-          }
-
-          message.filter = { $case: "lookup", lookup: reader.string() };
-          continue;
+export const ListAuditLogEntriesRequest: MessageFns<ListAuditLogEntriesRequest> =
+  {
+    encode(
+      message: ListAuditLogEntriesRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.kind !== 0) {
+        writer.uint32(8).int32(message.kind);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      switch (message.filter?.$case) {
+        case "tail":
+          writer.uint32(16).uint32(message.filter.tail);
+          break;
+        case "between":
+          ListAuditLogEntriesRequest_TimeRange.encode(
+            message.filter.between,
+            writer.uint32(26).fork(),
+          ).join();
+          break;
+        case "since":
+          Duration.encode(
+            message.filter.since,
+            writer.uint32(34).fork(),
+          ).join();
+          break;
+        case "lookup":
+          writer.uint32(42).string(message.filter.lookup);
+          break;
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): ListAuditLogEntriesRequest {
-    return {
-      kind: isSet(object.kind)
-        ? listAuditLogEntriesRequest_KindFromJSON(object.kind)
-        : 0,
-      filter: isSet(object.tail)
-        ? { $case: "tail", tail: globalThis.Number(object.tail) }
-        : isSet(object.between)
-          ? {
-              $case: "between",
-              between: ListAuditLogEntriesRequest_TimeRange.fromJSON(
-                object.between,
-              ),
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): ListAuditLogEntriesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseListAuditLogEntriesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 8) {
+              break;
             }
-          : isSet(object.since)
-            ? { $case: "since", since: Duration.fromJSON(object.since) }
-            : isSet(object.lookup)
-              ? { $case: "lookup", lookup: globalThis.String(object.lookup) }
-              : undefined,
-    };
-  },
 
-  toJSON(message: ListAuditLogEntriesRequest): unknown {
-    const obj: any = {};
-    if (message.kind !== 0) {
-      obj.kind = listAuditLogEntriesRequest_KindToJSON(message.kind);
-    }
-    if (message.filter?.$case === "tail") {
-      obj.tail = Math.round(message.filter.tail);
-    }
-    if (message.filter?.$case === "between") {
-      obj.between = ListAuditLogEntriesRequest_TimeRange.toJSON(
-        message.filter.between,
-      );
-    }
-    if (message.filter?.$case === "since") {
-      obj.since = Duration.toJSON(message.filter.since);
-    }
-    if (message.filter?.$case === "lookup") {
-      obj.lookup = message.filter.lookup;
-    }
-    return obj;
-  },
-};
+            message.kind = reader.int32() as any;
+            continue;
+          case 2:
+            if (tag !== 16) {
+              break;
+            }
+
+            message.filter = { $case: "tail", tail: reader.uint32() };
+            continue;
+          case 3:
+            if (tag !== 26) {
+              break;
+            }
+
+            message.filter = {
+              $case: "between",
+              between: ListAuditLogEntriesRequest_TimeRange.decode(
+                reader,
+                reader.uint32(),
+              ),
+            };
+            continue;
+          case 4:
+            if (tag !== 34) {
+              break;
+            }
+
+            message.filter = {
+              $case: "since",
+              since: Duration.decode(reader, reader.uint32()),
+            };
+            continue;
+          case 5:
+            if (tag !== 42) {
+              break;
+            }
+
+            message.filter = { $case: "lookup", lookup: reader.string() };
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): ListAuditLogEntriesRequest {
+      return {
+        kind: isSet(object.kind)
+          ? listAuditLogEntriesRequest_KindFromJSON(object.kind)
+          : 0,
+        filter: isSet(object.tail)
+          ? { $case: "tail", tail: globalThis.Number(object.tail) }
+          : isSet(object.between)
+            ? {
+                $case: "between",
+                between: ListAuditLogEntriesRequest_TimeRange.fromJSON(
+                  object.between,
+                ),
+              }
+            : isSet(object.since)
+              ? { $case: "since", since: Duration.fromJSON(object.since) }
+              : isSet(object.lookup)
+                ? { $case: "lookup", lookup: globalThis.String(object.lookup) }
+                : undefined,
+      };
+    },
+
+    toJSON(message: ListAuditLogEntriesRequest): unknown {
+      const obj: any = {};
+      if (message.kind !== 0) {
+        obj.kind = listAuditLogEntriesRequest_KindToJSON(message.kind);
+      }
+      if (message.filter?.$case === "tail") {
+        obj.tail = Math.round(message.filter.tail);
+      }
+      if (message.filter?.$case === "between") {
+        obj.between = ListAuditLogEntriesRequest_TimeRange.toJSON(
+          message.filter.between,
+        );
+      }
+      if (message.filter?.$case === "since") {
+        obj.since = Duration.toJSON(message.filter.since);
+      }
+      if (message.filter?.$case === "lookup") {
+        obj.lookup = message.filter.lookup;
+      }
+      return obj;
+    },
+  };
 
 function createBaseListAuditLogEntriesRequest_TimeRange(): ListAuditLogEntriesRequest_TimeRange {
   return { start: undefined, end: undefined };
 }
 
-export const ListAuditLogEntriesRequest_TimeRange = {
-  encode(
-    message: ListAuditLogEntriesRequest_TimeRange,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.start !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.start),
-        writer.uint32(10).fork(),
-      ).join();
-    }
-    if (message.end !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.end),
-        writer.uint32(18).fork(),
-      ).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): ListAuditLogEntriesRequest_TimeRange {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseListAuditLogEntriesRequest_TimeRange();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.start = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.end = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
-          continue;
+export const ListAuditLogEntriesRequest_TimeRange: MessageFns<ListAuditLogEntriesRequest_TimeRange> =
+  {
+    encode(
+      message: ListAuditLogEntriesRequest_TimeRange,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.start !== undefined) {
+        Timestamp.encode(
+          toTimestamp(message.start),
+          writer.uint32(10).fork(),
+        ).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.end !== undefined) {
+        Timestamp.encode(
+          toTimestamp(message.end),
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): ListAuditLogEntriesRequest_TimeRange {
-    return {
-      start: isSet(object.start) ? fromJsonTimestamp(object.start) : undefined,
-      end: isSet(object.end) ? fromJsonTimestamp(object.end) : undefined,
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): ListAuditLogEntriesRequest_TimeRange {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseListAuditLogEntriesRequest_TimeRange();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: ListAuditLogEntriesRequest_TimeRange): unknown {
-    const obj: any = {};
-    if (message.start !== undefined) {
-      obj.start = message.start.toISOString();
-    }
-    if (message.end !== undefined) {
-      obj.end = message.end.toISOString();
-    }
-    return obj;
-  },
-};
+            message.start = fromTimestamp(
+              Timestamp.decode(reader, reader.uint32()),
+            );
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.end = fromTimestamp(
+              Timestamp.decode(reader, reader.uint32()),
+            );
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): ListAuditLogEntriesRequest_TimeRange {
+      return {
+        start: isSet(object.start)
+          ? fromJsonTimestamp(object.start)
+          : undefined,
+        end: isSet(object.end) ? fromJsonTimestamp(object.end) : undefined,
+      };
+    },
+
+    toJSON(message: ListAuditLogEntriesRequest_TimeRange): unknown {
+      const obj: any = {};
+      if (message.start !== undefined) {
+        obj.start = message.start.toISOString();
+      }
+      if (message.end !== undefined) {
+        obj.end = message.end.toISOString();
+      }
+      return obj;
+    },
+  };
 
 function createBaseServerInfoRequest(): ServerInfoRequest {
   return {};
 }
 
-export const ServerInfoRequest = {
+export const ServerInfoRequest: MessageFns<ServerInfoRequest> = {
   encode(
     _: ServerInfoRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1697,7 +1708,7 @@ function createBaseListPoliciesRequest(): ListPoliciesRequest {
   };
 }
 
-export const ListPoliciesRequest = {
+export const ListPoliciesRequest: MessageFns<ListPoliciesRequest> = {
   encode(
     message: ListPoliciesRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1804,7 +1815,7 @@ function createBaseGetPolicyRequest(): GetPolicyRequest {
   return { id: [] };
 }
 
-export const GetPolicyRequest = {
+export const GetPolicyRequest: MessageFns<GetPolicyRequest> = {
   encode(
     message: GetPolicyRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1860,7 +1871,7 @@ function createBaseDisablePolicyRequest(): DisablePolicyRequest {
   return { id: [] };
 }
 
-export const DisablePolicyRequest = {
+export const DisablePolicyRequest: MessageFns<DisablePolicyRequest> = {
   encode(
     message: DisablePolicyRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1919,7 +1930,7 @@ function createBaseEnablePolicyRequest(): EnablePolicyRequest {
   return { id: [] };
 }
 
-export const EnablePolicyRequest = {
+export const EnablePolicyRequest: MessageFns<EnablePolicyRequest> = {
   encode(
     message: EnablePolicyRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1978,7 +1989,7 @@ function createBaseAddOrUpdateSchemaRequest(): AddOrUpdateSchemaRequest {
   return { schemas: [] };
 }
 
-export const AddOrUpdateSchemaRequest = {
+export const AddOrUpdateSchemaRequest: MessageFns<AddOrUpdateSchemaRequest> = {
   encode(
     message: AddOrUpdateSchemaRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2037,7 +2048,7 @@ function createBaseListSchemasRequest(): ListSchemasRequest {
   return {};
 }
 
-export const ListSchemasRequest = {
+export const ListSchemasRequest: MessageFns<ListSchemasRequest> = {
   encode(
     _: ListSchemasRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2079,7 +2090,7 @@ function createBaseGetSchemaRequest(): GetSchemaRequest {
   return { id: [] };
 }
 
-export const GetSchemaRequest = {
+export const GetSchemaRequest: MessageFns<GetSchemaRequest> = {
   encode(
     message: GetSchemaRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2135,7 +2146,7 @@ function createBaseDeleteSchemaRequest(): DeleteSchemaRequest {
   return { id: [] };
 }
 
-export const DeleteSchemaRequest = {
+export const DeleteSchemaRequest: MessageFns<DeleteSchemaRequest> = {
   encode(
     message: DeleteSchemaRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2194,7 +2205,7 @@ function createBaseReloadStoreRequest(): ReloadStoreRequest {
   return { wait: false };
 }
 
-export const ReloadStoreRequest = {
+export const ReloadStoreRequest: MessageFns<ReloadStoreRequest> = {
   encode(
     message: ReloadStoreRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2275,4 +2286,11 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

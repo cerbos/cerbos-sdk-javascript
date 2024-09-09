@@ -421,7 +421,7 @@ export function featureSet_JsonFormatFromJSON(
   }
 }
 
-export const FieldOptions = {
+export const FieldOptions: MessageFns<FieldOptions> = {
   fromJSON(object: any): FieldOptions {
     return {
       ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
@@ -468,35 +468,37 @@ export const FieldOptions = {
   },
 };
 
-export const FieldOptions_EditionDefault = {
-  fromJSON(object: any): FieldOptions_EditionDefault {
-    return {
-      edition: isSet(object.edition) ? editionFromJSON(object.edition) : 0,
-      value: isSet(object.value) ? globalThis.String(object.value) : "",
-    };
-  },
-};
+export const FieldOptions_EditionDefault: MessageFns<FieldOptions_EditionDefault> =
+  {
+    fromJSON(object: any): FieldOptions_EditionDefault {
+      return {
+        edition: isSet(object.edition) ? editionFromJSON(object.edition) : 0,
+        value: isSet(object.value) ? globalThis.String(object.value) : "",
+      };
+    },
+  };
 
-export const FieldOptions_FeatureSupport = {
-  fromJSON(object: any): FieldOptions_FeatureSupport {
-    return {
-      editionIntroduced: isSet(object.editionIntroduced)
-        ? editionFromJSON(object.editionIntroduced)
-        : 0,
-      editionDeprecated: isSet(object.editionDeprecated)
-        ? editionFromJSON(object.editionDeprecated)
-        : 0,
-      deprecationWarning: isSet(object.deprecationWarning)
-        ? globalThis.String(object.deprecationWarning)
-        : "",
-      editionRemoved: isSet(object.editionRemoved)
-        ? editionFromJSON(object.editionRemoved)
-        : 0,
-    };
-  },
-};
+export const FieldOptions_FeatureSupport: MessageFns<FieldOptions_FeatureSupport> =
+  {
+    fromJSON(object: any): FieldOptions_FeatureSupport {
+      return {
+        editionIntroduced: isSet(object.editionIntroduced)
+          ? editionFromJSON(object.editionIntroduced)
+          : 0,
+        editionDeprecated: isSet(object.editionDeprecated)
+          ? editionFromJSON(object.editionDeprecated)
+          : 0,
+        deprecationWarning: isSet(object.deprecationWarning)
+          ? globalThis.String(object.deprecationWarning)
+          : "",
+        editionRemoved: isSet(object.editionRemoved)
+          ? editionFromJSON(object.editionRemoved)
+          : 0,
+      };
+    },
+  };
 
-export const OneofOptions = {
+export const OneofOptions: MessageFns<OneofOptions> = {
   fromJSON(object: any): OneofOptions {
     return {
       features: isSet(object.features)
@@ -511,7 +513,7 @@ export const OneofOptions = {
   },
 };
 
-export const UninterpretedOption = {
+export const UninterpretedOption: MessageFns<UninterpretedOption> = {
   fromJSON(object: any): UninterpretedOption {
     return {
       name: globalThis.Array.isArray(object?.name)
@@ -539,20 +541,21 @@ export const UninterpretedOption = {
   },
 };
 
-export const UninterpretedOption_NamePart = {
-  fromJSON(object: any): UninterpretedOption_NamePart {
-    return {
-      namePart: isSet(object.namePart)
-        ? globalThis.String(object.namePart)
-        : "",
-      isExtension: isSet(object.isExtension)
-        ? globalThis.Boolean(object.isExtension)
-        : false,
-    };
-  },
-};
+export const UninterpretedOption_NamePart: MessageFns<UninterpretedOption_NamePart> =
+  {
+    fromJSON(object: any): UninterpretedOption_NamePart {
+      return {
+        namePart: isSet(object.namePart)
+          ? globalThis.String(object.namePart)
+          : "",
+        isExtension: isSet(object.isExtension)
+          ? globalThis.Boolean(object.isExtension)
+          : false,
+      };
+    },
+  };
 
-export const FeatureSet = {
+export const FeatureSet: MessageFns<FeatureSet> = {
   fromJSON(object: any): FeatureSet {
     return {
       fieldPresence: isSet(object.fieldPresence)
@@ -592,4 +595,8 @@ function bytesFromBase64(b64: string): Uint8Array {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
 }

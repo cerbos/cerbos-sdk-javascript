@@ -14,7 +14,7 @@ function createBaseUInt64Value(): UInt64Value {
   return { value: "0" };
 }
 
-export const UInt64Value = {
+export const UInt64Value: MessageFns<UInt64Value> = {
   encode(
     message: UInt64Value,
     writer: BinaryWriter = new BinaryWriter(),
@@ -49,3 +49,8 @@ export const UInt64Value = {
     return message;
   },
 };
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+}
