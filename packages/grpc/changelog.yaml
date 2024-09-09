@@ -1,3 +1,11 @@
+unreleased:
+  type: patch
+
+  bumped:
+    "@grpc/grpc-js":
+      to: 1.11.2
+      pull: 1000
+
 releases:
   - version: 0.18.2
     date: 2024-08-19
