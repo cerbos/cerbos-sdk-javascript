@@ -9,7 +9,7 @@ export interface UInt64Value {
   value: string;
 }
 
-export const UInt64Value = {
+export const UInt64Value: MessageFns<UInt64Value> = {
   fromJSON(object: any): UInt64Value {
     return {
       value: isSet(object.value) ? globalThis.String(object.value) : "0",
@@ -27,4 +27,9 @@ export const UInt64Value = {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

@@ -166,7 +166,7 @@ export interface Schemas_Schema {
   ignoreWhen: Schemas_IgnoreWhen | undefined;
 }
 
-export const Policy = {
+export const Policy: MessageFns<Policy> = {
   fromJSON(object: any): Policy {
     return {
       apiVersion: isSet(object.apiVersion)
@@ -267,7 +267,7 @@ export const Policy = {
   },
 };
 
-export const Policy_VariablesEntry = {
+export const Policy_VariablesEntry: MessageFns<Policy_VariablesEntry> = {
   fromJSON(object: any): Policy_VariablesEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -287,7 +287,7 @@ export const Policy_VariablesEntry = {
   },
 };
 
-export const SourceAttributes = {
+export const SourceAttributes: MessageFns<SourceAttributes> = {
   fromJSON(object: any): SourceAttributes {
     return {
       attributes: isObject(object.attributes)
@@ -316,27 +316,28 @@ export const SourceAttributes = {
   },
 };
 
-export const SourceAttributes_AttributesEntry = {
-  fromJSON(object: any): SourceAttributes_AttributesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
-  },
+export const SourceAttributes_AttributesEntry: MessageFns<SourceAttributes_AttributesEntry> =
+  {
+    fromJSON(object: any): SourceAttributes_AttributesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object?.value) ? object.value : undefined,
+      };
+    },
 
-  toJSON(message: SourceAttributes_AttributesEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = message.value;
-    }
-    return obj;
-  },
-};
+    toJSON(message: SourceAttributes_AttributesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
-export const Metadata = {
+export const Metadata: MessageFns<Metadata> = {
   fromJSON(object: any): Metadata {
     return {
       sourceFile: isSet(object.sourceFile)
@@ -394,27 +395,28 @@ export const Metadata = {
   },
 };
 
-export const Metadata_AnnotationsEntry = {
-  fromJSON(object: any): Metadata_AnnotationsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? globalThis.String(object.value) : "",
-    };
-  },
+export const Metadata_AnnotationsEntry: MessageFns<Metadata_AnnotationsEntry> =
+  {
+    fromJSON(object: any): Metadata_AnnotationsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? globalThis.String(object.value) : "",
+      };
+    },
 
-  toJSON(message: Metadata_AnnotationsEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== "") {
-      obj.value = message.value;
-    }
-    return obj;
-  },
-};
+    toJSON(message: Metadata_AnnotationsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== "") {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
-export const ResourcePolicy = {
+export const ResourcePolicy: MessageFns<ResourcePolicy> = {
   fromJSON(object: any): ResourcePolicy {
     return {
       resource: isSet(object.resource)
@@ -464,7 +466,7 @@ export const ResourcePolicy = {
   },
 };
 
-export const ResourceRule = {
+export const ResourceRule: MessageFns<ResourceRule> = {
   fromJSON(object: any): ResourceRule {
     return {
       actions: globalThis.Array.isArray(object?.actions)
@@ -512,7 +514,7 @@ export const ResourceRule = {
   },
 };
 
-export const PrincipalPolicy = {
+export const PrincipalPolicy: MessageFns<PrincipalPolicy> = {
   fromJSON(object: any): PrincipalPolicy {
     return {
       principal: isSet(object.principal)
@@ -550,7 +552,7 @@ export const PrincipalPolicy = {
   },
 };
 
-export const PrincipalRule = {
+export const PrincipalRule: MessageFns<PrincipalRule> = {
   fromJSON(object: any): PrincipalRule {
     return {
       resource: isSet(object.resource)
@@ -574,7 +576,7 @@ export const PrincipalRule = {
   },
 };
 
-export const PrincipalRule_Action = {
+export const PrincipalRule_Action: MessageFns<PrincipalRule_Action> = {
   fromJSON(object: any): PrincipalRule_Action {
     return {
       action: isSet(object.action) ? globalThis.String(object.action) : "",
@@ -608,7 +610,7 @@ export const PrincipalRule_Action = {
   },
 };
 
-export const DerivedRoles = {
+export const DerivedRoles: MessageFns<DerivedRoles> = {
   fromJSON(object: any): DerivedRoles {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
@@ -636,7 +638,7 @@ export const DerivedRoles = {
   },
 };
 
-export const RoleDef = {
+export const RoleDef: MessageFns<RoleDef> = {
   fromJSON(object: any): RoleDef {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
@@ -664,7 +666,7 @@ export const RoleDef = {
   },
 };
 
-export const ExportVariables = {
+export const ExportVariables: MessageFns<ExportVariables> = {
   fromJSON(object: any): ExportVariables {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
@@ -698,27 +700,28 @@ export const ExportVariables = {
   },
 };
 
-export const ExportVariables_DefinitionsEntry = {
-  fromJSON(object: any): ExportVariables_DefinitionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? globalThis.String(object.value) : "",
-    };
-  },
+export const ExportVariables_DefinitionsEntry: MessageFns<ExportVariables_DefinitionsEntry> =
+  {
+    fromJSON(object: any): ExportVariables_DefinitionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? globalThis.String(object.value) : "",
+      };
+    },
 
-  toJSON(message: ExportVariables_DefinitionsEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== "") {
-      obj.value = message.value;
-    }
-    return obj;
-  },
-};
+    toJSON(message: ExportVariables_DefinitionsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== "") {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
-export const Variables = {
+export const Variables: MessageFns<Variables> = {
   fromJSON(object: any): Variables {
     return {
       import: globalThis.Array.isArray(object?.import)
@@ -754,7 +757,7 @@ export const Variables = {
   },
 };
 
-export const Variables_LocalEntry = {
+export const Variables_LocalEntry: MessageFns<Variables_LocalEntry> = {
   fromJSON(object: any): Variables_LocalEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -774,7 +777,7 @@ export const Variables_LocalEntry = {
   },
 };
 
-export const Condition = {
+export const Condition: MessageFns<Condition> = {
   fromJSON(object: any): Condition {
     return {
       condition: isSet(object.match)
@@ -797,7 +800,7 @@ export const Condition = {
   },
 };
 
-export const Match = {
+export const Match: MessageFns<Match> = {
   fromJSON(object: any): Match {
     return {
       op: isSet(object.all)
@@ -830,7 +833,7 @@ export const Match = {
   },
 };
 
-export const Match_ExprList = {
+export const Match_ExprList: MessageFns<Match_ExprList> = {
   fromJSON(object: any): Match_ExprList {
     return {
       of: globalThis.Array.isArray(object?.of)
@@ -848,7 +851,7 @@ export const Match_ExprList = {
   },
 };
 
-export const Output = {
+export const Output: MessageFns<Output> = {
   fromJSON(object: any): Output {
     return {
       expr: isSet(object.expr) ? globalThis.String(object.expr) : "",
@@ -868,7 +871,7 @@ export const Output = {
   },
 };
 
-export const Output_When = {
+export const Output_When: MessageFns<Output_When> = {
   fromJSON(object: any): Output_When {
     return {
       ruleActivated: isSet(object.ruleActivated)
@@ -892,7 +895,7 @@ export const Output_When = {
   },
 };
 
-export const Schemas = {
+export const Schemas: MessageFns<Schemas> = {
   fromJSON(object: any): Schemas {
     return {
       principalSchema: isSet(object.principalSchema)
@@ -916,7 +919,7 @@ export const Schemas = {
   },
 };
 
-export const Schemas_IgnoreWhen = {
+export const Schemas_IgnoreWhen: MessageFns<Schemas_IgnoreWhen> = {
   fromJSON(object: any): Schemas_IgnoreWhen {
     return {
       actions: globalThis.Array.isArray(object?.actions)
@@ -934,7 +937,7 @@ export const Schemas_IgnoreWhen = {
   },
 };
 
-export const Schemas_Schema = {
+export const Schemas_Schema: MessageFns<Schemas_Schema> = {
   fromJSON(object: any): Schemas_Schema {
     return {
       ref: isSet(object.ref) ? globalThis.String(object.ref) : "",
@@ -962,4 +965,9 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

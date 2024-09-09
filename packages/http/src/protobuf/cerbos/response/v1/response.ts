@@ -187,7 +187,7 @@ export interface DeleteSchemaResponse {
 
 export interface ReloadStoreResponse {}
 
-export const PlanResourcesResponse = {
+export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
   fromJSON(object: any): PlanResourcesResponse {
     return {
       requestId: isSet(object.requestId)
@@ -247,31 +247,32 @@ export const PlanResourcesResponse = {
   },
 };
 
-export const PlanResourcesResponse_Meta = {
-  fromJSON(object: any): PlanResourcesResponse_Meta {
-    return {
-      filterDebug: isSet(object.filterDebug)
-        ? globalThis.String(object.filterDebug)
-        : "",
-      matchedScope: isSet(object.matchedScope)
-        ? globalThis.String(object.matchedScope)
-        : "",
-    };
-  },
+export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> =
+  {
+    fromJSON(object: any): PlanResourcesResponse_Meta {
+      return {
+        filterDebug: isSet(object.filterDebug)
+          ? globalThis.String(object.filterDebug)
+          : "",
+        matchedScope: isSet(object.matchedScope)
+          ? globalThis.String(object.matchedScope)
+          : "",
+      };
+    },
 
-  toJSON(message: PlanResourcesResponse_Meta): unknown {
-    const obj: any = {};
-    if (message.filterDebug !== "") {
-      obj.filterDebug = message.filterDebug;
-    }
-    if (message.matchedScope !== "") {
-      obj.matchedScope = message.matchedScope;
-    }
-    return obj;
-  },
-};
+    toJSON(message: PlanResourcesResponse_Meta): unknown {
+      const obj: any = {};
+      if (message.filterDebug !== "") {
+        obj.filterDebug = message.filterDebug;
+      }
+      if (message.matchedScope !== "") {
+        obj.matchedScope = message.matchedScope;
+      }
+      return obj;
+    },
+  };
 
-export const CheckResourceSetResponse = {
+export const CheckResourceSetResponse: MessageFns<CheckResourceSetResponse> = {
   fromJSON(object: any): CheckResourceSetResponse {
     return {
       requestId: isSet(object.requestId)
@@ -313,330 +314,349 @@ export const CheckResourceSetResponse = {
   },
 };
 
-export const CheckResourceSetResponse_ActionEffectMap = {
-  fromJSON(object: any): CheckResourceSetResponse_ActionEffectMap {
-    return {
-      actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-            (acc, [key, value]) => {
-              acc[key] = effectFromJSON(value);
+export const CheckResourceSetResponse_ActionEffectMap: MessageFns<CheckResourceSetResponse_ActionEffectMap> =
+  {
+    fromJSON(object: any): CheckResourceSetResponse_ActionEffectMap {
+      return {
+        actions: isObject(object.actions)
+          ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
+              (acc, [key, value]) => {
+                acc[key] = effectFromJSON(value);
+                return acc;
+              },
+              {},
+            )
+          : {},
+        validationErrors: globalThis.Array.isArray(object?.validationErrors)
+          ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: CheckResourceSetResponse_ActionEffectMap): unknown {
+      const obj: any = {};
+      if (message.actions) {
+        const entries = Object.entries(message.actions);
+        if (entries.length > 0) {
+          obj.actions = {};
+          entries.forEach(([k, v]) => {
+            obj.actions[k] = effectToJSON(v);
+          });
+        }
+      }
+      if (message.validationErrors?.length) {
+        obj.validationErrors = message.validationErrors.map((e) =>
+          ValidationError.toJSON(e),
+        );
+      }
+      return obj;
+    },
+  };
+
+export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry: MessageFns<CheckResourceSetResponse_ActionEffectMap_ActionsEntry> =
+  {
+    fromJSON(
+      object: any,
+    ): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? effectFromJSON(object.value) : 0,
+      };
+    },
+
+    toJSON(
+      message: CheckResourceSetResponse_ActionEffectMap_ActionsEntry,
+    ): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== 0) {
+        obj.value = effectToJSON(message.value);
+      }
+      return obj;
+    },
+  };
+
+export const CheckResourceSetResponse_Meta: MessageFns<CheckResourceSetResponse_Meta> =
+  {
+    fromJSON(object: any): CheckResourceSetResponse_Meta {
+      return {
+        resourceInstances: isObject(object.resourceInstances)
+          ? Object.entries(object.resourceInstances).reduce<{
+              [key: string]: CheckResourceSetResponse_Meta_ActionMeta;
+            }>((acc, [key, value]) => {
+              acc[key] =
+                CheckResourceSetResponse_Meta_ActionMeta.fromJSON(value);
               return acc;
-            },
-            {},
-          )
-        : {},
-      validationErrors: globalThis.Array.isArray(object?.validationErrors)
-        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-        : [],
-    };
-  },
+            }, {})
+          : {},
+      };
+    },
 
-  toJSON(message: CheckResourceSetResponse_ActionEffectMap): unknown {
-    const obj: any = {};
-    if (message.actions) {
-      const entries = Object.entries(message.actions);
-      if (entries.length > 0) {
-        obj.actions = {};
-        entries.forEach(([k, v]) => {
-          obj.actions[k] = effectToJSON(v);
-        });
+    toJSON(message: CheckResourceSetResponse_Meta): unknown {
+      const obj: any = {};
+      if (message.resourceInstances) {
+        const entries = Object.entries(message.resourceInstances);
+        if (entries.length > 0) {
+          obj.resourceInstances = {};
+          entries.forEach(([k, v]) => {
+            obj.resourceInstances[k] =
+              CheckResourceSetResponse_Meta_ActionMeta.toJSON(v);
+          });
+        }
       }
-    }
-    if (message.validationErrors?.length) {
-      obj.validationErrors = message.validationErrors.map((e) =>
-        ValidationError.toJSON(e),
-      );
-    }
-    return obj;
-  },
-};
+      return obj;
+    },
+  };
 
-export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry = {
-  fromJSON(object: any): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? effectFromJSON(object.value) : 0,
-    };
-  },
+export const CheckResourceSetResponse_Meta_EffectMeta: MessageFns<CheckResourceSetResponse_Meta_EffectMeta> =
+  {
+    fromJSON(object: any): CheckResourceSetResponse_Meta_EffectMeta {
+      return {
+        matchedPolicy: isSet(object.matchedPolicy)
+          ? globalThis.String(object.matchedPolicy)
+          : "",
+        matchedScope: isSet(object.matchedScope)
+          ? globalThis.String(object.matchedScope)
+          : "",
+      };
+    },
 
-  toJSON(
-    message: CheckResourceSetResponse_ActionEffectMap_ActionsEntry,
-  ): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== 0) {
-      obj.value = effectToJSON(message.value);
-    }
-    return obj;
-  },
-};
-
-export const CheckResourceSetResponse_Meta = {
-  fromJSON(object: any): CheckResourceSetResponse_Meta {
-    return {
-      resourceInstances: isObject(object.resourceInstances)
-        ? Object.entries(object.resourceInstances).reduce<{
-            [key: string]: CheckResourceSetResponse_Meta_ActionMeta;
-          }>((acc, [key, value]) => {
-            acc[key] = CheckResourceSetResponse_Meta_ActionMeta.fromJSON(value);
-            return acc;
-          }, {})
-        : {},
-    };
-  },
-
-  toJSON(message: CheckResourceSetResponse_Meta): unknown {
-    const obj: any = {};
-    if (message.resourceInstances) {
-      const entries = Object.entries(message.resourceInstances);
-      if (entries.length > 0) {
-        obj.resourceInstances = {};
-        entries.forEach(([k, v]) => {
-          obj.resourceInstances[k] =
-            CheckResourceSetResponse_Meta_ActionMeta.toJSON(v);
-        });
+    toJSON(message: CheckResourceSetResponse_Meta_EffectMeta): unknown {
+      const obj: any = {};
+      if (message.matchedPolicy !== "") {
+        obj.matchedPolicy = message.matchedPolicy;
       }
-    }
-    return obj;
-  },
-};
-
-export const CheckResourceSetResponse_Meta_EffectMeta = {
-  fromJSON(object: any): CheckResourceSetResponse_Meta_EffectMeta {
-    return {
-      matchedPolicy: isSet(object.matchedPolicy)
-        ? globalThis.String(object.matchedPolicy)
-        : "",
-      matchedScope: isSet(object.matchedScope)
-        ? globalThis.String(object.matchedScope)
-        : "",
-    };
-  },
-
-  toJSON(message: CheckResourceSetResponse_Meta_EffectMeta): unknown {
-    const obj: any = {};
-    if (message.matchedPolicy !== "") {
-      obj.matchedPolicy = message.matchedPolicy;
-    }
-    if (message.matchedScope !== "") {
-      obj.matchedScope = message.matchedScope;
-    }
-    return obj;
-  },
-};
-
-export const CheckResourceSetResponse_Meta_ActionMeta = {
-  fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta {
-    return {
-      actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{
-            [key: string]: CheckResourceSetResponse_Meta_EffectMeta;
-          }>((acc, [key, value]) => {
-            acc[key] = CheckResourceSetResponse_Meta_EffectMeta.fromJSON(value);
-            return acc;
-          }, {})
-        : {},
-      effectiveDerivedRoles: globalThis.Array.isArray(
-        object?.effectiveDerivedRoles,
-      )
-        ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
-  toJSON(message: CheckResourceSetResponse_Meta_ActionMeta): unknown {
-    const obj: any = {};
-    if (message.actions) {
-      const entries = Object.entries(message.actions);
-      if (entries.length > 0) {
-        obj.actions = {};
-        entries.forEach(([k, v]) => {
-          obj.actions[k] = CheckResourceSetResponse_Meta_EffectMeta.toJSON(v);
-        });
+      if (message.matchedScope !== "") {
+        obj.matchedScope = message.matchedScope;
       }
-    }
-    if (message.effectiveDerivedRoles?.length) {
-      obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
-    }
-    return obj;
-  },
-};
+      return obj;
+    },
+  };
 
-export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry = {
-  fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckResourceSetResponse_Meta_EffectMeta.fromJSON(object.value)
-        : undefined,
-    };
-  },
-
-  toJSON(
-    message: CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry,
-  ): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = CheckResourceSetResponse_Meta_EffectMeta.toJSON(
-        message.value,
-      );
-    }
-    return obj;
-  },
-};
-
-export const CheckResourceSetResponse_Meta_ResourceInstancesEntry = {
-  fromJSON(object: any): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckResourceSetResponse_Meta_ActionMeta.fromJSON(object.value)
-        : undefined,
-    };
-  },
-
-  toJSON(
-    message: CheckResourceSetResponse_Meta_ResourceInstancesEntry,
-  ): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = CheckResourceSetResponse_Meta_ActionMeta.toJSON(
-        message.value,
-      );
-    }
-    return obj;
-  },
-};
-
-export const CheckResourceSetResponse_ResourceInstancesEntry = {
-  fromJSON(object: any): CheckResourceSetResponse_ResourceInstancesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckResourceSetResponse_ActionEffectMap.fromJSON(object.value)
-        : undefined,
-    };
-  },
-
-  toJSON(message: CheckResourceSetResponse_ResourceInstancesEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = CheckResourceSetResponse_ActionEffectMap.toJSON(
-        message.value,
-      );
-    }
-    return obj;
-  },
-};
-
-export const CheckResourceBatchResponse = {
-  fromJSON(object: any): CheckResourceBatchResponse {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      results: globalThis.Array.isArray(object?.results)
-        ? object.results.map((e: any) =>
-            CheckResourceBatchResponse_ActionEffectMap.fromJSON(e),
-          )
-        : [],
-    };
-  },
-
-  toJSON(message: CheckResourceBatchResponse): unknown {
-    const obj: any = {};
-    if (message.requestId !== "") {
-      obj.requestId = message.requestId;
-    }
-    if (message.results?.length) {
-      obj.results = message.results.map((e) =>
-        CheckResourceBatchResponse_ActionEffectMap.toJSON(e),
-      );
-    }
-    return obj;
-  },
-};
-
-export const CheckResourceBatchResponse_ActionEffectMap = {
-  fromJSON(object: any): CheckResourceBatchResponse_ActionEffectMap {
-    return {
-      resourceId: isSet(object.resourceId)
-        ? globalThis.String(object.resourceId)
-        : "",
-      actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-            (acc, [key, value]) => {
-              acc[key] = effectFromJSON(value);
+export const CheckResourceSetResponse_Meta_ActionMeta: MessageFns<CheckResourceSetResponse_Meta_ActionMeta> =
+  {
+    fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta {
+      return {
+        actions: isObject(object.actions)
+          ? Object.entries(object.actions).reduce<{
+              [key: string]: CheckResourceSetResponse_Meta_EffectMeta;
+            }>((acc, [key, value]) => {
+              acc[key] =
+                CheckResourceSetResponse_Meta_EffectMeta.fromJSON(value);
               return acc;
-            },
-            {},
-          )
-        : {},
-      validationErrors: globalThis.Array.isArray(object?.validationErrors)
-        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-        : [],
-    };
-  },
+            }, {})
+          : {},
+        effectiveDerivedRoles: globalThis.Array.isArray(
+          object?.effectiveDerivedRoles,
+        )
+          ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
+          : [],
+      };
+    },
 
-  toJSON(message: CheckResourceBatchResponse_ActionEffectMap): unknown {
-    const obj: any = {};
-    if (message.resourceId !== "") {
-      obj.resourceId = message.resourceId;
-    }
-    if (message.actions) {
-      const entries = Object.entries(message.actions);
-      if (entries.length > 0) {
-        obj.actions = {};
-        entries.forEach(([k, v]) => {
-          obj.actions[k] = effectToJSON(v);
-        });
+    toJSON(message: CheckResourceSetResponse_Meta_ActionMeta): unknown {
+      const obj: any = {};
+      if (message.actions) {
+        const entries = Object.entries(message.actions);
+        if (entries.length > 0) {
+          obj.actions = {};
+          entries.forEach(([k, v]) => {
+            obj.actions[k] = CheckResourceSetResponse_Meta_EffectMeta.toJSON(v);
+          });
+        }
       }
-    }
-    if (message.validationErrors?.length) {
-      obj.validationErrors = message.validationErrors.map((e) =>
-        ValidationError.toJSON(e),
-      );
-    }
-    return obj;
-  },
-};
+      if (message.effectiveDerivedRoles?.length) {
+        obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
+      }
+      return obj;
+    },
+  };
 
-export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry = {
-  fromJSON(
-    object: any,
-  ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? effectFromJSON(object.value) : 0,
-    };
-  },
+export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry: MessageFns<CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry> =
+  {
+    fromJSON(
+      object: any,
+    ): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? CheckResourceSetResponse_Meta_EffectMeta.fromJSON(object.value)
+          : undefined,
+      };
+    },
 
-  toJSON(
-    message: CheckResourceBatchResponse_ActionEffectMap_ActionsEntry,
-  ): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== 0) {
-      obj.value = effectToJSON(message.value);
-    }
-    return obj;
-  },
-};
+    toJSON(
+      message: CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry,
+    ): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = CheckResourceSetResponse_Meta_EffectMeta.toJSON(
+          message.value,
+        );
+      }
+      return obj;
+    },
+  };
 
-export const CheckResourcesResponse = {
+export const CheckResourceSetResponse_Meta_ResourceInstancesEntry: MessageFns<CheckResourceSetResponse_Meta_ResourceInstancesEntry> =
+  {
+    fromJSON(
+      object: any,
+    ): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? CheckResourceSetResponse_Meta_ActionMeta.fromJSON(object.value)
+          : undefined,
+      };
+    },
+
+    toJSON(
+      message: CheckResourceSetResponse_Meta_ResourceInstancesEntry,
+    ): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = CheckResourceSetResponse_Meta_ActionMeta.toJSON(
+          message.value,
+        );
+      }
+      return obj;
+    },
+  };
+
+export const CheckResourceSetResponse_ResourceInstancesEntry: MessageFns<CheckResourceSetResponse_ResourceInstancesEntry> =
+  {
+    fromJSON(object: any): CheckResourceSetResponse_ResourceInstancesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? CheckResourceSetResponse_ActionEffectMap.fromJSON(object.value)
+          : undefined,
+      };
+    },
+
+    toJSON(message: CheckResourceSetResponse_ResourceInstancesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = CheckResourceSetResponse_ActionEffectMap.toJSON(
+          message.value,
+        );
+      }
+      return obj;
+    },
+  };
+
+export const CheckResourceBatchResponse: MessageFns<CheckResourceBatchResponse> =
+  {
+    fromJSON(object: any): CheckResourceBatchResponse {
+      return {
+        requestId: isSet(object.requestId)
+          ? globalThis.String(object.requestId)
+          : "",
+        results: globalThis.Array.isArray(object?.results)
+          ? object.results.map((e: any) =>
+              CheckResourceBatchResponse_ActionEffectMap.fromJSON(e),
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: CheckResourceBatchResponse): unknown {
+      const obj: any = {};
+      if (message.requestId !== "") {
+        obj.requestId = message.requestId;
+      }
+      if (message.results?.length) {
+        obj.results = message.results.map((e) =>
+          CheckResourceBatchResponse_ActionEffectMap.toJSON(e),
+        );
+      }
+      return obj;
+    },
+  };
+
+export const CheckResourceBatchResponse_ActionEffectMap: MessageFns<CheckResourceBatchResponse_ActionEffectMap> =
+  {
+    fromJSON(object: any): CheckResourceBatchResponse_ActionEffectMap {
+      return {
+        resourceId: isSet(object.resourceId)
+          ? globalThis.String(object.resourceId)
+          : "",
+        actions: isObject(object.actions)
+          ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
+              (acc, [key, value]) => {
+                acc[key] = effectFromJSON(value);
+                return acc;
+              },
+              {},
+            )
+          : {},
+        validationErrors: globalThis.Array.isArray(object?.validationErrors)
+          ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: CheckResourceBatchResponse_ActionEffectMap): unknown {
+      const obj: any = {};
+      if (message.resourceId !== "") {
+        obj.resourceId = message.resourceId;
+      }
+      if (message.actions) {
+        const entries = Object.entries(message.actions);
+        if (entries.length > 0) {
+          obj.actions = {};
+          entries.forEach(([k, v]) => {
+            obj.actions[k] = effectToJSON(v);
+          });
+        }
+      }
+      if (message.validationErrors?.length) {
+        obj.validationErrors = message.validationErrors.map((e) =>
+          ValidationError.toJSON(e),
+        );
+      }
+      return obj;
+    },
+  };
+
+export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry: MessageFns<CheckResourceBatchResponse_ActionEffectMap_ActionsEntry> =
+  {
+    fromJSON(
+      object: any,
+    ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? effectFromJSON(object.value) : 0,
+      };
+    },
+
+    toJSON(
+      message: CheckResourceBatchResponse_ActionEffectMap_ActionsEntry,
+    ): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== 0) {
+        obj.value = effectToJSON(message.value);
+      }
+      return obj;
+    },
+  };
+
+export const CheckResourcesResponse: MessageFns<CheckResourcesResponse> = {
   fromJSON(object: any): CheckResourcesResponse {
     return {
       requestId: isSet(object.requestId)
@@ -670,259 +690,275 @@ export const CheckResourcesResponse = {
   },
 };
 
-export const CheckResourcesResponse_ResultEntry = {
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry {
-    return {
-      resource: isSet(object.resource)
-        ? CheckResourcesResponse_ResultEntry_Resource.fromJSON(object.resource)
-        : undefined,
-      actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-            (acc, [key, value]) => {
-              acc[key] = effectFromJSON(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-      validationErrors: globalThis.Array.isArray(object?.validationErrors)
-        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-        : [],
-      meta: isSet(object.meta)
-        ? CheckResourcesResponse_ResultEntry_Meta.fromJSON(object.meta)
-        : undefined,
-      outputs: globalThis.Array.isArray(object?.outputs)
-        ? object.outputs.map((e: any) => OutputEntry.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: CheckResourcesResponse_ResultEntry): unknown {
-    const obj: any = {};
-    if (message.resource !== undefined) {
-      obj.resource = CheckResourcesResponse_ResultEntry_Resource.toJSON(
-        message.resource,
-      );
-    }
-    if (message.actions) {
-      const entries = Object.entries(message.actions);
-      if (entries.length > 0) {
-        obj.actions = {};
-        entries.forEach(([k, v]) => {
-          obj.actions[k] = effectToJSON(v);
-        });
-      }
-    }
-    if (message.validationErrors?.length) {
-      obj.validationErrors = message.validationErrors.map((e) =>
-        ValidationError.toJSON(e),
-      );
-    }
-    if (message.meta !== undefined) {
-      obj.meta = CheckResourcesResponse_ResultEntry_Meta.toJSON(message.meta);
-    }
-    if (message.outputs?.length) {
-      obj.outputs = message.outputs.map((e) => OutputEntry.toJSON(e));
-    }
-    return obj;
-  },
-};
-
-export const CheckResourcesResponse_ResultEntry_Resource = {
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry_Resource {
-    return {
-      id: isSet(object.id) ? globalThis.String(object.id) : "",
-      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
-      policyVersion: isSet(object.policyVersion)
-        ? globalThis.String(object.policyVersion)
-        : "",
-      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-    };
-  },
-
-  toJSON(message: CheckResourcesResponse_ResultEntry_Resource): unknown {
-    const obj: any = {};
-    if (message.id !== "") {
-      obj.id = message.id;
-    }
-    if (message.kind !== "") {
-      obj.kind = message.kind;
-    }
-    if (message.policyVersion !== "") {
-      obj.policyVersion = message.policyVersion;
-    }
-    if (message.scope !== "") {
-      obj.scope = message.scope;
-    }
-    return obj;
-  },
-};
-
-export const CheckResourcesResponse_ResultEntry_Meta = {
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta {
-    return {
-      actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{
-            [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta;
-          }>((acc, [key, value]) => {
-            acc[key] =
-              CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
-                value,
-              );
-            return acc;
-          }, {})
-        : {},
-      effectiveDerivedRoles: globalThis.Array.isArray(
-        object?.effectiveDerivedRoles,
-      )
-        ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
-  toJSON(message: CheckResourcesResponse_ResultEntry_Meta): unknown {
-    const obj: any = {};
-    if (message.actions) {
-      const entries = Object.entries(message.actions);
-      if (entries.length > 0) {
-        obj.actions = {};
-        entries.forEach(([k, v]) => {
-          obj.actions[k] =
-            CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(v);
-        });
-      }
-    }
-    if (message.effectiveDerivedRoles?.length) {
-      obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
-    }
-    return obj;
-  },
-};
-
-export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta = {
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
-    return {
-      matchedPolicy: isSet(object.matchedPolicy)
-        ? globalThis.String(object.matchedPolicy)
-        : "",
-      matchedScope: isSet(object.matchedScope)
-        ? globalThis.String(object.matchedScope)
-        : "",
-    };
-  },
-
-  toJSON(message: CheckResourcesResponse_ResultEntry_Meta_EffectMeta): unknown {
-    const obj: any = {};
-    if (message.matchedPolicy !== "") {
-      obj.matchedPolicy = message.matchedPolicy;
-    }
-    if (message.matchedScope !== "") {
-      obj.matchedScope = message.matchedScope;
-    }
-    return obj;
-  },
-};
-
-export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry = {
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
-            object.value,
-          )
-        : undefined,
-    };
-  },
-
-  toJSON(
-    message: CheckResourcesResponse_ResultEntry_Meta_ActionsEntry,
-  ): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(
-        message.value,
-      );
-    }
-    return obj;
-  },
-};
-
-export const CheckResourcesResponse_ResultEntry_ActionsEntry = {
-  fromJSON(object: any): CheckResourcesResponse_ResultEntry_ActionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? effectFromJSON(object.value) : 0,
-    };
-  },
-
-  toJSON(message: CheckResourcesResponse_ResultEntry_ActionsEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== 0) {
-      obj.value = effectToJSON(message.value);
-    }
-    return obj;
-  },
-};
-
-export const AddOrUpdatePolicyResponse = {
-  fromJSON(object: any): AddOrUpdatePolicyResponse {
-    return {
-      success: isSet(object.success)
-        ? Empty.fromJSON(object.success)
-        : undefined,
-    };
-  },
-
-  toJSON(message: AddOrUpdatePolicyResponse): unknown {
-    const obj: any = {};
-    if (message.success !== undefined) {
-      obj.success = Empty.toJSON(message.success);
-    }
-    return obj;
-  },
-};
-
-export const ListAuditLogEntriesResponse = {
-  fromJSON(object: any): ListAuditLogEntriesResponse {
-    return {
-      entry: isSet(object.accessLogEntry)
-        ? {
-            $case: "accessLogEntry",
-            accessLogEntry: AccessLogEntry.fromJSON(object.accessLogEntry),
-          }
-        : isSet(object.decisionLogEntry)
-          ? {
-              $case: "decisionLogEntry",
-              decisionLogEntry: DecisionLogEntry.fromJSON(
-                object.decisionLogEntry,
-              ),
-            }
+export const CheckResourcesResponse_ResultEntry: MessageFns<CheckResourcesResponse_ResultEntry> =
+  {
+    fromJSON(object: any): CheckResourcesResponse_ResultEntry {
+      return {
+        resource: isSet(object.resource)
+          ? CheckResourcesResponse_ResultEntry_Resource.fromJSON(
+              object.resource,
+            )
           : undefined,
-    };
-  },
+        actions: isObject(object.actions)
+          ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
+              (acc, [key, value]) => {
+                acc[key] = effectFromJSON(value);
+                return acc;
+              },
+              {},
+            )
+          : {},
+        validationErrors: globalThis.Array.isArray(object?.validationErrors)
+          ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
+          : [],
+        meta: isSet(object.meta)
+          ? CheckResourcesResponse_ResultEntry_Meta.fromJSON(object.meta)
+          : undefined,
+        outputs: globalThis.Array.isArray(object?.outputs)
+          ? object.outputs.map((e: any) => OutputEntry.fromJSON(e))
+          : [],
+      };
+    },
 
-  toJSON(message: ListAuditLogEntriesResponse): unknown {
-    const obj: any = {};
-    if (message.entry?.$case === "accessLogEntry") {
-      obj.accessLogEntry = AccessLogEntry.toJSON(message.entry.accessLogEntry);
-    }
-    if (message.entry?.$case === "decisionLogEntry") {
-      obj.decisionLogEntry = DecisionLogEntry.toJSON(
-        message.entry.decisionLogEntry,
-      );
-    }
-    return obj;
-  },
-};
+    toJSON(message: CheckResourcesResponse_ResultEntry): unknown {
+      const obj: any = {};
+      if (message.resource !== undefined) {
+        obj.resource = CheckResourcesResponse_ResultEntry_Resource.toJSON(
+          message.resource,
+        );
+      }
+      if (message.actions) {
+        const entries = Object.entries(message.actions);
+        if (entries.length > 0) {
+          obj.actions = {};
+          entries.forEach(([k, v]) => {
+            obj.actions[k] = effectToJSON(v);
+          });
+        }
+      }
+      if (message.validationErrors?.length) {
+        obj.validationErrors = message.validationErrors.map((e) =>
+          ValidationError.toJSON(e),
+        );
+      }
+      if (message.meta !== undefined) {
+        obj.meta = CheckResourcesResponse_ResultEntry_Meta.toJSON(message.meta);
+      }
+      if (message.outputs?.length) {
+        obj.outputs = message.outputs.map((e) => OutputEntry.toJSON(e));
+      }
+      return obj;
+    },
+  };
 
-export const ServerInfoResponse = {
+export const CheckResourcesResponse_ResultEntry_Resource: MessageFns<CheckResourcesResponse_ResultEntry_Resource> =
+  {
+    fromJSON(object: any): CheckResourcesResponse_ResultEntry_Resource {
+      return {
+        id: isSet(object.id) ? globalThis.String(object.id) : "",
+        kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
+        policyVersion: isSet(object.policyVersion)
+          ? globalThis.String(object.policyVersion)
+          : "",
+        scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
+      };
+    },
+
+    toJSON(message: CheckResourcesResponse_ResultEntry_Resource): unknown {
+      const obj: any = {};
+      if (message.id !== "") {
+        obj.id = message.id;
+      }
+      if (message.kind !== "") {
+        obj.kind = message.kind;
+      }
+      if (message.policyVersion !== "") {
+        obj.policyVersion = message.policyVersion;
+      }
+      if (message.scope !== "") {
+        obj.scope = message.scope;
+      }
+      return obj;
+    },
+  };
+
+export const CheckResourcesResponse_ResultEntry_Meta: MessageFns<CheckResourcesResponse_ResultEntry_Meta> =
+  {
+    fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta {
+      return {
+        actions: isObject(object.actions)
+          ? Object.entries(object.actions).reduce<{
+              [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta;
+            }>((acc, [key, value]) => {
+              acc[key] =
+                CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
+                  value,
+                );
+              return acc;
+            }, {})
+          : {},
+        effectiveDerivedRoles: globalThis.Array.isArray(
+          object?.effectiveDerivedRoles,
+        )
+          ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
+          : [],
+      };
+    },
+
+    toJSON(message: CheckResourcesResponse_ResultEntry_Meta): unknown {
+      const obj: any = {};
+      if (message.actions) {
+        const entries = Object.entries(message.actions);
+        if (entries.length > 0) {
+          obj.actions = {};
+          entries.forEach(([k, v]) => {
+            obj.actions[k] =
+              CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(v);
+          });
+        }
+      }
+      if (message.effectiveDerivedRoles?.length) {
+        obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
+      }
+      return obj;
+    },
+  };
+
+export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta: MessageFns<CheckResourcesResponse_ResultEntry_Meta_EffectMeta> =
+  {
+    fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
+      return {
+        matchedPolicy: isSet(object.matchedPolicy)
+          ? globalThis.String(object.matchedPolicy)
+          : "",
+        matchedScope: isSet(object.matchedScope)
+          ? globalThis.String(object.matchedScope)
+          : "",
+      };
+    },
+
+    toJSON(
+      message: CheckResourcesResponse_ResultEntry_Meta_EffectMeta,
+    ): unknown {
+      const obj: any = {};
+      if (message.matchedPolicy !== "") {
+        obj.matchedPolicy = message.matchedPolicy;
+      }
+      if (message.matchedScope !== "") {
+        obj.matchedScope = message.matchedScope;
+      }
+      return obj;
+    },
+  };
+
+export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry: MessageFns<CheckResourcesResponse_ResultEntry_Meta_ActionsEntry> =
+  {
+    fromJSON(
+      object: any,
+    ): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
+              object.value,
+            )
+          : undefined,
+      };
+    },
+
+    toJSON(
+      message: CheckResourcesResponse_ResultEntry_Meta_ActionsEntry,
+    ): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = CheckResourcesResponse_ResultEntry_Meta_EffectMeta.toJSON(
+          message.value,
+        );
+      }
+      return obj;
+    },
+  };
+
+export const CheckResourcesResponse_ResultEntry_ActionsEntry: MessageFns<CheckResourcesResponse_ResultEntry_ActionsEntry> =
+  {
+    fromJSON(object: any): CheckResourcesResponse_ResultEntry_ActionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? effectFromJSON(object.value) : 0,
+      };
+    },
+
+    toJSON(message: CheckResourcesResponse_ResultEntry_ActionsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== 0) {
+        obj.value = effectToJSON(message.value);
+      }
+      return obj;
+    },
+  };
+
+export const AddOrUpdatePolicyResponse: MessageFns<AddOrUpdatePolicyResponse> =
+  {
+    fromJSON(object: any): AddOrUpdatePolicyResponse {
+      return {
+        success: isSet(object.success)
+          ? Empty.fromJSON(object.success)
+          : undefined,
+      };
+    },
+
+    toJSON(message: AddOrUpdatePolicyResponse): unknown {
+      const obj: any = {};
+      if (message.success !== undefined) {
+        obj.success = Empty.toJSON(message.success);
+      }
+      return obj;
+    },
+  };
+
+export const ListAuditLogEntriesResponse: MessageFns<ListAuditLogEntriesResponse> =
+  {
+    fromJSON(object: any): ListAuditLogEntriesResponse {
+      return {
+        entry: isSet(object.accessLogEntry)
+          ? {
+              $case: "accessLogEntry",
+              accessLogEntry: AccessLogEntry.fromJSON(object.accessLogEntry),
+            }
+          : isSet(object.decisionLogEntry)
+            ? {
+                $case: "decisionLogEntry",
+                decisionLogEntry: DecisionLogEntry.fromJSON(
+                  object.decisionLogEntry,
+                ),
+              }
+            : undefined,
+      };
+    },
+
+    toJSON(message: ListAuditLogEntriesResponse): unknown {
+      const obj: any = {};
+      if (message.entry?.$case === "accessLogEntry") {
+        obj.accessLogEntry = AccessLogEntry.toJSON(
+          message.entry.accessLogEntry,
+        );
+      }
+      if (message.entry?.$case === "decisionLogEntry") {
+        obj.decisionLogEntry = DecisionLogEntry.toJSON(
+          message.entry.decisionLogEntry,
+        );
+      }
+      return obj;
+    },
+  };
+
+export const ServerInfoResponse: MessageFns<ServerInfoResponse> = {
   fromJSON(object: any): ServerInfoResponse {
     return {
       version: isSet(object.version) ? globalThis.String(object.version) : "",
@@ -948,7 +984,7 @@ export const ServerInfoResponse = {
   },
 };
 
-export const ListPoliciesResponse = {
+export const ListPoliciesResponse: MessageFns<ListPoliciesResponse> = {
   fromJSON(object: any): ListPoliciesResponse {
     return {
       policyIds: globalThis.Array.isArray(object?.policyIds)
@@ -966,7 +1002,7 @@ export const ListPoliciesResponse = {
   },
 };
 
-export const GetPolicyResponse = {
+export const GetPolicyResponse: MessageFns<GetPolicyResponse> = {
   fromJSON(object: any): GetPolicyResponse {
     return {
       policies: globalThis.Array.isArray(object?.policies)
@@ -984,7 +1020,7 @@ export const GetPolicyResponse = {
   },
 };
 
-export const DisablePolicyResponse = {
+export const DisablePolicyResponse: MessageFns<DisablePolicyResponse> = {
   fromJSON(object: any): DisablePolicyResponse {
     return {
       disabledPolicies: isSet(object.disabledPolicies)
@@ -1002,7 +1038,7 @@ export const DisablePolicyResponse = {
   },
 };
 
-export const EnablePolicyResponse = {
+export const EnablePolicyResponse: MessageFns<EnablePolicyResponse> = {
   fromJSON(object: any): EnablePolicyResponse {
     return {
       enabledPolicies: isSet(object.enabledPolicies)
@@ -1020,18 +1056,19 @@ export const EnablePolicyResponse = {
   },
 };
 
-export const AddOrUpdateSchemaResponse = {
-  fromJSON(_: any): AddOrUpdateSchemaResponse {
-    return {};
-  },
+export const AddOrUpdateSchemaResponse: MessageFns<AddOrUpdateSchemaResponse> =
+  {
+    fromJSON(_: any): AddOrUpdateSchemaResponse {
+      return {};
+    },
 
-  toJSON(_: AddOrUpdateSchemaResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-};
+    toJSON(_: AddOrUpdateSchemaResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
+  };
 
-export const ListSchemasResponse = {
+export const ListSchemasResponse: MessageFns<ListSchemasResponse> = {
   fromJSON(object: any): ListSchemasResponse {
     return {
       schemaIds: globalThis.Array.isArray(object?.schemaIds)
@@ -1049,7 +1086,7 @@ export const ListSchemasResponse = {
   },
 };
 
-export const GetSchemaResponse = {
+export const GetSchemaResponse: MessageFns<GetSchemaResponse> = {
   fromJSON(object: any): GetSchemaResponse {
     return {
       schemas: globalThis.Array.isArray(object?.schemas)
@@ -1067,7 +1104,7 @@ export const GetSchemaResponse = {
   },
 };
 
-export const DeleteSchemaResponse = {
+export const DeleteSchemaResponse: MessageFns<DeleteSchemaResponse> = {
   fromJSON(object: any): DeleteSchemaResponse {
     return {
       deletedSchemas: isSet(object.deletedSchemas)
@@ -1085,7 +1122,7 @@ export const DeleteSchemaResponse = {
   },
 };
 
-export const ReloadStoreResponse = {
+export const ReloadStoreResponse: MessageFns<ReloadStoreResponse> = {
   fromJSON(_: any): ReloadStoreResponse {
     return {};
   },
@@ -1102,4 +1139,9 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

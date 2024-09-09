@@ -307,7 +307,7 @@ function createBaseSwagger(): Swagger {
   };
 }
 
-export const Swagger = {
+export const Swagger: MessageFns<Swagger> = {
   encode(
     message: Swagger,
     writer: BinaryWriter = new BinaryWriter(),
@@ -513,7 +513,7 @@ function createBaseSwagger_ResponsesEntry(): Swagger_ResponsesEntry {
   return { key: "", value: undefined };
 }
 
-export const Swagger_ResponsesEntry = {
+export const Swagger_ResponsesEntry: MessageFns<Swagger_ResponsesEntry> = {
   encode(
     message: Swagger_ResponsesEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -566,7 +566,7 @@ function createBaseSwagger_ExtensionsEntry(): Swagger_ExtensionsEntry {
   return { key: "", value: undefined };
 }
 
-export const Swagger_ExtensionsEntry = {
+export const Swagger_ExtensionsEntry: MessageFns<Swagger_ExtensionsEntry> = {
   encode(
     message: Swagger_ExtensionsEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -633,7 +633,7 @@ function createBaseOperation(): Operation {
   };
 }
 
-export const Operation = {
+export const Operation: MessageFns<Operation> = {
   encode(
     message: Operation,
     writer: BinaryWriter = new BinaryWriter(),
@@ -833,7 +833,7 @@ function createBaseOperation_ResponsesEntry(): Operation_ResponsesEntry {
   return { key: "", value: undefined };
 }
 
-export const Operation_ResponsesEntry = {
+export const Operation_ResponsesEntry: MessageFns<Operation_ResponsesEntry> = {
   encode(
     message: Operation_ResponsesEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -886,60 +886,64 @@ function createBaseOperation_ExtensionsEntry(): Operation_ExtensionsEntry {
   return { key: "", value: undefined };
 }
 
-export const Operation_ExtensionsEntry = {
-  encode(
-    message: Operation_ExtensionsEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): Operation_ExtensionsEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseOperation_ExtensionsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
-          continue;
+export const Operation_ExtensionsEntry: MessageFns<Operation_ExtensionsEntry> =
+  {
+    encode(
+      message: Operation_ExtensionsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        Value.encode(
+          Value.wrap(message.value),
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-};
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): Operation_ExtensionsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseOperation_ExtensionsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
 
 function createBaseParameters(): Parameters {
   return { headers: [] };
 }
 
-export const Parameters = {
+export const Parameters: MessageFns<Parameters> = {
   encode(
     message: Parameters,
     writer: BinaryWriter = new BinaryWriter(),
@@ -979,7 +983,7 @@ function createBaseHeaderParameter(): HeaderParameter {
   return { name: "", description: "", type: 0, format: "", required: false };
 }
 
-export const HeaderParameter = {
+export const HeaderParameter: MessageFns<HeaderParameter> = {
   encode(
     message: HeaderParameter,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1059,7 +1063,7 @@ function createBaseHeader(): Header {
   return { description: "", type: "", format: "", default: "", pattern: "" };
 }
 
-export const Header = {
+export const Header: MessageFns<Header> = {
   encode(
     message: Header,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1145,7 +1149,7 @@ function createBaseResponse(): Response {
   };
 }
 
-export const Response = {
+export const Response: MessageFns<Response> = {
   encode(
     message: Response,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1248,7 +1252,7 @@ function createBaseResponse_HeadersEntry(): Response_HeadersEntry {
   return { key: "", value: undefined };
 }
 
-export const Response_HeadersEntry = {
+export const Response_HeadersEntry: MessageFns<Response_HeadersEntry> = {
   encode(
     message: Response_HeadersEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1301,7 +1305,7 @@ function createBaseResponse_ExamplesEntry(): Response_ExamplesEntry {
   return { key: "", value: "" };
 }
 
-export const Response_ExamplesEntry = {
+export const Response_ExamplesEntry: MessageFns<Response_ExamplesEntry> = {
   encode(
     message: Response_ExamplesEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1354,7 +1358,7 @@ function createBaseResponse_ExtensionsEntry(): Response_ExtensionsEntry {
   return { key: "", value: undefined };
 }
 
-export const Response_ExtensionsEntry = {
+export const Response_ExtensionsEntry: MessageFns<Response_ExtensionsEntry> = {
   encode(
     message: Response_ExtensionsEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1415,7 +1419,7 @@ function createBaseInfo(): Info {
   };
 }
 
-export const Info = {
+export const Info: MessageFns<Info> = {
   encode(
     message: Info,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1523,7 +1527,7 @@ function createBaseInfo_ExtensionsEntry(): Info_ExtensionsEntry {
   return { key: "", value: undefined };
 }
 
-export const Info_ExtensionsEntry = {
+export const Info_ExtensionsEntry: MessageFns<Info_ExtensionsEntry> = {
   encode(
     message: Info_ExtensionsEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1576,7 +1580,7 @@ function createBaseContact(): Contact {
   return { name: "", url: "", email: "" };
 }
 
-export const Contact = {
+export const Contact: MessageFns<Contact> = {
   encode(
     message: Contact,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1636,7 +1640,7 @@ function createBaseLicense(): License {
   return { name: "", url: "" };
 }
 
-export const License = {
+export const License: MessageFns<License> = {
   encode(
     message: License,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1686,7 +1690,7 @@ function createBaseExternalDocumentation(): ExternalDocumentation {
   return { description: "", url: "" };
 }
 
-export const ExternalDocumentation = {
+export const ExternalDocumentation: MessageFns<ExternalDocumentation> = {
   encode(
     message: ExternalDocumentation,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1745,7 +1749,7 @@ function createBaseSchema(): Schema {
   };
 }
 
-export const Schema = {
+export const Schema: MessageFns<Schema> = {
   encode(
     message: Schema,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1858,7 +1862,7 @@ function createBaseJSONSchema(): JSONSchema {
   };
 }
 
-export const JSONSchema = {
+export const JSONSchema: MessageFns<JSONSchema> = {
   encode(
     message: JSONSchema,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2177,103 +2181,108 @@ function createBaseJSONSchema_FieldConfiguration(): JSONSchema_FieldConfiguratio
   return { pathParamName: "" };
 }
 
-export const JSONSchema_FieldConfiguration = {
-  encode(
-    message: JSONSchema_FieldConfiguration,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.pathParamName !== "") {
-      writer.uint32(378).string(message.pathParamName);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): JSONSchema_FieldConfiguration {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseJSONSchema_FieldConfiguration();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 47:
-          if (tag !== 378) {
-            break;
-          }
-
-          message.pathParamName = reader.string();
-          continue;
+export const JSONSchema_FieldConfiguration: MessageFns<JSONSchema_FieldConfiguration> =
+  {
+    encode(
+      message: JSONSchema_FieldConfiguration,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.pathParamName !== "") {
+        writer.uint32(378).string(message.pathParamName);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): JSONSchema_FieldConfiguration {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseJSONSchema_FieldConfiguration();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 47:
+            if (tag !== 378) {
+              break;
+            }
+
+            message.pathParamName = reader.string();
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-};
+      return message;
+    },
+  };
 
 function createBaseJSONSchema_ExtensionsEntry(): JSONSchema_ExtensionsEntry {
   return { key: "", value: undefined };
 }
 
-export const JSONSchema_ExtensionsEntry = {
-  encode(
-    message: JSONSchema_ExtensionsEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): JSONSchema_ExtensionsEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseJSONSchema_ExtensionsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
-          continue;
+export const JSONSchema_ExtensionsEntry: MessageFns<JSONSchema_ExtensionsEntry> =
+  {
+    encode(
+      message: JSONSchema_ExtensionsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        Value.encode(
+          Value.wrap(message.value),
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-};
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): JSONSchema_ExtensionsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseJSONSchema_ExtensionsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
 
 function createBaseTag(): Tag {
   return { name: "", description: "", externalDocs: undefined, extensions: {} };
 }
 
-export const Tag = {
+export const Tag: MessageFns<Tag> = {
   encode(
     message: Tag,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2357,7 +2366,7 @@ function createBaseTag_ExtensionsEntry(): Tag_ExtensionsEntry {
   return { key: "", value: undefined };
 }
 
-export const Tag_ExtensionsEntry = {
+export const Tag_ExtensionsEntry: MessageFns<Tag_ExtensionsEntry> = {
   encode(
     message: Tag_ExtensionsEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2410,7 +2419,7 @@ function createBaseSecurityDefinitions(): SecurityDefinitions {
   return { security: {} };
 }
 
-export const SecurityDefinitions = {
+export const SecurityDefinitions: MessageFns<SecurityDefinitions> = {
   encode(
     message: SecurityDefinitions,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2462,54 +2471,55 @@ function createBaseSecurityDefinitions_SecurityEntry(): SecurityDefinitions_Secu
   return { key: "", value: undefined };
 }
 
-export const SecurityDefinitions_SecurityEntry = {
-  encode(
-    message: SecurityDefinitions_SecurityEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      SecurityScheme.encode(message.value, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): SecurityDefinitions_SecurityEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSecurityDefinitions_SecurityEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = SecurityScheme.decode(reader, reader.uint32());
-          continue;
+export const SecurityDefinitions_SecurityEntry: MessageFns<SecurityDefinitions_SecurityEntry> =
+  {
+    encode(
+      message: SecurityDefinitions_SecurityEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        SecurityScheme.encode(message.value, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-};
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SecurityDefinitions_SecurityEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSecurityDefinitions_SecurityEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = SecurityScheme.decode(reader, reader.uint32());
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
 
 function createBaseSecurityScheme(): SecurityScheme {
   return {
@@ -2525,7 +2535,7 @@ function createBaseSecurityScheme(): SecurityScheme {
   };
 }
 
-export const SecurityScheme = {
+export const SecurityScheme: MessageFns<SecurityScheme> = {
   encode(
     message: SecurityScheme,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2656,60 +2666,64 @@ function createBaseSecurityScheme_ExtensionsEntry(): SecurityScheme_ExtensionsEn
   return { key: "", value: undefined };
 }
 
-export const SecurityScheme_ExtensionsEntry = {
-  encode(
-    message: SecurityScheme_ExtensionsEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): SecurityScheme_ExtensionsEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSecurityScheme_ExtensionsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
-          continue;
+export const SecurityScheme_ExtensionsEntry: MessageFns<SecurityScheme_ExtensionsEntry> =
+  {
+    encode(
+      message: SecurityScheme_ExtensionsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        Value.encode(
+          Value.wrap(message.value),
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-};
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SecurityScheme_ExtensionsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSecurityScheme_ExtensionsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
 
 function createBaseSecurityRequirement(): SecurityRequirement {
   return { securityRequirement: {} };
 }
 
-export const SecurityRequirement = {
+export const SecurityRequirement: MessageFns<SecurityRequirement> = {
   encode(
     message: SecurityRequirement,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2761,109 +2775,111 @@ function createBaseSecurityRequirement_SecurityRequirementValue(): SecurityRequi
   return { scope: [] };
 }
 
-export const SecurityRequirement_SecurityRequirementValue = {
-  encode(
-    message: SecurityRequirement_SecurityRequirementValue,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    for (const v of message.scope) {
-      writer.uint32(10).string(v!);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): SecurityRequirement_SecurityRequirementValue {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSecurityRequirement_SecurityRequirementValue();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.scope.push(reader.string());
-          continue;
+export const SecurityRequirement_SecurityRequirementValue: MessageFns<SecurityRequirement_SecurityRequirementValue> =
+  {
+    encode(
+      message: SecurityRequirement_SecurityRequirementValue,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.scope) {
+        writer.uint32(10).string(v!);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SecurityRequirement_SecurityRequirementValue {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSecurityRequirement_SecurityRequirementValue();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            message.scope.push(reader.string());
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-};
+      return message;
+    },
+  };
 
 function createBaseSecurityRequirement_SecurityRequirementEntry(): SecurityRequirement_SecurityRequirementEntry {
   return { key: "", value: undefined };
 }
 
-export const SecurityRequirement_SecurityRequirementEntry = {
-  encode(
-    message: SecurityRequirement_SecurityRequirementEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      SecurityRequirement_SecurityRequirementValue.encode(
-        message.value,
-        writer.uint32(18).fork(),
-      ).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): SecurityRequirement_SecurityRequirementEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSecurityRequirement_SecurityRequirementEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = SecurityRequirement_SecurityRequirementValue.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
+export const SecurityRequirement_SecurityRequirementEntry: MessageFns<SecurityRequirement_SecurityRequirementEntry> =
+  {
+    encode(
+      message: SecurityRequirement_SecurityRequirementEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        SecurityRequirement_SecurityRequirementValue.encode(
+          message.value,
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-};
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SecurityRequirement_SecurityRequirementEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSecurityRequirement_SecurityRequirementEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = SecurityRequirement_SecurityRequirementValue.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
 
 function createBaseScopes(): Scopes {
   return { scope: {} };
 }
 
-export const Scopes = {
+export const Scopes: MessageFns<Scopes> = {
   encode(
     message: Scopes,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2909,7 +2925,7 @@ function createBaseScopes_ScopeEntry(): Scopes_ScopeEntry {
   return { key: "", value: "" };
 }
 
-export const Scopes_ScopeEntry = {
+export const Scopes_ScopeEntry: MessageFns<Scopes_ScopeEntry> = {
   encode(
     message: Scopes_ScopeEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2954,3 +2970,8 @@ export const Scopes_ScopeEntry = {
     return message;
   },
 };
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+}

@@ -73,7 +73,7 @@ function createBaseGetTraceRequest(): GetTraceRequest {
   return { traceId: "", startTime: undefined, endTime: undefined };
 }
 
-export const GetTraceRequest = {
+export const GetTraceRequest: MessageFns<GetTraceRequest> = {
   encode(
     message: GetTraceRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -178,7 +178,7 @@ function createBaseTraceQueryParameters(): TraceQueryParameters {
   };
 }
 
-export const TraceQueryParameters = {
+export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
   encode(
     message: TraceQueryParameters,
     writer: BinaryWriter = new BinaryWriter(),
@@ -380,78 +380,79 @@ function createBaseTraceQueryParameters_AttributesEntry(): TraceQueryParameters_
   return { key: "", value: "" };
 }
 
-export const TraceQueryParameters_AttributesEntry = {
-  encode(
-    message: TraceQueryParameters_AttributesEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): TraceQueryParameters_AttributesEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTraceQueryParameters_AttributesEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = reader.string();
-          continue;
+export const TraceQueryParameters_AttributesEntry: MessageFns<TraceQueryParameters_AttributesEntry> =
+  {
+    encode(
+      message: TraceQueryParameters_AttributesEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== "") {
+        writer.uint32(18).string(message.value);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): TraceQueryParameters_AttributesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? globalThis.String(object.value) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): TraceQueryParameters_AttributesEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTraceQueryParameters_AttributesEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: TraceQueryParameters_AttributesEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== "") {
-      obj.value = message.value;
-    }
-    return obj;
-  },
-};
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = reader.string();
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): TraceQueryParameters_AttributesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? globalThis.String(object.value) : "",
+      };
+    },
+
+    toJSON(message: TraceQueryParameters_AttributesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== "") {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
 function createBaseFindTracesRequest(): FindTracesRequest {
   return { query: undefined };
 }
 
-export const FindTracesRequest = {
+export const FindTracesRequest: MessageFns<FindTracesRequest> = {
   encode(
     message: FindTracesRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -510,7 +511,7 @@ function createBaseGetServicesRequest(): GetServicesRequest {
   return {};
 }
 
-export const GetServicesRequest = {
+export const GetServicesRequest: MessageFns<GetServicesRequest> = {
   encode(
     _: GetServicesRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -552,7 +553,7 @@ function createBaseGetServicesResponse(): GetServicesResponse {
   return { services: [] };
 }
 
-export const GetServicesResponse = {
+export const GetServicesResponse: MessageFns<GetServicesResponse> = {
   encode(
     message: GetServicesResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -611,7 +612,7 @@ function createBaseGetOperationsRequest(): GetOperationsRequest {
   return { service: "", spanKind: "" };
 }
 
-export const GetOperationsRequest = {
+export const GetOperationsRequest: MessageFns<GetOperationsRequest> = {
   encode(
     message: GetOperationsRequest,
     writer: BinaryWriter = new BinaryWriter(),
@@ -684,7 +685,7 @@ function createBaseOperation(): Operation {
   return { name: "", spanKind: "" };
 }
 
-export const Operation = {
+export const Operation: MessageFns<Operation> = {
   encode(
     message: Operation,
     writer: BinaryWriter = new BinaryWriter(),
@@ -754,7 +755,7 @@ function createBaseGetOperationsResponse(): GetOperationsResponse {
   return { operations: [] };
 }
 
-export const GetOperationsResponse = {
+export const GetOperationsResponse: MessageFns<GetOperationsResponse> = {
   encode(
     message: GetOperationsResponse,
     writer: BinaryWriter = new BinaryWriter(),
@@ -974,4 +975,11 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

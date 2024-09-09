@@ -557,7 +557,7 @@ export interface Scopes_ScopeEntry {
   value: string;
 }
 
-export const Swagger = {
+export const Swagger: MessageFns<Swagger> = {
   fromJSON(object: any): Swagger {
     return {
       swagger: isSet(object.swagger) ? globalThis.String(object.swagger) : "",
@@ -666,7 +666,7 @@ export const Swagger = {
   },
 };
 
-export const Swagger_ResponsesEntry = {
+export const Swagger_ResponsesEntry: MessageFns<Swagger_ResponsesEntry> = {
   fromJSON(object: any): Swagger_ResponsesEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -686,7 +686,7 @@ export const Swagger_ResponsesEntry = {
   },
 };
 
-export const Swagger_ExtensionsEntry = {
+export const Swagger_ExtensionsEntry: MessageFns<Swagger_ExtensionsEntry> = {
   fromJSON(object: any): Swagger_ExtensionsEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -706,7 +706,7 @@ export const Swagger_ExtensionsEntry = {
   },
 };
 
-export const Operation = {
+export const Operation: MessageFns<Operation> = {
   fromJSON(object: any): Operation {
     return {
       tags: globalThis.Array.isArray(object?.tags)
@@ -817,7 +817,7 @@ export const Operation = {
   },
 };
 
-export const Operation_ResponsesEntry = {
+export const Operation_ResponsesEntry: MessageFns<Operation_ResponsesEntry> = {
   fromJSON(object: any): Operation_ResponsesEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -837,27 +837,28 @@ export const Operation_ResponsesEntry = {
   },
 };
 
-export const Operation_ExtensionsEntry = {
-  fromJSON(object: any): Operation_ExtensionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
-  },
+export const Operation_ExtensionsEntry: MessageFns<Operation_ExtensionsEntry> =
+  {
+    fromJSON(object: any): Operation_ExtensionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object?.value) ? object.value : undefined,
+      };
+    },
 
-  toJSON(message: Operation_ExtensionsEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = message.value;
-    }
-    return obj;
-  },
-};
+    toJSON(message: Operation_ExtensionsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
-export const Parameters = {
+export const Parameters: MessageFns<Parameters> = {
   fromJSON(object: any): Parameters {
     return {
       headers: globalThis.Array.isArray(object?.headers)
@@ -875,7 +876,7 @@ export const Parameters = {
   },
 };
 
-export const HeaderParameter = {
+export const HeaderParameter: MessageFns<HeaderParameter> = {
   fromJSON(object: any): HeaderParameter {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
@@ -911,7 +912,7 @@ export const HeaderParameter = {
   },
 };
 
-export const Header = {
+export const Header: MessageFns<Header> = {
   fromJSON(object: any): Header {
     return {
       description: isSet(object.description)
@@ -945,7 +946,7 @@ export const Header = {
   },
 };
 
-export const Response = {
+export const Response: MessageFns<Response> = {
   fromJSON(object: any): Response {
     return {
       description: isSet(object.description)
@@ -1020,7 +1021,7 @@ export const Response = {
   },
 };
 
-export const Response_HeadersEntry = {
+export const Response_HeadersEntry: MessageFns<Response_HeadersEntry> = {
   fromJSON(object: any): Response_HeadersEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -1040,7 +1041,7 @@ export const Response_HeadersEntry = {
   },
 };
 
-export const Response_ExamplesEntry = {
+export const Response_ExamplesEntry: MessageFns<Response_ExamplesEntry> = {
   fromJSON(object: any): Response_ExamplesEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -1060,7 +1061,7 @@ export const Response_ExamplesEntry = {
   },
 };
 
-export const Response_ExtensionsEntry = {
+export const Response_ExtensionsEntry: MessageFns<Response_ExtensionsEntry> = {
   fromJSON(object: any): Response_ExtensionsEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -1080,7 +1081,7 @@ export const Response_ExtensionsEntry = {
   },
 };
 
-export const Info = {
+export const Info: MessageFns<Info> = {
   fromJSON(object: any): Info {
     return {
       title: isSet(object.title) ? globalThis.String(object.title) : "",
@@ -1141,7 +1142,7 @@ export const Info = {
   },
 };
 
-export const Info_ExtensionsEntry = {
+export const Info_ExtensionsEntry: MessageFns<Info_ExtensionsEntry> = {
   fromJSON(object: any): Info_ExtensionsEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -1161,7 +1162,7 @@ export const Info_ExtensionsEntry = {
   },
 };
 
-export const Contact = {
+export const Contact: MessageFns<Contact> = {
   fromJSON(object: any): Contact {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
@@ -1185,7 +1186,7 @@ export const Contact = {
   },
 };
 
-export const License = {
+export const License: MessageFns<License> = {
   fromJSON(object: any): License {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
@@ -1205,7 +1206,7 @@ export const License = {
   },
 };
 
-export const ExternalDocumentation = {
+export const ExternalDocumentation: MessageFns<ExternalDocumentation> = {
   fromJSON(object: any): ExternalDocumentation {
     return {
       description: isSet(object.description)
@@ -1227,7 +1228,7 @@ export const ExternalDocumentation = {
   },
 };
 
-export const Schema = {
+export const Schema: MessageFns<Schema> = {
   fromJSON(object: any): Schema {
     return {
       jsonSchema: isSet(object.jsonSchema)
@@ -1267,7 +1268,7 @@ export const Schema = {
   },
 };
 
-export const JSONSchema = {
+export const JSONSchema: MessageFns<JSONSchema> = {
   fromJSON(object: any): JSONSchema {
     return {
       ref: isSet(object.ref) ? globalThis.String(object.ref) : "",
@@ -1436,45 +1437,47 @@ export const JSONSchema = {
   },
 };
 
-export const JSONSchema_FieldConfiguration = {
-  fromJSON(object: any): JSONSchema_FieldConfiguration {
-    return {
-      pathParamName: isSet(object.pathParamName)
-        ? globalThis.String(object.pathParamName)
-        : "",
-    };
-  },
+export const JSONSchema_FieldConfiguration: MessageFns<JSONSchema_FieldConfiguration> =
+  {
+    fromJSON(object: any): JSONSchema_FieldConfiguration {
+      return {
+        pathParamName: isSet(object.pathParamName)
+          ? globalThis.String(object.pathParamName)
+          : "",
+      };
+    },
 
-  toJSON(message: JSONSchema_FieldConfiguration): unknown {
-    const obj: any = {};
-    if (message.pathParamName !== "") {
-      obj.pathParamName = message.pathParamName;
-    }
-    return obj;
-  },
-};
+    toJSON(message: JSONSchema_FieldConfiguration): unknown {
+      const obj: any = {};
+      if (message.pathParamName !== "") {
+        obj.pathParamName = message.pathParamName;
+      }
+      return obj;
+    },
+  };
 
-export const JSONSchema_ExtensionsEntry = {
-  fromJSON(object: any): JSONSchema_ExtensionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
-  },
+export const JSONSchema_ExtensionsEntry: MessageFns<JSONSchema_ExtensionsEntry> =
+  {
+    fromJSON(object: any): JSONSchema_ExtensionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object?.value) ? object.value : undefined,
+      };
+    },
 
-  toJSON(message: JSONSchema_ExtensionsEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = message.value;
-    }
-    return obj;
-  },
-};
+    toJSON(message: JSONSchema_ExtensionsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
-export const Tag = {
+export const Tag: MessageFns<Tag> = {
   fromJSON(object: any): Tag {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
@@ -1519,7 +1522,7 @@ export const Tag = {
   },
 };
 
-export const Tag_ExtensionsEntry = {
+export const Tag_ExtensionsEntry: MessageFns<Tag_ExtensionsEntry> = {
   fromJSON(object: any): Tag_ExtensionsEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -1539,7 +1542,7 @@ export const Tag_ExtensionsEntry = {
   },
 };
 
-export const SecurityDefinitions = {
+export const SecurityDefinitions: MessageFns<SecurityDefinitions> = {
   fromJSON(object: any): SecurityDefinitions {
     return {
       security: isObject(object.security)
@@ -1568,29 +1571,30 @@ export const SecurityDefinitions = {
   },
 };
 
-export const SecurityDefinitions_SecurityEntry = {
-  fromJSON(object: any): SecurityDefinitions_SecurityEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? SecurityScheme.fromJSON(object.value)
-        : undefined,
-    };
-  },
+export const SecurityDefinitions_SecurityEntry: MessageFns<SecurityDefinitions_SecurityEntry> =
+  {
+    fromJSON(object: any): SecurityDefinitions_SecurityEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? SecurityScheme.fromJSON(object.value)
+          : undefined,
+      };
+    },
 
-  toJSON(message: SecurityDefinitions_SecurityEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = SecurityScheme.toJSON(message.value);
-    }
-    return obj;
-  },
-};
+    toJSON(message: SecurityDefinitions_SecurityEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = SecurityScheme.toJSON(message.value);
+      }
+      return obj;
+    },
+  };
 
-export const SecurityScheme = {
+export const SecurityScheme: MessageFns<SecurityScheme> = {
   fromJSON(object: any): SecurityScheme {
     return {
       type: isSet(object.type) ? securityScheme_TypeFromJSON(object.type) : 0,
@@ -1657,27 +1661,28 @@ export const SecurityScheme = {
   },
 };
 
-export const SecurityScheme_ExtensionsEntry = {
-  fromJSON(object: any): SecurityScheme_ExtensionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
-  },
+export const SecurityScheme_ExtensionsEntry: MessageFns<SecurityScheme_ExtensionsEntry> =
+  {
+    fromJSON(object: any): SecurityScheme_ExtensionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object?.value) ? object.value : undefined,
+      };
+    },
 
-  toJSON(message: SecurityScheme_ExtensionsEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = message.value;
-    }
-    return obj;
-  },
-};
+    toJSON(message: SecurityScheme_ExtensionsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
-export const SecurityRequirement = {
+export const SecurityRequirement: MessageFns<SecurityRequirement> = {
   fromJSON(object: any): SecurityRequirement {
     return {
       securityRequirement: isObject(object.securityRequirement)
@@ -1708,49 +1713,51 @@ export const SecurityRequirement = {
   },
 };
 
-export const SecurityRequirement_SecurityRequirementValue = {
-  fromJSON(object: any): SecurityRequirement_SecurityRequirementValue {
-    return {
-      scope: globalThis.Array.isArray(object?.scope)
-        ? object.scope.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
+export const SecurityRequirement_SecurityRequirementValue: MessageFns<SecurityRequirement_SecurityRequirementValue> =
+  {
+    fromJSON(object: any): SecurityRequirement_SecurityRequirementValue {
+      return {
+        scope: globalThis.Array.isArray(object?.scope)
+          ? object.scope.map((e: any) => globalThis.String(e))
+          : [],
+      };
+    },
 
-  toJSON(message: SecurityRequirement_SecurityRequirementValue): unknown {
-    const obj: any = {};
-    if (message.scope?.length) {
-      obj.scope = message.scope;
-    }
-    return obj;
-  },
-};
+    toJSON(message: SecurityRequirement_SecurityRequirementValue): unknown {
+      const obj: any = {};
+      if (message.scope?.length) {
+        obj.scope = message.scope;
+      }
+      return obj;
+    },
+  };
 
-export const SecurityRequirement_SecurityRequirementEntry = {
-  fromJSON(object: any): SecurityRequirement_SecurityRequirementEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? SecurityRequirement_SecurityRequirementValue.fromJSON(object.value)
-        : undefined,
-    };
-  },
+export const SecurityRequirement_SecurityRequirementEntry: MessageFns<SecurityRequirement_SecurityRequirementEntry> =
+  {
+    fromJSON(object: any): SecurityRequirement_SecurityRequirementEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? SecurityRequirement_SecurityRequirementValue.fromJSON(object.value)
+          : undefined,
+      };
+    },
 
-  toJSON(message: SecurityRequirement_SecurityRequirementEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = SecurityRequirement_SecurityRequirementValue.toJSON(
-        message.value,
-      );
-    }
-    return obj;
-  },
-};
+    toJSON(message: SecurityRequirement_SecurityRequirementEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = SecurityRequirement_SecurityRequirementValue.toJSON(
+          message.value,
+        );
+      }
+      return obj;
+    },
+  };
 
-export const Scopes = {
+export const Scopes: MessageFns<Scopes> = {
   fromJSON(object: any): Scopes {
     return {
       scope: isObject(object.scope)
@@ -1780,7 +1787,7 @@ export const Scopes = {
   },
 };
 
-export const Scopes_ScopeEntry = {
+export const Scopes_ScopeEntry: MessageFns<Scopes_ScopeEntry> = {
   fromJSON(object: any): Scopes_ScopeEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -1806,4 +1813,9 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

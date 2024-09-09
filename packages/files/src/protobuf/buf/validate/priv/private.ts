@@ -15,7 +15,7 @@ export interface Constraint {
   expression: string;
 }
 
-export const FieldConstraints = {
+export const FieldConstraints: MessageFns<FieldConstraints> = {
   fromJSON(object: any): FieldConstraints {
     return {
       cel: globalThis.Array.isArray(object?.cel)
@@ -25,7 +25,7 @@ export const FieldConstraints = {
   },
 };
 
-export const Constraint = {
+export const Constraint: MessageFns<Constraint> = {
   fromJSON(object: any): Constraint {
     return {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
@@ -39,4 +39,8 @@ export const Constraint = {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
 }

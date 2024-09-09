@@ -58,7 +58,7 @@ export function validationError_SourceToJSON(
   }
 }
 
-export const ValidationError = {
+export const ValidationError: MessageFns<ValidationError> = {
   fromJSON(object: any): ValidationError {
     return {
       path: isSet(object.path) ? globalThis.String(object.path) : "",
@@ -86,4 +86,9 @@ export const ValidationError = {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

@@ -63,7 +63,7 @@ export interface Schema {
   definition: Uint8Array;
 }
 
-export const ValidationError = {
+export const ValidationError: MessageFns<ValidationError> = {
   fromJSON(object: any): ValidationError {
     return {
       path: isSet(object.path) ? globalThis.String(object.path) : "",
@@ -89,7 +89,7 @@ export const ValidationError = {
   },
 };
 
-export const Schema = {
+export const Schema: MessageFns<Schema> = {
   fromJSON(object: any): Schema {
     return {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
@@ -138,4 +138,9 @@ function base64FromBytes(arr: Uint8Array): string {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

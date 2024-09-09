@@ -20,7 +20,7 @@ function createBaseFieldConstraints(): FieldConstraints {
   return { cel: [] };
 }
 
-export const FieldConstraints = {
+export const FieldConstraints: MessageFns<FieldConstraints> = {
   encode(
     message: FieldConstraints,
     writer: BinaryWriter = new BinaryWriter(),
@@ -76,7 +76,7 @@ function createBaseConstraint(): Constraint {
   return { id: "", message: "", expression: "" };
 }
 
-export const Constraint = {
+export const Constraint: MessageFns<Constraint> = {
   encode(
     message: Constraint,
     writer: BinaryWriter = new BinaryWriter(),
@@ -158,4 +158,11 @@ export const Constraint = {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

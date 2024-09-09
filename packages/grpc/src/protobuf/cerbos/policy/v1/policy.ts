@@ -181,7 +181,7 @@ function createBasePolicy(): Policy {
   };
 }
 
-export const Policy = {
+export const Policy: MessageFns<Policy> = {
   encode(
     message: Policy,
     writer: BinaryWriter = new BinaryWriter(),
@@ -343,7 +343,7 @@ function createBasePolicy_VariablesEntry(): Policy_VariablesEntry {
   return { key: "", value: "" };
 }
 
-export const Policy_VariablesEntry = {
+export const Policy_VariablesEntry: MessageFns<Policy_VariablesEntry> = {
   encode(
     message: Policy_VariablesEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -396,7 +396,7 @@ function createBaseSourceAttributes(): SourceAttributes {
   return { attributes: {} };
 }
 
-export const SourceAttributes = {
+export const SourceAttributes: MessageFns<SourceAttributes> = {
   encode(
     message: SourceAttributes,
     writer: BinaryWriter = new BinaryWriter(),
@@ -447,54 +447,58 @@ function createBaseSourceAttributes_AttributesEntry(): SourceAttributes_Attribut
   return { key: "", value: undefined };
 }
 
-export const SourceAttributes_AttributesEntry = {
-  encode(
-    message: SourceAttributes_AttributesEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): SourceAttributes_AttributesEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSourceAttributes_AttributesEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
-          continue;
+export const SourceAttributes_AttributesEntry: MessageFns<SourceAttributes_AttributesEntry> =
+  {
+    encode(
+      message: SourceAttributes_AttributesEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        Value.encode(
+          Value.wrap(message.value),
+          writer.uint32(18).fork(),
+        ).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-};
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): SourceAttributes_AttributesEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSourceAttributes_AttributesEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
 
 function createBaseMetadata(): Metadata {
   return {
@@ -507,7 +511,7 @@ function createBaseMetadata(): Metadata {
   };
 }
 
-export const Metadata = {
+export const Metadata: MessageFns<Metadata> = {
   encode(
     message: Metadata,
     writer: BinaryWriter = new BinaryWriter(),
@@ -615,54 +619,55 @@ function createBaseMetadata_AnnotationsEntry(): Metadata_AnnotationsEntry {
   return { key: "", value: "" };
 }
 
-export const Metadata_AnnotationsEntry = {
-  encode(
-    message: Metadata_AnnotationsEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): Metadata_AnnotationsEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMetadata_AnnotationsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = reader.string();
-          continue;
+export const Metadata_AnnotationsEntry: MessageFns<Metadata_AnnotationsEntry> =
+  {
+    encode(
+      message: Metadata_AnnotationsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== "") {
+        writer.uint32(18).string(message.value);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-};
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): Metadata_AnnotationsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMetadata_AnnotationsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = reader.string();
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
 
 function createBaseResourcePolicy(): ResourcePolicy {
   return {
@@ -676,7 +681,7 @@ function createBaseResourcePolicy(): ResourcePolicy {
   };
 }
 
-export const ResourcePolicy = {
+export const ResourcePolicy: MessageFns<ResourcePolicy> = {
   encode(
     message: ResourcePolicy,
     writer: BinaryWriter = new BinaryWriter(),
@@ -784,7 +789,7 @@ function createBaseResourceRule(): ResourceRule {
   };
 }
 
-export const ResourceRule = {
+export const ResourceRule: MessageFns<ResourceRule> = {
   encode(
     message: ResourceRule,
     writer: BinaryWriter = new BinaryWriter(),
@@ -890,7 +895,7 @@ function createBasePrincipalPolicy(): PrincipalPolicy {
   };
 }
 
-export const PrincipalPolicy = {
+export const PrincipalPolicy: MessageFns<PrincipalPolicy> = {
   encode(
     message: PrincipalPolicy,
     writer: BinaryWriter = new BinaryWriter(),
@@ -970,7 +975,7 @@ function createBasePrincipalRule(): PrincipalRule {
   return { resource: "", actions: [] };
 }
 
-export const PrincipalRule = {
+export const PrincipalRule: MessageFns<PrincipalRule> = {
   encode(
     message: PrincipalRule,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1028,7 +1033,7 @@ function createBasePrincipalRule_Action(): PrincipalRule_Action {
   };
 }
 
-export const PrincipalRule_Action = {
+export const PrincipalRule_Action: MessageFns<PrincipalRule_Action> = {
   encode(
     message: PrincipalRule_Action,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1111,7 +1116,7 @@ function createBaseDerivedRoles(): DerivedRoles {
   return { name: "", definitions: [], variables: undefined };
 }
 
-export const DerivedRoles = {
+export const DerivedRoles: MessageFns<DerivedRoles> = {
   encode(
     message: DerivedRoles,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1171,7 +1176,7 @@ function createBaseRoleDef(): RoleDef {
   return { name: "", parentRoles: [], condition: undefined };
 }
 
-export const RoleDef = {
+export const RoleDef: MessageFns<RoleDef> = {
   encode(
     message: RoleDef,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1231,7 +1236,7 @@ function createBaseExportVariables(): ExportVariables {
   return { name: "", definitions: {} };
 }
 
-export const ExportVariables = {
+export const ExportVariables: MessageFns<ExportVariables> = {
   encode(
     message: ExportVariables,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1290,60 +1295,61 @@ function createBaseExportVariables_DefinitionsEntry(): ExportVariables_Definitio
   return { key: "", value: "" };
 }
 
-export const ExportVariables_DefinitionsEntry = {
-  encode(
-    message: ExportVariables_DefinitionsEntry,
-    writer: BinaryWriter = new BinaryWriter(),
-  ): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== "") {
-      writer.uint32(18).string(message.value);
-    }
-    return writer;
-  },
-
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): ExportVariables_DefinitionsEntry {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseExportVariables_DefinitionsEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = reader.string();
-          continue;
+export const ExportVariables_DefinitionsEntry: MessageFns<ExportVariables_DefinitionsEntry> =
+  {
+    encode(
+      message: ExportVariables_DefinitionsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== "") {
+        writer.uint32(18).string(message.value);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
-};
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): ExportVariables_DefinitionsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseExportVariables_DefinitionsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1:
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          case 2:
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = reader.string();
+            continue;
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
 
 function createBaseVariables(): Variables {
   return { import: [], local: {} };
 }
 
-export const Variables = {
+export const Variables: MessageFns<Variables> = {
   encode(
     message: Variables,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1399,7 +1405,7 @@ function createBaseVariables_LocalEntry(): Variables_LocalEntry {
   return { key: "", value: "" };
 }
 
-export const Variables_LocalEntry = {
+export const Variables_LocalEntry: MessageFns<Variables_LocalEntry> = {
   encode(
     message: Variables_LocalEntry,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1452,7 +1458,7 @@ function createBaseCondition(): Condition {
   return { condition: undefined };
 }
 
-export const Condition = {
+export const Condition: MessageFns<Condition> = {
   encode(
     message: Condition,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1507,7 +1513,7 @@ function createBaseMatch(): Match {
   return { op: undefined };
 }
 
-export const Match = {
+export const Match: MessageFns<Match> = {
   encode(
     message: Match,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1588,7 +1594,7 @@ function createBaseMatch_ExprList(): Match_ExprList {
   return { of: [] };
 }
 
-export const Match_ExprList = {
+export const Match_ExprList: MessageFns<Match_ExprList> = {
   encode(
     message: Match_ExprList,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1628,7 +1634,7 @@ function createBaseOutput(): Output {
   return { expr: "", when: undefined };
 }
 
-export const Output = {
+export const Output: MessageFns<Output> = {
   encode(
     message: Output,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1678,7 +1684,7 @@ function createBaseOutput_When(): Output_When {
   return { ruleActivated: "", conditionNotMet: "" };
 }
 
-export const Output_When = {
+export const Output_When: MessageFns<Output_When> = {
   encode(
     message: Output_When,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1728,7 +1734,7 @@ function createBaseSchemas(): Schemas {
   return { principalSchema: undefined, resourceSchema: undefined };
 }
 
-export const Schemas = {
+export const Schemas: MessageFns<Schemas> = {
   encode(
     message: Schemas,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1790,7 +1796,7 @@ function createBaseSchemas_IgnoreWhen(): Schemas_IgnoreWhen {
   return { actions: [] };
 }
 
-export const Schemas_IgnoreWhen = {
+export const Schemas_IgnoreWhen: MessageFns<Schemas_IgnoreWhen> = {
   encode(
     message: Schemas_IgnoreWhen,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1833,7 +1839,7 @@ function createBaseSchemas_Schema(): Schemas_Schema {
   return { ref: "", ignoreWhen: undefined };
 }
 
-export const Schemas_Schema = {
+export const Schemas_Schema: MessageFns<Schemas_Schema> = {
   encode(
     message: Schemas_Schema,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1884,3 +1890,8 @@ export const Schemas_Schema = {
     return message;
   },
 };
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+}

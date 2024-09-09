@@ -36,7 +36,7 @@ function createBaseHttpRule(): HttpRule {
   };
 }
 
-export const HttpRule = {
+export const HttpRule: MessageFns<HttpRule> = {
   encode(
     message: HttpRule,
     writer: BinaryWriter = new BinaryWriter(),
@@ -176,7 +176,7 @@ function createBaseCustomHttpPattern(): CustomHttpPattern {
   return { kind: "", path: "" };
 }
 
-export const CustomHttpPattern = {
+export const CustomHttpPattern: MessageFns<CustomHttpPattern> = {
   encode(
     message: CustomHttpPattern,
     writer: BinaryWriter = new BinaryWriter(),
@@ -221,3 +221,8 @@ export const CustomHttpPattern = {
     return message;
   },
 };
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+}

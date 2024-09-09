@@ -68,7 +68,7 @@ function createBaseValidationError(): ValidationError {
   return { path: "", message: "", source: 0 };
 }
 
-export const ValidationError = {
+export const ValidationError: MessageFns<ValidationError> = {
   encode(
     message: ValidationError,
     writer: BinaryWriter = new BinaryWriter(),
@@ -152,7 +152,7 @@ function createBaseSchema(): Schema {
   return { id: "", definition: new Uint8Array(0) };
 }
 
-export const Schema = {
+export const Schema: MessageFns<Schema> = {
   encode(
     message: Schema,
     writer: BinaryWriter = new BinaryWriter(),
@@ -245,4 +245,11 @@ function base64FromBytes(arr: Uint8Array): string {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

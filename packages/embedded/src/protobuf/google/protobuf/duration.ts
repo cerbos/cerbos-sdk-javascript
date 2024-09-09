@@ -10,7 +10,7 @@ export interface Duration {
   nanos: number;
 }
 
-export const Duration = {
+export const Duration: MessageFns<Duration> = {
   fromJSON(object: any): Duration {
     return {
       seconds: isSet(object.seconds) ? globalThis.Number(object.seconds) : 0,
@@ -32,4 +32,9 @@ export const Duration = {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

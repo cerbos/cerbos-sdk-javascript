@@ -336,7 +336,7 @@ function createBaseOneofConstraints(): OneofConstraints {
   return { required: undefined };
 }
 
-export const OneofConstraints = {
+export const OneofConstraints: MessageFns<OneofConstraints> = {
   encode(
     message: OneofConstraints,
     writer: BinaryWriter = new BinaryWriter(),
@@ -382,7 +382,7 @@ function createBaseFieldConstraints(): FieldConstraints {
   };
 }
 
-export const FieldConstraints = {
+export const FieldConstraints: MessageFns<FieldConstraints> = {
   encode(
     message: FieldConstraints,
     writer: BinaryWriter = new BinaryWriter(),
@@ -773,7 +773,7 @@ function createBaseFloatRules(): FloatRules {
   };
 }
 
-export const FloatRules = {
+export const FloatRules: MessageFns<FloatRules> = {
   encode(
     message: FloatRules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -918,7 +918,7 @@ function createBaseDoubleRules(): DoubleRules {
   };
 }
 
-export const DoubleRules = {
+export const DoubleRules: MessageFns<DoubleRules> = {
   encode(
     message: DoubleRules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1062,7 +1062,7 @@ function createBaseInt32Rules(): Int32Rules {
   };
 }
 
-export const Int32Rules = {
+export const Int32Rules: MessageFns<Int32Rules> = {
   encode(
     message: Int32Rules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1196,7 +1196,7 @@ function createBaseInt64Rules(): Int64Rules {
   };
 }
 
-export const Int64Rules = {
+export const Int64Rules: MessageFns<Int64Rules> = {
   encode(
     message: Int64Rules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1333,7 +1333,7 @@ function createBaseUInt32Rules(): UInt32Rules {
   };
 }
 
-export const UInt32Rules = {
+export const UInt32Rules: MessageFns<UInt32Rules> = {
   encode(
     message: UInt32Rules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1467,7 +1467,7 @@ function createBaseUInt64Rules(): UInt64Rules {
   };
 }
 
-export const UInt64Rules = {
+export const UInt64Rules: MessageFns<UInt64Rules> = {
   encode(
     message: UInt64Rules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1604,7 +1604,7 @@ function createBaseSInt32Rules(): SInt32Rules {
   };
 }
 
-export const SInt32Rules = {
+export const SInt32Rules: MessageFns<SInt32Rules> = {
   encode(
     message: SInt32Rules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1738,7 +1738,7 @@ function createBaseSInt64Rules(): SInt64Rules {
   };
 }
 
-export const SInt64Rules = {
+export const SInt64Rules: MessageFns<SInt64Rules> = {
   encode(
     message: SInt64Rules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -1875,7 +1875,7 @@ function createBaseFixed32Rules(): Fixed32Rules {
   };
 }
 
-export const Fixed32Rules = {
+export const Fixed32Rules: MessageFns<Fixed32Rules> = {
   encode(
     message: Fixed32Rules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2009,7 +2009,7 @@ function createBaseFixed64Rules(): Fixed64Rules {
   };
 }
 
-export const Fixed64Rules = {
+export const Fixed64Rules: MessageFns<Fixed64Rules> = {
   encode(
     message: Fixed64Rules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2149,7 +2149,7 @@ function createBaseSFixed32Rules(): SFixed32Rules {
   };
 }
 
-export const SFixed32Rules = {
+export const SFixed32Rules: MessageFns<SFixed32Rules> = {
   encode(
     message: SFixed32Rules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2283,7 +2283,7 @@ function createBaseSFixed64Rules(): SFixed64Rules {
   };
 }
 
-export const SFixed64Rules = {
+export const SFixed64Rules: MessageFns<SFixed64Rules> = {
   encode(
     message: SFixed64Rules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2420,7 +2420,7 @@ function createBaseBoolRules(): BoolRules {
   return { const: undefined };
 }
 
-export const BoolRules = {
+export const BoolRules: MessageFns<BoolRules> = {
   encode(
     message: BoolRules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2477,7 +2477,7 @@ function createBaseStringRules(): StringRules {
   };
 }
 
-export const StringRules = {
+export const StringRules: MessageFns<StringRules> = {
   encode(
     message: StringRules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -2849,7 +2849,7 @@ function createBaseBytesRules(): BytesRules {
   };
 }
 
-export const BytesRules = {
+export const BytesRules: MessageFns<BytesRules> = {
   encode(
     message: BytesRules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -3011,7 +3011,7 @@ function createBaseEnumRules(): EnumRules {
   return { const: undefined, definedOnly: undefined, in: [], notIn: [] };
 }
 
-export const EnumRules = {
+export const EnumRules: MessageFns<EnumRules> = {
   encode(
     message: EnumRules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -3110,7 +3110,7 @@ function createBaseRepeatedRules(): RepeatedRules {
   };
 }
 
-export const RepeatedRules = {
+export const RepeatedRules: MessageFns<RepeatedRules> = {
   encode(
     message: RepeatedRules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -3185,7 +3185,7 @@ function createBaseMapRules(): MapRules {
   };
 }
 
-export const MapRules = {
+export const MapRules: MessageFns<MapRules> = {
   encode(
     message: MapRules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -3255,7 +3255,7 @@ function createBaseAnyRules(): AnyRules {
   return { in: [], notIn: [] };
 }
 
-export const AnyRules = {
+export const AnyRules: MessageFns<AnyRules> = {
   encode(
     message: AnyRules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -3311,7 +3311,7 @@ function createBaseDurationRules(): DurationRules {
   };
 }
 
-export const DurationRules = {
+export const DurationRules: MessageFns<DurationRules> = {
   encode(
     message: DurationRules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -3438,7 +3438,7 @@ function createBaseTimestampRules(): TimestampRules {
   };
 }
 
-export const TimestampRules = {
+export const TimestampRules: MessageFns<TimestampRules> = {
   encode(
     message: TimestampRules,
     writer: BinaryWriter = new BinaryWriter(),
@@ -3587,4 +3587,9 @@ function fromTimestamp(t: Timestamp): Date {
   let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
   return new globalThis.Date(millis);
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
 }

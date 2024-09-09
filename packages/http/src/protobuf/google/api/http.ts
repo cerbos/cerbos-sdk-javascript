@@ -25,7 +25,7 @@ export interface CustomHttpPattern {
   path: string;
 }
 
-export const HttpRule = {
+export const HttpRule: MessageFns<HttpRule> = {
   fromJSON(object: any): HttpRule {
     return {
       selector: isSet(object.selector)
@@ -95,7 +95,7 @@ export const HttpRule = {
   },
 };
 
-export const CustomHttpPattern = {
+export const CustomHttpPattern: MessageFns<CustomHttpPattern> = {
   fromJSON(object: any): CustomHttpPattern {
     return {
       kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
@@ -117,4 +117,9 @@ export const CustomHttpPattern = {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

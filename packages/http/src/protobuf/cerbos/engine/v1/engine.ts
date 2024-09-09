@@ -178,7 +178,7 @@ export interface AuxData_JwtEntry {
   value: any | undefined;
 }
 
-export const PlanResourcesInput = {
+export const PlanResourcesInput: MessageFns<PlanResourcesInput> = {
   fromJSON(object: any): PlanResourcesInput {
     return {
       requestId: isSet(object.requestId)
@@ -224,70 +224,72 @@ export const PlanResourcesInput = {
   },
 };
 
-export const PlanResourcesInput_Resource = {
-  fromJSON(object: any): PlanResourcesInput_Resource {
-    return {
-      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
-      attr: isObject(object.attr)
-        ? Object.entries(object.attr).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-      policyVersion: isSet(object.policyVersion)
-        ? globalThis.String(object.policyVersion)
-        : "",
-      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-    };
-  },
+export const PlanResourcesInput_Resource: MessageFns<PlanResourcesInput_Resource> =
+  {
+    fromJSON(object: any): PlanResourcesInput_Resource {
+      return {
+        kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
+        attr: isObject(object.attr)
+          ? Object.entries(object.attr).reduce<{
+              [key: string]: any | undefined;
+            }>((acc, [key, value]) => {
+              acc[key] = value as any | undefined;
+              return acc;
+            }, {})
+          : {},
+        policyVersion: isSet(object.policyVersion)
+          ? globalThis.String(object.policyVersion)
+          : "",
+        scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
+      };
+    },
 
-  toJSON(message: PlanResourcesInput_Resource): unknown {
-    const obj: any = {};
-    if (message.kind !== "") {
-      obj.kind = message.kind;
-    }
-    if (message.attr) {
-      const entries = Object.entries(message.attr);
-      if (entries.length > 0) {
-        obj.attr = {};
-        entries.forEach(([k, v]) => {
-          obj.attr[k] = v;
-        });
+    toJSON(message: PlanResourcesInput_Resource): unknown {
+      const obj: any = {};
+      if (message.kind !== "") {
+        obj.kind = message.kind;
       }
-    }
-    if (message.policyVersion !== "") {
-      obj.policyVersion = message.policyVersion;
-    }
-    if (message.scope !== "") {
-      obj.scope = message.scope;
-    }
-    return obj;
-  },
-};
+      if (message.attr) {
+        const entries = Object.entries(message.attr);
+        if (entries.length > 0) {
+          obj.attr = {};
+          entries.forEach(([k, v]) => {
+            obj.attr[k] = v;
+          });
+        }
+      }
+      if (message.policyVersion !== "") {
+        obj.policyVersion = message.policyVersion;
+      }
+      if (message.scope !== "") {
+        obj.scope = message.scope;
+      }
+      return obj;
+    },
+  };
 
-export const PlanResourcesInput_Resource_AttrEntry = {
-  fromJSON(object: any): PlanResourcesInput_Resource_AttrEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
-  },
+export const PlanResourcesInput_Resource_AttrEntry: MessageFns<PlanResourcesInput_Resource_AttrEntry> =
+  {
+    fromJSON(object: any): PlanResourcesInput_Resource_AttrEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object?.value) ? object.value : undefined,
+      };
+    },
 
-  toJSON(message: PlanResourcesInput_Resource_AttrEntry): unknown {
-    const obj: any = {};
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = message.value;
-    }
-    return obj;
-  },
-};
+    toJSON(message: PlanResourcesInput_Resource_AttrEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
-export const PlanResourcesFilter = {
+export const PlanResourcesFilter: MessageFns<PlanResourcesFilter> = {
   fromJSON(object: any): PlanResourcesFilter {
     return {
       kind: isSet(object.kind)
@@ -313,73 +315,75 @@ export const PlanResourcesFilter = {
   },
 };
 
-export const PlanResourcesFilter_Expression = {
-  fromJSON(object: any): PlanResourcesFilter_Expression {
-    return {
-      operator: isSet(object.operator)
-        ? globalThis.String(object.operator)
-        : "",
-      operands: globalThis.Array.isArray(object?.operands)
-        ? object.operands.map((e: any) =>
-            PlanResourcesFilter_Expression_Operand.fromJSON(e),
-          )
-        : [],
-    };
-  },
+export const PlanResourcesFilter_Expression: MessageFns<PlanResourcesFilter_Expression> =
+  {
+    fromJSON(object: any): PlanResourcesFilter_Expression {
+      return {
+        operator: isSet(object.operator)
+          ? globalThis.String(object.operator)
+          : "",
+        operands: globalThis.Array.isArray(object?.operands)
+          ? object.operands.map((e: any) =>
+              PlanResourcesFilter_Expression_Operand.fromJSON(e),
+            )
+          : [],
+      };
+    },
 
-  toJSON(message: PlanResourcesFilter_Expression): unknown {
-    const obj: any = {};
-    if (message.operator !== "") {
-      obj.operator = message.operator;
-    }
-    if (message.operands?.length) {
-      obj.operands = message.operands.map((e) =>
-        PlanResourcesFilter_Expression_Operand.toJSON(e),
-      );
-    }
-    return obj;
-  },
-};
+    toJSON(message: PlanResourcesFilter_Expression): unknown {
+      const obj: any = {};
+      if (message.operator !== "") {
+        obj.operator = message.operator;
+      }
+      if (message.operands?.length) {
+        obj.operands = message.operands.map((e) =>
+          PlanResourcesFilter_Expression_Operand.toJSON(e),
+        );
+      }
+      return obj;
+    },
+  };
 
-export const PlanResourcesFilter_Expression_Operand = {
-  fromJSON(object: any): PlanResourcesFilter_Expression_Operand {
-    return {
-      node: isSet(object.value)
-        ? { $case: "value", value: object.value }
-        : isSet(object.expression)
-          ? {
-              $case: "expression",
-              expression: PlanResourcesFilter_Expression.fromJSON(
-                object.expression,
-              ),
-            }
-          : isSet(object.variable)
+export const PlanResourcesFilter_Expression_Operand: MessageFns<PlanResourcesFilter_Expression_Operand> =
+  {
+    fromJSON(object: any): PlanResourcesFilter_Expression_Operand {
+      return {
+        node: isSet(object.value)
+          ? { $case: "value", value: object.value }
+          : isSet(object.expression)
             ? {
-                $case: "variable",
-                variable: globalThis.String(object.variable),
+                $case: "expression",
+                expression: PlanResourcesFilter_Expression.fromJSON(
+                  object.expression,
+                ),
               }
-            : undefined,
-    };
-  },
+            : isSet(object.variable)
+              ? {
+                  $case: "variable",
+                  variable: globalThis.String(object.variable),
+                }
+              : undefined,
+      };
+    },
 
-  toJSON(message: PlanResourcesFilter_Expression_Operand): unknown {
-    const obj: any = {};
-    if (message.node?.$case === "value") {
-      obj.value = message.node.value;
-    }
-    if (message.node?.$case === "expression") {
-      obj.expression = PlanResourcesFilter_Expression.toJSON(
-        message.node.expression,
-      );
-    }
-    if (message.node?.$case === "variable") {
-      obj.variable = message.node.variable;
-    }
-    return obj;
-  },
-};
+    toJSON(message: PlanResourcesFilter_Expression_Operand): unknown {
+      const obj: any = {};
+      if (message.node?.$case === "value") {
+        obj.value = message.node.value;
+      }
+      if (message.node?.$case === "expression") {
+        obj.expression = PlanResourcesFilter_Expression.toJSON(
+          message.node.expression,
+        );
+      }
+      if (message.node?.$case === "variable") {
+        obj.variable = message.node.variable;
+      }
+      return obj;
+    },
+  };
 
-export const PlanResourcesOutput = {
+export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
   fromJSON(object: any): PlanResourcesOutput {
     return {
       requestId: isSet(object.requestId)
@@ -435,7 +439,7 @@ export const PlanResourcesOutput = {
   },
 };
 
-export const CheckInput = {
+export const CheckInput: MessageFns<CheckInput> = {
   fromJSON(object: any): CheckInput {
     return {
       requestId: isSet(object.requestId)
@@ -477,7 +481,7 @@ export const CheckInput = {
   },
 };
 
-export const CheckOutput = {
+export const CheckOutput: MessageFns<CheckOutput> = {
   fromJSON(object: any): CheckOutput {
     return {
       requestId: isSet(object.requestId)
@@ -540,7 +544,7 @@ export const CheckOutput = {
   },
 };
 
-export const CheckOutput_ActionEffect = {
+export const CheckOutput_ActionEffect: MessageFns<CheckOutput_ActionEffect> = {
   fromJSON(object: any): CheckOutput_ActionEffect {
     return {
       effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
@@ -564,7 +568,7 @@ export const CheckOutput_ActionEffect = {
   },
 };
 
-export const CheckOutput_ActionsEntry = {
+export const CheckOutput_ActionsEntry: MessageFns<CheckOutput_ActionsEntry> = {
   fromJSON(object: any): CheckOutput_ActionsEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -586,7 +590,7 @@ export const CheckOutput_ActionsEntry = {
   },
 };
 
-export const OutputEntry = {
+export const OutputEntry: MessageFns<OutputEntry> = {
   fromJSON(object: any): OutputEntry {
     return {
       src: isSet(object.src) ? globalThis.String(object.src) : "",
@@ -606,7 +610,7 @@ export const OutputEntry = {
   },
 };
 
-export const Resource = {
+export const Resource: MessageFns<Resource> = {
   fromJSON(object: any): Resource {
     return {
       kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
@@ -653,7 +657,7 @@ export const Resource = {
   },
 };
 
-export const Resource_AttrEntry = {
+export const Resource_AttrEntry: MessageFns<Resource_AttrEntry> = {
   fromJSON(object: any): Resource_AttrEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -673,7 +677,7 @@ export const Resource_AttrEntry = {
   },
 };
 
-export const Principal = {
+export const Principal: MessageFns<Principal> = {
   fromJSON(object: any): Principal {
     return {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
@@ -722,7 +726,7 @@ export const Principal = {
   },
 };
 
-export const Principal_AttrEntry = {
+export const Principal_AttrEntry: MessageFns<Principal_AttrEntry> = {
   fromJSON(object: any): Principal_AttrEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -742,7 +746,7 @@ export const Principal_AttrEntry = {
   },
 };
 
-export const AuxData = {
+export const AuxData: MessageFns<AuxData> = {
   fromJSON(object: any): AuxData {
     return {
       jwt: isObject(object.jwt)
@@ -772,7 +776,7 @@ export const AuxData = {
   },
 };
 
-export const AuxData_JwtEntry = {
+export const AuxData_JwtEntry: MessageFns<AuxData_JwtEntry> = {
   fromJSON(object: any): AuxData_JwtEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
@@ -798,4 +802,9 @@ function isObject(value: any): boolean {
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

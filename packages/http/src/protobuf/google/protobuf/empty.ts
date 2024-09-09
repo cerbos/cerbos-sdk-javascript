@@ -7,7 +7,7 @@ export const protobufPackage = "google.protobuf";
 
 export interface Empty {}
 
-export const Empty = {
+export const Empty: MessageFns<Empty> = {
   fromJSON(_: any): Empty {
     return {};
   },
@@ -17,3 +17,8 @@ export const Empty = {
     return obj;
   },
 };
+
+export interface MessageFns<T> {
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+}
