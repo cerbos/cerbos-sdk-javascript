@@ -50,7 +50,7 @@
     "test:servers:stop": "pnpm run --filter=./private/test test:servers:stop"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.16.2",
+    "@arethetypeswrong/cli": "0.15.4",
     "@microsoft/api-documenter": "7.25.14",
     "@microsoft/api-extractor": "7.47.9",
     "@tsconfig/node18": "18.2.4",
