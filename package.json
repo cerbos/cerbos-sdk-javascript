@@ -1,10 +1,10 @@
 {
   "name": "cerbos-sdk-javascript",
   "private": true,
-  "packageManager": "pnpm@9.9.0",
+  "packageManager": "pnpm@9.10.0",
   "engines": {
     "node": "22.8.0",
-    "pnpm": "9.9.0"
+    "pnpm": "9.10.0"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
@@ -50,14 +50,14 @@
     "test:servers:stop": "pnpm run --filter=./private/test test:servers:stop"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.15.4",
-    "@microsoft/api-documenter": "7.25.12",
-    "@microsoft/api-extractor": "7.47.7",
+    "@arethetypeswrong/cli": "0.16.2",
+    "@microsoft/api-documenter": "7.25.14",
+    "@microsoft/api-extractor": "7.47.9",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
     "@types/node": "18.19.50",
-    "@typescript-eslint/eslint-plugin": "8.4.0",
-    "@typescript-eslint/parser": "8.4.0",
+    "@typescript-eslint/eslint-plugin": "8.5.0",
+    "@typescript-eslint/parser": "8.5.0",
     "concurrently": "9.0.1",
     "depcheck": "1.4.7",
     "eslint": "8.57.0",
@@ -66,7 +66,7 @@
     "prettier": "3.3.3",
     "prettier-plugin-pkg": "0.18.1",
     "ts-proto": "2.2.0",
-    "tsx": "4.19.0",
-    "typescript": "5.5.4"
+    "tsx": "4.19.1",
+    "typescript": "5.6.2"
   }
 }
