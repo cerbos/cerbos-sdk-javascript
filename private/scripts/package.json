@@ -3,7 +3,7 @@
   "private": true,
   "devDependencies": {
     "@types/semver": "7.5.8",
-    "date-fns": "3.6.0",
+    "date-fns": "4.1.0",
     "execa": "9.4.0",
     "prettier": "3.3.3",
     "semver": "7.6.3",
