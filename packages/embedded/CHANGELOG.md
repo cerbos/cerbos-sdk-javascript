@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.8.0] - 2024-09-23
+
 ### Added
 
 - Support for loading a precompiled `WebAssembly.Module` ([#1016](https://github.com/cerbos/cerbos-sdk-javascript/pull/1016))
@@ -157,7 +161,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.3...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.8.0...HEAD
+[0.8.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.3...@cerbos/embedded@0.8.0
 [0.7.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.2...@cerbos/embedded@0.7.3
 [0.7.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.1...@cerbos/embedded@0.7.2
 [0.7.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.0...@cerbos/embedded@0.7.1

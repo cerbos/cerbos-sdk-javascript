@@ -1,11 +1,11 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Support for loading a precompiled `WebAssembly.Module`
-      pull: 1016
-
 releases:
+  - version: 0.8.0
+    date: 2024-09-23
+
+    added:
+      - summary: Support for loading a precompiled `WebAssembly.Module`
+        pull: 1016
+
   - version: 0.7.3
     date: 2024-06-11
 
