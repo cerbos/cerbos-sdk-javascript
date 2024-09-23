@@ -88,3 +88,13 @@ import { readFile } from "fs/promises";
 const loader = new Loader(readFile("policies.wasm"));
 ```
 
+## Example 3
+
+Load an embedded PDP bundle from a precompiled WebAssembly module (requires a bundler):
+
+```typescript
+import bundle from "bundle.wasm";
+
+const loader = new Loader(bundle);
+```
+

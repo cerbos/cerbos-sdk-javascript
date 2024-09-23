@@ -156,7 +156,7 @@ export async function download(
 }
 
 async function instantiate(
-  source: ArrayBufferView | ArrayBuffer | Response,
+  source: ArrayBufferView | ArrayBuffer | Response | WebAssembly.Module,
   imports: WebAssembly.Imports,
 ): Promise<Exports> {
   if (source instanceof Response) {
@@ -182,8 +182,11 @@ async function instantiateStreaming(
   );
 }
 
-function instantiated({
-  instance: { exports },
-}: WebAssembly.WebAssemblyInstantiatedSource): Exports {
+function instantiated(
+  result: WebAssembly.Instance | WebAssembly.WebAssemblyInstantiatedSource,
+): Exports {
+  const { exports } =
+    result instanceof WebAssembly.Instance ? result : result.instance;
+
   return exports as Exports;
 }
