@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Support for loading a precompiled `WebAssembly.Module` ([#1016](https://github.com/cerbos/cerbos-sdk-javascript/pull/1016))
 
 ## [0.7.3] - 2024-06-11
 

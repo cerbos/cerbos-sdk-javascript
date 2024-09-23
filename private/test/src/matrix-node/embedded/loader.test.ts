@@ -89,6 +89,16 @@ describe("loaders", () => {
         "Promise<Response>",
         async (): Promise<Response> => await fetch(server.url),
       ],
+      [
+        "WebAssembly.Module",
+        (): WebAssembly.Module =>
+          new WebAssembly.Module(readFileSync(bundleFilePath(first))),
+      ],
+      [
+        "Promise<WebAssembly.Module>",
+        async (): Promise<WebAssembly.Module> =>
+          await WebAssembly.compile(await readFile(bundleFilePath(first))),
+      ],
     ])("%s", async (_, source) => {
       const callbacks = new Callbacks();
       const loader = new Loader(source(), callbacks);

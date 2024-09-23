@@ -61,7 +61,8 @@ export type Source =
   | ArrayBufferView
   | ArrayBuffer
   | Response
-  | Promise<ArrayBufferView | ArrayBuffer | Response>;
+  | WebAssembly.Module
+  | Promise<ArrayBufferView | ArrayBuffer | Response | WebAssembly.Module>;
 
 /**
  * Options for creating a new {@link Embedded} client or {@link Loader}.
@@ -231,6 +232,15 @@ export class Loader {
    * import { readFile } from "fs/promises";
    *
    * const loader = new Loader(readFile("policies.wasm"));
+   * ```
+   *
+   * @example
+   * Load an embedded PDP bundle from a precompiled WebAssembly module (requires a bundler):
+   *
+   * ```typescript
+   * import bundle from "bundle.wasm";
+   *
+   * const loader = new Loader(bundle);
    * ```
    */
   public constructor(

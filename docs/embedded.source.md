@@ -9,5 +9,5 @@ WebAssembly binary code of an embedded policy decision point bundle, or a URL or
 **Signature:**
 
 ```typescript
-export type Source = string | URL | ArrayBufferView | ArrayBuffer | Response | Promise<ArrayBufferView | ArrayBuffer | Response>;
+export type Source = string | URL | ArrayBufferView | ArrayBuffer | Response | WebAssembly.Module | Promise<ArrayBufferView | ArrayBuffer | Response | WebAssembly.Module>;
 ```
