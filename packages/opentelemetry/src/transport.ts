@@ -7,11 +7,11 @@ import {
   trace,
 } from "@opentelemetry/api";
 import {
-  SEMATTRS_RPC_GRPC_STATUS_CODE,
-  SEMATTRS_RPC_METHOD,
-  SEMATTRS_RPC_SERVICE,
-  SEMATTRS_RPC_SYSTEM,
-} from "@opentelemetry/semantic-conventions";
+  ATTR_RPC_GRPC_STATUS_CODE,
+  ATTR_RPC_METHOD,
+  ATTR_RPC_SERVICE,
+  ATTR_RPC_SYSTEM,
+} from "@opentelemetry/semantic-conventions/incubating";
 
 import type {
   _AbortHandler,
@@ -162,9 +162,9 @@ export class Transport implements _Transport {
     const status: SpanStatus = { code: SpanStatusCode.UNSET };
 
     const attributes: Attributes = {
-      [SEMATTRS_RPC_SYSTEM]: "grpc",
-      [SEMATTRS_RPC_SERVICE]: serviceName,
-      [SEMATTRS_RPC_METHOD]: methodName,
+      [ATTR_RPC_SYSTEM]: "grpc",
+      [ATTR_RPC_SERVICE]: serviceName,
+      [ATTR_RPC_METHOD]: methodName,
     };
 
     const span = this.tracer.startSpan(`${serviceName}/${methodName}`, {
@@ -189,7 +189,7 @@ export class Transport implements _Transport {
 
     const call = {
       succeeded: (): void => {
-        attributes[SEMATTRS_RPC_GRPC_STATUS_CODE] = Status.OK;
+        attributes[ATTR_RPC_GRPC_STATUS_CODE] = Status.OK;
         finish();
       },
       failed: (error: unknown): void => {
@@ -200,7 +200,7 @@ export class Transport implements _Transport {
           attributes["cerbos.error"] = error.message;
 
           if (error instanceof NotOK) {
-            attributes[SEMATTRS_RPC_GRPC_STATUS_CODE] = error.code;
+            attributes[ATTR_RPC_GRPC_STATUS_CODE] = error.code;
           }
         }
 

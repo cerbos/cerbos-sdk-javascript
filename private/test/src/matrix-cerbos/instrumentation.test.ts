@@ -12,11 +12,11 @@ import {
 } from "@opentelemetry/sdk-trace-base";
 import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
 import {
-  SEMATTRS_RPC_GRPC_STATUS_CODE,
-  SEMATTRS_RPC_METHOD,
-  SEMATTRS_RPC_SERVICE,
-  SEMATTRS_RPC_SYSTEM,
-} from "@opentelemetry/semantic-conventions";
+  ATTR_RPC_GRPC_STATUS_CODE,
+  ATTR_RPC_METHOD,
+  ATTR_RPC_SERVICE,
+  ATTR_RPC_SYSTEM,
+} from "@opentelemetry/semantic-conventions/incubating";
 import { UnsecuredJWT } from "jose";
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 
@@ -51,10 +51,10 @@ import {
 } from "../servers";
 
 interface ExpectedAttributes extends Attributes {
-  [SEMATTRS_RPC_SYSTEM]: string;
-  [SEMATTRS_RPC_SERVICE]: string;
-  [SEMATTRS_RPC_METHOD]: string;
-  [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status;
+  [ATTR_RPC_SYSTEM]: string;
+  [ATTR_RPC_SERVICE]: string;
+  [ATTR_RPC_METHOD]: string;
+  [ATTR_RPC_GRPC_STATUS_CODE]: Status;
   "cerbos.error"?: string;
 }
 
@@ -149,10 +149,10 @@ describe("CerbosInstrumentation", () => {
           );
 
           const attributes: ExpectedAttributes = {
-            [SEMATTRS_RPC_SYSTEM]: "grpc",
-            [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
-            [SEMATTRS_RPC_METHOD]: "CheckResources",
-            [SEMATTRS_RPC_GRPC_STATUS_CODE]: 0,
+            [ATTR_RPC_SYSTEM]: "grpc",
+            [ATTR_RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
+            [ATTR_RPC_METHOD]: "CheckResources",
+            [ATTR_RPC_GRPC_STATUS_CODE]: 0,
           };
 
           expect(result).toEqual({ value: false });
@@ -191,10 +191,10 @@ describe("CerbosInstrumentation", () => {
             );
 
             const attributes: ExpectedAttributes = {
-              [SEMATTRS_RPC_SYSTEM]: "grpc",
-              [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
-              [SEMATTRS_RPC_METHOD]: "CheckResources",
-              [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
+              [ATTR_RPC_SYSTEM]: "grpc",
+              [ATTR_RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
+              [ATTR_RPC_METHOD]: "CheckResources",
+              [ATTR_RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
               "cerbos.error": invalidArgumentDetails,
             };
 
@@ -268,10 +268,10 @@ describe("CerbosInstrumentation", () => {
             });
 
             const attributes: ExpectedAttributes = {
-              [SEMATTRS_RPC_SYSTEM]: "grpc",
-              [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
-              [SEMATTRS_RPC_METHOD]: "ListAuditLogEntries",
-              [SEMATTRS_RPC_GRPC_STATUS_CODE]: 0,
+              [ATTR_RPC_SYSTEM]: "grpc",
+              [ATTR_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
+              [ATTR_RPC_METHOD]: "ListAuditLogEntries",
+              [ATTR_RPC_GRPC_STATUS_CODE]: 0,
             };
 
             expect(result).toEqual({ value: entry });
@@ -297,10 +297,10 @@ describe("CerbosInstrumentation", () => {
             );
 
             const attributes: ExpectedAttributes = {
-              [SEMATTRS_RPC_SYSTEM]: "grpc",
-              [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
-              [SEMATTRS_RPC_METHOD]: "ListAuditLogEntries",
-              [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
+              [ATTR_RPC_SYSTEM]: "grpc",
+              [ATTR_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
+              [ATTR_RPC_METHOD]: "ListAuditLogEntries",
+              [ATTR_RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
               "cerbos.error": invalidArgumentDetails,
             };
 
@@ -353,10 +353,10 @@ describe("CerbosInstrumentation", () => {
             );
 
             const attributes = {
-              [SEMATTRS_RPC_SYSTEM]: "grpc",
-              [SEMATTRS_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
-              [SEMATTRS_RPC_METHOD]: "ListAuditLogEntries",
-              [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status.CANCELLED,
+              [ATTR_RPC_SYSTEM]: "grpc",
+              [ATTR_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
+              [ATTR_RPC_METHOD]: "ListAuditLogEntries",
+              [ATTR_RPC_GRPC_STATUS_CODE]: Status.CANCELLED,
               "cerbos.error": expect.stringContaining("Aborted"),
             } satisfies Attributes;
 
@@ -375,7 +375,7 @@ describe("CerbosInstrumentation", () => {
 
             await expectServerSpan(span, {
               ...attributes,
-              [SEMATTRS_RPC_GRPC_STATUS_CODE]: Status.OK, // Although the call is aborted after returning early from for-await on the client, it completes successfully on the server
+              [ATTR_RPC_GRPC_STATUS_CODE]: Status.OK, // Although the call is aborted after returning early from for-await on the client, it completes successfully on the server
             });
           });
         });
@@ -405,39 +405,38 @@ describe("CerbosInstrumentation", () => {
             kind: SpanKindProto.SPAN_KIND_SERVER,
             attributes: expect.arrayContaining([
               {
-                key: SEMATTRS_RPC_SYSTEM,
+                key: ATTR_RPC_SYSTEM,
                 value: {
                   value: {
                     $case: "stringValue",
-                    stringValue: attributes[SEMATTRS_RPC_SYSTEM],
+                    stringValue: attributes[ATTR_RPC_SYSTEM],
                   },
                 },
               },
               {
-                key: SEMATTRS_RPC_SERVICE,
+                key: ATTR_RPC_SERVICE,
                 value: {
                   value: {
                     $case: "stringValue",
-                    stringValue: attributes[SEMATTRS_RPC_SERVICE],
+                    stringValue: attributes[ATTR_RPC_SERVICE],
                   },
                 },
               },
               {
-                key: SEMATTRS_RPC_METHOD,
+                key: ATTR_RPC_METHOD,
                 value: {
                   value: {
                     $case: "stringValue",
-                    stringValue: attributes[SEMATTRS_RPC_METHOD],
+                    stringValue: attributes[ATTR_RPC_METHOD],
                   },
                 },
               },
               {
-                key: SEMATTRS_RPC_GRPC_STATUS_CODE,
+                key: ATTR_RPC_GRPC_STATUS_CODE,
                 value: {
                   value: {
                     $case: "intValue",
-                    intValue:
-                      attributes[SEMATTRS_RPC_GRPC_STATUS_CODE].toString(),
+                    intValue: attributes[ATTR_RPC_GRPC_STATUS_CODE].toString(),
                   },
                 },
               },

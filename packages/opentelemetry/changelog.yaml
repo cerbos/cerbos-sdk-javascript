@@ -1,3 +1,10 @@
+unreleased:
+  type: patch
+
+  changed:
+    - summary: Migrate away from [deprecated semantic attributes](https://github.com/open-telemetry/opentelemetry-js/pull/4690)
+      pull: 1018
+
 releases:
   - version: 0.5.3
     date: 2024-09-23
