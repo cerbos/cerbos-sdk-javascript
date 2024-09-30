@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Migrate away from [deprecated semantic attributes](https://github.com/open-telemetry/opentelemetry-js/pull/4690) ([#1018](https://github.com/cerbos/cerbos-sdk-javascript/pull/1018))
 
 ## [0.5.3] - 2024-09-23
 
