@@ -15,7 +15,7 @@
     "@cerbos/http": "workspace:*",
     "@cerbos/opentelemetry": "workspace:*",
     "@cerbos/react": "workspace:*",
-    "@grpc/grpc-js": "1.11.3",
+    "@grpc/grpc-js": "1.12.0",
     "@opentelemetry/api": "1.9.0",
     "@opentelemetry/sdk-metrics": "1.26.0",
     "@opentelemetry/sdk-trace-base": "1.26.0",
@@ -23,7 +23,7 @@
     "@opentelemetry/semantic-conventions": "1.27.0",
     "@testing-library/react": "16.0.1",
     "@testing-library/user-event": "14.5.2",
-    "@types/react": "18.3.9",
+    "@types/react": "18.3.11",
     "@types/semver": "7.5.8",
     "eslint-plugin-vitest": "0.4.1",
     "jose": "5.9.3",
@@ -31,6 +31,6 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "semver": "7.6.3",
-    "vitest": "2.1.1"
+    "vitest": "2.1.2"
   }
 }

@@ -87,49 +87,55 @@ export const HttpRule: MessageFns<HttpRule> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.selector = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.pattern = { $case: "get", get: reader.string() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.pattern = { $case: "put", put: reader.string() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.pattern = { $case: "post", post: reader.string() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.pattern = { $case: "delete", delete: reader.string() };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.pattern = { $case: "patch", patch: reader.string() };
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 66) {
             break;
           }
@@ -139,21 +145,24 @@ export const HttpRule: MessageFns<HttpRule> = {
             custom: CustomHttpPattern.decode(reader, reader.uint32()),
           };
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.body = reader.string();
           continue;
-        case 12:
+        }
+        case 12: {
           if (tag !== 98) {
             break;
           }
 
           message.responseBody = reader.string();
           continue;
-        case 11:
+        }
+        case 11: {
           if (tag !== 90) {
             break;
           }
@@ -162,6 +171,7 @@ export const HttpRule: MessageFns<HttpRule> = {
             HttpRule.decode(reader, reader.uint32()),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -266,20 +276,22 @@ export const CustomHttpPattern: MessageFns<CustomHttpPattern> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.kind = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.path = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;

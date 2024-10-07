@@ -250,42 +250,47 @@ export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.requestId = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.action = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.resourceKind = reader.string();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.policyVersion = reader.string();
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.filter = PlanResourcesFilter.decode(reader, reader.uint32());
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
@@ -295,7 +300,8 @@ export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
             reader.uint32(),
           );
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
@@ -304,13 +310,15 @@ export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
             ValidationError.decode(reader, reader.uint32()),
           );
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 66) {
             break;
           }
 
           message.cerbosCallId = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -409,20 +417,22 @@ export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> 
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.filterDebug = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.matchedScope = reader.string();
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -493,14 +503,15 @@ export const CheckResourceSetResponse: MessageFns<CheckResourceSetResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.requestId = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
@@ -513,7 +524,8 @@ export const CheckResourceSetResponse: MessageFns<CheckResourceSetResponse> = {
             message.resourceInstances[entry2.key] = entry2.value;
           }
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
@@ -523,6 +535,7 @@ export const CheckResourceSetResponse: MessageFns<CheckResourceSetResponse> = {
             reader.uint32(),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -606,7 +619,7 @@ export const CheckResourceSetResponse_ActionEffectMap: MessageFns<CheckResourceS
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
@@ -620,7 +633,8 @@ export const CheckResourceSetResponse_ActionEffectMap: MessageFns<CheckResourceS
               message.actions[entry1.key] = entry1.value;
             }
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -629,6 +643,7 @@ export const CheckResourceSetResponse_ActionEffectMap: MessageFns<CheckResourceS
               ValidationError.decode(reader, reader.uint32()),
             );
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -706,20 +721,22 @@ export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry: MessageFns<C
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 16) {
               break;
             }
 
             message.value = reader.int32() as any;
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -782,7 +799,7 @@ export const CheckResourceSetResponse_Meta: MessageFns<CheckResourceSetResponse_
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
@@ -796,6 +813,7 @@ export const CheckResourceSetResponse_Meta: MessageFns<CheckResourceSetResponse_
               message.resourceInstances[entry1.key] = entry1.value;
             }
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -865,20 +883,22 @@ export const CheckResourceSetResponse_Meta_EffectMeta: MessageFns<CheckResourceS
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.matchedPolicy = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.matchedScope = reader.string();
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -944,7 +964,7 @@ export const CheckResourceSetResponse_Meta_ActionMeta: MessageFns<CheckResourceS
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
@@ -958,13 +978,15 @@ export const CheckResourceSetResponse_Meta_ActionMeta: MessageFns<CheckResourceS
               message.actions[entry1.key] = entry1.value;
             }
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.effectiveDerivedRoles.push(reader.string());
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1045,14 +1067,15 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry: MessageFns<C
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -1062,6 +1085,7 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry: MessageFns<C
               reader.uint32(),
             );
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1132,14 +1156,15 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry: MessageFns<Ch
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -1149,6 +1174,7 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry: MessageFns<Ch
               reader.uint32(),
             );
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1219,14 +1245,15 @@ export const CheckResourceSetResponse_ResourceInstancesEntry: MessageFns<CheckRe
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -1236,6 +1263,7 @@ export const CheckResourceSetResponse_ResourceInstancesEntry: MessageFns<CheckRe
               reader.uint32(),
             );
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1301,14 +1329,15 @@ export const CheckResourceBatchResponse: MessageFns<CheckResourceBatchResponse> 
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.requestId = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -1320,6 +1349,7 @@ export const CheckResourceBatchResponse: MessageFns<CheckResourceBatchResponse> 
               ),
             );
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1392,14 +1422,15 @@ export const CheckResourceBatchResponse_ActionEffectMap: MessageFns<CheckResourc
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.resourceId = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -1413,7 +1444,8 @@ export const CheckResourceBatchResponse_ActionEffectMap: MessageFns<CheckResourc
               message.actions[entry2.key] = entry2.value;
             }
             continue;
-          case 3:
+          }
+          case 3: {
             if (tag !== 26) {
               break;
             }
@@ -1422,6 +1454,7 @@ export const CheckResourceBatchResponse_ActionEffectMap: MessageFns<CheckResourc
               ValidationError.decode(reader, reader.uint32()),
             );
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1505,20 +1538,22 @@ export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry: MessageFns
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 16) {
               break;
             }
 
             message.value = reader.int32() as any;
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1586,14 +1621,15 @@ export const CheckResourcesResponse: MessageFns<CheckResourcesResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.requestId = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
@@ -1602,13 +1638,15 @@ export const CheckResourcesResponse: MessageFns<CheckResourcesResponse> = {
             CheckResourcesResponse_ResultEntry.decode(reader, reader.uint32()),
           );
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.cerbosCallId = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1705,7 +1743,7 @@ export const CheckResourcesResponse_ResultEntry: MessageFns<CheckResourcesRespon
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
@@ -1716,7 +1754,8 @@ export const CheckResourcesResponse_ResultEntry: MessageFns<CheckResourcesRespon
                 reader.uint32(),
               );
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -1730,7 +1769,8 @@ export const CheckResourcesResponse_ResultEntry: MessageFns<CheckResourcesRespon
               message.actions[entry2.key] = entry2.value;
             }
             continue;
-          case 3:
+          }
+          case 3: {
             if (tag !== 26) {
               break;
             }
@@ -1739,7 +1779,8 @@ export const CheckResourcesResponse_ResultEntry: MessageFns<CheckResourcesRespon
               ValidationError.decode(reader, reader.uint32()),
             );
             continue;
-          case 4:
+          }
+          case 4: {
             if (tag !== 34) {
               break;
             }
@@ -1749,13 +1790,15 @@ export const CheckResourcesResponse_ResultEntry: MessageFns<CheckResourcesRespon
               reader.uint32(),
             );
             continue;
-          case 5:
+          }
+          case 5: {
             if (tag !== 42) {
               break;
             }
 
             message.outputs.push(OutputEntry.decode(reader, reader.uint32()));
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1860,34 +1903,38 @@ export const CheckResourcesResponse_ResultEntry_Resource: MessageFns<CheckResour
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.id = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.kind = reader.string();
             continue;
-          case 3:
+          }
+          case 3: {
             if (tag !== 26) {
               break;
             }
 
             message.policyVersion = reader.string();
             continue;
-          case 4:
+          }
+          case 4: {
             if (tag !== 34) {
               break;
             }
 
             message.scope = reader.string();
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1959,7 +2006,7 @@ export const CheckResourcesResponse_ResultEntry_Meta: MessageFns<CheckResourcesR
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
@@ -1973,13 +2020,15 @@ export const CheckResourcesResponse_ResultEntry_Meta: MessageFns<CheckResourcesR
               message.actions[entry1.key] = entry1.value;
             }
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.effectiveDerivedRoles.push(reader.string());
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -2060,20 +2109,22 @@ export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta: MessageFns<Chec
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.matchedPolicy = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.matchedScope = reader.string();
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -2142,14 +2193,15 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry: MessageFns<Ch
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -2160,6 +2212,7 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry: MessageFns<Ch
                 reader.uint32(),
               );
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -2229,20 +2282,22 @@ export const CheckResourcesResponse_ResultEntry_ActionsEntry: MessageFns<CheckRe
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 16) {
               break;
             }
 
             message.value = reader.int32() as any;
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -2298,13 +2353,14 @@ export const AddOrUpdatePolicyResponse: MessageFns<AddOrUpdatePolicyResponse> =
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.success = Empty.decode(reader, reader.uint32());
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -2369,7 +2425,7 @@ export const ListAuditLogEntriesResponse: MessageFns<ListAuditLogEntriesResponse
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
@@ -2379,7 +2435,8 @@ export const ListAuditLogEntriesResponse: MessageFns<ListAuditLogEntriesResponse
               accessLogEntry: AccessLogEntry.decode(reader, reader.uint32()),
             };
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -2392,6 +2449,7 @@ export const ListAuditLogEntriesResponse: MessageFns<ListAuditLogEntriesResponse
               ),
             };
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -2467,27 +2525,30 @@ export const ServerInfoResponse: MessageFns<ServerInfoResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.version = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.commit = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.buildDate = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2548,13 +2609,14 @@ export const ListPoliciesResponse: MessageFns<ListPoliciesResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.policyIds.push(reader.string());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2604,13 +2666,14 @@ export const GetPolicyResponse: MessageFns<GetPolicyResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.policies.push(Policy.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2663,13 +2726,14 @@ export const DisablePolicyResponse: MessageFns<DisablePolicyResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.disabledPolicies = reader.uint32();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2722,13 +2786,14 @@ export const EnablePolicyResponse: MessageFns<EnablePolicyResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.enabledPolicies = reader.uint32();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2824,13 +2889,14 @@ export const ListSchemasResponse: MessageFns<ListSchemasResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.schemaIds.push(reader.string());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2880,13 +2946,14 @@ export const GetSchemaResponse: MessageFns<GetSchemaResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.schemas.push(Schema.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2939,13 +3006,14 @@ export const DeleteSchemaResponse: MessageFns<DeleteSchemaResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.deletedSchemas = reader.uint32();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;

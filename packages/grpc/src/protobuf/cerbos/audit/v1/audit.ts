@@ -137,14 +137,15 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.callId = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
@@ -153,14 +154,16 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
             Timestamp.decode(reader, reader.uint32()),
           );
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.peer = Peer.decode(reader, reader.uint32());
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
@@ -173,20 +176,23 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
             message.metadata[entry4.key] = entry4.value;
           }
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.method = reader.string();
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 48) {
             break;
           }
 
           message.statusCode = reader.uint32();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -227,20 +233,22 @@ export const AccessLogEntry_MetadataEntry: MessageFns<AccessLogEntry_MetadataEnt
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.value = MetaValues.decode(reader, reader.uint32());
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -325,14 +333,15 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.callId = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
@@ -341,35 +350,40 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
             Timestamp.decode(reader, reader.uint32()),
           );
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.peer = Peer.decode(reader, reader.uint32());
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.inputs.push(CheckInput.decode(reader, reader.uint32()));
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.outputs.push(CheckOutput.decode(reader, reader.uint32()));
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.error = reader.string();
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
@@ -382,7 +396,8 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
             ),
           };
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 66) {
             break;
           }
@@ -395,7 +410,8 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
             ),
           };
           continue;
-        case 15:
+        }
+        case 15: {
           if (tag !== 122) {
             break;
           }
@@ -408,13 +424,15 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
             message.metadata[entry15.key] = entry15.value;
           }
           continue;
-        case 16:
+        }
+        case 16: {
           if (tag !== 130) {
             break;
           }
 
           message.auditTrail = AuditTrail.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -458,27 +476,30 @@ export const DecisionLogEntry_CheckResources: MessageFns<DecisionLogEntry_CheckR
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.inputs.push(CheckInput.decode(reader, reader.uint32()));
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.outputs.push(CheckOutput.decode(reader, reader.uint32()));
             continue;
-          case 3:
+          }
+          case 3: {
             if (tag !== 26) {
               break;
             }
 
             message.error = reader.string();
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -528,14 +549,15 @@ export const DecisionLogEntry_PlanResources: MessageFns<DecisionLogEntry_PlanRes
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.input = PlanResourcesInput.decode(reader, reader.uint32());
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -545,13 +567,15 @@ export const DecisionLogEntry_PlanResources: MessageFns<DecisionLogEntry_PlanRes
               reader.uint32(),
             );
             continue;
-          case 3:
+          }
+          case 3: {
             if (tag !== 26) {
               break;
             }
 
             message.error = reader.string();
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -592,20 +616,22 @@ export const DecisionLogEntry_MetadataEntry: MessageFns<DecisionLogEntry_Metadat
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.value = MetaValues.decode(reader, reader.uint32());
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -639,13 +665,14 @@ export const MetaValues: MessageFns<MetaValues> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.values.push(reader.string());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -688,34 +715,38 @@ export const Peer: MessageFns<Peer> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.address = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.authInfo = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.userAgent = reader.string();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.forwardedFor = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -752,7 +783,7 @@ export const AuditTrail: MessageFns<AuditTrail> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
@@ -765,6 +796,7 @@ export const AuditTrail: MessageFns<AuditTrail> = {
             message.effectivePolicies[entry1.key] = entry1.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -805,20 +837,22 @@ export const AuditTrail_EffectivePoliciesEntry: MessageFns<AuditTrail_EffectiveP
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.value = SourceAttributes.decode(reader, reader.uint32());
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;

@@ -355,13 +355,14 @@ export const OneofConstraints: MessageFns<OneofConstraints> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.required = reader.bool();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -514,35 +515,39 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 23:
+        case 23: {
           if (tag !== 186) {
             break;
           }
 
           message.cel.push(Constraint.decode(reader, reader.uint32()));
           continue;
-        case 24:
+        }
+        case 24: {
           if (tag !== 192) {
             break;
           }
 
           message.skipped = reader.bool();
           continue;
-        case 25:
+        }
+        case 25: {
           if (tag !== 200) {
             break;
           }
 
           message.required = reader.bool();
           continue;
-        case 26:
+        }
+        case 26: {
           if (tag !== 208) {
             break;
           }
 
           message.ignoreEmpty = reader.bool();
           continue;
-        case 1:
+        }
+        case 1: {
           if (tag !== 10) {
             break;
           }
@@ -552,7 +557,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             float: FloatRules.decode(reader, reader.uint32()),
           };
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
@@ -562,7 +568,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             double: DoubleRules.decode(reader, reader.uint32()),
           };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
@@ -572,7 +579,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             int32: Int32Rules.decode(reader, reader.uint32()),
           };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
@@ -582,7 +590,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             int64: Int64Rules.decode(reader, reader.uint32()),
           };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
@@ -592,7 +601,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             uint32: UInt32Rules.decode(reader, reader.uint32()),
           };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
@@ -602,7 +612,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             uint64: UInt64Rules.decode(reader, reader.uint32()),
           };
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
@@ -612,7 +623,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             sint32: SInt32Rules.decode(reader, reader.uint32()),
           };
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 66) {
             break;
           }
@@ -622,7 +634,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             sint64: SInt64Rules.decode(reader, reader.uint32()),
           };
           continue;
-        case 9:
+        }
+        case 9: {
           if (tag !== 74) {
             break;
           }
@@ -632,7 +645,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             fixed32: Fixed32Rules.decode(reader, reader.uint32()),
           };
           continue;
-        case 10:
+        }
+        case 10: {
           if (tag !== 82) {
             break;
           }
@@ -642,7 +656,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             fixed64: Fixed64Rules.decode(reader, reader.uint32()),
           };
           continue;
-        case 11:
+        }
+        case 11: {
           if (tag !== 90) {
             break;
           }
@@ -652,7 +667,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             sfixed32: SFixed32Rules.decode(reader, reader.uint32()),
           };
           continue;
-        case 12:
+        }
+        case 12: {
           if (tag !== 98) {
             break;
           }
@@ -662,7 +678,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             sfixed64: SFixed64Rules.decode(reader, reader.uint32()),
           };
           continue;
-        case 13:
+        }
+        case 13: {
           if (tag !== 106) {
             break;
           }
@@ -672,7 +689,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             bool: BoolRules.decode(reader, reader.uint32()),
           };
           continue;
-        case 14:
+        }
+        case 14: {
           if (tag !== 114) {
             break;
           }
@@ -682,7 +700,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             string: StringRules.decode(reader, reader.uint32()),
           };
           continue;
-        case 15:
+        }
+        case 15: {
           if (tag !== 122) {
             break;
           }
@@ -692,7 +711,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             bytes: BytesRules.decode(reader, reader.uint32()),
           };
           continue;
-        case 16:
+        }
+        case 16: {
           if (tag !== 130) {
             break;
           }
@@ -702,7 +722,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             enum: EnumRules.decode(reader, reader.uint32()),
           };
           continue;
-        case 18:
+        }
+        case 18: {
           if (tag !== 146) {
             break;
           }
@@ -712,7 +733,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             repeated: RepeatedRules.decode(reader, reader.uint32()),
           };
           continue;
-        case 19:
+        }
+        case 19: {
           if (tag !== 154) {
             break;
           }
@@ -722,7 +744,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             map: MapRules.decode(reader, reader.uint32()),
           };
           continue;
-        case 20:
+        }
+        case 20: {
           if (tag !== 162) {
             break;
           }
@@ -732,7 +755,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             any: AnyRules.decode(reader, reader.uint32()),
           };
           continue;
-        case 21:
+        }
+        case 21: {
           if (tag !== 170) {
             break;
           }
@@ -742,7 +766,8 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             duration: DurationRules.decode(reader, reader.uint32()),
           };
           continue;
-        case 22:
+        }
+        case 22: {
           if (tag !== 178) {
             break;
           }
@@ -752,6 +777,7 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             timestamp: TimestampRules.decode(reader, reader.uint32()),
           };
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -821,42 +847,47 @@ export const FloatRules: MessageFns<FloatRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 13) {
             break;
           }
 
           message.const = reader.float();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 21) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.float() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 29) {
             break;
           }
 
           message.lessThan = { $case: "lte", lte: reader.float() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 37) {
             break;
           }
 
           message.greaterThan = { $case: "gt", gt: reader.float() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 45) {
             break;
           }
 
           message.greaterThan = { $case: "gte", gte: reader.float() };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 53) {
             message.in.push(reader.float());
 
@@ -873,7 +904,8 @@ export const FloatRules: MessageFns<FloatRules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 61) {
             message.notIn.push(reader.float());
 
@@ -890,13 +922,15 @@ export const FloatRules: MessageFns<FloatRules> = {
           }
 
           break;
-        case 8:
+        }
+        case 8: {
           if (tag !== 64) {
             break;
           }
 
           message.finite = reader.bool();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -966,42 +1000,47 @@ export const DoubleRules: MessageFns<DoubleRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 9) {
             break;
           }
 
           message.const = reader.double();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 17) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.double() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 25) {
             break;
           }
 
           message.lessThan = { $case: "lte", lte: reader.double() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 33) {
             break;
           }
 
           message.greaterThan = { $case: "gt", gt: reader.double() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 41) {
             break;
           }
 
           message.greaterThan = { $case: "gte", gte: reader.double() };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 49) {
             message.in.push(reader.double());
 
@@ -1018,7 +1057,8 @@ export const DoubleRules: MessageFns<DoubleRules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 57) {
             message.notIn.push(reader.double());
 
@@ -1035,13 +1075,15 @@ export const DoubleRules: MessageFns<DoubleRules> = {
           }
 
           break;
-        case 8:
+        }
+        case 8: {
           if (tag !== 64) {
             break;
           }
 
           message.finite = reader.bool();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1107,42 +1149,47 @@ export const Int32Rules: MessageFns<Int32Rules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.const = reader.int32();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.int32() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.lessThan = { $case: "lte", lte: reader.int32() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.greaterThan = { $case: "gt", gt: reader.int32() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
 
           message.greaterThan = { $case: "gte", gte: reader.int32() };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 48) {
             message.in.push(reader.int32());
 
@@ -1159,7 +1206,8 @@ export const Int32Rules: MessageFns<Int32Rules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 56) {
             message.notIn.push(reader.int32());
 
@@ -1176,6 +1224,7 @@ export const Int32Rules: MessageFns<Int32Rules> = {
           }
 
           break;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1241,35 +1290,39 @@ export const Int64Rules: MessageFns<Int64Rules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.const = reader.int64().toString();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.int64().toString() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.lessThan = { $case: "lte", lte: reader.int64().toString() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.greaterThan = { $case: "gt", gt: reader.int64().toString() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
@@ -1279,7 +1332,8 @@ export const Int64Rules: MessageFns<Int64Rules> = {
             gte: reader.int64().toString(),
           };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 48) {
             message.in.push(reader.int64().toString());
 
@@ -1296,7 +1350,8 @@ export const Int64Rules: MessageFns<Int64Rules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 56) {
             message.notIn.push(reader.int64().toString());
 
@@ -1313,6 +1368,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
           }
 
           break;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1378,42 +1434,47 @@ export const UInt32Rules: MessageFns<UInt32Rules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.const = reader.uint32();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.uint32() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.lessThan = { $case: "lte", lte: reader.uint32() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.greaterThan = { $case: "gt", gt: reader.uint32() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
 
           message.greaterThan = { $case: "gte", gte: reader.uint32() };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 48) {
             message.in.push(reader.uint32());
 
@@ -1430,7 +1491,8 @@ export const UInt32Rules: MessageFns<UInt32Rules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 56) {
             message.notIn.push(reader.uint32());
 
@@ -1447,6 +1509,7 @@ export const UInt32Rules: MessageFns<UInt32Rules> = {
           }
 
           break;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1512,35 +1575,39 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.const = reader.uint64().toString();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.uint64().toString() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.lessThan = { $case: "lte", lte: reader.uint64().toString() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.greaterThan = { $case: "gt", gt: reader.uint64().toString() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
@@ -1550,7 +1617,8 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
             gte: reader.uint64().toString(),
           };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 48) {
             message.in.push(reader.uint64().toString());
 
@@ -1567,7 +1635,8 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 56) {
             message.notIn.push(reader.uint64().toString());
 
@@ -1584,6 +1653,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
           }
 
           break;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1649,42 +1719,47 @@ export const SInt32Rules: MessageFns<SInt32Rules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.const = reader.sint32();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.sint32() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.lessThan = { $case: "lte", lte: reader.sint32() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.greaterThan = { $case: "gt", gt: reader.sint32() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
 
           message.greaterThan = { $case: "gte", gte: reader.sint32() };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 48) {
             message.in.push(reader.sint32());
 
@@ -1701,7 +1776,8 @@ export const SInt32Rules: MessageFns<SInt32Rules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 56) {
             message.notIn.push(reader.sint32());
 
@@ -1718,6 +1794,7 @@ export const SInt32Rules: MessageFns<SInt32Rules> = {
           }
 
           break;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1783,35 +1860,39 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.const = reader.sint64().toString();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.sint64().toString() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.lessThan = { $case: "lte", lte: reader.sint64().toString() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.greaterThan = { $case: "gt", gt: reader.sint64().toString() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
@@ -1821,7 +1902,8 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
             gte: reader.sint64().toString(),
           };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 48) {
             message.in.push(reader.sint64().toString());
 
@@ -1838,7 +1920,8 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 56) {
             message.notIn.push(reader.sint64().toString());
 
@@ -1855,6 +1938,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
           }
 
           break;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1920,42 +2004,47 @@ export const Fixed32Rules: MessageFns<Fixed32Rules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 13) {
             break;
           }
 
           message.const = reader.fixed32();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 21) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.fixed32() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 29) {
             break;
           }
 
           message.lessThan = { $case: "lte", lte: reader.fixed32() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 37) {
             break;
           }
 
           message.greaterThan = { $case: "gt", gt: reader.fixed32() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 45) {
             break;
           }
 
           message.greaterThan = { $case: "gte", gte: reader.fixed32() };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 53) {
             message.in.push(reader.fixed32());
 
@@ -1972,7 +2061,8 @@ export const Fixed32Rules: MessageFns<Fixed32Rules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 61) {
             message.notIn.push(reader.fixed32());
 
@@ -1989,6 +2079,7 @@ export const Fixed32Rules: MessageFns<Fixed32Rules> = {
           }
 
           break;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2054,28 +2145,31 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 9) {
             break;
           }
 
           message.const = reader.fixed64().toString();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 17) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.fixed64().toString() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 25) {
             break;
           }
 
           message.lessThan = { $case: "lte", lte: reader.fixed64().toString() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 33) {
             break;
           }
@@ -2085,7 +2179,8 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
             gt: reader.fixed64().toString(),
           };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 41) {
             break;
           }
@@ -2095,7 +2190,8 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
             gte: reader.fixed64().toString(),
           };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 49) {
             message.in.push(reader.fixed64().toString());
 
@@ -2112,7 +2208,8 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 57) {
             message.notIn.push(reader.fixed64().toString());
 
@@ -2129,6 +2226,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
           }
 
           break;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2194,42 +2292,47 @@ export const SFixed32Rules: MessageFns<SFixed32Rules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 13) {
             break;
           }
 
           message.const = reader.sfixed32();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 21) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.sfixed32() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 29) {
             break;
           }
 
           message.lessThan = { $case: "lte", lte: reader.sfixed32() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 37) {
             break;
           }
 
           message.greaterThan = { $case: "gt", gt: reader.sfixed32() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 45) {
             break;
           }
 
           message.greaterThan = { $case: "gte", gte: reader.sfixed32() };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 53) {
             message.in.push(reader.sfixed32());
 
@@ -2246,7 +2349,8 @@ export const SFixed32Rules: MessageFns<SFixed32Rules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 61) {
             message.notIn.push(reader.sfixed32());
 
@@ -2263,6 +2367,7 @@ export const SFixed32Rules: MessageFns<SFixed32Rules> = {
           }
 
           break;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2328,21 +2433,23 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 9) {
             break;
           }
 
           message.const = reader.sfixed64().toString();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 17) {
             break;
           }
 
           message.lessThan = { $case: "lt", lt: reader.sfixed64().toString() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 25) {
             break;
           }
@@ -2352,7 +2459,8 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
             lte: reader.sfixed64().toString(),
           };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 33) {
             break;
           }
@@ -2362,7 +2470,8 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
             gt: reader.sfixed64().toString(),
           };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 41) {
             break;
           }
@@ -2372,7 +2481,8 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
             gte: reader.sfixed64().toString(),
           };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag === 49) {
             message.in.push(reader.sfixed64().toString());
 
@@ -2389,7 +2499,8 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
           }
 
           break;
-        case 7:
+        }
+        case 7: {
           if (tag === 57) {
             message.notIn.push(reader.sfixed64().toString());
 
@@ -2406,6 +2517,7 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
           }
 
           break;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2439,13 +2551,14 @@ export const BoolRules: MessageFns<BoolRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.const = reader.bool();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2588,168 +2701,191 @@ export const StringRules: MessageFns<StringRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.const = reader.string();
           continue;
-        case 19:
+        }
+        case 19: {
           if (tag !== 152) {
             break;
           }
 
           message.len = reader.uint64().toString();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.minLen = reader.uint64().toString();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.maxLen = reader.uint64().toString();
           continue;
-        case 20:
+        }
+        case 20: {
           if (tag !== 160) {
             break;
           }
 
           message.lenBytes = reader.uint64().toString();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.minBytes = reader.uint64().toString();
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
 
           message.maxBytes = reader.uint64().toString();
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.pattern = reader.string();
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.prefix = reader.string();
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 66) {
             break;
           }
 
           message.suffix = reader.string();
           continue;
-        case 9:
+        }
+        case 9: {
           if (tag !== 74) {
             break;
           }
 
           message.contains = reader.string();
           continue;
-        case 23:
+        }
+        case 23: {
           if (tag !== 186) {
             break;
           }
 
           message.notContains = reader.string();
           continue;
-        case 10:
+        }
+        case 10: {
           if (tag !== 82) {
             break;
           }
 
           message.in.push(reader.string());
           continue;
-        case 11:
+        }
+        case 11: {
           if (tag !== 90) {
             break;
           }
 
           message.notIn.push(reader.string());
           continue;
-        case 12:
+        }
+        case 12: {
           if (tag !== 96) {
             break;
           }
 
           message.wellKnown = { $case: "email", email: reader.bool() };
           continue;
-        case 13:
+        }
+        case 13: {
           if (tag !== 104) {
             break;
           }
 
           message.wellKnown = { $case: "hostname", hostname: reader.bool() };
           continue;
-        case 14:
+        }
+        case 14: {
           if (tag !== 112) {
             break;
           }
 
           message.wellKnown = { $case: "ip", ip: reader.bool() };
           continue;
-        case 15:
+        }
+        case 15: {
           if (tag !== 120) {
             break;
           }
 
           message.wellKnown = { $case: "ipv4", ipv4: reader.bool() };
           continue;
-        case 16:
+        }
+        case 16: {
           if (tag !== 128) {
             break;
           }
 
           message.wellKnown = { $case: "ipv6", ipv6: reader.bool() };
           continue;
-        case 17:
+        }
+        case 17: {
           if (tag !== 136) {
             break;
           }
 
           message.wellKnown = { $case: "uri", uri: reader.bool() };
           continue;
-        case 18:
+        }
+        case 18: {
           if (tag !== 144) {
             break;
           }
 
           message.wellKnown = { $case: "uriRef", uriRef: reader.bool() };
           continue;
-        case 21:
+        }
+        case 21: {
           if (tag !== 168) {
             break;
           }
 
           message.wellKnown = { $case: "address", address: reader.bool() };
           continue;
-        case 22:
+        }
+        case 22: {
           if (tag !== 176) {
             break;
           }
 
           message.wellKnown = { $case: "uuid", uuid: reader.bool() };
           continue;
-        case 26:
+        }
+        case 26: {
           if (tag !== 208) {
             break;
           }
@@ -2759,7 +2895,8 @@ export const StringRules: MessageFns<StringRules> = {
             ipWithPrefixlen: reader.bool(),
           };
           continue;
-        case 27:
+        }
+        case 27: {
           if (tag !== 216) {
             break;
           }
@@ -2769,7 +2906,8 @@ export const StringRules: MessageFns<StringRules> = {
             ipv4WithPrefixlen: reader.bool(),
           };
           continue;
-        case 28:
+        }
+        case 28: {
           if (tag !== 224) {
             break;
           }
@@ -2779,14 +2917,16 @@ export const StringRules: MessageFns<StringRules> = {
             ipv6WithPrefixlen: reader.bool(),
           };
           continue;
-        case 29:
+        }
+        case 29: {
           if (tag !== 232) {
             break;
           }
 
           message.wellKnown = { $case: "ipPrefix", ipPrefix: reader.bool() };
           continue;
-        case 30:
+        }
+        case 30: {
           if (tag !== 240) {
             break;
           }
@@ -2796,7 +2936,8 @@ export const StringRules: MessageFns<StringRules> = {
             ipv4Prefix: reader.bool(),
           };
           continue;
-        case 31:
+        }
+        case 31: {
           if (tag !== 248) {
             break;
           }
@@ -2806,7 +2947,8 @@ export const StringRules: MessageFns<StringRules> = {
             ipv6Prefix: reader.bool(),
           };
           continue;
-        case 24:
+        }
+        case 24: {
           if (tag !== 192) {
             break;
           }
@@ -2816,13 +2958,15 @@ export const StringRules: MessageFns<StringRules> = {
             wellKnownRegex: reader.int32() as any,
           };
           continue;
-        case 25:
+        }
+        case 25: {
           if (tag !== 200) {
             break;
           }
 
           message.strict = reader.bool();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2906,97 +3050,110 @@ export const BytesRules: MessageFns<BytesRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.const = reader.bytes();
           continue;
-        case 13:
+        }
+        case 13: {
           if (tag !== 104) {
             break;
           }
 
           message.len = reader.uint64().toString();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.minLen = reader.uint64().toString();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.maxLen = reader.uint64().toString();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.pattern = reader.string();
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.prefix = reader.bytes();
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.suffix = reader.bytes();
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.contains = reader.bytes();
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 66) {
             break;
           }
 
           message.in.push(reader.bytes());
           continue;
-        case 9:
+        }
+        case 9: {
           if (tag !== 74) {
             break;
           }
 
           message.notIn.push(reader.bytes());
           continue;
-        case 10:
+        }
+        case 10: {
           if (tag !== 80) {
             break;
           }
 
           message.wellKnown = { $case: "ip", ip: reader.bool() };
           continue;
-        case 11:
+        }
+        case 11: {
           if (tag !== 88) {
             break;
           }
 
           message.wellKnown = { $case: "ipv4", ipv4: reader.bool() };
           continue;
-        case 12:
+        }
+        case 12: {
           if (tag !== 96) {
             break;
           }
 
           message.wellKnown = { $case: "ipv6", ipv6: reader.bool() };
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3043,21 +3200,23 @@ export const EnumRules: MessageFns<EnumRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.const = reader.int32();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.definedOnly = reader.bool();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag === 24) {
             message.in.push(reader.int32());
 
@@ -3074,7 +3233,8 @@ export const EnumRules: MessageFns<EnumRules> = {
           }
 
           break;
-        case 4:
+        }
+        case 4: {
           if (tag === 32) {
             message.notIn.push(reader.int32());
 
@@ -3091,6 +3251,7 @@ export const EnumRules: MessageFns<EnumRules> = {
           }
 
           break;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3138,34 +3299,38 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.minItems = reader.uint64().toString();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.maxItems = reader.uint64().toString();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.unique = reader.bool();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.items = FieldConstraints.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3213,34 +3378,38 @@ export const MapRules: MessageFns<MapRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.minPairs = reader.uint64().toString();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.maxPairs = reader.uint64().toString();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.keys = FieldConstraints.decode(reader, reader.uint32());
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.values = FieldConstraints.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3277,20 +3446,22 @@ export const AnyRules: MessageFns<AnyRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 2:
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.in.push(reader.string());
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.notIn.push(reader.string());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3358,14 +3529,15 @@ export const DurationRules: MessageFns<DurationRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 2:
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.const = Duration.decode(reader, reader.uint32());
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
@@ -3375,7 +3547,8 @@ export const DurationRules: MessageFns<DurationRules> = {
             lt: Duration.decode(reader, reader.uint32()),
           };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
@@ -3385,7 +3558,8 @@ export const DurationRules: MessageFns<DurationRules> = {
             lte: Duration.decode(reader, reader.uint32()),
           };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
@@ -3395,7 +3569,8 @@ export const DurationRules: MessageFns<DurationRules> = {
             gt: Duration.decode(reader, reader.uint32()),
           };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
@@ -3405,20 +3580,23 @@ export const DurationRules: MessageFns<DurationRules> = {
             gte: Duration.decode(reader, reader.uint32()),
           };
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.in.push(Duration.decode(reader, reader.uint32()));
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 66) {
             break;
           }
 
           message.notIn.push(Duration.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3497,7 +3675,7 @@ export const TimestampRules: MessageFns<TimestampRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 2:
+        case 2: {
           if (tag !== 18) {
             break;
           }
@@ -3506,7 +3684,8 @@ export const TimestampRules: MessageFns<TimestampRules> = {
             Timestamp.decode(reader, reader.uint32()),
           );
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
@@ -3516,7 +3695,8 @@ export const TimestampRules: MessageFns<TimestampRules> = {
             lt: fromTimestamp(Timestamp.decode(reader, reader.uint32())),
           };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
@@ -3526,14 +3706,16 @@ export const TimestampRules: MessageFns<TimestampRules> = {
             lte: fromTimestamp(Timestamp.decode(reader, reader.uint32())),
           };
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 56) {
             break;
           }
 
           message.lessThan = { $case: "ltNow", ltNow: reader.bool() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
@@ -3543,7 +3725,8 @@ export const TimestampRules: MessageFns<TimestampRules> = {
             gt: fromTimestamp(Timestamp.decode(reader, reader.uint32())),
           };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
@@ -3553,20 +3736,23 @@ export const TimestampRules: MessageFns<TimestampRules> = {
             gte: fromTimestamp(Timestamp.decode(reader, reader.uint32())),
           };
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 64) {
             break;
           }
 
           message.greaterThan = { $case: "gtNow", gtNow: reader.bool() };
           continue;
-        case 9:
+        }
+        case 9: {
           if (tag !== 74) {
             break;
           }
 
           message.within = Duration.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;

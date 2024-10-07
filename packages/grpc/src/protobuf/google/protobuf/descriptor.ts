@@ -344,147 +344,167 @@ export const FileOptions: MessageFns<FileOptions> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.javaPackage = reader.string();
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 66) {
             break;
           }
 
           message.javaOuterClassname = reader.string();
           continue;
-        case 10:
+        }
+        case 10: {
           if (tag !== 80) {
             break;
           }
 
           message.javaMultipleFiles = reader.bool();
           continue;
-        case 20:
+        }
+        case 20: {
           if (tag !== 160) {
             break;
           }
 
           message.javaGenerateEqualsAndHash = reader.bool();
           continue;
-        case 27:
+        }
+        case 27: {
           if (tag !== 216) {
             break;
           }
 
           message.javaStringCheckUtf8 = reader.bool();
           continue;
-        case 9:
+        }
+        case 9: {
           if (tag !== 72) {
             break;
           }
 
           message.optimizeFor = reader.int32() as any;
           continue;
-        case 11:
+        }
+        case 11: {
           if (tag !== 90) {
             break;
           }
 
           message.goPackage = reader.string();
           continue;
-        case 16:
+        }
+        case 16: {
           if (tag !== 128) {
             break;
           }
 
           message.ccGenericServices = reader.bool();
           continue;
-        case 17:
+        }
+        case 17: {
           if (tag !== 136) {
             break;
           }
 
           message.javaGenericServices = reader.bool();
           continue;
-        case 18:
+        }
+        case 18: {
           if (tag !== 144) {
             break;
           }
 
           message.pyGenericServices = reader.bool();
           continue;
-        case 23:
+        }
+        case 23: {
           if (tag !== 184) {
             break;
           }
 
           message.deprecated = reader.bool();
           continue;
-        case 31:
+        }
+        case 31: {
           if (tag !== 248) {
             break;
           }
 
           message.ccEnableArenas = reader.bool();
           continue;
-        case 36:
+        }
+        case 36: {
           if (tag !== 290) {
             break;
           }
 
           message.objcClassPrefix = reader.string();
           continue;
-        case 37:
+        }
+        case 37: {
           if (tag !== 298) {
             break;
           }
 
           message.csharpNamespace = reader.string();
           continue;
-        case 39:
+        }
+        case 39: {
           if (tag !== 314) {
             break;
           }
 
           message.swiftPrefix = reader.string();
           continue;
-        case 40:
+        }
+        case 40: {
           if (tag !== 322) {
             break;
           }
 
           message.phpClassPrefix = reader.string();
           continue;
-        case 41:
+        }
+        case 41: {
           if (tag !== 330) {
             break;
           }
 
           message.phpNamespace = reader.string();
           continue;
-        case 44:
+        }
+        case 44: {
           if (tag !== 354) {
             break;
           }
 
           message.phpMetadataNamespace = reader.string();
           continue;
-        case 45:
+        }
+        case 45: {
           if (tag !== 362) {
             break;
           }
 
           message.rubyPackage = reader.string();
           continue;
-        case 50:
+        }
+        case 50: {
           if (tag !== 402) {
             break;
           }
 
           message.features = FeatureSet.decode(reader, reader.uint32());
           continue;
-        case 999:
+        }
+        case 999: {
           if (tag !== 7994) {
             break;
           }
@@ -493,6 +513,7 @@ export const FileOptions: MessageFns<FileOptions> = {
             UninterpretedOption.decode(reader, reader.uint32()),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -561,49 +582,55 @@ export const MessageOptions: MessageFns<MessageOptions> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.messageSetWireFormat = reader.bool();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.noStandardDescriptorAccessor = reader.bool();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.deprecated = reader.bool();
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 56) {
             break;
           }
 
           message.mapEntry = reader.bool();
           continue;
-        case 11:
+        }
+        case 11: {
           if (tag !== 88) {
             break;
           }
 
           message.deprecatedLegacyJsonFieldConflicts = reader.bool();
           continue;
-        case 12:
+        }
+        case 12: {
           if (tag !== 98) {
             break;
           }
 
           message.features = FeatureSet.decode(reader, reader.uint32());
           continue;
-        case 999:
+        }
+        case 999: {
           if (tag !== 7994) {
             break;
           }
@@ -612,6 +639,7 @@ export const MessageOptions: MessageFns<MessageOptions> = {
             UninterpretedOption.decode(reader, reader.uint32()),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -707,70 +735,79 @@ export const FieldOptions: MessageFns<FieldOptions> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.ctype = reader.int32() as any;
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.packed = reader.bool();
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 48) {
             break;
           }
 
           message.jstype = reader.int32() as any;
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
 
           message.lazy = reader.bool();
           continue;
-        case 15:
+        }
+        case 15: {
           if (tag !== 120) {
             break;
           }
 
           message.unverifiedLazy = reader.bool();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.deprecated = reader.bool();
           continue;
-        case 10:
+        }
+        case 10: {
           if (tag !== 80) {
             break;
           }
 
           message.weak = reader.bool();
           continue;
-        case 16:
+        }
+        case 16: {
           if (tag !== 128) {
             break;
           }
 
           message.debugRedact = reader.bool();
           continue;
-        case 17:
+        }
+        case 17: {
           if (tag !== 136) {
             break;
           }
 
           message.retention = reader.int32() as any;
           continue;
-        case 19:
+        }
+        case 19: {
           if (tag === 152) {
             message.targets.push(reader.int32() as any);
 
@@ -787,7 +824,8 @@ export const FieldOptions: MessageFns<FieldOptions> = {
           }
 
           break;
-        case 20:
+        }
+        case 20: {
           if (tag !== 162) {
             break;
           }
@@ -796,14 +834,16 @@ export const FieldOptions: MessageFns<FieldOptions> = {
             FieldOptions_EditionDefault.decode(reader, reader.uint32()),
           );
           continue;
-        case 21:
+        }
+        case 21: {
           if (tag !== 170) {
             break;
           }
 
           message.features = FeatureSet.decode(reader, reader.uint32());
           continue;
-        case 22:
+        }
+        case 22: {
           if (tag !== 178) {
             break;
           }
@@ -813,7 +853,8 @@ export const FieldOptions: MessageFns<FieldOptions> = {
             reader.uint32(),
           );
           continue;
-        case 999:
+        }
+        case 999: {
           if (tag !== 7994) {
             break;
           }
@@ -822,6 +863,7 @@ export const FieldOptions: MessageFns<FieldOptions> = {
             UninterpretedOption.decode(reader, reader.uint32()),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -862,20 +904,22 @@ export const FieldOptions_EditionDefault: MessageFns<FieldOptions_EditionDefault
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 3:
+          case 3: {
             if (tag !== 24) {
               break;
             }
 
             message.edition = reader.int32() as any;
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.value = reader.string();
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -939,34 +983,38 @@ export const FieldOptions_FeatureSupport: MessageFns<FieldOptions_FeatureSupport
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 8) {
               break;
             }
 
             message.editionIntroduced = reader.int32() as any;
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 16) {
               break;
             }
 
             message.editionDeprecated = reader.int32() as any;
             continue;
-          case 3:
+          }
+          case 3: {
             if (tag !== 26) {
               break;
             }
 
             message.deprecationWarning = reader.string();
             continue;
-          case 4:
+          }
+          case 4: {
             if (tag !== 32) {
               break;
             }
 
             message.editionRemoved = reader.int32() as any;
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1003,14 +1051,15 @@ export const OneofOptions: MessageFns<OneofOptions> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.features = FeatureSet.decode(reader, reader.uint32());
           continue;
-        case 999:
+        }
+        case 999: {
           if (tag !== 7994) {
             break;
           }
@@ -1019,6 +1068,7 @@ export const OneofOptions: MessageFns<OneofOptions> = {
             UninterpretedOption.decode(reader, reader.uint32()),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1058,21 +1108,23 @@ export const ServiceOptions: MessageFns<ServiceOptions> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 34:
+        case 34: {
           if (tag !== 274) {
             break;
           }
 
           message.features = FeatureSet.decode(reader, reader.uint32());
           continue;
-        case 33:
+        }
+        case 33: {
           if (tag !== 264) {
             break;
           }
 
           message.deprecated = reader.bool();
           continue;
-        case 999:
+        }
+        case 999: {
           if (tag !== 7994) {
             break;
           }
@@ -1081,6 +1133,7 @@ export const ServiceOptions: MessageFns<ServiceOptions> = {
             UninterpretedOption.decode(reader, reader.uint32()),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1131,28 +1184,31 @@ export const MethodOptions: MessageFns<MethodOptions> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 33:
+        case 33: {
           if (tag !== 264) {
             break;
           }
 
           message.deprecated = reader.bool();
           continue;
-        case 34:
+        }
+        case 34: {
           if (tag !== 272) {
             break;
           }
 
           message.idempotencyLevel = reader.int32() as any;
           continue;
-        case 35:
+        }
+        case 35: {
           if (tag !== 282) {
             break;
           }
 
           message.features = FeatureSet.decode(reader, reader.uint32());
           continue;
-        case 999:
+        }
+        case 999: {
           if (tag !== 7994) {
             break;
           }
@@ -1161,6 +1217,7 @@ export const MethodOptions: MessageFns<MethodOptions> = {
             UninterpretedOption.decode(reader, reader.uint32()),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1232,7 +1289,7 @@ export const UninterpretedOption: MessageFns<UninterpretedOption> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 2:
+        case 2: {
           if (tag !== 18) {
             break;
           }
@@ -1241,48 +1298,55 @@ export const UninterpretedOption: MessageFns<UninterpretedOption> = {
             UninterpretedOption_NamePart.decode(reader, reader.uint32()),
           );
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.identifierValue = reader.string();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.positiveIntValue = reader.uint64().toString();
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
 
           message.negativeIntValue = reader.int64().toString();
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 49) {
             break;
           }
 
           message.doubleValue = reader.double();
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.stringValue = reader.bytes();
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 66) {
             break;
           }
 
           message.aggregateValue = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1323,20 +1387,22 @@ export const UninterpretedOption_NamePart: MessageFns<UninterpretedOption_NamePa
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.namePart = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 16) {
               break;
             }
 
             message.isExtension = reader.bool();
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1398,48 +1464,54 @@ export const FeatureSet: MessageFns<FeatureSet> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.fieldPresence = reader.int32() as any;
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.enumType = reader.int32() as any;
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.repeatedFieldEncoding = reader.int32() as any;
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.utf8Validation = reader.int32() as any;
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
 
           message.messageEncoding = reader.int32() as any;
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 48) {
             break;
           }
 
           message.jsonFormat = reader.int32() as any;
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;

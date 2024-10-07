@@ -62,7 +62,7 @@ export const Struct: MessageFns<Struct> & StructWrapperFns = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
@@ -72,6 +72,7 @@ export const Struct: MessageFns<Struct> & StructWrapperFns = {
             message.fields[entry1.key] = entry1.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -132,20 +133,22 @@ export const Struct_FieldsEntry: MessageFns<Struct_FieldsEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -202,7 +205,7 @@ export const Value: MessageFns<Value> & AnyValueWrapperFns = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
@@ -212,28 +215,32 @@ export const Value: MessageFns<Value> & AnyValueWrapperFns = {
             nullValue: reader.int32() as any,
           };
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 17) {
             break;
           }
 
           message.kind = { $case: "numberValue", numberValue: reader.double() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.kind = { $case: "stringValue", stringValue: reader.string() };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.kind = { $case: "boolValue", boolValue: reader.bool() };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
@@ -243,7 +250,8 @@ export const Value: MessageFns<Value> & AnyValueWrapperFns = {
             structValue: Struct.unwrap(Struct.decode(reader, reader.uint32())),
           };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
@@ -255,6 +263,7 @@ export const Value: MessageFns<Value> & AnyValueWrapperFns = {
             ),
           };
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -328,7 +337,7 @@ export const ListValue: MessageFns<ListValue> & ListValueWrapperFns = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
@@ -337,6 +346,7 @@ export const ListValue: MessageFns<ListValue> & ListValueWrapperFns = {
             Value.unwrap(Value.decode(reader, reader.uint32())),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;

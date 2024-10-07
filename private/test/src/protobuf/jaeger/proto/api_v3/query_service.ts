@@ -104,14 +104,15 @@ export const GetTraceRequest: MessageFns<GetTraceRequest> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.traceId = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
@@ -120,7 +121,8 @@ export const GetTraceRequest: MessageFns<GetTraceRequest> = {
             Timestamp.decode(reader, reader.uint32()),
           );
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
@@ -129,6 +131,7 @@ export const GetTraceRequest: MessageFns<GetTraceRequest> = {
             Timestamp.decode(reader, reader.uint32()),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -230,21 +233,23 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.serviceName = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.operationName = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
@@ -257,7 +262,8 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
             message.attributes[entry3.key] = entry3.value;
           }
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
@@ -266,7 +272,8 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
             Timestamp.decode(reader, reader.uint32()),
           );
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
@@ -275,27 +282,31 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
             Timestamp.decode(reader, reader.uint32()),
           );
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.durationMin = Duration.decode(reader, reader.uint32());
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.durationMax = Duration.decode(reader, reader.uint32());
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 64) {
             break;
           }
 
           message.numTraces = reader.int32();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -406,20 +417,22 @@ export const TraceQueryParameters_AttributesEntry: MessageFns<TraceQueryParamete
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.value = reader.string();
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -474,13 +487,14 @@ export const FindTracesRequest: MessageFns<FindTracesRequest> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.query = TraceQueryParameters.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -575,13 +589,14 @@ export const GetServicesResponse: MessageFns<GetServicesResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.services.push(reader.string());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -637,20 +652,22 @@ export const GetOperationsRequest: MessageFns<GetOperationsRequest> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.service = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.spanKind = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -707,20 +724,22 @@ export const Operation: MessageFns<Operation> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.spanKind = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -777,13 +796,14 @@ export const GetOperationsResponse: MessageFns<GetOperationsResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.operations.push(Operation.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;

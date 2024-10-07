@@ -231,28 +231,31 @@ export const PlanResourcesInput: MessageFns<PlanResourcesInput> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.requestId = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.action = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.principal = Principal.decode(reader, reader.uint32());
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
@@ -262,20 +265,23 @@ export const PlanResourcesInput: MessageFns<PlanResourcesInput> = {
             reader.uint32(),
           );
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.auxData = AuxData.decode(reader, reader.uint32());
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 48) {
             break;
           }
 
           message.includeMeta = reader.bool();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -371,14 +377,15 @@ export const PlanResourcesInput_Resource: MessageFns<PlanResourcesInput_Resource
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.kind = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -391,20 +398,23 @@ export const PlanResourcesInput_Resource: MessageFns<PlanResourcesInput_Resource
               message.attr[entry2.key] = entry2.value;
             }
             continue;
-          case 3:
+          }
+          case 3: {
             if (tag !== 26) {
               break;
             }
 
             message.policyVersion = reader.string();
             continue;
-          case 4:
+          }
+          case 4: {
             if (tag !== 34) {
               break;
             }
 
             message.scope = reader.string();
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -489,20 +499,22 @@ export const PlanResourcesInput_Resource_AttrEntry: MessageFns<PlanResourcesInpu
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -563,14 +575,15 @@ export const PlanResourcesFilter: MessageFns<PlanResourcesFilter> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.kind = reader.int32() as any;
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
@@ -580,6 +593,7 @@ export const PlanResourcesFilter: MessageFns<PlanResourcesFilter> = {
             reader.uint32(),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -647,14 +661,15 @@ export const PlanResourcesFilter_Expression: MessageFns<PlanResourcesFilter_Expr
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.operator = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -666,6 +681,7 @@ export const PlanResourcesFilter_Expression: MessageFns<PlanResourcesFilter_Expr
               ),
             );
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -743,7 +759,7 @@ export const PlanResourcesFilter_Expression_Operand: MessageFns<PlanResourcesFil
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
@@ -753,7 +769,8 @@ export const PlanResourcesFilter_Expression_Operand: MessageFns<PlanResourcesFil
               value: Value.unwrap(Value.decode(reader, reader.uint32())),
             };
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -766,13 +783,15 @@ export const PlanResourcesFilter_Expression_Operand: MessageFns<PlanResourcesFil
               ),
             };
             continue;
-          case 3:
+          }
+          case 3: {
             if (tag !== 26) {
               break;
             }
 
             message.node = { $case: "variable", variable: reader.string() };
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -878,56 +897,63 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.requestId = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.action = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.kind = reader.string();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.policyVersion = reader.string();
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.scope = reader.string();
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.filter = PlanResourcesFilter.decode(reader, reader.uint32());
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.filterDebug = reader.string();
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 66) {
             break;
           }
@@ -936,6 +962,7 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
             ValidationError.decode(reader, reader.uint32()),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1041,41 +1068,46 @@ export const CheckInput: MessageFns<CheckInput> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.requestId = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.resource = Resource.decode(reader, reader.uint32());
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.principal = Principal.decode(reader, reader.uint32());
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.actions.push(reader.string());
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.auxData = AuxData.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1174,21 +1206,23 @@ export const CheckOutput: MessageFns<CheckOutput> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.requestId = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.resourceId = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
@@ -1201,14 +1235,16 @@ export const CheckOutput: MessageFns<CheckOutput> = {
             message.actions[entry3.key] = entry3.value;
           }
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.effectiveDerivedRoles.push(reader.string());
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
@@ -1217,13 +1253,15 @@ export const CheckOutput: MessageFns<CheckOutput> = {
             ValidationError.decode(reader, reader.uint32()),
           );
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.outputs.push(OutputEntry.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1327,27 +1365,30 @@ export const CheckOutput_ActionEffect: MessageFns<CheckOutput_ActionEffect> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.effect = reader.int32() as any;
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.policy = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.scope = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1412,14 +1453,15 @@ export const CheckOutput_ActionsEntry: MessageFns<CheckOutput_ActionsEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
@@ -1429,6 +1471,7 @@ export const CheckOutput_ActionsEntry: MessageFns<CheckOutput_ActionsEntry> = {
             reader.uint32(),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1485,20 +1528,22 @@ export const OutputEntry: MessageFns<OutputEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.src = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.val = Value.unwrap(Value.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1567,28 +1612,31 @@ export const Resource: MessageFns<Resource> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.kind = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.policyVersion = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.id = reader.string();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
@@ -1598,13 +1646,15 @@ export const Resource: MessageFns<Resource> = {
             message.attr[entry4.key] = entry4.value;
           }
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.scope = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1689,20 +1739,22 @@ export const Resource_AttrEntry: MessageFns<Resource_AttrEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1771,28 +1823,31 @@ export const Principal: MessageFns<Principal> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.id = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.policyVersion = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.roles.push(reader.string());
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
@@ -1802,13 +1857,15 @@ export const Principal: MessageFns<Principal> = {
             message.attr[entry4.key] = entry4.value;
           }
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.scope = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1895,20 +1952,22 @@ export const Principal_AttrEntry: MessageFns<Principal_AttrEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1965,7 +2024,7 @@ export const AuxData: MessageFns<AuxData> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
@@ -1975,6 +2034,7 @@ export const AuxData: MessageFns<AuxData> = {
             message.jwt[entry1.key] = entry1.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2039,20 +2099,22 @@ export const AuxData_JwtEntry: MessageFns<AuxData_JwtEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;

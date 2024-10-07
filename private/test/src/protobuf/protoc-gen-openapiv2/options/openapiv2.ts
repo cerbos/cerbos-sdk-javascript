@@ -648,35 +648,39 @@ export const Swagger: MessageFns<Swagger> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.swagger = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.info = Info.decode(reader, reader.uint32());
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.host = reader.string();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.basePath = reader.string();
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag === 40) {
             message.schemes.push(reader.int32() as any);
 
@@ -693,21 +697,24 @@ export const Swagger: MessageFns<Swagger> = {
           }
 
           break;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.consumes.push(reader.string());
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.produces.push(reader.string());
           continue;
-        case 10:
+        }
+        case 10: {
           if (tag !== 82) {
             break;
           }
@@ -720,7 +727,8 @@ export const Swagger: MessageFns<Swagger> = {
             message.responses[entry10.key] = entry10.value;
           }
           continue;
-        case 11:
+        }
+        case 11: {
           if (tag !== 90) {
             break;
           }
@@ -730,7 +738,8 @@ export const Swagger: MessageFns<Swagger> = {
             reader.uint32(),
           );
           continue;
-        case 12:
+        }
+        case 12: {
           if (tag !== 98) {
             break;
           }
@@ -739,14 +748,16 @@ export const Swagger: MessageFns<Swagger> = {
             SecurityRequirement.decode(reader, reader.uint32()),
           );
           continue;
-        case 13:
+        }
+        case 13: {
           if (tag !== 106) {
             break;
           }
 
           message.tags.push(Tag.decode(reader, reader.uint32()));
           continue;
-        case 14:
+        }
+        case 14: {
           if (tag !== 114) {
             break;
           }
@@ -756,7 +767,8 @@ export const Swagger: MessageFns<Swagger> = {
             reader.uint32(),
           );
           continue;
-        case 15:
+        }
+        case 15: {
           if (tag !== 122) {
             break;
           }
@@ -769,6 +781,7 @@ export const Swagger: MessageFns<Swagger> = {
             message.extensions[entry15.key] = entry15.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -915,20 +928,22 @@ export const Swagger_ResponsesEntry: MessageFns<Swagger_ResponsesEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = Response.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -986,20 +1001,22 @@ export const Swagger_ExtensionsEntry: MessageFns<Swagger_ExtensionsEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1114,28 +1131,31 @@ export const Operation: MessageFns<Operation> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.tags.push(reader.string());
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.summary = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.description = reader.string();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
@@ -1145,28 +1165,32 @@ export const Operation: MessageFns<Operation> = {
             reader.uint32(),
           );
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.operationId = reader.string();
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.consumes.push(reader.string());
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.produces.push(reader.string());
           continue;
-        case 9:
+        }
+        case 9: {
           if (tag !== 74) {
             break;
           }
@@ -1179,7 +1203,8 @@ export const Operation: MessageFns<Operation> = {
             message.responses[entry9.key] = entry9.value;
           }
           continue;
-        case 10:
+        }
+        case 10: {
           if (tag === 80) {
             message.schemes.push(reader.int32() as any);
 
@@ -1196,14 +1221,16 @@ export const Operation: MessageFns<Operation> = {
           }
 
           break;
-        case 11:
+        }
+        case 11: {
           if (tag !== 88) {
             break;
           }
 
           message.deprecated = reader.bool();
           continue;
-        case 12:
+        }
+        case 12: {
           if (tag !== 98) {
             break;
           }
@@ -1212,7 +1239,8 @@ export const Operation: MessageFns<Operation> = {
             SecurityRequirement.decode(reader, reader.uint32()),
           );
           continue;
-        case 13:
+        }
+        case 13: {
           if (tag !== 106) {
             break;
           }
@@ -1225,13 +1253,15 @@ export const Operation: MessageFns<Operation> = {
             message.extensions[entry13.key] = entry13.value;
           }
           continue;
-        case 14:
+        }
+        case 14: {
           if (tag !== 114) {
             break;
           }
 
           message.parameters = Parameters.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1380,20 +1410,22 @@ export const Operation_ResponsesEntry: MessageFns<Operation_ResponsesEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = Response.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1455,20 +1487,22 @@ export const Operation_ExtensionsEntry: MessageFns<Operation_ExtensionsEntry> =
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1520,13 +1554,14 @@ export const Parameters: MessageFns<Parameters> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.headers.push(HeaderParameter.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1588,41 +1623,46 @@ export const HeaderParameter: MessageFns<HeaderParameter> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.description = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.format = reader.string();
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
 
           message.required = reader.bool();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1702,41 +1742,46 @@ export const Header: MessageFns<Header> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.description = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.type = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.format = reader.string();
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.default = reader.string();
           continue;
-        case 13:
+        }
+        case 13: {
           if (tag !== 106) {
             break;
           }
 
           message.pattern = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1831,21 +1876,23 @@ export const Response: MessageFns<Response> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.description = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.schema = Schema.decode(reader, reader.uint32());
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
@@ -1855,7 +1902,8 @@ export const Response: MessageFns<Response> = {
             message.headers[entry3.key] = entry3.value;
           }
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
@@ -1865,7 +1913,8 @@ export const Response: MessageFns<Response> = {
             message.examples[entry4.key] = entry4.value;
           }
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
@@ -1878,6 +1927,7 @@ export const Response: MessageFns<Response> = {
             message.extensions[entry5.key] = entry5.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1990,20 +2040,22 @@ export const Response_HeadersEntry: MessageFns<Response_HeadersEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = Header.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2061,20 +2113,22 @@ export const Response_ExamplesEntry: MessageFns<Response_ExamplesEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2132,20 +2186,22 @@ export const Response_ExtensionsEntry: MessageFns<Response_ExtensionsEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2228,49 +2284,55 @@ export const Info: MessageFns<Info> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.title = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.description = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.termsOfService = reader.string();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.contact = Contact.decode(reader, reader.uint32());
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.license = License.decode(reader, reader.uint32());
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.version = reader.string();
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
@@ -2280,6 +2342,7 @@ export const Info: MessageFns<Info> = {
             message.extensions[entry7.key] = entry7.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2378,20 +2441,22 @@ export const Info_ExtensionsEntry: MessageFns<Info_ExtensionsEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2449,27 +2514,30 @@ export const Contact: MessageFns<Contact> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.url = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.email = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2528,20 +2596,22 @@ export const License: MessageFns<License> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.url = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2599,20 +2669,22 @@ export const ExternalDocumentation: MessageFns<ExternalDocumentation> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.description = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.url = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2687,28 +2759,31 @@ export const Schema: MessageFns<Schema> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.jsonSchema = JSONSchema.decode(reader, reader.uint32());
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.discriminator = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.readOnly = reader.bool();
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
@@ -2718,13 +2793,15 @@ export const Schema: MessageFns<Schema> = {
             reader.uint32(),
           );
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.example = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2908,154 +2985,175 @@ export const JSONSchema: MessageFns<JSONSchema> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 3:
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.ref = reader.string();
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.title = reader.string();
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.description = reader.string();
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.default = reader.string();
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 64) {
             break;
           }
 
           message.readOnly = reader.bool();
           continue;
-        case 9:
+        }
+        case 9: {
           if (tag !== 74) {
             break;
           }
 
           message.example = reader.string();
           continue;
-        case 10:
+        }
+        case 10: {
           if (tag !== 81) {
             break;
           }
 
           message.multipleOf = reader.double();
           continue;
-        case 11:
+        }
+        case 11: {
           if (tag !== 89) {
             break;
           }
 
           message.maximum = reader.double();
           continue;
-        case 12:
+        }
+        case 12: {
           if (tag !== 96) {
             break;
           }
 
           message.exclusiveMaximum = reader.bool();
           continue;
-        case 13:
+        }
+        case 13: {
           if (tag !== 105) {
             break;
           }
 
           message.minimum = reader.double();
           continue;
-        case 14:
+        }
+        case 14: {
           if (tag !== 112) {
             break;
           }
 
           message.exclusiveMinimum = reader.bool();
           continue;
-        case 15:
+        }
+        case 15: {
           if (tag !== 120) {
             break;
           }
 
           message.maxLength = reader.uint64().toString();
           continue;
-        case 16:
+        }
+        case 16: {
           if (tag !== 128) {
             break;
           }
 
           message.minLength = reader.uint64().toString();
           continue;
-        case 17:
+        }
+        case 17: {
           if (tag !== 138) {
             break;
           }
 
           message.pattern = reader.string();
           continue;
-        case 20:
+        }
+        case 20: {
           if (tag !== 160) {
             break;
           }
 
           message.maxItems = reader.uint64().toString();
           continue;
-        case 21:
+        }
+        case 21: {
           if (tag !== 168) {
             break;
           }
 
           message.minItems = reader.uint64().toString();
           continue;
-        case 22:
+        }
+        case 22: {
           if (tag !== 176) {
             break;
           }
 
           message.uniqueItems = reader.bool();
           continue;
-        case 24:
+        }
+        case 24: {
           if (tag !== 192) {
             break;
           }
 
           message.maxProperties = reader.uint64().toString();
           continue;
-        case 25:
+        }
+        case 25: {
           if (tag !== 200) {
             break;
           }
 
           message.minProperties = reader.uint64().toString();
           continue;
-        case 26:
+        }
+        case 26: {
           if (tag !== 210) {
             break;
           }
 
           message.required.push(reader.string());
           continue;
-        case 34:
+        }
+        case 34: {
           if (tag !== 274) {
             break;
           }
 
           message.array.push(reader.string());
           continue;
-        case 35:
+        }
+        case 35: {
           if (tag === 280) {
             message.type.push(reader.int32() as any);
 
@@ -3072,21 +3170,24 @@ export const JSONSchema: MessageFns<JSONSchema> = {
           }
 
           break;
-        case 36:
+        }
+        case 36: {
           if (tag !== 290) {
             break;
           }
 
           message.format = reader.string();
           continue;
-        case 46:
+        }
+        case 46: {
           if (tag !== 370) {
             break;
           }
 
           message.enum.push(reader.string());
           continue;
-        case 1001:
+        }
+        case 1001: {
           if (tag !== 8010) {
             break;
           }
@@ -3096,7 +3197,8 @@ export const JSONSchema: MessageFns<JSONSchema> = {
             reader.uint32(),
           );
           continue;
-        case 48:
+        }
+        case 48: {
           if (tag !== 386) {
             break;
           }
@@ -3109,6 +3211,7 @@ export const JSONSchema: MessageFns<JSONSchema> = {
             message.extensions[entry48.key] = entry48.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3313,13 +3416,14 @@ export const JSONSchema_FieldConfiguration: MessageFns<JSONSchema_FieldConfigura
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 47:
+          case 47: {
             if (tag !== 378) {
               break;
             }
 
             message.pathParamName = reader.string();
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -3379,20 +3483,22 @@ export const JSONSchema_ExtensionsEntry: MessageFns<JSONSchema_ExtensionsEntry> 
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -3461,21 +3567,23 @@ export const Tag: MessageFns<Tag> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.description = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
@@ -3485,7 +3593,8 @@ export const Tag: MessageFns<Tag> = {
             reader.uint32(),
           );
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
@@ -3495,6 +3604,7 @@ export const Tag: MessageFns<Tag> = {
             message.extensions[entry4.key] = entry4.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3577,20 +3687,22 @@ export const Tag_ExtensionsEntry: MessageFns<Tag_ExtensionsEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3648,7 +3760,7 @@ export const SecurityDefinitions: MessageFns<SecurityDefinitions> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
@@ -3661,6 +3773,7 @@ export const SecurityDefinitions: MessageFns<SecurityDefinitions> = {
             message.security[entry1.key] = entry1.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3728,20 +3841,22 @@ export const SecurityDefinitions_SecurityEntry: MessageFns<SecurityDefinitions_S
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.value = SecurityScheme.decode(reader, reader.uint32());
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -3834,63 +3949,71 @@ export const SecurityScheme: MessageFns<SecurityScheme> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.description = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.name = reader.string();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.in = reader.int32() as any;
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
 
           message.flow = reader.int32() as any;
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.authorizationUrl = reader.string();
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.tokenUrl = reader.string();
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 66) {
             break;
           }
 
           message.scopes = Scopes.decode(reader, reader.uint32());
           continue;
-        case 9:
+        }
+        case 9: {
           if (tag !== 74) {
             break;
           }
@@ -3903,6 +4026,7 @@ export const SecurityScheme: MessageFns<SecurityScheme> = {
             message.extensions[entry9.key] = entry9.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -4011,20 +4135,22 @@ export const SecurityScheme_ExtensionsEntry: MessageFns<SecurityScheme_Extension
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
 
             message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -4082,7 +4208,7 @@ export const SecurityRequirement: MessageFns<SecurityRequirement> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
@@ -4095,6 +4221,7 @@ export const SecurityRequirement: MessageFns<SecurityRequirement> = {
             message.securityRequirement[entry1.key] = entry1.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -4161,13 +4288,14 @@ export const SecurityRequirement_SecurityRequirementValue: MessageFns<SecurityRe
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.scope.push(reader.string());
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -4227,14 +4355,15 @@ export const SecurityRequirement_SecurityRequirementEntry: MessageFns<SecurityRe
       while (reader.pos < end) {
         const tag = reader.uint32();
         switch (tag >>> 3) {
-          case 1:
+          case 1: {
             if (tag !== 10) {
               break;
             }
 
             message.key = reader.string();
             continue;
-          case 2:
+          }
+          case 2: {
             if (tag !== 18) {
               break;
             }
@@ -4244,6 +4373,7 @@ export const SecurityRequirement_SecurityRequirementEntry: MessageFns<SecurityRe
               reader.uint32(),
             );
             continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -4302,7 +4432,7 @@ export const Scopes: MessageFns<Scopes> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
@@ -4312,6 +4442,7 @@ export const Scopes: MessageFns<Scopes> = {
             message.scope[entry1.key] = entry1.value;
           }
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -4376,20 +4507,22 @@ export const Scopes_ScopeEntry: MessageFns<Scopes_ScopeEntry> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;

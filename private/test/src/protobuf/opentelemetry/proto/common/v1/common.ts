@@ -87,7 +87,7 @@ export const AnyValue: MessageFns<AnyValue> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
@@ -97,14 +97,16 @@ export const AnyValue: MessageFns<AnyValue> = {
             stringValue: reader.string(),
           };
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 16) {
             break;
           }
 
           message.value = { $case: "boolValue", boolValue: reader.bool() };
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
@@ -114,7 +116,8 @@ export const AnyValue: MessageFns<AnyValue> = {
             intValue: reader.int64().toString(),
           };
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 33) {
             break;
           }
@@ -124,7 +127,8 @@ export const AnyValue: MessageFns<AnyValue> = {
             doubleValue: reader.double(),
           };
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
@@ -134,7 +138,8 @@ export const AnyValue: MessageFns<AnyValue> = {
             arrayValue: ArrayValue.decode(reader, reader.uint32()),
           };
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 50) {
             break;
           }
@@ -144,13 +149,15 @@ export const AnyValue: MessageFns<AnyValue> = {
             kvlistValue: KeyValueList.decode(reader, reader.uint32()),
           };
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 58) {
             break;
           }
 
           message.value = { $case: "bytesValue", bytesValue: reader.bytes() };
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -251,13 +258,14 @@ export const ArrayValue: MessageFns<ArrayValue> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.values.push(AnyValue.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -307,13 +315,14 @@ export const KeyValueList: MessageFns<KeyValueList> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.values.push(KeyValue.decode(reader, reader.uint32()));
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -366,20 +375,22 @@ export const KeyValue: MessageFns<KeyValue> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.value = AnyValue.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -443,34 +454,38 @@ export const InstrumentationScope: MessageFns<InstrumentationScope> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.version = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.attributes.push(KeyValue.decode(reader, reader.uint32()));
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.droppedAttributesCount = reader.uint32();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
