@@ -97,7 +97,7 @@ importers:
         specifier: ^0.18.1
         version: link:../core
       '@grpc/grpc-js':
-        specifier: ^1.11.3
+        specifier: ^1.12.0
         version: 1.12.0
 
   packages/http:
