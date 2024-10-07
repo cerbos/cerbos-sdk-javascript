@@ -260,11 +260,13 @@ export class Transport implements _Transport {
     );
 
     try {
-      const lines = response.body
-        ? eachLine(response.body as ReadableStream<Uint8Array>)
-        : [];
+      if (!response.body) {
+        throw new Error("Missing response body");
+      }
 
-      for await (const line of lines) {
+      for await (const line of eachLine(
+        response.body as ReadableStream<Uint8Array>,
+      )) {
         const message = JSON.parse(line) as unknown;
 
         if (!_isObject(message)) {
