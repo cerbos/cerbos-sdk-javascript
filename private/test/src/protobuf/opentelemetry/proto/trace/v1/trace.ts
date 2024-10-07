@@ -183,7 +183,7 @@ export const TracesData: MessageFns<TracesData> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
@@ -192,6 +192,7 @@ export const TracesData: MessageFns<TracesData> = {
             ResourceSpans.decode(reader, reader.uint32()),
           );
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -249,27 +250,30 @@ export const ResourceSpans: MessageFns<ResourceSpans> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.resource = Resource.decode(reader, reader.uint32());
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.scopeSpans.push(ScopeSpans.decode(reader, reader.uint32()));
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.schemaUrl = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -340,27 +344,30 @@ export const ScopeSpans: MessageFns<ScopeSpans> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.scope = InstrumentationScope.decode(reader, reader.uint32());
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.spans.push(Span.decode(reader, reader.uint32()));
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.schemaUrl = reader.string();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -484,118 +491,134 @@ export const Span: MessageFns<Span> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.traceId = reader.bytes();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.spanId = reader.bytes();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.traceState = reader.string();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.parentSpanId = reader.bytes();
           continue;
-        case 16:
+        }
+        case 16: {
           if (tag !== 133) {
             break;
           }
 
           message.flags = reader.fixed32();
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.name = reader.string();
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 48) {
             break;
           }
 
           message.kind = reader.int32() as any;
           continue;
-        case 7:
+        }
+        case 7: {
           if (tag !== 57) {
             break;
           }
 
           message.startTimeUnixNano = reader.fixed64().toString();
           continue;
-        case 8:
+        }
+        case 8: {
           if (tag !== 65) {
             break;
           }
 
           message.endTimeUnixNano = reader.fixed64().toString();
           continue;
-        case 9:
+        }
+        case 9: {
           if (tag !== 74) {
             break;
           }
 
           message.attributes.push(KeyValue.decode(reader, reader.uint32()));
           continue;
-        case 10:
+        }
+        case 10: {
           if (tag !== 80) {
             break;
           }
 
           message.droppedAttributesCount = reader.uint32();
           continue;
-        case 11:
+        }
+        case 11: {
           if (tag !== 90) {
             break;
           }
 
           message.events.push(Span_Event.decode(reader, reader.uint32()));
           continue;
-        case 12:
+        }
+        case 12: {
           if (tag !== 96) {
             break;
           }
 
           message.droppedEventsCount = reader.uint32();
           continue;
-        case 13:
+        }
+        case 13: {
           if (tag !== 106) {
             break;
           }
 
           message.links.push(Span_Link.decode(reader, reader.uint32()));
           continue;
-        case 14:
+        }
+        case 14: {
           if (tag !== 112) {
             break;
           }
 
           message.droppedLinksCount = reader.uint32();
           continue;
-        case 15:
+        }
+        case 15: {
           if (tag !== 122) {
             break;
           }
 
           message.status = Status.decode(reader, reader.uint32());
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -741,34 +764,38 @@ export const Span_Event: MessageFns<Span_Event> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 9) {
             break;
           }
 
           message.timeUnixNano = reader.fixed64().toString();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.attributes.push(KeyValue.decode(reader, reader.uint32()));
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 32) {
             break;
           }
 
           message.droppedAttributesCount = reader.uint32();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -856,48 +883,54 @@ export const Span_Link: MessageFns<Span_Link> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 10) {
             break;
           }
 
           message.traceId = reader.bytes();
           continue;
-        case 2:
+        }
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.spanId = reader.bytes();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.traceState = reader.string();
           continue;
-        case 4:
+        }
+        case 4: {
           if (tag !== 34) {
             break;
           }
 
           message.attributes.push(KeyValue.decode(reader, reader.uint32()));
           continue;
-        case 5:
+        }
+        case 5: {
           if (tag !== 40) {
             break;
           }
 
           message.droppedAttributesCount = reader.uint32();
           continue;
-        case 6:
+        }
+        case 6: {
           if (tag !== 53) {
             break;
           }
 
           message.flags = reader.fixed32();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -978,20 +1011,22 @@ export const Status: MessageFns<Status> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 2:
+        case 2: {
           if (tag !== 18) {
             break;
           }
 
           message.message = reader.string();
           continue;
-        case 3:
+        }
+        case 3: {
           if (tag !== 24) {
             break;
           }
 
           message.code = reader.int32() as any;
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;

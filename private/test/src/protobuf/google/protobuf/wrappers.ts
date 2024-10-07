@@ -33,13 +33,14 @@ export const UInt64Value: MessageFns<UInt64Value> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
+        case 1: {
           if (tag !== 8) {
             break;
           }
 
           message.value = reader.uint64().toString();
           continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
