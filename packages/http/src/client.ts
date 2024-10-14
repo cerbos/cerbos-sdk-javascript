@@ -3,7 +3,6 @@ import { Client } from "@cerbos/core";
 
 import { Transport } from "./transport";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires -- Can't import package.json because it is outside of the project's rootDir
 const { version } = require("../package.json") as { version: string };
 
 const defaultUserAgent = `cerbos-sdk-javascript-http/${version}`;

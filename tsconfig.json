@@ -1,4 +1,8 @@
 {
   "files": [],
-  "references": [{ "path": "private/scripts" }, { "path": "private/test" }]
+  "references": [
+    { "path": "private/eslint" },
+    { "path": "private/scripts" },
+    { "path": "private/test" }
+  ]
 }

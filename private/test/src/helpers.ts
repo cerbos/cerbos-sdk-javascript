@@ -29,7 +29,6 @@ import type {
 } from "./protobuf/opentelemetry/proto/trace/v1/trace";
 import { cerbosVersionIsAtLeast } from "./servers";
 
-/* eslint-disable @typescript-eslint/no-var-requires -- Can't import package.json files because they're outside of the project's rootDir */
 const { version: grpcSdkVersion } =
   require("../../../packages/grpc/package.json") as { version: string };
 
@@ -41,7 +40,6 @@ const {
 } = require("../package.json") as {
   devDependencies: { "@grpc/grpc-js": string };
 };
-/* eslint-enable @typescript-eslint/no-var-requires */
 
 export function buildResultsForResources({
   id,

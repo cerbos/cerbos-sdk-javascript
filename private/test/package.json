@@ -25,7 +25,6 @@
     "@testing-library/user-event": "14.5.2",
     "@types/react": "18.3.11",
     "@types/semver": "7.5.8",
-    "eslint-plugin-vitest": "0.4.1",
     "jose": "5.9.3",
     "jsdom": "25.0.1",
     "react": "18.3.1",
