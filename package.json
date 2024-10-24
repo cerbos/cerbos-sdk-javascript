@@ -1,10 +1,10 @@
 {
   "name": "cerbos-sdk-javascript",
   "private": true,
-  "packageManager": "pnpm@9.12.1",
+  "packageManager": "pnpm@9.12.2",
   "engines": {
-    "node": "22.9.0",
-    "pnpm": "9.12.1"
+    "node": "22.10.0",
+    "pnpm": "9.12.2"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
@@ -51,25 +51,25 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.16.4",
-    "@eslint/js": "9.12.0",
-    "@microsoft/api-documenter": "7.25.17",
-    "@microsoft/api-extractor": "7.47.9",
+    "@eslint/js": "9.13.0",
+    "@microsoft/api-documenter": "7.25.20",
+    "@microsoft/api-extractor": "7.47.11",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
     "@types/eslint__js": "8.42.3",
-    "@types/node": "18.19.55",
+    "@types/node": "18.19.57",
     "@vitest/eslint-plugin": "1.1.7",
     "concurrently": "9.0.1",
     "depcheck": "1.4.7",
-    "eslint": "9.12.0",
+    "eslint": "9.13.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-react-hooks": "5.0.0",
     "eslint-plugin-tsdoc": "0.3.0",
     "prettier": "3.3.3",
     "prettier-plugin-pkg": "0.18.1",
-    "ts-proto": "2.2.3",
+    "ts-proto": "2.2.4",
     "tsx": "4.19.1",
     "typescript": "5.6.3",
-    "typescript-eslint": "8.8.1"
+    "typescript-eslint": "8.11.0"
   }
 }
