@@ -52,12 +52,12 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "0.16.4",
     "@eslint/js": "9.13.0",
-    "@microsoft/api-documenter": "7.25.20",
+    "@microsoft/api-documenter": "7.25.21",
     "@microsoft/api-extractor": "7.47.11",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
     "@types/eslint__js": "8.42.3",
-    "@types/node": "18.19.57",
+    "@types/node": "18.19.59",
     "@vitest/eslint-plugin": "1.1.7",
     "concurrently": "9.0.1",
     "depcheck": "1.4.7",
@@ -67,7 +67,7 @@
     "eslint-plugin-tsdoc": "0.3.0",
     "prettier": "3.3.3",
     "prettier-plugin-pkg": "0.18.1",
-    "ts-proto": "2.2.4",
+    "ts-proto": "2.2.5",
     "tsx": "4.19.1",
     "typescript": "5.6.3",
     "typescript-eslint": "8.11.0"

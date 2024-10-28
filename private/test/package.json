@@ -23,7 +23,7 @@
     "@opentelemetry/semantic-conventions": "1.27.0",
     "@testing-library/react": "16.0.1",
     "@testing-library/user-event": "14.5.2",
-    "@types/react": "18.3.11",
+    "@types/react": "18.3.12",
     "@types/semver": "7.5.8",
     "jose": "5.9.6",
     "jsdom": "25.0.1",
