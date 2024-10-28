@@ -6,6 +6,8 @@
 
 - Migrate away from [deprecated semantic attributes](https://github.com/open-telemetry/opentelemetry-js/pull/4690) ([#1018](https://github.com/cerbos/cerbos-sdk-javascript/pull/1018))
 
+- Bump dependency on [@opentelemetry/instrumentation] to 0.54.0 ([#1032](https://github.com/cerbos/cerbos-sdk-javascript/pull/1032))
+
 ## [0.5.3] - 2024-09-23
 
 ### Changed
