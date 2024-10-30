@@ -33,18 +33,27 @@ const first: Bundle = {
       "cerbos.resource.document.v1",
       "cerbos.resource.document.v1/test",
     ],
+    sourceAttributes: {},
   },
 };
 
 const second: Bundle = {
-  etag: '"26d5b714d3790b596e18b36af406f57b"',
+  etag: '"34acbd4bf4d9683654a084e6007b642b"',
   metadata: {
-    builtAt: new Date(Date.UTC(2024, 3, 11, 11, 16, 12)),
-    commit: "38612c14bd01c7a832b5c1a04a83d9b103e25478",
+    builtAt: new Date(Date.UTC(2024, 9, 28, 9, 12, 55)),
+    commit: "b0917abcc7989a918cea62f97d5d0a8e84f66086",
     policies: [
       "cerbos.resource.document.v1",
       "cerbos.resource.document.v1/test",
     ],
+    sourceAttributes: {
+      "cerbos.resource.document.v1": {
+        source: "document.yaml",
+      },
+      "cerbos.resource.document.v1/test": {
+        source: "test/document.yaml",
+      },
+    },
   },
 };
 

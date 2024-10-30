@@ -8,6 +8,7 @@ import type {
   Options,
   Source,
 } from "./loader";
+import { Metadata as BundleMetadataProtobuf } from "./protobuf/cerbos/cloud/epdp/v1/epdp";
 import { CheckResourcesRequest } from "./protobuf/cerbos/request/v1/request";
 import { CheckResourcesResponse } from "./protobuf/cerbos/response/v1/response";
 import { cancelBody } from "./response";
@@ -69,14 +70,26 @@ export class Bundle {
 
   public get metadata(): BundleMetadata {
     if (!this._metadata) {
-      const { version, buildTimestamp, policies } = JSON.parse(
-        Slice.from(this.exports, this.exports.metadata()).text(),
-      ) as { version: string; buildTimestamp: number; policies: string[] };
+      const {
+        commitHash,
+        version,
+        buildTimestamp,
+        policies,
+        sourceAttributes,
+      } = BundleMetadataProtobuf.fromJSON(
+        JSON.parse(Slice.from(this.exports, this.exports.metadata()).text()),
+      );
 
       this._metadata = {
-        commit: version,
+        commit: commitHash || version,
         builtAt: new Date(buildTimestamp * 1000),
         policies,
+        sourceAttributes: Object.fromEntries(
+          Object.entries(sourceAttributes).map(([id, { attributes }]) => [
+            id,
+            attributes,
+          ]),
+        ),
       };
     }
 

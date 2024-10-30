@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [`BundleMetadata.sourceAttributes`](../../docs/embedded.bundlemetadata.sourceattributes.md) property mapping IDs of policies included in the bundle to metadata about their sources ([#1033](https://github.com/cerbos/cerbos-sdk-javascript/pull/1033))
 
 ## [0.8.0] - 2024-09-23
 

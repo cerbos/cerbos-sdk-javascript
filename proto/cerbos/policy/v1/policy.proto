@@ -16,6 +16,14 @@ option csharp_namespace = "Cerbos.Api.V1.Policy";
 option go_package = "github.com/cerbos/cerbos/api/genpb/cerbos/policy/v1;policyv1";
 option java_package = "dev.cerbos.api.v1.policy";
 
+enum Kind {
+  KIND_UNSPECIFIED = 0;
+  KIND_DERIVED_ROLES = 1;
+  KIND_EXPORT_VARIABLES = 2;
+  KIND_PRINCIPAL = 3;
+  KIND_RESOURCE = 4;
+}
+
 message Policy {
   string api_version = 1 [
     (buf.validate.field).required = true,
@@ -58,9 +66,9 @@ message ResourcePolicy {
     (buf.validate.field).string = {pattern: "^[[:word:]]+$"}
   ];
   repeated string import_derived_roles = 3 [(buf.validate.field).repeated = {
-    unique: true,
-    items {
-      string {pattern: "^[[:word:]\\-\\.]+$"}
+    unique: true
+    items: {
+      string: {pattern: "^[[:word:]\\-\\.]+$"}
     }
   }];
   repeated ResourceRule rules = 4;
@@ -72,24 +80,24 @@ message ResourcePolicy {
 message ResourceRule {
   repeated string actions = 1 [
     (buf.validate.field).repeated = {
-      min_items: 1,
-      unique: true,
-      items {
-        string {min_len: 1}
+      min_items: 1
+      unique: true
+      items: {
+        string: {min_len: 1}
       }
     },
     (buf.validate.field).required = true
   ];
   repeated string derived_roles = 2 [(buf.validate.field).repeated = {
-    unique: true,
-    items {
-      string {pattern: "^[[:word:]\\-\\.]+$"}
+    unique: true
+    items: {
+      string: {pattern: "^[[:word:]\\-\\.]+$"}
     }
   }];
   repeated string roles = 3 [(buf.validate.field).repeated = {
-    unique: true,
-    items {
-      string {min_len: 1}
+    unique: true
+    items: {
+      string: {min_len: 1}
     }
   }];
   Condition condition = 4;
@@ -154,7 +162,7 @@ message DerivedRoles {
   string name = 1 [
     (buf.validate.field).required = true,
     (buf.validate.field).string = {
-      pattern: "^[[:word:]\\-\\.]+$",
+      pattern: "^[[:word:]\\-\\.]+$"
       min_len: 1
     }
   ];
@@ -172,10 +180,10 @@ message RoleDef {
   ];
   repeated string parent_roles = 2 [
     (buf.validate.field).repeated = {
-      unique: true,
-      min_items: 1,
-      items {
-        string {min_len: 1}
+      unique: true
+      min_items: 1
+      items: {
+        string: {min_len: 1}
       }
     },
     (buf.validate.field).required = true
@@ -187,7 +195,7 @@ message ExportVariables {
   string name = 1 [
     (buf.validate.field).required = true,
     (buf.validate.field).string = {
-      pattern: "^[[:word:]\\-\\.]+$",
+      pattern: "^[[:word:]\\-\\.]+$"
       min_len: 1
     }
   ];
@@ -196,9 +204,9 @@ message ExportVariables {
 
 message Variables {
   repeated string import = 1 [(buf.validate.field).repeated = {
-    unique: true,
-    items {
-      string {pattern: "^[[:word:]\\-\\.]+$"}
+    unique: true
+    items: {
+      string: {pattern: "^[[:word:]\\-\\.]+$"}
     }
   }];
   map<string, string> local = 2;
@@ -243,10 +251,10 @@ message Schemas {
   message IgnoreWhen {
     repeated string actions = 1 [
       (buf.validate.field).repeated = {
-        unique: true,
-        min_items: 1,
-        items {
-          string {min_len: 1}
+        unique: true
+        min_items: 1
+        items: {
+          string: {min_len: 1}
         }
       },
       (buf.validate.field).required = true
@@ -311,8 +319,8 @@ message TestTable {
   message Input {
     repeated string principals = 1 [
       (buf.validate.field).repeated = {
-        min_items: 1,
-        unique: true,
+        min_items: 1
+        unique: true
         items: {
           string: {min_len: 1}
         }
@@ -321,8 +329,8 @@ message TestTable {
     ];
     repeated string resources = 2 [
       (buf.validate.field).repeated = {
-        min_items: 1,
-        unique: true,
+        min_items: 1
+        unique: true
         items: {
           string: {min_len: 1}
         }
@@ -331,8 +339,8 @@ message TestTable {
     ];
     repeated string actions = 3 [
       (buf.validate.field).repeated = {
-        min_items: 1,
-        unique: true,
+        min_items: 1
+        unique: true
         items: {
           string: {min_len: 1}
         }
@@ -364,10 +372,10 @@ message TestTable {
     ];
     map<string, cerbos.effect.v1.Effect> actions = 3 [
       (buf.validate.field).map = {
-        min_pairs: 1,
+        min_pairs: 1
         keys: {
           string: {min_len: 1}
-        },
+        }
         values: {
           enum: {
             in: [
@@ -424,10 +432,10 @@ message Test {
   cerbos.engine.v1.CheckInput input = 5 [(buf.validate.field).required = true];
   map<string, cerbos.effect.v1.Effect> expected = 6 [
     (buf.validate.field).map = {
-      min_pairs: 1,
+      min_pairs: 1
       keys: {
         string: {min_len: 1}
-      },
+      }
       values: {
         enum: {
           in: [

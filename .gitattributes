@@ -1,1 +1,2 @@
 /packages/*/src/protobuf/**/* linguist-generated=true
+/private/*/src/protobuf/**/* linguist-generated=true

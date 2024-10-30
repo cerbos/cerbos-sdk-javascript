@@ -1,0 +1,28 @@
+// Copyright 2021-2024 Zenauth Ltd.
+// SPDX-License-Identifier: Apache-2.0
+
+syntax = "proto3";
+
+package cerbos.cloud.apikey.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+
+option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/apikey/v1;apikeyv1";
+
+message IssueAccessTokenRequest {
+  string client_id = 1 [(buf.validate.field).string.len = 12];
+  string client_secret = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+message IssueAccessTokenResponse {
+  string access_token = 1 [(buf.validate.field).string.min_len = 1];
+  google.protobuf.Duration expires_in = 2 [(buf.validate.field).required = true];
+}
+
+service ApiKeyService {
+  option (google.api.api_visibility).restriction = "EXPERIMENTAL";
+
+  rpc IssueAccessToken(IssueAccessTokenRequest) returns (IssueAccessTokenResponse) {}
+}
