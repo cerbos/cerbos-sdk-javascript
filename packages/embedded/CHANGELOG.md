@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.9.0] - 2024-10-30
+
 ### Added
 
 - [`BundleMetadata.sourceAttributes`](../../docs/embedded.bundlemetadata.sourceattributes.md) property mapping IDs of policies included in the bundle to metadata about their sources ([#1033](https://github.com/cerbos/cerbos-sdk-javascript/pull/1033))
@@ -163,7 +167,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.8.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.9.0...HEAD
+[0.9.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.8.0...@cerbos/embedded@0.9.0
 [0.8.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.3...@cerbos/embedded@0.8.0
 [0.7.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.2...@cerbos/embedded@0.7.3
 [0.7.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.7.1...@cerbos/embedded@0.7.2

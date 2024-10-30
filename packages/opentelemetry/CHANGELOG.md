@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.5.4] - 2024-10-30
+
 ### Changed
 
 - Migrate away from [deprecated semantic attributes](https://github.com/open-telemetry/opentelemetry-js/pull/4690) ([#1018](https://github.com/cerbos/cerbos-sdk-javascript/pull/1018))
@@ -204,7 +208,8 @@
 
 - [OpenTelemetry](https://opentelemetry.io) instrumentation for the [@cerbos/grpc] and [@cerbos/http] client libraries ([#438](https://github.com/cerbos/cerbos-sdk-javascript/pull/438))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.5.3...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.5.4...HEAD
+[0.5.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.5.3...@cerbos/opentelemetry@0.5.4
 [0.5.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.5.2...@cerbos/opentelemetry@0.5.3
 [0.5.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.5.1...@cerbos/opentelemetry@0.5.2
 [0.5.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.5.0...@cerbos/opentelemetry@0.5.1
