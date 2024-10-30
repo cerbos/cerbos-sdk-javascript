@@ -3,6 +3,7 @@ version: v2
 inputs:
   - directory: proto
     types:
+      - cerbos.cloud.epdp.v1.Metadata
       - cerbos.svc.v1.CerbosService
 
 plugins:

@@ -1,0 +1,117 @@
+// Copyright 2021-2024 Zenauth Ltd.
+// SPDX-License-Identifier: Apache-2.0
+
+syntax = "proto3";
+
+package cerbos.cloud.store.v1;
+
+import "buf/validate/validate.proto";
+import "cerbos/policy/v1/policy.proto";
+import "google/api/field_behavior.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/store/v1;storev1";
+
+message StringMatch {
+  message InList {
+    repeated string values = 1 [(buf.validate.field).repeated = {
+      max_items: 50
+      items: {
+        string: {min_len: 1}
+      }
+    }];
+  }
+
+  oneof match {
+    option (buf.validate.oneof).required = true;
+    string equals = 1;
+    string like = 2;
+    InList in = 3;
+  }
+}
+
+message PolicyFilter {
+  repeated cerbos.policy.v1.Kind kinds = 1 [
+    (google.api.field_behavior) = OPTIONAL,
+    (buf.validate.field).repeated = {
+      unique: true
+      items: {
+        enum: {
+          not_in: [0]
+          defined_only: true
+        }
+      }
+    }
+  ];
+  StringMatch name = 2 [(google.api.field_behavior) = OPTIONAL];
+  StringMatch version = 3 [(google.api.field_behavior) = OPTIONAL];
+  StringMatch scope = 4 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message ListPoliciesRequest {
+  string store_id = 1 [(buf.validate.field).string.len = 12];
+  PolicyFilter filter = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message ListPoliciesResponse {
+  message Policy {
+    string key = 1;
+    cerbos.policy.v1.Kind kind = 2;
+    string name = 3;
+    string version = 4;
+    string scope = 5;
+    google.protobuf.Timestamp created_at = 6;
+  }
+  int64 store_version = 1;
+  repeated Policy policies = 2;
+}
+
+message GetPoliciesRequest {
+  string store_id = 1 [(buf.validate.field).string.len = 12];
+  repeated string policy_keys = 2 [(buf.validate.field).repeated = {
+    max_items: 50
+    items: {
+      string: {min_len: 1}
+    }
+  }];
+}
+
+message GetPoliciesResponse {
+  int64 store_version = 1;
+  map<string, cerbos.policy.v1.Policy> policies = 2;
+}
+
+message PolicyOp {
+  oneof op {
+    option (buf.validate.oneof).required = true;
+    cerbos.policy.v1.Policy add_or_update = 1;
+    string delete = 2;
+  }
+}
+
+message ModifyPoliciesRequest {
+  message Condition {
+    int64 store_version_must_equal = 1 [(buf.validate.field).int64.gte = 0];
+  }
+
+  string store_id = 1 [(buf.validate.field).string.len = 12];
+  Condition condition = 2 [(google.api.field_behavior) = OPTIONAL];
+  repeated PolicyOp operations = 3 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message ModifyPoliciesResponse {
+  int64 new_store_version = 1;
+}
+
+service CerbosStoreService {
+  option (google.api.api_visibility).restriction = "EXPERIMENTAL";
+
+  rpc ListPolicies(ListPoliciesRequest) returns (ListPoliciesResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+  }
+  rpc GetPolicies(GetPoliciesRequest) returns (GetPoliciesResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+  }
+  rpc ModifyPolicies(ModifyPoliciesRequest) returns (ModifyPoliciesResponse) {}
+}

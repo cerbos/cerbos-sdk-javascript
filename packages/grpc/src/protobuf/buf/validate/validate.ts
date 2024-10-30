@@ -9,6 +9,15 @@ import { Constraint } from "./expression";
 
 export const protobufPackage = "buf.validate";
 
+export enum Ignore {
+  IGNORE_UNSPECIFIED = 0,
+  IGNORE_IF_UNPOPULATED = 1,
+  IGNORE_IF_DEFAULT_VALUE = 2,
+  IGNORE_ALWAYS = 3,
+  IGNORE_EMPTY = 1,
+  IGNORE_DEFAULT = 2,
+}
+
 export enum KnownRegex {
   KNOWN_REGEX_UNSPECIFIED = 0,
   KNOWN_REGEX_HTTP_HEADER_NAME = 1,
@@ -21,9 +30,8 @@ export interface OneofConstraints {
 
 export interface FieldConstraints {
   cel: Constraint[];
-  skipped: boolean;
   required: boolean;
-  ignoreEmpty: boolean;
+  ignore: Ignore;
   type?:
     | { $case: "float"; float: FloatRules }
     | { $case: "double"; double: DoubleRules }
@@ -47,6 +55,8 @@ export interface FieldConstraints {
     | { $case: "duration"; duration: DurationRules }
     | { $case: "timestamp"; timestamp: TimestampRules }
     | undefined;
+  skipped: boolean;
+  ignoreEmpty: boolean;
 }
 
 export interface FloatRules {
@@ -248,12 +258,14 @@ export interface StringRules {
     | { $case: "uriRef"; uriRef: boolean }
     | { $case: "address"; address: boolean }
     | { $case: "uuid"; uuid: boolean }
+    | { $case: "tuuid"; tuuid: boolean }
     | { $case: "ipWithPrefixlen"; ipWithPrefixlen: boolean }
     | { $case: "ipv4WithPrefixlen"; ipv4WithPrefixlen: boolean }
     | { $case: "ipv6WithPrefixlen"; ipv6WithPrefixlen: boolean }
     | { $case: "ipPrefix"; ipPrefix: boolean }
     | { $case: "ipv4Prefix"; ipv4Prefix: boolean }
     | { $case: "ipv6Prefix"; ipv6Prefix: boolean }
+    | { $case: "hostAndPort"; hostAndPort: boolean }
     | { $case: "wellKnownRegex"; wellKnownRegex: KnownRegex }
     | undefined;
   strict?: boolean | undefined;
@@ -376,10 +388,11 @@ export const OneofConstraints: MessageFns<OneofConstraints> = {
 function createBaseFieldConstraints(): FieldConstraints {
   return {
     cel: [],
-    skipped: false,
     required: false,
-    ignoreEmpty: false,
+    ignore: 0,
     type: undefined,
+    skipped: false,
+    ignoreEmpty: false,
   };
 }
 
@@ -391,14 +404,11 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
     for (const v of message.cel) {
       Constraint.encode(v!, writer.uint32(186).fork()).join();
     }
-    if (message.skipped !== false) {
-      writer.uint32(192).bool(message.skipped);
-    }
     if (message.required !== false) {
       writer.uint32(200).bool(message.required);
     }
-    if (message.ignoreEmpty !== false) {
-      writer.uint32(208).bool(message.ignoreEmpty);
+    if (message.ignore !== 0) {
+      writer.uint32(216).int32(message.ignore);
     }
     switch (message.type?.$case) {
       case "float":
@@ -504,6 +514,12 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
         ).join();
         break;
     }
+    if (message.skipped !== false) {
+      writer.uint32(192).bool(message.skipped);
+    }
+    if (message.ignoreEmpty !== false) {
+      writer.uint32(208).bool(message.ignoreEmpty);
+    }
     return writer;
   },
 
@@ -523,14 +539,6 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
           message.cel.push(Constraint.decode(reader, reader.uint32()));
           continue;
         }
-        case 24: {
-          if (tag !== 192) {
-            break;
-          }
-
-          message.skipped = reader.bool();
-          continue;
-        }
         case 25: {
           if (tag !== 200) {
             break;
@@ -539,12 +547,12 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
           message.required = reader.bool();
           continue;
         }
-        case 26: {
-          if (tag !== 208) {
+        case 27: {
+          if (tag !== 216) {
             break;
           }
 
-          message.ignoreEmpty = reader.bool();
+          message.ignore = reader.int32() as any;
           continue;
         }
         case 1: {
@@ -776,6 +784,22 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             $case: "timestamp",
             timestamp: TimestampRules.decode(reader, reader.uint32()),
           };
+          continue;
+        }
+        case 24: {
+          if (tag !== 192) {
+            break;
+          }
+
+          message.skipped = reader.bool();
+          continue;
+        }
+        case 26: {
+          if (tag !== 208) {
+            break;
+          }
+
+          message.ignoreEmpty = reader.bool();
           continue;
         }
       }
@@ -2665,6 +2689,9 @@ export const StringRules: MessageFns<StringRules> = {
       case "uuid":
         writer.uint32(176).bool(message.wellKnown.uuid);
         break;
+      case "tuuid":
+        writer.uint32(264).bool(message.wellKnown.tuuid);
+        break;
       case "ipWithPrefixlen":
         writer.uint32(208).bool(message.wellKnown.ipWithPrefixlen);
         break;
@@ -2682,6 +2709,9 @@ export const StringRules: MessageFns<StringRules> = {
         break;
       case "ipv6Prefix":
         writer.uint32(248).bool(message.wellKnown.ipv6Prefix);
+        break;
+      case "hostAndPort":
+        writer.uint32(256).bool(message.wellKnown.hostAndPort);
         break;
       case "wellKnownRegex":
         writer.uint32(192).int32(message.wellKnown.wellKnownRegex);
@@ -2885,6 +2915,14 @@ export const StringRules: MessageFns<StringRules> = {
           message.wellKnown = { $case: "uuid", uuid: reader.bool() };
           continue;
         }
+        case 33: {
+          if (tag !== 264) {
+            break;
+          }
+
+          message.wellKnown = { $case: "tuuid", tuuid: reader.bool() };
+          continue;
+        }
         case 26: {
           if (tag !== 208) {
             break;
@@ -2945,6 +2983,17 @@ export const StringRules: MessageFns<StringRules> = {
           message.wellKnown = {
             $case: "ipv6Prefix",
             ipv6Prefix: reader.bool(),
+          };
+          continue;
+        }
+        case 32: {
+          if (tag !== 256) {
+            break;
+          }
+
+          message.wellKnown = {
+            $case: "hostAndPort",
+            hostAndPort: reader.bool(),
           };
           continue;
         }

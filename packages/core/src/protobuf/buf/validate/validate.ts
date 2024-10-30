@@ -7,6 +7,15 @@ import { type Constraint } from "./expression";
 
 export const protobufPackage = "buf.validate";
 
+export enum Ignore {
+  IGNORE_UNSPECIFIED = 0,
+  IGNORE_IF_UNPOPULATED = 1,
+  IGNORE_IF_DEFAULT_VALUE = 2,
+  IGNORE_ALWAYS = 3,
+  IGNORE_EMPTY = 1,
+  IGNORE_DEFAULT = 2,
+}
+
 export enum KnownRegex {
   KNOWN_REGEX_UNSPECIFIED = 0,
   KNOWN_REGEX_HTTP_HEADER_NAME = 1,
@@ -19,9 +28,8 @@ export interface OneofConstraints {
 
 export interface FieldConstraints {
   cel: Constraint[];
-  skipped: boolean;
   required: boolean;
-  ignoreEmpty: boolean;
+  ignore: Ignore;
   type?:
     | { $case: "float"; float: FloatRules }
     | { $case: "double"; double: DoubleRules }
@@ -45,6 +53,8 @@ export interface FieldConstraints {
     | { $case: "duration"; duration: DurationRules }
     | { $case: "timestamp"; timestamp: TimestampRules }
     | undefined;
+  skipped: boolean;
+  ignoreEmpty: boolean;
 }
 
 export interface FloatRules {
@@ -246,12 +256,14 @@ export interface StringRules {
     | { $case: "uriRef"; uriRef: boolean }
     | { $case: "address"; address: boolean }
     | { $case: "uuid"; uuid: boolean }
+    | { $case: "tuuid"; tuuid: boolean }
     | { $case: "ipWithPrefixlen"; ipWithPrefixlen: boolean }
     | { $case: "ipv4WithPrefixlen"; ipv4WithPrefixlen: boolean }
     | { $case: "ipv6WithPrefixlen"; ipv6WithPrefixlen: boolean }
     | { $case: "ipPrefix"; ipPrefix: boolean }
     | { $case: "ipv4Prefix"; ipv4Prefix: boolean }
     | { $case: "ipv6Prefix"; ipv6Prefix: boolean }
+    | { $case: "hostAndPort"; hostAndPort: boolean }
     | { $case: "wellKnownRegex"; wellKnownRegex: KnownRegex }
     | undefined;
   strict?: boolean | undefined;

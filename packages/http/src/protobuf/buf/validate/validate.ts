@@ -8,6 +8,63 @@ import { Constraint } from "./expression";
 
 export const protobufPackage = "buf.validate";
 
+export enum Ignore {
+  IGNORE_UNSPECIFIED = 0,
+  IGNORE_IF_UNPOPULATED = 1,
+  IGNORE_IF_DEFAULT_VALUE = 2,
+  IGNORE_ALWAYS = 3,
+  IGNORE_EMPTY = 1,
+  IGNORE_DEFAULT = 2,
+}
+
+export function ignoreFromJSON(object: any): Ignore {
+  switch (object) {
+    case 0:
+    case "IGNORE_UNSPECIFIED":
+      return Ignore.IGNORE_UNSPECIFIED;
+    case 1:
+    case "IGNORE_IF_UNPOPULATED":
+      return Ignore.IGNORE_IF_UNPOPULATED;
+    case 2:
+    case "IGNORE_IF_DEFAULT_VALUE":
+      return Ignore.IGNORE_IF_DEFAULT_VALUE;
+    case 3:
+    case "IGNORE_ALWAYS":
+      return Ignore.IGNORE_ALWAYS;
+    case 1:
+    case "IGNORE_EMPTY":
+      return Ignore.IGNORE_EMPTY;
+    case 2:
+    case "IGNORE_DEFAULT":
+      return Ignore.IGNORE_DEFAULT;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum Ignore",
+      );
+  }
+}
+
+export function ignoreToJSON(object: Ignore): string {
+  switch (object) {
+    case Ignore.IGNORE_UNSPECIFIED:
+      return "IGNORE_UNSPECIFIED";
+    case Ignore.IGNORE_IF_UNPOPULATED:
+      return "IGNORE_IF_UNPOPULATED";
+    case Ignore.IGNORE_IF_DEFAULT_VALUE:
+      return "IGNORE_IF_DEFAULT_VALUE";
+    case Ignore.IGNORE_ALWAYS:
+      return "IGNORE_ALWAYS";
+    case Ignore.IGNORE_EMPTY:
+      return "IGNORE_EMPTY";
+    case Ignore.IGNORE_DEFAULT:
+      return "IGNORE_DEFAULT";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum Ignore",
+      );
+  }
+}
+
 export enum KnownRegex {
   KNOWN_REGEX_UNSPECIFIED = 0,
   KNOWN_REGEX_HTTP_HEADER_NAME = 1,
@@ -53,9 +110,8 @@ export interface OneofConstraints {
 
 export interface FieldConstraints {
   cel: Constraint[];
-  skipped: boolean;
   required: boolean;
-  ignoreEmpty: boolean;
+  ignore: Ignore;
   type?:
     | { $case: "float"; float: FloatRules }
     | { $case: "double"; double: DoubleRules }
@@ -79,6 +135,8 @@ export interface FieldConstraints {
     | { $case: "duration"; duration: DurationRules }
     | { $case: "timestamp"; timestamp: TimestampRules }
     | undefined;
+  skipped: boolean;
+  ignoreEmpty: boolean;
 }
 
 export interface FloatRules {
@@ -280,12 +338,14 @@ export interface StringRules {
     | { $case: "uriRef"; uriRef: boolean }
     | { $case: "address"; address: boolean }
     | { $case: "uuid"; uuid: boolean }
+    | { $case: "tuuid"; tuuid: boolean }
     | { $case: "ipWithPrefixlen"; ipWithPrefixlen: boolean }
     | { $case: "ipv4WithPrefixlen"; ipv4WithPrefixlen: boolean }
     | { $case: "ipv6WithPrefixlen"; ipv6WithPrefixlen: boolean }
     | { $case: "ipPrefix"; ipPrefix: boolean }
     | { $case: "ipv4Prefix"; ipv4Prefix: boolean }
     | { $case: "ipv6Prefix"; ipv6Prefix: boolean }
+    | { $case: "hostAndPort"; hostAndPort: boolean }
     | { $case: "wellKnownRegex"; wellKnownRegex: KnownRegex }
     | undefined;
   strict?: boolean | undefined;
@@ -388,15 +448,10 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
       cel: globalThis.Array.isArray(object?.cel)
         ? object.cel.map((e: any) => Constraint.fromJSON(e))
         : [],
-      skipped: isSet(object.skipped)
-        ? globalThis.Boolean(object.skipped)
-        : false,
       required: isSet(object.required)
         ? globalThis.Boolean(object.required)
         : false,
-      ignoreEmpty: isSet(object.ignoreEmpty)
-        ? globalThis.Boolean(object.ignoreEmpty)
-        : false,
+      ignore: isSet(object.ignore) ? ignoreFromJSON(object.ignore) : 0,
       type: isSet(object.float)
         ? { $case: "float", float: FloatRules.fromJSON(object.float) }
         : isSet(object.double)
@@ -511,6 +566,12 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
                                                       ),
                                                   }
                                                 : undefined,
+      skipped: isSet(object.skipped)
+        ? globalThis.Boolean(object.skipped)
+        : false,
+      ignoreEmpty: isSet(object.ignoreEmpty)
+        ? globalThis.Boolean(object.ignoreEmpty)
+        : false,
     };
   },
 
@@ -519,14 +580,11 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
     if (message.cel?.length) {
       obj.cel = message.cel.map((e) => Constraint.toJSON(e));
     }
-    if (message.skipped !== false) {
-      obj.skipped = message.skipped;
-    }
     if (message.required !== false) {
       obj.required = message.required;
     }
-    if (message.ignoreEmpty !== false) {
-      obj.ignoreEmpty = message.ignoreEmpty;
+    if (message.ignore !== 0) {
+      obj.ignore = ignoreToJSON(message.ignore);
     }
     if (message.type?.$case === "float") {
       obj.float = FloatRules.toJSON(message.type.float);
@@ -590,6 +648,12 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
     }
     if (message.type?.$case === "timestamp") {
       obj.timestamp = TimestampRules.toJSON(message.type.timestamp);
+    }
+    if (message.skipped !== false) {
+      obj.skipped = message.skipped;
+    }
+    if (message.ignoreEmpty !== false) {
+      obj.ignoreEmpty = message.ignoreEmpty;
     }
     return obj;
   },
@@ -1287,56 +1351,69 @@ export const StringRules: MessageFns<StringRules> = {
                             $case: "uuid",
                             uuid: globalThis.Boolean(object.uuid),
                           }
-                        : isSet(object.ipWithPrefixlen)
+                        : isSet(object.tuuid)
                           ? {
-                              $case: "ipWithPrefixlen",
-                              ipWithPrefixlen: globalThis.Boolean(
-                                object.ipWithPrefixlen,
-                              ),
+                              $case: "tuuid",
+                              tuuid: globalThis.Boolean(object.tuuid),
                             }
-                          : isSet(object.ipv4WithPrefixlen)
+                          : isSet(object.ipWithPrefixlen)
                             ? {
-                                $case: "ipv4WithPrefixlen",
-                                ipv4WithPrefixlen: globalThis.Boolean(
-                                  object.ipv4WithPrefixlen,
+                                $case: "ipWithPrefixlen",
+                                ipWithPrefixlen: globalThis.Boolean(
+                                  object.ipWithPrefixlen,
                                 ),
                               }
-                            : isSet(object.ipv6WithPrefixlen)
+                            : isSet(object.ipv4WithPrefixlen)
                               ? {
-                                  $case: "ipv6WithPrefixlen",
-                                  ipv6WithPrefixlen: globalThis.Boolean(
-                                    object.ipv6WithPrefixlen,
+                                  $case: "ipv4WithPrefixlen",
+                                  ipv4WithPrefixlen: globalThis.Boolean(
+                                    object.ipv4WithPrefixlen,
                                   ),
                                 }
-                              : isSet(object.ipPrefix)
+                              : isSet(object.ipv6WithPrefixlen)
                                 ? {
-                                    $case: "ipPrefix",
-                                    ipPrefix: globalThis.Boolean(
-                                      object.ipPrefix,
+                                    $case: "ipv6WithPrefixlen",
+                                    ipv6WithPrefixlen: globalThis.Boolean(
+                                      object.ipv6WithPrefixlen,
                                     ),
                                   }
-                                : isSet(object.ipv4Prefix)
+                                : isSet(object.ipPrefix)
                                   ? {
-                                      $case: "ipv4Prefix",
-                                      ipv4Prefix: globalThis.Boolean(
-                                        object.ipv4Prefix,
+                                      $case: "ipPrefix",
+                                      ipPrefix: globalThis.Boolean(
+                                        object.ipPrefix,
                                       ),
                                     }
-                                  : isSet(object.ipv6Prefix)
+                                  : isSet(object.ipv4Prefix)
                                     ? {
-                                        $case: "ipv6Prefix",
-                                        ipv6Prefix: globalThis.Boolean(
-                                          object.ipv6Prefix,
+                                        $case: "ipv4Prefix",
+                                        ipv4Prefix: globalThis.Boolean(
+                                          object.ipv4Prefix,
                                         ),
                                       }
-                                    : isSet(object.wellKnownRegex)
+                                    : isSet(object.ipv6Prefix)
                                       ? {
-                                          $case: "wellKnownRegex",
-                                          wellKnownRegex: knownRegexFromJSON(
-                                            object.wellKnownRegex,
+                                          $case: "ipv6Prefix",
+                                          ipv6Prefix: globalThis.Boolean(
+                                            object.ipv6Prefix,
                                           ),
                                         }
-                                      : undefined,
+                                      : isSet(object.hostAndPort)
+                                        ? {
+                                            $case: "hostAndPort",
+                                            hostAndPort: globalThis.Boolean(
+                                              object.hostAndPort,
+                                            ),
+                                          }
+                                        : isSet(object.wellKnownRegex)
+                                          ? {
+                                              $case: "wellKnownRegex",
+                                              wellKnownRegex:
+                                                knownRegexFromJSON(
+                                                  object.wellKnownRegex,
+                                                ),
+                                            }
+                                          : undefined,
       strict: isSet(object.strict)
         ? globalThis.Boolean(object.strict)
         : undefined,
@@ -1414,6 +1491,9 @@ export const StringRules: MessageFns<StringRules> = {
     if (message.wellKnown?.$case === "uuid") {
       obj.uuid = message.wellKnown.uuid;
     }
+    if (message.wellKnown?.$case === "tuuid") {
+      obj.tuuid = message.wellKnown.tuuid;
+    }
     if (message.wellKnown?.$case === "ipWithPrefixlen") {
       obj.ipWithPrefixlen = message.wellKnown.ipWithPrefixlen;
     }
@@ -1431,6 +1511,9 @@ export const StringRules: MessageFns<StringRules> = {
     }
     if (message.wellKnown?.$case === "ipv6Prefix") {
       obj.ipv6Prefix = message.wellKnown.ipv6Prefix;
+    }
+    if (message.wellKnown?.$case === "hostAndPort") {
+      obj.hostAndPort = message.wellKnown.hostAndPort;
     }
     if (message.wellKnown?.$case === "wellKnownRegex") {
       obj.wellKnownRegex = knownRegexToJSON(message.wellKnown.wellKnownRegex);

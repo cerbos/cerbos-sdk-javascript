@@ -1,0 +1,67 @@
+// Copyright 2021-2024 Zenauth Ltd.
+// SPDX-License-Identifier: Apache-2.0
+
+syntax = "proto3";
+
+package cerbos.cloud.logs.v1;
+
+import "buf/validate/validate.proto";
+import "cerbos/audit/v1/audit.proto";
+import "cerbos/cloud/pdp/v1/pdp.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/logs/v1;logsv1";
+
+message IngestBatch {
+  enum EntryKind {
+    ENTRY_KIND_UNSPECIFIED = 0;
+    ENTRY_KIND_ACCESS_LOG = 1;
+    ENTRY_KIND_DECISION_LOG = 2;
+  }
+
+  message Entry {
+    EntryKind kind = 1 [(buf.validate.field).enum = {
+      in: [
+        1,
+        2
+      ]
+    }];
+    google.protobuf.Timestamp timestamp = 2 [(buf.validate.field).required = true];
+    oneof entry {
+      option (buf.validate.oneof).required = true;
+      cerbos.audit.v1.AccessLogEntry access_log_entry = 3;
+      cerbos.audit.v1.DecisionLogEntry decision_log_entry = 4;
+    }
+  }
+
+  string id = 1;
+  repeated Entry entries = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 1024
+  }];
+}
+
+message IngestRequest {
+  cerbos.cloud.pdp.v1.Identifier pdp_id = 1 [(buf.validate.field).required = true];
+  IngestBatch batch = 2 [(buf.validate.field).required = true];
+}
+
+message IngestResponse {
+  message Backoff {
+    google.protobuf.Duration duration = 1;
+  }
+
+  oneof status {
+    google.protobuf.Empty success = 1;
+    Backoff backoff = 2;
+  }
+}
+
+service CerbosLogsService {
+  option (google.api.api_visibility).restriction = "EXPERIMENTAL";
+
+  rpc Ingest(IngestRequest) returns (IngestResponse) {}
+}

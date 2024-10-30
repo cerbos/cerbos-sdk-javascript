@@ -92,4 +92,23 @@ The IDs of the policies included in the bundle.
 
 
 </td></tr>
+<tr><td>
+
+[sourceAttributes](./embedded.bundlemetadata.sourceattributes.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, [SourceAttributes](./core.sourceattributes.md)<!-- -->&gt;
+
+
+</td><td>
+
+Map of the IDs of policies included in the bundle to metadata about their sources.
+
+
+</td></tr>
 </tbody></table>

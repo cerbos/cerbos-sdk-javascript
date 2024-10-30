@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: "[`BundleMetadata.sourceAttributes`](../../docs/embedded.bundlemetadata.sourceattributes.md) property mapping IDs of policies included in the bundle to metadata about their sources"
+      pull: 1033
+
 releases:
   - version: 0.8.0
     date: 2024-09-23

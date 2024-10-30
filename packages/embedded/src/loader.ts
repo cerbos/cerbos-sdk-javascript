@@ -1,4 +1,4 @@
-import type { JWT, Value } from "@cerbos/core";
+import type { JWT, SourceAttributes, Value } from "@cerbos/core";
 import { _setErrorNameAndStack } from "@cerbos/core";
 
 import { Bundle, download } from "./bundle";
@@ -192,8 +192,15 @@ export interface BundleMetadata {
 
   /**
    * The IDs of the policies included in the bundle.
+   *
+   * @deprecated Use {@link BundleMetadata.sourceAttributes} instead.
    */
   policies: string[];
+
+  /**
+   * Map of the IDs of policies included in the bundle to metadata about their sources.
+   */
+  sourceAttributes: Record<string, SourceAttributes>;
 }
 
 /**
