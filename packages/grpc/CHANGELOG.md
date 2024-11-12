@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Bump dependency on [@bufbuild/protobuf] to 2.2.1 ([#1035](https://github.com/cerbos/cerbos-sdk-javascript/pull/1035))
+- Bump dependency on [@bufbuild/protobuf] to 2.2.2 ([#1035](https://github.com/cerbos/cerbos-sdk-javascript/pull/1035), [#1039](https://github.com/cerbos/cerbos-sdk-javascript/pull/1039))
 
 ## [0.18.4] - 2024-10-30
 
