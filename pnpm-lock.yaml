@@ -75,7 +75,7 @@ importers:
   packages/core:
     dependencies:
       uuid:
-        specifier: ^11.0.2
+        specifier: ^11.0.3
         version: 11.0.3
 
   packages/embedded:
