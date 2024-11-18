@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Bump dependency on [uuid] to 11.0.2 ([#1037](https://github.com/cerbos/cerbos-sdk-javascript/pull/1037))
+- Bump dependency on [uuid] to 11.0.3 ([#1037](https://github.com/cerbos/cerbos-sdk-javascript/pull/1037), [#1043](https://github.com/cerbos/cerbos-sdk-javascript/pull/1043))
 
 ## [0.18.1] - 2024-06-11
 
