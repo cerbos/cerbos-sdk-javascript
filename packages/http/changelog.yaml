@@ -1,6 +1,11 @@
 unreleased:
   type: patch
 
+  bumped:
+    qs:
+      to: 6.13.1
+      pull: 1046
+
 releases:
   - version: 0.19.2
     date: 2024-08-19
