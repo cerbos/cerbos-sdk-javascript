@@ -80,9 +80,10 @@ describe("CerbosInstrumentation", () => {
     );
 
     spanExporter = new InMemorySpanExporter();
-    const tracerProvider = new NodeTracerProvider();
-    tracerProvider.addSpanProcessor(new SimpleSpanProcessor(spanExporter));
-    tracerProvider.register();
+
+    new NodeTracerProvider({
+      spanProcessors: [new SimpleSpanProcessor(spanExporter)],
+    }).register();
 
     cerbosInstrumentation.enable();
   });
