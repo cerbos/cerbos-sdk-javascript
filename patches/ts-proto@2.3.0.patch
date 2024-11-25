@@ -1,0 +1,22 @@
+diff --git a/build/src/main.js b/build/src/main.js
+index 3e03249d11bae4b1ccc9000e0f4e41f1e4393f26..a6e519f26db63304ab4f29781261d2736d986382 100644
+--- a/build/src/main.js
++++ b/build/src/main.js
+@@ -851,7 +851,7 @@ function generateOneofProperty(ctx, messageDesc, oneofIndex, sourceInfo) {
+         let fieldComments = [];
+         (0, utils_1.maybeAddComment)(options, fieldInfo, fieldComments);
+         const combinedComments = fieldComments.join("\n");
+-        return (0, ts_poet_1.code) `| // \n ${combinedComments} { ${mbReadonly}$case: '${fieldName}', ${mbReadonly}${valueName}: ${typeName} }`;
++        return (0, ts_poet_1.code) `|${combinedComments ? " // " : ""}\n ${combinedComments} { ${mbReadonly}$case: '${fieldName}', ${mbReadonly}${valueName}: ${typeName} }`;
+     }));
+     const name = (0, case_1.maybeSnakeToCamel)(messageDesc.oneofDecl[oneofIndex].name, options);
+     return (0, ts_poet_1.joinCode)([...outerComments, (0, ts_poet_1.code) `${mbReadonly}${name}?:`, unionType, (0, ts_poet_1.code) `| ${(0, utils_1.nullOrUndefined)(options)},`], {
+@@ -1155,7 +1155,7 @@ function generateDecode(ctx, fullName, messageDesc) {
+         }
+         chunks.push((0, ts_poet_1.code) `
+       const buf = reader.skip(tag & 7);
+-      
++
+       ${unknownFieldsInitializerSnippet}
+       const list = message._unknownFields${maybeNonNullAssertion}[tag];
+ 
