@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependency on [qs] to 6.13.1 ([#1046](https://github.com/cerbos/cerbos-sdk-javascript/pull/1046))
 
 ## [0.19.2] - 2024-08-19
 

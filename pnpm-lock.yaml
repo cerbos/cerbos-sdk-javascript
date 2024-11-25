@@ -111,7 +111,7 @@ importers:
         specifier: ^0.18.1
         version: link:../core
       qs:
-        specifier: ^6.13.0
+        specifier: ^6.13.1
         version: 6.13.1
     devDependencies:
       '@types/qs':
