@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  ts-proto@2.3.0:
+    hash: 2qpjfd4y3g7erppns3t4ngrbg4
+    path: patches/ts-proto@2.3.0.patch
+
 importers:
 
   .:
@@ -61,7 +66,7 @@ importers:
         version: 0.18.1(prettier@3.3.3)
       ts-proto:
         specifier: 2.3.0
-        version: 2.3.0
+        version: 2.3.0(patch_hash=2qpjfd4y3g7erppns3t4ngrbg4)
       tsx:
         specifier: 4.19.2
         version: 4.19.2
@@ -5161,7 +5166,7 @@ snapshots:
     dependencies:
       '@bufbuild/protobuf': 2.2.2
 
-  ts-proto@2.3.0:
+  ts-proto@2.3.0(patch_hash=2qpjfd4y3g7erppns3t4ngrbg4):
     dependencies:
       '@bufbuild/protobuf': 2.2.2
       case-anything: 2.1.13
