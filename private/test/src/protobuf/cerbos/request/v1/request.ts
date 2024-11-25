@@ -162,6 +162,7 @@ export interface ListPoliciesRequest {
   nameRegexp: string;
   scopeRegexp: string;
   versionRegexp: string;
+  policyId: string[];
 }
 
 export interface GetPolicyRequest {
@@ -174,6 +175,14 @@ export interface DisablePolicyRequest {
 
 export interface EnablePolicyRequest {
   id: string[];
+}
+
+export interface InspectPoliciesRequest {
+  includeDisabled: boolean;
+  nameRegexp: string;
+  scopeRegexp: string;
+  versionRegexp: string;
+  policyId: string[];
 }
 
 export interface AddOrUpdateSchemaRequest {
@@ -1750,6 +1759,7 @@ function createBaseListPoliciesRequest(): ListPoliciesRequest {
     nameRegexp: "",
     scopeRegexp: "",
     versionRegexp: "",
+    policyId: [],
   };
 }
 
@@ -1769,6 +1779,9 @@ export const ListPoliciesRequest: MessageFns<ListPoliciesRequest> = {
     }
     if (message.versionRegexp !== "") {
       writer.uint32(34).string(message.versionRegexp);
+    }
+    for (const v of message.policyId) {
+      writer.uint32(42).string(v!);
     }
     return writer;
   },
@@ -1816,6 +1829,14 @@ export const ListPoliciesRequest: MessageFns<ListPoliciesRequest> = {
           message.versionRegexp = reader.string();
           continue;
         }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.policyId.push(reader.string());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1839,6 +1860,9 @@ export const ListPoliciesRequest: MessageFns<ListPoliciesRequest> = {
       versionRegexp: isSet(object.versionRegexp)
         ? globalThis.String(object.versionRegexp)
         : "",
+      policyId: globalThis.Array.isArray(object?.policyId)
+        ? object.policyId.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -1855,6 +1879,9 @@ export const ListPoliciesRequest: MessageFns<ListPoliciesRequest> = {
     }
     if (message.versionRegexp !== "") {
       obj.versionRegexp = message.versionRegexp;
+    }
+    if (message.policyId?.length) {
+      obj.policyId = message.policyId;
     }
     return obj;
   },
@@ -2032,6 +2059,140 @@ export const EnablePolicyRequest: MessageFns<EnablePolicyRequest> = {
     const obj: any = {};
     if (message.id?.length) {
       obj.id = message.id;
+    }
+    return obj;
+  },
+};
+
+function createBaseInspectPoliciesRequest(): InspectPoliciesRequest {
+  return {
+    includeDisabled: false,
+    nameRegexp: "",
+    scopeRegexp: "",
+    versionRegexp: "",
+    policyId: [],
+  };
+}
+
+export const InspectPoliciesRequest: MessageFns<InspectPoliciesRequest> = {
+  encode(
+    message: InspectPoliciesRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.includeDisabled !== false) {
+      writer.uint32(8).bool(message.includeDisabled);
+    }
+    if (message.nameRegexp !== "") {
+      writer.uint32(18).string(message.nameRegexp);
+    }
+    if (message.scopeRegexp !== "") {
+      writer.uint32(26).string(message.scopeRegexp);
+    }
+    if (message.versionRegexp !== "") {
+      writer.uint32(34).string(message.versionRegexp);
+    }
+    for (const v of message.policyId) {
+      writer.uint32(42).string(v!);
+    }
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): InspectPoliciesRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseInspectPoliciesRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.includeDisabled = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.nameRegexp = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.scopeRegexp = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.versionRegexp = reader.string();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.policyId.push(reader.string());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): InspectPoliciesRequest {
+    return {
+      includeDisabled: isSet(object.includeDisabled)
+        ? globalThis.Boolean(object.includeDisabled)
+        : false,
+      nameRegexp: isSet(object.nameRegexp)
+        ? globalThis.String(object.nameRegexp)
+        : "",
+      scopeRegexp: isSet(object.scopeRegexp)
+        ? globalThis.String(object.scopeRegexp)
+        : "",
+      versionRegexp: isSet(object.versionRegexp)
+        ? globalThis.String(object.versionRegexp)
+        : "",
+      policyId: globalThis.Array.isArray(object?.policyId)
+        ? object.policyId.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: InspectPoliciesRequest): unknown {
+    const obj: any = {};
+    if (message.includeDisabled !== false) {
+      obj.includeDisabled = message.includeDisabled;
+    }
+    if (message.nameRegexp !== "") {
+      obj.nameRegexp = message.nameRegexp;
+    }
+    if (message.scopeRegexp !== "") {
+      obj.scopeRegexp = message.scopeRegexp;
+    }
+    if (message.versionRegexp !== "") {
+      obj.versionRegexp = message.versionRegexp;
+    }
+    if (message.policyId?.length) {
+      obj.policyId = message.policyId;
     }
     return obj;
   },

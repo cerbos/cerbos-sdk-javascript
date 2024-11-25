@@ -4,7 +4,6 @@
 /* eslint-disable */
 import { Duration } from "../../google/protobuf/duration";
 import { Timestamp } from "../../google/protobuf/timestamp";
-import { Constraint } from "./expression";
 
 export const protobufPackage = "buf.validate";
 
@@ -68,14 +67,20 @@ export function knownRegexFromJSON(object: any): KnownRegex {
   }
 }
 
+export interface Constraint {
+  id?: string | undefined;
+  message?: string | undefined;
+  expression?: string | undefined;
+}
+
 export interface OneofConstraints {
   required?: boolean | undefined;
 }
 
 export interface FieldConstraints {
   cel: Constraint[];
-  required: boolean;
-  ignore: Ignore;
+  required?: boolean | undefined;
+  ignore?: Ignore | undefined;
   type?:
     | { $case: "float"; float: FloatRules }
     | { $case: "double"; double: DoubleRules }
@@ -99,8 +104,12 @@ export interface FieldConstraints {
     | { $case: "duration"; duration: DurationRules }
     | { $case: "timestamp"; timestamp: TimestampRules }
     | undefined;
-  skipped: boolean;
-  ignoreEmpty: boolean;
+  skipped?: boolean | undefined;
+  ignoreEmpty?: boolean | undefined;
+}
+
+export interface PredefinedConstraints {
+  cel: Constraint[];
 }
 
 export interface FloatRules {
@@ -115,7 +124,8 @@ export interface FloatRules {
     | undefined;
   in: number[];
   notIn: number[];
-  finite: boolean;
+  finite?: boolean | undefined;
+  example: number[];
 }
 
 export interface DoubleRules {
@@ -130,7 +140,8 @@ export interface DoubleRules {
     | undefined;
   in: number[];
   notIn: number[];
-  finite: boolean;
+  finite?: boolean | undefined;
+  example: number[];
 }
 
 export interface Int32Rules {
@@ -145,6 +156,7 @@ export interface Int32Rules {
     | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface Int64Rules {
@@ -159,6 +171,7 @@ export interface Int64Rules {
     | undefined;
   in: string[];
   notIn: string[];
+  example: string[];
 }
 
 export interface UInt32Rules {
@@ -173,6 +186,7 @@ export interface UInt32Rules {
     | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface UInt64Rules {
@@ -187,6 +201,7 @@ export interface UInt64Rules {
     | undefined;
   in: string[];
   notIn: string[];
+  example: string[];
 }
 
 export interface SInt32Rules {
@@ -201,6 +216,7 @@ export interface SInt32Rules {
     | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface SInt64Rules {
@@ -215,6 +231,7 @@ export interface SInt64Rules {
     | undefined;
   in: string[];
   notIn: string[];
+  example: string[];
 }
 
 export interface Fixed32Rules {
@@ -229,6 +246,7 @@ export interface Fixed32Rules {
     | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface Fixed64Rules {
@@ -243,6 +261,7 @@ export interface Fixed64Rules {
     | undefined;
   in: string[];
   notIn: string[];
+  example: string[];
 }
 
 export interface SFixed32Rules {
@@ -257,6 +276,7 @@ export interface SFixed32Rules {
     | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface SFixed64Rules {
@@ -271,10 +291,12 @@ export interface SFixed64Rules {
     | undefined;
   in: string[];
   notIn: string[];
+  example: string[];
 }
 
 export interface BoolRules {
   const?: boolean | undefined;
+  example: boolean[];
 }
 
 export interface StringRules {
@@ -313,6 +335,7 @@ export interface StringRules {
     | { $case: "wellKnownRegex"; wellKnownRegex: KnownRegex }
     | undefined;
   strict?: boolean | undefined;
+  example: string[];
 }
 
 export interface BytesRules {
@@ -331,6 +354,7 @@ export interface BytesRules {
     | { $case: "ipv4"; ipv4: boolean }
     | { $case: "ipv6"; ipv6: boolean }
     | undefined;
+  example: Uint8Array[];
 }
 
 export interface EnumRules {
@@ -338,6 +362,7 @@ export interface EnumRules {
   definedOnly?: boolean | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface RepeatedRules {
@@ -371,6 +396,7 @@ export interface DurationRules {
     | undefined;
   in: Duration[];
   notIn: Duration[];
+  example: Duration[];
 }
 
 export interface TimestampRules {
@@ -386,14 +412,27 @@ export interface TimestampRules {
     | { $case: "gtNow"; gtNow: boolean }
     | undefined;
   within?: Duration | undefined;
+  example: Date[];
 }
+
+export const Constraint: MessageFns<Constraint> = {
+  fromJSON(object: any): Constraint {
+    return {
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      message: isSet(object.message) ? globalThis.String(object.message) : "",
+      expression: isSet(object.expression)
+        ? globalThis.String(object.expression)
+        : "",
+    };
+  },
+};
 
 export const OneofConstraints: MessageFns<OneofConstraints> = {
   fromJSON(object: any): OneofConstraints {
     return {
       required: isSet(object.required)
         ? globalThis.Boolean(object.required)
-        : undefined,
+        : false,
     };
   },
 };
@@ -532,10 +571,20 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
   },
 };
 
+export const PredefinedConstraints: MessageFns<PredefinedConstraints> = {
+  fromJSON(object: any): PredefinedConstraints {
+    return {
+      cel: globalThis.Array.isArray(object?.cel)
+        ? object.cel.map((e: any) => Constraint.fromJSON(e))
+        : [],
+    };
+  },
+};
+
 export const FloatRules: MessageFns<FloatRules> = {
   fromJSON(object: any): FloatRules {
     return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.Number(object.lt) }
         : isSet(object.lte)
@@ -553,6 +602,9 @@ export const FloatRules: MessageFns<FloatRules> = {
         ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       finite: isSet(object.finite) ? globalThis.Boolean(object.finite) : false,
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.Number(e))
+        : [],
     };
   },
 };
@@ -560,7 +612,7 @@ export const FloatRules: MessageFns<FloatRules> = {
 export const DoubleRules: MessageFns<DoubleRules> = {
   fromJSON(object: any): DoubleRules {
     return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.Number(object.lt) }
         : isSet(object.lte)
@@ -578,6 +630,9 @@ export const DoubleRules: MessageFns<DoubleRules> = {
         ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
       finite: isSet(object.finite) ? globalThis.Boolean(object.finite) : false,
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.Number(e))
+        : [],
     };
   },
 };
@@ -585,7 +640,7 @@ export const DoubleRules: MessageFns<DoubleRules> = {
 export const Int32Rules: MessageFns<Int32Rules> = {
   fromJSON(object: any): Int32Rules {
     return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.Number(object.lt) }
         : isSet(object.lte)
@@ -601,6 +656,9 @@ export const Int32Rules: MessageFns<Int32Rules> = {
         : [],
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => globalThis.Number(e))
+        : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.Number(e))
         : [],
     };
   },
@@ -609,7 +667,7 @@ export const Int32Rules: MessageFns<Int32Rules> = {
 export const Int64Rules: MessageFns<Int64Rules> = {
   fromJSON(object: any): Int64Rules {
     return {
-      const: isSet(object.const) ? globalThis.String(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.String(object.const) : "0",
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.String(object.lt) }
         : isSet(object.lte)
@@ -625,6 +683,9 @@ export const Int64Rules: MessageFns<Int64Rules> = {
         : [],
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => globalThis.String(e))
+        : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -633,7 +694,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
 export const UInt32Rules: MessageFns<UInt32Rules> = {
   fromJSON(object: any): UInt32Rules {
     return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.Number(object.lt) }
         : isSet(object.lte)
@@ -649,6 +710,9 @@ export const UInt32Rules: MessageFns<UInt32Rules> = {
         : [],
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => globalThis.Number(e))
+        : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.Number(e))
         : [],
     };
   },
@@ -657,7 +721,7 @@ export const UInt32Rules: MessageFns<UInt32Rules> = {
 export const UInt64Rules: MessageFns<UInt64Rules> = {
   fromJSON(object: any): UInt64Rules {
     return {
-      const: isSet(object.const) ? globalThis.String(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.String(object.const) : "0",
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.String(object.lt) }
         : isSet(object.lte)
@@ -673,6 +737,9 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
         : [],
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => globalThis.String(e))
+        : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -681,7 +748,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
 export const SInt32Rules: MessageFns<SInt32Rules> = {
   fromJSON(object: any): SInt32Rules {
     return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.Number(object.lt) }
         : isSet(object.lte)
@@ -697,6 +764,9 @@ export const SInt32Rules: MessageFns<SInt32Rules> = {
         : [],
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => globalThis.Number(e))
+        : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.Number(e))
         : [],
     };
   },
@@ -705,7 +775,7 @@ export const SInt32Rules: MessageFns<SInt32Rules> = {
 export const SInt64Rules: MessageFns<SInt64Rules> = {
   fromJSON(object: any): SInt64Rules {
     return {
-      const: isSet(object.const) ? globalThis.String(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.String(object.const) : "0",
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.String(object.lt) }
         : isSet(object.lte)
@@ -721,6 +791,9 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
         : [],
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => globalThis.String(e))
+        : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -729,7 +802,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
 export const Fixed32Rules: MessageFns<Fixed32Rules> = {
   fromJSON(object: any): Fixed32Rules {
     return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.Number(object.lt) }
         : isSet(object.lte)
@@ -745,6 +818,9 @@ export const Fixed32Rules: MessageFns<Fixed32Rules> = {
         : [],
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => globalThis.Number(e))
+        : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.Number(e))
         : [],
     };
   },
@@ -753,7 +829,7 @@ export const Fixed32Rules: MessageFns<Fixed32Rules> = {
 export const Fixed64Rules: MessageFns<Fixed64Rules> = {
   fromJSON(object: any): Fixed64Rules {
     return {
-      const: isSet(object.const) ? globalThis.String(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.String(object.const) : "0",
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.String(object.lt) }
         : isSet(object.lte)
@@ -770,6 +846,9 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => globalThis.String(e))
         : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 };
@@ -777,7 +856,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
 export const SFixed32Rules: MessageFns<SFixed32Rules> = {
   fromJSON(object: any): SFixed32Rules {
     return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.Number(object.lt) }
         : isSet(object.lte)
@@ -794,6 +873,9 @@ export const SFixed32Rules: MessageFns<SFixed32Rules> = {
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => globalThis.Number(e))
         : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.Number(e))
+        : [],
     };
   },
 };
@@ -801,7 +883,7 @@ export const SFixed32Rules: MessageFns<SFixed32Rules> = {
 export const SFixed64Rules: MessageFns<SFixed64Rules> = {
   fromJSON(object: any): SFixed64Rules {
     return {
-      const: isSet(object.const) ? globalThis.String(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.String(object.const) : "0",
       lessThan: isSet(object.lt)
         ? { $case: "lt", lt: globalThis.String(object.lt) }
         : isSet(object.lte)
@@ -818,6 +900,9 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => globalThis.String(e))
         : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 };
@@ -825,7 +910,10 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
 export const BoolRules: MessageFns<BoolRules> = {
   fromJSON(object: any): BoolRules {
     return {
-      const: isSet(object.const) ? globalThis.Boolean(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.Boolean(object.const) : false,
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.Boolean(e))
+        : [],
     };
   },
 };
@@ -833,38 +921,28 @@ export const BoolRules: MessageFns<BoolRules> = {
 export const StringRules: MessageFns<StringRules> = {
   fromJSON(object: any): StringRules {
     return {
-      const: isSet(object.const) ? globalThis.String(object.const) : undefined,
-      len: isSet(object.len) ? globalThis.String(object.len) : undefined,
-      minLen: isSet(object.minLen)
-        ? globalThis.String(object.minLen)
-        : undefined,
-      maxLen: isSet(object.maxLen)
-        ? globalThis.String(object.maxLen)
-        : undefined,
+      const: isSet(object.const) ? globalThis.String(object.const) : "",
+      len: isSet(object.len) ? globalThis.String(object.len) : "0",
+      minLen: isSet(object.minLen) ? globalThis.String(object.minLen) : "0",
+      maxLen: isSet(object.maxLen) ? globalThis.String(object.maxLen) : "0",
       lenBytes: isSet(object.lenBytes)
         ? globalThis.String(object.lenBytes)
-        : undefined,
+        : "0",
       minBytes: isSet(object.minBytes)
         ? globalThis.String(object.minBytes)
-        : undefined,
+        : "0",
       maxBytes: isSet(object.maxBytes)
         ? globalThis.String(object.maxBytes)
-        : undefined,
-      pattern: isSet(object.pattern)
-        ? globalThis.String(object.pattern)
-        : undefined,
-      prefix: isSet(object.prefix)
-        ? globalThis.String(object.prefix)
-        : undefined,
-      suffix: isSet(object.suffix)
-        ? globalThis.String(object.suffix)
-        : undefined,
+        : "0",
+      pattern: isSet(object.pattern) ? globalThis.String(object.pattern) : "",
+      prefix: isSet(object.prefix) ? globalThis.String(object.prefix) : "",
+      suffix: isSet(object.suffix) ? globalThis.String(object.suffix) : "",
       contains: isSet(object.contains)
         ? globalThis.String(object.contains)
-        : undefined,
+        : "",
       notContains: isSet(object.notContains)
         ? globalThis.String(object.notContains)
-        : undefined,
+        : "",
       in: globalThis.Array.isArray(object?.in)
         ? object.in.map((e: any) => globalThis.String(e))
         : [],
@@ -961,9 +1039,10 @@ export const StringRules: MessageFns<StringRules> = {
                                                 ),
                                             }
                                           : undefined,
-      strict: isSet(object.strict)
-        ? globalThis.Boolean(object.strict)
-        : undefined,
+      strict: isSet(object.strict) ? globalThis.Boolean(object.strict) : false,
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 };
@@ -971,22 +1050,22 @@ export const StringRules: MessageFns<StringRules> = {
 export const BytesRules: MessageFns<BytesRules> = {
   fromJSON(object: any): BytesRules {
     return {
-      const: isSet(object.const) ? bytesFromBase64(object.const) : undefined,
-      len: isSet(object.len) ? globalThis.String(object.len) : undefined,
-      minLen: isSet(object.minLen)
-        ? globalThis.String(object.minLen)
-        : undefined,
-      maxLen: isSet(object.maxLen)
-        ? globalThis.String(object.maxLen)
-        : undefined,
-      pattern: isSet(object.pattern)
-        ? globalThis.String(object.pattern)
-        : undefined,
-      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : undefined,
-      suffix: isSet(object.suffix) ? bytesFromBase64(object.suffix) : undefined,
+      const: isSet(object.const)
+        ? bytesFromBase64(object.const)
+        : new Uint8Array(0),
+      len: isSet(object.len) ? globalThis.String(object.len) : "0",
+      minLen: isSet(object.minLen) ? globalThis.String(object.minLen) : "0",
+      maxLen: isSet(object.maxLen) ? globalThis.String(object.maxLen) : "0",
+      pattern: isSet(object.pattern) ? globalThis.String(object.pattern) : "",
+      prefix: isSet(object.prefix)
+        ? bytesFromBase64(object.prefix)
+        : new Uint8Array(0),
+      suffix: isSet(object.suffix)
+        ? bytesFromBase64(object.suffix)
+        : new Uint8Array(0),
       contains: isSet(object.contains)
         ? bytesFromBase64(object.contains)
-        : undefined,
+        : new Uint8Array(0),
       in: globalThis.Array.isArray(object?.in)
         ? object.in.map((e: any) => bytesFromBase64(e))
         : [],
@@ -1000,6 +1079,9 @@ export const BytesRules: MessageFns<BytesRules> = {
           : isSet(object.ipv6)
             ? { $case: "ipv6", ipv6: globalThis.Boolean(object.ipv6) }
             : undefined,
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => bytesFromBase64(e))
+        : [],
     };
   },
 };
@@ -1007,15 +1089,18 @@ export const BytesRules: MessageFns<BytesRules> = {
 export const EnumRules: MessageFns<EnumRules> = {
   fromJSON(object: any): EnumRules {
     return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : undefined,
+      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
       definedOnly: isSet(object.definedOnly)
         ? globalThis.Boolean(object.definedOnly)
-        : undefined,
+        : false,
       in: globalThis.Array.isArray(object?.in)
         ? object.in.map((e: any) => globalThis.Number(e))
         : [],
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => globalThis.Number(e))
+        : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => globalThis.Number(e))
         : [],
     };
   },
@@ -1026,13 +1111,11 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
     return {
       minItems: isSet(object.minItems)
         ? globalThis.String(object.minItems)
-        : undefined,
+        : "0",
       maxItems: isSet(object.maxItems)
         ? globalThis.String(object.maxItems)
-        : undefined,
-      unique: isSet(object.unique)
-        ? globalThis.Boolean(object.unique)
-        : undefined,
+        : "0",
+      unique: isSet(object.unique) ? globalThis.Boolean(object.unique) : false,
       items: isSet(object.items)
         ? FieldConstraints.fromJSON(object.items)
         : undefined,
@@ -1045,10 +1128,10 @@ export const MapRules: MessageFns<MapRules> = {
     return {
       minPairs: isSet(object.minPairs)
         ? globalThis.String(object.minPairs)
-        : undefined,
+        : "0",
       maxPairs: isSet(object.maxPairs)
         ? globalThis.String(object.maxPairs)
-        : undefined,
+        : "0",
       keys: isSet(object.keys)
         ? FieldConstraints.fromJSON(object.keys)
         : undefined,
@@ -1092,6 +1175,9 @@ export const DurationRules: MessageFns<DurationRules> = {
       notIn: globalThis.Array.isArray(object?.notIn)
         ? object.notIn.map((e: any) => Duration.fromJSON(e))
         : [],
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => Duration.fromJSON(e))
+        : [],
     };
   },
 };
@@ -1117,6 +1203,9 @@ export const TimestampRules: MessageFns<TimestampRules> = {
       within: isSet(object.within)
         ? Duration.fromJSON(object.within)
         : undefined,
+      example: globalThis.Array.isArray(object?.example)
+        ? object.example.map((e: any) => fromJsonTimestamp(e))
+        : [],
     };
   },
 };

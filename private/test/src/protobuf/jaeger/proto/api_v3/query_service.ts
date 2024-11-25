@@ -37,7 +37,7 @@ export interface TraceQueryParameters {
   startTimeMax: Date | undefined;
   durationMin: Duration | undefined;
   durationMax: Duration | undefined;
-  numTraces: number;
+  searchDepth: number;
 }
 
 export interface TraceQueryParameters_AttributesEntry {
@@ -177,7 +177,7 @@ function createBaseTraceQueryParameters(): TraceQueryParameters {
     startTimeMax: undefined,
     durationMin: undefined,
     durationMax: undefined,
-    numTraces: 0,
+    searchDepth: 0,
   };
 }
 
@@ -216,8 +216,8 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
     if (message.durationMax !== undefined) {
       Duration.encode(message.durationMax, writer.uint32(58).fork()).join();
     }
-    if (message.numTraces !== 0) {
-      writer.uint32(64).int32(message.numTraces);
+    if (message.searchDepth !== 0) {
+      writer.uint32(64).int32(message.searchDepth);
     }
     return writer;
   },
@@ -304,7 +304,7 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
             break;
           }
 
-          message.numTraces = reader.int32();
+          message.searchDepth = reader.int32();
           continue;
         }
       }
@@ -345,8 +345,8 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
       durationMax: isSet(object.durationMax)
         ? Duration.fromJSON(object.durationMax)
         : undefined,
-      numTraces: isSet(object.numTraces)
-        ? globalThis.Number(object.numTraces)
+      searchDepth: isSet(object.searchDepth)
+        ? globalThis.Number(object.searchDepth)
         : 0,
     };
   },
@@ -380,8 +380,8 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
     if (message.durationMax !== undefined) {
       obj.durationMax = Duration.toJSON(message.durationMax);
     }
-    if (message.numTraces !== 0) {
-      obj.numTraces = Math.round(message.numTraces);
+    if (message.searchDepth !== 0) {
+      obj.searchDepth = Math.round(message.searchDepth);
     }
     return obj;
   },

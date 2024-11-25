@@ -9,6 +9,45 @@ import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
 
 export const protobufPackage = "cerbos.policy.v1";
 
+export enum ScopePermissions {
+  SCOPE_PERMISSIONS_UNSPECIFIED = 0,
+  SCOPE_PERMISSIONS_OVERRIDE_PARENT = 1,
+  SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS = 2,
+}
+
+export function scopePermissionsFromJSON(object: any): ScopePermissions {
+  switch (object) {
+    case 0:
+    case "SCOPE_PERMISSIONS_UNSPECIFIED":
+      return ScopePermissions.SCOPE_PERMISSIONS_UNSPECIFIED;
+    case 1:
+    case "SCOPE_PERMISSIONS_OVERRIDE_PARENT":
+      return ScopePermissions.SCOPE_PERMISSIONS_OVERRIDE_PARENT;
+    case 2:
+    case "SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS":
+      return ScopePermissions.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum ScopePermissions",
+      );
+  }
+}
+
+export function scopePermissionsToJSON(object: ScopePermissions): string {
+  switch (object) {
+    case ScopePermissions.SCOPE_PERMISSIONS_UNSPECIFIED:
+      return "SCOPE_PERMISSIONS_UNSPECIFIED";
+    case ScopePermissions.SCOPE_PERMISSIONS_OVERRIDE_PARENT:
+      return "SCOPE_PERMISSIONS_OVERRIDE_PARENT";
+    case ScopePermissions.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS:
+      return "SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum ScopePermissions",
+      );
+  }
+}
+
 export interface Policy {
   apiVersion: string;
   disabled: boolean;
@@ -19,6 +58,8 @@ export interface Policy {
     | { $case: "principalPolicy"; principalPolicy: PrincipalPolicy }
     | { $case: "derivedRoles"; derivedRoles: DerivedRoles }
     | { $case: "exportVariables"; exportVariables: ExportVariables }
+    | { $case: "rolePolicy"; rolePolicy: RolePolicy }
+    | { $case: "exportConstants"; exportConstants: ExportConstants }
     | undefined;
   variables: { [key: string]: string };
   jsonSchema: string;
@@ -60,6 +101,8 @@ export interface ResourcePolicy {
   scope: string;
   schemas: Schemas | undefined;
   variables: Variables | undefined;
+  scopePermissions: ScopePermissions;
+  constants: Constants | undefined;
 }
 
 export interface ResourceRule {
@@ -72,12 +115,27 @@ export interface ResourceRule {
   output: Output | undefined;
 }
 
+export interface RolePolicy {
+  policyType?: { $case: "role"; role: string } | undefined;
+  parentRoles: string[];
+  scope: string;
+  rules: RoleRule[];
+  scopePermissions: ScopePermissions;
+}
+
+export interface RoleRule {
+  resource: string;
+  allowActions: string[];
+}
+
 export interface PrincipalPolicy {
   principal: string;
   version: string;
   rules: PrincipalRule[];
   scope: string;
   variables: Variables | undefined;
+  scopePermissions: ScopePermissions;
+  constants: Constants | undefined;
 }
 
 export interface PrincipalRule {
@@ -97,12 +155,33 @@ export interface DerivedRoles {
   name: string;
   definitions: RoleDef[];
   variables: Variables | undefined;
+  constants: Constants | undefined;
 }
 
 export interface RoleDef {
   name: string;
   parentRoles: string[];
   condition: Condition | undefined;
+}
+
+export interface ExportConstants {
+  name: string;
+  definitions: { [key: string]: any | undefined };
+}
+
+export interface ExportConstants_DefinitionsEntry {
+  key: string;
+  value: any | undefined;
+}
+
+export interface Constants {
+  import: string[];
+  local: { [key: string]: any | undefined };
+}
+
+export interface Constants_LocalEntry {
+  key: string;
+  value: any | undefined;
 }
 
 export interface ExportVariables {
@@ -223,6 +302,18 @@ export const Policy: MessageFns<Policy> = {
           writer.uint32(82).fork(),
         ).join();
         break;
+      case "rolePolicy":
+        RolePolicy.encode(
+          message.policyType.rolePolicy,
+          writer.uint32(90).fork(),
+        ).join();
+        break;
+      case "exportConstants":
+        ExportConstants.encode(
+          message.policyType.exportConstants,
+          writer.uint32(98).fork(),
+        ).join();
+        break;
     }
     Object.entries(message.variables).forEach(([key, value]) => {
       Policy_VariablesEntry.encode(
@@ -320,6 +411,28 @@ export const Policy: MessageFns<Policy> = {
           };
           continue;
         }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.policyType = {
+            $case: "rolePolicy",
+            rolePolicy: RolePolicy.decode(reader, reader.uint32()),
+          };
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.policyType = {
+            $case: "exportConstants",
+            exportConstants: ExportConstants.decode(reader, reader.uint32()),
+          };
+          continue;
+        }
         case 8: {
           if (tag !== 66) {
             break;
@@ -384,7 +497,19 @@ export const Policy: MessageFns<Policy> = {
                     object.exportVariables,
                   ),
                 }
-              : undefined,
+              : isSet(object.rolePolicy)
+                ? {
+                    $case: "rolePolicy",
+                    rolePolicy: RolePolicy.fromJSON(object.rolePolicy),
+                  }
+                : isSet(object.exportConstants)
+                  ? {
+                      $case: "exportConstants",
+                      exportConstants: ExportConstants.fromJSON(
+                        object.exportConstants,
+                      ),
+                    }
+                  : undefined,
       variables: isObject(object.variables)
         ? Object.entries(object.variables).reduce<{ [key: string]: string }>(
             (acc, [key, value]) => {
@@ -430,6 +555,14 @@ export const Policy: MessageFns<Policy> = {
     if (message.policyType?.$case === "exportVariables") {
       obj.exportVariables = ExportVariables.toJSON(
         message.policyType.exportVariables,
+      );
+    }
+    if (message.policyType?.$case === "rolePolicy") {
+      obj.rolePolicy = RolePolicy.toJSON(message.policyType.rolePolicy);
+    }
+    if (message.policyType?.$case === "exportConstants") {
+      obj.exportConstants = ExportConstants.toJSON(
+        message.policyType.exportConstants,
       );
     }
     if (message.variables) {
@@ -937,6 +1070,8 @@ function createBaseResourcePolicy(): ResourcePolicy {
     scope: "",
     schemas: undefined,
     variables: undefined,
+    scopePermissions: 0,
+    constants: undefined,
   };
 }
 
@@ -965,6 +1100,12 @@ export const ResourcePolicy: MessageFns<ResourcePolicy> = {
     }
     if (message.variables !== undefined) {
       Variables.encode(message.variables, writer.uint32(58).fork()).join();
+    }
+    if (message.scopePermissions !== 0) {
+      writer.uint32(64).int32(message.scopePermissions);
+    }
+    if (message.constants !== undefined) {
+      Constants.encode(message.constants, writer.uint32(74).fork()).join();
     }
     return writer;
   },
@@ -1033,6 +1174,22 @@ export const ResourcePolicy: MessageFns<ResourcePolicy> = {
           message.variables = Variables.decode(reader, reader.uint32());
           continue;
         }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.scopePermissions = reader.int32() as any;
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.constants = Constants.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1061,6 +1218,12 @@ export const ResourcePolicy: MessageFns<ResourcePolicy> = {
       variables: isSet(object.variables)
         ? Variables.fromJSON(object.variables)
         : undefined,
+      scopePermissions: isSet(object.scopePermissions)
+        ? scopePermissionsFromJSON(object.scopePermissions)
+        : 0,
+      constants: isSet(object.constants)
+        ? Constants.fromJSON(object.constants)
+        : undefined,
     };
   },
 
@@ -1086,6 +1249,12 @@ export const ResourcePolicy: MessageFns<ResourcePolicy> = {
     }
     if (message.variables !== undefined) {
       obj.variables = Variables.toJSON(message.variables);
+    }
+    if (message.scopePermissions !== 0) {
+      obj.scopePermissions = scopePermissionsToJSON(message.scopePermissions);
+    }
+    if (message.constants !== undefined) {
+      obj.constants = Constants.toJSON(message.constants);
     }
     return obj;
   },
@@ -1252,6 +1421,211 @@ export const ResourceRule: MessageFns<ResourceRule> = {
   },
 };
 
+function createBaseRolePolicy(): RolePolicy {
+  return {
+    policyType: undefined,
+    parentRoles: [],
+    scope: "",
+    rules: [],
+    scopePermissions: 0,
+  };
+}
+
+export const RolePolicy: MessageFns<RolePolicy> = {
+  encode(
+    message: RolePolicy,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    switch (message.policyType?.$case) {
+      case "role":
+        writer.uint32(10).string(message.policyType.role);
+        break;
+    }
+    for (const v of message.parentRoles) {
+      writer.uint32(42).string(v!);
+    }
+    if (message.scope !== "") {
+      writer.uint32(18).string(message.scope);
+    }
+    for (const v of message.rules) {
+      RoleRule.encode(v!, writer.uint32(26).fork()).join();
+    }
+    if (message.scopePermissions !== 0) {
+      writer.uint32(32).int32(message.scopePermissions);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): RolePolicy {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRolePolicy();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.policyType = { $case: "role", role: reader.string() };
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.parentRoles.push(reader.string());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.scope = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.rules.push(RoleRule.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.scopePermissions = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RolePolicy {
+    return {
+      policyType: isSet(object.role)
+        ? { $case: "role", role: globalThis.String(object.role) }
+        : undefined,
+      parentRoles: globalThis.Array.isArray(object?.parentRoles)
+        ? object.parentRoles.map((e: any) => globalThis.String(e))
+        : [],
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
+      rules: globalThis.Array.isArray(object?.rules)
+        ? object.rules.map((e: any) => RoleRule.fromJSON(e))
+        : [],
+      scopePermissions: isSet(object.scopePermissions)
+        ? scopePermissionsFromJSON(object.scopePermissions)
+        : 0,
+    };
+  },
+
+  toJSON(message: RolePolicy): unknown {
+    const obj: any = {};
+    if (message.policyType?.$case === "role") {
+      obj.role = message.policyType.role;
+    }
+    if (message.parentRoles?.length) {
+      obj.parentRoles = message.parentRoles;
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    if (message.rules?.length) {
+      obj.rules = message.rules.map((e) => RoleRule.toJSON(e));
+    }
+    if (message.scopePermissions !== 0) {
+      obj.scopePermissions = scopePermissionsToJSON(message.scopePermissions);
+    }
+    return obj;
+  },
+};
+
+function createBaseRoleRule(): RoleRule {
+  return { resource: "", allowActions: [] };
+}
+
+export const RoleRule: MessageFns<RoleRule> = {
+  encode(
+    message: RoleRule,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.resource !== "") {
+      writer.uint32(10).string(message.resource);
+    }
+    for (const v of message.allowActions) {
+      writer.uint32(18).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): RoleRule {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRoleRule();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.resource = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.allowActions.push(reader.string());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RoleRule {
+    return {
+      resource: isSet(object.resource)
+        ? globalThis.String(object.resource)
+        : "",
+      allowActions: globalThis.Array.isArray(object?.allowActions)
+        ? object.allowActions.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: RoleRule): unknown {
+    const obj: any = {};
+    if (message.resource !== "") {
+      obj.resource = message.resource;
+    }
+    if (message.allowActions?.length) {
+      obj.allowActions = message.allowActions;
+    }
+    return obj;
+  },
+};
+
 function createBasePrincipalPolicy(): PrincipalPolicy {
   return {
     principal: "",
@@ -1259,6 +1633,8 @@ function createBasePrincipalPolicy(): PrincipalPolicy {
     rules: [],
     scope: "",
     variables: undefined,
+    scopePermissions: 0,
+    constants: undefined,
   };
 }
 
@@ -1281,6 +1657,12 @@ export const PrincipalPolicy: MessageFns<PrincipalPolicy> = {
     }
     if (message.variables !== undefined) {
       Variables.encode(message.variables, writer.uint32(42).fork()).join();
+    }
+    if (message.scopePermissions !== 0) {
+      writer.uint32(48).int32(message.scopePermissions);
+    }
+    if (message.constants !== undefined) {
+      Constants.encode(message.constants, writer.uint32(58).fork()).join();
     }
     return writer;
   },
@@ -1333,6 +1715,22 @@ export const PrincipalPolicy: MessageFns<PrincipalPolicy> = {
           message.variables = Variables.decode(reader, reader.uint32());
           continue;
         }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.scopePermissions = reader.int32() as any;
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.constants = Constants.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1355,6 +1753,12 @@ export const PrincipalPolicy: MessageFns<PrincipalPolicy> = {
       variables: isSet(object.variables)
         ? Variables.fromJSON(object.variables)
         : undefined,
+      scopePermissions: isSet(object.scopePermissions)
+        ? scopePermissionsFromJSON(object.scopePermissions)
+        : 0,
+      constants: isSet(object.constants)
+        ? Constants.fromJSON(object.constants)
+        : undefined,
     };
   },
 
@@ -1374,6 +1778,12 @@ export const PrincipalPolicy: MessageFns<PrincipalPolicy> = {
     }
     if (message.variables !== undefined) {
       obj.variables = Variables.toJSON(message.variables);
+    }
+    if (message.scopePermissions !== 0) {
+      obj.scopePermissions = scopePermissionsToJSON(message.scopePermissions);
+    }
+    if (message.constants !== undefined) {
+      obj.constants = Constants.toJSON(message.constants);
     }
     return obj;
   },
@@ -1582,7 +1992,12 @@ export const PrincipalRule_Action: MessageFns<PrincipalRule_Action> = {
 };
 
 function createBaseDerivedRoles(): DerivedRoles {
-  return { name: "", definitions: [], variables: undefined };
+  return {
+    name: "",
+    definitions: [],
+    variables: undefined,
+    constants: undefined,
+  };
 }
 
 export const DerivedRoles: MessageFns<DerivedRoles> = {
@@ -1598,6 +2013,9 @@ export const DerivedRoles: MessageFns<DerivedRoles> = {
     }
     if (message.variables !== undefined) {
       Variables.encode(message.variables, writer.uint32(26).fork()).join();
+    }
+    if (message.constants !== undefined) {
+      Constants.encode(message.constants, writer.uint32(34).fork()).join();
     }
     return writer;
   },
@@ -1634,6 +2052,14 @@ export const DerivedRoles: MessageFns<DerivedRoles> = {
           message.variables = Variables.decode(reader, reader.uint32());
           continue;
         }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.constants = Constants.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1652,6 +2078,9 @@ export const DerivedRoles: MessageFns<DerivedRoles> = {
       variables: isSet(object.variables)
         ? Variables.fromJSON(object.variables)
         : undefined,
+      constants: isSet(object.constants)
+        ? Constants.fromJSON(object.constants)
+        : undefined,
     };
   },
 
@@ -1665,6 +2094,9 @@ export const DerivedRoles: MessageFns<DerivedRoles> = {
     }
     if (message.variables !== undefined) {
       obj.variables = Variables.toJSON(message.variables);
+    }
+    if (message.constants !== undefined) {
+      obj.constants = Constants.toJSON(message.constants);
     }
     return obj;
   },
@@ -1754,6 +2186,343 @@ export const RoleDef: MessageFns<RoleDef> = {
     }
     if (message.condition !== undefined) {
       obj.condition = Condition.toJSON(message.condition);
+    }
+    return obj;
+  },
+};
+
+function createBaseExportConstants(): ExportConstants {
+  return { name: "", definitions: {} };
+}
+
+export const ExportConstants: MessageFns<ExportConstants> = {
+  encode(
+    message: ExportConstants,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
+    }
+    Object.entries(message.definitions).forEach(([key, value]) => {
+      if (value !== undefined) {
+        ExportConstants_DefinitionsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(18).fork(),
+        ).join();
+      }
+    });
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ExportConstants {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseExportConstants();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          const entry2 = ExportConstants_DefinitionsEntry.decode(
+            reader,
+            reader.uint32(),
+          );
+          if (entry2.value !== undefined) {
+            message.definitions[entry2.key] = entry2.value;
+          }
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ExportConstants {
+    return {
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      definitions: isObject(object.definitions)
+        ? Object.entries(object.definitions).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
+        : {},
+    };
+  },
+
+  toJSON(message: ExportConstants): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.definitions) {
+      const entries = Object.entries(message.definitions);
+      if (entries.length > 0) {
+        obj.definitions = {};
+        entries.forEach(([k, v]) => {
+          obj.definitions[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
+};
+
+function createBaseExportConstants_DefinitionsEntry(): ExportConstants_DefinitionsEntry {
+  return { key: "", value: undefined };
+}
+
+export const ExportConstants_DefinitionsEntry: MessageFns<ExportConstants_DefinitionsEntry> =
+  {
+    encode(
+      message: ExportConstants_DefinitionsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
+      }
+      if (message.value !== undefined) {
+        Value.encode(
+          Value.wrap(message.value),
+          writer.uint32(18).fork(),
+        ).join();
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): ExportConstants_DefinitionsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseExportConstants_DefinitionsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): ExportConstants_DefinitionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object?.value) ? object.value : undefined,
+      };
+    },
+
+    toJSON(message: ExportConstants_DefinitionsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
+
+function createBaseConstants(): Constants {
+  return { import: [], local: {} };
+}
+
+export const Constants: MessageFns<Constants> = {
+  encode(
+    message: Constants,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    for (const v of message.import) {
+      writer.uint32(10).string(v!);
+    }
+    Object.entries(message.local).forEach(([key, value]) => {
+      if (value !== undefined) {
+        Constants_LocalEntry.encode(
+          { key: key as any, value },
+          writer.uint32(18).fork(),
+        ).join();
+      }
+    });
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): Constants {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseConstants();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.import.push(reader.string());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          const entry2 = Constants_LocalEntry.decode(reader, reader.uint32());
+          if (entry2.value !== undefined) {
+            message.local[entry2.key] = entry2.value;
+          }
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Constants {
+    return {
+      import: globalThis.Array.isArray(object?.import)
+        ? object.import.map((e: any) => globalThis.String(e))
+        : [],
+      local: isObject(object.local)
+        ? Object.entries(object.local).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
+        : {},
+    };
+  },
+
+  toJSON(message: Constants): unknown {
+    const obj: any = {};
+    if (message.import?.length) {
+      obj.import = message.import;
+    }
+    if (message.local) {
+      const entries = Object.entries(message.local);
+      if (entries.length > 0) {
+        obj.local = {};
+        entries.forEach(([k, v]) => {
+          obj.local[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
+};
+
+function createBaseConstants_LocalEntry(): Constants_LocalEntry {
+  return { key: "", value: undefined };
+}
+
+export const Constants_LocalEntry: MessageFns<Constants_LocalEntry> = {
+  encode(
+    message: Constants_LocalEntry,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+    if (message.value !== undefined) {
+      Value.encode(Value.wrap(message.value), writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): Constants_LocalEntry {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseConstants_LocalEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.key = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Constants_LocalEntry {
+    return {
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
+    };
+  },
+
+  toJSON(message: Constants_LocalEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
     }
     return obj;
   },

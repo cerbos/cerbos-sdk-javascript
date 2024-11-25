@@ -6,6 +6,30 @@ import { Effect, effectFromJSON } from "../../effect/v1/effect";
 
 export const protobufPackage = "cerbos.policy.v1";
 
+export enum ScopePermissions {
+  SCOPE_PERMISSIONS_UNSPECIFIED = 0,
+  SCOPE_PERMISSIONS_OVERRIDE_PARENT = 1,
+  SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS = 2,
+}
+
+export function scopePermissionsFromJSON(object: any): ScopePermissions {
+  switch (object) {
+    case 0:
+    case "SCOPE_PERMISSIONS_UNSPECIFIED":
+      return ScopePermissions.SCOPE_PERMISSIONS_UNSPECIFIED;
+    case 1:
+    case "SCOPE_PERMISSIONS_OVERRIDE_PARENT":
+      return ScopePermissions.SCOPE_PERMISSIONS_OVERRIDE_PARENT;
+    case 2:
+    case "SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS":
+      return ScopePermissions.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum ScopePermissions",
+      );
+  }
+}
+
 export interface Policy {
   apiVersion: string;
   disabled: boolean;
@@ -16,6 +40,8 @@ export interface Policy {
     | { $case: "principalPolicy"; principalPolicy: PrincipalPolicy }
     | { $case: "derivedRoles"; derivedRoles: DerivedRoles }
     | { $case: "exportVariables"; exportVariables: ExportVariables }
+    | { $case: "rolePolicy"; rolePolicy: RolePolicy }
+    | { $case: "exportConstants"; exportConstants: ExportConstants }
     | undefined;
   variables: { [key: string]: string };
   jsonSchema: string;
@@ -57,6 +83,8 @@ export interface ResourcePolicy {
   scope: string;
   schemas: Schemas | undefined;
   variables: Variables | undefined;
+  scopePermissions: ScopePermissions;
+  constants: Constants | undefined;
 }
 
 export interface ResourceRule {
@@ -69,12 +97,27 @@ export interface ResourceRule {
   output: Output | undefined;
 }
 
+export interface RolePolicy {
+  policyType?: { $case: "role"; role: string } | undefined;
+  parentRoles: string[];
+  scope: string;
+  rules: RoleRule[];
+  scopePermissions: ScopePermissions;
+}
+
+export interface RoleRule {
+  resource: string;
+  allowActions: string[];
+}
+
 export interface PrincipalPolicy {
   principal: string;
   version: string;
   rules: PrincipalRule[];
   scope: string;
   variables: Variables | undefined;
+  scopePermissions: ScopePermissions;
+  constants: Constants | undefined;
 }
 
 export interface PrincipalRule {
@@ -94,12 +137,33 @@ export interface DerivedRoles {
   name: string;
   definitions: RoleDef[];
   variables: Variables | undefined;
+  constants: Constants | undefined;
 }
 
 export interface RoleDef {
   name: string;
   parentRoles: string[];
   condition: Condition | undefined;
+}
+
+export interface ExportConstants {
+  name: string;
+  definitions: { [key: string]: any | undefined };
+}
+
+export interface ExportConstants_DefinitionsEntry {
+  key: string;
+  value: any | undefined;
+}
+
+export interface Constants {
+  import: string[];
+  local: { [key: string]: any | undefined };
+}
+
+export interface Constants_LocalEntry {
+  key: string;
+  value: any | undefined;
 }
 
 export interface ExportVariables {
@@ -203,7 +267,19 @@ export const Policy: MessageFns<Policy> = {
                     object.exportVariables,
                   ),
                 }
-              : undefined,
+              : isSet(object.rolePolicy)
+                ? {
+                    $case: "rolePolicy",
+                    rolePolicy: RolePolicy.fromJSON(object.rolePolicy),
+                  }
+                : isSet(object.exportConstants)
+                  ? {
+                      $case: "exportConstants",
+                      exportConstants: ExportConstants.fromJSON(
+                        object.exportConstants,
+                      ),
+                    }
+                  : undefined,
       variables: isObject(object.variables)
         ? Object.entries(object.variables).reduce<{ [key: string]: string }>(
             (acc, [key, value]) => {
@@ -313,6 +389,12 @@ export const ResourcePolicy: MessageFns<ResourcePolicy> = {
       variables: isSet(object.variables)
         ? Variables.fromJSON(object.variables)
         : undefined,
+      scopePermissions: isSet(object.scopePermissions)
+        ? scopePermissionsFromJSON(object.scopePermissions)
+        : 0,
+      constants: isSet(object.constants)
+        ? Constants.fromJSON(object.constants)
+        : undefined,
     };
   },
 };
@@ -339,6 +421,39 @@ export const ResourceRule: MessageFns<ResourceRule> = {
   },
 };
 
+export const RolePolicy: MessageFns<RolePolicy> = {
+  fromJSON(object: any): RolePolicy {
+    return {
+      policyType: isSet(object.role)
+        ? { $case: "role", role: globalThis.String(object.role) }
+        : undefined,
+      parentRoles: globalThis.Array.isArray(object?.parentRoles)
+        ? object.parentRoles.map((e: any) => globalThis.String(e))
+        : [],
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
+      rules: globalThis.Array.isArray(object?.rules)
+        ? object.rules.map((e: any) => RoleRule.fromJSON(e))
+        : [],
+      scopePermissions: isSet(object.scopePermissions)
+        ? scopePermissionsFromJSON(object.scopePermissions)
+        : 0,
+    };
+  },
+};
+
+export const RoleRule: MessageFns<RoleRule> = {
+  fromJSON(object: any): RoleRule {
+    return {
+      resource: isSet(object.resource)
+        ? globalThis.String(object.resource)
+        : "",
+      allowActions: globalThis.Array.isArray(object?.allowActions)
+        ? object.allowActions.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+};
+
 export const PrincipalPolicy: MessageFns<PrincipalPolicy> = {
   fromJSON(object: any): PrincipalPolicy {
     return {
@@ -352,6 +467,12 @@ export const PrincipalPolicy: MessageFns<PrincipalPolicy> = {
       scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
       variables: isSet(object.variables)
         ? Variables.fromJSON(object.variables)
+        : undefined,
+      scopePermissions: isSet(object.scopePermissions)
+        ? scopePermissionsFromJSON(object.scopePermissions)
+        : 0,
+      constants: isSet(object.constants)
+        ? Constants.fromJSON(object.constants)
         : undefined,
     };
   },
@@ -394,6 +515,9 @@ export const DerivedRoles: MessageFns<DerivedRoles> = {
       variables: isSet(object.variables)
         ? Variables.fromJSON(object.variables)
         : undefined,
+      constants: isSet(object.constants)
+        ? Constants.fromJSON(object.constants)
+        : undefined,
     };
   },
 };
@@ -408,6 +532,59 @@ export const RoleDef: MessageFns<RoleDef> = {
       condition: isSet(object.condition)
         ? Condition.fromJSON(object.condition)
         : undefined,
+    };
+  },
+};
+
+export const ExportConstants: MessageFns<ExportConstants> = {
+  fromJSON(object: any): ExportConstants {
+    return {
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      definitions: isObject(object.definitions)
+        ? Object.entries(object.definitions).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
+        : {},
+    };
+  },
+};
+
+export const ExportConstants_DefinitionsEntry: MessageFns<ExportConstants_DefinitionsEntry> =
+  {
+    fromJSON(object: any): ExportConstants_DefinitionsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object?.value) ? object.value : undefined,
+      };
+    },
+  };
+
+export const Constants: MessageFns<Constants> = {
+  fromJSON(object: any): Constants {
+    return {
+      import: globalThis.Array.isArray(object?.import)
+        ? object.import.map((e: any) => globalThis.String(e))
+        : [],
+      local: isObject(object.local)
+        ? Object.entries(object.local).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
+        : {},
+    };
+  },
+};
+
+export const Constants_LocalEntry: MessageFns<Constants_LocalEntry> = {
+  fromJSON(object: any): Constants_LocalEntry {
+    return {
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object?.value) ? object.value : undefined,
     };
   },
 };

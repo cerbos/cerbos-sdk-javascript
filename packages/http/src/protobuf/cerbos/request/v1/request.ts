@@ -160,6 +160,7 @@ export interface ListPoliciesRequest {
   nameRegexp: string;
   scopeRegexp: string;
   versionRegexp: string;
+  policyId: string[];
 }
 
 export interface GetPolicyRequest {
@@ -172,6 +173,14 @@ export interface DisablePolicyRequest {
 
 export interface EnablePolicyRequest {
   id: string[];
+}
+
+export interface InspectPoliciesRequest {
+  includeDisabled: boolean;
+  nameRegexp: string;
+  scopeRegexp: string;
+  versionRegexp: string;
+  policyId: string[];
 }
 
 export interface AddOrUpdateSchemaRequest {
@@ -690,6 +699,9 @@ export const ListPoliciesRequest: MessageFns<ListPoliciesRequest> = {
       versionRegexp: isSet(object.versionRegexp)
         ? globalThis.String(object.versionRegexp)
         : "",
+      policyId: globalThis.Array.isArray(object?.policyId)
+        ? object.policyId.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -706,6 +718,9 @@ export const ListPoliciesRequest: MessageFns<ListPoliciesRequest> = {
     }
     if (message.versionRegexp !== "") {
       obj.versionRegexp = message.versionRegexp;
+    }
+    if (message.policyId?.length) {
+      obj.policyId = message.policyId;
     }
     return obj;
   },
@@ -760,6 +775,48 @@ export const EnablePolicyRequest: MessageFns<EnablePolicyRequest> = {
     const obj: any = {};
     if (message.id?.length) {
       obj.id = message.id;
+    }
+    return obj;
+  },
+};
+
+export const InspectPoliciesRequest: MessageFns<InspectPoliciesRequest> = {
+  fromJSON(object: any): InspectPoliciesRequest {
+    return {
+      includeDisabled: isSet(object.includeDisabled)
+        ? globalThis.Boolean(object.includeDisabled)
+        : false,
+      nameRegexp: isSet(object.nameRegexp)
+        ? globalThis.String(object.nameRegexp)
+        : "",
+      scopeRegexp: isSet(object.scopeRegexp)
+        ? globalThis.String(object.scopeRegexp)
+        : "",
+      versionRegexp: isSet(object.versionRegexp)
+        ? globalThis.String(object.versionRegexp)
+        : "",
+      policyId: globalThis.Array.isArray(object?.policyId)
+        ? object.policyId.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: InspectPoliciesRequest): unknown {
+    const obj: any = {};
+    if (message.includeDisabled !== false) {
+      obj.includeDisabled = message.includeDisabled;
+    }
+    if (message.nameRegexp !== "") {
+      obj.nameRegexp = message.nameRegexp;
+    }
+    if (message.scopeRegexp !== "") {
+      obj.scopeRegexp = message.scopeRegexp;
+    }
+    if (message.versionRegexp !== "") {
+      obj.versionRegexp = message.versionRegexp;
+    }
+    if (message.policyId?.length) {
+      obj.policyId = message.policyId;
     }
     return obj;
   },

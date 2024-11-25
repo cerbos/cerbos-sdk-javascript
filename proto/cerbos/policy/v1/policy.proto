@@ -22,6 +22,14 @@ enum Kind {
   KIND_EXPORT_VARIABLES = 2;
   KIND_PRINCIPAL = 3;
   KIND_RESOURCE = 4;
+  KIND_ROLE_POLICY = 5;
+  KIND_EXPORT_CONSTANTS = 6;
+}
+
+enum ScopePermissions {
+  SCOPE_PERMISSIONS_UNSPECIFIED = 0;
+  SCOPE_PERMISSIONS_OVERRIDE_PARENT = 1;
+  SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS = 2;
 }
 
 message Policy {
@@ -38,6 +46,8 @@ message Policy {
     PrincipalPolicy principal_policy = 6;
     DerivedRoles derived_roles = 7;
     ExportVariables export_variables = 10;
+    RolePolicy role_policy = 11;
+    ExportConstants export_constants = 12;
   }
   map<string, string> variables = 8 [deprecated = true];
   string json_schema = 9 [json_name = "$schema"];
@@ -75,6 +85,8 @@ message ResourcePolicy {
   string scope = 5 [(buf.validate.field).string.pattern = "^([[:alnum:]][[:word:]\\-]*(\\.[[:word:]\\-]*)*)*$"];
   Schemas schemas = 6;
   Variables variables = 7;
+  ScopePermissions scope_permissions = 8;
+  Constants constants = 9;
 }
 
 message ResourceRule {
@@ -114,6 +126,47 @@ message ResourceRule {
   Output output = 7;
 }
 
+message RolePolicy {
+  oneof policy_type {
+    option (buf.validate.oneof).required = true;
+    string role = 1 [(buf.validate.field).string = {min_len: 1}];
+  }
+  repeated string parent_roles = 5 [(buf.validate.field).repeated = {
+    unique: true
+    items: {
+      string: {min_len: 1}
+    }
+  }];
+  string scope = 2 [(buf.validate.field).string.pattern = "^([[:alnum:]][[:word:]\\-]*(\\.[[:word:]\\-]*)*)*$"];
+  repeated RoleRule rules = 3;
+  ScopePermissions scope_permissions = 4 [
+    (buf.validate.field).enum = {
+      in: [
+        1,
+        2
+      ]
+    },
+    (buf.validate.field).required = true
+  ];
+}
+
+message RoleRule {
+  string resource = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string = {min_len: 1}
+  ];
+  repeated string allow_actions = 2 [
+    (buf.validate.field).repeated = {
+      min_items: 1
+      unique: true
+      items: {
+        string: {min_len: 1}
+      }
+    },
+    (buf.validate.field).required = true
+  ];
+}
+
 message PrincipalPolicy {
   string principal = 1 [
     (buf.validate.field).required = true,
@@ -126,6 +179,8 @@ message PrincipalPolicy {
   repeated PrincipalRule rules = 3;
   string scope = 4 [(buf.validate.field).string.pattern = "^([[:alnum:]][[:word:]\\-]*(\\.[[:word:]\\-]*)*)*$"];
   Variables variables = 5;
+  ScopePermissions scope_permissions = 6;
+  Constants constants = 7;
 }
 
 message PrincipalRule {
@@ -171,6 +226,7 @@ message DerivedRoles {
     (buf.validate.field).required = true
   ];
   Variables variables = 3;
+  Constants constants = 4;
 }
 
 message RoleDef {
@@ -189,6 +245,27 @@ message RoleDef {
     (buf.validate.field).required = true
   ];
   Condition condition = 3;
+}
+
+message ExportConstants {
+  string name = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string = {
+      pattern: "^[[:word:]\\-\\.]+$"
+      min_len: 1
+    }
+  ];
+  map<string, google.protobuf.Value> definitions = 2;
+}
+
+message Constants {
+  repeated string import = 1 [(buf.validate.field).repeated = {
+    unique: true
+    items: {
+      string: {pattern: "^[[:word:]\\-\\.]+$"}
+    }
+  }];
+  map<string, google.protobuf.Value> local = 2;
 }
 
 message ExportVariables {
@@ -277,11 +354,13 @@ message TestFixture {
   message Principals {
     map<string, cerbos.engine.v1.Principal> principals = 1;
     string json_schema = 2 [json_name = "$schema"];
+    map<string, TestFixtureGroup.Principals> principal_groups = 3;
   }
 
   message Resources {
     map<string, cerbos.engine.v1.Resource> resources = 1;
     string json_schema = 2 [json_name = "$schema"];
+    map<string, TestFixtureGroup.Resources> resource_groups = 3;
   }
 
   message AuxData {
@@ -290,10 +369,39 @@ message TestFixture {
   }
 }
 
+message TestFixtureGroup {
+  message Principals {
+    repeated string principals = 1 [
+      (buf.validate.field).repeated = {
+        min_items: 1
+        unique: true
+        items: {
+          string: {min_len: 1}
+        }
+      },
+      (buf.validate.field).required = true
+    ];
+  }
+
+  message Resources {
+    repeated string resources = 1 [
+      (buf.validate.field).repeated = {
+        min_items: 1
+        unique: true
+        items: {
+          string: {min_len: 1}
+        }
+      },
+      (buf.validate.field).required = true
+    ];
+  }
+}
+
 message TestOptions {
   google.protobuf.Timestamp now = 1;
   bool lenient_scope_search = 2;
   map<string, google.protobuf.Value> globals = 3;
+  string default_policy_version = 4;
 }
 
 message TestSuite {
@@ -313,30 +421,24 @@ message TestSuite {
   map<string, cerbos.engine.v1.AuxData> aux_data = 8;
   TestOptions options = 9;
   string json_schema = 10 [json_name = "$schema"];
+  map<string, TestFixtureGroup.Principals> principal_groups = 11;
+  map<string, TestFixtureGroup.Resources> resource_groups = 12;
 }
 
 message TestTable {
   message Input {
-    repeated string principals = 1 [
-      (buf.validate.field).repeated = {
-        min_items: 1
-        unique: true
-        items: {
-          string: {min_len: 1}
-        }
-      },
-      (buf.validate.field).required = true
-    ];
-    repeated string resources = 2 [
-      (buf.validate.field).repeated = {
-        min_items: 1
-        unique: true
-        items: {
-          string: {min_len: 1}
-        }
-      },
-      (buf.validate.field).required = true
-    ];
+    repeated string principals = 1 [(buf.validate.field).repeated = {
+      unique: true
+      items: {
+        string: {min_len: 1}
+      }
+    }];
+    repeated string resources = 2 [(buf.validate.field).repeated = {
+      unique: true
+      items: {
+        string: {min_len: 1}
+      }
+    }];
     repeated string actions = 3 [
       (buf.validate.field).repeated = {
         min_items: 1
@@ -348,6 +450,30 @@ message TestTable {
       (buf.validate.field).required = true
     ];
     string aux_data = 4;
+    repeated string principal_groups = 5 [(buf.validate.field).repeated = {
+      unique: true
+      items: {
+        string: {min_len: 1}
+      }
+    }];
+    repeated string resource_groups = 6 [(buf.validate.field).repeated = {
+      unique: true
+      items: {
+        string: {min_len: 1}
+      }
+    }];
+
+    option (buf.validate.message).cel = {
+      id: "input.principals"
+      message: "principals or principalGroups must be present"
+      expression: "size(this.principals) > 0 || size(this.principal_groups) > 0"
+    };
+
+    option (buf.validate.message).cel = {
+      id: "input.resources"
+      message: "resources or resourceGroups must be present"
+      expression: "size(this.resources) > 0 || size(this.resource_groups) > 0"
+    };
   }
 
   message OutputExpectations {
@@ -362,14 +488,8 @@ message TestTable {
   }
 
   message Expectation {
-    string principal = 1 [
-      (buf.validate.field).required = true,
-      (buf.validate.field).string.min_len = 1
-    ];
-    string resource = 2 [
-      (buf.validate.field).required = true,
-      (buf.validate.field).string.min_len = 1
-    ];
+    string principal = 1;
+    string resource = 2;
     map<string, cerbos.effect.v1.Effect> actions = 3 [
       (buf.validate.field).map = {
         min_pairs: 1
@@ -388,6 +508,54 @@ message TestTable {
       (buf.validate.field).required = true
     ];
     repeated OutputExpectations outputs = 4;
+    repeated string principals = 5 [(buf.validate.field).repeated = {
+      unique: true
+      items: {
+        string: {min_len: 1}
+      }
+    }];
+    repeated string resources = 6 [(buf.validate.field).repeated = {
+      unique: true
+      items: {
+        string: {min_len: 1}
+      }
+    }];
+    repeated string principal_groups = 7 [(buf.validate.field).repeated = {
+      unique: true
+      items: {
+        string: {min_len: 1}
+      }
+    }];
+    repeated string resource_groups = 8 [(buf.validate.field).repeated = {
+      unique: true
+      items: {
+        string: {min_len: 1}
+      }
+    }];
+
+    option (buf.validate.message).cel = {
+      id: "expectation.principals"
+      message: "principal, principals, or principalGroups must be present"
+      expression: "this.principal != '' || size(this.principals) > 0 || size(this.principal_groups) > 0"
+    };
+
+    option (buf.validate.message).cel = {
+      id: "expectation.principal_nand_principals"
+      message: "principal and principals may not both be present"
+      expression: "!(this.principal != '' && size(this.principals) > 0)"
+    };
+
+    option (buf.validate.message).cel = {
+      id: "expectation.resources"
+      message: "resource, resources, or resourceGroups must be present"
+      expression: "this.resource != '' || size(this.resources) > 0 || size(this.resource_groups) > 0"
+    };
+
+    option (buf.validate.message).cel = {
+      id: "expectation.resource_nand_resources"
+      message: "resource and resources may not both be present"
+      expression: "!(this.resource != '' && size(this.resources) > 0)"
+    };
   }
 
   string name = 1 [
@@ -479,6 +647,7 @@ message TestResults {
     string error = 5;
     repeated TestCase test_cases = 6;
     string description = 7;
+    string skip_reason = 8;
   }
 
   message TestCase {
@@ -507,6 +676,7 @@ message TestResults {
       Failure failure = 2;
       string error = 3;
       Success success = 5;
+      string skip_reason = 6;
     }
     repeated cerbos.engine.v1.Trace engine_trace = 4;
   }

@@ -27,6 +27,7 @@ import {
   EnablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
+  InspectPoliciesRequest,
   ListAuditLogEntriesRequest,
   ListPoliciesRequest,
   ListSchemasRequest,
@@ -45,6 +46,7 @@ import {
   EnablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
+  InspectPoliciesResponse,
   ListAuditLogEntriesResponse,
   ListPoliciesResponse,
   ListSchemasResponse,
@@ -287,6 +289,18 @@ export const CerbosAdminServiceService = {
     responseDeserialize: (value: Buffer) =>
       AddOrUpdatePolicyResponse.decode(value),
   },
+  inspectPolicies: {
+    path: "/cerbos.svc.v1.CerbosAdminService/InspectPolicies",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: InspectPoliciesRequest) =>
+      Buffer.from(InspectPoliciesRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => InspectPoliciesRequest.decode(value),
+    responseSerialize: (value: InspectPoliciesResponse) =>
+      Buffer.from(InspectPoliciesResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer) =>
+      InspectPoliciesResponse.decode(value),
+  },
   listPolicies: {
     path: "/cerbos.svc.v1.CerbosAdminService/ListPolicies",
     requestStream: false,
@@ -408,6 +422,10 @@ export interface CerbosAdminServiceServer extends UntypedServiceImplementation {
     AddOrUpdatePolicyRequest,
     AddOrUpdatePolicyResponse
   >;
+  inspectPolicies: handleUnaryCall<
+    InspectPoliciesRequest,
+    InspectPoliciesResponse
+  >;
   listPolicies: handleUnaryCall<ListPoliciesRequest, ListPoliciesResponse>;
   getPolicy: handleUnaryCall<GetPolicyRequest, GetPolicyResponse>;
   disablePolicy: handleUnaryCall<DisablePolicyRequest, DisablePolicyResponse>;
@@ -449,6 +467,30 @@ export interface CerbosAdminServiceClient extends Client {
     callback: (
       error: ServiceError | null,
       response: AddOrUpdatePolicyResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  inspectPolicies(
+    request: InspectPoliciesRequest,
+    callback: (
+      error: ServiceError | null,
+      response: InspectPoliciesResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  inspectPolicies(
+    request: InspectPoliciesRequest,
+    metadata: Metadata,
+    callback: (
+      error: ServiceError | null,
+      response: InspectPoliciesResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  inspectPolicies(
+    request: InspectPoliciesRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (
+      error: ServiceError | null,
+      response: InspectPoliciesResponse,
     ) => void,
   ): ClientUnaryCall;
   listPolicies(
