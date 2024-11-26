@@ -662,11 +662,13 @@ function durationToProtobuf(duration: number): Duration {
 
 export function listPoliciesRequestToProtobuf({
   includeDisabled = false,
+  ids = [],
   nameRegexp = "",
   scopeRegexp = "",
   versionRegexp = "",
 }: ListPoliciesRequest): ListPoliciesRequestProtobuf {
   return {
+    policyId: ids,
     includeDisabled,
     nameRegexp,
     scopeRegexp,

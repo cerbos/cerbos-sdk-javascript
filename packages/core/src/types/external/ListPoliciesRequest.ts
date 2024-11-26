@@ -15,6 +15,16 @@ export interface ListPoliciesRequest {
   includeDisabled?: boolean | undefined;
 
   /**
+   * Only include policies with the given IDs.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.37.
+   *
+   * @defaultValue `undefined`
+   */
+  ids?: string[] | undefined;
+
+  /**
    * Only include policies with a name matching the given regular expression.
    *
    * @remarks
