@@ -1,3 +1,4 @@
+import type { Constants } from "./Constants";
 import type { PrincipalRule } from "./PrincipalRule";
 import type { ScopePermissions } from "./ScopePermissions";
 import type { Variables } from "./Variables";
@@ -37,7 +38,15 @@ export interface PrincipalPolicyBody {
   scopePermissions?: ScopePermissions | undefined;
 
   /**
-   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables | Variables} defined for use in conditions.
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#constants | Constants} defined for use in conditions.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.40.
+   */
+  constants?: Constants | undefined;
+
+  /**
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#variables | Variables} defined for use in conditions.
    *
    * @remarks
    * Requires the Cerbos policy decision point server to be at least v0.29.

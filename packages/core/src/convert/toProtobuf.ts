@@ -10,7 +10,9 @@ import type {
 } from "../protobuf/cerbos/engine/v1/engine";
 import type {
   Condition as ConditionProtobuf,
+  Constants as ConstantsProtobuf,
   DerivedRoles as DerivedRolesProtobuf,
+  ExportConstants as ExportConstantsProtobuf,
   ExportVariables as ExportVariablesProtobuf,
   Match as MatchProtobuf,
   Match_ExprList,
@@ -54,11 +56,13 @@ import type {
   AuxData,
   CheckResourcesRequest,
   Condition,
+  Constants,
   DeleteSchemasRequest,
   DerivedRoleDefinition,
   DerivedRoles,
   DisablePoliciesRequest,
   EnablePoliciesRequest,
+  ExportConstants,
   ExportVariables,
   GetPoliciesRequest,
   GetSchemasRequest,
@@ -99,6 +103,7 @@ import {
   matchIsMatchExpr,
   matchIsMatchNone,
   policyIsDerivedRoles,
+  policyIsExportConstants,
   policyIsExportVariables,
   policyIsPrincipalPolicy,
   policyIsResourcePolicy,
@@ -143,6 +148,13 @@ function policyTypeToProtobuf(
     };
   }
 
+  if (policyIsExportConstants(policy)) {
+    return {
+      $case: "exportConstants",
+      exportConstants: exportConstantsToProtobuf(policy),
+    };
+  }
+
   if (policyIsExportVariables(policy)) {
     return {
       $case: "exportVariables",
@@ -168,11 +180,12 @@ function policyTypeToProtobuf(
 }
 
 function derivedRolesToProtobuf({
-  derivedRoles: { name, definitions, variables },
+  derivedRoles: { name, definitions, constants, variables },
 }: DerivedRoles): DerivedRolesProtobuf {
   return {
     name,
     definitions: definitions.map(derivedRoleDefinitionToProtobuf),
+    constants: constants && constantsToProtobuf(constants),
     variables: variables && variablesToProtobuf(variables),
   };
 }
@@ -244,6 +257,25 @@ function matchesToProtobuf({ of }: Matches): Match_ExprList {
   };
 }
 
+function constantsToProtobuf({
+  import: imports = [],
+  local = {},
+}: Constants): ConstantsProtobuf {
+  return {
+    import: imports,
+    local,
+  };
+}
+
+function exportConstantsToProtobuf({
+  exportConstants: { name, definitions },
+}: ExportConstants): ExportConstantsProtobuf {
+  return {
+    name,
+    definitions,
+  };
+}
+
 function variablesToProtobuf({
   import: imports = [],
   local = {},
@@ -270,6 +302,7 @@ function principalPolicyToProtobuf({
     rules,
     scope = "",
     scopePermissions,
+    constants,
     variables,
   },
 }: PrincipalPolicy): PrincipalPolicyProtobuf {
@@ -279,6 +312,7 @@ function principalPolicyToProtobuf({
     rules: rules.map(principalRuleToProtobuf),
     scope,
     scopePermissions: scopePermissionsToProtobuf(scopePermissions),
+    constants: constants && constantsToProtobuf(constants),
     variables: variables && variablesToProtobuf(variables),
   };
 }
@@ -356,6 +390,7 @@ function resourcePolicyToProtobuf({
     scope = "",
     scopePermissions,
     schemas,
+    constants,
     variables,
   },
 }: ResourcePolicy): ResourcePolicyProtobuf {
@@ -367,6 +402,7 @@ function resourcePolicyToProtobuf({
     scope,
     scopePermissions: scopePermissionsToProtobuf(scopePermissions),
     schemas: schemas && policySchemasToProtobuf(schemas),
+    constants: constants && constantsToProtobuf(constants),
     variables: variables && variablesToProtobuf(variables),
   };
 }
