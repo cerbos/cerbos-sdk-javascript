@@ -11,6 +11,7 @@ A hook to access the Cerbos client passed down by the [CerbosProvider()](./react
 ```typescript
 export declare function useCerbos(): ClientWithPrincipal;
 ```
+
 **Returns:**
 
 [ClientWithPrincipal](./core.clientwithprincipal.md)

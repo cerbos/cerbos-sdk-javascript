@@ -61,6 +61,7 @@ _(Optional)_
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [AsyncResult](./react.asyncresult.md)<!-- -->&lt;[CheckResourcesResponse](./core.checkresourcesresponse.md)<!-- -->&gt;

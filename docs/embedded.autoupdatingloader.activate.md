@@ -11,6 +11,7 @@ Promote the [pending](./embedded.autoupdatingloader.pending.md) embedded policy 
 ```typescript
 activate(): void;
 ```
+
 **Returns:**
 
 void

@@ -45,6 +45,7 @@ filter
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 filter is [AuditLogFilterBetween](./core.auditlogfilterbetween.md)
