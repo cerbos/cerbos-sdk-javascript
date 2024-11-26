@@ -37,6 +37,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[constants?](./core.resourcepolicybody.constants.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Constants](./core.constants.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Constants](https://docs.cerbos.dev/cerbos/latest/policies/variables#constants) defined for use in conditions.
+
+
+</td></tr>
+<tr><td>
+
 [importDerivedRoles?](./core.resourcepolicybody.importderivedroles.md)
 
 
@@ -132,6 +151,25 @@ _(Optional)_ [Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_polic
 </td></tr>
 <tr><td>
 
+[scopePermissions?](./core.resourcepolicybody.scopepermissions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ScopePermissions](./core.scopepermissions.md) \| undefined
+
+
+</td><td>
+
+**_(ALPHA)_** _(Optional)_
+
+
+</td></tr>
+<tr><td>
+
 [variables?](./core.resourcepolicybody.variables.md)
 
 
@@ -145,7 +183,7 @@ _(Optional)_ [Scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_polic
 
 </td><td>
 
-_(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in conditions.
+_(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables#variables) defined for use in conditions.
 
 
 </td></tr>

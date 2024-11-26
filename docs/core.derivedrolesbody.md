@@ -37,6 +37,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[constants?](./core.derivedrolesbody.constants.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Constants](./core.constants.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Constants](https://docs.cerbos.dev/cerbos/latest/policies/variables#constants) defined for use in conditions.
+
+
+</td></tr>
+<tr><td>
+
 [definitions](./core.derivedrolesbody.definitions.md)
 
 
@@ -88,7 +107,7 @@ The name to use when importing the set of derived roles.
 
 </td><td>
 
-_(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in conditions.
+_(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables#variables) defined for use in conditions.
 
 
 </td></tr>
