@@ -7,6 +7,7 @@ import type {
   EnablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
+  InspectPoliciesRequest,
   ListAuditLogEntriesRequest,
   ListPoliciesRequest,
   ListSchemasRequest,
@@ -23,6 +24,7 @@ import type {
   EnablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
+  InspectPoliciesResponse,
   ListAuditLogEntriesResponse,
   ListPoliciesResponse,
   ListSchemasResponse,
@@ -42,6 +44,7 @@ export interface _Services {
       enablePolicy: [EnablePolicyRequest, EnablePolicyResponse];
       getPolicy: [GetPolicyRequest, GetPolicyResponse];
       getSchema: [GetSchemaRequest, GetSchemaResponse];
+      inspectPolicies: [InspectPoliciesRequest, InspectPoliciesResponse];
       listPolicies: [ListPoliciesRequest, ListPoliciesResponse];
       listSchemas: [ListSchemasRequest, ListSchemasResponse];
       reloadStore: [ReloadStoreRequest, ReloadStoreResponse];

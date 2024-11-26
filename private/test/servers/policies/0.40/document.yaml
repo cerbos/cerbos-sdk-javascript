@@ -11,7 +11,9 @@ resourcePolicy:
   variables:
     local:
       allow_deletion: globals.allow_deletion && request.aux_data.jwt.delete
-      output: '"delete_allowed"'
+  constants:
+    local:
+      output: delete_allowed:%s
   rules:
     - name: delete
       actions:
@@ -23,5 +25,4 @@ resourcePolicy:
         match:
           expr: variables.allow_deletion
       output:
-        expr: |-
-          "%s:%s".format([variables.output, request.principal.id])
+        expr: constants.output.format([request.principal.id])

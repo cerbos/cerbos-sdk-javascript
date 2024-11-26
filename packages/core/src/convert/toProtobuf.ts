@@ -44,6 +44,7 @@ import type {
   EnablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
+  InspectPoliciesRequest as InspectPoliciesRequestProtobuf,
   ListAuditLogEntriesRequest,
   ListPoliciesRequest as ListPoliciesRequestProtobuf,
   PlanResourcesRequest as PlanResourcesRequestProtobuf,
@@ -68,6 +69,7 @@ import type {
   ExportVariables,
   GetPoliciesRequest,
   GetSchemasRequest,
+  InspectPoliciesRequest,
   JWT,
   ListAccessLogEntriesRequest,
   ListDecisionLogEntriesRequest,
@@ -691,6 +693,22 @@ function durationToProtobuf(duration: number): Duration {
   return {
     seconds,
     nanos: parseInt(nanos, 10),
+  };
+}
+
+export function inspectPoliciesRequestToProtobuf({
+  includeDisabled = false,
+  ids = [],
+  nameRegexp = "",
+  scopeRegexp = "",
+  versionRegexp = "",
+}: InspectPoliciesRequest): InspectPoliciesRequestProtobuf {
+  return {
+    policyId: ids,
+    includeDisabled,
+    nameRegexp,
+    scopeRegexp,
+    versionRegexp,
   };
 }
 
