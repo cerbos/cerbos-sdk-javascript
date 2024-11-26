@@ -94,6 +94,7 @@ export * from "./SchemaDefinitionInput";
 export * from "./SchemaInput";
 export * from "./SchemaRef";
 export * from "./SchemaRefs";
+export * from "./ScopePermissions";
 export * from "./ServerInfo";
 export * from "./SourceAttributes";
 export * from "./Status";

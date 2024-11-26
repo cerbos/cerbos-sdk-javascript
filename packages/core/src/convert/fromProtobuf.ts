@@ -43,6 +43,7 @@ import type {
   SourceAttributes as SourceAttributesProtobuf,
   Variables as VariablesProtobuf,
 } from "../protobuf/cerbos/policy/v1/policy";
+import { ScopePermissions as ScopePermissionsProtobuf } from "../protobuf/cerbos/policy/v1/policy";
 import type {
   CheckResourcesResponse as CheckResourcesResponseProtobuf,
   CheckResourcesResponse_ResultEntry,
@@ -124,6 +125,7 @@ import {
   PlanExpressionVariable,
   PlanKind,
   SchemaDefinition,
+  ScopePermissions,
   ValidationErrorSource,
 } from "../types/external";
 import type { OmitFromEach } from "../types/internal";
@@ -734,6 +736,36 @@ function resourceRuleFromProtobuf({
     name,
     output: output && outputFromProtobuf(output),
   };
+}
+
+function scopePermissionsFromProtobuf(
+  scopePermissions: ScopePermissionsProtobuf,
+  required: true,
+): ScopePermissions;
+
+function scopePermissionsFromProtobuf(
+  scopePermissions: ScopePermissionsProtobuf,
+  required: false,
+): ScopePermissions | undefined;
+
+function scopePermissionsFromProtobuf(
+  scopePermissions: ScopePermissionsProtobuf,
+  required: boolean,
+): ScopePermissions | undefined {
+  return translateEnum(
+    "ScopePermissions",
+    ScopePermissionsProtobuf,
+    scopePermissions,
+    {
+      [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_UNSPECIFIED]: required
+        ? unexpected
+        : undefined,
+      [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_OVERRIDE_PARENT]:
+        ScopePermissions.OVERRIDE_PARENT,
+      [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS]:
+        ScopePermissions.REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS,
+    },
+  );
 }
 
 function schemaRefsFromProtobuf({

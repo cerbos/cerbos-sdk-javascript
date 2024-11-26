@@ -5,6 +5,9 @@
     "extractorMessageReporting": {
       "ae-forgotten-export": {
         "logLevel": "none"
+      },
+      "ae-incompatible-release-tags": {
+        "logLevel": "none"
       }
     }
   }

@@ -27,6 +27,7 @@ import type {
   Schemas_Schema,
   Variables as VariablesProtobuf,
 } from "../protobuf/cerbos/policy/v1/policy";
+import { ScopePermissions as ScopePermissionsProtobuf } from "../protobuf/cerbos/policy/v1/policy";
 import type {
   AddOrUpdatePolicyRequest,
   AddOrUpdateSchemaRequest,
@@ -89,6 +90,7 @@ import type {
 import {
   Effect,
   SchemaDefinition,
+  ScopePermissions,
   auditLogFilterIsBetween,
   auditLogFilterIsSince,
   auditLogFilterIsTail,
@@ -262,13 +264,21 @@ function exportVariablesToProtobuf({
 }
 
 function principalPolicyToProtobuf({
-  principalPolicy: { principal, version, rules, scope = "", variables },
+  principalPolicy: {
+    principal,
+    version,
+    rules,
+    scope = "",
+    scopePermissions,
+    variables,
+  },
 }: PrincipalPolicy): PrincipalPolicyProtobuf {
   return {
     principal,
     version,
     rules: rules.map(principalRuleToProtobuf),
     scope,
+    scopePermissions: scopePermissionsToProtobuf(scopePermissions),
     variables: variables && variablesToProtobuf(variables),
   };
 }
@@ -297,6 +307,21 @@ function principalRuleActionToProtobuf({
     name,
     output: output && outputToProtobuf(output),
   };
+}
+
+function scopePermissionsToProtobuf(
+  scopePermissions: ScopePermissions | undefined,
+): ScopePermissionsProtobuf {
+  switch (scopePermissions) {
+    case ScopePermissions.OVERRIDE_PARENT:
+      return ScopePermissionsProtobuf.SCOPE_PERMISSIONS_OVERRIDE_PARENT;
+
+    case ScopePermissions.REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS:
+      return ScopePermissionsProtobuf.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS;
+
+    default:
+      return ScopePermissionsProtobuf.SCOPE_PERMISSIONS_UNSPECIFIED;
+  }
 }
 
 function effectToProtobuf(effect: Effect): EffectProtobuf {
@@ -329,6 +354,7 @@ function resourcePolicyToProtobuf({
     importDerivedRoles = [],
     rules,
     scope = "",
+    scopePermissions,
     schemas,
     variables,
   },
@@ -339,6 +365,7 @@ function resourcePolicyToProtobuf({
     importDerivedRoles,
     rules: rules.map(resourceRuleToProtobuf),
     scope,
+    scopePermissions: scopePermissionsToProtobuf(scopePermissions),
     schemas: schemas && policySchemasToProtobuf(schemas),
     variables: variables && variablesToProtobuf(variables),
   };

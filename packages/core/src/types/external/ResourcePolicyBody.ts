@@ -1,5 +1,6 @@
 import type { ResourceRule } from "./ResourceRule";
 import type { SchemaRefs } from "./SchemaRefs";
+import type { ScopePermissions } from "./ScopePermissions";
 import type { Variables } from "./Variables";
 
 /**
@@ -37,6 +38,9 @@ export interface ResourcePolicyBody {
    * {@link https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies | Scope} of the policy.
    */
   scope?: string | undefined;
+
+  /** @alpha */
+  scopePermissions?: ScopePermissions | undefined;
 
   /**
    * {@link https://docs.cerbos.dev/cerbos/latest/policies/schemas | Schemas} for principal and resource attributes.
