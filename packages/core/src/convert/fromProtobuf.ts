@@ -40,6 +40,8 @@ import type {
   ResourcePolicy as ResourcePolicyProtobuf,
   ResourceRule as ResourceRuleProtobuf,
   RoleDef,
+  RolePolicy as RolePolicyProtobuf,
+  RoleRule as RoleRuleProtobuf,
   Schemas,
   Schemas_Schema,
   SourceAttributes as SourceAttributesProtobuf,
@@ -112,6 +114,8 @@ import type {
   ResourcePolicy,
   ResourceQuery,
   ResourceRule,
+  RolePolicy,
+  RoleRule,
   Schema,
   SchemaRef,
   SchemaRefs,
@@ -576,6 +580,8 @@ function policyTypeFromProtobuf(
 
     resourcePolicy: ({ resourcePolicy }) =>
       resourcePolicyFromProtobuf(resourcePolicy),
+
+    rolePolicy: ({ rolePolicy }) => rolePolicyFromProtobuf(rolePolicy),
   });
 }
 
@@ -770,6 +776,36 @@ function resourceRuleFromProtobuf({
     condition: condition && conditionFromProtobuf(condition),
     name,
     output: output && outputFromProtobuf(output),
+  };
+}
+
+function rolePolicyFromProtobuf({
+  policyType,
+  parentRoles,
+  scope,
+  scopePermissions,
+  rules,
+}: RolePolicyProtobuf): RolePolicy {
+  requireOneOf("RolePolicy.policyType", policyType, "role");
+
+  return {
+    rolePolicy: {
+      role: policyType.role,
+      parentRoles: parentRoles,
+      scope,
+      scopePermissions: scopePermissionsFromProtobuf(scopePermissions, true),
+      rules: rules.map(roleRuleFromProtobuf),
+    },
+  };
+}
+
+function roleRuleFromProtobuf({
+  resource,
+  allowActions,
+}: RoleRuleProtobuf): RoleRule {
+  return {
+    resource,
+    allowActions,
   };
 }
 

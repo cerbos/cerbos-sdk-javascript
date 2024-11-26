@@ -3,6 +3,7 @@ import type { ExportConstants } from "./ExportConstants";
 import type { ExportVariables } from "./ExportVariables";
 import type { PrincipalPolicy } from "./PrincipalPolicy";
 import type { ResourcePolicy } from "./ResourcePolicy";
+import type { RolePolicy } from "./RolePolicy";
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/ | policy} definition.
@@ -14,7 +15,8 @@ export type Policy =
   | ExportConstants
   | ExportVariables
   | PrincipalPolicy
-  | ResourcePolicy;
+  | ResourcePolicy
+  | RolePolicy;
 
 /**
  * Type guard to check if a {@link Policy} is a set of {@link DerivedRoles}.
@@ -67,4 +69,9 @@ export function policyIsResourcePolicy(
   policy: Policy,
 ): policy is ResourcePolicy {
   return "resourcePolicy" in policy;
+}
+
+/** @alpha */
+export function policyIsRolePolicy(policy: Policy): policy is RolePolicy {
+  return "rolePolicy" in policy;
 }

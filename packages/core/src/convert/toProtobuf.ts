@@ -25,6 +25,8 @@ import type {
   ResourcePolicy as ResourcePolicyProtobuf,
   ResourceRule as ResourceRuleProtobuf,
   RoleDef,
+  RolePolicy as RolePolicyProtobuf,
+  RoleRule as RoleRuleProtobuf,
   Schemas,
   Schemas_Schema,
   Variables as VariablesProtobuf,
@@ -85,6 +87,8 @@ import type {
   ResourcePolicy,
   ResourceQuery,
   ResourceRule,
+  RolePolicy,
+  RoleRule,
   SchemaDefinitionInput,
   SchemaInput,
   SchemaRef,
@@ -107,6 +111,7 @@ import {
   policyIsExportVariables,
   policyIsPrincipalPolicy,
   policyIsResourcePolicy,
+  policyIsRolePolicy,
 } from "../types/external";
 
 const encoder = new TextEncoder();
@@ -173,6 +178,13 @@ function policyTypeToProtobuf(
     return {
       $case: "resourcePolicy",
       resourcePolicy: resourcePolicyToProtobuf(policy),
+    };
+  }
+
+  if (policyIsRolePolicy(policy)) {
+    return {
+      $case: "rolePolicy",
+      rolePolicy: rolePolicyToProtobuf(policy),
     };
   }
 
@@ -424,6 +436,28 @@ function resourceRuleToProtobuf({
     condition: condition && conditionToProtobuf(condition),
     name,
     output: output && outputToProtobuf(output),
+  };
+}
+
+function rolePolicyToProtobuf({
+  rolePolicy: { role, parentRoles, scope, scopePermissions, rules },
+}: RolePolicy): RolePolicyProtobuf {
+  return {
+    policyType: { $case: "role", role },
+    parentRoles: parentRoles ?? [],
+    scope: scope ?? "",
+    scopePermissions: scopePermissionsToProtobuf(scopePermissions),
+    rules: rules.map(roleRuleToProtobuf),
+  };
+}
+
+function roleRuleToProtobuf({
+  resource,
+  allowActions,
+}: RoleRule): RoleRuleProtobuf {
+  return {
+    resource,
+    allowActions,
   };
 }
 
