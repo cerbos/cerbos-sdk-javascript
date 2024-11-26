@@ -1,5 +1,18 @@
 unreleased:
-  type: patch
+  type: minor
+
+  added:
+    - summary: "[`Client.inspectPolicies`](../../docs/core.client.inspectpolicies.md) method to inspect policy details"
+      details: Requires a policy decision point server running Cerbos 0.35+.
+      pull: 1051
+
+    - summary: Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy ID
+      details: Requires a policy decision point server running Cerbos 0.37+.
+      pull: 1051
+
+    - summary: Support for [constants](https://docs.cerbos.dev/cerbos/latest/policies/variables#constants)
+      details: Requires a policy decision point server running Cerbos 0.40+.
+      pull: 1051
 
   bumped:
     uuid:

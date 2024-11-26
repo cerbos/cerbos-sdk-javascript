@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+### Added
+
+- [`Client.inspectPolicies`](../../docs/core.client.inspectpolicies.md) method to inspect policy details ([#1051](https://github.com/cerbos/cerbos-sdk-javascript/pull/1051))
+
+  Requires a policy decision point server running Cerbos 0.35+.
+
+- Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy ID ([#1051](https://github.com/cerbos/cerbos-sdk-javascript/pull/1051))
+
+  Requires a policy decision point server running Cerbos 0.37+.
+
+- Support for [constants](https://docs.cerbos.dev/cerbos/latest/policies/variables#constants) ([#1051](https://github.com/cerbos/cerbos-sdk-javascript/pull/1051))
+
+  Requires a policy decision point server running Cerbos 0.40+.
+
 ### Changed
 
 - Bump dependency on [uuid] to 11.0.3 ([#1037](https://github.com/cerbos/cerbos-sdk-javascript/pull/1037), [#1043](https://github.com/cerbos/cerbos-sdk-javascript/pull/1043))
