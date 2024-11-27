@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.19.0] - 2024-11-27
+
 ### Added
 
 - [`Client.inspectPolicies`](../../docs/core.client.inspectpolicies.md) method to inspect policy details ([#1051](https://github.com/cerbos/cerbos-sdk-javascript/pull/1051))
@@ -205,7 +209,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.18.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.19.0...HEAD
+[0.19.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.18.1...@cerbos/core@0.19.0
 [0.18.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.18.0...@cerbos/core@0.18.1
 [0.18.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.17.1...@cerbos/core@0.18.0
 [0.17.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.17.0...@cerbos/core@0.17.1

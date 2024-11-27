@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.20.0] - 2024-11-27
+
 ### Added
 
 - [`Client.inspectPolicies`](../../docs/core.client.inspectpolicies.md) method to inspect policy details ([#1051](https://github.com/cerbos/cerbos-sdk-javascript/pull/1051))
@@ -17,6 +21,8 @@
   Requires a policy decision point server running Cerbos 0.40+.
 
 ### Changed
+
+- Bump dependency on [@cerbos/core] to 0.19.0 ([#1053](https://github.com/cerbos/cerbos-sdk-javascript/pull/1053))
 
 - Bump dependency on [qs] to 6.13.1 ([#1046](https://github.com/cerbos/cerbos-sdk-javascript/pull/1046))
 
@@ -287,7 +293,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.2...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.20.0...HEAD
+[0.20.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.2...@cerbos/http@0.20.0
 [0.19.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.1...@cerbos/http@0.19.2
 [0.19.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.0...@cerbos/http@0.19.1
 [0.19.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.18.1...@cerbos/http@0.19.0

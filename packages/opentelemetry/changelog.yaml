@@ -1,16 +1,20 @@
-unreleased:
-  type: patch
-
-  bumped:
-    "@opentelemetry/instrumentation":
-      to: 0.55.0
-      pulls: [1040, 1048]
-
-    "@opentelemetry/semantic-conventions":
-      to: 1.28.0
-      pull: 1048
-
 releases:
+  - version: 0.5.5
+    date: 2024-11-27
+
+    bumped:
+      "@cerbos/core":
+        to: 0.19.0
+        pull: 1053
+
+      "@opentelemetry/instrumentation":
+        to: 0.55.0
+        pulls: [1040, 1048]
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.28.0
+        pull: 1048
+
   - version: 0.5.4
     date: 2024-10-30
 

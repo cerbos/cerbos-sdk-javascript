@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.19.0] - 2024-11-27
+
 ### Added
 
 - [`Client.inspectPolicies`](../../docs/core.client.inspectpolicies.md) method to inspect policy details ([#1051](https://github.com/cerbos/cerbos-sdk-javascript/pull/1051))
@@ -19,6 +23,8 @@
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.2.2 ([#1035](https://github.com/cerbos/cerbos-sdk-javascript/pull/1035), [#1039](https://github.com/cerbos/cerbos-sdk-javascript/pull/1039))
+
+- Bump dependency on [@cerbos/core] to 0.19.0 ([#1053](https://github.com/cerbos/cerbos-sdk-javascript/pull/1053))
 
 ## [0.18.4] - 2024-10-30
 
@@ -335,7 +341,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.18.4...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.19.0...HEAD
+[0.19.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.18.4...@cerbos/grpc@0.19.0
 [0.18.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.18.3...@cerbos/grpc@0.18.4
 [0.18.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.18.2...@cerbos/grpc@0.18.3
 [0.18.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.18.1...@cerbos/grpc@0.18.2
