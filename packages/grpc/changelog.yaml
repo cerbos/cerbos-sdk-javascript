@@ -1,25 +1,29 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[`Client.inspectPolicies`](../../docs/core.client.inspectpolicies.md) method to inspect policy details"
-      details: Requires a policy decision point server running Cerbos 0.35+.
-      pull: 1051
-
-    - summary: Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy ID
-      details: Requires a policy decision point server running Cerbos 0.37+.
-      pull: 1051
-
-    - summary: Support for [constants](https://docs.cerbos.dev/cerbos/latest/policies/variables#constants)
-      details: Requires a policy decision point server running Cerbos 0.40+.
-      pull: 1051
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.2.2
-      pulls: [1035, 1039]
-
 releases:
+  - version: 0.19.0
+    date: 2024-11-27
+
+    added:
+      - summary: "[`Client.inspectPolicies`](../../docs/core.client.inspectpolicies.md) method to inspect policy details"
+        details: Requires a policy decision point server running Cerbos 0.35+.
+        pull: 1051
+
+      - summary: Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy ID
+        details: Requires a policy decision point server running Cerbos 0.37+.
+        pull: 1051
+
+      - summary: Support for [constants](https://docs.cerbos.dev/cerbos/latest/policies/variables#constants)
+        details: Requires a policy decision point server running Cerbos 0.40+.
+        pull: 1051
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.2.2
+        pulls: [1035, 1039]
+
+      "@cerbos/core":
+        to: 0.19.0
+        pull: 1053
+
   - version: 0.18.4
     date: 2024-10-30
 
