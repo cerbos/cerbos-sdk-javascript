@@ -1,0 +1,47 @@
+name: Update protos
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 8 * * 1
+
+jobs:
+  update-protos:
+    name: Update protos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Install Buf
+        uses: bufbuild/buf-setup-action@v1.47.2
+        with:
+          github_token: ${{ github.token }}
+
+      - name: Set up Node.js
+        uses: ./.github/actions/setup-node
+
+      - name: Update protos
+        run: pnpm run proto
+
+      - name: Generate code
+        run: pnpm run generate
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: update-protos
+          draft: always-true
+          reviewers: haines
+          signoff: true
+          sign-commits: true
+          commit-message: |-
+            chore: Update protos
+          title: |-
+            chore: Update protos
+          body: |-
+            This PR updates protos and regenerates code.
+          add-paths: |-
+            packages/*/src/protobuf/**/*.ts
+            private/*/src/protobuf/**/*.ts
+            proto/**/*.proto

@@ -4,6 +4,11 @@ on:
   pull_request:
     branches:
       - main
+    types:
+      - opened
+      - ready_for_review
+      - reopened
+      - synchronize
 
   schedule:
     - cron: 0 1 * * 1-5
