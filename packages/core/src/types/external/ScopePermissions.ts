@@ -1,0 +1,8 @@
+/** @alpha */
+export enum ScopePermissions {
+  /** @alpha */
+  OVERRIDE_PARENT = "SCOPE_PERMISSIONS_OVERRIDE_PARENT",
+
+  /** @alpha */
+  REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS = "SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS",
+}

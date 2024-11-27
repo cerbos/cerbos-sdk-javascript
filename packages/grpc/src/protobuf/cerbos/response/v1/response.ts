@@ -4,6 +4,7 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { Empty } from "../../../google/protobuf/empty";
+import { Value } from "../../../google/protobuf/struct";
 import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
 import { Effect } from "../../effect/v1/effect";
 import { OutputEntry, PlanResourcesFilter } from "../../engine/v1/engine";
@@ -170,6 +171,82 @@ export interface DisablePolicyResponse {
 
 export interface EnablePolicyResponse {
   enabledPolicies: number;
+}
+
+export interface InspectPoliciesResponse {
+  results: { [key: string]: InspectPoliciesResponse_Result };
+}
+
+export interface InspectPoliciesResponse_Attribute {
+  kind: InspectPoliciesResponse_Attribute_Kind;
+  name: string;
+}
+
+export enum InspectPoliciesResponse_Attribute_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_PRINCIPAL_ATTRIBUTE = 1,
+  KIND_RESOURCE_ATTRIBUTE = 2,
+}
+
+export interface InspectPoliciesResponse_DerivedRole {
+  name: string;
+  kind: InspectPoliciesResponse_DerivedRole_Kind;
+  source: string;
+}
+
+export enum InspectPoliciesResponse_DerivedRole_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_UNDEFINED = 1,
+  KIND_EXPORTED = 2,
+  KIND_IMPORTED = 3,
+}
+
+export interface InspectPoliciesResponse_Constant {
+  name: string;
+  value: any | undefined;
+  kind: InspectPoliciesResponse_Constant_Kind;
+  source: string;
+  used: boolean;
+}
+
+export enum InspectPoliciesResponse_Constant_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_EXPORTED = 1,
+  KIND_IMPORTED = 2,
+  KIND_LOCAL = 3,
+  KIND_UNDEFINED = 4,
+  KIND_UNKNOWN = 5,
+}
+
+export interface InspectPoliciesResponse_Variable {
+  name: string;
+  value: string;
+  kind: InspectPoliciesResponse_Variable_Kind;
+  source: string;
+  used: boolean;
+}
+
+export enum InspectPoliciesResponse_Variable_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_EXPORTED = 1,
+  KIND_IMPORTED = 2,
+  KIND_LOCAL = 3,
+  KIND_UNDEFINED = 4,
+  KIND_UNKNOWN = 5,
+}
+
+export interface InspectPoliciesResponse_Result {
+  actions: string[];
+  variables: InspectPoliciesResponse_Variable[];
+  policyId: string;
+  derivedRoles: InspectPoliciesResponse_DerivedRole[];
+  attributes: InspectPoliciesResponse_Attribute[];
+  constants: InspectPoliciesResponse_Constant[];
+}
+
+export interface InspectPoliciesResponse_ResultsEntry {
+  key: string;
+  value: InspectPoliciesResponse_Result | undefined;
 }
 
 export interface AddOrUpdateSchemaResponse {}
@@ -2026,6 +2103,555 @@ export const EnablePolicyResponse: MessageFns<EnablePolicyResponse> = {
     return message;
   },
 };
+
+function createBaseInspectPoliciesResponse(): InspectPoliciesResponse {
+  return { results: {} };
+}
+
+export const InspectPoliciesResponse: MessageFns<InspectPoliciesResponse> = {
+  encode(
+    message: InspectPoliciesResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    Object.entries(message.results).forEach(([key, value]) => {
+      InspectPoliciesResponse_ResultsEntry.encode(
+        { key: key as any, value },
+        writer.uint32(10).fork(),
+      ).join();
+    });
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): InspectPoliciesResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseInspectPoliciesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          const entry1 = InspectPoliciesResponse_ResultsEntry.decode(
+            reader,
+            reader.uint32(),
+          );
+          if (entry1.value !== undefined) {
+            message.results[entry1.key] = entry1.value;
+          }
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseInspectPoliciesResponse_Attribute(): InspectPoliciesResponse_Attribute {
+  return { kind: 0, name: "" };
+}
+
+export const InspectPoliciesResponse_Attribute: MessageFns<InspectPoliciesResponse_Attribute> =
+  {
+    encode(
+      message: InspectPoliciesResponse_Attribute,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.kind !== 0) {
+        writer.uint32(8).int32(message.kind);
+      }
+      if (message.name !== "") {
+        writer.uint32(18).string(message.name);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_Attribute {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_Attribute();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.kind = reader.int32() as any;
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.name = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
+
+function createBaseInspectPoliciesResponse_DerivedRole(): InspectPoliciesResponse_DerivedRole {
+  return { name: "", kind: 0, source: "" };
+}
+
+export const InspectPoliciesResponse_DerivedRole: MessageFns<InspectPoliciesResponse_DerivedRole> =
+  {
+    encode(
+      message: InspectPoliciesResponse_DerivedRole,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.name !== "") {
+        writer.uint32(10).string(message.name);
+      }
+      if (message.kind !== 0) {
+        writer.uint32(16).int32(message.kind);
+      }
+      if (message.source !== "") {
+        writer.uint32(26).string(message.source);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_DerivedRole {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_DerivedRole();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.name = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
+
+            message.kind = reader.int32() as any;
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.source = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
+
+function createBaseInspectPoliciesResponse_Constant(): InspectPoliciesResponse_Constant {
+  return { name: "", value: undefined, kind: 0, source: "", used: false };
+}
+
+export const InspectPoliciesResponse_Constant: MessageFns<InspectPoliciesResponse_Constant> =
+  {
+    encode(
+      message: InspectPoliciesResponse_Constant,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.name !== "") {
+        writer.uint32(10).string(message.name);
+      }
+      if (message.value !== undefined) {
+        Value.encode(
+          Value.wrap(message.value),
+          writer.uint32(18).fork(),
+        ).join();
+      }
+      if (message.kind !== 0) {
+        writer.uint32(24).int32(message.kind);
+      }
+      if (message.source !== "") {
+        writer.uint32(34).string(message.source);
+      }
+      if (message.used !== false) {
+        writer.uint32(40).bool(message.used);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_Constant {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_Constant();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.name = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.kind = reader.int32() as any;
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.source = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.used = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
+
+function createBaseInspectPoliciesResponse_Variable(): InspectPoliciesResponse_Variable {
+  return { name: "", value: "", kind: 0, source: "", used: false };
+}
+
+export const InspectPoliciesResponse_Variable: MessageFns<InspectPoliciesResponse_Variable> =
+  {
+    encode(
+      message: InspectPoliciesResponse_Variable,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.name !== "") {
+        writer.uint32(10).string(message.name);
+      }
+      if (message.value !== "") {
+        writer.uint32(18).string(message.value);
+      }
+      if (message.kind !== 0) {
+        writer.uint32(24).int32(message.kind);
+      }
+      if (message.source !== "") {
+        writer.uint32(34).string(message.source);
+      }
+      if (message.used !== false) {
+        writer.uint32(40).bool(message.used);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_Variable {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_Variable();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.name = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.kind = reader.int32() as any;
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.source = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.used = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
+
+function createBaseInspectPoliciesResponse_Result(): InspectPoliciesResponse_Result {
+  return {
+    actions: [],
+    variables: [],
+    policyId: "",
+    derivedRoles: [],
+    attributes: [],
+    constants: [],
+  };
+}
+
+export const InspectPoliciesResponse_Result: MessageFns<InspectPoliciesResponse_Result> =
+  {
+    encode(
+      message: InspectPoliciesResponse_Result,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.actions) {
+        writer.uint32(10).string(v!);
+      }
+      for (const v of message.variables) {
+        InspectPoliciesResponse_Variable.encode(
+          v!,
+          writer.uint32(18).fork(),
+        ).join();
+      }
+      if (message.policyId !== "") {
+        writer.uint32(26).string(message.policyId);
+      }
+      for (const v of message.derivedRoles) {
+        InspectPoliciesResponse_DerivedRole.encode(
+          v!,
+          writer.uint32(34).fork(),
+        ).join();
+      }
+      for (const v of message.attributes) {
+        InspectPoliciesResponse_Attribute.encode(
+          v!,
+          writer.uint32(42).fork(),
+        ).join();
+      }
+      for (const v of message.constants) {
+        InspectPoliciesResponse_Constant.encode(
+          v!,
+          writer.uint32(50).fork(),
+        ).join();
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_Result {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_Result();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.actions.push(reader.string());
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.variables.push(
+              InspectPoliciesResponse_Variable.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.policyId = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.derivedRoles.push(
+              InspectPoliciesResponse_DerivedRole.decode(
+                reader,
+                reader.uint32(),
+              ),
+            );
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.attributes.push(
+              InspectPoliciesResponse_Attribute.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.constants.push(
+              InspectPoliciesResponse_Constant.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
+
+function createBaseInspectPoliciesResponse_ResultsEntry(): InspectPoliciesResponse_ResultsEntry {
+  return { key: "", value: undefined };
+}
+
+export const InspectPoliciesResponse_ResultsEntry: MessageFns<InspectPoliciesResponse_ResultsEntry> =
+  {
+    encode(
+      message: InspectPoliciesResponse_ResultsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
+      }
+      if (message.value !== undefined) {
+        InspectPoliciesResponse_Result.encode(
+          message.value,
+          writer.uint32(18).fork(),
+        ).join();
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_ResultsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_ResultsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = InspectPoliciesResponse_Result.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
 
 function createBaseAddOrUpdateSchemaResponse(): AddOrUpdateSchemaResponse {
   return {};

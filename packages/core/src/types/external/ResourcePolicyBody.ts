@@ -1,5 +1,7 @@
+import type { Constants } from "./Constants";
 import type { ResourceRule } from "./ResourceRule";
 import type { SchemaRefs } from "./SchemaRefs";
+import type { ScopePermissions } from "./ScopePermissions";
 import type { Variables } from "./Variables";
 
 /**
@@ -38,13 +40,24 @@ export interface ResourcePolicyBody {
    */
   scope?: string | undefined;
 
+  /** @alpha */
+  scopePermissions?: ScopePermissions | undefined;
+
   /**
    * {@link https://docs.cerbos.dev/cerbos/latest/policies/schemas | Schemas} for principal and resource attributes.
    */
   schemas?: SchemaRefs | undefined;
 
   /**
-   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables | Variables} defined for use in conditions.
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#constants | Constants} defined for use in conditions.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.40.
+   */
+  constants?: Constants | undefined;
+
+  /**
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#variables | Variables} defined for use in conditions.
    *
    * @remarks
    * Requires the Cerbos policy decision point server to be at least v0.29.

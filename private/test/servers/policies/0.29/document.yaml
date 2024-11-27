@@ -8,6 +8,10 @@ resourcePolicy:
       ref: cerbos:///principal.json
     resourceSchema:
       ref: cerbos:///document.json
+  variables:
+    local:
+      allow_deletion: globals.allow_deletion && request.aux_data.jwt.delete
+      output: '"delete_allowed"'
   rules:
     - name: delete
       actions:
@@ -17,7 +21,7 @@ resourcePolicy:
         - USER
       condition:
         match:
-          expr: globals.allow_deletion && request.aux_data.jwt.delete
+          expr: variables.allow_deletion
       output:
         expr: |-
-          "delete_allowed:%s".format([request.principal.id])
+          "%s:%s".format([variables.output, request.principal.id])

@@ -260,6 +260,20 @@ Fetch multiple schemas by ID.
 </td></tr>
 <tr><td>
 
+[inspectPolicies(request, options)](./core.client.inspectpolicies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Inspect policies in the store.
+
+
+</td></tr>
+<tr><td>
+
 [isAllowed(request, options)](./core.client.isallowed.md)
 
 

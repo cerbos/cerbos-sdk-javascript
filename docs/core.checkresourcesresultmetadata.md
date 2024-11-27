@@ -45,7 +45,7 @@ Description
 
 </td><td>
 
-Record&lt;string, [CheckResourcesResultMetadataEffect](./core.checkresourcesresultmetadataeffect.md) \| undefined&gt;
+Record&lt;string, [CheckResourcesResultMetadataEffect](./core.checkresourcesresultmetadataeffect.md)<!-- -->&gt;
 
 
 </td><td>

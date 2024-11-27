@@ -47,6 +47,7 @@ the resource search criteria.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [CheckResourcesResult](./core.checkresourcesresult.md) \| undefined

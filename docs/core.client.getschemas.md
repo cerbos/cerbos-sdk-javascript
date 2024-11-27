@@ -61,6 +61,7 @@ _(Optional)_
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 Promise&lt;[GetSchemasResponse](./core.getschemasresponse.md)<!-- -->&gt;

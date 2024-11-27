@@ -177,6 +177,82 @@ export interface EnablePolicyResponse {
   enabledPolicies: number;
 }
 
+export interface InspectPoliciesResponse {
+  results: { [key: string]: InspectPoliciesResponse_Result };
+}
+
+export interface InspectPoliciesResponse_Attribute {
+  kind: InspectPoliciesResponse_Attribute_Kind;
+  name: string;
+}
+
+export enum InspectPoliciesResponse_Attribute_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_PRINCIPAL_ATTRIBUTE = 1,
+  KIND_RESOURCE_ATTRIBUTE = 2,
+}
+
+export interface InspectPoliciesResponse_DerivedRole {
+  name: string;
+  kind: InspectPoliciesResponse_DerivedRole_Kind;
+  source: string;
+}
+
+export enum InspectPoliciesResponse_DerivedRole_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_UNDEFINED = 1,
+  KIND_EXPORTED = 2,
+  KIND_IMPORTED = 3,
+}
+
+export interface InspectPoliciesResponse_Constant {
+  name: string;
+  value: any | undefined;
+  kind: InspectPoliciesResponse_Constant_Kind;
+  source: string;
+  used: boolean;
+}
+
+export enum InspectPoliciesResponse_Constant_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_EXPORTED = 1,
+  KIND_IMPORTED = 2,
+  KIND_LOCAL = 3,
+  KIND_UNDEFINED = 4,
+  KIND_UNKNOWN = 5,
+}
+
+export interface InspectPoliciesResponse_Variable {
+  name: string;
+  value: string;
+  kind: InspectPoliciesResponse_Variable_Kind;
+  source: string;
+  used: boolean;
+}
+
+export enum InspectPoliciesResponse_Variable_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_EXPORTED = 1,
+  KIND_IMPORTED = 2,
+  KIND_LOCAL = 3,
+  KIND_UNDEFINED = 4,
+  KIND_UNKNOWN = 5,
+}
+
+export interface InspectPoliciesResponse_Result {
+  actions: string[];
+  variables: InspectPoliciesResponse_Variable[];
+  policyId: string;
+  derivedRoles: InspectPoliciesResponse_DerivedRole[];
+  attributes: InspectPoliciesResponse_Attribute[];
+  constants: InspectPoliciesResponse_Constant[];
+}
+
+export interface InspectPoliciesResponse_ResultsEntry {
+  key: string;
+  value: InspectPoliciesResponse_Result | undefined;
+}
+
 export interface AddOrUpdateSchemaResponse {}
 
 export interface ListSchemasResponse {

@@ -4,6 +4,7 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { Empty } from "../../../google/protobuf/empty";
+import { Value } from "../../../google/protobuf/struct";
 import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
 import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
 import { OutputEntry, PlanResourcesFilter } from "../../engine/v1/engine";
@@ -170,6 +171,281 @@ export interface DisablePolicyResponse {
 
 export interface EnablePolicyResponse {
   enabledPolicies: number;
+}
+
+export interface InspectPoliciesResponse {
+  results: { [key: string]: InspectPoliciesResponse_Result };
+}
+
+export interface InspectPoliciesResponse_Attribute {
+  kind: InspectPoliciesResponse_Attribute_Kind;
+  name: string;
+}
+
+export enum InspectPoliciesResponse_Attribute_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_PRINCIPAL_ATTRIBUTE = 1,
+  KIND_RESOURCE_ATTRIBUTE = 2,
+}
+
+export function inspectPoliciesResponse_Attribute_KindFromJSON(
+  object: any,
+): InspectPoliciesResponse_Attribute_Kind {
+  switch (object) {
+    case 0:
+    case "KIND_UNSPECIFIED":
+      return InspectPoliciesResponse_Attribute_Kind.KIND_UNSPECIFIED;
+    case 1:
+    case "KIND_PRINCIPAL_ATTRIBUTE":
+      return InspectPoliciesResponse_Attribute_Kind.KIND_PRINCIPAL_ATTRIBUTE;
+    case 2:
+    case "KIND_RESOURCE_ATTRIBUTE":
+      return InspectPoliciesResponse_Attribute_Kind.KIND_RESOURCE_ATTRIBUTE;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum InspectPoliciesResponse_Attribute_Kind",
+      );
+  }
+}
+
+export function inspectPoliciesResponse_Attribute_KindToJSON(
+  object: InspectPoliciesResponse_Attribute_Kind,
+): string {
+  switch (object) {
+    case InspectPoliciesResponse_Attribute_Kind.KIND_UNSPECIFIED:
+      return "KIND_UNSPECIFIED";
+    case InspectPoliciesResponse_Attribute_Kind.KIND_PRINCIPAL_ATTRIBUTE:
+      return "KIND_PRINCIPAL_ATTRIBUTE";
+    case InspectPoliciesResponse_Attribute_Kind.KIND_RESOURCE_ATTRIBUTE:
+      return "KIND_RESOURCE_ATTRIBUTE";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum InspectPoliciesResponse_Attribute_Kind",
+      );
+  }
+}
+
+export interface InspectPoliciesResponse_DerivedRole {
+  name: string;
+  kind: InspectPoliciesResponse_DerivedRole_Kind;
+  source: string;
+}
+
+export enum InspectPoliciesResponse_DerivedRole_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_UNDEFINED = 1,
+  KIND_EXPORTED = 2,
+  KIND_IMPORTED = 3,
+}
+
+export function inspectPoliciesResponse_DerivedRole_KindFromJSON(
+  object: any,
+): InspectPoliciesResponse_DerivedRole_Kind {
+  switch (object) {
+    case 0:
+    case "KIND_UNSPECIFIED":
+      return InspectPoliciesResponse_DerivedRole_Kind.KIND_UNSPECIFIED;
+    case 1:
+    case "KIND_UNDEFINED":
+      return InspectPoliciesResponse_DerivedRole_Kind.KIND_UNDEFINED;
+    case 2:
+    case "KIND_EXPORTED":
+      return InspectPoliciesResponse_DerivedRole_Kind.KIND_EXPORTED;
+    case 3:
+    case "KIND_IMPORTED":
+      return InspectPoliciesResponse_DerivedRole_Kind.KIND_IMPORTED;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum InspectPoliciesResponse_DerivedRole_Kind",
+      );
+  }
+}
+
+export function inspectPoliciesResponse_DerivedRole_KindToJSON(
+  object: InspectPoliciesResponse_DerivedRole_Kind,
+): string {
+  switch (object) {
+    case InspectPoliciesResponse_DerivedRole_Kind.KIND_UNSPECIFIED:
+      return "KIND_UNSPECIFIED";
+    case InspectPoliciesResponse_DerivedRole_Kind.KIND_UNDEFINED:
+      return "KIND_UNDEFINED";
+    case InspectPoliciesResponse_DerivedRole_Kind.KIND_EXPORTED:
+      return "KIND_EXPORTED";
+    case InspectPoliciesResponse_DerivedRole_Kind.KIND_IMPORTED:
+      return "KIND_IMPORTED";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum InspectPoliciesResponse_DerivedRole_Kind",
+      );
+  }
+}
+
+export interface InspectPoliciesResponse_Constant {
+  name: string;
+  value: any | undefined;
+  kind: InspectPoliciesResponse_Constant_Kind;
+  source: string;
+  used: boolean;
+}
+
+export enum InspectPoliciesResponse_Constant_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_EXPORTED = 1,
+  KIND_IMPORTED = 2,
+  KIND_LOCAL = 3,
+  KIND_UNDEFINED = 4,
+  KIND_UNKNOWN = 5,
+}
+
+export function inspectPoliciesResponse_Constant_KindFromJSON(
+  object: any,
+): InspectPoliciesResponse_Constant_Kind {
+  switch (object) {
+    case 0:
+    case "KIND_UNSPECIFIED":
+      return InspectPoliciesResponse_Constant_Kind.KIND_UNSPECIFIED;
+    case 1:
+    case "KIND_EXPORTED":
+      return InspectPoliciesResponse_Constant_Kind.KIND_EXPORTED;
+    case 2:
+    case "KIND_IMPORTED":
+      return InspectPoliciesResponse_Constant_Kind.KIND_IMPORTED;
+    case 3:
+    case "KIND_LOCAL":
+      return InspectPoliciesResponse_Constant_Kind.KIND_LOCAL;
+    case 4:
+    case "KIND_UNDEFINED":
+      return InspectPoliciesResponse_Constant_Kind.KIND_UNDEFINED;
+    case 5:
+    case "KIND_UNKNOWN":
+      return InspectPoliciesResponse_Constant_Kind.KIND_UNKNOWN;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum InspectPoliciesResponse_Constant_Kind",
+      );
+  }
+}
+
+export function inspectPoliciesResponse_Constant_KindToJSON(
+  object: InspectPoliciesResponse_Constant_Kind,
+): string {
+  switch (object) {
+    case InspectPoliciesResponse_Constant_Kind.KIND_UNSPECIFIED:
+      return "KIND_UNSPECIFIED";
+    case InspectPoliciesResponse_Constant_Kind.KIND_EXPORTED:
+      return "KIND_EXPORTED";
+    case InspectPoliciesResponse_Constant_Kind.KIND_IMPORTED:
+      return "KIND_IMPORTED";
+    case InspectPoliciesResponse_Constant_Kind.KIND_LOCAL:
+      return "KIND_LOCAL";
+    case InspectPoliciesResponse_Constant_Kind.KIND_UNDEFINED:
+      return "KIND_UNDEFINED";
+    case InspectPoliciesResponse_Constant_Kind.KIND_UNKNOWN:
+      return "KIND_UNKNOWN";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum InspectPoliciesResponse_Constant_Kind",
+      );
+  }
+}
+
+export interface InspectPoliciesResponse_Variable {
+  name: string;
+  value: string;
+  kind: InspectPoliciesResponse_Variable_Kind;
+  source: string;
+  used: boolean;
+}
+
+export enum InspectPoliciesResponse_Variable_Kind {
+  KIND_UNSPECIFIED = 0,
+  KIND_EXPORTED = 1,
+  KIND_IMPORTED = 2,
+  KIND_LOCAL = 3,
+  KIND_UNDEFINED = 4,
+  KIND_UNKNOWN = 5,
+}
+
+export function inspectPoliciesResponse_Variable_KindFromJSON(
+  object: any,
+): InspectPoliciesResponse_Variable_Kind {
+  switch (object) {
+    case 0:
+    case "KIND_UNSPECIFIED":
+      return InspectPoliciesResponse_Variable_Kind.KIND_UNSPECIFIED;
+    case 1:
+    case "KIND_EXPORTED":
+      return InspectPoliciesResponse_Variable_Kind.KIND_EXPORTED;
+    case 2:
+    case "KIND_IMPORTED":
+      return InspectPoliciesResponse_Variable_Kind.KIND_IMPORTED;
+    case 3:
+    case "KIND_LOCAL":
+      return InspectPoliciesResponse_Variable_Kind.KIND_LOCAL;
+    case 4:
+    case "KIND_UNDEFINED":
+      return InspectPoliciesResponse_Variable_Kind.KIND_UNDEFINED;
+    case 5:
+    case "KIND_UNKNOWN":
+      return InspectPoliciesResponse_Variable_Kind.KIND_UNKNOWN;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum InspectPoliciesResponse_Variable_Kind",
+      );
+  }
+}
+
+export function inspectPoliciesResponse_Variable_KindToJSON(
+  object: InspectPoliciesResponse_Variable_Kind,
+): string {
+  switch (object) {
+    case InspectPoliciesResponse_Variable_Kind.KIND_UNSPECIFIED:
+      return "KIND_UNSPECIFIED";
+    case InspectPoliciesResponse_Variable_Kind.KIND_EXPORTED:
+      return "KIND_EXPORTED";
+    case InspectPoliciesResponse_Variable_Kind.KIND_IMPORTED:
+      return "KIND_IMPORTED";
+    case InspectPoliciesResponse_Variable_Kind.KIND_LOCAL:
+      return "KIND_LOCAL";
+    case InspectPoliciesResponse_Variable_Kind.KIND_UNDEFINED:
+      return "KIND_UNDEFINED";
+    case InspectPoliciesResponse_Variable_Kind.KIND_UNKNOWN:
+      return "KIND_UNKNOWN";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum InspectPoliciesResponse_Variable_Kind",
+      );
+  }
+}
+
+export interface InspectPoliciesResponse_Result {
+  actions: string[];
+  variables: InspectPoliciesResponse_Variable[];
+  policyId: string;
+  derivedRoles: InspectPoliciesResponse_DerivedRole[];
+  attributes: InspectPoliciesResponse_Attribute[];
+  constants: InspectPoliciesResponse_Constant[];
+}
+
+export interface InspectPoliciesResponse_ResultsEntry {
+  key: string;
+  value: InspectPoliciesResponse_Result | undefined;
 }
 
 export interface AddOrUpdateSchemaResponse {}
@@ -2819,6 +3095,772 @@ export const EnablePolicyResponse: MessageFns<EnablePolicyResponse> = {
     return obj;
   },
 };
+
+function createBaseInspectPoliciesResponse(): InspectPoliciesResponse {
+  return { results: {} };
+}
+
+export const InspectPoliciesResponse: MessageFns<InspectPoliciesResponse> = {
+  encode(
+    message: InspectPoliciesResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    Object.entries(message.results).forEach(([key, value]) => {
+      InspectPoliciesResponse_ResultsEntry.encode(
+        { key: key as any, value },
+        writer.uint32(10).fork(),
+      ).join();
+    });
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): InspectPoliciesResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseInspectPoliciesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          const entry1 = InspectPoliciesResponse_ResultsEntry.decode(
+            reader,
+            reader.uint32(),
+          );
+          if (entry1.value !== undefined) {
+            message.results[entry1.key] = entry1.value;
+          }
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): InspectPoliciesResponse {
+    return {
+      results: isObject(object.results)
+        ? Object.entries(object.results).reduce<{
+            [key: string]: InspectPoliciesResponse_Result;
+          }>((acc, [key, value]) => {
+            acc[key] = InspectPoliciesResponse_Result.fromJSON(value);
+            return acc;
+          }, {})
+        : {},
+    };
+  },
+
+  toJSON(message: InspectPoliciesResponse): unknown {
+    const obj: any = {};
+    if (message.results) {
+      const entries = Object.entries(message.results);
+      if (entries.length > 0) {
+        obj.results = {};
+        entries.forEach(([k, v]) => {
+          obj.results[k] = InspectPoliciesResponse_Result.toJSON(v);
+        });
+      }
+    }
+    return obj;
+  },
+};
+
+function createBaseInspectPoliciesResponse_Attribute(): InspectPoliciesResponse_Attribute {
+  return { kind: 0, name: "" };
+}
+
+export const InspectPoliciesResponse_Attribute: MessageFns<InspectPoliciesResponse_Attribute> =
+  {
+    encode(
+      message: InspectPoliciesResponse_Attribute,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.kind !== 0) {
+        writer.uint32(8).int32(message.kind);
+      }
+      if (message.name !== "") {
+        writer.uint32(18).string(message.name);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_Attribute {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_Attribute();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.kind = reader.int32() as any;
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.name = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): InspectPoliciesResponse_Attribute {
+      return {
+        kind: isSet(object.kind)
+          ? inspectPoliciesResponse_Attribute_KindFromJSON(object.kind)
+          : 0,
+        name: isSet(object.name) ? globalThis.String(object.name) : "",
+      };
+    },
+
+    toJSON(message: InspectPoliciesResponse_Attribute): unknown {
+      const obj: any = {};
+      if (message.kind !== 0) {
+        obj.kind = inspectPoliciesResponse_Attribute_KindToJSON(message.kind);
+      }
+      if (message.name !== "") {
+        obj.name = message.name;
+      }
+      return obj;
+    },
+  };
+
+function createBaseInspectPoliciesResponse_DerivedRole(): InspectPoliciesResponse_DerivedRole {
+  return { name: "", kind: 0, source: "" };
+}
+
+export const InspectPoliciesResponse_DerivedRole: MessageFns<InspectPoliciesResponse_DerivedRole> =
+  {
+    encode(
+      message: InspectPoliciesResponse_DerivedRole,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.name !== "") {
+        writer.uint32(10).string(message.name);
+      }
+      if (message.kind !== 0) {
+        writer.uint32(16).int32(message.kind);
+      }
+      if (message.source !== "") {
+        writer.uint32(26).string(message.source);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_DerivedRole {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_DerivedRole();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.name = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
+
+            message.kind = reader.int32() as any;
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.source = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): InspectPoliciesResponse_DerivedRole {
+      return {
+        name: isSet(object.name) ? globalThis.String(object.name) : "",
+        kind: isSet(object.kind)
+          ? inspectPoliciesResponse_DerivedRole_KindFromJSON(object.kind)
+          : 0,
+        source: isSet(object.source) ? globalThis.String(object.source) : "",
+      };
+    },
+
+    toJSON(message: InspectPoliciesResponse_DerivedRole): unknown {
+      const obj: any = {};
+      if (message.name !== "") {
+        obj.name = message.name;
+      }
+      if (message.kind !== 0) {
+        obj.kind = inspectPoliciesResponse_DerivedRole_KindToJSON(message.kind);
+      }
+      if (message.source !== "") {
+        obj.source = message.source;
+      }
+      return obj;
+    },
+  };
+
+function createBaseInspectPoliciesResponse_Constant(): InspectPoliciesResponse_Constant {
+  return { name: "", value: undefined, kind: 0, source: "", used: false };
+}
+
+export const InspectPoliciesResponse_Constant: MessageFns<InspectPoliciesResponse_Constant> =
+  {
+    encode(
+      message: InspectPoliciesResponse_Constant,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.name !== "") {
+        writer.uint32(10).string(message.name);
+      }
+      if (message.value !== undefined) {
+        Value.encode(
+          Value.wrap(message.value),
+          writer.uint32(18).fork(),
+        ).join();
+      }
+      if (message.kind !== 0) {
+        writer.uint32(24).int32(message.kind);
+      }
+      if (message.source !== "") {
+        writer.uint32(34).string(message.source);
+      }
+      if (message.used !== false) {
+        writer.uint32(40).bool(message.used);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_Constant {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_Constant();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.name = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.kind = reader.int32() as any;
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.source = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.used = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): InspectPoliciesResponse_Constant {
+      return {
+        name: isSet(object.name) ? globalThis.String(object.name) : "",
+        value: isSet(object?.value) ? object.value : undefined,
+        kind: isSet(object.kind)
+          ? inspectPoliciesResponse_Constant_KindFromJSON(object.kind)
+          : 0,
+        source: isSet(object.source) ? globalThis.String(object.source) : "",
+        used: isSet(object.used) ? globalThis.Boolean(object.used) : false,
+      };
+    },
+
+    toJSON(message: InspectPoliciesResponse_Constant): unknown {
+      const obj: any = {};
+      if (message.name !== "") {
+        obj.name = message.name;
+      }
+      if (message.value !== undefined) {
+        obj.value = message.value;
+      }
+      if (message.kind !== 0) {
+        obj.kind = inspectPoliciesResponse_Constant_KindToJSON(message.kind);
+      }
+      if (message.source !== "") {
+        obj.source = message.source;
+      }
+      if (message.used !== false) {
+        obj.used = message.used;
+      }
+      return obj;
+    },
+  };
+
+function createBaseInspectPoliciesResponse_Variable(): InspectPoliciesResponse_Variable {
+  return { name: "", value: "", kind: 0, source: "", used: false };
+}
+
+export const InspectPoliciesResponse_Variable: MessageFns<InspectPoliciesResponse_Variable> =
+  {
+    encode(
+      message: InspectPoliciesResponse_Variable,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.name !== "") {
+        writer.uint32(10).string(message.name);
+      }
+      if (message.value !== "") {
+        writer.uint32(18).string(message.value);
+      }
+      if (message.kind !== 0) {
+        writer.uint32(24).int32(message.kind);
+      }
+      if (message.source !== "") {
+        writer.uint32(34).string(message.source);
+      }
+      if (message.used !== false) {
+        writer.uint32(40).bool(message.used);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_Variable {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_Variable();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.name = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.kind = reader.int32() as any;
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.source = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.used = reader.bool();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): InspectPoliciesResponse_Variable {
+      return {
+        name: isSet(object.name) ? globalThis.String(object.name) : "",
+        value: isSet(object.value) ? globalThis.String(object.value) : "",
+        kind: isSet(object.kind)
+          ? inspectPoliciesResponse_Variable_KindFromJSON(object.kind)
+          : 0,
+        source: isSet(object.source) ? globalThis.String(object.source) : "",
+        used: isSet(object.used) ? globalThis.Boolean(object.used) : false,
+      };
+    },
+
+    toJSON(message: InspectPoliciesResponse_Variable): unknown {
+      const obj: any = {};
+      if (message.name !== "") {
+        obj.name = message.name;
+      }
+      if (message.value !== "") {
+        obj.value = message.value;
+      }
+      if (message.kind !== 0) {
+        obj.kind = inspectPoliciesResponse_Variable_KindToJSON(message.kind);
+      }
+      if (message.source !== "") {
+        obj.source = message.source;
+      }
+      if (message.used !== false) {
+        obj.used = message.used;
+      }
+      return obj;
+    },
+  };
+
+function createBaseInspectPoliciesResponse_Result(): InspectPoliciesResponse_Result {
+  return {
+    actions: [],
+    variables: [],
+    policyId: "",
+    derivedRoles: [],
+    attributes: [],
+    constants: [],
+  };
+}
+
+export const InspectPoliciesResponse_Result: MessageFns<InspectPoliciesResponse_Result> =
+  {
+    encode(
+      message: InspectPoliciesResponse_Result,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.actions) {
+        writer.uint32(10).string(v!);
+      }
+      for (const v of message.variables) {
+        InspectPoliciesResponse_Variable.encode(
+          v!,
+          writer.uint32(18).fork(),
+        ).join();
+      }
+      if (message.policyId !== "") {
+        writer.uint32(26).string(message.policyId);
+      }
+      for (const v of message.derivedRoles) {
+        InspectPoliciesResponse_DerivedRole.encode(
+          v!,
+          writer.uint32(34).fork(),
+        ).join();
+      }
+      for (const v of message.attributes) {
+        InspectPoliciesResponse_Attribute.encode(
+          v!,
+          writer.uint32(42).fork(),
+        ).join();
+      }
+      for (const v of message.constants) {
+        InspectPoliciesResponse_Constant.encode(
+          v!,
+          writer.uint32(50).fork(),
+        ).join();
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_Result {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_Result();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.actions.push(reader.string());
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.variables.push(
+              InspectPoliciesResponse_Variable.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.policyId = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.derivedRoles.push(
+              InspectPoliciesResponse_DerivedRole.decode(
+                reader,
+                reader.uint32(),
+              ),
+            );
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.attributes.push(
+              InspectPoliciesResponse_Attribute.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.constants.push(
+              InspectPoliciesResponse_Constant.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): InspectPoliciesResponse_Result {
+      return {
+        actions: globalThis.Array.isArray(object?.actions)
+          ? object.actions.map((e: any) => globalThis.String(e))
+          : [],
+        variables: globalThis.Array.isArray(object?.variables)
+          ? object.variables.map((e: any) =>
+              InspectPoliciesResponse_Variable.fromJSON(e),
+            )
+          : [],
+        policyId: isSet(object.policyId)
+          ? globalThis.String(object.policyId)
+          : "",
+        derivedRoles: globalThis.Array.isArray(object?.derivedRoles)
+          ? object.derivedRoles.map((e: any) =>
+              InspectPoliciesResponse_DerivedRole.fromJSON(e),
+            )
+          : [],
+        attributes: globalThis.Array.isArray(object?.attributes)
+          ? object.attributes.map((e: any) =>
+              InspectPoliciesResponse_Attribute.fromJSON(e),
+            )
+          : [],
+        constants: globalThis.Array.isArray(object?.constants)
+          ? object.constants.map((e: any) =>
+              InspectPoliciesResponse_Constant.fromJSON(e),
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: InspectPoliciesResponse_Result): unknown {
+      const obj: any = {};
+      if (message.actions?.length) {
+        obj.actions = message.actions;
+      }
+      if (message.variables?.length) {
+        obj.variables = message.variables.map((e) =>
+          InspectPoliciesResponse_Variable.toJSON(e),
+        );
+      }
+      if (message.policyId !== "") {
+        obj.policyId = message.policyId;
+      }
+      if (message.derivedRoles?.length) {
+        obj.derivedRoles = message.derivedRoles.map((e) =>
+          InspectPoliciesResponse_DerivedRole.toJSON(e),
+        );
+      }
+      if (message.attributes?.length) {
+        obj.attributes = message.attributes.map((e) =>
+          InspectPoliciesResponse_Attribute.toJSON(e),
+        );
+      }
+      if (message.constants?.length) {
+        obj.constants = message.constants.map((e) =>
+          InspectPoliciesResponse_Constant.toJSON(e),
+        );
+      }
+      return obj;
+    },
+  };
+
+function createBaseInspectPoliciesResponse_ResultsEntry(): InspectPoliciesResponse_ResultsEntry {
+  return { key: "", value: undefined };
+}
+
+export const InspectPoliciesResponse_ResultsEntry: MessageFns<InspectPoliciesResponse_ResultsEntry> =
+  {
+    encode(
+      message: InspectPoliciesResponse_ResultsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
+      }
+      if (message.value !== undefined) {
+        InspectPoliciesResponse_Result.encode(
+          message.value,
+          writer.uint32(18).fork(),
+        ).join();
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): InspectPoliciesResponse_ResultsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse_ResultsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = InspectPoliciesResponse_Result.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): InspectPoliciesResponse_ResultsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? InspectPoliciesResponse_Result.fromJSON(object.value)
+          : undefined,
+      };
+    },
+
+    toJSON(message: InspectPoliciesResponse_ResultsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = InspectPoliciesResponse_Result.toJSON(message.value);
+      }
+      return obj;
+    },
+  };
 
 function createBaseAddOrUpdateSchemaResponse(): AddOrUpdateSchemaResponse {
   return {};

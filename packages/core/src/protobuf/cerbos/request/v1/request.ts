@@ -118,6 +118,7 @@ export interface ListPoliciesRequest {
   nameRegexp: string;
   scopeRegexp: string;
   versionRegexp: string;
+  policyId: string[];
 }
 
 export interface GetPolicyRequest {
@@ -130,6 +131,14 @@ export interface DisablePolicyRequest {
 
 export interface EnablePolicyRequest {
   id: string[];
+}
+
+export interface InspectPoliciesRequest {
+  includeDisabled: boolean;
+  nameRegexp: string;
+  scopeRegexp: string;
+  versionRegexp: string;
+  policyId: string[];
 }
 
 export interface AddOrUpdateSchemaRequest {

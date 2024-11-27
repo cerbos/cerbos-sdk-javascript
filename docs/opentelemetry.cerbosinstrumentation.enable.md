@@ -11,6 +11,7 @@ Enables the instrumentation.
 ```typescript
 enable(): void;
 ```
+
 **Returns:**
 
 void

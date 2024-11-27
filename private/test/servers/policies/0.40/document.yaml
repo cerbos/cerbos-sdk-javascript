@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://api.cerbos.dev/latest/cerbos/policy/v1/Policy.schema.json
+apiVersion: api.cerbos.dev/v1
+resourcePolicy:
+  resource: document
+  version: "1"
+  schemas:
+    principalSchema:
+      ref: cerbos:///principal.json
+    resourceSchema:
+      ref: cerbos:///document.json
+  variables:
+    local:
+      allow_deletion: globals.allow_deletion && request.aux_data.jwt.delete
+  constants:
+    local:
+      output: delete_allowed:%s
+  rules:
+    - name: delete
+      actions:
+        - delete
+      effect: EFFECT_ALLOW
+      roles:
+        - USER
+      condition:
+        match:
+          expr: variables.allow_deletion
+      output:
+        expr: constants.output.format([request.principal.id])

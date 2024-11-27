@@ -1,0 +1,102 @@
+// Copyright 2021-2024 Zenauth Ltd.
+// SPDX-License-Identifier: Apache-2.0
+
+// Copyright 2021-2024 Zenauth Ltd.
+// SPDX-License-Identifier: Apache-2.0
+
+syntax = "proto3";
+
+package cerbos.cloud.bundle.v2;
+
+import "buf/validate/validate.proto";
+import "cerbos/cloud/pdp/v1/pdp.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/bundle/v2;bundlev2";
+
+// BundleInfo holds information about a bundle and its download URLs.
+message BundleInfo {
+  message Segment {
+    uint32 segment_id = 1 [(buf.validate.field).uint32.gt = 0];
+    bytes checksum = 2 [(buf.validate.field).bytes.len = 32];
+    repeated string download_urls = 3 [(buf.validate.field).repeated = {
+      unique: true
+      min_items: 1
+      items: {
+        string: {min_len: 1}
+      }
+    }];
+  }
+
+  string label = 1 [(buf.validate.field).string.min_len = 1];
+  bytes input_hash = 2 [(buf.validate.field).bytes.len = 32];
+  bytes output_hash = 3 [(buf.validate.field).bytes.len = 32];
+  bytes encryption_key = 4;
+  repeated Segment segments = 5 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message Meta {
+  string identifier = 1;
+  string source = 2;
+}
+
+message Manifest {
+  string api_version = 1;
+  map<string, string> policy_index = 2;
+  repeated string schemas = 3;
+  Meta meta = 4;
+}
+
+message GetBundleRequest {
+  cerbos.cloud.pdp.v1.Identifier pdp_id = 1 [(buf.validate.field).required = true];
+  string bundle_label = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+message GetBundleResponse {
+  BundleInfo bundle_info = 1 [(buf.validate.field).required = true];
+}
+
+message WatchBundleRequest {
+  message WatchLabel {
+    string bundle_label = 1 [(buf.validate.field).string.min_len = 1];
+  }
+
+  message Heartbeat {
+    google.protobuf.Timestamp timestamp = 1 [
+      (buf.validate.field).required = true,
+      (buf.validate.field).timestamp.within = {seconds: 60}
+    ];
+    string active_bundle_id = 2 [(buf.validate.field).string.min_len = 1];
+  }
+
+  cerbos.cloud.pdp.v1.Identifier pdp_id = 1 [(buf.validate.field).required = true];
+  oneof msg {
+    WatchLabel watch_label = 2;
+    Heartbeat heartbeat = 3;
+  }
+}
+
+message WatchBundleResponse {
+  message Reconnect {
+    google.protobuf.Duration backoff = 1;
+    string reason = 2;
+  }
+
+  message BundleRemoved {}
+
+  oneof msg {
+    option (buf.validate.oneof).required = true;
+    BundleInfo bundle_update = 1;
+    Reconnect reconnect = 2;
+    BundleRemoved bundle_removed = 3;
+  }
+}
+
+service CerbosBundleService {
+  option (google.api.api_visibility).restriction = "EXPERIMENTAL";
+
+  rpc GetBundle(GetBundleRequest) returns (GetBundleResponse) {}
+  rpc WatchBundle(stream WatchBundleRequest) returns (stream WatchBundleResponse) {}
+}

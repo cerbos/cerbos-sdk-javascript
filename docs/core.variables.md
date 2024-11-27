@@ -4,7 +4,7 @@
 
 ## Variables interface
 
-[Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in policy conditions.
+[Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables#variables) defined for use in policy conditions.
 
 **Signature:**
 

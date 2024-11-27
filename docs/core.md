@@ -172,12 +172,67 @@ Outcomes of policy decisions.
 </td></tr>
 <tr><td>
 
+[InspectedAttributeKind](./core.inspectedattributekind.md)
+
+
+</td><td>
+
+Kind of an attribute referenced by a policy.
+
+
+</td></tr>
+<tr><td>
+
+[InspectedConstantKind](./core.inspectedconstantkind.md)
+
+
+</td><td>
+
+Kind of a [constant](https://docs.cerbos.dev/cerbos/latest/policies/variables#constants) referenced by a policy.
+
+
+</td></tr>
+<tr><td>
+
+[InspectedDerivedRoleKind](./core.inspectedderivedrolekind.md)
+
+
+</td><td>
+
+Kind of a [derived role](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) referenced by a policy.
+
+
+</td></tr>
+<tr><td>
+
+[InspectedVariableKind](./core.inspectedvariablekind.md)
+
+
+</td><td>
+
+Kind of a [variable](https://docs.cerbos.dev/cerbos/latest/policies/variables#variables) referenced by a policy.
+
+
+</td></tr>
+<tr><td>
+
 [PlanKind](./core.plankind.md)
 
 
 </td><td>
 
 Types of query plans.
+
+
+</td></tr>
+<tr><td>
+
+[ScopePermissions](./core.scopepermissions.md)
+
+
+</td><td>
+
+**_(ALPHA)_**
 
 
 </td></tr>
@@ -374,6 +429,17 @@ Type guard to check if a [Policy](./core.policy.md) is a set of [DerivedRoles](.
 </td></tr>
 <tr><td>
 
+[policyIsExportConstants(policy)](./core.policyisexportconstants.md)
+
+
+</td><td>
+
+Type guard to check if a [Policy](./core.policy.md) is a set of [ExportConstants](./core.exportconstants.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
 [policyIsExportVariables(policy)](./core.policyisexportvariables.md)
 
 
@@ -402,6 +468,17 @@ Type guard to check if a [Policy](./core.policy.md) is a [PrincipalPolicy](./cor
 </td><td>
 
 Type guard to check if a [Policy](./core.policy.md) is a [ResourcePolicy](./core.resourcepolicy.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[policyIsRolePolicy(policy)](./core.policyisrolepolicy.md)
+
+
+</td><td>
+
+**_(ALPHA)_**
 
 
 </td></tr>
@@ -609,6 +686,17 @@ A set of expressions that must evaluate to true for a rule to take effect.
 </td></tr>
 <tr><td>
 
+[Constants](./core.constants.md)
+
+
+</td><td>
+
+[Constants](https://docs.cerbos.dev/cerbos/latest/policies/variables#constants) defined for use in policy conditions.
+
+
+</td></tr>
+<tr><td>
+
 [DecisionLogEntry](./core.decisionlogentry.md)
 
 
@@ -763,6 +851,28 @@ Options for creating an error.
 </td></tr>
 <tr><td>
 
+[ExportConstants](./core.exportconstants.md)
+
+
+</td><td>
+
+A set of [exported constants](https://docs.cerbos.dev/cerbos/latest/policies/variables#export-constants) to be reused in other policies.
+
+
+</td></tr>
+<tr><td>
+
+[ExportConstantsBody](./core.exportconstantsbody.md)
+
+
+</td><td>
+
+A set of [exported constants](https://docs.cerbos.dev/cerbos/latest/policies/variables#export-constants) to be reused in other policies.
+
+
+</td></tr>
+<tr><td>
+
 [ExportVariables](./core.exportvariables.md)
 
 
@@ -824,6 +934,83 @@ Input to [Client.getSchemas()](./core.client.getschemas.md)<!-- -->.
 </td><td>
 
 Fetched schemas.
+
+
+</td></tr>
+<tr><td>
+
+[InspectedAttribute](./core.inspectedattribute.md)
+
+
+</td><td>
+
+Details of an attribute referenced by a policy.
+
+
+</td></tr>
+<tr><td>
+
+[InspectedConstant](./core.inspectedconstant.md)
+
+
+</td><td>
+
+Details of a [constant](https://docs.cerbos.dev/cerbos/latest/policies/variables#constants) referenced by a policy.
+
+
+</td></tr>
+<tr><td>
+
+[InspectedDerivedRole](./core.inspectedderivedrole.md)
+
+
+</td><td>
+
+Details of a [derived role](https://docs.cerbos.dev/cerbos/latest/policies/derived_roles) referenced by a policy.
+
+
+</td></tr>
+<tr><td>
+
+[InspectedPolicy](./core.inspectedpolicy.md)
+
+
+</td><td>
+
+Details of a policy in the store.
+
+
+</td></tr>
+<tr><td>
+
+[InspectedVariable](./core.inspectedvariable.md)
+
+
+</td><td>
+
+Details of a [variable](https://docs.cerbos.dev/cerbos/latest/policies/variables#variables) referenced by a policy.
+
+
+</td></tr>
+<tr><td>
+
+[InspectPoliciesRequest](./core.inspectpoliciesrequest.md)
+
+
+</td><td>
+
+Input to [Client.inspectPolicies()](./core.client.inspectpolicies.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[InspectPoliciesResponse](./core.inspectpoliciesresponse.md)
+
+
+</td><td>
+
+Details of policies in the store.
 
 
 </td></tr>
@@ -1258,6 +1445,39 @@ A rule for actions that can be performed on a given resource.
 </td></tr>
 <tr><td>
 
+[RolePolicy](./core.rolepolicy.md)
+
+
+</td><td>
+
+**_(ALPHA)_**
+
+
+</td></tr>
+<tr><td>
+
+[RolePolicyBody](./core.rolepolicybody.md)
+
+
+</td><td>
+
+**_(ALPHA)_**
+
+
+</td></tr>
+<tr><td>
+
+[RoleRule](./core.rolerule.md)
+
+
+</td><td>
+
+**_(ALPHA)_**
+
+
+</td></tr>
+<tr><td>
+
 [Schema](./core.schema.md)
 
 
@@ -1329,7 +1549,7 @@ An error that occurred while validating the principal or resource attributes aga
 
 </td><td>
 
-[Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables) defined for use in policy conditions.
+[Variables](https://docs.cerbos.dev/cerbos/latest/policies/variables#variables) defined for use in policy conditions.
 
 
 </td></tr>

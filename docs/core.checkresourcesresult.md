@@ -79,7 +79,7 @@ Description
 
 </td><td>
 
-Record&lt;string, [Effect](./core.effect.md) \| undefined&gt;
+Record&lt;string, [Effect](./core.effect.md)<!-- -->&gt;
 
 
 </td><td>

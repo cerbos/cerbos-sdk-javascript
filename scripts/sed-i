@@ -5,7 +5,7 @@ set -o pipefail
 
 if sed --version >/dev/null 2>&1; then
   # GNU sed
-  sed -i -- "$@"
+  sed -i "$@"
 else
   # BSD sed
   sed -i "" "$@"

@@ -37,6 +37,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[ids?](./core.listpoliciesrequest.ids.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\] \| undefined
+
+
+</td><td>
+
+_(Optional)_ Only include policies with the given IDs.
+
+
+</td></tr>
+<tr><td>
+
 [includeDisabled?](./core.listpoliciesrequest.includedisabled.md)
 
 

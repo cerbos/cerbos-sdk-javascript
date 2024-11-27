@@ -13,6 +13,7 @@ import type {
   DecisionLogEntry,
   DecodedAuxData,
   DerivedRoles,
+  InspectPoliciesResponse,
   ListAccessLogEntriesRequest,
   ListDecisionLogEntriesRequest,
   OutputResult,
@@ -23,6 +24,10 @@ import type {
 } from "@cerbos/core";
 import {
   Effect,
+  InspectedAttributeKind,
+  InspectedConstantKind,
+  InspectedDerivedRoleKind,
+  InspectedVariableKind,
   PlanExpression,
   PlanExpressionValue,
   PlanExpressionVariable,
@@ -744,6 +749,20 @@ describe("Client", () => {
         });
       });
 
+      describeIfCerbosVersionIsAtLeast("0.35.0")("inspectPolicies", () => {
+        it("returns policy details", async () => {
+          const { policies } = await reloadable.inspectPolicies();
+
+          if (cerbosVersion === "0.37.0") {
+            for (const policy of Object.values(policies)) {
+              policy.variables.sort((a, b) => a.name.localeCompare(b.name));
+            }
+          }
+
+          expect(policies).toEqual(expectedInspectedPolicies());
+        });
+      });
+
       describe("reloadStore", () => {
         it("reloads the store", async () => {
           await expect(
@@ -754,3 +773,203 @@ describe("Client", () => {
     });
   });
 });
+
+function expectedInspectedPolicies(): InspectPoliciesResponse["policies"] {
+  if (cerbosVersionIsAtLeast("0.40.0")) {
+    return {
+      "derived_roles.owner": {
+        id: "owner.yaml",
+        actions: [],
+        attributes: [
+          {
+            kind: InspectedAttributeKind.RESOURCE,
+            name: "owner",
+          },
+        ],
+        constants: [],
+        derivedRoles: [
+          {
+            kind: InspectedDerivedRoleKind.EXPORTED,
+            name: "OWNER",
+            source: "derived_roles.owner",
+          },
+        ],
+        variables: [],
+      },
+      "resource.document.v1": {
+        id: "document.yaml",
+        actions: ["delete"],
+        attributes: [],
+        constants: [
+          {
+            kind: InspectedConstantKind.LOCAL,
+            name: "output",
+            value: "delete_allowed:%s",
+            source: "resource.document.v1",
+            used: true,
+          },
+        ],
+        derivedRoles: [],
+        variables: [
+          {
+            kind: InspectedVariableKind.LOCAL,
+            name: "allow_deletion",
+            definition: "globals.allow_deletion && request.aux_data.jwt.delete",
+            source: "resource.document.v1",
+            used: true,
+          },
+        ],
+      },
+      "resource.document.v1/test": {
+        id: "test/document.yaml",
+        actions: ["edit", "view"],
+        attributes: [],
+        constants: [],
+        derivedRoles: [
+          {
+            kind: InspectedDerivedRoleKind.IMPORTED,
+            name: "OWNER",
+            source: "derived_roles.owner",
+          },
+        ],
+        variables: [],
+      },
+    };
+  }
+
+  if (cerbosVersionIsAtLeast("0.38.0")) {
+    return {
+      "derived_roles.owner": {
+        id: "owner.yaml",
+        actions: [],
+        attributes: [
+          {
+            kind: InspectedAttributeKind.RESOURCE,
+            name: "owner",
+          },
+        ],
+        constants: [],
+        derivedRoles: [
+          {
+            kind: InspectedDerivedRoleKind.EXPORTED,
+            name: "OWNER",
+            source: "derived_roles.owner",
+          },
+        ],
+        variables: [],
+      },
+      "resource.document.v1": {
+        id: "document.yaml",
+        actions: ["delete"],
+        attributes: [],
+        constants: [],
+        derivedRoles: [],
+        variables: [
+          {
+            kind: InspectedVariableKind.LOCAL,
+            name: "allow_deletion",
+            definition: "globals.allow_deletion && request.aux_data.jwt.delete",
+            source: "resource.document.v1",
+            used: true,
+          },
+          {
+            kind: InspectedVariableKind.LOCAL,
+            name: "output",
+            definition: '"delete_allowed"',
+            source: "resource.document.v1",
+            used: false,
+          },
+        ],
+      },
+      "resource.document.v1/test": {
+        id: "test/document.yaml",
+        actions: ["edit", "view"],
+        attributes: [],
+        constants: [],
+        derivedRoles: [
+          {
+            kind: InspectedDerivedRoleKind.IMPORTED,
+            name: "OWNER",
+            source: "derived_roles.owner",
+          },
+        ],
+        variables: [],
+      },
+    };
+  }
+
+  if (cerbosVersionIsAtLeast("0.37.0")) {
+    return {
+      "derived_roles.owner": {
+        id: "owner.yaml",
+        actions: [],
+        attributes: [],
+        constants: [],
+        derivedRoles: [
+          {
+            kind: InspectedDerivedRoleKind.EXPORTED,
+            name: "OWNER",
+            source: "derived_roles.owner",
+          },
+        ],
+        variables: [],
+      },
+      "resource.document.v1": {
+        id: "document.yaml",
+        actions: ["delete"],
+        attributes: [],
+        constants: [],
+        derivedRoles: [],
+        variables: [
+          {
+            kind: InspectedVariableKind.LOCAL,
+            name: "allow_deletion",
+            definition: "globals.allow_deletion && request.aux_data.jwt.delete",
+            source: "resource.document.v1",
+            used: true,
+          },
+          {
+            kind: InspectedVariableKind.LOCAL,
+            name: "output",
+            definition: '"delete_allowed"',
+            source: "resource.document.v1",
+            used: false,
+          },
+        ],
+      },
+      "resource.document.v1/test": {
+        id: "test/document.yaml",
+        actions: ["edit", "view"],
+        attributes: [],
+        constants: [],
+        derivedRoles: [
+          {
+            kind: InspectedDerivedRoleKind.IMPORTED,
+            name: "OWNER",
+            source: "derived_roles.owner",
+          },
+        ],
+        variables: [],
+      },
+    };
+  }
+
+  return {
+    "resource.document.v1": {
+      id: "",
+      actions: ["delete"],
+      attributes: [],
+      constants: [],
+      derivedRoles: [],
+      variables: [],
+    },
+    "resource.document.v1/test": {
+      id: "",
+      actions: ["edit", "view"],
+      attributes: [],
+      constants: [],
+      derivedRoles: [],
+      variables: [],
+    },
+  };
+}

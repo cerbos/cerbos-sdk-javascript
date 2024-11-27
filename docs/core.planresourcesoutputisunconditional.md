@@ -45,6 +45,7 @@ output
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 output is [PlanResourcesUnconditionalOutput](./core.planresourcesunconditionaloutput.md)

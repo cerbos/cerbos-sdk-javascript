@@ -11,6 +11,7 @@ import "cerbos/engine/v1/engine.proto";
 import "cerbos/policy/v1/policy.proto";
 import "cerbos/schema/v1/schema.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option csharp_namespace = "Cerbos.Api.V1.Response";
@@ -51,7 +52,7 @@ message PlanResourcesResponse {
   }];
 
   string policy_version = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "The policy version.",
+    description: "The policy version."
     example: "\"default\""
   }];
 
@@ -193,8 +194,8 @@ message CheckResourcesResponse {
         example: "\"XX125\""
       }];
       string kind = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        description: "Name of the resource kind being accessed.",
-        example: "\"album:photo\"",
+        description: "Name of the resource kind being accessed."
+        example: "\"album:photo\""
       }];
       string policy_version = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
         description:
@@ -438,6 +439,81 @@ message EnablePolicyResponse {
     json_schema: {description: "Enable policy response"}
   };
   uint32 enabled_policies = 1;
+}
+
+message InspectPoliciesResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {description: "Inspect policies response"}
+  };
+
+  message Attribute {
+    enum Kind {
+      KIND_UNSPECIFIED = 0;
+      KIND_PRINCIPAL_ATTRIBUTE = 1;
+      KIND_RESOURCE_ATTRIBUTE = 2;
+    }
+
+    Kind kind = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Kind of the attribute being referenced."}];
+    string name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Name of the attribute being referenced."}];
+  }
+
+  message DerivedRole {
+    enum Kind {
+      KIND_UNSPECIFIED = 0;
+      KIND_UNDEFINED = 1;
+      KIND_EXPORTED = 2;
+      KIND_IMPORTED = 3;
+    }
+
+    string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Derived role name defined in the policy."}];
+    Kind kind = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Kind of the derived role defined in the policy."}];
+    string source = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Source of the derived role defined in the policy."}];
+  }
+
+  message Constant {
+    enum Kind {
+      KIND_UNSPECIFIED = 0;
+      KIND_EXPORTED = 1;
+      KIND_IMPORTED = 2;
+      KIND_LOCAL = 3;
+      KIND_UNDEFINED = 4;
+      KIND_UNKNOWN = 5;
+    }
+
+    string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Constant name defined in the policy."}];
+    google.protobuf.Value value = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Raw value of the constant defined in the policy."}];
+    Kind kind = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Kind of the constant defined in the policy."}];
+    string source = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Source of the constant defined in the policy. Only exists if the kind is imported."}];
+    bool used = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Whether the constant is used in a condition."}];
+  }
+
+  message Variable {
+    enum Kind {
+      KIND_UNSPECIFIED = 0;
+      KIND_EXPORTED = 1;
+      KIND_IMPORTED = 2;
+      KIND_LOCAL = 3;
+      KIND_UNDEFINED = 4;
+      KIND_UNKNOWN = 5;
+    }
+
+    string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Variable name defined in the policy."}];
+    string value = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Raw value of the variable defined in the policy."}];
+    Kind kind = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Kind of the variable defined in the policy."}];
+    string source = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Source of the variable defined in the policy. Only exists if the kind is imported."}];
+    bool used = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Whether the variable is used in a condition."}];
+  }
+
+  message Result {
+    repeated string actions = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Actions defined in the policy."}];
+    repeated Variable variables = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Variables referenced in the policy."}];
+    string policy_id = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "For blob, disk, and git stores policy ID is the file name. For other stores it is <kind>.<name>.<version>/<scope>."}];
+    repeated DerivedRole derived_roles = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Derived roles referenced in the policy."}];
+    repeated Attribute attributes = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Attributes referenced in the policy."}];
+    repeated Constant constants = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Constants referenced in the policy."}];
+  }
+
+  map<string, Result> results = 1;
 }
 
 message AddOrUpdateSchemaResponse {

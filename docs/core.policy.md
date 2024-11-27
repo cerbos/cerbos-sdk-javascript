@@ -9,7 +9,7 @@ A [policy](https://docs.cerbos.dev/cerbos/latest/policies/) definition.
 **Signature:**
 
 ```typescript
-export type Policy = DerivedRoles | ExportVariables | PrincipalPolicy | ResourcePolicy;
+export type Policy = DerivedRoles | ExportConstants | ExportVariables | PrincipalPolicy | ResourcePolicy | RolePolicy;
 ```
-**References:** [DerivedRoles](./core.derivedroles.md)<!-- -->, [ExportVariables](./core.exportvariables.md)<!-- -->, [PrincipalPolicy](./core.principalpolicy.md)<!-- -->, [ResourcePolicy](./core.resourcepolicy.md)
+**References:** [DerivedRoles](./core.derivedroles.md)<!-- -->, [ExportConstants](./core.exportconstants.md)<!-- -->, [ExportVariables](./core.exportvariables.md)<!-- -->, [PrincipalPolicy](./core.principalpolicy.md)<!-- -->, [ResourcePolicy](./core.resourcepolicy.md)<!-- -->, [RolePolicy](./core.rolepolicy.md)
 

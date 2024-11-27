@@ -63,6 +63,7 @@ _(Optional)_ additional settings.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 Promise&lt;[Schema](./files.schema.md)<!-- -->&gt;

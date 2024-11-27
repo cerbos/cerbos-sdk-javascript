@@ -45,6 +45,7 @@ method
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 method is [DecisionLogEntryPlanResources](./core.decisionlogentryplanresources.md)

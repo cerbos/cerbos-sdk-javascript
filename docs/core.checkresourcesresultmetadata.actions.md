@@ -9,5 +9,5 @@ Additional information about how the policy decision was reached for each action
 **Signature:**
 
 ```typescript
-actions: Record<string, CheckResourcesResultMetadataEffect | undefined>;
+actions: Record<string, CheckResourcesResultMetadataEffect>;
 ```

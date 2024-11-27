@@ -25,7 +25,9 @@ import type {
 import { PlanResourcesFilter_Kind } from "../protobuf/cerbos/engine/v1/engine";
 import type {
   Condition as ConditionProtobuf,
+  Constants as ConstantsProtobuf,
   DerivedRoles as DerivedRolesProtobuf,
+  ExportConstants as ExportConstantsProtobuf,
   ExportVariables as ExportVariablesProtobuf,
   Match as MatchProtobuf,
   Match_ExprList,
@@ -38,11 +40,14 @@ import type {
   ResourcePolicy as ResourcePolicyProtobuf,
   ResourceRule as ResourceRuleProtobuf,
   RoleDef,
+  RolePolicy as RolePolicyProtobuf,
+  RoleRule as RoleRuleProtobuf,
   Schemas,
   Schemas_Schema,
   SourceAttributes as SourceAttributesProtobuf,
   Variables as VariablesProtobuf,
 } from "../protobuf/cerbos/policy/v1/policy";
+import { ScopePermissions as ScopePermissionsProtobuf } from "../protobuf/cerbos/policy/v1/policy";
 import type {
   CheckResourcesResponse as CheckResourcesResponseProtobuf,
   CheckResourcesResponse_ResultEntry,
@@ -51,11 +56,23 @@ import type {
   EnablePolicyResponse,
   GetPolicyResponse,
   GetSchemaResponse,
+  InspectPoliciesResponse as InspectPoliciesResponseProtobuf,
+  InspectPoliciesResponse_Attribute,
+  InspectPoliciesResponse_Constant,
+  InspectPoliciesResponse_DerivedRole,
+  InspectPoliciesResponse_Result,
+  InspectPoliciesResponse_Variable,
   ListAuditLogEntriesResponse,
   ListPoliciesResponse as ListPoliciesResponseProtobuf,
   ListSchemasResponse as ListSchemasResponseProtobuf,
   PlanResourcesResponse as PlanResourcesResponseProtobuf,
   PlanResourcesResponse_Meta,
+} from "../protobuf/cerbos/response/v1/response";
+import {
+  InspectPoliciesResponse_Attribute_Kind,
+  InspectPoliciesResponse_Constant_Kind,
+  InspectPoliciesResponse_DerivedRole_Kind,
+  InspectPoliciesResponse_Variable_Kind,
 } from "../protobuf/cerbos/response/v1/response";
 import type {
   Schema as SchemaProtobuf,
@@ -69,6 +86,7 @@ import type {
   CheckOutput,
   CheckOutputActionEffect,
   Condition,
+  Constants,
   DecisionLogEntry,
   DecisionLogEntryCheckResources,
   DecisionLogEntryMethod,
@@ -79,9 +97,16 @@ import type {
   DerivedRoles,
   DisablePoliciesResponse,
   EnablePoliciesResponse,
+  ExportConstants,
   ExportVariables,
   GetPoliciesResponse,
   GetSchemasResponse,
+  InspectPoliciesResponse,
+  InspectedAttribute,
+  InspectedConstant,
+  InspectedDerivedRole,
+  InspectedPolicy,
+  InspectedVariable,
   ListPoliciesResponse,
   ListSchemasResponse,
   Match,
@@ -107,6 +132,8 @@ import type {
   ResourcePolicy,
   ResourceQuery,
   ResourceRule,
+  RolePolicy,
+  RoleRule,
   Schema,
   SchemaRef,
   SchemaRefs,
@@ -119,11 +146,16 @@ import {
   CheckResourcesResponse,
   CheckResourcesResult,
   Effect,
+  InspectedAttributeKind,
+  InspectedConstantKind,
+  InspectedDerivedRoleKind,
+  InspectedVariableKind,
   PlanExpression,
   PlanExpressionValue,
   PlanExpressionVariable,
   PlanKind,
   SchemaDefinition,
+  ScopePermissions,
   ValidationErrorSource,
 } from "../types/external";
 import type { OmitFromEach } from "../types/internal";
@@ -436,7 +468,7 @@ function checkResourcesResultFromProtobuf({
 
 function actionsFromProtobuf(
   actions: Record<string, EffectProtobuf>,
-): Record<string, Effect | undefined> {
+): Record<string, Effect> {
   return Object.fromEntries(
     Object.entries(actions).map(([action, effect]) => [
       action,
@@ -559,6 +591,9 @@ function policyTypeFromProtobuf(
   return transformOneOf("Policy.policyType", policyType, {
     derivedRoles: ({ derivedRoles }) => derivedRolesFromProtobuf(derivedRoles),
 
+    exportConstants: ({ exportConstants }) =>
+      exportConstantsFromProtobuf(exportConstants),
+
     exportVariables: ({ exportVariables }) =>
       exportVariablesFromProtobuf(exportVariables),
 
@@ -567,18 +602,22 @@ function policyTypeFromProtobuf(
 
     resourcePolicy: ({ resourcePolicy }) =>
       resourcePolicyFromProtobuf(resourcePolicy),
+
+    rolePolicy: ({ rolePolicy }) => rolePolicyFromProtobuf(rolePolicy),
   });
 }
 
 function derivedRolesFromProtobuf({
   name,
   definitions,
+  constants,
   variables,
 }: DerivedRolesProtobuf): OmitPolicyBase<DerivedRoles> {
   return {
     derivedRoles: {
       name,
       definitions: definitions.map(derivedRoleDefinitionFromProtobuf),
+      constants: constants && constantsFromProtobuf(constants),
       variables: variables && variablesFromProtobuf(variables),
     },
   };
@@ -614,6 +653,28 @@ function matchesFromProtobuf({ of }: Match_ExprList): Matches {
   return { of: of.map(matchFromProtobuf) };
 }
 
+function constantsFromProtobuf({
+  import: imports,
+  local,
+}: ConstantsProtobuf): Constants {
+  return {
+    import: imports,
+    local,
+  };
+}
+
+function exportConstantsFromProtobuf({
+  name,
+  definitions,
+}: ExportConstantsProtobuf): OmitPolicyBase<ExportConstants> {
+  return {
+    exportConstants: {
+      name,
+      definitions,
+    },
+  };
+}
+
 function variablesFromProtobuf({
   import: imports,
   local,
@@ -641,6 +702,7 @@ function principalPolicyFromProtobuf({
   version,
   rules,
   scope,
+  constants,
   variables,
 }: PrincipalPolicyProtobuf): OmitPolicyBase<PrincipalPolicy> {
   return {
@@ -649,6 +711,7 @@ function principalPolicyFromProtobuf({
       version,
       rules: rules.map(principalRuleFromProtobuf),
       scope,
+      constants: constants && constantsFromProtobuf(constants),
       variables: variables && variablesFromProtobuf(variables),
     },
   };
@@ -701,6 +764,7 @@ function resourcePolicyFromProtobuf({
   rules,
   schemas,
   scope,
+  constants,
   variables,
 }: ResourcePolicyProtobuf): OmitPolicyBase<ResourcePolicy> {
   return {
@@ -711,6 +775,7 @@ function resourcePolicyFromProtobuf({
       rules: rules.map(resourceRuleFromProtobuf),
       schemas: schemas && schemaRefsFromProtobuf(schemas),
       scope,
+      constants: constants && constantsFromProtobuf(constants),
       variables: variables && variablesFromProtobuf(variables),
     },
   };
@@ -734,6 +799,66 @@ function resourceRuleFromProtobuf({
     name,
     output: output && outputFromProtobuf(output),
   };
+}
+
+function rolePolicyFromProtobuf({
+  policyType,
+  parentRoles,
+  scope,
+  scopePermissions,
+  rules,
+}: RolePolicyProtobuf): RolePolicy {
+  requireOneOf("RolePolicy.policyType", policyType, "role");
+
+  return {
+    rolePolicy: {
+      role: policyType.role,
+      parentRoles: parentRoles,
+      scope,
+      scopePermissions: scopePermissionsFromProtobuf(scopePermissions, true),
+      rules: rules.map(roleRuleFromProtobuf),
+    },
+  };
+}
+
+function roleRuleFromProtobuf({
+  resource,
+  allowActions,
+}: RoleRuleProtobuf): RoleRule {
+  return {
+    resource,
+    allowActions,
+  };
+}
+
+function scopePermissionsFromProtobuf(
+  scopePermissions: ScopePermissionsProtobuf,
+  required: true,
+): ScopePermissions;
+
+function scopePermissionsFromProtobuf(
+  scopePermissions: ScopePermissionsProtobuf,
+  required: false,
+): ScopePermissions | undefined;
+
+function scopePermissionsFromProtobuf(
+  scopePermissions: ScopePermissionsProtobuf,
+  required: boolean,
+): ScopePermissions | undefined {
+  return translateEnum(
+    "ScopePermissions",
+    ScopePermissionsProtobuf,
+    scopePermissions,
+    {
+      [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_UNSPECIFIED]: required
+        ? unexpected
+        : undefined,
+      [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_OVERRIDE_PARENT]:
+        ScopePermissions.OVERRIDE_PARENT,
+      [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS]:
+        ScopePermissions.REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS,
+    },
+  );
 }
 
 function schemaRefsFromProtobuf({
@@ -764,6 +889,173 @@ function schemaFromProtobuf({ id, definition }: SchemaProtobuf): Schema {
     id,
     definition: new SchemaDefinition(definition),
   };
+}
+
+export function inspectPoliciesResponseFromProtobuf({
+  results,
+}: InspectPoliciesResponseProtobuf): InspectPoliciesResponse {
+  return {
+    policies: Object.fromEntries(
+      Object.entries(results).map(([id, result]) => [
+        id,
+        inspectedPolicyFromProtobuf(result),
+      ]),
+    ),
+  };
+}
+
+function inspectedPolicyFromProtobuf({
+  policyId,
+  actions,
+  attributes,
+  constants,
+  derivedRoles,
+  variables,
+}: InspectPoliciesResponse_Result): InspectedPolicy {
+  return {
+    id: policyId,
+    actions,
+    attributes: attributes.map(inspectedAttributeFromProtobuf),
+    constants: constants.map(inspectedConstantFromProtobuf),
+    derivedRoles: derivedRoles.map(inspectedDerivedRoleFromProtobuf),
+    variables: variables.map(inspectedVariableFromProtobuf),
+  };
+}
+
+function inspectedAttributeFromProtobuf({
+  kind,
+  name,
+}: InspectPoliciesResponse_Attribute): InspectedAttribute {
+  return {
+    kind: inspectedAttributeKindFromProtobuf(kind),
+    name,
+  };
+}
+
+function inspectedAttributeKindFromProtobuf(
+  kind: InspectPoliciesResponse_Attribute_Kind,
+): InspectedAttributeKind {
+  return translateEnum(
+    "InspectPoliciesResponse.Attribute.Kind",
+    InspectPoliciesResponse_Attribute_Kind,
+    kind,
+    {
+      [InspectPoliciesResponse_Attribute_Kind.KIND_UNSPECIFIED]: unexpected,
+      [InspectPoliciesResponse_Attribute_Kind.KIND_PRINCIPAL_ATTRIBUTE]:
+        InspectedAttributeKind.PRINCIPAL,
+      [InspectPoliciesResponse_Attribute_Kind.KIND_RESOURCE_ATTRIBUTE]:
+        InspectedAttributeKind.RESOURCE,
+    },
+  );
+}
+
+function inspectedConstantFromProtobuf({
+  kind,
+  name,
+  value,
+  source,
+  used,
+}: InspectPoliciesResponse_Constant): InspectedConstant {
+  return {
+    kind: inspectedConstantKindFromProtobuf(kind),
+    name,
+    value: value as Value,
+    source: source || undefined,
+    used,
+  };
+}
+
+function inspectedConstantKindFromProtobuf(
+  kind: InspectPoliciesResponse_Constant_Kind,
+): InspectedConstantKind {
+  return translateEnum(
+    "InspectPoliciesResponse.Constant.Kind",
+    InspectPoliciesResponse_Constant_Kind,
+    kind,
+    {
+      [InspectPoliciesResponse_Constant_Kind.KIND_UNSPECIFIED]: unexpected,
+      [InspectPoliciesResponse_Constant_Kind.KIND_EXPORTED]:
+        InspectedConstantKind.EXPORTED,
+      [InspectPoliciesResponse_Constant_Kind.KIND_IMPORTED]:
+        InspectedConstantKind.IMPORTED,
+      [InspectPoliciesResponse_Constant_Kind.KIND_LOCAL]:
+        InspectedConstantKind.LOCAL,
+      [InspectPoliciesResponse_Constant_Kind.KIND_UNDEFINED]:
+        InspectedConstantKind.UNDEFINED,
+      [InspectPoliciesResponse_Constant_Kind.KIND_UNKNOWN]:
+        InspectedConstantKind.UNKNOWN,
+    },
+  );
+}
+
+function inspectedDerivedRoleFromProtobuf({
+  kind,
+  name,
+  source,
+}: InspectPoliciesResponse_DerivedRole): InspectedDerivedRole {
+  return {
+    kind: inspectedDerivedRoleKindFromProtobuf(kind),
+    name,
+    source: source || undefined,
+  };
+}
+
+function inspectedDerivedRoleKindFromProtobuf(
+  kind: InspectPoliciesResponse_DerivedRole_Kind,
+): InspectedDerivedRoleKind {
+  return translateEnum(
+    "InspectPoliciesResponse.DerivedRole.Kind",
+    InspectPoliciesResponse_DerivedRole_Kind,
+    kind,
+    {
+      [InspectPoliciesResponse_DerivedRole_Kind.KIND_UNSPECIFIED]: unexpected,
+      [InspectPoliciesResponse_DerivedRole_Kind.KIND_EXPORTED]:
+        InspectedDerivedRoleKind.EXPORTED,
+      [InspectPoliciesResponse_DerivedRole_Kind.KIND_IMPORTED]:
+        InspectedDerivedRoleKind.IMPORTED,
+      [InspectPoliciesResponse_DerivedRole_Kind.KIND_UNDEFINED]:
+        InspectedDerivedRoleKind.UNDEFINED,
+    },
+  );
+}
+
+function inspectedVariableFromProtobuf({
+  kind,
+  name,
+  value,
+  source,
+  used,
+}: InspectPoliciesResponse_Variable): InspectedVariable {
+  return {
+    kind: inspectedVariableKindFromProtobuf(kind),
+    name,
+    definition: value || undefined,
+    source: source || undefined,
+    used,
+  };
+}
+
+function inspectedVariableKindFromProtobuf(
+  kind: InspectPoliciesResponse_Variable_Kind,
+): InspectedVariableKind {
+  return translateEnum(
+    "InspectPoliciesResponse.Variable.Kind",
+    InspectPoliciesResponse_Variable_Kind,
+    kind,
+    {
+      [InspectPoliciesResponse_Variable_Kind.KIND_UNSPECIFIED]: unexpected,
+      [InspectPoliciesResponse_Variable_Kind.KIND_EXPORTED]:
+        InspectedVariableKind.EXPORTED,
+      [InspectPoliciesResponse_Variable_Kind.KIND_IMPORTED]:
+        InspectedVariableKind.IMPORTED,
+      [InspectPoliciesResponse_Variable_Kind.KIND_LOCAL]:
+        InspectedVariableKind.LOCAL,
+      [InspectPoliciesResponse_Variable_Kind.KIND_UNDEFINED]:
+        InspectedVariableKind.UNDEFINED,
+      [InspectPoliciesResponse_Variable_Kind.KIND_UNKNOWN]:
+        InspectedVariableKind.UNKNOWN,
+    },
+  );
 }
 
 export function listPoliciesResponseFromProtobuf({

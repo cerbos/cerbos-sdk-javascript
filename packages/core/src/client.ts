@@ -7,6 +7,7 @@ import {
   enablePoliciesResponseFromProtobuf,
   getPoliciesResponseFromProtobuf,
   getSchemasResponseFromProtobuf,
+  inspectPoliciesResponseFromProtobuf,
   listPoliciesResponseFromProtobuf,
   listSchemasResponseFromProtobuf,
   planResourcesResponseFromProtobuf,
@@ -20,6 +21,7 @@ import {
   enablePoliciesRequestToProtobuf,
   getPoliciesRequestToProtobuf,
   getSchemasRequestToProtobuf,
+  inspectPoliciesRequestToProtobuf,
   listAccessLogEntriesRequestToProtobuf,
   listDecisionLogEntriesRequestToProtobuf,
   listPoliciesRequestToProtobuf,
@@ -48,6 +50,8 @@ import type {
   GetPoliciesResponse,
   GetSchemasRequest,
   GetSchemasResponse,
+  InspectPoliciesRequest,
+  InspectPoliciesResponse,
   IsAllowedRequest,
   ListAccessLogEntriesRequest,
   ListDecisionLogEntriesRequest,
@@ -871,6 +875,35 @@ export abstract class Client {
         "admin",
         "getSchema",
         getSchemasRequestToProtobuf(request),
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Inspect policies in the store.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials}; and
+   *
+   * - the Cerbos policy decision point server to be at least v0.35 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled.
+   *
+   * @example
+   * ```typescript
+   * const { policies } = await cerbos.inspectPolicies();
+   * ```
+   */
+  public async inspectPolicies(
+    request: InspectPoliciesRequest = {},
+    options?: RequestOptions,
+  ): Promise<InspectPoliciesResponse> {
+    return inspectPoliciesResponseFromProtobuf(
+      await this.unary(
+        "admin",
+        "inspectPolicies",
+        inspectPoliciesRequestToProtobuf(request),
         options,
       ),
     );

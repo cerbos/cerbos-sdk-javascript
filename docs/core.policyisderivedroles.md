@@ -45,6 +45,7 @@ policy
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 policy is [DerivedRoles](./core.derivedroles.md)

@@ -10,7 +10,9 @@ import type {
 } from "../protobuf/cerbos/engine/v1/engine";
 import type {
   Condition as ConditionProtobuf,
+  Constants as ConstantsProtobuf,
   DerivedRoles as DerivedRolesProtobuf,
+  ExportConstants as ExportConstantsProtobuf,
   ExportVariables as ExportVariablesProtobuf,
   Match as MatchProtobuf,
   Match_ExprList,
@@ -23,10 +25,13 @@ import type {
   ResourcePolicy as ResourcePolicyProtobuf,
   ResourceRule as ResourceRuleProtobuf,
   RoleDef,
+  RolePolicy as RolePolicyProtobuf,
+  RoleRule as RoleRuleProtobuf,
   Schemas,
   Schemas_Schema,
   Variables as VariablesProtobuf,
 } from "../protobuf/cerbos/policy/v1/policy";
+import { ScopePermissions as ScopePermissionsProtobuf } from "../protobuf/cerbos/policy/v1/policy";
 import type {
   AddOrUpdatePolicyRequest,
   AddOrUpdateSchemaRequest,
@@ -39,6 +44,7 @@ import type {
   EnablePolicyRequest,
   GetPolicyRequest,
   GetSchemaRequest,
+  InspectPoliciesRequest as InspectPoliciesRequestProtobuf,
   ListAuditLogEntriesRequest,
   ListPoliciesRequest as ListPoliciesRequestProtobuf,
   PlanResourcesRequest as PlanResourcesRequestProtobuf,
@@ -53,14 +59,17 @@ import type {
   AuxData,
   CheckResourcesRequest,
   Condition,
+  Constants,
   DeleteSchemasRequest,
   DerivedRoleDefinition,
   DerivedRoles,
   DisablePoliciesRequest,
   EnablePoliciesRequest,
+  ExportConstants,
   ExportVariables,
   GetPoliciesRequest,
   GetSchemasRequest,
+  InspectPoliciesRequest,
   JWT,
   ListAccessLogEntriesRequest,
   ListDecisionLogEntriesRequest,
@@ -80,6 +89,8 @@ import type {
   ResourcePolicy,
   ResourceQuery,
   ResourceRule,
+  RolePolicy,
+  RoleRule,
   SchemaDefinitionInput,
   SchemaInput,
   SchemaRef,
@@ -89,6 +100,7 @@ import type {
 import {
   Effect,
   SchemaDefinition,
+  ScopePermissions,
   auditLogFilterIsBetween,
   auditLogFilterIsSince,
   auditLogFilterIsTail,
@@ -97,9 +109,11 @@ import {
   matchIsMatchExpr,
   matchIsMatchNone,
   policyIsDerivedRoles,
+  policyIsExportConstants,
   policyIsExportVariables,
   policyIsPrincipalPolicy,
   policyIsResourcePolicy,
+  policyIsRolePolicy,
 } from "../types/external";
 
 const encoder = new TextEncoder();
@@ -141,6 +155,13 @@ function policyTypeToProtobuf(
     };
   }
 
+  if (policyIsExportConstants(policy)) {
+    return {
+      $case: "exportConstants",
+      exportConstants: exportConstantsToProtobuf(policy),
+    };
+  }
+
   if (policyIsExportVariables(policy)) {
     return {
       $case: "exportVariables",
@@ -162,15 +183,23 @@ function policyTypeToProtobuf(
     };
   }
 
+  if (policyIsRolePolicy(policy)) {
+    return {
+      $case: "rolePolicy",
+      rolePolicy: rolePolicyToProtobuf(policy),
+    };
+  }
+
   throw new Error(`Unknown policy type: ${JSON.stringify(policy, null, 2)}`);
 }
 
 function derivedRolesToProtobuf({
-  derivedRoles: { name, definitions, variables },
+  derivedRoles: { name, definitions, constants, variables },
 }: DerivedRoles): DerivedRolesProtobuf {
   return {
     name,
     definitions: definitions.map(derivedRoleDefinitionToProtobuf),
+    constants: constants && constantsToProtobuf(constants),
     variables: variables && variablesToProtobuf(variables),
   };
 }
@@ -242,6 +271,25 @@ function matchesToProtobuf({ of }: Matches): Match_ExprList {
   };
 }
 
+function constantsToProtobuf({
+  import: imports = [],
+  local = {},
+}: Constants): ConstantsProtobuf {
+  return {
+    import: imports,
+    local,
+  };
+}
+
+function exportConstantsToProtobuf({
+  exportConstants: { name, definitions },
+}: ExportConstants): ExportConstantsProtobuf {
+  return {
+    name,
+    definitions,
+  };
+}
+
 function variablesToProtobuf({
   import: imports = [],
   local = {},
@@ -262,13 +310,23 @@ function exportVariablesToProtobuf({
 }
 
 function principalPolicyToProtobuf({
-  principalPolicy: { principal, version, rules, scope = "", variables },
+  principalPolicy: {
+    principal,
+    version,
+    rules,
+    scope = "",
+    scopePermissions,
+    constants,
+    variables,
+  },
 }: PrincipalPolicy): PrincipalPolicyProtobuf {
   return {
     principal,
     version,
     rules: rules.map(principalRuleToProtobuf),
     scope,
+    scopePermissions: scopePermissionsToProtobuf(scopePermissions),
+    constants: constants && constantsToProtobuf(constants),
     variables: variables && variablesToProtobuf(variables),
   };
 }
@@ -297,6 +355,21 @@ function principalRuleActionToProtobuf({
     name,
     output: output && outputToProtobuf(output),
   };
+}
+
+function scopePermissionsToProtobuf(
+  scopePermissions: ScopePermissions | undefined,
+): ScopePermissionsProtobuf {
+  switch (scopePermissions) {
+    case ScopePermissions.OVERRIDE_PARENT:
+      return ScopePermissionsProtobuf.SCOPE_PERMISSIONS_OVERRIDE_PARENT;
+
+    case ScopePermissions.REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS:
+      return ScopePermissionsProtobuf.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS;
+
+    default:
+      return ScopePermissionsProtobuf.SCOPE_PERMISSIONS_UNSPECIFIED;
+  }
 }
 
 function effectToProtobuf(effect: Effect): EffectProtobuf {
@@ -329,7 +402,9 @@ function resourcePolicyToProtobuf({
     importDerivedRoles = [],
     rules,
     scope = "",
+    scopePermissions,
     schemas,
+    constants,
     variables,
   },
 }: ResourcePolicy): ResourcePolicyProtobuf {
@@ -339,7 +414,9 @@ function resourcePolicyToProtobuf({
     importDerivedRoles,
     rules: rules.map(resourceRuleToProtobuf),
     scope,
+    scopePermissions: scopePermissionsToProtobuf(scopePermissions),
     schemas: schemas && policySchemasToProtobuf(schemas),
+    constants: constants && constantsToProtobuf(constants),
     variables: variables && variablesToProtobuf(variables),
   };
 }
@@ -361,6 +438,28 @@ function resourceRuleToProtobuf({
     condition: condition && conditionToProtobuf(condition),
     name,
     output: output && outputToProtobuf(output),
+  };
+}
+
+function rolePolicyToProtobuf({
+  rolePolicy: { role, parentRoles, scope, scopePermissions, rules },
+}: RolePolicy): RolePolicyProtobuf {
+  return {
+    policyType: { $case: "role", role },
+    parentRoles: parentRoles ?? [],
+    scope: scope ?? "",
+    scopePermissions: scopePermissionsToProtobuf(scopePermissions),
+    rules: rules.map(roleRuleToProtobuf),
+  };
+}
+
+function roleRuleToProtobuf({
+  resource,
+  allowActions,
+}: RoleRule): RoleRuleProtobuf {
+  return {
+    resource,
+    allowActions,
   };
 }
 
@@ -597,13 +696,31 @@ function durationToProtobuf(duration: number): Duration {
   };
 }
 
+export function inspectPoliciesRequestToProtobuf({
+  includeDisabled = false,
+  ids = [],
+  nameRegexp = "",
+  scopeRegexp = "",
+  versionRegexp = "",
+}: InspectPoliciesRequest): InspectPoliciesRequestProtobuf {
+  return {
+    policyId: ids,
+    includeDisabled,
+    nameRegexp,
+    scopeRegexp,
+    versionRegexp,
+  };
+}
+
 export function listPoliciesRequestToProtobuf({
   includeDisabled = false,
+  ids = [],
   nameRegexp = "",
   scopeRegexp = "",
   versionRegexp = "",
 }: ListPoliciesRequest): ListPoliciesRequestProtobuf {
   return {
+    policyId: ids,
     includeDisabled,
     nameRegexp,
     scopeRegexp,

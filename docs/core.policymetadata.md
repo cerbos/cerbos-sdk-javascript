@@ -45,7 +45,7 @@ Description
 
 </td><td>
 
-Record&lt;string, string \| undefined&gt;
+Record&lt;string, string&gt;
 
 
 </td><td>

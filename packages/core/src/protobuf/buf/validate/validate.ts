@@ -3,7 +3,6 @@
 
 /* eslint-disable */
 import { type Duration } from "../../google/protobuf/duration";
-import { type Constraint } from "./expression";
 
 export const protobufPackage = "buf.validate";
 
@@ -22,14 +21,20 @@ export enum KnownRegex {
   KNOWN_REGEX_HTTP_HEADER_VALUE = 2,
 }
 
+export interface Constraint {
+  id?: string | undefined;
+  message?: string | undefined;
+  expression?: string | undefined;
+}
+
 export interface OneofConstraints {
   required?: boolean | undefined;
 }
 
 export interface FieldConstraints {
   cel: Constraint[];
-  required: boolean;
-  ignore: Ignore;
+  required?: boolean | undefined;
+  ignore?: Ignore | undefined;
   type?:
     | { $case: "float"; float: FloatRules }
     | { $case: "double"; double: DoubleRules }
@@ -53,8 +58,12 @@ export interface FieldConstraints {
     | { $case: "duration"; duration: DurationRules }
     | { $case: "timestamp"; timestamp: TimestampRules }
     | undefined;
-  skipped: boolean;
-  ignoreEmpty: boolean;
+  skipped?: boolean | undefined;
+  ignoreEmpty?: boolean | undefined;
+}
+
+export interface PredefinedConstraints {
+  cel: Constraint[];
 }
 
 export interface FloatRules {
@@ -69,7 +78,8 @@ export interface FloatRules {
     | undefined;
   in: number[];
   notIn: number[];
-  finite: boolean;
+  finite?: boolean | undefined;
+  example: number[];
 }
 
 export interface DoubleRules {
@@ -84,7 +94,8 @@ export interface DoubleRules {
     | undefined;
   in: number[];
   notIn: number[];
-  finite: boolean;
+  finite?: boolean | undefined;
+  example: number[];
 }
 
 export interface Int32Rules {
@@ -99,6 +110,7 @@ export interface Int32Rules {
     | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface Int64Rules {
@@ -113,6 +125,7 @@ export interface Int64Rules {
     | undefined;
   in: string[];
   notIn: string[];
+  example: string[];
 }
 
 export interface UInt32Rules {
@@ -127,6 +140,7 @@ export interface UInt32Rules {
     | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface UInt64Rules {
@@ -141,6 +155,7 @@ export interface UInt64Rules {
     | undefined;
   in: string[];
   notIn: string[];
+  example: string[];
 }
 
 export interface SInt32Rules {
@@ -155,6 +170,7 @@ export interface SInt32Rules {
     | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface SInt64Rules {
@@ -169,6 +185,7 @@ export interface SInt64Rules {
     | undefined;
   in: string[];
   notIn: string[];
+  example: string[];
 }
 
 export interface Fixed32Rules {
@@ -183,6 +200,7 @@ export interface Fixed32Rules {
     | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface Fixed64Rules {
@@ -197,6 +215,7 @@ export interface Fixed64Rules {
     | undefined;
   in: string[];
   notIn: string[];
+  example: string[];
 }
 
 export interface SFixed32Rules {
@@ -211,6 +230,7 @@ export interface SFixed32Rules {
     | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface SFixed64Rules {
@@ -225,10 +245,12 @@ export interface SFixed64Rules {
     | undefined;
   in: string[];
   notIn: string[];
+  example: string[];
 }
 
 export interface BoolRules {
   const?: boolean | undefined;
+  example: boolean[];
 }
 
 export interface StringRules {
@@ -267,6 +289,7 @@ export interface StringRules {
     | { $case: "wellKnownRegex"; wellKnownRegex: KnownRegex }
     | undefined;
   strict?: boolean | undefined;
+  example: string[];
 }
 
 export interface BytesRules {
@@ -285,6 +308,7 @@ export interface BytesRules {
     | { $case: "ipv4"; ipv4: boolean }
     | { $case: "ipv6"; ipv6: boolean }
     | undefined;
+  example: Uint8Array[];
 }
 
 export interface EnumRules {
@@ -292,6 +316,7 @@ export interface EnumRules {
   definedOnly?: boolean | undefined;
   in: number[];
   notIn: number[];
+  example: number[];
 }
 
 export interface RepeatedRules {
@@ -325,6 +350,7 @@ export interface DurationRules {
     | undefined;
   in: Duration[];
   notIn: Duration[];
+  example: Duration[];
 }
 
 export interface TimestampRules {
@@ -340,4 +366,5 @@ export interface TimestampRules {
     | { $case: "gtNow"; gtNow: boolean }
     | undefined;
   within?: Duration | undefined;
+  example: Date[];
 }
