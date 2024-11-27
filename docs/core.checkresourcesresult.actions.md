@@ -9,5 +9,5 @@ The policy decisions for each action.
 **Signature:**
 
 ```typescript
-actions: Record<string, Effect | undefined>;
+actions: Record<string, Effect>;
 ```

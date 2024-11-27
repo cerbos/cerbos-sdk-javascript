@@ -14,6 +14,11 @@ unreleased:
       details: Requires a policy decision point server running Cerbos 0.40+.
       pull: 1051
 
+  changed:
+    - summary: Stop adding explicit `undefined`s in `Record` values
+      details: TypeScript provides the [`noUncheckedIndexedAccess`](https://www.typescriptlang.org/tsconfig/#noUncheckedIndexedAccess) compiler option for this purpose.
+      pull: 1051
+
   bumped:
     uuid:
       to: 11.0.3

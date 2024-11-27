@@ -18,6 +18,10 @@
 
 ### Changed
 
+- Stop adding explicit `undefined`s in `Record` values ([#1051](https://github.com/cerbos/cerbos-sdk-javascript/pull/1051))
+
+  TypeScript provides the [`noUncheckedIndexedAccess`](https://www.typescriptlang.org/tsconfig/#noUncheckedIndexedAccess) compiler option for this purpose.
+
 - Bump dependency on [uuid] to 11.0.3 ([#1037](https://github.com/cerbos/cerbos-sdk-javascript/pull/1037), [#1043](https://github.com/cerbos/cerbos-sdk-javascript/pull/1043))
 
 ## [0.18.1] - 2024-06-11

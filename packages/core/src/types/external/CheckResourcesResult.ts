@@ -19,7 +19,7 @@ export class CheckResourcesResult {
   /**
    * The policy decisions for each action.
    */
-  public actions: Record<string, Effect | undefined>;
+  public actions: Record<string, Effect>;
 
   /**
    * Any schema validation errors for the principal or resource attributes.

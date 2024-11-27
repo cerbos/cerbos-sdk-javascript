@@ -19,7 +19,7 @@ export interface PolicyMetadata {
   /**
    * Free-form data, for auditing purposes.
    */
-  annotations: Record<string, string | undefined>;
+  annotations: Record<string, string>;
 
   /**
    * Hash of policy contents.

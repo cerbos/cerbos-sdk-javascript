@@ -468,7 +468,7 @@ function checkResourcesResultFromProtobuf({
 
 function actionsFromProtobuf(
   actions: Record<string, EffectProtobuf>,
-): Record<string, Effect | undefined> {
+): Record<string, Effect> {
   return Object.fromEntries(
     Object.entries(actions).map(([action, effect]) => [
       action,

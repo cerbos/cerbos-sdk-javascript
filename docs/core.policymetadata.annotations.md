@@ -9,5 +9,5 @@ Free-form data, for auditing purposes.
 **Signature:**
 
 ```typescript
-annotations: Record<string, string | undefined>;
+annotations: Record<string, string>;
 ```
