@@ -372,20 +372,15 @@ export const Value: MessageFns<Value> & AnyValueWrapperFns = {
     const obj: any = {};
     if (message.kind?.$case === "nullValue") {
       obj.nullValue = nullValueToJSON(message.kind.nullValue);
-    }
-    if (message.kind?.$case === "numberValue") {
+    } else if (message.kind?.$case === "numberValue") {
       obj.numberValue = message.kind.numberValue;
-    }
-    if (message.kind?.$case === "stringValue") {
+    } else if (message.kind?.$case === "stringValue") {
       obj.stringValue = message.kind.stringValue;
-    }
-    if (message.kind?.$case === "boolValue") {
+    } else if (message.kind?.$case === "boolValue") {
       obj.boolValue = message.kind.boolValue;
-    }
-    if (message.kind?.$case === "structValue") {
+    } else if (message.kind?.$case === "structValue") {
       obj.structValue = message.kind.structValue;
-    }
-    if (message.kind?.$case === "listValue") {
+    } else if (message.kind?.$case === "listValue") {
       obj.listValue = message.kind.listValue;
     }
     return obj;

@@ -328,24 +328,19 @@ export const Policy: MessageFns<Policy> = {
       obj.resourcePolicy = ResourcePolicy.toJSON(
         message.policyType.resourcePolicy,
       );
-    }
-    if (message.policyType?.$case === "principalPolicy") {
+    } else if (message.policyType?.$case === "principalPolicy") {
       obj.principalPolicy = PrincipalPolicy.toJSON(
         message.policyType.principalPolicy,
       );
-    }
-    if (message.policyType?.$case === "derivedRoles") {
+    } else if (message.policyType?.$case === "derivedRoles") {
       obj.derivedRoles = DerivedRoles.toJSON(message.policyType.derivedRoles);
-    }
-    if (message.policyType?.$case === "exportVariables") {
+    } else if (message.policyType?.$case === "exportVariables") {
       obj.exportVariables = ExportVariables.toJSON(
         message.policyType.exportVariables,
       );
-    }
-    if (message.policyType?.$case === "rolePolicy") {
+    } else if (message.policyType?.$case === "rolePolicy") {
       obj.rolePolicy = RolePolicy.toJSON(message.policyType.rolePolicy);
-    }
-    if (message.policyType?.$case === "exportConstants") {
+    } else if (message.policyType?.$case === "exportConstants") {
       obj.exportConstants = ExportConstants.toJSON(
         message.policyType.exportConstants,
       );
@@ -1094,8 +1089,7 @@ export const Condition: MessageFns<Condition> = {
     const obj: any = {};
     if (message.condition?.$case === "match") {
       obj.match = Match.toJSON(message.condition.match);
-    }
-    if (message.condition?.$case === "script") {
+    } else if (message.condition?.$case === "script") {
       obj.script = message.condition.script;
     }
     return obj;
@@ -1121,14 +1115,11 @@ export const Match: MessageFns<Match> = {
     const obj: any = {};
     if (message.op?.$case === "all") {
       obj.all = Match_ExprList.toJSON(message.op.all);
-    }
-    if (message.op?.$case === "any") {
+    } else if (message.op?.$case === "any") {
       obj.any = Match_ExprList.toJSON(message.op.any);
-    }
-    if (message.op?.$case === "none") {
+    } else if (message.op?.$case === "none") {
       obj.none = Match_ExprList.toJSON(message.op.none);
-    }
-    if (message.op?.$case === "expr") {
+    } else if (message.op?.$case === "expr") {
       obj.expr = message.op.expr;
     }
     return obj;

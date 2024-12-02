@@ -370,13 +370,11 @@ export const PlanResourcesFilter_Expression_Operand: MessageFns<PlanResourcesFil
       const obj: any = {};
       if (message.node?.$case === "value") {
         obj.value = message.node.value;
-      }
-      if (message.node?.$case === "expression") {
+      } else if (message.node?.$case === "expression") {
         obj.expression = PlanResourcesFilter_Expression.toJSON(
           message.node.expression,
         );
-      }
-      if (message.node?.$case === "variable") {
+      } else if (message.node?.$case === "variable") {
         obj.variable = message.node.variable;
       }
       return obj;
