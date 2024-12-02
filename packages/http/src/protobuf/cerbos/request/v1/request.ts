@@ -634,16 +634,13 @@ export const ListAuditLogEntriesRequest: MessageFns<ListAuditLogEntriesRequest> 
       }
       if (message.filter?.$case === "tail") {
         obj.tail = Math.round(message.filter.tail);
-      }
-      if (message.filter?.$case === "between") {
+      } else if (message.filter?.$case === "between") {
         obj.between = ListAuditLogEntriesRequest_TimeRange.toJSON(
           message.filter.between,
         );
-      }
-      if (message.filter?.$case === "since") {
+      } else if (message.filter?.$case === "since") {
         obj.since = Duration.toJSON(message.filter.since);
-      }
-      if (message.filter?.$case === "lookup") {
+      } else if (message.filter?.$case === "lookup") {
         obj.lookup = message.filter.lookup;
       }
       return obj;

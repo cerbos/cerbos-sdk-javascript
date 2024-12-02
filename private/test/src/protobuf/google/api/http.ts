@@ -219,20 +219,15 @@ export const HttpRule: MessageFns<HttpRule> = {
     }
     if (message.pattern?.$case === "get") {
       obj.get = message.pattern.get;
-    }
-    if (message.pattern?.$case === "put") {
+    } else if (message.pattern?.$case === "put") {
       obj.put = message.pattern.put;
-    }
-    if (message.pattern?.$case === "post") {
+    } else if (message.pattern?.$case === "post") {
       obj.post = message.pattern.post;
-    }
-    if (message.pattern?.$case === "delete") {
+    } else if (message.pattern?.$case === "delete") {
       obj.delete = message.pattern.delete;
-    }
-    if (message.pattern?.$case === "patch") {
+    } else if (message.pattern?.$case === "patch") {
       obj.patch = message.pattern.patch;
-    }
-    if (message.pattern?.$case === "custom") {
+    } else if (message.pattern?.$case === "custom") {
       obj.custom = CustomHttpPattern.toJSON(message.pattern.custom);
     }
     if (message.body !== "") {

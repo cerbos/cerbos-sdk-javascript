@@ -582,8 +582,7 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
       obj.checkResources = DecisionLogEntry_CheckResources.toJSON(
         message.method.checkResources,
       );
-    }
-    if (message.method?.$case === "planResources") {
+    } else if (message.method?.$case === "planResources") {
       obj.planResources = DecisionLogEntry_PlanResources.toJSON(
         message.method.planResources,
       );

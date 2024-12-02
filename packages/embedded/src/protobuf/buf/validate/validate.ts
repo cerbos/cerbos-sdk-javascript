@@ -619,65 +619,45 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
     }
     if (message.type?.$case === "float") {
       obj.float = FloatRules.toJSON(message.type.float);
-    }
-    if (message.type?.$case === "double") {
+    } else if (message.type?.$case === "double") {
       obj.double = DoubleRules.toJSON(message.type.double);
-    }
-    if (message.type?.$case === "int32") {
+    } else if (message.type?.$case === "int32") {
       obj.int32 = Int32Rules.toJSON(message.type.int32);
-    }
-    if (message.type?.$case === "int64") {
+    } else if (message.type?.$case === "int64") {
       obj.int64 = Int64Rules.toJSON(message.type.int64);
-    }
-    if (message.type?.$case === "uint32") {
+    } else if (message.type?.$case === "uint32") {
       obj.uint32 = UInt32Rules.toJSON(message.type.uint32);
-    }
-    if (message.type?.$case === "uint64") {
+    } else if (message.type?.$case === "uint64") {
       obj.uint64 = UInt64Rules.toJSON(message.type.uint64);
-    }
-    if (message.type?.$case === "sint32") {
+    } else if (message.type?.$case === "sint32") {
       obj.sint32 = SInt32Rules.toJSON(message.type.sint32);
-    }
-    if (message.type?.$case === "sint64") {
+    } else if (message.type?.$case === "sint64") {
       obj.sint64 = SInt64Rules.toJSON(message.type.sint64);
-    }
-    if (message.type?.$case === "fixed32") {
+    } else if (message.type?.$case === "fixed32") {
       obj.fixed32 = Fixed32Rules.toJSON(message.type.fixed32);
-    }
-    if (message.type?.$case === "fixed64") {
+    } else if (message.type?.$case === "fixed64") {
       obj.fixed64 = Fixed64Rules.toJSON(message.type.fixed64);
-    }
-    if (message.type?.$case === "sfixed32") {
+    } else if (message.type?.$case === "sfixed32") {
       obj.sfixed32 = SFixed32Rules.toJSON(message.type.sfixed32);
-    }
-    if (message.type?.$case === "sfixed64") {
+    } else if (message.type?.$case === "sfixed64") {
       obj.sfixed64 = SFixed64Rules.toJSON(message.type.sfixed64);
-    }
-    if (message.type?.$case === "bool") {
+    } else if (message.type?.$case === "bool") {
       obj.bool = BoolRules.toJSON(message.type.bool);
-    }
-    if (message.type?.$case === "string") {
+    } else if (message.type?.$case === "string") {
       obj.string = StringRules.toJSON(message.type.string);
-    }
-    if (message.type?.$case === "bytes") {
+    } else if (message.type?.$case === "bytes") {
       obj.bytes = BytesRules.toJSON(message.type.bytes);
-    }
-    if (message.type?.$case === "enum") {
+    } else if (message.type?.$case === "enum") {
       obj.enum = EnumRules.toJSON(message.type.enum);
-    }
-    if (message.type?.$case === "repeated") {
+    } else if (message.type?.$case === "repeated") {
       obj.repeated = RepeatedRules.toJSON(message.type.repeated);
-    }
-    if (message.type?.$case === "map") {
+    } else if (message.type?.$case === "map") {
       obj.map = MapRules.toJSON(message.type.map);
-    }
-    if (message.type?.$case === "any") {
+    } else if (message.type?.$case === "any") {
       obj.any = AnyRules.toJSON(message.type.any);
-    }
-    if (message.type?.$case === "duration") {
+    } else if (message.type?.$case === "duration") {
       obj.duration = DurationRules.toJSON(message.type.duration);
-    }
-    if (message.type?.$case === "timestamp") {
+    } else if (message.type?.$case === "timestamp") {
       obj.timestamp = TimestampRules.toJSON(message.type.timestamp);
     }
     if (message.skipped !== undefined && message.skipped !== false) {
@@ -742,14 +722,12 @@ export const FloatRules: MessageFns<FloatRules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = message.lessThan.lt;
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = message.lessThan.lte;
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = message.greaterThan.gt;
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = message.greaterThan.gte;
     }
     if (message.in?.length) {
@@ -802,14 +780,12 @@ export const DoubleRules: MessageFns<DoubleRules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = message.lessThan.lt;
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = message.lessThan.lte;
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = message.greaterThan.gt;
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = message.greaterThan.gte;
     }
     if (message.in?.length) {
@@ -861,14 +837,12 @@ export const Int32Rules: MessageFns<Int32Rules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = Math.round(message.lessThan.lt);
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = Math.round(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = Math.round(message.greaterThan.gt);
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = Math.round(message.greaterThan.gte);
     }
     if (message.in?.length) {
@@ -917,14 +891,12 @@ export const Int64Rules: MessageFns<Int64Rules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = Math.round(message.lessThan.lt);
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = Math.round(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = Math.round(message.greaterThan.gt);
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = Math.round(message.greaterThan.gte);
     }
     if (message.in?.length) {
@@ -973,14 +945,12 @@ export const UInt32Rules: MessageFns<UInt32Rules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = Math.round(message.lessThan.lt);
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = Math.round(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = Math.round(message.greaterThan.gt);
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = Math.round(message.greaterThan.gte);
     }
     if (message.in?.length) {
@@ -1029,14 +999,12 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = Math.round(message.lessThan.lt);
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = Math.round(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = Math.round(message.greaterThan.gt);
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = Math.round(message.greaterThan.gte);
     }
     if (message.in?.length) {
@@ -1085,14 +1053,12 @@ export const SInt32Rules: MessageFns<SInt32Rules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = Math.round(message.lessThan.lt);
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = Math.round(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = Math.round(message.greaterThan.gt);
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = Math.round(message.greaterThan.gte);
     }
     if (message.in?.length) {
@@ -1141,14 +1107,12 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = Math.round(message.lessThan.lt);
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = Math.round(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = Math.round(message.greaterThan.gt);
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = Math.round(message.greaterThan.gte);
     }
     if (message.in?.length) {
@@ -1197,14 +1161,12 @@ export const Fixed32Rules: MessageFns<Fixed32Rules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = Math.round(message.lessThan.lt);
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = Math.round(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = Math.round(message.greaterThan.gt);
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = Math.round(message.greaterThan.gte);
     }
     if (message.in?.length) {
@@ -1253,14 +1215,12 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = Math.round(message.lessThan.lt);
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = Math.round(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = Math.round(message.greaterThan.gt);
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = Math.round(message.greaterThan.gte);
     }
     if (message.in?.length) {
@@ -1309,14 +1269,12 @@ export const SFixed32Rules: MessageFns<SFixed32Rules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = Math.round(message.lessThan.lt);
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = Math.round(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = Math.round(message.greaterThan.gt);
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = Math.round(message.greaterThan.gte);
     }
     if (message.in?.length) {
@@ -1365,14 +1323,12 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = Math.round(message.lessThan.lt);
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = Math.round(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = Math.round(message.greaterThan.gt);
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = Math.round(message.greaterThan.gte);
     }
     if (message.in?.length) {
@@ -1578,56 +1534,39 @@ export const StringRules: MessageFns<StringRules> = {
     }
     if (message.wellKnown?.$case === "email") {
       obj.email = message.wellKnown.email;
-    }
-    if (message.wellKnown?.$case === "hostname") {
+    } else if (message.wellKnown?.$case === "hostname") {
       obj.hostname = message.wellKnown.hostname;
-    }
-    if (message.wellKnown?.$case === "ip") {
+    } else if (message.wellKnown?.$case === "ip") {
       obj.ip = message.wellKnown.ip;
-    }
-    if (message.wellKnown?.$case === "ipv4") {
+    } else if (message.wellKnown?.$case === "ipv4") {
       obj.ipv4 = message.wellKnown.ipv4;
-    }
-    if (message.wellKnown?.$case === "ipv6") {
+    } else if (message.wellKnown?.$case === "ipv6") {
       obj.ipv6 = message.wellKnown.ipv6;
-    }
-    if (message.wellKnown?.$case === "uri") {
+    } else if (message.wellKnown?.$case === "uri") {
       obj.uri = message.wellKnown.uri;
-    }
-    if (message.wellKnown?.$case === "uriRef") {
+    } else if (message.wellKnown?.$case === "uriRef") {
       obj.uriRef = message.wellKnown.uriRef;
-    }
-    if (message.wellKnown?.$case === "address") {
+    } else if (message.wellKnown?.$case === "address") {
       obj.address = message.wellKnown.address;
-    }
-    if (message.wellKnown?.$case === "uuid") {
+    } else if (message.wellKnown?.$case === "uuid") {
       obj.uuid = message.wellKnown.uuid;
-    }
-    if (message.wellKnown?.$case === "tuuid") {
+    } else if (message.wellKnown?.$case === "tuuid") {
       obj.tuuid = message.wellKnown.tuuid;
-    }
-    if (message.wellKnown?.$case === "ipWithPrefixlen") {
+    } else if (message.wellKnown?.$case === "ipWithPrefixlen") {
       obj.ipWithPrefixlen = message.wellKnown.ipWithPrefixlen;
-    }
-    if (message.wellKnown?.$case === "ipv4WithPrefixlen") {
+    } else if (message.wellKnown?.$case === "ipv4WithPrefixlen") {
       obj.ipv4WithPrefixlen = message.wellKnown.ipv4WithPrefixlen;
-    }
-    if (message.wellKnown?.$case === "ipv6WithPrefixlen") {
+    } else if (message.wellKnown?.$case === "ipv6WithPrefixlen") {
       obj.ipv6WithPrefixlen = message.wellKnown.ipv6WithPrefixlen;
-    }
-    if (message.wellKnown?.$case === "ipPrefix") {
+    } else if (message.wellKnown?.$case === "ipPrefix") {
       obj.ipPrefix = message.wellKnown.ipPrefix;
-    }
-    if (message.wellKnown?.$case === "ipv4Prefix") {
+    } else if (message.wellKnown?.$case === "ipv4Prefix") {
       obj.ipv4Prefix = message.wellKnown.ipv4Prefix;
-    }
-    if (message.wellKnown?.$case === "ipv6Prefix") {
+    } else if (message.wellKnown?.$case === "ipv6Prefix") {
       obj.ipv6Prefix = message.wellKnown.ipv6Prefix;
-    }
-    if (message.wellKnown?.$case === "hostAndPort") {
+    } else if (message.wellKnown?.$case === "hostAndPort") {
       obj.hostAndPort = message.wellKnown.hostAndPort;
-    }
-    if (message.wellKnown?.$case === "wellKnownRegex") {
+    } else if (message.wellKnown?.$case === "wellKnownRegex") {
       obj.wellKnownRegex = knownRegexToJSON(message.wellKnown.wellKnownRegex);
     }
     if (message.strict !== undefined && message.strict !== false) {
@@ -1712,11 +1651,9 @@ export const BytesRules: MessageFns<BytesRules> = {
     }
     if (message.wellKnown?.$case === "ip") {
       obj.ip = message.wellKnown.ip;
-    }
-    if (message.wellKnown?.$case === "ipv4") {
+    } else if (message.wellKnown?.$case === "ipv4") {
       obj.ipv4 = message.wellKnown.ipv4;
-    }
-    if (message.wellKnown?.$case === "ipv6") {
+    } else if (message.wellKnown?.$case === "ipv6") {
       obj.ipv6 = message.wellKnown.ipv6;
     }
     if (message.example?.length) {
@@ -1885,14 +1822,12 @@ export const DurationRules: MessageFns<DurationRules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = Duration.toJSON(message.lessThan.lt);
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = Duration.toJSON(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = Duration.toJSON(message.greaterThan.gt);
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = Duration.toJSON(message.greaterThan.gte);
     }
     if (message.in?.length) {
@@ -1942,20 +1877,16 @@ export const TimestampRules: MessageFns<TimestampRules> = {
     }
     if (message.lessThan?.$case === "lt") {
       obj.lt = message.lessThan.lt.toISOString();
-    }
-    if (message.lessThan?.$case === "lte") {
+    } else if (message.lessThan?.$case === "lte") {
       obj.lte = message.lessThan.lte.toISOString();
-    }
-    if (message.lessThan?.$case === "ltNow") {
+    } else if (message.lessThan?.$case === "ltNow") {
       obj.ltNow = message.lessThan.ltNow;
     }
     if (message.greaterThan?.$case === "gt") {
       obj.gt = message.greaterThan.gt.toISOString();
-    }
-    if (message.greaterThan?.$case === "gte") {
+    } else if (message.greaterThan?.$case === "gte") {
       obj.gte = message.greaterThan.gte.toISOString();
-    }
-    if (message.greaterThan?.$case === "gtNow") {
+    } else if (message.greaterThan?.$case === "gtNow") {
       obj.gtNow = message.greaterThan.gtNow;
     }
     if (message.within !== undefined) {

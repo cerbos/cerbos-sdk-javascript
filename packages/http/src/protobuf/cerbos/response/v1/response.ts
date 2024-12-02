@@ -1223,8 +1223,7 @@ export const ListAuditLogEntriesResponse: MessageFns<ListAuditLogEntriesResponse
         obj.accessLogEntry = AccessLogEntry.toJSON(
           message.entry.accessLogEntry,
         );
-      }
-      if (message.entry?.$case === "decisionLogEntry") {
+      } else if (message.entry?.$case === "decisionLogEntry") {
         obj.decisionLogEntry = DecisionLogEntry.toJSON(
           message.entry.decisionLogEntry,
         );

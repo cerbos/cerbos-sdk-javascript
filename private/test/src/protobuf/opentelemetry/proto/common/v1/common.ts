@@ -212,23 +212,17 @@ export const AnyValue: MessageFns<AnyValue> = {
     const obj: any = {};
     if (message.value?.$case === "stringValue") {
       obj.stringValue = message.value.stringValue;
-    }
-    if (message.value?.$case === "boolValue") {
+    } else if (message.value?.$case === "boolValue") {
       obj.boolValue = message.value.boolValue;
-    }
-    if (message.value?.$case === "intValue") {
+    } else if (message.value?.$case === "intValue") {
       obj.intValue = message.value.intValue;
-    }
-    if (message.value?.$case === "doubleValue") {
+    } else if (message.value?.$case === "doubleValue") {
       obj.doubleValue = message.value.doubleValue;
-    }
-    if (message.value?.$case === "arrayValue") {
+    } else if (message.value?.$case === "arrayValue") {
       obj.arrayValue = ArrayValue.toJSON(message.value.arrayValue);
-    }
-    if (message.value?.$case === "kvlistValue") {
+    } else if (message.value?.$case === "kvlistValue") {
       obj.kvlistValue = KeyValueList.toJSON(message.value.kvlistValue);
-    }
-    if (message.value?.$case === "bytesValue") {
+    } else if (message.value?.$case === "bytesValue") {
       obj.bytesValue = base64FromBytes(message.value.bytesValue);
     }
     return obj;
