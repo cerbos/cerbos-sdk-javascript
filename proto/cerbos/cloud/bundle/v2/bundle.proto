@@ -1,9 +1,6 @@
 // Copyright 2021-2024 Zenauth Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
-// Copyright 2021-2024 Zenauth Ltd.
-// SPDX-License-Identifier: Apache-2.0
-
 syntax = "proto3";
 
 package cerbos.cloud.bundle.v2;
