@@ -7,7 +7,7 @@
     "test:servers:stop": "servers/stop"
   },
   "devDependencies": {
-    "@bufbuild/protobuf": "2.2.2",
+    "@bufbuild/protobuf": "2.2.3",
     "@cerbos/core": "workspace:*",
     "@cerbos/embedded": "workspace:*",
     "@cerbos/files": "workspace:*",
@@ -23,7 +23,7 @@
     "@opentelemetry/semantic-conventions": "1.28.0",
     "@testing-library/react": "16.1.0",
     "@testing-library/user-event": "14.5.2",
-    "@types/react": "19.0.0",
+    "@types/react": "19.0.2",
     "@types/semver": "7.5.8",
     "jose": "5.9.6",
     "jsdom": "25.0.1",
