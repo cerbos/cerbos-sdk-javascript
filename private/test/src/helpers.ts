@@ -131,6 +131,7 @@ export async function fetchSpans(
         traceId,
         startTime: undefined,
         endTime: undefined,
+        rawTraces: false,
       });
 
       for await (const chunk of stream) {

@@ -27,6 +27,7 @@ export interface GetTraceRequest {
   traceId: string;
   startTime: Date | undefined;
   endTime: Date | undefined;
+  rawTraces: boolean;
 }
 
 export interface TraceQueryParameters {
@@ -38,6 +39,7 @@ export interface TraceQueryParameters {
   durationMin: Duration | undefined;
   durationMax: Duration | undefined;
   searchDepth: number;
+  rawTraces: boolean;
 }
 
 export interface TraceQueryParameters_AttributesEntry {
@@ -70,7 +72,12 @@ export interface GetOperationsResponse {
 }
 
 function createBaseGetTraceRequest(): GetTraceRequest {
-  return { traceId: "", startTime: undefined, endTime: undefined };
+  return {
+    traceId: "",
+    startTime: undefined,
+    endTime: undefined,
+    rawTraces: false,
+  };
 }
 
 export const GetTraceRequest: MessageFns<GetTraceRequest> = {
@@ -92,6 +99,9 @@ export const GetTraceRequest: MessageFns<GetTraceRequest> = {
         toTimestamp(message.endTime),
         writer.uint32(26).fork(),
       ).join();
+    }
+    if (message.rawTraces !== false) {
+      writer.uint32(32).bool(message.rawTraces);
     }
     return writer;
   },
@@ -132,6 +142,14 @@ export const GetTraceRequest: MessageFns<GetTraceRequest> = {
           );
           continue;
         }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.rawTraces = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -150,6 +168,9 @@ export const GetTraceRequest: MessageFns<GetTraceRequest> = {
       endTime: isSet(object.endTime)
         ? fromJsonTimestamp(object.endTime)
         : undefined,
+      rawTraces: isSet(object.rawTraces)
+        ? globalThis.Boolean(object.rawTraces)
+        : false,
     };
   },
 
@@ -163,6 +184,9 @@ export const GetTraceRequest: MessageFns<GetTraceRequest> = {
     }
     if (message.endTime !== undefined) {
       obj.endTime = message.endTime.toISOString();
+    }
+    if (message.rawTraces !== false) {
+      obj.rawTraces = message.rawTraces;
     }
     return obj;
   },
@@ -178,6 +202,7 @@ function createBaseTraceQueryParameters(): TraceQueryParameters {
     durationMin: undefined,
     durationMax: undefined,
     searchDepth: 0,
+    rawTraces: false,
   };
 }
 
@@ -218,6 +243,9 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
     }
     if (message.searchDepth !== 0) {
       writer.uint32(64).int32(message.searchDepth);
+    }
+    if (message.rawTraces !== false) {
+      writer.uint32(72).bool(message.rawTraces);
     }
     return writer;
   },
@@ -307,6 +335,14 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
           message.searchDepth = reader.int32();
           continue;
         }
+        case 9: {
+          if (tag !== 72) {
+            break;
+          }
+
+          message.rawTraces = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -348,6 +384,9 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
       searchDepth: isSet(object.searchDepth)
         ? globalThis.Number(object.searchDepth)
         : 0,
+      rawTraces: isSet(object.rawTraces)
+        ? globalThis.Boolean(object.rawTraces)
+        : false,
     };
   },
 
@@ -382,6 +421,9 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
     }
     if (message.searchDepth !== 0) {
       obj.searchDepth = Math.round(message.searchDepth);
+    }
+    if (message.rawTraces !== false) {
+      obj.rawTraces = message.rawTraces;
     }
     return obj;
   },
