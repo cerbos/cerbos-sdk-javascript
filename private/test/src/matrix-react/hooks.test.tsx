@@ -7,7 +7,6 @@ import {
   afterAll,
   afterEach,
   beforeAll,
-  beforeEach,
   describe,
   expect,
   it,
@@ -138,10 +137,6 @@ function testCerbosHook<TParams>(
 
     afterEach(() => {
       cleanup();
-    });
-
-    beforeEach(() => {
-      vi.clearAllMocks();
     });
 
     function render(

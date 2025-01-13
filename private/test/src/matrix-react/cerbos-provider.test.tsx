@@ -80,36 +80,41 @@ function App({ children }: PropsWithChildren<object>): ReactElement {
 
 describe("<CerbosProvider>", () => {
   const container = document.createElement("div");
+  let rerender: () => void;
 
-  const { rerender } = renderHook(useCerbos, { wrapper: App, container });
   it("correctly initializes ClientWithPrincipal", () => {
-    expect(client.withPrincipal).toHaveBeenLastCalledWith(
+    ({ rerender } = renderHook(useCerbos, { wrapper: App, container }));
+
+    expect(client.withPrincipal).toHaveBeenCalledOnce();
+    expect(client.withPrincipal).toHaveBeenCalledWith(
       getPrincipal(false),
       getAuxData(false),
     );
-    expect(client.withPrincipal).toHaveBeenCalledTimes(1);
   });
 
   it("re-initializes ClientWithPrincipal when principal changes", async () => {
     await userEvent.click(getByText(container, "switch user"));
-    expect(client.withPrincipal).toHaveBeenLastCalledWith(
+
+    expect(client.withPrincipal).toHaveBeenCalledOnce();
+    expect(client.withPrincipal).toHaveBeenCalledWith(
       getPrincipal(true),
       getAuxData(false),
     );
-    expect(client.withPrincipal).toHaveBeenCalledTimes(2);
   });
 
   it("re-initializes ClientWithPrincipal when auxData changes", async () => {
     await userEvent.click(getByText(container, "switch aux data"));
-    expect(client.withPrincipal).toHaveBeenLastCalledWith(
+
+    expect(client.withPrincipal).toHaveBeenCalledOnce();
+    expect(client.withPrincipal).toHaveBeenCalledWith(
       getPrincipal(true),
       getAuxData(true),
     );
-    expect(client.withPrincipal).toHaveBeenCalledTimes(3);
   });
 
   it("re-renders without parameter values does not cause re-initialization of ClientWithPrincipal", () => {
     rerender();
-    expect(client.withPrincipal).toHaveBeenCalledTimes(3);
+
+    expect(client.withPrincipal).not.toHaveBeenCalled();
   });
 });
