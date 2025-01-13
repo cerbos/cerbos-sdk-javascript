@@ -16,7 +16,7 @@ option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/store/v1;sto
 message StringMatch {
   message InList {
     repeated string values = 1 [(buf.validate.field).repeated = {
-      max_items: 50
+      max_items: 10
       items: {
         string: {min_len: 1}
       }
@@ -31,87 +31,101 @@ message StringMatch {
   }
 }
 
-message PolicyFilter {
-  repeated cerbos.policy.v1.Kind kinds = 1 [
-    (google.api.field_behavior) = OPTIONAL,
-    (buf.validate.field).repeated = {
-      unique: true
-      items: {
-        enum: {
-          not_in: [0]
-          defined_only: true
-        }
-      }
-    }
-  ];
-  StringMatch name = 2 [(google.api.field_behavior) = OPTIONAL];
-  StringMatch version = 3 [(google.api.field_behavior) = OPTIONAL];
-  StringMatch scope = 4 [(google.api.field_behavior) = OPTIONAL];
+message FileFilter {
+  optional StringMatch path = 1;
 }
 
-message ListPoliciesRequest {
+message ListFilesRequest {
   string store_id = 1 [(buf.validate.field).string.len = 12];
-  PolicyFilter filter = 2 [(google.api.field_behavior) = OPTIONAL];
+  optional FileFilter filter = 2;
 }
 
-message ListPoliciesResponse {
-  message Policy {
-    string key = 1;
-    cerbos.policy.v1.Kind kind = 2;
-    string name = 3;
-    string version = 4;
-    string scope = 5;
-    google.protobuf.Timestamp created_at = 6;
-  }
+message ListFilesResponse {
   int64 store_version = 1;
-  repeated Policy policies = 2;
+  repeated string files = 2;
 }
 
-message GetPoliciesRequest {
+message GetFilesRequest {
   string store_id = 1 [(buf.validate.field).string.len = 12];
-  repeated string policy_keys = 2 [(buf.validate.field).repeated = {
-    max_items: 50
+  repeated string files = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 10
+    unique: true
     items: {
       string: {min_len: 1}
     }
   }];
 }
 
-message GetPoliciesResponse {
-  int64 store_version = 1;
-  map<string, cerbos.policy.v1.Policy> policies = 2;
+message File {
+  string path = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 1024
+  }];
+  bytes contents = 2 [(buf.validate.field).bytes.min_len = 1];
 }
 
-message PolicyOp {
+message GetFilesResponse {
+  int64 store_version = 1;
+  repeated File files = 2;
+}
+
+message FileOp {
   oneof op {
     option (buf.validate.oneof).required = true;
-    cerbos.policy.v1.Policy add_or_update = 1;
+    File add_or_update = 1;
     string delete = 2;
   }
 }
 
-message ModifyPoliciesRequest {
+message ModifyFilesRequest {
   message Condition {
     int64 store_version_must_equal = 1 [(buf.validate.field).int64.gte = 0];
   }
 
   string store_id = 1 [(buf.validate.field).string.len = 12];
-  Condition condition = 2 [(google.api.field_behavior) = OPTIONAL];
-  repeated PolicyOp operations = 3 [(buf.validate.field).repeated.min_items = 1];
+  optional Condition condition = 2;
+  repeated FileOp operations = 3 [(buf.validate.field).repeated.min_items = 1];
 }
 
-message ModifyPoliciesResponse {
-  int64 new_store_version = 1;
+message ModifyFilesResponse {
+  message Error {
+    enum Cause {
+      CAUSE_UNSPECIFIED = 0;
+      CAUSE_INVALID_FILE_PATH = 1;
+      CAUSE_UNSUPPORTED_FILE_EXTENSION = 2;
+      CAUSE_INVALID_FILE_CONTENTS = 3;
+      CAUSE_DUPLICATE_FILE_PATH = 4;
+    }
+
+    string file = 1;
+    Cause cause = 2;
+    string details = 3;
+  }
+
+  message Failure {
+    repeated Error errors = 1;
+  }
+
+  message Success {
+    int64 new_store_version = 1;
+  }
+
+  oneof result {
+    option (buf.validate.oneof).required = true;
+    Success success = 1;
+    Failure failure = 2;
+  }
 }
 
 service CerbosStoreService {
   option (google.api.api_visibility).restriction = "EXPERIMENTAL";
 
-  rpc ListPolicies(ListPoliciesRequest) returns (ListPoliciesResponse) {
+  rpc ListFiles(ListFilesRequest) returns (ListFilesResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
   }
-  rpc GetPolicies(GetPoliciesRequest) returns (GetPoliciesResponse) {
+  rpc GetFiles(GetFilesRequest) returns (GetFilesResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
   }
-  rpc ModifyPolicies(ModifyPoliciesRequest) returns (ModifyPoliciesResponse) {}
+  rpc ModifyFiles(ModifyFilesRequest) returns (ModifyFilesResponse) {}
 }
