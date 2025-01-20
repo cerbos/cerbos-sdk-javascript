@@ -93,6 +93,7 @@ export interface RolePolicy {
 export interface RoleRule {
   resource: string;
   allowActions: string[];
+  condition: Condition | undefined;
 }
 
 export interface PrincipalPolicy {
@@ -1120,7 +1121,7 @@ export const RolePolicy: MessageFns<RolePolicy> = {
 };
 
 function createBaseRoleRule(): RoleRule {
-  return { resource: "", allowActions: [] };
+  return { resource: "", allowActions: [], condition: undefined };
 }
 
 export const RoleRule: MessageFns<RoleRule> = {
@@ -1133,6 +1134,9 @@ export const RoleRule: MessageFns<RoleRule> = {
     }
     for (const v of message.allowActions) {
       writer.uint32(18).string(v!);
+    }
+    if (message.condition !== undefined) {
+      Condition.encode(message.condition, writer.uint32(26).fork()).join();
     }
     return writer;
   },
@@ -1159,6 +1163,14 @@ export const RoleRule: MessageFns<RoleRule> = {
           }
 
           message.allowActions.push(reader.string());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.condition = Condition.decode(reader, reader.uint32());
           continue;
         }
       }
