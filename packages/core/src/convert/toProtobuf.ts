@@ -456,10 +456,12 @@ function rolePolicyToProtobuf({
 function roleRuleToProtobuf({
   resource,
   allowActions,
+  condition,
 }: RoleRule): RoleRuleProtobuf {
   return {
     resource,
     allowActions,
+    condition: condition && conditionToProtobuf(condition),
   };
 }
 
