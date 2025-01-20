@@ -171,7 +171,8 @@ describe("loaders", () => {
       const callbacks = new Callbacks();
       const loader = new AutoUpdatingLoader(server.url, {
         activateOnLoad: false,
-        ...callbacks,
+        onError: callbacks.onError,
+        onLoad: callbacks.onLoad,
       });
 
       const loadedFirst = await callbacks.next();
