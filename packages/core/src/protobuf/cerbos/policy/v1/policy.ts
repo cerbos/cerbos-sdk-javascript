@@ -90,6 +90,7 @@ export interface RolePolicy {
 export interface RoleRule {
   resource: string;
   allowActions: string[];
+  condition: Condition | undefined;
 }
 
 export interface PrincipalPolicy {

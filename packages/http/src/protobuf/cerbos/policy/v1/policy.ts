@@ -123,6 +123,7 @@ export interface RolePolicy {
 export interface RoleRule {
   resource: string;
   allowActions: string[];
+  condition: Condition | undefined;
 }
 
 export interface PrincipalPolicy {
@@ -669,6 +670,9 @@ export const RoleRule: MessageFns<RoleRule> = {
       allowActions: globalThis.Array.isArray(object?.allowActions)
         ? object.allowActions.map((e: any) => globalThis.String(e))
         : [],
+      condition: isSet(object.condition)
+        ? Condition.fromJSON(object.condition)
+        : undefined,
     };
   },
 
@@ -679,6 +683,9 @@ export const RoleRule: MessageFns<RoleRule> = {
     }
     if (message.allowActions?.length) {
       obj.allowActions = message.allowActions;
+    }
+    if (message.condition !== undefined) {
+      obj.condition = Condition.toJSON(message.condition);
     }
     return obj;
   },

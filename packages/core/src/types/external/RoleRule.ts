@@ -1,3 +1,5 @@
+import type { Condition } from "./Condition";
+
 /** @alpha */
 export interface RoleRule {
   /** @alpha */
@@ -5,4 +7,7 @@ export interface RoleRule {
 
   /** @alpha */
   allowActions: string[];
+
+  /** @alpha */
+  condition?: Condition | undefined;
 }

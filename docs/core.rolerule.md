@@ -58,6 +58,25 @@ string\[\]
 </td></tr>
 <tr><td>
 
+[condition?](./core.rolerule.condition.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Condition](./core.condition.md) \| undefined
+
+
+</td><td>
+
+**_(ALPHA)_** _(Optional)_
+
+
+</td></tr>
+<tr><td>
+
 [resource](./core.rolerule.resource.md)
 
 
