@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@9.15.4",
   "engines": {
-    "node": "23.6.0",
+    "node": "23.6.1",
     "pnpm": "9.15.4"
   },
   "scripts": {
@@ -58,7 +58,7 @@
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
     "@types/eslint__js": "8.42.3",
-    "@types/node": "18.19.71",
+    "@types/node": "18.19.74",
     "@vitest/eslint-plugin": "1.1.25",
     "concurrently": "9.1.2",
     "depcheck": "1.4.7",
@@ -71,6 +71,6 @@
     "ts-proto": "2.6.1",
     "tsx": "4.19.2",
     "typescript": "5.7.3",
-    "typescript-eslint": "8.20.0"
+    "typescript-eslint": "8.21.0"
   }
 }
