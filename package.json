@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@9.15.4",
   "engines": {
-    "node": "23.6.1",
+    "node": "23.7.0",
     "pnpm": "9.15.4"
   },
   "scripts": {
@@ -52,9 +52,9 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.17.3",
-    "@eslint/js": "9.18.0",
-    "@microsoft/api-documenter": "7.26.5",
-    "@microsoft/api-extractor": "7.49.1",
+    "@eslint/js": "9.19.0",
+    "@microsoft/api-documenter": "7.26.7",
+    "@microsoft/api-extractor": "7.49.2",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
     "@types/eslint__js": "8.42.3",
@@ -62,7 +62,7 @@
     "@vitest/eslint-plugin": "1.1.25",
     "concurrently": "9.1.2",
     "depcheck": "1.4.7",
-    "eslint": "9.18.0",
+    "eslint": "9.19.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-react-hooks": "5.1.0",
     "eslint-plugin-tsdoc": "0.4.0",
@@ -71,6 +71,6 @@
     "ts-proto": "2.6.1",
     "tsx": "4.19.2",
     "typescript": "5.7.3",
-    "typescript-eslint": "8.21.0"
+    "typescript-eslint": "8.22.0"
   }
 }
