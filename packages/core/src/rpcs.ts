@@ -32,6 +32,10 @@ import type {
   ReloadStoreResponse,
   ServerInfoResponse,
 } from "./protobuf/cerbos/response/v1/response";
+import type {
+  HealthCheckRequest,
+  HealthCheckResponse,
+} from "./protobuf/grpc/health/v1/health";
 
 /** @internal */
 export interface _Services {
@@ -61,6 +65,12 @@ export interface _Services {
       checkResources: [CheckResourcesRequest, CheckResourcesResponse];
       planResources: [PlanResourcesRequest, PlanResourcesResponse];
       serverInfo: [ServerInfoRequest, ServerInfoResponse];
+    };
+    serverStream: Record<string, never>;
+  };
+  health: {
+    unary: {
+      check: [HealthCheckRequest, HealthCheckResponse];
     };
     serverStream: Record<string, never>;
   };

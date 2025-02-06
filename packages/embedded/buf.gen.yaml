@@ -5,6 +5,7 @@ inputs:
     types:
       - cerbos.cloud.epdp.v1.Metadata
       - cerbos.svc.v1.CerbosService
+      - grpc.health.v1.Health
 
 plugins:
   - local: node_modules/.bin/protoc-gen-ts_proto

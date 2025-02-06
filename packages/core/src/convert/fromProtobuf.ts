@@ -79,6 +79,8 @@ import type {
   ValidationError as ValidationErrorProtobuf,
 } from "../protobuf/cerbos/schema/v1/schema";
 import { ValidationError_Source } from "../protobuf/cerbos/schema/v1/schema";
+import type { HealthCheckResponse as HealthCheckResponseProtobuf } from "../protobuf/grpc/health/v1/health";
+import { HealthCheckResponse_ServingStatus } from "../protobuf/grpc/health/v1/health";
 import type {
   AccessLogEntry,
   AuditTrail,
@@ -101,6 +103,7 @@ import type {
   ExportVariables,
   GetPoliciesResponse,
   GetSchemasResponse,
+  HealthCheckResponse,
   InspectPoliciesResponse,
   InspectedAttribute,
   InspectedConstant,
@@ -156,6 +159,7 @@ import {
   PlanKind,
   SchemaDefinition,
   ScopePermissions,
+  ServiceStatus,
   ValidationErrorSource,
 } from "../types/external";
 import type { OmitFromEach } from "../types/internal";
@@ -538,6 +542,17 @@ export function getPoliciesResponseFromProtobuf({
   policies,
 }: GetPolicyResponse): GetPoliciesResponse {
   return { policies: policies.map(_policyFromProtobuf) };
+}
+
+export function healthCheckResponseFromProtobuf({
+  status,
+}: HealthCheckResponseProtobuf): HealthCheckResponse {
+  return {
+    status:
+      status === HealthCheckResponse_ServingStatus.SERVING
+        ? ServiceStatus.SERVING
+        : ServiceStatus.NOT_SERVING,
+  };
 }
 
 /** @internal */

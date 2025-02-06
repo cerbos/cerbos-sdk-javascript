@@ -48,6 +48,10 @@ import {
   ReloadStoreResponse,
   ServerInfoResponse,
 } from "./protobuf/cerbos/response/v1/response";
+import {
+  HealthCheckRequest,
+  HealthCheckResponse,
+} from "./protobuf/grpc/health/v1/health";
 
 interface Endpoint<
   Service extends _Service,
@@ -210,6 +214,15 @@ const services: Services = {
       path: "/api/server_info",
       requestType: ServerInfoRequest,
       responseType: ServerInfoResponse,
+      serializeRequest: serializeRequestToQueryString,
+    },
+  },
+  health: {
+    check: {
+      method: "GET",
+      path: "/_cerbos/health",
+      requestType: HealthCheckRequest,
+      responseType: HealthCheckResponse,
       serializeRequest: serializeRequestToQueryString,
     },
   },

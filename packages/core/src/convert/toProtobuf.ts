@@ -52,6 +52,7 @@ import type {
 import { ListAuditLogEntriesRequest_Kind } from "../protobuf/cerbos/request/v1/request";
 import type { Schema } from "../protobuf/cerbos/schema/v1/schema";
 import type { Duration } from "../protobuf/google/protobuf/duration";
+import type { HealthCheckRequest as HealthCheckRequestProtobuf } from "../protobuf/grpc/health/v1/health";
 import type {
   AddOrUpdatePoliciesRequest,
   AddOrUpdateSchemasRequest,
@@ -69,6 +70,7 @@ import type {
   ExportVariables,
   GetPoliciesRequest,
   GetSchemasRequest,
+  HealthCheckRequest,
   InspectPoliciesRequest,
   JWT,
   ListAccessLogEntriesRequest,
@@ -101,6 +103,7 @@ import {
   Effect,
   SchemaDefinition,
   ScopePermissions,
+  Service,
   auditLogFilterIsBetween,
   auditLogFilterIsSince,
   auditLogFilterIsTail,
@@ -638,6 +641,14 @@ export function getSchemasRequestToProtobuf({
 }: GetSchemasRequest): GetSchemaRequest {
   return {
     id: ids,
+  };
+}
+
+export function healthCheckRequestToProtobuf({
+  service = Service.CERBOS,
+}: HealthCheckRequest): HealthCheckRequestProtobuf {
+  return {
+    service,
   };
 }
 

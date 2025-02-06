@@ -1,5 +1,9 @@
 unreleased:
-  type: patch
+  type: minor
+
+  added:
+    - summary: "[`Client.checkHealth`](../../docs/core.client.checkhealth.md) method to check the health of services provided by the policy decision point server"
+      pull: 1085
 
   bumped:
     "@bufbuild/protobuf":

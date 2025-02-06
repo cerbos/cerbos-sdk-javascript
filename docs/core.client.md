@@ -64,6 +64,20 @@ Add schemas to be used for validating principal or resource attributes, or updat
 </td></tr>
 <tr><td>
 
+[checkHealth(request, options)](./core.client.checkhealth.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Checks the health of services provided by the policy decision point server.
+
+
+</td></tr>
+<tr><td>
+
 [checkResource(request, options)](./core.client.checkresource.md)
 
 
