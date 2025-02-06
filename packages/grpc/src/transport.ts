@@ -16,6 +16,7 @@ import {
   CerbosAdminServiceService as adminService,
   CerbosServiceService as cerbosService,
 } from "./protobuf/cerbos/svc/v1/svc";
+import { HealthService as healthService } from "./protobuf/grpc/health/v1/health";
 
 type Endpoint<
   Service extends _Service,
@@ -41,6 +42,7 @@ type Services = {
 const services: Services = {
   admin: adminService,
   cerbos: cerbosService,
+  health: healthService,
 };
 
 export class Transport implements _Transport {

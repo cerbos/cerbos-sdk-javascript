@@ -6,6 +6,7 @@ import { afterAll, beforeAll, describe, expect, it, vitest } from "vitest";
 import type {
   CheckResourcesRequest,
   Client,
+  HealthCheckResponse,
   Options,
   OutputResult,
   PlanResourcesRequest,
@@ -23,6 +24,8 @@ import {
   PlanExpressionValue,
   PlanExpressionVariable,
   PlanKind,
+  Service,
+  ServiceStatus,
   Status,
   ValidationErrorSource,
   ValidationFailed,
@@ -60,6 +63,7 @@ describe("Client", () => {
             tls: false,
             ...options,
           }),
+        adminServiceEnabled: false,
       },
       {
         type: "gRPC | TCP | TLS",
@@ -68,6 +72,7 @@ describe("Client", () => {
             tls: tls(),
             ...options,
           }),
+        adminServiceEnabled: true,
       },
       {
         type: "gRPC | TCP | mTLS",
@@ -76,11 +81,13 @@ describe("Client", () => {
             tls: mtls(),
             ...options,
           }),
+        adminServiceEnabled: false,
       },
       {
         type: "HTTP",
         client: (options: Options = {}): Client =>
           new HTTP(`http://localhost:${ports.plaintext.http}`, options),
+        adminServiceEnabled: false,
       },
     ];
 
@@ -95,12 +102,13 @@ describe("Client", () => {
               ...options,
             },
           ),
+        adminServiceEnabled: false,
       });
     }
 
     describe.each(cases)(
       "$type",
-      ({ client: factory }: (typeof cases)[number]) => {
+      ({ client: factory, adminServiceEnabled }: (typeof cases)[number]) => {
         let clients: {
           default: Client;
           throwOnValidationError: Client;
@@ -126,6 +134,28 @@ describe("Client", () => {
             if (client instanceof GRPC) {
               client.close();
             }
+          });
+        });
+
+        describe("checkHealth", () => {
+          it("checks the Cerbos service health", async () => {
+            const result = await clients.default.checkHealth();
+
+            expect(result).toEqual({
+              status: ServiceStatus.SERVING,
+            } satisfies HealthCheckResponse);
+          });
+
+          it("checks the admin service health", async () => {
+            const result = await clients.default.checkHealth({
+              service: Service.ADMIN,
+            });
+
+            expect(result).toEqual({
+              status: adminServiceEnabled
+                ? ServiceStatus.SERVING
+                : ServiceStatus.DISABLED,
+            } satisfies HealthCheckResponse);
           });
         });
 

@@ -96,6 +96,22 @@ The operation was rejected because an argument was invalid.
 </td></tr>
 <tr><td>
 
+NOT\_FOUND
+
+
+</td><td>
+
+`5`
+
+
+</td><td>
+
+The requested entity was not found.
+
+
+</td></tr>
+<tr><td>
+
 OK
 
 

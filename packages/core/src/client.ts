@@ -7,6 +7,7 @@ import {
   enablePoliciesResponseFromProtobuf,
   getPoliciesResponseFromProtobuf,
   getSchemasResponseFromProtobuf,
+  healthCheckResponseFromProtobuf,
   inspectPoliciesResponseFromProtobuf,
   listPoliciesResponseFromProtobuf,
   listSchemasResponseFromProtobuf,
@@ -21,6 +22,7 @@ import {
   enablePoliciesRequestToProtobuf,
   getPoliciesRequestToProtobuf,
   getSchemasRequestToProtobuf,
+  healthCheckRequestToProtobuf,
   inspectPoliciesRequestToProtobuf,
   listAccessLogEntriesRequestToProtobuf,
   listDecisionLogEntriesRequestToProtobuf,
@@ -50,6 +52,8 @@ import type {
   GetPoliciesResponse,
   GetSchemasRequest,
   GetSchemasResponse,
+  HealthCheckRequest,
+  HealthCheckResponse,
   InspectPoliciesRequest,
   InspectPoliciesResponse,
   IsAllowedRequest,
@@ -68,7 +72,7 @@ import type {
   ValidationError,
   ValidationFailedCallback,
 } from "./types/external";
-import { Status } from "./types/external";
+import { Service, ServiceStatus, Status } from "./types/external";
 
 /** @internal */
 export class _AbortHandler {
@@ -398,6 +402,45 @@ export abstract class Client {
       addOrUpdateSchemasRequestToProtobuf(request),
       options,
     );
+  }
+
+  /**
+   * Checks the health of services provided by the policy decision point server.
+   *
+   * @example
+   * ```typescript
+   * const { status } = await cerbos.checkHealth();
+   * ```
+   *
+   * @example
+   * ```typescript
+   * const { status } = await cerbos.checkHealth({ service: Service.ADMIN });
+   * ```
+   */
+  public async checkHealth(
+    request: HealthCheckRequest = {},
+    options?: RequestOptions,
+  ): Promise<HealthCheckResponse> {
+    try {
+      return healthCheckResponseFromProtobuf(
+        await this.unary(
+          "health",
+          "check",
+          healthCheckRequestToProtobuf(request),
+          options,
+        ),
+      );
+    } catch (error) {
+      if (
+        request.service === Service.ADMIN &&
+        error instanceof NotOK &&
+        error.code === Status.NOT_FOUND
+      ) {
+        return { status: ServiceStatus.DISABLED };
+      }
+
+      throw error;
+    }
   }
 
   /**

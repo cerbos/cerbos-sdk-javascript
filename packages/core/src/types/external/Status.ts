@@ -25,6 +25,11 @@ export enum Status {
   INVALID_ARGUMENT = 3,
 
   /**
+   * The requested entity was not found.
+   */
+  NOT_FOUND = 5,
+
+  /**
    * The operation completed successfully.
    */
   OK = 0,

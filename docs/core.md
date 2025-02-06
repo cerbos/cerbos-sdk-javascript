@@ -238,6 +238,28 @@ Types of query plans.
 </td></tr>
 <tr><td>
 
+[Service](./core.service.md)
+
+
+</td><td>
+
+A service provided by the policy decision point server.
+
+
+</td></tr>
+<tr><td>
+
+[ServiceStatus](./core.servicestatus.md)
+
+
+</td><td>
+
+The status of a service provided by the policy decision point server.
+
+
+</td></tr>
+<tr><td>
+
 [Status](./core.status.md)
 
 
@@ -934,6 +956,28 @@ Input to [Client.getSchemas()](./core.client.getschemas.md)<!-- -->.
 </td><td>
 
 Fetched schemas.
+
+
+</td></tr>
+<tr><td>
+
+[HealthCheckRequest](./core.healthcheckrequest.md)
+
+
+</td><td>
+
+Input to [Client.checkHealth()](./core.client.checkhealth.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[HealthCheckResponse](./core.healthcheckresponse.md)
+
+
+</td><td>
+
+The outcome of checking the health of a service provided by the policy decision point server.
 
 
 </td></tr>

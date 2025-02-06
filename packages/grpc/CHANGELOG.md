@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- [`Client.checkHealth`](../../docs/core.client.checkhealth.md) method to check the health of services provided by the policy decision point server ([#1085](https://github.com/cerbos/cerbos-sdk-javascript/pull/1085))
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.2.3 ([#1061](https://github.com/cerbos/cerbos-sdk-javascript/pull/1061))

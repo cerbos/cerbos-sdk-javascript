@@ -52,6 +52,7 @@ type TransportReturn<
 const serviceNames: Record<_Service, string> = {
   admin: "cerbos.svc.v1.CerbosAdminService",
   cerbos: "cerbos.svc.v1.CerbosService",
+  health: "grpc.health.v1.Health",
 };
 
 export class Transport implements _Transport {

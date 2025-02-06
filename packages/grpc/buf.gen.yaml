@@ -5,6 +5,7 @@ inputs:
     types:
       - cerbos.svc.v1.CerbosService
       - cerbos.svc.v1.CerbosAdminService
+      - grpc.health.v1.Health
 
 plugins:
   - local: node_modules/.bin/protoc-gen-ts_proto
