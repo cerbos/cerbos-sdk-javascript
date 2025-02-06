@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.20.0] - 2025-02-06
+
 ### Added
 
 - [`Client.checkHealth`](../../docs/core.client.checkhealth.md) method to check the health of services provided by the policy decision point server ([#1085](https://github.com/cerbos/cerbos-sdk-javascript/pull/1085))
@@ -215,7 +219,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.19.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.20.0...HEAD
+[0.20.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.19.0...@cerbos/core@0.20.0
 [0.19.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.18.1...@cerbos/core@0.19.0
 [0.18.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.18.0...@cerbos/core@0.18.1
 [0.18.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.17.1...@cerbos/core@0.18.0

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.20.0] - 2025-02-06
+
 ### Added
 
 - [`Client.checkHealth`](../../docs/core.client.checkhealth.md) method to check the health of services provided by the policy decision point server ([#1085](https://github.com/cerbos/cerbos-sdk-javascript/pull/1085))
@@ -9,6 +13,8 @@
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.2.3 ([#1061](https://github.com/cerbos/cerbos-sdk-javascript/pull/1061))
+
+- Bump dependency on [@cerbos/core] to 0.20.0 ([#1086](https://github.com/cerbos/cerbos-sdk-javascript/pull/1086))
 
 - Bump dependency on [@grpc/grpc-js] to 1.12.5 ([#1056](https://github.com/cerbos/cerbos-sdk-javascript/pull/1056), [#1065](https://github.com/cerbos/cerbos-sdk-javascript/pull/1065))
 
@@ -349,7 +355,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.19.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.20.0...HEAD
+[0.20.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.19.0...@cerbos/grpc@0.20.0
 [0.19.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.18.4...@cerbos/grpc@0.19.0
 [0.18.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.18.3...@cerbos/grpc@0.18.4
 [0.18.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.18.2...@cerbos/grpc@0.18.3

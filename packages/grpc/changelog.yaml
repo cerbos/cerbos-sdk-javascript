@@ -1,20 +1,24 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[`Client.checkHealth`](../../docs/core.client.checkhealth.md) method to check the health of services provided by the policy decision point server"
-      pull: 1085
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.2.3
-      pull: 1061
-
-    "@grpc/grpc-js":
-      to: 1.12.5
-      pulls: [1056, 1065]
-
 releases:
+  - version: 0.20.0
+    date: 2025-02-06
+
+    added:
+      - summary: "[`Client.checkHealth`](../../docs/core.client.checkhealth.md) method to check the health of services provided by the policy decision point server"
+        pull: 1085
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.2.3
+        pull: 1061
+
+      "@cerbos/core":
+        to: 0.20.0
+        pull: 1086
+
+      "@grpc/grpc-js":
+        to: 1.12.5
+        pulls: [1056, 1065]
+
   - version: 0.19.0
     date: 2024-11-27
 
