@@ -2,11 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.21.0] - 2025-02-06
+
 ### Added
 
 - [`Client.checkHealth`](../../docs/core.client.checkhealth.md) method to check the health of services provided by the policy decision point server ([#1085](https://github.com/cerbos/cerbos-sdk-javascript/pull/1085))
 
 ### Changed
+
+- Bump dependency on [@cerbos/core] to 0.20.0 ([#1086](https://github.com/cerbos/cerbos-sdk-javascript/pull/1086))
 
 - Bump dependency on [qs] to 6.14.0 ([#1077](https://github.com/cerbos/cerbos-sdk-javascript/pull/1077))
 
@@ -299,7 +305,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.20.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.21.0...HEAD
+[0.21.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.20.0...@cerbos/http@0.21.0
 [0.20.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.2...@cerbos/http@0.20.0
 [0.19.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.1...@cerbos/http@0.19.2
 [0.19.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.19.0...@cerbos/http@0.19.1

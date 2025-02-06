@@ -1,16 +1,16 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[`Client.checkHealth`](../../docs/core.client.checkhealth.md) method to check the health of services provided by the policy decision point server"
-      pull: 1085
-
-  bumped:
-    uuid:
-      to: 11.0.5
-      pull: 1069
-
 releases:
+  - version: 0.20.0
+    date: 2025-02-06
+
+    added:
+      - summary: "[`Client.checkHealth`](../../docs/core.client.checkhealth.md) method to check the health of services provided by the policy decision point server"
+        pull: 1085
+
+    bumped:
+      uuid:
+        to: 11.0.5
+        pull: 1069
+
   - version: 0.19.0
     date: 2024-11-27
 
