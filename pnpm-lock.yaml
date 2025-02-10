@@ -11,9 +11,9 @@ importers:
       '@arethetypeswrong/cli':
         specifier: 0.17.3
         version: 0.17.3
-      '@eslint/js':
-        specifier: 9.19.0
-        version: 9.19.0
+      '@cerbos/sdk-javascript-eslint':
+        specifier: workspace:*
+        version: link:private/eslint
       '@microsoft/api-documenter':
         specifier: 7.26.7
         version: 7.26.7(@types/node@18.19.74)
@@ -26,15 +26,9 @@ importers:
       '@tsconfig/strictest':
         specifier: 2.0.5
         version: 2.0.5
-      '@types/eslint__js':
-        specifier: 8.42.3
-        version: 8.42.3
       '@types/node':
         specifier: 18.19.74
         version: 18.19.74
-      '@vitest/eslint-plugin':
-        specifier: 1.1.25
-        version: 1.1.25(@typescript-eslint/utils@8.22.0(eslint@9.19.0)(typescript@5.7.3))(eslint@9.19.0)(typescript@5.7.3)(vitest@3.0.5(@types/node@18.19.74)(jsdom@26.0.0)(tsx@4.19.2)(yaml@2.7.0))
       concurrently:
         specifier: 9.1.2
         version: 9.1.2
@@ -44,15 +38,6 @@ importers:
       eslint:
         specifier: 9.19.0
         version: 9.19.0
-      eslint-plugin-import:
-        specifier: 2.31.0
-        version: 2.31.0(@typescript-eslint/parser@8.22.0(eslint@9.19.0)(typescript@5.7.3))(eslint@9.19.0)
-      eslint-plugin-react-hooks:
-        specifier: 5.1.0
-        version: 5.1.0(eslint@9.19.0)
-      eslint-plugin-tsdoc:
-        specifier: 0.4.0
-        version: 0.4.0
       prettier:
         specifier: 3.4.2
         version: 3.4.2
@@ -68,9 +53,6 @@ importers:
       typescript:
         specifier: 5.7.3
         version: 5.7.3
-      typescript-eslint:
-        specifier: 8.22.0
-        version: 8.22.0(eslint@9.19.0)(typescript@5.7.3)
 
   packages/core:
     dependencies:
@@ -148,6 +130,36 @@ importers:
       '@types/react':
         specifier: 19.0.8
         version: 19.0.8
+
+  private/eslint:
+    devDependencies:
+      '@eslint/js':
+        specifier: 9.19.0
+        version: 9.19.0
+      '@stylistic/eslint-plugin':
+        specifier: 3.0.1
+        version: 3.0.1(eslint@9.19.0)(typescript@5.7.3)
+      '@types/eslint__js':
+        specifier: 8.42.3
+        version: 8.42.3
+      '@typescript-eslint/utils':
+        specifier: 8.22.0
+        version: 8.22.0(eslint@9.19.0)(typescript@5.7.3)
+      '@vitest/eslint-plugin':
+        specifier: 1.1.25
+        version: 1.1.25(@typescript-eslint/utils@8.22.0(eslint@9.19.0)(typescript@5.7.3))(eslint@9.19.0)(typescript@5.7.3)(vitest@3.0.5(@types/node@18.19.74)(jsdom@26.0.0)(tsx@4.19.2)(yaml@2.7.0))
+      eslint-plugin-import:
+        specifier: 2.31.0
+        version: 2.31.0(@typescript-eslint/parser@8.22.0(eslint@9.19.0)(typescript@5.7.3))(eslint@9.19.0)
+      eslint-plugin-react-hooks:
+        specifier: 5.1.0
+        version: 5.1.0(eslint@9.19.0)
+      eslint-plugin-tsdoc:
+        specifier: 0.4.0
+        version: 0.4.0
+      typescript-eslint:
+        specifier: 8.22.0
+        version: 8.22.0(eslint@9.19.0)(typescript@5.7.3)
 
   private/scripts:
     devDependencies:
@@ -970,6 +982,12 @@ packages:
   '@sindresorhus/merge-streams@4.0.0':
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
     engines: {node: '>=18'}
+
+  '@stylistic/eslint-plugin@3.0.1':
+    resolution: {integrity: sha512-rQ3tcT5N2cynofJfbjUsnL4seoewTaOVBLyUEwtNldo7iNMPo3h/GUQk+Cl3iHEWwRxjq2wuH6q0FufQrbVL1A==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: '>=8.40.0'
 
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
@@ -2294,6 +2312,10 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
 
+  picomatch@4.0.2:
+    resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
+    engines: {node: '>=12'}
+
   please-upgrade-node@3.2.0:
     resolution: {integrity: sha512-gQR3WpIgNIKwBMVLkpMUeR3e1/E1y42bqDQZfql+kDeXd8COYfM8PQA4X6y7a8u9Ua9FHmsrrmirW2vHs45hWg==}
 
@@ -3521,6 +3543,18 @@ snapshots:
   '@sindresorhus/is@4.6.0': {}
 
   '@sindresorhus/merge-streams@4.0.0': {}
+
+  '@stylistic/eslint-plugin@3.0.1(eslint@9.19.0)(typescript@5.7.3)':
+    dependencies:
+      '@typescript-eslint/utils': 8.22.0(eslint@9.19.0)(typescript@5.7.3)
+      eslint: 9.19.0
+      eslint-visitor-keys: 4.2.0
+      espree: 10.3.0
+      estraverse: 5.3.0
+      picomatch: 4.0.2
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
 
   '@testing-library/dom@10.4.0':
     dependencies:
@@ -5066,6 +5100,8 @@ snapshots:
   picocolors@1.1.1: {}
 
   picomatch@2.3.1: {}
+
+  picomatch@4.0.2: {}
 
   please-upgrade-node@3.2.0:
     dependencies:

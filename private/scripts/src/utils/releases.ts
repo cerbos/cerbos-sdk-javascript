@@ -88,6 +88,7 @@ function bumpVersion({ name, version }: Package, type: ReleaseType): string {
   if (!bumped) {
     throw new Error(`${name}: failed to ${type} bump "${version}"`);
   }
+
   return bumped;
 }
 

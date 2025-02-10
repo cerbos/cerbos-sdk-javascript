@@ -192,6 +192,7 @@ describe("aborting requests", () => {
           expect(response).toEqual(
             dummyServerStreamResponse.entry.accessLogEntry,
           );
+
           break;
         }
 

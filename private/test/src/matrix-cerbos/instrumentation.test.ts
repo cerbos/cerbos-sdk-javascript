@@ -390,6 +390,7 @@ describe("CerbosInstrumentation", () => {
         if (type === "Embedded" || !cerbosVersionIsAtLeast("0.30.0")) {
           return;
         }
+
         const jaeger = new QueryServiceClient(
           `localhost:${jaegerPort}`,
           ChannelCredentials.createInsecure(),

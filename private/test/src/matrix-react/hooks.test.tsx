@@ -170,6 +170,7 @@ function testCerbosHook<TParams>(
         initialParams,
         expectedRequestOptions,
       );
+
       expect(clientFn).toHaveBeenCalledTimes(1);
 
       expect(result.current.isLoading).toBe(true);
@@ -196,6 +197,7 @@ function testCerbosHook<TParams>(
       rerender(
         JSON.parse(JSON.stringify(initialParams)) as typeof initialParams,
       );
+
       expect(result.current.isLoading).toBe(false);
       await act(async () => await vi.advanceTimersByTimeAsync(300));
       expect(result.current.isLoading).toBe(false);
@@ -212,6 +214,7 @@ function testCerbosHook<TParams>(
         nextParams,
         expectedRequestOptions,
       );
+
       expect(clientFn).toHaveBeenCalledTimes(2);
       expect(result.current.isLoading).toBe(true);
       await act(async () => await vi.advanceTimersByTimeAsync(300));

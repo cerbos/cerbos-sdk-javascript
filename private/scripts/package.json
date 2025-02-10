@@ -1,4 +1,5 @@
 {
+  "name": "@cerbos/sdk-javascript-scripts",
   "type": "module",
   "private": true,
   "devDependencies": {

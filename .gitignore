@@ -2,6 +2,7 @@
 /node_modules/
 /packages/*/lib/
 /packages/*/node_modules/
+/private/*/lib/
 /private/*/node_modules/
-/private/*/tsconfig.tsbuildinfo
 /private/test/servers/tmp/
+/tsconfig.tsbuildinfo
