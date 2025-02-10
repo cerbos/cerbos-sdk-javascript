@@ -1,8 +1,13 @@
 {
-  "files": [],
+  "extends": "./tsconfig.base.json",
+  "include": ["**/*.config.mjs", "**/*.config.mts"],
   "references": [
     { "path": "private/eslint" },
     { "path": "private/scripts" },
     { "path": "private/test" }
-  ]
+  ],
+  "compilerOptions": {
+    "composite": false,
+    "noEmit": true
+  }
 }

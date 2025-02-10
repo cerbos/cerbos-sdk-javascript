@@ -156,5 +156,6 @@ function metadata(headers: Headers): Metadata {
   for (const [name, value] of headers) {
     metadata.set(name, value);
   }
+
   return metadata;
 }

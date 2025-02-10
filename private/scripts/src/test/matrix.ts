@@ -162,6 +162,7 @@ async function fetchReactVersions(): Promise<Versions> {
   const matchingVersions = allVersions.filter(
     (version) => satisfies(version, requirement) && !prerelease(version),
   );
+
   const minimumVersion = matchingVersions[0];
   const versions = groupMinorVersions(matchingVersions);
 

@@ -1,8 +1,9 @@
 {
-  "extends": "../tsconfig.base.json",
-  "include": ["../../eslint.config.mjs", "types"],
+  "extends": "../../tsconfig.base.json",
+  "include": ["src"],
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true
+    "outDir": "lib",
+    "rootDir": "src",
+    "tsBuildInfoFile": "lib/eslint.tsbuildinfo"
   }
 }

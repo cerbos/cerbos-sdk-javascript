@@ -678,6 +678,7 @@ describe("Client", () => {
               const { ids: disabledIds } = await mutable.listPolicies({
                 includeDisabled: true,
               });
+
               expect(disabledIds).toContain(id);
 
               const enabled = await mutable.enablePolicy(id);

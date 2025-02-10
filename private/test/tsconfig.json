@@ -1,6 +1,6 @@
 {
-  "extends": "../tsconfig.base.json",
-  "include": ["src", "vitest.config.mts"],
+  "extends": "../../tsconfig.base.json",
+  "include": ["src"],
   "references": [
     { "path": "../../packages/core" },
     { "path": "../../packages/embedded" },
@@ -12,6 +12,9 @@
   ],
   "compilerOptions": {
     "jsx": "react-jsx",
-    "lib": ["ES2022", "DOM"]
+    "lib": ["ES2022", "DOM"],
+    "outDir": "lib",
+    "rootDir": "src",
+    "tsBuildInfoFile": "lib/test.tsbuildinfo"
   }
 }

@@ -1,4 +1,5 @@
 {
+  "name": "@cerbos/sdk-javascript-test",
   "private": true,
   "scripts": {
     "postinstall": "pnpm --workspace-root run build",

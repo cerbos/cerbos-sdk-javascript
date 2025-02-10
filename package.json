@@ -1,10 +1,10 @@
 {
-  "name": "cerbos-sdk-javascript",
+  "name": "@cerbos/sdk-javascript",
   "private": true,
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.2.1",
   "engines": {
     "node": "23.7.0",
-    "pnpm": "9.15.4"
+    "pnpm": "10.2.1"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
@@ -12,10 +12,12 @@
     "api:fixup": "scripts/sed-all api 's/_2//'",
     "build": "tsc --build",
     "build:watch": "tsc --build --watch",
-    "clean": "rm -rf api packages/*/lib private/*/tsconfig.tsbuildinfo",
+    "clean": "rm -rf api packages/*/lib private/*/lib",
     "docs": "pnpm run build && pnpm run api:extract && pnpm run api:fixup && pnpm run docs:generate && pnpm run docs:fixup",
     "docs:fixup": "scripts/sed-all docs -e 's/\\r$//' -e 's/^\\*\\*Returns:\\*\\*/\\n&/'",
     "docs:generate": "api-documenter markdown --input-folder api --output-folder docs",
+    "eslint:build": "tsc --build private/eslint",
+    "eslint:run": "eslint --max-warnings=0",
     "generate": "pnpm run generate:clean && pnpm run all:parallel 'pnpm:generate:*(!clean|format)' && pnpm run generate:format",
     "generate:buf:core": "buf generate --template=packages/core/buf.gen.yaml",
     "generate:buf:embedded": "buf generate --template=packages/embedded/buf.gen.yaml",
@@ -29,7 +31,7 @@
     "generate:format": "prettier --write packages/*/src/protobuf private/*/src/protobuf",
     "lint": "pnpm run all:parallel 'pnpm:lint:check:*'",
     "lint:check:depcheck": "pnpm --recursive --include-workspace-root exec depcheck --ignore-patterns=/lib/ --quiet --skip-missing",
-    "lint:check:eslint": "eslint --max-warnings=0 .",
+    "lint:check:eslint": "pnpm run eslint:build && pnpm run eslint:run .",
     "lint:check:prettier": "prettier --check .",
     "lint:check:types": "pnpm --recursive --filter='./packages/*' exec attw --pack .",
     "lint:fix": "pnpm run lint:fix:eslint && pnpm run lint:fix:prettier",
@@ -53,25 +55,19 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.17.3",
-    "@eslint/js": "9.19.0",
+    "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@microsoft/api-documenter": "7.26.7",
     "@microsoft/api-extractor": "7.49.2",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
-    "@types/eslint__js": "8.42.3",
     "@types/node": "18.19.74",
-    "@vitest/eslint-plugin": "1.1.25",
     "concurrently": "9.1.2",
     "depcheck": "1.4.7",
     "eslint": "9.19.0",
-    "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-react-hooks": "5.1.0",
-    "eslint-plugin-tsdoc": "0.4.0",
     "prettier": "3.4.2",
     "prettier-plugin-pkg": "0.18.1",
     "ts-proto": "2.6.1",
     "tsx": "4.19.2",
-    "typescript": "5.7.3",
-    "typescript-eslint": "8.22.0"
+    "typescript": "5.7.3"
   }
 }
