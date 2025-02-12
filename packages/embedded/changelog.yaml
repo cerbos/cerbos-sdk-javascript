@@ -1,6 +1,10 @@
 unreleased:
   type: minor
 
+  added:
+    - summary: "[`onDecision`](../../docs/embedded.options.ondecision.md) callback to support audit logging"
+      pull: 1091
+
   changed:
     - summary: Accept async callbacks for [`onLoad`](../../docs/embedded.options.onload.md) and [`onError`](../../docs/embedded.options.onerror.md)
       pull: 1091
@@ -236,5 +240,6 @@ releases:
 references:
   "@cerbos/core": ../core/README.md
   nodejs-eol: https://github.com/nodejs/release#end-of-life-releases
+  ulid: https://github.com/ulid/javascript
 
 initialCommit: a3dcb572e0eeff4c4d86c9cc66c1d0c7e59c4853

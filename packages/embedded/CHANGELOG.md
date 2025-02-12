@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- [`onDecision`](../../docs/embedded.options.ondecision.md) callback to support audit logging ([#1091](https://github.com/cerbos/cerbos-sdk-javascript/pull/1091))
+
 ### Changed
 
 - Accept async callbacks for [`onLoad`](../../docs/embedded.options.onload.md) and [`onError`](../../docs/embedded.options.onerror.md) ([#1091](https://github.com/cerbos/cerbos-sdk-javascript/pull/1091))
@@ -206,3 +210,4 @@
 [0.1.0-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/a3dcb572e0eeff4c4d86c9cc66c1d0c7e59c4853...@cerbos/lite@0.1.0-alpha
 [@cerbos/core]: ../core/README.md
 [nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases
+[ulid]: https://github.com/ulid/javascript

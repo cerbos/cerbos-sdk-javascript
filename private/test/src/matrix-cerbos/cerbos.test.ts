@@ -34,9 +34,9 @@ import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
 
 import {
-  callIdMatcher,
   describeIfCerbosVersionIsAtLeast,
   invalidArgumentDetails,
+  versionDependentCallIdMatcher,
 } from "../helpers";
 import type { Ports } from "../servers";
 import {
@@ -320,7 +320,7 @@ describe("Client", () => {
 
             expect(response).toEqual(
               new CheckResourcesResponse({
-                cerbosCallId: callIdMatcher,
+                cerbosCallId: versionDependentCallIdMatcher,
                 requestId: "42",
                 results: [
                   new CheckResourcesResult({
@@ -560,7 +560,7 @@ describe("Client", () => {
             const response = await clients.default.planResources(request);
 
             expect(response).toEqual({
-              cerbosCallId: callIdMatcher,
+              cerbosCallId: versionDependentCallIdMatcher,
               requestId: "42",
               kind: PlanKind.CONDITIONAL,
               condition: new PlanExpression("eq", [
@@ -1058,7 +1058,7 @@ describe("Client", () => {
 
               expect(response).toEqual(
                 new CheckResourcesResponse({
-                  cerbosCallId: callIdMatcher,
+                  cerbosCallId: versionDependentCallIdMatcher,
                   requestId: "42",
                   results: [
                     new CheckResourcesResult({
@@ -1260,7 +1260,7 @@ describe("Client", () => {
 
               expect(response).toEqual(
                 new CheckResourcesResponse({
-                  cerbosCallId: callIdMatcher,
+                  cerbosCallId: versionDependentCallIdMatcher,
                   requestId: "42",
                   results: [
                     new CheckResourcesResult({
@@ -1467,7 +1467,7 @@ describe("Client", () => {
 
               expect(response).toEqual(
                 new CheckResourcesResponse({
-                  cerbosCallId: callIdMatcher,
+                  cerbosCallId: versionDependentCallIdMatcher,
                   requestId: "42",
                   results: [
                     new CheckResourcesResult({
@@ -1663,7 +1663,7 @@ describe("Client", () => {
 
               expect(response).toEqual(
                 new CheckResourcesResponse({
-                  cerbosCallId: callIdMatcher,
+                  cerbosCallId: versionDependentCallIdMatcher,
                   requestId: "42",
                   results: [
                     new CheckResourcesResult({

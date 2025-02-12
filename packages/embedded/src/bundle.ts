@@ -1,13 +1,13 @@
-import type { JWT } from "@cerbos/core";
+import type { DecodedAuxData, JWT } from "@cerbos/core";
 import { NotOK } from "@cerbos/core";
 
 import type {
   BundleMetadata,
   DecodeJWTPayload,
-  DecodedJWTPayload,
   Options,
   Source,
 } from "./loader";
+import type { DecisionLogger } from "./logger";
 import { Metadata as BundleMetadataProtobuf } from "./protobuf/cerbos/cloud/epdp/v1/epdp";
 import { CheckResourcesRequest } from "./protobuf/cerbos/request/v1/request";
 import { CheckResourcesResponse } from "./protobuf/cerbos/response/v1/response";
@@ -24,6 +24,8 @@ interface Exports extends WebAssembly.Exports, Allocator {
 export class Bundle {
   public static async from(
     source: Source,
+    logger: DecisionLogger | undefined,
+    userAgent: string,
     {
       decodeJWTPayload = cannotDecodeJWTPayload,
       globals,
@@ -31,7 +33,7 @@ export class Bundle {
     }: Options,
   ): Promise<Bundle> {
     if (typeof source === "string" || source instanceof URL) {
-      source = await download(source);
+      source = await download(source, userAgent);
     } else {
       source = await source;
     }
@@ -57,7 +59,7 @@ export class Bundle {
       }
     }
 
-    return new Bundle(etag, exports, decodeJWTPayload);
+    return new Bundle(etag, exports, decodeJWTPayload, logger);
   }
 
   private _metadata: BundleMetadata | undefined;
@@ -66,6 +68,7 @@ export class Bundle {
     public readonly etag: string | undefined,
     private readonly exports: Exports,
     private readonly decodeJWTPayload: DecodeJWTPayload,
+    private readonly logger: DecisionLogger | undefined,
   ) {}
 
   public get metadata(): BundleMetadata {
@@ -98,44 +101,67 @@ export class Bundle {
 
   public async checkResources(
     request: CheckResourcesRequest,
+    headers: Headers,
   ): Promise<CheckResourcesResponse> {
-    const requestJSON = CheckResourcesRequest.toJSON(request) as {
-      auxData?: { jwt?: unknown };
-    };
+    let response: CheckResourcesResponse | undefined = undefined;
+    let auxData: DecodedAuxData | undefined = undefined;
+    let error: unknown = undefined;
 
-    if (requestJSON.auxData?.jwt) {
-      const jwt = requestJSON.auxData.jwt as JWT;
-      if (!jwt.keySetId) {
-        delete jwt.keySetId;
+    try {
+      const requestJSON = CheckResourcesRequest.toJSON(request) as {
+        auxData?: { jwt?: unknown };
+      };
+
+      if (requestJSON.auxData?.jwt) {
+        const jwt = requestJSON.auxData.jwt as JWT;
+        if (!jwt.keySetId) {
+          delete jwt.keySetId;
+        }
+
+        auxData = { jwt: await this.decodeJWTPayload(jwt) };
+        requestJSON.auxData = auxData;
       }
 
-      (requestJSON.auxData as { jwt: DecodedJWTPayload }).jwt =
-        await this.decodeJWTPayload(jwt);
-    }
+      const requestSlice = Slice.ofJSON(this.exports, requestJSON);
 
-    const requestSlice = Slice.ofJSON(this.exports, requestJSON);
+      let responseSlice: Slice;
+      try {
+        responseSlice = Slice.from(
+          this.exports,
+          this.exports.check(requestSlice.offset, requestSlice.length),
+        );
+      } finally {
+        requestSlice.deallocate();
+      }
 
-    let responseSlice: Slice;
-    try {
-      responseSlice = Slice.from(
-        this.exports,
-        this.exports.check(requestSlice.offset, requestSlice.length),
-      );
+      let responseText: string;
+      try {
+        responseText = responseSlice.text();
+      } finally {
+        responseSlice.deallocate();
+      }
+
+      try {
+        response = CheckResourcesResponse.fromJSON(JSON.parse(responseText));
+      } catch {
+        throw NotOK.fromJSON(responseText);
+      }
+
+      return response;
+    } catch (caught) {
+      error = caught;
+      throw caught;
     } finally {
-      requestSlice.deallocate();
-    }
-
-    let responseText: string;
-    try {
-      responseText = responseSlice.text();
-    } finally {
-      responseSlice.deallocate();
-    }
-
-    try {
-      return CheckResourcesResponse.fromJSON(JSON.parse(responseText));
-    } catch {
-      throw NotOK.fromJSON(responseText);
+      if (this.logger) {
+        await this.logger.logCheckResources(
+          request,
+          auxData,
+          headers,
+          response,
+          this.metadata,
+          error,
+        );
+      }
     }
   }
 }
@@ -155,10 +181,14 @@ function secondsSinceUnixEpoch(date: Date | number): bigint {
 
 export async function download(
   url: string | URL,
+  userAgent: string,
   request?: RequestInit,
 ): Promise<Response> {
+  const headers = new Headers(request?.headers);
+  headers.set("User-Agent", userAgent);
+
   try {
-    return await fetch(url, request);
+    return await fetch(url, { ...request, headers });
   } catch (error) {
     const message = `Failed to download from ${url.toString()}`;
     throw new Error(

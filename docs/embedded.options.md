@@ -9,8 +9,9 @@ Options for creating a new [Embedded](./embedded.embedded.md) client or [Loader]
 **Signature:**
 
 ```typescript
-export interface Options 
+export interface Options extends Pick<CoreOptions, "headers" | "userAgent"> 
 ```
+**Extends:** Pick&lt;[CoreOptions](./core.options.md)<!-- -->, "headers" \| "userAgent"&gt;
 
 ## Properties
 
@@ -89,6 +90,25 @@ _(Optional)_ [Global variables](https://docs.cerbos.dev/cerbos/latest/configurat
 </td><td>
 
 _(Optional)_ A function returning the current time, to be used when evaluating policy conditions.
+
+
+</td></tr>
+<tr><td>
+
+[onDecision?](./embedded.options.ondecision.md)
+
+
+</td><td>
+
+
+</td><td>
+
+((entry: [DecisionLogEntry](./core.decisionlogentry.md)<!-- -->) =&gt; void \| Promise&lt;void&gt;) \| undefined
+
+
+</td><td>
+
+_(Optional)_ A callback to invoke when a decision is made by the embedded policy decision point.
 
 
 </td></tr>

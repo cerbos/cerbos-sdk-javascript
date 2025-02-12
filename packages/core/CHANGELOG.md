@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Internal exports to support audit logging in embedded policy decision points ([#1091](https://github.com/cerbos/cerbos-sdk-javascript/pull/1091))
 
 ## [0.20.0] - 2025-02-06
 

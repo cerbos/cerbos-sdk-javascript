@@ -30,13 +30,14 @@ import { CerbosInstrumentation } from "@cerbos/opentelemetry";
 
 import {
   TestMetricReader,
-  bundleFilePath,
   captureSpan,
   describeIfCerbosVersionIsAtLeast,
   expectMetrics,
   fetchSpans,
   getDecisionLogEntry,
   invalidArgumentDetails,
+  newEmbeddedBundle,
+  oldEmbeddedBundle,
 } from "../helpers";
 import { QueryServiceClient } from "../protobuf/jaeger/proto/api_v3/query_service";
 import type { KeyValue as KeyValueProto } from "../protobuf/opentelemetry/proto/common/v1/common";
@@ -101,6 +102,7 @@ describe("CerbosInstrumentation", () => {
   const cases = [
     {
       type: "gRPC",
+      embedded: false,
       client: (): Client =>
         new GRPC(`localhost:${cerbosPorts.grpc}`, {
           tls: tls(),
@@ -109,13 +111,24 @@ describe("CerbosInstrumentation", () => {
     },
     {
       type: "HTTP",
+      embedded: false,
       client: (): Client =>
         new HTTP(`https://localhost:${cerbosPorts.http}`, { adminCredentials }),
     },
     {
-      type: "Embedded",
+      type: "Embedded (old bundle)",
+      embedded: true,
       client: (): Client =>
-        new Embedded(readFileSync(bundleFilePath()), {
+        new Embedded(readFileSync(oldEmbeddedBundle.path), {
+          decodeJWTPayload: ({ token }): DecodedJWTPayload =>
+            UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
+        }),
+    },
+    {
+      type: "Embedded (new bundle)",
+      embedded: true,
+      client: (): Client =>
+        new Embedded(readFileSync(newEmbeddedBundle.path), {
           decodeJWTPayload: ({ token }): DecodedJWTPayload =>
             UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
         }),
@@ -124,7 +137,7 @@ describe("CerbosInstrumentation", () => {
 
   describe.each(cases)(
     "instruments $type clients",
-    ({ type, client: factory }: (typeof cases)[number]) => {
+    ({ embedded, client: factory }: (typeof cases)[number]) => {
       let client: Client;
 
       beforeAll(() => {
@@ -173,7 +186,7 @@ describe("CerbosInstrumentation", () => {
         });
 
         // Embedded policy bundles don't produce invalid argument errors
-        if (type !== "Embedded") {
+        if (!embedded) {
           it("records spans for unsuccessful calls", async () => {
             const [result, span] = await captureSpan(
               spanExporter,
@@ -224,7 +237,7 @@ describe("CerbosInstrumentation", () => {
       });
 
       // Embedded policy bundles don't implement server streams
-      if (type !== "Embedded") {
+      if (!embedded) {
         // Prior to 0.33.0, the minimum flushInterval for audit logs was 5s, which makes this painfully slow.
         describeIfCerbosVersionIsAtLeast("0.33.0")("serverStream", () => {
           it("records spans for successful calls", async () => {
@@ -387,7 +400,7 @@ describe("CerbosInstrumentation", () => {
         attributes: ExpectedAttributes,
       ): Promise<void> {
         // Embedded policy bundles don't produce server spans, and Cerbos didn't include the otelgrpc interceptors until 0.30.0.
-        if (type === "Embedded" || !cerbosVersionIsAtLeast("0.30.0")) {
+        if (embedded || !cerbosVersionIsAtLeast("0.30.0")) {
           return;
         }
 
