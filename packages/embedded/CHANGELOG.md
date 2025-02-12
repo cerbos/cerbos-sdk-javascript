@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Accept async callbacks for [`onLoad`](../../docs/embedded.options.onload.md) and [`onError`](../../docs/embedded.options.onerror.md) ([#1091](https://github.com/cerbos/cerbos-sdk-javascript/pull/1091))
 
 ## [0.9.2] - 2025-02-06
 

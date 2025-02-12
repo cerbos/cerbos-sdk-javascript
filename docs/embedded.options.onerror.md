@@ -9,5 +9,5 @@ A callback to invoke when the embedded policy decision point bundle has failed t
 **Signature:**
 
 ```typescript
-onError?: ((error: LoadError) => void) | undefined;
+onError?: ((error: LoadError) => void | Promise<void>) | undefined;
 ```

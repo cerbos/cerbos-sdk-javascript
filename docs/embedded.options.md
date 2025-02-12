@@ -102,7 +102,7 @@ _(Optional)_ A function returning the current time, to be used when evaluating p
 
 </td><td>
 
-((error: [LoadError](./embedded.loaderror.md)<!-- -->) =&gt; void) \| undefined
+((error: [LoadError](./embedded.loaderror.md)<!-- -->) =&gt; void \| Promise&lt;void&gt;) \| undefined
 
 
 </td><td>
@@ -121,7 +121,7 @@ _(Optional)_ A callback to invoke when the embedded policy decision point bundle
 
 </td><td>
 
-((metadata: [BundleMetadata](./embedded.bundlemetadata.md)<!-- -->) =&gt; void) \| undefined
+((metadata: [BundleMetadata](./embedded.bundlemetadata.md)<!-- -->) =&gt; void \| Promise&lt;void&gt;) \| undefined
 
 
 </td><td>

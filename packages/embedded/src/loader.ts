@@ -99,14 +99,14 @@ export interface Options {
    *
    * @defaultValue (no-op)
    */
-  onLoad?: ((metadata: BundleMetadata) => void) | undefined;
+  onLoad?: ((metadata: BundleMetadata) => void | Promise<void>) | undefined;
 
   /**
    * A callback to invoke when the embedded policy decision point bundle has failed to load.
    *
    * @defaultValue (no-op)
    */
-  onError?: ((error: LoadError) => void) | undefined;
+  onError?: ((error: LoadError) => void | Promise<void>) | undefined;
 }
 
 /**
@@ -273,23 +273,23 @@ export class Loader {
   protected async _load(source: Source, initial = false): Promise<LoadResult> {
     try {
       const bundle = await Bundle.from(source, this.options);
-      this._onLoad(bundle, initial);
+      await this._onLoad(bundle, initial);
       return { bundle };
     } catch (cause) {
       const error = new LoadError(cause);
-      this._onError(error);
+      await this._onError(error);
       return { error };
     }
   }
 
   /** @internal */
-  protected _onLoad(bundle: Bundle, _initial: boolean): void {
-    this.options.onLoad?.(bundle.metadata);
+  protected async _onLoad(bundle: Bundle, _initial: boolean): Promise<void> {
+    await this.options.onLoad?.(bundle.metadata);
   }
 
   /** @internal */
-  protected _onError(error: LoadError): void {
-    this.options.onError?.(error);
+  protected async _onError(error: LoadError): Promise<void> {
+    await this.options.onError?.(error);
   }
 }
 
@@ -403,7 +403,10 @@ export class AutoUpdatingLoader extends Loader {
   }
 
   /** @internal */
-  protected override _onLoad(bundle: Bundle, initial: boolean): void {
+  protected override async _onLoad(
+    bundle: Bundle,
+    initial: boolean,
+  ): Promise<void> {
     this.etag = bundle.etag;
 
     if (!initial) {
@@ -414,13 +417,13 @@ export class AutoUpdatingLoader extends Loader {
       }
     }
 
-    super._onLoad(bundle, initial);
+    await super._onLoad(bundle, initial);
   }
 
   /** @internal */
-  protected override _onError(error: LoadError): void {
+  protected override async _onError(error: LoadError): Promise<void> {
     if (!this.suppressError(error.cause)) {
-      super._onError(error);
+      await super._onError(error);
     }
   }
 
