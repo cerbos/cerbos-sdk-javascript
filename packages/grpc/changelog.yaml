@@ -1,12 +1,16 @@
-unreleased:
-  type: patch
-
-  bumped:
-    "@grpc/grpc-js":
-      to: 1.12.6
-      pull: 1088
-
 releases:
+  - version: 0.20.1
+    date: 2025-02-13
+
+    bumped:
+      "@cerbos/core":
+        to: 0.21.0
+        pull: 1097
+
+      "@grpc/grpc-js":
+        to: 1.12.6
+        pull: 1088
+
   - version: 0.20.0
     date: 2025-02-06
 

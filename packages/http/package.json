@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/http",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "description": "Client library for interacting with the Cerbos policy decision point service over HTTP from browser-based applications",
   "repository": {
     "type": "git",
@@ -50,7 +50,7 @@
     "browser"
   ],
   "dependencies": {
-    "@cerbos/core": "^0.20.0",
+    "@cerbos/core": "^0.21.0",
     "qs": "^6.14.0"
   },
   "devDependencies": {
