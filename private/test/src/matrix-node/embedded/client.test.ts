@@ -143,228 +143,24 @@ describe("Embedded", () => {
       });
 
       describe("checkResources", () => {
-        const request: CheckResourcesRequest = {
-          principal: {
-            id: "me@example.com",
-            policyVersion: "1",
-            scope: "test",
-            roles: ["USER"],
-            attr: {
-              country: {
-                alpha2: "",
-                alpha3: "NZL",
-              },
-            },
-          },
-          resources: [
-            {
-              resource: {
-                kind: "document",
-                id: "mine",
+        describe.each([true, false])(
+          "with includeMetadata: %s",
+          (includeMetadata) => {
+            const request: CheckResourcesRequest = {
+              principal: {
+                id: "me@example.com",
                 policyVersion: "1",
                 scope: "test",
+                roles: ["USER"],
                 attr: {
-                  owner: "me@example.com",
+                  country: {
+                    alpha2: "",
+                    alpha3: "NZL",
+                  },
                 },
               },
-              actions: ["view", "edit", "delete"],
-            },
-            {
-              resource: {
-                kind: "document",
-                id: "theirs",
-                policyVersion: "1",
-                scope: "test",
-                attr: {
-                  owner: "them@example.com",
-                },
-              },
-              actions: ["view", "edit", "delete"],
-            },
-            {
-              resource: {
-                kind: "document",
-                id: "invalid",
-                policyVersion: "1",
-                scope: "test",
-                attr: {
-                  owner: 123,
-                },
-              },
-              actions: ["view", "edit", "delete"],
-            },
-          ],
-          auxData: {
-            jwt: {
-              token: new UnsecuredJWT({ delete: true }).encode(),
-            },
-          },
-          includeMetadata: true,
-          requestId: "42",
-        };
-
-        const now = new Date();
-
-        beforeAll(() => {
-          vitest.useFakeTimers();
-          vitest.setSystemTime(now);
-        });
-
-        afterAll(() => {
-          vitest.useRealTimers();
-        });
-
-        it("checks a principal's permissions on a set of resources", async () => {
-          const response = await client.checkResources(request);
-
-          expect(response).toEqual(
-            new CheckResourcesResponse({
-              cerbosCallId: callIdMatcher,
-              requestId: "42",
-              results: [
-                new CheckResourcesResult({
-                  resource: {
-                    kind: "document",
-                    id: "mine",
-                    policyVersion: "1",
-                    scope: "test",
-                  },
-                  actions: {
-                    view: Effect.ALLOW,
-                    edit: Effect.ALLOW,
-                    delete: Effect.ALLOW,
-                  },
-                  validationErrors: [],
-                  metadata: {
-                    actions: {
-                      view: {
-                        matchedPolicy: "resource.document.v1/test",
-                        matchedScope: "test",
-                      },
-                      edit: {
-                        matchedPolicy: "resource.document.v1/test",
-                        matchedScope: "test",
-                      },
-                      delete: {
-                        matchedPolicy: "resource.document.v1/test",
-                        matchedScope: "",
-                      },
-                    },
-                    effectiveDerivedRoles: ["OWNER"],
-                  },
-                  outputs: [
-                    {
-                      source: "resource.document.v1#delete",
-                      value: "delete_allowed:me@example.com",
-                    },
-                  ],
-                }),
-                new CheckResourcesResult({
-                  resource: {
-                    kind: "document",
-                    id: "theirs",
-                    policyVersion: "1",
-                    scope: "test",
-                  },
-                  actions: {
-                    view: Effect.ALLOW,
-                    edit: Effect.DENY,
-                    delete: Effect.ALLOW,
-                  },
-                  validationErrors: [],
-                  metadata: {
-                    actions: {
-                      view: {
-                        matchedPolicy: "resource.document.v1/test",
-                        matchedScope: "test",
-                      },
-                      edit: {
-                        matchedPolicy: "resource.document.v1/test",
-                        matchedScope: "",
-                      },
-                      delete: {
-                        matchedPolicy: "resource.document.v1/test",
-                        matchedScope: "",
-                      },
-                    },
-                    effectiveDerivedRoles: [],
-                  },
-                  outputs: [
-                    {
-                      source: "resource.document.v1#delete",
-                      value: "delete_allowed:me@example.com",
-                    },
-                  ],
-                }),
-                new CheckResourcesResult({
-                  resource: {
-                    kind: "document",
-                    id: "invalid",
-                    policyVersion: "1",
-                    scope: "test",
-                  },
-                  actions: {
-                    view: Effect.ALLOW,
-                    edit: Effect.DENY,
-                    delete: Effect.ALLOW,
-                  },
-                  validationErrors: [],
-                  metadata: {
-                    actions: {
-                      view: {
-                        matchedPolicy: "resource.document.v1/test",
-                        matchedScope: "test",
-                      },
-                      edit: {
-                        matchedPolicy: "resource.document.v1/test",
-                        matchedScope: "",
-                      },
-                      delete: {
-                        matchedPolicy: "resource.document.v1/test",
-                        matchedScope: "",
-                      },
-                    },
-                    effectiveDerivedRoles: [],
-                  },
-                  outputs: [
-                    {
-                      source: "resource.document.v1#delete",
-                      value: "delete_allowed:me@example.com",
-                    },
-                  ],
-                }),
-              ],
-            }),
-          );
-
-          const commonInput: Omit<CheckInput, "resource" | "actions"> = {
-            requestId: "42",
-            principal: {
-              id: "me@example.com",
-              policyVersion: "1",
-              scope: "test",
-              roles: ["USER"],
-              attr: {
-                country: {
-                  alpha2: "",
-                  alpha3: "NZL",
-                },
-              },
-            },
-            auxData: {
-              jwt: {
-                delete: true,
-              },
-            },
-          };
-
-          expect(onDecision).toHaveBeenCalledExactlyOnceWith({
-            callId: response.cerbosCallId,
-            method: {
-              name: "CheckResources",
-              inputs: [
+              resources: [
                 {
-                  ...commonInput,
                   resource: {
                     kind: "document",
                     id: "mine",
@@ -377,7 +173,6 @@ describe("Embedded", () => {
                   actions: ["view", "edit", "delete"],
                 },
                 {
-                  ...commonInput,
                   resource: {
                     kind: "document",
                     id: "theirs",
@@ -390,8 +185,6 @@ describe("Embedded", () => {
                   actions: ["view", "edit", "delete"],
                 },
                 {
-                  ...commonInput,
-
                   resource: {
                     kind: "document",
                     id: "invalid",
@@ -404,112 +197,330 @@ describe("Embedded", () => {
                   actions: ["view", "edit", "delete"],
                 },
               ],
-              outputs: [
-                {
+              auxData: {
+                jwt: {
+                  token: new UnsecuredJWT({ delete: true }).encode(),
+                },
+              },
+              includeMetadata,
+              requestId: "42",
+            };
+
+            const now = new Date();
+
+            beforeAll(() => {
+              vitest.useFakeTimers();
+              vitest.setSystemTime(now);
+            });
+
+            afterAll(() => {
+              vitest.useRealTimers();
+            });
+
+            it("checks a principal's permissions on a set of resources", async () => {
+              const response = await client.checkResources(request);
+
+              expect(response).toEqual(
+                new CheckResourcesResponse({
+                  cerbosCallId: callIdMatcher,
                   requestId: "42",
-                  resourceId: "mine",
-                  actions: {
-                    view: {
-                      effect: Effect.ALLOW,
-                      policy: "resource.document.v1/test",
-                      scope: "test",
-                    },
-                    edit: {
-                      effect: Effect.ALLOW,
-                      policy: "resource.document.v1/test",
-                      scope: "test",
-                    },
-                    delete: {
-                      effect: Effect.ALLOW,
-                      policy: "resource.document.v1/test",
-                      scope: "",
+                  results: [
+                    new CheckResourcesResult({
+                      resource: {
+                        kind: "document",
+                        id: "mine",
+                        policyVersion: "1",
+                        scope: "test",
+                      },
+                      actions: {
+                        view: Effect.ALLOW,
+                        edit: Effect.ALLOW,
+                        delete: Effect.ALLOW,
+                      },
+                      validationErrors: [],
+                      metadata: includeMetadata
+                        ? {
+                            actions: {
+                              view: {
+                                matchedPolicy: "resource.document.v1/test",
+                                matchedScope: "test",
+                              },
+                              edit: {
+                                matchedPolicy: "resource.document.v1/test",
+                                matchedScope: "test",
+                              },
+                              delete: {
+                                matchedPolicy: "resource.document.v1/test",
+                                matchedScope: "",
+                              },
+                            },
+                            effectiveDerivedRoles: ["OWNER"],
+                          }
+                        : undefined,
+                      outputs: [
+                        {
+                          source: "resource.document.v1#delete",
+                          value: "delete_allowed:me@example.com",
+                        },
+                      ],
+                    }),
+                    new CheckResourcesResult({
+                      resource: {
+                        kind: "document",
+                        id: "theirs",
+                        policyVersion: "1",
+                        scope: "test",
+                      },
+                      actions: {
+                        view: Effect.ALLOW,
+                        edit: Effect.DENY,
+                        delete: Effect.ALLOW,
+                      },
+                      validationErrors: [],
+                      metadata: includeMetadata
+                        ? {
+                            actions: {
+                              view: {
+                                matchedPolicy: "resource.document.v1/test",
+                                matchedScope: "test",
+                              },
+                              edit: {
+                                matchedPolicy: "resource.document.v1/test",
+                                matchedScope: "",
+                              },
+                              delete: {
+                                matchedPolicy: "resource.document.v1/test",
+                                matchedScope: "",
+                              },
+                            },
+                            effectiveDerivedRoles: [],
+                          }
+                        : undefined,
+                      outputs: [
+                        {
+                          source: "resource.document.v1#delete",
+                          value: "delete_allowed:me@example.com",
+                        },
+                      ],
+                    }),
+                    new CheckResourcesResult({
+                      resource: {
+                        kind: "document",
+                        id: "invalid",
+                        policyVersion: "1",
+                        scope: "test",
+                      },
+                      actions: {
+                        view: Effect.ALLOW,
+                        edit: Effect.DENY,
+                        delete: Effect.ALLOW,
+                      },
+                      validationErrors: [],
+                      metadata: includeMetadata
+                        ? {
+                            actions: {
+                              view: {
+                                matchedPolicy: "resource.document.v1/test",
+                                matchedScope: "test",
+                              },
+                              edit: {
+                                matchedPolicy: "resource.document.v1/test",
+                                matchedScope: "",
+                              },
+                              delete: {
+                                matchedPolicy: "resource.document.v1/test",
+                                matchedScope: "",
+                              },
+                            },
+                            effectiveDerivedRoles: [],
+                          }
+                        : undefined,
+                      outputs: [
+                        {
+                          source: "resource.document.v1#delete",
+                          value: "delete_allowed:me@example.com",
+                        },
+                      ],
+                    }),
+                  ],
+                }),
+              );
+
+              const commonInput: Omit<CheckInput, "resource" | "actions"> = {
+                requestId: "42",
+                principal: {
+                  id: "me@example.com",
+                  policyVersion: "1",
+                  scope: "test",
+                  roles: ["USER"],
+                  attr: {
+                    country: {
+                      alpha2: "",
+                      alpha3: "NZL",
                     },
                   },
-                  effectiveDerivedRoles: ["OWNER"],
-                  outputs: [
-                    {
-                      source: "resource.document.v1#delete",
-                      value: "delete_allowed:me@example.com",
-                    },
-                  ],
-                  validationErrors: [],
                 },
-                {
-                  requestId: "42",
-                  resourceId: "theirs",
-                  actions: {
-                    view: {
-                      effect: Effect.ALLOW,
-                      policy: "resource.document.v1/test",
-                      scope: "test",
-                    },
-                    edit: {
-                      effect: Effect.DENY,
-                      policy: "resource.document.v1/test",
-                      scope: "",
-                    },
-                    delete: {
-                      effect: Effect.ALLOW,
-                      policy: "resource.document.v1/test",
-                      scope: "",
-                    },
+                auxData: {
+                  jwt: {
+                    delete: true,
                   },
-                  effectiveDerivedRoles: [],
-                  outputs: [
+                },
+              };
+
+              expect(onDecision).toHaveBeenCalledExactlyOnceWith({
+                callId: response.cerbosCallId,
+                method: {
+                  name: "CheckResources",
+                  inputs: [
                     {
-                      source: "resource.document.v1#delete",
-                      value: "delete_allowed:me@example.com",
+                      ...commonInput,
+                      resource: {
+                        kind: "document",
+                        id: "mine",
+                        policyVersion: "1",
+                        scope: "test",
+                        attr: {
+                          owner: "me@example.com",
+                        },
+                      },
+                      actions: ["view", "edit", "delete"],
+                    },
+                    {
+                      ...commonInput,
+                      resource: {
+                        kind: "document",
+                        id: "theirs",
+                        policyVersion: "1",
+                        scope: "test",
+                        attr: {
+                          owner: "them@example.com",
+                        },
+                      },
+                      actions: ["view", "edit", "delete"],
+                    },
+                    {
+                      ...commonInput,
+
+                      resource: {
+                        kind: "document",
+                        id: "invalid",
+                        policyVersion: "1",
+                        scope: "test",
+                        attr: {
+                          owner: 123,
+                        },
+                      },
+                      actions: ["view", "edit", "delete"],
                     },
                   ],
-                  validationErrors: [],
-                },
-                {
-                  requestId: "42",
-                  resourceId: "invalid",
-                  actions: {
-                    view: {
-                      effect: Effect.ALLOW,
-                      policy: "resource.document.v1/test",
-                      scope: "test",
-                    },
-                    edit: {
-                      effect: Effect.DENY,
-                      policy: "resource.document.v1/test",
-                      scope: "",
-                    },
-                    delete: {
-                      effect: Effect.ALLOW,
-                      policy: "resource.document.v1/test",
-                      scope: "",
-                    },
-                  },
-                  effectiveDerivedRoles: [],
                   outputs: [
                     {
-                      source: "resource.document.v1#delete",
-                      value: "delete_allowed:me@example.com",
+                      requestId: "42",
+                      resourceId: "mine",
+                      actions: {
+                        view: {
+                          effect: Effect.ALLOW,
+                          policy: "resource.document.v1/test",
+                          scope: "test",
+                        },
+                        edit: {
+                          effect: Effect.ALLOW,
+                          policy: "resource.document.v1/test",
+                          scope: "test",
+                        },
+                        delete: {
+                          effect: Effect.ALLOW,
+                          policy: "resource.document.v1/test",
+                          scope: "",
+                        },
+                      },
+                      effectiveDerivedRoles: ["OWNER"],
+                      outputs: [
+                        {
+                          source: "resource.document.v1#delete",
+                          value: "delete_allowed:me@example.com",
+                        },
+                      ],
+                      validationErrors: [],
+                    },
+                    {
+                      requestId: "42",
+                      resourceId: "theirs",
+                      actions: {
+                        view: {
+                          effect: Effect.ALLOW,
+                          policy: "resource.document.v1/test",
+                          scope: "test",
+                        },
+                        edit: {
+                          effect: Effect.DENY,
+                          policy: "resource.document.v1/test",
+                          scope: "",
+                        },
+                        delete: {
+                          effect: Effect.ALLOW,
+                          policy: "resource.document.v1/test",
+                          scope: "",
+                        },
+                      },
+                      effectiveDerivedRoles: [],
+                      outputs: [
+                        {
+                          source: "resource.document.v1#delete",
+                          value: "delete_allowed:me@example.com",
+                        },
+                      ],
+                      validationErrors: [],
+                    },
+                    {
+                      requestId: "42",
+                      resourceId: "invalid",
+                      actions: {
+                        view: {
+                          effect: Effect.ALLOW,
+                          policy: "resource.document.v1/test",
+                          scope: "test",
+                        },
+                        edit: {
+                          effect: Effect.DENY,
+                          policy: "resource.document.v1/test",
+                          scope: "",
+                        },
+                        delete: {
+                          effect: Effect.ALLOW,
+                          policy: "resource.document.v1/test",
+                          scope: "",
+                        },
+                      },
+                      effectiveDerivedRoles: [],
+                      outputs: [
+                        {
+                          source: "resource.document.v1#delete",
+                          value: "delete_allowed:me@example.com",
+                        },
+                      ],
+                      validationErrors: [],
                     },
                   ],
-                  validationErrors: [],
+                  error: undefined,
                 },
-              ],
-              error: undefined,
-            },
-            timestamp: now,
-            metadata: {
-              foo: ["42"],
-            },
-            auditTrail: {
-              effectivePolicies: expectedEffectivePolicies,
-            },
-            peer: {
-              address: "",
-              authInfo: "",
-              forwardedFor: "",
-              userAgent: `test/9000 ${embeddedUserAgent}`,
-            },
-          } satisfies DecisionLogEntry);
-        });
+                timestamp: now,
+                metadata: {
+                  foo: ["42"],
+                },
+                auditTrail: {
+                  effectivePolicies: expectedEffectivePolicies,
+                },
+                peer: {
+                  address: "",
+                  authInfo: "",
+                  forwardedFor: "",
+                  userAgent: `test/9000 ${embeddedUserAgent}`,
+                },
+              } satisfies DecisionLogEntry);
+            });
+          },
+        );
 
         describe("isAllowed", () => {
           it("checks if a principal is allowed to perform an action on a resource", async () => {

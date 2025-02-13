@@ -162,6 +162,12 @@ export class Bundle {
           error,
         );
       }
+
+      if (response && !request.includeMeta) {
+        for (const result of response.results) {
+          result.meta = undefined;
+        }
+      }
     }
   }
 }

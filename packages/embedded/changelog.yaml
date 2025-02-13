@@ -9,6 +9,9 @@ unreleased:
     - summary: Accept async callbacks for [`onLoad`](../../docs/embedded.options.onload.md) and [`onError`](../../docs/embedded.options.onerror.md)
       pull: 1091
 
+    - summary: Omit metadata from `checkResources` responses if [`includeMetadata`](../../docs/core.checkresourcesrequest.includemetadata.md) is `false`
+      pull: 1092
+
 releases:
   - version: 0.9.2
     date: 2025-02-06
