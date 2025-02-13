@@ -50,7 +50,8 @@
     "WASM"
   ],
   "dependencies": {
-    "@cerbos/core": "^0.20.0"
+    "@cerbos/core": "^0.20.0",
+    "ulid": "^2.3.0"
   },
   "publishConfig": {
     "access": "public",

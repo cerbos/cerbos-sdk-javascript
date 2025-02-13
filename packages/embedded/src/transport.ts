@@ -20,12 +20,14 @@ export class Transport implements _Transport {
     service: Service,
     method: Method,
     request: _Request<Service, "unary", Method>,
+    headers: Headers,
   ): Promise<_Response<Service, "unary", Method>> {
     if (service === "cerbos" && method === "checkResources") {
       const bundle = await this.bundle();
 
       return (await bundle.checkResources(
         request as CheckResourcesRequest,
+        headers,
       )) as _Response<Service, "unary", Method>;
     }
 

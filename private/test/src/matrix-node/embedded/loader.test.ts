@@ -17,45 +17,11 @@ import {
 import type { BundleMetadata, Options, Source } from "@cerbos/embedded";
 import { AutoUpdatingLoader, LoadError, Loader } from "@cerbos/embedded";
 
-import { bundleFilePath as bundleFilePathForCommit } from "../../helpers";
-
-interface Bundle {
-  etag: string;
-  metadata: BundleMetadata;
-}
-
-const first: Bundle = {
-  etag: '"9017f17ef4224dc634cf33b25201d463"',
-  metadata: {
-    builtAt: new Date(Date.UTC(2024, 2, 25, 11, 45, 14)),
-    commit: "68337848cb3f987627da7381653d82c6d4e368a5",
-    policies: [
-      "cerbos.resource.document.v1",
-      "cerbos.resource.document.v1/test",
-    ],
-    sourceAttributes: {},
-  },
-};
-
-const second: Bundle = {
-  etag: '"34acbd4bf4d9683654a084e6007b642b"',
-  metadata: {
-    builtAt: new Date(Date.UTC(2024, 9, 28, 9, 12, 55)),
-    commit: "b0917abcc7989a918cea62f97d5d0a8e84f66086",
-    policies: [
-      "cerbos.resource.document.v1",
-      "cerbos.resource.document.v1/test",
-    ],
-    sourceAttributes: {
-      "cerbos.resource.document.v1": {
-        source: "document.yaml",
-      },
-      "cerbos.resource.document.v1/test": {
-        source: "test/document.yaml",
-      },
-    },
-  },
-};
+import type { EmbeddedBundle } from "../../helpers";
+import {
+  oldEmbeddedBundle as first,
+  newEmbeddedBundle as second,
+} from "../../helpers";
 
 describe("loaders", () => {
   const server = new DummyServer();
@@ -76,18 +42,16 @@ describe("loaders", () => {
     test.each<[type: string, source: () => Source]>([
       ["string", (): string => server.url],
       ["URL", (): URL => new URL(server.url)],
-      ["ArrayBuffer", (): ArrayBuffer => readFileSync(bundleFilePath(first))],
+      ["ArrayBuffer", (): ArrayBuffer => readFileSync(first.path)],
       [
         "Promise<ArrayBuffer>",
-        async (): Promise<ArrayBuffer> => await readFile(bundleFilePath(first)),
+        async (): Promise<ArrayBuffer> => await readFile(first.path),
       ],
       [
         "Response",
         (): Response =>
           new Response(
-            Readable.toWeb(
-              createReadStream(bundleFilePath(first)),
-            ) as ReadableStream,
+            Readable.toWeb(createReadStream(first.path)) as ReadableStream,
             {
               status: 200,
               headers: { "Content-Type": "application/wasm" },
@@ -101,12 +65,12 @@ describe("loaders", () => {
       [
         "WebAssembly.Module",
         (): WebAssembly.Module =>
-          new WebAssembly.Module(readFileSync(bundleFilePath(first))),
+          new WebAssembly.Module(readFileSync(first.path)),
       ],
       [
         "Promise<WebAssembly.Module>",
         async (): Promise<WebAssembly.Module> =>
-          await WebAssembly.compile(await readFile(bundleFilePath(first))),
+          await WebAssembly.compile(await readFile(first.path)),
       ],
     ])("%s", async (_, source) => {
       const callbacks = new Callbacks();
@@ -224,16 +188,12 @@ describe("loaders", () => {
   });
 });
 
-function bundleFilePath({ metadata: { commit } }: Bundle): string {
-  return bundleFilePathForCommit(commit);
-}
-
-function bundleUrlPath({ metadata: { commit } }: Bundle): string {
+function bundleUrlPath({ metadata: { commit } }: EmbeddedBundle): string {
   return `/bundle/${commit}.wasm`;
 }
 
 class DummyServer {
-  public bundle!: Bundle;
+  public bundle!: EmbeddedBundle;
   public error!: boolean;
 
   private readonly server = createServer((request, response) => {
@@ -258,7 +218,7 @@ class DummyServer {
           .setHeader("ETag", this.bundle.etag)
           .writeHead(200);
 
-        createReadStream(bundleFilePath(this.bundle)).pipe(response);
+        createReadStream(this.bundle.path).pipe(response);
 
         break;
 

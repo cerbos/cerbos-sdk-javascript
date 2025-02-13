@@ -4,7 +4,7 @@
 
 ## DecisionLogEntry.timestamp property
 
-The time at which the logged request was received by the policy decision point server.
+The time at which the decision was made by the policy decision point server.
 
 **Signature:**
 

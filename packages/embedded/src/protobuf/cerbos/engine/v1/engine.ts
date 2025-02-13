@@ -2,6 +2,8 @@
 // source: cerbos/engine/v1/engine.proto
 
 /* eslint-disable */
+import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
+import { ValidationError } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.engine.v1";
 
@@ -88,6 +90,26 @@ export interface PlanResourcesFilter_Expression_Operand {
     | { $case: "expression"; expression: PlanResourcesFilter_Expression }
     | { $case: "variable"; variable: string }
     | undefined;
+}
+
+export interface CheckOutput {
+  requestId: string;
+  resourceId: string;
+  actions: { [key: string]: CheckOutput_ActionEffect };
+  effectiveDerivedRoles: string[];
+  validationErrors: ValidationError[];
+  outputs: OutputEntry[];
+}
+
+export interface CheckOutput_ActionEffect {
+  effect: Effect;
+  policy: string;
+  scope: string;
+}
+
+export interface CheckOutput_ActionsEntry {
+  key: string;
+  value: CheckOutput_ActionEffect | undefined;
 }
 
 export interface OutputEntry {
@@ -288,6 +310,115 @@ export const PlanResourcesFilter_Expression_Operand: MessageFns<PlanResourcesFil
       return obj;
     },
   };
+
+export const CheckOutput: MessageFns<CheckOutput> = {
+  fromJSON(object: any): CheckOutput {
+    return {
+      requestId: isSet(object.requestId)
+        ? globalThis.String(object.requestId)
+        : "",
+      resourceId: isSet(object.resourceId)
+        ? globalThis.String(object.resourceId)
+        : "",
+      actions: isObject(object.actions)
+        ? Object.entries(object.actions).reduce<{
+            [key: string]: CheckOutput_ActionEffect;
+          }>((acc, [key, value]) => {
+            acc[key] = CheckOutput_ActionEffect.fromJSON(value);
+            return acc;
+          }, {})
+        : {},
+      effectiveDerivedRoles: globalThis.Array.isArray(
+        object?.effectiveDerivedRoles,
+      )
+        ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
+        : [],
+      validationErrors: globalThis.Array.isArray(object?.validationErrors)
+        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
+        : [],
+      outputs: globalThis.Array.isArray(object?.outputs)
+        ? object.outputs.map((e: any) => OutputEntry.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: CheckOutput): unknown {
+    const obj: any = {};
+    if (message.requestId !== "") {
+      obj.requestId = message.requestId;
+    }
+    if (message.resourceId !== "") {
+      obj.resourceId = message.resourceId;
+    }
+    if (message.actions) {
+      const entries = Object.entries(message.actions);
+      if (entries.length > 0) {
+        obj.actions = {};
+        entries.forEach(([k, v]) => {
+          obj.actions[k] = CheckOutput_ActionEffect.toJSON(v);
+        });
+      }
+    }
+    if (message.effectiveDerivedRoles?.length) {
+      obj.effectiveDerivedRoles = message.effectiveDerivedRoles;
+    }
+    if (message.validationErrors?.length) {
+      obj.validationErrors = message.validationErrors.map((e) =>
+        ValidationError.toJSON(e),
+      );
+    }
+    if (message.outputs?.length) {
+      obj.outputs = message.outputs.map((e) => OutputEntry.toJSON(e));
+    }
+    return obj;
+  },
+};
+
+export const CheckOutput_ActionEffect: MessageFns<CheckOutput_ActionEffect> = {
+  fromJSON(object: any): CheckOutput_ActionEffect {
+    return {
+      effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
+      policy: isSet(object.policy) ? globalThis.String(object.policy) : "",
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
+    };
+  },
+
+  toJSON(message: CheckOutput_ActionEffect): unknown {
+    const obj: any = {};
+    if (message.effect !== 0) {
+      obj.effect = effectToJSON(message.effect);
+    }
+    if (message.policy !== "") {
+      obj.policy = message.policy;
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    return obj;
+  },
+};
+
+export const CheckOutput_ActionsEntry: MessageFns<CheckOutput_ActionsEntry> = {
+  fromJSON(object: any): CheckOutput_ActionsEntry {
+    return {
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      value: isSet(object.value)
+        ? CheckOutput_ActionEffect.fromJSON(object.value)
+        : undefined,
+    };
+  },
+
+  toJSON(message: CheckOutput_ActionsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = CheckOutput_ActionEffect.toJSON(message.value);
+    }
+    return obj;
+  },
+};
 
 export const OutputEntry: MessageFns<OutputEntry> = {
   fromJSON(object: any): OutputEntry {

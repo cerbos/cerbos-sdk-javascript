@@ -5,7 +5,12 @@
  */
 
 export * from "./client";
-export { _policyFromProtobuf } from "./convert/fromProtobuf";
+export {
+  checkInputFromProtobuf as _checkInputFromProtobuf,
+  checkOutputFromProtobuf as _checkOutputFromProtobuf,
+  policyFromProtobuf as _policyFromProtobuf,
+  requireField as _requireField,
+} from "./convert/fromProtobuf";
 export * from "./errors";
 export * from "./rpcs";
 export * from "./types/external";

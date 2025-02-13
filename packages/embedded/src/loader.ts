@@ -1,10 +1,21 @@
-import type { JWT, SourceAttributes, Value } from "@cerbos/core";
+import type {
+  Options as CoreOptions,
+  DecisionLogEntry,
+  JWT,
+  SourceAttributes,
+  Value,
+} from "@cerbos/core";
 import { _setErrorNameAndStack } from "@cerbos/core";
 
 import { Bundle, download } from "./bundle";
 import { constrainAutoUpdateInterval } from "./interval";
+import { DecisionLogger } from "./logger";
 import { cancelBody } from "./response";
 import { Transport } from "./transport";
+
+const { version } = require("../package.json") as { version: string };
+
+const defaultUserAgent = `cerbos-sdk-javascript-embedded/${version}`;
 
 type LoadResult =
   | {
@@ -69,7 +80,7 @@ export type Source =
  *
  * @public
  */
-export interface Options {
+export interface Options extends Pick<CoreOptions, "headers" | "userAgent"> {
   /**
    * A function to verify and decode JWTs passed as auxiliary data, returning the JWT payload.
    *
@@ -99,14 +110,21 @@ export interface Options {
    *
    * @defaultValue (no-op)
    */
-  onLoad?: ((metadata: BundleMetadata) => void) | undefined;
+  onLoad?: ((metadata: BundleMetadata) => void | Promise<void>) | undefined;
 
   /**
    * A callback to invoke when the embedded policy decision point bundle has failed to load.
    *
    * @defaultValue (no-op)
    */
-  onError?: ((error: LoadError) => void) | undefined;
+  onError?: ((error: LoadError) => void | Promise<void>) | undefined;
+
+  /**
+   * A callback to invoke when a decision is made by the embedded policy decision point.
+   *
+   * @defaultValue (no-op)
+   */
+  onDecision?: ((entry: DecisionLogEntry) => void | Promise<void>) | undefined;
 }
 
 /**
@@ -212,6 +230,14 @@ export class Loader {
   /** @internal */
   public _active: LoadResult | Promise<LoadResult>;
 
+  /** @internal */
+  public readonly _options: Options;
+
+  /** @internal */
+  public readonly _userAgent: string;
+
+  private readonly logger: DecisionLogger | undefined;
+
   /**
    * Load an embedded policy decision point (PDP) bundle from a given source.
    *
@@ -250,10 +276,17 @@ export class Loader {
    * const loader = new Loader(bundle);
    * ```
    */
-  public constructor(
-    source: Source,
-    private readonly options: Options = {},
-  ) {
+  public constructor(source: Source, options: Options = {}) {
+    this._options = options;
+
+    this._userAgent = `${
+      options.userAgent ? `${options.userAgent} ` : ""
+    }${defaultUserAgent}`;
+
+    if (options.onDecision) {
+      this.logger = new DecisionLogger(options.onDecision, this._userAgent);
+    }
+
     this._active = this._load(source, true);
   }
 
@@ -272,24 +305,31 @@ export class Loader {
   /** @internal */
   protected async _load(source: Source, initial = false): Promise<LoadResult> {
     try {
-      const bundle = await Bundle.from(source, this.options);
-      this._onLoad(bundle, initial);
+      const bundle = await Bundle.from(
+        source,
+        this.logger,
+        this._userAgent,
+        this._options,
+      );
+
+      await this._onLoad(bundle, initial);
+
       return { bundle };
     } catch (cause) {
       const error = new LoadError(cause);
-      this._onError(error);
+      await this._onError(error);
       return { error };
     }
   }
 
   /** @internal */
-  protected _onLoad(bundle: Bundle, _initial: boolean): void {
-    this.options.onLoad?.(bundle.metadata);
+  protected async _onLoad(bundle: Bundle, _initial: boolean): Promise<void> {
+    await this._options.onLoad?.(bundle.metadata);
   }
 
   /** @internal */
-  protected _onError(error: LoadError): void {
-    this.options.onError?.(error);
+  protected async _onError(error: LoadError): Promise<void> {
+    await this._options.onError?.(error);
   }
 }
 
@@ -403,7 +443,10 @@ export class AutoUpdatingLoader extends Loader {
   }
 
   /** @internal */
-  protected override _onLoad(bundle: Bundle, initial: boolean): void {
+  protected override async _onLoad(
+    bundle: Bundle,
+    initial: boolean,
+  ): Promise<void> {
     this.etag = bundle.etag;
 
     if (!initial) {
@@ -414,13 +457,13 @@ export class AutoUpdatingLoader extends Loader {
       }
     }
 
-    super._onLoad(bundle, initial);
+    await super._onLoad(bundle, initial);
   }
 
   /** @internal */
-  protected override _onError(error: LoadError): void {
+  protected override async _onError(error: LoadError): Promise<void> {
     if (!this.suppressError(error.cause)) {
-      super._onError(error);
+      await super._onError(error);
     }
   }
 
@@ -452,7 +495,7 @@ export class AutoUpdatingLoader extends Loader {
       request.headers = { "If-None-Match": this.etag };
     }
 
-    const response = await download(this.url, request);
+    const response = await download(this.url, this._userAgent, request);
 
     if (response.status === 304) {
       cancelBody(response);

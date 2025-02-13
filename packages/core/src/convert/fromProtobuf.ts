@@ -266,7 +266,8 @@ function decisionLogEntryCheckResourcesFromProtobuf({
   };
 }
 
-function checkInputFromProtobuf({
+/** @internal */
+export function checkInputFromProtobuf({
   requestId,
   principal,
   resource,
@@ -321,7 +322,8 @@ function decodedAuxDataFromProtobuf({ jwt }: AuxDataProtobuf): DecodedAuxData {
   return { jwt };
 }
 
-function checkOutputFromProtobuf({
+/** @internal */
+export function checkOutputFromProtobuf({
   requestId,
   resourceId,
   actions,
@@ -459,7 +461,7 @@ function checkResourcesResultFromProtobuf({
   meta,
   outputs,
 }: CheckResourcesResponse_ResultEntry): CheckResourcesResult {
-  requireField("CheckResourcesResponse.ResultEntry", resource);
+  requireField("CheckResourcesResponse.ResultEntry.resource", resource);
 
   return new CheckResourcesResult({
     resource,
@@ -541,7 +543,7 @@ export function enablePoliciesResponseFromProtobuf({
 export function getPoliciesResponseFromProtobuf({
   policies,
 }: GetPolicyResponse): GetPoliciesResponse {
-  return { policies: policies.map(_policyFromProtobuf) };
+  return { policies: policies.map(policyFromProtobuf) };
 }
 
 export function healthCheckResponseFromProtobuf({
@@ -556,7 +558,7 @@ export function healthCheckResponseFromProtobuf({
 }
 
 /** @internal */
-export function _policyFromProtobuf({
+export function policyFromProtobuf({
   apiVersion,
   description,
   disabled,
@@ -1232,7 +1234,8 @@ function requireOneOf<
   }
 }
 
-function requireField<T>(
+/** @internal */
+export function requireField<T>(
   descriptor: string,
   value: T | undefined,
 ): asserts value is T {
