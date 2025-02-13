@@ -1,11 +1,11 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Internal exports to support audit logging in embedded policy decision points
-      pull: 1091
-
 releases:
+  - version: 0.21.0
+    date: 2025-02-13
+
+    added:
+      - summary: Internal exports to support audit logging in embedded policy decision points
+        pull: 1091
+
   - version: 0.20.0
     date: 2025-02-06
 
