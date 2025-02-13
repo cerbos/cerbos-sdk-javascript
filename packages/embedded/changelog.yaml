@@ -1,18 +1,23 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[`onDecision`](../../docs/embedded.options.ondecision.md) callback to support audit logging"
-      pull: 1091
-
-  changed:
-    - summary: Accept async callbacks for [`onLoad`](../../docs/embedded.options.onload.md) and [`onError`](../../docs/embedded.options.onerror.md)
-      pull: 1091
-
-    - summary: Omit metadata from `checkResources` responses if [`includeMetadata`](../../docs/core.checkresourcesrequest.includemetadata.md) is `false`
-      pull: 1092
-
 releases:
+  - version: 0.10.0
+    date: 2025-02-13
+
+    added:
+      - summary: "[`onDecision`](../../docs/embedded.options.ondecision.md) callback to support audit logging"
+        pull: 1091
+
+    changed:
+      - summary: Accept async callbacks for [`onLoad`](../../docs/embedded.options.onload.md) and [`onError`](../../docs/embedded.options.onerror.md)
+        pull: 1091
+
+      - summary: Omit metadata from `checkResources` responses if [`includeMetadata`](../../docs/core.checkresourcesrequest.includemetadata.md) is `false`
+        pull: 1092
+
+    bumped:
+      "@cerbos/core":
+        to: 0.21.0
+        pull: 1093
+
   - version: 0.9.2
     date: 2025-02-06
 

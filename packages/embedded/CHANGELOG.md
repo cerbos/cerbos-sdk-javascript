@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.10.0] - 2025-02-13
+
 ### Added
 
 - [`onDecision`](../../docs/embedded.options.ondecision.md) callback to support audit logging ([#1091](https://github.com/cerbos/cerbos-sdk-javascript/pull/1091))
@@ -11,6 +15,8 @@
 - Accept async callbacks for [`onLoad`](../../docs/embedded.options.onload.md) and [`onError`](../../docs/embedded.options.onerror.md) ([#1091](https://github.com/cerbos/cerbos-sdk-javascript/pull/1091))
 
 - Omit metadata from `checkResources` responses if [`includeMetadata`](../../docs/core.checkresourcesrequest.includemetadata.md) is `false` ([#1092](https://github.com/cerbos/cerbos-sdk-javascript/pull/1092))
+
+- Bump dependency on [@cerbos/core] to 0.21.0 ([#1093](https://github.com/cerbos/cerbos-sdk-javascript/pull/1093))
 
 ## [0.9.2] - 2025-02-06
 
@@ -187,7 +193,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.9.2...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.10.0...HEAD
+[0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.9.2...@cerbos/embedded@0.10.0
 [0.9.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.9.1...@cerbos/embedded@0.9.2
 [0.9.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.9.0...@cerbos/embedded@0.9.1
 [0.9.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.8.0...@cerbos/embedded@0.9.0
