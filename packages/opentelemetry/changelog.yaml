@@ -3,8 +3,8 @@ unreleased:
 
   bumped:
     "@opentelemetry/semantic-conventions":
-      to: 1.29.0
-      pull: 1090
+      to: 1.30.0
+      pulls: [1090, 1094]
 
 releases:
   - version: 0.5.6
