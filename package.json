@@ -1,10 +1,10 @@
 {
   "name": "@cerbos/sdk-javascript",
   "private": true,
-  "packageManager": "pnpm@10.2.1",
+  "packageManager": "pnpm@10.4.0",
   "engines": {
-    "node": "23.7.0",
-    "pnpm": "10.2.1"
+    "node": "23.8.0",
+    "pnpm": "10.4.0"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
@@ -56,15 +56,15 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "0.17.3",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
-    "@microsoft/api-documenter": "7.26.7",
-    "@microsoft/api-extractor": "7.49.2",
+    "@microsoft/api-documenter": "7.26.8",
+    "@microsoft/api-extractor": "7.50.0",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
-    "@types/node": "18.19.75",
+    "@types/node": "18.19.76",
     "concurrently": "9.1.2",
     "depcheck": "1.4.7",
-    "eslint": "9.20.0",
-    "prettier": "3.5.0",
+    "eslint": "9.20.1",
+    "prettier": "3.5.1",
     "prettier-plugin-pkg": "0.18.1",
     "ts-proto": "2.6.1",
     "tsx": "4.19.2",
