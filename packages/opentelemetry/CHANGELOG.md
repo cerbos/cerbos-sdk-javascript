@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependency on [@opentelemetry/instrumentation] to 0.57.2 ([#1098](https://github.com/cerbos/cerbos-sdk-javascript/pull/1098))
 
 ## [0.5.7] - 2025-02-13
 
