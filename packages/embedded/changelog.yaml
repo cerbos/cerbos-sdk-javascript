@@ -1,11 +1,11 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[`defaultPolicyVersion`](../../docs/embedded.options.defaultpolicyversion.md) and [`lenientScopeSearch`](../../docs/embedded.options.lenientscopesearch.md) engine configuration options"
-      pull: 1101
-
 releases:
+  - version: 0.11.0
+    date: 2025-02-19
+
+    added:
+      - summary: "[`defaultPolicyVersion`](../../docs/embedded.options.defaultpolicyversion.md) and [`lenientScopeSearch`](../../docs/embedded.options.lenientscopesearch.md) engine configuration options"
+        pull: 1101
+
   - version: 0.10.0
     date: 2025-02-13
 
