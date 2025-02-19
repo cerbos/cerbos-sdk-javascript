@@ -17,7 +17,11 @@ export class Slice {
   }
 
   public static ofJSON(allocator: Allocator, data: unknown): Slice {
-    const bytes = utf8Encoder.encode(JSON.stringify(data));
+    return Slice.ofString(allocator, JSON.stringify(data));
+  }
+
+  public static ofString(allocator: Allocator, data: string): Slice {
+    const bytes = utf8Encoder.encode(data);
 
     const slice = new Slice(
       allocator,

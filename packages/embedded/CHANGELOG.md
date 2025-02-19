@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [`defaultPolicyVersion`](../../docs/embedded.options.defaultpolicyversion.md) and [`lenientScopeSearch`](../../docs/embedded.options.lenientscopesearch.md) engine configuration options ([#1101](https://github.com/cerbos/cerbos-sdk-javascript/pull/1101))
 
 ## [0.10.0] - 2025-02-13
 

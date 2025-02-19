@@ -18,7 +18,9 @@ import { Slice } from "./slice";
 interface Exports extends WebAssembly.Exports, Allocator {
   check: (offset: number, length: number) => bigint;
   metadata: () => bigint;
+  set_default_policy_version: (offset: number, length: number) => void;
   set_globals: (offset: number, length: number) => void;
+  set_lenient_scope_search: (value: number) => void;
 }
 
 export class Bundle {
@@ -28,7 +30,9 @@ export class Bundle {
     userAgent: string,
     {
       decodeJWTPayload = cannotDecodeJWTPayload,
+      defaultPolicyVersion,
       globals,
+      lenientScopeSearch,
       now = Date.now,
     }: Options,
   ): Promise<Bundle> {
@@ -49,14 +53,23 @@ export class Bundle {
       },
     });
 
+    if (defaultPolicyVersion) {
+      const slice = Slice.ofString(exports, defaultPolicyVersion);
+      exports.set_default_policy_version(slice.offset, slice.length);
+    }
+
     if (globals) {
-      const globalsSlice = Slice.ofJSON(exports, globals);
+      const slice = Slice.ofJSON(exports, globals);
 
       try {
-        exports.set_globals(globalsSlice.offset, globalsSlice.length);
+        exports.set_globals(slice.offset, slice.length);
       } finally {
-        globalsSlice.deallocate();
+        slice.deallocate();
       }
+    }
+
+    if (lenientScopeSearch) {
+      exports.set_lenient_scope_search(1);
     }
 
     return new Bundle(etag, exports, decodeJWTPayload, logger);
