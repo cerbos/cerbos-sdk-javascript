@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.11.0] - 2025-02-19
+
 ### Added
 
 - [`defaultPolicyVersion`](../../docs/embedded.options.defaultpolicyversion.md) and [`lenientScopeSearch`](../../docs/embedded.options.lenientscopesearch.md) engine configuration options ([#1101](https://github.com/cerbos/cerbos-sdk-javascript/pull/1101))
@@ -195,7 +199,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.10.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.11.0...HEAD
+[0.11.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.10.0...@cerbos/embedded@0.11.0
 [0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.9.2...@cerbos/embedded@0.10.0
 [0.9.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.9.1...@cerbos/embedded@0.9.2
 [0.9.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.9.0...@cerbos/embedded@0.9.1
