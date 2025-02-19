@@ -9,11 +9,11 @@
     "@eslint/js": "9.20.0",
     "@stylistic/eslint-plugin": "3.1.0",
     "@types/eslint__js": "8.42.3",
-    "@typescript-eslint/utils": "8.24.0",
+    "@typescript-eslint/utils": "8.24.1",
     "@vitest/eslint-plugin": "1.1.31",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-react-hooks": "5.1.0",
     "eslint-plugin-tsdoc": "0.4.0",
-    "typescript-eslint": "8.24.0"
+    "typescript-eslint": "8.24.1"
   }
 }

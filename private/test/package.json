@@ -24,13 +24,13 @@
     "@opentelemetry/semantic-conventions": "1.30.0",
     "@testing-library/react": "16.2.0",
     "@testing-library/user-event": "14.6.1",
-    "@types/react": "19.0.8",
+    "@types/react": "19.0.10",
     "@types/semver": "7.5.8",
-    "jose": "5.9.6",
+    "jose": "5.10.0",
     "jsdom": "26.0.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "semver": "7.7.1",
-    "vitest": "3.0.5"
+    "vitest": "3.0.6"
   }
 }
