@@ -89,11 +89,29 @@ export interface Options extends Pick<CoreOptions, "headers" | "userAgent"> {
   decodeJWTPayload?: DecodeJWTPayload | undefined;
 
   /**
+   * {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_policy_version | Default policy version} to apply to requests that do not specify one.
+   *
+   * @defaultValue `"default"`
+   */
+  defaultPolicyVersion?: string | undefined;
+
+  /**
    * {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine#globals | Global variables} to pass environment-specific information to policy conditions.
    *
    * @defaultValue `{}`
    */
   globals?: Record<string, Value> | undefined;
+
+  /**
+   * Enable {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine#lenient_scopes | lenient scope search}?
+   *
+   * By default, when a request specifies a scope of `a.b.c` then a policy must exist with that exact scope.
+   * If lenient scope search is enabled, then the policy decision point will fall back to trying scopes `a.b`, `a`, and `""`
+   * if a policy with scope `a.b.c` does not exist.
+   *
+   * @defaultValue `false`
+   */
+  lenientScopeSearch?: boolean | undefined;
 
   /**
    * A function returning the current time, to be used when evaluating policy conditions.

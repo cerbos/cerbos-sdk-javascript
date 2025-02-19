@@ -521,43 +521,43 @@ describe("Embedded", () => {
             });
           },
         );
+      });
 
-        describe("isAllowed", () => {
-          it("checks if a principal is allowed to perform an action on a resource", async () => {
-            const allowed = await client.isAllowed({
-              principal: {
-                id: "me@example.com",
-                policyVersion: "1",
-                scope: "test",
-                roles: ["USER"],
-                attr: {
-                  country: {
-                    alpha2: "",
-                    alpha3: "NZL",
-                  },
+      describe("isAllowed", () => {
+        it("checks if a principal is allowed to perform an action on a resource", async () => {
+          const allowed = await client.isAllowed({
+            principal: {
+              id: "me@example.com",
+              policyVersion: "1",
+              scope: "test",
+              roles: ["USER"],
+              attr: {
+                country: {
+                  alpha2: "",
+                  alpha3: "NZL",
                 },
               },
-              resource: {
-                kind: "document",
-                id: "mine",
-                policyVersion: "1",
-                scope: "test",
-                attr: {
-                  owner: "me@example.com",
-                },
+            },
+            resource: {
+              kind: "document",
+              id: "mine",
+              policyVersion: "1",
+              scope: "test",
+              attr: {
+                owner: "me@example.com",
               },
-              action: "edit",
-              auxData: {
-                jwt: {
-                  token: new UnsecuredJWT({ delete: true }).encode(),
-                },
+            },
+            action: "edit",
+            auxData: {
+              jwt: {
+                token: new UnsecuredJWT({ delete: true }).encode(),
               },
-              includeMetadata: true,
-              requestId: "42",
-            });
-
-            expect(allowed).toBe(true);
+            },
+            includeMetadata: true,
+            requestId: "42",
           });
+
+          expect(allowed).toBe(true);
         });
       });
 
@@ -1742,4 +1742,82 @@ describe("Embedded", () => {
       });
     });
   });
+
+  describe.each(["1", "2", undefined])(
+    "defaultPolicyVersion: %s",
+    (defaultPolicyVersion) => {
+      it("configures the default policy version", async () => {
+        const client = new Embedded(readFile(newEmbeddedBundle.path), {
+          defaultPolicyVersion,
+        });
+
+        const allowed = await client.isAllowed({
+          principal: {
+            id: "me@example.com",
+            scope: "test",
+            roles: ["USER"],
+            attr: {
+              country: {
+                alpha2: "",
+                alpha3: "NZL",
+              },
+            },
+          },
+          resource: {
+            kind: "document",
+            id: "mine",
+            scope: "test",
+            attr: {
+              owner: "me@example.com",
+            },
+          },
+          action: "edit",
+          includeMetadata: true,
+          requestId: "42",
+        });
+
+        expect(allowed).toBe(defaultPolicyVersion === "1");
+      });
+    },
+  );
+
+  describe.each([true, false, undefined])(
+    "lenientScopeSearch: %s",
+    (lenientScopeSearch) => {
+      it("configures lenient scope search", async () => {
+        const client = new Embedded(readFile(newEmbeddedBundle.path), {
+          lenientScopeSearch,
+        });
+
+        const allowed = await client.isAllowed({
+          principal: {
+            id: "me@example.com",
+            policyVersion: "1",
+            scope: "test.foo.bar",
+            roles: ["USER"],
+            attr: {
+              country: {
+                alpha2: "",
+                alpha3: "NZL",
+              },
+            },
+          },
+          resource: {
+            kind: "document",
+            id: "mine",
+            policyVersion: "1",
+            scope: "test.foo.bar",
+            attr: {
+              owner: "me@example.com",
+            },
+          },
+          action: "edit",
+          includeMetadata: true,
+          requestId: "42",
+        });
+
+        expect(allowed).toBe(lenientScopeSearch === true);
+      });
+    },
+  );
 });

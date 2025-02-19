@@ -57,6 +57,25 @@ _(Optional)_ A function to verify and decode JWTs passed as auxiliary data, retu
 </td></tr>
 <tr><td>
 
+[defaultPolicyVersion?](./embedded.options.defaultpolicyversion.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Default policy version](https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_policy_version) to apply to requests that do not specify one.
+
+
+</td></tr>
+<tr><td>
+
 [globals?](./embedded.options.globals.md)
 
 
@@ -71,6 +90,27 @@ Record&lt;string, [Value](./core.value.md)<!-- -->&gt; \| undefined
 </td><td>
 
 _(Optional)_ [Global variables](https://docs.cerbos.dev/cerbos/latest/configuration/engine#globals) to pass environment-specific information to policy conditions.
+
+
+</td></tr>
+<tr><td>
+
+[lenientScopeSearch?](./embedded.options.lenientscopesearch.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean \| undefined
+
+
+</td><td>
+
+_(Optional)_ Enable [lenient scope search](https://docs.cerbos.dev/cerbos/latest/configuration/engine#lenient_scopes)<!-- -->?
+
+By default, when a request specifies a scope of `a.b.c` then a policy must exist with that exact scope. If lenient scope search is enabled, then the policy decision point will fall back to trying scopes `a.b`<!-- -->, `a`<!-- -->, and `""` if a policy with scope `a.b.c` does not exist.
 
 
 </td></tr>
