@@ -59,7 +59,10 @@ message File {
     min_len: 1
     max_len: 1024
   }];
-  bytes contents = 2 [(buf.validate.field).bytes.min_len = 1];
+  bytes contents = 2 [(buf.validate.field).bytes = {
+    min_len: 1
+    max_len: 5242880
+  }];
 }
 
 message GetFilesResponse {
@@ -82,32 +85,62 @@ message ModifyFilesRequest {
 
   string store_id = 1 [(buf.validate.field).string.len = 12];
   optional Condition condition = 2;
-  repeated FileOp operations = 3 [(buf.validate.field).repeated.min_items = 1];
+  repeated FileOp operations = 3 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 25
+  }];
+}
+
+message FileError {
+  enum Cause {
+    CAUSE_UNSPECIFIED = 0;
+    CAUSE_INVALID_FILE_PATH = 1;
+    CAUSE_UNSUPPORTED_FILE_EXTENSION = 2;
+    CAUSE_INVALID_FILE_CONTENTS = 3;
+    CAUSE_DUPLICATE_FILE_PATH = 4;
+    CAUSE_FILE_TOO_LARGE = 5;
+  }
+
+  string file = 1;
+  Cause cause = 2;
+  string details = 3;
 }
 
 message ModifyFilesResponse {
-  message Error {
-    enum Cause {
-      CAUSE_UNSPECIFIED = 0;
-      CAUSE_INVALID_FILE_PATH = 1;
-      CAUSE_UNSUPPORTED_FILE_EXTENSION = 2;
-      CAUSE_INVALID_FILE_CONTENTS = 3;
-      CAUSE_DUPLICATE_FILE_PATH = 4;
-    }
-
-    string file = 1;
-    Cause cause = 2;
-    string details = 3;
-  }
-
   message Failure {
-    repeated Error errors = 1;
+    repeated FileError errors = 1;
   }
 
   message Success {
     int64 new_store_version = 1;
   }
+  oneof result {
+    option (buf.validate.oneof).required = true;
+    Success success = 1;
+    Failure failure = 2;
+  }
+}
 
+message ReplaceFilesRequest {
+  message Condition {
+    int64 store_version_must_equal = 1 [(buf.validate.field).int64.gte = 0];
+  }
+  string store_id = 1 [(buf.validate.field).string.len = 12];
+  optional Condition condition = 2;
+  bytes zipped_contents = 3 [(buf.validate.field).bytes = {
+    min_len: 22
+    max_len: 15728640
+  }];
+}
+
+message ReplaceFilesResponse {
+  message Failure {
+    repeated FileError errors = 1;
+  }
+
+  message Success {
+    int64 new_store_version = 1;
+  }
   oneof result {
     option (buf.validate.oneof).required = true;
     Success success = 1;
@@ -125,4 +158,5 @@ service CerbosStoreService {
     option idempotency_level = NO_SIDE_EFFECTS;
   }
   rpc ModifyFiles(ModifyFilesRequest) returns (ModifyFilesResponse) {}
+  rpc ReplaceFiles(ReplaceFilesRequest) returns (ReplaceFilesResponse) {}
 }
