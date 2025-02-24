@@ -1,7 +1,6 @@
 ignores:
   - "@tsconfig/node18"
   - "@tsconfig/strictest"
-  - "@types/eslint__js"
   - "@types/node"
   - prettier-plugin-pkg
   - ts-proto

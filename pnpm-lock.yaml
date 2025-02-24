@@ -15,8 +15,8 @@ importers:
         specifier: workspace:*
         version: link:private/eslint
       '@microsoft/api-documenter':
-        specifier: 7.26.8
-        version: 7.26.8(@types/node@18.19.76)
+        specifier: 7.26.9
+        version: 7.26.9(@types/node@18.19.76)
       '@microsoft/api-extractor':
         specifier: 7.50.0
         version: 7.50.0(@types/node@18.19.76)
@@ -142,9 +142,6 @@ importers:
       '@stylistic/eslint-plugin':
         specifier: 4.0.1
         version: 4.0.1(eslint@9.20.1)(typescript@5.7.3)
-      '@types/eslint__js':
-        specifier: 8.42.3
-        version: 8.42.3
       '@typescript-eslint/utils':
         specifier: 8.24.1
         version: 8.24.1(eslint@9.20.1)(typescript@5.7.3)
@@ -736,8 +733,8 @@ packages:
   '@js-sdsl/ordered-map@4.4.2':
     resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
 
-  '@microsoft/api-documenter@7.26.8':
-    resolution: {integrity: sha512-j80mXVi6/tZVMcithJ1jXzWMbVUgyRp9wX1RdNhV0ILVRKLp07L0qiSKTcUT2m3Klwah38UAof3wx9OOLu6NEA==}
+  '@microsoft/api-documenter@7.26.9':
+    resolution: {integrity: sha512-c9U3hcBkJBd0Q00lG0MM9B1BHnXAJspsrVeotbZ5Zs0dcsMnub79cE79MzXhRO9wtxTh1PC8vooicgFMibQznQ==}
     hasBin: true
 
   '@microsoft/api-extractor-model@7.30.3':
@@ -1038,12 +1035,6 @@ packages:
 
   '@types/aria-query@5.0.4':
     resolution: {integrity: sha512-rfT93uj5s0PRL7EzccGMs3brplhcrghnDoV26NqKhCAS1hVo+WdNsPvE/yb6ilfr5hi2MEk6d5EWJTKdxg8jVw==}
-
-  '@types/eslint@9.6.1':
-    resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
-
-  '@types/eslint__js@8.42.3':
-    resolution: {integrity: sha512-alfG737uhmPdnvkrLdZLcEKJ/B8s9Y4hrZ+YAdzUeoArBlSUERA2E87ROfOaS4jd/C45fzOoZzidLc1IPwLqOw==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -3316,7 +3307,7 @@ snapshots:
 
   '@js-sdsl/ordered-map@4.4.2': {}
 
-  '@microsoft/api-documenter@7.26.8(@types/node@18.19.76)':
+  '@microsoft/api-documenter@7.26.9(@types/node@18.19.76)':
     dependencies:
       '@microsoft/api-extractor-model': 7.30.3(@types/node@18.19.76)
       '@microsoft/tsdoc': 0.15.1
@@ -3610,15 +3601,6 @@ snapshots:
   '@types/argparse@1.0.38': {}
 
   '@types/aria-query@5.0.4': {}
-
-  '@types/eslint@9.6.1':
-    dependencies:
-      '@types/estree': 1.0.6
-      '@types/json-schema': 7.0.15
-
-  '@types/eslint__js@8.42.3':
-    dependencies:
-      '@types/eslint': 9.6.1
 
   '@types/estree@1.0.6': {}
 
