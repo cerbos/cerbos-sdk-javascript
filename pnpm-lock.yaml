@@ -15,8 +15,8 @@ importers:
         specifier: workspace:*
         version: link:private/eslint
       '@microsoft/api-documenter':
-        specifier: 7.26.8
-        version: 7.26.8(@types/node@18.19.76)
+        specifier: 7.26.9
+        version: 7.26.9(@types/node@18.19.76)
       '@microsoft/api-extractor':
         specifier: 7.50.0
         version: 7.50.0(@types/node@18.19.76)
@@ -736,8 +736,8 @@ packages:
   '@js-sdsl/ordered-map@4.4.2':
     resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
 
-  '@microsoft/api-documenter@7.26.8':
-    resolution: {integrity: sha512-j80mXVi6/tZVMcithJ1jXzWMbVUgyRp9wX1RdNhV0ILVRKLp07L0qiSKTcUT2m3Klwah38UAof3wx9OOLu6NEA==}
+  '@microsoft/api-documenter@7.26.9':
+    resolution: {integrity: sha512-c9U3hcBkJBd0Q00lG0MM9B1BHnXAJspsrVeotbZ5Zs0dcsMnub79cE79MzXhRO9wtxTh1PC8vooicgFMibQznQ==}
     hasBin: true
 
   '@microsoft/api-extractor-model@7.30.3':
@@ -3316,7 +3316,7 @@ snapshots:
 
   '@js-sdsl/ordered-map@4.4.2': {}
 
-  '@microsoft/api-documenter@7.26.8(@types/node@18.19.76)':
+  '@microsoft/api-documenter@7.26.9(@types/node@18.19.76)':
     dependencies:
       '@microsoft/api-extractor-model': 7.30.3(@types/node@18.19.76)
       '@microsoft/tsdoc': 0.15.1
