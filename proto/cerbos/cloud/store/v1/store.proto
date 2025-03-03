@@ -7,6 +7,8 @@ package cerbos.cloud.store.v1;
 
 import "buf/validate/validate.proto";
 import "google/api/visibility.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/store/v1;storev1";
 
@@ -70,6 +72,36 @@ message GetFilesResponse {
   repeated File files = 2;
 }
 
+message ChangeDetails {
+  message Git {
+    string repo = 1;
+    string ref = 2;
+    string hash = 3;
+    string message = 4;
+    string committer = 5;
+    google.protobuf.Timestamp commit_date = 6;
+    string author = 7;
+    google.protobuf.Timestamp author_date = 8;
+  }
+
+  message Internal {
+    string source = 1;
+    map<string, google.protobuf.Value> metadata = 2;
+  }
+
+  message Uploader {
+    string name = 1;
+    map<string, google.protobuf.Value> metadata = 2;
+  }
+
+  string description = 1;
+  Uploader uploader = 2;
+  oneof origin {
+    Git git = 3;
+    Internal internal = 4;
+  }
+}
+
 message FileOp {
   oneof op {
     option (buf.validate.oneof).required = true;
@@ -89,6 +121,7 @@ message ModifyFilesRequest {
     min_items: 1
     max_items: 25
   }];
+  optional ChangeDetails change_details = 4;
 }
 
 message FileError {
@@ -131,6 +164,7 @@ message ReplaceFilesRequest {
     min_len: 22
     max_len: 15728640
   }];
+  optional ChangeDetails change_details = 4;
 }
 
 message ReplaceFilesResponse {
