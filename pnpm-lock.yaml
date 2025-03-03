@@ -242,8 +242,8 @@ importers:
         specifier: 7.5.8
         version: 7.5.8
       jose:
-        specifier: 5.10.0
-        version: 5.10.0
+        specifier: 6.0.8
+        version: 6.0.8
       jsdom:
         specifier: 26.0.0
         version: 26.0.0
@@ -2034,8 +2034,8 @@ packages:
   jju@1.4.0:
     resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
 
-  jose@5.10.0:
-    resolution: {integrity: sha512-s+3Al/p9g32Iq+oqXxkW//7jk2Vig6FF1CFqzVXoTUXt2qz89YWbL+OwS17NFYEvxC35n0FKeGO2LGYSxeM2Gg==}
+  jose@6.0.8:
+    resolution: {integrity: sha512-EyUPtOKyTYq+iMOszO42eobQllaIjJnwkZ2U93aJzNyPibCy7CEvT9UQnaCVB51IAd49gbNdCew1c0LcLTCB2g==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -4824,7 +4824,7 @@ snapshots:
 
   jju@1.4.0: {}
 
-  jose@5.10.0: {}
+  jose@6.0.8: {}
 
   js-tokens@4.0.0: {}
 
