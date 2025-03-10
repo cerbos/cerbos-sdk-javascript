@@ -6,7 +6,7 @@
     "@types/semver": "7.5.8",
     "date-fns": "4.1.0",
     "execa": "9.5.2",
-    "prettier": "3.5.2",
+    "prettier": "3.5.3",
     "semver": "7.7.1",
     "yaml": "2.7.0",
     "zod": "3.24.2"
