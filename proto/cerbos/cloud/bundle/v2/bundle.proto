@@ -13,6 +13,14 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/bundle/v2;bundlev2";
 
+message Source {
+  oneof source {
+    option (buf.validate.oneof).required = true;
+    string deployment_id = 1 [(buf.validate.field).string.len = 12];
+    string playground_id = 2 [(buf.validate.field).string.len = 12];
+  }
+}
+
 // BundleInfo holds information about a bundle and its download URLs.
 message BundleInfo {
   message Segment {
@@ -27,7 +35,7 @@ message BundleInfo {
     }];
   }
 
-  string label = 1 [(buf.validate.field).string.min_len = 1];
+  Source source = 1 [(buf.validate.field).required = true];
   bytes input_hash = 2 [(buf.validate.field).bytes.len = 32];
   bytes output_hash = 3 [(buf.validate.field).bytes.len = 32];
   bytes encryption_key = 4;
@@ -35,7 +43,7 @@ message BundleInfo {
 }
 
 message Meta {
-  string identifier = 1;
+  string bundle_id = 1 [(buf.validate.field).string.len = 16];
   string source = 2;
 }
 
@@ -48,7 +56,7 @@ message Manifest {
 
 message GetBundleRequest {
   cerbos.cloud.pdp.v1.Identifier pdp_id = 1 [(buf.validate.field).required = true];
-  string bundle_label = 2 [(buf.validate.field).string.min_len = 1];
+  Source source = 2 [(buf.validate.field).required = true];
 }
 
 message GetBundleResponse {
@@ -56,8 +64,8 @@ message GetBundleResponse {
 }
 
 message WatchBundleRequest {
-  message WatchLabel {
-    string bundle_label = 1 [(buf.validate.field).string.min_len = 1];
+  message Start {
+    Source source = 1 [(buf.validate.field).required = true];
   }
 
   message Heartbeat {
@@ -65,12 +73,12 @@ message WatchBundleRequest {
       (buf.validate.field).required = true,
       (buf.validate.field).timestamp.within = {seconds: 60}
     ];
-    string active_bundle_id = 2 [(buf.validate.field).string.min_len = 1];
+    string active_bundle_id = 2 [(buf.validate.field).string.len = 16];
   }
 
   cerbos.cloud.pdp.v1.Identifier pdp_id = 1 [(buf.validate.field).required = true];
   oneof msg {
-    WatchLabel watch_label = 2;
+    Start start = 2;
     Heartbeat heartbeat = 3;
   }
 }
