@@ -79,6 +79,21 @@ export class GRPC extends Client {
       "grpc.primary_user_agent": `${
         options.userAgent ? `${options.userAgent} ` : ""
       }${defaultUserAgent}`,
+      "grpc.default_compression_algorithm": `${
+        options.compressionAlgorithm ? `${options.compressionAlgorithm} ` : "0"
+      }`,
+      // GZIP compression
+      // 0 - No compression
+      // 1 - Compress with DEFLATE algorithm
+      // 2 - Compress with GZIP algorithm
+      // 3 - Stream compression with GZIP algorithm
+      "grpc.default_compression_level": `${
+        options.compressionLevel ? `${options.compressionLevel} ` : "0"
+      }`,
+      // 0 - None
+      // 1 - Low level
+      // 2 - Medium level
+      // 3 - High level
     });
 
     super(new Transport(client), options);
