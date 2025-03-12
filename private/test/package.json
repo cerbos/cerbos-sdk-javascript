@@ -26,6 +26,7 @@
     "@testing-library/user-event": "14.6.1",
     "@types/react": "19.0.10",
     "@types/semver": "7.5.8",
+    "@ungap/with-resolvers": "0.1.0",
     "jose": "5.10.0",
     "jsdom": "26.0.0",
     "react": "19.0.0",

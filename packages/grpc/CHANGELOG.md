@@ -2,7 +2,13 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [`Options.compression`](../../docs/grpc.options.compression.md) to compress messages exchanged between the client and policy decision point server ([#1120](https://github.com/cerbos/cerbos-sdk-javascript/pull/1120))
+
+  Requires a policy decision point server running Cerbos 0.19+.
+
+- [`Options.channelOptions`](../../docs/grpc.options.channeloptions.md) to configure advanced settings on the underlying gRPC client ([#1120](https://github.com/cerbos/cerbos-sdk-javascript/pull/1120))
 
 ## [0.20.1] - 2025-02-13
 
