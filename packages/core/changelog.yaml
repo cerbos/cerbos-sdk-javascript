@@ -1,12 +1,12 @@
-unreleased:
-  type: patch
-
-  bumped:
-    uuid:
-      to: 11.1.0
-      pull: 1107
-
 releases:
+  - version: 0.21.1
+    date: 2025-03-12
+
+    bumped:
+      uuid:
+        to: 11.1.0
+        pull: 1107
+
   - version: 0.21.0
     date: 2025-02-13
 

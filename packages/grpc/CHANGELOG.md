@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.21.0] - 2025-03-12
+
 ### Added
 
 - [`Options.compression`](../../docs/grpc.options.compression.md) to compress messages exchanged between the client and policy decision point server ([#1120](https://github.com/cerbos/cerbos-sdk-javascript/pull/1120))
@@ -9,6 +13,10 @@
   Requires a policy decision point server running Cerbos 0.19+.
 
 - [`Options.channelOptions`](../../docs/grpc.options.channeloptions.md) to configure advanced settings on the underlying gRPC client ([#1120](https://github.com/cerbos/cerbos-sdk-javascript/pull/1120))
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.21.1 ([#1121](https://github.com/cerbos/cerbos-sdk-javascript/pull/1121))
 
 ## [0.20.1] - 2025-02-13
 
@@ -369,7 +377,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.20.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.21.0...HEAD
+[0.21.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.20.1...@cerbos/grpc@0.21.0
 [0.20.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.20.0...@cerbos/grpc@0.20.1
 [0.20.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.19.0...@cerbos/grpc@0.20.0
 [0.19.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.18.4...@cerbos/grpc@0.19.0

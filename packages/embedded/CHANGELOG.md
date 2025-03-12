@@ -4,6 +4,12 @@
 
 No notable changes.
 
+## [0.11.1] - 2025-03-12
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.21.1 ([#1121](https://github.com/cerbos/cerbos-sdk-javascript/pull/1121))
+
 ## [0.11.0] - 2025-02-19
 
 ### Added
@@ -199,7 +205,8 @@ No notable changes.
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.11.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.11.1...HEAD
+[0.11.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.11.0...@cerbos/embedded@0.11.1
 [0.11.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.10.0...@cerbos/embedded@0.11.0
 [0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.9.2...@cerbos/embedded@0.10.0
 [0.9.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.9.1...@cerbos/embedded@0.9.2
