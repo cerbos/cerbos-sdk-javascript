@@ -38,6 +38,44 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[channelOptions?](./grpc.options.channeloptions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ChannelOptions](./grpc.channeloptions.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Advanced settings to configure the underlying gRPC client.
+
+
+</td></tr>
+<tr><td>
+
+[compression?](./grpc.options.compression.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Compression](./grpc.compression.md) \| undefined
+
+
+</td><td>
+
+_(Optional)_ Compress messages exchanged between the client and policy decision point server.
+
+
+</td></tr>
+<tr><td>
+
 [tls](./grpc.options.tls.md)
 
 

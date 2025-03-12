@@ -1,3 +1,5 @@
+import "@ungap/with-resolvers";
+
 import { Module } from "module";
 
 import type * as interval from "../../../packages/embedded/src/interval";

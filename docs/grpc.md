@@ -32,6 +32,32 @@ A client for interacting with the Cerbos policy decision point server over gRPC.
 </td></tr>
 </tbody></table>
 
+## Enumerations
+
+<table><thead><tr><th>
+
+Enumeration
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[Compression](./grpc.compression.md)
+
+
+</td><td>
+
+Compression algorithm to apply to messages exchanged between the client and policy decision point server.
+
+
+</td></tr>
+</tbody></table>
+
 ## Interfaces
 
 <table><thead><tr><th>
@@ -46,6 +72,17 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[ChannelOptions](./grpc.channeloptions.md)
+
+
+</td><td>
+
+Advanced settings to configure a gRPC client.
+
+
+</td></tr>
+<tr><td>
 
 [Options](./grpc.options.md)
 
