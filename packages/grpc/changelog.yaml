@@ -1,15 +1,20 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[`Options.compression`](../../docs/grpc.options.compression.md) to compress messages exchanged between the client and policy decision point server"
-      details: Requires a policy decision point server running Cerbos 0.19+.
-      pull: 1120
-
-    - summary: "[`Options.channelOptions`](../../docs/grpc.options.channeloptions.md) to configure advanced settings on the underlying gRPC client"
-      pull: 1120
-
 releases:
+  - version: 0.21.0
+    date: 2025-03-12
+
+    added:
+      - summary: "[`Options.compression`](../../docs/grpc.options.compression.md) to compress messages exchanged between the client and policy decision point server"
+        details: Requires a policy decision point server running Cerbos 0.19+.
+        pull: 1120
+
+      - summary: "[`Options.channelOptions`](../../docs/grpc.options.channeloptions.md) to configure advanced settings on the underlying gRPC client"
+        pull: 1120
+
+    bumped:
+      "@cerbos/core":
+        to: 0.21.1
+        pull: 1121
+
   - version: 0.20.1
     date: 2025-02-13
 
