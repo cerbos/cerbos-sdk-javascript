@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- [`ChannelOptions."grpc-node.flow_control_window"`](../../docs/grpc.channeloptions._grpc-node.flow_control_window_.md) option to set initial window size for HTTP/2 stream-level flow control ([#1122](https://github.com/cerbos/cerbos-sdk-javascript/pull/1122))
+
 ### Changed
 
 - Bump dependency on [@grpc/grpc-js] to 1.13.0 ([#1122](https://github.com/cerbos/cerbos-sdk-javascript/pull/1122))

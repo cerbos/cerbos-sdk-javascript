@@ -37,6 +37,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+["grpc-node.flow\_control\_window"?](./grpc.channeloptions._grpc-node.flow_control_window_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+_(Optional)_ Initial window size (in bytes) for HTTP/2 stream-level flow control.
+
+
+</td></tr>
+<tr><td>
+
 ["grpc-node.retry\_max\_attempts\_limit"?](./grpc.channeloptions._grpc-node.retry_max_attempts_limit_.md)
 
 

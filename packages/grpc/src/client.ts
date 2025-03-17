@@ -78,6 +78,13 @@ export enum Compression {
  */
 export interface ChannelOptions {
   /**
+   * Initial window size (in bytes) for HTTP/2 stream-level flow control.
+   *
+   * @defaultValue `65535`
+   */
+  "grpc-node.flow_control_window"?: number | undefined;
+
+  /**
    * Maximum number of attempts when retrying requests.
    *
    * @defaultValue `5`
