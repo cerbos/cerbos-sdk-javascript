@@ -87,8 +87,8 @@ importers:
         specifier: ^0.21.1
         version: link:../core
       '@grpc/grpc-js':
-        specifier: ^1.12.6
-        version: 1.12.6
+        specifier: ^1.13.0
+        version: 1.13.0
 
   packages/http:
     dependencies:
@@ -212,8 +212,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/react
       '@grpc/grpc-js':
-        specifier: 1.12.6
-        version: 1.12.6
+        specifier: 1.13.0
+        version: 1.13.0
       '@opentelemetry/api':
         specifier: 1.9.0
         version: 1.9.0
@@ -539,8 +539,8 @@ packages:
     resolution: {integrity: sha512-JubJ5B2pJ4k4yGxaNLdbjrnk9d/iDz6/q8wOilpIowd6PJPgaxCuHBnBszq7Ce2TyMrywm5r4PnKm6V3iiZF+g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@grpc/grpc-js@1.12.6':
-    resolution: {integrity: sha512-JXUj6PI0oqqzTGvKtzOkxtpsyPRNsrmhh41TtIz/zEB6J+AUiZZ0dxWzcMwO9Ns5rmSPuMdghlTbUuqIM48d3Q==}
+  '@grpc/grpc-js@1.13.0':
+    resolution: {integrity: sha512-pMuxInZjUnUkgMT2QLZclRqwk2ykJbIU05aZgPgJYXEpN9+2I7z7aNwcjWZSycRPl232FfhPszyBFJyOxTHNog==}
     engines: {node: '>=12.10.0'}
 
   '@grpc/proto-loader@0.7.13':
@@ -3048,7 +3048,7 @@ snapshots:
       '@eslint/core': 0.12.0
       levn: 0.4.1
 
-  '@grpc/grpc-js@1.12.6':
+  '@grpc/grpc-js@1.13.0':
     dependencies:
       '@grpc/proto-loader': 0.7.13
       '@js-sdsl/ordered-map': 4.4.2
