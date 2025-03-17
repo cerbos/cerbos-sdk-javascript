@@ -51,7 +51,7 @@
   "dependencies": {
     "@bufbuild/protobuf": "^2.2.3",
     "@cerbos/core": "^0.21.1",
-    "@grpc/grpc-js": "^1.12.6"
+    "@grpc/grpc-js": "^1.13.0"
   },
   "publishConfig": {
     "access": "public",
