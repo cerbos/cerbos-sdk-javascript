@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependency on [ulid] to 2.4.0 ([#1127](https://github.com/cerbos/cerbos-sdk-javascript/pull/1127))
 
 ## [0.11.1] - 2025-03-12
 
