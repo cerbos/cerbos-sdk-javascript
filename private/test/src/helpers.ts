@@ -10,7 +10,6 @@ import type { Histogram, MetricDescriptor } from "@opentelemetry/sdk-metrics";
 import {
   AggregationTemporality,
   DataPointType,
-  InstrumentType,
   MetricReader,
 } from "@opentelemetry/sdk-metrics";
 import type {
@@ -113,7 +112,10 @@ export async function captureSpan<T>(
 
   const childSpan = spanExporter
     .getFinishedSpans()
-    .find((span) => span.parentSpanId === parentSpan.spanContext().spanId);
+    .find(
+      (span) =>
+        span.parentSpanContext?.spanId === parentSpan.spanContext().spanId,
+    );
 
   if (!childSpan) {
     throw new Error("No child span created");
@@ -210,7 +212,6 @@ export async function expectMetrics(
   expect(metric?.descriptor).toMatchObject({
     name: "rpc.client.duration",
     description: "",
-    type: InstrumentType.HISTOGRAM,
     valueType: ValueType.DOUBLE,
     unit: "ms",
   } satisfies MetricDescriptor);
