@@ -1,3 +1,11 @@
+unreleased:
+  type: patch
+
+  bumped:
+    "@opentelemetry/instrumentation":
+      to: 0.200.0
+      pull: 1126
+
 releases:
   - version: 0.5.9
     date: 2025-03-12
