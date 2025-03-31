@@ -66,8 +66,8 @@ importers:
         specifier: ^0.21.1
         version: link:../core
       ulid:
-        specifier: ^2.4.0
-        version: 2.4.0
+        specifier: ^3.0.0
+        version: 3.0.0
 
   packages/files:
     dependencies:
@@ -2580,8 +2580,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  ulid@2.4.0:
-    resolution: {integrity: sha512-fIRiVTJNcSRmXKPZtGzFQv9WRrZ3M9eoptl/teFJvjOzmpU+/K/JH6HZ8deBfb5vMEpicJcLn7JmvdknlMq7Zg==}
+  ulid@3.0.0:
+    resolution: {integrity: sha512-yvZYdXInnJve6LdlPIuYmURdS2NP41ZoF4QW7SXwbUKYt53+0eDAySO+rGSvM2O/ciuB/G+8N7GQrZ1mCJpuqw==}
     hasBin: true
 
   unbox-primitive@1.1.0:
@@ -5311,7 +5311,7 @@ snapshots:
 
   typescript@5.8.2: {}
 
-  ulid@2.4.0: {}
+  ulid@3.0.0: {}
 
   unbox-primitive@1.1.0:
     dependencies:
