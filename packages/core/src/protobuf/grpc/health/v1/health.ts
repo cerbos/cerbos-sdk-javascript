@@ -19,3 +19,14 @@ export enum HealthCheckResponse_ServingStatus {
   NOT_SERVING = 2,
   SERVICE_UNKNOWN = 3,
 }
+
+export interface HealthListRequest {}
+
+export interface HealthListResponse {
+  statuses: { [key: string]: HealthCheckResponse };
+}
+
+export interface HealthListResponse_StatusesEntry {
+  key: string;
+  value: HealthCheckResponse | undefined;
+}

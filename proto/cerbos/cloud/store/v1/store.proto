@@ -140,18 +140,7 @@ message FileError {
 }
 
 message ModifyFilesResponse {
-  message Failure {
-    repeated FileError errors = 1;
-  }
-
-  message Success {
-    int64 new_store_version = 1;
-  }
-  oneof result {
-    option (buf.validate.oneof).required = true;
-    Success success = 1;
-    Failure failure = 2;
-  }
+  int64 new_store_version = 1;
 }
 
 message ReplaceFilesRequest {
@@ -167,19 +156,17 @@ message ReplaceFilesRequest {
   optional ChangeDetails change_details = 4;
 }
 
-message ReplaceFilesResponse {
-  message Failure {
-    repeated FileError errors = 1;
-  }
+message ErrDetailValidationFailure {
+  repeated FileError errors = 1;
+}
 
-  message Success {
-    int64 new_store_version = 1;
-  }
-  oneof result {
-    option (buf.validate.oneof).required = true;
-    Success success = 1;
-    Failure failure = 2;
-  }
+message ErrDetailNoUsableFiles {
+  repeated string ignored_files = 1;
+}
+
+message ReplaceFilesResponse {
+  int64 new_store_version = 1;
+  repeated string ignored_files = 2;
 }
 
 service CerbosStoreService {

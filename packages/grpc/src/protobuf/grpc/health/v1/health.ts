@@ -35,6 +35,17 @@ export enum HealthCheckResponse_ServingStatus {
   SERVICE_UNKNOWN = 3,
 }
 
+export interface HealthListRequest {}
+
+export interface HealthListResponse {
+  statuses: { [key: string]: HealthCheckResponse };
+}
+
+export interface HealthListResponse_StatusesEntry {
+  key: string;
+  value: HealthCheckResponse | undefined;
+}
+
 function createBaseHealthCheckRequest(): HealthCheckRequest {
   return { service: "" };
 }
@@ -123,6 +134,148 @@ export const HealthCheckResponse: MessageFns<HealthCheckResponse> = {
   },
 };
 
+function createBaseHealthListRequest(): HealthListRequest {
+  return {};
+}
+
+export const HealthListRequest: MessageFns<HealthListRequest> = {
+  encode(
+    _: HealthListRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): HealthListRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseHealthListRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseHealthListResponse(): HealthListResponse {
+  return { statuses: {} };
+}
+
+export const HealthListResponse: MessageFns<HealthListResponse> = {
+  encode(
+    message: HealthListResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    Object.entries(message.statuses).forEach(([key, value]) => {
+      HealthListResponse_StatusesEntry.encode(
+        { key: key as any, value },
+        writer.uint32(10).fork(),
+      ).join();
+    });
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): HealthListResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseHealthListResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          const entry1 = HealthListResponse_StatusesEntry.decode(
+            reader,
+            reader.uint32(),
+          );
+          if (entry1.value !== undefined) {
+            message.statuses[entry1.key] = entry1.value;
+          }
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBaseHealthListResponse_StatusesEntry(): HealthListResponse_StatusesEntry {
+  return { key: "", value: undefined };
+}
+
+export const HealthListResponse_StatusesEntry: MessageFns<HealthListResponse_StatusesEntry> =
+  {
+    encode(
+      message: HealthListResponse_StatusesEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
+      }
+      if (message.value !== undefined) {
+        HealthCheckResponse.encode(
+          message.value,
+          writer.uint32(18).fork(),
+        ).join();
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): HealthListResponse_StatusesEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseHealthListResponse_StatusesEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = HealthCheckResponse.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
+
 export type HealthService = typeof HealthService;
 export const HealthService = {
   check: {
@@ -135,6 +288,17 @@ export const HealthService = {
     responseSerialize: (value: HealthCheckResponse) =>
       Buffer.from(HealthCheckResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer) => HealthCheckResponse.decode(value),
+  },
+  list: {
+    path: "/grpc.health.v1.Health/List",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: HealthListRequest) =>
+      Buffer.from(HealthListRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => HealthListRequest.decode(value),
+    responseSerialize: (value: HealthListResponse) =>
+      Buffer.from(HealthListResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => HealthListResponse.decode(value),
   },
   watch: {
     path: "/grpc.health.v1.Health/Watch",
@@ -151,6 +315,7 @@ export const HealthService = {
 
 export interface HealthServer extends UntypedServiceImplementation {
   check: handleUnaryCall<HealthCheckRequest, HealthCheckResponse>;
+  list: handleUnaryCall<HealthListRequest, HealthListResponse>;
   watch: handleServerStreamingCall<HealthCheckRequest, HealthCheckResponse>;
 }
 
@@ -177,6 +342,30 @@ export interface HealthClient extends Client {
     callback: (
       error: ServiceError | null,
       response: HealthCheckResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  list(
+    request: HealthListRequest,
+    callback: (
+      error: ServiceError | null,
+      response: HealthListResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  list(
+    request: HealthListRequest,
+    metadata: Metadata,
+    callback: (
+      error: ServiceError | null,
+      response: HealthListResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  list(
+    request: HealthListRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (
+      error: ServiceError | null,
+      response: HealthListResponse,
     ) => void,
   ): ClientUnaryCall;
   watch(
