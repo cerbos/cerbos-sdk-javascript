@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Bump dependency on [ulid] to 2.4.0 ([#1127](https://github.com/cerbos/cerbos-sdk-javascript/pull/1127))
+- Bump dependency on [ulid] to 3.0.0 ([#1127](https://github.com/cerbos/cerbos-sdk-javascript/pull/1127), [#1133](https://github.com/cerbos/cerbos-sdk-javascript/pull/1133))
 
 ## [0.11.1] - 2025-03-12
 

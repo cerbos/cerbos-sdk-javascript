@@ -1,4 +1,4 @@
-import type { ULID } from "ulid";
+import type { ULIDFactory } from "ulid";
 import { monotonicFactory } from "ulid";
 
 import type {
@@ -19,7 +19,7 @@ import type { CheckResourcesRequest } from "./protobuf/cerbos/request/v1/request
 import type { CheckResourcesResponse } from "./protobuf/cerbos/response/v1/response";
 
 export class DecisionLogger {
-  private readonly ulid: ULID;
+  private readonly ulid: ULIDFactory;
 
   public constructor(
     private readonly log: Exclude<Options["onDecision"], undefined>,
