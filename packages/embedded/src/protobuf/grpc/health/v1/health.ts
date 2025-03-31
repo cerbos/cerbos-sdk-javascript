@@ -66,6 +66,17 @@ export function healthCheckResponse_ServingStatusToJSON(
   }
 }
 
+export interface HealthListRequest {}
+
+export interface HealthListResponse {
+  statuses: { [key: string]: HealthCheckResponse };
+}
+
+export interface HealthListResponse_StatusesEntry {
+  key: string;
+  value: HealthCheckResponse | undefined;
+}
+
 export const HealthCheckRequest: MessageFns<HealthCheckRequest> = {
   fromJSON(object: any): HealthCheckRequest {
     return {
@@ -99,6 +110,73 @@ export const HealthCheckResponse: MessageFns<HealthCheckResponse> = {
     return obj;
   },
 };
+
+export const HealthListRequest: MessageFns<HealthListRequest> = {
+  fromJSON(_: any): HealthListRequest {
+    return {};
+  },
+
+  toJSON(_: HealthListRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+};
+
+export const HealthListResponse: MessageFns<HealthListResponse> = {
+  fromJSON(object: any): HealthListResponse {
+    return {
+      statuses: isObject(object.statuses)
+        ? Object.entries(object.statuses).reduce<{
+            [key: string]: HealthCheckResponse;
+          }>((acc, [key, value]) => {
+            acc[key] = HealthCheckResponse.fromJSON(value);
+            return acc;
+          }, {})
+        : {},
+    };
+  },
+
+  toJSON(message: HealthListResponse): unknown {
+    const obj: any = {};
+    if (message.statuses) {
+      const entries = Object.entries(message.statuses);
+      if (entries.length > 0) {
+        obj.statuses = {};
+        entries.forEach(([k, v]) => {
+          obj.statuses[k] = HealthCheckResponse.toJSON(v);
+        });
+      }
+    }
+    return obj;
+  },
+};
+
+export const HealthListResponse_StatusesEntry: MessageFns<HealthListResponse_StatusesEntry> =
+  {
+    fromJSON(object: any): HealthListResponse_StatusesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value)
+          ? HealthCheckResponse.fromJSON(object.value)
+          : undefined,
+      };
+    },
+
+    toJSON(message: HealthListResponse_StatusesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = HealthCheckResponse.toJSON(message.value);
+      }
+      return obj;
+    },
+  };
+
+function isObject(value: any): boolean {
+  return typeof value === "object" && value !== null;
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
