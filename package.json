@@ -1,10 +1,10 @@
 {
   "name": "@cerbos/sdk-javascript",
   "private": true,
-  "packageManager": "pnpm@10.7.0",
+  "packageManager": "pnpm@10.7.1",
   "engines": {
-    "node": "23.10.0",
-    "pnpm": "10.7.0"
+    "node": "23.11.0",
+    "pnpm": "10.7.1"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
@@ -60,7 +60,7 @@
     "@microsoft/api-extractor": "7.52.2",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
-    "@types/node": "18.19.84",
+    "@types/node": "18.19.86",
     "concurrently": "9.1.2",
     "depcheck": "1.4.7",
     "eslint": "9.23.0",
