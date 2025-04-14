@@ -42,6 +42,11 @@
       "semanticCommitScope": "deps-dev"
     },
     {
+      "matchPackageNames": ["@grpc/*"],
+      "groupName": "grpc",
+      "semanticCommitScope": "deps"
+    },
+    {
       "matchPackageNames": ["@opentelemetry/*"],
       "groupName": "opentelemetry",
       "semanticCommitScope": "deps"
