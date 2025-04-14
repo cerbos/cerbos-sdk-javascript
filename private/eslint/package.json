@@ -6,13 +6,13 @@
     ".": "./lib/index.js"
   },
   "devDependencies": {
-    "@eslint/js": "9.23.0",
+    "@eslint/js": "9.24.0",
     "@stylistic/eslint-plugin": "4.2.0",
-    "@typescript-eslint/utils": "8.29.0",
-    "@vitest/eslint-plugin": "1.1.39",
+    "@typescript-eslint/utils": "8.29.1",
+    "@vitest/eslint-plugin": "1.1.42",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-tsdoc": "0.4.0",
-    "typescript-eslint": "8.29.0"
+    "typescript-eslint": "8.29.1"
   }
 }
