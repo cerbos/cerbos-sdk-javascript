@@ -10,7 +10,7 @@
 
 - Bump dependency on [@bufbuild/protobuf] to 2.2.5 ([#1124](https://github.com/cerbos/cerbos-sdk-javascript/pull/1124))
 
-- Bump dependency on [@grpc/grpc-js] to 1.13.2 ([#1122](https://github.com/cerbos/cerbos-sdk-javascript/pull/1122), [#1130](https://github.com/cerbos/cerbos-sdk-javascript/pull/1130))
+- Bump dependency on [@grpc/grpc-js] to 1.13.3 ([#1122](https://github.com/cerbos/cerbos-sdk-javascript/pull/1122), [#1130](https://github.com/cerbos/cerbos-sdk-javascript/pull/1130), [#1139](https://github.com/cerbos/cerbos-sdk-javascript/pull/1139))
 
 ## [0.21.0] - 2025-03-12
 
