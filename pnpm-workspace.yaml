@@ -1,3 +1,7 @@
 packages:
   - packages/*
   - private/*
+
+ignoredBuiltDependencies:
+  - esbuild
+  - protobufjs

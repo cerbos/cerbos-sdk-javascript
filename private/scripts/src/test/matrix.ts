@@ -54,20 +54,36 @@ const versionSchema = z
   .transform((version) => version.replace(/^v/, ""));
 
 async function fetchNodeVersions(): Promise<string[]> {
-  const schedule = await fetchJson(
-    "https://raw.githubusercontent.com/nodejs/Release/main/schedule.json",
-    z.record(
-      versionSchema,
-      z.object({ start: isoDateSchema, end: isoDateSchema }),
+  const [majorVersions, schedule] = await Promise.all([
+    fetchJson(
+      "https://nodejs.org/dist/index.json",
+      z
+        .array(
+          z
+            .object({ version: versionSchema })
+            .transform(({ version }) => major(version)),
+        )
+        .transform((majorVersions) => new Set(majorVersions)),
     ),
-  );
+    fetchJson(
+      "https://raw.githubusercontent.com/nodejs/Release/main/schedule.json",
+      z.record(
+        versionSchema,
+        z.object({ start: isoDateSchema, end: isoDateSchema }),
+      ),
+    ),
+  ]);
 
   const today = formatISO(Date.now(), { representation: "date" });
 
   const versions: string[] = [];
 
   for (const [version, { start, end }] of Object.entries(schedule)) {
-    if (start < today && today <= end) {
+    if (
+      start < today &&
+      today <= end &&
+      majorVersions.has(parseInt(version, 10))
+    ) {
       versions.push(version);
     }
   }
