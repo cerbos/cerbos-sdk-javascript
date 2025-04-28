@@ -16,6 +16,7 @@ export const protobufPackage = "cerbos.response.v1";
 export interface PlanResourcesResponse {
   requestId: string;
   action: string;
+  actions: string[];
   resourceKind: string;
   policyVersion: string;
   filter: PlanResourcesFilter | undefined;
@@ -27,6 +28,12 @@ export interface PlanResourcesResponse {
 export interface PlanResourcesResponse_Meta {
   filterDebug: string;
   matchedScope: string;
+  matchedScopes: { [key: string]: string };
+}
+
+export interface PlanResourcesResponse_Meta_MatchedScopesEntry {
+  key: string;
+  value: string;
 }
 
 export interface CheckResourceSetResponse {
@@ -269,6 +276,7 @@ function createBasePlanResourcesResponse(): PlanResourcesResponse {
   return {
     requestId: "",
     action: "",
+    actions: [],
     resourceKind: "",
     policyVersion: "",
     filter: undefined,
@@ -288,6 +296,9 @@ export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
     }
     if (message.action !== "") {
       writer.uint32(18).string(message.action);
+    }
+    for (const v of message.actions) {
+      writer.uint32(74).string(v!);
     }
     if (message.resourceKind !== "") {
       writer.uint32(26).string(message.resourceKind);
@@ -341,6 +352,14 @@ export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
           }
 
           message.action = reader.string();
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.actions.push(reader.string());
           continue;
         }
         case 3: {
@@ -407,7 +426,7 @@ export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
 };
 
 function createBasePlanResourcesResponse_Meta(): PlanResourcesResponse_Meta {
-  return { filterDebug: "", matchedScope: "" };
+  return { filterDebug: "", matchedScope: "", matchedScopes: {} };
 }
 
 export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> =
@@ -422,6 +441,12 @@ export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> 
       if (message.matchedScope !== "") {
         writer.uint32(18).string(message.matchedScope);
       }
+      Object.entries(message.matchedScopes).forEach(([key, value]) => {
+        PlanResourcesResponse_Meta_MatchedScopesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(26).fork(),
+        ).join();
+      });
       return writer;
     },
 
@@ -450,6 +475,76 @@ export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> 
             }
 
             message.matchedScope = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            const entry3 = PlanResourcesResponse_Meta_MatchedScopesEntry.decode(
+              reader,
+              reader.uint32(),
+            );
+            if (entry3.value !== undefined) {
+              message.matchedScopes[entry3.key] = entry3.value;
+            }
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
+
+function createBasePlanResourcesResponse_Meta_MatchedScopesEntry(): PlanResourcesResponse_Meta_MatchedScopesEntry {
+  return { key: "", value: "" };
+}
+
+export const PlanResourcesResponse_Meta_MatchedScopesEntry: MessageFns<PlanResourcesResponse_Meta_MatchedScopesEntry> =
+  {
+    encode(
+      message: PlanResourcesResponse_Meta_MatchedScopesEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
+      }
+      if (message.value !== "") {
+        writer.uint32(18).string(message.value);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PlanResourcesResponse_Meta_MatchedScopesEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePlanResourcesResponse_Meta_MatchedScopesEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = reader.string();
             continue;
           }
         }

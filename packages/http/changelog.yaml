@@ -1,3 +1,11 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: Support for multiple actions in [`Client.planResources`](../../docs/core.client.planresources.md)
+      details: Requires a policy decision point server running Cerbos 0.44+.
+      pull: 1146
+
 releases:
   - version: 0.21.2
     date: 2025-03-12

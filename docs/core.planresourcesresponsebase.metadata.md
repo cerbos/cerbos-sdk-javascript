@@ -14,5 +14,5 @@ metadata: PlanResourcesMetadata | undefined;
 
 ## Remarks
 
-`undefined` if [includeMetadata](./core.planresourcesrequest.includemetadata.md) was `false`<!-- -->.
+`undefined` if [includeMetadata](./core.planresourcesrequestbase.includemetadata.md) was `false`<!-- -->.
 

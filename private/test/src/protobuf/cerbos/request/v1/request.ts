@@ -19,6 +19,7 @@ export const protobufPackage = "cerbos.request.v1";
 export interface PlanResourcesRequest {
   requestId: string;
   action: string;
+  actions: string[];
   principal: Principal | undefined;
   resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
@@ -207,6 +208,7 @@ function createBasePlanResourcesRequest(): PlanResourcesRequest {
   return {
     requestId: "",
     action: "",
+    actions: [],
     principal: undefined,
     resource: undefined,
     auxData: undefined,
@@ -224,6 +226,9 @@ export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
     }
     if (message.action !== "") {
       writer.uint32(18).string(message.action);
+    }
+    for (const v of message.actions) {
+      writer.uint32(58).string(v!);
     }
     if (message.principal !== undefined) {
       Principal.encode(message.principal, writer.uint32(26).fork()).join();
@@ -268,6 +273,14 @@ export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
           }
 
           message.action = reader.string();
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.actions.push(reader.string());
           continue;
         }
         case 3: {
@@ -320,6 +333,9 @@ export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
         ? globalThis.String(object.requestId)
         : "",
       action: isSet(object.action) ? globalThis.String(object.action) : "",
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
+        : [],
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
         : undefined,
@@ -342,6 +358,9 @@ export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
     }
     if (message.action !== "") {
       obj.action = message.action;
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions;
     }
     if (message.principal !== undefined) {
       obj.principal = Principal.toJSON(message.principal);

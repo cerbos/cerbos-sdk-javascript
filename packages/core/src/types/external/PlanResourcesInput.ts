@@ -25,8 +25,18 @@ export interface PlanResourcesInput {
 
   /**
    * The action for which the plan was made.
+   *
+   * @deprecated Use {@link PlanResourcesInput.actions | actions} instead.
    */
   action: string;
+
+  /**
+   * The actions for which the plan was made.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.44.
+   */
+  actions: string[];
 
   /**
    * Auxiliary data that was used in the plan.

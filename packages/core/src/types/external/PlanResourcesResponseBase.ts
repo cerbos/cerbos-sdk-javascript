@@ -29,7 +29,7 @@ export interface PlanResourcesResponseBase {
    * Additional information about the query plan.
    *
    * @remarks
-   * `undefined` if {@link PlanResourcesRequest.includeMetadata | includeMetadata} was `false`.
+   * `undefined` if {@link PlanResourcesRequestBase.includeMetadata | includeMetadata} was `false`.
    */
   metadata: PlanResourcesMetadata | undefined;
 }

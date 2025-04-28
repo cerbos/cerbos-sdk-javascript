@@ -10,6 +10,7 @@ export const protobufPackage = "cerbos.engine.v1";
 export interface PlanResourcesInput {
   requestId: string;
   action: string;
+  actions: string[];
   principal: Principal | undefined;
   resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
@@ -108,6 +109,13 @@ export interface PlanResourcesOutput {
   filter: PlanResourcesFilter | undefined;
   filterDebug: string;
   validationErrors: ValidationError[];
+  actions: string[];
+  matchedScopes: { [key: string]: string };
+}
+
+export interface PlanResourcesOutput_MatchedScopesEntry {
+  key: string;
+  value: string;
 }
 
 export interface CheckInput {
@@ -185,6 +193,9 @@ export const PlanResourcesInput: MessageFns<PlanResourcesInput> = {
         ? globalThis.String(object.requestId)
         : "",
       action: isSet(object.action) ? globalThis.String(object.action) : "",
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
+        : [],
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
         : undefined,
@@ -207,6 +218,9 @@ export const PlanResourcesInput: MessageFns<PlanResourcesInput> = {
     }
     if (message.action !== "") {
       obj.action = message.action;
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions;
     }
     if (message.principal !== undefined) {
       obj.principal = Principal.toJSON(message.principal);
@@ -402,6 +416,17 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
       validationErrors: globalThis.Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
+        : [],
+      matchedScopes: isObject(object.matchedScopes)
+        ? Object.entries(object.matchedScopes).reduce<{
+            [key: string]: string;
+          }>((acc, [key, value]) => {
+            acc[key] = String(value);
+            return acc;
+          }, {})
+        : {},
     };
   },
 
@@ -433,9 +458,42 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
         ValidationError.toJSON(e),
       );
     }
+    if (message.actions?.length) {
+      obj.actions = message.actions;
+    }
+    if (message.matchedScopes) {
+      const entries = Object.entries(message.matchedScopes);
+      if (entries.length > 0) {
+        obj.matchedScopes = {};
+        entries.forEach(([k, v]) => {
+          obj.matchedScopes[k] = v;
+        });
+      }
+    }
     return obj;
   },
 };
+
+export const PlanResourcesOutput_MatchedScopesEntry: MessageFns<PlanResourcesOutput_MatchedScopesEntry> =
+  {
+    fromJSON(object: any): PlanResourcesOutput_MatchedScopesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? globalThis.String(object.value) : "",
+      };
+    },
+
+    toJSON(message: PlanResourcesOutput_MatchedScopesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== "") {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
 export const CheckInput: MessageFns<CheckInput> = {
   fromJSON(object: any): CheckInput {

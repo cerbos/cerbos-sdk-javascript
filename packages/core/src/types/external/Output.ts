@@ -10,7 +10,7 @@ export interface Output {
    * A {@link https://docs.cerbos.dev/cerbos/latest/policies/conditions | Common Expression Language} expression to evaluate when the policy rule is fully activated
    * (action, roles, and derived roles match, and condition is met).
    *
-   * @deprecated Use {@link Output.when} instead.
+   * @deprecated Use {@link Output.when | when} instead.
    */
   expr?: string | undefined;
 

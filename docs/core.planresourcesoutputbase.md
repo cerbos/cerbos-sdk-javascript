@@ -56,6 +56,25 @@ The action for which the plan was made.
 </td></tr>
 <tr><td>
 
+[actions](./core.planresourcesoutputbase.actions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The actions for which the plan was made.
+
+
+</td></tr>
+<tr><td>
+
 [policyVersion](./core.planresourcesoutputbase.policyversion.md)
 
 

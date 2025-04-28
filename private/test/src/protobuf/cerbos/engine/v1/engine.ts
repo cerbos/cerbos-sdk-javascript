@@ -12,6 +12,7 @@ export const protobufPackage = "cerbos.engine.v1";
 export interface PlanResourcesInput {
   requestId: string;
   action: string;
+  actions: string[];
   principal: Principal | undefined;
   resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
@@ -110,6 +111,13 @@ export interface PlanResourcesOutput {
   filter: PlanResourcesFilter | undefined;
   filterDebug: string;
   validationErrors: ValidationError[];
+  actions: string[];
+  matchedScopes: { [key: string]: string };
+}
+
+export interface PlanResourcesOutput_MatchedScopesEntry {
+  key: string;
+  value: string;
 }
 
 export interface CheckInput {
@@ -184,6 +192,7 @@ function createBasePlanResourcesInput(): PlanResourcesInput {
   return {
     requestId: "",
     action: "",
+    actions: [],
     principal: undefined,
     resource: undefined,
     auxData: undefined,
@@ -201,6 +210,9 @@ export const PlanResourcesInput: MessageFns<PlanResourcesInput> = {
     }
     if (message.action !== "") {
       writer.uint32(18).string(message.action);
+    }
+    for (const v of message.actions) {
+      writer.uint32(58).string(v!);
     }
     if (message.principal !== undefined) {
       Principal.encode(message.principal, writer.uint32(26).fork()).join();
@@ -245,6 +257,14 @@ export const PlanResourcesInput: MessageFns<PlanResourcesInput> = {
           }
 
           message.action = reader.string();
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.actions.push(reader.string());
           continue;
         }
         case 3: {
@@ -297,6 +317,9 @@ export const PlanResourcesInput: MessageFns<PlanResourcesInput> = {
         ? globalThis.String(object.requestId)
         : "",
       action: isSet(object.action) ? globalThis.String(object.action) : "",
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
+        : [],
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
         : undefined,
@@ -319,6 +342,9 @@ export const PlanResourcesInput: MessageFns<PlanResourcesInput> = {
     }
     if (message.action !== "") {
       obj.action = message.action;
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions;
     }
     if (message.principal !== undefined) {
       obj.principal = Principal.toJSON(message.principal);
@@ -846,6 +872,8 @@ function createBasePlanResourcesOutput(): PlanResourcesOutput {
     filter: undefined,
     filterDebug: "",
     validationErrors: [],
+    actions: [],
+    matchedScopes: {},
   };
 }
 
@@ -881,6 +909,15 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
     for (const v of message.validationErrors) {
       ValidationError.encode(v!, writer.uint32(66).fork()).join();
     }
+    for (const v of message.actions) {
+      writer.uint32(74).string(v!);
+    }
+    Object.entries(message.matchedScopes).forEach(([key, value]) => {
+      PlanResourcesOutput_MatchedScopesEntry.encode(
+        { key: key as any, value },
+        writer.uint32(82).fork(),
+      ).join();
+    });
     return writer;
   },
 
@@ -961,6 +998,28 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
           );
           continue;
         }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.actions.push(reader.string());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          const entry10 = PlanResourcesOutput_MatchedScopesEntry.decode(
+            reader,
+            reader.uint32(),
+          );
+          if (entry10.value !== undefined) {
+            message.matchedScopes[entry10.key] = entry10.value;
+          }
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -990,6 +1049,17 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
       validationErrors: globalThis.Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
         : [],
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
+        : [],
+      matchedScopes: isObject(object.matchedScopes)
+        ? Object.entries(object.matchedScopes).reduce<{
+            [key: string]: string;
+          }>((acc, [key, value]) => {
+            acc[key] = String(value);
+            return acc;
+          }, {})
+        : {},
     };
   },
 
@@ -1021,9 +1091,95 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
         ValidationError.toJSON(e),
       );
     }
+    if (message.actions?.length) {
+      obj.actions = message.actions;
+    }
+    if (message.matchedScopes) {
+      const entries = Object.entries(message.matchedScopes);
+      if (entries.length > 0) {
+        obj.matchedScopes = {};
+        entries.forEach(([k, v]) => {
+          obj.matchedScopes[k] = v;
+        });
+      }
+    }
     return obj;
   },
 };
+
+function createBasePlanResourcesOutput_MatchedScopesEntry(): PlanResourcesOutput_MatchedScopesEntry {
+  return { key: "", value: "" };
+}
+
+export const PlanResourcesOutput_MatchedScopesEntry: MessageFns<PlanResourcesOutput_MatchedScopesEntry> =
+  {
+    encode(
+      message: PlanResourcesOutput_MatchedScopesEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
+      }
+      if (message.value !== "") {
+        writer.uint32(18).string(message.value);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PlanResourcesOutput_MatchedScopesEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePlanResourcesOutput_MatchedScopesEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): PlanResourcesOutput_MatchedScopesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? globalThis.String(object.value) : "",
+      };
+    },
+
+    toJSON(message: PlanResourcesOutput_MatchedScopesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== "") {
+        obj.value = message.value;
+      }
+      return obj;
+    },
+  };
 
 function createBaseCheckInput(): CheckInput {
   return {

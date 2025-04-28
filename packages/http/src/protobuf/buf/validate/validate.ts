@@ -109,6 +109,11 @@ export interface Constraint {
   expression?: string | undefined;
 }
 
+export interface MessageConstraints {
+  disabled?: boolean | undefined;
+  cel: Constraint[];
+}
+
 export interface OneofConstraints {
   required?: boolean | undefined;
 }
@@ -472,6 +477,30 @@ export const Constraint: MessageFns<Constraint> = {
     }
     if (message.expression !== undefined && message.expression !== "") {
       obj.expression = message.expression;
+    }
+    return obj;
+  },
+};
+
+export const MessageConstraints: MessageFns<MessageConstraints> = {
+  fromJSON(object: any): MessageConstraints {
+    return {
+      disabled: isSet(object.disabled)
+        ? globalThis.Boolean(object.disabled)
+        : false,
+      cel: globalThis.Array.isArray(object?.cel)
+        ? object.cel.map((e: any) => Constraint.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: MessageConstraints): unknown {
+    const obj: any = {};
+    if (message.disabled !== undefined && message.disabled !== false) {
+      obj.disabled = message.disabled;
+    }
+    if (message.cel?.length) {
+      obj.cel = message.cel.map((e) => Constraint.toJSON(e));
     }
     return obj;
   },

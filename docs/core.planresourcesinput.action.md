@@ -4,6 +4,11 @@
 
 ## PlanResourcesInput.action property
 
+> Warning: This API is now obsolete.
+> 
+> Use [actions](./core.planresourcesinput.actions.md) instead.
+> 
+
 The action for which the plan was made.
 
 **Signature:**
