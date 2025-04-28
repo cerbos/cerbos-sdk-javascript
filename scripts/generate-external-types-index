@@ -5,4 +5,4 @@ set -o pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/../packages/core/src/types/external"
 
-find . -type f ! -name index.ts | sort --ignore-case | sed -e 's/^/export * from "/' -e 's/\.ts$/";/' > index.ts
+find . -type f ! -name index.ts | LANG=POSIX sort --ignore-case | sed -e 's/^/export * from "/' -e 's/\.ts$/";/' > index.ts

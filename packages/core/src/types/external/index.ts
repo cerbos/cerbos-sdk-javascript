@@ -1,4 +1,3 @@
-export * from "./_isObject";
 export * from "./AccessLogEntry";
 export * from "./AddOrUpdatePoliciesRequest";
 export * from "./AddOrUpdateSchemasRequest";
@@ -128,3 +127,4 @@ export * from "./ValidationErrorSource";
 export * from "./ValidationFailedCallback";
 export * from "./Value";
 export * from "./Variables";
+export * from "./_isObject";
