@@ -73,4 +73,23 @@ The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policie
 
 
 </td></tr>
+<tr><td>
+
+[matchedScopes](./core.planresourcesmetadata.matchedscopes.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string&gt;
+
+
+</td><td>
+
+The [policy scopes](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies)<!-- -->that were used to plan the query for each action.
+
+
+</td></tr>
 </tbody></table>

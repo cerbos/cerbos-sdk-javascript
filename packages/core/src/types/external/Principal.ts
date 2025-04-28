@@ -27,7 +27,7 @@ export interface Principal {
    * Application-specific attributes describing the principal (deprecated).
    *
    * @defaultValue `{}`
-   * @deprecated Use {@link Principal.attr} instead, for consistency with policy expressions.
+   * @deprecated Use {@link Principal.attr | attr} instead, for consistency with policy expressions.
    */
   attributes?: Record<string, Value> | undefined;
 

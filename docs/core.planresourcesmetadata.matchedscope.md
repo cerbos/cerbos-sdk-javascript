@@ -4,6 +4,11 @@
 
 ## PlanResourcesMetadata.matchedScope property
 
+> Warning: This API is now obsolete.
+> 
+> Use [matchedScopes](./core.planresourcesmetadata.matchedscopes.md) instead.
+> 
+
 The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies) that was used to plan the query.
 
 **Signature:**

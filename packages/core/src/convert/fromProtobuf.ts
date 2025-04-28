@@ -379,6 +379,7 @@ function planResourcesInputFromProtobuf({
   principal,
   resource,
   action,
+  actions,
   auxData,
 }: PlanResourcesInputProtobuf): PlanResourcesInput {
   requireField("PlanResourcesInput.principal", principal);
@@ -388,7 +389,7 @@ function planResourcesInputFromProtobuf({
     requestId,
     principal: principalFromProtobuf(principal),
     resource: resourceQueryFromProtobuf(resource),
-    action,
+    ...planResourcesActionsFromProtobuf({ action, actions }),
     auxData: auxData && decodedAuxDataFromProtobuf(auxData),
   };
 }
@@ -412,13 +413,14 @@ function planResourcesOutputFromProtobuf({
   filter,
   filterDebug,
   action,
+  actions,
   policyVersion,
   scope,
   validationErrors,
 }: PlanResourcesOutputProtobuf): PlanResourcesOutput {
   const base: PlanResourcesOutputBase = {
     requestId,
-    action,
+    ...planResourcesActionsFromProtobuf({ action, actions }),
     policyVersion,
     scope,
     validationErrors: validationErrors.map(validationErrorFromProtobuf),
@@ -439,6 +441,21 @@ function planResourcesOutputFromProtobuf({
     kind,
     condition: planOperandFromProtobuf(filter.condition),
     conditionString: filterDebug,
+  };
+}
+
+interface PlanResourcesActions {
+  action: string;
+  actions: string[];
+}
+
+function planResourcesActionsFromProtobuf({
+  action,
+  actions,
+}: PlanResourcesActions): PlanResourcesActions {
+  return {
+    action: actions.length === 1 ? actions[0]! : action, // eslint-disable-line @typescript-eslint/no-non-null-assertion
+    actions: actions.length ? actions : [action],
   };
 }
 
@@ -1149,10 +1166,12 @@ function planOperandFromProtobuf({
 function planResourcesMetadataFromProtobuf({
   filterDebug,
   matchedScope,
+  matchedScopes,
 }: PlanResourcesResponse_Meta): PlanResourcesMetadata {
   return {
     conditionString: filterDebug,
     matchedScope,
+    matchedScopes,
   };
 }
 

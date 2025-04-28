@@ -741,21 +741,41 @@ export function listPoliciesRequestToProtobuf({
   };
 }
 
-export function planResourcesRequestToProtobuf({
-  principal,
-  resource,
-  action,
-  auxData,
-  includeMetadata = false,
-  requestId = uuidv4(),
-}: PlanResourcesRequest): PlanResourcesRequestProtobuf {
+export function planResourcesRequestToProtobuf(
+  request: PlanResourcesRequest,
+): PlanResourcesRequestProtobuf {
+  const {
+    principal,
+    resource,
+    auxData,
+    includeMetadata = false,
+    requestId = uuidv4(),
+  } = request;
+
   return {
     principal: principalToProtobuf(principal),
     resource: resourceQueryToProtobuf(resource),
-    action,
+    ...planResourcesActionsToProtobuf(request),
     auxData: auxData && auxDataToProtobuf(auxData),
     includeMeta: includeMetadata,
     requestId,
+  };
+}
+
+function planResourcesActionsToProtobuf(request: PlanResourcesRequest): {
+  action: string;
+  actions: string[];
+} {
+  if ("actions" in request) {
+    return {
+      action: "",
+      actions: request.actions,
+    };
+  }
+
+  return {
+    action: request.action,
+    actions: [],
   };
 }
 

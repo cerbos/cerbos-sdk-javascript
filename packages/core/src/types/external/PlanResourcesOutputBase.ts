@@ -13,8 +13,15 @@ export interface PlanResourcesOutputBase {
 
   /**
    * The action for which the plan was made.
+   *
+   * @deprecated Use {@link PlanResourcesOutputBase.actions | actions} instead.
    */
   action: string;
+
+  /**
+   * The actions for which the plan was made.
+   */
+  actions: string[];
 
   /**
    * The version of the policy that was used to make the plan.

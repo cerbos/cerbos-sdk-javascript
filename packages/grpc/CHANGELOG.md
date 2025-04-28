@@ -6,6 +6,10 @@
 
 - [`ChannelOptions."grpc-node.flow_control_window"`](../../docs/grpc.channeloptions._grpc-node.flow_control_window_.md) option to set initial window size for HTTP/2 stream-level flow control ([#1122](https://github.com/cerbos/cerbos-sdk-javascript/pull/1122))
 
+- Support for multiple actions in [`Client.planResources`](../../docs/core.client.planresources.md) ([#1146](https://github.com/cerbos/cerbos-sdk-javascript/pull/1146))
+
+  Requires a policy decision point server running Cerbos 0.44+.
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.2.5 ([#1124](https://github.com/cerbos/cerbos-sdk-javascript/pull/1124))

@@ -2,7 +2,11 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Support for multiple actions in [`Client.planResources`](../../docs/core.client.planresources.md) ([#1146](https://github.com/cerbos/cerbos-sdk-javascript/pull/1146))
+
+  Requires a policy decision point server running Cerbos 0.44+.
 
 ## [0.21.1] - 2025-03-12
 

@@ -1291,7 +1291,29 @@ Common fields between different [PlanResourcesOutput](./core.planresourcesoutput
 </td></tr>
 <tr><td>
 
-[PlanResourcesRequest](./core.planresourcesrequest.md)
+[PlanResourcesRequestBase](./core.planresourcesrequestbase.md)
+
+
+</td><td>
+
+Common fields for inputs to [Client.planResources()](./core.client.planresources.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[PlanResourcesRequestWithAction](./core.planresourcesrequestwithaction.md)
+
+
+</td><td>
+
+Input to [Client.planResources()](./core.client.planresources.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[PlanResourcesRequestWithActions](./core.planresourcesrequestwithactions.md)
 
 
 </td><td>
@@ -1697,6 +1719,17 @@ An abstract syntax tree node representing an operand to an expression.
 </td><td>
 
 Output from a `PlanResources` invocation.
+
+
+</td></tr>
+<tr><td>
+
+[PlanResourcesRequest](./core.planresourcesrequest.md)
+
+
+</td><td>
+
+Input to [Client.planResources()](./core.client.planresources.md)<!-- -->.
 
 
 </td></tr>

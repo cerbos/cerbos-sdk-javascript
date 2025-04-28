@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> Use [PolicyMetadata.storeIdentifier](./core.policymetadata.storeidentifier.md) instead.
+> Use [storeIdentifier](./core.policymetadata.storeidentifier.md) instead.
 > 
 
 Deprecated.

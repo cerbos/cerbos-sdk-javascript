@@ -29,7 +29,7 @@ export interface PolicyMetadata {
   /**
    * Deprecated.
    *
-   * @deprecated Use {@link PolicyMetadata.storeIdentifier} instead.
+   * @deprecated Use {@link PolicyMetadata.storeIdentifier | storeIdentifier} instead.
    */
   storeIdentifer: string;
 

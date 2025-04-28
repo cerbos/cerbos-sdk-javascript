@@ -56,6 +56,25 @@ The action for which the plan was made.
 </td></tr>
 <tr><td>
 
+[actions](./core.planresourcesinput.actions.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The actions for which the plan was made.
+
+
+</td></tr>
+<tr><td>
+
 [auxData](./core.planresourcesinput.auxdata.md)
 
 

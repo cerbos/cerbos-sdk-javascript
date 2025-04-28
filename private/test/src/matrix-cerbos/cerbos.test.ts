@@ -34,6 +34,7 @@ import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
 
 import {
+  callIdMatcher,
   describeIfCerbosVersionIsAtLeast,
   invalidArgumentDetails,
   versionDependentCallIdMatcher,
@@ -527,67 +528,165 @@ describe("Client", () => {
         });
 
         describe("planResources", () => {
-          const request: PlanResourcesRequest = {
-            principal: {
-              id: "me@example.com",
-              policyVersion: "1",
-              scope: "test",
-              roles: ["USER"],
-              attr: {
-                country: {
-                  alpha2: "",
-                  alpha3: "NZL",
+          describe("with action", () => {
+            const request: PlanResourcesRequest = {
+              principal: {
+                id: "me@example.com",
+                policyVersion: "1",
+                scope: "test",
+                roles: ["USER"],
+                attr: {
+                  country: {
+                    alpha2: "",
+                    alpha3: "NZL",
+                  },
                 },
               },
-            },
-            resource: {
-              kind: "document",
-              policyVersion: "1",
-              scope: "test",
-              attr: {},
-            },
-            action: "edit",
-            auxData: {
-              jwt: {
-                token: new UnsecuredJWT({ delete: true }).encode(),
+              resource: {
+                kind: "document",
+                policyVersion: "1",
+                scope: "test",
+                attr: {},
               },
-            },
-            includeMetadata: true,
-            requestId: "42",
-          };
-
-          it("returns a query plan for resources", async () => {
-            const response = await clients.default.planResources(request);
-
-            expect(response).toEqual({
-              cerbosCallId: versionDependentCallIdMatcher,
+              action: "edit",
+              auxData: {
+                jwt: {
+                  token: new UnsecuredJWT({ delete: true }).encode(),
+                },
+              },
+              includeMetadata: true,
               requestId: "42",
-              kind: PlanKind.CONDITIONAL,
-              condition: new PlanExpression("eq", [
-                new PlanExpressionVariable("request.resource.attr.owner"),
-                new PlanExpressionValue("me@example.com"),
-              ]),
-              validationErrors: cerbosVersionIsAtLeast("0.19.0")
-                ? [
+            };
+
+            it("returns a query plan for resources", async () => {
+              const response = await clients.default.planResources(request);
+
+              expect(response).toEqual({
+                cerbosCallId: versionDependentCallIdMatcher,
+                requestId: "42",
+                kind: PlanKind.CONDITIONAL,
+                condition: new PlanExpression("eq", [
+                  new PlanExpressionVariable("request.resource.attr.owner"),
+                  new PlanExpressionValue("me@example.com"),
+                ]),
+                validationErrors: cerbosVersionIsAtLeast("0.19.0")
+                  ? [
+                      {
+                        path: "/country/alpha2",
+                        message: "does not match pattern '[A-Z]{2}'",
+                        source: ValidationErrorSource.PRINCIPAL,
+                      },
+                    ]
+                  : [],
+                metadata: {
+                  conditionString: cerbosVersionIsAtLeast("0.18.0")
+                    ? '(eq request.resource.attr.owner "me@example.com")'
+                    : '(request.resource.attr.owner == "me@example.com")',
+                  matchedScope: "test",
+                  matchedScopes: {},
+                },
+              } satisfies PlanResourcesResponse);
+            });
+
+            describeIfCerbosVersionIsAtLeast("0.19.0")(
+              "when configured to throw on validation error",
+              () => {
+                it("throws on validation error", async () => {
+                  await expect(
+                    clients.throwOnValidationError.planResources(request),
+                  ).rejects.toThrow(
+                    new ValidationFailed([
+                      {
+                        path: "/country/alpha2",
+                        message: "does not match pattern '[A-Z]{2}'",
+                        source: ValidationErrorSource.PRINCIPAL,
+                      } satisfies ValidationError,
+                    ]),
+                  );
+                });
+              },
+            );
+
+            describeIfCerbosVersionIsAtLeast("0.19.0")(
+              "when configured with a callback on validation error",
+              () => {
+                it("calls the callback on validation error", async () => {
+                  await clients.callbackOnValidationError.planResources(
+                    request,
+                  );
+
+                  expect(validationFailed).toHaveBeenCalledWith([
                     {
                       path: "/country/alpha2",
                       message: "does not match pattern '[A-Z]{2}'",
                       source: ValidationErrorSource.PRINCIPAL,
-                    },
-                  ]
-                : [],
-              metadata: {
-                conditionString: cerbosVersionIsAtLeast("0.18.0")
-                  ? '(eq request.resource.attr.owner "me@example.com")'
-                  : '(request.resource.attr.owner == "me@example.com")',
-                matchedScope: "test",
+                    } satisfies ValidationError,
+                  ]);
+                });
               },
-            } satisfies PlanResourcesResponse);
+            );
           });
 
-          describeIfCerbosVersionIsAtLeast("0.19.0")(
-            "when configured to throw on validation error",
-            () => {
+          describeIfCerbosVersionIsAtLeast("0.44.0")("with actions", () => {
+            const request: PlanResourcesRequest = {
+              principal: {
+                id: "me@example.com",
+                policyVersion: "1",
+                scope: "test",
+                roles: ["USER"],
+                attr: {
+                  country: {
+                    alpha2: "",
+                    alpha3: "NZL",
+                  },
+                },
+              },
+              resource: {
+                kind: "document",
+                policyVersion: "1",
+                scope: "test",
+                attr: {},
+              },
+              actions: ["edit"],
+              auxData: {
+                jwt: {
+                  token: new UnsecuredJWT({ delete: true }).encode(),
+                },
+              },
+              includeMetadata: true,
+              requestId: "42",
+            };
+
+            it("returns a query plan for resources", async () => {
+              const response = await clients.default.planResources(request);
+
+              expect(response).toEqual({
+                cerbosCallId: callIdMatcher,
+                requestId: "42",
+                kind: PlanKind.CONDITIONAL,
+                condition: new PlanExpression("eq", [
+                  new PlanExpressionVariable("request.resource.attr.owner"),
+                  new PlanExpressionValue("me@example.com"),
+                ]),
+                validationErrors: [
+                  {
+                    path: "/country/alpha2",
+                    message: "does not match pattern '[A-Z]{2}'",
+                    source: ValidationErrorSource.PRINCIPAL,
+                  },
+                ],
+                metadata: {
+                  conditionString:
+                    '(eq request.resource.attr.owner "me@example.com")',
+                  matchedScope: "",
+                  matchedScopes: {
+                    edit: "test",
+                  },
+                },
+              } satisfies PlanResourcesResponse);
+            });
+
+            describe("when configured to throw on validation error", () => {
               it("throws on validation error", async () => {
                 await expect(
                   clients.throwOnValidationError.planResources(request),
@@ -601,12 +700,9 @@ describe("Client", () => {
                   ]),
                 );
               });
-            },
-          );
+            });
 
-          describeIfCerbosVersionIsAtLeast("0.19.0")(
-            "when configured with a callback on validation error",
-            () => {
+            describe("when configured with a callback on validation error", () => {
               it("calls the callback on validation error", async () => {
                 await clients.callbackOnValidationError.planResources(request);
 
@@ -618,8 +714,8 @@ describe("Client", () => {
                   } satisfies ValidationError,
                 ]);
               });
-            },
-          );
+            });
+          });
         });
 
         describe("serverInfo", () => {

@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> Use [Principal.attr](./core.principal.attr.md) instead, for consistency with policy expressions.
+> Use [attr](./core.principal.attr.md) instead, for consistency with policy expressions.
 > 
 
 Application-specific attributes describing the principal (deprecated).
