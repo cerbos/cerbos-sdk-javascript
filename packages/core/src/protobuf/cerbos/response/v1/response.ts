@@ -20,6 +20,7 @@ export const protobufPackage = "cerbos.response.v1";
 export interface PlanResourcesResponse {
   requestId: string;
   action: string;
+  actions: string[];
   resourceKind: string;
   policyVersion: string;
   filter: PlanResourcesFilter | undefined;
@@ -31,6 +32,12 @@ export interface PlanResourcesResponse {
 export interface PlanResourcesResponse_Meta {
   filterDebug: string;
   matchedScope: string;
+  matchedScopes: { [key: string]: string };
+}
+
+export interface PlanResourcesResponse_Meta_MatchedScopesEntry {
+  key: string;
+  value: string;
 }
 
 export interface CheckResourceSetResponse {

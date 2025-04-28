@@ -16,6 +16,7 @@ export const protobufPackage = "cerbos.request.v1";
 export interface PlanResourcesRequest {
   requestId: string;
   action: string;
+  actions: string[];
   principal: Principal | undefined;
   resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;

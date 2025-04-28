@@ -14,6 +14,7 @@ export const protobufPackage = "cerbos.response.v1";
 export interface PlanResourcesResponse {
   requestId: string;
   action: string;
+  actions: string[];
   resourceKind: string;
   policyVersion: string;
   filter: PlanResourcesFilter | undefined;
@@ -25,6 +26,12 @@ export interface PlanResourcesResponse {
 export interface PlanResourcesResponse_Meta {
   filterDebug: string;
   matchedScope: string;
+  matchedScopes: { [key: string]: string };
+}
+
+export interface PlanResourcesResponse_Meta_MatchedScopesEntry {
+  key: string;
+  value: string;
 }
 
 export interface CheckResourceSetResponse {
@@ -469,6 +476,9 @@ export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
         ? globalThis.String(object.requestId)
         : "",
       action: isSet(object.action) ? globalThis.String(object.action) : "",
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
+        : [],
       resourceKind: isSet(object.resourceKind)
         ? globalThis.String(object.resourceKind)
         : "",
@@ -497,6 +507,9 @@ export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
     }
     if (message.action !== "") {
       obj.action = message.action;
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions;
     }
     if (message.resourceKind !== "") {
       obj.resourceKind = message.resourceKind;
@@ -532,6 +545,14 @@ export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> 
         matchedScope: isSet(object.matchedScope)
           ? globalThis.String(object.matchedScope)
           : "",
+        matchedScopes: isObject(object.matchedScopes)
+          ? Object.entries(object.matchedScopes).reduce<{
+              [key: string]: string;
+            }>((acc, [key, value]) => {
+              acc[key] = String(value);
+              return acc;
+            }, {})
+          : {},
       };
     },
 
@@ -542,6 +563,36 @@ export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> 
       }
       if (message.matchedScope !== "") {
         obj.matchedScope = message.matchedScope;
+      }
+      if (message.matchedScopes) {
+        const entries = Object.entries(message.matchedScopes);
+        if (entries.length > 0) {
+          obj.matchedScopes = {};
+          entries.forEach(([k, v]) => {
+            obj.matchedScopes[k] = v;
+          });
+        }
+      }
+      return obj;
+    },
+  };
+
+export const PlanResourcesResponse_Meta_MatchedScopesEntry: MessageFns<PlanResourcesResponse_Meta_MatchedScopesEntry> =
+  {
+    fromJSON(object: any): PlanResourcesResponse_Meta_MatchedScopesEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? globalThis.String(object.value) : "",
+      };
+    },
+
+    toJSON(message: PlanResourcesResponse_Meta_MatchedScopesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== "") {
+        obj.value = message.value;
       }
       return obj;
     },

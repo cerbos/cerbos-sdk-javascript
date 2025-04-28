@@ -110,6 +110,11 @@ export interface Constraint {
   expression?: string | undefined;
 }
 
+export interface MessageConstraints {
+  disabled?: boolean | undefined;
+  cel: Constraint[];
+}
+
 export interface OneofConstraints {
   required?: boolean | undefined;
 }
@@ -534,6 +539,83 @@ export const Constraint: MessageFns<Constraint> = {
     }
     if (message.expression !== undefined && message.expression !== "") {
       obj.expression = message.expression;
+    }
+    return obj;
+  },
+};
+
+function createBaseMessageConstraints(): MessageConstraints {
+  return { disabled: false, cel: [] };
+}
+
+export const MessageConstraints: MessageFns<MessageConstraints> = {
+  encode(
+    message: MessageConstraints,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.disabled !== undefined && message.disabled !== false) {
+      writer.uint32(8).bool(message.disabled);
+    }
+    for (const v of message.cel) {
+      Constraint.encode(v!, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): MessageConstraints {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMessageConstraints();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.disabled = reader.bool();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.cel.push(Constraint.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MessageConstraints {
+    return {
+      disabled: isSet(object.disabled)
+        ? globalThis.Boolean(object.disabled)
+        : false,
+      cel: globalThis.Array.isArray(object?.cel)
+        ? object.cel.map((e: any) => Constraint.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: MessageConstraints): unknown {
+    const obj: any = {};
+    if (message.disabled !== undefined && message.disabled !== false) {
+      obj.disabled = message.disabled;
+    }
+    if (message.cel?.length) {
+      obj.cel = message.cel.map((e) => Constraint.toJSON(e));
     }
     return obj;
   },

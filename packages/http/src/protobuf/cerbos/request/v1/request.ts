@@ -17,6 +17,7 @@ export const protobufPackage = "cerbos.request.v1";
 export interface PlanResourcesRequest {
   requestId: string;
   action: string;
+  actions: string[];
   principal: Principal | undefined;
   resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
@@ -208,6 +209,9 @@ export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
         ? globalThis.String(object.requestId)
         : "",
       action: isSet(object.action) ? globalThis.String(object.action) : "",
+      actions: globalThis.Array.isArray(object?.actions)
+        ? object.actions.map((e: any) => globalThis.String(e))
+        : [],
       principal: isSet(object.principal)
         ? Principal.fromJSON(object.principal)
         : undefined,
@@ -230,6 +234,9 @@ export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
     }
     if (message.action !== "") {
       obj.action = message.action;
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions;
     }
     if (message.principal !== undefined) {
       obj.principal = Principal.toJSON(message.principal);

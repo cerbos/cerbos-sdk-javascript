@@ -10,6 +10,7 @@ export const protobufPackage = "cerbos.engine.v1";
 export interface PlanResourcesInput {
   requestId: string;
   action: string;
+  actions: string[];
   principal: Principal | undefined;
   resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
@@ -62,6 +63,13 @@ export interface PlanResourcesOutput {
   filter: PlanResourcesFilter | undefined;
   filterDebug: string;
   validationErrors: ValidationError[];
+  actions: string[];
+  matchedScopes: { [key: string]: string };
+}
+
+export interface PlanResourcesOutput_MatchedScopesEntry {
+  key: string;
+  value: string;
 }
 
 export interface CheckInput {

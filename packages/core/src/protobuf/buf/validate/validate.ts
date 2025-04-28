@@ -27,6 +27,11 @@ export interface Constraint {
   expression?: string | undefined;
 }
 
+export interface MessageConstraints {
+  disabled?: boolean | undefined;
+  cel: Constraint[];
+}
+
 export interface OneofConstraints {
   required?: boolean | undefined;
 }
