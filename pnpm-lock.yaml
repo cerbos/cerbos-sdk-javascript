@@ -81,7 +81,7 @@ importers:
   packages/grpc:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.2.5
+        specifier: ^2.3.0
         version: 2.3.0
       '@cerbos/core':
         specifier: ^0.21.1
