@@ -54,18 +54,18 @@
     "test:servers:stop": "pnpm run --filter=./private/test test:servers:stop"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.17.4",
+    "@arethetypeswrong/cli": "0.18.0",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@microsoft/api-documenter": "7.26.26",
     "@microsoft/api-extractor": "7.52.7",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
-    "@types/node": "18.19.87",
+    "@types/node": "18.19.100",
     "concurrently": "9.1.2",
     "depcheck": "1.4.7",
     "eslint": "9.26.0",
     "prettier": "3.5.3",
-    "prettier-plugin-pkg": "0.19.0",
+    "prettier-plugin-pkg": "0.19.1",
     "ts-proto": "2.7.0",
     "tsx": "4.19.4",
     "typescript": "5.8.3"
