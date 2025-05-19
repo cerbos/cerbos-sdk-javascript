@@ -3,8 +3,8 @@ unreleased:
 
   bumped:
     yaml:
-      to: 2.7.1
-      pull: 1135
+      to: 2.8.0
+      pulls: [1135, 1155]
 
 releases:
   - version: 0.2.14
