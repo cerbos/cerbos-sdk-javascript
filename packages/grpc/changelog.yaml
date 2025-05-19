@@ -11,8 +11,8 @@ unreleased:
 
   bumped:
     "@bufbuild/protobuf":
-      to: 2.3.0
-      pulls: [1124, 1151]
+      to: 2.4.0
+      pulls: [1124, 1151, 1154]
 
     "@grpc/grpc-js":
       to: 1.13.3
