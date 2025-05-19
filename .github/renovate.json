@@ -57,6 +57,11 @@
       "semanticCommitScope": "deps"
     },
     {
+      "matchPackageNames": ["yaml"],
+      "groupName": "yaml",
+      "semanticCommitScope": "deps"
+    },
+    {
       "description": "@types/node should match the Node.js version",
       "matchPackageNames": ["@types/node"],
       "matchUpdateTypes": ["major"],
