@@ -42,6 +42,11 @@
       "semanticCommitScope": "deps-dev"
     },
     {
+      "matchPackageNames": ["@bufbuild/*"],
+      "groupName": "buf",
+      "semanticCommitScope": "deps"
+    },
+    {
       "matchPackageNames": ["@grpc/*"],
       "groupName": "grpc",
       "semanticCommitScope": "deps"
