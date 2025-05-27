@@ -15,8 +15,8 @@ unreleased:
       pulls: [1124, 1151, 1154]
 
     "@grpc/grpc-js":
-      to: 1.13.3
-      pulls: [1122, 1130, 1139]
+      to: 1.13.4
+      pulls: [1122, 1130, 1139, 1158]
 
 releases:
   - version: 0.21.0
