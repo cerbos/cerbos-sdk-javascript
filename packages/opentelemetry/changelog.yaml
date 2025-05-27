@@ -3,12 +3,12 @@ unreleased:
 
   bumped:
     "@opentelemetry/instrumentation":
-      to: 0.201.0
-      pulls: [1126, 1156]
+      to: 0.201.1
+      pulls: [1126, 1156, 1159]
 
     "@opentelemetry/semantic-conventions":
-      to: 1.33.0
-      pulls: [1140, 1152]
+      to: 1.34.0
+      pulls: [1140, 1152, 1159]
 
 releases:
   - version: 0.5.9
