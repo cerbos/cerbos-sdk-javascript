@@ -18,6 +18,10 @@ unreleased:
       to: 1.13.4
       pulls: [1122, 1130, 1139, 1158]
 
+  removed:
+    - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
+      pull: 1166
+
 releases:
   - version: 0.21.0
     date: 2025-03-12

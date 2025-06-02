@@ -8,6 +8,10 @@
 
   Requires a policy decision point server running Cerbos 0.44+.
 
+### Removed
+
+- Support for Node.js 18, which is now [end-of-life][nodejs-eol] ([#1166](https://github.com/cerbos/cerbos-sdk-javascript/pull/1166))
+
 ## [0.21.1] - 2025-03-12
 
 ### Changed

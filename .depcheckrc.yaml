@@ -1,5 +1,5 @@
 ignores:
-  - "@tsconfig/node18"
+  - "@tsconfig/node20"
   - "@tsconfig/strictest"
   - "@types/node"
   - prettier-plugin-pkg

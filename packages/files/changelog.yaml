@@ -1,10 +1,14 @@
 unreleased:
-  type: patch
+  type: minor
 
   bumped:
     yaml:
       to: 2.8.0
       pulls: [1135, 1155]
+
+  removed:
+    - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
+      pull: 1166
 
 releases:
   - version: 0.2.14

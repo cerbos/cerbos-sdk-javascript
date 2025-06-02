@@ -6,6 +6,10 @@ unreleased:
       details: Requires a policy decision point server running Cerbos 0.44+.
       pull: 1146
 
+  removed:
+    - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
+      pull: 1166
+
 releases:
   - version: 0.21.1
     date: 2025-03-12

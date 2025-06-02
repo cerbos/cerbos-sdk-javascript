@@ -1,5 +1,5 @@
 unreleased:
-  type: patch
+  type: minor
 
   bumped:
     "@opentelemetry/instrumentation":
@@ -9,6 +9,10 @@ unreleased:
     "@opentelemetry/semantic-conventions":
       to: 1.34.0
       pulls: [1140, 1152, 1159]
+
+  removed:
+    - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
+      pull: 1166
 
 releases:
   - version: 0.5.9

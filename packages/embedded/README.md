@@ -6,7 +6,7 @@ Client library for interacting with embedded Cerbos policy decision points (PDPs
 
 ## Prerequisites
 
-- Node.js 18+
+- Node.js 20+
 - A [Cerbos Hub](https://hub.cerbos.cloud) account
 
 ## Installation

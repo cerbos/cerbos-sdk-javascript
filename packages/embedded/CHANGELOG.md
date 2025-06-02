@@ -6,6 +6,10 @@
 
 - Bump dependency on [ulid] to 3.0.0 ([#1127](https://github.com/cerbos/cerbos-sdk-javascript/pull/1127), [#1133](https://github.com/cerbos/cerbos-sdk-javascript/pull/1133))
 
+### Removed
+
+- Support for Node.js 18, which is now [end-of-life][nodejs-eol] ([#1166](https://github.com/cerbos/cerbos-sdk-javascript/pull/1166))
+
 ## [0.11.1] - 2025-03-12
 
 ### Changed

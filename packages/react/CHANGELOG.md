@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Removed
+
+- Support for Node.js 18, which is now [end-of-life][nodejs-eol] ([#1166](https://github.com/cerbos/cerbos-sdk-javascript/pull/1166))
 
 ## [0.1.7] - 2025-03-12
 
@@ -64,3 +66,4 @@ No notable changes.
 [0.1.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.1.0...@cerbos/react@0.1.1
 [0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/68337848cb3f987627da7381653d82c6d4e368a5...@cerbos/react@0.1.0
 [@cerbos/core]: ../core/README.md
+[nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases

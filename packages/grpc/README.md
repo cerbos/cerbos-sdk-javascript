@@ -7,7 +7,7 @@ Client library for interacting with the Cerbos policy decision point service ove
 ## Prerequisites
 
 - Cerbos 0.16+
-- Node.js 18+
+- Node.js 20+
 
 ## Installation
 

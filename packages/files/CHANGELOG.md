@@ -6,6 +6,10 @@
 
 - Bump dependency on [yaml] to 2.8.0 ([#1135](https://github.com/cerbos/cerbos-sdk-javascript/pull/1135), [#1155](https://github.com/cerbos/cerbos-sdk-javascript/pull/1155))
 
+### Removed
+
+- Support for Node.js 18, which is now [end-of-life][nodejs-eol] ([#1166](https://github.com/cerbos/cerbos-sdk-javascript/pull/1166))
+
 ## [0.2.14] - 2025-03-12
 
 ### Changed
