@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.22.0] - 2025-06-02
+
 ### Added
 
 - Support for multiple actions in [`Client.planResources`](../../docs/core.client.planresources.md) ([#1146](https://github.com/cerbos/cerbos-sdk-javascript/pull/1146))
@@ -241,7 +245,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.21.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.22.0...HEAD
+[0.22.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.21.1...@cerbos/core@0.22.0
 [0.21.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.21.0...@cerbos/core@0.21.1
 [0.21.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.20.0...@cerbos/core@0.21.0
 [0.20.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.19.0...@cerbos/core@0.20.0

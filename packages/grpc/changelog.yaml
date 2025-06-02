@@ -1,31 +1,35 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: '[`ChannelOptions."grpc-node.flow_control_window"`](../../docs/grpc.channeloptions._grpc-node.flow_control_window_.md) option to set initial window size for HTTP/2 stream-level flow control'
-      pull: 1122
-
-    - summary: Support for multiple actions in [`Client.planResources`](../../docs/core.client.planresources.md)
-      details: Requires a policy decision point server running Cerbos 0.44+.
-      pull: 1146
-
-    - summary: "[`AccessLogEntry.oversized`](../../docs/core.accesslogentry.oversized.md) and [`DecisionLogEntry.oversized`](../../docs/core.decisionlogentry.oversized.md) properties"
-      pull: 1165
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.5.1
-      pulls: [1124, 1151, 1154, 1161, 1164]
-
-    "@grpc/grpc-js":
-      to: 1.13.4
-      pulls: [1122, 1130, 1139, 1158]
-
-  removed:
-    - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
-      pull: 1166
-
 releases:
+  - version: 0.22.0
+    date: 2025-06-02
+
+    added:
+      - summary: '[`ChannelOptions."grpc-node.flow_control_window"`](../../docs/grpc.channeloptions._grpc-node.flow_control_window_.md) option to set initial window size for HTTP/2 stream-level flow control'
+        pull: 1122
+
+      - summary: Support for multiple actions in [`Client.planResources`](../../docs/core.client.planresources.md)
+        details: Requires a policy decision point server running Cerbos 0.44+.
+        pull: 1146
+
+      - summary: "[`AccessLogEntry.oversized`](../../docs/core.accesslogentry.oversized.md) and [`DecisionLogEntry.oversized`](../../docs/core.decisionlogentry.oversized.md) properties"
+        pull: 1165
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.5.1
+        pulls: [1124, 1151, 1154, 1161, 1164]
+
+      "@cerbos/core":
+        to: 0.22.0
+        pull: 1167
+
+      "@grpc/grpc-js":
+        to: 1.13.4
+        pulls: [1122, 1130, 1139, 1158]
+
+    removed:
+      - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
+        pull: 1166
+
   - version: 0.21.0
     date: 2025-03-12
 

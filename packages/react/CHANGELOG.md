@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.2.0] - 2025-06-02
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.22.0 ([#1167](https://github.com/cerbos/cerbos-sdk-javascript/pull/1167))
+
 ### Removed
 
 - Support for Node.js 18, which is now [end-of-life][nodejs-eol] ([#1166](https://github.com/cerbos/cerbos-sdk-javascript/pull/1166))
@@ -56,7 +64,8 @@
 
 - A collection of React hooks for interacting with Cerbos policy decision points ([#876](https://github.com/cerbos/cerbos-sdk-javascript/pull/876), [#918](https://github.com/cerbos/cerbos-sdk-javascript/pull/918))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.1.7...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.2.0...HEAD
+[0.2.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.1.7...@cerbos/react@0.2.0
 [0.1.7]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.1.6...@cerbos/react@0.1.7
 [0.1.6]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.1.5...@cerbos/react@0.1.6
 [0.1.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.1.4...@cerbos/react@0.1.5

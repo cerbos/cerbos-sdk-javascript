@@ -1,20 +1,24 @@
-unreleased:
-  type: minor
-
-  bumped:
-    "@opentelemetry/instrumentation":
-      to: 0.201.1
-      pulls: [1126, 1156, 1159]
-
-    "@opentelemetry/semantic-conventions":
-      to: 1.34.0
-      pulls: [1140, 1152, 1159]
-
-  removed:
-    - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
-      pull: 1166
-
 releases:
+  - version: 0.6.0
+    date: 2025-06-02
+
+    bumped:
+      "@cerbos/core":
+        to: 0.22.0
+        pull: 1167
+
+      "@opentelemetry/instrumentation":
+        to: 0.201.1
+        pulls: [1126, 1156, 1159]
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.34.0
+        pulls: [1140, 1152, 1159]
+
+    removed:
+      - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
+        pull: 1166
+
   - version: 0.5.9
     date: 2025-03-12
 
