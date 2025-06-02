@@ -2,14 +2,14 @@
 // source: cerbos/request/v1/request.proto
 
 /* eslint-disable */
-import { type Duration } from "../../../google/protobuf/duration";
-import {
-  type PlanResourcesInput_Resource,
-  type Principal,
-  type Resource,
+import type { Duration } from "../../../google/protobuf/duration";
+import type {
+  PlanResourcesInput_Resource,
+  Principal,
+  Resource,
 } from "../../engine/v1/engine";
-import { type Policy } from "../../policy/v1/policy";
-import { type Schema } from "../../schema/v1/schema";
+import type { Policy } from "../../policy/v1/policy";
+import type { Schema } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.request.v1";
 

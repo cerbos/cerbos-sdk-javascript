@@ -2,13 +2,13 @@
 // source: cerbos/audit/v1/audit.proto
 
 /* eslint-disable */
-import {
-  type CheckInput,
-  type CheckOutput,
-  type PlanResourcesInput,
-  type PlanResourcesOutput,
+import type {
+  CheckInput,
+  CheckOutput,
+  PlanResourcesInput,
+  PlanResourcesOutput,
 } from "../../engine/v1/engine";
-import { type SourceAttributes } from "../../policy/v1/policy";
+import type { SourceAttributes } from "../../policy/v1/policy";
 
 export const protobufPackage = "cerbos.audit.v1";
 

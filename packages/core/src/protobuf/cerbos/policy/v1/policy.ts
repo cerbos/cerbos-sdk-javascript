@@ -2,7 +2,7 @@
 // source: cerbos/policy/v1/policy.proto
 
 /* eslint-disable */
-import { type Effect } from "../../effect/v1/effect";
+import type { Effect } from "../../effect/v1/effect";
 
 export const protobufPackage = "cerbos.policy.v1";
 

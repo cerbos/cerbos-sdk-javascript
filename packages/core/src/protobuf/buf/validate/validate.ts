@@ -2,7 +2,7 @@
 // source: buf/validate/validate.proto
 
 /* eslint-disable */
-import { type Duration } from "../../google/protobuf/duration";
+import type { Duration } from "../../google/protobuf/duration";
 
 export const protobufPackage = "buf.validate";
 
