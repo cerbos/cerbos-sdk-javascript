@@ -14,7 +14,7 @@
   "author": "Cerbos <help@cerbos.dev> (https://cerbos.dev)",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 18"
+    "node": ">= 20"
   },
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

@@ -16,6 +16,10 @@
 
 - Bump dependency on [@grpc/grpc-js] to 1.13.4 ([#1122](https://github.com/cerbos/cerbos-sdk-javascript/pull/1122), [#1130](https://github.com/cerbos/cerbos-sdk-javascript/pull/1130), [#1139](https://github.com/cerbos/cerbos-sdk-javascript/pull/1139), [#1158](https://github.com/cerbos/cerbos-sdk-javascript/pull/1158))
 
+### Removed
+
+- Support for Node.js 18, which is now [end-of-life][nodejs-eol] ([#1166](https://github.com/cerbos/cerbos-sdk-javascript/pull/1166))
+
 ## [0.21.0] - 2025-03-12
 
 ### Added

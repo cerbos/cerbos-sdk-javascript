@@ -6,7 +6,7 @@ Load Cerbos policies from YAML or JSON files.
 
 ## Prerequisites
 
-- Node.js 18+
+- Node.js 20+
 
 ## Installation
 

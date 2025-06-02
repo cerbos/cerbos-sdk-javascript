@@ -52,7 +52,7 @@ Bundle download URLs are available in the "Embedded" section of the "Decision po
 
 ## Example
 
-Fetch an embedded PDP bundle via HTTP in a [supported browser](https://caniuse.com/wasm) or Node.js 18.1+, and [automatically update](./embedded.autoupdatingloader.md) the bundle when newer versions become available:
+Fetch an embedded PDP bundle via HTTP in a [supported browser](https://caniuse.com/wasm) or Node.js, and [automatically update](./embedded.autoupdatingloader.md) the bundle when newer versions become available:
 
 ```typescript
 const loader = new AutoUpdatingLoader("https://lite.cerbos.cloud/bundle?workspace=...&label=...");

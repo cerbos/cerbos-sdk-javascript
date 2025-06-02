@@ -270,7 +270,7 @@ export class Loader {
    * To detect failure to load the bundle before making any requests, provide an {@link Options.onError} callback or await the {@link Loader.active} method.
    *
    * @example
-   * Fetch an embedded PDP bundle via HTTP in a {@link https://caniuse.com/wasm | supported browser} or Node.js 18.1+:
+   * Fetch an embedded PDP bundle via HTTP in a {@link https://caniuse.com/wasm | supported browser} or Node.js:
    *
    * ```typescript
    * const loader = new Loader("https://lite.cerbos.cloud/bundle?workspace=...&label=...");

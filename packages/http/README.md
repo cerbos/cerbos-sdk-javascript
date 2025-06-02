@@ -12,7 +12,7 @@ You can use it in server-side Node.js applications, but the [gRPC client](../grp
 ## Prerequisites
 
 - Cerbos 0.16+
-- Node.js 18+
+- Node.js 20+
 - `fetch`
 
 ## Installation

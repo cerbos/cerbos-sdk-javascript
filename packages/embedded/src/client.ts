@@ -27,7 +27,7 @@ export class Embedded extends Client {
    * Bundle download URLs are available in the "Embedded" section of the "Decision points" page of your Cerbos Hub workspace.
    *
    * @example
-   * Fetch an embedded PDP bundle via HTTP in a {@link https://caniuse.com/wasm | supported browser} or Node.js 18.1+,
+   * Fetch an embedded PDP bundle via HTTP in a {@link https://caniuse.com/wasm | supported browser} or Node.js,
    * and {@link AutoUpdatingLoader | automatically update} the bundle when newer versions become available:
    *
    * ```typescript
@@ -49,7 +49,7 @@ export class Embedded extends Client {
    * Bundle download URLs are available in the "Embedded" section of the "Decision points" page of your Cerbos Hub workspace.
    *
    * @example
-   * Fetch an embedded PDP bundle via HTTP in a {@link https://caniuse.com/wasm | supported browser} or Node.js 18.1+:
+   * Fetch an embedded PDP bundle via HTTP in a {@link https://caniuse.com/wasm | supported browser} or Node.js:
    *
    * ```typescript
    * const cerbos = new Embedded("https://lite.cerbos.cloud/bundle?workspace=...&label=...");

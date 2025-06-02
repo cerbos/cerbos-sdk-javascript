@@ -1,5 +1,9 @@
 unreleased:
-  type: patch
+  type: minor
+
+  removed:
+    - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
+      pull: 1166
 
 releases:
   - version: 0.1.7
@@ -71,5 +75,6 @@ releases:
 
 references:
   "@cerbos/core": ../core/README.md
+  nodejs-eol: https://github.com/nodejs/release#end-of-life-releases
 
 initialCommit: 68337848cb3f987627da7381653d82c6d4e368a5
