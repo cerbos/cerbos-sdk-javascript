@@ -169,7 +169,7 @@ export function accessLogEntryFromProtobuf({
 }: ListAuditLogEntriesResponse): AccessLogEntry {
   requireOneOf("ListAuditLogEntriesResponse.entry", entry, "accessLogEntry");
 
-  const { callId, timestamp, peer, metadata, method, statusCode } =
+  const { callId, timestamp, peer, metadata, method, statusCode, oversized } =
     entry.accessLogEntry;
 
   requireField("AccessLogEntry.timestamp", timestamp);
@@ -182,6 +182,7 @@ export function accessLogEntryFromProtobuf({
     metadata: auditLogMetadataFromProtobuf(metadata),
     method,
     statusCode,
+    oversized,
   };
 }
 
@@ -190,7 +191,7 @@ export function decisionLogEntryFromProtobuf({
 }: ListAuditLogEntriesResponse): DecisionLogEntry {
   requireOneOf("ListAuditLogEntriesResponse.entry", entry, "decisionLogEntry");
 
-  const { callId, timestamp, peer, metadata, auditTrail, method } =
+  const { callId, timestamp, peer, metadata, auditTrail, method, oversized } =
     entry.decisionLogEntry;
 
   requireField("DecisionLogEntry.timestamp", timestamp);
@@ -203,6 +204,7 @@ export function decisionLogEntryFromProtobuf({
     metadata: auditLogMetadataFromProtobuf(metadata),
     auditTrail: auditTrailFromProtobuf(auditTrail),
     method: decisionLogEntryMethodFromProtobuf(method),
+    oversized,
   };
 }
 

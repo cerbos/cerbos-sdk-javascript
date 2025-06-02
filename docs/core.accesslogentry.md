@@ -94,6 +94,25 @@ The gRPC method that was invoked.
 </td></tr>
 <tr><td>
 
+[oversized](./core.accesslogentry.oversized.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the log entry was truncated because it was too large.
+
+
+</td></tr>
+<tr><td>
+
 [peer](./core.accesslogentry.peer.md)
 
 

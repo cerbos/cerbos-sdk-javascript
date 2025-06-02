@@ -508,6 +508,7 @@ describe("Embedded", () => {
                 metadata: {
                   foo: ["42"],
                 },
+                oversized: false,
                 auditTrail: {
                   effectivePolicies: expectedEffectivePolicies,
                 },
