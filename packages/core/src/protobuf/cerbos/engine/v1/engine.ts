@@ -2,8 +2,8 @@
 // source: cerbos/engine/v1/engine.proto
 
 /* eslint-disable */
-import { type Effect } from "../../effect/v1/effect";
-import { type ValidationError } from "../../schema/v1/schema";
+import type { Effect } from "../../effect/v1/effect";
+import type { ValidationError } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.engine.v1";
 
