@@ -9,6 +9,9 @@ unreleased:
       details: Requires a policy decision point server running Cerbos 0.44+.
       pull: 1146
 
+    - summary: "[`AccessLogEntry.oversized`](../../docs/core.accesslogentry.oversized.md) and [`DecisionLogEntry.oversized`](../../docs/core.decisionlogentry.oversized.md) properties"
+      pull: 1165
+
   bumped:
     "@bufbuild/protobuf":
       to: 2.5.1

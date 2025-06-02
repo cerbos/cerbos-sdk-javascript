@@ -37,4 +37,9 @@ export interface DecisionLogEntry {
    * The decision that was made.
    */
   method: DecisionLogEntryMethod;
+
+  /**
+   * Whether the log entry was truncated because it was too large.
+   */
+  oversized: boolean;
 }

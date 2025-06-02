@@ -21,6 +21,7 @@ export interface AccessLogEntry {
   metadata: { [key: string]: MetaValues };
   method: string;
   statusCode: number;
+  oversized: boolean;
 }
 
 export interface AccessLogEntry_MetadataEntry {
@@ -47,6 +48,7 @@ export interface DecisionLogEntry {
     | undefined;
   metadata: { [key: string]: MetaValues };
   auditTrail: AuditTrail | undefined;
+  oversized: boolean;
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -94,6 +96,7 @@ function createBaseAccessLogEntry(): AccessLogEntry {
     metadata: {},
     method: "",
     statusCode: 0,
+    oversized: false,
   };
 }
 
@@ -125,6 +128,9 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
     }
     if (message.statusCode !== 0) {
       writer.uint32(48).uint32(message.statusCode);
+    }
+    if (message.oversized !== false) {
+      writer.uint32(56).bool(message.oversized);
     }
     return writer;
   },
@@ -193,6 +199,14 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
           message.statusCode = reader.uint32();
           continue;
         }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.oversized = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -222,6 +236,9 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
       statusCode: isSet(object.statusCode)
         ? globalThis.Number(object.statusCode)
         : 0,
+      oversized: isSet(object.oversized)
+        ? globalThis.Boolean(object.oversized)
+        : false,
     };
   },
 
@@ -250,6 +267,9 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
     }
     if (message.statusCode !== 0) {
       obj.statusCode = Math.round(message.statusCode);
+    }
+    if (message.oversized !== false) {
+      obj.oversized = message.oversized;
     }
     return obj;
   },
@@ -342,6 +362,7 @@ function createBaseDecisionLogEntry(): DecisionLogEntry {
     method: undefined,
     metadata: {},
     auditTrail: undefined,
+    oversized: false,
   };
 }
 
@@ -393,6 +414,9 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
     });
     if (message.auditTrail !== undefined) {
       AuditTrail.encode(message.auditTrail, writer.uint32(130).fork()).join();
+    }
+    if (message.oversized !== false) {
+      writer.uint32(136).bool(message.oversized);
     }
     return writer;
   },
@@ -505,6 +529,14 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
           message.auditTrail = AuditTrail.decode(reader, reader.uint32());
           continue;
         }
+        case 17: {
+          if (tag !== 136) {
+            break;
+          }
+
+          message.oversized = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -555,6 +587,9 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
       auditTrail: isSet(object.auditTrail)
         ? AuditTrail.fromJSON(object.auditTrail)
         : undefined,
+      oversized: isSet(object.oversized)
+        ? globalThis.Boolean(object.oversized)
+        : false,
     };
   },
 
@@ -598,6 +633,9 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
     }
     if (message.auditTrail !== undefined) {
       obj.auditTrail = AuditTrail.toJSON(message.auditTrail);
+    }
+    if (message.oversized !== false) {
+      obj.oversized = message.oversized;
     }
     return obj;
   },

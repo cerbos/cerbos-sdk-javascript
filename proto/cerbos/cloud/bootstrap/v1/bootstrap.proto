@@ -9,7 +9,9 @@ import "buf/validate/validate.proto";
 import "cerbos/cloud/bundle/v1/bundle.proto";
 import "google/protobuf/timestamp.proto";
 
+option csharp_namespace = "Cerbos.Api.Cloud.V1.Bootstrap";
 option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/bootstrap/v1;bootstrapv1";
+option java_package = "dev.cerbos.api.cloud.v1.bootstrap";
 
 message PDPConfig {
   message Meta {

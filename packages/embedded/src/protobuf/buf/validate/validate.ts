@@ -12,8 +12,6 @@ export enum Ignore {
   IGNORE_IF_UNPOPULATED = 1,
   IGNORE_IF_DEFAULT_VALUE = 2,
   IGNORE_ALWAYS = 3,
-  IGNORE_EMPTY = 1,
-  IGNORE_DEFAULT = 2,
 }
 
 export function ignoreFromJSON(object: any): Ignore {
@@ -30,12 +28,6 @@ export function ignoreFromJSON(object: any): Ignore {
     case 3:
     case "IGNORE_ALWAYS":
       return Ignore.IGNORE_ALWAYS;
-    case 1:
-    case "IGNORE_EMPTY":
-      return Ignore.IGNORE_EMPTY;
-    case 2:
-    case "IGNORE_DEFAULT":
-      return Ignore.IGNORE_DEFAULT;
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum Ignore",
@@ -53,10 +45,6 @@ export function ignoreToJSON(object: Ignore): string {
       return "IGNORE_IF_DEFAULT_VALUE";
     case Ignore.IGNORE_ALWAYS:
       return "IGNORE_ALWAYS";
-    case Ignore.IGNORE_EMPTY:
-      return "IGNORE_EMPTY";
-    case Ignore.IGNORE_DEFAULT:
-      return "IGNORE_DEFAULT";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum Ignore",
@@ -103,19 +91,19 @@ export function knownRegexToJSON(object: KnownRegex): string {
   }
 }
 
-export interface Constraint {
+export interface Rule {
   id?: string | undefined;
   message?: string | undefined;
   expression?: string | undefined;
 }
 
-export interface MessageConstraints {
+export interface MessageRules {
   disabled?: boolean | undefined;
-  cel: Constraint[];
+  cel: Rule[];
 }
 
-export interface FieldConstraints {
-  cel: Constraint[];
+export interface FieldRules {
+  cel: Rule[];
   required?: boolean | undefined;
   ignore?: Ignore | undefined;
   type?:
@@ -141,12 +129,10 @@ export interface FieldConstraints {
     | { $case: "duration"; duration: DurationRules }
     | { $case: "timestamp"; timestamp: TimestampRules }
     | undefined;
-  skipped?: boolean | undefined;
-  ignoreEmpty?: boolean | undefined;
 }
 
-export interface PredefinedConstraints {
-  cel: Constraint[];
+export interface PredefinedRules {
+  cel: Rule[];
 }
 
 export interface FloatRules {
@@ -406,14 +392,14 @@ export interface RepeatedRules {
   minItems?: number | undefined;
   maxItems?: number | undefined;
   unique?: boolean | undefined;
-  items?: FieldConstraints | undefined;
+  items?: FieldRules | undefined;
 }
 
 export interface MapRules {
   minPairs?: number | undefined;
   maxPairs?: number | undefined;
-  keys?: FieldConstraints | undefined;
-  values?: FieldConstraints | undefined;
+  keys?: FieldRules | undefined;
+  values?: FieldRules | undefined;
 }
 
 export interface AnyRules {
@@ -452,8 +438,8 @@ export interface TimestampRules {
   example: Date[];
 }
 
-export const Constraint: MessageFns<Constraint> = {
-  fromJSON(object: any): Constraint {
+export const Rule: MessageFns<Rule> = {
+  fromJSON(object: any): Rule {
     return {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       message: isSet(object.message) ? globalThis.String(object.message) : "",
@@ -463,7 +449,7 @@ export const Constraint: MessageFns<Constraint> = {
     };
   },
 
-  toJSON(message: Constraint): unknown {
+  toJSON(message: Rule): unknown {
     const obj: any = {};
     if (message.id !== undefined && message.id !== "") {
       obj.id = message.id;
@@ -478,35 +464,35 @@ export const Constraint: MessageFns<Constraint> = {
   },
 };
 
-export const MessageConstraints: MessageFns<MessageConstraints> = {
-  fromJSON(object: any): MessageConstraints {
+export const MessageRules: MessageFns<MessageRules> = {
+  fromJSON(object: any): MessageRules {
     return {
       disabled: isSet(object.disabled)
         ? globalThis.Boolean(object.disabled)
         : false,
       cel: globalThis.Array.isArray(object?.cel)
-        ? object.cel.map((e: any) => Constraint.fromJSON(e))
+        ? object.cel.map((e: any) => Rule.fromJSON(e))
         : [],
     };
   },
 
-  toJSON(message: MessageConstraints): unknown {
+  toJSON(message: MessageRules): unknown {
     const obj: any = {};
     if (message.disabled !== undefined && message.disabled !== false) {
       obj.disabled = message.disabled;
     }
     if (message.cel?.length) {
-      obj.cel = message.cel.map((e) => Constraint.toJSON(e));
+      obj.cel = message.cel.map((e) => Rule.toJSON(e));
     }
     return obj;
   },
 };
 
-export const FieldConstraints: MessageFns<FieldConstraints> = {
-  fromJSON(object: any): FieldConstraints {
+export const FieldRules: MessageFns<FieldRules> = {
+  fromJSON(object: any): FieldRules {
     return {
       cel: globalThis.Array.isArray(object?.cel)
-        ? object.cel.map((e: any) => Constraint.fromJSON(e))
+        ? object.cel.map((e: any) => Rule.fromJSON(e))
         : [],
       required: isSet(object.required)
         ? globalThis.Boolean(object.required)
@@ -626,19 +612,13 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
                                                       ),
                                                   }
                                                 : undefined,
-      skipped: isSet(object.skipped)
-        ? globalThis.Boolean(object.skipped)
-        : false,
-      ignoreEmpty: isSet(object.ignoreEmpty)
-        ? globalThis.Boolean(object.ignoreEmpty)
-        : false,
     };
   },
 
-  toJSON(message: FieldConstraints): unknown {
+  toJSON(message: FieldRules): unknown {
     const obj: any = {};
     if (message.cel?.length) {
-      obj.cel = message.cel.map((e) => Constraint.toJSON(e));
+      obj.cel = message.cel.map((e) => Rule.toJSON(e));
     }
     if (message.required !== undefined && message.required !== false) {
       obj.required = message.required;
@@ -689,29 +669,23 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
     } else if (message.type?.$case === "timestamp") {
       obj.timestamp = TimestampRules.toJSON(message.type.timestamp);
     }
-    if (message.skipped !== undefined && message.skipped !== false) {
-      obj.skipped = message.skipped;
-    }
-    if (message.ignoreEmpty !== undefined && message.ignoreEmpty !== false) {
-      obj.ignoreEmpty = message.ignoreEmpty;
-    }
     return obj;
   },
 };
 
-export const PredefinedConstraints: MessageFns<PredefinedConstraints> = {
-  fromJSON(object: any): PredefinedConstraints {
+export const PredefinedRules: MessageFns<PredefinedRules> = {
+  fromJSON(object: any): PredefinedRules {
     return {
       cel: globalThis.Array.isArray(object?.cel)
-        ? object.cel.map((e: any) => Constraint.fromJSON(e))
+        ? object.cel.map((e: any) => Rule.fromJSON(e))
         : [],
     };
   },
 
-  toJSON(message: PredefinedConstraints): unknown {
+  toJSON(message: PredefinedRules): unknown {
     const obj: any = {};
     if (message.cel?.length) {
-      obj.cel = message.cel.map((e) => Constraint.toJSON(e));
+      obj.cel = message.cel.map((e) => Rule.toJSON(e));
     }
     return obj;
   },
@@ -1739,7 +1713,7 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
       maxItems: isSet(object.maxItems) ? globalThis.Number(object.maxItems) : 0,
       unique: isSet(object.unique) ? globalThis.Boolean(object.unique) : false,
       items: isSet(object.items)
-        ? FieldConstraints.fromJSON(object.items)
+        ? FieldRules.fromJSON(object.items)
         : undefined,
     };
   },
@@ -1756,7 +1730,7 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
       obj.unique = message.unique;
     }
     if (message.items !== undefined) {
-      obj.items = FieldConstraints.toJSON(message.items);
+      obj.items = FieldRules.toJSON(message.items);
     }
     return obj;
   },
@@ -1767,11 +1741,9 @@ export const MapRules: MessageFns<MapRules> = {
     return {
       minPairs: isSet(object.minPairs) ? globalThis.Number(object.minPairs) : 0,
       maxPairs: isSet(object.maxPairs) ? globalThis.Number(object.maxPairs) : 0,
-      keys: isSet(object.keys)
-        ? FieldConstraints.fromJSON(object.keys)
-        : undefined,
+      keys: isSet(object.keys) ? FieldRules.fromJSON(object.keys) : undefined,
       values: isSet(object.values)
-        ? FieldConstraints.fromJSON(object.values)
+        ? FieldRules.fromJSON(object.values)
         : undefined,
     };
   },
@@ -1785,10 +1757,10 @@ export const MapRules: MessageFns<MapRules> = {
       obj.maxPairs = Math.round(message.maxPairs);
     }
     if (message.keys !== undefined) {
-      obj.keys = FieldConstraints.toJSON(message.keys);
+      obj.keys = FieldRules.toJSON(message.keys);
     }
     if (message.values !== undefined) {
-      obj.values = FieldConstraints.toJSON(message.values);
+      obj.values = FieldRules.toJSON(message.values);
     }
     return obj;
   },

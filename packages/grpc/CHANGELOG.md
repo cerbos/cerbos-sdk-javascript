@@ -10,6 +10,8 @@
 
   Requires a policy decision point server running Cerbos 0.44+.
 
+- [`AccessLogEntry.oversized`](../../docs/core.accesslogentry.oversized.md) and [`DecisionLogEntry.oversized`](../../docs/core.decisionlogentry.oversized.md) properties ([#1165](https://github.com/cerbos/cerbos-sdk-javascript/pull/1165))
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.5.1 ([#1124](https://github.com/cerbos/cerbos-sdk-javascript/pull/1124), [#1151](https://github.com/cerbos/cerbos-sdk-javascript/pull/1151), [#1154](https://github.com/cerbos/cerbos-sdk-javascript/pull/1154), [#1161](https://github.com/cerbos/cerbos-sdk-javascript/pull/1161), [#1164](https://github.com/cerbos/cerbos-sdk-javascript/pull/1164))

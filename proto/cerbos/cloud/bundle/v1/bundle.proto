@@ -11,7 +11,9 @@ import "google/api/visibility.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 
+option csharp_namespace = "Cerbos.Api.Cloud.V1.Bundle";
 option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/bundle/v1;bundlev1";
+option java_package = "dev.cerbos.api.cloud.v1.bundle";
 
 // BundleInfo holds information about a bundle and its download URLs.
 message BundleInfo {

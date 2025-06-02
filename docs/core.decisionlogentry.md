@@ -113,6 +113,25 @@ The decision that was made.
 </td></tr>
 <tr><td>
 
+[oversized](./core.decisionlogentry.oversized.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the log entry was truncated because it was too large.
+
+
+</td></tr>
+<tr><td>
+
 [peer](./core.decisionlogentry.peer.md)
 
 

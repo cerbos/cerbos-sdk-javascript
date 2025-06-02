@@ -11,7 +11,9 @@ import "google/api/visibility.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 
+option csharp_namespace = "Cerbos.Api.Cloud.V2.Bundle";
 option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/bundle/v2;bundlev2";
+option java_package = "dev.cerbos.api.cloud.v2.bundle";
 
 message Source {
   oneof source {

@@ -8,6 +8,8 @@
 
   Requires a policy decision point server running Cerbos 0.44+.
 
+- [`AccessLogEntry.oversized`](../../docs/core.accesslogentry.oversized.md) and [`DecisionLogEntry.oversized`](../../docs/core.decisionlogentry.oversized.md) properties ([#1165](https://github.com/cerbos/cerbos-sdk-javascript/pull/1165))
+
 ### Removed
 
 - Support for Node.js 18, which is now [end-of-life][nodejs-eol] ([#1166](https://github.com/cerbos/cerbos-sdk-javascript/pull/1166))

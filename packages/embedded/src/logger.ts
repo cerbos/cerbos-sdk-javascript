@@ -106,6 +106,7 @@ export class DecisionLogger {
       },
       timestamp: new Date(),
       metadata: metadata(headers),
+      oversized: false,
       auditTrail: {
         effectivePolicies,
       },

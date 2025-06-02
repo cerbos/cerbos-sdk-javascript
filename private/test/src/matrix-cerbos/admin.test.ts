@@ -220,12 +220,14 @@ describe("Client", () => {
               metadata: expectedMetadata,
               method: "/cerbos.svc.v1.CerbosService/CheckResources",
               statusCode: Status.OK,
+              oversized: false,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
               timestamp: expect.any(Date),
               peer: expectedPeer,
               metadata: expectedMetadata,
+              oversized: false,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {
@@ -363,12 +365,14 @@ describe("Client", () => {
               metadata: expectedMetadata,
               method: "/cerbos.svc.v1.CerbosService/PlanResources",
               statusCode: Status.OK,
+              oversized: false,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
               timestamp: expect.any(Date),
               peer: expectedPeer,
               metadata: expectedMetadata,
+              oversized: false,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {
@@ -433,12 +437,14 @@ describe("Client", () => {
               metadata: expectedMetadata,
               method: "/cerbos.svc.v1.CerbosService/PlanResources",
               statusCode: Status.OK,
+              oversized: false,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
               timestamp: expect.any(Date),
               peer: expectedPeer,
               metadata: expectedMetadata,
+              oversized: false,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {

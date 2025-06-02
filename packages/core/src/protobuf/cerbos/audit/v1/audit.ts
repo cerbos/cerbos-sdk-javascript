@@ -19,6 +19,7 @@ export interface AccessLogEntry {
   metadata: { [key: string]: MetaValues };
   method: string;
   statusCode: number;
+  oversized: boolean;
 }
 
 export interface AccessLogEntry_MetadataEntry {
@@ -45,6 +46,7 @@ export interface DecisionLogEntry {
     | undefined;
   metadata: { [key: string]: MetaValues };
   auditTrail: AuditTrail | undefined;
+  oversized: boolean;
 }
 
 export interface DecisionLogEntry_CheckResources {

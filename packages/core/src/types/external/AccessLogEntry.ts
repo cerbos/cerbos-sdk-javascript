@@ -36,4 +36,9 @@ export interface AccessLogEntry {
    * The status code returned by the policy decision point server.
    */
   statusCode: Status;
+
+  /**
+   * Whether the log entry was truncated because it was too large.
+   */
+  oversized: boolean;
 }
