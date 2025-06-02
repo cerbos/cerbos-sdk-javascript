@@ -11,8 +11,6 @@ export enum Ignore {
   IGNORE_IF_UNPOPULATED = 1,
   IGNORE_IF_DEFAULT_VALUE = 2,
   IGNORE_ALWAYS = 3,
-  IGNORE_EMPTY = 1,
-  IGNORE_DEFAULT = 2,
 }
 
 export enum KnownRegex {
@@ -21,23 +19,23 @@ export enum KnownRegex {
   KNOWN_REGEX_HTTP_HEADER_VALUE = 2,
 }
 
-export interface Constraint {
+export interface Rule {
   id?: string | undefined;
   message?: string | undefined;
   expression?: string | undefined;
 }
 
-export interface MessageConstraints {
+export interface MessageRules {
   disabled?: boolean | undefined;
-  cel: Constraint[];
+  cel: Rule[];
 }
 
-export interface OneofConstraints {
+export interface OneofRules {
   required?: boolean | undefined;
 }
 
-export interface FieldConstraints {
-  cel: Constraint[];
+export interface FieldRules {
+  cel: Rule[];
   required?: boolean | undefined;
   ignore?: Ignore | undefined;
   type?:
@@ -63,12 +61,10 @@ export interface FieldConstraints {
     | { $case: "duration"; duration: DurationRules }
     | { $case: "timestamp"; timestamp: TimestampRules }
     | undefined;
-  skipped?: boolean | undefined;
-  ignoreEmpty?: boolean | undefined;
 }
 
-export interface PredefinedConstraints {
-  cel: Constraint[];
+export interface PredefinedRules {
+  cel: Rule[];
 }
 
 export interface FloatRules {
@@ -328,14 +324,14 @@ export interface RepeatedRules {
   minItems?: string | undefined;
   maxItems?: string | undefined;
   unique?: boolean | undefined;
-  items?: FieldConstraints | undefined;
+  items?: FieldRules | undefined;
 }
 
 export interface MapRules {
   minPairs?: string | undefined;
   maxPairs?: string | undefined;
-  keys?: FieldConstraints | undefined;
-  values?: FieldConstraints | undefined;
+  keys?: FieldRules | undefined;
+  values?: FieldRules | undefined;
 }
 
 export interface AnyRules {

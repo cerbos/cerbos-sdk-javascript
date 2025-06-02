@@ -7,7 +7,9 @@ package cerbos.cloud.pdp.v1;
 
 import "buf/validate/validate.proto";
 
+option csharp_namespace = "Cerbos.Api.Cloud.V1.Pdp";
 option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/pdp/v1;pdpv1";
+option java_package = "dev.cerbos.api.cloud.v1.pdp";
 
 message Identifier {
   string instance = 1 [(buf.validate.field).string.min_len = 1];

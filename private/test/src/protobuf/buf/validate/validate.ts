@@ -13,8 +13,6 @@ export enum Ignore {
   IGNORE_IF_UNPOPULATED = 1,
   IGNORE_IF_DEFAULT_VALUE = 2,
   IGNORE_ALWAYS = 3,
-  IGNORE_EMPTY = 1,
-  IGNORE_DEFAULT = 2,
 }
 
 export function ignoreFromJSON(object: any): Ignore {
@@ -31,12 +29,6 @@ export function ignoreFromJSON(object: any): Ignore {
     case 3:
     case "IGNORE_ALWAYS":
       return Ignore.IGNORE_ALWAYS;
-    case 1:
-    case "IGNORE_EMPTY":
-      return Ignore.IGNORE_EMPTY;
-    case 2:
-    case "IGNORE_DEFAULT":
-      return Ignore.IGNORE_DEFAULT;
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum Ignore",
@@ -54,10 +46,6 @@ export function ignoreToJSON(object: Ignore): string {
       return "IGNORE_IF_DEFAULT_VALUE";
     case Ignore.IGNORE_ALWAYS:
       return "IGNORE_ALWAYS";
-    case Ignore.IGNORE_EMPTY:
-      return "IGNORE_EMPTY";
-    case Ignore.IGNORE_DEFAULT:
-      return "IGNORE_DEFAULT";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum Ignore",
@@ -104,23 +92,23 @@ export function knownRegexToJSON(object: KnownRegex): string {
   }
 }
 
-export interface Constraint {
+export interface Rule {
   id?: string | undefined;
   message?: string | undefined;
   expression?: string | undefined;
 }
 
-export interface MessageConstraints {
+export interface MessageRules {
   disabled?: boolean | undefined;
-  cel: Constraint[];
+  cel: Rule[];
 }
 
-export interface OneofConstraints {
+export interface OneofRules {
   required?: boolean | undefined;
 }
 
-export interface FieldConstraints {
-  cel: Constraint[];
+export interface FieldRules {
+  cel: Rule[];
   required?: boolean | undefined;
   ignore?: Ignore | undefined;
   type?:
@@ -146,12 +134,10 @@ export interface FieldConstraints {
     | { $case: "duration"; duration: DurationRules }
     | { $case: "timestamp"; timestamp: TimestampRules }
     | undefined;
-  skipped?: boolean | undefined;
-  ignoreEmpty?: boolean | undefined;
 }
 
-export interface PredefinedConstraints {
-  cel: Constraint[];
+export interface PredefinedRules {
+  cel: Rule[];
 }
 
 export interface FloatRules {
@@ -411,14 +397,14 @@ export interface RepeatedRules {
   minItems?: string | undefined;
   maxItems?: string | undefined;
   unique?: boolean | undefined;
-  items?: FieldConstraints | undefined;
+  items?: FieldRules | undefined;
 }
 
 export interface MapRules {
   minPairs?: string | undefined;
   maxPairs?: string | undefined;
-  keys?: FieldConstraints | undefined;
-  values?: FieldConstraints | undefined;
+  keys?: FieldRules | undefined;
+  values?: FieldRules | undefined;
 }
 
 export interface AnyRules {
@@ -457,13 +443,13 @@ export interface TimestampRules {
   example: Date[];
 }
 
-function createBaseConstraint(): Constraint {
+function createBaseRule(): Rule {
   return { id: "", message: "", expression: "" };
 }
 
-export const Constraint: MessageFns<Constraint> = {
+export const Rule: MessageFns<Rule> = {
   encode(
-    message: Constraint,
+    message: Rule,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
     if (message.id !== undefined && message.id !== "") {
@@ -478,11 +464,11 @@ export const Constraint: MessageFns<Constraint> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): Constraint {
+  decode(input: BinaryReader | Uint8Array, length?: number): Rule {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseConstraint();
+    const message = createBaseRule();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -519,7 +505,7 @@ export const Constraint: MessageFns<Constraint> = {
     return message;
   },
 
-  fromJSON(object: any): Constraint {
+  fromJSON(object: any): Rule {
     return {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       message: isSet(object.message) ? globalThis.String(object.message) : "",
@@ -529,7 +515,7 @@ export const Constraint: MessageFns<Constraint> = {
     };
   },
 
-  toJSON(message: Constraint): unknown {
+  toJSON(message: Rule): unknown {
     const obj: any = {};
     if (message.id !== undefined && message.id !== "") {
       obj.id = message.id;
@@ -544,32 +530,29 @@ export const Constraint: MessageFns<Constraint> = {
   },
 };
 
-function createBaseMessageConstraints(): MessageConstraints {
+function createBaseMessageRules(): MessageRules {
   return { disabled: false, cel: [] };
 }
 
-export const MessageConstraints: MessageFns<MessageConstraints> = {
+export const MessageRules: MessageFns<MessageRules> = {
   encode(
-    message: MessageConstraints,
+    message: MessageRules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
     if (message.disabled !== undefined && message.disabled !== false) {
       writer.uint32(8).bool(message.disabled);
     }
     for (const v of message.cel) {
-      Constraint.encode(v!, writer.uint32(26).fork()).join();
+      Rule.encode(v!, writer.uint32(26).fork()).join();
     }
     return writer;
   },
 
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): MessageConstraints {
+  decode(input: BinaryReader | Uint8Array, length?: number): MessageRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMessageConstraints();
+    const message = createBaseMessageRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -586,7 +569,7 @@ export const MessageConstraints: MessageFns<MessageConstraints> = {
             break;
           }
 
-          message.cel.push(Constraint.decode(reader, reader.uint32()));
+          message.cel.push(Rule.decode(reader, reader.uint32()));
           continue;
         }
       }
@@ -598,36 +581,36 @@ export const MessageConstraints: MessageFns<MessageConstraints> = {
     return message;
   },
 
-  fromJSON(object: any): MessageConstraints {
+  fromJSON(object: any): MessageRules {
     return {
       disabled: isSet(object.disabled)
         ? globalThis.Boolean(object.disabled)
         : false,
       cel: globalThis.Array.isArray(object?.cel)
-        ? object.cel.map((e: any) => Constraint.fromJSON(e))
+        ? object.cel.map((e: any) => Rule.fromJSON(e))
         : [],
     };
   },
 
-  toJSON(message: MessageConstraints): unknown {
+  toJSON(message: MessageRules): unknown {
     const obj: any = {};
     if (message.disabled !== undefined && message.disabled !== false) {
       obj.disabled = message.disabled;
     }
     if (message.cel?.length) {
-      obj.cel = message.cel.map((e) => Constraint.toJSON(e));
+      obj.cel = message.cel.map((e) => Rule.toJSON(e));
     }
     return obj;
   },
 };
 
-function createBaseOneofConstraints(): OneofConstraints {
+function createBaseOneofRules(): OneofRules {
   return { required: false };
 }
 
-export const OneofConstraints: MessageFns<OneofConstraints> = {
+export const OneofRules: MessageFns<OneofRules> = {
   encode(
-    message: OneofConstraints,
+    message: OneofRules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
     if (message.required !== undefined && message.required !== false) {
@@ -636,11 +619,11 @@ export const OneofConstraints: MessageFns<OneofConstraints> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): OneofConstraints {
+  decode(input: BinaryReader | Uint8Array, length?: number): OneofRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseOneofConstraints();
+    const message = createBaseOneofRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -661,7 +644,7 @@ export const OneofConstraints: MessageFns<OneofConstraints> = {
     return message;
   },
 
-  fromJSON(object: any): OneofConstraints {
+  fromJSON(object: any): OneofRules {
     return {
       required: isSet(object.required)
         ? globalThis.Boolean(object.required)
@@ -669,7 +652,7 @@ export const OneofConstraints: MessageFns<OneofConstraints> = {
     };
   },
 
-  toJSON(message: OneofConstraints): unknown {
+  toJSON(message: OneofRules): unknown {
     const obj: any = {};
     if (message.required !== undefined && message.required !== false) {
       obj.required = message.required;
@@ -678,24 +661,17 @@ export const OneofConstraints: MessageFns<OneofConstraints> = {
   },
 };
 
-function createBaseFieldConstraints(): FieldConstraints {
-  return {
-    cel: [],
-    required: false,
-    ignore: 0,
-    type: undefined,
-    skipped: false,
-    ignoreEmpty: false,
-  };
+function createBaseFieldRules(): FieldRules {
+  return { cel: [], required: false, ignore: 0, type: undefined };
 }
 
-export const FieldConstraints: MessageFns<FieldConstraints> = {
+export const FieldRules: MessageFns<FieldRules> = {
   encode(
-    message: FieldConstraints,
+    message: FieldRules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
     for (const v of message.cel) {
-      Constraint.encode(v!, writer.uint32(186).fork()).join();
+      Rule.encode(v!, writer.uint32(186).fork()).join();
     }
     if (message.required !== undefined && message.required !== false) {
       writer.uint32(200).bool(message.required);
@@ -807,20 +783,14 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
         ).join();
         break;
     }
-    if (message.skipped !== undefined && message.skipped !== false) {
-      writer.uint32(192).bool(message.skipped);
-    }
-    if (message.ignoreEmpty !== undefined && message.ignoreEmpty !== false) {
-      writer.uint32(208).bool(message.ignoreEmpty);
-    }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): FieldConstraints {
+  decode(input: BinaryReader | Uint8Array, length?: number): FieldRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseFieldConstraints();
+    const message = createBaseFieldRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -829,7 +799,7 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
             break;
           }
 
-          message.cel.push(Constraint.decode(reader, reader.uint32()));
+          message.cel.push(Rule.decode(reader, reader.uint32()));
           continue;
         }
         case 25: {
@@ -1079,22 +1049,6 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
           };
           continue;
         }
-        case 24: {
-          if (tag !== 192) {
-            break;
-          }
-
-          message.skipped = reader.bool();
-          continue;
-        }
-        case 26: {
-          if (tag !== 208) {
-            break;
-          }
-
-          message.ignoreEmpty = reader.bool();
-          continue;
-        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1104,10 +1058,10 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
     return message;
   },
 
-  fromJSON(object: any): FieldConstraints {
+  fromJSON(object: any): FieldRules {
     return {
       cel: globalThis.Array.isArray(object?.cel)
-        ? object.cel.map((e: any) => Constraint.fromJSON(e))
+        ? object.cel.map((e: any) => Rule.fromJSON(e))
         : [],
       required: isSet(object.required)
         ? globalThis.Boolean(object.required)
@@ -1227,19 +1181,13 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
                                                       ),
                                                   }
                                                 : undefined,
-      skipped: isSet(object.skipped)
-        ? globalThis.Boolean(object.skipped)
-        : false,
-      ignoreEmpty: isSet(object.ignoreEmpty)
-        ? globalThis.Boolean(object.ignoreEmpty)
-        : false,
     };
   },
 
-  toJSON(message: FieldConstraints): unknown {
+  toJSON(message: FieldRules): unknown {
     const obj: any = {};
     if (message.cel?.length) {
-      obj.cel = message.cel.map((e) => Constraint.toJSON(e));
+      obj.cel = message.cel.map((e) => Rule.toJSON(e));
     }
     if (message.required !== undefined && message.required !== false) {
       obj.required = message.required;
@@ -1290,39 +1238,30 @@ export const FieldConstraints: MessageFns<FieldConstraints> = {
     } else if (message.type?.$case === "timestamp") {
       obj.timestamp = TimestampRules.toJSON(message.type.timestamp);
     }
-    if (message.skipped !== undefined && message.skipped !== false) {
-      obj.skipped = message.skipped;
-    }
-    if (message.ignoreEmpty !== undefined && message.ignoreEmpty !== false) {
-      obj.ignoreEmpty = message.ignoreEmpty;
-    }
     return obj;
   },
 };
 
-function createBasePredefinedConstraints(): PredefinedConstraints {
+function createBasePredefinedRules(): PredefinedRules {
   return { cel: [] };
 }
 
-export const PredefinedConstraints: MessageFns<PredefinedConstraints> = {
+export const PredefinedRules: MessageFns<PredefinedRules> = {
   encode(
-    message: PredefinedConstraints,
+    message: PredefinedRules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
     for (const v of message.cel) {
-      Constraint.encode(v!, writer.uint32(10).fork()).join();
+      Rule.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(
-    input: BinaryReader | Uint8Array,
-    length?: number,
-  ): PredefinedConstraints {
+  decode(input: BinaryReader | Uint8Array, length?: number): PredefinedRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePredefinedConstraints();
+    const message = createBasePredefinedRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1331,7 +1270,7 @@ export const PredefinedConstraints: MessageFns<PredefinedConstraints> = {
             break;
           }
 
-          message.cel.push(Constraint.decode(reader, reader.uint32()));
+          message.cel.push(Rule.decode(reader, reader.uint32()));
           continue;
         }
       }
@@ -1343,18 +1282,18 @@ export const PredefinedConstraints: MessageFns<PredefinedConstraints> = {
     return message;
   },
 
-  fromJSON(object: any): PredefinedConstraints {
+  fromJSON(object: any): PredefinedRules {
     return {
       cel: globalThis.Array.isArray(object?.cel)
-        ? object.cel.map((e: any) => Constraint.fromJSON(e))
+        ? object.cel.map((e: any) => Rule.fromJSON(e))
         : [],
     };
   },
 
-  toJSON(message: PredefinedConstraints): unknown {
+  toJSON(message: PredefinedRules): unknown {
     const obj: any = {};
     if (message.cel?.length) {
-      obj.cel = message.cel.map((e) => Constraint.toJSON(e));
+      obj.cel = message.cel.map((e) => Rule.toJSON(e));
     }
     return obj;
   },
@@ -5225,7 +5164,7 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
       writer.uint32(24).bool(message.unique);
     }
     if (message.items !== undefined) {
-      FieldConstraints.encode(message.items, writer.uint32(34).fork()).join();
+      FieldRules.encode(message.items, writer.uint32(34).fork()).join();
     }
     return writer;
   },
@@ -5267,7 +5206,7 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
             break;
           }
 
-          message.items = FieldConstraints.decode(reader, reader.uint32());
+          message.items = FieldRules.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -5289,7 +5228,7 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
         : "0",
       unique: isSet(object.unique) ? globalThis.Boolean(object.unique) : false,
       items: isSet(object.items)
-        ? FieldConstraints.fromJSON(object.items)
+        ? FieldRules.fromJSON(object.items)
         : undefined,
     };
   },
@@ -5306,7 +5245,7 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
       obj.unique = message.unique;
     }
     if (message.items !== undefined) {
-      obj.items = FieldConstraints.toJSON(message.items);
+      obj.items = FieldRules.toJSON(message.items);
     }
     return obj;
   },
@@ -5328,10 +5267,10 @@ export const MapRules: MessageFns<MapRules> = {
       writer.uint32(16).uint64(message.maxPairs);
     }
     if (message.keys !== undefined) {
-      FieldConstraints.encode(message.keys, writer.uint32(34).fork()).join();
+      FieldRules.encode(message.keys, writer.uint32(34).fork()).join();
     }
     if (message.values !== undefined) {
-      FieldConstraints.encode(message.values, writer.uint32(42).fork()).join();
+      FieldRules.encode(message.values, writer.uint32(42).fork()).join();
     }
     return writer;
   },
@@ -5365,7 +5304,7 @@ export const MapRules: MessageFns<MapRules> = {
             break;
           }
 
-          message.keys = FieldConstraints.decode(reader, reader.uint32());
+          message.keys = FieldRules.decode(reader, reader.uint32());
           continue;
         }
         case 5: {
@@ -5373,7 +5312,7 @@ export const MapRules: MessageFns<MapRules> = {
             break;
           }
 
-          message.values = FieldConstraints.decode(reader, reader.uint32());
+          message.values = FieldRules.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -5393,11 +5332,9 @@ export const MapRules: MessageFns<MapRules> = {
       maxPairs: isSet(object.maxPairs)
         ? globalThis.String(object.maxPairs)
         : "0",
-      keys: isSet(object.keys)
-        ? FieldConstraints.fromJSON(object.keys)
-        : undefined,
+      keys: isSet(object.keys) ? FieldRules.fromJSON(object.keys) : undefined,
       values: isSet(object.values)
-        ? FieldConstraints.fromJSON(object.values)
+        ? FieldRules.fromJSON(object.values)
         : undefined,
     };
   },
@@ -5411,10 +5348,10 @@ export const MapRules: MessageFns<MapRules> = {
       obj.maxPairs = message.maxPairs;
     }
     if (message.keys !== undefined) {
-      obj.keys = FieldConstraints.toJSON(message.keys);
+      obj.keys = FieldRules.toJSON(message.keys);
     }
     if (message.values !== undefined) {
-      obj.values = FieldConstraints.toJSON(message.values);
+      obj.values = FieldRules.toJSON(message.values);
     }
     return obj;
   },

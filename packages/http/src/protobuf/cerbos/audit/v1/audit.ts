@@ -20,6 +20,7 @@ export interface AccessLogEntry {
   metadata: { [key: string]: MetaValues };
   method: string;
   statusCode: number;
+  oversized: boolean;
 }
 
 export interface AccessLogEntry_MetadataEntry {
@@ -46,6 +47,7 @@ export interface DecisionLogEntry {
     | undefined;
   metadata: { [key: string]: MetaValues };
   auditTrail: AuditTrail | undefined;
+  oversized: boolean;
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -106,6 +108,9 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
       statusCode: isSet(object.statusCode)
         ? globalThis.Number(object.statusCode)
         : 0,
+      oversized: isSet(object.oversized)
+        ? globalThis.Boolean(object.oversized)
+        : false,
     };
   },
 
@@ -134,6 +139,9 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
     }
     if (message.statusCode !== 0) {
       obj.statusCode = Math.round(message.statusCode);
+    }
+    if (message.oversized !== false) {
+      obj.oversized = message.oversized;
     }
     return obj;
   },
@@ -204,6 +212,9 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
       auditTrail: isSet(object.auditTrail)
         ? AuditTrail.fromJSON(object.auditTrail)
         : undefined,
+      oversized: isSet(object.oversized)
+        ? globalThis.Boolean(object.oversized)
+        : false,
     };
   },
 
@@ -247,6 +258,9 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
     }
     if (message.auditTrail !== undefined) {
       obj.auditTrail = AuditTrail.toJSON(message.auditTrail);
+    }
+    if (message.oversized !== false) {
+      obj.oversized = message.oversized;
     }
     return obj;
   },
