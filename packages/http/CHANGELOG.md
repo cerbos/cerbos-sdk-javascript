@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.22.0] - 2025-06-02
+
 ### Added
 
 - Support for multiple actions in [`Client.planResources`](../../docs/core.client.planresources.md) ([#1146](https://github.com/cerbos/cerbos-sdk-javascript/pull/1146))
@@ -9,6 +13,10 @@
   Requires a policy decision point server running Cerbos 0.44+.
 
 - [`AccessLogEntry.oversized`](../../docs/core.accesslogentry.oversized.md) and [`DecisionLogEntry.oversized`](../../docs/core.decisionlogentry.oversized.md) properties ([#1165](https://github.com/cerbos/cerbos-sdk-javascript/pull/1165))
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.22.0 ([#1167](https://github.com/cerbos/cerbos-sdk-javascript/pull/1167))
 
 ### Removed
 
@@ -327,7 +335,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.21.2...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.22.0...HEAD
+[0.22.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.21.2...@cerbos/http@0.22.0
 [0.21.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.21.1...@cerbos/http@0.21.2
 [0.21.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.21.0...@cerbos/http@0.21.1
 [0.21.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.20.0...@cerbos/http@0.21.0

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.22.0] - 2025-06-02
+
 ### Added
 
 - [`ChannelOptions."grpc-node.flow_control_window"`](../../docs/grpc.channeloptions._grpc-node.flow_control_window_.md) option to set initial window size for HTTP/2 stream-level flow control ([#1122](https://github.com/cerbos/cerbos-sdk-javascript/pull/1122))
@@ -15,6 +19,8 @@
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.5.1 ([#1124](https://github.com/cerbos/cerbos-sdk-javascript/pull/1124), [#1151](https://github.com/cerbos/cerbos-sdk-javascript/pull/1151), [#1154](https://github.com/cerbos/cerbos-sdk-javascript/pull/1154), [#1161](https://github.com/cerbos/cerbos-sdk-javascript/pull/1161), [#1164](https://github.com/cerbos/cerbos-sdk-javascript/pull/1164))
+
+- Bump dependency on [@cerbos/core] to 0.22.0 ([#1167](https://github.com/cerbos/cerbos-sdk-javascript/pull/1167))
 
 - Bump dependency on [@grpc/grpc-js] to 1.13.4 ([#1122](https://github.com/cerbos/cerbos-sdk-javascript/pull/1122), [#1130](https://github.com/cerbos/cerbos-sdk-javascript/pull/1130), [#1139](https://github.com/cerbos/cerbos-sdk-javascript/pull/1139), [#1158](https://github.com/cerbos/cerbos-sdk-javascript/pull/1158))
 
@@ -395,7 +401,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.21.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.22.0...HEAD
+[0.22.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.21.0...@cerbos/grpc@0.22.0
 [0.21.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.20.1...@cerbos/grpc@0.21.0
 [0.20.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.20.0...@cerbos/grpc@0.20.1
 [0.20.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.19.0...@cerbos/grpc@0.20.0

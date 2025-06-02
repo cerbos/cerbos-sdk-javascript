@@ -1,11 +1,16 @@
-unreleased:
-  type: minor
-
-  removed:
-    - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
-      pull: 1166
-
 releases:
+  - version: 0.2.0
+    date: 2025-06-02
+
+    bumped:
+      "@cerbos/core":
+        to: 0.22.0
+        pull: 1167
+
+    removed:
+      - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
+        pull: 1166
+
   - version: 0.1.7
     date: 2025-03-12
 

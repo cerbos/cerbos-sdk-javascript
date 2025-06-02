@@ -1,19 +1,24 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Support for multiple actions in [`Client.planResources`](../../docs/core.client.planresources.md)
-      details: Requires a policy decision point server running Cerbos 0.44+.
-      pull: 1146
-
-    - summary: "[`AccessLogEntry.oversized`](../../docs/core.accesslogentry.oversized.md) and [`DecisionLogEntry.oversized`](../../docs/core.decisionlogentry.oversized.md) properties"
-      pull: 1165
-
-  removed:
-    - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
-      pull: 1166
-
 releases:
+  - version: 0.22.0
+    date: 2025-06-02
+
+    added:
+      - summary: Support for multiple actions in [`Client.planResources`](../../docs/core.client.planresources.md)
+        details: Requires a policy decision point server running Cerbos 0.44+.
+        pull: 1146
+
+      - summary: "[`AccessLogEntry.oversized`](../../docs/core.accesslogentry.oversized.md) and [`DecisionLogEntry.oversized`](../../docs/core.decisionlogentry.oversized.md) properties"
+        pull: 1165
+
+    bumped:
+      "@cerbos/core":
+        to: 0.22.0
+        pull: 1167
+
+    removed:
+      - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
+        pull: 1166
+
   - version: 0.21.2
     date: 2025-03-12
 
