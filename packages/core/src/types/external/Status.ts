@@ -5,14 +5,34 @@
  */
 export enum Status {
   /**
+   * The operation was aborted.
+   */
+  ABORTED = 10,
+
+  /**
+   * The entity that the client attempted to create already exists.
+   */
+  ALREADY_EXISTS = 6,
+
+  /**
    * The operation was cancelled.
    */
   CANCELLED = 1,
 
   /**
+   * The operation resulted in unrecoverable data loss or corruption.
+   */
+  DATA_LOSS = 15,
+
+  /**
    * The operation timed out.
    */
   DEADLINE_EXCEEDED = 4,
+
+  /**
+   * The operation was rejected because the system is not in a state required for the operation's execution.
+   */
+  FAILED_PRECONDITION = 9,
 
   /**
    * The operation failed due to an internal error.
@@ -33,6 +53,16 @@ export enum Status {
    * The operation completed successfully.
    */
   OK = 0,
+
+  /**
+   * The operation was attempted past the valid range.
+   */
+  OUT_OF_RANGE = 11,
+
+  /**
+   * The caller does not have permission to execute the specified operation.
+   */
+  PERMISSION_DENIED = 7,
 
   /**
    * The operation failed because a resource has been exhausted.

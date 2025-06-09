@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-set -o errexit
-set -o nounset
-set -o pipefail
-
-cd "$(dirname "${BASH_SOURCE[0]}")/../packages/core/src/types/external"
-
-find . -type f ! -name index.ts | LANG=POSIX sort --ignore-case | sed -e 's/^/export * from "/' -e 's/\.ts$/";/' > index.ts

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+generate_types_index() {
+  cd "$(dirname "${BASH_SOURCE[0]}")/../packages/$1"
+  find . -type f ! -name index.ts | LANG=POSIX sort --ignore-case | sed -e 's/^/export * from "/' -e 's/\.ts$/";/' > index.ts
+  cd - >/dev/null
+}
+
+generate_types_index core/src/types/external
+generate_types_index hub/src/types

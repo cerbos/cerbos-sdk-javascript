@@ -1177,14 +1177,17 @@ function planResourcesMetadataFromProtobuf({
   };
 }
 
-const unexpected = Symbol("unexpected");
+/** @internal */
+export const unexpected = Symbol("unexpected");
+
 type Unexpected = typeof unexpected;
 
 function isUnexpected(value: unknown): value is Unexpected | undefined {
   return value === unexpected || value === undefined;
 }
 
-function translateEnum<
+/** @internal */
+export function translateEnum<
   Enum extends Record<string | number, number | string>,
   Result,
 >(

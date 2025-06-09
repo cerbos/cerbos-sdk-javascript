@@ -1,0 +1,65 @@
+{
+  "name": "@cerbos/hub",
+  "version": "0.0.1",
+  "description": "Client library for interacting with Cerbos Hub from server-side Node.js applications",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cerbos/cerbos-sdk-javascript.git",
+    "directory": "packages/hub"
+  },
+  "homepage": "https://github.com/cerbos/cerbos-sdk-javascript/tree/main/packages/hub#readme",
+  "bugs": {
+    "url": "https://github.com/cerbos/cerbos-sdk-javascript/issues"
+  },
+  "author": "Cerbos <help@cerbos.dev> (https://cerbos.dev)",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 20"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    }
+  },
+  "files": [
+    "lib/**/*.d.ts",
+    "lib/**/*.d.ts.map",
+    "lib/**/*.js",
+    "lib/**/*.js.map",
+    "src/**/*.ts"
+  ],
+  "keywords": [
+    "Cerbos",
+    "Cerbos Hub",
+    "authorization",
+    "access control",
+    "roles",
+    "permissions",
+    "policy",
+    "security",
+    "role-based access control",
+    "RBAC",
+    "attribute-based access control",
+    "ABAC",
+    "policy decision point",
+    "PDP"
+  ],
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.5.2",
+    "@bufbuild/protovalidate": "^0.4.0",
+    "@cerbos/core": "^0.22.0",
+    "@connectrpc/connect": "^2.0.2",
+    "@connectrpc/connect-node": "^2.0.2",
+    "opossum": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/opossum": "8.1.8"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
