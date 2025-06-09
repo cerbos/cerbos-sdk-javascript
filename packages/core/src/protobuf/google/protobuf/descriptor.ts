@@ -167,6 +167,9 @@ export interface FeatureSet {
   messageEncoding?: FeatureSet_MessageEncoding | undefined;
   jsonFormat?: FeatureSet_JsonFormat | undefined;
   enforceNamingStyle?: FeatureSet_EnforceNamingStyle | undefined;
+  defaultSymbolVisibility?:
+    | FeatureSet_VisibilityFeature_DefaultSymbolVisibility
+    | undefined;
 }
 
 export enum FeatureSet_FieldPresence {
@@ -210,4 +213,14 @@ export enum FeatureSet_EnforceNamingStyle {
   ENFORCE_NAMING_STYLE_UNKNOWN = 0,
   STYLE2024 = 1,
   STYLE_LEGACY = 2,
+}
+
+export interface FeatureSet_VisibilityFeature {}
+
+export enum FeatureSet_VisibilityFeature_DefaultSymbolVisibility {
+  DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+  EXPORT_ALL = 1,
+  EXPORT_TOP_LEVEL = 2,
+  LOCAL_ALL = 3,
+  STRICT = 4,
 }
