@@ -70,6 +70,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.test-matrix.outputs.matrix) }}
+    concurrency:
+      group: ${{ matrix.concurrency }}
     steps:
       - name: Check out code
         uses: actions/checkout@v4

@@ -5,4 +5,5 @@
 /private/*/lib/
 /private/*/node_modules/
 /private/test/servers/tmp/
+/private/test/.env
 /tsconfig.tsbuildinfo

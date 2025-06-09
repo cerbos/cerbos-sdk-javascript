@@ -195,6 +195,7 @@ async function fetchReactVersions(): Promise<Versions> {
 
 interface MatrixEntry {
   required: boolean;
+  concurrency?: string;
   title: string;
   setup?: string;
   test: string;
@@ -208,6 +209,16 @@ function nodeEntry(node: string): MatrixEntry {
     required: true,
     title: `Node ${node}`,
     test: "pnpm run test matrix-node",
+    node,
+  };
+}
+
+function hubEntry(node: string): MatrixEntry {
+  return {
+    required: true,
+    concurrency: "hub",
+    title: `Hub | Node ${node}`,
+    test: "pnpm run test matrix-hub",
     node,
   };
 }
@@ -258,6 +269,7 @@ const [nodes, cerboses, reacts] = await Promise.all([
 const matrix = {
   include: [
     ...nodes.map((node) => nodeEntry(node)),
+    ...nodes.map((node) => hubEntry(node)),
     ...matrixEntries(nodes, cerboses, cerbosEntry),
     ...matrixEntries(nodes, reacts, reactEntry),
   ],

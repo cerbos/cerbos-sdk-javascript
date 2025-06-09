@@ -10,6 +10,8 @@ export {
   checkOutputFromProtobuf as _checkOutputFromProtobuf,
   policyFromProtobuf as _policyFromProtobuf,
   requireField as _requireField,
+  translateEnum as _translateEnum,
+  unexpected as _unexpected,
 } from "./convert/fromProtobuf";
 export { policyToProtobuf as _policyToProtobuf } from "./convert/toProtobuf";
 export * from "./errors";
