@@ -74,6 +74,17 @@ Client library for interacting with the Cerbos policy decision point service ove
 </td></tr>
 <tr><td>
 
+[@cerbos/hub](./hub.md)
+
+
+</td><td>
+
+Client library for interacting with [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
 [@cerbos/opentelemetry](./opentelemetry.md)
 
 
