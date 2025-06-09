@@ -150,9 +150,13 @@ describe("Client", () => {
           userAgent: expectedUserAgent,
         };
 
+        type WithTimestampMatcher<T> = Omit<T, "timestamp"> & {
+          timestamp: ReturnType<typeof expect.any>;
+        };
+
         interface AuditLogTestCase {
-          expectedAccessLogEntry: AccessLogEntry;
-          expectedDecisionLogEntry: DecisionLogEntry;
+          expectedAccessLogEntry: WithTimestampMatcher<AccessLogEntry>;
+          expectedDecisionLogEntry: WithTimestampMatcher<DecisionLogEntry>;
         }
 
         async function checkResources(): Promise<AuditLogTestCase> {

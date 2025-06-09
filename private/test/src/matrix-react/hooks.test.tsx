@@ -120,7 +120,7 @@ const client: Pick<Client, "withPrincipal"> = {
 };
 
 const expectedRequestOptions: RequestOptions = expect.objectContaining({
-  signal: expect.any(AbortSignal) as AbortSignal,
+  signal: expect.any(AbortSignal) as unknown as AbortSignal,
 }) as RequestOptions;
 
 function testCerbosHook<TParams>(
