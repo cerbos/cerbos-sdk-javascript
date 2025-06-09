@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "postinstall": "pnpm --workspace-root run build",
-    "test": "NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt vitest",
+    "test": "NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt node --env-file-if-exists=.env node_modules/vitest/vitest.mjs",
     "test:servers:start": "servers/start",
     "test:servers:stop": "servers/stop"
   },
@@ -14,6 +14,7 @@
     "@cerbos/files": "workspace:*",
     "@cerbos/grpc": "workspace:*",
     "@cerbos/http": "workspace:*",
+    "@cerbos/hub": "workspace:*",
     "@cerbos/opentelemetry": "workspace:*",
     "@cerbos/react": "workspace:*",
     "@grpc/grpc-js": "1.13.4",

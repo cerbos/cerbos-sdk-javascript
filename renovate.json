@@ -47,6 +47,11 @@
       "semanticCommitScope": "deps"
     },
     {
+      "matchPackageNames": ["@connectrpc/*"],
+      "groupName": "connect",
+      "semanticCommitScope": "deps"
+    },
+    {
       "matchPackageNames": ["@grpc/*"],
       "groupName": "grpc",
       "semanticCommitScope": "deps"
