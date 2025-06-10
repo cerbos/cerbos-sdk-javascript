@@ -35,6 +35,23 @@ export function ignoreFromJSON(object: any): Ignore {
   }
 }
 
+export function ignoreToJSON(object: Ignore): string {
+  switch (object) {
+    case Ignore.IGNORE_UNSPECIFIED:
+      return "IGNORE_UNSPECIFIED";
+    case Ignore.IGNORE_IF_UNPOPULATED:
+      return "IGNORE_IF_UNPOPULATED";
+    case Ignore.IGNORE_IF_DEFAULT_VALUE:
+      return "IGNORE_IF_DEFAULT_VALUE";
+    case Ignore.IGNORE_ALWAYS:
+      return "IGNORE_ALWAYS";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum Ignore",
+      );
+  }
+}
+
 export enum KnownRegex {
   KNOWN_REGEX_UNSPECIFIED = 0,
   KNOWN_REGEX_HTTP_HEADER_NAME = 1,
@@ -52,6 +69,21 @@ export function knownRegexFromJSON(object: any): KnownRegex {
     case 2:
     case "KNOWN_REGEX_HTTP_HEADER_VALUE":
       return KnownRegex.KNOWN_REGEX_HTTP_HEADER_VALUE;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum KnownRegex",
+      );
+  }
+}
+
+export function knownRegexToJSON(object: KnownRegex): string {
+  switch (object) {
+    case KnownRegex.KNOWN_REGEX_UNSPECIFIED:
+      return "KNOWN_REGEX_UNSPECIFIED";
+    case KnownRegex.KNOWN_REGEX_HTTP_HEADER_NAME:
+      return "KNOWN_REGEX_HTTP_HEADER_NAME";
+    case KnownRegex.KNOWN_REGEX_HTTP_HEADER_VALUE:
+      return "KNOWN_REGEX_HTTP_HEADER_VALUE";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum KnownRegex",
@@ -415,6 +447,20 @@ export const Rule: MessageFns<Rule> = {
         : "",
     };
   },
+
+  toJSON(message: Rule): unknown {
+    const obj: any = {};
+    if (message.id !== undefined && message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.message !== undefined && message.message !== "") {
+      obj.message = message.message;
+    }
+    if (message.expression !== undefined && message.expression !== "") {
+      obj.expression = message.expression;
+    }
+    return obj;
+  },
 };
 
 export const OneofRules: MessageFns<OneofRules> = {
@@ -424,6 +470,14 @@ export const OneofRules: MessageFns<OneofRules> = {
         ? globalThis.Boolean(object.required)
         : false,
     };
+  },
+
+  toJSON(message: OneofRules): unknown {
+    const obj: any = {};
+    if (message.required !== undefined && message.required !== false) {
+      obj.required = message.required;
+    }
+    return obj;
   },
 };
 
@@ -553,6 +607,63 @@ export const FieldRules: MessageFns<FieldRules> = {
                                                 : undefined,
     };
   },
+
+  toJSON(message: FieldRules): unknown {
+    const obj: any = {};
+    if (message.cel?.length) {
+      obj.cel = message.cel.map((e) => Rule.toJSON(e));
+    }
+    if (message.required !== undefined && message.required !== false) {
+      obj.required = message.required;
+    }
+    if (message.ignore !== undefined && message.ignore !== 0) {
+      obj.ignore = ignoreToJSON(message.ignore);
+    }
+    if (message.type?.$case === "float") {
+      obj.float = FloatRules.toJSON(message.type.float);
+    } else if (message.type?.$case === "double") {
+      obj.double = DoubleRules.toJSON(message.type.double);
+    } else if (message.type?.$case === "int32") {
+      obj.int32 = Int32Rules.toJSON(message.type.int32);
+    } else if (message.type?.$case === "int64") {
+      obj.int64 = Int64Rules.toJSON(message.type.int64);
+    } else if (message.type?.$case === "uint32") {
+      obj.uint32 = UInt32Rules.toJSON(message.type.uint32);
+    } else if (message.type?.$case === "uint64") {
+      obj.uint64 = UInt64Rules.toJSON(message.type.uint64);
+    } else if (message.type?.$case === "sint32") {
+      obj.sint32 = SInt32Rules.toJSON(message.type.sint32);
+    } else if (message.type?.$case === "sint64") {
+      obj.sint64 = SInt64Rules.toJSON(message.type.sint64);
+    } else if (message.type?.$case === "fixed32") {
+      obj.fixed32 = Fixed32Rules.toJSON(message.type.fixed32);
+    } else if (message.type?.$case === "fixed64") {
+      obj.fixed64 = Fixed64Rules.toJSON(message.type.fixed64);
+    } else if (message.type?.$case === "sfixed32") {
+      obj.sfixed32 = SFixed32Rules.toJSON(message.type.sfixed32);
+    } else if (message.type?.$case === "sfixed64") {
+      obj.sfixed64 = SFixed64Rules.toJSON(message.type.sfixed64);
+    } else if (message.type?.$case === "bool") {
+      obj.bool = BoolRules.toJSON(message.type.bool);
+    } else if (message.type?.$case === "string") {
+      obj.string = StringRules.toJSON(message.type.string);
+    } else if (message.type?.$case === "bytes") {
+      obj.bytes = BytesRules.toJSON(message.type.bytes);
+    } else if (message.type?.$case === "enum") {
+      obj.enum = EnumRules.toJSON(message.type.enum);
+    } else if (message.type?.$case === "repeated") {
+      obj.repeated = RepeatedRules.toJSON(message.type.repeated);
+    } else if (message.type?.$case === "map") {
+      obj.map = MapRules.toJSON(message.type.map);
+    } else if (message.type?.$case === "any") {
+      obj.any = AnyRules.toJSON(message.type.any);
+    } else if (message.type?.$case === "duration") {
+      obj.duration = DurationRules.toJSON(message.type.duration);
+    } else if (message.type?.$case === "timestamp") {
+      obj.timestamp = TimestampRules.toJSON(message.type.timestamp);
+    }
+    return obj;
+  },
 };
 
 export const PredefinedRules: MessageFns<PredefinedRules> = {
@@ -562,6 +673,14 @@ export const PredefinedRules: MessageFns<PredefinedRules> = {
         ? object.cel.map((e: any) => Rule.fromJSON(e))
         : [],
     };
+  },
+
+  toJSON(message: PredefinedRules): unknown {
+    const obj: any = {};
+    if (message.cel?.length) {
+      obj.cel = message.cel.map((e) => Rule.toJSON(e));
+    }
+    return obj;
   },
 };
 
@@ -591,6 +710,36 @@ export const FloatRules: MessageFns<FloatRules> = {
         : [],
     };
   },
+
+  toJSON(message: FloatRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== 0) {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    if (message.finite !== undefined && message.finite !== false) {
+      obj.finite = message.finite;
+    }
+    if (message.example?.length) {
+      obj.example = message.example;
+    }
+    return obj;
+  },
 };
 
 export const DoubleRules: MessageFns<DoubleRules> = {
@@ -619,6 +768,36 @@ export const DoubleRules: MessageFns<DoubleRules> = {
         : [],
     };
   },
+
+  toJSON(message: DoubleRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== 0) {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    if (message.finite !== undefined && message.finite !== false) {
+      obj.finite = message.finite;
+    }
+    if (message.example?.length) {
+      obj.example = message.example;
+    }
+    return obj;
+  },
 };
 
 export const Int32Rules: MessageFns<Int32Rules> = {
@@ -645,6 +824,33 @@ export const Int32Rules: MessageFns<Int32Rules> = {
         ? object.example.map((e: any) => globalThis.Number(e))
         : [],
     };
+  },
+
+  toJSON(message: Int32Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== 0) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Math.round(message.lessThan.lt);
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = Math.round(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Math.round(message.greaterThan.gt);
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = Math.round(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    if (message.example?.length) {
+      obj.example = message.example.map((e) => Math.round(e));
+    }
+    return obj;
   },
 };
 
@@ -673,6 +879,33 @@ export const Int64Rules: MessageFns<Int64Rules> = {
         : [],
     };
   },
+
+  toJSON(message: Int64Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== "0") {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    if (message.example?.length) {
+      obj.example = message.example;
+    }
+    return obj;
+  },
 };
 
 export const UInt32Rules: MessageFns<UInt32Rules> = {
@@ -699,6 +932,33 @@ export const UInt32Rules: MessageFns<UInt32Rules> = {
         ? object.example.map((e: any) => globalThis.Number(e))
         : [],
     };
+  },
+
+  toJSON(message: UInt32Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== 0) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Math.round(message.lessThan.lt);
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = Math.round(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Math.round(message.greaterThan.gt);
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = Math.round(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    if (message.example?.length) {
+      obj.example = message.example.map((e) => Math.round(e));
+    }
+    return obj;
   },
 };
 
@@ -727,6 +987,33 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
         : [],
     };
   },
+
+  toJSON(message: UInt64Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== "0") {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    if (message.example?.length) {
+      obj.example = message.example;
+    }
+    return obj;
+  },
 };
 
 export const SInt32Rules: MessageFns<SInt32Rules> = {
@@ -753,6 +1040,33 @@ export const SInt32Rules: MessageFns<SInt32Rules> = {
         ? object.example.map((e: any) => globalThis.Number(e))
         : [],
     };
+  },
+
+  toJSON(message: SInt32Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== 0) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Math.round(message.lessThan.lt);
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = Math.round(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Math.round(message.greaterThan.gt);
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = Math.round(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    if (message.example?.length) {
+      obj.example = message.example.map((e) => Math.round(e));
+    }
+    return obj;
   },
 };
 
@@ -781,6 +1095,33 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
         : [],
     };
   },
+
+  toJSON(message: SInt64Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== "0") {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    if (message.example?.length) {
+      obj.example = message.example;
+    }
+    return obj;
+  },
 };
 
 export const Fixed32Rules: MessageFns<Fixed32Rules> = {
@@ -807,6 +1148,33 @@ export const Fixed32Rules: MessageFns<Fixed32Rules> = {
         ? object.example.map((e: any) => globalThis.Number(e))
         : [],
     };
+  },
+
+  toJSON(message: Fixed32Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== 0) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Math.round(message.lessThan.lt);
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = Math.round(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Math.round(message.greaterThan.gt);
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = Math.round(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    if (message.example?.length) {
+      obj.example = message.example.map((e) => Math.round(e));
+    }
+    return obj;
   },
 };
 
@@ -835,6 +1203,33 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
         : [],
     };
   },
+
+  toJSON(message: Fixed64Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== "0") {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    if (message.example?.length) {
+      obj.example = message.example;
+    }
+    return obj;
+  },
 };
 
 export const SFixed32Rules: MessageFns<SFixed32Rules> = {
@@ -861,6 +1256,33 @@ export const SFixed32Rules: MessageFns<SFixed32Rules> = {
         ? object.example.map((e: any) => globalThis.Number(e))
         : [],
     };
+  },
+
+  toJSON(message: SFixed32Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== 0) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Math.round(message.lessThan.lt);
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = Math.round(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Math.round(message.greaterThan.gt);
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = Math.round(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    if (message.example?.length) {
+      obj.example = message.example.map((e) => Math.round(e));
+    }
+    return obj;
   },
 };
 
@@ -889,6 +1311,33 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
         : [],
     };
   },
+
+  toJSON(message: SFixed64Rules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== "0") {
+      obj.const = message.const;
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt;
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt;
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    if (message.example?.length) {
+      obj.example = message.example;
+    }
+    return obj;
+  },
 };
 
 export const BoolRules: MessageFns<BoolRules> = {
@@ -899,6 +1348,17 @@ export const BoolRules: MessageFns<BoolRules> = {
         ? object.example.map((e: any) => globalThis.Boolean(e))
         : [],
     };
+  },
+
+  toJSON(message: BoolRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== false) {
+      obj.const = message.const;
+    }
+    if (message.example?.length) {
+      obj.example = message.example;
+    }
+    return obj;
   },
 };
 
@@ -1029,6 +1489,96 @@ export const StringRules: MessageFns<StringRules> = {
         : [],
     };
   },
+
+  toJSON(message: StringRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== "") {
+      obj.const = message.const;
+    }
+    if (message.len !== undefined && message.len !== "0") {
+      obj.len = message.len;
+    }
+    if (message.minLen !== undefined && message.minLen !== "0") {
+      obj.minLen = message.minLen;
+    }
+    if (message.maxLen !== undefined && message.maxLen !== "0") {
+      obj.maxLen = message.maxLen;
+    }
+    if (message.lenBytes !== undefined && message.lenBytes !== "0") {
+      obj.lenBytes = message.lenBytes;
+    }
+    if (message.minBytes !== undefined && message.minBytes !== "0") {
+      obj.minBytes = message.minBytes;
+    }
+    if (message.maxBytes !== undefined && message.maxBytes !== "0") {
+      obj.maxBytes = message.maxBytes;
+    }
+    if (message.pattern !== undefined && message.pattern !== "") {
+      obj.pattern = message.pattern;
+    }
+    if (message.prefix !== undefined && message.prefix !== "") {
+      obj.prefix = message.prefix;
+    }
+    if (message.suffix !== undefined && message.suffix !== "") {
+      obj.suffix = message.suffix;
+    }
+    if (message.contains !== undefined && message.contains !== "") {
+      obj.contains = message.contains;
+    }
+    if (message.notContains !== undefined && message.notContains !== "") {
+      obj.notContains = message.notContains;
+    }
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    if (message.wellKnown?.$case === "email") {
+      obj.email = message.wellKnown.email;
+    } else if (message.wellKnown?.$case === "hostname") {
+      obj.hostname = message.wellKnown.hostname;
+    } else if (message.wellKnown?.$case === "ip") {
+      obj.ip = message.wellKnown.ip;
+    } else if (message.wellKnown?.$case === "ipv4") {
+      obj.ipv4 = message.wellKnown.ipv4;
+    } else if (message.wellKnown?.$case === "ipv6") {
+      obj.ipv6 = message.wellKnown.ipv6;
+    } else if (message.wellKnown?.$case === "uri") {
+      obj.uri = message.wellKnown.uri;
+    } else if (message.wellKnown?.$case === "uriRef") {
+      obj.uriRef = message.wellKnown.uriRef;
+    } else if (message.wellKnown?.$case === "address") {
+      obj.address = message.wellKnown.address;
+    } else if (message.wellKnown?.$case === "uuid") {
+      obj.uuid = message.wellKnown.uuid;
+    } else if (message.wellKnown?.$case === "tuuid") {
+      obj.tuuid = message.wellKnown.tuuid;
+    } else if (message.wellKnown?.$case === "ipWithPrefixlen") {
+      obj.ipWithPrefixlen = message.wellKnown.ipWithPrefixlen;
+    } else if (message.wellKnown?.$case === "ipv4WithPrefixlen") {
+      obj.ipv4WithPrefixlen = message.wellKnown.ipv4WithPrefixlen;
+    } else if (message.wellKnown?.$case === "ipv6WithPrefixlen") {
+      obj.ipv6WithPrefixlen = message.wellKnown.ipv6WithPrefixlen;
+    } else if (message.wellKnown?.$case === "ipPrefix") {
+      obj.ipPrefix = message.wellKnown.ipPrefix;
+    } else if (message.wellKnown?.$case === "ipv4Prefix") {
+      obj.ipv4Prefix = message.wellKnown.ipv4Prefix;
+    } else if (message.wellKnown?.$case === "ipv6Prefix") {
+      obj.ipv6Prefix = message.wellKnown.ipv6Prefix;
+    } else if (message.wellKnown?.$case === "hostAndPort") {
+      obj.hostAndPort = message.wellKnown.hostAndPort;
+    } else if (message.wellKnown?.$case === "wellKnownRegex") {
+      obj.wellKnownRegex = knownRegexToJSON(message.wellKnown.wellKnownRegex);
+    }
+    if (message.strict !== undefined && message.strict !== false) {
+      obj.strict = message.strict;
+    }
+    if (message.example?.length) {
+      obj.example = message.example;
+    }
+    return obj;
+  },
 };
 
 export const BytesRules: MessageFns<BytesRules> = {
@@ -1068,6 +1618,51 @@ export const BytesRules: MessageFns<BytesRules> = {
         : [],
     };
   },
+
+  toJSON(message: BytesRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const.length !== 0) {
+      obj.const = base64FromBytes(message.const);
+    }
+    if (message.len !== undefined && message.len !== "0") {
+      obj.len = message.len;
+    }
+    if (message.minLen !== undefined && message.minLen !== "0") {
+      obj.minLen = message.minLen;
+    }
+    if (message.maxLen !== undefined && message.maxLen !== "0") {
+      obj.maxLen = message.maxLen;
+    }
+    if (message.pattern !== undefined && message.pattern !== "") {
+      obj.pattern = message.pattern;
+    }
+    if (message.prefix !== undefined && message.prefix.length !== 0) {
+      obj.prefix = base64FromBytes(message.prefix);
+    }
+    if (message.suffix !== undefined && message.suffix.length !== 0) {
+      obj.suffix = base64FromBytes(message.suffix);
+    }
+    if (message.contains !== undefined && message.contains.length !== 0) {
+      obj.contains = base64FromBytes(message.contains);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => base64FromBytes(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => base64FromBytes(e));
+    }
+    if (message.wellKnown?.$case === "ip") {
+      obj.ip = message.wellKnown.ip;
+    } else if (message.wellKnown?.$case === "ipv4") {
+      obj.ipv4 = message.wellKnown.ipv4;
+    } else if (message.wellKnown?.$case === "ipv6") {
+      obj.ipv6 = message.wellKnown.ipv6;
+    }
+    if (message.example?.length) {
+      obj.example = message.example.map((e) => base64FromBytes(e));
+    }
+    return obj;
+  },
 };
 
 export const EnumRules: MessageFns<EnumRules> = {
@@ -1088,6 +1683,26 @@ export const EnumRules: MessageFns<EnumRules> = {
         : [],
     };
   },
+
+  toJSON(message: EnumRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined && message.const !== 0) {
+      obj.const = Math.round(message.const);
+    }
+    if (message.definedOnly !== undefined && message.definedOnly !== false) {
+      obj.definedOnly = message.definedOnly;
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Math.round(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Math.round(e));
+    }
+    if (message.example?.length) {
+      obj.example = message.example.map((e) => Math.round(e));
+    }
+    return obj;
+  },
 };
 
 export const RepeatedRules: MessageFns<RepeatedRules> = {
@@ -1104,6 +1719,23 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
         ? FieldRules.fromJSON(object.items)
         : undefined,
     };
+  },
+
+  toJSON(message: RepeatedRules): unknown {
+    const obj: any = {};
+    if (message.minItems !== undefined && message.minItems !== "0") {
+      obj.minItems = message.minItems;
+    }
+    if (message.maxItems !== undefined && message.maxItems !== "0") {
+      obj.maxItems = message.maxItems;
+    }
+    if (message.unique !== undefined && message.unique !== false) {
+      obj.unique = message.unique;
+    }
+    if (message.items !== undefined) {
+      obj.items = FieldRules.toJSON(message.items);
+    }
+    return obj;
   },
 };
 
@@ -1122,6 +1754,23 @@ export const MapRules: MessageFns<MapRules> = {
         : undefined,
     };
   },
+
+  toJSON(message: MapRules): unknown {
+    const obj: any = {};
+    if (message.minPairs !== undefined && message.minPairs !== "0") {
+      obj.minPairs = message.minPairs;
+    }
+    if (message.maxPairs !== undefined && message.maxPairs !== "0") {
+      obj.maxPairs = message.maxPairs;
+    }
+    if (message.keys !== undefined) {
+      obj.keys = FieldRules.toJSON(message.keys);
+    }
+    if (message.values !== undefined) {
+      obj.values = FieldRules.toJSON(message.values);
+    }
+    return obj;
+  },
 };
 
 export const AnyRules: MessageFns<AnyRules> = {
@@ -1134,6 +1783,17 @@ export const AnyRules: MessageFns<AnyRules> = {
         ? object.notIn.map((e: any) => globalThis.String(e))
         : [],
     };
+  },
+
+  toJSON(message: AnyRules): unknown {
+    const obj: any = {};
+    if (message.in?.length) {
+      obj.in = message.in;
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn;
+    }
+    return obj;
   },
 };
 
@@ -1161,6 +1821,33 @@ export const DurationRules: MessageFns<DurationRules> = {
         ? object.example.map((e: any) => Duration.fromJSON(e))
         : [],
     };
+  },
+
+  toJSON(message: DurationRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = Duration.toJSON(message.const);
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = Duration.toJSON(message.lessThan.lt);
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = Duration.toJSON(message.lessThan.lte);
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = Duration.toJSON(message.greaterThan.gt);
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = Duration.toJSON(message.greaterThan.gte);
+    }
+    if (message.in?.length) {
+      obj.in = message.in.map((e) => Duration.toJSON(e));
+    }
+    if (message.notIn?.length) {
+      obj.notIn = message.notIn.map((e) => Duration.toJSON(e));
+    }
+    if (message.example?.length) {
+      obj.example = message.example.map((e) => Duration.toJSON(e));
+    }
+    return obj;
   },
 };
 
@@ -1190,6 +1877,34 @@ export const TimestampRules: MessageFns<TimestampRules> = {
         : [],
     };
   },
+
+  toJSON(message: TimestampRules): unknown {
+    const obj: any = {};
+    if (message.const !== undefined) {
+      obj.const = message.const.toISOString();
+    }
+    if (message.lessThan?.$case === "lt") {
+      obj.lt = message.lessThan.lt.toISOString();
+    } else if (message.lessThan?.$case === "lte") {
+      obj.lte = message.lessThan.lte.toISOString();
+    } else if (message.lessThan?.$case === "ltNow") {
+      obj.ltNow = message.lessThan.ltNow;
+    }
+    if (message.greaterThan?.$case === "gt") {
+      obj.gt = message.greaterThan.gt.toISOString();
+    } else if (message.greaterThan?.$case === "gte") {
+      obj.gte = message.greaterThan.gte.toISOString();
+    } else if (message.greaterThan?.$case === "gtNow") {
+      obj.gtNow = message.greaterThan.gtNow;
+    }
+    if (message.within !== undefined) {
+      obj.within = Duration.toJSON(message.within);
+    }
+    if (message.example?.length) {
+      obj.example = message.example.map((e) => e.toISOString());
+    }
+    return obj;
+  },
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
@@ -1202,6 +1917,18 @@ function bytesFromBase64(b64: string): Uint8Array {
       arr[i] = bin.charCodeAt(i);
     }
     return arr;
+  }
+}
+
+function base64FromBytes(arr: Uint8Array): string {
+  if ((globalThis as any).Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(globalThis.String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
   }
 }
 
@@ -1227,4 +1954,5 @@ function isSet(value: any): boolean {
 
 export interface MessageFns<T> {
   fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

@@ -1,3 +1,6 @@
+unreleased:
+  type: patch
+
 releases:
   - version: 0.22.0
     date: 2025-06-02

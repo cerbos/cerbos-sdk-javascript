@@ -1,7 +1,7 @@
 {
   "name": "@cerbos/core",
   "version": "0.22.0",
-  "description": "Common types used by the @cerbos/grpc, @cerbos/http, and @cerbos/embedded client libraries",
+  "description": "Common types used by the Cerbos client libraries",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cerbos/cerbos-sdk-javascript.git",

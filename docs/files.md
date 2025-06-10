@@ -63,6 +63,28 @@ Read a schema from a JSON file.
 
 
 </td></tr>
+<tr><td>
+
+[serializePolicy(policy)](./files.serializepolicy.md)
+
+
+</td><td>
+
+Serialize a policy to a JSON-encoded string.
+
+
+</td></tr>
+<tr><td>
+
+[writePolicy(path, policy)](./files.writepolicy.md)
+
+
+</td><td>
+
+Write a policy to a JSON file.
+
+
+</td></tr>
 </tbody></table>
 
 ## Interfaces

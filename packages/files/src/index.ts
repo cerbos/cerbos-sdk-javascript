@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import { opendir, readFile } from "fs/promises";
+import { opendir, readFile, writeFile } from "fs/promises";
 import { basename, extname, join, resolve, sep } from "path";
 
 import { parse } from "yaml";
@@ -12,6 +12,7 @@ import { parse } from "yaml";
 import type { Policy, SchemaInput } from "@cerbos/core";
 import {
   _policyFromProtobuf,
+  _policyToProtobuf,
   policyIsDerivedRoles,
   policyIsExportVariables,
   policyIsPrincipalPolicy,
@@ -52,6 +53,29 @@ export function parsePolicy(contents: string): Policy {
  */
 export async function readPolicy(path: string): Promise<Policy> {
   return parsePolicy(await readFile(path, { encoding: "utf8" }));
+}
+
+/**
+ * Serialize a policy to a JSON-encoded string.
+ *
+ * @param policy - the policy definition.
+ *
+ * @public
+ */
+export function serializePolicy(policy: Policy): string {
+  return `${JSON.stringify(PolicyProtobuf.toJSON(_policyToProtobuf(policy)), null, 2)}\n`;
+}
+
+/**
+ * Write a policy to a JSON file.
+ *
+ * @param path - the path to the policy file.
+ * @param policy - the policy definition.
+ *
+ * @public
+ */
+export async function writePolicy(path: string, policy: Policy): Promise<void> {
+  await writeFile(path, serializePolicy(policy), { encoding: "utf8" });
 }
 
 /**

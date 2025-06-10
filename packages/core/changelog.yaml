@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: Internal exports to support policy serialization
+      pull: 1174
+
 releases:
   - version: 0.22.0
     date: 2025-06-02

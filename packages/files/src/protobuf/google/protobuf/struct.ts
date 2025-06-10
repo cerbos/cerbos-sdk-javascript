@@ -21,6 +21,17 @@ export function nullValueFromJSON(object: any): NullValue {
   }
 }
 
+export function nullValueToJSON(object: NullValue): string {
+  switch (object) {
+    case NullValue.NULL_VALUE:
+      return "NULL_VALUE";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum NullValue",
+      );
+  }
+}
+
 export interface Struct {
   fields: { [key: string]: any | undefined };
 }
@@ -63,6 +74,20 @@ export const Struct: MessageFns<Struct> & StructWrapperFns = {
     };
   },
 
+  toJSON(message: Struct): unknown {
+    const obj: any = {};
+    if (message.fields) {
+      const entries = Object.entries(message.fields);
+      if (entries.length > 0) {
+        obj.fields = {};
+        entries.forEach(([k, v]) => {
+          obj.fields[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
+
   wrap(object: { [key: string]: any } | undefined): Struct {
     const struct = createBaseStruct();
 
@@ -91,6 +116,17 @@ export const Struct_FieldsEntry: MessageFns<Struct_FieldsEntry> = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: Struct_FieldsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -124,6 +160,24 @@ export const Value: MessageFns<Value> & AnyValueWrapperFns = {
                   ? { $case: "listValue", listValue: [...object.listValue] }
                   : undefined,
     };
+  },
+
+  toJSON(message: Value): unknown {
+    const obj: any = {};
+    if (message.kind?.$case === "nullValue") {
+      obj.nullValue = nullValueToJSON(message.kind.nullValue);
+    } else if (message.kind?.$case === "numberValue") {
+      obj.numberValue = message.kind.numberValue;
+    } else if (message.kind?.$case === "stringValue") {
+      obj.stringValue = message.kind.stringValue;
+    } else if (message.kind?.$case === "boolValue") {
+      obj.boolValue = message.kind.boolValue;
+    } else if (message.kind?.$case === "structValue") {
+      obj.structValue = message.kind.structValue;
+    } else if (message.kind?.$case === "listValue") {
+      obj.listValue = message.kind.listValue;
+    }
+    return obj;
   },
 
   wrap(value: any): Value {
@@ -180,6 +234,14 @@ export const ListValue: MessageFns<ListValue> & ListValueWrapperFns = {
     };
   },
 
+  toJSON(message: ListValue): unknown {
+    const obj: any = {};
+    if (message.values?.length) {
+      obj.values = message.values;
+    }
+    return obj;
+  },
+
   wrap(array: Array<any> | undefined): ListValue {
     const result = createBaseListValue();
     result.values = array ?? [];
@@ -208,6 +270,7 @@ function isSet(value: any): boolean {
 
 export interface MessageFns<T> {
   fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }
 
 export interface StructWrapperFns {

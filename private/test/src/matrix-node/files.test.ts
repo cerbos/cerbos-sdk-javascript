@@ -2,9 +2,10 @@ import { resolve } from "path";
 
 import { describe, expect, it } from "vitest";
 
+import type { Policy } from "@cerbos/core";
 import { Effect } from "@cerbos/core";
 import type { DirectoryContents } from "@cerbos/files";
-import { readDirectory } from "@cerbos/files";
+import { readDirectory, serializePolicy } from "@cerbos/files";
 
 describe("readDirectory", () => {
   it("reads policy and schema files from a directory", async () => {
@@ -128,5 +129,43 @@ describe("readDirectory", () => {
     const path = resolve(__dirname, "../../files");
 
     expect(await readDirectory(path)).toEqual(expected);
+  });
+});
+
+describe("serializePolicy", () => {
+  it("serializes a policy to a JSON-encoded string", () => {
+    const policy: Policy = {
+      resourcePolicy: {
+        resource: "example",
+        version: "default",
+        rules: [
+          {
+            actions: ["view"],
+            roles: ["user"],
+            effect: Effect.ALLOW,
+          },
+        ],
+      },
+    };
+
+    expect(serializePolicy(policy)).toEqual(`{
+  "apiVersion": "api.cerbos.dev/v1",
+  "resourcePolicy": {
+    "resource": "example",
+    "version": "default",
+    "rules": [
+      {
+        "actions": [
+          "view"
+        ],
+        "roles": [
+          "user"
+        ],
+        "effect": "EFFECT_ALLOW"
+      }
+    ]
+  }
+}
+`);
   });
 });

@@ -65,6 +65,39 @@ export function editionFromJSON(object: any): Edition {
   }
 }
 
+export function editionToJSON(object: Edition): string {
+  switch (object) {
+    case Edition.EDITION_UNKNOWN:
+      return "EDITION_UNKNOWN";
+    case Edition.EDITION_LEGACY:
+      return "EDITION_LEGACY";
+    case Edition.EDITION_PROTO2:
+      return "EDITION_PROTO2";
+    case Edition.EDITION_PROTO3:
+      return "EDITION_PROTO3";
+    case Edition.EDITION_2023:
+      return "EDITION_2023";
+    case Edition.EDITION_2024:
+      return "EDITION_2024";
+    case Edition.EDITION_1_TEST_ONLY:
+      return "EDITION_1_TEST_ONLY";
+    case Edition.EDITION_2_TEST_ONLY:
+      return "EDITION_2_TEST_ONLY";
+    case Edition.EDITION_99997_TEST_ONLY:
+      return "EDITION_99997_TEST_ONLY";
+    case Edition.EDITION_99998_TEST_ONLY:
+      return "EDITION_99998_TEST_ONLY";
+    case Edition.EDITION_99999_TEST_ONLY:
+      return "EDITION_99999_TEST_ONLY";
+    case Edition.EDITION_MAX:
+      return "EDITION_MAX";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum Edition",
+      );
+  }
+}
+
 export interface FieldOptions {
   ctype?: FieldOptions_CType | undefined;
   packed?: boolean | undefined;
@@ -106,6 +139,21 @@ export function fieldOptions_CTypeFromJSON(object: any): FieldOptions_CType {
   }
 }
 
+export function fieldOptions_CTypeToJSON(object: FieldOptions_CType): string {
+  switch (object) {
+    case FieldOptions_CType.STRING:
+      return "STRING";
+    case FieldOptions_CType.CORD:
+      return "CORD";
+    case FieldOptions_CType.STRING_PIECE:
+      return "STRING_PIECE";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum FieldOptions_CType",
+      );
+  }
+}
+
 export enum FieldOptions_JSType {
   JS_NORMAL = 0,
   JS_STRING = 1,
@@ -123,6 +171,21 @@ export function fieldOptions_JSTypeFromJSON(object: any): FieldOptions_JSType {
     case 2:
     case "JS_NUMBER":
       return FieldOptions_JSType.JS_NUMBER;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum FieldOptions_JSType",
+      );
+  }
+}
+
+export function fieldOptions_JSTypeToJSON(object: FieldOptions_JSType): string {
+  switch (object) {
+    case FieldOptions_JSType.JS_NORMAL:
+      return "JS_NORMAL";
+    case FieldOptions_JSType.JS_STRING:
+      return "JS_STRING";
+    case FieldOptions_JSType.JS_NUMBER:
+      return "JS_NUMBER";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FieldOptions_JSType",
@@ -149,6 +212,25 @@ export function fieldOptions_OptionRetentionFromJSON(
     case 2:
     case "RETENTION_SOURCE":
       return FieldOptions_OptionRetention.RETENTION_SOURCE;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FieldOptions_OptionRetention",
+      );
+  }
+}
+
+export function fieldOptions_OptionRetentionToJSON(
+  object: FieldOptions_OptionRetention,
+): string {
+  switch (object) {
+    case FieldOptions_OptionRetention.RETENTION_UNKNOWN:
+      return "RETENTION_UNKNOWN";
+    case FieldOptions_OptionRetention.RETENTION_RUNTIME:
+      return "RETENTION_RUNTIME";
+    case FieldOptions_OptionRetention.RETENTION_SOURCE:
+      return "RETENTION_SOURCE";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " +
@@ -205,6 +287,39 @@ export function fieldOptions_OptionTargetTypeFromJSON(
     case 9:
     case "TARGET_TYPE_METHOD":
       return FieldOptions_OptionTargetType.TARGET_TYPE_METHOD;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FieldOptions_OptionTargetType",
+      );
+  }
+}
+
+export function fieldOptions_OptionTargetTypeToJSON(
+  object: FieldOptions_OptionTargetType,
+): string {
+  switch (object) {
+    case FieldOptions_OptionTargetType.TARGET_TYPE_UNKNOWN:
+      return "TARGET_TYPE_UNKNOWN";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_FILE:
+      return "TARGET_TYPE_FILE";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_EXTENSION_RANGE:
+      return "TARGET_TYPE_EXTENSION_RANGE";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_MESSAGE:
+      return "TARGET_TYPE_MESSAGE";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_FIELD:
+      return "TARGET_TYPE_FIELD";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_ONEOF:
+      return "TARGET_TYPE_ONEOF";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_ENUM:
+      return "TARGET_TYPE_ENUM";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_ENUM_ENTRY:
+      return "TARGET_TYPE_ENUM_ENTRY";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_SERVICE:
+      return "TARGET_TYPE_SERVICE";
+    case FieldOptions_OptionTargetType.TARGET_TYPE_METHOD:
+      return "TARGET_TYPE_METHOD";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " +
@@ -287,6 +402,27 @@ export function featureSet_FieldPresenceFromJSON(
   }
 }
 
+export function featureSet_FieldPresenceToJSON(
+  object: FeatureSet_FieldPresence,
+): string {
+  switch (object) {
+    case FeatureSet_FieldPresence.FIELD_PRESENCE_UNKNOWN:
+      return "FIELD_PRESENCE_UNKNOWN";
+    case FeatureSet_FieldPresence.EXPLICIT:
+      return "EXPLICIT";
+    case FeatureSet_FieldPresence.IMPLICIT:
+      return "IMPLICIT";
+    case FeatureSet_FieldPresence.LEGACY_REQUIRED:
+      return "LEGACY_REQUIRED";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_FieldPresence",
+      );
+  }
+}
+
 export enum FeatureSet_EnumType {
   ENUM_TYPE_UNKNOWN = 0,
   OPEN = 1,
@@ -304,6 +440,21 @@ export function featureSet_EnumTypeFromJSON(object: any): FeatureSet_EnumType {
     case 2:
     case "CLOSED":
       return FeatureSet_EnumType.CLOSED;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum FeatureSet_EnumType",
+      );
+  }
+}
+
+export function featureSet_EnumTypeToJSON(object: FeatureSet_EnumType): string {
+  switch (object) {
+    case FeatureSet_EnumType.ENUM_TYPE_UNKNOWN:
+      return "ENUM_TYPE_UNKNOWN";
+    case FeatureSet_EnumType.OPEN:
+      return "OPEN";
+    case FeatureSet_EnumType.CLOSED:
+      return "CLOSED";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FeatureSet_EnumType",
@@ -330,6 +481,25 @@ export function featureSet_RepeatedFieldEncodingFromJSON(
     case 2:
     case "EXPANDED":
       return FeatureSet_RepeatedFieldEncoding.EXPANDED;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_RepeatedFieldEncoding",
+      );
+  }
+}
+
+export function featureSet_RepeatedFieldEncodingToJSON(
+  object: FeatureSet_RepeatedFieldEncoding,
+): string {
+  switch (object) {
+    case FeatureSet_RepeatedFieldEncoding.REPEATED_FIELD_ENCODING_UNKNOWN:
+      return "REPEATED_FIELD_ENCODING_UNKNOWN";
+    case FeatureSet_RepeatedFieldEncoding.PACKED:
+      return "PACKED";
+    case FeatureSet_RepeatedFieldEncoding.EXPANDED:
+      return "EXPANDED";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " +
@@ -367,6 +537,25 @@ export function featureSet_Utf8ValidationFromJSON(
   }
 }
 
+export function featureSet_Utf8ValidationToJSON(
+  object: FeatureSet_Utf8Validation,
+): string {
+  switch (object) {
+    case FeatureSet_Utf8Validation.UTF8_VALIDATION_UNKNOWN:
+      return "UTF8_VALIDATION_UNKNOWN";
+    case FeatureSet_Utf8Validation.VERIFY:
+      return "VERIFY";
+    case FeatureSet_Utf8Validation.NONE:
+      return "NONE";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_Utf8Validation",
+      );
+  }
+}
+
 export enum FeatureSet_MessageEncoding {
   MESSAGE_ENCODING_UNKNOWN = 0,
   LENGTH_PREFIXED = 1,
@@ -395,6 +584,25 @@ export function featureSet_MessageEncodingFromJSON(
   }
 }
 
+export function featureSet_MessageEncodingToJSON(
+  object: FeatureSet_MessageEncoding,
+): string {
+  switch (object) {
+    case FeatureSet_MessageEncoding.MESSAGE_ENCODING_UNKNOWN:
+      return "MESSAGE_ENCODING_UNKNOWN";
+    case FeatureSet_MessageEncoding.LENGTH_PREFIXED:
+      return "LENGTH_PREFIXED";
+    case FeatureSet_MessageEncoding.DELIMITED:
+      return "DELIMITED";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_MessageEncoding",
+      );
+  }
+}
+
 export enum FeatureSet_JsonFormat {
   JSON_FORMAT_UNKNOWN = 0,
   ALLOW = 1,
@@ -414,6 +622,23 @@ export function featureSet_JsonFormatFromJSON(
     case 2:
     case "LEGACY_BEST_EFFORT":
       return FeatureSet_JsonFormat.LEGACY_BEST_EFFORT;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum FeatureSet_JsonFormat",
+      );
+  }
+}
+
+export function featureSet_JsonFormatToJSON(
+  object: FeatureSet_JsonFormat,
+): string {
+  switch (object) {
+    case FeatureSet_JsonFormat.JSON_FORMAT_UNKNOWN:
+      return "JSON_FORMAT_UNKNOWN";
+    case FeatureSet_JsonFormat.ALLOW:
+      return "ALLOW";
+    case FeatureSet_JsonFormat.LEGACY_BEST_EFFORT:
+      return "LEGACY_BEST_EFFORT";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FeatureSet_JsonFormat",
@@ -466,6 +691,64 @@ export const FieldOptions: MessageFns<FieldOptions> = {
         : [],
     };
   },
+
+  toJSON(message: FieldOptions): unknown {
+    const obj: any = {};
+    if (message.ctype !== undefined && message.ctype !== 0) {
+      obj.ctype = fieldOptions_CTypeToJSON(message.ctype);
+    }
+    if (message.packed !== undefined && message.packed !== false) {
+      obj.packed = message.packed;
+    }
+    if (message.jstype !== undefined && message.jstype !== 0) {
+      obj.jstype = fieldOptions_JSTypeToJSON(message.jstype);
+    }
+    if (message.lazy !== undefined && message.lazy !== false) {
+      obj.lazy = message.lazy;
+    }
+    if (
+      message.unverifiedLazy !== undefined &&
+      message.unverifiedLazy !== false
+    ) {
+      obj.unverifiedLazy = message.unverifiedLazy;
+    }
+    if (message.deprecated !== undefined && message.deprecated !== false) {
+      obj.deprecated = message.deprecated;
+    }
+    if (message.weak !== undefined && message.weak !== false) {
+      obj.weak = message.weak;
+    }
+    if (message.debugRedact !== undefined && message.debugRedact !== false) {
+      obj.debugRedact = message.debugRedact;
+    }
+    if (message.retention !== undefined && message.retention !== 0) {
+      obj.retention = fieldOptions_OptionRetentionToJSON(message.retention);
+    }
+    if (message.targets?.length) {
+      obj.targets = message.targets.map((e) =>
+        fieldOptions_OptionTargetTypeToJSON(e),
+      );
+    }
+    if (message.editionDefaults?.length) {
+      obj.editionDefaults = message.editionDefaults.map((e) =>
+        FieldOptions_EditionDefault.toJSON(e),
+      );
+    }
+    if (message.features !== undefined) {
+      obj.features = FeatureSet.toJSON(message.features);
+    }
+    if (message.featureSupport !== undefined) {
+      obj.featureSupport = FieldOptions_FeatureSupport.toJSON(
+        message.featureSupport,
+      );
+    }
+    if (message.uninterpretedOption?.length) {
+      obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+        UninterpretedOption.toJSON(e),
+      );
+    }
+    return obj;
+  },
 };
 
 export const FieldOptions_EditionDefault: MessageFns<FieldOptions_EditionDefault> =
@@ -475,6 +758,17 @@ export const FieldOptions_EditionDefault: MessageFns<FieldOptions_EditionDefault
         edition: isSet(object.edition) ? editionFromJSON(object.edition) : 0,
         value: isSet(object.value) ? globalThis.String(object.value) : "",
       };
+    },
+
+    toJSON(message: FieldOptions_EditionDefault): unknown {
+      const obj: any = {};
+      if (message.edition !== undefined && message.edition !== 0) {
+        obj.edition = editionToJSON(message.edition);
+      }
+      if (message.value !== undefined && message.value !== "") {
+        obj.value = message.value;
+      }
+      return obj;
     },
   };
 
@@ -496,6 +790,35 @@ export const FieldOptions_FeatureSupport: MessageFns<FieldOptions_FeatureSupport
           : 0,
       };
     },
+
+    toJSON(message: FieldOptions_FeatureSupport): unknown {
+      const obj: any = {};
+      if (
+        message.editionIntroduced !== undefined &&
+        message.editionIntroduced !== 0
+      ) {
+        obj.editionIntroduced = editionToJSON(message.editionIntroduced);
+      }
+      if (
+        message.editionDeprecated !== undefined &&
+        message.editionDeprecated !== 0
+      ) {
+        obj.editionDeprecated = editionToJSON(message.editionDeprecated);
+      }
+      if (
+        message.deprecationWarning !== undefined &&
+        message.deprecationWarning !== ""
+      ) {
+        obj.deprecationWarning = message.deprecationWarning;
+      }
+      if (
+        message.editionRemoved !== undefined &&
+        message.editionRemoved !== 0
+      ) {
+        obj.editionRemoved = editionToJSON(message.editionRemoved);
+      }
+      return obj;
+    },
   };
 
 export const OneofOptions: MessageFns<OneofOptions> = {
@@ -510,6 +833,19 @@ export const OneofOptions: MessageFns<OneofOptions> = {
           )
         : [],
     };
+  },
+
+  toJSON(message: OneofOptions): unknown {
+    const obj: any = {};
+    if (message.features !== undefined) {
+      obj.features = FeatureSet.toJSON(message.features);
+    }
+    if (message.uninterpretedOption?.length) {
+      obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+        UninterpretedOption.toJSON(e),
+      );
+    }
+    return obj;
   },
 };
 
@@ -539,6 +875,43 @@ export const UninterpretedOption: MessageFns<UninterpretedOption> = {
         : "",
     };
   },
+
+  toJSON(message: UninterpretedOption): unknown {
+    const obj: any = {};
+    if (message.name?.length) {
+      obj.name = message.name.map((e) =>
+        UninterpretedOption_NamePart.toJSON(e),
+      );
+    }
+    if (
+      message.identifierValue !== undefined &&
+      message.identifierValue !== ""
+    ) {
+      obj.identifierValue = message.identifierValue;
+    }
+    if (
+      message.positiveIntValue !== undefined &&
+      message.positiveIntValue !== "0"
+    ) {
+      obj.positiveIntValue = message.positiveIntValue;
+    }
+    if (
+      message.negativeIntValue !== undefined &&
+      message.negativeIntValue !== "0"
+    ) {
+      obj.negativeIntValue = message.negativeIntValue;
+    }
+    if (message.doubleValue !== undefined && message.doubleValue !== 0) {
+      obj.doubleValue = message.doubleValue;
+    }
+    if (message.stringValue !== undefined && message.stringValue.length !== 0) {
+      obj.stringValue = base64FromBytes(message.stringValue);
+    }
+    if (message.aggregateValue !== undefined && message.aggregateValue !== "") {
+      obj.aggregateValue = message.aggregateValue;
+    }
+    return obj;
+  },
 };
 
 export const UninterpretedOption_NamePart: MessageFns<UninterpretedOption_NamePart> =
@@ -552,6 +925,17 @@ export const UninterpretedOption_NamePart: MessageFns<UninterpretedOption_NamePa
           ? globalThis.Boolean(object.isExtension)
           : false,
       };
+    },
+
+    toJSON(message: UninterpretedOption_NamePart): unknown {
+      const obj: any = {};
+      if (message.namePart !== "") {
+        obj.namePart = message.namePart;
+      }
+      if (message.isExtension !== false) {
+        obj.isExtension = message.isExtension;
+      }
+      return obj;
     },
   };
 
@@ -578,6 +962,41 @@ export const FeatureSet: MessageFns<FeatureSet> = {
         : 0,
     };
   },
+
+  toJSON(message: FeatureSet): unknown {
+    const obj: any = {};
+    if (message.fieldPresence !== undefined && message.fieldPresence !== 0) {
+      obj.fieldPresence = featureSet_FieldPresenceToJSON(message.fieldPresence);
+    }
+    if (message.enumType !== undefined && message.enumType !== 0) {
+      obj.enumType = featureSet_EnumTypeToJSON(message.enumType);
+    }
+    if (
+      message.repeatedFieldEncoding !== undefined &&
+      message.repeatedFieldEncoding !== 0
+    ) {
+      obj.repeatedFieldEncoding = featureSet_RepeatedFieldEncodingToJSON(
+        message.repeatedFieldEncoding,
+      );
+    }
+    if (message.utf8Validation !== undefined && message.utf8Validation !== 0) {
+      obj.utf8Validation = featureSet_Utf8ValidationToJSON(
+        message.utf8Validation,
+      );
+    }
+    if (
+      message.messageEncoding !== undefined &&
+      message.messageEncoding !== 0
+    ) {
+      obj.messageEncoding = featureSet_MessageEncodingToJSON(
+        message.messageEncoding,
+      );
+    }
+    if (message.jsonFormat !== undefined && message.jsonFormat !== 0) {
+      obj.jsonFormat = featureSet_JsonFormatToJSON(message.jsonFormat);
+    }
+    return obj;
+  },
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
@@ -593,10 +1012,23 @@ function bytesFromBase64(b64: string): Uint8Array {
   }
 }
 
+function base64FromBytes(arr: Uint8Array): string {
+  if ((globalThis as any).Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(globalThis.String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
+  }
+}
+
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
   fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

@@ -17,6 +17,17 @@ export const Timestamp: MessageFns<Timestamp> = {
       nanos: isSet(object.nanos) ? globalThis.Number(object.nanos) : 0,
     };
   },
+
+  toJSON(message: Timestamp): unknown {
+    const obj: any = {};
+    if (message.seconds !== "0") {
+      obj.seconds = message.seconds;
+    }
+    if (message.nanos !== 0) {
+      obj.nanos = Math.round(message.nanos);
+    }
+    return obj;
+  },
 };
 
 function isSet(value: any): boolean {
@@ -25,4 +36,5 @@ function isSet(value: any): boolean {
 
 export interface MessageFns<T> {
   fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }
