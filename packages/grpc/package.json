@@ -49,7 +49,7 @@
     "server-side"
   ],
   "dependencies": {
-    "@bufbuild/protobuf": "^2.5.1",
+    "@bufbuild/protobuf": "^2.5.2",
     "@cerbos/core": "^0.22.0",
     "@grpc/grpc-js": "^1.13.4"
   },
