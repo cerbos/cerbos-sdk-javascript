@@ -129,7 +129,8 @@ export function addOrUpdatePoliciesRequestToProtobuf({
   };
 }
 
-function policyToProtobuf(policy: Policy): PolicyProtobuf {
+/** @internal */
+export function policyToProtobuf(policy: Policy): PolicyProtobuf {
   const {
     apiVersion = "api.cerbos.dev/v1",
     description = "",

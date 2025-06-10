@@ -32,3 +32,20 @@ export function effectFromJSON(object: any): Effect {
       );
   }
 }
+
+export function effectToJSON(object: Effect): string {
+  switch (object) {
+    case Effect.EFFECT_UNSPECIFIED:
+      return "EFFECT_UNSPECIFIED";
+    case Effect.EFFECT_ALLOW:
+      return "EFFECT_ALLOW";
+    case Effect.EFFECT_DENY:
+      return "EFFECT_DENY";
+    case Effect.EFFECT_NO_MATCH:
+      return "EFFECT_NO_MATCH";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum Effect",
+      );
+  }
+}

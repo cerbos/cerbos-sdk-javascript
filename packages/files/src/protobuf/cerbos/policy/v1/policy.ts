@@ -2,7 +2,7 @@
 // source: cerbos/policy/v1/policy.proto
 
 /* eslint-disable */
-import { Effect, effectFromJSON } from "../../effect/v1/effect";
+import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
 
 export const protobufPackage = "cerbos.policy.v1";
 
@@ -23,6 +23,21 @@ export function scopePermissionsFromJSON(object: any): ScopePermissions {
     case 2:
     case "SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS":
       return ScopePermissions.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " + object + " for enum ScopePermissions",
+      );
+  }
+}
+
+export function scopePermissionsToJSON(object: ScopePermissions): string {
+  switch (object) {
+    case ScopePermissions.SCOPE_PERMISSIONS_UNSPECIFIED:
+      return "SCOPE_PERMISSIONS_UNSPECIFIED";
+    case ScopePermissions.SCOPE_PERMISSIONS_OVERRIDE_PARENT:
+      return "SCOPE_PERMISSIONS_OVERRIDE_PARENT";
+    case ScopePermissions.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS:
+      return "SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum ScopePermissions",
@@ -295,6 +310,56 @@ export const Policy: MessageFns<Policy> = {
         : "",
     };
   },
+
+  toJSON(message: Policy): unknown {
+    const obj: any = {};
+    if (message.apiVersion !== "") {
+      obj.apiVersion = message.apiVersion;
+    }
+    if (message.disabled !== false) {
+      obj.disabled = message.disabled;
+    }
+    if (message.description !== "") {
+      obj.description = message.description;
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = Metadata.toJSON(message.metadata);
+    }
+    if (message.policyType?.$case === "resourcePolicy") {
+      obj.resourcePolicy = ResourcePolicy.toJSON(
+        message.policyType.resourcePolicy,
+      );
+    } else if (message.policyType?.$case === "principalPolicy") {
+      obj.principalPolicy = PrincipalPolicy.toJSON(
+        message.policyType.principalPolicy,
+      );
+    } else if (message.policyType?.$case === "derivedRoles") {
+      obj.derivedRoles = DerivedRoles.toJSON(message.policyType.derivedRoles);
+    } else if (message.policyType?.$case === "exportVariables") {
+      obj.exportVariables = ExportVariables.toJSON(
+        message.policyType.exportVariables,
+      );
+    } else if (message.policyType?.$case === "rolePolicy") {
+      obj.rolePolicy = RolePolicy.toJSON(message.policyType.rolePolicy);
+    } else if (message.policyType?.$case === "exportConstants") {
+      obj.exportConstants = ExportConstants.toJSON(
+        message.policyType.exportConstants,
+      );
+    }
+    if (message.variables) {
+      const entries = Object.entries(message.variables);
+      if (entries.length > 0) {
+        obj.variables = {};
+        entries.forEach(([k, v]) => {
+          obj.variables[k] = v;
+        });
+      }
+    }
+    if (message.jsonSchema !== "") {
+      obj.$schema = message.jsonSchema;
+    }
+    return obj;
+  },
 };
 
 export const Policy_VariablesEntry: MessageFns<Policy_VariablesEntry> = {
@@ -303,6 +368,17 @@ export const Policy_VariablesEntry: MessageFns<Policy_VariablesEntry> = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
+  },
+
+  toJSON(message: Policy_VariablesEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -319,6 +395,20 @@ export const SourceAttributes: MessageFns<SourceAttributes> = {
         : {},
     };
   },
+
+  toJSON(message: SourceAttributes): unknown {
+    const obj: any = {};
+    if (message.attributes) {
+      const entries = Object.entries(message.attributes);
+      if (entries.length > 0) {
+        obj.attributes = {};
+        entries.forEach(([k, v]) => {
+          obj.attributes[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 export const SourceAttributes_AttributesEntry: MessageFns<SourceAttributes_AttributesEntry> =
@@ -328,6 +418,17 @@ export const SourceAttributes_AttributesEntry: MessageFns<SourceAttributes_Attri
         key: isSet(object.key) ? globalThis.String(object.key) : "",
         value: isSet(object?.value) ? object.value : undefined,
       };
+    },
+
+    toJSON(message: SourceAttributes_AttributesEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = message.value;
+      }
+      return obj;
     },
   };
 
@@ -358,6 +459,35 @@ export const Metadata: MessageFns<Metadata> = {
         : undefined,
     };
   },
+
+  toJSON(message: Metadata): unknown {
+    const obj: any = {};
+    if (message.sourceFile !== "") {
+      obj.sourceFile = message.sourceFile;
+    }
+    if (message.annotations) {
+      const entries = Object.entries(message.annotations);
+      if (entries.length > 0) {
+        obj.annotations = {};
+        entries.forEach(([k, v]) => {
+          obj.annotations[k] = v;
+        });
+      }
+    }
+    if (message.hash !== undefined) {
+      obj.hash = message.hash;
+    }
+    if (message.storeIdentifer !== "") {
+      obj.storeIdentifer = message.storeIdentifer;
+    }
+    if (message.storeIdentifier !== "") {
+      obj.storeIdentifier = message.storeIdentifier;
+    }
+    if (message.sourceAttributes !== undefined) {
+      obj.sourceAttributes = SourceAttributes.toJSON(message.sourceAttributes);
+    }
+    return obj;
+  },
 };
 
 export const Metadata_AnnotationsEntry: MessageFns<Metadata_AnnotationsEntry> =
@@ -367,6 +497,17 @@ export const Metadata_AnnotationsEntry: MessageFns<Metadata_AnnotationsEntry> =
         key: isSet(object.key) ? globalThis.String(object.key) : "",
         value: isSet(object.value) ? globalThis.String(object.value) : "",
       };
+    },
+
+    toJSON(message: Metadata_AnnotationsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== "") {
+        obj.value = message.value;
+      }
+      return obj;
     },
   };
 
@@ -398,6 +539,38 @@ export const ResourcePolicy: MessageFns<ResourcePolicy> = {
         : undefined,
     };
   },
+
+  toJSON(message: ResourcePolicy): unknown {
+    const obj: any = {};
+    if (message.resource !== "") {
+      obj.resource = message.resource;
+    }
+    if (message.version !== "") {
+      obj.version = message.version;
+    }
+    if (message.importDerivedRoles?.length) {
+      obj.importDerivedRoles = message.importDerivedRoles;
+    }
+    if (message.rules?.length) {
+      obj.rules = message.rules.map((e) => ResourceRule.toJSON(e));
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    if (message.schemas !== undefined) {
+      obj.schemas = Schemas.toJSON(message.schemas);
+    }
+    if (message.variables !== undefined) {
+      obj.variables = Variables.toJSON(message.variables);
+    }
+    if (message.scopePermissions !== 0) {
+      obj.scopePermissions = scopePermissionsToJSON(message.scopePermissions);
+    }
+    if (message.constants !== undefined) {
+      obj.constants = Constants.toJSON(message.constants);
+    }
+    return obj;
+  },
 };
 
 export const ResourceRule: MessageFns<ResourceRule> = {
@@ -420,6 +593,32 @@ export const ResourceRule: MessageFns<ResourceRule> = {
       output: isSet(object.output) ? Output.fromJSON(object.output) : undefined,
     };
   },
+
+  toJSON(message: ResourceRule): unknown {
+    const obj: any = {};
+    if (message.actions?.length) {
+      obj.actions = message.actions;
+    }
+    if (message.derivedRoles?.length) {
+      obj.derivedRoles = message.derivedRoles;
+    }
+    if (message.roles?.length) {
+      obj.roles = message.roles;
+    }
+    if (message.condition !== undefined) {
+      obj.condition = Condition.toJSON(message.condition);
+    }
+    if (message.effect !== 0) {
+      obj.effect = effectToJSON(message.effect);
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.output !== undefined) {
+      obj.output = Output.toJSON(message.output);
+    }
+    return obj;
+  },
 };
 
 export const RolePolicy: MessageFns<RolePolicy> = {
@@ -440,6 +639,26 @@ export const RolePolicy: MessageFns<RolePolicy> = {
         : 0,
     };
   },
+
+  toJSON(message: RolePolicy): unknown {
+    const obj: any = {};
+    if (message.policyType?.$case === "role") {
+      obj.role = message.policyType.role;
+    }
+    if (message.parentRoles?.length) {
+      obj.parentRoles = message.parentRoles;
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    if (message.rules?.length) {
+      obj.rules = message.rules.map((e) => RoleRule.toJSON(e));
+    }
+    if (message.scopePermissions !== 0) {
+      obj.scopePermissions = scopePermissionsToJSON(message.scopePermissions);
+    }
+    return obj;
+  },
 };
 
 export const RoleRule: MessageFns<RoleRule> = {
@@ -455,6 +674,20 @@ export const RoleRule: MessageFns<RoleRule> = {
         ? Condition.fromJSON(object.condition)
         : undefined,
     };
+  },
+
+  toJSON(message: RoleRule): unknown {
+    const obj: any = {};
+    if (message.resource !== "") {
+      obj.resource = message.resource;
+    }
+    if (message.allowActions?.length) {
+      obj.allowActions = message.allowActions;
+    }
+    if (message.condition !== undefined) {
+      obj.condition = Condition.toJSON(message.condition);
+    }
+    return obj;
   },
 };
 
@@ -480,6 +713,32 @@ export const PrincipalPolicy: MessageFns<PrincipalPolicy> = {
         : undefined,
     };
   },
+
+  toJSON(message: PrincipalPolicy): unknown {
+    const obj: any = {};
+    if (message.principal !== "") {
+      obj.principal = message.principal;
+    }
+    if (message.version !== "") {
+      obj.version = message.version;
+    }
+    if (message.rules?.length) {
+      obj.rules = message.rules.map((e) => PrincipalRule.toJSON(e));
+    }
+    if (message.scope !== "") {
+      obj.scope = message.scope;
+    }
+    if (message.variables !== undefined) {
+      obj.variables = Variables.toJSON(message.variables);
+    }
+    if (message.scopePermissions !== 0) {
+      obj.scopePermissions = scopePermissionsToJSON(message.scopePermissions);
+    }
+    if (message.constants !== undefined) {
+      obj.constants = Constants.toJSON(message.constants);
+    }
+    return obj;
+  },
 };
 
 export const PrincipalRule: MessageFns<PrincipalRule> = {
@@ -492,6 +751,17 @@ export const PrincipalRule: MessageFns<PrincipalRule> = {
         ? object.actions.map((e: any) => PrincipalRule_Action.fromJSON(e))
         : [],
     };
+  },
+
+  toJSON(message: PrincipalRule): unknown {
+    const obj: any = {};
+    if (message.resource !== "") {
+      obj.resource = message.resource;
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions.map((e) => PrincipalRule_Action.toJSON(e));
+    }
+    return obj;
   },
 };
 
@@ -506,6 +776,26 @@ export const PrincipalRule_Action: MessageFns<PrincipalRule_Action> = {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       output: isSet(object.output) ? Output.fromJSON(object.output) : undefined,
     };
+  },
+
+  toJSON(message: PrincipalRule_Action): unknown {
+    const obj: any = {};
+    if (message.action !== "") {
+      obj.action = message.action;
+    }
+    if (message.condition !== undefined) {
+      obj.condition = Condition.toJSON(message.condition);
+    }
+    if (message.effect !== 0) {
+      obj.effect = effectToJSON(message.effect);
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.output !== undefined) {
+      obj.output = Output.toJSON(message.output);
+    }
+    return obj;
   },
 };
 
@@ -524,6 +814,23 @@ export const DerivedRoles: MessageFns<DerivedRoles> = {
         : undefined,
     };
   },
+
+  toJSON(message: DerivedRoles): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.definitions?.length) {
+      obj.definitions = message.definitions.map((e) => RoleDef.toJSON(e));
+    }
+    if (message.variables !== undefined) {
+      obj.variables = Variables.toJSON(message.variables);
+    }
+    if (message.constants !== undefined) {
+      obj.constants = Constants.toJSON(message.constants);
+    }
+    return obj;
+  },
 };
 
 export const RoleDef: MessageFns<RoleDef> = {
@@ -537,6 +844,20 @@ export const RoleDef: MessageFns<RoleDef> = {
         ? Condition.fromJSON(object.condition)
         : undefined,
     };
+  },
+
+  toJSON(message: RoleDef): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.parentRoles?.length) {
+      obj.parentRoles = message.parentRoles;
+    }
+    if (message.condition !== undefined) {
+      obj.condition = Condition.toJSON(message.condition);
+    }
+    return obj;
   },
 };
 
@@ -554,6 +875,23 @@ export const ExportConstants: MessageFns<ExportConstants> = {
         : {},
     };
   },
+
+  toJSON(message: ExportConstants): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.definitions) {
+      const entries = Object.entries(message.definitions);
+      if (entries.length > 0) {
+        obj.definitions = {};
+        entries.forEach(([k, v]) => {
+          obj.definitions[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 export const ExportConstants_DefinitionsEntry: MessageFns<ExportConstants_DefinitionsEntry> =
@@ -563,6 +901,17 @@ export const ExportConstants_DefinitionsEntry: MessageFns<ExportConstants_Defini
         key: isSet(object.key) ? globalThis.String(object.key) : "",
         value: isSet(object?.value) ? object.value : undefined,
       };
+    },
+
+    toJSON(message: ExportConstants_DefinitionsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = message.value;
+      }
+      return obj;
     },
   };
 
@@ -582,6 +931,23 @@ export const Constants: MessageFns<Constants> = {
         : {},
     };
   },
+
+  toJSON(message: Constants): unknown {
+    const obj: any = {};
+    if (message.import?.length) {
+      obj.import = message.import;
+    }
+    if (message.local) {
+      const entries = Object.entries(message.local);
+      if (entries.length > 0) {
+        obj.local = {};
+        entries.forEach(([k, v]) => {
+          obj.local[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 export const Constants_LocalEntry: MessageFns<Constants_LocalEntry> = {
@@ -590,6 +956,17 @@ export const Constants_LocalEntry: MessageFns<Constants_LocalEntry> = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
+  },
+
+  toJSON(message: Constants_LocalEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -608,6 +985,23 @@ export const ExportVariables: MessageFns<ExportVariables> = {
         : {},
     };
   },
+
+  toJSON(message: ExportVariables): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.definitions) {
+      const entries = Object.entries(message.definitions);
+      if (entries.length > 0) {
+        obj.definitions = {};
+        entries.forEach(([k, v]) => {
+          obj.definitions[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 export const ExportVariables_DefinitionsEntry: MessageFns<ExportVariables_DefinitionsEntry> =
@@ -617,6 +1011,17 @@ export const ExportVariables_DefinitionsEntry: MessageFns<ExportVariables_Defini
         key: isSet(object.key) ? globalThis.String(object.key) : "",
         value: isSet(object.value) ? globalThis.String(object.value) : "",
       };
+    },
+
+    toJSON(message: ExportVariables_DefinitionsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== "") {
+        obj.value = message.value;
+      }
+      return obj;
     },
   };
 
@@ -637,6 +1042,23 @@ export const Variables: MessageFns<Variables> = {
         : {},
     };
   },
+
+  toJSON(message: Variables): unknown {
+    const obj: any = {};
+    if (message.import?.length) {
+      obj.import = message.import;
+    }
+    if (message.local) {
+      const entries = Object.entries(message.local);
+      if (entries.length > 0) {
+        obj.local = {};
+        entries.forEach(([k, v]) => {
+          obj.local[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
 };
 
 export const Variables_LocalEntry: MessageFns<Variables_LocalEntry> = {
@@ -645,6 +1067,17 @@ export const Variables_LocalEntry: MessageFns<Variables_LocalEntry> = {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? globalThis.String(object.value) : "",
     };
+  },
+
+  toJSON(message: Variables_LocalEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
+    return obj;
   },
 };
 
@@ -657,6 +1090,16 @@ export const Condition: MessageFns<Condition> = {
           ? { $case: "script", script: globalThis.String(object.script) }
           : undefined,
     };
+  },
+
+  toJSON(message: Condition): unknown {
+    const obj: any = {};
+    if (message.condition?.$case === "match") {
+      obj.match = Match.toJSON(message.condition.match);
+    } else if (message.condition?.$case === "script") {
+      obj.script = message.condition.script;
+    }
+    return obj;
   },
 };
 
@@ -674,6 +1117,20 @@ export const Match: MessageFns<Match> = {
               : undefined,
     };
   },
+
+  toJSON(message: Match): unknown {
+    const obj: any = {};
+    if (message.op?.$case === "all") {
+      obj.all = Match_ExprList.toJSON(message.op.all);
+    } else if (message.op?.$case === "any") {
+      obj.any = Match_ExprList.toJSON(message.op.any);
+    } else if (message.op?.$case === "none") {
+      obj.none = Match_ExprList.toJSON(message.op.none);
+    } else if (message.op?.$case === "expr") {
+      obj.expr = message.op.expr;
+    }
+    return obj;
+  },
 };
 
 export const Match_ExprList: MessageFns<Match_ExprList> = {
@@ -684,6 +1141,14 @@ export const Match_ExprList: MessageFns<Match_ExprList> = {
         : [],
     };
   },
+
+  toJSON(message: Match_ExprList): unknown {
+    const obj: any = {};
+    if (message.of?.length) {
+      obj.of = message.of.map((e) => Match.toJSON(e));
+    }
+    return obj;
+  },
 };
 
 export const Output: MessageFns<Output> = {
@@ -692,6 +1157,17 @@ export const Output: MessageFns<Output> = {
       expr: isSet(object.expr) ? globalThis.String(object.expr) : "",
       when: isSet(object.when) ? Output_When.fromJSON(object.when) : undefined,
     };
+  },
+
+  toJSON(message: Output): unknown {
+    const obj: any = {};
+    if (message.expr !== "") {
+      obj.expr = message.expr;
+    }
+    if (message.when !== undefined) {
+      obj.when = Output_When.toJSON(message.when);
+    }
+    return obj;
   },
 };
 
@@ -706,6 +1182,17 @@ export const Output_When: MessageFns<Output_When> = {
         : "",
     };
   },
+
+  toJSON(message: Output_When): unknown {
+    const obj: any = {};
+    if (message.ruleActivated !== "") {
+      obj.ruleActivated = message.ruleActivated;
+    }
+    if (message.conditionNotMet !== "") {
+      obj.conditionNotMet = message.conditionNotMet;
+    }
+    return obj;
+  },
 };
 
 export const Schemas: MessageFns<Schemas> = {
@@ -719,6 +1206,17 @@ export const Schemas: MessageFns<Schemas> = {
         : undefined,
     };
   },
+
+  toJSON(message: Schemas): unknown {
+    const obj: any = {};
+    if (message.principalSchema !== undefined) {
+      obj.principalSchema = Schemas_Schema.toJSON(message.principalSchema);
+    }
+    if (message.resourceSchema !== undefined) {
+      obj.resourceSchema = Schemas_Schema.toJSON(message.resourceSchema);
+    }
+    return obj;
+  },
 };
 
 export const Schemas_IgnoreWhen: MessageFns<Schemas_IgnoreWhen> = {
@@ -728,6 +1226,14 @@ export const Schemas_IgnoreWhen: MessageFns<Schemas_IgnoreWhen> = {
         ? object.actions.map((e: any) => globalThis.String(e))
         : [],
     };
+  },
+
+  toJSON(message: Schemas_IgnoreWhen): unknown {
+    const obj: any = {};
+    if (message.actions?.length) {
+      obj.actions = message.actions;
+    }
+    return obj;
   },
 };
 
@@ -739,6 +1245,17 @@ export const Schemas_Schema: MessageFns<Schemas_Schema> = {
         ? Schemas_IgnoreWhen.fromJSON(object.ignoreWhen)
         : undefined,
     };
+  },
+
+  toJSON(message: Schemas_Schema): unknown {
+    const obj: any = {};
+    if (message.ref !== "") {
+      obj.ref = message.ref;
+    }
+    if (message.ignoreWhen !== undefined) {
+      obj.ignoreWhen = Schemas_IgnoreWhen.toJSON(message.ignoreWhen);
+    }
+    return obj;
   },
 };
 
@@ -752,4 +1269,5 @@ function isSet(value: any): boolean {
 
 export interface MessageFns<T> {
   fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

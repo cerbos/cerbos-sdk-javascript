@@ -15,6 +15,14 @@ export const UInt64Value: MessageFns<UInt64Value> = {
       value: isSet(object.value) ? globalThis.String(object.value) : "0",
     };
   },
+
+  toJSON(message: UInt64Value): unknown {
+    const obj: any = {};
+    if (message.value !== "0") {
+      obj.value = message.value;
+    }
+    return obj;
+  },
 };
 
 function isSet(value: any): boolean {
@@ -23,4 +31,5 @@ function isSet(value: any): boolean {
 
 export interface MessageFns<T> {
   fromJSON(object: any): T;
+  toJSON(message: T): unknown;
 }

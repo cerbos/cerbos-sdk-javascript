@@ -4,7 +4,7 @@
 
 ## core package
 
-Common types used by the [gRPC](./grpc.md)<!-- -->, [HTTP](./http.md)<!-- -->, and [embedded](./embedded.md) client libraries.
+Common types used by the Cerbos client libraries.
 
 ## Classes
 

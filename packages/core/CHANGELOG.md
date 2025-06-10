@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Internal exports to support policy serialization ([#1174](https://github.com/cerbos/cerbos-sdk-javascript/pull/1174))
 
 ## [0.22.0] - 2025-06-02
 

@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: "[`serializePolicy`](../docs/files.serializepolicy.md) and [`writePolicy`](../docs/files.writepolicy.md) functions to serialize policies to JSON-encoded strings and files"
+      pull: 1174
+
 releases:
   - version: 0.3.0
     date: 2025-06-02
