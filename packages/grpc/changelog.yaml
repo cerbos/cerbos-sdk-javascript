@@ -1,6 +1,11 @@
 unreleased:
   type: patch
 
+  bumped:
+    "@bufbuild/protobuf":
+      to: 2.5.2
+      pull: 1175
+
 releases:
   - version: 0.22.0
     date: 2025-06-02
