@@ -51,7 +51,7 @@
   ],
   "dependencies": {
     "@cerbos/core": "^0.22.0",
-    "ulid": "^3.0.0"
+    "ulid": "^3.0.1"
   },
   "publishConfig": {
     "access": "public",
