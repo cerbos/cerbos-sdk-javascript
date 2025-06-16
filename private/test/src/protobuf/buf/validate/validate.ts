@@ -467,7 +467,7 @@ export const Rule: MessageFns<Rule> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Rule {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRule();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -551,7 +551,7 @@ export const MessageRules: MessageFns<MessageRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): MessageRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessageRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -622,7 +622,7 @@ export const OneofRules: MessageFns<OneofRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): OneofRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOneofRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -789,7 +789,7 @@ export const FieldRules: MessageFns<FieldRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): FieldRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1260,7 +1260,7 @@ export const PredefinedRules: MessageFns<PredefinedRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): PredefinedRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePredefinedRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1359,7 +1359,7 @@ export const FloatRules: MessageFns<FloatRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): FloatRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFloatRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1592,7 +1592,7 @@ export const DoubleRules: MessageFns<DoubleRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): DoubleRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDoubleRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1821,7 +1821,7 @@ export const Int32Rules: MessageFns<Int32Rules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Int32Rules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt32Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2038,7 +2038,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Int64Rules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt64Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2258,7 +2258,7 @@ export const UInt32Rules: MessageFns<UInt32Rules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): UInt32Rules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt32Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2475,7 +2475,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): UInt64Rules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt64Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2695,7 +2695,7 @@ export const SInt32Rules: MessageFns<SInt32Rules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): SInt32Rules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSInt32Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2912,7 +2912,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): SInt64Rules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSInt64Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -3132,7 +3132,7 @@ export const Fixed32Rules: MessageFns<Fixed32Rules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Fixed32Rules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFixed32Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -3349,7 +3349,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Fixed64Rules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFixed64Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -3572,7 +3572,7 @@ export const SFixed32Rules: MessageFns<SFixed32Rules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): SFixed32Rules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSFixed32Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -3789,7 +3789,7 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): SFixed64Rules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSFixed64Rules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -3982,7 +3982,7 @@ export const BoolRules: MessageFns<BoolRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): BoolRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBoolRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -4180,7 +4180,7 @@ export const StringRules: MessageFns<StringRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): StringRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStringRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -4777,7 +4777,7 @@ export const BytesRules: MessageFns<BytesRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): BytesRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBytesRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -5022,7 +5022,7 @@ export const EnumRules: MessageFns<EnumRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): EnumRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -5172,7 +5172,7 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): RepeatedRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRepeatedRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -5278,7 +5278,7 @@ export const MapRules: MessageFns<MapRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): MapRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -5378,7 +5378,7 @@ export const AnyRules: MessageFns<AnyRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): AnyRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAnyRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -5487,7 +5487,7 @@ export const DurationRules: MessageFns<DurationRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): DurationRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDurationRules();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -5697,7 +5697,7 @@ export const TimestampRules: MessageFns<TimestampRules> = {
   decode(input: BinaryReader | Uint8Array, length?: number): TimestampRules {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTimestampRules();
     while (reader.pos < end) {
       const tag = reader.uint32();

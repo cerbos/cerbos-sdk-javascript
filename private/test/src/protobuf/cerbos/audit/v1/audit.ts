@@ -138,7 +138,7 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
   decode(input: BinaryReader | Uint8Array, length?: number): AccessLogEntry {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessLogEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -300,7 +300,7 @@ export const AccessLogEntry_MetadataEntry: MessageFns<AccessLogEntry_MetadataEnt
     ): AccessLogEntry_MetadataEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseAccessLogEntry_MetadataEntry();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -424,7 +424,7 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
   decode(input: BinaryReader | Uint8Array, length?: number): DecisionLogEntry {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecisionLogEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -669,7 +669,7 @@ export const DecisionLogEntry_CheckResources: MessageFns<DecisionLogEntry_CheckR
     ): DecisionLogEntry_CheckResources {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseDecisionLogEntry_CheckResources();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -768,7 +768,7 @@ export const DecisionLogEntry_PlanResources: MessageFns<DecisionLogEntry_PlanRes
     ): DecisionLogEntry_PlanResources {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseDecisionLogEntry_PlanResources();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -861,7 +861,7 @@ export const DecisionLogEntry_MetadataEntry: MessageFns<DecisionLogEntry_Metadat
     ): DecisionLogEntry_MetadataEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseDecisionLogEntry_MetadataEntry();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -930,7 +930,7 @@ export const MetaValues: MessageFns<MetaValues> = {
   decode(input: BinaryReader | Uint8Array, length?: number): MetaValues {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetaValues();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -996,7 +996,7 @@ export const Peer: MessageFns<Peer> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Peer {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeer();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1096,7 +1096,7 @@ export const AuditTrail: MessageFns<AuditTrail> = {
   decode(input: BinaryReader | Uint8Array, length?: number): AuditTrail {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuditTrail();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1177,7 +1177,7 @@ export const AuditTrail_EffectivePoliciesEntry: MessageFns<AuditTrail_EffectiveP
     ): AuditTrail_EffectivePoliciesEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseAuditTrail_EffectivePoliciesEntry();
       while (reader.pos < end) {
         const tag = reader.uint32();

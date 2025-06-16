@@ -1,10 +1,10 @@
 {
   "name": "@cerbos/sdk-javascript",
   "private": true,
-  "packageManager": "pnpm@10.11.1",
+  "packageManager": "pnpm@10.12.1",
   "engines": {
     "node": "23.11.1",
-    "pnpm": "10.11.1"
+    "pnpm": "10.12.1"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
@@ -54,7 +54,7 @@
     "test:servers:stop": "pnpm run --filter=./private/test test:servers:stop"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.18.1",
+    "@arethetypeswrong/cli": "0.18.2",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@microsoft/api-documenter": "7.26.27",
     "@microsoft/api-extractor": "7.52.8",
@@ -65,9 +65,9 @@
     "depcheck": "1.4.7",
     "eslint": "9.28.0",
     "prettier": "3.5.3",
-    "prettier-plugin-pkg": "0.20.0",
-    "ts-proto": "2.7.2",
-    "tsx": "4.19.4",
+    "prettier-plugin-pkg": "0.21.1",
+    "ts-proto": "2.7.4",
+    "tsx": "4.20.3",
     "typescript": "5.8.3"
   }
 }

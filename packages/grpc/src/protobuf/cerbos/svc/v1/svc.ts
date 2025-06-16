@@ -63,61 +63,66 @@ export const CerbosServiceService = {
     path: "/cerbos.svc.v1.CerbosService/CheckResourceSet",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: CheckResourceSetRequest) =>
+    requestSerialize: (value: CheckResourceSetRequest): Buffer =>
       Buffer.from(CheckResourceSetRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) =>
+    requestDeserialize: (value: Buffer): CheckResourceSetRequest =>
       CheckResourceSetRequest.decode(value),
-    responseSerialize: (value: CheckResourceSetResponse) =>
+    responseSerialize: (value: CheckResourceSetResponse): Buffer =>
       Buffer.from(CheckResourceSetResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) =>
+    responseDeserialize: (value: Buffer): CheckResourceSetResponse =>
       CheckResourceSetResponse.decode(value),
   },
   checkResourceBatch: {
     path: "/cerbos.svc.v1.CerbosService/CheckResourceBatch",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: CheckResourceBatchRequest) =>
+    requestSerialize: (value: CheckResourceBatchRequest): Buffer =>
       Buffer.from(CheckResourceBatchRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) =>
+    requestDeserialize: (value: Buffer): CheckResourceBatchRequest =>
       CheckResourceBatchRequest.decode(value),
-    responseSerialize: (value: CheckResourceBatchResponse) =>
+    responseSerialize: (value: CheckResourceBatchResponse): Buffer =>
       Buffer.from(CheckResourceBatchResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) =>
+    responseDeserialize: (value: Buffer): CheckResourceBatchResponse =>
       CheckResourceBatchResponse.decode(value),
   },
   checkResources: {
     path: "/cerbos.svc.v1.CerbosService/CheckResources",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: CheckResourcesRequest) =>
+    requestSerialize: (value: CheckResourcesRequest): Buffer =>
       Buffer.from(CheckResourcesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => CheckResourcesRequest.decode(value),
-    responseSerialize: (value: CheckResourcesResponse) =>
+    requestDeserialize: (value: Buffer): CheckResourcesRequest =>
+      CheckResourcesRequest.decode(value),
+    responseSerialize: (value: CheckResourcesResponse): Buffer =>
       Buffer.from(CheckResourcesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) =>
+    responseDeserialize: (value: Buffer): CheckResourcesResponse =>
       CheckResourcesResponse.decode(value),
   },
   serverInfo: {
     path: "/cerbos.svc.v1.CerbosService/ServerInfo",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: ServerInfoRequest) =>
+    requestSerialize: (value: ServerInfoRequest): Buffer =>
       Buffer.from(ServerInfoRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => ServerInfoRequest.decode(value),
-    responseSerialize: (value: ServerInfoResponse) =>
+    requestDeserialize: (value: Buffer): ServerInfoRequest =>
+      ServerInfoRequest.decode(value),
+    responseSerialize: (value: ServerInfoResponse): Buffer =>
       Buffer.from(ServerInfoResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => ServerInfoResponse.decode(value),
+    responseDeserialize: (value: Buffer): ServerInfoResponse =>
+      ServerInfoResponse.decode(value),
   },
   planResources: {
     path: "/cerbos.svc.v1.CerbosService/PlanResources",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: PlanResourcesRequest) =>
+    requestSerialize: (value: PlanResourcesRequest): Buffer =>
       Buffer.from(PlanResourcesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => PlanResourcesRequest.decode(value),
-    responseSerialize: (value: PlanResourcesResponse) =>
+    requestDeserialize: (value: Buffer): PlanResourcesRequest =>
+      PlanResourcesRequest.decode(value),
+    responseSerialize: (value: PlanResourcesResponse): Buffer =>
       Buffer.from(PlanResourcesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => PlanResourcesResponse.decode(value),
+    responseDeserialize: (value: Buffer): PlanResourcesResponse =>
+      PlanResourcesResponse.decode(value),
   },
 } as const;
 
@@ -280,140 +285,157 @@ export const CerbosAdminServiceService = {
     path: "/cerbos.svc.v1.CerbosAdminService/AddOrUpdatePolicy",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: AddOrUpdatePolicyRequest) =>
+    requestSerialize: (value: AddOrUpdatePolicyRequest): Buffer =>
       Buffer.from(AddOrUpdatePolicyRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) =>
+    requestDeserialize: (value: Buffer): AddOrUpdatePolicyRequest =>
       AddOrUpdatePolicyRequest.decode(value),
-    responseSerialize: (value: AddOrUpdatePolicyResponse) =>
+    responseSerialize: (value: AddOrUpdatePolicyResponse): Buffer =>
       Buffer.from(AddOrUpdatePolicyResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) =>
+    responseDeserialize: (value: Buffer): AddOrUpdatePolicyResponse =>
       AddOrUpdatePolicyResponse.decode(value),
   },
   inspectPolicies: {
     path: "/cerbos.svc.v1.CerbosAdminService/InspectPolicies",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: InspectPoliciesRequest) =>
+    requestSerialize: (value: InspectPoliciesRequest): Buffer =>
       Buffer.from(InspectPoliciesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => InspectPoliciesRequest.decode(value),
-    responseSerialize: (value: InspectPoliciesResponse) =>
+    requestDeserialize: (value: Buffer): InspectPoliciesRequest =>
+      InspectPoliciesRequest.decode(value),
+    responseSerialize: (value: InspectPoliciesResponse): Buffer =>
       Buffer.from(InspectPoliciesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) =>
+    responseDeserialize: (value: Buffer): InspectPoliciesResponse =>
       InspectPoliciesResponse.decode(value),
   },
   listPolicies: {
     path: "/cerbos.svc.v1.CerbosAdminService/ListPolicies",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: ListPoliciesRequest) =>
+    requestSerialize: (value: ListPoliciesRequest): Buffer =>
       Buffer.from(ListPoliciesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => ListPoliciesRequest.decode(value),
-    responseSerialize: (value: ListPoliciesResponse) =>
+    requestDeserialize: (value: Buffer): ListPoliciesRequest =>
+      ListPoliciesRequest.decode(value),
+    responseSerialize: (value: ListPoliciesResponse): Buffer =>
       Buffer.from(ListPoliciesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => ListPoliciesResponse.decode(value),
+    responseDeserialize: (value: Buffer): ListPoliciesResponse =>
+      ListPoliciesResponse.decode(value),
   },
   getPolicy: {
     path: "/cerbos.svc.v1.CerbosAdminService/GetPolicy",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: GetPolicyRequest) =>
+    requestSerialize: (value: GetPolicyRequest): Buffer =>
       Buffer.from(GetPolicyRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => GetPolicyRequest.decode(value),
-    responseSerialize: (value: GetPolicyResponse) =>
+    requestDeserialize: (value: Buffer): GetPolicyRequest =>
+      GetPolicyRequest.decode(value),
+    responseSerialize: (value: GetPolicyResponse): Buffer =>
       Buffer.from(GetPolicyResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => GetPolicyResponse.decode(value),
+    responseDeserialize: (value: Buffer): GetPolicyResponse =>
+      GetPolicyResponse.decode(value),
   },
   disablePolicy: {
     path: "/cerbos.svc.v1.CerbosAdminService/DisablePolicy",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: DisablePolicyRequest) =>
+    requestSerialize: (value: DisablePolicyRequest): Buffer =>
       Buffer.from(DisablePolicyRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => DisablePolicyRequest.decode(value),
-    responseSerialize: (value: DisablePolicyResponse) =>
+    requestDeserialize: (value: Buffer): DisablePolicyRequest =>
+      DisablePolicyRequest.decode(value),
+    responseSerialize: (value: DisablePolicyResponse): Buffer =>
       Buffer.from(DisablePolicyResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => DisablePolicyResponse.decode(value),
+    responseDeserialize: (value: Buffer): DisablePolicyResponse =>
+      DisablePolicyResponse.decode(value),
   },
   enablePolicy: {
     path: "/cerbos.svc.v1.CerbosAdminService/EnablePolicy",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: EnablePolicyRequest) =>
+    requestSerialize: (value: EnablePolicyRequest): Buffer =>
       Buffer.from(EnablePolicyRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => EnablePolicyRequest.decode(value),
-    responseSerialize: (value: EnablePolicyResponse) =>
+    requestDeserialize: (value: Buffer): EnablePolicyRequest =>
+      EnablePolicyRequest.decode(value),
+    responseSerialize: (value: EnablePolicyResponse): Buffer =>
       Buffer.from(EnablePolicyResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => EnablePolicyResponse.decode(value),
+    responseDeserialize: (value: Buffer): EnablePolicyResponse =>
+      EnablePolicyResponse.decode(value),
   },
   listAuditLogEntries: {
     path: "/cerbos.svc.v1.CerbosAdminService/ListAuditLogEntries",
     requestStream: false,
     responseStream: true,
-    requestSerialize: (value: ListAuditLogEntriesRequest) =>
+    requestSerialize: (value: ListAuditLogEntriesRequest): Buffer =>
       Buffer.from(ListAuditLogEntriesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) =>
+    requestDeserialize: (value: Buffer): ListAuditLogEntriesRequest =>
       ListAuditLogEntriesRequest.decode(value),
-    responseSerialize: (value: ListAuditLogEntriesResponse) =>
+    responseSerialize: (value: ListAuditLogEntriesResponse): Buffer =>
       Buffer.from(ListAuditLogEntriesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) =>
+    responseDeserialize: (value: Buffer): ListAuditLogEntriesResponse =>
       ListAuditLogEntriesResponse.decode(value),
   },
   addOrUpdateSchema: {
     path: "/cerbos.svc.v1.CerbosAdminService/AddOrUpdateSchema",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: AddOrUpdateSchemaRequest) =>
+    requestSerialize: (value: AddOrUpdateSchemaRequest): Buffer =>
       Buffer.from(AddOrUpdateSchemaRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) =>
+    requestDeserialize: (value: Buffer): AddOrUpdateSchemaRequest =>
       AddOrUpdateSchemaRequest.decode(value),
-    responseSerialize: (value: AddOrUpdateSchemaResponse) =>
+    responseSerialize: (value: AddOrUpdateSchemaResponse): Buffer =>
       Buffer.from(AddOrUpdateSchemaResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) =>
+    responseDeserialize: (value: Buffer): AddOrUpdateSchemaResponse =>
       AddOrUpdateSchemaResponse.decode(value),
   },
   listSchemas: {
     path: "/cerbos.svc.v1.CerbosAdminService/ListSchemas",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: ListSchemasRequest) =>
+    requestSerialize: (value: ListSchemasRequest): Buffer =>
       Buffer.from(ListSchemasRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => ListSchemasRequest.decode(value),
-    responseSerialize: (value: ListSchemasResponse) =>
+    requestDeserialize: (value: Buffer): ListSchemasRequest =>
+      ListSchemasRequest.decode(value),
+    responseSerialize: (value: ListSchemasResponse): Buffer =>
       Buffer.from(ListSchemasResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => ListSchemasResponse.decode(value),
+    responseDeserialize: (value: Buffer): ListSchemasResponse =>
+      ListSchemasResponse.decode(value),
   },
   getSchema: {
     path: "/cerbos.svc.v1.CerbosAdminService/GetSchema",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: GetSchemaRequest) =>
+    requestSerialize: (value: GetSchemaRequest): Buffer =>
       Buffer.from(GetSchemaRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => GetSchemaRequest.decode(value),
-    responseSerialize: (value: GetSchemaResponse) =>
+    requestDeserialize: (value: Buffer): GetSchemaRequest =>
+      GetSchemaRequest.decode(value),
+    responseSerialize: (value: GetSchemaResponse): Buffer =>
       Buffer.from(GetSchemaResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => GetSchemaResponse.decode(value),
+    responseDeserialize: (value: Buffer): GetSchemaResponse =>
+      GetSchemaResponse.decode(value),
   },
   deleteSchema: {
     path: "/cerbos.svc.v1.CerbosAdminService/DeleteSchema",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: DeleteSchemaRequest) =>
+    requestSerialize: (value: DeleteSchemaRequest): Buffer =>
       Buffer.from(DeleteSchemaRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => DeleteSchemaRequest.decode(value),
-    responseSerialize: (value: DeleteSchemaResponse) =>
+    requestDeserialize: (value: Buffer): DeleteSchemaRequest =>
+      DeleteSchemaRequest.decode(value),
+    responseSerialize: (value: DeleteSchemaResponse): Buffer =>
       Buffer.from(DeleteSchemaResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => DeleteSchemaResponse.decode(value),
+    responseDeserialize: (value: Buffer): DeleteSchemaResponse =>
+      DeleteSchemaResponse.decode(value),
   },
   reloadStore: {
     path: "/cerbos.svc.v1.CerbosAdminService/ReloadStore",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: ReloadStoreRequest) =>
+    requestSerialize: (value: ReloadStoreRequest): Buffer =>
       Buffer.from(ReloadStoreRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => ReloadStoreRequest.decode(value),
-    responseSerialize: (value: ReloadStoreResponse) =>
+    requestDeserialize: (value: Buffer): ReloadStoreRequest =>
+      ReloadStoreRequest.decode(value),
+    responseSerialize: (value: ReloadStoreResponse): Buffer =>
       Buffer.from(ReloadStoreResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => ReloadStoreResponse.decode(value),
+    responseDeserialize: (value: Buffer): ReloadStoreResponse =>
+      ReloadStoreResponse.decode(value),
   },
 } as const;
 

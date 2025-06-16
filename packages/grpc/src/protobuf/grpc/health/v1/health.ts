@@ -67,7 +67,7 @@ export const HealthCheckRequest: MessageFns<HealthCheckRequest> = {
   ): HealthCheckRequest {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHealthCheckRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -111,7 +111,7 @@ export const HealthCheckResponse: MessageFns<HealthCheckResponse> = {
   ): HealthCheckResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHealthCheckResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -149,7 +149,7 @@ export const HealthListRequest: MessageFns<HealthListRequest> = {
   decode(input: BinaryReader | Uint8Array, length?: number): HealthListRequest {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHealthListRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -188,7 +188,7 @@ export const HealthListResponse: MessageFns<HealthListResponse> = {
   ): HealthListResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHealthListResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -245,7 +245,7 @@ export const HealthListResponse_StatusesEntry: MessageFns<HealthListResponse_Sta
     ): HealthListResponse_StatusesEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseHealthListResponse_StatusesEntry();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -282,34 +282,40 @@ export const HealthService = {
     path: "/grpc.health.v1.Health/Check",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: HealthCheckRequest) =>
+    requestSerialize: (value: HealthCheckRequest): Buffer =>
       Buffer.from(HealthCheckRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => HealthCheckRequest.decode(value),
-    responseSerialize: (value: HealthCheckResponse) =>
+    requestDeserialize: (value: Buffer): HealthCheckRequest =>
+      HealthCheckRequest.decode(value),
+    responseSerialize: (value: HealthCheckResponse): Buffer =>
       Buffer.from(HealthCheckResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => HealthCheckResponse.decode(value),
+    responseDeserialize: (value: Buffer): HealthCheckResponse =>
+      HealthCheckResponse.decode(value),
   },
   list: {
     path: "/grpc.health.v1.Health/List",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: HealthListRequest) =>
+    requestSerialize: (value: HealthListRequest): Buffer =>
       Buffer.from(HealthListRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => HealthListRequest.decode(value),
-    responseSerialize: (value: HealthListResponse) =>
+    requestDeserialize: (value: Buffer): HealthListRequest =>
+      HealthListRequest.decode(value),
+    responseSerialize: (value: HealthListResponse): Buffer =>
       Buffer.from(HealthListResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => HealthListResponse.decode(value),
+    responseDeserialize: (value: Buffer): HealthListResponse =>
+      HealthListResponse.decode(value),
   },
   watch: {
     path: "/grpc.health.v1.Health/Watch",
     requestStream: false,
     responseStream: true,
-    requestSerialize: (value: HealthCheckRequest) =>
+    requestSerialize: (value: HealthCheckRequest): Buffer =>
       Buffer.from(HealthCheckRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => HealthCheckRequest.decode(value),
-    responseSerialize: (value: HealthCheckResponse) =>
+    requestDeserialize: (value: Buffer): HealthCheckRequest =>
+      HealthCheckRequest.decode(value),
+    responseSerialize: (value: HealthCheckResponse): Buffer =>
       Buffer.from(HealthCheckResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => HealthCheckResponse.decode(value),
+    responseDeserialize: (value: Buffer): HealthCheckResponse =>
+      HealthCheckResponse.decode(value),
   },
 } as const;
 

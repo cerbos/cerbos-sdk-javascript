@@ -178,7 +178,7 @@ export const TracesData: MessageFns<TracesData> = {
   decode(input: BinaryReader | Uint8Array, length?: number): TracesData {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTracesData();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -245,7 +245,7 @@ export const ResourceSpans: MessageFns<ResourceSpans> = {
   decode(input: BinaryReader | Uint8Array, length?: number): ResourceSpans {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceSpans();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -339,7 +339,7 @@ export const ScopeSpans: MessageFns<ScopeSpans> = {
   decode(input: BinaryReader | Uint8Array, length?: number): ScopeSpans {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseScopeSpans();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -486,7 +486,7 @@ export const Span: MessageFns<Span> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Span {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpan();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -759,7 +759,7 @@ export const Span_Event: MessageFns<Span_Event> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Span_Event {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpan_Event();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -878,7 +878,7 @@ export const Span_Link: MessageFns<Span_Link> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Span_Link {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSpan_Link();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1006,7 +1006,7 @@ export const Status: MessageFns<Status> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Status {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStatus();
     while (reader.pos < end) {
       const tag = reader.uint32();

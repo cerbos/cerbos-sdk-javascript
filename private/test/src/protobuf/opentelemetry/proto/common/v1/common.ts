@@ -82,7 +82,7 @@ export const AnyValue: MessageFns<AnyValue> = {
   decode(input: BinaryReader | Uint8Array, length?: number): AnyValue {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAnyValue();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -247,7 +247,7 @@ export const ArrayValue: MessageFns<ArrayValue> = {
   decode(input: BinaryReader | Uint8Array, length?: number): ArrayValue {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArrayValue();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -304,7 +304,7 @@ export const KeyValueList: MessageFns<KeyValueList> = {
   decode(input: BinaryReader | Uint8Array, length?: number): KeyValueList {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseKeyValueList();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -364,7 +364,7 @@ export const KeyValue: MessageFns<KeyValue> = {
   decode(input: BinaryReader | Uint8Array, length?: number): KeyValue {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseKeyValue();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -443,7 +443,7 @@ export const InstrumentationScope: MessageFns<InstrumentationScope> = {
   ): InstrumentationScope {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInstrumentationScope();
     while (reader.pos < end) {
       const tag = reader.uint32();
