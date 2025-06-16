@@ -167,6 +167,7 @@ export interface FeatureSet {
   utf8Validation?: FeatureSet_Utf8Validation | undefined;
   messageEncoding?: FeatureSet_MessageEncoding | undefined;
   jsonFormat?: FeatureSet_JsonFormat | undefined;
+  enforceNamingStyle?: FeatureSet_EnforceNamingStyle | undefined;
 }
 
 export enum FeatureSet_FieldPresence {
@@ -204,6 +205,12 @@ export enum FeatureSet_JsonFormat {
   JSON_FORMAT_UNKNOWN = 0,
   ALLOW = 1,
   LEGACY_BEST_EFFORT = 2,
+}
+
+export enum FeatureSet_EnforceNamingStyle {
+  ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+  STYLE2024 = 1,
+  STYLE_LEGACY = 2,
 }
 
 function createBaseFileOptions(): FileOptions {
@@ -1421,6 +1428,7 @@ function createBaseFeatureSet(): FeatureSet {
     utf8Validation: 0,
     messageEncoding: 0,
     jsonFormat: 0,
+    enforceNamingStyle: 0,
   };
 }
 
@@ -1452,6 +1460,12 @@ export const FeatureSet: MessageFns<FeatureSet> = {
     }
     if (message.jsonFormat !== undefined && message.jsonFormat !== 0) {
       writer.uint32(48).int32(message.jsonFormat);
+    }
+    if (
+      message.enforceNamingStyle !== undefined &&
+      message.enforceNamingStyle !== 0
+    ) {
+      writer.uint32(56).int32(message.enforceNamingStyle);
     }
     return writer;
   },
@@ -1510,6 +1524,14 @@ export const FeatureSet: MessageFns<FeatureSet> = {
           }
 
           message.jsonFormat = reader.int32() as any;
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.enforceNamingStyle = reader.int32() as any;
           continue;
         }
       }

@@ -3,5 +3,6 @@ packages:
   - private/*
 
 ignoredBuiltDependencies:
+  - "@bufbuild/buf"
   - esbuild
   - protobufjs
