@@ -368,6 +368,7 @@ export interface FeatureSet {
   utf8Validation?: FeatureSet_Utf8Validation | undefined;
   messageEncoding?: FeatureSet_MessageEncoding | undefined;
   jsonFormat?: FeatureSet_JsonFormat | undefined;
+  enforceNamingStyle?: FeatureSet_EnforceNamingStyle | undefined;
 }
 
 export enum FeatureSet_FieldPresence {
@@ -642,6 +643,53 @@ export function featureSet_JsonFormatToJSON(
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " + object + " for enum FeatureSet_JsonFormat",
+      );
+  }
+}
+
+export enum FeatureSet_EnforceNamingStyle {
+  ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+  STYLE2024 = 1,
+  STYLE_LEGACY = 2,
+}
+
+export function featureSet_EnforceNamingStyleFromJSON(
+  object: any,
+): FeatureSet_EnforceNamingStyle {
+  switch (object) {
+    case 0:
+    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+      return FeatureSet_EnforceNamingStyle.ENFORCE_NAMING_STYLE_UNKNOWN;
+    case 1:
+    case "STYLE2024":
+      return FeatureSet_EnforceNamingStyle.STYLE2024;
+    case 2:
+    case "STYLE_LEGACY":
+      return FeatureSet_EnforceNamingStyle.STYLE_LEGACY;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_EnforceNamingStyle",
+      );
+  }
+}
+
+export function featureSet_EnforceNamingStyleToJSON(
+  object: FeatureSet_EnforceNamingStyle,
+): string {
+  switch (object) {
+    case FeatureSet_EnforceNamingStyle.ENFORCE_NAMING_STYLE_UNKNOWN:
+      return "ENFORCE_NAMING_STYLE_UNKNOWN";
+    case FeatureSet_EnforceNamingStyle.STYLE2024:
+      return "STYLE2024";
+    case FeatureSet_EnforceNamingStyle.STYLE_LEGACY:
+      return "STYLE_LEGACY";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_EnforceNamingStyle",
       );
   }
 }
@@ -960,6 +1008,9 @@ export const FeatureSet: MessageFns<FeatureSet> = {
       jsonFormat: isSet(object.jsonFormat)
         ? featureSet_JsonFormatFromJSON(object.jsonFormat)
         : 0,
+      enforceNamingStyle: isSet(object.enforceNamingStyle)
+        ? featureSet_EnforceNamingStyleFromJSON(object.enforceNamingStyle)
+        : 0,
     };
   },
 
@@ -994,6 +1045,14 @@ export const FeatureSet: MessageFns<FeatureSet> = {
     }
     if (message.jsonFormat !== undefined && message.jsonFormat !== 0) {
       obj.jsonFormat = featureSet_JsonFormatToJSON(message.jsonFormat);
+    }
+    if (
+      message.enforceNamingStyle !== undefined &&
+      message.enforceNamingStyle !== 0
+    ) {
+      obj.enforceNamingStyle = featureSet_EnforceNamingStyleToJSON(
+        message.enforceNamingStyle,
+      );
     }
     return obj;
   },
