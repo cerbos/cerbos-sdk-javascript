@@ -82,7 +82,7 @@ export const HttpRule: MessageFns<HttpRule> = {
   decode(input: BinaryReader | Uint8Array, length?: number): HttpRule {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpRule();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -266,7 +266,7 @@ export const CustomHttpPattern: MessageFns<CustomHttpPattern> = {
   decode(input: BinaryReader | Uint8Array, length?: number): CustomHttpPattern {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCustomHttpPattern();
     while (reader.pos < end) {
       const tag = reader.uint32();

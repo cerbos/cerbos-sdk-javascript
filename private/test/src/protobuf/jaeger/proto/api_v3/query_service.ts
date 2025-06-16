@@ -109,7 +109,7 @@ export const GetTraceRequest: MessageFns<GetTraceRequest> = {
   decode(input: BinaryReader | Uint8Array, length?: number): GetTraceRequest {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTraceRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -256,7 +256,7 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
   ): TraceQueryParameters {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTraceQueryParameters();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -454,7 +454,7 @@ export const TraceQueryParameters_AttributesEntry: MessageFns<TraceQueryParamete
     ): TraceQueryParameters_AttributesEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseTraceQueryParameters_AttributesEntry();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -524,7 +524,7 @@ export const FindTracesRequest: MessageFns<FindTracesRequest> = {
   decode(input: BinaryReader | Uint8Array, length?: number): FindTracesRequest {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFindTracesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -581,7 +581,7 @@ export const GetServicesRequest: MessageFns<GetServicesRequest> = {
   ): GetServicesRequest {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServicesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -626,7 +626,7 @@ export const GetServicesResponse: MessageFns<GetServicesResponse> = {
   ): GetServicesResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServicesResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -689,7 +689,7 @@ export const GetOperationsRequest: MessageFns<GetOperationsRequest> = {
   ): GetOperationsRequest {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetOperationsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -761,7 +761,7 @@ export const Operation: MessageFns<Operation> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Operation {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -833,7 +833,7 @@ export const GetOperationsResponse: MessageFns<GetOperationsResponse> = {
   ): GetOperationsResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetOperationsResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -878,45 +878,53 @@ export const QueryServiceService = {
     path: "/jaeger.api_v3.QueryService/GetTrace",
     requestStream: false,
     responseStream: true,
-    requestSerialize: (value: GetTraceRequest) =>
+    requestSerialize: (value: GetTraceRequest): Buffer =>
       Buffer.from(GetTraceRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => GetTraceRequest.decode(value),
-    responseSerialize: (value: TracesData) =>
+    requestDeserialize: (value: Buffer): GetTraceRequest =>
+      GetTraceRequest.decode(value),
+    responseSerialize: (value: TracesData): Buffer =>
       Buffer.from(TracesData.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => TracesData.decode(value),
+    responseDeserialize: (value: Buffer): TracesData =>
+      TracesData.decode(value),
   },
   findTraces: {
     path: "/jaeger.api_v3.QueryService/FindTraces",
     requestStream: false,
     responseStream: true,
-    requestSerialize: (value: FindTracesRequest) =>
+    requestSerialize: (value: FindTracesRequest): Buffer =>
       Buffer.from(FindTracesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => FindTracesRequest.decode(value),
-    responseSerialize: (value: TracesData) =>
+    requestDeserialize: (value: Buffer): FindTracesRequest =>
+      FindTracesRequest.decode(value),
+    responseSerialize: (value: TracesData): Buffer =>
       Buffer.from(TracesData.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => TracesData.decode(value),
+    responseDeserialize: (value: Buffer): TracesData =>
+      TracesData.decode(value),
   },
   getServices: {
     path: "/jaeger.api_v3.QueryService/GetServices",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: GetServicesRequest) =>
+    requestSerialize: (value: GetServicesRequest): Buffer =>
       Buffer.from(GetServicesRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => GetServicesRequest.decode(value),
-    responseSerialize: (value: GetServicesResponse) =>
+    requestDeserialize: (value: Buffer): GetServicesRequest =>
+      GetServicesRequest.decode(value),
+    responseSerialize: (value: GetServicesResponse): Buffer =>
       Buffer.from(GetServicesResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => GetServicesResponse.decode(value),
+    responseDeserialize: (value: Buffer): GetServicesResponse =>
+      GetServicesResponse.decode(value),
   },
   getOperations: {
     path: "/jaeger.api_v3.QueryService/GetOperations",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: GetOperationsRequest) =>
+    requestSerialize: (value: GetOperationsRequest): Buffer =>
       Buffer.from(GetOperationsRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => GetOperationsRequest.decode(value),
-    responseSerialize: (value: GetOperationsResponse) =>
+    requestDeserialize: (value: Buffer): GetOperationsRequest =>
+      GetOperationsRequest.decode(value),
+    responseSerialize: (value: GetOperationsResponse): Buffer =>
       Buffer.from(GetOperationsResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => GetOperationsResponse.decode(value),
+    responseDeserialize: (value: Buffer): GetOperationsResponse =>
+      GetOperationsResponse.decode(value),
   },
 } as const;
 

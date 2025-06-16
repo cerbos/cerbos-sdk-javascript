@@ -32,7 +32,7 @@ export const Duration: MessageFns<Duration> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Duration {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDuration();
     while (reader.pos < end) {
       const tag = reader.uint32();

@@ -47,7 +47,7 @@ export const ValidationError: MessageFns<ValidationError> = {
   decode(input: BinaryReader | Uint8Array, length?: number): ValidationError {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidationError();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -107,7 +107,7 @@ export const Schema: MessageFns<Schema> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Schema {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSchema();
     while (reader.pos < end) {
       const tag = reader.uint32();

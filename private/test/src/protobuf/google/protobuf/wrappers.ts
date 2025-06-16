@@ -28,7 +28,7 @@ export const UInt64Value: MessageFns<UInt64Value> = {
   decode(input: BinaryReader | Uint8Array, length?: number): UInt64Value {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt64Value();
     while (reader.pos < end) {
       const tag = reader.uint32();

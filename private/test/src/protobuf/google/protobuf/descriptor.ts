@@ -921,7 +921,7 @@ export const FileOptions: MessageFns<FileOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): FileOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFileOptions();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1332,7 +1332,7 @@ export const MessageOptions: MessageFns<MessageOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): MessageOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessageOptions();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1553,7 +1553,7 @@ export const FieldOptions: MessageFns<FieldOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): FieldOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldOptions();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1825,7 +1825,7 @@ export const FieldOptions_EditionDefault: MessageFns<FieldOptions_EditionDefault
     ): FieldOptions_EditionDefault {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseFieldOptions_EditionDefault();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -1922,7 +1922,7 @@ export const FieldOptions_FeatureSupport: MessageFns<FieldOptions_FeatureSupport
     ): FieldOptions_FeatureSupport {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseFieldOptions_FeatureSupport();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -2036,7 +2036,7 @@ export const OneofOptions: MessageFns<OneofOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): OneofOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOneofOptions();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2119,7 +2119,7 @@ export const ServiceOptions: MessageFns<ServiceOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): ServiceOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceOptions();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2227,7 +2227,7 @@ export const MethodOptions: MessageFns<MethodOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): MethodOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMethodOptions();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2375,7 +2375,7 @@ export const UninterpretedOption: MessageFns<UninterpretedOption> = {
   ): UninterpretedOption {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUninterpretedOption();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2536,7 +2536,7 @@ export const UninterpretedOption_NamePart: MessageFns<UninterpretedOption_NamePa
     ): UninterpretedOption_NamePart {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseUninterpretedOption_NamePart();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -2635,7 +2635,7 @@ export const FeatureSet: MessageFns<FeatureSet> = {
   decode(input: BinaryReader | Uint8Array, length?: number): FeatureSet {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFeatureSet();
     while (reader.pos < end) {
       const tag = reader.uint32();

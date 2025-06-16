@@ -373,7 +373,7 @@ export const Swagger: MessageFns<Swagger> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Swagger {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSwagger();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -546,7 +546,7 @@ export const Swagger_ResponsesEntry: MessageFns<Swagger_ResponsesEntry> = {
   ): Swagger_ResponsesEntry {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSwagger_ResponsesEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -601,7 +601,7 @@ export const Swagger_ExtensionsEntry: MessageFns<Swagger_ExtensionsEntry> = {
   ): Swagger_ExtensionsEntry {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSwagger_ExtensionsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -713,7 +713,7 @@ export const Operation: MessageFns<Operation> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Operation {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -883,7 +883,7 @@ export const Operation_ResponsesEntry: MessageFns<Operation_ResponsesEntry> = {
   ): Operation_ResponsesEntry {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation_ResponsesEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -942,7 +942,7 @@ export const Operation_ExtensionsEntry: MessageFns<Operation_ExtensionsEntry> =
     ): Operation_ExtensionsEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseOperation_ExtensionsEntry();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -991,7 +991,7 @@ export const Parameters: MessageFns<Parameters> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Parameters {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParameters();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1044,7 +1044,7 @@ export const HeaderParameter: MessageFns<HeaderParameter> = {
   decode(input: BinaryReader | Uint8Array, length?: number): HeaderParameter {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeaderParameter();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1129,7 +1129,7 @@ export const Header: MessageFns<Header> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Header {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeader();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1231,7 +1231,7 @@ export const Response: MessageFns<Response> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Response {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1322,7 +1322,7 @@ export const Response_HeadersEntry: MessageFns<Response_HeadersEntry> = {
   ): Response_HeadersEntry {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponse_HeadersEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1377,7 +1377,7 @@ export const Response_ExamplesEntry: MessageFns<Response_ExamplesEntry> = {
   ): Response_ExamplesEntry {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponse_ExamplesEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1432,7 +1432,7 @@ export const Response_ExtensionsEntry: MessageFns<Response_ExtensionsEntry> = {
   ): Response_ExtensionsEntry {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponse_ExtensionsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1512,7 +1512,7 @@ export const Info: MessageFns<Info> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Info {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInfo();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1610,7 +1610,7 @@ export const Info_ExtensionsEntry: MessageFns<Info_ExtensionsEntry> = {
   ): Info_ExtensionsEntry {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInfo_ExtensionsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1665,7 +1665,7 @@ export const Contact: MessageFns<Contact> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Contact {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContact();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1725,7 +1725,7 @@ export const License: MessageFns<License> = {
   decode(input: BinaryReader | Uint8Array, length?: number): License {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLicense();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1780,7 +1780,7 @@ export const ExternalDocumentation: MessageFns<ExternalDocumentation> = {
   ): ExternalDocumentation {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExternalDocumentation();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -1850,7 +1850,7 @@ export const Schema: MessageFns<Schema> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Schema {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSchema();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2038,7 +2038,7 @@ export const JSONSchema: MessageFns<JSONSchema> = {
   decode(input: BinaryReader | Uint8Array, length?: number): JSONSchema {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseJSONSchema();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2302,7 +2302,7 @@ export const JSONSchema_FieldConfiguration: MessageFns<JSONSchema_FieldConfigura
     ): JSONSchema_FieldConfiguration {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseJSONSchema_FieldConfiguration();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -2353,7 +2353,7 @@ export const JSONSchema_ExtensionsEntry: MessageFns<JSONSchema_ExtensionsEntry> 
     ): JSONSchema_ExtensionsEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseJSONSchema_ExtensionsEntry();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -2419,7 +2419,7 @@ export const Tag: MessageFns<Tag> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Tag {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTag();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2496,7 +2496,7 @@ export const Tag_ExtensionsEntry: MessageFns<Tag_ExtensionsEntry> = {
   ): Tag_ExtensionsEntry {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTag_ExtensionsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2551,7 +2551,7 @@ export const SecurityDefinitions: MessageFns<SecurityDefinitions> = {
   ): SecurityDefinitions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSecurityDefinitions();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2605,7 +2605,7 @@ export const SecurityDefinitions_SecurityEntry: MessageFns<SecurityDefinitions_S
     ): SecurityDefinitions_SecurityEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseSecurityDefinitions_SecurityEntry();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -2693,7 +2693,7 @@ export const SecurityScheme: MessageFns<SecurityScheme> = {
   decode(input: BinaryReader | Uint8Array, length?: number): SecurityScheme {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSecurityScheme();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2814,7 +2814,7 @@ export const SecurityScheme_ExtensionsEntry: MessageFns<SecurityScheme_Extension
     ): SecurityScheme_ExtensionsEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseSecurityScheme_ExtensionsEntry();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -2869,7 +2869,7 @@ export const SecurityRequirement: MessageFns<SecurityRequirement> = {
   ): SecurityRequirement {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSecurityRequirement();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -2920,7 +2920,7 @@ export const SecurityRequirement_SecurityRequirementValue: MessageFns<SecurityRe
     ): SecurityRequirement_SecurityRequirementValue {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseSecurityRequirement_SecurityRequirementValue();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -2971,7 +2971,7 @@ export const SecurityRequirement_SecurityRequirementEntry: MessageFns<SecurityRe
     ): SecurityRequirement_SecurityRequirementEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      let end = length === undefined ? reader.len : reader.pos + length;
+      const end = length === undefined ? reader.len : reader.pos + length;
       const message = createBaseSecurityRequirement_SecurityRequirementEntry();
       while (reader.pos < end) {
         const tag = reader.uint32();
@@ -3026,7 +3026,7 @@ export const Scopes: MessageFns<Scopes> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Scopes {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseScopes();
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -3073,7 +3073,7 @@ export const Scopes_ScopeEntry: MessageFns<Scopes_ScopeEntry> = {
   decode(input: BinaryReader | Uint8Array, length?: number): Scopes_ScopeEntry {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseScopes_ScopeEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
