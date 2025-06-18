@@ -22,10 +22,13 @@ To instrument the clients with [OpenTelemetry](http://opentelemetry.io), use the
 
 To load Cerbos policies from YAML or JSON files, use the [@cerbos/files](/packages/files/README.md) package.
 
+To read and write policies to stores in [Cerbos Hub](https://docs.cerbos.dev/cerbos-hub/), use the [@cerbos/hub](/packages/hub/README.md) package.
+
 ## Further reading
 
 - [API reference](/docs/index.md)
 - [Cerbos documentation](https://docs.cerbos.dev)
+- [Cerbos Hub documentation](https://docs.cerbos.dev/cerbos-hub/)
 
 ## Get help
 

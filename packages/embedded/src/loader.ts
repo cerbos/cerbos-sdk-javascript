@@ -378,7 +378,7 @@ export interface AutoUpdateOptions extends Options {
    * @remarks
    * The interval will be increased to the minimum of 10 seconds if a smaller value is specified.
    *
-   * @defaultValue `60000` (1 minute)
+   * @defaultValue `60_000` (1 minute)
    */
   interval?: number;
 }
