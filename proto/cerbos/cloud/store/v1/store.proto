@@ -149,12 +149,28 @@ message ReplaceFilesRequest {
   message Condition {
     int64 store_version_must_equal = 1 [(buf.validate.field).int64.gte = 0];
   }
+
+  message Files {
+    repeated File files = 1 [
+      (buf.validate.field).repeated.min_items = 1,
+      (buf.validate.field).cel = {
+        id: "files.unique_paths"
+        message: "File paths must be unique"
+        expression: "this.map(f, f.path).unique()"
+      }
+    ];
+  }
+
   string store_id = 1 [(buf.validate.field).string.len = 12];
   optional Condition condition = 2;
-  bytes zipped_contents = 3 [(buf.validate.field).bytes = {
-    min_len: 22
-    max_len: 15728640
-  }];
+  oneof contents {
+    option (buf.validate.oneof).required = true;
+    bytes zipped_contents = 3 [(buf.validate.field).bytes = {
+      min_len: 22
+      max_len: 15728640
+    }];
+    Files files = 5;
+  }
   optional ChangeDetails change_details = 4;
 }
 
