@@ -168,6 +168,9 @@ export interface FeatureSet {
   messageEncoding?: FeatureSet_MessageEncoding | undefined;
   jsonFormat?: FeatureSet_JsonFormat | undefined;
   enforceNamingStyle?: FeatureSet_EnforceNamingStyle | undefined;
+  defaultSymbolVisibility?:
+    | FeatureSet_VisibilityFeature_DefaultSymbolVisibility
+    | undefined;
 }
 
 export enum FeatureSet_FieldPresence {
@@ -211,6 +214,16 @@ export enum FeatureSet_EnforceNamingStyle {
   ENFORCE_NAMING_STYLE_UNKNOWN = 0,
   STYLE2024 = 1,
   STYLE_LEGACY = 2,
+}
+
+export interface FeatureSet_VisibilityFeature {}
+
+export enum FeatureSet_VisibilityFeature_DefaultSymbolVisibility {
+  DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+  EXPORT_ALL = 1,
+  EXPORT_TOP_LEVEL = 2,
+  LOCAL_ALL = 3,
+  STRICT = 4,
 }
 
 function createBaseFileOptions(): FileOptions {
@@ -1429,6 +1442,7 @@ function createBaseFeatureSet(): FeatureSet {
     messageEncoding: 0,
     jsonFormat: 0,
     enforceNamingStyle: 0,
+    defaultSymbolVisibility: 0,
   };
 }
 
@@ -1466,6 +1480,12 @@ export const FeatureSet: MessageFns<FeatureSet> = {
       message.enforceNamingStyle !== 0
     ) {
       writer.uint32(56).int32(message.enforceNamingStyle);
+    }
+    if (
+      message.defaultSymbolVisibility !== undefined &&
+      message.defaultSymbolVisibility !== 0
+    ) {
+      writer.uint32(64).int32(message.defaultSymbolVisibility);
     }
     return writer;
   },
@@ -1534,6 +1554,14 @@ export const FeatureSet: MessageFns<FeatureSet> = {
           message.enforceNamingStyle = reader.int32() as any;
           continue;
         }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.defaultSymbolVisibility = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1543,6 +1571,40 @@ export const FeatureSet: MessageFns<FeatureSet> = {
     return message;
   },
 };
+
+function createBaseFeatureSet_VisibilityFeature(): FeatureSet_VisibilityFeature {
+  return {};
+}
+
+export const FeatureSet_VisibilityFeature: MessageFns<FeatureSet_VisibilityFeature> =
+  {
+    encode(
+      _: FeatureSet_VisibilityFeature,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): FeatureSet_VisibilityFeature {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseFeatureSet_VisibilityFeature();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
 
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
