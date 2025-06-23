@@ -511,6 +511,9 @@ export interface FeatureSet {
   messageEncoding?: FeatureSet_MessageEncoding | undefined;
   jsonFormat?: FeatureSet_JsonFormat | undefined;
   enforceNamingStyle?: FeatureSet_EnforceNamingStyle | undefined;
+  defaultSymbolVisibility?:
+    | FeatureSet_VisibilityFeature_DefaultSymbolVisibility
+    | undefined;
 }
 
 export enum FeatureSet_FieldPresence {
@@ -832,6 +835,67 @@ export function featureSet_EnforceNamingStyleToJSON(
         "Unrecognized enum value " +
           object +
           " for enum FeatureSet_EnforceNamingStyle",
+      );
+  }
+}
+
+export interface FeatureSet_VisibilityFeature {}
+
+export enum FeatureSet_VisibilityFeature_DefaultSymbolVisibility {
+  DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+  EXPORT_ALL = 1,
+  EXPORT_TOP_LEVEL = 2,
+  LOCAL_ALL = 3,
+  STRICT = 4,
+}
+
+export function featureSet_VisibilityFeature_DefaultSymbolVisibilityFromJSON(
+  object: any,
+): FeatureSet_VisibilityFeature_DefaultSymbolVisibility {
+  switch (object) {
+    case 0:
+    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+      return FeatureSet_VisibilityFeature_DefaultSymbolVisibility.DEFAULT_SYMBOL_VISIBILITY_UNKNOWN;
+    case 1:
+    case "EXPORT_ALL":
+      return FeatureSet_VisibilityFeature_DefaultSymbolVisibility.EXPORT_ALL;
+    case 2:
+    case "EXPORT_TOP_LEVEL":
+      return FeatureSet_VisibilityFeature_DefaultSymbolVisibility.EXPORT_TOP_LEVEL;
+    case 3:
+    case "LOCAL_ALL":
+      return FeatureSet_VisibilityFeature_DefaultSymbolVisibility.LOCAL_ALL;
+    case 4:
+    case "STRICT":
+      return FeatureSet_VisibilityFeature_DefaultSymbolVisibility.STRICT;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_VisibilityFeature_DefaultSymbolVisibility",
+      );
+  }
+}
+
+export function featureSet_VisibilityFeature_DefaultSymbolVisibilityToJSON(
+  object: FeatureSet_VisibilityFeature_DefaultSymbolVisibility,
+): string {
+  switch (object) {
+    case FeatureSet_VisibilityFeature_DefaultSymbolVisibility.DEFAULT_SYMBOL_VISIBILITY_UNKNOWN:
+      return "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN";
+    case FeatureSet_VisibilityFeature_DefaultSymbolVisibility.EXPORT_ALL:
+      return "EXPORT_ALL";
+    case FeatureSet_VisibilityFeature_DefaultSymbolVisibility.EXPORT_TOP_LEVEL:
+      return "EXPORT_TOP_LEVEL";
+    case FeatureSet_VisibilityFeature_DefaultSymbolVisibility.LOCAL_ALL:
+      return "LOCAL_ALL";
+    case FeatureSet_VisibilityFeature_DefaultSymbolVisibility.STRICT:
+      return "STRICT";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_VisibilityFeature_DefaultSymbolVisibility",
       );
   }
 }
@@ -2646,6 +2710,7 @@ function createBaseFeatureSet(): FeatureSet {
     messageEncoding: 0,
     jsonFormat: 0,
     enforceNamingStyle: 0,
+    defaultSymbolVisibility: 0,
   };
 }
 
@@ -2683,6 +2748,12 @@ export const FeatureSet: MessageFns<FeatureSet> = {
       message.enforceNamingStyle !== 0
     ) {
       writer.uint32(56).int32(message.enforceNamingStyle);
+    }
+    if (
+      message.defaultSymbolVisibility !== undefined &&
+      message.defaultSymbolVisibility !== 0
+    ) {
+      writer.uint32(64).int32(message.defaultSymbolVisibility);
     }
     return writer;
   },
@@ -2751,6 +2822,14 @@ export const FeatureSet: MessageFns<FeatureSet> = {
           message.enforceNamingStyle = reader.int32() as any;
           continue;
         }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.defaultSymbolVisibility = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2782,6 +2861,11 @@ export const FeatureSet: MessageFns<FeatureSet> = {
         : 0,
       enforceNamingStyle: isSet(object.enforceNamingStyle)
         ? featureSet_EnforceNamingStyleFromJSON(object.enforceNamingStyle)
+        : 0,
+      defaultSymbolVisibility: isSet(object.defaultSymbolVisibility)
+        ? featureSet_VisibilityFeature_DefaultSymbolVisibilityFromJSON(
+            object.defaultSymbolVisibility,
+          )
         : 0,
     };
   },
@@ -2826,9 +2910,61 @@ export const FeatureSet: MessageFns<FeatureSet> = {
         message.enforceNamingStyle,
       );
     }
+    if (
+      message.defaultSymbolVisibility !== undefined &&
+      message.defaultSymbolVisibility !== 0
+    ) {
+      obj.defaultSymbolVisibility =
+        featureSet_VisibilityFeature_DefaultSymbolVisibilityToJSON(
+          message.defaultSymbolVisibility,
+        );
+    }
     return obj;
   },
 };
+
+function createBaseFeatureSet_VisibilityFeature(): FeatureSet_VisibilityFeature {
+  return {};
+}
+
+export const FeatureSet_VisibilityFeature: MessageFns<FeatureSet_VisibilityFeature> =
+  {
+    encode(
+      _: FeatureSet_VisibilityFeature,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): FeatureSet_VisibilityFeature {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseFeatureSet_VisibilityFeature();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(_: any): FeatureSet_VisibilityFeature {
+      return {};
+    },
+
+    toJSON(_: FeatureSet_VisibilityFeature): unknown {
+      const obj: any = {};
+      return obj;
+    },
+  };
 
 function bytesFromBase64(b64: string): Uint8Array {
   if ((globalThis as any).Buffer) {
