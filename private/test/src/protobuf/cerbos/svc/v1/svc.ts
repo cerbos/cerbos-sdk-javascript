@@ -4,7 +4,7 @@
 /* eslint-disable */
 import {
   type CallOptions,
-  ChannelCredentials,
+  type ChannelCredentials,
   Client,
   type ClientOptions,
   type ClientReadableStream,
@@ -12,7 +12,7 @@ import {
   type handleServerStreamingCall,
   type handleUnaryCall,
   makeGenericClientConstructor,
-  Metadata,
+  type Metadata,
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
