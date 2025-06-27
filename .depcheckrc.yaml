@@ -1,4 +1,5 @@
 ignores:
+  - "@bufbuild/protoc-gen-es"
   - "@tsconfig/node20"
   - "@tsconfig/strictest"
   - "@types/node"
