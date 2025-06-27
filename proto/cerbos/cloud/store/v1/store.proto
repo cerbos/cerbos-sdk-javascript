@@ -188,6 +188,7 @@ message ErrDetailConditionUnsatisfied {
 
 message ErrDetailOperationDiscarded {
   int64 current_store_version = 1;
+  repeated string ignored_files = 2;
 }
 
 message ErrDetailCannotModifyGitConnectedStore {}
