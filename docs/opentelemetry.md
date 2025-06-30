@@ -57,3 +57,4 @@ Configuration for OpenTelemetry instrumentation of Cerbos clients.
 
 </td></tr>
 </tbody></table>
+

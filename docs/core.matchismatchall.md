@@ -46,6 +46,7 @@ match
 </td></tr>
 </tbody></table>
 
+
 **Returns:**
 
 match is [MatchAll](./core.matchall.md)

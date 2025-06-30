@@ -46,6 +46,7 @@ filter
 </td></tr>
 </tbody></table>
 
+
 **Returns:**
 
 filter is [AuditLogFilterSince](./core.auditlogfiltersince.md)

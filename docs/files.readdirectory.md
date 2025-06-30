@@ -48,6 +48,7 @@ the path to the directory.
 </td></tr>
 </tbody></table>
 
+
 **Returns:**
 
 Promise&lt;[DirectoryContents](./files.directorycontents.md)<!-- -->&gt;

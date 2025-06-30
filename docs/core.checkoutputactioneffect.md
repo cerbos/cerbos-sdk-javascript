@@ -93,3 +93,4 @@ The [scope](https://docs.cerbos.dev/cerbos/latest/policies/scoped_policies.html)
 
 </td></tr>
 </tbody></table>
+

@@ -62,6 +62,7 @@ _(Optional)_
 </td></tr>
 </tbody></table>
 
+
 **Returns:**
 
 AsyncGenerator&lt;[AccessLogEntry](./core.accesslogentry.md)<!-- -->, void, undefined&gt;

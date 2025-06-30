@@ -48,6 +48,7 @@ policy
 </td></tr>
 </tbody></table>
 
+
 **Returns:**
 
 policy is [RolePolicy](./core.rolepolicy.md)

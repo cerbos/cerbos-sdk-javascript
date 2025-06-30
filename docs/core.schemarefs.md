@@ -74,3 +74,4 @@ _(Optional)_ Reference to a schema to be used to validate resource attributes.
 
 </td></tr>
 </tbody></table>
+
