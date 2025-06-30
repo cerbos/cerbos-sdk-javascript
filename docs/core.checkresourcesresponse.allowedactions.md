@@ -48,6 +48,7 @@ the resource search criteria.
 </td></tr>
 </tbody></table>
 
+
 **Returns:**
 
 string\[\] \| undefined

@@ -79,3 +79,4 @@ Resolves to the metadata of the loaded bundle, or rejects with the error that wa
 
 </td></tr>
 </tbody></table>
+

@@ -112,3 +112,4 @@ _(Optional)_ [Variables](https://docs.cerbos.dev/cerbos/latest/policies/variable
 
 </td></tr>
 </tbody></table>
+

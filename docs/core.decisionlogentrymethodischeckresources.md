@@ -46,6 +46,7 @@ method
 </td></tr>
 </tbody></table>
 
+
 **Returns:**
 
 method is [DecisionLogEntryCheckResources](./core.decisionlogentrycheckresources.md)

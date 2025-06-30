@@ -57,3 +57,4 @@ Options for creating a new [HTTP](./http.http.md) client.
 
 </td></tr>
 </tbody></table>
+

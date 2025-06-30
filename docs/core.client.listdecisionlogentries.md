@@ -62,6 +62,7 @@ _(Optional)_
 </td></tr>
 </tbody></table>
 
+
 **Returns:**
 
 AsyncGenerator&lt;[DecisionLogEntry](./core.decisionlogentry.md)<!-- -->, void, undefined&gt;

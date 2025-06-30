@@ -87,7 +87,6 @@ No notable changes.
 ### Added
 
 - Support for fetching audit logs ([#945](https://github.com/cerbos/cerbos-sdk-javascript/pull/945))
-
   - [`Client.getAccessLogEntry`](../../docs/core.client.getaccesslogentry.md) method
   - [`Client.getDecisionLogEntry`](../../docs/core.client.getdecisionlogentry.md) method
   - [`Client.listAccessLogEntries`](../../docs/core.client.listaccesslogentries.md) method

@@ -5,7 +5,6 @@ import { defineConfig } from "../config.js";
 export const importConfig = defineConfig(
   importPlugin.flatConfigs.typescript,
   {
-    plugins: { import: importPlugin },
     settings: {
       "import/internal-regex": "^@cerbos/",
     },

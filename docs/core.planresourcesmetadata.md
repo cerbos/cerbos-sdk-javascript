@@ -93,3 +93,4 @@ The [policy scopes](https://docs.cerbos.dev/cerbos/latest/policies/scoped_polici
 
 </td></tr>
 </tbody></table>
+

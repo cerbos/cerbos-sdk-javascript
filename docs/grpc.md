@@ -94,3 +94,4 @@ Options for creating a new [GRPC](./grpc.grpc.md) client.
 
 </td></tr>
 </tbody></table>
+

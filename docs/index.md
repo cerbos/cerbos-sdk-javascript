@@ -95,3 +95,4 @@ A collection of React hooks for interacting with Cerbos policy decision points.
 
 </td></tr>
 </tbody></table>
+

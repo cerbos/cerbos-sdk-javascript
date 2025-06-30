@@ -150,3 +150,4 @@ _(Optional)_ The [policy scope](https://docs.cerbos.dev/cerbos/latest/policies/s
 
 </td></tr>
 </tbody></table>
+

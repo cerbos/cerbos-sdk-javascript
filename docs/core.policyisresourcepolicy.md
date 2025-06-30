@@ -46,6 +46,7 @@ policy
 </td></tr>
 </tbody></table>
 
+
 **Returns:**
 
 policy is [ResourcePolicy](./core.resourcepolicy.md)
