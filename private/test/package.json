@@ -27,7 +27,7 @@
     "@types/react": "19.1.8",
     "@types/semver": "7.7.0",
     "@ungap/with-resolvers": "0.1.0",
-    "jose": "5.10.0",
+    "jose": "6.0.11",
     "jsdom": "26.1.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
