@@ -27,7 +27,7 @@ message StringMatch {
   oneof match {
     option (buf.validate.oneof).required = true;
     string equals = 1;
-    string like = 2;
+    string contains = 2;
     InList in = 3;
   }
 }
