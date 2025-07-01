@@ -741,7 +741,7 @@ export abstract class Client {
    *
    *   - the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled
    *
-   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#_local_backend | local audit logging backend}, and
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#local | local audit logging backend}, and
    *
    *   - {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit | access logs} enabled.
    *
@@ -781,7 +781,7 @@ export abstract class Client {
    *
    *   - the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled
    *
-   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#_local_backend | local audit logging backend}, and
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#local | local audit logging backend}, and
    *
    *   - {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit | decision logs} enabled.
    *
@@ -1002,7 +1002,7 @@ export abstract class Client {
    *
    *   - the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled
    *
-   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#_local_backend | local audit logging backend}, and
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#local | local audit logging backend}, and
    *
    *   - {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit | access logs} enabled.
    *
@@ -1039,7 +1039,7 @@ export abstract class Client {
    *
    *   - the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled
    *
-   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#_local_backend | local audit logging backend}, and
+   *   - the {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit#local | local audit logging backend}, and
    *
    *   - {@link https://docs.cerbos.dev/cerbos/latest/configuration/audit | decision logs} enabled.
    *

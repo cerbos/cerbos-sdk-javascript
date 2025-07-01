@@ -4,7 +4,7 @@
 
 ### Added
 
-- [`serializePolicy`](../docs/files.serializepolicy.md) and [`writePolicy`](../docs/files.writepolicy.md) functions to serialize policies to JSON-encoded strings and files ([#1174](https://github.com/cerbos/cerbos-sdk-javascript/pull/1174))
+- [`serializePolicy`](../../docs/files.serializepolicy.md) and [`writePolicy`](../../docs/files.writepolicy.md) functions to serialize policies to JSON-encoded strings and files ([#1174](https://github.com/cerbos/cerbos-sdk-javascript/pull/1174))
 
 ## [0.3.0] - 2025-06-02
 

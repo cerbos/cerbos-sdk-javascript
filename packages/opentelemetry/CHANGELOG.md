@@ -293,5 +293,5 @@
 [@cerbos/http]: ../http/README.md
 [@opentelemetry/api]: https://github.com/open-telemetry/opentelemetry-js/tree/main/api
 [@opentelemetry/instrumentation]: https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation
-[@opentelemetry/semantic-conventions]: https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-semantic-conventions
+[@opentelemetry/semantic-conventions]: https://github.com/open-telemetry/opentelemetry-js/tree/main/semantic-conventions
 [nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases

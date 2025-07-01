@@ -298,7 +298,7 @@ releases:
     date: 2023-03-21
 
     added:
-      - summary: "[`headers`](../../docs/http.options.headers.md) option to add headers to every request"
+      - summary: "[`headers`](../../docs/core.options.headers.md) option to add headers to every request"
         pull: 471
 
     bumped:

@@ -26,6 +26,8 @@ jobs:
 
       - name: Lint code
         run: pnpm run lint
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Generate code
         run: pnpm run generate

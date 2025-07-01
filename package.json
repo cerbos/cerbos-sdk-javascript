@@ -32,6 +32,7 @@
     "lint": "pnpm run all:parallel 'pnpm:lint:check:*'",
     "lint:check:depcheck": "pnpm --recursive --include-workspace-root exec depcheck --ignore-patterns=/lib/ --quiet --skip-missing",
     "lint:check:eslint": "pnpm run eslint:build && pnpm run eslint:run .",
+    "lint:check:links": "scripts/check-links",
     "lint:check:prettier": "prettier --check .",
     "lint:check:types": "pnpm --recursive --filter='./packages/*' exec attw --pack .",
     "lint:fix": "pnpm run lint:fix:eslint && pnpm run lint:fix:prettier",

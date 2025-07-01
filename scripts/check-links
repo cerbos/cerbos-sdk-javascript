@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+docker run \
+  --interactive \
+  --rm \
+  --env GITHUB_TOKEN \
+  --mount "type=bind,source=${PWD},target=/input" \
+  --workdir /input \
+  lycheeverse/lychee:latest-alpine \
+  --include-fragments \
+  --max-concurrency 8 \
+  --root-dir /input \
+  .
