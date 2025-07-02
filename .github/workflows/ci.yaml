@@ -13,6 +13,12 @@ on:
   schedule:
     - cron: 0 1 * * 1-5
 
+env:
+  CERBOS_HUB_API_ENDPOINT: ${{ secrets.CERBOS_HUB_API_ENDPOINT }}
+  CERBOS_HUB_STORE_ID: ${{ secrets.CERBOS_HUB_STORE_ID }}
+  CERBOS_HUB_STORES_CLIENT_ID: ${{ secrets.CERBOS_HUB_STORES_CLIENT_ID }}
+  CERBOS_HUB_STORES_CLIENT_SECRET: ${{ secrets.CERBOS_HUB_STORES_CLIENT_SECRET }}
+
 jobs:
   lint:
     name: Lint
@@ -26,6 +32,8 @@ jobs:
 
       - name: Lint code
         run: pnpm run lint
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Generate code
         run: pnpm run generate
@@ -61,7 +69,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-  test:
+  test-parallel:
     name: Test (${{ matrix.title }})
     runs-on: ubuntu-latest
     continue-on-error: ${{ github.event_name != 'schedule' && !matrix.required }}
@@ -69,7 +77,36 @@ jobs:
       - test-matrix
     strategy:
       fail-fast: false
-      matrix: ${{ fromJSON(needs.test-matrix.outputs.matrix) }}
+      matrix: ${{ fromJSON(needs.test-matrix.outputs.matrix).parallel }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: ./.github/actions/setup-node
+        with:
+          node-version: ${{ matrix.node }}
+          save-cache: false
+
+      - name: Set up tests
+        if: matrix.setup
+        run: ${{ matrix.setup }}
+
+      - name: Run tests
+        run: ${{ matrix.test }}
+
+  test-serial:
+    name: Test (${{ matrix.title }})
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ github.event_name != 'schedule' && !matrix.required }}
+    needs:
+      - test-matrix
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.test-matrix.outputs.matrix).serial }}
+      max-parallel: 1
+    concurrency:
+      group: ci-test-serial
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -92,7 +129,10 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     needs:
-      - test
+      - test-parallel
+      - test-serial
     steps:
       - name: Check test results
-        run: test "${{ needs.test.result }}" = "success"
+        run: |-
+          test "${{ needs.test-parallel.result }}" = "success"
+          test "${{ needs.test-serial.result }}" = "success"

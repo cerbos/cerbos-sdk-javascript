@@ -2,16 +2,16 @@ version: v2
 
 inputs:
   - directory: proto
-    types:
-      - cerbos.response.v1.ListAuditLogEntriesResponse
-      - cerbos.svc.v1.CerbosAdminService
-      - cerbos.svc.v1.CerbosService
-      - jaeger.api_v3.QueryService
 
 plugins:
   - local: node_modules/.bin/protoc-gen-ts_proto
     out: private/test/src/protobuf
     strategy: all
+    types:
+      - cerbos.response.v1.ListAuditLogEntriesResponse
+      - cerbos.svc.v1.CerbosAdminService
+      - cerbos.svc.v1.CerbosService
+      - jaeger.api_v3.QueryService
     opt:
       - annotateFilesWithVersion=false
       - comments=false
@@ -25,3 +25,13 @@ plugins:
       - outputPartialMethods=false
       - outputServices=grpc-js
       - unrecognizedEnum=false
+
+  - local: node_modules/.bin/protoc-gen-es
+    out: private/test/src/protobuf
+    include_imports: true
+    types:
+      - cerbos.cloud.apikey.v1.ApiKeyService
+      - cerbos.cloud.store.v1.CerbosStoreService
+    opt:
+      - target=ts
+      - valid_types=protovalidate_required

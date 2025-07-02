@@ -1,0 +1,15 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: A client for interacting with policy stores in Cerbos Hub
+      pull: 1173
+
+references:
+  "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es
+  "@bufbuild/protovalidate": https://github.com/bufbuild/protovalidate-es
+  "@connectrpc/connect": https://github.com/connectrpc/connect-es
+  "@connectrpc/connect-node": https://github.com/connectrpc/connect-es
+  opossum: https://nodeshift.dev/opossum/
+
+initialCommit: f477d2e7210284634461d85cb273d6a92e448ceb
