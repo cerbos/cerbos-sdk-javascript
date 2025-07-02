@@ -32,6 +32,38 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+ABORTED
+
+
+</td><td>
+
+`10`
+
+
+</td><td>
+
+The operation was aborted.
+
+
+</td></tr>
+<tr><td>
+
+ALREADY\_EXISTS
+
+
+</td><td>
+
+`6`
+
+
+</td><td>
+
+The entity that the client attempted to create already exists.
+
+
+</td></tr>
+<tr><td>
+
 CANCELLED
 
 
@@ -48,6 +80,22 @@ The operation was cancelled.
 </td></tr>
 <tr><td>
 
+DATA\_LOSS
+
+
+</td><td>
+
+`15`
+
+
+</td><td>
+
+The operation resulted in unrecoverable data loss or corruption.
+
+
+</td></tr>
+<tr><td>
+
 DEADLINE\_EXCEEDED
 
 
@@ -59,6 +107,22 @@ DEADLINE\_EXCEEDED
 </td><td>
 
 The operation timed out.
+
+
+</td></tr>
+<tr><td>
+
+FAILED\_PRECONDITION
+
+
+</td><td>
+
+`9`
+
+
+</td><td>
+
+The operation was rejected because the system is not in a state required for the operation's execution.
 
 
 </td></tr>
@@ -123,6 +187,38 @@ OK
 </td><td>
 
 The operation completed successfully.
+
+
+</td></tr>
+<tr><td>
+
+OUT\_OF\_RANGE
+
+
+</td><td>
+
+`11`
+
+
+</td><td>
+
+The operation was attempted past the valid range.
+
+
+</td></tr>
+<tr><td>
+
+PERMISSION\_DENIED
+
+
+</td><td>
+
+`7`
+
+
+</td><td>
+
+The caller does not have permission to execute the specified operation.
 
 
 </td></tr>

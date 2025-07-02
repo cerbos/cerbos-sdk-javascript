@@ -14,6 +14,9 @@ importers:
       '@bufbuild/buf':
         specifier: 1.55.1
         version: 1.55.1
+      '@bufbuild/protoc-gen-es':
+        specifier: 2.5.2
+        version: 2.5.2(@bufbuild/protobuf@2.5.2)
       '@cerbos/sdk-javascript-eslint':
         specifier: workspace:*
         version: link:private/eslint
@@ -105,6 +108,31 @@ importers:
       '@types/qs':
         specifier: 6.14.0
         version: 6.14.0
+
+  packages/hub:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^2.5.2
+        version: 2.5.2
+      '@bufbuild/protovalidate':
+        specifier: ^0.4.0
+        version: 0.4.0(@bufbuild/protobuf@2.5.2)
+      '@cerbos/core':
+        specifier: ^0.22.0
+        version: link:../core
+      '@connectrpc/connect':
+        specifier: ^2.0.2
+        version: 2.0.2(@bufbuild/protobuf@2.5.2)
+      '@connectrpc/connect-node':
+        specifier: ^2.0.2
+        version: 2.0.2(@bufbuild/protobuf@2.5.2)(@connectrpc/connect@2.0.2(@bufbuild/protobuf@2.5.2))
+      opossum:
+        specifier: ^9.0.0
+        version: 9.0.0
+    devDependencies:
+      '@types/opossum':
+        specifier: 8.1.8
+        version: 8.1.8
 
   packages/opentelemetry:
     dependencies:
@@ -208,12 +236,21 @@ importers:
       '@cerbos/http':
         specifier: workspace:*
         version: link:../../packages/http
+      '@cerbos/hub':
+        specifier: workspace:*
+        version: link:../../packages/hub
       '@cerbos/opentelemetry':
         specifier: workspace:*
         version: link:../../packages/opentelemetry
       '@cerbos/react':
         specifier: workspace:*
         version: link:../../packages/react
+      '@connectrpc/connect':
+        specifier: 2.0.2
+        version: 2.0.2(@bufbuild/protobuf@2.5.2)
+      '@connectrpc/connect-node':
+        specifier: 2.0.2
+        version: 2.0.2(@bufbuild/protobuf@2.5.2)(@connectrpc/connect@2.0.2(@bufbuild/protobuf@2.5.2))
       '@grpc/grpc-js':
         specifier: 1.13.4
         version: 1.13.4
@@ -238,6 +275,9 @@ importers:
       '@testing-library/user-event':
         specifier: 14.6.1
         version: 14.6.1(@testing-library/dom@10.4.0)
+      '@types/adm-zip':
+        specifier: 0.5.7
+        version: 0.5.7
       '@types/react':
         specifier: 19.1.8
         version: 19.1.8
@@ -247,6 +287,9 @@ importers:
       '@ungap/with-resolvers':
         specifier: 0.1.0
         version: 0.1.0
+      adm-zip:
+        specifier: 0.5.16
+        version: 0.5.16
       jose:
         specifier: 6.0.11
         version: 6.0.11
@@ -370,12 +413,52 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
 
+  '@bufbuild/cel-spec@0.2.0':
+    resolution: {integrity: sha512-SH2rdoPeKe4Ii2XIhx5v9znDEmH8OgmDq1WRTuc1DrhuhO5A+r1juTPSO7n7I7Nn1DFmFY4+OjpdbLZEo8cWLg==}
+    peerDependencies:
+      '@bufbuild/protobuf': ^2.2.5
+
+  '@bufbuild/cel@0.2.0':
+    resolution: {integrity: sha512-TiXbkdhpxt8BlF8aYW+9FWiY20YjHMkFhqb9gfQ1KSbkIIBKxcDUiPCBvBkFXWrvcQ9fSBiggaM3lJluZ+zUDQ==}
+    peerDependencies:
+      '@bufbuild/protobuf': ^2.2.5
+
   '@bufbuild/protobuf@2.5.2':
     resolution: {integrity: sha512-foZ7qr0IsUBjzWIq+SuBLfdQCpJ1j8cTuNNT4owngTHoN5KsJb8L9t65fzz7SCeSWzescoOil/0ldqiL041ABg==}
+
+  '@bufbuild/protoc-gen-es@2.5.2':
+    resolution: {integrity: sha512-G9rvJ3CH1MXxUTppBJLdhc+wS2m6LR1Tvi0sGoDDChmiqJVkOhIeYrqtGMqqLqiE44I7uJGDaYcn1PG3aIGJUg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    peerDependencies:
+      '@bufbuild/protobuf': 2.5.2
+    peerDependenciesMeta:
+      '@bufbuild/protobuf':
+        optional: true
+
+  '@bufbuild/protoplugin@2.5.2':
+    resolution: {integrity: sha512-7d/NUae/ugs/qgHEYOwkVWGDE3Bf/xjuGviVFs38+MLRdwiHNTiuvzPVwuIPo/1wuZCZn3Nax1cg1owLuY72xw==}
+
+  '@bufbuild/protovalidate@0.4.0':
+    resolution: {integrity: sha512-thC1S9dU4Nc2gSM7osRqh8Pb6EkiGqhfHdXz2AKcmi7NxOSxKBpQnVPw67vmHk2f9Y1Qu3n0Om/akPwqtLrIHg==}
+    peerDependencies:
+      '@bufbuild/protobuf': ^2.5.0
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
     engines: {node: '>=0.1.90'}
+
+  '@connectrpc/connect-node@2.0.2':
+    resolution: {integrity: sha512-33Ut3SRkb6SugpwVCtXXRvUrOdtiyG6z6d5+eijBOLOI75sw1tDCwcs0o/9WL3rUj1M08dLUrPmJB47fjpv6EA==}
+    engines: {node: '>=18.14.1'}
+    peerDependencies:
+      '@bufbuild/protobuf': ^2.2.0
+      '@connectrpc/connect': 2.0.2
+
+  '@connectrpc/connect@2.0.2':
+    resolution: {integrity: sha512-xZuylIUNvNlH52e/4eQsZvY4QZyDJRtEFEDnn/yBrv5Xi5ZZI/p8X+GAHH35ucVaBvv9u7OzHZo8+tEh1EFTxA==}
+    peerDependencies:
+      '@bufbuild/protobuf': ^2.2.0
 
   '@csstools/color-helpers@5.0.2':
     resolution: {integrity: sha512-JqWH1vsgdGcw2RR6VliXXdA0/59LttzlU8UlRT/iUUsEeWfYq8I+K0yhihEUTTHLRm1EXvpsCx3083EU15ecsA==}
@@ -931,6 +1014,9 @@ packages:
   '@tsconfig/strictest@2.0.5':
     resolution: {integrity: sha512-ec4tjL2Rr0pkZ5hww65c+EEPYwxOi4Ryv+0MtjeaSQRJyq322Q27eOQiFbuNgw2hpL4hB1/W/HBGk3VKS43osg==}
 
+  '@types/adm-zip@0.5.7':
+    resolution: {integrity: sha512-DNEs/QvmyRLurdQPChqq0Md4zGvPwHerAJYWk9l2jCbD1VPpnzRJorOdiq4zsw09NFbYnhfsoEhWtxIzXpn2yw==}
+
   '@types/argparse@1.0.38':
     resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==}
 
@@ -957,6 +1043,9 @@ packages:
 
   '@types/node@20.19.1':
     resolution: {integrity: sha512-jJD50LtlD2dodAEO653i3YF04NWak6jN3ky+Ri3Em3mGR39/glWiboM/IePaRbgwSfqM1TpGXfAg8ohn/4dTgA==}
+
+  '@types/opossum@8.1.8':
+    resolution: {integrity: sha512-FTpWfHcpMgdLIdaTpL1D/nTlIH03T62RIQfzmwdEDAndYJwHDdUTkBvgXhaVp/zN74woiWEyb6DSNuZHPt1gmA==}
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
@@ -1028,6 +1117,11 @@ packages:
   '@typescript-eslint/visitor-keys@8.35.0':
     resolution: {integrity: sha512-zTh2+1Y8ZpmeQaQVIc/ZZxsx8UzgKJyNg1PTvjzC7WMhPSVS8bfDX34k1SrwOf016qd5RU3az2UxUNue3IfQ5g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript/vfs@1.6.1':
+    resolution: {integrity: sha512-JwoxboBh7Oz1v38tPbkrZ62ZXNHAk9bJ7c9x0eI5zBfBnBYGhURdbnh7Z4smN/MV48Y5OCcZb58n972UtbazsA==}
+    peerDependencies:
+      typescript: '*'
 
   '@ungap/with-resolvers@0.1.0':
     resolution: {integrity: sha512-g7f0IkJdPW2xhY7H4iE72DAsIyfuwEFc6JWc2tYFwKDMWWAF699vGjrM348cwQuOXgHpe1gWFe+Eiyjx/ewvvw==}
@@ -1102,6 +1196,10 @@ packages:
     resolution: {integrity: sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+
+  adm-zip@0.5.16:
+    resolution: {integrity: sha512-TGw5yVi4saajsSEgz25grObGHEUaDrniwvA2qwSC060KfqGPdglhvPMA2lPIoxs3PQIItj2iag35fONcQqgUaQ==}
+    engines: {node: '>=12.0'}
 
   agent-base@7.1.3:
     resolution: {integrity: sha512-jRR5wdylq8CkOe6hei19GGZnxM6rBGwFl3Bg0YItGDimvjGtAvdZk4Pu6Cl4u4Igsws4a1fd1Vq3ezrhn4KmFw==}
@@ -2157,6 +2255,10 @@ packages:
     resolution: {integrity: sha512-gXah6aZrcUxjWg2zR2MwouP2eHlCBzdV4pygudehaKXSGW4v2AsRQUK+lwwXhii6KFZcunEnmSUoYp5CXibxtA==}
     engines: {node: '>= 0.4'}
 
+  opossum@9.0.0:
+    resolution: {integrity: sha512-K76U0QkxOfUZamneQuzz+AP0fyfTJcCplZ2oZL93nxeupuJbN4s6uFNbmVCt4eWqqGqRnnowdFuBicJ1fLMVxw==}
+    engines: {node: ^24 || ^22 || ^20}
+
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
@@ -2639,6 +2741,11 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <5.9.0'
 
+  typescript@5.4.5:
+    resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   typescript@5.6.1-rc:
     resolution: {integrity: sha512-E3b2+1zEFu84jB0YQi9BORDjz9+jGbwwy1Zi3G0LUNw7a7cePUrHMRNy8aPh53nXpkFGVHSxIZo5vKTfYaFiBQ==}
     engines: {node: '>=14.17'}
@@ -3000,10 +3107,49 @@ snapshots:
       '@bufbuild/buf-win32-arm64': 1.55.1
       '@bufbuild/buf-win32-x64': 1.55.1
 
+  '@bufbuild/cel-spec@0.2.0(@bufbuild/protobuf@2.5.2)':
+    dependencies:
+      '@bufbuild/protobuf': 2.5.2
+
+  '@bufbuild/cel@0.2.0(@bufbuild/protobuf@2.5.2)':
+    dependencies:
+      '@bufbuild/cel-spec': 0.2.0(@bufbuild/protobuf@2.5.2)
+      '@bufbuild/protobuf': 2.5.2
+
   '@bufbuild/protobuf@2.5.2': {}
+
+  '@bufbuild/protoc-gen-es@2.5.2(@bufbuild/protobuf@2.5.2)':
+    dependencies:
+      '@bufbuild/protoplugin': 2.5.2
+    optionalDependencies:
+      '@bufbuild/protobuf': 2.5.2
+    transitivePeerDependencies:
+      - supports-color
+
+  '@bufbuild/protoplugin@2.5.2':
+    dependencies:
+      '@bufbuild/protobuf': 2.5.2
+      '@typescript/vfs': 1.6.1(typescript@5.4.5)
+      typescript: 5.4.5
+    transitivePeerDependencies:
+      - supports-color
+
+  '@bufbuild/protovalidate@0.4.0(@bufbuild/protobuf@2.5.2)':
+    dependencies:
+      '@bufbuild/cel': 0.2.0(@bufbuild/protobuf@2.5.2)
+      '@bufbuild/protobuf': 2.5.2
 
   '@colors/colors@1.5.0':
     optional: true
+
+  '@connectrpc/connect-node@2.0.2(@bufbuild/protobuf@2.5.2)(@connectrpc/connect@2.0.2(@bufbuild/protobuf@2.5.2))':
+    dependencies:
+      '@bufbuild/protobuf': 2.5.2
+      '@connectrpc/connect': 2.0.2(@bufbuild/protobuf@2.5.2)
+
+  '@connectrpc/connect@2.0.2(@bufbuild/protobuf@2.5.2)':
+    dependencies:
+      '@bufbuild/protobuf': 2.5.2
 
   '@csstools/color-helpers@5.0.2': {}
 
@@ -3467,6 +3613,10 @@ snapshots:
 
   '@tsconfig/strictest@2.0.5': {}
 
+  '@types/adm-zip@0.5.7':
+    dependencies:
+      '@types/node': 20.19.1
+
   '@types/argparse@1.0.38': {}
 
   '@types/aria-query@5.0.4': {}
@@ -3488,6 +3638,10 @@ snapshots:
   '@types/node@20.19.1':
     dependencies:
       undici-types: 6.21.0
+
+  '@types/opossum@8.1.8':
+    dependencies:
+      '@types/node': 20.19.1
 
   '@types/parse-json@4.0.2': {}
 
@@ -3591,6 +3745,13 @@ snapshots:
       '@typescript-eslint/types': 8.35.0
       eslint-visitor-keys: 4.2.1
 
+  '@typescript/vfs@1.6.1(typescript@5.4.5)':
+    dependencies:
+      debug: 4.4.1
+      typescript: 5.4.5
+    transitivePeerDependencies:
+      - supports-color
+
   '@ungap/with-resolvers@0.1.0': {}
 
   '@vitest/eslint-plugin@1.3.3(eslint@9.29.0)(typescript@5.8.3)(vitest@3.2.4(@types/node@20.19.1)(jsdom@26.1.0)(tsx@4.20.3)(yaml@2.8.0))':
@@ -3686,6 +3847,8 @@ snapshots:
       acorn: 8.15.0
 
   acorn@8.15.0: {}
+
+  adm-zip@0.5.16: {}
 
   agent-base@7.1.3: {}
 
@@ -4905,6 +5068,8 @@ snapshots:
       define-properties: 1.2.1
       es-object-atoms: 1.1.1
 
+  opossum@9.0.0: {}
+
   optionator@0.9.4:
     dependencies:
       deep-is: 0.1.4
@@ -5434,6 +5599,8 @@ snapshots:
       typescript: 5.8.3
     transitivePeerDependencies:
       - supports-color
+
+  typescript@5.4.5: {}
 
   typescript@5.6.1-rc: {}
 

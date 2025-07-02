@@ -80,7 +80,7 @@ export interface ChannelOptions {
   /**
    * Initial window size (in bytes) for HTTP/2 stream-level flow control.
    *
-   * @defaultValue `65535`
+   * @defaultValue `65_535`
    */
   "grpc-node.flow_control_window"?: number | undefined;
 

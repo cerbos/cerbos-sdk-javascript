@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@10.12.4",
   "engines": {
-    "node": "23.11.1",
+    "node": "24.3.0",
     "pnpm": "10.12.4"
   },
   "scripts": {
@@ -24,14 +24,16 @@
     "generate:buf:files": "buf generate --template=packages/files/buf.gen.yaml",
     "generate:buf:grpc": "buf generate --template=packages/grpc/buf.gen.yaml",
     "generate:buf:http": "buf generate --template=packages/http/buf.gen.yaml",
+    "generate:buf:hub": "buf generate --template=packages/hub/buf.gen.yaml",
     "generate:buf:test": "buf generate --template=private/test/buf.gen.yaml",
     "generate:changelogs": "tsx private/scripts/src/generate/changelogs.ts",
     "generate:clean": "rm -rf packages/*/src/protobuf private/*/src/protobuf",
-    "generate:external-types-index": "scripts/generate-external-types-index",
     "generate:format": "prettier --write packages/*/src/protobuf private/*/src/protobuf",
+    "generate:types-indexes": "scripts/generate-types-indexes",
     "lint": "pnpm run all:parallel 'pnpm:lint:check:*'",
     "lint:check:depcheck": "pnpm --recursive --include-workspace-root exec depcheck --ignore-patterns=/lib/ --quiet --skip-missing",
     "lint:check:eslint": "pnpm run eslint:build && pnpm run eslint:run .",
+    "lint:check:links": "scripts/check-links",
     "lint:check:prettier": "prettier --check .",
     "lint:check:types": "pnpm --recursive --filter='./packages/*' exec attw --pack .",
     "lint:fix": "pnpm run lint:fix:eslint && pnpm run lint:fix:prettier",
@@ -56,6 +58,7 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.2",
     "@bufbuild/buf": "1.55.1",
+    "@bufbuild/protoc-gen-es": "2.5.2",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@microsoft/api-documenter": "7.26.29",
     "@microsoft/api-extractor": "7.52.8",

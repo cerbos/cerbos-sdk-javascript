@@ -212,6 +212,15 @@ function nodeEntry(node: string): MatrixEntry {
   };
 }
 
+function hubEntry(node: string): MatrixEntry {
+  return {
+    required: true,
+    title: `Hub | Node ${node}`,
+    test: "pnpm run test matrix-hub",
+    node,
+  };
+}
+
 function cerbosEntry(node: string, cerbos: string): MatrixEntry {
   return {
     required: !prerelease(cerbos),
@@ -256,11 +265,16 @@ const [nodes, cerboses, reacts] = await Promise.all([
 ]);
 
 const matrix = {
-  include: [
-    ...nodes.map((node) => nodeEntry(node)),
-    ...matrixEntries(nodes, cerboses, cerbosEntry),
-    ...matrixEntries(nodes, reacts, reactEntry),
-  ],
+  parallel: {
+    include: [
+      ...nodes.map((node) => nodeEntry(node)),
+      ...matrixEntries(nodes, cerboses, cerbosEntry),
+      ...matrixEntries(nodes, reacts, reactEntry),
+    ],
+  },
+  serial: {
+    include: nodes.map((node) => hubEntry(node)),
+  },
 };
 
 console.log(JSON.stringify(matrix, null, 2));

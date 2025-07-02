@@ -77,7 +77,7 @@ Requires
 
 - the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) enabled
 
-- the [local audit logging backend](https://docs.cerbos.dev/cerbos/latest/configuration/audit#_local_backend)<!-- -->, and
+- the [local audit logging backend](https://docs.cerbos.dev/cerbos/latest/configuration/audit#local)<!-- -->, and
 
 - [decision logs](https://docs.cerbos.dev/cerbos/latest/configuration/audit) enabled.
 
