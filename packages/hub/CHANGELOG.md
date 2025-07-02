@@ -4,7 +4,7 @@
 
 ### Added
 
-- A client for interacting with policy stores in Cerbos Hub ([#1173](https://github.com/cerbos/cerbos-sdk-javascript/pull/1173))
+- A client for interacting with policy stores in Cerbos Hub ([#1173](https://github.com/cerbos/cerbos-sdk-javascript/pull/1173), [#1191](https://github.com/cerbos/cerbos-sdk-javascript/pull/1191))
 
 [unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/f477d2e7210284634461d85cb273d6a92e448ceb...HEAD
 [@bufbuild/protobuf]: https://github.com/bufbuild/protobuf-es
