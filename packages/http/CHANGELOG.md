@@ -4,6 +4,12 @@
 
 No notable changes.
 
+## [0.22.1] - 2025-07-02
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.23.0 ([#1192](https://github.com/cerbos/cerbos-sdk-javascript/pull/1192))
+
 ## [0.22.0] - 2025-06-02
 
 ### Added
@@ -334,7 +340,8 @@ No notable changes.
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.22.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.22.1...HEAD
+[0.22.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.22.0...@cerbos/http@0.22.1
 [0.22.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.21.2...@cerbos/http@0.22.0
 [0.21.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.21.1...@cerbos/http@0.21.2
 [0.21.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.21.0...@cerbos/http@0.21.1
