@@ -3,7 +3,7 @@ unreleased:
 
   added:
     - summary: A client for interacting with policy stores in Cerbos Hub
-      pull: 1173
+      pulls: [1173, 1191]
 
 references:
   "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es
