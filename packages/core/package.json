@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/core",
-  "version": "0.22.0",
+  "version": "0.23.0",
   "description": "Common types used by the Cerbos client libraries",
   "repository": {
     "type": "git",

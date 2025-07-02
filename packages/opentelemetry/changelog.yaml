@@ -1,12 +1,16 @@
-unreleased:
-  type: patch
-
-  bumped:
-    "@opentelemetry/instrumentation":
-      to: 0.202.0
-      pull: 1169
-
 releases:
+  - version: 0.6.1
+    date: 2025-07-02
+
+    bumped:
+      "@cerbos/core":
+        to: 0.23.0
+        pull: 1192
+
+      "@opentelemetry/instrumentation":
+        to: 0.202.0
+        pull: 1169
+
   - version: 0.6.0
     date: 2025-06-02
 

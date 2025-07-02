@@ -1,12 +1,16 @@
-unreleased:
-  type: patch
-
-  bumped:
-    ulid:
-      to: 3.0.1
-      pull: 1177
-
 releases:
+  - version: 0.12.1
+    date: 2025-07-02
+
+    bumped:
+      "@cerbos/core":
+        to: 0.23.0
+        pull: 1192
+
+      ulid:
+        to: 3.0.1
+        pull: 1177
+
   - version: 0.12.0
     date: 2025-06-02
 

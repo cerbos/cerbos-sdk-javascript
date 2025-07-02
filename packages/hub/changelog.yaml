@@ -1,9 +1,10 @@
-unreleased:
-  type: minor
+releases:
+  - version: 0.1.0
+    date: 2025-07-02
 
-  added:
-    - summary: A client for interacting with policy stores in Cerbos Hub
-      pulls: [1173, 1191]
+    added:
+      - summary: A client for interacting with policy stores in Cerbos Hub
+        pulls: [1173, 1191]
 
 references:
   "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es
