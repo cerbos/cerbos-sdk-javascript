@@ -2,7 +2,11 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [`AccessLogEntry.policySource`](../../docs/core.accesslogentry.policysource.md) and [`DecisionLogEntry.policySource`](../../docs/core.decisionlogentry.policysource.md) properties ([#1193](https://github.com/cerbos/cerbos-sdk-javascript/pull/1193))
+
+  Requires a policy decision point server running Cerbos 0.46+.
 
 ## [0.22.1] - 2025-07-02
 

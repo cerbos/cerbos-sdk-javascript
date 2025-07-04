@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Set [`policySource`](../../docs/core.decisionlogentry.policysource.md) on log entries passed to [`onDecision`](../../docs/embedded.options.ondecision.md)" ([#1193](https://github.com/cerbos/cerbos-sdk-javascript/pull/1193))
 
 ## [0.12.1] - 2025-07-02
 

@@ -21,6 +21,7 @@ export interface AccessLogEntry {
   method: string;
   statusCode: number;
   oversized: boolean;
+  policySource: PolicySource | undefined;
 }
 
 export interface AccessLogEntry_MetadataEntry {
@@ -48,6 +49,7 @@ export interface DecisionLogEntry {
   metadata: { [key: string]: MetaValues };
   auditTrail: AuditTrail | undefined;
   oversized: boolean;
+  policySource: PolicySource | undefined;
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -87,6 +89,108 @@ export interface AuditTrail_EffectivePoliciesEntry {
   value: SourceAttributes | undefined;
 }
 
+export interface PolicySource {
+  source?:
+    | { $case: "blob"; blob: PolicySource_Blob }
+    | { $case: "database"; database: PolicySource_Database }
+    | { $case: "disk"; disk: PolicySource_Disk }
+    | { $case: "git"; git: PolicySource_Git }
+    | { $case: "hub"; hub: PolicySource_Hub }
+    | { $case: "embeddedPdp"; embeddedPdp: PolicySource_EmbeddedPDP }
+    | undefined;
+}
+
+export interface PolicySource_Blob {
+  bucketUrl: string;
+  prefix: string;
+}
+
+export interface PolicySource_Database {
+  driver: PolicySource_Database_Driver;
+}
+
+export enum PolicySource_Database_Driver {
+  DRIVER_UNSPECIFIED = 0,
+  DRIVER_MYSQL = 1,
+  DRIVER_POSTGRES = 2,
+  DRIVER_SQLITE3 = 3,
+}
+
+export function policySource_Database_DriverFromJSON(
+  object: any,
+): PolicySource_Database_Driver {
+  switch (object) {
+    case 0:
+    case "DRIVER_UNSPECIFIED":
+      return PolicySource_Database_Driver.DRIVER_UNSPECIFIED;
+    case 1:
+    case "DRIVER_MYSQL":
+      return PolicySource_Database_Driver.DRIVER_MYSQL;
+    case 2:
+    case "DRIVER_POSTGRES":
+      return PolicySource_Database_Driver.DRIVER_POSTGRES;
+    case 3:
+    case "DRIVER_SQLITE3":
+      return PolicySource_Database_Driver.DRIVER_SQLITE3;
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum PolicySource_Database_Driver",
+      );
+  }
+}
+
+export function policySource_Database_DriverToJSON(
+  object: PolicySource_Database_Driver,
+): string {
+  switch (object) {
+    case PolicySource_Database_Driver.DRIVER_UNSPECIFIED:
+      return "DRIVER_UNSPECIFIED";
+    case PolicySource_Database_Driver.DRIVER_MYSQL:
+      return "DRIVER_MYSQL";
+    case PolicySource_Database_Driver.DRIVER_POSTGRES:
+      return "DRIVER_POSTGRES";
+    case PolicySource_Database_Driver.DRIVER_SQLITE3:
+      return "DRIVER_SQLITE3";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum PolicySource_Database_Driver",
+      );
+  }
+}
+
+export interface PolicySource_Disk {
+  directory: string;
+}
+
+export interface PolicySource_EmbeddedPDP {
+  url: string;
+  commitHash: string;
+  builtAt: Date | undefined;
+}
+
+export interface PolicySource_Git {
+  repositoryUrl: string;
+  branch: string;
+  subdirectory: string;
+}
+
+export interface PolicySource_Hub {
+  source?:
+    | { $case: "label"; label: string }
+    | { $case: "deploymentId"; deploymentId: string }
+    | { $case: "playgroundId"; playgroundId: string }
+    | { $case: "localBundle"; localBundle: PolicySource_Hub_LocalBundle }
+    | undefined;
+}
+
+export interface PolicySource_Hub_LocalBundle {
+  path: string;
+}
+
 export const AccessLogEntry: MessageFns<AccessLogEntry> = {
   fromJSON(object: any): AccessLogEntry {
     return {
@@ -111,6 +215,9 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
       oversized: isSet(object.oversized)
         ? globalThis.Boolean(object.oversized)
         : false,
+      policySource: isSet(object.policySource)
+        ? PolicySource.fromJSON(object.policySource)
+        : undefined,
     };
   },
 
@@ -142,6 +249,9 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
     }
     if (message.oversized !== false) {
       obj.oversized = message.oversized;
+    }
+    if (message.policySource !== undefined) {
+      obj.policySource = PolicySource.toJSON(message.policySource);
     }
     return obj;
   },
@@ -215,6 +325,9 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
       oversized: isSet(object.oversized)
         ? globalThis.Boolean(object.oversized)
         : false,
+      policySource: isSet(object.policySource)
+        ? PolicySource.fromJSON(object.policySource)
+        : undefined,
     };
   },
 
@@ -261,6 +374,9 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
     }
     if (message.oversized !== false) {
       obj.oversized = message.oversized;
+    }
+    if (message.policySource !== undefined) {
+      obj.policySource = PolicySource.toJSON(message.policySource);
     }
     return obj;
   },
@@ -446,6 +562,226 @@ export const AuditTrail_EffectivePoliciesEntry: MessageFns<AuditTrail_EffectiveP
       }
       if (message.value !== undefined) {
         obj.value = SourceAttributes.toJSON(message.value);
+      }
+      return obj;
+    },
+  };
+
+export const PolicySource: MessageFns<PolicySource> = {
+  fromJSON(object: any): PolicySource {
+    return {
+      source: isSet(object.blob)
+        ? { $case: "blob", blob: PolicySource_Blob.fromJSON(object.blob) }
+        : isSet(object.database)
+          ? {
+              $case: "database",
+              database: PolicySource_Database.fromJSON(object.database),
+            }
+          : isSet(object.disk)
+            ? { $case: "disk", disk: PolicySource_Disk.fromJSON(object.disk) }
+            : isSet(object.git)
+              ? { $case: "git", git: PolicySource_Git.fromJSON(object.git) }
+              : isSet(object.hub)
+                ? { $case: "hub", hub: PolicySource_Hub.fromJSON(object.hub) }
+                : isSet(object.embeddedPdp)
+                  ? {
+                      $case: "embeddedPdp",
+                      embeddedPdp: PolicySource_EmbeddedPDP.fromJSON(
+                        object.embeddedPdp,
+                      ),
+                    }
+                  : undefined,
+    };
+  },
+
+  toJSON(message: PolicySource): unknown {
+    const obj: any = {};
+    if (message.source?.$case === "blob") {
+      obj.blob = PolicySource_Blob.toJSON(message.source.blob);
+    } else if (message.source?.$case === "database") {
+      obj.database = PolicySource_Database.toJSON(message.source.database);
+    } else if (message.source?.$case === "disk") {
+      obj.disk = PolicySource_Disk.toJSON(message.source.disk);
+    } else if (message.source?.$case === "git") {
+      obj.git = PolicySource_Git.toJSON(message.source.git);
+    } else if (message.source?.$case === "hub") {
+      obj.hub = PolicySource_Hub.toJSON(message.source.hub);
+    } else if (message.source?.$case === "embeddedPdp") {
+      obj.embeddedPdp = PolicySource_EmbeddedPDP.toJSON(
+        message.source.embeddedPdp,
+      );
+    }
+    return obj;
+  },
+};
+
+export const PolicySource_Blob: MessageFns<PolicySource_Blob> = {
+  fromJSON(object: any): PolicySource_Blob {
+    return {
+      bucketUrl: isSet(object.bucketUrl)
+        ? globalThis.String(object.bucketUrl)
+        : "",
+      prefix: isSet(object.prefix) ? globalThis.String(object.prefix) : "",
+    };
+  },
+
+  toJSON(message: PolicySource_Blob): unknown {
+    const obj: any = {};
+    if (message.bucketUrl !== "") {
+      obj.bucketUrl = message.bucketUrl;
+    }
+    if (message.prefix !== "") {
+      obj.prefix = message.prefix;
+    }
+    return obj;
+  },
+};
+
+export const PolicySource_Database: MessageFns<PolicySource_Database> = {
+  fromJSON(object: any): PolicySource_Database {
+    return {
+      driver: isSet(object.driver)
+        ? policySource_Database_DriverFromJSON(object.driver)
+        : 0,
+    };
+  },
+
+  toJSON(message: PolicySource_Database): unknown {
+    const obj: any = {};
+    if (message.driver !== 0) {
+      obj.driver = policySource_Database_DriverToJSON(message.driver);
+    }
+    return obj;
+  },
+};
+
+export const PolicySource_Disk: MessageFns<PolicySource_Disk> = {
+  fromJSON(object: any): PolicySource_Disk {
+    return {
+      directory: isSet(object.directory)
+        ? globalThis.String(object.directory)
+        : "",
+    };
+  },
+
+  toJSON(message: PolicySource_Disk): unknown {
+    const obj: any = {};
+    if (message.directory !== "") {
+      obj.directory = message.directory;
+    }
+    return obj;
+  },
+};
+
+export const PolicySource_EmbeddedPDP: MessageFns<PolicySource_EmbeddedPDP> = {
+  fromJSON(object: any): PolicySource_EmbeddedPDP {
+    return {
+      url: isSet(object.url) ? globalThis.String(object.url) : "",
+      commitHash: isSet(object.commitHash)
+        ? globalThis.String(object.commitHash)
+        : "",
+      builtAt: isSet(object.builtAt)
+        ? fromJsonTimestamp(object.builtAt)
+        : undefined,
+    };
+  },
+
+  toJSON(message: PolicySource_EmbeddedPDP): unknown {
+    const obj: any = {};
+    if (message.url !== "") {
+      obj.url = message.url;
+    }
+    if (message.commitHash !== "") {
+      obj.commitHash = message.commitHash;
+    }
+    if (message.builtAt !== undefined) {
+      obj.builtAt = message.builtAt.toISOString();
+    }
+    return obj;
+  },
+};
+
+export const PolicySource_Git: MessageFns<PolicySource_Git> = {
+  fromJSON(object: any): PolicySource_Git {
+    return {
+      repositoryUrl: isSet(object.repositoryUrl)
+        ? globalThis.String(object.repositoryUrl)
+        : "",
+      branch: isSet(object.branch) ? globalThis.String(object.branch) : "",
+      subdirectory: isSet(object.subdirectory)
+        ? globalThis.String(object.subdirectory)
+        : "",
+    };
+  },
+
+  toJSON(message: PolicySource_Git): unknown {
+    const obj: any = {};
+    if (message.repositoryUrl !== "") {
+      obj.repositoryUrl = message.repositoryUrl;
+    }
+    if (message.branch !== "") {
+      obj.branch = message.branch;
+    }
+    if (message.subdirectory !== "") {
+      obj.subdirectory = message.subdirectory;
+    }
+    return obj;
+  },
+};
+
+export const PolicySource_Hub: MessageFns<PolicySource_Hub> = {
+  fromJSON(object: any): PolicySource_Hub {
+    return {
+      source: isSet(object.label)
+        ? { $case: "label", label: globalThis.String(object.label) }
+        : isSet(object.deploymentId)
+          ? {
+              $case: "deploymentId",
+              deploymentId: globalThis.String(object.deploymentId),
+            }
+          : isSet(object.playgroundId)
+            ? {
+                $case: "playgroundId",
+                playgroundId: globalThis.String(object.playgroundId),
+              }
+            : isSet(object.localBundle)
+              ? {
+                  $case: "localBundle",
+                  localBundle: PolicySource_Hub_LocalBundle.fromJSON(
+                    object.localBundle,
+                  ),
+                }
+              : undefined,
+    };
+  },
+
+  toJSON(message: PolicySource_Hub): unknown {
+    const obj: any = {};
+    if (message.source?.$case === "label") {
+      obj.label = message.source.label;
+    } else if (message.source?.$case === "deploymentId") {
+      obj.deploymentId = message.source.deploymentId;
+    } else if (message.source?.$case === "playgroundId") {
+      obj.playgroundId = message.source.playgroundId;
+    } else if (message.source?.$case === "localBundle") {
+      obj.localBundle = PolicySource_Hub_LocalBundle.toJSON(
+        message.source.localBundle,
+      );
+    }
+    return obj;
+  },
+};
+
+export const PolicySource_Hub_LocalBundle: MessageFns<PolicySource_Hub_LocalBundle> =
+  {
+    fromJSON(object: any): PolicySource_Hub_LocalBundle {
+      return { path: isSet(object.path) ? globalThis.String(object.path) : "" };
+    },
+
+    toJSON(message: PolicySource_Hub_LocalBundle): unknown {
+      const obj: any = {};
+      if (message.path !== "") {
+        obj.path = message.path;
       }
       return obj;
     },
