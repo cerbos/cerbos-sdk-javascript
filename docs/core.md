@@ -161,6 +161,17 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[DatabaseDriver](./core.databasedriver.md)
+
+
+</td><td>
+
+Driver used to load policies from a database.
+
+
+</td></tr>
+<tr><td>
+
 [Effect](./core.effect.md)
 
 
@@ -501,6 +512,116 @@ Type guard to check if a [Policy](./core.policy.md) is a [ResourcePolicy](./core
 </td><td>
 
 **_(ALPHA)_**
+
+
+</td></tr>
+<tr><td>
+
+[policySourceIsBlob(source)](./core.policysourceisblob.md)
+
+
+</td><td>
+
+Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceBlob](./core.policysourceblob.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[policySourceIsDatabase(source)](./core.policysourceisdatabase.md)
+
+
+</td><td>
+
+Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceDatabase](./core.policysourcedatabase.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[policySourceIsDisk(source)](./core.policysourceisdisk.md)
+
+
+</td><td>
+
+Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceDisk](./core.policysourcedisk.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[policySourceIsEmbeddedPDP(source)](./core.policysourceisembeddedpdp.md)
+
+
+</td><td>
+
+Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceEmbeddedPDP](./core.policysourceembeddedpdp.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[policySourceIsGit(source)](./core.policysourceisgit.md)
+
+
+</td><td>
+
+Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceGit](./core.policysourcegit.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[policySourceIsHub(source)](./core.policysourceishub.md)
+
+
+</td><td>
+
+Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHub](./core.policysourcehub.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[policySourceIsHubDeployment(source)](./core.policysourceishubdeployment.md)
+
+
+</td><td>
+
+Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHubDeployment](./core.policysourcehubdeployment.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[policySourceIsHubLabel(source)](./core.policysourceishublabel.md)
+
+
+</td><td>
+
+Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHubLabel](./core.policysourcehublabel.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[policySourceIsHubLocalBundle(source)](./core.policysourceishublocalbundle.md)
+
+
+</td><td>
+
+Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHubLocalBundle](./core.policysourcehublocalbundle.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[policySourceIsHubPlayground(source)](./core.policysourceishubplayground.md)
+
+
+</td><td>
+
+Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHubPlayground](./core.policysourcehubplayground.md)<!-- -->.
 
 
 </td></tr>
@@ -1126,6 +1247,17 @@ A list of available schema IDs.
 </td></tr>
 <tr><td>
 
+[LocalBundle](./core.localbundle.md)
+
+
+</td><td>
+
+A policy bundle downloaded from [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) and saved locally.
+
+
+</td></tr>
+<tr><td>
+
 [MatchAll](./core.matchall.md)
 
 
@@ -1374,6 +1506,116 @@ Common fields between different [Policy](./core.policy.md) types.
 </td><td>
 
 Metadata describing a policy.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceBlob](./core.policysourceblob.md)
+
+
+</td><td>
+
+Policies sourced from Amazon-S3-compatible storage using the [\`blob\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#blob-driver)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceDatabase](./core.policysourcedatabase.md)
+
+
+</td><td>
+
+Policies sourced from a database using the [\`mysql\`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#mysql)<!-- -->, [\`postgres\`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#postgres)<!-- -->, or [\`sqlite3\`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#sqlite3) storage drivers.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceDisk](./core.policysourcedisk.md)
+
+
+</td><td>
+
+Policies sourced from a directory on the filesystem using the [\`disk\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#disk-driver)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceEmbeddedPDP](./core.policysourceembeddedpdp.md)
+
+
+</td><td>
+
+Policies sourced from an [embedded policy decision point](https://docs.cerbos.dev/cerbos-hub/legacy/decision-points-embedded)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceGit](./core.policysourcegit.md)
+
+
+</td><td>
+
+Policies sourced from a Git repository using the [\`git\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#git-driver)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceHubBase](./core.policysourcehubbase.md)
+
+
+</td><td>
+
+Common fields between different [PolicySourceHub](./core.policysourcehub.md) types.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceHubDeployment](./core.policysourcehubdeployment.md)
+
+
+</td><td>
+
+Policies sourced from a deployment in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceHubLabel](./core.policysourcehublabel.md)
+
+
+</td><td>
+
+Policies sourced from a [label](https://docs.cerbos.dev/cerbos-hub/legacy/deployment-labels) in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceHubLocalBundle](./core.policysourcehublocalbundle.md)
+
+
+</td><td>
+
+Policies sourced from a local policy bundle using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceHubPlayground](./core.policysourcehubplayground.md)
+
+
+</td><td>
+
+Policies sourced from a [playground](https://docs.cerbos.dev/cerbos-hub/playground) in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
 
 
 </td></tr>
@@ -1752,6 +1994,28 @@ A query plan that can be used to obtain a list of resources on which a principal
 </td><td>
 
 A [policy](https://docs.cerbos.dev/cerbos/latest/policies/) definition.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySource](./core.policysource.md)
+
+
+</td><td>
+
+Source of policies.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceHub](./core.policysourcehub.md)
+
+
+</td><td>
+
+Policies sourced from [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
 
 
 </td></tr>

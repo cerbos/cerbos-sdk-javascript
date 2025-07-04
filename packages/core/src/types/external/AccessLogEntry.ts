@@ -1,4 +1,5 @@
 import type { Peer } from "./Peer";
+import type { PolicySource } from "./PolicySource";
 import type { Status } from "./Status";
 
 /**
@@ -41,4 +42,12 @@ export interface AccessLogEntry {
    * Whether the log entry was truncated because it was too large.
    */
   oversized: boolean;
+
+  /**
+   * Where the policy decision point server sourced its policies.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.46.
+   */
+  policySource: PolicySource | undefined;
 }

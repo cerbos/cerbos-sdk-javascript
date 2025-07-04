@@ -116,6 +116,12 @@ export class DecisionLogger {
         forwardedFor: "",
         userAgent: this.userAgent,
       },
+      policySource: {
+        kind: "embeddedPDP",
+        url: bundleMetadata.url ?? "",
+        commit: bundleMetadata.commit,
+        builtAt: bundleMetadata.builtAt,
+      },
     });
   }
 }

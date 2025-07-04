@@ -19,6 +19,7 @@ import type {
   OutputResult,
   Peer,
   PlanResourcesRequest,
+  PolicySource,
   Principal,
   ValidationError,
 } from "@cerbos/core";
@@ -150,6 +151,11 @@ describe("Client", () => {
           userAgent: expectedUserAgent,
         };
 
+        const expectedPolicySource: PolicySource | undefined =
+          cerbosVersionIsAtLeast("0.46.0")
+            ? { kind: "disk", directory: "/policies" }
+            : undefined;
+
         type WithTimestampMatcher<T> = Omit<T, "timestamp"> & {
           timestamp: ReturnType<typeof expect.any>;
         };
@@ -225,6 +231,7 @@ describe("Client", () => {
               method: "/cerbos.svc.v1.CerbosService/CheckResources",
               statusCode: Status.OK,
               oversized: false,
+              policySource: expectedPolicySource,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
@@ -232,6 +239,7 @@ describe("Client", () => {
               peer: expectedPeer,
               metadata: expectedMetadata,
               oversized: false,
+              policySource: expectedPolicySource,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {
@@ -370,6 +378,7 @@ describe("Client", () => {
               method: "/cerbos.svc.v1.CerbosService/PlanResources",
               statusCode: Status.OK,
               oversized: false,
+              policySource: expectedPolicySource,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
@@ -377,6 +386,7 @@ describe("Client", () => {
               peer: expectedPeer,
               metadata: expectedMetadata,
               oversized: false,
+              policySource: expectedPolicySource,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {
@@ -442,6 +452,7 @@ describe("Client", () => {
               method: "/cerbos.svc.v1.CerbosService/PlanResources",
               statusCode: Status.OK,
               oversized: false,
+              policySource: expectedPolicySource,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
@@ -449,6 +460,7 @@ describe("Client", () => {
               peer: expectedPeer,
               metadata: expectedMetadata,
               oversized: false,
+              policySource: expectedPolicySource,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {
