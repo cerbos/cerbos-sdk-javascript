@@ -1,7 +1,3 @@
-import type { AuditLogFilterBetween } from "./AuditLogFilterBetween";
-import type { AuditLogFilterSince } from "./AuditLogFilterSince";
-import type { AuditLogFilterTail } from "./AuditLogFilterTail";
-
 /**
  * Criteria to match audit log entries.
  *
@@ -11,6 +7,23 @@ export type AuditLogFilter =
   | AuditLogFilterBetween
   | AuditLogFilterSince
   | AuditLogFilterTail;
+
+/**
+ * Match audit log entries captured between two timestamps.
+ *
+ * @public
+ */
+export interface AuditLogFilterBetween {
+  /**
+   * Timestamp from which entries should be returned.
+   */
+  start: Date;
+
+  /**
+   * Timestamp before which entries should be returned.
+   */
+  end: Date;
+}
 
 /**
  * Type guard to check if an {@link AuditLogFilter} is an {@link AuditLogFilterBetween}.
@@ -24,6 +37,18 @@ export function auditLogFilterIsBetween(
 }
 
 /**
+ * Match the audit log entries captured since N seconds ago.
+ *
+ * @public
+ */
+export interface AuditLogFilterSince {
+  /**
+   * The maximum age (in seconds) of entries to return.
+   */
+  since: number;
+}
+
+/**
  * Type guard to check if an {@link AuditLogFilter} is an {@link AuditLogFilterSince}.
  *
  * @public
@@ -32,6 +57,18 @@ export function auditLogFilterIsSince(
   filter: AuditLogFilter,
 ): filter is AuditLogFilterSince {
   return "since" in filter;
+}
+
+/**
+ * Match the last N audit log entries.
+ *
+ * @public
+ */
+export interface AuditLogFilterTail {
+  /**
+   * The maximum number of entries to return.
+   */
+  tail: number;
 }
 
 /**

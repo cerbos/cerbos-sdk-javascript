@@ -20,6 +20,7 @@ export interface AccessLogEntry {
   method: string;
   statusCode: number;
   oversized: boolean;
+  policySource: PolicySource | undefined;
 }
 
 export interface AccessLogEntry_MetadataEntry {
@@ -47,6 +48,7 @@ export interface DecisionLogEntry {
   metadata: { [key: string]: MetaValues };
   auditTrail: AuditTrail | undefined;
   oversized: boolean;
+  policySource: PolicySource | undefined;
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -84,4 +86,60 @@ export interface AuditTrail {
 export interface AuditTrail_EffectivePoliciesEntry {
   key: string;
   value: SourceAttributes | undefined;
+}
+
+export interface PolicySource {
+  source?:
+    | { $case: "blob"; blob: PolicySource_Blob }
+    | { $case: "database"; database: PolicySource_Database }
+    | { $case: "disk"; disk: PolicySource_Disk }
+    | { $case: "git"; git: PolicySource_Git }
+    | { $case: "hub"; hub: PolicySource_Hub }
+    | { $case: "embeddedPdp"; embeddedPdp: PolicySource_EmbeddedPDP }
+    | undefined;
+}
+
+export interface PolicySource_Blob {
+  bucketUrl: string;
+  prefix: string;
+}
+
+export interface PolicySource_Database {
+  driver: PolicySource_Database_Driver;
+}
+
+export enum PolicySource_Database_Driver {
+  DRIVER_UNSPECIFIED = 0,
+  DRIVER_MYSQL = 1,
+  DRIVER_POSTGRES = 2,
+  DRIVER_SQLITE3 = 3,
+}
+
+export interface PolicySource_Disk {
+  directory: string;
+}
+
+export interface PolicySource_EmbeddedPDP {
+  url: string;
+  commitHash: string;
+  builtAt: Date | undefined;
+}
+
+export interface PolicySource_Git {
+  repositoryUrl: string;
+  branch: string;
+  subdirectory: string;
+}
+
+export interface PolicySource_Hub {
+  source?:
+    | { $case: "label"; label: string }
+    | { $case: "deploymentId"; deploymentId: string }
+    | { $case: "playgroundId"; playgroundId: string }
+    | { $case: "localBundle"; localBundle: PolicySource_Hub_LocalBundle }
+    | undefined;
+}
+
+export interface PolicySource_Hub_LocalBundle {
+  path: string;
 }

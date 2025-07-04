@@ -39,9 +39,9 @@ describe("loaders", () => {
   });
 
   describe("Loader", () => {
-    test.each<[type: string, source: () => Source]>([
-      ["string", (): string => server.url],
-      ["URL", (): URL => new URL(server.url)],
+    test.each<[type: string, source: () => Source, url?: () => string]>([
+      ["string", (): string => server.url, (): string => server.url],
+      ["URL", (): URL => new URL(server.url), (): string => server.url],
       ["ArrayBuffer", (): ArrayBuffer => readFileSync(first.path)],
       [
         "Promise<ArrayBuffer>",
@@ -61,6 +61,7 @@ describe("loaders", () => {
       [
         "Promise<Response>",
         async (): Promise<Response> => await fetch(server.url),
+        (): string => `${server.url}bundle/${first.metadata.commit}.wasm`,
       ],
       [
         "WebAssembly.Module",
@@ -72,12 +73,16 @@ describe("loaders", () => {
         async (): Promise<WebAssembly.Module> =>
           await WebAssembly.compile(await readFile(first.path)),
       ],
-    ])("%s", async (_, source) => {
+    ])("%s", async (_, source, url) => {
       const callbacks = new Callbacks();
       const loader = new Loader(source(), callbacks);
 
       const active = await loader.active();
-      expect(active).toEqual(first.metadata);
+      expect(active).toEqual({
+        ...first.metadata,
+        url: url?.(),
+      });
+
       expect(await callbacks.next()).toBe(active);
     });
 
@@ -109,14 +114,14 @@ describe("loaders", () => {
       const loader = new AutoUpdatingLoader(server.url, callbacks);
 
       const loadedFirst = await callbacks.next();
-      expect(loadedFirst).toEqual(first.metadata);
+      expect(loadedFirst).toEqual({ ...first.metadata, url: server.url });
       expect(await loader.active()).toBe(loadedFirst);
       expect(loader.pending).toBeUndefined();
 
       server.bundle = second;
 
       const loadedSecond = await callbacks.next();
-      expect(loadedSecond).toEqual(second.metadata);
+      expect(loadedSecond).toEqual({ ...second.metadata, url: server.url });
       expect(await loader.active()).toBe(loadedSecond);
       expect(loader.pending).toBeUndefined();
 
@@ -140,14 +145,14 @@ describe("loaders", () => {
       });
 
       const loadedFirst = await callbacks.next();
-      expect(loadedFirst).toEqual(first.metadata);
+      expect(loadedFirst).toEqual({ ...first.metadata, url: server.url });
       expect(await loader.active()).toBe(loadedFirst);
       expect(loader.pending).toBeUndefined();
 
       server.bundle = second;
 
       const loadedSecond = await callbacks.next();
-      expect(loadedSecond).toEqual(second.metadata);
+      expect(loadedSecond).toEqual({ ...second.metadata, url: server.url });
       expect(await loader.active()).toBe(loadedFirst);
       expect(loader.pending).toBe(loadedSecond);
 
@@ -176,7 +181,7 @@ describe("loaders", () => {
       const loader = new AutoUpdatingLoader(server.url, callbacks);
 
       const loaded = await callbacks.next();
-      expect(loaded).toEqual(first.metadata);
+      expect(loaded).toEqual({ ...first.metadata, url: server.url });
       expect(await loader.active()).toBe(loaded);
 
       server.bundle = second;
@@ -233,11 +238,11 @@ class DummyServer {
 
   public get url(): string {
     const { port } = this.server.address() as AddressInfo;
-    return `http://localhost:${port}`;
+    return `http://localhost:${port}/`;
   }
 
   public get errorMessage(): string {
-    return `Failed to download from ${this.url}/: HTTP 500`;
+    return `Failed to download from ${this.url}: HTTP 500`;
   }
 
   public async start(): Promise<void> {

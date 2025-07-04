@@ -42,7 +42,7 @@ ALLOW
 
 </td><td>
 
-The action should be allowed.
+The action is allowed.
 
 
 </td></tr>
@@ -58,7 +58,7 @@ DENY
 
 </td><td>
 
-The action should be denied.
+The action is denied.
 
 
 </td></tr>

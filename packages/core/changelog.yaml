@@ -1,3 +1,11 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: "[`AccessLogEntry.policySource`](../../docs/core.accesslogentry.policysource.md) and [`DecisionLogEntry.policySource`](../../docs/core.decisionlogentry.policysource.md) properties"
+      details: Requires a policy decision point server running Cerbos 0.46+.
+      pull: 1193
+
 releases:
   - version: 0.23.0
     date: 2025-07-02

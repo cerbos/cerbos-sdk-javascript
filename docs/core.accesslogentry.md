@@ -132,6 +132,25 @@ Details of the client who made the logged request.
 </td></tr>
 <tr><td>
 
+[policySource](./core.accesslogentry.policysource.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[PolicySource](./core.policysource.md) \| undefined
+
+
+</td><td>
+
+Where the policy decision point server sourced its policies.
+
+
+</td></tr>
+<tr><td>
+
 [statusCode](./core.accesslogentry.statuscode.md)
 
 

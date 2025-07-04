@@ -7,7 +7,16 @@ import type {
   DecisionLogEntry_PlanResources,
   MetaValues,
   Peer as PeerProtobuf,
+  PolicySource as PolicySourceProtobuf,
+  PolicySource_Blob,
+  PolicySource_Database,
+  PolicySource_Disk,
+  PolicySource_EmbeddedPDP,
+  PolicySource_Git,
+  PolicySource_Hub,
+  PolicySource_Hub_LocalBundle,
 } from "../protobuf/cerbos/audit/v1/audit";
+import { PolicySource_Database_Driver } from "../protobuf/cerbos/audit/v1/audit";
 import { Effect as EffectProtobuf } from "../protobuf/cerbos/effect/v1/effect";
 import type {
   AuxData as AuxDataProtobuf,
@@ -112,6 +121,7 @@ import type {
   InspectedVariable,
   ListPoliciesResponse,
   ListSchemasResponse,
+  LocalBundle,
   Match,
   Matches,
   Output,
@@ -127,6 +137,18 @@ import type {
   Policy,
   PolicyBase,
   PolicyMetadata,
+  PolicySource,
+  PolicySourceBlob,
+  PolicySourceDatabase,
+  PolicySourceDisk,
+  PolicySourceEmbeddedPDP,
+  PolicySourceGit,
+  PolicySourceHub,
+  PolicySourceHubBase,
+  PolicySourceHubDeployment,
+  PolicySourceHubLabel,
+  PolicySourceHubLocalBundle,
+  PolicySourceHubPlayground,
   Principal,
   PrincipalPolicy,
   PrincipalRule,
@@ -148,6 +170,7 @@ import type {
 import {
   CheckResourcesResponse,
   CheckResourcesResult,
+  DatabaseDriver,
   Effect,
   InspectedAttributeKind,
   InspectedConstantKind,
@@ -169,8 +192,16 @@ export function accessLogEntryFromProtobuf({
 }: ListAuditLogEntriesResponse): AccessLogEntry {
   requireOneOf("ListAuditLogEntriesResponse.entry", entry, "accessLogEntry");
 
-  const { callId, timestamp, peer, metadata, method, statusCode, oversized } =
-    entry.accessLogEntry;
+  const {
+    callId,
+    timestamp,
+    peer,
+    metadata,
+    method,
+    statusCode,
+    oversized,
+    policySource,
+  } = entry.accessLogEntry;
 
   requireField("AccessLogEntry.timestamp", timestamp);
   requireField("AccessLogEntry.peer", peer);
@@ -183,6 +214,7 @@ export function accessLogEntryFromProtobuf({
     method,
     statusCode,
     oversized,
+    policySource: policySource && policySourceFromProtobuf(policySource),
   };
 }
 
@@ -191,8 +223,16 @@ export function decisionLogEntryFromProtobuf({
 }: ListAuditLogEntriesResponse): DecisionLogEntry {
   requireOneOf("ListAuditLogEntriesResponse.entry", entry, "decisionLogEntry");
 
-  const { callId, timestamp, peer, metadata, auditTrail, method, oversized } =
-    entry.decisionLogEntry;
+  const {
+    callId,
+    timestamp,
+    peer,
+    metadata,
+    auditTrail,
+    method,
+    oversized,
+    policySource,
+  } = entry.decisionLogEntry;
 
   requireField("DecisionLogEntry.timestamp", timestamp);
   requireField("DecisionLogEntry.peer", peer);
@@ -205,6 +245,7 @@ export function decisionLogEntryFromProtobuf({
     auditTrail: auditTrailFromProtobuf(auditTrail),
     method: decisionLogEntryMethodFromProtobuf(method),
     oversized,
+    policySource: policySource && policySourceFromProtobuf(policySource),
   };
 }
 
@@ -241,6 +282,143 @@ function auditTrailFromProtobuf(
       ]),
     ),
   };
+}
+
+function policySourceFromProtobuf({
+  source,
+}: PolicySourceProtobuf): PolicySource {
+  return transformOneOf("PolicySource.source", source, {
+    blob: ({ blob }) => policySourceBlobFromProtobuf(blob),
+    database: ({ database }) => policySourceDatabaseFromProtobuf(database),
+    disk: ({ disk }) => policySourceDiskFromProtobuf(disk),
+    embeddedPdp: ({ embeddedPdp }) =>
+      policySourceEmbeddedPDPFromProtobuf(embeddedPdp),
+    git: ({ git }) => policySourceGitFromProtobuf(git),
+    hub: ({ hub }) => policySourceHubFromProtobuf(hub),
+  });
+}
+
+function policySourceBlobFromProtobuf({
+  bucketUrl,
+  prefix,
+}: PolicySource_Blob): PolicySourceBlob {
+  return {
+    kind: "blob",
+    bucketUrl,
+    prefix,
+  };
+}
+
+function policySourceDatabaseFromProtobuf({
+  driver,
+}: PolicySource_Database): PolicySourceDatabase {
+  return {
+    kind: "database",
+    driver: translateEnum(
+      "PolicySource.Database.Driver",
+      PolicySource_Database_Driver,
+      driver,
+      {
+        [PolicySource_Database_Driver.DRIVER_UNSPECIFIED]: unexpected,
+        [PolicySource_Database_Driver.DRIVER_MYSQL]: DatabaseDriver.MYSQL,
+        [PolicySource_Database_Driver.DRIVER_POSTGRES]: DatabaseDriver.POSTGRES,
+        [PolicySource_Database_Driver.DRIVER_SQLITE3]: DatabaseDriver.SQLITE3,
+      },
+    ),
+  };
+}
+
+function policySourceDiskFromProtobuf({
+  directory,
+}: PolicySource_Disk): PolicySourceDisk {
+  return {
+    kind: "disk",
+    directory,
+  };
+}
+
+function policySourceEmbeddedPDPFromProtobuf({
+  url,
+  commitHash,
+  builtAt,
+}: PolicySource_EmbeddedPDP): PolicySourceEmbeddedPDP {
+  return {
+    kind: "embeddedPDP",
+    url,
+    commit: commitHash,
+    builtAt,
+  };
+}
+
+function policySourceGitFromProtobuf({
+  repositoryUrl,
+  branch,
+  subdirectory,
+}: PolicySource_Git): PolicySourceGit {
+  return {
+    kind: "git",
+    repositoryUrl,
+    branch,
+    subdirectory,
+  };
+}
+
+function policySourceHubFromProtobuf({
+  source,
+}: PolicySource_Hub): PolicySourceHub {
+  return {
+    kind: "hub",
+    ...policySourceHubSourceFromProtobuf(source),
+  };
+}
+
+type OmitPolicySourceHubBase<T extends PolicySourceHub> = OmitFromEach<
+  T,
+  keyof PolicySourceHubBase
+>;
+
+function policySourceHubSourceFromProtobuf(
+  source: PolicySource_Hub["source"],
+): OmitPolicySourceHubBase<PolicySourceHub> {
+  return transformOneOf("PolicySource.Hub.source", source, {
+    label: ({ label }) => policySourceHubLabelFromProtobuf(label),
+    deploymentId: ({ deploymentId }) =>
+      policySourceHubDeploymentFromProtobuf(deploymentId),
+    playgroundId: ({ playgroundId }) =>
+      policySourceHubPlaygroundFromProtobuf(playgroundId),
+    localBundle: ({ localBundle }) =>
+      policySourceHubLocalBundleFromProtobuf(localBundle),
+  });
+}
+
+function policySourceHubLabelFromProtobuf(
+  label: string,
+): OmitPolicySourceHubBase<PolicySourceHubLabel> {
+  return { label };
+}
+
+function policySourceHubDeploymentFromProtobuf(
+  deploymentId: string,
+): OmitPolicySourceHubBase<PolicySourceHubDeployment> {
+  return { deploymentId };
+}
+
+function policySourceHubPlaygroundFromProtobuf(
+  playgroundId: string,
+): OmitPolicySourceHubBase<PolicySourceHubPlayground> {
+  return { playgroundId };
+}
+
+function policySourceHubLocalBundleFromProtobuf(
+  localBundle: PolicySource_Hub_LocalBundle,
+): OmitPolicySourceHubBase<PolicySourceHubLocalBundle> {
+  return { localBundle: localBundleFromProtobuf(localBundle) };
+}
+
+function localBundleFromProtobuf({
+  path,
+}: PolicySource_Hub_LocalBundle): LocalBundle {
+  return { path };
 }
 
 function decisionLogEntryMethodFromProtobuf(

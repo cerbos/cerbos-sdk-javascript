@@ -5,12 +5,12 @@
  */
 export enum Effect {
   /**
-   * The action should be allowed.
+   * The action is allowed.
    */
   ALLOW = "EFFECT_ALLOW",
 
   /**
-   * The action should be denied.
+   * The action is denied.
    */
   DENY = "EFFECT_DENY",
 }

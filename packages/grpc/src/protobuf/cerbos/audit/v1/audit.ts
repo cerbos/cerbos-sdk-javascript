@@ -22,6 +22,7 @@ export interface AccessLogEntry {
   method: string;
   statusCode: number;
   oversized: boolean;
+  policySource: PolicySource | undefined;
 }
 
 export interface AccessLogEntry_MetadataEntry {
@@ -49,6 +50,7 @@ export interface DecisionLogEntry {
   metadata: { [key: string]: MetaValues };
   auditTrail: AuditTrail | undefined;
   oversized: boolean;
+  policySource: PolicySource | undefined;
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -88,6 +90,62 @@ export interface AuditTrail_EffectivePoliciesEntry {
   value: SourceAttributes | undefined;
 }
 
+export interface PolicySource {
+  source?:
+    | { $case: "blob"; blob: PolicySource_Blob }
+    | { $case: "database"; database: PolicySource_Database }
+    | { $case: "disk"; disk: PolicySource_Disk }
+    | { $case: "git"; git: PolicySource_Git }
+    | { $case: "hub"; hub: PolicySource_Hub }
+    | { $case: "embeddedPdp"; embeddedPdp: PolicySource_EmbeddedPDP }
+    | undefined;
+}
+
+export interface PolicySource_Blob {
+  bucketUrl: string;
+  prefix: string;
+}
+
+export interface PolicySource_Database {
+  driver: PolicySource_Database_Driver;
+}
+
+export enum PolicySource_Database_Driver {
+  DRIVER_UNSPECIFIED = 0,
+  DRIVER_MYSQL = 1,
+  DRIVER_POSTGRES = 2,
+  DRIVER_SQLITE3 = 3,
+}
+
+export interface PolicySource_Disk {
+  directory: string;
+}
+
+export interface PolicySource_EmbeddedPDP {
+  url: string;
+  commitHash: string;
+  builtAt: Date | undefined;
+}
+
+export interface PolicySource_Git {
+  repositoryUrl: string;
+  branch: string;
+  subdirectory: string;
+}
+
+export interface PolicySource_Hub {
+  source?:
+    | { $case: "label"; label: string }
+    | { $case: "deploymentId"; deploymentId: string }
+    | { $case: "playgroundId"; playgroundId: string }
+    | { $case: "localBundle"; localBundle: PolicySource_Hub_LocalBundle }
+    | undefined;
+}
+
+export interface PolicySource_Hub_LocalBundle {
+  path: string;
+}
+
 function createBaseAccessLogEntry(): AccessLogEntry {
   return {
     callId: "",
@@ -97,6 +155,7 @@ function createBaseAccessLogEntry(): AccessLogEntry {
     method: "",
     statusCode: 0,
     oversized: false,
+    policySource: undefined,
   };
 }
 
@@ -131,6 +190,12 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
     }
     if (message.oversized !== false) {
       writer.uint32(56).bool(message.oversized);
+    }
+    if (message.policySource !== undefined) {
+      PolicySource.encode(
+        message.policySource,
+        writer.uint32(66).fork(),
+      ).join();
     }
     return writer;
   },
@@ -205,6 +270,14 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
           }
 
           message.oversized = reader.bool();
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.policySource = PolicySource.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -285,6 +358,7 @@ function createBaseDecisionLogEntry(): DecisionLogEntry {
     metadata: {},
     auditTrail: undefined,
     oversized: false,
+    policySource: undefined,
   };
 }
 
@@ -339,6 +413,12 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
     }
     if (message.oversized !== false) {
       writer.uint32(136).bool(message.oversized);
+    }
+    if (message.policySource !== undefined) {
+      PolicySource.encode(
+        message.policySource,
+        writer.uint32(146).fork(),
+      ).join();
     }
     return writer;
   },
@@ -457,6 +537,14 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
           }
 
           message.oversized = reader.bool();
+          continue;
+        }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.policySource = PolicySource.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -877,6 +965,550 @@ export const AuditTrail_EffectivePoliciesEntry: MessageFns<AuditTrail_EffectiveP
             }
 
             message.value = SourceAttributes.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+  };
+
+function createBasePolicySource(): PolicySource {
+  return { source: undefined };
+}
+
+export const PolicySource: MessageFns<PolicySource> = {
+  encode(
+    message: PolicySource,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    switch (message.source?.$case) {
+      case "blob":
+        PolicySource_Blob.encode(
+          message.source.blob,
+          writer.uint32(10).fork(),
+        ).join();
+        break;
+      case "database":
+        PolicySource_Database.encode(
+          message.source.database,
+          writer.uint32(18).fork(),
+        ).join();
+        break;
+      case "disk":
+        PolicySource_Disk.encode(
+          message.source.disk,
+          writer.uint32(26).fork(),
+        ).join();
+        break;
+      case "git":
+        PolicySource_Git.encode(
+          message.source.git,
+          writer.uint32(34).fork(),
+        ).join();
+        break;
+      case "hub":
+        PolicySource_Hub.encode(
+          message.source.hub,
+          writer.uint32(42).fork(),
+        ).join();
+        break;
+      case "embeddedPdp":
+        PolicySource_EmbeddedPDP.encode(
+          message.source.embeddedPdp,
+          writer.uint32(50).fork(),
+        ).join();
+        break;
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PolicySource {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePolicySource();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.source = {
+            $case: "blob",
+            blob: PolicySource_Blob.decode(reader, reader.uint32()),
+          };
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.source = {
+            $case: "database",
+            database: PolicySource_Database.decode(reader, reader.uint32()),
+          };
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.source = {
+            $case: "disk",
+            disk: PolicySource_Disk.decode(reader, reader.uint32()),
+          };
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.source = {
+            $case: "git",
+            git: PolicySource_Git.decode(reader, reader.uint32()),
+          };
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.source = {
+            $case: "hub",
+            hub: PolicySource_Hub.decode(reader, reader.uint32()),
+          };
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.source = {
+            $case: "embeddedPdp",
+            embeddedPdp: PolicySource_EmbeddedPDP.decode(
+              reader,
+              reader.uint32(),
+            ),
+          };
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBasePolicySource_Blob(): PolicySource_Blob {
+  return { bucketUrl: "", prefix: "" };
+}
+
+export const PolicySource_Blob: MessageFns<PolicySource_Blob> = {
+  encode(
+    message: PolicySource_Blob,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.bucketUrl !== "") {
+      writer.uint32(10).string(message.bucketUrl);
+    }
+    if (message.prefix !== "") {
+      writer.uint32(18).string(message.prefix);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PolicySource_Blob {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePolicySource_Blob();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.bucketUrl = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.prefix = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBasePolicySource_Database(): PolicySource_Database {
+  return { driver: 0 };
+}
+
+export const PolicySource_Database: MessageFns<PolicySource_Database> = {
+  encode(
+    message: PolicySource_Database,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.driver !== 0) {
+      writer.uint32(8).int32(message.driver);
+    }
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PolicySource_Database {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePolicySource_Database();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.driver = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBasePolicySource_Disk(): PolicySource_Disk {
+  return { directory: "" };
+}
+
+export const PolicySource_Disk: MessageFns<PolicySource_Disk> = {
+  encode(
+    message: PolicySource_Disk,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.directory !== "") {
+      writer.uint32(10).string(message.directory);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PolicySource_Disk {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePolicySource_Disk();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.directory = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBasePolicySource_EmbeddedPDP(): PolicySource_EmbeddedPDP {
+  return { url: "", commitHash: "", builtAt: undefined };
+}
+
+export const PolicySource_EmbeddedPDP: MessageFns<PolicySource_EmbeddedPDP> = {
+  encode(
+    message: PolicySource_EmbeddedPDP,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.url !== "") {
+      writer.uint32(10).string(message.url);
+    }
+    if (message.commitHash !== "") {
+      writer.uint32(18).string(message.commitHash);
+    }
+    if (message.builtAt !== undefined) {
+      Timestamp.encode(
+        toTimestamp(message.builtAt),
+        writer.uint32(26).fork(),
+      ).join();
+    }
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): PolicySource_EmbeddedPDP {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePolicySource_EmbeddedPDP();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.url = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.commitHash = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.builtAt = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32()),
+          );
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBasePolicySource_Git(): PolicySource_Git {
+  return { repositoryUrl: "", branch: "", subdirectory: "" };
+}
+
+export const PolicySource_Git: MessageFns<PolicySource_Git> = {
+  encode(
+    message: PolicySource_Git,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.repositoryUrl !== "") {
+      writer.uint32(10).string(message.repositoryUrl);
+    }
+    if (message.branch !== "") {
+      writer.uint32(18).string(message.branch);
+    }
+    if (message.subdirectory !== "") {
+      writer.uint32(26).string(message.subdirectory);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PolicySource_Git {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePolicySource_Git();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.repositoryUrl = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.branch = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.subdirectory = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBasePolicySource_Hub(): PolicySource_Hub {
+  return { source: undefined };
+}
+
+export const PolicySource_Hub: MessageFns<PolicySource_Hub> = {
+  encode(
+    message: PolicySource_Hub,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    switch (message.source?.$case) {
+      case "label":
+        writer.uint32(10).string(message.source.label);
+        break;
+      case "deploymentId":
+        writer.uint32(18).string(message.source.deploymentId);
+        break;
+      case "playgroundId":
+        writer.uint32(26).string(message.source.playgroundId);
+        break;
+      case "localBundle":
+        PolicySource_Hub_LocalBundle.encode(
+          message.source.localBundle,
+          writer.uint32(34).fork(),
+        ).join();
+        break;
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PolicySource_Hub {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePolicySource_Hub();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.source = { $case: "label", label: reader.string() };
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.source = {
+            $case: "deploymentId",
+            deploymentId: reader.string(),
+          };
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.source = {
+            $case: "playgroundId",
+            playgroundId: reader.string(),
+          };
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.source = {
+            $case: "localBundle",
+            localBundle: PolicySource_Hub_LocalBundle.decode(
+              reader,
+              reader.uint32(),
+            ),
+          };
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+};
+
+function createBasePolicySource_Hub_LocalBundle(): PolicySource_Hub_LocalBundle {
+  return { path: "" };
+}
+
+export const PolicySource_Hub_LocalBundle: MessageFns<PolicySource_Hub_LocalBundle> =
+  {
+    encode(
+      message: PolicySource_Hub_LocalBundle,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.path !== "") {
+        writer.uint32(10).string(message.path);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PolicySource_Hub_LocalBundle {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePolicySource_Hub_LocalBundle();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.path = reader.string();
             continue;
           }
         }
