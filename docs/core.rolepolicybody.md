@@ -113,24 +113,5 @@ string \| undefined
 
 
 </td></tr>
-<tr><td>
-
-[scopePermissions](./core.rolepolicybody.scopepermissions.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[ScopePermissions](./core.scopepermissions.md)
-
-
-</td><td>
-
-**_(ALPHA)_**
-
-
-</td></tr>
 </tbody></table>
 
