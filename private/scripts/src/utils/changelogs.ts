@@ -11,7 +11,7 @@ import {
   parse as parseYaml,
   visit,
 } from "yaml";
-import { ZodIssueCode, z } from "zod";
+import { z } from "zod";
 
 import { read, write } from "./files.js";
 import { repositoryUrl } from "./git.js";
@@ -84,7 +84,8 @@ const changelogSchema = z
     references: sortedRecord(z.string()).optional(),
     initialCommit: z.string(),
   })
-  .superRefine(({ unreleased, releases = [], references = {} }, ctx) => {
+  .check((ctx) => {
+    const { unreleased, releases = [], references = {} } = ctx.value;
     const entries: Entries[] = [unreleased ?? {}, ...releases];
 
     const dependencies = new Set(
@@ -93,9 +94,10 @@ const changelogSchema = z
 
     for (const dependency of dependencies) {
       if (!references[dependency]) {
-        ctx.addIssue({
-          code: ZodIssueCode.custom,
+        ctx.issues.push({
+          code: "custom",
           message: `Provide a URL for dependency "${dependency}"`,
+          input: references,
           path: ["references"],
         });
       }

@@ -2,34 +2,38 @@ import { formatISO, parseISO } from "date-fns";
 import { valid as semverValid } from "semver";
 import type {
   ZodArray,
-  ZodEffects,
+  ZodPipe,
   ZodRecord,
   ZodString,
-  ZodTypeAny,
+  ZodTransform,
+  ZodType,
 } from "zod";
-import { ZodIssueCode, z } from "zod";
+import { z } from "zod";
 
-export function sortedArray<T extends ZodTypeAny>(
+export function sortedArray<T extends ZodType>(
   schema: T,
-  compare?: (a: z.infer<T>, b: z.infer<T>) => number,
-): ZodEffects<ZodArray<T>> {
+  compare?: (a: z.output<T>, b: z.output<T>) => number,
+): ZodPipe<ZodArray<T>, ZodTransform<z.output<T>[], z.output<T>[]>> {
   return z
     .array(schema)
     .min(1)
     .transform((array) => array.sort(compare));
 }
 
-export function sortedRecord<T extends ZodTypeAny>(
+export function sortedRecord<T extends ZodType>(
   schema: T,
-): ZodEffects<ZodRecord<ZodString, T>> {
-  return z.record(schema).transform((value, ctx) => {
+): ZodPipe<
+  ZodRecord<ZodString, T>,
+  ZodTransform<Record<string, z.output<T>>, Record<string, z.output<T>>>
+> {
+  return z.record(z.string(), schema).transform((value, ctx) => {
     const entries = Object.entries(value).sort(([a], [b]) =>
       a.localeCompare(b),
     );
 
     if (entries.length === 0) {
       ctx.addIssue({
-        code: ZodIssueCode.custom,
+        code: "custom",
         message: "Record must contain at least one entry",
       });
     }
@@ -38,10 +42,13 @@ export function sortedRecord<T extends ZodTypeAny>(
   });
 }
 
-export const semverSchema = z.string().refine(
-  (value) => value === semverValid(value),
-  (value) => ({ message: `"${value}" is not a valid semantic version number` }),
-);
+export const semverSchema = z
+  .string()
+  .refine((value) => value === semverValid(value), {
+    error: ({ input }) => ({
+      message: `"${input as string}" is not a valid semantic version number`,
+    }),
+  });
 
 export const isoDateSchema = z.string().refine(
   (value) => {
@@ -51,5 +58,9 @@ export const isoDateSchema = z.string().refine(
       return false;
     }
   },
-  (value) => ({ message: `"${value}" is not a valid ISO 8601 date` }),
+  {
+    error: ({ input }) => ({
+      message: `"${input as string}" is not a valid ISO 8601 date`,
+    }),
+  },
 );

@@ -9,7 +9,7 @@ import {
   inc as semverBump,
   compare as semverCompare,
 } from "semver";
-import type { ZodType, ZodTypeDef } from "zod";
+import type { ZodType } from "zod";
 import { z } from "zod";
 
 import { read } from "../utils/files.js";
@@ -17,7 +17,7 @@ import { isoDateSchema } from "../utils/schemas.js";
 
 async function fetchJson<T>(
   url: string,
-  schema: ZodType<T, ZodTypeDef, unknown>,
+  schema: ZodType<T>,
   init?: RequestInit,
 ): Promise<T> {
   const response = await fetch(url, init);
@@ -169,7 +169,7 @@ async function fetchReactVersions(): Promise<Versions> {
     z.object({
       "dist-tags": z.object({ canary: z.string() }),
       versions: z
-        .record(z.unknown())
+        .record(z.string(), z.unknown())
         .transform((versions) => Object.keys(versions).sort(semverCompare)),
     }),
     { headers: { Accept: "application/vnd.npm.install-v1+json" } },
