@@ -56,7 +56,7 @@
     "opossum": "^9.0.0"
   },
   "devDependencies": {
-    "@types/opossum": "8.1.8"
+    "@types/opossum": "8.1.9"
   },
   "publishConfig": {
     "access": "public",
