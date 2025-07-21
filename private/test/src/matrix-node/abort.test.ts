@@ -44,6 +44,7 @@ const dummyServerStreamResponse = {
       method: "cerbos.svc.v1.CerbosService/ServerInfo",
       statusCode: Status.OK,
       oversized: false,
+      policySource: undefined,
     },
   },
 } satisfies ListAuditLogEntriesResponse;
