@@ -1,3 +1,15 @@
+unreleased:
+  type: patch
+
+  bumped:
+    "@opentelemetry/instrumentation":
+      to: 0.203.0
+      pull: 1198
+
+    "@opentelemetry/semantic-conventions":
+      to: 1.36.0
+      pull: 1198
+
 releases:
   - version: 0.6.1
     date: 2025-07-02
