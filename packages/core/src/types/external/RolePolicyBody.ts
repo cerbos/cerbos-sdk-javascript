@@ -1,5 +1,4 @@
 import type { RoleRule } from "./RoleRule";
-import type { ScopePermissions } from "./ScopePermissions";
 
 /** @alpha */
 export interface RolePolicyBody {
@@ -11,9 +10,6 @@ export interface RolePolicyBody {
 
   /** @alpha */
   scope?: string | undefined;
-
-  /** @alpha */
-  scopePermissions: ScopePermissions;
 
   /** @alpha */
   rules: RoleRule[];

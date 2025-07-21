@@ -738,6 +738,7 @@ function principalPolicyFromProtobuf({
   version,
   rules,
   scope,
+  scopePermissions,
   constants,
   variables,
 }: PrincipalPolicyProtobuf): OmitPolicyBase<PrincipalPolicy> {
@@ -747,6 +748,7 @@ function principalPolicyFromProtobuf({
       version,
       rules: rules.map(principalRuleFromProtobuf),
       scope,
+      scopePermissions: scopePermissionsFromProtobuf(scopePermissions),
       constants: constants && constantsFromProtobuf(constants),
       variables: variables && variablesFromProtobuf(variables),
     },
@@ -800,6 +802,7 @@ function resourcePolicyFromProtobuf({
   rules,
   schemas,
   scope,
+  scopePermissions,
   constants,
   variables,
 }: ResourcePolicyProtobuf): OmitPolicyBase<ResourcePolicy> {
@@ -811,6 +814,7 @@ function resourcePolicyFromProtobuf({
       rules: rules.map(resourceRuleFromProtobuf),
       schemas: schemas && schemaRefsFromProtobuf(schemas),
       scope,
+      scopePermissions: scopePermissionsFromProtobuf(scopePermissions),
       constants: constants && constantsFromProtobuf(constants),
       variables: variables && variablesFromProtobuf(variables),
     },
@@ -841,7 +845,6 @@ function rolePolicyFromProtobuf({
   policyType,
   parentRoles,
   scope,
-  scopePermissions,
   rules,
 }: RolePolicyProtobuf): RolePolicy {
   requireOneOf("RolePolicy.policyType", policyType, "role");
@@ -851,7 +854,6 @@ function rolePolicyFromProtobuf({
       role: policyType.role,
       parentRoles: parentRoles,
       scope,
-      scopePermissions: scopePermissionsFromProtobuf(scopePermissions, true),
       rules: rules.map(roleRuleFromProtobuf),
     },
   };
@@ -869,26 +871,13 @@ function roleRuleFromProtobuf({
 
 function scopePermissionsFromProtobuf(
   scopePermissions: ScopePermissionsProtobuf,
-  required: true,
-): ScopePermissions;
-
-function scopePermissionsFromProtobuf(
-  scopePermissions: ScopePermissionsProtobuf,
-  required: false,
-): ScopePermissions | undefined;
-
-function scopePermissionsFromProtobuf(
-  scopePermissions: ScopePermissionsProtobuf,
-  required: boolean,
 ): ScopePermissions | undefined {
   return translateEnum(
     "ScopePermissions",
     ScopePermissionsProtobuf,
     scopePermissions,
     {
-      [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_UNSPECIFIED]: required
-        ? unexpected
-        : undefined,
+      [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_UNSPECIFIED]: undefined,
       [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_OVERRIDE_PARENT]:
         ScopePermissions.OVERRIDE_PARENT,
       [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS]:
@@ -1182,8 +1171,8 @@ export const unexpected = Symbol("unexpected");
 
 type Unexpected = typeof unexpected;
 
-function isUnexpected(value: unknown): value is Unexpected | undefined {
-  return value === unexpected || value === undefined;
+function isUnexpected(value: unknown): value is Unexpected {
+  return value === unexpected;
 }
 
 /** @internal */
@@ -1196,24 +1185,26 @@ export function translateEnum<
   value: Enum[keyof Enum],
   translate: Record<Enum[keyof Enum], Result | Unexpected>,
 ): Result {
-  const result = translate[value] as Result | Unexpected | undefined;
+  if (value in translate) {
+    const result = translate[value] as Result | Unexpected;
 
-  if (isUnexpected(result)) {
-    const wanted = Object.entries(source)
-      .filter(
-        ([, value]) =>
-          typeof value === "number" &&
-          !isUnexpected(translate[value as Enum[keyof Enum]]),
-      )
-      .map(([key, value]) => `${key}:${value}`)
-      .join("|");
-
-    const got = source[value] ? `${source[value]}:${value}` : value;
-
-    throw new Error(`Unexpected ${descriptor}: wanted ${wanted}, got ${got}`);
+    if (!isUnexpected(result)) {
+      return result;
+    }
   }
 
-  return result;
+  const wanted = Object.entries(source)
+    .filter(
+      ([, value]) =>
+        typeof value === "number" &&
+        !isUnexpected(translate[value as Enum[keyof Enum]]),
+    )
+    .map(([key, value]) => `${key}:${value}`)
+    .join("|");
+
+  const got = source[value] ? `${source[value]}:${value}` : value;
+
+  throw new Error(`Unexpected ${descriptor}: wanted ${wanted}, got ${got}`);
 }
 
 function transformOneOf<OneOf extends { $case: string }, Result>(
@@ -1232,7 +1223,7 @@ function transformOneOf<OneOf extends { $case: string }, Result>(
     | Unexpected
     | undefined;
 
-  if (isUnexpected(transform)) {
+  if (!transform || isUnexpected(transform)) {
     throw new Error(
       `Unexpected ${descriptor}: wanted ${Object.keys(transforms).join("|")}, got ${oneOf.$case}`,
     );

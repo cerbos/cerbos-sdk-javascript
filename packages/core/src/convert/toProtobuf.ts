@@ -446,13 +446,13 @@ function resourceRuleToProtobuf({
 }
 
 function rolePolicyToProtobuf({
-  rolePolicy: { role, parentRoles, scope, scopePermissions, rules },
+  rolePolicy: { role, parentRoles, scope, rules },
 }: RolePolicy): RolePolicyProtobuf {
   return {
     policyType: { $case: "role", role },
     parentRoles: parentRoles ?? [],
     scope: scope ?? "",
-    scopePermissions: scopePermissionsToProtobuf(scopePermissions),
+    scopePermissions: ScopePermissionsProtobuf.SCOPE_PERMISSIONS_UNSPECIFIED,
     rules: rules.map(roleRuleToProtobuf),
   };
 }

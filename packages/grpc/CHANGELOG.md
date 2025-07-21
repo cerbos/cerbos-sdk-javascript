@@ -2,9 +2,17 @@
 
 ## [Unreleased]
 
+### Added
+
+- Include [scope permissions](https://docs.cerbos.dev/cerbos/latest/policies/scope_permissions) when retrieving resource and principal policies via the Admin API ([#1201](https://github.com/cerbos/cerbos-sdk-javascript/pull/1201))
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.6.1 ([#1200](https://github.com/cerbos/cerbos-sdk-javascript/pull/1200))
+
+### Removed
+
+- Support for scope permissions in role policies ([#1201](https://github.com/cerbos/cerbos-sdk-javascript/pull/1201))
 
 ## [0.22.1] - 2025-07-02
 

@@ -1,3 +1,14 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: Include [scope permissions](https://docs.cerbos.dev/cerbos/latest/policies/scope_permissions) when retrieving resource and principal policies via the Admin API
+      pull: 1201
+
+  removed:
+    - summary: Support for scope permissions in role policies
+      pull: 1201
+
 releases:
   - version: 0.22.1
     date: 2025-07-02
