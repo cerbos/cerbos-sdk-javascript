@@ -7,8 +7,8 @@ unreleased:
 
   bumped:
     "@bufbuild/protobuf":
-      to: 2.6.1
-      pull: 1200
+      to: 2.6.2
+      pulls: [1200, 1202]
 
   removed:
     - summary: Support for scope permissions in role policies
