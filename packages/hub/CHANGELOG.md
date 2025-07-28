@@ -8,6 +8,10 @@
 
 - Bump dependency on [@bufbuild/protovalidate] to 0.6.0 ([#1200](https://github.com/cerbos/cerbos-sdk-javascript/pull/1200))
 
+- Bump dependency on [@connectrpc/connect] to 2.0.3 ([#1203](https://github.com/cerbos/cerbos-sdk-javascript/pull/1203))
+
+- Bump dependency on [@connectrpc/connect-node] to 2.0.3 ([#1203](https://github.com/cerbos/cerbos-sdk-javascript/pull/1203))
+
 ## [0.1.0] - 2025-07-02
 
 ### Added
