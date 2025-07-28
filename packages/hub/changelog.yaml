@@ -10,6 +10,14 @@ unreleased:
       to: 0.6.0
       pull: 1200
 
+    "@connectrpc/connect":
+      to: 2.0.3
+      pull: 1203
+
+    "@connectrpc/connect-node":
+      to: 2.0.3
+      pull: 1203
+
 releases:
   - version: 0.1.0
     date: 2025-07-02
