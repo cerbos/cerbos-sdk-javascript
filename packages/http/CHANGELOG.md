@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.23.0] - 2025-08-11
+
 ### Added
 
 - [`AccessLogEntry.policySource`](../../docs/core.accesslogentry.policysource.md) and [`DecisionLogEntry.policySource`](../../docs/core.decisionlogentry.policysource.md) properties ([#1193](https://github.com/cerbos/cerbos-sdk-javascript/pull/1193))
@@ -9,6 +13,10 @@
   Requires a policy decision point server running Cerbos 0.46+.
 
 - Include [scope permissions](https://docs.cerbos.dev/cerbos/latest/policies/scope_permissions) when retrieving resource and principal policies via the Admin API ([#1201](https://github.com/cerbos/cerbos-sdk-javascript/pull/1201))
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.24.0 ([#1208](https://github.com/cerbos/cerbos-sdk-javascript/pull/1208))
 
 ### Removed
 
@@ -350,7 +358,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.22.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.23.0...HEAD
+[0.23.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.22.1...@cerbos/http@0.23.0
 [0.22.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.22.0...@cerbos/http@0.22.1
 [0.22.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.21.2...@cerbos/http@0.22.0
 [0.21.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.21.1...@cerbos/http@0.21.2

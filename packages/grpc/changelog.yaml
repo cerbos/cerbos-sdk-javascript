@@ -1,24 +1,28 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[`AccessLogEntry.policySource`](../../docs/core.accesslogentry.policysource.md) and [`DecisionLogEntry.policySource`](../../docs/core.decisionlogentry.policysource.md) properties"
-      details: Requires a policy decision point server running Cerbos 0.46+.
-      pull: 1193
-
-    - summary: Include [scope permissions](https://docs.cerbos.dev/cerbos/latest/policies/scope_permissions) when retrieving resource and principal policies via the Admin API
-      pull: 1201
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.6.3
-      pulls: [1200, 1202, 1205]
-
-  removed:
-    - summary: Support for scope permissions in role policies
-      pull: 1201
-
 releases:
+  - version: 0.23.0
+    date: 2025-08-11
+
+    added:
+      - summary: "[`AccessLogEntry.policySource`](../../docs/core.accesslogentry.policysource.md) and [`DecisionLogEntry.policySource`](../../docs/core.decisionlogentry.policysource.md) properties"
+        details: Requires a policy decision point server running Cerbos 0.46+.
+        pull: 1193
+
+      - summary: Include [scope permissions](https://docs.cerbos.dev/cerbos/latest/policies/scope_permissions) when retrieving resource and principal policies via the Admin API
+        pull: 1201
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.6.3
+        pulls: [1200, 1202, 1205]
+
+      "@cerbos/core":
+        to: 0.24.0
+        pull: 1208
+
+    removed:
+      - summary: Support for scope permissions in role policies
+        pull: 1201
+
   - version: 0.22.1
     date: 2025-07-02
 

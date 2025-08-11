@@ -1,24 +1,28 @@
-unreleased:
-  type: patch
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.6.3
-      pulls: [1200, 1202, 1205]
-
-    "@bufbuild/protovalidate":
-      to: 0.8.0
-      pulls: [1200, 1205]
-
-    "@connectrpc/connect":
-      to: 2.0.3
-      pull: 1203
-
-    "@connectrpc/connect-node":
-      to: 2.0.3
-      pull: 1203
-
 releases:
+  - version: 0.1.1
+    date: 2025-08-11
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.6.3
+        pulls: [1200, 1202, 1205]
+
+      "@bufbuild/protovalidate":
+        to: 0.8.0
+        pulls: [1200, 1205]
+
+      "@cerbos/core":
+        to: 0.24.0
+        pull: 1208
+
+      "@connectrpc/connect":
+        to: 2.0.3
+        pull: 1203
+
+      "@connectrpc/connect-node":
+        to: 2.0.3
+        pull: 1203
+
   - version: 0.1.0
     date: 2025-07-02
 
@@ -29,6 +33,7 @@ releases:
 references:
   "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es
   "@bufbuild/protovalidate": https://github.com/bufbuild/protovalidate-es
+  "@cerbos/core": ../core/README.md
   "@connectrpc/connect": https://github.com/connectrpc/connect-es
   "@connectrpc/connect-node": https://github.com/connectrpc/connect-es
   opossum: https://nodeshift.dev/opossum/
