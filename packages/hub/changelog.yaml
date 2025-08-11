@@ -3,12 +3,12 @@ unreleased:
 
   bumped:
     "@bufbuild/protobuf":
-      to: 2.6.2
-      pulls: [1200, 1202]
+      to: 2.6.3
+      pulls: [1200, 1202, 1205]
 
     "@bufbuild/protovalidate":
-      to: 0.6.0
-      pull: 1200
+      to: 0.8.0
+      pulls: [1200, 1205]
 
     "@connectrpc/connect":
       to: 2.0.3
