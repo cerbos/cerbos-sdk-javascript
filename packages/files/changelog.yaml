@@ -1,6 +1,11 @@
 unreleased:
   type: patch
 
+  bumped:
+    yaml:
+      to: 2.8.1
+      pull: 1206
+
 releases:
   - version: 0.4.0
     date: 2025-07-02
