@@ -4,9 +4,9 @@
 
 ### Changed
 
-- Bump dependency on [@bufbuild/protobuf] to 2.6.2 ([#1200](https://github.com/cerbos/cerbos-sdk-javascript/pull/1200), [#1202](https://github.com/cerbos/cerbos-sdk-javascript/pull/1202))
+- Bump dependency on [@bufbuild/protobuf] to 2.6.3 ([#1200](https://github.com/cerbos/cerbos-sdk-javascript/pull/1200), [#1202](https://github.com/cerbos/cerbos-sdk-javascript/pull/1202), [#1205](https://github.com/cerbos/cerbos-sdk-javascript/pull/1205))
 
-- Bump dependency on [@bufbuild/protovalidate] to 0.6.0 ([#1200](https://github.com/cerbos/cerbos-sdk-javascript/pull/1200))
+- Bump dependency on [@bufbuild/protovalidate] to 0.8.0 ([#1200](https://github.com/cerbos/cerbos-sdk-javascript/pull/1200), [#1205](https://github.com/cerbos/cerbos-sdk-javascript/pull/1205))
 
 - Bump dependency on [@connectrpc/connect] to 2.0.3 ([#1203](https://github.com/cerbos/cerbos-sdk-javascript/pull/1203))
 
