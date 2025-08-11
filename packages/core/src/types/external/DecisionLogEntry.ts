@@ -1,6 +1,7 @@
 import type { AuditTrail } from "./AuditTrail";
 import type { DecisionLogEntryMethod } from "./DecisionLogEntryMethod";
 import type { Peer } from "./Peer";
+import type { PolicySource } from "./PolicySource";
 
 /**
  * A decision log entry in the policy decision point's audit log.
@@ -42,4 +43,9 @@ export interface DecisionLogEntry {
    * Whether the log entry was truncated because it was too large.
    */
   oversized: boolean;
+
+  /**
+   * Where the policy decision point server sourced its policies.
+   */
+  policySource: PolicySource | undefined;
 }

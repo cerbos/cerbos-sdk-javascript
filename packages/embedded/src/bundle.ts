@@ -26,6 +26,7 @@ interface Exports extends WebAssembly.Exports, Allocator {
 export class Bundle {
   public static async from(
     source: Source,
+    url: string | undefined,
     logger: DecisionLogger | undefined,
     userAgent: string,
     {
@@ -72,7 +73,11 @@ export class Bundle {
       exports.set_lenient_scope_search(1);
     }
 
-    return new Bundle(etag, exports, decodeJWTPayload, logger);
+    if (!url && source instanceof Response && source.url) {
+      url = source.url;
+    }
+
+    return new Bundle(etag, exports, decodeJWTPayload, logger, url);
   }
 
   private _metadata: BundleMetadata | undefined;
@@ -82,6 +87,7 @@ export class Bundle {
     private readonly exports: Exports,
     private readonly decodeJWTPayload: DecodeJWTPayload,
     private readonly logger: DecisionLogger | undefined,
+    private readonly url: string | undefined,
   ) {}
 
   public get metadata(): BundleMetadata {
@@ -97,6 +103,7 @@ export class Bundle {
       );
 
       this._metadata = {
+        url: this.url,
         commit: commitHash || version,
         builtAt: new Date(buildTimestamp * 1000),
         policies,

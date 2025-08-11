@@ -1,5 +1,9 @@
 unreleased:
-  type: patch
+  type: minor
+
+  added:
+    - summary: Set [`policySource`](../../docs/core.decisionlogentry.policysource.md) on log entries passed to [`onDecision`](../../docs/embedded.options.ondecision.md)"
+      pull: 1193
 
 releases:
   - version: 0.12.1

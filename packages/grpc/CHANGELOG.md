@@ -4,6 +4,10 @@
 
 ### Added
 
+- [`AccessLogEntry.policySource`](../../docs/core.accesslogentry.policysource.md) and [`DecisionLogEntry.policySource`](../../docs/core.decisionlogentry.policysource.md) properties ([#1193](https://github.com/cerbos/cerbos-sdk-javascript/pull/1193))
+
+  Requires a policy decision point server running Cerbos 0.46+.
+
 - Include [scope permissions](https://docs.cerbos.dev/cerbos/latest/policies/scope_permissions) when retrieving resource and principal policies via the Admin API ([#1201](https://github.com/cerbos/cerbos-sdk-javascript/pull/1201))
 
 ### Changed

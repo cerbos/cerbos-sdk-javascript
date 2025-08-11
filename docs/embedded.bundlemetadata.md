@@ -111,5 +111,24 @@ Map of the IDs of policies included in the bundle to metadata about their source
 
 
 </td></tr>
+<tr><td>
+
+[url?](./embedded.bundlemetadata.url.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ The URL from which the bundle was downloaded.
+
+
+</td></tr>
 </tbody></table>
 

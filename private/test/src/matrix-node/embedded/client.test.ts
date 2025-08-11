@@ -509,6 +509,12 @@ describe("Embedded", () => {
                   foo: ["42"],
                 },
                 oversized: false,
+                policySource: {
+                  kind: "embeddedPDP",
+                  url: "",
+                  commit: bundle.metadata.commit,
+                  builtAt: bundle.metadata.builtAt,
+                },
                 auditTrail: {
                   effectivePolicies: expectedEffectivePolicies,
                 },

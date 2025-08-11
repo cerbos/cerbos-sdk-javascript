@@ -217,6 +217,11 @@ export type DecodedJWTPayload = Record<string, Value>;
  */
 export interface BundleMetadata {
   /**
+   * The URL from which the bundle was downloaded.
+   */
+  url?: string | undefined;
+
+  /**
    * The commit SHA from which the bundle was built.
    */
   commit: string;
@@ -305,7 +310,7 @@ export class Loader {
       this.logger = new DecisionLogger(options.onDecision, this._userAgent);
     }
 
-    this._active = this._load(source, true);
+    this._active = this._load(source, url(source), true);
   }
 
   /**
@@ -321,10 +326,15 @@ export class Loader {
   );
 
   /** @internal */
-  protected async _load(source: Source, initial = false): Promise<LoadResult> {
+  protected async _load(
+    source: Source,
+    url: string | undefined,
+    initial = false,
+  ): Promise<LoadResult> {
     try {
       const bundle = await Bundle.from(
         source,
+        url,
         this.logger,
         this._userAgent,
         this._options,
@@ -502,7 +512,12 @@ export class AutoUpdatingLoader extends Loader {
   private async update(): Promise<void> {
     this.abortController?.abort();
     this.abortController = new AbortController();
-    await this._load(this.download(this.abortController.signal));
+
+    await this._load(
+      this.download(this.abortController.signal),
+      this.url.toString(),
+    );
+
     this.scheduleUpdate();
   }
 
@@ -530,4 +545,12 @@ export class AutoUpdatingLoader extends Loader {
 
 function isAbortError(error: unknown): error is DOMException {
   return error instanceof DOMException && error.name === "AbortError";
+}
+
+function url(source: Source): string | undefined {
+  if (typeof source === "string" || source instanceof URL) {
+    return source.toString();
+  }
+
+  return undefined;
 }
