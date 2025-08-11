@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.23.0] - 2025-08-11
+
 ### Added
 
 - [`AccessLogEntry.policySource`](../../docs/core.accesslogentry.policysource.md) and [`DecisionLogEntry.policySource`](../../docs/core.decisionlogentry.policysource.md) properties ([#1193](https://github.com/cerbos/cerbos-sdk-javascript/pull/1193))
@@ -13,6 +17,8 @@
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.6.3 ([#1200](https://github.com/cerbos/cerbos-sdk-javascript/pull/1200), [#1202](https://github.com/cerbos/cerbos-sdk-javascript/pull/1202), [#1205](https://github.com/cerbos/cerbos-sdk-javascript/pull/1205))
+
+- Bump dependency on [@cerbos/core] to 0.24.0 ([#1208](https://github.com/cerbos/cerbos-sdk-javascript/pull/1208))
 
 ### Removed
 
@@ -422,7 +428,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.22.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.0...HEAD
+[0.23.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.22.1...@cerbos/grpc@0.23.0
 [0.22.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.22.0...@cerbos/grpc@0.22.1
 [0.22.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.21.0...@cerbos/grpc@0.22.0
 [0.21.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.20.1...@cerbos/grpc@0.21.0

@@ -2,9 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.13.0] - 2025-08-11
+
 ### Added
 
-- Set [`policySource`](../../docs/core.decisionlogentry.policysource.md) on log entries passed to [`onDecision`](../../docs/embedded.options.ondecision.md)" ([#1193](https://github.com/cerbos/cerbos-sdk-javascript/pull/1193))
+- Set [`policySource`](../../docs/core.decisionlogentry.policysource.md) on log entries passed to [`onDecision`](../../docs/embedded.options.ondecision.md) ([#1193](https://github.com/cerbos/cerbos-sdk-javascript/pull/1193))
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.24.0 ([#1208](https://github.com/cerbos/cerbos-sdk-javascript/pull/1208))
 
 ## [0.12.1] - 2025-07-02
 
@@ -227,7 +235,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.12.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.0...HEAD
+[0.13.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.12.1...@cerbos/embedded@0.13.0
 [0.12.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.12.0...@cerbos/embedded@0.12.1
 [0.12.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.11.1...@cerbos/embedded@0.12.0
 [0.11.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.11.0...@cerbos/embedded@0.11.1

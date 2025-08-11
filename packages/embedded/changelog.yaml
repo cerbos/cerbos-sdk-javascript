@@ -1,11 +1,16 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Set [`policySource`](../../docs/core.decisionlogentry.policysource.md) on log entries passed to [`onDecision`](../../docs/embedded.options.ondecision.md)"
-      pull: 1193
-
 releases:
+  - version: 0.13.0
+    date: 2025-08-11
+
+    added:
+      - summary: Set [`policySource`](../../docs/core.decisionlogentry.policysource.md) on log entries passed to [`onDecision`](../../docs/embedded.options.ondecision.md)
+        pull: 1193
+
+    bumped:
+      "@cerbos/core":
+        to: 0.24.0
+        pull: 1208
+
   - version: 0.12.1
     date: 2025-07-02
 
