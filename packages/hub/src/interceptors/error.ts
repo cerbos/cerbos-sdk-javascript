@@ -22,6 +22,7 @@ const circuitBreaker = new CircuitBreaker<[Request, Handler], Response>(
 
 const ignoredStatuses = new Set([
   Status.ABORTED,
+  Status.ALREADY_EXISTS,
   Status.CANCELLED,
   Status.DEADLINE_EXCEEDED,
   Status.FAILED_PRECONDITION,

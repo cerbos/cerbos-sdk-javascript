@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Ignore "already exists" errors in circuit breaker ([#1210](https://github.com/cerbos/cerbos-sdk-javascript/pull/1210))
 
 ## [0.1.1] - 2025-08-11
 
