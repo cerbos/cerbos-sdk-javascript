@@ -724,11 +724,9 @@ export const FieldOptions: MessageFns<FieldOptions> = {
     if (message.retention !== undefined && message.retention !== 0) {
       writer.uint32(136).int32(message.retention);
     }
-    writer.uint32(154).fork();
     for (const v of message.targets) {
-      writer.int32(v);
+      writer.uint32(152).int32(v!);
     }
-    writer.join();
     for (const v of message.editionDefaults) {
       FieldOptions_EditionDefault.encode(v!, writer.uint32(162).fork()).join();
     }
