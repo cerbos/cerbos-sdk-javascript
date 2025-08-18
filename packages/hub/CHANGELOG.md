@@ -6,6 +6,10 @@
 
 - Ignore "already exists" errors in circuit breaker ([#1210](https://github.com/cerbos/cerbos-sdk-javascript/pull/1210))
 
+- Bump dependency on [@connectrpc/connect] to 2.0.4 ([#1211](https://github.com/cerbos/cerbos-sdk-javascript/pull/1211))
+
+- Bump dependency on [@connectrpc/connect-node] to 2.0.4 ([#1211](https://github.com/cerbos/cerbos-sdk-javascript/pull/1211))
+
 ## [0.1.1] - 2025-08-11
 
 ### Changed

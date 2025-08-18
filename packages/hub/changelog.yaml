@@ -5,6 +5,15 @@ unreleased:
     - summary: Ignore "already exists" errors in circuit breaker
       pull: 1210
 
+  bumped:
+    "@connectrpc/connect":
+      to: 2.0.4
+      pull: 1211
+
+    "@connectrpc/connect-node":
+      to: 2.0.4
+      pull: 1211
+
 releases:
   - version: 0.1.1
     date: 2025-08-11
