@@ -42,10 +42,11 @@ describe("loaders", () => {
     test.each<[type: string, source: () => Source, url?: () => string]>([
       ["string", (): string => server.url, (): string => server.url],
       ["URL", (): URL => new URL(server.url), (): string => server.url],
-      ["ArrayBuffer", (): ArrayBuffer => readFileSync(first.path)],
+      ["ArrayBuffer", (): ArrayBuffer => readFileSync(first.path).buffer],
       [
         "Promise<ArrayBuffer>",
-        async (): Promise<ArrayBuffer> => await readFile(first.path),
+        async (): Promise<ArrayBuffer> =>
+          (await readFile(first.path)).buffer as ArrayBuffer,
       ],
       [
         "Response",
@@ -71,7 +72,9 @@ describe("loaders", () => {
       [
         "Promise<WebAssembly.Module>",
         async (): Promise<WebAssembly.Module> =>
-          await WebAssembly.compile(await readFile(first.path)),
+          await WebAssembly.compile(
+            (await readFile(first.path)).buffer as ArrayBuffer,
+          ),
       ],
     ])("%s", async (_, source, url) => {
       const callbacks = new Callbacks();
