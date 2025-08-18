@@ -71,6 +71,12 @@
       "matchPackageNames": ["@types/node"],
       "matchUpdateTypes": ["major"],
       "enabled": false
+    },
+    {
+      "description": "https://github.com/renovatebot/renovate/issues/37211",
+      "matchPackageNames": ["traefik"],
+      "sourceUrl": "https://github.com/traefik/traefik",
+      "extractVersion": "^(?<version>\\d+\\.\\d+\\.\\d+)$"
     }
   ],
   "postUpdateOptions": ["pnpmDedupe"],
