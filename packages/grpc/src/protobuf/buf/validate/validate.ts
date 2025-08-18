@@ -1003,24 +1003,18 @@ export const FloatRules: MessageFns<FloatRules> = {
         writer.uint32(45).float(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.float(v);
+      writer.uint32(53).float(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.float(v);
+      writer.uint32(61).float(v!);
     }
-    writer.join();
     if (message.finite !== undefined && message.finite !== false) {
       writer.uint32(64).bool(message.finite);
     }
-    writer.uint32(74).fork();
     for (const v of message.example) {
-      writer.float(v);
+      writer.uint32(77).float(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -1180,24 +1174,18 @@ export const DoubleRules: MessageFns<DoubleRules> = {
         writer.uint32(41).double(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.double(v);
+      writer.uint32(49).double(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.double(v);
+      writer.uint32(57).double(v!);
     }
-    writer.join();
     if (message.finite !== undefined && message.finite !== false) {
       writer.uint32(64).bool(message.finite);
     }
-    writer.uint32(74).fork();
     for (const v of message.example) {
-      writer.double(v);
+      writer.uint32(73).double(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -1356,21 +1344,15 @@ export const Int32Rules: MessageFns<Int32Rules> = {
         writer.uint32(40).int32(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.int32(v);
+      writer.uint32(48).int32(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.int32(v);
+      writer.uint32(56).int32(v!);
     }
-    writer.join();
-    writer.uint32(66).fork();
     for (const v of message.example) {
-      writer.int32(v);
+      writer.uint32(64).int32(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -1521,21 +1503,15 @@ export const Int64Rules: MessageFns<Int64Rules> = {
         writer.uint32(40).int64(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.int64(v);
+      writer.uint32(48).int64(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.int64(v);
+      writer.uint32(56).int64(v!);
     }
-    writer.join();
-    writer.uint32(74).fork();
     for (const v of message.example) {
-      writer.int64(v);
+      writer.uint32(72).int64(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -1689,21 +1665,15 @@ export const UInt32Rules: MessageFns<UInt32Rules> = {
         writer.uint32(40).uint32(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.uint32(v);
+      writer.uint32(48).uint32(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.uint32(v);
+      writer.uint32(56).uint32(v!);
     }
-    writer.join();
-    writer.uint32(66).fork();
     for (const v of message.example) {
-      writer.uint32(v);
+      writer.uint32(64).uint32(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -1854,21 +1824,15 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
         writer.uint32(40).uint64(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.uint64(v);
+      writer.uint32(48).uint64(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.uint64(v);
+      writer.uint32(56).uint64(v!);
     }
-    writer.join();
-    writer.uint32(66).fork();
     for (const v of message.example) {
-      writer.uint64(v);
+      writer.uint32(64).uint64(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -2022,21 +1986,15 @@ export const SInt32Rules: MessageFns<SInt32Rules> = {
         writer.uint32(40).sint32(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.sint32(v);
+      writer.uint32(48).sint32(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.sint32(v);
+      writer.uint32(56).sint32(v!);
     }
-    writer.join();
-    writer.uint32(66).fork();
     for (const v of message.example) {
-      writer.sint32(v);
+      writer.uint32(64).sint32(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -2187,21 +2145,15 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
         writer.uint32(40).sint64(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.sint64(v);
+      writer.uint32(48).sint64(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.sint64(v);
+      writer.uint32(56).sint64(v!);
     }
-    writer.join();
-    writer.uint32(66).fork();
     for (const v of message.example) {
-      writer.sint64(v);
+      writer.uint32(64).sint64(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -2355,21 +2307,15 @@ export const Fixed32Rules: MessageFns<Fixed32Rules> = {
         writer.uint32(45).fixed32(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.fixed32(v);
+      writer.uint32(53).fixed32(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.fixed32(v);
+      writer.uint32(61).fixed32(v!);
     }
-    writer.join();
-    writer.uint32(66).fork();
     for (const v of message.example) {
-      writer.fixed32(v);
+      writer.uint32(69).fixed32(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -2520,21 +2466,15 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
         writer.uint32(41).fixed64(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.fixed64(v);
+      writer.uint32(49).fixed64(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.fixed64(v);
+      writer.uint32(57).fixed64(v!);
     }
-    writer.join();
-    writer.uint32(66).fork();
     for (const v of message.example) {
-      writer.fixed64(v);
+      writer.uint32(65).fixed64(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -2691,21 +2631,15 @@ export const SFixed32Rules: MessageFns<SFixed32Rules> = {
         writer.uint32(45).sfixed32(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.sfixed32(v);
+      writer.uint32(53).sfixed32(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.sfixed32(v);
+      writer.uint32(61).sfixed32(v!);
     }
-    writer.join();
-    writer.uint32(66).fork();
     for (const v of message.example) {
-      writer.sfixed32(v);
+      writer.uint32(69).sfixed32(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -2856,21 +2790,15 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
         writer.uint32(41).sfixed64(message.greaterThan.gte);
         break;
     }
-    writer.uint32(50).fork();
     for (const v of message.in) {
-      writer.sfixed64(v);
+      writer.uint32(49).sfixed64(v!);
     }
-    writer.join();
-    writer.uint32(58).fork();
     for (const v of message.notIn) {
-      writer.sfixed64(v);
+      writer.uint32(57).sfixed64(v!);
     }
-    writer.join();
-    writer.uint32(66).fork();
     for (const v of message.example) {
-      writer.sfixed64(v);
+      writer.uint32(65).sfixed64(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -3007,11 +2935,9 @@ export const BoolRules: MessageFns<BoolRules> = {
     if (message.const !== undefined && message.const !== false) {
       writer.uint32(8).bool(message.const);
     }
-    writer.uint32(18).fork();
     for (const v of message.example) {
-      writer.bool(v);
+      writer.uint32(16).bool(v!);
     }
-    writer.join();
     return writer;
   },
 
@@ -3718,21 +3644,15 @@ export const EnumRules: MessageFns<EnumRules> = {
     if (message.definedOnly !== undefined && message.definedOnly !== false) {
       writer.uint32(16).bool(message.definedOnly);
     }
-    writer.uint32(26).fork();
     for (const v of message.in) {
-      writer.int32(v);
+      writer.uint32(24).int32(v!);
     }
-    writer.join();
-    writer.uint32(34).fork();
     for (const v of message.notIn) {
-      writer.int32(v);
+      writer.uint32(32).int32(v!);
     }
-    writer.join();
-    writer.uint32(42).fork();
     for (const v of message.example) {
-      writer.int32(v);
+      writer.uint32(40).int32(v!);
     }
-    writer.join();
     return writer;
   },
 
