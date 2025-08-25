@@ -48,7 +48,7 @@
     "PDP"
   ],
   "dependencies": {
-    "@bufbuild/protobuf": "^2.6.3",
+    "@bufbuild/protobuf": "^2.7.0",
     "@bufbuild/protovalidate": "^0.8.0",
     "@cerbos/core": "^0.24.0",
     "@connectrpc/connect": "^2.0.4",
