@@ -15,8 +15,8 @@ importers:
         specifier: 1.56.0
         version: 1.56.0
       '@bufbuild/protoc-gen-es':
-        specifier: 2.6.3
-        version: 2.6.3(@bufbuild/protobuf@2.6.3)
+        specifier: 2.7.0
+        version: 2.7.0(@bufbuild/protobuf@2.7.0)
       '@cerbos/sdk-javascript-eslint':
         specifier: workspace:*
         version: link:private/eslint
@@ -87,8 +87,8 @@ importers:
   packages/grpc:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.6.3
-        version: 2.6.3
+        specifier: ^2.7.0
+        version: 2.7.0
       '@cerbos/core':
         specifier: ^0.24.0
         version: link:../core
@@ -112,20 +112,20 @@ importers:
   packages/hub:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.6.3
-        version: 2.6.3
+        specifier: ^2.7.0
+        version: 2.7.0
       '@bufbuild/protovalidate':
         specifier: ^0.8.0
-        version: 0.8.0(@bufbuild/protobuf@2.6.3)
+        version: 0.8.0(@bufbuild/protobuf@2.7.0)
       '@cerbos/core':
         specifier: ^0.24.0
         version: link:../core
       '@connectrpc/connect':
         specifier: ^2.0.4
-        version: 2.0.4(@bufbuild/protobuf@2.6.3)
+        version: 2.0.4(@bufbuild/protobuf@2.7.0)
       '@connectrpc/connect-node':
         specifier: ^2.0.4
-        version: 2.0.4(@bufbuild/protobuf@2.6.3)(@connectrpc/connect@2.0.4(@bufbuild/protobuf@2.6.3))
+        version: 2.0.4(@bufbuild/protobuf@2.7.0)(@connectrpc/connect@2.0.4(@bufbuild/protobuf@2.7.0))
       opossum:
         specifier: ^9.0.0
         version: 9.0.0
@@ -219,8 +219,8 @@ importers:
   private/test:
     devDependencies:
       '@bufbuild/protobuf':
-        specifier: 2.6.3
-        version: 2.6.3
+        specifier: 2.7.0
+        version: 2.7.0
       '@cerbos/core':
         specifier: workspace:*
         version: link:../../packages/core
@@ -247,10 +247,10 @@ importers:
         version: link:../../packages/react
       '@connectrpc/connect':
         specifier: 2.0.4
-        version: 2.0.4(@bufbuild/protobuf@2.6.3)
+        version: 2.0.4(@bufbuild/protobuf@2.7.0)
       '@connectrpc/connect-node':
         specifier: 2.0.4
-        version: 2.0.4(@bufbuild/protobuf@2.6.3)(@connectrpc/connect@2.0.4(@bufbuild/protobuf@2.6.3))
+        version: 2.0.4(@bufbuild/protobuf@2.7.0)(@connectrpc/connect@2.0.4(@bufbuild/protobuf@2.7.0))
       '@grpc/grpc-js':
         specifier: 1.13.4
         version: 1.13.4
@@ -427,21 +427,21 @@ packages:
     peerDependencies:
       '@bufbuild/protobuf': ^2.6.2
 
-  '@bufbuild/protobuf@2.6.3':
-    resolution: {integrity: sha512-w/gJKME9mYN7ZoUAmSMAWXk4hkVpxRKvEJCb3dV5g9wwWdxTJJ0ayOJAVcNxtdqaxDyFuC0uz4RSGVacJ030PQ==}
+  '@bufbuild/protobuf@2.7.0':
+    resolution: {integrity: sha512-qn6tAIZEw5i/wiESBF4nQxZkl86aY4KoO0IkUa2Lh+rya64oTOdJQFlZuMwI1Qz9VBJQrQC4QlSA2DNek5gCOA==}
 
-  '@bufbuild/protoc-gen-es@2.6.3':
-    resolution: {integrity: sha512-20o4U/Th0yLK/ayQGJ8hwh+fmcI/2PWZFkTS4gv08AtOx31YA05/X/wbn+pLZLJCDP2ik4KTIWuV1j4gERs15A==}
-    engines: {node: '>=14'}
+  '@bufbuild/protoc-gen-es@2.7.0':
+    resolution: {integrity: sha512-xVz0PCo4Q/MzVvYtCmr4MgAb1/q7EXSHNh/eSwJRs3KfTG5GbT0YUY+J53+aVjQB6ELIIXvAkvOPX2WHa0Bbgw==}
+    engines: {node: '>=20'}
     hasBin: true
     peerDependencies:
-      '@bufbuild/protobuf': 2.6.3
+      '@bufbuild/protobuf': 2.7.0
     peerDependenciesMeta:
       '@bufbuild/protobuf':
         optional: true
 
-  '@bufbuild/protoplugin@2.6.3':
-    resolution: {integrity: sha512-VceMuxeRukxGeABfo34SXq0VqY1MU+mzS+PBf0HAWo97ylFut8F6sQ3mV0tKiM08UQ/xQco7lxCn83BkoxrWrA==}
+  '@bufbuild/protoplugin@2.7.0':
+    resolution: {integrity: sha512-yUdg8hXzFGR6K8ren7aXly2hT9BxClId814VB142YeZPatY0wqD3c0D8KfIz5nIeMdoPt0/Pm/RycFJCNGMD6w==}
 
   '@bufbuild/protovalidate@0.8.0':
     resolution: {integrity: sha512-8NLEdRjxZSgyRdtwOY3c2s4uo08mxOGGK4k6z9JAF8MuoTWhC6xuspDkKbt+M2WcBB4QyFiYQ2OF4V1j9zunzA==}
@@ -3121,49 +3121,49 @@ snapshots:
       '@bufbuild/buf-win32-arm64': 1.56.0
       '@bufbuild/buf-win32-x64': 1.56.0
 
-  '@bufbuild/cel-spec@0.3.0(@bufbuild/protobuf@2.6.3)':
+  '@bufbuild/cel-spec@0.3.0(@bufbuild/protobuf@2.7.0)':
     dependencies:
-      '@bufbuild/protobuf': 2.6.3
+      '@bufbuild/protobuf': 2.7.0
 
-  '@bufbuild/cel@0.3.0(@bufbuild/protobuf@2.6.3)':
+  '@bufbuild/cel@0.3.0(@bufbuild/protobuf@2.7.0)':
     dependencies:
-      '@bufbuild/cel-spec': 0.3.0(@bufbuild/protobuf@2.6.3)
-      '@bufbuild/protobuf': 2.6.3
+      '@bufbuild/cel-spec': 0.3.0(@bufbuild/protobuf@2.7.0)
+      '@bufbuild/protobuf': 2.7.0
 
-  '@bufbuild/protobuf@2.6.3': {}
+  '@bufbuild/protobuf@2.7.0': {}
 
-  '@bufbuild/protoc-gen-es@2.6.3(@bufbuild/protobuf@2.6.3)':
+  '@bufbuild/protoc-gen-es@2.7.0(@bufbuild/protobuf@2.7.0)':
     dependencies:
-      '@bufbuild/protoplugin': 2.6.3
+      '@bufbuild/protoplugin': 2.7.0
     optionalDependencies:
-      '@bufbuild/protobuf': 2.6.3
+      '@bufbuild/protobuf': 2.7.0
     transitivePeerDependencies:
       - supports-color
 
-  '@bufbuild/protoplugin@2.6.3':
+  '@bufbuild/protoplugin@2.7.0':
     dependencies:
-      '@bufbuild/protobuf': 2.6.3
+      '@bufbuild/protobuf': 2.7.0
       '@typescript/vfs': 1.6.1(typescript@5.4.5)
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
 
-  '@bufbuild/protovalidate@0.8.0(@bufbuild/protobuf@2.6.3)':
+  '@bufbuild/protovalidate@0.8.0(@bufbuild/protobuf@2.7.0)':
     dependencies:
-      '@bufbuild/cel': 0.3.0(@bufbuild/protobuf@2.6.3)
-      '@bufbuild/protobuf': 2.6.3
+      '@bufbuild/cel': 0.3.0(@bufbuild/protobuf@2.7.0)
+      '@bufbuild/protobuf': 2.7.0
 
   '@colors/colors@1.5.0':
     optional: true
 
-  '@connectrpc/connect-node@2.0.4(@bufbuild/protobuf@2.6.3)(@connectrpc/connect@2.0.4(@bufbuild/protobuf@2.6.3))':
+  '@connectrpc/connect-node@2.0.4(@bufbuild/protobuf@2.7.0)(@connectrpc/connect@2.0.4(@bufbuild/protobuf@2.7.0))':
     dependencies:
-      '@bufbuild/protobuf': 2.6.3
-      '@connectrpc/connect': 2.0.4(@bufbuild/protobuf@2.6.3)
+      '@bufbuild/protobuf': 2.7.0
+      '@connectrpc/connect': 2.0.4(@bufbuild/protobuf@2.7.0)
 
-  '@connectrpc/connect@2.0.4(@bufbuild/protobuf@2.6.3)':
+  '@connectrpc/connect@2.0.4(@bufbuild/protobuf@2.7.0)':
     dependencies:
-      '@bufbuild/protobuf': 2.6.3
+      '@bufbuild/protobuf': 2.7.0
 
   '@csstools/color-helpers@5.0.2': {}
 
@@ -5547,11 +5547,11 @@ snapshots:
 
   ts-proto-descriptors@2.0.0:
     dependencies:
-      '@bufbuild/protobuf': 2.6.3
+      '@bufbuild/protobuf': 2.7.0
 
   ts-proto@2.7.7:
     dependencies:
-      '@bufbuild/protobuf': 2.6.3
+      '@bufbuild/protobuf': 2.7.0
       case-anything: 2.1.13
       ts-poet: 6.12.0
       ts-proto-descriptors: 2.0.0

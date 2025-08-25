@@ -6,6 +6,10 @@ unreleased:
       pull: 1210
 
   bumped:
+    "@bufbuild/protobuf":
+      to: 2.7.0
+      pull: 1216
+
     "@connectrpc/connect":
       to: 2.0.4
       pull: 1211
