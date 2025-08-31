@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.2",
-    "@bufbuild/buf": "1.56.0",
+    "@bufbuild/buf": "1.57.0",
     "@bufbuild/protoc-gen-es": "2.7.0",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@microsoft/api-documenter": "7.26.32",
