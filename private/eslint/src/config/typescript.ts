@@ -1,6 +1,5 @@
+import { defineConfig } from "eslint/config";
 import typescriptPlugin from "typescript-eslint";
-
-import { defineConfig } from "../config.js";
 
 export const typescriptConfig = defineConfig(
   ...typescriptPlugin.configs.strictTypeChecked,
