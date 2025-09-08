@@ -22,10 +22,11 @@ runs:
 
   steps:
     - name: Set up Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v5
       with:
         node-version: ${{ inputs.node-version }}
         node-version-file: ${{ inputs.node-version == '' && '.node-version' || '' }}
+        package-manager-cache: false
         registry-url: https://registry.npmjs.com
 
     - name: Set up pnpm
