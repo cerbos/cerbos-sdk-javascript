@@ -26,6 +26,7 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         node-version-file: ${{ inputs.node-version == '' && '.node-version' || '' }}
+        package-manager-cache: false
         registry-url: https://registry.npmjs.com
 
     - name: Set up pnpm
