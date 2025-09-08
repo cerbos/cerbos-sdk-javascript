@@ -173,9 +173,6 @@ importers:
       '@stylistic/eslint-plugin':
         specifier: 5.3.1
         version: 5.3.1(eslint@9.34.0)
-      '@typescript-eslint/utils':
-        specifier: 8.42.0
-        version: 8.42.0(eslint@9.34.0)(typescript@5.9.2)
       '@vitest/eslint-plugin':
         specifier: 1.3.8
         version: 1.3.8(eslint@9.34.0)(typescript@5.9.2)(vitest@3.2.4(@types/node@20.19.13)(jsdom@26.1.0)(tsx@4.20.5)(yaml@2.8.1))

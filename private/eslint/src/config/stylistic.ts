@@ -1,6 +1,5 @@
 import stylisticPlugin from "@stylistic/eslint-plugin";
-
-import { defineConfig } from "../config.js";
+import { defineConfig } from "eslint/config";
 
 export const stylisticConfig = defineConfig(
   stylisticPlugin.configs["disable-legacy"],

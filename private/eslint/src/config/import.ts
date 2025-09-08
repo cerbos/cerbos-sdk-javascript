@@ -1,6 +1,5 @@
+import { defineConfig } from "eslint/config";
 import importPlugin from "eslint-plugin-import";
-
-import { defineConfig } from "../config.js";
 
 export const importConfig = defineConfig(
   importPlugin.flatConfigs.typescript,
