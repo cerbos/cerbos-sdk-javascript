@@ -3,8 +3,8 @@ unreleased:
 
   bumped:
     "@bufbuild/protobuf":
-      to: 2.7.0
-      pull: 1216
+      to: 2.8.0
+      pulls: [1216, 1227]
 
 releases:
   - version: 0.23.0
