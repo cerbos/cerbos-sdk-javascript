@@ -115,8 +115,8 @@ importers:
         specifier: ^2.8.0
         version: 2.8.0
       '@bufbuild/protovalidate':
-        specifier: ^0.8.0
-        version: 0.8.0(@bufbuild/protobuf@2.8.0)
+        specifier: ^1.0.0
+        version: 1.0.0(@bufbuild/protobuf@2.8.0)
       '@cerbos/core':
         specifier: ^0.24.0
         version: link:../core
@@ -440,10 +440,10 @@ packages:
   '@bufbuild/protoplugin@2.8.0':
     resolution: {integrity: sha512-kwZeZAz6jmDC571Wf/f5cDX02IjvPmtdspdxW/hbLS+bnZHkXMW4StaW+irGd4TkykvHD4fFgBnPG/O1x8OgXw==}
 
-  '@bufbuild/protovalidate@0.8.0':
-    resolution: {integrity: sha512-8NLEdRjxZSgyRdtwOY3c2s4uo08mxOGGK4k6z9JAF8MuoTWhC6xuspDkKbt+M2WcBB4QyFiYQ2OF4V1j9zunzA==}
+  '@bufbuild/protovalidate@1.0.0':
+    resolution: {integrity: sha512-ICGANMQXaPKdR5BJ+6/L3nySHOZQQEZQvvivSZCFb799138obPLjNk32rSIKOMrA/YHc4Y2W738e+SL3CbZXSg==}
     peerDependencies:
-      '@bufbuild/protobuf': ^2.6.2
+      '@bufbuild/protobuf': ^2.8.0
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -3146,7 +3146,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@bufbuild/protovalidate@0.8.0(@bufbuild/protobuf@2.8.0)':
+  '@bufbuild/protovalidate@1.0.0(@bufbuild/protobuf@2.8.0)':
     dependencies:
       '@bufbuild/cel': 0.3.0(@bufbuild/protobuf@2.8.0)
       '@bufbuild/protobuf': 2.8.0
