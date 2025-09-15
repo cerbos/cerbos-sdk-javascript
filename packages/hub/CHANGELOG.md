@@ -6,7 +6,7 @@
 
 - Ignore "already exists" errors in circuit breaker ([#1210](https://github.com/cerbos/cerbos-sdk-javascript/pull/1210))
 
-- Bump dependency on [@bufbuild/protobuf] to 2.7.0 ([#1216](https://github.com/cerbos/cerbos-sdk-javascript/pull/1216))
+- Bump dependency on [@bufbuild/protobuf] to 2.8.0 ([#1216](https://github.com/cerbos/cerbos-sdk-javascript/pull/1216), [#1227](https://github.com/cerbos/cerbos-sdk-javascript/pull/1227))
 
 - Bump dependency on [@connectrpc/connect] to 2.1.0 ([#1211](https://github.com/cerbos/cerbos-sdk-javascript/pull/1211), [#1219](https://github.com/cerbos/cerbos-sdk-javascript/pull/1219))
 
