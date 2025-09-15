@@ -1,28 +1,32 @@
-unreleased:
-  type: minor
-
-  changed:
-    - summary: Ignore "already exists" errors in circuit breaker
-      pull: 1210
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.8.0
-      pulls: [1216, 1227]
-
-    "@bufbuild/protovalidate":
-      to: 1.0.0
-      pull: 1231
-
-    "@connectrpc/connect":
-      to: 2.1.0
-      pulls: [1211, 1219]
-
-    "@connectrpc/connect-node":
-      to: 2.1.0
-      pulls: [1211, 1219]
-
 releases:
+  - version: 0.2.0
+    date: 2025-09-15
+
+    changed:
+      - summary: Ignore "already exists" errors in circuit breaker
+        pull: 1210
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.8.0
+        pulls: [1216, 1227]
+
+      "@bufbuild/protovalidate":
+        to: 1.0.0
+        pull: 1231
+
+      "@cerbos/core":
+        to: 0.24.1
+        pull: 1233
+
+      "@connectrpc/connect":
+        to: 2.1.0
+        pulls: [1211, 1219]
+
+      "@connectrpc/connect-node":
+        to: 2.1.0
+        pulls: [1211, 1219]
+
   - version: 0.1.1
     date: 2025-08-11
 

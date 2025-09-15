@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.2.0] - 2025-09-15
+
 ### Changed
 
 - Ignore "already exists" errors in circuit breaker ([#1210](https://github.com/cerbos/cerbos-sdk-javascript/pull/1210))
@@ -9,6 +13,8 @@
 - Bump dependency on [@bufbuild/protobuf] to 2.8.0 ([#1216](https://github.com/cerbos/cerbos-sdk-javascript/pull/1216), [#1227](https://github.com/cerbos/cerbos-sdk-javascript/pull/1227))
 
 - Bump dependency on [@bufbuild/protovalidate] to 1.0.0 ([#1231](https://github.com/cerbos/cerbos-sdk-javascript/pull/1231))
+
+- Bump dependency on [@cerbos/core] to 0.24.1 ([#1233](https://github.com/cerbos/cerbos-sdk-javascript/pull/1233))
 
 - Bump dependency on [@connectrpc/connect] to 2.1.0 ([#1211](https://github.com/cerbos/cerbos-sdk-javascript/pull/1211), [#1219](https://github.com/cerbos/cerbos-sdk-javascript/pull/1219))
 
@@ -34,7 +40,8 @@
 
 - A client for interacting with policy stores in Cerbos Hub ([#1173](https://github.com/cerbos/cerbos-sdk-javascript/pull/1173), [#1191](https://github.com/cerbos/cerbos-sdk-javascript/pull/1191))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.1.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.2.0...HEAD
+[0.2.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.1.1...@cerbos/hub@0.2.0
 [0.1.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.1.0...@cerbos/hub@0.1.1
 [0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/f477d2e7210284634461d85cb273d6a92e448ceb...@cerbos/hub@0.1.0
 [@bufbuild/protobuf]: https://github.com/bufbuild/protobuf-es

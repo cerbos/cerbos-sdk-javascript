@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/opentelemetry",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "OpenTelemetry instrumentation for the @cerbos/grpc and @cerbos/http client libraries",
   "repository": {
     "type": "git",
@@ -51,7 +51,7 @@
     "metrics"
   ],
   "dependencies": {
-    "@cerbos/core": "^0.24.0",
+    "@cerbos/core": "^0.24.1",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/instrumentation": "^0.205.0",
     "@opentelemetry/semantic-conventions": "^1.37.0"
