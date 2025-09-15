@@ -10,6 +10,10 @@ unreleased:
       to: 2.8.0
       pulls: [1216, 1227]
 
+    "@bufbuild/protovalidate":
+      to: 1.0.0
+      pull: 1231
+
     "@connectrpc/connect":
       to: 2.1.0
       pulls: [1211, 1219]
