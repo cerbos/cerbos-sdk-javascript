@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@10.15.1",
   "engines": {
-    "node": "24.7.0",
+    "node": "24.8.0",
     "pnpm": "10.15.1"
   },
   "scripts": {
@@ -60,14 +60,14 @@
     "@bufbuild/buf": "1.57.0",
     "@bufbuild/protoc-gen-es": "2.8.0",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
-    "@microsoft/api-documenter": "7.26.32",
-    "@microsoft/api-extractor": "7.52.11",
+    "@microsoft/api-documenter": "7.26.33",
+    "@microsoft/api-extractor": "7.52.12",
     "@tsconfig/node20": "20.1.6",
     "@tsconfig/strictest": "2.0.5",
     "@types/node": "20.19.13",
     "concurrently": "9.2.1",
     "depcheck": "1.4.7",
-    "eslint": "9.34.0",
+    "eslint": "9.35.0",
     "prettier": "3.6.2",
     "prettier-plugin-pkg": "0.21.2",
     "ts-proto": "2.7.7",
