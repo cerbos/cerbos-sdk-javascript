@@ -2,6 +2,10 @@ unreleased:
   type: patch
 
   bumped:
+    "@bufbuild/protobuf":
+      to: 2.9.0
+      pull: 1236
+
     "@grpc/grpc-js":
       to: 1.14.0
       pull: 1237
