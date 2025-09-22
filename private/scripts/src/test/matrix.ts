@@ -165,7 +165,7 @@ async function fetchReactVersions(): Promise<Versions> {
     "dist-tags": { canary },
     versions: allVersions,
   } = await fetchJson(
-    "https://registry.npmjs.org/react",
+    "https://registry.npmjs.com/react",
     z.object({
       "dist-tags": z.object({ canary: z.string() }),
       versions: z
