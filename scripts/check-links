@@ -3,7 +3,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-excludes=()
+excludes=(--exclude https://www.npmjs.com/)
 if [[ "${GITHUB_HEAD_REF:-}" = "prepare-releases" ]]; then
   excludes=(--exclude https://github.com/cerbos/cerbos-sdk-javascript/compare/)
 fi

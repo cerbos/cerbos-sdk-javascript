@@ -8,7 +8,7 @@ const { version } = require("../../../../packages/hub/package.json") as {
   version: string;
 };
 
-describe("headers ", () => {
+describe("headers", () => {
   const server = new Server();
 
   beforeAll(async () => {
