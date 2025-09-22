@@ -13,6 +13,7 @@ type UnsupportedOptions =
   | "grpc.max_connection_idle_ms" // server-only
   | "grpc.primary_user_agent" // set using `userAgent` option
   | "grpc.secondary_user_agent" // set using `userAgent` option
+  | "grpc.server_call_metric_recording" // server-only
   | "grpc-node.max_session_memory"; // server-only
 
 describe("ChannelOptions", () => {
