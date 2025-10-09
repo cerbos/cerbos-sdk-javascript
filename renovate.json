@@ -6,7 +6,6 @@
     ":dependencyDashboard",
     ":gitSignOff",
     ":prConcurrentLimitNone",
-    "security:minimumReleaseAgeNpm",
     "schedule:weekly",
     "workarounds:all"
   ],
@@ -14,6 +13,9 @@
     "enabled": true
   },
   "packageRules": [
+    {
+      "minimumReleaseAge": "3 days"
+    },
     {
       "matchDepTypes": ["dependencies"],
       "rangeStrategy": "bump",
