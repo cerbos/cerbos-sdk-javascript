@@ -6,3 +6,9 @@ ignoredBuiltDependencies:
   - "@bufbuild/buf"
   - esbuild
   - protobufjs
+
+minimumReleaseAge: 4320 # 3 days
+minimumReleaseAgeExclude:
+  - "@cerbos/*"
+  - react
+  - react-dom
