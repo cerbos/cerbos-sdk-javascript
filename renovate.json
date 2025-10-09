@@ -6,7 +6,7 @@
     ":dependencyDashboard",
     ":gitSignOff",
     ":prConcurrentLimitNone",
-    "npm:unpublishSafe",
+    "security:minimumReleaseAgeNpm",
     "schedule:weekly",
     "workarounds:all"
   ],
