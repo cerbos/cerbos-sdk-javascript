@@ -12,10 +12,8 @@
   "lockFileMaintenance": {
     "enabled": true
   },
+  "minimumReleaseAge": "3 days",
   "packageRules": [
-    {
-      "minimumReleaseAge": "3 days"
-    },
     {
       "matchDepTypes": ["dependencies"],
       "rangeStrategy": "bump",
