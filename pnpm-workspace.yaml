@@ -12,3 +12,4 @@ minimumReleaseAgeExclude:
   - "@cerbos/*"
   - react
   - react-dom
+  - scheduler
