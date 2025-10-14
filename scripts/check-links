@@ -5,7 +5,7 @@ set -o pipefail
 
 excludes=(--exclude https://www.npmjs.com/)
 if [[ "${GITHUB_HEAD_REF:-}" = "prepare-releases" ]]; then
-  excludes=(--exclude https://github.com/cerbos/cerbos-sdk-javascript/compare/)
+  excludes+=(--exclude https://github.com/cerbos/cerbos-sdk-javascript/compare/)
 fi
 
 docker run \
