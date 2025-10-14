@@ -18,4 +18,6 @@ if [[ "${expected_version}" != "${actual_version}" ]]; then
   exit 1
 fi
 
-pnpm --filter="${package_dir}" publish --no-git-checks
+cd "${package_dir}"
+
+npm publish --verbose
