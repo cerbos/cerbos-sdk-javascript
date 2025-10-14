@@ -1,0 +1,27 @@
+name: Publish (dry run)
+
+on:
+  push:
+    branches:
+      - publish-dry-run
+
+jobs:
+  publish:
+    name: Publish package to npm registry
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: ./.github/actions/setup-node
+
+      - name: Show npm version
+        run: npm --version
+
+      - name: Publish
+        working-directory: packages/hub
+        run: npm publish --dry-run --verbose
