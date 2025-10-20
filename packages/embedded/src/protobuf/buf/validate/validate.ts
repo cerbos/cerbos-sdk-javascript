@@ -9,8 +9,7 @@ export const protobufPackage = "buf.validate";
 
 export enum Ignore {
   IGNORE_UNSPECIFIED = 0,
-  IGNORE_IF_UNPOPULATED = 1,
-  IGNORE_IF_DEFAULT_VALUE = 2,
+  IGNORE_IF_ZERO_VALUE = 1,
   IGNORE_ALWAYS = 3,
 }
 
@@ -20,11 +19,8 @@ export function ignoreFromJSON(object: any): Ignore {
     case "IGNORE_UNSPECIFIED":
       return Ignore.IGNORE_UNSPECIFIED;
     case 1:
-    case "IGNORE_IF_UNPOPULATED":
-      return Ignore.IGNORE_IF_UNPOPULATED;
-    case 2:
-    case "IGNORE_IF_DEFAULT_VALUE":
-      return Ignore.IGNORE_IF_DEFAULT_VALUE;
+    case "IGNORE_IF_ZERO_VALUE":
+      return Ignore.IGNORE_IF_ZERO_VALUE;
     case 3:
     case "IGNORE_ALWAYS":
       return Ignore.IGNORE_ALWAYS;
@@ -39,10 +35,8 @@ export function ignoreToJSON(object: Ignore): string {
   switch (object) {
     case Ignore.IGNORE_UNSPECIFIED:
       return "IGNORE_UNSPECIFIED";
-    case Ignore.IGNORE_IF_UNPOPULATED:
-      return "IGNORE_IF_UNPOPULATED";
-    case Ignore.IGNORE_IF_DEFAULT_VALUE:
-      return "IGNORE_IF_DEFAULT_VALUE";
+    case Ignore.IGNORE_IF_ZERO_VALUE:
+      return "IGNORE_IF_ZERO_VALUE";
     case Ignore.IGNORE_ALWAYS:
       return "IGNORE_ALWAYS";
     default:
@@ -98,8 +92,13 @@ export interface Rule {
 }
 
 export interface MessageRules {
-  disabled?: boolean | undefined;
   cel: Rule[];
+  oneof: MessageOneofRule[];
+}
+
+export interface MessageOneofRule {
+  fields: string[];
+  required?: boolean | undefined;
 }
 
 export interface FieldRules {
@@ -467,22 +466,46 @@ export const Rule: MessageFns<Rule> = {
 export const MessageRules: MessageFns<MessageRules> = {
   fromJSON(object: any): MessageRules {
     return {
-      disabled: isSet(object.disabled)
-        ? globalThis.Boolean(object.disabled)
-        : false,
       cel: globalThis.Array.isArray(object?.cel)
         ? object.cel.map((e: any) => Rule.fromJSON(e))
+        : [],
+      oneof: globalThis.Array.isArray(object?.oneof)
+        ? object.oneof.map((e: any) => MessageOneofRule.fromJSON(e))
         : [],
     };
   },
 
   toJSON(message: MessageRules): unknown {
     const obj: any = {};
-    if (message.disabled !== undefined && message.disabled !== false) {
-      obj.disabled = message.disabled;
-    }
     if (message.cel?.length) {
       obj.cel = message.cel.map((e) => Rule.toJSON(e));
+    }
+    if (message.oneof?.length) {
+      obj.oneof = message.oneof.map((e) => MessageOneofRule.toJSON(e));
+    }
+    return obj;
+  },
+};
+
+export const MessageOneofRule: MessageFns<MessageOneofRule> = {
+  fromJSON(object: any): MessageOneofRule {
+    return {
+      fields: globalThis.Array.isArray(object?.fields)
+        ? object.fields.map((e: any) => globalThis.String(e))
+        : [],
+      required: isSet(object.required)
+        ? globalThis.Boolean(object.required)
+        : false,
+    };
+  },
+
+  toJSON(message: MessageOneofRule): unknown {
+    const obj: any = {};
+    if (message.fields?.length) {
+      obj.fields = message.fields;
+    }
+    if (message.required !== undefined && message.required !== false) {
+      obj.required = message.required;
     }
     return obj;
   },

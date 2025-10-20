@@ -10,8 +10,7 @@ export const protobufPackage = "buf.validate";
 
 export enum Ignore {
   IGNORE_UNSPECIFIED = 0,
-  IGNORE_IF_UNPOPULATED = 1,
-  IGNORE_IF_DEFAULT_VALUE = 2,
+  IGNORE_IF_ZERO_VALUE = 1,
   IGNORE_ALWAYS = 3,
 }
 
@@ -21,11 +20,8 @@ export function ignoreFromJSON(object: any): Ignore {
     case "IGNORE_UNSPECIFIED":
       return Ignore.IGNORE_UNSPECIFIED;
     case 1:
-    case "IGNORE_IF_UNPOPULATED":
-      return Ignore.IGNORE_IF_UNPOPULATED;
-    case 2:
-    case "IGNORE_IF_DEFAULT_VALUE":
-      return Ignore.IGNORE_IF_DEFAULT_VALUE;
+    case "IGNORE_IF_ZERO_VALUE":
+      return Ignore.IGNORE_IF_ZERO_VALUE;
     case 3:
     case "IGNORE_ALWAYS":
       return Ignore.IGNORE_ALWAYS;
@@ -40,10 +36,8 @@ export function ignoreToJSON(object: Ignore): string {
   switch (object) {
     case Ignore.IGNORE_UNSPECIFIED:
       return "IGNORE_UNSPECIFIED";
-    case Ignore.IGNORE_IF_UNPOPULATED:
-      return "IGNORE_IF_UNPOPULATED";
-    case Ignore.IGNORE_IF_DEFAULT_VALUE:
-      return "IGNORE_IF_DEFAULT_VALUE";
+    case Ignore.IGNORE_IF_ZERO_VALUE:
+      return "IGNORE_IF_ZERO_VALUE";
     case Ignore.IGNORE_ALWAYS:
       return "IGNORE_ALWAYS";
     default:
@@ -99,8 +93,13 @@ export interface Rule {
 }
 
 export interface MessageRules {
-  disabled?: boolean | undefined;
   cel: Rule[];
+  oneof: MessageOneofRule[];
+}
+
+export interface MessageOneofRule {
+  fields: string[];
+  required?: boolean | undefined;
 }
 
 export interface OneofRules {
@@ -531,7 +530,7 @@ export const Rule: MessageFns<Rule> = {
 };
 
 function createBaseMessageRules(): MessageRules {
-  return { disabled: false, cel: [] };
+  return { cel: [], oneof: [] };
 }
 
 export const MessageRules: MessageFns<MessageRules> = {
@@ -539,11 +538,11 @@ export const MessageRules: MessageFns<MessageRules> = {
     message: MessageRules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.disabled !== undefined && message.disabled !== false) {
-      writer.uint32(8).bool(message.disabled);
-    }
     for (const v of message.cel) {
       Rule.encode(v!, writer.uint32(26).fork()).join();
+    }
+    for (const v of message.oneof) {
+      MessageOneofRule.encode(v!, writer.uint32(34).fork()).join();
     }
     return writer;
   },
@@ -556,20 +555,20 @@ export const MessageRules: MessageFns<MessageRules> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
-          }
-
-          message.disabled = reader.bool();
-          continue;
-        }
         case 3: {
           if (tag !== 26) {
             break;
           }
 
           message.cel.push(Rule.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.oneof.push(MessageOneofRule.decode(reader, reader.uint32()));
           continue;
         }
       }
@@ -583,22 +582,96 @@ export const MessageRules: MessageFns<MessageRules> = {
 
   fromJSON(object: any): MessageRules {
     return {
-      disabled: isSet(object.disabled)
-        ? globalThis.Boolean(object.disabled)
-        : false,
       cel: globalThis.Array.isArray(object?.cel)
         ? object.cel.map((e: any) => Rule.fromJSON(e))
+        : [],
+      oneof: globalThis.Array.isArray(object?.oneof)
+        ? object.oneof.map((e: any) => MessageOneofRule.fromJSON(e))
         : [],
     };
   },
 
   toJSON(message: MessageRules): unknown {
     const obj: any = {};
-    if (message.disabled !== undefined && message.disabled !== false) {
-      obj.disabled = message.disabled;
-    }
     if (message.cel?.length) {
       obj.cel = message.cel.map((e) => Rule.toJSON(e));
+    }
+    if (message.oneof?.length) {
+      obj.oneof = message.oneof.map((e) => MessageOneofRule.toJSON(e));
+    }
+    return obj;
+  },
+};
+
+function createBaseMessageOneofRule(): MessageOneofRule {
+  return { fields: [], required: false };
+}
+
+export const MessageOneofRule: MessageFns<MessageOneofRule> = {
+  encode(
+    message: MessageOneofRule,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    for (const v of message.fields) {
+      writer.uint32(10).string(v!);
+    }
+    if (message.required !== undefined && message.required !== false) {
+      writer.uint32(16).bool(message.required);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): MessageOneofRule {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMessageOneofRule();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.fields.push(reader.string());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.required = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MessageOneofRule {
+    return {
+      fields: globalThis.Array.isArray(object?.fields)
+        ? object.fields.map((e: any) => globalThis.String(e))
+        : [],
+      required: isSet(object.required)
+        ? globalThis.Boolean(object.required)
+        : false,
+    };
+  },
+
+  toJSON(message: MessageOneofRule): unknown {
+    const obj: any = {};
+    if (message.fields?.length) {
+      obj.fields = message.fields;
+    }
+    if (message.required !== undefined && message.required !== false) {
+      obj.required = message.required;
     }
     return obj;
   },
