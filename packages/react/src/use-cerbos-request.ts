@@ -55,7 +55,7 @@ function useCerbosRequest<Method extends Methods>(
   const bundle = activeEmbeddedBundle(client);
 
   useEffect(() => {
-    setIsLoading(true);
+    setIsLoading(true); // eslint-disable-line react-hooks/set-state-in-effect
     setData(undefined);
     setError(undefined);
 
