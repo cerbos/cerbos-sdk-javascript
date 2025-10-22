@@ -9,8 +9,7 @@ export const protobufPackage = "buf.validate";
 
 export enum Ignore {
   IGNORE_UNSPECIFIED = 0,
-  IGNORE_IF_UNPOPULATED = 1,
-  IGNORE_IF_DEFAULT_VALUE = 2,
+  IGNORE_IF_ZERO_VALUE = 1,
   IGNORE_ALWAYS = 3,
 }
 
@@ -20,11 +19,8 @@ export function ignoreFromJSON(object: any): Ignore {
     case "IGNORE_UNSPECIFIED":
       return Ignore.IGNORE_UNSPECIFIED;
     case 1:
-    case "IGNORE_IF_UNPOPULATED":
-      return Ignore.IGNORE_IF_UNPOPULATED;
-    case 2:
-    case "IGNORE_IF_DEFAULT_VALUE":
-      return Ignore.IGNORE_IF_DEFAULT_VALUE;
+    case "IGNORE_IF_ZERO_VALUE":
+      return Ignore.IGNORE_IF_ZERO_VALUE;
     case 3:
     case "IGNORE_ALWAYS":
       return Ignore.IGNORE_ALWAYS;
@@ -39,10 +35,8 @@ export function ignoreToJSON(object: Ignore): string {
   switch (object) {
     case Ignore.IGNORE_UNSPECIFIED:
       return "IGNORE_UNSPECIFIED";
-    case Ignore.IGNORE_IF_UNPOPULATED:
-      return "IGNORE_IF_UNPOPULATED";
-    case Ignore.IGNORE_IF_DEFAULT_VALUE:
-      return "IGNORE_IF_DEFAULT_VALUE";
+    case Ignore.IGNORE_IF_ZERO_VALUE:
+      return "IGNORE_IF_ZERO_VALUE";
     case Ignore.IGNORE_ALWAYS:
       return "IGNORE_ALWAYS";
     default:
