@@ -45,8 +45,7 @@ describe("loaders", () => {
       ["ArrayBuffer", (): ArrayBuffer => readFileSync(first.path).buffer],
       [
         "Promise<ArrayBuffer>",
-        async (): Promise<ArrayBuffer> =>
-          (await readFile(first.path)).buffer as ArrayBuffer,
+        async (): Promise<ArrayBuffer> => (await readFile(first.path)).buffer,
       ],
       [
         "Response",
@@ -72,9 +71,7 @@ describe("loaders", () => {
       [
         "Promise<WebAssembly.Module>",
         async (): Promise<WebAssembly.Module> =>
-          await WebAssembly.compile(
-            (await readFile(first.path)).buffer as ArrayBuffer,
-          ),
+          await WebAssembly.compile((await readFile(first.path)).buffer),
       ],
     ])("%s", async (_, source, url) => {
       const callbacks = new Callbacks();
