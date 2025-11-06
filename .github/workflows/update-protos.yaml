@@ -22,11 +22,19 @@ jobs:
       - name: Generate code
         run: pnpm run generate
 
+      - name: Generate bot token
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
+
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
         with:
+          token: ${{ steps.generate-token.outputs.token }}
           branch: update-protos
-          draft: always-true
+          delete-branch: true
           reviewers: haines
           signoff: true
           sign-commits: true
