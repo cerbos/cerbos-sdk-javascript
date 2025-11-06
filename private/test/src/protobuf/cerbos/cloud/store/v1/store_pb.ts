@@ -29,7 +29,7 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_cerbos_cloud_store_v1_store: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "CiFjZXJib3MvY2xvdWQvc3RvcmUvdjEvc3RvcmUucHJvdG8SFWNlcmJvcy5jbG91ZC5zdG9yZS52MSKmAQoLU3RyaW5nTWF0Y2gSEAoGZXF1YWxzGAEgASgJSAASEgoIY29udGFpbnMYAiABKAlIABI3CgJpbhgDIAEoCzIpLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5TdHJpbmdNYXRjaC5Jbkxpc3RIABooCgZJbkxpc3QSHgoGdmFsdWVzGAEgAygJQg66SAuSAQgQCiIEcgIQAUIOCgVtYXRjaBIFukgCCAEiTAoKRmlsZUZpbHRlchI1CgRwYXRoGAEgASgLMiIuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLlN0cmluZ01hdGNoSACIAQFCBwoFX3BhdGgicQoQTGlzdEZpbGVzUmVxdWVzdBIaCghzdG9yZV9pZBgBIAEoCUIIukgFcgOYAQwSNgoGZmlsdGVyGAIgASgLMiEuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkZpbGVGaWx0ZXJIAIgBAUIJCgdfZmlsdGVyIjkKEUxpc3RGaWxlc1Jlc3BvbnNlEhUKDXN0b3JlX3ZlcnNpb24YASABKAMSDQoFZmlsZXMYAiADKAkiUAoPR2V0RmlsZXNSZXF1ZXN0EhoKCHN0b3JlX2lkGAEgASgJQgi6SAVyA5gBDBIhCgVmaWxlcxgCIAMoCUISukgPkgEMCAEQChgBIgRyAhABIkAKBEZpbGUSGAoEcGF0aBgBIAEoCUIKukgHcgUQARiACBIeCghjb250ZW50cxgCIAEoDEIMukgJegcQARiAgMACIlUKEEdldEZpbGVzUmVzcG9uc2USFQoNc3RvcmVfdmVyc2lvbhgBIAEoAxIqCgVmaWxlcxgCIAMoCzIbLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5GaWxlIpoGCg1DaGFuZ2VEZXRhaWxzEhMKC2Rlc2NyaXB0aW9uGAEgASgJEj8KCHVwbG9hZGVyGAIgASgLMi0uY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkNoYW5nZURldGFpbHMuVXBsb2FkZXISNwoDZ2l0GAMgASgLMiguY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkNoYW5nZURldGFpbHMuR2l0SAASQQoIaW50ZXJuYWwYBCABKAsyLS5jZXJib3MuY2xvdWQuc3RvcmUudjEuQ2hhbmdlRGV0YWlscy5JbnRlcm5hbEgAGsQBCgNHaXQSDAoEcmVwbxgBIAEoCRILCgNyZWYYAiABKAkSDAoEaGFzaBgDIAEoCRIPCgdtZXNzYWdlGAQgASgJEhEKCWNvbW1pdHRlchgFIAEoCRIvCgtjb21taXRfZGF0ZRgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGYXV0aG9yGAcgASgJEi8KC2F1dGhvcl9kYXRlGAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBqyAQoISW50ZXJuYWwSDgoGc291cmNlGAEgASgJEk0KCG1ldGFkYXRhGAIgAygLMjsuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkNoYW5nZURldGFpbHMuSW50ZXJuYWwuTWV0YWRhdGFFbnRyeRpHCg1NZXRhZGF0YUVudHJ5EgsKA2tleRgBIAEoCRIlCgV2YWx1ZRgCIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5WYWx1ZToCOAEasAEKCFVwbG9hZGVyEgwKBG5hbWUYASABKAkSTQoIbWV0YWRhdGEYAiADKAsyOy5jZXJib3MuY2xvdWQuc3RvcmUudjEuQ2hhbmdlRGV0YWlscy5VcGxvYWRlci5NZXRhZGF0YUVudHJ5GkcKDU1ldGFkYXRhRW50cnkSCwoDa2V5GAEgASgJEiUKBXZhbHVlGAIgASgLMhYuZ29vZ2xlLnByb3RvYnVmLlZhbHVlOgI4AUIICgZvcmlnaW4iXQoGRmlsZU9wEjQKDWFkZF9vcl91cGRhdGUYASABKAsyGy5jZXJib3MuY2xvdWQuc3RvcmUudjEuRmlsZUgAEhAKBmRlbGV0ZRgCIAEoCUgAQgsKAm9wEgW6SAIIASLYAgoSTW9kaWZ5RmlsZXNSZXF1ZXN0EhoKCHN0b3JlX2lkGAEgASgJQgi6SAVyA5gBDBJLCgljb25kaXRpb24YAiABKAsyMy5jZXJib3MuY2xvdWQuc3RvcmUudjEuTW9kaWZ5RmlsZXNSZXF1ZXN0LkNvbmRpdGlvbkgAiAEBEj0KCm9wZXJhdGlvbnMYAyADKAsyHS5jZXJib3MuY2xvdWQuc3RvcmUudjEuRmlsZU9wQgq6SAeSAQQIARAZEkEKDmNoYW5nZV9kZXRhaWxzGAQgASgLMiQuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkNoYW5nZURldGFpbHNIAYgBARo2CglDb25kaXRpb24SKQoYc3RvcmVfdmVyc2lvbl9tdXN0X2VxdWFsGAEgASgDQge6SAQiAigAQgwKCl9jb25kaXRpb25CEQoPX2NoYW5nZV9kZXRhaWxzIjAKE01vZGlmeUZpbGVzUmVzcG9uc2USGQoRbmV3X3N0b3JlX3ZlcnNpb24YASABKAMiqwQKE1JlcGxhY2VGaWxlc1JlcXVlc3QSGgoIc3RvcmVfaWQYASABKAlCCLpIBXIDmAEMEkwKCWNvbmRpdGlvbhgCIAEoCzI0LmNlcmJvcy5jbG91ZC5zdG9yZS52MS5SZXBsYWNlRmlsZXNSZXF1ZXN0LkNvbmRpdGlvbkgBiAEBEicKD3ppcHBlZF9jb250ZW50cxgDIAEoDEIMukgJegcQFhiAgMAHSAASQQoFZmlsZXMYBSABKAsyMC5jZXJib3MuY2xvdWQuc3RvcmUudjEuUmVwbGFjZUZpbGVzUmVxdWVzdC5GaWxlc0gAEkEKDmNoYW5nZV9kZXRhaWxzGAQgASgLMiQuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkNoYW5nZURldGFpbHNIAogBARo2CglDb25kaXRpb24SKQoYc3RvcmVfdmVyc2lvbl9tdXN0X2VxdWFsGAEgASgDQge6SAQiAigAGo4BCgVGaWxlcxKEAQoFZmlsZXMYASADKAsyGy5jZXJib3MuY2xvdWQuc3RvcmUudjEuRmlsZUJYukhVugFNChJmaWxlcy51bmlxdWVfcGF0aHMSGUZpbGUgcGF0aHMgbXVzdCBiZSB1bmlxdWUaHHRoaXMubWFwKGYsIGYucGF0aCkudW5pcXVlKCmSAQIIAUIRCghjb250ZW50cxIFukgCCAFCDAoKX2NvbmRpdGlvbkIRCg9fY2hhbmdlX2RldGFpbHMiSAoUUmVwbGFjZUZpbGVzUmVzcG9uc2USGQoRbmV3X3N0b3JlX3ZlcnNpb24YASABKAMSFQoNaWdub3JlZF9maWxlcxgCIAMoCTLAAwoSQ2VyYm9zU3RvcmVTZXJ2aWNlEmMKCUxpc3RGaWxlcxInLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5MaXN0RmlsZXNSZXF1ZXN0GiguY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkxpc3RGaWxlc1Jlc3BvbnNlIgOQAgESYAoIR2V0RmlsZXMSJi5jZXJib3MuY2xvdWQuc3RvcmUudjEuR2V0RmlsZXNSZXF1ZXN0GicuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkdldEZpbGVzUmVzcG9uc2UiA5ACARJkCgtNb2RpZnlGaWxlcxIpLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5Nb2RpZnlGaWxlc1JlcXVlc3QaKi5jZXJib3MuY2xvdWQuc3RvcmUudjEuTW9kaWZ5RmlsZXNSZXNwb25zZRJnCgxSZXBsYWNlRmlsZXMSKi5jZXJib3MuY2xvdWQuc3RvcmUudjEuUmVwbGFjZUZpbGVzUmVxdWVzdBorLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5SZXBsYWNlRmlsZXNSZXNwb25zZRoU+tLkkwIOEgxFWFBFUklNRU5UQUxCfAodZGV2LmNlcmJvcy5hcGkuY2xvdWQudjEuc3RvcmVaP2dpdGh1Yi5jb20vY2VyYm9zL2Nsb3VkLWFwaS9nZW5wYi9jZXJib3MvY2xvdWQvc3RvcmUvdjE7c3RvcmV2MaoCGUNlcmJvcy5BcGkuQ2xvdWQuVjEuU3RvcmViBnByb3RvMw",
+    "CiFjZXJib3MvY2xvdWQvc3RvcmUvdjEvc3RvcmUucHJvdG8SFWNlcmJvcy5jbG91ZC5zdG9yZS52MSKmAQoLU3RyaW5nTWF0Y2gSEAoGZXF1YWxzGAEgASgJSAASEgoIY29udGFpbnMYAiABKAlIABI3CgJpbhgDIAEoCzIpLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5TdHJpbmdNYXRjaC5Jbkxpc3RIABooCgZJbkxpc3QSHgoGdmFsdWVzGAEgAygJQg66SAuSAQgQCiIEcgIQAUIOCgVtYXRjaBIFukgCCAEiTAoKRmlsZUZpbHRlchI1CgRwYXRoGAEgASgLMiIuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLlN0cmluZ01hdGNoSACIAQFCBwoFX3BhdGgicQoQTGlzdEZpbGVzUmVxdWVzdBIaCghzdG9yZV9pZBgBIAEoCUIIukgFcgOYAQwSNgoGZmlsdGVyGAIgASgLMiEuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkZpbGVGaWx0ZXJIAIgBAUIJCgdfZmlsdGVyIjkKEUxpc3RGaWxlc1Jlc3BvbnNlEhUKDXN0b3JlX3ZlcnNpb24YASABKAMSDQoFZmlsZXMYAiADKAkiUAoPR2V0RmlsZXNSZXF1ZXN0EhoKCHN0b3JlX2lkGAEgASgJQgi6SAVyA5gBDBIhCgVmaWxlcxgCIAMoCUISukgPkgEMCAEQChgBIgRyAhABIkAKBEZpbGUSGAoEcGF0aBgBIAEoCUIKukgHcgUQARiACBIeCghjb250ZW50cxgCIAEoDEIMukgJegcQARiAgMACIlUKEEdldEZpbGVzUmVzcG9uc2USFQoNc3RvcmVfdmVyc2lvbhgBIAEoAxIqCgVmaWxlcxgCIAMoCzIbLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5GaWxlIjYKGEdldEN1cnJlbnRWZXJzaW9uUmVxdWVzdBIaCghzdG9yZV9pZBgBIAEoCUIIukgFcgOYAQwiiAEKGUdldEN1cnJlbnRWZXJzaW9uUmVzcG9uc2USFQoNc3RvcmVfdmVyc2lvbhgBIAEoAxJBCg5jaGFuZ2VfZGV0YWlscxgCIAEoCzIkLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5DaGFuZ2VEZXRhaWxzSACIAQFCEQoPX2NoYW5nZV9kZXRhaWxzIpoGCg1DaGFuZ2VEZXRhaWxzEhMKC2Rlc2NyaXB0aW9uGAEgASgJEj8KCHVwbG9hZGVyGAIgASgLMi0uY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkNoYW5nZURldGFpbHMuVXBsb2FkZXISNwoDZ2l0GAMgASgLMiguY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkNoYW5nZURldGFpbHMuR2l0SAASQQoIaW50ZXJuYWwYBCABKAsyLS5jZXJib3MuY2xvdWQuc3RvcmUudjEuQ2hhbmdlRGV0YWlscy5JbnRlcm5hbEgAGsQBCgNHaXQSDAoEcmVwbxgBIAEoCRILCgNyZWYYAiABKAkSDAoEaGFzaBgDIAEoCRIPCgdtZXNzYWdlGAQgASgJEhEKCWNvbW1pdHRlchgFIAEoCRIvCgtjb21taXRfZGF0ZRgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGYXV0aG9yGAcgASgJEi8KC2F1dGhvcl9kYXRlGAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBqyAQoISW50ZXJuYWwSDgoGc291cmNlGAEgASgJEk0KCG1ldGFkYXRhGAIgAygLMjsuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkNoYW5nZURldGFpbHMuSW50ZXJuYWwuTWV0YWRhdGFFbnRyeRpHCg1NZXRhZGF0YUVudHJ5EgsKA2tleRgBIAEoCRIlCgV2YWx1ZRgCIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5WYWx1ZToCOAEasAEKCFVwbG9hZGVyEgwKBG5hbWUYASABKAkSTQoIbWV0YWRhdGEYAiADKAsyOy5jZXJib3MuY2xvdWQuc3RvcmUudjEuQ2hhbmdlRGV0YWlscy5VcGxvYWRlci5NZXRhZGF0YUVudHJ5GkcKDU1ldGFkYXRhRW50cnkSCwoDa2V5GAEgASgJEiUKBXZhbHVlGAIgASgLMhYuZ29vZ2xlLnByb3RvYnVmLlZhbHVlOgI4AUIICgZvcmlnaW4iXQoGRmlsZU9wEjQKDWFkZF9vcl91cGRhdGUYASABKAsyGy5jZXJib3MuY2xvdWQuc3RvcmUudjEuRmlsZUgAEhAKBmRlbGV0ZRgCIAEoCUgAQgsKAm9wEgW6SAIIASLYAgoSTW9kaWZ5RmlsZXNSZXF1ZXN0EhoKCHN0b3JlX2lkGAEgASgJQgi6SAVyA5gBDBJLCgljb25kaXRpb24YAiABKAsyMy5jZXJib3MuY2xvdWQuc3RvcmUudjEuTW9kaWZ5RmlsZXNSZXF1ZXN0LkNvbmRpdGlvbkgAiAEBEj0KCm9wZXJhdGlvbnMYAyADKAsyHS5jZXJib3MuY2xvdWQuc3RvcmUudjEuRmlsZU9wQgq6SAeSAQQIARAZEkEKDmNoYW5nZV9kZXRhaWxzGAQgASgLMiQuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkNoYW5nZURldGFpbHNIAYgBARo2CglDb25kaXRpb24SKQoYc3RvcmVfdmVyc2lvbl9tdXN0X2VxdWFsGAEgASgDQge6SAQiAigAQgwKCl9jb25kaXRpb25CEQoPX2NoYW5nZV9kZXRhaWxzIjAKE01vZGlmeUZpbGVzUmVzcG9uc2USGQoRbmV3X3N0b3JlX3ZlcnNpb24YASABKAMiqwQKE1JlcGxhY2VGaWxlc1JlcXVlc3QSGgoIc3RvcmVfaWQYASABKAlCCLpIBXIDmAEMEkwKCWNvbmRpdGlvbhgCIAEoCzI0LmNlcmJvcy5jbG91ZC5zdG9yZS52MS5SZXBsYWNlRmlsZXNSZXF1ZXN0LkNvbmRpdGlvbkgBiAEBEicKD3ppcHBlZF9jb250ZW50cxgDIAEoDEIMukgJegcQFhiAgMAHSAASQQoFZmlsZXMYBSABKAsyMC5jZXJib3MuY2xvdWQuc3RvcmUudjEuUmVwbGFjZUZpbGVzUmVxdWVzdC5GaWxlc0gAEkEKDmNoYW5nZV9kZXRhaWxzGAQgASgLMiQuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkNoYW5nZURldGFpbHNIAogBARo2CglDb25kaXRpb24SKQoYc3RvcmVfdmVyc2lvbl9tdXN0X2VxdWFsGAEgASgDQge6SAQiAigAGo4BCgVGaWxlcxKEAQoFZmlsZXMYASADKAsyGy5jZXJib3MuY2xvdWQuc3RvcmUudjEuRmlsZUJYukhVugFNChJmaWxlcy51bmlxdWVfcGF0aHMSGUZpbGUgcGF0aHMgbXVzdCBiZSB1bmlxdWUaHHRoaXMubWFwKGYsIGYucGF0aCkudW5pcXVlKCmSAQIIAUIRCghjb250ZW50cxIFukgCCAFCDAoKX2NvbmRpdGlvbkIRCg9fY2hhbmdlX2RldGFpbHMiSAoUUmVwbGFjZUZpbGVzUmVzcG9uc2USGQoRbmV3X3N0b3JlX3ZlcnNpb24YASABKAMSFQoNaWdub3JlZF9maWxlcxgCIAMoCTK9BAoSQ2VyYm9zU3RvcmVTZXJ2aWNlEmMKCUxpc3RGaWxlcxInLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5MaXN0RmlsZXNSZXF1ZXN0GiguY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkxpc3RGaWxlc1Jlc3BvbnNlIgOQAgESewoRR2V0Q3VycmVudFZlcnNpb24SLy5jZXJib3MuY2xvdWQuc3RvcmUudjEuR2V0Q3VycmVudFZlcnNpb25SZXF1ZXN0GjAuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLkdldEN1cnJlbnRWZXJzaW9uUmVzcG9uc2UiA5ACARJgCghHZXRGaWxlcxImLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5HZXRGaWxlc1JlcXVlc3QaJy5jZXJib3MuY2xvdWQuc3RvcmUudjEuR2V0RmlsZXNSZXNwb25zZSIDkAIBEmQKC01vZGlmeUZpbGVzEikuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLk1vZGlmeUZpbGVzUmVxdWVzdBoqLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5Nb2RpZnlGaWxlc1Jlc3BvbnNlEmcKDFJlcGxhY2VGaWxlcxIqLmNlcmJvcy5jbG91ZC5zdG9yZS52MS5SZXBsYWNlRmlsZXNSZXF1ZXN0GisuY2VyYm9zLmNsb3VkLnN0b3JlLnYxLlJlcGxhY2VGaWxlc1Jlc3BvbnNlGhT60uSTAg4SDEVYUEVSSU1FTlRBTEJ8Ch1kZXYuY2VyYm9zLmFwaS5jbG91ZC52MS5zdG9yZVo/Z2l0aHViLmNvbS9jZXJib3MvY2xvdWQtYXBpL2dlbnBiL2NlcmJvcy9jbG91ZC9zdG9yZS92MTtzdG9yZXYxqgIZQ2VyYm9zLkFwaS5DbG91ZC5WMS5TdG9yZWIGcHJvdG8z",
     [
       file_buf_validate_validate,
       file_google_api_visibility,
@@ -258,6 +258,55 @@ export const GetFilesResponseSchema: GenMessage<
 > = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 6);
 
 /**
+ * @generated from message cerbos.cloud.store.v1.GetCurrentVersionRequest
+ */
+export type GetCurrentVersionRequest =
+  Message<"cerbos.cloud.store.v1.GetCurrentVersionRequest"> & {
+    /**
+     * @generated from field: string store_id = 1;
+     */
+    storeId: string;
+  };
+
+export type GetCurrentVersionRequestValid = GetCurrentVersionRequest;
+
+/**
+ * Describes the message cerbos.cloud.store.v1.GetCurrentVersionRequest.
+ * Use `create(GetCurrentVersionRequestSchema)` to create a new message.
+ */
+export const GetCurrentVersionRequestSchema: GenMessage<
+  GetCurrentVersionRequest,
+  { validType: GetCurrentVersionRequestValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 7);
+
+/**
+ * @generated from message cerbos.cloud.store.v1.GetCurrentVersionResponse
+ */
+export type GetCurrentVersionResponse =
+  Message<"cerbos.cloud.store.v1.GetCurrentVersionResponse"> & {
+    /**
+     * @generated from field: int64 store_version = 1;
+     */
+    storeVersion: bigint;
+
+    /**
+     * @generated from field: optional cerbos.cloud.store.v1.ChangeDetails change_details = 2;
+     */
+    changeDetails?: ChangeDetails;
+  };
+
+export type GetCurrentVersionResponseValid = GetCurrentVersionResponse;
+
+/**
+ * Describes the message cerbos.cloud.store.v1.GetCurrentVersionResponse.
+ * Use `create(GetCurrentVersionResponseSchema)` to create a new message.
+ */
+export const GetCurrentVersionResponseSchema: GenMessage<
+  GetCurrentVersionResponse,
+  { validType: GetCurrentVersionResponseValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 8);
+
+/**
  * @generated from message cerbos.cloud.store.v1.ChangeDetails
  */
 export type ChangeDetails = Message<"cerbos.cloud.store.v1.ChangeDetails"> & {
@@ -301,7 +350,7 @@ export type ChangeDetailsValid = ChangeDetails;
 export const ChangeDetailsSchema: GenMessage<
   ChangeDetails,
   { validType: ChangeDetailsValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 7);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 9);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ChangeDetails.Git
@@ -358,7 +407,7 @@ export type ChangeDetails_GitValid = ChangeDetails_Git;
 export const ChangeDetails_GitSchema: GenMessage<
   ChangeDetails_Git,
   { validType: ChangeDetails_GitValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 7, 0);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 9, 0);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ChangeDetails.Internal
@@ -385,7 +434,7 @@ export type ChangeDetails_InternalValid = ChangeDetails_Internal;
 export const ChangeDetails_InternalSchema: GenMessage<
   ChangeDetails_Internal,
   { validType: ChangeDetails_InternalValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 7, 1);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 9, 1);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ChangeDetails.Uploader
@@ -412,7 +461,7 @@ export type ChangeDetails_UploaderValid = ChangeDetails_Uploader;
 export const ChangeDetails_UploaderSchema: GenMessage<
   ChangeDetails_Uploader,
   { validType: ChangeDetails_UploaderValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 7, 2);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 9, 2);
 
 /**
  * @generated from message cerbos.cloud.store.v1.FileOp
@@ -447,7 +496,7 @@ export type FileOpValid = FileOp;
  */
 export const FileOpSchema: GenMessage<FileOp, { validType: FileOpValid }> =
   /*@__PURE__*/
-  messageDesc(file_cerbos_cloud_store_v1_store, 8);
+  messageDesc(file_cerbos_cloud_store_v1_store, 10);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ModifyFilesRequest
@@ -484,7 +533,7 @@ export type ModifyFilesRequestValid = ModifyFilesRequest;
 export const ModifyFilesRequestSchema: GenMessage<
   ModifyFilesRequest,
   { validType: ModifyFilesRequestValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 9);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 11);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ModifyFilesRequest.Condition
@@ -506,7 +555,7 @@ export type ModifyFilesRequest_ConditionValid = ModifyFilesRequest_Condition;
 export const ModifyFilesRequest_ConditionSchema: GenMessage<
   ModifyFilesRequest_Condition,
   { validType: ModifyFilesRequest_ConditionValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 9, 0);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 11, 0);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ModifyFilesResponse
@@ -528,7 +577,7 @@ export type ModifyFilesResponseValid = ModifyFilesResponse;
 export const ModifyFilesResponseSchema: GenMessage<
   ModifyFilesResponse,
   { validType: ModifyFilesResponseValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 10);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 12);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ReplaceFilesRequest
@@ -580,7 +629,7 @@ export type ReplaceFilesRequestValid = ReplaceFilesRequest;
 export const ReplaceFilesRequestSchema: GenMessage<
   ReplaceFilesRequest,
   { validType: ReplaceFilesRequestValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 11);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 13);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ReplaceFilesRequest.Condition
@@ -602,7 +651,7 @@ export type ReplaceFilesRequest_ConditionValid = ReplaceFilesRequest_Condition;
 export const ReplaceFilesRequest_ConditionSchema: GenMessage<
   ReplaceFilesRequest_Condition,
   { validType: ReplaceFilesRequest_ConditionValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 11, 0);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 13, 0);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ReplaceFilesRequest.Files
@@ -624,7 +673,7 @@ export type ReplaceFilesRequest_FilesValid = ReplaceFilesRequest_Files;
 export const ReplaceFilesRequest_FilesSchema: GenMessage<
   ReplaceFilesRequest_Files,
   { validType: ReplaceFilesRequest_FilesValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 11, 1);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 13, 1);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ReplaceFilesResponse
@@ -651,7 +700,7 @@ export type ReplaceFilesResponseValid = ReplaceFilesResponse;
 export const ReplaceFilesResponseSchema: GenMessage<
   ReplaceFilesResponse,
   { validType: ReplaceFilesResponseValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 12);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 14);
 
 /**
  * @generated from service cerbos.cloud.store.v1.CerbosStoreService
@@ -664,6 +713,14 @@ export const CerbosStoreService: GenService<{
     methodKind: "unary";
     input: typeof ListFilesRequestSchema;
     output: typeof ListFilesResponseSchema;
+  };
+  /**
+   * @generated from rpc cerbos.cloud.store.v1.CerbosStoreService.GetCurrentVersion
+   */
+  getCurrentVersion: {
+    methodKind: "unary";
+    input: typeof GetCurrentVersionRequestSchema;
+    output: typeof GetCurrentVersionResponseSchema;
   };
   /**
    * @generated from rpc cerbos.cloud.store.v1.CerbosStoreService.GetFiles

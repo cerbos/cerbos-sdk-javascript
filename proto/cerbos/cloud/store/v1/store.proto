@@ -74,6 +74,15 @@ message GetFilesResponse {
   repeated File files = 2;
 }
 
+message GetCurrentVersionRequest {
+  string store_id = 1 [(buf.validate.field).string.len = 12];
+}
+
+message GetCurrentVersionResponse {
+  int64 store_version = 1;
+  optional ChangeDetails change_details = 2;
+}
+
 message ChangeDetails {
   message Git {
     string repo = 1;
@@ -202,6 +211,9 @@ service CerbosStoreService {
   option (google.api.api_visibility).restriction = "EXPERIMENTAL";
 
   rpc ListFiles(ListFilesRequest) returns (ListFilesResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+  }
+  rpc GetCurrentVersion(GetCurrentVersionRequest) returns (GetCurrentVersionResponse) {
     option idempotency_level = NO_SIDE_EFFECTS;
   }
   rpc GetFiles(GetFilesRequest) returns (GetFilesResponse) {
