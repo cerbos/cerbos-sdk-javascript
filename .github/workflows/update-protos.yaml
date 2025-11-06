@@ -38,6 +38,8 @@ jobs:
           reviewers: haines
           signoff: true
           sign-commits: true
+          author: ${{ vars.CERBOS_BOT_AUTHOR }}
+          committer: ${{ vars.CERBOS_BOT_AUTHOR }}
           commit-message: |-
             chore: Update protos
           title: |-
