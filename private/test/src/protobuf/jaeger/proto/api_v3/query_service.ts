@@ -159,21 +159,6 @@ export const GetTraceRequest: MessageFns<GetTraceRequest> = {
     return message;
   },
 
-  fromJSON(object: any): GetTraceRequest {
-    return {
-      traceId: isSet(object.traceId) ? globalThis.String(object.traceId) : "",
-      startTime: isSet(object.startTime)
-        ? fromJsonTimestamp(object.startTime)
-        : undefined,
-      endTime: isSet(object.endTime)
-        ? fromJsonTimestamp(object.endTime)
-        : undefined,
-      rawTraces: isSet(object.rawTraces)
-        ? globalThis.Boolean(object.rawTraces)
-        : false,
-    };
-  },
-
   toJSON(message: GetTraceRequest): unknown {
     const obj: any = {};
     if (message.traceId !== "") {
@@ -352,44 +337,6 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
     return message;
   },
 
-  fromJSON(object: any): TraceQueryParameters {
-    return {
-      serviceName: isSet(object.serviceName)
-        ? globalThis.String(object.serviceName)
-        : "",
-      operationName: isSet(object.operationName)
-        ? globalThis.String(object.operationName)
-        : "",
-      attributes: isObject(object.attributes)
-        ? Object.entries(object.attributes).reduce<{ [key: string]: string }>(
-            (acc, [key, value]) => {
-              acc[key] = String(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-      startTimeMin: isSet(object.startTimeMin)
-        ? fromJsonTimestamp(object.startTimeMin)
-        : undefined,
-      startTimeMax: isSet(object.startTimeMax)
-        ? fromJsonTimestamp(object.startTimeMax)
-        : undefined,
-      durationMin: isSet(object.durationMin)
-        ? Duration.fromJSON(object.durationMin)
-        : undefined,
-      durationMax: isSet(object.durationMax)
-        ? Duration.fromJSON(object.durationMax)
-        : undefined,
-      searchDepth: isSet(object.searchDepth)
-        ? globalThis.Number(object.searchDepth)
-        : 0,
-      rawTraces: isSet(object.rawTraces)
-        ? globalThis.Boolean(object.rawTraces)
-        : false,
-    };
-  },
-
   toJSON(message: TraceQueryParameters): unknown {
     const obj: any = {};
     if (message.serviceName !== "") {
@@ -484,13 +431,6 @@ export const TraceQueryParameters_AttributesEntry: MessageFns<TraceQueryParamete
       return message;
     },
 
-    fromJSON(object: any): TraceQueryParameters_AttributesEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value) ? globalThis.String(object.value) : "",
-      };
-    },
-
     toJSON(message: TraceQueryParameters_AttributesEntry): unknown {
       const obj: any = {};
       if (message.key !== "") {
@@ -546,14 +486,6 @@ export const FindTracesRequest: MessageFns<FindTracesRequest> = {
     return message;
   },
 
-  fromJSON(object: any): FindTracesRequest {
-    return {
-      query: isSet(object.query)
-        ? TraceQueryParameters.fromJSON(object.query)
-        : undefined,
-    };
-  },
-
   toJSON(message: FindTracesRequest): unknown {
     const obj: any = {};
     if (message.query !== undefined) {
@@ -593,10 +525,6 @@ export const GetServicesRequest: MessageFns<GetServicesRequest> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(_: any): GetServicesRequest {
-    return {};
   },
 
   toJSON(_: GetServicesRequest): unknown {
@@ -646,14 +574,6 @@ export const GetServicesResponse: MessageFns<GetServicesResponse> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): GetServicesResponse {
-    return {
-      services: globalThis.Array.isArray(object?.services)
-        ? object.services.map((e: any) => globalThis.String(e))
-        : [],
-    };
   },
 
   toJSON(message: GetServicesResponse): unknown {
@@ -719,15 +639,6 @@ export const GetOperationsRequest: MessageFns<GetOperationsRequest> = {
     return message;
   },
 
-  fromJSON(object: any): GetOperationsRequest {
-    return {
-      service: isSet(object.service) ? globalThis.String(object.service) : "",
-      spanKind: isSet(object.spanKind)
-        ? globalThis.String(object.spanKind)
-        : "",
-    };
-  },
-
   toJSON(message: GetOperationsRequest): unknown {
     const obj: any = {};
     if (message.service !== "") {
@@ -791,15 +702,6 @@ export const Operation: MessageFns<Operation> = {
     return message;
   },
 
-  fromJSON(object: any): Operation {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      spanKind: isSet(object.spanKind)
-        ? globalThis.String(object.spanKind)
-        : "",
-    };
-  },
-
   toJSON(message: Operation): unknown {
     const obj: any = {};
     if (message.name !== "") {
@@ -853,14 +755,6 @@ export const GetOperationsResponse: MessageFns<GetOperationsResponse> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): GetOperationsResponse {
-    return {
-      operations: globalThis.Array.isArray(object?.operations)
-        ? object.operations.map((e: any) => Operation.fromJSON(e))
-        : [],
-    };
   },
 
   toJSON(message: GetOperationsResponse): unknown {
@@ -1018,38 +912,19 @@ export const QueryServiceClient = makeGenericClientConstructor(
 };
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = BigInt(Math.trunc(date.getTime() / 1_000));
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds.toString()) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
   return new globalThis.Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof globalThis.Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new globalThis.Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

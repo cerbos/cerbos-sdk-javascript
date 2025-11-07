@@ -1,58 +1,62 @@
 /* eslint-disable @typescript-eslint/no-deprecated */
 
+import { fromJson } from "@bufbuild/protobuf";
+import type { Duration, Value as ValueProtobuf } from "@bufbuild/protobuf/wkt";
+import { ValueSchema, timestampFromDate } from "@bufbuild/protobuf/wkt";
 import { v4 as uuidv4 } from "uuid";
 
-import { Effect as EffectProtobuf } from "../protobuf/cerbos/effect/v1/effect";
+import { Effect as EffectProtobuf } from "@cerbos/api/cerbos/effect/v1/effect_pb";
 import type {
-  PlanResourcesInput_Resource,
-  Principal as PrincipalProtobuf,
-  Resource as ResourceProtobuf,
-} from "../protobuf/cerbos/engine/v1/engine";
+  PlanResourcesInput_ResourceValid,
+  PrincipalValid,
+  ResourceValid,
+} from "@cerbos/api/cerbos/engine/v1/engine_pb";
 import type {
-  Condition as ConditionProtobuf,
-  Constants as ConstantsProtobuf,
-  DerivedRoles as DerivedRolesProtobuf,
-  ExportConstants as ExportConstantsProtobuf,
-  ExportVariables as ExportVariablesProtobuf,
-  Match as MatchProtobuf,
-  Match_ExprList,
-  Output as OutputProtobuf,
-  Output_When,
-  Policy as PolicyProtobuf,
-  PrincipalPolicy as PrincipalPolicyProtobuf,
-  PrincipalRule as PrincipalRuleProtobuf,
-  PrincipalRule_Action,
-  ResourcePolicy as ResourcePolicyProtobuf,
-  ResourceRule as ResourceRuleProtobuf,
-  RoleDef,
-  RolePolicy as RolePolicyProtobuf,
-  RoleRule as RoleRuleProtobuf,
-  Schemas,
-  Schemas_Schema,
-  Variables as VariablesProtobuf,
-} from "../protobuf/cerbos/policy/v1/policy";
-import { ScopePermissions as ScopePermissionsProtobuf } from "../protobuf/cerbos/policy/v1/policy";
+  ConditionValid,
+  ConstantsValid,
+  DerivedRolesValid,
+  ExportConstantsValid,
+  ExportVariablesValid,
+  MatchValid,
+  Match_ExprListValid,
+  OutputValid,
+  Output_WhenValid,
+  PolicyValid,
+  PrincipalPolicyValid,
+  PrincipalRuleValid,
+  PrincipalRule_ActionValid,
+  ResourcePolicyValid,
+  ResourceRuleValid,
+  RoleDefValid,
+  RolePolicyValid,
+  RoleRuleValid,
+  SchemasValid,
+  Schemas_SchemaValid,
+  VariablesValid,
+} from "@cerbos/api/cerbos/policy/v1/policy_pb";
+import { ScopePermissions as ScopePermissionsProtobuf } from "@cerbos/api/cerbos/policy/v1/policy_pb";
 import type {
-  AddOrUpdatePolicyRequest,
-  AddOrUpdateSchemaRequest,
-  AuxData as AuxDataProtobuf,
-  AuxData_JWT,
-  CheckResourcesRequest as CheckResourcesRequestProtobuf,
-  CheckResourcesRequest_ResourceEntry,
-  DeleteSchemaRequest,
-  DisablePolicyRequest,
-  EnablePolicyRequest,
-  GetPolicyRequest,
-  GetSchemaRequest,
-  InspectPoliciesRequest as InspectPoliciesRequestProtobuf,
-  ListAuditLogEntriesRequest,
-  ListPoliciesRequest as ListPoliciesRequestProtobuf,
-  PlanResourcesRequest as PlanResourcesRequestProtobuf,
-} from "../protobuf/cerbos/request/v1/request";
-import { ListAuditLogEntriesRequest_Kind } from "../protobuf/cerbos/request/v1/request";
-import type { Schema } from "../protobuf/cerbos/schema/v1/schema";
-import type { Duration } from "../protobuf/google/protobuf/duration";
-import type { HealthCheckRequest as HealthCheckRequestProtobuf } from "../protobuf/grpc/health/v1/health";
+  AddOrUpdatePolicyRequestValid,
+  AddOrUpdateSchemaRequestValid,
+  AuxDataValid,
+  AuxData_JWTValid,
+  CheckResourcesRequestValid,
+  CheckResourcesRequest_ResourceEntryValid,
+  DeleteSchemaRequestValid,
+  DisablePolicyRequestValid,
+  EnablePolicyRequestValid,
+  GetPolicyRequestValid,
+  GetSchemaRequestValid,
+  InspectPoliciesRequestValid,
+  ListAuditLogEntriesRequestValid,
+  ListPoliciesRequestValid,
+  PlanResourcesRequestValid,
+  ReloadStoreRequestValid,
+} from "@cerbos/api/cerbos/request/v1/request_pb";
+import { ListAuditLogEntriesRequest_Kind } from "@cerbos/api/cerbos/request/v1/request_pb";
+import type { SchemaValid } from "@cerbos/api/cerbos/schema/v1/schema_pb";
+import type { HealthCheckRequestValid } from "@cerbos/api/grpc/health/v1/health_pb";
+
 import type {
   AddOrUpdatePoliciesRequest,
   AddOrUpdateSchemasRequest,
@@ -86,6 +90,7 @@ import type {
   PrincipalPolicy,
   PrincipalRule,
   PrincipalRuleAction,
+  ReloadStoreRequest,
   Resource,
   ResourceCheck,
   ResourcePolicy,
@@ -97,6 +102,7 @@ import type {
   SchemaInput,
   SchemaRef,
   SchemaRefs,
+  Value,
   Variables,
 } from "../types/external";
 import {
@@ -123,14 +129,15 @@ const encoder = new TextEncoder();
 
 export function addOrUpdatePoliciesRequestToProtobuf({
   policies,
-}: AddOrUpdatePoliciesRequest): AddOrUpdatePolicyRequest {
+}: AddOrUpdatePoliciesRequest): AddOrUpdatePolicyRequestValid {
   return {
+    $typeName: "cerbos.request.v1.AddOrUpdatePolicyRequest",
     policies: policies.map(policyToProtobuf),
   };
 }
 
 /** @internal */
-export function policyToProtobuf(policy: Policy): PolicyProtobuf {
+export function policyToProtobuf(policy: Policy): PolicyValid {
   const {
     apiVersion = "api.cerbos.dev/v1",
     description = "",
@@ -139,11 +146,11 @@ export function policyToProtobuf(policy: Policy): PolicyProtobuf {
   } = policy;
 
   return {
+    $typeName: "cerbos.policy.v1.Policy",
     apiVersion,
     description,
     disabled,
     jsonSchema: "",
-    metadata: undefined,
     policyType: policyTypeToProtobuf(policy),
     variables,
   };
@@ -151,46 +158,46 @@ export function policyToProtobuf(policy: Policy): PolicyProtobuf {
 
 function policyTypeToProtobuf(
   policy: Policy,
-): Exclude<PolicyProtobuf["policyType"], undefined> {
+): Exclude<PolicyValid["policyType"], undefined> {
   if (policyIsDerivedRoles(policy)) {
     return {
-      $case: "derivedRoles",
-      derivedRoles: derivedRolesToProtobuf(policy),
+      case: "derivedRoles",
+      value: derivedRolesToProtobuf(policy),
     };
   }
 
   if (policyIsExportConstants(policy)) {
     return {
-      $case: "exportConstants",
-      exportConstants: exportConstantsToProtobuf(policy),
+      case: "exportConstants",
+      value: exportConstantsToProtobuf(policy),
     };
   }
 
   if (policyIsExportVariables(policy)) {
     return {
-      $case: "exportVariables",
-      exportVariables: exportVariablesToProtobuf(policy),
+      case: "exportVariables",
+      value: exportVariablesToProtobuf(policy),
     };
   }
 
   if (policyIsPrincipalPolicy(policy)) {
     return {
-      $case: "principalPolicy",
-      principalPolicy: principalPolicyToProtobuf(policy),
+      case: "principalPolicy",
+      value: principalPolicyToProtobuf(policy),
     };
   }
 
   if (policyIsResourcePolicy(policy)) {
     return {
-      $case: "resourcePolicy",
-      resourcePolicy: resourcePolicyToProtobuf(policy),
+      case: "resourcePolicy",
+      value: resourcePolicyToProtobuf(policy),
     };
   }
 
   if (policyIsRolePolicy(policy)) {
     return {
-      $case: "rolePolicy",
-      rolePolicy: rolePolicyToProtobuf(policy),
+      case: "rolePolicy",
+      value: rolePolicyToProtobuf(policy),
     };
   }
 
@@ -199,8 +206,9 @@ function policyTypeToProtobuf(
 
 function derivedRolesToProtobuf({
   derivedRoles: { name, definitions, constants, variables },
-}: DerivedRoles): DerivedRolesProtobuf {
+}: DerivedRoles): DerivedRolesValid {
   return {
+    $typeName: "cerbos.policy.v1.DerivedRoles",
     name,
     definitions: definitions.map(derivedRoleDefinitionToProtobuf),
     constants: constants && constantsToProtobuf(constants),
@@ -212,56 +220,62 @@ function derivedRoleDefinitionToProtobuf({
   name,
   parentRoles,
   condition,
-}: DerivedRoleDefinition): RoleDef {
+}: DerivedRoleDefinition): RoleDefValid {
   return {
+    $typeName: "cerbos.policy.v1.RoleDef",
     name,
     parentRoles,
     condition: condition && conditionToProtobuf(condition),
   };
 }
 
-function conditionToProtobuf({ match }: Condition): ConditionProtobuf {
+function conditionToProtobuf({ match }: Condition): ConditionValid {
   return {
+    $typeName: "cerbos.policy.v1.Condition",
     condition: {
-      $case: "match",
-      match: matchToProtobuf(match),
+      case: "match",
+      value: matchToProtobuf(match),
     },
   };
 }
 
-function matchToProtobuf(match: Match): MatchProtobuf {
+function matchToProtobuf(match: Match): MatchValid {
   if (matchIsMatchAll(match)) {
     return {
+      $typeName: "cerbos.policy.v1.Match",
       op: {
-        $case: "all",
-        all: matchesToProtobuf(match.all),
+        case: "all",
+        value: matchesToProtobuf(match.all),
       },
     };
   }
 
   if (matchIsMatchAny(match)) {
     return {
+      $typeName: "cerbos.policy.v1.Match",
       op: {
-        $case: "any",
-        any: matchesToProtobuf(match.any),
+        case: "any",
+        value: matchesToProtobuf(match.any),
       },
     };
   }
 
   if (matchIsMatchNone(match)) {
     return {
+      $typeName: "cerbos.policy.v1.Match",
       op: {
-        $case: "none",
-        none: matchesToProtobuf(match.none),
+        case: "none",
+        value: matchesToProtobuf(match.none),
       },
     };
   }
 
   if (matchIsMatchExpr(match)) {
     return {
+      $typeName: "cerbos.policy.v1.Match",
       op: {
-        $case: "expr",
-        expr: match.expr,
+        case: "expr",
+        value: match.expr,
       },
     };
   }
@@ -269,8 +283,9 @@ function matchToProtobuf(match: Match): MatchProtobuf {
   throw new Error(`Unknown match type: ${JSON.stringify(match, null, 2)}`);
 }
 
-function matchesToProtobuf({ of }: Matches): Match_ExprList {
+function matchesToProtobuf({ of }: Matches): Match_ExprListValid {
   return {
+    $typeName: "cerbos.policy.v1.Match.ExprList",
     of: of.map(matchToProtobuf),
   };
 }
@@ -278,27 +293,30 @@ function matchesToProtobuf({ of }: Matches): Match_ExprList {
 function constantsToProtobuf({
   import: imports = [],
   local = {},
-}: Constants): ConstantsProtobuf {
+}: Constants): ConstantsValid {
   return {
+    $typeName: "cerbos.policy.v1.Constants",
     import: imports,
-    local,
+    local: valuesToProtobuf(local),
   };
 }
 
 function exportConstantsToProtobuf({
   exportConstants: { name, definitions },
-}: ExportConstants): ExportConstantsProtobuf {
+}: ExportConstants): ExportConstantsValid {
   return {
+    $typeName: "cerbos.policy.v1.ExportConstants",
     name,
-    definitions,
+    definitions: valuesToProtobuf(definitions),
   };
 }
 
 function variablesToProtobuf({
   import: imports = [],
   local = {},
-}: Variables): VariablesProtobuf {
+}: Variables): VariablesValid {
   return {
+    $typeName: "cerbos.policy.v1.Variables",
     import: imports,
     local,
   };
@@ -306,8 +324,9 @@ function variablesToProtobuf({
 
 function exportVariablesToProtobuf({
   exportVariables: { name, definitions },
-}: ExportVariables): ExportVariablesProtobuf {
+}: ExportVariables): ExportVariablesValid {
   return {
+    $typeName: "cerbos.policy.v1.ExportVariables",
     name,
     definitions,
   };
@@ -323,8 +342,9 @@ function principalPolicyToProtobuf({
     constants,
     variables,
   },
-}: PrincipalPolicy): PrincipalPolicyProtobuf {
+}: PrincipalPolicy): PrincipalPolicyValid {
   return {
+    $typeName: "cerbos.policy.v1.PrincipalPolicy",
     principal,
     version,
     rules: rules.map(principalRuleToProtobuf),
@@ -338,8 +358,9 @@ function principalPolicyToProtobuf({
 function principalRuleToProtobuf({
   resource,
   actions,
-}: PrincipalRule): PrincipalRuleProtobuf {
+}: PrincipalRule): PrincipalRuleValid {
   return {
+    $typeName: "cerbos.policy.v1.PrincipalRule",
     resource,
     actions: actions.map(principalRuleActionToProtobuf),
   };
@@ -351,8 +372,9 @@ function principalRuleActionToProtobuf({
   condition,
   name = "",
   output,
-}: PrincipalRuleAction): PrincipalRule_Action {
+}: PrincipalRuleAction): PrincipalRule_ActionValid {
   return {
+    $typeName: "cerbos.policy.v1.PrincipalRule.Action",
     action,
     effect: effectToProtobuf(effect),
     condition: condition && conditionToProtobuf(condition),
@@ -366,24 +388,23 @@ function scopePermissionsToProtobuf(
 ): ScopePermissionsProtobuf {
   switch (scopePermissions) {
     case ScopePermissions.OVERRIDE_PARENT:
-      return ScopePermissionsProtobuf.SCOPE_PERMISSIONS_OVERRIDE_PARENT;
+      return ScopePermissionsProtobuf.OVERRIDE_PARENT;
 
     case ScopePermissions.REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS:
-      return ScopePermissionsProtobuf.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS;
+      return ScopePermissionsProtobuf.REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS;
 
     default:
-      return ScopePermissionsProtobuf.SCOPE_PERMISSIONS_UNSPECIFIED;
+      return ScopePermissionsProtobuf.UNSPECIFIED;
   }
 }
 
 function effectToProtobuf(effect: Effect): EffectProtobuf {
-  return effect === Effect.ALLOW
-    ? EffectProtobuf.EFFECT_ALLOW
-    : EffectProtobuf.EFFECT_DENY;
+  return effect === Effect.ALLOW ? EffectProtobuf.ALLOW : EffectProtobuf.DENY;
 }
 
-function outputToProtobuf({ expr = "", when }: Output): OutputProtobuf {
+function outputToProtobuf({ expr = "", when }: Output): OutputValid {
   return {
+    $typeName: "cerbos.policy.v1.Output",
     expr,
     when: when && outputExpressionsToProtobuf(when),
   };
@@ -392,8 +413,9 @@ function outputToProtobuf({ expr = "", when }: Output): OutputProtobuf {
 function outputExpressionsToProtobuf({
   ruleActivated = "",
   conditionNotMet = "",
-}: OutputExpressions): Output_When {
+}: OutputExpressions): Output_WhenValid {
   return {
+    $typeName: "cerbos.policy.v1.Output.When",
     ruleActivated,
     conditionNotMet,
   };
@@ -411,8 +433,9 @@ function resourcePolicyToProtobuf({
     constants,
     variables,
   },
-}: ResourcePolicy): ResourcePolicyProtobuf {
+}: ResourcePolicy): ResourcePolicyValid {
   return {
+    $typeName: "cerbos.policy.v1.ResourcePolicy",
     resource,
     version,
     importDerivedRoles,
@@ -433,8 +456,9 @@ function resourceRuleToProtobuf({
   condition,
   name = "",
   output,
-}: ResourceRule): ResourceRuleProtobuf {
+}: ResourceRule): ResourceRuleValid {
   return {
+    $typeName: "cerbos.policy.v1.ResourceRule",
     actions,
     effect: effectToProtobuf(effect),
     derivedRoles,
@@ -447,12 +471,13 @@ function resourceRuleToProtobuf({
 
 function rolePolicyToProtobuf({
   rolePolicy: { role, parentRoles, scope, rules },
-}: RolePolicy): RolePolicyProtobuf {
+}: RolePolicy): RolePolicyValid {
   return {
-    policyType: { $case: "role", role },
+    $typeName: "cerbos.policy.v1.RolePolicy",
+    policyType: { case: "role", value: role },
     parentRoles: parentRoles ?? [],
     scope: scope ?? "",
-    scopePermissions: ScopePermissionsProtobuf.SCOPE_PERMISSIONS_UNSPECIFIED,
+    scopePermissions: ScopePermissionsProtobuf.UNSPECIFIED,
     rules: rules.map(roleRuleToProtobuf),
   };
 }
@@ -461,8 +486,9 @@ function roleRuleToProtobuf({
   resource,
   allowActions,
   condition,
-}: RoleRule): RoleRuleProtobuf {
+}: RoleRule): RoleRuleValid {
   return {
+    $typeName: "cerbos.policy.v1.RoleRule",
     resource,
     allowActions,
     condition: condition && conditionToProtobuf(condition),
@@ -472,8 +498,9 @@ function roleRuleToProtobuf({
 function policySchemasToProtobuf({
   principalSchema,
   resourceSchema,
-}: SchemaRefs): Schemas {
+}: SchemaRefs): SchemasValid {
   return {
+    $typeName: "cerbos.policy.v1.Schemas",
     principalSchema: principalSchema && policySchemaToProtobuf(principalSchema),
     resourceSchema: resourceSchema && policySchemaToProtobuf(resourceSchema),
   };
@@ -482,23 +509,29 @@ function policySchemasToProtobuf({
 function policySchemaToProtobuf({
   ref,
   ignoreWhen,
-}: SchemaRef): Schemas_Schema {
+}: SchemaRef): Schemas_SchemaValid {
   return {
+    $typeName: "cerbos.policy.v1.Schemas.Schema",
     ref,
-    ignoreWhen,
+    ignoreWhen: ignoreWhen && {
+      $typeName: "cerbos.policy.v1.Schemas.IgnoreWhen",
+      actions: ignoreWhen.actions,
+    },
   };
 }
 
 export function addOrUpdateSchemasRequestToProtobuf({
   schemas,
-}: AddOrUpdateSchemasRequest): AddOrUpdateSchemaRequest {
+}: AddOrUpdateSchemasRequest): AddOrUpdateSchemaRequestValid {
   return {
+    $typeName: "cerbos.request.v1.AddOrUpdateSchemaRequest",
     schemas: schemas.map(schemaToProtobuf),
   };
 }
 
-function schemaToProtobuf({ id, definition }: SchemaInput): Schema {
+function schemaToProtobuf({ id, definition }: SchemaInput): SchemaValid {
   return {
+    $typeName: "cerbos.schema.v1.Schema",
     id,
     definition: schemaDefinitionToProtobuf(definition),
   };
@@ -528,8 +561,9 @@ export function checkResourcesRequestToProtobuf({
   auxData,
   includeMetadata = false,
   requestId = uuidv4(),
-}: CheckResourcesRequest): CheckResourcesRequestProtobuf {
+}: CheckResourcesRequest): CheckResourcesRequestValid {
   return {
+    $typeName: "cerbos.request.v1.CheckResourcesRequest",
     principal: principalToProtobuf(principal),
     resources: resources.map(resourceCheckToProtobuf),
     auxData: auxData && auxDataToProtobuf(auxData),
@@ -545,14 +579,15 @@ function principalToProtobuf({
   attributes = {},
   policyVersion = "",
   scope = "",
-}: Principal): PrincipalProtobuf {
+}: Principal): PrincipalValid {
   return {
+    $typeName: "cerbos.engine.v1.Principal",
     id,
     roles,
-    attr: {
+    attr: valuesToProtobuf({
       ...attributes,
       ...attr,
-    },
+    }),
     policyVersion,
     scope,
   };
@@ -561,8 +596,9 @@ function principalToProtobuf({
 function resourceCheckToProtobuf({
   resource,
   actions,
-}: ResourceCheck): CheckResourcesRequest_ResourceEntry {
+}: ResourceCheck): CheckResourcesRequest_ResourceEntryValid {
   return {
+    $typeName: "cerbos.request.v1.CheckResourcesRequest.ResourceEntry",
     resource: resourceToProtobuf(resource),
     actions,
   };
@@ -575,31 +611,34 @@ function resourceToProtobuf({
   attributes = {},
   policyVersion = "",
   scope = "",
-}: Resource): ResourceProtobuf {
+}: Resource): ResourceValid {
   return {
+    $typeName: "cerbos.engine.v1.Resource",
     kind,
     id,
-    attr: {
+    attr: valuesToProtobuf({
       ...attributes,
       ...attr,
-    },
+    }),
     policyVersion,
     scope,
   };
 }
 
-function auxDataToProtobuf({ jwt }: AuxData): AuxDataProtobuf | undefined {
+function auxDataToProtobuf({ jwt }: AuxData): AuxDataValid | undefined {
   if (!jwt) {
     return undefined;
   }
 
   return {
+    $typeName: "cerbos.request.v1.AuxData",
     jwt: jwtToProtobuf(jwt),
   };
 }
 
-function jwtToProtobuf({ token, keySetId = "" }: JWT): AuxData_JWT {
+function jwtToProtobuf({ token, keySetId = "" }: JWT): AuxData_JWTValid {
   return {
+    $typeName: "cerbos.request.v1.AuxData.JWT",
     token,
     keySetId,
   };
@@ -607,95 +646,107 @@ function jwtToProtobuf({ token, keySetId = "" }: JWT): AuxData_JWT {
 
 export function deleteSchemasRequestToProtobuf({
   ids,
-}: DeleteSchemasRequest): DeleteSchemaRequest {
+}: DeleteSchemasRequest): DeleteSchemaRequestValid {
   return {
+    $typeName: "cerbos.request.v1.DeleteSchemaRequest",
     id: ids,
   };
 }
 
 export function disablePoliciesRequestToProtobuf({
   ids,
-}: DisablePoliciesRequest): DisablePolicyRequest {
+}: DisablePoliciesRequest): DisablePolicyRequestValid {
   return {
+    $typeName: "cerbos.request.v1.DisablePolicyRequest",
     id: ids,
   };
 }
 
 export function enablePoliciesRequestToProtobuf({
   ids,
-}: EnablePoliciesRequest): EnablePolicyRequest {
+}: EnablePoliciesRequest): EnablePolicyRequestValid {
   return {
+    $typeName: "cerbos.request.v1.EnablePolicyRequest",
     id: ids,
   };
 }
 
 export function getPoliciesRequestToProtobuf({
   ids,
-}: GetPoliciesRequest): GetPolicyRequest {
+}: GetPoliciesRequest): GetPolicyRequestValid {
   return {
+    $typeName: "cerbos.request.v1.GetPolicyRequest",
     id: ids,
   };
 }
 
 export function getSchemasRequestToProtobuf({
   ids,
-}: GetSchemasRequest): GetSchemaRequest {
+}: GetSchemasRequest): GetSchemaRequestValid {
   return {
+    $typeName: "cerbos.request.v1.GetSchemaRequest",
     id: ids,
   };
 }
 
 export function healthCheckRequestToProtobuf({
   service = Service.CERBOS,
-}: HealthCheckRequest): HealthCheckRequestProtobuf {
+}: HealthCheckRequest): HealthCheckRequestValid {
   return {
+    $typeName: "grpc.health.v1.HealthCheckRequest",
     service,
   };
 }
 
 export function listAccessLogEntriesRequestToProtobuf({
   filter,
-}: ListAccessLogEntriesRequest): ListAuditLogEntriesRequest {
+}: ListAccessLogEntriesRequest): ListAuditLogEntriesRequestValid {
   return {
-    kind: ListAuditLogEntriesRequest_Kind.KIND_ACCESS,
+    $typeName: "cerbos.request.v1.ListAuditLogEntriesRequest",
+    kind: ListAuditLogEntriesRequest_Kind.ACCESS,
     filter: auditLogFilterToProtobuf(filter),
   };
 }
 
 export function listDecisionLogEntriesRequestToProtobuf({
   filter,
-}: ListDecisionLogEntriesRequest): ListAuditLogEntriesRequest {
+}: ListDecisionLogEntriesRequest): ListAuditLogEntriesRequestValid {
   return {
-    kind: ListAuditLogEntriesRequest_Kind.KIND_DECISION,
+    $typeName: "cerbos.request.v1.ListAuditLogEntriesRequest",
+    kind: ListAuditLogEntriesRequest_Kind.DECISION,
     filter: auditLogFilterToProtobuf(filter),
   };
 }
 
 function auditLogFilterToProtobuf(
   filter: AuditLogFilter,
-): ListAuditLogEntriesRequest["filter"] {
+): ListAuditLogEntriesRequestValid["filter"] {
   if (auditLogFilterIsBetween(filter)) {
     return {
-      $case: "between",
-      between: { start: filter.start, end: filter.end },
+      case: "between",
+      value: {
+        $typeName: "cerbos.request.v1.ListAuditLogEntriesRequest.TimeRange",
+        start: timestampFromDate(filter.start),
+        end: timestampFromDate(filter.end),
+      },
     };
   }
 
   if (auditLogFilterIsSince(filter)) {
     return {
-      $case: "since",
-      since: durationToProtobuf(filter.since),
+      case: "since",
+      value: durationToProtobuf(filter.since),
     };
   }
 
   if (auditLogFilterIsTail(filter)) {
     return {
-      $case: "tail",
-      tail: filter.tail,
+      case: "tail",
+      value: filter.tail,
     };
   }
 
-  return undefined;
+  return { case: undefined };
 }
 
 function durationToProtobuf(duration: number): Duration {
@@ -705,7 +756,8 @@ function durationToProtobuf(duration: number): Duration {
   ];
 
   return {
-    seconds,
+    $typeName: "google.protobuf.Duration",
+    seconds: BigInt(seconds),
     nanos: parseInt(nanos, 10),
   };
 }
@@ -716,8 +768,9 @@ export function inspectPoliciesRequestToProtobuf({
   nameRegexp = "",
   scopeRegexp = "",
   versionRegexp = "",
-}: InspectPoliciesRequest): InspectPoliciesRequestProtobuf {
+}: InspectPoliciesRequest): InspectPoliciesRequestValid {
   return {
+    $typeName: "cerbos.request.v1.InspectPoliciesRequest",
     policyId: ids,
     includeDisabled,
     nameRegexp,
@@ -732,8 +785,9 @@ export function listPoliciesRequestToProtobuf({
   nameRegexp = "",
   scopeRegexp = "",
   versionRegexp = "",
-}: ListPoliciesRequest): ListPoliciesRequestProtobuf {
+}: ListPoliciesRequest): ListPoliciesRequestValid {
   return {
+    $typeName: "cerbos.request.v1.ListPoliciesRequest",
     policyId: ids,
     includeDisabled,
     nameRegexp,
@@ -744,7 +798,7 @@ export function listPoliciesRequestToProtobuf({
 
 export function planResourcesRequestToProtobuf(
   request: PlanResourcesRequest,
-): PlanResourcesRequestProtobuf {
+): PlanResourcesRequestValid {
   const {
     principal,
     resource,
@@ -754,6 +808,7 @@ export function planResourcesRequestToProtobuf(
   } = request;
 
   return {
+    $typeName: "cerbos.request.v1.PlanResourcesRequest",
     principal: principalToProtobuf(principal),
     resource: resourceQueryToProtobuf(resource),
     ...planResourcesActionsToProtobuf(request),
@@ -786,14 +841,36 @@ function resourceQueryToProtobuf({
   attributes = {},
   policyVersion = "",
   scope = "",
-}: ResourceQuery): PlanResourcesInput_Resource {
+}: ResourceQuery): PlanResourcesInput_ResourceValid {
   return {
+    $typeName: "cerbos.engine.v1.PlanResourcesInput.Resource",
     kind,
-    attr: {
+    attr: valuesToProtobuf({
       ...attributes,
       ...attr,
-    },
+    }),
     policyVersion,
     scope,
   };
+}
+
+export function reloadStoreRequestToProtobuf({
+  wait,
+}: ReloadStoreRequest): ReloadStoreRequestValid {
+  return {
+    $typeName: "cerbos.request.v1.ReloadStoreRequest",
+    wait,
+  };
+}
+
+function valuesToProtobuf(
+  values: Record<string, Value>,
+): Record<string, ValueProtobuf> {
+  return Object.fromEntries(
+    Object.entries(values).map(([key, value]) => [key, valueToProtobuf(value)]),
+  );
+}
+
+function valueToProtobuf(value: Value): ValueProtobuf {
+  return fromJson(ValueSchema, value);
 }

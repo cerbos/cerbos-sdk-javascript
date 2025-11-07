@@ -7,12 +7,12 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 export const protobufPackage = "google.protobuf";
 
 export interface Duration {
-  seconds: string;
+  seconds: bigint;
   nanos: number;
 }
 
 function createBaseDuration(): Duration {
-  return { seconds: "0", nanos: 0 };
+  return { seconds: 0n, nanos: 0 };
 }
 
 export const Duration: MessageFns<Duration> = {
@@ -20,7 +20,12 @@ export const Duration: MessageFns<Duration> = {
     message: Duration,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.seconds !== "0") {
+    if (message.seconds !== 0n) {
+      if (BigInt.asIntN(64, message.seconds) !== message.seconds) {
+        throw new globalThis.Error(
+          "value provided for field message.seconds of type int64 too large",
+        );
+      }
       writer.uint32(8).int64(message.seconds);
     }
     if (message.nanos !== 0) {
@@ -42,7 +47,7 @@ export const Duration: MessageFns<Duration> = {
             break;
           }
 
-          message.seconds = reader.int64().toString();
+          message.seconds = reader.int64() as bigint;
           continue;
         }
         case 2: {
@@ -62,17 +67,10 @@ export const Duration: MessageFns<Duration> = {
     return message;
   },
 
-  fromJSON(object: any): Duration {
-    return {
-      seconds: isSet(object.seconds) ? globalThis.String(object.seconds) : "0",
-      nanos: isSet(object.nanos) ? globalThis.Number(object.nanos) : 0,
-    };
-  },
-
   toJSON(message: Duration): unknown {
     const obj: any = {};
-    if (message.seconds !== "0") {
-      obj.seconds = message.seconds;
+    if (message.seconds !== 0n) {
+      obj.seconds = message.seconds.toString();
     }
     if (message.nanos !== 0) {
       obj.nanos = Math.round(message.nanos);
@@ -81,13 +79,8 @@ export const Duration: MessageFns<Duration> = {
   },
 };
 
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

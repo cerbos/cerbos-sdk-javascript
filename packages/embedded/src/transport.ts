@@ -1,50 +1,48 @@
 import type {
-  _Method,
-  _Request,
-  _Response,
-  _Service,
-  _Transport,
-} from "@cerbos/core";
-import { NotOK, Status } from "@cerbos/core";
+  DescMessage,
+  DescMethod,
+  DescMethodServerStreaming,
+  DescMethodUnary,
+  MessageShape,
+  MessageValidType,
+} from "@bufbuild/protobuf";
+
+import type { CheckResourcesRequest } from "@cerbos/api/cerbos/request/v1/request_pb";
+import { CerbosService as cerbos } from "@cerbos/api/cerbos/svc/v1/svc_pb";
+import type { _Transport } from "@cerbos/core";
+import { NotOK, Status, _methodName } from "@cerbos/core";
 
 import type { Bundle } from "./bundle";
-import type { CheckResourcesRequest } from "./protobuf/cerbos/request/v1/request";
 
 export class Transport implements _Transport {
   public constructor(private readonly bundle: () => Promise<Bundle>) {}
-
-  public async unary<
-    Service extends _Service,
-    Method extends _Method<Service, "unary">,
-  >(
-    service: Service,
-    method: Method,
-    request: _Request<Service, "unary", Method>,
+  public async unary<I extends DescMessage, O extends DescMessage>(
+    method: DescMethodUnary<I, O>,
+    request: MessageValidType<I>,
     headers: Headers,
-  ): Promise<_Response<Service, "unary", Method>> {
-    if (service === "cerbos" && method === "checkResources") {
+  ): Promise<MessageShape<O>> {
+    if (_methodName(method) === _methodName(cerbos.method.checkResources)) {
       const bundle = await this.bundle();
 
       return (await bundle.checkResources(
         request as CheckResourcesRequest,
         headers,
-      )) as _Response<Service, "unary", Method>;
+      )) as unknown as MessageShape<O>;
     }
 
     notImplemented(method);
   }
 
-  public serverStream<Service extends _Service>(
-    _: Service,
-    method: _Method<Service, "serverStream">,
+  public serverStream<I extends DescMessage, O extends DescMessage>(
+    method: DescMethodServerStreaming<I, O>,
   ): never {
     notImplemented(method);
   }
 }
 
-function notImplemented(method: string): never {
+function notImplemented(method: DescMethod): never {
   throw new NotOK(
     Status.UNIMPLEMENTED,
-    `${method} is not implemented in embedded policy decision points`,
+    `${_methodName(method)} is not implemented in embedded policy decision points`,
   );
 }

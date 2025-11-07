@@ -103,13 +103,11 @@ export type Rule = Message<"buf.validate.Rule"> & {
   expression: string;
 };
 
-export type RuleValid = Rule;
-
 /**
  * Describes the message buf.validate.Rule.
  * Use `create(RuleSchema)` to create a new message.
  */
-export const RuleSchema: GenMessage<Rule, { validType: RuleValid }> =
+export const RuleSchema: GenMessage<Rule> =
   /*@__PURE__*/
   messageDesc(file_buf_validate_validate, 0);
 
@@ -143,16 +141,13 @@ export type OneofRules = Message<"buf.validate.OneofRules"> & {
   required: boolean;
 };
 
-export type OneofRulesValid = OneofRules;
-
 /**
  * Describes the message buf.validate.OneofRules.
  * Use `create(OneofRulesSchema)` to create a new message.
  */
-export const OneofRulesSchema: GenMessage<
-  OneofRules,
-  { validType: OneofRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 1);
+export const OneofRulesSchema: GenMessage<OneofRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 1);
 
 /**
  * FieldRules encapsulates the rules for each type of field. Depending on
@@ -421,16 +416,13 @@ export type FieldRules = Message<"buf.validate.FieldRules"> & {
     | { case: undefined; value?: undefined };
 };
 
-export type FieldRulesValid = FieldRules;
-
 /**
  * Describes the message buf.validate.FieldRules.
  * Use `create(FieldRulesSchema)` to create a new message.
  */
-export const FieldRulesSchema: GenMessage<
-  FieldRules,
-  { validType: FieldRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 2);
+export const FieldRulesSchema: GenMessage<FieldRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 2);
 
 /**
  * PredefinedRules are custom rules that can be re-used with
@@ -460,16 +452,13 @@ export type PredefinedRules = Message<"buf.validate.PredefinedRules"> & {
   cel: Rule[];
 };
 
-export type PredefinedRulesValid = PredefinedRules;
-
 /**
  * Describes the message buf.validate.PredefinedRules.
  * Use `create(PredefinedRulesSchema)` to create a new message.
  */
-export const PredefinedRulesSchema: GenMessage<
-  PredefinedRules,
-  { validType: PredefinedRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 3);
+export const PredefinedRulesSchema: GenMessage<PredefinedRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 3);
 
 /**
  * FloatRules describes the rules applied to `float` values. These
@@ -652,16 +641,13 @@ export type FloatRules = Message<"buf.validate.FloatRules"> & {
   example: number[];
 };
 
-export type FloatRulesValid = FloatRules;
-
 /**
  * Describes the message buf.validate.FloatRules.
  * Use `create(FloatRulesSchema)` to create a new message.
  */
-export const FloatRulesSchema: GenMessage<
-  FloatRules,
-  { validType: FloatRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 4);
+export const FloatRulesSchema: GenMessage<FloatRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 4);
 
 /**
  * DoubleRules describes the rules applied to `double` values. These
@@ -844,16 +830,13 @@ export type DoubleRules = Message<"buf.validate.DoubleRules"> & {
   example: number[];
 };
 
-export type DoubleRulesValid = DoubleRules;
-
 /**
  * Describes the message buf.validate.DoubleRules.
  * Use `create(DoubleRulesSchema)` to create a new message.
  */
-export const DoubleRulesSchema: GenMessage<
-  DoubleRules,
-  { validType: DoubleRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 5);
+export const DoubleRulesSchema: GenMessage<DoubleRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 5);
 
 /**
  * Int32Rules describes the rules applied to `int32` values. These
@@ -1028,16 +1011,13 @@ export type Int32Rules = Message<"buf.validate.Int32Rules"> & {
   example: number[];
 };
 
-export type Int32RulesValid = Int32Rules;
-
 /**
  * Describes the message buf.validate.Int32Rules.
  * Use `create(Int32RulesSchema)` to create a new message.
  */
-export const Int32RulesSchema: GenMessage<
-  Int32Rules,
-  { validType: Int32RulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 6);
+export const Int32RulesSchema: GenMessage<Int32Rules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 6);
 
 /**
  * Int64Rules describes the rules applied to `int64` values. These
@@ -1212,16 +1192,13 @@ export type Int64Rules = Message<"buf.validate.Int64Rules"> & {
   example: bigint[];
 };
 
-export type Int64RulesValid = Int64Rules;
-
 /**
  * Describes the message buf.validate.Int64Rules.
  * Use `create(Int64RulesSchema)` to create a new message.
  */
-export const Int64RulesSchema: GenMessage<
-  Int64Rules,
-  { validType: Int64RulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 7);
+export const Int64RulesSchema: GenMessage<Int64Rules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 7);
 
 /**
  * UInt32Rules describes the rules applied to `uint32` values. These
@@ -1396,16 +1373,13 @@ export type UInt32Rules = Message<"buf.validate.UInt32Rules"> & {
   example: number[];
 };
 
-export type UInt32RulesValid = UInt32Rules;
-
 /**
  * Describes the message buf.validate.UInt32Rules.
  * Use `create(UInt32RulesSchema)` to create a new message.
  */
-export const UInt32RulesSchema: GenMessage<
-  UInt32Rules,
-  { validType: UInt32RulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 8);
+export const UInt32RulesSchema: GenMessage<UInt32Rules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 8);
 
 /**
  * UInt64Rules describes the rules applied to `uint64` values. These
@@ -1580,16 +1554,13 @@ export type UInt64Rules = Message<"buf.validate.UInt64Rules"> & {
   example: bigint[];
 };
 
-export type UInt64RulesValid = UInt64Rules;
-
 /**
  * Describes the message buf.validate.UInt64Rules.
  * Use `create(UInt64RulesSchema)` to create a new message.
  */
-export const UInt64RulesSchema: GenMessage<
-  UInt64Rules,
-  { validType: UInt64RulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 9);
+export const UInt64RulesSchema: GenMessage<UInt64Rules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 9);
 
 /**
  * SInt32Rules describes the rules applied to `sint32` values.
@@ -1763,16 +1734,13 @@ export type SInt32Rules = Message<"buf.validate.SInt32Rules"> & {
   example: number[];
 };
 
-export type SInt32RulesValid = SInt32Rules;
-
 /**
  * Describes the message buf.validate.SInt32Rules.
  * Use `create(SInt32RulesSchema)` to create a new message.
  */
-export const SInt32RulesSchema: GenMessage<
-  SInt32Rules,
-  { validType: SInt32RulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 10);
+export const SInt32RulesSchema: GenMessage<SInt32Rules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 10);
 
 /**
  * SInt64Rules describes the rules applied to `sint64` values.
@@ -1946,16 +1914,13 @@ export type SInt64Rules = Message<"buf.validate.SInt64Rules"> & {
   example: bigint[];
 };
 
-export type SInt64RulesValid = SInt64Rules;
-
 /**
  * Describes the message buf.validate.SInt64Rules.
  * Use `create(SInt64RulesSchema)` to create a new message.
  */
-export const SInt64RulesSchema: GenMessage<
-  SInt64Rules,
-  { validType: SInt64RulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 11);
+export const SInt64RulesSchema: GenMessage<SInt64Rules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 11);
 
 /**
  * Fixed32Rules describes the rules applied to `fixed32` values.
@@ -2129,16 +2094,13 @@ export type Fixed32Rules = Message<"buf.validate.Fixed32Rules"> & {
   example: number[];
 };
 
-export type Fixed32RulesValid = Fixed32Rules;
-
 /**
  * Describes the message buf.validate.Fixed32Rules.
  * Use `create(Fixed32RulesSchema)` to create a new message.
  */
-export const Fixed32RulesSchema: GenMessage<
-  Fixed32Rules,
-  { validType: Fixed32RulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 12);
+export const Fixed32RulesSchema: GenMessage<Fixed32Rules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 12);
 
 /**
  * Fixed64Rules describes the rules applied to `fixed64` values.
@@ -2312,16 +2274,13 @@ export type Fixed64Rules = Message<"buf.validate.Fixed64Rules"> & {
   example: bigint[];
 };
 
-export type Fixed64RulesValid = Fixed64Rules;
-
 /**
  * Describes the message buf.validate.Fixed64Rules.
  * Use `create(Fixed64RulesSchema)` to create a new message.
  */
-export const Fixed64RulesSchema: GenMessage<
-  Fixed64Rules,
-  { validType: Fixed64RulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 13);
+export const Fixed64RulesSchema: GenMessage<Fixed64Rules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 13);
 
 /**
  * SFixed32Rules describes the rules applied to `fixed32` values.
@@ -2495,16 +2454,13 @@ export type SFixed32Rules = Message<"buf.validate.SFixed32Rules"> & {
   example: number[];
 };
 
-export type SFixed32RulesValid = SFixed32Rules;
-
 /**
  * Describes the message buf.validate.SFixed32Rules.
  * Use `create(SFixed32RulesSchema)` to create a new message.
  */
-export const SFixed32RulesSchema: GenMessage<
-  SFixed32Rules,
-  { validType: SFixed32RulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 14);
+export const SFixed32RulesSchema: GenMessage<SFixed32Rules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 14);
 
 /**
  * SFixed64Rules describes the rules applied to `fixed64` values.
@@ -2678,16 +2634,13 @@ export type SFixed64Rules = Message<"buf.validate.SFixed64Rules"> & {
   example: bigint[];
 };
 
-export type SFixed64RulesValid = SFixed64Rules;
-
 /**
  * Describes the message buf.validate.SFixed64Rules.
  * Use `create(SFixed64RulesSchema)` to create a new message.
  */
-export const SFixed64RulesSchema: GenMessage<
-  SFixed64Rules,
-  { validType: SFixed64RulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 15);
+export const SFixed64RulesSchema: GenMessage<SFixed64Rules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 15);
 
 /**
  * BoolRules describes the rules applied to `bool` values. These rules
@@ -2730,16 +2683,13 @@ export type BoolRules = Message<"buf.validate.BoolRules"> & {
   example: boolean[];
 };
 
-export type BoolRulesValid = BoolRules;
-
 /**
  * Describes the message buf.validate.BoolRules.
  * Use `create(BoolRulesSchema)` to create a new message.
  */
-export const BoolRulesSchema: GenMessage<
-  BoolRules,
-  { validType: BoolRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 16);
+export const BoolRulesSchema: GenMessage<BoolRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 16);
 
 /**
  * StringRules describes the rules applied to `string` values These
@@ -3413,16 +3363,13 @@ export type StringRules = Message<"buf.validate.StringRules"> & {
   example: string[];
 };
 
-export type StringRulesValid = StringRules;
-
 /**
  * Describes the message buf.validate.StringRules.
  * Use `create(StringRulesSchema)` to create a new message.
  */
-export const StringRulesSchema: GenMessage<
-  StringRules,
-  { validType: StringRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 17);
+export const StringRulesSchema: GenMessage<StringRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 17);
 
 /**
  * BytesRules describe the rules applied to `bytes` values. These rules
@@ -3670,16 +3617,13 @@ export type BytesRules = Message<"buf.validate.BytesRules"> & {
   example: Uint8Array[];
 };
 
-export type BytesRulesValid = BytesRules;
-
 /**
  * Describes the message buf.validate.BytesRules.
  * Use `create(BytesRulesSchema)` to create a new message.
  */
-export const BytesRulesSchema: GenMessage<
-  BytesRules,
-  { validType: BytesRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 18);
+export const BytesRulesSchema: GenMessage<BytesRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 18);
 
 /**
  * EnumRules describe the rules applied to `enum` values.
@@ -3796,16 +3740,13 @@ export type EnumRules = Message<"buf.validate.EnumRules"> & {
   example: number[];
 };
 
-export type EnumRulesValid = EnumRules;
-
 /**
  * Describes the message buf.validate.EnumRules.
  * Use `create(EnumRulesSchema)` to create a new message.
  */
-export const EnumRulesSchema: GenMessage<
-  EnumRules,
-  { validType: EnumRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 19);
+export const EnumRulesSchema: GenMessage<EnumRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 19);
 
 /**
  * RepeatedRules describe the rules applied to `repeated` values.
@@ -3888,16 +3829,13 @@ export type RepeatedRules = Message<"buf.validate.RepeatedRules"> & {
   items?: FieldRules;
 };
 
-export type RepeatedRulesValid = RepeatedRules;
-
 /**
  * Describes the message buf.validate.RepeatedRules.
  * Use `create(RepeatedRulesSchema)` to create a new message.
  */
-export const RepeatedRulesSchema: GenMessage<
-  RepeatedRules,
-  { validType: RepeatedRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 20);
+export const RepeatedRulesSchema: GenMessage<RepeatedRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 20);
 
 /**
  * MapRules describe the rules applied to `map` values.
@@ -3979,16 +3917,13 @@ export type MapRules = Message<"buf.validate.MapRules"> & {
   values?: FieldRules;
 };
 
-export type MapRulesValid = MapRules;
-
 /**
  * Describes the message buf.validate.MapRules.
  * Use `create(MapRulesSchema)` to create a new message.
  */
-export const MapRulesSchema: GenMessage<
-  MapRules,
-  { validType: MapRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 21);
+export const MapRulesSchema: GenMessage<MapRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 21);
 
 /**
  * AnyRules describe rules applied exclusively to the `google.protobuf.Any` well-known type.
@@ -4031,16 +3966,13 @@ export type AnyRules = Message<"buf.validate.AnyRules"> & {
   notIn: string[];
 };
 
-export type AnyRulesValid = AnyRules;
-
 /**
  * Describes the message buf.validate.AnyRules.
  * Use `create(AnyRulesSchema)` to create a new message.
  */
-export const AnyRulesSchema: GenMessage<
-  AnyRules,
-  { validType: AnyRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 22);
+export const AnyRulesSchema: GenMessage<AnyRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 22);
 
 /**
  * DurationRules describe the rules applied exclusively to the `google.protobuf.Duration` well-known type.
@@ -4216,16 +4148,13 @@ export type DurationRules = Message<"buf.validate.DurationRules"> & {
   example: Duration[];
 };
 
-export type DurationRulesValid = DurationRules;
-
 /**
  * Describes the message buf.validate.DurationRules.
  * Use `create(DurationRulesSchema)` to create a new message.
  */
-export const DurationRulesSchema: GenMessage<
-  DurationRules,
-  { validType: DurationRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 23);
+export const DurationRulesSchema: GenMessage<DurationRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 23);
 
 /**
  * TimestampRules describe the rules applied exclusively to the `google.protobuf.Timestamp` well-known type.
@@ -4408,16 +4337,13 @@ export type TimestampRules = Message<"buf.validate.TimestampRules"> & {
   example: Timestamp[];
 };
 
-export type TimestampRulesValid = TimestampRules;
-
 /**
  * Describes the message buf.validate.TimestampRules.
  * Use `create(TimestampRulesSchema)` to create a new message.
  */
-export const TimestampRulesSchema: GenMessage<
-  TimestampRules,
-  { validType: TimestampRulesValid }
-> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 24);
+export const TimestampRulesSchema: GenMessage<TimestampRules> =
+  /*@__PURE__*/
+  messageDesc(file_buf_validate_validate, 24);
 
 /**
  * Specifies how `FieldRules.ignore` behaves, depending on the field's value, and

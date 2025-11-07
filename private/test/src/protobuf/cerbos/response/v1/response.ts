@@ -6,7 +6,7 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { Empty } from "../../../google/protobuf/empty";
 import { Value } from "../../../google/protobuf/struct";
 import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
-import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
+import { Effect, effectToJSON } from "../../effect/v1/effect";
 import { OutputEntry, PlanResourcesFilter } from "../../engine/v1/engine";
 import { Policy } from "../../policy/v1/policy";
 import { Schema, ValidationError } from "../../schema/v1/schema";
@@ -195,28 +195,6 @@ export enum InspectPoliciesResponse_Attribute_Kind {
   KIND_RESOURCE_ATTRIBUTE = 2,
 }
 
-export function inspectPoliciesResponse_Attribute_KindFromJSON(
-  object: any,
-): InspectPoliciesResponse_Attribute_Kind {
-  switch (object) {
-    case 0:
-    case "KIND_UNSPECIFIED":
-      return InspectPoliciesResponse_Attribute_Kind.KIND_UNSPECIFIED;
-    case 1:
-    case "KIND_PRINCIPAL_ATTRIBUTE":
-      return InspectPoliciesResponse_Attribute_Kind.KIND_PRINCIPAL_ATTRIBUTE;
-    case 2:
-    case "KIND_RESOURCE_ATTRIBUTE":
-      return InspectPoliciesResponse_Attribute_Kind.KIND_RESOURCE_ATTRIBUTE;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum InspectPoliciesResponse_Attribute_Kind",
-      );
-  }
-}
-
 export function inspectPoliciesResponse_Attribute_KindToJSON(
   object: InspectPoliciesResponse_Attribute_Kind,
 ): string {
@@ -247,31 +225,6 @@ export enum InspectPoliciesResponse_DerivedRole_Kind {
   KIND_UNDEFINED = 1,
   KIND_EXPORTED = 2,
   KIND_IMPORTED = 3,
-}
-
-export function inspectPoliciesResponse_DerivedRole_KindFromJSON(
-  object: any,
-): InspectPoliciesResponse_DerivedRole_Kind {
-  switch (object) {
-    case 0:
-    case "KIND_UNSPECIFIED":
-      return InspectPoliciesResponse_DerivedRole_Kind.KIND_UNSPECIFIED;
-    case 1:
-    case "KIND_UNDEFINED":
-      return InspectPoliciesResponse_DerivedRole_Kind.KIND_UNDEFINED;
-    case 2:
-    case "KIND_EXPORTED":
-      return InspectPoliciesResponse_DerivedRole_Kind.KIND_EXPORTED;
-    case 3:
-    case "KIND_IMPORTED":
-      return InspectPoliciesResponse_DerivedRole_Kind.KIND_IMPORTED;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum InspectPoliciesResponse_DerivedRole_Kind",
-      );
-  }
 }
 
 export function inspectPoliciesResponse_DerivedRole_KindToJSON(
@@ -310,37 +263,6 @@ export enum InspectPoliciesResponse_Constant_Kind {
   KIND_LOCAL = 3,
   KIND_UNDEFINED = 4,
   KIND_UNKNOWN = 5,
-}
-
-export function inspectPoliciesResponse_Constant_KindFromJSON(
-  object: any,
-): InspectPoliciesResponse_Constant_Kind {
-  switch (object) {
-    case 0:
-    case "KIND_UNSPECIFIED":
-      return InspectPoliciesResponse_Constant_Kind.KIND_UNSPECIFIED;
-    case 1:
-    case "KIND_EXPORTED":
-      return InspectPoliciesResponse_Constant_Kind.KIND_EXPORTED;
-    case 2:
-    case "KIND_IMPORTED":
-      return InspectPoliciesResponse_Constant_Kind.KIND_IMPORTED;
-    case 3:
-    case "KIND_LOCAL":
-      return InspectPoliciesResponse_Constant_Kind.KIND_LOCAL;
-    case 4:
-    case "KIND_UNDEFINED":
-      return InspectPoliciesResponse_Constant_Kind.KIND_UNDEFINED;
-    case 5:
-    case "KIND_UNKNOWN":
-      return InspectPoliciesResponse_Constant_Kind.KIND_UNKNOWN;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum InspectPoliciesResponse_Constant_Kind",
-      );
-  }
 }
 
 export function inspectPoliciesResponse_Constant_KindToJSON(
@@ -383,37 +305,6 @@ export enum InspectPoliciesResponse_Variable_Kind {
   KIND_LOCAL = 3,
   KIND_UNDEFINED = 4,
   KIND_UNKNOWN = 5,
-}
-
-export function inspectPoliciesResponse_Variable_KindFromJSON(
-  object: any,
-): InspectPoliciesResponse_Variable_Kind {
-  switch (object) {
-    case 0:
-    case "KIND_UNSPECIFIED":
-      return InspectPoliciesResponse_Variable_Kind.KIND_UNSPECIFIED;
-    case 1:
-    case "KIND_EXPORTED":
-      return InspectPoliciesResponse_Variable_Kind.KIND_EXPORTED;
-    case 2:
-    case "KIND_IMPORTED":
-      return InspectPoliciesResponse_Variable_Kind.KIND_IMPORTED;
-    case 3:
-    case "KIND_LOCAL":
-      return InspectPoliciesResponse_Variable_Kind.KIND_LOCAL;
-    case 4:
-    case "KIND_UNDEFINED":
-      return InspectPoliciesResponse_Variable_Kind.KIND_UNDEFINED;
-    case 5:
-    case "KIND_UNKNOWN":
-      return InspectPoliciesResponse_Variable_Kind.KIND_UNKNOWN;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum InspectPoliciesResponse_Variable_Kind",
-      );
-  }
 }
 
 export function inspectPoliciesResponse_Variable_KindToJSON(
@@ -623,36 +514,6 @@ export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
     return message;
   },
 
-  fromJSON(object: any): PlanResourcesResponse {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      action: isSet(object.action) ? globalThis.String(object.action) : "",
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-      resourceKind: isSet(object.resourceKind)
-        ? globalThis.String(object.resourceKind)
-        : "",
-      policyVersion: isSet(object.policyVersion)
-        ? globalThis.String(object.policyVersion)
-        : "",
-      filter: isSet(object.filter)
-        ? PlanResourcesFilter.fromJSON(object.filter)
-        : undefined,
-      meta: isSet(object.meta)
-        ? PlanResourcesResponse_Meta.fromJSON(object.meta)
-        : undefined,
-      validationErrors: globalThis.Array.isArray(object?.validationErrors)
-        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-        : [],
-      cerbosCallId: isSet(object.cerbosCallId)
-        ? globalThis.String(object.cerbosCallId)
-        : "",
-    };
-  },
-
   toJSON(message: PlanResourcesResponse): unknown {
     const obj: any = {};
     if (message.requestId !== "") {
@@ -763,25 +624,6 @@ export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> 
       return message;
     },
 
-    fromJSON(object: any): PlanResourcesResponse_Meta {
-      return {
-        filterDebug: isSet(object.filterDebug)
-          ? globalThis.String(object.filterDebug)
-          : "",
-        matchedScope: isSet(object.matchedScope)
-          ? globalThis.String(object.matchedScope)
-          : "",
-        matchedScopes: isObject(object.matchedScopes)
-          ? Object.entries(object.matchedScopes).reduce<{
-              [key: string]: string;
-            }>((acc, [key, value]) => {
-              acc[key] = String(value);
-              return acc;
-            }, {})
-          : {},
-      };
-    },
-
     toJSON(message: PlanResourcesResponse_Meta): unknown {
       const obj: any = {};
       if (message.filterDebug !== "") {
@@ -856,13 +698,6 @@ export const PlanResourcesResponse_Meta_MatchedScopesEntry: MessageFns<PlanResou
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): PlanResourcesResponse_Meta_MatchedScopesEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value) ? globalThis.String(object.value) : "",
-      };
     },
 
     toJSON(message: PlanResourcesResponse_Meta_MatchedScopesEntry): unknown {
@@ -957,25 +792,6 @@ export const CheckResourceSetResponse: MessageFns<CheckResourceSetResponse> = {
     return message;
   },
 
-  fromJSON(object: any): CheckResourceSetResponse {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      resourceInstances: isObject(object.resourceInstances)
-        ? Object.entries(object.resourceInstances).reduce<{
-            [key: string]: CheckResourceSetResponse_ActionEffectMap;
-          }>((acc, [key, value]) => {
-            acc[key] = CheckResourceSetResponse_ActionEffectMap.fromJSON(value);
-            return acc;
-          }, {})
-        : {},
-      meta: isSet(object.meta)
-        ? CheckResourceSetResponse_Meta.fromJSON(object.meta)
-        : undefined,
-    };
-  },
-
   toJSON(message: CheckResourceSetResponse): unknown {
     const obj: any = {};
     if (message.requestId !== "") {
@@ -1065,23 +881,6 @@ export const CheckResourceSetResponse_ActionEffectMap: MessageFns<CheckResourceS
       return message;
     },
 
-    fromJSON(object: any): CheckResourceSetResponse_ActionEffectMap {
-      return {
-        actions: isObject(object.actions)
-          ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-              (acc, [key, value]) => {
-                acc[key] = effectFromJSON(value);
-                return acc;
-              },
-              {},
-            )
-          : {},
-        validationErrors: globalThis.Array.isArray(object?.validationErrors)
-          ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-          : [],
-      };
-    },
-
     toJSON(message: CheckResourceSetResponse_ActionEffectMap): unknown {
       const obj: any = {};
       if (message.actions) {
@@ -1158,15 +957,6 @@ export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry: MessageFns<C
       return message;
     },
 
-    fromJSON(
-      object: any,
-    ): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value) ? effectFromJSON(object.value) : 0,
-      };
-    },
-
     toJSON(
       message: CheckResourceSetResponse_ActionEffectMap_ActionsEntry,
     ): unknown {
@@ -1233,20 +1023,6 @@ export const CheckResourceSetResponse_Meta: MessageFns<CheckResourceSetResponse_
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): CheckResourceSetResponse_Meta {
-      return {
-        resourceInstances: isObject(object.resourceInstances)
-          ? Object.entries(object.resourceInstances).reduce<{
-              [key: string]: CheckResourceSetResponse_Meta_ActionMeta;
-            }>((acc, [key, value]) => {
-              acc[key] =
-                CheckResourceSetResponse_Meta_ActionMeta.fromJSON(value);
-              return acc;
-            }, {})
-          : {},
-      };
     },
 
     toJSON(message: CheckResourceSetResponse_Meta): unknown {
@@ -1318,17 +1094,6 @@ export const CheckResourceSetResponse_Meta_EffectMeta: MessageFns<CheckResourceS
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): CheckResourceSetResponse_Meta_EffectMeta {
-      return {
-        matchedPolicy: isSet(object.matchedPolicy)
-          ? globalThis.String(object.matchedPolicy)
-          : "",
-        matchedScope: isSet(object.matchedScope)
-          ? globalThis.String(object.matchedScope)
-          : "",
-      };
     },
 
     toJSON(message: CheckResourceSetResponse_Meta_EffectMeta): unknown {
@@ -1406,25 +1171,6 @@ export const CheckResourceSetResponse_Meta_ActionMeta: MessageFns<CheckResourceS
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): CheckResourceSetResponse_Meta_ActionMeta {
-      return {
-        actions: isObject(object.actions)
-          ? Object.entries(object.actions).reduce<{
-              [key: string]: CheckResourceSetResponse_Meta_EffectMeta;
-            }>((acc, [key, value]) => {
-              acc[key] =
-                CheckResourceSetResponse_Meta_EffectMeta.fromJSON(value);
-              return acc;
-            }, {})
-          : {},
-        effectiveDerivedRoles: globalThis.Array.isArray(
-          object?.effectiveDerivedRoles,
-        )
-          ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
-          : [],
-      };
     },
 
     toJSON(message: CheckResourceSetResponse_Meta_ActionMeta): unknown {
@@ -1507,17 +1253,6 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry: MessageFns<C
       return message;
     },
 
-    fromJSON(
-      object: any,
-    ): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value)
-          ? CheckResourceSetResponse_Meta_EffectMeta.fromJSON(object.value)
-          : undefined,
-      };
-    },
-
     toJSON(
       message: CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry,
     ): unknown {
@@ -1594,17 +1329,6 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry: MessageFns<Ch
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(
-      object: any,
-    ): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value)
-          ? CheckResourceSetResponse_Meta_ActionMeta.fromJSON(object.value)
-          : undefined,
-      };
     },
 
     toJSON(
@@ -1685,15 +1409,6 @@ export const CheckResourceSetResponse_ResourceInstancesEntry: MessageFns<CheckRe
       return message;
     },
 
-    fromJSON(object: any): CheckResourceSetResponse_ResourceInstancesEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value)
-          ? CheckResourceSetResponse_ActionEffectMap.fromJSON(object.value)
-          : undefined,
-      };
-    },
-
     toJSON(message: CheckResourceSetResponse_ResourceInstancesEntry): unknown {
       const obj: any = {};
       if (message.key !== "") {
@@ -1769,19 +1484,6 @@ export const CheckResourceBatchResponse: MessageFns<CheckResourceBatchResponse> 
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): CheckResourceBatchResponse {
-      return {
-        requestId: isSet(object.requestId)
-          ? globalThis.String(object.requestId)
-          : "",
-        results: globalThis.Array.isArray(object?.results)
-          ? object.results.map((e: any) =>
-              CheckResourceBatchResponse_ActionEffectMap.fromJSON(e),
-            )
-          : [],
-      };
     },
 
     toJSON(message: CheckResourceBatchResponse): unknown {
@@ -1876,26 +1578,6 @@ export const CheckResourceBatchResponse_ActionEffectMap: MessageFns<CheckResourc
       return message;
     },
 
-    fromJSON(object: any): CheckResourceBatchResponse_ActionEffectMap {
-      return {
-        resourceId: isSet(object.resourceId)
-          ? globalThis.String(object.resourceId)
-          : "",
-        actions: isObject(object.actions)
-          ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-              (acc, [key, value]) => {
-                acc[key] = effectFromJSON(value);
-                return acc;
-              },
-              {},
-            )
-          : {},
-        validationErrors: globalThis.Array.isArray(object?.validationErrors)
-          ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-          : [],
-      };
-    },
-
     toJSON(message: CheckResourceBatchResponse_ActionEffectMap): unknown {
       const obj: any = {};
       if (message.resourceId !== "") {
@@ -1973,15 +1655,6 @@ export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry: MessageFns
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(
-      object: any,
-    ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value) ? effectFromJSON(object.value) : 0,
-      };
     },
 
     toJSON(
@@ -2066,22 +1739,6 @@ export const CheckResourcesResponse: MessageFns<CheckResourcesResponse> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): CheckResourcesResponse {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      results: globalThis.Array.isArray(object?.results)
-        ? object.results.map((e: any) =>
-            CheckResourcesResponse_ResultEntry.fromJSON(e),
-          )
-        : [],
-      cerbosCallId: isSet(object.cerbosCallId)
-        ? globalThis.String(object.cerbosCallId)
-        : "",
-    };
   },
 
   toJSON(message: CheckResourcesResponse): unknown {
@@ -2220,34 +1877,6 @@ export const CheckResourcesResponse_ResultEntry: MessageFns<CheckResourcesRespon
       return message;
     },
 
-    fromJSON(object: any): CheckResourcesResponse_ResultEntry {
-      return {
-        resource: isSet(object.resource)
-          ? CheckResourcesResponse_ResultEntry_Resource.fromJSON(
-              object.resource,
-            )
-          : undefined,
-        actions: isObject(object.actions)
-          ? Object.entries(object.actions).reduce<{ [key: string]: Effect }>(
-              (acc, [key, value]) => {
-                acc[key] = effectFromJSON(value);
-                return acc;
-              },
-              {},
-            )
-          : {},
-        validationErrors: globalThis.Array.isArray(object?.validationErrors)
-          ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-          : [],
-        meta: isSet(object.meta)
-          ? CheckResourcesResponse_ResultEntry_Meta.fromJSON(object.meta)
-          : undefined,
-        outputs: globalThis.Array.isArray(object?.outputs)
-          ? object.outputs.map((e: any) => OutputEntry.fromJSON(e))
-          : [],
-      };
-    },
-
     toJSON(message: CheckResourcesResponse_ResultEntry): unknown {
       const obj: any = {};
       if (message.resource !== undefined) {
@@ -2356,17 +1985,6 @@ export const CheckResourcesResponse_ResultEntry_Resource: MessageFns<CheckResour
       return message;
     },
 
-    fromJSON(object: any): CheckResourcesResponse_ResultEntry_Resource {
-      return {
-        id: isSet(object.id) ? globalThis.String(object.id) : "",
-        kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
-        policyVersion: isSet(object.policyVersion)
-          ? globalThis.String(object.policyVersion)
-          : "",
-        scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-      };
-    },
-
     toJSON(message: CheckResourcesResponse_ResultEntry_Resource): unknown {
       const obj: any = {};
       if (message.id !== "") {
@@ -2450,27 +2068,6 @@ export const CheckResourcesResponse_ResultEntry_Meta: MessageFns<CheckResourcesR
       return message;
     },
 
-    fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta {
-      return {
-        actions: isObject(object.actions)
-          ? Object.entries(object.actions).reduce<{
-              [key: string]: CheckResourcesResponse_ResultEntry_Meta_EffectMeta;
-            }>((acc, [key, value]) => {
-              acc[key] =
-                CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
-                  value,
-                );
-              return acc;
-            }, {})
-          : {},
-        effectiveDerivedRoles: globalThis.Array.isArray(
-          object?.effectiveDerivedRoles,
-        )
-          ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
-          : [],
-      };
-    },
-
     toJSON(message: CheckResourcesResponse_ResultEntry_Meta): unknown {
       const obj: any = {};
       if (message.actions) {
@@ -2544,17 +2141,6 @@ export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta: MessageFns<Chec
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
-      return {
-        matchedPolicy: isSet(object.matchedPolicy)
-          ? globalThis.String(object.matchedPolicy)
-          : "",
-        matchedScope: isSet(object.matchedScope)
-          ? globalThis.String(object.matchedScope)
-          : "",
-      };
     },
 
     toJSON(
@@ -2634,19 +2220,6 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry: MessageFns<Ch
       return message;
     },
 
-    fromJSON(
-      object: any,
-    ): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value)
-          ? CheckResourcesResponse_ResultEntry_Meta_EffectMeta.fromJSON(
-              object.value,
-            )
-          : undefined,
-      };
-    },
-
     toJSON(
       message: CheckResourcesResponse_ResultEntry_Meta_ActionsEntry,
     ): unknown {
@@ -2719,13 +2292,6 @@ export const CheckResourcesResponse_ResultEntry_ActionsEntry: MessageFns<CheckRe
       return message;
     },
 
-    fromJSON(object: any): CheckResourcesResponse_ResultEntry_ActionsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value) ? effectFromJSON(object.value) : 0,
-      };
-    },
-
     toJSON(message: CheckResourcesResponse_ResultEntry_ActionsEntry): unknown {
       const obj: any = {};
       if (message.key !== "") {
@@ -2780,14 +2346,6 @@ export const AddOrUpdatePolicyResponse: MessageFns<AddOrUpdatePolicyResponse> =
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): AddOrUpdatePolicyResponse {
-      return {
-        success: isSet(object.success)
-          ? Empty.fromJSON(object.success)
-          : undefined,
-      };
     },
 
     toJSON(message: AddOrUpdatePolicyResponse): unknown {
@@ -2871,24 +2429,6 @@ export const ListAuditLogEntriesResponse: MessageFns<ListAuditLogEntriesResponse
       return message;
     },
 
-    fromJSON(object: any): ListAuditLogEntriesResponse {
-      return {
-        entry: isSet(object.accessLogEntry)
-          ? {
-              $case: "accessLogEntry",
-              accessLogEntry: AccessLogEntry.fromJSON(object.accessLogEntry),
-            }
-          : isSet(object.decisionLogEntry)
-            ? {
-                $case: "decisionLogEntry",
-                decisionLogEntry: DecisionLogEntry.fromJSON(
-                  object.decisionLogEntry,
-                ),
-              }
-            : undefined,
-      };
-    },
-
     toJSON(message: ListAuditLogEntriesResponse): unknown {
       const obj: any = {};
       if (message.entry?.$case === "accessLogEntry") {
@@ -2969,16 +2509,6 @@ export const ServerInfoResponse: MessageFns<ServerInfoResponse> = {
     return message;
   },
 
-  fromJSON(object: any): ServerInfoResponse {
-    return {
-      version: isSet(object.version) ? globalThis.String(object.version) : "",
-      commit: isSet(object.commit) ? globalThis.String(object.commit) : "",
-      buildDate: isSet(object.buildDate)
-        ? globalThis.String(object.buildDate)
-        : "",
-    };
-  },
-
   toJSON(message: ServerInfoResponse): unknown {
     const obj: any = {};
     if (message.version !== "") {
@@ -3037,14 +2567,6 @@ export const ListPoliciesResponse: MessageFns<ListPoliciesResponse> = {
     return message;
   },
 
-  fromJSON(object: any): ListPoliciesResponse {
-    return {
-      policyIds: globalThis.Array.isArray(object?.policyIds)
-        ? object.policyIds.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
   toJSON(message: ListPoliciesResponse): unknown {
     const obj: any = {};
     if (message.policyIds?.length) {
@@ -3092,14 +2614,6 @@ export const GetPolicyResponse: MessageFns<GetPolicyResponse> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): GetPolicyResponse {
-    return {
-      policies: globalThis.Array.isArray(object?.policies)
-        ? object.policies.map((e: any) => Policy.fromJSON(e))
-        : [],
-    };
   },
 
   toJSON(message: GetPolicyResponse): unknown {
@@ -3154,14 +2668,6 @@ export const DisablePolicyResponse: MessageFns<DisablePolicyResponse> = {
     return message;
   },
 
-  fromJSON(object: any): DisablePolicyResponse {
-    return {
-      disabledPolicies: isSet(object.disabledPolicies)
-        ? globalThis.Number(object.disabledPolicies)
-        : 0,
-    };
-  },
-
   toJSON(message: DisablePolicyResponse): unknown {
     const obj: any = {};
     if (message.disabledPolicies !== 0) {
@@ -3212,14 +2718,6 @@ export const EnablePolicyResponse: MessageFns<EnablePolicyResponse> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): EnablePolicyResponse {
-    return {
-      enabledPolicies: isSet(object.enabledPolicies)
-        ? globalThis.Number(object.enabledPolicies)
-        : 0,
-    };
   },
 
   toJSON(message: EnablePolicyResponse): unknown {
@@ -3281,19 +2779,6 @@ export const InspectPoliciesResponse: MessageFns<InspectPoliciesResponse> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): InspectPoliciesResponse {
-    return {
-      results: isObject(object.results)
-        ? Object.entries(object.results).reduce<{
-            [key: string]: InspectPoliciesResponse_Result;
-          }>((acc, [key, value]) => {
-            acc[key] = InspectPoliciesResponse_Result.fromJSON(value);
-            return acc;
-          }, {})
-        : {},
-    };
   },
 
   toJSON(message: InspectPoliciesResponse): unknown {
@@ -3364,15 +2849,6 @@ export const InspectPoliciesResponse_Attribute: MessageFns<InspectPoliciesRespon
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): InspectPoliciesResponse_Attribute {
-      return {
-        kind: isSet(object.kind)
-          ? inspectPoliciesResponse_Attribute_KindFromJSON(object.kind)
-          : 0,
-        name: isSet(object.name) ? globalThis.String(object.name) : "",
-      };
     },
 
     toJSON(message: InspectPoliciesResponse_Attribute): unknown {
@@ -3451,16 +2927,6 @@ export const InspectPoliciesResponse_DerivedRole: MessageFns<InspectPoliciesResp
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): InspectPoliciesResponse_DerivedRole {
-      return {
-        name: isSet(object.name) ? globalThis.String(object.name) : "",
-        kind: isSet(object.kind)
-          ? inspectPoliciesResponse_DerivedRole_KindFromJSON(object.kind)
-          : 0,
-        source: isSet(object.source) ? globalThis.String(object.source) : "",
-      };
     },
 
     toJSON(message: InspectPoliciesResponse_DerivedRole): unknown {
@@ -3567,18 +3033,6 @@ export const InspectPoliciesResponse_Constant: MessageFns<InspectPoliciesRespons
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): InspectPoliciesResponse_Constant {
-      return {
-        name: isSet(object.name) ? globalThis.String(object.name) : "",
-        value: isSet(object?.value) ? object.value : undefined,
-        kind: isSet(object.kind)
-          ? inspectPoliciesResponse_Constant_KindFromJSON(object.kind)
-          : 0,
-        source: isSet(object.source) ? globalThis.String(object.source) : "",
-        used: isSet(object.used) ? globalThis.Boolean(object.used) : false,
-      };
     },
 
     toJSON(message: InspectPoliciesResponse_Constant): unknown {
@@ -3688,18 +3142,6 @@ export const InspectPoliciesResponse_Variable: MessageFns<InspectPoliciesRespons
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): InspectPoliciesResponse_Variable {
-      return {
-        name: isSet(object.name) ? globalThis.String(object.name) : "",
-        value: isSet(object.value) ? globalThis.String(object.value) : "",
-        kind: isSet(object.kind)
-          ? inspectPoliciesResponse_Variable_KindFromJSON(object.kind)
-          : 0,
-        source: isSet(object.source) ? globalThis.String(object.source) : "",
-        used: isSet(object.used) ? globalThis.Boolean(object.used) : false,
-      };
     },
 
     toJSON(message: InspectPoliciesResponse_Variable): unknown {
@@ -3852,37 +3294,6 @@ export const InspectPoliciesResponse_Result: MessageFns<InspectPoliciesResponse_
       return message;
     },
 
-    fromJSON(object: any): InspectPoliciesResponse_Result {
-      return {
-        actions: globalThis.Array.isArray(object?.actions)
-          ? object.actions.map((e: any) => globalThis.String(e))
-          : [],
-        variables: globalThis.Array.isArray(object?.variables)
-          ? object.variables.map((e: any) =>
-              InspectPoliciesResponse_Variable.fromJSON(e),
-            )
-          : [],
-        policyId: isSet(object.policyId)
-          ? globalThis.String(object.policyId)
-          : "",
-        derivedRoles: globalThis.Array.isArray(object?.derivedRoles)
-          ? object.derivedRoles.map((e: any) =>
-              InspectPoliciesResponse_DerivedRole.fromJSON(e),
-            )
-          : [],
-        attributes: globalThis.Array.isArray(object?.attributes)
-          ? object.attributes.map((e: any) =>
-              InspectPoliciesResponse_Attribute.fromJSON(e),
-            )
-          : [],
-        constants: globalThis.Array.isArray(object?.constants)
-          ? object.constants.map((e: any) =>
-              InspectPoliciesResponse_Constant.fromJSON(e),
-            )
-          : [],
-      };
-    },
-
     toJSON(message: InspectPoliciesResponse_Result): unknown {
       const obj: any = {};
       if (message.actions?.length) {
@@ -3976,15 +3387,6 @@ export const InspectPoliciesResponse_ResultsEntry: MessageFns<InspectPoliciesRes
       return message;
     },
 
-    fromJSON(object: any): InspectPoliciesResponse_ResultsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value)
-          ? InspectPoliciesResponse_Result.fromJSON(object.value)
-          : undefined,
-      };
-    },
-
     toJSON(message: InspectPoliciesResponse_ResultsEntry): unknown {
       const obj: any = {};
       if (message.key !== "") {
@@ -4028,10 +3430,6 @@ export const AddOrUpdateSchemaResponse: MessageFns<AddOrUpdateSchemaResponse> =
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(_: any): AddOrUpdateSchemaResponse {
-      return {};
     },
 
     toJSON(_: AddOrUpdateSchemaResponse): unknown {
@@ -4083,14 +3481,6 @@ export const ListSchemasResponse: MessageFns<ListSchemasResponse> = {
     return message;
   },
 
-  fromJSON(object: any): ListSchemasResponse {
-    return {
-      schemaIds: globalThis.Array.isArray(object?.schemaIds)
-        ? object.schemaIds.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
   toJSON(message: ListSchemasResponse): unknown {
     const obj: any = {};
     if (message.schemaIds?.length) {
@@ -4138,14 +3528,6 @@ export const GetSchemaResponse: MessageFns<GetSchemaResponse> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): GetSchemaResponse {
-    return {
-      schemas: globalThis.Array.isArray(object?.schemas)
-        ? object.schemas.map((e: any) => Schema.fromJSON(e))
-        : [],
-    };
   },
 
   toJSON(message: GetSchemaResponse): unknown {
@@ -4200,14 +3582,6 @@ export const DeleteSchemaResponse: MessageFns<DeleteSchemaResponse> = {
     return message;
   },
 
-  fromJSON(object: any): DeleteSchemaResponse {
-    return {
-      deletedSchemas: isSet(object.deletedSchemas)
-        ? globalThis.Number(object.deletedSchemas)
-        : 0,
-    };
-  },
-
   toJSON(message: DeleteSchemaResponse): unknown {
     const obj: any = {};
     if (message.deletedSchemas !== 0) {
@@ -4249,27 +3623,14 @@ export const ReloadStoreResponse: MessageFns<ReloadStoreResponse> = {
     return message;
   },
 
-  fromJSON(_: any): ReloadStoreResponse {
-    return {};
-  },
-
   toJSON(_: ReloadStoreResponse): unknown {
     const obj: any = {};
     return obj;
   },
 };
 
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

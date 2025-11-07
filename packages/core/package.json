@@ -46,7 +46,11 @@
     "policy decision point",
     "PDP"
   ],
+  "peerDependencies": {
+    "@bufbuild/protobuf": "^2.10.0"
+  },
   "dependencies": {
+    "@cerbos/api": "^0.0.1",
     "uuid": "^13.0.0"
   },
   "publishConfig": {

@@ -1,10 +1,9 @@
 unreleased:
   type: patch
 
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.10.0
-      pull: 1260
+  changed:
+    - summary: Migrate to `protoc-gen-es` and extract generated code to its own package
+      pull: 1271
 
 releases:
   - version: 0.23.2
@@ -591,6 +590,7 @@ releases:
 
 references:
   "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es
+  "@cerbos/api": ../api/README.md
   "@cerbos/core": ../core/README.md
   "@cerbos/opentelemetry": ../opentelemetry/README.md
   "@grpc/grpc-js": https://github.com/grpc/grpc-node

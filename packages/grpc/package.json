@@ -48,8 +48,11 @@
     "gRPC",
     "server-side"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "@bufbuild/protobuf": "^2.10.0",
+    "@cerbos/api": "^0.0.1"
+  },
+  "dependencies": {
     "@cerbos/core": "^0.24.1",
     "@grpc/grpc-js": "^1.14.0"
   },

@@ -70,16 +70,13 @@ export type StringMatch = Message<"cerbos.cloud.store.v1.StringMatch"> & {
     | { case: undefined; value?: undefined };
 };
 
-export type StringMatchValid = StringMatch;
-
 /**
  * Describes the message cerbos.cloud.store.v1.StringMatch.
  * Use `create(StringMatchSchema)` to create a new message.
  */
-export const StringMatchSchema: GenMessage<
-  StringMatch,
-  { validType: StringMatchValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 0);
+export const StringMatchSchema: GenMessage<StringMatch> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 0);
 
 /**
  * @generated from message cerbos.cloud.store.v1.StringMatch.InList
@@ -92,16 +89,13 @@ export type StringMatch_InList =
     values: string[];
   };
 
-export type StringMatch_InListValid = StringMatch_InList;
-
 /**
  * Describes the message cerbos.cloud.store.v1.StringMatch.InList.
  * Use `create(StringMatch_InListSchema)` to create a new message.
  */
-export const StringMatch_InListSchema: GenMessage<
-  StringMatch_InList,
-  { validType: StringMatch_InListValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 0, 0);
+export const StringMatch_InListSchema: GenMessage<StringMatch_InList> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 0, 0);
 
 /**
  * @generated from message cerbos.cloud.store.v1.FileFilter
@@ -113,16 +107,13 @@ export type FileFilter = Message<"cerbos.cloud.store.v1.FileFilter"> & {
   path?: StringMatch;
 };
 
-export type FileFilterValid = FileFilter;
-
 /**
  * Describes the message cerbos.cloud.store.v1.FileFilter.
  * Use `create(FileFilterSchema)` to create a new message.
  */
-export const FileFilterSchema: GenMessage<
-  FileFilter,
-  { validType: FileFilterValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 1);
+export const FileFilterSchema: GenMessage<FileFilter> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 1);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ListFilesRequest
@@ -140,16 +131,13 @@ export type ListFilesRequest =
     filter?: FileFilter;
   };
 
-export type ListFilesRequestValid = ListFilesRequest;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ListFilesRequest.
  * Use `create(ListFilesRequestSchema)` to create a new message.
  */
-export const ListFilesRequestSchema: GenMessage<
-  ListFilesRequest,
-  { validType: ListFilesRequestValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 2);
+export const ListFilesRequestSchema: GenMessage<ListFilesRequest> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 2);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ListFilesResponse
@@ -167,16 +155,13 @@ export type ListFilesResponse =
     files: string[];
   };
 
-export type ListFilesResponseValid = ListFilesResponse;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ListFilesResponse.
  * Use `create(ListFilesResponseSchema)` to create a new message.
  */
-export const ListFilesResponseSchema: GenMessage<
-  ListFilesResponse,
-  { validType: ListFilesResponseValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 3);
+export const ListFilesResponseSchema: GenMessage<ListFilesResponse> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 3);
 
 /**
  * @generated from message cerbos.cloud.store.v1.GetFilesRequest
@@ -194,16 +179,13 @@ export type GetFilesRequest =
     files: string[];
   };
 
-export type GetFilesRequestValid = GetFilesRequest;
-
 /**
  * Describes the message cerbos.cloud.store.v1.GetFilesRequest.
  * Use `create(GetFilesRequestSchema)` to create a new message.
  */
-export const GetFilesRequestSchema: GenMessage<
-  GetFilesRequest,
-  { validType: GetFilesRequestValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 4);
+export const GetFilesRequestSchema: GenMessage<GetFilesRequest> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 4);
 
 /**
  * @generated from message cerbos.cloud.store.v1.File
@@ -220,13 +202,11 @@ export type File = Message<"cerbos.cloud.store.v1.File"> & {
   contents: Uint8Array;
 };
 
-export type FileValid = File;
-
 /**
  * Describes the message cerbos.cloud.store.v1.File.
  * Use `create(FileSchema)` to create a new message.
  */
-export const FileSchema: GenMessage<File, { validType: FileValid }> =
+export const FileSchema: GenMessage<File> =
   /*@__PURE__*/
   messageDesc(file_cerbos_cloud_store_v1_store, 5);
 
@@ -246,16 +226,13 @@ export type GetFilesResponse =
     files: File[];
   };
 
-export type GetFilesResponseValid = GetFilesResponse;
-
 /**
  * Describes the message cerbos.cloud.store.v1.GetFilesResponse.
  * Use `create(GetFilesResponseSchema)` to create a new message.
  */
-export const GetFilesResponseSchema: GenMessage<
-  GetFilesResponse,
-  { validType: GetFilesResponseValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 6);
+export const GetFilesResponseSchema: GenMessage<GetFilesResponse> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 6);
 
 /**
  * @generated from message cerbos.cloud.store.v1.GetCurrentVersionRequest
@@ -268,16 +245,13 @@ export type GetCurrentVersionRequest =
     storeId: string;
   };
 
-export type GetCurrentVersionRequestValid = GetCurrentVersionRequest;
-
 /**
  * Describes the message cerbos.cloud.store.v1.GetCurrentVersionRequest.
  * Use `create(GetCurrentVersionRequestSchema)` to create a new message.
  */
-export const GetCurrentVersionRequestSchema: GenMessage<
-  GetCurrentVersionRequest,
-  { validType: GetCurrentVersionRequestValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 7);
+export const GetCurrentVersionRequestSchema: GenMessage<GetCurrentVersionRequest> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 7);
 
 /**
  * @generated from message cerbos.cloud.store.v1.GetCurrentVersionResponse
@@ -295,16 +269,13 @@ export type GetCurrentVersionResponse =
     changeDetails?: ChangeDetails;
   };
 
-export type GetCurrentVersionResponseValid = GetCurrentVersionResponse;
-
 /**
  * Describes the message cerbos.cloud.store.v1.GetCurrentVersionResponse.
  * Use `create(GetCurrentVersionResponseSchema)` to create a new message.
  */
-export const GetCurrentVersionResponseSchema: GenMessage<
-  GetCurrentVersionResponse,
-  { validType: GetCurrentVersionResponseValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 8);
+export const GetCurrentVersionResponseSchema: GenMessage<GetCurrentVersionResponse> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 8);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ChangeDetails
@@ -341,16 +312,13 @@ export type ChangeDetails = Message<"cerbos.cloud.store.v1.ChangeDetails"> & {
     | { case: undefined; value?: undefined };
 };
 
-export type ChangeDetailsValid = ChangeDetails;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ChangeDetails.
  * Use `create(ChangeDetailsSchema)` to create a new message.
  */
-export const ChangeDetailsSchema: GenMessage<
-  ChangeDetails,
-  { validType: ChangeDetailsValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 9);
+export const ChangeDetailsSchema: GenMessage<ChangeDetails> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 9);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ChangeDetails.Git
@@ -398,16 +366,13 @@ export type ChangeDetails_Git =
     authorDate?: Timestamp;
   };
 
-export type ChangeDetails_GitValid = ChangeDetails_Git;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ChangeDetails.Git.
  * Use `create(ChangeDetails_GitSchema)` to create a new message.
  */
-export const ChangeDetails_GitSchema: GenMessage<
-  ChangeDetails_Git,
-  { validType: ChangeDetails_GitValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 9, 0);
+export const ChangeDetails_GitSchema: GenMessage<ChangeDetails_Git> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 9, 0);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ChangeDetails.Internal
@@ -425,16 +390,13 @@ export type ChangeDetails_Internal =
     metadata: { [key: string]: Value };
   };
 
-export type ChangeDetails_InternalValid = ChangeDetails_Internal;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ChangeDetails.Internal.
  * Use `create(ChangeDetails_InternalSchema)` to create a new message.
  */
-export const ChangeDetails_InternalSchema: GenMessage<
-  ChangeDetails_Internal,
-  { validType: ChangeDetails_InternalValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 9, 1);
+export const ChangeDetails_InternalSchema: GenMessage<ChangeDetails_Internal> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 9, 1);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ChangeDetails.Uploader
@@ -452,16 +414,13 @@ export type ChangeDetails_Uploader =
     metadata: { [key: string]: Value };
   };
 
-export type ChangeDetails_UploaderValid = ChangeDetails_Uploader;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ChangeDetails.Uploader.
  * Use `create(ChangeDetails_UploaderSchema)` to create a new message.
  */
-export const ChangeDetails_UploaderSchema: GenMessage<
-  ChangeDetails_Uploader,
-  { validType: ChangeDetails_UploaderValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 9, 2);
+export const ChangeDetails_UploaderSchema: GenMessage<ChangeDetails_Uploader> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 9, 2);
 
 /**
  * @generated from message cerbos.cloud.store.v1.FileOp
@@ -488,13 +447,11 @@ export type FileOp = Message<"cerbos.cloud.store.v1.FileOp"> & {
     | { case: undefined; value?: undefined };
 };
 
-export type FileOpValid = FileOp;
-
 /**
  * Describes the message cerbos.cloud.store.v1.FileOp.
  * Use `create(FileOpSchema)` to create a new message.
  */
-export const FileOpSchema: GenMessage<FileOp, { validType: FileOpValid }> =
+export const FileOpSchema: GenMessage<FileOp> =
   /*@__PURE__*/
   messageDesc(file_cerbos_cloud_store_v1_store, 10);
 
@@ -524,16 +481,13 @@ export type ModifyFilesRequest =
     changeDetails?: ChangeDetails;
   };
 
-export type ModifyFilesRequestValid = ModifyFilesRequest;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ModifyFilesRequest.
  * Use `create(ModifyFilesRequestSchema)` to create a new message.
  */
-export const ModifyFilesRequestSchema: GenMessage<
-  ModifyFilesRequest,
-  { validType: ModifyFilesRequestValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 11);
+export const ModifyFilesRequestSchema: GenMessage<ModifyFilesRequest> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 11);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ModifyFilesRequest.Condition
@@ -546,16 +500,13 @@ export type ModifyFilesRequest_Condition =
     storeVersionMustEqual: bigint;
   };
 
-export type ModifyFilesRequest_ConditionValid = ModifyFilesRequest_Condition;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ModifyFilesRequest.Condition.
  * Use `create(ModifyFilesRequest_ConditionSchema)` to create a new message.
  */
-export const ModifyFilesRequest_ConditionSchema: GenMessage<
-  ModifyFilesRequest_Condition,
-  { validType: ModifyFilesRequest_ConditionValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 11, 0);
+export const ModifyFilesRequest_ConditionSchema: GenMessage<ModifyFilesRequest_Condition> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 11, 0);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ModifyFilesResponse
@@ -568,16 +519,13 @@ export type ModifyFilesResponse =
     newStoreVersion: bigint;
   };
 
-export type ModifyFilesResponseValid = ModifyFilesResponse;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ModifyFilesResponse.
  * Use `create(ModifyFilesResponseSchema)` to create a new message.
  */
-export const ModifyFilesResponseSchema: GenMessage<
-  ModifyFilesResponse,
-  { validType: ModifyFilesResponseValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 12);
+export const ModifyFilesResponseSchema: GenMessage<ModifyFilesResponse> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 12);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ReplaceFilesRequest
@@ -620,16 +568,13 @@ export type ReplaceFilesRequest =
     changeDetails?: ChangeDetails;
   };
 
-export type ReplaceFilesRequestValid = ReplaceFilesRequest;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ReplaceFilesRequest.
  * Use `create(ReplaceFilesRequestSchema)` to create a new message.
  */
-export const ReplaceFilesRequestSchema: GenMessage<
-  ReplaceFilesRequest,
-  { validType: ReplaceFilesRequestValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 13);
+export const ReplaceFilesRequestSchema: GenMessage<ReplaceFilesRequest> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 13);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ReplaceFilesRequest.Condition
@@ -642,16 +587,13 @@ export type ReplaceFilesRequest_Condition =
     storeVersionMustEqual: bigint;
   };
 
-export type ReplaceFilesRequest_ConditionValid = ReplaceFilesRequest_Condition;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ReplaceFilesRequest.Condition.
  * Use `create(ReplaceFilesRequest_ConditionSchema)` to create a new message.
  */
-export const ReplaceFilesRequest_ConditionSchema: GenMessage<
-  ReplaceFilesRequest_Condition,
-  { validType: ReplaceFilesRequest_ConditionValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 13, 0);
+export const ReplaceFilesRequest_ConditionSchema: GenMessage<ReplaceFilesRequest_Condition> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 13, 0);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ReplaceFilesRequest.Files
@@ -664,16 +606,13 @@ export type ReplaceFilesRequest_Files =
     files: File[];
   };
 
-export type ReplaceFilesRequest_FilesValid = ReplaceFilesRequest_Files;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ReplaceFilesRequest.Files.
  * Use `create(ReplaceFilesRequest_FilesSchema)` to create a new message.
  */
-export const ReplaceFilesRequest_FilesSchema: GenMessage<
-  ReplaceFilesRequest_Files,
-  { validType: ReplaceFilesRequest_FilesValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 13, 1);
+export const ReplaceFilesRequest_FilesSchema: GenMessage<ReplaceFilesRequest_Files> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 13, 1);
 
 /**
  * @generated from message cerbos.cloud.store.v1.ReplaceFilesResponse
@@ -691,16 +630,13 @@ export type ReplaceFilesResponse =
     ignoredFiles: string[];
   };
 
-export type ReplaceFilesResponseValid = ReplaceFilesResponse;
-
 /**
  * Describes the message cerbos.cloud.store.v1.ReplaceFilesResponse.
  * Use `create(ReplaceFilesResponseSchema)` to create a new message.
  */
-export const ReplaceFilesResponseSchema: GenMessage<
-  ReplaceFilesResponse,
-  { validType: ReplaceFilesResponseValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_store_v1_store, 14);
+export const ReplaceFilesResponseSchema: GenMessage<ReplaceFilesResponse> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_store_v1_store, 14);
 
 /**
  * @generated from service cerbos.cloud.store.v1.CerbosStoreService

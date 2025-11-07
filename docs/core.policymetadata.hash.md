@@ -9,5 +9,5 @@ Hash of policy contents.
 **Signature:**
 
 ```typescript
-hash: string | undefined;
+hash: bigint | undefined;
 ```

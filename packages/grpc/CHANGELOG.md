@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Bump dependency on [@bufbuild/protobuf] to 2.10.0 ([#1260](https://github.com/cerbos/cerbos-sdk-javascript/pull/1260))
+- Migrate to `protoc-gen-es` and extract generated code to its own package ([#1271](https://github.com/cerbos/cerbos-sdk-javascript/pull/1271))
 
 ## [0.23.2] - 2025-10-14
 
@@ -484,6 +484,7 @@
 [0.5.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.5.0...@cerbos/grpc@0.5.1
 [0.5.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/138ce112e6b775902ddd3791faa8a763dad8614f...@cerbos/grpc@0.5.0
 [@bufbuild/protobuf]: https://github.com/bufbuild/protobuf-es
+[@cerbos/api]: ../api/README.md
 [@cerbos/core]: ../core/README.md
 [@cerbos/opentelemetry]: ../opentelemetry/README.md
 [@grpc/grpc-js]: https://github.com/grpc/grpc-node

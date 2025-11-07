@@ -451,7 +451,7 @@ describe("CerbosInstrumentation", () => {
                 value: {
                   value: {
                     $case: "intValue",
-                    intValue: attributes[ATTR_RPC_GRPC_STATUS_CODE].toString(),
+                    intValue: BigInt(attributes[ATTR_RPC_GRPC_STATUS_CODE]),
                   },
                 },
               },

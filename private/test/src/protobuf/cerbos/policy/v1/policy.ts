@@ -5,7 +5,7 @@
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { Value } from "../../../google/protobuf/struct";
 import { UInt64Value } from "../../../google/protobuf/wrappers";
-import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
+import { Effect, effectToJSON } from "../../effect/v1/effect";
 
 export const protobufPackage = "cerbos.policy.v1";
 
@@ -13,24 +13,6 @@ export enum ScopePermissions {
   SCOPE_PERMISSIONS_UNSPECIFIED = 0,
   SCOPE_PERMISSIONS_OVERRIDE_PARENT = 1,
   SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS = 2,
-}
-
-export function scopePermissionsFromJSON(object: any): ScopePermissions {
-  switch (object) {
-    case 0:
-    case "SCOPE_PERMISSIONS_UNSPECIFIED":
-      return ScopePermissions.SCOPE_PERMISSIONS_UNSPECIFIED;
-    case 1:
-    case "SCOPE_PERMISSIONS_OVERRIDE_PARENT":
-      return ScopePermissions.SCOPE_PERMISSIONS_OVERRIDE_PARENT;
-    case 2:
-    case "SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS":
-      return ScopePermissions.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum ScopePermissions",
-      );
-  }
 }
 
 export function scopePermissionsToJSON(object: ScopePermissions): string {
@@ -82,7 +64,7 @@ export interface SourceAttributes_AttributesEntry {
 export interface Metadata {
   sourceFile: string;
   annotations: { [key: string]: string };
-  hash: string | undefined;
+  hash: bigint | undefined;
   storeIdentifer: string;
   storeIdentifier: string;
   sourceAttributes: SourceAttributes | undefined;
@@ -462,70 +444,6 @@ export const Policy: MessageFns<Policy> = {
     return message;
   },
 
-  fromJSON(object: any): Policy {
-    return {
-      apiVersion: isSet(object.apiVersion)
-        ? globalThis.String(object.apiVersion)
-        : "",
-      disabled: isSet(object.disabled)
-        ? globalThis.Boolean(object.disabled)
-        : false,
-      description: isSet(object.description)
-        ? globalThis.String(object.description)
-        : "",
-      metadata: isSet(object.metadata)
-        ? Metadata.fromJSON(object.metadata)
-        : undefined,
-      policyType: isSet(object.resourcePolicy)
-        ? {
-            $case: "resourcePolicy",
-            resourcePolicy: ResourcePolicy.fromJSON(object.resourcePolicy),
-          }
-        : isSet(object.principalPolicy)
-          ? {
-              $case: "principalPolicy",
-              principalPolicy: PrincipalPolicy.fromJSON(object.principalPolicy),
-            }
-          : isSet(object.derivedRoles)
-            ? {
-                $case: "derivedRoles",
-                derivedRoles: DerivedRoles.fromJSON(object.derivedRoles),
-              }
-            : isSet(object.exportVariables)
-              ? {
-                  $case: "exportVariables",
-                  exportVariables: ExportVariables.fromJSON(
-                    object.exportVariables,
-                  ),
-                }
-              : isSet(object.rolePolicy)
-                ? {
-                    $case: "rolePolicy",
-                    rolePolicy: RolePolicy.fromJSON(object.rolePolicy),
-                  }
-                : isSet(object.exportConstants)
-                  ? {
-                      $case: "exportConstants",
-                      exportConstants: ExportConstants.fromJSON(
-                        object.exportConstants,
-                      ),
-                    }
-                  : undefined,
-      variables: isObject(object.variables)
-        ? Object.entries(object.variables).reduce<{ [key: string]: string }>(
-            (acc, [key, value]) => {
-              acc[key] = String(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-      jsonSchema: isSet(object.$schema)
-        ? globalThis.String(object.$schema)
-        : "",
-    };
-  },
-
   toJSON(message: Policy): unknown {
     const obj: any = {};
     if (message.apiVersion !== "") {
@@ -631,13 +549,6 @@ export const Policy_VariablesEntry: MessageFns<Policy_VariablesEntry> = {
     return message;
   },
 
-  fromJSON(object: any): Policy_VariablesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? globalThis.String(object.value) : "",
-    };
-  },
-
   toJSON(message: Policy_VariablesEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -699,19 +610,6 @@ export const SourceAttributes: MessageFns<SourceAttributes> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): SourceAttributes {
-    return {
-      attributes: isObject(object.attributes)
-        ? Object.entries(object.attributes).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-    };
   },
 
   toJSON(message: SourceAttributes): unknown {
@@ -785,13 +683,6 @@ export const SourceAttributes_AttributesEntry: MessageFns<SourceAttributes_Attri
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): SourceAttributes_AttributesEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object?.value) ? object.value : undefined,
-      };
     },
 
     toJSON(message: SourceAttributes_AttributesEntry): unknown {
@@ -926,33 +817,6 @@ export const Metadata: MessageFns<Metadata> = {
     return message;
   },
 
-  fromJSON(object: any): Metadata {
-    return {
-      sourceFile: isSet(object.sourceFile)
-        ? globalThis.String(object.sourceFile)
-        : "",
-      annotations: isObject(object.annotations)
-        ? Object.entries(object.annotations).reduce<{ [key: string]: string }>(
-            (acc, [key, value]) => {
-              acc[key] = String(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-      hash: isSet(object.hash) ? String(object.hash) : undefined,
-      storeIdentifer: isSet(object.storeIdentifer)
-        ? globalThis.String(object.storeIdentifer)
-        : "",
-      storeIdentifier: isSet(object.storeIdentifier)
-        ? globalThis.String(object.storeIdentifier)
-        : "",
-      sourceAttributes: isSet(object.sourceAttributes)
-        ? SourceAttributes.fromJSON(object.sourceAttributes)
-        : undefined,
-    };
-  },
-
   toJSON(message: Metadata): unknown {
     const obj: any = {};
     if (message.sourceFile !== "") {
@@ -1036,13 +900,6 @@ export const Metadata_AnnotationsEntry: MessageFns<Metadata_AnnotationsEntry> =
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): Metadata_AnnotationsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value) ? globalThis.String(object.value) : "",
-      };
     },
 
     toJSON(message: Metadata_AnnotationsEntry): unknown {
@@ -1195,34 +1052,6 @@ export const ResourcePolicy: MessageFns<ResourcePolicy> = {
     return message;
   },
 
-  fromJSON(object: any): ResourcePolicy {
-    return {
-      resource: isSet(object.resource)
-        ? globalThis.String(object.resource)
-        : "",
-      version: isSet(object.version) ? globalThis.String(object.version) : "",
-      importDerivedRoles: globalThis.Array.isArray(object?.importDerivedRoles)
-        ? object.importDerivedRoles.map((e: any) => globalThis.String(e))
-        : [],
-      rules: globalThis.Array.isArray(object?.rules)
-        ? object.rules.map((e: any) => ResourceRule.fromJSON(e))
-        : [],
-      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-      schemas: isSet(object.schemas)
-        ? Schemas.fromJSON(object.schemas)
-        : undefined,
-      variables: isSet(object.variables)
-        ? Variables.fromJSON(object.variables)
-        : undefined,
-      scopePermissions: isSet(object.scopePermissions)
-        ? scopePermissionsFromJSON(object.scopePermissions)
-        : 0,
-      constants: isSet(object.constants)
-        ? Constants.fromJSON(object.constants)
-        : undefined,
-    };
-  },
-
   toJSON(message: ResourcePolicy): unknown {
     const obj: any = {};
     if (message.resource !== "") {
@@ -1370,26 +1199,6 @@ export const ResourceRule: MessageFns<ResourceRule> = {
     return message;
   },
 
-  fromJSON(object: any): ResourceRule {
-    return {
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-      derivedRoles: globalThis.Array.isArray(object?.derivedRoles)
-        ? object.derivedRoles.map((e: any) => globalThis.String(e))
-        : [],
-      roles: globalThis.Array.isArray(object?.roles)
-        ? object.roles.map((e: any) => globalThis.String(e))
-        : [],
-      condition: isSet(object.condition)
-        ? Condition.fromJSON(object.condition)
-        : undefined,
-      effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      output: isSet(object.output) ? Output.fromJSON(object.output) : undefined,
-    };
-  },
-
   toJSON(message: ResourceRule): unknown {
     const obj: any = {};
     if (message.actions?.length) {
@@ -1509,24 +1318,6 @@ export const RolePolicy: MessageFns<RolePolicy> = {
     return message;
   },
 
-  fromJSON(object: any): RolePolicy {
-    return {
-      policyType: isSet(object.role)
-        ? { $case: "role", role: globalThis.String(object.role) }
-        : undefined,
-      parentRoles: globalThis.Array.isArray(object?.parentRoles)
-        ? object.parentRoles.map((e: any) => globalThis.String(e))
-        : [],
-      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-      rules: globalThis.Array.isArray(object?.rules)
-        ? object.rules.map((e: any) => RoleRule.fromJSON(e))
-        : [],
-      scopePermissions: isSet(object.scopePermissions)
-        ? scopePermissionsFromJSON(object.scopePermissions)
-        : 0,
-    };
-  },
-
   toJSON(message: RolePolicy): unknown {
     const obj: any = {};
     if (message.policyType?.$case === "role") {
@@ -1608,20 +1399,6 @@ export const RoleRule: MessageFns<RoleRule> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): RoleRule {
-    return {
-      resource: isSet(object.resource)
-        ? globalThis.String(object.resource)
-        : "",
-      allowActions: globalThis.Array.isArray(object?.allowActions)
-        ? object.allowActions.map((e: any) => globalThis.String(e))
-        : [],
-      condition: isSet(object.condition)
-        ? Condition.fromJSON(object.condition)
-        : undefined,
-    };
   },
 
   toJSON(message: RoleRule): unknown {
@@ -1753,28 +1530,6 @@ export const PrincipalPolicy: MessageFns<PrincipalPolicy> = {
     return message;
   },
 
-  fromJSON(object: any): PrincipalPolicy {
-    return {
-      principal: isSet(object.principal)
-        ? globalThis.String(object.principal)
-        : "",
-      version: isSet(object.version) ? globalThis.String(object.version) : "",
-      rules: globalThis.Array.isArray(object?.rules)
-        ? object.rules.map((e: any) => PrincipalRule.fromJSON(e))
-        : [],
-      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-      variables: isSet(object.variables)
-        ? Variables.fromJSON(object.variables)
-        : undefined,
-      scopePermissions: isSet(object.scopePermissions)
-        ? scopePermissionsFromJSON(object.scopePermissions)
-        : 0,
-      constants: isSet(object.constants)
-        ? Constants.fromJSON(object.constants)
-        : undefined,
-    };
-  },
-
   toJSON(message: PrincipalPolicy): unknown {
     const obj: any = {};
     if (message.principal !== "") {
@@ -1853,17 +1608,6 @@ export const PrincipalRule: MessageFns<PrincipalRule> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): PrincipalRule {
-    return {
-      resource: isSet(object.resource)
-        ? globalThis.String(object.resource)
-        : "",
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => PrincipalRule_Action.fromJSON(e))
-        : [],
-    };
   },
 
   toJSON(message: PrincipalRule): unknown {
@@ -1971,18 +1715,6 @@ export const PrincipalRule_Action: MessageFns<PrincipalRule_Action> = {
     return message;
   },
 
-  fromJSON(object: any): PrincipalRule_Action {
-    return {
-      action: isSet(object.action) ? globalThis.String(object.action) : "",
-      condition: isSet(object.condition)
-        ? Condition.fromJSON(object.condition)
-        : undefined,
-      effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      output: isSet(object.output) ? Output.fromJSON(object.output) : undefined,
-    };
-  },
-
   toJSON(message: PrincipalRule_Action): unknown {
     const obj: any = {};
     if (message.action !== "") {
@@ -2082,21 +1814,6 @@ export const DerivedRoles: MessageFns<DerivedRoles> = {
     return message;
   },
 
-  fromJSON(object: any): DerivedRoles {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      definitions: globalThis.Array.isArray(object?.definitions)
-        ? object.definitions.map((e: any) => RoleDef.fromJSON(e))
-        : [],
-      variables: isSet(object.variables)
-        ? Variables.fromJSON(object.variables)
-        : undefined,
-      constants: isSet(object.constants)
-        ? Constants.fromJSON(object.constants)
-        : undefined,
-    };
-  },
-
   toJSON(message: DerivedRoles): unknown {
     const obj: any = {};
     if (message.name !== "") {
@@ -2177,18 +1894,6 @@ export const RoleDef: MessageFns<RoleDef> = {
     return message;
   },
 
-  fromJSON(object: any): RoleDef {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      parentRoles: globalThis.Array.isArray(object?.parentRoles)
-        ? object.parentRoles.map((e: any) => globalThis.String(e))
-        : [],
-      condition: isSet(object.condition)
-        ? Condition.fromJSON(object.condition)
-        : undefined,
-    };
-  },
-
   toJSON(message: RoleDef): unknown {
     const obj: any = {};
     if (message.name !== "") {
@@ -2264,20 +1969,6 @@ export const ExportConstants: MessageFns<ExportConstants> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): ExportConstants {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      definitions: isObject(object.definitions)
-        ? Object.entries(object.definitions).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-    };
   },
 
   toJSON(message: ExportConstants): unknown {
@@ -2356,13 +2047,6 @@ export const ExportConstants_DefinitionsEntry: MessageFns<ExportConstants_Defini
       return message;
     },
 
-    fromJSON(object: any): ExportConstants_DefinitionsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object?.value) ? object.value : undefined,
-      };
-    },
-
     toJSON(message: ExportConstants_DefinitionsEntry): unknown {
       const obj: any = {};
       if (message.key !== "") {
@@ -2432,22 +2116,6 @@ export const Constants: MessageFns<Constants> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Constants {
-    return {
-      import: globalThis.Array.isArray(object?.import)
-        ? object.import.map((e: any) => globalThis.String(e))
-        : [],
-      local: isObject(object.local)
-        ? Object.entries(object.local).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-    };
   },
 
   toJSON(message: Constants): unknown {
@@ -2522,13 +2190,6 @@ export const Constants_LocalEntry: MessageFns<Constants_LocalEntry> = {
     return message;
   },
 
-  fromJSON(object: any): Constants_LocalEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
-  },
-
   toJSON(message: Constants_LocalEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -2599,21 +2260,6 @@ export const ExportVariables: MessageFns<ExportVariables> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): ExportVariables {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      definitions: isObject(object.definitions)
-        ? Object.entries(object.definitions).reduce<{ [key: string]: string }>(
-            (acc, [key, value]) => {
-              acc[key] = String(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-    };
   },
 
   toJSON(message: ExportVariables): unknown {
@@ -2689,13 +2335,6 @@ export const ExportVariables_DefinitionsEntry: MessageFns<ExportVariables_Defini
       return message;
     },
 
-    fromJSON(object: any): ExportVariables_DefinitionsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value) ? globalThis.String(object.value) : "",
-      };
-    },
-
     toJSON(message: ExportVariables_DefinitionsEntry): unknown {
       const obj: any = {};
       if (message.key !== "") {
@@ -2763,23 +2402,6 @@ export const Variables: MessageFns<Variables> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Variables {
-    return {
-      import: globalThis.Array.isArray(object?.import)
-        ? object.import.map((e: any) => globalThis.String(e))
-        : [],
-      local: isObject(object.local)
-        ? Object.entries(object.local).reduce<{ [key: string]: string }>(
-            (acc, [key, value]) => {
-              acc[key] = String(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-    };
   },
 
   toJSON(message: Variables): unknown {
@@ -2854,13 +2476,6 @@ export const Variables_LocalEntry: MessageFns<Variables_LocalEntry> = {
     return message;
   },
 
-  fromJSON(object: any): Variables_LocalEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? globalThis.String(object.value) : "",
-    };
-  },
-
   toJSON(message: Variables_LocalEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -2927,16 +2542,6 @@ export const Condition: MessageFns<Condition> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Condition {
-    return {
-      condition: isSet(object.match)
-        ? { $case: "match", match: Match.fromJSON(object.match) }
-        : isSet(object.script)
-          ? { $case: "script", script: globalThis.String(object.script) }
-          : undefined,
-    };
   },
 
   toJSON(message: Condition): unknown {
@@ -3034,20 +2639,6 @@ export const Match: MessageFns<Match> = {
     return message;
   },
 
-  fromJSON(object: any): Match {
-    return {
-      op: isSet(object.all)
-        ? { $case: "all", all: Match_ExprList.fromJSON(object.all) }
-        : isSet(object.any)
-          ? { $case: "any", any: Match_ExprList.fromJSON(object.any) }
-          : isSet(object.none)
-            ? { $case: "none", none: Match_ExprList.fromJSON(object.none) }
-            : isSet(object.expr)
-              ? { $case: "expr", expr: globalThis.String(object.expr) }
-              : undefined,
-    };
-  },
-
   toJSON(message: Match): unknown {
     const obj: any = {};
     if (message.op?.$case === "all") {
@@ -3101,14 +2692,6 @@ export const Match_ExprList: MessageFns<Match_ExprList> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Match_ExprList {
-    return {
-      of: globalThis.Array.isArray(object?.of)
-        ? object.of.map((e: any) => Match.fromJSON(e))
-        : [],
-    };
   },
 
   toJSON(message: Match_ExprList): unknown {
@@ -3169,13 +2752,6 @@ export const Output: MessageFns<Output> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Output {
-    return {
-      expr: isSet(object.expr) ? globalThis.String(object.expr) : "",
-      when: isSet(object.when) ? Output_When.fromJSON(object.when) : undefined,
-    };
   },
 
   toJSON(message: Output): unknown {
@@ -3239,17 +2815,6 @@ export const Output_When: MessageFns<Output_When> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Output_When {
-    return {
-      ruleActivated: isSet(object.ruleActivated)
-        ? globalThis.String(object.ruleActivated)
-        : "",
-      conditionNotMet: isSet(object.conditionNotMet)
-        ? globalThis.String(object.conditionNotMet)
-        : "",
-    };
   },
 
   toJSON(message: Output_When): unknown {
@@ -3327,17 +2892,6 @@ export const Schemas: MessageFns<Schemas> = {
     return message;
   },
 
-  fromJSON(object: any): Schemas {
-    return {
-      principalSchema: isSet(object.principalSchema)
-        ? Schemas_Schema.fromJSON(object.principalSchema)
-        : undefined,
-      resourceSchema: isSet(object.resourceSchema)
-        ? Schemas_Schema.fromJSON(object.resourceSchema)
-        : undefined,
-    };
-  },
-
   toJSON(message: Schemas): unknown {
     const obj: any = {};
     if (message.principalSchema !== undefined) {
@@ -3391,14 +2945,6 @@ export const Schemas_IgnoreWhen: MessageFns<Schemas_IgnoreWhen> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Schemas_IgnoreWhen {
-    return {
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-    };
   },
 
   toJSON(message: Schemas_IgnoreWhen): unknown {
@@ -3467,15 +3013,6 @@ export const Schemas_Schema: MessageFns<Schemas_Schema> = {
     return message;
   },
 
-  fromJSON(object: any): Schemas_Schema {
-    return {
-      ref: isSet(object.ref) ? globalThis.String(object.ref) : "",
-      ignoreWhen: isSet(object.ignoreWhen)
-        ? Schemas_IgnoreWhen.fromJSON(object.ignoreWhen)
-        : undefined,
-    };
-  },
-
   toJSON(message: Schemas_Schema): unknown {
     const obj: any = {};
     if (message.ref !== "") {
@@ -3488,17 +3025,8 @@ export const Schemas_Schema: MessageFns<Schemas_Schema> = {
   },
 };
 
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

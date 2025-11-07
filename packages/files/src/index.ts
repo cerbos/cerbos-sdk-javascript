@@ -7,9 +7,11 @@
 import { opendir, readFile, writeFile } from "fs/promises";
 import { basename, extname, join, resolve, sep } from "path";
 
+import { fromJson, toJsonString } from "@bufbuild/protobuf";
 import { parse } from "yaml";
 
-import type { Policy, SchemaInput } from "@cerbos/core";
+import { PolicySchema } from "@cerbos/api/cerbos/policy/v1/policy_pb";
+import type { Policy, SchemaInput, Value } from "@cerbos/core";
 import {
   _policyFromProtobuf,
   _policyToProtobuf,
@@ -18,8 +20,6 @@ import {
   policyIsPrincipalPolicy,
   policyIsResourcePolicy,
 } from "@cerbos/core";
-
-import { Policy as PolicyProtobuf } from "./protobuf/cerbos/policy/v1/policy";
 
 /**
  * {@inheritDoc @cerbos/core#SchemaInput}
@@ -41,7 +41,7 @@ export interface Schema extends SchemaInput {
  * @public
  */
 export function parsePolicy(contents: string): Policy {
-  return _policyFromProtobuf(PolicyProtobuf.fromJSON(parse(contents)));
+  return _policyFromProtobuf(fromJson(PolicySchema, parse(contents) as Value));
 }
 
 /**
@@ -63,7 +63,7 @@ export async function readPolicy(path: string): Promise<Policy> {
  * @public
  */
 export function serializePolicy(policy: Policy): string {
-  return `${JSON.stringify(PolicyProtobuf.toJSON(_policyToProtobuf(policy)), null, 2)}\n`;
+  return `${toJsonString(PolicySchema, _policyToProtobuf(policy), { prettySpaces: 2 })}\n`;
 }
 
 /**

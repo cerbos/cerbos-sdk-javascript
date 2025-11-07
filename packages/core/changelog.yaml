@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  changed:
+    - summary: Migrate to `protoc-gen-es` and extract generated code to its own package
+      pull: 1271
+
 releases:
   - version: 0.24.1
     date: 2025-09-15
@@ -301,6 +308,7 @@ releases:
         pull: 73
 
 references:
+  "@cerbos/api": ../api/README.md
   nodejs-eol: https://github.com/nodejs/release#end-of-life-releases
   uuid: https://github.com/uuidjs/uuid
 

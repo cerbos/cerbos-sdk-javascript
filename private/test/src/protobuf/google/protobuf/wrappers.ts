@@ -7,11 +7,11 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 export const protobufPackage = "google.protobuf";
 
 export interface UInt64Value {
-  value: string;
+  value: bigint;
 }
 
 function createBaseUInt64Value(): UInt64Value {
-  return { value: "0" };
+  return { value: 0n };
 }
 
 export const UInt64Value: MessageFns<UInt64Value> = {
@@ -19,7 +19,12 @@ export const UInt64Value: MessageFns<UInt64Value> = {
     message: UInt64Value,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.value !== "0") {
+    if (message.value !== 0n) {
+      if (BigInt.asUintN(64, message.value) !== message.value) {
+        throw new globalThis.Error(
+          "value provided for field message.value of type uint64 too large",
+        );
+      }
       writer.uint32(8).uint64(message.value);
     }
     return writer;
@@ -38,7 +43,7 @@ export const UInt64Value: MessageFns<UInt64Value> = {
             break;
           }
 
-          message.value = reader.uint64().toString();
+          message.value = reader.uint64() as bigint;
           continue;
         }
       }
@@ -50,28 +55,17 @@ export const UInt64Value: MessageFns<UInt64Value> = {
     return message;
   },
 
-  fromJSON(object: any): UInt64Value {
-    return {
-      value: isSet(object.value) ? globalThis.String(object.value) : "0",
-    };
-  },
-
   toJSON(message: UInt64Value): unknown {
     const obj: any = {};
-    if (message.value !== "0") {
-      obj.value = message.value;
+    if (message.value !== 0n) {
+      obj.value = message.value.toString();
     }
     return obj;
   },
 };
 
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

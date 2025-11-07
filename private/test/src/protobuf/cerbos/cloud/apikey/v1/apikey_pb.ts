@@ -50,16 +50,13 @@ export type IssueAccessTokenRequest =
     clientSecret: string;
   };
 
-export type IssueAccessTokenRequestValid = IssueAccessTokenRequest;
-
 /**
  * Describes the message cerbos.cloud.apikey.v1.IssueAccessTokenRequest.
  * Use `create(IssueAccessTokenRequestSchema)` to create a new message.
  */
-export const IssueAccessTokenRequestSchema: GenMessage<
-  IssueAccessTokenRequest,
-  { validType: IssueAccessTokenRequestValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_apikey_v1_apikey, 0);
+export const IssueAccessTokenRequestSchema: GenMessage<IssueAccessTokenRequest> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_apikey_v1_apikey, 0);
 
 /**
  * @generated from message cerbos.cloud.apikey.v1.IssueAccessTokenResponse
@@ -78,29 +75,12 @@ export type IssueAccessTokenResponse =
   };
 
 /**
- * @generated from message cerbos.cloud.apikey.v1.IssueAccessTokenResponse
- */
-export type IssueAccessTokenResponseValid =
-  Message<"cerbos.cloud.apikey.v1.IssueAccessTokenResponse"> & {
-    /**
-     * @generated from field: string access_token = 1;
-     */
-    accessToken: string;
-
-    /**
-     * @generated from field: google.protobuf.Duration expires_in = 2;
-     */
-    expiresIn: Duration;
-  };
-
-/**
  * Describes the message cerbos.cloud.apikey.v1.IssueAccessTokenResponse.
  * Use `create(IssueAccessTokenResponseSchema)` to create a new message.
  */
-export const IssueAccessTokenResponseSchema: GenMessage<
-  IssueAccessTokenResponse,
-  { validType: IssueAccessTokenResponseValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_apikey_v1_apikey, 1);
+export const IssueAccessTokenResponseSchema: GenMessage<IssueAccessTokenResponse> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_apikey_v1_apikey, 1);
 
 /**
  * @generated from service cerbos.cloud.apikey.v1.ApiKeyService

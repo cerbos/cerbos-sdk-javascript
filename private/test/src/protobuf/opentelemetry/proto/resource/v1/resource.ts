@@ -63,17 +63,6 @@ export const Resource: MessageFns<Resource> = {
     return message;
   },
 
-  fromJSON(object: any): Resource {
-    return {
-      attributes: globalThis.Array.isArray(object?.attributes)
-        ? object.attributes.map((e: any) => KeyValue.fromJSON(e))
-        : [],
-      droppedAttributesCount: isSet(object.droppedAttributesCount)
-        ? globalThis.Number(object.droppedAttributesCount)
-        : 0,
-    };
-  },
-
   toJSON(message: Resource): unknown {
     const obj: any = {};
     if (message.attributes?.length) {
@@ -86,13 +75,8 @@ export const Resource: MessageFns<Resource> = {
   },
 };
 
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

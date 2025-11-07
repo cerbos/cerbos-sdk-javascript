@@ -47,8 +47,10 @@
     "policy decision point",
     "PDP"
   ],
+  "peerDependencies": {
+    "@bufbuild/protobuf": "^2.10.0"
+  },
   "dependencies": {
-    "@bufbuild/protobuf": "^2.10.0",
     "@bufbuild/protovalidate": "^1.0.0",
     "@cerbos/core": "^0.24.1",
     "@connectrpc/connect": "^2.1.0",

@@ -64,7 +64,7 @@ Free-form data, for auditing purposes.
 
 </td><td>
 
-string \| undefined
+bigint \| undefined
 
 
 </td><td>

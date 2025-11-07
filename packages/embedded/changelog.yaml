@@ -1,3 +1,10 @@
+unreleased:
+  type: patch
+
+  changed:
+    - summary: Migrate to `protoc-gen-es` and extract generated code to its own package
+      pull: 1271
+
 releases:
   - version: 0.13.1
     date: 2025-09-15
@@ -309,6 +316,7 @@ releases:
         pull: 249
 
 references:
+  "@cerbos/api": ../api/README.md
   "@cerbos/core": ../core/README.md
   nodejs-eol: https://github.com/nodejs/release#end-of-life-releases
   ulid: https://github.com/ulid/javascript

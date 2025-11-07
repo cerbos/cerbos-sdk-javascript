@@ -326,6 +326,7 @@
 [0.1.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.1.1...@cerbos/opentelemetry@0.1.2
 [0.1.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.1.0...@cerbos/opentelemetry@0.1.1
 [0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/a3dcb572e0eeff4c4d86c9cc66c1d0c7e59c4853...@cerbos/opentelemetry@0.1.0
+[@cerbos/api]: ../api/README.md
 [@cerbos/core]: ../core/README.md
 [@cerbos/grpc]: ../grpc/README.md
 [@cerbos/http]: ../http/README.md

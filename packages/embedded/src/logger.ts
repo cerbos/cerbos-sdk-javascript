@@ -1,6 +1,9 @@
 import type { ULIDFactory } from "ulid";
 import { monotonicFactory } from "ulid";
 
+import type { CheckOutput_ActionEffect } from "@cerbos/api/cerbos/engine/v1/engine_pb";
+import type { CheckResourcesRequest } from "@cerbos/api/cerbos/request/v1/request_pb";
+import type { CheckResourcesResponse } from "@cerbos/api/cerbos/response/v1/response_pb";
 import type {
   CheckInput,
   CheckOutput,
@@ -14,9 +17,6 @@ import {
 } from "@cerbos/core";
 
 import type { BundleMetadata, Options } from "./loader";
-import type { CheckOutput_ActionEffect } from "./protobuf/cerbos/engine/v1/engine";
-import type { CheckResourcesRequest } from "./protobuf/cerbos/request/v1/request";
-import type { CheckResourcesResponse } from "./protobuf/cerbos/response/v1/response";
 
 export class DecisionLogger {
   private readonly ulid: ULIDFactory;
@@ -38,12 +38,15 @@ export class DecisionLogger {
   ): Promise<void> {
     const callId = this.ulid();
 
-    const inputs = request.resources.map<CheckInput>(({ resource, actions }) =>
-      _checkInputFromProtobuf({
-        requestId: request.requestId,
-        principal: request.principal,
-        resource,
-        actions,
+    const inputs = request.resources.map<CheckInput>(
+      ({ resource, actions }) => ({
+        ..._checkInputFromProtobuf({
+          $typeName: "cerbos.engine.v1.CheckInput",
+          requestId: request.requestId,
+          principal: request.principal,
+          resource,
+          actions,
+        }),
         auxData,
       }),
     );
@@ -68,6 +71,7 @@ export class DecisionLogger {
           const meta = result.meta.actions[action];
 
           actions[action] = {
+            $typeName: "cerbos.engine.v1.CheckOutput.ActionEffect",
             effect,
             policy: meta?.matchedPolicy ?? "",
             scope: meta?.matchedScope ?? "",
@@ -85,6 +89,7 @@ export class DecisionLogger {
 
         outputs.push(
           _checkOutputFromProtobuf({
+            $typeName: "cerbos.engine.v1.CheckOutput",
             requestId: response.requestId,
             resourceId: result.resource.id,
             actions,

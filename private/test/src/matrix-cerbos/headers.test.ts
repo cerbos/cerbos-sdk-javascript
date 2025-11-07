@@ -71,7 +71,7 @@ describeIfCerbosVersionIsAtLeast("0.33.0")("Client", () => {
         requestHeaders: {
           Bar: "99",
           "User-Agent": "ignored again",
-        },
+        } as HeadersInit,
         expectedBar: "99",
       },
       {
@@ -80,7 +80,7 @@ describeIfCerbosVersionIsAtLeast("0.33.0")("Client", () => {
           Foo: "43",
           Bar: "99",
           "User-Agent": "ignored again",
-        },
+        } as HeadersInit,
         expectedFoo: "43",
         expectedBar: "99",
       },

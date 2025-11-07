@@ -47,6 +47,10 @@
     "PDP",
     "YAML"
   ],
+  "peerDependencies": {
+    "@bufbuild/protobuf": "^2.10.0",
+    "@cerbos/api": "^0.0.1"
+  },
   "dependencies": {
     "@cerbos/core": "^0.24.1",
     "yaml": "^2.8.1"

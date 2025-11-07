@@ -15,30 +15,6 @@ export enum Scheme {
   WSS = 4,
 }
 
-export function schemeFromJSON(object: any): Scheme {
-  switch (object) {
-    case 0:
-    case "UNKNOWN":
-      return Scheme.UNKNOWN;
-    case 1:
-    case "HTTP":
-      return Scheme.HTTP;
-    case 2:
-    case "HTTPS":
-      return Scheme.HTTPS;
-    case 3:
-    case "WS":
-      return Scheme.WS;
-    case 4:
-    case "WSS":
-      return Scheme.WSS;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum Scheme",
-      );
-  }
-}
-
 export function schemeToJSON(object: Scheme): string {
   switch (object) {
     case Scheme.UNKNOWN:
@@ -128,32 +104,6 @@ export enum HeaderParameter_Type {
   NUMBER = 2,
   INTEGER = 3,
   BOOLEAN = 4,
-}
-
-export function headerParameter_TypeFromJSON(
-  object: any,
-): HeaderParameter_Type {
-  switch (object) {
-    case 0:
-    case "UNKNOWN":
-      return HeaderParameter_Type.UNKNOWN;
-    case 1:
-    case "STRING":
-      return HeaderParameter_Type.STRING;
-    case 2:
-    case "NUMBER":
-      return HeaderParameter_Type.NUMBER;
-    case 3:
-    case "INTEGER":
-      return HeaderParameter_Type.INTEGER;
-    case 4:
-    case "BOOLEAN":
-      return HeaderParameter_Type.BOOLEAN;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum HeaderParameter_Type",
-      );
-  }
 }
 
 export function headerParameter_TypeToJSON(
@@ -259,14 +209,14 @@ export interface JSONSchema {
   exclusiveMaximum: boolean;
   minimum: number;
   exclusiveMinimum: boolean;
-  maxLength: string;
-  minLength: string;
+  maxLength: bigint;
+  minLength: bigint;
   pattern: string;
-  maxItems: string;
-  minItems: string;
+  maxItems: bigint;
+  minItems: bigint;
   uniqueItems: boolean;
-  maxProperties: string;
-  minProperties: string;
+  maxProperties: bigint;
+  minProperties: bigint;
   required: string[];
   array: string[];
   type: JSONSchema_JSONSchemaSimpleTypes[];
@@ -285,43 +235,6 @@ export enum JSONSchema_JSONSchemaSimpleTypes {
   NUMBER = 5,
   OBJECT = 6,
   STRING = 7,
-}
-
-export function jSONSchema_JSONSchemaSimpleTypesFromJSON(
-  object: any,
-): JSONSchema_JSONSchemaSimpleTypes {
-  switch (object) {
-    case 0:
-    case "UNKNOWN":
-      return JSONSchema_JSONSchemaSimpleTypes.UNKNOWN;
-    case 1:
-    case "ARRAY":
-      return JSONSchema_JSONSchemaSimpleTypes.ARRAY;
-    case 2:
-    case "BOOLEAN":
-      return JSONSchema_JSONSchemaSimpleTypes.BOOLEAN;
-    case 3:
-    case "INTEGER":
-      return JSONSchema_JSONSchemaSimpleTypes.INTEGER;
-    case 4:
-    case "NULL":
-      return JSONSchema_JSONSchemaSimpleTypes.NULL;
-    case 5:
-    case "NUMBER":
-      return JSONSchema_JSONSchemaSimpleTypes.NUMBER;
-    case 6:
-    case "OBJECT":
-      return JSONSchema_JSONSchemaSimpleTypes.OBJECT;
-    case 7:
-    case "STRING":
-      return JSONSchema_JSONSchemaSimpleTypes.STRING;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum JSONSchema_JSONSchemaSimpleTypes",
-      );
-  }
 }
 
 export function jSONSchema_JSONSchemaSimpleTypesToJSON(
@@ -402,27 +315,6 @@ export enum SecurityScheme_Type {
   TYPE_OAUTH2 = 3,
 }
 
-export function securityScheme_TypeFromJSON(object: any): SecurityScheme_Type {
-  switch (object) {
-    case 0:
-    case "TYPE_INVALID":
-      return SecurityScheme_Type.TYPE_INVALID;
-    case 1:
-    case "TYPE_BASIC":
-      return SecurityScheme_Type.TYPE_BASIC;
-    case 2:
-    case "TYPE_API_KEY":
-      return SecurityScheme_Type.TYPE_API_KEY;
-    case 3:
-    case "TYPE_OAUTH2":
-      return SecurityScheme_Type.TYPE_OAUTH2;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum SecurityScheme_Type",
-      );
-  }
-}
-
 export function securityScheme_TypeToJSON(object: SecurityScheme_Type): string {
   switch (object) {
     case SecurityScheme_Type.TYPE_INVALID:
@@ -446,24 +338,6 @@ export enum SecurityScheme_In {
   IN_HEADER = 2,
 }
 
-export function securityScheme_InFromJSON(object: any): SecurityScheme_In {
-  switch (object) {
-    case 0:
-    case "IN_INVALID":
-      return SecurityScheme_In.IN_INVALID;
-    case 1:
-    case "IN_QUERY":
-      return SecurityScheme_In.IN_QUERY;
-    case 2:
-    case "IN_HEADER":
-      return SecurityScheme_In.IN_HEADER;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum SecurityScheme_In",
-      );
-  }
-}
-
 export function securityScheme_InToJSON(object: SecurityScheme_In): string {
   switch (object) {
     case SecurityScheme_In.IN_INVALID:
@@ -485,30 +359,6 @@ export enum SecurityScheme_Flow {
   FLOW_PASSWORD = 2,
   FLOW_APPLICATION = 3,
   FLOW_ACCESS_CODE = 4,
-}
-
-export function securityScheme_FlowFromJSON(object: any): SecurityScheme_Flow {
-  switch (object) {
-    case 0:
-    case "FLOW_INVALID":
-      return SecurityScheme_Flow.FLOW_INVALID;
-    case 1:
-    case "FLOW_IMPLICIT":
-      return SecurityScheme_Flow.FLOW_IMPLICIT;
-    case 2:
-    case "FLOW_PASSWORD":
-      return SecurityScheme_Flow.FLOW_PASSWORD;
-    case 3:
-    case "FLOW_APPLICATION":
-      return SecurityScheme_Flow.FLOW_APPLICATION;
-    case 4:
-    case "FLOW_ACCESS_CODE":
-      return SecurityScheme_Flow.FLOW_ACCESS_CODE;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum SecurityScheme_Flow",
-      );
-  }
 }
 
 export function securityScheme_FlowToJSON(object: SecurityScheme_Flow): string {
@@ -791,55 +641,6 @@ export const Swagger: MessageFns<Swagger> = {
     return message;
   },
 
-  fromJSON(object: any): Swagger {
-    return {
-      swagger: isSet(object.swagger) ? globalThis.String(object.swagger) : "",
-      info: isSet(object.info) ? Info.fromJSON(object.info) : undefined,
-      host: isSet(object.host) ? globalThis.String(object.host) : "",
-      basePath: isSet(object.basePath)
-        ? globalThis.String(object.basePath)
-        : "",
-      schemes: globalThis.Array.isArray(object?.schemes)
-        ? object.schemes.map((e: any) => schemeFromJSON(e))
-        : [],
-      consumes: globalThis.Array.isArray(object?.consumes)
-        ? object.consumes.map((e: any) => globalThis.String(e))
-        : [],
-      produces: globalThis.Array.isArray(object?.produces)
-        ? object.produces.map((e: any) => globalThis.String(e))
-        : [],
-      responses: isObject(object.responses)
-        ? Object.entries(object.responses).reduce<{ [key: string]: Response }>(
-            (acc, [key, value]) => {
-              acc[key] = Response.fromJSON(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-      securityDefinitions: isSet(object.securityDefinitions)
-        ? SecurityDefinitions.fromJSON(object.securityDefinitions)
-        : undefined,
-      security: globalThis.Array.isArray(object?.security)
-        ? object.security.map((e: any) => SecurityRequirement.fromJSON(e))
-        : [],
-      tags: globalThis.Array.isArray(object?.tags)
-        ? object.tags.map((e: any) => Tag.fromJSON(e))
-        : [],
-      externalDocs: isSet(object.externalDocs)
-        ? ExternalDocumentation.fromJSON(object.externalDocs)
-        : undefined,
-      extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-    };
-  },
-
   toJSON(message: Swagger): unknown {
     const obj: any = {};
     if (message.swagger !== "") {
@@ -953,13 +754,6 @@ export const Swagger_ResponsesEntry: MessageFns<Swagger_ResponsesEntry> = {
     return message;
   },
 
-  fromJSON(object: any): Swagger_ResponsesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? Response.fromJSON(object.value) : undefined,
-    };
-  },
-
   toJSON(message: Swagger_ResponsesEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -1024,13 +818,6 @@ export const Swagger_ExtensionsEntry: MessageFns<Swagger_ExtensionsEntry> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Swagger_ExtensionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
   },
 
   toJSON(message: Swagger_ExtensionsEntry): unknown {
@@ -1271,59 +1058,6 @@ export const Operation: MessageFns<Operation> = {
     return message;
   },
 
-  fromJSON(object: any): Operation {
-    return {
-      tags: globalThis.Array.isArray(object?.tags)
-        ? object.tags.map((e: any) => globalThis.String(e))
-        : [],
-      summary: isSet(object.summary) ? globalThis.String(object.summary) : "",
-      description: isSet(object.description)
-        ? globalThis.String(object.description)
-        : "",
-      externalDocs: isSet(object.externalDocs)
-        ? ExternalDocumentation.fromJSON(object.externalDocs)
-        : undefined,
-      operationId: isSet(object.operationId)
-        ? globalThis.String(object.operationId)
-        : "",
-      consumes: globalThis.Array.isArray(object?.consumes)
-        ? object.consumes.map((e: any) => globalThis.String(e))
-        : [],
-      produces: globalThis.Array.isArray(object?.produces)
-        ? object.produces.map((e: any) => globalThis.String(e))
-        : [],
-      responses: isObject(object.responses)
-        ? Object.entries(object.responses).reduce<{ [key: string]: Response }>(
-            (acc, [key, value]) => {
-              acc[key] = Response.fromJSON(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-      schemes: globalThis.Array.isArray(object?.schemes)
-        ? object.schemes.map((e: any) => schemeFromJSON(e))
-        : [],
-      deprecated: isSet(object.deprecated)
-        ? globalThis.Boolean(object.deprecated)
-        : false,
-      security: globalThis.Array.isArray(object?.security)
-        ? object.security.map((e: any) => SecurityRequirement.fromJSON(e))
-        : [],
-      extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-      parameters: isSet(object.parameters)
-        ? Parameters.fromJSON(object.parameters)
-        : undefined,
-    };
-  },
-
   toJSON(message: Operation): unknown {
     const obj: any = {};
     if (message.tags?.length) {
@@ -1435,13 +1169,6 @@ export const Operation_ResponsesEntry: MessageFns<Operation_ResponsesEntry> = {
     return message;
   },
 
-  fromJSON(object: any): Operation_ResponsesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? Response.fromJSON(object.value) : undefined,
-    };
-  },
-
   toJSON(message: Operation_ResponsesEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -1512,13 +1239,6 @@ export const Operation_ExtensionsEntry: MessageFns<Operation_ExtensionsEntry> =
       return message;
     },
 
-    fromJSON(object: any): Operation_ExtensionsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object?.value) ? object.value : undefined,
-      };
-    },
-
     toJSON(message: Operation_ExtensionsEntry): unknown {
       const obj: any = {};
       if (message.key !== "") {
@@ -1569,14 +1289,6 @@ export const Parameters: MessageFns<Parameters> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Parameters {
-    return {
-      headers: globalThis.Array.isArray(object?.headers)
-        ? object.headers.map((e: any) => HeaderParameter.fromJSON(e))
-        : [],
-    };
   },
 
   toJSON(message: Parameters): unknown {
@@ -1670,20 +1382,6 @@ export const HeaderParameter: MessageFns<HeaderParameter> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): HeaderParameter {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      description: isSet(object.description)
-        ? globalThis.String(object.description)
-        : "",
-      type: isSet(object.type) ? headerParameter_TypeFromJSON(object.type) : 0,
-      format: isSet(object.format) ? globalThis.String(object.format) : "",
-      required: isSet(object.required)
-        ? globalThis.Boolean(object.required)
-        : false,
-    };
   },
 
   toJSON(message: HeaderParameter): unknown {
@@ -1789,18 +1487,6 @@ export const Header: MessageFns<Header> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Header {
-    return {
-      description: isSet(object.description)
-        ? globalThis.String(object.description)
-        : "",
-      type: isSet(object.type) ? globalThis.String(object.type) : "",
-      format: isSet(object.format) ? globalThis.String(object.format) : "",
-      default: isSet(object.default) ? globalThis.String(object.default) : "",
-      pattern: isSet(object.pattern) ? globalThis.String(object.pattern) : "",
-    };
   },
 
   toJSON(message: Header): unknown {
@@ -1937,41 +1623,6 @@ export const Response: MessageFns<Response> = {
     return message;
   },
 
-  fromJSON(object: any): Response {
-    return {
-      description: isSet(object.description)
-        ? globalThis.String(object.description)
-        : "",
-      schema: isSet(object.schema) ? Schema.fromJSON(object.schema) : undefined,
-      headers: isObject(object.headers)
-        ? Object.entries(object.headers).reduce<{ [key: string]: Header }>(
-            (acc, [key, value]) => {
-              acc[key] = Header.fromJSON(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-      examples: isObject(object.examples)
-        ? Object.entries(object.examples).reduce<{ [key: string]: string }>(
-            (acc, [key, value]) => {
-              acc[key] = String(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-      extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-    };
-  },
-
   toJSON(message: Response): unknown {
     const obj: any = {};
     if (message.description !== "") {
@@ -2065,13 +1716,6 @@ export const Response_HeadersEntry: MessageFns<Response_HeadersEntry> = {
     return message;
   },
 
-  fromJSON(object: any): Response_HeadersEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? Header.fromJSON(object.value) : undefined,
-    };
-  },
-
   toJSON(message: Response_HeadersEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -2138,13 +1782,6 @@ export const Response_ExamplesEntry: MessageFns<Response_ExamplesEntry> = {
     return message;
   },
 
-  fromJSON(object: any): Response_ExamplesEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? globalThis.String(object.value) : "",
-    };
-  },
-
   toJSON(message: Response_ExamplesEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -2209,13 +1846,6 @@ export const Response_ExtensionsEntry: MessageFns<Response_ExtensionsEntry> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Response_ExtensionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
   },
 
   toJSON(message: Response_ExtensionsEntry): unknown {
@@ -2352,33 +1982,6 @@ export const Info: MessageFns<Info> = {
     return message;
   },
 
-  fromJSON(object: any): Info {
-    return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description)
-        ? globalThis.String(object.description)
-        : "",
-      termsOfService: isSet(object.termsOfService)
-        ? globalThis.String(object.termsOfService)
-        : "",
-      contact: isSet(object.contact)
-        ? Contact.fromJSON(object.contact)
-        : undefined,
-      license: isSet(object.license)
-        ? License.fromJSON(object.license)
-        : undefined,
-      version: isSet(object.version) ? globalThis.String(object.version) : "",
-      extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-    };
-  },
-
   toJSON(message: Info): unknown {
     const obj: any = {};
     if (message.title !== "") {
@@ -2466,13 +2069,6 @@ export const Info_ExtensionsEntry: MessageFns<Info_ExtensionsEntry> = {
     return message;
   },
 
-  fromJSON(object: any): Info_ExtensionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
-  },
-
   toJSON(message: Info_ExtensionsEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -2547,14 +2143,6 @@ export const Contact: MessageFns<Contact> = {
     return message;
   },
 
-  fromJSON(object: any): Contact {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      url: isSet(object.url) ? globalThis.String(object.url) : "",
-      email: isSet(object.email) ? globalThis.String(object.email) : "",
-    };
-  },
-
   toJSON(message: Contact): unknown {
     const obj: any = {};
     if (message.name !== "") {
@@ -2621,13 +2209,6 @@ export const License: MessageFns<License> = {
     return message;
   },
 
-  fromJSON(object: any): License {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      url: isSet(object.url) ? globalThis.String(object.url) : "",
-    };
-  },
-
   toJSON(message: License): unknown {
     const obj: any = {};
     if (message.name !== "") {
@@ -2692,15 +2273,6 @@ export const ExternalDocumentation: MessageFns<ExternalDocumentation> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): ExternalDocumentation {
-    return {
-      description: isSet(object.description)
-        ? globalThis.String(object.description)
-        : "",
-      url: isSet(object.url) ? globalThis.String(object.url) : "",
-    };
   },
 
   toJSON(message: ExternalDocumentation): unknown {
@@ -2811,24 +2383,6 @@ export const Schema: MessageFns<Schema> = {
     return message;
   },
 
-  fromJSON(object: any): Schema {
-    return {
-      jsonSchema: isSet(object.jsonSchema)
-        ? JSONSchema.fromJSON(object.jsonSchema)
-        : undefined,
-      discriminator: isSet(object.discriminator)
-        ? globalThis.String(object.discriminator)
-        : "",
-      readOnly: isSet(object.readOnly)
-        ? globalThis.Boolean(object.readOnly)
-        : false,
-      externalDocs: isSet(object.externalDocs)
-        ? ExternalDocumentation.fromJSON(object.externalDocs)
-        : undefined,
-      example: isSet(object.example) ? globalThis.String(object.example) : "",
-    };
-  },
-
   toJSON(message: Schema): unknown {
     const obj: any = {};
     if (message.jsonSchema !== undefined) {
@@ -2863,14 +2417,14 @@ function createBaseJSONSchema(): JSONSchema {
     exclusiveMaximum: false,
     minimum: 0,
     exclusiveMinimum: false,
-    maxLength: "0",
-    minLength: "0",
+    maxLength: 0n,
+    minLength: 0n,
     pattern: "",
-    maxItems: "0",
-    minItems: "0",
+    maxItems: 0n,
+    minItems: 0n,
     uniqueItems: false,
-    maxProperties: "0",
-    minProperties: "0",
+    maxProperties: 0n,
+    minProperties: 0n,
     required: [],
     array: [],
     type: [],
@@ -2919,28 +2473,58 @@ export const JSONSchema: MessageFns<JSONSchema> = {
     if (message.exclusiveMinimum !== false) {
       writer.uint32(112).bool(message.exclusiveMinimum);
     }
-    if (message.maxLength !== "0") {
+    if (message.maxLength !== 0n) {
+      if (BigInt.asUintN(64, message.maxLength) !== message.maxLength) {
+        throw new globalThis.Error(
+          "value provided for field message.maxLength of type uint64 too large",
+        );
+      }
       writer.uint32(120).uint64(message.maxLength);
     }
-    if (message.minLength !== "0") {
+    if (message.minLength !== 0n) {
+      if (BigInt.asUintN(64, message.minLength) !== message.minLength) {
+        throw new globalThis.Error(
+          "value provided for field message.minLength of type uint64 too large",
+        );
+      }
       writer.uint32(128).uint64(message.minLength);
     }
     if (message.pattern !== "") {
       writer.uint32(138).string(message.pattern);
     }
-    if (message.maxItems !== "0") {
+    if (message.maxItems !== 0n) {
+      if (BigInt.asUintN(64, message.maxItems) !== message.maxItems) {
+        throw new globalThis.Error(
+          "value provided for field message.maxItems of type uint64 too large",
+        );
+      }
       writer.uint32(160).uint64(message.maxItems);
     }
-    if (message.minItems !== "0") {
+    if (message.minItems !== 0n) {
+      if (BigInt.asUintN(64, message.minItems) !== message.minItems) {
+        throw new globalThis.Error(
+          "value provided for field message.minItems of type uint64 too large",
+        );
+      }
       writer.uint32(168).uint64(message.minItems);
     }
     if (message.uniqueItems !== false) {
       writer.uint32(176).bool(message.uniqueItems);
     }
-    if (message.maxProperties !== "0") {
+    if (message.maxProperties !== 0n) {
+      if (BigInt.asUintN(64, message.maxProperties) !== message.maxProperties) {
+        throw new globalThis.Error(
+          "value provided for field message.maxProperties of type uint64 too large",
+        );
+      }
       writer.uint32(192).uint64(message.maxProperties);
     }
-    if (message.minProperties !== "0") {
+    if (message.minProperties !== 0n) {
+      if (BigInt.asUintN(64, message.minProperties) !== message.minProperties) {
+        throw new globalThis.Error(
+          "value provided for field message.minProperties of type uint64 too large",
+        );
+      }
       writer.uint32(200).uint64(message.minProperties);
     }
     for (const v of message.required) {
@@ -3078,7 +2662,7 @@ export const JSONSchema: MessageFns<JSONSchema> = {
             break;
           }
 
-          message.maxLength = reader.uint64().toString();
+          message.maxLength = reader.uint64() as bigint;
           continue;
         }
         case 16: {
@@ -3086,7 +2670,7 @@ export const JSONSchema: MessageFns<JSONSchema> = {
             break;
           }
 
-          message.minLength = reader.uint64().toString();
+          message.minLength = reader.uint64() as bigint;
           continue;
         }
         case 17: {
@@ -3102,7 +2686,7 @@ export const JSONSchema: MessageFns<JSONSchema> = {
             break;
           }
 
-          message.maxItems = reader.uint64().toString();
+          message.maxItems = reader.uint64() as bigint;
           continue;
         }
         case 21: {
@@ -3110,7 +2694,7 @@ export const JSONSchema: MessageFns<JSONSchema> = {
             break;
           }
 
-          message.minItems = reader.uint64().toString();
+          message.minItems = reader.uint64() as bigint;
           continue;
         }
         case 22: {
@@ -3126,7 +2710,7 @@ export const JSONSchema: MessageFns<JSONSchema> = {
             break;
           }
 
-          message.maxProperties = reader.uint64().toString();
+          message.maxProperties = reader.uint64() as bigint;
           continue;
         }
         case 25: {
@@ -3134,7 +2718,7 @@ export const JSONSchema: MessageFns<JSONSchema> = {
             break;
           }
 
-          message.minProperties = reader.uint64().toString();
+          message.minProperties = reader.uint64() as bigint;
           continue;
         }
         case 26: {
@@ -3221,80 +2805,6 @@ export const JSONSchema: MessageFns<JSONSchema> = {
     return message;
   },
 
-  fromJSON(object: any): JSONSchema {
-    return {
-      ref: isSet(object.ref) ? globalThis.String(object.ref) : "",
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description)
-        ? globalThis.String(object.description)
-        : "",
-      default: isSet(object.default) ? globalThis.String(object.default) : "",
-      readOnly: isSet(object.readOnly)
-        ? globalThis.Boolean(object.readOnly)
-        : false,
-      example: isSet(object.example) ? globalThis.String(object.example) : "",
-      multipleOf: isSet(object.multipleOf)
-        ? globalThis.Number(object.multipleOf)
-        : 0,
-      maximum: isSet(object.maximum) ? globalThis.Number(object.maximum) : 0,
-      exclusiveMaximum: isSet(object.exclusiveMaximum)
-        ? globalThis.Boolean(object.exclusiveMaximum)
-        : false,
-      minimum: isSet(object.minimum) ? globalThis.Number(object.minimum) : 0,
-      exclusiveMinimum: isSet(object.exclusiveMinimum)
-        ? globalThis.Boolean(object.exclusiveMinimum)
-        : false,
-      maxLength: isSet(object.maxLength)
-        ? globalThis.String(object.maxLength)
-        : "0",
-      minLength: isSet(object.minLength)
-        ? globalThis.String(object.minLength)
-        : "0",
-      pattern: isSet(object.pattern) ? globalThis.String(object.pattern) : "",
-      maxItems: isSet(object.maxItems)
-        ? globalThis.String(object.maxItems)
-        : "0",
-      minItems: isSet(object.minItems)
-        ? globalThis.String(object.minItems)
-        : "0",
-      uniqueItems: isSet(object.uniqueItems)
-        ? globalThis.Boolean(object.uniqueItems)
-        : false,
-      maxProperties: isSet(object.maxProperties)
-        ? globalThis.String(object.maxProperties)
-        : "0",
-      minProperties: isSet(object.minProperties)
-        ? globalThis.String(object.minProperties)
-        : "0",
-      required: globalThis.Array.isArray(object?.required)
-        ? object.required.map((e: any) => globalThis.String(e))
-        : [],
-      array: globalThis.Array.isArray(object?.array)
-        ? object.array.map((e: any) => globalThis.String(e))
-        : [],
-      type: globalThis.Array.isArray(object?.type)
-        ? object.type.map((e: any) =>
-            jSONSchema_JSONSchemaSimpleTypesFromJSON(e),
-          )
-        : [],
-      format: isSet(object.format) ? globalThis.String(object.format) : "",
-      enum: globalThis.Array.isArray(object?.enum)
-        ? object.enum.map((e: any) => globalThis.String(e))
-        : [],
-      fieldConfiguration: isSet(object.fieldConfiguration)
-        ? JSONSchema_FieldConfiguration.fromJSON(object.fieldConfiguration)
-        : undefined,
-      extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-    };
-  },
-
   toJSON(message: JSONSchema): unknown {
     const obj: any = {};
     if (message.ref !== "") {
@@ -3330,29 +2840,29 @@ export const JSONSchema: MessageFns<JSONSchema> = {
     if (message.exclusiveMinimum !== false) {
       obj.exclusiveMinimum = message.exclusiveMinimum;
     }
-    if (message.maxLength !== "0") {
-      obj.maxLength = message.maxLength;
+    if (message.maxLength !== 0n) {
+      obj.maxLength = message.maxLength.toString();
     }
-    if (message.minLength !== "0") {
-      obj.minLength = message.minLength;
+    if (message.minLength !== 0n) {
+      obj.minLength = message.minLength.toString();
     }
     if (message.pattern !== "") {
       obj.pattern = message.pattern;
     }
-    if (message.maxItems !== "0") {
-      obj.maxItems = message.maxItems;
+    if (message.maxItems !== 0n) {
+      obj.maxItems = message.maxItems.toString();
     }
-    if (message.minItems !== "0") {
-      obj.minItems = message.minItems;
+    if (message.minItems !== 0n) {
+      obj.minItems = message.minItems.toString();
     }
     if (message.uniqueItems !== false) {
       obj.uniqueItems = message.uniqueItems;
     }
-    if (message.maxProperties !== "0") {
-      obj.maxProperties = message.maxProperties;
+    if (message.maxProperties !== 0n) {
+      obj.maxProperties = message.maxProperties.toString();
     }
-    if (message.minProperties !== "0") {
-      obj.minProperties = message.minProperties;
+    if (message.minProperties !== 0n) {
+      obj.minProperties = message.minProperties.toString();
     }
     if (message.required?.length) {
       obj.required = message.required;
@@ -3433,14 +2943,6 @@ export const JSONSchema_FieldConfiguration: MessageFns<JSONSchema_FieldConfigura
       return message;
     },
 
-    fromJSON(object: any): JSONSchema_FieldConfiguration {
-      return {
-        pathParamName: isSet(object.pathParamName)
-          ? globalThis.String(object.pathParamName)
-          : "",
-      };
-    },
-
     toJSON(message: JSONSchema_FieldConfiguration): unknown {
       const obj: any = {};
       if (message.pathParamName !== "") {
@@ -3506,13 +3008,6 @@ export const JSONSchema_ExtensionsEntry: MessageFns<JSONSchema_ExtensionsEntry> 
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): JSONSchema_ExtensionsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object?.value) ? object.value : undefined,
-      };
     },
 
     toJSON(message: JSONSchema_ExtensionsEntry): unknown {
@@ -3614,26 +3109,6 @@ export const Tag: MessageFns<Tag> = {
     return message;
   },
 
-  fromJSON(object: any): Tag {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      description: isSet(object.description)
-        ? globalThis.String(object.description)
-        : "",
-      externalDocs: isSet(object.externalDocs)
-        ? ExternalDocumentation.fromJSON(object.externalDocs)
-        : undefined,
-      extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-    };
-  },
-
   toJSON(message: Tag): unknown {
     const obj: any = {};
     if (message.name !== "") {
@@ -3712,13 +3187,6 @@ export const Tag_ExtensionsEntry: MessageFns<Tag_ExtensionsEntry> = {
     return message;
   },
 
-  fromJSON(object: any): Tag_ExtensionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
-  },
-
   toJSON(message: Tag_ExtensionsEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -3781,19 +3249,6 @@ export const SecurityDefinitions: MessageFns<SecurityDefinitions> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): SecurityDefinitions {
-    return {
-      security: isObject(object.security)
-        ? Object.entries(object.security).reduce<{
-            [key: string]: SecurityScheme;
-          }>((acc, [key, value]) => {
-            acc[key] = SecurityScheme.fromJSON(value);
-            return acc;
-          }, {})
-        : {},
-    };
   },
 
   toJSON(message: SecurityDefinitions): unknown {
@@ -3864,15 +3319,6 @@ export const SecurityDefinitions_SecurityEntry: MessageFns<SecurityDefinitions_S
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): SecurityDefinitions_SecurityEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value)
-          ? SecurityScheme.fromJSON(object.value)
-          : undefined,
-      };
     },
 
     toJSON(message: SecurityDefinitions_SecurityEntry): unknown {
@@ -4036,33 +3482,6 @@ export const SecurityScheme: MessageFns<SecurityScheme> = {
     return message;
   },
 
-  fromJSON(object: any): SecurityScheme {
-    return {
-      type: isSet(object.type) ? securityScheme_TypeFromJSON(object.type) : 0,
-      description: isSet(object.description)
-        ? globalThis.String(object.description)
-        : "",
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      in: isSet(object.in) ? securityScheme_InFromJSON(object.in) : 0,
-      flow: isSet(object.flow) ? securityScheme_FlowFromJSON(object.flow) : 0,
-      authorizationUrl: isSet(object.authorizationUrl)
-        ? globalThis.String(object.authorizationUrl)
-        : "",
-      tokenUrl: isSet(object.tokenUrl)
-        ? globalThis.String(object.tokenUrl)
-        : "",
-      scopes: isSet(object.scopes) ? Scopes.fromJSON(object.scopes) : undefined,
-      extensions: isObject(object.extensions)
-        ? Object.entries(object.extensions).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-    };
-  },
-
   toJSON(message: SecurityScheme): unknown {
     const obj: any = {};
     if (message.type !== 0) {
@@ -4160,13 +3579,6 @@ export const SecurityScheme_ExtensionsEntry: MessageFns<SecurityScheme_Extension
       return message;
     },
 
-    fromJSON(object: any): SecurityScheme_ExtensionsEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object?.value) ? object.value : undefined,
-      };
-    },
-
     toJSON(message: SecurityScheme_ExtensionsEntry): unknown {
       const obj: any = {};
       if (message.key !== "") {
@@ -4231,20 +3643,6 @@ export const SecurityRequirement: MessageFns<SecurityRequirement> = {
     return message;
   },
 
-  fromJSON(object: any): SecurityRequirement {
-    return {
-      securityRequirement: isObject(object.securityRequirement)
-        ? Object.entries(object.securityRequirement).reduce<{
-            [key: string]: SecurityRequirement_SecurityRequirementValue;
-          }>((acc, [key, value]) => {
-            acc[key] =
-              SecurityRequirement_SecurityRequirementValue.fromJSON(value);
-            return acc;
-          }, {})
-        : {},
-    };
-  },
-
   toJSON(message: SecurityRequirement): unknown {
     const obj: any = {};
     if (message.securityRequirement) {
@@ -4303,14 +3701,6 @@ export const SecurityRequirement_SecurityRequirementValue: MessageFns<SecurityRe
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): SecurityRequirement_SecurityRequirementValue {
-      return {
-        scope: globalThis.Array.isArray(object?.scope)
-          ? object.scope.map((e: any) => globalThis.String(e))
-          : [],
-      };
     },
 
     toJSON(message: SecurityRequirement_SecurityRequirementValue): unknown {
@@ -4383,15 +3773,6 @@ export const SecurityRequirement_SecurityRequirementEntry: MessageFns<SecurityRe
       return message;
     },
 
-    fromJSON(object: any): SecurityRequirement_SecurityRequirementEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value)
-          ? SecurityRequirement_SecurityRequirementValue.fromJSON(object.value)
-          : undefined,
-      };
-    },
-
     toJSON(message: SecurityRequirement_SecurityRequirementEntry): unknown {
       const obj: any = {};
       if (message.key !== "") {
@@ -4450,20 +3831,6 @@ export const Scopes: MessageFns<Scopes> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Scopes {
-    return {
-      scope: isObject(object.scope)
-        ? Object.entries(object.scope).reduce<{ [key: string]: string }>(
-            (acc, [key, value]) => {
-              acc[key] = String(value);
-              return acc;
-            },
-            {},
-          )
-        : {},
-    };
   },
 
   toJSON(message: Scopes): unknown {
@@ -4532,13 +3899,6 @@ export const Scopes_ScopeEntry: MessageFns<Scopes_ScopeEntry> = {
     return message;
   },
 
-  fromJSON(object: any): Scopes_ScopeEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? globalThis.String(object.value) : "",
-    };
-  },
-
   toJSON(message: Scopes_ScopeEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -4551,17 +3911,8 @@ export const Scopes_ScopeEntry: MessageFns<Scopes_ScopeEntry> = {
   },
 };
 
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }
