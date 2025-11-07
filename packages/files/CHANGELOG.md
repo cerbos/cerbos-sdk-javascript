@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.4.3] - 2025-11-07
+
 ### Changed
 
 - Migrate to `protoc-gen-es` and extract generated code to its own package ([#1271](https://github.com/cerbos/cerbos-sdk-javascript/pull/1271))
+
+- Bump dependency on [@cerbos/core] to 0.25.0 ([#1273](https://github.com/cerbos/cerbos-sdk-javascript/pull/1273))
 
 ## [0.4.2] - 2025-09-15
 
@@ -168,7 +174,8 @@
 
 - A package to load Cerbos policies from YAML or JSON files ([#611](https://github.com/cerbos/cerbos-sdk-javascript/pull/611))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.4.2...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.4.3...HEAD
+[0.4.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.4.2...@cerbos/files@0.4.3
 [0.4.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.4.1...@cerbos/files@0.4.2
 [0.4.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.4.0...@cerbos/files@0.4.1
 [0.4.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.3.0...@cerbos/files@0.4.0

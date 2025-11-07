@@ -1,11 +1,11 @@
-unreleased:
-  type: minor
-
-  changed:
-    - summary: Migrate to `protoc-gen-es` and extract generated code to its own package
-      pull: 1271
-
 releases:
+  - version: 0.25.0
+    date: 2025-11-07
+
+    changed:
+      - summary: Migrate to `protoc-gen-es` and extract generated code to its own package
+        pull: 1271
+
   - version: 0.24.1
     date: 2025-09-15
 

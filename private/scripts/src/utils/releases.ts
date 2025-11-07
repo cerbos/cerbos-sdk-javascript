@@ -114,6 +114,7 @@ async function prepareRelease(
   pkg.manifest.version = pkg.newVersion;
 
   for (const [dependency, newVersion] of pkg.dependenciesToBump) {
+    setDependencyVersion(pkg.manifest.peerDependencies, dependency, newVersion);
     setDependencyVersion(pkg.manifest.dependencies, dependency, newVersion);
 
     if (pkg.changelog.releases?.length) {

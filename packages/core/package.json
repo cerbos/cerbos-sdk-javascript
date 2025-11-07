@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/core",
-  "version": "0.24.1",
+  "version": "0.25.0",
   "description": "Common types used by the Cerbos client libraries",
   "repository": {
     "type": "git",
@@ -50,7 +50,7 @@
     "@bufbuild/protobuf": "^2.10.0"
   },
   "dependencies": {
-    "@cerbos/api": "^0.0.1",
+    "@cerbos/api": "^0.1.0",
     "uuid": "^13.0.0"
   },
   "publishConfig": {

@@ -4,6 +4,12 @@
 
 No notable changes.
 
+## [0.2.4] - 2025-11-07
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.25.0 ([#1273](https://github.com/cerbos/cerbos-sdk-javascript/pull/1273))
+
 ## [0.2.3] - 2025-09-15
 
 ### Changed
@@ -82,7 +88,8 @@ No notable changes.
 
 - A collection of React hooks for interacting with Cerbos policy decision points ([#876](https://github.com/cerbos/cerbos-sdk-javascript/pull/876), [#918](https://github.com/cerbos/cerbos-sdk-javascript/pull/918))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.2.3...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.2.4...HEAD
+[0.2.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.2.3...@cerbos/react@0.2.4
 [0.2.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.2.2...@cerbos/react@0.2.3
 [0.2.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.2.1...@cerbos/react@0.2.2
 [0.2.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.2.0...@cerbos/react@0.2.1
