@@ -1,11 +1,16 @@
-unreleased:
-  type: patch
-
-  changed:
-    - summary: Migrate to `protoc-gen-es` and extract generated code to its own package
-      pull: 1271
-
 releases:
+  - version: 0.4.3
+    date: 2025-11-07
+
+    changed:
+      - summary: Migrate to `protoc-gen-es` and extract generated code to its own package
+        pull: 1271
+
+    bumped:
+      "@cerbos/core":
+        to: 0.25.0
+        pull: 1273
+
   - version: 0.4.2
     date: 2025-09-15
 

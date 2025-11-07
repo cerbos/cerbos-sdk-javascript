@@ -1,12 +1,16 @@
-unreleased:
-  type: patch
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.10.0
-      pull: 1260
-
 releases:
+  - version: 0.2.2
+    date: 2025-11-07
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.10.0
+        pull: 1260
+
+      "@cerbos/core":
+        to: 0.25.0
+        pull: 1273
+
   - version: 0.2.1
     date: 2025-10-14
 

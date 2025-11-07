@@ -2,7 +2,13 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.7.0] - 2025-11-07
+
 ### Changed
+
+- Bump dependency on [@cerbos/core] to 0.25.0 ([#1273](https://github.com/cerbos/cerbos-sdk-javascript/pull/1273))
 
 - Bump dependency on [@opentelemetry/instrumentation] to 0.207.0 ([#1261](https://github.com/cerbos/cerbos-sdk-javascript/pull/1261))
 
@@ -296,7 +302,8 @@
 
 - [OpenTelemetry](https://opentelemetry.io) instrumentation for the [@cerbos/grpc] and [@cerbos/http] client libraries ([#438](https://github.com/cerbos/cerbos-sdk-javascript/pull/438))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.6.4...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.7.0...HEAD
+[0.7.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.6.4...@cerbos/opentelemetry@0.7.0
 [0.6.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.6.3...@cerbos/opentelemetry@0.6.4
 [0.6.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.6.2...@cerbos/opentelemetry@0.6.3
 [0.6.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.6.1...@cerbos/opentelemetry@0.6.2

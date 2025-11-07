@@ -1,9 +1,10 @@
-unreleased:
-  type: minor
+releases:
+  - version: 0.1.0
+    date: 2025-11-07
 
-  added:
-    - summary: Generated code
-      pull: 1271
+    added:
+      - summary: Generated code
+        pull: 1271
 
 references:
   "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es

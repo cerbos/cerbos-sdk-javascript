@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.13.2] - 2025-11-07
+
 ### Changed
 
 - Migrate to `protoc-gen-es` and extract generated code to its own package ([#1271](https://github.com/cerbos/cerbos-sdk-javascript/pull/1271))
+
+- Bump dependency on [@cerbos/core] to 0.25.0 ([#1273](https://github.com/cerbos/cerbos-sdk-javascript/pull/1273))
 
 ## [0.13.1] - 2025-09-15
 
@@ -243,7 +249,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.2...HEAD
+[0.13.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.1...@cerbos/embedded@0.13.2
 [0.13.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.0...@cerbos/embedded@0.13.1
 [0.13.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.12.1...@cerbos/embedded@0.13.0
 [0.12.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.12.0...@cerbos/embedded@0.12.1
