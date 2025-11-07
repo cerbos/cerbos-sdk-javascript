@@ -21,11 +21,11 @@ importers:
         specifier: workspace:*
         version: link:private/eslint
       '@microsoft/api-documenter':
-        specifier: 7.27.3
-        version: 7.27.3(@types/node@20.19.24)
+        specifier: 7.27.4
+        version: 7.27.4(@types/node@20.19.24)
       '@microsoft/api-extractor':
-        specifier: 7.53.3
-        version: 7.53.3(@types/node@20.19.24)
+        specifier: 7.54.0
+        version: 7.54.0(@types/node@20.19.24)
       '@tsconfig/node20':
         specifier: 20.1.6
         version: 20.1.6
@@ -820,15 +820,15 @@ packages:
   '@loaderkit/resolve@1.0.4':
     resolution: {integrity: sha512-rJzYKVcV4dxJv+vW6jlvagF8zvGxHJ2+HTr1e2qOejfmGhAApgJHl8Aog4mMszxceTRiKTTbnpgmTO1bEZHV/A==}
 
-  '@microsoft/api-documenter@7.27.3':
-    resolution: {integrity: sha512-o4sgQZTLp0zBrGv2uXLJFs5wQEA+nPMqoqX8duioj6DvJMpLWVFy/lGz+qTWTYs/BRCy/8xF/JL9euqmPm6N1Q==}
+  '@microsoft/api-documenter@7.27.4':
+    resolution: {integrity: sha512-swFAXorwMtw3kKpDuW6G8dcmrwe1i299S8vfNvCZSLfup3HBzldiToZQfejKFEMwwbq1V2St9QWLdWsjvRQtXA==}
     hasBin: true
 
   '@microsoft/api-extractor-model@7.31.3':
     resolution: {integrity: sha512-dv4quQI46p0U03TCEpasUf6JrJL3qjMN7JUAobsPElxBv4xayYYvWW9aPpfYV+Jx6hqUcVaLVOeV7+5hxsyoFQ==}
 
-  '@microsoft/api-extractor@7.53.3':
-    resolution: {integrity: sha512-p2HmQaMSVqMBj3bH3643f8xApKAqrF1jNpPsMCTQOYCYgfwLnvzsve8c+bgBWzCOBBgLK54PB6ZLIWMGLg8CZA==}
+  '@microsoft/api-extractor@7.54.0':
+    resolution: {integrity: sha512-t0SEcbVUPy4yAVykPafTNWktBg728X6p9t8qCuGDsYr1/lz2VQFihYDP2CnBFSArP5vwJPcvxktoKVSqH326cA==}
     hasBin: true
 
   '@microsoft/tsdoc-config@0.17.1':
@@ -1636,6 +1636,10 @@ packages:
     resolution: {integrity: sha512-pGjwhsmsp4kL2RTz08wcOlGN83otlqHeD/Z5T8GXZB+/YcpQ/dgo+lbU8ZsGxV0HIvqqxo9l7mqYwyYMD9bKDg==}
     engines: {node: '>=0.10'}
     hasBin: true
+
+  diff@8.0.2:
+    resolution: {integrity: sha512-sSuxWU5j5SR9QQji/o2qMvqRNYRDOcBTgsJ/DeCf4iSN4gW+gNMXM7wFIP+fdXZxoNiAnHUTGjCr+TSWXdRDKg==}
+    engines: {node: '>=0.3.1'}
 
   doctrine@2.1.0:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
@@ -3559,7 +3563,7 @@ snapshots:
     dependencies:
       '@braidai/lang': 1.1.2
 
-  '@microsoft/api-documenter@7.27.3(@types/node@20.19.24)':
+  '@microsoft/api-documenter@7.27.4(@types/node@20.19.24)':
     dependencies:
       '@microsoft/api-extractor-model': 7.31.3(@types/node@20.19.24)
       '@microsoft/tsdoc': 0.15.1
@@ -3579,7 +3583,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@microsoft/api-extractor@7.53.3(@types/node@20.19.24)':
+  '@microsoft/api-extractor@7.54.0(@types/node@20.19.24)':
     dependencies:
       '@microsoft/api-extractor-model': 7.31.3(@types/node@20.19.24)
       '@microsoft/tsdoc': 0.15.1
@@ -3588,6 +3592,7 @@ snapshots:
       '@rushstack/rig-package': 0.6.0
       '@rushstack/terminal': 0.19.3(@types/node@20.19.24)
       '@rushstack/ts-command-line': 5.1.3(@types/node@20.19.24)
+      diff: 8.0.2
       lodash: 4.17.21
       minimatch: 10.0.3
       resolve: 1.22.11
@@ -4432,6 +4437,8 @@ snapshots:
   detect-file@1.0.0: {}
 
   detect-libc@1.0.3: {}
+
+  diff@8.0.2: {}
 
   doctrine@2.1.0:
     dependencies:

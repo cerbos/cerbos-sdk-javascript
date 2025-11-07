@@ -44,26 +44,9 @@ export const importConfig = defineConfig(
     },
   },
   {
-    files: ["**/*.ts"],
-    ignores: [
-      "**/*.d.ts",
-      "packages/ui-app/src/routes.ts",
-      "**/.storybook/main.ts",
-      "**/knip.config.ts",
-      "**/tailwind.config.ts",
-      "**/vite.config.ts",
-      "**/vitest.workspace.ts",
-    ],
+    ignores: ["**/*.config.*"],
     rules: {
       "import/no-default-export": "warn",
-    },
-  },
-  {
-    files: ["**/*.tsx"],
-    ignores: ["**/routes/*/route.tsx"],
-    rules: {
-      // Components should use default exports for compatibility with `React.lazy`
-      "import/prefer-default-export": ["warn", { target: "any" }],
     },
   },
 );
