@@ -1,74 +1,34 @@
-import type { Client, MethodDefinition } from "@grpc/grpc-js";
+import type {
+  DescMessage,
+  DescMethod,
+  DescMethodServerStreaming,
+  DescMethodUnary,
+  MessageShape,
+  MessageValidType,
+} from "@bufbuild/protobuf";
+import { fromBinary, toBinary } from "@bufbuild/protobuf";
+import type { Client } from "@grpc/grpc-js";
 import { Metadata } from "@grpc/grpc-js";
 
-import type {
-  _AbortHandler,
-  _Method,
-  _MethodKind,
-  _Request,
-  _Response,
-  _Service,
-  _Transport,
-} from "@cerbos/core";
-import { NotOK, Status, _isObject } from "@cerbos/core";
-
-import {
-  CerbosAdminServiceService as adminService,
-  CerbosServiceService as cerbosService,
-} from "./protobuf/cerbos/svc/v1/svc";
-import { HealthService as healthService } from "./protobuf/grpc/health/v1/health";
-
-type Endpoint<
-  Service extends _Service,
-  MethodKind extends _MethodKind,
-  Method extends _Method<Service, MethodKind>,
-> = MethodDefinition<
-  _Request<Service, MethodKind, Method>,
-  _Response<Service, MethodKind, Method>
->;
-
-type Services = {
-  [Service in _Service]: {
-    [MethodKind in _MethodKind]: {
-      [Method in _Method<Service, MethodKind>]: Endpoint<
-        Service,
-        MethodKind,
-        Method
-      >;
-    };
-  }[_MethodKind];
-};
-
-const services: Services = {
-  admin: adminService,
-  cerbos: cerbosService,
-  health: healthService,
-};
+import type { _AbortHandler, _Transport } from "@cerbos/core";
+import { NotOK, Status, _isObject, _methodName } from "@cerbos/core";
 
 export class Transport implements _Transport {
   public constructor(private readonly client: Client) {}
 
-  public async unary<
-    Service extends _Service,
-    Method extends _Method<Service, "unary">,
-  >(
-    service: Service,
-    method: Method,
-    request: _Request<Service, "unary", Method>,
+  public async unary<I extends DescMessage, O extends DescMessage>(
+    method: DescMethodUnary<I, O>,
+    request: MessageValidType<I>,
     headers: Headers,
     abortHandler: _AbortHandler,
-  ): Promise<_Response<Service, "unary", Method>> {
-    const { path, requestSerialize, responseDeserialize } = services[service][
-      method
-    ] as Endpoint<Service, "unary", Method>; // https://github.com/microsoft/TypeScript/issues/30581
-
+  ): Promise<MessageShape<O>> {
     return await new Promise((resolve, reject) => {
       abortHandler.throwIfAborted();
 
       const call = this.client.makeUnaryRequest(
-        path,
-        requestSerialize,
-        responseDeserialize,
+        path(method),
+        serialize(method.input),
+        deserialize(method.output),
         request,
         metadata(headers),
         (error, response) => {
@@ -94,31 +54,19 @@ export class Transport implements _Transport {
     });
   }
 
-  public async *serverStream<
-    Service extends _Service,
-    Method extends _Method<Service, "serverStream">,
-  >(
-    service: Service,
-    method: Method,
-    request: _Request<Service, "serverStream", Method>,
+  public async *serverStream<I extends DescMessage, O extends DescMessage>(
+    method: DescMethodServerStreaming<I, O>,
+    request: MessageValidType<I>,
     headers: Headers,
     abortHandler: _AbortHandler,
-  ): AsyncGenerator<
-    _Response<Service, "serverStream", Method>,
-    void,
-    undefined
-  > {
-    const { path, requestSerialize, responseDeserialize } = services[service][
-      method
-    ] as Endpoint<Service, "serverStream", Method>; // https://github.com/microsoft/TypeScript/issues/30581
-
+  ): AsyncGenerator<MessageShape<O>, void, undefined> {
     abortHandler.throwIfAborted();
 
     try {
       const stream = this.client.makeServerStreamRequest(
-        path,
-        requestSerialize,
-        responseDeserialize,
+        path(method),
+        serialize(method.input),
+        deserialize(method.output),
         request,
         metadata(headers),
       );
@@ -158,4 +106,21 @@ function metadata(headers: Headers): Metadata {
   }
 
   return metadata;
+}
+
+function path(method: DescMethod): string {
+  return `/${_methodName(method)}`;
+}
+
+function serialize<I extends DescMessage>(
+  schema: I,
+): (request: MessageValidType<I>) => Buffer {
+  return (request) =>
+    Buffer.from(toBinary(schema, request as MessageShape<I>).buffer);
+}
+
+function deserialize<O extends DescMessage>(
+  schema: O,
+): (output: Buffer) => MessageShape<O> {
+  return (output) => fromBinary(schema, output);
 }

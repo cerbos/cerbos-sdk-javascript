@@ -28,6 +28,7 @@ export async function listPackages(): Promise<Package[]> {
 
 export interface PackageJson {
   version: string;
+  peerDependencies?: Record<string, string>;
   dependencies?: Record<string, string>;
 }
 

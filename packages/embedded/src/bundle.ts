@@ -1,5 +1,12 @@
+import { fromJsonString, toJson } from "@bufbuild/protobuf";
+
+import { MetadataSchema } from "@cerbos/api/cerbos/cloud/epdp/v1/epdp_pb";
+import type { CheckResourcesRequest } from "@cerbos/api/cerbos/request/v1/request_pb";
+import { CheckResourcesRequestSchema } from "@cerbos/api/cerbos/request/v1/request_pb";
+import type { CheckResourcesResponse } from "@cerbos/api/cerbos/response/v1/response_pb";
+import { CheckResourcesResponseSchema } from "@cerbos/api/cerbos/response/v1/response_pb";
 import type { DecodedAuxData, JWT } from "@cerbos/core";
-import { NotOK } from "@cerbos/core";
+import { NotOK, _valuesFromProtobuf } from "@cerbos/core";
 
 import type {
   BundleMetadata,
@@ -8,9 +15,6 @@ import type {
   Source,
 } from "./loader";
 import type { DecisionLogger } from "./logger";
-import { Metadata as BundleMetadataProtobuf } from "./protobuf/cerbos/cloud/epdp/v1/epdp";
-import { CheckResourcesRequest } from "./protobuf/cerbos/request/v1/request";
-import { CheckResourcesResponse } from "./protobuf/cerbos/response/v1/response";
 import { cancelBody } from "./response";
 import type { Allocator } from "./slice";
 import { Slice } from "./slice";
@@ -96,21 +100,22 @@ export class Bundle {
         commitHash,
         version,
         buildTimestamp,
-        policies,
+        policies, // eslint-disable-line @typescript-eslint/no-deprecated
         sourceAttributes,
-      } = BundleMetadataProtobuf.fromJSON(
-        JSON.parse(Slice.from(this.exports, this.exports.metadata()).text()),
+      } = fromJsonString(
+        MetadataSchema,
+        Slice.from(this.exports, this.exports.metadata()).text(),
       );
 
       this._metadata = {
         url: this.url,
         commit: commitHash || version,
-        builtAt: new Date(buildTimestamp * 1000),
+        builtAt: new Date(Number(buildTimestamp) * 1000),
         policies,
         sourceAttributes: Object.fromEntries(
           Object.entries(sourceAttributes).map(([id, { attributes }]) => [
             id,
-            attributes,
+            _valuesFromProtobuf(attributes),
           ]),
         ),
       };
@@ -128,7 +133,7 @@ export class Bundle {
     let error: unknown = undefined;
 
     try {
-      const requestJSON = CheckResourcesRequest.toJSON(request) as {
+      const requestJSON = toJson(CheckResourcesRequestSchema, request) as {
         auxData?: { jwt?: unknown };
       };
 
@@ -162,7 +167,7 @@ export class Bundle {
       }
 
       try {
-        response = CheckResourcesResponse.fromJSON(JSON.parse(responseText));
+        response = fromJsonString(CheckResourcesResponseSchema, responseText);
       } catch {
         throw NotOK.fromJSON(responseText);
       }

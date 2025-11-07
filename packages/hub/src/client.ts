@@ -105,14 +105,14 @@ function createUnaryMethod<I extends DescMessage, O extends DescMessage>(
   method: DescMethodUnary<I, O>,
   createError: (error: unknown) => Error,
 ): MethodUnary<I, O> {
-  return async (input, options) => {
+  return async (request, options) => {
     try {
       const response = await transport.unary(
         method,
         options.signal,
         options.timeoutMs,
         options.headers,
-        input as unknown as BufMessageInitShape<I>,
+        request as unknown as BufMessageInitShape<I>,
         options.contextValues,
       );
 

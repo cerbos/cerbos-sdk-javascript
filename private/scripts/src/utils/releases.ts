@@ -42,18 +42,19 @@ export async function planReleases(
       packagesToRelease.push(pkg);
     }
 
-    if (pkg.manifest.dependencies) {
-      for (const dependency of Object.keys(pkg.manifest.dependencies)) {
-        const newVersion = newVersions.get(dependency);
-        if (newVersion) {
-          if (!pkg.newVersion) {
-            throw new Error(
-              `"${pkg.name}" has an updated dependency ("${dependency}"), but has not been marked as having unreleased changes`,
-            );
-          }
-
-          pkg.dependenciesToBump.set(dependency, newVersion);
+    for (const dependency of Object.keys({
+      ...pkg.manifest.peerDependencies,
+      ...pkg.manifest.dependencies,
+    })) {
+      const newVersion = newVersions.get(dependency);
+      if (newVersion) {
+        if (!pkg.newVersion) {
+          throw new Error(
+            `"${pkg.name}" has an updated dependency ("${dependency}"), but has not been marked as having unreleased changes`,
+          );
         }
+
+        pkg.dependenciesToBump.set(dependency, newVersion);
       }
     }
   }
@@ -112,19 +113,17 @@ async function prepareRelease(
 ): Promise<void> {
   pkg.manifest.version = pkg.newVersion;
 
-  if (pkg.manifest.dependencies) {
-    for (const [dependency, newVersion] of pkg.dependenciesToBump) {
-      pkg.manifest.dependencies[dependency] = `^${newVersion}`;
+  for (const [dependency, newVersion] of pkg.dependenciesToBump) {
+    setDependencyVersion(pkg.manifest.dependencies, dependency, newVersion);
 
-      if (pkg.changelog.releases?.length) {
-        (pkg.unreleased.bumped ??= {})[dependency] = {
-          to: newVersion,
-          pull: pullRequest,
-        };
+    if (pkg.changelog.releases?.length) {
+      (pkg.unreleased.bumped ??= {})[dependency] = {
+        to: newVersion,
+        pull: pullRequest,
+      };
 
-        (pkg.changelog.references ??= {})[dependency] =
-          `../${dependency.replace("@cerbos/", "")}/README.md`;
-      }
+      (pkg.changelog.references ??= {})[dependency] =
+        `../${dependency.replace("@cerbos/", "")}/README.md`;
     }
   }
 
@@ -142,4 +141,14 @@ async function prepareRelease(
     writePackageJson(pkg, pkg.manifest),
     writeChangelog(pkg, pkg.changelog),
   ]);
+}
+
+function setDependencyVersion(
+  dependencies: Record<string, string> | undefined,
+  dependency: string,
+  newVersion: string,
+): void {
+  if (dependencies?.[dependency]) {
+    dependencies[dependency] = `^${newVersion}`;
+  }
 }

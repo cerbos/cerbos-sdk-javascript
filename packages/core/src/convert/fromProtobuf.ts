@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-deprecated */
 
+import { toJson } from "@bufbuild/protobuf";
+import type { Value as ValueProtobuf } from "@bufbuild/protobuf/wkt";
+import { ValueSchema, timestampDate } from "@bufbuild/protobuf/wkt";
+
 import type {
   AuditTrail as AuditTrailProtobuf,
   DecisionLogEntry as DecisionLogEntryProtobuf,
@@ -15,9 +19,9 @@ import type {
   PolicySource_Git,
   PolicySource_Hub,
   PolicySource_Hub_LocalBundle,
-} from "../protobuf/cerbos/audit/v1/audit";
-import { PolicySource_Database_Driver } from "../protobuf/cerbos/audit/v1/audit";
-import { Effect as EffectProtobuf } from "../protobuf/cerbos/effect/v1/effect";
+} from "@cerbos/api/cerbos/audit/v1/audit_pb";
+import { PolicySource_Database_Driver } from "@cerbos/api/cerbos/audit/v1/audit_pb";
+import { Effect as EffectProtobuf } from "@cerbos/api/cerbos/effect/v1/effect_pb";
 import type {
   AuxData as AuxDataProtobuf,
   CheckInput as CheckInputProtobuf,
@@ -30,8 +34,8 @@ import type {
   PlanResourcesOutput as PlanResourcesOutputProtobuf,
   Principal as PrincipalProtobuf,
   Resource as ResourceProtobuf,
-} from "../protobuf/cerbos/engine/v1/engine";
-import { PlanResourcesFilter_Kind } from "../protobuf/cerbos/engine/v1/engine";
+} from "@cerbos/api/cerbos/engine/v1/engine_pb";
+import { PlanResourcesFilter_Kind } from "@cerbos/api/cerbos/engine/v1/engine_pb";
 import type {
   Condition as ConditionProtobuf,
   Constants as ConstantsProtobuf,
@@ -55,11 +59,14 @@ import type {
   Schemas_Schema,
   SourceAttributes as SourceAttributesProtobuf,
   Variables as VariablesProtobuf,
-} from "../protobuf/cerbos/policy/v1/policy";
-import { ScopePermissions as ScopePermissionsProtobuf } from "../protobuf/cerbos/policy/v1/policy";
+} from "@cerbos/api/cerbos/policy/v1/policy_pb";
+import { ScopePermissions as ScopePermissionsProtobuf } from "@cerbos/api/cerbos/policy/v1/policy_pb";
 import type {
   CheckResourcesResponse as CheckResourcesResponseProtobuf,
   CheckResourcesResponse_ResultEntry,
+  CheckResourcesResponse_ResultEntry_Meta,
+  CheckResourcesResponse_ResultEntry_Meta_EffectMeta,
+  CheckResourcesResponse_ResultEntry_Resource,
   DeleteSchemaResponse,
   DisablePolicyResponse,
   EnablePolicyResponse,
@@ -76,26 +83,31 @@ import type {
   ListSchemasResponse as ListSchemasResponseProtobuf,
   PlanResourcesResponse as PlanResourcesResponseProtobuf,
   PlanResourcesResponse_Meta,
-} from "../protobuf/cerbos/response/v1/response";
+  ServerInfoResponse,
+} from "@cerbos/api/cerbos/response/v1/response_pb";
 import {
   InspectPoliciesResponse_Attribute_Kind,
   InspectPoliciesResponse_Constant_Kind,
   InspectPoliciesResponse_DerivedRole_Kind,
   InspectPoliciesResponse_Variable_Kind,
-} from "../protobuf/cerbos/response/v1/response";
+} from "@cerbos/api/cerbos/response/v1/response_pb";
 import type {
   Schema as SchemaProtobuf,
   ValidationError as ValidationErrorProtobuf,
-} from "../protobuf/cerbos/schema/v1/schema";
-import { ValidationError_Source } from "../protobuf/cerbos/schema/v1/schema";
-import type { HealthCheckResponse as HealthCheckResponseProtobuf } from "../protobuf/grpc/health/v1/health";
-import { HealthCheckResponse_ServingStatus } from "../protobuf/grpc/health/v1/health";
+} from "@cerbos/api/cerbos/schema/v1/schema_pb";
+import { ValidationError_Source } from "@cerbos/api/cerbos/schema/v1/schema_pb";
+import type { HealthCheckResponse as HealthCheckResponseProtobuf } from "@cerbos/api/grpc/health/v1/health_pb";
+import { HealthCheckResponse_ServingStatus } from "@cerbos/api/grpc/health/v1/health_pb";
+
 import type {
   AccessLogEntry,
   AuditTrail,
   CheckInput,
   CheckOutput,
   CheckOutputActionEffect,
+  CheckResourcesResultMetadata,
+  CheckResourcesResultMetadataEffect,
+  CheckResourcesResultResource,
   Condition,
   Constants,
   DecisionLogEntry,
@@ -162,6 +174,7 @@ import type {
   Schema,
   SchemaRef,
   SchemaRefs,
+  ServerInfo,
   SourceAttributes,
   ValidationError,
   Value,
@@ -201,14 +214,14 @@ export function accessLogEntryFromProtobuf({
     statusCode,
     oversized,
     policySource,
-  } = entry.accessLogEntry;
+  } = entry.value;
 
   requireField("AccessLogEntry.timestamp", timestamp);
   requireField("AccessLogEntry.peer", peer);
 
   return {
     callId,
-    timestamp,
+    timestamp: timestampDate(timestamp),
     peer: peerFromProtobuf(peer),
     metadata: auditLogMetadataFromProtobuf(metadata),
     method,
@@ -232,14 +245,14 @@ export function decisionLogEntryFromProtobuf({
     method,
     oversized,
     policySource,
-  } = entry.decisionLogEntry;
+  } = entry.value;
 
   requireField("DecisionLogEntry.timestamp", timestamp);
   requireField("DecisionLogEntry.peer", peer);
 
   return {
     callId,
-    timestamp,
+    timestamp: timestampDate(timestamp),
     peer: peerFromProtobuf(peer),
     metadata: auditLogMetadataFromProtobuf(metadata),
     auditTrail: auditTrailFromProtobuf(auditTrail),
@@ -272,8 +285,9 @@ function auditLogMetadataFromProtobuf(
 }
 
 function auditTrailFromProtobuf(
-  { effectivePolicies }: AuditTrailProtobuf = { effectivePolicies: {} },
+  auditTrail: AuditTrailProtobuf | undefined,
 ): AuditTrail {
+  const { effectivePolicies = {} } = auditTrail ?? {};
   return {
     effectivePolicies: Object.fromEntries(
       Object.entries(effectivePolicies).map(([policyId, sourceAttributes]) => [
@@ -288,13 +302,12 @@ function policySourceFromProtobuf({
   source,
 }: PolicySourceProtobuf): PolicySource {
   return transformOneOf("PolicySource.source", source, {
-    blob: ({ blob }) => policySourceBlobFromProtobuf(blob),
-    database: ({ database }) => policySourceDatabaseFromProtobuf(database),
-    disk: ({ disk }) => policySourceDiskFromProtobuf(disk),
-    embeddedPdp: ({ embeddedPdp }) =>
-      policySourceEmbeddedPDPFromProtobuf(embeddedPdp),
-    git: ({ git }) => policySourceGitFromProtobuf(git),
-    hub: ({ hub }) => policySourceHubFromProtobuf(hub),
+    blob: policySourceBlobFromProtobuf,
+    database: policySourceDatabaseFromProtobuf,
+    disk: policySourceDiskFromProtobuf,
+    embeddedPdp: policySourceEmbeddedPDPFromProtobuf,
+    git: policySourceGitFromProtobuf,
+    hub: policySourceHubFromProtobuf,
   });
 }
 
@@ -319,10 +332,10 @@ function policySourceDatabaseFromProtobuf({
       PolicySource_Database_Driver,
       driver,
       {
-        [PolicySource_Database_Driver.DRIVER_UNSPECIFIED]: unexpected,
-        [PolicySource_Database_Driver.DRIVER_MYSQL]: DatabaseDriver.MYSQL,
-        [PolicySource_Database_Driver.DRIVER_POSTGRES]: DatabaseDriver.POSTGRES,
-        [PolicySource_Database_Driver.DRIVER_SQLITE3]: DatabaseDriver.SQLITE3,
+        [PolicySource_Database_Driver.UNSPECIFIED]: unexpected,
+        [PolicySource_Database_Driver.MYSQL]: DatabaseDriver.MYSQL,
+        [PolicySource_Database_Driver.POSTGRES]: DatabaseDriver.POSTGRES,
+        [PolicySource_Database_Driver.SQLITE3]: DatabaseDriver.SQLITE3,
       },
     ),
   };
@@ -346,7 +359,7 @@ function policySourceEmbeddedPDPFromProtobuf({
     kind: "embeddedPDP",
     url,
     commit: commitHash,
-    builtAt,
+    builtAt: builtAt && timestampDate(builtAt),
   };
 }
 
@@ -381,13 +394,10 @@ function policySourceHubSourceFromProtobuf(
   source: PolicySource_Hub["source"],
 ): OmitPolicySourceHubBase<PolicySourceHub> {
   return transformOneOf("PolicySource.Hub.source", source, {
-    label: ({ label }) => policySourceHubLabelFromProtobuf(label),
-    deploymentId: ({ deploymentId }) =>
-      policySourceHubDeploymentFromProtobuf(deploymentId),
-    playgroundId: ({ playgroundId }) =>
-      policySourceHubPlaygroundFromProtobuf(playgroundId),
-    localBundle: ({ localBundle }) =>
-      policySourceHubLocalBundleFromProtobuf(localBundle),
+    label: policySourceHubLabelFromProtobuf,
+    deploymentId: policySourceHubDeploymentFromProtobuf,
+    playgroundId: policySourceHubPlaygroundFromProtobuf,
+    localBundle: policySourceHubLocalBundleFromProtobuf,
   });
 }
 
@@ -425,11 +435,8 @@ function decisionLogEntryMethodFromProtobuf(
   method: DecisionLogEntryProtobuf["method"],
 ): DecisionLogEntryMethod {
   return transformOneOf("DecisionLogEntry.method", method, {
-    checkResources: ({ checkResources }) =>
-      decisionLogEntryCheckResourcesFromProtobuf(checkResources),
-
-    planResources: ({ planResources }) =>
-      decisionLogEntryPlanResourcesFromProtobuf(planResources),
+    checkResources: decisionLogEntryCheckResourcesFromProtobuf,
+    planResources: decisionLogEntryPlanResourcesFromProtobuf,
   });
 }
 
@@ -476,7 +483,7 @@ function principalFromProtobuf({
   return {
     id,
     roles,
-    attr,
+    attr: valuesFromProtobuf(attr),
     policyVersion,
     scope,
   };
@@ -492,14 +499,32 @@ function resourceFromProtobuf({
   return {
     kind,
     id,
-    attr,
+    attr: valuesFromProtobuf(attr),
     policyVersion,
     scope,
   };
 }
 
 function decodedAuxDataFromProtobuf({ jwt }: AuxDataProtobuf): DecodedAuxData {
-  return { jwt };
+  return {
+    jwt: valuesFromProtobuf(jwt),
+  };
+}
+
+/** @internal */
+export function valuesFromProtobuf(
+  values: Record<string, ValueProtobuf>,
+): Record<string, Value> {
+  return Object.fromEntries(
+    Object.entries(values).map(([key, value]) => [
+      key,
+      valueFromProtobuf(value),
+    ]),
+  );
+}
+
+function valueFromProtobuf(value: ValueProtobuf): Value {
+  return toJson(ValueSchema, value);
 }
 
 /** @internal */
@@ -582,7 +607,7 @@ function resourceQueryFromProtobuf({
 }: PlanResourcesInput_Resource): Required<Omit<ResourceQuery, "attributes">> {
   return {
     kind,
-    attr,
+    attr: valuesFromProtobuf(attr),
     policyVersion,
     scope,
   };
@@ -661,12 +686,57 @@ function checkResourcesResultFromProtobuf({
   requireField("CheckResourcesResponse.ResultEntry.resource", resource);
 
   return new CheckResourcesResult({
-    resource,
+    resource: checkResourcesResultResourceFromProtobuf(resource),
     actions: actionsFromProtobuf(actions),
     validationErrors: validationErrors.map(validationErrorFromProtobuf),
-    metadata: meta,
+    metadata: meta && checkResourcesResultMetadataFromProtobuf(meta),
     outputs: outputs.map(outputResultFromProtobuf),
   });
+}
+
+function checkResourcesResultResourceFromProtobuf({
+  kind,
+  id,
+  policyVersion,
+  scope,
+}: CheckResourcesResponse_ResultEntry_Resource): CheckResourcesResultResource {
+  return {
+    kind,
+    id,
+    policyVersion,
+    scope,
+  };
+}
+
+function checkResourcesResultMetadataFromProtobuf({
+  actions,
+  effectiveDerivedRoles,
+}: CheckResourcesResponse_ResultEntry_Meta): CheckResourcesResultMetadata {
+  return {
+    actions: checkResourcesResultMetadataActionsFromProtobuf(actions),
+    effectiveDerivedRoles,
+  };
+}
+
+function checkResourcesResultMetadataActionsFromProtobuf(
+  actions: Record<string, CheckResourcesResponse_ResultEntry_Meta_EffectMeta>,
+): Record<string, CheckResourcesResultMetadataEffect> {
+  return Object.fromEntries(
+    Object.entries(actions).map(([action, effect]) => [
+      action,
+      checkResourcesResultMetadataEffectFromProtobuf(effect),
+    ]),
+  );
+}
+
+function checkResourcesResultMetadataEffectFromProtobuf({
+  matchedPolicy,
+  matchedScope,
+}: CheckResourcesResponse_ResultEntry_Meta_EffectMeta): CheckResourcesResultMetadataEffect {
+  return {
+    matchedPolicy,
+    matchedScope,
+  };
 }
 
 function actionsFromProtobuf(
@@ -681,7 +751,7 @@ function actionsFromProtobuf(
 }
 
 function effectFromProtobuf(effect: EffectProtobuf): Effect {
-  return effect === EffectProtobuf.EFFECT_ALLOW ? Effect.ALLOW : Effect.DENY;
+  return effect === EffectProtobuf.ALLOW ? Effect.ALLOW : Effect.DENY;
 }
 
 function validationErrorFromProtobuf({
@@ -704,10 +774,9 @@ function validationErrorSourceFromProtobuf(
     ValidationError_Source,
     source,
     {
-      [ValidationError_Source.SOURCE_UNSPECIFIED]: unexpected,
-      [ValidationError_Source.SOURCE_PRINCIPAL]:
-        ValidationErrorSource.PRINCIPAL,
-      [ValidationError_Source.SOURCE_RESOURCE]: ValidationErrorSource.RESOURCE,
+      [ValidationError_Source.UNSPECIFIED]: unexpected,
+      [ValidationError_Source.PRINCIPAL]: ValidationErrorSource.PRINCIPAL,
+      [ValidationError_Source.RESOURCE]: ValidationErrorSource.RESOURCE,
     },
   );
 }
@@ -715,7 +784,7 @@ function validationErrorSourceFromProtobuf(
 function outputResultFromProtobuf({ src, val }: OutputEntry): OutputResult {
   return {
     source: src,
-    value: val as Value | undefined,
+    value: val && valueFromProtobuf(val),
   };
 }
 
@@ -792,9 +861,13 @@ function policyMetadataFromProtobuf({
 }
 
 function sourceAttributesFromProtobuf(
-  { attributes }: SourceAttributesProtobuf = { attributes: {} },
+  sourceAttributes: SourceAttributesProtobuf | undefined,
 ): SourceAttributes {
-  return attributes;
+  if (!sourceAttributes) {
+    return {};
+  }
+
+  return valuesFromProtobuf(sourceAttributes.attributes);
 }
 
 type OmitPolicyBase<T extends Policy> = OmitFromEach<T, keyof PolicyBase>;
@@ -803,21 +876,12 @@ function policyTypeFromProtobuf(
   policyType: PolicyProtobuf["policyType"],
 ): OmitPolicyBase<Policy> {
   return transformOneOf("Policy.policyType", policyType, {
-    derivedRoles: ({ derivedRoles }) => derivedRolesFromProtobuf(derivedRoles),
-
-    exportConstants: ({ exportConstants }) =>
-      exportConstantsFromProtobuf(exportConstants),
-
-    exportVariables: ({ exportVariables }) =>
-      exportVariablesFromProtobuf(exportVariables),
-
-    principalPolicy: ({ principalPolicy }) =>
-      principalPolicyFromProtobuf(principalPolicy),
-
-    resourcePolicy: ({ resourcePolicy }) =>
-      resourcePolicyFromProtobuf(resourcePolicy),
-
-    rolePolicy: ({ rolePolicy }) => rolePolicyFromProtobuf(rolePolicy),
+    derivedRoles: derivedRolesFromProtobuf,
+    exportConstants: exportConstantsFromProtobuf,
+    exportVariables: exportVariablesFromProtobuf,
+    principalPolicy: principalPolicyFromProtobuf,
+    resourcePolicy: resourcePolicyFromProtobuf,
+    rolePolicy: rolePolicyFromProtobuf,
   });
 }
 
@@ -851,15 +915,15 @@ function derivedRoleDefinitionFromProtobuf({
 
 function conditionFromProtobuf({ condition }: ConditionProtobuf): Condition {
   requireOneOf("Condition.condition", condition, "match");
-  return { match: matchFromProtobuf(condition.match) };
+  return { match: matchFromProtobuf(condition.value) };
 }
 
 function matchFromProtobuf({ op }: MatchProtobuf): Match {
   return transformOneOf("Match.op", op, {
-    all: ({ all }) => ({ all: matchesFromProtobuf(all) }),
-    any: ({ any }) => ({ any: matchesFromProtobuf(any) }),
-    none: ({ none }) => ({ none: matchesFromProtobuf(none) }),
-    expr: ({ expr }) => ({ expr }),
+    all: (all) => ({ all: matchesFromProtobuf(all) }),
+    any: (any) => ({ any: matchesFromProtobuf(any) }),
+    none: (none) => ({ none: matchesFromProtobuf(none) }),
+    expr: (expr) => ({ expr }),
   });
 }
 
@@ -873,7 +937,7 @@ function constantsFromProtobuf({
 }: ConstantsProtobuf): Constants {
   return {
     import: imports,
-    local,
+    local: valuesFromProtobuf(local),
   };
 }
 
@@ -884,7 +948,7 @@ function exportConstantsFromProtobuf({
   return {
     exportConstants: {
       name,
-      definitions,
+      definitions: valuesFromProtobuf(definitions),
     },
   };
 }
@@ -1029,7 +1093,7 @@ function rolePolicyFromProtobuf({
 
   return {
     rolePolicy: {
-      role: policyType.role,
+      role: policyType.value,
       parentRoles: parentRoles,
       scope,
       rules: rules.map(roleRuleFromProtobuf),
@@ -1055,10 +1119,10 @@ function scopePermissionsFromProtobuf(
     ScopePermissionsProtobuf,
     scopePermissions,
     {
-      [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_UNSPECIFIED]: undefined,
-      [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_OVERRIDE_PARENT]:
+      [ScopePermissionsProtobuf.UNSPECIFIED]: undefined,
+      [ScopePermissionsProtobuf.OVERRIDE_PARENT]:
         ScopePermissions.OVERRIDE_PARENT,
-      [ScopePermissionsProtobuf.SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS]:
+      [ScopePermissionsProtobuf.REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS]:
         ScopePermissions.REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS,
     },
   );
@@ -1143,10 +1207,10 @@ function inspectedAttributeKindFromProtobuf(
     InspectPoliciesResponse_Attribute_Kind,
     kind,
     {
-      [InspectPoliciesResponse_Attribute_Kind.KIND_UNSPECIFIED]: unexpected,
-      [InspectPoliciesResponse_Attribute_Kind.KIND_PRINCIPAL_ATTRIBUTE]:
+      [InspectPoliciesResponse_Attribute_Kind.UNSPECIFIED]: unexpected,
+      [InspectPoliciesResponse_Attribute_Kind.PRINCIPAL_ATTRIBUTE]:
         InspectedAttributeKind.PRINCIPAL,
-      [InspectPoliciesResponse_Attribute_Kind.KIND_RESOURCE_ATTRIBUTE]:
+      [InspectPoliciesResponse_Attribute_Kind.RESOURCE_ATTRIBUTE]:
         InspectedAttributeKind.RESOURCE,
     },
   );
@@ -1162,7 +1226,7 @@ function inspectedConstantFromProtobuf({
   return {
     kind: inspectedConstantKindFromProtobuf(kind),
     name,
-    value: value as Value,
+    value: value && valueFromProtobuf(value),
     source: source || undefined,
     used,
   };
@@ -1176,16 +1240,16 @@ function inspectedConstantKindFromProtobuf(
     InspectPoliciesResponse_Constant_Kind,
     kind,
     {
-      [InspectPoliciesResponse_Constant_Kind.KIND_UNSPECIFIED]: unexpected,
-      [InspectPoliciesResponse_Constant_Kind.KIND_EXPORTED]:
+      [InspectPoliciesResponse_Constant_Kind.UNSPECIFIED]: unexpected,
+      [InspectPoliciesResponse_Constant_Kind.EXPORTED]:
         InspectedConstantKind.EXPORTED,
-      [InspectPoliciesResponse_Constant_Kind.KIND_IMPORTED]:
+      [InspectPoliciesResponse_Constant_Kind.IMPORTED]:
         InspectedConstantKind.IMPORTED,
-      [InspectPoliciesResponse_Constant_Kind.KIND_LOCAL]:
+      [InspectPoliciesResponse_Constant_Kind.LOCAL]:
         InspectedConstantKind.LOCAL,
-      [InspectPoliciesResponse_Constant_Kind.KIND_UNDEFINED]:
+      [InspectPoliciesResponse_Constant_Kind.UNDEFINED]:
         InspectedConstantKind.UNDEFINED,
-      [InspectPoliciesResponse_Constant_Kind.KIND_UNKNOWN]:
+      [InspectPoliciesResponse_Constant_Kind.UNKNOWN]:
         InspectedConstantKind.UNKNOWN,
     },
   );
@@ -1211,12 +1275,12 @@ function inspectedDerivedRoleKindFromProtobuf(
     InspectPoliciesResponse_DerivedRole_Kind,
     kind,
     {
-      [InspectPoliciesResponse_DerivedRole_Kind.KIND_UNSPECIFIED]: unexpected,
-      [InspectPoliciesResponse_DerivedRole_Kind.KIND_EXPORTED]:
+      [InspectPoliciesResponse_DerivedRole_Kind.UNSPECIFIED]: unexpected,
+      [InspectPoliciesResponse_DerivedRole_Kind.EXPORTED]:
         InspectedDerivedRoleKind.EXPORTED,
-      [InspectPoliciesResponse_DerivedRole_Kind.KIND_IMPORTED]:
+      [InspectPoliciesResponse_DerivedRole_Kind.IMPORTED]:
         InspectedDerivedRoleKind.IMPORTED,
-      [InspectPoliciesResponse_DerivedRole_Kind.KIND_UNDEFINED]:
+      [InspectPoliciesResponse_DerivedRole_Kind.UNDEFINED]:
         InspectedDerivedRoleKind.UNDEFINED,
     },
   );
@@ -1246,16 +1310,16 @@ function inspectedVariableKindFromProtobuf(
     InspectPoliciesResponse_Variable_Kind,
     kind,
     {
-      [InspectPoliciesResponse_Variable_Kind.KIND_UNSPECIFIED]: unexpected,
-      [InspectPoliciesResponse_Variable_Kind.KIND_EXPORTED]:
+      [InspectPoliciesResponse_Variable_Kind.UNSPECIFIED]: unexpected,
+      [InspectPoliciesResponse_Variable_Kind.EXPORTED]:
         InspectedVariableKind.EXPORTED,
-      [InspectPoliciesResponse_Variable_Kind.KIND_IMPORTED]:
+      [InspectPoliciesResponse_Variable_Kind.IMPORTED]:
         InspectedVariableKind.IMPORTED,
-      [InspectPoliciesResponse_Variable_Kind.KIND_LOCAL]:
+      [InspectPoliciesResponse_Variable_Kind.LOCAL]:
         InspectedVariableKind.LOCAL,
-      [InspectPoliciesResponse_Variable_Kind.KIND_UNDEFINED]:
+      [InspectPoliciesResponse_Variable_Kind.UNDEFINED]:
         InspectedVariableKind.UNDEFINED,
-      [InspectPoliciesResponse_Variable_Kind.KIND_UNKNOWN]:
+      [InspectPoliciesResponse_Variable_Kind.UNKNOWN]:
         InspectedVariableKind.UNKNOWN,
     },
   );
@@ -1310,10 +1374,10 @@ function planKindFromProtobuf(kind: PlanResourcesFilter_Kind): PlanKind {
     PlanResourcesFilter_Kind,
     kind,
     {
-      [PlanResourcesFilter_Kind.KIND_UNSPECIFIED]: unexpected,
-      [PlanResourcesFilter_Kind.KIND_ALWAYS_ALLOWED]: PlanKind.ALWAYS_ALLOWED,
-      [PlanResourcesFilter_Kind.KIND_ALWAYS_DENIED]: PlanKind.ALWAYS_DENIED,
-      [PlanResourcesFilter_Kind.KIND_CONDITIONAL]: PlanKind.CONDITIONAL,
+      [PlanResourcesFilter_Kind.UNSPECIFIED]: unexpected,
+      [PlanResourcesFilter_Kind.ALWAYS_ALLOWED]: PlanKind.ALWAYS_ALLOWED,
+      [PlanResourcesFilter_Kind.ALWAYS_DENIED]: PlanKind.ALWAYS_DENIED,
+      [PlanResourcesFilter_Kind.CONDITIONAL]: PlanKind.CONDITIONAL,
     },
   );
 }
@@ -1322,13 +1386,13 @@ function planOperandFromProtobuf({
   node,
 }: PlanResourcesFilter_Expression_Operand): PlanExpressionOperand {
   return transformOneOf("PlanResourcesFilter.Expression.Operand.node", node, {
-    expression: ({ expression }) =>
+    expression: (expression) =>
       new PlanExpression(
         expression.operator,
         expression.operands.map(planOperandFromProtobuf),
       ),
-    value: ({ value }) => new PlanExpressionValue((value ?? null) as Value),
-    variable: ({ variable }) => new PlanExpressionVariable(variable),
+    value: (value) => new PlanExpressionValue(valueFromProtobuf(value)),
+    variable: (variable) => new PlanExpressionVariable(variable),
   });
 }
 
@@ -1341,6 +1405,18 @@ function planResourcesMetadataFromProtobuf({
     conditionString: filterDebug,
     matchedScope,
     matchedScopes,
+  };
+}
+
+export function serverInfoFromProtobuf({
+  buildDate,
+  commit,
+  version,
+}: ServerInfoResponse): ServerInfo {
+  return {
+    buildDate,
+    commit,
+    version,
   };
 }
 
@@ -1385,44 +1461,47 @@ export function translateEnum<
   throw new Error(`Unexpected ${descriptor}: wanted ${wanted}, got ${got}`);
 }
 
-function transformOneOf<OneOf extends { $case: string }, Result>(
+function transformOneOf<
+  OneOf extends { case: string | undefined; value?: unknown },
+  Result,
+>(
   descriptor: string,
-  oneOf: OneOf | undefined,
+  oneOf: OneOf,
   transforms: {
-    [Case in OneOf["$case"]]:
-      | ((oneOf: Extract<OneOf, { $case: Case }>) => Result)
+    [Case in Exclude<OneOf["case"], undefined>]:
+      | ((oneOf: Extract<OneOf, { case: Case }>["value"]) => Result)
       | Unexpected;
   },
 ): Result {
   requireField(descriptor, oneOf);
 
-  const transform = transforms[oneOf.$case as OneOf["$case"]] as
-    | ((oneOf: OneOf) => Result)
+  const transform = transforms[oneOf.case as OneOf["case"]] as
+    | ((value: OneOf["value"]) => Result)
     | Unexpected
     | undefined;
 
   if (!transform || isUnexpected(transform)) {
     throw new Error(
-      `Unexpected ${descriptor}: wanted ${Object.keys(transforms).join("|")}, got ${oneOf.$case}`,
+      `Unexpected ${descriptor}: wanted ${Object.keys(transforms).join("|")}, got ${oneOf.case}`,
     );
   }
 
-  return transform(oneOf);
+  return transform(oneOf.value);
 }
 
 function requireOneOf<
-  OneOf extends { $case: string },
-  Case extends OneOf["$case"],
+  OneOf extends { case: string | undefined },
+  Case extends OneOf["case"],
 >(
   descriptor: string,
-  oneOf: OneOf | undefined,
+  oneOf: OneOf,
   $case: Case,
-): asserts oneOf is Extract<OneOf, { $case: Case }> {
+): asserts oneOf is Extract<OneOf, { case: Case }> {
   requireField(descriptor, oneOf);
 
-  if (oneOf.$case !== $case) {
+  if (oneOf.case !== $case) {
     throw new Error(
-      `Unexpected ${descriptor}: wanted ${$case}, got ${oneOf.$case}`,
+      `Unexpected ${descriptor}: wanted ${$case}, got ${oneOf.case}`,
     );
   }
 }

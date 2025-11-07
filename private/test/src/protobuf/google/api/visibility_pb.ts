@@ -74,16 +74,13 @@ export type VisibilityRule = Message<"google.api.VisibilityRule"> & {
   restriction: string;
 };
 
-export type VisibilityRuleValid = VisibilityRule;
-
 /**
  * Describes the message google.api.VisibilityRule.
  * Use `create(VisibilityRuleSchema)` to create a new message.
  */
-export const VisibilityRuleSchema: GenMessage<
-  VisibilityRule,
-  { validType: VisibilityRuleValid }
-> = /*@__PURE__*/ messageDesc(file_google_api_visibility, 0);
+export const VisibilityRuleSchema: GenMessage<VisibilityRule> =
+  /*@__PURE__*/
+  messageDesc(file_google_api_visibility, 0);
 
 /**
  * See `VisibilityRule`.

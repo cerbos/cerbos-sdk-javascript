@@ -1,0 +1,19 @@
+version: v2
+
+clean: true
+
+inputs:
+  - directory: proto
+    types:
+      - cerbos.cloud.epdp.v1.Metadata
+      - cerbos.engine.v1.Config
+      - cerbos.svc.v1.CerbosAdminService
+      - cerbos.svc.v1.CerbosService
+      - grpc.health.v1.Health
+
+plugins:
+  - local: node_modules/.bin/protoc-gen-es
+    out: packages/api/src/protobuf
+    opt:
+      - target=ts
+      - valid_types=protovalidate_required

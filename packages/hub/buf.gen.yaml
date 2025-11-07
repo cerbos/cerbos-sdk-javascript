@@ -1,5 +1,7 @@
 version: v2
 
+clean: true
+
 inputs:
   - directory: proto
     types:
@@ -14,7 +16,6 @@ inputs:
 plugins:
   - local: node_modules/.bin/protoc-gen-es
     out: packages/hub/src/protobuf
-    include_imports: true
     opt:
       - target=ts
       - valid_types=protovalidate_required

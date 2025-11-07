@@ -14,24 +14,6 @@ export enum Ignore {
   IGNORE_ALWAYS = 3,
 }
 
-export function ignoreFromJSON(object: any): Ignore {
-  switch (object) {
-    case 0:
-    case "IGNORE_UNSPECIFIED":
-      return Ignore.IGNORE_UNSPECIFIED;
-    case 1:
-    case "IGNORE_IF_ZERO_VALUE":
-      return Ignore.IGNORE_IF_ZERO_VALUE;
-    case 3:
-    case "IGNORE_ALWAYS":
-      return Ignore.IGNORE_ALWAYS;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum Ignore",
-      );
-  }
-}
-
 export function ignoreToJSON(object: Ignore): string {
   switch (object) {
     case Ignore.IGNORE_UNSPECIFIED:
@@ -51,24 +33,6 @@ export enum KnownRegex {
   KNOWN_REGEX_UNSPECIFIED = 0,
   KNOWN_REGEX_HTTP_HEADER_NAME = 1,
   KNOWN_REGEX_HTTP_HEADER_VALUE = 2,
-}
-
-export function knownRegexFromJSON(object: any): KnownRegex {
-  switch (object) {
-    case 0:
-    case "KNOWN_REGEX_UNSPECIFIED":
-      return KnownRegex.KNOWN_REGEX_UNSPECIFIED;
-    case 1:
-    case "KNOWN_REGEX_HTTP_HEADER_NAME":
-      return KnownRegex.KNOWN_REGEX_HTTP_HEADER_NAME;
-    case 2:
-    case "KNOWN_REGEX_HTTP_HEADER_VALUE":
-      return KnownRegex.KNOWN_REGEX_HTTP_HEADER_VALUE;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum KnownRegex",
-      );
-  }
 }
 
 export function knownRegexToJSON(object: KnownRegex): string {
@@ -187,18 +151,18 @@ export interface Int32Rules {
 }
 
 export interface Int64Rules {
-  const?: string | undefined;
+  const?: bigint | undefined;
   lessThan?:
-    | { $case: "lt"; lt: string }
-    | { $case: "lte"; lte: string }
+    | { $case: "lt"; lt: bigint }
+    | { $case: "lte"; lte: bigint }
     | undefined;
   greaterThan?:
-    | { $case: "gt"; gt: string }
-    | { $case: "gte"; gte: string }
+    | { $case: "gt"; gt: bigint }
+    | { $case: "gte"; gte: bigint }
     | undefined;
-  in: string[];
-  notIn: string[];
-  example: string[];
+  in: bigint[];
+  notIn: bigint[];
+  example: bigint[];
 }
 
 export interface UInt32Rules {
@@ -217,18 +181,18 @@ export interface UInt32Rules {
 }
 
 export interface UInt64Rules {
-  const?: string | undefined;
+  const?: bigint | undefined;
   lessThan?:
-    | { $case: "lt"; lt: string }
-    | { $case: "lte"; lte: string }
+    | { $case: "lt"; lt: bigint }
+    | { $case: "lte"; lte: bigint }
     | undefined;
   greaterThan?:
-    | { $case: "gt"; gt: string }
-    | { $case: "gte"; gte: string }
+    | { $case: "gt"; gt: bigint }
+    | { $case: "gte"; gte: bigint }
     | undefined;
-  in: string[];
-  notIn: string[];
-  example: string[];
+  in: bigint[];
+  notIn: bigint[];
+  example: bigint[];
 }
 
 export interface SInt32Rules {
@@ -247,18 +211,18 @@ export interface SInt32Rules {
 }
 
 export interface SInt64Rules {
-  const?: string | undefined;
+  const?: bigint | undefined;
   lessThan?:
-    | { $case: "lt"; lt: string }
-    | { $case: "lte"; lte: string }
+    | { $case: "lt"; lt: bigint }
+    | { $case: "lte"; lte: bigint }
     | undefined;
   greaterThan?:
-    | { $case: "gt"; gt: string }
-    | { $case: "gte"; gte: string }
+    | { $case: "gt"; gt: bigint }
+    | { $case: "gte"; gte: bigint }
     | undefined;
-  in: string[];
-  notIn: string[];
-  example: string[];
+  in: bigint[];
+  notIn: bigint[];
+  example: bigint[];
 }
 
 export interface Fixed32Rules {
@@ -277,18 +241,18 @@ export interface Fixed32Rules {
 }
 
 export interface Fixed64Rules {
-  const?: string | undefined;
+  const?: bigint | undefined;
   lessThan?:
-    | { $case: "lt"; lt: string }
-    | { $case: "lte"; lte: string }
+    | { $case: "lt"; lt: bigint }
+    | { $case: "lte"; lte: bigint }
     | undefined;
   greaterThan?:
-    | { $case: "gt"; gt: string }
-    | { $case: "gte"; gte: string }
+    | { $case: "gt"; gt: bigint }
+    | { $case: "gte"; gte: bigint }
     | undefined;
-  in: string[];
-  notIn: string[];
-  example: string[];
+  in: bigint[];
+  notIn: bigint[];
+  example: bigint[];
 }
 
 export interface SFixed32Rules {
@@ -307,18 +271,18 @@ export interface SFixed32Rules {
 }
 
 export interface SFixed64Rules {
-  const?: string | undefined;
+  const?: bigint | undefined;
   lessThan?:
-    | { $case: "lt"; lt: string }
-    | { $case: "lte"; lte: string }
+    | { $case: "lt"; lt: bigint }
+    | { $case: "lte"; lte: bigint }
     | undefined;
   greaterThan?:
-    | { $case: "gt"; gt: string }
-    | { $case: "gte"; gte: string }
+    | { $case: "gt"; gt: bigint }
+    | { $case: "gte"; gte: bigint }
     | undefined;
-  in: string[];
-  notIn: string[];
-  example: string[];
+  in: bigint[];
+  notIn: bigint[];
+  example: bigint[];
 }
 
 export interface BoolRules {
@@ -328,12 +292,12 @@ export interface BoolRules {
 
 export interface StringRules {
   const?: string | undefined;
-  len?: string | undefined;
-  minLen?: string | undefined;
-  maxLen?: string | undefined;
-  lenBytes?: string | undefined;
-  minBytes?: string | undefined;
-  maxBytes?: string | undefined;
+  len?: bigint | undefined;
+  minLen?: bigint | undefined;
+  maxLen?: bigint | undefined;
+  lenBytes?: bigint | undefined;
+  minBytes?: bigint | undefined;
+  maxBytes?: bigint | undefined;
   pattern?: string | undefined;
   prefix?: string | undefined;
   suffix?: string | undefined;
@@ -367,9 +331,9 @@ export interface StringRules {
 
 export interface BytesRules {
   const?: Uint8Array | undefined;
-  len?: string | undefined;
-  minLen?: string | undefined;
-  maxLen?: string | undefined;
+  len?: bigint | undefined;
+  minLen?: bigint | undefined;
+  maxLen?: bigint | undefined;
   pattern?: string | undefined;
   prefix?: Uint8Array | undefined;
   suffix?: Uint8Array | undefined;
@@ -393,15 +357,15 @@ export interface EnumRules {
 }
 
 export interface RepeatedRules {
-  minItems?: string | undefined;
-  maxItems?: string | undefined;
+  minItems?: bigint | undefined;
+  maxItems?: bigint | undefined;
   unique?: boolean | undefined;
   items?: FieldRules | undefined;
 }
 
 export interface MapRules {
-  minPairs?: string | undefined;
-  maxPairs?: string | undefined;
+  minPairs?: bigint | undefined;
+  maxPairs?: bigint | undefined;
   keys?: FieldRules | undefined;
   values?: FieldRules | undefined;
 }
@@ -504,16 +468,6 @@ export const Rule: MessageFns<Rule> = {
     return message;
   },
 
-  fromJSON(object: any): Rule {
-    return {
-      id: isSet(object.id) ? globalThis.String(object.id) : "",
-      message: isSet(object.message) ? globalThis.String(object.message) : "",
-      expression: isSet(object.expression)
-        ? globalThis.String(object.expression)
-        : "",
-    };
-  },
-
   toJSON(message: Rule): unknown {
     const obj: any = {};
     if (message.id !== undefined && message.id !== "") {
@@ -580,17 +534,6 @@ export const MessageRules: MessageFns<MessageRules> = {
     return message;
   },
 
-  fromJSON(object: any): MessageRules {
-    return {
-      cel: globalThis.Array.isArray(object?.cel)
-        ? object.cel.map((e: any) => Rule.fromJSON(e))
-        : [],
-      oneof: globalThis.Array.isArray(object?.oneof)
-        ? object.oneof.map((e: any) => MessageOneofRule.fromJSON(e))
-        : [],
-    };
-  },
-
   toJSON(message: MessageRules): unknown {
     const obj: any = {};
     if (message.cel?.length) {
@@ -654,17 +597,6 @@ export const MessageOneofRule: MessageFns<MessageOneofRule> = {
     return message;
   },
 
-  fromJSON(object: any): MessageOneofRule {
-    return {
-      fields: globalThis.Array.isArray(object?.fields)
-        ? object.fields.map((e: any) => globalThis.String(e))
-        : [],
-      required: isSet(object.required)
-        ? globalThis.Boolean(object.required)
-        : false,
-    };
-  },
-
   toJSON(message: MessageOneofRule): unknown {
     const obj: any = {};
     if (message.fields?.length) {
@@ -715,14 +647,6 @@ export const OneofRules: MessageFns<OneofRules> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): OneofRules {
-    return {
-      required: isSet(object.required)
-        ? globalThis.Boolean(object.required)
-        : false,
-    };
   },
 
   toJSON(message: OneofRules): unknown {
@@ -1131,132 +1055,6 @@ export const FieldRules: MessageFns<FieldRules> = {
     return message;
   },
 
-  fromJSON(object: any): FieldRules {
-    return {
-      cel: globalThis.Array.isArray(object?.cel)
-        ? object.cel.map((e: any) => Rule.fromJSON(e))
-        : [],
-      required: isSet(object.required)
-        ? globalThis.Boolean(object.required)
-        : false,
-      ignore: isSet(object.ignore) ? ignoreFromJSON(object.ignore) : 0,
-      type: isSet(object.float)
-        ? { $case: "float", float: FloatRules.fromJSON(object.float) }
-        : isSet(object.double)
-          ? { $case: "double", double: DoubleRules.fromJSON(object.double) }
-          : isSet(object.int32)
-            ? { $case: "int32", int32: Int32Rules.fromJSON(object.int32) }
-            : isSet(object.int64)
-              ? { $case: "int64", int64: Int64Rules.fromJSON(object.int64) }
-              : isSet(object.uint32)
-                ? {
-                    $case: "uint32",
-                    uint32: UInt32Rules.fromJSON(object.uint32),
-                  }
-                : isSet(object.uint64)
-                  ? {
-                      $case: "uint64",
-                      uint64: UInt64Rules.fromJSON(object.uint64),
-                    }
-                  : isSet(object.sint32)
-                    ? {
-                        $case: "sint32",
-                        sint32: SInt32Rules.fromJSON(object.sint32),
-                      }
-                    : isSet(object.sint64)
-                      ? {
-                          $case: "sint64",
-                          sint64: SInt64Rules.fromJSON(object.sint64),
-                        }
-                      : isSet(object.fixed32)
-                        ? {
-                            $case: "fixed32",
-                            fixed32: Fixed32Rules.fromJSON(object.fixed32),
-                          }
-                        : isSet(object.fixed64)
-                          ? {
-                              $case: "fixed64",
-                              fixed64: Fixed64Rules.fromJSON(object.fixed64),
-                            }
-                          : isSet(object.sfixed32)
-                            ? {
-                                $case: "sfixed32",
-                                sfixed32: SFixed32Rules.fromJSON(
-                                  object.sfixed32,
-                                ),
-                              }
-                            : isSet(object.sfixed64)
-                              ? {
-                                  $case: "sfixed64",
-                                  sfixed64: SFixed64Rules.fromJSON(
-                                    object.sfixed64,
-                                  ),
-                                }
-                              : isSet(object.bool)
-                                ? {
-                                    $case: "bool",
-                                    bool: BoolRules.fromJSON(object.bool),
-                                  }
-                                : isSet(object.string)
-                                  ? {
-                                      $case: "string",
-                                      string: StringRules.fromJSON(
-                                        object.string,
-                                      ),
-                                    }
-                                  : isSet(object.bytes)
-                                    ? {
-                                        $case: "bytes",
-                                        bytes: BytesRules.fromJSON(
-                                          object.bytes,
-                                        ),
-                                      }
-                                    : isSet(object.enum)
-                                      ? {
-                                          $case: "enum",
-                                          enum: EnumRules.fromJSON(object.enum),
-                                        }
-                                      : isSet(object.repeated)
-                                        ? {
-                                            $case: "repeated",
-                                            repeated: RepeatedRules.fromJSON(
-                                              object.repeated,
-                                            ),
-                                          }
-                                        : isSet(object.map)
-                                          ? {
-                                              $case: "map",
-                                              map: MapRules.fromJSON(
-                                                object.map,
-                                              ),
-                                            }
-                                          : isSet(object.any)
-                                            ? {
-                                                $case: "any",
-                                                any: AnyRules.fromJSON(
-                                                  object.any,
-                                                ),
-                                              }
-                                            : isSet(object.duration)
-                                              ? {
-                                                  $case: "duration",
-                                                  duration:
-                                                    DurationRules.fromJSON(
-                                                      object.duration,
-                                                    ),
-                                                }
-                                              : isSet(object.timestamp)
-                                                ? {
-                                                    $case: "timestamp",
-                                                    timestamp:
-                                                      TimestampRules.fromJSON(
-                                                        object.timestamp,
-                                                      ),
-                                                  }
-                                                : undefined,
-    };
-  },
-
   toJSON(message: FieldRules): unknown {
     const obj: any = {};
     if (message.cel?.length) {
@@ -1353,14 +1151,6 @@ export const PredefinedRules: MessageFns<PredefinedRules> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): PredefinedRules {
-    return {
-      cel: globalThis.Array.isArray(object?.cel)
-        ? object.cel.map((e: any) => Rule.fromJSON(e))
-        : [],
-    };
   },
 
   toJSON(message: PredefinedRules): unknown {
@@ -1540,32 +1330,6 @@ export const FloatRules: MessageFns<FloatRules> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): FloatRules {
-    return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.Number(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.Number(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.Number(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.Number(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.Number(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.Number(e))
-        : [],
-      finite: isSet(object.finite) ? globalThis.Boolean(object.finite) : false,
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.Number(e))
-        : [],
-    };
   },
 
   toJSON(message: FloatRules): unknown {
@@ -1769,32 +1533,6 @@ export const DoubleRules: MessageFns<DoubleRules> = {
     return message;
   },
 
-  fromJSON(object: any): DoubleRules {
-    return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.Number(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.Number(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.Number(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.Number(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.Number(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.Number(e))
-        : [],
-      finite: isSet(object.finite) ? globalThis.Boolean(object.finite) : false,
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.Number(e))
-        : [],
-    };
-  },
-
   toJSON(message: DoubleRules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const !== 0) {
@@ -1984,31 +1722,6 @@ export const Int32Rules: MessageFns<Int32Rules> = {
     return message;
   },
 
-  fromJSON(object: any): Int32Rules {
-    return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.Number(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.Number(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.Number(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.Number(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.Number(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.Number(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.Number(e))
-        : [],
-    };
-  },
-
   toJSON(message: Int32Rules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const !== 0) {
@@ -2039,7 +1752,7 @@ export const Int32Rules: MessageFns<Int32Rules> = {
 
 function createBaseInt64Rules(): Int64Rules {
   return {
-    const: "0",
+    const: 0n,
     lessThan: undefined,
     greaterThan: undefined,
     in: [],
@@ -2053,32 +1766,76 @@ export const Int64Rules: MessageFns<Int64Rules> = {
     message: Int64Rules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.const !== undefined && message.const !== "0") {
+    if (message.const !== undefined && message.const !== 0n) {
+      if (BigInt.asIntN(64, message.const) !== message.const) {
+        throw new globalThis.Error(
+          "value provided for field message.const of type int64 too large",
+        );
+      }
       writer.uint32(8).int64(message.const);
     }
     switch (message.lessThan?.$case) {
       case "lt":
+        if (BigInt.asIntN(64, message.lessThan.lt) !== message.lessThan.lt) {
+          throw new globalThis.Error(
+            "value provided for field message.lessThan.lt of type int64 too large",
+          );
+        }
         writer.uint32(16).int64(message.lessThan.lt);
         break;
       case "lte":
+        if (BigInt.asIntN(64, message.lessThan.lte) !== message.lessThan.lte) {
+          throw new globalThis.Error(
+            "value provided for field message.lessThan.lte of type int64 too large",
+          );
+        }
         writer.uint32(24).int64(message.lessThan.lte);
         break;
     }
     switch (message.greaterThan?.$case) {
       case "gt":
+        if (
+          BigInt.asIntN(64, message.greaterThan.gt) !== message.greaterThan.gt
+        ) {
+          throw new globalThis.Error(
+            "value provided for field message.greaterThan.gt of type int64 too large",
+          );
+        }
         writer.uint32(32).int64(message.greaterThan.gt);
         break;
       case "gte":
+        if (
+          BigInt.asIntN(64, message.greaterThan.gte) !== message.greaterThan.gte
+        ) {
+          throw new globalThis.Error(
+            "value provided for field message.greaterThan.gte of type int64 too large",
+          );
+        }
         writer.uint32(40).int64(message.greaterThan.gte);
         break;
     }
     for (const v of message.in) {
+      if (BigInt.asIntN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type int64 too large",
+        );
+      }
       writer.uint32(48).int64(v!);
     }
     for (const v of message.notIn) {
+      if (BigInt.asIntN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type int64 too large",
+        );
+      }
       writer.uint32(56).int64(v!);
     }
     for (const v of message.example) {
+      if (BigInt.asIntN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type int64 too large",
+        );
+      }
       writer.uint32(72).int64(v!);
     }
     return writer;
@@ -2097,7 +1854,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
             break;
           }
 
-          message.const = reader.int64().toString();
+          message.const = reader.int64() as bigint;
           continue;
         }
         case 2: {
@@ -2105,7 +1862,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
             break;
           }
 
-          message.lessThan = { $case: "lt", lt: reader.int64().toString() };
+          message.lessThan = { $case: "lt", lt: reader.int64() as bigint };
           continue;
         }
         case 3: {
@@ -2113,7 +1870,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
             break;
           }
 
-          message.lessThan = { $case: "lte", lte: reader.int64().toString() };
+          message.lessThan = { $case: "lte", lte: reader.int64() as bigint };
           continue;
         }
         case 4: {
@@ -2121,7 +1878,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
             break;
           }
 
-          message.greaterThan = { $case: "gt", gt: reader.int64().toString() };
+          message.greaterThan = { $case: "gt", gt: reader.int64() as bigint };
           continue;
         }
         case 5: {
@@ -2129,15 +1886,12 @@ export const Int64Rules: MessageFns<Int64Rules> = {
             break;
           }
 
-          message.greaterThan = {
-            $case: "gte",
-            gte: reader.int64().toString(),
-          };
+          message.greaterThan = { $case: "gte", gte: reader.int64() as bigint };
           continue;
         }
         case 6: {
           if (tag === 48) {
-            message.in.push(reader.int64().toString());
+            message.in.push(reader.int64() as bigint);
 
             continue;
           }
@@ -2145,7 +1899,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
           if (tag === 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(reader.int64().toString());
+              message.in.push(reader.int64() as bigint);
             }
 
             continue;
@@ -2155,7 +1909,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
         }
         case 7: {
           if (tag === 56) {
-            message.notIn.push(reader.int64().toString());
+            message.notIn.push(reader.int64() as bigint);
 
             continue;
           }
@@ -2163,7 +1917,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
           if (tag === 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(reader.int64().toString());
+              message.notIn.push(reader.int64() as bigint);
             }
 
             continue;
@@ -2173,7 +1927,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
         }
         case 9: {
           if (tag === 72) {
-            message.example.push(reader.int64().toString());
+            message.example.push(reader.int64() as bigint);
 
             continue;
           }
@@ -2181,7 +1935,7 @@ export const Int64Rules: MessageFns<Int64Rules> = {
           if (tag === 74) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.example.push(reader.int64().toString());
+              message.example.push(reader.int64() as bigint);
             }
 
             continue;
@@ -2198,54 +1952,29 @@ export const Int64Rules: MessageFns<Int64Rules> = {
     return message;
   },
 
-  fromJSON(object: any): Int64Rules {
-    return {
-      const: isSet(object.const) ? globalThis.String(object.const) : "0",
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.String(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.String(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.String(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.String(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.String(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.String(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
   toJSON(message: Int64Rules): unknown {
     const obj: any = {};
-    if (message.const !== undefined && message.const !== "0") {
-      obj.const = message.const;
+    if (message.const !== undefined && message.const !== 0n) {
+      obj.const = message.const.toString();
     }
     if (message.lessThan?.$case === "lt") {
-      obj.lt = message.lessThan.lt;
+      obj.lt = message.lessThan.lt.toString();
     } else if (message.lessThan?.$case === "lte") {
-      obj.lte = message.lessThan.lte;
+      obj.lte = message.lessThan.lte.toString();
     }
     if (message.greaterThan?.$case === "gt") {
-      obj.gt = message.greaterThan.gt;
+      obj.gt = message.greaterThan.gt.toString();
     } else if (message.greaterThan?.$case === "gte") {
-      obj.gte = message.greaterThan.gte;
+      obj.gte = message.greaterThan.gte.toString();
     }
     if (message.in?.length) {
-      obj.in = message.in;
+      obj.in = message.in.map((e) => e.toString());
     }
     if (message.notIn?.length) {
-      obj.notIn = message.notIn;
+      obj.notIn = message.notIn.map((e) => e.toString());
     }
     if (message.example?.length) {
-      obj.example = message.example;
+      obj.example = message.example.map((e) => e.toString());
     }
     return obj;
   },
@@ -2409,31 +2138,6 @@ export const UInt32Rules: MessageFns<UInt32Rules> = {
     return message;
   },
 
-  fromJSON(object: any): UInt32Rules {
-    return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.Number(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.Number(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.Number(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.Number(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.Number(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.Number(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.Number(e))
-        : [],
-    };
-  },
-
   toJSON(message: UInt32Rules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const !== 0) {
@@ -2464,7 +2168,7 @@ export const UInt32Rules: MessageFns<UInt32Rules> = {
 
 function createBaseUInt64Rules(): UInt64Rules {
   return {
-    const: "0",
+    const: 0n,
     lessThan: undefined,
     greaterThan: undefined,
     in: [],
@@ -2478,32 +2182,77 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
     message: UInt64Rules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.const !== undefined && message.const !== "0") {
+    if (message.const !== undefined && message.const !== 0n) {
+      if (BigInt.asUintN(64, message.const) !== message.const) {
+        throw new globalThis.Error(
+          "value provided for field message.const of type uint64 too large",
+        );
+      }
       writer.uint32(8).uint64(message.const);
     }
     switch (message.lessThan?.$case) {
       case "lt":
+        if (BigInt.asUintN(64, message.lessThan.lt) !== message.lessThan.lt) {
+          throw new globalThis.Error(
+            "value provided for field message.lessThan.lt of type uint64 too large",
+          );
+        }
         writer.uint32(16).uint64(message.lessThan.lt);
         break;
       case "lte":
+        if (BigInt.asUintN(64, message.lessThan.lte) !== message.lessThan.lte) {
+          throw new globalThis.Error(
+            "value provided for field message.lessThan.lte of type uint64 too large",
+          );
+        }
         writer.uint32(24).uint64(message.lessThan.lte);
         break;
     }
     switch (message.greaterThan?.$case) {
       case "gt":
+        if (
+          BigInt.asUintN(64, message.greaterThan.gt) !== message.greaterThan.gt
+        ) {
+          throw new globalThis.Error(
+            "value provided for field message.greaterThan.gt of type uint64 too large",
+          );
+        }
         writer.uint32(32).uint64(message.greaterThan.gt);
         break;
       case "gte":
+        if (
+          BigInt.asUintN(64, message.greaterThan.gte) !==
+          message.greaterThan.gte
+        ) {
+          throw new globalThis.Error(
+            "value provided for field message.greaterThan.gte of type uint64 too large",
+          );
+        }
         writer.uint32(40).uint64(message.greaterThan.gte);
         break;
     }
     for (const v of message.in) {
+      if (BigInt.asUintN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type uint64 too large",
+        );
+      }
       writer.uint32(48).uint64(v!);
     }
     for (const v of message.notIn) {
+      if (BigInt.asUintN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type uint64 too large",
+        );
+      }
       writer.uint32(56).uint64(v!);
     }
     for (const v of message.example) {
+      if (BigInt.asUintN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type uint64 too large",
+        );
+      }
       writer.uint32(64).uint64(v!);
     }
     return writer;
@@ -2522,7 +2271,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
             break;
           }
 
-          message.const = reader.uint64().toString();
+          message.const = reader.uint64() as bigint;
           continue;
         }
         case 2: {
@@ -2530,7 +2279,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
             break;
           }
 
-          message.lessThan = { $case: "lt", lt: reader.uint64().toString() };
+          message.lessThan = { $case: "lt", lt: reader.uint64() as bigint };
           continue;
         }
         case 3: {
@@ -2538,7 +2287,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
             break;
           }
 
-          message.lessThan = { $case: "lte", lte: reader.uint64().toString() };
+          message.lessThan = { $case: "lte", lte: reader.uint64() as bigint };
           continue;
         }
         case 4: {
@@ -2546,7 +2295,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
             break;
           }
 
-          message.greaterThan = { $case: "gt", gt: reader.uint64().toString() };
+          message.greaterThan = { $case: "gt", gt: reader.uint64() as bigint };
           continue;
         }
         case 5: {
@@ -2556,13 +2305,13 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
 
           message.greaterThan = {
             $case: "gte",
-            gte: reader.uint64().toString(),
+            gte: reader.uint64() as bigint,
           };
           continue;
         }
         case 6: {
           if (tag === 48) {
-            message.in.push(reader.uint64().toString());
+            message.in.push(reader.uint64() as bigint);
 
             continue;
           }
@@ -2570,7 +2319,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
           if (tag === 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(reader.uint64().toString());
+              message.in.push(reader.uint64() as bigint);
             }
 
             continue;
@@ -2580,7 +2329,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
         }
         case 7: {
           if (tag === 56) {
-            message.notIn.push(reader.uint64().toString());
+            message.notIn.push(reader.uint64() as bigint);
 
             continue;
           }
@@ -2588,7 +2337,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
           if (tag === 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(reader.uint64().toString());
+              message.notIn.push(reader.uint64() as bigint);
             }
 
             continue;
@@ -2598,7 +2347,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
         }
         case 8: {
           if (tag === 64) {
-            message.example.push(reader.uint64().toString());
+            message.example.push(reader.uint64() as bigint);
 
             continue;
           }
@@ -2606,7 +2355,7 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
           if (tag === 66) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.example.push(reader.uint64().toString());
+              message.example.push(reader.uint64() as bigint);
             }
 
             continue;
@@ -2623,54 +2372,29 @@ export const UInt64Rules: MessageFns<UInt64Rules> = {
     return message;
   },
 
-  fromJSON(object: any): UInt64Rules {
-    return {
-      const: isSet(object.const) ? globalThis.String(object.const) : "0",
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.String(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.String(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.String(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.String(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.String(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.String(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
   toJSON(message: UInt64Rules): unknown {
     const obj: any = {};
-    if (message.const !== undefined && message.const !== "0") {
-      obj.const = message.const;
+    if (message.const !== undefined && message.const !== 0n) {
+      obj.const = message.const.toString();
     }
     if (message.lessThan?.$case === "lt") {
-      obj.lt = message.lessThan.lt;
+      obj.lt = message.lessThan.lt.toString();
     } else if (message.lessThan?.$case === "lte") {
-      obj.lte = message.lessThan.lte;
+      obj.lte = message.lessThan.lte.toString();
     }
     if (message.greaterThan?.$case === "gt") {
-      obj.gt = message.greaterThan.gt;
+      obj.gt = message.greaterThan.gt.toString();
     } else if (message.greaterThan?.$case === "gte") {
-      obj.gte = message.greaterThan.gte;
+      obj.gte = message.greaterThan.gte.toString();
     }
     if (message.in?.length) {
-      obj.in = message.in;
+      obj.in = message.in.map((e) => e.toString());
     }
     if (message.notIn?.length) {
-      obj.notIn = message.notIn;
+      obj.notIn = message.notIn.map((e) => e.toString());
     }
     if (message.example?.length) {
-      obj.example = message.example;
+      obj.example = message.example.map((e) => e.toString());
     }
     return obj;
   },
@@ -2834,31 +2558,6 @@ export const SInt32Rules: MessageFns<SInt32Rules> = {
     return message;
   },
 
-  fromJSON(object: any): SInt32Rules {
-    return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.Number(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.Number(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.Number(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.Number(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.Number(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.Number(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.Number(e))
-        : [],
-    };
-  },
-
   toJSON(message: SInt32Rules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const !== 0) {
@@ -2889,7 +2588,7 @@ export const SInt32Rules: MessageFns<SInt32Rules> = {
 
 function createBaseSInt64Rules(): SInt64Rules {
   return {
-    const: "0",
+    const: 0n,
     lessThan: undefined,
     greaterThan: undefined,
     in: [],
@@ -2903,32 +2602,76 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
     message: SInt64Rules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.const !== undefined && message.const !== "0") {
+    if (message.const !== undefined && message.const !== 0n) {
+      if (BigInt.asIntN(64, message.const) !== message.const) {
+        throw new globalThis.Error(
+          "value provided for field message.const of type sint64 too large",
+        );
+      }
       writer.uint32(8).sint64(message.const);
     }
     switch (message.lessThan?.$case) {
       case "lt":
+        if (BigInt.asIntN(64, message.lessThan.lt) !== message.lessThan.lt) {
+          throw new globalThis.Error(
+            "value provided for field message.lessThan.lt of type sint64 too large",
+          );
+        }
         writer.uint32(16).sint64(message.lessThan.lt);
         break;
       case "lte":
+        if (BigInt.asIntN(64, message.lessThan.lte) !== message.lessThan.lte) {
+          throw new globalThis.Error(
+            "value provided for field message.lessThan.lte of type sint64 too large",
+          );
+        }
         writer.uint32(24).sint64(message.lessThan.lte);
         break;
     }
     switch (message.greaterThan?.$case) {
       case "gt":
+        if (
+          BigInt.asIntN(64, message.greaterThan.gt) !== message.greaterThan.gt
+        ) {
+          throw new globalThis.Error(
+            "value provided for field message.greaterThan.gt of type sint64 too large",
+          );
+        }
         writer.uint32(32).sint64(message.greaterThan.gt);
         break;
       case "gte":
+        if (
+          BigInt.asIntN(64, message.greaterThan.gte) !== message.greaterThan.gte
+        ) {
+          throw new globalThis.Error(
+            "value provided for field message.greaterThan.gte of type sint64 too large",
+          );
+        }
         writer.uint32(40).sint64(message.greaterThan.gte);
         break;
     }
     for (const v of message.in) {
+      if (BigInt.asIntN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type sint64 too large",
+        );
+      }
       writer.uint32(48).sint64(v!);
     }
     for (const v of message.notIn) {
+      if (BigInt.asIntN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type sint64 too large",
+        );
+      }
       writer.uint32(56).sint64(v!);
     }
     for (const v of message.example) {
+      if (BigInt.asIntN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type sint64 too large",
+        );
+      }
       writer.uint32(64).sint64(v!);
     }
     return writer;
@@ -2947,7 +2690,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
             break;
           }
 
-          message.const = reader.sint64().toString();
+          message.const = reader.sint64() as bigint;
           continue;
         }
         case 2: {
@@ -2955,7 +2698,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
             break;
           }
 
-          message.lessThan = { $case: "lt", lt: reader.sint64().toString() };
+          message.lessThan = { $case: "lt", lt: reader.sint64() as bigint };
           continue;
         }
         case 3: {
@@ -2963,7 +2706,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
             break;
           }
 
-          message.lessThan = { $case: "lte", lte: reader.sint64().toString() };
+          message.lessThan = { $case: "lte", lte: reader.sint64() as bigint };
           continue;
         }
         case 4: {
@@ -2971,7 +2714,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
             break;
           }
 
-          message.greaterThan = { $case: "gt", gt: reader.sint64().toString() };
+          message.greaterThan = { $case: "gt", gt: reader.sint64() as bigint };
           continue;
         }
         case 5: {
@@ -2981,13 +2724,13 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
 
           message.greaterThan = {
             $case: "gte",
-            gte: reader.sint64().toString(),
+            gte: reader.sint64() as bigint,
           };
           continue;
         }
         case 6: {
           if (tag === 48) {
-            message.in.push(reader.sint64().toString());
+            message.in.push(reader.sint64() as bigint);
 
             continue;
           }
@@ -2995,7 +2738,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
           if (tag === 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(reader.sint64().toString());
+              message.in.push(reader.sint64() as bigint);
             }
 
             continue;
@@ -3005,7 +2748,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
         }
         case 7: {
           if (tag === 56) {
-            message.notIn.push(reader.sint64().toString());
+            message.notIn.push(reader.sint64() as bigint);
 
             continue;
           }
@@ -3013,7 +2756,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
           if (tag === 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(reader.sint64().toString());
+              message.notIn.push(reader.sint64() as bigint);
             }
 
             continue;
@@ -3023,7 +2766,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
         }
         case 8: {
           if (tag === 64) {
-            message.example.push(reader.sint64().toString());
+            message.example.push(reader.sint64() as bigint);
 
             continue;
           }
@@ -3031,7 +2774,7 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
           if (tag === 66) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.example.push(reader.sint64().toString());
+              message.example.push(reader.sint64() as bigint);
             }
 
             continue;
@@ -3048,54 +2791,29 @@ export const SInt64Rules: MessageFns<SInt64Rules> = {
     return message;
   },
 
-  fromJSON(object: any): SInt64Rules {
-    return {
-      const: isSet(object.const) ? globalThis.String(object.const) : "0",
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.String(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.String(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.String(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.String(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.String(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.String(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
   toJSON(message: SInt64Rules): unknown {
     const obj: any = {};
-    if (message.const !== undefined && message.const !== "0") {
-      obj.const = message.const;
+    if (message.const !== undefined && message.const !== 0n) {
+      obj.const = message.const.toString();
     }
     if (message.lessThan?.$case === "lt") {
-      obj.lt = message.lessThan.lt;
+      obj.lt = message.lessThan.lt.toString();
     } else if (message.lessThan?.$case === "lte") {
-      obj.lte = message.lessThan.lte;
+      obj.lte = message.lessThan.lte.toString();
     }
     if (message.greaterThan?.$case === "gt") {
-      obj.gt = message.greaterThan.gt;
+      obj.gt = message.greaterThan.gt.toString();
     } else if (message.greaterThan?.$case === "gte") {
-      obj.gte = message.greaterThan.gte;
+      obj.gte = message.greaterThan.gte.toString();
     }
     if (message.in?.length) {
-      obj.in = message.in;
+      obj.in = message.in.map((e) => e.toString());
     }
     if (message.notIn?.length) {
-      obj.notIn = message.notIn;
+      obj.notIn = message.notIn.map((e) => e.toString());
     }
     if (message.example?.length) {
-      obj.example = message.example;
+      obj.example = message.example.map((e) => e.toString());
     }
     return obj;
   },
@@ -3259,31 +2977,6 @@ export const Fixed32Rules: MessageFns<Fixed32Rules> = {
     return message;
   },
 
-  fromJSON(object: any): Fixed32Rules {
-    return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.Number(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.Number(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.Number(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.Number(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.Number(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.Number(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.Number(e))
-        : [],
-    };
-  },
-
   toJSON(message: Fixed32Rules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const !== 0) {
@@ -3314,7 +3007,7 @@ export const Fixed32Rules: MessageFns<Fixed32Rules> = {
 
 function createBaseFixed64Rules(): Fixed64Rules {
   return {
-    const: "0",
+    const: 0n,
     lessThan: undefined,
     greaterThan: undefined,
     in: [],
@@ -3328,32 +3021,77 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
     message: Fixed64Rules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.const !== undefined && message.const !== "0") {
+    if (message.const !== undefined && message.const !== 0n) {
+      if (BigInt.asUintN(64, message.const) !== message.const) {
+        throw new globalThis.Error(
+          "value provided for field message.const of type fixed64 too large",
+        );
+      }
       writer.uint32(9).fixed64(message.const);
     }
     switch (message.lessThan?.$case) {
       case "lt":
+        if (BigInt.asUintN(64, message.lessThan.lt) !== message.lessThan.lt) {
+          throw new globalThis.Error(
+            "value provided for field message.lessThan.lt of type fixed64 too large",
+          );
+        }
         writer.uint32(17).fixed64(message.lessThan.lt);
         break;
       case "lte":
+        if (BigInt.asUintN(64, message.lessThan.lte) !== message.lessThan.lte) {
+          throw new globalThis.Error(
+            "value provided for field message.lessThan.lte of type fixed64 too large",
+          );
+        }
         writer.uint32(25).fixed64(message.lessThan.lte);
         break;
     }
     switch (message.greaterThan?.$case) {
       case "gt":
+        if (
+          BigInt.asUintN(64, message.greaterThan.gt) !== message.greaterThan.gt
+        ) {
+          throw new globalThis.Error(
+            "value provided for field message.greaterThan.gt of type fixed64 too large",
+          );
+        }
         writer.uint32(33).fixed64(message.greaterThan.gt);
         break;
       case "gte":
+        if (
+          BigInt.asUintN(64, message.greaterThan.gte) !==
+          message.greaterThan.gte
+        ) {
+          throw new globalThis.Error(
+            "value provided for field message.greaterThan.gte of type fixed64 too large",
+          );
+        }
         writer.uint32(41).fixed64(message.greaterThan.gte);
         break;
     }
     for (const v of message.in) {
+      if (BigInt.asUintN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type fixed64 too large",
+        );
+      }
       writer.uint32(49).fixed64(v!);
     }
     for (const v of message.notIn) {
+      if (BigInt.asUintN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type fixed64 too large",
+        );
+      }
       writer.uint32(57).fixed64(v!);
     }
     for (const v of message.example) {
+      if (BigInt.asUintN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type fixed64 too large",
+        );
+      }
       writer.uint32(65).fixed64(v!);
     }
     return writer;
@@ -3372,7 +3110,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
             break;
           }
 
-          message.const = reader.fixed64().toString();
+          message.const = reader.fixed64() as bigint;
           continue;
         }
         case 2: {
@@ -3380,7 +3118,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
             break;
           }
 
-          message.lessThan = { $case: "lt", lt: reader.fixed64().toString() };
+          message.lessThan = { $case: "lt", lt: reader.fixed64() as bigint };
           continue;
         }
         case 3: {
@@ -3388,7 +3126,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
             break;
           }
 
-          message.lessThan = { $case: "lte", lte: reader.fixed64().toString() };
+          message.lessThan = { $case: "lte", lte: reader.fixed64() as bigint };
           continue;
         }
         case 4: {
@@ -3396,10 +3134,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
             break;
           }
 
-          message.greaterThan = {
-            $case: "gt",
-            gt: reader.fixed64().toString(),
-          };
+          message.greaterThan = { $case: "gt", gt: reader.fixed64() as bigint };
           continue;
         }
         case 5: {
@@ -3409,13 +3144,13 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
 
           message.greaterThan = {
             $case: "gte",
-            gte: reader.fixed64().toString(),
+            gte: reader.fixed64() as bigint,
           };
           continue;
         }
         case 6: {
           if (tag === 49) {
-            message.in.push(reader.fixed64().toString());
+            message.in.push(reader.fixed64() as bigint);
 
             continue;
           }
@@ -3423,7 +3158,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
           if (tag === 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(reader.fixed64().toString());
+              message.in.push(reader.fixed64() as bigint);
             }
 
             continue;
@@ -3433,7 +3168,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
         }
         case 7: {
           if (tag === 57) {
-            message.notIn.push(reader.fixed64().toString());
+            message.notIn.push(reader.fixed64() as bigint);
 
             continue;
           }
@@ -3441,7 +3176,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
           if (tag === 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(reader.fixed64().toString());
+              message.notIn.push(reader.fixed64() as bigint);
             }
 
             continue;
@@ -3451,7 +3186,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
         }
         case 8: {
           if (tag === 65) {
-            message.example.push(reader.fixed64().toString());
+            message.example.push(reader.fixed64() as bigint);
 
             continue;
           }
@@ -3459,7 +3194,7 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
           if (tag === 66) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.example.push(reader.fixed64().toString());
+              message.example.push(reader.fixed64() as bigint);
             }
 
             continue;
@@ -3476,54 +3211,29 @@ export const Fixed64Rules: MessageFns<Fixed64Rules> = {
     return message;
   },
 
-  fromJSON(object: any): Fixed64Rules {
-    return {
-      const: isSet(object.const) ? globalThis.String(object.const) : "0",
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.String(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.String(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.String(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.String(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.String(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.String(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
   toJSON(message: Fixed64Rules): unknown {
     const obj: any = {};
-    if (message.const !== undefined && message.const !== "0") {
-      obj.const = message.const;
+    if (message.const !== undefined && message.const !== 0n) {
+      obj.const = message.const.toString();
     }
     if (message.lessThan?.$case === "lt") {
-      obj.lt = message.lessThan.lt;
+      obj.lt = message.lessThan.lt.toString();
     } else if (message.lessThan?.$case === "lte") {
-      obj.lte = message.lessThan.lte;
+      obj.lte = message.lessThan.lte.toString();
     }
     if (message.greaterThan?.$case === "gt") {
-      obj.gt = message.greaterThan.gt;
+      obj.gt = message.greaterThan.gt.toString();
     } else if (message.greaterThan?.$case === "gte") {
-      obj.gte = message.greaterThan.gte;
+      obj.gte = message.greaterThan.gte.toString();
     }
     if (message.in?.length) {
-      obj.in = message.in;
+      obj.in = message.in.map((e) => e.toString());
     }
     if (message.notIn?.length) {
-      obj.notIn = message.notIn;
+      obj.notIn = message.notIn.map((e) => e.toString());
     }
     if (message.example?.length) {
-      obj.example = message.example;
+      obj.example = message.example.map((e) => e.toString());
     }
     return obj;
   },
@@ -3687,31 +3397,6 @@ export const SFixed32Rules: MessageFns<SFixed32Rules> = {
     return message;
   },
 
-  fromJSON(object: any): SFixed32Rules {
-    return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.Number(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.Number(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.Number(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.Number(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.Number(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.Number(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.Number(e))
-        : [],
-    };
-  },
-
   toJSON(message: SFixed32Rules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const !== 0) {
@@ -3742,7 +3427,7 @@ export const SFixed32Rules: MessageFns<SFixed32Rules> = {
 
 function createBaseSFixed64Rules(): SFixed64Rules {
   return {
-    const: "0",
+    const: 0n,
     lessThan: undefined,
     greaterThan: undefined,
     in: [],
@@ -3756,32 +3441,76 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
     message: SFixed64Rules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.const !== undefined && message.const !== "0") {
+    if (message.const !== undefined && message.const !== 0n) {
+      if (BigInt.asIntN(64, message.const) !== message.const) {
+        throw new globalThis.Error(
+          "value provided for field message.const of type sfixed64 too large",
+        );
+      }
       writer.uint32(9).sfixed64(message.const);
     }
     switch (message.lessThan?.$case) {
       case "lt":
+        if (BigInt.asIntN(64, message.lessThan.lt) !== message.lessThan.lt) {
+          throw new globalThis.Error(
+            "value provided for field message.lessThan.lt of type sfixed64 too large",
+          );
+        }
         writer.uint32(17).sfixed64(message.lessThan.lt);
         break;
       case "lte":
+        if (BigInt.asIntN(64, message.lessThan.lte) !== message.lessThan.lte) {
+          throw new globalThis.Error(
+            "value provided for field message.lessThan.lte of type sfixed64 too large",
+          );
+        }
         writer.uint32(25).sfixed64(message.lessThan.lte);
         break;
     }
     switch (message.greaterThan?.$case) {
       case "gt":
+        if (
+          BigInt.asIntN(64, message.greaterThan.gt) !== message.greaterThan.gt
+        ) {
+          throw new globalThis.Error(
+            "value provided for field message.greaterThan.gt of type sfixed64 too large",
+          );
+        }
         writer.uint32(33).sfixed64(message.greaterThan.gt);
         break;
       case "gte":
+        if (
+          BigInt.asIntN(64, message.greaterThan.gte) !== message.greaterThan.gte
+        ) {
+          throw new globalThis.Error(
+            "value provided for field message.greaterThan.gte of type sfixed64 too large",
+          );
+        }
         writer.uint32(41).sfixed64(message.greaterThan.gte);
         break;
     }
     for (const v of message.in) {
+      if (BigInt.asIntN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type sfixed64 too large",
+        );
+      }
       writer.uint32(49).sfixed64(v!);
     }
     for (const v of message.notIn) {
+      if (BigInt.asIntN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type sfixed64 too large",
+        );
+      }
       writer.uint32(57).sfixed64(v!);
     }
     for (const v of message.example) {
+      if (BigInt.asIntN(64, v!) !== v!) {
+        throw new globalThis.Error(
+          "value provided for field v! of type sfixed64 too large",
+        );
+      }
       writer.uint32(65).sfixed64(v!);
     }
     return writer;
@@ -3800,7 +3529,7 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
             break;
           }
 
-          message.const = reader.sfixed64().toString();
+          message.const = reader.sfixed64() as bigint;
           continue;
         }
         case 2: {
@@ -3808,7 +3537,7 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
             break;
           }
 
-          message.lessThan = { $case: "lt", lt: reader.sfixed64().toString() };
+          message.lessThan = { $case: "lt", lt: reader.sfixed64() as bigint };
           continue;
         }
         case 3: {
@@ -3816,10 +3545,7 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
             break;
           }
 
-          message.lessThan = {
-            $case: "lte",
-            lte: reader.sfixed64().toString(),
-          };
+          message.lessThan = { $case: "lte", lte: reader.sfixed64() as bigint };
           continue;
         }
         case 4: {
@@ -3829,7 +3555,7 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
 
           message.greaterThan = {
             $case: "gt",
-            gt: reader.sfixed64().toString(),
+            gt: reader.sfixed64() as bigint,
           };
           continue;
         }
@@ -3840,13 +3566,13 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
 
           message.greaterThan = {
             $case: "gte",
-            gte: reader.sfixed64().toString(),
+            gte: reader.sfixed64() as bigint,
           };
           continue;
         }
         case 6: {
           if (tag === 49) {
-            message.in.push(reader.sfixed64().toString());
+            message.in.push(reader.sfixed64() as bigint);
 
             continue;
           }
@@ -3854,7 +3580,7 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
           if (tag === 50) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.in.push(reader.sfixed64().toString());
+              message.in.push(reader.sfixed64() as bigint);
             }
 
             continue;
@@ -3864,7 +3590,7 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
         }
         case 7: {
           if (tag === 57) {
-            message.notIn.push(reader.sfixed64().toString());
+            message.notIn.push(reader.sfixed64() as bigint);
 
             continue;
           }
@@ -3872,7 +3598,7 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
           if (tag === 58) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.notIn.push(reader.sfixed64().toString());
+              message.notIn.push(reader.sfixed64() as bigint);
             }
 
             continue;
@@ -3882,7 +3608,7 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
         }
         case 8: {
           if (tag === 65) {
-            message.example.push(reader.sfixed64().toString());
+            message.example.push(reader.sfixed64() as bigint);
 
             continue;
           }
@@ -3890,7 +3616,7 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
           if (tag === 66) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.example.push(reader.sfixed64().toString());
+              message.example.push(reader.sfixed64() as bigint);
             }
 
             continue;
@@ -3907,54 +3633,29 @@ export const SFixed64Rules: MessageFns<SFixed64Rules> = {
     return message;
   },
 
-  fromJSON(object: any): SFixed64Rules {
-    return {
-      const: isSet(object.const) ? globalThis.String(object.const) : "0",
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: globalThis.String(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: globalThis.String(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: globalThis.String(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: globalThis.String(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.String(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.String(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
   toJSON(message: SFixed64Rules): unknown {
     const obj: any = {};
-    if (message.const !== undefined && message.const !== "0") {
-      obj.const = message.const;
+    if (message.const !== undefined && message.const !== 0n) {
+      obj.const = message.const.toString();
     }
     if (message.lessThan?.$case === "lt") {
-      obj.lt = message.lessThan.lt;
+      obj.lt = message.lessThan.lt.toString();
     } else if (message.lessThan?.$case === "lte") {
-      obj.lte = message.lessThan.lte;
+      obj.lte = message.lessThan.lte.toString();
     }
     if (message.greaterThan?.$case === "gt") {
-      obj.gt = message.greaterThan.gt;
+      obj.gt = message.greaterThan.gt.toString();
     } else if (message.greaterThan?.$case === "gte") {
-      obj.gte = message.greaterThan.gte;
+      obj.gte = message.greaterThan.gte.toString();
     }
     if (message.in?.length) {
-      obj.in = message.in;
+      obj.in = message.in.map((e) => e.toString());
     }
     if (message.notIn?.length) {
-      obj.notIn = message.notIn;
+      obj.notIn = message.notIn.map((e) => e.toString());
     }
     if (message.example?.length) {
-      obj.example = message.example;
+      obj.example = message.example.map((e) => e.toString());
     }
     return obj;
   },
@@ -4021,15 +3722,6 @@ export const BoolRules: MessageFns<BoolRules> = {
     return message;
   },
 
-  fromJSON(object: any): BoolRules {
-    return {
-      const: isSet(object.const) ? globalThis.Boolean(object.const) : false,
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.Boolean(e))
-        : [],
-    };
-  },
-
   toJSON(message: BoolRules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const !== false) {
@@ -4045,12 +3737,12 @@ export const BoolRules: MessageFns<BoolRules> = {
 function createBaseStringRules(): StringRules {
   return {
     const: "",
-    len: "0",
-    minLen: "0",
-    maxLen: "0",
-    lenBytes: "0",
-    minBytes: "0",
-    maxBytes: "0",
+    len: 0n,
+    minLen: 0n,
+    maxLen: 0n,
+    lenBytes: 0n,
+    minBytes: 0n,
+    maxBytes: 0n,
     pattern: "",
     prefix: "",
     suffix: "",
@@ -4072,22 +3764,52 @@ export const StringRules: MessageFns<StringRules> = {
     if (message.const !== undefined && message.const !== "") {
       writer.uint32(10).string(message.const);
     }
-    if (message.len !== undefined && message.len !== "0") {
+    if (message.len !== undefined && message.len !== 0n) {
+      if (BigInt.asUintN(64, message.len) !== message.len) {
+        throw new globalThis.Error(
+          "value provided for field message.len of type uint64 too large",
+        );
+      }
       writer.uint32(152).uint64(message.len);
     }
-    if (message.minLen !== undefined && message.minLen !== "0") {
+    if (message.minLen !== undefined && message.minLen !== 0n) {
+      if (BigInt.asUintN(64, message.minLen) !== message.minLen) {
+        throw new globalThis.Error(
+          "value provided for field message.minLen of type uint64 too large",
+        );
+      }
       writer.uint32(16).uint64(message.minLen);
     }
-    if (message.maxLen !== undefined && message.maxLen !== "0") {
+    if (message.maxLen !== undefined && message.maxLen !== 0n) {
+      if (BigInt.asUintN(64, message.maxLen) !== message.maxLen) {
+        throw new globalThis.Error(
+          "value provided for field message.maxLen of type uint64 too large",
+        );
+      }
       writer.uint32(24).uint64(message.maxLen);
     }
-    if (message.lenBytes !== undefined && message.lenBytes !== "0") {
+    if (message.lenBytes !== undefined && message.lenBytes !== 0n) {
+      if (BigInt.asUintN(64, message.lenBytes) !== message.lenBytes) {
+        throw new globalThis.Error(
+          "value provided for field message.lenBytes of type uint64 too large",
+        );
+      }
       writer.uint32(160).uint64(message.lenBytes);
     }
-    if (message.minBytes !== undefined && message.minBytes !== "0") {
+    if (message.minBytes !== undefined && message.minBytes !== 0n) {
+      if (BigInt.asUintN(64, message.minBytes) !== message.minBytes) {
+        throw new globalThis.Error(
+          "value provided for field message.minBytes of type uint64 too large",
+        );
+      }
       writer.uint32(32).uint64(message.minBytes);
     }
-    if (message.maxBytes !== undefined && message.maxBytes !== "0") {
+    if (message.maxBytes !== undefined && message.maxBytes !== 0n) {
+      if (BigInt.asUintN(64, message.maxBytes) !== message.maxBytes) {
+        throw new globalThis.Error(
+          "value provided for field message.maxBytes of type uint64 too large",
+        );
+      }
       writer.uint32(40).uint64(message.maxBytes);
     }
     if (message.pattern !== undefined && message.pattern !== "") {
@@ -4197,7 +3919,7 @@ export const StringRules: MessageFns<StringRules> = {
             break;
           }
 
-          message.len = reader.uint64().toString();
+          message.len = reader.uint64() as bigint;
           continue;
         }
         case 2: {
@@ -4205,7 +3927,7 @@ export const StringRules: MessageFns<StringRules> = {
             break;
           }
 
-          message.minLen = reader.uint64().toString();
+          message.minLen = reader.uint64() as bigint;
           continue;
         }
         case 3: {
@@ -4213,7 +3935,7 @@ export const StringRules: MessageFns<StringRules> = {
             break;
           }
 
-          message.maxLen = reader.uint64().toString();
+          message.maxLen = reader.uint64() as bigint;
           continue;
         }
         case 20: {
@@ -4221,7 +3943,7 @@ export const StringRules: MessageFns<StringRules> = {
             break;
           }
 
-          message.lenBytes = reader.uint64().toString();
+          message.lenBytes = reader.uint64() as bigint;
           continue;
         }
         case 4: {
@@ -4229,7 +3951,7 @@ export const StringRules: MessageFns<StringRules> = {
             break;
           }
 
-          message.minBytes = reader.uint64().toString();
+          message.minBytes = reader.uint64() as bigint;
           continue;
         }
         case 5: {
@@ -4237,7 +3959,7 @@ export const StringRules: MessageFns<StringRules> = {
             break;
           }
 
-          message.maxBytes = reader.uint64().toString();
+          message.maxBytes = reader.uint64() as bigint;
           continue;
         }
         case 6: {
@@ -4486,155 +4208,28 @@ export const StringRules: MessageFns<StringRules> = {
     return message;
   },
 
-  fromJSON(object: any): StringRules {
-    return {
-      const: isSet(object.const) ? globalThis.String(object.const) : "",
-      len: isSet(object.len) ? globalThis.String(object.len) : "0",
-      minLen: isSet(object.minLen) ? globalThis.String(object.minLen) : "0",
-      maxLen: isSet(object.maxLen) ? globalThis.String(object.maxLen) : "0",
-      lenBytes: isSet(object.lenBytes)
-        ? globalThis.String(object.lenBytes)
-        : "0",
-      minBytes: isSet(object.minBytes)
-        ? globalThis.String(object.minBytes)
-        : "0",
-      maxBytes: isSet(object.maxBytes)
-        ? globalThis.String(object.maxBytes)
-        : "0",
-      pattern: isSet(object.pattern) ? globalThis.String(object.pattern) : "",
-      prefix: isSet(object.prefix) ? globalThis.String(object.prefix) : "",
-      suffix: isSet(object.suffix) ? globalThis.String(object.suffix) : "",
-      contains: isSet(object.contains)
-        ? globalThis.String(object.contains)
-        : "",
-      notContains: isSet(object.notContains)
-        ? globalThis.String(object.notContains)
-        : "",
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.String(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.String(e))
-        : [],
-      wellKnown: isSet(object.email)
-        ? { $case: "email", email: globalThis.Boolean(object.email) }
-        : isSet(object.hostname)
-          ? { $case: "hostname", hostname: globalThis.Boolean(object.hostname) }
-          : isSet(object.ip)
-            ? { $case: "ip", ip: globalThis.Boolean(object.ip) }
-            : isSet(object.ipv4)
-              ? { $case: "ipv4", ipv4: globalThis.Boolean(object.ipv4) }
-              : isSet(object.ipv6)
-                ? { $case: "ipv6", ipv6: globalThis.Boolean(object.ipv6) }
-                : isSet(object.uri)
-                  ? { $case: "uri", uri: globalThis.Boolean(object.uri) }
-                  : isSet(object.uriRef)
-                    ? {
-                        $case: "uriRef",
-                        uriRef: globalThis.Boolean(object.uriRef),
-                      }
-                    : isSet(object.address)
-                      ? {
-                          $case: "address",
-                          address: globalThis.Boolean(object.address),
-                        }
-                      : isSet(object.uuid)
-                        ? {
-                            $case: "uuid",
-                            uuid: globalThis.Boolean(object.uuid),
-                          }
-                        : isSet(object.tuuid)
-                          ? {
-                              $case: "tuuid",
-                              tuuid: globalThis.Boolean(object.tuuid),
-                            }
-                          : isSet(object.ipWithPrefixlen)
-                            ? {
-                                $case: "ipWithPrefixlen",
-                                ipWithPrefixlen: globalThis.Boolean(
-                                  object.ipWithPrefixlen,
-                                ),
-                              }
-                            : isSet(object.ipv4WithPrefixlen)
-                              ? {
-                                  $case: "ipv4WithPrefixlen",
-                                  ipv4WithPrefixlen: globalThis.Boolean(
-                                    object.ipv4WithPrefixlen,
-                                  ),
-                                }
-                              : isSet(object.ipv6WithPrefixlen)
-                                ? {
-                                    $case: "ipv6WithPrefixlen",
-                                    ipv6WithPrefixlen: globalThis.Boolean(
-                                      object.ipv6WithPrefixlen,
-                                    ),
-                                  }
-                                : isSet(object.ipPrefix)
-                                  ? {
-                                      $case: "ipPrefix",
-                                      ipPrefix: globalThis.Boolean(
-                                        object.ipPrefix,
-                                      ),
-                                    }
-                                  : isSet(object.ipv4Prefix)
-                                    ? {
-                                        $case: "ipv4Prefix",
-                                        ipv4Prefix: globalThis.Boolean(
-                                          object.ipv4Prefix,
-                                        ),
-                                      }
-                                    : isSet(object.ipv6Prefix)
-                                      ? {
-                                          $case: "ipv6Prefix",
-                                          ipv6Prefix: globalThis.Boolean(
-                                            object.ipv6Prefix,
-                                          ),
-                                        }
-                                      : isSet(object.hostAndPort)
-                                        ? {
-                                            $case: "hostAndPort",
-                                            hostAndPort: globalThis.Boolean(
-                                              object.hostAndPort,
-                                            ),
-                                          }
-                                        : isSet(object.wellKnownRegex)
-                                          ? {
-                                              $case: "wellKnownRegex",
-                                              wellKnownRegex:
-                                                knownRegexFromJSON(
-                                                  object.wellKnownRegex,
-                                                ),
-                                            }
-                                          : undefined,
-      strict: isSet(object.strict) ? globalThis.Boolean(object.strict) : false,
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.String(e))
-        : [],
-    };
-  },
-
   toJSON(message: StringRules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const !== "") {
       obj.const = message.const;
     }
-    if (message.len !== undefined && message.len !== "0") {
-      obj.len = message.len;
+    if (message.len !== undefined && message.len !== 0n) {
+      obj.len = message.len.toString();
     }
-    if (message.minLen !== undefined && message.minLen !== "0") {
-      obj.minLen = message.minLen;
+    if (message.minLen !== undefined && message.minLen !== 0n) {
+      obj.minLen = message.minLen.toString();
     }
-    if (message.maxLen !== undefined && message.maxLen !== "0") {
-      obj.maxLen = message.maxLen;
+    if (message.maxLen !== undefined && message.maxLen !== 0n) {
+      obj.maxLen = message.maxLen.toString();
     }
-    if (message.lenBytes !== undefined && message.lenBytes !== "0") {
-      obj.lenBytes = message.lenBytes;
+    if (message.lenBytes !== undefined && message.lenBytes !== 0n) {
+      obj.lenBytes = message.lenBytes.toString();
     }
-    if (message.minBytes !== undefined && message.minBytes !== "0") {
-      obj.minBytes = message.minBytes;
+    if (message.minBytes !== undefined && message.minBytes !== 0n) {
+      obj.minBytes = message.minBytes.toString();
     }
-    if (message.maxBytes !== undefined && message.maxBytes !== "0") {
-      obj.maxBytes = message.maxBytes;
+    if (message.maxBytes !== undefined && message.maxBytes !== 0n) {
+      obj.maxBytes = message.maxBytes.toString();
     }
     if (message.pattern !== undefined && message.pattern !== "") {
       obj.pattern = message.pattern;
@@ -4707,9 +4302,9 @@ export const StringRules: MessageFns<StringRules> = {
 function createBaseBytesRules(): BytesRules {
   return {
     const: new Uint8Array(0),
-    len: "0",
-    minLen: "0",
-    maxLen: "0",
+    len: 0n,
+    minLen: 0n,
+    maxLen: 0n,
     pattern: "",
     prefix: new Uint8Array(0),
     suffix: new Uint8Array(0),
@@ -4729,13 +4324,28 @@ export const BytesRules: MessageFns<BytesRules> = {
     if (message.const !== undefined && message.const.length !== 0) {
       writer.uint32(10).bytes(message.const);
     }
-    if (message.len !== undefined && message.len !== "0") {
+    if (message.len !== undefined && message.len !== 0n) {
+      if (BigInt.asUintN(64, message.len) !== message.len) {
+        throw new globalThis.Error(
+          "value provided for field message.len of type uint64 too large",
+        );
+      }
       writer.uint32(104).uint64(message.len);
     }
-    if (message.minLen !== undefined && message.minLen !== "0") {
+    if (message.minLen !== undefined && message.minLen !== 0n) {
+      if (BigInt.asUintN(64, message.minLen) !== message.minLen) {
+        throw new globalThis.Error(
+          "value provided for field message.minLen of type uint64 too large",
+        );
+      }
       writer.uint32(16).uint64(message.minLen);
     }
-    if (message.maxLen !== undefined && message.maxLen !== "0") {
+    if (message.maxLen !== undefined && message.maxLen !== 0n) {
+      if (BigInt.asUintN(64, message.maxLen) !== message.maxLen) {
+        throw new globalThis.Error(
+          "value provided for field message.maxLen of type uint64 too large",
+        );
+      }
       writer.uint32(24).uint64(message.maxLen);
     }
     if (message.pattern !== undefined && message.pattern !== "") {
@@ -4794,7 +4404,7 @@ export const BytesRules: MessageFns<BytesRules> = {
             break;
           }
 
-          message.len = reader.uint64().toString();
+          message.len = reader.uint64() as bigint;
           continue;
         }
         case 2: {
@@ -4802,7 +4412,7 @@ export const BytesRules: MessageFns<BytesRules> = {
             break;
           }
 
-          message.minLen = reader.uint64().toString();
+          message.minLen = reader.uint64() as bigint;
           continue;
         }
         case 3: {
@@ -4810,7 +4420,7 @@ export const BytesRules: MessageFns<BytesRules> = {
             break;
           }
 
-          message.maxLen = reader.uint64().toString();
+          message.maxLen = reader.uint64() as bigint;
           continue;
         }
         case 4: {
@@ -4902,56 +4512,19 @@ export const BytesRules: MessageFns<BytesRules> = {
     return message;
   },
 
-  fromJSON(object: any): BytesRules {
-    return {
-      const: isSet(object.const)
-        ? bytesFromBase64(object.const)
-        : new Uint8Array(0),
-      len: isSet(object.len) ? globalThis.String(object.len) : "0",
-      minLen: isSet(object.minLen) ? globalThis.String(object.minLen) : "0",
-      maxLen: isSet(object.maxLen) ? globalThis.String(object.maxLen) : "0",
-      pattern: isSet(object.pattern) ? globalThis.String(object.pattern) : "",
-      prefix: isSet(object.prefix)
-        ? bytesFromBase64(object.prefix)
-        : new Uint8Array(0),
-      suffix: isSet(object.suffix)
-        ? bytesFromBase64(object.suffix)
-        : new Uint8Array(0),
-      contains: isSet(object.contains)
-        ? bytesFromBase64(object.contains)
-        : new Uint8Array(0),
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => bytesFromBase64(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => bytesFromBase64(e))
-        : [],
-      wellKnown: isSet(object.ip)
-        ? { $case: "ip", ip: globalThis.Boolean(object.ip) }
-        : isSet(object.ipv4)
-          ? { $case: "ipv4", ipv4: globalThis.Boolean(object.ipv4) }
-          : isSet(object.ipv6)
-            ? { $case: "ipv6", ipv6: globalThis.Boolean(object.ipv6) }
-            : undefined,
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => bytesFromBase64(e))
-        : [],
-    };
-  },
-
   toJSON(message: BytesRules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const.length !== 0) {
       obj.const = base64FromBytes(message.const);
     }
-    if (message.len !== undefined && message.len !== "0") {
-      obj.len = message.len;
+    if (message.len !== undefined && message.len !== 0n) {
+      obj.len = message.len.toString();
     }
-    if (message.minLen !== undefined && message.minLen !== "0") {
-      obj.minLen = message.minLen;
+    if (message.minLen !== undefined && message.minLen !== 0n) {
+      obj.minLen = message.minLen.toString();
     }
-    if (message.maxLen !== undefined && message.maxLen !== "0") {
-      obj.maxLen = message.maxLen;
+    if (message.maxLen !== undefined && message.maxLen !== 0n) {
+      obj.maxLen = message.maxLen.toString();
     }
     if (message.pattern !== undefined && message.pattern !== "") {
       obj.pattern = message.pattern;
@@ -5099,24 +4672,6 @@ export const EnumRules: MessageFns<EnumRules> = {
     return message;
   },
 
-  fromJSON(object: any): EnumRules {
-    return {
-      const: isSet(object.const) ? globalThis.Number(object.const) : 0,
-      definedOnly: isSet(object.definedOnly)
-        ? globalThis.Boolean(object.definedOnly)
-        : false,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.Number(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.Number(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => globalThis.Number(e))
-        : [],
-    };
-  },
-
   toJSON(message: EnumRules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const !== 0) {
@@ -5139,7 +4694,7 @@ export const EnumRules: MessageFns<EnumRules> = {
 };
 
 function createBaseRepeatedRules(): RepeatedRules {
-  return { minItems: "0", maxItems: "0", unique: false, items: undefined };
+  return { minItems: 0n, maxItems: 0n, unique: false, items: undefined };
 }
 
 export const RepeatedRules: MessageFns<RepeatedRules> = {
@@ -5147,10 +4702,20 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
     message: RepeatedRules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.minItems !== undefined && message.minItems !== "0") {
+    if (message.minItems !== undefined && message.minItems !== 0n) {
+      if (BigInt.asUintN(64, message.minItems) !== message.minItems) {
+        throw new globalThis.Error(
+          "value provided for field message.minItems of type uint64 too large",
+        );
+      }
       writer.uint32(8).uint64(message.minItems);
     }
-    if (message.maxItems !== undefined && message.maxItems !== "0") {
+    if (message.maxItems !== undefined && message.maxItems !== 0n) {
+      if (BigInt.asUintN(64, message.maxItems) !== message.maxItems) {
+        throw new globalThis.Error(
+          "value provided for field message.maxItems of type uint64 too large",
+        );
+      }
       writer.uint32(16).uint64(message.maxItems);
     }
     if (message.unique !== undefined && message.unique !== false) {
@@ -5175,7 +4740,7 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
             break;
           }
 
-          message.minItems = reader.uint64().toString();
+          message.minItems = reader.uint64() as bigint;
           continue;
         }
         case 2: {
@@ -5183,7 +4748,7 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
             break;
           }
 
-          message.maxItems = reader.uint64().toString();
+          message.maxItems = reader.uint64() as bigint;
           continue;
         }
         case 3: {
@@ -5211,28 +4776,13 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
     return message;
   },
 
-  fromJSON(object: any): RepeatedRules {
-    return {
-      minItems: isSet(object.minItems)
-        ? globalThis.String(object.minItems)
-        : "0",
-      maxItems: isSet(object.maxItems)
-        ? globalThis.String(object.maxItems)
-        : "0",
-      unique: isSet(object.unique) ? globalThis.Boolean(object.unique) : false,
-      items: isSet(object.items)
-        ? FieldRules.fromJSON(object.items)
-        : undefined,
-    };
-  },
-
   toJSON(message: RepeatedRules): unknown {
     const obj: any = {};
-    if (message.minItems !== undefined && message.minItems !== "0") {
-      obj.minItems = message.minItems;
+    if (message.minItems !== undefined && message.minItems !== 0n) {
+      obj.minItems = message.minItems.toString();
     }
-    if (message.maxItems !== undefined && message.maxItems !== "0") {
-      obj.maxItems = message.maxItems;
+    if (message.maxItems !== undefined && message.maxItems !== 0n) {
+      obj.maxItems = message.maxItems.toString();
     }
     if (message.unique !== undefined && message.unique !== false) {
       obj.unique = message.unique;
@@ -5245,7 +4795,7 @@ export const RepeatedRules: MessageFns<RepeatedRules> = {
 };
 
 function createBaseMapRules(): MapRules {
-  return { minPairs: "0", maxPairs: "0", keys: undefined, values: undefined };
+  return { minPairs: 0n, maxPairs: 0n, keys: undefined, values: undefined };
 }
 
 export const MapRules: MessageFns<MapRules> = {
@@ -5253,10 +4803,20 @@ export const MapRules: MessageFns<MapRules> = {
     message: MapRules,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.minPairs !== undefined && message.minPairs !== "0") {
+    if (message.minPairs !== undefined && message.minPairs !== 0n) {
+      if (BigInt.asUintN(64, message.minPairs) !== message.minPairs) {
+        throw new globalThis.Error(
+          "value provided for field message.minPairs of type uint64 too large",
+        );
+      }
       writer.uint32(8).uint64(message.minPairs);
     }
-    if (message.maxPairs !== undefined && message.maxPairs !== "0") {
+    if (message.maxPairs !== undefined && message.maxPairs !== 0n) {
+      if (BigInt.asUintN(64, message.maxPairs) !== message.maxPairs) {
+        throw new globalThis.Error(
+          "value provided for field message.maxPairs of type uint64 too large",
+        );
+      }
       writer.uint32(16).uint64(message.maxPairs);
     }
     if (message.keys !== undefined) {
@@ -5281,7 +4841,7 @@ export const MapRules: MessageFns<MapRules> = {
             break;
           }
 
-          message.minPairs = reader.uint64().toString();
+          message.minPairs = reader.uint64() as bigint;
           continue;
         }
         case 2: {
@@ -5289,7 +4849,7 @@ export const MapRules: MessageFns<MapRules> = {
             break;
           }
 
-          message.maxPairs = reader.uint64().toString();
+          message.maxPairs = reader.uint64() as bigint;
           continue;
         }
         case 4: {
@@ -5317,28 +4877,13 @@ export const MapRules: MessageFns<MapRules> = {
     return message;
   },
 
-  fromJSON(object: any): MapRules {
-    return {
-      minPairs: isSet(object.minPairs)
-        ? globalThis.String(object.minPairs)
-        : "0",
-      maxPairs: isSet(object.maxPairs)
-        ? globalThis.String(object.maxPairs)
-        : "0",
-      keys: isSet(object.keys) ? FieldRules.fromJSON(object.keys) : undefined,
-      values: isSet(object.values)
-        ? FieldRules.fromJSON(object.values)
-        : undefined,
-    };
-  },
-
   toJSON(message: MapRules): unknown {
     const obj: any = {};
-    if (message.minPairs !== undefined && message.minPairs !== "0") {
-      obj.minPairs = message.minPairs;
+    if (message.minPairs !== undefined && message.minPairs !== 0n) {
+      obj.minPairs = message.minPairs.toString();
     }
-    if (message.maxPairs !== undefined && message.maxPairs !== "0") {
-      obj.maxPairs = message.maxPairs;
+    if (message.maxPairs !== undefined && message.maxPairs !== 0n) {
+      obj.maxPairs = message.maxPairs.toString();
     }
     if (message.keys !== undefined) {
       obj.keys = FieldRules.toJSON(message.keys);
@@ -5399,17 +4944,6 @@ export const AnyRules: MessageFns<AnyRules> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): AnyRules {
-    return {
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => globalThis.String(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => globalThis.String(e))
-        : [],
-    };
   },
 
   toJSON(message: AnyRules): unknown {
@@ -5568,31 +5102,6 @@ export const DurationRules: MessageFns<DurationRules> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): DurationRules {
-    return {
-      const: isSet(object.const) ? Duration.fromJSON(object.const) : undefined,
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: Duration.fromJSON(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: Duration.fromJSON(object.lte) }
-          : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: Duration.fromJSON(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: Duration.fromJSON(object.gte) }
-          : undefined,
-      in: globalThis.Array.isArray(object?.in)
-        ? object.in.map((e: any) => Duration.fromJSON(e))
-        : [],
-      notIn: globalThis.Array.isArray(object?.notIn)
-        ? object.notIn.map((e: any) => Duration.fromJSON(e))
-        : [],
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => Duration.fromJSON(e))
-        : [],
-    };
   },
 
   toJSON(message: DurationRules): unknown {
@@ -5792,32 +5301,6 @@ export const TimestampRules: MessageFns<TimestampRules> = {
     return message;
   },
 
-  fromJSON(object: any): TimestampRules {
-    return {
-      const: isSet(object.const) ? fromJsonTimestamp(object.const) : undefined,
-      lessThan: isSet(object.lt)
-        ? { $case: "lt", lt: fromJsonTimestamp(object.lt) }
-        : isSet(object.lte)
-          ? { $case: "lte", lte: fromJsonTimestamp(object.lte) }
-          : isSet(object.ltNow)
-            ? { $case: "ltNow", ltNow: globalThis.Boolean(object.ltNow) }
-            : undefined,
-      greaterThan: isSet(object.gt)
-        ? { $case: "gt", gt: fromJsonTimestamp(object.gt) }
-        : isSet(object.gte)
-          ? { $case: "gte", gte: fromJsonTimestamp(object.gte) }
-          : isSet(object.gtNow)
-            ? { $case: "gtNow", gtNow: globalThis.Boolean(object.gtNow) }
-            : undefined,
-      within: isSet(object.within)
-        ? Duration.fromJSON(object.within)
-        : undefined,
-      example: globalThis.Array.isArray(object?.example)
-        ? object.example.map((e: any) => fromJsonTimestamp(e))
-        : [],
-    };
-  },
-
   toJSON(message: TimestampRules): unknown {
     const obj: any = {};
     if (message.const !== undefined) {
@@ -5847,19 +5330,6 @@ export const TimestampRules: MessageFns<TimestampRules> = {
   },
 };
 
-function bytesFromBase64(b64: string): Uint8Array {
-  if ((globalThis as any).Buffer) {
-    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
-  } else {
-    const bin = globalThis.atob(b64);
-    const arr = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; ++i) {
-      arr[i] = bin.charCodeAt(i);
-    }
-    return arr;
-  }
-}
-
 function base64FromBytes(arr: Uint8Array): string {
   if ((globalThis as any).Buffer) {
     return globalThis.Buffer.from(arr).toString("base64");
@@ -5873,34 +5343,19 @@ function base64FromBytes(arr: Uint8Array): string {
 }
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const seconds = BigInt(Math.trunc(date.getTime() / 1_000));
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds.toString()) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
   return new globalThis.Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof globalThis.Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new globalThis.Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

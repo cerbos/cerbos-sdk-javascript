@@ -10,18 +10,6 @@ export enum NullValue {
   NULL_VALUE = 0,
 }
 
-export function nullValueFromJSON(object: any): NullValue {
-  switch (object) {
-    case 0:
-    case "NULL_VALUE":
-      return NullValue.NULL_VALUE;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum NullValue",
-      );
-  }
-}
-
 export function nullValueToJSON(object: NullValue): string {
   switch (object) {
     case NullValue.NULL_VALUE:
@@ -103,19 +91,6 @@ export const Struct: MessageFns<Struct> & StructWrapperFns = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Struct {
-    return {
-      fields: isObject(object.fields)
-        ? Object.entries(object.fields).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-    };
   },
 
   toJSON(message: Struct): unknown {
@@ -206,13 +181,6 @@ export const Struct_FieldsEntry: MessageFns<Struct_FieldsEntry> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Struct_FieldsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
   },
 
   toJSON(message: Struct_FieldsEntry): unknown {
@@ -341,33 +309,6 @@ export const Value: MessageFns<Value> & AnyValueWrapperFns = {
     return message;
   },
 
-  fromJSON(object: any): Value {
-    return {
-      kind: isSet(object.nullValue)
-        ? { $case: "nullValue", nullValue: nullValueFromJSON(object.nullValue) }
-        : isSet(object.numberValue)
-          ? {
-              $case: "numberValue",
-              numberValue: globalThis.Number(object.numberValue),
-            }
-          : isSet(object.stringValue)
-            ? {
-                $case: "stringValue",
-                stringValue: globalThis.String(object.stringValue),
-              }
-            : isSet(object.boolValue)
-              ? {
-                  $case: "boolValue",
-                  boolValue: globalThis.Boolean(object.boolValue),
-                }
-              : isSet(object.structValue)
-                ? { $case: "structValue", structValue: object.structValue }
-                : isSet(object.listValue)
-                  ? { $case: "listValue", listValue: [...object.listValue] }
-                  : undefined,
-    };
-  },
-
   toJSON(message: Value): unknown {
     const obj: any = {};
     if (message.kind?.$case === "nullValue") {
@@ -469,14 +410,6 @@ export const ListValue: MessageFns<ListValue> & ListValueWrapperFns = {
     return message;
   },
 
-  fromJSON(object: any): ListValue {
-    return {
-      values: globalThis.Array.isArray(object?.values)
-        ? [...object.values]
-        : [],
-    };
-  },
-
   toJSON(message: ListValue): unknown {
     const obj: any = {};
     if (message.values?.length) {
@@ -503,18 +436,9 @@ export const ListValue: MessageFns<ListValue> & ListValueWrapperFns = {
   },
 };
 
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }
 

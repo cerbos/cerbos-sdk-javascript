@@ -21,51 +21,6 @@ export enum Edition {
   EDITION_MAX = 2147483647,
 }
 
-export function editionFromJSON(object: any): Edition {
-  switch (object) {
-    case 0:
-    case "EDITION_UNKNOWN":
-      return Edition.EDITION_UNKNOWN;
-    case 900:
-    case "EDITION_LEGACY":
-      return Edition.EDITION_LEGACY;
-    case 998:
-    case "EDITION_PROTO2":
-      return Edition.EDITION_PROTO2;
-    case 999:
-    case "EDITION_PROTO3":
-      return Edition.EDITION_PROTO3;
-    case 1000:
-    case "EDITION_2023":
-      return Edition.EDITION_2023;
-    case 1001:
-    case "EDITION_2024":
-      return Edition.EDITION_2024;
-    case 1:
-    case "EDITION_1_TEST_ONLY":
-      return Edition.EDITION_1_TEST_ONLY;
-    case 2:
-    case "EDITION_2_TEST_ONLY":
-      return Edition.EDITION_2_TEST_ONLY;
-    case 99997:
-    case "EDITION_99997_TEST_ONLY":
-      return Edition.EDITION_99997_TEST_ONLY;
-    case 99998:
-    case "EDITION_99998_TEST_ONLY":
-      return Edition.EDITION_99998_TEST_ONLY;
-    case 99999:
-    case "EDITION_99999_TEST_ONLY":
-      return Edition.EDITION_99999_TEST_ONLY;
-    case 2147483647:
-    case "EDITION_MAX":
-      return Edition.EDITION_MAX;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum Edition",
-      );
-  }
-}
-
 export function editionToJSON(object: Edition): string {
   switch (object) {
     case Edition.EDITION_UNKNOWN:
@@ -129,28 +84,6 @@ export enum FileOptions_OptimizeMode {
   LITE_RUNTIME = 3,
 }
 
-export function fileOptions_OptimizeModeFromJSON(
-  object: any,
-): FileOptions_OptimizeMode {
-  switch (object) {
-    case 1:
-    case "SPEED":
-      return FileOptions_OptimizeMode.SPEED;
-    case 2:
-    case "CODE_SIZE":
-      return FileOptions_OptimizeMode.CODE_SIZE;
-    case 3:
-    case "LITE_RUNTIME":
-      return FileOptions_OptimizeMode.LITE_RUNTIME;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum FileOptions_OptimizeMode",
-      );
-  }
-}
-
 export function fileOptions_OptimizeModeToJSON(
   object: FileOptions_OptimizeMode,
 ): string {
@@ -203,24 +136,6 @@ export enum FieldOptions_CType {
   STRING_PIECE = 2,
 }
 
-export function fieldOptions_CTypeFromJSON(object: any): FieldOptions_CType {
-  switch (object) {
-    case 0:
-    case "STRING":
-      return FieldOptions_CType.STRING;
-    case 1:
-    case "CORD":
-      return FieldOptions_CType.CORD;
-    case 2:
-    case "STRING_PIECE":
-      return FieldOptions_CType.STRING_PIECE;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum FieldOptions_CType",
-      );
-  }
-}
-
 export function fieldOptions_CTypeToJSON(object: FieldOptions_CType): string {
   switch (object) {
     case FieldOptions_CType.STRING:
@@ -242,24 +157,6 @@ export enum FieldOptions_JSType {
   JS_NUMBER = 2,
 }
 
-export function fieldOptions_JSTypeFromJSON(object: any): FieldOptions_JSType {
-  switch (object) {
-    case 0:
-    case "JS_NORMAL":
-      return FieldOptions_JSType.JS_NORMAL;
-    case 1:
-    case "JS_STRING":
-      return FieldOptions_JSType.JS_STRING;
-    case 2:
-    case "JS_NUMBER":
-      return FieldOptions_JSType.JS_NUMBER;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum FieldOptions_JSType",
-      );
-  }
-}
-
 export function fieldOptions_JSTypeToJSON(object: FieldOptions_JSType): string {
   switch (object) {
     case FieldOptions_JSType.JS_NORMAL:
@@ -279,28 +176,6 @@ export enum FieldOptions_OptionRetention {
   RETENTION_UNKNOWN = 0,
   RETENTION_RUNTIME = 1,
   RETENTION_SOURCE = 2,
-}
-
-export function fieldOptions_OptionRetentionFromJSON(
-  object: any,
-): FieldOptions_OptionRetention {
-  switch (object) {
-    case 0:
-    case "RETENTION_UNKNOWN":
-      return FieldOptions_OptionRetention.RETENTION_UNKNOWN;
-    case 1:
-    case "RETENTION_RUNTIME":
-      return FieldOptions_OptionRetention.RETENTION_RUNTIME;
-    case 2:
-    case "RETENTION_SOURCE":
-      return FieldOptions_OptionRetention.RETENTION_SOURCE;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum FieldOptions_OptionRetention",
-      );
-  }
 }
 
 export function fieldOptions_OptionRetentionToJSON(
@@ -333,49 +208,6 @@ export enum FieldOptions_OptionTargetType {
   TARGET_TYPE_ENUM_ENTRY = 7,
   TARGET_TYPE_SERVICE = 8,
   TARGET_TYPE_METHOD = 9,
-}
-
-export function fieldOptions_OptionTargetTypeFromJSON(
-  object: any,
-): FieldOptions_OptionTargetType {
-  switch (object) {
-    case 0:
-    case "TARGET_TYPE_UNKNOWN":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_UNKNOWN;
-    case 1:
-    case "TARGET_TYPE_FILE":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_FILE;
-    case 2:
-    case "TARGET_TYPE_EXTENSION_RANGE":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_EXTENSION_RANGE;
-    case 3:
-    case "TARGET_TYPE_MESSAGE":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_MESSAGE;
-    case 4:
-    case "TARGET_TYPE_FIELD":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_FIELD;
-    case 5:
-    case "TARGET_TYPE_ONEOF":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_ONEOF;
-    case 6:
-    case "TARGET_TYPE_ENUM":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_ENUM;
-    case 7:
-    case "TARGET_TYPE_ENUM_ENTRY":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_ENUM_ENTRY;
-    case 8:
-    case "TARGET_TYPE_SERVICE":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_SERVICE;
-    case 9:
-    case "TARGET_TYPE_METHOD":
-      return FieldOptions_OptionTargetType.TARGET_TYPE_METHOD;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum FieldOptions_OptionTargetType",
-      );
-  }
 }
 
 export function fieldOptions_OptionTargetTypeToJSON(
@@ -447,28 +279,6 @@ export enum MethodOptions_IdempotencyLevel {
   IDEMPOTENT = 2,
 }
 
-export function methodOptions_IdempotencyLevelFromJSON(
-  object: any,
-): MethodOptions_IdempotencyLevel {
-  switch (object) {
-    case 0:
-    case "IDEMPOTENCY_UNKNOWN":
-      return MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN;
-    case 1:
-    case "NO_SIDE_EFFECTS":
-      return MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS;
-    case 2:
-    case "IDEMPOTENT":
-      return MethodOptions_IdempotencyLevel.IDEMPOTENT;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum MethodOptions_IdempotencyLevel",
-      );
-  }
-}
-
 export function methodOptions_IdempotencyLevelToJSON(
   object: MethodOptions_IdempotencyLevel,
 ): string {
@@ -491,8 +301,8 @@ export function methodOptions_IdempotencyLevelToJSON(
 export interface UninterpretedOption {
   name: UninterpretedOption_NamePart[];
   identifierValue?: string | undefined;
-  positiveIntValue?: string | undefined;
-  negativeIntValue?: string | undefined;
+  positiveIntValue?: bigint | undefined;
+  negativeIntValue?: bigint | undefined;
   doubleValue?: number | undefined;
   stringValue?: Uint8Array | undefined;
   aggregateValue?: string | undefined;
@@ -523,31 +333,6 @@ export enum FeatureSet_FieldPresence {
   LEGACY_REQUIRED = 3,
 }
 
-export function featureSet_FieldPresenceFromJSON(
-  object: any,
-): FeatureSet_FieldPresence {
-  switch (object) {
-    case 0:
-    case "FIELD_PRESENCE_UNKNOWN":
-      return FeatureSet_FieldPresence.FIELD_PRESENCE_UNKNOWN;
-    case 1:
-    case "EXPLICIT":
-      return FeatureSet_FieldPresence.EXPLICIT;
-    case 2:
-    case "IMPLICIT":
-      return FeatureSet_FieldPresence.IMPLICIT;
-    case 3:
-    case "LEGACY_REQUIRED":
-      return FeatureSet_FieldPresence.LEGACY_REQUIRED;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum FeatureSet_FieldPresence",
-      );
-  }
-}
-
 export function featureSet_FieldPresenceToJSON(
   object: FeatureSet_FieldPresence,
 ): string {
@@ -575,24 +360,6 @@ export enum FeatureSet_EnumType {
   CLOSED = 2,
 }
 
-export function featureSet_EnumTypeFromJSON(object: any): FeatureSet_EnumType {
-  switch (object) {
-    case 0:
-    case "ENUM_TYPE_UNKNOWN":
-      return FeatureSet_EnumType.ENUM_TYPE_UNKNOWN;
-    case 1:
-    case "OPEN":
-      return FeatureSet_EnumType.OPEN;
-    case 2:
-    case "CLOSED":
-      return FeatureSet_EnumType.CLOSED;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum FeatureSet_EnumType",
-      );
-  }
-}
-
 export function featureSet_EnumTypeToJSON(object: FeatureSet_EnumType): string {
   switch (object) {
     case FeatureSet_EnumType.ENUM_TYPE_UNKNOWN:
@@ -612,28 +379,6 @@ export enum FeatureSet_RepeatedFieldEncoding {
   REPEATED_FIELD_ENCODING_UNKNOWN = 0,
   PACKED = 1,
   EXPANDED = 2,
-}
-
-export function featureSet_RepeatedFieldEncodingFromJSON(
-  object: any,
-): FeatureSet_RepeatedFieldEncoding {
-  switch (object) {
-    case 0:
-    case "REPEATED_FIELD_ENCODING_UNKNOWN":
-      return FeatureSet_RepeatedFieldEncoding.REPEATED_FIELD_ENCODING_UNKNOWN;
-    case 1:
-    case "PACKED":
-      return FeatureSet_RepeatedFieldEncoding.PACKED;
-    case 2:
-    case "EXPANDED":
-      return FeatureSet_RepeatedFieldEncoding.EXPANDED;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum FeatureSet_RepeatedFieldEncoding",
-      );
-  }
 }
 
 export function featureSet_RepeatedFieldEncodingToJSON(
@@ -661,28 +406,6 @@ export enum FeatureSet_Utf8Validation {
   NONE = 3,
 }
 
-export function featureSet_Utf8ValidationFromJSON(
-  object: any,
-): FeatureSet_Utf8Validation {
-  switch (object) {
-    case 0:
-    case "UTF8_VALIDATION_UNKNOWN":
-      return FeatureSet_Utf8Validation.UTF8_VALIDATION_UNKNOWN;
-    case 2:
-    case "VERIFY":
-      return FeatureSet_Utf8Validation.VERIFY;
-    case 3:
-    case "NONE":
-      return FeatureSet_Utf8Validation.NONE;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum FeatureSet_Utf8Validation",
-      );
-  }
-}
-
 export function featureSet_Utf8ValidationToJSON(
   object: FeatureSet_Utf8Validation,
 ): string {
@@ -706,28 +429,6 @@ export enum FeatureSet_MessageEncoding {
   MESSAGE_ENCODING_UNKNOWN = 0,
   LENGTH_PREFIXED = 1,
   DELIMITED = 2,
-}
-
-export function featureSet_MessageEncodingFromJSON(
-  object: any,
-): FeatureSet_MessageEncoding {
-  switch (object) {
-    case 0:
-    case "MESSAGE_ENCODING_UNKNOWN":
-      return FeatureSet_MessageEncoding.MESSAGE_ENCODING_UNKNOWN;
-    case 1:
-    case "LENGTH_PREFIXED":
-      return FeatureSet_MessageEncoding.LENGTH_PREFIXED;
-    case 2:
-    case "DELIMITED":
-      return FeatureSet_MessageEncoding.DELIMITED;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum FeatureSet_MessageEncoding",
-      );
-  }
 }
 
 export function featureSet_MessageEncodingToJSON(
@@ -755,26 +456,6 @@ export enum FeatureSet_JsonFormat {
   LEGACY_BEST_EFFORT = 2,
 }
 
-export function featureSet_JsonFormatFromJSON(
-  object: any,
-): FeatureSet_JsonFormat {
-  switch (object) {
-    case 0:
-    case "JSON_FORMAT_UNKNOWN":
-      return FeatureSet_JsonFormat.JSON_FORMAT_UNKNOWN;
-    case 1:
-    case "ALLOW":
-      return FeatureSet_JsonFormat.ALLOW;
-    case 2:
-    case "LEGACY_BEST_EFFORT":
-      return FeatureSet_JsonFormat.LEGACY_BEST_EFFORT;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum FeatureSet_JsonFormat",
-      );
-  }
-}
-
 export function featureSet_JsonFormatToJSON(
   object: FeatureSet_JsonFormat,
 ): string {
@@ -796,28 +477,6 @@ export enum FeatureSet_EnforceNamingStyle {
   ENFORCE_NAMING_STYLE_UNKNOWN = 0,
   STYLE2024 = 1,
   STYLE_LEGACY = 2,
-}
-
-export function featureSet_EnforceNamingStyleFromJSON(
-  object: any,
-): FeatureSet_EnforceNamingStyle {
-  switch (object) {
-    case 0:
-    case "ENFORCE_NAMING_STYLE_UNKNOWN":
-      return FeatureSet_EnforceNamingStyle.ENFORCE_NAMING_STYLE_UNKNOWN;
-    case 1:
-    case "STYLE2024":
-      return FeatureSet_EnforceNamingStyle.STYLE2024;
-    case 2:
-    case "STYLE_LEGACY":
-      return FeatureSet_EnforceNamingStyle.STYLE_LEGACY;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum FeatureSet_EnforceNamingStyle",
-      );
-  }
 }
 
 export function featureSet_EnforceNamingStyleToJSON(
@@ -847,34 +506,6 @@ export enum FeatureSet_VisibilityFeature_DefaultSymbolVisibility {
   EXPORT_TOP_LEVEL = 2,
   LOCAL_ALL = 3,
   STRICT = 4,
-}
-
-export function featureSet_VisibilityFeature_DefaultSymbolVisibilityFromJSON(
-  object: any,
-): FeatureSet_VisibilityFeature_DefaultSymbolVisibility {
-  switch (object) {
-    case 0:
-    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
-      return FeatureSet_VisibilityFeature_DefaultSymbolVisibility.DEFAULT_SYMBOL_VISIBILITY_UNKNOWN;
-    case 1:
-    case "EXPORT_ALL":
-      return FeatureSet_VisibilityFeature_DefaultSymbolVisibility.EXPORT_ALL;
-    case 2:
-    case "EXPORT_TOP_LEVEL":
-      return FeatureSet_VisibilityFeature_DefaultSymbolVisibility.EXPORT_TOP_LEVEL;
-    case 3:
-    case "LOCAL_ALL":
-      return FeatureSet_VisibilityFeature_DefaultSymbolVisibility.LOCAL_ALL;
-    case 4:
-    case "STRICT":
-      return FeatureSet_VisibilityFeature_DefaultSymbolVisibility.STRICT;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum FeatureSet_VisibilityFeature_DefaultSymbolVisibility",
-      );
-  }
 }
 
 export function featureSet_VisibilityFeature_DefaultSymbolVisibilityToJSON(
@@ -1217,76 +848,6 @@ export const FileOptions: MessageFns<FileOptions> = {
     return message;
   },
 
-  fromJSON(object: any): FileOptions {
-    return {
-      javaPackage: isSet(object.javaPackage)
-        ? globalThis.String(object.javaPackage)
-        : "",
-      javaOuterClassname: isSet(object.javaOuterClassname)
-        ? globalThis.String(object.javaOuterClassname)
-        : "",
-      javaMultipleFiles: isSet(object.javaMultipleFiles)
-        ? globalThis.Boolean(object.javaMultipleFiles)
-        : false,
-      javaGenerateEqualsAndHash: isSet(object.javaGenerateEqualsAndHash)
-        ? globalThis.Boolean(object.javaGenerateEqualsAndHash)
-        : false,
-      javaStringCheckUtf8: isSet(object.javaStringCheckUtf8)
-        ? globalThis.Boolean(object.javaStringCheckUtf8)
-        : false,
-      optimizeFor: isSet(object.optimizeFor)
-        ? fileOptions_OptimizeModeFromJSON(object.optimizeFor)
-        : 1,
-      goPackage: isSet(object.goPackage)
-        ? globalThis.String(object.goPackage)
-        : "",
-      ccGenericServices: isSet(object.ccGenericServices)
-        ? globalThis.Boolean(object.ccGenericServices)
-        : false,
-      javaGenericServices: isSet(object.javaGenericServices)
-        ? globalThis.Boolean(object.javaGenericServices)
-        : false,
-      pyGenericServices: isSet(object.pyGenericServices)
-        ? globalThis.Boolean(object.pyGenericServices)
-        : false,
-      deprecated: isSet(object.deprecated)
-        ? globalThis.Boolean(object.deprecated)
-        : false,
-      ccEnableArenas: isSet(object.ccEnableArenas)
-        ? globalThis.Boolean(object.ccEnableArenas)
-        : true,
-      objcClassPrefix: isSet(object.objcClassPrefix)
-        ? globalThis.String(object.objcClassPrefix)
-        : "",
-      csharpNamespace: isSet(object.csharpNamespace)
-        ? globalThis.String(object.csharpNamespace)
-        : "",
-      swiftPrefix: isSet(object.swiftPrefix)
-        ? globalThis.String(object.swiftPrefix)
-        : "",
-      phpClassPrefix: isSet(object.phpClassPrefix)
-        ? globalThis.String(object.phpClassPrefix)
-        : "",
-      phpNamespace: isSet(object.phpNamespace)
-        ? globalThis.String(object.phpNamespace)
-        : "",
-      phpMetadataNamespace: isSet(object.phpMetadataNamespace)
-        ? globalThis.String(object.phpMetadataNamespace)
-        : "",
-      rubyPackage: isSet(object.rubyPackage)
-        ? globalThis.String(object.rubyPackage)
-        : "",
-      features: isSet(object.features)
-        ? FeatureSet.fromJSON(object.features)
-        : undefined,
-      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) =>
-            UninterpretedOption.fromJSON(e),
-          )
-        : [],
-    };
-  },
-
   toJSON(message: FileOptions): unknown {
     const obj: any = {};
     if (message.javaPackage !== undefined && message.javaPackage !== "") {
@@ -1514,36 +1075,6 @@ export const MessageOptions: MessageFns<MessageOptions> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): MessageOptions {
-    return {
-      messageSetWireFormat: isSet(object.messageSetWireFormat)
-        ? globalThis.Boolean(object.messageSetWireFormat)
-        : false,
-      noStandardDescriptorAccessor: isSet(object.noStandardDescriptorAccessor)
-        ? globalThis.Boolean(object.noStandardDescriptorAccessor)
-        : false,
-      deprecated: isSet(object.deprecated)
-        ? globalThis.Boolean(object.deprecated)
-        : false,
-      mapEntry: isSet(object.mapEntry)
-        ? globalThis.Boolean(object.mapEntry)
-        : false,
-      deprecatedLegacyJsonFieldConflicts: isSet(
-        object.deprecatedLegacyJsonFieldConflicts,
-      )
-        ? globalThis.Boolean(object.deprecatedLegacyJsonFieldConflicts)
-        : false,
-      features: isSet(object.features)
-        ? FeatureSet.fromJSON(object.features)
-        : undefined,
-      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) =>
-            UninterpretedOption.fromJSON(e),
-          )
-        : [],
-    };
   },
 
   toJSON(message: MessageOptions): unknown {
@@ -1806,51 +1337,6 @@ export const FieldOptions: MessageFns<FieldOptions> = {
     return message;
   },
 
-  fromJSON(object: any): FieldOptions {
-    return {
-      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
-      packed: isSet(object.packed) ? globalThis.Boolean(object.packed) : false,
-      jstype: isSet(object.jstype)
-        ? fieldOptions_JSTypeFromJSON(object.jstype)
-        : 0,
-      lazy: isSet(object.lazy) ? globalThis.Boolean(object.lazy) : false,
-      unverifiedLazy: isSet(object.unverifiedLazy)
-        ? globalThis.Boolean(object.unverifiedLazy)
-        : false,
-      deprecated: isSet(object.deprecated)
-        ? globalThis.Boolean(object.deprecated)
-        : false,
-      weak: isSet(object.weak) ? globalThis.Boolean(object.weak) : false,
-      debugRedact: isSet(object.debugRedact)
-        ? globalThis.Boolean(object.debugRedact)
-        : false,
-      retention: isSet(object.retention)
-        ? fieldOptions_OptionRetentionFromJSON(object.retention)
-        : 0,
-      targets: globalThis.Array.isArray(object?.targets)
-        ? object.targets.map((e: any) =>
-            fieldOptions_OptionTargetTypeFromJSON(e),
-          )
-        : [],
-      editionDefaults: globalThis.Array.isArray(object?.editionDefaults)
-        ? object.editionDefaults.map((e: any) =>
-            FieldOptions_EditionDefault.fromJSON(e),
-          )
-        : [],
-      features: isSet(object.features)
-        ? FeatureSet.fromJSON(object.features)
-        : undefined,
-      featureSupport: isSet(object.featureSupport)
-        ? FieldOptions_FeatureSupport.fromJSON(object.featureSupport)
-        : undefined,
-      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) =>
-            UninterpretedOption.fromJSON(e),
-          )
-        : [],
-    };
-  },
-
   toJSON(message: FieldOptions): unknown {
     const obj: any = {};
     if (message.ctype !== undefined && message.ctype !== 0) {
@@ -1965,13 +1451,6 @@ export const FieldOptions_EditionDefault: MessageFns<FieldOptions_EditionDefault
       return message;
     },
 
-    fromJSON(object: any): FieldOptions_EditionDefault {
-      return {
-        edition: isSet(object.edition) ? editionFromJSON(object.edition) : 0,
-        value: isSet(object.value) ? globalThis.String(object.value) : "",
-      };
-    },
-
     toJSON(message: FieldOptions_EditionDefault): unknown {
       const obj: any = {};
       if (message.edition !== undefined && message.edition !== 0) {
@@ -2078,23 +1557,6 @@ export const FieldOptions_FeatureSupport: MessageFns<FieldOptions_FeatureSupport
       return message;
     },
 
-    fromJSON(object: any): FieldOptions_FeatureSupport {
-      return {
-        editionIntroduced: isSet(object.editionIntroduced)
-          ? editionFromJSON(object.editionIntroduced)
-          : 0,
-        editionDeprecated: isSet(object.editionDeprecated)
-          ? editionFromJSON(object.editionDeprecated)
-          : 0,
-        deprecationWarning: isSet(object.deprecationWarning)
-          ? globalThis.String(object.deprecationWarning)
-          : "",
-        editionRemoved: isSet(object.editionRemoved)
-          ? editionFromJSON(object.editionRemoved)
-          : 0,
-      };
-    },
-
     toJSON(message: FieldOptions_FeatureSupport): unknown {
       const obj: any = {};
       if (
@@ -2178,19 +1640,6 @@ export const OneofOptions: MessageFns<OneofOptions> = {
     return message;
   },
 
-  fromJSON(object: any): OneofOptions {
-    return {
-      features: isSet(object.features)
-        ? FeatureSet.fromJSON(object.features)
-        : undefined,
-      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) =>
-            UninterpretedOption.fromJSON(e),
-          )
-        : [],
-    };
-  },
-
   toJSON(message: OneofOptions): unknown {
     const obj: any = {};
     if (message.features !== undefined) {
@@ -2267,22 +1716,6 @@ export const ServiceOptions: MessageFns<ServiceOptions> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): ServiceOptions {
-    return {
-      features: isSet(object.features)
-        ? FeatureSet.fromJSON(object.features)
-        : undefined,
-      deprecated: isSet(object.deprecated)
-        ? globalThis.Boolean(object.deprecated)
-        : false,
-      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) =>
-            UninterpretedOption.fromJSON(e),
-          )
-        : [],
-    };
   },
 
   toJSON(message: ServiceOptions): unknown {
@@ -2385,25 +1818,6 @@ export const MethodOptions: MessageFns<MethodOptions> = {
     return message;
   },
 
-  fromJSON(object: any): MethodOptions {
-    return {
-      deprecated: isSet(object.deprecated)
-        ? globalThis.Boolean(object.deprecated)
-        : false,
-      idempotencyLevel: isSet(object.idempotencyLevel)
-        ? methodOptions_IdempotencyLevelFromJSON(object.idempotencyLevel)
-        : 0,
-      features: isSet(object.features)
-        ? FeatureSet.fromJSON(object.features)
-        : undefined,
-      uninterpretedOption: globalThis.Array.isArray(object?.uninterpretedOption)
-        ? object.uninterpretedOption.map((e: any) =>
-            UninterpretedOption.fromJSON(e),
-          )
-        : [],
-    };
-  },
-
   toJSON(message: MethodOptions): unknown {
     const obj: any = {};
     if (message.deprecated !== undefined && message.deprecated !== false) {
@@ -2433,8 +1847,8 @@ function createBaseUninterpretedOption(): UninterpretedOption {
   return {
     name: [],
     identifierValue: "",
-    positiveIntValue: "0",
-    negativeIntValue: "0",
+    positiveIntValue: 0n,
+    negativeIntValue: 0n,
     doubleValue: 0,
     stringValue: new Uint8Array(0),
     aggregateValue: "",
@@ -2457,14 +1871,29 @@ export const UninterpretedOption: MessageFns<UninterpretedOption> = {
     }
     if (
       message.positiveIntValue !== undefined &&
-      message.positiveIntValue !== "0"
+      message.positiveIntValue !== 0n
     ) {
+      if (
+        BigInt.asUintN(64, message.positiveIntValue) !==
+        message.positiveIntValue
+      ) {
+        throw new globalThis.Error(
+          "value provided for field message.positiveIntValue of type uint64 too large",
+        );
+      }
       writer.uint32(32).uint64(message.positiveIntValue);
     }
     if (
       message.negativeIntValue !== undefined &&
-      message.negativeIntValue !== "0"
+      message.negativeIntValue !== 0n
     ) {
+      if (
+        BigInt.asIntN(64, message.negativeIntValue) !== message.negativeIntValue
+      ) {
+        throw new globalThis.Error(
+          "value provided for field message.negativeIntValue of type int64 too large",
+        );
+      }
       writer.uint32(40).int64(message.negativeIntValue);
     }
     if (message.doubleValue !== undefined && message.doubleValue !== 0) {
@@ -2513,7 +1942,7 @@ export const UninterpretedOption: MessageFns<UninterpretedOption> = {
             break;
           }
 
-          message.positiveIntValue = reader.uint64().toString();
+          message.positiveIntValue = reader.uint64() as bigint;
           continue;
         }
         case 5: {
@@ -2521,7 +1950,7 @@ export const UninterpretedOption: MessageFns<UninterpretedOption> = {
             break;
           }
 
-          message.negativeIntValue = reader.int64().toString();
+          message.negativeIntValue = reader.int64() as bigint;
           continue;
         }
         case 6: {
@@ -2557,32 +1986,6 @@ export const UninterpretedOption: MessageFns<UninterpretedOption> = {
     return message;
   },
 
-  fromJSON(object: any): UninterpretedOption {
-    return {
-      name: globalThis.Array.isArray(object?.name)
-        ? object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e))
-        : [],
-      identifierValue: isSet(object.identifierValue)
-        ? globalThis.String(object.identifierValue)
-        : "",
-      positiveIntValue: isSet(object.positiveIntValue)
-        ? globalThis.String(object.positiveIntValue)
-        : "0",
-      negativeIntValue: isSet(object.negativeIntValue)
-        ? globalThis.String(object.negativeIntValue)
-        : "0",
-      doubleValue: isSet(object.doubleValue)
-        ? globalThis.Number(object.doubleValue)
-        : 0,
-      stringValue: isSet(object.stringValue)
-        ? bytesFromBase64(object.stringValue)
-        : new Uint8Array(0),
-      aggregateValue: isSet(object.aggregateValue)
-        ? globalThis.String(object.aggregateValue)
-        : "",
-    };
-  },
-
   toJSON(message: UninterpretedOption): unknown {
     const obj: any = {};
     if (message.name?.length) {
@@ -2598,15 +2001,15 @@ export const UninterpretedOption: MessageFns<UninterpretedOption> = {
     }
     if (
       message.positiveIntValue !== undefined &&
-      message.positiveIntValue !== "0"
+      message.positiveIntValue !== 0n
     ) {
-      obj.positiveIntValue = message.positiveIntValue;
+      obj.positiveIntValue = message.positiveIntValue.toString();
     }
     if (
       message.negativeIntValue !== undefined &&
-      message.negativeIntValue !== "0"
+      message.negativeIntValue !== 0n
     ) {
-      obj.negativeIntValue = message.negativeIntValue;
+      obj.negativeIntValue = message.negativeIntValue.toString();
     }
     if (message.doubleValue !== undefined && message.doubleValue !== 0) {
       obj.doubleValue = message.doubleValue;
@@ -2674,17 +2077,6 @@ export const UninterpretedOption_NamePart: MessageFns<UninterpretedOption_NamePa
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): UninterpretedOption_NamePart {
-      return {
-        namePart: isSet(object.namePart)
-          ? globalThis.String(object.namePart)
-          : "",
-        isExtension: isSet(object.isExtension)
-          ? globalThis.Boolean(object.isExtension)
-          : false,
-      };
     },
 
     toJSON(message: UninterpretedOption_NamePart): unknown {
@@ -2837,37 +2229,6 @@ export const FeatureSet: MessageFns<FeatureSet> = {
     return message;
   },
 
-  fromJSON(object: any): FeatureSet {
-    return {
-      fieldPresence: isSet(object.fieldPresence)
-        ? featureSet_FieldPresenceFromJSON(object.fieldPresence)
-        : 0,
-      enumType: isSet(object.enumType)
-        ? featureSet_EnumTypeFromJSON(object.enumType)
-        : 0,
-      repeatedFieldEncoding: isSet(object.repeatedFieldEncoding)
-        ? featureSet_RepeatedFieldEncodingFromJSON(object.repeatedFieldEncoding)
-        : 0,
-      utf8Validation: isSet(object.utf8Validation)
-        ? featureSet_Utf8ValidationFromJSON(object.utf8Validation)
-        : 0,
-      messageEncoding: isSet(object.messageEncoding)
-        ? featureSet_MessageEncodingFromJSON(object.messageEncoding)
-        : 0,
-      jsonFormat: isSet(object.jsonFormat)
-        ? featureSet_JsonFormatFromJSON(object.jsonFormat)
-        : 0,
-      enforceNamingStyle: isSet(object.enforceNamingStyle)
-        ? featureSet_EnforceNamingStyleFromJSON(object.enforceNamingStyle)
-        : 0,
-      defaultSymbolVisibility: isSet(object.defaultSymbolVisibility)
-        ? featureSet_VisibilityFeature_DefaultSymbolVisibilityFromJSON(
-            object.defaultSymbolVisibility,
-          )
-        : 0,
-    };
-  },
-
   toJSON(message: FeatureSet): unknown {
     const obj: any = {};
     if (message.fieldPresence !== undefined && message.fieldPresence !== 0) {
@@ -2954,28 +2315,11 @@ export const FeatureSet_VisibilityFeature: MessageFns<FeatureSet_VisibilityFeatu
       return message;
     },
 
-    fromJSON(_: any): FeatureSet_VisibilityFeature {
-      return {};
-    },
-
     toJSON(_: FeatureSet_VisibilityFeature): unknown {
       const obj: any = {};
       return obj;
     },
   };
-
-function bytesFromBase64(b64: string): Uint8Array {
-  if ((globalThis as any).Buffer) {
-    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
-  } else {
-    const bin = globalThis.atob(b64);
-    const arr = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; ++i) {
-      arr[i] = bin.charCodeAt(i);
-    }
-    return arr;
-  }
-}
 
 function base64FromBytes(arr: Uint8Array): string {
   if ((globalThis as any).Buffer) {
@@ -2989,13 +2333,8 @@ function base64FromBytes(arr: Uint8Array): string {
   }
 }
 
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

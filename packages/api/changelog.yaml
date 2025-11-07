@@ -1,0 +1,11 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: Generated code
+      pull: 1271
+
+references:
+  "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es
+
+initialCommit: 7c9a46d98af3f606f28deb6f5485446ebdf18d11

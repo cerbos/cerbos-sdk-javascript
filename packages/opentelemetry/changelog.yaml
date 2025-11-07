@@ -1,5 +1,5 @@
 unreleased:
-  type: patch
+  type: minor
 
   bumped:
     "@opentelemetry/instrumentation":
@@ -446,6 +446,7 @@ releases:
         pull: 438
 
 references:
+  "@cerbos/api": ../api/README.md
   "@cerbos/core": ../core/README.md
   "@cerbos/grpc": ../grpc/README.md
   "@cerbos/http": ../http/README.md

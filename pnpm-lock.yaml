@@ -60,14 +60,32 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
+  packages/api:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^2.10.0
+        version: 2.10.0
+
   packages/core:
     dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^2.10.0
+        version: 2.10.0
+      '@cerbos/api':
+        specifier: ^0.0.1
+        version: link:../api
       uuid:
         specifier: ^13.0.0
         version: 13.0.0
 
   packages/embedded:
     dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^2.10.0
+        version: 2.10.0
+      '@cerbos/api':
+        specifier: ^0.0.1
+        version: link:../api
       '@cerbos/core':
         specifier: ^0.24.1
         version: link:../core
@@ -77,6 +95,12 @@ importers:
 
   packages/files:
     dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^2.10.0
+        version: 2.10.0
+      '@cerbos/api':
+        specifier: ^0.0.1
+        version: link:../api
       '@cerbos/core':
         specifier: ^0.24.1
         version: link:../core
@@ -89,6 +113,9 @@ importers:
       '@bufbuild/protobuf':
         specifier: ^2.10.0
         version: 2.10.0
+      '@cerbos/api':
+        specifier: ^0.0.1
+        version: link:../api
       '@cerbos/core':
         specifier: ^0.24.1
         version: link:../core
@@ -98,6 +125,12 @@ importers:
 
   packages/http:
     dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^2.10.0
+        version: 2.10.0
+      '@cerbos/api':
+        specifier: ^0.0.1
+        version: link:../api
       '@cerbos/core':
         specifier: ^0.24.1
         version: link:../core
@@ -136,6 +169,12 @@ importers:
 
   packages/opentelemetry:
     dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^2.10.0
+        version: 2.10.0
+      '@cerbos/api':
+        specifier: ^0.0.1
+        version: link:../api
       '@cerbos/core':
         specifier: ^0.24.1
         version: link:../core

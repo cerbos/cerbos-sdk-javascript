@@ -181,37 +181,6 @@ export const HttpRule: MessageFns<HttpRule> = {
     return message;
   },
 
-  fromJSON(object: any): HttpRule {
-    return {
-      selector: isSet(object.selector)
-        ? globalThis.String(object.selector)
-        : "",
-      pattern: isSet(object.get)
-        ? { $case: "get", get: globalThis.String(object.get) }
-        : isSet(object.put)
-          ? { $case: "put", put: globalThis.String(object.put) }
-          : isSet(object.post)
-            ? { $case: "post", post: globalThis.String(object.post) }
-            : isSet(object.delete)
-              ? { $case: "delete", delete: globalThis.String(object.delete) }
-              : isSet(object.patch)
-                ? { $case: "patch", patch: globalThis.String(object.patch) }
-                : isSet(object.custom)
-                  ? {
-                      $case: "custom",
-                      custom: CustomHttpPattern.fromJSON(object.custom),
-                    }
-                  : undefined,
-      body: isSet(object.body) ? globalThis.String(object.body) : "",
-      responseBody: isSet(object.responseBody)
-        ? globalThis.String(object.responseBody)
-        : "",
-      additionalBindings: globalThis.Array.isArray(object?.additionalBindings)
-        ? object.additionalBindings.map((e: any) => HttpRule.fromJSON(e))
-        : [],
-    };
-  },
-
   toJSON(message: HttpRule): unknown {
     const obj: any = {};
     if (message.selector !== "") {
@@ -296,13 +265,6 @@ export const CustomHttpPattern: MessageFns<CustomHttpPattern> = {
     return message;
   },
 
-  fromJSON(object: any): CustomHttpPattern {
-    return {
-      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
-      path: isSet(object.path) ? globalThis.String(object.path) : "",
-    };
-  },
-
   toJSON(message: CustomHttpPattern): unknown {
     const obj: any = {};
     if (message.kind !== "") {
@@ -315,13 +277,8 @@ export const CustomHttpPattern: MessageFns<CustomHttpPattern> = {
   },
 };
 
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

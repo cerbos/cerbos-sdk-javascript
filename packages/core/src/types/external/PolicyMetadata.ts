@@ -24,7 +24,7 @@ export interface PolicyMetadata {
   /**
    * Hash of policy contents.
    */
-  hash: string | undefined;
+  hash: bigint | undefined;
 
   /**
    * Deprecated.

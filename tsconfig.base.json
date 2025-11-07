@@ -1,6 +1,7 @@
 {
   "extends": ["@tsconfig/node20", "@tsconfig/strictest"],
   "compilerOptions": {
-    "composite": true
+    "composite": true,
+    "exactOptionalPropertyTypes": false
   }
 }

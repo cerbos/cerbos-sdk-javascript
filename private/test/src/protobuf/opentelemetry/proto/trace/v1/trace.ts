@@ -32,8 +32,8 @@ export interface Span {
   flags: number;
   name: string;
   kind: Span_SpanKind;
-  startTimeUnixNano: string;
-  endTimeUnixNano: string;
+  startTimeUnixNano: bigint;
+  endTimeUnixNano: bigint;
   attributes: KeyValue[];
   droppedAttributesCount: number;
   events: Span_Event[];
@@ -50,33 +50,6 @@ export enum Span_SpanKind {
   SPAN_KIND_CLIENT = 3,
   SPAN_KIND_PRODUCER = 4,
   SPAN_KIND_CONSUMER = 5,
-}
-
-export function span_SpanKindFromJSON(object: any): Span_SpanKind {
-  switch (object) {
-    case 0:
-    case "SPAN_KIND_UNSPECIFIED":
-      return Span_SpanKind.SPAN_KIND_UNSPECIFIED;
-    case 1:
-    case "SPAN_KIND_INTERNAL":
-      return Span_SpanKind.SPAN_KIND_INTERNAL;
-    case 2:
-    case "SPAN_KIND_SERVER":
-      return Span_SpanKind.SPAN_KIND_SERVER;
-    case 3:
-    case "SPAN_KIND_CLIENT":
-      return Span_SpanKind.SPAN_KIND_CLIENT;
-    case 4:
-    case "SPAN_KIND_PRODUCER":
-      return Span_SpanKind.SPAN_KIND_PRODUCER;
-    case 5:
-    case "SPAN_KIND_CONSUMER":
-      return Span_SpanKind.SPAN_KIND_CONSUMER;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum Span_SpanKind",
-      );
-  }
 }
 
 export function span_SpanKindToJSON(object: Span_SpanKind): string {
@@ -101,7 +74,7 @@ export function span_SpanKindToJSON(object: Span_SpanKind): string {
 }
 
 export interface Span_Event {
-  timeUnixNano: string;
+  timeUnixNano: bigint;
   name: string;
   attributes: KeyValue[];
   droppedAttributesCount: number;
@@ -125,24 +98,6 @@ export enum Status_StatusCode {
   STATUS_CODE_UNSET = 0,
   STATUS_CODE_OK = 1,
   STATUS_CODE_ERROR = 2,
-}
-
-export function status_StatusCodeFromJSON(object: any): Status_StatusCode {
-  switch (object) {
-    case 0:
-    case "STATUS_CODE_UNSET":
-      return Status_StatusCode.STATUS_CODE_UNSET;
-    case 1:
-    case "STATUS_CODE_OK":
-      return Status_StatusCode.STATUS_CODE_OK;
-    case 2:
-    case "STATUS_CODE_ERROR":
-      return Status_StatusCode.STATUS_CODE_ERROR;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " + object + " for enum Status_StatusCode",
-      );
-  }
 }
 
 export function status_StatusCodeToJSON(object: Status_StatusCode): string {
@@ -200,14 +155,6 @@ export const TracesData: MessageFns<TracesData> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): TracesData {
-    return {
-      resourceSpans: globalThis.Array.isArray(object?.resourceSpans)
-        ? object.resourceSpans.map((e: any) => ResourceSpans.fromJSON(e))
-        : [],
-    };
   },
 
   toJSON(message: TracesData): unknown {
@@ -281,20 +228,6 @@ export const ResourceSpans: MessageFns<ResourceSpans> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): ResourceSpans {
-    return {
-      resource: isSet(object.resource)
-        ? Resource.fromJSON(object.resource)
-        : undefined,
-      scopeSpans: globalThis.Array.isArray(object?.scopeSpans)
-        ? object.scopeSpans.map((e: any) => ScopeSpans.fromJSON(e))
-        : [],
-      schemaUrl: isSet(object.schemaUrl)
-        ? globalThis.String(object.schemaUrl)
-        : "",
-    };
   },
 
   toJSON(message: ResourceSpans): unknown {
@@ -377,20 +310,6 @@ export const ScopeSpans: MessageFns<ScopeSpans> = {
     return message;
   },
 
-  fromJSON(object: any): ScopeSpans {
-    return {
-      scope: isSet(object.scope)
-        ? InstrumentationScope.fromJSON(object.scope)
-        : undefined,
-      spans: globalThis.Array.isArray(object?.spans)
-        ? object.spans.map((e: any) => Span.fromJSON(e))
-        : [],
-      schemaUrl: isSet(object.schemaUrl)
-        ? globalThis.String(object.schemaUrl)
-        : "",
-    };
-  },
-
   toJSON(message: ScopeSpans): unknown {
     const obj: any = {};
     if (message.scope !== undefined) {
@@ -415,8 +334,8 @@ function createBaseSpan(): Span {
     flags: 0,
     name: "",
     kind: 0,
-    startTimeUnixNano: "0",
-    endTimeUnixNano: "0",
+    startTimeUnixNano: 0n,
+    endTimeUnixNano: 0n,
     attributes: [],
     droppedAttributesCount: 0,
     events: [],
@@ -453,10 +372,25 @@ export const Span: MessageFns<Span> = {
     if (message.kind !== 0) {
       writer.uint32(48).int32(message.kind);
     }
-    if (message.startTimeUnixNano !== "0") {
+    if (message.startTimeUnixNano !== 0n) {
+      if (
+        BigInt.asUintN(64, message.startTimeUnixNano) !==
+        message.startTimeUnixNano
+      ) {
+        throw new globalThis.Error(
+          "value provided for field message.startTimeUnixNano of type fixed64 too large",
+        );
+      }
       writer.uint32(57).fixed64(message.startTimeUnixNano);
     }
-    if (message.endTimeUnixNano !== "0") {
+    if (message.endTimeUnixNano !== 0n) {
+      if (
+        BigInt.asUintN(64, message.endTimeUnixNano) !== message.endTimeUnixNano
+      ) {
+        throw new globalThis.Error(
+          "value provided for field message.endTimeUnixNano of type fixed64 too large",
+        );
+      }
       writer.uint32(65).fixed64(message.endTimeUnixNano);
     }
     for (const v of message.attributes) {
@@ -552,7 +486,7 @@ export const Span: MessageFns<Span> = {
             break;
           }
 
-          message.startTimeUnixNano = reader.fixed64().toString();
+          message.startTimeUnixNano = reader.fixed64() as bigint;
           continue;
         }
         case 8: {
@@ -560,7 +494,7 @@ export const Span: MessageFns<Span> = {
             break;
           }
 
-          message.endTimeUnixNano = reader.fixed64().toString();
+          message.endTimeUnixNano = reader.fixed64() as bigint;
           continue;
         }
         case 9: {
@@ -628,51 +562,6 @@ export const Span: MessageFns<Span> = {
     return message;
   },
 
-  fromJSON(object: any): Span {
-    return {
-      traceId: isSet(object.traceId)
-        ? bytesFromBase64(object.traceId)
-        : new Uint8Array(0),
-      spanId: isSet(object.spanId)
-        ? bytesFromBase64(object.spanId)
-        : new Uint8Array(0),
-      traceState: isSet(object.traceState)
-        ? globalThis.String(object.traceState)
-        : "",
-      parentSpanId: isSet(object.parentSpanId)
-        ? bytesFromBase64(object.parentSpanId)
-        : new Uint8Array(0),
-      flags: isSet(object.flags) ? globalThis.Number(object.flags) : 0,
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      kind: isSet(object.kind) ? span_SpanKindFromJSON(object.kind) : 0,
-      startTimeUnixNano: isSet(object.startTimeUnixNano)
-        ? globalThis.String(object.startTimeUnixNano)
-        : "0",
-      endTimeUnixNano: isSet(object.endTimeUnixNano)
-        ? globalThis.String(object.endTimeUnixNano)
-        : "0",
-      attributes: globalThis.Array.isArray(object?.attributes)
-        ? object.attributes.map((e: any) => KeyValue.fromJSON(e))
-        : [],
-      droppedAttributesCount: isSet(object.droppedAttributesCount)
-        ? globalThis.Number(object.droppedAttributesCount)
-        : 0,
-      events: globalThis.Array.isArray(object?.events)
-        ? object.events.map((e: any) => Span_Event.fromJSON(e))
-        : [],
-      droppedEventsCount: isSet(object.droppedEventsCount)
-        ? globalThis.Number(object.droppedEventsCount)
-        : 0,
-      links: globalThis.Array.isArray(object?.links)
-        ? object.links.map((e: any) => Span_Link.fromJSON(e))
-        : [],
-      droppedLinksCount: isSet(object.droppedLinksCount)
-        ? globalThis.Number(object.droppedLinksCount)
-        : 0,
-      status: isSet(object.status) ? Status.fromJSON(object.status) : undefined,
-    };
-  },
-
   toJSON(message: Span): unknown {
     const obj: any = {};
     if (message.traceId.length !== 0) {
@@ -696,11 +585,11 @@ export const Span: MessageFns<Span> = {
     if (message.kind !== 0) {
       obj.kind = span_SpanKindToJSON(message.kind);
     }
-    if (message.startTimeUnixNano !== "0") {
-      obj.startTimeUnixNano = message.startTimeUnixNano;
+    if (message.startTimeUnixNano !== 0n) {
+      obj.startTimeUnixNano = message.startTimeUnixNano.toString();
     }
-    if (message.endTimeUnixNano !== "0") {
-      obj.endTimeUnixNano = message.endTimeUnixNano;
+    if (message.endTimeUnixNano !== 0n) {
+      obj.endTimeUnixNano = message.endTimeUnixNano.toString();
     }
     if (message.attributes?.length) {
       obj.attributes = message.attributes.map((e) => KeyValue.toJSON(e));
@@ -729,7 +618,7 @@ export const Span: MessageFns<Span> = {
 
 function createBaseSpan_Event(): Span_Event {
   return {
-    timeUnixNano: "0",
+    timeUnixNano: 0n,
     name: "",
     attributes: [],
     droppedAttributesCount: 0,
@@ -741,7 +630,12 @@ export const Span_Event: MessageFns<Span_Event> = {
     message: Span_Event,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.timeUnixNano !== "0") {
+    if (message.timeUnixNano !== 0n) {
+      if (BigInt.asUintN(64, message.timeUnixNano) !== message.timeUnixNano) {
+        throw new globalThis.Error(
+          "value provided for field message.timeUnixNano of type fixed64 too large",
+        );
+      }
       writer.uint32(9).fixed64(message.timeUnixNano);
     }
     if (message.name !== "") {
@@ -769,7 +663,7 @@ export const Span_Event: MessageFns<Span_Event> = {
             break;
           }
 
-          message.timeUnixNano = reader.fixed64().toString();
+          message.timeUnixNano = reader.fixed64() as bigint;
           continue;
         }
         case 2: {
@@ -805,25 +699,10 @@ export const Span_Event: MessageFns<Span_Event> = {
     return message;
   },
 
-  fromJSON(object: any): Span_Event {
-    return {
-      timeUnixNano: isSet(object.timeUnixNano)
-        ? globalThis.String(object.timeUnixNano)
-        : "0",
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      attributes: globalThis.Array.isArray(object?.attributes)
-        ? object.attributes.map((e: any) => KeyValue.fromJSON(e))
-        : [],
-      droppedAttributesCount: isSet(object.droppedAttributesCount)
-        ? globalThis.Number(object.droppedAttributesCount)
-        : 0,
-    };
-  },
-
   toJSON(message: Span_Event): unknown {
     const obj: any = {};
-    if (message.timeUnixNano !== "0") {
-      obj.timeUnixNano = message.timeUnixNano;
+    if (message.timeUnixNano !== 0n) {
+      obj.timeUnixNano = message.timeUnixNano.toString();
     }
     if (message.name !== "") {
       obj.name = message.name;
@@ -940,27 +819,6 @@ export const Span_Link: MessageFns<Span_Link> = {
     return message;
   },
 
-  fromJSON(object: any): Span_Link {
-    return {
-      traceId: isSet(object.traceId)
-        ? bytesFromBase64(object.traceId)
-        : new Uint8Array(0),
-      spanId: isSet(object.spanId)
-        ? bytesFromBase64(object.spanId)
-        : new Uint8Array(0),
-      traceState: isSet(object.traceState)
-        ? globalThis.String(object.traceState)
-        : "",
-      attributes: globalThis.Array.isArray(object?.attributes)
-        ? object.attributes.map((e: any) => KeyValue.fromJSON(e))
-        : [],
-      droppedAttributesCount: isSet(object.droppedAttributesCount)
-        ? globalThis.Number(object.droppedAttributesCount)
-        : 0,
-      flags: isSet(object.flags) ? globalThis.Number(object.flags) : 0,
-    };
-  },
-
   toJSON(message: Span_Link): unknown {
     const obj: any = {};
     if (message.traceId.length !== 0) {
@@ -1036,13 +894,6 @@ export const Status: MessageFns<Status> = {
     return message;
   },
 
-  fromJSON(object: any): Status {
-    return {
-      message: isSet(object.message) ? globalThis.String(object.message) : "",
-      code: isSet(object.code) ? status_StatusCodeFromJSON(object.code) : 0,
-    };
-  },
-
   toJSON(message: Status): unknown {
     const obj: any = {};
     if (message.message !== "") {
@@ -1054,19 +905,6 @@ export const Status: MessageFns<Status> = {
     return obj;
   },
 };
-
-function bytesFromBase64(b64: string): Uint8Array {
-  if ((globalThis as any).Buffer) {
-    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
-  } else {
-    const bin = globalThis.atob(b64);
-    const arr = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; ++i) {
-      arr[i] = bin.charCodeAt(i);
-    }
-    return arr;
-  }
-}
 
 function base64FromBytes(arr: Uint8Array): string {
   if ((globalThis as any).Buffer) {
@@ -1080,13 +918,8 @@ function base64FromBytes(arr: Uint8Array): string {
   }
 }
 
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

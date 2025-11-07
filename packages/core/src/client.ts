@@ -1,3 +1,19 @@
+import type {
+  DescMessage,
+  DescMethod,
+  DescMethodServerStreaming,
+  DescMethodUnary,
+  MessageShape,
+  MessageValidType,
+} from "@bufbuild/protobuf";
+
+import { ListAuditLogEntriesRequest_Kind } from "@cerbos/api/cerbos/request/v1/request_pb";
+import {
+  CerbosAdminService as admin,
+  CerbosService as cerbos,
+} from "@cerbos/api/cerbos/svc/v1/svc_pb";
+import { Health as health } from "@cerbos/api/grpc/health/v1/health_pb";
+
 import {
   accessLogEntryFromProtobuf,
   checkResourcesResponseFromProtobuf,
@@ -12,6 +28,7 @@ import {
   listPoliciesResponseFromProtobuf,
   listSchemasResponseFromProtobuf,
   planResourcesResponseFromProtobuf,
+  serverInfoFromProtobuf,
 } from "./convert/fromProtobuf";
 import {
   addOrUpdatePoliciesRequestToProtobuf,
@@ -28,10 +45,9 @@ import {
   listDecisionLogEntriesRequestToProtobuf,
   listPoliciesRequestToProtobuf,
   planResourcesRequestToProtobuf,
+  reloadStoreRequestToProtobuf,
 } from "./convert/toProtobuf";
 import { NotOK, ValidationFailed } from "./errors";
-import { ListAuditLogEntriesRequest_Kind } from "./protobuf/cerbos/request/v1/request";
-import type { _Method, _Request, _Response, _Service } from "./rpcs";
 import type {
   AccessLogEntry,
   AddOrUpdatePoliciesRequest,
@@ -107,28 +123,19 @@ export class _AbortHandler {
 
 /** @internal */
 export interface _Transport {
-  unary<Service extends _Service, Method extends _Method<Service, "unary">>(
-    service: Service,
-    method: Method,
-    request: _Request<Service, "unary", Method>,
+  unary<I extends DescMessage, O extends DescMessage>(
+    method: DescMethodUnary<I, O>,
+    request: MessageValidType<I>,
     headers: Headers,
     abortHandler: _AbortHandler,
-  ): Promise<_Response<Service, "unary", Method>>;
+  ): Promise<MessageShape<O>>;
 
-  serverStream<
-    Service extends _Service,
-    Method extends _Method<Service, "serverStream">,
-  >(
-    service: Service,
-    method: Method,
-    request: _Request<Service, "serverStream", Method>,
+  serverStream<I extends DescMessage, O extends DescMessage>(
+    method: DescMethodServerStreaming<I, O>,
+    request: MessageValidType<I>,
     headers: Headers,
     abortHandler: _AbortHandler,
-  ): AsyncGenerator<
-    _Response<Service, "serverStream", Method>,
-    void,
-    undefined
-  >;
+  ): AsyncGenerator<MessageShape<O>, void, undefined>;
 }
 
 /** @internal */
@@ -332,8 +339,7 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<void> {
     await this.unary(
-      "admin",
-      "addOrUpdatePolicy",
+      admin.method.addOrUpdatePolicy,
       addOrUpdatePoliciesRequestToProtobuf(request),
       options,
     );
@@ -397,8 +403,7 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<void> {
     await this.unary(
-      "admin",
-      "addOrUpdateSchema",
+      admin.method.addOrUpdateSchema,
       addOrUpdateSchemasRequestToProtobuf(request),
       options,
     );
@@ -424,8 +429,7 @@ export abstract class Client {
     try {
       return healthCheckResponseFromProtobuf(
         await this.unary(
-          "health",
-          "check",
+          health.method.check,
           healthCheckRequestToProtobuf(request),
           options,
         ),
@@ -527,8 +531,7 @@ export abstract class Client {
   ): Promise<CheckResourcesResponse> {
     const response = checkResourcesResponseFromProtobuf(
       await this.unary(
-        "cerbos",
-        "checkResources",
+        cerbos.method.checkResources,
         checkResourcesRequestToProtobuf(request),
         options,
       ),
@@ -597,8 +600,7 @@ export abstract class Client {
   ): Promise<DeleteSchemasResponse> {
     return deleteSchemasResponseFromProtobuf(
       await this.unary(
-        "admin",
-        "deleteSchema",
+        admin.method.deleteSchema,
         deleteSchemasRequestToProtobuf(request),
         options,
       ),
@@ -630,8 +632,7 @@ export abstract class Client {
   ): Promise<DisablePoliciesResponse> {
     return disablePoliciesResponseFromProtobuf(
       await this.unary(
-        "admin",
-        "disablePolicy",
+        admin.method.disablePolicy,
         disablePoliciesRequestToProtobuf(request),
         options,
       ),
@@ -692,8 +693,7 @@ export abstract class Client {
   ): Promise<EnablePoliciesResponse> {
     return enablePoliciesResponseFromProtobuf(
       await this.unary(
-        "admin",
-        "enablePolicy",
+        admin.method.enablePolicy,
         enablePoliciesRequestToProtobuf(request),
         options,
       ),
@@ -755,11 +755,11 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<AccessLogEntry | undefined> {
     for await (const entry of this.serverStream(
-      "admin",
-      "listAuditLogEntries",
+      admin.method.listAuditLogEntries,
       {
-        kind: ListAuditLogEntriesRequest_Kind.KIND_ACCESS,
-        filter: { $case: "lookup", lookup: callId },
+        $typeName: "cerbos.request.v1.ListAuditLogEntriesRequest",
+        kind: ListAuditLogEntriesRequest_Kind.ACCESS,
+        filter: { case: "lookup", value: callId },
       },
       options,
     )) {
@@ -795,11 +795,11 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<DecisionLogEntry | undefined> {
     for await (const entry of this.serverStream(
-      "admin",
-      "listAuditLogEntries",
+      admin.method.listAuditLogEntries,
       {
-        kind: ListAuditLogEntriesRequest_Kind.KIND_DECISION,
-        filter: { $case: "lookup", lookup: callId },
+        $typeName: "cerbos.request.v1.ListAuditLogEntriesRequest",
+        kind: ListAuditLogEntriesRequest_Kind.DECISION,
+        filter: { case: "lookup", value: callId },
       },
       options,
     )) {
@@ -832,8 +832,7 @@ export abstract class Client {
   ): Promise<GetPoliciesResponse> {
     return getPoliciesResponseFromProtobuf(
       await this.unary(
-        "admin",
-        "getPolicy",
+        admin.method.getPolicy,
         getPoliciesRequestToProtobuf(request),
         options,
       ),
@@ -915,8 +914,7 @@ export abstract class Client {
   ): Promise<GetSchemasResponse> {
     return getSchemasResponseFromProtobuf(
       await this.unary(
-        "admin",
-        "getSchema",
+        admin.method.getSchema,
         getSchemasRequestToProtobuf(request),
         options,
       ),
@@ -944,8 +942,7 @@ export abstract class Client {
   ): Promise<InspectPoliciesResponse> {
     return inspectPoliciesResponseFromProtobuf(
       await this.unary(
-        "admin",
-        "inspectPolicies",
+        admin.method.inspectPolicies,
         inspectPoliciesRequestToProtobuf(request),
         options,
       ),
@@ -1018,8 +1015,7 @@ export abstract class Client {
     options?: RequestOptions,
   ): AsyncGenerator<AccessLogEntry, void, undefined> {
     for await (const entry of this.serverStream(
-      "admin",
-      "listAuditLogEntries",
+      admin.method.listAuditLogEntries,
       listAccessLogEntriesRequestToProtobuf(request),
       options,
     )) {
@@ -1055,8 +1051,7 @@ export abstract class Client {
     options?: RequestOptions,
   ): AsyncGenerator<DecisionLogEntry, void, undefined> {
     for await (const entry of this.serverStream(
-      "admin",
-      "listAuditLogEntries",
+      admin.method.listAuditLogEntries,
       listDecisionLogEntriesRequestToProtobuf(request),
       options,
     )) {
@@ -1085,8 +1080,7 @@ export abstract class Client {
   ): Promise<ListPoliciesResponse> {
     return listPoliciesResponseFromProtobuf(
       await this.unary(
-        "admin",
-        "listPolicies",
+        admin.method.listPolicies,
         listPoliciesRequestToProtobuf(request),
         options,
       ),
@@ -1112,7 +1106,11 @@ export abstract class Client {
     options?: RequestOptions,
   ): Promise<ListSchemasResponse> {
     return listSchemasResponseFromProtobuf(
-      await this.unary("admin", "listSchemas", {}, options),
+      await this.unary(
+        admin.method.listSchemas,
+        { $typeName: "cerbos.request.v1.ListSchemasRequest" },
+        options,
+      ),
     );
   }
 
@@ -1138,8 +1136,7 @@ export abstract class Client {
   ): Promise<PlanResourcesResponse> {
     const response = planResourcesResponseFromProtobuf(
       await this.unary(
-        "cerbos",
-        "planResources",
+        cerbos.method.planResources,
         planResourcesRequestToProtobuf(request),
         options,
       ),
@@ -1171,14 +1168,24 @@ export abstract class Client {
     request: ReloadStoreRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    await this.unary("admin", "reloadStore", request, options);
+    await this.unary(
+      admin.method.reloadStore,
+      reloadStoreRequestToProtobuf(request),
+      options,
+    );
   }
 
   /**
    * Retrieve information about the Cerbos policy decision point server.
    */
   public async serverInfo(options?: RequestOptions): Promise<ServerInfo> {
-    return await this.unary("cerbos", "serverInfo", {}, options);
+    return serverInfoFromProtobuf(
+      await this.unary(
+        cerbos.method.serverInfo,
+        { $typeName: "cerbos.request.v1.ServerInfoRequest" },
+        options,
+      ),
+    );
   }
 
   /**
@@ -1191,37 +1198,24 @@ export abstract class Client {
     return new ClientWithPrincipal(this, principal, auxData);
   }
 
-  private async unary<
-    Service extends _Service,
-    Method extends _Method<Service, "unary">,
-  >(
-    service: Service,
-    method: Method,
-    request: _Request<Service, "unary", Method>,
+  private async unary<I extends DescMessage, O extends DescMessage>(
+    method: DescMethodUnary<I, O>,
+    request: MessageValidType<I>,
     { headers, signal }: RequestOptions = {},
-  ): Promise<_Response<Service, "unary", Method>> {
+  ): Promise<MessageShape<O>> {
     return await this.transport.unary(
-      service,
       method,
       request,
-      await this.mergeHeaders(headers, service),
+      await this.mergeHeaders(headers, method),
       new _AbortHandler(signal),
     );
   }
 
-  private async *serverStream<
-    Service extends _Service,
-    Method extends _Method<Service, "serverStream">,
-  >(
-    service: Service,
-    method: Method,
-    request: _Request<Service, "serverStream", Method>,
+  private async *serverStream<I extends DescMessage, O extends DescMessage>(
+    method: DescMethodServerStreaming<I, O>,
+    request: MessageValidType<I>,
     { headers, signal }: RequestOptions = {},
-  ): AsyncGenerator<
-    _Response<Service, "serverStream", Method>,
-    void,
-    undefined
-  > {
+  ): AsyncGenerator<MessageShape<O>, void, undefined> {
     const abortController = new AbortController();
 
     signal?.addEventListener(
@@ -1238,10 +1232,9 @@ export abstract class Client {
 
     try {
       yield* this.transport.serverStream(
-        service,
         method,
         request,
-        await this.mergeHeaders(headers, service),
+        await this.mergeHeaders(headers, method),
         new _AbortHandler(abortController.signal),
       );
     } finally {
@@ -1251,7 +1244,7 @@ export abstract class Client {
 
   private async mergeHeaders(
     override: HeadersInit | undefined,
-    service: _Service,
+    method: DescMethod,
   ): Promise<Headers> {
     const init = this.options.headers;
 
@@ -1259,7 +1252,10 @@ export abstract class Client {
       typeof init === "function" ? await init() : init,
     );
 
-    if (service === "admin" && this.options.adminCredentials) {
+    if (
+      method.parent.typeName === admin.typeName &&
+      this.options.adminCredentials
+    ) {
       const { username, password } = this.options.adminCredentials;
       headers.set("Authorization", `Basic ${btoa(`${username}:${password}`)}`);
     }

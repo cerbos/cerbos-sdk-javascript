@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Migrate to `protoc-gen-es` and extract generated code to its own package ([#1271](https://github.com/cerbos/cerbos-sdk-javascript/pull/1271))
 
 ## [0.13.1] - 2025-09-15
 
@@ -271,6 +273,7 @@ No notable changes.
 [0.2.0-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.1.1-alpha...@cerbos/lite@0.2.0-alpha
 [0.1.1-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.1.0-alpha...@cerbos/lite@0.1.1-alpha
 [0.1.0-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/a3dcb572e0eeff4c4d86c9cc66c1d0c7e59c4853...@cerbos/lite@0.1.0-alpha
+[@cerbos/api]: ../api/README.md
 [@cerbos/core]: ../core/README.md
 [nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases
 [ulid]: https://github.com/ulid/javascript

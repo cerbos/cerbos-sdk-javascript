@@ -10,7 +10,7 @@ export interface AnyValue {
   value?:
     | { $case: "stringValue"; stringValue: string }
     | { $case: "boolValue"; boolValue: boolean }
-    | { $case: "intValue"; intValue: string }
+    | { $case: "intValue"; intValue: bigint }
     | { $case: "doubleValue"; doubleValue: number }
     | { $case: "arrayValue"; arrayValue: ArrayValue }
     | { $case: "kvlistValue"; kvlistValue: KeyValueList }
@@ -55,6 +55,13 @@ export const AnyValue: MessageFns<AnyValue> = {
         writer.uint32(16).bool(message.value.boolValue);
         break;
       case "intValue":
+        if (
+          BigInt.asIntN(64, message.value.intValue) !== message.value.intValue
+        ) {
+          throw new globalThis.Error(
+            "value provided for field message.value.intValue of type int64 too large",
+          );
+        }
         writer.uint32(24).int64(message.value.intValue);
         break;
       case "doubleValue":
@@ -113,7 +120,7 @@ export const AnyValue: MessageFns<AnyValue> = {
 
           message.value = {
             $case: "intValue",
-            intValue: reader.int64().toString(),
+            intValue: reader.int64() as bigint,
           };
           continue;
         }
@@ -167,47 +174,6 @@ export const AnyValue: MessageFns<AnyValue> = {
     return message;
   },
 
-  fromJSON(object: any): AnyValue {
-    return {
-      value: isSet(object.stringValue)
-        ? {
-            $case: "stringValue",
-            stringValue: globalThis.String(object.stringValue),
-          }
-        : isSet(object.boolValue)
-          ? {
-              $case: "boolValue",
-              boolValue: globalThis.Boolean(object.boolValue),
-            }
-          : isSet(object.intValue)
-            ? {
-                $case: "intValue",
-                intValue: globalThis.String(object.intValue),
-              }
-            : isSet(object.doubleValue)
-              ? {
-                  $case: "doubleValue",
-                  doubleValue: globalThis.Number(object.doubleValue),
-                }
-              : isSet(object.arrayValue)
-                ? {
-                    $case: "arrayValue",
-                    arrayValue: ArrayValue.fromJSON(object.arrayValue),
-                  }
-                : isSet(object.kvlistValue)
-                  ? {
-                      $case: "kvlistValue",
-                      kvlistValue: KeyValueList.fromJSON(object.kvlistValue),
-                    }
-                  : isSet(object.bytesValue)
-                    ? {
-                        $case: "bytesValue",
-                        bytesValue: bytesFromBase64(object.bytesValue),
-                      }
-                    : undefined,
-    };
-  },
-
   toJSON(message: AnyValue): unknown {
     const obj: any = {};
     if (message.value?.$case === "stringValue") {
@@ -215,7 +181,7 @@ export const AnyValue: MessageFns<AnyValue> = {
     } else if (message.value?.$case === "boolValue") {
       obj.boolValue = message.value.boolValue;
     } else if (message.value?.$case === "intValue") {
-      obj.intValue = message.value.intValue;
+      obj.intValue = message.value.intValue.toString();
     } else if (message.value?.$case === "doubleValue") {
       obj.doubleValue = message.value.doubleValue;
     } else if (message.value?.$case === "arrayValue") {
@@ -269,14 +235,6 @@ export const ArrayValue: MessageFns<ArrayValue> = {
     return message;
   },
 
-  fromJSON(object: any): ArrayValue {
-    return {
-      values: globalThis.Array.isArray(object?.values)
-        ? object.values.map((e: any) => AnyValue.fromJSON(e))
-        : [],
-    };
-  },
-
   toJSON(message: ArrayValue): unknown {
     const obj: any = {};
     if (message.values?.length) {
@@ -324,14 +282,6 @@ export const KeyValueList: MessageFns<KeyValueList> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): KeyValueList {
-    return {
-      values: globalThis.Array.isArray(object?.values)
-        ? object.values.map((e: any) => KeyValue.fromJSON(e))
-        : [],
-    };
   },
 
   toJSON(message: KeyValueList): unknown {
@@ -392,13 +342,6 @@ export const KeyValue: MessageFns<KeyValue> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): KeyValue {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? AnyValue.fromJSON(object.value) : undefined,
-    };
   },
 
   toJSON(message: KeyValue): unknown {
@@ -489,19 +432,6 @@ export const InstrumentationScope: MessageFns<InstrumentationScope> = {
     return message;
   },
 
-  fromJSON(object: any): InstrumentationScope {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      version: isSet(object.version) ? globalThis.String(object.version) : "",
-      attributes: globalThis.Array.isArray(object?.attributes)
-        ? object.attributes.map((e: any) => KeyValue.fromJSON(e))
-        : [],
-      droppedAttributesCount: isSet(object.droppedAttributesCount)
-        ? globalThis.Number(object.droppedAttributesCount)
-        : 0,
-    };
-  },
-
   toJSON(message: InstrumentationScope): unknown {
     const obj: any = {};
     if (message.name !== "") {
@@ -520,19 +450,6 @@ export const InstrumentationScope: MessageFns<InstrumentationScope> = {
   },
 };
 
-function bytesFromBase64(b64: string): Uint8Array {
-  if ((globalThis as any).Buffer) {
-    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
-  } else {
-    const bin = globalThis.atob(b64);
-    const arr = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; ++i) {
-      arr[i] = bin.charCodeAt(i);
-    }
-    return arr;
-  }
-}
-
 function base64FromBytes(arr: Uint8Array): string {
   if ((globalThis as any).Buffer) {
     return globalThis.Buffer.from(arr).toString("base64");
@@ -545,13 +462,8 @@ function base64FromBytes(arr: Uint8Array): string {
   }
 }
 
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

@@ -7,6 +7,7 @@ import type {
   CheckInput,
   CheckResourcesRequest,
   DecisionLogEntry,
+  SourceAttributes,
 } from "@cerbos/core";
 import {
   CheckResourcesResponse,
@@ -16,6 +17,7 @@ import {
 import type { DecodedJWTPayload, Options } from "@cerbos/embedded";
 import { Embedded } from "@cerbos/embedded";
 
+import type { EmbeddedBundle } from "../../helpers";
 import {
   callIdMatcher,
   embeddedUserAgent,
@@ -24,7 +26,11 @@ import {
 } from "../../helpers";
 
 describe("Embedded", () => {
-  describe.each([
+  describe.each<{
+    name: string;
+    bundle: EmbeddedBundle;
+    expectedEffectivePolicies: Record<string, SourceAttributes>;
+  }>([
     {
       name: "old bundle",
       bundle: oldEmbeddedBundle,

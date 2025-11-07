@@ -4,7 +4,7 @@
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { Value } from "../../../google/protobuf/struct";
-import { Effect, effectFromJSON, effectToJSON } from "../../effect/v1/effect";
+import { Effect, effectToJSON } from "../../effect/v1/effect";
 import { ValidationError } from "../../schema/v1/schema";
 
 export const protobufPackage = "cerbos.engine.v1";
@@ -41,31 +41,6 @@ export enum PlanResourcesFilter_Kind {
   KIND_ALWAYS_ALLOWED = 1,
   KIND_ALWAYS_DENIED = 2,
   KIND_CONDITIONAL = 3,
-}
-
-export function planResourcesFilter_KindFromJSON(
-  object: any,
-): PlanResourcesFilter_Kind {
-  switch (object) {
-    case 0:
-    case "KIND_UNSPECIFIED":
-      return PlanResourcesFilter_Kind.KIND_UNSPECIFIED;
-    case 1:
-    case "KIND_ALWAYS_ALLOWED":
-      return PlanResourcesFilter_Kind.KIND_ALWAYS_ALLOWED;
-    case 2:
-    case "KIND_ALWAYS_DENIED":
-      return PlanResourcesFilter_Kind.KIND_ALWAYS_DENIED;
-    case 3:
-    case "KIND_CONDITIONAL":
-      return PlanResourcesFilter_Kind.KIND_CONDITIONAL;
-    default:
-      throw new globalThis.Error(
-        "Unrecognized enum value " +
-          object +
-          " for enum PlanResourcesFilter_Kind",
-      );
-  }
 }
 
 export function planResourcesFilter_KindToJSON(
@@ -311,30 +286,6 @@ export const PlanResourcesInput: MessageFns<PlanResourcesInput> = {
     return message;
   },
 
-  fromJSON(object: any): PlanResourcesInput {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      action: isSet(object.action) ? globalThis.String(object.action) : "",
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-      principal: isSet(object.principal)
-        ? Principal.fromJSON(object.principal)
-        : undefined,
-      resource: isSet(object.resource)
-        ? PlanResourcesInput_Resource.fromJSON(object.resource)
-        : undefined,
-      auxData: isSet(object.auxData)
-        ? AuxData.fromJSON(object.auxData)
-        : undefined,
-      includeMeta: isSet(object.includeMeta)
-        ? globalThis.Boolean(object.includeMeta)
-        : false,
-    };
-  },
-
   toJSON(message: PlanResourcesInput): unknown {
     const obj: any = {};
     if (message.requestId !== "") {
@@ -450,24 +401,6 @@ export const PlanResourcesInput_Resource: MessageFns<PlanResourcesInput_Resource
       return message;
     },
 
-    fromJSON(object: any): PlanResourcesInput_Resource {
-      return {
-        kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
-        attr: isObject(object.attr)
-          ? Object.entries(object.attr).reduce<{
-              [key: string]: any | undefined;
-            }>((acc, [key, value]) => {
-              acc[key] = value as any | undefined;
-              return acc;
-            }, {})
-          : {},
-        policyVersion: isSet(object.policyVersion)
-          ? globalThis.String(object.policyVersion)
-          : "",
-        scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-      };
-    },
-
     toJSON(message: PlanResourcesInput_Resource): unknown {
       const obj: any = {};
       if (message.kind !== "") {
@@ -550,13 +483,6 @@ export const PlanResourcesInput_Resource_AttrEntry: MessageFns<PlanResourcesInpu
       return message;
     },
 
-    fromJSON(object: any): PlanResourcesInput_Resource_AttrEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object?.value) ? object.value : undefined,
-      };
-    },
-
     toJSON(message: PlanResourcesInput_Resource_AttrEntry): unknown {
       const obj: any = {};
       if (message.key !== "") {
@@ -627,17 +553,6 @@ export const PlanResourcesFilter: MessageFns<PlanResourcesFilter> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): PlanResourcesFilter {
-    return {
-      kind: isSet(object.kind)
-        ? planResourcesFilter_KindFromJSON(object.kind)
-        : 0,
-      condition: isSet(object.condition)
-        ? PlanResourcesFilter_Expression_Operand.fromJSON(object.condition)
-        : undefined,
-    };
   },
 
   toJSON(message: PlanResourcesFilter): unknown {
@@ -715,19 +630,6 @@ export const PlanResourcesFilter_Expression: MessageFns<PlanResourcesFilter_Expr
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): PlanResourcesFilter_Expression {
-      return {
-        operator: isSet(object.operator)
-          ? globalThis.String(object.operator)
-          : "",
-        operands: globalThis.Array.isArray(object?.operands)
-          ? object.operands.map((e: any) =>
-              PlanResourcesFilter_Expression_Operand.fromJSON(e),
-            )
-          : [],
-      };
     },
 
     toJSON(message: PlanResourcesFilter_Expression): unknown {
@@ -825,26 +727,6 @@ export const PlanResourcesFilter_Expression_Operand: MessageFns<PlanResourcesFil
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): PlanResourcesFilter_Expression_Operand {
-      return {
-        node: isSet(object.value)
-          ? { $case: "value", value: object.value }
-          : isSet(object.expression)
-            ? {
-                $case: "expression",
-                expression: PlanResourcesFilter_Expression.fromJSON(
-                  object.expression,
-                ),
-              }
-            : isSet(object.variable)
-              ? {
-                  $case: "variable",
-                  variable: globalThis.String(object.variable),
-                }
-              : undefined,
-      };
     },
 
     toJSON(message: PlanResourcesFilter_Expression_Operand): unknown {
@@ -1029,40 +911,6 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
     return message;
   },
 
-  fromJSON(object: any): PlanResourcesOutput {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      action: isSet(object.action) ? globalThis.String(object.action) : "",
-      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
-      policyVersion: isSet(object.policyVersion)
-        ? globalThis.String(object.policyVersion)
-        : "",
-      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-      filter: isSet(object.filter)
-        ? PlanResourcesFilter.fromJSON(object.filter)
-        : undefined,
-      filterDebug: isSet(object.filterDebug)
-        ? globalThis.String(object.filterDebug)
-        : "",
-      validationErrors: globalThis.Array.isArray(object?.validationErrors)
-        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-        : [],
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-      matchedScopes: isObject(object.matchedScopes)
-        ? Object.entries(object.matchedScopes).reduce<{
-            [key: string]: string;
-          }>((acc, [key, value]) => {
-            acc[key] = String(value);
-            return acc;
-          }, {})
-        : {},
-    };
-  },
-
   toJSON(message: PlanResourcesOutput): unknown {
     const obj: any = {};
     if (message.requestId !== "") {
@@ -1160,13 +1008,6 @@ export const PlanResourcesOutput_MatchedScopesEntry: MessageFns<PlanResourcesOut
         reader.skip(tag & 7);
       }
       return message;
-    },
-
-    fromJSON(object: any): PlanResourcesOutput_MatchedScopesEntry {
-      return {
-        key: isSet(object.key) ? globalThis.String(object.key) : "",
-        value: isSet(object.value) ? globalThis.String(object.value) : "",
-      };
     },
 
     toJSON(message: PlanResourcesOutput_MatchedScopesEntry): unknown {
@@ -1269,26 +1110,6 @@ export const CheckInput: MessageFns<CheckInput> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): CheckInput {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      resource: isSet(object.resource)
-        ? Resource.fromJSON(object.resource)
-        : undefined,
-      principal: isSet(object.principal)
-        ? Principal.fromJSON(object.principal)
-        : undefined,
-      actions: globalThis.Array.isArray(object?.actions)
-        ? object.actions.map((e: any) => globalThis.String(e))
-        : [],
-      auxData: isSet(object.auxData)
-        ? AuxData.fromJSON(object.auxData)
-        : undefined,
-    };
   },
 
   toJSON(message: CheckInput): unknown {
@@ -1425,36 +1246,6 @@ export const CheckOutput: MessageFns<CheckOutput> = {
     return message;
   },
 
-  fromJSON(object: any): CheckOutput {
-    return {
-      requestId: isSet(object.requestId)
-        ? globalThis.String(object.requestId)
-        : "",
-      resourceId: isSet(object.resourceId)
-        ? globalThis.String(object.resourceId)
-        : "",
-      actions: isObject(object.actions)
-        ? Object.entries(object.actions).reduce<{
-            [key: string]: CheckOutput_ActionEffect;
-          }>((acc, [key, value]) => {
-            acc[key] = CheckOutput_ActionEffect.fromJSON(value);
-            return acc;
-          }, {})
-        : {},
-      effectiveDerivedRoles: globalThis.Array.isArray(
-        object?.effectiveDerivedRoles,
-      )
-        ? object.effectiveDerivedRoles.map((e: any) => globalThis.String(e))
-        : [],
-      validationErrors: globalThis.Array.isArray(object?.validationErrors)
-        ? object.validationErrors.map((e: any) => ValidationError.fromJSON(e))
-        : [],
-      outputs: globalThis.Array.isArray(object?.outputs)
-        ? object.outputs.map((e: any) => OutputEntry.fromJSON(e))
-        : [],
-    };
-  },
-
   toJSON(message: CheckOutput): unknown {
     const obj: any = {};
     if (message.requestId !== "") {
@@ -1552,14 +1343,6 @@ export const CheckOutput_ActionEffect: MessageFns<CheckOutput_ActionEffect> = {
     return message;
   },
 
-  fromJSON(object: any): CheckOutput_ActionEffect {
-    return {
-      effect: isSet(object.effect) ? effectFromJSON(object.effect) : 0,
-      policy: isSet(object.policy) ? globalThis.String(object.policy) : "",
-      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-    };
-  },
-
   toJSON(message: CheckOutput_ActionEffect): unknown {
     const obj: any = {};
     if (message.effect !== 0) {
@@ -1635,15 +1418,6 @@ export const CheckOutput_ActionsEntry: MessageFns<CheckOutput_ActionsEntry> = {
     return message;
   },
 
-  fromJSON(object: any): CheckOutput_ActionsEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value)
-        ? CheckOutput_ActionEffect.fromJSON(object.value)
-        : undefined,
-    };
-  },
-
   toJSON(message: CheckOutput_ActionsEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -1705,13 +1479,6 @@ export const OutputEntry: MessageFns<OutputEntry> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): OutputEntry {
-    return {
-      src: isSet(object.src) ? globalThis.String(object.src) : "",
-      val: isSet(object?.val) ? object.val : undefined,
-    };
   },
 
   toJSON(message: OutputEntry): unknown {
@@ -1818,25 +1585,6 @@ export const Resource: MessageFns<Resource> = {
     return message;
   },
 
-  fromJSON(object: any): Resource {
-    return {
-      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
-      policyVersion: isSet(object.policyVersion)
-        ? globalThis.String(object.policyVersion)
-        : "",
-      id: isSet(object.id) ? globalThis.String(object.id) : "",
-      attr: isObject(object.attr)
-        ? Object.entries(object.attr).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-    };
-  },
-
   toJSON(message: Resource): unknown {
     const obj: any = {};
     if (message.kind !== "") {
@@ -1916,13 +1664,6 @@ export const Resource_AttrEntry: MessageFns<Resource_AttrEntry> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): Resource_AttrEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
   },
 
   toJSON(message: Resource_AttrEntry): unknown {
@@ -2029,27 +1770,6 @@ export const Principal: MessageFns<Principal> = {
     return message;
   },
 
-  fromJSON(object: any): Principal {
-    return {
-      id: isSet(object.id) ? globalThis.String(object.id) : "",
-      policyVersion: isSet(object.policyVersion)
-        ? globalThis.String(object.policyVersion)
-        : "",
-      roles: globalThis.Array.isArray(object?.roles)
-        ? object.roles.map((e: any) => globalThis.String(e))
-        : [],
-      attr: isObject(object.attr)
-        ? Object.entries(object.attr).reduce<{
-            [key: string]: any | undefined;
-          }>((acc, [key, value]) => {
-            acc[key] = value as any | undefined;
-            return acc;
-          }, {})
-        : {},
-      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
-    };
-  },
-
   toJSON(message: Principal): unknown {
     const obj: any = {};
     if (message.id !== "") {
@@ -2131,13 +1851,6 @@ export const Principal_AttrEntry: MessageFns<Principal_AttrEntry> = {
     return message;
   },
 
-  fromJSON(object: any): Principal_AttrEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
-  },
-
   toJSON(message: Principal_AttrEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -2196,20 +1909,6 @@ export const AuxData: MessageFns<AuxData> = {
       reader.skip(tag & 7);
     }
     return message;
-  },
-
-  fromJSON(object: any): AuxData {
-    return {
-      jwt: isObject(object.jwt)
-        ? Object.entries(object.jwt).reduce<{ [key: string]: any | undefined }>(
-            (acc, [key, value]) => {
-              acc[key] = value as any | undefined;
-              return acc;
-            },
-            {},
-          )
-        : {},
-    };
   },
 
   toJSON(message: AuxData): unknown {
@@ -2278,13 +1977,6 @@ export const AuxData_JwtEntry: MessageFns<AuxData_JwtEntry> = {
     return message;
   },
 
-  fromJSON(object: any): AuxData_JwtEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object?.value) ? object.value : undefined,
-    };
-  },
-
   toJSON(message: AuxData_JwtEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
@@ -2297,17 +1989,8 @@ export const AuxData_JwtEntry: MessageFns<AuxData_JwtEntry> = {
   },
 };
 
-function isObject(value: any): boolean {
-  return typeof value === "object" && value !== null;
-}
-
-function isSet(value: any): boolean {
-  return value !== null && value !== undefined;
-}
-
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
   decode(input: BinaryReader | Uint8Array, length?: number): T;
-  fromJSON(object: any): T;
   toJSON(message: T): unknown;
 }

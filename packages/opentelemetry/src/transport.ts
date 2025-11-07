@@ -1,3 +1,11 @@
+import type {
+  DescMessage,
+  DescMethod,
+  DescMethodServerStreaming,
+  DescMethodUnary,
+  MessageShape,
+  MessageValidType,
+} from "@bufbuild/protobuf";
 import type { Attributes, SpanStatus, Tracer } from "@opentelemetry/api";
 import {
   SpanKind,
@@ -13,51 +21,15 @@ import {
   ATTR_RPC_SYSTEM,
 } from "@opentelemetry/semantic-conventions/incubating";
 
-import type {
-  _AbortHandler,
-  _Method,
-  _MethodKind,
-  _Request,
-  _Response,
-  _Service,
-  _Transport,
-} from "@cerbos/core";
-import { NotOK, Status } from "@cerbos/core";
+import type { _AbortHandler, _Transport } from "@cerbos/core";
+import { NotOK, Status, _methodName } from "@cerbos/core";
 
 import type { CerbosInstrumentation } from "./instrumentation";
 import type { Instruments } from "./instruments";
 
-type TransportMethod<
-  Service extends _Service,
-  MethodKind extends _MethodKind,
-  Method extends _Method<Service, MethodKind>,
-> = (
-  service: Service,
-  method: Method,
-  request: _Request<Service, MethodKind, Method>,
-  headers: Headers,
-  abortHandler: _AbortHandler,
-) => TransportReturn<Service, MethodKind, Method>;
-
-type TransportReturn<
-  Service extends _Service,
-  MethodKind extends _MethodKind,
-  Method extends _Method<Service, MethodKind>,
-> = MethodKind extends "unary"
-  ? Promise<_Response<Service, MethodKind, Method>>
-  : MethodKind extends "serverStream"
-    ? AsyncGenerator<_Response<Service, MethodKind, Method>, void, undefined>
-    : never;
-
-const serviceNames: Record<_Service, string> = {
-  admin: "cerbos.svc.v1.CerbosAdminService",
-  cerbos: "cerbos.svc.v1.CerbosService",
-  health: "grpc.health.v1.Health",
-};
-
 export class Transport implements _Transport {
   private readonly transport: {
-    [MethodKind in _MethodKind]: _Transport[MethodKind];
+    [MethodKind in keyof _Transport]: _Transport[MethodKind];
   };
 
   public constructor(
@@ -70,105 +42,77 @@ export class Transport implements _Transport {
     };
   }
 
-  public async unary<
-    Service extends _Service,
-    Method extends _Method<Service, "unary">,
-  >(
-    service: Service,
-    method: Method,
-    request: _Request<Service, "unary", Method>,
+  public async unary<I extends DescMessage, O extends DescMessage>(
+    method: DescMethodUnary<I, O>,
+    request: MessageValidType<I>,
     headers: Headers,
     abortHandler: _AbortHandler,
-  ): Promise<_Response<Service, "unary", Method>> {
-    const call = this.call(
-      service,
-      "unary",
+  ): Promise<MessageShape<O>> {
+    const { call, succeeded, failed } = this.instrument(
+      this.transport.unary,
       method,
-      request,
       headers,
-      abortHandler,
     );
 
     try {
-      const response = await call.result;
-      call.succeeded();
-      return response;
+      const output = await call(method, request, headers, abortHandler);
+      succeeded();
+      return output;
     } catch (error) {
-      call.failed(error);
+      failed(error);
       throw error;
     }
   }
 
-  public async *serverStream<
-    Service extends _Service,
-    Method extends _Method<Service, "serverStream">,
-  >(
-    service: Service,
-    method: Method,
-    request: _Request<Service, "serverStream", Method>,
+  public async *serverStream<I extends DescMessage, O extends DescMessage>(
+    method: DescMethodServerStreaming<I, O>,
+    request: MessageValidType<I>,
     headers: Headers,
     abortHandler: _AbortHandler,
-  ): AsyncGenerator<
-    _Response<Service, "serverStream", Method>,
-    void,
-    undefined
-  > {
-    const call = this.call(
-      service,
-      "serverStream",
+  ): AsyncGenerator<MessageShape<O>, void, undefined> {
+    const { call, succeeded, failed } = this.instrument(
+      this.transport.serverStream,
       method,
-      request,
       headers,
-      abortHandler,
     );
 
     let done = false;
 
     try {
-      yield* call.result;
+      yield* call(method, request, headers, abortHandler);
       done = true;
-      call.succeeded();
+      succeeded();
     } catch (error) {
       done = true;
-      call.failed(error);
+      failed(error);
       throw error;
     } finally {
       if (!done) {
-        call.failed(abortHandler.error());
+        failed(abortHandler.error());
       }
     }
   }
 
-  private call<
-    Service extends _Service,
-    MethodKind extends _MethodKind,
-    Method extends _Method<Service, MethodKind>,
-  >(
-    service: Service,
-    methodKind: MethodKind,
-    method: Method,
-    request: _Request<Service, MethodKind, Method>,
+  private instrument<F>(
+    fn: F,
+    method: DescMethod,
     headers: Headers,
-    abortHandler: _AbortHandler,
   ): {
-    result: TransportReturn<Service, MethodKind, Method>;
+    call: F;
     succeeded: () => void;
     failed: (error: unknown) => void;
   } {
     const startTime = performance.now();
 
-    const serviceName = serviceNames[service];
-    const methodName = `${method.charAt(0).toUpperCase()}${method.slice(1)}`;
-
     const status: SpanStatus = { code: SpanStatusCode.UNSET };
 
     const attributes: Attributes = {
       [ATTR_RPC_SYSTEM]: "grpc",
-      [ATTR_RPC_SERVICE]: serviceName,
-      [ATTR_RPC_METHOD]: methodName,
+      [ATTR_RPC_SERVICE]: method.parent.typeName,
+      [ATTR_RPC_METHOD]: method.name,
     };
 
-    const span = this.tracer.startSpan(`${serviceName}/${methodName}`, {
+    const span = this.tracer.startSpan(_methodName(method), {
       kind: SpanKind.CLIENT,
       startTime,
     });
@@ -188,7 +132,8 @@ export class Transport implements _Transport {
       this.instruments.duration.record(endTime - startTime, attributes);
     };
 
-    const call = {
+    return {
+      call: context.bind(activeContext, fn),
       succeeded: (): void => {
         attributes[ATTR_RPC_GRPC_STATUS_CODE] = Status.OK;
         finish();
@@ -208,31 +153,6 @@ export class Transport implements _Transport {
         finish();
       },
     };
-
-    const transport = this.transport[methodKind] as TransportMethod<
-      Service,
-      MethodKind,
-      Method
-    >;
-
-    try {
-      return {
-        result: context.with(
-          activeContext,
-          transport,
-          undefined,
-          service,
-          method,
-          request,
-          headers,
-          abortHandler,
-        ),
-        ...call,
-      };
-    } catch (error) {
-      call.failed(error);
-      throw error;
-    }
   }
 
   private get instruments(): Instruments {

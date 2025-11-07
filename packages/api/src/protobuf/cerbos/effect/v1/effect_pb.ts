@@ -1,0 +1,49 @@
+// Copyright 2021-2025 Zenauth Ltd.
+// SPDX-License-Identifier: Apache-2.0
+
+// @generated from file cerbos/effect/v1/effect.proto (package cerbos.effect.v1, syntax proto3)
+/* eslint-disable */
+
+import type { GenEnum, GenFile } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, fileDesc } from "@bufbuild/protobuf/codegenv2";
+
+/**
+ * Describes the file cerbos/effect/v1/effect.proto.
+ */
+export const file_cerbos_effect_v1_effect: GenFile =
+  /*@__PURE__*/
+  fileDesc(
+    "Ch1jZXJib3MvZWZmZWN0L3YxL2VmZmVjdC5wcm90bxIQY2VyYm9zLmVmZmVjdC52MSpYCgZFZmZlY3QSFgoSRUZGRUNUX1VOU1BFQ0lGSUVEEAASEAoMRUZGRUNUX0FMTE9XEAESDwoLRUZGRUNUX0RFTlkQAhITCg9FRkZFQ1RfTk9fTUFUQ0gQA0JvChhkZXYuY2VyYm9zLmFwaS52MS5lZmZlY3RaPGdpdGh1Yi5jb20vY2VyYm9zL2NlcmJvcy9hcGkvZ2VucGIvY2VyYm9zL2VmZmVjdC92MTtlZmZlY3R2MaoCFENlcmJvcy5BcGkuVjEuRWZmZWN0YgZwcm90bzM",
+  );
+
+/**
+ * @generated from enum cerbos.effect.v1.Effect
+ */
+export enum Effect {
+  /**
+   * @generated from enum value: EFFECT_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: EFFECT_ALLOW = 1;
+   */
+  ALLOW = 1,
+
+  /**
+   * @generated from enum value: EFFECT_DENY = 2;
+   */
+  DENY = 2,
+
+  /**
+   * @generated from enum value: EFFECT_NO_MATCH = 3;
+   */
+  NO_MATCH = 3,
+}
+
+/**
+ * Describes the enum cerbos.effect.v1.Effect.
+ */
+export const EffectSchema: GenEnum<Effect> =
+  /*@__PURE__*/
+  enumDesc(file_cerbos_effect_v1_effect, 0);
