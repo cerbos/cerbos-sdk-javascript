@@ -15,6 +15,12 @@ option csharp_namespace = "Cerbos.Api.Cloud.V2.Bundle";
 option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/bundle/v2;bundlev2";
 option java_package = "dev.cerbos.api.cloud.v2.bundle";
 
+enum BundleType {
+  BUNDLE_TYPE_UNSPECIFIED = 0;
+  BUNDLE_TYPE_LEGACY = 1;
+  BUNDLE_TYPE_RULE_TABLE = 2;
+}
+
 message Source {
   oneof source {
     option (buf.validate.oneof).required = true;
@@ -42,6 +48,12 @@ message BundleInfo {
   bytes output_hash = 3 [(buf.validate.field).bytes.len = 32];
   bytes encryption_key = 4;
   repeated Segment segments = 5 [(buf.validate.field).repeated.min_items = 1];
+  optional BundleType bundle_type = 6 [(buf.validate.field).enum = {
+    in: [
+      1,
+      2
+    ]
+  }];
 }
 
 message Meta {
@@ -59,6 +71,12 @@ message Manifest {
 message GetBundleRequest {
   cerbos.cloud.pdp.v1.Identifier pdp_id = 1 [(buf.validate.field).required = true];
   Source source = 2 [(buf.validate.field).required = true];
+  optional BundleType bundle_type = 3 [(buf.validate.field).enum = {
+    in: [
+      1,
+      2
+    ]
+  }];
 }
 
 message GetBundleResponse {
@@ -68,6 +86,12 @@ message GetBundleResponse {
 message WatchBundleRequest {
   message Start {
     Source source = 1 [(buf.validate.field).required = true];
+    optional BundleType bundle_type = 2 [(buf.validate.field).enum = {
+      in: [
+        1,
+        2
+      ]
+    }];
   }
 
   message Heartbeat {
@@ -76,6 +100,12 @@ message WatchBundleRequest {
       (buf.validate.field).timestamp.within = {seconds: 60}
     ];
     string active_bundle_id = 2 [(buf.validate.field).string.len = 16];
+    optional BundleType bundle_type = 3 [(buf.validate.field).enum = {
+      in: [
+        1,
+        2
+      ]
+    }];
   }
 
   cerbos.cloud.pdp.v1.Identifier pdp_id = 1 [(buf.validate.field).required = true];
