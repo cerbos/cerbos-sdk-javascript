@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/files",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Load Cerbos policies from YAML or JSON files",
   "repository": {
     "type": "git",
@@ -49,10 +49,10 @@
   ],
   "peerDependencies": {
     "@bufbuild/protobuf": "^2.10.0",
-    "@cerbos/api": "^0.1.0"
+    "@cerbos/api": "^0.2.0"
   },
   "dependencies": {
-    "@cerbos/core": "^0.25.0",
+    "@cerbos/core": "^0.25.1",
     "yaml": "^2.8.1"
   },
   "publishConfig": {

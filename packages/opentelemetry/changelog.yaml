@@ -1,16 +1,24 @@
-unreleased:
-  type: patch
-
-  bumped:
-    "@opentelemetry/instrumentation":
-      to: 0.208.0
-      pull: 1275
-
-    "@opentelemetry/semantic-conventions":
-      to: 1.38.0
-      pull: 1275
-
 releases:
+  - version: 0.7.1
+    date: 2025-11-12
+
+    bumped:
+      "@cerbos/api":
+        to: 0.2.0
+        pull: 1280
+
+      "@cerbos/core":
+        to: 0.25.1
+        pull: 1280
+
+      "@opentelemetry/instrumentation":
+        to: 0.208.0
+        pull: 1275
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.38.0
+        pull: 1275
+
   - version: 0.7.0
     date: 2025-11-07
 

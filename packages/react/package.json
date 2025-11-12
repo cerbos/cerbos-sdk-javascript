@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/react",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A collection of React hooks for interacting with Cerbos policy decision points",
   "repository": {
     "type": "git",
@@ -49,7 +49,7 @@
     "hooks"
   ],
   "peerDependencies": {
-    "@cerbos/core": "^0.25.0",
+    "@cerbos/core": "^0.25.1",
     "react": ">=18.0.0"
   },
   "dependencies": {
