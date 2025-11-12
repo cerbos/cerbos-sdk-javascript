@@ -42,8 +42,17 @@ export enum Effect {
 }
 
 /**
+ * @generated from enum cerbos.effect.v1.Effect
+ */
+export type EffectJson =
+  | "EFFECT_UNSPECIFIED"
+  | "EFFECT_ALLOW"
+  | "EFFECT_DENY"
+  | "EFFECT_NO_MATCH";
+
+/**
  * Describes the enum cerbos.effect.v1.Effect.
  */
-export const EffectSchema: GenEnum<Effect> =
+export const EffectSchema: GenEnum<Effect, EffectJson> =
   /*@__PURE__*/
   enumDesc(file_cerbos_effect_v1_effect, 0);

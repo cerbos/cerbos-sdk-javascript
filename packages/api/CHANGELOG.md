@@ -6,6 +6,8 @@
 
 - `cerbos.epdp.v2` messages ([#1279](https://github.com/cerbos/cerbos-sdk-javascript/pull/1279))
 
+- JSON types ([#1279](https://github.com/cerbos/cerbos-sdk-javascript/pull/1279))
+
 ## [0.1.0] - 2025-11-07
 
 ### Added

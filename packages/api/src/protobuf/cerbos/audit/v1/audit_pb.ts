@@ -12,18 +12,25 @@ import type {
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type {
   CheckInput,
+  CheckInputJson,
   CheckInputValid,
   CheckOutput,
+  CheckOutputJson,
   CheckOutputValid,
   PlanResourcesInput,
+  PlanResourcesInputJson,
   PlanResourcesInputValid,
   PlanResourcesOutput,
+  PlanResourcesOutputJson,
   PlanResourcesOutputValid,
 } from "../../engine/v1/engine_pb";
 import { file_cerbos_engine_v1_engine } from "../../engine/v1/engine_pb";
-import type { SourceAttributes } from "../../policy/v1/policy_pb";
+import type {
+  SourceAttributes,
+  SourceAttributesJson,
+} from "../../policy/v1/policy_pb";
 import { file_cerbos_policy_v1_policy } from "../../policy/v1/policy_pb";
-import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Timestamp, TimestampJson } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -86,6 +93,51 @@ export type AccessLogEntry = Message<"cerbos.audit.v1.AccessLogEntry"> & {
   policySource?: PolicySource;
 };
 
+/**
+ * @generated from message cerbos.audit.v1.AccessLogEntry
+ */
+export type AccessLogEntryJson = {
+  /**
+   * @generated from field: string call_id = 1;
+   */
+  callId?: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp timestamp = 2;
+   */
+  timestamp?: TimestampJson;
+
+  /**
+   * @generated from field: cerbos.audit.v1.Peer peer = 3;
+   */
+  peer?: PeerJson;
+
+  /**
+   * @generated from field: map<string, cerbos.audit.v1.MetaValues> metadata = 4;
+   */
+  metadata?: { [key: string]: MetaValuesJson };
+
+  /**
+   * @generated from field: string method = 5;
+   */
+  method?: string;
+
+  /**
+   * @generated from field: uint32 status_code = 6;
+   */
+  statusCode?: number;
+
+  /**
+   * @generated from field: bool oversized = 7;
+   */
+  oversized?: boolean;
+
+  /**
+   * @generated from field: cerbos.audit.v1.PolicySource policy_source = 8;
+   */
+  policySource?: PolicySourceJson;
+};
+
 export type AccessLogEntryValid = AccessLogEntry;
 
 /**
@@ -94,7 +146,7 @@ export type AccessLogEntryValid = AccessLogEntry;
  */
 export const AccessLogEntrySchema: GenMessage<
   AccessLogEntry,
-  { validType: AccessLogEntryValid }
+  { jsonType: AccessLogEntryJson; validType: AccessLogEntryValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 0);
 
 /**
@@ -179,6 +231,80 @@ export type DecisionLogEntry = Message<"cerbos.audit.v1.DecisionLogEntry"> & {
    * @generated from field: cerbos.audit.v1.PolicySource policy_source = 18;
    */
   policySource?: PolicySource;
+};
+
+/**
+ * @generated from message cerbos.audit.v1.DecisionLogEntry
+ */
+export type DecisionLogEntryJson = {
+  /**
+   * @generated from field: string call_id = 1;
+   */
+  callId?: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp timestamp = 2;
+   */
+  timestamp?: TimestampJson;
+
+  /**
+   * @generated from field: cerbos.audit.v1.Peer peer = 3;
+   */
+  peer?: PeerJson;
+
+  /**
+   * Deprecated. Use method.check_resources.inputs instead.
+   *
+   * @generated from field: repeated cerbos.engine.v1.CheckInput inputs = 4 [deprecated = true];
+   * @deprecated
+   */
+  inputs?: CheckInputJson[];
+
+  /**
+   * Deprecated. Use method.check_resources.outputs instead.
+   *
+   * @generated from field: repeated cerbos.engine.v1.CheckOutput outputs = 5 [deprecated = true];
+   * @deprecated
+   */
+  outputs?: CheckOutputJson[];
+
+  /**
+   * Deprecated. Use method.check_resources.error instead.
+   *
+   * @generated from field: string error = 6 [deprecated = true];
+   * @deprecated
+   */
+  error?: string;
+
+  /**
+   * @generated from field: cerbos.audit.v1.DecisionLogEntry.CheckResources check_resources = 7;
+   */
+  checkResources?: DecisionLogEntry_CheckResourcesJson;
+
+  /**
+   * @generated from field: cerbos.audit.v1.DecisionLogEntry.PlanResources plan_resources = 8;
+   */
+  planResources?: DecisionLogEntry_PlanResourcesJson;
+
+  /**
+   * @generated from field: map<string, cerbos.audit.v1.MetaValues> metadata = 15;
+   */
+  metadata?: { [key: string]: MetaValuesJson };
+
+  /**
+   * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 16;
+   */
+  auditTrail?: AuditTrailJson;
+
+  /**
+   * @generated from field: bool oversized = 17;
+   */
+  oversized?: boolean;
+
+  /**
+   * @generated from field: cerbos.audit.v1.PolicySource policy_source = 18;
+   */
+  policySource?: PolicySourceJson;
 };
 
 /**
@@ -272,7 +398,7 @@ export type DecisionLogEntryValid =
  */
 export const DecisionLogEntrySchema: GenMessage<
   DecisionLogEntry,
-  { validType: DecisionLogEntryValid }
+  { jsonType: DecisionLogEntryJson; validType: DecisionLogEntryValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 1);
 
 /**
@@ -295,6 +421,26 @@ export type DecisionLogEntry_CheckResources =
      */
     error: string;
   };
+
+/**
+ * @generated from message cerbos.audit.v1.DecisionLogEntry.CheckResources
+ */
+export type DecisionLogEntry_CheckResourcesJson = {
+  /**
+   * @generated from field: repeated cerbos.engine.v1.CheckInput inputs = 1;
+   */
+  inputs?: CheckInputJson[];
+
+  /**
+   * @generated from field: repeated cerbos.engine.v1.CheckOutput outputs = 2;
+   */
+  outputs?: CheckOutputJson[];
+
+  /**
+   * @generated from field: string error = 3;
+   */
+  error?: string;
+};
 
 /**
  * @generated from message cerbos.audit.v1.DecisionLogEntry.CheckResources
@@ -323,7 +469,10 @@ export type DecisionLogEntry_CheckResourcesValid =
  */
 export const DecisionLogEntry_CheckResourcesSchema: GenMessage<
   DecisionLogEntry_CheckResources,
-  { validType: DecisionLogEntry_CheckResourcesValid }
+  {
+    jsonType: DecisionLogEntry_CheckResourcesJson;
+    validType: DecisionLogEntry_CheckResourcesValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 1, 0);
 
 /**
@@ -346,6 +495,26 @@ export type DecisionLogEntry_PlanResources =
      */
     error: string;
   };
+
+/**
+ * @generated from message cerbos.audit.v1.DecisionLogEntry.PlanResources
+ */
+export type DecisionLogEntry_PlanResourcesJson = {
+  /**
+   * @generated from field: cerbos.engine.v1.PlanResourcesInput input = 1;
+   */
+  input?: PlanResourcesInputJson;
+
+  /**
+   * @generated from field: cerbos.engine.v1.PlanResourcesOutput output = 2;
+   */
+  output?: PlanResourcesOutputJson;
+
+  /**
+   * @generated from field: string error = 3;
+   */
+  error?: string;
+};
 
 /**
  * @generated from message cerbos.audit.v1.DecisionLogEntry.PlanResources
@@ -374,7 +543,10 @@ export type DecisionLogEntry_PlanResourcesValid =
  */
 export const DecisionLogEntry_PlanResourcesSchema: GenMessage<
   DecisionLogEntry_PlanResources,
-  { validType: DecisionLogEntry_PlanResourcesValid }
+  {
+    jsonType: DecisionLogEntry_PlanResourcesJson;
+    validType: DecisionLogEntry_PlanResourcesValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 1, 1);
 
 /**
@@ -387,6 +559,16 @@ export type MetaValues = Message<"cerbos.audit.v1.MetaValues"> & {
   values: string[];
 };
 
+/**
+ * @generated from message cerbos.audit.v1.MetaValues
+ */
+export type MetaValuesJson = {
+  /**
+   * @generated from field: repeated string values = 1;
+   */
+  values?: string[];
+};
+
 export type MetaValuesValid = MetaValues;
 
 /**
@@ -395,7 +577,7 @@ export type MetaValuesValid = MetaValues;
  */
 export const MetaValuesSchema: GenMessage<
   MetaValues,
-  { validType: MetaValuesValid }
+  { jsonType: MetaValuesJson; validType: MetaValuesValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 2);
 
 /**
@@ -423,15 +605,41 @@ export type Peer = Message<"cerbos.audit.v1.Peer"> & {
   forwardedFor: string;
 };
 
+/**
+ * @generated from message cerbos.audit.v1.Peer
+ */
+export type PeerJson = {
+  /**
+   * @generated from field: string address = 1;
+   */
+  address?: string;
+
+  /**
+   * @generated from field: string auth_info = 2;
+   */
+  authInfo?: string;
+
+  /**
+   * @generated from field: string user_agent = 3;
+   */
+  userAgent?: string;
+
+  /**
+   * @generated from field: string forwarded_for = 4;
+   */
+  forwardedFor?: string;
+};
+
 export type PeerValid = Peer;
 
 /**
  * Describes the message cerbos.audit.v1.Peer.
  * Use `create(PeerSchema)` to create a new message.
  */
-export const PeerSchema: GenMessage<Peer, { validType: PeerValid }> =
-  /*@__PURE__*/
-  messageDesc(file_cerbos_audit_v1_audit, 3);
+export const PeerSchema: GenMessage<
+  Peer,
+  { jsonType: PeerJson; validType: PeerValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 3);
 
 /**
  * @generated from message cerbos.audit.v1.AuditTrail
@@ -443,6 +651,16 @@ export type AuditTrail = Message<"cerbos.audit.v1.AuditTrail"> & {
   effectivePolicies: { [key: string]: SourceAttributes };
 };
 
+/**
+ * @generated from message cerbos.audit.v1.AuditTrail
+ */
+export type AuditTrailJson = {
+  /**
+   * @generated from field: map<string, cerbos.policy.v1.SourceAttributes> effective_policies = 1;
+   */
+  effectivePolicies?: { [key: string]: SourceAttributesJson };
+};
+
 export type AuditTrailValid = AuditTrail;
 
 /**
@@ -451,7 +669,7 @@ export type AuditTrailValid = AuditTrail;
  */
 export const AuditTrailSchema: GenMessage<
   AuditTrail,
-  { validType: AuditTrailValid }
+  { jsonType: AuditTrailJson; validType: AuditTrailValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 4);
 
 /**
@@ -507,6 +725,41 @@ export type PolicySource = Message<"cerbos.audit.v1.PolicySource"> & {
     | { case: undefined; value?: undefined };
 };
 
+/**
+ * @generated from message cerbos.audit.v1.PolicySource
+ */
+export type PolicySourceJson = {
+  /**
+   * @generated from field: cerbos.audit.v1.PolicySource.Blob blob = 1;
+   */
+  blob?: PolicySource_BlobJson;
+
+  /**
+   * @generated from field: cerbos.audit.v1.PolicySource.Database database = 2;
+   */
+  database?: PolicySource_DatabaseJson;
+
+  /**
+   * @generated from field: cerbos.audit.v1.PolicySource.Disk disk = 3;
+   */
+  disk?: PolicySource_DiskJson;
+
+  /**
+   * @generated from field: cerbos.audit.v1.PolicySource.Git git = 4;
+   */
+  git?: PolicySource_GitJson;
+
+  /**
+   * @generated from field: cerbos.audit.v1.PolicySource.Hub hub = 5;
+   */
+  hub?: PolicySource_HubJson;
+
+  /**
+   * @generated from field: cerbos.audit.v1.PolicySource.EmbeddedPDP embedded_pdp = 6;
+   */
+  embeddedPdp?: PolicySource_EmbeddedPDPJson;
+};
+
 export type PolicySourceValid = PolicySource;
 
 /**
@@ -515,7 +768,7 @@ export type PolicySourceValid = PolicySource;
  */
 export const PolicySourceSchema: GenMessage<
   PolicySource,
-  { validType: PolicySourceValid }
+  { jsonType: PolicySourceJson; validType: PolicySourceValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 5);
 
 /**
@@ -533,6 +786,21 @@ export type PolicySource_Blob = Message<"cerbos.audit.v1.PolicySource.Blob"> & {
   prefix: string;
 };
 
+/**
+ * @generated from message cerbos.audit.v1.PolicySource.Blob
+ */
+export type PolicySource_BlobJson = {
+  /**
+   * @generated from field: string bucket_url = 1;
+   */
+  bucketUrl?: string;
+
+  /**
+   * @generated from field: string prefix = 2;
+   */
+  prefix?: string;
+};
+
 export type PolicySource_BlobValid = PolicySource_Blob;
 
 /**
@@ -541,7 +809,7 @@ export type PolicySource_BlobValid = PolicySource_Blob;
  */
 export const PolicySource_BlobSchema: GenMessage<
   PolicySource_Blob,
-  { validType: PolicySource_BlobValid }
+  { jsonType: PolicySource_BlobJson; validType: PolicySource_BlobValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 5, 0);
 
 /**
@@ -555,6 +823,16 @@ export type PolicySource_Database =
     driver: PolicySource_Database_Driver;
   };
 
+/**
+ * @generated from message cerbos.audit.v1.PolicySource.Database
+ */
+export type PolicySource_DatabaseJson = {
+  /**
+   * @generated from field: cerbos.audit.v1.PolicySource.Database.Driver driver = 1;
+   */
+  driver?: PolicySource_Database_DriverJson;
+};
+
 export type PolicySource_DatabaseValid = PolicySource_Database;
 
 /**
@@ -563,7 +841,7 @@ export type PolicySource_DatabaseValid = PolicySource_Database;
  */
 export const PolicySource_DatabaseSchema: GenMessage<
   PolicySource_Database,
-  { validType: PolicySource_DatabaseValid }
+  { jsonType: PolicySource_DatabaseJson; validType: PolicySource_DatabaseValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 5, 1);
 
 /**
@@ -592,11 +870,21 @@ export enum PolicySource_Database_Driver {
 }
 
 /**
+ * @generated from enum cerbos.audit.v1.PolicySource.Database.Driver
+ */
+export type PolicySource_Database_DriverJson =
+  | "DRIVER_UNSPECIFIED"
+  | "DRIVER_MYSQL"
+  | "DRIVER_POSTGRES"
+  | "DRIVER_SQLITE3";
+
+/**
  * Describes the enum cerbos.audit.v1.PolicySource.Database.Driver.
  */
-export const PolicySource_Database_DriverSchema: GenEnum<PolicySource_Database_Driver> =
-  /*@__PURE__*/
-  enumDesc(file_cerbos_audit_v1_audit, 5, 1, 0);
+export const PolicySource_Database_DriverSchema: GenEnum<
+  PolicySource_Database_Driver,
+  PolicySource_Database_DriverJson
+> = /*@__PURE__*/ enumDesc(file_cerbos_audit_v1_audit, 5, 1, 0);
 
 /**
  * @generated from message cerbos.audit.v1.PolicySource.Disk
@@ -608,6 +896,16 @@ export type PolicySource_Disk = Message<"cerbos.audit.v1.PolicySource.Disk"> & {
   directory: string;
 };
 
+/**
+ * @generated from message cerbos.audit.v1.PolicySource.Disk
+ */
+export type PolicySource_DiskJson = {
+  /**
+   * @generated from field: string directory = 1;
+   */
+  directory?: string;
+};
+
 export type PolicySource_DiskValid = PolicySource_Disk;
 
 /**
@@ -616,7 +914,7 @@ export type PolicySource_DiskValid = PolicySource_Disk;
  */
 export const PolicySource_DiskSchema: GenMessage<
   PolicySource_Disk,
-  { validType: PolicySource_DiskValid }
+  { jsonType: PolicySource_DiskJson; validType: PolicySource_DiskValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 5, 2);
 
 /**
@@ -640,6 +938,26 @@ export type PolicySource_EmbeddedPDP =
     builtAt?: Timestamp;
   };
 
+/**
+ * @generated from message cerbos.audit.v1.PolicySource.EmbeddedPDP
+ */
+export type PolicySource_EmbeddedPDPJson = {
+  /**
+   * @generated from field: string url = 1;
+   */
+  url?: string;
+
+  /**
+   * @generated from field: string commit_hash = 2;
+   */
+  commitHash?: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp built_at = 3;
+   */
+  builtAt?: TimestampJson;
+};
+
 export type PolicySource_EmbeddedPDPValid = PolicySource_EmbeddedPDP;
 
 /**
@@ -648,7 +966,10 @@ export type PolicySource_EmbeddedPDPValid = PolicySource_EmbeddedPDP;
  */
 export const PolicySource_EmbeddedPDPSchema: GenMessage<
   PolicySource_EmbeddedPDP,
-  { validType: PolicySource_EmbeddedPDPValid }
+  {
+    jsonType: PolicySource_EmbeddedPDPJson;
+    validType: PolicySource_EmbeddedPDPValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 5, 3);
 
 /**
@@ -671,6 +992,26 @@ export type PolicySource_Git = Message<"cerbos.audit.v1.PolicySource.Git"> & {
   subdirectory: string;
 };
 
+/**
+ * @generated from message cerbos.audit.v1.PolicySource.Git
+ */
+export type PolicySource_GitJson = {
+  /**
+   * @generated from field: string repository_url = 1;
+   */
+  repositoryUrl?: string;
+
+  /**
+   * @generated from field: string branch = 2;
+   */
+  branch?: string;
+
+  /**
+   * @generated from field: string subdirectory = 3;
+   */
+  subdirectory?: string;
+};
+
 export type PolicySource_GitValid = PolicySource_Git;
 
 /**
@@ -679,7 +1020,7 @@ export type PolicySource_GitValid = PolicySource_Git;
  */
 export const PolicySource_GitSchema: GenMessage<
   PolicySource_Git,
-  { validType: PolicySource_GitValid }
+  { jsonType: PolicySource_GitJson; validType: PolicySource_GitValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 5, 4);
 
 /**
@@ -721,6 +1062,31 @@ export type PolicySource_Hub = Message<"cerbos.audit.v1.PolicySource.Hub"> & {
     | { case: undefined; value?: undefined };
 };
 
+/**
+ * @generated from message cerbos.audit.v1.PolicySource.Hub
+ */
+export type PolicySource_HubJson = {
+  /**
+   * @generated from field: string label = 1;
+   */
+  label?: string;
+
+  /**
+   * @generated from field: string deployment_id = 2;
+   */
+  deploymentId?: string;
+
+  /**
+   * @generated from field: string playground_id = 3;
+   */
+  playgroundId?: string;
+
+  /**
+   * @generated from field: cerbos.audit.v1.PolicySource.Hub.LocalBundle local_bundle = 4;
+   */
+  localBundle?: PolicySource_Hub_LocalBundleJson;
+};
+
 export type PolicySource_HubValid = PolicySource_Hub;
 
 /**
@@ -729,7 +1095,7 @@ export type PolicySource_HubValid = PolicySource_Hub;
  */
 export const PolicySource_HubSchema: GenMessage<
   PolicySource_Hub,
-  { validType: PolicySource_HubValid }
+  { jsonType: PolicySource_HubJson; validType: PolicySource_HubValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 5, 5);
 
 /**
@@ -743,6 +1109,16 @@ export type PolicySource_Hub_LocalBundle =
     path: string;
   };
 
+/**
+ * @generated from message cerbos.audit.v1.PolicySource.Hub.LocalBundle
+ */
+export type PolicySource_Hub_LocalBundleJson = {
+  /**
+   * @generated from field: string path = 1;
+   */
+  path?: string;
+};
+
 export type PolicySource_Hub_LocalBundleValid = PolicySource_Hub_LocalBundle;
 
 /**
@@ -751,5 +1127,8 @@ export type PolicySource_Hub_LocalBundleValid = PolicySource_Hub_LocalBundle;
  */
 export const PolicySource_Hub_LocalBundleSchema: GenMessage<
   PolicySource_Hub_LocalBundle,
-  { validType: PolicySource_Hub_LocalBundleValid }
+  {
+    jsonType: PolicySource_Hub_LocalBundleJson;
+    validType: PolicySource_Hub_LocalBundleValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 5, 5, 0);

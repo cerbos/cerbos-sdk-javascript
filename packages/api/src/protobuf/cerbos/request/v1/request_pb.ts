@@ -13,19 +13,37 @@ import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import { file_buf_validate_validate } from "../../../buf/validate/validate_pb";
 import type {
   PlanResourcesInput_Resource,
+  PlanResourcesInput_ResourceJson,
   PlanResourcesInput_ResourceValid,
   Principal,
+  PrincipalJson,
   PrincipalValid,
   Resource,
+  ResourceJson,
   ResourceValid,
 } from "../../engine/v1/engine_pb";
 import { file_cerbos_engine_v1_engine } from "../../engine/v1/engine_pb";
-import type { Policy, PolicyValid } from "../../policy/v1/policy_pb";
+import type {
+  Policy,
+  PolicyJson,
+  PolicyValid,
+} from "../../policy/v1/policy_pb";
 import { file_cerbos_policy_v1_policy } from "../../policy/v1/policy_pb";
-import type { Schema, SchemaValid } from "../../schema/v1/schema_pb";
+import type {
+  Schema,
+  SchemaJson,
+  SchemaValid,
+} from "../../schema/v1/schema_pb";
 import { file_cerbos_schema_v1_schema } from "../../schema/v1/schema_pb";
 import { file_google_api_field_behavior } from "../../../google/api/field_behavior_pb";
-import type { Duration, Timestamp, Value } from "@bufbuild/protobuf/wkt";
+import type {
+  Duration,
+  DurationJson,
+  Timestamp,
+  TimestampJson,
+  Value,
+  ValueJson,
+} from "@bufbuild/protobuf/wkt";
 import {
   file_google_protobuf_duration,
   file_google_protobuf_struct,
@@ -99,6 +117,47 @@ export type PlanResourcesRequest =
 /**
  * @generated from message cerbos.request.v1.PlanResourcesRequest
  */
+export type PlanResourcesRequestJson = {
+  /**
+   * @generated from field: string request_id = 1;
+   */
+  requestId?: string;
+
+  /**
+   * @generated from field: string action = 2 [deprecated = true];
+   * @deprecated
+   */
+  action?: string;
+
+  /**
+   * @generated from field: repeated string actions = 7;
+   */
+  actions?: string[];
+
+  /**
+   * @generated from field: cerbos.engine.v1.Principal principal = 3;
+   */
+  principal?: PrincipalJson;
+
+  /**
+   * @generated from field: cerbos.engine.v1.PlanResourcesInput.Resource resource = 4;
+   */
+  resource?: PlanResourcesInput_ResourceJson;
+
+  /**
+   * @generated from field: cerbos.request.v1.AuxData aux_data = 5;
+   */
+  auxData?: AuxDataJson;
+
+  /**
+   * @generated from field: bool include_meta = 6;
+   */
+  includeMeta?: boolean;
+};
+
+/**
+ * @generated from message cerbos.request.v1.PlanResourcesRequest
+ */
 export type PlanResourcesRequestValid =
   Message<"cerbos.request.v1.PlanResourcesRequest"> & {
     /**
@@ -144,7 +203,7 @@ export type PlanResourcesRequestValid =
  */
 export const PlanResourcesRequestSchema: GenMessage<
   PlanResourcesRequest,
-  { validType: PlanResourcesRequestValid }
+  { jsonType: PlanResourcesRequestJson; validType: PlanResourcesRequestValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 0);
 
 /**
@@ -190,6 +249,43 @@ export type CheckResourceSetRequest =
  *
  * @generated from message cerbos.request.v1.CheckResourceSetRequest
  */
+export type CheckResourceSetRequestJson = {
+  /**
+   * @generated from field: string request_id = 1;
+   */
+  requestId?: string;
+
+  /**
+   * @generated from field: repeated string actions = 2;
+   */
+  actions?: string[];
+
+  /**
+   * @generated from field: cerbos.engine.v1.Principal principal = 3;
+   */
+  principal?: PrincipalJson;
+
+  /**
+   * @generated from field: cerbos.request.v1.ResourceSet resource = 4;
+   */
+  resource?: ResourceSetJson;
+
+  /**
+   * @generated from field: bool include_meta = 5;
+   */
+  includeMeta?: boolean;
+
+  /**
+   * @generated from field: cerbos.request.v1.AuxData aux_data = 6;
+   */
+  auxData?: AuxDataJson;
+};
+
+/**
+ * Deprecated. See CheckResourcesRequest.
+ *
+ * @generated from message cerbos.request.v1.CheckResourceSetRequest
+ */
 export type CheckResourceSetRequestValid =
   Message<"cerbos.request.v1.CheckResourceSetRequest"> & {
     /**
@@ -229,7 +325,10 @@ export type CheckResourceSetRequestValid =
  */
 export const CheckResourceSetRequestSchema: GenMessage<
   CheckResourceSetRequest,
-  { validType: CheckResourceSetRequestValid }
+  {
+    jsonType: CheckResourceSetRequestJson;
+    validType: CheckResourceSetRequestValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 1);
 
 /**
@@ -255,6 +354,31 @@ export type ResourceSet = Message<"cerbos.request.v1.ResourceSet"> & {
    * @generated from field: string scope = 4;
    */
   scope: string;
+};
+
+/**
+ * @generated from message cerbos.request.v1.ResourceSet
+ */
+export type ResourceSetJson = {
+  /**
+   * @generated from field: string kind = 1;
+   */
+  kind?: string;
+
+  /**
+   * @generated from field: string policy_version = 2;
+   */
+  policyVersion?: string;
+
+  /**
+   * @generated from field: map<string, cerbos.request.v1.AttributesMap> instances = 3;
+   */
+  instances?: { [key: string]: AttributesMapJson };
+
+  /**
+   * @generated from field: string scope = 4;
+   */
+  scope?: string;
 };
 
 /**
@@ -288,7 +412,7 @@ export type ResourceSetValid = Message<"cerbos.request.v1.ResourceSet"> & {
  */
 export const ResourceSetSchema: GenMessage<
   ResourceSet,
-  { validType: ResourceSetValid }
+  { jsonType: ResourceSetJson; validType: ResourceSetValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 2);
 
 /**
@@ -301,6 +425,16 @@ export type AttributesMap = Message<"cerbos.request.v1.AttributesMap"> & {
   attr: { [key: string]: Value };
 };
 
+/**
+ * @generated from message cerbos.request.v1.AttributesMap
+ */
+export type AttributesMapJson = {
+  /**
+   * @generated from field: map<string, google.protobuf.Value> attr = 1;
+   */
+  attr?: { [key: string]: ValueJson };
+};
+
 export type AttributesMapValid = AttributesMap;
 
 /**
@@ -309,7 +443,7 @@ export type AttributesMapValid = AttributesMap;
  */
 export const AttributesMapSchema: GenMessage<
   AttributesMap,
-  { validType: AttributesMapValid }
+  { jsonType: AttributesMapJson; validType: AttributesMapValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 3);
 
 /**
@@ -345,6 +479,33 @@ export type CheckResourceBatchRequest =
  *
  * @generated from message cerbos.request.v1.CheckResourceBatchRequest
  */
+export type CheckResourceBatchRequestJson = {
+  /**
+   * @generated from field: string request_id = 1;
+   */
+  requestId?: string;
+
+  /**
+   * @generated from field: cerbos.engine.v1.Principal principal = 2;
+   */
+  principal?: PrincipalJson;
+
+  /**
+   * @generated from field: repeated cerbos.request.v1.CheckResourceBatchRequest.BatchEntry resources = 3;
+   */
+  resources?: CheckResourceBatchRequest_BatchEntryJson[];
+
+  /**
+   * @generated from field: cerbos.request.v1.AuxData aux_data = 4;
+   */
+  auxData?: AuxDataJson;
+};
+
+/**
+ * Deprecated. See CheckResourcesRequest.
+ *
+ * @generated from message cerbos.request.v1.CheckResourceBatchRequest
+ */
 export type CheckResourceBatchRequestValid =
   Message<"cerbos.request.v1.CheckResourceBatchRequest"> & {
     /**
@@ -374,7 +535,10 @@ export type CheckResourceBatchRequestValid =
  */
 export const CheckResourceBatchRequestSchema: GenMessage<
   CheckResourceBatchRequest,
-  { validType: CheckResourceBatchRequestValid }
+  {
+    jsonType: CheckResourceBatchRequestJson;
+    validType: CheckResourceBatchRequestValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 4);
 
 /**
@@ -392,6 +556,21 @@ export type CheckResourceBatchRequest_BatchEntry =
      */
     resource?: Resource;
   };
+
+/**
+ * @generated from message cerbos.request.v1.CheckResourceBatchRequest.BatchEntry
+ */
+export type CheckResourceBatchRequest_BatchEntryJson = {
+  /**
+   * @generated from field: repeated string actions = 1;
+   */
+  actions?: string[];
+
+  /**
+   * @generated from field: cerbos.engine.v1.Resource resource = 2;
+   */
+  resource?: ResourceJson;
+};
 
 /**
  * @generated from message cerbos.request.v1.CheckResourceBatchRequest.BatchEntry
@@ -415,7 +594,10 @@ export type CheckResourceBatchRequest_BatchEntryValid =
  */
 export const CheckResourceBatchRequest_BatchEntrySchema: GenMessage<
   CheckResourceBatchRequest_BatchEntry,
-  { validType: CheckResourceBatchRequest_BatchEntryValid }
+  {
+    jsonType: CheckResourceBatchRequest_BatchEntryJson;
+    validType: CheckResourceBatchRequest_BatchEntryValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 4, 0);
 
 /**
@@ -456,6 +638,38 @@ export type CheckResourcesRequest =
  *
  * @generated from message cerbos.request.v1.CheckResourcesRequest
  */
+export type CheckResourcesRequestJson = {
+  /**
+   * @generated from field: string request_id = 1;
+   */
+  requestId?: string;
+
+  /**
+   * @generated from field: bool include_meta = 2;
+   */
+  includeMeta?: boolean;
+
+  /**
+   * @generated from field: cerbos.engine.v1.Principal principal = 3;
+   */
+  principal?: PrincipalJson;
+
+  /**
+   * @generated from field: repeated cerbos.request.v1.CheckResourcesRequest.ResourceEntry resources = 4;
+   */
+  resources?: CheckResourcesRequest_ResourceEntryJson[];
+
+  /**
+   * @generated from field: cerbos.request.v1.AuxData aux_data = 5;
+   */
+  auxData?: AuxDataJson;
+};
+
+/**
+ * Structure of the request for the check resources API call.
+ *
+ * @generated from message cerbos.request.v1.CheckResourcesRequest
+ */
 export type CheckResourcesRequestValid =
   Message<"cerbos.request.v1.CheckResourcesRequest"> & {
     /**
@@ -490,7 +704,7 @@ export type CheckResourcesRequestValid =
  */
 export const CheckResourcesRequestSchema: GenMessage<
   CheckResourcesRequest,
-  { validType: CheckResourcesRequestValid }
+  { jsonType: CheckResourcesRequestJson; validType: CheckResourcesRequestValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 5);
 
 /**
@@ -508,6 +722,21 @@ export type CheckResourcesRequest_ResourceEntry =
      */
     resource?: Resource;
   };
+
+/**
+ * @generated from message cerbos.request.v1.CheckResourcesRequest.ResourceEntry
+ */
+export type CheckResourcesRequest_ResourceEntryJson = {
+  /**
+   * @generated from field: repeated string actions = 1;
+   */
+  actions?: string[];
+
+  /**
+   * @generated from field: cerbos.engine.v1.Resource resource = 2;
+   */
+  resource?: ResourceJson;
+};
 
 /**
  * @generated from message cerbos.request.v1.CheckResourcesRequest.ResourceEntry
@@ -531,7 +760,10 @@ export type CheckResourcesRequest_ResourceEntryValid =
  */
 export const CheckResourcesRequest_ResourceEntrySchema: GenMessage<
   CheckResourcesRequest_ResourceEntry,
-  { validType: CheckResourcesRequest_ResourceEntryValid }
+  {
+    jsonType: CheckResourcesRequest_ResourceEntryJson;
+    validType: CheckResourcesRequest_ResourceEntryValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 5, 0);
 
 /**
@@ -542,6 +774,16 @@ export type AuxData = Message<"cerbos.request.v1.AuxData"> & {
    * @generated from field: cerbos.request.v1.AuxData.JWT jwt = 1;
    */
   jwt?: AuxData_JWT;
+};
+
+/**
+ * @generated from message cerbos.request.v1.AuxData
+ */
+export type AuxDataJson = {
+  /**
+   * @generated from field: cerbos.request.v1.AuxData.JWT jwt = 1;
+   */
+  jwt?: AuxData_JWTJson;
 };
 
 /**
@@ -558,9 +800,10 @@ export type AuxDataValid = Message<"cerbos.request.v1.AuxData"> & {
  * Describes the message cerbos.request.v1.AuxData.
  * Use `create(AuxDataSchema)` to create a new message.
  */
-export const AuxDataSchema: GenMessage<AuxData, { validType: AuxDataValid }> =
-  /*@__PURE__*/
-  messageDesc(file_cerbos_request_v1_request, 6);
+export const AuxDataSchema: GenMessage<
+  AuxData,
+  { jsonType: AuxDataJson; validType: AuxDataValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 6);
 
 /**
  * @generated from message cerbos.request.v1.AuxData.JWT
@@ -575,6 +818,21 @@ export type AuxData_JWT = Message<"cerbos.request.v1.AuxData.JWT"> & {
    * @generated from field: string key_set_id = 2;
    */
   keySetId: string;
+};
+
+/**
+ * @generated from message cerbos.request.v1.AuxData.JWT
+ */
+export type AuxData_JWTJson = {
+  /**
+   * @generated from field: string token = 1;
+   */
+  token?: string;
+
+  /**
+   * @generated from field: string key_set_id = 2;
+   */
+  keySetId?: string;
 };
 
 /**
@@ -598,7 +856,7 @@ export type AuxData_JWTValid = Message<"cerbos.request.v1.AuxData.JWT"> & {
  */
 export const AuxData_JWTSchema: GenMessage<
   AuxData_JWT,
-  { validType: AuxData_JWTValid }
+  { jsonType: AuxData_JWTJson; validType: AuxData_JWTValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 6, 0);
 
 /**
@@ -611,6 +869,16 @@ export type AddOrUpdatePolicyRequest =
      */
     policies: Policy[];
   };
+
+/**
+ * @generated from message cerbos.request.v1.AddOrUpdatePolicyRequest
+ */
+export type AddOrUpdatePolicyRequestJson = {
+  /**
+   * @generated from field: repeated cerbos.policy.v1.Policy policies = 1;
+   */
+  policies?: PolicyJson[];
+};
 
 /**
  * @generated from message cerbos.request.v1.AddOrUpdatePolicyRequest
@@ -629,7 +897,10 @@ export type AddOrUpdatePolicyRequestValid =
  */
 export const AddOrUpdatePolicyRequestSchema: GenMessage<
   AddOrUpdatePolicyRequest,
-  { validType: AddOrUpdatePolicyRequestValid }
+  {
+    jsonType: AddOrUpdatePolicyRequestJson;
+    validType: AddOrUpdatePolicyRequestValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 7);
 
 /**
@@ -676,6 +947,36 @@ export type ListAuditLogEntriesRequest =
         }
       | { case: undefined; value?: undefined };
   };
+
+/**
+ * @generated from message cerbos.request.v1.ListAuditLogEntriesRequest
+ */
+export type ListAuditLogEntriesRequestJson = {
+  /**
+   * @generated from field: cerbos.request.v1.ListAuditLogEntriesRequest.Kind kind = 1;
+   */
+  kind?: ListAuditLogEntriesRequest_KindJson;
+
+  /**
+   * @generated from field: uint32 tail = 2;
+   */
+  tail?: number;
+
+  /**
+   * @generated from field: cerbos.request.v1.ListAuditLogEntriesRequest.TimeRange between = 3;
+   */
+  between?: ListAuditLogEntriesRequest_TimeRangeJson;
+
+  /**
+   * @generated from field: google.protobuf.Duration since = 4;
+   */
+  since?: DurationJson;
+
+  /**
+   * @generated from field: string lookup = 5;
+   */
+  lookup?: string;
+};
 
 /**
  * @generated from message cerbos.request.v1.ListAuditLogEntriesRequest
@@ -728,7 +1029,10 @@ export type ListAuditLogEntriesRequestValid =
  */
 export const ListAuditLogEntriesRequestSchema: GenMessage<
   ListAuditLogEntriesRequest,
-  { validType: ListAuditLogEntriesRequestValid }
+  {
+    jsonType: ListAuditLogEntriesRequestJson;
+    validType: ListAuditLogEntriesRequestValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 8);
 
 /**
@@ -746,6 +1050,21 @@ export type ListAuditLogEntriesRequest_TimeRange =
      */
     end?: Timestamp;
   };
+
+/**
+ * @generated from message cerbos.request.v1.ListAuditLogEntriesRequest.TimeRange
+ */
+export type ListAuditLogEntriesRequest_TimeRangeJson = {
+  /**
+   * @generated from field: google.protobuf.Timestamp start = 1;
+   */
+  start?: TimestampJson;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp end = 2;
+   */
+  end?: TimestampJson;
+};
 
 /**
  * @generated from message cerbos.request.v1.ListAuditLogEntriesRequest.TimeRange
@@ -769,7 +1088,10 @@ export type ListAuditLogEntriesRequest_TimeRangeValid =
  */
 export const ListAuditLogEntriesRequest_TimeRangeSchema: GenMessage<
   ListAuditLogEntriesRequest_TimeRange,
-  { validType: ListAuditLogEntriesRequest_TimeRangeValid }
+  {
+    jsonType: ListAuditLogEntriesRequest_TimeRangeJson;
+    validType: ListAuditLogEntriesRequest_TimeRangeValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 8, 0);
 
 /**
@@ -793,17 +1115,31 @@ export enum ListAuditLogEntriesRequest_Kind {
 }
 
 /**
+ * @generated from enum cerbos.request.v1.ListAuditLogEntriesRequest.Kind
+ */
+export type ListAuditLogEntriesRequest_KindJson =
+  | "KIND_UNSPECIFIED"
+  | "KIND_ACCESS"
+  | "KIND_DECISION";
+
+/**
  * Describes the enum cerbos.request.v1.ListAuditLogEntriesRequest.Kind.
  */
-export const ListAuditLogEntriesRequest_KindSchema: GenEnum<ListAuditLogEntriesRequest_Kind> =
-  /*@__PURE__*/
-  enumDesc(file_cerbos_request_v1_request, 8, 0);
+export const ListAuditLogEntriesRequest_KindSchema: GenEnum<
+  ListAuditLogEntriesRequest_Kind,
+  ListAuditLogEntriesRequest_KindJson
+> = /*@__PURE__*/ enumDesc(file_cerbos_request_v1_request, 8, 0);
 
 /**
  * @generated from message cerbos.request.v1.ServerInfoRequest
  */
 export type ServerInfoRequest =
   Message<"cerbos.request.v1.ServerInfoRequest"> & {};
+
+/**
+ * @generated from message cerbos.request.v1.ServerInfoRequest
+ */
+export type ServerInfoRequestJson = {};
 
 export type ServerInfoRequestValid = ServerInfoRequest;
 
@@ -813,7 +1149,7 @@ export type ServerInfoRequestValid = ServerInfoRequest;
  */
 export const ServerInfoRequestSchema: GenMessage<
   ServerInfoRequest,
-  { validType: ServerInfoRequestValid }
+  { jsonType: ServerInfoRequestJson; validType: ServerInfoRequestValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 9);
 
 /**
@@ -847,6 +1183,36 @@ export type ListPoliciesRequest =
     policyId: string[];
   };
 
+/**
+ * @generated from message cerbos.request.v1.ListPoliciesRequest
+ */
+export type ListPoliciesRequestJson = {
+  /**
+   * @generated from field: bool include_disabled = 1;
+   */
+  includeDisabled?: boolean;
+
+  /**
+   * @generated from field: string name_regexp = 2;
+   */
+  nameRegexp?: string;
+
+  /**
+   * @generated from field: string scope_regexp = 3;
+   */
+  scopeRegexp?: string;
+
+  /**
+   * @generated from field: string version_regexp = 4;
+   */
+  versionRegexp?: string;
+
+  /**
+   * @generated from field: repeated string policy_id = 5;
+   */
+  policyId?: string[];
+};
+
 export type ListPoliciesRequestValid = ListPoliciesRequest;
 
 /**
@@ -855,7 +1221,7 @@ export type ListPoliciesRequestValid = ListPoliciesRequest;
  */
 export const ListPoliciesRequestSchema: GenMessage<
   ListPoliciesRequest,
-  { validType: ListPoliciesRequestValid }
+  { jsonType: ListPoliciesRequestJson; validType: ListPoliciesRequestValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 10);
 
 /**
@@ -866,6 +1232,16 @@ export type GetPolicyRequest = Message<"cerbos.request.v1.GetPolicyRequest"> & {
    * @generated from field: repeated string id = 1;
    */
   id: string[];
+};
+
+/**
+ * @generated from message cerbos.request.v1.GetPolicyRequest
+ */
+export type GetPolicyRequestJson = {
+  /**
+   * @generated from field: repeated string id = 1;
+   */
+  id?: string[];
 };
 
 /**
@@ -885,7 +1261,7 @@ export type GetPolicyRequestValid =
  */
 export const GetPolicyRequestSchema: GenMessage<
   GetPolicyRequest,
-  { validType: GetPolicyRequestValid }
+  { jsonType: GetPolicyRequestJson; validType: GetPolicyRequestValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 11);
 
 /**
@@ -898,6 +1274,16 @@ export type DisablePolicyRequest =
      */
     id: string[];
   };
+
+/**
+ * @generated from message cerbos.request.v1.DisablePolicyRequest
+ */
+export type DisablePolicyRequestJson = {
+  /**
+   * @generated from field: repeated string id = 1;
+   */
+  id?: string[];
+};
 
 /**
  * @generated from message cerbos.request.v1.DisablePolicyRequest
@@ -916,7 +1302,7 @@ export type DisablePolicyRequestValid =
  */
 export const DisablePolicyRequestSchema: GenMessage<
   DisablePolicyRequest,
-  { validType: DisablePolicyRequestValid }
+  { jsonType: DisablePolicyRequestJson; validType: DisablePolicyRequestValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 12);
 
 /**
@@ -929,6 +1315,16 @@ export type EnablePolicyRequest =
      */
     id: string[];
   };
+
+/**
+ * @generated from message cerbos.request.v1.EnablePolicyRequest
+ */
+export type EnablePolicyRequestJson = {
+  /**
+   * @generated from field: repeated string id = 1;
+   */
+  id?: string[];
+};
 
 /**
  * @generated from message cerbos.request.v1.EnablePolicyRequest
@@ -947,7 +1343,7 @@ export type EnablePolicyRequestValid =
  */
 export const EnablePolicyRequestSchema: GenMessage<
   EnablePolicyRequest,
-  { validType: EnablePolicyRequestValid }
+  { jsonType: EnablePolicyRequestJson; validType: EnablePolicyRequestValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 13);
 
 /**
@@ -981,6 +1377,36 @@ export type InspectPoliciesRequest =
     policyId: string[];
   };
 
+/**
+ * @generated from message cerbos.request.v1.InspectPoliciesRequest
+ */
+export type InspectPoliciesRequestJson = {
+  /**
+   * @generated from field: bool include_disabled = 1;
+   */
+  includeDisabled?: boolean;
+
+  /**
+   * @generated from field: string name_regexp = 2;
+   */
+  nameRegexp?: string;
+
+  /**
+   * @generated from field: string scope_regexp = 3;
+   */
+  scopeRegexp?: string;
+
+  /**
+   * @generated from field: string version_regexp = 4;
+   */
+  versionRegexp?: string;
+
+  /**
+   * @generated from field: repeated string policy_id = 5;
+   */
+  policyId?: string[];
+};
+
 export type InspectPoliciesRequestValid = InspectPoliciesRequest;
 
 /**
@@ -989,7 +1415,10 @@ export type InspectPoliciesRequestValid = InspectPoliciesRequest;
  */
 export const InspectPoliciesRequestSchema: GenMessage<
   InspectPoliciesRequest,
-  { validType: InspectPoliciesRequestValid }
+  {
+    jsonType: InspectPoliciesRequestJson;
+    validType: InspectPoliciesRequestValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 14);
 
 /**
@@ -1002,6 +1431,16 @@ export type AddOrUpdateSchemaRequest =
      */
     schemas: Schema[];
   };
+
+/**
+ * @generated from message cerbos.request.v1.AddOrUpdateSchemaRequest
+ */
+export type AddOrUpdateSchemaRequestJson = {
+  /**
+   * @generated from field: repeated cerbos.schema.v1.Schema schemas = 1;
+   */
+  schemas?: SchemaJson[];
+};
 
 /**
  * @generated from message cerbos.request.v1.AddOrUpdateSchemaRequest
@@ -1020,7 +1459,10 @@ export type AddOrUpdateSchemaRequestValid =
  */
 export const AddOrUpdateSchemaRequestSchema: GenMessage<
   AddOrUpdateSchemaRequest,
-  { validType: AddOrUpdateSchemaRequestValid }
+  {
+    jsonType: AddOrUpdateSchemaRequestJson;
+    validType: AddOrUpdateSchemaRequestValid;
+  }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 15);
 
 /**
@@ -1028,6 +1470,11 @@ export const AddOrUpdateSchemaRequestSchema: GenMessage<
  */
 export type ListSchemasRequest =
   Message<"cerbos.request.v1.ListSchemasRequest"> & {};
+
+/**
+ * @generated from message cerbos.request.v1.ListSchemasRequest
+ */
+export type ListSchemasRequestJson = {};
 
 export type ListSchemasRequestValid = ListSchemasRequest;
 
@@ -1037,7 +1484,7 @@ export type ListSchemasRequestValid = ListSchemasRequest;
  */
 export const ListSchemasRequestSchema: GenMessage<
   ListSchemasRequest,
-  { validType: ListSchemasRequestValid }
+  { jsonType: ListSchemasRequestJson; validType: ListSchemasRequestValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 16);
 
 /**
@@ -1048,6 +1495,16 @@ export type GetSchemaRequest = Message<"cerbos.request.v1.GetSchemaRequest"> & {
    * @generated from field: repeated string id = 1;
    */
   id: string[];
+};
+
+/**
+ * @generated from message cerbos.request.v1.GetSchemaRequest
+ */
+export type GetSchemaRequestJson = {
+  /**
+   * @generated from field: repeated string id = 1;
+   */
+  id?: string[];
 };
 
 /**
@@ -1067,7 +1524,7 @@ export type GetSchemaRequestValid =
  */
 export const GetSchemaRequestSchema: GenMessage<
   GetSchemaRequest,
-  { validType: GetSchemaRequestValid }
+  { jsonType: GetSchemaRequestJson; validType: GetSchemaRequestValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 17);
 
 /**
@@ -1080,6 +1537,16 @@ export type DeleteSchemaRequest =
      */
     id: string[];
   };
+
+/**
+ * @generated from message cerbos.request.v1.DeleteSchemaRequest
+ */
+export type DeleteSchemaRequestJson = {
+  /**
+   * @generated from field: repeated string id = 1;
+   */
+  id?: string[];
+};
 
 /**
  * @generated from message cerbos.request.v1.DeleteSchemaRequest
@@ -1098,7 +1565,7 @@ export type DeleteSchemaRequestValid =
  */
 export const DeleteSchemaRequestSchema: GenMessage<
   DeleteSchemaRequest,
-  { validType: DeleteSchemaRequestValid }
+  { jsonType: DeleteSchemaRequestJson; validType: DeleteSchemaRequestValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 18);
 
 /**
@@ -1112,6 +1579,16 @@ export type ReloadStoreRequest =
     wait: boolean;
   };
 
+/**
+ * @generated from message cerbos.request.v1.ReloadStoreRequest
+ */
+export type ReloadStoreRequestJson = {
+  /**
+   * @generated from field: bool wait = 1;
+   */
+  wait?: boolean;
+};
+
 export type ReloadStoreRequestValid = ReloadStoreRequest;
 
 /**
@@ -1120,5 +1597,5 @@ export type ReloadStoreRequestValid = ReloadStoreRequest;
  */
 export const ReloadStoreRequestSchema: GenMessage<
   ReloadStoreRequest,
-  { validType: ReloadStoreRequestValid }
+  { jsonType: ReloadStoreRequestJson; validType: ReloadStoreRequestValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_request_v1_request, 19);

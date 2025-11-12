@@ -263,8 +263,38 @@ export enum Code {
 }
 
 /**
+ * The canonical error codes for gRPC APIs.
+ *
+ *
+ * Sometimes multiple error codes may apply.  Services should return
+ * the most specific error code that applies.  For example, prefer
+ * `OUT_OF_RANGE` over `FAILED_PRECONDITION` if both codes apply.
+ * Similarly prefer `NOT_FOUND` or `ALREADY_EXISTS` over `FAILED_PRECONDITION`.
+ *
+ * @generated from enum google.rpc.Code
+ */
+export type CodeJson =
+  | "OK"
+  | "CANCELLED"
+  | "UNKNOWN"
+  | "INVALID_ARGUMENT"
+  | "DEADLINE_EXCEEDED"
+  | "NOT_FOUND"
+  | "ALREADY_EXISTS"
+  | "PERMISSION_DENIED"
+  | "UNAUTHENTICATED"
+  | "RESOURCE_EXHAUSTED"
+  | "FAILED_PRECONDITION"
+  | "ABORTED"
+  | "OUT_OF_RANGE"
+  | "UNIMPLEMENTED"
+  | "INTERNAL"
+  | "UNAVAILABLE"
+  | "DATA_LOSS";
+
+/**
  * Describes the enum google.rpc.Code.
  */
-export const CodeSchema: GenEnum<Code> =
+export const CodeSchema: GenEnum<Code, CodeJson> =
   /*@__PURE__*/
   enumDesc(file_google_rpc_code, 0);

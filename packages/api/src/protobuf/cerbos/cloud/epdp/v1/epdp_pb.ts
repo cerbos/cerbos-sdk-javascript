@@ -6,7 +6,10 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { SourceAttributes } from "../../../policy/v1/policy_pb";
+import type {
+  SourceAttributes,
+  SourceAttributesJson,
+} from "../../../policy/v1/policy_pb";
 import { file_cerbos_policy_v1_policy } from "../../../policy/v1/policy_pb";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -51,6 +54,37 @@ export type Metadata = Message<"cerbos.cloud.epdp.v1.Metadata"> & {
   sourceAttributes: { [key: string]: SourceAttributes };
 };
 
+/**
+ * @generated from message cerbos.cloud.epdp.v1.Metadata
+ */
+export type MetadataJson = {
+  /**
+   * @generated from field: string version = 1;
+   */
+  version?: string;
+
+  /**
+   * @generated from field: repeated string policies = 2 [deprecated = true];
+   * @deprecated
+   */
+  policies?: string[];
+
+  /**
+   * @generated from field: int64 build_timestamp = 3;
+   */
+  buildTimestamp?: string;
+
+  /**
+   * @generated from field: string commit_hash = 4;
+   */
+  commitHash?: string;
+
+  /**
+   * @generated from field: map<string, cerbos.policy.v1.SourceAttributes> source_attributes = 5;
+   */
+  sourceAttributes?: { [key: string]: SourceAttributesJson };
+};
+
 export type MetadataValid = Metadata;
 
 /**
@@ -59,5 +93,5 @@ export type MetadataValid = Metadata;
  */
 export const MetadataSchema: GenMessage<
   Metadata,
-  { validType: MetadataValid }
+  { jsonType: MetadataJson; validType: MetadataValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v1_epdp, 0);

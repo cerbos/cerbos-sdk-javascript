@@ -11,12 +11,17 @@ import type {
 } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import { file_buf_validate_validate } from "../../../../buf/validate/validate_pb";
-import type { Timestamp, Value } from "@bufbuild/protobuf/wkt";
+import type {
+  Timestamp,
+  TimestampJson,
+  Value,
+  ValueJson,
+} from "@bufbuild/protobuf/wkt";
 import {
   file_google_protobuf_struct,
   file_google_protobuf_timestamp,
 } from "@bufbuild/protobuf/wkt";
-import type { Code } from "../../../../google/rpc/code_pb";
+import type { Code, CodeJson } from "../../../../google/rpc/code_pb";
 import { file_google_rpc_code } from "../../../../google/rpc/code_pb";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -50,15 +55,31 @@ export type Config = Message<"cerbos.cloud.epdp.v2.Config"> & {
   schema?: Config_Schema;
 };
 
+/**
+ * @generated from message cerbos.cloud.epdp.v2.Config
+ */
+export type ConfigJson = {
+  /**
+   * @generated from field: cerbos.cloud.epdp.v2.Config.Evaluator evaluator = 1;
+   */
+  evaluator?: Config_EvaluatorJson;
+
+  /**
+   * @generated from field: cerbos.cloud.epdp.v2.Config.Schema schema = 2;
+   */
+  schema?: Config_SchemaJson;
+};
+
 export type ConfigValid = Config;
 
 /**
  * Describes the message cerbos.cloud.epdp.v2.Config.
  * Use `create(ConfigSchema)` to create a new message.
  */
-export const ConfigSchema: GenMessage<Config, { validType: ConfigValid }> =
-  /*@__PURE__*/
-  messageDesc(file_cerbos_cloud_epdp_v2_epdp, 0);
+export const ConfigSchema: GenMessage<
+  Config,
+  { jsonType: ConfigJson; validType: ConfigValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 0);
 
 /**
  * @generated from message cerbos.cloud.epdp.v2.Config.Evaluator
@@ -81,6 +102,26 @@ export type Config_Evaluator =
     lenientScopeSearch: boolean;
   };
 
+/**
+ * @generated from message cerbos.cloud.epdp.v2.Config.Evaluator
+ */
+export type Config_EvaluatorJson = {
+  /**
+   * @generated from field: map<string, google.protobuf.Value> globals = 1;
+   */
+  globals?: { [key: string]: ValueJson };
+
+  /**
+   * @generated from field: string default_policy_version = 2;
+   */
+  defaultPolicyVersion?: string;
+
+  /**
+   * @generated from field: bool lenient_scope_search = 3;
+   */
+  lenientScopeSearch?: boolean;
+};
+
 export type Config_EvaluatorValid = Config_Evaluator;
 
 /**
@@ -89,7 +130,7 @@ export type Config_EvaluatorValid = Config_Evaluator;
  */
 export const Config_EvaluatorSchema: GenMessage<
   Config_Evaluator,
-  { validType: Config_EvaluatorValid }
+  { jsonType: Config_EvaluatorJson; validType: Config_EvaluatorValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 0, 0);
 
 /**
@@ -102,6 +143,16 @@ export type Config_Schema = Message<"cerbos.cloud.epdp.v2.Config.Schema"> & {
   enforcement: Config_Schema_Enforcement;
 };
 
+/**
+ * @generated from message cerbos.cloud.epdp.v2.Config.Schema
+ */
+export type Config_SchemaJson = {
+  /**
+   * @generated from field: cerbos.cloud.epdp.v2.Config.Schema.Enforcement enforcement = 1;
+   */
+  enforcement?: Config_Schema_EnforcementJson;
+};
+
 export type Config_SchemaValid = Config_Schema;
 
 /**
@@ -110,7 +161,7 @@ export type Config_SchemaValid = Config_Schema;
  */
 export const Config_SchemaSchema: GenMessage<
   Config_Schema,
-  { validType: Config_SchemaValid }
+  { jsonType: Config_SchemaJson; validType: Config_SchemaValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 0, 1);
 
 /**
@@ -139,11 +190,21 @@ export enum Config_Schema_Enforcement {
 }
 
 /**
+ * @generated from enum cerbos.cloud.epdp.v2.Config.Schema.Enforcement
+ */
+export type Config_Schema_EnforcementJson =
+  | "ENFORCEMENT_UNSPECIFIED"
+  | "ENFORCEMENT_NONE"
+  | "ENFORCEMENT_WARN"
+  | "ENFORCEMENT_REJECT";
+
+/**
  * Describes the enum cerbos.cloud.epdp.v2.Config.Schema.Enforcement.
  */
-export const Config_Schema_EnforcementSchema: GenEnum<Config_Schema_Enforcement> =
-  /*@__PURE__*/
-  enumDesc(file_cerbos_cloud_epdp_v2_epdp, 0, 1, 0);
+export const Config_Schema_EnforcementSchema: GenEnum<
+  Config_Schema_Enforcement,
+  Config_Schema_EnforcementJson
+> = /*@__PURE__*/ enumDesc(file_cerbos_cloud_epdp_v2_epdp, 0, 1, 0);
 
 /**
  * @generated from message cerbos.cloud.epdp.v2.Error
@@ -160,15 +221,31 @@ export type Error = Message<"cerbos.cloud.epdp.v2.Error"> & {
   message: string;
 };
 
+/**
+ * @generated from message cerbos.cloud.epdp.v2.Error
+ */
+export type ErrorJson = {
+  /**
+   * @generated from field: google.rpc.Code code = 1;
+   */
+  code?: CodeJson;
+
+  /**
+   * @generated from field: string message = 2;
+   */
+  message?: string;
+};
+
 export type ErrorValid = Error;
 
 /**
  * Describes the message cerbos.cloud.epdp.v2.Error.
  * Use `create(ErrorSchema)` to create a new message.
  */
-export const ErrorSchema: GenMessage<Error, { validType: ErrorValid }> =
-  /*@__PURE__*/
-  messageDesc(file_cerbos_cloud_epdp_v2_epdp, 1);
+export const ErrorSchema: GenMessage<
+  Error,
+  { jsonType: ErrorJson; validType: ErrorValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 1);
 
 /**
  * @generated from message cerbos.cloud.epdp.v2.Metadata
@@ -193,6 +270,31 @@ export type Metadata = Message<"cerbos.cloud.epdp.v2.Metadata"> & {
    * @generated from field: google.protobuf.Timestamp built_at = 4;
    */
   builtAt?: Timestamp;
+};
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.Metadata
+ */
+export type MetadataJson = {
+  /**
+   * @generated from field: string cerbos_version = 1;
+   */
+  cerbosVersion?: string;
+
+  /**
+   * @generated from field: string cerbos_commit_hash = 2;
+   */
+  cerbosCommitHash?: string;
+
+  /**
+   * @generated from field: string wasm_checksum = 3;
+   */
+  wasmChecksum?: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp built_at = 4;
+   */
+  builtAt?: TimestampJson;
 };
 
 /**
@@ -226,5 +328,5 @@ export type MetadataValid = Message<"cerbos.cloud.epdp.v2.Metadata"> & {
  */
 export const MetadataSchema: GenMessage<
   Metadata,
-  { validType: MetadataValid }
+  { jsonType: MetadataJson; validType: MetadataValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 2);

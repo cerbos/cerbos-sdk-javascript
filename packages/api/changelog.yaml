@@ -5,6 +5,9 @@ unreleased:
     - summary: "`cerbos.epdp.v2` messages"
       pull: 1279
 
+    - summary: JSON types
+      pull: 1279
+
 releases:
   - version: 0.1.0
     date: 2025-11-07
