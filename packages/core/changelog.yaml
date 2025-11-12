@@ -1,7 +1,12 @@
-unreleased:
-  type: patch
-
 releases:
+  - version: 0.25.1
+    date: 2025-11-12
+
+    bumped:
+      "@cerbos/api":
+        to: 0.2.0
+        pull: 1280
+
   - version: 0.25.0
     date: 2025-11-07
 

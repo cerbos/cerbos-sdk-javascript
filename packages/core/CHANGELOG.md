@@ -4,6 +4,12 @@
 
 No notable changes.
 
+## [0.25.1] - 2025-11-12
+
+### Changed
+
+- Bump dependency on [@cerbos/api] to 0.2.0 ([#1280](https://github.com/cerbos/cerbos-sdk-javascript/pull/1280))
+
 ## [0.25.0] - 2025-11-07
 
 ### Changed
@@ -276,7 +282,8 @@ No notable changes.
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.1...HEAD
+[0.25.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.0...@cerbos/core@0.25.1
 [0.25.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.24.1...@cerbos/core@0.25.0
 [0.24.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.24.0...@cerbos/core@0.24.1
 [0.24.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.23.0...@cerbos/core@0.24.0
