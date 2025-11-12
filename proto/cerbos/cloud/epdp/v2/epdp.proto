@@ -1,0 +1,52 @@
+// Copyright 2021-2025 Zenauth Ltd.
+// SPDX-License-Identifier: Apache-2.0
+
+syntax = "proto3";
+
+package cerbos.cloud.epdp.v2;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/rpc/code.proto";
+
+option csharp_namespace = "Cerbos.Api.Cloud.V2.Epdp";
+option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/epdp/v2;epdpv2";
+option java_package = "dev.cerbos.api.cloud.v2.epdp";
+
+message Config {
+  message Evaluator {
+    map<string, google.protobuf.Value> globals = 1;
+    string default_policy_version = 2;
+    bool lenient_scope_search = 3;
+  }
+
+  message Schema {
+    enum Enforcement {
+      ENFORCEMENT_UNSPECIFIED = 0;
+      ENFORCEMENT_NONE = 1;
+      ENFORCEMENT_WARN = 2;
+      ENFORCEMENT_REJECT = 3;
+    }
+
+    Enforcement enforcement = 1;
+  }
+
+  Evaluator evaluator = 1;
+  Schema schema = 2;
+}
+
+message Error {
+  google.rpc.Code code = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  string message = 2;
+}
+
+message Metadata {
+  string cerbos_version = 1 [(buf.validate.field).string.min_len = 1];
+  string cerbos_commit_hash = 2 [(buf.validate.field).string.len = 40];
+  string wasm_checksum = 3 [(buf.validate.field).string.len = 64];
+  google.protobuf.Timestamp built_at = 4 [(buf.validate.field).required = true];
+}
