@@ -52,6 +52,16 @@ export type HealthCheckRequest =
     service: string;
   };
 
+/**
+ * @generated from message grpc.health.v1.HealthCheckRequest
+ */
+export type HealthCheckRequestJson = {
+  /**
+   * @generated from field: string service = 1;
+   */
+  service?: string;
+};
+
 export type HealthCheckRequestValid = HealthCheckRequest;
 
 /**
@@ -60,7 +70,7 @@ export type HealthCheckRequestValid = HealthCheckRequest;
  */
 export const HealthCheckRequestSchema: GenMessage<
   HealthCheckRequest,
-  { validType: HealthCheckRequestValid }
+  { jsonType: HealthCheckRequestJson; validType: HealthCheckRequestValid }
 > = /*@__PURE__*/ messageDesc(file_grpc_health_v1_health, 0);
 
 /**
@@ -74,6 +84,16 @@ export type HealthCheckResponse =
     status: HealthCheckResponse_ServingStatus;
   };
 
+/**
+ * @generated from message grpc.health.v1.HealthCheckResponse
+ */
+export type HealthCheckResponseJson = {
+  /**
+   * @generated from field: grpc.health.v1.HealthCheckResponse.ServingStatus status = 1;
+   */
+  status?: HealthCheckResponse_ServingStatusJson;
+};
+
 export type HealthCheckResponseValid = HealthCheckResponse;
 
 /**
@@ -82,7 +102,7 @@ export type HealthCheckResponseValid = HealthCheckResponse;
  */
 export const HealthCheckResponseSchema: GenMessage<
   HealthCheckResponse,
-  { validType: HealthCheckResponseValid }
+  { jsonType: HealthCheckResponseJson; validType: HealthCheckResponseValid }
 > = /*@__PURE__*/ messageDesc(file_grpc_health_v1_health, 1);
 
 /**
@@ -113,17 +133,32 @@ export enum HealthCheckResponse_ServingStatus {
 }
 
 /**
+ * @generated from enum grpc.health.v1.HealthCheckResponse.ServingStatus
+ */
+export type HealthCheckResponse_ServingStatusJson =
+  | "UNKNOWN"
+  | "SERVING"
+  | "NOT_SERVING"
+  | "SERVICE_UNKNOWN";
+
+/**
  * Describes the enum grpc.health.v1.HealthCheckResponse.ServingStatus.
  */
-export const HealthCheckResponse_ServingStatusSchema: GenEnum<HealthCheckResponse_ServingStatus> =
-  /*@__PURE__*/
-  enumDesc(file_grpc_health_v1_health, 1, 0);
+export const HealthCheckResponse_ServingStatusSchema: GenEnum<
+  HealthCheckResponse_ServingStatus,
+  HealthCheckResponse_ServingStatusJson
+> = /*@__PURE__*/ enumDesc(file_grpc_health_v1_health, 1, 0);
 
 /**
  * @generated from message grpc.health.v1.HealthListRequest
  */
 export type HealthListRequest =
   Message<"grpc.health.v1.HealthListRequest"> & {};
+
+/**
+ * @generated from message grpc.health.v1.HealthListRequest
+ */
+export type HealthListRequestJson = {};
 
 export type HealthListRequestValid = HealthListRequest;
 
@@ -133,7 +168,7 @@ export type HealthListRequestValid = HealthListRequest;
  */
 export const HealthListRequestSchema: GenMessage<
   HealthListRequest,
-  { validType: HealthListRequestValid }
+  { jsonType: HealthListRequestJson; validType: HealthListRequestValid }
 > = /*@__PURE__*/ messageDesc(file_grpc_health_v1_health, 2);
 
 /**
@@ -149,6 +184,18 @@ export type HealthListResponse =
     statuses: { [key: string]: HealthCheckResponse };
   };
 
+/**
+ * @generated from message grpc.health.v1.HealthListResponse
+ */
+export type HealthListResponseJson = {
+  /**
+   * statuses contains all the services and their respective status.
+   *
+   * @generated from field: map<string, grpc.health.v1.HealthCheckResponse> statuses = 1;
+   */
+  statuses?: { [key: string]: HealthCheckResponseJson };
+};
+
 export type HealthListResponseValid = HealthListResponse;
 
 /**
@@ -157,7 +204,7 @@ export type HealthListResponseValid = HealthListResponse;
  */
 export const HealthListResponseSchema: GenMessage<
   HealthListResponse,
-  { validType: HealthListResponseValid }
+  { jsonType: HealthListResponseJson; validType: HealthListResponseValid }
 > = /*@__PURE__*/ messageDesc(file_grpc_health_v1_health, 3);
 
 /**

@@ -29,10 +29,12 @@ import {
 } from "@bufbuild/protobuf/codegenv2";
 import type {
   Duration,
+  DurationJson,
   FieldOptions,
   MessageOptions,
   OneofOptions,
   Timestamp,
+  TimestampJson,
 } from "@bufbuild/protobuf/wkt";
 import {
   file_google_protobuf_descriptor,
@@ -104,15 +106,65 @@ export type Rule = Message<"buf.validate.Rule"> & {
   expression: string;
 };
 
+/**
+ * `Rule` represents a validation rule written in the Common Expression
+ * Language (CEL) syntax. Each Rule includes a unique identifier, an
+ * optional error message, and the CEL expression to evaluate. For more
+ * information, [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+ *
+ * ```proto
+ * message Foo {
+ *   option (buf.validate.message).cel = {
+ *     id: "foo.bar"
+ *     message: "bar must be greater than 0"
+ *     expression: "this.bar > 0"
+ *   };
+ *   int32 bar = 1;
+ * }
+ * ```
+ *
+ * @generated from message buf.validate.Rule
+ */
+export type RuleJson = {
+  /**
+   * `id` is a string that serves as a machine-readable name for this Rule.
+   * It should be unique within its scope, which could be either a message or a field.
+   *
+   * @generated from field: optional string id = 1;
+   */
+  id?: string;
+
+  /**
+   * `message` is an optional field that provides a human-readable error message
+   * for this Rule when the CEL expression evaluates to false. If a
+   * non-empty message is provided, any strings resulting from the CEL
+   * expression evaluation are ignored.
+   *
+   * @generated from field: optional string message = 2;
+   */
+  message?: string;
+
+  /**
+   * `expression` is the actual CEL expression that will be evaluated for
+   * validation. This string must resolve to either a boolean or a string
+   * value. If the expression evaluates to false or a non-empty string, the
+   * validation is considered failed, and the message is rejected.
+   *
+   * @generated from field: optional string expression = 3;
+   */
+  expression?: string;
+};
+
 export type RuleValid = Rule;
 
 /**
  * Describes the message buf.validate.Rule.
  * Use `create(RuleSchema)` to create a new message.
  */
-export const RuleSchema: GenMessage<Rule, { validType: RuleValid }> =
-  /*@__PURE__*/
-  messageDesc(file_buf_validate_validate, 0);
+export const RuleSchema: GenMessage<
+  Rule,
+  { jsonType: RuleJson; validType: RuleValid }
+> = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 0);
 
 /**
  * MessageRules represents validation rules that are applied to the entire message.
@@ -184,6 +236,76 @@ export type MessageRules = Message<"buf.validate.MessageRules"> & {
   oneof: MessageOneofRule[];
 };
 
+/**
+ * MessageRules represents validation rules that are applied to the entire message.
+ * It includes disabling options and a list of Rule messages representing Common Expression Language (CEL) validation rules.
+ *
+ * @generated from message buf.validate.MessageRules
+ */
+export type MessageRulesJson = {
+  /**
+   * `cel` is a repeated field of type Rule. Each Rule specifies a validation rule to be applied to this message.
+   * These rules are written in Common Expression Language (CEL) syntax. For more information,
+   * [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+   *
+   *
+   * ```proto
+   * message MyMessage {
+   *   // The field `foo` must be greater than 42.
+   *   option (buf.validate.message).cel = {
+   *     id: "my_message.value",
+   *     message: "value must be greater than 42",
+   *     expression: "this.foo > 42",
+   *   };
+   *   optional int32 foo = 1;
+   * }
+   * ```
+   *
+   * @generated from field: repeated buf.validate.Rule cel = 3;
+   */
+  cel?: RuleJson[];
+
+  /**
+   * `oneof` is a repeated field of type MessageOneofRule that specifies a list of fields
+   * of which at most one can be present. If `required` is also specified, then exactly one
+   * of the specified fields _must_ be present.
+   *
+   * This will enforce oneof-like constraints with a few features not provided by
+   * actual Protobuf oneof declarations:
+   *   1. Repeated and map fields are allowed in this validation. In a Protobuf oneof,
+   *      only scalar fields are allowed.
+   *   2. Fields with implicit presence are allowed. In a Protobuf oneof, all member
+   *      fields have explicit presence. This means that, for the purpose of determining
+   *      how many fields are set, explicitly setting such a field to its zero value is
+   *      effectively the same as not setting it at all.
+   *   3. This will always generate validation errors for a message unmarshalled from
+   *      serialized data that sets more than one field. With a Protobuf oneof, when
+   *      multiple fields are present in the serialized form, earlier values are usually
+   *      silently ignored when unmarshalling, with only the last field being set when
+   *      unmarshalling completes.
+   *
+   * Note that adding a field to a `oneof` will also set the IGNORE_IF_ZERO_VALUE on the fields. This means
+   * only the field that is set will be validated and the unset fields are not validated according to the field rules.
+   * This behavior can be overridden by setting `ignore` against a field.
+   *
+   * ```proto
+   * message MyMessage {
+   *   // Only one of `field1` or `field2` _can_ be present in this message.
+   *   option (buf.validate.message).oneof = { fields: ["field1", "field2"] };
+   *   // Exactly one of `field3` or `field4` _must_ be present in this message.
+   *   option (buf.validate.message).oneof = { fields: ["field3", "field4"], required: true };
+   *   string field1 = 1;
+   *   bytes field2 = 2;
+   *   bool field3 = 3;
+   *   int32 field4 = 4;
+   * }
+   * ```
+   *
+   * @generated from field: repeated buf.validate.MessageOneofRule oneof = 4;
+   */
+  oneof?: MessageOneofRuleJson[];
+};
+
 export type MessageRulesValid = MessageRules;
 
 /**
@@ -192,7 +314,7 @@ export type MessageRulesValid = MessageRules;
  */
 export const MessageRulesSchema: GenMessage<
   MessageRules,
-  { validType: MessageRulesValid }
+  { jsonType: MessageRulesJson; validType: MessageRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 1);
 
 /**
@@ -216,6 +338,27 @@ export type MessageOneofRule = Message<"buf.validate.MessageOneofRule"> & {
   required: boolean;
 };
 
+/**
+ * @generated from message buf.validate.MessageOneofRule
+ */
+export type MessageOneofRuleJson = {
+  /**
+   * A list of field names to include in the oneof. All field names must be
+   * defined in the message. At least one field must be specified, and
+   * duplicates are not permitted.
+   *
+   * @generated from field: repeated string fields = 1;
+   */
+  fields?: string[];
+
+  /**
+   * If true, one of the fields specified _must_ be set.
+   *
+   * @generated from field: optional bool required = 2;
+   */
+  required?: boolean;
+};
+
 export type MessageOneofRuleValid = MessageOneofRule;
 
 /**
@@ -224,7 +367,7 @@ export type MessageOneofRuleValid = MessageOneofRule;
  */
 export const MessageOneofRuleSchema: GenMessage<
   MessageOneofRule,
-  { validType: MessageOneofRuleValid }
+  { jsonType: MessageOneofRuleJson; validType: MessageOneofRuleValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 2);
 
 /**
@@ -257,6 +400,36 @@ export type OneofRules = Message<"buf.validate.OneofRules"> & {
   required: boolean;
 };
 
+/**
+ * The `OneofRules` message type enables you to manage rules for
+ * oneof fields in your protobuf messages.
+ *
+ * @generated from message buf.validate.OneofRules
+ */
+export type OneofRulesJson = {
+  /**
+   * If `required` is true, exactly one field of the oneof must be set. A
+   * validation error is returned if no fields in the oneof are set. Further rules
+   * should be placed on the fields themselves to ensure they are valid values,
+   * such as `min_len` or `gt`.
+   *
+   * ```proto
+   * message MyMessage {
+   *   oneof value {
+   *     // Either `a` or `b` must be set. If `a` is set, it must also be
+   *     // non-empty; whereas if `b` is set, it can still be an empty string.
+   *     option (buf.validate.oneof).required = true;
+   *     string a = 1 [(buf.validate.field).string.min_len = 1];
+   *     string b = 2;
+   *   }
+   * }
+   * ```
+   *
+   * @generated from field: optional bool required = 1;
+   */
+  required?: boolean;
+};
+
 export type OneofRulesValid = OneofRules;
 
 /**
@@ -265,7 +438,7 @@ export type OneofRulesValid = OneofRules;
  */
 export const OneofRulesSchema: GenMessage<
   OneofRules,
-  { validType: OneofRulesValid }
+  { jsonType: OneofRulesJson; validType: OneofRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 3);
 
 /**
@@ -535,6 +708,225 @@ export type FieldRules = Message<"buf.validate.FieldRules"> & {
     | { case: undefined; value?: undefined };
 };
 
+/**
+ * FieldRules encapsulates the rules for each type of field. Depending on
+ * the field, the correct set should be used to ensure proper validations.
+ *
+ * @generated from message buf.validate.FieldRules
+ */
+export type FieldRulesJson = {
+  /**
+   * `cel` is a repeated field used to represent a textual expression
+   * in the Common Expression Language (CEL) syntax. For more information,
+   * [see our documentation](https://buf.build/docs/protovalidate/schemas/custom-rules/).
+   *
+   * ```proto
+   * message MyMessage {
+   *   // The field `value` must be greater than 42.
+   *   optional int32 value = 1 [(buf.validate.field).cel = {
+   *     id: "my_message.value",
+   *     message: "value must be greater than 42",
+   *     expression: "this > 42",
+   *   }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated buf.validate.Rule cel = 23;
+   */
+  cel?: RuleJson[];
+
+  /**
+   * If `required` is true, the field must be set. A validation error is returned
+   * if the field is not set.
+   *
+   * ```proto
+   * syntax="proto3";
+   *
+   * message FieldsWithPresence {
+   *   // Requires any string to be set, including the empty string.
+   *   optional string link = 1 [
+   *     (buf.validate.field).required = true
+   *   ];
+   *   // Requires true or false to be set.
+   *   optional bool disabled = 2 [
+   *     (buf.validate.field).required = true
+   *   ];
+   *   // Requires a message to be set, including the empty message.
+   *   SomeMessage msg = 4 [
+   *     (buf.validate.field).required = true
+   *   ];
+   * }
+   * ```
+   *
+   * All fields in the example above track presence. By default, Protovalidate
+   * ignores rules on those fields if no value is set. `required` ensures that
+   * the fields are set and valid.
+   *
+   * Fields that don't track presence are always validated by Protovalidate,
+   * whether they are set or not. It is not necessary to add `required`. It
+   * can be added to indicate that the field cannot be the zero value.
+   *
+   * ```proto
+   * syntax="proto3";
+   *
+   * message FieldsWithoutPresence {
+   *   // `string.email` always applies, even to an empty string.
+   *   string link = 1 [
+   *     (buf.validate.field).string.email = true
+   *   ];
+   *   // `repeated.min_items` always applies, even to an empty list.
+   *   repeated string labels = 2 [
+   *     (buf.validate.field).repeated.min_items = 1
+   *   ];
+   *   // `required`, for fields that don't track presence, indicates
+   *   // the value of the field can't be the zero value.
+   *   int32 zero_value_not_allowed = 3 [
+   *     (buf.validate.field).required = true
+   *   ];
+   * }
+   * ```
+   *
+   * To learn which fields track presence, see the
+   * [Field Presence cheat sheet](https://protobuf.dev/programming-guides/field_presence/#cheat).
+   *
+   * Note: While field rules can be applied to repeated items, map keys, and map
+   * values, the elements are always considered to be set. Consequently,
+   * specifying `repeated.items.required` is redundant.
+   *
+   * @generated from field: optional bool required = 25;
+   */
+  required?: boolean;
+
+  /**
+   * Ignore validation rules on the field if its value matches the specified
+   * criteria. See the `Ignore` enum for details.
+   *
+   * ```proto
+   * message UpdateRequest {
+   *   // The uri rule only applies if the field is not an empty string.
+   *   string url = 1 [
+   *     (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+   *     (buf.validate.field).string.uri = true
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: optional buf.validate.Ignore ignore = 27;
+   */
+  ignore?: IgnoreJson;
+
+  /**
+   * Scalar Field Types
+   *
+   * @generated from field: buf.validate.FloatRules float = 1;
+   */
+  float?: FloatRulesJson;
+
+  /**
+   * @generated from field: buf.validate.DoubleRules double = 2;
+   */
+  double?: DoubleRulesJson;
+
+  /**
+   * @generated from field: buf.validate.Int32Rules int32 = 3;
+   */
+  int32?: Int32RulesJson;
+
+  /**
+   * @generated from field: buf.validate.Int64Rules int64 = 4;
+   */
+  int64?: Int64RulesJson;
+
+  /**
+   * @generated from field: buf.validate.UInt32Rules uint32 = 5;
+   */
+  uint32?: UInt32RulesJson;
+
+  /**
+   * @generated from field: buf.validate.UInt64Rules uint64 = 6;
+   */
+  uint64?: UInt64RulesJson;
+
+  /**
+   * @generated from field: buf.validate.SInt32Rules sint32 = 7;
+   */
+  sint32?: SInt32RulesJson;
+
+  /**
+   * @generated from field: buf.validate.SInt64Rules sint64 = 8;
+   */
+  sint64?: SInt64RulesJson;
+
+  /**
+   * @generated from field: buf.validate.Fixed32Rules fixed32 = 9;
+   */
+  fixed32?: Fixed32RulesJson;
+
+  /**
+   * @generated from field: buf.validate.Fixed64Rules fixed64 = 10;
+   */
+  fixed64?: Fixed64RulesJson;
+
+  /**
+   * @generated from field: buf.validate.SFixed32Rules sfixed32 = 11;
+   */
+  sfixed32?: SFixed32RulesJson;
+
+  /**
+   * @generated from field: buf.validate.SFixed64Rules sfixed64 = 12;
+   */
+  sfixed64?: SFixed64RulesJson;
+
+  /**
+   * @generated from field: buf.validate.BoolRules bool = 13;
+   */
+  bool?: BoolRulesJson;
+
+  /**
+   * @generated from field: buf.validate.StringRules string = 14;
+   */
+  string?: StringRulesJson;
+
+  /**
+   * @generated from field: buf.validate.BytesRules bytes = 15;
+   */
+  bytes?: BytesRulesJson;
+
+  /**
+   * Complex Field Types
+   *
+   * @generated from field: buf.validate.EnumRules enum = 16;
+   */
+  enum?: EnumRulesJson;
+
+  /**
+   * @generated from field: buf.validate.RepeatedRules repeated = 18;
+   */
+  repeated?: RepeatedRulesJson;
+
+  /**
+   * @generated from field: buf.validate.MapRules map = 19;
+   */
+  map?: MapRulesJson;
+
+  /**
+   * Well-Known Field Types
+   *
+   * @generated from field: buf.validate.AnyRules any = 20;
+   */
+  any?: AnyRulesJson;
+
+  /**
+   * @generated from field: buf.validate.DurationRules duration = 21;
+   */
+  duration?: DurationRulesJson;
+
+  /**
+   * @generated from field: buf.validate.TimestampRules timestamp = 22;
+   */
+  timestamp?: TimestampRulesJson;
+};
+
 export type FieldRulesValid = FieldRules;
 
 /**
@@ -543,7 +935,7 @@ export type FieldRulesValid = FieldRules;
  */
 export const FieldRulesSchema: GenMessage<
   FieldRules,
-  { validType: FieldRulesValid }
+  { jsonType: FieldRulesJson; validType: FieldRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 4);
 
 /**
@@ -574,6 +966,34 @@ export type PredefinedRules = Message<"buf.validate.PredefinedRules"> & {
   cel: Rule[];
 };
 
+/**
+ * PredefinedRules are custom rules that can be re-used with
+ * multiple fields.
+ *
+ * @generated from message buf.validate.PredefinedRules
+ */
+export type PredefinedRulesJson = {
+  /**
+   * `cel` is a repeated field used to represent a textual expression
+   * in the Common Expression Language (CEL) syntax. For more information,
+   * [see our documentation](https://buf.build/docs/protovalidate/schemas/predefined-rules/).
+   *
+   * ```proto
+   * message MyMessage {
+   *   // The field `value` must be greater than 42.
+   *   optional int32 value = 1 [(buf.validate.predefined).cel = {
+   *     id: "my_message.value",
+   *     message: "value must be greater than 42",
+   *     expression: "this > 42",
+   *   }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated buf.validate.Rule cel = 1;
+   */
+  cel?: RuleJson[];
+};
+
 export type PredefinedRulesValid = PredefinedRules;
 
 /**
@@ -582,7 +1002,7 @@ export type PredefinedRulesValid = PredefinedRules;
  */
 export const PredefinedRulesSchema: GenMessage<
   PredefinedRules,
-  { validType: PredefinedRulesValid }
+  { jsonType: PredefinedRulesJson; validType: PredefinedRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 5);
 
 /**
@@ -766,6 +1186,167 @@ export type FloatRules = Message<"buf.validate.FloatRules"> & {
   example: number[];
 };
 
+/**
+ * FloatRules describes the rules applied to `float` values. These
+ * rules may also be applied to the `google.protobuf.FloatValue` Well-Known-Type.
+ *
+ * @generated from message buf.validate.FloatRules
+ */
+export type FloatRulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyFloat {
+   *   // value must equal 42.0
+   *   float value = 1 [(buf.validate.field).float.const = 42.0];
+   * }
+   * ```
+   *
+   * @generated from field: optional float const = 1;
+   */
+  const?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field <
+   * value). If the field value is equal to or greater than the specified value,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyFloat {
+   *   // value must be less than 10.0
+   *   float value = 1 [(buf.validate.field).float.lt = 10.0];
+   * }
+   * ```
+   *
+   * @generated from field: float lt = 2;
+   */
+  lt?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified
+   * value (field <= value). If the field value is greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MyFloat {
+   *   // value must be less than or equal to 10.0
+   *   float value = 1 [(buf.validate.field).float.lte = 10.0];
+   * }
+   * ```
+   *
+   * @generated from field: float lte = 3;
+   */
+  lte?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyFloat {
+   *   // value must be greater than 5.0 [float.gt]
+   *   float value = 1 [(buf.validate.field).float.gt = 5.0];
+   *
+   *   // value must be greater than 5 and less than 10.0 [float.gt_lt]
+   *   float other_value = 2 [(buf.validate.field).float = { gt: 5.0, lt: 10.0 }];
+   *
+   *   // value must be greater than 10 or less than 5.0 [float.gt_lt_exclusive]
+   *   float another_value = 3 [(buf.validate.field).float = { gt: 10.0, lt: 5.0 }];
+   * }
+   * ```
+   *
+   * @generated from field: float gt = 4;
+   */
+  gt?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified
+   * value (exclusive). If the value of `gte` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyFloat {
+   *   // value must be greater than or equal to 5.0 [float.gte]
+   *   float value = 1 [(buf.validate.field).float.gte = 5.0];
+   *
+   *   // value must be greater than or equal to 5.0 and less than 10.0 [float.gte_lt]
+   *   float other_value = 2 [(buf.validate.field).float = { gte: 5.0, lt: 10.0 }];
+   *
+   *   // value must be greater than or equal to 10.0 or less than 5.0 [float.gte_lt_exclusive]
+   *   float another_value = 3 [(buf.validate.field).float = { gte: 10.0, lt: 5.0 }];
+   * }
+   * ```
+   *
+   * @generated from field: float gte = 5;
+   */
+  gte?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message
+   * is generated.
+   *
+   * ```proto
+   * message MyFloat {
+   *   // value must be in list [1.0, 2.0, 3.0]
+   *   float value = 1 [(buf.validate.field).float = { in: [1.0, 2.0, 3.0] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated float in = 6;
+   */
+  in?: (number | "NaN" | "Infinity" | "-Infinity")[];
+
+  /**
+   * `in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MyFloat {
+   *   // value must not be in list [1.0, 2.0, 3.0]
+   *   float value = 1 [(buf.validate.field).float = { not_in: [1.0, 2.0, 3.0] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated float not_in = 7;
+   */
+  notIn?: (number | "NaN" | "Infinity" | "-Infinity")[];
+
+  /**
+   * `finite` requires the field value to be finite. If the field value is
+   * infinite or NaN, an error message is generated.
+   *
+   * @generated from field: optional bool finite = 8;
+   */
+  finite?: boolean;
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyFloat {
+   *   float value = 1 [
+   *     (buf.validate.field).float.example = 1.0,
+   *     (buf.validate.field).float.example = inf
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated float example = 9;
+   */
+  example?: (number | "NaN" | "Infinity" | "-Infinity")[];
+};
+
 export type FloatRulesValid = FloatRules;
 
 /**
@@ -774,7 +1355,7 @@ export type FloatRulesValid = FloatRules;
  */
 export const FloatRulesSchema: GenMessage<
   FloatRules,
-  { validType: FloatRulesValid }
+  { jsonType: FloatRulesJson; validType: FloatRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 6);
 
 /**
@@ -958,6 +1539,167 @@ export type DoubleRules = Message<"buf.validate.DoubleRules"> & {
   example: number[];
 };
 
+/**
+ * DoubleRules describes the rules applied to `double` values. These
+ * rules may also be applied to the `google.protobuf.DoubleValue` Well-Known-Type.
+ *
+ * @generated from message buf.validate.DoubleRules
+ */
+export type DoubleRulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyDouble {
+   *   // value must equal 42.0
+   *   double value = 1 [(buf.validate.field).double.const = 42.0];
+   * }
+   * ```
+   *
+   * @generated from field: optional double const = 1;
+   */
+  const?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field <
+   * value). If the field value is equal to or greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MyDouble {
+   *   // value must be less than 10.0
+   *   double value = 1 [(buf.validate.field).double.lt = 10.0];
+   * }
+   * ```
+   *
+   * @generated from field: double lt = 2;
+   */
+  lt?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified value
+   * (field <= value). If the field value is greater than the specified value,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyDouble {
+   *   // value must be less than or equal to 10.0
+   *   double value = 1 [(buf.validate.field).double.lte = 10.0];
+   * }
+   * ```
+   *
+   * @generated from field: double lte = 3;
+   */
+  lte?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or `lte`,
+   * the range is reversed, and the field value must be outside the specified
+   * range. If the field value doesn't meet the required conditions, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MyDouble {
+   *   // value must be greater than 5.0 [double.gt]
+   *   double value = 1 [(buf.validate.field).double.gt = 5.0];
+   *
+   *   // value must be greater than 5 and less than 10.0 [double.gt_lt]
+   *   double other_value = 2 [(buf.validate.field).double = { gt: 5.0, lt: 10.0 }];
+   *
+   *   // value must be greater than 10 or less than 5.0 [double.gt_lt_exclusive]
+   *   double another_value = 3 [(buf.validate.field).double = { gt: 10.0, lt: 5.0 }];
+   * }
+   * ```
+   *
+   * @generated from field: double gt = 4;
+   */
+  gt?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified
+   * value (exclusive). If the value of `gte` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyDouble {
+   *   // value must be greater than or equal to 5.0 [double.gte]
+   *   double value = 1 [(buf.validate.field).double.gte = 5.0];
+   *
+   *   // value must be greater than or equal to 5.0 and less than 10.0 [double.gte_lt]
+   *   double other_value = 2 [(buf.validate.field).double = { gte: 5.0, lt: 10.0 }];
+   *
+   *   // value must be greater than or equal to 10.0 or less than 5.0 [double.gte_lt_exclusive]
+   *   double another_value = 3 [(buf.validate.field).double = { gte: 10.0, lt: 5.0 }];
+   * }
+   * ```
+   *
+   * @generated from field: double gte = 5;
+   */
+  gte?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message is
+   * generated.
+   *
+   * ```proto
+   * message MyDouble {
+   *   // value must be in list [1.0, 2.0, 3.0]
+   *   double value = 1 [(buf.validate.field).double = { in: [1.0, 2.0, 3.0] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated double in = 6;
+   */
+  in?: (number | "NaN" | "Infinity" | "-Infinity")[];
+
+  /**
+   * `not_in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MyDouble {
+   *   // value must not be in list [1.0, 2.0, 3.0]
+   *   double value = 1 [(buf.validate.field).double = { not_in: [1.0, 2.0, 3.0] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated double not_in = 7;
+   */
+  notIn?: (number | "NaN" | "Infinity" | "-Infinity")[];
+
+  /**
+   * `finite` requires the field value to be finite. If the field value is
+   * infinite or NaN, an error message is generated.
+   *
+   * @generated from field: optional bool finite = 8;
+   */
+  finite?: boolean;
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyDouble {
+   *   double value = 1 [
+   *     (buf.validate.field).double.example = 1.0,
+   *     (buf.validate.field).double.example = inf
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated double example = 9;
+   */
+  example?: (number | "NaN" | "Infinity" | "-Infinity")[];
+};
+
 export type DoubleRulesValid = DoubleRules;
 
 /**
@@ -966,7 +1708,7 @@ export type DoubleRulesValid = DoubleRules;
  */
 export const DoubleRulesSchema: GenMessage<
   DoubleRules,
-  { validType: DoubleRulesValid }
+  { jsonType: DoubleRulesJson; validType: DoubleRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 7);
 
 /**
@@ -1142,6 +1884,159 @@ export type Int32Rules = Message<"buf.validate.Int32Rules"> & {
   example: number[];
 };
 
+/**
+ * Int32Rules describes the rules applied to `int32` values. These
+ * rules may also be applied to the `google.protobuf.Int32Value` Well-Known-Type.
+ *
+ * @generated from message buf.validate.Int32Rules
+ */
+export type Int32RulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyInt32 {
+   *   // value must equal 42
+   *   int32 value = 1 [(buf.validate.field).int32.const = 42];
+   * }
+   * ```
+   *
+   * @generated from field: optional int32 const = 1;
+   */
+  const?: number;
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field
+   * < value). If the field value is equal to or greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MyInt32 {
+   *   // value must be less than 10
+   *   int32 value = 1 [(buf.validate.field).int32.lt = 10];
+   * }
+   * ```
+   *
+   * @generated from field: int32 lt = 2;
+   */
+  lt?: number;
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified
+   * value (field <= value). If the field value is greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MyInt32 {
+   *   // value must be less than or equal to 10
+   *   int32 value = 1 [(buf.validate.field).int32.lte = 10];
+   * }
+   * ```
+   *
+   * @generated from field: int32 lte = 3;
+   */
+  lte?: number;
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyInt32 {
+   *   // value must be greater than 5 [int32.gt]
+   *   int32 value = 1 [(buf.validate.field).int32.gt = 5];
+   *
+   *   // value must be greater than 5 and less than 10 [int32.gt_lt]
+   *   int32 other_value = 2 [(buf.validate.field).int32 = { gt: 5, lt: 10 }];
+   *
+   *   // value must be greater than 10 or less than 5 [int32.gt_lt_exclusive]
+   *   int32 another_value = 3 [(buf.validate.field).int32 = { gt: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: int32 gt = 4;
+   */
+  gt?: number;
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified value
+   * (exclusive). If the value of `gte` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyInt32 {
+   *   // value must be greater than or equal to 5 [int32.gte]
+   *   int32 value = 1 [(buf.validate.field).int32.gte = 5];
+   *
+   *   // value must be greater than or equal to 5 and less than 10 [int32.gte_lt]
+   *   int32 other_value = 2 [(buf.validate.field).int32 = { gte: 5, lt: 10 }];
+   *
+   *   // value must be greater than or equal to 10 or less than 5 [int32.gte_lt_exclusive]
+   *   int32 another_value = 3 [(buf.validate.field).int32 = { gte: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: int32 gte = 5;
+   */
+  gte?: number;
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message is
+   * generated.
+   *
+   * ```proto
+   * message MyInt32 {
+   *   // value must be in list [1, 2, 3]
+   *   int32 value = 1 [(buf.validate.field).int32 = { in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated int32 in = 6;
+   */
+  in?: number[];
+
+  /**
+   * `not_in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error message
+   * is generated.
+   *
+   * ```proto
+   * message MyInt32 {
+   *   // value must not be in list [1, 2, 3]
+   *   int32 value = 1 [(buf.validate.field).int32 = { not_in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated int32 not_in = 7;
+   */
+  notIn?: number[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyInt32 {
+   *   int32 value = 1 [
+   *     (buf.validate.field).int32.example = 1,
+   *     (buf.validate.field).int32.example = -10
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated int32 example = 8;
+   */
+  example?: number[];
+};
+
 export type Int32RulesValid = Int32Rules;
 
 /**
@@ -1150,7 +2045,7 @@ export type Int32RulesValid = Int32Rules;
  */
 export const Int32RulesSchema: GenMessage<
   Int32Rules,
-  { validType: Int32RulesValid }
+  { jsonType: Int32RulesJson; validType: Int32RulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 8);
 
 /**
@@ -1326,6 +2221,159 @@ export type Int64Rules = Message<"buf.validate.Int64Rules"> & {
   example: bigint[];
 };
 
+/**
+ * Int64Rules describes the rules applied to `int64` values. These
+ * rules may also be applied to the `google.protobuf.Int64Value` Well-Known-Type.
+ *
+ * @generated from message buf.validate.Int64Rules
+ */
+export type Int64RulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyInt64 {
+   *   // value must equal 42
+   *   int64 value = 1 [(buf.validate.field).int64.const = 42];
+   * }
+   * ```
+   *
+   * @generated from field: optional int64 const = 1;
+   */
+  const?: string;
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field <
+   * value). If the field value is equal to or greater than the specified value,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyInt64 {
+   *   // value must be less than 10
+   *   int64 value = 1 [(buf.validate.field).int64.lt = 10];
+   * }
+   * ```
+   *
+   * @generated from field: int64 lt = 2;
+   */
+  lt?: string;
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified
+   * value (field <= value). If the field value is greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MyInt64 {
+   *   // value must be less than or equal to 10
+   *   int64 value = 1 [(buf.validate.field).int64.lte = 10];
+   * }
+   * ```
+   *
+   * @generated from field: int64 lte = 3;
+   */
+  lte?: string;
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyInt64 {
+   *   // value must be greater than 5 [int64.gt]
+   *   int64 value = 1 [(buf.validate.field).int64.gt = 5];
+   *
+   *   // value must be greater than 5 and less than 10 [int64.gt_lt]
+   *   int64 other_value = 2 [(buf.validate.field).int64 = { gt: 5, lt: 10 }];
+   *
+   *   // value must be greater than 10 or less than 5 [int64.gt_lt_exclusive]
+   *   int64 another_value = 3 [(buf.validate.field).int64 = { gt: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: int64 gt = 4;
+   */
+  gt?: string;
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified
+   * value (exclusive). If the value of `gte` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyInt64 {
+   *   // value must be greater than or equal to 5 [int64.gte]
+   *   int64 value = 1 [(buf.validate.field).int64.gte = 5];
+   *
+   *   // value must be greater than or equal to 5 and less than 10 [int64.gte_lt]
+   *   int64 other_value = 2 [(buf.validate.field).int64 = { gte: 5, lt: 10 }];
+   *
+   *   // value must be greater than or equal to 10 or less than 5 [int64.gte_lt_exclusive]
+   *   int64 another_value = 3 [(buf.validate.field).int64 = { gte: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: int64 gte = 5;
+   */
+  gte?: string;
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message is
+   * generated.
+   *
+   * ```proto
+   * message MyInt64 {
+   *   // value must be in list [1, 2, 3]
+   *   int64 value = 1 [(buf.validate.field).int64 = { in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated int64 in = 6;
+   */
+  in?: string[];
+
+  /**
+   * `not_in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MyInt64 {
+   *   // value must not be in list [1, 2, 3]
+   *   int64 value = 1 [(buf.validate.field).int64 = { not_in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated int64 not_in = 7;
+   */
+  notIn?: string[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyInt64 {
+   *   int64 value = 1 [
+   *     (buf.validate.field).int64.example = 1,
+   *     (buf.validate.field).int64.example = -10
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated int64 example = 9;
+   */
+  example?: string[];
+};
+
 export type Int64RulesValid = Int64Rules;
 
 /**
@@ -1334,7 +2382,7 @@ export type Int64RulesValid = Int64Rules;
  */
 export const Int64RulesSchema: GenMessage<
   Int64Rules,
-  { validType: Int64RulesValid }
+  { jsonType: Int64RulesJson; validType: Int64RulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 9);
 
 /**
@@ -1510,6 +2558,159 @@ export type UInt32Rules = Message<"buf.validate.UInt32Rules"> & {
   example: number[];
 };
 
+/**
+ * UInt32Rules describes the rules applied to `uint32` values. These
+ * rules may also be applied to the `google.protobuf.UInt32Value` Well-Known-Type.
+ *
+ * @generated from message buf.validate.UInt32Rules
+ */
+export type UInt32RulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyUInt32 {
+   *   // value must equal 42
+   *   uint32 value = 1 [(buf.validate.field).uint32.const = 42];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint32 const = 1;
+   */
+  const?: number;
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field <
+   * value). If the field value is equal to or greater than the specified value,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyUInt32 {
+   *   // value must be less than 10
+   *   uint32 value = 1 [(buf.validate.field).uint32.lt = 10];
+   * }
+   * ```
+   *
+   * @generated from field: uint32 lt = 2;
+   */
+  lt?: number;
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified
+   * value (field <= value). If the field value is greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MyUInt32 {
+   *   // value must be less than or equal to 10
+   *   uint32 value = 1 [(buf.validate.field).uint32.lte = 10];
+   * }
+   * ```
+   *
+   * @generated from field: uint32 lte = 3;
+   */
+  lte?: number;
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyUInt32 {
+   *   // value must be greater than 5 [uint32.gt]
+   *   uint32 value = 1 [(buf.validate.field).uint32.gt = 5];
+   *
+   *   // value must be greater than 5 and less than 10 [uint32.gt_lt]
+   *   uint32 other_value = 2 [(buf.validate.field).uint32 = { gt: 5, lt: 10 }];
+   *
+   *   // value must be greater than 10 or less than 5 [uint32.gt_lt_exclusive]
+   *   uint32 another_value = 3 [(buf.validate.field).uint32 = { gt: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: uint32 gt = 4;
+   */
+  gt?: number;
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified
+   * value (exclusive). If the value of `gte` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyUInt32 {
+   *   // value must be greater than or equal to 5 [uint32.gte]
+   *   uint32 value = 1 [(buf.validate.field).uint32.gte = 5];
+   *
+   *   // value must be greater than or equal to 5 and less than 10 [uint32.gte_lt]
+   *   uint32 other_value = 2 [(buf.validate.field).uint32 = { gte: 5, lt: 10 }];
+   *
+   *   // value must be greater than or equal to 10 or less than 5 [uint32.gte_lt_exclusive]
+   *   uint32 another_value = 3 [(buf.validate.field).uint32 = { gte: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: uint32 gte = 5;
+   */
+  gte?: number;
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message is
+   * generated.
+   *
+   * ```proto
+   * message MyUInt32 {
+   *   // value must be in list [1, 2, 3]
+   *   uint32 value = 1 [(buf.validate.field).uint32 = { in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated uint32 in = 6;
+   */
+  in?: number[];
+
+  /**
+   * `not_in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MyUInt32 {
+   *   // value must not be in list [1, 2, 3]
+   *   uint32 value = 1 [(buf.validate.field).uint32 = { not_in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated uint32 not_in = 7;
+   */
+  notIn?: number[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyUInt32 {
+   *   uint32 value = 1 [
+   *     (buf.validate.field).uint32.example = 1,
+   *     (buf.validate.field).uint32.example = 10
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated uint32 example = 8;
+   */
+  example?: number[];
+};
+
 export type UInt32RulesValid = UInt32Rules;
 
 /**
@@ -1518,7 +2719,7 @@ export type UInt32RulesValid = UInt32Rules;
  */
 export const UInt32RulesSchema: GenMessage<
   UInt32Rules,
-  { validType: UInt32RulesValid }
+  { jsonType: UInt32RulesJson; validType: UInt32RulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 10);
 
 /**
@@ -1694,6 +2895,159 @@ export type UInt64Rules = Message<"buf.validate.UInt64Rules"> & {
   example: bigint[];
 };
 
+/**
+ * UInt64Rules describes the rules applied to `uint64` values. These
+ * rules may also be applied to the `google.protobuf.UInt64Value` Well-Known-Type.
+ *
+ * @generated from message buf.validate.UInt64Rules
+ */
+export type UInt64RulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyUInt64 {
+   *   // value must equal 42
+   *   uint64 value = 1 [(buf.validate.field).uint64.const = 42];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 const = 1;
+   */
+  const?: string;
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field <
+   * value). If the field value is equal to or greater than the specified value,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyUInt64 {
+   *   // value must be less than 10
+   *   uint64 value = 1 [(buf.validate.field).uint64.lt = 10];
+   * }
+   * ```
+   *
+   * @generated from field: uint64 lt = 2;
+   */
+  lt?: string;
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified
+   * value (field <= value). If the field value is greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MyUInt64 {
+   *   // value must be less than or equal to 10
+   *   uint64 value = 1 [(buf.validate.field).uint64.lte = 10];
+   * }
+   * ```
+   *
+   * @generated from field: uint64 lte = 3;
+   */
+  lte?: string;
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyUInt64 {
+   *   // value must be greater than 5 [uint64.gt]
+   *   uint64 value = 1 [(buf.validate.field).uint64.gt = 5];
+   *
+   *   // value must be greater than 5 and less than 10 [uint64.gt_lt]
+   *   uint64 other_value = 2 [(buf.validate.field).uint64 = { gt: 5, lt: 10 }];
+   *
+   *   // value must be greater than 10 or less than 5 [uint64.gt_lt_exclusive]
+   *   uint64 another_value = 3 [(buf.validate.field).uint64 = { gt: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: uint64 gt = 4;
+   */
+  gt?: string;
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified
+   * value (exclusive). If the value of `gte` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyUInt64 {
+   *   // value must be greater than or equal to 5 [uint64.gte]
+   *   uint64 value = 1 [(buf.validate.field).uint64.gte = 5];
+   *
+   *   // value must be greater than or equal to 5 and less than 10 [uint64.gte_lt]
+   *   uint64 other_value = 2 [(buf.validate.field).uint64 = { gte: 5, lt: 10 }];
+   *
+   *   // value must be greater than or equal to 10 or less than 5 [uint64.gte_lt_exclusive]
+   *   uint64 another_value = 3 [(buf.validate.field).uint64 = { gte: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: uint64 gte = 5;
+   */
+  gte?: string;
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message is
+   * generated.
+   *
+   * ```proto
+   * message MyUInt64 {
+   *   // value must be in list [1, 2, 3]
+   *   uint64 value = 1 [(buf.validate.field).uint64 = { in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated uint64 in = 6;
+   */
+  in?: string[];
+
+  /**
+   * `not_in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MyUInt64 {
+   *   // value must not be in list [1, 2, 3]
+   *   uint64 value = 1 [(buf.validate.field).uint64 = { not_in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated uint64 not_in = 7;
+   */
+  notIn?: string[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyUInt64 {
+   *   uint64 value = 1 [
+   *     (buf.validate.field).uint64.example = 1,
+   *     (buf.validate.field).uint64.example = -10
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated uint64 example = 8;
+   */
+  example?: string[];
+};
+
 export type UInt64RulesValid = UInt64Rules;
 
 /**
@@ -1702,7 +3056,7 @@ export type UInt64RulesValid = UInt64Rules;
  */
 export const UInt64RulesSchema: GenMessage<
   UInt64Rules,
-  { validType: UInt64RulesValid }
+  { jsonType: UInt64RulesJson; validType: UInt64RulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 11);
 
 /**
@@ -1877,6 +3231,158 @@ export type SInt32Rules = Message<"buf.validate.SInt32Rules"> & {
   example: number[];
 };
 
+/**
+ * SInt32Rules describes the rules applied to `sint32` values.
+ *
+ * @generated from message buf.validate.SInt32Rules
+ */
+export type SInt32RulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MySInt32 {
+   *   // value must equal 42
+   *   sint32 value = 1 [(buf.validate.field).sint32.const = 42];
+   * }
+   * ```
+   *
+   * @generated from field: optional sint32 const = 1;
+   */
+  const?: number;
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field
+   * < value). If the field value is equal to or greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MySInt32 {
+   *   // value must be less than 10
+   *   sint32 value = 1 [(buf.validate.field).sint32.lt = 10];
+   * }
+   * ```
+   *
+   * @generated from field: sint32 lt = 2;
+   */
+  lt?: number;
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified
+   * value (field <= value). If the field value is greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MySInt32 {
+   *   // value must be less than or equal to 10
+   *   sint32 value = 1 [(buf.validate.field).sint32.lte = 10];
+   * }
+   * ```
+   *
+   * @generated from field: sint32 lte = 3;
+   */
+  lte?: number;
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MySInt32 {
+   *   // value must be greater than 5 [sint32.gt]
+   *   sint32 value = 1 [(buf.validate.field).sint32.gt = 5];
+   *
+   *   // value must be greater than 5 and less than 10 [sint32.gt_lt]
+   *   sint32 other_value = 2 [(buf.validate.field).sint32 = { gt: 5, lt: 10 }];
+   *
+   *   // value must be greater than 10 or less than 5 [sint32.gt_lt_exclusive]
+   *   sint32 another_value = 3 [(buf.validate.field).sint32 = { gt: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: sint32 gt = 4;
+   */
+  gt?: number;
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified
+   * value (exclusive). If the value of `gte` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MySInt32 {
+   *  // value must be greater than or equal to 5 [sint32.gte]
+   *  sint32 value = 1 [(buf.validate.field).sint32.gte = 5];
+   *
+   *  // value must be greater than or equal to 5 and less than 10 [sint32.gte_lt]
+   *  sint32 other_value = 2 [(buf.validate.field).sint32 = { gte: 5, lt: 10 }];
+   *
+   *  // value must be greater than or equal to 10 or less than 5 [sint32.gte_lt_exclusive]
+   *  sint32 another_value = 3 [(buf.validate.field).sint32 = { gte: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: sint32 gte = 5;
+   */
+  gte?: number;
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message is
+   * generated.
+   *
+   * ```proto
+   * message MySInt32 {
+   *   // value must be in list [1, 2, 3]
+   *   sint32 value = 1 [(buf.validate.field).sint32 = { in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sint32 in = 6;
+   */
+  in?: number[];
+
+  /**
+   * `not_in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MySInt32 {
+   *   // value must not be in list [1, 2, 3]
+   *   sint32 value = 1 [(buf.validate.field).sint32 = { not_in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sint32 not_in = 7;
+   */
+  notIn?: number[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MySInt32 {
+   *   sint32 value = 1 [
+   *     (buf.validate.field).sint32.example = 1,
+   *     (buf.validate.field).sint32.example = -10
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sint32 example = 8;
+   */
+  example?: number[];
+};
+
 export type SInt32RulesValid = SInt32Rules;
 
 /**
@@ -1885,7 +3391,7 @@ export type SInt32RulesValid = SInt32Rules;
  */
 export const SInt32RulesSchema: GenMessage<
   SInt32Rules,
-  { validType: SInt32RulesValid }
+  { jsonType: SInt32RulesJson; validType: SInt32RulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 12);
 
 /**
@@ -2060,6 +3566,158 @@ export type SInt64Rules = Message<"buf.validate.SInt64Rules"> & {
   example: bigint[];
 };
 
+/**
+ * SInt64Rules describes the rules applied to `sint64` values.
+ *
+ * @generated from message buf.validate.SInt64Rules
+ */
+export type SInt64RulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MySInt64 {
+   *   // value must equal 42
+   *   sint64 value = 1 [(buf.validate.field).sint64.const = 42];
+   * }
+   * ```
+   *
+   * @generated from field: optional sint64 const = 1;
+   */
+  const?: string;
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field
+   * < value). If the field value is equal to or greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MySInt64 {
+   *   // value must be less than 10
+   *   sint64 value = 1 [(buf.validate.field).sint64.lt = 10];
+   * }
+   * ```
+   *
+   * @generated from field: sint64 lt = 2;
+   */
+  lt?: string;
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified
+   * value (field <= value). If the field value is greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MySInt64 {
+   *   // value must be less than or equal to 10
+   *   sint64 value = 1 [(buf.validate.field).sint64.lte = 10];
+   * }
+   * ```
+   *
+   * @generated from field: sint64 lte = 3;
+   */
+  lte?: string;
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MySInt64 {
+   *   // value must be greater than 5 [sint64.gt]
+   *   sint64 value = 1 [(buf.validate.field).sint64.gt = 5];
+   *
+   *   // value must be greater than 5 and less than 10 [sint64.gt_lt]
+   *   sint64 other_value = 2 [(buf.validate.field).sint64 = { gt: 5, lt: 10 }];
+   *
+   *   // value must be greater than 10 or less than 5 [sint64.gt_lt_exclusive]
+   *   sint64 another_value = 3 [(buf.validate.field).sint64 = { gt: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: sint64 gt = 4;
+   */
+  gt?: string;
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified
+   * value (exclusive). If the value of `gte` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MySInt64 {
+   *   // value must be greater than or equal to 5 [sint64.gte]
+   *   sint64 value = 1 [(buf.validate.field).sint64.gte = 5];
+   *
+   *   // value must be greater than or equal to 5 and less than 10 [sint64.gte_lt]
+   *   sint64 other_value = 2 [(buf.validate.field).sint64 = { gte: 5, lt: 10 }];
+   *
+   *   // value must be greater than or equal to 10 or less than 5 [sint64.gte_lt_exclusive]
+   *   sint64 another_value = 3 [(buf.validate.field).sint64 = { gte: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: sint64 gte = 5;
+   */
+  gte?: string;
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message
+   * is generated.
+   *
+   * ```proto
+   * message MySInt64 {
+   *   // value must be in list [1, 2, 3]
+   *   sint64 value = 1 [(buf.validate.field).sint64 = { in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sint64 in = 6;
+   */
+  in?: string[];
+
+  /**
+   * `not_in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MySInt64 {
+   *   // value must not be in list [1, 2, 3]
+   *   sint64 value = 1 [(buf.validate.field).sint64 = { not_in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sint64 not_in = 7;
+   */
+  notIn?: string[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MySInt64 {
+   *   sint64 value = 1 [
+   *     (buf.validate.field).sint64.example = 1,
+   *     (buf.validate.field).sint64.example = -10
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sint64 example = 8;
+   */
+  example?: string[];
+};
+
 export type SInt64RulesValid = SInt64Rules;
 
 /**
@@ -2068,7 +3726,7 @@ export type SInt64RulesValid = SInt64Rules;
  */
 export const SInt64RulesSchema: GenMessage<
   SInt64Rules,
-  { validType: SInt64RulesValid }
+  { jsonType: SInt64RulesJson; validType: SInt64RulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 13);
 
 /**
@@ -2243,6 +3901,158 @@ export type Fixed32Rules = Message<"buf.validate.Fixed32Rules"> & {
   example: number[];
 };
 
+/**
+ * Fixed32Rules describes the rules applied to `fixed32` values.
+ *
+ * @generated from message buf.validate.Fixed32Rules
+ */
+export type Fixed32RulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value.
+   * If the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyFixed32 {
+   *   // value must equal 42
+   *   fixed32 value = 1 [(buf.validate.field).fixed32.const = 42];
+   * }
+   * ```
+   *
+   * @generated from field: optional fixed32 const = 1;
+   */
+  const?: number;
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field <
+   * value). If the field value is equal to or greater than the specified value,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyFixed32 {
+   *   // value must be less than 10
+   *   fixed32 value = 1 [(buf.validate.field).fixed32.lt = 10];
+   * }
+   * ```
+   *
+   * @generated from field: fixed32 lt = 2;
+   */
+  lt?: number;
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified
+   * value (field <= value). If the field value is greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MyFixed32 {
+   *   // value must be less than or equal to 10
+   *   fixed32 value = 1 [(buf.validate.field).fixed32.lte = 10];
+   * }
+   * ```
+   *
+   * @generated from field: fixed32 lte = 3;
+   */
+  lte?: number;
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyFixed32 {
+   *   // value must be greater than 5 [fixed32.gt]
+   *   fixed32 value = 1 [(buf.validate.field).fixed32.gt = 5];
+   *
+   *   // value must be greater than 5 and less than 10 [fixed32.gt_lt]
+   *   fixed32 other_value = 2 [(buf.validate.field).fixed32 = { gt: 5, lt: 10 }];
+   *
+   *   // value must be greater than 10 or less than 5 [fixed32.gt_lt_exclusive]
+   *   fixed32 another_value = 3 [(buf.validate.field).fixed32 = { gt: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: fixed32 gt = 4;
+   */
+  gt?: number;
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified
+   * value (exclusive). If the value of `gte` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyFixed32 {
+   *   // value must be greater than or equal to 5 [fixed32.gte]
+   *   fixed32 value = 1 [(buf.validate.field).fixed32.gte = 5];
+   *
+   *   // value must be greater than or equal to 5 and less than 10 [fixed32.gte_lt]
+   *   fixed32 other_value = 2 [(buf.validate.field).fixed32 = { gte: 5, lt: 10 }];
+   *
+   *   // value must be greater than or equal to 10 or less than 5 [fixed32.gte_lt_exclusive]
+   *   fixed32 another_value = 3 [(buf.validate.field).fixed32 = { gte: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: fixed32 gte = 5;
+   */
+  gte?: number;
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message
+   * is generated.
+   *
+   * ```proto
+   * message MyFixed32 {
+   *   // value must be in list [1, 2, 3]
+   *   fixed32 value = 1 [(buf.validate.field).fixed32 = { in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated fixed32 in = 6;
+   */
+  in?: number[];
+
+  /**
+   * `not_in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MyFixed32 {
+   *   // value must not be in list [1, 2, 3]
+   *   fixed32 value = 1 [(buf.validate.field).fixed32 = { not_in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated fixed32 not_in = 7;
+   */
+  notIn?: number[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyFixed32 {
+   *   fixed32 value = 1 [
+   *     (buf.validate.field).fixed32.example = 1,
+   *     (buf.validate.field).fixed32.example = 2
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated fixed32 example = 8;
+   */
+  example?: number[];
+};
+
 export type Fixed32RulesValid = Fixed32Rules;
 
 /**
@@ -2251,7 +4061,7 @@ export type Fixed32RulesValid = Fixed32Rules;
  */
 export const Fixed32RulesSchema: GenMessage<
   Fixed32Rules,
-  { validType: Fixed32RulesValid }
+  { jsonType: Fixed32RulesJson; validType: Fixed32RulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 14);
 
 /**
@@ -2426,6 +4236,158 @@ export type Fixed64Rules = Message<"buf.validate.Fixed64Rules"> & {
   example: bigint[];
 };
 
+/**
+ * Fixed64Rules describes the rules applied to `fixed64` values.
+ *
+ * @generated from message buf.validate.Fixed64Rules
+ */
+export type Fixed64RulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyFixed64 {
+   *   // value must equal 42
+   *   fixed64 value = 1 [(buf.validate.field).fixed64.const = 42];
+   * }
+   * ```
+   *
+   * @generated from field: optional fixed64 const = 1;
+   */
+  const?: string;
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field <
+   * value). If the field value is equal to or greater than the specified value,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyFixed64 {
+   *   // value must be less than 10
+   *   fixed64 value = 1 [(buf.validate.field).fixed64.lt = 10];
+   * }
+   * ```
+   *
+   * @generated from field: fixed64 lt = 2;
+   */
+  lt?: string;
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified
+   * value (field <= value). If the field value is greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MyFixed64 {
+   *   // value must be less than or equal to 10
+   *   fixed64 value = 1 [(buf.validate.field).fixed64.lte = 10];
+   * }
+   * ```
+   *
+   * @generated from field: fixed64 lte = 3;
+   */
+  lte?: string;
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyFixed64 {
+   *   // value must be greater than 5 [fixed64.gt]
+   *   fixed64 value = 1 [(buf.validate.field).fixed64.gt = 5];
+   *
+   *   // value must be greater than 5 and less than 10 [fixed64.gt_lt]
+   *   fixed64 other_value = 2 [(buf.validate.field).fixed64 = { gt: 5, lt: 10 }];
+   *
+   *   // value must be greater than 10 or less than 5 [fixed64.gt_lt_exclusive]
+   *   fixed64 another_value = 3 [(buf.validate.field).fixed64 = { gt: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: fixed64 gt = 4;
+   */
+  gt?: string;
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified
+   * value (exclusive). If the value of `gte` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyFixed64 {
+   *   // value must be greater than or equal to 5 [fixed64.gte]
+   *   fixed64 value = 1 [(buf.validate.field).fixed64.gte = 5];
+   *
+   *   // value must be greater than or equal to 5 and less than 10 [fixed64.gte_lt]
+   *   fixed64 other_value = 2 [(buf.validate.field).fixed64 = { gte: 5, lt: 10 }];
+   *
+   *   // value must be greater than or equal to 10 or less than 5 [fixed64.gte_lt_exclusive]
+   *   fixed64 another_value = 3 [(buf.validate.field).fixed64 = { gte: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: fixed64 gte = 5;
+   */
+  gte?: string;
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message is
+   * generated.
+   *
+   * ```proto
+   * message MyFixed64 {
+   *   // value must be in list [1, 2, 3]
+   *   fixed64 value = 1 [(buf.validate.field).fixed64 = { in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated fixed64 in = 6;
+   */
+  in?: string[];
+
+  /**
+   * `not_in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MyFixed64 {
+   *   // value must not be in list [1, 2, 3]
+   *   fixed64 value = 1 [(buf.validate.field).fixed64 = { not_in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated fixed64 not_in = 7;
+   */
+  notIn?: string[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyFixed64 {
+   *   fixed64 value = 1 [
+   *     (buf.validate.field).fixed64.example = 1,
+   *     (buf.validate.field).fixed64.example = 2
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated fixed64 example = 8;
+   */
+  example?: string[];
+};
+
 export type Fixed64RulesValid = Fixed64Rules;
 
 /**
@@ -2434,7 +4396,7 @@ export type Fixed64RulesValid = Fixed64Rules;
  */
 export const Fixed64RulesSchema: GenMessage<
   Fixed64Rules,
-  { validType: Fixed64RulesValid }
+  { jsonType: Fixed64RulesJson; validType: Fixed64RulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 15);
 
 /**
@@ -2609,6 +4571,158 @@ export type SFixed32Rules = Message<"buf.validate.SFixed32Rules"> & {
   example: number[];
 };
 
+/**
+ * SFixed32Rules describes the rules applied to `fixed32` values.
+ *
+ * @generated from message buf.validate.SFixed32Rules
+ */
+export type SFixed32RulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MySFixed32 {
+   *   // value must equal 42
+   *   sfixed32 value = 1 [(buf.validate.field).sfixed32.const = 42];
+   * }
+   * ```
+   *
+   * @generated from field: optional sfixed32 const = 1;
+   */
+  const?: number;
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field <
+   * value). If the field value is equal to or greater than the specified value,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MySFixed32 {
+   *   // value must be less than 10
+   *   sfixed32 value = 1 [(buf.validate.field).sfixed32.lt = 10];
+   * }
+   * ```
+   *
+   * @generated from field: sfixed32 lt = 2;
+   */
+  lt?: number;
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified
+   * value (field <= value). If the field value is greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MySFixed32 {
+   *   // value must be less than or equal to 10
+   *   sfixed32 value = 1 [(buf.validate.field).sfixed32.lte = 10];
+   * }
+   * ```
+   *
+   * @generated from field: sfixed32 lte = 3;
+   */
+  lte?: number;
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MySFixed32 {
+   *   // value must be greater than 5 [sfixed32.gt]
+   *   sfixed32 value = 1 [(buf.validate.field).sfixed32.gt = 5];
+   *
+   *   // value must be greater than 5 and less than 10 [sfixed32.gt_lt]
+   *   sfixed32 other_value = 2 [(buf.validate.field).sfixed32 = { gt: 5, lt: 10 }];
+   *
+   *   // value must be greater than 10 or less than 5 [sfixed32.gt_lt_exclusive]
+   *   sfixed32 another_value = 3 [(buf.validate.field).sfixed32 = { gt: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: sfixed32 gt = 4;
+   */
+  gt?: number;
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified
+   * value (exclusive). If the value of `gte` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MySFixed32 {
+   *   // value must be greater than or equal to 5 [sfixed32.gte]
+   *   sfixed32 value = 1 [(buf.validate.field).sfixed32.gte = 5];
+   *
+   *   // value must be greater than or equal to 5 and less than 10 [sfixed32.gte_lt]
+   *   sfixed32 other_value = 2 [(buf.validate.field).sfixed32 = { gte: 5, lt: 10 }];
+   *
+   *   // value must be greater than or equal to 10 or less than 5 [sfixed32.gte_lt_exclusive]
+   *   sfixed32 another_value = 3 [(buf.validate.field).sfixed32 = { gte: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: sfixed32 gte = 5;
+   */
+  gte?: number;
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message is
+   * generated.
+   *
+   * ```proto
+   * message MySFixed32 {
+   *   // value must be in list [1, 2, 3]
+   *   sfixed32 value = 1 [(buf.validate.field).sfixed32 = { in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sfixed32 in = 6;
+   */
+  in?: number[];
+
+  /**
+   * `not_in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MySFixed32 {
+   *   // value must not be in list [1, 2, 3]
+   *   sfixed32 value = 1 [(buf.validate.field).sfixed32 = { not_in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sfixed32 not_in = 7;
+   */
+  notIn?: number[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MySFixed32 {
+   *   sfixed32 value = 1 [
+   *     (buf.validate.field).sfixed32.example = 1,
+   *     (buf.validate.field).sfixed32.example = 2
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sfixed32 example = 8;
+   */
+  example?: number[];
+};
+
 export type SFixed32RulesValid = SFixed32Rules;
 
 /**
@@ -2617,7 +4731,7 @@ export type SFixed32RulesValid = SFixed32Rules;
  */
 export const SFixed32RulesSchema: GenMessage<
   SFixed32Rules,
-  { validType: SFixed32RulesValid }
+  { jsonType: SFixed32RulesJson; validType: SFixed32RulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 16);
 
 /**
@@ -2792,6 +4906,158 @@ export type SFixed64Rules = Message<"buf.validate.SFixed64Rules"> & {
   example: bigint[];
 };
 
+/**
+ * SFixed64Rules describes the rules applied to `fixed64` values.
+ *
+ * @generated from message buf.validate.SFixed64Rules
+ */
+export type SFixed64RulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MySFixed64 {
+   *   // value must equal 42
+   *   sfixed64 value = 1 [(buf.validate.field).sfixed64.const = 42];
+   * }
+   * ```
+   *
+   * @generated from field: optional sfixed64 const = 1;
+   */
+  const?: string;
+
+  /**
+   * `lt` requires the field value to be less than the specified value (field <
+   * value). If the field value is equal to or greater than the specified value,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MySFixed64 {
+   *   // value must be less than 10
+   *   sfixed64 value = 1 [(buf.validate.field).sfixed64.lt = 10];
+   * }
+   * ```
+   *
+   * @generated from field: sfixed64 lt = 2;
+   */
+  lt?: string;
+
+  /**
+   * `lte` requires the field value to be less than or equal to the specified
+   * value (field <= value). If the field value is greater than the specified
+   * value, an error message is generated.
+   *
+   * ```proto
+   * message MySFixed64 {
+   *   // value must be less than or equal to 10
+   *   sfixed64 value = 1 [(buf.validate.field).sfixed64.lte = 10];
+   * }
+   * ```
+   *
+   * @generated from field: sfixed64 lte = 3;
+   */
+  lte?: string;
+
+  /**
+   * `gt` requires the field value to be greater than the specified value
+   * (exclusive). If the value of `gt` is larger than a specified `lt` or
+   * `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MySFixed64 {
+   *   // value must be greater than 5 [sfixed64.gt]
+   *   sfixed64 value = 1 [(buf.validate.field).sfixed64.gt = 5];
+   *
+   *   // value must be greater than 5 and less than 10 [sfixed64.gt_lt]
+   *   sfixed64 other_value = 2 [(buf.validate.field).sfixed64 = { gt: 5, lt: 10 }];
+   *
+   *   // value must be greater than 10 or less than 5 [sfixed64.gt_lt_exclusive]
+   *   sfixed64 another_value = 3 [(buf.validate.field).sfixed64 = { gt: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: sfixed64 gt = 4;
+   */
+  gt?: string;
+
+  /**
+   * `gte` requires the field value to be greater than or equal to the specified
+   * value (exclusive). If the value of `gte` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MySFixed64 {
+   *   // value must be greater than or equal to 5 [sfixed64.gte]
+   *   sfixed64 value = 1 [(buf.validate.field).sfixed64.gte = 5];
+   *
+   *   // value must be greater than or equal to 5 and less than 10 [sfixed64.gte_lt]
+   *   sfixed64 other_value = 2 [(buf.validate.field).sfixed64 = { gte: 5, lt: 10 }];
+   *
+   *   // value must be greater than or equal to 10 or less than 5 [sfixed64.gte_lt_exclusive]
+   *   sfixed64 another_value = 3 [(buf.validate.field).sfixed64 = { gte: 10, lt: 5 }];
+   * }
+   * ```
+   *
+   * @generated from field: sfixed64 gte = 5;
+   */
+  gte?: string;
+
+  /**
+   * `in` requires the field value to be equal to one of the specified values.
+   * If the field value isn't one of the specified values, an error message is
+   * generated.
+   *
+   * ```proto
+   * message MySFixed64 {
+   *   // value must be in list [1, 2, 3]
+   *   sfixed64 value = 1 [(buf.validate.field).sfixed64 = { in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sfixed64 in = 6;
+   */
+  in?: string[];
+
+  /**
+   * `not_in` requires the field value to not be equal to any of the specified
+   * values. If the field value is one of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MySFixed64 {
+   *   // value must not be in list [1, 2, 3]
+   *   sfixed64 value = 1 [(buf.validate.field).sfixed64 = { not_in: [1, 2, 3] }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sfixed64 not_in = 7;
+   */
+  notIn?: string[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MySFixed64 {
+   *   sfixed64 value = 1 [
+   *     (buf.validate.field).sfixed64.example = 1,
+   *     (buf.validate.field).sfixed64.example = 2
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated sfixed64 example = 8;
+   */
+  example?: string[];
+};
+
 export type SFixed64RulesValid = SFixed64Rules;
 
 /**
@@ -2800,7 +5066,7 @@ export type SFixed64RulesValid = SFixed64Rules;
  */
 export const SFixed64RulesSchema: GenMessage<
   SFixed64Rules,
-  { validType: SFixed64RulesValid }
+  { jsonType: SFixed64RulesJson; validType: SFixed64RulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 17);
 
 /**
@@ -2844,6 +5110,47 @@ export type BoolRules = Message<"buf.validate.BoolRules"> & {
   example: boolean[];
 };
 
+/**
+ * BoolRules describes the rules applied to `bool` values. These rules
+ * may also be applied to the `google.protobuf.BoolValue` Well-Known-Type.
+ *
+ * @generated from message buf.validate.BoolRules
+ */
+export type BoolRulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified boolean value.
+   * If the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyBool {
+   *   // value must equal true
+   *   bool value = 1 [(buf.validate.field).bool.const = true];
+   * }
+   * ```
+   *
+   * @generated from field: optional bool const = 1;
+   */
+  const?: boolean;
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyBool {
+   *   bool value = 1 [
+   *     (buf.validate.field).bool.example = 1,
+   *     (buf.validate.field).bool.example = 2
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated bool example = 2;
+   */
+  example?: boolean[];
+};
+
 export type BoolRulesValid = BoolRules;
 
 /**
@@ -2852,7 +5159,7 @@ export type BoolRulesValid = BoolRules;
  */
 export const BoolRulesSchema: GenMessage<
   BoolRules,
-  { validType: BoolRulesValid }
+  { jsonType: BoolRulesJson; validType: BoolRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 18);
 
 /**
@@ -3527,6 +5834,633 @@ export type StringRules = Message<"buf.validate.StringRules"> & {
   example: string[];
 };
 
+/**
+ * StringRules describes the rules applied to `string` values These
+ * rules may also be applied to the `google.protobuf.StringValue` Well-Known-Type.
+ *
+ * @generated from message buf.validate.StringRules
+ */
+export type StringRulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified value. If
+   * the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must equal `hello`
+   *   string value = 1 [(buf.validate.field).string.const = "hello"];
+   * }
+   * ```
+   *
+   * @generated from field: optional string const = 1;
+   */
+  const?: string;
+
+  /**
+   * `len` dictates that the field value must have the specified
+   * number of characters (Unicode code points), which may differ from the number
+   * of bytes in the string. If the field value does not meet the specified
+   * length, an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value length must be 5 characters
+   *   string value = 1 [(buf.validate.field).string.len = 5];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 len = 19;
+   */
+  len?: string;
+
+  /**
+   * `min_len` specifies that the field value must have at least the specified
+   * number of characters (Unicode code points), which may differ from the number
+   * of bytes in the string. If the field value contains fewer characters, an error
+   * message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value length must be at least 3 characters
+   *   string value = 1 [(buf.validate.field).string.min_len = 3];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 min_len = 2;
+   */
+  minLen?: string;
+
+  /**
+   * `max_len` specifies that the field value must have no more than the specified
+   * number of characters (Unicode code points), which may differ from the
+   * number of bytes in the string. If the field value contains more characters,
+   * an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value length must be at most 10 characters
+   *   string value = 1 [(buf.validate.field).string.max_len = 10];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 max_len = 3;
+   */
+  maxLen?: string;
+
+  /**
+   * `len_bytes` dictates that the field value must have the specified number of
+   * bytes. If the field value does not match the specified length in bytes,
+   * an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value length must be 6 bytes
+   *   string value = 1 [(buf.validate.field).string.len_bytes = 6];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 len_bytes = 20;
+   */
+  lenBytes?: string;
+
+  /**
+   * `min_bytes` specifies that the field value must have at least the specified
+   * number of bytes. If the field value contains fewer bytes, an error message
+   * will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value length must be at least 4 bytes
+   *   string value = 1 [(buf.validate.field).string.min_bytes = 4];
+   * }
+   *
+   * ```
+   *
+   * @generated from field: optional uint64 min_bytes = 4;
+   */
+  minBytes?: string;
+
+  /**
+   * `max_bytes` specifies that the field value must have no more than the
+   * specified number of bytes. If the field value contains more bytes, an
+   * error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value length must be at most 8 bytes
+   *   string value = 1 [(buf.validate.field).string.max_bytes = 8];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 max_bytes = 5;
+   */
+  maxBytes?: string;
+
+  /**
+   * `pattern` specifies that the field value must match the specified
+   * regular expression (RE2 syntax), with the expression provided without any
+   * delimiters. If the field value doesn't match the regular expression, an
+   * error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value does not match regex pattern `^[a-zA-Z]//$`
+   *   string value = 1 [(buf.validate.field).string.pattern = "^[a-zA-Z]//$"];
+   * }
+   * ```
+   *
+   * @generated from field: optional string pattern = 6;
+   */
+  pattern?: string;
+
+  /**
+   * `prefix` specifies that the field value must have the
+   * specified substring at the beginning of the string. If the field value
+   * doesn't start with the specified prefix, an error message will be
+   * generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value does not have prefix `pre`
+   *   string value = 1 [(buf.validate.field).string.prefix = "pre"];
+   * }
+   * ```
+   *
+   * @generated from field: optional string prefix = 7;
+   */
+  prefix?: string;
+
+  /**
+   * `suffix` specifies that the field value must have the
+   * specified substring at the end of the string. If the field value doesn't
+   * end with the specified suffix, an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value does not have suffix `post`
+   *   string value = 1 [(buf.validate.field).string.suffix = "post"];
+   * }
+   * ```
+   *
+   * @generated from field: optional string suffix = 8;
+   */
+  suffix?: string;
+
+  /**
+   * `contains` specifies that the field value must have the
+   * specified substring anywhere in the string. If the field value doesn't
+   * contain the specified substring, an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value does not contain substring `inside`.
+   *   string value = 1 [(buf.validate.field).string.contains = "inside"];
+   * }
+   * ```
+   *
+   * @generated from field: optional string contains = 9;
+   */
+  contains?: string;
+
+  /**
+   * `not_contains` specifies that the field value must not have the
+   * specified substring anywhere in the string. If the field value contains
+   * the specified substring, an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value contains substring `inside`.
+   *   string value = 1 [(buf.validate.field).string.not_contains = "inside"];
+   * }
+   * ```
+   *
+   * @generated from field: optional string not_contains = 23;
+   */
+  notContains?: string;
+
+  /**
+   * `in` specifies that the field value must be equal to one of the specified
+   * values. If the field value isn't one of the specified values, an error
+   * message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be in list ["apple", "banana"]
+   *   string value = 1 [(buf.validate.field).string.in = "apple", (buf.validate.field).string.in = "banana"];
+   * }
+   * ```
+   *
+   * @generated from field: repeated string in = 10;
+   */
+  in?: string[];
+
+  /**
+   * `not_in` specifies that the field value cannot be equal to any
+   * of the specified values. If the field value is one of the specified values,
+   * an error message will be generated.
+   * ```proto
+   * message MyString {
+   *   // value must not be in list ["orange", "grape"]
+   *   string value = 1 [(buf.validate.field).string.not_in = "orange", (buf.validate.field).string.not_in = "grape"];
+   * }
+   * ```
+   *
+   * @generated from field: repeated string not_in = 11;
+   */
+  notIn?: string[];
+
+  /**
+   * `email` specifies that the field value must be a valid email address, for
+   * example "foo@example.com".
+   *
+   * Conforms to the definition for a valid email address from the [HTML standard](https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address).
+   * Note that this standard willfully deviates from [RFC 5322](https://datatracker.ietf.org/doc/html/rfc5322),
+   * which allows many unexpected forms of email addresses and will easily match
+   * a typographical error.
+   *
+   * If the field value isn't a valid email address, an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid email address
+   *   string value = 1 [(buf.validate.field).string.email = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool email = 12;
+   */
+  email?: boolean;
+
+  /**
+   * `hostname` specifies that the field value must be a valid hostname, for
+   * example "foo.example.com".
+   *
+   * A valid hostname follows the rules below:
+   * - The name consists of one or more labels, separated by a dot (".").
+   * - Each label can be 1 to 63 alphanumeric characters.
+   * - A label can contain hyphens ("-"), but must not start or end with a hyphen.
+   * - The right-most label must not be digits only.
+   * - The name can have a trailing dot—for example, "foo.example.com.".
+   * - The name can be 253 characters at most, excluding the optional trailing dot.
+   *
+   * If the field value isn't a valid hostname, an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid hostname
+   *   string value = 1 [(buf.validate.field).string.hostname = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool hostname = 13;
+   */
+  hostname?: boolean;
+
+  /**
+   * `ip` specifies that the field value must be a valid IP (v4 or v6) address.
+   *
+   * IPv4 addresses are expected in the dotted decimal format—for example, "192.168.5.21".
+   * IPv6 addresses are expected in their text representation—for example, "::1",
+   * or "2001:0DB8:ABCD:0012::0".
+   *
+   * Both formats are well-defined in the internet standard [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986).
+   * Zone identifiers for IPv6 addresses (for example, "fe80::a%en1") are supported.
+   *
+   * If the field value isn't a valid IP address, an error message will be
+   * generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid IP address
+   *   string value = 1 [(buf.validate.field).string.ip = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ip = 14;
+   */
+  ip?: boolean;
+
+  /**
+   * `ipv4` specifies that the field value must be a valid IPv4 address—for
+   * example "192.168.5.21". If the field value isn't a valid IPv4 address, an
+   * error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid IPv4 address
+   *   string value = 1 [(buf.validate.field).string.ipv4 = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ipv4 = 15;
+   */
+  ipv4?: boolean;
+
+  /**
+   * `ipv6` specifies that the field value must be a valid IPv6 address—for
+   * example "::1", or "d7a:115c:a1e0:ab12:4843:cd96:626b:430b". If the field
+   * value is not a valid IPv6 address, an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid IPv6 address
+   *   string value = 1 [(buf.validate.field).string.ipv6 = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ipv6 = 16;
+   */
+  ipv6?: boolean;
+
+  /**
+   * `uri` specifies that the field value must be a valid URI, for example
+   * "https://example.com/foo/bar?baz=quux#frag".
+   *
+   * URI is defined in the internet standard [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986).
+   * Zone Identifiers in IPv6 address literals are supported ([RFC 6874](https://datatracker.ietf.org/doc/html/rfc6874)).
+   *
+   * If the field value isn't a valid URI, an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid URI
+   *   string value = 1 [(buf.validate.field).string.uri = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool uri = 17;
+   */
+  uri?: boolean;
+
+  /**
+   * `uri_ref` specifies that the field value must be a valid URI Reference—either
+   * a URI such as "https://example.com/foo/bar?baz=quux#frag", or a Relative
+   * Reference such as "./foo/bar?query".
+   *
+   * URI, URI Reference, and Relative Reference are defined in the internet
+   * standard [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986). Zone
+   * Identifiers in IPv6 address literals are supported ([RFC 6874](https://datatracker.ietf.org/doc/html/rfc6874)).
+   *
+   * If the field value isn't a valid URI Reference, an error message will be
+   * generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid URI Reference
+   *   string value = 1 [(buf.validate.field).string.uri_ref = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool uri_ref = 18;
+   */
+  uriRef?: boolean;
+
+  /**
+   * `address` specifies that the field value must be either a valid hostname
+   * (for example, "example.com"), or a valid IP (v4 or v6) address (for example,
+   * "192.168.0.1", or "::1"). If the field value isn't a valid hostname or IP,
+   * an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid hostname, or ip address
+   *   string value = 1 [(buf.validate.field).string.address = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool address = 21;
+   */
+  address?: boolean;
+
+  /**
+   * `uuid` specifies that the field value must be a valid UUID as defined by
+   * [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122#section-4.1.2). If the
+   * field value isn't a valid UUID, an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid UUID
+   *   string value = 1 [(buf.validate.field).string.uuid = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool uuid = 22;
+   */
+  uuid?: boolean;
+
+  /**
+   * `tuuid` (trimmed UUID) specifies that the field value must be a valid UUID as
+   * defined by [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122#section-4.1.2) with all dashes
+   * omitted. If the field value isn't a valid UUID without dashes, an error message
+   * will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid trimmed UUID
+   *   string value = 1 [(buf.validate.field).string.tuuid = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool tuuid = 33;
+   */
+  tuuid?: boolean;
+
+  /**
+   * `ip_with_prefixlen` specifies that the field value must be a valid IP
+   * (v4 or v6) address with prefix length—for example, "192.168.5.21/16" or
+   * "2001:0DB8:ABCD:0012::F1/64". If the field value isn't a valid IP with
+   * prefix length, an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid IP with prefix length
+   *    string value = 1 [(buf.validate.field).string.ip_with_prefixlen = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ip_with_prefixlen = 26;
+   */
+  ipWithPrefixlen?: boolean;
+
+  /**
+   * `ipv4_with_prefixlen` specifies that the field value must be a valid
+   * IPv4 address with prefix length—for example, "192.168.5.21/16". If the
+   * field value isn't a valid IPv4 address with prefix length, an error
+   * message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid IPv4 address with prefix length
+   *    string value = 1 [(buf.validate.field).string.ipv4_with_prefixlen = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ipv4_with_prefixlen = 27;
+   */
+  ipv4WithPrefixlen?: boolean;
+
+  /**
+   * `ipv6_with_prefixlen` specifies that the field value must be a valid
+   * IPv6 address with prefix length—for example, "2001:0DB8:ABCD:0012::F1/64".
+   * If the field value is not a valid IPv6 address with prefix length,
+   * an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid IPv6 address prefix length
+   *    string value = 1 [(buf.validate.field).string.ipv6_with_prefixlen = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ipv6_with_prefixlen = 28;
+   */
+  ipv6WithPrefixlen?: boolean;
+
+  /**
+   * `ip_prefix` specifies that the field value must be a valid IP (v4 or v6)
+   * prefix—for example, "192.168.0.0/16" or "2001:0DB8:ABCD:0012::0/64".
+   *
+   * The prefix must have all zeros for the unmasked bits. For example,
+   * "2001:0DB8:ABCD:0012::0/64" designates the left-most 64 bits for the
+   * prefix, and the remaining 64 bits must be zero.
+   *
+   * If the field value isn't a valid IP prefix, an error message will be
+   * generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid IP prefix
+   *    string value = 1 [(buf.validate.field).string.ip_prefix = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ip_prefix = 29;
+   */
+  ipPrefix?: boolean;
+
+  /**
+   * `ipv4_prefix` specifies that the field value must be a valid IPv4
+   * prefix, for example "192.168.0.0/16".
+   *
+   * The prefix must have all zeros for the unmasked bits. For example,
+   * "192.168.0.0/16" designates the left-most 16 bits for the prefix,
+   * and the remaining 16 bits must be zero.
+   *
+   * If the field value isn't a valid IPv4 prefix, an error message
+   * will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid IPv4 prefix
+   *    string value = 1 [(buf.validate.field).string.ipv4_prefix = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ipv4_prefix = 30;
+   */
+  ipv4Prefix?: boolean;
+
+  /**
+   * `ipv6_prefix` specifies that the field value must be a valid IPv6 prefix—for
+   * example, "2001:0DB8:ABCD:0012::0/64".
+   *
+   * The prefix must have all zeros for the unmasked bits. For example,
+   * "2001:0DB8:ABCD:0012::0/64" designates the left-most 64 bits for the
+   * prefix, and the remaining 64 bits must be zero.
+   *
+   * If the field value is not a valid IPv6 prefix, an error message will be
+   * generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid IPv6 prefix
+   *    string value = 1 [(buf.validate.field).string.ipv6_prefix = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ipv6_prefix = 31;
+   */
+  ipv6Prefix?: boolean;
+
+  /**
+   * `host_and_port` specifies that the field value must be valid host/port
+   * pair—for example, "example.com:8080".
+   *
+   * The host can be one of:
+   * - An IPv4 address in dotted decimal format—for example, "192.168.5.21".
+   * - An IPv6 address enclosed in square brackets—for example, "[2001:0DB8:ABCD:0012::F1]".
+   * - A hostname—for example, "example.com".
+   *
+   * The port is separated by a colon. It must be non-empty, with a decimal number
+   * in the range of 0-65535, inclusive.
+   *
+   * @generated from field: bool host_and_port = 32;
+   */
+  hostAndPort?: boolean;
+
+  /**
+   * `well_known_regex` specifies a common well-known pattern
+   * defined as a regex. If the field value doesn't match the well-known
+   * regex, an error message will be generated.
+   *
+   * ```proto
+   * message MyString {
+   *   // value must be a valid HTTP header value
+   *   string value = 1 [(buf.validate.field).string.well_known_regex = KNOWN_REGEX_HTTP_HEADER_VALUE];
+   * }
+   * ```
+   *
+   * #### KnownRegex
+   *
+   * `well_known_regex` contains some well-known patterns.
+   *
+   * | Name                          | Number | Description                               |
+   * |-------------------------------|--------|-------------------------------------------|
+   * | KNOWN_REGEX_UNSPECIFIED       | 0      |                                           |
+   * | KNOWN_REGEX_HTTP_HEADER_NAME  | 1      | HTTP header name as defined by [RFC 7230](https://datatracker.ietf.org/doc/html/rfc7230#section-3.2)  |
+   * | KNOWN_REGEX_HTTP_HEADER_VALUE | 2      | HTTP header value as defined by [RFC 7230](https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.4) |
+   *
+   * @generated from field: buf.validate.KnownRegex well_known_regex = 24;
+   */
+  wellKnownRegex?: KnownRegexJson;
+
+  /**
+   * This applies to regexes `HTTP_HEADER_NAME` and `HTTP_HEADER_VALUE` to
+   * enable strict header validation. By default, this is true, and HTTP header
+   * validations are [RFC-compliant](https://datatracker.ietf.org/doc/html/rfc7230#section-3). Setting to false will enable looser
+   * validations that only disallow `\r\n\0` characters, which can be used to
+   * bypass header matching rules.
+   *
+   * ```proto
+   * message MyString {
+   *   // The field `value` must have be a valid HTTP headers, but not enforced with strict rules.
+   *   string value = 1 [(buf.validate.field).string.strict = false];
+   * }
+   * ```
+   *
+   * @generated from field: optional bool strict = 25;
+   */
+  strict?: boolean;
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyString {
+   *   string value = 1 [
+   *     (buf.validate.field).string.example = "hello",
+   *     (buf.validate.field).string.example = "world"
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated string example = 34;
+   */
+  example?: string[];
+};
+
 export type StringRulesValid = StringRules;
 
 /**
@@ -3535,7 +6469,7 @@ export type StringRulesValid = StringRules;
  */
 export const StringRulesSchema: GenMessage<
   StringRules,
-  { validType: StringRulesValid }
+  { jsonType: StringRulesJson; validType: StringRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 19);
 
 /**
@@ -3784,6 +6718,237 @@ export type BytesRules = Message<"buf.validate.BytesRules"> & {
   example: Uint8Array[];
 };
 
+/**
+ * BytesRules describe the rules applied to `bytes` values. These rules
+ * may also be applied to the `google.protobuf.BytesValue` Well-Known-Type.
+ *
+ * @generated from message buf.validate.BytesRules
+ */
+export type BytesRulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified bytes
+   * value. If the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyBytes {
+   *   // value must be "\x01\x02\x03\x04"
+   *   bytes value = 1 [(buf.validate.field).bytes.const = "\x01\x02\x03\x04"];
+   * }
+   * ```
+   *
+   * @generated from field: optional bytes const = 1;
+   */
+  const?: string;
+
+  /**
+   * `len` requires the field value to have the specified length in bytes.
+   * If the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * message MyBytes {
+   *   // value length must be 4 bytes.
+   *   optional bytes value = 1 [(buf.validate.field).bytes.len = 4];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 len = 13;
+   */
+  len?: string;
+
+  /**
+   * `min_len` requires the field value to have at least the specified minimum
+   * length in bytes.
+   * If the field value doesn't meet the requirement, an error message is generated.
+   *
+   * ```proto
+   * message MyBytes {
+   *   // value length must be at least 2 bytes.
+   *   optional bytes value = 1 [(buf.validate.field).bytes.min_len = 2];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 min_len = 2;
+   */
+  minLen?: string;
+
+  /**
+   * `max_len` requires the field value to have at most the specified maximum
+   * length in bytes.
+   * If the field value exceeds the requirement, an error message is generated.
+   *
+   * ```proto
+   * message MyBytes {
+   *   // value must be at most 6 bytes.
+   *   optional bytes value = 1 [(buf.validate.field).bytes.max_len = 6];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 max_len = 3;
+   */
+  maxLen?: string;
+
+  /**
+   * `pattern` requires the field value to match the specified regular
+   * expression ([RE2 syntax](https://github.com/google/re2/wiki/Syntax)).
+   * The value of the field must be valid UTF-8 or validation will fail with a
+   * runtime error.
+   * If the field value doesn't match the pattern, an error message is generated.
+   *
+   * ```proto
+   * message MyBytes {
+   *   // value must match regex pattern "^[a-zA-Z0-9]+$".
+   *   optional bytes value = 1 [(buf.validate.field).bytes.pattern = "^[a-zA-Z0-9]+$"];
+   * }
+   * ```
+   *
+   * @generated from field: optional string pattern = 4;
+   */
+  pattern?: string;
+
+  /**
+   * `prefix` requires the field value to have the specified bytes at the
+   * beginning of the string.
+   * If the field value doesn't meet the requirement, an error message is generated.
+   *
+   * ```proto
+   * message MyBytes {
+   *   // value does not have prefix \x01\x02
+   *   optional bytes value = 1 [(buf.validate.field).bytes.prefix = "\x01\x02"];
+   * }
+   * ```
+   *
+   * @generated from field: optional bytes prefix = 5;
+   */
+  prefix?: string;
+
+  /**
+   * `suffix` requires the field value to have the specified bytes at the end
+   * of the string.
+   * If the field value doesn't meet the requirement, an error message is generated.
+   *
+   * ```proto
+   * message MyBytes {
+   *   // value does not have suffix \x03\x04
+   *   optional bytes value = 1 [(buf.validate.field).bytes.suffix = "\x03\x04"];
+   * }
+   * ```
+   *
+   * @generated from field: optional bytes suffix = 6;
+   */
+  suffix?: string;
+
+  /**
+   * `contains` requires the field value to have the specified bytes anywhere in
+   * the string.
+   * If the field value doesn't meet the requirement, an error message is generated.
+   *
+   * ```protobuf
+   * message MyBytes {
+   *   // value does not contain \x02\x03
+   *   optional bytes value = 1 [(buf.validate.field).bytes.contains = "\x02\x03"];
+   * }
+   * ```
+   *
+   * @generated from field: optional bytes contains = 7;
+   */
+  contains?: string;
+
+  /**
+   * `in` requires the field value to be equal to one of the specified
+   * values. If the field value doesn't match any of the specified values, an
+   * error message is generated.
+   *
+   * ```protobuf
+   * message MyBytes {
+   *   // value must in ["\x01\x02", "\x02\x03", "\x03\x04"]
+   *   optional bytes value = 1 [(buf.validate.field).bytes.in = {"\x01\x02", "\x02\x03", "\x03\x04"}];
+   * }
+   * ```
+   *
+   * @generated from field: repeated bytes in = 8;
+   */
+  in?: string[];
+
+  /**
+   * `not_in` requires the field value to be not equal to any of the specified
+   * values.
+   * If the field value matches any of the specified values, an error message is
+   * generated.
+   *
+   * ```proto
+   * message MyBytes {
+   *   // value must not in ["\x01\x02", "\x02\x03", "\x03\x04"]
+   *   optional bytes value = 1 [(buf.validate.field).bytes.not_in = {"\x01\x02", "\x02\x03", "\x03\x04"}];
+   * }
+   * ```
+   *
+   * @generated from field: repeated bytes not_in = 9;
+   */
+  notIn?: string[];
+
+  /**
+   * `ip` ensures that the field `value` is a valid IP address (v4 or v6) in byte format.
+   * If the field value doesn't meet this rule, an error message is generated.
+   *
+   * ```proto
+   * message MyBytes {
+   *   // value must be a valid IP address
+   *   optional bytes value = 1 [(buf.validate.field).bytes.ip = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ip = 10;
+   */
+  ip?: boolean;
+
+  /**
+   * `ipv4` ensures that the field `value` is a valid IPv4 address in byte format.
+   * If the field value doesn't meet this rule, an error message is generated.
+   *
+   * ```proto
+   * message MyBytes {
+   *   // value must be a valid IPv4 address
+   *   optional bytes value = 1 [(buf.validate.field).bytes.ipv4 = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ipv4 = 11;
+   */
+  ipv4?: boolean;
+
+  /**
+   * `ipv6` ensures that the field `value` is a valid IPv6 address in byte format.
+   * If the field value doesn't meet this rule, an error message is generated.
+   * ```proto
+   * message MyBytes {
+   *   // value must be a valid IPv6 address
+   *   optional bytes value = 1 [(buf.validate.field).bytes.ipv6 = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool ipv6 = 12;
+   */
+  ipv6?: boolean;
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyBytes {
+   *   bytes value = 1 [
+   *     (buf.validate.field).bytes.example = "\x01\x02",
+   *     (buf.validate.field).bytes.example = "\x02\x03"
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated bytes example = 14;
+   */
+  example?: string[];
+};
+
 export type BytesRulesValid = BytesRules;
 
 /**
@@ -3792,7 +6957,7 @@ export type BytesRulesValid = BytesRules;
  */
 export const BytesRulesSchema: GenMessage<
   BytesRules,
-  { validType: BytesRulesValid }
+  { jsonType: BytesRulesJson; validType: BytesRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 20);
 
 /**
@@ -3910,6 +7075,121 @@ export type EnumRules = Message<"buf.validate.EnumRules"> & {
   example: number[];
 };
 
+/**
+ * EnumRules describe the rules applied to `enum` values.
+ *
+ * @generated from message buf.validate.EnumRules
+ */
+export type EnumRulesJson = {
+  /**
+   * `const` requires the field value to exactly match the specified enum value.
+   * If the field value doesn't match, an error message is generated.
+   *
+   * ```proto
+   * enum MyEnum {
+   *   MY_ENUM_UNSPECIFIED = 0;
+   *   MY_ENUM_VALUE1 = 1;
+   *   MY_ENUM_VALUE2 = 2;
+   * }
+   *
+   * message MyMessage {
+   *   // The field `value` must be exactly MY_ENUM_VALUE1.
+   *   MyEnum value = 1 [(buf.validate.field).enum.const = 1];
+   * }
+   * ```
+   *
+   * @generated from field: optional int32 const = 1;
+   */
+  const?: number;
+
+  /**
+   * `defined_only` requires the field value to be one of the defined values for
+   * this enum, failing on any undefined value.
+   *
+   * ```proto
+   * enum MyEnum {
+   *   MY_ENUM_UNSPECIFIED = 0;
+   *   MY_ENUM_VALUE1 = 1;
+   *   MY_ENUM_VALUE2 = 2;
+   * }
+   *
+   * message MyMessage {
+   *   // The field `value` must be a defined value of MyEnum.
+   *   MyEnum value = 1 [(buf.validate.field).enum.defined_only = true];
+   * }
+   * ```
+   *
+   * @generated from field: optional bool defined_only = 2;
+   */
+  definedOnly?: boolean;
+
+  /**
+   * `in` requires the field value to be equal to one of the
+   * specified enum values. If the field value doesn't match any of the
+   * specified values, an error message is generated.
+   *
+   * ```proto
+   * enum MyEnum {
+   *   MY_ENUM_UNSPECIFIED = 0;
+   *   MY_ENUM_VALUE1 = 1;
+   *   MY_ENUM_VALUE2 = 2;
+   * }
+   *
+   * message MyMessage {
+   *   // The field `value` must be equal to one of the specified values.
+   *   MyEnum value = 1 [(buf.validate.field).enum = { in: [1, 2]}];
+   * }
+   * ```
+   *
+   * @generated from field: repeated int32 in = 3;
+   */
+  in?: number[];
+
+  /**
+   * `not_in` requires the field value to be not equal to any of the
+   * specified enum values. If the field value matches one of the specified
+   * values, an error message is generated.
+   *
+   * ```proto
+   * enum MyEnum {
+   *   MY_ENUM_UNSPECIFIED = 0;
+   *   MY_ENUM_VALUE1 = 1;
+   *   MY_ENUM_VALUE2 = 2;
+   * }
+   *
+   * message MyMessage {
+   *   // The field `value` must not be equal to any of the specified values.
+   *   MyEnum value = 1 [(buf.validate.field).enum = { not_in: [1, 2]}];
+   * }
+   * ```
+   *
+   * @generated from field: repeated int32 not_in = 4;
+   */
+  notIn?: number[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * enum MyEnum {
+   *   MY_ENUM_UNSPECIFIED = 0;
+   *   MY_ENUM_VALUE1 = 1;
+   *   MY_ENUM_VALUE2 = 2;
+   * }
+   *
+   * message MyMessage {
+   *     (buf.validate.field).enum.example = 1,
+   *     (buf.validate.field).enum.example = 2
+   * }
+   * ```
+   *
+   * @generated from field: repeated int32 example = 5;
+   */
+  example?: number[];
+};
+
 export type EnumRulesValid = EnumRules;
 
 /**
@@ -3918,7 +7198,7 @@ export type EnumRulesValid = EnumRules;
  */
 export const EnumRulesSchema: GenMessage<
   EnumRules,
-  { validType: EnumRulesValid }
+  { jsonType: EnumRulesJson; validType: EnumRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 21);
 
 /**
@@ -4002,6 +7282,87 @@ export type RepeatedRules = Message<"buf.validate.RepeatedRules"> & {
   items?: FieldRules;
 };
 
+/**
+ * RepeatedRules describe the rules applied to `repeated` values.
+ *
+ * @generated from message buf.validate.RepeatedRules
+ */
+export type RepeatedRulesJson = {
+  /**
+   * `min_items` requires that this field must contain at least the specified
+   * minimum number of items.
+   *
+   * Note that `min_items = 1` is equivalent to setting a field as `required`.
+   *
+   * ```proto
+   * message MyRepeated {
+   *   // value must contain at least  2 items
+   *   repeated string value = 1 [(buf.validate.field).repeated.min_items = 2];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 min_items = 1;
+   */
+  minItems?: string;
+
+  /**
+   * `max_items` denotes that this field must not exceed a
+   * certain number of items as the upper limit. If the field contains more
+   * items than specified, an error message will be generated, requiring the
+   * field to maintain no more than the specified number of items.
+   *
+   * ```proto
+   * message MyRepeated {
+   *   // value must contain no more than 3 item(s)
+   *   repeated string value = 1 [(buf.validate.field).repeated.max_items = 3];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 max_items = 2;
+   */
+  maxItems?: string;
+
+  /**
+   * `unique` indicates that all elements in this field must
+   * be unique. This rule is strictly applicable to scalar and enum
+   * types, with message types not being supported.
+   *
+   * ```proto
+   * message MyRepeated {
+   *   // repeated value must contain unique items
+   *   repeated string value = 1 [(buf.validate.field).repeated.unique = true];
+   * }
+   * ```
+   *
+   * @generated from field: optional bool unique = 3;
+   */
+  unique?: boolean;
+
+  /**
+   * `items` details the rules to be applied to each item
+   * in the field. Even for repeated message fields, validation is executed
+   * against each item unless `ignore` is specified.
+   *
+   * ```proto
+   * message MyRepeated {
+   *   // The items in the field `value` must follow the specified rules.
+   *   repeated string value = 1 [(buf.validate.field).repeated.items = {
+   *     string: {
+   *       min_len: 3
+   *       max_len: 10
+   *     }
+   *   }];
+   * }
+   * ```
+   *
+   * Note that the `required` rule does not apply. Repeated items
+   * cannot be unset.
+   *
+   * @generated from field: optional buf.validate.FieldRules items = 4;
+   */
+  items?: FieldRulesJson;
+};
+
 export type RepeatedRulesValid = RepeatedRules;
 
 /**
@@ -4010,7 +7371,7 @@ export type RepeatedRulesValid = RepeatedRules;
  */
 export const RepeatedRulesSchema: GenMessage<
   RepeatedRules,
-  { validType: RepeatedRulesValid }
+  { jsonType: RepeatedRulesJson; validType: RepeatedRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 22);
 
 /**
@@ -4093,6 +7454,86 @@ export type MapRules = Message<"buf.validate.MapRules"> & {
   values?: FieldRules;
 };
 
+/**
+ * MapRules describe the rules applied to `map` values.
+ *
+ * @generated from message buf.validate.MapRules
+ */
+export type MapRulesJson = {
+  /**
+   * Specifies the minimum number of key-value pairs allowed. If the field has
+   * fewer key-value pairs than specified, an error message is generated.
+   *
+   * ```proto
+   * message MyMap {
+   *   // The field `value` must have at least 2 key-value pairs.
+   *   map<string, string> value = 1 [(buf.validate.field).map.min_pairs = 2];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 min_pairs = 1;
+   */
+  minPairs?: string;
+
+  /**
+   * Specifies the maximum number of key-value pairs allowed. If the field has
+   * more key-value pairs than specified, an error message is generated.
+   *
+   * ```proto
+   * message MyMap {
+   *   // The field `value` must have at most 3 key-value pairs.
+   *   map<string, string> value = 1 [(buf.validate.field).map.max_pairs = 3];
+   * }
+   * ```
+   *
+   * @generated from field: optional uint64 max_pairs = 2;
+   */
+  maxPairs?: string;
+
+  /**
+   * Specifies the rules to be applied to each key in the field.
+   *
+   * ```proto
+   * message MyMap {
+   *   // The keys in the field `value` must follow the specified rules.
+   *   map<string, string> value = 1 [(buf.validate.field).map.keys = {
+   *     string: {
+   *       min_len: 3
+   *       max_len: 10
+   *     }
+   *   }];
+   * }
+   * ```
+   *
+   * Note that the `required` rule does not apply. Map keys cannot be unset.
+   *
+   * @generated from field: optional buf.validate.FieldRules keys = 4;
+   */
+  keys?: FieldRulesJson;
+
+  /**
+   * Specifies the rules to be applied to the value of each key in the
+   * field. Message values will still have their validations evaluated unless
+   * `ignore` is specified.
+   *
+   * ```proto
+   * message MyMap {
+   *   // The values in the field `value` must follow the specified rules.
+   *   map<string, string> value = 1 [(buf.validate.field).map.values = {
+   *     string: {
+   *       min_len: 5
+   *       max_len: 20
+   *     }
+   *   }];
+   * }
+   * ```
+   * Note that the `required` rule does not apply. Map values cannot be unset.
+   *
+   * @generated from field: optional buf.validate.FieldRules values = 5;
+   */
+  values?: FieldRulesJson;
+};
+
 export type MapRulesValid = MapRules;
 
 /**
@@ -4101,7 +7542,7 @@ export type MapRulesValid = MapRules;
  */
 export const MapRulesSchema: GenMessage<
   MapRules,
-  { validType: MapRulesValid }
+  { jsonType: MapRulesJson; validType: MapRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 23);
 
 /**
@@ -4145,6 +7586,47 @@ export type AnyRules = Message<"buf.validate.AnyRules"> & {
   notIn: string[];
 };
 
+/**
+ * AnyRules describe rules applied exclusively to the `google.protobuf.Any` well-known type.
+ *
+ * @generated from message buf.validate.AnyRules
+ */
+export type AnyRulesJson = {
+  /**
+   * `in` requires the field's `type_url` to be equal to one of the
+   * specified values. If it doesn't match any of the specified values, an error
+   * message is generated.
+   *
+   * ```proto
+   * message MyAny {
+   *   //  The `value` field must have a `type_url` equal to one of the specified values.
+   *   google.protobuf.Any value = 1 [(buf.validate.field).any = {
+   *       in: ["type.googleapis.com/MyType1", "type.googleapis.com/MyType2"]
+   *   }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated string in = 2;
+   */
+  in?: string[];
+
+  /**
+   * requires the field's type_url to be not equal to any of the specified values. If it matches any of the specified values, an error message is generated.
+   *
+   * ```proto
+   * message MyAny {
+   *   //  The `value` field must not have a `type_url` equal to any of the specified values.
+   *   google.protobuf.Any value = 1 [(buf.validate.field).any = {
+   *       not_in: ["type.googleapis.com/ForbiddenType1", "type.googleapis.com/ForbiddenType2"]
+   *   }];
+   * }
+   * ```
+   *
+   * @generated from field: repeated string not_in = 3;
+   */
+  notIn?: string[];
+};
+
 export type AnyRulesValid = AnyRules;
 
 /**
@@ -4153,7 +7635,7 @@ export type AnyRulesValid = AnyRules;
  */
 export const AnyRulesSchema: GenMessage<
   AnyRules,
-  { validType: AnyRulesValid }
+  { jsonType: AnyRulesJson; validType: AnyRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 24);
 
 /**
@@ -4330,6 +7812,160 @@ export type DurationRules = Message<"buf.validate.DurationRules"> & {
   example: Duration[];
 };
 
+/**
+ * DurationRules describe the rules applied exclusively to the `google.protobuf.Duration` well-known type.
+ *
+ * @generated from message buf.validate.DurationRules
+ */
+export type DurationRulesJson = {
+  /**
+   * `const` dictates that the field must match the specified value of the `google.protobuf.Duration` type exactly.
+   * If the field's value deviates from the specified value, an error message
+   * will be generated.
+   *
+   * ```proto
+   * message MyDuration {
+   *   // value must equal 5s
+   *   google.protobuf.Duration value = 1 [(buf.validate.field).duration.const = "5s"];
+   * }
+   * ```
+   *
+   * @generated from field: optional google.protobuf.Duration const = 2;
+   */
+  const?: DurationJson;
+
+  /**
+   * `lt` stipulates that the field must be less than the specified value of the `google.protobuf.Duration` type,
+   * exclusive. If the field's value is greater than or equal to the specified
+   * value, an error message will be generated.
+   *
+   * ```proto
+   * message MyDuration {
+   *   // value must be less than 5s
+   *   google.protobuf.Duration value = 1 [(buf.validate.field).duration.lt = "5s"];
+   * }
+   * ```
+   *
+   * @generated from field: google.protobuf.Duration lt = 3;
+   */
+  lt?: DurationJson;
+
+  /**
+   * `lte` indicates that the field must be less than or equal to the specified
+   * value of the `google.protobuf.Duration` type, inclusive. If the field's value is greater than the specified value,
+   * an error message will be generated.
+   *
+   * ```proto
+   * message MyDuration {
+   *   // value must be less than or equal to 10s
+   *   google.protobuf.Duration value = 1 [(buf.validate.field).duration.lte = "10s"];
+   * }
+   * ```
+   *
+   * @generated from field: google.protobuf.Duration lte = 4;
+   */
+  lte?: DurationJson;
+
+  /**
+   * `gt` requires the duration field value to be greater than the specified
+   * value (exclusive). If the value of `gt` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyDuration {
+   *   // duration must be greater than 5s [duration.gt]
+   *   google.protobuf.Duration value = 1 [(buf.validate.field).duration.gt = { seconds: 5 }];
+   *
+   *   // duration must be greater than 5s and less than 10s [duration.gt_lt]
+   *   google.protobuf.Duration another_value = 2 [(buf.validate.field).duration = { gt: { seconds: 5 }, lt: { seconds: 10 } }];
+   *
+   *   // duration must be greater than 10s or less than 5s [duration.gt_lt_exclusive]
+   *   google.protobuf.Duration other_value = 3 [(buf.validate.field).duration = { gt: { seconds: 10 }, lt: { seconds: 5 } }];
+   * }
+   * ```
+   *
+   * @generated from field: google.protobuf.Duration gt = 5;
+   */
+  gt?: DurationJson;
+
+  /**
+   * `gte` requires the duration field value to be greater than or equal to the
+   * specified value (exclusive). If the value of `gte` is larger than a
+   * specified `lt` or `lte`, the range is reversed, and the field value must
+   * be outside the specified range. If the field value doesn't meet the
+   * required conditions, an error message is generated.
+   *
+   * ```proto
+   * message MyDuration {
+   *  // duration must be greater than or equal to 5s [duration.gte]
+   *  google.protobuf.Duration value = 1 [(buf.validate.field).duration.gte = { seconds: 5 }];
+   *
+   *  // duration must be greater than or equal to 5s and less than 10s [duration.gte_lt]
+   *  google.protobuf.Duration another_value = 2 [(buf.validate.field).duration = { gte: { seconds: 5 }, lt: { seconds: 10 } }];
+   *
+   *  // duration must be greater than or equal to 10s or less than 5s [duration.gte_lt_exclusive]
+   *  google.protobuf.Duration other_value = 3 [(buf.validate.field).duration = { gte: { seconds: 10 }, lt: { seconds: 5 } }];
+   * }
+   * ```
+   *
+   * @generated from field: google.protobuf.Duration gte = 6;
+   */
+  gte?: DurationJson;
+
+  /**
+   * `in` asserts that the field must be equal to one of the specified values of the `google.protobuf.Duration` type.
+   * If the field's value doesn't correspond to any of the specified values,
+   * an error message will be generated.
+   *
+   * ```proto
+   * message MyDuration {
+   *   // value must be in list [1s, 2s, 3s]
+   *   google.protobuf.Duration value = 1 [(buf.validate.field).duration.in = ["1s", "2s", "3s"]];
+   * }
+   * ```
+   *
+   * @generated from field: repeated google.protobuf.Duration in = 7;
+   */
+  in?: DurationJson[];
+
+  /**
+   * `not_in` denotes that the field must not be equal to
+   * any of the specified values of the `google.protobuf.Duration` type.
+   * If the field's value matches any of these values, an error message will be
+   * generated.
+   *
+   * ```proto
+   * message MyDuration {
+   *   // value must not be in list [1s, 2s, 3s]
+   *   google.protobuf.Duration value = 1 [(buf.validate.field).duration.not_in = ["1s", "2s", "3s"]];
+   * }
+   * ```
+   *
+   * @generated from field: repeated google.protobuf.Duration not_in = 8;
+   */
+  notIn?: DurationJson[];
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyDuration {
+   *   google.protobuf.Duration value = 1 [
+   *     (buf.validate.field).duration.example = { seconds: 1 },
+   *     (buf.validate.field).duration.example = { seconds: 2 },
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated google.protobuf.Duration example = 9;
+   */
+  example?: DurationJson[];
+};
+
 export type DurationRulesValid = DurationRules;
 
 /**
@@ -4338,7 +7974,7 @@ export type DurationRulesValid = DurationRules;
  */
 export const DurationRulesSchema: GenMessage<
   DurationRules,
-  { validType: DurationRulesValid }
+  { jsonType: DurationRulesJson; validType: DurationRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 25);
 
 /**
@@ -4522,6 +8158,163 @@ export type TimestampRules = Message<"buf.validate.TimestampRules"> & {
   example: Timestamp[];
 };
 
+/**
+ * TimestampRules describe the rules applied exclusively to the `google.protobuf.Timestamp` well-known type.
+ *
+ * @generated from message buf.validate.TimestampRules
+ */
+export type TimestampRulesJson = {
+  /**
+   * `const` dictates that this field, of the `google.protobuf.Timestamp` type, must exactly match the specified value. If the field value doesn't correspond to the specified timestamp, an error message will be generated.
+   *
+   * ```proto
+   * message MyTimestamp {
+   *   // value must equal 2023-05-03T10:00:00Z
+   *   google.protobuf.Timestamp created_at = 1 [(buf.validate.field).timestamp.const = {seconds: 1727998800}];
+   * }
+   * ```
+   *
+   * @generated from field: optional google.protobuf.Timestamp const = 2;
+   */
+  const?: TimestampJson;
+
+  /**
+   * requires the duration field value to be less than the specified value (field < value). If the field value doesn't meet the required conditions, an error message is generated.
+   *
+   * ```proto
+   * message MyDuration {
+   *   // duration must be less than 'P3D' [duration.lt]
+   *   google.protobuf.Duration value = 1 [(buf.validate.field).duration.lt = { seconds: 259200 }];
+   * }
+   * ```
+   *
+   * @generated from field: google.protobuf.Timestamp lt = 3;
+   */
+  lt?: TimestampJson;
+
+  /**
+   * requires the timestamp field value to be less than or equal to the specified value (field <= value). If the field value doesn't meet the required conditions, an error message is generated.
+   *
+   * ```proto
+   * message MyTimestamp {
+   *   // timestamp must be less than or equal to '2023-05-14T00:00:00Z' [timestamp.lte]
+   *   google.protobuf.Timestamp value = 1 [(buf.validate.field).timestamp.lte = { seconds: 1678867200 }];
+   * }
+   * ```
+   *
+   * @generated from field: google.protobuf.Timestamp lte = 4;
+   */
+  lte?: TimestampJson;
+
+  /**
+   * `lt_now` specifies that this field, of the `google.protobuf.Timestamp` type, must be less than the current time. `lt_now` can only be used with the `within` rule.
+   *
+   * ```proto
+   * message MyTimestamp {
+   *  // value must be less than now
+   *   google.protobuf.Timestamp created_at = 1 [(buf.validate.field).timestamp.lt_now = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool lt_now = 7;
+   */
+  ltNow?: boolean;
+
+  /**
+   * `gt` requires the timestamp field value to be greater than the specified
+   * value (exclusive). If the value of `gt` is larger than a specified `lt`
+   * or `lte`, the range is reversed, and the field value must be outside the
+   * specified range. If the field value doesn't meet the required conditions,
+   * an error message is generated.
+   *
+   * ```proto
+   * message MyTimestamp {
+   *   // timestamp must be greater than '2023-01-01T00:00:00Z' [timestamp.gt]
+   *   google.protobuf.Timestamp value = 1 [(buf.validate.field).timestamp.gt = { seconds: 1672444800 }];
+   *
+   *   // timestamp must be greater than '2023-01-01T00:00:00Z' and less than '2023-01-02T00:00:00Z' [timestamp.gt_lt]
+   *   google.protobuf.Timestamp another_value = 2 [(buf.validate.field).timestamp = { gt: { seconds: 1672444800 }, lt: { seconds: 1672531200 } }];
+   *
+   *   // timestamp must be greater than '2023-01-02T00:00:00Z' or less than '2023-01-01T00:00:00Z' [timestamp.gt_lt_exclusive]
+   *   google.protobuf.Timestamp other_value = 3 [(buf.validate.field).timestamp = { gt: { seconds: 1672531200 }, lt: { seconds: 1672444800 } }];
+   * }
+   * ```
+   *
+   * @generated from field: google.protobuf.Timestamp gt = 5;
+   */
+  gt?: TimestampJson;
+
+  /**
+   * `gte` requires the timestamp field value to be greater than or equal to the
+   * specified value (exclusive). If the value of `gte` is larger than a
+   * specified `lt` or `lte`, the range is reversed, and the field value
+   * must be outside the specified range. If the field value doesn't meet
+   * the required conditions, an error message is generated.
+   *
+   * ```proto
+   * message MyTimestamp {
+   *   // timestamp must be greater than or equal to '2023-01-01T00:00:00Z' [timestamp.gte]
+   *   google.protobuf.Timestamp value = 1 [(buf.validate.field).timestamp.gte = { seconds: 1672444800 }];
+   *
+   *   // timestamp must be greater than or equal to '2023-01-01T00:00:00Z' and less than '2023-01-02T00:00:00Z' [timestamp.gte_lt]
+   *   google.protobuf.Timestamp another_value = 2 [(buf.validate.field).timestamp = { gte: { seconds: 1672444800 }, lt: { seconds: 1672531200 } }];
+   *
+   *   // timestamp must be greater than or equal to '2023-01-02T00:00:00Z' or less than '2023-01-01T00:00:00Z' [timestamp.gte_lt_exclusive]
+   *   google.protobuf.Timestamp other_value = 3 [(buf.validate.field).timestamp = { gte: { seconds: 1672531200 }, lt: { seconds: 1672444800 } }];
+   * }
+   * ```
+   *
+   * @generated from field: google.protobuf.Timestamp gte = 6;
+   */
+  gte?: TimestampJson;
+
+  /**
+   * `gt_now` specifies that this field, of the `google.protobuf.Timestamp` type, must be greater than the current time. `gt_now` can only be used with the `within` rule.
+   *
+   * ```proto
+   * message MyTimestamp {
+   *   // value must be greater than now
+   *   google.protobuf.Timestamp created_at = 1 [(buf.validate.field).timestamp.gt_now = true];
+   * }
+   * ```
+   *
+   * @generated from field: bool gt_now = 8;
+   */
+  gtNow?: boolean;
+
+  /**
+   * `within` specifies that this field, of the `google.protobuf.Timestamp` type, must be within the specified duration of the current time. If the field value isn't within the duration, an error message is generated.
+   *
+   * ```proto
+   * message MyTimestamp {
+   *   // value must be within 1 hour of now
+   *   google.protobuf.Timestamp created_at = 1 [(buf.validate.field).timestamp.within = {seconds: 3600}];
+   * }
+   * ```
+   *
+   * @generated from field: optional google.protobuf.Duration within = 9;
+   */
+  within?: DurationJson;
+
+  /**
+   * `example` specifies values that the field may have. These values SHOULD
+   * conform to other rules. `example` values will not impact validation
+   * but may be used as helpful guidance on how to populate the given field.
+   *
+   * ```proto
+   * message MyTimestamp {
+   *   google.protobuf.Timestamp value = 1 [
+   *     (buf.validate.field).timestamp.example = { seconds: 1672444800 },
+   *     (buf.validate.field).timestamp.example = { seconds: 1672531200 },
+   *   ];
+   * }
+   * ```
+   *
+   * @generated from field: repeated google.protobuf.Timestamp example = 10;
+   */
+  example?: TimestampJson[];
+};
+
 export type TimestampRulesValid = TimestampRules;
 
 /**
@@ -4530,7 +8323,7 @@ export type TimestampRulesValid = TimestampRules;
  */
 export const TimestampRulesSchema: GenMessage<
   TimestampRules,
-  { validType: TimestampRulesValid }
+  { jsonType: TimestampRulesJson; validType: TimestampRulesValid }
 > = /*@__PURE__*/ messageDesc(file_buf_validate_validate, 26);
 
 /**
@@ -4639,9 +8432,20 @@ export enum Ignore {
 }
 
 /**
+ * Specifies how `FieldRules.ignore` behaves, depending on the field's value, and
+ * whether the field tracks presence.
+ *
+ * @generated from enum buf.validate.Ignore
+ */
+export type IgnoreJson =
+  | "IGNORE_UNSPECIFIED"
+  | "IGNORE_IF_ZERO_VALUE"
+  | "IGNORE_ALWAYS";
+
+/**
  * Describes the enum buf.validate.Ignore.
  */
-export const IgnoreSchema: GenEnum<Ignore> =
+export const IgnoreSchema: GenEnum<Ignore, IgnoreJson> =
   /*@__PURE__*/
   enumDesc(file_buf_validate_validate, 0);
 
@@ -4672,9 +8476,19 @@ export enum KnownRegex {
 }
 
 /**
+ * KnownRegex contains some well-known patterns.
+ *
+ * @generated from enum buf.validate.KnownRegex
+ */
+export type KnownRegexJson =
+  | "KNOWN_REGEX_UNSPECIFIED"
+  | "KNOWN_REGEX_HTTP_HEADER_NAME"
+  | "KNOWN_REGEX_HTTP_HEADER_VALUE";
+
+/**
  * Describes the enum buf.validate.KnownRegex.
  */
-export const KnownRegexSchema: GenEnum<KnownRegex> =
+export const KnownRegexSchema: GenEnum<KnownRegex, KnownRegexJson> =
   /*@__PURE__*/
   enumDesc(file_buf_validate_validate, 1);
 

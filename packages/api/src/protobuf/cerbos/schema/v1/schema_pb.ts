@@ -49,6 +49,26 @@ export type ValidationError = Message<"cerbos.schema.v1.ValidationError"> & {
   source: ValidationError_Source;
 };
 
+/**
+ * @generated from message cerbos.schema.v1.ValidationError
+ */
+export type ValidationErrorJson = {
+  /**
+   * @generated from field: string path = 1;
+   */
+  path?: string;
+
+  /**
+   * @generated from field: string message = 2;
+   */
+  message?: string;
+
+  /**
+   * @generated from field: cerbos.schema.v1.ValidationError.Source source = 3;
+   */
+  source?: ValidationError_SourceJson;
+};
+
 export type ValidationErrorValid = ValidationError;
 
 /**
@@ -57,7 +77,7 @@ export type ValidationErrorValid = ValidationError;
  */
 export const ValidationErrorSchema: GenMessage<
   ValidationError,
-  { validType: ValidationErrorValid }
+  { jsonType: ValidationErrorJson; validType: ValidationErrorValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_schema_v1_schema, 0);
 
 /**
@@ -81,11 +101,20 @@ export enum ValidationError_Source {
 }
 
 /**
+ * @generated from enum cerbos.schema.v1.ValidationError.Source
+ */
+export type ValidationError_SourceJson =
+  | "SOURCE_UNSPECIFIED"
+  | "SOURCE_PRINCIPAL"
+  | "SOURCE_RESOURCE";
+
+/**
  * Describes the enum cerbos.schema.v1.ValidationError.Source.
  */
-export const ValidationError_SourceSchema: GenEnum<ValidationError_Source> =
-  /*@__PURE__*/
-  enumDesc(file_cerbos_schema_v1_schema, 0, 0);
+export const ValidationError_SourceSchema: GenEnum<
+  ValidationError_Source,
+  ValidationError_SourceJson
+> = /*@__PURE__*/ enumDesc(file_cerbos_schema_v1_schema, 0, 0);
 
 /**
  * @generated from message cerbos.schema.v1.Schema
@@ -100,6 +129,21 @@ export type Schema = Message<"cerbos.schema.v1.Schema"> & {
    * @generated from field: bytes definition = 2;
    */
   definition: Uint8Array;
+};
+
+/**
+ * @generated from message cerbos.schema.v1.Schema
+ */
+export type SchemaJson = {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id?: string;
+
+  /**
+   * @generated from field: bytes definition = 2;
+   */
+  definition?: string;
 };
 
 /**
@@ -121,6 +165,7 @@ export type SchemaValid = Message<"cerbos.schema.v1.Schema"> & {
  * Describes the message cerbos.schema.v1.Schema.
  * Use `create(SchemaSchema)` to create a new message.
  */
-export const SchemaSchema: GenMessage<Schema, { validType: SchemaValid }> =
-  /*@__PURE__*/
-  messageDesc(file_cerbos_schema_v1_schema, 1);
+export const SchemaSchema: GenMessage<
+  Schema,
+  { jsonType: SchemaJson; validType: SchemaValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_schema_v1_schema, 1);

@@ -7,7 +7,7 @@ import type {
   GenMessage,
 } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Value } from "@bufbuild/protobuf/wkt";
+import type { Value, ValueJson } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_struct } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -172,15 +172,166 @@ export type Swagger =
     extensions: { [key: string]: Value };
   };
 
+/**
+ * `Swagger` is a representation of OpenAPI v2 specification's Swagger object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#swaggerObject
+ *
+ * Example:
+ *
+ *  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+ *    info: {
+ *      title: "Echo API";
+ *      version: "1.0";
+ *      description: "";
+ *      contact: {
+ *        name: "gRPC-Gateway project";
+ *        url: "https://github.com/grpc-ecosystem/grpc-gateway";
+ *        email: "none@example.com";
+ *      };
+ *      license: {
+ *        name: "BSD 3-Clause License";
+ *        url: "https://github.com/grpc-ecosystem/grpc-gateway/blob/main/LICENSE";
+ *      };
+ *    };
+ *    schemes: HTTPS;
+ *    consumes: "application/json";
+ *    produces: "application/json";
+ *  };
+ *
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.Swagger
+ */
+export type SwaggerJson = {
+  /**
+   * Specifies the OpenAPI Specification version being used. It can be
+   * used by the OpenAPI UI and other clients to interpret the API listing. The
+   * value MUST be "2.0".
+   *
+   * @generated from field: string swagger = 1;
+   */
+  swagger?: string;
+
+  /**
+   * Provides metadata about the API. The metadata can be used by the
+   * clients if needed.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.Info info = 2;
+   */
+  info?: InfoJson;
+
+  /**
+   * The host (name or ip) serving the API. This MUST be the host only and does
+   * not include the scheme nor sub-paths. It MAY include a port. If the host is
+   * not included, the host serving the documentation is to be used (including
+   * the port). The host does not support path templating.
+   *
+   * @generated from field: string host = 3;
+   */
+  host?: string;
+
+  /**
+   * The base path on which the API is served, which is relative to the host. If
+   * it is not included, the API is served directly under the host. The value
+   * MUST start with a leading slash (/). The basePath does not support path
+   * templating.
+   * Note that using `base_path` does not change the endpoint paths that are
+   * generated in the resulting OpenAPI file. If you wish to use `base_path`
+   * with relatively generated OpenAPI paths, the `base_path` prefix must be
+   * manually removed from your `google.api.http` paths and your code changed to
+   * serve the API from the `base_path`.
+   *
+   * @generated from field: string base_path = 4;
+   */
+  basePath?: string;
+
+  /**
+   * The transfer protocol of the API. Values MUST be from the list: "http",
+   * "https", "ws", "wss". If the schemes is not included, the default scheme to
+   * be used is the one used to access the OpenAPI definition itself.
+   *
+   * @generated from field: repeated grpc.gateway.protoc_gen_openapiv2.options.Scheme schemes = 5;
+   */
+  schemes?: SchemeJson[];
+
+  /**
+   * A list of MIME types the APIs can consume. This is global to all APIs but
+   * can be overridden on specific API calls. Value MUST be as described under
+   * Mime Types.
+   *
+   * @generated from field: repeated string consumes = 6;
+   */
+  consumes?: string[];
+
+  /**
+   * A list of MIME types the APIs can produce. This is global to all APIs but
+   * can be overridden on specific API calls. Value MUST be as described under
+   * Mime Types.
+   *
+   * @generated from field: repeated string produces = 7;
+   */
+  produces?: string[];
+
+  /**
+   * An object to hold responses that can be used across operations. This
+   * property does not define global responses for all operations.
+   *
+   * @generated from field: map<string, grpc.gateway.protoc_gen_openapiv2.options.Response> responses = 10;
+   */
+  responses?: { [key: string]: ResponseJson };
+
+  /**
+   * Security scheme definitions that can be used across the specification.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.SecurityDefinitions security_definitions = 11;
+   */
+  securityDefinitions?: SecurityDefinitionsJson;
+
+  /**
+   * A declaration of which security schemes are applied for the API as a whole.
+   * The list of values describes alternative security schemes that can be used
+   * (that is, there is a logical OR between the security requirements).
+   * Individual operations can override this definition.
+   *
+   * @generated from field: repeated grpc.gateway.protoc_gen_openapiv2.options.SecurityRequirement security = 12;
+   */
+  security?: SecurityRequirementJson[];
+
+  /**
+   * A list of tags for API documentation control. Tags can be used for logical
+   * grouping of operations by resources or any other qualifier.
+   *
+   * @generated from field: repeated grpc.gateway.protoc_gen_openapiv2.options.Tag tags = 13;
+   */
+  tags?: TagJson[];
+
+  /**
+   * Additional external documentation.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.ExternalDocumentation external_docs = 14;
+   */
+  externalDocs?: ExternalDocumentationJson;
+
+  /**
+   * Custom properties that start with "x-" such as "x-foo" used to describe
+   * extra functionality that is not covered by the standard OpenAPI Specification.
+   * See: https://swagger.io/docs/specification/2-0/swagger-extensions/
+   *
+   * @generated from field: map<string, google.protobuf.Value> extensions = 15;
+   */
+  extensions?: { [key: string]: ValueJson };
+};
+
 export type SwaggerValid = Swagger;
 
 /**
  * Describes the message grpc.gateway.protoc_gen_openapiv2.options.Swagger.
  * Use `create(SwaggerSchema)` to create a new message.
  */
-export const SwaggerSchema: GenMessage<Swagger, { validType: SwaggerValid }> =
-  /*@__PURE__*/
-  messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 0);
+export const SwaggerSchema: GenMessage<
+  Swagger,
+  { jsonType: SwaggerJson; validType: SwaggerValid }
+> = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 0);
 
 /**
  * `Operation` is a representation of OpenAPI v2 specification's Operation object.
@@ -327,6 +478,150 @@ export type Operation =
     parameters?: Parameters;
   };
 
+/**
+ * `Operation` is a representation of OpenAPI v2 specification's Operation object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#operationObject
+ *
+ * Example:
+ *
+ *  service EchoService {
+ *    rpc Echo(SimpleMessage) returns (SimpleMessage) {
+ *      option (google.api.http) = {
+ *        get: "/v1/example/echo/{id}"
+ *      };
+ *
+ *      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+ *        summary: "Get a message.";
+ *        operation_id: "getMessage";
+ *        tags: "echo";
+ *        responses: {
+ *          key: "200"
+ *            value: {
+ *            description: "OK";
+ *          }
+ *        }
+ *      };
+ *    }
+ *  }
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.Operation
+ */
+export type OperationJson = {
+  /**
+   * A list of tags for API documentation control. Tags can be used for logical
+   * grouping of operations by resources or any other qualifier.
+   *
+   * @generated from field: repeated string tags = 1;
+   */
+  tags?: string[];
+
+  /**
+   * A short summary of what the operation does. For maximum readability in the
+   * swagger-ui, this field SHOULD be less than 120 characters.
+   *
+   * @generated from field: string summary = 2;
+   */
+  summary?: string;
+
+  /**
+   * A verbose explanation of the operation behavior. GFM syntax can be used for
+   * rich text representation.
+   *
+   * @generated from field: string description = 3;
+   */
+  description?: string;
+
+  /**
+   * Additional external documentation for this operation.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.ExternalDocumentation external_docs = 4;
+   */
+  externalDocs?: ExternalDocumentationJson;
+
+  /**
+   * Unique string used to identify the operation. The id MUST be unique among
+   * all operations described in the API. Tools and libraries MAY use the
+   * operationId to uniquely identify an operation, therefore, it is recommended
+   * to follow common programming naming conventions.
+   *
+   * @generated from field: string operation_id = 5;
+   */
+  operationId?: string;
+
+  /**
+   * A list of MIME types the operation can consume. This overrides the consumes
+   * definition at the OpenAPI Object. An empty value MAY be used to clear the
+   * global definition. Value MUST be as described under Mime Types.
+   *
+   * @generated from field: repeated string consumes = 6;
+   */
+  consumes?: string[];
+
+  /**
+   * A list of MIME types the operation can produce. This overrides the produces
+   * definition at the OpenAPI Object. An empty value MAY be used to clear the
+   * global definition. Value MUST be as described under Mime Types.
+   *
+   * @generated from field: repeated string produces = 7;
+   */
+  produces?: string[];
+
+  /**
+   * The list of possible responses as they are returned from executing this
+   * operation.
+   *
+   * @generated from field: map<string, grpc.gateway.protoc_gen_openapiv2.options.Response> responses = 9;
+   */
+  responses?: { [key: string]: ResponseJson };
+
+  /**
+   * The transfer protocol for the operation. Values MUST be from the list:
+   * "http", "https", "ws", "wss". The value overrides the OpenAPI Object
+   * schemes definition.
+   *
+   * @generated from field: repeated grpc.gateway.protoc_gen_openapiv2.options.Scheme schemes = 10;
+   */
+  schemes?: SchemeJson[];
+
+  /**
+   * Declares this operation to be deprecated. Usage of the declared operation
+   * should be refrained. Default value is false.
+   *
+   * @generated from field: bool deprecated = 11;
+   */
+  deprecated?: boolean;
+
+  /**
+   * A declaration of which security schemes are applied for this operation. The
+   * list of values describes alternative security schemes that can be used
+   * (that is, there is a logical OR between the security requirements). This
+   * definition overrides any declared top-level security. To remove a top-level
+   * security declaration, an empty array can be used.
+   *
+   * @generated from field: repeated grpc.gateway.protoc_gen_openapiv2.options.SecurityRequirement security = 12;
+   */
+  security?: SecurityRequirementJson[];
+
+  /**
+   * Custom properties that start with "x-" such as "x-foo" used to describe
+   * extra functionality that is not covered by the standard OpenAPI Specification.
+   * See: https://swagger.io/docs/specification/2-0/swagger-extensions/
+   *
+   * @generated from field: map<string, google.protobuf.Value> extensions = 13;
+   */
+  extensions?: { [key: string]: ValueJson };
+
+  /**
+   * Custom parameters such as HTTP request headers.
+   * See: https://swagger.io/docs/specification/2-0/describing-parameters/
+   * and https://swagger.io/specification/v2/#parameter-object.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.Parameters parameters = 14;
+   */
+  parameters?: ParametersJson;
+};
+
 export type OperationValid = Operation;
 
 /**
@@ -335,7 +630,7 @@ export type OperationValid = Operation;
  */
 export const OperationSchema: GenMessage<
   Operation,
-  { validType: OperationValid }
+  { jsonType: OperationJson; validType: OperationValid }
 > = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 1);
 
 /**
@@ -358,6 +653,25 @@ export type Parameters =
     headers: HeaderParameter[];
   };
 
+/**
+ * `Parameters` is a representation of OpenAPI v2 specification's parameters object.
+ * Note: This technically breaks compatibility with the OpenAPI 2 definition structure as we only
+ * allow header parameters to be set here since we do not want users specifying custom non-header
+ * parameters beyond those inferred from the Protobuf schema.
+ * See: https://swagger.io/specification/v2/#parameter-object
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.Parameters
+ */
+export type ParametersJson = {
+  /**
+   * `Headers` is one or more HTTP header parameter.
+   * See: https://swagger.io/docs/specification/2-0/describing-parameters/#header-parameters
+   *
+   * @generated from field: repeated grpc.gateway.protoc_gen_openapiv2.options.HeaderParameter headers = 1;
+   */
+  headers?: HeaderParameterJson[];
+};
+
 export type ParametersValid = Parameters;
 
 /**
@@ -366,7 +680,7 @@ export type ParametersValid = Parameters;
  */
 export const ParametersSchema: GenMessage<
   Parameters,
-  { validType: ParametersValid }
+  { jsonType: ParametersJson; validType: ParametersValid }
 > = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 2);
 
 /**
@@ -414,6 +728,50 @@ export type HeaderParameter =
     required: boolean;
   };
 
+/**
+ * `HeaderParameter` a HTTP header parameter.
+ * See: https://swagger.io/specification/v2/#parameter-object
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.HeaderParameter
+ */
+export type HeaderParameterJson = {
+  /**
+   * `Name` is the header name.
+   *
+   * @generated from field: string name = 1;
+   */
+  name?: string;
+
+  /**
+   * `Description` is a short description of the header.
+   *
+   * @generated from field: string description = 2;
+   */
+  description?: string;
+
+  /**
+   * `Type` is the type of the object. The value MUST be one of "string", "number", "integer", or "boolean". The "array" type is not supported.
+   * See: https://swagger.io/specification/v2/#parameterType.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.HeaderParameter.Type type = 3;
+   */
+  type?: HeaderParameter_TypeJson;
+
+  /**
+   * `Format` The extending format for the previously mentioned type.
+   *
+   * @generated from field: string format = 4;
+   */
+  format?: string;
+
+  /**
+   * `Required` indicates if the header is optional
+   *
+   * @generated from field: bool required = 5;
+   */
+  required?: boolean;
+};
+
 export type HeaderParameterValid = HeaderParameter;
 
 /**
@@ -422,7 +780,7 @@ export type HeaderParameterValid = HeaderParameter;
  */
 export const HeaderParameterSchema: GenMessage<
   HeaderParameter,
-  { validType: HeaderParameterValid }
+  { jsonType: HeaderParameterJson; validType: HeaderParameterValid }
 > = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 3);
 
 /**
@@ -459,11 +817,25 @@ export enum HeaderParameter_Type {
 }
 
 /**
+ * `Type` is a supported HTTP header type.
+ * See https://swagger.io/specification/v2/#parameterType.
+ *
+ * @generated from enum grpc.gateway.protoc_gen_openapiv2.options.HeaderParameter.Type
+ */
+export type HeaderParameter_TypeJson =
+  | "UNKNOWN"
+  | "STRING"
+  | "NUMBER"
+  | "INTEGER"
+  | "BOOLEAN";
+
+/**
  * Describes the enum grpc.gateway.protoc_gen_openapiv2.options.HeaderParameter.Type.
  */
-export const HeaderParameter_TypeSchema: GenEnum<HeaderParameter_Type> =
-  /*@__PURE__*/
-  enumDesc(file_protoc_gen_openapiv2_options_openapiv2, 3, 0);
+export const HeaderParameter_TypeSchema: GenEnum<
+  HeaderParameter_Type,
+  HeaderParameter_TypeJson
+> = /*@__PURE__*/ enumDesc(file_protoc_gen_openapiv2_options_openapiv2, 3, 0);
 
 /**
  * `Header` is a representation of OpenAPI v2 specification's Header object.
@@ -513,15 +885,63 @@ export type Header =
     pattern: string;
   };
 
+/**
+ * `Header` is a representation of OpenAPI v2 specification's Header object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#headerObject
+ *
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.Header
+ */
+export type HeaderJson = {
+  /**
+   * `Description` is a short description of the header.
+   *
+   * @generated from field: string description = 1;
+   */
+  description?: string;
+
+  /**
+   * The type of the object. The value MUST be one of "string", "number", "integer", or "boolean". The "array" type is not supported.
+   *
+   * @generated from field: string type = 2;
+   */
+  type?: string;
+
+  /**
+   * `Format` The extending format for the previously mentioned type.
+   *
+   * @generated from field: string format = 3;
+   */
+  format?: string;
+
+  /**
+   * `Default` Declares the value of the header that the server will use if none is provided.
+   * See: https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-6.2.
+   * Unlike JSON Schema this value MUST conform to the defined type for the header.
+   *
+   * @generated from field: string default = 6;
+   */
+  default?: string;
+
+  /**
+   * 'Pattern' See https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.2.3.
+   *
+   * @generated from field: string pattern = 13;
+   */
+  pattern?: string;
+};
+
 export type HeaderValid = Header;
 
 /**
  * Describes the message grpc.gateway.protoc_gen_openapiv2.options.Header.
  * Use `create(HeaderSchema)` to create a new message.
  */
-export const HeaderSchema: GenMessage<Header, { validType: HeaderValid }> =
-  /*@__PURE__*/
-  messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 4);
+export const HeaderSchema: GenMessage<
+  Header,
+  { jsonType: HeaderJson; validType: HeaderValid }
+> = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 4);
 
 /**
  * `Response` is a representation of OpenAPI v2 specification's Response object.
@@ -576,6 +996,58 @@ export type Response =
     extensions: { [key: string]: Value };
   };
 
+/**
+ * `Response` is a representation of OpenAPI v2 specification's Response object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#responseObject
+ *
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.Response
+ */
+export type ResponseJson = {
+  /**
+   * `Description` is a short description of the response.
+   * GFM syntax can be used for rich text representation.
+   *
+   * @generated from field: string description = 1;
+   */
+  description?: string;
+
+  /**
+   * `Schema` optionally defines the structure of the response.
+   * If `Schema` is not provided, it means there is no content to the response.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.Schema schema = 2;
+   */
+  schema?: SchemaJson;
+
+  /**
+   * `Headers` A list of headers that are sent with the response.
+   * `Header` name is expected to be a string in the canonical format of the MIME header key
+   * See: https://golang.org/pkg/net/textproto/#CanonicalMIMEHeaderKey
+   *
+   * @generated from field: map<string, grpc.gateway.protoc_gen_openapiv2.options.Header> headers = 3;
+   */
+  headers?: { [key: string]: HeaderJson };
+
+  /**
+   * `Examples` gives per-mimetype response examples.
+   * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#example-object
+   *
+   * @generated from field: map<string, string> examples = 4;
+   */
+  examples?: { [key: string]: string };
+
+  /**
+   * Custom properties that start with "x-" such as "x-foo" used to describe
+   * extra functionality that is not covered by the standard OpenAPI Specification.
+   * See: https://swagger.io/docs/specification/2-0/swagger-extensions/
+   *
+   * @generated from field: map<string, google.protobuf.Value> extensions = 5;
+   */
+  extensions?: { [key: string]: ValueJson };
+};
+
 export type ResponseValid = Response;
 
 /**
@@ -584,7 +1056,7 @@ export type ResponseValid = Response;
  */
 export const ResponseSchema: GenMessage<
   Response,
-  { validType: ResponseValid }
+  { jsonType: ResponseJson; validType: ResponseValid }
 > = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 5);
 
 /**
@@ -670,15 +1142,99 @@ export type Info = Message<"grpc.gateway.protoc_gen_openapiv2.options.Info"> & {
   extensions: { [key: string]: Value };
 };
 
+/**
+ * `Info` is a representation of OpenAPI v2 specification's Info object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#infoObject
+ *
+ * Example:
+ *
+ *  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+ *    info: {
+ *      title: "Echo API";
+ *      version: "1.0";
+ *      description: "";
+ *      contact: {
+ *        name: "gRPC-Gateway project";
+ *        url: "https://github.com/grpc-ecosystem/grpc-gateway";
+ *        email: "none@example.com";
+ *      };
+ *      license: {
+ *        name: "BSD 3-Clause License";
+ *        url: "https://github.com/grpc-ecosystem/grpc-gateway/blob/main/LICENSE";
+ *      };
+ *    };
+ *    ...
+ *  };
+ *
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.Info
+ */
+export type InfoJson = {
+  /**
+   * The title of the application.
+   *
+   * @generated from field: string title = 1;
+   */
+  title?: string;
+
+  /**
+   * A short description of the application. GFM syntax can be used for rich
+   * text representation.
+   *
+   * @generated from field: string description = 2;
+   */
+  description?: string;
+
+  /**
+   * The Terms of Service for the API.
+   *
+   * @generated from field: string terms_of_service = 3;
+   */
+  termsOfService?: string;
+
+  /**
+   * The contact information for the exposed API.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.Contact contact = 4;
+   */
+  contact?: ContactJson;
+
+  /**
+   * The license information for the exposed API.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.License license = 5;
+   */
+  license?: LicenseJson;
+
+  /**
+   * Provides the version of the application API (not to be confused
+   * with the specification version).
+   *
+   * @generated from field: string version = 6;
+   */
+  version?: string;
+
+  /**
+   * Custom properties that start with "x-" such as "x-foo" used to describe
+   * extra functionality that is not covered by the standard OpenAPI Specification.
+   * See: https://swagger.io/docs/specification/2-0/swagger-extensions/
+   *
+   * @generated from field: map<string, google.protobuf.Value> extensions = 7;
+   */
+  extensions?: { [key: string]: ValueJson };
+};
+
 export type InfoValid = Info;
 
 /**
  * Describes the message grpc.gateway.protoc_gen_openapiv2.options.Info.
  * Use `create(InfoSchema)` to create a new message.
  */
-export const InfoSchema: GenMessage<Info, { validType: InfoValid }> =
-  /*@__PURE__*/
-  messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 6);
+export const InfoSchema: GenMessage<
+  Info,
+  { jsonType: InfoJson; validType: InfoValid }
+> = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 6);
 
 /**
  * `Contact` is a representation of OpenAPI v2 specification's Contact object.
@@ -729,15 +1285,64 @@ export type Contact =
     email: string;
   };
 
+/**
+ * `Contact` is a representation of OpenAPI v2 specification's Contact object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#contactObject
+ *
+ * Example:
+ *
+ *  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+ *    info: {
+ *      ...
+ *      contact: {
+ *        name: "gRPC-Gateway project";
+ *        url: "https://github.com/grpc-ecosystem/grpc-gateway";
+ *        email: "none@example.com";
+ *      };
+ *      ...
+ *    };
+ *    ...
+ *  };
+ *
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.Contact
+ */
+export type ContactJson = {
+  /**
+   * The identifying name of the contact person/organization.
+   *
+   * @generated from field: string name = 1;
+   */
+  name?: string;
+
+  /**
+   * The URL pointing to the contact information. MUST be in the format of a
+   * URL.
+   *
+   * @generated from field: string url = 2;
+   */
+  url?: string;
+
+  /**
+   * The email address of the contact person/organization. MUST be in the format
+   * of an email address.
+   *
+   * @generated from field: string email = 3;
+   */
+  email?: string;
+};
+
 export type ContactValid = Contact;
 
 /**
  * Describes the message grpc.gateway.protoc_gen_openapiv2.options.Contact.
  * Use `create(ContactSchema)` to create a new message.
  */
-export const ContactSchema: GenMessage<Contact, { validType: ContactValid }> =
-  /*@__PURE__*/
-  messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 7);
+export const ContactSchema: GenMessage<
+  Contact,
+  { jsonType: ContactJson; validType: ContactValid }
+> = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 7);
 
 /**
  * `License` is a representation of OpenAPI v2 specification's License object.
@@ -778,15 +1383,54 @@ export type License =
     url: string;
   };
 
+/**
+ * `License` is a representation of OpenAPI v2 specification's License object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#licenseObject
+ *
+ * Example:
+ *
+ *  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+ *    info: {
+ *      ...
+ *      license: {
+ *        name: "BSD 3-Clause License";
+ *        url: "https://github.com/grpc-ecosystem/grpc-gateway/blob/main/LICENSE";
+ *      };
+ *      ...
+ *    };
+ *    ...
+ *  };
+ *
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.License
+ */
+export type LicenseJson = {
+  /**
+   * The license name used for the API.
+   *
+   * @generated from field: string name = 1;
+   */
+  name?: string;
+
+  /**
+   * A URL to the license used for the API. MUST be in the format of a URL.
+   *
+   * @generated from field: string url = 2;
+   */
+  url?: string;
+};
+
 export type LicenseValid = License;
 
 /**
  * Describes the message grpc.gateway.protoc_gen_openapiv2.options.License.
  * Use `create(LicenseSchema)` to create a new message.
  */
-export const LicenseSchema: GenMessage<License, { validType: LicenseValid }> =
-  /*@__PURE__*/
-  messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 8);
+export const LicenseSchema: GenMessage<
+  License,
+  { jsonType: LicenseJson; validType: LicenseValid }
+> = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 8);
 
 /**
  * `ExternalDocumentation` is a representation of OpenAPI v2 specification's
@@ -827,6 +1471,44 @@ export type ExternalDocumentation =
     url: string;
   };
 
+/**
+ * `ExternalDocumentation` is a representation of OpenAPI v2 specification's
+ * ExternalDocumentation object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#externalDocumentationObject
+ *
+ * Example:
+ *
+ *  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+ *    ...
+ *    external_docs: {
+ *      description: "More about gRPC-Gateway";
+ *      url: "https://github.com/grpc-ecosystem/grpc-gateway";
+ *    }
+ *    ...
+ *  };
+ *
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.ExternalDocumentation
+ */
+export type ExternalDocumentationJson = {
+  /**
+   * A short description of the target documentation. GFM syntax can be used for
+   * rich text representation.
+   *
+   * @generated from field: string description = 1;
+   */
+  description?: string;
+
+  /**
+   * The URL for the target documentation. Value MUST be in the format
+   * of a URL.
+   *
+   * @generated from field: string url = 2;
+   */
+  url?: string;
+};
+
 export type ExternalDocumentationValid = ExternalDocumentation;
 
 /**
@@ -835,7 +1517,7 @@ export type ExternalDocumentationValid = ExternalDocumentation;
  */
 export const ExternalDocumentationSchema: GenMessage<
   ExternalDocumentation,
-  { validType: ExternalDocumentationValid }
+  { jsonType: ExternalDocumentationJson; validType: ExternalDocumentationValid }
 > = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 9);
 
 /**
@@ -891,15 +1573,68 @@ export type Schema =
     example: string;
   };
 
+/**
+ * `Schema` is a representation of OpenAPI v2 specification's Schema object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#schemaObject
+ *
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.Schema
+ */
+export type SchemaJson = {
+  /**
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.JSONSchema json_schema = 1;
+   */
+  jsonSchema?: JSONSchemaJson;
+
+  /**
+   * Adds support for polymorphism. The discriminator is the schema property
+   * name that is used to differentiate between other schema that inherit this
+   * schema. The property name used MUST be defined at this schema and it MUST
+   * be in the required property list. When used, the value MUST be the name of
+   * this schema or any schema that inherits it.
+   *
+   * @generated from field: string discriminator = 2;
+   */
+  discriminator?: string;
+
+  /**
+   * Relevant only for Schema "properties" definitions. Declares the property as
+   * "read only". This means that it MAY be sent as part of a response but MUST
+   * NOT be sent as part of the request. Properties marked as readOnly being
+   * true SHOULD NOT be in the required list of the defined schema. Default
+   * value is false.
+   *
+   * @generated from field: bool read_only = 3;
+   */
+  readOnly?: boolean;
+
+  /**
+   * Additional external documentation for this schema.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.ExternalDocumentation external_docs = 5;
+   */
+  externalDocs?: ExternalDocumentationJson;
+
+  /**
+   * A free-form property to include an example of an instance for this schema in JSON.
+   * This is copied verbatim to the output.
+   *
+   * @generated from field: string example = 6;
+   */
+  example?: string;
+};
+
 export type SchemaValid = Schema;
 
 /**
  * Describes the message grpc.gateway.protoc_gen_openapiv2.options.Schema.
  * Use `create(SchemaSchema)` to create a new message.
  */
-export const SchemaSchema: GenMessage<Schema, { validType: SchemaValid }> =
-  /*@__PURE__*/
-  messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 10);
+export const SchemaSchema: GenMessage<
+  Schema,
+  { jsonType: SchemaJson; validType: SchemaValid }
+> = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 10);
 
 /**
  * `JSONSchema` represents properties from JSON Schema taken, and as used, in
@@ -1099,6 +1834,203 @@ export type JSONSchema =
     extensions: { [key: string]: Value };
   };
 
+/**
+ * `JSONSchema` represents properties from JSON Schema taken, and as used, in
+ * the OpenAPI v2 spec.
+ *
+ * This includes changes made by OpenAPI v2.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#schemaObject
+ *
+ * See also: https://cswr.github.io/JsonSchema/spec/basic_types/,
+ * https://github.com/json-schema-org/json-schema-spec/blob/master/schema.json
+ *
+ * Example:
+ *
+ *  message SimpleMessage {
+ *    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+ *      json_schema: {
+ *        title: "SimpleMessage"
+ *        description: "A simple message."
+ *        required: ["id"]
+ *      }
+ *    };
+ *
+ *    // Id represents the message identifier.
+ *    string id = 1; [
+ *        (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+ *          description: "The unique identifier of the simple message."
+ *        }];
+ *  }
+ *
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.JSONSchema
+ */
+export type JSONSchemaJson = {
+  /**
+   * Ref is used to define an external reference to include in the message.
+   * This could be a fully qualified proto message reference, and that type must
+   * be imported into the protofile. If no message is identified, the Ref will
+   * be used verbatim in the output.
+   * For example:
+   *  `ref: ".google.protobuf.Timestamp"`.
+   *
+   * @generated from field: string ref = 3;
+   */
+  ref?: string;
+
+  /**
+   * The title of the schema.
+   *
+   * @generated from field: string title = 5;
+   */
+  title?: string;
+
+  /**
+   * A short description of the schema.
+   *
+   * @generated from field: string description = 6;
+   */
+  description?: string;
+
+  /**
+   * @generated from field: string default = 7;
+   */
+  default?: string;
+
+  /**
+   * @generated from field: bool read_only = 8;
+   */
+  readOnly?: boolean;
+
+  /**
+   * A free-form property to include a JSON example of this field. This is copied
+   * verbatim to the output swagger.json. Quotes must be escaped.
+   * This property is the same for 2.0 and 3.0.0 https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/3.0.0.md#schemaObject  https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#schemaObject
+   *
+   * @generated from field: string example = 9;
+   */
+  example?: string;
+
+  /**
+   * @generated from field: double multiple_of = 10;
+   */
+  multipleOf?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * Maximum represents an inclusive upper limit for a numeric instance. The
+   * value of MUST be a number,
+   *
+   * @generated from field: double maximum = 11;
+   */
+  maximum?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * @generated from field: bool exclusive_maximum = 12;
+   */
+  exclusiveMaximum?: boolean;
+
+  /**
+   * minimum represents an inclusive lower limit for a numeric instance. The
+   * value of MUST be a number,
+   *
+   * @generated from field: double minimum = 13;
+   */
+  minimum?: number | "NaN" | "Infinity" | "-Infinity";
+
+  /**
+   * @generated from field: bool exclusive_minimum = 14;
+   */
+  exclusiveMinimum?: boolean;
+
+  /**
+   * @generated from field: uint64 max_length = 15;
+   */
+  maxLength?: string;
+
+  /**
+   * @generated from field: uint64 min_length = 16;
+   */
+  minLength?: string;
+
+  /**
+   * @generated from field: string pattern = 17;
+   */
+  pattern?: string;
+
+  /**
+   * @generated from field: uint64 max_items = 20;
+   */
+  maxItems?: string;
+
+  /**
+   * @generated from field: uint64 min_items = 21;
+   */
+  minItems?: string;
+
+  /**
+   * @generated from field: bool unique_items = 22;
+   */
+  uniqueItems?: boolean;
+
+  /**
+   * @generated from field: uint64 max_properties = 24;
+   */
+  maxProperties?: string;
+
+  /**
+   * @generated from field: uint64 min_properties = 25;
+   */
+  minProperties?: string;
+
+  /**
+   * @generated from field: repeated string required = 26;
+   */
+  required?: string[];
+
+  /**
+   * Items in 'array' must be unique.
+   *
+   * @generated from field: repeated string array = 34;
+   */
+  array?: string[];
+
+  /**
+   * @generated from field: repeated grpc.gateway.protoc_gen_openapiv2.options.JSONSchema.JSONSchemaSimpleTypes type = 35;
+   */
+  type?: JSONSchema_JSONSchemaSimpleTypesJson[];
+
+  /**
+   * `Format`
+   *
+   * @generated from field: string format = 36;
+   */
+  format?: string;
+
+  /**
+   * Items in `enum` must be unique https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.5.1
+   *
+   * @generated from field: repeated string enum = 46;
+   */
+  enum?: string[];
+
+  /**
+   * Additional field level properties used when generating the OpenAPI v2 file.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.JSONSchema.FieldConfiguration field_configuration = 1001;
+   */
+  fieldConfiguration?: JSONSchema_FieldConfigurationJson;
+
+  /**
+   * Custom properties that start with "x-" such as "x-foo" used to describe
+   * extra functionality that is not covered by the standard OpenAPI Specification.
+   * See: https://swagger.io/docs/specification/2-0/swagger-extensions/
+   *
+   * @generated from field: map<string, google.protobuf.Value> extensions = 48;
+   */
+  extensions?: { [key: string]: ValueJson };
+};
+
 export type JSONSchemaValid = JSONSchema;
 
 /**
@@ -1107,7 +2039,7 @@ export type JSONSchemaValid = JSONSchema;
  */
 export const JSONSchemaSchema: GenMessage<
   JSONSchema,
-  { validType: JSONSchemaValid }
+  { jsonType: JSONSchemaJson; validType: JSONSchemaValid }
 > = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 11);
 
 /**
@@ -1129,6 +2061,24 @@ export type JSONSchema_FieldConfiguration =
     pathParamName: string;
   };
 
+/**
+ * 'FieldConfiguration' provides additional field level properties used when generating the OpenAPI v2 file.
+ * These properties are not defined by OpenAPIv2, but they are used to control the generation.
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.JSONSchema.FieldConfiguration
+ */
+export type JSONSchema_FieldConfigurationJson = {
+  /**
+   * Alternative parameter name when used as path parameter. If set, this will
+   * be used as the complete parameter name when this field is used as a path
+   * parameter. Use this to avoid having auto generated path parameter names
+   * for overlapping paths.
+   *
+   * @generated from field: string path_param_name = 47;
+   */
+  pathParamName?: string;
+};
+
 export type JSONSchema_FieldConfigurationValid = JSONSchema_FieldConfiguration;
 
 /**
@@ -1137,7 +2087,10 @@ export type JSONSchema_FieldConfigurationValid = JSONSchema_FieldConfiguration;
  */
 export const JSONSchema_FieldConfigurationSchema: GenMessage<
   JSONSchema_FieldConfiguration,
-  { validType: JSONSchema_FieldConfigurationValid }
+  {
+    jsonType: JSONSchema_FieldConfigurationJson;
+    validType: JSONSchema_FieldConfigurationValid;
+  }
 > =
   /*@__PURE__*/
   messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 11, 0);
@@ -1188,11 +2141,25 @@ export enum JSONSchema_JSONSchemaSimpleTypes {
 }
 
 /**
+ * @generated from enum grpc.gateway.protoc_gen_openapiv2.options.JSONSchema.JSONSchemaSimpleTypes
+ */
+export type JSONSchema_JSONSchemaSimpleTypesJson =
+  | "UNKNOWN"
+  | "ARRAY"
+  | "BOOLEAN"
+  | "INTEGER"
+  | "NULL"
+  | "NUMBER"
+  | "OBJECT"
+  | "STRING";
+
+/**
  * Describes the enum grpc.gateway.protoc_gen_openapiv2.options.JSONSchema.JSONSchemaSimpleTypes.
  */
-export const JSONSchema_JSONSchemaSimpleTypesSchema: GenEnum<JSONSchema_JSONSchemaSimpleTypes> =
-  /*@__PURE__*/
-  enumDesc(file_protoc_gen_openapiv2_options_openapiv2, 11, 0);
+export const JSONSchema_JSONSchemaSimpleTypesSchema: GenEnum<
+  JSONSchema_JSONSchemaSimpleTypes,
+  JSONSchema_JSONSchemaSimpleTypesJson
+> = /*@__PURE__*/ enumDesc(file_protoc_gen_openapiv2_options_openapiv2, 11, 0);
 
 /**
  * `Tag` is a representation of OpenAPI v2 specification's Tag object.
@@ -1237,15 +2204,59 @@ export type Tag = Message<"grpc.gateway.protoc_gen_openapiv2.options.Tag"> & {
   extensions: { [key: string]: Value };
 };
 
+/**
+ * `Tag` is a representation of OpenAPI v2 specification's Tag object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#tagObject
+ *
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.Tag
+ */
+export type TagJson = {
+  /**
+   * The name of the tag. Use it to allow override of the name of a
+   * global Tag object, then use that name to reference the tag throughout the
+   * OpenAPI file.
+   *
+   * @generated from field: string name = 1;
+   */
+  name?: string;
+
+  /**
+   * A short description for the tag. GFM syntax can be used for rich text
+   * representation.
+   *
+   * @generated from field: string description = 2;
+   */
+  description?: string;
+
+  /**
+   * Additional external documentation for this tag.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.ExternalDocumentation external_docs = 3;
+   */
+  externalDocs?: ExternalDocumentationJson;
+
+  /**
+   * Custom properties that start with "x-" such as "x-foo" used to describe
+   * extra functionality that is not covered by the standard OpenAPI Specification.
+   * See: https://swagger.io/docs/specification/2-0/swagger-extensions/
+   *
+   * @generated from field: map<string, google.protobuf.Value> extensions = 4;
+   */
+  extensions?: { [key: string]: ValueJson };
+};
+
 export type TagValid = Tag;
 
 /**
  * Describes the message grpc.gateway.protoc_gen_openapiv2.options.Tag.
  * Use `create(TagSchema)` to create a new message.
  */
-export const TagSchema: GenMessage<Tag, { validType: TagValid }> =
-  /*@__PURE__*/
-  messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 12);
+export const TagSchema: GenMessage<
+  Tag,
+  { jsonType: TagJson; validType: TagValid }
+> = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 12);
 
 /**
  * `SecurityDefinitions` is a representation of OpenAPI v2 specification's
@@ -1270,6 +2281,28 @@ export type SecurityDefinitions =
     security: { [key: string]: SecurityScheme };
   };
 
+/**
+ * `SecurityDefinitions` is a representation of OpenAPI v2 specification's
+ * Security Definitions object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#securityDefinitionsObject
+ *
+ * A declaration of the security schemes available to be used in the
+ * specification. This does not enforce the security schemes on the operations
+ * and only serves to provide the relevant details for each scheme.
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.SecurityDefinitions
+ */
+export type SecurityDefinitionsJson = {
+  /**
+   * A single security scheme definition, mapping a "name" to the scheme it
+   * defines.
+   *
+   * @generated from field: map<string, grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme> security = 1;
+   */
+  security?: { [key: string]: SecuritySchemeJson };
+};
+
 export type SecurityDefinitionsValid = SecurityDefinitions;
 
 /**
@@ -1278,7 +2311,7 @@ export type SecurityDefinitionsValid = SecurityDefinitions;
  */
 export const SecurityDefinitionsSchema: GenMessage<
   SecurityDefinitions,
-  { validType: SecurityDefinitionsValid }
+  { jsonType: SecurityDefinitionsJson; validType: SecurityDefinitionsValid }
 > = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 13);
 
 /**
@@ -1373,6 +2406,97 @@ export type SecurityScheme =
     extensions: { [key: string]: Value };
   };
 
+/**
+ * `SecurityScheme` is a representation of OpenAPI v2 specification's
+ * Security Scheme object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#securitySchemeObject
+ *
+ * Allows the definition of a security scheme that can be used by the
+ * operations. Supported schemes are basic authentication, an API key (either as
+ * a header or as a query parameter) and OAuth2's common flows (implicit,
+ * password, application and access code).
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme
+ */
+export type SecuritySchemeJson = {
+  /**
+   * The type of the security scheme. Valid values are "basic",
+   * "apiKey" or "oauth2".
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme.Type type = 1;
+   */
+  type?: SecurityScheme_TypeJson;
+
+  /**
+   * A short description for security scheme.
+   *
+   * @generated from field: string description = 2;
+   */
+  description?: string;
+
+  /**
+   * The name of the header or query parameter to be used.
+   * Valid for apiKey.
+   *
+   * @generated from field: string name = 3;
+   */
+  name?: string;
+
+  /**
+   * The location of the API key. Valid values are "query" or
+   * "header".
+   * Valid for apiKey.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme.In in = 4;
+   */
+  in?: SecurityScheme_InJson;
+
+  /**
+   * The flow used by the OAuth2 security scheme. Valid values are
+   * "implicit", "password", "application" or "accessCode".
+   * Valid for oauth2.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme.Flow flow = 5;
+   */
+  flow?: SecurityScheme_FlowJson;
+
+  /**
+   * The authorization URL to be used for this flow. This SHOULD be in
+   * the form of a URL.
+   * Valid for oauth2/implicit and oauth2/accessCode.
+   *
+   * @generated from field: string authorization_url = 6;
+   */
+  authorizationUrl?: string;
+
+  /**
+   * The token URL to be used for this flow. This SHOULD be in the
+   * form of a URL.
+   * Valid for oauth2/password, oauth2/application and oauth2/accessCode.
+   *
+   * @generated from field: string token_url = 7;
+   */
+  tokenUrl?: string;
+
+  /**
+   * The available scopes for the OAuth2 security scheme.
+   * Valid for oauth2.
+   *
+   * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.Scopes scopes = 8;
+   */
+  scopes?: ScopesJson;
+
+  /**
+   * Custom properties that start with "x-" such as "x-foo" used to describe
+   * extra functionality that is not covered by the standard OpenAPI Specification.
+   * See: https://swagger.io/docs/specification/2-0/swagger-extensions/
+   *
+   * @generated from field: map<string, google.protobuf.Value> extensions = 9;
+   */
+  extensions?: { [key: string]: ValueJson };
+};
+
 export type SecuritySchemeValid = SecurityScheme;
 
 /**
@@ -1381,7 +2505,7 @@ export type SecuritySchemeValid = SecurityScheme;
  */
 export const SecuritySchemeSchema: GenMessage<
   SecurityScheme,
-  { validType: SecuritySchemeValid }
+  { jsonType: SecuritySchemeJson; validType: SecuritySchemeValid }
 > = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 14);
 
 /**
@@ -1413,11 +2537,24 @@ export enum SecurityScheme_Type {
 }
 
 /**
+ * The type of the security scheme. Valid values are "basic",
+ * "apiKey" or "oauth2".
+ *
+ * @generated from enum grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme.Type
+ */
+export type SecurityScheme_TypeJson =
+  | "TYPE_INVALID"
+  | "TYPE_BASIC"
+  | "TYPE_API_KEY"
+  | "TYPE_OAUTH2";
+
+/**
  * Describes the enum grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme.Type.
  */
-export const SecurityScheme_TypeSchema: GenEnum<SecurityScheme_Type> =
-  /*@__PURE__*/
-  enumDesc(file_protoc_gen_openapiv2_options_openapiv2, 14, 0);
+export const SecurityScheme_TypeSchema: GenEnum<
+  SecurityScheme_Type,
+  SecurityScheme_TypeJson
+> = /*@__PURE__*/ enumDesc(file_protoc_gen_openapiv2_options_openapiv2, 14, 0);
 
 /**
  * The location of the API key. Valid values are "query" or "header".
@@ -1442,11 +2579,19 @@ export enum SecurityScheme_In {
 }
 
 /**
+ * The location of the API key. Valid values are "query" or "header".
+ *
+ * @generated from enum grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme.In
+ */
+export type SecurityScheme_InJson = "IN_INVALID" | "IN_QUERY" | "IN_HEADER";
+
+/**
  * Describes the enum grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme.In.
  */
-export const SecurityScheme_InSchema: GenEnum<SecurityScheme_In> =
-  /*@__PURE__*/
-  enumDesc(file_protoc_gen_openapiv2_options_openapiv2, 14, 1);
+export const SecurityScheme_InSchema: GenEnum<
+  SecurityScheme_In,
+  SecurityScheme_InJson
+> = /*@__PURE__*/ enumDesc(file_protoc_gen_openapiv2_options_openapiv2, 14, 1);
 
 /**
  * The flow used by the OAuth2 security scheme. Valid values are
@@ -1482,11 +2627,25 @@ export enum SecurityScheme_Flow {
 }
 
 /**
+ * The flow used by the OAuth2 security scheme. Valid values are
+ * "implicit", "password", "application" or "accessCode".
+ *
+ * @generated from enum grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme.Flow
+ */
+export type SecurityScheme_FlowJson =
+  | "FLOW_INVALID"
+  | "FLOW_IMPLICIT"
+  | "FLOW_PASSWORD"
+  | "FLOW_APPLICATION"
+  | "FLOW_ACCESS_CODE";
+
+/**
  * Describes the enum grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme.Flow.
  */
-export const SecurityScheme_FlowSchema: GenEnum<SecurityScheme_Flow> =
-  /*@__PURE__*/
-  enumDesc(file_protoc_gen_openapiv2_options_openapiv2, 14, 2);
+export const SecurityScheme_FlowSchema: GenEnum<
+  SecurityScheme_Flow,
+  SecurityScheme_FlowJson
+> = /*@__PURE__*/ enumDesc(file_protoc_gen_openapiv2_options_openapiv2, 14, 2);
 
 /**
  * `SecurityRequirement` is a representation of OpenAPI v2 specification's
@@ -1518,6 +2677,35 @@ export type SecurityRequirement =
     };
   };
 
+/**
+ * `SecurityRequirement` is a representation of OpenAPI v2 specification's
+ * Security Requirement object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#securityRequirementObject
+ *
+ * Lists the required security schemes to execute this operation. The object can
+ * have multiple security schemes declared in it which are all required (that
+ * is, there is a logical AND between the schemes).
+ *
+ * The name used for each property MUST correspond to a security scheme
+ * declared in the Security Definitions.
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.SecurityRequirement
+ */
+export type SecurityRequirementJson = {
+  /**
+   * Each name must correspond to a security scheme which is declared in
+   * the Security Definitions. If the security scheme is of type "oauth2",
+   * then the value is a list of scope names required for the execution.
+   * For other security scheme types, the array MUST be empty.
+   *
+   * @generated from field: map<string, grpc.gateway.protoc_gen_openapiv2.options.SecurityRequirement.SecurityRequirementValue> security_requirement = 1;
+   */
+  securityRequirement?: {
+    [key: string]: SecurityRequirement_SecurityRequirementValueJson;
+  };
+};
+
 export type SecurityRequirementValid = SecurityRequirement;
 
 /**
@@ -1526,7 +2714,7 @@ export type SecurityRequirementValid = SecurityRequirement;
  */
 export const SecurityRequirementSchema: GenMessage<
   SecurityRequirement,
-  { validType: SecurityRequirementValid }
+  { jsonType: SecurityRequirementJson; validType: SecurityRequirementValid }
 > = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 15);
 
 /**
@@ -1544,6 +2732,20 @@ export type SecurityRequirement_SecurityRequirementValue =
     scope: string[];
   };
 
+/**
+ * If the security scheme is of type "oauth2", then the value is a list of
+ * scope names required for the execution. For other security scheme types,
+ * the array MUST be empty.
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.SecurityRequirement.SecurityRequirementValue
+ */
+export type SecurityRequirement_SecurityRequirementValueJson = {
+  /**
+   * @generated from field: repeated string scope = 1;
+   */
+  scope?: string[];
+};
+
 export type SecurityRequirement_SecurityRequirementValueValid =
   SecurityRequirement_SecurityRequirementValue;
 
@@ -1553,7 +2755,10 @@ export type SecurityRequirement_SecurityRequirementValueValid =
  */
 export const SecurityRequirement_SecurityRequirementValueSchema: GenMessage<
   SecurityRequirement_SecurityRequirementValue,
-  { validType: SecurityRequirement_SecurityRequirementValueValid }
+  {
+    jsonType: SecurityRequirement_SecurityRequirementValueJson;
+    validType: SecurityRequirement_SecurityRequirementValueValid;
+  }
 > =
   /*@__PURE__*/
   messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 15, 0);
@@ -1578,15 +2783,35 @@ export type Scopes =
     scope: { [key: string]: string };
   };
 
+/**
+ * `Scopes` is a representation of OpenAPI v2 specification's Scopes object.
+ *
+ * See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#scopesObject
+ *
+ * Lists the available scopes for an OAuth2 security scheme.
+ *
+ * @generated from message grpc.gateway.protoc_gen_openapiv2.options.Scopes
+ */
+export type ScopesJson = {
+  /**
+   * Maps between a name of a scope to a short description of it (as the value
+   * of the property).
+   *
+   * @generated from field: map<string, string> scope = 1;
+   */
+  scope?: { [key: string]: string };
+};
+
 export type ScopesValid = Scopes;
 
 /**
  * Describes the message grpc.gateway.protoc_gen_openapiv2.options.Scopes.
  * Use `create(ScopesSchema)` to create a new message.
  */
-export const ScopesSchema: GenMessage<Scopes, { validType: ScopesValid }> =
-  /*@__PURE__*/
-  messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 16);
+export const ScopesSchema: GenMessage<
+  Scopes,
+  { jsonType: ScopesJson; validType: ScopesValid }
+> = /*@__PURE__*/ messageDesc(file_protoc_gen_openapiv2_options_openapiv2, 16);
 
 /**
  * Scheme describes the schemes supported by the OpenAPI Swagger
@@ -1622,8 +2847,16 @@ export enum Scheme {
 }
 
 /**
+ * Scheme describes the schemes supported by the OpenAPI Swagger
+ * and Operation objects.
+ *
+ * @generated from enum grpc.gateway.protoc_gen_openapiv2.options.Scheme
+ */
+export type SchemeJson = "UNKNOWN" | "HTTP" | "HTTPS" | "WS" | "WSS";
+
+/**
  * Describes the enum grpc.gateway.protoc_gen_openapiv2.options.Scheme.
  */
-export const SchemeSchema: GenEnum<Scheme> =
+export const SchemeSchema: GenEnum<Scheme, SchemeJson> =
   /*@__PURE__*/
   enumDesc(file_protoc_gen_openapiv2_options_openapiv2, 0);

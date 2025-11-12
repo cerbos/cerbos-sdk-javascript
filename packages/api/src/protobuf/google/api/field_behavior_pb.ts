@@ -138,9 +138,30 @@ export enum FieldBehavior {
 }
 
 /**
+ * An indicator of the behavior of a given field (for example, that a field
+ * is required in requests, or given as output but ignored as input).
+ * This **does not** change the behavior in protocol buffers itself; it only
+ * denotes the behavior and may affect how API tooling handles the field.
+ *
+ * Note: This enum **may** receive new values in the future.
+ *
+ * @generated from enum google.api.FieldBehavior
+ */
+export type FieldBehaviorJson =
+  | "FIELD_BEHAVIOR_UNSPECIFIED"
+  | "OPTIONAL"
+  | "REQUIRED"
+  | "OUTPUT_ONLY"
+  | "INPUT_ONLY"
+  | "IMMUTABLE"
+  | "UNORDERED_LIST"
+  | "NON_EMPTY_DEFAULT"
+  | "IDENTIFIER";
+
+/**
  * Describes the enum google.api.FieldBehavior.
  */
-export const FieldBehaviorSchema: GenEnum<FieldBehavior> =
+export const FieldBehaviorSchema: GenEnum<FieldBehavior, FieldBehaviorJson> =
   /*@__PURE__*/
   enumDesc(file_google_api_field_behavior, 0);
 

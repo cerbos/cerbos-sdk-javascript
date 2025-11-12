@@ -11,9 +11,9 @@ import type {
 } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import { file_buf_validate_validate } from "../../../buf/validate/validate_pb";
-import type { Effect } from "../../effect/v1/effect_pb";
+import type { Effect, EffectJson } from "../../effect/v1/effect_pb";
 import { file_cerbos_effect_v1_effect } from "../../effect/v1/effect_pb";
-import type { Value } from "@bufbuild/protobuf/wkt";
+import type { UInt64ValueJson, Value, ValueJson } from "@bufbuild/protobuf/wkt";
 import {
   file_google_protobuf_struct,
   file_google_protobuf_wrappers,
@@ -122,6 +122,72 @@ export type Policy = Message<"cerbos.policy.v1.Policy"> & {
 /**
  * @generated from message cerbos.policy.v1.Policy
  */
+export type PolicyJson = {
+  /**
+   * @generated from field: string api_version = 1;
+   */
+  apiVersion?: string;
+
+  /**
+   * @generated from field: bool disabled = 2;
+   */
+  disabled?: boolean;
+
+  /**
+   * @generated from field: string description = 3;
+   */
+  description?: string;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Metadata metadata = 4;
+   */
+  metadata?: MetadataJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.ResourcePolicy resource_policy = 5;
+   */
+  resourcePolicy?: ResourcePolicyJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.PrincipalPolicy principal_policy = 6;
+   */
+  principalPolicy?: PrincipalPolicyJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.DerivedRoles derived_roles = 7;
+   */
+  derivedRoles?: DerivedRolesJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.ExportVariables export_variables = 10;
+   */
+  exportVariables?: ExportVariablesJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.RolePolicy role_policy = 11;
+   */
+  rolePolicy?: RolePolicyJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.ExportConstants export_constants = 12;
+   */
+  exportConstants?: ExportConstantsJson;
+
+  /**
+   * @generated from field: map<string, string> variables = 8 [deprecated = true];
+   * @deprecated
+   */
+  variables?: { [key: string]: string };
+
+  /**
+   * @generated from field: string json_schema = 9 [json_name = "$schema"];
+   */
+  $schema?: string;
+};
+
+/**
+ * @generated from message cerbos.policy.v1.Policy
+ */
 export type PolicyValid = Message<"cerbos.policy.v1.Policy"> & {
   /**
    * @generated from field: string api_version = 1;
@@ -207,9 +273,10 @@ export type PolicyValid = Message<"cerbos.policy.v1.Policy"> & {
  * Describes the message cerbos.policy.v1.Policy.
  * Use `create(PolicySchema)` to create a new message.
  */
-export const PolicySchema: GenMessage<Policy, { validType: PolicyValid }> =
-  /*@__PURE__*/
-  messageDesc(file_cerbos_policy_v1_policy, 0);
+export const PolicySchema: GenMessage<
+  Policy,
+  { jsonType: PolicyJson; validType: PolicyValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 0);
 
 /**
  * @generated from message cerbos.policy.v1.SourceAttributes
@@ -221,6 +288,16 @@ export type SourceAttributes = Message<"cerbos.policy.v1.SourceAttributes"> & {
   attributes: { [key: string]: Value };
 };
 
+/**
+ * @generated from message cerbos.policy.v1.SourceAttributes
+ */
+export type SourceAttributesJson = {
+  /**
+   * @generated from field: map<string, google.protobuf.Value> attributes = 1;
+   */
+  attributes?: { [key: string]: ValueJson };
+};
+
 export type SourceAttributesValid = SourceAttributes;
 
 /**
@@ -229,7 +306,7 @@ export type SourceAttributesValid = SourceAttributes;
  */
 export const SourceAttributesSchema: GenMessage<
   SourceAttributes,
-  { validType: SourceAttributesValid }
+  { jsonType: SourceAttributesJson; validType: SourceAttributesValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 1);
 
 /**
@@ -268,6 +345,42 @@ export type Metadata = Message<"cerbos.policy.v1.Metadata"> & {
   sourceAttributes?: SourceAttributes;
 };
 
+/**
+ * @generated from message cerbos.policy.v1.Metadata
+ */
+export type MetadataJson = {
+  /**
+   * @generated from field: string source_file = 1;
+   */
+  sourceFile?: string;
+
+  /**
+   * @generated from field: map<string, string> annotations = 2;
+   */
+  annotations?: { [key: string]: string };
+
+  /**
+   * @generated from field: google.protobuf.UInt64Value hash = 3;
+   */
+  hash?: UInt64ValueJson;
+
+  /**
+   * @generated from field: string store_identifer = 4 [deprecated = true];
+   * @deprecated
+   */
+  storeIdentifer?: string;
+
+  /**
+   * @generated from field: string store_identifier = 5;
+   */
+  storeIdentifier?: string;
+
+  /**
+   * @generated from field: cerbos.policy.v1.SourceAttributes source_attributes = 6;
+   */
+  sourceAttributes?: SourceAttributesJson;
+};
+
 export type MetadataValid = Metadata;
 
 /**
@@ -276,7 +389,7 @@ export type MetadataValid = Metadata;
  */
 export const MetadataSchema: GenMessage<
   Metadata,
-  { validType: MetadataValid }
+  { jsonType: MetadataJson; validType: MetadataValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 2);
 
 /**
@@ -327,6 +440,56 @@ export type ResourcePolicy = Message<"cerbos.policy.v1.ResourcePolicy"> & {
    * @generated from field: cerbos.policy.v1.Constants constants = 9;
    */
   constants?: Constants;
+};
+
+/**
+ * @generated from message cerbos.policy.v1.ResourcePolicy
+ */
+export type ResourcePolicyJson = {
+  /**
+   * @generated from field: string resource = 1;
+   */
+  resource?: string;
+
+  /**
+   * @generated from field: string version = 2;
+   */
+  version?: string;
+
+  /**
+   * @generated from field: repeated string import_derived_roles = 3;
+   */
+  importDerivedRoles?: string[];
+
+  /**
+   * @generated from field: repeated cerbos.policy.v1.ResourceRule rules = 4;
+   */
+  rules?: ResourceRuleJson[];
+
+  /**
+   * @generated from field: string scope = 5;
+   */
+  scope?: string;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Schemas schemas = 6;
+   */
+  schemas?: SchemasJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Variables variables = 7;
+   */
+  variables?: VariablesJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.ScopePermissions scope_permissions = 8;
+   */
+  scopePermissions?: ScopePermissionsJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Constants constants = 9;
+   */
+  constants?: ConstantsJson;
 };
 
 /**
@@ -385,7 +548,7 @@ export type ResourcePolicyValid = Message<"cerbos.policy.v1.ResourcePolicy"> & {
  */
 export const ResourcePolicySchema: GenMessage<
   ResourcePolicy,
-  { validType: ResourcePolicyValid }
+  { jsonType: ResourcePolicyJson; validType: ResourcePolicyValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 3);
 
 /**
@@ -426,6 +589,46 @@ export type ResourceRule = Message<"cerbos.policy.v1.ResourceRule"> & {
    * @generated from field: cerbos.policy.v1.Output output = 7;
    */
   output?: Output;
+};
+
+/**
+ * @generated from message cerbos.policy.v1.ResourceRule
+ */
+export type ResourceRuleJson = {
+  /**
+   * @generated from field: repeated string actions = 1;
+   */
+  actions?: string[];
+
+  /**
+   * @generated from field: repeated string derived_roles = 2;
+   */
+  derivedRoles?: string[];
+
+  /**
+   * @generated from field: repeated string roles = 3;
+   */
+  roles?: string[];
+
+  /**
+   * @generated from field: cerbos.policy.v1.Condition condition = 4;
+   */
+  condition?: ConditionJson;
+
+  /**
+   * @generated from field: cerbos.effect.v1.Effect effect = 5;
+   */
+  effect?: EffectJson;
+
+  /**
+   * @generated from field: string name = 6;
+   */
+  name?: string;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Output output = 7;
+   */
+  output?: OutputJson;
 };
 
 /**
@@ -474,7 +677,7 @@ export type ResourceRuleValid = Message<"cerbos.policy.v1.ResourceRule"> & {
  */
 export const ResourceRuleSchema: GenMessage<
   ResourceRule,
-  { validType: ResourceRuleValid }
+  { jsonType: ResourceRuleJson; validType: ResourceRuleValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 4);
 
 /**
@@ -516,6 +719,39 @@ export type RolePolicy = Message<"cerbos.policy.v1.RolePolicy"> & {
    * @deprecated
    */
   scopePermissions: ScopePermissions;
+};
+
+/**
+ * @generated from message cerbos.policy.v1.RolePolicy
+ */
+export type RolePolicyJson = {
+  /**
+   * @generated from field: string role = 1;
+   */
+  role?: string;
+
+  /**
+   * @generated from field: repeated string parent_roles = 5;
+   */
+  parentRoles?: string[];
+
+  /**
+   * @generated from field: string scope = 2;
+   */
+  scope?: string;
+
+  /**
+   * @generated from field: repeated cerbos.policy.v1.RoleRule rules = 3;
+   */
+  rules?: RoleRuleJson[];
+
+  /**
+   * Deprecated: no-op.
+   *
+   * @generated from field: cerbos.policy.v1.ScopePermissions scope_permissions = 4 [deprecated = true];
+   * @deprecated
+   */
+  scopePermissions?: ScopePermissionsJson;
 };
 
 /**
@@ -565,7 +801,7 @@ export type RolePolicyValid = Message<"cerbos.policy.v1.RolePolicy"> & {
  */
 export const RolePolicySchema: GenMessage<
   RolePolicy,
-  { validType: RolePolicyValid }
+  { jsonType: RolePolicyJson; validType: RolePolicyValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 5);
 
 /**
@@ -586,6 +822,26 @@ export type RoleRule = Message<"cerbos.policy.v1.RoleRule"> & {
    * @generated from field: cerbos.policy.v1.Condition condition = 3;
    */
   condition?: Condition;
+};
+
+/**
+ * @generated from message cerbos.policy.v1.RoleRule
+ */
+export type RoleRuleJson = {
+  /**
+   * @generated from field: string resource = 1;
+   */
+  resource?: string;
+
+  /**
+   * @generated from field: repeated string allow_actions = 2;
+   */
+  allowActions?: string[];
+
+  /**
+   * @generated from field: cerbos.policy.v1.Condition condition = 3;
+   */
+  condition?: ConditionJson;
 };
 
 /**
@@ -614,7 +870,7 @@ export type RoleRuleValid = Message<"cerbos.policy.v1.RoleRule"> & {
  */
 export const RoleRuleSchema: GenMessage<
   RoleRule,
-  { validType: RoleRuleValid }
+  { jsonType: RoleRuleJson; validType: RoleRuleValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 6);
 
 /**
@@ -655,6 +911,46 @@ export type PrincipalPolicy = Message<"cerbos.policy.v1.PrincipalPolicy"> & {
    * @generated from field: cerbos.policy.v1.Constants constants = 7;
    */
   constants?: Constants;
+};
+
+/**
+ * @generated from message cerbos.policy.v1.PrincipalPolicy
+ */
+export type PrincipalPolicyJson = {
+  /**
+   * @generated from field: string principal = 1;
+   */
+  principal?: string;
+
+  /**
+   * @generated from field: string version = 2;
+   */
+  version?: string;
+
+  /**
+   * @generated from field: repeated cerbos.policy.v1.PrincipalRule rules = 3;
+   */
+  rules?: PrincipalRuleJson[];
+
+  /**
+   * @generated from field: string scope = 4;
+   */
+  scope?: string;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Variables variables = 5;
+   */
+  variables?: VariablesJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.ScopePermissions scope_permissions = 6;
+   */
+  scopePermissions?: ScopePermissionsJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Constants constants = 7;
+   */
+  constants?: ConstantsJson;
 };
 
 /**
@@ -704,7 +1000,7 @@ export type PrincipalPolicyValid =
  */
 export const PrincipalPolicySchema: GenMessage<
   PrincipalPolicy,
-  { validType: PrincipalPolicyValid }
+  { jsonType: PrincipalPolicyJson; validType: PrincipalPolicyValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 7);
 
 /**
@@ -720,6 +1016,21 @@ export type PrincipalRule = Message<"cerbos.policy.v1.PrincipalRule"> & {
    * @generated from field: repeated cerbos.policy.v1.PrincipalRule.Action actions = 2;
    */
   actions: PrincipalRule_Action[];
+};
+
+/**
+ * @generated from message cerbos.policy.v1.PrincipalRule
+ */
+export type PrincipalRuleJson = {
+  /**
+   * @generated from field: string resource = 1;
+   */
+  resource?: string;
+
+  /**
+   * @generated from field: repeated cerbos.policy.v1.PrincipalRule.Action actions = 2;
+   */
+  actions?: PrincipalRule_ActionJson[];
 };
 
 /**
@@ -743,7 +1054,7 @@ export type PrincipalRuleValid = Message<"cerbos.policy.v1.PrincipalRule"> & {
  */
 export const PrincipalRuleSchema: GenMessage<
   PrincipalRule,
-  { validType: PrincipalRuleValid }
+  { jsonType: PrincipalRuleJson; validType: PrincipalRuleValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 8);
 
 /**
@@ -776,6 +1087,36 @@ export type PrincipalRule_Action =
      */
     output?: Output;
   };
+
+/**
+ * @generated from message cerbos.policy.v1.PrincipalRule.Action
+ */
+export type PrincipalRule_ActionJson = {
+  /**
+   * @generated from field: string action = 1;
+   */
+  action?: string;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Condition condition = 2;
+   */
+  condition?: ConditionJson;
+
+  /**
+   * @generated from field: cerbos.effect.v1.Effect effect = 3;
+   */
+  effect?: EffectJson;
+
+  /**
+   * @generated from field: string name = 4;
+   */
+  name?: string;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Output output = 5;
+   */
+  output?: OutputJson;
+};
 
 /**
  * @generated from message cerbos.policy.v1.PrincipalRule.Action
@@ -814,7 +1155,7 @@ export type PrincipalRule_ActionValid =
  */
 export const PrincipalRule_ActionSchema: GenMessage<
   PrincipalRule_Action,
-  { validType: PrincipalRule_ActionValid }
+  { jsonType: PrincipalRule_ActionJson; validType: PrincipalRule_ActionValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 8, 0);
 
 /**
@@ -840,6 +1181,31 @@ export type DerivedRoles = Message<"cerbos.policy.v1.DerivedRoles"> & {
    * @generated from field: cerbos.policy.v1.Constants constants = 4;
    */
   constants?: Constants;
+};
+
+/**
+ * @generated from message cerbos.policy.v1.DerivedRoles
+ */
+export type DerivedRolesJson = {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name?: string;
+
+  /**
+   * @generated from field: repeated cerbos.policy.v1.RoleDef definitions = 2;
+   */
+  definitions?: RoleDefJson[];
+
+  /**
+   * @generated from field: cerbos.policy.v1.Variables variables = 3;
+   */
+  variables?: VariablesJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Constants constants = 4;
+   */
+  constants?: ConstantsJson;
 };
 
 /**
@@ -873,7 +1239,7 @@ export type DerivedRolesValid = Message<"cerbos.policy.v1.DerivedRoles"> & {
  */
 export const DerivedRolesSchema: GenMessage<
   DerivedRoles,
-  { validType: DerivedRolesValid }
+  { jsonType: DerivedRolesJson; validType: DerivedRolesValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 9);
 
 /**
@@ -894,6 +1260,26 @@ export type RoleDef = Message<"cerbos.policy.v1.RoleDef"> & {
    * @generated from field: cerbos.policy.v1.Condition condition = 3;
    */
   condition?: Condition;
+};
+
+/**
+ * @generated from message cerbos.policy.v1.RoleDef
+ */
+export type RoleDefJson = {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name?: string;
+
+  /**
+   * @generated from field: repeated string parent_roles = 2;
+   */
+  parentRoles?: string[];
+
+  /**
+   * @generated from field: cerbos.policy.v1.Condition condition = 3;
+   */
+  condition?: ConditionJson;
 };
 
 /**
@@ -920,9 +1306,10 @@ export type RoleDefValid = Message<"cerbos.policy.v1.RoleDef"> & {
  * Describes the message cerbos.policy.v1.RoleDef.
  * Use `create(RoleDefSchema)` to create a new message.
  */
-export const RoleDefSchema: GenMessage<RoleDef, { validType: RoleDefValid }> =
-  /*@__PURE__*/
-  messageDesc(file_cerbos_policy_v1_policy, 10);
+export const RoleDefSchema: GenMessage<
+  RoleDef,
+  { jsonType: RoleDefJson; validType: RoleDefValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 10);
 
 /**
  * @generated from message cerbos.policy.v1.ExportConstants
@@ -937,6 +1324,21 @@ export type ExportConstants = Message<"cerbos.policy.v1.ExportConstants"> & {
    * @generated from field: map<string, google.protobuf.Value> definitions = 2;
    */
   definitions: { [key: string]: Value };
+};
+
+/**
+ * @generated from message cerbos.policy.v1.ExportConstants
+ */
+export type ExportConstantsJson = {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name?: string;
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> definitions = 2;
+   */
+  definitions?: { [key: string]: ValueJson };
 };
 
 /**
@@ -961,7 +1363,7 @@ export type ExportConstantsValid =
  */
 export const ExportConstantsSchema: GenMessage<
   ExportConstants,
-  { validType: ExportConstantsValid }
+  { jsonType: ExportConstantsJson; validType: ExportConstantsValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 11);
 
 /**
@@ -979,6 +1381,21 @@ export type Constants = Message<"cerbos.policy.v1.Constants"> & {
   local: { [key: string]: Value };
 };
 
+/**
+ * @generated from message cerbos.policy.v1.Constants
+ */
+export type ConstantsJson = {
+  /**
+   * @generated from field: repeated string import = 1;
+   */
+  import?: string[];
+
+  /**
+   * @generated from field: map<string, google.protobuf.Value> local = 2;
+   */
+  local?: { [key: string]: ValueJson };
+};
+
 export type ConstantsValid = Constants;
 
 /**
@@ -987,7 +1404,7 @@ export type ConstantsValid = Constants;
  */
 export const ConstantsSchema: GenMessage<
   Constants,
-  { validType: ConstantsValid }
+  { jsonType: ConstantsJson; validType: ConstantsValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 12);
 
 /**
@@ -1003,6 +1420,21 @@ export type ExportVariables = Message<"cerbos.policy.v1.ExportVariables"> & {
    * @generated from field: map<string, string> definitions = 2;
    */
   definitions: { [key: string]: string };
+};
+
+/**
+ * @generated from message cerbos.policy.v1.ExportVariables
+ */
+export type ExportVariablesJson = {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name?: string;
+
+  /**
+   * @generated from field: map<string, string> definitions = 2;
+   */
+  definitions?: { [key: string]: string };
 };
 
 /**
@@ -1027,7 +1459,7 @@ export type ExportVariablesValid =
  */
 export const ExportVariablesSchema: GenMessage<
   ExportVariables,
-  { validType: ExportVariablesValid }
+  { jsonType: ExportVariablesJson; validType: ExportVariablesValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 13);
 
 /**
@@ -1045,6 +1477,21 @@ export type Variables = Message<"cerbos.policy.v1.Variables"> & {
   local: { [key: string]: string };
 };
 
+/**
+ * @generated from message cerbos.policy.v1.Variables
+ */
+export type VariablesJson = {
+  /**
+   * @generated from field: repeated string import = 1;
+   */
+  import?: string[];
+
+  /**
+   * @generated from field: map<string, string> local = 2;
+   */
+  local?: { [key: string]: string };
+};
+
 export type VariablesValid = Variables;
 
 /**
@@ -1053,7 +1500,7 @@ export type VariablesValid = Variables;
  */
 export const VariablesSchema: GenMessage<
   Variables,
-  { validType: VariablesValid }
+  { jsonType: VariablesJson; validType: VariablesValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 14);
 
 /**
@@ -1079,6 +1526,21 @@ export type Condition = Message<"cerbos.policy.v1.Condition"> & {
         case: "script";
       }
     | { case: undefined; value?: undefined };
+};
+
+/**
+ * @generated from message cerbos.policy.v1.Condition
+ */
+export type ConditionJson = {
+  /**
+   * @generated from field: cerbos.policy.v1.Match match = 1;
+   */
+  match?: MatchJson;
+
+  /**
+   * @generated from field: string script = 2;
+   */
+  script?: string;
 };
 
 /**
@@ -1112,7 +1574,7 @@ export type ConditionValid = Message<"cerbos.policy.v1.Condition"> & {
  */
 export const ConditionSchema: GenMessage<
   Condition,
-  { validType: ConditionValid }
+  { jsonType: ConditionJson; validType: ConditionValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 15);
 
 /**
@@ -1152,6 +1614,31 @@ export type Match = Message<"cerbos.policy.v1.Match"> & {
         case: "expr";
       }
     | { case: undefined; value?: undefined };
+};
+
+/**
+ * @generated from message cerbos.policy.v1.Match
+ */
+export type MatchJson = {
+  /**
+   * @generated from field: cerbos.policy.v1.Match.ExprList all = 1;
+   */
+  all?: Match_ExprListJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Match.ExprList any = 2;
+   */
+  any?: Match_ExprListJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Match.ExprList none = 3;
+   */
+  none?: Match_ExprListJson;
+
+  /**
+   * @generated from field: string expr = 4;
+   */
+  expr?: string;
 };
 
 /**
@@ -1197,9 +1684,10 @@ export type MatchValid = Message<"cerbos.policy.v1.Match"> & {
  * Describes the message cerbos.policy.v1.Match.
  * Use `create(MatchSchema)` to create a new message.
  */
-export const MatchSchema: GenMessage<Match, { validType: MatchValid }> =
-  /*@__PURE__*/
-  messageDesc(file_cerbos_policy_v1_policy, 16);
+export const MatchSchema: GenMessage<
+  Match,
+  { jsonType: MatchJson; validType: MatchValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 16);
 
 /**
  * @generated from message cerbos.policy.v1.Match.ExprList
@@ -1209,6 +1697,16 @@ export type Match_ExprList = Message<"cerbos.policy.v1.Match.ExprList"> & {
    * @generated from field: repeated cerbos.policy.v1.Match of = 1;
    */
   of: Match[];
+};
+
+/**
+ * @generated from message cerbos.policy.v1.Match.ExprList
+ */
+export type Match_ExprListJson = {
+  /**
+   * @generated from field: repeated cerbos.policy.v1.Match of = 1;
+   */
+  of?: MatchJson[];
 };
 
 /**
@@ -1227,7 +1725,7 @@ export type Match_ExprListValid = Message<"cerbos.policy.v1.Match.ExprList"> & {
  */
 export const Match_ExprListSchema: GenMessage<
   Match_ExprList,
-  { validType: Match_ExprListValid }
+  { jsonType: Match_ExprListJson; validType: Match_ExprListValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 16, 0);
 
 /**
@@ -1246,15 +1744,32 @@ export type Output = Message<"cerbos.policy.v1.Output"> & {
   when?: Output_When;
 };
 
+/**
+ * @generated from message cerbos.policy.v1.Output
+ */
+export type OutputJson = {
+  /**
+   * @generated from field: string expr = 1 [deprecated = true];
+   * @deprecated
+   */
+  expr?: string;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Output.When when = 2;
+   */
+  when?: Output_WhenJson;
+};
+
 export type OutputValid = Output;
 
 /**
  * Describes the message cerbos.policy.v1.Output.
  * Use `create(OutputSchema)` to create a new message.
  */
-export const OutputSchema: GenMessage<Output, { validType: OutputValid }> =
-  /*@__PURE__*/
-  messageDesc(file_cerbos_policy_v1_policy, 17);
+export const OutputSchema: GenMessage<
+  Output,
+  { jsonType: OutputJson; validType: OutputValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 17);
 
 /**
  * @generated from message cerbos.policy.v1.Output.When
@@ -1271,6 +1786,21 @@ export type Output_When = Message<"cerbos.policy.v1.Output.When"> & {
   conditionNotMet: string;
 };
 
+/**
+ * @generated from message cerbos.policy.v1.Output.When
+ */
+export type Output_WhenJson = {
+  /**
+   * @generated from field: string rule_activated = 1;
+   */
+  ruleActivated?: string;
+
+  /**
+   * @generated from field: string condition_not_met = 2;
+   */
+  conditionNotMet?: string;
+};
+
 export type Output_WhenValid = Output_When;
 
 /**
@@ -1279,7 +1809,7 @@ export type Output_WhenValid = Output_When;
  */
 export const Output_WhenSchema: GenMessage<
   Output_When,
-  { validType: Output_WhenValid }
+  { jsonType: Output_WhenJson; validType: Output_WhenValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 17, 0);
 
 /**
@@ -1295,6 +1825,21 @@ export type Schemas = Message<"cerbos.policy.v1.Schemas"> & {
    * @generated from field: cerbos.policy.v1.Schemas.Schema resource_schema = 2;
    */
   resourceSchema?: Schemas_Schema;
+};
+
+/**
+ * @generated from message cerbos.policy.v1.Schemas
+ */
+export type SchemasJson = {
+  /**
+   * @generated from field: cerbos.policy.v1.Schemas.Schema principal_schema = 1;
+   */
+  principalSchema?: Schemas_SchemaJson;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Schemas.Schema resource_schema = 2;
+   */
+  resourceSchema?: Schemas_SchemaJson;
 };
 
 /**
@@ -1316,9 +1861,10 @@ export type SchemasValid = Message<"cerbos.policy.v1.Schemas"> & {
  * Describes the message cerbos.policy.v1.Schemas.
  * Use `create(SchemasSchema)` to create a new message.
  */
-export const SchemasSchema: GenMessage<Schemas, { validType: SchemasValid }> =
-  /*@__PURE__*/
-  messageDesc(file_cerbos_policy_v1_policy, 18);
+export const SchemasSchema: GenMessage<
+  Schemas,
+  { jsonType: SchemasJson; validType: SchemasValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 18);
 
 /**
  * @generated from message cerbos.policy.v1.Schemas.IgnoreWhen
@@ -1330,6 +1876,16 @@ export type Schemas_IgnoreWhen =
      */
     actions: string[];
   };
+
+/**
+ * @generated from message cerbos.policy.v1.Schemas.IgnoreWhen
+ */
+export type Schemas_IgnoreWhenJson = {
+  /**
+   * @generated from field: repeated string actions = 1;
+   */
+  actions?: string[];
+};
 
 /**
  * @generated from message cerbos.policy.v1.Schemas.IgnoreWhen
@@ -1348,7 +1904,7 @@ export type Schemas_IgnoreWhenValid =
  */
 export const Schemas_IgnoreWhenSchema: GenMessage<
   Schemas_IgnoreWhen,
-  { validType: Schemas_IgnoreWhenValid }
+  { jsonType: Schemas_IgnoreWhenJson; validType: Schemas_IgnoreWhenValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 18, 0);
 
 /**
@@ -1364,6 +1920,21 @@ export type Schemas_Schema = Message<"cerbos.policy.v1.Schemas.Schema"> & {
    * @generated from field: cerbos.policy.v1.Schemas.IgnoreWhen ignore_when = 2;
    */
   ignoreWhen?: Schemas_IgnoreWhen;
+};
+
+/**
+ * @generated from message cerbos.policy.v1.Schemas.Schema
+ */
+export type Schemas_SchemaJson = {
+  /**
+   * @generated from field: string ref = 1;
+   */
+  ref?: string;
+
+  /**
+   * @generated from field: cerbos.policy.v1.Schemas.IgnoreWhen ignore_when = 2;
+   */
+  ignoreWhen?: Schemas_IgnoreWhenJson;
 };
 
 /**
@@ -1387,7 +1958,7 @@ export type Schemas_SchemaValid = Message<"cerbos.policy.v1.Schemas.Schema"> & {
  */
 export const Schemas_SchemaSchema: GenMessage<
   Schemas_Schema,
-  { validType: Schemas_SchemaValid }
+  { jsonType: Schemas_SchemaJson; validType: Schemas_SchemaValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_policy_v1_policy, 18, 1);
 
 /**
@@ -1411,8 +1982,17 @@ export enum ScopePermissions {
 }
 
 /**
+ * @generated from enum cerbos.policy.v1.ScopePermissions
+ */
+export type ScopePermissionsJson =
+  | "SCOPE_PERMISSIONS_UNSPECIFIED"
+  | "SCOPE_PERMISSIONS_OVERRIDE_PARENT"
+  | "SCOPE_PERMISSIONS_REQUIRE_PARENTAL_CONSENT_FOR_ALLOWS";
+
+/**
  * Describes the enum cerbos.policy.v1.ScopePermissions.
  */
-export const ScopePermissionsSchema: GenEnum<ScopePermissions> =
-  /*@__PURE__*/
-  enumDesc(file_cerbos_policy_v1_policy, 0);
+export const ScopePermissionsSchema: GenEnum<
+  ScopePermissions,
+  ScopePermissionsJson
+> = /*@__PURE__*/ enumDesc(file_cerbos_policy_v1_policy, 0);
