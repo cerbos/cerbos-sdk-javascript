@@ -41,6 +41,17 @@ Client library for interacting with embedded Cerbos policy decision points gener
 </td></tr>
 <tr><td>
 
+[@cerbos/embedded-client](./embedded-client.md)
+
+
+</td><td>
+
+Client library for interacting with embedded Cerbos policy decision points from server-side Node.js and browser-based applications.
+
+
+</td></tr>
+<tr><td>
+
 [@cerbos/files](./files.md)
 
 

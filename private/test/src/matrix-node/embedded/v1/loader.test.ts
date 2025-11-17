@@ -17,11 +17,11 @@ import {
 import type { BundleMetadata, Options, Source } from "@cerbos/embedded";
 import { AutoUpdatingLoader, LoadError, Loader } from "@cerbos/embedded";
 
-import type { EmbeddedBundle } from "../../helpers";
+import type { EmbeddedBundle } from "../../../helpers";
 import {
   oldEmbeddedBundle as first,
   newEmbeddedBundle as second,
-} from "../../helpers";
+} from "../../../helpers";
 
 describe("loaders", () => {
   const server = new DummyServer();

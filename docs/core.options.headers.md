@@ -9,7 +9,7 @@ Headers to add to every request to the policy decision point.
 **Signature:**
 
 ```typescript
-headers?: HeadersInit | (() => HeadersInit | Promise<HeadersInit>) | undefined;
+headers?: HeadersInit | (() => Awaitable<HeadersInit>) | undefined;
 ```
 
 ## Remarks

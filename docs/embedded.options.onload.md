@@ -9,5 +9,5 @@ A callback to invoke when the embedded policy decision point bundle has been loa
 **Signature:**
 
 ```typescript
-onLoad?: ((metadata: BundleMetadata) => void | Promise<void>) | undefined;
+onLoad?: ((metadata: BundleMetadata) => Awaitable<void>) | undefined;
 ```
