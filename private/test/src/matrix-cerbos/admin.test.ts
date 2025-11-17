@@ -41,7 +41,7 @@ import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
 
 import {
-  describeIfCerbosVersionIsAtLeast,
+  describeIfVersionIsAtLeast,
   grpcUserAgent,
   httpUserAgent,
   retry,
@@ -50,9 +50,9 @@ import type { CerbosService, Ports } from "../servers";
 import {
   adminCredentials,
   cerbosVersion,
-  cerbosVersionIsAtLeast,
   ports as serverPorts,
   tls,
+  versionIsAtLeast,
 } from "../servers";
 
 const policiesDirectory = resolve(__dirname, "../../servers/policies");
@@ -105,7 +105,7 @@ describe("Client", () => {
       });
 
       // Prior to 0.33.0, the minimum flushInterval for audit logs was 5s, which makes this painfully slow.
-      describeIfCerbosVersionIsAtLeast("0.33.0")("audit logs", () => {
+      describeIfVersionIsAtLeast("0.33.0", cerbosVersion)("audit logs", () => {
         const headers: HeadersInit = {
           Foo: "bar",
           "X-Forwarded-For": "1.1.1.1, 2.2.2.2, 3.3.3.3",
@@ -151,10 +151,12 @@ describe("Client", () => {
           userAgent: expectedUserAgent,
         };
 
-        const expectedPolicySource: PolicySource | undefined =
-          cerbosVersionIsAtLeast("0.46.0")
-            ? { kind: "disk", directory: "/policies" }
-            : undefined;
+        const expectedPolicySource: PolicySource | undefined = versionIsAtLeast(
+          "0.46.0",
+          cerbosVersion,
+        )
+          ? { kind: "disk", directory: "/policies" }
+          : undefined;
 
         type WithTimestampMatcher<T> = Omit<T, "timestamp"> & {
           timestamp: ReturnType<typeof expect.any>;
@@ -693,14 +695,14 @@ describe("Client", () => {
             },
           });
 
-          if (cerbosVersionIsAtLeast("0.25.0")) {
+          if (versionIsAtLeast("0.25.0", cerbosVersion)) {
             const disabled = await mutable.disablePolicy(id);
             expect(disabled).toBe(true);
 
             const { ids: remainingIds } = await mutable.listPolicies();
             expect(remainingIds).not.toContain(id);
 
-            if (cerbosVersionIsAtLeast("0.26.0")) {
+            if (versionIsAtLeast("0.26.0", cerbosVersion)) {
               const { ids: disabledIds } = await mutable.listPolicies({
                 includeDisabled: true,
               });
@@ -769,26 +771,29 @@ describe("Client", () => {
           expect(roundTrippedSchema?.definition.toObject()).toEqual(definition);
 
           const deleted = await mutable.deleteSchema(id);
-          expect(deleted).toBe(cerbosVersionIsAtLeast("0.25.0"));
+          expect(deleted).toBe(versionIsAtLeast("0.25.0", cerbosVersion));
 
           const { ids: remainingIds } = await mutable.listSchemas();
           expect(remainingIds).not.toContain(id);
         });
       });
 
-      describeIfCerbosVersionIsAtLeast("0.35.0")("inspectPolicies", () => {
-        it("returns policy details", async () => {
-          const { policies } = await reloadable.inspectPolicies();
+      describeIfVersionIsAtLeast("0.35.0", cerbosVersion)(
+        "inspectPolicies",
+        () => {
+          it("returns policy details", async () => {
+            const { policies } = await reloadable.inspectPolicies();
 
-          if (cerbosVersion === "0.37.0") {
-            for (const policy of Object.values(policies)) {
-              policy.variables.sort((a, b) => a.name.localeCompare(b.name));
+            if (cerbosVersion === "0.37.0") {
+              for (const policy of Object.values(policies)) {
+                policy.variables.sort((a, b) => a.name.localeCompare(b.name));
+              }
             }
-          }
 
-          expect(policies).toEqual(expectedInspectedPolicies());
-        });
-      });
+            expect(policies).toEqual(expectedInspectedPolicies());
+          });
+        },
+      );
 
       describe("reloadStore", () => {
         it("reloads the store", async () => {
@@ -802,7 +807,7 @@ describe("Client", () => {
 });
 
 function expectedInspectedPolicies(): InspectPoliciesResponse["policies"] {
-  if (cerbosVersionIsAtLeast("0.40.0")) {
+  if (versionIsAtLeast("0.40.0", cerbosVersion)) {
     return {
       "derived_roles.owner": {
         id: "owner.yaml",
@@ -864,7 +869,7 @@ function expectedInspectedPolicies(): InspectPoliciesResponse["policies"] {
     };
   }
 
-  if (cerbosVersionIsAtLeast("0.38.0")) {
+  if (versionIsAtLeast("0.38.0", cerbosVersion)) {
     return {
       "derived_roles.owner": {
         id: "owner.yaml",
@@ -925,7 +930,7 @@ function expectedInspectedPolicies(): InspectPoliciesResponse["policies"] {
     };
   }
 
-  if (cerbosVersionIsAtLeast("0.37.0")) {
+  if (versionIsAtLeast("0.37.0", cerbosVersion)) {
     return {
       "derived_roles.owner": {
         id: "owner.yaml",

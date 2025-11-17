@@ -9,5 +9,7 @@ WebAssembly binary code of an embedded policy decision point bundle, or a URL or
 **Signature:**
 
 ```typescript
-export type Source = string | URL | ArrayBufferView<ArrayBuffer> | ArrayBuffer | Response | WebAssembly.Module | Promise<ArrayBufferView<ArrayBuffer> | ArrayBuffer | Response | WebAssembly.Module>;
+export type Source = string | URL | Awaitable<ArrayBufferView<ArrayBuffer>> | Awaitable<ArrayBuffer> | Awaitable<Response> | Awaitable<WebAssembly.Module>;
 ```
+**References:** [Awaitable](./core.awaitable.md)
+

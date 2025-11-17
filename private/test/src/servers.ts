@@ -13,8 +13,8 @@ const execFile = promisify(execFileCallback);
 
 export const cerbosVersion = process.env["CERBOS_VERSION"] ?? "0.16.0";
 
-export function cerbosVersionIsAtLeast(version: string): boolean {
-  return semverGte(cerbosVersion, `${version}-prerelease`);
+export function versionIsAtLeast(want: string, have: string): boolean {
+  return semverGte(have, `${want}-prerelease`);
 }
 
 export interface CerbosPorts {

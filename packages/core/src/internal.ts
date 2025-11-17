@@ -1,15 +1,18 @@
 import type { DescMethod } from "@bufbuild/protobuf";
 
 export {
+  auditTrailFromProtobuf,
   checkInputFromProtobuf,
   checkOutputFromProtobuf,
+  planResourcesInputFromProtobuf,
+  planResourcesOutputFromProtobuf,
   policyFromProtobuf,
   requireField,
   translateEnum,
   unexpected,
   valuesFromProtobuf,
 } from "./convert/fromProtobuf";
-export { policyToProtobuf } from "./convert/toProtobuf";
+export { policyToProtobuf, valuesToProtobuf } from "./convert/toProtobuf";
 export * from "./transport";
 
 /** @internal */
@@ -30,4 +33,16 @@ export function setErrorNameAndStack(error: Error): void {
   if ("captureStackTrace" in Error) {
     Error.captureStackTrace(error, error.constructor);
   }
+}
+
+/** @internal */
+export function userAgent(
+  customUserAgent: string | undefined,
+  defaultUserAgent: string,
+): string {
+  if (!customUserAgent) {
+    return defaultUserAgent;
+  }
+
+  return `${customUserAgent} ${defaultUserAgent}`;
 }

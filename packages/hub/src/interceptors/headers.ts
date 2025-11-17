@@ -1,6 +1,7 @@
 import type { Interceptor } from "@connectrpc/connect";
 
 import type { Options } from "@cerbos/core";
+import { userAgent } from "@cerbos/core/~internal";
 
 import { createInterceptor } from "./interceptor";
 
@@ -10,7 +11,7 @@ const defaultUserAgent = `cerbos-sdk-javascript-hub/${version}`;
 
 export function createHeadersInterceptor({
   headers: init,
-  userAgent,
+  userAgent: customUserAgent,
 }: Pick<Options, "headers" | "userAgent">): Interceptor {
   return createInterceptor(async (request, next) => {
     const headers = new Headers(
@@ -25,7 +26,7 @@ export function createHeadersInterceptor({
 
     request.header.set(
       "User-Agent",
-      `${userAgent ? `${userAgent} ` : ""}${defaultUserAgent}`,
+      userAgent(customUserAgent, defaultUserAgent),
     );
 
     return await next(request);

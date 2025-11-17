@@ -147,7 +147,9 @@ function metadata(headers: Headers): Record<string, string[]> {
   const metadata: Record<string, string[]> = {};
 
   for (const [name, value] of headers) {
-    (metadata[name] ??= []).push(value);
+    if (name !== "user-agent") {
+      (metadata[name] ??= []).push(value);
+    }
   }
 
   return metadata;

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Internal exports to support new embedded client library ([#1289](https://github.com/cerbos/cerbos-sdk-javascript/pull/1289))
+
 ### Changed
 
 - Migrate to [@connectrpc/validate] ([#1294](https://github.com/cerbos/cerbos-sdk-javascript/pull/1294))

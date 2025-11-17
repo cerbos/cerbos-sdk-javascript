@@ -55,6 +55,7 @@ import type {
   AddOrUpdatePoliciesRequest,
   AddOrUpdateSchemasRequest,
   AuxData,
+  Awaitable,
   CheckResourceRequest,
   CheckResourcesRequest,
   CheckResourcesResponse,
@@ -123,10 +124,7 @@ export interface Options {
    *
    * @defaultValue `undefined`
    */
-  headers?:
-    | HeadersInit
-    | (() => HeadersInit | Promise<HeadersInit>)
-    | undefined;
+  headers?: HeadersInit | (() => Awaitable<HeadersInit>) | undefined;
 
   /**
    * Action to take when input fails schema validation.
