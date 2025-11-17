@@ -863,7 +863,8 @@ export function reloadStoreRequestToProtobuf({
   };
 }
 
-function valuesToProtobuf(
+/** @internal */
+export function valuesToProtobuf(
   values: Record<string, Value>,
 ): Record<string, ValueProtobuf> {
   return Object.fromEntries(

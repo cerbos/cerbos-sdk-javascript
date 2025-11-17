@@ -6,86 +6,89 @@ import { beforeAll, beforeEach, expect, it } from "vitest";
 
 import { Compression, GRPC } from "@cerbos/grpc";
 
-import { describeIfCerbosVersionIsAtLeast } from "../helpers";
-import { ports as serverPorts } from "../servers";
+import { describeIfVersionIsAtLeast } from "../helpers";
+import { cerbosVersion, ports as serverPorts } from "../servers";
 
-describeIfCerbosVersionIsAtLeast("0.19.0")("gRPC message compression", () => {
-  let port: number;
+describeIfVersionIsAtLeast("0.19.0", cerbosVersion)(
+  "gRPC message compression",
+  () => {
+    let port: number;
 
-  const encoding = {
-    request: [] as (string | string[] | undefined)[],
-    response: [] as (string | string[] | undefined)[],
-  };
+    const encoding = {
+      request: [] as (string | string[] | undefined)[],
+      response: [] as (string | string[] | undefined)[],
+    };
 
-  beforeAll(async () => {
-    const ports = await serverPorts();
-    const proxyClient = connect(`http://localhost:${ports.plaintext.grpc}`);
-    const proxyServer = createServer();
+    beforeAll(async () => {
+      const ports = await serverPorts();
+      const proxyClient = connect(`http://localhost:${ports.plaintext.grpc}`);
+      const proxyServer = createServer();
 
-    proxyServer.on("stream", (incoming, requestHeaders) => {
-      encoding.request.push(requestHeaders["grpc-encoding"]);
+      proxyServer.on("stream", (incoming, requestHeaders) => {
+        encoding.request.push(requestHeaders["grpc-encoding"]);
 
-      const responseTrailers = Promise.withResolvers<OutgoingHttpHeaders>();
+        const responseTrailers = Promise.withResolvers<OutgoingHttpHeaders>();
 
-      incoming.on("wantTrailers", () => {
-        void responseTrailers.promise.then((trailers) => {
-          incoming.sendTrailers(trailers);
+        incoming.on("wantTrailers", () => {
+          void responseTrailers.promise.then((trailers) => {
+            incoming.sendTrailers(trailers);
+          });
+        });
+
+        const outgoing = proxyClient.request(requestHeaders, {
+          waitForTrailers: true,
+        });
+
+        outgoing.on("response", (responseHeaders) => {
+          encoding.response.push(responseHeaders["grpc-encoding"]);
+
+          const wait = !responseHeaders["grpc-status"];
+          incoming.respond(responseHeaders, {
+            waitForTrailers: wait,
+            endStream: !wait,
+          });
+        });
+
+        outgoing.on("trailers", (trailers: OutgoingHttpHeaders) => {
+          responseTrailers.resolve(trailers);
+        });
+
+        incoming.pipe(outgoing);
+        outgoing.pipe(incoming);
+      });
+
+      await new Promise<void>((resolve) => {
+        proxyServer.listen(0, "localhost", () => {
+          resolve();
         });
       });
 
-      const outgoing = proxyClient.request(requestHeaders, {
-        waitForTrailers: true,
-      });
+      port = (proxyServer.address() as AddressInfo).port;
+    });
 
-      outgoing.on("response", (responseHeaders) => {
-        encoding.response.push(responseHeaders["grpc-encoding"]);
+    beforeEach(() => {
+      encoding.request = [];
+      encoding.response = [];
+    });
 
-        const wait = !responseHeaders["grpc-status"];
-        incoming.respond(responseHeaders, {
-          waitForTrailers: wait,
-          endStream: !wait,
+    it.each([
+      { compression: Compression.NONE, encoding: undefined },
+      { compression: Compression.GZIP, encoding: "gzip" },
+    ])(
+      "compresses messages exchanged between client and server with $compression",
+      async ({ compression, encoding: wantEncoding }) => {
+        const client = new GRPC(`localhost:${port}`, {
+          tls: false,
+          compression,
         });
-      });
 
-      outgoing.on("trailers", (trailers: OutgoingHttpHeaders) => {
-        responseTrailers.resolve(trailers);
-      });
+        await client.serverInfo();
 
-      incoming.pipe(outgoing);
-      outgoing.pipe(incoming);
-    });
-
-    await new Promise<void>((resolve) => {
-      proxyServer.listen(0, "localhost", () => {
-        resolve();
-      });
-    });
-
-    port = (proxyServer.address() as AddressInfo).port;
-  });
-
-  beforeEach(() => {
-    encoding.request = [];
-    encoding.response = [];
-  });
-
-  it.each([
-    { compression: Compression.NONE, encoding: undefined },
-    { compression: Compression.GZIP, encoding: "gzip" },
-  ])(
-    "compresses messages exchanged between client and server with $compression",
-    async ({ compression, encoding: wantEncoding }) => {
-      const client = new GRPC(`localhost:${port}`, {
-        tls: false,
-        compression,
-      });
-
-      await client.serverInfo();
-
-      expect(encoding).toEqual({
-        request: [wantEncoding],
-        response: [wantEncoding],
-      });
-    },
-  );
-});
+        expect(encoding).toEqual({
+          request: [wantEncoding],
+          response: [wantEncoding],
+        });
+      },
+    );
+  },
+);
