@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependency on [@bufbuild/protobuf] to 2.10.1 ([#1281](https://github.com/cerbos/cerbos-sdk-javascript/pull/1281))
 
 ## [0.13.3] - 2025-11-12
 
@@ -289,6 +291,7 @@ No notable changes.
 [0.2.0-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.1.1-alpha...@cerbos/lite@0.2.0-alpha
 [0.1.1-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/lite@0.1.0-alpha...@cerbos/lite@0.1.1-alpha
 [0.1.0-alpha]: https://github.com/cerbos/cerbos-sdk-javascript/compare/a3dcb572e0eeff4c4d86c9cc66c1d0c7e59c4853...@cerbos/lite@0.1.0-alpha
+[@bufbuild/protobuf]: https://github.com/bufbuild/protobuf-es
 [@cerbos/api]: ../api/README.md
 [@cerbos/core]: ../core/README.md
 [nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases

@@ -1,3 +1,11 @@
+unreleased:
+  type: patch
+
+  bumped:
+    "@bufbuild/protobuf":
+      to: 2.10.1
+      pull: 1281
+
 releases:
   - version: 0.23.3
     date: 2025-11-12
@@ -466,6 +474,7 @@ releases:
         pull: 73
 
 references:
+  "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es
   "@cerbos/api": ../api/README.md
   "@cerbos/core": ../core/README.md
   "@cerbos/opentelemetry": ../opentelemetry/README.md

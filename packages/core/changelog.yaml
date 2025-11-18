@@ -1,3 +1,11 @@
+unreleased:
+  type: patch
+
+  bumped:
+    "@bufbuild/protobuf":
+      to: 2.10.1
+      pull: 1281
+
 releases:
   - version: 0.25.1
     date: 2025-11-12
@@ -316,6 +324,7 @@ releases:
         pull: 73
 
 references:
+  "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es
   "@cerbos/api": ../api/README.md
   nodejs-eol: https://github.com/nodejs/release#end-of-life-releases
   uuid: https://github.com/uuidjs/uuid
