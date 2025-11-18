@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@cerbos/core": "^0.25.1",
-    "@grpc/grpc-js": "^1.14.0"
+    "@grpc/grpc-js": "^1.14.1"
   },
   "publishConfig": {
     "access": "public",
