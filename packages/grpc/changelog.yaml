@@ -6,6 +6,10 @@ unreleased:
       to: 2.10.1
       pull: 1281
 
+    "@grpc/grpc-js":
+      to: 1.14.1
+      pull: 1282
+
 releases:
   - version: 0.23.4
     date: 2025-11-12
