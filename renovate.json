@@ -15,7 +15,7 @@
   "minimumReleaseAge": "3 days",
   "packageRules": [
     {
-      "matchDepTypes": ["dependencies"],
+      "matchDepTypes": ["dependencies", "peerDependencies"],
       "rangeStrategy": "bump",
       "semanticCommitScope": "deps"
     },
