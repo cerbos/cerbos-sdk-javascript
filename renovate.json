@@ -20,6 +20,11 @@
       "semanticCommitScope": "deps"
     },
     {
+      "matchDepTypes": ["peerDependencies"],
+      "matchPackageNames": ["react"],
+      "rangeStrategy": "widen"
+    },
+    {
       "matchDepTypes": ["devDependencies"],
       "groupName": "development dependencies",
       "rangeStrategy": "pin",
