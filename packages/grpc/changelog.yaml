@@ -1,16 +1,24 @@
-unreleased:
-  type: patch
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.10.1
-      pull: 1281
-
-    "@grpc/grpc-js":
-      to: 1.14.1
-      pull: 1282
-
 releases:
+  - version: 0.23.5
+    date: 2025-11-20
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.10.1
+        pull: 1281
+
+      "@cerbos/api":
+        to: 0.3.0
+        pull: 1288
+
+      "@cerbos/core":
+        to: 0.25.2
+        pull: 1288
+
+      "@grpc/grpc-js":
+        to: 1.14.1
+        pull: 1282
+
   - version: 0.23.4
     date: 2025-11-12
 

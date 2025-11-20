@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.25.2] - 2025-11-20
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.10.1 ([#1281](https://github.com/cerbos/cerbos-sdk-javascript/pull/1281))
+
+- Bump dependency on [@cerbos/api] to 0.3.0 ([#1288](https://github.com/cerbos/cerbos-sdk-javascript/pull/1288))
 
 ## [0.25.1] - 2025-11-12
 
@@ -284,7 +290,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.2...HEAD
+[0.25.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.1...@cerbos/core@0.25.2
 [0.25.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.0...@cerbos/core@0.25.1
 [0.25.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.24.1...@cerbos/core@0.25.0
 [0.24.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.24.0...@cerbos/core@0.24.1
