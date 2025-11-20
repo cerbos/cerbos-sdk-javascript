@@ -12,6 +12,21 @@ import type {
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import { file_buf_validate_validate } from "../../../../buf/validate/validate_pb";
 import type {
+  AuditTrail,
+  AuditTrailJson,
+  AuditTrailValid,
+} from "../../../audit/v1/audit_pb";
+import { file_cerbos_audit_v1_audit } from "../../../audit/v1/audit_pb";
+import type {
+  CheckResourcesResponse as CheckResourcesResponse$1,
+  CheckResourcesResponseJson as CheckResourcesResponseJson$1,
+  CheckResourcesResponseValid as CheckResourcesResponseValid$1,
+  PlanResourcesResponse as PlanResourcesResponse$1,
+  PlanResourcesResponseJson as PlanResourcesResponseJson$1,
+  PlanResourcesResponseValid as PlanResourcesResponseValid$1,
+} from "../../../response/v1/response_pb";
+import { file_cerbos_response_v1_response } from "../../../response/v1/response_pb";
+import type {
   Timestamp,
   TimestampJson,
   Value,
@@ -31,9 +46,11 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_cerbos_cloud_epdp_v2_epdp: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "Ch9jZXJib3MvY2xvdWQvZXBkcC92Mi9lcGRwLnByb3RvEhRjZXJib3MuY2xvdWQuZXBkcC52MiKTBAoGQ29uZmlnEjkKCWV2YWx1YXRvchgBIAEoCzImLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5FdmFsdWF0b3ISMwoGc2NoZW1hGAIgASgLMiMuY2VyYm9zLmNsb3VkLmVwZHAudjIuQ29uZmlnLlNjaGVtYRrXAQoJRXZhbHVhdG9yEkQKB2dsb2JhbHMYASADKAsyMy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuRXZhbHVhdG9yLkdsb2JhbHNFbnRyeRIeChZkZWZhdWx0X3BvbGljeV92ZXJzaW9uGAIgASgJEhwKFGxlbmllbnRfc2NvcGVfc2VhcmNoGAMgASgIGkYKDEdsb2JhbHNFbnRyeRILCgNrZXkYASABKAkSJQoFdmFsdWUYAiABKAsyFi5nb29nbGUucHJvdG9idWYuVmFsdWU6AjgBGr4BCgZTY2hlbWESRAoLZW5mb3JjZW1lbnQYASABKA4yLy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuU2NoZW1hLkVuZm9yY2VtZW50Im4KC0VuZm9yY2VtZW50EhsKF0VORk9SQ0VNRU5UX1VOU1BFQ0lGSUVEEAASFAoQRU5GT1JDRU1FTlRfTk9ORRABEhQKEEVORk9SQ0VNRU5UX1dBUk4QAhIWChJFTkZPUkNFTUVOVF9SRUpFQ1QQAyJECgVFcnJvchIqCgRjb2RlGAEgASgOMhAuZ29vZ2xlLnJwYy5Db2RlQgq6SAeCAQQQASAAEg8KB21lc3NhZ2UYAiABKAkiqAEKCE1ldGFkYXRhEh8KDmNlcmJvc192ZXJzaW9uGAEgASgJQge6SARyAhABEiQKEmNlcmJvc19jb21taXRfaGFzaBgCIAEoCUIIukgFcgOYASgSHwoNd2FzbV9jaGVja3N1bRgDIAEoCUIIukgFcgOYAUASNAoIYnVpbHRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQga6SAPIAQFCeAocZGV2LmNlcmJvcy5hcGkuY2xvdWQudjIuZXBkcFo9Z2l0aHViLmNvbS9jZXJib3MvY2xvdWQtYXBpL2dlbnBiL2NlcmJvcy9jbG91ZC9lcGRwL3YyO2VwZHB2MqoCGENlcmJvcy5BcGkuQ2xvdWQuVjIuRXBkcGIGcHJvdG8z",
+    "Ch9jZXJib3MvY2xvdWQvZXBkcC92Mi9lcGRwLnByb3RvEhRjZXJib3MuY2xvdWQuZXBkcC52MiKTBAoGQ29uZmlnEjkKCWV2YWx1YXRvchgBIAEoCzImLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5FdmFsdWF0b3ISMwoGc2NoZW1hGAIgASgLMiMuY2VyYm9zLmNsb3VkLmVwZHAudjIuQ29uZmlnLlNjaGVtYRrXAQoJRXZhbHVhdG9yEkQKB2dsb2JhbHMYASADKAsyMy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuRXZhbHVhdG9yLkdsb2JhbHNFbnRyeRIeChZkZWZhdWx0X3BvbGljeV92ZXJzaW9uGAIgASgJEhwKFGxlbmllbnRfc2NvcGVfc2VhcmNoGAMgASgIGkYKDEdsb2JhbHNFbnRyeRILCgNrZXkYASABKAkSJQoFdmFsdWUYAiABKAsyFi5nb29nbGUucHJvdG9idWYuVmFsdWU6AjgBGr4BCgZTY2hlbWESRAoLZW5mb3JjZW1lbnQYASABKA4yLy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuU2NoZW1hLkVuZm9yY2VtZW50Im4KC0VuZm9yY2VtZW50EhsKF0VORk9SQ0VNRU5UX1VOU1BFQ0lGSUVEEAASFAoQRU5GT1JDRU1FTlRfTk9ORRABEhQKEEVORk9SQ0VNRU5UX1dBUk4QAhIWChJFTkZPUkNFTUVOVF9SRUpFQ1QQAyJECgVFcnJvchIqCgRjb2RlGAEgASgOMhAuZ29vZ2xlLnJwYy5Db2RlQgq6SAeCAQQQASAAEg8KB21lc3NhZ2UYAiABKAkiqAEKCE1ldGFkYXRhEh8KDmNlcmJvc192ZXJzaW9uGAEgASgJQge6SARyAhABEiQKEmNlcmJvc19jb21taXRfaGFzaBgCIAEoCUIIukgFcgOYASgSHwoNd2FzbV9jaGVja3N1bRgDIAEoCUIIukgFcgOYAUASNAoIYnVpbHRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQga6SAPIAQEimAEKFkNoZWNrUmVzb3VyY2VzUmVzcG9uc2USRAoIcmVzcG9uc2UYASABKAsyKi5jZXJib3MucmVzcG9uc2UudjEuQ2hlY2tSZXNvdXJjZXNSZXNwb25zZUIGukgDyAEBEjgKC2F1ZGl0X3RyYWlsGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWxCBrpIA8gBASKWAQoVUGxhblJlc291cmNlc1Jlc3BvbnNlEkMKCHJlc3BvbnNlGAEgASgLMikuY2VyYm9zLnJlc3BvbnNlLnYxLlBsYW5SZXNvdXJjZXNSZXNwb25zZUIGukgDyAEBEjgKC2F1ZGl0X3RyYWlsGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWxCBrpIA8gBAUJ4ChxkZXYuY2VyYm9zLmFwaS5jbG91ZC52Mi5lcGRwWj1naXRodWIuY29tL2NlcmJvcy9jbG91ZC1hcGkvZ2VucGIvY2VyYm9zL2Nsb3VkL2VwZHAvdjI7ZXBkcHYyqgIYQ2VyYm9zLkFwaS5DbG91ZC5WMi5FcGRwYgZwcm90bzM",
     [
       file_buf_validate_validate,
+      file_cerbos_audit_v1_audit,
+      file_cerbos_response_v1_response,
       file_google_protobuf_struct,
       file_google_protobuf_timestamp,
       file_google_rpc_code,
@@ -330,3 +347,118 @@ export const MetadataSchema: GenMessage<
   Metadata,
   { jsonType: MetadataJson; validType: MetadataValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 2);
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.CheckResourcesResponse
+ */
+export type CheckResourcesResponse =
+  Message<"cerbos.cloud.epdp.v2.CheckResourcesResponse"> & {
+    /**
+     * @generated from field: cerbos.response.v1.CheckResourcesResponse response = 1;
+     */
+    response?: CheckResourcesResponse$1;
+
+    /**
+     * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
+     */
+    auditTrail?: AuditTrail;
+  };
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.CheckResourcesResponse
+ */
+export type CheckResourcesResponseJson = {
+  /**
+   * @generated from field: cerbos.response.v1.CheckResourcesResponse response = 1;
+   */
+  response?: CheckResourcesResponseJson$1;
+
+  /**
+   * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
+   */
+  auditTrail?: AuditTrailJson;
+};
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.CheckResourcesResponse
+ */
+export type CheckResourcesResponseValid =
+  Message<"cerbos.cloud.epdp.v2.CheckResourcesResponse"> & {
+    /**
+     * @generated from field: cerbos.response.v1.CheckResourcesResponse response = 1;
+     */
+    response: CheckResourcesResponseValid$1;
+
+    /**
+     * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
+     */
+    auditTrail: AuditTrailValid;
+  };
+
+/**
+ * Describes the message cerbos.cloud.epdp.v2.CheckResourcesResponse.
+ * Use `create(CheckResourcesResponseSchema)` to create a new message.
+ */
+export const CheckResourcesResponseSchema: GenMessage<
+  CheckResourcesResponse,
+  {
+    jsonType: CheckResourcesResponseJson;
+    validType: CheckResourcesResponseValid;
+  }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 3);
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.PlanResourcesResponse
+ */
+export type PlanResourcesResponse =
+  Message<"cerbos.cloud.epdp.v2.PlanResourcesResponse"> & {
+    /**
+     * @generated from field: cerbos.response.v1.PlanResourcesResponse response = 1;
+     */
+    response?: PlanResourcesResponse$1;
+
+    /**
+     * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
+     */
+    auditTrail?: AuditTrail;
+  };
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.PlanResourcesResponse
+ */
+export type PlanResourcesResponseJson = {
+  /**
+   * @generated from field: cerbos.response.v1.PlanResourcesResponse response = 1;
+   */
+  response?: PlanResourcesResponseJson$1;
+
+  /**
+   * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
+   */
+  auditTrail?: AuditTrailJson;
+};
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.PlanResourcesResponse
+ */
+export type PlanResourcesResponseValid =
+  Message<"cerbos.cloud.epdp.v2.PlanResourcesResponse"> & {
+    /**
+     * @generated from field: cerbos.response.v1.PlanResourcesResponse response = 1;
+     */
+    response: PlanResourcesResponseValid$1;
+
+    /**
+     * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
+     */
+    auditTrail: AuditTrailValid;
+  };
+
+/**
+ * Describes the message cerbos.cloud.epdp.v2.PlanResourcesResponse.
+ * Use `create(PlanResourcesResponseSchema)` to create a new message.
+ */
+export const PlanResourcesResponseSchema: GenMessage<
+  PlanResourcesResponse,
+  { jsonType: PlanResourcesResponseJson; validType: PlanResourcesResponseValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 4);

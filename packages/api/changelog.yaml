@@ -1,5 +1,9 @@
 unreleased:
-  type: patch
+  type: minor
+
+  added:
+    - summary: "`cerbos.epdp.v2.CheckResourcesResponse` and `cerbos.epdp.v2.PlanResourcesResponse` messages"
+      pull: 1287
 
   bumped:
     "@bufbuild/protobuf":
@@ -11,7 +15,7 @@ releases:
     date: 2025-11-12
 
     added:
-      - summary: "`cerbos.epdp.v2` messages"
+      - summary: "`cerbos.epdp.v2.Config`, `cerbos.epdp.v2.Error`, and `cerbos.epdp.v2.Metadata` messages"
         pull: 1279
 
       - summary: JSON types
