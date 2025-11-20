@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/api",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Generated code used by the Cerbos client libraries",
   "repository": {
     "type": "git",
