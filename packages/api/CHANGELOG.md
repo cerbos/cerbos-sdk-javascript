@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- `cerbos.epdp.v2.CheckResourcesResponse` and `cerbos.epdp.v2.PlanResourcesResponse` messages ([#1287](https://github.com/cerbos/cerbos-sdk-javascript/pull/1287))
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.10.1 ([#1281](https://github.com/cerbos/cerbos-sdk-javascript/pull/1281))
@@ -10,7 +14,7 @@
 
 ### Added
 
-- `cerbos.epdp.v2` messages ([#1279](https://github.com/cerbos/cerbos-sdk-javascript/pull/1279))
+- `cerbos.epdp.v2.Config`, `cerbos.epdp.v2.Error`, and `cerbos.epdp.v2.Metadata` messages ([#1279](https://github.com/cerbos/cerbos-sdk-javascript/pull/1279))
 
 - JSON types ([#1279](https://github.com/cerbos/cerbos-sdk-javascript/pull/1279))
 

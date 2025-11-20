@@ -6,9 +6,11 @@ inputs:
   - directory: proto
     types:
       - cerbos.cloud.epdp.v1.Metadata
+      - cerbos.cloud.epdp.v2.CheckResourcesResponse
       - cerbos.cloud.epdp.v2.Config
       - cerbos.cloud.epdp.v2.Error
       - cerbos.cloud.epdp.v2.Metadata
+      - cerbos.cloud.epdp.v2.PlanResourcesResponse
       - cerbos.svc.v1.CerbosAdminService
       - cerbos.svc.v1.CerbosService
       - grpc.health.v1.Health
