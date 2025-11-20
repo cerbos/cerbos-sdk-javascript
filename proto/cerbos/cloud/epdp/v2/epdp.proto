@@ -6,6 +6,8 @@ syntax = "proto3";
 package cerbos.cloud.epdp.v2;
 
 import "buf/validate/validate.proto";
+import "cerbos/audit/v1/audit.proto";
+import "cerbos/response/v1/response.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/code.proto";
@@ -49,4 +51,14 @@ message Metadata {
   string cerbos_commit_hash = 2 [(buf.validate.field).string.len = 40];
   string wasm_checksum = 3 [(buf.validate.field).string.len = 64];
   google.protobuf.Timestamp built_at = 4 [(buf.validate.field).required = true];
+}
+
+message CheckResourcesResponse {
+  cerbos.response.v1.CheckResourcesResponse response = 1 [(buf.validate.field).required = true];
+  cerbos.audit.v1.AuditTrail audit_trail = 2 [(buf.validate.field).required = true];
+}
+
+message PlanResourcesResponse {
+  cerbos.response.v1.PlanResourcesResponse response = 1 [(buf.validate.field).required = true];
+  cerbos.audit.v1.AuditTrail audit_trail = 2 [(buf.validate.field).required = true];
 }
