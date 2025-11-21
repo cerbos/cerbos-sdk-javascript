@@ -4,7 +4,7 @@
 
 ## ClientWithPrincipal.checkResources() method
 
-Check the principal's permissions on a set of resources. See [Client.checkResources()](./core.client.checkresources.md) for details.
+Check the principal's permissions on a set of resources. See [`Client.checkResources()`](./core.client.checkresources.md) for details.
 
 **Signature:**
 
@@ -61,7 +61,6 @@ _(Optional)_
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

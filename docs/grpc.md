@@ -89,7 +89,7 @@ Advanced settings to configure a gRPC client.
 
 </td><td>
 
-Options for creating a new [GRPC](./grpc.grpc.md) client.
+Options for creating a new [`GRPC`](./grpc.grpc.md) client.
 
 
 </td></tr>

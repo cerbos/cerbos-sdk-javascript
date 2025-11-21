@@ -4,7 +4,7 @@
 
 ## ModifyFilesResponse interface
 
-Output from [StoresClient.modifyFiles()](./hub.storesclient.modifyfiles.md)<!-- -->.
+Output from [`StoresClient.modifyFiles()`](./hub.storesclient.modifyfiles.md)<!-- -->.
 
 **Signature:**
 

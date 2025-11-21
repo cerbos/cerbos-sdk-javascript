@@ -14,7 +14,7 @@ get pending(): BundleMetadata | undefined;
 
 ## Remarks
 
-Only set if [AutoUpdateOptions.activateOnLoad](./embedded.autoupdateoptions.activateonload.md) is `false` and an update has been downloaded.
+Only set if [`AutoUpdateOptions.activateOnLoad`](./embedded.autoupdateoptions.activateonload.md) is `false` and an update has been downloaded.
 
-Use [AutoUpdatingLoader.activate()](./embedded.autoupdatingloader.activate.md) to start using the pending bundle to evaluate policy decisions.
+Use [`AutoUpdatingLoader.activate()`](./embedded.autoupdatingloader.activate.md) to start using the pending bundle to evaluate policy decisions.
 

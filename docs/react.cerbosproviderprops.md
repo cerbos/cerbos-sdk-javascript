@@ -4,7 +4,7 @@
 
 ## CerbosProviderProps interface
 
-Props for the [CerbosProvider()](./react.cerbosprovider.md) component.
+Props for the [`CerbosProvider()`](./react.cerbosprovider.md) component.
 
 **Signature:**
 

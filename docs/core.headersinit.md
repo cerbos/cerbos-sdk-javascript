@@ -4,7 +4,7 @@
 
 ## HeadersInit type
 
-HTTP headers from which to construct a [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) object.
+HTTP headers from which to construct a [`Headers`](https://developer.mozilla.org/en-US/docs/Web/API/Headers) object.
 
 **Signature:**
 

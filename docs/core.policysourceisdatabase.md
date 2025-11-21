@@ -4,7 +4,7 @@
 
 ## policySourceIsDatabase() function
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceDatabase](./core.policysourcedatabase.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceDatabase`](./core.policysourcedatabase.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ source
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

@@ -48,12 +48,11 @@ _(Optional)_ the environment variables from which to load (default: `process.env
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 [Credentials](./hub.credentials.md)
 
 ## Exceptions
 
-[MissingCredentials](./hub.missingcredentials.md) if the environment variables are not set or are set to empty strings.
+[`MissingCredentials`](./hub.missingcredentials.md) if the environment variables are not set or are set to empty strings.
 

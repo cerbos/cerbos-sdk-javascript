@@ -4,7 +4,7 @@
 
 ## HealthCheckRequest interface
 
-Input to [Client.checkHealth()](./core.client.checkhealth.md)<!-- -->.
+Input to [`Client.checkHealth()`](./core.client.checkhealth.md)<!-- -->.
 
 **Signature:**
 

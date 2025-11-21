@@ -4,7 +4,7 @@
 
 ## matchIsMatchAny() function
 
-Type guard to check if a [Match](./core.match.md) is a [MatchAny](./core.matchany.md)<!-- -->.
+Type guard to check if a [`Match`](./core.match.md) is a [`MatchAny`](./core.matchany.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ match
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

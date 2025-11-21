@@ -4,7 +4,7 @@
 
 ## changeOriginIsChangeOriginInternal() function
 
-Type guard to check if a [ChangeOrigin](./hub.changeorigin.md) is a [ChangeOriginInternal](./hub.changeorigininternal.md)<!-- -->.
+Type guard to check if a [`ChangeOrigin`](./hub.changeorigin.md) is a [`ChangeOriginInternal`](./hub.changeorigininternal.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ origin
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

@@ -16,9 +16,9 @@ onValidationError?: "throw" | ValidationFailedCallback | undefined;
 
 Possible values are
 
-- `"throw"`<!-- -->, to throw a [ValidationFailed](./core.validationfailed.md) error;
+- `"throw"`<!-- -->, to throw a [`ValidationFailed`](./core.validationfailed.md) error;
 
-- a [ValidationFailedCallback](./core.validationfailedcallback.md) function; or
+- a [`ValidationFailedCallback`](./core.validationfailedcallback.md) function; or
 
 - `undefined`<!-- -->, to return the validation errors in the response.
 

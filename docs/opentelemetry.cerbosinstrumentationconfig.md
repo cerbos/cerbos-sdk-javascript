@@ -14,5 +14,5 @@ export type CerbosInstrumentationConfig = InstrumentationConfig;
 
 ## Remarks
 
-See [InstrumentationConfig documentation from OpenTelemetry](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_instrumentation.InstrumentationConfig.html)<!-- -->.
+See [`InstrumentationConfig` documentation from OpenTelemetry](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_instrumentation.InstrumentationConfig.html)<!-- -->.
 

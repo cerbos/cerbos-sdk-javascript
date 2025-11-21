@@ -4,7 +4,7 @@
 
 ## ResourceCheck interface
 
-A [Resource](./core.resource.md) and list of actions on which to check a principal's permissions.
+A [`Resource`](./core.resource.md) and list of actions on which to check a principal's permissions.
 
 **Signature:**
 

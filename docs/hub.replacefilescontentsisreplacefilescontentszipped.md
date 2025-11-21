@@ -4,7 +4,7 @@
 
 ## replaceFilesContentsIsReplaceFilesContentsZipped() function
 
-Type guard to check if a [ReplaceFilesContents](./hub.replacefilescontents.md) is a [ReplaceFilesContentsZipped](./hub.replacefilescontentszipped.md)<!-- -->.
+Type guard to check if a [`ReplaceFilesContents`](./hub.replacefilescontents.md) is a [`ReplaceFilesContentsZipped`](./hub.replacefilescontentszipped.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ contents
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

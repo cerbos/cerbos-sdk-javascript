@@ -11,12 +11,11 @@ Promote the [pending](./embedded.autoupdatingloader.pending.md) embedded policy 
 ```typescript
 activate(): void;
 ```
-
 **Returns:**
 
 void
 
 ## Remarks
 
-This method is a no-op if an update has not been downloaded, or if [AutoUpdateOptions.activateOnLoad](./embedded.autoupdateoptions.activateonload.md) is `true` (the default).
+This method is a no-op if an update has not been downloaded, or if [`AutoUpdateOptions.activateOnLoad`](./embedded.autoupdateoptions.activateonload.md) is `true` (the default).
 

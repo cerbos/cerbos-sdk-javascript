@@ -4,7 +4,7 @@
 
 ## auditLogFilterIsBetween() function
 
-Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [AuditLogFilterBetween](./core.auditlogfilterbetween.md)<!-- -->.
+Type guard to check if an [`AuditLogFilter`](./core.auditlogfilter.md) is an [`AuditLogFilterBetween`](./core.auditlogfilterbetween.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ filter
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

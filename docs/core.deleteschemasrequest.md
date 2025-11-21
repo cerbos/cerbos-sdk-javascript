@@ -4,7 +4,7 @@
 
 ## DeleteSchemasRequest interface
 
-Input to [Client.deleteSchemas()](./core.client.deleteschemas.md)<!-- -->.
+Input to [`Client.deleteSchemas()`](./core.client.deleteschemas.md)<!-- -->.
 
 **Signature:**
 

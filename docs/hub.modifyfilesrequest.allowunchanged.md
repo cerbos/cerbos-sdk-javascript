@@ -14,5 +14,5 @@ allowUnchanged?: boolean;
 
 ## Remarks
 
-If `false` (the default), an [OperationDiscarded](./hub.operationdiscarded.md) error will be thrown if the modifications leave the store unchanged. If `true`<!-- -->, no error will be thrown and the current store version will be returned.
+If `false` (the default), an [`OperationDiscarded`](./hub.operationdiscarded.md) error will be thrown if the modifications leave the store unchanged. If `true`<!-- -->, no error will be thrown and the current store version will be returned.
 

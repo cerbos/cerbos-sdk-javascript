@@ -4,7 +4,7 @@
 
 ## auditLogFilterIsSince() function
 
-Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [AuditLogFilterSince](./core.auditlogfiltersince.md)<!-- -->.
+Type guard to check if an [`AuditLogFilter`](./core.auditlogfilter.md) is an [`AuditLogFilterSince`](./core.auditlogfiltersince.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ filter
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

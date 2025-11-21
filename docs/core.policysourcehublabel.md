@@ -4,7 +4,7 @@
 
 ## PolicySourceHubLabel interface
 
-Policies sourced from a [label](https://docs.cerbos.dev/cerbos-hub/legacy/deployment-labels) in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
+Policies sourced from a [label](https://docs.cerbos.dev/cerbos-hub/legacy/deployment-labels) in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [`hub` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
 
 **Signature:**
 

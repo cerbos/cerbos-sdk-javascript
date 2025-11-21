@@ -4,21 +4,20 @@
 
 ## useCerbos() function
 
-A hook to access the Cerbos client passed down by the [CerbosProvider()](./react.cerbosprovider.md)<!-- -->.
+A hook to access the Cerbos client passed down by the [`CerbosProvider()`](./react.cerbosprovider.md)<!-- -->.
 
 **Signature:**
 
 ```typescript
 export declare function useCerbos(): ClientWithPrincipal;
 ```
-
 **Returns:**
 
 [ClientWithPrincipal](./core.clientwithprincipal.md)
 
 ## Remarks
 
-The client's methods are asynchronous, so depending on your use case it may be easier to use one of the higher-level hooks ([useCheckResource()](./react.usecheckresource.md)<!-- -->, [useCheckResources()](./react.usecheckresources.md)<!-- -->, or [useIsAllowed()](./react.useisallowed.md)<!-- -->), which convert the resulting promises into [AsyncResult](./react.asyncresult.md)<!-- -->s.
+The client's methods are asynchronous, so depending on your use case it may be easier to use one of the higher-level hooks ([`useCheckResource()`](./react.usecheckresource.md)<!-- -->, [`useCheckResources()`](./react.usecheckresources.md)<!-- -->, or [`useIsAllowed()`](./react.useisallowed.md)<!-- -->), which convert the resulting promises into [`AsyncResult`](./react.asyncresult.md)<!-- -->s.
 
 ## Example
 

@@ -14,5 +14,5 @@ ids: string[];
 
 ## Remarks
 
-Available policy IDs can be listed with [Client.listPolicies()](./core.client.listpolicies.md)<!-- -->, setting [ListPoliciesRequest.includeDisabled](./core.listpoliciesrequest.includedisabled.md) to `true`<!-- -->.
+Available policy IDs can be listed with [`Client.listPolicies()`](./core.client.listpolicies.md)<!-- -->, setting [`ListPoliciesRequest.includeDisabled`](./core.listpoliciesrequest.includedisabled.md) to `true`<!-- -->.
 

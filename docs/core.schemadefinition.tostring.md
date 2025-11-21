@@ -11,7 +11,6 @@ The JSON-serialized schema definition.
 ```typescript
 toString(): string;
 ```
-
 **Returns:**
 
 string

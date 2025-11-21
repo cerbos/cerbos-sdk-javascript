@@ -4,7 +4,7 @@
 
 ## NoUsableFiles class
 
-Error thrown when [StoresClient.replaceFiles()](./hub.storesclient.replacefiles.md) fails because the request didn't contain any usable files.
+Error thrown when [`StoresClient.replaceFiles()`](./hub.storesclient.replacefiles.md) fails because the request didn't contain any usable files.
 
 **Signature:**
 

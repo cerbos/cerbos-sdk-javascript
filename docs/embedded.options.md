@@ -4,7 +4,7 @@
 
 ## Options interface
 
-Options for creating a new [Embedded](./embedded.embedded.md) client or [Loader](./embedded.loader.md)<!-- -->.
+Options for creating a new [`Embedded`](./embedded.embedded.md) client or [`Loader`](./embedded.loader.md)<!-- -->.
 
 **Signature:**
 

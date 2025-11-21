@@ -4,7 +4,7 @@
 
 ## policyIsResourcePolicy() function
 
-Type guard to check if a [Policy](./core.policy.md) is a [ResourcePolicy](./core.resourcepolicy.md)<!-- -->.
+Type guard to check if a [`Policy`](./core.policy.md) is a [`ResourcePolicy`](./core.resourcepolicy.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ policy
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

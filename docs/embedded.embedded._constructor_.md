@@ -4,7 +4,7 @@
 
 ## Embedded.(constructor)
 
-Create a client for interacting with an embedded Cerbos policy decision point (PDP), using a specified [Loader](./embedded.loader.md) to load the embedded PDP bundle.
+Create a client for interacting with an embedded Cerbos policy decision point (PDP), using a specified [`Loader`](./embedded.loader.md) to load the embedded PDP bundle.
 
 **Signature:**
 

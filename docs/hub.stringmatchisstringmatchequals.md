@@ -4,7 +4,7 @@
 
 ## stringMatchIsStringMatchEquals() function
 
-Type guard to check if a [StringMatch](./hub.stringmatch.md) is a [StringMatchEquals](./hub.stringmatchequals.md)<!-- -->.
+Type guard to check if a [`StringMatch`](./hub.stringmatch.md) is a [`StringMatchEquals`](./hub.stringmatchequals.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ match
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

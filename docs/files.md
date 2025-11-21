@@ -107,7 +107,7 @@ Description
 
 </td><td>
 
-The contents of a directory, returned by [readDirectory()](./files.readdirectory.md)<!-- -->.
+The contents of a directory, returned by [`readDirectory()`](./files.readdirectory.md)<!-- -->.
 
 
 </td></tr>
@@ -118,7 +118,7 @@ The contents of a directory, returned by [readDirectory()](./files.readdirectory
 
 </td><td>
 
-Options for [readSchema()](./files.readschema.md)<!-- -->.
+Options for [`readSchema()`](./files.readschema.md)<!-- -->.
 
 
 </td></tr>

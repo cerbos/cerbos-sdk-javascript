@@ -47,7 +47,7 @@ Description
 
 </td><td>
 
-Create a client for interacting with an embedded Cerbos policy decision point (PDP), using a specified [Loader](./embedded.loader.md) to load the embedded PDP bundle.
+Create a client for interacting with an embedded Cerbos policy decision point (PDP), using a specified [`Loader`](./embedded.loader.md) to load the embedded PDP bundle.
 
 
 </td></tr>
@@ -61,7 +61,7 @@ Create a client for interacting with an embedded Cerbos policy decision point (P
 
 </td><td>
 
-Create a client for interacting with an embedded Cerbos policy decision point (PDP), using the default [Loader](./embedded.loader.md) to load the embedded PDP bundle.
+Create a client for interacting with an embedded Cerbos policy decision point (PDP), using the default [`Loader`](./embedded.loader.md) to load the embedded PDP bundle.
 
 
 </td></tr>
@@ -107,7 +107,7 @@ Description
 
 </td><td>
 
-The [Loader](./embedded.loader.md) used to load the embedded policy decision point bundle.
+The [`Loader`](./embedded.loader.md) used to load the embedded policy decision point bundle.
 
 
 </td></tr>

@@ -14,5 +14,5 @@ contents: Uint8Array;
 
 ## Remarks
 
-Use [bytesToString()](./hub.bytestostring.md) and [stringToBytes()](./hub.stringtobytes.md) to convert the contents to or from a string, and [parsePolicy()](./files.parsepolicy.md) and [serializePolicy()](./files.serializepolicy.md) to programmatically manipulate policies.
+Use [`bytesToString()`](./hub.bytestostring.md) and [`stringToBytes()`](./hub.stringtobytes.md) to convert the contents to or from a string, and [`parsePolicy()`](./files.parsepolicy.md) and [`serializePolicy()`](./files.serializepolicy.md) to programmatically manipulate policies.
 

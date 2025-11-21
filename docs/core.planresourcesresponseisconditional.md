@@ -4,7 +4,7 @@
 
 ## planResourcesResponseIsConditional() function
 
-Type guard to check if a [PlanResourcesResponse](./core.planresourcesresponse.md) is a [PlanResourcesConditionalResponse](./core.planresourcesconditionalresponse.md)<!-- -->.
+Type guard to check if a [`PlanResourcesResponse`](./core.planresourcesresponse.md) is a [`PlanResourcesConditionalResponse`](./core.planresourcesconditionalresponse.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ output
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

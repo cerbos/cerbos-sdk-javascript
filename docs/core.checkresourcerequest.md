@@ -4,7 +4,7 @@
 
 ## CheckResourceRequest type
 
-Input to [Client.checkResource()](./core.client.checkresource.md)<!-- -->.
+Input to [`Client.checkResource()`](./core.client.checkresource.md)<!-- -->.
 
 **Signature:**
 

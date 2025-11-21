@@ -62,7 +62,6 @@ _(Optional)_
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 AsyncGenerator&lt;[AccessLogEntry](./core.accesslogentry.md)<!-- -->, void, undefined&gt;
@@ -71,7 +70,7 @@ AsyncGenerator&lt;[AccessLogEntry](./core.accesslogentry.md)<!-- -->, void, unde
 
 Requires
 
-- the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->; and
+- the client to be configured with [`Options.adminCredentials`](./core.options.admincredentials.md)<!-- -->; and
 
 - the Cerbos policy decision point server to be configured with
 

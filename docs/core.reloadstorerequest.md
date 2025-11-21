@@ -4,7 +4,7 @@
 
 ## ReloadStoreRequest interface
 
-Input to [Client.reloadStore()](./core.client.reloadstore.md)<!-- -->.
+Input to [`Client.reloadStore()`](./core.client.reloadstore.md)<!-- -->.
 
 **Signature:**
 

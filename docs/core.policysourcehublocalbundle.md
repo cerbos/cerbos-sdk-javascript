@@ -4,7 +4,7 @@
 
 ## PolicySourceHubLocalBundle interface
 
-Policies sourced from a local policy bundle using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
+Policies sourced from a local policy bundle using the [`hub` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
 
 **Signature:**
 

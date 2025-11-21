@@ -21,7 +21,7 @@ import { Transport } from "./transport";
  * Configuration for OpenTelemetry instrumentation of Cerbos clients.
  *
  * @remarks
- * See {@link https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_instrumentation.InstrumentationConfig.html | InstrumentationConfig documentation from OpenTelemetry}.
+ * See {@link https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_instrumentation.InstrumentationConfig.html | `InstrumentationConfig` documentation from OpenTelemetry}.
  *
  * @public
  */

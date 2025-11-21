@@ -154,7 +154,7 @@ export function _removeInstrumenter(instrumenter: _Instrumenter): void {
 }
 
 /**
- * HTTP headers from which to construct a {@link https://developer.mozilla.org/en-US/docs/Web/API/Headers | Headers} object.
+ * HTTP headers from which to construct a {@link https://developer.mozilla.org/en-US/docs/Web/API/Headers | `Headers`} object.
  *
  * @public
  */

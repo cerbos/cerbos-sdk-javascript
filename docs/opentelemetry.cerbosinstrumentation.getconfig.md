@@ -11,7 +11,6 @@ Gets the instrumentation configuration.
 ```typescript
 getConfig(): CerbosInstrumentationConfig;
 ```
-
 **Returns:**
 
 [CerbosInstrumentationConfig](./opentelemetry.cerbosinstrumentationconfig.md)

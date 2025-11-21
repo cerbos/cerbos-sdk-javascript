@@ -4,7 +4,7 @@
 
 ## planResourcesOutputIsUnconditional() function
 
-Type guard to check if a [PlanResourcesOutput](./core.planresourcesoutput.md) is a [PlanResourcesUnconditionalOutput](./core.planresourcesunconditionaloutput.md)<!-- -->.
+Type guard to check if a [`PlanResourcesOutput`](./core.planresourcesoutput.md) is a [`PlanResourcesUnconditionalOutput`](./core.planresourcesunconditionaloutput.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ output
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

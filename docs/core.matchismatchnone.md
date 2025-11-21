@@ -4,7 +4,7 @@
 
 ## matchIsMatchNone() function
 
-Type guard to check if a [Match](./core.match.md) is a [MatchNone](./core.matchnone.md)<!-- -->.
+Type guard to check if a [`Match`](./core.match.md) is a [`MatchNone`](./core.matchnone.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ match
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

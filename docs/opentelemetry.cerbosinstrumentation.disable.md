@@ -11,7 +11,6 @@ Disables the instrumentation.
 ```typescript
 disable(): void;
 ```
-
 **Returns:**
 
 void

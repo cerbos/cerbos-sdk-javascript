@@ -11,7 +11,6 @@ Stops polling for new embedded policy decision point bundles, and aborts any in-
 ```typescript
 stop(): void;
 ```
-
 **Returns:**
 
 void

@@ -62,7 +62,6 @@ _(Optional)_
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 Promise&lt;[EnablePoliciesResponse](./core.enablepoliciesresponse.md)<!-- -->&gt;
@@ -71,7 +70,7 @@ Promise&lt;[EnablePoliciesResponse](./core.enablepoliciesresponse.md)<!-- -->&gt
 
 Requires
 
-- the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->,
+- the client to be configured with [`Options.adminCredentials`](./core.options.admincredentials.md)<!-- -->,
 
 - the Cerbos policy decision point server to be at least v0.26 and configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) enabled, and
 

@@ -37,7 +37,7 @@ A component to provide a Cerbos client to your application's components.
 
 </td><td>
 
-A hook to access the Cerbos client passed down by the [CerbosProvider()](./react.cerbosprovider.md)<!-- -->.
+A hook to access the Cerbos client passed down by the [`CerbosProvider()`](./react.cerbosprovider.md)<!-- -->.
 
 
 </td></tr>
@@ -96,7 +96,7 @@ Description
 
 </td><td>
 
-Props for the [CerbosProvider()](./react.cerbosprovider.md) component.
+Props for the [`CerbosProvider()`](./react.cerbosprovider.md) component.
 
 
 </td></tr>

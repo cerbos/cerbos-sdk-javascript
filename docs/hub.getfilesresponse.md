@@ -4,7 +4,7 @@
 
 ## GetFilesResponse interface
 
-Output from [StoresClient.getFiles()](./hub.storesclient.getfiles.md)<!-- -->.
+Output from [`StoresClient.getFiles()`](./hub.storesclient.getfiles.md)<!-- -->.
 
 **Signature:**
 

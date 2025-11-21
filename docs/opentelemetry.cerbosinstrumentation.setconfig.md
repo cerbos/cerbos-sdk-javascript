@@ -46,12 +46,11 @@ config
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 void
 
 ## Remarks
 
-Changing `enabled` via this method has no effect. Use the [CerbosInstrumentation.disable()](./opentelemetry.cerbosinstrumentation.disable.md) and [CerbosInstrumentation.enable()](./opentelemetry.cerbosinstrumentation.enable.md) methods instead.
+Changing `enabled` via this method has no effect. Use the [`CerbosInstrumentation.disable()`](./opentelemetry.cerbosinstrumentation.disable.md) and [`CerbosInstrumentation.enable()`](./opentelemetry.cerbosinstrumentation.enable.md) methods instead.
 

@@ -4,7 +4,7 @@
 
 ## LoadError class
 
-Error thrown when a [Loader](./embedded.loader.md) fails to load an embedded policy decision point bundle.
+Error thrown when a [`Loader`](./embedded.loader.md) fails to load an embedded policy decision point bundle.
 
 **Signature:**
 

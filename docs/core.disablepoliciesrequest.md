@@ -4,7 +4,7 @@
 
 ## DisablePoliciesRequest interface
 
-Input to [Client.disablePolicies()](./core.client.disablepolicies.md)<!-- -->.
+Input to [`Client.disablePolicies()`](./core.client.disablepolicies.md)<!-- -->.
 
 **Signature:**
 

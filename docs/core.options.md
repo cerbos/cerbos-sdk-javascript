@@ -4,7 +4,7 @@
 
 ## Options interface
 
-Options for creating a new [Client](./core.client.md)<!-- -->.
+Options for creating a new [`Client`](./core.client.md)<!-- -->.
 
 **Signature:**
 

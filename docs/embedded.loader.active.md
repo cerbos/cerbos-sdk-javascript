@@ -11,7 +11,6 @@ Resolves to the metadata of the loaded bundle, or rejects with the error that wa
 ```typescript
 active(): Promise<BundleMetadata>;
 ```
-
 **Returns:**
 
 Promise&lt;[BundleMetadata](./embedded.bundlemetadata.md)<!-- -->&gt;

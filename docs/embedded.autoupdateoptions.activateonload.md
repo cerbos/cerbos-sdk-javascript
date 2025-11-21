@@ -14,7 +14,7 @@ activateOnLoad?: boolean;
 
 ## Remarks
 
-If `false`<!-- -->, new bundles will be downloaded automatically but not used to evaluate policy decisions until you call [AutoUpdatingLoader.activate()](./embedded.autoupdatingloader.activate.md)<!-- -->. This might be useful if you want to activate updates only on page transitions to avoid layout shifts in your application.
+If `false`<!-- -->, new bundles will be downloaded automatically but not used to evaluate policy decisions until you call [`AutoUpdatingLoader.activate()`](./embedded.autoupdatingloader.activate.md)<!-- -->. This might be useful if you want to activate updates only on page transitions to avoid layout shifts in your application.
 
-To detect whether an update is available to activate, provide an [Options.onLoad](./embedded.options.onload.md) callback or check the [AutoUpdatingLoader.pending](./embedded.autoupdatingloader.pending.md) property.
+To detect whether an update is available to activate, provide an [`Options.onLoad`](./embedded.options.onload.md) callback or check the [`AutoUpdatingLoader.pending`](./embedded.autoupdatingloader.pending.md) property.
 

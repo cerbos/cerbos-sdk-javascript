@@ -4,7 +4,7 @@
 
 ## policySourceIsHub() function
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHub](./core.policysourcehub.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceHub`](./core.policysourcehub.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ source
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

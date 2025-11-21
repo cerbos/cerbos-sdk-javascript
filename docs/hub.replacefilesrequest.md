@@ -4,7 +4,7 @@
 
 ## ReplaceFilesRequest interface
 
-Input to [StoresClient.replaceFiles()](./hub.storesclient.replacefiles.md)<!-- -->.
+Input to [`StoresClient.replaceFiles()`](./hub.storesclient.replacefiles.md)<!-- -->.
 
 **Signature:**
 

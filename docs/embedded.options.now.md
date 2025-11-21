@@ -14,5 +14,5 @@ now?: (() => Date | number) | undefined;
 
 ## Remarks
 
-The function can either return a [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) or a number of milliseconds elapsed since the Unix epoch.
+The function can either return a [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) or a number of milliseconds elapsed since the Unix epoch.
 

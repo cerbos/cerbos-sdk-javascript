@@ -11,7 +11,6 @@ List the actions that should be allowed for the resource.
 ```typescript
 allowedActions(): string[];
 ```
-
 **Returns:**
 
 string\[\]

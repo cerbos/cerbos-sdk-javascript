@@ -4,7 +4,7 @@
 
 ## PolicySourceBlob interface
 
-Policies sourced from Amazon-S3-compatible storage using the [\`blob\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#blob-driver)<!-- -->.
+Policies sourced from Amazon-S3-compatible storage using the [`blob` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#blob-driver)<!-- -->.
 
 **Signature:**
 

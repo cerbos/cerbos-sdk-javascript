@@ -4,7 +4,7 @@
 
 ## policySourceIsEmbeddedPDP() function
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceEmbeddedPDP](./core.policysourceembeddedpdp.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceEmbeddedPDP`](./core.policysourceembeddedpdp.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ source
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

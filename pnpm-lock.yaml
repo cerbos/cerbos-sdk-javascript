@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@microsoft/api-documenter@7.28.0':
+    hash: 032703a247ffee1e75e1a33ad702e9f16e14b8dc318f150723bc7ca985ae9d3e
+    path: patches/@microsoft__api-documenter@7.28.0.patch
+
 importers:
 
   .:
@@ -22,7 +27,7 @@ importers:
         version: link:private/eslint
       '@microsoft/api-documenter':
         specifier: 7.28.0
-        version: 7.28.0(@types/node@20.19.25)
+        version: 7.28.0(patch_hash=032703a247ffee1e75e1a33ad702e9f16e14b8dc318f150723bc7ca985ae9d3e)(@types/node@20.19.25)
       '@microsoft/api-extractor':
         specifier: 7.55.0
         version: 7.55.0(@types/node@20.19.25)
@@ -3563,7 +3568,7 @@ snapshots:
     dependencies:
       '@braidai/lang': 1.1.2
 
-  '@microsoft/api-documenter@7.28.0(@types/node@20.19.25)':
+  '@microsoft/api-documenter@7.28.0(patch_hash=032703a247ffee1e75e1a33ad702e9f16e14b8dc318f150723bc7ca985ae9d3e)(@types/node@20.19.25)':
     dependencies:
       '@microsoft/api-extractor-model': 7.32.0(@types/node@20.19.25)
       '@microsoft/tsdoc': 0.16.0

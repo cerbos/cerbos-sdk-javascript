@@ -4,7 +4,7 @@
 
 ## PolicySourceHubBase interface
 
-Common fields between different [PolicySourceHub](./core.policysourcehub.md) types.
+Common fields between different [`PolicySourceHub`](./core.policysourcehub.md) types.
 
 **Signature:**
 

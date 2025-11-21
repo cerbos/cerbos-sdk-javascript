@@ -117,7 +117,7 @@ export interface Options extends Pick<CoreOptions, "headers" | "userAgent"> {
    * A function returning the current time, to be used when evaluating policy conditions.
    *
    * @remarks
-   * The function can either return a {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date | Date} or a number of milliseconds elapsed since the Unix epoch.
+   * The function can either return a {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date | `Date`} or a number of milliseconds elapsed since the Unix epoch.
    *
    * @defaultValue `Date.now`
    */

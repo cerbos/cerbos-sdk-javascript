@@ -4,7 +4,7 @@
 
 ## AutoUpdateOptions interface
 
-Options for creating a new [AutoUpdatingLoader](./embedded.autoupdatingloader.md)<!-- -->.
+Options for creating a new [`AutoUpdatingLoader`](./embedded.autoupdatingloader.md)<!-- -->.
 
 **Signature:**
 

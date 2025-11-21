@@ -4,7 +4,7 @@
 
 ## PlanResourcesResponseBase interface
 
-Common fields between different [PlanResourcesResponse](./core.planresourcesresponse.md) types.
+Common fields between different [`PlanResourcesResponse`](./core.planresourcesresponse.md) types.
 
 **Signature:**
 

@@ -4,7 +4,7 @@
 
 ## planResourcesOutputIsConditional() function
 
-Type guard to check if a [PlanResourcesOutput](./core.planresourcesoutput.md) is a [PlanResourcesConditionalOutput](./core.planresourcesconditionaloutput.md)<!-- -->.
+Type guard to check if a [`PlanResourcesOutput`](./core.planresourcesoutput.md) is a [`PlanResourcesConditionalOutput`](./core.planresourcesconditionaloutput.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ output
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

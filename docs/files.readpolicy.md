@@ -48,7 +48,6 @@ the path to the policy file.
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 Promise&lt;[Policy](./core.policy.md)<!-- -->&gt;

@@ -51,7 +51,6 @@ the resource search criteria and action to check.
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 boolean \| undefined
