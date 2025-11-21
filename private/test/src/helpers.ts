@@ -27,10 +27,15 @@ import type {
   Span as SpanProto,
   TracesData,
 } from "./protobuf/opentelemetry/proto/trace/v1/trace";
-import { cerbosVersionIsAtLeast } from "./servers";
+import { versionIsAtLeast } from "./servers";
 
-const { version: embeddedSdkVersion } =
+const { version: embeddedV1SdkVersion } =
   require("../../../packages/embedded/package.json") as { version: string };
+
+const { version: embeddedV2SdkVersion } =
+  require("../../../packages/embedded-client/package.json") as {
+    version: string;
+  };
 
 const { version: grpcSdkVersion } =
   require("../../../packages/grpc/package.json") as { version: string };
@@ -232,30 +237,35 @@ function hrTimeToMilliseconds([seconds, nanoseconds]: HrTime): number {
   return seconds * 1e3 + nanoseconds * 1e-6;
 }
 
-export const invalidArgumentDetails = expect.stringContaining(
-  cerbosVersionIsAtLeast("0.30.0")
-    ? "validation error"
-    : "invalid CheckResourcesRequest",
-);
+export function invalidArgumentDetails(cerbosVersion: string): any {
+  return expect.stringContaining(
+    versionIsAtLeast("0.30.0", cerbosVersion)
+      ? "validation error"
+      : "invalid CheckResourcesRequest",
+  );
+}
 
-export function describeIfCerbosVersionIsAtLeast(
-  version: string,
+export function describeIfVersionIsAtLeast(
+  want: string,
+  have: string,
 ): (typeof describe)["skip"] {
-  if (cerbosVersionIsAtLeast(version)) {
+  if (versionIsAtLeast(want, have)) {
     return describe;
   }
 
   return describe.skip;
 }
 
-const callIdPattern = /^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$/;
+export const callIdPattern = /^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$/;
 
 export const callIdMatcher = expect.stringMatching(callIdPattern);
 
-export const versionDependentCallIdMatcher = expect.stringMatching(
-  // cerbosCallId was not available on API responses before 0.33.0
-  cerbosVersionIsAtLeast("0.33.0") ? callIdPattern : /^$/,
-);
+export function versionDependentCallIdMatcher(cerbosVersion: string): any {
+  return expect.stringMatching(
+    // cerbosCallId was not available on API responses before 0.33.0
+    versionIsAtLeast("0.33.0", cerbosVersion) ? callIdPattern : /^$/,
+  );
+}
 
 export async function retry<T>(
   { attempts, delay }: { attempts: number; delay: number },
@@ -276,7 +286,9 @@ export async function retry<T>(
   }
 }
 
-export const embeddedUserAgent = `cerbos-sdk-javascript-embedded/${embeddedSdkVersion}`;
+export const embeddedV1UserAgent = `cerbos-sdk-javascript-embedded/${embeddedV1SdkVersion}`;
+
+export const embeddedV2UserAgent = `cerbos-sdk-javascript-embedded-client/${embeddedV2SdkVersion}`;
 
 export const grpcUserAgent = `cerbos-sdk-javascript-grpc/${grpcSdkVersion} grpc-node-js/${grpcJsVersion}`;
 

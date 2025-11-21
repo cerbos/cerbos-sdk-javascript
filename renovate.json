@@ -21,6 +21,11 @@
     },
     {
       "matchDepTypes": ["peerDependencies"],
+      "matchPackageNames": ["@cerbos/embedded-server"],
+      "rangeStrategy": "replace"
+    },
+    {
+      "matchDepTypes": ["peerDependencies"],
       "matchPackageNames": ["react"],
       "rangeStrategy": "widen"
     },

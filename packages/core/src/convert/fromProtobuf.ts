@@ -284,7 +284,8 @@ function auditLogMetadataFromProtobuf(
   );
 }
 
-function auditTrailFromProtobuf(
+/** @internal */
+export function auditTrailFromProtobuf(
   auditTrail: AuditTrailProtobuf | undefined,
 ): AuditTrail {
   const { effectivePolicies = {} } = auditTrail ?? {};
@@ -569,17 +570,17 @@ function decisionLogEntryPlanResourcesFromProtobuf({
   error,
 }: DecisionLogEntry_PlanResources): DecisionLogEntryPlanResources {
   requireField("DecisionLogEntry.PlanResources.input", input);
-  requireField("DecisionLogEntry.PlanResources.output", output);
 
   return {
     name: "PlanResources",
     input: planResourcesInputFromProtobuf(input),
-    output: planResourcesOutputFromProtobuf(output),
+    output: output && planResourcesOutputFromProtobuf(output),
     error: error || undefined,
   };
 }
 
-function planResourcesInputFromProtobuf({
+/** @internal */
+export function planResourcesInputFromProtobuf({
   requestId,
   principal,
   resource,
@@ -613,7 +614,8 @@ function resourceQueryFromProtobuf({
   };
 }
 
-function planResourcesOutputFromProtobuf({
+/** @internal */
+export function planResourcesOutputFromProtobuf({
   requestId,
   filter,
   filterDebug,
