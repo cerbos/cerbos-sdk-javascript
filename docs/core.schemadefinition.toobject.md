@@ -11,7 +11,6 @@ The parsed schema definition.
 ```typescript
 toObject(): Record<string, unknown>;
 ```
-
 **Returns:**
 
 Record&lt;string, unknown&gt;

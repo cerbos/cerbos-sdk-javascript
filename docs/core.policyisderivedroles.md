@@ -4,7 +4,7 @@
 
 ## policyIsDerivedRoles() function
 
-Type guard to check if a [Policy](./core.policy.md) is a set of [DerivedRoles](./core.derivedroles.md)<!-- -->.
+Type guard to check if a [`Policy`](./core.policy.md) is a set of [`DerivedRoles`](./core.derivedroles.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ policy
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

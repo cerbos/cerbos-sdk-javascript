@@ -132,7 +132,7 @@ Description
 
 </td><td>
 
-Check the principal's permissions on a resource. See [Client.checkResource()](./core.client.checkresource.md) for details.
+Check the principal's permissions on a resource. See [`Client.checkResource()`](./core.client.checkresource.md) for details.
 
 
 </td></tr>
@@ -146,7 +146,7 @@ Check the principal's permissions on a resource. See [Client.checkResource()](./
 
 </td><td>
 
-Check the principal's permissions on a set of resources. See [Client.checkResources()](./core.client.checkresources.md) for details.
+Check the principal's permissions on a set of resources. See [`Client.checkResources()`](./core.client.checkresources.md) for details.
 
 
 </td></tr>
@@ -160,7 +160,7 @@ Check the principal's permissions on a set of resources. See [Client.checkResour
 
 </td><td>
 
-Check if the principal is allowed to perform an action on a resource. See [Client.isAllowed()](./core.client.isallowed.md) for details.
+Check if the principal is allowed to perform an action on a resource. See [`Client.isAllowed()`](./core.client.isallowed.md) for details.
 
 
 </td></tr>
@@ -174,7 +174,7 @@ Check if the principal is allowed to perform an action on a resource. See [Clien
 
 </td><td>
 
-Produce a query plan that can be used to obtain a list of resources on which the principal is allowed to perform a particular action. See [Client.planResources()](./core.client.planresources.md) for details.
+Produce a query plan that can be used to obtain a list of resources on which the principal is allowed to perform a particular action. See [`Client.planResources()`](./core.client.planresources.md) for details.
 
 
 </td></tr>

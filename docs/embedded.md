@@ -59,7 +59,7 @@ Loads an embedded policy decision point bundle from a given source.
 
 </td><td>
 
-Error thrown when a [Loader](./embedded.loader.md) fails to load an embedded policy decision point bundle.
+Error thrown when a [`Loader`](./embedded.loader.md) fails to load an embedded policy decision point bundle.
 
 
 </td></tr>
@@ -85,7 +85,7 @@ Description
 
 </td><td>
 
-Options for creating a new [AutoUpdatingLoader](./embedded.autoupdatingloader.md)<!-- -->.
+Options for creating a new [`AutoUpdatingLoader`](./embedded.autoupdatingloader.md)<!-- -->.
 
 
 </td></tr>
@@ -107,7 +107,7 @@ Metadata describing an embedded policy decision point bundle.
 
 </td><td>
 
-Options for creating a new [Embedded](./embedded.embedded.md) client or [Loader](./embedded.loader.md)<!-- -->.
+Options for creating a new [`Embedded`](./embedded.embedded.md) client or [`Loader`](./embedded.loader.md)<!-- -->.
 
 
 </td></tr>

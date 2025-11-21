@@ -62,7 +62,6 @@ _(Optional)_
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 Promise&lt;[DeleteSchemasResponse](./core.deleteschemasresponse.md)<!-- -->&gt;
@@ -71,13 +70,13 @@ Promise&lt;[DeleteSchemasResponse](./core.deleteschemasresponse.md)<!-- -->&gt;
 
 Requires
 
-- the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->,
+- the client to be configured with [`Options.adminCredentials`](./core.options.admincredentials.md)<!-- -->,
 
 - the Cerbos policy decision point (PDP) server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) enabled, and
 
 - a dynamic [storage backend](https://docs.cerbos.dev/cerbos/latest/configuration/storage)<!-- -->.
 
-The way this method handles failure depends on the version of the connected PDP server. When the server is running Cerbos v0.25 or later, it returns a [DeleteSchemasResponse](./core.deleteschemasresponse.md) that includes the number of schemas that were deleted. With earlier versions of Cerbos, it throws an error if no schemas were found, and returns successfully if at least one schema was deleted; the returned value should be ignored.
+The way this method handles failure depends on the version of the connected PDP server. When the server is running Cerbos v0.25 or later, it returns a [`DeleteSchemasResponse`](./core.deleteschemasresponse.md) that includes the number of schemas that were deleted. With earlier versions of Cerbos, it throws an error if no schemas were found, and returns successfully if at least one schema was deleted; the returned value should be ignored.
 
 ## Example
 

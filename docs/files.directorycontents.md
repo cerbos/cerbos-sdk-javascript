@@ -4,7 +4,7 @@
 
 ## DirectoryContents interface
 
-The contents of a directory, returned by [readDirectory()](./files.readdirectory.md)<!-- -->.
+The contents of a directory, returned by [`readDirectory()`](./files.readdirectory.md)<!-- -->.
 
 **Signature:**
 

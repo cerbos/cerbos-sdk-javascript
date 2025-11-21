@@ -62,7 +62,6 @@ _(Optional)_
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 Promise&lt;[DecisionLogEntry](./core.decisionlogentry.md) \| undefined&gt;
@@ -71,7 +70,7 @@ Promise&lt;[DecisionLogEntry](./core.decisionlogentry.md) \| undefined&gt;
 
 Requires
 
-- the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->; and
+- the client to be configured with [`Options.adminCredentials`](./core.options.admincredentials.md)<!-- -->; and
 
 - the Cerbos policy decision point server to be at least v0.18 and configured with
 

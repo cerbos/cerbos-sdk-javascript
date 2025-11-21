@@ -4,7 +4,7 @@
 
 ## AddOrUpdateSchemasRequest interface
 
-Input to [Client.addOrUpdateSchemas()](./core.client.addorupdateschemas.md)<!-- -->.
+Input to [`Client.addOrUpdateSchemas()`](./core.client.addorupdateschemas.md)<!-- -->.
 
 **Signature:**
 

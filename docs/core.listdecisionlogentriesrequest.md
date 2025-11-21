@@ -4,7 +4,7 @@
 
 ## ListDecisionLogEntriesRequest interface
 
-Input to [Client.listDecisionLogEntries()](./core.client.listdecisionlogentries.md)<!-- -->.
+Input to [`Client.listDecisionLogEntries()`](./core.client.listdecisionlogentries.md)<!-- -->.
 
 **Signature:**
 

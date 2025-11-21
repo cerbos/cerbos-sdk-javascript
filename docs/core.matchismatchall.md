@@ -4,7 +4,7 @@
 
 ## matchIsMatchAll() function
 
-Type guard to check if a [Match](./core.match.md) is a [MatchAll](./core.matchall.md)<!-- -->.
+Type guard to check if a [`Match`](./core.match.md) is a [`MatchAll`](./core.matchall.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ match
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

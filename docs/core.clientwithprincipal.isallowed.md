@@ -4,7 +4,7 @@
 
 ## ClientWithPrincipal.isAllowed() method
 
-Check if the principal is allowed to perform an action on a resource. See [Client.isAllowed()](./core.client.isallowed.md) for details.
+Check if the principal is allowed to perform an action on a resource. See [`Client.isAllowed()`](./core.client.isallowed.md) for details.
 
 **Signature:**
 
@@ -61,7 +61,6 @@ _(Optional)_
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

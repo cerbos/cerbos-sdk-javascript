@@ -4,7 +4,7 @@
 
 ## stringMatchIsStringMatchContains() function
 
-Type guard to check if a [StringMatch](./hub.stringmatch.md) is a [StringMatchContains](./hub.stringmatchcontains.md)<!-- -->.
+Type guard to check if a [`StringMatch`](./hub.stringmatch.md) is a [`StringMatchContains`](./hub.stringmatchcontains.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ match
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

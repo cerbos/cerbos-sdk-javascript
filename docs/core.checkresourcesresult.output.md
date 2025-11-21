@@ -48,7 +48,6 @@ the identifier of the policy rule that produced the output.
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 [Value](./core.value.md) \| undefined

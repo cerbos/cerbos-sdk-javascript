@@ -1,0 +1,5 @@
+{
+  "$schema": "node_modules/@microsoft/api-documenter/lib/schemas/api-documenter.schema.json",
+  "newlineKind": "lf",
+  "outputTarget": "markdown"
+}

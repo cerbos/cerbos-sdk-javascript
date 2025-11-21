@@ -63,6 +63,14 @@
       "semanticCommitScope": "deps"
     },
     {
+      "matchPackageNames": [
+        "@microsoft/api-documenter",
+        "@microsoft/api-extractor"
+      ],
+      "groupName": "docs",
+      "semanticCommitScope": "deps-dev"
+    },
+    {
       "matchPackageNames": ["@opentelemetry/*"],
       "groupName": "opentelemetry",
       "semanticCommitScope": "deps"

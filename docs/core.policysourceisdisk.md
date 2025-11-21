@@ -4,7 +4,7 @@
 
 ## policySourceIsDisk() function
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceDisk](./core.policysourcedisk.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceDisk`](./core.policysourcedisk.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ source
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

@@ -4,7 +4,7 @@
 
 ## CheckResourcesRequest interface
 
-Input to [Client.checkResources()](./core.client.checkresources.md)<!-- -->.
+Input to [`Client.checkResources()`](./core.client.checkresources.md)<!-- -->.
 
 **Signature:**
 

@@ -4,7 +4,7 @@
 
 ## PolicySourceGit interface
 
-Policies sourced from a Git repository using the [\`git\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#git-driver)<!-- -->.
+Policies sourced from a Git repository using the [`git` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#git-driver)<!-- -->.
 
 **Signature:**
 

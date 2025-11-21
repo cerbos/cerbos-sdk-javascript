@@ -4,7 +4,7 @@
 
 ## GetFilesRequest interface
 
-Input to [StoresClient.getFiles()](./hub.storesclient.getfiles.md)<!-- -->.
+Input to [`StoresClient.getFiles()`](./hub.storesclient.getfiles.md)<!-- -->.
 
 **Signature:**
 

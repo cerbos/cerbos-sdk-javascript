@@ -4,7 +4,7 @@
 
 ## fileOperationIsFileOperationDelete() function
 
-Type guard to check if a [FileOperation](./hub.fileoperation.md) is a [FileOperationDelete](./hub.fileoperationdelete.md)<!-- -->.
+Type guard to check if a [`FileOperation`](./hub.fileoperation.md) is a [`FileOperationDelete`](./hub.fileoperationdelete.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ operation
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

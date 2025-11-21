@@ -14,5 +14,5 @@ changed: boolean;
 
 ## Remarks
 
-This can only be `false` if [ReplaceFilesRequest.allowUnchanged](./hub.replacefilesrequest.allowunchanged.md) was `true`<!-- -->.
+This can only be `false` if [`ReplaceFilesRequest.allowUnchanged`](./hub.replacefilesrequest.allowunchanged.md) was `true`<!-- -->.
 

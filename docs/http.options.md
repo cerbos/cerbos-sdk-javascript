@@ -4,7 +4,7 @@
 
 ## Options type
 
-Options for creating a new [HTTP](./http.http.md) client.
+Options for creating a new [`HTTP`](./http.http.md) client.
 
 **Signature:**
 

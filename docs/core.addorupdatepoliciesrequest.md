@@ -4,7 +4,7 @@
 
 ## AddOrUpdatePoliciesRequest interface
 
-Input to [Client.addOrUpdatePolicies()](./core.client.addorupdatepolicies.md)<!-- -->.
+Input to [`Client.addOrUpdatePolicies()`](./core.client.addorupdatepolicies.md)<!-- -->.
 
 **Signature:**
 

@@ -4,7 +4,7 @@
 
 ## policySourceIsBlob() function
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceBlob](./core.policysourceblob.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceBlob`](./core.policysourceblob.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ source
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

@@ -48,7 +48,6 @@ the policy definition.
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 string

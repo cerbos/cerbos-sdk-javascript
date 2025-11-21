@@ -4,7 +4,7 @@
 
 ## PolicyBase interface
 
-Common fields between different [Policy](./core.policy.md) types.
+Common fields between different [`Policy`](./core.policy.md) types.
 
 **Signature:**
 

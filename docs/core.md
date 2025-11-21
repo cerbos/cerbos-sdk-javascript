@@ -114,7 +114,7 @@ Definition of a JSON schema used to validate principal or resource attributes.
 
 </td><td>
 
-Error thrown when input fails schema validation, if the [Client](./core.client.md) is configured with [onValidationError](./core.options.onvalidationerror.md) set to `"throw"`<!-- -->.
+Error thrown when input fails schema validation, if the [`Client`](./core.client.md) is configured with [onValidationError](./core.options.onvalidationerror.md) set to `"throw"`<!-- -->.
 
 
 </td></tr>
@@ -313,7 +313,7 @@ Description
 
 </td><td>
 
-Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [AuditLogFilterBetween](./core.auditlogfilterbetween.md)<!-- -->.
+Type guard to check if an [`AuditLogFilter`](./core.auditlogfilter.md) is an [`AuditLogFilterBetween`](./core.auditlogfilterbetween.md)<!-- -->.
 
 
 </td></tr>
@@ -324,7 +324,7 @@ Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [Audi
 
 </td><td>
 
-Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [AuditLogFilterSince](./core.auditlogfiltersince.md)<!-- -->.
+Type guard to check if an [`AuditLogFilter`](./core.auditlogfilter.md) is an [`AuditLogFilterSince`](./core.auditlogfiltersince.md)<!-- -->.
 
 
 </td></tr>
@@ -335,7 +335,7 @@ Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [Audi
 
 </td><td>
 
-Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [AuditLogFilterTail](./core.auditlogfiltertail.md)<!-- -->.
+Type guard to check if an [`AuditLogFilter`](./core.auditlogfilter.md) is an [`AuditLogFilterTail`](./core.auditlogfiltertail.md)<!-- -->.
 
 
 </td></tr>
@@ -346,7 +346,7 @@ Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [Audi
 
 </td><td>
 
-Type guard to check if a [DecisionLogEntryMethod](./core.decisionlogentrymethod.md) is a [DecisionLogEntryCheckResources](./core.decisionlogentrycheckresources.md)<!-- -->.
+Type guard to check if a [`DecisionLogEntryMethod`](./core.decisionlogentrymethod.md) is a [`DecisionLogEntryCheckResources`](./core.decisionlogentrycheckresources.md)<!-- -->.
 
 
 </td></tr>
@@ -357,7 +357,7 @@ Type guard to check if a [DecisionLogEntryMethod](./core.decisionlogentrymethod.
 
 </td><td>
 
-Type guard to check if a [DecisionLogEntryMethod](./core.decisionlogentrymethod.md) is a [DecisionLogEntryPlanResources](./core.decisionlogentryplanresources.md)<!-- -->.
+Type guard to check if a [`DecisionLogEntryMethod`](./core.decisionlogentrymethod.md) is a [`DecisionLogEntryPlanResources`](./core.decisionlogentryplanresources.md)<!-- -->.
 
 
 </td></tr>
@@ -368,7 +368,7 @@ Type guard to check if a [DecisionLogEntryMethod](./core.decisionlogentrymethod.
 
 </td><td>
 
-Type guard to check if a [Match](./core.match.md) is a [MatchAll](./core.matchall.md)<!-- -->.
+Type guard to check if a [`Match`](./core.match.md) is a [`MatchAll`](./core.matchall.md)<!-- -->.
 
 
 </td></tr>
@@ -379,7 +379,7 @@ Type guard to check if a [Match](./core.match.md) is a [MatchAll](./core.matchal
 
 </td><td>
 
-Type guard to check if a [Match](./core.match.md) is a [MatchAny](./core.matchany.md)<!-- -->.
+Type guard to check if a [`Match`](./core.match.md) is a [`MatchAny`](./core.matchany.md)<!-- -->.
 
 
 </td></tr>
@@ -390,7 +390,7 @@ Type guard to check if a [Match](./core.match.md) is a [MatchAny](./core.matchan
 
 </td><td>
 
-Type guard to check if a [Match](./core.match.md) is a [MatchExpr](./core.matchexpr.md)<!-- -->.
+Type guard to check if a [`Match`](./core.match.md) is a [`MatchExpr`](./core.matchexpr.md)<!-- -->.
 
 
 </td></tr>
@@ -401,7 +401,7 @@ Type guard to check if a [Match](./core.match.md) is a [MatchExpr](./core.matche
 
 </td><td>
 
-Type guard to check if a [Match](./core.match.md) is a [MatchNone](./core.matchnone.md)<!-- -->.
+Type guard to check if a [`Match`](./core.match.md) is a [`MatchNone`](./core.matchnone.md)<!-- -->.
 
 
 </td></tr>
@@ -412,7 +412,7 @@ Type guard to check if a [Match](./core.match.md) is a [MatchNone](./core.matchn
 
 </td><td>
 
-Type guard to check if a [PlanResourcesOutput](./core.planresourcesoutput.md) is a [PlanResourcesConditionalOutput](./core.planresourcesconditionaloutput.md)<!-- -->.
+Type guard to check if a [`PlanResourcesOutput`](./core.planresourcesoutput.md) is a [`PlanResourcesConditionalOutput`](./core.planresourcesconditionaloutput.md)<!-- -->.
 
 
 </td></tr>
@@ -423,7 +423,7 @@ Type guard to check if a [PlanResourcesOutput](./core.planresourcesoutput.md) is
 
 </td><td>
 
-Type guard to check if a [PlanResourcesOutput](./core.planresourcesoutput.md) is a [PlanResourcesUnconditionalOutput](./core.planresourcesunconditionaloutput.md)<!-- -->.
+Type guard to check if a [`PlanResourcesOutput`](./core.planresourcesoutput.md) is a [`PlanResourcesUnconditionalOutput`](./core.planresourcesunconditionaloutput.md)<!-- -->.
 
 
 </td></tr>
@@ -434,7 +434,7 @@ Type guard to check if a [PlanResourcesOutput](./core.planresourcesoutput.md) is
 
 </td><td>
 
-Type guard to check if a [PlanResourcesResponse](./core.planresourcesresponse.md) is a [PlanResourcesConditionalResponse](./core.planresourcesconditionalresponse.md)<!-- -->.
+Type guard to check if a [`PlanResourcesResponse`](./core.planresourcesresponse.md) is a [`PlanResourcesConditionalResponse`](./core.planresourcesconditionalresponse.md)<!-- -->.
 
 
 </td></tr>
@@ -445,7 +445,7 @@ Type guard to check if a [PlanResourcesResponse](./core.planresourcesresponse.md
 
 </td><td>
 
-Type guard to check if a [PlanResourcesResponse](./core.planresourcesresponse.md) is a [PlanResourcesUnconditionalResponse](./core.planresourcesunconditionalresponse.md)<!-- -->.
+Type guard to check if a [`PlanResourcesResponse`](./core.planresourcesresponse.md) is a [`PlanResourcesUnconditionalResponse`](./core.planresourcesunconditionalresponse.md)<!-- -->.
 
 
 </td></tr>
@@ -456,7 +456,7 @@ Type guard to check if a [PlanResourcesResponse](./core.planresourcesresponse.md
 
 </td><td>
 
-Type guard to check if a [Policy](./core.policy.md) is a set of [DerivedRoles](./core.derivedroles.md)<!-- -->.
+Type guard to check if a [`Policy`](./core.policy.md) is a set of [`DerivedRoles`](./core.derivedroles.md)<!-- -->.
 
 
 </td></tr>
@@ -467,7 +467,7 @@ Type guard to check if a [Policy](./core.policy.md) is a set of [DerivedRoles](.
 
 </td><td>
 
-Type guard to check if a [Policy](./core.policy.md) is a set of [ExportConstants](./core.exportconstants.md)<!-- -->.
+Type guard to check if a [`Policy`](./core.policy.md) is a set of [`ExportConstants`](./core.exportconstants.md)<!-- -->.
 
 
 </td></tr>
@@ -478,7 +478,7 @@ Type guard to check if a [Policy](./core.policy.md) is a set of [ExportConstants
 
 </td><td>
 
-Type guard to check if a [Policy](./core.policy.md) is a set of [ExportVariables](./core.exportvariables.md)<!-- -->.
+Type guard to check if a [`Policy`](./core.policy.md) is a set of [`ExportVariables`](./core.exportvariables.md)<!-- -->.
 
 
 </td></tr>
@@ -489,7 +489,7 @@ Type guard to check if a [Policy](./core.policy.md) is a set of [ExportVariables
 
 </td><td>
 
-Type guard to check if a [Policy](./core.policy.md) is a [PrincipalPolicy](./core.principalpolicy.md)<!-- -->.
+Type guard to check if a [`Policy`](./core.policy.md) is a [`PrincipalPolicy`](./core.principalpolicy.md)<!-- -->.
 
 
 </td></tr>
@@ -500,7 +500,7 @@ Type guard to check if a [Policy](./core.policy.md) is a [PrincipalPolicy](./cor
 
 </td><td>
 
-Type guard to check if a [Policy](./core.policy.md) is a [ResourcePolicy](./core.resourcepolicy.md)<!-- -->.
+Type guard to check if a [`Policy`](./core.policy.md) is a [`ResourcePolicy`](./core.resourcepolicy.md)<!-- -->.
 
 
 </td></tr>
@@ -522,7 +522,7 @@ Type guard to check if a [Policy](./core.policy.md) is a [ResourcePolicy](./core
 
 </td><td>
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceBlob](./core.policysourceblob.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceBlob`](./core.policysourceblob.md)<!-- -->.
 
 
 </td></tr>
@@ -533,7 +533,7 @@ Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySour
 
 </td><td>
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceDatabase](./core.policysourcedatabase.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceDatabase`](./core.policysourcedatabase.md)<!-- -->.
 
 
 </td></tr>
@@ -544,7 +544,7 @@ Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySour
 
 </td><td>
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceDisk](./core.policysourcedisk.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceDisk`](./core.policysourcedisk.md)<!-- -->.
 
 
 </td></tr>
@@ -555,7 +555,7 @@ Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySour
 
 </td><td>
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceEmbeddedPDP](./core.policysourceembeddedpdp.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceEmbeddedPDP`](./core.policysourceembeddedpdp.md)<!-- -->.
 
 
 </td></tr>
@@ -566,7 +566,7 @@ Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySour
 
 </td><td>
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceGit](./core.policysourcegit.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceGit`](./core.policysourcegit.md)<!-- -->.
 
 
 </td></tr>
@@ -577,7 +577,7 @@ Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySour
 
 </td><td>
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHub](./core.policysourcehub.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceHub`](./core.policysourcehub.md)<!-- -->.
 
 
 </td></tr>
@@ -588,7 +588,7 @@ Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySour
 
 </td><td>
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHubDeployment](./core.policysourcehubdeployment.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceHubDeployment`](./core.policysourcehubdeployment.md)<!-- -->.
 
 
 </td></tr>
@@ -599,7 +599,7 @@ Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySour
 
 </td><td>
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHubLabel](./core.policysourcehublabel.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceHubLabel`](./core.policysourcehublabel.md)<!-- -->.
 
 
 </td></tr>
@@ -610,7 +610,7 @@ Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySour
 
 </td><td>
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHubLocalBundle](./core.policysourcehublocalbundle.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceHubLocalBundle`](./core.policysourcehublocalbundle.md)<!-- -->.
 
 
 </td></tr>
@@ -621,7 +621,7 @@ Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySour
 
 </td><td>
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHubPlayground](./core.policysourcehubplayground.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceHubPlayground`](./core.policysourcehubplayground.md)<!-- -->.
 
 
 </td></tr>
@@ -658,7 +658,7 @@ An access log entry in the policy decision point's audit log.
 
 </td><td>
 
-Input to [Client.addOrUpdatePolicies()](./core.client.addorupdatepolicies.md)<!-- -->.
+Input to [`Client.addOrUpdatePolicies()`](./core.client.addorupdatepolicies.md)<!-- -->.
 
 
 </td></tr>
@@ -669,7 +669,7 @@ Input to [Client.addOrUpdatePolicies()](./core.client.addorupdatepolicies.md)<!-
 
 </td><td>
 
-Input to [Client.addOrUpdateSchemas()](./core.client.addorupdateschemas.md)<!-- -->.
+Input to [`Client.addOrUpdateSchemas()`](./core.client.addorupdateschemas.md)<!-- -->.
 
 
 </td></tr>
@@ -779,7 +779,7 @@ The `CheckResources` decision made for an action.
 
 </td><td>
 
-Input to [Client.checkResources()](./core.client.checkresources.md)<!-- -->.
+Input to [`Client.checkResources()`](./core.client.checkresources.md)<!-- -->.
 
 
 </td></tr>
@@ -889,7 +889,7 @@ Auxiliary data after decoding the JSON Web Token.
 
 </td><td>
 
-Input to [Client.deleteSchemas()](./core.client.deleteschemas.md)<!-- -->.
+Input to [`Client.deleteSchemas()`](./core.client.deleteschemas.md)<!-- -->.
 
 
 </td></tr>
@@ -944,7 +944,7 @@ A set of [derived roles](https://docs.cerbos.dev/cerbos/latest/policies/derived_
 
 </td><td>
 
-Input to [Client.disablePolicies()](./core.client.disablepolicies.md)<!-- -->.
+Input to [`Client.disablePolicies()`](./core.client.disablepolicies.md)<!-- -->.
 
 
 </td></tr>
@@ -966,7 +966,7 @@ The outcome of disabling policies.
 
 </td><td>
 
-Input to [Client.enablePolicies()](./core.client.enablepolicies.md)<!-- -->.
+Input to [`Client.enablePolicies()`](./core.client.enablepolicies.md)<!-- -->.
 
 
 </td></tr>
@@ -1043,7 +1043,7 @@ A set of [exported variables](https://docs.cerbos.dev/cerbos/latest/policies/var
 
 </td><td>
 
-Input to [Client.getPolicies()](./core.client.getpolicies.md)<!-- -->.
+Input to [`Client.getPolicies()`](./core.client.getpolicies.md)<!-- -->.
 
 
 </td></tr>
@@ -1065,7 +1065,7 @@ Fetched policies.
 
 </td><td>
 
-Input to [Client.getSchemas()](./core.client.getschemas.md)<!-- -->.
+Input to [`Client.getSchemas()`](./core.client.getschemas.md)<!-- -->.
 
 
 </td></tr>
@@ -1087,7 +1087,7 @@ Fetched schemas.
 
 </td><td>
 
-Input to [Client.checkHealth()](./core.client.checkhealth.md)<!-- -->.
+Input to [`Client.checkHealth()`](./core.client.checkhealth.md)<!-- -->.
 
 
 </td></tr>
@@ -1164,7 +1164,7 @@ Details of a [variable](https://docs.cerbos.dev/cerbos/latest/policies/variables
 
 </td><td>
 
-Input to [Client.inspectPolicies()](./core.client.inspectpolicies.md)<!-- -->.
+Input to [`Client.inspectPolicies()`](./core.client.inspectpolicies.md)<!-- -->.
 
 
 </td></tr>
@@ -1197,7 +1197,7 @@ A JSON Web Token to use as an auxiliary data source, which will be verified agai
 
 </td><td>
 
-Input to [Client.listAccessLogEntries()](./core.client.listaccesslogentries.md)<!-- -->.
+Input to [`Client.listAccessLogEntries()`](./core.client.listaccesslogentries.md)<!-- -->.
 
 
 </td></tr>
@@ -1208,7 +1208,7 @@ Input to [Client.listAccessLogEntries()](./core.client.listaccesslogentries.md)<
 
 </td><td>
 
-Input to [Client.listDecisionLogEntries()](./core.client.listdecisionlogentries.md)<!-- -->.
+Input to [`Client.listDecisionLogEntries()`](./core.client.listdecisionlogentries.md)<!-- -->.
 
 
 </td></tr>
@@ -1219,7 +1219,7 @@ Input to [Client.listDecisionLogEntries()](./core.client.listdecisionlogentries.
 
 </td><td>
 
-Input to [Client.listPolicies()](./core.client.listpolicies.md)<!-- -->.
+Input to [`Client.listPolicies()`](./core.client.listpolicies.md)<!-- -->.
 
 
 </td></tr>
@@ -1318,7 +1318,7 @@ A set of expressions to evaluate in a condition that must all be false.
 
 </td><td>
 
-Options for creating a new [Client](./core.client.md)<!-- -->.
+Options for creating a new [`Client`](./core.client.md)<!-- -->.
 
 
 </td></tr>
@@ -1417,7 +1417,7 @@ Additional information about the query plan.
 
 </td><td>
 
-Common fields between different [PlanResourcesOutput](./core.planresourcesoutput.md) types.
+Common fields between different [`PlanResourcesOutput`](./core.planresourcesoutput.md) types.
 
 
 </td></tr>
@@ -1428,7 +1428,7 @@ Common fields between different [PlanResourcesOutput](./core.planresourcesoutput
 
 </td><td>
 
-Common fields for inputs to [Client.planResources()](./core.client.planresources.md)<!-- -->.
+Common fields for inputs to [`Client.planResources()`](./core.client.planresources.md)<!-- -->.
 
 
 </td></tr>
@@ -1439,7 +1439,7 @@ Common fields for inputs to [Client.planResources()](./core.client.planresources
 
 </td><td>
 
-Input to [Client.planResources()](./core.client.planresources.md)<!-- -->.
+Input to [`Client.planResources()`](./core.client.planresources.md)<!-- -->.
 
 
 </td></tr>
@@ -1450,7 +1450,7 @@ Input to [Client.planResources()](./core.client.planresources.md)<!-- -->.
 
 </td><td>
 
-Input to [Client.planResources()](./core.client.planresources.md)<!-- -->.
+Input to [`Client.planResources()`](./core.client.planresources.md)<!-- -->.
 
 
 </td></tr>
@@ -1461,7 +1461,7 @@ Input to [Client.planResources()](./core.client.planresources.md)<!-- -->.
 
 </td><td>
 
-Common fields between different [PlanResourcesResponse](./core.planresourcesresponse.md) types.
+Common fields between different [`PlanResourcesResponse`](./core.planresourcesresponse.md) types.
 
 
 </td></tr>
@@ -1494,7 +1494,7 @@ A query plan for when the specified action is always allowed or denied for the p
 
 </td><td>
 
-Common fields between different [Policy](./core.policy.md) types.
+Common fields between different [`Policy`](./core.policy.md) types.
 
 
 </td></tr>
@@ -1516,7 +1516,7 @@ Metadata describing a policy.
 
 </td><td>
 
-Policies sourced from Amazon-S3-compatible storage using the [\`blob\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#blob-driver)<!-- -->.
+Policies sourced from Amazon-S3-compatible storage using the [`blob` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#blob-driver)<!-- -->.
 
 
 </td></tr>
@@ -1527,7 +1527,7 @@ Policies sourced from Amazon-S3-compatible storage using the [\`blob\` storage d
 
 </td><td>
 
-Policies sourced from a database using the [\`mysql\`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#mysql)<!-- -->, [\`postgres\`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#postgres)<!-- -->, or [\`sqlite3\`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#sqlite3) storage drivers.
+Policies sourced from a database using the [`mysql`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#mysql)<!-- -->, [`postgres`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#postgres)<!-- -->, or [`sqlite3`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#sqlite3) storage drivers.
 
 
 </td></tr>
@@ -1538,7 +1538,7 @@ Policies sourced from a database using the [\`mysql\`](https://docs.cerbos.dev/c
 
 </td><td>
 
-Policies sourced from a directory on the filesystem using the [\`disk\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#disk-driver)<!-- -->.
+Policies sourced from a directory on the filesystem using the [`disk` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#disk-driver)<!-- -->.
 
 
 </td></tr>
@@ -1560,7 +1560,7 @@ Policies sourced from an [embedded policy decision point](https://docs.cerbos.de
 
 </td><td>
 
-Policies sourced from a Git repository using the [\`git\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#git-driver)<!-- -->.
+Policies sourced from a Git repository using the [`git` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#git-driver)<!-- -->.
 
 
 </td></tr>
@@ -1571,7 +1571,7 @@ Policies sourced from a Git repository using the [\`git\` storage driver](https:
 
 </td><td>
 
-Common fields between different [PolicySourceHub](./core.policysourcehub.md) types.
+Common fields between different [`PolicySourceHub`](./core.policysourcehub.md) types.
 
 
 </td></tr>
@@ -1582,7 +1582,7 @@ Common fields between different [PolicySourceHub](./core.policysourcehub.md) typ
 
 </td><td>
 
-Policies sourced from a deployment in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
+Policies sourced from a deployment in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [`hub` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
 
 
 </td></tr>
@@ -1593,7 +1593,7 @@ Policies sourced from a deployment in [Cerbos Hub](https://www.cerbos.dev/produc
 
 </td><td>
 
-Policies sourced from a [label](https://docs.cerbos.dev/cerbos-hub/legacy/deployment-labels) in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
+Policies sourced from a [label](https://docs.cerbos.dev/cerbos-hub/legacy/deployment-labels) in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [`hub` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
 
 
 </td></tr>
@@ -1604,7 +1604,7 @@ Policies sourced from a [label](https://docs.cerbos.dev/cerbos-hub/legacy/deploy
 
 </td><td>
 
-Policies sourced from a local policy bundle using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
+Policies sourced from a local policy bundle using the [`hub` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
 
 
 </td></tr>
@@ -1615,7 +1615,7 @@ Policies sourced from a local policy bundle using the [\`hub\` storage driver](h
 
 </td><td>
 
-Policies sourced from a [playground](https://docs.cerbos.dev/cerbos-hub/playground) in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
+Policies sourced from a [playground](https://docs.cerbos.dev/cerbos-hub/playground) in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [`hub` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
 
 
 </td></tr>
@@ -1681,7 +1681,7 @@ An override for a given action for a specific user.
 
 </td><td>
 
-Input to [Client.reloadStore()](./core.client.reloadstore.md)<!-- -->.
+Input to [`Client.reloadStore()`](./core.client.reloadstore.md)<!-- -->.
 
 
 </td></tr>
@@ -1714,7 +1714,7 @@ A resource on which to check a principal's permissions.
 
 </td><td>
 
-A [Resource](./core.resource.md) and list of actions on which to check a principal's permissions.
+A [`Resource`](./core.resource.md) and list of actions on which to check a principal's permissions.
 
 
 </td></tr>
@@ -1894,7 +1894,7 @@ Criteria to match audit log entries.
 
 </td><td>
 
-Input to [Client.checkResource()](./core.client.checkresource.md)<!-- -->.
+Input to [`Client.checkResource()`](./core.client.checkresource.md)<!-- -->.
 
 
 </td></tr>
@@ -1916,7 +1916,7 @@ The outcome of a decision made by the policy decision point server.
 
 </td><td>
 
-HTTP headers from which to construct a [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) object.
+HTTP headers from which to construct a [`Headers`](https://developer.mozilla.org/en-US/docs/Web/API/Headers) object.
 
 
 </td></tr>
@@ -1927,7 +1927,7 @@ HTTP headers from which to construct a [Headers](https://developer.mozilla.org/e
 
 </td><td>
 
-Input to [Client.isAllowed()](./core.client.isallowed.md)<!-- -->.
+Input to [`Client.isAllowed()`](./core.client.isallowed.md)<!-- -->.
 
 
 </td></tr>
@@ -1971,7 +1971,7 @@ Output from a `PlanResources` invocation.
 
 </td><td>
 
-Input to [Client.planResources()](./core.client.planresources.md)<!-- -->.
+Input to [`Client.planResources()`](./core.client.planresources.md)<!-- -->.
 
 
 </td></tr>
@@ -2015,7 +2015,7 @@ Source of policies.
 
 </td><td>
 
-Policies sourced from [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [\`hub\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
+Policies sourced from [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [`hub` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
 
 
 </td></tr>

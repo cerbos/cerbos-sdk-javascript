@@ -4,7 +4,7 @@
 
 ## ListAccessLogEntriesRequest interface
 
-Input to [Client.listAccessLogEntries()](./core.client.listaccesslogentries.md)<!-- -->.
+Input to [`Client.listAccessLogEntries()`](./core.client.listaccesslogentries.md)<!-- -->.
 
 **Signature:**
 

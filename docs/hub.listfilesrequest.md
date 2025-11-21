@@ -4,7 +4,7 @@
 
 ## ListFilesRequest interface
 
-Input to [StoresClient.listFiles()](./hub.storesclient.listfiles.md)<!-- -->.
+Input to [`StoresClient.listFiles()`](./hub.storesclient.listfiles.md)<!-- -->.
 
 **Signature:**
 

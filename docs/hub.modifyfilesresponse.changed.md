@@ -14,5 +14,5 @@ changed: boolean;
 
 ## Remarks
 
-This can only be `false` if [ModifyFilesRequest.allowUnchanged](./hub.modifyfilesrequest.allowunchanged.md) was `true`<!-- -->.
+This can only be `false` if [`ModifyFilesRequest.allowUnchanged`](./hub.modifyfilesrequest.allowunchanged.md) was `true`<!-- -->.
 

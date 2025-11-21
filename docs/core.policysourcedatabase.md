@@ -4,7 +4,7 @@
 
 ## PolicySourceDatabase interface
 
-Policies sourced from a database using the [\`mysql\`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#mysql)<!-- -->, [\`postgres\`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#postgres)<!-- -->, or [\`sqlite3\`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#sqlite3) storage drivers.
+Policies sourced from a database using the [`mysql`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#mysql)<!-- -->, [`postgres`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#postgres)<!-- -->, or [`sqlite3`](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#sqlite3) storage drivers.
 
 **Signature:**
 

@@ -4,7 +4,7 @@
 
 ## IsAllowedRequest type
 
-Input to [Client.isAllowed()](./core.client.isallowed.md)<!-- -->.
+Input to [`Client.isAllowed()`](./core.client.isallowed.md)<!-- -->.
 
 **Signature:**
 

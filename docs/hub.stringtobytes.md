@@ -46,7 +46,6 @@ string
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 Uint8Array

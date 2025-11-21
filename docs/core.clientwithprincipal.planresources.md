@@ -4,7 +4,7 @@
 
 ## ClientWithPrincipal.planResources() method
 
-Produce a query plan that can be used to obtain a list of resources on which the principal is allowed to perform a particular action. See [Client.planResources()](./core.client.planresources.md) for details.
+Produce a query plan that can be used to obtain a list of resources on which the principal is allowed to perform a particular action. See [`Client.planResources()`](./core.client.planresources.md) for details.
 
 **Signature:**
 
@@ -61,7 +61,6 @@ _(Optional)_
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

@@ -4,7 +4,7 @@
 
 ## decisionLogEntryMethodIsCheckResources() function
 
-Type guard to check if a [DecisionLogEntryMethod](./core.decisionlogentrymethod.md) is a [DecisionLogEntryCheckResources](./core.decisionlogentrycheckresources.md)<!-- -->.
+Type guard to check if a [`DecisionLogEntryMethod`](./core.decisionlogentrymethod.md) is a [`DecisionLogEntryCheckResources`](./core.decisionlogentrycheckresources.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ method
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

@@ -62,7 +62,6 @@ _(Optional)_
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 Promise&lt;void&gt;
@@ -71,7 +70,7 @@ Promise&lt;void&gt;
 
 Requires
 
-- the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->,
+- the client to be configured with [`Options.adminCredentials`](./core.options.admincredentials.md)<!-- -->,
 
 - the Cerbos policy decision point server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) enabled, and
 
@@ -99,7 +98,7 @@ await cerbos.addOrUpdatePolicies({
 
 ## Example 2
 
-Load a policy from a YAML or JSON file with [readPolicy()](./files.readpolicy.md)<!-- -->:
+Load a policy from a YAML or JSON file with [`readPolicy()`](./files.readpolicy.md)<!-- -->:
 
 ```typescript
 import { readPolicy } from "@cerbos/files";
@@ -111,7 +110,7 @@ await cerbos.addOrUpdatePolicies({
 
 ## Example 3
 
-Load policies and schemas from a directory with [readDirectory()](./files.readdirectory.md)<!-- -->:
+Load policies and schemas from a directory with [`readDirectory()`](./files.readdirectory.md)<!-- -->:
 
 ```typescript
 import { readDirectory } from "@cerbos/files";

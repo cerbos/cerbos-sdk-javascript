@@ -48,7 +48,6 @@ _(Optional)_
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 Promise&lt;[ListSchemasResponse](./core.listschemasresponse.md)<!-- -->&gt;
@@ -57,7 +56,7 @@ Promise&lt;[ListSchemasResponse](./core.listschemasresponse.md)<!-- -->&gt;
 
 Requires
 
-- the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->, and
+- the client to be configured with [`Options.adminCredentials`](./core.options.admincredentials.md)<!-- -->, and
 
 - the Cerbos policy decision point server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) enabled.
 

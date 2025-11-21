@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> Define variables within the policy body instead, provided the Cerbos policy decision point server is at least v0.29 ([DerivedRolesBody.variables](./core.derivedrolesbody.variables.md)<!-- -->, [PrincipalPolicyBody.variables](./core.principalpolicybody.variables.md)<!-- -->, or [ResourcePolicyBody.variables](./core.resourcepolicybody.variables.md)<!-- -->).
+> Define variables within the policy body instead, provided the Cerbos policy decision point server is at least v0.29 ([`DerivedRolesBody.variables`](./core.derivedrolesbody.variables.md)<!-- -->, [`PrincipalPolicyBody.variables`](./core.principalpolicybody.variables.md)<!-- -->, or [`ResourcePolicyBody.variables`](./core.resourcepolicybody.variables.md)<!-- -->).
 > 
 
 Variable expressions defined for the policy.

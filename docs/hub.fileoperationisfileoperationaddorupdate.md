@@ -4,7 +4,7 @@
 
 ## fileOperationIsFileOperationAddOrUpdate() function
 
-Type guard to check if a [FileOperation](./hub.fileoperation.md) is a [FileOperationAddOrUpdate](./hub.fileoperationaddorupdate.md)<!-- -->.
+Type guard to check if a [`FileOperation`](./hub.fileoperation.md) is a [`FileOperationAddOrUpdate`](./hub.fileoperationaddorupdate.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ operation
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

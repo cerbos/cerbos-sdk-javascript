@@ -4,7 +4,7 @@
 
 ## EnablePoliciesRequest interface
 
-Input to [Client.enablePolicies()](./core.client.enablepolicies.md)<!-- -->.
+Input to [`Client.enablePolicies()`](./core.client.enablepolicies.md)<!-- -->.
 
 **Signature:**
 

@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> Use [BundleMetadata.sourceAttributes](./embedded.bundlemetadata.sourceattributes.md) instead.
+> Use [`BundleMetadata.sourceAttributes`](./embedded.bundlemetadata.sourceattributes.md) instead.
 > 
 
 The IDs of the policies included in the bundle.

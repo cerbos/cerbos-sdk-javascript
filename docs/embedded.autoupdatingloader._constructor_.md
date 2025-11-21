@@ -68,7 +68,7 @@ _(Optional)_
 
 Bundle download URLs are available in the "Embedded" section of the "Decision points" page of your Cerbos Hub workspace.
 
-The bundle will be loaded in the background when the loader is created. If initial loading fails, then the first request from the client using the loader will throw an error. To detect failure to load the bundle before making any requests, provide an [Options.onError](./embedded.options.onerror.md) callback or await the [Loader.active()](./embedded.loader.active.md) method.
+The bundle will be loaded in the background when the loader is created. If initial loading fails, then the first request from the client using the loader will throw an error. To detect failure to load the bundle before making any requests, provide an [`Options.onError`](./embedded.options.onerror.md) callback or await the [`Loader.active()`](./embedded.loader.active.md) method.
 
-Failure to load updates after the initial load will not cause requests from the client to throw errors, but errors will be passed to the [Options.onError](./embedded.options.onerror.md) callback.
+Failure to load updates after the initial load will not cause requests from the client to throw errors, but errors will be passed to the [`Options.onError`](./embedded.options.onerror.md) callback.
 

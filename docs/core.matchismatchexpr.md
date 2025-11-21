@@ -4,7 +4,7 @@
 
 ## matchIsMatchExpr() function
 
-Type guard to check if a [Match](./core.match.md) is a [MatchExpr](./core.matchexpr.md)<!-- -->.
+Type guard to check if a [`Match`](./core.match.md) is a [`MatchExpr`](./core.matchexpr.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ match
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

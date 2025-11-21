@@ -4,7 +4,7 @@
 
 ## ModifyFilesRequest interface
 
-Input to [StoresClient.modifyFiles()](./hub.storesclient.modifyfiles.md)<!-- -->.
+Input to [`StoresClient.modifyFiles()`](./hub.storesclient.modifyfiles.md)<!-- -->.
 
 **Signature:**
 

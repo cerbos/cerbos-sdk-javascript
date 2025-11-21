@@ -4,7 +4,7 @@
 
 ## PlanResourcesRequestWithAction interface
 
-Input to [Client.planResources()](./core.client.planresources.md)<!-- -->.
+Input to [`Client.planResources()`](./core.client.planresources.md)<!-- -->.
 
 **Signature:**
 

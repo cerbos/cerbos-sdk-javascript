@@ -4,7 +4,7 @@
 
 ## auditLogFilterIsTail() function
 
-Type guard to check if an [AuditLogFilter](./core.auditlogfilter.md) is an [AuditLogFilterTail](./core.auditlogfiltertail.md)<!-- -->.
+Type guard to check if an [`AuditLogFilter`](./core.auditlogfilter.md) is an [`AuditLogFilterTail`](./core.auditlogfiltertail.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ filter
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

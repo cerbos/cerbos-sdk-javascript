@@ -4,7 +4,7 @@
 
 ## policyIsPrincipalPolicy() function
 
-Type guard to check if a [Policy](./core.policy.md) is a [PrincipalPolicy](./core.principalpolicy.md)<!-- -->.
+Type guard to check if a [`Policy`](./core.policy.md) is a [`PrincipalPolicy`](./core.principalpolicy.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ policy
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

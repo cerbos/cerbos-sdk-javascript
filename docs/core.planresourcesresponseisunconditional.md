@@ -4,7 +4,7 @@
 
 ## planResourcesResponseIsUnconditional() function
 
-Type guard to check if a [PlanResourcesResponse](./core.planresourcesresponse.md) is a [PlanResourcesUnconditionalResponse](./core.planresourcesunconditionalresponse.md)<!-- -->.
+Type guard to check if a [`PlanResourcesResponse`](./core.planresourcesresponse.md) is a [`PlanResourcesUnconditionalResponse`](./core.planresourcesunconditionalresponse.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ output
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

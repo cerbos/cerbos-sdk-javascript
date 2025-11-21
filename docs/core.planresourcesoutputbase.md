@@ -4,7 +4,7 @@
 
 ## PlanResourcesOutputBase interface
 
-Common fields between different [PlanResourcesOutput](./core.planresourcesoutput.md) types.
+Common fields between different [`PlanResourcesOutput`](./core.planresourcesoutput.md) types.
 
 **Signature:**
 

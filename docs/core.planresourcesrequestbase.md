@@ -4,7 +4,7 @@
 
 ## PlanResourcesRequestBase interface
 
-Common fields for inputs to [Client.planResources()](./core.client.planresources.md)<!-- -->.
+Common fields for inputs to [`Client.planResources()`](./core.client.planresources.md)<!-- -->.
 
 **Signature:**
 

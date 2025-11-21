@@ -4,7 +4,7 @@
 
 ## GetSchemasRequest interface
 
-Input to [Client.getSchemas()](./core.client.getschemas.md)<!-- -->.
+Input to [`Client.getSchemas()`](./core.client.getschemas.md)<!-- -->.
 
 **Signature:**
 

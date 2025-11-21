@@ -4,7 +4,7 @@
 
 ## stringMatchIsStringMatchIn() function
 
-Type guard to check if a [StringMatch](./hub.stringmatch.md) is a [StringMatchIn](./hub.stringmatchin.md)<!-- -->.
+Type guard to check if a [`StringMatch`](./hub.stringmatch.md) is a [`StringMatchIn`](./hub.stringmatchin.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ match
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

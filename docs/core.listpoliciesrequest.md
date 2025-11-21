@@ -4,7 +4,7 @@
 
 ## ListPoliciesRequest interface
 
-Input to [Client.listPolicies()](./core.client.listpolicies.md)<!-- -->.
+Input to [`Client.listPolicies()`](./core.client.listpolicies.md)<!-- -->.
 
 **Signature:**
 

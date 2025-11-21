@@ -4,7 +4,7 @@
 
 ## GetPoliciesRequest interface
 
-Input to [Client.getPolicies()](./core.client.getpolicies.md)<!-- -->.
+Input to [`Client.getPolicies()`](./core.client.getpolicies.md)<!-- -->.
 
 **Signature:**
 

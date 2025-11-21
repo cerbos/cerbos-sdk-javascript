@@ -4,7 +4,7 @@
 
 ## ValidationFailed class
 
-Error thrown when input fails schema validation, if the [Client](./core.client.md) is configured with [onValidationError](./core.options.onvalidationerror.md) set to `"throw"`<!-- -->.
+Error thrown when input fails schema validation, if the [`Client`](./core.client.md) is configured with [onValidationError](./core.options.onvalidationerror.md) set to `"throw"`<!-- -->.
 
 **Signature:**
 

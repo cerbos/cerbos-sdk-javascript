@@ -16,5 +16,5 @@ headers?: HeadersInit | (() => HeadersInit | Promise<HeadersInit>) | undefined;
 
 Headers can be included in the policy decision point's audit logs by setting the `includeMetadataKeys` or `excludeMetadataKeys` fields in the `audit` [configuration block](https://docs.cerbos.dev/cerbos/latest/configuration/audit)<!-- -->.
 
-The `User-Agent` header is set using [Options.userAgent](./core.options.useragent.md)<!-- -->.
+The `User-Agent` header is set using [`Options.userAgent`](./core.options.useragent.md)<!-- -->.
 

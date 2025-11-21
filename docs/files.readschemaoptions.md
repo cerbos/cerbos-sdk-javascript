@@ -4,7 +4,7 @@
 
 ## ReadSchemaOptions interface
 
-Options for [readSchema()](./files.readschema.md)<!-- -->.
+Options for [`readSchema()`](./files.readschema.md)<!-- -->.
 
 **Signature:**
 

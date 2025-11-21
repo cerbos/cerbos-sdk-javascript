@@ -11,7 +11,6 @@ Check if the policy decision was that all input actions should be allowed for th
 ```typescript
 allAllowed(): boolean;
 ```
-
 **Returns:**
 
 boolean

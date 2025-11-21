@@ -48,7 +48,6 @@ the YAML- or JSON-encoded policy definition.
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 [Policy](./core.policy.md)

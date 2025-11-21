@@ -1,0 +1,26 @@
+diff --git a/lib/markdown/CustomMarkdownEmitter.js b/lib/markdown/CustomMarkdownEmitter.js
+index ccceeec5f3995f91d327fa48dba6603a82e41b0f..816c3e9e578a900cef3406a095066599feb72cf9 100644
+--- a/lib/markdown/CustomMarkdownEmitter.js
++++ b/lib/markdown/CustomMarkdownEmitter.js
+@@ -127,7 +127,7 @@ class CustomMarkdownEmitter extends MarkdownEmitter_1.MarkdownEmitter {
+                 let linkText = docLinkTag.linkText || '';
+                 if (linkText.length === 0) {
+                     // Generate a name such as Namespace1.Namespace2.MyClass.myMethod()
+-                    linkText = result.resolvedApiItem.getScopedNameWithinPackage();
++                    linkText = `\`${result.resolvedApiItem.getScopedNameWithinPackage()}\``;
+                 }
+                 if (linkText.length > 0) {
+                     const encodedLinkText = this.getEscapedText(linkText.replace(/\s+/g, ' '));
+diff --git a/lib/markdown/MarkdownEmitter.js b/lib/markdown/MarkdownEmitter.js
+index 1c3faedf949e73667204cbf0b9eda64174d58148..36c462fca07c66200978d48ffc9914a2b24bcc95 100644
+--- a/lib/markdown/MarkdownEmitter.js
++++ b/lib/markdown/MarkdownEmitter.js
+@@ -28,7 +28,7 @@ class MarkdownEmitter {
+     getEscapedText(text) {
+         const textWithBackslashes = text
+             .replace(/\\/g, '\\\\') // first replace the escape character
+-            .replace(/[*#[\]_|`~]/g, (x) => '\\' + x) // then escape any special characters
++            .replace(/[*#[\]_|~]/g, (x) => '\\' + x) // then escape any special characters
+             .replace(/---/g, '\\-\\-\\-') // hyphens only if it's 3 or more
+             .replace(/&/g, '&amp;')
+             .replace(/</g, '&lt;')

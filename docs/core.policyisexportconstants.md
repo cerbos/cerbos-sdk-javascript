@@ -4,7 +4,7 @@
 
 ## policyIsExportConstants() function
 
-Type guard to check if a [Policy](./core.policy.md) is a set of [ExportConstants](./core.exportconstants.md)<!-- -->.
+Type guard to check if a [`Policy`](./core.policy.md) is a set of [`ExportConstants`](./core.exportconstants.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ policy
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

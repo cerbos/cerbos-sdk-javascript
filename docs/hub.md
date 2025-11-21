@@ -59,7 +59,7 @@ Error thrown on failure to load credentials from environment variables.
 
 </td><td>
 
-Error thrown when [StoresClient.replaceFiles()](./hub.storesclient.replacefiles.md) fails because the request didn't contain any usable files.
+Error thrown when [`StoresClient.replaceFiles()`](./hub.storesclient.replacefiles.md) fails because the request didn't contain any usable files.
 
 
 </td></tr>
@@ -155,7 +155,7 @@ Decode a string from a UTF-8 byte sequence.
 
 </td><td>
 
-Type guard to check if a [ChangeOrigin](./hub.changeorigin.md) is a [ChangeOriginGit](./hub.changeorigingit.md)<!-- -->.
+Type guard to check if a [`ChangeOrigin`](./hub.changeorigin.md) is a [`ChangeOriginGit`](./hub.changeorigingit.md)<!-- -->.
 
 
 </td></tr>
@@ -166,7 +166,7 @@ Type guard to check if a [ChangeOrigin](./hub.changeorigin.md) is a [ChangeOrigi
 
 </td><td>
 
-Type guard to check if a [ChangeOrigin](./hub.changeorigin.md) is a [ChangeOriginInternal](./hub.changeorigininternal.md)<!-- -->.
+Type guard to check if a [`ChangeOrigin`](./hub.changeorigin.md) is a [`ChangeOriginInternal`](./hub.changeorigininternal.md)<!-- -->.
 
 
 </td></tr>
@@ -188,7 +188,7 @@ Load client credentials from the `CERBOS_HUB_CLIENT_ID` and `CERBOS_HUB_CLIENT_S
 
 </td><td>
 
-Type guard to check if a [FileOperation](./hub.fileoperation.md) is a [FileOperationAddOrUpdate](./hub.fileoperationaddorupdate.md)<!-- -->.
+Type guard to check if a [`FileOperation`](./hub.fileoperation.md) is a [`FileOperationAddOrUpdate`](./hub.fileoperationaddorupdate.md)<!-- -->.
 
 
 </td></tr>
@@ -199,7 +199,7 @@ Type guard to check if a [FileOperation](./hub.fileoperation.md) is a [FileOpera
 
 </td><td>
 
-Type guard to check if a [FileOperation](./hub.fileoperation.md) is a [FileOperationDelete](./hub.fileoperationdelete.md)<!-- -->.
+Type guard to check if a [`FileOperation`](./hub.fileoperation.md) is a [`FileOperationDelete`](./hub.fileoperationdelete.md)<!-- -->.
 
 
 </td></tr>
@@ -210,7 +210,7 @@ Type guard to check if a [FileOperation](./hub.fileoperation.md) is a [FileOpera
 
 </td><td>
 
-Type guard to check if a [ReplaceFilesContents](./hub.replacefilescontents.md) is a [ReplaceFilesContentsUnzipped](./hub.replacefilescontentsunzipped.md)<!-- -->.
+Type guard to check if a [`ReplaceFilesContents`](./hub.replacefilescontents.md) is a [`ReplaceFilesContentsUnzipped`](./hub.replacefilescontentsunzipped.md)<!-- -->.
 
 
 </td></tr>
@@ -221,7 +221,7 @@ Type guard to check if a [ReplaceFilesContents](./hub.replacefilescontents.md) i
 
 </td><td>
 
-Type guard to check if a [ReplaceFilesContents](./hub.replacefilescontents.md) is a [ReplaceFilesContentsZipped](./hub.replacefilescontentszipped.md)<!-- -->.
+Type guard to check if a [`ReplaceFilesContents`](./hub.replacefilescontents.md) is a [`ReplaceFilesContentsZipped`](./hub.replacefilescontentszipped.md)<!-- -->.
 
 
 </td></tr>
@@ -232,7 +232,7 @@ Type guard to check if a [ReplaceFilesContents](./hub.replacefilescontents.md) i
 
 </td><td>
 
-Type guard to check if a [StringMatch](./hub.stringmatch.md) is a [StringMatchContains](./hub.stringmatchcontains.md)<!-- -->.
+Type guard to check if a [`StringMatch`](./hub.stringmatch.md) is a [`StringMatchContains`](./hub.stringmatchcontains.md)<!-- -->.
 
 
 </td></tr>
@@ -243,7 +243,7 @@ Type guard to check if a [StringMatch](./hub.stringmatch.md) is a [StringMatchCo
 
 </td><td>
 
-Type guard to check if a [StringMatch](./hub.stringmatch.md) is a [StringMatchEquals](./hub.stringmatchequals.md)<!-- -->.
+Type guard to check if a [`StringMatch`](./hub.stringmatch.md) is a [`StringMatchEquals`](./hub.stringmatchequals.md)<!-- -->.
 
 
 </td></tr>
@@ -254,7 +254,7 @@ Type guard to check if a [StringMatch](./hub.stringmatch.md) is a [StringMatchEq
 
 </td><td>
 
-Type guard to check if a [StringMatch](./hub.stringmatch.md) is a [StringMatchIn](./hub.stringmatchin.md)<!-- -->.
+Type guard to check if a [`StringMatch`](./hub.stringmatch.md) is a [`StringMatchIn`](./hub.stringmatchin.md)<!-- -->.
 
 
 </td></tr>
@@ -412,7 +412,7 @@ Delete a file.
 
 </td><td>
 
-Input to [StoresClient.getFiles()](./hub.storesclient.getfiles.md)<!-- -->.
+Input to [`StoresClient.getFiles()`](./hub.storesclient.getfiles.md)<!-- -->.
 
 
 </td></tr>
@@ -423,7 +423,7 @@ Input to [StoresClient.getFiles()](./hub.storesclient.getfiles.md)<!-- -->.
 
 </td><td>
 
-Output from [StoresClient.getFiles()](./hub.storesclient.getfiles.md)<!-- -->.
+Output from [`StoresClient.getFiles()`](./hub.storesclient.getfiles.md)<!-- -->.
 
 
 </td></tr>
@@ -434,7 +434,7 @@ Output from [StoresClient.getFiles()](./hub.storesclient.getfiles.md)<!-- -->.
 
 </td><td>
 
-Input to [StoresClient.listFiles()](./hub.storesclient.listfiles.md)<!-- -->.
+Input to [`StoresClient.listFiles()`](./hub.storesclient.listfiles.md)<!-- -->.
 
 
 </td></tr>
@@ -445,7 +445,7 @@ Input to [StoresClient.listFiles()](./hub.storesclient.listfiles.md)<!-- -->.
 
 </td><td>
 
-Output from [StoresClient.listFiles()](./hub.storesclient.listfiles.md)<!-- -->.
+Output from [`StoresClient.listFiles()`](./hub.storesclient.listfiles.md)<!-- -->.
 
 
 </td></tr>
@@ -456,7 +456,7 @@ Output from [StoresClient.listFiles()](./hub.storesclient.listfiles.md)<!-- -->.
 
 </td><td>
 
-Input to [StoresClient.modifyFiles()](./hub.storesclient.modifyfiles.md)<!-- -->.
+Input to [`StoresClient.modifyFiles()`](./hub.storesclient.modifyfiles.md)<!-- -->.
 
 
 </td></tr>
@@ -467,7 +467,7 @@ Input to [StoresClient.modifyFiles()](./hub.storesclient.modifyfiles.md)<!-- -->
 
 </td><td>
 
-Output from [StoresClient.modifyFiles()](./hub.storesclient.modifyfiles.md)<!-- -->.
+Output from [`StoresClient.modifyFiles()`](./hub.storesclient.modifyfiles.md)<!-- -->.
 
 
 </td></tr>
@@ -500,7 +500,7 @@ Zipped files to upload to a store.
 
 </td><td>
 
-Input to [StoresClient.replaceFiles()](./hub.storesclient.replacefiles.md)<!-- -->.
+Input to [`StoresClient.replaceFiles()`](./hub.storesclient.replacefiles.md)<!-- -->.
 
 
 </td></tr>
@@ -511,7 +511,7 @@ Input to [StoresClient.replaceFiles()](./hub.storesclient.replacefiles.md)<!-- -
 
 </td><td>
 
-Output from [StoresClient.replaceFiles()](./hub.storesclient.replacefiles.md)<!-- -->.
+Output from [`StoresClient.replaceFiles()`](./hub.storesclient.replacefiles.md)<!-- -->.
 
 
 </td></tr>

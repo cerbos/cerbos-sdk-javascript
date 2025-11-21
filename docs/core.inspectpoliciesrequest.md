@@ -4,7 +4,7 @@
 
 ## InspectPoliciesRequest interface
 
-Input to [Client.inspectPolicies()](./core.client.inspectpolicies.md)<!-- -->.
+Input to [`Client.inspectPolicies()`](./core.client.inspectpolicies.md)<!-- -->.
 
 **Signature:**
 

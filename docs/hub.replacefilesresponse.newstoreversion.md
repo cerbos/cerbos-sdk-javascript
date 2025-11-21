@@ -14,5 +14,5 @@ newStoreVersion: bigint;
 
 ## Remarks
 
-If [ReplaceFilesRequest.allowUnchanged](./hub.replacefilesrequest.allowunchanged.md) was `true`<!-- -->, this will be the existing store version if no changes were made.
+If [`ReplaceFilesRequest.allowUnchanged`](./hub.replacefilesrequest.allowunchanged.md) was `true`<!-- -->, this will be the existing store version if no changes were made.
 

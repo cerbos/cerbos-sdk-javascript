@@ -4,7 +4,7 @@
 
 ## policySourceIsHubLocalBundle() function
 
-Type guard to check if a [PolicySource](./core.policysource.md) is a [PolicySourceHubLocalBundle](./core.policysourcehublocalbundle.md)<!-- -->.
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceHubLocalBundle`](./core.policysourcehublocalbundle.md)<!-- -->.
 
 **Signature:**
 
@@ -45,7 +45,6 @@ source
 
 </td></tr>
 </tbody></table>
-
 
 **Returns:**
 

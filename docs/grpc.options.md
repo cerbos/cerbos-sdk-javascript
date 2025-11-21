@@ -4,7 +4,7 @@
 
 ## Options interface
 
-Options for creating a new [GRPC](./grpc.grpc.md) client.
+Options for creating a new [`GRPC`](./grpc.grpc.md) client.
 
 **Signature:**
 

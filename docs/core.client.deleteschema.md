@@ -62,7 +62,6 @@ _(Optional)_
 </td></tr>
 </tbody></table>
 
-
 **Returns:**
 
 Promise&lt;boolean&gt;
@@ -71,7 +70,7 @@ Promise&lt;boolean&gt;
 
 Requires
 
-- the client to be configured with [Options.adminCredentials](./core.options.admincredentials.md)<!-- -->,
+- the client to be configured with [`Options.adminCredentials`](./core.options.admincredentials.md)<!-- -->,
 
 - the Cerbos policy decision point (PDP) server to be configured with the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api) enabled, and
 

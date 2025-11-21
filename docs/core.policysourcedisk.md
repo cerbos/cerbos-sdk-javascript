@@ -4,7 +4,7 @@
 
 ## PolicySourceDisk interface
 
-Policies sourced from a directory on the filesystem using the [\`disk\` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#disk-driver)<!-- -->.
+Policies sourced from a directory on the filesystem using the [`disk` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#disk-driver)<!-- -->.
 
 **Signature:**
 

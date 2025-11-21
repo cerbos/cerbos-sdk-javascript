@@ -4,7 +4,7 @@
 
 ## ListFilesResponse interface
 
-Output from [StoresClient.listFiles()](./hub.storesclient.listfiles.md)<!-- -->.
+Output from [`StoresClient.listFiles()`](./hub.storesclient.listfiles.md)<!-- -->.
 
 **Signature:**
 

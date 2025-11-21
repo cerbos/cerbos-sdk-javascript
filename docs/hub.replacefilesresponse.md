@@ -4,7 +4,7 @@
 
 ## ReplaceFilesResponse interface
 
-Output from [StoresClient.replaceFiles()](./hub.storesclient.replacefiles.md)<!-- -->.
+Output from [`StoresClient.replaceFiles()`](./hub.storesclient.replacefiles.md)<!-- -->.
 
 **Signature:**
 
