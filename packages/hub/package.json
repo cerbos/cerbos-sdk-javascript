@@ -53,8 +53,8 @@
   "dependencies": {
     "@bufbuild/protovalidate": "^1.0.0",
     "@cerbos/core": "^0.25.2",
-    "@connectrpc/connect": "^2.1.0",
-    "@connectrpc/connect-node": "^2.1.0",
+    "@connectrpc/connect": "^2.1.1",
+    "@connectrpc/connect-node": "^2.1.1",
     "opossum": "^9.0.0"
   },
   "devDependencies": {

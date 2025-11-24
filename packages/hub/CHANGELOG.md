@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependency on [@connectrpc/connect] to 2.1.1 ([#1291](https://github.com/cerbos/cerbos-sdk-javascript/pull/1291))
 
 ## [0.2.4] - 2025-11-20
 
