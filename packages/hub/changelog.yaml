@@ -1,6 +1,10 @@
 unreleased:
   type: patch
 
+  changed:
+    - summary: Migrate to [@connectrpc/validate]
+      pull: 1294
+
   bumped:
     "@connectrpc/connect":
       to: 2.1.1
@@ -112,6 +116,7 @@ references:
   "@cerbos/core": ../core/README.md
   "@connectrpc/connect": https://github.com/connectrpc/connect-es
   "@connectrpc/connect-node": https://github.com/connectrpc/connect-es
+  "@connectrpc/validate": https://github.com/connectrpc/validate-es
   opossum: https://nodeshift.dev/opossum/
 
 initialCommit: f477d2e7210284634461d85cb273d6a92e448ceb

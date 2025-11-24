@@ -152,9 +152,6 @@ importers:
       '@bufbuild/protobuf':
         specifier: ^2.10.1
         version: 2.10.1
-      '@bufbuild/protovalidate':
-        specifier: ^1.0.0
-        version: 1.0.0(@bufbuild/protobuf@2.10.1)
       '@cerbos/core':
         specifier: ^0.25.2
         version: link:../core
@@ -164,6 +161,9 @@ importers:
       '@connectrpc/connect-node':
         specifier: ^2.1.1
         version: 2.1.1(@bufbuild/protobuf@2.10.1)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1))
+      '@connectrpc/validate':
+        specifier: ^0.2.0
+        version: 0.2.0(@bufbuild/protobuf@2.10.1)(@bufbuild/protovalidate@1.0.0(@bufbuild/protobuf@2.10.1))(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1))
       opossum:
         specifier: ^9.0.0
         version: 9.0.0
@@ -543,6 +543,13 @@ packages:
     resolution: {integrity: sha512-JzhkaTvM73m2K1URT6tv53k2RwngSmCXLZJgK580qNQOXRzZRR/BCMfZw3h+90JpnG6XksP5bYT+cz0rpUzUWQ==}
     peerDependencies:
       '@bufbuild/protobuf': ^2.7.0
+
+  '@connectrpc/validate@0.2.0':
+    resolution: {integrity: sha512-u1hdyt1WaFkKpuT/3J2wYlCjYLkYHMZamoatgxTIsV5Q8H9fO2px3zecmb0Q47YDjkZqnX6z0PAEstK+dNYiEQ==}
+    peerDependencies:
+      '@bufbuild/protobuf': ^2.9.0
+      '@bufbuild/protovalidate': ^1.0.0
+      '@connectrpc/connect': ^2.0.3
 
   '@csstools/color-helpers@5.1.0':
     resolution: {integrity: sha512-S11EXWJyy0Mz5SYvRmY8nJYTFFd1LCNV+7cXyAgQtOOuzb4EsgfqDufL+9esx72/eLhsRdGZwaldu/h+E4t4BA==}
@@ -3407,6 +3414,12 @@ snapshots:
   '@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1)':
     dependencies:
       '@bufbuild/protobuf': 2.10.1
+
+  '@connectrpc/validate@0.2.0(@bufbuild/protobuf@2.10.1)(@bufbuild/protovalidate@1.0.0(@bufbuild/protobuf@2.10.1))(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1))':
+    dependencies:
+      '@bufbuild/protobuf': 2.10.1
+      '@bufbuild/protovalidate': 1.0.0(@bufbuild/protobuf@2.10.1)
+      '@connectrpc/connect': 2.1.1(@bufbuild/protobuf@2.10.1)
 
   '@csstools/color-helpers@5.1.0': {}
 
