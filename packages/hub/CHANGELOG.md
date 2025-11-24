@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Migrate to [@connectrpc/validate] ([#1294](https://github.com/cerbos/cerbos-sdk-javascript/pull/1294))
+
 - Bump dependency on [@connectrpc/connect] to 2.1.1 ([#1291](https://github.com/cerbos/cerbos-sdk-javascript/pull/1291))
 
 ## [0.2.4] - 2025-11-20
@@ -83,4 +85,5 @@
 [@cerbos/core]: ../core/README.md
 [@connectrpc/connect]: https://github.com/connectrpc/connect-es
 [@connectrpc/connect-node]: https://github.com/connectrpc/connect-es
+[@connectrpc/validate]: https://github.com/connectrpc/validate-es
 [opossum]: https://nodeshift.dev/opossum/
