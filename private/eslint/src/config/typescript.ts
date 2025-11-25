@@ -41,8 +41,13 @@ export const typescriptConfig = defineConfig(
     },
   },
   {
-    files: ["**/*.test.ts", "private/test/src/helpers.ts"],
+    files: [
+      "**/*.test.ts",
+      "private/test/src/client/*.ts",
+      "private/test/src/helpers.ts",
+    ],
     rules: {
+      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/no-unsafe-member-access": "off",
       "@typescript-eslint/no-unsafe-argument": "off",

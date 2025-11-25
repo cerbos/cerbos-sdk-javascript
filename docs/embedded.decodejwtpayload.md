@@ -9,9 +9,9 @@ A function to verify and decode a JWT, returning its payload.
 **Signature:**
 
 ```typescript
-export type DecodeJWTPayload = (jwt: JWT) => DecodedJWTPayload | Promise<DecodedJWTPayload>;
+export type DecodeJWTPayload = (jwt: JWT) => Awaitable<DecodedJWTPayload>;
 ```
-**References:** [JWT](./core.jwt.md)<!-- -->, [DecodedJWTPayload](./embedded.decodedjwtpayload.md)
+**References:** [JWT](./core.jwt.md)<!-- -->, [Awaitable](./core.awaitable.md)<!-- -->, [DecodedJWTPayload](./embedded.decodedjwtpayload.md)
 
 ## Example
 

@@ -64,7 +64,7 @@ _(Optional)_ Credentials for the [admin API](https://docs.cerbos.dev/cerbos/late
 
 </td><td>
 
-[HeadersInit](./core.headersinit.md) \| (() =&gt; [HeadersInit](./core.headersinit.md) \| Promise&lt;[HeadersInit](./core.headersinit.md)<!-- -->&gt;) \| undefined
+[HeadersInit](./core.headersinit.md) \| (() =&gt; [Awaitable](./core.awaitable.md)<!-- -->&lt;[HeadersInit](./core.headersinit.md)<!-- -->&gt;) \| undefined
 
 
 </td><td>
