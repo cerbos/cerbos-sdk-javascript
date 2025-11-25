@@ -6,6 +6,7 @@
     ":dependencyDashboard",
     ":gitSignOff",
     ":prConcurrentLimitNone",
+    "helpers:pinGitHubActionDigests",
     "schedule:weekly",
     "workarounds:all"
   ],
