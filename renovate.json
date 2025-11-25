@@ -1,11 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "commitMessageLowerCase": "never",
   "configMigration": true,
   "extends": [
     ":dependencyDashboard",
     ":gitSignOff",
     ":prConcurrentLimitNone",
+    ":semanticCommitsDisabled",
     "helpers:pinGitHubActionDigests",
     "schedule:weekly",
     "workarounds:all"
@@ -17,8 +17,7 @@
   "packageRules": [
     {
       "matchDepTypes": ["dependencies", "peerDependencies"],
-      "rangeStrategy": "bump",
-      "semanticCommitScope": "deps"
+      "rangeStrategy": "bump"
     },
     {
       "matchDepTypes": ["peerDependencies"],
@@ -28,58 +27,45 @@
     {
       "matchDepTypes": ["devDependencies"],
       "groupName": "development dependencies",
-      "rangeStrategy": "pin",
-      "semanticCommitScope": "deps-dev"
-    },
-    {
-      "matchUpdateTypes": ["lockFileMaintenance"],
-      "semanticCommitScope": "deps-dev"
+      "rangeStrategy": "pin"
     },
     {
       "matchDepTypes": ["engines", "packageManager"],
       "matchFileNames": ["package.json"],
       "groupName": "development dependencies",
-      "rangeStrategy": "pin",
-      "semanticCommitScope": "deps-dev"
+      "rangeStrategy": "pin"
     },
     {
       "matchManagers": ["docker-compose", "github-actions", "nodenv"],
       "groupName": "development dependencies",
-      "rangeStrategy": "pin",
-      "semanticCommitScope": "deps-dev"
+      "rangeStrategy": "pin"
     },
     {
       "matchPackageNames": ["@bufbuild/*"],
-      "groupName": "buf",
-      "semanticCommitScope": "deps"
+      "groupName": "buf"
     },
     {
       "matchPackageNames": ["@connectrpc/*"],
-      "groupName": "connect",
-      "semanticCommitScope": "deps"
+      "groupName": "connect"
     },
     {
       "matchPackageNames": ["@grpc/*"],
-      "groupName": "grpc",
-      "semanticCommitScope": "deps"
+      "groupName": "grpc"
     },
     {
       "matchPackageNames": [
         "@microsoft/api-documenter",
         "@microsoft/api-extractor"
       ],
-      "groupName": "docs",
-      "semanticCommitScope": "deps-dev"
+      "groupName": "docs"
     },
     {
       "matchPackageNames": ["@opentelemetry/*"],
-      "groupName": "opentelemetry",
-      "semanticCommitScope": "deps"
+      "groupName": "opentelemetry"
     },
     {
       "matchPackageNames": ["yaml"],
-      "groupName": "yaml",
-      "semanticCommitScope": "deps"
+      "groupName": "yaml"
     },
     {
       "description": "@types/node should match the Node.js version",
@@ -94,6 +80,5 @@
     }
   ],
   "postUpdateOptions": ["pnpmDedupe"],
-  "reviewers": ["haines"],
-  "semanticCommitType": "chore"
+  "reviewers": ["haines"]
 }
