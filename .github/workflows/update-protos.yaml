@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v6
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
 
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
@@ -23,14 +23,14 @@ jobs:
         run: pnpm run generate
 
       - name: Generate bot token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2
         id: generate-token
         with:
           app-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
           private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7
         with:
           token: ${{ steps.generate-token.outputs.token }}
           branch: update-protos
