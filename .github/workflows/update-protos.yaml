@@ -41,9 +41,9 @@ jobs:
           author: ${{ vars.CERBOS_BOT_AUTHOR }}
           committer: ${{ vars.CERBOS_BOT_AUTHOR }}
           commit-message: |-
-            chore: Update protos
+            Update protos
           title: |-
-            chore: Update protos
+            Update protos
           body: |-
             This PR updates protos and regenerates code.
           add-paths: |-
