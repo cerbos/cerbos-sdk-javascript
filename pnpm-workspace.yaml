@@ -17,4 +17,4 @@ minimumReleaseAgeExclude:
   - scheduler
 
 patchedDependencies:
-  "@microsoft/api-documenter@7.28.0": patches/@microsoft__api-documenter@7.28.0.patch
+  "@microsoft/api-documenter@7.28.1": patches/@microsoft__api-documenter@7.28.1.patch
