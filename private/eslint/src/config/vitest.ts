@@ -11,5 +11,6 @@ export const vitestConfig = defineConfig({
   },
   rules: {
     "vitest/expect-expect": ["warn", { assertFunctionNames: ["expect*"] }],
+    "vitest/no-conditional-expect": "off",
   },
 });

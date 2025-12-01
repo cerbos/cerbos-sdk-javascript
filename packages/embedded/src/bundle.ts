@@ -230,7 +230,11 @@ export async function download(
 }
 
 async function instantiate(
-  source: ArrayBufferView | ArrayBuffer | Response | WebAssembly.Module,
+  source:
+    | ArrayBufferView<ArrayBuffer>
+    | ArrayBuffer
+    | Response
+    | WebAssembly.Module,
   imports: WebAssembly.Imports,
 ): Promise<Exports> {
   if (source instanceof Response) {

@@ -291,7 +291,7 @@ class Callbacks implements Pick<Required<Options>, "onLoad" | "onError"> {
     abortController.abort();
 
     if (this.calls.length > 0) {
-      expect(this.calls).toHaveLength(1);
+      expect(this.calls).toHaveLength(1); // eslint-disable-line vitest/no-standalone-expect
     }
 
     const call = this.calls[0];
