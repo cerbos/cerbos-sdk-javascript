@@ -69,11 +69,13 @@ export class LoadError extends Error {
 export type Source =
   | string
   | URL
-  | ArrayBufferView
+  | ArrayBufferView<ArrayBuffer>
   | ArrayBuffer
   | Response
   | WebAssembly.Module
-  | Promise<ArrayBufferView | ArrayBuffer | Response | WebAssembly.Module>;
+  | Promise<
+      ArrayBufferView<ArrayBuffer> | ArrayBuffer | Response | WebAssembly.Module
+    >;
 
 /**
  * Options for creating a new {@link Embedded} client or {@link Loader}.

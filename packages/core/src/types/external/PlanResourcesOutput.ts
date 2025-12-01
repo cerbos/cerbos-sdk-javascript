@@ -55,8 +55,7 @@ export interface PlanResourcesOutputBase {
  *
  * @public
  */
-export interface PlanResourcesConditionalOutput
-  extends PlanResourcesOutputBase {
+export interface PlanResourcesConditionalOutput extends PlanResourcesOutputBase {
   /**
    * The type of plan.
    */
@@ -89,8 +88,7 @@ export function planResourcesOutputIsConditional(
  *
  * @public
  */
-export interface PlanResourcesUnconditionalOutput
-  extends PlanResourcesOutputBase {
+export interface PlanResourcesUnconditionalOutput extends PlanResourcesOutputBase {
   /**
    * The type of plan.
    */

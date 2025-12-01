@@ -50,8 +50,7 @@ export interface PlanResourcesResponseBase {
  *
  * @public
  */
-export interface PlanResourcesConditionalResponse
-  extends PlanResourcesResponseBase {
+export interface PlanResourcesConditionalResponse extends PlanResourcesResponseBase {
   /**
    * The type of plan.
    */
@@ -79,8 +78,7 @@ export function planResourcesResponseIsConditional(
  *
  * @public
  */
-export interface PlanResourcesUnconditionalResponse
-  extends PlanResourcesResponseBase {
+export interface PlanResourcesUnconditionalResponse extends PlanResourcesResponseBase {
   /**
    * The type of plan.
    */

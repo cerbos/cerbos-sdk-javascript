@@ -54,8 +54,7 @@ export interface PlanResourcesRequestBase {
  *
  * @public
  */
-export interface PlanResourcesRequestWithAction
-  extends PlanResourcesRequestBase {
+export interface PlanResourcesRequestWithAction extends PlanResourcesRequestBase {
   /**
    * The action for which to plan.
    *
@@ -69,8 +68,7 @@ export interface PlanResourcesRequestWithAction
  *
  * @public
  */
-export interface PlanResourcesRequestWithActions
-  extends PlanResourcesRequestBase {
+export interface PlanResourcesRequestWithActions extends PlanResourcesRequestBase {
   /**
    * The actions for which to plan.
    *
