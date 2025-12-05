@@ -11,13 +11,18 @@ import type {
 } from "@bufbuild/protobuf";
 import { fromJson } from "@bufbuild/protobuf";
 
-import type { Value, _AbortHandler, _Transport } from "@cerbos/core";
-import { NotOK, Status, _isObject, _methodName } from "@cerbos/core";
+import type { Value } from "@cerbos/core";
+import { NotOK, Status } from "@cerbos/core";
+import type {
+  AbortHandler,
+  Transport as CoreTransport,
+} from "@cerbos/core/~internal";
+import { isObject, methodName } from "@cerbos/core/~internal";
 
 import type { RequestInitWithUrl } from "./endpoints";
 import { endpoints } from "./endpoints";
 
-export class Transport implements _Transport {
+export class Transport implements CoreTransport {
   public constructor(
     private readonly baseUrl: string,
     private readonly userAgent: string,
@@ -27,7 +32,7 @@ export class Transport implements _Transport {
     method: DescMethodUnary<I, O>,
     request: MessageValidType<I>,
     headers: Headers,
-    abortHandler: _AbortHandler,
+    abortHandler: AbortHandler,
   ): Promise<MessageShape<O>> {
     const response = await this.fetch(method, request, headers, abortHandler);
 
@@ -42,7 +47,7 @@ export class Transport implements _Transport {
     method: DescMethodServerStreaming<I, O>,
     request: MessageValidType<I>,
     headers: Headers,
-    abortHandler: _AbortHandler,
+    abortHandler: AbortHandler,
   ): AsyncGenerator<MessageShape<O>, void, undefined> {
     const response = await this.fetch(method, request, headers, abortHandler);
 
@@ -56,7 +61,7 @@ export class Transport implements _Transport {
       )) {
         const message = JSON.parse(line) as Value;
 
-        if (!_isObject(message)) {
+        if (!isObject(message)) {
           throw new Error(`Unexpected message: wanted object, got ${line}`);
         }
 
@@ -97,9 +102,9 @@ export class Transport implements _Transport {
     method: DescMethod,
     request: Message,
     headers: Headers,
-    abortHandler: _AbortHandler,
+    abortHandler: AbortHandler,
   ): Promise<Response> {
-    const endpoint = endpoints.get(_methodName(method));
+    const endpoint = endpoints.get(methodName(method));
 
     if (!endpoint) {
       throw new NotOK(Status.UNIMPLEMENTED, "Unimplemented");

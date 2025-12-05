@@ -6,7 +6,8 @@ import { CheckResourcesRequestSchema } from "@cerbos/api/cerbos/request/v1/reque
 import type { CheckResourcesResponse } from "@cerbos/api/cerbos/response/v1/response_pb";
 import { CheckResourcesResponseSchema } from "@cerbos/api/cerbos/response/v1/response_pb";
 import type { DecodedAuxData, JWT } from "@cerbos/core";
-import { NotOK, _valuesFromProtobuf } from "@cerbos/core";
+import { NotOK } from "@cerbos/core";
+import { valuesFromProtobuf } from "@cerbos/core/~internal";
 
 import type {
   BundleMetadata,
@@ -115,7 +116,7 @@ export class Bundle {
         sourceAttributes: Object.fromEntries(
           Object.entries(sourceAttributes).map(([id, { attributes }]) => [
             id,
-            _valuesFromProtobuf(attributes),
+            valuesFromProtobuf(attributes),
           ]),
         ),
       };

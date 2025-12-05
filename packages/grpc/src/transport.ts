@@ -10,17 +10,21 @@ import { fromBinary, toBinary } from "@bufbuild/protobuf";
 import type { Client } from "@grpc/grpc-js";
 import { Metadata } from "@grpc/grpc-js";
 
-import type { _AbortHandler, _Transport } from "@cerbos/core";
-import { NotOK, Status, _isObject, _methodName } from "@cerbos/core";
+import { NotOK, Status } from "@cerbos/core";
+import type {
+  AbortHandler,
+  Transport as CoreTransport,
+} from "@cerbos/core/~internal";
+import { isObject, methodName } from "@cerbos/core/~internal";
 
-export class Transport implements _Transport {
+export class Transport implements CoreTransport {
   public constructor(private readonly client: Client) {}
 
   public async unary<I extends DescMessage, O extends DescMessage>(
     method: DescMethodUnary<I, O>,
     request: MessageValidType<I>,
     headers: Headers,
-    abortHandler: _AbortHandler,
+    abortHandler: AbortHandler,
   ): Promise<MessageShape<O>> {
     return await new Promise((resolve, reject) => {
       abortHandler.throwIfAborted();
@@ -58,7 +62,7 @@ export class Transport implements _Transport {
     method: DescMethodServerStreaming<I, O>,
     request: MessageValidType<I>,
     headers: Headers,
-    abortHandler: _AbortHandler,
+    abortHandler: AbortHandler,
   ): AsyncGenerator<MessageShape<O>, void, undefined> {
     abortHandler.throwIfAborted();
 
@@ -81,7 +85,7 @@ export class Transport implements _Transport {
     } catch (error) {
       abortHandler.throwIfAborted();
 
-      if (_isObject(error)) {
+      if (isObject(error)) {
         const { code, details } = error;
         if (typeof code === "number" && typeof details === "string") {
           throw new NotOK(code in Status ? code : Status.UNKNOWN, details);
@@ -109,7 +113,7 @@ function metadata(headers: Headers): Metadata {
 }
 
 function path(method: DescMethod): string {
-  return `/${_methodName(method)}`;
+  return `/${methodName(method)}`;
 }
 
 function serialize<I extends DescMessage>(

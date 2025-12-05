@@ -109,4 +109,3 @@ export * from "./ValidationErrorSource";
 export * from "./ValidationFailedCallback";
 export * from "./Value";
 export * from "./Variables";
-export * from "./_isObject";
