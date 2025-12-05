@@ -1,3 +1,4 @@
+import { setErrorNameAndStack } from "./internal";
 import type { ValidationError } from "./types/external";
 import { Status } from "./types/external";
 
@@ -45,7 +46,7 @@ export class NotOK extends Error {
     options?: ErrorOptions,
   ) {
     super(`gRPC error ${code} (${Status[code]}): ${details}`, options);
-    _setErrorNameAndStack(this);
+    setErrorNameAndStack(this);
   }
 }
 
@@ -89,16 +90,6 @@ export class ValidationFailed extends Error {
     public readonly validationErrors: ValidationError[],
   ) {
     super("Input failed schema validation");
-    _setErrorNameAndStack(this);
-  }
-}
-
-/** @internal */
-export function _setErrorNameAndStack(error: Error): void {
-  error.name = error.constructor.name;
-
-  // `Error.captureStackTrace` is not available in all browsers
-  if ("captureStackTrace" in Error) {
-    Error.captureStackTrace(error, error.constructor);
+    setErrorNameAndStack(this);
   }
 }

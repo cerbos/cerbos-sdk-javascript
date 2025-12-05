@@ -93,8 +93,8 @@ function activeEmbeddedBundle({ client }: ClientWithPrincipal): unknown {
   return "loader" in client &&
     typeof client.loader === "object" &&
     client.loader &&
-    "_active" in client.loader
-    ? client.loader._active
+    "~active" in client.loader
+    ? client.loader["~active"]
     : undefined;
 }
 

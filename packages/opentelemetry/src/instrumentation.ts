@@ -10,8 +10,11 @@ import type {
   InstrumentationConfig,
 } from "@opentelemetry/instrumentation";
 
-import type { _Instrumenter, _Transport } from "@cerbos/core";
-import { _addInstrumenter, _removeInstrumenter } from "@cerbos/core";
+import type {
+  Transport as CoreTransport,
+  Instrumenter,
+} from "@cerbos/core/~internal";
+import { addInstrumenter, removeInstrumenter } from "@cerbos/core/~internal";
 
 import { Instruments } from "./instruments";
 import { name, version } from "./metadata";
@@ -54,10 +57,10 @@ export class CerbosInstrumentation implements Instrumentation {
   public readonly instrumentationVersion = version;
 
   /** @internal */
-  public _tracer: Tracer;
+  public ["~tracer"]: Tracer;
 
   private readonly diag: DiagLogger;
-  private readonly instrumenter: _Instrumenter;
+  private readonly instrumenter: Instrumenter;
   private config: CerbosInstrumentationConfig;
   private instruments: Instruments | undefined;
 
@@ -67,9 +70,9 @@ export class CerbosInstrumentation implements Instrumentation {
     });
 
     this.config = { enabled: true, ...config };
-    this._tracer = trace.getTracer(name, version);
+    this["~tracer"] = trace.getTracer(name, version);
 
-    this.instrumenter = (transport): _Transport =>
+    this.instrumenter = (transport): CoreTransport =>
       new Transport(this, transport);
 
     if (this.config.enabled) {
@@ -106,7 +109,7 @@ export class CerbosInstrumentation implements Instrumentation {
    * Override the tracer provider, which otherwise defaults to the global tracer provider.
    */
   public setTracerProvider(tracerProvider: TracerProvider): void {
-    this._tracer = tracerProvider.getTracer(name, version);
+    this["~tracer"] = tracerProvider.getTracer(name, version);
   }
 
   /**
@@ -114,7 +117,7 @@ export class CerbosInstrumentation implements Instrumentation {
    */
   public enable(): void {
     this.diag.debug("Enabling Cerbos client instrumentation");
-    _addInstrumenter(this.instrumenter);
+    addInstrumenter(this.instrumenter);
   }
 
   /**
@@ -122,11 +125,11 @@ export class CerbosInstrumentation implements Instrumentation {
    */
   public disable(): void {
     this.diag.debug("Disabling Cerbos client instrumentation");
-    _removeInstrumenter(this.instrumenter);
+    removeInstrumenter(this.instrumenter);
   }
 
   /** @internal */
-  public get _instruments(): Instruments {
+  public get ["~instruments"](): Instruments {
     return (this.instruments ??= new Instruments(metrics));
   }
 }

@@ -1,6 +1,7 @@
 import type { ConnectError } from "@connectrpc/connect";
 
-import { NotOK, _setErrorNameAndStack } from "@cerbos/core";
+import { NotOK } from "@cerbos/core";
+import { setErrorNameAndStack } from "@cerbos/core/~internal";
 
 import type { FileError } from "../types";
 
@@ -49,7 +50,7 @@ export class MissingCredentials extends Error {
       "Expected credentials to be provided in CERBOS_HUB_CLIENT_ID and CERBOS_HUB_CLIENT_SECRET environment variables",
     );
 
-    _setErrorNameAndStack(this);
+    setErrorNameAndStack(this);
   }
 }
 

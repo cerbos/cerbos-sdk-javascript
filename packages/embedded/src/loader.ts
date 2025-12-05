@@ -5,7 +5,7 @@ import type {
   SourceAttributes,
   Value,
 } from "@cerbos/core";
-import { _setErrorNameAndStack } from "@cerbos/core";
+import { setErrorNameAndStack } from "@cerbos/core/~internal";
 
 import { Bundle, download } from "./bundle";
 import { constrainAutoUpdateInterval } from "./interval";
@@ -57,7 +57,7 @@ export class LoadError extends Error {
       cause,
     });
 
-    _setErrorNameAndStack(this);
+    setErrorNameAndStack(this);
   }
 }
 
@@ -253,13 +253,13 @@ export interface BundleMetadata {
  */
 export class Loader {
   /** @internal */
-  public _active: LoadResult | Promise<LoadResult>;
+  public ["~active"]: LoadResult | Promise<LoadResult>;
 
   /** @internal */
-  public readonly _options: Options;
+  public readonly ["~options"]: Options;
 
   /** @internal */
-  public readonly _userAgent: string;
+  public readonly ["~userAgent"]: string;
 
   private readonly logger: DecisionLogger | undefined;
 
@@ -302,33 +302,33 @@ export class Loader {
    * ```
    */
   public constructor(source: Source, options: Options = {}) {
-    this._options = options;
+    this["~options"] = options;
 
-    this._userAgent = `${
+    this["~userAgent"] = `${
       options.userAgent ? `${options.userAgent} ` : ""
     }${defaultUserAgent}`;
 
     if (options.onDecision) {
-      this.logger = new DecisionLogger(options.onDecision, this._userAgent);
+      this.logger = new DecisionLogger(options.onDecision, this["~userAgent"]);
     }
 
-    this._active = this._load(source, url(source), true);
+    this["~active"] = this["~load"](source, url(source), true);
   }
 
   /**
    * Resolves to the metadata of the loaded bundle, or rejects with the error that was encountered when loading the bundle.
    */
   public async active(): Promise<BundleMetadata> {
-    return (await resolve(this._active)).metadata;
+    return (await resolve(this["~active"])).metadata;
   }
 
   /** @internal */
-  public readonly _transport = new Transport(
-    async () => await resolve(this._active),
+  public readonly ["~transport"] = new Transport(
+    async () => await resolve(this["~active"]),
   );
 
   /** @internal */
-  protected async _load(
+  protected async ["~load"](
     source: Source,
     url: string | undefined,
     initial = false,
@@ -338,28 +338,31 @@ export class Loader {
         source,
         url,
         this.logger,
-        this._userAgent,
-        this._options,
+        this["~userAgent"],
+        this["~options"],
       );
 
-      await this._onLoad(bundle, initial);
+      await this["~onLoad"](bundle, initial);
 
       return { bundle };
     } catch (cause) {
       const error = new LoadError(cause);
-      await this._onError(error);
+      await this["~onError"](error);
       return { error };
     }
   }
 
   /** @internal */
-  protected async _onLoad(bundle: Bundle, _initial: boolean): Promise<void> {
-    await this._options.onLoad?.(bundle.metadata);
+  protected async ["~onLoad"](
+    bundle: Bundle,
+    _initial: boolean,
+  ): Promise<void> {
+    await this["~options"].onLoad?.(bundle.metadata);
   }
 
   /** @internal */
-  protected async _onError(error: LoadError): Promise<void> {
-    await this._options.onError?.(error);
+  protected async ["~onError"](error: LoadError): Promise<void> {
+    await this["~options"].onError?.(error);
   }
 }
 
@@ -455,7 +458,7 @@ export class AutoUpdatingLoader extends Loader {
    */
   public activate(): void {
     if (this._pending) {
-      this._active = { bundle: this._pending };
+      this["~active"] = { bundle: this._pending };
       this._pending = undefined;
     }
   }
@@ -473,7 +476,7 @@ export class AutoUpdatingLoader extends Loader {
   }
 
   /** @internal */
-  protected override async _onLoad(
+  protected override async ["~onLoad"](
     bundle: Bundle,
     initial: boolean,
   ): Promise<void> {
@@ -487,13 +490,13 @@ export class AutoUpdatingLoader extends Loader {
       }
     }
 
-    await super._onLoad(bundle, initial);
+    await super["~onLoad"](bundle, initial);
   }
 
   /** @internal */
-  protected override async _onError(error: LoadError): Promise<void> {
+  protected override async ["~onError"](error: LoadError): Promise<void> {
     if (!this.suppressError(error.cause)) {
-      await super._onError(error);
+      await super["~onError"](error);
     }
   }
 
@@ -515,7 +518,7 @@ export class AutoUpdatingLoader extends Loader {
     this.abortController?.abort();
     this.abortController = new AbortController();
 
-    await this._load(
+    await this["~load"](
       this.download(this.abortController.signal),
       this.url.toString(),
     );
@@ -530,7 +533,7 @@ export class AutoUpdatingLoader extends Loader {
       request.headers = { "If-None-Match": this.etag };
     }
 
-    const response = await download(this.url, this._userAgent, request);
+    const response = await download(this.url, this["~userAgent"], request);
 
     if (response.status === 304) {
       cancelBody(response);

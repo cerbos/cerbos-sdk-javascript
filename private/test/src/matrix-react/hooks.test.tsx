@@ -224,7 +224,7 @@ function testCerbosHook<TParams>(
     });
 
     it("calls Cerbos Client again when a new embedded bundle is activated", async () => {
-      const loader = { _active: Symbol("old LoadResult") };
+      const loader = { ["~active"]: Symbol("old LoadResult") };
 
       const embedded: Pick<Embedded, "loader" | "withPrincipal"> = {
         loader: loader as unknown as Loader,
@@ -240,7 +240,7 @@ function testCerbosHook<TParams>(
 
       await act(async () => await vi.advanceTimersByTimeAsync(300));
 
-      loader._active = Symbol("new LoadResult");
+      loader["~active"] = Symbol("new LoadResult");
       rerender(initialParams);
 
       expect(clientFn).toHaveBeenCalledTimes(2);

@@ -1,4 +1,4 @@
-import { _isObject } from "./_isObject";
+import { isObject } from "../../internal";
 
 const utf8Decoder = new TextDecoder("utf-8", { fatal: true });
 
@@ -21,7 +21,7 @@ export class SchemaDefinition {
   public toObject(): Record<string, unknown> {
     const object = JSON.parse(this.toString()) as unknown;
 
-    if (!_isObject(object)) {
+    if (!isObject(object)) {
       throw new Error("Schema definition is not an object");
     }
 
