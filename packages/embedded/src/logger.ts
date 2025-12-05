@@ -11,10 +11,10 @@ import type {
   SourceAttributes,
 } from "@cerbos/core";
 import {
-  _checkInputFromProtobuf,
-  _checkOutputFromProtobuf,
-  _requireField,
-} from "@cerbos/core";
+  checkInputFromProtobuf,
+  checkOutputFromProtobuf,
+  requireField,
+} from "@cerbos/core/~internal";
 
 import type { BundleMetadata, Options } from "./loader";
 
@@ -40,7 +40,7 @@ export class DecisionLogger {
 
     const inputs = request.resources.map<CheckInput>(
       ({ resource, actions }) => ({
-        ..._checkInputFromProtobuf({
+        ...checkInputFromProtobuf({
           $typeName: "cerbos.engine.v1.CheckInput",
           requestId: request.requestId,
           principal: request.principal,
@@ -58,12 +58,12 @@ export class DecisionLogger {
       response.cerbosCallId = callId;
 
       for (const result of response.results) {
-        _requireField(
+        requireField(
           "CheckResourcesResponse.ResultEntry.resource",
           result.resource,
         );
 
-        _requireField("CheckResourcesResponse.ResultEntry.meta", result.meta);
+        requireField("CheckResourcesResponse.ResultEntry.meta", result.meta);
 
         const actions: Record<string, CheckOutput_ActionEffect> = {};
 
@@ -88,7 +88,7 @@ export class DecisionLogger {
         }
 
         outputs.push(
-          _checkOutputFromProtobuf({
+          checkOutputFromProtobuf({
             $typeName: "cerbos.engine.v1.CheckOutput",
             requestId: response.requestId,
             resourceId: result.resource.id,
@@ -147,7 +147,9 @@ function metadata(headers: Headers): Record<string, string[]> {
   const metadata: Record<string, string[]> = {};
 
   for (const [name, value] of headers) {
-    (metadata[name] ??= []).push(value);
+    if (name !== "user-agent") {
+      (metadata[name] ??= []).push(value);
+    }
   }
 
   return metadata;

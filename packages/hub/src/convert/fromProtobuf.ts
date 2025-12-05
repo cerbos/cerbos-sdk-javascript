@@ -1,4 +1,4 @@
-import { _translateEnum, _unexpected } from "@cerbos/core";
+import { translateEnum, unexpected } from "@cerbos/core/~internal";
 
 import type {
   FileErrorValid,
@@ -39,8 +39,8 @@ export function fileErrorFromProto({
 }
 
 function fileErrorCauseFromProto(cause: FileError_Cause): FileErrorCause {
-  return _translateEnum("FileError.Cause", FileError_Cause, cause, {
-    [FileError_Cause.UNSPECIFIED]: _unexpected,
+  return translateEnum("FileError.Cause", FileError_Cause, cause, {
+    [FileError_Cause.UNSPECIFIED]: unexpected,
     [FileError_Cause.INVALID_FILE_PATH]: FileErrorCause.INVALID_FILE_PATH,
     [FileError_Cause.UNSUPPORTED_FILE_EXTENSION]:
       FileErrorCause.UNSUPPORTED_FILE_EXTENSION,

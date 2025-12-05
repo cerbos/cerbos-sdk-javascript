@@ -22,6 +22,10 @@
     ".": {
       "types": "./lib/index.d.ts",
       "default": "./lib/index.js"
+    },
+    "./~internal": {
+      "types": "./lib/internal.d.ts",
+      "default": "./lib/internal.js"
     }
   },
   "files": [

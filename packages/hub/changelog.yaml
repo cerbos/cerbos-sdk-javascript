@@ -1,5 +1,9 @@
 unreleased:
-  type: patch
+  type: minor
+
+  added:
+    - summary: Internal exports to support new embedded client library
+      pull: 1289
 
   changed:
     - summary: Migrate to [@connectrpc/validate]

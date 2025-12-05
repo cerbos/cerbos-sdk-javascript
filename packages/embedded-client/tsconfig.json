@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.base.json",
+  "include": ["src"],
+  "references": [{ "path": "../core" }, { "path": "../hub" }],
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "outDir": "lib",
+    "rootDir": "src",
+    "tsBuildInfoFile": "lib/embedded.tsbuildinfo"
+  }
+}

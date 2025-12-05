@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Stop duplicating `user-agent` between `metadata` and `peer` in decision log entries ([#1289](https://github.com/cerbos/cerbos-sdk-javascript/pull/1289))
 
 ## [0.13.4] - 2025-11-20
 

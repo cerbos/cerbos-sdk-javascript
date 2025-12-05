@@ -67,9 +67,9 @@ export interface DecisionLogEntryPlanResources {
   input: PlanResourcesInput;
 
   /**
-   * The outputs from the `PlanResources` call.
+   * The output from the `PlanResources` call.
    */
-  output: PlanResourcesOutput;
+  output: PlanResourcesOutput | undefined;
 
   /**
    * The error (if any) encountered while evaluating the `PlanResources` call.

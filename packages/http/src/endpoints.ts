@@ -17,7 +17,7 @@ import {
   CerbosService as cerbos,
 } from "@cerbos/api/cerbos/svc/v1/svc_pb";
 import { Health as health } from "@cerbos/api/grpc/health/v1/health_pb";
-import { _methodName } from "@cerbos/core";
+import { methodName } from "@cerbos/core/~internal";
 
 export interface RequestInitWithUrl extends RequestInit {
   url: string;
@@ -57,7 +57,7 @@ function defineEndpoints<Service extends DescService>(
   for (const method of service.methods) {
     const endpoint = descs[method.localName];
     if (endpoint) {
-      endpoints.set(_methodName(method), {
+      endpoints.set(methodName(method), {
         method: endpoint.method,
         path: endpoint.path,
         serialize: endpoint.serialize(method.input),

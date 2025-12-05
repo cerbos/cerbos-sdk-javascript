@@ -9,6 +9,7 @@ import {
 
 import type { Options as CoreOptions } from "@cerbos/core";
 import { Client } from "@cerbos/core";
+import { userAgent } from "@cerbos/core/~internal";
 
 import { Transport } from "./transport";
 
@@ -328,7 +329,7 @@ function channelCredentials({
 
 function channelOptions({
   compression = Compression.NONE,
-  userAgent,
+  userAgent: customUserAgent,
   channelOptions: input = {},
 }: Options): GrpcChannelOptions {
   const output = Object.fromEntries(
@@ -338,9 +339,10 @@ function channelOptions({
   output["grpc.default_compression_algorithm"] =
     compressionAlgorithms[compression];
 
-  output["grpc.primary_user_agent"] = `${
-    userAgent ? `${userAgent} ` : ""
-  }${defaultUserAgent}`;
+  output["grpc.primary_user_agent"] = userAgent(
+    customUserAgent,
+    defaultUserAgent,
+  );
 
   return output;
 }

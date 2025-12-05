@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Internal exports to support new embedded client library ([#1289](https://github.com/cerbos/cerbos-sdk-javascript/pull/1289))
 
 ## [0.25.2] - 2025-11-20
 

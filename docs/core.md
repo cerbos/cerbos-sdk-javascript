@@ -1889,6 +1889,17 @@ Criteria to match audit log entries.
 </td></tr>
 <tr><td>
 
+[Awaitable](./core.awaitable.md)
+
+
+</td><td>
+
+A value available now or in the future.
+
+
+</td></tr>
+<tr><td>
+
 [CheckResourceRequest](./core.checkresourcerequest.md)
 
 
