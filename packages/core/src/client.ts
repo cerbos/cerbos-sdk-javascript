@@ -48,6 +48,8 @@ import {
   reloadStoreRequestToProtobuf,
 } from "./convert/toProtobuf";
 import { NotOK, ValidationFailed } from "./errors";
+import type { Transport } from "./transport";
+import { AbortHandler, instrument } from "./transport";
 import type {
   AccessLogEntry,
   AddOrUpdatePoliciesRequest,
@@ -89,69 +91,6 @@ import type {
   ValidationFailedCallback,
 } from "./types/external";
 import { Service, ServiceStatus, Status } from "./types/external";
-
-/** @internal */
-export class _AbortHandler {
-  public constructor(public readonly signal: AbortSignal | undefined) {}
-
-  public throwIfAborted(): void {
-    if (this.signal?.aborted) {
-      throw this.error();
-    }
-  }
-
-  public onAbort(listener: (error: NotOK) => void): void {
-    this.signal?.addEventListener(
-      "abort",
-      () => {
-        listener(this.error());
-      },
-      { once: true },
-    );
-  }
-
-  public error(): NotOK {
-    const reason = this.signal?.reason as unknown;
-
-    return new NotOK(
-      Status.CANCELLED,
-      reason instanceof Error ? `Aborted: ${reason.message}` : "Aborted",
-      { cause: reason },
-    );
-  }
-}
-
-/** @internal */
-export interface _Transport {
-  unary<I extends DescMessage, O extends DescMessage>(
-    method: DescMethodUnary<I, O>,
-    request: MessageValidType<I>,
-    headers: Headers,
-    abortHandler: _AbortHandler,
-  ): Promise<MessageShape<O>>;
-
-  serverStream<I extends DescMessage, O extends DescMessage>(
-    method: DescMethodServerStreaming<I, O>,
-    request: MessageValidType<I>,
-    headers: Headers,
-    abortHandler: _AbortHandler,
-  ): AsyncGenerator<MessageShape<O>, void, undefined>;
-}
-
-/** @internal */
-export type _Instrumenter = (transport: _Transport) => _Transport;
-
-const instrumenters = new Set<_Instrumenter>();
-
-/** @internal */
-export function _addInstrumenter(instrumenter: _Instrumenter): void {
-  instrumenters.add(instrumenter);
-}
-
-/** @internal */
-export function _removeInstrumenter(instrumenter: _Instrumenter): void {
-  instrumenters.delete(instrumenter);
-}
 
 /**
  * HTTP headers from which to construct a {@link https://developer.mozilla.org/en-US/docs/Web/API/Headers | `Headers`} object.
@@ -272,12 +211,10 @@ export interface RequestOptions {
 export abstract class Client {
   /** @internal */
   protected constructor(
-    private readonly transport: _Transport,
+    private readonly transport: Transport,
     private readonly options: Options,
   ) {
-    for (const instrumenter of instrumenters) {
-      this.transport = instrumenter(this.transport);
-    }
+    this.transport = instrument(transport);
   }
 
   /**
@@ -1207,7 +1144,7 @@ export abstract class Client {
       method,
       request,
       await this.mergeHeaders(headers, method),
-      new _AbortHandler(signal),
+      new AbortHandler(signal),
     );
   }
 
@@ -1235,7 +1172,7 @@ export abstract class Client {
         method,
         request,
         await this.mergeHeaders(headers, method),
-        new _AbortHandler(abortController.signal),
+        new AbortHandler(abortController.signal),
       );
     } finally {
       abortController.abort();

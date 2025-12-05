@@ -13,13 +13,12 @@ import { parse } from "yaml";
 import { PolicySchema } from "@cerbos/api/cerbos/policy/v1/policy_pb";
 import type { Policy, SchemaInput, Value } from "@cerbos/core";
 import {
-  _policyFromProtobuf,
-  _policyToProtobuf,
   policyIsDerivedRoles,
   policyIsExportVariables,
   policyIsPrincipalPolicy,
   policyIsResourcePolicy,
 } from "@cerbos/core";
+import { policyFromProtobuf, policyToProtobuf } from "@cerbos/core/~internal";
 
 /**
  * {@inheritDoc @cerbos/core#SchemaInput}
@@ -41,7 +40,7 @@ export interface Schema extends SchemaInput {
  * @public
  */
 export function parsePolicy(contents: string): Policy {
-  return _policyFromProtobuf(fromJson(PolicySchema, parse(contents) as Value));
+  return policyFromProtobuf(fromJson(PolicySchema, parse(contents) as Value));
 }
 
 /**
@@ -63,7 +62,7 @@ export async function readPolicy(path: string): Promise<Policy> {
  * @public
  */
 export function serializePolicy(policy: Policy): string {
-  return `${toJsonString(PolicySchema, _policyToProtobuf(policy), { prettySpaces: 2 })}\n`;
+  return `${toJsonString(PolicySchema, policyToProtobuf(policy), { prettySpaces: 2 })}\n`;
 }
 
 /**

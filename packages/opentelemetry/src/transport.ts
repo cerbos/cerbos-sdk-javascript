@@ -21,20 +21,24 @@ import {
   ATTR_RPC_SYSTEM,
 } from "@opentelemetry/semantic-conventions/incubating";
 
-import type { _AbortHandler, _Transport } from "@cerbos/core";
-import { NotOK, Status, _methodName } from "@cerbos/core";
+import { NotOK, Status } from "@cerbos/core";
+import type {
+  AbortHandler,
+  Transport as CoreTransport,
+} from "@cerbos/core/~internal";
+import { methodName } from "@cerbos/core/~internal";
 
 import type { CerbosInstrumentation } from "./instrumentation";
 import type { Instruments } from "./instruments";
 
-export class Transport implements _Transport {
+export class Transport implements CoreTransport {
   private readonly transport: {
-    [MethodKind in keyof _Transport]: _Transport[MethodKind];
+    [MethodKind in keyof CoreTransport]: CoreTransport[MethodKind];
   };
 
   public constructor(
     private readonly instrumentation: CerbosInstrumentation,
-    transport: _Transport,
+    transport: CoreTransport,
   ) {
     this.transport = {
       unary: transport.unary.bind(transport),
@@ -46,7 +50,7 @@ export class Transport implements _Transport {
     method: DescMethodUnary<I, O>,
     request: MessageValidType<I>,
     headers: Headers,
-    abortHandler: _AbortHandler,
+    abortHandler: AbortHandler,
   ): Promise<MessageShape<O>> {
     const { call, succeeded, failed } = this.instrument(
       this.transport.unary,
@@ -68,7 +72,7 @@ export class Transport implements _Transport {
     method: DescMethodServerStreaming<I, O>,
     request: MessageValidType<I>,
     headers: Headers,
-    abortHandler: _AbortHandler,
+    abortHandler: AbortHandler,
   ): AsyncGenerator<MessageShape<O>, void, undefined> {
     const { call, succeeded, failed } = this.instrument(
       this.transport.serverStream,
@@ -112,7 +116,7 @@ export class Transport implements _Transport {
       [ATTR_RPC_METHOD]: method.name,
     };
 
-    const span = this.tracer.startSpan(_methodName(method), {
+    const span = this.tracer.startSpan(methodName(method), {
       kind: SpanKind.CLIENT,
       startTime,
     });
@@ -156,10 +160,10 @@ export class Transport implements _Transport {
   }
 
   private get instruments(): Instruments {
-    return this.instrumentation._instruments;
+    return this.instrumentation["~instruments"];
   }
 
   private get tracer(): Tracer {
-    return this.instrumentation._tracer;
+    return this.instrumentation["~tracer"];
   }
 }

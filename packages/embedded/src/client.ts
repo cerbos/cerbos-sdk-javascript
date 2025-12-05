@@ -63,9 +63,9 @@ export class Embedded extends Client {
         ? loaderOrSource
         : new Loader(loaderOrSource, options);
 
-    super(loader._transport, {
-      headers: loader._options.headers,
-      userAgent: loader._userAgent,
+    super(loader["~transport"], {
+      headers: loader["~options"].headers,
+      userAgent: loader["~userAgent"],
     });
 
     this.loader = loader;
