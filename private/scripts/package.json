@@ -5,8 +5,8 @@
   "devDependencies": {
     "@types/semver": "7.7.1",
     "date-fns": "4.1.0",
-    "execa": "9.6.0",
-    "prettier": "3.7.1",
+    "execa": "9.6.1",
+    "prettier": "3.7.4",
     "semver": "7.7.3",
     "yaml": "2.8.2",
     "zod": "4.1.13"
