@@ -61,10 +61,10 @@
     "concurrently": "9.2.1",
     "depcheck": "1.4.7",
     "eslint": "9.39.1",
-    "prettier": "3.7.1",
+    "prettier": "3.7.4",
     "prettier-plugin-pkg": "0.21.2",
     "ts-proto": "2.8.3",
-    "tsx": "4.20.6",
+    "tsx": "4.21.0",
     "typescript": "5.9.3"
   }
 }
