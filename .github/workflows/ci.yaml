@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
@@ -55,7 +55,7 @@ jobs:
       matrix: ${{ steps.test-matrix.outputs.matrix }}
     steps:
       - name: Check out code
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
@@ -79,7 +79,7 @@ jobs:
       matrix: ${{ fromJSON(needs.test-matrix.outputs.matrix).parallel }}
     steps:
       - name: Check out code
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
@@ -108,7 +108,7 @@ jobs:
       group: ci-test-serial
     steps:
       - name: Check out code
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
