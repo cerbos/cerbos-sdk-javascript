@@ -8,6 +8,8 @@ package cerbos.cloud.epdp.v2;
 import "buf/validate/validate.proto";
 import "cerbos/audit/v1/audit.proto";
 import "cerbos/response/v1/response.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/code.proto";
@@ -61,4 +63,42 @@ message CheckResourcesResponse {
 message PlanResourcesResponse {
   cerbos.response.v1.PlanResourcesResponse response = 1 [(buf.validate.field).required = true];
   cerbos.audit.v1.AuditTrail audit_trail = 2 [(buf.validate.field).required = true];
+}
+
+message Bundle {
+  message Metadata {
+    string bundle_id = 1 [(buf.validate.field).string.len = 16];
+    int64 rule_revision = 2 [(buf.validate.field).int64.gt = 0];
+  }
+
+  Metadata metadata = 1 [(buf.validate.field).required = true];
+  bytes contents = 2;
+}
+
+message GetBundleRequest {
+  string rule_id = 1 [(buf.validate.field).string.len = 12];
+  repeated string scopes = 2 [(buf.validate.field).repeated = {
+    max_items: 128
+    unique: true
+    items: {
+      string: {min_len: 1}
+    }
+  }];
+  optional Bundle.Metadata if_modified_since = 3;
+}
+
+message GetBundleResponse {
+  oneof result {
+    option (buf.validate.oneof).required = true;
+    Bundle bundle = 1;
+    google.protobuf.Empty not_modified = 2;
+  }
+}
+
+service BundleService {
+  option (google.api.api_visibility).restriction = "EXPERIMENTAL";
+
+  rpc GetBundle(GetBundleRequest) returns (GetBundleResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+  }
 }
