@@ -4,6 +4,7 @@ export * from "./AddOrUpdateSchemasRequest";
 export * from "./AuditLogFilter";
 export * from "./AuditTrail";
 export * from "./AuxData";
+export * from "./Awaitable";
 export * from "./CheckInput";
 export * from "./CheckOutput";
 export * from "./CheckOutputActionEffect";

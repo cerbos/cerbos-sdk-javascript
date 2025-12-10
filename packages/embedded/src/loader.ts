@@ -1,4 +1,5 @@
 import type {
+  Awaitable,
   Options as CoreOptions,
   DecisionLogEntry,
   JWT,
@@ -27,9 +28,7 @@ type LoadResult =
       error: LoadError;
     };
 
-async function resolve(
-  result: LoadResult | Promise<LoadResult>,
-): Promise<Bundle> {
+async function resolve(result: Awaitable<LoadResult>): Promise<Bundle> {
   const { bundle, error } = await result;
 
   if (error) {
@@ -69,13 +68,10 @@ export class LoadError extends Error {
 export type Source =
   | string
   | URL
-  | ArrayBufferView<ArrayBuffer>
-  | ArrayBuffer
-  | Response
-  | WebAssembly.Module
-  | Promise<
-      ArrayBufferView<ArrayBuffer> | ArrayBuffer | Response | WebAssembly.Module
-    >;
+  | Awaitable<ArrayBufferView<ArrayBuffer>>
+  | Awaitable<ArrayBuffer>
+  | Awaitable<Response>
+  | Awaitable<WebAssembly.Module>;
 
 /**
  * Options for creating a new {@link Embedded} client or {@link Loader}.
@@ -130,21 +126,21 @@ export interface Options extends Pick<CoreOptions, "headers" | "userAgent"> {
    *
    * @defaultValue (no-op)
    */
-  onLoad?: ((metadata: BundleMetadata) => void | Promise<void>) | undefined;
+  onLoad?: ((metadata: BundleMetadata) => Awaitable<void>) | undefined;
 
   /**
    * A callback to invoke when the embedded policy decision point bundle has failed to load.
    *
    * @defaultValue (no-op)
    */
-  onError?: ((error: LoadError) => void | Promise<void>) | undefined;
+  onError?: ((error: LoadError) => Awaitable<void>) | undefined;
 
   /**
    * A callback to invoke when a decision is made by the embedded policy decision point.
    *
    * @defaultValue (no-op)
    */
-  onDecision?: ((entry: DecisionLogEntry) => void | Promise<void>) | undefined;
+  onDecision?: ((entry: DecisionLogEntry) => Awaitable<void>) | undefined;
 }
 
 /**
@@ -201,9 +197,7 @@ export interface Options extends Pick<CoreOptions, "headers" | "userAgent"> {
  *
  * @public
  */
-export type DecodeJWTPayload = (
-  jwt: JWT,
-) => DecodedJWTPayload | Promise<DecodedJWTPayload>;
+export type DecodeJWTPayload = (jwt: JWT) => Awaitable<DecodedJWTPayload>;
 
 /**
  * The decoded payload of a JWT, containing the claims.
@@ -253,7 +247,7 @@ export interface BundleMetadata {
  */
 export class Loader {
   /** @internal */
-  public ["~active"]: LoadResult | Promise<LoadResult>;
+  public ["~active"]: Awaitable<LoadResult>;
 
   /** @internal */
   public readonly ["~options"]: Options;

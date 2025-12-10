@@ -9,5 +9,5 @@ A callback to invoke when a decision is made by the embedded policy decision poi
 **Signature:**
 
 ```typescript
-onDecision?: ((entry: DecisionLogEntry) => void | Promise<void>) | undefined;
+onDecision?: ((entry: DecisionLogEntry) => Awaitable<void>) | undefined;
 ```
