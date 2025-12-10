@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: "[`PolicySourceHubEmbeddedBundle`](../../docs/core.policysourcehubembeddedbundle.md) type"
+      pull: 1310
+
 releases:
   - version: 0.25.2
     date: 2025-11-20
