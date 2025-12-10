@@ -143,7 +143,7 @@ _(Optional)_ A function returning the current time, to be used when evaluating p
 
 </td><td>
 
-((entry: [DecisionLogEntry](./core.decisionlogentry.md)<!-- -->) =&gt; void \| Promise&lt;void&gt;) \| undefined
+((entry: [DecisionLogEntry](./core.decisionlogentry.md)<!-- -->) =&gt; [Awaitable](./core.awaitable.md)<!-- -->&lt;void&gt;) \| undefined
 
 
 </td><td>
@@ -162,7 +162,7 @@ _(Optional)_ A callback to invoke when a decision is made by the embedded policy
 
 </td><td>
 
-((error: [LoadError](./embedded.loaderror.md)<!-- -->) =&gt; void \| Promise&lt;void&gt;) \| undefined
+((error: [LoadError](./embedded.loaderror.md)<!-- -->) =&gt; [Awaitable](./core.awaitable.md)<!-- -->&lt;void&gt;) \| undefined
 
 
 </td><td>
@@ -181,7 +181,7 @@ _(Optional)_ A callback to invoke when the embedded policy decision point bundle
 
 </td><td>
 
-((metadata: [BundleMetadata](./embedded.bundlemetadata.md)<!-- -->) =&gt; void \| Promise&lt;void&gt;) \| undefined
+((metadata: [BundleMetadata](./embedded.bundlemetadata.md)<!-- -->) =&gt; [Awaitable](./core.awaitable.md)<!-- -->&lt;void&gt;) \| undefined
 
 
 </td><td>

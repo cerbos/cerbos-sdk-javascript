@@ -4,6 +4,8 @@
 
 ### Added
 
+- [`Awaitable`](../../docs/core.awaitable.md) type ([#1289](https://github.com/cerbos/cerbos-sdk-javascript/pull/1289))
+
 - [`PolicySourceHubEmbeddedBundle`](../../docs/core.policysourcehubembeddedbundle.md) type ([#1310](https://github.com/cerbos/cerbos-sdk-javascript/pull/1310))
 
 ### Changed

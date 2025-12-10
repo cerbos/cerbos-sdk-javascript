@@ -2,6 +2,9 @@ unreleased:
   type: minor
 
   added:
+    - summary: "[`Awaitable`](../../docs/core.awaitable.md) type"
+      pull: 1289
+
     - summary: "[`PolicySourceHubEmbeddedBundle`](../../docs/core.policysourcehubembeddedbundle.md) type"
       pull: 1310
 
