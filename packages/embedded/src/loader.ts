@@ -5,7 +5,7 @@ import type {
   SourceAttributes,
   Value,
 } from "@cerbos/core";
-import { setErrorNameAndStack } from "@cerbos/core/~internal";
+import { setErrorNameAndStack, userAgent } from "@cerbos/core/~internal";
 
 import { Bundle, download } from "./bundle";
 import { constrainAutoUpdateInterval } from "./interval";
@@ -303,10 +303,7 @@ export class Loader {
    */
   public constructor(source: Source, options: Options = {}) {
     this["~options"] = options;
-
-    this["~userAgent"] = `${
-      options.userAgent ? `${options.userAgent} ` : ""
-    }${defaultUserAgent}`;
+    this["~userAgent"] = userAgent(options.userAgent, defaultUserAgent);
 
     if (options.onDecision) {
       this.logger = new DecisionLogger(options.onDecision, this["~userAgent"]);
