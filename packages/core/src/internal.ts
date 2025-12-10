@@ -31,3 +31,15 @@ export function setErrorNameAndStack(error: Error): void {
     Error.captureStackTrace(error, error.constructor);
   }
 }
+
+/** @internal */
+export function userAgent(
+  customUserAgent: string | undefined,
+  defaultUserAgent: string,
+): string {
+  if (!customUserAgent) {
+    return defaultUserAgent;
+  }
+
+  return `${customUserAgent} ${defaultUserAgent}`;
+}
