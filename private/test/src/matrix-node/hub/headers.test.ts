@@ -4,7 +4,7 @@ import type { ListFilesResponse } from "@cerbos/hub";
 
 import { Server } from "./server";
 
-const { version } = require("../../../../packages/hub/package.json") as {
+const { version } = require("../../../../../packages/hub/package.json") as {
   version: string;
 };
 
@@ -104,7 +104,7 @@ describe("headers", () => {
               expectedFoo: expectedFooOverride,
               expectedBar,
             }) => {
-              const client = server.client({
+              const client = server.storesClient({
                 headers: clientHeaders,
                 userAgent,
               });

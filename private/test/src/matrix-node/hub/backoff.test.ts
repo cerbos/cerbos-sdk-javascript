@@ -21,7 +21,7 @@ describe("authentication failure", () => {
   it("backs off", async () => {
     vitest.useFakeTimers();
 
-    const client = server.client();
+    const client = server.storesClient();
 
     server.expectIssueAccessToken(() => {
       throw new ConnectError("down", Code.Unavailable);

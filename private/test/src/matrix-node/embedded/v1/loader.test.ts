@@ -5,33 +5,22 @@ import type { AddressInfo } from "net";
 import { Readable } from "stream";
 import { setTimeout } from "timers/promises";
 
-import {
-  afterAll,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  test,
-} from "vitest";
+import { beforeAll, beforeEach, describe, expect, test } from "vitest";
 
 import type { BundleMetadata, Options, Source } from "@cerbos/embedded";
 import { AutoUpdatingLoader, LoadError, Loader } from "@cerbos/embedded";
 
-import type { EmbeddedBundle } from "../../helpers";
+import type { EmbeddedBundle } from "../../../helpers";
 import {
   oldEmbeddedBundle as first,
   newEmbeddedBundle as second,
-} from "../../helpers";
+} from "../../../helpers";
 
 describe("loaders", () => {
   const server = new DummyServer();
 
   beforeAll(async () => {
     await server.start();
-  });
-
-  afterAll(async () => {
-    await server.stop();
   });
 
   beforeEach(() => {

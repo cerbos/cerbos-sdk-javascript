@@ -1,15 +1,18 @@
 import type { DescMethod } from "@bufbuild/protobuf";
 
 export {
+  auditTrailFromProtobuf,
   checkInputFromProtobuf,
   checkOutputFromProtobuf,
+  planResourcesInputFromProtobuf,
+  planResourcesOutputFromProtobuf,
   policyFromProtobuf,
   requireField,
   translateEnum,
   unexpected,
   valuesFromProtobuf,
 } from "./convert/fromProtobuf";
-export { policyToProtobuf } from "./convert/toProtobuf";
+export { policyToProtobuf, valuesToProtobuf } from "./convert/toProtobuf";
 export * from "./transport";
 
 /** @internal */
