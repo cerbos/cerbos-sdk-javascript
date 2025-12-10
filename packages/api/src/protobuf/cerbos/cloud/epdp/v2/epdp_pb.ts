@@ -8,8 +8,14 @@ import type {
   GenEnum,
   GenFile,
   GenMessage,
+  GenService,
 } from "@bufbuild/protobuf/codegenv2";
-import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import {
+  enumDesc,
+  fileDesc,
+  messageDesc,
+  serviceDesc,
+} from "@bufbuild/protobuf/codegenv2";
 import { file_buf_validate_validate } from "../../../../buf/validate/validate_pb";
 import type {
   AuditTrail,
@@ -26,13 +32,17 @@ import type {
   PlanResourcesResponseValid as PlanResourcesResponseValid$1,
 } from "../../../response/v1/response_pb";
 import { file_cerbos_response_v1_response } from "../../../response/v1/response_pb";
+import { file_google_api_visibility } from "../../../../google/api/visibility_pb";
 import type {
+  Empty,
+  EmptyJson,
   Timestamp,
   TimestampJson,
   Value,
   ValueJson,
 } from "@bufbuild/protobuf/wkt";
 import {
+  file_google_protobuf_empty,
   file_google_protobuf_struct,
   file_google_protobuf_timestamp,
 } from "@bufbuild/protobuf/wkt";
@@ -46,11 +56,13 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_cerbos_cloud_epdp_v2_epdp: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "Ch9jZXJib3MvY2xvdWQvZXBkcC92Mi9lcGRwLnByb3RvEhRjZXJib3MuY2xvdWQuZXBkcC52MiKTBAoGQ29uZmlnEjkKCWV2YWx1YXRvchgBIAEoCzImLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5FdmFsdWF0b3ISMwoGc2NoZW1hGAIgASgLMiMuY2VyYm9zLmNsb3VkLmVwZHAudjIuQ29uZmlnLlNjaGVtYRrXAQoJRXZhbHVhdG9yEkQKB2dsb2JhbHMYASADKAsyMy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuRXZhbHVhdG9yLkdsb2JhbHNFbnRyeRIeChZkZWZhdWx0X3BvbGljeV92ZXJzaW9uGAIgASgJEhwKFGxlbmllbnRfc2NvcGVfc2VhcmNoGAMgASgIGkYKDEdsb2JhbHNFbnRyeRILCgNrZXkYASABKAkSJQoFdmFsdWUYAiABKAsyFi5nb29nbGUucHJvdG9idWYuVmFsdWU6AjgBGr4BCgZTY2hlbWESRAoLZW5mb3JjZW1lbnQYASABKA4yLy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuU2NoZW1hLkVuZm9yY2VtZW50Im4KC0VuZm9yY2VtZW50EhsKF0VORk9SQ0VNRU5UX1VOU1BFQ0lGSUVEEAASFAoQRU5GT1JDRU1FTlRfTk9ORRABEhQKEEVORk9SQ0VNRU5UX1dBUk4QAhIWChJFTkZPUkNFTUVOVF9SRUpFQ1QQAyJECgVFcnJvchIqCgRjb2RlGAEgASgOMhAuZ29vZ2xlLnJwYy5Db2RlQgq6SAeCAQQQASAAEg8KB21lc3NhZ2UYAiABKAkiqAEKCE1ldGFkYXRhEh8KDmNlcmJvc192ZXJzaW9uGAEgASgJQge6SARyAhABEiQKEmNlcmJvc19jb21taXRfaGFzaBgCIAEoCUIIukgFcgOYASgSHwoNd2FzbV9jaGVja3N1bRgDIAEoCUIIukgFcgOYAUASNAoIYnVpbHRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQga6SAPIAQEimAEKFkNoZWNrUmVzb3VyY2VzUmVzcG9uc2USRAoIcmVzcG9uc2UYASABKAsyKi5jZXJib3MucmVzcG9uc2UudjEuQ2hlY2tSZXNvdXJjZXNSZXNwb25zZUIGukgDyAEBEjgKC2F1ZGl0X3RyYWlsGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWxCBrpIA8gBASKWAQoVUGxhblJlc291cmNlc1Jlc3BvbnNlEkMKCHJlc3BvbnNlGAEgASgLMikuY2VyYm9zLnJlc3BvbnNlLnYxLlBsYW5SZXNvdXJjZXNSZXNwb25zZUIGukgDyAEBEjgKC2F1ZGl0X3RyYWlsGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWxCBrpIA8gBAUJ4ChxkZXYuY2VyYm9zLmFwaS5jbG91ZC52Mi5lcGRwWj1naXRodWIuY29tL2NlcmJvcy9jbG91ZC1hcGkvZ2VucGIvY2VyYm9zL2Nsb3VkL2VwZHAvdjI7ZXBkcHYyqgIYQ2VyYm9zLkFwaS5DbG91ZC5WMi5FcGRwYgZwcm90bzM",
+    "Ch9jZXJib3MvY2xvdWQvZXBkcC92Mi9lcGRwLnByb3RvEhRjZXJib3MuY2xvdWQuZXBkcC52MiKTBAoGQ29uZmlnEjkKCWV2YWx1YXRvchgBIAEoCzImLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5FdmFsdWF0b3ISMwoGc2NoZW1hGAIgASgLMiMuY2VyYm9zLmNsb3VkLmVwZHAudjIuQ29uZmlnLlNjaGVtYRrXAQoJRXZhbHVhdG9yEkQKB2dsb2JhbHMYASADKAsyMy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuRXZhbHVhdG9yLkdsb2JhbHNFbnRyeRIeChZkZWZhdWx0X3BvbGljeV92ZXJzaW9uGAIgASgJEhwKFGxlbmllbnRfc2NvcGVfc2VhcmNoGAMgASgIGkYKDEdsb2JhbHNFbnRyeRILCgNrZXkYASABKAkSJQoFdmFsdWUYAiABKAsyFi5nb29nbGUucHJvdG9idWYuVmFsdWU6AjgBGr4BCgZTY2hlbWESRAoLZW5mb3JjZW1lbnQYASABKA4yLy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuU2NoZW1hLkVuZm9yY2VtZW50Im4KC0VuZm9yY2VtZW50EhsKF0VORk9SQ0VNRU5UX1VOU1BFQ0lGSUVEEAASFAoQRU5GT1JDRU1FTlRfTk9ORRABEhQKEEVORk9SQ0VNRU5UX1dBUk4QAhIWChJFTkZPUkNFTUVOVF9SRUpFQ1QQAyJECgVFcnJvchIqCgRjb2RlGAEgASgOMhAuZ29vZ2xlLnJwYy5Db2RlQgq6SAeCAQQQASAAEg8KB21lc3NhZ2UYAiABKAkiqAEKCE1ldGFkYXRhEh8KDmNlcmJvc192ZXJzaW9uGAEgASgJQge6SARyAhABEiQKEmNlcmJvc19jb21taXRfaGFzaBgCIAEoCUIIukgFcgOYASgSHwoNd2FzbV9jaGVja3N1bRgDIAEoCUIIukgFcgOYAUASNAoIYnVpbHRfYXQYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQga6SAPIAQEimAEKFkNoZWNrUmVzb3VyY2VzUmVzcG9uc2USRAoIcmVzcG9uc2UYASABKAsyKi5jZXJib3MucmVzcG9uc2UudjEuQ2hlY2tSZXNvdXJjZXNSZXNwb25zZUIGukgDyAEBEjgKC2F1ZGl0X3RyYWlsGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWxCBrpIA8gBASKWAQoVUGxhblJlc291cmNlc1Jlc3BvbnNlEkMKCHJlc3BvbnNlGAEgASgLMikuY2VyYm9zLnJlc3BvbnNlLnYxLlBsYW5SZXNvdXJjZXNSZXNwb25zZUIGukgDyAEBEjgKC2F1ZGl0X3RyYWlsGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWxCBrpIA8gBASKkAQoGQnVuZGxlEj8KCG1ldGFkYXRhGAEgASgLMiUuY2VyYm9zLmNsb3VkLmVwZHAudjIuQnVuZGxlLk1ldGFkYXRhQga6SAPIAQESEAoIY29udGVudHMYAiABKAwaRwoITWV0YWRhdGESGwoJYnVuZGxlX2lkGAEgASgJQgi6SAVyA5gBEBIeCg1ydWxlX3JldmlzaW9uGAIgASgDQge6SAQiAiAAIq0BChBHZXRCdW5kbGVSZXF1ZXN0EhkKB3J1bGVfaWQYASABKAlCCLpIBXIDmAEMEiEKBnNjb3BlcxgCIAMoCUIRukgOkgELEIABGAEiBHICEAESRQoRaWZfbW9kaWZpZWRfc2luY2UYAyABKAsyJS5jZXJib3MuY2xvdWQuZXBkcC52Mi5CdW5kbGUuTWV0YWRhdGFIAIgBAUIUChJfaWZfbW9kaWZpZWRfc2luY2UihAEKEUdldEJ1bmRsZVJlc3BvbnNlEi4KBmJ1bmRsZRgBIAEoCzIcLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkJ1bmRsZUgAEi4KDG5vdF9tb2RpZmllZBgCIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eUgAQg8KBnJlc3VsdBIFukgCCAEyiAEKDUJ1bmRsZVNlcnZpY2USYQoJR2V0QnVuZGxlEiYuY2VyYm9zLmNsb3VkLmVwZHAudjIuR2V0QnVuZGxlUmVxdWVzdBonLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkdldEJ1bmRsZVJlc3BvbnNlIgOQAgEaFPrS5JMCDhIMRVhQRVJJTUVOVEFMQngKHGRldi5jZXJib3MuYXBpLmNsb3VkLnYyLmVwZHBaPWdpdGh1Yi5jb20vY2VyYm9zL2Nsb3VkLWFwaS9nZW5wYi9jZXJib3MvY2xvdWQvZXBkcC92MjtlcGRwdjKqAhhDZXJib3MuQXBpLkNsb3VkLlYyLkVwZHBiBnByb3RvMw",
     [
       file_buf_validate_validate,
       file_cerbos_audit_v1_audit,
       file_cerbos_response_v1_response,
+      file_google_api_visibility,
+      file_google_protobuf_empty,
       file_google_protobuf_struct,
       file_google_protobuf_timestamp,
       file_google_rpc_code,
@@ -462,3 +474,241 @@ export const PlanResourcesResponseSchema: GenMessage<
   PlanResourcesResponse,
   { jsonType: PlanResourcesResponseJson; validType: PlanResourcesResponseValid }
 > = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 4);
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.Bundle
+ */
+export type Bundle = Message<"cerbos.cloud.epdp.v2.Bundle"> & {
+  /**
+   * @generated from field: cerbos.cloud.epdp.v2.Bundle.Metadata metadata = 1;
+   */
+  metadata?: Bundle_Metadata;
+
+  /**
+   * @generated from field: bytes contents = 2;
+   */
+  contents: Uint8Array;
+};
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.Bundle
+ */
+export type BundleJson = {
+  /**
+   * @generated from field: cerbos.cloud.epdp.v2.Bundle.Metadata metadata = 1;
+   */
+  metadata?: Bundle_MetadataJson;
+
+  /**
+   * @generated from field: bytes contents = 2;
+   */
+  contents?: string;
+};
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.Bundle
+ */
+export type BundleValid = Message<"cerbos.cloud.epdp.v2.Bundle"> & {
+  /**
+   * @generated from field: cerbos.cloud.epdp.v2.Bundle.Metadata metadata = 1;
+   */
+  metadata: Bundle_MetadataValid;
+
+  /**
+   * @generated from field: bytes contents = 2;
+   */
+  contents: Uint8Array;
+};
+
+/**
+ * Describes the message cerbos.cloud.epdp.v2.Bundle.
+ * Use `create(BundleSchema)` to create a new message.
+ */
+export const BundleSchema: GenMessage<
+  Bundle,
+  { jsonType: BundleJson; validType: BundleValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 5);
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.Bundle.Metadata
+ */
+export type Bundle_Metadata =
+  Message<"cerbos.cloud.epdp.v2.Bundle.Metadata"> & {
+    /**
+     * @generated from field: string bundle_id = 1;
+     */
+    bundleId: string;
+
+    /**
+     * @generated from field: int64 rule_revision = 2;
+     */
+    ruleRevision: bigint;
+  };
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.Bundle.Metadata
+ */
+export type Bundle_MetadataJson = {
+  /**
+   * @generated from field: string bundle_id = 1;
+   */
+  bundleId?: string;
+
+  /**
+   * @generated from field: int64 rule_revision = 2;
+   */
+  ruleRevision?: string;
+};
+
+export type Bundle_MetadataValid = Bundle_Metadata;
+
+/**
+ * Describes the message cerbos.cloud.epdp.v2.Bundle.Metadata.
+ * Use `create(Bundle_MetadataSchema)` to create a new message.
+ */
+export const Bundle_MetadataSchema: GenMessage<
+  Bundle_Metadata,
+  { jsonType: Bundle_MetadataJson; validType: Bundle_MetadataValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 5, 0);
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.GetBundleRequest
+ */
+export type GetBundleRequest =
+  Message<"cerbos.cloud.epdp.v2.GetBundleRequest"> & {
+    /**
+     * @generated from field: string rule_id = 1;
+     */
+    ruleId: string;
+
+    /**
+     * @generated from field: repeated string scopes = 2;
+     */
+    scopes: string[];
+
+    /**
+     * @generated from field: optional cerbos.cloud.epdp.v2.Bundle.Metadata if_modified_since = 3;
+     */
+    ifModifiedSince?: Bundle_Metadata;
+  };
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.GetBundleRequest
+ */
+export type GetBundleRequestJson = {
+  /**
+   * @generated from field: string rule_id = 1;
+   */
+  ruleId?: string;
+
+  /**
+   * @generated from field: repeated string scopes = 2;
+   */
+  scopes?: string[];
+
+  /**
+   * @generated from field: optional cerbos.cloud.epdp.v2.Bundle.Metadata if_modified_since = 3;
+   */
+  ifModifiedSince?: Bundle_MetadataJson;
+};
+
+export type GetBundleRequestValid = GetBundleRequest;
+
+/**
+ * Describes the message cerbos.cloud.epdp.v2.GetBundleRequest.
+ * Use `create(GetBundleRequestSchema)` to create a new message.
+ */
+export const GetBundleRequestSchema: GenMessage<
+  GetBundleRequest,
+  { jsonType: GetBundleRequestJson; validType: GetBundleRequestValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 6);
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.GetBundleResponse
+ */
+export type GetBundleResponse =
+  Message<"cerbos.cloud.epdp.v2.GetBundleResponse"> & {
+    /**
+     * @generated from oneof cerbos.cloud.epdp.v2.GetBundleResponse.result
+     */
+    result:
+      | {
+          /**
+           * @generated from field: cerbos.cloud.epdp.v2.Bundle bundle = 1;
+           */
+          value: Bundle;
+          case: "bundle";
+        }
+      | {
+          /**
+           * @generated from field: google.protobuf.Empty not_modified = 2;
+           */
+          value: Empty;
+          case: "notModified";
+        }
+      | { case: undefined; value?: undefined };
+  };
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.GetBundleResponse
+ */
+export type GetBundleResponseJson = {
+  /**
+   * @generated from field: cerbos.cloud.epdp.v2.Bundle bundle = 1;
+   */
+  bundle?: BundleJson;
+
+  /**
+   * @generated from field: google.protobuf.Empty not_modified = 2;
+   */
+  notModified?: EmptyJson;
+};
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.GetBundleResponse
+ */
+export type GetBundleResponseValid =
+  Message<"cerbos.cloud.epdp.v2.GetBundleResponse"> & {
+    /**
+     * @generated from oneof cerbos.cloud.epdp.v2.GetBundleResponse.result
+     */
+    result:
+      | {
+          /**
+           * @generated from field: cerbos.cloud.epdp.v2.Bundle bundle = 1;
+           */
+          value: BundleValid;
+          case: "bundle";
+        }
+      | {
+          /**
+           * @generated from field: google.protobuf.Empty not_modified = 2;
+           */
+          value: Empty;
+          case: "notModified";
+        }
+      | { case: undefined; value?: undefined };
+  };
+
+/**
+ * Describes the message cerbos.cloud.epdp.v2.GetBundleResponse.
+ * Use `create(GetBundleResponseSchema)` to create a new message.
+ */
+export const GetBundleResponseSchema: GenMessage<
+  GetBundleResponse,
+  { jsonType: GetBundleResponseJson; validType: GetBundleResponseValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 7);
+
+/**
+ * @generated from service cerbos.cloud.epdp.v2.BundleService
+ */
+export const BundleService: GenService<{
+  /**
+   * @generated from rpc cerbos.cloud.epdp.v2.BundleService.GetBundle
+   */
+  getBundle: {
+    methodKind: "unary";
+    input: typeof GetBundleRequestSchema;
+    output: typeof GetBundleResponseSchema;
+  };
+}> = /*@__PURE__*/ serviceDesc(file_cerbos_cloud_epdp_v2_epdp, 0);

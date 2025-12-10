@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: "`cerbos.epdp.v2.BundleService`"
+      pull: 1289
+
 releases:
   - version: 0.3.0
     date: 2025-11-20
