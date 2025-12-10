@@ -6,6 +6,12 @@
 
 - [`PolicySourceHubEmbeddedBundle`](../../docs/core.policysourcehubembeddedbundle.md) type ([#1310](https://github.com/cerbos/cerbos-sdk-javascript/pull/1310))
 
+### Changed
+
+- Make [`DecisionLogEntryPlanResources.output`](../../docs/core.decisionlogentryplanresources.output.md) optional ([#1311](https://github.com/cerbos/cerbos-sdk-javascript/pull/1311))
+
+  If an error was encountered while evaluating the `PlanResources` call, there may be no output.
+
 ## [0.25.2] - 2025-11-20
 
 ### Changed
