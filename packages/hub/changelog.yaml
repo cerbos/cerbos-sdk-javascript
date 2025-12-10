@@ -1,5 +1,5 @@
 unreleased:
-  type: patch
+  type: minor
 
   changed:
     - summary: Migrate to [@connectrpc/validate]
