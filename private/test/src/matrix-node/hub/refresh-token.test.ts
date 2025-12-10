@@ -1,4 +1,12 @@
-import { afterEach, beforeAll, describe, expect, it, vitest } from "vitest";
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  vitest,
+} from "vitest";
 
 import type { ListFilesResponse } from "@cerbos/hub";
 
@@ -16,10 +24,14 @@ describe("access token rotation", () => {
     vitest.useRealTimers();
   });
 
+  afterAll(async () => {
+    await server.stop();
+  });
+
   it("refreshes access tokens 5 minutes before expiry", async () => {
     vitest.useFakeTimers();
 
-    const client = server.client();
+    const client = server.storesClient();
 
     server.expectIssueAccessToken(() => ({
       accessToken: "let-me-in",

@@ -1,5 +1,13 @@
 import { Code, ConnectError } from "@connectrpc/connect";
-import { afterEach, beforeAll, describe, expect, it, vitest } from "vitest";
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  vitest,
+} from "vitest";
 
 import { NotOK, Status } from "@cerbos/core";
 import type { ListFilesResponse } from "@cerbos/hub";
@@ -18,10 +26,14 @@ describe("authentication failure", () => {
     vitest.useRealTimers();
   });
 
+  afterAll(async () => {
+    await server.stop();
+  });
+
   it("backs off", async () => {
     vitest.useFakeTimers();
 
-    const client = server.client();
+    const client = server.storesClient();
 
     server.expectIssueAccessToken(() => {
       throw new ConnectError("down", Code.Unavailable);

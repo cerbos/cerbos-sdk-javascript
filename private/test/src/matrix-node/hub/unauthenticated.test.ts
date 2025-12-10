@@ -1,5 +1,5 @@
 import { Code, ConnectError } from "@connectrpc/connect";
-import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 
 import { NotOK, Status } from "@cerbos/core";
 
@@ -16,8 +16,12 @@ describe("with invalid credentials", () => {
     server.reset();
   });
 
+  afterAll(async () => {
+    await server.stop();
+  });
+
   it("only tries to issue access token once", async () => {
-    const client = server.client();
+    const client = server.storesClient();
 
     server.expectIssueAccessToken(() => {
       throw new ConnectError("wrong", Code.Unauthenticated);

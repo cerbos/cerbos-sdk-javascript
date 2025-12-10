@@ -14,16 +14,21 @@ import { Code, ConnectError } from "@connectrpc/connect";
 import { connectNodeAdapter } from "@connectrpc/connect-node";
 import { expect } from "vitest";
 
-import type { ClientOptions } from "@cerbos/hub";
+import type {
+  GetBundleRequestSchema,
+  GetBundleResponseSchema,
+} from "@cerbos/api/cerbos/cloud/epdp/v2/epdp_pb";
+import { BundleService } from "@cerbos/api/cerbos/cloud/epdp/v2/epdp_pb";
+import type { ClientOptions, Credentials } from "@cerbos/hub";
 import { StoresClient } from "@cerbos/hub";
 
-import type { IssueAccessTokenResponseSchema } from "../protobuf/cerbos/cloud/apikey/v1/apikey_pb";
-import { ApiKeyService } from "../protobuf/cerbos/cloud/apikey/v1/apikey_pb";
+import type { IssueAccessTokenResponseSchema } from "../../protobuf/cerbos/cloud/apikey/v1/apikey_pb";
+import { ApiKeyService } from "../../protobuf/cerbos/cloud/apikey/v1/apikey_pb";
 import type {
   ListFilesRequestSchema,
   ListFilesResponseSchema,
-} from "../protobuf/cerbos/cloud/store/v1/store_pb";
-import { CerbosStoreService } from "../protobuf/cerbos/cloud/store/v1/store_pb";
+} from "../../protobuf/cerbos/cloud/store/v1/store_pb";
+import { CerbosStoreService } from "../../protobuf/cerbos/cloud/store/v1/store_pb";
 
 interface Expectation<I extends DescMessage, O extends DescMessage> {
   headers: Record<string, string | null>;
@@ -115,8 +120,14 @@ class Expectations<I extends DescMessage, O extends DescMessage> {
 }
 
 export class Server {
+  public readonly credentials: Credentials = {
+    clientId: "KT8DGHXEZIK2",
+    clientSecret: "correct-horse-battery-staple",
+  };
+
   private readonly server: Http2Server;
   private readonly expectations = {
+    getBundle: new Expectations(BundleService.method.getBundle),
     issueAccessToken: new Expectations(ApiKeyService.method.issueAccessToken),
     listFiles: new Expectations(CerbosStoreService.method.listFiles),
   } as const;
@@ -147,22 +158,45 @@ export class Server {
     });
   }
 
-  public client(
-    options?: Omit<ClientOptions, "baseUrl" | "credentials">,
-  ): StoresClient {
+  public async stop(): Promise<void> {
+    await new Promise<void>((resolve, reject) => {
+      this.server.close((error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+
+  public get baseUrl(): string {
     const address = this.server.address() as AddressInfo | null;
+
     if (!address) {
       throw new Error("Server is not listening");
     }
 
+    return `http://${address.address}:${address.port}`;
+  }
+
+  public storesClient(
+    options?: Omit<ClientOptions, "baseUrl" | "credentials">,
+  ): StoresClient {
     return new StoresClient({
       ...options,
-      baseUrl: `http://${address.address}:${address.port}`,
-      credentials: {
-        clientId: "KT8DGHXEZIK2",
-        clientSecret: "correct-horse-battery-staple",
-      },
+      baseUrl: this.baseUrl,
+      credentials: this.credentials,
     });
+  }
+
+  public expectGetBundle(
+    accessToken: string | null,
+    request: MessageInitShape<typeof GetBundleRequestSchema>,
+    response: () => MessageInitShape<typeof GetBundleResponseSchema>,
+    headers: Record<string, string | null> = {},
+  ): void {
+    this.expectations.getBundle.add(accessToken, headers, request, response);
   }
 
   public expectIssueAccessToken(
@@ -172,10 +206,7 @@ export class Server {
     this.expectations.issueAccessToken.add(
       null,
       headers,
-      {
-        clientId: "KT8DGHXEZIK2",
-        clientSecret: "correct-horse-battery-staple",
-      },
+      this.credentials,
       response,
     );
   }

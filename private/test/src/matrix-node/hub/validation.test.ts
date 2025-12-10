@@ -1,4 +1,4 @@
-import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 
 import { NotOK, Status } from "@cerbos/core";
 
@@ -15,8 +15,12 @@ describe("request validation", () => {
     server.reset();
   });
 
+  afterAll(async () => {
+    await server.stop();
+  });
+
   it("doesn't send invalid requests to the server", async () => {
-    const client = server.client();
+    const client = server.storesClient();
 
     try {
       await client.listFiles({ storeId: "" });
