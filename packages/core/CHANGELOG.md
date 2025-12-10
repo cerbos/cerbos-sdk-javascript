@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [`PolicySourceHubEmbeddedBundle`](../../docs/core.policysourcehubembeddedbundle.md) type ([#1310](https://github.com/cerbos/cerbos-sdk-javascript/pull/1310))
 
 ## [0.25.2] - 2025-11-20
 

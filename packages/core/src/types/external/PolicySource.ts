@@ -1,4 +1,5 @@
 import type { DatabaseDriver } from "./DatabaseDriver";
+import type { EmbeddedBundle } from "./EmbeddedBundle";
 import type { LocalBundle } from "./LocalBundle";
 
 /**
@@ -187,10 +188,11 @@ export function policySourceIsGit(
  * @public
  */
 export type PolicySourceHub =
-  | PolicySourceHubLabel
   | PolicySourceHubDeployment
-  | PolicySourceHubPlayground
-  | PolicySourceHubLocalBundle;
+  | PolicySourceHubEmbeddedBundle
+  | PolicySourceHubLabel
+  | PolicySourceHubLocalBundle
+  | PolicySourceHubPlayground;
 
 /**
  * Type guard to check if a {@link PolicySource} is a {@link PolicySourceHub}.
@@ -213,29 +215,6 @@ export interface PolicySourceHubBase {
    * Discriminator to mark the policy source as Cerbos Hub.
    */
   kind: "hub";
-}
-
-/**
- * Policies sourced from a {@link https://docs.cerbos.dev/cerbos-hub/legacy/deployment-labels | label} in {@link https://www.cerbos.dev/product-cerbos-hub | Cerbos Hub} using the {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub | `hub` storage driver}.
- *
- * @public
- */
-export interface PolicySourceHubLabel extends PolicySourceHubBase {
-  /**
-   * The {@link https://docs.cerbos.dev/cerbos-hub/legacy/deployment-labels | label} from which the policy bundle was downloaded.
-   */
-  label: string;
-}
-
-/**
- * Type guard to check if a {@link PolicySource} is a {@link PolicySourceHubLabel}.
- *
- * @public
- */
-export function policySourceIsHubLabel(
-  source: PolicySource,
-): source is PolicySourceHubLabel {
-  return policySourceIsHub(source) && "label" in source;
 }
 
 /**
@@ -262,26 +241,49 @@ export function policySourceIsHubDeployment(
 }
 
 /**
- * Policies sourced from a {@link https://docs.cerbos.dev/cerbos-hub/playground | playground} in {@link https://www.cerbos.dev/product-cerbos-hub | Cerbos Hub} using the {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub | `hub` storage driver}.
+ * Policies sourced from a policy bundle downloaded from {@link https://www.cerbos.dev/product-cerbos-hub | Cerbos Hub} for an embedded policy decision point.
  *
  * @public
  */
-export interface PolicySourceHubPlayground extends PolicySourceHubBase {
+export interface PolicySourceHubEmbeddedBundle extends PolicySourceHubBase {
   /**
-   * ID of the {@link https://docs.cerbos.dev/cerbos-hub/playground | playground} from which the policy bundle was downloaded.
+   * Details of the embedded policy bundle.
    */
-  playgroundId: string;
+  embeddedBundle: EmbeddedBundle;
 }
 
 /**
- * Type guard to check if a {@link PolicySource} is a {@link PolicySourceHubPlayground}.
+ * Type guard to check if a {@link PolicySource} is a {@link PolicySourceHubEmbeddedBundle}.
  *
  * @public
  */
-export function policySourceIsHubPlayground(
+export function policySourceIsHubEmbeddedBundle(
   source: PolicySource,
-): source is PolicySourceHubPlayground {
-  return policySourceIsHub(source) && "playgroundId" in source;
+): source is PolicySourceHubEmbeddedBundle {
+  return policySourceIsHub(source) && "embeddedBundle" in source;
+}
+
+/**
+ * Policies sourced from a {@link https://docs.cerbos.dev/cerbos-hub/legacy/deployment-labels | label} in {@link https://www.cerbos.dev/product-cerbos-hub | Cerbos Hub} using the {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub | `hub` storage driver}.
+ *
+ * @public
+ */
+export interface PolicySourceHubLabel extends PolicySourceHubBase {
+  /**
+   * The {@link https://docs.cerbos.dev/cerbos-hub/legacy/deployment-labels | label} from which the policy bundle was downloaded.
+   */
+  label: string;
+}
+
+/**
+ * Type guard to check if a {@link PolicySource} is a {@link PolicySourceHubLabel}.
+ *
+ * @public
+ */
+export function policySourceIsHubLabel(
+  source: PolicySource,
+): source is PolicySourceHubLabel {
+  return policySourceIsHub(source) && "label" in source;
 }
 
 /**
@@ -305,4 +307,27 @@ export function policySourceIsHubLocalBundle(
   source: PolicySource,
 ): source is PolicySourceHubLocalBundle {
   return policySourceIsHub(source) && "localBundle" in source;
+}
+
+/**
+ * Policies sourced from a {@link https://docs.cerbos.dev/cerbos-hub/playground | playground} in {@link https://www.cerbos.dev/product-cerbos-hub | Cerbos Hub} using the {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub | `hub` storage driver}.
+ *
+ * @public
+ */
+export interface PolicySourceHubPlayground extends PolicySourceHubBase {
+  /**
+   * ID of the {@link https://docs.cerbos.dev/cerbos-hub/playground | playground} from which the policy bundle was downloaded.
+   */
+  playgroundId: string;
+}
+
+/**
+ * Type guard to check if a {@link PolicySource} is a {@link PolicySourceHubPlayground}.
+ *
+ * @public
+ */
+export function policySourceIsHubPlayground(
+  source: PolicySource,
+): source is PolicySourceHubPlayground {
+  return policySourceIsHub(source) && "playgroundId" in source;
 }

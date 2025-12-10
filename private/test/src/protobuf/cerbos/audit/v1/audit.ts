@@ -160,7 +160,16 @@ export interface PolicySource_Hub {
     | { $case: "deploymentId"; deploymentId: string }
     | { $case: "playgroundId"; playgroundId: string }
     | { $case: "localBundle"; localBundle: PolicySource_Hub_LocalBundle }
+    | {
+        $case: "embeddedBundle";
+        embeddedBundle: PolicySource_Hub_EmbeddedBundle;
+      }
     | undefined;
+}
+
+export interface PolicySource_Hub_EmbeddedBundle {
+  ruleId: string;
+  scopes: string[];
 }
 
 export interface PolicySource_Hub_LocalBundle {
@@ -1691,6 +1700,12 @@ export const PolicySource_Hub: MessageFns<PolicySource_Hub> = {
           writer.uint32(34).fork(),
         ).join();
         break;
+      case "embeddedBundle":
+        PolicySource_Hub_EmbeddedBundle.encode(
+          message.source.embeddedBundle,
+          writer.uint32(42).fork(),
+        ).join();
+        break;
     }
     return writer;
   },
@@ -1747,6 +1762,20 @@ export const PolicySource_Hub: MessageFns<PolicySource_Hub> = {
           };
           continue;
         }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.source = {
+            $case: "embeddedBundle",
+            embeddedBundle: PolicySource_Hub_EmbeddedBundle.decode(
+              reader,
+              reader.uint32(),
+            ),
+          };
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1768,10 +1797,81 @@ export const PolicySource_Hub: MessageFns<PolicySource_Hub> = {
       obj.localBundle = PolicySource_Hub_LocalBundle.toJSON(
         message.source.localBundle,
       );
+    } else if (message.source?.$case === "embeddedBundle") {
+      obj.embeddedBundle = PolicySource_Hub_EmbeddedBundle.toJSON(
+        message.source.embeddedBundle,
+      );
     }
     return obj;
   },
 };
+
+function createBasePolicySource_Hub_EmbeddedBundle(): PolicySource_Hub_EmbeddedBundle {
+  return { ruleId: "", scopes: [] };
+}
+
+export const PolicySource_Hub_EmbeddedBundle: MessageFns<PolicySource_Hub_EmbeddedBundle> =
+  {
+    encode(
+      message: PolicySource_Hub_EmbeddedBundle,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.ruleId !== "") {
+        writer.uint32(10).string(message.ruleId);
+      }
+      for (const v of message.scopes) {
+        writer.uint32(18).string(v!);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PolicySource_Hub_EmbeddedBundle {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePolicySource_Hub_EmbeddedBundle();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.ruleId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.scopes.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    toJSON(message: PolicySource_Hub_EmbeddedBundle): unknown {
+      const obj: any = {};
+      if (message.ruleId !== "") {
+        obj.ruleId = message.ruleId;
+      }
+      if (message.scopes?.length) {
+        obj.scopes = message.scopes;
+      }
+      return obj;
+    },
+  };
 
 function createBasePolicySource_Hub_LocalBundle(): PolicySource_Hub_LocalBundle {
   return { path: "" };

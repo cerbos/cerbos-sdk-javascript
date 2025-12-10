@@ -27,6 +27,7 @@ export * from "./DerivedRolesBody";
 export * from "./DisablePoliciesRequest";
 export * from "./DisablePoliciesResponse";
 export * from "./Effect";
+export * from "./EmbeddedBundle";
 export * from "./EnablePoliciesRequest";
 export * from "./EnablePoliciesResponse";
 export * from "./ExportConstantsBody";

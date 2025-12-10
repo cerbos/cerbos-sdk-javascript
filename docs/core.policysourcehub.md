@@ -9,7 +9,7 @@ Policies sourced from [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) us
 **Signature:**
 
 ```typescript
-export type PolicySourceHub = PolicySourceHubLabel | PolicySourceHubDeployment | PolicySourceHubPlayground | PolicySourceHubLocalBundle;
+export type PolicySourceHub = PolicySourceHubDeployment | PolicySourceHubEmbeddedBundle | PolicySourceHubLabel | PolicySourceHubLocalBundle | PolicySourceHubPlayground;
 ```
-**References:** [PolicySourceHubLabel](./core.policysourcehublabel.md)<!-- -->, [PolicySourceHubDeployment](./core.policysourcehubdeployment.md)<!-- -->, [PolicySourceHubPlayground](./core.policysourcehubplayground.md)<!-- -->, [PolicySourceHubLocalBundle](./core.policysourcehublocalbundle.md)
+**References:** [PolicySourceHubDeployment](./core.policysourcehubdeployment.md)<!-- -->, [PolicySourceHubEmbeddedBundle](./core.policysourcehubembeddedbundle.md)<!-- -->, [PolicySourceHubLabel](./core.policysourcehublabel.md)<!-- -->, [PolicySourceHubLocalBundle](./core.policysourcehublocalbundle.md)<!-- -->, [PolicySourceHubPlayground](./core.policysourcehubplayground.md)
 

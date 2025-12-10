@@ -18,6 +18,7 @@ import type {
   PolicySource_EmbeddedPDP,
   PolicySource_Git,
   PolicySource_Hub,
+  PolicySource_Hub_EmbeddedBundle,
   PolicySource_Hub_LocalBundle,
 } from "@cerbos/api/cerbos/audit/v1/audit_pb";
 import { PolicySource_Database_Driver } from "@cerbos/api/cerbos/audit/v1/audit_pb";
@@ -119,6 +120,7 @@ import type {
   DerivedRoleDefinition,
   DerivedRoles,
   DisablePoliciesResponse,
+  EmbeddedBundle,
   EnablePoliciesResponse,
   ExportConstants,
   ExportVariables,
@@ -158,6 +160,7 @@ import type {
   PolicySourceHub,
   PolicySourceHubBase,
   PolicySourceHubDeployment,
+  PolicySourceHubEmbeddedBundle,
   PolicySourceHubLabel,
   PolicySourceHubLocalBundle,
   PolicySourceHubPlayground,
@@ -394,17 +397,12 @@ function policySourceHubSourceFromProtobuf(
   source: PolicySource_Hub["source"],
 ): OmitPolicySourceHubBase<PolicySourceHub> {
   return transformOneOf("PolicySource.Hub.source", source, {
-    label: policySourceHubLabelFromProtobuf,
     deploymentId: policySourceHubDeploymentFromProtobuf,
-    playgroundId: policySourceHubPlaygroundFromProtobuf,
+    embeddedBundle: policySourceHubEmbeddedBundleFromProtobuf,
+    label: policySourceHubLabelFromProtobuf,
     localBundle: policySourceHubLocalBundleFromProtobuf,
+    playgroundId: policySourceHubPlaygroundFromProtobuf,
   });
-}
-
-function policySourceHubLabelFromProtobuf(
-  label: string,
-): OmitPolicySourceHubBase<PolicySourceHubLabel> {
-  return { label };
 }
 
 function policySourceHubDeploymentFromProtobuf(
@@ -413,16 +411,38 @@ function policySourceHubDeploymentFromProtobuf(
   return { deploymentId };
 }
 
-function policySourceHubPlaygroundFromProtobuf(
-  playgroundId: string,
-): OmitPolicySourceHubBase<PolicySourceHubPlayground> {
-  return { playgroundId };
+function policySourceHubEmbeddedBundleFromProtobuf(
+  embeddedBundle: PolicySource_Hub_EmbeddedBundle,
+): OmitPolicySourceHubBase<PolicySourceHubEmbeddedBundle> {
+  return { embeddedBundle: embeddedBundleFromProtobuf(embeddedBundle) };
+}
+
+function policySourceHubLabelFromProtobuf(
+  label: string,
+): OmitPolicySourceHubBase<PolicySourceHubLabel> {
+  return { label };
 }
 
 function policySourceHubLocalBundleFromProtobuf(
   localBundle: PolicySource_Hub_LocalBundle,
 ): OmitPolicySourceHubBase<PolicySourceHubLocalBundle> {
   return { localBundle: localBundleFromProtobuf(localBundle) };
+}
+
+function policySourceHubPlaygroundFromProtobuf(
+  playgroundId: string,
+): OmitPolicySourceHubBase<PolicySourceHubPlayground> {
+  return { playgroundId };
+}
+
+function embeddedBundleFromProtobuf({
+  ruleId,
+  scopes,
+}: PolicySource_Hub_EmbeddedBundle): EmbeddedBundle {
+  return {
+    ruleId,
+    scopes,
+  };
 }
 
 function localBundleFromProtobuf({

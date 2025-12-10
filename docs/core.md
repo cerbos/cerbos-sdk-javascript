@@ -594,6 +594,17 @@ Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicyS
 </td></tr>
 <tr><td>
 
+[policySourceIsHubEmbeddedBundle(source)](./core.policysourceishubembeddedbundle.md)
+
+
+</td><td>
+
+Type guard to check if a [`PolicySource`](./core.policysource.md) is a [`PolicySourceHubEmbeddedBundle`](./core.policysourcehubembeddedbundle.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
 [policySourceIsHubLabel(source)](./core.policysourceishublabel.md)
 
 
@@ -956,6 +967,17 @@ Input to [`Client.disablePolicies()`](./core.client.disablepolicies.md)<!-- -->.
 </td><td>
 
 The outcome of disabling policies.
+
+
+</td></tr>
+<tr><td>
+
+[EmbeddedBundle](./core.embeddedbundle.md)
+
+
+</td><td>
+
+A policy bundle downloaded from [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) for an embedded policy decision point.
 
 
 </td></tr>
@@ -1583,6 +1605,17 @@ Common fields between different [`PolicySourceHub`](./core.policysourcehub.md) t
 </td><td>
 
 Policies sourced from a deployment in [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) using the [`hub` storage driver](https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[PolicySourceHubEmbeddedBundle](./core.policysourcehubembeddedbundle.md)
+
+
+</td><td>
+
+Policies sourced from a policy bundle downloaded from [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) for an embedded policy decision point.
 
 
 </td></tr>
