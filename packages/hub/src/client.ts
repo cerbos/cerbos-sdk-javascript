@@ -47,6 +47,7 @@ interface InternalClientOptions extends Partial<ClientOptions> {
 }
 
 // Adapted from https://github.com/connectrpc/connect-es/blob/v2.0.2/packages/connect/src/promise-client.ts#L39-L46
+/** @internal */
 export type Client<Desc extends DescService> = {
   [P in keyof Desc["method"]]: Method<Desc["method"][P]>;
 };
@@ -59,6 +60,7 @@ type MethodUnary<I extends DescMessage, O extends DescMessage> = (
   options: CallOptions,
 ) => Promise<MessageValidType<O>>;
 
+/** @internal */
 export function createClient<T extends DescService>(
   service: T,
   {
