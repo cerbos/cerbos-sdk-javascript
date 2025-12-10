@@ -4,10 +4,10 @@
 
 ## DecisionLogEntryPlanResources.output property
 
-The outputs from the `PlanResources` call.
+The output from the `PlanResources` call.
 
 **Signature:**
 
 ```typescript
-output: PlanResourcesOutput;
+output: PlanResourcesOutput | undefined;
 ```

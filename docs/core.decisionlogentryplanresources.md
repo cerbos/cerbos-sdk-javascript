@@ -102,12 +102,12 @@ The method that was called.
 
 </td><td>
 
-[PlanResourcesOutput](./core.planresourcesoutput.md)
+[PlanResourcesOutput](./core.planresourcesoutput.md) \| undefined
 
 
 </td><td>
 
-The outputs from the `PlanResources` call.
+The output from the `PlanResources` call.
 
 
 </td></tr>
