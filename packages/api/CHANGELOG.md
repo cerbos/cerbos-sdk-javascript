@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- `cerbos.epdp.v2.BundleService` ([#1312](https://github.com/cerbos/cerbos-sdk-javascript/pull/1312))
 
 ## [0.3.0] - 2025-11-20
 
