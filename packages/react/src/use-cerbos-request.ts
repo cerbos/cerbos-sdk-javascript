@@ -52,7 +52,7 @@ function useCerbosRequest<Method extends Methods>(
     [client, method, optionsMemo, requestMemo],
   );
 
-  const bundle = activeEmbeddedBundle(client);
+  const updateSignal = client.client["~updateSignal"];
 
   useEffect(() => {
     setIsLoading(true); // eslint-disable-line react-hooks/set-state-in-effect
@@ -84,18 +84,9 @@ function useCerbosRequest<Method extends Methods>(
     return (): void => {
       abortController.abort();
     };
-  }, [load, bundle]);
+  }, [load, updateSignal]);
 
   return { isLoading, data, error } as AsyncResult<Result<Method>>;
-}
-
-function activeEmbeddedBundle({ client }: ClientWithPrincipal): unknown {
-  return "loader" in client &&
-    typeof client.loader === "object" &&
-    client.loader &&
-    "~active" in client.loader
-    ? client.loader["~active"]
-    : undefined;
 }
 
 /**

@@ -13,6 +13,8 @@ import { Transport } from "./transport";
  * @public
  */
 export class Embedded extends Client {
+  private readonly server: Server;
+
   /**
    * Create a client for interacting with an embedded Cerbos policy decision point (PDP).
    *
@@ -34,5 +36,11 @@ export class Embedded extends Client {
   public constructor(options: Options) {
     const server = new Server(options);
     super(new Transport(server), options);
+    this.server = server;
+  }
+
+  /** @internal */
+  public override get ["~updateSignal"](): unknown {
+    return this.server.loader?.["~updateSignal"];
   }
 }

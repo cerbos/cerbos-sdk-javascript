@@ -102,10 +102,12 @@ describe("loaders", () => {
       const callbacks = new Callbacks();
       const loader = new AutoUpdatingLoader(server.url, callbacks);
 
+      let updateSignal = loader["~updateSignal"];
       const loadedFirst = await callbacks.next();
       expect(loadedFirst).toEqual({ ...first.metadata, url: server.url });
       expect(await loader.active()).toBe(loadedFirst);
       expect(loader.pending).toBeUndefined();
+      expect(loader["~updateSignal"]).toBe(updateSignal);
 
       server.bundle = second;
 
@@ -113,16 +115,20 @@ describe("loaders", () => {
       expect(loadedSecond).toEqual({ ...second.metadata, url: server.url });
       expect(await loader.active()).toBe(loadedSecond);
       expect(loader.pending).toBeUndefined();
+      expect(loader["~updateSignal"]).not.toEqual(updateSignal);
+      updateSignal = loader["~updateSignal"];
 
       expect(await callbacks.next()).toBeUndefined();
       expect(await loader.active()).toBe(loadedSecond);
       expect(loader.pending).toBeUndefined();
+      expect(loader["~updateSignal"]).toBe(updateSignal);
 
       server.error = true;
 
       expectLoadError(await callbacks.next(), server.errorMessage);
       expect(await loader.active()).toBe(loadedSecond);
       expect(loader.pending).toBeUndefined();
+      expect(loader["~updateSignal"]).toBe(updateSignal);
     });
 
     test("activateOnLoad: false", async () => {
@@ -133,10 +139,12 @@ describe("loaders", () => {
         onLoad: callbacks.onLoad,
       });
 
+      let updateSignal = loader["~updateSignal"];
       const loadedFirst = await callbacks.next();
       expect(loadedFirst).toEqual({ ...first.metadata, url: server.url });
       expect(await loader.active()).toBe(loadedFirst);
       expect(loader.pending).toBeUndefined();
+      expect(loader["~updateSignal"]).toBe(updateSignal);
 
       server.bundle = second;
 
@@ -144,40 +152,49 @@ describe("loaders", () => {
       expect(loadedSecond).toEqual({ ...second.metadata, url: server.url });
       expect(await loader.active()).toBe(loadedFirst);
       expect(loader.pending).toBe(loadedSecond);
+      expect(loader["~updateSignal"]).toBe(updateSignal);
 
       expect(await callbacks.next()).toBeUndefined();
       expect(await loader.active()).toBe(loadedFirst);
       expect(loader.pending).toBe(loadedSecond);
+      expect(loader["~updateSignal"]).toBe(updateSignal);
 
       loader.activate();
 
       expect(await loader.active()).toBe(loadedSecond);
       expect(loader.pending).toBeUndefined();
+      expect(loader["~updateSignal"]).not.toEqual(updateSignal);
+      updateSignal = loader["~updateSignal"];
 
       expect(await callbacks.next()).toBeUndefined();
       expect(await loader.active()).toBe(loadedSecond);
       expect(loader.pending).toBeUndefined();
+      expect(loader["~updateSignal"]).toBe(updateSignal);
 
       server.error = true;
 
       expectLoadError(await callbacks.next(), server.errorMessage);
       expect(await loader.active()).toBe(loadedSecond);
       expect(loader.pending).toBeUndefined();
+      expect(loader["~updateSignal"]).toBe(updateSignal);
     });
 
     test("stop", async () => {
       const callbacks = new Callbacks();
       const loader = new AutoUpdatingLoader(server.url, callbacks);
 
+      const updateSignal = loader["~updateSignal"];
       const loaded = await callbacks.next();
       expect(loaded).toEqual({ ...first.metadata, url: server.url });
       expect(await loader.active()).toBe(loaded);
+      expect(loader["~updateSignal"]).toBe(updateSignal);
 
       server.bundle = second;
       loader.stop();
 
       expect(await callbacks.next()).toBeUndefined();
       expect(await loader.active()).toBe(loaded);
+      expect(loader["~updateSignal"]).toBe(updateSignal);
     });
   });
 });

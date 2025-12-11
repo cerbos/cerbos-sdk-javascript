@@ -239,6 +239,13 @@ describe("PolicyLoader", () => {
           result: Bundle | "notModified" | "error",
         ): Promise<void> {
           this.reset();
+          const updateSignal = this.loader["~updateSignal"];
+
+          const expectNotLoaded = (): void => {
+            this.expectNotLoaded();
+            expect(this.loader["~updateSignal"]).toBe(updateSignal);
+          };
+
           expectGetBundle(ifModifiedSince, result);
           this.update = Promise.withResolvers();
           const error = await this.update.promise;
@@ -246,22 +253,24 @@ describe("PolicyLoader", () => {
           switch (result) {
             case "notModified":
               expect(error).toBeUndefined();
-              this.expectNotLoaded();
+              expectNotLoaded();
               break;
 
             case "error":
               expectNotOK(error);
+              expectNotLoaded();
               break;
 
             default:
               expect(error).toBeUndefined();
 
               if (!activateOnLoad) {
-                this.expectNotLoaded();
+                expectNotLoaded();
                 this.loader.activate();
               }
 
               this.expectLoaded(result);
+              expect(this.loader["~updateSignal"]).not.toEqual(updateSignal);
           }
         }
 

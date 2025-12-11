@@ -46,6 +46,7 @@ import { DecisionLogger } from "./logger";
 import type {
   DecodeJWTPayload,
   Options,
+  PolicyLoaderOptions,
   PolicySource,
   WasmSource,
 } from "./options";
@@ -57,6 +58,7 @@ const servingServices: ReadonlySet<string> = new Set([
 ]);
 
 export class Server {
+  public readonly loader?: PolicyLoader;
   private readonly server: Deferred<EmbeddedServer>;
   private readonly decodeJWTPayload: DecodeJWTPayload;
   private readonly logger?: DecisionLogger;
@@ -70,6 +72,14 @@ export class Server {
     ...config
   }: Options) {
     userAgent = createUserAgent(userAgent);
+
+    if (policySourceIsPolicyLoaderOptions(policies)) {
+      policies = new PolicyLoader(policies);
+    }
+
+    if (policySourceIsPolicyLoader(policies)) {
+      this.loader = policies;
+    }
 
     this.server = defer(
       start(policies, wasm, configToProtobuf(config), userAgent),
@@ -227,8 +237,20 @@ export class Server {
   }
 }
 
-async function start(
+function policySourceIsPolicyLoader(
   policies: PolicySource,
+): policies is PolicyLoader {
+  return policies instanceof PolicyLoader;
+}
+
+function policySourceIsPolicyLoaderOptions(
+  policies: PolicySource,
+): policies is PolicyLoaderOptions {
+  return "ruleId" in policies && !policySourceIsPolicyLoader(policies);
+}
+
+async function start(
+  policies: Exclude<PolicySource, PolicyLoaderOptions>,
   wasm: WasmSource,
   config: ConfigValid,
   userAgent: string,
@@ -238,16 +260,10 @@ async function start(
     config,
   );
 
-  policies = await policies;
-
-  if (ArrayBuffer.isView(policies)) {
-    server.loadRuleTable(new Uint8Array(policies.buffer));
-  } else {
-    if (!(policies instanceof PolicyLoader)) {
-      policies = new PolicyLoader(policies);
-    }
-
+  if (policySourceIsPolicyLoader(policies)) {
     await policies["~start"](server);
+  } else {
+    server.loadRuleTable(new Uint8Array((await policies).buffer));
   }
 
   return server;

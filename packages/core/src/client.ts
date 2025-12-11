@@ -1133,6 +1133,11 @@ export abstract class Client {
     return new ClientWithPrincipal(this, principal, auxData);
   }
 
+  /** @internal */
+  public get ["~updateSignal"](): unknown {
+    return undefined;
+  }
+
   private async unary<I extends DescMessage, O extends DescMessage>(
     method: DescMethodUnary<I, O>,
     request: MessageValidType<I>,

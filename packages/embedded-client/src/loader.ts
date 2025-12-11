@@ -31,6 +31,7 @@ export class PolicyLoader {
   private readonly servers: Server[] = [];
   private readonly client: HubClient<typeof BundleService>;
   private readonly abortController = new AbortController();
+  private activations = 0;
   private initialLoad?: Promise<void>;
   private activeBundle?: BundleValid;
   private pendingBundle?: BundleValid;
@@ -123,6 +124,7 @@ export class PolicyLoader {
    */
   public activate(): void {
     if (this.pendingBundle) {
+      this.activations++;
       this.activeBundle = this.pendingBundle;
       this.pendingBundle = undefined;
 
@@ -138,6 +140,11 @@ export class PolicyLoader {
   public stop(): void {
     this.abortController.abort();
     clearTimeout(this.timeout);
+  }
+
+  /** @internal */
+  public get ["~updateSignal"](): unknown {
+    return this.activations;
   }
 
   private async loadAndScheduleUpdate(): Promise<void> {

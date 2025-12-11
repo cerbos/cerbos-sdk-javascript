@@ -11,6 +11,7 @@ export const typescriptConfig = defineConfig(
       },
     },
     rules: {
+      "@typescript-eslint/class-literal-property-style": "off",
       "@typescript-eslint/consistent-type-imports": "warn",
       "@typescript-eslint/explicit-function-return-type": "warn",
       "@typescript-eslint/explicit-member-accessibility": "warn",

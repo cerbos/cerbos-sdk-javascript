@@ -14,7 +14,6 @@ import {
 } from "vitest";
 
 import type { Client, ClientWithPrincipal, RequestOptions } from "@cerbos/core";
-import type { Embedded, Loader } from "@cerbos/embedded";
 import type { AsyncResult } from "@cerbos/react";
 import {
   CerbosProvider,
@@ -110,14 +109,15 @@ describe("react hooks", () => {
   );
 });
 
-const client: Pick<Client, "withPrincipal"> = {
-  withPrincipal() {
+const client = {
+  withPrincipal(): ClientWithPrincipal {
     return {
       client: this,
       ...clientWithPrincipal,
     } as ClientWithPrincipal;
   },
-};
+  "~updateSignal": 0,
+} satisfies Pick<Client, "withPrincipal" | "~updateSignal">;
 
 const expectedRequestOptions: RequestOptions = expect.objectContaining({
   signal: expect.any(AbortSignal) as unknown as AbortSignal,
@@ -223,24 +223,12 @@ function testCerbosHook<TParams>(
       expect(result.current.error).toBeUndefined();
     });
 
-    it("calls Cerbos Client again when a new embedded bundle is activated", async () => {
-      const loader = { ["~active"]: Symbol("old LoadResult") };
-
-      const embedded: Pick<Embedded, "loader" | "withPrincipal"> = {
-        loader: loader as unknown as Loader,
-        withPrincipal() {
-          return {
-            client: this,
-            ...clientWithPrincipal,
-          } as ClientWithPrincipal<Embedded>;
-        },
-      };
-
-      const { rerender, result } = render(embedded);
+    it("calls Cerbos Client again when update signal changes", async () => {
+      const { rerender, result } = render(client);
 
       await act(async () => await vi.advanceTimersByTimeAsync(300));
 
-      loader["~active"] = Symbol("new LoadResult");
+      client["~updateSignal"]++;
       rerender(initialParams);
 
       expect(clientFn).toHaveBeenCalledTimes(2);

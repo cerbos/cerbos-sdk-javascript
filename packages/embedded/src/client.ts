@@ -70,4 +70,9 @@ export class Embedded extends Client {
 
     this.loader = loader;
   }
+
+  /** @internal */
+  public override get ["~updateSignal"](): unknown {
+    return this.loader["~active"];
+  }
 }

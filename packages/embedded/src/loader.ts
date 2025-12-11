@@ -247,13 +247,18 @@ export interface BundleMetadata {
  */
 export class Loader {
   /** @internal */
-  public ["~active"]: Awaitable<LoadResult>;
-
-  /** @internal */
   public readonly ["~options"]: Options;
 
   /** @internal */
   public readonly ["~userAgent"]: string;
+
+  /** @internal */
+  public readonly ["~transport"] = new Transport(
+    async () => await resolve(this["~active"]),
+  );
+
+  /** @internal */
+  protected ["~active"]: Awaitable<LoadResult>;
 
   private readonly logger: DecisionLogger | undefined;
 
@@ -314,9 +319,9 @@ export class Loader {
   }
 
   /** @internal */
-  public readonly ["~transport"] = new Transport(
-    async () => await resolve(this["~active"]),
-  );
+  public get ["~updateSignal"](): unknown {
+    return undefined;
+  }
 
   /** @internal */
   protected async ["~load"](
@@ -397,6 +402,7 @@ export interface AutoUpdateOptions extends Options {
 export class AutoUpdatingLoader extends Loader {
   private readonly activateOnLoad: boolean;
   private readonly interval: number;
+  private activations = 0;
   private _pending: Bundle | undefined;
   private etag: string | undefined;
   private running = true;
@@ -449,6 +455,7 @@ export class AutoUpdatingLoader extends Loader {
    */
   public activate(): void {
     if (this._pending) {
+      this.activations++;
       this["~active"] = { bundle: this._pending };
       this._pending = undefined;
     }
@@ -464,6 +471,11 @@ export class AutoUpdatingLoader extends Loader {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
+  }
+
+  /** @internal */
+  public override get ["~updateSignal"](): unknown {
+    return this.activations;
   }
 
   /** @internal */
