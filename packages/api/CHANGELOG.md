@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.4.0] - 2025-12-12
+
 ### Added
 
 - `cerbos.epdp.v2.BundleService` ([#1312](https://github.com/cerbos/cerbos-sdk-javascript/pull/1312))
@@ -30,7 +34,8 @@
 
 - Generated code ([#1271](https://github.com/cerbos/cerbos-sdk-javascript/pull/1271))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.3.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.4.0...HEAD
+[0.4.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.3.0...@cerbos/api@0.4.0
 [0.3.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.2.0...@cerbos/api@0.3.0
 [0.2.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.1.0...@cerbos/api@0.2.0
 [0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/7c9a46d98af3f606f28deb6f5485446ebdf18d11...@cerbos/api@0.1.0

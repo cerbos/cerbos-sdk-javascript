@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.26.0] - 2025-12-12
+
 ### Added
 
 - [`Awaitable`](../../docs/core.awaitable.md) type ([#1312](https://github.com/cerbos/cerbos-sdk-javascript/pull/1312))
@@ -13,6 +17,8 @@
 - Make [`DecisionLogEntryPlanResources.output`](../../docs/core.decisionlogentryplanresources.output.md) optional ([#1311](https://github.com/cerbos/cerbos-sdk-javascript/pull/1311))
 
   If an error was encountered while evaluating the `PlanResources` call, there may be no output.
+
+- Bump dependency on [@cerbos/api] to 0.4.0 ([#1313](https://github.com/cerbos/cerbos-sdk-javascript/pull/1313))
 
 ## [0.25.2] - 2025-11-20
 
@@ -300,7 +306,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.2...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.26.0...HEAD
+[0.26.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.2...@cerbos/core@0.26.0
 [0.25.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.1...@cerbos/core@0.25.2
 [0.25.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.0...@cerbos/core@0.25.1
 [0.25.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.24.1...@cerbos/core@0.25.0

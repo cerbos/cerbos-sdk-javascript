@@ -1,16 +1,20 @@
-unreleased:
-  type: minor
-
-  changed:
-    - summary: Migrate to [@connectrpc/validate]
-      pull: 1294
-
-  bumped:
-    "@connectrpc/connect":
-      to: 2.1.1
-      pull: 1291
-
 releases:
+  - version: 0.3.0
+    date: 2025-12-12
+
+    changed:
+      - summary: Migrate to [@connectrpc/validate]
+        pull: 1294
+
+    bumped:
+      "@cerbos/core":
+        to: 0.26.0
+        pull: 1313
+
+      "@connectrpc/connect":
+        to: 2.1.1
+        pull: 1291
+
   - version: 0.2.4
     date: 2025-11-20
 

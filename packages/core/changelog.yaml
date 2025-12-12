@@ -1,19 +1,24 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[`Awaitable`](../../docs/core.awaitable.md) type"
-      pull: 1312
-
-    - summary: "[`PolicySourceHubEmbeddedBundle`](../../docs/core.policysourcehubembeddedbundle.md) type"
-      pull: 1310
-
-  changed:
-    - summary: Make [`DecisionLogEntryPlanResources.output`](../../docs/core.decisionlogentryplanresources.output.md) optional
-      details: If an error was encountered while evaluating the `PlanResources` call, there may be no output.
-      pull: 1311
-
 releases:
+  - version: 0.26.0
+    date: 2025-12-12
+
+    added:
+      - summary: "[`Awaitable`](../../docs/core.awaitable.md) type"
+        pull: 1312
+
+      - summary: "[`PolicySourceHubEmbeddedBundle`](../../docs/core.policysourcehubembeddedbundle.md) type"
+        pull: 1310
+
+    changed:
+      - summary: Make [`DecisionLogEntryPlanResources.output`](../../docs/core.decisionlogentryplanresources.output.md) optional
+        details: If an error was encountered while evaluating the `PlanResources` call, there may be no output.
+        pull: 1311
+
+    bumped:
+      "@cerbos/api":
+        to: 0.4.0
+        pull: 1313
+
   - version: 0.25.2
     date: 2025-11-20
 
