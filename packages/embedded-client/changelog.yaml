@@ -1,0 +1,15 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: Client library for new embedded policy decision point servers
+      pull: 1312
+
+references:
+  "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es
+  "@bufbuild/protovalidate": https://github.com/bufbuild/protovalidate-es
+  "@cerbos/api": ../api/README.md
+  "@cerbos/core": ../core/README.md
+  ulid: https://github.com/ulid/javascript
+
+initialCommit: e55b224b1a6dcdd6ea9b2472bc498b5223d19b5e

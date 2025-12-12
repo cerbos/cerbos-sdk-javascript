@@ -287,7 +287,8 @@ function auditLogMetadataFromProtobuf(
   );
 }
 
-function auditTrailFromProtobuf(
+/** @internal */
+export function auditTrailFromProtobuf(
   auditTrail: AuditTrailProtobuf | undefined,
 ): AuditTrail {
   const { effectivePolicies = {} } = auditTrail ?? {};
@@ -598,7 +599,8 @@ function decisionLogEntryPlanResourcesFromProtobuf({
   };
 }
 
-function planResourcesInputFromProtobuf({
+/** @internal */
+export function planResourcesInputFromProtobuf({
   requestId,
   principal,
   resource,
@@ -632,7 +634,8 @@ function resourceQueryFromProtobuf({
   };
 }
 
-function planResourcesOutputFromProtobuf({
+/** @internal */
+export function planResourcesOutputFromProtobuf({
   requestId,
   filter,
   filterDebug,

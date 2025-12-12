@@ -1,0 +1,4 @@
+{
+  "main": "../lib/internal.js",
+  "types": "../lib/internal.d.ts"
+}

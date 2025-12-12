@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Stop duplicating `user-agent` between `metadata` and `peer` in decision log entries ([#1312](https://github.com/cerbos/cerbos-sdk-javascript/pull/1312))
+
 - Bump dependency on [ulid] to 3.0.2 ([#1305](https://github.com/cerbos/cerbos-sdk-javascript/pull/1305))
 
 ## [0.13.4] - 2025-11-20

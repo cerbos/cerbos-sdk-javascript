@@ -16,7 +16,7 @@ describe("request validation", () => {
   });
 
   it("doesn't send invalid requests to the server", async () => {
-    const client = server.client();
+    const client = server.storesClient();
 
     try {
       await client.listFiles({ storeId: "" });

@@ -11,6 +11,7 @@ export const typescriptConfig = defineConfig(
       },
     },
     rules: {
+      "@typescript-eslint/class-literal-property-style": "off",
       "@typescript-eslint/consistent-type-imports": "warn",
       "@typescript-eslint/explicit-function-return-type": "warn",
       "@typescript-eslint/explicit-member-accessibility": "warn",
@@ -41,8 +42,13 @@ export const typescriptConfig = defineConfig(
     },
   },
   {
-    files: ["**/*.test.ts", "private/test/src/helpers.ts"],
+    files: [
+      "**/*.test.ts",
+      "private/test/src/client/*.ts",
+      "private/test/src/helpers.ts",
+    ],
     rules: {
+      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/no-unsafe-member-access": "off",
       "@typescript-eslint/no-unsafe-argument": "off",

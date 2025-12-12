@@ -1,5 +1,6 @@
 import type { Options as CoreOptions } from "@cerbos/core";
 import { Client } from "@cerbos/core";
+import { userAgent } from "@cerbos/core/~internal";
 
 import { Transport } from "./transport";
 
@@ -49,10 +50,9 @@ export class HTTP extends Client {
    * ```
    */
   public constructor(baseUrl: string, options: Options = {}) {
-    const userAgent = `${
-      options.userAgent ? `${options.userAgent} ` : ""
-    }${defaultUserAgent}`;
-
-    super(new Transport(baseUrl, userAgent), options);
+    super(
+      new Transport(baseUrl, userAgent(options.userAgent, defaultUserAgent)),
+      options,
+    );
   }
 }

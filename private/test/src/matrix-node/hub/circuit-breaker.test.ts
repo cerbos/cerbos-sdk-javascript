@@ -21,7 +21,7 @@ describe("repeated failures", () => {
   it("backs off", async () => {
     vitest.useFakeTimers();
 
-    const client = server.client();
+    const client = server.storesClient();
 
     server.expectIssueAccessToken(() => ({
       accessToken: "let-me-in",

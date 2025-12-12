@@ -17,7 +17,7 @@ describe("with invalid credentials", () => {
   });
 
   it("only tries to issue access token once", async () => {
-    const client = server.client();
+    const client = server.storesClient();
 
     server.expectIssueAccessToken(() => {
       throw new ConnectError("wrong", Code.Unauthenticated);

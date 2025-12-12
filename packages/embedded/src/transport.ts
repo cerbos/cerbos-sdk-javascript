@@ -9,19 +9,20 @@ import type {
 
 import type { CheckResourcesRequest } from "@cerbos/api/cerbos/request/v1/request_pb";
 import { CerbosService as cerbos } from "@cerbos/api/cerbos/svc/v1/svc_pb";
-import type { _Transport } from "@cerbos/core";
-import { NotOK, Status, _methodName } from "@cerbos/core";
+import { NotOK, Status } from "@cerbos/core";
+import type { Transport as CoreTransport } from "@cerbos/core/~internal";
+import { methodName } from "@cerbos/core/~internal";
 
 import type { Bundle } from "./bundle";
 
-export class Transport implements _Transport {
+export class Transport implements CoreTransport {
   public constructor(private readonly bundle: () => Promise<Bundle>) {}
   public async unary<I extends DescMessage, O extends DescMessage>(
     method: DescMethodUnary<I, O>,
     request: MessageValidType<I>,
     headers: Headers,
   ): Promise<MessageShape<O>> {
-    if (_methodName(method) === _methodName(cerbos.method.checkResources)) {
+    if (methodName(method) === methodName(cerbos.method.checkResources)) {
       const bundle = await this.bundle();
 
       return (await bundle.checkResources(
@@ -43,6 +44,6 @@ export class Transport implements _Transport {
 function notImplemented(method: DescMethod): never {
   throw new NotOK(
     Status.UNIMPLEMENTED,
-    `${_methodName(method)} is not implemented in embedded policy decision points`,
+    `${methodName(method)} is not implemented in embedded policy decision points`,
   );
 }

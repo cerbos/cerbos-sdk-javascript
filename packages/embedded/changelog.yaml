@@ -1,6 +1,10 @@
 unreleased:
   type: patch
 
+  changed:
+    - summary: Stop duplicating `user-agent` between `metadata` and `peer` in decision log entries
+      pull: 1312
+
   bumped:
     ulid:
       to: 3.0.2

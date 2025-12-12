@@ -19,7 +19,7 @@ describe("access token rotation", () => {
   it("refreshes access tokens 5 minutes before expiry", async () => {
     vitest.useFakeTimers();
 
-    const client = server.client();
+    const client = server.storesClient();
 
     server.expectIssueAccessToken(() => ({
       accessToken: "let-me-in",
