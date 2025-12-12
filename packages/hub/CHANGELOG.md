@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.3.0] - 2025-12-12
+
 ### Changed
 
 - Migrate to [@connectrpc/validate] ([#1294](https://github.com/cerbos/cerbos-sdk-javascript/pull/1294))
+
+- Bump dependency on [@cerbos/core] to 0.26.0 ([#1313](https://github.com/cerbos/cerbos-sdk-javascript/pull/1313))
 
 - Bump dependency on [@connectrpc/connect] to 2.1.1 ([#1291](https://github.com/cerbos/cerbos-sdk-javascript/pull/1291))
 
@@ -72,7 +78,8 @@
 
 - A client for interacting with policy stores in Cerbos Hub ([#1173](https://github.com/cerbos/cerbos-sdk-javascript/pull/1173), [#1191](https://github.com/cerbos/cerbos-sdk-javascript/pull/1191))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.2.4...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.3.0...HEAD
+[0.3.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.2.4...@cerbos/hub@0.3.0
 [0.2.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.2.3...@cerbos/hub@0.2.4
 [0.2.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.2.2...@cerbos/hub@0.2.3
 [0.2.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.2.1...@cerbos/hub@0.2.2

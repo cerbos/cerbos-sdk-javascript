@@ -1,16 +1,24 @@
-unreleased:
-  type: patch
-
-  changed:
-    - summary: Stop duplicating `user-agent` between `metadata` and `peer` in decision log entries
-      pull: 1312
-
-  bumped:
-    ulid:
-      to: 3.0.2
-      pull: 1305
-
 releases:
+  - version: 0.13.5
+    date: 2025-12-12
+
+    changed:
+      - summary: Stop duplicating `user-agent` between `metadata` and `peer` in decision log entries
+        pull: 1312
+
+    bumped:
+      "@cerbos/api":
+        to: 0.4.0
+        pull: 1313
+
+      "@cerbos/core":
+        to: 0.26.0
+        pull: 1313
+
+      ulid:
+        to: 3.0.2
+        pull: 1305
+
   - version: 0.13.4
     date: 2025-11-20
 

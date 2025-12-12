@@ -1,12 +1,20 @@
-unreleased:
-  type: patch
-
-  bumped:
-    yaml:
-      to: 2.8.2
-      pull: 1306
-
 releases:
+  - version: 0.4.6
+    date: 2025-12-12
+
+    bumped:
+      "@cerbos/api":
+        to: 0.4.0
+        pull: 1313
+
+      "@cerbos/core":
+        to: 0.26.0
+        pull: 1313
+
+      yaml:
+        to: 2.8.2
+        pull: 1306
+
   - version: 0.4.5
     date: 2025-11-20
 

@@ -2,9 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.13.5] - 2025-12-12
+
 ### Changed
 
 - Stop duplicating `user-agent` between `metadata` and `peer` in decision log entries ([#1312](https://github.com/cerbos/cerbos-sdk-javascript/pull/1312))
+
+- Bump dependency on [@cerbos/api] to 0.4.0 ([#1313](https://github.com/cerbos/cerbos-sdk-javascript/pull/1313))
+
+- Bump dependency on [@cerbos/core] to 0.26.0 ([#1313](https://github.com/cerbos/cerbos-sdk-javascript/pull/1313))
 
 - Bump dependency on [ulid] to 3.0.2 ([#1305](https://github.com/cerbos/cerbos-sdk-javascript/pull/1305))
 
@@ -271,7 +279,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.4...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.5...HEAD
+[0.13.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.4...@cerbos/embedded@0.13.5
 [0.13.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.3...@cerbos/embedded@0.13.4
 [0.13.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.2...@cerbos/embedded@0.13.3
 [0.13.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.1...@cerbos/embedded@0.13.2

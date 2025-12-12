@@ -2,7 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.23.6] - 2025-12-12
+
 ### Changed
+
+- Bump dependency on [@cerbos/api] to 0.4.0 ([#1313](https://github.com/cerbos/cerbos-sdk-javascript/pull/1313))
+
+- Bump dependency on [@cerbos/core] to 0.26.0 ([#1313](https://github.com/cerbos/cerbos-sdk-javascript/pull/1313))
 
 - Bump dependency on [@grpc/grpc-js] to 1.14.2 ([#1303](https://github.com/cerbos/cerbos-sdk-javascript/pull/1303))
 
@@ -474,7 +482,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.5...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.6...HEAD
+[0.23.6]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.5...@cerbos/grpc@0.23.6
 [0.23.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.4...@cerbos/grpc@0.23.5
 [0.23.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.3...@cerbos/grpc@0.23.4
 [0.23.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.2...@cerbos/grpc@0.23.3
