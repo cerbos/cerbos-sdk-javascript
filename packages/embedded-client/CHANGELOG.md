@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Compatibility with Vite's `?init` imports ([#1317](https://github.com/cerbos/cerbos-sdk-javascript/pull/1317))
 
 ## [0.1.0] - 2025-12-12
 

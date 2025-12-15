@@ -34,7 +34,7 @@ describe("Client", () => {
         policies: readFile(
           resolve(__dirname, "../../../../bundles/PS2MX9855QURB3Y8.crrt"),
         ),
-        wasm: readFile(require.resolve("@cerbos/embedded-server/wasm")),
+        wasm: readFile(require.resolve("@cerbos/embedded-server/server.wasm")),
         onDecision,
       }),
     defaultUserAgent: embeddedV2UserAgent,

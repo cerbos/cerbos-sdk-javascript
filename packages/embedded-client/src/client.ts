@@ -19,6 +19,18 @@ export class Embedded extends Client {
    * Create a client for interacting with an embedded Cerbos policy decision point (PDP).
    *
    * @example
+   * Read the PDP's WebAssembly module from the server using {@link https://vite.dev/guide/features#webassembly | Vite}:
+   *
+   * ```typescript
+   * import wasm from "@cerbos/embedded-server/server.wasm?init";
+   *
+   * const cerbos = new Embedded({
+   *   policies: { ruleId: "B5LU9EVYN1MD" },
+   *   wasm,
+   * });
+   * ```
+   *
+   * @example
    * Read the PDP's WebAssembly module from the local filesystem in Node.js:
    *
    * ```typescript
@@ -28,7 +40,7 @@ export class Embedded extends Client {
    * const cerbos = new Embedded({
    *   policies: { ruleId: "B5LU9EVYN1MD" },
    *   wasm: readFile(
-   *     fileURLToPath(import.meta.resolve("@cerbos/embedded-server/wasm")),
+   *     fileURLToPath(import.meta.resolve("@cerbos/embedded-server/server.wasm")),
    *   ),
    * });
    * ```

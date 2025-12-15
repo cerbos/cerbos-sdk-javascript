@@ -186,7 +186,7 @@ _(Optional)_ [Schema enforcement level](https://docs.cerbos.dev/cerbos/latest/co
 
 </td><td>
 
-Source of the embedded policy decision point server's WebAssembly module (imported from `@cerbos/embedded-server/wasm`<!-- -->). The most appropriate source to use will depend on the target runtime of your application.
+Source of the embedded policy decision point server's WebAssembly module (imported from `@cerbos/embedded-server/server.wasm`<!-- -->). The most appropriate source to use will depend on the target runtime of your application.
 
 
 </td></tr>

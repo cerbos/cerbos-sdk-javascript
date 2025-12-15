@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: Compatibility with Vite's `?init` imports
+      pull: 1317
+
 releases:
   - version: 0.1.0
     date: 2025-12-12

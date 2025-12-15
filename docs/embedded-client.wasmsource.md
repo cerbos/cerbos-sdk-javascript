@@ -4,14 +4,14 @@
 
 ## WasmSource type
 
-Source of the embedded policy decision point server's WebAssembly module (imported from `@cerbos/embedded-server/wasm`<!-- -->). The most appropriate source to use will depend on the target runtime of your application.
+Source of the embedded policy decision point server's WebAssembly module (imported from `@cerbos/embedded-server/server.wasm`<!-- -->). The most appropriate source to use will depend on the target runtime of your application.
 
 **Signature:**
 
 ```typescript
-export type WasmSource = string | URL | Awaitable<ArrayBufferView<ArrayBuffer>> | Awaitable<ArrayBuffer> | Awaitable<Response> | Awaitable<WebAssembly.Module>;
+export type WasmSource = string | URL | Awaitable<ArrayBufferView<ArrayBuffer>> | Awaitable<ArrayBuffer> | Awaitable<Response> | Awaitable<WebAssembly.Module> | WasmInstantiate;
 ```
-**References:** [Awaitable](./core.awaitable.md)
+**References:** [Awaitable](./core.awaitable.md)<!-- -->, [WasmInstantiate](./embedded-client.wasminstantiate.md)
 
 ## Remarks
 
@@ -21,7 +21,9 @@ The source may be
 
 - an HTTP [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response) (or a promise resolving to one), to stream the binary code from the response body and compile it using [`WebAssembly.instantiateStreaming`](https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiateStreaming_static)<!-- -->;
 
-- the binary code itself as an [`ArrayBuffer`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)<!-- -->, [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)<!-- -->, or Node.js [`Buffer`](https://nodejs.org/api/buffer.html#class-buffer) (or a promise resolving to one of these), to compile it using [`WebAssembly.instantiate`](https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiate_static)<!-- -->; or
+- the binary code itself as an [`ArrayBuffer`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)<!-- -->, [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)<!-- -->, or Node.js [`Buffer`](https://nodejs.org/api/buffer.html#class-buffer) (or a promise resolving to one of these), to compile it using [`WebAssembly.instantiate`](https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiate_static)<!-- -->;
 
-- a precompiled [`WebAssembly.Module`](https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Module) (or a promise resolving to one).
+- a precompiled [`WebAssembly.Module`](https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Module) (or a promise resolving to one); or
+
+- a function that instantiates a WebAssembly module.
 

@@ -1,11 +1,15 @@
 import { cancelBody, download } from "./fetch";
-import type { WasmSource } from "./options";
+import type { WasmInstantiate, WasmSource } from "./options";
 
 export async function load(
   source: WasmSource,
   imports: WebAssembly.Imports,
   userAgent: string,
 ): Promise<WebAssembly.Instance> {
+  if (sourceIsInstantiate(source)) {
+    return instantiated(await source(imports));
+  }
+
   if (typeof source === "string" || source instanceof URL) {
     source = await download(source, userAgent);
   } else {
@@ -51,4 +55,8 @@ function instantiated(
   return instantiated instanceof WebAssembly.Instance
     ? instantiated
     : instantiated.instance;
+}
+
+function sourceIsInstantiate(source: WasmSource): source is WasmInstantiate {
+  return typeof source === "function";
 }

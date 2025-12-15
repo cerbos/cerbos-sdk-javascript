@@ -25,7 +25,7 @@ export interface Options extends Pick<
   policies: PolicySource;
 
   /**
-   * Source of the embedded policy decision point server's WebAssembly module (imported from `@cerbos/embedded-server/wasm`).
+   * Source of the embedded policy decision point server's WebAssembly module (imported from `@cerbos/embedded-server/server.wasm`).
    * The most appropriate source to use will depend on the target runtime of your application.
    */
   wasm: WasmSource;
@@ -171,7 +171,7 @@ export interface PolicyLoaderOptions extends Partial<HubClientOptions> {
 }
 
 /**
- * Source of the embedded policy decision point server's WebAssembly module (imported from `@cerbos/embedded-server/wasm`).
+ * Source of the embedded policy decision point server's WebAssembly module (imported from `@cerbos/embedded-server/server.wasm`).
  * The most appropriate source to use will depend on the target runtime of your application.
  *
  * @remarks
@@ -182,9 +182,11 @@ export interface PolicyLoaderOptions extends Partial<HubClientOptions> {
  *
  * - an HTTP {@link https://developer.mozilla.org/en-US/docs/Web/API/Response | `Response`} (or a promise resolving to one), to stream the binary code from the response body and compile it using {@link https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiateStreaming_static | `WebAssembly.instantiateStreaming`};
  *
- * - the binary code itself as an {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer | `ArrayBuffer`}, {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array | `Uint8Array`}, or Node.js {@link https://nodejs.org/api/buffer.html#class-buffer | `Buffer`} (or a promise resolving to one of these), to compile it using {@link https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiate_static | `WebAssembly.instantiate`}; or
+ * - the binary code itself as an {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer | `ArrayBuffer`}, {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array | `Uint8Array`}, or Node.js {@link https://nodejs.org/api/buffer.html#class-buffer | `Buffer`} (or a promise resolving to one of these), to compile it using {@link https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiate_static | `WebAssembly.instantiate`};
  *
- * - a precompiled {@link https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Module | `WebAssembly.Module`} (or a promise resolving to one).
+ * - a precompiled {@link https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Module | `WebAssembly.Module`} (or a promise resolving to one); or
+ *
+ * - a function that instantiates a WebAssembly module.
  *
  * @public
  */
@@ -194,7 +196,19 @@ export type WasmSource =
   | Awaitable<ArrayBufferView<ArrayBuffer>>
   | Awaitable<ArrayBuffer>
   | Awaitable<Response>
-  | Awaitable<WebAssembly.Module>;
+  | Awaitable<WebAssembly.Module>
+  | WasmInstantiate;
+
+/**
+ * A function that instantiates a WebAssembly module.
+ *
+ * @public
+ */
+export type WasmInstantiate = (
+  imports: WebAssembly.Imports,
+) => Awaitable<
+  WebAssembly.Instance | WebAssembly.WebAssemblyInstantiatedSource
+>;
 
 /**
  * A function to verify and decode a JWT, returning its payload.
