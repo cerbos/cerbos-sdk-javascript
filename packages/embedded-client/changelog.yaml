@@ -1,11 +1,16 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Compatibility with Vite's `?init` imports
-      pull: 1317
-
 releases:
+  - version: 0.2.0
+    date: 2025-12-15
+
+    added:
+      - summary: Compatibility with Vite's `?init` imports
+        pull: 1317
+
+    bumped:
+      "@cerbos/hub":
+        to: 0.4.0
+        pull: 1318
+
   - version: 0.1.0
     date: 2025-12-12
 
@@ -18,6 +23,7 @@ references:
   "@bufbuild/protovalidate": https://github.com/bufbuild/protovalidate-es
   "@cerbos/api": ../api/README.md
   "@cerbos/core": ../core/README.md
+  "@cerbos/hub": ../hub/README.md
   ulid: https://github.com/ulid/javascript
 
 initialCommit: e55b224b1a6dcdd6ea9b2472bc498b5223d19b5e

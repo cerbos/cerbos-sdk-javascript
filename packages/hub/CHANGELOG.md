@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.4.0] - 2025-12-15
+
 ### Changed
 
 - Use [@connectrpc/connect-web] in browsers ([#1317](https://github.com/cerbos/cerbos-sdk-javascript/pull/1317))
@@ -80,7 +84,8 @@
 
 - A client for interacting with policy stores in Cerbos Hub ([#1173](https://github.com/cerbos/cerbos-sdk-javascript/pull/1173), [#1191](https://github.com/cerbos/cerbos-sdk-javascript/pull/1191))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.3.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.4.0...HEAD
+[0.4.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.3.0...@cerbos/hub@0.4.0
 [0.3.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.2.4...@cerbos/hub@0.3.0
 [0.2.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.2.3...@cerbos/hub@0.2.4
 [0.2.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.2.2...@cerbos/hub@0.2.3
