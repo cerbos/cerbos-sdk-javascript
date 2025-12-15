@@ -8,10 +8,6 @@ import type {
 } from "@bufbuild/protobuf";
 import type { CallOptions, Interceptor, Transport } from "@connectrpc/connect";
 import { makeAnyClient } from "@connectrpc/connect";
-import {
-  compressionGzip,
-  createConnectTransport,
-} from "@connectrpc/connect-node";
 
 import type { Options, RequestOptions } from "@cerbos/core";
 
@@ -22,6 +18,7 @@ import { errorInterceptor } from "./interceptors/error";
 import { createHeadersInterceptor } from "./interceptors/headers";
 import { validationInterceptor } from "./interceptors/validation";
 import type { MessageInitShape } from "./protobuf";
+import { createTransport } from "./transport";
 
 /**
  * Options for connecting to Cerbos Hub.
@@ -81,14 +78,7 @@ export function createClient<T extends DescService>(
     interceptors.push(createAuthInterceptor({ ...options, credentials }));
   }
 
-  const transport = createConnectTransport({
-    baseUrl,
-    httpVersion: "2",
-    interceptors,
-    sendCompression: compressionGzip,
-    useBinaryFormat: true,
-    useHttpGet: true,
-  });
+  const transport = createTransport(baseUrl, interceptors);
 
   return makeAnyClient(service, (method) => {
     switch (method.methodKind) {
