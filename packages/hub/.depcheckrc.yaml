@@ -1,0 +1,3 @@
+ignores:
+  - "@connectrpc/connect-node"
+  - "@connectrpc/connect-web"

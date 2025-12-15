@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.base.json",
-  "include": ["src"],
+  "include": ["src", "src/transport/package.json"],
   "references": [{ "path": "../core" }],
   "compilerOptions": {
     "outDir": "lib",

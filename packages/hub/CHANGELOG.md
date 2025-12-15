@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Use [@connectrpc/connect-web] in browsers ([#1317](https://github.com/cerbos/cerbos-sdk-javascript/pull/1317))
 
 ## [0.3.0] - 2025-12-12
 
@@ -92,5 +94,6 @@ No notable changes.
 [@cerbos/core]: ../core/README.md
 [@connectrpc/connect]: https://github.com/connectrpc/connect-es
 [@connectrpc/connect-node]: https://github.com/connectrpc/connect-es
+[@connectrpc/connect-web]: https://github.com/connectrpc/connect-es
 [@connectrpc/validate]: https://github.com/connectrpc/validate-es
 [opossum]: https://nodeshift.dev/opossum/

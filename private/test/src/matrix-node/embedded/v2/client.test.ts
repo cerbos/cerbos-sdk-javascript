@@ -55,7 +55,7 @@ describe("Client", () => {
       return new Embedded({
         ...options,
         policies,
-        wasm: readFile(require.resolve("@cerbos/embedded-server/wasm")),
+        wasm: readFile(require.resolve("@cerbos/embedded-server/server.wasm")),
         decodeJWTPayload: ({ token }): DecodedJWTPayload =>
           UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
         globals: {

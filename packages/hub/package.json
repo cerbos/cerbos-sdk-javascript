@@ -33,6 +33,7 @@
     "lib/**/*.d.ts.map",
     "lib/**/*.js",
     "lib/**/*.js.map",
+    "lib/transport/package.json",
     "src/**/*.ts",
     "~internal/package.json"
   ],
@@ -59,6 +60,7 @@
     "@cerbos/core": "^0.26.0",
     "@connectrpc/connect": "^2.1.1",
     "@connectrpc/connect-node": "^2.1.1",
+    "@connectrpc/connect-web": "^2.1.1",
     "@connectrpc/validate": "^0.2.0",
     "opossum": "^9.0.0"
   },

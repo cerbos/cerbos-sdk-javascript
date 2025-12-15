@@ -4,7 +4,7 @@
 
 ## Options.wasm property
 
-Source of the embedded policy decision point server's WebAssembly module (imported from `@cerbos/embedded-server/wasm`<!-- -->). The most appropriate source to use will depend on the target runtime of your application.
+Source of the embedded policy decision point server's WebAssembly module (imported from `@cerbos/embedded-server/server.wasm`<!-- -->). The most appropriate source to use will depend on the target runtime of your application.
 
 **Signature:**
 

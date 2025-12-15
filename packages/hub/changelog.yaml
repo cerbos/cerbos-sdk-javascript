@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  changed:
+    - summary: Use [@connectrpc/connect-web] in browsers
+      pull: 1317
+
 releases:
   - version: 0.3.0
     date: 2025-12-12
@@ -120,6 +127,7 @@ references:
   "@cerbos/core": ../core/README.md
   "@connectrpc/connect": https://github.com/connectrpc/connect-es
   "@connectrpc/connect-node": https://github.com/connectrpc/connect-es
+  "@connectrpc/connect-web": https://github.com/connectrpc/connect-es
   "@connectrpc/validate": https://github.com/connectrpc/validate-es
   opossum: https://nodeshift.dev/opossum/
 

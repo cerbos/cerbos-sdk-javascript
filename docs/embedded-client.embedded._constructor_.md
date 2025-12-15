@@ -46,7 +46,20 @@ options
 </td></tr>
 </tbody></table>
 
-## Example
+## Example 1
+
+Read the PDP's WebAssembly module from the server using [Vite](https://vite.dev/guide/features#webassembly)<!-- -->:
+
+```typescript
+import wasm from "@cerbos/embedded-server/server.wasm?init";
+
+const cerbos = new Embedded({
+  policies: { ruleId: "B5LU9EVYN1MD" },
+  wasm,
+});
+```
+
+## Example 2
 
 Read the PDP's WebAssembly module from the local filesystem in Node.js:
 
@@ -57,7 +70,7 @@ import { fileURLToPath } from "node:url";
 const cerbos = new Embedded({
   policies: { ruleId: "B5LU9EVYN1MD" },
   wasm: readFile(
-    fileURLToPath(import.meta.resolve("@cerbos/embedded-server/wasm")),
+    fileURLToPath(import.meta.resolve("@cerbos/embedded-server/server.wasm")),
   ),
 });
 ```

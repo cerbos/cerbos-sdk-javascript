@@ -1,5 +1,14 @@
+import { fileURLToPath } from "url";
+
 import { defineConfig } from "eslint/config";
 import importPlugin from "eslint-plugin-import";
+
+const noExtraneousDependencies = {
+  devDependencies: false,
+  optionalDependencies: false,
+  peerDependencies: true,
+  includeTypes: true,
+};
 
 export const importConfig = defineConfig(
   importPlugin.flatConfigs.typescript,
@@ -15,10 +24,8 @@ export const importConfig = defineConfig(
       "import/no-extraneous-dependencies": [
         "warn",
         {
+          ...noExtraneousDependencies,
           devDependencies: ["private/**", "eslint.config.mjs"],
-          optionalDependencies: false,
-          peerDependencies: true,
-          includeTypes: true,
         },
       ],
       "import/no-named-as-default": "warn",
@@ -47,6 +54,20 @@ export const importConfig = defineConfig(
     ignores: ["**/*.config.*"],
     rules: {
       "import/no-default-export": "warn",
+    },
+  },
+  {
+    files: ["packages/hub/**"],
+    rules: {
+      "import/no-extraneous-dependencies": [
+        "warn",
+        {
+          ...noExtraneousDependencies,
+          packageDir: fileURLToPath(
+            import.meta.resolve("../../../../packages/hub"),
+          ),
+        },
+      ],
     },
   },
 );
