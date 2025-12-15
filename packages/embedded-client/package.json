@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/embedded-client",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Client library for interacting with embedded Cerbos policy decision points from server-side Node.js and browser-based applications",
   "repository": {
     "type": "git",
@@ -57,7 +57,7 @@
   "dependencies": {
     "@bufbuild/protovalidate": "^1.0.0",
     "@cerbos/core": "^0.26.0",
-    "@cerbos/hub": "^0.3.0",
+    "@cerbos/hub": "^0.4.0",
     "ulid": "^3.0.2"
   },
   "publishConfig": {

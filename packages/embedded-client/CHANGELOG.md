@@ -2,9 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.2.0] - 2025-12-15
+
 ### Added
 
 - Compatibility with Vite's `?init` imports ([#1317](https://github.com/cerbos/cerbos-sdk-javascript/pull/1317))
+
+### Changed
+
+- Bump dependency on [@cerbos/hub] to 0.4.0 ([#1318](https://github.com/cerbos/cerbos-sdk-javascript/pull/1318))
 
 ## [0.1.0] - 2025-12-12
 
@@ -12,10 +20,12 @@
 
 - Client library for new embedded policy decision point servers ([#1312](https://github.com/cerbos/cerbos-sdk-javascript/pull/1312))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.1.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.2.0...HEAD
+[0.2.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.1.0...@cerbos/embedded-client@0.2.0
 [0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/e55b224b1a6dcdd6ea9b2472bc498b5223d19b5e...@cerbos/embedded-client@0.1.0
 [@bufbuild/protobuf]: https://github.com/bufbuild/protobuf-es
 [@bufbuild/protovalidate]: https://github.com/bufbuild/protovalidate-es
 [@cerbos/api]: ../api/README.md
 [@cerbos/core]: ../core/README.md
+[@cerbos/hub]: ../hub/README.md
 [ulid]: https://github.com/ulid/javascript
