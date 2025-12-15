@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: "`cerbos.epdp.v2.Config.defaultScope`"
+      pull: 1316
+
 releases:
   - version: 0.4.0
     date: 2025-12-12
@@ -10,7 +17,7 @@ releases:
     date: 2025-11-20
 
     added:
-      - summary: "`cerbos.epdp.v2.CheckResourcesResponse` and `cerbos.epdp.v2.PlanResourcesResponse` messages"
+      - summary: "`cerbos.epdp.v2.CheckResourcesResponse` and `cerbos.epdp.v2.PlanResourcesResponse`"
         pull: 1287
 
     bumped:
@@ -22,7 +29,7 @@ releases:
     date: 2025-11-12
 
     added:
-      - summary: "`cerbos.epdp.v2.Config`, `cerbos.epdp.v2.Error`, and `cerbos.epdp.v2.Metadata` messages"
+      - summary: "`cerbos.epdp.v2.Config`, `cerbos.epdp.v2.Error`, and `cerbos.epdp.v2.Metadata`"
         pull: 1279
 
       - summary: JSON types
