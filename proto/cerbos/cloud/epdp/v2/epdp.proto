@@ -23,6 +23,7 @@ message Config {
     map<string, google.protobuf.Value> globals = 1;
     string default_policy_version = 2;
     bool lenient_scope_search = 3;
+    string default_scope = 4;
   }
 
   message Schema {

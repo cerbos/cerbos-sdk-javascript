@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- `cerbos.epdp.v2.Config.defaultScope` ([#1316](https://github.com/cerbos/cerbos-sdk-javascript/pull/1316))
 
 ## [0.4.0] - 2025-12-12
 
@@ -14,7 +16,7 @@ No notable changes.
 
 ### Added
 
-- `cerbos.epdp.v2.CheckResourcesResponse` and `cerbos.epdp.v2.PlanResourcesResponse` messages ([#1287](https://github.com/cerbos/cerbos-sdk-javascript/pull/1287))
+- `cerbos.epdp.v2.CheckResourcesResponse` and `cerbos.epdp.v2.PlanResourcesResponse` ([#1287](https://github.com/cerbos/cerbos-sdk-javascript/pull/1287))
 
 ### Changed
 
@@ -24,7 +26,7 @@ No notable changes.
 
 ### Added
 
-- `cerbos.epdp.v2.Config`, `cerbos.epdp.v2.Error`, and `cerbos.epdp.v2.Metadata` messages ([#1279](https://github.com/cerbos/cerbos-sdk-javascript/pull/1279))
+- `cerbos.epdp.v2.Config`, `cerbos.epdp.v2.Error`, and `cerbos.epdp.v2.Metadata` ([#1279](https://github.com/cerbos/cerbos-sdk-javascript/pull/1279))
 
 - JSON types ([#1279](https://github.com/cerbos/cerbos-sdk-javascript/pull/1279))
 

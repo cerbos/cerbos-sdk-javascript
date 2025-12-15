@@ -24,6 +24,7 @@ export function configToProtobuf({
     evaluator: {
       $typeName: "cerbos.cloud.epdp.v2.Config.Evaluator",
       defaultPolicyVersion,
+      defaultScope: "",
       globals: valuesToProtobuf(globals),
       lenientScopeSearch,
     },
