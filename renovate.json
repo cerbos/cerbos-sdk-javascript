@@ -1,19 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "configMigration": true,
-  "extends": [
-    ":dependencyDashboard",
-    ":gitSignOff",
-    ":prConcurrentLimitNone",
-    ":semanticCommitsDisabled",
-    "helpers:pinGitHubActionDigests",
-    "schedule:weekly",
-    "workarounds:all"
-  ],
-  "lockFileMaintenance": {
-    "enabled": true
-  },
-  "minimumReleaseAge": "3 days",
+  "extends": ["github>cerbos/renovate"],
   "packageRules": [
     {
       "matchDepTypes": ["dependencies", "peerDependencies"],
@@ -84,6 +71,5 @@
       "enabled": false
     }
   ],
-  "postUpdateOptions": ["pnpmDedupe"],
   "reviewers": ["haines"]
 }
