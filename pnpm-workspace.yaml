@@ -9,7 +9,7 @@ ignoredBuiltDependencies:
 
 linkWorkspacePackages: true
 
-minimumReleaseAge: 4320 # 3 days
+minimumReleaseAge: 7200 # 5 days
 minimumReleaseAgeExclude:
   - "@cerbos/*"
   - react
