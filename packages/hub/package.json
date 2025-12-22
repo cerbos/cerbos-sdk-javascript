@@ -54,7 +54,7 @@
     "PDP"
   ],
   "peerDependencies": {
-    "@bufbuild/protobuf": "^2.10.1"
+    "@bufbuild/protobuf": "^2.10.2"
   },
   "dependencies": {
     "@cerbos/core": "^0.26.0",
