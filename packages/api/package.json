@@ -47,7 +47,7 @@
     "PDP"
   ],
   "dependencies": {
-    "@bufbuild/protobuf": "^2.10.1"
+    "@bufbuild/protobuf": "^2.10.2"
   },
   "publishConfig": {
     "access": "public",
