@@ -565,12 +565,14 @@ export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> 
       if (message.matchedScope !== "") {
         writer.uint32(18).string(message.matchedScope);
       }
-      Object.entries(message.matchedScopes).forEach(([key, value]) => {
-        PlanResourcesResponse_Meta_MatchedScopesEntry.encode(
-          { key: key as any, value },
-          writer.uint32(26).fork(),
-        ).join();
-      });
+      globalThis.Object.entries(message.matchedScopes).forEach(
+        ([key, value]: [string, string]) => {
+          PlanResourcesResponse_Meta_MatchedScopesEntry.encode(
+            { key: key as any, value },
+            writer.uint32(26).fork(),
+          ).join();
+        },
+      );
       return writer;
     },
 
@@ -633,7 +635,10 @@ export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> 
         obj.matchedScope = message.matchedScope;
       }
       if (message.matchedScopes) {
-        const entries = Object.entries(message.matchedScopes);
+        const entries = globalThis.Object.entries(message.matchedScopes) as [
+          string,
+          string,
+        ][];
         if (entries.length > 0) {
           obj.matchedScopes = {};
           entries.forEach(([k, v]) => {
@@ -724,12 +729,14 @@ export const CheckResourceSetResponse: MessageFns<CheckResourceSetResponse> = {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
-    Object.entries(message.resourceInstances).forEach(([key, value]) => {
-      CheckResourceSetResponse_ResourceInstancesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(18).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.resourceInstances).forEach(
+      ([key, value]: [string, CheckResourceSetResponse_ActionEffectMap]) => {
+        CheckResourceSetResponse_ResourceInstancesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(18).fork(),
+        ).join();
+      },
+    );
     if (message.meta !== undefined) {
       CheckResourceSetResponse_Meta.encode(
         message.meta,
@@ -798,7 +805,10 @@ export const CheckResourceSetResponse: MessageFns<CheckResourceSetResponse> = {
       obj.requestId = message.requestId;
     }
     if (message.resourceInstances) {
-      const entries = Object.entries(message.resourceInstances);
+      const entries = globalThis.Object.entries(message.resourceInstances) as [
+        string,
+        CheckResourceSetResponse_ActionEffectMap,
+      ][];
       if (entries.length > 0) {
         obj.resourceInstances = {};
         entries.forEach(([k, v]) => {
@@ -824,12 +834,14 @@ export const CheckResourceSetResponse_ActionEffectMap: MessageFns<CheckResourceS
       message: CheckResourceSetResponse_ActionEffectMap,
       writer: BinaryWriter = new BinaryWriter(),
     ): BinaryWriter {
-      Object.entries(message.actions).forEach(([key, value]) => {
-        CheckResourceSetResponse_ActionEffectMap_ActionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(10).fork(),
-        ).join();
-      });
+      globalThis.Object.entries(message.actions).forEach(
+        ([key, value]: [string, Effect]) => {
+          CheckResourceSetResponse_ActionEffectMap_ActionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(10).fork(),
+          ).join();
+        },
+      );
       for (const v of message.validationErrors) {
         ValidationError.encode(v!, writer.uint32(18).fork()).join();
       }
@@ -884,7 +896,10 @@ export const CheckResourceSetResponse_ActionEffectMap: MessageFns<CheckResourceS
     toJSON(message: CheckResourceSetResponse_ActionEffectMap): unknown {
       const obj: any = {};
       if (message.actions) {
-        const entries = Object.entries(message.actions);
+        const entries = globalThis.Object.entries(message.actions) as [
+          string,
+          Effect,
+        ][];
         if (entries.length > 0) {
           obj.actions = {};
           entries.forEach(([k, v]) => {
@@ -981,12 +996,14 @@ export const CheckResourceSetResponse_Meta: MessageFns<CheckResourceSetResponse_
       message: CheckResourceSetResponse_Meta,
       writer: BinaryWriter = new BinaryWriter(),
     ): BinaryWriter {
-      Object.entries(message.resourceInstances).forEach(([key, value]) => {
-        CheckResourceSetResponse_Meta_ResourceInstancesEntry.encode(
-          { key: key as any, value },
-          writer.uint32(10).fork(),
-        ).join();
-      });
+      globalThis.Object.entries(message.resourceInstances).forEach(
+        ([key, value]: [string, CheckResourceSetResponse_Meta_ActionMeta]) => {
+          CheckResourceSetResponse_Meta_ResourceInstancesEntry.encode(
+            { key: key as any, value },
+            writer.uint32(10).fork(),
+          ).join();
+        },
+      );
       return writer;
     },
 
@@ -1028,7 +1045,9 @@ export const CheckResourceSetResponse_Meta: MessageFns<CheckResourceSetResponse_
     toJSON(message: CheckResourceSetResponse_Meta): unknown {
       const obj: any = {};
       if (message.resourceInstances) {
-        const entries = Object.entries(message.resourceInstances);
+        const entries = globalThis.Object.entries(
+          message.resourceInstances,
+        ) as [string, CheckResourceSetResponse_Meta_ActionMeta][];
         if (entries.length > 0) {
           obj.resourceInstances = {};
           entries.forEach(([k, v]) => {
@@ -1118,12 +1137,14 @@ export const CheckResourceSetResponse_Meta_ActionMeta: MessageFns<CheckResourceS
       message: CheckResourceSetResponse_Meta_ActionMeta,
       writer: BinaryWriter = new BinaryWriter(),
     ): BinaryWriter {
-      Object.entries(message.actions).forEach(([key, value]) => {
-        CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(10).fork(),
-        ).join();
-      });
+      globalThis.Object.entries(message.actions).forEach(
+        ([key, value]: [string, CheckResourceSetResponse_Meta_EffectMeta]) => {
+          CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(10).fork(),
+          ).join();
+        },
+      );
       for (const v of message.effectiveDerivedRoles) {
         writer.uint32(18).string(v!);
       }
@@ -1176,7 +1197,10 @@ export const CheckResourceSetResponse_Meta_ActionMeta: MessageFns<CheckResourceS
     toJSON(message: CheckResourceSetResponse_Meta_ActionMeta): unknown {
       const obj: any = {};
       if (message.actions) {
-        const entries = Object.entries(message.actions);
+        const entries = globalThis.Object.entries(message.actions) as [
+          string,
+          CheckResourceSetResponse_Meta_EffectMeta,
+        ][];
         if (entries.length > 0) {
           obj.actions = {};
           entries.forEach(([k, v]) => {
@@ -1513,12 +1537,14 @@ export const CheckResourceBatchResponse_ActionEffectMap: MessageFns<CheckResourc
       if (message.resourceId !== "") {
         writer.uint32(10).string(message.resourceId);
       }
-      Object.entries(message.actions).forEach(([key, value]) => {
-        CheckResourceBatchResponse_ActionEffectMap_ActionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(18).fork(),
-        ).join();
-      });
+      globalThis.Object.entries(message.actions).forEach(
+        ([key, value]: [string, Effect]) => {
+          CheckResourceBatchResponse_ActionEffectMap_ActionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(18).fork(),
+          ).join();
+        },
+      );
       for (const v of message.validationErrors) {
         ValidationError.encode(v!, writer.uint32(26).fork()).join();
       }
@@ -1584,7 +1610,10 @@ export const CheckResourceBatchResponse_ActionEffectMap: MessageFns<CheckResourc
         obj.resourceId = message.resourceId;
       }
       if (message.actions) {
-        const entries = Object.entries(message.actions);
+        const entries = globalThis.Object.entries(message.actions) as [
+          string,
+          Effect,
+        ][];
         if (entries.length > 0) {
           obj.actions = {};
           entries.forEach(([k, v]) => {
@@ -1780,12 +1809,14 @@ export const CheckResourcesResponse_ResultEntry: MessageFns<CheckResourcesRespon
           writer.uint32(10).fork(),
         ).join();
       }
-      Object.entries(message.actions).forEach(([key, value]) => {
-        CheckResourcesResponse_ResultEntry_ActionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(18).fork(),
-        ).join();
-      });
+      globalThis.Object.entries(message.actions).forEach(
+        ([key, value]: [string, Effect]) => {
+          CheckResourcesResponse_ResultEntry_ActionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(18).fork(),
+          ).join();
+        },
+      );
       for (const v of message.validationErrors) {
         ValidationError.encode(v!, writer.uint32(26).fork()).join();
       }
@@ -1885,7 +1916,10 @@ export const CheckResourcesResponse_ResultEntry: MessageFns<CheckResourcesRespon
         );
       }
       if (message.actions) {
-        const entries = Object.entries(message.actions);
+        const entries = globalThis.Object.entries(message.actions) as [
+          string,
+          Effect,
+        ][];
         if (entries.length > 0) {
           obj.actions = {};
           entries.forEach(([k, v]) => {
@@ -2013,12 +2047,17 @@ export const CheckResourcesResponse_ResultEntry_Meta: MessageFns<CheckResourcesR
       message: CheckResourcesResponse_ResultEntry_Meta,
       writer: BinaryWriter = new BinaryWriter(),
     ): BinaryWriter {
-      Object.entries(message.actions).forEach(([key, value]) => {
-        CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(10).fork(),
-        ).join();
-      });
+      globalThis.Object.entries(message.actions).forEach(
+        ([key, value]: [
+          string,
+          CheckResourcesResponse_ResultEntry_Meta_EffectMeta,
+        ]) => {
+          CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(10).fork(),
+          ).join();
+        },
+      );
       for (const v of message.effectiveDerivedRoles) {
         writer.uint32(18).string(v!);
       }
@@ -2071,7 +2110,10 @@ export const CheckResourcesResponse_ResultEntry_Meta: MessageFns<CheckResourcesR
     toJSON(message: CheckResourcesResponse_ResultEntry_Meta): unknown {
       const obj: any = {};
       if (message.actions) {
-        const entries = Object.entries(message.actions);
+        const entries = globalThis.Object.entries(message.actions) as [
+          string,
+          CheckResourcesResponse_ResultEntry_Meta_EffectMeta,
+        ][];
         if (entries.length > 0) {
           obj.actions = {};
           entries.forEach(([k, v]) => {
@@ -2738,12 +2780,14 @@ export const InspectPoliciesResponse: MessageFns<InspectPoliciesResponse> = {
     message: InspectPoliciesResponse,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    Object.entries(message.results).forEach(([key, value]) => {
-      InspectPoliciesResponse_ResultsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.results).forEach(
+      ([key, value]: [string, InspectPoliciesResponse_Result]) => {
+        InspectPoliciesResponse_ResultsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).join();
+      },
+    );
     return writer;
   },
 
@@ -2784,7 +2828,10 @@ export const InspectPoliciesResponse: MessageFns<InspectPoliciesResponse> = {
   toJSON(message: InspectPoliciesResponse): unknown {
     const obj: any = {};
     if (message.results) {
-      const entries = Object.entries(message.results);
+      const entries = globalThis.Object.entries(message.results) as [
+        string,
+        InspectPoliciesResponse_Result,
+      ][];
       if (entries.length > 0) {
         obj.results = {};
         entries.forEach(([k, v]) => {

@@ -202,12 +202,14 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
     if (message.operationName !== "") {
       writer.uint32(18).string(message.operationName);
     }
-    Object.entries(message.attributes).forEach(([key, value]) => {
-      TraceQueryParameters_AttributesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(26).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.attributes).forEach(
+      ([key, value]: [string, string]) => {
+        TraceQueryParameters_AttributesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(26).fork(),
+        ).join();
+      },
+    );
     if (message.startTimeMin !== undefined) {
       Timestamp.encode(
         toTimestamp(message.startTimeMin),
@@ -346,7 +348,10 @@ export const TraceQueryParameters: MessageFns<TraceQueryParameters> = {
       obj.operationName = message.operationName;
     }
     if (message.attributes) {
-      const entries = Object.entries(message.attributes);
+      const entries = globalThis.Object.entries(message.attributes) as [
+        string,
+        string,
+      ][];
       if (entries.length > 0) {
         obj.attributes = {};
         entries.forEach(([k, v]) => {

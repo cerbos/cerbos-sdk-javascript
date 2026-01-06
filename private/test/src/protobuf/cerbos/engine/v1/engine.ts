@@ -326,14 +326,16 @@ export const PlanResourcesInput_Resource: MessageFns<PlanResourcesInput_Resource
       if (message.kind !== "") {
         writer.uint32(10).string(message.kind);
       }
-      Object.entries(message.attr).forEach(([key, value]) => {
-        if (value !== undefined) {
-          PlanResourcesInput_Resource_AttrEntry.encode(
-            { key: key as any, value },
-            writer.uint32(18).fork(),
-          ).join();
-        }
-      });
+      globalThis.Object.entries(message.attr).forEach(
+        ([key, value]: [string, any | undefined]) => {
+          if (value !== undefined) {
+            PlanResourcesInput_Resource_AttrEntry.encode(
+              { key: key as any, value },
+              writer.uint32(18).fork(),
+            ).join();
+          }
+        },
+      );
       if (message.policyVersion !== "") {
         writer.uint32(26).string(message.policyVersion);
       }
@@ -407,7 +409,10 @@ export const PlanResourcesInput_Resource: MessageFns<PlanResourcesInput_Resource
         obj.kind = message.kind;
       }
       if (message.attr) {
-        const entries = Object.entries(message.attr);
+        const entries = globalThis.Object.entries(message.attr) as [
+          string,
+          any | undefined,
+        ][];
         if (entries.length > 0) {
           obj.attr = {};
           entries.forEach(([k, v]) => {
@@ -794,12 +799,14 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
     for (const v of message.actions) {
       writer.uint32(74).string(v!);
     }
-    Object.entries(message.matchedScopes).forEach(([key, value]) => {
-      PlanResourcesOutput_MatchedScopesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(82).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.matchedScopes).forEach(
+      ([key, value]: [string, string]) => {
+        PlanResourcesOutput_MatchedScopesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(82).fork(),
+        ).join();
+      },
+    );
     return writer;
   },
 
@@ -943,7 +950,10 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
       obj.actions = message.actions;
     }
     if (message.matchedScopes) {
-      const entries = Object.entries(message.matchedScopes);
+      const entries = globalThis.Object.entries(message.matchedScopes) as [
+        string,
+        string,
+      ][];
       if (entries.length > 0) {
         obj.matchedScopes = {};
         entries.forEach(([k, v]) => {
@@ -1155,12 +1165,14 @@ export const CheckOutput: MessageFns<CheckOutput> = {
     if (message.resourceId !== "") {
       writer.uint32(18).string(message.resourceId);
     }
-    Object.entries(message.actions).forEach(([key, value]) => {
-      CheckOutput_ActionsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(26).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.actions).forEach(
+      ([key, value]: [string, CheckOutput_ActionEffect]) => {
+        CheckOutput_ActionsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(26).fork(),
+        ).join();
+      },
+    );
     for (const v of message.effectiveDerivedRoles) {
       writer.uint32(34).string(v!);
     }
@@ -1255,7 +1267,10 @@ export const CheckOutput: MessageFns<CheckOutput> = {
       obj.resourceId = message.resourceId;
     }
     if (message.actions) {
-      const entries = Object.entries(message.actions);
+      const entries = globalThis.Object.entries(message.actions) as [
+        string,
+        CheckOutput_ActionEffect,
+      ][];
       if (entries.length > 0) {
         obj.actions = {};
         entries.forEach(([k, v]) => {
@@ -1511,14 +1526,16 @@ export const Resource: MessageFns<Resource> = {
     if (message.id !== "") {
       writer.uint32(26).string(message.id);
     }
-    Object.entries(message.attr).forEach(([key, value]) => {
-      if (value !== undefined) {
-        Resource_AttrEntry.encode(
-          { key: key as any, value },
-          writer.uint32(34).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.attr).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          Resource_AttrEntry.encode(
+            { key: key as any, value },
+            writer.uint32(34).fork(),
+          ).join();
+        }
+      },
+    );
     if (message.scope !== "") {
       writer.uint32(42).string(message.scope);
     }
@@ -1597,7 +1614,10 @@ export const Resource: MessageFns<Resource> = {
       obj.id = message.id;
     }
     if (message.attr) {
-      const entries = Object.entries(message.attr);
+      const entries = globalThis.Object.entries(message.attr) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.attr = {};
         entries.forEach(([k, v]) => {
@@ -1696,14 +1716,16 @@ export const Principal: MessageFns<Principal> = {
     for (const v of message.roles) {
       writer.uint32(26).string(v!);
     }
-    Object.entries(message.attr).forEach(([key, value]) => {
-      if (value !== undefined) {
-        Principal_AttrEntry.encode(
-          { key: key as any, value },
-          writer.uint32(34).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.attr).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          Principal_AttrEntry.encode(
+            { key: key as any, value },
+            writer.uint32(34).fork(),
+          ).join();
+        }
+      },
+    );
     if (message.scope !== "") {
       writer.uint32(42).string(message.scope);
     }
@@ -1782,7 +1804,10 @@ export const Principal: MessageFns<Principal> = {
       obj.roles = message.roles;
     }
     if (message.attr) {
-      const entries = Object.entries(message.attr);
+      const entries = globalThis.Object.entries(message.attr) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.attr = {};
         entries.forEach(([k, v]) => {
@@ -1872,14 +1897,16 @@ export const AuxData: MessageFns<AuxData> = {
     message: AuxData,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    Object.entries(message.jwt).forEach(([key, value]) => {
-      if (value !== undefined) {
-        AuxData_JwtEntry.encode(
-          { key: key as any, value },
-          writer.uint32(10).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.jwt).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          AuxData_JwtEntry.encode(
+            { key: key as any, value },
+            writer.uint32(10).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -1914,7 +1941,10 @@ export const AuxData: MessageFns<AuxData> = {
   toJSON(message: AuxData): unknown {
     const obj: any = {};
     if (message.jwt) {
-      const entries = Object.entries(message.jwt);
+      const entries = globalThis.Object.entries(message.jwt) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.jwt = {};
         entries.forEach(([k, v]) => {

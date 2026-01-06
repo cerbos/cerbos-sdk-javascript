@@ -476,12 +476,14 @@ export const ResourceSet: MessageFns<ResourceSet> = {
     if (message.policyVersion !== "") {
       writer.uint32(18).string(message.policyVersion);
     }
-    Object.entries(message.instances).forEach(([key, value]) => {
-      ResourceSet_InstancesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(26).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.instances).forEach(
+      ([key, value]: [string, AttributesMap]) => {
+        ResourceSet_InstancesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(26).fork(),
+        ).join();
+      },
+    );
     if (message.scope !== "") {
       writer.uint32(34).string(message.scope);
     }
@@ -552,7 +554,10 @@ export const ResourceSet: MessageFns<ResourceSet> = {
       obj.policyVersion = message.policyVersion;
     }
     if (message.instances) {
-      const entries = Object.entries(message.instances);
+      const entries = globalThis.Object.entries(message.instances) as [
+        string,
+        AttributesMap,
+      ][];
       if (entries.length > 0) {
         obj.instances = {};
         entries.forEach(([k, v]) => {
@@ -643,14 +648,16 @@ export const AttributesMap: MessageFns<AttributesMap> = {
     message: AttributesMap,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    Object.entries(message.attr).forEach(([key, value]) => {
-      if (value !== undefined) {
-        AttributesMap_AttrEntry.encode(
-          { key: key as any, value },
-          writer.uint32(10).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.attr).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          AttributesMap_AttrEntry.encode(
+            { key: key as any, value },
+            writer.uint32(10).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -688,7 +695,10 @@ export const AttributesMap: MessageFns<AttributesMap> = {
   toJSON(message: AttributesMap): unknown {
     const obj: any = {};
     if (message.attr) {
-      const entries = Object.entries(message.attr);
+      const entries = globalThis.Object.entries(message.attr) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.attr = {};
         entries.forEach(([k, v]) => {

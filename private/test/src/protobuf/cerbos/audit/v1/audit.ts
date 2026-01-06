@@ -206,12 +206,14 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
     if (message.peer !== undefined) {
       Peer.encode(message.peer, writer.uint32(26).fork()).join();
     }
-    Object.entries(message.metadata).forEach(([key, value]) => {
-      AccessLogEntry_MetadataEntry.encode(
-        { key: key as any, value },
-        writer.uint32(34).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.metadata).forEach(
+      ([key, value]: [string, MetaValues]) => {
+        AccessLogEntry_MetadataEntry.encode(
+          { key: key as any, value },
+          writer.uint32(34).fork(),
+        ).join();
+      },
+    );
     if (message.method !== "") {
       writer.uint32(42).string(message.method);
     }
@@ -331,7 +333,10 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
       obj.peer = Peer.toJSON(message.peer);
     }
     if (message.metadata) {
-      const entries = Object.entries(message.metadata);
+      const entries = globalThis.Object.entries(message.metadata) as [
+        string,
+        MetaValues,
+      ][];
       if (entries.length > 0) {
         obj.metadata = {};
         entries.forEach(([k, v]) => {
@@ -478,12 +483,14 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
         ).join();
         break;
     }
-    Object.entries(message.metadata).forEach(([key, value]) => {
-      DecisionLogEntry_MetadataEntry.encode(
-        { key: key as any, value },
-        writer.uint32(122).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.metadata).forEach(
+      ([key, value]: [string, MetaValues]) => {
+        DecisionLogEntry_MetadataEntry.encode(
+          { key: key as any, value },
+          writer.uint32(122).fork(),
+        ).join();
+      },
+    );
     if (message.auditTrail !== undefined) {
       AuditTrail.encode(message.auditTrail, writer.uint32(130).fork()).join();
     }
@@ -662,7 +669,10 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
       );
     }
     if (message.metadata) {
-      const entries = Object.entries(message.metadata);
+      const entries = globalThis.Object.entries(message.metadata) as [
+        string,
+        MetaValues,
+      ][];
       if (entries.length > 0) {
         obj.metadata = {};
         entries.forEach(([k, v]) => {
@@ -1070,12 +1080,14 @@ export const AuditTrail: MessageFns<AuditTrail> = {
     message: AuditTrail,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    Object.entries(message.effectivePolicies).forEach(([key, value]) => {
-      AuditTrail_EffectivePoliciesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.effectivePolicies).forEach(
+      ([key, value]: [string, SourceAttributes]) => {
+        AuditTrail_EffectivePoliciesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).join();
+      },
+    );
     return writer;
   },
 
@@ -1113,7 +1125,10 @@ export const AuditTrail: MessageFns<AuditTrail> = {
   toJSON(message: AuditTrail): unknown {
     const obj: any = {};
     if (message.effectivePolicies) {
-      const entries = Object.entries(message.effectivePolicies);
+      const entries = globalThis.Object.entries(message.effectivePolicies) as [
+        string,
+        SourceAttributes,
+      ][];
       if (entries.length > 0) {
         obj.effectivePolicies = {};
         entries.forEach(([k, v]) => {
