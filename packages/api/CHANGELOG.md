@@ -6,6 +6,10 @@
 
 - `cerbos.epdp.v2.Config.defaultScope` ([#1316](https://github.com/cerbos/cerbos-sdk-javascript/pull/1316))
 
+### Changed
+
+- Bump dependency on [@bufbuild/protobuf] to 2.10.2 ([#1320](https://github.com/cerbos/cerbos-sdk-javascript/pull/1320))
+
 ## [0.4.0] - 2025-12-12
 
 ### Added
