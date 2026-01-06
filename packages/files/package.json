@@ -48,7 +48,7 @@
     "YAML"
   ],
   "peerDependencies": {
-    "@bufbuild/protobuf": "^2.10.1",
+    "@bufbuild/protobuf": "^2.10.2",
     "@cerbos/api": "^0.4.0"
   },
   "dependencies": {

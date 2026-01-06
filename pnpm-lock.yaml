@@ -17,11 +17,11 @@ importers:
         specifier: 0.18.2
         version: 0.18.2
       '@bufbuild/buf':
-        specifier: 1.61.0
-        version: 1.61.0
+        specifier: 1.62.1
+        version: 1.62.1
       '@bufbuild/protoc-gen-es':
-        specifier: 2.10.1
-        version: 2.10.1(@bufbuild/protobuf@2.10.1)
+        specifier: 2.10.2
+        version: 2.10.2(@bufbuild/protobuf@2.10.2)
       '@cerbos/sdk-javascript-eslint':
         specifier: workspace:*
         version: link:private/eslint
@@ -68,14 +68,14 @@ importers:
   packages/api:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.10.1
-        version: 2.10.1
+        specifier: ^2.10.2
+        version: 2.10.2
 
   packages/core:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.10.1
-        version: 2.10.1
+        specifier: ^2.10.2
+        version: 2.10.2
       '@cerbos/api':
         specifier: ^0.4.0
         version: link:../api
@@ -86,8 +86,8 @@ importers:
   packages/embedded:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.10.1
-        version: 2.10.1
+        specifier: ^2.10.2
+        version: 2.10.2
       '@cerbos/api':
         specifier: ^0.4.0
         version: link:../api
@@ -101,11 +101,11 @@ importers:
   packages/embedded-client:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.10.1
-        version: 2.10.1
+        specifier: ^2.10.2
+        version: 2.10.2
       '@bufbuild/protovalidate':
-        specifier: ^1.0.0
-        version: 1.0.0(@bufbuild/protobuf@2.10.1)
+        specifier: ^1.1.0
+        version: 1.1.0(@bufbuild/protobuf@2.10.2)
       '@cerbos/api':
         specifier: ^0.4.0
         version: link:../api
@@ -114,7 +114,7 @@ importers:
         version: link:../core
       '@cerbos/embedded-server':
         specifier: ^0.2.0
-        version: 0.2.0(@bufbuild/protobuf@2.10.1)(@cerbos/api@packages+api)
+        version: 0.2.0(@bufbuild/protobuf@2.10.2)(@cerbos/api@packages+api)
       '@cerbos/hub':
         specifier: ^0.4.0
         version: link:../hub
@@ -125,8 +125,8 @@ importers:
   packages/files:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.10.1
-        version: 2.10.1
+        specifier: ^2.10.2
+        version: 2.10.2
       '@cerbos/api':
         specifier: ^0.4.0
         version: link:../api
@@ -140,8 +140,8 @@ importers:
   packages/grpc:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.10.1
-        version: 2.10.1
+        specifier: ^2.10.2
+        version: 2.10.2
       '@cerbos/api':
         specifier: ^0.4.0
         version: link:../api
@@ -155,8 +155,8 @@ importers:
   packages/http:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.10.1
-        version: 2.10.1
+        specifier: ^2.10.2
+        version: 2.10.2
       '@cerbos/api':
         specifier: ^0.4.0
         version: link:../api
@@ -174,23 +174,23 @@ importers:
   packages/hub:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.10.1
-        version: 2.10.1
+        specifier: ^2.10.2
+        version: 2.10.2
       '@cerbos/core':
         specifier: ^0.26.0
         version: link:../core
       '@connectrpc/connect':
         specifier: ^2.1.1
-        version: 2.1.1(@bufbuild/protobuf@2.10.1)
+        version: 2.1.1(@bufbuild/protobuf@2.10.2)
       '@connectrpc/connect-node':
         specifier: ^2.1.1
-        version: 2.1.1(@bufbuild/protobuf@2.10.1)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1))
+        version: 2.1.1(@bufbuild/protobuf@2.10.2)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2))
       '@connectrpc/connect-web':
         specifier: ^2.1.1
-        version: 2.1.1(@bufbuild/protobuf@2.10.1)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1))
+        version: 2.1.1(@bufbuild/protobuf@2.10.2)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2))
       '@connectrpc/validate':
         specifier: ^0.2.0
-        version: 0.2.0(@bufbuild/protobuf@2.10.1)(@bufbuild/protovalidate@1.0.0(@bufbuild/protobuf@2.10.1))(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1))
+        version: 0.2.0(@bufbuild/protobuf@2.10.2)(@bufbuild/protovalidate@1.1.0(@bufbuild/protobuf@2.10.2))(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2))
       opossum:
         specifier: ^9.0.0
         version: 9.0.0
@@ -202,8 +202,8 @@ importers:
   packages/opentelemetry:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.10.1
-        version: 2.10.1
+        specifier: ^2.10.2
+        version: 2.10.2
       '@cerbos/api':
         specifier: ^0.4.0
         version: link:../api
@@ -287,8 +287,8 @@ importers:
   private/test:
     devDependencies:
       '@bufbuild/protobuf':
-        specifier: 2.10.1
-        version: 2.10.1
+        specifier: 2.10.2
+        version: 2.10.2
       '@cerbos/api':
         specifier: workspace:*
         version: link:../../packages/api
@@ -303,7 +303,7 @@ importers:
         version: link:../../packages/embedded-client
       '@cerbos/embedded-server':
         specifier: 0.2.0
-        version: 0.2.0(@bufbuild/protobuf@2.10.1)(@cerbos/api@packages+api)
+        version: 0.2.0(@bufbuild/protobuf@2.10.2)(@cerbos/api@packages+api)
       '@cerbos/files':
         specifier: workspace:*
         version: link:../../packages/files
@@ -324,10 +324,10 @@ importers:
         version: link:../../packages/react
       '@connectrpc/connect':
         specifier: 2.1.1
-        version: 2.1.1(@bufbuild/protobuf@2.10.1)
+        version: 2.1.1(@bufbuild/protobuf@2.10.2)
       '@connectrpc/connect-node':
         specifier: 2.1.1
-        version: 2.1.1(@bufbuild/protobuf@2.10.1)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1))
+        version: 2.1.1(@bufbuild/protobuf@2.10.2)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2))
       '@grpc/grpc-js':
         specifier: 1.14.3
         version: 1.14.3
@@ -486,50 +486,50 @@ packages:
   '@braidai/lang@1.1.2':
     resolution: {integrity: sha512-qBcknbBufNHlui137Hft8xauQMTZDKdophmLFv05r2eNmdIv/MlPuP4TdUknHG68UdWLgVZwgxVe735HzJNIwA==}
 
-  '@bufbuild/buf-darwin-arm64@1.61.0':
-    resolution: {integrity: sha512-8vUGNV65LNPp+HT3NuCT9i/mCUEyLrSFctJ2Dz8JqnUu8fVPm4f8lVBSCT0TYLoQ8o8xb/A7bwWu14aKfXxgCg==}
+  '@bufbuild/buf-darwin-arm64@1.62.1':
+    resolution: {integrity: sha512-qklVRzBgdzLv9fVa9OX/ewpgX4H34b4mKezJsDPGRwAwykgswgF39jhihIRDJNI40/Gi2Ik0tvmg4v8aO2E/1Q==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [darwin]
 
-  '@bufbuild/buf-darwin-x64@1.61.0':
-    resolution: {integrity: sha512-dyJghwTYXT6e/Ec+2iPWijquTzyT+5vTItX4R7hM/soNQOs4eEo2z7EHLqvclHyi7+p7+8xye3z+BFM33ucM8A==}
+  '@bufbuild/buf-darwin-x64@1.62.1':
+    resolution: {integrity: sha512-HUEiPeIL9mFHSM5z9ZdD0ZgjQaDxwFnDr4sv62/ajgMZd0h/rXe212CPrrLxmufhNx1jnDuxiSyhhAvl6lS5bA==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [darwin]
 
-  '@bufbuild/buf-linux-aarch64@1.61.0':
-    resolution: {integrity: sha512-9r5DRqwpq3WX0ltzt1p/Oe+8g679Fg4XJLaH/zmjqpwHVO+tNzYy7PHK4qWg83PCoANw6OVizl+iTmnE0vbklg==}
+  '@bufbuild/buf-linux-aarch64@1.62.1':
+    resolution: {integrity: sha512-NdLOdRSkhKDlOmRhwywbC0Bo5TcPuRscqwVLOWWkarDNG1mybMCZYTvzXyuvdHVILsq8aA3T5w9yfuzMsVNfQg==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [linux]
 
-  '@bufbuild/buf-linux-armv7@1.61.0':
-    resolution: {integrity: sha512-P2cSlzu68omZ6kyijMcYezZJFS4XayfLA0ATm1HP0zUaV+xVoeMOGhKvMWUFAa9SGYUs4Drxi2fyK/c2ZFA8sw==}
+  '@bufbuild/buf-linux-armv7@1.62.1':
+    resolution: {integrity: sha512-BVaXXud1YQ++vK7OVH3CiQwSXqmzSU+f03Jhy+FxiXQZuCQ9+EQsqsCIdVYdTFTCNd4O8l66d290+smLVDf1/A==}
     engines: {node: '>=12'}
     cpu: [arm]
     os: [linux]
 
-  '@bufbuild/buf-linux-x64@1.61.0':
-    resolution: {integrity: sha512-USDSLB0vkrR6Sk/VDtECLdOKHfynenCjnAchr9bdqC137IVJT7TVT8JhBW0UWMmXDZYjwbDrBLITwWj8hwk6Uw==}
+  '@bufbuild/buf-linux-x64@1.62.1':
+    resolution: {integrity: sha512-lmN5op+lRlcaOLohfAhYh6VkEnj0mDxuhVAEXOtG9rTpxDguOgFFDzoYzoVdxtGDAg9npgQaUl7W58KO9kfTHw==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [linux]
 
-  '@bufbuild/buf-win32-arm64@1.61.0':
-    resolution: {integrity: sha512-36n90c0lzhDMXRKhht8XreUCha4OTY7yR6g+bnkAFUXSbCbR3BpqrenWvl5NBtfX2Y70dmvjKnGwVanSIrb1uA==}
+  '@bufbuild/buf-win32-arm64@1.62.1':
+    resolution: {integrity: sha512-jXO8TXIY8yVC/1br687WAJx7feRfccqOZYRDy9AaPupQ40Cv8l0L4TWckGketaftDcnJCWBStO5+rwjAmN7fug==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [win32]
 
-  '@bufbuild/buf-win32-x64@1.61.0':
-    resolution: {integrity: sha512-uBIU7tQlCBPyoeJZH0NzL6y9Y4ikje4OlgHYGssbaPLsCKELSFDHQkHFabkwnVeXSUf9Intq+U3jtb+qOIlflw==}
+  '@bufbuild/buf-win32-x64@1.62.1':
+    resolution: {integrity: sha512-djH6dYHCLBCNilXHzAZDxo39EIS2/etiShgznSI/mQe8ybsaObqoK8CCxLu+kpUXYFaDd4onbFQKos2fxONDqQ==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
 
-  '@bufbuild/buf@1.61.0':
-    resolution: {integrity: sha512-9kKZK/GjhIDUj50pngmjtC6bGFl6U1rFDH2gZJATRfp2vNnQPsb6BqZ+2lea37bgHBYdAYttlve8wnXszXmftA==}
+  '@bufbuild/buf@1.62.1':
+    resolution: {integrity: sha512-0S+7jXEl9LXdG8+lyoqGbHFiKgFjRK/EuuFxw+szMT9qVOhg4//j0wIfZ/visOCU2FB1fQNuesb1MB4WVnwH0A==}
     engines: {node: '>=12'}
     hasBin: true
 
@@ -543,27 +543,24 @@ packages:
     peerDependencies:
       '@bufbuild/protobuf': ^2.6.2
 
-  '@bufbuild/protobuf@2.10.1':
-    resolution: {integrity: sha512-ckS3+vyJb5qGpEYv/s1OebUHDi/xSNtfgw1wqKZo7MR9F2z+qXr0q5XagafAG/9O0QPVIUfST0smluYSTpYFkg==}
-
   '@bufbuild/protobuf@2.10.2':
     resolution: {integrity: sha512-uFsRXwIGyu+r6AMdz+XijIIZJYpoWeYzILt5yZ2d3mCjQrWUTVpVD9WL/jZAbvp+Ed04rOhrsk7FiTcEDseB5A==}
 
-  '@bufbuild/protoc-gen-es@2.10.1':
-    resolution: {integrity: sha512-vsfbWs1X93oX+sMMJ7910/OwIizAYH5IOAArsxnSTifiop1fVgLFPAvJBLiHZoNMI8B/lbqji2SFwvjK0AWO1Q==}
+  '@bufbuild/protoc-gen-es@2.10.2':
+    resolution: {integrity: sha512-vbjPsuofbtZwZXuOP7Y16CQsxrwCjuRONffmJSBEhoC7PQu/Cabp0+Fu/poLPm9CNM0tDCQA0xvgobgudaEYxQ==}
     engines: {node: '>=20'}
     hasBin: true
     peerDependencies:
-      '@bufbuild/protobuf': 2.10.1
+      '@bufbuild/protobuf': 2.10.2
     peerDependenciesMeta:
       '@bufbuild/protobuf':
         optional: true
 
-  '@bufbuild/protoplugin@2.10.1':
-    resolution: {integrity: sha512-imB8dKEjrOnG5+XqVS+CeYn924WGLU/g3wogKhk11XtX9y9NJ7432OS6h24asuBbLrQcPdEZ6QkfM7KeOCeeyQ==}
+  '@bufbuild/protoplugin@2.10.2':
+    resolution: {integrity: sha512-RAWVs9tCzRqSS3tUtaFhOcauOAazCrm7tlGh0WHFq/44n5Fj6YgefdlZEPIaAK6VAA+FdOoFgtOJK2Ji5U24pw==}
 
-  '@bufbuild/protovalidate@1.0.0':
-    resolution: {integrity: sha512-ICGANMQXaPKdR5BJ+6/L3nySHOZQQEZQvvivSZCFb799138obPLjNk32rSIKOMrA/YHc4Y2W738e+SL3CbZXSg==}
+  '@bufbuild/protovalidate@1.1.0':
+    resolution: {integrity: sha512-oC1sYAr9eQucZsLb0M7cIk3TftZ/cOBbKT1XBIL9Aypm5e0IcC8/HlfN+NrwPVhw9JI4bOQM1Ar1E6x7L71nbA==}
     peerDependencies:
       '@bufbuild/protobuf': ^2.8.0
 
@@ -3551,98 +3548,96 @@ snapshots:
 
   '@braidai/lang@1.1.2': {}
 
-  '@bufbuild/buf-darwin-arm64@1.61.0':
+  '@bufbuild/buf-darwin-arm64@1.62.1':
     optional: true
 
-  '@bufbuild/buf-darwin-x64@1.61.0':
+  '@bufbuild/buf-darwin-x64@1.62.1':
     optional: true
 
-  '@bufbuild/buf-linux-aarch64@1.61.0':
+  '@bufbuild/buf-linux-aarch64@1.62.1':
     optional: true
 
-  '@bufbuild/buf-linux-armv7@1.61.0':
+  '@bufbuild/buf-linux-armv7@1.62.1':
     optional: true
 
-  '@bufbuild/buf-linux-x64@1.61.0':
+  '@bufbuild/buf-linux-x64@1.62.1':
     optional: true
 
-  '@bufbuild/buf-win32-arm64@1.61.0':
+  '@bufbuild/buf-win32-arm64@1.62.1':
     optional: true
 
-  '@bufbuild/buf-win32-x64@1.61.0':
+  '@bufbuild/buf-win32-x64@1.62.1':
     optional: true
 
-  '@bufbuild/buf@1.61.0':
+  '@bufbuild/buf@1.62.1':
     optionalDependencies:
-      '@bufbuild/buf-darwin-arm64': 1.61.0
-      '@bufbuild/buf-darwin-x64': 1.61.0
-      '@bufbuild/buf-linux-aarch64': 1.61.0
-      '@bufbuild/buf-linux-armv7': 1.61.0
-      '@bufbuild/buf-linux-x64': 1.61.0
-      '@bufbuild/buf-win32-arm64': 1.61.0
-      '@bufbuild/buf-win32-x64': 1.61.0
+      '@bufbuild/buf-darwin-arm64': 1.62.1
+      '@bufbuild/buf-darwin-x64': 1.62.1
+      '@bufbuild/buf-linux-aarch64': 1.62.1
+      '@bufbuild/buf-linux-armv7': 1.62.1
+      '@bufbuild/buf-linux-x64': 1.62.1
+      '@bufbuild/buf-win32-arm64': 1.62.1
+      '@bufbuild/buf-win32-x64': 1.62.1
 
-  '@bufbuild/cel-spec@0.3.0(@bufbuild/protobuf@2.10.1)':
+  '@bufbuild/cel-spec@0.3.0(@bufbuild/protobuf@2.10.2)':
     dependencies:
-      '@bufbuild/protobuf': 2.10.1
+      '@bufbuild/protobuf': 2.10.2
 
-  '@bufbuild/cel@0.3.0(@bufbuild/protobuf@2.10.1)':
+  '@bufbuild/cel@0.3.0(@bufbuild/protobuf@2.10.2)':
     dependencies:
-      '@bufbuild/cel-spec': 0.3.0(@bufbuild/protobuf@2.10.1)
-      '@bufbuild/protobuf': 2.10.1
-
-  '@bufbuild/protobuf@2.10.1': {}
+      '@bufbuild/cel-spec': 0.3.0(@bufbuild/protobuf@2.10.2)
+      '@bufbuild/protobuf': 2.10.2
 
   '@bufbuild/protobuf@2.10.2': {}
 
-  '@bufbuild/protoc-gen-es@2.10.1(@bufbuild/protobuf@2.10.1)':
+  '@bufbuild/protoc-gen-es@2.10.2(@bufbuild/protobuf@2.10.2)':
     dependencies:
-      '@bufbuild/protoplugin': 2.10.1
+      '@bufbuild/protoplugin': 2.10.2
     optionalDependencies:
-      '@bufbuild/protobuf': 2.10.1
+      '@bufbuild/protobuf': 2.10.2
     transitivePeerDependencies:
       - supports-color
 
-  '@bufbuild/protoplugin@2.10.1':
+  '@bufbuild/protoplugin@2.10.2':
     dependencies:
-      '@bufbuild/protobuf': 2.10.1
+      '@bufbuild/protobuf': 2.10.2
       '@typescript/vfs': 1.6.2(typescript@5.4.5)
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
 
-  '@bufbuild/protovalidate@1.0.0(@bufbuild/protobuf@2.10.1)':
+  '@bufbuild/protovalidate@1.1.0(@bufbuild/protobuf@2.10.2)':
     dependencies:
-      '@bufbuild/cel': 0.3.0(@bufbuild/protobuf@2.10.1)
-      '@bufbuild/protobuf': 2.10.1
+      '@bufbuild/cel': 0.3.0(@bufbuild/protobuf@2.10.2)
+      '@bufbuild/protobuf': 2.10.2
 
-  '@cerbos/embedded-server@0.2.0(@bufbuild/protobuf@2.10.1)(@cerbos/api@packages+api)':
+  '@cerbos/embedded-server@0.2.0(@bufbuild/protobuf@2.10.2)(@cerbos/api@packages+api)':
     dependencies:
-      '@bufbuild/protobuf': 2.10.1
+      '@bufbuild/protobuf': 2.10.2
       '@cerbos/api': link:packages/api
 
   '@colors/colors@1.5.0':
     optional: true
 
-  '@connectrpc/connect-node@2.1.1(@bufbuild/protobuf@2.10.1)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1))':
+  '@connectrpc/connect-node@2.1.1(@bufbuild/protobuf@2.10.2)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2))':
     dependencies:
-      '@bufbuild/protobuf': 2.10.1
-      '@connectrpc/connect': 2.1.1(@bufbuild/protobuf@2.10.1)
+      '@bufbuild/protobuf': 2.10.2
+      '@connectrpc/connect': 2.1.1(@bufbuild/protobuf@2.10.2)
 
-  '@connectrpc/connect-web@2.1.1(@bufbuild/protobuf@2.10.1)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1))':
+  '@connectrpc/connect-web@2.1.1(@bufbuild/protobuf@2.10.2)(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2))':
     dependencies:
-      '@bufbuild/protobuf': 2.10.1
-      '@connectrpc/connect': 2.1.1(@bufbuild/protobuf@2.10.1)
+      '@bufbuild/protobuf': 2.10.2
+      '@connectrpc/connect': 2.1.1(@bufbuild/protobuf@2.10.2)
 
-  '@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1)':
+  '@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2)':
     dependencies:
-      '@bufbuild/protobuf': 2.10.1
+      '@bufbuild/protobuf': 2.10.2
 
-  '@connectrpc/validate@0.2.0(@bufbuild/protobuf@2.10.1)(@bufbuild/protovalidate@1.0.0(@bufbuild/protobuf@2.10.1))(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.1))':
+  '@connectrpc/validate@0.2.0(@bufbuild/protobuf@2.10.2)(@bufbuild/protovalidate@1.1.0(@bufbuild/protobuf@2.10.2))(@connectrpc/connect@2.1.1(@bufbuild/protobuf@2.10.2))':
     dependencies:
-      '@bufbuild/protobuf': 2.10.1
-      '@bufbuild/protovalidate': 1.0.0(@bufbuild/protobuf@2.10.1)
-      '@connectrpc/connect': 2.1.1(@bufbuild/protobuf@2.10.1)
+      '@bufbuild/protobuf': 2.10.2
+      '@bufbuild/protovalidate': 1.1.0(@bufbuild/protobuf@2.10.2)
+      '@connectrpc/connect': 2.1.1(@bufbuild/protobuf@2.10.2)
 
   '@csstools/color-helpers@5.1.0': {}
 
@@ -6228,7 +6223,7 @@ snapshots:
 
   ts-proto-descriptors@2.1.0:
     dependencies:
-      '@bufbuild/protobuf': 2.10.1
+      '@bufbuild/protobuf': 2.10.2
 
   ts-proto@2.10.1:
     dependencies:
