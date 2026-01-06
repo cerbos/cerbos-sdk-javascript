@@ -455,12 +455,14 @@ export const Swagger: MessageFns<Swagger> = {
     for (const v of message.produces) {
       writer.uint32(58).string(v!);
     }
-    Object.entries(message.responses).forEach(([key, value]) => {
-      Swagger_ResponsesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(82).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.responses).forEach(
+      ([key, value]: [string, Response]) => {
+        Swagger_ResponsesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(82).fork(),
+        ).join();
+      },
+    );
     if (message.securityDefinitions !== undefined) {
       SecurityDefinitions.encode(
         message.securityDefinitions,
@@ -479,14 +481,16 @@ export const Swagger: MessageFns<Swagger> = {
         writer.uint32(114).fork(),
       ).join();
     }
-    Object.entries(message.extensions).forEach(([key, value]) => {
-      if (value !== undefined) {
-        Swagger_ExtensionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(122).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.extensions).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          Swagger_ExtensionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(122).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -665,7 +669,10 @@ export const Swagger: MessageFns<Swagger> = {
       obj.produces = message.produces;
     }
     if (message.responses) {
-      const entries = Object.entries(message.responses);
+      const entries = globalThis.Object.entries(message.responses) as [
+        string,
+        Response,
+      ][];
       if (entries.length > 0) {
         obj.responses = {};
         entries.forEach(([k, v]) => {
@@ -688,7 +695,10 @@ export const Swagger: MessageFns<Swagger> = {
       obj.externalDocs = ExternalDocumentation.toJSON(message.externalDocs);
     }
     if (message.extensions) {
-      const entries = Object.entries(message.extensions);
+      const entries = globalThis.Object.entries(message.extensions) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.extensions = {};
         entries.forEach(([k, v]) => {
@@ -879,12 +889,14 @@ export const Operation: MessageFns<Operation> = {
     for (const v of message.produces) {
       writer.uint32(58).string(v!);
     }
-    Object.entries(message.responses).forEach(([key, value]) => {
-      Operation_ResponsesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(74).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.responses).forEach(
+      ([key, value]: [string, Response]) => {
+        Operation_ResponsesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(74).fork(),
+        ).join();
+      },
+    );
     writer.uint32(82).fork();
     for (const v of message.schemes) {
       writer.int32(v);
@@ -896,14 +908,16 @@ export const Operation: MessageFns<Operation> = {
     for (const v of message.security) {
       SecurityRequirement.encode(v!, writer.uint32(98).fork()).join();
     }
-    Object.entries(message.extensions).forEach(([key, value]) => {
-      if (value !== undefined) {
-        Operation_ExtensionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(106).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.extensions).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          Operation_ExtensionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(106).fork(),
+          ).join();
+        }
+      },
+    );
     if (message.parameters !== undefined) {
       Parameters.encode(message.parameters, writer.uint32(114).fork()).join();
     }
@@ -1082,7 +1096,10 @@ export const Operation: MessageFns<Operation> = {
       obj.produces = message.produces;
     }
     if (message.responses) {
-      const entries = Object.entries(message.responses);
+      const entries = globalThis.Object.entries(message.responses) as [
+        string,
+        Response,
+      ][];
       if (entries.length > 0) {
         obj.responses = {};
         entries.forEach(([k, v]) => {
@@ -1100,7 +1117,10 @@ export const Operation: MessageFns<Operation> = {
       obj.security = message.security.map((e) => SecurityRequirement.toJSON(e));
     }
     if (message.extensions) {
-      const entries = Object.entries(message.extensions);
+      const entries = globalThis.Object.entries(message.extensions) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.extensions = {};
         entries.forEach(([k, v]) => {
@@ -1531,26 +1551,32 @@ export const Response: MessageFns<Response> = {
     if (message.schema !== undefined) {
       Schema.encode(message.schema, writer.uint32(18).fork()).join();
     }
-    Object.entries(message.headers).forEach(([key, value]) => {
-      Response_HeadersEntry.encode(
-        { key: key as any, value },
-        writer.uint32(26).fork(),
-      ).join();
-    });
-    Object.entries(message.examples).forEach(([key, value]) => {
-      Response_ExamplesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(34).fork(),
-      ).join();
-    });
-    Object.entries(message.extensions).forEach(([key, value]) => {
-      if (value !== undefined) {
-        Response_ExtensionsEntry.encode(
+    globalThis.Object.entries(message.headers).forEach(
+      ([key, value]: [string, Header]) => {
+        Response_HeadersEntry.encode(
           { key: key as any, value },
-          writer.uint32(42).fork(),
+          writer.uint32(26).fork(),
         ).join();
-      }
-    });
+      },
+    );
+    globalThis.Object.entries(message.examples).forEach(
+      ([key, value]: [string, string]) => {
+        Response_ExamplesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(34).fork(),
+        ).join();
+      },
+    );
+    globalThis.Object.entries(message.extensions).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          Response_ExtensionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(42).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -1632,7 +1658,10 @@ export const Response: MessageFns<Response> = {
       obj.schema = Schema.toJSON(message.schema);
     }
     if (message.headers) {
-      const entries = Object.entries(message.headers);
+      const entries = globalThis.Object.entries(message.headers) as [
+        string,
+        Header,
+      ][];
       if (entries.length > 0) {
         obj.headers = {};
         entries.forEach(([k, v]) => {
@@ -1641,7 +1670,10 @@ export const Response: MessageFns<Response> = {
       }
     }
     if (message.examples) {
-      const entries = Object.entries(message.examples);
+      const entries = globalThis.Object.entries(message.examples) as [
+        string,
+        string,
+      ][];
       if (entries.length > 0) {
         obj.examples = {};
         entries.forEach(([k, v]) => {
@@ -1650,7 +1682,10 @@ export const Response: MessageFns<Response> = {
       }
     }
     if (message.extensions) {
-      const entries = Object.entries(message.extensions);
+      const entries = globalThis.Object.entries(message.extensions) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.extensions = {};
         entries.forEach(([k, v]) => {
@@ -1895,14 +1930,16 @@ export const Info: MessageFns<Info> = {
     if (message.version !== "") {
       writer.uint32(50).string(message.version);
     }
-    Object.entries(message.extensions).forEach(([key, value]) => {
-      if (value !== undefined) {
-        Info_ExtensionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(58).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.extensions).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          Info_ExtensionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(58).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -2003,7 +2040,10 @@ export const Info: MessageFns<Info> = {
       obj.version = message.version;
     }
     if (message.extensions) {
-      const entries = Object.entries(message.extensions);
+      const entries = globalThis.Object.entries(message.extensions) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.extensions = {};
         entries.forEach(([k, v]) => {
@@ -2550,14 +2590,16 @@ export const JSONSchema: MessageFns<JSONSchema> = {
         writer.uint32(8010).fork(),
       ).join();
     }
-    Object.entries(message.extensions).forEach(([key, value]) => {
-      if (value !== undefined) {
-        JSONSchema_ExtensionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(386).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.extensions).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          JSONSchema_ExtensionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(386).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -2887,7 +2929,10 @@ export const JSONSchema: MessageFns<JSONSchema> = {
       );
     }
     if (message.extensions) {
-      const entries = Object.entries(message.extensions);
+      const entries = globalThis.Object.entries(message.extensions) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.extensions = {};
         entries.forEach(([k, v]) => {
@@ -3043,14 +3088,16 @@ export const Tag: MessageFns<Tag> = {
         writer.uint32(26).fork(),
       ).join();
     }
-    Object.entries(message.extensions).forEach(([key, value]) => {
-      if (value !== undefined) {
-        Tag_ExtensionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(34).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.extensions).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          Tag_ExtensionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(34).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -3121,7 +3168,10 @@ export const Tag: MessageFns<Tag> = {
       obj.externalDocs = ExternalDocumentation.toJSON(message.externalDocs);
     }
     if (message.extensions) {
-      const entries = Object.entries(message.extensions);
+      const entries = globalThis.Object.entries(message.extensions) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.extensions = {};
         entries.forEach(([k, v]) => {
@@ -3208,12 +3258,14 @@ export const SecurityDefinitions: MessageFns<SecurityDefinitions> = {
     message: SecurityDefinitions,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    Object.entries(message.security).forEach(([key, value]) => {
-      SecurityDefinitions_SecurityEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.security).forEach(
+      ([key, value]: [string, SecurityScheme]) => {
+        SecurityDefinitions_SecurityEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).join();
+      },
+    );
     return writer;
   },
 
@@ -3254,7 +3306,10 @@ export const SecurityDefinitions: MessageFns<SecurityDefinitions> = {
   toJSON(message: SecurityDefinitions): unknown {
     const obj: any = {};
     if (message.security) {
-      const entries = Object.entries(message.security);
+      const entries = globalThis.Object.entries(message.security) as [
+        string,
+        SecurityScheme,
+      ][];
       if (entries.length > 0) {
         obj.security = {};
         entries.forEach(([k, v]) => {
@@ -3376,14 +3431,16 @@ export const SecurityScheme: MessageFns<SecurityScheme> = {
     if (message.scopes !== undefined) {
       Scopes.encode(message.scopes, writer.uint32(66).fork()).join();
     }
-    Object.entries(message.extensions).forEach(([key, value]) => {
-      if (value !== undefined) {
-        SecurityScheme_ExtensionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(74).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.extensions).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          SecurityScheme_ExtensionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(74).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -3509,7 +3566,10 @@ export const SecurityScheme: MessageFns<SecurityScheme> = {
       obj.scopes = Scopes.toJSON(message.scopes);
     }
     if (message.extensions) {
-      const entries = Object.entries(message.extensions);
+      const entries = globalThis.Object.entries(message.extensions) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.extensions = {};
         entries.forEach(([k, v]) => {
@@ -3600,12 +3660,17 @@ export const SecurityRequirement: MessageFns<SecurityRequirement> = {
     message: SecurityRequirement,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    Object.entries(message.securityRequirement).forEach(([key, value]) => {
-      SecurityRequirement_SecurityRequirementEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.securityRequirement).forEach(
+      ([key, value]: [
+        string,
+        SecurityRequirement_SecurityRequirementValue,
+      ]) => {
+        SecurityRequirement_SecurityRequirementEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).join();
+      },
+    );
     return writer;
   },
 
@@ -3646,7 +3711,9 @@ export const SecurityRequirement: MessageFns<SecurityRequirement> = {
   toJSON(message: SecurityRequirement): unknown {
     const obj: any = {};
     if (message.securityRequirement) {
-      const entries = Object.entries(message.securityRequirement);
+      const entries = globalThis.Object.entries(
+        message.securityRequirement,
+      ) as [string, SecurityRequirement_SecurityRequirementValue][];
       if (entries.length > 0) {
         obj.securityRequirement = {};
         entries.forEach(([k, v]) => {
@@ -3796,12 +3863,14 @@ export const Scopes: MessageFns<Scopes> = {
     message: Scopes,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    Object.entries(message.scope).forEach(([key, value]) => {
-      Scopes_ScopeEntry.encode(
-        { key: key as any, value },
-        writer.uint32(10).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.scope).forEach(
+      ([key, value]: [string, string]) => {
+        Scopes_ScopeEntry.encode(
+          { key: key as any, value },
+          writer.uint32(10).fork(),
+        ).join();
+      },
+    );
     return writer;
   },
 
@@ -3836,7 +3905,10 @@ export const Scopes: MessageFns<Scopes> = {
   toJSON(message: Scopes): unknown {
     const obj: any = {};
     if (message.scope) {
-      const entries = Object.entries(message.scope);
+      const entries = globalThis.Object.entries(message.scope) as [
+        string,
+        string,
+      ][];
       if (entries.length > 0) {
         obj.scope = {};
         entries.forEach(([k, v]) => {

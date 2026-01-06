@@ -54,14 +54,16 @@ export const Struct: MessageFns<Struct> & StructWrapperFns = {
     message: Struct,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    Object.entries(message.fields).forEach(([key, value]) => {
-      if (value !== undefined) {
-        Struct_FieldsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(10).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.fields).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          Struct_FieldsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(10).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -96,7 +98,10 @@ export const Struct: MessageFns<Struct> & StructWrapperFns = {
   toJSON(message: Struct): unknown {
     const obj: any = {};
     if (message.fields) {
-      const entries = Object.entries(message.fields);
+      const entries = globalThis.Object.entries(message.fields) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.fields = {};
         entries.forEach(([k, v]) => {
@@ -111,7 +116,7 @@ export const Struct: MessageFns<Struct> & StructWrapperFns = {
     const struct = createBaseStruct();
 
     if (object !== undefined) {
-      for (const key of Object.keys(object)) {
+      for (const key of globalThis.Object.keys(object)) {
         struct.fields[key] = object[key];
       }
     }
@@ -121,7 +126,7 @@ export const Struct: MessageFns<Struct> & StructWrapperFns = {
   unwrap(message: Struct): { [key: string]: any } {
     const object: { [key: string]: any } = {};
     if (message.fields) {
-      for (const key of Object.keys(message.fields)) {
+      for (const key of globalThis.Object.keys(message.fields)) {
         object[key] = message.fields[key];
       }
     }

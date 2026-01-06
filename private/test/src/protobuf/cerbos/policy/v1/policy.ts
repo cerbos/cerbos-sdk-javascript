@@ -298,12 +298,14 @@ export const Policy: MessageFns<Policy> = {
         ).join();
         break;
     }
-    Object.entries(message.variables).forEach(([key, value]) => {
-      Policy_VariablesEntry.encode(
-        { key: key as any, value },
-        writer.uint32(66).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.variables).forEach(
+      ([key, value]: [string, string]) => {
+        Policy_VariablesEntry.encode(
+          { key: key as any, value },
+          writer.uint32(66).fork(),
+        ).join();
+      },
+    );
     if (message.jsonSchema !== "") {
       writer.uint32(74).string(message.jsonSchema);
     }
@@ -480,7 +482,10 @@ export const Policy: MessageFns<Policy> = {
       );
     }
     if (message.variables) {
-      const entries = Object.entries(message.variables);
+      const entries = globalThis.Object.entries(message.variables) as [
+        string,
+        string,
+      ][];
       if (entries.length > 0) {
         obj.variables = {};
         entries.forEach(([k, v]) => {
@@ -570,14 +575,16 @@ export const SourceAttributes: MessageFns<SourceAttributes> = {
     message: SourceAttributes,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    Object.entries(message.attributes).forEach(([key, value]) => {
-      if (value !== undefined) {
-        SourceAttributes_AttributesEntry.encode(
-          { key: key as any, value },
-          writer.uint32(10).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.attributes).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          SourceAttributes_AttributesEntry.encode(
+            { key: key as any, value },
+            writer.uint32(10).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -615,7 +622,10 @@ export const SourceAttributes: MessageFns<SourceAttributes> = {
   toJSON(message: SourceAttributes): unknown {
     const obj: any = {};
     if (message.attributes) {
-      const entries = Object.entries(message.attributes);
+      const entries = globalThis.Object.entries(message.attributes) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.attributes = {};
         entries.forEach(([k, v]) => {
@@ -716,12 +726,14 @@ export const Metadata: MessageFns<Metadata> = {
     if (message.sourceFile !== "") {
       writer.uint32(10).string(message.sourceFile);
     }
-    Object.entries(message.annotations).forEach(([key, value]) => {
-      Metadata_AnnotationsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(18).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.annotations).forEach(
+      ([key, value]: [string, string]) => {
+        Metadata_AnnotationsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(18).fork(),
+        ).join();
+      },
+    );
     if (message.hash !== undefined) {
       UInt64Value.encode(
         { value: message.hash! },
@@ -823,7 +835,10 @@ export const Metadata: MessageFns<Metadata> = {
       obj.sourceFile = message.sourceFile;
     }
     if (message.annotations) {
-      const entries = Object.entries(message.annotations);
+      const entries = globalThis.Object.entries(message.annotations) as [
+        string,
+        string,
+      ][];
       if (entries.length > 0) {
         obj.annotations = {};
         entries.forEach(([k, v]) => {
@@ -1921,14 +1936,16 @@ export const ExportConstants: MessageFns<ExportConstants> = {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    Object.entries(message.definitions).forEach(([key, value]) => {
-      if (value !== undefined) {
-        ExportConstants_DefinitionsEntry.encode(
-          { key: key as any, value },
-          writer.uint32(18).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.definitions).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          ExportConstants_DefinitionsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(18).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -1977,7 +1994,10 @@ export const ExportConstants: MessageFns<ExportConstants> = {
       obj.name = message.name;
     }
     if (message.definitions) {
-      const entries = Object.entries(message.definitions);
+      const entries = globalThis.Object.entries(message.definitions) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.definitions = {};
         entries.forEach(([k, v]) => {
@@ -2071,14 +2091,16 @@ export const Constants: MessageFns<Constants> = {
     for (const v of message.import) {
       writer.uint32(10).string(v!);
     }
-    Object.entries(message.local).forEach(([key, value]) => {
-      if (value !== undefined) {
-        Constants_LocalEntry.encode(
-          { key: key as any, value },
-          writer.uint32(18).fork(),
-        ).join();
-      }
-    });
+    globalThis.Object.entries(message.local).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          Constants_LocalEntry.encode(
+            { key: key as any, value },
+            writer.uint32(18).fork(),
+          ).join();
+        }
+      },
+    );
     return writer;
   },
 
@@ -2124,7 +2146,10 @@ export const Constants: MessageFns<Constants> = {
       obj.import = message.import;
     }
     if (message.local) {
-      const entries = Object.entries(message.local);
+      const entries = globalThis.Object.entries(message.local) as [
+        string,
+        any | undefined,
+      ][];
       if (entries.length > 0) {
         obj.local = {};
         entries.forEach(([k, v]) => {
@@ -2214,12 +2239,14 @@ export const ExportVariables: MessageFns<ExportVariables> = {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    Object.entries(message.definitions).forEach(([key, value]) => {
-      ExportVariables_DefinitionsEntry.encode(
-        { key: key as any, value },
-        writer.uint32(18).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.definitions).forEach(
+      ([key, value]: [string, string]) => {
+        ExportVariables_DefinitionsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(18).fork(),
+        ).join();
+      },
+    );
     return writer;
   },
 
@@ -2268,7 +2295,10 @@ export const ExportVariables: MessageFns<ExportVariables> = {
       obj.name = message.name;
     }
     if (message.definitions) {
-      const entries = Object.entries(message.definitions);
+      const entries = globalThis.Object.entries(message.definitions) as [
+        string,
+        string,
+      ][];
       if (entries.length > 0) {
         obj.definitions = {};
         entries.forEach(([k, v]) => {
@@ -2359,12 +2389,14 @@ export const Variables: MessageFns<Variables> = {
     for (const v of message.import) {
       writer.uint32(10).string(v!);
     }
-    Object.entries(message.local).forEach(([key, value]) => {
-      Variables_LocalEntry.encode(
-        { key: key as any, value },
-        writer.uint32(18).fork(),
-      ).join();
-    });
+    globalThis.Object.entries(message.local).forEach(
+      ([key, value]: [string, string]) => {
+        Variables_LocalEntry.encode(
+          { key: key as any, value },
+          writer.uint32(18).fork(),
+        ).join();
+      },
+    );
     return writer;
   },
 
@@ -2410,7 +2442,10 @@ export const Variables: MessageFns<Variables> = {
       obj.import = message.import;
     }
     if (message.local) {
-      const entries = Object.entries(message.local);
+      const entries = globalThis.Object.entries(message.local) as [
+        string,
+        string,
+      ][];
       if (entries.length > 0) {
         obj.local = {};
         entries.forEach(([k, v]) => {
