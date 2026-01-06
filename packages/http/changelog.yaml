@@ -6,6 +6,10 @@ unreleased:
       to: 2.10.2
       pull: 1320
 
+    qs:
+      to: 6.14.1
+      pull: 1325
+
 releases:
   - version: 0.23.5
     date: 2025-12-12
