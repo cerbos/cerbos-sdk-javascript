@@ -2,7 +2,11 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependency on [@bufbuild/protobuf] to 2.10.2 ([#1320](https://github.com/cerbos/cerbos-sdk-javascript/pull/1320))
+
+- Bump dependency on [@bufbuild/protovalidate] to 1.1.0 ([#1320](https://github.com/cerbos/cerbos-sdk-javascript/pull/1320))
 
 ## [0.2.0] - 2025-12-15
 
