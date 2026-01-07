@@ -2,11 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.27.0] - 2026-01-07
+
 ### Changed
 
 - Convert package to ESM ([#1330](https://github.com/cerbos/cerbos-sdk-javascript/pull/1330))
 
 - Bump dependency on [@bufbuild/protobuf] to 2.10.2 ([#1320](https://github.com/cerbos/cerbos-sdk-javascript/pull/1320))
+
+- Bump dependency on [@cerbos/api] to 0.5.0 ([#1331](https://github.com/cerbos/cerbos-sdk-javascript/pull/1331))
 
 ## [0.26.0] - 2025-12-12
 
@@ -310,7 +316,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.26.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.27.0...HEAD
+[0.27.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.26.0...@cerbos/core@0.27.0
 [0.26.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.2...@cerbos/core@0.26.0
 [0.25.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.1...@cerbos/core@0.25.2
 [0.25.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.0...@cerbos/core@0.25.1

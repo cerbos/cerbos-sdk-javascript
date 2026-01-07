@@ -2,11 +2,19 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.24.0] - 2026-01-07
+
 ### Changed
 
 - Convert package to ESM ([#1330](https://github.com/cerbos/cerbos-sdk-javascript/pull/1330))
 
 - Bump dependency on [@bufbuild/protobuf] to 2.10.2 ([#1320](https://github.com/cerbos/cerbos-sdk-javascript/pull/1320))
+
+- Bump dependency on [@cerbos/api] to 0.5.0 ([#1331](https://github.com/cerbos/cerbos-sdk-javascript/pull/1331))
+
+- Bump dependency on [@cerbos/core] to 0.27.0 ([#1331](https://github.com/cerbos/cerbos-sdk-javascript/pull/1331))
 
 - Bump dependency on [qs] to 6.14.1 ([#1325](https://github.com/cerbos/cerbos-sdk-javascript/pull/1325))
 
@@ -404,7 +412,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.23.5...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.0...HEAD
+[0.24.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.23.5...@cerbos/http@0.24.0
 [0.23.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.23.4...@cerbos/http@0.23.5
 [0.23.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.23.3...@cerbos/http@0.23.4
 [0.23.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.23.2...@cerbos/http@0.23.3

@@ -2,11 +2,19 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.24.0] - 2026-01-07
+
 ### Changed
 
 - Convert package to ESM ([#1330](https://github.com/cerbos/cerbos-sdk-javascript/pull/1330))
 
 - Bump dependency on [@bufbuild/protobuf] to 2.10.2 ([#1320](https://github.com/cerbos/cerbos-sdk-javascript/pull/1320))
+
+- Bump dependency on [@cerbos/api] to 0.5.0 ([#1331](https://github.com/cerbos/cerbos-sdk-javascript/pull/1331))
+
+- Bump dependency on [@cerbos/core] to 0.27.0 ([#1331](https://github.com/cerbos/cerbos-sdk-javascript/pull/1331))
 
 ## [0.23.7] - 2025-12-15
 
@@ -492,7 +500,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.7...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.24.0...HEAD
+[0.24.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.7...@cerbos/grpc@0.24.0
 [0.23.7]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.6...@cerbos/grpc@0.23.7
 [0.23.6]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.5...@cerbos/grpc@0.23.6
 [0.23.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.4...@cerbos/grpc@0.23.5

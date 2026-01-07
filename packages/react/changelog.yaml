@@ -1,11 +1,16 @@
-unreleased:
-  type: minor
-
-  changed:
-    - summary: Convert package to ESM
-      pull: 1330
-
 releases:
+  - version: 0.3.0
+    date: 2026-01-07
+
+    changed:
+      - summary: Convert package to ESM
+        pull: 1330
+
+    bumped:
+      "@cerbos/core":
+        to: 0.27.0
+        pull: 1331
+
   - version: 0.2.7
     date: 2025-12-12
 
