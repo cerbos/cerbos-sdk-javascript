@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/hub",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "description": "Client library for interacting with Cerbos Hub from server-side Node.js applications",
   "repository": {
@@ -64,7 +64,7 @@
     "@bufbuild/protobuf": "^2.10.2"
   },
   "dependencies": {
-    "@cerbos/core": "^0.26.0",
+    "@cerbos/core": "^0.27.0",
     "@connectrpc/connect": "^2.1.1",
     "@connectrpc/connect-node": "^2.1.1",
     "@connectrpc/connect-web": "^2.1.1",

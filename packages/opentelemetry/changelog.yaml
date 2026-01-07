@@ -1,16 +1,24 @@
-unreleased:
-  type: minor
-
-  changed:
-    - summary: Convert package to ESM
-      pull: 1330
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.10.2
-      pull: 1320
-
 releases:
+  - version: 0.8.0
+    date: 2026-01-07
+
+    changed:
+      - summary: Convert package to ESM
+        pull: 1330
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.10.2
+        pull: 1320
+
+      "@cerbos/api":
+        to: 0.5.0
+        pull: 1331
+
+      "@cerbos/core":
+        to: 0.27.0
+        pull: 1331
+
   - version: 0.7.3
     date: 2025-12-12
 

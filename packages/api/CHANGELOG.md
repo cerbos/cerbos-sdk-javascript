@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.5.0] - 2026-01-07
+
 ### Added
 
 - `cerbos.epdp.v2.Config.defaultScope` ([#1316](https://github.com/cerbos/cerbos-sdk-javascript/pull/1316))
@@ -42,7 +46,8 @@
 
 - Generated code ([#1271](https://github.com/cerbos/cerbos-sdk-javascript/pull/1271))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.4.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.5.0...HEAD
+[0.5.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.4.0...@cerbos/api@0.5.0
 [0.4.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.3.0...@cerbos/api@0.4.0
 [0.3.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.2.0...@cerbos/api@0.3.0
 [0.2.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.1.0...@cerbos/api@0.2.0
