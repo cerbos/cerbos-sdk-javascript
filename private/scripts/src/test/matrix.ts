@@ -207,7 +207,11 @@ function nodeEntry(node: string): MatrixEntry {
   return {
     required: true,
     title: `Node ${node}`,
-    test: "pnpm run test matrix-node",
+    test: [
+      "pnpm run test matrix-node",
+      "node private/test/src/import.mjs",
+      "node private/test/src/require.cjs",
+    ].join(" && "),
     node,
   };
 }

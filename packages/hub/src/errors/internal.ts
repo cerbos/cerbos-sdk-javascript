@@ -5,14 +5,14 @@ import { ConnectError } from "@connectrpc/connect";
 
 import { NotOK } from "@cerbos/core";
 
-import { fileErrorFromProto } from "../convert/fromProtobuf";
+import { fileErrorFromProto } from "../convert/fromProtobuf.js";
 import {
   ErrDetailCannotModifyGitConnectedStoreSchema,
   ErrDetailConditionUnsatisfiedSchema,
   ErrDetailNoUsableFilesSchema,
   ErrDetailOperationDiscardedSchema,
   ErrDetailValidationFailureSchema,
-} from "../protobuf/cerbos/cloud/store/v1/store_pb";
+} from "../protobuf/cerbos/cloud/store/v1/store_pb.js";
 
 import {
   CannotModifyGitConnectedStore,
@@ -20,7 +20,7 @@ import {
   NoUsableFiles,
   OperationDiscarded,
   ValidationFailure,
-} from "./external";
+} from "./external.js";
 
 const registry = createMutableRegistry();
 

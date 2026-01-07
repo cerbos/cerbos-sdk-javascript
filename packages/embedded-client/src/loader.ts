@@ -5,9 +5,9 @@ import type { Server } from "@cerbos/embedded-server";
 import type { Client as HubClient } from "@cerbos/hub/~internal";
 import { createClient as createHubClient } from "@cerbos/hub/~internal";
 
-import { createUserAgent } from "./fetch";
-import { defaultInterval, minimumInterval } from "./interval";
-import type { PolicyLoaderOptions } from "./options";
+import { createUserAgent } from "./fetch.js";
+import { defaultInterval, minimumInterval } from "./interval.js";
+import type { PolicyLoaderOptions } from "./options.js";
 
 /**
  * Loader to fetch policy bundles from Cerbos Hub.

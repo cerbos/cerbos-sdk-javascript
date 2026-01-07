@@ -17,8 +17,8 @@ import type {
   Schema,
   Swagger,
   Tag,
-} from "./openapiv2_pb";
-import { file_protoc_gen_openapiv2_options_openapiv2 } from "./openapiv2_pb";
+} from "./openapiv2_pb.js";
+import { file_protoc_gen_openapiv2_options_openapiv2 } from "./openapiv2_pb.js";
 
 /**
  * Describes the file protoc-gen-openapiv2/options/annotations.proto.

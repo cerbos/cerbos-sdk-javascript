@@ -16,9 +16,9 @@ import type {
 } from "@cerbos/core/~internal";
 import { addInstrumenter, removeInstrumenter } from "@cerbos/core/~internal";
 
-import { Instruments } from "./instruments";
-import { name, version } from "./metadata";
-import { Transport } from "./transport";
+import { Instruments } from "./instruments.js";
+import { name, version } from "./metadata.js";
+import { Transport } from "./transport.js";
 
 /**
  * Configuration for OpenTelemetry instrumentation of Cerbos clients.

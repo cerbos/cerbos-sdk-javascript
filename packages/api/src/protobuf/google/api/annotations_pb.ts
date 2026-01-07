@@ -17,8 +17,8 @@
 
 import type { GenExtension, GenFile } from "@bufbuild/protobuf/codegenv2";
 import { extDesc, fileDesc } from "@bufbuild/protobuf/codegenv2";
-import type { HttpRule } from "./http_pb";
-import { file_google_api_http } from "./http_pb";
+import type { HttpRule } from "./http_pb.js";
+import { file_google_api_http } from "./http_pb.js";
 import type { MethodOptions } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
 

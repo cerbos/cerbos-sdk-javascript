@@ -1,6 +1,7 @@
 {
   "name": "@cerbos/files",
   "version": "0.4.6",
+  "type": "module",
   "description": "Load Cerbos policies from YAML or JSON files",
   "repository": {
     "type": "git",
@@ -16,8 +17,6 @@
   "engines": {
     "node": ">= 20"
   },
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",

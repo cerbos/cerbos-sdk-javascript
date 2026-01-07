@@ -33,8 +33,12 @@ import { Embedded } from "@cerbos/embedded-client";
 import { metadata } from "@cerbos/embedded-server";
 import { credentialsFromEnv } from "@cerbos/hub";
 
-import { testCerbosServiceClient } from "../../../client/cerbos";
-import { callIdPattern, embeddedV2UserAgent } from "../../../helpers";
+import { testCerbosServiceClient } from "../../../client/cerbos.js";
+import {
+  callIdPattern,
+  embeddedV2UserAgent,
+  readEmbeddedServerWASM,
+} from "../../../helpers.js";
 
 describe("Client", () => {
   const onDecision = vitest.fn<Exclude<Options["onDecision"], undefined>>();
@@ -55,7 +59,7 @@ describe("Client", () => {
       return new Embedded({
         ...options,
         policies,
-        wasm: readFile(require.resolve("@cerbos/embedded-server/server.wasm")),
+        wasm: readEmbeddedServerWASM(),
         decodeJWTPayload: ({ token }): DecodedJWTPayload =>
           UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
         globals: {

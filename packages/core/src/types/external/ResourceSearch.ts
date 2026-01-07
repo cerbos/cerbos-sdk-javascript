@@ -1,4 +1,4 @@
-import type { Resource } from "./Resource";
+import type { Resource } from "./Resource.js";
 
 /**
  * Search criteria to match a resource in results.

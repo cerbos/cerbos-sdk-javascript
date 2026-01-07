@@ -1,10 +1,10 @@
-import type { DerivedRolesBody } from "./DerivedRolesBody";
-import type { ExportConstantsBody } from "./ExportConstantsBody";
-import type { ExportVariablesBody } from "./ExportVariablesBody";
-import type { PolicyMetadata } from "./PolicyMetadata";
-import type { PrincipalPolicyBody } from "./PrincipalPolicyBody";
-import type { ResourcePolicyBody } from "./ResourcePolicyBody";
-import type { RolePolicyBody } from "./RolePolicyBody";
+import type { DerivedRolesBody } from "./DerivedRolesBody.js";
+import type { ExportConstantsBody } from "./ExportConstantsBody.js";
+import type { ExportVariablesBody } from "./ExportVariablesBody.js";
+import type { PolicyMetadata } from "./PolicyMetadata.js";
+import type { PrincipalPolicyBody } from "./PrincipalPolicyBody.js";
+import type { ResourcePolicyBody } from "./ResourcePolicyBody.js";
+import type { RolePolicyBody } from "./RolePolicyBody.js";
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/ | policy} definition.

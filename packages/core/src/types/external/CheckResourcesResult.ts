@@ -1,9 +1,9 @@
-import type { CheckResourcesResultMetadata } from "./CheckResourcesResultMetadata";
-import type { CheckResourcesResultResource } from "./CheckResourcesResultResource";
-import { Effect } from "./Effect";
-import type { OutputResult } from "./OutputResult";
-import type { ValidationError } from "./ValidationError";
-import type { Value } from "./Value";
+import type { CheckResourcesResultMetadata } from "./CheckResourcesResultMetadata.js";
+import type { CheckResourcesResultResource } from "./CheckResourcesResultResource.js";
+import { Effect } from "./Effect.js";
+import type { OutputResult } from "./OutputResult.js";
+import type { ValidationError } from "./ValidationError.js";
+import type { Value } from "./Value.js";
 
 /**
  * The outcome of checking a principal's permissions on single resource.

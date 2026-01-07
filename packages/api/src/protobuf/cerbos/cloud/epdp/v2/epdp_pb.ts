@@ -16,13 +16,13 @@ import {
   messageDesc,
   serviceDesc,
 } from "@bufbuild/protobuf/codegenv2";
-import { file_buf_validate_validate } from "../../../../buf/validate/validate_pb";
+import { file_buf_validate_validate } from "../../../../buf/validate/validate_pb.js";
 import type {
   AuditTrail,
   AuditTrailJson,
   AuditTrailValid,
-} from "../../../audit/v1/audit_pb";
-import { file_cerbos_audit_v1_audit } from "../../../audit/v1/audit_pb";
+} from "../../../audit/v1/audit_pb.js";
+import { file_cerbos_audit_v1_audit } from "../../../audit/v1/audit_pb.js";
 import type {
   CheckResourcesResponse as CheckResourcesResponse$1,
   CheckResourcesResponseJson as CheckResourcesResponseJson$1,
@@ -30,9 +30,9 @@ import type {
   PlanResourcesResponse as PlanResourcesResponse$1,
   PlanResourcesResponseJson as PlanResourcesResponseJson$1,
   PlanResourcesResponseValid as PlanResourcesResponseValid$1,
-} from "../../../response/v1/response_pb";
-import { file_cerbos_response_v1_response } from "../../../response/v1/response_pb";
-import { file_google_api_visibility } from "../../../../google/api/visibility_pb";
+} from "../../../response/v1/response_pb.js";
+import { file_cerbos_response_v1_response } from "../../../response/v1/response_pb.js";
+import { file_google_api_visibility } from "../../../../google/api/visibility_pb.js";
 import type {
   Empty,
   EmptyJson,
@@ -46,8 +46,8 @@ import {
   file_google_protobuf_struct,
   file_google_protobuf_timestamp,
 } from "@bufbuild/protobuf/wkt";
-import type { Code, CodeJson } from "../../../../google/rpc/code_pb";
-import { file_google_rpc_code } from "../../../../google/rpc/code_pb";
+import type { Code, CodeJson } from "../../../../google/rpc/code_pb.js";
+import { file_google_rpc_code } from "../../../../google/rpc/code_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**

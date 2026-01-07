@@ -1,4 +1,4 @@
-import type { Condition } from "./Condition";
+import type { Condition } from "./Condition.js";
 
 /** @alpha */
 export interface RoleRule {

@@ -1,4 +1,4 @@
-import type { ServiceStatus } from "./ServiceStatus";
+import type { ServiceStatus } from "./ServiceStatus.js";
 
 /**
  * The outcome of checking the health of a service provided by the policy decision point server.

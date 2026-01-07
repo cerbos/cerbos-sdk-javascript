@@ -7,7 +7,8 @@ import type { DecodedJWTPayload } from "@cerbos/embedded-client";
 import { Embedded } from "@cerbos/embedded-client";
 import { metadata } from "@cerbos/embedded-server";
 
-import { testInstrumentation } from "../../../client/instrumentation";
+import { testInstrumentation } from "../../../client/instrumentation.js";
+import { readEmbeddedServerWASM } from "../../../helpers.js";
 
 testInstrumentation({
   type: "embedded | v2",
@@ -18,7 +19,7 @@ testInstrumentation({
       policies: readFile(
         resolve(__dirname, "../../../../bundles/PS2MX9855QURB3Y8.crrt"),
       ),
-      wasm: readFile(require.resolve("@cerbos/embedded-server/server.wasm")),
+      wasm: readEmbeddedServerWASM(),
       decodeJWTPayload: ({ token }): DecodedJWTPayload =>
         UnsecuredJWT.decode(token).payload as DecodedJWTPayload,
       globals: {

@@ -1,4 +1,4 @@
-import type { File } from "./File";
+import type { File } from "./File.js";
 
 /**
  * Files to upload to a store.

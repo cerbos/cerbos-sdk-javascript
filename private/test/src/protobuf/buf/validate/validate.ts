@@ -3,8 +3,8 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { Duration } from "../../google/protobuf/duration";
-import { Timestamp } from "../../google/protobuf/timestamp";
+import { Duration } from "../../google/protobuf/duration.js";
+import { Timestamp } from "../../google/protobuf/timestamp.js";
 
 export const protobufPackage = "buf.validate";
 

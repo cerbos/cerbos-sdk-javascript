@@ -21,5 +21,6 @@ plugins:
     out: packages/api/src/protobuf
     opt:
       - target=ts
+      - import_extension=js
       - json_types=true
       - valid_types=protovalidate_required

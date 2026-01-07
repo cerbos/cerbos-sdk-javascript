@@ -1,6 +1,7 @@
 {
   "name": "@cerbos/hub",
   "version": "0.4.0",
+  "type": "module",
   "description": "Client library for interacting with Cerbos Hub from server-side Node.js applications",
   "repository": {
     "type": "git",
@@ -16,8 +17,6 @@
   "engines": {
     "node": ">= 20"
   },
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
@@ -26,6 +25,16 @@
     "./~internal": {
       "types": "./lib/internal.d.ts",
       "default": "./lib/internal.js"
+    },
+    "./~internal/transport": {
+      "node": {
+        "types": "./lib/transport/node.d.ts",
+        "default": "./lib/transport/node.js"
+      },
+      "default": {
+        "types": "./lib/transport/web.d.ts",
+        "default": "./lib/transport/web.js"
+      }
     }
   },
   "files": [
@@ -33,9 +42,7 @@
     "lib/**/*.d.ts.map",
     "lib/**/*.js",
     "lib/**/*.js.map",
-    "lib/transport/package.json",
-    "src/**/*.ts",
-    "~internal/package.json"
+    "src/**/*.ts"
   ],
   "keywords": [
     "Cerbos",

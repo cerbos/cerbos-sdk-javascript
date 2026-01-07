@@ -1,7 +1,7 @@
-import type { PlanExpressionOperand } from "./PlanExpressionOperand";
-import { PlanKind } from "./PlanKind";
-import type { PlanResourcesMetadata } from "./PlanResourcesMetadata";
-import type { ValidationError } from "./ValidationError";
+import type { PlanExpressionOperand } from "./PlanExpressionOperand.js";
+import { PlanKind } from "./PlanKind.js";
+import type { PlanResourcesMetadata } from "./PlanResourcesMetadata.js";
+import type { ValidationError } from "./ValidationError.js";
 
 /**
  * A query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action.

@@ -3,7 +3,7 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { Value } from "../../google/protobuf/struct";
+import { Value } from "../../google/protobuf/struct.js";
 
 export const protobufPackage = "grpc.gateway.protoc_gen_openapiv2.options";
 

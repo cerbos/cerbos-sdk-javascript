@@ -6,8 +6,11 @@ import { describe } from "vitest";
 import type { DecisionLogEntry } from "@cerbos/core";
 import { Embedded } from "@cerbos/embedded-client";
 
-import { testHeaders } from "../../../client/headers";
-import { embeddedV2UserAgent } from "../../../helpers";
+import { testHeaders } from "../../../client/headers.js";
+import {
+  embeddedV2UserAgent,
+  readEmbeddedServerWASM,
+} from "../../../helpers.js";
 
 describe("Client", () => {
   const decisionLogEntries = new Map<string, DecisionLogEntry>();
@@ -34,7 +37,7 @@ describe("Client", () => {
         policies: readFile(
           resolve(__dirname, "../../../../bundles/PS2MX9855QURB3Y8.crrt"),
         ),
-        wasm: readFile(require.resolve("@cerbos/embedded-server/server.wasm")),
+        wasm: readEmbeddedServerWASM(),
         onDecision,
       }),
     defaultUserAgent: embeddedV2UserAgent,

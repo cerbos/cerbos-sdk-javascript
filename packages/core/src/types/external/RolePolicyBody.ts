@@ -1,4 +1,4 @@
-import type { RoleRule } from "./RoleRule";
+import type { RoleRule } from "./RoleRule.js";
 
 /** @alpha */
 export interface RolePolicyBody {

@@ -1,4 +1,4 @@
-import type { Value } from "./Value";
+import type { Value } from "./Value.js";
 
 /**
  * Auxiliary data after decoding the JSON Web Token.

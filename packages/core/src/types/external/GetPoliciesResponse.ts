@@ -1,4 +1,4 @@
-import type { Policy } from "./Policy";
+import type { Policy } from "./Policy.js";
 
 /**
  * Fetched policies.

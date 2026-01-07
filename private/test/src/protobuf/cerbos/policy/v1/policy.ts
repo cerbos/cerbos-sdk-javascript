@@ -3,9 +3,9 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { Value } from "../../../google/protobuf/struct";
-import { UInt64Value } from "../../../google/protobuf/wrappers";
-import { Effect, effectToJSON } from "../../effect/v1/effect";
+import { Value } from "../../../google/protobuf/struct.js";
+import { UInt64Value } from "../../../google/protobuf/wrappers.js";
+import { Effect, effectToJSON } from "../../effect/v1/effect.js";
 
 export const protobufPackage = "cerbos.policy.v1";
 

@@ -1,4 +1,4 @@
-import type { PrincipalRuleAction } from "./PrincipalRuleAction";
+import type { PrincipalRuleAction } from "./PrincipalRuleAction.js";
 
 /**
  * A rule defining an override for a specific user.

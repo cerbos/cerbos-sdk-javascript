@@ -28,7 +28,7 @@
     "lint:check:eslint": "pnpm run eslint:build && pnpm run eslint:run .",
     "lint:check:links": "scripts/check-links",
     "lint:check:prettier": "prettier --check .",
-    "lint:check:types": "pnpm --recursive --filter='./packages/*' exec attw --pack .",
+    "lint:check:types": "pnpm --recursive --filter='./packages/*' exec attw --pack . --profile esm-only",
     "lint:fix": "pnpm run lint:fix:eslint && pnpm run lint:fix:prettier",
     "lint:fix:eslint": "eslint --fix --max-warnings=0 .",
     "lint:fix:prettier": "prettier --write .",

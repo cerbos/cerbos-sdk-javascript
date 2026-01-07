@@ -4,4 +4,4 @@
  * @packageDocumentation
  */
 
-export * from "./instrumentation";
+export * from "./instrumentation.js";

@@ -11,9 +11,9 @@ export {
   translateEnum,
   unexpected,
   valuesFromProtobuf,
-} from "./convert/fromProtobuf";
-export { policyToProtobuf, valuesToProtobuf } from "./convert/toProtobuf";
-export * from "./transport";
+} from "./convert/fromProtobuf.js";
+export { policyToProtobuf, valuesToProtobuf } from "./convert/toProtobuf.js";
+export * from "./transport.js";
 
 /** @internal */
 export function isObject(value: unknown): value is Record<string, unknown> {

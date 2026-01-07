@@ -1,4 +1,4 @@
-import type { Value } from "./Value";
+import type { Value } from "./Value.js";
 
 /**
  * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#constants | Constants} defined for use in policy conditions.

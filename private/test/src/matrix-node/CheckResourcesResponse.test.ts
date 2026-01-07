@@ -6,7 +6,7 @@ import type {
 } from "@cerbos/core";
 import { CheckResourcesResponse, Effect } from "@cerbos/core";
 
-import { buildResult, buildResultsForResources, shuffle } from "../helpers";
+import { buildResult, buildResultsForResources, shuffle } from "../helpers.js";
 
 describe("CheckResourcesResponse", () => {
   describe("#allAllowed", () => {

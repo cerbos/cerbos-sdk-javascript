@@ -2,14 +2,14 @@ import type { Duration } from "@bufbuild/protobuf/wkt";
 import type { Interceptor } from "@connectrpc/connect";
 import { Code, ConnectError } from "@connectrpc/connect";
 
-import { backoff } from "../backoff";
-import type { Client, ClientOptions } from "../client";
-import { createClient } from "../client";
-import type { Credentials } from "../credentials";
-import { createNotOK } from "../errors/internal";
-import { ApiKeyService } from "../protobuf/cerbos/cloud/apikey/v1/apikey_pb";
+import { backoff } from "../backoff.js";
+import type { Client, ClientOptions } from "../client.js";
+import { createClient } from "../client.js";
+import type { Credentials } from "../credentials.js";
+import { createNotOK } from "../errors/internal.js";
+import { ApiKeyService } from "../protobuf/cerbos/cloud/apikey/v1/apikey_pb.js";
 
-import { createInterceptor } from "./interceptor";
+import { createInterceptor } from "./interceptor.js";
 
 export function createAuthInterceptor(options: ClientOptions): Interceptor {
   return new Auth(options).interceptor;

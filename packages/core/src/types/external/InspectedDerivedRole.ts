@@ -1,4 +1,4 @@
-import type { InspectedDerivedRoleKind } from "./InspectedDerivedRoleKind";
+import type { InspectedDerivedRoleKind } from "./InspectedDerivedRoleKind.js";
 
 /**
  * Details of a {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles | derived role} referenced by a policy.

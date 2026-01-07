@@ -1,4 +1,4 @@
-import type { SourceAttributes } from "./SourceAttributes";
+import type { SourceAttributes } from "./SourceAttributes.js";
 
 /**
  * Metadata describing a policy.

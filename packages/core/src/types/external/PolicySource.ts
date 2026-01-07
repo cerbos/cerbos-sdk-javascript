@@ -1,6 +1,6 @@
-import type { DatabaseDriver } from "./DatabaseDriver";
-import type { EmbeddedBundle } from "./EmbeddedBundle";
-import type { LocalBundle } from "./LocalBundle";
+import type { DatabaseDriver } from "./DatabaseDriver.js";
+import type { EmbeddedBundle } from "./EmbeddedBundle.js";
+import type { LocalBundle } from "./LocalBundle.js";
 
 /**
  * Source of policies.

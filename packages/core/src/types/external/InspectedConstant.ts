@@ -1,5 +1,5 @@
-import type { InspectedConstantKind } from "./InspectedConstantKind";
-import type { Value } from "./Value";
+import type { InspectedConstantKind } from "./InspectedConstantKind.js";
+import type { Value } from "./Value.js";
 
 /**
  * Details of a {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#constants | constant} referenced by a policy.

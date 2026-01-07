@@ -19,6 +19,7 @@ plugins:
       - env=both
       - esModuleInterop=true
       - forceLong=bigint
+      - importSuffix=.js
       - oneof=unions
       - onlyTypes=false
       - outputEncodeMethods=true
@@ -34,3 +35,4 @@ plugins:
       - cerbos.cloud.store.v1.CerbosStoreService
     opt:
       - target=ts
+      - import_extension=js

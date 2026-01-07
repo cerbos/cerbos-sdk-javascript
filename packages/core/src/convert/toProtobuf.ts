@@ -104,7 +104,7 @@ import type {
   SchemaRefs,
   Value,
   Variables,
-} from "../types/external";
+} from "../types/external.js";
 import {
   Effect,
   SchemaDefinition,
@@ -123,7 +123,7 @@ import {
   policyIsPrincipalPolicy,
   policyIsResourcePolicy,
   policyIsRolePolicy,
-} from "../types/external";
+} from "../types/external.js";
 
 const encoder = new TextEncoder();
 

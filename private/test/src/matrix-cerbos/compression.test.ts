@@ -6,8 +6,8 @@ import { beforeAll, beforeEach, expect, it } from "vitest";
 
 import { Compression, GRPC } from "@cerbos/grpc";
 
-import { describeIfVersionIsAtLeast } from "../helpers";
-import { cerbosVersion, ports as serverPorts } from "../servers";
+import { describeIfVersionIsAtLeast } from "../helpers.js";
+import { cerbosVersion, ports as serverPorts } from "../servers.js";
 
 describeIfVersionIsAtLeast("0.19.0", cerbosVersion)(
   "gRPC message compression",

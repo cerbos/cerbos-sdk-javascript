@@ -16,6 +16,14 @@ export const eslintConfig = defineConfig(
     },
   },
   {
+    files: ["**/*.cjs"],
+    languageOptions: {
+      globals: {
+        require: true,
+      },
+    },
+  },
+  {
     files: ["private/scripts/**"],
     rules: {
       "no-console": "off",

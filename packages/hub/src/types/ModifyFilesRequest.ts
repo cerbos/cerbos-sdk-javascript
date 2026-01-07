@@ -1,6 +1,6 @@
-import type { ChangeDetails } from "./ChangeDetails";
-import type { FileModificationCondition } from "./FileModificationCondition";
-import type { FileOperation } from "./FileOperation";
+import type { ChangeDetails } from "./ChangeDetails.js";
+import type { FileModificationCondition } from "./FileModificationCondition.js";
+import type { FileOperation } from "./FileOperation.js";
 
 /**
  * Input to {@link StoresClient.modifyFiles}.

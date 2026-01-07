@@ -1,6 +1,6 @@
-import type { OmitFromEach } from "../internal";
+import type { OmitFromEach } from "../internal.js";
 
-import type { Policy } from "./Policy";
+import type { Policy } from "./Policy.js";
 
 /**
  * Input to {@link @cerbos/core#Client.addOrUpdatePolicies}.

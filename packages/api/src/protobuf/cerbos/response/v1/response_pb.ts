@@ -17,31 +17,31 @@ import type {
   DecisionLogEntry,
   DecisionLogEntryJson,
   DecisionLogEntryValid,
-} from "../../audit/v1/audit_pb";
-import { file_cerbos_audit_v1_audit } from "../../audit/v1/audit_pb";
-import type { Effect, EffectJson } from "../../effect/v1/effect_pb";
-import { file_cerbos_effect_v1_effect } from "../../effect/v1/effect_pb";
+} from "../../audit/v1/audit_pb.js";
+import { file_cerbos_audit_v1_audit } from "../../audit/v1/audit_pb.js";
+import type { Effect, EffectJson } from "../../effect/v1/effect_pb.js";
+import { file_cerbos_effect_v1_effect } from "../../effect/v1/effect_pb.js";
 import type {
   OutputEntry,
   OutputEntryJson,
   PlanResourcesFilter,
   PlanResourcesFilterJson,
-} from "../../engine/v1/engine_pb";
-import { file_cerbos_engine_v1_engine } from "../../engine/v1/engine_pb";
+} from "../../engine/v1/engine_pb.js";
+import { file_cerbos_engine_v1_engine } from "../../engine/v1/engine_pb.js";
 import type {
   Policy,
   PolicyJson,
   PolicyValid,
-} from "../../policy/v1/policy_pb";
-import { file_cerbos_policy_v1_policy } from "../../policy/v1/policy_pb";
+} from "../../policy/v1/policy_pb.js";
+import { file_cerbos_policy_v1_policy } from "../../policy/v1/policy_pb.js";
 import type {
   Schema,
   SchemaJson,
   SchemaValid,
   ValidationError,
   ValidationErrorJson,
-} from "../../schema/v1/schema_pb";
-import { file_cerbos_schema_v1_schema } from "../../schema/v1/schema_pb";
+} from "../../schema/v1/schema_pb.js";
+import { file_cerbos_schema_v1_schema } from "../../schema/v1/schema_pb.js";
 import type {
   Empty,
   EmptyJson,
@@ -52,7 +52,7 @@ import {
   file_google_protobuf_empty,
   file_google_protobuf_struct,
 } from "@bufbuild/protobuf/wkt";
-import { file_protoc_gen_openapiv2_options_annotations } from "../../../protoc-gen-openapiv2/options/annotations_pb";
+import { file_protoc_gen_openapiv2_options_annotations } from "../../../protoc-gen-openapiv2/options/annotations_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**

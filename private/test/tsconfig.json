@@ -13,6 +13,7 @@
     { "path": "../../packages/react" }
   ],
   "compilerOptions": {
+    "checkJs": true,
     "jsx": "react-jsx",
     "lib": ["ES2022", "ES2024.Promise", "DOM"],
     "outDir": "lib",

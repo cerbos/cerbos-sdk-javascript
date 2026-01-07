@@ -4,7 +4,7 @@ import { afterEach, beforeAll, describe, expect, it, vitest } from "vitest";
 import { NotOK, Status } from "@cerbos/core";
 import type { ListFilesResponse } from "@cerbos/hub";
 
-import { Server } from "./server";
+import { Server } from "./server.js";
 
 describe("repeated failures", () => {
   const server = new Server();

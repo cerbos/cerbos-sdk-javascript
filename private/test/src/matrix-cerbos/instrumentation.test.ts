@@ -1,14 +1,14 @@
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
 
-import { testInstrumentation } from "../client/instrumentation";
-import type { CerbosPorts, Ports } from "../servers";
+import { testInstrumentation } from "../client/instrumentation.js";
+import type { CerbosPorts, Ports } from "../servers.js";
 import {
   adminCredentials,
   cerbosVersion,
   tls,
   versionIsAtLeast,
-} from "../servers";
+} from "../servers.js";
 
 function cerbosPorts(ports: Ports): CerbosPorts {
   return versionIsAtLeast("0.30.0", cerbosVersion) &&

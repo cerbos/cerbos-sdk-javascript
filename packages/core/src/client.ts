@@ -29,7 +29,7 @@ import {
   listSchemasResponseFromProtobuf,
   planResourcesResponseFromProtobuf,
   serverInfoFromProtobuf,
-} from "./convert/fromProtobuf";
+} from "./convert/fromProtobuf.js";
 import {
   addOrUpdatePoliciesRequestToProtobuf,
   addOrUpdateSchemasRequestToProtobuf,
@@ -46,10 +46,10 @@ import {
   listPoliciesRequestToProtobuf,
   planResourcesRequestToProtobuf,
   reloadStoreRequestToProtobuf,
-} from "./convert/toProtobuf";
-import { NotOK, ValidationFailed } from "./errors";
-import type { Transport } from "./transport";
-import { AbortHandler, instrument } from "./transport";
+} from "./convert/toProtobuf.js";
+import { NotOK, ValidationFailed } from "./errors.js";
+import type { Transport } from "./transport.js";
+import { AbortHandler, instrument } from "./transport.js";
 import type {
   AccessLogEntry,
   AddOrUpdatePoliciesRequest,
@@ -90,8 +90,8 @@ import type {
   ServerInfo,
   ValidationError,
   ValidationFailedCallback,
-} from "./types/external";
-import { Service, ServiceStatus, Status } from "./types/external";
+} from "./types/external.js";
+import { Service, ServiceStatus, Status } from "./types/external.js";
 
 /**
  * HTTP headers from which to construct a {@link https://developer.mozilla.org/en-US/docs/Web/API/Headers | `Headers`} object.

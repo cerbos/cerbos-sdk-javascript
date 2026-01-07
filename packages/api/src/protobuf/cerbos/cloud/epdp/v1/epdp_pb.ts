@@ -9,8 +9,8 @@ import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type {
   SourceAttributes,
   SourceAttributesJson,
-} from "../../../policy/v1/policy_pb";
-import { file_cerbos_policy_v1_policy } from "../../../policy/v1/policy_pb";
+} from "../../../policy/v1/policy_pb.js";
+import { file_cerbos_policy_v1_policy } from "../../../policy/v1/policy_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**

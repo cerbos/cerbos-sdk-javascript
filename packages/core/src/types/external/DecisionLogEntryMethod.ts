@@ -1,7 +1,7 @@
-import type { CheckInput } from "./CheckInput";
-import type { CheckOutput } from "./CheckOutput";
-import type { PlanResourcesInput } from "./PlanResourcesInput";
-import type { PlanResourcesOutput } from "./PlanResourcesOutput";
+import type { CheckInput } from "./CheckInput.js";
+import type { CheckOutput } from "./CheckOutput.js";
+import type { PlanResourcesInput } from "./PlanResourcesInput.js";
+import type { PlanResourcesOutput } from "./PlanResourcesOutput.js";
 
 /**
  * The outcome of a decision made by the policy decision point server.

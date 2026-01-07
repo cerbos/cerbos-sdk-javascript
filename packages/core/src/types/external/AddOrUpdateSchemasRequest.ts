@@ -1,4 +1,4 @@
-import type { SchemaInput } from "./SchemaInput";
+import type { SchemaInput } from "./SchemaInput.js";
 
 /**
  * Input to {@link @cerbos/core#Client.addOrUpdateSchemas}.

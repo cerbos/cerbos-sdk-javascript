@@ -17,9 +17,9 @@ import {
   type ServiceError,
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { Duration } from "../../../google/protobuf/duration";
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { TracesData } from "../../../opentelemetry/proto/trace/v1/trace";
+import { Duration } from "../../../google/protobuf/duration.js";
+import { Timestamp } from "../../../google/protobuf/timestamp.js";
+import { TracesData } from "../../../opentelemetry/proto/trace/v1/trace.js";
 
 export const protobufPackage = "jaeger.api_v3";
 

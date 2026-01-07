@@ -1,4 +1,4 @@
-import type { JWT } from "./JWT";
+import type { JWT } from "./JWT.js";
 
 /**
  * Auxiliary data sources that can be referenced in policy conditions.

@@ -1,4 +1,4 @@
-import type { CheckResourcesResultMetadataEffect } from "./CheckResourcesResultMetadataEffect";
+import type { CheckResourcesResultMetadataEffect } from "./CheckResourcesResultMetadataEffect.js";
 
 /**
  * Additional information about how policy decisions were reached.

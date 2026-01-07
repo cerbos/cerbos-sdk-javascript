@@ -3,16 +3,16 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { Duration } from "../../../google/protobuf/duration";
-import { Value } from "../../../google/protobuf/struct";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Duration } from "../../../google/protobuf/duration.js";
+import { Value } from "../../../google/protobuf/struct.js";
+import { Timestamp } from "../../../google/protobuf/timestamp.js";
 import {
   PlanResourcesInput_Resource,
   Principal,
   Resource,
-} from "../../engine/v1/engine";
-import { Policy } from "../../policy/v1/policy";
-import { Schema } from "../../schema/v1/schema";
+} from "../../engine/v1/engine.js";
+import { Policy } from "../../policy/v1/policy.js";
+import { Schema } from "../../schema/v1/schema.js";
 
 export const protobufPackage = "cerbos.request.v1";
 

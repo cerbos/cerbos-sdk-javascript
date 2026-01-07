@@ -1,6 +1,6 @@
-import type { DecodedAuxData } from "./DecodedAuxData";
-import type { Principal } from "./Principal";
-import type { ResourceQuery } from "./ResourceQuery";
+import type { DecodedAuxData } from "./DecodedAuxData.js";
+import type { Principal } from "./Principal.js";
+import type { ResourceQuery } from "./ResourceQuery.js";
 
 /**
  * Input to a `PlanResources` invocation.

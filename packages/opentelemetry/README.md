@@ -27,6 +27,10 @@ registerInstrumentations({
 });
 ```
 
+## CommonJS support
+
+This package is ESM-only, but may be `require`d from CommonJS modules in Node.js versions 20.19.5+, 22.15+, and 24+.
+
 ## Further reading
 
 - [API reference](../../docs/opentelemetry.md)

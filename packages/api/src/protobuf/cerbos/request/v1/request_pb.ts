@@ -10,7 +10,7 @@ import type {
   GenMessage,
 } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import { file_buf_validate_validate } from "../../../buf/validate/validate_pb";
+import { file_buf_validate_validate } from "../../../buf/validate/validate_pb.js";
 import type {
   PlanResourcesInput_Resource,
   PlanResourcesInput_ResourceJson,
@@ -21,21 +21,21 @@ import type {
   Resource,
   ResourceJson,
   ResourceValid,
-} from "../../engine/v1/engine_pb";
-import { file_cerbos_engine_v1_engine } from "../../engine/v1/engine_pb";
+} from "../../engine/v1/engine_pb.js";
+import { file_cerbos_engine_v1_engine } from "../../engine/v1/engine_pb.js";
 import type {
   Policy,
   PolicyJson,
   PolicyValid,
-} from "../../policy/v1/policy_pb";
-import { file_cerbos_policy_v1_policy } from "../../policy/v1/policy_pb";
+} from "../../policy/v1/policy_pb.js";
+import { file_cerbos_policy_v1_policy } from "../../policy/v1/policy_pb.js";
 import type {
   Schema,
   SchemaJson,
   SchemaValid,
-} from "../../schema/v1/schema_pb";
-import { file_cerbos_schema_v1_schema } from "../../schema/v1/schema_pb";
-import { file_google_api_field_behavior } from "../../../google/api/field_behavior_pb";
+} from "../../schema/v1/schema_pb.js";
+import { file_cerbos_schema_v1_schema } from "../../schema/v1/schema_pb.js";
+import { file_google_api_field_behavior } from "../../../google/api/field_behavior_pb.js";
 import type {
   Duration,
   DurationJson,
@@ -49,7 +49,7 @@ import {
   file_google_protobuf_struct,
   file_google_protobuf_timestamp,
 } from "@bufbuild/protobuf/wkt";
-import { file_protoc_gen_openapiv2_options_annotations } from "../../../protoc-gen-openapiv2/options/annotations_pb";
+import { file_protoc_gen_openapiv2_options_annotations } from "../../../protoc-gen-openapiv2/options/annotations_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**

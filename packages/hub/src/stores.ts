@@ -1,21 +1,21 @@
 import type { RequestOptions } from "@cerbos/core";
 
-import type { Client, ClientOptions } from "./client";
-import { callOptions, createClient } from "./client";
+import type { Client, ClientOptions } from "./client.js";
+import { callOptions, createClient } from "./client.js";
 import {
   getFilesResponseFromProto,
   listFilesResponseFromProto,
   modifyFilesResponseFromProto,
   replaceFilesResponseFromProto,
-} from "./convert/fromProtobuf";
+} from "./convert/fromProtobuf.js";
 import {
   getFilesRequestToProto,
   listFilesRequestToProto,
   modifyFilesRequestToProto,
   replaceFilesRequestToProto,
-} from "./convert/toProtobuf";
-import { OperationDiscarded } from "./errors/external";
-import { CerbosStoreService } from "./protobuf/cerbos/cloud/store/v1/store_pb";
+} from "./convert/toProtobuf.js";
+import { OperationDiscarded } from "./errors/external.js";
+import { CerbosStoreService } from "./protobuf/cerbos/cloud/store/v1/store_pb.js";
 import type {
   GetFilesRequest,
   GetFilesResponse,
@@ -25,7 +25,7 @@ import type {
   ModifyFilesResponse,
   ReplaceFilesRequest,
   ReplaceFilesResponse,
-} from "./types";
+} from "./types.js";
 
 /**
  * A client for interacting with policy stores in Cerbos Hub.

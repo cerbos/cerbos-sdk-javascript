@@ -3,9 +3,9 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { Value } from "../../../google/protobuf/struct";
-import { Effect, effectToJSON } from "../../effect/v1/effect";
-import { ValidationError } from "../../schema/v1/schema";
+import { Value } from "../../../google/protobuf/struct.js";
+import { Effect, effectToJSON } from "../../effect/v1/effect.js";
+import { ValidationError } from "../../schema/v1/schema.js";
 
 export const protobufPackage = "cerbos.engine.v1";
 

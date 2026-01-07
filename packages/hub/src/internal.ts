@@ -1,2 +1,2 @@
-export type { Client } from "./client";
-export { createClient } from "./client";
+export type { Client } from "./client.js";
+export { createClient } from "./client.js";

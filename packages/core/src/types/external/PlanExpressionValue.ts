@@ -1,4 +1,4 @@
-import type { Value } from "./Value";
+import type { Value } from "./Value.js";
 
 /**
  * An abstract syntax tree node representing a constant value.

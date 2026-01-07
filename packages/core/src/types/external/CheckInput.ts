@@ -1,6 +1,6 @@
-import type { DecodedAuxData } from "./DecodedAuxData";
-import type { Principal } from "./Principal";
-import type { Resource } from "./Resource";
+import type { DecodedAuxData } from "./DecodedAuxData.js";
+import type { Principal } from "./Principal.js";
+import type { Resource } from "./Resource.js";
 
 /**
  * Input to a `CheckResources` decision.

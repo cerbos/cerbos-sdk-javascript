@@ -1,7 +1,7 @@
-import type { AuditTrail } from "./AuditTrail";
-import type { DecisionLogEntryMethod } from "./DecisionLogEntryMethod";
-import type { Peer } from "./Peer";
-import type { PolicySource } from "./PolicySource";
+import type { AuditTrail } from "./AuditTrail.js";
+import type { DecisionLogEntryMethod } from "./DecisionLogEntryMethod.js";
+import type { Peer } from "./Peer.js";
+import type { PolicySource } from "./PolicySource.js";
 
 /**
  * A decision log entry in the policy decision point's audit log.

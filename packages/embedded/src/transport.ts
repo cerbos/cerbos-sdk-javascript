@@ -13,7 +13,7 @@ import { NotOK, Status } from "@cerbos/core";
 import type { Transport as CoreTransport } from "@cerbos/core/~internal";
 import { methodName } from "@cerbos/core/~internal";
 
-import type { Bundle } from "./bundle";
+import type { Bundle } from "./bundle.js";
 
 export class Transport implements CoreTransport {
   public constructor(private readonly bundle: () => Promise<Bundle>) {}

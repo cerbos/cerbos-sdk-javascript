@@ -1,6 +1,8 @@
+import { readFile } from "fs/promises";
 import { resolve } from "path";
 import { hrtime } from "process";
 import { setTimeout } from "timers/promises";
+import { fileURLToPath } from "url";
 
 import type { ServiceError } from "@grpc/grpc-js";
 import { Metadata } from "@grpc/grpc-js";
@@ -22,12 +24,12 @@ import type { Client, DecisionLogEntry } from "@cerbos/core";
 import { CheckResourcesResult } from "@cerbos/core";
 import type { BundleMetadata } from "@cerbos/embedded";
 
-import type { QueryServiceClient } from "./protobuf/jaeger/proto/api_v3/query_service";
+import type { QueryServiceClient } from "./protobuf/jaeger/proto/api_v3/query_service.js";
 import type {
   Span as SpanProto,
   TracesData,
-} from "./protobuf/opentelemetry/proto/trace/v1/trace";
-import { versionIsAtLeast } from "./servers";
+} from "./protobuf/opentelemetry/proto/trace/v1/trace.js";
+import { versionIsAtLeast } from "./servers.js";
 
 const { version: embeddedV1SdkVersion } =
   require("../../../packages/embedded/package.json") as { version: string };
@@ -355,3 +357,9 @@ export const newEmbeddedBundle = embeddedBundle(
     },
   },
 );
+
+export async function readEmbeddedServerWASM(): Promise<Buffer> {
+  return await readFile(
+    fileURLToPath(import.meta.resolve("@cerbos/embedded-server/server.wasm")),
+  );
+}

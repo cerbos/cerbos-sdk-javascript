@@ -4,8 +4,8 @@ import type { AuxDataValid as EngineAuxData } from "@cerbos/api/cerbos/engine/v1
 import type { DecodedAuxData } from "@cerbos/core";
 import { valuesToProtobuf } from "@cerbos/core/~internal";
 
-import type { Options } from "../options";
-import { SchemaEnforcement } from "../options";
+import type { Options } from "../options.js";
+import { SchemaEnforcement } from "../options.js";
 
 export function configToProtobuf({
   defaultPolicyVersion = "",

@@ -14,8 +14,8 @@ import {
   messageDesc,
   serviceDesc,
 } from "@bufbuild/protobuf/codegenv2";
-import { file_buf_validate_validate } from "../../../../buf/validate/validate_pb";
-import { file_google_api_visibility } from "../../../../google/api/visibility_pb";
+import { file_buf_validate_validate } from "../../../../buf/validate/validate_pb.js";
+import { file_google_api_visibility } from "../../../../google/api/visibility_pb.js";
 import type { Timestamp, Value } from "@bufbuild/protobuf/wkt";
 import {
   file_google_protobuf_struct,

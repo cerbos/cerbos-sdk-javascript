@@ -37,20 +37,20 @@ import { Server as EmbeddedServer, metadata } from "@cerbos/embedded-server";
 import {
   configToProtobuf,
   decodedAuxDataToProtobuf,
-} from "./convert/toProtobuf";
-import type { Deferred } from "./defer";
-import { defer } from "./defer";
-import { createUserAgent } from "./fetch";
-import { PolicyLoader } from "./loader";
-import { DecisionLogger } from "./logger";
+} from "./convert/toProtobuf.js";
+import type { Deferred } from "./defer.js";
+import { defer } from "./defer.js";
+import { createUserAgent } from "./fetch.js";
+import { PolicyLoader } from "./loader.js";
+import { DecisionLogger } from "./logger.js";
 import type {
   DecodeJWTPayload,
   Options,
   PolicyLoaderOptions,
   PolicySource,
   WasmSource,
-} from "./options";
-import { load } from "./wasm";
+} from "./options.js";
+import { load } from "./wasm.js";
 
 const servingServices: ReadonlySet<string> = new Set([
   cerbos.typeName,

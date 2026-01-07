@@ -3,9 +3,9 @@ import type { ConnectError } from "@connectrpc/connect";
 import { NotOK } from "@cerbos/core";
 import { setErrorNameAndStack } from "@cerbos/core/~internal";
 
-import type { FileError } from "../types";
+import type { FileError } from "../types.js";
 
-import { notOKParams } from "./internal";
+import { notOKParams } from "./internal.js";
 
 /**
  * Error thrown when attempting to modify a store that is connected to a Git repository.

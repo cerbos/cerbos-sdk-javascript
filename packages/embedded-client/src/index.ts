@@ -4,6 +4,6 @@
  * @packageDocumentation
  */
 
-export * from "./client";
-export * from "./loader";
-export * from "./options";
+export * from "./client.js";
+export * from "./loader.js";
+export * from "./options.js";

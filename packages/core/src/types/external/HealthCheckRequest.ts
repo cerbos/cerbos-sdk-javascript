@@ -1,4 +1,4 @@
-import type { Service } from "./Service";
+import type { Service } from "./Service.js";
 
 /**
  * Input to {@link @cerbos/core#Client.checkHealth}.

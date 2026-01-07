@@ -1,5 +1,9 @@
 unreleased:
-  type: patch
+  type: minor
+
+  changed:
+    - summary: Convert package to ESM
+      pull: 1330
 
 releases:
   - version: 0.2.7

@@ -45,15 +45,15 @@ import {
   grpcUserAgent,
   httpUserAgent,
   retry,
-} from "../helpers";
-import type { CerbosService, Ports } from "../servers";
+} from "../helpers.js";
+import type { CerbosService, Ports } from "../servers.js";
 import {
   adminCredentials,
   cerbosVersion,
   ports as serverPorts,
   tls,
   versionIsAtLeast,
-} from "../servers";
+} from "../servers.js";
 
 const policiesDirectory = resolve(__dirname, "../../servers/policies");
 

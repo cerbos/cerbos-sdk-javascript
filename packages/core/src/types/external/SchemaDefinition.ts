@@ -1,4 +1,4 @@
-import { isObject } from "../../internal";
+import { isObject } from "../../internal.js";
 
 const utf8Decoder = new TextDecoder("utf-8", { fatal: true });
 

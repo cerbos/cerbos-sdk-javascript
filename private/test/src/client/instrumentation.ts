@@ -29,17 +29,17 @@ import {
   fetchSpans,
   getDecisionLogEntry,
   invalidArgumentDetails,
-} from "../helpers";
-import { QueryServiceClient } from "../protobuf/jaeger/proto/api_v3/query_service";
-import type { KeyValue as KeyValueProto } from "../protobuf/opentelemetry/proto/common/v1/common";
-import type { Span as SpanProto } from "../protobuf/opentelemetry/proto/trace/v1/trace";
-import { Span_SpanKind as SpanKindProto } from "../protobuf/opentelemetry/proto/trace/v1/trace";
-import type { Ports } from "../servers";
+} from "../helpers.js";
+import { QueryServiceClient } from "../protobuf/jaeger/proto/api_v3/query_service.js";
+import type { KeyValue as KeyValueProto } from "../protobuf/opentelemetry/proto/common/v1/common.js";
+import type { Span as SpanProto } from "../protobuf/opentelemetry/proto/trace/v1/trace.js";
+import { Span_SpanKind as SpanKindProto } from "../protobuf/opentelemetry/proto/trace/v1/trace.js";
+import type { Ports } from "../servers.js";
 import {
   cerbosVersion as defaultCerbosVersion,
   ports as serverPorts,
   versionIsAtLeast,
-} from "../servers";
+} from "../servers.js";
 
 export type InstrumentationTestCase = {
   type: string;

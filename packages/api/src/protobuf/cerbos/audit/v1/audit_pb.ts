@@ -23,13 +23,13 @@ import type {
   PlanResourcesOutput,
   PlanResourcesOutputJson,
   PlanResourcesOutputValid,
-} from "../../engine/v1/engine_pb";
-import { file_cerbos_engine_v1_engine } from "../../engine/v1/engine_pb";
+} from "../../engine/v1/engine_pb.js";
+import { file_cerbos_engine_v1_engine } from "../../engine/v1/engine_pb.js";
 import type {
   SourceAttributes,
   SourceAttributesJson,
-} from "../../policy/v1/policy_pb";
-import { file_cerbos_policy_v1_policy } from "../../policy/v1/policy_pb";
+} from "../../policy/v1/policy_pb.js";
+import { file_cerbos_policy_v1_policy } from "../../policy/v1/policy_pb.js";
 import type { Timestamp, TimestampJson } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";

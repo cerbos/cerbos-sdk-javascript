@@ -3,7 +3,7 @@ import { Readable } from "stream";
 
 import { describe, expect, it } from "vitest";
 
-import { eachLine } from "../../../../packages/http/src/transport";
+import { eachLine } from "../../../../packages/http/src/transport.js";
 
 describe("eachLine", () => {
   const lines = [
