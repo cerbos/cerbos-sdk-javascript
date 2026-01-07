@@ -33,7 +33,7 @@ import {
   requireField,
 } from "@cerbos/core/~internal";
 
-import type { Options } from "./options";
+import type { Options } from "./options.js";
 
 export class DecisionLogger {
   private readonly ulid: ULIDFactory;

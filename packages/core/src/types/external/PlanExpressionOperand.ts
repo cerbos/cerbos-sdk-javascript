@@ -1,6 +1,6 @@
-import type { PlanExpression } from "./PlanExpression";
-import type { PlanExpressionValue } from "./PlanExpressionValue";
-import type { PlanExpressionVariable } from "./PlanExpressionVariable";
+import type { PlanExpression } from "./PlanExpression.js";
+import type { PlanExpressionValue } from "./PlanExpressionValue.js";
+import type { PlanExpressionVariable } from "./PlanExpressionVariable.js";
 
 /**
  * An abstract syntax tree node representing an operand to an expression.

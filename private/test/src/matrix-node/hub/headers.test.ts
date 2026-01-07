@@ -2,7 +2,7 @@ import { afterEach, beforeAll, describe, expect, it } from "vitest";
 
 import type { ListFilesResponse } from "@cerbos/hub";
 
-import { Server } from "./server";
+import { Server } from "./server.js";
 
 const { version } = require("../../../../../packages/hub/package.json") as {
   version: string;

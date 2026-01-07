@@ -3,14 +3,14 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Timestamp } from "../../../google/protobuf/timestamp.js";
 import {
   CheckInput,
   CheckOutput,
   PlanResourcesInput,
   PlanResourcesOutput,
-} from "../../engine/v1/engine";
-import { SourceAttributes } from "../../policy/v1/policy";
+} from "../../engine/v1/engine.js";
+import { SourceAttributes } from "../../policy/v1/policy.js";
 
 export const protobufPackage = "cerbos.audit.v1";
 

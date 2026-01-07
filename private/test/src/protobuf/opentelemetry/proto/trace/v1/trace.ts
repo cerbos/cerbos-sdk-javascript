@@ -3,8 +3,8 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { InstrumentationScope, KeyValue } from "../../common/v1/common";
-import { Resource } from "../../resource/v1/resource";
+import { InstrumentationScope, KeyValue } from "../../common/v1/common.js";
+import { Resource } from "../../resource/v1/resource.js";
 
 export const protobufPackage = "opentelemetry.proto.trace.v1";
 

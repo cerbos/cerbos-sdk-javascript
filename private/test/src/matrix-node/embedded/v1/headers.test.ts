@@ -5,8 +5,8 @@ import { describe } from "vitest";
 import type { DecisionLogEntry } from "@cerbos/core";
 import { Embedded } from "@cerbos/embedded";
 
-import { testHeaders } from "../../../client/headers";
-import { embeddedV1UserAgent, newEmbeddedBundle } from "../../../helpers";
+import { testHeaders } from "../../../client/headers.js";
+import { embeddedV1UserAgent, newEmbeddedBundle } from "../../../helpers.js";
 
 describe("Client", () => {
   const bundle = readFileSync(newEmbeddedBundle.path);

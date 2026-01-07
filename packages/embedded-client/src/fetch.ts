@@ -1,8 +1,8 @@
 import { userAgent } from "@cerbos/core/~internal";
 
-const { version } = require("../package.json") as { version: string };
+import pkg from "../package.json" with { type: "json" };
 
-const defaultUserAgent = `cerbos-sdk-javascript-embedded-client/${version}`;
+const defaultUserAgent = `cerbos-sdk-javascript-embedded-client/${pkg.version}`;
 
 export async function download(
   url: string | URL,

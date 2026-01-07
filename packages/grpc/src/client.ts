@@ -11,11 +11,11 @@ import type { Options as CoreOptions } from "@cerbos/core";
 import { Client } from "@cerbos/core";
 import { userAgent } from "@cerbos/core/~internal";
 
-import { Transport } from "./transport";
+import pkg from "../package.json" with { type: "json" };
 
-const { version } = require("../package.json") as { version: string };
+import { Transport } from "./transport.js";
 
-const defaultUserAgent = `cerbos-sdk-javascript-grpc/${version}`;
+const defaultUserAgent = `cerbos-sdk-javascript-grpc/${pkg.version}`;
 
 /**
  * Options for creating a new {@link GRPC} client.

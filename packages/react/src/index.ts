@@ -3,11 +3,11 @@
  *
  * @packageDocumentation
  */
-export { type CerbosProviderProps, CerbosProvider } from "./cerbos-provider";
-export { useCerbos } from "./use-cerbos";
+export { type CerbosProviderProps, CerbosProvider } from "./cerbos-provider.js";
+export { useCerbos } from "./use-cerbos.js";
 export {
   type AsyncResult,
   useCheckResource,
   useCheckResources,
   useIsAllowed,
-} from "./use-cerbos-request";
+} from "./use-cerbos-request.js";

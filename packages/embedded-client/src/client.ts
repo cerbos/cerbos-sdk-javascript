@@ -1,8 +1,8 @@
 import { Client } from "@cerbos/core";
 
-import type { Options } from "./options";
-import { Server } from "./server";
-import { Transport } from "./transport";
+import type { Options } from "./options.js";
+import { Server } from "./server.js";
+import { Transport } from "./transport.js";
 
 /**
  * A client for interacting with an embedded Cerbos policy decision point.

@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Convert package to ESM ([#1330](https://github.com/cerbos/cerbos-sdk-javascript/pull/1330))
 
 ## [0.2.7] - 2025-12-12
 

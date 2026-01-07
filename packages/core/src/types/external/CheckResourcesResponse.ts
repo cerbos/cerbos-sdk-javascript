@@ -1,6 +1,6 @@
-import type { CheckResourcesResult } from "./CheckResourcesResult";
-import type { ResourceSearch } from "./ResourceSearch";
-import type { ValidationError } from "./ValidationError";
+import type { CheckResourcesResult } from "./CheckResourcesResult.js";
+import type { ResourceSearch } from "./ResourceSearch.js";
+import type { ValidationError } from "./ValidationError.js";
 
 /**
  * The outcome of checking a principal's permissions on a set of resources.

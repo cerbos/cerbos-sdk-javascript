@@ -28,8 +28,8 @@ import type {
 } from "@cerbos/core/~internal";
 import { methodName } from "@cerbos/core/~internal";
 
-import type { CerbosInstrumentation } from "./instrumentation";
-import type { Instruments } from "./instruments";
+import type { CerbosInstrumentation } from "./instrumentation.js";
+import type { Instruments } from "./instruments.js";
 
 export class Transport implements CoreTransport {
   private readonly transport: {

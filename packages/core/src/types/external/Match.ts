@@ -1,7 +1,7 @@
-import type { MatchAll } from "./MatchAll";
-import type { MatchAny } from "./MatchAny";
-import type { MatchExpr } from "./MatchExpr";
-import type { MatchNone } from "./MatchNone";
+import type { MatchAll } from "./MatchAll.js";
+import type { MatchAny } from "./MatchAny.js";
+import type { MatchExpr } from "./MatchExpr.js";
+import type { MatchNone } from "./MatchNone.js";
 
 /**
  * Expressions to evaluate in a condition.

@@ -1,6 +1,6 @@
-import type { Condition } from "./Condition";
-import type { Effect } from "./Effect";
-import type { Output } from "./Output";
+import type { Condition } from "./Condition.js";
+import type { Effect } from "./Effect.js";
+import type { Output } from "./Output.js";
 
 /**
  * A rule for actions that can be performed on a given resource.

@@ -3,13 +3,13 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { Empty } from "../../../google/protobuf/empty";
-import { Value } from "../../../google/protobuf/struct";
-import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit";
-import { Effect, effectToJSON } from "../../effect/v1/effect";
-import { OutputEntry, PlanResourcesFilter } from "../../engine/v1/engine";
-import { Policy } from "../../policy/v1/policy";
-import { Schema, ValidationError } from "../../schema/v1/schema";
+import { Empty } from "../../../google/protobuf/empty.js";
+import { Value } from "../../../google/protobuf/struct.js";
+import { AccessLogEntry, DecisionLogEntry } from "../../audit/v1/audit.js";
+import { Effect, effectToJSON } from "../../effect/v1/effect.js";
+import { OutputEntry, PlanResourcesFilter } from "../../engine/v1/engine.js";
+import { Policy } from "../../policy/v1/policy.js";
+import { Schema, ValidationError } from "../../schema/v1/schema.js";
 
 export const protobufPackage = "cerbos.response.v1";
 

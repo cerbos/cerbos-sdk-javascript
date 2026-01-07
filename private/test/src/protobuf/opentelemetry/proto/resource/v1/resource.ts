@@ -3,7 +3,7 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { KeyValue } from "../../common/v1/common";
+import { KeyValue } from "../../common/v1/common.js";
 
 export const protobufPackage = "opentelemetry.proto.resource.v1";
 

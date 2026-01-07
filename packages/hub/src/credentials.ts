@@ -1,4 +1,4 @@
-import { MissingCredentials } from "./errors/external";
+import { MissingCredentials } from "./errors/external.js";
 
 /**
  * Client credentials to authenticate with Cerbos Hub.

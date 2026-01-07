@@ -35,11 +35,11 @@ import {
   describeIfVersionIsAtLeast,
   invalidArgumentDetails,
   versionDependentCallIdMatcher,
-} from "../helpers";
+} from "../helpers.js";
 import {
   cerbosVersion as defaultCerbosVersion,
   versionIsAtLeast,
-} from "../servers";
+} from "../servers.js";
 
 export interface CerbosServiceClientTestCase {
   type: string;

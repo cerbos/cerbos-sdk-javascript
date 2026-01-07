@@ -1,4 +1,4 @@
-import type { Effect } from "./Effect";
+import type { Effect } from "./Effect.js";
 
 /**
  * The `CheckResources` decision made for an action.

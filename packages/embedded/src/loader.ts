@@ -8,15 +8,15 @@ import type {
 } from "@cerbos/core";
 import { setErrorNameAndStack, userAgent } from "@cerbos/core/~internal";
 
-import { Bundle, download } from "./bundle";
-import { constrainAutoUpdateInterval } from "./interval";
-import { DecisionLogger } from "./logger";
-import { cancelBody } from "./response";
-import { Transport } from "./transport";
+import pkg from "../package.json" with { type: "json" };
 
-const { version } = require("../package.json") as { version: string };
+import { Bundle, download } from "./bundle.js";
+import { constrainAutoUpdateInterval } from "./interval.js";
+import { DecisionLogger } from "./logger.js";
+import { cancelBody } from "./response.js";
+import { Transport } from "./transport.js";
 
-const defaultUserAgent = `cerbos-sdk-javascript-embedded/${version}`;
+const defaultUserAgent = `cerbos-sdk-javascript-embedded/${pkg.version}`;
 
 type LoadResult =
   | {

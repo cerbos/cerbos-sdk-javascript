@@ -1,5 +1,5 @@
-import type { ChangeOrigin } from "./ChangeOrigin";
-import type { Uploader } from "./Uploader";
+import type { ChangeOrigin } from "./ChangeOrigin.js";
+import type { Uploader } from "./Uploader.js";
 
 /**
  * Metadata describing a change that was made to a store.

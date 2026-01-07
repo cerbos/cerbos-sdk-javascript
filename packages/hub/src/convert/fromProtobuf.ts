@@ -7,8 +7,8 @@ import type {
   ListFilesResponseValid,
   ModifyFilesResponseValid,
   ReplaceFilesResponseValid,
-} from "../protobuf/cerbos/cloud/store/v1/store_pb";
-import { FileError_Cause } from "../protobuf/cerbos/cloud/store/v1/store_pb";
+} from "../protobuf/cerbos/cloud/store/v1/store_pb.js";
+import { FileError_Cause } from "../protobuf/cerbos/cloud/store/v1/store_pb.js";
 import type {
   File,
   FileError,
@@ -16,8 +16,8 @@ import type {
   ListFilesResponse,
   ModifyFilesResponse,
   ReplaceFilesResponse,
-} from "../types";
-import { FileErrorCause } from "../types";
+} from "../types.js";
+import { FileErrorCause } from "../types.js";
 
 function fileFromProto({ path, contents }: FileValid): File {
   return {

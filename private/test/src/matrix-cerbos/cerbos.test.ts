@@ -5,10 +5,10 @@ import { beforeAll, describe } from "vitest";
 import { GRPC } from "@cerbos/grpc";
 import { HTTP } from "@cerbos/http";
 
-import type { CerbosServiceClientTestCase } from "../client/cerbos";
-import { testCerbosServiceClient } from "../client/cerbos";
-import type { Ports } from "../servers";
-import { mtls, ports as serverPorts, tls } from "../servers";
+import type { CerbosServiceClientTestCase } from "../client/cerbos.js";
+import { testCerbosServiceClient } from "../client/cerbos.js";
+import type { Ports } from "../servers.js";
+import { mtls, ports as serverPorts, tls } from "../servers.js";
 
 describe("Client", () => {
   let ports: Ports;

@@ -19,8 +19,8 @@ import type {
 } from "@cerbos/core/~internal";
 import { isObject, methodName } from "@cerbos/core/~internal";
 
-import type { RequestInitWithUrl } from "./endpoints";
-import { endpoints } from "./endpoints";
+import type { RequestInitWithUrl } from "./endpoints.js";
+import { endpoints } from "./endpoints.js";
 
 export class Transport implements CoreTransport {
   public constructor(

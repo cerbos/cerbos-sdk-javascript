@@ -1,6 +1,6 @@
-import type { Constants } from "./Constants";
-import type { DerivedRoleDefinition } from "./DerivedRoleDefinition";
-import type { Variables } from "./Variables";
+import type { Constants } from "./Constants.js";
+import type { DerivedRoleDefinition } from "./DerivedRoleDefinition.js";
+import type { Variables } from "./Variables.js";
 
 /**
  * A set of {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles | derived roles}

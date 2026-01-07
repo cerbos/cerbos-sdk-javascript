@@ -24,8 +24,8 @@ import type {
   PlanResourcesRequestSchema,
   ReloadStoreRequestSchema,
   ServerInfoRequestSchema,
-} from "../../request/v1/request_pb";
-import { file_cerbos_request_v1_request } from "../../request/v1/request_pb";
+} from "../../request/v1/request_pb.js";
+import { file_cerbos_request_v1_request } from "../../request/v1/request_pb.js";
 import type {
   AddOrUpdatePolicyResponseSchema,
   AddOrUpdateSchemaResponseSchema,
@@ -44,10 +44,10 @@ import type {
   PlanResourcesResponseSchema,
   ReloadStoreResponseSchema,
   ServerInfoResponseSchema,
-} from "../../response/v1/response_pb";
-import { file_cerbos_response_v1_response } from "../../response/v1/response_pb";
-import { file_google_api_annotations } from "../../../google/api/annotations_pb";
-import { file_protoc_gen_openapiv2_options_annotations } from "../../../protoc-gen-openapiv2/options/annotations_pb";
+} from "../../response/v1/response_pb.js";
+import { file_cerbos_response_v1_response } from "../../response/v1/response_pb.js";
+import { file_google_api_annotations } from "../../../google/api/annotations_pb.js";
+import { file_protoc_gen_openapiv2_options_annotations } from "../../../protoc-gen-openapiv2/options/annotations_pb.js";
 
 /**
  * Describes the file cerbos/svc/v1/svc.proto.

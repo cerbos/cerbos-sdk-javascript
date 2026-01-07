@@ -1,4 +1,4 @@
-import type { InspectedAttributeKind } from "./InspectedAttributeKind";
+import type { InspectedAttributeKind } from "./InspectedAttributeKind.js";
 
 /**
  * Details of an attribute referenced by a policy.

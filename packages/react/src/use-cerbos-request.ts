@@ -11,7 +11,7 @@ import type {
   RequestOptions,
 } from "@cerbos/core";
 
-import { useCerbos } from "./use-cerbos";
+import { useCerbos } from "./use-cerbos.js";
 
 /**
  * The result of calling an async method on a client.

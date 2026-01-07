@@ -182,7 +182,7 @@ import type {
   ValidationError,
   Value,
   Variables,
-} from "../types/external";
+} from "../types/external.js";
 import {
   CheckResourcesResponse,
   CheckResourcesResult,
@@ -200,8 +200,8 @@ import {
   ScopePermissions,
   ServiceStatus,
   ValidationErrorSource,
-} from "../types/external";
-import type { OmitFromEach } from "../types/internal";
+} from "../types/external.js";
+import type { OmitFromEach } from "../types/internal.js";
 
 export function accessLogEntryFromProtobuf({
   entry,

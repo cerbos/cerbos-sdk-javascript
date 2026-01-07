@@ -1,6 +1,6 @@
-import type { AuxData } from "./AuxData";
-import type { Principal } from "./Principal";
-import type { ResourceCheck } from "./ResourceCheck";
+import type { AuxData } from "./AuxData.js";
+import type { Principal } from "./Principal.js";
+import type { ResourceCheck } from "./ResourceCheck.js";
 
 /**
  * Input to {@link @cerbos/core#Client.checkResources}.

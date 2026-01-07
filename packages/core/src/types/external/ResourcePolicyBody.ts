@@ -1,8 +1,8 @@
-import type { Constants } from "./Constants";
-import type { ResourceRule } from "./ResourceRule";
-import type { SchemaRefs } from "./SchemaRefs";
-import type { ScopePermissions } from "./ScopePermissions";
-import type { Variables } from "./Variables";
+import type { Constants } from "./Constants.js";
+import type { ResourceRule } from "./ResourceRule.js";
+import type { SchemaRefs } from "./SchemaRefs.js";
+import type { ScopePermissions } from "./ScopePermissions.js";
+import type { Variables } from "./Variables.js";
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/resource_policies | policy} defining rules for actions that can be performed on a given resource.

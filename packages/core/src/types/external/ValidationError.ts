@@ -1,4 +1,4 @@
-import type { ValidationErrorSource } from "./ValidationErrorSource";
+import type { ValidationErrorSource } from "./ValidationErrorSource.js";
 
 /**
  * An error that occurred while validating the principal or resource attributes against a schema.

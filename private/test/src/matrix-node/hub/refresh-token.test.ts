@@ -2,7 +2,7 @@ import { afterEach, beforeAll, describe, expect, it, vitest } from "vitest";
 
 import type { ListFilesResponse } from "@cerbos/hub";
 
-import { Server } from "./server";
+import { Server } from "./server.js";
 
 describe("access token rotation", () => {
   const server = new Server();

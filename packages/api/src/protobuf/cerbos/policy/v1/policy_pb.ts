@@ -10,9 +10,9 @@ import type {
   GenMessage,
 } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import { file_buf_validate_validate } from "../../../buf/validate/validate_pb";
-import type { Effect, EffectJson } from "../../effect/v1/effect_pb";
-import { file_cerbos_effect_v1_effect } from "../../effect/v1/effect_pb";
+import { file_buf_validate_validate } from "../../../buf/validate/validate_pb.js";
+import type { Effect, EffectJson } from "../../effect/v1/effect_pb.js";
+import { file_cerbos_effect_v1_effect } from "../../effect/v1/effect_pb.js";
 import type { UInt64ValueJson, Value, ValueJson } from "@bufbuild/protobuf/wkt";
 import {
   file_google_protobuf_struct,

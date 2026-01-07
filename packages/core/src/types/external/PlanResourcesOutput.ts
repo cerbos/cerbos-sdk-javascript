@@ -1,6 +1,6 @@
-import type { PlanExpressionOperand } from "./PlanExpressionOperand";
-import { PlanKind } from "./PlanKind";
-import type { ValidationError } from "./ValidationError";
+import type { PlanExpressionOperand } from "./PlanExpressionOperand.js";
+import { PlanKind } from "./PlanKind.js";
+import type { ValidationError } from "./ValidationError.js";
 
 /**
  * Output from a `PlanResources` invocation.

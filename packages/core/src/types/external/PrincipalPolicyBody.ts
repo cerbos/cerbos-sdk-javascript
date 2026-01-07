@@ -1,7 +1,7 @@
-import type { Constants } from "./Constants";
-import type { PrincipalRule } from "./PrincipalRule";
-import type { ScopePermissions } from "./ScopePermissions";
-import type { Variables } from "./Variables";
+import type { Constants } from "./Constants.js";
+import type { PrincipalRule } from "./PrincipalRule.js";
+import type { ScopePermissions } from "./ScopePermissions.js";
+import type { Variables } from "./Variables.js";
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/principal_policies | policy} defining overrides for a specific user.

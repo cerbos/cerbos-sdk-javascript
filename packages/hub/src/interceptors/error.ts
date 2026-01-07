@@ -3,10 +3,10 @@ import CircuitBreaker from "opossum";
 
 import { Status } from "@cerbos/core";
 
-import { errorCode } from "../errors/internal";
+import { errorCode } from "../errors/internal.js";
 
-import type { Handler, Request, Response } from "./interceptor";
-import { createInterceptor } from "./interceptor";
+import type { Handler, Request, Response } from "./interceptor.js";
+import { createInterceptor } from "./interceptor.js";
 
 const circuitBreaker = new CircuitBreaker<[Request, Handler], Response>(
   async (request, next) => await next(request),

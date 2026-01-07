@@ -1,6 +1,6 @@
-import type { CheckOutputActionEffect } from "./CheckOutputActionEffect";
-import type { OutputResult } from "./OutputResult";
-import type { ValidationError } from "./ValidationError";
+import type { CheckOutputActionEffect } from "./CheckOutputActionEffect.js";
+import type { OutputResult } from "./OutputResult.js";
+import type { ValidationError } from "./ValidationError.js";
 
 /**
  * Output from a `CheckResources` decision.

@@ -8,7 +8,7 @@ import type {
 } from "@cerbos/core";
 import type { ClientOptions as HubClientOptions } from "@cerbos/hub";
 
-import type { PolicyLoader } from "./loader";
+import type { PolicyLoader } from "./loader.js";
 
 /**
  * Options for creating a new {@link Embedded} client.

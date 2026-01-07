@@ -12,15 +12,15 @@ import { HTTP } from "@cerbos/http";
 import {
   ListAuditLogEntriesResponse,
   ServerInfoResponse,
-} from "../protobuf/cerbos/response/v1/response";
+} from "../protobuf/cerbos/response/v1/response.js";
 import type {
   CerbosAdminServiceServer as AdminServiceServer,
   CerbosServiceServer,
-} from "../protobuf/cerbos/svc/v1/svc";
+} from "../protobuf/cerbos/svc/v1/svc.js";
 import {
   CerbosAdminServiceService as AdminService,
   CerbosServiceService as CerbosService,
-} from "../protobuf/cerbos/svc/v1/svc";
+} from "../protobuf/cerbos/svc/v1/svc.js";
 
 const dummyUnaryResponse: ServerInfoResponse = {
   version: "test",

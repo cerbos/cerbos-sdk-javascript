@@ -1,4 +1,4 @@
-import type { AuditLogFilter } from "./AuditLogFilter";
+import type { AuditLogFilter } from "./AuditLogFilter.js";
 
 /**
  * Input to {@link @cerbos/core#Client.listAccessLogEntries}.

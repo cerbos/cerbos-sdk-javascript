@@ -18,4 +18,5 @@ plugins:
     out: packages/hub/src/protobuf
     opt:
       - target=ts
+      - import_extension=js
       - valid_types=protovalidate_required

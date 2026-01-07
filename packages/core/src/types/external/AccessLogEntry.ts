@@ -1,6 +1,6 @@
-import type { Peer } from "./Peer";
-import type { PolicySource } from "./PolicySource";
-import type { Status } from "./Status";
+import type { Peer } from "./Peer.js";
+import type { PolicySource } from "./PolicySource.js";
+import type { Status } from "./Status.js";
 
 /**
  * An access log entry in the policy decision point's audit log.

@@ -22,13 +22,13 @@ import { BundleService } from "@cerbos/api/cerbos/cloud/epdp/v2/epdp_pb";
 import type { ClientOptions, Credentials } from "@cerbos/hub";
 import { StoresClient } from "@cerbos/hub";
 
-import type { IssueAccessTokenResponseSchema } from "../../protobuf/cerbos/cloud/apikey/v1/apikey_pb";
-import { ApiKeyService } from "../../protobuf/cerbos/cloud/apikey/v1/apikey_pb";
+import type { IssueAccessTokenResponseSchema } from "../../protobuf/cerbos/cloud/apikey/v1/apikey_pb.js";
+import { ApiKeyService } from "../../protobuf/cerbos/cloud/apikey/v1/apikey_pb.js";
 import type {
   ListFilesRequestSchema,
   ListFilesResponseSchema,
-} from "../../protobuf/cerbos/cloud/store/v1/store_pb";
-import { CerbosStoreService } from "../../protobuf/cerbos/cloud/store/v1/store_pb";
+} from "../../protobuf/cerbos/cloud/store/v1/store_pb.js";
+import { CerbosStoreService } from "../../protobuf/cerbos/cloud/store/v1/store_pb.js";
 
 interface Expectation<I extends DescMessage, O extends DescMessage> {
   headers: Record<string, string | null>;

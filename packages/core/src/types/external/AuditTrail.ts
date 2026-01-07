@@ -1,4 +1,4 @@
-import type { SourceAttributes } from "./SourceAttributes";
+import type { SourceAttributes } from "./SourceAttributes.js";
 
 /**
  * Details about how a policy decision was reached.

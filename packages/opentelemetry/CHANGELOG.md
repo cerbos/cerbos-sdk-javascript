@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Convert package to ESM ([#1330](https://github.com/cerbos/cerbos-sdk-javascript/pull/1330))
+
 - Bump dependency on [@bufbuild/protobuf] to 2.10.2 ([#1320](https://github.com/cerbos/cerbos-sdk-javascript/pull/1320))
 
 ## [0.7.3] - 2025-12-12

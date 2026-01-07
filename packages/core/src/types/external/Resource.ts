@@ -1,4 +1,4 @@
-import type { Value } from "./Value";
+import type { Value } from "./Value.js";
 
 /**
  * A resource on which to check a principal's permissions.

@@ -5,8 +5,8 @@ import { UnsecuredJWT } from "jose";
 import type { DecodedJWTPayload } from "@cerbos/embedded";
 import { Embedded } from "@cerbos/embedded";
 
-import { testInstrumentation } from "../../../client/instrumentation";
-import { newEmbeddedBundle, oldEmbeddedBundle } from "../../../helpers";
+import { testInstrumentation } from "../../../client/instrumentation.js";
+import { newEmbeddedBundle, oldEmbeddedBundle } from "../../../helpers.js";
 
 testInstrumentation(
   {

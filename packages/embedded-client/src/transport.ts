@@ -20,7 +20,7 @@ import { NotOK, Status } from "@cerbos/core";
 import type { Transport as CoreTransport } from "@cerbos/core/~internal";
 import { methodName } from "@cerbos/core/~internal";
 
-import type { Server } from "./server";
+import type { Server } from "./server.js";
 
 export class Transport implements CoreTransport {
   private readonly validator = createValidator({ failFast: true });

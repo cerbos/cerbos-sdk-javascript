@@ -17,13 +17,13 @@ import {
 import type { DecodedJWTPayload, Options } from "@cerbos/embedded";
 import { Embedded } from "@cerbos/embedded";
 
-import type { EmbeddedBundle } from "../../../helpers";
+import type { EmbeddedBundle } from "../../../helpers.js";
 import {
   callIdMatcher,
   embeddedV1UserAgent,
   newEmbeddedBundle,
   oldEmbeddedBundle,
-} from "../../../helpers";
+} from "../../../helpers.js";
 
 describe("Embedded", () => {
   describe.each<{

@@ -1,7 +1,7 @@
 import { Client } from "@cerbos/core";
 
-import type { Options, Source } from "./loader";
-import { Loader } from "./loader";
+import type { Options, Source } from "./loader.js";
+import { Loader } from "./loader.js";
 
 /**
  * A client for interacting with an embedded Cerbos policy decision point (PDP).

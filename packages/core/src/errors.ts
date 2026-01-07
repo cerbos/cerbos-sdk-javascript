@@ -1,6 +1,6 @@
-import { setErrorNameAndStack } from "./internal";
-import type { ValidationError } from "./types/external";
-import { Status } from "./types/external";
+import { setErrorNameAndStack } from "./internal.js";
+import type { ValidationError } from "./types/external.js";
+import { Status } from "./types/external.js";
 
 /**
  * Options for creating an error.

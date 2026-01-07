@@ -5,15 +5,15 @@ import type { ClientWithPrincipal } from "@cerbos/core";
 import {
   CerbosContext,
   CerbosProvider, // eslint-disable-line @typescript-eslint/no-unused-vars -- used for docs link
-} from "./cerbos-provider";
+} from "./cerbos-provider.js";
 import type {
   AsyncResult, // eslint-disable-line @typescript-eslint/no-unused-vars -- used for docs link
-} from "./use-cerbos-request";
+} from "./use-cerbos-request.js";
 import {
   useCheckResource, // eslint-disable-line @typescript-eslint/no-unused-vars -- used for docs link
   useCheckResources, // eslint-disable-line @typescript-eslint/no-unused-vars -- used for docs link
   useIsAllowed, // eslint-disable-line @typescript-eslint/no-unused-vars -- used for docs links
-} from "./use-cerbos-request";
+} from "./use-cerbos-request.js";
 
 /**
  * A hook to access the Cerbos client passed down by the {@link CerbosProvider}.

@@ -23,7 +23,7 @@ import { NotOK, Status } from "@cerbos/core";
 import { PolicyLoader } from "@cerbos/embedded-client";
 import type { Server as EmbeddedServer } from "@cerbos/embedded-server";
 
-import { Server as HubServer } from "../../hub/server";
+import { Server as HubServer } from "../../hub/server.js";
 
 type BundleMetadata = Omit<BundleMetadataMessage, keyof Message>;
 type Bundle = Omit<BundleMessage, keyof Message | "metadata"> & {

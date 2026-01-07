@@ -16,7 +16,7 @@ import {
   requireField,
 } from "@cerbos/core/~internal";
 
-import type { BundleMetadata, Options } from "./loader";
+import type { BundleMetadata, Options } from "./loader.js";
 
 export class DecisionLogger {
   private readonly ulid: ULIDFactory;

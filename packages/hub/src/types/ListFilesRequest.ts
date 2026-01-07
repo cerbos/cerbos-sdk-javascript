@@ -1,4 +1,4 @@
-import type { FileFilter } from "./FileFilter";
+import type { FileFilter } from "./FileFilter.js";
 
 /**
  * Input to {@link StoresClient.listFiles}.

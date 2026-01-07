@@ -10,15 +10,15 @@ import type { CallOptions, Interceptor, Transport } from "@connectrpc/connect";
 import { makeAnyClient } from "@connectrpc/connect";
 
 import type { Options, RequestOptions } from "@cerbos/core";
+import { createTransport } from "@cerbos/hub/~internal/transport";
 
-import type { Credentials } from "./credentials";
-import { createNotOK } from "./errors/internal";
-import { createAuthInterceptor } from "./interceptors/auth";
-import { errorInterceptor } from "./interceptors/error";
-import { createHeadersInterceptor } from "./interceptors/headers";
-import { validationInterceptor } from "./interceptors/validation";
-import type { MessageInitShape } from "./protobuf";
-import { createTransport } from "./transport";
+import type { Credentials } from "./credentials.js";
+import { createNotOK } from "./errors/internal.js";
+import { createAuthInterceptor } from "./interceptors/auth.js";
+import { errorInterceptor } from "./interceptors/error.js";
+import { createHeadersInterceptor } from "./interceptors/headers.js";
+import { validationInterceptor } from "./interceptors/validation.js";
+import type { MessageInitShape } from "./protobuf.js";
 
 /**
  * Options for connecting to Cerbos Hub.

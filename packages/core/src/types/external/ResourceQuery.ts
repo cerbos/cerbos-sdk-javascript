@@ -1,4 +1,4 @@
-import type { Resource } from "./Resource";
+import type { Resource } from "./Resource.js";
 
 /**
  * Partial details of resources to be queried.

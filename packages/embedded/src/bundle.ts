@@ -14,11 +14,11 @@ import type {
   DecodeJWTPayload,
   Options,
   Source,
-} from "./loader";
-import type { DecisionLogger } from "./logger";
-import { cancelBody } from "./response";
-import type { Allocator } from "./slice";
-import { Slice } from "./slice";
+} from "./loader.js";
+import type { DecisionLogger } from "./logger.js";
+import { cancelBody } from "./response.js";
+import type { Allocator } from "./slice.js";
+import { Slice } from "./slice.js";
 
 interface Exports extends WebAssembly.Exports, Allocator {
   check: (offset: number, length: number) => bigint;

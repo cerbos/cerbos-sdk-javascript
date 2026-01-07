@@ -3,11 +3,11 @@ import type { Interceptor } from "@connectrpc/connect";
 import type { Options } from "@cerbos/core";
 import { userAgent } from "@cerbos/core/~internal";
 
-import { createInterceptor } from "./interceptor";
+import pkg from "../../package.json" with { type: "json" };
 
-const { version } = require("../../package.json") as { version: string };
+import { createInterceptor } from "./interceptor.js";
 
-const defaultUserAgent = `cerbos-sdk-javascript-hub/${version}`;
+const defaultUserAgent = `cerbos-sdk-javascript-hub/${pkg.version}`;
 
 export function createHeadersInterceptor({
   headers: init,

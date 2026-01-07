@@ -1,4 +1,3 @@
-export const { name, version } = require("../package.json") as {
-  name: string;
-  version: string;
-};
+import pkg from "../package.json" with { type: "json" };
+
+export const { name, version } = pkg;

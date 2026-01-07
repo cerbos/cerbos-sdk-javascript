@@ -5,6 +5,10 @@ unreleased:
     - summary: "`cerbos.epdp.v2.Config.defaultScope`"
       pull: 1316
 
+  changed:
+    - summary: Convert package to ESM
+      pull: 1330
+
   bumped:
     "@bufbuild/protobuf":
       to: 2.10.2

@@ -1,5 +1,5 @@
-import { cancelBody, download } from "./fetch";
-import type { WasmInstantiate, WasmSource } from "./options";
+import { cancelBody, download } from "./fetch.js";
+import type { WasmInstantiate, WasmSource } from "./options.js";
 
 export async function load(
   source: WasmSource,

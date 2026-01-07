@@ -6,8 +6,8 @@ import type {
   MessageValidType,
 } from "@bufbuild/protobuf";
 
-import { NotOK } from "./errors";
-import { Status } from "./types/external";
+import { NotOK } from "./errors.js";
+import { Status } from "./types/external.js";
 
 /** @internal */
 export class AbortHandler {

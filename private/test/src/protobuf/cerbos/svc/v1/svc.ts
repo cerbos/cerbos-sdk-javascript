@@ -34,7 +34,7 @@ import {
   PlanResourcesRequest,
   ReloadStoreRequest,
   ServerInfoRequest,
-} from "../../request/v1/request";
+} from "../../request/v1/request.js";
 import {
   AddOrUpdatePolicyResponse,
   AddOrUpdateSchemaResponse,
@@ -53,7 +53,7 @@ import {
   PlanResourcesResponse,
   ReloadStoreResponse,
   ServerInfoResponse,
-} from "../../response/v1/response";
+} from "../../response/v1/response.js";
 
 export const protobufPackage = "cerbos.svc.v1";
 

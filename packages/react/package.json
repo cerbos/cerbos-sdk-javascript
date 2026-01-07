@@ -1,6 +1,7 @@
 {
   "name": "@cerbos/react",
   "version": "0.2.7",
+  "type": "module",
   "description": "A collection of React hooks for interacting with Cerbos policy decision points",
   "repository": {
     "type": "git",
@@ -16,8 +17,6 @@
   "engines": {
     "node": ">= 20"
   },
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",

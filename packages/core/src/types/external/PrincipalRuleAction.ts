@@ -1,6 +1,6 @@
-import type { Condition } from "./Condition";
-import type { Effect } from "./Effect";
-import type { Output } from "./Output";
+import type { Condition } from "./Condition.js";
+import type { Effect } from "./Effect.js";
+import type { Output } from "./Output.js";
 
 /**
  * An override for a given action for a specific user.

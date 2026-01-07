@@ -1,7 +1,7 @@
-import type { InspectedAttribute } from "./InspectedAttribute";
-import type { InspectedConstant } from "./InspectedConstant";
-import type { InspectedDerivedRole } from "./InspectedDerivedRole";
-import type { InspectedVariable } from "./InspectedVariable";
+import type { InspectedAttribute } from "./InspectedAttribute.js";
+import type { InspectedConstant } from "./InspectedConstant.js";
+import type { InspectedDerivedRole } from "./InspectedDerivedRole.js";
+import type { InspectedVariable } from "./InspectedVariable.js";
 
 /**
  * Details of a policy in the store.

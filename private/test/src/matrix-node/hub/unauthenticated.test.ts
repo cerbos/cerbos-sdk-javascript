@@ -3,7 +3,7 @@ import { afterEach, beforeAll, describe, expect, it } from "vitest";
 
 import { NotOK, Status } from "@cerbos/core";
 
-import { Server } from "./server";
+import { Server } from "./server.js";
 
 describe("with invalid credentials", () => {
   const server = new Server();

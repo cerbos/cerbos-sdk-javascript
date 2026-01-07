@@ -4,7 +4,6 @@ import { StructSchema, timestampFromDate } from "@bufbuild/protobuf/wkt";
 
 import type { Value } from "@cerbos/core";
 
-import type { MessageInit } from "../protobuf";
 import type {
   ChangeDetails as ChangeDetailsProto,
   ChangeDetails_Git,
@@ -20,7 +19,8 @@ import type {
   ReplaceFilesRequest as ReplaceFilesRequestProto,
   ReplaceFilesRequest_Condition,
   StringMatch as StringMatchProto,
-} from "../protobuf/cerbos/cloud/store/v1/store_pb";
+} from "../protobuf/cerbos/cloud/store/v1/store_pb.js";
+import type { MessageInit } from "../protobuf.js";
 import type {
   ChangeDetails,
   ChangeOrigin,
@@ -37,7 +37,7 @@ import type {
   ReplaceFilesRequest,
   StringMatch,
   Uploader,
-} from "../types";
+} from "../types.js";
 import {
   changeOriginIsChangeOriginGit,
   changeOriginIsChangeOriginInternal,
@@ -48,7 +48,7 @@ import {
   stringMatchIsStringMatchContains,
   stringMatchIsStringMatchEquals,
   stringMatchIsStringMatchIn,
-} from "../types";
+} from "../types.js";
 
 function changeDetailsToProto({
   description,

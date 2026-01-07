@@ -1,4 +1,4 @@
-import type { Value } from "./Value";
+import type { Value } from "./Value.js";
 
 /**
  * Metadata about the source of a policy.

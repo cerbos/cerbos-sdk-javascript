@@ -1,6 +1,6 @@
-import type { ChangeDetails } from "./ChangeDetails";
-import type { FileModificationCondition } from "./FileModificationCondition";
-import type { ReplaceFilesContents } from "./ReplaceFilesContents";
+import type { ChangeDetails } from "./ChangeDetails.js";
+import type { FileModificationCondition } from "./FileModificationCondition.js";
+import type { ReplaceFilesContents } from "./ReplaceFilesContents.js";
 
 /**
  * Input to {@link StoresClient.replaceFiles}.

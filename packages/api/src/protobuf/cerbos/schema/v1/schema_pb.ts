@@ -10,9 +10,9 @@ import type {
   GenMessage,
 } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import { file_buf_validate_validate } from "../../../buf/validate/validate_pb";
-import { file_google_api_field_behavior } from "../../../google/api/field_behavior_pb";
-import { file_protoc_gen_openapiv2_options_annotations } from "../../../protoc-gen-openapiv2/options/annotations_pb";
+import { file_buf_validate_validate } from "../../../buf/validate/validate_pb.js";
+import { file_google_api_field_behavior } from "../../../google/api/field_behavior_pb.js";
+import { file_protoc_gen_openapiv2_options_annotations } from "../../../protoc-gen-openapiv2/options/annotations_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**

@@ -1,4 +1,4 @@
-import type { Value } from "./Value";
+import type { Value } from "./Value.js";
 
 /**
  * A set of {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#export-constants | exported constants}

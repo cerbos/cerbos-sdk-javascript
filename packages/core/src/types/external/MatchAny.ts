@@ -1,4 +1,4 @@
-import type { Matches } from "./Matches";
+import type { Matches } from "./Matches.js";
 
 /**
  * A set of expressions to evaluate in a condition, at least one of which must be true.

@@ -4,6 +4,6 @@
  * @packageDocumentation
  */
 
-export * from "./client";
-export * from "./errors";
-export * from "./types/external";
+export * from "./client.js";
+export * from "./errors.js";
+export * from "./types/external.js";
