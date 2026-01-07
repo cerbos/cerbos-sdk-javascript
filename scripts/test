@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt
+
+if [[ -f "${NODE_EXTRA_CA_CERTS}" ]]; then
+  export NODE_EXTRA_CA_CERTS
+fi
+
+exec node --env-file-if-exists=.env node_modules/vitest/vitest.mjs "$@"

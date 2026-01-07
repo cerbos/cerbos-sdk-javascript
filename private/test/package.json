@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "postinstall": "pnpm --workspace-root run build",
-    "test": "NODE_EXTRA_CA_CERTS=servers/tmp/certificates/server.root.crt node --env-file-if-exists=.env node_modules/vitest/vitest.mjs",
+    "test": "../../scripts/test",
     "test:servers:start": "servers/start",
     "test:servers:stop": "servers/stop"
   },
