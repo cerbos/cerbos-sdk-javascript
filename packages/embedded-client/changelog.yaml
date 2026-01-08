@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: "[`Options.defaultScope`](../../docs/embedded-client.options.defaultscope.md) to configure the embedded policy decision point server's [default scope](https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_scope)"
+      pull: 1333
+
 releases:
   - version: 0.3.0
     date: 2026-01-07

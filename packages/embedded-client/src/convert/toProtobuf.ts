@@ -9,12 +9,14 @@ import { SchemaEnforcement } from "../options.js";
 
 export function configToProtobuf({
   defaultPolicyVersion = "",
+  defaultScope = "",
   globals = {},
   lenientScopeSearch = false,
   schemaEnforcement = SchemaEnforcement.WARN,
 }: Pick<
   Options,
   | "defaultPolicyVersion"
+  | "defaultScope"
   | "globals"
   | "lenientScopeSearch"
   | "schemaEnforcement"
@@ -24,7 +26,7 @@ export function configToProtobuf({
     evaluator: {
       $typeName: "cerbos.cloud.epdp.v2.Config.Evaluator",
       defaultPolicyVersion,
-      defaultScope: "",
+      defaultScope,
       globals: valuesToProtobuf(globals),
       lenientScopeSearch,
     },

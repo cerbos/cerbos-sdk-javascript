@@ -113,8 +113,8 @@ importers:
         specifier: ^0.27.0
         version: link:../core
       '@cerbos/embedded-server':
-        specifier: ^0.2.0
-        version: 0.2.0(@bufbuild/protobuf@2.10.2)(@cerbos/api@packages+api)
+        specifier: ^0.3.1
+        version: 0.3.1(@bufbuild/protobuf@2.10.2)(@cerbos/api@packages+api)
       '@cerbos/hub':
         specifier: ^0.5.0
         version: link:../hub
@@ -302,8 +302,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/embedded-client
       '@cerbos/embedded-server':
-        specifier: 0.2.0
-        version: 0.2.0(@bufbuild/protobuf@2.10.2)(@cerbos/api@packages+api)
+        specifier: 0.3.1
+        version: 0.3.1(@bufbuild/protobuf@2.10.2)(@cerbos/api@packages+api)
       '@cerbos/files':
         specifier: workspace:*
         version: link:../../packages/files
@@ -564,12 +564,12 @@ packages:
     peerDependencies:
       '@bufbuild/protobuf': ^2.8.0
 
-  '@cerbos/embedded-server@0.2.0':
-    resolution: {integrity: sha512-L1gA777wDZnVi9SVq9FpqtNSP51N6K7Ie3P3LkCvwL51vXsXnwCGlRcEjCpSJ8buu1gwKrXGUnK3EXxa8JtvZg==}
+  '@cerbos/embedded-server@0.3.1':
+    resolution: {integrity: sha512-J0uBMOR/AvN/c/txIuGf0IFPDlBhCaNYmUX/xle6htgRSn4O7d5NzEYZ7lhwtL78jh2c8RdX79nPpeGOWUOE+g==}
     engines: {node: '>= 20'}
     peerDependencies:
-      '@bufbuild/protobuf': ^2.10.1
-      '@cerbos/api': ^0.4.0
+      '@bufbuild/protobuf': ^2.10.2
+      '@cerbos/api': ^0.5.0
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -3448,7 +3448,7 @@ snapshots:
       '@bufbuild/cel': 0.3.0(@bufbuild/protobuf@2.10.2)
       '@bufbuild/protobuf': 2.10.2
 
-  '@cerbos/embedded-server@0.2.0(@bufbuild/protobuf@2.10.2)(@cerbos/api@packages+api)':
+  '@cerbos/embedded-server@0.3.1(@bufbuild/protobuf@2.10.2)(@cerbos/api@packages+api)':
     dependencies:
       '@bufbuild/protobuf': 2.10.2
       '@cerbos/api': link:packages/api

@@ -45,6 +45,13 @@ export interface Options extends Pick<
   defaultPolicyVersion?: string | undefined;
 
   /**
+   * {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_scope | Default scope} to apply to requests that do not specify one.
+   *
+   * @defaultValue `""`
+   */
+  defaultScope?: string | undefined;
+
+  /**
    * {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine#globals | Global variables} to pass environment-specific information to policy conditions.
    *
    * @defaultValue `{}`

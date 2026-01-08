@@ -76,6 +76,25 @@ _(Optional)_ [Default policy version](https://docs.cerbos.dev/cerbos/latest/conf
 </td></tr>
 <tr><td>
 
+[defaultScope?](./embedded-client.options.defaultscope.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+_(Optional)_ [Default scope](https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_scope) to apply to requests that do not specify one.
+
+
+</td></tr>
+<tr><td>
+
 [globals?](./embedded-client.options.globals.md)
 
 
