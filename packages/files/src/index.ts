@@ -1,9 +1,3 @@
-/**
- * Load Cerbos policies from YAML or JSON files.
- *
- * @packageDocumentation
- */
-
 import { opendir, readFile, writeFile } from "fs/promises";
 import { basename, extname, join, resolve, sep } from "path";
 
@@ -21,13 +15,11 @@ import {
 import { policyFromProtobuf, policyToProtobuf } from "@cerbos/core/~internal";
 
 /**
- * {@inheritDoc @cerbos/core#SchemaInput}
- *
- * @public
+ * {@inheritDoc @cerbos/core!SchemaInput}
  */
 export interface Schema extends SchemaInput {
   /**
-   * {@inheritDoc @cerbos/core#SchemaInput.definition}
+   * {@inheritDoc @cerbos/core!SchemaInput.definition}
    */
   definition: string;
 }
@@ -35,9 +27,7 @@ export interface Schema extends SchemaInput {
 /**
  * Parse a policy from a YAML- or JSON-encoded string.
  *
- * @param contents - the YAML- or JSON-encoded policy definition.
- *
- * @public
+ * @param contents - The YAML- or JSON-encoded policy definition.
  */
 export function parsePolicy(contents: string): Policy {
   return policyFromProtobuf(fromJson(PolicySchema, parse(contents) as Value));
@@ -46,9 +36,7 @@ export function parsePolicy(contents: string): Policy {
 /**
  * Read a policy from a YAML or JSON file.
  *
- * @param path - the path to the policy file.
- *
- * @public
+ * @param path - The path to the policy file.
  */
 export async function readPolicy(path: string): Promise<Policy> {
   return parsePolicy(await readFile(path, { encoding: "utf8" }));
@@ -57,9 +45,7 @@ export async function readPolicy(path: string): Promise<Policy> {
 /**
  * Serialize a policy to a JSON-encoded string.
  *
- * @param policy - the policy definition.
- *
- * @public
+ * @param policy - The policy definition.
  */
 export function serializePolicy(policy: Policy): string {
   return `${toJsonString(PolicySchema, policyToProtobuf(policy), { prettySpaces: 2 })}\n`;
@@ -68,10 +54,8 @@ export function serializePolicy(policy: Policy): string {
 /**
  * Write a policy to a JSON file.
  *
- * @param path - the path to the policy file.
- * @param policy - the policy definition.
- *
- * @public
+ * @param path - The path to the policy file.
+ * @param policy - The policy definition.
  */
 export async function writePolicy(path: string, policy: Policy): Promise<void> {
   await writeFile(path, serializePolicy(policy), { encoding: "utf8" });
@@ -79,8 +63,6 @@ export async function writePolicy(path: string, policy: Policy): Promise<void> {
 
 /**
  * Options for {@link readSchema}.
- *
- * @public
  */
 export interface ReadSchemaOptions {
   /**
@@ -98,10 +80,8 @@ export interface ReadSchemaOptions {
 /**
  * Read a schema from a JSON file.
  *
- * @param path - the path to the schema file.
- * @param options - additional settings.
- *
- * @public
+ * @param path - The path to the schema file.
+ * @param options - Additional settings.
  */
 export async function readSchema(
   path: string,
@@ -129,8 +109,6 @@ function schemaIdFromPath(path: string): string {
 
 /**
  * The contents of a directory, returned by {@link readDirectory}.
- *
- * @public
  */
 export interface DirectoryContents {
   /**
@@ -168,13 +146,11 @@ const fileHandlers = {
 /**
  * Read the policy and schema files in a directory and its subdirectories.
  *
- * @param path - the path to the directory.
+ * @param path - The path to the directory.
  *
  * @remarks
  * This function looks for policies and schemas stored in the
  * {@link https://docs.cerbos.dev/cerbos/latest/policies/best_practices#_policy_repository_layout | standard Cerbos directory layout}.
- *
- * @public
  */
 export async function readDirectory(path: string): Promise<DirectoryContents> {
   const pending: PendingDirectoryContents = {

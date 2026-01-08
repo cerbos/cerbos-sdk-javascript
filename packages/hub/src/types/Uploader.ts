@@ -2,8 +2,6 @@ import type { Value } from "@cerbos/core";
 
 /**
  * Metadata describing the uploader who made a change to a store.
- *
- * @public
  */
 export interface Uploader {
   /**

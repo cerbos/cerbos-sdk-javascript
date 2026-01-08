@@ -2,8 +2,6 @@ import type { InspectedPolicy } from "./InspectedPolicy.js";
 
 /**
  * Details of policies in the store.
- *
- * @public
  */
 export interface InspectPoliciesResponse {
   /**

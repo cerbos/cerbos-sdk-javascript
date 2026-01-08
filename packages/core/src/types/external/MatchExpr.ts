@@ -1,7 +1,5 @@
 /**
  * A single expression to evaluate in a condition.
- *
- * @public
  */
 export interface MatchExpr {
   /**

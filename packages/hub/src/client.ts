@@ -22,8 +22,6 @@ import type { MessageInitShape } from "./protobuf.js";
 
 /**
  * Options for connecting to Cerbos Hub.
- *
- * @public
  */
 export interface ClientOptions extends Pick<Options, "headers" | "userAgent"> {
   /**

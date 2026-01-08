@@ -6,7 +6,7 @@ Common types used by the Cerbos client libraries.
 
 ## Further reading
 
-- [API reference](../../docs/core.md)
+- [API reference](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_core.html)
 - [Cerbos documentation](https://docs.cerbos.dev)
 
 ## Get help

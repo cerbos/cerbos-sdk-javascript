@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Migrate documentation to TypeDoc ([#1332](https://github.com/cerbos/cerbos-sdk-javascript/pull/1332))
 
 ## [0.14.0] - 2026-01-07
 
@@ -64,7 +66,7 @@ No notable changes.
 
 ### Added
 
-- Set [`policySource`](../../docs/core.decisionlogentry.policysource.md) on log entries passed to [`onDecision`](../../docs/embedded.options.ondecision.md) ([#1193](https://github.com/cerbos/cerbos-sdk-javascript/pull/1193))
+- Set [`policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#policysource) on log entries passed to [`onDecision`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#ondecision) ([#1193](https://github.com/cerbos/cerbos-sdk-javascript/pull/1193))
 
 ### Changed
 
@@ -100,19 +102,19 @@ No notable changes.
 
 ### Added
 
-- [`defaultPolicyVersion`](../../docs/embedded.options.defaultpolicyversion.md) and [`lenientScopeSearch`](../../docs/embedded.options.lenientscopesearch.md) engine configuration options ([#1101](https://github.com/cerbos/cerbos-sdk-javascript/pull/1101))
+- [`defaultPolicyVersion`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#defaultpolicyversion) and [`lenientScopeSearch`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#lenientscopesearch) engine configuration options ([#1101](https://github.com/cerbos/cerbos-sdk-javascript/pull/1101))
 
 ## [0.10.0] - 2025-02-13
 
 ### Added
 
-- [`onDecision`](../../docs/embedded.options.ondecision.md) callback to support audit logging ([#1091](https://github.com/cerbos/cerbos-sdk-javascript/pull/1091))
+- [`onDecision`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#ondecision) callback to support audit logging ([#1091](https://github.com/cerbos/cerbos-sdk-javascript/pull/1091))
 
 ### Changed
 
-- Accept async callbacks for [`onLoad`](../../docs/embedded.options.onload.md) and [`onError`](../../docs/embedded.options.onerror.md) ([#1091](https://github.com/cerbos/cerbos-sdk-javascript/pull/1091))
+- Accept async callbacks for [`onLoad`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#onload) and [`onError`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#onerror) ([#1091](https://github.com/cerbos/cerbos-sdk-javascript/pull/1091))
 
-- Omit metadata from `checkResources` responses if [`includeMetadata`](../../docs/core.checkresourcesrequest.includemetadata.md) is `false` ([#1092](https://github.com/cerbos/cerbos-sdk-javascript/pull/1092))
+- Omit metadata from `checkResources` responses if [`includeMetadata`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckResourcesRequest.html#includemetadata) is `false` ([#1092](https://github.com/cerbos/cerbos-sdk-javascript/pull/1092))
 
 - Bump dependency on [@cerbos/core] to 0.21.0 ([#1097](https://github.com/cerbos/cerbos-sdk-javascript/pull/1097))
 
@@ -132,7 +134,7 @@ No notable changes.
 
 ### Added
 
-- [`BundleMetadata.sourceAttributes`](../../docs/embedded.bundlemetadata.sourceattributes.md) property mapping IDs of policies included in the bundle to metadata about their sources ([#1033](https://github.com/cerbos/cerbos-sdk-javascript/pull/1033))
+- [`BundleMetadata.sourceAttributes`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.BundleMetadata.html#sourceattributes) property mapping IDs of policies included in the bundle to metadata about their sources ([#1033](https://github.com/cerbos/cerbos-sdk-javascript/pull/1033))
 
 ## [0.8.0] - 2024-09-23
 
@@ -166,9 +168,9 @@ No notable changes.
 
 ### Added
 
-- [`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal ([#868](https://github.com/cerbos/cerbos-sdk-javascript/pull/868), [#877](https://github.com/cerbos/cerbos-sdk-javascript/pull/877))
+- [`Client.withPrincipal`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#withprincipal) method to create a client instance with a pre-specified principal ([#868](https://github.com/cerbos/cerbos-sdk-javascript/pull/868), [#877](https://github.com/cerbos/cerbos-sdk-javascript/pull/877))
 
-- [`AutoUpdatingLoader`](../../docs/embedded.autoupdatingloader.md) class to automatically update embedded policy decision point bundles ([#915](https://github.com/cerbos/cerbos-sdk-javascript/pull/915))
+- [`AutoUpdatingLoader`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_embedded.AutoUpdatingLoader.html) class to automatically update embedded policy decision point bundles ([#915](https://github.com/cerbos/cerbos-sdk-javascript/pull/915))
 
 ### Changed
 
@@ -188,7 +190,7 @@ No notable changes.
 
 ### Changed
 
-- Allow promises of binary data in [Source](../../docs/embedded.source.md) type ([#824](https://github.com/cerbos/cerbos-sdk-javascript/pull/824))
+- Allow promises of binary data in [Source](https://cerbos.github.io/cerbos-sdk-javascript/types/_cerbos_embedded.Source.html) type ([#824](https://github.com/cerbos/cerbos-sdk-javascript/pull/824))
 
 ## [0.6.1] - 2024-01-11
 

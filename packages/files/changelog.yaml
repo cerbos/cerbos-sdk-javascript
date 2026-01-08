@@ -1,3 +1,10 @@
+unreleased:
+  type: patch
+
+  changed:
+    - summary: Migrate documentation to TypeDoc
+      pull: 1332
+
 releases:
   - version: 0.5.0
     date: 2026-01-07
@@ -99,7 +106,7 @@ releases:
     date: 2025-07-02
 
     added:
-      - summary: "[`serializePolicy`](../../docs/files.serializepolicy.md) and [`writePolicy`](../../docs/files.writepolicy.md) functions to serialize policies to JSON-encoded strings and files"
+      - summary: "[`serializePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/functions/_cerbos_files.serializePolicy.html) and [`writePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/functions/_cerbos_files.writePolicy.html) functions to serialize policies to JSON-encoded strings and files"
         pull: 1174
 
     bumped:

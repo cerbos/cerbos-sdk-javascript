@@ -2,8 +2,6 @@ import type { SourceAttributes } from "./SourceAttributes.js";
 
 /**
  * Details about how a policy decision was reached.
- *
- * @public
  */
 export interface AuditTrail {
   /**

@@ -1,7 +1,5 @@
 /**
  * Additional information about how a policy decision was reached.
- *
- * @public
  */
 export interface CheckResourcesResultMetadataEffect {
   /**

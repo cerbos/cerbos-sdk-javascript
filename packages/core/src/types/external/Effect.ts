@@ -1,7 +1,5 @@
 /**
  * Outcomes of policy decisions.
- *
- * @public
  */
 export enum Effect {
   /**

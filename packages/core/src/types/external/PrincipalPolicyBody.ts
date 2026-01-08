@@ -5,8 +5,6 @@ import type { Variables } from "./Variables.js";
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/principal_policies | policy} defining overrides for a specific user.
- *
- * @public
  */
 export interface PrincipalPolicyBody {
   /**
@@ -34,7 +32,9 @@ export interface PrincipalPolicyBody {
    */
   scope?: string | undefined;
 
-  /** @alpha */
+  /**
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/scope_permissions | Scope permissions} determining how rules are evaluated within a scope hierarchy.
+   */
   scopePermissions?: ScopePermissions | undefined;
 
   /**

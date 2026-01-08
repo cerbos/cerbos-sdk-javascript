@@ -1,7 +1,5 @@
 /**
  * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#variables | Variables} defined for use in policy conditions.
- *
- * @public
  */
 export interface Variables {
   /**

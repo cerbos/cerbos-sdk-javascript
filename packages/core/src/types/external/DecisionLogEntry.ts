@@ -5,8 +5,6 @@ import type { PolicySource } from "./PolicySource.js";
 
 /**
  * A decision log entry in the policy decision point's audit log.
- *
- * @public
  */
 export interface DecisionLogEntry {
   /**

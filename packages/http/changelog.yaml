@@ -1,3 +1,10 @@
+unreleased:
+  type: patch
+
+  changed:
+    - summary: Migrate documentation to TypeDoc
+      pull: 1332
+
 releases:
   - version: 0.24.0
     date: 2026-01-07
@@ -87,7 +94,7 @@ releases:
     date: 2025-08-11
 
     added:
-      - summary: "[`AccessLogEntry.policySource`](../../docs/core.accesslogentry.policysource.md) and [`DecisionLogEntry.policySource`](../../docs/core.decisionlogentry.policysource.md) properties"
+      - summary: "[`AccessLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AccessLogEntry.html#policysource) and [`DecisionLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#policysource) properties"
         details: Requires a policy decision point server running Cerbos 0.46+.
         pull: 1193
 
@@ -115,11 +122,11 @@ releases:
     date: 2025-06-02
 
     added:
-      - summary: Support for multiple actions in [`Client.planResources`](../../docs/core.client.planresources.md)
+      - summary: Support for multiple actions in [`Client.planResources`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#planresources)
         details: Requires a policy decision point server running Cerbos 0.44+.
         pull: 1146
 
-      - summary: "[`AccessLogEntry.oversized`](../../docs/core.accesslogentry.oversized.md) and [`DecisionLogEntry.oversized`](../../docs/core.decisionlogentry.oversized.md) properties"
+      - summary: "[`AccessLogEntry.oversized`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AccessLogEntry.html#oversized) and [`DecisionLogEntry.oversized`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#oversized) properties"
         pull: 1165
 
     bumped:
@@ -151,7 +158,7 @@ releases:
     date: 2025-02-06
 
     added:
-      - summary: "[`Client.checkHealth`](../../docs/core.client.checkhealth.md) method to check the health of services provided by the policy decision point server"
+      - summary: "[`Client.checkHealth`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#checkhealth) method to check the health of services provided by the policy decision point server"
         pull: 1085
 
     bumped:
@@ -167,11 +174,11 @@ releases:
     date: 2024-11-27
 
     added:
-      - summary: "[`Client.inspectPolicies`](../../docs/core.client.inspectpolicies.md) method to inspect policy details"
+      - summary: "[`Client.inspectPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#inspectpolicies) method to inspect policy details"
         details: Requires a policy decision point server running Cerbos 0.35+.
         pull: 1051
 
-      - summary: Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy ID
+      - summary: Support for filtering [`Client.listPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listpolicies) results by policy ID
         details: Requires a policy decision point server running Cerbos 0.37+.
         pull: 1051
 
@@ -214,12 +221,12 @@ releases:
     added:
       - summary: Support for fetching audit logs
         details: |-
-          - [`Client.getAccessLogEntry`](../../docs/core.client.getaccesslogentry.md) method
-          - [`Client.getDecisionLogEntry`](../../docs/core.client.getdecisionlogentry.md) method
-          - [`Client.listAccessLogEntries`](../../docs/core.client.listaccesslogentries.md) method
-          - [`Client.listDecisionLogEntries`](../../docs/core.client.listdecisionlogentries.md) method
-          - [`CheckResourcesResponse.cerbosCallId`](../../docs/core.checkresourcesresponse.cerboscallid.md) property
-          - [`PlanResourcesResponse.cerbosCallId`](../../docs/core.planresourcesresponsebase.cerboscallid.md) property
+          - [`Client.getAccessLogEntry`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#getaccesslogentry) method
+          - [`Client.getDecisionLogEntry`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#getdecisionlogentry) method
+          - [`Client.listAccessLogEntries`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listaccesslogentries) method
+          - [`Client.listDecisionLogEntries`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listdecisionlogentries) method
+          - [`CheckResourcesResponse.cerbosCallId`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.CheckResourcesResponse.html#cerboscallid) property
+          - [`PlanResourcesResponse.cerbosCallId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesResponseBase.html#cerboscallid) property
         pull: 945
 
     bumped:
@@ -247,10 +254,10 @@ releases:
     date: 2024-04-12
 
     added:
-      - summary: "[`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal"
+      - summary: "[`Client.withPrincipal`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#withprincipal) method to create a client instance with a pre-specified principal"
         pulls: [868, 877]
 
-      - summary: "[`signal`](../../docs/core.requestoptions.signal.md) option to all methods, so that requests can be aborted using an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)"
+      - summary: "[`signal`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestOptions.html#signal) option to all methods, so that requests can be aborted using an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)"
         pull: 894
 
     changed:
@@ -273,7 +280,7 @@ releases:
     date: 2024-02-29
 
     added:
-      - summary: "[`Output.when`](../../docs/core.output.when.md) to define [conditional policy rule outputs](https://docs.cerbos.dev/cerbos/latest/policies/outputs) using the Admin API"
+      - summary: "[`Output.when`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.Output.html#when) to define [conditional policy rule outputs](https://docs.cerbos.dev/cerbos/latest/policies/outputs) using the Admin API"
         details: Requires a policy decision point server running Cerbos 0.33+.
         pull: 829
 
@@ -286,7 +293,7 @@ releases:
     date: 2024-01-11
 
     added:
-      - summary: "[`userAgent`](../../docs/core.options.useragent.md) option to `HTTP` constructor, and [`headers`](../../docs/core.requestoptions.headers.md) option to all methods"
+      - summary: "[`userAgent`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.Options.html#useragent) option to `HTTP` constructor, and [`headers`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestOptions.html#headers) option to all methods"
         details: Note that if you were previously setting the `User-Agent` header via the `headers` option, you'll now need to do so using the dedicated `userAgent` option.
         pull: 776
 
@@ -336,7 +343,7 @@ releases:
     date: 2023-07-18
 
     added:
-      - summary: Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy name, scope, and version
+      - summary: Support for filtering [`Client.listPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listpolicies) results by policy name, scope, and version
         details: Requires a policy decision point server running Cerbos 0.29+.
         pull: 568
 
@@ -374,11 +381,11 @@ releases:
     date: 2023-04-18
 
     added:
-      - summary: "[`includeDisabled`](../../docs/core.listpoliciesrequest.includedisabled.md) option to [`Client.listPolicies`](../../docs/core.client.listpolicies.md) method to include disabled policies in the list"
+      - summary: "[`includeDisabled`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.ListPoliciesRequest.html#includedisabled) option to [`Client.listPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listpolicies) method to include disabled policies in the list"
         details: Requires a policy decision point server running Cerbos 0.26+.
         pull: 475
 
-      - summary: "[`Client.enablePolicy`](../../docs/core.client.enablepolicy.md) and [`Client.enablePolicies`](../../docs/core.client.enablepolicies.md) methods to enable policies"
+      - summary: "[`Client.enablePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#enablepolicy) and [`Client.enablePolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#enablepolicies) methods to enable policies"
         details: Requires a policy decision point server running Cerbos 0.26+.
         pull: 475
 
@@ -407,7 +414,7 @@ releases:
     date: 2023-03-21
 
     added:
-      - summary: "[`headers`](../../docs/core.options.headers.md) option to add headers to every request"
+      - summary: "[`headers`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.Options.html#headers) option to add headers to every request"
         pull: 471
 
     bumped:
@@ -419,7 +426,7 @@ releases:
     date: 2023-02-15
 
     added:
-      - summary: "[`Client.disablePolicy`](../../docs/core.client.disablepolicy.md) and [`Client.disablePolicies`](../../docs/core.client.disablepolicies.md) methods to disable policies"
+      - summary: "[`Client.disablePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#disablepolicy) and [`Client.disablePolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#disablepolicies) methods to disable policies"
         details: Requires a policy decision point server running Cerbos 0.25+.
         pull: 429
 
@@ -427,11 +434,11 @@ releases:
         pull: 438
 
     changed:
-      - summary: "[`Client.deleteSchema`](../../docs/core.client.deleteschema.md) and [`Client.deleteSchemas`](../../docs/core.client.deleteschemas.md) now return whether schemas were deleted"
+      - summary: "[`Client.deleteSchema`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deleteschema) and [`Client.deleteSchemas`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deleteschemas) now return whether schemas were deleted"
         details: Requires a policy decision point server running Cerbos 0.25+.
         pull: 429
 
-      - summary: "[`Policy.metadata.storeIdentifer`](../../docs/core.policymetadata.storeidentifer.md) is now deprecated, replaced by [`Policy.metadata.storeIdentifier`](../../docs/core.policymetadata.storeidentifier.md)"
+      - summary: "[`Policy.metadata.storeIdentifer`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicyMetadata.html#storeidentifer) is now deprecated, replaced by [`Policy.metadata.storeIdentifier`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicyMetadata.html#storeidentifier)"
         pull: 439
 
     bumped:
@@ -455,7 +462,7 @@ releases:
     date: 2022-09-08
 
     changed:
-      - summary: Use [`NotOK.fromJSON`](../../docs/core.notok.fromjson.md) factory method to parse JSON-serialized unsucessful responses
+      - summary: Use [`NotOK.fromJSON`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.NotOK.html#fromjson) factory method to parse JSON-serialized unsucessful responses
         pull: 249
 
     bumped:
@@ -487,10 +494,10 @@ releases:
     date: 2022-07-01
 
     added:
-      - summary: Support for schema validation in [`Client.planResources`](../../docs/core.client.planresources.md)
+      - summary: Support for schema validation in [`Client.planResources`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#planresources)
         details: |-
           Requires a policy decision point server running Cerbos 0.19+.
-          [`PlanResourcesResponse.validationErrors`](../../docs/core.planresourcesresponsebase.validationerrors.md) will always be an empty array if the client is connected to an earlier version of Cerbos.
+          [`PlanResourcesResponse.validationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesResponseBase.html#validationerrors) will always be an empty array if the client is connected to an earlier version of Cerbos.
         pull: 123
 
     bumped:

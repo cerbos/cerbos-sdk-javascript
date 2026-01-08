@@ -2,8 +2,6 @@ import type { CheckResourcesResultMetadataEffect } from "./CheckResourcesResultM
 
 /**
  * Additional information about how policy decisions were reached.
- *
- * @public
  */
 export interface CheckResourcesResultMetadata {
   /**

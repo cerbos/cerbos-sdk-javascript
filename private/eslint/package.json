@@ -11,7 +11,6 @@
     "@vitest/eslint-plugin": "1.6.5",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-react-hooks": "7.0.1",
-    "eslint-plugin-tsdoc": "0.5.0",
     "typescript-eslint": "8.52.0"
   }
 }

@@ -8,15 +8,27 @@ if [[ "${GITHUB_HEAD_REF:-}" = "prepare-releases" ]]; then
   excludes+=(--exclude https://github.com/cerbos/cerbos-sdk-javascript/compare/)
 fi
 
-docker run \
-  --interactive \
-  --rm \
-  --env GITHUB_TOKEN \
-  --mount "type=bind,source=${PWD},target=/input" \
-  --workdir /input \
-  lycheeverse/lychee:latest-alpine \
-  "${excludes[@]}" \
-  --include-fragments \
-  --max-concurrency 8 \
+check() {
+  docker run \
+    --interactive \
+    --rm \
+    --env GITHUB_TOKEN \
+    --mount "type=bind,source=${PWD},target=/input" \
+    --workdir /input \
+    lycheeverse/lychee:0.22.0-alpine \
+    "${excludes[@]}" \
+    --include-fragments \
+    --max-concurrency 8 \
+    --remap "^https://cerbos\.github\.io/cerbos-sdk-javascript/ file:///input/docs/" \
+    "$@"
+}
+
+git_commit=$(git rev-parse HEAD)
+
+check \
   --root-dir /input \
   .
+
+check \
+  --remap "^https://github\.com/[^/]+/cerbos-sdk-javascript/blob/${git_commit}/ file:///input/" \
+  docs

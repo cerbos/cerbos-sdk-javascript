@@ -1,7 +1,5 @@
 /**
  * Driver used to load policies from a database.
- *
- * @public
  */
 export enum DatabaseDriver {
   /**

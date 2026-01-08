@@ -2,15 +2,11 @@ import type { File } from "./File.js";
 
 /**
  * An operation modifying a file in a store.
- *
- * @public
  */
 export type FileOperation = FileOperationAddOrUpdate | FileOperationDelete;
 
 /**
  * Add or update a file.
- *
- * @public
  */
 export interface FileOperationAddOrUpdate {
   /**
@@ -21,8 +17,6 @@ export interface FileOperationAddOrUpdate {
 
 /**
  * Type guard to check if a {@link FileOperation} is a {@link FileOperationAddOrUpdate}.
- *
- * @public
  */
 export function fileOperationIsFileOperationAddOrUpdate(
   operation: FileOperation,
@@ -32,8 +26,6 @@ export function fileOperationIsFileOperationAddOrUpdate(
 
 /**
  * Delete a file.
- *
- * @public
  */
 export interface FileOperationDelete {
   /**
@@ -44,8 +36,6 @@ export interface FileOperationDelete {
 
 /**
  * Type guard to check if a {@link FileOperation} is a {@link FileOperationDelete}.
- *
- * @public
  */
 export function fileOperationIsFileOperationDelete(
   operation: FileOperation,

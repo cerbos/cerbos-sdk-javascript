@@ -2,9 +2,10 @@ import type { Schema } from "./Schema.js";
 
 /**
  * Fetched schemas.
- *
- * @public
  */
 export interface GetSchemasResponse {
+  /**
+   * The schemas fetched from the policy decision point server.
+   */
   schemas: Schema[];
 }

@@ -45,13 +45,6 @@
       "groupName": "grpc"
     },
     {
-      "matchPackageNames": [
-        "@microsoft/api-documenter",
-        "@microsoft/api-extractor"
-      ],
-      "groupName": "docs"
-    },
-    {
       "matchPackageNames": ["@opentelemetry/*"],
       "groupName": "opentelemetry"
     },

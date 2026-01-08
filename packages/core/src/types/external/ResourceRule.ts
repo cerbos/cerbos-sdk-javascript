@@ -4,8 +4,6 @@ import type { Output } from "./Output.js";
 
 /**
  * A rule for actions that can be performed on a given resource.
- *
- * @public
  */
 export interface ResourceRule {
   /**

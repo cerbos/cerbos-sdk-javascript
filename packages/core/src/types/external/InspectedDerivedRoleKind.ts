@@ -1,7 +1,5 @@
 /**
  * Kind of a {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles | derived role} referenced by a policy.
- *
- * @public
  */
 export enum InspectedDerivedRoleKind {
   /**

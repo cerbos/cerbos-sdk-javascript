@@ -2,8 +2,6 @@ import type { Effect } from "./Effect.js";
 
 /**
  * The `CheckResources` decision made for an action.
- *
- * @public
  */
 export interface CheckOutputActionEffect {
   /**

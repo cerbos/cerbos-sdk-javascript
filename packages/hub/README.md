@@ -38,7 +38,7 @@ const { newStoreVersion } = await stores.modifyFiles({
 });
 ```
 
-For more details, [see the `StoresClient` class documentation](../../docs/hub.storesclient.md).
+For more details, [see the `StoresClient` class documentation](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_hub.StoresClient.html).
 
 ## CommonJS support
 
@@ -46,7 +46,7 @@ This package is ESM-only, but may be `require`d from CommonJS modules in Node.js
 
 ## Further reading
 
-- [API reference](../../docs/hub.md)
+- [API reference](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_hub.html)
 - [Cerbos Hub documentation](https://docs.cerbos.dev/cerbos-hub/)
 
 ## Get help

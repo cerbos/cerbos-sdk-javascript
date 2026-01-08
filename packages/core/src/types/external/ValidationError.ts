@@ -2,8 +2,6 @@ import type { ValidationErrorSource } from "./ValidationErrorSource.js";
 
 /**
  * An error that occurred while validating the principal or resource attributes against a schema.
- *
- * @public
  */
 export interface ValidationError {
   /**

@@ -29,8 +29,6 @@ import type {
 
 /**
  * A client for interacting with policy stores in Cerbos Hub.
- *
- * @public
  */
 export class StoresClient {
   private readonly client: Client<typeof CerbosStoreService>;
@@ -38,7 +36,7 @@ export class StoresClient {
   /**
    * Create a client for interacting with policy stores in Cerbos Hub.
    *
-   * @param options - settings for the client.
+   * @param options - Settings for the client.
    *
    * @example
    * ```typescript

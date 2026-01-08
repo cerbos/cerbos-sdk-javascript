@@ -6,8 +6,6 @@ import type { Variables } from "./Variables.js";
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/resource_policies | policy} defining rules for actions that can be performed on a given resource.
- *
- * @public
  */
 export interface ResourcePolicyBody {
   /**
@@ -40,7 +38,9 @@ export interface ResourcePolicyBody {
    */
   scope?: string | undefined;
 
-  /** @alpha */
+  /**
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/scope_permissions | Scope permissions} determining how rules are evaluated within a scope hierarchy.
+   */
   scopePermissions?: ScopePermissions | undefined;
 
   /**

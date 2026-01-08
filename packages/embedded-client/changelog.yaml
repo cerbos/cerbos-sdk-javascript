@@ -2,7 +2,7 @@ unreleased:
   type: minor
 
   added:
-    - summary: "[`Options.defaultScope`](../../docs/embedded-client.options.defaultscope.md) to configure the embedded policy decision point server's [default scope](https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_scope)"
+    - summary: "[`Options.defaultScope`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded-client.Options.html#defaultscope) to configure the embedded policy decision point server's [default scope](https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_scope)"
       pull: 1333
 
   changed:
@@ -11,6 +11,9 @@ unreleased:
         Previously the client set the schema enforcement level to `WARN` by default.
         Now the default is determined by the server (currently `NONE`).
       pull: 1333
+
+    - summary: Migrate documentation to TypeDoc
+      pull: 1332
 
 releases:
   - version: 0.3.0

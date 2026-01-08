@@ -1,7 +1,5 @@
 /**
  * A service provided by the policy decision point server.
- *
- * @public
  */
 export enum Service {
   /**

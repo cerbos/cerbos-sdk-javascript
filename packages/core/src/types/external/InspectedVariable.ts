@@ -2,8 +2,6 @@ import type { InspectedVariableKind } from "./InspectedVariableKind.js";
 
 /**
  * Details of a {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#variables | variable} referenced by a policy.
- *
- * @public
  */
 export interface InspectedVariable {
   /**

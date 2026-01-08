@@ -4,8 +4,6 @@ import type { ResourceQuery } from "./ResourceQuery.js";
 
 /**
  * Input to a `PlanResources` invocation.
- *
- * @public
  */
 export interface PlanResourcesInput {
   /**

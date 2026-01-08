@@ -3,9 +3,7 @@ import type { OmitFromEach } from "../internal.js";
 import type { Policy } from "./Policy.js";
 
 /**
- * Input to {@link @cerbos/core#Client.addOrUpdatePolicies}.
- *
- * @public
+ * Input to {@link Client.addOrUpdatePolicies}.
  */
 export interface AddOrUpdatePoliciesRequest {
   /**

@@ -4,8 +4,6 @@ import type { Output } from "./Output.js";
 
 /**
  * An override for a given action for a specific user.
- *
- * @public
  */
 export interface PrincipalRuleAction {
   /**

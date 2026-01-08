@@ -1,9 +1,7 @@
 import type { Service } from "./Service.js";
 
 /**
- * Input to {@link @cerbos/core#Client.checkHealth}.
- *
- * @public
+ * Input to {@link Client.checkHealth}.
  */
 export interface HealthCheckRequest {
   /**

@@ -11,8 +11,6 @@ import type { PolicyLoaderOptions } from "./options.js";
 
 /**
  * Loader to fetch policy bundles from Cerbos Hub.
- *
- * @public
  */
 export class PolicyLoader {
   /**
@@ -39,6 +37,8 @@ export class PolicyLoader {
 
   /**
    * Load policy bundles from {@link https://www.cerbos.dev/product-cerbos-hub | Cerbos Hub}.
+   *
+   * @param options
    *
    * @example
    * Unauthenticated access:

@@ -4,10 +4,11 @@ const utf8Decoder = new TextDecoder("utf-8", { fatal: true });
 
 /**
  * Definition of a JSON schema used to validate principal or resource attributes.
- *
- * @public
  */
 export class SchemaDefinition {
+  /**
+   * Create a schema definition from raw bytes.
+   */
   public constructor(
     /**
      * The UTF-8 bytes of the JSON-serialized schema definition.

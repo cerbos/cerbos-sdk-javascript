@@ -1,7 +1,5 @@
 /**
  * The reason a file was found to be invalid.
- *
- * @public
  */
 export enum FileErrorCause {
   /**

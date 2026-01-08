@@ -1,7 +1,5 @@
 /**
  * Input to {@link StoresClient.getFiles}.
- *
- * @public
  */
 export interface GetFilesRequest {
   /**

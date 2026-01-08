@@ -5,8 +5,6 @@ import type { InspectedVariable } from "./InspectedVariable.js";
 
 /**
  * Details of a policy in the store.
- *
- * @public
  */
 export interface InspectedPolicy {
   /**

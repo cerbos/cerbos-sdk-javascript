@@ -1,7 +1,5 @@
 /**
  * Details of the client who made a request to the policy decision point server.
- *
- * @public
  */
 export interface Peer {
   /**
