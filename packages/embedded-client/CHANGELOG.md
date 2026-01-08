@@ -2,7 +2,16 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- [`Options.defaultScope`](../../docs/embedded-client.options.defaultscope.md) to configure the embedded policy decision point server's [default scope](https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_scope) ([#1333](https://github.com/cerbos/cerbos-sdk-javascript/pull/1333))
+
+### Changed
+
+- Stop overriding the embedded policy decision point server's default schema enforcement level ([#1333](https://github.com/cerbos/cerbos-sdk-javascript/pull/1333))
+
+  Previously the client set the schema enforcement level to `WARN` by default.
+  Now the default is determined by the server (currently `NONE`).
 
 ## [0.3.0] - 2026-01-07
 

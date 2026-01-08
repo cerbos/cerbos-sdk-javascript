@@ -45,6 +45,13 @@ export interface Options extends Pick<
   defaultPolicyVersion?: string | undefined;
 
   /**
+   * {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_scope | Default scope} to apply to requests that do not specify one.
+   *
+   * @defaultValue `""`
+   */
+  defaultScope?: string | undefined;
+
+  /**
    * {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine#globals | Global variables} to pass environment-specific information to policy conditions.
    *
    * @defaultValue `{}`
@@ -72,7 +79,7 @@ export interface Options extends Pick<
   /**
    * {@link https://docs.cerbos.dev/cerbos/latest/configuration/schema#_enforcement | Schema enforcement level} for the embedded policy decision point server.
    *
-   * @defaultValue `SchemaEnforcement.WARN`
+   * @defaultValue `SchemaEnforcement.NONE`
    */
   schemaEnforcement?: SchemaEnforcement;
 }
