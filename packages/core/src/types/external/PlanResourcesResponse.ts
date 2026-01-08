@@ -5,8 +5,6 @@ import type { ValidationError } from "./ValidationError.js";
 
 /**
  * A query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action.
- *
- * @public
  */
 export type PlanResourcesResponse =
   | PlanResourcesConditionalResponse
@@ -14,8 +12,6 @@ export type PlanResourcesResponse =
 
 /**
  * Common fields between different {@link PlanResourcesResponse} types.
- *
- * @public
  */
 export interface PlanResourcesResponseBase {
   /**
@@ -47,8 +43,6 @@ export interface PlanResourcesResponseBase {
 
 /**
  * A query plan for when the specified action is conditionally allowed for the principal on resources matching the input.
- *
- * @public
  */
 export interface PlanResourcesConditionalResponse extends PlanResourcesResponseBase {
   /**
@@ -64,8 +58,6 @@ export interface PlanResourcesConditionalResponse extends PlanResourcesResponseB
 
 /**
  * Type guard to check if a {@link PlanResourcesResponse} is a {@link PlanResourcesConditionalResponse}.
- *
- * @public
  */
 export function planResourcesResponseIsConditional(
   output: PlanResourcesResponse,
@@ -75,8 +67,6 @@ export function planResourcesResponseIsConditional(
 
 /**
  * A query plan for when the specified action is always allowed or denied for the principal on resources matching the input.
- *
- * @public
  */
 export interface PlanResourcesUnconditionalResponse extends PlanResourcesResponseBase {
   /**
@@ -87,8 +77,6 @@ export interface PlanResourcesUnconditionalResponse extends PlanResourcesRespons
 
 /**
  * Type guard to check if a {@link PlanResourcesResponse} is a {@link PlanResourcesUnconditionalResponse}.
- *
- * @public
  */
 export function planResourcesResponseIsUnconditional(
   output: PlanResourcesResponse,

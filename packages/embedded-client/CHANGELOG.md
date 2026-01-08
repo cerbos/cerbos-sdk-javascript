@@ -4,7 +4,7 @@
 
 ### Added
 
-- [`Options.defaultScope`](../../docs/embedded-client.options.defaultscope.md) to configure the embedded policy decision point server's [default scope](https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_scope) ([#1333](https://github.com/cerbos/cerbos-sdk-javascript/pull/1333))
+- [`Options.defaultScope`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded-client.Options.html#defaultscope) to configure the embedded policy decision point server's [default scope](https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_scope) ([#1333](https://github.com/cerbos/cerbos-sdk-javascript/pull/1333))
 
 ### Changed
 

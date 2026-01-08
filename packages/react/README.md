@@ -17,7 +17,7 @@ $ npm install @cerbos/react
 
 ## Example usage
 
-First, create an [HTTP](../http/README.md) or [embedded](../embedded/README.md) Cerbos client, and provide it to your application's components using [`CerbosProvider`](../../docs/react.cerbosprovider.md):
+First, create an [HTTP](../http/README.md) or [embedded](../embedded/README.md) Cerbos client, and provide it to your application's components using [`CerbosProvider`](https://cerbos.github.io/cerbos-sdk-javascript/functions/_cerbos_react.CerbosProvider.html):
 
 ```typescript
 import { Embedded as Cerbos } from "@cerbos/embedded";
@@ -54,10 +54,10 @@ function MyApp({ children }) {
 
 Then, use the client to perform permission checks in your components, using one of the provided hooks:
 
-- [`useCerbos`](../../docs/react.usecerbos.md)
-- [`useCheckResource`](../../docs/react.usecheckresource.md)
-- [`useCheckResources`](../../docs/react.usecheckresources.md)
-- [`useIsAllowed`](../../docs/react.useisallowed.md)
+- [`useCerbos`](https://cerbos.github.io/cerbos-sdk-javascript/functions/_cerbos_react.useCerbos.html)
+- [`useCheckResource`](https://cerbos.github.io/cerbos-sdk-javascript/functions/_cerbos_react.useCheckResource.html)
+- [`useCheckResources`](https://cerbos.github.io/cerbos-sdk-javascript/functions/_cerbos_react.useCheckResources.html)
+- [`useIsAllowed`](https://cerbos.github.io/cerbos-sdk-javascript/functions/_cerbos_react.useIsAllowed.html)
 
 ```typescript
 import { useIsAllowed } from "@cerbos/react";
@@ -91,7 +91,7 @@ This package is ESM-only, but may be `require`d from CommonJS modules in Node.js
 
 ## Further reading
 
-- [API reference](../../docs/react.md)
+- [API reference](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_react.html)
 - [Cerbos documentation](https://docs.cerbos.dev)
 
 ## Get help

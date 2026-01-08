@@ -3,8 +3,6 @@ import type { Uploader } from "./Uploader.js";
 
 /**
  * Metadata describing a change that was made to a store.
- *
- * @public
  */
 export interface ChangeDetails {
   /**

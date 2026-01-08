@@ -9,8 +9,6 @@ import { notOKParams } from "./internal.js";
 
 /**
  * Error thrown when attempting to modify a store that is connected to a Git repository.
- *
- * @public
  */
 export class CannotModifyGitConnectedStore extends NotOK {
   /** @internal */
@@ -21,8 +19,6 @@ export class CannotModifyGitConnectedStore extends NotOK {
 
 /**
  * Error thrown when a store modification is rejected because the condition specified in the request wasn't met.
- *
- * @public
  */
 export class ConditionUnsatisfied extends NotOK {
   /** @internal */
@@ -40,8 +36,6 @@ export class ConditionUnsatisfied extends NotOK {
 
 /**
  * Error thrown on failure to load credentials from environment variables.
- *
- * @public
  */
 export class MissingCredentials extends Error {
   /** @internal */
@@ -56,8 +50,6 @@ export class MissingCredentials extends Error {
 
 /**
  * Error thrown when {@link StoresClient.replaceFiles} fails because the request didn't contain any usable files.
- *
- * @public
  */
 export class NoUsableFiles extends NotOK {
   /** @internal */
@@ -81,8 +73,6 @@ export class NoUsableFiles extends NotOK {
  *
  * @remarks
  * Use the `allowUnchanged` request parameter to avoid throwing an error and return the current store version instead.
- *
- * @public
  */
 export class OperationDiscarded extends NotOK {
   /** @internal */
@@ -108,8 +98,6 @@ export class OperationDiscarded extends NotOK {
 
 /**
  * Error thrown when a store modification is rejected because it contains invalid files.
- *
- * @public
  */
 export class ValidationFailure extends NotOK {
   /** @internal */

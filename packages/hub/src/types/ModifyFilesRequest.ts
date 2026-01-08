@@ -4,8 +4,6 @@ import type { FileOperation } from "./FileOperation.js";
 
 /**
  * Input to {@link StoresClient.modifyFiles}.
- *
- * @public
  */
 export interface ModifyFilesRequest {
   /**

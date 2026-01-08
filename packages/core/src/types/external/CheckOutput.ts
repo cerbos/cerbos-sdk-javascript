@@ -4,8 +4,6 @@ import type { ValidationError } from "./ValidationError.js";
 
 /**
  * Output from a `CheckResources` decision.
- *
- * @public
  */
 export interface CheckOutput {
   /**

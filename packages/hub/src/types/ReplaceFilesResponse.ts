@@ -1,7 +1,5 @@
 /**
  * Output from {@link StoresClient.replaceFiles}.
- *
- * @public
  */
 export interface ReplaceFilesResponse {
   /**

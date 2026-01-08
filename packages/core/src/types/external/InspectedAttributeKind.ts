@@ -1,7 +1,5 @@
 /**
  * Kind of an attribute referenced by a policy.
- *
- * @public
  */
 export enum InspectedAttributeKind {
   /**

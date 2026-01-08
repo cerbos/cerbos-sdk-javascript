@@ -8,8 +8,6 @@ import type { RolePolicyBody } from "./RolePolicyBody.js";
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/ | policy} definition.
- *
- * @public
  */
 export type Policy =
   | DerivedRoles
@@ -21,8 +19,6 @@ export type Policy =
 
 /**
  * Common fields between different {@link Policy} types.
- *
- * @public
  */
 export interface PolicyBase {
   /**
@@ -60,8 +56,6 @@ export interface PolicyBase {
 /**
  * A set of {@link https://docs.cerbos.dev/cerbos/latest/policies/derived_roles | derived roles}
  * to augment static RBAC roles with contextual data to provide more fine-grained control at runtime.
- *
- * @public
  */
 export interface DerivedRoles extends PolicyBase {
   /**
@@ -72,8 +66,6 @@ export interface DerivedRoles extends PolicyBase {
 
 /**
  * Type guard to check if a {@link Policy} is a set of {@link DerivedRoles}.
- *
- * @public
  */
 export function policyIsDerivedRoles(policy: Policy): policy is DerivedRoles {
   return "derivedRoles" in policy;
@@ -85,8 +77,6 @@ export function policyIsDerivedRoles(policy: Policy): policy is DerivedRoles {
  *
  * @remarks
  * Requires the Cerbos policy decision point server to be at least v0.40.
- *
- * @public
  */
 export interface ExportConstants extends PolicyBase {
   /**
@@ -97,8 +87,6 @@ export interface ExportConstants extends PolicyBase {
 
 /**
  * Type guard to check if a {@link Policy} is a set of {@link ExportConstants}.
- *
- * @public
  */
 export function policyIsExportConstants(
   policy: Policy,
@@ -112,8 +100,6 @@ export function policyIsExportConstants(
  *
  * @remarks
  * Requires the Cerbos policy decision point server to be at least v0.29.
- *
- * @public
  */
 export interface ExportVariables extends PolicyBase {
   /**
@@ -124,8 +110,6 @@ export interface ExportVariables extends PolicyBase {
 
 /**
  * Type guard to check if a {@link Policy} is a set of {@link ExportVariables}.
- *
- * @public
  */
 export function policyIsExportVariables(
   policy: Policy,
@@ -135,8 +119,6 @@ export function policyIsExportVariables(
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/principal_policies | policy} defining overrides for a specific user.
- *
- * @public
  */
 export interface PrincipalPolicy extends PolicyBase {
   /**
@@ -147,8 +129,6 @@ export interface PrincipalPolicy extends PolicyBase {
 
 /**
  * Type guard to check if a {@link Policy} is a {@link PrincipalPolicy}.
- *
- * @public
  */
 export function policyIsPrincipalPolicy(
   policy: Policy,
@@ -158,8 +138,6 @@ export function policyIsPrincipalPolicy(
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/resource_policies | policy} defining rules for actions that can be performed on a given resource.
- *
- * @public
  */
 export interface ResourcePolicy extends PolicyBase {
   /**
@@ -170,8 +148,6 @@ export interface ResourcePolicy extends PolicyBase {
 
 /**
  * Type guard to check if a {@link Policy} is a {@link ResourcePolicy}.
- *
- * @public
  */
 export function policyIsResourcePolicy(
   policy: Policy,
@@ -179,13 +155,19 @@ export function policyIsResourcePolicy(
   return "resourcePolicy" in policy;
 }
 
-/** @alpha */
+/**
+ * A {@link https://docs.cerbos.dev/cerbos/latest/policies/role_policies | policy} defining rules for actions that can be performed by a given role.
+ */
 export interface RolePolicy extends PolicyBase {
-  /** @alpha */
+  /**
+   * The policy body.
+   */
   rolePolicy: RolePolicyBody;
 }
 
-/** @alpha */
+/**
+ * Type guard to check if a {@link Policy} is a {@link RolePolicy}.
+ */
 export function policyIsRolePolicy(policy: Policy): policy is RolePolicy {
   return "rolePolicy" in policy;
 }

@@ -16,7 +16,7 @@ $ npm install @cerbos/opentelemetry
 
 ## Example usage
 
-Register [`CerbosInstrumentation`](../../docs/opentelemetry.cerbosinstrumentation.md) with your other [OpenTelemetry instrumentation](https://opentelemetry.io/docs/instrumentation/js/instrumentation/):
+Register [`CerbosInstrumentation`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_opentelemetry.CerbosInstrumentation.html) with your other [OpenTelemetry instrumentation](https://opentelemetry.io/docs/instrumentation/js/instrumentation/):
 
 ```typescript
 import { CerbosInstrumentation } from "@cerbos/opentelemetry";
@@ -33,7 +33,7 @@ This package is ESM-only, but may be `require`d from CommonJS modules in Node.js
 
 ## Further reading
 
-- [API reference](../../docs/opentelemetry.md)
+- [API reference](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_opentelemetry.html)
 - [Cerbos documentation](https://docs.cerbos.dev)
 
 ## Get help

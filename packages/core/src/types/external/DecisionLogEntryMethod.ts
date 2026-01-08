@@ -5,8 +5,6 @@ import type { PlanResourcesOutput } from "./PlanResourcesOutput.js";
 
 /**
  * The outcome of a decision made by the policy decision point server.
- *
- * @public
  */
 export type DecisionLogEntryMethod =
   | DecisionLogEntryCheckResources
@@ -14,8 +12,6 @@ export type DecisionLogEntryMethod =
 
 /**
  * The outcome of a `CheckResources` decision made by the policy decision point server.
- *
- * @public
  */
 export interface DecisionLogEntryCheckResources {
   /**
@@ -41,8 +37,6 @@ export interface DecisionLogEntryCheckResources {
 
 /**
  * Type guard to check if a {@link DecisionLogEntryMethod} is a {@link DecisionLogEntryCheckResources}.
- *
- * @public
  */
 export function decisionLogEntryMethodIsCheckResources(
   method: DecisionLogEntryMethod,
@@ -52,8 +46,6 @@ export function decisionLogEntryMethodIsCheckResources(
 
 /**
  * The outcome of a `PlanResources` decision made by the policy decision point server.
- *
- * @public
  */
 export interface DecisionLogEntryPlanResources {
   /**
@@ -79,8 +71,6 @@ export interface DecisionLogEntryPlanResources {
 
 /**
  * Type guard to check if a {@link DecisionLogEntryMethod} is a {@link DecisionLogEntryPlanResources}.
- *
- * @public
  */
 export function decisionLogEntryMethodIsPlanResources(
   method: DecisionLogEntryMethod,

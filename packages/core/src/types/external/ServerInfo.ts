@@ -1,7 +1,5 @@
 /**
  * Information about the Cerbos policy decision point (PDP) server.
- *
- * @public
  */
 export interface ServerInfo {
   /**

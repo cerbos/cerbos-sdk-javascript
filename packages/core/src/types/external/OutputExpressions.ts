@@ -1,7 +1,5 @@
 /**
  * {@link https://docs.cerbos.dev/cerbos/latest/policies/conditions | Common Expression Language} expressions to evaluate to produce {@link https://docs.cerbos.dev/cerbos/latest/policies/outputs | user-defined output} from a policy rule.
- *
- * @public
  */
 export interface OutputExpressions {
   /**

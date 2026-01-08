@@ -10,8 +10,6 @@ const defaultUserAgent = `cerbos-sdk-javascript-http/${pkg.version}`;
 
 /**
  * Options for creating a new {@link HTTP} client.
- *
- * @public
  */
 export type Options = CoreOptions;
 
@@ -22,18 +20,16 @@ export type Options = CoreOptions;
  * This is primarily intended for use in browsers, and requires `fetch` to be available globally.
  * If you're targeting {@link https://caniuse.com/fetch | old browsers}, you'll need to apply {@link https://www.npmjs.com/package/whatwg-fetch | a polyfill}.
  *
- * You can use it in server-side Node.js applications, but the {@link @cerbos/grpc#GRPC | gRPC client} might be more appropriate.
+ * You can use it in server-side Node.js applications, but the {@link @cerbos/grpc!GRPC | gRPC client} might be more appropriate.
  *
- * See {@link @cerbos/core#Client | the parent class} for available methods.
- *
- * @public
+ * See {@link @cerbos/core!Client | the parent class} for available methods.
  */
 export class HTTP extends Client {
   /**
    * Create a client for interacting with the Cerbos policy decision point (PDP) server over HTTP.
    *
-   * @param baseUrl - base Cerbos PDP server URL (the Cerbos REST API must be available at `${baseUrl}/api/`).
-   * @param options - additional client settings.
+   * @param baseUrl - Base Cerbos PDP server URL (the Cerbos REST API must be available at `${baseUrl}/api/`).
+   * @param options - Additional client settings.
    *
    * @example
    * Connect via HTTP:

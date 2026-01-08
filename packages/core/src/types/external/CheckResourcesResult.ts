@@ -7,8 +7,6 @@ import type { Value } from "./Value.js";
 
 /**
  * The outcome of checking a principal's permissions on single resource.
- *
- * @public
  */
 export class CheckResourcesResult {
   /**
@@ -42,6 +40,7 @@ export class CheckResourcesResult {
    */
   public outputs: OutputResult[];
 
+  /** @internal */
   public constructor({
     resource,
     actions,
@@ -80,7 +79,7 @@ export class CheckResourcesResult {
   /**
    * Check if the policy decision was that a given action should be allowed for the resource.
    *
-   * @param action - the action to check.
+   * @param action - The action to check.
    * @returns `undefined` if the action is not present in the results.
    */
   public isAllowed(action: string): boolean | undefined {
@@ -99,7 +98,7 @@ export class CheckResourcesResult {
   /**
    * Find the value of the user-defined output for a particular policy rule.
    *
-   * @param source - the identifier of the policy rule that produced the output.
+   * @param source - The identifier of the policy rule that produced the output.
    * @returns `undefined` if the result does not include an output for the source.
    *
    * @remarks

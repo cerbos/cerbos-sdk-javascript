@@ -2,8 +2,6 @@ import type { Value } from "./Value.js";
 
 /**
  * A principal (often a user, but potentially another actor like a service account) to authorize.
- *
- * @public
  */
 export interface Principal {
   /**

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPointStrategy": "packages",
+  "entryPoints": ["packages/*"],
+  "exclude": ["packages/api"],
+  "externalSymbolLinkMappings": {
+    "typescript": {
+      "WebAssembly.instantiate": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiate_static",
+      "WebAssembly.instantiateStreaming": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiateStreaming_static",
+      "WebAssembly.Module": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Module"
+    }
+  },
+  "favicon": "assets/favicon.svg",
+  "headings": {
+    "readme": false
+  },
+  "hostedBaseUrl": "https://cerbos.github.io/cerbos-sdk-javascript/",
+  "locales": {
+    "en": {
+      "kind_enum_member": "Enumeration member",
+      "kind_call_signature": "Call signature",
+      "kind_index_signature": "Index signature",
+      "kind_constructor_signature": "Constructor signature",
+      "kind_type_literal": "Type literal",
+      "kind_type_parameter": "Type parameter",
+      "kind_get_signature": "Get signature",
+      "kind_set_signature": "Set signature",
+      "kind_type_alias": "Type alias",
+      "kind_plural_enum_member": "Enumeration members",
+      "kind_plural_call_signature": "Call signatures",
+      "kind_plural_index_signature": "Index signatures",
+      "kind_plural_constructor_signature": "Constructor signatures",
+      "kind_plural_type_literal": "Type literals",
+      "kind_plural_type_parameter": "Type parameters",
+      "kind_plural_get_signature": "Get signatures",
+      "kind_plural_set_signature": "Set signatures",
+      "kind_plural_type_alias": "Type aliases"
+    }
+  },
+  "name": "Cerbos JavaScript SDK",
+  "navigationLinks": {
+    "Cerbos": "https://cerbos.dev",
+    "GitHub": "https://github.com/cerbos/cerbos-sdk-javascript"
+  },
+  "packageOptions": {
+    "excludeInternal": true,
+    "includeVersion": true,
+    "requiredToBeDocumented": [
+      "Enum",
+      "EnumMember",
+      "Variable",
+      "Function",
+      "Class",
+      "Interface",
+      "Constructor",
+      "Property",
+      "Method",
+      "Accessor",
+      "TypeAlias",
+      "TypeParameter"
+    ],
+    "validation": {
+      "notDocumented": true
+    }
+  },
+  "plugin": [
+    "typedoc-plugin-mdn-links",
+    "./private/scripts/lib/typedoc-plugin.js"
+  ],
+  "treatWarningsAsErrors": true
+}

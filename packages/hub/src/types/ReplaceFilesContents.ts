@@ -2,8 +2,6 @@ import type { File } from "./File.js";
 
 /**
  * Files to upload to a store.
- *
- * @public
  */
 export type ReplaceFilesContents =
   | ReplaceFilesContentsUnzipped
@@ -11,8 +9,6 @@ export type ReplaceFilesContents =
 
 /**
  * Files to upload to a store.
- *
- * @public
  */
 export interface ReplaceFilesContentsUnzipped {
   /**
@@ -23,8 +19,6 @@ export interface ReplaceFilesContentsUnzipped {
 
 /**
  * Type guard to check if a {@link ReplaceFilesContents} is a {@link ReplaceFilesContentsUnzipped}.
- *
- * @public
  */
 export function replaceFilesContentsIsReplaceFilesContentsUnzipped(
   contents: ReplaceFilesContents,
@@ -34,8 +28,6 @@ export function replaceFilesContentsIsReplaceFilesContentsUnzipped(
 
 /**
  * Zipped files to upload to a store.
- *
- * @public
  */
 export interface ReplaceFilesContentsZipped {
   /**
@@ -46,8 +38,6 @@ export interface ReplaceFilesContentsZipped {
 
 /**
  * Type guard to check if a {@link ReplaceFilesContents} is a {@link ReplaceFilesContentsZipped}.
- *
- * @public
  */
 export function replaceFilesContentsIsReplaceFilesContentsZipped(
   contents: ReplaceFilesContents,

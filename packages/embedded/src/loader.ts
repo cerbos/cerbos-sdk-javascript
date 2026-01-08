@@ -40,10 +40,9 @@ async function resolve(result: Awaitable<LoadResult>): Promise<Bundle> {
 
 /**
  * Error thrown when a {@link Loader} fails to load an embedded policy decision point bundle.
- *
- * @public
  */
 export class LoadError extends Error {
+  /** @internal */
   public constructor(
     /**
      * The error that caused loading the embedded policy decision point bundle to fail.
@@ -62,8 +61,6 @@ export class LoadError extends Error {
 
 /**
  * WebAssembly binary code of an embedded policy decision point bundle, or a URL or HTTP response from which to stream it.
- *
- * @public
  */
 export type Source =
   | string
@@ -75,8 +72,6 @@ export type Source =
 
 /**
  * Options for creating a new {@link Embedded} client or {@link Loader}.
- *
- * @public
  */
 export interface Options extends Pick<CoreOptions, "headers" | "userAgent"> {
   /**
@@ -115,7 +110,7 @@ export interface Options extends Pick<CoreOptions, "headers" | "userAgent"> {
    * A function returning the current time, to be used when evaluating policy conditions.
    *
    * @remarks
-   * The function can either return a {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date | `Date`} or a number of milliseconds elapsed since the Unix epoch.
+   * The function can either return a {@link Date} or a number of milliseconds elapsed since the Unix epoch.
    *
    * @defaultValue `Date.now`
    */
@@ -194,22 +189,16 @@ export interface Options extends Pick<CoreOptions, "headers" | "userAgent"> {
  *   return payload as DecodedJWTPayload;
  * };
  * ```
- *
- * @public
  */
 export type DecodeJWTPayload = (jwt: JWT) => Awaitable<DecodedJWTPayload>;
 
 /**
  * The decoded payload of a JWT, containing the claims.
- *
- * @public
  */
 export type DecodedJWTPayload = Record<string, Value>;
 
 /**
  * Metadata describing an embedded policy decision point bundle.
- *
- * @public
  */
 export interface BundleMetadata {
   /**
@@ -242,8 +231,6 @@ export interface BundleMetadata {
 
 /**
  * Loads an embedded policy decision point bundle from a given source.
- *
- * @public
  */
 export class Loader {
   /** @internal */
@@ -266,7 +253,7 @@ export class Loader {
    * Load an embedded policy decision point (PDP) bundle from a given source.
    *
    * @param source - WebAssembly binary code of an embedded PDP bundle, or a URL or HTTP response from which to stream it.
-   * @param options - additional settings.
+   * @param options - Additional settings.
    *
    * @remarks
    * Bundle download URLs are available in the "Embedded" section of the "Decision points" page of your Cerbos Hub workspace.
@@ -366,8 +353,6 @@ const notModified = new Error("HTTP 304");
 
 /**
  * Options for creating a new {@link AutoUpdatingLoader}.
- *
- * @public
  */
 export interface AutoUpdateOptions extends Options {
   /**
@@ -396,8 +381,6 @@ export interface AutoUpdateOptions extends Options {
 
 /**
  * Loads an embedded policy decision point bundle from a given URL, and polls for updates.
- *
- * @public
  */
 export class AutoUpdatingLoader extends Loader {
   private readonly activateOnLoad: boolean;
@@ -413,7 +396,7 @@ export class AutoUpdatingLoader extends Loader {
    * Load an embedded policy decision point bundle from a given URL.
    *
    * @param url - URL from which to stream bundles.
-   * @param options - additional settings.
+   * @param options - Additional settings.
    *
    * @remarks
    * Bundle download URLs are available in the "Embedded" section of the "Decision points" page of your Cerbos Hub workspace.

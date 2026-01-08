@@ -19,8 +19,6 @@ const defaultUserAgent = `cerbos-sdk-javascript-grpc/${pkg.version}`;
 
 /**
  * Options for creating a new {@link GRPC} client.
- *
- * @public
  */
 export interface Options extends CoreOptions {
   /**
@@ -57,8 +55,6 @@ export interface Options extends CoreOptions {
 
 /**
  * Compression algorithm to apply to messages exchanged between the client and policy decision point server.
- *
- * @public
  */
 export enum Compression {
   /**
@@ -74,8 +70,6 @@ export enum Compression {
 
 /**
  * Advanced settings to configure a gRPC client.
- *
- * @public
  */
 export interface ChannelOptions {
   /**
@@ -248,9 +242,7 @@ export interface ChannelOptions {
  * @remarks
  * Not supported in browsers.
  *
- * See {@link @cerbos/core#Client | the parent class} for available methods.
- *
- * @public
+ * See {@link @cerbos/core!Client | the parent class} for available methods.
  */
 export class GRPC extends Client {
   private readonly client: GenericClient;
@@ -259,7 +251,7 @@ export class GRPC extends Client {
    * Create a client for interacting with the Cerbos policy decision point (PDP) server over gRPC.
    *
    * @param target - Cerbos PDP server address (`"host"`, `"host:port"`, or `"unix:/path/to/socket"`).
-   * @param options - additional client settings.
+   * @param options - Additional client settings.
    *
    * @example
    * Connect via TCP with no encryption:

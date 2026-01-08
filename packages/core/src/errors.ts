@@ -4,8 +4,6 @@ import { Status } from "./types/external.js";
 
 /**
  * Options for creating an error.
- *
- * @public
  */
 export interface ErrorOptions {
   /**
@@ -16,8 +14,6 @@ export interface ErrorOptions {
 
 /**
  * Error thrown when the Cerbos policy decision point server returns an unsuccessful response.
- *
- * @public
  */
 export class NotOK extends Error {
   /**
@@ -32,6 +28,7 @@ export class NotOK extends Error {
     }
   }
 
+  /** @internal */
   public constructor(
     /**
      * The status code returned by the Cerbos policy decision point server.
@@ -78,11 +75,10 @@ function has<K extends string>(
 }
 
 /**
- * Error thrown when input fails schema validation, if the {@link @cerbos/core#Client} is configured with {@link @cerbos/core#Options.onValidationError | onValidationError} set to `"throw"`.
- *
- * @public
+ * Error thrown when input fails schema validation, if the {@link Client} is configured with {@link Options.onValidationError | onValidationError} set to `"throw"`.
  */
 export class ValidationFailed extends Error {
+  /** @internal */
   public constructor(
     /**
      * The validation errors that occurred.

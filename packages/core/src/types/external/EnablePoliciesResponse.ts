@@ -1,7 +1,5 @@
 /**
  * The outcome of enabling policies.
- *
- * @public
  */
 export interface EnablePoliciesResponse {
   /**

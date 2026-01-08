@@ -1,7 +1,5 @@
 /**
- * Input to {@link @cerbos/core#Client.deleteSchemas}.
- *
- * @public
+ * Input to {@link @cerbos/core!Client.deleteSchemas}.
  */
 export interface DeleteSchemasRequest {
   /**

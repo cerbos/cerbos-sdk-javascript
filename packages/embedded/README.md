@@ -43,7 +43,7 @@ await cerbos.isAllowed({
 }); // => true
 ```
 
-For more details, [see the `Embedded` class documentation](../../docs/embedded.embedded.md).
+For more details, [see the `Embedded` class documentation](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_embedded.Embedded.html).
 
 ## CommonJS support
 
@@ -51,7 +51,7 @@ This package is ESM-only, but may be `require`d from CommonJS modules in Node.js
 
 ## Further reading
 
-- [API reference](../../docs/embedded.md)
+- [API reference](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_embedded.html)
 - [Cerbos documentation](https://docs.cerbos.dev)
 - [Cerbos Hub documentation](https://docs.cerbos.dev/cerbos-hub/)
 

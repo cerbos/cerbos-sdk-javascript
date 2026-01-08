@@ -1,7 +1,5 @@
 /**
  * Status codes returned by the Cerbos policy decision point server.
- *
- * @public
  */
 export enum Status {
   /**

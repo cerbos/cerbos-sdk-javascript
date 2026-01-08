@@ -2,8 +2,6 @@ import type { InspectedAttributeKind } from "./InspectedAttributeKind.js";
 
 /**
  * Details of an attribute referenced by a policy.
- *
- * @public
  */
 export interface InspectedAttribute {
   /**
