@@ -12,7 +12,7 @@ export function configToProtobuf({
   defaultScope = "",
   globals = {},
   lenientScopeSearch = false,
-  schemaEnforcement = SchemaEnforcement.WARN,
+  schemaEnforcement,
 }: Pick<
   Options,
   | "defaultPolicyVersion"
@@ -38,9 +38,12 @@ export function configToProtobuf({
 }
 
 function schemaEnforcementToProtobuf(
-  enforcement: SchemaEnforcement,
+  enforcement: SchemaEnforcement | undefined,
 ): Config_Schema_Enforcement {
   switch (enforcement) {
+    case undefined:
+      return Config_Schema_Enforcement.UNSPECIFIED;
+
     case SchemaEnforcement.NONE:
       return Config_Schema_Enforcement.NONE;
 

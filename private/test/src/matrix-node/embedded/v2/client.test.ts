@@ -29,7 +29,7 @@ import type {
   Options,
   PolicySource,
 } from "@cerbos/embedded-client";
-import { Embedded } from "@cerbos/embedded-client";
+import { Embedded, SchemaEnforcement } from "@cerbos/embedded-client";
 import { metadata } from "@cerbos/embedded-server";
 import { credentialsFromEnv } from "@cerbos/hub";
 
@@ -57,7 +57,6 @@ describe("Embedded", () => {
       options?: Partial<Options>,
     ): Client {
       return new Embedded({
-        ...options,
         policies,
         wasm: readEmbeddedServerWASM(),
         decodeJWTPayload: ({ token }): DecodedJWTPayload =>
@@ -66,6 +65,8 @@ describe("Embedded", () => {
           allow_deletion: true,
         },
         onDecision,
+        schemaEnforcement: SchemaEnforcement.WARN,
+        ...options,
       });
     }
 

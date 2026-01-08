@@ -79,7 +79,7 @@ export interface Options extends Pick<
   /**
    * {@link https://docs.cerbos.dev/cerbos/latest/configuration/schema#_enforcement | Schema enforcement level} for the embedded policy decision point server.
    *
-   * @defaultValue `SchemaEnforcement.WARN`
+   * @defaultValue `SchemaEnforcement.NONE`
    */
   schemaEnforcement?: SchemaEnforcement;
 }
