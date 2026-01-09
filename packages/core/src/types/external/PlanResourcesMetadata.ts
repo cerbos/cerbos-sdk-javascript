@@ -1,7 +1,5 @@
 /**
  * Additional information about the query plan.
- *
- * @public
  */
 export interface PlanResourcesMetadata {
   /**

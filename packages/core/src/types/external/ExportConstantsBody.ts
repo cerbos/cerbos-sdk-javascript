@@ -6,8 +6,6 @@ import type { Value } from "./Value.js";
  *
  * @remarks
  * Requires the Cerbos policy decision point server to be at least v0.40.
- *
- * @public
  */
 export interface ExportConstantsBody {
   /**

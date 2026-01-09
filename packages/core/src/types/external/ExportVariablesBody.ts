@@ -4,8 +4,6 @@
  *
  * @remarks
  * Requires the Cerbos policy decision point server to be at least v0.29.
- *
- * @public
  */
 export interface ExportVariablesBody {
   /**

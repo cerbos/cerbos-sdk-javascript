@@ -2,10 +2,9 @@ import type { PlanExpressionOperand } from "./PlanExpressionOperand.js";
 
 /**
  * An abstract syntax tree node representing an expression to evaluate.
- *
- * @public
  */
 export class PlanExpression {
+  /** @internal */
   public constructor(
     /**
      * The operator to invoke.

@@ -4,8 +4,6 @@ import type { Resource } from "./Resource.js";
 
 /**
  * Input to a `CheckResources` decision.
- *
- * @public
  */
 export interface CheckInput {
   /**

@@ -1,7 +1,5 @@
 /**
  * Output from {@link StoresClient.modifyFiles}.
- *
- * @public
  */
 export interface ModifyFilesResponse {
   /**

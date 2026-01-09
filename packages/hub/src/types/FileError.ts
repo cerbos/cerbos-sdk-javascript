@@ -2,8 +2,6 @@ import type { FileErrorCause } from "./FileErrorCause.js";
 
 /**
  * A validation error that occurred when attempting to add a file to a store.
- *
- * @public
  */
 export interface FileError {
   /**

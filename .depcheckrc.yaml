@@ -3,5 +3,7 @@ ignores:
   - "@tsconfig/node20"
   - "@tsconfig/strictest"
   - "@types/node"
+  - "@types/web"
   - prettier-plugin-pkg
   - ts-proto
+  - typedoc-plugin-mdn-links

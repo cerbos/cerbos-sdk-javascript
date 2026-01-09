@@ -1,7 +1,5 @@
 /**
  * Reference to a schema to be used to validate principal or resource attributes.
- *
- * @public
  */
 export interface SchemaRef {
   /**

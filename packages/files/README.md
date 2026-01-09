@@ -29,7 +29,7 @@ const { policies, schemas } = await readDirectory("path/to/directory");
 // => { policies: [...], schemas: [...] }
 ```
 
-For more details, [see the package documentation](../../docs/files.md).
+For more details, [see the package documentation](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_files.html).
 
 ## CommonJS support
 
@@ -37,7 +37,7 @@ This package is ESM-only, but may be `require`d from CommonJS modules in Node.js
 
 ## Further reading
 
-- [API reference](../../docs/files.md)
+- [API reference](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_files.html)
 - [Cerbos documentation](https://docs.cerbos.dev)
 
 ## Get help

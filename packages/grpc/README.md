@@ -37,7 +37,7 @@ await cerbos.isAllowed({
 }); // => true
 ```
 
-For more details, [see the `GRPC` class documentation](../../docs/grpc.grpc.md).
+For more details, [see the `GRPC` class documentation](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_grpc.GRPC.html).
 
 ## CommonJS support
 
@@ -45,7 +45,7 @@ This package is ESM-only, but may be `require`d from CommonJS modules in Node.js
 
 ## Further reading
 
-- [API reference](../../docs/grpc.md)
+- [API reference](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_grpc.html)
 - [Cerbos documentation](https://docs.cerbos.dev)
 
 ## Get help

@@ -1,7 +1,5 @@
 /**
  * Output from {@link StoresClient.listFiles}.
- *
- * @public
  */
 export interface ListFilesResponse {
   /**

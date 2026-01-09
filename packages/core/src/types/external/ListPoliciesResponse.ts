@@ -1,7 +1,5 @@
 /**
  * A list of available policy IDs.
- *
- * @public
  */
 export interface ListPoliciesResponse {
   /**

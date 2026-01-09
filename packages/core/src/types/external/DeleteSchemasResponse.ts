@@ -1,7 +1,5 @@
 /**
  * The outcome of deleting schemas.
- *
- * @public
  */
 export interface DeleteSchemasResponse {
   /**

@@ -1,7 +1,5 @@
 /**
  * Sources of invalid attributes.
- *
- * @public
  */
 export enum ValidationErrorSource {
   /**

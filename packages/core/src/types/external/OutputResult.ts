@@ -2,8 +2,6 @@ import type { Value } from "./Value.js";
 
 /**
  * User-defined output from a policy rule evaluation.
- *
- * @public
  */
 export interface OutputResult {
   /**

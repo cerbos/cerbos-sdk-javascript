@@ -4,8 +4,6 @@ import type { Status } from "./Status.js";
 
 /**
  * An access log entry in the policy decision point's audit log.
- *
- * @public
  */
 export interface AccessLogEntry {
   /**

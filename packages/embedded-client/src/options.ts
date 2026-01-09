@@ -12,8 +12,6 @@ import type { PolicyLoader } from "./loader.js";
 
 /**
  * Options for creating a new {@link Embedded} client.
- *
- * @public
  */
 export interface Options extends Pick<
   CoreOptions,
@@ -86,8 +84,6 @@ export interface Options extends Pick<
 
 /**
  * {@link https://docs.cerbos.dev/cerbos/latest/configuration/schema#_enforcement | Schema enforcement levels} for the embedded policy decision point (PDP) server.
- *
- * @public
  */
 export enum SchemaEnforcement {
   /**
@@ -116,8 +112,6 @@ export enum SchemaEnforcement {
  * - a {@link PolicyLoader} (or the {@link PolicyLoaderOptions} to create one) to download policy bundles from Cerbos Hub; or
  *
  * - the contents of a previously-downloaded policy bundle (or a promise resolving to one).
- *
- * @public
  */
 export type PolicySource =
   | PolicyLoader
@@ -126,8 +120,6 @@ export type PolicySource =
 
 /**
  * Options for creating a {@link PolicyLoader}.
- *
- * @public
  */
 export interface PolicyLoaderOptions extends Partial<HubClientOptions> {
   /**
@@ -185,17 +177,15 @@ export interface PolicyLoaderOptions extends Partial<HubClientOptions> {
  *
  * The source may be
  *
- * - a `string` or `URL`, to {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch | `fetch`} the binary code from a remote location and compile it using {@link https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiateStreaming_static | `WebAssembly.instantiateStreaming`};
+ * - a `string` or {@link URL}, to {@link fetch} the binary code from a remote location and compile it using {@link WebAssembly.instantiateStreaming};
  *
- * - an HTTP {@link https://developer.mozilla.org/en-US/docs/Web/API/Response | `Response`} (or a promise resolving to one), to stream the binary code from the response body and compile it using {@link https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiateStreaming_static | `WebAssembly.instantiateStreaming`};
+ * - an HTTP {@link Response} (or a promise resolving to one), to stream the binary code from the response body and compile it using {@link WebAssembly.instantiateStreaming};
  *
- * - the binary code itself as an {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer | `ArrayBuffer`}, {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array | `Uint8Array`}, or Node.js {@link https://nodejs.org/api/buffer.html#class-buffer | `Buffer`} (or a promise resolving to one of these), to compile it using {@link https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiate_static | `WebAssembly.instantiate`};
+ * - the binary code itself as an {@link ArrayBuffer}, {@link Uint8Array}, or Node.js {@link https://nodejs.org/api/buffer.html#class-buffer | Buffer} (or a promise resolving to one of these), to compile it using {@link WebAssembly.instantiate};
  *
- * - a precompiled {@link https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Module | `WebAssembly.Module`} (or a promise resolving to one); or
+ * - a precompiled {@link WebAssembly.Module} (or a promise resolving to one); or
  *
  * - a function that instantiates a WebAssembly module.
- *
- * @public
  */
 export type WasmSource =
   | string
@@ -208,8 +198,6 @@ export type WasmSource =
 
 /**
  * A function that instantiates a WebAssembly module.
- *
- * @public
  */
 export type WasmInstantiate = (
   imports: WebAssembly.Imports,
@@ -268,14 +256,10 @@ export type WasmInstantiate = (
  *   return payload as DecodedJWTPayload;
  * };
  * ```
- *
- * @public
  */
 export type DecodeJWTPayload = (jwt: JWT) => Awaitable<DecodedJWTPayload>;
 
 /**
  * The decoded payload of a JWT, containing the claims.
- *
- * @public
  */
 export type DecodedJWTPayload = Record<string, Value>;

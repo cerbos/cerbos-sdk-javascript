@@ -1,7 +1,5 @@
 /**
  * Criteria to match audit log entries.
- *
- * @public
  */
 export type AuditLogFilter =
   | AuditLogFilterBetween
@@ -10,8 +8,6 @@ export type AuditLogFilter =
 
 /**
  * Match audit log entries captured between two timestamps.
- *
- * @public
  */
 export interface AuditLogFilterBetween {
   /**
@@ -27,8 +23,6 @@ export interface AuditLogFilterBetween {
 
 /**
  * Type guard to check if an {@link AuditLogFilter} is an {@link AuditLogFilterBetween}.
- *
- * @public
  */
 export function auditLogFilterIsBetween(
   filter: AuditLogFilter,
@@ -38,8 +32,6 @@ export function auditLogFilterIsBetween(
 
 /**
  * Match the audit log entries captured since N seconds ago.
- *
- * @public
  */
 export interface AuditLogFilterSince {
   /**
@@ -50,8 +42,6 @@ export interface AuditLogFilterSince {
 
 /**
  * Type guard to check if an {@link AuditLogFilter} is an {@link AuditLogFilterSince}.
- *
- * @public
  */
 export function auditLogFilterIsSince(
   filter: AuditLogFilter,
@@ -61,8 +51,6 @@ export function auditLogFilterIsSince(
 
 /**
  * Match the last N audit log entries.
- *
- * @public
  */
 export interface AuditLogFilterTail {
   /**
@@ -73,8 +61,6 @@ export interface AuditLogFilterTail {
 
 /**
  * Type guard to check if an {@link AuditLogFilter} is an {@link AuditLogFilterTail}.
- *
- * @public
  */
 export function auditLogFilterIsTail(
   filter: AuditLogFilter,

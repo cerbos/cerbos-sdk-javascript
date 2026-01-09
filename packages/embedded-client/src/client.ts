@@ -8,9 +8,7 @@ import { Transport } from "./transport.js";
  * A client for interacting with an embedded Cerbos policy decision point.
  *
  * @remarks
- * See {@link @cerbos/core#Client | the parent class} for available methods.
- *
- * @public
+ * See {@link @cerbos/core!Client | the parent class} for available methods.
  */
 export class Embedded extends Client {
   private readonly server: Server;

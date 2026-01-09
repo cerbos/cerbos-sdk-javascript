@@ -2,8 +2,6 @@ import type { SchemaRef } from "./SchemaRef.js";
 
 /**
  * References to schemas to be used to validate principal and resource attributes.
- *
- * @public
  */
 export interface SchemaRefs {
   /**

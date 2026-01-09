@@ -1,7 +1,5 @@
 /**
  * A list of available schema IDs.
- *
- * @public
  */
 export interface ListSchemasResponse {
   /**

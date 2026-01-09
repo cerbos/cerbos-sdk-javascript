@@ -1,7 +1,5 @@
 /**
- * Input to {@link @cerbos/core#Client.reloadStore}.
- *
- * @public
+ * Input to {@link @cerbos/core!Client.reloadStore}.
  */
 export interface ReloadStoreRequest {
   /**

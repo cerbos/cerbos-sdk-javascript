@@ -25,8 +25,6 @@ import { Transport } from "./transport.js";
  *
  * @remarks
  * See {@link https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_instrumentation.InstrumentationConfig.html | `InstrumentationConfig` documentation from OpenTelemetry}.
- *
- * @public
  */
 export type CerbosInstrumentationConfig = InstrumentationConfig;
 
@@ -42,8 +40,6 @@ export type CerbosInstrumentationConfig = InstrumentationConfig;
  *   instrumentations: [...yourOtherInstrumentations, new CerbosInstrumentation()],
  * });
  * ```
- *
- * @public
  */
 export class CerbosInstrumentation implements Instrumentation {
   /**
@@ -64,6 +60,9 @@ export class CerbosInstrumentation implements Instrumentation {
   private config: CerbosInstrumentationConfig;
   private instruments: Instruments | undefined;
 
+  /**
+   * Create OpenTelemetry instrumentation for Cerbos clients.
+   */
   public constructor(config: CerbosInstrumentationConfig = {}) {
     this.diag = diag.createComponentLogger({
       namespace: name,

@@ -4,8 +4,6 @@ import type { ReplaceFilesContents } from "./ReplaceFilesContents.js";
 
 /**
  * Input to {@link StoresClient.replaceFiles}.
- *
- * @public
  */
 export interface ReplaceFilesRequest {
   /**
