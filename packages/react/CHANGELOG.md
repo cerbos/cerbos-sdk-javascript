@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.3.1] - 2026-01-12
+
 ### Changed
 
 - Migrate documentation to TypeDoc ([#1332](https://github.com/cerbos/cerbos-sdk-javascript/pull/1332))
+
+- Bump dependency on [@cerbos/core] to 0.27.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
 
 ## [0.3.0] - 2026-01-07
 
@@ -116,7 +122,8 @@
 
 - A collection of React hooks for interacting with Cerbos policy decision points ([#876](https://github.com/cerbos/cerbos-sdk-javascript/pull/876), [#918](https://github.com/cerbos/cerbos-sdk-javascript/pull/918))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.3.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.3.1...HEAD
+[0.3.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.3.0...@cerbos/react@0.3.1
 [0.3.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.2.7...@cerbos/react@0.3.0
 [0.2.7]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.2.6...@cerbos/react@0.2.7
 [0.2.6]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.2.5...@cerbos/react@0.2.6

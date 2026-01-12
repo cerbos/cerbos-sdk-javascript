@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.4.0] - 2026-01-12
+
 ### Added
 
 - [`Options.defaultScope`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded-client.Options.html#defaultscope) to configure the embedded policy decision point server's [default scope](https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_scope) ([#1333](https://github.com/cerbos/cerbos-sdk-javascript/pull/1333))
@@ -14,6 +18,12 @@
   Now the default is determined by the server (currently `NONE`).
 
 - Migrate documentation to TypeDoc ([#1332](https://github.com/cerbos/cerbos-sdk-javascript/pull/1332))
+
+- Bump dependency on [@cerbos/api] to 0.5.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
+
+- Bump dependency on [@cerbos/core] to 0.27.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
+
+- Bump dependency on [@cerbos/hub] to 0.5.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
 
 ## [0.3.0] - 2026-01-07
 
@@ -47,7 +57,8 @@
 
 - Client library for new embedded policy decision point servers ([#1312](https://github.com/cerbos/cerbos-sdk-javascript/pull/1312))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.3.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.4.0...HEAD
+[0.4.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.3.0...@cerbos/embedded-client@0.4.0
 [0.3.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.2.0...@cerbos/embedded-client@0.3.0
 [0.2.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.1.0...@cerbos/embedded-client@0.2.0
 [0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/e55b224b1a6dcdd6ea9b2472bc498b5223d19b5e...@cerbos/embedded-client@0.1.0

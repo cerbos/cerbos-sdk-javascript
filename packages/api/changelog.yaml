@@ -1,11 +1,11 @@
-unreleased:
-  type: patch
-
-  changed:
-    - summary: Migrate documentation to TypeDoc
-      pull: 1332
-
 releases:
+  - version: 0.5.1
+    date: 2026-01-12
+
+    changed:
+      - summary: Migrate documentation to TypeDoc
+        pull: 1332
+
   - version: 0.5.0
     date: 2026-01-07
 

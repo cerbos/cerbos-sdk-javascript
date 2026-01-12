@@ -2,9 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.24.1] - 2026-01-12
+
 ### Changed
 
 - Migrate documentation to TypeDoc ([#1332](https://github.com/cerbos/cerbos-sdk-javascript/pull/1332))
+
+- Bump dependency on [@cerbos/api] to 0.5.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
+
+- Bump dependency on [@cerbos/core] to 0.27.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
 
 ## [0.24.0] - 2026-01-07
 
@@ -502,7 +510,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.24.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.24.1...HEAD
+[0.24.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.24.0...@cerbos/grpc@0.24.1
 [0.24.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.7...@cerbos/grpc@0.24.0
 [0.23.7]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.6...@cerbos/grpc@0.23.7
 [0.23.6]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.5...@cerbos/grpc@0.23.6

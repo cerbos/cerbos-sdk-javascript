@@ -2,9 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.5.1] - 2026-01-12
+
 ### Changed
 
 - Migrate documentation to TypeDoc ([#1332](https://github.com/cerbos/cerbos-sdk-javascript/pull/1332))
+
+- Bump dependency on [@cerbos/api] to 0.5.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
+
+- Bump dependency on [@cerbos/core] to 0.27.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
 
 ## [0.5.0] - 2026-01-07
 
@@ -216,7 +224,8 @@
 
 - A package to load Cerbos policies from YAML or JSON files ([#611](https://github.com/cerbos/cerbos-sdk-javascript/pull/611))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.5.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.5.1...HEAD
+[0.5.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.5.0...@cerbos/files@0.5.1
 [0.5.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.4.6...@cerbos/files@0.5.0
 [0.4.6]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.4.5...@cerbos/files@0.4.6
 [0.4.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.4.4...@cerbos/files@0.4.5

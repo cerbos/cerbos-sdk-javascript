@@ -2,9 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.14.1] - 2026-01-12
+
 ### Changed
 
 - Migrate documentation to TypeDoc ([#1332](https://github.com/cerbos/cerbos-sdk-javascript/pull/1332))
+
+- Bump dependency on [@cerbos/api] to 0.5.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
+
+- Bump dependency on [@cerbos/core] to 0.27.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
 
 ## [0.14.0] - 2026-01-07
 
@@ -293,7 +301,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.14.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.14.1...HEAD
+[0.14.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.14.0...@cerbos/embedded@0.14.1
 [0.14.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.5...@cerbos/embedded@0.14.0
 [0.13.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.4...@cerbos/embedded@0.13.5
 [0.13.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.3...@cerbos/embedded@0.13.4
