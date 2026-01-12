@@ -1,7 +1,5 @@
 /**
  * A policy bundle downloaded from {@link https://www.cerbos.dev/product-cerbos-hub | Cerbos Hub} and saved locally.
- *
- * @public
  */
 export interface LocalBundle {
   /**

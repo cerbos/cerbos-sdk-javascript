@@ -8,13 +8,10 @@
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
-    "api:extract": "pnpm --filter='./packages/*' --filter='!./packages/api' --parallel exec api-extractor run",
-    "api:fixup": "scripts/sed-all api -- 's/_2//'",
     "build": "tsc --build",
     "build:watch": "tsc --build --watch",
-    "clean": "rm -rf api packages/*/lib private/*/lib",
-    "docs": "pnpm run build && pnpm run api:extract && pnpm run api:fixup && pnpm run docs:generate",
-    "docs:generate": "api-documenter generate --input-folder api --output-folder docs",
+    "clean": "rm -rf docs packages/*/lib private/*/lib",
+    "docs": "tsc --build && typedoc",
     "eslint:build": "tsc --build private/eslint",
     "eslint:run": "eslint --max-warnings=0",
     "generate": "pnpm run all:parallel 'pnpm:generate:*'",
@@ -53,11 +50,10 @@
     "@bufbuild/buf": "1.63.0",
     "@bufbuild/protoc-gen-es": "2.10.2",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
-    "@microsoft/api-documenter": "7.28.2",
-    "@microsoft/api-extractor": "7.55.2",
     "@tsconfig/node20": "20.1.8",
     "@tsconfig/strictest": "2.0.8",
     "@types/node": "20.19.27",
+    "@types/web": "0.0.312",
     "concurrently": "9.2.1",
     "depcheck": "1.4.7",
     "eslint": "9.39.2",
@@ -65,6 +61,8 @@
     "prettier-plugin-pkg": "0.21.2",
     "ts-proto": "2.10.1",
     "tsx": "4.21.0",
+    "typedoc": "0.28.15",
+    "typedoc-plugin-mdn-links": "5.0.10",
     "typescript": "5.9.3"
   }
 }

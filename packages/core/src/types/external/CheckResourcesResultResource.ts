@@ -1,7 +1,5 @@
 /**
  * A resource that was checked.
- *
- * @public
  */
 export interface CheckResourcesResultResource {
   /**

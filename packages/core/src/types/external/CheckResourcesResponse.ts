@@ -4,8 +4,6 @@ import type { ValidationError } from "./ValidationError.js";
 
 /**
  * The outcome of checking a principal's permissions on a set of resources.
- *
- * @public
  */
 export class CheckResourcesResponse {
   /**
@@ -26,6 +24,7 @@ export class CheckResourcesResponse {
    */
   public results: CheckResourcesResult[];
 
+  /** @internal */
   public constructor({
     cerbosCallId,
     requestId,
@@ -39,7 +38,7 @@ export class CheckResourcesResponse {
   /**
    * Check if the policy decision was that all input actions should be allowed for a resource.
    *
-   * @param resource - the resource search criteria.
+   * @param resource - The resource search criteria.
    * @returns `undefined` if the resource is not present in the results.
    */
   public allAllowed(resource: ResourceSearch): boolean | undefined {
@@ -49,7 +48,7 @@ export class CheckResourcesResponse {
   /**
    * List the actions that should be allowed for a resource.
    *
-   * @param resource - the resource search criteria.
+   * @param resource - The resource search criteria.
    * @returns `undefined` if the resource is not present in the results.
    */
   public allowedActions(resource: ResourceSearch): string[] | undefined {
@@ -59,7 +58,7 @@ export class CheckResourcesResponse {
   /**
    * Check if the policy decision was that an action should be allowed for a resource.
    *
-   * @param check - the resource search criteria and action to check.
+   * @param check - The resource search criteria and action to check.
    * @returns `undefined` if the resource or action is not present in the results.
    */
   public isAllowed(check: {
@@ -72,7 +71,7 @@ export class CheckResourcesResponse {
   /**
    * Find an item from {@link CheckResourcesResponse.results | results} by resource.
    *
-   * @param resource - the resource search criteria.
+   * @param resource - The resource search criteria.
    * @returns `undefined` if the resource is not present in the results.
    */
   public findResult(

@@ -1,9 +1,7 @@
 import type { SchemaInput } from "./SchemaInput.js";
 
 /**
- * Input to {@link @cerbos/core#Client.addOrUpdateSchemas}.
- *
- * @public
+ * Input to {@link Client.addOrUpdateSchemas}.
  */
 export interface AddOrUpdateSchemasRequest {
   /**

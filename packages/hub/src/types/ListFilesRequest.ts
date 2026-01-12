@@ -2,8 +2,6 @@ import type { FileFilter } from "./FileFilter.js";
 
 /**
  * Input to {@link StoresClient.listFiles}.
- *
- * @public
  */
 export interface ListFilesRequest {
   /**

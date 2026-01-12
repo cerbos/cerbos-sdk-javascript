@@ -1,7 +1,5 @@
 /**
  * Types of query plans.
- *
- * @public
  */
 export enum PlanKind {
   /**

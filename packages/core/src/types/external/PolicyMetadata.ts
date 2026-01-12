@@ -2,8 +2,6 @@ import type { SourceAttributes } from "./SourceAttributes.js";
 
 /**
  * Metadata describing a policy.
- *
- * @public
  */
 export interface PolicyMetadata {
   /**

@@ -3,18 +3,14 @@ import type { Principal } from "./Principal.js";
 import type { ResourceQuery } from "./ResourceQuery.js";
 
 /**
- * Input to {@link @cerbos/core#Client.planResources}.
- *
- * @public
+ * Input to {@link Client.planResources}.
  */
 export type PlanResourcesRequest =
   | PlanResourcesRequestWithAction
   | PlanResourcesRequestWithActions;
 
 /**
- * Common fields for inputs to {@link @cerbos/core#Client.planResources}.
- *
- * @public
+ * Common fields for inputs to {@link Client.planResources}.
  */
 export interface PlanResourcesRequestBase {
   /**
@@ -50,9 +46,7 @@ export interface PlanResourcesRequestBase {
 }
 
 /**
- * Input to {@link @cerbos/core#Client.planResources}.
- *
- * @public
+ * Input to {@link Client.planResources}.
  */
 export interface PlanResourcesRequestWithAction extends PlanResourcesRequestBase {
   /**
@@ -64,9 +58,7 @@ export interface PlanResourcesRequestWithAction extends PlanResourcesRequestBase
 }
 
 /**
- * Input to {@link @cerbos/core#Client.planResources}.
- *
- * @public
+ * Input to {@link Client.planResources}.
  */
 export interface PlanResourcesRequestWithActions extends PlanResourcesRequestBase {
   /**

@@ -3,8 +3,6 @@ import type { Value } from "./Value.js";
 
 /**
  * Details of a {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#constants | constant} referenced by a policy.
- *
- * @public
  */
 export interface InspectedConstant {
   /**

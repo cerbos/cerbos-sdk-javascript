@@ -2,8 +2,6 @@ import type { Value } from "./Value.js";
 
 /**
  * Auxiliary data after decoding the JSON Web Token.
- *
- * @public
  */
 export interface DecodedAuxData {
   /**

@@ -4,8 +4,6 @@ import type { ValidationError } from "./ValidationError.js";
 
 /**
  * Output from a `PlanResources` invocation.
- *
- * @public
  */
 export type PlanResourcesOutput =
   | PlanResourcesConditionalOutput
@@ -13,8 +11,6 @@ export type PlanResourcesOutput =
 
 /**
  * Common fields between different {@link PlanResourcesOutput} types.
- *
- * @public
  */
 export interface PlanResourcesOutputBase {
   /**
@@ -52,8 +48,6 @@ export interface PlanResourcesOutputBase {
 
 /**
  * A query plan for when the specified action is conditionally allowed for the principal on resources matching the input.
- *
- * @public
  */
 export interface PlanResourcesConditionalOutput extends PlanResourcesOutputBase {
   /**
@@ -74,8 +68,6 @@ export interface PlanResourcesConditionalOutput extends PlanResourcesOutputBase 
 
 /**
  * Type guard to check if a {@link PlanResourcesOutput} is a {@link PlanResourcesConditionalOutput}.
- *
- * @public
  */
 export function planResourcesOutputIsConditional(
   output: PlanResourcesOutput,
@@ -85,8 +77,6 @@ export function planResourcesOutputIsConditional(
 
 /**
  * A query plan for when the specified action is always allowed or denied for the principal on resources matching the input.
- *
- * @public
  */
 export interface PlanResourcesUnconditionalOutput extends PlanResourcesOutputBase {
   /**
@@ -97,8 +87,6 @@ export interface PlanResourcesUnconditionalOutput extends PlanResourcesOutputBas
 
 /**
  * Type guard to check if a {@link PlanResourcesOutput} is a {@link PlanResourcesUnconditionalOutput}.
- *
- * @public
  */
 export function planResourcesOutputIsUnconditional(
   output: PlanResourcesOutput,

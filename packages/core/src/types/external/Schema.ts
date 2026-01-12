@@ -2,8 +2,6 @@ import type { SchemaDefinition } from "./SchemaDefinition.js";
 
 /**
  * A JSON schema used to validate principal or resource attributes.
- *
- * @public
  */
 export interface Schema {
   /**

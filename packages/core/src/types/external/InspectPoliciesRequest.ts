@@ -1,7 +1,5 @@
 /**
- * Input to {@link @cerbos/core#Client.inspectPolicies}.
- *
- * @public
+ * Input to {@link Client.inspectPolicies}.
  */
 export interface InspectPoliciesRequest {
   /**

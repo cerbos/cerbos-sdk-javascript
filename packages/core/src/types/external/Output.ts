@@ -2,8 +2,6 @@ import type { OutputExpressions } from "./OutputExpressions.js";
 
 /**
  * {@link https://docs.cerbos.dev/cerbos/latest/policies/outputs | User-defined output} to be produced when evaluating a policy rule.
- *
- * @public
  */
 export interface Output {
   /**

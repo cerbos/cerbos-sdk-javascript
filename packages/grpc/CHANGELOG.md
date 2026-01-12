@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Migrate documentation to TypeDoc ([#1332](https://github.com/cerbos/cerbos-sdk-javascript/pull/1332))
 
 ## [0.24.0] - 2026-01-07
 
@@ -80,7 +82,7 @@ No notable changes.
 
 ### Added
 
-- [`AccessLogEntry.policySource`](../../docs/core.accesslogentry.policysource.md) and [`DecisionLogEntry.policySource`](../../docs/core.decisionlogentry.policysource.md) properties ([#1193](https://github.com/cerbos/cerbos-sdk-javascript/pull/1193))
+- [`AccessLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AccessLogEntry.html#policysource) and [`DecisionLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#policysource) properties ([#1193](https://github.com/cerbos/cerbos-sdk-javascript/pull/1193))
 
   Requires a policy decision point server running Cerbos 0.46+.
 
@@ -108,13 +110,13 @@ No notable changes.
 
 ### Added
 
-- [`ChannelOptions."grpc-node.flow_control_window"`](../../docs/grpc.channeloptions._grpc-node.flow_control_window_.md) option to set initial window size for HTTP/2 stream-level flow control ([#1122](https://github.com/cerbos/cerbos-sdk-javascript/pull/1122))
+- [`ChannelOptions."grpc-node.flow_control_window"`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_grpc.ChannelOptions.html#grpc-nodeflow_control_window) option to set initial window size for HTTP/2 stream-level flow control ([#1122](https://github.com/cerbos/cerbos-sdk-javascript/pull/1122))
 
-- Support for multiple actions in [`Client.planResources`](../../docs/core.client.planresources.md) ([#1146](https://github.com/cerbos/cerbos-sdk-javascript/pull/1146))
+- Support for multiple actions in [`Client.planResources`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#planresources) ([#1146](https://github.com/cerbos/cerbos-sdk-javascript/pull/1146))
 
   Requires a policy decision point server running Cerbos 0.44+.
 
-- [`AccessLogEntry.oversized`](../../docs/core.accesslogentry.oversized.md) and [`DecisionLogEntry.oversized`](../../docs/core.decisionlogentry.oversized.md) properties ([#1165](https://github.com/cerbos/cerbos-sdk-javascript/pull/1165))
+- [`AccessLogEntry.oversized`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AccessLogEntry.html#oversized) and [`DecisionLogEntry.oversized`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#oversized) properties ([#1165](https://github.com/cerbos/cerbos-sdk-javascript/pull/1165))
 
 ### Changed
 
@@ -132,11 +134,11 @@ No notable changes.
 
 ### Added
 
-- [`Options.compression`](../../docs/grpc.options.compression.md) to compress messages exchanged between the client and policy decision point server ([#1120](https://github.com/cerbos/cerbos-sdk-javascript/pull/1120))
+- [`Options.compression`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_grpc.Options.html#compression) to compress messages exchanged between the client and policy decision point server ([#1120](https://github.com/cerbos/cerbos-sdk-javascript/pull/1120))
 
   Requires a policy decision point server running Cerbos 0.19+.
 
-- [`Options.channelOptions`](../../docs/grpc.options.channeloptions.md) to configure advanced settings on the underlying gRPC client ([#1120](https://github.com/cerbos/cerbos-sdk-javascript/pull/1120))
+- [`Options.channelOptions`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_grpc.Options.html#channeloptions) to configure advanced settings on the underlying gRPC client ([#1120](https://github.com/cerbos/cerbos-sdk-javascript/pull/1120))
 
 ### Changed
 
@@ -154,7 +156,7 @@ No notable changes.
 
 ### Added
 
-- [`Client.checkHealth`](../../docs/core.client.checkhealth.md) method to check the health of services provided by the policy decision point server ([#1085](https://github.com/cerbos/cerbos-sdk-javascript/pull/1085))
+- [`Client.checkHealth`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#checkhealth) method to check the health of services provided by the policy decision point server ([#1085](https://github.com/cerbos/cerbos-sdk-javascript/pull/1085))
 
 ### Changed
 
@@ -168,11 +170,11 @@ No notable changes.
 
 ### Added
 
-- [`Client.inspectPolicies`](../../docs/core.client.inspectpolicies.md) method to inspect policy details ([#1051](https://github.com/cerbos/cerbos-sdk-javascript/pull/1051))
+- [`Client.inspectPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#inspectpolicies) method to inspect policy details ([#1051](https://github.com/cerbos/cerbos-sdk-javascript/pull/1051))
 
   Requires a policy decision point server running Cerbos 0.35+.
 
-- Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy ID ([#1051](https://github.com/cerbos/cerbos-sdk-javascript/pull/1051))
+- Support for filtering [`Client.listPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listpolicies) results by policy ID ([#1051](https://github.com/cerbos/cerbos-sdk-javascript/pull/1051))
 
   Requires a policy decision point server running Cerbos 0.37+.
 
@@ -223,12 +225,12 @@ No notable changes.
 ### Added
 
 - Support for fetching audit logs ([#945](https://github.com/cerbos/cerbos-sdk-javascript/pull/945))
-  - [`Client.getAccessLogEntry`](../../docs/core.client.getaccesslogentry.md) method
-  - [`Client.getDecisionLogEntry`](../../docs/core.client.getdecisionlogentry.md) method
-  - [`Client.listAccessLogEntries`](../../docs/core.client.listaccesslogentries.md) method
-  - [`Client.listDecisionLogEntries`](../../docs/core.client.listdecisionlogentries.md) method
-  - [`CheckResourcesResponse.cerbosCallId`](../../docs/core.checkresourcesresponse.cerboscallid.md) property
-  - [`PlanResourcesResponse.cerbosCallId`](../../docs/core.planresourcesresponsebase.cerboscallid.md) property
+  - [`Client.getAccessLogEntry`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#getaccesslogentry) method
+  - [`Client.getDecisionLogEntry`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#getdecisionlogentry) method
+  - [`Client.listAccessLogEntries`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listaccesslogentries) method
+  - [`Client.listDecisionLogEntries`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listdecisionlogentries) method
+  - [`CheckResourcesResponse.cerbosCallId`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.CheckResourcesResponse.html#cerboscallid) property
+  - [`PlanResourcesResponse.cerbosCallId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesResponseBase.html#cerboscallid) property
 
 ### Changed
 
@@ -250,9 +252,9 @@ No notable changes.
 
 ### Added
 
-- [`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal ([#868](https://github.com/cerbos/cerbos-sdk-javascript/pull/868), [#877](https://github.com/cerbos/cerbos-sdk-javascript/pull/877))
+- [`Client.withPrincipal`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#withprincipal) method to create a client instance with a pre-specified principal ([#868](https://github.com/cerbos/cerbos-sdk-javascript/pull/868), [#877](https://github.com/cerbos/cerbos-sdk-javascript/pull/877))
 
-- [`signal`](../../docs/core.requestoptions.signal.md) option to all methods, so that requests can be aborted using an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) ([#894](https://github.com/cerbos/cerbos-sdk-javascript/pull/894))
+- [`signal`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestOptions.html#signal) option to all methods, so that requests can be aborted using an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) ([#894](https://github.com/cerbos/cerbos-sdk-javascript/pull/894))
 
 ### Changed
 
@@ -268,7 +270,7 @@ No notable changes.
 
 ### Added
 
-- [`Output.when`](../../docs/core.output.when.md) to define [conditional policy rule outputs](https://docs.cerbos.dev/cerbos/latest/policies/outputs) using the Admin API ([#829](https://github.com/cerbos/cerbos-sdk-javascript/pull/829))
+- [`Output.when`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.Output.html#when) to define [conditional policy rule outputs](https://docs.cerbos.dev/cerbos/latest/policies/outputs) using the Admin API ([#829](https://github.com/cerbos/cerbos-sdk-javascript/pull/829))
 
   Requires a policy decision point server running Cerbos 0.33+.
 
@@ -284,7 +286,7 @@ No notable changes.
 
 ### Added
 
-- [`headers`](../../docs/core.options.headers.md) and [`userAgent`](../../docs/core.options.useragent.md) options to `GRPC` constructor, and [`headers`](../../docs/core.requestoptions.headers.md) option to all methods ([#776](https://github.com/cerbos/cerbos-sdk-javascript/pull/776))
+- [`headers`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.Options.html#headers) and [`userAgent`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.Options.html#useragent) options to `GRPC` constructor, and [`headers`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestOptions.html#headers) option to all methods ([#776](https://github.com/cerbos/cerbos-sdk-javascript/pull/776))
 
 ### Changed
 
@@ -335,7 +337,7 @@ No notable changes.
 
 ### Added
 
-- Support for filtering [`Client.listPolicies`](../../docs/core.client.listpolicies.md) results by policy name, scope, and version ([#568](https://github.com/cerbos/cerbos-sdk-javascript/pull/568))
+- Support for filtering [`Client.listPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listpolicies) results by policy name, scope, and version ([#568](https://github.com/cerbos/cerbos-sdk-javascript/pull/568))
 
   Requires a policy decision point server running Cerbos 0.29+.
 
@@ -373,11 +375,11 @@ No notable changes.
 
 ### Added
 
-- [`includeDisabled`](../../docs/core.listpoliciesrequest.includedisabled.md) option to [`Client.listPolicies`](../../docs/core.client.listpolicies.md) method to include disabled policies in the list ([#475](https://github.com/cerbos/cerbos-sdk-javascript/pull/475))
+- [`includeDisabled`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.ListPoliciesRequest.html#includedisabled) option to [`Client.listPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listpolicies) method to include disabled policies in the list ([#475](https://github.com/cerbos/cerbos-sdk-javascript/pull/475))
 
   Requires a policy decision point server running Cerbos 0.26+.
 
-- [`Client.enablePolicy`](../../docs/core.client.enablepolicy.md) and [`Client.enablePolicies`](../../docs/core.client.enablepolicies.md) methods to enable policies ([#475](https://github.com/cerbos/cerbos-sdk-javascript/pull/475))
+- [`Client.enablePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#enablepolicy) and [`Client.enablePolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#enablepolicies) methods to enable policies ([#475](https://github.com/cerbos/cerbos-sdk-javascript/pull/475))
 
   Requires a policy decision point server running Cerbos 0.26+.
 
@@ -407,7 +409,7 @@ No notable changes.
 
 ### Added
 
-- [`Client.disablePolicy`](../../docs/core.client.disablepolicy.md) and [`Client.disablePolicies`](../../docs/core.client.disablepolicies.md) methods to disable policies ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
+- [`Client.disablePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#disablepolicy) and [`Client.disablePolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#disablepolicies) methods to disable policies ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
 
   Requires a policy decision point server running Cerbos 0.25+.
 
@@ -415,11 +417,11 @@ No notable changes.
 
 ### Changed
 
-- [`Client.deleteSchema`](../../docs/core.client.deleteschema.md) and [`Client.deleteSchemas`](../../docs/core.client.deleteschemas.md) now return whether schemas were deleted ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
+- [`Client.deleteSchema`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deleteschema) and [`Client.deleteSchemas`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deleteschemas) now return whether schemas were deleted ([#429](https://github.com/cerbos/cerbos-sdk-javascript/pull/429))
 
   Requires a policy decision point server running Cerbos 0.25+.
 
-- [`Policy.metadata.storeIdentifer`](../../docs/core.policymetadata.storeidentifer.md) is now deprecated, replaced by [`Policy.metadata.storeIdentifier`](../../docs/core.policymetadata.storeidentifier.md) ([#439](https://github.com/cerbos/cerbos-sdk-javascript/pull/439))
+- [`Policy.metadata.storeIdentifer`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicyMetadata.html#storeidentifer) is now deprecated, replaced by [`Policy.metadata.storeIdentifier`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicyMetadata.html#storeidentifier) ([#439](https://github.com/cerbos/cerbos-sdk-javascript/pull/439))
 
 - Bump dependency on [@cerbos/core] to 0.9.0 ([#446](https://github.com/cerbos/cerbos-sdk-javascript/pull/446))
 
@@ -471,10 +473,10 @@ No notable changes.
 
 ### Added
 
-- Support for schema validation in [`Client.planResources`](../../docs/core.client.planresources.md) ([#123](https://github.com/cerbos/cerbos-sdk-javascript/pull/123))
+- Support for schema validation in [`Client.planResources`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#planresources) ([#123](https://github.com/cerbos/cerbos-sdk-javascript/pull/123))
 
   Requires a policy decision point server running Cerbos 0.19+.
-  [`PlanResourcesResponse.validationErrors`](../../docs/core.planresourcesresponsebase.validationerrors.md) will always be an empty array if the client is connected to an earlier version of Cerbos.
+  [`PlanResourcesResponse.validationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesResponseBase.html#validationerrors) will always be an empty array if the client is connected to an earlier version of Cerbos.
 
 ### Changed
 

@@ -1,7 +1,5 @@
 /**
  * Filter to match a string.
- *
- * @public
  */
 export type StringMatch =
   | StringMatchEquals
@@ -10,8 +8,6 @@ export type StringMatch =
 
 /**
  * Filter to match a string exactly.
- *
- * @public
  */
 export interface StringMatchEquals {
   /**
@@ -22,8 +18,6 @@ export interface StringMatchEquals {
 
 /**
  * Type guard to check if a {@link StringMatch} is a {@link StringMatchEquals}.
- *
- * @public
  */
 export function stringMatchIsStringMatchEquals(
   match: StringMatch,
@@ -33,8 +27,6 @@ export function stringMatchIsStringMatchEquals(
 
 /**
  * Filter to match a string by a substring.
- *
- * @public
  */
 export interface StringMatchContains {
   /**
@@ -45,8 +37,6 @@ export interface StringMatchContains {
 
 /**
  * Type guard to check if a {@link StringMatch} is a {@link StringMatchContains}.
- *
- * @public
  */
 export function stringMatchIsStringMatchContains(
   match: StringMatch,
@@ -56,8 +46,6 @@ export function stringMatchIsStringMatchContains(
 
 /**
  * Filter to match a string from a list.
- *
- * @public
  */
 export interface StringMatchIn {
   /**
@@ -68,8 +56,6 @@ export interface StringMatchIn {
 
 /**
  * Type guard to check if a {@link StringMatch} is a {@link StringMatchIn}.
- *
- * @public
  */
 export function stringMatchIsStringMatchIn(
   match: StringMatch,

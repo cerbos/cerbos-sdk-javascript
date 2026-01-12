@@ -1,13 +1,21 @@
 import type { Condition } from "./Condition.js";
 
-/** @alpha */
+/**
+ * A rule for actions that can be performed on a resource by a role.
+ */
 export interface RoleRule {
-  /** @alpha */
+  /**
+   * The resource kind to which the rule applies.
+   */
   resource: string;
 
-  /** @alpha */
+  /**
+   * The list of allowable actions that the role can carry out on the given resource.
+   */
   allowActions: string[];
 
-  /** @alpha */
+  /**
+   * A condition that must be met for the actions to be allowed.
+   */
   condition?: Condition | undefined;
 }

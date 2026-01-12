@@ -1,3 +1,10 @@
+unreleased:
+  type: patch
+
+  changed:
+    - summary: Migrate documentation to TypeDoc
+      pull: 1332
+
 releases:
   - version: 0.14.0
     date: 2026-01-07
@@ -91,7 +98,7 @@ releases:
     date: 2025-08-11
 
     added:
-      - summary: Set [`policySource`](../../docs/core.decisionlogentry.policysource.md) on log entries passed to [`onDecision`](../../docs/embedded.options.ondecision.md)
+      - summary: Set [`policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#policysource) on log entries passed to [`onDecision`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#ondecision)
         pull: 1193
 
     bumped:
@@ -139,21 +146,21 @@ releases:
     date: 2025-02-19
 
     added:
-      - summary: "[`defaultPolicyVersion`](../../docs/embedded.options.defaultpolicyversion.md) and [`lenientScopeSearch`](../../docs/embedded.options.lenientscopesearch.md) engine configuration options"
+      - summary: "[`defaultPolicyVersion`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#defaultpolicyversion) and [`lenientScopeSearch`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#lenientscopesearch) engine configuration options"
         pull: 1101
 
   - version: 0.10.0
     date: 2025-02-13
 
     added:
-      - summary: "[`onDecision`](../../docs/embedded.options.ondecision.md) callback to support audit logging"
+      - summary: "[`onDecision`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#ondecision) callback to support audit logging"
         pull: 1091
 
     changed:
-      - summary: Accept async callbacks for [`onLoad`](../../docs/embedded.options.onload.md) and [`onError`](../../docs/embedded.options.onerror.md)
+      - summary: Accept async callbacks for [`onLoad`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#onload) and [`onError`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.Options.html#onerror)
         pull: 1091
 
-      - summary: Omit metadata from `checkResources` responses if [`includeMetadata`](../../docs/core.checkresourcesrequest.includemetadata.md) is `false`
+      - summary: Omit metadata from `checkResources` responses if [`includeMetadata`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckResourcesRequest.html#includemetadata) is `false`
         pull: 1092
 
     bumped:
@@ -181,7 +188,7 @@ releases:
     date: 2024-10-30
 
     added:
-      - summary: "[`BundleMetadata.sourceAttributes`](../../docs/embedded.bundlemetadata.sourceattributes.md) property mapping IDs of policies included in the bundle to metadata about their sources"
+      - summary: "[`BundleMetadata.sourceAttributes`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded.BundleMetadata.html#sourceattributes) property mapping IDs of policies included in the bundle to metadata about their sources"
         pull: 1033
 
   - version: 0.8.0
@@ -227,10 +234,10 @@ releases:
     date: 2024-04-12
 
     added:
-      - summary: "[`Client.withPrincipal`](../../docs/core.client.withprincipal.md) method to create a client instance with a pre-specified principal"
+      - summary: "[`Client.withPrincipal`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#withprincipal) method to create a client instance with a pre-specified principal"
         pulls: [868, 877]
 
-      - summary: "[`AutoUpdatingLoader`](../../docs/embedded.autoupdatingloader.md) class to automatically update embedded policy decision point bundles"
+      - summary: "[`AutoUpdatingLoader`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_embedded.AutoUpdatingLoader.html) class to automatically update embedded policy decision point bundles"
         pull: 915
 
     changed:
@@ -257,7 +264,7 @@ releases:
     date: 2024-02-26
 
     changed:
-      - summary: Allow promises of binary data in [Source](../../docs/embedded.source.md) type
+      - summary: Allow promises of binary data in [Source](https://cerbos.github.io/cerbos-sdk-javascript/types/_cerbos_embedded.Source.html) type
         pull: 824
 
   - version: 0.6.1

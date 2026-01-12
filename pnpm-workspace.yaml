@@ -15,6 +15,3 @@ minimumReleaseAgeExclude:
   - react
   - react-dom
   - scheduler
-
-patchedDependencies:
-  "@microsoft/api-documenter@7.28.2": patches/@microsoft__api-documenter@7.28.2.patch

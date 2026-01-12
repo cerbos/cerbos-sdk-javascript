@@ -1,9 +1,7 @@
 import type { AuditLogFilter } from "./AuditLogFilter.js";
 
 /**
- * Input to {@link @cerbos/core#Client.listDecisionLogEntries}.
- *
- * @public
+ * Input to {@link Client.listDecisionLogEntries}.
  */
 export interface ListDecisionLogEntriesRequest {
   /**

@@ -2,8 +2,6 @@ import type { File } from "./File.js";
 
 /**
  * Output from {@link StoresClient.getFiles}.
- *
- * @public
  */
 export interface GetFilesResponse {
   /**

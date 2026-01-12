@@ -2,15 +2,11 @@ import type { Value } from "@cerbos/core";
 
 /**
  * Origin of a change that was made to a store.
- *
- * @public
  */
 export type ChangeOrigin = ChangeOriginGit | ChangeOriginInternal;
 
 /**
  * Details of a change made to a store when syncing it with a Git repository.
- *
- * @public
  */
 export interface ChangeOriginGit {
   /**
@@ -61,8 +57,6 @@ export interface ChangeOriginGit {
 
 /**
  * Type guard to check if a {@link ChangeOrigin} is a {@link ChangeOriginGit}.
- *
- * @public
  */
 export function changeOriginIsChangeOriginGit(
   origin: ChangeOrigin,
@@ -72,8 +66,6 @@ export function changeOriginIsChangeOriginGit(
 
 /**
  * Details of a change made to a store by an internal application.
- *
- * @public
  */
 export interface ChangeOriginInternal {
   /**
@@ -94,8 +86,6 @@ export interface ChangeOriginInternal {
 
 /**
  * Type guard to check if a {@link ChangeOrigin} is a {@link ChangeOriginInternal}.
- *
- * @public
  */
 export function changeOriginIsChangeOriginInternal(
   origin: ChangeOrigin,

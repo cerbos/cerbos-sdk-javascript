@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Migrate documentation to TypeDoc ([#1332](https://github.com/cerbos/cerbos-sdk-javascript/pull/1332))
 
 ## [0.5.0] - 2026-01-07
 

@@ -2,8 +2,6 @@ import { MissingCredentials } from "./errors/external.js";
 
 /**
  * Client credentials to authenticate with Cerbos Hub.
- *
- * @public
  */
 export interface Credentials {
   /**
@@ -20,11 +18,9 @@ export interface Credentials {
 /**
  * Load client credentials from the `CERBOS_HUB_CLIENT_ID` and `CERBOS_HUB_CLIENT_SECRET` environment variables.
  *
- * @param env - the environment variables from which to load (default: `process.env`).
+ * @param env - The environment variables from which to load.
  *
  * @throws {@link MissingCredentials} if the environment variables are not set or are set to empty strings.
- *
- * @public
  */
 export function credentialsFromEnv(
   env: Record<string, string | undefined> = process.env,

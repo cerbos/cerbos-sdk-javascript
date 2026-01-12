@@ -3,9 +3,7 @@ import type { Principal } from "./Principal.js";
 import type { ResourceCheck } from "./ResourceCheck.js";
 
 /**
- * Input to {@link @cerbos/core#Client.checkResources}.
- *
- * @public
+ * Input to {@link Client.checkResources}.
  */
 export interface CheckResourcesRequest {
   /**

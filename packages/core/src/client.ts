@@ -94,16 +94,12 @@ import type {
 import { Service, ServiceStatus, Status } from "./types/external.js";
 
 /**
- * HTTP headers from which to construct a {@link https://developer.mozilla.org/en-US/docs/Web/API/Headers | `Headers`} object.
- *
- * @public
+ * HTTP headers from which to construct a {@link Headers} object.
  */
 export type HeadersInit = [string, string][] | Record<string, string> | Headers;
 
 /**
  * Options for creating a new {@link Client}.
- *
- * @public
  */
 export interface Options {
   /**
@@ -132,7 +128,7 @@ export interface Options {
    * @remarks
    * Possible values are
    *
-   * - `"throw"`, to throw a {@link ValidationFailed} error;
+   * - `"throw"`, to throw a {@link @cerbos/core!ValidationFailed | ValidationFailed} error;
    *
    * - a {@link ValidationFailedCallback} function; or
    *
@@ -159,8 +155,6 @@ export interface Options {
 
 /**
  * Credentials for the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API}.
- *
- * @public
  */
 export interface AdminCredentials {
   /**
@@ -176,8 +170,6 @@ export interface AdminCredentials {
 
 /**
  * Options for sending a request to the policy decision point.
- *
- * @public
  */
 export interface RequestOptions {
   /**
@@ -194,7 +186,7 @@ export interface RequestOptions {
   headers?: HeadersInit | undefined;
 
   /**
-   * A {@link https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal | signal} to abort the request.
+   * A signal to abort the request.
    *
    * @defaultValue `undefined`
    */
@@ -203,8 +195,6 @@ export interface RequestOptions {
 
 /**
  * Base implementation of a client for interacting with the Cerbos policy decision point server.
- *
- * @public
  */
 export abstract class Client {
   /** @internal */
@@ -247,7 +237,7 @@ export abstract class Client {
    * ```
    *
    * @example
-   * Load a policy from a YAML or JSON file with {@link @cerbos/files#readPolicy}:
+   * Load a policy from a YAML or JSON file with {@link @cerbos/files!readPolicy | readPolicy}:
    *
    * ```typescript
    * import { readPolicy } from "@cerbos/files";
@@ -258,7 +248,7 @@ export abstract class Client {
    * ```
    *
    * @example
-   * Load policies and schemas from a directory with {@link @cerbos/files#readDirectory}:
+   * Load policies and schemas from a directory with {@link @cerbos/files!readDirectory | readDirectory}:
    *
    * ```typescript
    * import { readDirectory } from "@cerbos/files";
@@ -296,7 +286,6 @@ export abstract class Client {
    * Create a schema in code:
    *
    * ```typescript
-   *
    * await cerbos.addOrUpdateSchemas({
    *   schemas: [{
    *     id: "document.json",
@@ -311,7 +300,7 @@ export abstract class Client {
    * ```
    *
    * @example
-   * Load a schema from a JSON file with {@link @cerbos/files#readSchema}:
+   * Load a schema from a JSON file with {@link @cerbos/files!readSchema | readSchema}:
    *
    * ```typescript
    * import { readSchema } from "@cerbos/files";
@@ -322,7 +311,7 @@ export abstract class Client {
    * ```
    *
    * @example
-   * Load policies and schemas from a directory with {@link @cerbos/files#readDirectory}:
+   * Load policies and schemas from a directory with {@link @cerbos/files!readDirectory | readDirectory}:
    *
    * ```typescript
    * import { readDirectory } from "@cerbos/files";
@@ -1235,7 +1224,7 @@ export abstract class Client {
 /**
  * A client instance with a pre-specified principal.
  *
- * @public
+ * @typeParam ClientType - Specific client instance type.
  */
 export class ClientWithPrincipal<ClientType extends Client = Client> {
   /** @internal */
