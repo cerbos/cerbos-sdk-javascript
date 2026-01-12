@@ -1,4 +1,4 @@
-// Copyright 2021-2025 Zenauth Ltd.
+// Copyright 2021-2026 Zenauth Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // @generated from file cerbos/request/v1/request.proto (package cerbos.request.v1, syntax proto3)
