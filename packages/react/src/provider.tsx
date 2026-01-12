@@ -34,7 +34,7 @@ export interface CerbosProviderProps {
    * @remarks
    * You can read claims directly from a JWT in your authorization policies by configuring
    * {@link https://docs.cerbos.dev/cerbos/latest/configuration/auxdata.html | the Cerbos policy decision point (PDP) service} or
-   * {@link https://github.com/cerbos/cerbos-sdk-javascript/blob/main/docs/embedded.options.md | an embedded PDP client }
+   * {@link @cerbos/embedded!Options.decodeJWTPayload | an embedded PDP client }
    * to decode the token.
    */
   auxData?: Pick<AuxData, "jwt"> | undefined;
