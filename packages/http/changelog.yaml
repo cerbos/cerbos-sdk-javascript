@@ -1,11 +1,20 @@
-unreleased:
-  type: patch
-
-  changed:
-    - summary: Migrate documentation to TypeDoc
-      pull: 1332
-
 releases:
+  - version: 0.24.1
+    date: 2026-01-12
+
+    changed:
+      - summary: Migrate documentation to TypeDoc
+        pull: 1332
+
+    bumped:
+      "@cerbos/api":
+        to: 0.5.1
+        pull: 1340
+
+      "@cerbos/core":
+        to: 0.27.1
+        pull: 1340
+
   - version: 0.24.0
     date: 2026-01-07
 

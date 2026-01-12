@@ -75,7 +75,7 @@ importers:
         specifier: ^2.10.2
         version: 2.10.2
       '@cerbos/api':
-        specifier: ^0.5.0
+        specifier: ^0.5.1
         version: link:../api
       uuid:
         specifier: ^13.0.0
@@ -87,10 +87,10 @@ importers:
         specifier: ^2.10.2
         version: 2.10.2
       '@cerbos/api':
-        specifier: ^0.5.0
+        specifier: ^0.5.1
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.0
+        specifier: ^0.27.1
         version: link:../core
       ulid:
         specifier: ^3.0.2
@@ -105,16 +105,16 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(@bufbuild/protobuf@2.10.2)
       '@cerbos/api':
-        specifier: ^0.5.0
+        specifier: ^0.5.1
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.0
+        specifier: ^0.27.1
         version: link:../core
       '@cerbos/embedded-server':
         specifier: ^0.3.1
         version: 0.3.1(@bufbuild/protobuf@2.10.2)(@cerbos/api@packages+api)
       '@cerbos/hub':
-        specifier: ^0.5.0
+        specifier: ^0.5.1
         version: link:../hub
       ulid:
         specifier: ^3.0.2
@@ -126,10 +126,10 @@ importers:
         specifier: ^2.10.2
         version: 2.10.2
       '@cerbos/api':
-        specifier: ^0.5.0
+        specifier: ^0.5.1
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.0
+        specifier: ^0.27.1
         version: link:../core
       yaml:
         specifier: ^2.8.2
@@ -141,10 +141,10 @@ importers:
         specifier: ^2.10.2
         version: 2.10.2
       '@cerbos/api':
-        specifier: ^0.5.0
+        specifier: ^0.5.1
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.0
+        specifier: ^0.27.1
         version: link:../core
       '@grpc/grpc-js':
         specifier: ^1.14.3
@@ -156,10 +156,10 @@ importers:
         specifier: ^2.10.2
         version: 2.10.2
       '@cerbos/api':
-        specifier: ^0.5.0
+        specifier: ^0.5.1
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.0
+        specifier: ^0.27.1
         version: link:../core
       qs:
         specifier: ^6.14.1
@@ -175,7 +175,7 @@ importers:
         specifier: ^2.10.2
         version: 2.10.2
       '@cerbos/core':
-        specifier: ^0.27.0
+        specifier: ^0.27.1
         version: link:../core
       '@connectrpc/connect':
         specifier: ^2.1.1
@@ -203,10 +203,10 @@ importers:
         specifier: ^2.10.2
         version: 2.10.2
       '@cerbos/api':
-        specifier: ^0.5.0
+        specifier: ^0.5.1
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.0
+        specifier: ^0.27.1
         version: link:../core
       '@opentelemetry/api':
         specifier: ^1.9.0
@@ -221,7 +221,7 @@ importers:
   packages/react:
     dependencies:
       '@cerbos/core':
-        specifier: ^0.27.0
+        specifier: ^0.27.1
         version: link:../core
       react:
         specifier: '>=18.0.0'
