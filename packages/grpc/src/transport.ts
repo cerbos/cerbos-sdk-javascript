@@ -126,5 +126,5 @@ function serialize<I extends DescMessage>(
 function deserialize<O extends DescMessage>(
   schema: O,
 ): (output: Buffer) => MessageShape<O> {
-  return (output) => fromBinary(schema, output);
+  return (output) => fromBinary(schema, output, { readUnknownFields: false });
 }
