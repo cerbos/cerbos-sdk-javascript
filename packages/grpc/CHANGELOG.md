@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.24.2] - 2026-01-15
+
 ### Changed
 
 - Ignore unknown fields when parsing responses from the policy decision point server ([#1341](https://github.com/cerbos/cerbos-sdk-javascript/pull/1341))
@@ -512,7 +516,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.24.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.24.2...HEAD
+[0.24.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.24.1...@cerbos/grpc@0.24.2
 [0.24.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.24.0...@cerbos/grpc@0.24.1
 [0.24.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.7...@cerbos/grpc@0.24.0
 [0.23.7]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.23.6...@cerbos/grpc@0.23.7

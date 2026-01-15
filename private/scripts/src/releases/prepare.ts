@@ -33,7 +33,7 @@ await git(
   `${baseRemote}/${baseBranch}`,
 );
 
-const title = `chore(release): Prepare ${releaseOrReleases}`;
+const title = `Prepare ${releaseOrReleases}`;
 
 const body = packages
   .map(({ name, newVersion }) => `${name}: ${newVersion}\n`)
