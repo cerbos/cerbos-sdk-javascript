@@ -40,7 +40,9 @@ export class Transport implements CoreTransport {
       throw NotOK.fromJSON(await response.text());
     }
 
-    return fromJson(method.output, (await response.json()) as Value);
+    return fromJson(method.output, (await response.json()) as Value, {
+      ignoreUnknownFields: true,
+    });
   }
 
   public async *serverStream<I extends DescMessage, O extends DescMessage>(
@@ -75,7 +77,7 @@ export class Transport implements CoreTransport {
           throw new Error(`Missing result in ${line}`);
         }
 
-        yield fromJson(method.output, result);
+        yield fromJson(method.output, result, { ignoreUnknownFields: true });
       }
     } catch (error) {
       response.body?.cancel().catch(() => {
