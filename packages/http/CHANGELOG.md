@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.24.2] - 2026-01-15
+
 ### Changed
 
 - Ignore unknown fields when parsing responses from the policy decision point server ([#1341](https://github.com/cerbos/cerbos-sdk-javascript/pull/1341))
@@ -424,7 +428,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.2...HEAD
+[0.24.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.1...@cerbos/http@0.24.2
 [0.24.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.0...@cerbos/http@0.24.1
 [0.24.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.23.5...@cerbos/http@0.24.0
 [0.23.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.23.4...@cerbos/http@0.23.5
