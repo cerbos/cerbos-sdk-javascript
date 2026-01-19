@@ -3,6 +3,7 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { Value } from "../../../google/protobuf/struct.js";
 import { Timestamp } from "../../../google/protobuf/timestamp.js";
 import {
   CheckInput,
@@ -23,6 +24,7 @@ export interface AccessLogEntry {
   statusCode: number;
   oversized: boolean;
   policySource: PolicySource | undefined;
+  requestContext?: RequestContext | undefined;
 }
 
 export interface AccessLogEntry_MetadataEntry {
@@ -51,6 +53,7 @@ export interface DecisionLogEntry {
   auditTrail: AuditTrail | undefined;
   oversized: boolean;
   policySource: PolicySource | undefined;
+  requestContext?: RequestContext | undefined;
 }
 
 export interface DecisionLogEntry_CheckResources {
@@ -176,6 +179,15 @@ export interface PolicySource_Hub_LocalBundle {
   path: string;
 }
 
+export interface RequestContext {
+  annotations: { [key: string]: any | undefined };
+}
+
+export interface RequestContext_AnnotationsEntry {
+  key: string;
+  value: any | undefined;
+}
+
 function createBaseAccessLogEntry(): AccessLogEntry {
   return {
     callId: "",
@@ -186,6 +198,7 @@ function createBaseAccessLogEntry(): AccessLogEntry {
     statusCode: 0,
     oversized: false,
     policySource: undefined,
+    requestContext: undefined,
   };
 }
 
@@ -227,6 +240,12 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
       PolicySource.encode(
         message.policySource,
         writer.uint32(66).fork(),
+      ).join();
+    }
+    if (message.requestContext !== undefined) {
+      RequestContext.encode(
+        message.requestContext,
+        writer.uint32(74).fork(),
       ).join();
     }
     return writer;
@@ -312,6 +331,17 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
           message.policySource = PolicySource.decode(reader, reader.uint32());
           continue;
         }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.requestContext = RequestContext.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -355,6 +385,9 @@ export const AccessLogEntry: MessageFns<AccessLogEntry> = {
     }
     if (message.policySource !== undefined) {
       obj.policySource = PolicySource.toJSON(message.policySource);
+    }
+    if (message.requestContext !== undefined) {
+      obj.requestContext = RequestContext.toJSON(message.requestContext);
     }
     return obj;
   },
@@ -440,6 +473,7 @@ function createBaseDecisionLogEntry(): DecisionLogEntry {
     auditTrail: undefined,
     oversized: false,
     policySource: undefined,
+    requestContext: undefined,
   };
 }
 
@@ -501,6 +535,12 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
       PolicySource.encode(
         message.policySource,
         writer.uint32(146).fork(),
+      ).join();
+    }
+    if (message.requestContext !== undefined) {
+      RequestContext.encode(
+        message.requestContext,
+        writer.uint32(154).fork(),
       ).join();
     }
     return writer;
@@ -630,6 +670,17 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
           message.policySource = PolicySource.decode(reader, reader.uint32());
           continue;
         }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.requestContext = RequestContext.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -688,6 +739,9 @@ export const DecisionLogEntry: MessageFns<DecisionLogEntry> = {
     }
     if (message.policySource !== undefined) {
       obj.policySource = PolicySource.toJSON(message.policySource);
+    }
+    if (message.requestContext !== undefined) {
+      obj.requestContext = RequestContext.toJSON(message.requestContext);
     }
     return obj;
   },
@@ -1936,6 +1990,147 @@ export const PolicySource_Hub_LocalBundle: MessageFns<PolicySource_Hub_LocalBund
       const obj: any = {};
       if (message.path !== "") {
         obj.path = message.path;
+      }
+      return obj;
+    },
+  };
+
+function createBaseRequestContext(): RequestContext {
+  return { annotations: {} };
+}
+
+export const RequestContext: MessageFns<RequestContext> = {
+  encode(
+    message: RequestContext,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    globalThis.Object.entries(message.annotations).forEach(
+      ([key, value]: [string, any | undefined]) => {
+        if (value !== undefined) {
+          RequestContext_AnnotationsEntry.encode(
+            { key: key as any, value },
+            writer.uint32(10).fork(),
+          ).join();
+        }
+      },
+    );
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): RequestContext {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRequestContext();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          const entry1 = RequestContext_AnnotationsEntry.decode(
+            reader,
+            reader.uint32(),
+          );
+          if (entry1.value !== undefined) {
+            message.annotations[entry1.key] = entry1.value;
+          }
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  toJSON(message: RequestContext): unknown {
+    const obj: any = {};
+    if (message.annotations) {
+      const entries = globalThis.Object.entries(message.annotations) as [
+        string,
+        any | undefined,
+      ][];
+      if (entries.length > 0) {
+        obj.annotations = {};
+        entries.forEach(([k, v]) => {
+          obj.annotations[k] = v;
+        });
+      }
+    }
+    return obj;
+  },
+};
+
+function createBaseRequestContext_AnnotationsEntry(): RequestContext_AnnotationsEntry {
+  return { key: "", value: undefined };
+}
+
+export const RequestContext_AnnotationsEntry: MessageFns<RequestContext_AnnotationsEntry> =
+  {
+    encode(
+      message: RequestContext_AnnotationsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
+      }
+      if (message.value !== undefined) {
+        Value.encode(
+          Value.wrap(message.value),
+          writer.uint32(18).fork(),
+        ).join();
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): RequestContext_AnnotationsEntry {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseRequestContext_AnnotationsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.key = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    toJSON(message: RequestContext_AnnotationsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== "") {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = message.value;
       }
       return obj;
     },
