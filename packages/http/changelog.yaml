@@ -1,3 +1,11 @@
+unreleased:
+  type: minor
+
+  changed:
+    - summary: Use `POST /admin/policy/disable` to disable policies
+      details: Requires a policy decision point server running Cerbos 0.26+.
+      pull: 1348
+
 releases:
   - version: 0.24.2
     date: 2026-01-15

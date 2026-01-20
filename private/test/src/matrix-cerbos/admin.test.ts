@@ -695,26 +695,24 @@ describe("Client", () => {
             },
           });
 
-          if (versionIsAtLeast("0.25.0", cerbosVersion)) {
+          if (versionIsAtLeast("0.26.0", cerbosVersion)) {
             const disabled = await mutable.disablePolicy(id);
             expect(disabled).toBe(true);
 
             const { ids: remainingIds } = await mutable.listPolicies();
             expect(remainingIds).not.toContain(id);
 
-            if (versionIsAtLeast("0.26.0", cerbosVersion)) {
-              const { ids: disabledIds } = await mutable.listPolicies({
-                includeDisabled: true,
-              });
+            const { ids: disabledIds } = await mutable.listPolicies({
+              includeDisabled: true,
+            });
 
-              expect(disabledIds).toContain(id);
+            expect(disabledIds).toContain(id);
 
-              const enabled = await mutable.enablePolicy(id);
-              expect(enabled).toBe(true);
+            const enabled = await mutable.enablePolicy(id);
+            expect(enabled).toBe(true);
 
-              const { ids: enabledIds } = await mutable.listPolicies();
-              expect(enabledIds).toContain(id);
-            }
+            const { ids: enabledIds } = await mutable.listPolicies();
+            expect(enabledIds).toContain(id);
           }
         });
       });

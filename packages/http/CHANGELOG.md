@@ -2,7 +2,11 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Use `POST /admin/policy/disable` to disable policies ([#1348](https://github.com/cerbos/cerbos-sdk-javascript/pull/1348))
+
+  Requires a policy decision point server running Cerbos 0.26+.
 
 ## [0.24.2] - 2026-01-15
 
