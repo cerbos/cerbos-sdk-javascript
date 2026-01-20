@@ -83,8 +83,8 @@ defineEndpoints(admin, {
     serialize: serializeToQueryString,
   },
   disablePolicy: {
-    method: "DELETE",
-    path: "/admin/policy",
+    method: "POST",
+    path: "/admin/policy/disable",
     serialize: serializeToQueryString,
   },
   enablePolicy: {
