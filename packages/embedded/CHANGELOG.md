@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.14.2] - 2026-01-22
+
 ### Changed
 
 - Ignore unknown fields when parsing responses from the embedded policy decision point server ([#1349](https://github.com/cerbos/cerbos-sdk-javascript/pull/1349))
@@ -303,7 +307,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.14.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.14.2...HEAD
+[0.14.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.14.1...@cerbos/embedded@0.14.2
 [0.14.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.14.0...@cerbos/embedded@0.14.1
 [0.14.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.5...@cerbos/embedded@0.14.0
 [0.13.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.4...@cerbos/embedded@0.13.5

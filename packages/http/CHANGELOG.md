@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.25.0] - 2026-01-22
+
 ### Changed
 
 - Use `POST /admin/policy/disable` to disable policies ([#1348](https://github.com/cerbos/cerbos-sdk-javascript/pull/1348))
@@ -432,7 +436,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.2...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.25.0...HEAD
+[0.25.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.2...@cerbos/http@0.25.0
 [0.24.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.1...@cerbos/http@0.24.2
 [0.24.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.0...@cerbos/http@0.24.1
 [0.24.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.23.5...@cerbos/http@0.24.0
