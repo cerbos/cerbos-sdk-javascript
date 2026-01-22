@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Ignore unknown fields when parsing responses from the embedded policy decision point server ([#1349](https://github.com/cerbos/cerbos-sdk-javascript/pull/1349))
 
 ## [0.14.1] - 2026-01-12
 

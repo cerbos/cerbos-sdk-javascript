@@ -1,3 +1,10 @@
+unreleased:
+  type: patch
+
+  changed:
+    - summary: Ignore unknown fields when parsing responses from the embedded policy decision point server
+      pull: 1349
+
 releases:
   - version: 0.14.1
     date: 2026-01-12

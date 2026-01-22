@@ -106,6 +106,7 @@ export class Bundle {
       } = fromJsonString(
         MetadataSchema,
         Slice.from(this.exports, this.exports.metadata()).text(),
+        { ignoreUnknownFields: true },
       );
 
       this._metadata = {
@@ -168,7 +169,9 @@ export class Bundle {
       }
 
       try {
-        response = fromJsonString(CheckResourcesResponseSchema, responseText);
+        response = fromJsonString(CheckResourcesResponseSchema, responseText, {
+          ignoreUnknownFields: true,
+        });
       } catch {
         throw NotOK.fromJSON(responseText);
       }
