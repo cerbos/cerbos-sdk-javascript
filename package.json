@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.2",
-    "@bufbuild/buf": "1.63.0",
+    "@bufbuild/buf": "1.64.0",
     "@bufbuild/protoc-gen-es": "2.10.2",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@tsconfig/node20": "20.1.8",
