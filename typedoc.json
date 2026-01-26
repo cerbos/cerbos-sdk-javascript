@@ -3,13 +3,6 @@
   "entryPointStrategy": "packages",
   "entryPoints": ["packages/*"],
   "exclude": ["packages/api"],
-  "externalSymbolLinkMappings": {
-    "typescript": {
-      "WebAssembly.instantiate": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiate_static",
-      "WebAssembly.instantiateStreaming": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/instantiateStreaming_static",
-      "WebAssembly.Module": "https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Module"
-    }
-  },
   "favicon": "assets/favicon.svg",
   "headings": {
     "readme": false
