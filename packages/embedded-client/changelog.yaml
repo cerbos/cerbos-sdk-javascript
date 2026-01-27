@@ -1,3 +1,15 @@
+unreleased:
+  type: patch
+
+  bumped:
+    "@bufbuild/protobuf":
+      to: 2.11.0
+      pull: 1355
+
+    "@bufbuild/protovalidate":
+      to: 1.1.1
+      pull: 1355
+
 releases:
   - version: 0.4.0
     date: 2026-01-12

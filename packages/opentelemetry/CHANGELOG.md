@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Bump dependency on [@bufbuild/protobuf] to 2.11.0 ([#1355](https://github.com/cerbos/cerbos-sdk-javascript/pull/1355))
+
 - Bump dependency on [@opentelemetry/instrumentation] to 0.211.0 ([#1352](https://github.com/cerbos/cerbos-sdk-javascript/pull/1352))
 
 - Bump dependency on [@opentelemetry/semantic-conventions] to 1.39.0 ([#1352](https://github.com/cerbos/cerbos-sdk-javascript/pull/1352))

@@ -2,6 +2,10 @@ unreleased:
   type: patch
 
   bumped:
+    "@bufbuild/protobuf":
+      to: 2.11.0
+      pull: 1355
+
     "@opentelemetry/instrumentation":
       to: 0.211.0
       pull: 1352
