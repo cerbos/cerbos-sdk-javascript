@@ -13,6 +13,7 @@ import type {
 import {
   checkInputFromProtobuf,
   checkOutputFromProtobuf,
+  requestContextFromProtobuf,
   requireField,
 } from "@cerbos/core/~internal";
 
@@ -127,6 +128,9 @@ export class DecisionLogger {
         commit: bundleMetadata.commit,
         builtAt: bundleMetadata.builtAt,
       },
+      requestContext:
+        request.requestContext &&
+        requestContextFromProtobuf(request.requestContext),
     });
   }
 }

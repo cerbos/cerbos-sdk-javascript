@@ -21,6 +21,7 @@ import type {
   PlanResourcesRequest,
   PolicySource,
   Principal,
+  RequestContext,
   ValidationError,
 } from "@cerbos/core";
 import {
@@ -140,6 +141,17 @@ describe("Client", () => {
           },
         } satisfies AuxData;
 
+        const requestContext: RequestContext | undefined = versionIsAtLeast(
+          "0.51.0",
+          cerbosVersion,
+        )
+          ? {
+              annotations: {
+                baz: { qux: 1234 },
+              },
+            }
+          : undefined;
+
         const expectedMetadata: Record<string, string[]> = {
           foo: ["bar"],
         };
@@ -211,6 +223,7 @@ describe("Client", () => {
             auxData,
             includeMetadata: true,
             requestId: "check-resources",
+            requestContext,
           } satisfies CheckResourcesRequest;
 
           const response = await reloadable.checkResources(request, {
@@ -234,6 +247,7 @@ describe("Client", () => {
               statusCode: Status.OK,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
@@ -242,6 +256,7 @@ describe("Client", () => {
               metadata: expectedMetadata,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {
@@ -365,6 +380,7 @@ describe("Client", () => {
             auxData,
             includeMetadata: true,
             requestId: "plan-resources-unconditional",
+            requestContext,
           } satisfies PlanResourcesRequest;
 
           const response = await reloadable.planResources(request, {
@@ -381,6 +397,7 @@ describe("Client", () => {
               statusCode: Status.OK,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
@@ -389,6 +406,7 @@ describe("Client", () => {
               metadata: expectedMetadata,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {
@@ -439,6 +457,7 @@ describe("Client", () => {
             auxData,
             includeMetadata: true,
             requestId: "plan-resources-unconditional",
+            requestContext,
           } satisfies PlanResourcesRequest;
 
           const response = await reloadable.planResources(request, {
@@ -455,6 +474,7 @@ describe("Client", () => {
               statusCode: Status.OK,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
@@ -463,6 +483,7 @@ describe("Client", () => {
               metadata: expectedMetadata,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {

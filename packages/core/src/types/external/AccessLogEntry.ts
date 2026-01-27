@@ -1,5 +1,6 @@
 import type { Peer } from "./Peer.js";
 import type { PolicySource } from "./PolicySource.js";
+import type { RequestContext } from "./RequestContext.js";
 import type { Status } from "./Status.js";
 
 /**
@@ -48,4 +49,12 @@ export interface AccessLogEntry {
    * Requires the Cerbos policy decision point server to be at least v0.46.
    */
   policySource: PolicySource | undefined;
+
+  /**
+   * Metadata attached to the request.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.51.
+   */
+  requestContext: RequestContext | undefined;
 }

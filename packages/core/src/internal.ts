@@ -7,6 +7,7 @@ export {
   planResourcesInputFromProtobuf,
   planResourcesOutputFromProtobuf,
   policyFromProtobuf,
+  requestContextFromProtobuf,
   requireField,
   translateEnum,
   unexpected,

@@ -4,6 +4,10 @@
 
 ### Added
 
+- Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html) ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344))
+
+  Requires a policy decision point server running Cerbos 0.51+.
+
 - Support for [versioned role policies](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#version) ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344))
 
   Requires a policy decision point server running Cerbos 0.51+.
