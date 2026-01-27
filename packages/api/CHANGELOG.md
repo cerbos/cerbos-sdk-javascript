@@ -2,6 +2,26 @@
 
 ## [Unreleased]
 
+### Added
+
+- Cerbos v0.51 updates ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344))
+  - `cerbos.audit.v1.AccessLogEntry.requestContext`
+  - `cerbos.audit.v1.DecisionLogEntry.requestContext`
+  - `cerbos.audit.v1.RequestContext`
+  - `cerbos.engine.v1.OutputEntry.action`
+  - `cerbos.policy.v1.RolePolicy.version`
+  - `cerbos.request.v1.CheckResourcesRequest.requestContext`
+  - `cerbos.request.v1.DeletePolicyRequest`
+  - `cerbos.request.v1.PlanResourcesRequest.requestContext`
+  - `cerbos.request.v1.PurgeStoreRevisionsRequest`
+  - `cerbos.response.v1.DeletePolicyErrorDetails`
+  - `cerbos.response.v1.DeletePolicyResponse`
+  - `cerbos.response.v1.DisablePolicyErrorDetails`
+  - `cerbos.response.v1.IntegrityErrors`
+  - `cerbos.response.v1.PurgeStoreRevisionsResponse`
+  - `cerbos.svc.v1.CerbosAdminService.deletePolicy`
+  - `cerbos.svc.v1.CerbosAdminService.purgeStoreRevisions`
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.11.0 ([#1355](https://github.com/cerbos/cerbos-sdk-javascript/pull/1355))
