@@ -470,13 +470,14 @@ function resourceRuleToProtobuf({
 }
 
 function rolePolicyToProtobuf({
-  rolePolicy: { role, parentRoles, scope, rules },
+  rolePolicy: { role, version = "", parentRoles = [], scope = "", rules },
 }: RolePolicy): RolePolicyValid {
   return {
     $typeName: "cerbos.policy.v1.RolePolicy",
     policyType: { case: "role", value: role },
-    parentRoles: parentRoles ?? [],
-    scope: scope ?? "",
+    version,
+    parentRoles,
+    scope,
     scopePermissions: ScopePermissionsProtobuf.UNSPECIFIED,
     rules: rules.map(roleRuleToProtobuf),
   };

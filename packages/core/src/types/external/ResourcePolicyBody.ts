@@ -17,8 +17,8 @@ export interface ResourcePolicyBody {
    * The version of the policy.
    *
    * @remarks
-   * Policies are uniquely identified by the principal name and version pair.
-   * You can have multiple policy versions for the same principal (e.g. production vs. staging).
+   * Policies are uniquely identified by the resource kind and version pair.
+   * You can have multiple policy versions for the same resource (e.g. production vs. staging).
    * The version value `default` is special as it is the default fallback when no version is specified in the request.
    */
   version: string;
