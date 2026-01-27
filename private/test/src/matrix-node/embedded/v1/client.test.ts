@@ -139,6 +139,7 @@ describe("Embedded", () => {
               },
               outputs: [
                 {
+                  action: "",
                   source: "resource.document.v1#delete",
                   value: "delete_allowed:me@example.com",
                 },
@@ -270,6 +271,7 @@ describe("Embedded", () => {
                         : undefined,
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -309,6 +311,7 @@ describe("Embedded", () => {
                         : undefined,
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -348,6 +351,7 @@ describe("Embedded", () => {
                         : undefined,
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -448,6 +452,7 @@ describe("Embedded", () => {
                       effectiveDerivedRoles: ["OWNER"],
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -477,6 +482,7 @@ describe("Embedded", () => {
                       effectiveDerivedRoles: [],
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -506,6 +512,7 @@ describe("Embedded", () => {
                       effectiveDerivedRoles: [],
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -653,6 +660,7 @@ describe("Embedded", () => {
                 },
                 outputs: [
                   {
+                    action: "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -730,6 +738,7 @@ describe("Embedded", () => {
                 },
                 outputs: [
                   {
+                    action: "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -812,6 +821,7 @@ describe("Embedded", () => {
                 },
                 outputs: [
                   {
+                    action: "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -986,6 +996,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1023,6 +1034,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1060,6 +1072,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1171,6 +1184,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1208,6 +1222,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1245,6 +1260,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1361,6 +1377,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1398,6 +1415,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1435,6 +1453,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },

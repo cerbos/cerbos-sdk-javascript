@@ -819,8 +819,13 @@ function validationErrorSourceFromProtobuf(
   );
 }
 
-function outputResultFromProtobuf({ src, val }: OutputEntry): OutputResult {
+function outputResultFromProtobuf({
+  action,
+  src,
+  val,
+}: OutputEntry): OutputResult {
   return {
+    action,
     source: src,
     value: val && valueFromProtobuf(val),
   };
