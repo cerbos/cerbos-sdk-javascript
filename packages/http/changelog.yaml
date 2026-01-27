@@ -6,6 +6,10 @@ unreleased:
       details: Requires a policy decision point server running Cerbos 0.51+.
       pull: 1344
 
+    - summary: "[`OutputResult.action`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#action) property"
+      details: Requires a policy decision point server running Cerbos 0.51+.
+      pull: 1344
+
     - summary: Support for [versioned role policies](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#version)
       details: Requires a policy decision point server running Cerbos 0.51+.
       pull: 1344
