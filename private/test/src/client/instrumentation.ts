@@ -387,7 +387,7 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
               kind: SpanKindProto.SPAN_KIND_SERVER,
               attributes: expect.arrayContaining([
                 {
-                  key: ATTR_RPC_SYSTEM,
+                  key: ATTR_RPC_SYSTEM, // eslint-disable-line @typescript-eslint/no-deprecated
                   value: {
                     value: {
                       $case: "stringValue",
@@ -396,7 +396,7 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
                   },
                 },
                 {
-                  key: ATTR_RPC_SERVICE,
+                  key: ATTR_RPC_SERVICE, // eslint-disable-line @typescript-eslint/no-deprecated
                   value: {
                     value: {
                       $case: "stringValue",
@@ -414,7 +414,7 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
                   },
                 },
                 {
-                  key: ATTR_RPC_GRPC_STATUS_CODE,
+                  key: ATTR_RPC_GRPC_STATUS_CODE, // eslint-disable-line @typescript-eslint/no-deprecated
                   value: {
                     value: {
                       $case: "intValue",
