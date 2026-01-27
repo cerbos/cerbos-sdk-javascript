@@ -12,6 +12,7 @@ import type {
   DecodedAuxData,
   OutputResult,
   Principal,
+  RequestContext,
   Resource,
   ResourceQuery,
   ValidationError,
@@ -141,6 +142,14 @@ describe("Embedded", () => {
 
         const now = new Date();
 
+        const requestContext = {
+          annotations: {
+            baz: {
+              qux: 999,
+            },
+          },
+        } satisfies RequestContext;
+
         const expected = {
           timestamp: now,
           metadata: {
@@ -168,6 +177,7 @@ describe("Embedded", () => {
             userAgent: `test/9000 ${embeddedV2UserAgent}`,
           },
           policySource,
+          requestContext,
         } satisfies Omit<DecisionLogEntry, "callId" | "method">;
 
         const principal = {
@@ -269,6 +279,7 @@ describe("Embedded", () => {
               ],
               auxData,
               requestId,
+              requestContext,
             });
 
             const outputs = [
@@ -415,6 +426,7 @@ describe("Embedded", () => {
               },
               includeMetadata: true,
               requestId,
+              requestContext,
             });
 
             expect(callId).toMatch(callIdPattern);

@@ -210,6 +210,11 @@ describe("Embedded", () => {
               },
               includeMetadata,
               requestId: "42",
+              requestContext: {
+                annotations: {
+                  bar: 1234,
+                },
+              },
             };
 
             const now = new Date();
@@ -529,6 +534,11 @@ describe("Embedded", () => {
                   authInfo: "",
                   forwardedFor: "",
                   userAgent: `test/9000 ${embeddedV1UserAgent}`,
+                },
+                requestContext: {
+                  annotations: {
+                    bar: 1234,
+                  },
                 },
               } satisfies DecisionLogEntry);
             });

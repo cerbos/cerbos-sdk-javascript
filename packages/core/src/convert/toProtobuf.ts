@@ -5,6 +5,7 @@ import type { Duration, Value as ValueProtobuf } from "@bufbuild/protobuf/wkt";
 import { ValueSchema, timestampFromDate } from "@bufbuild/protobuf/wkt";
 import { v4 as uuidv4 } from "uuid";
 
+import type { RequestContextValid } from "@cerbos/api/cerbos/audit/v1/audit_pb";
 import { Effect as EffectProtobuf } from "@cerbos/api/cerbos/effect/v1/effect_pb";
 import type {
   PlanResourcesInput_ResourceValid,
@@ -91,6 +92,7 @@ import type {
   PrincipalRule,
   PrincipalRuleAction,
   ReloadStoreRequest,
+  RequestContext,
   Resource,
   ResourceCheck,
   ResourcePolicy,
@@ -562,6 +564,7 @@ export function checkResourcesRequestToProtobuf({
   auxData,
   includeMetadata = false,
   requestId = uuidv4(),
+  requestContext,
 }: CheckResourcesRequest): CheckResourcesRequestValid {
   return {
     $typeName: "cerbos.request.v1.CheckResourcesRequest",
@@ -570,6 +573,7 @@ export function checkResourcesRequestToProtobuf({
     auxData: auxData && auxDataToProtobuf(auxData),
     includeMeta: includeMetadata,
     requestId,
+    requestContext: requestContext && requestContextToProtobuf(requestContext),
   };
 }
 
@@ -642,6 +646,15 @@ function jwtToProtobuf({ token, keySetId = "" }: JWT): AuxData_JWTValid {
     $typeName: "cerbos.request.v1.AuxData.JWT",
     token,
     keySetId,
+  };
+}
+
+function requestContextToProtobuf({
+  annotations,
+}: RequestContext): RequestContextValid {
+  return {
+    $typeName: "cerbos.audit.v1.RequestContext",
+    annotations: valuesToProtobuf(annotations),
   };
 }
 
@@ -806,6 +819,7 @@ export function planResourcesRequestToProtobuf(
     auxData,
     includeMetadata = false,
     requestId = uuidv4(),
+    requestContext,
   } = request;
 
   return {
@@ -816,6 +830,7 @@ export function planResourcesRequestToProtobuf(
     auxData: auxData && auxDataToProtobuf(auxData),
     includeMeta: includeMetadata,
     requestId,
+    requestContext: requestContext && requestContextToProtobuf(requestContext),
   };
 }
 

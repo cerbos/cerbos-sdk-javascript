@@ -23,6 +23,7 @@ import type {
   PlanResourcesInput,
   PlanResourcesOutput,
   PolicySource,
+  RequestContext,
 } from "@cerbos/core";
 import {
   auditTrailFromProtobuf,
@@ -30,6 +31,7 @@ import {
   checkOutputFromProtobuf,
   planResourcesInputFromProtobuf,
   planResourcesOutputFromProtobuf,
+  requestContextFromProtobuf,
   requireField,
 } from "@cerbos/core/~internal";
 
@@ -60,6 +62,7 @@ export class DecisionLogger {
         outputs: checkOutputs(response?.response),
         error: errorMessage(error),
       },
+      requestContext(request),
       response?.auditTrail,
       headers,
     );
@@ -83,6 +86,7 @@ export class DecisionLogger {
         output: planResourcesOutput(request, response?.response),
         error: errorMessage(error),
       },
+      requestContext(request),
       response?.auditTrail,
       headers,
     );
@@ -94,6 +98,7 @@ export class DecisionLogger {
 
   private async logDecision(
     method: DecisionLogEntryMethod,
+    requestContext: RequestContext | undefined,
     auditTrail: AuditTrail | undefined,
     headers: Headers,
   ): Promise<string> {
@@ -113,6 +118,7 @@ export class DecisionLogger {
         userAgent: this.userAgent,
       },
       policySource: this.policySource,
+      requestContext,
     });
 
     return callId;
@@ -238,4 +244,12 @@ function metadata(headers: Headers): Record<string, string[]> {
   }
 
   return metadata;
+}
+
+function requestContext({
+  requestContext,
+}: CheckResourcesRequestValid | PlanResourcesRequestValid):
+  | RequestContext
+  | undefined {
+  return requestContext && requestContextFromProtobuf(requestContext);
 }

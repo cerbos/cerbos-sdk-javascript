@@ -20,6 +20,7 @@ import type {
   PolicySource_Hub,
   PolicySource_Hub_EmbeddedBundle,
   PolicySource_Hub_LocalBundle,
+  RequestContext as RequestContextProtobuf,
 } from "@cerbos/api/cerbos/audit/v1/audit_pb";
 import { PolicySource_Database_Driver } from "@cerbos/api/cerbos/audit/v1/audit_pb";
 import { Effect as EffectProtobuf } from "@cerbos/api/cerbos/effect/v1/effect_pb";
@@ -168,6 +169,7 @@ import type {
   PrincipalPolicy,
   PrincipalRule,
   PrincipalRuleAction,
+  RequestContext,
   Resource,
   ResourcePolicy,
   ResourceQuery,
@@ -217,6 +219,7 @@ export function accessLogEntryFromProtobuf({
     statusCode,
     oversized,
     policySource,
+    requestContext,
   } = entry.value;
 
   requireField("AccessLogEntry.timestamp", timestamp);
@@ -231,6 +234,8 @@ export function accessLogEntryFromProtobuf({
     statusCode,
     oversized,
     policySource: policySource && policySourceFromProtobuf(policySource),
+    requestContext:
+      requestContext && requestContextFromProtobuf(requestContext),
   };
 }
 
@@ -248,6 +253,7 @@ export function decisionLogEntryFromProtobuf({
     method,
     oversized,
     policySource,
+    requestContext,
   } = entry.value;
 
   requireField("DecisionLogEntry.timestamp", timestamp);
@@ -262,6 +268,8 @@ export function decisionLogEntryFromProtobuf({
     method: decisionLogEntryMethodFromProtobuf(method),
     oversized,
     policySource: policySource && policySourceFromProtobuf(policySource),
+    requestContext:
+      requestContext && requestContextFromProtobuf(requestContext),
   };
 }
 
@@ -450,6 +458,14 @@ function localBundleFromProtobuf({
   path,
 }: PolicySource_Hub_LocalBundle): LocalBundle {
   return { path };
+}
+
+export function requestContextFromProtobuf({
+  annotations,
+}: RequestContextProtobuf): RequestContext {
+  return {
+    annotations: valuesFromProtobuf(annotations),
+  };
 }
 
 function decisionLogEntryMethodFromProtobuf(
