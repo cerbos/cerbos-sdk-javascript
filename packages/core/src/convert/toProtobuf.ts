@@ -43,6 +43,7 @@ import type {
   AuxData_JWTValid,
   CheckResourcesRequestValid,
   CheckResourcesRequest_ResourceEntryValid,
+  DeletePolicyRequestValid,
   DeleteSchemaRequestValid,
   DisablePolicyRequestValid,
   EnablePolicyRequestValid,
@@ -66,6 +67,7 @@ import type {
   CheckResourcesRequest,
   Condition,
   Constants,
+  DeletePoliciesRequest,
   DeleteSchemasRequest,
   DerivedRoleDefinition,
   DerivedRoles,
@@ -655,6 +657,15 @@ function requestContextToProtobuf({
   return {
     $typeName: "cerbos.audit.v1.RequestContext",
     annotations: valuesToProtobuf(annotations),
+  };
+}
+
+export function deletePoliciesRequestToProtobuf({
+  ids,
+}: DeletePoliciesRequest): DeletePolicyRequestValid {
+  return {
+    $typeName: "cerbos.request.v1.DeletePolicyRequest",
+    id: ids,
   };
 }
 

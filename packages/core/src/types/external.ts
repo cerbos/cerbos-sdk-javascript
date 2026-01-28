@@ -21,6 +21,8 @@ export * from "./external/DatabaseDriver.js";
 export * from "./external/DecisionLogEntry.js";
 export * from "./external/DecisionLogEntryMethod.js";
 export * from "./external/DecodedAuxData.js";
+export * from "./external/DeletePoliciesRequest.js";
+export * from "./external/DeletePoliciesResponse.js";
 export * from "./external/DeleteSchemasRequest.js";
 export * from "./external/DeleteSchemasResponse.js";
 export * from "./external/DerivedRoleDefinition.js";
