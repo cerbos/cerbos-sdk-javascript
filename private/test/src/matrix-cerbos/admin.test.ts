@@ -671,7 +671,7 @@ describe("Client", () => {
         });
       });
 
-      describe("addOrUpdatePolicies / listPolicies / getPolicy / disablePolicy", () => {
+      describe("addOrUpdatePolicies / listPolicies / getPolicy / disablePolicy / enablePolicy / deletePolicy", () => {
         it.each([
           {
             source: "defined inline",
@@ -721,20 +721,25 @@ describe("Client", () => {
             const disabled = await mutable.disablePolicy(id);
             expect(disabled).toBe(true);
 
-            const { ids: remainingIds } = await mutable.listPolicies();
-            expect(remainingIds).not.toContain(id);
+            let { ids } = await mutable.listPolicies();
+            expect(ids).not.toContain(id);
 
-            const { ids: disabledIds } = await mutable.listPolicies({
-              includeDisabled: true,
-            });
-
-            expect(disabledIds).toContain(id);
+            ({ ids } = await mutable.listPolicies({ includeDisabled: true }));
+            expect(ids).toContain(id);
 
             const enabled = await mutable.enablePolicy(id);
             expect(enabled).toBe(true);
 
-            const { ids: enabledIds } = await mutable.listPolicies();
-            expect(enabledIds).toContain(id);
+            ({ ids } = await mutable.listPolicies());
+            expect(ids).toContain(id);
+
+            if (versionIsAtLeast("0.51.0", cerbosVersion)) {
+              const deleted = await mutable.deletePolicy(id);
+              expect(deleted).toBe(true);
+
+              ({ ids } = await mutable.listPolicies({ includeDisabled: true }));
+              expect(ids).not.toContain(id);
+            }
           }
         });
       });

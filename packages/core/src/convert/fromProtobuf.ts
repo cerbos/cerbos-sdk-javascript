@@ -69,6 +69,7 @@ import type {
   CheckResourcesResponse_ResultEntry_Meta,
   CheckResourcesResponse_ResultEntry_Meta_EffectMeta,
   CheckResourcesResponse_ResultEntry_Resource,
+  DeletePolicyResponse,
   DeleteSchemaResponse,
   DisablePolicyResponse,
   EnablePolicyResponse,
@@ -117,6 +118,7 @@ import type {
   DecisionLogEntryMethod,
   DecisionLogEntryPlanResources,
   DecodedAuxData,
+  DeletePoliciesResponse,
   DeleteSchemasResponse,
   DerivedRoleDefinition,
   DerivedRoles,
@@ -829,6 +831,12 @@ function outputResultFromProtobuf({
     source: src,
     value: val && valueFromProtobuf(val),
   };
+}
+
+export function deletePoliciesResponseFromProtobuf({
+  deletedPolicies,
+}: DeletePolicyResponse): DeletePoliciesResponse {
+  return { deletedPolicies };
 }
 
 export function deleteSchemasResponseFromProtobuf({
