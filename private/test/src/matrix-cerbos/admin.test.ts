@@ -820,6 +820,17 @@ describe("Client", () => {
         },
       );
 
+      describeIfVersionIsAtLeast("0.51.0", cerbosVersion)(
+        "purgeStoreRevisions",
+        () => {
+          it("purges revisions from the store", async () => {
+            await expect(
+              mutable.purgeStoreRevisions({ keepLast: 1 }),
+            ).resolves.toBeUndefined();
+          });
+        },
+      );
+
       describe("reloadStore", () => {
         it("reloads the store", async () => {
           await expect(

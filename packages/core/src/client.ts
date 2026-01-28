@@ -47,6 +47,7 @@ import {
   listDecisionLogEntriesRequestToProtobuf,
   listPoliciesRequestToProtobuf,
   planResourcesRequestToProtobuf,
+  purgeStoreRevisionsRequestToProtobuf,
   reloadStoreRequestToProtobuf,
 } from "./convert/toProtobuf.js";
 import { NotOK, ValidationFailed } from "./errors.js";
@@ -89,6 +90,7 @@ import type {
   PlanResourcesResponse,
   Policy,
   Principal,
+  PurgeStoreRevisionsRequest,
   ReloadStoreRequest,
   Schema,
   ServerInfo,
@@ -1134,6 +1136,36 @@ export abstract class Client {
     this.handleValidationErrors(response);
 
     return response;
+  }
+
+  /**
+   * Delete policy revisions from the store.
+   *
+   * @remarks
+   * Dynamic storage backends keep an audit trail of policy changes, which grows over time.
+   *
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be at least v0.51 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * await cerbos.purgeStoreRevisions({ keepLast: 5 });
+   * ```
+   */
+  public async purgeStoreRevisions(
+    request: PurgeStoreRevisionsRequest = {},
+    options?: RequestOptions,
+  ): Promise<void> {
+    await this.unary(
+      admin.method.purgeStoreRevisions,
+      purgeStoreRevisionsRequestToProtobuf(request),
+      options,
+    );
   }
 
   /**

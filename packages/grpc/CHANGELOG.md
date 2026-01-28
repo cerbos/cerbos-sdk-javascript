@@ -20,6 +20,10 @@
 
   Requires a policy decision point server running Cerbos 0.51+.
 
+- [`Client.purgeStoreRevisions`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#purgestorerevisions) method to clear history from dynamic policy stores ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344))
+
+  Requires a policy decision point server running Cerbos 0.51+.
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.11.0 ([#1355](https://github.com/cerbos/cerbos-sdk-javascript/pull/1355))

@@ -127,6 +127,11 @@ defineEndpoints(admin, {
     path: "/admin/schemas",
     serialize: serializeToQueryString,
   },
+  purgeStoreRevisions: {
+    method: "DELETE",
+    path: "/admin/store/revisions",
+    serialize: serializeToQueryString,
+  },
   reloadStore: {
     method: "GET",
     path: "/admin/store/reload",
