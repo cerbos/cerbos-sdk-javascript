@@ -6,6 +6,7 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { Duration } from "../../../google/protobuf/duration.js";
 import { Value } from "../../../google/protobuf/struct.js";
 import { Timestamp } from "../../../google/protobuf/timestamp.js";
+import { RequestContext } from "../../audit/v1/audit.js";
 import {
   PlanResourcesInput_Resource,
   Principal,
@@ -24,6 +25,7 @@ export interface PlanResourcesRequest {
   resource: PlanResourcesInput_Resource | undefined;
   auxData: AuxData | undefined;
   includeMeta: boolean;
+  requestContext?: RequestContext | undefined;
 }
 
 export interface CheckResourceSetRequest {
@@ -74,6 +76,7 @@ export interface CheckResourcesRequest {
   principal: Principal | undefined;
   resources: CheckResourcesRequest_ResourceEntry[];
   auxData: AuxData | undefined;
+  requestContext?: RequestContext | undefined;
 }
 
 export interface CheckResourcesRequest_ResourceEntry {
@@ -148,6 +151,10 @@ export interface GetPolicyRequest {
   id: string[];
 }
 
+export interface DeletePolicyRequest {
+  id: string[];
+}
+
 export interface DisablePolicyRequest {
   id: string[];
 }
@@ -182,6 +189,10 @@ export interface ReloadStoreRequest {
   wait: boolean;
 }
 
+export interface PurgeStoreRevisionsRequest {
+  keepLast: number;
+}
+
 function createBasePlanResourcesRequest(): PlanResourcesRequest {
   return {
     requestId: "",
@@ -191,6 +202,7 @@ function createBasePlanResourcesRequest(): PlanResourcesRequest {
     resource: undefined,
     auxData: undefined,
     includeMeta: false,
+    requestContext: undefined,
   };
 }
 
@@ -222,6 +234,12 @@ export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
     }
     if (message.includeMeta !== false) {
       writer.uint32(48).bool(message.includeMeta);
+    }
+    if (message.requestContext !== undefined) {
+      RequestContext.encode(
+        message.requestContext,
+        writer.uint32(66).fork(),
+      ).join();
     }
     return writer;
   },
@@ -296,6 +314,17 @@ export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
           message.includeMeta = reader.bool();
           continue;
         }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.requestContext = RequestContext.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -327,6 +356,9 @@ export const PlanResourcesRequest: MessageFns<PlanResourcesRequest> = {
     }
     if (message.includeMeta !== false) {
       obj.includeMeta = message.includeMeta;
+    }
+    if (message.requestContext !== undefined) {
+      obj.requestContext = RequestContext.toJSON(message.requestContext);
     }
     return obj;
   },
@@ -960,6 +992,7 @@ function createBaseCheckResourcesRequest(): CheckResourcesRequest {
     principal: undefined,
     resources: [],
     auxData: undefined,
+    requestContext: undefined,
   };
 }
 
@@ -985,6 +1018,12 @@ export const CheckResourcesRequest: MessageFns<CheckResourcesRequest> = {
     }
     if (message.auxData !== undefined) {
       AuxData.encode(message.auxData, writer.uint32(42).fork()).join();
+    }
+    if (message.requestContext !== undefined) {
+      RequestContext.encode(
+        message.requestContext,
+        writer.uint32(50).fork(),
+      ).join();
     }
     return writer;
   },
@@ -1042,6 +1081,17 @@ export const CheckResourcesRequest: MessageFns<CheckResourcesRequest> = {
           message.auxData = AuxData.decode(reader, reader.uint32());
           continue;
         }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.requestContext = RequestContext.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1069,6 +1119,9 @@ export const CheckResourcesRequest: MessageFns<CheckResourcesRequest> = {
     }
     if (message.auxData !== undefined) {
       obj.auxData = AuxData.toJSON(message.auxData);
+    }
+    if (message.requestContext !== undefined) {
+      obj.requestContext = RequestContext.toJSON(message.requestContext);
     }
     return obj;
   },
@@ -1705,6 +1758,58 @@ export const GetPolicyRequest: MessageFns<GetPolicyRequest> = {
   },
 };
 
+function createBaseDeletePolicyRequest(): DeletePolicyRequest {
+  return { id: [] };
+}
+
+export const DeletePolicyRequest: MessageFns<DeletePolicyRequest> = {
+  encode(
+    message: DeletePolicyRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    for (const v of message.id) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DeletePolicyRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDeletePolicyRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id.push(reader.string());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  toJSON(message: DeletePolicyRequest): unknown {
+    const obj: any = {};
+    if (message.id?.length) {
+      obj.id = message.id;
+    }
+    return obj;
+  },
+};
+
 function createBaseDisablePolicyRequest(): DisablePolicyRequest {
   return { id: [] };
 }
@@ -2165,6 +2270,59 @@ export const ReloadStoreRequest: MessageFns<ReloadStoreRequest> = {
     return obj;
   },
 };
+
+function createBasePurgeStoreRevisionsRequest(): PurgeStoreRevisionsRequest {
+  return { keepLast: 0 };
+}
+
+export const PurgeStoreRevisionsRequest: MessageFns<PurgeStoreRevisionsRequest> =
+  {
+    encode(
+      message: PurgeStoreRevisionsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.keepLast !== 0) {
+        writer.uint32(8).uint32(message.keepLast);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PurgeStoreRevisionsRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePurgeStoreRevisionsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.keepLast = reader.uint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    toJSON(message: PurgeStoreRevisionsRequest): unknown {
+      const obj: any = {};
+      if (message.keepLast !== 0) {
+        obj.keepLast = Math.round(message.keepLast);
+      }
+      return obj;
+    },
+  };
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = BigInt(Math.trunc(date.getTime() / 1_000));

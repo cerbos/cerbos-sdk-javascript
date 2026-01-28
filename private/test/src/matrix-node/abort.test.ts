@@ -45,6 +45,7 @@ const dummyServerStreamResponse = {
       statusCode: Status.OK,
       oversized: false,
       policySource: undefined,
+      requestContext: undefined,
     },
   },
 } satisfies ListAuditLogEntriesResponse;

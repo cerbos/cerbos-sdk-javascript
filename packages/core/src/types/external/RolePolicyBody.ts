@@ -10,6 +10,20 @@ export interface RolePolicyBody {
   role: string;
 
   /**
+   * The version of the policy.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.51.
+   *
+   * Policies are uniquely identified by the role name and version pair.
+   * You can have multiple policy versions for the same role (e.g. production vs. staging).
+   * The version value `default` is special as it is the default fallback when no version is specified in the request.
+   *
+   * @defaultValue `"default"`
+   */
+  version?: string | undefined;
+
+  /**
    * The list of parent roles that a custom role inherits.
    */
   parentRoles?: string[] | undefined;

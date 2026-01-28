@@ -18,6 +18,7 @@ import {
   accessLogEntryFromProtobuf,
   checkResourcesResponseFromProtobuf,
   decisionLogEntryFromProtobuf,
+  deletePoliciesResponseFromProtobuf,
   deleteSchemasResponseFromProtobuf,
   disablePoliciesResponseFromProtobuf,
   enablePoliciesResponseFromProtobuf,
@@ -34,6 +35,7 @@ import {
   addOrUpdatePoliciesRequestToProtobuf,
   addOrUpdateSchemasRequestToProtobuf,
   checkResourcesRequestToProtobuf,
+  deletePoliciesRequestToProtobuf,
   deleteSchemasRequestToProtobuf,
   disablePoliciesRequestToProtobuf,
   enablePoliciesRequestToProtobuf,
@@ -45,6 +47,7 @@ import {
   listDecisionLogEntriesRequestToProtobuf,
   listPoliciesRequestToProtobuf,
   planResourcesRequestToProtobuf,
+  purgeStoreRevisionsRequestToProtobuf,
   reloadStoreRequestToProtobuf,
 } from "./convert/toProtobuf.js";
 import { NotOK, ValidationFailed } from "./errors.js";
@@ -61,6 +64,8 @@ import type {
   CheckResourcesResponse,
   CheckResourcesResult,
   DecisionLogEntry,
+  DeletePoliciesRequest,
+  DeletePoliciesResponse,
   DeleteSchemasRequest,
   DeleteSchemasResponse,
   DisablePoliciesRequest,
@@ -85,6 +90,7 @@ import type {
   PlanResourcesResponse,
   Policy,
   Principal,
+  PurgeStoreRevisionsRequest,
   ReloadStoreRequest,
   Schema,
   ServerInfo,
@@ -464,6 +470,67 @@ export abstract class Client {
     this.handleValidationErrors(response);
 
     return response;
+  }
+
+  /**
+   * Delete multiple policies.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be at least v0.51 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * const result = await cerbos.deletePolicies({
+   *   ids: ["resource.document.v1", "resource.image.v1"],
+   * });
+   * ```
+   */
+  public async deletePolicies(
+    request: DeletePoliciesRequest,
+    options?: RequestOptions,
+  ): Promise<DeletePoliciesResponse> {
+    return deletePoliciesResponseFromProtobuf(
+      await this.unary(
+        admin.method.deletePolicy,
+        deletePoliciesRequestToProtobuf(request),
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Delete a policy.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be at least v0.25 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * const deleted = await cerbos.deletePolicy("resource.document.v1");
+   * ```
+   */
+  public async deletePolicy(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<boolean> {
+    const { deletedPolicies } = await this.deletePolicies(
+      { ids: [id] },
+      options,
+    );
+
+    return deletedPolicies === 1;
   }
 
   /**
@@ -1069,6 +1136,36 @@ export abstract class Client {
     this.handleValidationErrors(response);
 
     return response;
+  }
+
+  /**
+   * Delete policy revisions from the store.
+   *
+   * @remarks
+   * Dynamic storage backends keep an audit trail of policy changes, which grows over time.
+   *
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be at least v0.51 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * await cerbos.purgeStoreRevisions({ keepLast: 5 });
+   * ```
+   */
+  public async purgeStoreRevisions(
+    request: PurgeStoreRevisionsRequest = {},
+    options?: RequestOptions,
+  ): Promise<void> {
+    await this.unary(
+      admin.method.purgeStoreRevisions,
+      purgeStoreRevisionsRequestToProtobuf(request),
+      options,
+    );
   }
 
   /**

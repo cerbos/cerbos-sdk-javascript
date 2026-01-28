@@ -172,6 +172,10 @@ export interface GetPolicyResponse {
   policies: Policy[];
 }
 
+export interface DeletePolicyResponse {
+  deletedPolicies: number;
+}
+
 export interface DisablePolicyResponse {
   disabledPolicies: number;
 }
@@ -361,6 +365,10 @@ export interface DeleteSchemaResponse {
 }
 
 export interface ReloadStoreResponse {}
+
+export interface PurgeStoreRevisionsResponse {
+  affectedRows: number;
+}
 
 function createBasePlanResourcesResponse(): PlanResourcesResponse {
   return {
@@ -2667,6 +2675,58 @@ export const GetPolicyResponse: MessageFns<GetPolicyResponse> = {
   },
 };
 
+function createBaseDeletePolicyResponse(): DeletePolicyResponse {
+  return { deletedPolicies: 0 };
+}
+
+export const DeletePolicyResponse: MessageFns<DeletePolicyResponse> = {
+  encode(
+    message: DeletePolicyResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.deletedPolicies !== 0) {
+      writer.uint32(8).uint32(message.deletedPolicies);
+    }
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DeletePolicyResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDeletePolicyResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.deletedPolicies = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  toJSON(message: DeletePolicyResponse): unknown {
+    const obj: any = {};
+    if (message.deletedPolicies !== 0) {
+      obj.deletedPolicies = Math.round(message.deletedPolicies);
+    }
+    return obj;
+  },
+};
+
 function createBaseDisablePolicyResponse(): DisablePolicyResponse {
   return { disabledPolicies: 0 };
 }
@@ -3675,6 +3735,59 @@ export const ReloadStoreResponse: MessageFns<ReloadStoreResponse> = {
     return obj;
   },
 };
+
+function createBasePurgeStoreRevisionsResponse(): PurgeStoreRevisionsResponse {
+  return { affectedRows: 0 };
+}
+
+export const PurgeStoreRevisionsResponse: MessageFns<PurgeStoreRevisionsResponse> =
+  {
+    encode(
+      message: PurgeStoreRevisionsResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.affectedRows !== 0) {
+        writer.uint32(8).uint32(message.affectedRows);
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): PurgeStoreRevisionsResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePurgeStoreRevisionsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.affectedRows = reader.uint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    toJSON(message: PurgeStoreRevisionsResponse): unknown {
+      const obj: any = {};
+      if (message.affectedRows !== 0) {
+        obj.affectedRows = Math.round(message.affectedRows);
+      }
+      return obj;
+    },
+  };
 
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;

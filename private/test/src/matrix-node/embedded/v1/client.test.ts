@@ -139,6 +139,7 @@ describe("Embedded", () => {
               },
               outputs: [
                 {
+                  action: "",
                   source: "resource.document.v1#delete",
                   value: "delete_allowed:me@example.com",
                 },
@@ -210,6 +211,11 @@ describe("Embedded", () => {
               },
               includeMetadata,
               requestId: "42",
+              requestContext: {
+                annotations: {
+                  bar: 1234,
+                },
+              },
             };
 
             const now = new Date();
@@ -265,6 +271,7 @@ describe("Embedded", () => {
                         : undefined,
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -304,6 +311,7 @@ describe("Embedded", () => {
                         : undefined,
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -343,6 +351,7 @@ describe("Embedded", () => {
                         : undefined,
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -443,6 +452,7 @@ describe("Embedded", () => {
                       effectiveDerivedRoles: ["OWNER"],
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -472,6 +482,7 @@ describe("Embedded", () => {
                       effectiveDerivedRoles: [],
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -501,6 +512,7 @@ describe("Embedded", () => {
                       effectiveDerivedRoles: [],
                       outputs: [
                         {
+                          action: "",
                           source: "resource.document.v1#delete",
                           value: "delete_allowed:me@example.com",
                         },
@@ -529,6 +541,11 @@ describe("Embedded", () => {
                   authInfo: "",
                   forwardedFor: "",
                   userAgent: `test/9000 ${embeddedV1UserAgent}`,
+                },
+                requestContext: {
+                  annotations: {
+                    bar: 1234,
+                  },
                 },
               } satisfies DecisionLogEntry);
             });
@@ -643,6 +660,7 @@ describe("Embedded", () => {
                 },
                 outputs: [
                   {
+                    action: "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -720,6 +738,7 @@ describe("Embedded", () => {
                 },
                 outputs: [
                   {
+                    action: "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -802,6 +821,7 @@ describe("Embedded", () => {
                 },
                 outputs: [
                   {
+                    action: "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -976,6 +996,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1013,6 +1034,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1050,6 +1072,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1161,6 +1184,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1198,6 +1222,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1235,6 +1260,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1351,6 +1377,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1388,6 +1415,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },
@@ -1425,6 +1453,7 @@ describe("Embedded", () => {
                     },
                     outputs: [
                       {
+                        action: "",
                         source: "resource.document.v1#delete",
                         value: "delete_allowed:me@example.com",
                       },

@@ -10,6 +10,7 @@ import type {
   GenMessage,
 } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import { file_buf_validate_validate } from "../../../buf/validate/validate_pb.js";
 import type {
   CheckInput,
   CheckInputJson,
@@ -30,8 +31,17 @@ import type {
   SourceAttributesJson,
 } from "../../policy/v1/policy_pb.js";
 import { file_cerbos_policy_v1_policy } from "../../policy/v1/policy_pb.js";
-import type { Timestamp, TimestampJson } from "@bufbuild/protobuf/wkt";
-import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
+import type {
+  Timestamp,
+  TimestampJson,
+  Value,
+  ValueJson,
+} from "@bufbuild/protobuf/wkt";
+import {
+  file_google_protobuf_struct,
+  file_google_protobuf_timestamp,
+} from "@bufbuild/protobuf/wkt";
+import { file_protoc_gen_openapiv2_options_annotations } from "../../../protoc-gen-openapiv2/options/annotations_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
@@ -40,11 +50,14 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_cerbos_audit_v1_audit: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChtjZXJib3MvYXVkaXQvdjEvYXVkaXQucHJvdG8SD2NlcmJvcy5hdWRpdC52MSLyAgoOQWNjZXNzTG9nRW50cnkSDwoHY2FsbF9pZBgBIAEoCRItCgl0aW1lc3RhbXAYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiMKBHBlZXIYAyABKAsyFS5jZXJib3MuYXVkaXQudjEuUGVlchI/CghtZXRhZGF0YRgEIAMoCzItLmNlcmJvcy5hdWRpdC52MS5BY2Nlc3NMb2dFbnRyeS5NZXRhZGF0YUVudHJ5Eg4KBm1ldGhvZBgFIAEoCRITCgtzdGF0dXNfY29kZRgGIAEoDRIRCglvdmVyc2l6ZWQYByABKAgSNAoNcG9saWN5X3NvdXJjZRgIIAEoCzIdLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UaTAoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSKgoFdmFsdWUYAiABKAsyGy5jZXJib3MuYXVkaXQudjEuTWV0YVZhbHVlczoCOAEiqgcKEERlY2lzaW9uTG9nRW50cnkSDwoHY2FsbF9pZBgBIAEoCRItCgl0aW1lc3RhbXAYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiMKBHBlZXIYAyABKAsyFS5jZXJib3MuYXVkaXQudjEuUGVlchIwCgZpbnB1dHMYBCADKAsyHC5jZXJib3MuZW5naW5lLnYxLkNoZWNrSW5wdXRCAhgBEjIKB291dHB1dHMYBSADKAsyHS5jZXJib3MuZW5naW5lLnYxLkNoZWNrT3V0cHV0QgIYARIRCgVlcnJvchgGIAEoCUICGAESSwoPY2hlY2tfcmVzb3VyY2VzGAcgASgLMjAuY2VyYm9zLmF1ZGl0LnYxLkRlY2lzaW9uTG9nRW50cnkuQ2hlY2tSZXNvdXJjZXNIABJJCg5wbGFuX3Jlc291cmNlcxgIIAEoCzIvLmNlcmJvcy5hdWRpdC52MS5EZWNpc2lvbkxvZ0VudHJ5LlBsYW5SZXNvdXJjZXNIABJBCghtZXRhZGF0YRgPIAMoCzIvLmNlcmJvcy5hdWRpdC52MS5EZWNpc2lvbkxvZ0VudHJ5Lk1ldGFkYXRhRW50cnkSMAoLYXVkaXRfdHJhaWwYECABKAsyGy5jZXJib3MuYXVkaXQudjEuQXVkaXRUcmFpbBIRCglvdmVyc2l6ZWQYESABKAgSNAoNcG9saWN5X3NvdXJjZRgSIAEoCzIdLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UafQoOQ2hlY2tSZXNvdXJjZXMSLAoGaW5wdXRzGAEgAygLMhwuY2VyYm9zLmVuZ2luZS52MS5DaGVja0lucHV0Ei4KB291dHB1dHMYAiADKAsyHS5jZXJib3MuZW5naW5lLnYxLkNoZWNrT3V0cHV0Eg0KBWVycm9yGAMgASgJGooBCg1QbGFuUmVzb3VyY2VzEjMKBWlucHV0GAEgASgLMiQuY2VyYm9zLmVuZ2luZS52MS5QbGFuUmVzb3VyY2VzSW5wdXQSNQoGb3V0cHV0GAIgASgLMiUuY2VyYm9zLmVuZ2luZS52MS5QbGFuUmVzb3VyY2VzT3V0cHV0Eg0KBWVycm9yGAMgASgJGkwKDU1ldGFkYXRhRW50cnkSCwoDa2V5GAEgASgJEioKBXZhbHVlGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLk1ldGFWYWx1ZXM6AjgBQggKBm1ldGhvZCIcCgpNZXRhVmFsdWVzEg4KBnZhbHVlcxgBIAMoCSJVCgRQZWVyEg8KB2FkZHJlc3MYASABKAkSEQoJYXV0aF9pbmZvGAIgASgJEhIKCnVzZXJfYWdlbnQYAyABKAkSFQoNZm9yd2FyZGVkX2ZvchgEIAEoCSK6AQoKQXVkaXRUcmFpbBJOChJlZmZlY3RpdmVfcG9saWNpZXMYASADKAsyMi5jZXJib3MuYXVkaXQudjEuQXVkaXRUcmFpbC5FZmZlY3RpdmVQb2xpY2llc0VudHJ5GlwKFkVmZmVjdGl2ZVBvbGljaWVzRW50cnkSCwoDa2V5GAEgASgJEjEKBXZhbHVlGAIgASgLMiIuY2VyYm9zLnBvbGljeS52MS5Tb3VyY2VBdHRyaWJ1dGVzOgI4ASKwCAoMUG9saWN5U291cmNlEjIKBGJsb2IYASABKAsyIi5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkJsb2JIABI6CghkYXRhYmFzZRgCIAEoCzImLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuRGF0YWJhc2VIABIyCgRkaXNrGAMgASgLMiIuY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5EaXNrSAASMAoDZ2l0GAQgASgLMiEuY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5HaXRIABIwCgNodWIYBSABKAsyIS5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkh1YkgAEkEKDGVtYmVkZGVkX3BkcBgGIAEoCzIpLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuRW1iZWRkZWRQRFBIABoqCgRCbG9iEhIKCmJ1Y2tldF91cmwYASABKAkSDgoGcHJlZml4GAIgASgJGqYBCghEYXRhYmFzZRI9CgZkcml2ZXIYASABKA4yLS5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkRhdGFiYXNlLkRyaXZlciJbCgZEcml2ZXISFgoSRFJJVkVSX1VOU1BFQ0lGSUVEEAASEAoMRFJJVkVSX01ZU1FMEAESEwoPRFJJVkVSX1BPU1RHUkVTEAISEgoORFJJVkVSX1NRTElURTMQAxoZCgREaXNrEhEKCWRpcmVjdG9yeRgBIAEoCRpdCgtFbWJlZGRlZFBEUBILCgN1cmwYASABKAkSEwoLY29tbWl0X2hhc2gYAiABKAkSLAoIYnVpbHRfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wGkMKA0dpdBIWCg5yZXBvc2l0b3J5X3VybBgBIAEoCRIOCgZicmFuY2gYAiABKAkSFAoMc3ViZGlyZWN0b3J5GAMgASgJGrYCCgNIdWISDwoFbGFiZWwYASABKAlIABIXCg1kZXBsb3ltZW50X2lkGAIgASgJSAASFwoNcGxheWdyb3VuZF9pZBgDIAEoCUgAEkUKDGxvY2FsX2J1bmRsZRgEIAEoCzItLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuSHViLkxvY2FsQnVuZGxlSAASSwoPZW1iZWRkZWRfYnVuZGxlGAUgASgLMjAuY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5IdWIuRW1iZWRkZWRCdW5kbGVIABoxCg5FbWJlZGRlZEJ1bmRsZRIPCgdydWxlX2lkGAEgASgJEg4KBnNjb3BlcxgCIAMoCRobCgtMb2NhbEJ1bmRsZRIMCgRwYXRoGAEgASgJQggKBnNvdXJjZUIICgZzb3VyY2VCawoXZGV2LmNlcmJvcy5hcGkudjEuYXVkaXRaOmdpdGh1Yi5jb20vY2VyYm9zL2NlcmJvcy9hcGkvZ2VucGIvY2VyYm9zL2F1ZGl0L3YxO2F1ZGl0djGqAhNDZXJib3MuQXBpLlYxLkF1ZGl0YgZwcm90bzM",
+    "ChtjZXJib3MvYXVkaXQvdjEvYXVkaXQucHJvdG8SD2NlcmJvcy5hdWRpdC52MSLFAwoOQWNjZXNzTG9nRW50cnkSDwoHY2FsbF9pZBgBIAEoCRItCgl0aW1lc3RhbXAYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiMKBHBlZXIYAyABKAsyFS5jZXJib3MuYXVkaXQudjEuUGVlchI/CghtZXRhZGF0YRgEIAMoCzItLmNlcmJvcy5hdWRpdC52MS5BY2Nlc3NMb2dFbnRyeS5NZXRhZGF0YUVudHJ5Eg4KBm1ldGhvZBgFIAEoCRITCgtzdGF0dXNfY29kZRgGIAEoDRIRCglvdmVyc2l6ZWQYByABKAgSNAoNcG9saWN5X3NvdXJjZRgIIAEoCzIdLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2USPQoPcmVxdWVzdF9jb250ZXh0GAkgASgLMh8uY2VyYm9zLmF1ZGl0LnYxLlJlcXVlc3RDb250ZXh0SACIAQEaTAoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSKgoFdmFsdWUYAiABKAsyGy5jZXJib3MuYXVkaXQudjEuTWV0YVZhbHVlczoCOAFCEgoQX3JlcXVlc3RfY29udGV4dCL9BwoQRGVjaXNpb25Mb2dFbnRyeRIPCgdjYWxsX2lkGAEgASgJEi0KCXRpbWVzdGFtcBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASIwoEcGVlchgDIAEoCzIVLmNlcmJvcy5hdWRpdC52MS5QZWVyEjAKBmlucHV0cxgEIAMoCzIcLmNlcmJvcy5lbmdpbmUudjEuQ2hlY2tJbnB1dEICGAESMgoHb3V0cHV0cxgFIAMoCzIdLmNlcmJvcy5lbmdpbmUudjEuQ2hlY2tPdXRwdXRCAhgBEhEKBWVycm9yGAYgASgJQgIYARJLCg9jaGVja19yZXNvdXJjZXMYByABKAsyMC5jZXJib3MuYXVkaXQudjEuRGVjaXNpb25Mb2dFbnRyeS5DaGVja1Jlc291cmNlc0gAEkkKDnBsYW5fcmVzb3VyY2VzGAggASgLMi8uY2VyYm9zLmF1ZGl0LnYxLkRlY2lzaW9uTG9nRW50cnkuUGxhblJlc291cmNlc0gAEkEKCG1ldGFkYXRhGA8gAygLMi8uY2VyYm9zLmF1ZGl0LnYxLkRlY2lzaW9uTG9nRW50cnkuTWV0YWRhdGFFbnRyeRIwCgthdWRpdF90cmFpbBgQIAEoCzIbLmNlcmJvcy5hdWRpdC52MS5BdWRpdFRyYWlsEhEKCW92ZXJzaXplZBgRIAEoCBI0Cg1wb2xpY3lfc291cmNlGBIgASgLMh0uY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZRI9Cg9yZXF1ZXN0X2NvbnRleHQYEyABKAsyHy5jZXJib3MuYXVkaXQudjEuUmVxdWVzdENvbnRleHRIAYgBARp9Cg5DaGVja1Jlc291cmNlcxIsCgZpbnB1dHMYASADKAsyHC5jZXJib3MuZW5naW5lLnYxLkNoZWNrSW5wdXQSLgoHb3V0cHV0cxgCIAMoCzIdLmNlcmJvcy5lbmdpbmUudjEuQ2hlY2tPdXRwdXQSDQoFZXJyb3IYAyABKAkaigEKDVBsYW5SZXNvdXJjZXMSMwoFaW5wdXQYASABKAsyJC5jZXJib3MuZW5naW5lLnYxLlBsYW5SZXNvdXJjZXNJbnB1dBI1CgZvdXRwdXQYAiABKAsyJS5jZXJib3MuZW5naW5lLnYxLlBsYW5SZXNvdXJjZXNPdXRwdXQSDQoFZXJyb3IYAyABKAkaTAoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSKgoFdmFsdWUYAiABKAsyGy5jZXJib3MuYXVkaXQudjEuTWV0YVZhbHVlczoCOAFCCAoGbWV0aG9kQhIKEF9yZXF1ZXN0X2NvbnRleHQiHAoKTWV0YVZhbHVlcxIOCgZ2YWx1ZXMYASADKAkiVQoEUGVlchIPCgdhZGRyZXNzGAEgASgJEhEKCWF1dGhfaW5mbxgCIAEoCRISCgp1c2VyX2FnZW50GAMgASgJEhUKDWZvcndhcmRlZF9mb3IYBCABKAkiugEKCkF1ZGl0VHJhaWwSTgoSZWZmZWN0aXZlX3BvbGljaWVzGAEgAygLMjIuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWwuRWZmZWN0aXZlUG9saWNpZXNFbnRyeRpcChZFZmZlY3RpdmVQb2xpY2llc0VudHJ5EgsKA2tleRgBIAEoCRIxCgV2YWx1ZRgCIAEoCzIiLmNlcmJvcy5wb2xpY3kudjEuU291cmNlQXR0cmlidXRlczoCOAEisAgKDFBvbGljeVNvdXJjZRIyCgRibG9iGAEgASgLMiIuY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5CbG9iSAASOgoIZGF0YWJhc2UYAiABKAsyJi5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkRhdGFiYXNlSAASMgoEZGlzaxgDIAEoCzIiLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuRGlza0gAEjAKA2dpdBgEIAEoCzIhLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuR2l0SAASMAoDaHViGAUgASgLMiEuY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5IdWJIABJBCgxlbWJlZGRlZF9wZHAYBiABKAsyKS5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkVtYmVkZGVkUERQSAAaKgoEQmxvYhISCgpidWNrZXRfdXJsGAEgASgJEg4KBnByZWZpeBgCIAEoCRqmAQoIRGF0YWJhc2USPQoGZHJpdmVyGAEgASgOMi0uY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5EYXRhYmFzZS5Ecml2ZXIiWwoGRHJpdmVyEhYKEkRSSVZFUl9VTlNQRUNJRklFRBAAEhAKDERSSVZFUl9NWVNRTBABEhMKD0RSSVZFUl9QT1NUR1JFUxACEhIKDkRSSVZFUl9TUUxJVEUzEAMaGQoERGlzaxIRCglkaXJlY3RvcnkYASABKAkaXQoLRW1iZWRkZWRQRFASCwoDdXJsGAEgASgJEhMKC2NvbW1pdF9oYXNoGAIgASgJEiwKCGJ1aWx0X2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBpDCgNHaXQSFgoOcmVwb3NpdG9yeV91cmwYASABKAkSDgoGYnJhbmNoGAIgASgJEhQKDHN1YmRpcmVjdG9yeRgDIAEoCRq2AgoDSHViEg8KBWxhYmVsGAEgASgJSAASFwoNZGVwbG95bWVudF9pZBgCIAEoCUgAEhcKDXBsYXlncm91bmRfaWQYAyABKAlIABJFCgxsb2NhbF9idW5kbGUYBCABKAsyLS5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkh1Yi5Mb2NhbEJ1bmRsZUgAEksKD2VtYmVkZGVkX2J1bmRsZRgFIAEoCzIwLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuSHViLkVtYmVkZGVkQnVuZGxlSAAaMQoORW1iZWRkZWRCdW5kbGUSDwoHcnVsZV9pZBgBIAEoCRIOCgZzY29wZXMYAiADKAkaGwoLTG9jYWxCdW5kbGUSDAoEcGF0aBgBIAEoCUIICgZzb3VyY2VCCAoGc291cmNlIpoDCg5SZXF1ZXN0Q29udGV4dBK0AQoLYW5ub3RhdGlvbnMYASADKAsyMC5jZXJib3MuYXVkaXQudjEuUmVxdWVzdENvbnRleHQuQW5ub3RhdGlvbnNFbnRyeUJtkkFZMh9LZXktdmFsdWUgcGFpcnMgb2YgYW5ub3RhdGlvbnMuSjN7ImFwcC1uYW1lIjogImF3ZXNvbWUtYXBwIiwgImFwcC12ZXJzaW9uIjogIjEuMi4zIn3IAQG6SA6aAQsiBHICEAEqA8gBARpKChBBbm5vdGF0aW9uc0VudHJ5EgsKA2tleRgBIAEoCRIlCgV2YWx1ZRgCIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5WYWx1ZToCOAE6hAGSQYABCn4yfE9wdGlvbmFsIG1ldGFkYXRhIHRvIGF0dGFjaCB0byB0aGUgcmVxdWVzdC4gVGhpcyBpbmZvcm1hdGlvbiB3aWxsIGJlIGNhcHR1cmVkIGluIHRoZSBhdWRpdCBsb2dzIGlmIGF1ZGl0IGxvZ2dpbmcgaXMgZW5hYmxlZC5CawoXZGV2LmNlcmJvcy5hcGkudjEuYXVkaXRaOmdpdGh1Yi5jb20vY2VyYm9zL2NlcmJvcy9hcGkvZ2VucGIvY2VyYm9zL2F1ZGl0L3YxO2F1ZGl0djGqAhNDZXJib3MuQXBpLlYxLkF1ZGl0YgZwcm90bzM",
     [
+      file_buf_validate_validate,
       file_cerbos_engine_v1_engine,
       file_cerbos_policy_v1_policy,
+      file_google_protobuf_struct,
       file_google_protobuf_timestamp,
+      file_protoc_gen_openapiv2_options_annotations,
     ],
   );
 
@@ -91,6 +104,11 @@ export type AccessLogEntry = Message<"cerbos.audit.v1.AccessLogEntry"> & {
    * @generated from field: cerbos.audit.v1.PolicySource policy_source = 8;
    */
   policySource?: PolicySource;
+
+  /**
+   * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 9;
+   */
+  requestContext?: RequestContext;
 };
 
 /**
@@ -136,6 +154,11 @@ export type AccessLogEntryJson = {
    * @generated from field: cerbos.audit.v1.PolicySource policy_source = 8;
    */
   policySource?: PolicySourceJson;
+
+  /**
+   * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 9;
+   */
+  requestContext?: RequestContextJson;
 };
 
 export type AccessLogEntryValid = AccessLogEntry;
@@ -231,6 +254,11 @@ export type DecisionLogEntry = Message<"cerbos.audit.v1.DecisionLogEntry"> & {
    * @generated from field: cerbos.audit.v1.PolicySource policy_source = 18;
    */
   policySource?: PolicySource;
+
+  /**
+   * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 19;
+   */
+  requestContext?: RequestContext;
 };
 
 /**
@@ -305,6 +333,11 @@ export type DecisionLogEntryJson = {
    * @generated from field: cerbos.audit.v1.PolicySource policy_source = 18;
    */
   policySource?: PolicySourceJson;
+
+  /**
+   * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 19;
+   */
+  requestContext?: RequestContextJson;
 };
 
 /**
@@ -390,6 +423,11 @@ export type DecisionLogEntryValid =
      * @generated from field: cerbos.audit.v1.PolicySource policy_source = 18;
      */
     policySource?: PolicySourceValid;
+
+    /**
+     * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 19;
+     */
+    requestContext?: RequestContextValid;
   };
 
 /**
@@ -1190,3 +1228,34 @@ export const PolicySource_Hub_LocalBundleSchema: GenMessage<
     validType: PolicySource_Hub_LocalBundleValid;
   }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 5, 5, 1);
+
+/**
+ * @generated from message cerbos.audit.v1.RequestContext
+ */
+export type RequestContext = Message<"cerbos.audit.v1.RequestContext"> & {
+  /**
+   * @generated from field: map<string, google.protobuf.Value> annotations = 1;
+   */
+  annotations: { [key: string]: Value };
+};
+
+/**
+ * @generated from message cerbos.audit.v1.RequestContext
+ */
+export type RequestContextJson = {
+  /**
+   * @generated from field: map<string, google.protobuf.Value> annotations = 1;
+   */
+  annotations?: { [key: string]: ValueJson };
+};
+
+export type RequestContextValid = RequestContext;
+
+/**
+ * Describes the message cerbos.audit.v1.RequestContext.
+ * Use `create(RequestContextSchema)` to create a new message.
+ */
+export const RequestContextSchema: GenMessage<
+  RequestContext,
+  { jsonType: RequestContextJson; validType: RequestContextValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 6);

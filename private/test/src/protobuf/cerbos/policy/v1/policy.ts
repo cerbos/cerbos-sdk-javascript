@@ -99,6 +99,7 @@ export interface ResourceRule {
 
 export interface RolePolicy {
   policyType?: { $case: "role"; role: string } | undefined;
+  version: string;
   parentRoles: string[];
   scope: string;
   rules: RoleRule[];
@@ -1244,6 +1245,7 @@ export const ResourceRule: MessageFns<ResourceRule> = {
 function createBaseRolePolicy(): RolePolicy {
   return {
     policyType: undefined,
+    version: "",
     parentRoles: [],
     scope: "",
     rules: [],
@@ -1260,6 +1262,9 @@ export const RolePolicy: MessageFns<RolePolicy> = {
       case "role":
         writer.uint32(10).string(message.policyType.role);
         break;
+    }
+    if (message.version !== "") {
+      writer.uint32(50).string(message.version);
     }
     for (const v of message.parentRoles) {
       writer.uint32(42).string(v!);
@@ -1290,6 +1295,14 @@ export const RolePolicy: MessageFns<RolePolicy> = {
           }
 
           message.policyType = { $case: "role", role: reader.string() };
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.version = reader.string();
           continue;
         }
         case 5: {
@@ -1337,6 +1350,9 @@ export const RolePolicy: MessageFns<RolePolicy> = {
     const obj: any = {};
     if (message.policyType?.$case === "role") {
       obj.role = message.policyType.role;
+    }
+    if (message.version !== "") {
+      obj.version = message.version;
     }
     if (message.parentRoles?.length) {
       obj.parentRoles = message.parentRoles;
