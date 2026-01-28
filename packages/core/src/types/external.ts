@@ -87,6 +87,7 @@ export * from "./external/Principal.js";
 export * from "./external/PrincipalPolicyBody.js";
 export * from "./external/PrincipalRule.js";
 export * from "./external/PrincipalRuleAction.js";
+export * from "./external/PurgeStoreRevisionsRequest.js";
 export * from "./external/ReloadStoreRequest.js";
 export * from "./external/RequestContext.js";
 export * from "./external/Resource.js";

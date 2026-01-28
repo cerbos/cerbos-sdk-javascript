@@ -53,6 +53,7 @@ import type {
   ListAuditLogEntriesRequestValid,
   ListPoliciesRequestValid,
   PlanResourcesRequestValid,
+  PurgeStoreRevisionsRequestValid,
   ReloadStoreRequestValid,
 } from "@cerbos/api/cerbos/request/v1/request_pb";
 import { ListAuditLogEntriesRequest_Kind } from "@cerbos/api/cerbos/request/v1/request_pb";
@@ -93,6 +94,7 @@ import type {
   PrincipalPolicy,
   PrincipalRule,
   PrincipalRuleAction,
+  PurgeStoreRevisionsRequest,
   ReloadStoreRequest,
   RequestContext,
   Resource,
@@ -878,6 +880,15 @@ function resourceQueryToProtobuf({
     }),
     policyVersion,
     scope,
+  };
+}
+
+export function purgeStoreRevisionsRequestToProtobuf({
+  keepLast = 0,
+}: PurgeStoreRevisionsRequest): PurgeStoreRevisionsRequestValid {
+  return {
+    $typeName: "cerbos.request.v1.PurgeStoreRevisionsRequest",
+    keepLast,
   };
 }
 
