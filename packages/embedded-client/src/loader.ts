@@ -14,7 +14,7 @@ import type { PolicyLoaderOptions } from "./options.js";
  */
 export class PolicyLoader {
   /**
-   * ID of the policy bundling rule.
+   * ID of the {@link https://docs.cerbos.dev/cerbos-hub/deployments-epdp-rules | policy bundling rule}.
    */
   public readonly ruleId: string;
 
