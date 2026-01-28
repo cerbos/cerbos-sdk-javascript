@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/cerbos/cerbos-sdk-javascript/issues"
   },
-  "author": "Cerbos <help@cerbos.dev> (https://cerbos.dev)",
+  "author": "Cerbos <help@cerbos.dev> (https://www.cerbos.dev)",
   "license": "Apache-2.0",
   "engines": {
     "node": ">= 20"
