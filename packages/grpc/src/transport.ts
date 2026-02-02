@@ -6,16 +6,21 @@ import type {
   MessageShape,
   MessageValidType,
 } from "@bufbuild/protobuf";
-import { fromBinary, toBinary } from "@bufbuild/protobuf";
-import type { Client } from "@grpc/grpc-js";
+import { fromBinary as bufFromBinary, toBinary } from "@bufbuild/protobuf";
+import type { Client, StatusObject } from "@grpc/grpc-js";
 import { Metadata } from "@grpc/grpc-js";
 
-import { NotOK, Status } from "@cerbos/core";
+import { StatusSchema } from "@cerbos/api/google/rpc/status_pb";
 import type {
   AbortHandler,
   Transport as CoreTransport,
+  ErrorDetails,
 } from "@cerbos/core/~internal";
-import { isObject, methodName } from "@cerbos/core/~internal";
+import {
+  AbstractErrorResponse,
+  isObject,
+  methodName,
+} from "@cerbos/core/~internal";
 
 export class Transport implements CoreTransport {
   public constructor(private readonly client: Client) {}
@@ -37,14 +42,9 @@ export class Transport implements CoreTransport {
         metadata(headers),
         (error, response) => {
           if (error) {
-            reject(
-              new NotOK(
-                (error.code || Status.UNKNOWN) as NotOK["code"],
-                error.details,
-              ),
-            );
+            reject(new ErrorResponse(error));
           } else if (!response) {
-            reject(new NotOK(Status.UNKNOWN, "No response received"));
+            reject(new Error("No response received"));
           } else {
             resolve(response);
           }
@@ -83,24 +83,48 @@ export class Transport implements CoreTransport {
         yield response;
       }
     } catch (error) {
-      abortHandler.throwIfAborted();
-
-      if (isObject(error)) {
-        const { code, details } = error;
-        if (typeof code === "number" && typeof details === "string") {
-          throw new NotOK(code in Status ? code : Status.UNKNOWN, details);
-        }
+      if (isStatus(error)) {
+        throw new ErrorResponse(error);
       }
 
-      throw new NotOK(
-        Status.UNKNOWN,
-        error instanceof Error
-          ? `Error reading stream: ${error.message}`
-          : "Error reading stream",
-        { cause: error },
-      );
+      throw error;
     }
   }
+}
+
+class ErrorResponse extends AbstractErrorResponse<Uint8Array> {
+  private readonly metadata: Metadata;
+
+  public constructor({ code, details, metadata }: StatusObject) {
+    super(code, details);
+    this.metadata = metadata;
+  }
+
+  protected override *details(): Generator<
+    ErrorDetails<Uint8Array>,
+    void,
+    undefined
+  > {
+    const [encoded] = this.metadata.get("grpc-status-details-bin");
+    if (!(encoded instanceof Uint8Array)) {
+      return;
+    }
+
+    const { details } = fromBinary(StatusSchema, encoded);
+
+    yield* details;
+  }
+
+  protected override readonly parseDetails = fromBinary;
+}
+
+function isStatus(error: unknown): error is StatusObject {
+  return (
+    isObject(error) &&
+    typeof error["code"] === "number" &&
+    typeof error["details"] === "string" &&
+    error["metadata"] instanceof Metadata
+  );
 }
 
 function metadata(headers: Headers): Metadata {
@@ -126,5 +150,12 @@ function serialize<I extends DescMessage>(
 function deserialize<O extends DescMessage>(
   schema: O,
 ): (output: Buffer) => MessageShape<O> {
-  return (output) => fromBinary(schema, output, { readUnknownFields: false });
+  return (output) => fromBinary(schema, output);
+}
+
+function fromBinary<T extends DescMessage>(
+  schema: T,
+  bytes: Uint8Array,
+): MessageShape<T> {
+  return bufFromBinary(schema, bytes, { readUnknownFields: false });
 }

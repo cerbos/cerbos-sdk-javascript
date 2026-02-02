@@ -36,6 +36,7 @@
     "proto:export:cerbos:pdp": "buf export --output=proto buf.build/cerbos/cerbos-api",
     "proto:export:gnostic": "mkdir -p proto/gnostic/openapiv3 && curl --fail --silent --show-error https://raw.githubusercontent.com/google/gnostic/main/openapiv3/annotations.proto --output proto/gnostic/openapiv3/annotations.proto",
     "proto:export:gogoproto": "buf export --output=proto buf.build/gogo/protobuf",
+    "proto:export:google": "buf export --output=proto --path=google/rpc/status.proto buf.build/googleapis/googleapis",
     "proto:export:grpc": "buf export --output=proto buf.build/grpc/grpc",
     "proto:export:jaeger": "mkdir -p proto/jaeger/proto/api_v3 && curl --fail --silent --show-error https://raw.githubusercontent.com/jaegertracing/jaeger-idl/main/proto/api_v3/query_service.proto --output proto/jaeger/proto/api_v3/query_service.proto",
     "proto:export:openapiv3": "mkdir -p proto/openapiv3 && curl --fail --silent --show-error https://raw.githubusercontent.com/google/gnostic/main/openapiv3/OpenAPIv3.proto --output proto/openapiv3/OpenAPIv3.proto",

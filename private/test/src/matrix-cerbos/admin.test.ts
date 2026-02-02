@@ -20,8 +20,10 @@ import type {
   Peer,
   PlanResourcesRequest,
   PolicySource,
+  PolicyStoreIntegrityViolation,
   Principal,
   RequestContext,
+  ResourcePolicy,
   ValidationError,
 } from "@cerbos/core";
 import {
@@ -34,6 +36,7 @@ import {
   PlanExpressionValue,
   PlanExpressionVariable,
   PlanKind,
+  PolicyStoreIntegrityViolated,
   Status,
   ValidationErrorSource,
 } from "@cerbos/core";
@@ -743,6 +746,99 @@ describe("Client", () => {
           }
         });
       });
+
+      describeIfVersionIsAtLeast("0.51.0", cerbosVersion)(
+        "integrity violations",
+        () => {
+          describe.each(["delete", "disable"] as const)("%s", (action) => {
+            it("throws if removing policy breaks scope chain", async () => {
+              await mutable.addOrUpdatePolicies({
+                policies: [
+                  {
+                    resourcePolicy: {
+                      resource: "inScopeChain",
+                      version: "1",
+                      rules: [],
+                    },
+                  } satisfies ResourcePolicy,
+                  {
+                    resourcePolicy: {
+                      resource: "inScopeChain",
+                      version: "1",
+                      scope: "foo",
+                      rules: [],
+                    },
+                  } satisfies ResourcePolicy,
+                ],
+              });
+
+              try {
+                await mutable[`${action}Policy`]("resource.inScopeChain.v1");
+                expect.unreachable();
+              } catch (error) {
+                expect(error).toBeInstanceOf(PolicyStoreIntegrityViolated);
+                expect(error).toMatchObject({
+                  code: Status.INVALID_ARGUMENT,
+                  details: `Failed to ${action} policies`,
+                  violations: {
+                    "resource.inScopeChain.v1": {
+                      breaksScopeChain: {
+                        descendants: ["resource.inScopeChain.v1/foo"],
+                      },
+                      requiredByOtherPolicies: undefined,
+                    } satisfies PolicyStoreIntegrityViolation,
+                  },
+                });
+              }
+            });
+
+            it("throws if policy is required by others", async () => {
+              await mutable.addOrUpdatePolicies({
+                policies: [
+                  {
+                    derivedRoles: {
+                      name: "dependency",
+                      definitions: [
+                        {
+                          name: "foo",
+                          parentRoles: ["bar"],
+                        },
+                      ],
+                    },
+                  } satisfies DerivedRoles,
+                  {
+                    resourcePolicy: {
+                      resource: "dependent",
+                      version: "1",
+                      importDerivedRoles: ["dependency"],
+                      rules: [],
+                    },
+                  } satisfies ResourcePolicy,
+                ],
+              });
+
+              try {
+                await mutable[`${action}Policy`]("derived_roles.dependency");
+                expect.unreachable();
+              } catch (error) {
+                expect(error).toBeInstanceOf(PolicyStoreIntegrityViolated);
+                expect(error).toMatchObject({
+                  code: Status.INVALID_ARGUMENT,
+                  details: `Failed to ${action} policies`,
+                  violations: {
+                    "derived_roles.dependency": {
+                      breaksScopeChain: undefined,
+                      requiredByOtherPolicies: {
+                        dependents: ["resource.dependent.v1"],
+                      },
+                    } satisfies PolicyStoreIntegrityViolation,
+                  },
+                });
+              }
+            });
+          });
+        },
+      );
 
       describe("addOrUpdateSchema / listSchemas / getSchema / deleteSchema", () => {
         const definition = {

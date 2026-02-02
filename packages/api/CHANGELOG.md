@@ -21,6 +21,7 @@
   - `cerbos.response.v1.PurgeStoreRevisionsResponse`
   - `cerbos.svc.v1.CerbosAdminService.deletePolicy`
   - `cerbos.svc.v1.CerbosAdminService.purgeStoreRevisions`
+  - `google.rpc.Status`
 
 ### Changed
 

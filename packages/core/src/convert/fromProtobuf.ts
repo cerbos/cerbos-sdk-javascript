@@ -81,6 +81,9 @@ import type {
   InspectPoliciesResponse_DerivedRole,
   InspectPoliciesResponse_Result,
   InspectPoliciesResponse_Variable,
+  IntegrityErrors,
+  IntegrityErrors_BreaksScopeChain,
+  IntegrityErrors_RequiredByOtherPolicies,
   ListAuditLogEntriesResponse,
   ListPoliciesResponse as ListPoliciesResponseProtobuf,
   ListSchemasResponse as ListSchemasResponseProtobuf,
@@ -167,6 +170,9 @@ import type {
   PolicySourceHubLabel,
   PolicySourceHubLocalBundle,
   PolicySourceHubPlayground,
+  PolicyStoreIntegrityViolation,
+  PolicyStoreIntegrityViolationBreaksScopeChain,
+  PolicyStoreIntegrityViolationRequiredByOtherPolicies,
   Principal,
   PrincipalPolicy,
   PrincipalRule,
@@ -1469,6 +1475,47 @@ export function serverInfoFromProtobuf({
     commit,
     version,
   };
+}
+
+export function policyStoreIntegrityViolationsFromProtobuf(
+  errors: Record<string, IntegrityErrors>,
+): Record<string, PolicyStoreIntegrityViolation> {
+  return Object.fromEntries(
+    Object.entries(errors).map(([id, error]) => [
+      id,
+      policyStoreIntegrityViolationFromProtobuf(error),
+    ]),
+  );
+}
+
+function policyStoreIntegrityViolationFromProtobuf({
+  breaksScopeChain,
+  requiredByOtherPolicies,
+}: IntegrityErrors): PolicyStoreIntegrityViolation {
+  return {
+    breaksScopeChain:
+      breaksScopeChain &&
+      policyStoreIntegrityViolationBreaksScopeChainFromProtobuf(
+        breaksScopeChain,
+      ),
+    requiredByOtherPolicies:
+      requiredByOtherPolicies &&
+      policyStoreIntegrityViolationRequiredByOtherPoliciesFromProtobuf(
+        requiredByOtherPolicies,
+      ),
+  };
+}
+
+function policyStoreIntegrityViolationBreaksScopeChainFromProtobuf({
+  descendants,
+}: IntegrityErrors_BreaksScopeChain): PolicyStoreIntegrityViolationBreaksScopeChain {
+  return { descendants };
+}
+
+function policyStoreIntegrityViolationRequiredByOtherPoliciesFromProtobuf({
+  dependents,
+}: IntegrityErrors_RequiredByOtherPolicies): PolicyStoreIntegrityViolationRequiredByOtherPolicies {
+  return { dependents };
 }
 
 /** @internal */

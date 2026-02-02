@@ -26,7 +26,7 @@ import type {
   AbortHandler,
   Transport as CoreTransport,
 } from "@cerbos/core/~internal";
-import { methodName } from "@cerbos/core/~internal";
+import { AbstractErrorResponse, methodName } from "@cerbos/core/~internal";
 
 import type { CerbosInstrumentation } from "./instrumentation.js";
 import type { Instruments } from "./instruments.js";
@@ -149,7 +149,10 @@ export class Transport implements CoreTransport {
           status.message = error.message;
           attributes["cerbos.error"] = error.message;
 
-          if (error instanceof NotOK) {
+          if (
+            error instanceof AbstractErrorResponse ||
+            error instanceof NotOK
+          ) {
             attributes[ATTR_RPC_GRPC_STATUS_CODE] = error.code;
           }
         }

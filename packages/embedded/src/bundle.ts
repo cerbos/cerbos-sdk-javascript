@@ -7,7 +7,11 @@ import type { CheckResourcesResponse } from "@cerbos/api/cerbos/response/v1/resp
 import { CheckResourcesResponseSchema } from "@cerbos/api/cerbos/response/v1/response_pb";
 import type { DecodedAuxData, JWT } from "@cerbos/core";
 import { NotOK } from "@cerbos/core";
-import { valuesFromProtobuf } from "@cerbos/core/~internal";
+import {
+  cancelBody,
+  joinErrorMessage,
+  valuesFromProtobuf,
+} from "@cerbos/core/~internal";
 
 import type {
   BundleMetadata,
@@ -16,7 +20,6 @@ import type {
   Source,
 } from "./loader.js";
 import type { DecisionLogger } from "./logger.js";
-import { cancelBody } from "./response.js";
 import type { Allocator } from "./slice.js";
 import { Slice } from "./slice.js";
 
@@ -173,7 +176,7 @@ export class Bundle {
           ignoreUnknownFields: true,
         });
       } catch {
-        throw NotOK.fromJSON(responseText);
+        throw NotOK.fromJSON(responseText); // eslint-disable-line @typescript-eslint/no-deprecated
       }
 
       return response;
@@ -225,9 +228,8 @@ export async function download(
   try {
     return await fetch(url, { ...request, headers });
   } catch (error) {
-    const message = `Failed to download from ${url.toString()}`;
     throw new Error(
-      error instanceof Error ? `${message}: ${error.message}` : message,
+      joinErrorMessage(`Failed to download from ${url.toString()}`, error),
       { cause: error },
     );
   }

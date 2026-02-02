@@ -6,6 +6,10 @@ unreleased:
       details: Requires a policy decision point server running Cerbos 0.51+.
       pull: 1344
 
+    - summary: "[`PolicyStoreIntegrityViolated`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.PolicyStoreIntegrityViolated.html) error, thrown when disabling or deleting a policy violates the integrity of the store"
+      details: Requires a policy decision point server running Cerbos 0.51+.
+      pull: 1344
+
     - summary: Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html)
       details: Requires a policy decision point server running Cerbos 0.51+.
       pull: 1344

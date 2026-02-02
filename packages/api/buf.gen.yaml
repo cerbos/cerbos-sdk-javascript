@@ -12,8 +12,11 @@ inputs:
       - cerbos.cloud.epdp.v2.Error
       - cerbos.cloud.epdp.v2.Metadata
       - cerbos.cloud.epdp.v2.PlanResourcesResponse
+      - cerbos.response.v1.DeletePolicyErrorDetails
+      - cerbos.response.v1.DisablePolicyErrorDetails
       - cerbos.svc.v1.CerbosAdminService
       - cerbos.svc.v1.CerbosService
+      - google.rpc.Status
       - grpc.health.v1.Health
 
 plugins:

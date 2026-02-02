@@ -6,14 +6,18 @@ import type {
   SourceAttributes,
   Value,
 } from "@cerbos/core";
-import { setErrorNameAndStack, userAgent } from "@cerbos/core/~internal";
+import {
+  cancelBody,
+  joinErrorMessage,
+  setErrorNameAndStack,
+  userAgent,
+} from "@cerbos/core/~internal";
 
 import pkg from "../package.json" with { type: "json" };
 
 import { Bundle, download } from "./bundle.js";
 import { constrainAutoUpdateInterval } from "./interval.js";
 import { DecisionLogger } from "./logger.js";
-import { cancelBody } from "./response.js";
 import { Transport } from "./transport.js";
 
 const defaultUserAgent = `cerbos-sdk-javascript-embedded/${pkg.version}`;
@@ -49,11 +53,13 @@ export class LoadError extends Error {
      */
     public override readonly cause: unknown,
   ) {
-    const message = "Failed to load embedded policy decision point bundle";
-
-    super(cause instanceof Error ? `${message}: ${cause.message}` : message, {
-      cause,
-    });
+    super(
+      joinErrorMessage(
+        "Failed to load embedded policy decision point bundle",
+        cause,
+      ),
+      { cause },
+    );
 
     setErrorNameAndStack(this);
   }

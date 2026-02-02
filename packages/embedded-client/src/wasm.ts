@@ -1,4 +1,6 @@
-import { cancelBody, download } from "./fetch.js";
+import { cancelBody } from "@cerbos/core/~internal";
+
+import { download } from "./fetch.js";
 import type { WasmInstantiate, WasmSource } from "./options.js";
 
 export async function load(

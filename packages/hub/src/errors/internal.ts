@@ -3,6 +3,7 @@ import { createMutableRegistry } from "@bufbuild/protobuf";
 import type { Code } from "@connectrpc/connect";
 import { ConnectError } from "@connectrpc/connect";
 
+import type { StatusNotOK } from "@cerbos/core";
 import { NotOK } from "@cerbos/core";
 
 import { fileErrorFromProto } from "../convert/fromProtobuf.js";
@@ -91,7 +92,7 @@ export function notOKParams({
   return [connectCodeToStatus(code), rawMessage, { cause }];
 }
 
-export function errorCode(error: unknown): NotOK["code"] {
+export function errorCode(error: unknown): StatusNotOK {
   if (error instanceof NotOK) {
     return error.code;
   }
@@ -99,6 +100,6 @@ export function errorCode(error: unknown): NotOK["code"] {
   return connectCodeToStatus(ConnectError.from(error).code);
 }
 
-function connectCodeToStatus(code: Code): NotOK["code"] {
-  return code as number as NotOK["code"];
+function connectCodeToStatus(code: Code): StatusNotOK {
+  return code as number as StatusNotOK;
 }

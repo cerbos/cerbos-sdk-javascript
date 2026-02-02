@@ -87,3 +87,8 @@ export enum Status {
    */
   UNKNOWN = 2,
 }
+
+/**
+ * Status codes of errors returned by the Cerbos policy decision point server.
+ */
+export type StatusNotOK = Exclude<Status, Status.OK>;

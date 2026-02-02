@@ -50,7 +50,14 @@ import {
   purgeStoreRevisionsRequestToProtobuf,
   reloadStoreRequestToProtobuf,
 } from "./convert/toProtobuf.js";
-import { NotOK, ValidationFailed } from "./errors.js";
+import { NotOK, ValidationFailed } from "./errors/external.js";
+import { joinErrorMessage } from "./errors/internal.js";
+import type { ErrorRegistry } from "./errors/registry.js";
+import {
+  deletePoliciesErrorRegistry,
+  disablePoliciesErrorRegistry,
+} from "./errors/registry.js";
+import { AbstractErrorResponse } from "./errors/response.js";
 import type { Transport } from "./transport.js";
 import { AbortHandler, instrument } from "./transport.js";
 import type {
@@ -475,6 +482,8 @@ export abstract class Client {
   /**
    * Delete multiple policies.
    *
+   * @throws {@link PolicyStoreIntegrityViolated} if deleting any of the policies violates the integrity of the store.
+   *
    * @remarks
    * Requires
    *
@@ -500,12 +509,15 @@ export abstract class Client {
         admin.method.deletePolicy,
         deletePoliciesRequestToProtobuf(request),
         options,
+        deletePoliciesErrorRegistry,
       ),
     );
   }
 
   /**
    * Delete a policy.
+   *
+   * @throws {@link PolicyStoreIntegrityViolated} if deleting the policy violates the integrity of the store.
    *
    * @remarks
    * Requires
@@ -601,6 +613,8 @@ export abstract class Client {
   /**
    * Disable multiple policies.
    *
+   * @throws {@link PolicyStoreIntegrityViolated} if disabling any of the policies violates the integrity of the store.
+   *
    * @remarks
    * Requires
    *
@@ -626,12 +640,15 @@ export abstract class Client {
         admin.method.disablePolicy,
         disablePoliciesRequestToProtobuf(request),
         options,
+        disablePoliciesErrorRegistry,
       ),
     );
   }
 
   /**
    * Disable a policy.
+   *
+   * @throws {@link PolicyStoreIntegrityViolated} if disabling the policy violates the integrity of the store.
    *
    * @remarks
    * Requires
@@ -1228,19 +1245,26 @@ export abstract class Client {
     method: DescMethodUnary<I, O>,
     request: MessageValidType<I>,
     { headers, signal }: RequestOptions = {},
+    registry?: ErrorRegistry,
   ): Promise<MessageShape<O>> {
-    return await this.transport.unary(
-      method,
-      request,
-      await this.mergeHeaders(headers, method),
-      new AbortHandler(signal),
-    );
+    const abortHandler = new AbortHandler(signal);
+    try {
+      return await this.transport.unary(
+        method,
+        request,
+        await this.mergeHeaders(headers, method),
+        abortHandler,
+      );
+    } catch (error) {
+      handleError(abortHandler, error, registry);
+    }
   }
 
   private async *serverStream<I extends DescMessage, O extends DescMessage>(
     method: DescMethodServerStreaming<I, O>,
     request: MessageValidType<I>,
     { headers, signal }: RequestOptions = {},
+    registry?: ErrorRegistry,
   ): AsyncGenerator<MessageShape<O>, void, undefined> {
     const abortController = new AbortController();
 
@@ -1256,13 +1280,17 @@ export abstract class Client {
       abortController.abort(signal.reason);
     }
 
+    const abortHandler = new AbortHandler(abortController.signal);
+
     try {
       yield* this.transport.serverStream(
         method,
         request,
         await this.mergeHeaders(headers, method),
-        new AbortHandler(abortController.signal),
+        abortHandler,
       );
+    } catch (error) {
+      handleError(abortHandler, error, registry);
     } finally {
       abortController.abort();
     }
@@ -1316,6 +1344,26 @@ export abstract class Client {
       }
     }
   }
+}
+
+function handleError(
+  abortHandler: AbortHandler,
+  error: unknown,
+  registry: ErrorRegistry | undefined,
+): never {
+  abortHandler.throwIfAborted();
+
+  if (error instanceof NotOK) {
+    throw error;
+  }
+
+  if (error instanceof AbstractErrorResponse) {
+    throw error.toNotOK(registry);
+  }
+
+  throw new NotOK(Status.INTERNAL, joinErrorMessage("Request failed", error), {
+    cause: error,
+  });
 }
 
 /**

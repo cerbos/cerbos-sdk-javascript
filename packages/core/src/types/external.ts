@@ -83,6 +83,7 @@ export * from "./external/PlanResourcesResponse.js";
 export * from "./external/Policy.js";
 export * from "./external/PolicyMetadata.js";
 export * from "./external/PolicySource.js";
+export * from "./external/PolicyStoreIntegrityViolation.js";
 export * from "./external/Principal.js";
 export * from "./external/PrincipalPolicyBody.js";
 export * from "./external/PrincipalRule.js";
