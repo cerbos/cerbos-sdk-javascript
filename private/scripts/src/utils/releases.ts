@@ -1,5 +1,5 @@
 import { formatISO } from "date-fns";
-import { inc as semverBump } from "semver";
+import { inc as semverBump, satisfies as semverSatisfies } from "semver";
 
 import type {
   Changelog,
@@ -17,54 +17,72 @@ interface PackageWithMetadata extends Package {
 
 export interface PackageWithUnreleasedChanges extends PackageWithMetadata {
   newVersion: string;
+  incompatible: boolean;
   unreleased: UnreleasedChanges;
   dependenciesToBump: Map<string, string>;
 }
 
 interface PackageWithoutUnreleasedChanges extends PackageWithMetadata {
   newVersion?: undefined;
+  incompatible?: undefined;
   unreleased?: undefined;
 }
 
-export async function planReleases(
-  packages: Package[],
-): Promise<PackageWithUnreleasedChanges[]> {
-  const packagesWithMetadata = await Promise.all(packages.map(readMetadata));
+interface ReleasePlan {
+  packagesToReleaseNow: PackageWithUnreleasedChanges[];
+  packagesToReleaseLater: PackageWithUnreleasedChanges[];
+}
 
-  const newVersions = new Map(
-    packagesWithMetadata.map(({ name, newVersion }) => [name, newVersion]),
+export async function planReleases(packages: Package[]): Promise<ReleasePlan> {
+  const packagesWithMetadata = new Map(
+    await Promise.all(packages.map(readMetadata)),
   );
 
-  const packagesToRelease: PackageWithUnreleasedChanges[] = [];
+  const api = packagesWithMetadata.get("@cerbos/api");
+  const apiOnly = api?.incompatible;
 
-  for (const pkg of packagesWithMetadata) {
+  const plan: ReleasePlan = {
+    packagesToReleaseNow: [],
+    packagesToReleaseLater: [],
+  };
+
+  for (const [, pkg] of packagesWithMetadata) {
     if (pkg.newVersion) {
-      packagesToRelease.push(pkg);
+      if (pkg === api || !apiOnly) {
+        plan.packagesToReleaseNow.push(pkg);
+      } else {
+        plan.packagesToReleaseLater.push(pkg);
+      }
     }
 
-    for (const dependency of Object.keys({
+    for (const dependencyName of Object.keys({
       ...pkg.manifest.peerDependencies,
       ...pkg.manifest.dependencies,
     })) {
-      const newVersion = newVersions.get(dependency);
+      const dependency = packagesWithMetadata.get(dependencyName);
+      const newVersion = dependency?.newVersion;
       if (newVersion) {
         if (!pkg.newVersion) {
           throw new Error(
-            `"${pkg.name}" has an updated dependency ("${dependency}"), but has not been marked as having unreleased changes`,
+            `"${pkg.name}" has an updated dependency ("${dependencyName}"), but has not been marked as having unreleased changes`,
           );
         }
 
-        pkg.dependenciesToBump.set(dependency, newVersion);
+        if (dependency === api || !apiOnly) {
+          pkg.dependenciesToBump.set(dependencyName, newVersion);
+        }
       }
     }
   }
 
-  return packagesToRelease;
+  return plan;
 }
 
 async function readMetadata(
   pkg: Package,
-): Promise<PackageWithoutUnreleasedChanges | PackageWithUnreleasedChanges> {
+): Promise<
+  [string, PackageWithoutUnreleasedChanges | PackageWithUnreleasedChanges]
+> {
   const [manifest, changelog] = await Promise.all([
     readPackageJson(pkg),
     readChangelog(pkg),
@@ -73,46 +91,57 @@ async function readMetadata(
   const withMetadata = { ...pkg, manifest, changelog };
 
   if (changelog.unreleased) {
-    return {
-      ...withMetadata,
-      newVersion: bumpVersion(pkg, changelog.unreleased.type),
-      unreleased: changelog.unreleased,
-      dependenciesToBump: new Map(),
-    };
+    return [
+      pkg.name,
+      {
+        ...withMetadata,
+        ...bumpVersion(pkg, changelog.unreleased.type),
+        unreleased: changelog.unreleased,
+        dependenciesToBump: new Map(),
+      },
+    ];
   }
 
-  return withMetadata;
+  return [pkg.name, withMetadata];
 }
 
-function bumpVersion({ name, version }: Package, type: ReleaseType): string {
-  const bumped = semverBump(version, type);
-  if (!bumped) {
+function bumpVersion(
+  { name, version }: Package,
+  type: ReleaseType,
+): Pick<PackageWithUnreleasedChanges, "newVersion" | "incompatible"> {
+  const newVersion = semverBump(version, type);
+  if (!newVersion) {
     throw new Error(`${name}: failed to ${type} bump "${version}"`);
   }
 
-  return bumped;
+  return {
+    newVersion,
+    incompatible: !semverSatisfies(newVersion, `^${version}`),
+  };
 }
 
 export async function prepareReleases(
-  packages: PackageWithUnreleasedChanges[],
+  { packagesToReleaseNow, packagesToReleaseLater }: ReleasePlan,
   pullRequest: number,
 ): Promise<void> {
   const date = formatISO(new Date(), { representation: "date" });
 
-  await Promise.all(
-    packages.map(async (pkg) => {
-      await prepareRelease(pkg, date, pullRequest);
+  await Promise.all([
+    ...packagesToReleaseNow.map(async (pkg) => {
+      await prepareRelease(pkg, date, pullRequest, true);
     }),
-  );
+    ...packagesToReleaseLater.map(async (pkg) => {
+      await prepareRelease(pkg, date, pullRequest, false);
+    }),
+  ]);
 }
 
 async function prepareRelease(
   pkg: PackageWithUnreleasedChanges,
   date: string,
   pullRequest: number,
+  now: boolean,
 ): Promise<void> {
-  pkg.manifest.version = pkg.newVersion;
-
   for (const [dependency, newVersion] of pkg.dependenciesToBump) {
     setDependencyVersion(pkg.manifest.peerDependencies, dependency, newVersion);
     setDependencyVersion(pkg.manifest.dependencies, dependency, newVersion);
@@ -128,15 +157,19 @@ async function prepareRelease(
     }
   }
 
-  const { type, ...entries } = pkg.unreleased;
+  if (now) {
+    pkg.manifest.version = pkg.newVersion;
 
-  (pkg.changelog.releases ??= []).unshift({
-    version: pkg.newVersion,
-    date,
-    ...entries,
-  });
+    const { type, ...entries } = pkg.unreleased;
 
-  pkg.changelog.unreleased = undefined;
+    (pkg.changelog.releases ??= []).unshift({
+      version: pkg.newVersion,
+      date,
+      ...entries,
+    });
+
+    pkg.changelog.unreleased = undefined;
+  }
 
   await Promise.all([
     writePackageJson(pkg, pkg.manifest),
