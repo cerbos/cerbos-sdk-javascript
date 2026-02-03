@@ -14,7 +14,7 @@
     "@cerbos/core": "workspace:*",
     "@cerbos/embedded": "workspace:*",
     "@cerbos/embedded-client": "workspace:*",
-    "@cerbos/embedded-server": "0.3.1",
+    "@cerbos/embedded-server": "0.4.0",
     "@cerbos/files": "workspace:*",
     "@cerbos/grpc": "workspace:*",
     "@cerbos/http": "workspace:*",

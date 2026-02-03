@@ -6,7 +6,7 @@ unreleased:
       pull: 1344
 
     - summary: "[`OutputResult.action`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#action) property"
-      pull: 1344
+      pulls: [1344, 1359]
 
   bumped:
     "@bufbuild/protobuf":
@@ -20,6 +20,10 @@ unreleased:
     "@cerbos/api":
       to: 0.6.0
       pull: 1358
+
+    "@cerbos/embedded-server":
+      to: 0.4.0
+      pull: 1359
 
 releases:
   - version: 0.4.0
@@ -47,6 +51,10 @@ releases:
       "@cerbos/core":
         to: 0.27.1
         pull: 1340
+
+      "@cerbos/embedded-server":
+        to: 0.3.1
+        pull: 1333
 
       "@cerbos/hub":
         to: 0.5.1
@@ -88,6 +96,10 @@ releases:
         pull: 1317
 
     bumped:
+      "@cerbos/embedded-server":
+        to: 0.2.0
+        pull: 1317
+
       "@cerbos/hub":
         to: 0.4.0
         pull: 1318
@@ -104,6 +116,7 @@ references:
   "@bufbuild/protovalidate": https://github.com/bufbuild/protovalidate-es
   "@cerbos/api": ../api/README.md
   "@cerbos/core": ../core/README.md
+  "@cerbos/embedded-server": https://www.npmjs.com/package/@cerbos/embedded-server
   "@cerbos/hub": ../hub/README.md
   ulid: https://github.com/ulid/javascript
 

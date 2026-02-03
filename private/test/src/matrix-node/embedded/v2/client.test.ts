@@ -135,7 +135,6 @@ describe("Embedded", () => {
         client: factory,
         adminServiceEnabled: false,
         cerbosVersion: metadata.cerbosVersion,
-        embedded: true,
       });
 
       describe("decision logging", () => {
@@ -285,7 +284,7 @@ describe("Embedded", () => {
 
             const outputs = [
               {
-                action: "",
+                action: "delete",
                 source: "resource.document.v1#delete",
                 value: "delete_allowed:me@example.com",
               },
