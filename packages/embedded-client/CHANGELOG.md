@@ -6,7 +6,7 @@
 
 - Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html) ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344))
 
-- [`OutputResult.action`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#action) property ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344))
+- [`OutputResult.action`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#action) property ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344), [#1359](https://github.com/cerbos/cerbos-sdk-javascript/pull/1359))
 
 ### Changed
 
@@ -15,6 +15,8 @@
 - Bump dependency on [@bufbuild/protovalidate] to 1.1.1 ([#1355](https://github.com/cerbos/cerbos-sdk-javascript/pull/1355))
 
 - Bump dependency on [@cerbos/api] to 0.6.0 ([#1358](https://github.com/cerbos/cerbos-sdk-javascript/pull/1358))
+
+- Bump dependency on [@cerbos/embedded-server] to 0.4.0 ([#1359](https://github.com/cerbos/cerbos-sdk-javascript/pull/1359))
 
 ## [0.4.0] - 2026-01-12
 
@@ -34,6 +36,8 @@
 - Bump dependency on [@cerbos/api] to 0.5.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
 
 - Bump dependency on [@cerbos/core] to 0.27.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
+
+- Bump dependency on [@cerbos/embedded-server] to 0.3.1 ([#1333](https://github.com/cerbos/cerbos-sdk-javascript/pull/1333))
 
 - Bump dependency on [@cerbos/hub] to 0.5.1 ([#1340](https://github.com/cerbos/cerbos-sdk-javascript/pull/1340))
 
@@ -61,6 +65,8 @@
 
 ### Changed
 
+- Bump dependency on [@cerbos/embedded-server] to 0.2.0 ([#1317](https://github.com/cerbos/cerbos-sdk-javascript/pull/1317))
+
 - Bump dependency on [@cerbos/hub] to 0.4.0 ([#1318](https://github.com/cerbos/cerbos-sdk-javascript/pull/1318))
 
 ## [0.1.0] - 2025-12-12
@@ -78,5 +84,6 @@
 [@bufbuild/protovalidate]: https://github.com/bufbuild/protovalidate-es
 [@cerbos/api]: ../api/README.md
 [@cerbos/core]: ../core/README.md
+[@cerbos/embedded-server]: https://www.npmjs.com/package/@cerbos/embedded-server
 [@cerbos/hub]: ../hub/README.md
 [ulid]: https://github.com/ulid/javascript

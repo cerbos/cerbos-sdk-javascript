@@ -46,7 +46,6 @@ export interface CerbosServiceClientTestCase {
   client: (options?: Pick<Options, "onValidationError">) => Client;
   adminServiceEnabled: boolean;
   cerbosVersion?: string;
-  embedded?: boolean;
 }
 
 export function testCerbosServiceClient(
@@ -58,7 +57,6 @@ export function testCerbosServiceClient(
       client: factory,
       adminServiceEnabled,
       cerbosVersion = defaultCerbosVersion,
-      embedded,
     }) => {
       let clients: {
         default: Client;
@@ -150,10 +148,9 @@ export function testCerbosServiceClient(
           )
             ? [
                 {
-                  action:
-                    versionIsAtLeast("0.51.0", cerbosVersion) && !embedded
-                      ? "delete"
-                      : "",
+                  action: versionIsAtLeast("0.51.0", cerbosVersion)
+                    ? "delete"
+                    : "",
                   source: "resource.document.v1#delete",
                   value: "delete_allowed:me@example.com",
                 },
@@ -279,10 +276,9 @@ export function testCerbosServiceClient(
               )
                 ? [
                     {
-                      action:
-                        versionIsAtLeast("0.51.0", cerbosVersion) && !embedded
-                          ? "delete"
-                          : "",
+                      action: versionIsAtLeast("0.51.0", cerbosVersion)
+                        ? "delete"
+                        : "",
                       source: "resource.document.v1#delete",
                       value: "delete_allowed:me@example.com",
                     },
@@ -753,10 +749,9 @@ export function testCerbosServiceClient(
             )
               ? [
                   {
-                    action:
-                      versionIsAtLeast("0.51.0", cerbosVersion) && !embedded
-                        ? "delete"
-                        : "",
+                    action: versionIsAtLeast("0.51.0", cerbosVersion)
+                      ? "delete"
+                      : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -847,10 +842,9 @@ export function testCerbosServiceClient(
             )
               ? [
                   {
-                    action:
-                      versionIsAtLeast("0.51.0", cerbosVersion) && !embedded
-                        ? "delete"
-                        : "",
+                    action: versionIsAtLeast("0.51.0", cerbosVersion)
+                      ? "delete"
+                      : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -946,10 +940,9 @@ export function testCerbosServiceClient(
             )
               ? [
                   {
-                    action:
-                      versionIsAtLeast("0.51.0", cerbosVersion) && !embedded
-                        ? "delete"
-                        : "",
+                    action: versionIsAtLeast("0.51.0", cerbosVersion)
+                      ? "delete"
+                      : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -1031,10 +1024,9 @@ export function testCerbosServiceClient(
               cerbosVersion === "0.27.0"
                 ? [
                     {
-                      action:
-                        versionIsAtLeast("0.51.0", cerbosVersion) && !embedded
-                          ? "delete"
-                          : "",
+                      action: versionIsAtLeast("0.51.0", cerbosVersion)
+                        ? "delete"
+                        : "",
                       source: "resource.document.v1#delete",
                       value: "delete_allowed:me@example.com",
                     },
@@ -1153,10 +1145,9 @@ export function testCerbosServiceClient(
             )
               ? [
                   {
-                    action:
-                      versionIsAtLeast("0.51.0", cerbosVersion) && !embedded
-                        ? "delete"
-                        : "",
+                    action: versionIsAtLeast("0.51.0", cerbosVersion)
+                      ? "delete"
+                      : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -1362,10 +1353,9 @@ export function testCerbosServiceClient(
             )
               ? [
                   {
-                    action:
-                      versionIsAtLeast("0.51.0", cerbosVersion) && !embedded
-                        ? "delete"
-                        : "",
+                    action: versionIsAtLeast("0.51.0", cerbosVersion)
+                      ? "delete"
+                      : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -1576,10 +1566,9 @@ export function testCerbosServiceClient(
             )
               ? [
                   {
-                    action:
-                      versionIsAtLeast("0.51.0", cerbosVersion) && !embedded
-                        ? "delete"
-                        : "",
+                    action: versionIsAtLeast("0.51.0", cerbosVersion)
+                      ? "delete"
+                      : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
                   },
@@ -1776,10 +1765,9 @@ export function testCerbosServiceClient(
               cerbosVersion === "0.27.0"
                 ? [
                     {
-                      action:
-                        versionIsAtLeast("0.51.0", cerbosVersion) && !embedded
-                          ? "delete"
-                          : "",
+                      action: versionIsAtLeast("0.51.0", cerbosVersion)
+                        ? "delete"
+                        : "",
                       source: "resource.document.v1#delete",
                       value: "delete_allowed:me@example.com",
                     },
