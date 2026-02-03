@@ -39,6 +39,7 @@ jobs:
       - name: Generate bot token
         uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
         id: generate-token
+        continue-on-error: true
         with:
           app-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
           private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
@@ -46,7 +47,7 @@ jobs:
       - name: Lint code
         run: pnpm run lint
         env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || github.token }}
 
       - name: Generate code
         run: pnpm run generate
