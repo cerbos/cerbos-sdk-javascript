@@ -2,6 +2,7 @@ import type { AuditTrail } from "./AuditTrail.js";
 import type { DecisionLogEntryMethod } from "./DecisionLogEntryMethod.js";
 import type { Peer } from "./Peer.js";
 import type { PolicySource } from "./PolicySource.js";
+import type { RequestContext } from "./RequestContext.js";
 
 /**
  * A decision log entry in the policy decision point's audit log.
@@ -46,4 +47,12 @@ export interface DecisionLogEntry {
    * Where the policy decision point server sourced its policies.
    */
   policySource: PolicySource | undefined;
+
+  /**
+   * Metadata attached to the request.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.51.
+   */
+  requestContext: RequestContext | undefined;
 }

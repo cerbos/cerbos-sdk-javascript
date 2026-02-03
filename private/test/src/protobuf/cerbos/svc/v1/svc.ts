@@ -22,6 +22,7 @@ import {
   CheckResourceBatchRequest,
   CheckResourceSetRequest,
   CheckResourcesRequest,
+  DeletePolicyRequest,
   DeleteSchemaRequest,
   DisablePolicyRequest,
   EnablePolicyRequest,
@@ -32,6 +33,7 @@ import {
   ListPoliciesRequest,
   ListSchemasRequest,
   PlanResourcesRequest,
+  PurgeStoreRevisionsRequest,
   ReloadStoreRequest,
   ServerInfoRequest,
 } from "../../request/v1/request.js";
@@ -41,6 +43,7 @@ import {
   CheckResourceBatchResponse,
   CheckResourceSetResponse,
   CheckResourcesResponse,
+  DeletePolicyResponse,
   DeleteSchemaResponse,
   DisablePolicyResponse,
   EnablePolicyResponse,
@@ -51,6 +54,7 @@ import {
   ListPoliciesResponse,
   ListSchemasResponse,
   PlanResourcesResponse,
+  PurgeStoreRevisionsResponse,
   ReloadStoreResponse,
   ServerInfoResponse,
 } from "../../response/v1/response.js";
@@ -333,6 +337,19 @@ export const CerbosAdminServiceService = {
     responseDeserialize: (value: Buffer): GetPolicyResponse =>
       GetPolicyResponse.decode(value),
   },
+  deletePolicy: {
+    path: "/cerbos.svc.v1.CerbosAdminService/DeletePolicy",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: DeletePolicyRequest): Buffer =>
+      Buffer.from(DeletePolicyRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): DeletePolicyRequest =>
+      DeletePolicyRequest.decode(value),
+    responseSerialize: (value: DeletePolicyResponse): Buffer =>
+      Buffer.from(DeletePolicyResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): DeletePolicyResponse =>
+      DeletePolicyResponse.decode(value),
+  },
   disablePolicy: {
     path: "/cerbos.svc.v1.CerbosAdminService/DisablePolicy",
     requestStream: false,
@@ -437,6 +454,19 @@ export const CerbosAdminServiceService = {
     responseDeserialize: (value: Buffer): ReloadStoreResponse =>
       ReloadStoreResponse.decode(value),
   },
+  purgeStoreRevisions: {
+    path: "/cerbos.svc.v1.CerbosAdminService/PurgeStoreRevisions",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: PurgeStoreRevisionsRequest): Buffer =>
+      Buffer.from(PurgeStoreRevisionsRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): PurgeStoreRevisionsRequest =>
+      PurgeStoreRevisionsRequest.decode(value),
+    responseSerialize: (value: PurgeStoreRevisionsResponse): Buffer =>
+      Buffer.from(PurgeStoreRevisionsResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): PurgeStoreRevisionsResponse =>
+      PurgeStoreRevisionsResponse.decode(value),
+  },
 } as const;
 
 export interface CerbosAdminServiceServer extends UntypedServiceImplementation {
@@ -450,6 +480,7 @@ export interface CerbosAdminServiceServer extends UntypedServiceImplementation {
   >;
   listPolicies: handleUnaryCall<ListPoliciesRequest, ListPoliciesResponse>;
   getPolicy: handleUnaryCall<GetPolicyRequest, GetPolicyResponse>;
+  deletePolicy: handleUnaryCall<DeletePolicyRequest, DeletePolicyResponse>;
   disablePolicy: handleUnaryCall<DisablePolicyRequest, DisablePolicyResponse>;
   enablePolicy: handleUnaryCall<EnablePolicyRequest, EnablePolicyResponse>;
   listAuditLogEntries: handleServerStreamingCall<
@@ -464,6 +495,10 @@ export interface CerbosAdminServiceServer extends UntypedServiceImplementation {
   getSchema: handleUnaryCall<GetSchemaRequest, GetSchemaResponse>;
   deleteSchema: handleUnaryCall<DeleteSchemaRequest, DeleteSchemaResponse>;
   reloadStore: handleUnaryCall<ReloadStoreRequest, ReloadStoreResponse>;
+  purgeStoreRevisions: handleUnaryCall<
+    PurgeStoreRevisionsRequest,
+    PurgeStoreRevisionsResponse
+  >;
 }
 
 export interface CerbosAdminServiceClient extends Client {
@@ -553,6 +588,30 @@ export interface CerbosAdminServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: GetPolicyResponse) => void,
+  ): ClientUnaryCall;
+  deletePolicy(
+    request: DeletePolicyRequest,
+    callback: (
+      error: ServiceError | null,
+      response: DeletePolicyResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  deletePolicy(
+    request: DeletePolicyRequest,
+    metadata: Metadata,
+    callback: (
+      error: ServiceError | null,
+      response: DeletePolicyResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  deletePolicy(
+    request: DeletePolicyRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (
+      error: ServiceError | null,
+      response: DeletePolicyResponse,
+    ) => void,
   ): ClientUnaryCall;
   disablePolicy(
     request: DisablePolicyRequest,
@@ -720,6 +779,30 @@ export interface CerbosAdminServiceClient extends Client {
     callback: (
       error: ServiceError | null,
       response: ReloadStoreResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  purgeStoreRevisions(
+    request: PurgeStoreRevisionsRequest,
+    callback: (
+      error: ServiceError | null,
+      response: PurgeStoreRevisionsResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  purgeStoreRevisions(
+    request: PurgeStoreRevisionsRequest,
+    metadata: Metadata,
+    callback: (
+      error: ServiceError | null,
+      response: PurgeStoreRevisionsResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  purgeStoreRevisions(
+    request: PurgeStoreRevisionsRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (
+      error: ServiceError | null,
+      response: PurgeStoreRevisionsResponse,
     ) => void,
   ): ClientUnaryCall;
 }

@@ -5,19 +5,27 @@ import type {
   DescMethod,
   DescMethodServerStreaming,
   DescMethodUnary,
+  JsonValue,
   Message,
   MessageShape,
   MessageValidType,
 } from "@bufbuild/protobuf";
-import { fromJson } from "@bufbuild/protobuf";
+import { fromJson as bufFromJson } from "@bufbuild/protobuf";
+import type { AnyJson } from "@bufbuild/protobuf/wkt";
 
-import type { Value } from "@cerbos/core";
+import type { StatusJson } from "@cerbos/api/google/rpc/status_pb";
 import { NotOK, Status } from "@cerbos/core";
 import type {
   AbortHandler,
   Transport as CoreTransport,
+  ErrorDetails,
 } from "@cerbos/core/~internal";
-import { isObject, methodName } from "@cerbos/core/~internal";
+import {
+  AbstractErrorResponse,
+  cancelBody,
+  isObject,
+  methodName,
+} from "@cerbos/core/~internal";
 
 import type { RequestInitWithUrl } from "./endpoints.js";
 import { endpoints } from "./endpoints.js";
@@ -35,14 +43,13 @@ export class Transport implements CoreTransport {
     abortHandler: AbortHandler,
   ): Promise<MessageShape<O>> {
     const response = await this.fetch(method, request, headers, abortHandler);
+    const json = (await response.json()) as JsonValue;
 
     if (!response.ok) {
-      throw NotOK.fromJSON(await response.text());
+      throw new ErrorResponse(json);
     }
 
-    return fromJson(method.output, (await response.json()) as Value, {
-      ignoreUnknownFields: true,
-    });
+    return fromJson(method.output, json);
   }
 
   public async *serverStream<I extends DescMessage, O extends DescMessage>(
@@ -53,15 +60,15 @@ export class Transport implements CoreTransport {
   ): AsyncGenerator<MessageShape<O>, void, undefined> {
     const response = await this.fetch(method, request, headers, abortHandler);
 
-    try {
-      if (!response.body) {
-        throw new Error("Missing response body");
-      }
+    if (!response.body) {
+      throw new Error("Missing response body");
+    }
 
+    try {
       for await (const line of eachLine(
         response.body as ReadableStream<Uint8Array>,
       )) {
-        const message = JSON.parse(line) as Value;
+        const message = JSON.parse(line) as JsonValue;
 
         if (!isObject(message)) {
           throw new Error(`Unexpected message: wanted object, got ${line}`);
@@ -70,33 +77,17 @@ export class Transport implements CoreTransport {
         const { result, error } = message;
 
         if (error) {
-          throw NotOK.fromJSON(JSON.stringify(error));
+          throw new ErrorResponse(error);
         }
 
         if (!result) {
           throw new Error(`Missing result in ${line}`);
         }
 
-        yield fromJson(method.output, result, { ignoreUnknownFields: true });
+        yield fromJson(method.output, result);
       }
-    } catch (error) {
-      response.body?.cancel().catch(() => {
-        // ignore failure to cancel
-      });
-
-      abortHandler.throwIfAborted();
-
-      if (error instanceof NotOK) {
-        throw error;
-      }
-
-      throw new NotOK(
-        Status.INTERNAL,
-        error instanceof Error
-          ? `Invalid stream: ${error.message}`
-          : "Invalid stream",
-        { cause: error },
-      );
+    } finally {
+      cancelBody(response);
     }
   }
 
@@ -126,19 +117,7 @@ export class Transport implements CoreTransport {
 
     const { url, ...rest } = endpoint.serialize(request, init);
 
-    try {
-      return await fetch(url, rest);
-    } catch (error) {
-      abortHandler.throwIfAborted();
-
-      throw new NotOK(
-        Status.UNKNOWN,
-        error instanceof Error
-          ? `Request failed: ${error.message}`
-          : "Request failed",
-        { cause: error },
-      );
-    }
+    return await fetch(url, rest);
   }
 }
 
@@ -166,4 +145,60 @@ export async function* eachLine(
   if (buffer.length > 0) {
     yield buffer;
   }
+}
+
+class ErrorResponse extends AbstractErrorResponse<JsonValue> {
+  private readonly jsonDetails: JsonValue[] | undefined;
+
+  public constructor(json: JsonValue) {
+    if (!isStatus(json)) {
+      throw new Error(`Invalid error response: ${JSON.stringify(json)}`);
+    }
+
+    super(json.code, json.message);
+    this.jsonDetails = json.details;
+  }
+
+  protected override *details(): Generator<
+    ErrorDetails<JsonValue>,
+    void,
+    undefined
+  > {
+    if (!this.jsonDetails) {
+      return;
+    }
+
+    for (const details of this.jsonDetails) {
+      if (isAny(details)) {
+        const { "@type": typeUrl, ...value } = details;
+        yield { typeUrl, value };
+      }
+    }
+  }
+
+  protected override readonly parseDetails = fromJson;
+}
+
+type StatusObject = Required<Pick<StatusJson, "code" | "message">> & {
+  details?: JsonValue[];
+};
+
+function isStatus(json: JsonValue): json is StatusObject {
+  return (
+    isObject(json) &&
+    typeof json["code"] === "number" &&
+    typeof json["message"] === "string" &&
+    (json["details"] === undefined || Array.isArray(json["details"]))
+  );
+}
+
+function isAny(json: JsonValue): json is Required<AnyJson> {
+  return isObject(json) && typeof json["@type"] === "string";
+}
+
+function fromJson<T extends DescMessage>(
+  schema: T,
+  json: JsonValue,
+): MessageShape<T> {
+  return bufFromJson(schema, json, { ignoreUnknownFields: true });
 }

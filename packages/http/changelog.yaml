@@ -1,5 +1,30 @@
 unreleased:
-  type: patch
+  type: minor
+
+  added:
+    - summary: "[`Client.deletePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deletepolicy) and [`Client.deletePolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deletepolicies) methods to delete policies"
+      details: Requires a policy decision point server running Cerbos 0.51+.
+      pull: 1344
+
+    - summary: "[`PolicyStoreIntegrityViolated`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.PolicyStoreIntegrityViolated.html) error, thrown when disabling or deleting a policy violates the integrity of the store"
+      details: Requires a policy decision point server running Cerbos 0.51+.
+      pull: 1344
+
+    - summary: Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html)
+      details: Requires a policy decision point server running Cerbos 0.51+.
+      pull: 1344
+
+    - summary: "[`OutputResult.action`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#action) property"
+      details: Requires a policy decision point server running Cerbos 0.51+.
+      pull: 1344
+
+    - summary: Support for [versioned role policies](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#version)
+      details: Requires a policy decision point server running Cerbos 0.51+.
+      pull: 1344
+
+    - summary: "[`Client.purgeStoreRevisions`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#purgestorerevisions) method to clear history from dynamic policy stores"
+      details: Requires a policy decision point server running Cerbos 0.51+.
+      pull: 1344
 
   bumped:
     "@bufbuild/protobuf":

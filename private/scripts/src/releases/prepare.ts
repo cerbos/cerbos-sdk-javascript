@@ -5,9 +5,10 @@ import { abort } from "../utils/logging.js";
 import { listPackages } from "../utils/packages.js";
 import { planReleases, prepareReleases } from "../utils/releases.js";
 
-const packages = await planReleases(await listPackages());
+const plan = await planReleases(await listPackages());
+const releases = plan.packagesToReleaseNow.length;
 
-if (packages.length === 0) {
+if (releases === 0) {
   abort("Nothing to release");
 }
 
@@ -15,7 +16,7 @@ if (await git("status", "--porcelain")) {
   abort("You have uncommitted changes");
 }
 
-const releaseOrReleases = `release${packages.length > 1 ? "s" : ""}`;
+const releaseOrReleases = `release${releases > 1 ? "s" : ""}`;
 
 const baseRemote = "upstream";
 const baseBranch = "main";
@@ -35,7 +36,7 @@ await git(
 
 const title = `Prepare ${releaseOrReleases}`;
 
-const body = packages
+const body = plan.packagesToReleaseNow
   .map(({ name, newVersion }) => `${name}: ${newVersion}\n`)
   .join("");
 
@@ -58,7 +59,7 @@ const pullRequestUrl = await gh(
   `--body=${body}`,
 );
 
-await prepareReleases(packages, parsePullRequestUrl(pullRequestUrl));
+await prepareReleases(plan, parsePullRequestUrl(pullRequestUrl));
 
 await execa("pnpm", ["install"]);
 

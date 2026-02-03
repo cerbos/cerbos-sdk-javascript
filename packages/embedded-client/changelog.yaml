@@ -1,5 +1,12 @@
 unreleased:
-  type: patch
+  type: minor
+
+  added:
+    - summary: Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html)
+      pull: 1344
+
+    - summary: "[`OutputResult.action`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#action) property"
+      pull: 1344
 
   bumped:
     "@bufbuild/protobuf":

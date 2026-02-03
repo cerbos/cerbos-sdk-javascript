@@ -20,7 +20,10 @@ import type {
   Peer,
   PlanResourcesRequest,
   PolicySource,
+  PolicyStoreIntegrityViolation,
   Principal,
+  RequestContext,
+  ResourcePolicy,
   ValidationError,
 } from "@cerbos/core";
 import {
@@ -33,6 +36,7 @@ import {
   PlanExpressionValue,
   PlanExpressionVariable,
   PlanKind,
+  PolicyStoreIntegrityViolated,
   Status,
   ValidationErrorSource,
 } from "@cerbos/core";
@@ -140,6 +144,17 @@ describe("Client", () => {
           },
         } satisfies AuxData;
 
+        const requestContext: RequestContext | undefined = versionIsAtLeast(
+          "0.51.0",
+          cerbosVersion,
+        )
+          ? {
+              annotations: {
+                baz: { qux: 1234 },
+              },
+            }
+          : undefined;
+
         const expectedMetadata: Record<string, string[]> = {
           foo: ["bar"],
         };
@@ -211,6 +226,7 @@ describe("Client", () => {
             auxData,
             includeMetadata: true,
             requestId: "check-resources",
+            requestContext,
           } satisfies CheckResourcesRequest;
 
           const response = await reloadable.checkResources(request, {
@@ -219,6 +235,7 @@ describe("Client", () => {
 
           const outputs: OutputResult[] = [
             {
+              action: versionIsAtLeast("0.51.0", cerbosVersion) ? "delete" : "",
               source: "resource.document.v1#delete",
               value: "delete_allowed:me@example.com",
             },
@@ -234,6 +251,7 @@ describe("Client", () => {
               statusCode: Status.OK,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
@@ -242,6 +260,7 @@ describe("Client", () => {
               metadata: expectedMetadata,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {
@@ -365,6 +384,7 @@ describe("Client", () => {
             auxData,
             includeMetadata: true,
             requestId: "plan-resources-unconditional",
+            requestContext,
           } satisfies PlanResourcesRequest;
 
           const response = await reloadable.planResources(request, {
@@ -381,6 +401,7 @@ describe("Client", () => {
               statusCode: Status.OK,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
@@ -389,6 +410,7 @@ describe("Client", () => {
               metadata: expectedMetadata,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {
@@ -439,6 +461,7 @@ describe("Client", () => {
             auxData,
             includeMetadata: true,
             requestId: "plan-resources-unconditional",
+            requestContext,
           } satisfies PlanResourcesRequest;
 
           const response = await reloadable.planResources(request, {
@@ -455,6 +478,7 @@ describe("Client", () => {
               statusCode: Status.OK,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
             },
             expectedDecisionLogEntry: {
               callId: response.cerbosCallId,
@@ -463,6 +487,7 @@ describe("Client", () => {
               metadata: expectedMetadata,
               oversized: false,
               policySource: expectedPolicySource,
+              requestContext,
               auditTrail: {
                 effectivePolicies: {
                   "resource.document.v1": {
@@ -649,7 +674,7 @@ describe("Client", () => {
         });
       });
 
-      describe("addOrUpdatePolicies / listPolicies / getPolicy / disablePolicy", () => {
+      describe("addOrUpdatePolicies / listPolicies / getPolicy / disablePolicy / enablePolicy / deletePolicy", () => {
         it.each([
           {
             source: "defined inline",
@@ -699,23 +724,121 @@ describe("Client", () => {
             const disabled = await mutable.disablePolicy(id);
             expect(disabled).toBe(true);
 
-            const { ids: remainingIds } = await mutable.listPolicies();
-            expect(remainingIds).not.toContain(id);
+            let { ids } = await mutable.listPolicies();
+            expect(ids).not.toContain(id);
 
-            const { ids: disabledIds } = await mutable.listPolicies({
-              includeDisabled: true,
-            });
-
-            expect(disabledIds).toContain(id);
+            ({ ids } = await mutable.listPolicies({ includeDisabled: true }));
+            expect(ids).toContain(id);
 
             const enabled = await mutable.enablePolicy(id);
             expect(enabled).toBe(true);
 
-            const { ids: enabledIds } = await mutable.listPolicies();
-            expect(enabledIds).toContain(id);
+            ({ ids } = await mutable.listPolicies());
+            expect(ids).toContain(id);
+
+            if (versionIsAtLeast("0.51.0", cerbosVersion)) {
+              const deleted = await mutable.deletePolicy(id);
+              expect(deleted).toBe(true);
+
+              ({ ids } = await mutable.listPolicies({ includeDisabled: true }));
+              expect(ids).not.toContain(id);
+            }
           }
         });
       });
+
+      describeIfVersionIsAtLeast("0.51.0", cerbosVersion)(
+        "integrity violations",
+        () => {
+          describe.each(["delete", "disable"] as const)("%s", (action) => {
+            it("throws if removing policy breaks scope chain", async () => {
+              await mutable.addOrUpdatePolicies({
+                policies: [
+                  {
+                    resourcePolicy: {
+                      resource: "inScopeChain",
+                      version: "1",
+                      rules: [],
+                    },
+                  } satisfies ResourcePolicy,
+                  {
+                    resourcePolicy: {
+                      resource: "inScopeChain",
+                      version: "1",
+                      scope: "foo",
+                      rules: [],
+                    },
+                  } satisfies ResourcePolicy,
+                ],
+              });
+
+              try {
+                await mutable[`${action}Policy`]("resource.inScopeChain.v1");
+                expect.unreachable();
+              } catch (error) {
+                expect(error).toBeInstanceOf(PolicyStoreIntegrityViolated);
+                expect(error).toMatchObject({
+                  code: Status.INVALID_ARGUMENT,
+                  details: `Failed to ${action} policies`,
+                  violations: {
+                    "resource.inScopeChain.v1": {
+                      breaksScopeChain: {
+                        descendants: ["resource.inScopeChain.v1/foo"],
+                      },
+                      requiredByOtherPolicies: undefined,
+                    } satisfies PolicyStoreIntegrityViolation,
+                  },
+                });
+              }
+            });
+
+            it("throws if policy is required by others", async () => {
+              await mutable.addOrUpdatePolicies({
+                policies: [
+                  {
+                    derivedRoles: {
+                      name: "dependency",
+                      definitions: [
+                        {
+                          name: "foo",
+                          parentRoles: ["bar"],
+                        },
+                      ],
+                    },
+                  } satisfies DerivedRoles,
+                  {
+                    resourcePolicy: {
+                      resource: "dependent",
+                      version: "1",
+                      importDerivedRoles: ["dependency"],
+                      rules: [],
+                    },
+                  } satisfies ResourcePolicy,
+                ],
+              });
+
+              try {
+                await mutable[`${action}Policy`]("derived_roles.dependency");
+                expect.unreachable();
+              } catch (error) {
+                expect(error).toBeInstanceOf(PolicyStoreIntegrityViolated);
+                expect(error).toMatchObject({
+                  code: Status.INVALID_ARGUMENT,
+                  details: `Failed to ${action} policies`,
+                  violations: {
+                    "derived_roles.dependency": {
+                      breaksScopeChain: undefined,
+                      requiredByOtherPolicies: {
+                        dependents: ["resource.dependent.v1"],
+                      },
+                    } satisfies PolicyStoreIntegrityViolation,
+                  },
+                });
+              }
+            });
+          });
+        },
+      );
 
       describe("addOrUpdateSchema / listSchemas / getSchema / deleteSchema", () => {
         const definition = {
@@ -789,6 +912,17 @@ describe("Client", () => {
             }
 
             expect(policies).toEqual(expectedInspectedPolicies());
+          });
+        },
+      );
+
+      describeIfVersionIsAtLeast("0.51.0", cerbosVersion)(
+        "purgeStoreRevisions",
+        () => {
+          it("purges revisions from the store", async () => {
+            await expect(
+              mutable.purgeStoreRevisions({ keepLast: 1 }),
+            ).resolves.toBeUndefined();
           });
         },
       );

@@ -1,6 +1,6 @@
 # Cerbos JavaScript SDK
 
-[Cerbos](https://cerbos.dev) helps you super-charge your authorization implementation by writing context-aware access control policies for your application resources.
+[Cerbos](https://www.cerbos.dev) helps you super-charge your authorization implementation by writing context-aware access control policies for your application resources.
 Author access rules using an intuitive YAML configuration language, use your Git-ops infrastructure to test and deploy them, and make simple API requests to the Cerbos policy decision point (PDP) server to evaluate the policies and make dynamic access decisions.
 
 The Cerbos JavaScript SDK makes it easy to interact with the Cerbos PDP from your Node.js and browser-based applications.
@@ -18,7 +18,7 @@ All clients extend the base [`Client`](https://cerbos.github.io/cerbos-sdk-javas
 
 In React applications, you can use the [@cerbos/react](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_react.html) package to use an [`HTTP`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_http.HTTP.html) or [`Embedded`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_embedded.Embedded.html) client in your components via hooks.
 
-To instrument the clients with [OpenTelemetry](http://opentelemetry.io), use the [@cerbos/opentelemetry](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_opentelemetry.html) package.
+To instrument the clients with [OpenTelemetry](https://opentelemetry.io), use the [@cerbos/opentelemetry](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_opentelemetry.html) package.
 
 To load Cerbos policies from YAML or JSON files, use the [@cerbos/files](https://cerbos.github.io/cerbos-sdk-javascript/modules/_cerbos_files.html) package.
 
@@ -32,5 +32,5 @@ To read and write policies to stores in [Cerbos Hub](https://docs.cerbos.dev/cer
 
 ## Get help
 
-- [Join the Cerbos community on Slack](http://go.cerbos.io/slack)
+- [Join the Cerbos community on Slack](https://go.cerbos.io/slack)
 - [Email us at help@cerbos.dev](mailto:help@cerbos.dev)

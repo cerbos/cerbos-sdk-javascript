@@ -12,6 +12,7 @@ import type {
   DecodedAuxData,
   OutputResult,
   Principal,
+  RequestContext,
   Resource,
   ResourceQuery,
   ValidationError,
@@ -134,12 +135,21 @@ describe("Embedded", () => {
         client: factory,
         adminServiceEnabled: false,
         cerbosVersion: metadata.cerbosVersion,
+        embedded: true,
       });
 
       describe("decision logging", () => {
         let client: Client;
 
         const now = new Date();
+
+        const requestContext = {
+          annotations: {
+            baz: {
+              qux: 999,
+            },
+          },
+        } satisfies RequestContext;
 
         const expected = {
           timestamp: now,
@@ -168,6 +178,7 @@ describe("Embedded", () => {
             userAgent: `test/9000 ${embeddedV2UserAgent}`,
           },
           policySource,
+          requestContext,
         } satisfies Omit<DecisionLogEntry, "callId" | "method">;
 
         const principal = {
@@ -269,10 +280,12 @@ describe("Embedded", () => {
               ],
               auxData,
               requestId,
+              requestContext,
             });
 
             const outputs = [
               {
+                action: "",
                 source: "resource.document.v1#delete",
                 value: "delete_allowed:me@example.com",
               },
@@ -415,6 +428,7 @@ describe("Embedded", () => {
               },
               includeMetadata: true,
               requestId,
+              requestContext,
             });
 
             expect(callId).toMatch(callIdPattern);

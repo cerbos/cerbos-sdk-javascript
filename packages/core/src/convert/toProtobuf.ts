@@ -5,6 +5,7 @@ import type { Duration, Value as ValueProtobuf } from "@bufbuild/protobuf/wkt";
 import { ValueSchema, timestampFromDate } from "@bufbuild/protobuf/wkt";
 import { v4 as uuidv4 } from "uuid";
 
+import type { RequestContextValid } from "@cerbos/api/cerbos/audit/v1/audit_pb";
 import { Effect as EffectProtobuf } from "@cerbos/api/cerbos/effect/v1/effect_pb";
 import type {
   PlanResourcesInput_ResourceValid,
@@ -42,6 +43,7 @@ import type {
   AuxData_JWTValid,
   CheckResourcesRequestValid,
   CheckResourcesRequest_ResourceEntryValid,
+  DeletePolicyRequestValid,
   DeleteSchemaRequestValid,
   DisablePolicyRequestValid,
   EnablePolicyRequestValid,
@@ -51,6 +53,7 @@ import type {
   ListAuditLogEntriesRequestValid,
   ListPoliciesRequestValid,
   PlanResourcesRequestValid,
+  PurgeStoreRevisionsRequestValid,
   ReloadStoreRequestValid,
 } from "@cerbos/api/cerbos/request/v1/request_pb";
 import { ListAuditLogEntriesRequest_Kind } from "@cerbos/api/cerbos/request/v1/request_pb";
@@ -65,6 +68,7 @@ import type {
   CheckResourcesRequest,
   Condition,
   Constants,
+  DeletePoliciesRequest,
   DeleteSchemasRequest,
   DerivedRoleDefinition,
   DerivedRoles,
@@ -90,7 +94,9 @@ import type {
   PrincipalPolicy,
   PrincipalRule,
   PrincipalRuleAction,
+  PurgeStoreRevisionsRequest,
   ReloadStoreRequest,
+  RequestContext,
   Resource,
   ResourceCheck,
   ResourcePolicy,
@@ -470,13 +476,14 @@ function resourceRuleToProtobuf({
 }
 
 function rolePolicyToProtobuf({
-  rolePolicy: { role, parentRoles, scope, rules },
+  rolePolicy: { role, version = "", parentRoles = [], scope = "", rules },
 }: RolePolicy): RolePolicyValid {
   return {
     $typeName: "cerbos.policy.v1.RolePolicy",
     policyType: { case: "role", value: role },
-    parentRoles: parentRoles ?? [],
-    scope: scope ?? "",
+    version,
+    parentRoles,
+    scope,
     scopePermissions: ScopePermissionsProtobuf.UNSPECIFIED,
     rules: rules.map(roleRuleToProtobuf),
   };
@@ -561,6 +568,7 @@ export function checkResourcesRequestToProtobuf({
   auxData,
   includeMetadata = false,
   requestId = uuidv4(),
+  requestContext,
 }: CheckResourcesRequest): CheckResourcesRequestValid {
   return {
     $typeName: "cerbos.request.v1.CheckResourcesRequest",
@@ -569,6 +577,7 @@ export function checkResourcesRequestToProtobuf({
     auxData: auxData && auxDataToProtobuf(auxData),
     includeMeta: includeMetadata,
     requestId,
+    requestContext: requestContext && requestContextToProtobuf(requestContext),
   };
 }
 
@@ -641,6 +650,24 @@ function jwtToProtobuf({ token, keySetId = "" }: JWT): AuxData_JWTValid {
     $typeName: "cerbos.request.v1.AuxData.JWT",
     token,
     keySetId,
+  };
+}
+
+function requestContextToProtobuf({
+  annotations,
+}: RequestContext): RequestContextValid {
+  return {
+    $typeName: "cerbos.audit.v1.RequestContext",
+    annotations: valuesToProtobuf(annotations),
+  };
+}
+
+export function deletePoliciesRequestToProtobuf({
+  ids,
+}: DeletePoliciesRequest): DeletePolicyRequestValid {
+  return {
+    $typeName: "cerbos.request.v1.DeletePolicyRequest",
+    id: ids,
   };
 }
 
@@ -805,6 +832,7 @@ export function planResourcesRequestToProtobuf(
     auxData,
     includeMetadata = false,
     requestId = uuidv4(),
+    requestContext,
   } = request;
 
   return {
@@ -815,6 +843,7 @@ export function planResourcesRequestToProtobuf(
     auxData: auxData && auxDataToProtobuf(auxData),
     includeMeta: includeMetadata,
     requestId,
+    requestContext: requestContext && requestContextToProtobuf(requestContext),
   };
 }
 
@@ -851,6 +880,15 @@ function resourceQueryToProtobuf({
     }),
     policyVersion,
     scope,
+  };
+}
+
+export function purgeStoreRevisionsRequestToProtobuf({
+  keepLast = 0,
+}: PurgeStoreRevisionsRequest): PurgeStoreRevisionsRequestValid {
+  return {
+    $typeName: "cerbos.request.v1.PurgeStoreRevisionsRequest",
+    keepLast,
   };
 }
 

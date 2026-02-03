@@ -6,7 +6,8 @@ import type {
   MessageValidType,
 } from "@bufbuild/protobuf";
 
-import { NotOK } from "./errors.js";
+import { NotOK } from "./errors/external.js";
+import { joinErrorMessage } from "./errors/internal.js";
 import { Status } from "./types/external.js";
 
 /** @internal */
@@ -32,11 +33,9 @@ export class AbortHandler {
   public error(): NotOK {
     const reason = this.signal?.reason as unknown;
 
-    return new NotOK(
-      Status.CANCELLED,
-      reason instanceof Error ? `Aborted: ${reason.message}` : "Aborted",
-      { cause: reason },
-    );
+    return new NotOK(Status.CANCELLED, joinErrorMessage("Aborted", reason), {
+      cause: reason,
+    });
   }
 }
 

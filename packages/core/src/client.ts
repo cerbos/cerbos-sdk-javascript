@@ -18,6 +18,7 @@ import {
   accessLogEntryFromProtobuf,
   checkResourcesResponseFromProtobuf,
   decisionLogEntryFromProtobuf,
+  deletePoliciesResponseFromProtobuf,
   deleteSchemasResponseFromProtobuf,
   disablePoliciesResponseFromProtobuf,
   enablePoliciesResponseFromProtobuf,
@@ -34,6 +35,7 @@ import {
   addOrUpdatePoliciesRequestToProtobuf,
   addOrUpdateSchemasRequestToProtobuf,
   checkResourcesRequestToProtobuf,
+  deletePoliciesRequestToProtobuf,
   deleteSchemasRequestToProtobuf,
   disablePoliciesRequestToProtobuf,
   enablePoliciesRequestToProtobuf,
@@ -45,9 +47,17 @@ import {
   listDecisionLogEntriesRequestToProtobuf,
   listPoliciesRequestToProtobuf,
   planResourcesRequestToProtobuf,
+  purgeStoreRevisionsRequestToProtobuf,
   reloadStoreRequestToProtobuf,
 } from "./convert/toProtobuf.js";
-import { NotOK, ValidationFailed } from "./errors.js";
+import { NotOK, ValidationFailed } from "./errors/external.js";
+import { joinErrorMessage } from "./errors/internal.js";
+import type { ErrorRegistry } from "./errors/registry.js";
+import {
+  deletePoliciesErrorRegistry,
+  disablePoliciesErrorRegistry,
+} from "./errors/registry.js";
+import { AbstractErrorResponse } from "./errors/response.js";
 import type { Transport } from "./transport.js";
 import { AbortHandler, instrument } from "./transport.js";
 import type {
@@ -61,6 +71,8 @@ import type {
   CheckResourcesResponse,
   CheckResourcesResult,
   DecisionLogEntry,
+  DeletePoliciesRequest,
+  DeletePoliciesResponse,
   DeleteSchemasRequest,
   DeleteSchemasResponse,
   DisablePoliciesRequest,
@@ -85,6 +97,7 @@ import type {
   PlanResourcesResponse,
   Policy,
   Principal,
+  PurgeStoreRevisionsRequest,
   ReloadStoreRequest,
   Schema,
   ServerInfo,
@@ -467,6 +480,72 @@ export abstract class Client {
   }
 
   /**
+   * Delete multiple policies.
+   *
+   * @throws {@link PolicyStoreIntegrityViolated} if deleting any of the policies violates the integrity of the store.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be at least v0.51 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * const result = await cerbos.deletePolicies({
+   *   ids: ["resource.document.v1", "resource.image.v1"],
+   * });
+   * ```
+   */
+  public async deletePolicies(
+    request: DeletePoliciesRequest,
+    options?: RequestOptions,
+  ): Promise<DeletePoliciesResponse> {
+    return deletePoliciesResponseFromProtobuf(
+      await this.unary(
+        admin.method.deletePolicy,
+        deletePoliciesRequestToProtobuf(request),
+        options,
+        deletePoliciesErrorRegistry,
+      ),
+    );
+  }
+
+  /**
+   * Delete a policy.
+   *
+   * @throws {@link PolicyStoreIntegrityViolated} if deleting the policy violates the integrity of the store.
+   *
+   * @remarks
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be at least v0.25 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * const deleted = await cerbos.deletePolicy("resource.document.v1");
+   * ```
+   */
+  public async deletePolicy(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<boolean> {
+    const { deletedPolicies } = await this.deletePolicies(
+      { ids: [id] },
+      options,
+    );
+
+    return deletedPolicies === 1;
+  }
+
+  /**
    * Delete a schema.
    *
    * @remarks
@@ -534,6 +613,8 @@ export abstract class Client {
   /**
    * Disable multiple policies.
    *
+   * @throws {@link PolicyStoreIntegrityViolated} if disabling any of the policies violates the integrity of the store.
+   *
    * @remarks
    * Requires
    *
@@ -559,12 +640,15 @@ export abstract class Client {
         admin.method.disablePolicy,
         disablePoliciesRequestToProtobuf(request),
         options,
+        disablePoliciesErrorRegistry,
       ),
     );
   }
 
   /**
    * Disable a policy.
+   *
+   * @throws {@link PolicyStoreIntegrityViolated} if disabling the policy violates the integrity of the store.
    *
    * @remarks
    * Requires
@@ -1072,6 +1156,36 @@ export abstract class Client {
   }
 
   /**
+   * Delete policy revisions from the store.
+   *
+   * @remarks
+   * Dynamic storage backends keep an audit trail of policy changes, which grows over time.
+   *
+   * Requires
+   *
+   * - the client to be configured with {@link Options.adminCredentials},
+   *
+   * - the Cerbos policy decision point server to be at least v0.51 and configured with the {@link https://docs.cerbos.dev/cerbos/latest/api/admin_api | admin API} enabled, and
+   *
+   * - a dynamic {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage | storage backend}.
+   *
+   * @example
+   * ```typescript
+   * await cerbos.purgeStoreRevisions({ keepLast: 5 });
+   * ```
+   */
+  public async purgeStoreRevisions(
+    request: PurgeStoreRevisionsRequest = {},
+    options?: RequestOptions,
+  ): Promise<void> {
+    await this.unary(
+      admin.method.purgeStoreRevisions,
+      purgeStoreRevisionsRequestToProtobuf(request),
+      options,
+    );
+  }
+
+  /**
    * Reload the store.
    *
    * @remarks
@@ -1131,19 +1245,26 @@ export abstract class Client {
     method: DescMethodUnary<I, O>,
     request: MessageValidType<I>,
     { headers, signal }: RequestOptions = {},
+    registry?: ErrorRegistry,
   ): Promise<MessageShape<O>> {
-    return await this.transport.unary(
-      method,
-      request,
-      await this.mergeHeaders(headers, method),
-      new AbortHandler(signal),
-    );
+    const abortHandler = new AbortHandler(signal);
+    try {
+      return await this.transport.unary(
+        method,
+        request,
+        await this.mergeHeaders(headers, method),
+        abortHandler,
+      );
+    } catch (error) {
+      handleError(abortHandler, error, registry);
+    }
   }
 
   private async *serverStream<I extends DescMessage, O extends DescMessage>(
     method: DescMethodServerStreaming<I, O>,
     request: MessageValidType<I>,
     { headers, signal }: RequestOptions = {},
+    registry?: ErrorRegistry,
   ): AsyncGenerator<MessageShape<O>, void, undefined> {
     const abortController = new AbortController();
 
@@ -1159,13 +1280,17 @@ export abstract class Client {
       abortController.abort(signal.reason);
     }
 
+    const abortHandler = new AbortHandler(abortController.signal);
+
     try {
       yield* this.transport.serverStream(
         method,
         request,
         await this.mergeHeaders(headers, method),
-        new AbortHandler(abortController.signal),
+        abortHandler,
       );
+    } catch (error) {
+      handleError(abortHandler, error, registry);
     } finally {
       abortController.abort();
     }
@@ -1219,6 +1344,26 @@ export abstract class Client {
       }
     }
   }
+}
+
+function handleError(
+  abortHandler: AbortHandler,
+  error: unknown,
+  registry: ErrorRegistry | undefined,
+): never {
+  abortHandler.throwIfAborted();
+
+  if (error instanceof NotOK) {
+    throw error;
+  }
+
+  if (error instanceof AbstractErrorResponse) {
+    throw error.toNotOK(registry);
+  }
+
+  throw new NotOK(Status.INTERNAL, joinErrorMessage("Request failed", error), {
+    cause: error,
+  });
 }
 
 /**

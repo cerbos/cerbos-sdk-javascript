@@ -20,6 +20,7 @@ import type {
   PolicySource_Hub,
   PolicySource_Hub_EmbeddedBundle,
   PolicySource_Hub_LocalBundle,
+  RequestContext as RequestContextProtobuf,
 } from "@cerbos/api/cerbos/audit/v1/audit_pb";
 import { PolicySource_Database_Driver } from "@cerbos/api/cerbos/audit/v1/audit_pb";
 import { Effect as EffectProtobuf } from "@cerbos/api/cerbos/effect/v1/effect_pb";
@@ -68,6 +69,7 @@ import type {
   CheckResourcesResponse_ResultEntry_Meta,
   CheckResourcesResponse_ResultEntry_Meta_EffectMeta,
   CheckResourcesResponse_ResultEntry_Resource,
+  DeletePolicyResponse,
   DeleteSchemaResponse,
   DisablePolicyResponse,
   EnablePolicyResponse,
@@ -79,6 +81,9 @@ import type {
   InspectPoliciesResponse_DerivedRole,
   InspectPoliciesResponse_Result,
   InspectPoliciesResponse_Variable,
+  IntegrityErrors,
+  IntegrityErrors_BreaksScopeChain,
+  IntegrityErrors_RequiredByOtherPolicies,
   ListAuditLogEntriesResponse,
   ListPoliciesResponse as ListPoliciesResponseProtobuf,
   ListSchemasResponse as ListSchemasResponseProtobuf,
@@ -116,6 +121,7 @@ import type {
   DecisionLogEntryMethod,
   DecisionLogEntryPlanResources,
   DecodedAuxData,
+  DeletePoliciesResponse,
   DeleteSchemasResponse,
   DerivedRoleDefinition,
   DerivedRoles,
@@ -164,10 +170,14 @@ import type {
   PolicySourceHubLabel,
   PolicySourceHubLocalBundle,
   PolicySourceHubPlayground,
+  PolicyStoreIntegrityViolation,
+  PolicyStoreIntegrityViolationBreaksScopeChain,
+  PolicyStoreIntegrityViolationRequiredByOtherPolicies,
   Principal,
   PrincipalPolicy,
   PrincipalRule,
   PrincipalRuleAction,
+  RequestContext,
   Resource,
   ResourcePolicy,
   ResourceQuery,
@@ -217,6 +227,7 @@ export function accessLogEntryFromProtobuf({
     statusCode,
     oversized,
     policySource,
+    requestContext,
   } = entry.value;
 
   requireField("AccessLogEntry.timestamp", timestamp);
@@ -231,6 +242,8 @@ export function accessLogEntryFromProtobuf({
     statusCode,
     oversized,
     policySource: policySource && policySourceFromProtobuf(policySource),
+    requestContext:
+      requestContext && requestContextFromProtobuf(requestContext),
   };
 }
 
@@ -248,6 +261,7 @@ export function decisionLogEntryFromProtobuf({
     method,
     oversized,
     policySource,
+    requestContext,
   } = entry.value;
 
   requireField("DecisionLogEntry.timestamp", timestamp);
@@ -262,6 +276,8 @@ export function decisionLogEntryFromProtobuf({
     method: decisionLogEntryMethodFromProtobuf(method),
     oversized,
     policySource: policySource && policySourceFromProtobuf(policySource),
+    requestContext:
+      requestContext && requestContextFromProtobuf(requestContext),
   };
 }
 
@@ -450,6 +466,14 @@ function localBundleFromProtobuf({
   path,
 }: PolicySource_Hub_LocalBundle): LocalBundle {
   return { path };
+}
+
+export function requestContextFromProtobuf({
+  annotations,
+}: RequestContextProtobuf): RequestContext {
+  return {
+    annotations: valuesFromProtobuf(annotations),
+  };
 }
 
 function decisionLogEntryMethodFromProtobuf(
@@ -803,11 +827,22 @@ function validationErrorSourceFromProtobuf(
   );
 }
 
-function outputResultFromProtobuf({ src, val }: OutputEntry): OutputResult {
+function outputResultFromProtobuf({
+  action,
+  src,
+  val,
+}: OutputEntry): OutputResult {
   return {
+    action,
     source: src,
     value: val && valueFromProtobuf(val),
   };
+}
+
+export function deletePoliciesResponseFromProtobuf({
+  deletedPolicies,
+}: DeletePolicyResponse): DeletePoliciesResponse {
+  return { deletedPolicies };
 }
 
 export function deleteSchemasResponseFromProtobuf({
@@ -1440,6 +1475,47 @@ export function serverInfoFromProtobuf({
     commit,
     version,
   };
+}
+
+export function policyStoreIntegrityViolationsFromProtobuf(
+  errors: Record<string, IntegrityErrors>,
+): Record<string, PolicyStoreIntegrityViolation> {
+  return Object.fromEntries(
+    Object.entries(errors).map(([id, error]) => [
+      id,
+      policyStoreIntegrityViolationFromProtobuf(error),
+    ]),
+  );
+}
+
+function policyStoreIntegrityViolationFromProtobuf({
+  breaksScopeChain,
+  requiredByOtherPolicies,
+}: IntegrityErrors): PolicyStoreIntegrityViolation {
+  return {
+    breaksScopeChain:
+      breaksScopeChain &&
+      policyStoreIntegrityViolationBreaksScopeChainFromProtobuf(
+        breaksScopeChain,
+      ),
+    requiredByOtherPolicies:
+      requiredByOtherPolicies &&
+      policyStoreIntegrityViolationRequiredByOtherPoliciesFromProtobuf(
+        requiredByOtherPolicies,
+      ),
+  };
+}
+
+function policyStoreIntegrityViolationBreaksScopeChainFromProtobuf({
+  descendants,
+}: IntegrityErrors_BreaksScopeChain): PolicyStoreIntegrityViolationBreaksScopeChain {
+  return { descendants };
+}
+
+function policyStoreIntegrityViolationRequiredByOtherPoliciesFromProtobuf({
+  dependents,
+}: IntegrityErrors_RequiredByOtherPolicies): PolicyStoreIntegrityViolationRequiredByOtherPolicies {
+  return { dependents };
 }
 
 /** @internal */

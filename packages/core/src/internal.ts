@@ -7,13 +7,24 @@ export {
   planResourcesInputFromProtobuf,
   planResourcesOutputFromProtobuf,
   policyFromProtobuf,
+  requestContextFromProtobuf,
   requireField,
   translateEnum,
   unexpected,
   valuesFromProtobuf,
 } from "./convert/fromProtobuf.js";
 export { policyToProtobuf, valuesToProtobuf } from "./convert/toProtobuf.js";
+export * from "./errors/internal.js";
+export type { ErrorDetails } from "./errors/response.js";
+export { AbstractErrorResponse } from "./errors/response.js";
 export * from "./transport.js";
+
+/** @internal */
+export function cancelBody(response: Response): void {
+  response.body?.cancel().catch(() => {
+    // ignore failure to cancel
+  });
+}
 
 /** @internal */
 export function isObject(value: unknown): value is Record<string, unknown> {
@@ -23,16 +34,6 @@ export function isObject(value: unknown): value is Record<string, unknown> {
 /** @internal */
 export function methodName(method: DescMethod): string {
   return `${method.parent.typeName}/${method.name}`;
-}
-
-/** @internal */
-export function setErrorNameAndStack(error: Error): void {
-  error.name = error.constructor.name;
-
-  // `Error.captureStackTrace` is not available in all browsers
-  if ("captureStackTrace" in Error) {
-    Error.captureStackTrace(error, error.constructor);
-  }
 }
 
 /** @internal */

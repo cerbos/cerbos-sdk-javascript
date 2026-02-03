@@ -1,6 +1,10 @@
-import { setErrorNameAndStack } from "./internal.js";
-import type { ValidationError } from "./types/external.js";
-import { Status } from "./types/external.js";
+import { setErrorNameAndStack } from "../internal.js";
+import type {
+  PolicyStoreIntegrityViolation,
+  StatusNotOK,
+  ValidationError,
+} from "../types/external.js";
+import { Status } from "../types/external.js";
 
 /**
  * Options for creating an error.
@@ -16,9 +20,7 @@ export interface ErrorOptions {
  * Error thrown when the Cerbos policy decision point server returns an unsuccessful response.
  */
 export class NotOK extends Error {
-  /**
-   * Parse a JSON-serialized unsuccessful response.
-   */
+  /** @deprecated */
   public static fromJSON(text: string): NotOK {
     try {
       const error: unknown = JSON.parse(text);
@@ -33,7 +35,7 @@ export class NotOK extends Error {
     /**
      * The status code returned by the Cerbos policy decision point server.
      */
-    public readonly code: Exclude<Status, Status.OK>,
+    public readonly code: StatusNotOK,
 
     /**
      * Additional error details.
@@ -47,7 +49,7 @@ export class NotOK extends Error {
   }
 }
 
-function code(error: unknown): Exclude<Status, Status.OK> {
+function code(error: unknown): StatusNotOK {
   if (
     has(error, "code") &&
     typeof error.code === "number" &&
@@ -87,5 +89,25 @@ export class ValidationFailed extends Error {
   ) {
     super("Input failed schema validation");
     setErrorNameAndStack(this);
+  }
+}
+
+/**
+ * Error thrown when disabling or deleting a policy violates the integrity of the store.
+ */
+export class PolicyStoreIntegrityViolated extends NotOK {
+  /** @internal */
+  public constructor(
+    code: StatusNotOK,
+    message: string,
+
+    /**
+     * Details of the integrity violations for each policy ID.
+     */
+    public readonly violations: Record<string, PolicyStoreIntegrityViolation>,
+
+    options?: ErrorOptions,
+  ) {
+    super(code, message, options);
   }
 }

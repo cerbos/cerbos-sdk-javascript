@@ -126,6 +126,7 @@ export interface CheckOutput_ActionsEntry {
 export interface OutputEntry {
   src: string;
   val: any | undefined;
+  action: string;
 }
 
 export interface Resource {
@@ -1446,7 +1447,7 @@ export const CheckOutput_ActionsEntry: MessageFns<CheckOutput_ActionsEntry> = {
 };
 
 function createBaseOutputEntry(): OutputEntry {
-  return { src: "", val: undefined };
+  return { src: "", val: undefined, action: "" };
 }
 
 export const OutputEntry: MessageFns<OutputEntry> = {
@@ -1459,6 +1460,9 @@ export const OutputEntry: MessageFns<OutputEntry> = {
     }
     if (message.val !== undefined) {
       Value.encode(Value.wrap(message.val), writer.uint32(18).fork()).join();
+    }
+    if (message.action !== "") {
+      writer.uint32(26).string(message.action);
     }
     return writer;
   },
@@ -1487,6 +1491,14 @@ export const OutputEntry: MessageFns<OutputEntry> = {
           message.val = Value.unwrap(Value.decode(reader, reader.uint32()));
           continue;
         }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.action = reader.string();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1503,6 +1515,9 @@ export const OutputEntry: MessageFns<OutputEntry> = {
     }
     if (message.val !== undefined) {
       obj.val = message.val;
+    }
+    if (message.action !== "") {
+      obj.action = message.action;
     }
     return obj;
   },

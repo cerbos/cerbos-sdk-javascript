@@ -81,7 +81,13 @@ describe("CheckResourcesResult", () => {
 
   describe("#output", () => {
     const result = buildResult({
-      outputs: [{ source: "resource.document.v1/scope#rule", value: 42 }],
+      outputs: [
+        {
+          action: "answer",
+          source: "resource.document.v1/scope#rule",
+          value: 42,
+        },
+      ],
     });
 
     describe("when the output is found", () => {

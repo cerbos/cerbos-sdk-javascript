@@ -109,7 +109,7 @@ export enum SchemaEnforcement {
  *
  * The source may be
  *
- * - a {@link PolicyLoader} (or the {@link PolicyLoaderOptions} to create one) to download policy bundles from Cerbos Hub; or
+ * - a {@link PolicyLoader} (or the {@link PolicyLoaderOptions} to create one) to {@link https://docs.cerbos.dev/cerbos-hub/deployments-epdp-rules | download policy bundles from Cerbos Hub}; or
  *
  * - the contents of a previously-downloaded policy bundle (or a promise resolving to one).
  */
@@ -123,7 +123,7 @@ export type PolicySource =
  */
 export interface PolicyLoaderOptions extends Partial<HubClientOptions> {
   /**
-   * ID of the policy bundling rule.
+   * ID of the {@link https://docs.cerbos.dev/cerbos-hub/deployments-epdp-rules | policy bundling rule}.
    */
   ruleId: string;
 

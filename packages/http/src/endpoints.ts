@@ -77,6 +77,11 @@ defineEndpoints(admin, {
     path: "/admin/schema",
     serialize: serializeToBody,
   },
+  deletePolicy: {
+    method: "POST",
+    path: "/admin/policy/delete",
+    serialize: serializeToQueryString,
+  },
   deleteSchema: {
     method: "DELETE",
     path: "/admin/schema",
@@ -120,6 +125,11 @@ defineEndpoints(admin, {
   listSchemas: {
     method: "GET",
     path: "/admin/schemas",
+    serialize: serializeToQueryString,
+  },
+  purgeStoreRevisions: {
+    method: "DELETE",
+    path: "/admin/store/revisions",
     serialize: serializeToQueryString,
   },
   reloadStore: {

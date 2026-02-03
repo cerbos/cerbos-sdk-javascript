@@ -59,5 +59,5 @@ This package is ESM-only, but may be `require`d from CommonJS modules in Node.js
 
 ## Get help
 
-- [Join the Cerbos community on Slack](http://go.cerbos.io/slack)
+- [Join the Cerbos community on Slack](https://go.cerbos.io/slack)
 - [Email us at help@cerbos.dev](mailto:help@cerbos.dev)
