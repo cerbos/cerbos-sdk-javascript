@@ -1,34 +1,34 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Cerbos v0.51 updates
-      details: |-
-        - `cerbos.audit.v1.AccessLogEntry.requestContext`
-        - `cerbos.audit.v1.DecisionLogEntry.requestContext`
-        - `cerbos.audit.v1.RequestContext`
-        - `cerbos.engine.v1.OutputEntry.action`
-        - `cerbos.policy.v1.RolePolicy.version`
-        - `cerbos.request.v1.CheckResourcesRequest.requestContext`
-        - `cerbos.request.v1.DeletePolicyRequest`
-        - `cerbos.request.v1.PlanResourcesRequest.requestContext`
-        - `cerbos.request.v1.PurgeStoreRevisionsRequest`
-        - `cerbos.response.v1.DeletePolicyErrorDetails`
-        - `cerbos.response.v1.DeletePolicyResponse`
-        - `cerbos.response.v1.DisablePolicyErrorDetails`
-        - `cerbos.response.v1.IntegrityErrors`
-        - `cerbos.response.v1.PurgeStoreRevisionsResponse`
-        - `cerbos.svc.v1.CerbosAdminService.deletePolicy`
-        - `cerbos.svc.v1.CerbosAdminService.purgeStoreRevisions`
-        - `google.rpc.Status`
-      pull: 1344
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.11.0
-      pull: 1355
-
 releases:
+  - version: 0.6.0
+    date: 2026-02-03
+
+    added:
+      - summary: Cerbos v0.51 updates
+        details: |-
+          - `cerbos.audit.v1.AccessLogEntry.requestContext`
+          - `cerbos.audit.v1.DecisionLogEntry.requestContext`
+          - `cerbos.audit.v1.RequestContext`
+          - `cerbos.engine.v1.OutputEntry.action`
+          - `cerbos.policy.v1.RolePolicy.version`
+          - `cerbos.request.v1.CheckResourcesRequest.requestContext`
+          - `cerbos.request.v1.DeletePolicyRequest`
+          - `cerbos.request.v1.PlanResourcesRequest.requestContext`
+          - `cerbos.request.v1.PurgeStoreRevisionsRequest`
+          - `cerbos.response.v1.DeletePolicyErrorDetails`
+          - `cerbos.response.v1.DeletePolicyResponse`
+          - `cerbos.response.v1.DisablePolicyErrorDetails`
+          - `cerbos.response.v1.IntegrityErrors`
+          - `cerbos.response.v1.PurgeStoreRevisionsResponse`
+          - `cerbos.svc.v1.CerbosAdminService.deletePolicy`
+          - `cerbos.svc.v1.CerbosAdminService.purgeStoreRevisions`
+          - `google.rpc.Status`
+        pull: 1344
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.11.0
+        pull: 1355
+
   - version: 0.5.1
     date: 2026-01-12
 

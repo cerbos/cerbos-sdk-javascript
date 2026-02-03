@@ -6,6 +6,10 @@ unreleased:
       to: 2.11.0
       pull: 1355
 
+    "@cerbos/api":
+      to: 0.6.0
+      pull: 1358
+
     "@opentelemetry/instrumentation":
       to: 0.211.0
       pull: 1352
