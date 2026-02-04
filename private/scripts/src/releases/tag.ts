@@ -60,11 +60,9 @@ try {
   prompt.close();
 }
 
-await Promise.all(
-  tagsToCreate.map(async (tag): Promise<void> => {
-    await git("tag", `--message=${tag}`, "--sign", tag, commitHash);
-  }),
-);
+for (const tag of tagsToCreate) {
+  await git("tag", `--message=${tag}`, "--sign", tag, commitHash);
+}
 
 // Note: An event will not be created when you push more than three tags at once.
 // https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#push
