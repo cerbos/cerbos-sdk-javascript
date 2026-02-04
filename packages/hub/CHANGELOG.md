@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Drop dependency on [opossum] to avoid requiring an [`EventEmitter`](https://nodejs.org/api/events.html#class-eventemitter) polyfill in browsers ([#1360](https://github.com/cerbos/cerbos-sdk-javascript/pull/1360))
+
 - Bump dependency on [@bufbuild/protobuf] to 2.11.0 ([#1355](https://github.com/cerbos/cerbos-sdk-javascript/pull/1355))
 
 ## [0.5.1] - 2026-01-12
