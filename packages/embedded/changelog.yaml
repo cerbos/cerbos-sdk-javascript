@@ -1,20 +1,24 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html)
-      pull: 1344
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.11.0
-      pull: 1355
-
-    "@cerbos/api":
-      to: 0.6.0
-      pull: 1358
-
 releases:
+  - version: 0.15.0
+    date: 2026-02-04
+
+    added:
+      - summary: Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html)
+        pull: 1344
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.11.0
+        pull: 1355
+
+      "@cerbos/api":
+        to: 0.6.0
+        pull: 1358
+
+      "@cerbos/core":
+        to: 0.28.0
+        pull: 1361
+
   - version: 0.14.2
     date: 2026-01-22
 

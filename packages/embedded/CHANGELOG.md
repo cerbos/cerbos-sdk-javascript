@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.15.0] - 2026-02-04
+
 ### Added
 
 - Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html) ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344))
@@ -11,6 +15,8 @@
 - Bump dependency on [@bufbuild/protobuf] to 2.11.0 ([#1355](https://github.com/cerbos/cerbos-sdk-javascript/pull/1355))
 
 - Bump dependency on [@cerbos/api] to 0.6.0 ([#1358](https://github.com/cerbos/cerbos-sdk-javascript/pull/1358))
+
+- Bump dependency on [@cerbos/core] to 0.28.0 ([#1361](https://github.com/cerbos/cerbos-sdk-javascript/pull/1361))
 
 ## [0.14.2] - 2026-01-22
 
@@ -315,7 +321,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.14.2...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.15.0...HEAD
+[0.15.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.14.2...@cerbos/embedded@0.15.0
 [0.14.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.14.1...@cerbos/embedded@0.14.2
 [0.14.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.14.0...@cerbos/embedded@0.14.1
 [0.14.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.13.5...@cerbos/embedded@0.14.0

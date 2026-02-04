@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.5.0] - 2026-02-04
+
 ### Added
 
 - Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html) ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344))
@@ -16,7 +20,11 @@
 
 - Bump dependency on [@cerbos/api] to 0.6.0 ([#1358](https://github.com/cerbos/cerbos-sdk-javascript/pull/1358))
 
-- Bump dependency on [@cerbos/embedded-server] to 0.4.0 ([#1359](https://github.com/cerbos/cerbos-sdk-javascript/pull/1359))
+- Bump dependency on [@cerbos/core] to 0.28.0 ([#1361](https://github.com/cerbos/cerbos-sdk-javascript/pull/1361))
+
+- Bump dependency on [@cerbos/embedded-server] to 0.4.1 ([#1359](https://github.com/cerbos/cerbos-sdk-javascript/pull/1359), [#1361](https://github.com/cerbos/cerbos-sdk-javascript/pull/1361))
+
+- Bump dependency on [@cerbos/hub] to 0.5.2 ([#1361](https://github.com/cerbos/cerbos-sdk-javascript/pull/1361))
 
 ## [0.4.0] - 2026-01-12
 
@@ -75,7 +83,8 @@
 
 - Client library for new embedded policy decision point servers ([#1312](https://github.com/cerbos/cerbos-sdk-javascript/pull/1312))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.4.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.5.0...HEAD
+[0.5.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.4.0...@cerbos/embedded-client@0.5.0
 [0.4.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.3.0...@cerbos/embedded-client@0.4.0
 [0.3.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.2.0...@cerbos/embedded-client@0.3.0
 [0.2.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.1.0...@cerbos/embedded-client@0.2.0

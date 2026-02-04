@@ -90,7 +90,7 @@ importers:
         specifier: ^0.6.0
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.1
+        specifier: ^0.28.0
         version: link:../core
       ulid:
         specifier: ^3.0.2
@@ -108,13 +108,13 @@ importers:
         specifier: ^0.6.0
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.1
+        specifier: ^0.28.0
         version: link:../core
       '@cerbos/embedded-server':
-        specifier: ^0.4.0
-        version: 0.4.0(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)
+        specifier: ^0.4.1
+        version: 0.4.1(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)
       '@cerbos/hub':
-        specifier: ^0.5.1
+        specifier: ^0.5.2
         version: link:../hub
       ulid:
         specifier: ^3.0.2
@@ -129,7 +129,7 @@ importers:
         specifier: ^0.6.0
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.1
+        specifier: ^0.28.0
         version: link:../core
       yaml:
         specifier: ^2.8.2
@@ -144,7 +144,7 @@ importers:
         specifier: ^0.6.0
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.1
+        specifier: ^0.28.0
         version: link:../core
       '@grpc/grpc-js':
         specifier: ^1.14.3
@@ -159,7 +159,7 @@ importers:
         specifier: ^0.6.0
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.1
+        specifier: ^0.28.0
         version: link:../core
       qs:
         specifier: ^6.14.1
@@ -175,7 +175,7 @@ importers:
         specifier: ^2.11.0
         version: 2.11.0
       '@cerbos/core':
-        specifier: ^0.27.1
+        specifier: ^0.28.0
         version: link:../core
       '@connectrpc/connect':
         specifier: ^2.1.1
@@ -199,7 +199,7 @@ importers:
         specifier: ^0.6.0
         version: link:../api
       '@cerbos/core':
-        specifier: ^0.27.1
+        specifier: ^0.28.0
         version: link:../core
       '@opentelemetry/api':
         specifier: ^1.9.0
@@ -214,7 +214,7 @@ importers:
   packages/react:
     dependencies:
       '@cerbos/core':
-        specifier: ^0.27.1
+        specifier: ^0.28.0
         version: link:../core
       react:
         specifier: '>=18.0.0'
@@ -296,8 +296,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/embedded-client
       '@cerbos/embedded-server':
-        specifier: 0.4.0
-        version: 0.4.0(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)
+        specifier: 0.4.1
+        version: 0.4.1(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)
       '@cerbos/files':
         specifier: workspace:*
         version: link:../../packages/files
@@ -558,8 +558,8 @@ packages:
     peerDependencies:
       '@bufbuild/protobuf': ^2.8.0
 
-  '@cerbos/embedded-server@0.4.0':
-    resolution: {integrity: sha512-jYe9R8zV5VTvl9tDLdisAHpq3pkyoY7AM4eEv71wlMsbzU5SJh4/VtBfZcx9oD0pSj/LljKab5Zpp1rftVShGg==}
+  '@cerbos/embedded-server@0.4.1':
+    resolution: {integrity: sha512-Zt/61V7oUTPsCivgT8Zz8iuHQYLF6cgfgC3Aub9KUzfBg+lhZB5SqqrA0LtT3aRZ9m2XGZxAJ6oSUY/2vjTIaQ==}
     engines: {node: '>= 20'}
     peerDependencies:
       '@bufbuild/protobuf': ^2.10.2
@@ -3340,7 +3340,7 @@ snapshots:
       '@bufbuild/cel': 0.4.0(@bufbuild/protobuf@2.11.0)
       '@bufbuild/protobuf': 2.11.0
 
-  '@cerbos/embedded-server@0.4.0(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)':
+  '@cerbos/embedded-server@0.4.1(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)':
     dependencies:
       '@bufbuild/protobuf': 2.11.0
       '@cerbos/api': link:packages/api

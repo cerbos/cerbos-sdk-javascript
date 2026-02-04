@@ -1,31 +1,39 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html)
-      pull: 1344
-
-    - summary: "[`OutputResult.action`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#action) property"
-      pulls: [1344, 1359]
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.11.0
-      pull: 1355
-
-    "@bufbuild/protovalidate":
-      to: 1.1.1
-      pull: 1355
-
-    "@cerbos/api":
-      to: 0.6.0
-      pull: 1358
-
-    "@cerbos/embedded-server":
-      to: 0.4.0
-      pull: 1359
-
 releases:
+  - version: 0.5.0
+    date: 2026-02-04
+
+    added:
+      - summary: Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html)
+        pull: 1344
+
+      - summary: "[`OutputResult.action`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#action) property"
+        pulls: [1344, 1359]
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.11.0
+        pull: 1355
+
+      "@bufbuild/protovalidate":
+        to: 1.1.1
+        pull: 1355
+
+      "@cerbos/api":
+        to: 0.6.0
+        pull: 1358
+
+      "@cerbos/core":
+        to: 0.28.0
+        pull: 1361
+
+      "@cerbos/embedded-server":
+        to: 0.4.1
+        pulls: [1359, 1361]
+
+      "@cerbos/hub":
+        to: 0.5.2
+        pull: 1361
+
   - version: 0.4.0
     date: 2026-01-12
 

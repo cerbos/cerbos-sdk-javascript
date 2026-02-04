@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/embedded-client",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "description": "Client library for interacting with embedded Cerbos policy decision points from server-side Node.js and browser-based applications",
   "repository": {
@@ -51,12 +51,12 @@
   "peerDependencies": {
     "@bufbuild/protobuf": "^2.11.0",
     "@cerbos/api": "^0.6.0",
-    "@cerbos/embedded-server": "^0.4.0"
+    "@cerbos/embedded-server": "^0.4.1"
   },
   "dependencies": {
     "@bufbuild/protovalidate": "^1.1.1",
-    "@cerbos/core": "^0.27.1",
-    "@cerbos/hub": "^0.5.1",
+    "@cerbos/core": "^0.28.0",
+    "@cerbos/hub": "^0.5.2",
     "ulid": "^3.0.2"
   },
   "publishConfig": {

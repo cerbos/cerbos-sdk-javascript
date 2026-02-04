@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.26.0] - 2026-02-04
+
 ### Added
 
 - [`Client.deletePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deletepolicy) and [`Client.deletePolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deletepolicies) methods to delete policies ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344))
@@ -33,6 +37,8 @@
 - Bump dependency on [@bufbuild/protobuf] to 2.11.0 ([#1355](https://github.com/cerbos/cerbos-sdk-javascript/pull/1355))
 
 - Bump dependency on [@cerbos/api] to 0.6.0 ([#1358](https://github.com/cerbos/cerbos-sdk-javascript/pull/1358))
+
+- Bump dependency on [@cerbos/core] to 0.28.0 ([#1361](https://github.com/cerbos/cerbos-sdk-javascript/pull/1361))
 
 ## [0.25.0] - 2026-01-22
 
@@ -466,7 +472,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.25.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.26.0...HEAD
+[0.26.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.25.0...@cerbos/http@0.26.0
 [0.25.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.2...@cerbos/http@0.25.0
 [0.24.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.1...@cerbos/http@0.24.2
 [0.24.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.0...@cerbos/http@0.24.1

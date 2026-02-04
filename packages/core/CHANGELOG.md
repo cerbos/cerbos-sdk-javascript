@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.28.0] - 2026-02-04
+
 ### Added
 
 - [`Client.deletePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deletepolicy) and [`Client.deletePolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deletepolicies) methods to delete policies ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344))
@@ -354,7 +358,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.27.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.28.0...HEAD
+[0.28.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.27.1...@cerbos/core@0.28.0
 [0.27.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.27.0...@cerbos/core@0.27.1
 [0.27.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.26.0...@cerbos/core@0.27.0
 [0.26.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.25.2...@cerbos/core@0.26.0

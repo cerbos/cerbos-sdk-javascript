@@ -2,11 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.5.2] - 2026-02-04
+
 ### Changed
 
 - Drop dependency on [opossum] to avoid requiring an [`EventEmitter`](https://nodejs.org/api/events.html#class-eventemitter) polyfill in browsers ([#1360](https://github.com/cerbos/cerbos-sdk-javascript/pull/1360))
 
 - Bump dependency on [@bufbuild/protobuf] to 2.11.0 ([#1355](https://github.com/cerbos/cerbos-sdk-javascript/pull/1355))
+
+- Bump dependency on [@cerbos/core] to 0.28.0 ([#1361](https://github.com/cerbos/cerbos-sdk-javascript/pull/1361))
 
 ## [0.5.1] - 2026-01-12
 
@@ -106,7 +112,8 @@
 
 - A client for interacting with policy stores in Cerbos Hub ([#1173](https://github.com/cerbos/cerbos-sdk-javascript/pull/1173), [#1191](https://github.com/cerbos/cerbos-sdk-javascript/pull/1191))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.2...HEAD
+[0.5.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.1...@cerbos/hub@0.5.2
 [0.5.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.0...@cerbos/hub@0.5.1
 [0.5.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.4.0...@cerbos/hub@0.5.0
 [0.4.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.3.0...@cerbos/hub@0.4.0

@@ -1,24 +1,28 @@
-unreleased:
-  type: minor
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.11.0
-      pull: 1355
-
-    "@cerbos/api":
-      to: 0.6.0
-      pull: 1358
-
-    "@opentelemetry/instrumentation":
-      to: 0.211.0
-      pull: 1352
-
-    "@opentelemetry/semantic-conventions":
-      to: 1.39.0
-      pull: 1352
-
 releases:
+  - version: 0.9.0
+    date: 2026-02-04
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.11.0
+        pull: 1355
+
+      "@cerbos/api":
+        to: 0.6.0
+        pull: 1358
+
+      "@cerbos/core":
+        to: 0.28.0
+        pull: 1361
+
+      "@opentelemetry/instrumentation":
+        to: 0.211.0
+        pull: 1352
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.39.0
+        pull: 1352
+
   - version: 0.8.2
     date: 2026-01-22
 
