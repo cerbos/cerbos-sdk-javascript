@@ -36,6 +36,7 @@ jobs:
           if-no-files-found: error
 
   publish:
+    name: Publish docs to GitHub Pages
     needs: generate
     runs-on: ubuntu-latest
     permissions:
