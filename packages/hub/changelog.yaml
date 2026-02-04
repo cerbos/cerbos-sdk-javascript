@@ -1,6 +1,10 @@
 unreleased:
   type: patch
 
+  changed:
+    - summary: Drop dependency on [opossum] to avoid requiring an [`EventEmitter`](https://nodejs.org/api/events.html#class-eventemitter) polyfill in browsers
+      pull: 1360
+
   bumped:
     "@bufbuild/protobuf":
       to: 2.11.0
