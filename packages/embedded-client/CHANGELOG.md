@@ -22,7 +22,7 @@ No notable changes.
 
 - Bump dependency on [@cerbos/core] to 0.28.0 ([#1361](https://github.com/cerbos/cerbos-sdk-javascript/pull/1361))
 
-- Bump dependency on [@cerbos/embedded-server] to 0.4.0 ([#1359](https://github.com/cerbos/cerbos-sdk-javascript/pull/1359))
+- Bump dependency on [@cerbos/embedded-server] to 0.4.1 ([#1359](https://github.com/cerbos/cerbos-sdk-javascript/pull/1359), [#1361](https://github.com/cerbos/cerbos-sdk-javascript/pull/1361))
 
 - Bump dependency on [@cerbos/hub] to 0.5.2 ([#1361](https://github.com/cerbos/cerbos-sdk-javascript/pull/1361))
 

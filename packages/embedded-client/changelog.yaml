@@ -27,8 +27,8 @@ releases:
         pull: 1361
 
       "@cerbos/embedded-server":
-        to: 0.4.0
-        pull: 1359
+        to: 0.4.1
+        pulls: [1359, 1361]
 
       "@cerbos/hub":
         to: 0.5.2
