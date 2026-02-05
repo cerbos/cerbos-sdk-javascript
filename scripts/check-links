@@ -15,6 +15,7 @@ check() {
     --interactive \
     --rm \
     --env GITHUB_TOKEN \
+    --env RUST_BACKTRACE=full \
     --mount "type=bind,source=${PWD},target=/input" \
     --workdir /input \
     lycheeverse/lychee:latest-alpine \
