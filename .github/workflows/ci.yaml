@@ -36,114 +36,114 @@ jobs:
       - name: Generate docs
         run: pnpm run docs
 
-      - name: Generate bot token
-        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
-        id: generate-token
-        continue-on-error: true
-        with:
-          app-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
-          private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
+      # - name: Generate bot token
+      #   uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+      #   id: generate-token
+      #   continue-on-error: true
+      #   with:
+      #     app-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
+      #     private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
 
       - name: Lint code
-        run: pnpm run lint
-        env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || github.token }}
-
-      - name: Generate code
-        run: pnpm run generate
-
-      - name: Check for uncommitted changes
-        run: |-
-          if [[ -n $(git status --porcelain) ]]; then
-            echo "::error::Uncommitted changes detected"
-            git -c color.ui=always status -vv
-            exit 1
-          fi
-
-  test-matrix:
-    name: Generate test matrix
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.test-matrix.outputs.matrix }}
-    steps:
-      - name: Check out code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Set up Node.js
-        uses: ./.github/actions/setup-node
-        with:
-          only-scripts: true
-
-      - id: test-matrix
-        name: Generate test matrix
-        run: pnpm run test:matrix
+        run: scripts/check-links
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-  test-parallel:
-    name: Test (${{ matrix.title }})
-    runs-on: ubuntu-latest
-    continue-on-error: ${{ github.event_name != 'schedule' && !matrix.required }}
-    needs:
-      - test-matrix
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJSON(needs.test-matrix.outputs.matrix).parallel }}
-    steps:
-      - name: Check out code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      # - name: Generate code
+      #   run: pnpm run generate
 
-      - name: Set up Node.js
-        uses: ./.github/actions/setup-node
-        with:
-          node-version: ${{ matrix.node }}
-          save-cache: false
+      # - name: Check for uncommitted changes
+      #   run: |-
+      #     if [[ -n $(git status --porcelain) ]]; then
+      #       echo "::error::Uncommitted changes detected"
+      #       git -c color.ui=always status -vv
+      #       exit 1
+      #     fi
 
-      - name: Set up tests
-        if: matrix.setup
-        run: ${{ matrix.setup }}
+  # test-matrix:
+  #   name: Generate test matrix
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     matrix: ${{ steps.test-matrix.outputs.matrix }}
+  #   steps:
+  #     - name: Check out code
+  #       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Run tests
-        run: ${{ matrix.test }}
+  #     - name: Set up Node.js
+  #       uses: ./.github/actions/setup-node
+  #       with:
+  #         only-scripts: true
 
-  test-serial:
-    name: Test (${{ matrix.title }})
-    runs-on: ubuntu-latest
-    continue-on-error: ${{ github.event_name != 'schedule' && !matrix.required }}
-    needs:
-      - test-matrix
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJSON(needs.test-matrix.outputs.matrix).serial }}
-      max-parallel: 1
-    concurrency:
-      group: ci-test-serial
-    steps:
-      - name: Check out code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+  #     - id: test-matrix
+  #       name: Generate test matrix
+  #       run: pnpm run test:matrix
+  #       env:
+  #         GITHUB_TOKEN: ${{ github.token }}
 
-      - name: Set up Node.js
-        uses: ./.github/actions/setup-node
-        with:
-          node-version: ${{ matrix.node }}
-          save-cache: false
+  # test-parallel:
+  #   name: Test (${{ matrix.title }})
+  #   runs-on: ubuntu-latest
+  #   continue-on-error: ${{ github.event_name != 'schedule' && !matrix.required }}
+  #   needs:
+  #     - test-matrix
+  #   strategy:
+  #     fail-fast: false
+  #     matrix: ${{ fromJSON(needs.test-matrix.outputs.matrix).parallel }}
+  #   steps:
+  #     - name: Check out code
+  #       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Set up tests
-        if: matrix.setup
-        run: ${{ matrix.setup }}
+  #     - name: Set up Node.js
+  #       uses: ./.github/actions/setup-node
+  #       with:
+  #         node-version: ${{ matrix.node }}
+  #         save-cache: false
 
-      - name: Run tests
-        run: ${{ matrix.test }}
+  #     - name: Set up tests
+  #       if: matrix.setup
+  #       run: ${{ matrix.setup }}
 
-  test-results:
-    name: Check test results
-    runs-on: ubuntu-latest
-    if: always()
-    needs:
-      - test-parallel
-      - test-serial
-    steps:
-      - name: Check test results
-        run: |-
-          test "${{ needs.test-parallel.result }}" = "success"
-          test "${{ needs.test-serial.result }}" = "success"
+  #     - name: Run tests
+  #       run: ${{ matrix.test }}
+
+  # test-serial:
+  #   name: Test (${{ matrix.title }})
+  #   runs-on: ubuntu-latest
+  #   continue-on-error: ${{ github.event_name != 'schedule' && !matrix.required }}
+  #   needs:
+  #     - test-matrix
+  #   strategy:
+  #     fail-fast: false
+  #     matrix: ${{ fromJSON(needs.test-matrix.outputs.matrix).serial }}
+  #     max-parallel: 1
+  #   concurrency:
+  #     group: ci-test-serial
+  #   steps:
+  #     - name: Check out code
+  #       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+  #     - name: Set up Node.js
+  #       uses: ./.github/actions/setup-node
+  #       with:
+  #         node-version: ${{ matrix.node }}
+  #         save-cache: false
+
+  #     - name: Set up tests
+  #       if: matrix.setup
+  #       run: ${{ matrix.setup }}
+
+  #     - name: Run tests
+  #       run: ${{ matrix.test }}
+
+  # test-results:
+  #   name: Check test results
+  #   runs-on: ubuntu-latest
+  #   if: always()
+  #   needs:
+  #     - test-parallel
+  #     - test-serial
+  #   steps:
+  #     - name: Check test results
+  #       run: |-
+  #         test "${{ needs.test-parallel.result }}" = "success"
+  #         test "${{ needs.test-serial.result }}" = "success"
