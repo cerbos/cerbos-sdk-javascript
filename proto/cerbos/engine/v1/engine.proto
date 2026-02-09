@@ -210,7 +210,6 @@ message Resource {
     (buf.validate.field).map.keys = {
       string: {min_len: 1}
     },
-    (buf.validate.field).map.values.required = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "Kay-value pairs of contextual data about this resource that should be used during policy evaluation."
       example: "{\"owner\": \"bugs_bunny\"}"
@@ -270,7 +269,6 @@ message Principal {
     (buf.validate.field).map.keys = {
       string: {min_len: 1}
     },
-    (buf.validate.field).map.values.required = true,
     (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "Key-value pairs of contextual data about this principal that should be used during policy evaluation."
       example: "{\"beta_tester\": true}"
@@ -355,6 +353,16 @@ message Trace {
 
   repeated Component components = 1;
   Event event = 2;
+}
+
+message TraceEntry {
+  repeated uint32 component_indices = 1;
+  Trace.Event event = 2;
+}
+
+message TraceBatch {
+  repeated Trace.Component definitions = 1;
+  repeated TraceEntry entries = 2;
 }
 
 // Data from the request, provided to expressions as the top-level `request` variable.

@@ -71,6 +71,21 @@ export interface GetOperationsResponse {
   operations: Operation[];
 }
 
+export interface GetDependenciesRequest {
+  startTime: Date | undefined;
+  endTime: Date | undefined;
+}
+
+export interface DependenciesResponse {
+  dependencies: Dependency[];
+}
+
+export interface Dependency {
+  parent: string;
+  child: string;
+  callCount: bigint;
+}
+
 function createBaseGetTraceRequest(): GetTraceRequest {
   return {
     traceId: "",
@@ -771,6 +786,216 @@ export const GetOperationsResponse: MessageFns<GetOperationsResponse> = {
   },
 };
 
+function createBaseGetDependenciesRequest(): GetDependenciesRequest {
+  return { startTime: undefined, endTime: undefined };
+}
+
+export const GetDependenciesRequest: MessageFns<GetDependenciesRequest> = {
+  encode(
+    message: GetDependenciesRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.startTime !== undefined) {
+      Timestamp.encode(
+        toTimestamp(message.startTime),
+        writer.uint32(10).fork(),
+      ).join();
+    }
+    if (message.endTime !== undefined) {
+      Timestamp.encode(
+        toTimestamp(message.endTime),
+        writer.uint32(18).fork(),
+      ).join();
+    }
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): GetDependenciesRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetDependenciesRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.startTime = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32()),
+          );
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.endTime = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32()),
+          );
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  toJSON(message: GetDependenciesRequest): unknown {
+    const obj: any = {};
+    if (message.startTime !== undefined) {
+      obj.startTime = message.startTime.toISOString();
+    }
+    if (message.endTime !== undefined) {
+      obj.endTime = message.endTime.toISOString();
+    }
+    return obj;
+  },
+};
+
+function createBaseDependenciesResponse(): DependenciesResponse {
+  return { dependencies: [] };
+}
+
+export const DependenciesResponse: MessageFns<DependenciesResponse> = {
+  encode(
+    message: DependenciesResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    for (const v of message.dependencies) {
+      Dependency.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): DependenciesResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDependenciesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.dependencies.push(Dependency.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  toJSON(message: DependenciesResponse): unknown {
+    const obj: any = {};
+    if (message.dependencies?.length) {
+      obj.dependencies = message.dependencies.map((e) => Dependency.toJSON(e));
+    }
+    return obj;
+  },
+};
+
+function createBaseDependency(): Dependency {
+  return { parent: "", child: "", callCount: 0n };
+}
+
+export const Dependency: MessageFns<Dependency> = {
+  encode(
+    message: Dependency,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.parent !== "") {
+      writer.uint32(10).string(message.parent);
+    }
+    if (message.child !== "") {
+      writer.uint32(18).string(message.child);
+    }
+    if (message.callCount !== 0n) {
+      if (BigInt.asUintN(64, message.callCount) !== message.callCount) {
+        throw new globalThis.Error(
+          "value provided for field message.callCount of type uint64 too large",
+        );
+      }
+      writer.uint32(24).uint64(message.callCount);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): Dependency {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDependency();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.parent = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.child = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.callCount = reader.uint64() as bigint;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  toJSON(message: Dependency): unknown {
+    const obj: any = {};
+    if (message.parent !== "") {
+      obj.parent = message.parent;
+    }
+    if (message.child !== "") {
+      obj.child = message.child;
+    }
+    if (message.callCount !== 0n) {
+      obj.callCount = message.callCount.toString();
+    }
+    return obj;
+  },
+};
+
 export type QueryServiceService = typeof QueryServiceService;
 export const QueryServiceService = {
   getTrace: {
@@ -825,6 +1050,19 @@ export const QueryServiceService = {
     responseDeserialize: (value: Buffer): GetOperationsResponse =>
       GetOperationsResponse.decode(value),
   },
+  getDependencies: {
+    path: "/jaeger.api_v3.QueryService/GetDependencies",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: GetDependenciesRequest): Buffer =>
+      Buffer.from(GetDependenciesRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): GetDependenciesRequest =>
+      GetDependenciesRequest.decode(value),
+    responseSerialize: (value: DependenciesResponse): Buffer =>
+      Buffer.from(DependenciesResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): DependenciesResponse =>
+      DependenciesResponse.decode(value),
+  },
 } as const;
 
 export interface QueryServiceServer extends UntypedServiceImplementation {
@@ -832,6 +1070,10 @@ export interface QueryServiceServer extends UntypedServiceImplementation {
   findTraces: handleServerStreamingCall<FindTracesRequest, TracesData>;
   getServices: handleUnaryCall<GetServicesRequest, GetServicesResponse>;
   getOperations: handleUnaryCall<GetOperationsRequest, GetOperationsResponse>;
+  getDependencies: handleUnaryCall<
+    GetDependenciesRequest,
+    DependenciesResponse
+  >;
 }
 
 export interface QueryServiceClient extends Client {
@@ -899,6 +1141,30 @@ export interface QueryServiceClient extends Client {
     callback: (
       error: ServiceError | null,
       response: GetOperationsResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  getDependencies(
+    request: GetDependenciesRequest,
+    callback: (
+      error: ServiceError | null,
+      response: DependenciesResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  getDependencies(
+    request: GetDependenciesRequest,
+    metadata: Metadata,
+    callback: (
+      error: ServiceError | null,
+      response: DependenciesResponse,
+    ) => void,
+  ): ClientUnaryCall;
+  getDependencies(
+    request: GetDependenciesRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (
+      error: ServiceError | null,
+      response: DependenciesResponse,
     ) => void,
   ): ClientUnaryCall;
 }
