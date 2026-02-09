@@ -37,7 +37,7 @@
     "@ungap/with-resolvers": "0.1.0",
     "adm-zip": "0.5.16",
     "jose": "6.1.3",
-    "jsdom": "27.4.0",
+    "jsdom": "28.0.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "semver": "7.7.3",
