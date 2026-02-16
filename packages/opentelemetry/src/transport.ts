@@ -15,10 +15,9 @@ import {
   trace,
 } from "@opentelemetry/api";
 import {
-  ATTR_RPC_GRPC_STATUS_CODE,
   ATTR_RPC_METHOD,
-  ATTR_RPC_SERVICE,
-  ATTR_RPC_SYSTEM,
+  ATTR_RPC_RESPONSE_STATUS_CODE,
+  ATTR_RPC_SYSTEM_NAME,
 } from "@opentelemetry/semantic-conventions/incubating";
 
 import { NotOK, Status } from "@cerbos/core";
@@ -111,9 +110,8 @@ export class Transport implements CoreTransport {
     const status: SpanStatus = { code: SpanStatusCode.UNSET };
 
     const attributes: Attributes = {
-      [ATTR_RPC_SYSTEM]: "grpc",
-      [ATTR_RPC_SERVICE]: method.parent.typeName,
-      [ATTR_RPC_METHOD]: method.name,
+      [ATTR_RPC_SYSTEM_NAME]: "grpc",
+      [ATTR_RPC_METHOD]: `${method.parent.typeName}/${method.name}`,
     };
 
     const span = this.tracer.startSpan(methodName(method), {
@@ -139,7 +137,7 @@ export class Transport implements CoreTransport {
     return {
       call: context.bind(activeContext, fn),
       succeeded: (): void => {
-        attributes[ATTR_RPC_GRPC_STATUS_CODE] = Status.OK;
+        attributes[ATTR_RPC_RESPONSE_STATUS_CODE] = Status[Status.OK];
         finish();
       },
       failed: (error: unknown): void => {
@@ -153,7 +151,7 @@ export class Transport implements CoreTransport {
             error instanceof AbstractErrorResponse ||
             error instanceof NotOK
           ) {
-            attributes[ATTR_RPC_GRPC_STATUS_CODE] = error.code;
+            attributes[ATTR_RPC_RESPONSE_STATUS_CODE] = Status[error.code];
           }
         }
 

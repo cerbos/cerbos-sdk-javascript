@@ -12,8 +12,10 @@ import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
 import {
   ATTR_RPC_GRPC_STATUS_CODE,
   ATTR_RPC_METHOD,
+  ATTR_RPC_RESPONSE_STATUS_CODE,
   ATTR_RPC_SERVICE,
   ATTR_RPC_SYSTEM,
+  ATTR_RPC_SYSTEM_NAME,
 } from "@opentelemetry/semantic-conventions/incubating";
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 
@@ -124,10 +126,9 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
             );
 
             const attributes: ExpectedAttributes = {
-              [ATTR_RPC_SYSTEM]: "grpc",
-              [ATTR_RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
-              [ATTR_RPC_METHOD]: "CheckResources",
-              [ATTR_RPC_GRPC_STATUS_CODE]: 0,
+              service: "cerbos.svc.v1.CerbosService",
+              method: "CheckResources",
+              status: Status.OK,
             };
 
             expect(result).toEqual({ value: false });
@@ -135,13 +136,17 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
             expect(span).toMatchObject({
               name: "cerbos.svc.v1.CerbosService/CheckResources",
               kind: SpanKind.CLIENT,
-              attributes,
+              attributes: clientAttributes(attributes),
               status: {
                 code: SpanStatusCode.UNSET,
               },
             } satisfies Partial<ReadableSpan>);
 
-            await expectMetrics(metricReader, attributes, span.duration);
+            await expectMetrics(
+              metricReader,
+              clientAttributes(attributes),
+              span.duration,
+            );
 
             await expectServerSpan(span, attributes);
           });
@@ -166,10 +171,9 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
               );
 
               const attributes: ExpectedAttributes = {
-                [ATTR_RPC_SYSTEM]: "grpc",
-                [ATTR_RPC_SERVICE]: "cerbos.svc.v1.CerbosService",
-                [ATTR_RPC_METHOD]: "CheckResources",
-                [ATTR_RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
+                service: "cerbos.svc.v1.CerbosService",
+                method: "CheckResources",
+                status: Status.INVALID_ARGUMENT,
                 "cerbos.error": invalidArgumentDetails(cerbosVersion),
               };
 
@@ -184,13 +188,17 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
               expect(span).toMatchObject({
                 name: "cerbos.svc.v1.CerbosService/CheckResources",
                 kind: SpanKind.CLIENT,
-                attributes,
+                attributes: clientAttributes(attributes),
                 status: {
                   code: SpanStatusCode.ERROR,
                 },
               } satisfies Partial<ReadableSpan>);
 
-              await expectMetrics(metricReader, attributes, span.duration);
+              await expectMetrics(
+                metricReader,
+                clientAttributes(attributes),
+                span.duration,
+              );
 
               await expectServerSpan(span, attributes);
             });
@@ -248,10 +256,9 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
                 );
 
                 const attributes: ExpectedAttributes = {
-                  [ATTR_RPC_SYSTEM]: "grpc",
-                  [ATTR_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
-                  [ATTR_RPC_METHOD]: "ListAuditLogEntries",
-                  [ATTR_RPC_GRPC_STATUS_CODE]: 0,
+                  service: "cerbos.svc.v1.CerbosAdminService",
+                  method: "ListAuditLogEntries",
+                  status: Status.OK,
                 };
 
                 expect(result).toEqual({ value: entry });
@@ -259,13 +266,17 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
                 expect(span).toMatchObject({
                   name: "cerbos.svc.v1.CerbosAdminService/ListAuditLogEntries",
                   kind: SpanKind.CLIENT,
-                  attributes,
+                  attributes: clientAttributes(attributes),
                   status: {
                     code: SpanStatusCode.UNSET,
                   },
                 } satisfies Partial<ReadableSpan>);
 
-                await expectMetrics(metricReader, attributes, span.duration);
+                await expectMetrics(
+                  metricReader,
+                  clientAttributes(attributes),
+                  span.duration,
+                );
 
                 await expectServerSpan(span, attributes);
               });
@@ -277,10 +288,9 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
                 );
 
                 const attributes: ExpectedAttributes = {
-                  [ATTR_RPC_SYSTEM]: "grpc",
-                  [ATTR_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
-                  [ATTR_RPC_METHOD]: "ListAuditLogEntries",
-                  [ATTR_RPC_GRPC_STATUS_CODE]: Status.INVALID_ARGUMENT,
+                  service: "cerbos.svc.v1.CerbosAdminService",
+                  method: "ListAuditLogEntries",
+                  status: Status.INVALID_ARGUMENT,
                   "cerbos.error": invalidArgumentDetails(cerbosVersion),
                 };
 
@@ -295,13 +305,17 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
                 expect(span).toMatchObject({
                   name: "cerbos.svc.v1.CerbosAdminService/ListAuditLogEntries",
                   kind: SpanKind.CLIENT,
-                  attributes,
+                  attributes: clientAttributes(attributes),
                   status: {
                     code: SpanStatusCode.ERROR,
                   },
                 } satisfies Partial<ReadableSpan>);
 
-                await expectMetrics(metricReader, attributes, span.duration);
+                await expectMetrics(
+                  metricReader,
+                  clientAttributes(attributes),
+                  span.duration,
+                );
 
                 await expectServerSpan(span, attributes);
               });
@@ -333,10 +347,9 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
                 );
 
                 const attributes = {
-                  [ATTR_RPC_SYSTEM]: "grpc",
-                  [ATTR_RPC_SERVICE]: "cerbos.svc.v1.CerbosAdminService",
-                  [ATTR_RPC_METHOD]: "ListAuditLogEntries",
-                  [ATTR_RPC_GRPC_STATUS_CODE]: Status.CANCELLED,
+                  service: "cerbos.svc.v1.CerbosAdminService",
+                  method: "ListAuditLogEntries",
+                  status: Status.CANCELLED,
                   "cerbos.error": expect.stringContaining("Aborted"),
                 } satisfies Attributes;
 
@@ -345,17 +358,21 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
                 expect(span).toMatchObject({
                   name: "cerbos.svc.v1.CerbosAdminService/ListAuditLogEntries",
                   kind: SpanKind.CLIENT,
-                  attributes,
+                  attributes: clientAttributes(attributes),
                   status: {
                     code: SpanStatusCode.ERROR,
                   },
                 } satisfies Partial<ReadableSpan>);
 
-                await expectMetrics(metricReader, attributes, span.duration);
+                await expectMetrics(
+                  metricReader,
+                  clientAttributes(attributes),
+                  span.duration,
+                );
 
                 await expectServerSpan(span, {
                   ...attributes,
-                  [ATTR_RPC_GRPC_STATUS_CODE]: Status.OK, // Although the call is aborted after returning early from for-await on the client, it completes successfully on the server
+                  status: Status.OK, // Although the call is aborted after returning early from for-await on the client, it completes successfully on the server
                 });
               });
             },
@@ -385,44 +402,9 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
             expect.objectContaining({
               name: clientSpan.name,
               kind: SpanKindProto.SPAN_KIND_SERVER,
-              attributes: expect.arrayContaining([
-                {
-                  key: ATTR_RPC_SYSTEM, // eslint-disable-line @typescript-eslint/no-deprecated
-                  value: {
-                    value: {
-                      $case: "stringValue",
-                      stringValue: attributes[ATTR_RPC_SYSTEM],
-                    },
-                  },
-                },
-                {
-                  key: ATTR_RPC_SERVICE, // eslint-disable-line @typescript-eslint/no-deprecated
-                  value: {
-                    value: {
-                      $case: "stringValue",
-                      stringValue: attributes[ATTR_RPC_SERVICE],
-                    },
-                  },
-                },
-                {
-                  key: ATTR_RPC_METHOD,
-                  value: {
-                    value: {
-                      $case: "stringValue",
-                      stringValue: attributes[ATTR_RPC_METHOD],
-                    },
-                  },
-                },
-                {
-                  key: ATTR_RPC_GRPC_STATUS_CODE, // eslint-disable-line @typescript-eslint/no-deprecated
-                  value: {
-                    value: {
-                      $case: "intValue",
-                      intValue: BigInt(attributes[ATTR_RPC_GRPC_STATUS_CODE]),
-                    },
-                  },
-                },
-              ] satisfies KeyValueProto[]),
+              attributes: expect.arrayContaining(
+                serverAttributes(cerbosVersion, attributes),
+              ),
             } satisfies Partial<SpanProto>),
           );
         }
@@ -431,10 +413,118 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
   });
 }
 
-interface ExpectedAttributes extends Attributes {
-  [ATTR_RPC_SYSTEM]: string;
-  [ATTR_RPC_SERVICE]: string;
-  [ATTR_RPC_METHOD]: string;
-  [ATTR_RPC_GRPC_STATUS_CODE]: Status;
+interface ExpectedAttributes {
+  service: string;
+  method: string;
+  status: Status;
   "cerbos.error"?: string;
 }
+
+function clientAttributes({
+  service,
+  method,
+  status,
+  ...rest
+}: ExpectedAttributes): Attributes {
+  return {
+    [ATTR_RPC_SYSTEM_NAME]: "grpc",
+    [ATTR_RPC_METHOD]: `${service}/${method}`,
+    [ATTR_RPC_RESPONSE_STATUS_CODE]: Status[status],
+    ...rest,
+  };
+}
+
+function serverAttributes(
+  cerbosVersion: string,
+  { service, method, status }: ExpectedAttributes,
+): KeyValueProto[] {
+  return versionIsAtLeast("0.52.0", cerbosVersion)
+    ? [
+        {
+          key: ATTR_RPC_SYSTEM_NAME,
+          value: {
+            value: {
+              $case: "stringValue",
+              stringValue: "grpc",
+            },
+          },
+        },
+        {
+          key: ATTR_RPC_METHOD,
+          value: {
+            value: {
+              $case: "stringValue",
+              stringValue: `${service}/${method}`,
+            },
+          },
+        },
+        {
+          key: ATTR_RPC_RESPONSE_STATUS_CODE,
+          value: {
+            value: {
+              $case: "stringValue",
+              stringValue: serverStatus[status],
+            },
+          },
+        },
+      ]
+    : [
+        {
+          key: ATTR_RPC_SYSTEM, // eslint-disable-line @typescript-eslint/no-deprecated
+          value: {
+            value: {
+              $case: "stringValue",
+              stringValue: "grpc",
+            },
+          },
+        },
+        {
+          key: ATTR_RPC_SERVICE, // eslint-disable-line @typescript-eslint/no-deprecated
+          value: {
+            value: {
+              $case: "stringValue",
+              stringValue: service,
+            },
+          },
+        },
+        {
+          key: ATTR_RPC_METHOD,
+          value: {
+            value: {
+              $case: "stringValue",
+              stringValue: method,
+            },
+          },
+        },
+        {
+          key: ATTR_RPC_GRPC_STATUS_CODE, // eslint-disable-line @typescript-eslint/no-deprecated
+          value: {
+            value: {
+              $case: "intValue",
+              intValue: BigInt(status),
+            },
+          },
+        },
+      ];
+}
+
+// https://github.com/open-telemetry/opentelemetry-go-contrib/issues/8543
+const serverStatus: Record<Status, string> = {
+  [Status.ABORTED]: "Aborted",
+  [Status.ALREADY_EXISTS]: "AlreadyExists",
+  [Status.CANCELLED]: "Cancelled",
+  [Status.DATA_LOSS]: "DataLoss",
+  [Status.DEADLINE_EXCEEDED]: "DeadlineExceeded",
+  [Status.FAILED_PRECONDITION]: "FailedPrecondition",
+  [Status.INTERNAL]: "Internal",
+  [Status.INVALID_ARGUMENT]: "InvalidArgument",
+  [Status.NOT_FOUND]: "NotFound",
+  [Status.OK]: "OK",
+  [Status.OUT_OF_RANGE]: "OutOfRange",
+  [Status.PERMISSION_DENIED]: "PermissionDenied",
+  [Status.RESOURCE_EXHAUSTED]: "ResourceExhausted",
+  [Status.UNAUTHENTICATED]: "Unauthenticated",
+  [Status.UNAVAILABLE]: "Unavailable",
+  [Status.UNIMPLEMENTED]: "Unimplemented",
+  [Status.UNKNOWN]: "Unknown",
+};
