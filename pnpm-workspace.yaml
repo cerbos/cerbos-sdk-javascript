@@ -15,3 +15,5 @@ minimumReleaseAgeExclude:
   - react
   - react-dom
   - scheduler
+  # Renovate security update: qs@6.14.2
+  - qs@6.14.2
