@@ -1,10 +1,10 @@
 {
   "name": "@cerbos/sdk-javascript",
   "private": true,
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@10.29.2",
   "engines": {
-    "node": "25.6.0",
-    "pnpm": "10.28.2"
+    "node": "25.6.1",
+    "pnpm": "10.29.2"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
@@ -55,8 +55,8 @@
     "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@tsconfig/node20": "20.1.9",
     "@tsconfig/strictest": "2.0.8",
-    "@types/node": "20.19.31",
-    "@types/web": "0.0.327",
+    "@types/node": "20.19.33",
+    "@types/web": "0.0.331",
     "concurrently": "9.2.1",
     "depcheck": "1.4.7",
     "eslint": "9.39.2",

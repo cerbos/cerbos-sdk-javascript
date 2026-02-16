@@ -32,7 +32,7 @@
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "@types/adm-zip": "0.5.7",
-    "@types/react": "19.2.10",
+    "@types/react": "19.2.13",
     "@types/semver": "7.7.1",
     "@ungap/with-resolvers": "0.1.0",
     "adm-zip": "0.5.16",
@@ -40,7 +40,7 @@
     "jsdom": "28.0.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "semver": "7.7.3",
+    "semver": "7.7.4",
     "vitest": "4.0.18"
   }
 }

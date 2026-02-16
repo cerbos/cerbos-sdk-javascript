@@ -55,7 +55,7 @@
     "use-deep-compare-effect": "^1.8.1"
   },
   "devDependencies": {
-    "@types/react": "19.2.10"
+    "@types/react": "19.2.13"
   },
   "publishConfig": {
     "access": "public",
