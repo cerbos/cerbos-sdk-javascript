@@ -12,6 +12,8 @@
   - `rpc.method` is now the fully-qualified name (`cerbos.svc.v1.CerbosService/CheckResources` instead of `CheckResources`); and
   - the numeric `rpc.grpc.status_code` is replaced by the string `rpc.response.status_code` (`INVALID_ARGUMENT` instead of `3`).
 
+- Bump dependency on [@opentelemetry/instrumentation] to 0.212.0 ([#1376](https://github.com/cerbos/cerbos-sdk-javascript/pull/1376))
+
 ## [0.9.0] - 2026-02-04
 
 ### Changed
