@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Drop dependency on [qs] ([#1377](https://github.com/cerbos/cerbos-sdk-javascript/pull/1377))
 
 ## [0.26.0] - 2026-02-04
 
