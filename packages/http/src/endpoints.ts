@@ -1,11 +1,12 @@
 import type {
   DescMessage,
   DescService,
+  JsonObject,
+  JsonValue,
   MessageShape,
   MessageValidType,
 } from "@bufbuild/protobuf";
 import { toJson, toJsonString } from "@bufbuild/protobuf";
-import { stringify as queryStringify } from "qs";
 
 import type { ListAuditLogEntriesRequestSchema } from "@cerbos/api/cerbos/request/v1/request_pb";
 import {
@@ -207,8 +208,55 @@ function toQueryString<I extends DescMessage>(
   schema: I,
   request: MessageValidType<I>,
 ): string {
-  return queryStringify(toJson(schema, request as MessageShape<I>), {
-    allowDots: true,
-    arrayFormat: "repeat",
-  });
+  return queryStringify(toJson(schema, request as MessageShape<I>));
+}
+
+function queryStringify(value: JsonValue, key = ""): string {
+  switch (typeof value) {
+    case "boolean":
+
+    case "number":
+
+    case "string":
+      return `${key}=${encodeURIComponent(String(value))}`;
+
+    default: {
+      if (value === null) {
+        return `${key}=null`;
+      }
+
+      let stringified = "";
+
+      for (const [subkey, subvalue] of entries(key, value)) {
+        if (stringified) {
+          stringified += "&";
+        }
+
+        stringified += queryStringify(subvalue, subkey);
+      }
+
+      return stringified;
+    }
+  }
+}
+
+function* entries(
+  key: string,
+  object: JsonValue[] | JsonObject,
+): Generator<[string, JsonValue], void, undefined> {
+  if (Array.isArray(object)) {
+    for (const value of object) {
+      yield [key, value];
+    }
+
+    return;
+  }
+
+  if (key) {
+    key += ".";
+  }
+
+  for (const [subkey, value] of Object.entries(object)) {
+    yield [`${key}${subkey}`, value];
+  }
 }
