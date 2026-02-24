@@ -17,7 +17,7 @@ check() {
     --env GITHUB_TOKEN \
     --mount "type=bind,source=${PWD},target=/input" \
     --workdir /input \
-    lycheeverse/lychee:0.22.0-alpine \
+    lycheeverse/lychee:latest-alpine \
     "${excludes[@]}" \
     --include-fragments \
     --max-concurrency 8 \
@@ -27,6 +27,8 @@ check() {
 }
 
 git_commit=$(git rev-parse HEAD)
+
+docker pull lycheeverse/lychee:latest-alpine
 
 check \
   --root-dir /input \
