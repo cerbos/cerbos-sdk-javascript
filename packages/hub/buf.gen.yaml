@@ -17,6 +17,7 @@ plugins:
   - local: node_modules/.bin/protoc-gen-es
     out: packages/hub/src/protobuf
     opt:
-      - target=ts
+      - elide_plugin_version=true
       - import_extension=js
+      - target=ts
       - valid_types=protovalidate_required

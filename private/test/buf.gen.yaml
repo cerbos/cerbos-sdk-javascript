@@ -34,5 +34,6 @@ plugins:
       - cerbos.cloud.apikey.v1.ApiKeyService
       - cerbos.cloud.store.v1.CerbosStoreService
     opt:
-      - target=ts
+      - elide_plugin_version=true
       - import_extension=js
+      - target=ts
