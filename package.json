@@ -59,7 +59,7 @@
     "@types/web": "0.0.336",
     "concurrently": "9.2.1",
     "depcheck": "1.4.7",
-    "eslint": "9.39.2",
+    "eslint": "10.0.2",
     "prettier": "3.8.1",
     "prettier-plugin-pkg": "0.21.2",
     "ts-proto": "2.11.2",
