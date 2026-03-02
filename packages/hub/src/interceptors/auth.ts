@@ -118,7 +118,6 @@ const neverRetry = Infinity;
 function retryAt(error: ConnectError, attempt: number): number {
   switch (error.code) {
     case Code.Aborted:
-
     case Code.Canceled:
       return retryImmediately;
 
