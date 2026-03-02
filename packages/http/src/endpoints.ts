@@ -214,9 +214,7 @@ function toQueryString<I extends DescMessage>(
 function queryStringify(value: JsonValue, key = ""): string {
   switch (typeof value) {
     case "boolean":
-
     case "number":
-
     case "string":
       return `${key}=${encodeURIComponent(String(value))}`;
 
