@@ -149,7 +149,7 @@ export interface AddOrUpdatePolicyResponse {
 }
 
 export interface ListAuditLogEntriesResponse {
-  entry?:
+  entry:
     | { $case: "accessLogEntry"; accessLogEntry: AccessLogEntry }
     | {
         $case: "decisionLogEntry";

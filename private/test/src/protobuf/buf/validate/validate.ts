@@ -74,7 +74,7 @@ export interface FieldRules {
   cel: Rule[];
   required?: boolean | undefined;
   ignore?: Ignore | undefined;
-  type?:
+  type:
     | { $case: "float"; float: FloatRules }
     | { $case: "double"; double: DoubleRules }
     | { $case: "int32"; int32: Int32Rules }
@@ -105,11 +105,11 @@ export interface PredefinedRules {
 
 export interface FloatRules {
   const?: number | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: number }
     | { $case: "lte"; lte: number }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: number }
     | { $case: "gte"; gte: number }
     | undefined;
@@ -121,11 +121,11 @@ export interface FloatRules {
 
 export interface DoubleRules {
   const?: number | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: number }
     | { $case: "lte"; lte: number }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: number }
     | { $case: "gte"; gte: number }
     | undefined;
@@ -137,11 +137,11 @@ export interface DoubleRules {
 
 export interface Int32Rules {
   const?: number | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: number }
     | { $case: "lte"; lte: number }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: number }
     | { $case: "gte"; gte: number }
     | undefined;
@@ -152,11 +152,11 @@ export interface Int32Rules {
 
 export interface Int64Rules {
   const?: bigint | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: bigint }
     | { $case: "lte"; lte: bigint }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: bigint }
     | { $case: "gte"; gte: bigint }
     | undefined;
@@ -167,11 +167,11 @@ export interface Int64Rules {
 
 export interface UInt32Rules {
   const?: number | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: number }
     | { $case: "lte"; lte: number }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: number }
     | { $case: "gte"; gte: number }
     | undefined;
@@ -182,11 +182,11 @@ export interface UInt32Rules {
 
 export interface UInt64Rules {
   const?: bigint | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: bigint }
     | { $case: "lte"; lte: bigint }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: bigint }
     | { $case: "gte"; gte: bigint }
     | undefined;
@@ -197,11 +197,11 @@ export interface UInt64Rules {
 
 export interface SInt32Rules {
   const?: number | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: number }
     | { $case: "lte"; lte: number }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: number }
     | { $case: "gte"; gte: number }
     | undefined;
@@ -212,11 +212,11 @@ export interface SInt32Rules {
 
 export interface SInt64Rules {
   const?: bigint | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: bigint }
     | { $case: "lte"; lte: bigint }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: bigint }
     | { $case: "gte"; gte: bigint }
     | undefined;
@@ -227,11 +227,11 @@ export interface SInt64Rules {
 
 export interface Fixed32Rules {
   const?: number | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: number }
     | { $case: "lte"; lte: number }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: number }
     | { $case: "gte"; gte: number }
     | undefined;
@@ -242,11 +242,11 @@ export interface Fixed32Rules {
 
 export interface Fixed64Rules {
   const?: bigint | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: bigint }
     | { $case: "lte"; lte: bigint }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: bigint }
     | { $case: "gte"; gte: bigint }
     | undefined;
@@ -257,11 +257,11 @@ export interface Fixed64Rules {
 
 export interface SFixed32Rules {
   const?: number | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: number }
     | { $case: "lte"; lte: number }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: number }
     | { $case: "gte"; gte: number }
     | undefined;
@@ -272,11 +272,11 @@ export interface SFixed32Rules {
 
 export interface SFixed64Rules {
   const?: bigint | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: bigint }
     | { $case: "lte"; lte: bigint }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: bigint }
     | { $case: "gte"; gte: bigint }
     | undefined;
@@ -305,7 +305,7 @@ export interface StringRules {
   notContains?: string | undefined;
   in: string[];
   notIn: string[];
-  wellKnown?:
+  wellKnown:
     | { $case: "email"; email: boolean }
     | { $case: "hostname"; hostname: boolean }
     | { $case: "ip"; ip: boolean }
@@ -340,7 +340,7 @@ export interface BytesRules {
   contains?: Uint8Array | undefined;
   in: Uint8Array[];
   notIn: Uint8Array[];
-  wellKnown?:
+  wellKnown:
     | { $case: "ip"; ip: boolean }
     | { $case: "ipv4"; ipv4: boolean }
     | { $case: "ipv6"; ipv6: boolean }
@@ -377,11 +377,11 @@ export interface AnyRules {
 
 export interface DurationRules {
   const?: Duration | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: Duration }
     | { $case: "lte"; lte: Duration }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: Duration }
     | { $case: "gte"; gte: Duration }
     | undefined;
@@ -392,12 +392,12 @@ export interface DurationRules {
 
 export interface TimestampRules {
   const?: Date | undefined;
-  lessThan?:
+  lessThan:
     | { $case: "lt"; lt: Date }
     | { $case: "lte"; lte: Date }
     | { $case: "ltNow"; ltNow: boolean }
     | undefined;
-  greaterThan?:
+  greaterThan:
     | { $case: "gt"; gt: Date }
     | { $case: "gte"; gte: Date }
     | { $case: "gtNow"; gtNow: boolean }

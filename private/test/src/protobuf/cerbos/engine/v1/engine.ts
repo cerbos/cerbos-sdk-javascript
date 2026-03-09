@@ -70,7 +70,7 @@ export interface PlanResourcesFilter_Expression {
 }
 
 export interface PlanResourcesFilter_Expression_Operand {
-  node?:
+  node:
     | { $case: "value"; value: any | undefined }
     | { $case: "expression"; expression: PlanResourcesFilter_Expression }
     | { $case: "variable"; variable: string }

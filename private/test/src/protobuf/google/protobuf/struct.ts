@@ -31,7 +31,7 @@ export interface Struct_FieldsEntry {
 }
 
 export interface Value {
-  kind?:
+  kind:
     | { $case: "nullValue"; nullValue: NullValue }
     | { $case: "numberValue"; numberValue: number }
     | { $case: "stringValue"; stringValue: string }

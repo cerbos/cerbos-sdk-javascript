@@ -39,7 +39,7 @@ export interface DecisionLogEntry {
   inputs: CheckInput[];
   outputs: CheckOutput[];
   error: string;
-  method?:
+  method:
     | {
         $case: "checkResources";
         checkResources: DecisionLogEntry_CheckResources;
@@ -94,7 +94,7 @@ export interface AuditTrail_EffectivePoliciesEntry {
 }
 
 export interface PolicySource {
-  source?:
+  source:
     | { $case: "blob"; blob: PolicySource_Blob }
     | { $case: "database"; database: PolicySource_Database }
     | { $case: "disk"; disk: PolicySource_Disk }
@@ -158,7 +158,7 @@ export interface PolicySource_Git {
 }
 
 export interface PolicySource_Hub {
-  source?:
+  source:
     | { $case: "label"; label: string }
     | { $case: "deploymentId"; deploymentId: string }
     | { $case: "playgroundId"; playgroundId: string }
