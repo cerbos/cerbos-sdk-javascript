@@ -463,7 +463,7 @@ function serverAttributes(
           value: {
             value: {
               $case: "stringValue",
-              stringValue: serverStatus[status],
+              stringValue: Status[status],
             },
           },
         },
@@ -507,24 +507,3 @@ function serverAttributes(
         },
       ];
 }
-
-// https://github.com/open-telemetry/opentelemetry-go-contrib/issues/8543
-const serverStatus: Record<Status, string> = {
-  [Status.ABORTED]: "Aborted",
-  [Status.ALREADY_EXISTS]: "AlreadyExists",
-  [Status.CANCELLED]: "Cancelled",
-  [Status.DATA_LOSS]: "DataLoss",
-  [Status.DEADLINE_EXCEEDED]: "DeadlineExceeded",
-  [Status.FAILED_PRECONDITION]: "FailedPrecondition",
-  [Status.INTERNAL]: "Internal",
-  [Status.INVALID_ARGUMENT]: "InvalidArgument",
-  [Status.NOT_FOUND]: "NotFound",
-  [Status.OK]: "OK",
-  [Status.OUT_OF_RANGE]: "OutOfRange",
-  [Status.PERMISSION_DENIED]: "PermissionDenied",
-  [Status.RESOURCE_EXHAUSTED]: "ResourceExhausted",
-  [Status.UNAUTHENTICATED]: "Unauthenticated",
-  [Status.UNAVAILABLE]: "Unavailable",
-  [Status.UNIMPLEMENTED]: "Unimplemented",
-  [Status.UNKNOWN]: "Unknown",
-};
