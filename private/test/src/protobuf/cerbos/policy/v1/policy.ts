@@ -35,7 +35,7 @@ export interface Policy {
   disabled: boolean;
   description: string;
   metadata: Metadata | undefined;
-  policyType?:
+  policyType:
     | { $case: "resourcePolicy"; resourcePolicy: ResourcePolicy }
     | { $case: "principalPolicy"; principalPolicy: PrincipalPolicy }
     | { $case: "derivedRoles"; derivedRoles: DerivedRoles }
@@ -98,7 +98,7 @@ export interface ResourceRule {
 }
 
 export interface RolePolicy {
-  policyType?: { $case: "role"; role: string } | undefined;
+  policyType: { $case: "role"; role: string } | undefined;
   version: string;
   parentRoles: string[];
   scope: string;
@@ -189,14 +189,14 @@ export interface Variables_LocalEntry {
 }
 
 export interface Condition {
-  condition?:
+  condition:
     | { $case: "match"; match: Match }
     | { $case: "script"; script: string }
     | undefined;
 }
 
 export interface Match {
-  op?:
+  op:
     | { $case: "all"; all: Match_ExprList }
     | { $case: "any"; any: Match_ExprList }
     | { $case: "none"; none: Match_ExprList }

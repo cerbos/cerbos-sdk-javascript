@@ -7,7 +7,7 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 export const protobufPackage = "opentelemetry.proto.common.v1";
 
 export interface AnyValue {
-  value?:
+  value:
     | { $case: "stringValue"; stringValue: string }
     | { $case: "boolValue"; boolValue: boolean }
     | { $case: "intValue"; intValue: bigint }

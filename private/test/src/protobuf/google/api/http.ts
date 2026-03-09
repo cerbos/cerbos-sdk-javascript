@@ -8,7 +8,7 @@ export const protobufPackage = "google.api";
 
 export interface HttpRule {
   selector: string;
-  pattern?:
+  pattern:
     | { $case: "get"; get: string }
     | { $case: "put"; put: string }
     | { $case: "post"; post: string }

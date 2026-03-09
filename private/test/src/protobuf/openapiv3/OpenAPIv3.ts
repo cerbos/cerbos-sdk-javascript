@@ -8,7 +8,7 @@ import { Any as Any1 } from "../google/protobuf/any.js";
 export const protobufPackage = "openapi.v3";
 
 export interface AdditionalPropertiesItem {
-  oneof?:
+  oneof:
     | { $case: "schemaOrReference"; schemaOrReference: SchemaOrReference }
     | { $case: "boolean"; boolean: boolean }
     | undefined;
@@ -20,7 +20,7 @@ export interface Any {
 }
 
 export interface DefaultType {
-  oneof?:
+  oneof:
     | { $case: "number"; number: number }
     | { $case: "boolean"; boolean: boolean }
     | {
@@ -111,7 +111,7 @@ export interface Schema {
 }
 
 export interface SchemaOrReference {
-  oneof?:
+  oneof:
     | { $case: "schema"; schema: Schema }
     | { $case: "reference"; reference: Reference }
     | undefined;
