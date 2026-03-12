@@ -6,7 +6,7 @@
     ".": "./lib/index.js"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.3",
+    "@eslint/js": "10.0.1",
     "@stylistic/eslint-plugin": "5.9.0",
     "@vitest/eslint-plugin": "1.6.9",
     "eslint-plugin-import": "2.32.0",
