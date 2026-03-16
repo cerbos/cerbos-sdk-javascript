@@ -64,9 +64,9 @@ export const protobufPackage = "cerbos.svc.v1";
 export type CerbosServiceService = typeof CerbosServiceService;
 export const CerbosServiceService = {
   checkResourceSet: {
-    path: "/cerbos.svc.v1.CerbosService/CheckResourceSet",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosService/CheckResourceSet" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: CheckResourceSetRequest): Buffer =>
       Buffer.from(CheckResourceSetRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): CheckResourceSetRequest =>
@@ -77,9 +77,9 @@ export const CerbosServiceService = {
       CheckResourceSetResponse.decode(value),
   },
   checkResourceBatch: {
-    path: "/cerbos.svc.v1.CerbosService/CheckResourceBatch",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosService/CheckResourceBatch" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: CheckResourceBatchRequest): Buffer =>
       Buffer.from(CheckResourceBatchRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): CheckResourceBatchRequest =>
@@ -90,9 +90,9 @@ export const CerbosServiceService = {
       CheckResourceBatchResponse.decode(value),
   },
   checkResources: {
-    path: "/cerbos.svc.v1.CerbosService/CheckResources",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosService/CheckResources" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: CheckResourcesRequest): Buffer =>
       Buffer.from(CheckResourcesRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): CheckResourcesRequest =>
@@ -103,9 +103,9 @@ export const CerbosServiceService = {
       CheckResourcesResponse.decode(value),
   },
   serverInfo: {
-    path: "/cerbos.svc.v1.CerbosService/ServerInfo",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosService/ServerInfo" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: ServerInfoRequest): Buffer =>
       Buffer.from(ServerInfoRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): ServerInfoRequest =>
@@ -116,9 +116,9 @@ export const CerbosServiceService = {
       ServerInfoResponse.decode(value),
   },
   planResources: {
-    path: "/cerbos.svc.v1.CerbosService/PlanResources",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosService/PlanResources" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: PlanResourcesRequest): Buffer =>
       Buffer.from(PlanResourcesRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): PlanResourcesRequest =>
@@ -286,9 +286,9 @@ export const CerbosServiceClient = makeGenericClientConstructor(
 export type CerbosAdminServiceService = typeof CerbosAdminServiceService;
 export const CerbosAdminServiceService = {
   addOrUpdatePolicy: {
-    path: "/cerbos.svc.v1.CerbosAdminService/AddOrUpdatePolicy",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/AddOrUpdatePolicy" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: AddOrUpdatePolicyRequest): Buffer =>
       Buffer.from(AddOrUpdatePolicyRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): AddOrUpdatePolicyRequest =>
@@ -299,9 +299,9 @@ export const CerbosAdminServiceService = {
       AddOrUpdatePolicyResponse.decode(value),
   },
   inspectPolicies: {
-    path: "/cerbos.svc.v1.CerbosAdminService/InspectPolicies",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/InspectPolicies" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: InspectPoliciesRequest): Buffer =>
       Buffer.from(InspectPoliciesRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): InspectPoliciesRequest =>
@@ -312,9 +312,9 @@ export const CerbosAdminServiceService = {
       InspectPoliciesResponse.decode(value),
   },
   listPolicies: {
-    path: "/cerbos.svc.v1.CerbosAdminService/ListPolicies",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/ListPolicies" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: ListPoliciesRequest): Buffer =>
       Buffer.from(ListPoliciesRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): ListPoliciesRequest =>
@@ -325,9 +325,9 @@ export const CerbosAdminServiceService = {
       ListPoliciesResponse.decode(value),
   },
   getPolicy: {
-    path: "/cerbos.svc.v1.CerbosAdminService/GetPolicy",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/GetPolicy" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: GetPolicyRequest): Buffer =>
       Buffer.from(GetPolicyRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): GetPolicyRequest =>
@@ -338,9 +338,9 @@ export const CerbosAdminServiceService = {
       GetPolicyResponse.decode(value),
   },
   deletePolicy: {
-    path: "/cerbos.svc.v1.CerbosAdminService/DeletePolicy",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/DeletePolicy" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: DeletePolicyRequest): Buffer =>
       Buffer.from(DeletePolicyRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): DeletePolicyRequest =>
@@ -351,9 +351,9 @@ export const CerbosAdminServiceService = {
       DeletePolicyResponse.decode(value),
   },
   disablePolicy: {
-    path: "/cerbos.svc.v1.CerbosAdminService/DisablePolicy",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/DisablePolicy" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: DisablePolicyRequest): Buffer =>
       Buffer.from(DisablePolicyRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): DisablePolicyRequest =>
@@ -364,9 +364,9 @@ export const CerbosAdminServiceService = {
       DisablePolicyResponse.decode(value),
   },
   enablePolicy: {
-    path: "/cerbos.svc.v1.CerbosAdminService/EnablePolicy",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/EnablePolicy" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: EnablePolicyRequest): Buffer =>
       Buffer.from(EnablePolicyRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): EnablePolicyRequest =>
@@ -377,9 +377,9 @@ export const CerbosAdminServiceService = {
       EnablePolicyResponse.decode(value),
   },
   listAuditLogEntries: {
-    path: "/cerbos.svc.v1.CerbosAdminService/ListAuditLogEntries",
-    requestStream: false,
-    responseStream: true,
+    path: "/cerbos.svc.v1.CerbosAdminService/ListAuditLogEntries" as const,
+    requestStream: false as const,
+    responseStream: true as const,
     requestSerialize: (value: ListAuditLogEntriesRequest): Buffer =>
       Buffer.from(ListAuditLogEntriesRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): ListAuditLogEntriesRequest =>
@@ -390,9 +390,9 @@ export const CerbosAdminServiceService = {
       ListAuditLogEntriesResponse.decode(value),
   },
   addOrUpdateSchema: {
-    path: "/cerbos.svc.v1.CerbosAdminService/AddOrUpdateSchema",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/AddOrUpdateSchema" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: AddOrUpdateSchemaRequest): Buffer =>
       Buffer.from(AddOrUpdateSchemaRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): AddOrUpdateSchemaRequest =>
@@ -403,9 +403,9 @@ export const CerbosAdminServiceService = {
       AddOrUpdateSchemaResponse.decode(value),
   },
   listSchemas: {
-    path: "/cerbos.svc.v1.CerbosAdminService/ListSchemas",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/ListSchemas" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: ListSchemasRequest): Buffer =>
       Buffer.from(ListSchemasRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): ListSchemasRequest =>
@@ -416,9 +416,9 @@ export const CerbosAdminServiceService = {
       ListSchemasResponse.decode(value),
   },
   getSchema: {
-    path: "/cerbos.svc.v1.CerbosAdminService/GetSchema",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/GetSchema" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: GetSchemaRequest): Buffer =>
       Buffer.from(GetSchemaRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): GetSchemaRequest =>
@@ -429,9 +429,9 @@ export const CerbosAdminServiceService = {
       GetSchemaResponse.decode(value),
   },
   deleteSchema: {
-    path: "/cerbos.svc.v1.CerbosAdminService/DeleteSchema",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/DeleteSchema" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: DeleteSchemaRequest): Buffer =>
       Buffer.from(DeleteSchemaRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): DeleteSchemaRequest =>
@@ -442,9 +442,9 @@ export const CerbosAdminServiceService = {
       DeleteSchemaResponse.decode(value),
   },
   reloadStore: {
-    path: "/cerbos.svc.v1.CerbosAdminService/ReloadStore",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/ReloadStore" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: ReloadStoreRequest): Buffer =>
       Buffer.from(ReloadStoreRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): ReloadStoreRequest =>
@@ -455,9 +455,9 @@ export const CerbosAdminServiceService = {
       ReloadStoreResponse.decode(value),
   },
   purgeStoreRevisions: {
-    path: "/cerbos.svc.v1.CerbosAdminService/PurgeStoreRevisions",
-    requestStream: false,
-    responseStream: false,
+    path: "/cerbos.svc.v1.CerbosAdminService/PurgeStoreRevisions" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: PurgeStoreRevisionsRequest): Buffer =>
       Buffer.from(PurgeStoreRevisionsRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): PurgeStoreRevisionsRequest =>
