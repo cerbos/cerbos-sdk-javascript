@@ -999,9 +999,9 @@ export const Dependency: MessageFns<Dependency> = {
 export type QueryServiceService = typeof QueryServiceService;
 export const QueryServiceService = {
   getTrace: {
-    path: "/jaeger.api_v3.QueryService/GetTrace",
-    requestStream: false,
-    responseStream: true,
+    path: "/jaeger.api_v3.QueryService/GetTrace" as const,
+    requestStream: false as const,
+    responseStream: true as const,
     requestSerialize: (value: GetTraceRequest): Buffer =>
       Buffer.from(GetTraceRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): GetTraceRequest =>
@@ -1012,9 +1012,9 @@ export const QueryServiceService = {
       TracesData.decode(value),
   },
   findTraces: {
-    path: "/jaeger.api_v3.QueryService/FindTraces",
-    requestStream: false,
-    responseStream: true,
+    path: "/jaeger.api_v3.QueryService/FindTraces" as const,
+    requestStream: false as const,
+    responseStream: true as const,
     requestSerialize: (value: FindTracesRequest): Buffer =>
       Buffer.from(FindTracesRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): FindTracesRequest =>
@@ -1025,9 +1025,9 @@ export const QueryServiceService = {
       TracesData.decode(value),
   },
   getServices: {
-    path: "/jaeger.api_v3.QueryService/GetServices",
-    requestStream: false,
-    responseStream: false,
+    path: "/jaeger.api_v3.QueryService/GetServices" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: GetServicesRequest): Buffer =>
       Buffer.from(GetServicesRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): GetServicesRequest =>
@@ -1038,9 +1038,9 @@ export const QueryServiceService = {
       GetServicesResponse.decode(value),
   },
   getOperations: {
-    path: "/jaeger.api_v3.QueryService/GetOperations",
-    requestStream: false,
-    responseStream: false,
+    path: "/jaeger.api_v3.QueryService/GetOperations" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: GetOperationsRequest): Buffer =>
       Buffer.from(GetOperationsRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): GetOperationsRequest =>
@@ -1051,9 +1051,9 @@ export const QueryServiceService = {
       GetOperationsResponse.decode(value),
   },
   getDependencies: {
-    path: "/jaeger.api_v3.QueryService/GetDependencies",
-    requestStream: false,
-    responseStream: false,
+    path: "/jaeger.api_v3.QueryService/GetDependencies" as const,
+    requestStream: false as const,
+    responseStream: false as const,
     requestSerialize: (value: GetDependenciesRequest): Buffer =>
       Buffer.from(GetDependenciesRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer): GetDependenciesRequest =>
