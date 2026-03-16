@@ -31,7 +31,6 @@ export const typescriptConfig = defineConfig(
           ignoreRestSiblings: true,
         },
       ],
-      "@typescript-eslint/no-useless-default-assignment": "off", // https://github.com/typescript-eslint/typescript-eslint/issues/12068
       "@typescript-eslint/prefer-enum-initializers": "warn",
       "@typescript-eslint/prefer-nullish-coalescing": "warn",
       "@typescript-eslint/promise-function-async": "warn",
