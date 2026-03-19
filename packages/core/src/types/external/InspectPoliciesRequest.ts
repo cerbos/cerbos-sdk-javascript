@@ -23,7 +23,7 @@ export interface InspectPoliciesRequest {
    * Only include policies with a name matching the given regular expression.
    *
    * @remarks
-   * Regular expressions must use the {@link https://golang.org/s/re2syntax | RE2 syntax}.
+   * Regular expressions must use the {@link https://go.dev/s/re2syntax | RE2 syntax}.
    * Note that backreferences are not supported.
    */
   nameRegexp?: string | undefined;
@@ -32,7 +32,7 @@ export interface InspectPoliciesRequest {
    * Only include policies with a scope matching the given regular expression.
    *
    * @remarks
-   * Regular expressions must use the {@link https://golang.org/s/re2syntax | RE2 syntax}.
+   * Regular expressions must use the {@link https://go.dev/s/re2syntax | RE2 syntax}.
    * Note that backreferences are not supported.
    */
   scopeRegexp?: string | undefined;
@@ -41,7 +41,7 @@ export interface InspectPoliciesRequest {
    * Only include policies with a version matching the given regular expression.
    *
    * @remarks
-   * Regular expressions must use the {@link https://golang.org/s/re2syntax | RE2 syntax}.
+   * Regular expressions must use the {@link https://go.dev/s/re2syntax | RE2 syntax}.
    * Note that backreferences are not supported.
    */
   versionRegexp?: string | undefined;

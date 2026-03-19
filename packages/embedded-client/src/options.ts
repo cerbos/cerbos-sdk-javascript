@@ -212,7 +212,7 @@ export type WasmInstantiate = (
  * Using {@link https://www.npmjs.com/package/jose | jose}:
  *
  * ```typescript
- * import type { DecodeJWTPayload, DecodedJWTPayload } from "@cerbos/embedded";
+ * import type { DecodeJWTPayload, DecodedJWTPayload } from "@cerbos/embedded-client";
  * import { JWTVerifyGetKey, createRemoteJWKSet, jwtVerify } from "jose";
  *
  * interface KeySet {

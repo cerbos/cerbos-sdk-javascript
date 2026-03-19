@@ -26,7 +26,7 @@ export interface ListPoliciesRequest {
    * Only include policies with a name matching the given regular expression.
    *
    * @remarks
-   * Regular expressions must use the {@link https://golang.org/s/re2syntax | RE2 syntax}.
+   * Regular expressions must use the {@link https://go.dev/s/re2syntax | RE2 syntax}.
    * Note that backreferences are not supported.
    *
    * Requires the Cerbos policy decision point server to be at least v0.29.
@@ -37,7 +37,7 @@ export interface ListPoliciesRequest {
    * Only include policies with a scope matching the given regular expression.
    *
    * @remarks
-   * Regular expressions must use the {@link https://golang.org/s/re2syntax | RE2 syntax}.
+   * Regular expressions must use the {@link https://go.dev/s/re2syntax | RE2 syntax}.
    * Note that backreferences are not supported.
    *
    * Requires the Cerbos policy decision point server to be at least v0.29.
@@ -48,7 +48,7 @@ export interface ListPoliciesRequest {
    * Only include policies with a version matching the given regular expression.
    *
    * @remarks
-   * Regular expressions must use the {@link https://golang.org/s/re2syntax | RE2 syntax}.
+   * Regular expressions must use the {@link https://go.dev/s/re2syntax | RE2 syntax}.
    * Note that backreferences are not supported.
    *
    * Requires the Cerbos policy decision point server to be at least v0.29.
