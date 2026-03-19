@@ -17,14 +17,14 @@ $ npm install @cerbos/react
 
 ## Example usage
 
-First, create an [HTTP](../http/README.md) or [embedded](../embedded/README.md) Cerbos client, and provide it to your application's components using [`CerbosProvider`](https://cerbos.github.io/cerbos-sdk-javascript/functions/_cerbos_react.CerbosProvider.html):
+First, create an [HTTP](../http/README.md) or [embedded](../embedded-client/README.md) Cerbos client, and provide it to your application's components using [`CerbosProvider`](https://cerbos.github.io/cerbos-sdk-javascript/functions/_cerbos_react.CerbosProvider.html):
 
 ```typescript
-import { Embedded as Cerbos } from "@cerbos/embedded";
-// or, import { HTTP as Cerbos } from "@cerbos/http";
+import { Embedded as Cerbos } from "@cerbos/embedded-client";
+// import { HTTP as Cerbos } from "@cerbos/http";
 import { CerbosProvider } from "@cerbos/react";
 
-const client = new Cerbos();
+const client = new Cerbos({...});
 
 function MyApp({ children }) {
   const user = useYourAuthenticationLogic(...);

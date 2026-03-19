@@ -13,7 +13,7 @@ Policy bundles are loaded from [Cerbos Hub](https://www.cerbos.dev/product-cerbo
 ## Installation
 
 ```console
-$ npm install @cerbos/embedded-client
+$ npm install @cerbos/embedded-client @cerbos/embedded-server
 ```
 
 ## Example usage

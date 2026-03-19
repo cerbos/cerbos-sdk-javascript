@@ -34,7 +34,7 @@ export interface CerbosProviderProps {
    * @remarks
    * You can read claims directly from a JWT in your authorization policies by configuring
    * {@link https://docs.cerbos.dev/cerbos/latest/configuration/auxdata.html | the Cerbos policy decision point (PDP) service} or
-   * {@link @cerbos/embedded!Options.decodeJWTPayload | an embedded PDP client }
+   * {@link @cerbos/embedded-client!Options.decodeJWTPayload | an embedded PDP client }
    * to decode the token.
    */
   auxData?: Pick<AuxData, "jwt"> | undefined;
@@ -51,19 +51,15 @@ export interface CerbosProviderProps {
  * You need to provide a principal, but it can describe an anonymous user so that you can perform permission checks for unauthenticated users.
  * You could use a single hardcoded ID for all anonymous users, or store a unique identifier in the session.
  *
- * You can use whichever of the {@link https://github.com/cerbos/cerbos-sdk-javascript/blob/main/packages/http/README.md | HTTP} or
- * {@link https://github.com/cerbos/cerbos-sdk-javascript/blob/main/packages/embedded/README.md | embedded} client libraries best fit your needs.
+ * You can use whichever of the {@link @cerbos/http! | HTTP} or {@link @cerbos/embedded-client! | embedded} client libraries best fit your needs.
  *
  * @example
  * ```typescript
- * import { Embedded as Cerbos } from "@cerbos/embedded";
- * * // or, import { HTTP as Cerbos } from "@cerbos/http";
+ * import { Embedded as Cerbos } from "@cerbos/embedded-client";
+ * // import { HTTP as Cerbos } from "@cerbos/http";
  * import { CerbosProvider } from "@cerbos/react";
  *
- * // Initialize the Cerbos client using any of the client libraries
- * // that fit the needs of your application. In this example we are
- * // using the client from `@cerbos/embedded`.
- * const client = new Cerbos();
+ * const client = new Cerbos({...});
  *
  * function MyApp({ children }) {
  *   const user = useYourAuthenticationLogic(...);
