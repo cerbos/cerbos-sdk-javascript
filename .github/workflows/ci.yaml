@@ -33,22 +33,11 @@ jobs:
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
 
-      - name: Generate docs
-        run: pnpm run docs
-
-      - name: Generate bot token
-        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
-        id: generate-token
-        continue-on-error: true
+      - name: Lint
+        uses: ./.github/actions/lint
         with:
-          app-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
-          private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
-          permission-metadata: read
-
-      - name: Lint code
-        run: pnpm run lint
-        env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || github.token }}
+          github-app-client-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
+          github-app-private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
 
       - name: Generate code
         run: pnpm run generate

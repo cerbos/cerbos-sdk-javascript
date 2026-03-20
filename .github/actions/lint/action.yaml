@@ -1,0 +1,60 @@
+name: Lint
+
+description: Run linters
+
+inputs:
+  github-app-client-id:
+    description: Client ID of GitHub App to use to generate token
+
+  github-app-private-key:
+    description: Private key of GitHub App to use to generate token
+
+runs:
+  using: composite
+
+  steps:
+    - name: Generate cache keys
+      id: lychee-cache
+      shell: bash
+      run: |-
+        print_key() {
+          printf "lychee-"
+          date --date="$1 days ago" +%F
+        }
+
+        {
+          printf "key="
+          print_key 0
+
+          echo "restore-keys<<EOF"
+          print_key 1
+          print_key 2
+          print_key 3
+          echo EOF
+        } >> "${GITHUB_OUTPUT}"
+
+    - name: Restore cached link checks
+      uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+      with:
+        path: .lycheecache
+        key: ${{ steps.lychee-cache.outputs.key }}
+        restore-keys: ${{ steps.lychee-cache.outputs.restore-keys }}
+
+    - name: Generate docs
+      shell: bash
+      run: pnpm run docs
+
+    - name: Generate bot token
+      uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
+      id: generate-token
+      continue-on-error: true
+      with:
+        app-id: ${{ inputs.github-app-client-id }}
+        private-key: ${{ inputs.github-app-private-key }}
+        permission-metadata: read
+
+    - name: Lint code
+      shell: bash
+      run: pnpm run lint
+      env:
+        GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || github.token }}
