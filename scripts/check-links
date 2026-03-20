@@ -3,7 +3,11 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-excludes=(--exclude https://www.npmjs.com/)
+excludes=(
+  --exclude https://www.npmjs.com/
+  --exclude https://opentelemetry.io/
+)
+
 case "${GITHUB_HEAD_REF:-}" in
   "prepare-release" | "prepare-releases")
     excludes+=(--exclude https://github.com/cerbos/cerbos-sdk-javascript/compare/)
