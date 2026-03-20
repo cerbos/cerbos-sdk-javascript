@@ -25,7 +25,7 @@ jobs:
           only-scripts: ${{ matrix.only-scripts }}
 
       - name: Lint
-        if: matrix.only-scripts == 'false'
+        if: (!matrix.only-scripts)
         uses: ./.github/actions/lint
         with:
           github-app-client-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
