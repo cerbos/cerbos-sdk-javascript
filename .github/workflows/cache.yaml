@@ -23,3 +23,10 @@ jobs:
         uses: ./.github/actions/setup-node
         with:
           only-scripts: ${{ matrix.only-scripts }}
+
+      - name: Lint
+        if: matrix.only-scripts == 'false'
+        uses: ./.github/actions/lint
+        with:
+          github-app-client-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
+          github-app-private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}

@@ -6,4 +6,5 @@
 /private/*/node_modules/
 /private/test/servers/tmp/
 /private/test/.env
+/.lycheecache
 /tsconfig.tsbuildinfo
