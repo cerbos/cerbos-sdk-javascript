@@ -31,7 +31,7 @@
     "@opentelemetry/semantic-conventions": "1.40.0",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
-    "@types/adm-zip": "0.5.7",
+    "@types/adm-zip": "0.5.8",
     "@types/react": "19.2.14",
     "@types/semver": "7.7.1",
     "@ungap/with-resolvers": "0.1.0",
