@@ -180,10 +180,14 @@ function serializeToBody<I extends DescMessage>(schema: I): Serialize<I> {
 function serializeToQueryString<I extends DescMessage>(
   schema: I,
 ): Serialize<I> {
-  return (request, { url, ...init }) => ({
-    ...init,
-    url: `${url}?${toQueryString(schema, request)}`,
-  });
+  return (request, { url, ...init }) => {
+    const queryString = toQueryString(schema, request);
+
+    return {
+      ...init,
+      url: queryString ? `${url}?${queryString}` : url,
+    };
+  };
 }
 
 function serializeListAuditLogEntriesRequest(
