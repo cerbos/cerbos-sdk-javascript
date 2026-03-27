@@ -132,7 +132,7 @@ importers:
         specifier: ^0.28.0
         version: link:../core
       yaml:
-        specifier: ^2.8.2
+        specifier: ^2.8.3
         version: 2.8.3
 
   packages/grpc:
