@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.10.0] - 2026-03-27
+
 ### Changed
 
 - Use [OpenTelemetry Semantic Conventions v1.39](https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.39.0) ([#1373](https://github.com/cerbos/cerbos-sdk-javascript/pull/1373))
@@ -386,7 +390,8 @@
 
 - [OpenTelemetry](https://opentelemetry.io) instrumentation for the [@cerbos/grpc] and [@cerbos/http] client libraries ([#438](https://github.com/cerbos/cerbos-sdk-javascript/pull/438))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.9.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.10.0...HEAD
+[0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.9.0...@cerbos/opentelemetry@0.10.0
 [0.9.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.8.2...@cerbos/opentelemetry@0.9.0
 [0.8.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.8.1...@cerbos/opentelemetry@0.8.2
 [0.8.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.8.0...@cerbos/opentelemetry@0.8.1

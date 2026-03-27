@@ -1,11 +1,11 @@
-unreleased:
-  type: patch
-
-  changed:
-    - summary: Drop dependency on [qs]
-      pull: 1377
-
 releases:
+  - version: 0.26.1
+    date: 2026-03-27
+
+    changed:
+      - summary: Drop dependency on [qs]
+        pull: 1377
+
   - version: 0.26.0
     date: 2026-02-04
 
