@@ -1,0 +1,12 @@
+name: cerbos-sdk-javascript-scripts
+
+services:
+  lychee:
+    image: lycheeverse/lychee:0.23.0-alpine@sha256:77ca5d963d8b935626ae46e6989b61a85b0e584828e061bc36d92dda1db0c4e2
+    environment:
+      - GITHUB_TOKEN
+    working_dir: /input
+    volumes:
+      - type: bind
+        source: ../
+        target: /input

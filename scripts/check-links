@@ -15,14 +15,13 @@ case "${GITHUB_HEAD_REF:-}" in
 esac
 
 check() {
-  docker run \
+  docker compose \
+    --file scripts/docker-compose.yaml \
+    run \
     --interactive \
     --rm \
-    --env GITHUB_TOKEN \
-    --mount "type=bind,source=${PWD},target=/input" \
     --user "${uid}:${gid}" \
-    --workdir /input \
-    lycheeverse/lychee:latest-alpine \
+    lychee \
     "${excludes[@]}" \
     --cache \
     --cache-exclude-status 400.. \
@@ -41,8 +40,6 @@ heading() {
 }
 
 git_commit=$(git rev-parse HEAD)
-
-docker pull lycheeverse/lychee:latest-alpine
 
 uid=$(id -u)
 gid=$(id -g)
