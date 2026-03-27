@@ -12,6 +12,10 @@ concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
+defaults:
+  run:
+    shell: bash
+
 env:
   CERBOS_HUB_API_ENDPOINT: ${{ secrets.CERBOS_HUB_API_ENDPOINT }}
   CERBOS_HUB_EPDP_CLIENT_ID: ${{ secrets.CERBOS_HUB_EPDP_CLIENT_ID }}
@@ -22,6 +26,8 @@ env:
   CERBOS_HUB_STORES_CLIENT_ID: ${{ secrets.CERBOS_HUB_STORES_CLIENT_ID }}
   CERBOS_HUB_STORES_CLIENT_SECRET: ${{ secrets.CERBOS_HUB_STORES_CLIENT_SECRET }}
 
+permissions: {}
+
 jobs:
   lint:
     name: Lint
@@ -29,6 +35,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
@@ -58,6 +66,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
@@ -82,6 +92,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
@@ -111,6 +123,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
