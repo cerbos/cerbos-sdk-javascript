@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.26.1] - 2026-03-27
+
 ### Changed
 
 - Drop dependency on [qs] ([#1377](https://github.com/cerbos/cerbos-sdk-javascript/pull/1377))
@@ -474,7 +478,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.26.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.26.1...HEAD
+[0.26.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.26.0...@cerbos/http@0.26.1
 [0.26.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.25.0...@cerbos/http@0.26.0
 [0.25.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.2...@cerbos/http@0.25.0
 [0.24.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.24.1...@cerbos/http@0.24.2
