@@ -156,14 +156,16 @@ export async function fetchSpans(
         }
       }
 
-      return spans;
+      if (spans.length) {
+        return spans;
+      }
     } catch (error) {
       if (!isTraceNotFound(error)) {
         throw error;
       }
-
-      await setTimeout(100);
     }
+
+    await setTimeout(100);
   } while (secondsSince(start) < 15);
 
   throw new Error(`Trace ${traceId} not found`);
