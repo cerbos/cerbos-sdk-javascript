@@ -9,7 +9,7 @@
     "node-html-parser": "7.1.0",
     "prettier": "3.8.1",
     "semver": "7.7.4",
-    "typedoc": "0.28.17",
+    "typedoc": "0.28.18",
     "yaml": "2.8.3",
     "zod": "4.3.6"
   }
