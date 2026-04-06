@@ -66,7 +66,7 @@ services:
         condition: service_completed_successfully
 
   mtls:
-    image: traefik:v3.6.11@sha256:acfc80650104f0194a15f73dc1648f517561bc1645391a15705332a064cfc33c
+    image: traefik:v3.6.12@sha256:171c9c3565b29f6c133f1c1b43c5d4e5853415198e9e1078c001f8702ff66aec
     command:
       - --entrypoints.grpc.address=:3593
       - --ping
@@ -117,7 +117,7 @@ services:
       - CERBOS_CONFIG=/config/tracing.yaml
 
   jaeger:
-    image: jaegertracing/jaeger:2.16.0@sha256:bf7f805da4c2bc8d58a6c81ee650fdb6b8e4287698f95fbe231c09c865bc397f
+    image: jaegertracing/jaeger:2.17.0@sha256:6266573208d665ce5c17483bce0a75d0806480d92c84766d288d0aee885ce708
     healthcheck:
       test:
         - CMD
