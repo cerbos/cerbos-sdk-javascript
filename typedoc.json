@@ -3,6 +3,11 @@
   "entryPointStrategy": "packages",
   "entryPoints": ["packages/*"],
   "exclude": ["packages/api"],
+  "externalSymbolLinkMappings": {
+    "@types/node": {
+      "__global.Headers": "https://developer.mozilla.org/docs/Web/API/Headers"
+    }
+  },
   "favicon": "assets/favicon.svg",
   "headings": {
     "readme": false
