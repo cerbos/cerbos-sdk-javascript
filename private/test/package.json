@@ -37,10 +37,10 @@
     "@ungap/with-resolvers": "0.1.0",
     "adm-zip": "0.5.17",
     "jose": "6.2.2",
-    "jsdom": "29.0.1",
+    "jsdom": "29.0.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "semver": "7.7.4",
-    "vitest": "4.1.2"
+    "vitest": "4.1.3"
   }
 }
