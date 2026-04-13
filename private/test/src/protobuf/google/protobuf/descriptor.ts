@@ -13,6 +13,7 @@ export enum Edition {
   EDITION_PROTO3 = 999,
   EDITION_2023 = 1000,
   EDITION_2024 = 1001,
+  EDITION_UNSTABLE = 9999,
   EDITION_1_TEST_ONLY = 1,
   EDITION_2_TEST_ONLY = 2,
   EDITION_99997_TEST_ONLY = 99997,
@@ -35,6 +36,8 @@ export function editionToJSON(object: Edition): string {
       return "EDITION_2023";
     case Edition.EDITION_2024:
       return "EDITION_2024";
+    case Edition.EDITION_UNSTABLE:
+      return "EDITION_UNSTABLE";
     case Edition.EDITION_1_TEST_ONLY:
       return "EDITION_1_TEST_ONLY";
     case Edition.EDITION_2_TEST_ONLY:
