@@ -55,7 +55,7 @@
     "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@tsconfig/node20": "20.1.9",
     "@tsconfig/strictest": "2.0.8",
-    "@types/node": "20.19.37",
+    "@types/node": "20.19.39",
     "@types/web": "0.0.345",
     "concurrently": "9.2.1",
     "depcheck": "1.4.7",
