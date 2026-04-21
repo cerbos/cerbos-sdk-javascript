@@ -30,30 +30,16 @@ jobs:
       - name: Generate code
         run: pnpm run generate
 
-      - name: Generate bot token
-        uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
-        id: generate-token
-        with:
-          app-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
-          private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
-
       - name: Create pull request
-        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
+        uses: cerbos/actions/create-pull-request@0ac15a1ad96a03fe4ac6c4a9201dabfe385ef265
         with:
-          token: ${{ steps.generate-token.outputs.token }}
-          branch: update-protos
-          delete-branch: true
-          reviewers: haines
-          signoff: true
-          sign-commits: true
+          client-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
           author: ${{ vars.CERBOS_BOT_AUTHOR }}
-          committer: ${{ vars.CERBOS_BOT_AUTHOR }}
-          commit-message: |-
-            Update protos
-          title: |-
-            Update protos
-          body: |-
-            This PR updates protos and regenerates code.
+          branch: update-protos
+          title: Update protos
+          body: This PR updates protos and regenerates code.
+          reviewers: haines
           add-paths: |-
             packages/*/src/protobuf/**/*.ts
             private/*/src/protobuf/**/*.ts

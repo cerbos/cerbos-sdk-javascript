@@ -51,12 +51,7 @@ jobs:
         run: pnpm run generate
 
       - name: Check for uncommitted changes
-        run: |-
-          if [[ -n $(git status --porcelain) ]]; then
-            echo "::error::Uncommitted changes detected"
-            git -c color.ui=always status -vv
-            exit 1
-          fi
+        uses: cerbos/actions/check-repo-status@0ac15a1ad96a03fe4ac6c4a9201dabfe385ef265
 
   test-matrix:
     name: Generate test matrix
