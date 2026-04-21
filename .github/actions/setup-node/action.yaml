@@ -44,7 +44,7 @@ runs:
     - name: Restore cached dependencies
       id: restore-cache
       if: inputs.restore-cache == 'true'
-      uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+      uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
       with:
         path: ${{ steps.pnpm-store.outputs.path }}
         key: pnpm-${{ runner.os }}-${{ inputs.only-scripts }}-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -56,7 +56,7 @@ runs:
 
     - name: Cache dependencies
       if: inputs.save-cache == 'true' && steps.restore-cache.outputs.cache-hit != 'true'
-      uses: actions/cache/save@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+      uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
       with:
         path: ${{ steps.pnpm-store.outputs.path }}
         key: ${{ steps.restore-cache.outputs.cache-primary-key }}

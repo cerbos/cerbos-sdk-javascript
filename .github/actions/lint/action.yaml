@@ -34,7 +34,7 @@ runs:
         } >> "${GITHUB_OUTPUT}"
 
     - name: Restore cached link checks
-      uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
       with:
         path: .lycheecache
         key: ${{ steps.lychee-cache.outputs.key }}
@@ -45,11 +45,11 @@ runs:
       run: pnpm run docs
 
     - name: Generate bot token
-      uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
+      uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
       id: generate-token
       continue-on-error: true
       with:
-        app-id: ${{ inputs.github-app-client-id }}
+        client-id: ${{ inputs.github-app-client-id }}
         private-key: ${{ inputs.github-app-private-key }}
         permission-metadata: read
 
