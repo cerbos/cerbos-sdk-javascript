@@ -49,7 +49,7 @@ runs:
       id: generate-token
       continue-on-error: true
       with:
-        app-id: ${{ inputs.github-app-client-id }}
+        client-id: ${{ inputs.github-app-client-id }}
         private-key: ${{ inputs.github-app-private-key }}
         permission-metadata: read
 
