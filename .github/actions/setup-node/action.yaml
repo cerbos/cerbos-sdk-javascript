@@ -12,6 +12,11 @@ inputs:
     required: false
     default: "false"
 
+  restore-cache:
+    description: Restore cache?
+    required: false
+    default: "true"
+
   save-cache:
     description: Save cache?
     required: false
@@ -38,6 +43,7 @@ runs:
 
     - name: Restore cached dependencies
       id: restore-cache
+      if: inputs.restore-cache == 'true'
       uses: actions/cache/restore@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
       with:
         path: ${{ steps.pnpm-store.outputs.path }}
