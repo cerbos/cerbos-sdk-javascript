@@ -43,6 +43,12 @@ jobs:
           retention-days: 1
           if-no-files-found: error
 
+      - name: Notify Slack on failure
+        if: failure()
+        uses: cerbos/actions/notify-slack@77f6019c58e3749bc035c696149309861302101f # main
+        with:
+          webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}
+
   publish:
     name: Publish docs to GitHub Pages
     needs: generate
@@ -57,3 +63,9 @@ jobs:
       - name: Publish docs to GitHub Pages
         id: publish
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+
+      - name: Notify Slack on failure
+        if: failure()
+        uses: cerbos/actions/notify-slack@77f6019c58e3749bc035c696149309861302101f # main
+        with:
+          webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}
