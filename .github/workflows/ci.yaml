@@ -51,7 +51,7 @@ jobs:
         run: pnpm run generate
 
       - name: Check for uncommitted changes
-        uses: cerbos/actions/check-repo-status@0ac15a1ad96a03fe4ac6c4a9201dabfe385ef265
+        uses: cerbos/actions/check-repo-status@77f6019c58e3749bc035c696149309861302101f # main
 
   test-matrix:
     name: Generate test matrix
@@ -146,3 +146,9 @@ jobs:
         run: |-
           test "${{ needs.test-parallel.result }}" = "success"
           test "${{ needs.test-serial.result }}" = "success"
+
+      - name: Notify Slack on failure
+        if: failure() && github.event_name == 'schedule'
+        uses: cerbos/actions/notify-slack@77f6019c58e3749bc035c696149309861302101f # main
+        with:
+          webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}
