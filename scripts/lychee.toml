@@ -1,0 +1,23 @@
+format = "detailed"
+verbose = "debug"
+
+cache = true
+cache_exclude_status = "400.."
+max_cache_age = "3d"
+
+max_concurrency = 8
+
+include_fragments = true
+
+exclude = [
+  "https://www.npmjs.com/",
+  "https://opentelemetry.io/",
+]
+
+remap = [
+  '^https://cerbos\.github\.io/cerbos-sdk-javascript/ file:///input/docs/',
+]
+
+# Slack returns 403 to unsupported browsers
+[hosts."go.cerbos.io".headers]
+"User-Agent" = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
