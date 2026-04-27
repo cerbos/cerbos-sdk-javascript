@@ -1,12 +1,12 @@
-unreleased:
-  type: patch
-
-  bumped:
-    uuid:
-      to: 14.0.0
-      pull: 1425
-
 releases:
+  - version: 0.28.1
+    date: 2026-04-27
+
+    bumped:
+      uuid:
+        to: 14.0.0
+        pull: 1425
+
   - version: 0.28.0
     date: 2026-02-04
 

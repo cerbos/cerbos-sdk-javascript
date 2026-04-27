@@ -1,12 +1,20 @@
-unreleased:
-  type: patch
-
-  bumped:
-    "@bufbuild/protovalidate":
-      to: 1.2.0
-      pull: 1431
-
 releases:
+  - version: 0.5.1
+    date: 2026-04-27
+
+    bumped:
+      "@bufbuild/protovalidate":
+        to: 1.2.0
+        pull: 1431
+
+      "@cerbos/core":
+        to: 0.28.1
+        pull: 1432
+
+      "@cerbos/hub":
+        to: 0.5.3
+        pull: 1432
+
   - version: 0.5.0
     date: 2026-02-04
 
