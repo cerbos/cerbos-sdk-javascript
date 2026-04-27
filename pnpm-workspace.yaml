@@ -15,5 +15,3 @@ minimumReleaseAgeExclude:
   - react
   - react-dom
   - scheduler
-  # Renovate security update: uuid@14.0.0
-  - uuid@14.0.0
