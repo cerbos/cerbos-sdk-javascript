@@ -3,7 +3,10 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-excludes=()
+excludes=(
+  --exclude https://www.npmjs.com/
+  --exclude https://opentelemetry.io/
+)
 
 case "${GITHUB_HEAD_REF:-}" in
   "prepare-release" | "prepare-releases")
@@ -21,6 +24,7 @@ check() {
     lychee \
     --config /input/scripts/lychee.toml \
     "${excludes[@]}" \
+    --remap "^https://cerbos\.github\.io/cerbos-sdk-javascript/ file:///input/docs/" \
     "$@" \
     2> >(grep -v -E "Skipping fragment check for [^ ]+ within a plaintext file")
 }
