@@ -12,6 +12,11 @@ inputs:
     required: false
     default: "false"
 
+  prune-cache:
+    description: Prune cache?
+    required: false
+    default: "false"
+
   restore-cache:
     description: Restore cache?
     required: false
@@ -53,6 +58,11 @@ runs:
     - name: Install dependencies
       shell: bash
       run: pnpm install --frozen-lockfile${{ inputs.only-scripts == 'true' && ' --config.dedupe-peer-dependents=false --filter=./private/scripts' || '' }}
+
+    - name: Prune cache
+      if: inputs.prune-cache == 'true' && steps.restore-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: pnpm store prune
 
     - name: Cache dependencies
       if: inputs.save-cache == 'true' && steps.restore-cache.outputs.cache-hit != 'true'
