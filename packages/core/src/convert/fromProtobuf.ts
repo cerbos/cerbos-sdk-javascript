@@ -1538,7 +1538,7 @@ export function translateEnum<
   translate: Record<Enum[keyof Enum], Result | Unexpected>,
 ): Result {
   if (value in translate) {
-    const result = translate[value] as Result | Unexpected;
+    const result: Result | Unexpected = translate[value];
 
     if (!isUnexpected(result)) {
       return result;
