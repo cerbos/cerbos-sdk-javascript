@@ -54,7 +54,7 @@
     "@cerbos/embedded-server": "^0.4.1"
   },
   "dependencies": {
-    "@bufbuild/protovalidate": "^1.1.1",
+    "@bufbuild/protovalidate": "^1.2.0",
     "@cerbos/core": "^0.28.0",
     "@cerbos/hub": "^0.5.2",
     "ulid": "^3.0.2"
