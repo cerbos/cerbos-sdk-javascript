@@ -25,7 +25,7 @@ describe("request validation", () => {
       expect(error).toBeInstanceOf(NotOK);
       expect(error).toMatchObject({
         code: Status.INVALID_ARGUMENT,
-        details: "store_id: value length must be 12 characters [string.len]",
+        details: "store_id: must be 12 characters [string.len]",
       });
     }
   });
