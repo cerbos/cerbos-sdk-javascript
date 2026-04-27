@@ -31,6 +31,7 @@ jobs:
         uses: ./.github/actions/setup-node
         with:
           only-scripts: ${{ matrix.only-scripts }}
+          prune-cache: true
 
       - name: Lint
         if: (!matrix.only-scripts)
