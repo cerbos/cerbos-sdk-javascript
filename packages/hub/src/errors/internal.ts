@@ -101,5 +101,5 @@ export function errorCode(error: unknown): StatusNotOK {
 }
 
 function connectCodeToStatus(code: Code): StatusNotOK {
-  return code as number as StatusNotOK;
+  return code as number as StatusNotOK; // eslint-disable-line @typescript-eslint/no-unnecessary-type-assertion -- https://github.com/typescript-eslint/typescript-eslint/issues/12271
 }
