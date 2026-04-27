@@ -102,7 +102,7 @@ importers:
         specifier: ^2.11.0
         version: 2.11.0
       '@bufbuild/protovalidate':
-        specifier: ^1.1.1
+        specifier: ^1.2.0
         version: 1.2.0(@bufbuild/protobuf@2.11.0)
       '@cerbos/api':
         specifier: ^0.6.0
