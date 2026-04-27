@@ -7,8 +7,8 @@ unreleased:
       pull: 1411
 
     "@opentelemetry/instrumentation":
-      to: 0.214.0
-      pull: 1411
+      to: 0.215.0
+      pulls: [1411, 1429]
 
 releases:
   - version: 0.10.0

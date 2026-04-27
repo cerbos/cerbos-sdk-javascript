@@ -6,7 +6,7 @@
 
 - Bump dependency on [@opentelemetry/api] to 1.9.1 ([#1411](https://github.com/cerbos/cerbos-sdk-javascript/pull/1411))
 
-- Bump dependency on [@opentelemetry/instrumentation] to 0.214.0 ([#1411](https://github.com/cerbos/cerbos-sdk-javascript/pull/1411))
+- Bump dependency on [@opentelemetry/instrumentation] to 0.215.0 ([#1411](https://github.com/cerbos/cerbos-sdk-javascript/pull/1411), [#1429](https://github.com/cerbos/cerbos-sdk-javascript/pull/1429))
 
 ## [0.10.0] - 2026-03-27
 
