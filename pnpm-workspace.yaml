@@ -1,7 +1,3 @@
-packages:
-  - packages/*
-  - private/*
-
 ignoredBuiltDependencies:
   - "@bufbuild/buf"
   - esbuild
@@ -15,3 +11,9 @@ minimumReleaseAgeExclude:
   - react
   - react-dom
   - scheduler
+
+packages:
+  - packages/*
+  - private/*
+
+saveExact: true
