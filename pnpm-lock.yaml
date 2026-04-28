@@ -112,7 +112,7 @@ importers:
         version: link:../core
       '@cerbos/embedded-server':
         specifier: ^0.4.1
-        version: 0.4.2(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)
+        version: 0.4.4(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)
       '@cerbos/hub':
         specifier: ^0.5.3
         version: link:../hub
@@ -289,8 +289,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/embedded-client
       '@cerbos/embedded-server':
-        specifier: 0.4.2
-        version: 0.4.2(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)
+        specifier: 0.4.4
+        version: 0.4.4(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)
       '@cerbos/files':
         specifier: workspace:*
         version: link:../../packages/files
@@ -558,8 +558,8 @@ packages:
     peerDependencies:
       '@bufbuild/protobuf': ^2.8.0
 
-  '@cerbos/embedded-server@0.4.2':
-    resolution: {integrity: sha512-GLn7nMCsRB0mxjQCLQun20wfCt1Di5cEgkuQT+P/tkMhjmMPXOlgd+eTBTesfRiD13/zKl5QrAC2kJovDXyAZg==}
+  '@cerbos/embedded-server@0.4.4':
+    resolution: {integrity: sha512-Xx8UTupDzOOlHUZazG2ZJmPljKqoAUlAUOoQfnA3Dtvm9iU9hxxZOXMrqCqT6WacuF0jo8+5Q+Y4r5yP8+Rxcw==}
     engines: {node: '>= 20'}
     peerDependencies:
       '@bufbuild/protobuf': ^2.10.2
@@ -3417,7 +3417,7 @@ snapshots:
       '@bufbuild/cel': 0.4.0(@bufbuild/protobuf@2.11.0)
       '@bufbuild/protobuf': 2.11.0
 
-  '@cerbos/embedded-server@0.4.2(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)':
+  '@cerbos/embedded-server@0.4.4(@bufbuild/protobuf@2.11.0)(@cerbos/api@packages+api)':
     dependencies:
       '@bufbuild/protobuf': 2.11.0
       '@cerbos/api': link:packages/api
