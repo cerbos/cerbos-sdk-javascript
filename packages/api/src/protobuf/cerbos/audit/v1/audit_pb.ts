@@ -51,7 +51,7 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_cerbos_audit_v1_audit: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChtjZXJib3MvYXVkaXQvdjEvYXVkaXQucHJvdG8SD2NlcmJvcy5hdWRpdC52MSLFAwoOQWNjZXNzTG9nRW50cnkSDwoHY2FsbF9pZBgBIAEoCRItCgl0aW1lc3RhbXAYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiMKBHBlZXIYAyABKAsyFS5jZXJib3MuYXVkaXQudjEuUGVlchI/CghtZXRhZGF0YRgEIAMoCzItLmNlcmJvcy5hdWRpdC52MS5BY2Nlc3NMb2dFbnRyeS5NZXRhZGF0YUVudHJ5Eg4KBm1ldGhvZBgFIAEoCRITCgtzdGF0dXNfY29kZRgGIAEoDRIRCglvdmVyc2l6ZWQYByABKAgSNAoNcG9saWN5X3NvdXJjZRgIIAEoCzIdLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2USPQoPcmVxdWVzdF9jb250ZXh0GAkgASgLMh8uY2VyYm9zLmF1ZGl0LnYxLlJlcXVlc3RDb250ZXh0SACIAQEaTAoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSKgoFdmFsdWUYAiABKAsyGy5jZXJib3MuYXVkaXQudjEuTWV0YVZhbHVlczoCOAFCEgoQX3JlcXVlc3RfY29udGV4dCL9BwoQRGVjaXNpb25Mb2dFbnRyeRIPCgdjYWxsX2lkGAEgASgJEi0KCXRpbWVzdGFtcBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASIwoEcGVlchgDIAEoCzIVLmNlcmJvcy5hdWRpdC52MS5QZWVyEjAKBmlucHV0cxgEIAMoCzIcLmNlcmJvcy5lbmdpbmUudjEuQ2hlY2tJbnB1dEICGAESMgoHb3V0cHV0cxgFIAMoCzIdLmNlcmJvcy5lbmdpbmUudjEuQ2hlY2tPdXRwdXRCAhgBEhEKBWVycm9yGAYgASgJQgIYARJLCg9jaGVja19yZXNvdXJjZXMYByABKAsyMC5jZXJib3MuYXVkaXQudjEuRGVjaXNpb25Mb2dFbnRyeS5DaGVja1Jlc291cmNlc0gAEkkKDnBsYW5fcmVzb3VyY2VzGAggASgLMi8uY2VyYm9zLmF1ZGl0LnYxLkRlY2lzaW9uTG9nRW50cnkuUGxhblJlc291cmNlc0gAEkEKCG1ldGFkYXRhGA8gAygLMi8uY2VyYm9zLmF1ZGl0LnYxLkRlY2lzaW9uTG9nRW50cnkuTWV0YWRhdGFFbnRyeRIwCgthdWRpdF90cmFpbBgQIAEoCzIbLmNlcmJvcy5hdWRpdC52MS5BdWRpdFRyYWlsEhEKCW92ZXJzaXplZBgRIAEoCBI0Cg1wb2xpY3lfc291cmNlGBIgASgLMh0uY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZRI9Cg9yZXF1ZXN0X2NvbnRleHQYEyABKAsyHy5jZXJib3MuYXVkaXQudjEuUmVxdWVzdENvbnRleHRIAYgBARp9Cg5DaGVja1Jlc291cmNlcxIsCgZpbnB1dHMYASADKAsyHC5jZXJib3MuZW5naW5lLnYxLkNoZWNrSW5wdXQSLgoHb3V0cHV0cxgCIAMoCzIdLmNlcmJvcy5lbmdpbmUudjEuQ2hlY2tPdXRwdXQSDQoFZXJyb3IYAyABKAkaigEKDVBsYW5SZXNvdXJjZXMSMwoFaW5wdXQYASABKAsyJC5jZXJib3MuZW5naW5lLnYxLlBsYW5SZXNvdXJjZXNJbnB1dBI1CgZvdXRwdXQYAiABKAsyJS5jZXJib3MuZW5naW5lLnYxLlBsYW5SZXNvdXJjZXNPdXRwdXQSDQoFZXJyb3IYAyABKAkaTAoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSKgoFdmFsdWUYAiABKAsyGy5jZXJib3MuYXVkaXQudjEuTWV0YVZhbHVlczoCOAFCCAoGbWV0aG9kQhIKEF9yZXF1ZXN0X2NvbnRleHQiHAoKTWV0YVZhbHVlcxIOCgZ2YWx1ZXMYASADKAkiVQoEUGVlchIPCgdhZGRyZXNzGAEgASgJEhEKCWF1dGhfaW5mbxgCIAEoCRISCgp1c2VyX2FnZW50GAMgASgJEhUKDWZvcndhcmRlZF9mb3IYBCABKAkiugEKCkF1ZGl0VHJhaWwSTgoSZWZmZWN0aXZlX3BvbGljaWVzGAEgAygLMjIuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWwuRWZmZWN0aXZlUG9saWNpZXNFbnRyeRpcChZFZmZlY3RpdmVQb2xpY2llc0VudHJ5EgsKA2tleRgBIAEoCRIxCgV2YWx1ZRgCIAEoCzIiLmNlcmJvcy5wb2xpY3kudjEuU291cmNlQXR0cmlidXRlczoCOAEisAgKDFBvbGljeVNvdXJjZRIyCgRibG9iGAEgASgLMiIuY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5CbG9iSAASOgoIZGF0YWJhc2UYAiABKAsyJi5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkRhdGFiYXNlSAASMgoEZGlzaxgDIAEoCzIiLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuRGlza0gAEjAKA2dpdBgEIAEoCzIhLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuR2l0SAASMAoDaHViGAUgASgLMiEuY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5IdWJIABJBCgxlbWJlZGRlZF9wZHAYBiABKAsyKS5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkVtYmVkZGVkUERQSAAaKgoEQmxvYhISCgpidWNrZXRfdXJsGAEgASgJEg4KBnByZWZpeBgCIAEoCRqmAQoIRGF0YWJhc2USPQoGZHJpdmVyGAEgASgOMi0uY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5EYXRhYmFzZS5Ecml2ZXIiWwoGRHJpdmVyEhYKEkRSSVZFUl9VTlNQRUNJRklFRBAAEhAKDERSSVZFUl9NWVNRTBABEhMKD0RSSVZFUl9QT1NUR1JFUxACEhIKDkRSSVZFUl9TUUxJVEUzEAMaGQoERGlzaxIRCglkaXJlY3RvcnkYASABKAkaXQoLRW1iZWRkZWRQRFASCwoDdXJsGAEgASgJEhMKC2NvbW1pdF9oYXNoGAIgASgJEiwKCGJ1aWx0X2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBpDCgNHaXQSFgoOcmVwb3NpdG9yeV91cmwYASABKAkSDgoGYnJhbmNoGAIgASgJEhQKDHN1YmRpcmVjdG9yeRgDIAEoCRq2AgoDSHViEg8KBWxhYmVsGAEgASgJSAASFwoNZGVwbG95bWVudF9pZBgCIAEoCUgAEhcKDXBsYXlncm91bmRfaWQYAyABKAlIABJFCgxsb2NhbF9idW5kbGUYBCABKAsyLS5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkh1Yi5Mb2NhbEJ1bmRsZUgAEksKD2VtYmVkZGVkX2J1bmRsZRgFIAEoCzIwLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuSHViLkVtYmVkZGVkQnVuZGxlSAAaMQoORW1iZWRkZWRCdW5kbGUSDwoHcnVsZV9pZBgBIAEoCRIOCgZzY29wZXMYAiADKAkaGwoLTG9jYWxCdW5kbGUSDAoEcGF0aBgBIAEoCUIICgZzb3VyY2VCCAoGc291cmNlIpUDCg5SZXF1ZXN0Q29udGV4dBKvAQoLYW5ub3RhdGlvbnMYASADKAsyMC5jZXJib3MuYXVkaXQudjEuUmVxdWVzdENvbnRleHQuQW5ub3RhdGlvbnNFbnRyeUJokkFZMh9LZXktdmFsdWUgcGFpcnMgb2YgYW5ub3RhdGlvbnMuSjN7ImFwcC1uYW1lIjogImF3ZXNvbWUtYXBwIiwgImFwcC12ZXJzaW9uIjogIjEuMi4zIn3IAQG6SAmaAQYiBHICEAEaSgoQQW5ub3RhdGlvbnNFbnRyeRILCgNrZXkYASABKAkSJQoFdmFsdWUYAiABKAsyFi5nb29nbGUucHJvdG9idWYuVmFsdWU6AjgBOoQBkkGAAQp+MnxPcHRpb25hbCBtZXRhZGF0YSB0byBhdHRhY2ggdG8gdGhlIHJlcXVlc3QuIFRoaXMgaW5mb3JtYXRpb24gd2lsbCBiZSBjYXB0dXJlZCBpbiB0aGUgYXVkaXQgbG9ncyBpZiBhdWRpdCBsb2dnaW5nIGlzIGVuYWJsZWQuQmsKF2Rldi5jZXJib3MuYXBpLnYxLmF1ZGl0WjpnaXRodWIuY29tL2NlcmJvcy9jZXJib3MvYXBpL2dlbnBiL2NlcmJvcy9hdWRpdC92MTthdWRpdHYxqgITQ2VyYm9zLkFwaS5WMS5BdWRpdGIGcHJvdG8z",
+    "ChtjZXJib3MvYXVkaXQvdjEvYXVkaXQucHJvdG8SD2NlcmJvcy5hdWRpdC52MSLFAwoOQWNjZXNzTG9nRW50cnkSDwoHY2FsbF9pZBgBIAEoCRItCgl0aW1lc3RhbXAYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiMKBHBlZXIYAyABKAsyFS5jZXJib3MuYXVkaXQudjEuUGVlchI/CghtZXRhZGF0YRgEIAMoCzItLmNlcmJvcy5hdWRpdC52MS5BY2Nlc3NMb2dFbnRyeS5NZXRhZGF0YUVudHJ5Eg4KBm1ldGhvZBgFIAEoCRITCgtzdGF0dXNfY29kZRgGIAEoDRIRCglvdmVyc2l6ZWQYByABKAgSNAoNcG9saWN5X3NvdXJjZRgIIAEoCzIdLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2USPQoPcmVxdWVzdF9jb250ZXh0GAkgASgLMh8uY2VyYm9zLmF1ZGl0LnYxLlJlcXVlc3RDb250ZXh0SACIAQEaTAoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSKgoFdmFsdWUYAiABKAsyGy5jZXJib3MuYXVkaXQudjEuTWV0YVZhbHVlczoCOAFCEgoQX3JlcXVlc3RfY29udGV4dCL9BwoQRGVjaXNpb25Mb2dFbnRyeRIPCgdjYWxsX2lkGAEgASgJEi0KCXRpbWVzdGFtcBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASIwoEcGVlchgDIAEoCzIVLmNlcmJvcy5hdWRpdC52MS5QZWVyEjAKBmlucHV0cxgEIAMoCzIcLmNlcmJvcy5lbmdpbmUudjEuQ2hlY2tJbnB1dEICGAESMgoHb3V0cHV0cxgFIAMoCzIdLmNlcmJvcy5lbmdpbmUudjEuQ2hlY2tPdXRwdXRCAhgBEhEKBWVycm9yGAYgASgJQgIYARJLCg9jaGVja19yZXNvdXJjZXMYByABKAsyMC5jZXJib3MuYXVkaXQudjEuRGVjaXNpb25Mb2dFbnRyeS5DaGVja1Jlc291cmNlc0gAEkkKDnBsYW5fcmVzb3VyY2VzGAggASgLMi8uY2VyYm9zLmF1ZGl0LnYxLkRlY2lzaW9uTG9nRW50cnkuUGxhblJlc291cmNlc0gAEkEKCG1ldGFkYXRhGA8gAygLMi8uY2VyYm9zLmF1ZGl0LnYxLkRlY2lzaW9uTG9nRW50cnkuTWV0YWRhdGFFbnRyeRIwCgthdWRpdF90cmFpbBgQIAEoCzIbLmNlcmJvcy5hdWRpdC52MS5BdWRpdFRyYWlsEhEKCW92ZXJzaXplZBgRIAEoCBI0Cg1wb2xpY3lfc291cmNlGBIgASgLMh0uY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZRI9Cg9yZXF1ZXN0X2NvbnRleHQYEyABKAsyHy5jZXJib3MuYXVkaXQudjEuUmVxdWVzdENvbnRleHRIAYgBARp9Cg5DaGVja1Jlc291cmNlcxIsCgZpbnB1dHMYASADKAsyHC5jZXJib3MuZW5naW5lLnYxLkNoZWNrSW5wdXQSLgoHb3V0cHV0cxgCIAMoCzIdLmNlcmJvcy5lbmdpbmUudjEuQ2hlY2tPdXRwdXQSDQoFZXJyb3IYAyABKAkaigEKDVBsYW5SZXNvdXJjZXMSMwoFaW5wdXQYASABKAsyJC5jZXJib3MuZW5naW5lLnYxLlBsYW5SZXNvdXJjZXNJbnB1dBI1CgZvdXRwdXQYAiABKAsyJS5jZXJib3MuZW5naW5lLnYxLlBsYW5SZXNvdXJjZXNPdXRwdXQSDQoFZXJyb3IYAyABKAkaTAoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSKgoFdmFsdWUYAiABKAsyGy5jZXJib3MuYXVkaXQudjEuTWV0YVZhbHVlczoCOAFCCAoGbWV0aG9kQhIKEF9yZXF1ZXN0X2NvbnRleHQiHAoKTWV0YVZhbHVlcxIOCgZ2YWx1ZXMYASADKAkiVQoEUGVlchIPCgdhZGRyZXNzGAEgASgJEhEKCWF1dGhfaW5mbxgCIAEoCRISCgp1c2VyX2FnZW50GAMgASgJEhUKDWZvcndhcmRlZF9mb3IYBCABKAkiugEKCkF1ZGl0VHJhaWwSTgoSZWZmZWN0aXZlX3BvbGljaWVzGAEgAygLMjIuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWwuRWZmZWN0aXZlUG9saWNpZXNFbnRyeRpcChZFZmZlY3RpdmVQb2xpY2llc0VudHJ5EgsKA2tleRgBIAEoCRIxCgV2YWx1ZRgCIAEoCzIiLmNlcmJvcy5wb2xpY3kudjEuU291cmNlQXR0cmlidXRlczoCOAEi2AkKDFBvbGljeVNvdXJjZRIyCgRibG9iGAEgASgLMiIuY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5CbG9iSAASOgoIZGF0YWJhc2UYAiABKAsyJi5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkRhdGFiYXNlSAASMgoEZGlzaxgDIAEoCzIiLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuRGlza0gAEjAKA2dpdBgEIAEoCzIhLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuR2l0SAASMAoDaHViGAUgASgLMiEuY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5IdWJIABJBCgxlbWJlZGRlZF9wZHAYBiABKAsyKS5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkVtYmVkZGVkUERQSAAaKgoEQmxvYhISCgpidWNrZXRfdXJsGAEgASgJEg4KBnByZWZpeBgCIAEoCRqmAQoIRGF0YWJhc2USPQoGZHJpdmVyGAEgASgOMi0uY2VyYm9zLmF1ZGl0LnYxLlBvbGljeVNvdXJjZS5EYXRhYmFzZS5Ecml2ZXIiWwoGRHJpdmVyEhYKEkRSSVZFUl9VTlNQRUNJRklFRBAAEhAKDERSSVZFUl9NWVNRTBABEhMKD0RSSVZFUl9QT1NUR1JFUxACEhIKDkRSSVZFUl9TUUxJVEUzEAMaGQoERGlzaxIRCglkaXJlY3RvcnkYASABKAkaXQoLRW1iZWRkZWRQRFASCwoDdXJsGAEgASgJEhMKC2NvbW1pdF9oYXNoGAIgASgJEiwKCGJ1aWx0X2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBpRCgNHaXQSFgoOcmVwb3NpdG9yeV91cmwYASABKAkSDgoGYnJhbmNoGAIgASgJEhQKDHN1YmRpcmVjdG9yeRgDIAEoCRIMCgRoYXNoGAQgASgJGtADCgNIdWISDwoFbGFiZWwYASABKAlIABIbCg1kZXBsb3ltZW50X2lkGAIgASgJQgIYAUgAEhcKDXBsYXlncm91bmRfaWQYAyABKAlIABJFCgxsb2NhbF9idW5kbGUYBCABKAsyLS5jZXJib3MuYXVkaXQudjEuUG9saWN5U291cmNlLkh1Yi5Mb2NhbEJ1bmRsZUgAEksKD2VtYmVkZGVkX2J1bmRsZRgFIAEoCzIwLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuSHViLkVtYmVkZGVkQnVuZGxlSAASRwoNcmVtb3RlX2J1bmRsZRgGIAEoCzIuLmNlcmJvcy5hdWRpdC52MS5Qb2xpY3lTb3VyY2UuSHViLlJlbW90ZUJ1bmRsZUgAGjEKDkVtYmVkZGVkQnVuZGxlEg8KB3J1bGVfaWQYASABKAkSDgoGc2NvcGVzGAIgAygJGi4KC0xvY2FsQnVuZGxlEgwKBHBhdGgYASABKAkSEQoJYnVuZGxlX2lkGAIgASgJGjgKDFJlbW90ZUJ1bmRsZRIVCg1kZXBsb3ltZW50X2lkGAEgASgJEhEKCWJ1bmRsZV9pZBgCIAEoCUIICgZzb3VyY2VCCAoGc291cmNlIpUDCg5SZXF1ZXN0Q29udGV4dBKvAQoLYW5ub3RhdGlvbnMYASADKAsyMC5jZXJib3MuYXVkaXQudjEuUmVxdWVzdENvbnRleHQuQW5ub3RhdGlvbnNFbnRyeUJokkFZMh9LZXktdmFsdWUgcGFpcnMgb2YgYW5ub3RhdGlvbnMuSjN7ImFwcC1uYW1lIjogImF3ZXNvbWUtYXBwIiwgImFwcC12ZXJzaW9uIjogIjEuMi4zIn3IAQG6SAmaAQYiBHICEAEaSgoQQW5ub3RhdGlvbnNFbnRyeRILCgNrZXkYASABKAkSJQoFdmFsdWUYAiABKAsyFi5nb29nbGUucHJvdG9idWYuVmFsdWU6AjgBOoQBkkGAAQp+MnxPcHRpb25hbCBtZXRhZGF0YSB0byBhdHRhY2ggdG8gdGhlIHJlcXVlc3QuIFRoaXMgaW5mb3JtYXRpb24gd2lsbCBiZSBjYXB0dXJlZCBpbiB0aGUgYXVkaXQgbG9ncyBpZiBhdWRpdCBsb2dnaW5nIGlzIGVuYWJsZWQuQmsKF2Rldi5jZXJib3MuYXBpLnYxLmF1ZGl0WjpnaXRodWIuY29tL2NlcmJvcy9jZXJib3MvYXBpL2dlbnBiL2NlcmJvcy9hdWRpdC92MTthdWRpdHYxqgITQ2VyYm9zLkFwaS5WMS5BdWRpdGIGcHJvdG8z",
     [
       file_buf_validate_validate,
       file_cerbos_engine_v1_engine,
@@ -1029,6 +1029,11 @@ export type PolicySource_Git = Message<"cerbos.audit.v1.PolicySource.Git"> & {
    * @generated from field: string subdirectory = 3;
    */
   subdirectory: string;
+
+  /**
+   * @generated from field: string hash = 4;
+   */
+  hash: string;
 };
 
 /**
@@ -1049,6 +1054,11 @@ export type PolicySource_GitJson = {
    * @generated from field: string subdirectory = 3;
    */
   subdirectory?: string;
+
+  /**
+   * @generated from field: string hash = 4;
+   */
+  hash?: string;
 };
 
 export type PolicySource_GitValid = PolicySource_Git;
@@ -1079,7 +1089,8 @@ export type PolicySource_Hub = Message<"cerbos.audit.v1.PolicySource.Hub"> & {
       }
     | {
         /**
-         * @generated from field: string deployment_id = 2;
+         * @generated from field: string deployment_id = 2 [deprecated = true];
+         * @deprecated
          */
         value: string;
         case: "deploymentId";
@@ -1105,6 +1116,13 @@ export type PolicySource_Hub = Message<"cerbos.audit.v1.PolicySource.Hub"> & {
         value: PolicySource_Hub_EmbeddedBundle;
         case: "embeddedBundle";
       }
+    | {
+        /**
+         * @generated from field: cerbos.audit.v1.PolicySource.Hub.RemoteBundle remote_bundle = 6;
+         */
+        value: PolicySource_Hub_RemoteBundle;
+        case: "remoteBundle";
+      }
     | { case: undefined; value?: undefined };
 };
 
@@ -1118,7 +1136,8 @@ export type PolicySource_HubJson = {
   label?: string;
 
   /**
-   * @generated from field: string deployment_id = 2;
+   * @generated from field: string deployment_id = 2 [deprecated = true];
+   * @deprecated
    */
   deploymentId?: string;
 
@@ -1136,6 +1155,11 @@ export type PolicySource_HubJson = {
    * @generated from field: cerbos.audit.v1.PolicySource.Hub.EmbeddedBundle embedded_bundle = 5;
    */
   embeddedBundle?: PolicySource_Hub_EmbeddedBundleJson;
+
+  /**
+   * @generated from field: cerbos.audit.v1.PolicySource.Hub.RemoteBundle remote_bundle = 6;
+   */
+  remoteBundle?: PolicySource_Hub_RemoteBundleJson;
 };
 
 export type PolicySource_HubValid = PolicySource_Hub;
@@ -1204,6 +1228,11 @@ export type PolicySource_Hub_LocalBundle =
      * @generated from field: string path = 1;
      */
     path: string;
+
+    /**
+     * @generated from field: string bundle_id = 2;
+     */
+    bundleId: string;
   };
 
 /**
@@ -1214,6 +1243,11 @@ export type PolicySource_Hub_LocalBundleJson = {
    * @generated from field: string path = 1;
    */
   path?: string;
+
+  /**
+   * @generated from field: string bundle_id = 2;
+   */
+  bundleId?: string;
 };
 
 export type PolicySource_Hub_LocalBundleValid = PolicySource_Hub_LocalBundle;
@@ -1229,6 +1263,51 @@ export const PolicySource_Hub_LocalBundleSchema: GenMessage<
     validType: PolicySource_Hub_LocalBundleValid;
   }
 > = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 5, 5, 1);
+
+/**
+ * @generated from message cerbos.audit.v1.PolicySource.Hub.RemoteBundle
+ */
+export type PolicySource_Hub_RemoteBundle =
+  Message<"cerbos.audit.v1.PolicySource.Hub.RemoteBundle"> & {
+    /**
+     * @generated from field: string deployment_id = 1;
+     */
+    deploymentId: string;
+
+    /**
+     * @generated from field: string bundle_id = 2;
+     */
+    bundleId: string;
+  };
+
+/**
+ * @generated from message cerbos.audit.v1.PolicySource.Hub.RemoteBundle
+ */
+export type PolicySource_Hub_RemoteBundleJson = {
+  /**
+   * @generated from field: string deployment_id = 1;
+   */
+  deploymentId?: string;
+
+  /**
+   * @generated from field: string bundle_id = 2;
+   */
+  bundleId?: string;
+};
+
+export type PolicySource_Hub_RemoteBundleValid = PolicySource_Hub_RemoteBundle;
+
+/**
+ * Describes the message cerbos.audit.v1.PolicySource.Hub.RemoteBundle.
+ * Use `create(PolicySource_Hub_RemoteBundleSchema)` to create a new message.
+ */
+export const PolicySource_Hub_RemoteBundleSchema: GenMessage<
+  PolicySource_Hub_RemoteBundle,
+  {
+    jsonType: PolicySource_Hub_RemoteBundleJson;
+    validType: PolicySource_Hub_RemoteBundleValid;
+  }
+> = /*@__PURE__*/ messageDesc(file_cerbos_audit_v1_audit, 5, 5, 2);
 
 /**
  * @generated from message cerbos.audit.v1.RequestContext
