@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.29.0] - 2026-04-28
+
 ### Added
 
 - [`PolicySourceHubRemoteBundle`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicySourceHubRemoteBundle.html) as a possible type for [`AccessLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AccessLogEntry.html#policysource) and [`DecisionLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#policysource) ([#1418](https://github.com/cerbos/cerbos-sdk-javascript/pull/1418))
@@ -368,7 +372,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.28.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.29.0...HEAD
+[0.29.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.28.1...@cerbos/core@0.29.0
 [0.28.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.28.0...@cerbos/core@0.28.1
 [0.28.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.27.1...@cerbos/core@0.28.0
 [0.27.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.27.0...@cerbos/core@0.27.1
