@@ -90,6 +90,7 @@ export * from "./external/PrincipalRule.js";
 export * from "./external/PrincipalRuleAction.js";
 export * from "./external/PurgeStoreRevisionsRequest.js";
 export * from "./external/ReloadStoreRequest.js";
+export * from "./external/RemoteBundle.js";
 export * from "./external/RequestContext.js";
 export * from "./external/Resource.js";
 export * from "./external/ResourceCheck.js";

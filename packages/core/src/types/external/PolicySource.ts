@@ -1,6 +1,7 @@
 import type { DatabaseDriver } from "./DatabaseDriver.js";
 import type { EmbeddedBundle } from "./EmbeddedBundle.js";
 import type { LocalBundle } from "./LocalBundle.js";
+import type { RemoteBundle } from "./RemoteBundle.js";
 
 /**
  * Source of policies.
@@ -164,11 +165,12 @@ export function policySourceIsGit(
  * Policies sourced from {@link https://www.cerbos.dev/product-cerbos-hub | Cerbos Hub} using the {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub | `hub` storage driver}.
  */
 export type PolicySourceHub =
-  | PolicySourceHubDeployment
+  | PolicySourceHubDeployment // eslint-disable-line @typescript-eslint/no-deprecated
   | PolicySourceHubEmbeddedBundle
   | PolicySourceHubLabel
   | PolicySourceHubLocalBundle
-  | PolicySourceHubPlayground;
+  | PolicySourceHubPlayground
+  | PolicySourceHubRemoteBundle;
 
 /**
  * Type guard to check if a {@link PolicySource} is a {@link PolicySourceHub}.
@@ -191,6 +193,8 @@ export interface PolicySourceHubBase {
 
 /**
  * Policies sourced from a deployment in {@link https://www.cerbos.dev/product-cerbos-hub | Cerbos Hub} using the {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub | `hub` storage driver}.
+ *
+ * @deprecated Use {@link PolicySourceHubRemoteBundle} instead.
  */
 export interface PolicySourceHubDeployment extends PolicySourceHubBase {
   /**
@@ -201,9 +205,12 @@ export interface PolicySourceHubDeployment extends PolicySourceHubBase {
 
 /**
  * Type guard to check if a {@link PolicySource} is a {@link PolicySourceHubDeployment}.
+ *
+ * @deprecated Use {@link policySourceIsHubRemoteBundle} instead.
  */
 export function policySourceIsHubDeployment(
   source: PolicySource,
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
 ): source is PolicySourceHubDeployment {
   return policySourceIsHub(source) && "deploymentId" in source;
 }
@@ -282,4 +289,29 @@ export function policySourceIsHubPlayground(
   source: PolicySource,
 ): source is PolicySourceHubPlayground {
   return policySourceIsHub(source) && "playgroundId" in source;
+}
+
+/**
+ * Policies sourced from a remote policy bundle using the {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub | `hub` storage driver}.
+ *
+ * @remarks
+ * Requires the Cerbos policy decision point server to be at least v0.52.
+ */
+export interface PolicySourceHubRemoteBundle extends PolicySourceHubBase {
+  /**
+   * Details of the remote policy bundle.
+   */
+  remoteBundle: RemoteBundle;
+}
+
+/**
+ * Type guard to check if a {@link PolicySource} is a {@link PolicySourceHubRemoteBundle}.
+ *
+ * @remarks
+ * Requires the Cerbos policy decision point server to be at least v0.52.
+ */
+export function policySourceIsHubRemoteBundle(
+  source: PolicySource,
+): source is PolicySourceHubRemoteBundle {
+  return policySourceIsHub(source) && "remoteBundle" in source;
 }

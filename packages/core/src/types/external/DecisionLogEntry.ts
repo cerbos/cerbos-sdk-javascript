@@ -45,6 +45,9 @@ export interface DecisionLogEntry {
 
   /**
    * Where the policy decision point server sourced its policies.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.46.
    */
   policySource: PolicySource | undefined;
 

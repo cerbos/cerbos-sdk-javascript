@@ -1,3 +1,11 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: "[`PolicySourceHubRemoteBundle`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicySourceHubRemoteBundle.html) as a possible type for [`AccessLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AccessLogEntry.html#policysource) and [`DecisionLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#policysource)"
+      details: Requires a policy decision point server running Cerbos 0.52+.
+      pull: 1418
+
 releases:
   - version: 0.26.2
     date: 2026-04-27
