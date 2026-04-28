@@ -1,7 +1,16 @@
-unreleased:
-  type: patch
-
 releases:
+  - version: 0.5.2
+    date: 2026-04-28
+
+    bumped:
+      "@cerbos/core":
+        to: 0.29.0
+        pull: 1436
+
+      "@cerbos/hub":
+        to: 0.5.4
+        pull: 1436
+
   - version: 0.5.1
     date: 2026-04-27
 

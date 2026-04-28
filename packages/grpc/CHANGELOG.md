@@ -2,11 +2,19 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.26.0] - 2026-04-28
+
 ### Added
 
 - [`PolicySourceHubRemoteBundle`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicySourceHubRemoteBundle.html) as a possible type for [`AccessLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AccessLogEntry.html#policysource) and [`DecisionLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#policysource) ([#1418](https://github.com/cerbos/cerbos-sdk-javascript/pull/1418))
 
   Requires a policy decision point server running Cerbos 0.52+.
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.29.0 ([#1436](https://github.com/cerbos/cerbos-sdk-javascript/pull/1436))
 
 ## [0.25.1] - 2026-04-27
 
@@ -562,7 +570,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.25.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.26.0...HEAD
+[0.26.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.25.1...@cerbos/grpc@0.26.0
 [0.25.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.25.0...@cerbos/grpc@0.25.1
 [0.25.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.24.2...@cerbos/grpc@0.25.0
 [0.24.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.24.1...@cerbos/grpc@0.24.2
