@@ -1,0 +1,32 @@
+// Copyright 2021-2025 Zenauth Ltd.
+// SPDX-License-Identifier: Apache-2.0
+
+syntax = "proto3";
+
+package cerbos.cloud.auth.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/cerbos/cloud-api/genpb/cerbos/cloud/auth/v1;authv1";
+
+message ClientCredentials {
+  string client_id = 1 [(buf.validate.field).string.min_len = 1];
+  string client_secret = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+message DeviceToken {
+  string access_token = 1 [(buf.validate.field).string.min_len = 1];
+  string refresh_token = 2 [(buf.validate.field).string.min_len = 1];
+  google.protobuf.Timestamp expires_at = 3 [(buf.validate.field).required = true];
+  string token_type = 4;
+}
+
+message SavedCredentials {
+  string api_endpoint = 1 [(buf.validate.field).string.host_and_port = true];
+  oneof credentials {
+    option (buf.validate.oneof).required = true;
+    ClientCredentials client_credentials = 2;
+    DeviceToken device_token = 3;
+  }
+}

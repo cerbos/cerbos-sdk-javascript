@@ -16,6 +16,8 @@ import {
   serviceDesc,
 } from "@bufbuild/protobuf/codegenv2";
 import { file_buf_validate_validate } from "../../../../buf/validate/validate_pb.js";
+import type { DeviceToken } from "../../auth/v1/auth_pb.js";
+import { file_cerbos_cloud_auth_v1_auth } from "../../auth/v1/auth_pb.js";
 import { file_google_api_visibility } from "../../../../google/api/visibility_pb.js";
 import type { Duration } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_duration } from "@bufbuild/protobuf/wkt";
@@ -27,9 +29,10 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_cerbos_cloud_apikey_v1_apikey: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "CiNjZXJib3MvY2xvdWQvYXBpa2V5L3YxL2FwaWtleS5wcm90bxIWY2VyYm9zLmNsb3VkLmFwaWtleS52MSJWChdJc3N1ZUFjY2Vzc1Rva2VuUmVxdWVzdBIbCgljbGllbnRfaWQYASABKAlCCLpIBXIDmAEMEh4KDWNsaWVudF9zZWNyZXQYAiABKAlCB7pIBHICEAEicAoYSXNzdWVBY2Nlc3NUb2tlblJlc3BvbnNlEh0KDGFjY2Vzc190b2tlbhgBIAEoCUIHukgEcgIQARI1CgpleHBpcmVzX2luGAIgASgLMhkuZ29vZ2xlLnByb3RvYnVmLkR1cmF0aW9uQga6SAPIAQEynAEKDUFwaUtleVNlcnZpY2USdQoQSXNzdWVBY2Nlc3NUb2tlbhIvLmNlcmJvcy5jbG91ZC5hcGlrZXkudjEuSXNzdWVBY2Nlc3NUb2tlblJlcXVlc3QaMC5jZXJib3MuY2xvdWQuYXBpa2V5LnYxLklzc3VlQWNjZXNzVG9rZW5SZXNwb25zZRoU+tLkkwIOEgxFWFBFUklNRU5UQUxCgAEKHmRldi5jZXJib3MuYXBpLmNsb3VkLnYxLmFwaWtleVpBZ2l0aHViLmNvbS9jZXJib3MvY2xvdWQtYXBpL2dlbnBiL2NlcmJvcy9jbG91ZC9hcGlrZXkvdjE7YXBpa2V5djGqAhpDZXJib3MuQXBpLkNsb3VkLlYxLkFwaUtleWIGcHJvdG8z",
+    "CiNjZXJib3MvY2xvdWQvYXBpa2V5L3YxL2FwaWtleS5wcm90bxIWY2VyYm9zLmNsb3VkLmFwaWtleS52MSJWChdJc3N1ZUFjY2Vzc1Rva2VuUmVxdWVzdBIbCgljbGllbnRfaWQYASABKAlCCLpIBXIDmAEMEh4KDWNsaWVudF9zZWNyZXQYAiABKAlCB7pIBHICEAEicAoYSXNzdWVBY2Nlc3NUb2tlblJlc3BvbnNlEh0KDGFjY2Vzc190b2tlbhgBIAEoCUIHukgEcgIQARI1CgpleHBpcmVzX2luGAIgASgLMhkuZ29vZ2xlLnByb3RvYnVmLkR1cmF0aW9uQga6SAPIAQEiFwoVUmVnaXN0ZXJEZXZpY2VSZXF1ZXN0IoEBChZSZWdpc3RlckRldmljZVJlc3BvbnNlEhoKEHZlcmlmaWNhdGlvbl91cmwYASABKAlIABI5CgxkZXZpY2VfdG9rZW4YAiABKAsyIS5jZXJib3MuY2xvdWQuYXV0aC52MS5EZXZpY2VUb2tlbkgAQhAKB21lc3NhZ2USBbpIAggBIlwKGVJlZnJlc2hEZXZpY2VUb2tlblJlcXVlc3QSPwoMZGV2aWNlX3Rva2VuGAEgASgLMiEuY2VyYm9zLmNsb3VkLmF1dGgudjEuRGV2aWNlVG9rZW5CBrpIA8gBASJdChpSZWZyZXNoRGV2aWNlVG9rZW5SZXNwb25zZRI/CgxkZXZpY2VfdG9rZW4YASABKAsyIS5jZXJib3MuY2xvdWQuYXV0aC52MS5EZXZpY2VUb2tlbkIGukgDyAEBMowDCg1BcGlLZXlTZXJ2aWNlEnUKEElzc3VlQWNjZXNzVG9rZW4SLy5jZXJib3MuY2xvdWQuYXBpa2V5LnYxLklzc3VlQWNjZXNzVG9rZW5SZXF1ZXN0GjAuY2VyYm9zLmNsb3VkLmFwaWtleS52MS5Jc3N1ZUFjY2Vzc1Rva2VuUmVzcG9uc2UScQoOUmVnaXN0ZXJEZXZpY2USLS5jZXJib3MuY2xvdWQuYXBpa2V5LnYxLlJlZ2lzdGVyRGV2aWNlUmVxdWVzdBouLmNlcmJvcy5jbG91ZC5hcGlrZXkudjEuUmVnaXN0ZXJEZXZpY2VSZXNwb25zZTABEnsKElJlZnJlc2hEZXZpY2VUb2tlbhIxLmNlcmJvcy5jbG91ZC5hcGlrZXkudjEuUmVmcmVzaERldmljZVRva2VuUmVxdWVzdBoyLmNlcmJvcy5jbG91ZC5hcGlrZXkudjEuUmVmcmVzaERldmljZVRva2VuUmVzcG9uc2UaFPrS5JMCDhIMRVhQRVJJTUVOVEFMQoABCh5kZXYuY2VyYm9zLmFwaS5jbG91ZC52MS5hcGlrZXlaQWdpdGh1Yi5jb20vY2VyYm9zL2Nsb3VkLWFwaS9nZW5wYi9jZXJib3MvY2xvdWQvYXBpa2V5L3YxO2FwaWtleXYxqgIaQ2VyYm9zLkFwaS5DbG91ZC5WMS5BcGlLZXliBnByb3RvMw",
     [
       file_buf_validate_validate,
+      file_cerbos_cloud_auth_v1_auth,
       file_google_api_visibility,
       file_google_protobuf_duration,
     ],
@@ -84,6 +87,92 @@ export const IssueAccessTokenResponseSchema: GenMessage<IssueAccessTokenResponse
   messageDesc(file_cerbos_cloud_apikey_v1_apikey, 1);
 
 /**
+ * @generated from message cerbos.cloud.apikey.v1.RegisterDeviceRequest
+ */
+export type RegisterDeviceRequest =
+  Message<"cerbos.cloud.apikey.v1.RegisterDeviceRequest"> & {};
+
+/**
+ * Describes the message cerbos.cloud.apikey.v1.RegisterDeviceRequest.
+ * Use `create(RegisterDeviceRequestSchema)` to create a new message.
+ */
+export const RegisterDeviceRequestSchema: GenMessage<RegisterDeviceRequest> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_apikey_v1_apikey, 2);
+
+/**
+ * @generated from message cerbos.cloud.apikey.v1.RegisterDeviceResponse
+ */
+export type RegisterDeviceResponse =
+  Message<"cerbos.cloud.apikey.v1.RegisterDeviceResponse"> & {
+    /**
+     * @generated from oneof cerbos.cloud.apikey.v1.RegisterDeviceResponse.message
+     */
+    message:
+      | {
+          /**
+           * @generated from field: string verification_url = 1;
+           */
+          value: string;
+          case: "verificationUrl";
+        }
+      | {
+          /**
+           * @generated from field: cerbos.cloud.auth.v1.DeviceToken device_token = 2;
+           */
+          value: DeviceToken;
+          case: "deviceToken";
+        }
+      | { case: undefined; value?: undefined };
+  };
+
+/**
+ * Describes the message cerbos.cloud.apikey.v1.RegisterDeviceResponse.
+ * Use `create(RegisterDeviceResponseSchema)` to create a new message.
+ */
+export const RegisterDeviceResponseSchema: GenMessage<RegisterDeviceResponse> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_apikey_v1_apikey, 3);
+
+/**
+ * @generated from message cerbos.cloud.apikey.v1.RefreshDeviceTokenRequest
+ */
+export type RefreshDeviceTokenRequest =
+  Message<"cerbos.cloud.apikey.v1.RefreshDeviceTokenRequest"> & {
+    /**
+     * @generated from field: cerbos.cloud.auth.v1.DeviceToken device_token = 1;
+     */
+    deviceToken?: DeviceToken;
+  };
+
+/**
+ * Describes the message cerbos.cloud.apikey.v1.RefreshDeviceTokenRequest.
+ * Use `create(RefreshDeviceTokenRequestSchema)` to create a new message.
+ */
+export const RefreshDeviceTokenRequestSchema: GenMessage<RefreshDeviceTokenRequest> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_apikey_v1_apikey, 4);
+
+/**
+ * @generated from message cerbos.cloud.apikey.v1.RefreshDeviceTokenResponse
+ */
+export type RefreshDeviceTokenResponse =
+  Message<"cerbos.cloud.apikey.v1.RefreshDeviceTokenResponse"> & {
+    /**
+     * @generated from field: cerbos.cloud.auth.v1.DeviceToken device_token = 1;
+     */
+    deviceToken?: DeviceToken;
+  };
+
+/**
+ * Describes the message cerbos.cloud.apikey.v1.RefreshDeviceTokenResponse.
+ * Use `create(RefreshDeviceTokenResponseSchema)` to create a new message.
+ */
+export const RefreshDeviceTokenResponseSchema: GenMessage<RefreshDeviceTokenResponse> =
+  /*@__PURE__*/
+  messageDesc(file_cerbos_cloud_apikey_v1_apikey, 5);
+
+/**
  * @generated from service cerbos.cloud.apikey.v1.ApiKeyService
  */
 export const ApiKeyService: GenService<{
@@ -94,5 +183,21 @@ export const ApiKeyService: GenService<{
     methodKind: "unary";
     input: typeof IssueAccessTokenRequestSchema;
     output: typeof IssueAccessTokenResponseSchema;
+  };
+  /**
+   * @generated from rpc cerbos.cloud.apikey.v1.ApiKeyService.RegisterDevice
+   */
+  registerDevice: {
+    methodKind: "server_streaming";
+    input: typeof RegisterDeviceRequestSchema;
+    output: typeof RegisterDeviceResponseSchema;
+  };
+  /**
+   * @generated from rpc cerbos.cloud.apikey.v1.ApiKeyService.RefreshDeviceToken
+   */
+  refreshDeviceToken: {
+    methodKind: "unary";
+    input: typeof RefreshDeviceTokenRequestSchema;
+    output: typeof RefreshDeviceTokenResponseSchema;
   };
 }> = /*@__PURE__*/ serviceDesc(file_cerbos_cloud_apikey_v1_apikey, 0);

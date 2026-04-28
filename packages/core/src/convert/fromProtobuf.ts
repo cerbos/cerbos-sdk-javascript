@@ -20,6 +20,7 @@ import type {
   PolicySource_Hub,
   PolicySource_Hub_EmbeddedBundle,
   PolicySource_Hub_LocalBundle,
+  PolicySource_Hub_RemoteBundle,
   RequestContext as RequestContextProtobuf,
 } from "@cerbos/api/cerbos/audit/v1/audit_pb";
 import { PolicySource_Database_Driver } from "@cerbos/api/cerbos/audit/v1/audit_pb";
@@ -170,6 +171,7 @@ import type {
   PolicySourceHubLabel,
   PolicySourceHubLocalBundle,
   PolicySourceHubPlayground,
+  PolicySourceHubRemoteBundle,
   PolicyStoreIntegrityViolation,
   PolicyStoreIntegrityViolationBreaksScopeChain,
   PolicyStoreIntegrityViolationRequiredByOtherPolicies,
@@ -177,6 +179,7 @@ import type {
   PrincipalPolicy,
   PrincipalRule,
   PrincipalRuleAction,
+  RemoteBundle,
   RequestContext,
   Resource,
   ResourcePolicy,
@@ -419,6 +422,7 @@ function policySourceHubSourceFromProtobuf(
     label: policySourceHubLabelFromProtobuf,
     localBundle: policySourceHubLocalBundleFromProtobuf,
     playgroundId: policySourceHubPlaygroundFromProtobuf,
+    remoteBundle: policySourceHubRemoteBundleFromProtobuf,
   });
 }
 
@@ -452,6 +456,12 @@ function policySourceHubPlaygroundFromProtobuf(
   return { playgroundId };
 }
 
+function policySourceHubRemoteBundleFromProtobuf(
+  remoteBundle: PolicySource_Hub_RemoteBundle,
+): OmitPolicySourceHubBase<PolicySourceHubRemoteBundle> {
+  return { remoteBundle: remoteBundleFromProtobuf(remoteBundle) };
+}
+
 function embeddedBundleFromProtobuf({
   ruleId,
   scopes,
@@ -466,6 +476,16 @@ function localBundleFromProtobuf({
   path,
 }: PolicySource_Hub_LocalBundle): LocalBundle {
   return { path };
+}
+
+function remoteBundleFromProtobuf({
+  bundleId,
+  deploymentId,
+}: PolicySource_Hub_RemoteBundle): RemoteBundle {
+  return {
+    bundleId,
+    deploymentId,
+  };
 }
 
 export function requestContextFromProtobuf({

@@ -6,6 +6,7 @@ syntax = "proto3";
 package cerbos.cloud.apikey.v1;
 
 import "buf/validate/validate.proto";
+import "cerbos/cloud/auth/v1/auth.proto";
 import "google/api/visibility.proto";
 import "google/protobuf/duration.proto";
 
@@ -23,8 +24,28 @@ message IssueAccessTokenResponse {
   google.protobuf.Duration expires_in = 2 [(buf.validate.field).required = true];
 }
 
+message RegisterDeviceRequest {}
+
+message RegisterDeviceResponse {
+  oneof message {
+    option (buf.validate.oneof).required = true;
+    string verification_url = 1;
+    cerbos.cloud.auth.v1.DeviceToken device_token = 2;
+  }
+}
+
+message RefreshDeviceTokenRequest {
+  cerbos.cloud.auth.v1.DeviceToken device_token = 1 [(buf.validate.field).required = true];
+}
+
+message RefreshDeviceTokenResponse {
+  cerbos.cloud.auth.v1.DeviceToken device_token = 1 [(buf.validate.field).required = true];
+}
+
 service ApiKeyService {
   option (google.api.api_visibility).restriction = "EXPERIMENTAL";
 
   rpc IssueAccessToken(IssueAccessTokenRequest) returns (IssueAccessTokenResponse) {}
+  rpc RegisterDevice(RegisterDeviceRequest) returns (stream RegisterDeviceResponse) {}
+  rpc RefreshDeviceToken(RefreshDeviceTokenRequest) returns (RefreshDeviceTokenResponse) {}
 }
