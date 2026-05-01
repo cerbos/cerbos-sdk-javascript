@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/opentelemetry",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "type": "module",
   "description": "OpenTelemetry instrumentation for the @cerbos/grpc and @cerbos/http client libraries",
   "repository": {
@@ -52,7 +52,7 @@
   "peerDependencies": {
     "@bufbuild/protobuf": "^2.11.0",
     "@cerbos/api": "^0.7.0",
-    "@cerbos/core": "^0.29.0"
+    "@cerbos/core": "^0.30.0"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",
