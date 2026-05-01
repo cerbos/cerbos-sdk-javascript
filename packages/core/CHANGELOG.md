@@ -8,6 +8,10 @@
   - [`LocalBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.LocalBundle.html#bundleid)
   - [`PolicySourceGit.hash`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicySourceGit.html#hash)
 
+### Changed
+
+- Bump dependency on [@cerbos/api] to 0.7.0 ([#1438](https://github.com/cerbos/cerbos-sdk-javascript/pull/1438))
+
 ## [0.29.0] - 2026-04-28
 
 ### Added

@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependency on [@cerbos/api] to 0.7.0 ([#1438](https://github.com/cerbos/cerbos-sdk-javascript/pull/1438))
 
 ## [0.6.3] - 2026-04-28
 
