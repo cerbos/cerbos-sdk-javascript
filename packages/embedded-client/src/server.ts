@@ -288,6 +288,9 @@ function auditPolicySource(policies: PolicySource): AuditPolicySource {
 
   return {
     kind: "hub",
-    localBundle: { path: "" },
+    localBundle: {
+      path: "",
+      bundleId: "",
+    },
   };
 }

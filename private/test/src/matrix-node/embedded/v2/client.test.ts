@@ -85,7 +85,13 @@ describe("Embedded", () => {
           ),
         bundleId: localBundleId,
         storeId: "NKFD70XLV8I5",
-        policySource: { kind: "hub", localBundle: { path: "" } },
+        policySource: {
+          kind: "hub",
+          localBundle: {
+            path: "",
+            bundleId: "",
+          },
+        },
       },
     ];
 
