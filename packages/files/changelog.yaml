@@ -1,12 +1,16 @@
-unreleased:
-  type: patch
-
-  bumped:
-    "@cerbos/api":
-      to: 0.7.0
-      pull: 1438
-
 releases:
+  - version: 0.6.4
+    date: 2026-05-01
+
+    bumped:
+      "@cerbos/api":
+        to: 0.7.0
+        pull: 1438
+
+      "@cerbos/core":
+        to: 0.30.0
+        pull: 1439
+
   - version: 0.6.3
     date: 2026-04-28
 

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.28.0] - 2026-05-01
+
 ### Added
 
 - Further policy source updates for Cerbos 0.52 ([#1437](https://github.com/cerbos/cerbos-sdk-javascript/pull/1437))
@@ -11,6 +15,8 @@
 ### Changed
 
 - Bump dependency on [@cerbos/api] to 0.7.0 ([#1438](https://github.com/cerbos/cerbos-sdk-javascript/pull/1438))
+
+- Bump dependency on [@cerbos/core] to 0.30.0 ([#1439](https://github.com/cerbos/cerbos-sdk-javascript/pull/1439))
 
 ## [0.27.0] - 2026-04-28
 
@@ -504,7 +510,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.27.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.28.0...HEAD
+[0.28.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.27.0...@cerbos/http@0.28.0
 [0.27.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.26.2...@cerbos/http@0.27.0
 [0.26.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.26.1...@cerbos/http@0.26.2
 [0.26.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.26.0...@cerbos/http@0.26.1

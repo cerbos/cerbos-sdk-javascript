@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.30.0] - 2026-05-01
+
 ### Added
 
 - Further policy source updates for Cerbos 0.52 ([#1437](https://github.com/cerbos/cerbos-sdk-javascript/pull/1437))
@@ -380,7 +384,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.29.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.30.0...HEAD
+[0.30.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.29.0...@cerbos/core@0.30.0
 [0.29.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.28.1...@cerbos/core@0.29.0
 [0.28.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.28.0...@cerbos/core@0.28.1
 [0.28.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.27.1...@cerbos/core@0.28.0
