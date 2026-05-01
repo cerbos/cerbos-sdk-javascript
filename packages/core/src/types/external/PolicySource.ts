@@ -150,6 +150,14 @@ export interface PolicySourceGit {
    * Subdirectory within the repository from which policies were loaded.
    */
   subdirectory: string;
+
+  /**
+   * Hash of the commit from which policies were cloned.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.52.
+   */
+  hash: string;
 }
 
 /**

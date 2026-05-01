@@ -1,3 +1,13 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: Further policy source updates for Cerbos 0.52
+      details: |-
+        - [`LocalBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.LocalBundle.html#bundleid)
+        - [`PolicySourceGit.hash`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicySourceGit.html#hash)
+      pull: 1437
+
 releases:
   - version: 0.29.0
     date: 2026-04-28

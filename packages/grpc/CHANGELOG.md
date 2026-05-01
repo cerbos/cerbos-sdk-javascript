@@ -2,7 +2,11 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Further policy source updates for Cerbos 0.52 ([#1437](https://github.com/cerbos/cerbos-sdk-javascript/pull/1437))
+  - [`LocalBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.LocalBundle.html#bundleid)
+  - [`PolicySourceGit.hash`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicySourceGit.html#hash)
 
 ## [0.26.0] - 2026-04-28
 

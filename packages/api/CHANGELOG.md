@@ -2,7 +2,12 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Cerbos v0.52 updates ([#1437](https://github.com/cerbos/cerbos-sdk-javascript/pull/1437))
+  - `cerbos.audit.v1.PolicySource.Git.hash`
+  - `cerbos.audit.v1.PolicySource.Hub.LocalBundle.bundleId`
+  - `cerbos.audit.v1.PolicySource.Hub.RemoteBundle`
 
 ## [0.6.0] - 2026-02-03
 

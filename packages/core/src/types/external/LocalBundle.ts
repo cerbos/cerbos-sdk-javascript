@@ -6,4 +6,12 @@ export interface LocalBundle {
    * The path to the local policy bundle file.
    */
   path: string;
+
+  /**
+   * The ID of the local policy bundle.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.52.
+   */
+  bundleId: string;
 }

@@ -390,12 +390,14 @@ function policySourceGitFromProtobuf({
   repositoryUrl,
   branch,
   subdirectory,
+  hash,
 }: PolicySource_Git): PolicySourceGit {
   return {
     kind: "git",
     repositoryUrl,
     branch,
     subdirectory,
+    hash,
   };
 }
 
@@ -474,8 +476,12 @@ function embeddedBundleFromProtobuf({
 
 function localBundleFromProtobuf({
   path,
+  bundleId,
 }: PolicySource_Hub_LocalBundle): LocalBundle {
-  return { path };
+  return {
+    path,
+    bundleId,
+  };
 }
 
 function remoteBundleFromProtobuf({

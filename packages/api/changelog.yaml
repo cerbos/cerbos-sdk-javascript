@@ -1,3 +1,14 @@
+unreleased:
+  type: minor
+
+  added:
+    - summary: Cerbos v0.52 updates
+      details: |-
+        - `cerbos.audit.v1.PolicySource.Git.hash`
+        - `cerbos.audit.v1.PolicySource.Hub.LocalBundle.bundleId`
+        - `cerbos.audit.v1.PolicySource.Hub.RemoteBundle`
+      pull: 1437
+
 releases:
   - version: 0.6.0
     date: 2026-02-03
