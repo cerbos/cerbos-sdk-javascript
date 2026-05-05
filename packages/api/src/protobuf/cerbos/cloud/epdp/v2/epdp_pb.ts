@@ -77,12 +77,12 @@ export type Config = Message<"cerbos.cloud.epdp.v2.Config"> & {
   /**
    * @generated from field: cerbos.cloud.epdp.v2.Config.Evaluator evaluator = 1;
    */
-  evaluator?: Config_Evaluator;
+  evaluator?: Config_Evaluator | undefined;
 
   /**
    * @generated from field: cerbos.cloud.epdp.v2.Config.Schema schema = 2;
    */
-  schema?: Config_Schema;
+  schema?: Config_Schema | undefined;
 };
 
 /**
@@ -309,7 +309,7 @@ export type Metadata = Message<"cerbos.cloud.epdp.v2.Metadata"> & {
   /**
    * @generated from field: google.protobuf.Timestamp built_at = 4;
    */
-  builtAt?: Timestamp;
+  builtAt?: Timestamp | undefined;
 };
 
 /**
@@ -379,12 +379,12 @@ export type CheckResourcesResponse =
     /**
      * @generated from field: cerbos.response.v1.CheckResourcesResponse response = 1;
      */
-    response?: CheckResourcesResponse$1;
+    response?: CheckResourcesResponse$1 | undefined;
 
     /**
      * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
      */
-    auditTrail?: AuditTrail;
+    auditTrail?: AuditTrail | undefined;
   };
 
 /**
@@ -438,12 +438,12 @@ export type PlanResourcesResponse =
     /**
      * @generated from field: cerbos.response.v1.PlanResourcesResponse response = 1;
      */
-    response?: PlanResourcesResponse$1;
+    response?: PlanResourcesResponse$1 | undefined;
 
     /**
      * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
      */
-    auditTrail?: AuditTrail;
+    auditTrail?: AuditTrail | undefined;
   };
 
 /**
@@ -493,7 +493,7 @@ export type Bundle = Message<"cerbos.cloud.epdp.v2.Bundle"> & {
   /**
    * @generated from field: cerbos.cloud.epdp.v2.Bundle.Metadata metadata = 1;
    */
-  metadata?: Bundle_Metadata;
+  metadata?: Bundle_Metadata | undefined;
 
   /**
    * @generated from field: bytes contents = 2;
@@ -600,7 +600,7 @@ export type GetBundleRequest =
     /**
      * @generated from field: optional cerbos.cloud.epdp.v2.Bundle.Metadata if_modified_since = 3;
      */
-    ifModifiedSince?: Bundle_Metadata;
+    ifModifiedSince?: Bundle_Metadata | undefined;
   };
 
 /**

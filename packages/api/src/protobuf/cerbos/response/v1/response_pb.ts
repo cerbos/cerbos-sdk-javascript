@@ -109,12 +109,12 @@ export type PlanResourcesResponse =
     /**
      * @generated from field: cerbos.engine.v1.PlanResourcesFilter filter = 5;
      */
-    filter?: PlanResourcesFilter;
+    filter?: PlanResourcesFilter | undefined;
 
     /**
      * @generated from field: cerbos.response.v1.PlanResourcesResponse.Meta meta = 6;
      */
-    meta?: PlanResourcesResponse_Meta;
+    meta?: PlanResourcesResponse_Meta | undefined;
 
     /**
      * @generated from field: repeated cerbos.schema.v1.ValidationError validation_errors = 7;
@@ -268,7 +268,7 @@ export type CheckResourceSetResponse =
     /**
      * @generated from field: cerbos.response.v1.CheckResourceSetResponse.Meta meta = 3;
      */
-    meta?: CheckResourceSetResponse_Meta;
+    meta?: CheckResourceSetResponse_Meta | undefined;
   };
 
 /**
@@ -654,7 +654,7 @@ export type CheckResourcesResponse_ResultEntry =
     /**
      * @generated from field: cerbos.response.v1.CheckResourcesResponse.ResultEntry.Resource resource = 1;
      */
-    resource?: CheckResourcesResponse_ResultEntry_Resource;
+    resource?: CheckResourcesResponse_ResultEntry_Resource | undefined;
 
     /**
      * @generated from field: map<string, cerbos.effect.v1.Effect> actions = 2;
@@ -669,7 +669,7 @@ export type CheckResourcesResponse_ResultEntry =
     /**
      * @generated from field: cerbos.response.v1.CheckResourcesResponse.ResultEntry.Meta meta = 4;
      */
-    meta?: CheckResourcesResponse_ResultEntry_Meta;
+    meta?: CheckResourcesResponse_ResultEntry_Meta | undefined;
 
     /**
      * @generated from field: repeated cerbos.engine.v1.OutputEntry outputs = 5;
@@ -892,7 +892,7 @@ export type AddOrUpdatePolicyResponse =
     /**
      * @generated from field: google.protobuf.Empty success = 1;
      */
-    success?: Empty;
+    success?: Empty | undefined;
   };
 
 /**
@@ -1264,12 +1264,12 @@ export type IntegrityErrors = Message<"cerbos.response.v1.IntegrityErrors"> & {
   /**
    * @generated from field: cerbos.response.v1.IntegrityErrors.BreaksScopeChain breaks_scope_chain = 1;
    */
-  breaksScopeChain?: IntegrityErrors_BreaksScopeChain;
+  breaksScopeChain?: IntegrityErrors_BreaksScopeChain | undefined;
 
   /**
    * @generated from field: cerbos.response.v1.IntegrityErrors.RequiredByOtherPolicies required_by_other_policies = 2;
    */
-  requiredByOtherPolicies?: IntegrityErrors_RequiredByOtherPolicies;
+  requiredByOtherPolicies?: IntegrityErrors_RequiredByOtherPolicies | undefined;
 };
 
 /**
@@ -1630,7 +1630,7 @@ export type InspectPoliciesResponse_Constant =
     /**
      * @generated from field: google.protobuf.Value value = 2;
      */
-    value?: Value;
+    value?: Value | undefined;
 
     /**
      * @generated from field: cerbos.response.v1.InspectPoliciesResponse.Constant.Kind kind = 3;

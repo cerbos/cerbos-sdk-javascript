@@ -104,17 +104,17 @@ export type PlanResourcesRequest =
     /**
      * @generated from field: cerbos.engine.v1.Principal principal = 3;
      */
-    principal?: Principal;
+    principal?: Principal | undefined;
 
     /**
      * @generated from field: cerbos.engine.v1.PlanResourcesInput.Resource resource = 4;
      */
-    resource?: PlanResourcesInput_Resource;
+    resource?: PlanResourcesInput_Resource | undefined;
 
     /**
      * @generated from field: cerbos.request.v1.AuxData aux_data = 5;
      */
-    auxData?: AuxData;
+    auxData?: AuxData | undefined;
 
     /**
      * @generated from field: bool include_meta = 6;
@@ -124,7 +124,7 @@ export type PlanResourcesRequest =
     /**
      * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 8;
      */
-    requestContext?: RequestContext;
+    requestContext?: RequestContext | undefined;
   };
 
 /**
@@ -207,7 +207,7 @@ export type PlanResourcesRequestValid =
     /**
      * @generated from field: cerbos.request.v1.AuxData aux_data = 5;
      */
-    auxData?: AuxDataValid;
+    auxData?: AuxDataValid | undefined;
 
     /**
      * @generated from field: bool include_meta = 6;
@@ -217,7 +217,7 @@ export type PlanResourcesRequestValid =
     /**
      * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 8;
      */
-    requestContext?: RequestContextValid;
+    requestContext?: RequestContextValid | undefined;
   };
 
 /**
@@ -249,12 +249,12 @@ export type CheckResourceSetRequest =
     /**
      * @generated from field: cerbos.engine.v1.Principal principal = 3;
      */
-    principal?: Principal;
+    principal?: Principal | undefined;
 
     /**
      * @generated from field: cerbos.request.v1.ResourceSet resource = 4;
      */
-    resource?: ResourceSet;
+    resource?: ResourceSet | undefined;
 
     /**
      * @generated from field: bool include_meta = 5;
@@ -264,7 +264,7 @@ export type CheckResourceSetRequest =
     /**
      * @generated from field: cerbos.request.v1.AuxData aux_data = 6;
      */
-    auxData?: AuxData;
+    auxData?: AuxData | undefined;
   };
 
 /**
@@ -339,7 +339,7 @@ export type CheckResourceSetRequestValid =
     /**
      * @generated from field: cerbos.request.v1.AuxData aux_data = 6;
      */
-    auxData?: AuxDataValid;
+    auxData?: AuxDataValid | undefined;
   };
 
 /**
@@ -484,7 +484,7 @@ export type CheckResourceBatchRequest =
     /**
      * @generated from field: cerbos.engine.v1.Principal principal = 2;
      */
-    principal?: Principal;
+    principal?: Principal | undefined;
 
     /**
      * @generated from field: repeated cerbos.request.v1.CheckResourceBatchRequest.BatchEntry resources = 3;
@@ -494,7 +494,7 @@ export type CheckResourceBatchRequest =
     /**
      * @generated from field: cerbos.request.v1.AuxData aux_data = 4;
      */
-    auxData?: AuxData;
+    auxData?: AuxData | undefined;
   };
 
 /**
@@ -549,7 +549,7 @@ export type CheckResourceBatchRequestValid =
     /**
      * @generated from field: cerbos.request.v1.AuxData aux_data = 4;
      */
-    auxData?: AuxDataValid;
+    auxData?: AuxDataValid | undefined;
   };
 
 /**
@@ -577,7 +577,7 @@ export type CheckResourceBatchRequest_BatchEntry =
     /**
      * @generated from field: cerbos.engine.v1.Resource resource = 2;
      */
-    resource?: Resource;
+    resource?: Resource | undefined;
   };
 
 /**
@@ -643,7 +643,7 @@ export type CheckResourcesRequest =
     /**
      * @generated from field: cerbos.engine.v1.Principal principal = 3;
      */
-    principal?: Principal;
+    principal?: Principal | undefined;
 
     /**
      * @generated from field: repeated cerbos.request.v1.CheckResourcesRequest.ResourceEntry resources = 4;
@@ -653,12 +653,12 @@ export type CheckResourcesRequest =
     /**
      * @generated from field: cerbos.request.v1.AuxData aux_data = 5;
      */
-    auxData?: AuxData;
+    auxData?: AuxData | undefined;
 
     /**
      * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 6;
      */
-    requestContext?: RequestContext;
+    requestContext?: RequestContext | undefined;
   };
 
 /**
@@ -728,12 +728,12 @@ export type CheckResourcesRequestValid =
     /**
      * @generated from field: cerbos.request.v1.AuxData aux_data = 5;
      */
-    auxData?: AuxDataValid;
+    auxData?: AuxDataValid | undefined;
 
     /**
      * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 6;
      */
-    requestContext?: RequestContextValid;
+    requestContext?: RequestContextValid | undefined;
   };
 
 /**
@@ -758,7 +758,7 @@ export type CheckResourcesRequest_ResourceEntry =
     /**
      * @generated from field: cerbos.engine.v1.Resource resource = 2;
      */
-    resource?: Resource;
+    resource?: Resource | undefined;
   };
 
 /**
@@ -811,7 +811,7 @@ export type AuxData = Message<"cerbos.request.v1.AuxData"> & {
   /**
    * @generated from field: cerbos.request.v1.AuxData.JWT jwt = 1;
    */
-  jwt?: AuxData_JWT;
+  jwt?: AuxData_JWT | undefined;
 };
 
 /**
@@ -831,7 +831,7 @@ export type AuxDataValid = Message<"cerbos.request.v1.AuxData"> & {
   /**
    * @generated from field: cerbos.request.v1.AuxData.JWT jwt = 1;
    */
-  jwt?: AuxData_JWTValid;
+  jwt?: AuxData_JWTValid | undefined;
 };
 
 /**
@@ -1081,12 +1081,12 @@ export type ListAuditLogEntriesRequest_TimeRange =
     /**
      * @generated from field: google.protobuf.Timestamp start = 1;
      */
-    start?: Timestamp;
+    start?: Timestamp | undefined;
 
     /**
      * @generated from field: google.protobuf.Timestamp end = 2;
      */
-    end?: Timestamp;
+    end?: Timestamp | undefined;
   };
 
 /**

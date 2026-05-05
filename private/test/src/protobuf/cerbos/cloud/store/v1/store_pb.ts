@@ -105,7 +105,7 @@ export type FileFilter = Message<"cerbos.cloud.store.v1.FileFilter"> & {
   /**
    * @generated from field: optional cerbos.cloud.store.v1.StringMatch path = 1;
    */
-  path?: StringMatch;
+  path?: StringMatch | undefined;
 };
 
 /**
@@ -129,7 +129,7 @@ export type ListFilesRequest =
     /**
      * @generated from field: optional cerbos.cloud.store.v1.FileFilter filter = 2;
      */
-    filter?: FileFilter;
+    filter?: FileFilter | undefined;
   };
 
 /**
@@ -267,7 +267,7 @@ export type GetCurrentVersionResponse =
     /**
      * @generated from field: optional cerbos.cloud.store.v1.ChangeDetails change_details = 2;
      */
-    changeDetails?: ChangeDetails;
+    changeDetails?: ChangeDetails | undefined;
   };
 
 /**
@@ -290,7 +290,7 @@ export type ChangeDetails = Message<"cerbos.cloud.store.v1.ChangeDetails"> & {
   /**
    * @generated from field: cerbos.cloud.store.v1.ChangeDetails.Uploader uploader = 2;
    */
-  uploader?: ChangeDetails_Uploader;
+  uploader?: ChangeDetails_Uploader | undefined;
 
   /**
    * @generated from oneof cerbos.cloud.store.v1.ChangeDetails.origin
@@ -354,7 +354,7 @@ export type ChangeDetails_Git =
     /**
      * @generated from field: google.protobuf.Timestamp commit_date = 6;
      */
-    commitDate?: Timestamp;
+    commitDate?: Timestamp | undefined;
 
     /**
      * @generated from field: string author = 7;
@@ -364,7 +364,7 @@ export type ChangeDetails_Git =
     /**
      * @generated from field: google.protobuf.Timestamp author_date = 8;
      */
-    authorDate?: Timestamp;
+    authorDate?: Timestamp | undefined;
   };
 
 /**
@@ -469,7 +469,7 @@ export type ModifyFilesRequest =
     /**
      * @generated from field: optional cerbos.cloud.store.v1.ModifyFilesRequest.Condition condition = 2;
      */
-    condition?: ModifyFilesRequest_Condition;
+    condition?: ModifyFilesRequest_Condition | undefined;
 
     /**
      * @generated from field: repeated cerbos.cloud.store.v1.FileOp operations = 3;
@@ -479,7 +479,7 @@ export type ModifyFilesRequest =
     /**
      * @generated from field: optional cerbos.cloud.store.v1.ChangeDetails change_details = 4;
      */
-    changeDetails?: ChangeDetails;
+    changeDetails?: ChangeDetails | undefined;
   };
 
 /**
@@ -541,7 +541,7 @@ export type ReplaceFilesRequest =
     /**
      * @generated from field: optional cerbos.cloud.store.v1.ReplaceFilesRequest.Condition condition = 2;
      */
-    condition?: ReplaceFilesRequest_Condition;
+    condition?: ReplaceFilesRequest_Condition | undefined;
 
     /**
      * @generated from oneof cerbos.cloud.store.v1.ReplaceFilesRequest.contents
@@ -566,7 +566,7 @@ export type ReplaceFilesRequest =
     /**
      * @generated from field: optional cerbos.cloud.store.v1.ChangeDetails change_details = 4;
      */
-    changeDetails?: ChangeDetails;
+    changeDetails?: ChangeDetails | undefined;
   };
 
 /**

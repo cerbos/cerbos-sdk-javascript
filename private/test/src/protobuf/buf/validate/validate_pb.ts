@@ -3827,7 +3827,7 @@ export type RepeatedRules = Message<"buf.validate.RepeatedRules"> & {
    *
    * @generated from field: optional buf.validate.FieldRules items = 4;
    */
-  items?: FieldRules;
+  items?: FieldRules | undefined;
 };
 
 /**
@@ -3893,7 +3893,7 @@ export type MapRules = Message<"buf.validate.MapRules"> & {
    *
    * @generated from field: optional buf.validate.FieldRules keys = 4;
    */
-  keys?: FieldRules;
+  keys?: FieldRules | undefined;
 
   /**
    * Specifies the rules to be applied to the value of each key in the
@@ -3915,7 +3915,7 @@ export type MapRules = Message<"buf.validate.MapRules"> & {
    *
    * @generated from field: optional buf.validate.FieldRules values = 5;
    */
-  values?: FieldRules;
+  values?: FieldRules | undefined;
 };
 
 /**
@@ -3995,7 +3995,7 @@ export type DurationRules = Message<"buf.validate.DurationRules"> & {
    *
    * @generated from field: optional google.protobuf.Duration const = 2;
    */
-  const?: Duration;
+  const?: Duration | undefined;
 
   /**
    * @generated from oneof buf.validate.DurationRules.less_than
@@ -4175,7 +4175,7 @@ export type TimestampRules = Message<"buf.validate.TimestampRules"> & {
    *
    * @generated from field: optional google.protobuf.Timestamp const = 2;
    */
-  const?: Timestamp;
+  const?: Timestamp | undefined;
 
   /**
    * @generated from oneof buf.validate.TimestampRules.less_than
@@ -4317,7 +4317,7 @@ export type TimestampRules = Message<"buf.validate.TimestampRules"> & {
    *
    * @generated from field: optional google.protobuf.Duration within = 9;
    */
-  within?: Duration;
+  within?: Duration | undefined;
 
   /**
    * `example` specifies values that the field may have. These values SHOULD

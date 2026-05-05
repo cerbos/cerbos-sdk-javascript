@@ -75,7 +75,7 @@ export type IssueAccessTokenResponse =
     /**
      * @generated from field: google.protobuf.Duration expires_in = 2;
      */
-    expiresIn?: Duration;
+    expiresIn?: Duration | undefined;
   };
 
 /**
@@ -142,7 +142,7 @@ export type RefreshDeviceTokenRequest =
     /**
      * @generated from field: cerbos.cloud.auth.v1.DeviceToken device_token = 1;
      */
-    deviceToken?: DeviceToken;
+    deviceToken?: DeviceToken | undefined;
   };
 
 /**
@@ -161,7 +161,7 @@ export type RefreshDeviceTokenResponse =
     /**
      * @generated from field: cerbos.cloud.auth.v1.DeviceToken device_token = 1;
      */
-    deviceToken?: DeviceToken;
+    deviceToken?: DeviceToken | undefined;
   };
 
 /**

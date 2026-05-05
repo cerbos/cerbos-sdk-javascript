@@ -39,7 +39,7 @@ export type DeviceToken = Message<"cerbos.cloud.auth.v1.DeviceToken"> & {
   /**
    * @generated from field: google.protobuf.Timestamp expires_at = 3;
    */
-  expiresAt?: Timestamp;
+  expiresAt?: Timestamp | undefined;
 
   /**
    * @generated from field: string token_type = 4;
