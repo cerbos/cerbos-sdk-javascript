@@ -58,7 +58,7 @@ export type Policy = Message<"cerbos.policy.v1.Policy"> & {
   /**
    * @generated from field: cerbos.policy.v1.Metadata metadata = 4;
    */
-  metadata?: Metadata;
+  metadata?: Metadata | undefined;
 
   /**
    * @generated from oneof cerbos.policy.v1.Policy.policy_type
@@ -208,7 +208,7 @@ export type PolicyValid = Message<"cerbos.policy.v1.Policy"> & {
   /**
    * @generated from field: cerbos.policy.v1.Metadata metadata = 4;
    */
-  metadata?: MetadataValid;
+  metadata?: MetadataValid | undefined;
 
   /**
    * @generated from oneof cerbos.policy.v1.Policy.policy_type
@@ -327,7 +327,7 @@ export type Metadata = Message<"cerbos.policy.v1.Metadata"> & {
   /**
    * @generated from field: google.protobuf.UInt64Value hash = 3;
    */
-  hash?: bigint;
+  hash?: bigint | undefined;
 
   /**
    * @generated from field: string store_identifer = 4 [deprecated = true];
@@ -343,7 +343,7 @@ export type Metadata = Message<"cerbos.policy.v1.Metadata"> & {
   /**
    * @generated from field: cerbos.policy.v1.SourceAttributes source_attributes = 6;
    */
-  sourceAttributes?: SourceAttributes;
+  sourceAttributes?: SourceAttributes | undefined;
 };
 
 /**
@@ -425,12 +425,12 @@ export type ResourcePolicy = Message<"cerbos.policy.v1.ResourcePolicy"> & {
   /**
    * @generated from field: cerbos.policy.v1.Schemas schemas = 6;
    */
-  schemas?: Schemas;
+  schemas?: Schemas | undefined;
 
   /**
    * @generated from field: cerbos.policy.v1.Variables variables = 7;
    */
-  variables?: Variables;
+  variables?: Variables | undefined;
 
   /**
    * @generated from field: cerbos.policy.v1.ScopePermissions scope_permissions = 8;
@@ -440,7 +440,7 @@ export type ResourcePolicy = Message<"cerbos.policy.v1.ResourcePolicy"> & {
   /**
    * @generated from field: cerbos.policy.v1.Constants constants = 9;
    */
-  constants?: Constants;
+  constants?: Constants | undefined;
 };
 
 /**
@@ -525,12 +525,12 @@ export type ResourcePolicyValid = Message<"cerbos.policy.v1.ResourcePolicy"> & {
   /**
    * @generated from field: cerbos.policy.v1.Schemas schemas = 6;
    */
-  schemas?: SchemasValid;
+  schemas?: SchemasValid | undefined;
 
   /**
    * @generated from field: cerbos.policy.v1.Variables variables = 7;
    */
-  variables?: VariablesValid;
+  variables?: VariablesValid | undefined;
 
   /**
    * @generated from field: cerbos.policy.v1.ScopePermissions scope_permissions = 8;
@@ -540,7 +540,7 @@ export type ResourcePolicyValid = Message<"cerbos.policy.v1.ResourcePolicy"> & {
   /**
    * @generated from field: cerbos.policy.v1.Constants constants = 9;
    */
-  constants?: ConstantsValid;
+  constants?: ConstantsValid | undefined;
 };
 
 /**
@@ -574,7 +574,7 @@ export type ResourceRule = Message<"cerbos.policy.v1.ResourceRule"> & {
   /**
    * @generated from field: cerbos.policy.v1.Condition condition = 4;
    */
-  condition?: Condition;
+  condition?: Condition | undefined;
 
   /**
    * @generated from field: cerbos.effect.v1.Effect effect = 5;
@@ -589,7 +589,7 @@ export type ResourceRule = Message<"cerbos.policy.v1.ResourceRule"> & {
   /**
    * @generated from field: cerbos.policy.v1.Output output = 7;
    */
-  output?: Output;
+  output?: Output | undefined;
 };
 
 /**
@@ -654,7 +654,7 @@ export type ResourceRuleValid = Message<"cerbos.policy.v1.ResourceRule"> & {
   /**
    * @generated from field: cerbos.policy.v1.Condition condition = 4;
    */
-  condition?: ConditionValid;
+  condition?: ConditionValid | undefined;
 
   /**
    * @generated from field: cerbos.effect.v1.Effect effect = 5;
@@ -669,7 +669,7 @@ export type ResourceRuleValid = Message<"cerbos.policy.v1.ResourceRule"> & {
   /**
    * @generated from field: cerbos.policy.v1.Output output = 7;
    */
-  output?: OutputValid;
+  output?: OutputValid | undefined;
 };
 
 /**
@@ -837,7 +837,7 @@ export type RoleRule = Message<"cerbos.policy.v1.RoleRule"> & {
   /**
    * @generated from field: cerbos.policy.v1.Condition condition = 3;
    */
-  condition?: Condition;
+  condition?: Condition | undefined;
 };
 
 /**
@@ -877,7 +877,7 @@ export type RoleRuleValid = Message<"cerbos.policy.v1.RoleRule"> & {
   /**
    * @generated from field: cerbos.policy.v1.Condition condition = 3;
    */
-  condition?: ConditionValid;
+  condition?: ConditionValid | undefined;
 };
 
 /**
@@ -916,7 +916,7 @@ export type PrincipalPolicy = Message<"cerbos.policy.v1.PrincipalPolicy"> & {
   /**
    * @generated from field: cerbos.policy.v1.Variables variables = 5;
    */
-  variables?: Variables;
+  variables?: Variables | undefined;
 
   /**
    * @generated from field: cerbos.policy.v1.ScopePermissions scope_permissions = 6;
@@ -926,7 +926,7 @@ export type PrincipalPolicy = Message<"cerbos.policy.v1.PrincipalPolicy"> & {
   /**
    * @generated from field: cerbos.policy.v1.Constants constants = 7;
    */
-  constants?: Constants;
+  constants?: Constants | undefined;
 };
 
 /**
@@ -997,7 +997,7 @@ export type PrincipalPolicyValid =
     /**
      * @generated from field: cerbos.policy.v1.Variables variables = 5;
      */
-    variables?: VariablesValid;
+    variables?: VariablesValid | undefined;
 
     /**
      * @generated from field: cerbos.policy.v1.ScopePermissions scope_permissions = 6;
@@ -1007,7 +1007,7 @@ export type PrincipalPolicyValid =
     /**
      * @generated from field: cerbos.policy.v1.Constants constants = 7;
      */
-    constants?: ConstantsValid;
+    constants?: ConstantsValid | undefined;
   };
 
 /**
@@ -1086,7 +1086,7 @@ export type PrincipalRule_Action =
     /**
      * @generated from field: cerbos.policy.v1.Condition condition = 2;
      */
-    condition?: Condition;
+    condition?: Condition | undefined;
 
     /**
      * @generated from field: cerbos.effect.v1.Effect effect = 3;
@@ -1101,7 +1101,7 @@ export type PrincipalRule_Action =
     /**
      * @generated from field: cerbos.policy.v1.Output output = 5;
      */
-    output?: Output;
+    output?: Output | undefined;
   };
 
 /**
@@ -1147,7 +1147,7 @@ export type PrincipalRule_ActionValid =
     /**
      * @generated from field: cerbos.policy.v1.Condition condition = 2;
      */
-    condition?: ConditionValid;
+    condition?: ConditionValid | undefined;
 
     /**
      * @generated from field: cerbos.effect.v1.Effect effect = 3;
@@ -1162,7 +1162,7 @@ export type PrincipalRule_ActionValid =
     /**
      * @generated from field: cerbos.policy.v1.Output output = 5;
      */
-    output?: OutputValid;
+    output?: OutputValid | undefined;
   };
 
 /**
@@ -1191,12 +1191,12 @@ export type DerivedRoles = Message<"cerbos.policy.v1.DerivedRoles"> & {
   /**
    * @generated from field: cerbos.policy.v1.Variables variables = 3;
    */
-  variables?: Variables;
+  variables?: Variables | undefined;
 
   /**
    * @generated from field: cerbos.policy.v1.Constants constants = 4;
    */
-  constants?: Constants;
+  constants?: Constants | undefined;
 };
 
 /**
@@ -1241,12 +1241,12 @@ export type DerivedRolesValid = Message<"cerbos.policy.v1.DerivedRoles"> & {
   /**
    * @generated from field: cerbos.policy.v1.Variables variables = 3;
    */
-  variables?: VariablesValid;
+  variables?: VariablesValid | undefined;
 
   /**
    * @generated from field: cerbos.policy.v1.Constants constants = 4;
    */
-  constants?: ConstantsValid;
+  constants?: ConstantsValid | undefined;
 };
 
 /**
@@ -1275,7 +1275,7 @@ export type RoleDef = Message<"cerbos.policy.v1.RoleDef"> & {
   /**
    * @generated from field: cerbos.policy.v1.Condition condition = 3;
    */
-  condition?: Condition;
+  condition?: Condition | undefined;
 };
 
 /**
@@ -1315,7 +1315,7 @@ export type RoleDefValid = Message<"cerbos.policy.v1.RoleDef"> & {
   /**
    * @generated from field: cerbos.policy.v1.Condition condition = 3;
    */
-  condition?: ConditionValid;
+  condition?: ConditionValid | undefined;
 };
 
 /**
@@ -1757,7 +1757,7 @@ export type Output = Message<"cerbos.policy.v1.Output"> & {
   /**
    * @generated from field: cerbos.policy.v1.Output.When when = 2;
    */
-  when?: Output_When;
+  when?: Output_When | undefined;
 };
 
 /**
@@ -1835,12 +1835,12 @@ export type Schemas = Message<"cerbos.policy.v1.Schemas"> & {
   /**
    * @generated from field: cerbos.policy.v1.Schemas.Schema principal_schema = 1;
    */
-  principalSchema?: Schemas_Schema;
+  principalSchema?: Schemas_Schema | undefined;
 
   /**
    * @generated from field: cerbos.policy.v1.Schemas.Schema resource_schema = 2;
    */
-  resourceSchema?: Schemas_Schema;
+  resourceSchema?: Schemas_Schema | undefined;
 };
 
 /**
@@ -1865,12 +1865,12 @@ export type SchemasValid = Message<"cerbos.policy.v1.Schemas"> & {
   /**
    * @generated from field: cerbos.policy.v1.Schemas.Schema principal_schema = 1;
    */
-  principalSchema?: Schemas_SchemaValid;
+  principalSchema?: Schemas_SchemaValid | undefined;
 
   /**
    * @generated from field: cerbos.policy.v1.Schemas.Schema resource_schema = 2;
    */
-  resourceSchema?: Schemas_SchemaValid;
+  resourceSchema?: Schemas_SchemaValid | undefined;
 };
 
 /**
@@ -1935,7 +1935,7 @@ export type Schemas_Schema = Message<"cerbos.policy.v1.Schemas.Schema"> & {
   /**
    * @generated from field: cerbos.policy.v1.Schemas.IgnoreWhen ignore_when = 2;
    */
-  ignoreWhen?: Schemas_IgnoreWhen;
+  ignoreWhen?: Schemas_IgnoreWhen | undefined;
 };
 
 /**
@@ -1965,7 +1965,7 @@ export type Schemas_SchemaValid = Message<"cerbos.policy.v1.Schemas.Schema"> & {
   /**
    * @generated from field: cerbos.policy.v1.Schemas.IgnoreWhen ignore_when = 2;
    */
-  ignoreWhen?: Schemas_IgnoreWhenValid;
+  ignoreWhen?: Schemas_IgnoreWhenValid | undefined;
 };
 
 /**

@@ -66,17 +66,17 @@ export type PlanResourcesInput =
     /**
      * @generated from field: cerbos.engine.v1.Principal principal = 3;
      */
-    principal?: Principal;
+    principal?: Principal | undefined;
 
     /**
      * @generated from field: cerbos.engine.v1.PlanResourcesInput.Resource resource = 4;
      */
-    resource?: PlanResourcesInput_Resource;
+    resource?: PlanResourcesInput_Resource | undefined;
 
     /**
      * @generated from field: cerbos.engine.v1.AuxData aux_data = 5;
      */
-    auxData?: AuxData;
+    auxData?: AuxData | undefined;
 
     /**
      * @generated from field: bool include_meta = 6;
@@ -149,17 +149,17 @@ export type PlanResourcesInputValid =
     /**
      * @generated from field: cerbos.engine.v1.Principal principal = 3;
      */
-    principal?: PrincipalValid;
+    principal?: PrincipalValid | undefined;
 
     /**
      * @generated from field: cerbos.engine.v1.PlanResourcesInput.Resource resource = 4;
      */
-    resource?: PlanResourcesInput_ResourceValid;
+    resource?: PlanResourcesInput_ResourceValid | undefined;
 
     /**
      * @generated from field: cerbos.engine.v1.AuxData aux_data = 5;
      */
-    auxData?: AuxDataValid;
+    auxData?: AuxDataValid | undefined;
 
     /**
      * @generated from field: bool include_meta = 6;
@@ -278,7 +278,7 @@ export type PlanResourcesFilter =
     /**
      * @generated from field: cerbos.engine.v1.PlanResourcesFilter.Expression.Operand condition = 2;
      */
-    condition?: PlanResourcesFilter_Expression_Operand;
+    condition?: PlanResourcesFilter_Expression_Operand | undefined;
   };
 
 /**
@@ -497,7 +497,7 @@ export type PlanResourcesOutput =
     /**
      * @generated from field: cerbos.engine.v1.PlanResourcesFilter filter = 6;
      */
-    filter?: PlanResourcesFilter;
+    filter?: PlanResourcesFilter | undefined;
 
     /**
      * @generated from field: string filter_debug = 7;
@@ -599,12 +599,12 @@ export type CheckInput = Message<"cerbos.engine.v1.CheckInput"> & {
   /**
    * @generated from field: cerbos.engine.v1.Resource resource = 2;
    */
-  resource?: Resource;
+  resource?: Resource | undefined;
 
   /**
    * @generated from field: cerbos.engine.v1.Principal principal = 3;
    */
-  principal?: Principal;
+  principal?: Principal | undefined;
 
   /**
    * @generated from field: repeated string actions = 4;
@@ -614,7 +614,7 @@ export type CheckInput = Message<"cerbos.engine.v1.CheckInput"> & {
   /**
    * @generated from field: cerbos.engine.v1.AuxData aux_data = 5;
    */
-  auxData?: AuxData;
+  auxData?: AuxData | undefined;
 };
 
 /**
@@ -674,7 +674,7 @@ export type CheckInputValid = Message<"cerbos.engine.v1.CheckInput"> & {
   /**
    * @generated from field: cerbos.engine.v1.AuxData aux_data = 5;
    */
-  auxData?: AuxDataValid;
+  auxData?: AuxDataValid | undefined;
 };
 
 /**
@@ -834,7 +834,7 @@ export type OutputEntry = Message<"cerbos.engine.v1.OutputEntry"> & {
   /**
    * @generated from field: google.protobuf.Value val = 2;
    */
-  val?: Value;
+  val?: Value | undefined;
 
   /**
    * @generated from field: string action = 3;

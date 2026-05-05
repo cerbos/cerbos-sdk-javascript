@@ -74,12 +74,12 @@ export type AccessLogEntry = Message<"cerbos.audit.v1.AccessLogEntry"> & {
   /**
    * @generated from field: google.protobuf.Timestamp timestamp = 2;
    */
-  timestamp?: Timestamp;
+  timestamp?: Timestamp | undefined;
 
   /**
    * @generated from field: cerbos.audit.v1.Peer peer = 3;
    */
-  peer?: Peer;
+  peer?: Peer | undefined;
 
   /**
    * @generated from field: map<string, cerbos.audit.v1.MetaValues> metadata = 4;
@@ -104,12 +104,12 @@ export type AccessLogEntry = Message<"cerbos.audit.v1.AccessLogEntry"> & {
   /**
    * @generated from field: cerbos.audit.v1.PolicySource policy_source = 8;
    */
-  policySource?: PolicySource;
+  policySource?: PolicySource | undefined;
 
   /**
    * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 9;
    */
-  requestContext?: RequestContext;
+  requestContext?: RequestContext | undefined;
 };
 
 /**
@@ -185,12 +185,12 @@ export type DecisionLogEntry = Message<"cerbos.audit.v1.DecisionLogEntry"> & {
   /**
    * @generated from field: google.protobuf.Timestamp timestamp = 2;
    */
-  timestamp?: Timestamp;
+  timestamp?: Timestamp | undefined;
 
   /**
    * @generated from field: cerbos.audit.v1.Peer peer = 3;
    */
-  peer?: Peer;
+  peer?: Peer | undefined;
 
   /**
    * Deprecated. Use method.check_resources.inputs instead.
@@ -244,7 +244,7 @@ export type DecisionLogEntry = Message<"cerbos.audit.v1.DecisionLogEntry"> & {
   /**
    * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 16;
    */
-  auditTrail?: AuditTrail;
+  auditTrail?: AuditTrail | undefined;
 
   /**
    * @generated from field: bool oversized = 17;
@@ -254,12 +254,12 @@ export type DecisionLogEntry = Message<"cerbos.audit.v1.DecisionLogEntry"> & {
   /**
    * @generated from field: cerbos.audit.v1.PolicySource policy_source = 18;
    */
-  policySource?: PolicySource;
+  policySource?: PolicySource | undefined;
 
   /**
    * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 19;
    */
-  requestContext?: RequestContext;
+  requestContext?: RequestContext | undefined;
 };
 
 /**
@@ -354,12 +354,12 @@ export type DecisionLogEntryValid =
     /**
      * @generated from field: google.protobuf.Timestamp timestamp = 2;
      */
-    timestamp?: Timestamp;
+    timestamp?: Timestamp | undefined;
 
     /**
      * @generated from field: cerbos.audit.v1.Peer peer = 3;
      */
-    peer?: PeerValid;
+    peer?: PeerValid | undefined;
 
     /**
      * Deprecated. Use method.check_resources.inputs instead.
@@ -413,7 +413,7 @@ export type DecisionLogEntryValid =
     /**
      * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 16;
      */
-    auditTrail?: AuditTrailValid;
+    auditTrail?: AuditTrailValid | undefined;
 
     /**
      * @generated from field: bool oversized = 17;
@@ -423,12 +423,12 @@ export type DecisionLogEntryValid =
     /**
      * @generated from field: cerbos.audit.v1.PolicySource policy_source = 18;
      */
-    policySource?: PolicySourceValid;
+    policySource?: PolicySourceValid | undefined;
 
     /**
      * @generated from field: optional cerbos.audit.v1.RequestContext request_context = 19;
      */
-    requestContext?: RequestContextValid;
+    requestContext?: RequestContextValid | undefined;
   };
 
 /**
@@ -522,12 +522,12 @@ export type DecisionLogEntry_PlanResources =
     /**
      * @generated from field: cerbos.engine.v1.PlanResourcesInput input = 1;
      */
-    input?: PlanResourcesInput;
+    input?: PlanResourcesInput | undefined;
 
     /**
      * @generated from field: cerbos.engine.v1.PlanResourcesOutput output = 2;
      */
-    output?: PlanResourcesOutput;
+    output?: PlanResourcesOutput | undefined;
 
     /**
      * @generated from field: string error = 3;
@@ -563,12 +563,12 @@ export type DecisionLogEntry_PlanResourcesValid =
     /**
      * @generated from field: cerbos.engine.v1.PlanResourcesInput input = 1;
      */
-    input?: PlanResourcesInputValid;
+    input?: PlanResourcesInputValid | undefined;
 
     /**
      * @generated from field: cerbos.engine.v1.PlanResourcesOutput output = 2;
      */
-    output?: PlanResourcesOutputValid;
+    output?: PlanResourcesOutputValid | undefined;
 
     /**
      * @generated from field: string error = 3;
@@ -974,7 +974,7 @@ export type PolicySource_EmbeddedPDP =
     /**
      * @generated from field: google.protobuf.Timestamp built_at = 3;
      */
-    builtAt?: Timestamp;
+    builtAt?: Timestamp | undefined;
   };
 
 /**

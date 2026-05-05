@@ -69,7 +69,7 @@ export type Swagger =
      *
      * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.Info info = 2;
      */
-    info?: Info;
+    info?: Info | undefined;
 
     /**
      * The host (name or ip) serving the API. This MUST be the host only and does
@@ -136,7 +136,7 @@ export type Swagger =
      *
      * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.SecurityDefinitions security_definitions = 11;
      */
-    securityDefinitions?: SecurityDefinitions;
+    securityDefinitions?: SecurityDefinitions | undefined;
 
     /**
      * A declaration of which security schemes are applied for the API as a whole.
@@ -161,7 +161,7 @@ export type Swagger =
      *
      * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.ExternalDocumentation external_docs = 14;
      */
-    externalDocs?: ExternalDocumentation;
+    externalDocs?: ExternalDocumentation | undefined;
 
     /**
      * Custom properties that start with "x-" such as "x-foo" used to describe
@@ -394,7 +394,7 @@ export type Operation =
      *
      * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.ExternalDocumentation external_docs = 4;
      */
-    externalDocs?: ExternalDocumentation;
+    externalDocs?: ExternalDocumentation | undefined;
 
     /**
      * Unique string used to identify the operation. The id MUST be unique among
@@ -476,7 +476,7 @@ export type Operation =
      *
      * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.Parameters parameters = 14;
      */
-    parameters?: Parameters;
+    parameters?: Parameters | undefined;
   };
 
 /**
@@ -968,7 +968,7 @@ export type Response =
      *
      * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.Schema schema = 2;
      */
-    schema?: Schema;
+    schema?: Schema | undefined;
 
     /**
      * `Headers` A list of headers that are sent with the response.
@@ -1116,14 +1116,14 @@ export type Info = Message<"grpc.gateway.protoc_gen_openapiv2.options.Info"> & {
    *
    * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.Contact contact = 4;
    */
-  contact?: Contact;
+  contact?: Contact | undefined;
 
   /**
    * The license information for the exposed API.
    *
    * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.License license = 5;
    */
-  license?: License;
+  license?: License | undefined;
 
   /**
    * Provides the version of the application API (not to be confused
@@ -1534,7 +1534,7 @@ export type Schema =
     /**
      * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.JSONSchema json_schema = 1;
      */
-    jsonSchema?: JSONSchema;
+    jsonSchema?: JSONSchema | undefined;
 
     /**
      * Adds support for polymorphism. The discriminator is the schema property
@@ -1563,7 +1563,7 @@ export type Schema =
      *
      * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.ExternalDocumentation external_docs = 5;
      */
-    externalDocs?: ExternalDocumentation;
+    externalDocs?: ExternalDocumentation | undefined;
 
     /**
      * A free-form property to include an example of an instance for this schema in JSON.
@@ -1823,7 +1823,7 @@ export type JSONSchema =
      *
      * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.JSONSchema.FieldConfiguration field_configuration = 1001;
      */
-    fieldConfiguration?: JSONSchema_FieldConfiguration;
+    fieldConfiguration?: JSONSchema_FieldConfiguration | undefined;
 
     /**
      * Custom properties that start with "x-" such as "x-foo" used to describe
@@ -2193,7 +2193,7 @@ export type Tag = Message<"grpc.gateway.protoc_gen_openapiv2.options.Tag"> & {
    *
    * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.ExternalDocumentation external_docs = 3;
    */
-  externalDocs?: ExternalDocumentation;
+  externalDocs?: ExternalDocumentation | undefined;
 
   /**
    * Custom properties that start with "x-" such as "x-foo" used to describe
@@ -2395,7 +2395,7 @@ export type SecurityScheme =
      *
      * @generated from field: grpc.gateway.protoc_gen_openapiv2.options.Scopes scopes = 8;
      */
-    scopes?: Scopes;
+    scopes?: Scopes | undefined;
 
     /**
      * Custom properties that start with "x-" such as "x-foo" used to describe
