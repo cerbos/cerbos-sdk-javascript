@@ -6,6 +6,7 @@ import type {
   NotOK,
   Value,
 } from "@cerbos/core";
+import type { Optional } from "@cerbos/core/~internal";
 import type { ClientOptions as HubClientOptions } from "@cerbos/hub";
 
 import type { PolicyLoader } from "./loader.js";
@@ -79,7 +80,7 @@ export interface Options extends Pick<
    *
    * @defaultValue `SchemaEnforcement.NONE`
    */
-  schemaEnforcement?: SchemaEnforcement;
+  schemaEnforcement?: SchemaEnforcement | undefined;
 }
 
 /**
@@ -121,7 +122,7 @@ export type PolicySource =
 /**
  * Options for creating a {@link PolicyLoader}.
  */
-export interface PolicyLoaderOptions extends Partial<HubClientOptions> {
+export interface PolicyLoaderOptions extends Optional<HubClientOptions> {
   /**
    * ID of the {@link https://docs.cerbos.dev/cerbos-hub/deployments-epdp-rules | policy bundling rule}.
    */
@@ -132,7 +133,7 @@ export interface PolicyLoaderOptions extends Partial<HubClientOptions> {
    *
    * @defaultValue (all scopes)
    */
-  scopes?: string[];
+  scopes?: string[] | undefined;
 
   /**
    * Whether to activate updated policy bundles as soon as they are downloaded.
@@ -143,7 +144,7 @@ export interface PolicyLoaderOptions extends Partial<HubClientOptions> {
    *
    * @defaultValue `true`
    */
-  activateOnLoad?: boolean;
+  activateOnLoad?: boolean | undefined;
 
   /**
    * The delay (in seconds) between successive requests to check for policy bundle updates.
@@ -155,7 +156,7 @@ export interface PolicyLoaderOptions extends Partial<HubClientOptions> {
    *
    * @defaultValue `60` (1 minute)
    */
-  interval?: number;
+  interval?: number | undefined;
 
   /**
    * A callback to invoke when a policy bundle update has finished.

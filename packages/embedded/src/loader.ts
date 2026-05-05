@@ -372,7 +372,7 @@ export interface AutoUpdateOptions extends Options {
    *
    * @defaultValue `true`
    */
-  activateOnLoad?: boolean;
+  activateOnLoad?: boolean | undefined;
 
   /**
    * The delay (in milliseconds) between successive requests to check for new embedded policy decision point bundles.
@@ -382,7 +382,7 @@ export interface AutoUpdateOptions extends Options {
    *
    * @defaultValue `60_000` (1 minute)
    */
-  interval?: number;
+  interval?: number | undefined;
 }
 
 /**

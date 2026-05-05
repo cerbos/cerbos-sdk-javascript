@@ -2,7 +2,6 @@
   "extends": ["@tsconfig/node20", "@tsconfig/strictest"],
   "compilerOptions": {
     "composite": true,
-    "exactOptionalPropertyTypes": false,
     "types": ["node"]
   }
 }

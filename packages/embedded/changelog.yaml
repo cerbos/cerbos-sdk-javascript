@@ -1,6 +1,10 @@
 unreleased:
   type: patch
 
+  added:
+    - summary: Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined`
+      pull: 1442
+
   bumped:
     "@bufbuild/protobuf":
       to: 2.12.0

@@ -10,6 +10,7 @@ import type { CallOptions, Interceptor, Transport } from "@connectrpc/connect";
 import { makeAnyClient } from "@connectrpc/connect";
 
 import type { Options, RequestOptions } from "@cerbos/core";
+import type { Optional } from "@cerbos/core/~internal";
 import { createTransport } from "@cerbos/hub/~internal/transport";
 
 import type { Credentials } from "./credentials.js";
@@ -37,8 +38,8 @@ export interface ClientOptions extends Pick<Options, "headers" | "userAgent"> {
   baseUrl?: string | undefined;
 }
 
-interface InternalClientOptions extends Partial<ClientOptions> {
-  createError?: (error: unknown) => Error;
+interface InternalClientOptions extends Optional<ClientOptions> {
+  createError?: ((error: unknown) => Error) | undefined;
 }
 
 // Adapted from https://github.com/connectrpc/connect-es/blob/v2.0.2/packages/connect/src/promise-client.ts#L39-L46

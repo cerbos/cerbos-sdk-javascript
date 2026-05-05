@@ -19,6 +19,9 @@ export type { ErrorDetails } from "./errors/response.js";
 export { AbstractErrorResponse } from "./errors/response.js";
 export * from "./transport.js";
 
+/** @inline */
+export type Optional<T> = { [K in keyof T]?: T[K] | undefined };
+
 /** @internal */
 export function cancelBody(response: Response): void {
   response.body?.cancel().catch(() => {
