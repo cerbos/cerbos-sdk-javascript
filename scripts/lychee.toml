@@ -7,7 +7,7 @@ max_cache_age = "3d"
 
 max_concurrency = 8
 
-include_fragments = true
+include_fragments = "full"
 
 # Slack returns 403 to unsupported browsers
 [hosts."go.cerbos.io".headers]
