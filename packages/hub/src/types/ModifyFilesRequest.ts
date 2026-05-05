@@ -35,5 +35,5 @@ export interface ModifyFilesRequest {
    *
    * @defaultValue `false`
    */
-  allowUnchanged?: boolean;
+  allowUnchanged?: boolean | undefined;
 }

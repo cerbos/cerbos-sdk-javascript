@@ -35,5 +35,5 @@ export interface ReplaceFilesRequest {
    *
    * @defaultValue `false`
    */
-  allowUnchanged?: boolean;
+  allowUnchanged?: boolean | undefined;
 }

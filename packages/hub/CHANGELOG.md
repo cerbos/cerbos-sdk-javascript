@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined` ([#1442](https://github.com/cerbos/cerbos-sdk-javascript/pull/1442))
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.12.0 ([#1441](https://github.com/cerbos/cerbos-sdk-javascript/pull/1441))

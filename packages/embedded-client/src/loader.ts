@@ -24,7 +24,7 @@ export class PolicyLoader {
   public readonly scopes: string[];
 
   private readonly activateOnLoad: boolean;
-  private readonly interval?: number;
+  private readonly interval?: number | undefined;
   private readonly onUpdate?: PolicyLoaderOptions["onUpdate"];
   private readonly servers: Server[] = [];
   private readonly client: HubClient<typeof BundleService>;
@@ -32,7 +32,7 @@ export class PolicyLoader {
   private activations = 0;
   private initialLoad?: Promise<void>;
   private activeBundle?: BundleValid;
-  private pendingBundle?: BundleValid;
+  private pendingBundle?: BundleValid | undefined;
   private timeout?: NodeJS.Timeout;
 
   /**
