@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.15.4] - 2026-05-06
+
 ### Added
 
 - Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined` ([#1442](https://github.com/cerbos/cerbos-sdk-javascript/pull/1442))
@@ -11,6 +15,8 @@
 - Bump dependency on [@bufbuild/protobuf] to 2.12.0 ([#1441](https://github.com/cerbos/cerbos-sdk-javascript/pull/1441))
 
 - Bump dependency on [@cerbos/api] to 0.8.0 ([#1447](https://github.com/cerbos/cerbos-sdk-javascript/pull/1447))
+
+- Bump dependency on [@cerbos/core] to 0.31.0 ([#1449](https://github.com/cerbos/cerbos-sdk-javascript/pull/1449))
 
 ## [0.15.3] - 2026-05-01
 
@@ -349,7 +355,8 @@
 
 - Lite client for interacting with a WebAssembly Cerbos policy bundle ([#249](https://github.com/cerbos/cerbos-sdk-javascript/pull/249))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.15.3...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.15.4...HEAD
+[0.15.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.15.3...@cerbos/embedded@0.15.4
 [0.15.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.15.2...@cerbos/embedded@0.15.3
 [0.15.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.15.1...@cerbos/embedded@0.15.2
 [0.15.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded@0.15.0...@cerbos/embedded@0.15.1

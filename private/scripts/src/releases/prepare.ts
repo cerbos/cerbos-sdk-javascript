@@ -18,12 +18,11 @@ if (await git("status", "--porcelain")) {
 
 const releaseOrReleases = `release${releases > 1 ? "s" : ""}`;
 
-const baseRemote = "upstream";
+const remote = "upstream";
 const baseBranch = "main";
-const headRemote = "origin";
 const headBranch = `prepare-${releaseOrReleases}`;
 
-await git("fetch", "--quiet", baseRemote, baseBranch);
+await git("fetch", "--quiet", remote, baseBranch);
 
 await git(
   "switch",
@@ -31,7 +30,7 @@ await git(
   "--no-track",
   "--force-create",
   headBranch,
-  `${baseRemote}/${baseBranch}`,
+  `${remote}/${baseBranch}`,
 );
 
 const title = `Prepare ${releaseOrReleases}`;
@@ -48,7 +47,7 @@ await git(
   "--signoff",
 );
 
-await git("push", "--quiet", "--set-upstream", headRemote, headBranch);
+await git("push", "--quiet", "--set-upstream", remote, headBranch);
 
 const pullRequestUrl = await gh(
   "pr",

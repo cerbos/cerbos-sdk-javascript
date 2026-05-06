@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.5.6] - 2026-05-06
+
 ### Added
 
 - Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined` ([#1442](https://github.com/cerbos/cerbos-sdk-javascript/pull/1442))
@@ -9,6 +13,8 @@
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.12.0 ([#1441](https://github.com/cerbos/cerbos-sdk-javascript/pull/1441))
+
+- Bump dependency on [@cerbos/core] to 0.31.0 ([#1449](https://github.com/cerbos/cerbos-sdk-javascript/pull/1449))
 
 ## [0.5.5] - 2026-05-01
 
@@ -136,7 +142,8 @@
 
 - A client for interacting with policy stores in Cerbos Hub ([#1173](https://github.com/cerbos/cerbos-sdk-javascript/pull/1173), [#1191](https://github.com/cerbos/cerbos-sdk-javascript/pull/1191))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.5...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.6...HEAD
+[0.5.6]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.5...@cerbos/hub@0.5.6
 [0.5.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.4...@cerbos/hub@0.5.5
 [0.5.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.3...@cerbos/hub@0.5.4
 [0.5.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.2...@cerbos/hub@0.5.3
