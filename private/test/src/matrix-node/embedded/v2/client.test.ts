@@ -89,7 +89,7 @@ describe("Embedded", () => {
           kind: "hub",
           localBundle: {
             path: "",
-            bundleId: "",
+            bundleId: localBundleId,
           },
         },
       },
@@ -108,6 +108,8 @@ describe("Embedded", () => {
 
       const scopes = ["test"];
 
+      const bundleIdMatcher = expect.stringMatching(/^[A-Z0-9]{16}$/);
+
       testCases.push({
         source: "remote",
         client: (options) =>
@@ -121,14 +123,14 @@ describe("Embedded", () => {
             },
             options,
           ),
-        bundleId: expect.stringMatching(/^[A-Z0-9]{16}$/),
+        bundleId: bundleIdMatcher,
         storeId,
         policySource: {
           kind: "hub",
           embeddedBundle: {
             ruleId,
             scopes,
-            bundleId: "",
+            bundleId: bundleIdMatcher,
           },
         },
       });

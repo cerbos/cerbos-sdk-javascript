@@ -1,9 +1,12 @@
 unreleased:
-  type: patch
+  type: minor
 
   added:
     - summary: Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined`
       pull: 1442
+
+    - summary: Populate [`EmbeddedBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.EmbeddedBundle.html#bundleid) (or [`LocalBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.LocalBundle.html#bundleid)) in audit log entries
+      pull: 1448
 
   bumped:
     "@bufbuild/protobuf":
@@ -13,6 +16,10 @@ unreleased:
     "@cerbos/api":
       to: 0.8.0
       pull: 1447
+
+    "@cerbos/embedded-server":
+      to: 0.5.0
+      pull: 1448
 
 releases:
   - version: 0.5.3

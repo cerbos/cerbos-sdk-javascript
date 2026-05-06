@@ -6,11 +6,15 @@
 
 - Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined` ([#1442](https://github.com/cerbos/cerbos-sdk-javascript/pull/1442))
 
+- Populate [`EmbeddedBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.EmbeddedBundle.html#bundleid) (or [`LocalBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.LocalBundle.html#bundleid)) in audit log entries ([#1448](https://github.com/cerbos/cerbos-sdk-javascript/pull/1448))
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.12.0 ([#1441](https://github.com/cerbos/cerbos-sdk-javascript/pull/1441))
 
 - Bump dependency on [@cerbos/api] to 0.8.0 ([#1447](https://github.com/cerbos/cerbos-sdk-javascript/pull/1447))
+
+- Bump dependency on [@cerbos/embedded-server] to 0.5.0 ([#1448](https://github.com/cerbos/cerbos-sdk-javascript/pull/1448))
 
 ## [0.5.3] - 2026-05-01
 

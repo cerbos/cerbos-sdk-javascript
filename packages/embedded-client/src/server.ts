@@ -59,7 +59,7 @@ const servingServices: ReadonlySet<string> = new Set([
 
 export class Server {
   public readonly loader?: PolicyLoader;
-  private readonly server: Deferred<EmbeddedServer>;
+  private readonly server: Deferred<Wrapper>;
   private readonly decodeJWTPayload: DecodeJWTPayload;
   private readonly logger?: DecisionLogger;
 
@@ -101,16 +101,19 @@ export class Server {
     headers: Headers,
   ): Promise<CheckResourcesResponse> {
     let auxData: DecodedAuxData | undefined = undefined;
+    let bundleId = "";
+    let error: unknown = undefined;
     let responseWithAuditTrail:
       | CheckResourcesResponseWithAuditTrail
       | undefined = undefined;
 
-    let error: unknown = undefined;
-
     try {
       auxData = await this.decodeAuxData(request.auxData);
 
-      responseWithAuditTrail = (await this.server()).checkResources(
+      const server = await this.server();
+      ({ bundleId } = server);
+
+      responseWithAuditTrail = server.checkResources(
         {
           ...request,
           auxData: undefined,
@@ -131,6 +134,7 @@ export class Server {
           request,
           auxData,
           headers,
+          bundleId,
           responseWithAuditTrail,
           error,
         );
@@ -164,16 +168,19 @@ export class Server {
     headers: Headers,
   ): Promise<PlanResourcesResponse> {
     let auxData: DecodedAuxData | undefined = undefined;
+    let bundleId = "";
+    let error: unknown = undefined;
     let responseWithAuditTrail:
       | PlanResourcesResponseWithAuditTrail
       | undefined = undefined;
 
-    let error: unknown = undefined;
-
     try {
       auxData = await this.decodeAuxData(request.auxData);
 
-      responseWithAuditTrail = (await this.server()).planResources(
+      const server = await this.server();
+      ({ bundleId } = server);
+
+      responseWithAuditTrail = server.planResources(
         {
           ...request,
           actions: request.action ? [request.action] : request.actions,
@@ -203,6 +210,7 @@ export class Server {
           request,
           auxData,
           headers,
+          bundleId,
           responseWithAuditTrail,
           error,
         );
@@ -254,10 +262,12 @@ async function start(
   wasm: WasmSource,
   config: ConfigValid,
   userAgent: string,
-): Promise<EmbeddedServer> {
-  const server = await EmbeddedServer.from(
-    async (imports) => await load(wasm, imports, userAgent),
-    config,
+): Promise<Wrapper> {
+  const server = new Wrapper(
+    await EmbeddedServer.from(
+      async (imports) => await load(wasm, imports, userAgent),
+      config,
+    ),
   );
 
   if (policySourceIsPolicyLoader(policies)) {
@@ -275,23 +285,41 @@ function cannotDecodeJWTPayload(): never {
   );
 }
 
-function auditPolicySource(policies: PolicySource): AuditPolicySource {
+function auditPolicySource(
+  policies: PolicySource,
+): (bundleId: string) => AuditPolicySource {
   if ("ruleId" in policies) {
-    return {
+    return (bundleId) => ({
       kind: "hub",
       embeddedBundle: {
         ruleId: policies.ruleId,
         scopes: policies.scopes ?? [],
-        bundleId: "",
+        bundleId,
       },
-    };
+    });
   }
 
-  return {
+  return (bundleId) => ({
     kind: "hub",
     localBundle: {
       path: "",
-      bundleId: "",
+      bundleId,
     },
-  };
+  });
+}
+
+class Wrapper {
+  public readonly checkResources: EmbeddedServer["checkResources"];
+  public readonly planResources: EmbeddedServer["planResources"];
+  public bundleId = "";
+
+  public constructor(private readonly server: EmbeddedServer) {
+    this.checkResources = server.checkResources.bind(server);
+    this.planResources = server.planResources.bind(server);
+  }
+
+  public loadRuleTable(ruleTable: Uint8Array): void {
+    const { bundleId } = this.server.loadRuleTable(ruleTable);
+    this.bundleId = bundleId;
+  }
 }
