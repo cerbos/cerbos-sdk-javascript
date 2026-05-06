@@ -1,16 +1,16 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "`cerbos.audit.v1.PolicySource.Hub.EmbeddedBundle.bundleId` and `cerbos.cloud.epdp.v2.LoadRuleTableResponse`"
-      pull: 1446
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.12.0
-      pull: 1441
-
 releases:
+  - version: 0.8.0
+    date: 2026-05-06
+
+    added:
+      - summary: "`cerbos.audit.v1.PolicySource.Hub.EmbeddedBundle.bundleId` and `cerbos.cloud.epdp.v2.LoadRuleTableResponse`"
+        pull: 1446
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.12.0
+        pull: 1441
+
   - version: 0.7.0
     date: 2026-05-01
 

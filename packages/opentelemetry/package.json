@@ -51,7 +51,7 @@
   ],
   "peerDependencies": {
     "@bufbuild/protobuf": "^2.12.0",
-    "@cerbos/api": "^0.7.0",
+    "@cerbos/api": "^0.8.0",
     "@cerbos/core": "^0.30.0"
   },
   "dependencies": {

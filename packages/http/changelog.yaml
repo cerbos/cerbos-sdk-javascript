@@ -6,6 +6,10 @@ unreleased:
       to: 2.12.0
       pull: 1441
 
+    "@cerbos/api":
+      to: 0.8.0
+      pull: 1447
+
 releases:
   - version: 0.28.0
     date: 2026-05-01

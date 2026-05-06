@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.8.0] - 2026-05-06
+
 ### Added
 
 - `cerbos.audit.v1.PolicySource.Hub.EmbeddedBundle.bundleId` and `cerbos.cloud.epdp.v2.LoadRuleTableResponse` ([#1446](https://github.com/cerbos/cerbos-sdk-javascript/pull/1446))
@@ -94,7 +98,8 @@
 
 - Generated code ([#1271](https://github.com/cerbos/cerbos-sdk-javascript/pull/1271))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.7.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.8.0...HEAD
+[0.8.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.7.0...@cerbos/api@0.8.0
 [0.7.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.6.0...@cerbos/api@0.7.0
 [0.6.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.5.1...@cerbos/api@0.6.0
 [0.5.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.5.0...@cerbos/api@0.5.1
