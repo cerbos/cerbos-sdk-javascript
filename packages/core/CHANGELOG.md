@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- [EmbeddedBundle.bundleId](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.EmbeddedBundle.html#bundleid) ([#1446](https://github.com/cerbos/cerbos-sdk-javascript/pull/1446))
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.12.0 ([#1441](https://github.com/cerbos/cerbos-sdk-javascript/pull/1441))

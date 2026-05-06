@@ -467,10 +467,12 @@ function policySourceHubRemoteBundleFromProtobuf(
 function embeddedBundleFromProtobuf({
   ruleId,
   scopes,
+  bundleId,
 }: PolicySource_Hub_EmbeddedBundle): EmbeddedBundle {
   return {
     ruleId,
     scopes,
+    bundleId,
   };
 }
 

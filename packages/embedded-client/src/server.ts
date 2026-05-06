@@ -282,6 +282,7 @@ function auditPolicySource(policies: PolicySource): AuditPolicySource {
       embeddedBundle: {
         ruleId: policies.ruleId,
         scopes: policies.scopes ?? [],
+        bundleId: "",
       },
     };
   }

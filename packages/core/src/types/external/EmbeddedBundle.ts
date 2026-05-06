@@ -11,4 +11,9 @@ export interface EmbeddedBundle {
    * Scopes requested by the client.
    */
   scopes: string[];
+
+  /**
+   * The ID of the downloaded policy bundle.
+   */
+  bundleId: string;
 }

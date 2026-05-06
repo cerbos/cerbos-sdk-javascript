@@ -10,6 +10,7 @@ inputs:
       - cerbos.cloud.epdp.v2.CheckResourcesResponse
       - cerbos.cloud.epdp.v2.Config
       - cerbos.cloud.epdp.v2.Error
+      - cerbos.cloud.epdp.v2.LoadRuleTableResponse
       - cerbos.cloud.epdp.v2.Metadata
       - cerbos.cloud.epdp.v2.PlanResourcesResponse
       - cerbos.response.v1.DeletePolicyErrorDetails
