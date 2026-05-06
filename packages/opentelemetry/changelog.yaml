@@ -1,20 +1,24 @@
-unreleased:
-  type: patch
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.12.0
-      pull: 1441
-
-    "@cerbos/api":
-      to: 0.8.0
-      pull: 1447
-
-    "@opentelemetry/instrumentation":
-      to: 0.216.0
-      pull: 1444
-
 releases:
+  - version: 0.10.4
+    date: 2026-05-06
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.12.0
+        pull: 1441
+
+      "@cerbos/api":
+        to: 0.8.0
+        pull: 1447
+
+      "@cerbos/core":
+        to: 0.31.0
+        pull: 1449
+
+      "@opentelemetry/instrumentation":
+        to: 0.216.0
+        pull: 1444
+
   - version: 0.10.3
     date: 2026-05-01
 

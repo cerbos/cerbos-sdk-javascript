@@ -1,27 +1,35 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined`
-      pull: 1442
-
-    - summary: Populate [`EmbeddedBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.EmbeddedBundle.html#bundleid) (or [`LocalBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.LocalBundle.html#bundleid)) in audit log entries
-      pull: 1448
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.12.0
-      pull: 1441
-
-    "@cerbos/api":
-      to: 0.8.0
-      pull: 1447
-
-    "@cerbos/embedded-server":
-      to: 0.5.0
-      pull: 1448
-
 releases:
+  - version: 0.6.0
+    date: 2026-05-06
+
+    added:
+      - summary: Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined`
+        pull: 1442
+
+      - summary: Populate [`EmbeddedBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.EmbeddedBundle.html#bundleid) (or [`LocalBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.LocalBundle.html#bundleid)) in audit log entries
+        pull: 1448
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.12.0
+        pull: 1441
+
+      "@cerbos/api":
+        to: 0.8.0
+        pull: 1447
+
+      "@cerbos/core":
+        to: 0.31.0
+        pull: 1449
+
+      "@cerbos/embedded-server":
+        to: 0.5.0
+        pull: 1448
+
+      "@cerbos/hub":
+        to: 0.5.6
+        pull: 1449
+
   - version: 0.5.3
     date: 2026-05-01
 

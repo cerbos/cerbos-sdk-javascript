@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/grpc",
-  "version": "0.27.0",
+  "version": "0.27.1",
   "type": "module",
   "description": "Client library for interacting with the Cerbos policy decision point service over gRPC from server-side Node.js applications",
   "repository": {
@@ -52,7 +52,7 @@
     "@cerbos/api": "^0.8.0"
   },
   "dependencies": {
-    "@cerbos/core": "^0.30.0",
+    "@cerbos/core": "^0.31.0",
     "@grpc/grpc-js": "^1.14.3"
   },
   "publishConfig": {

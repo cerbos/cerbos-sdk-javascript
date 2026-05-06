@@ -1,20 +1,24 @@
-unreleased:
-  type: patch
-
-  added:
-    - summary: Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined`
-      pull: 1442
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.12.0
-      pull: 1441
-
-    "@cerbos/api":
-      to: 0.8.0
-      pull: 1447
-
 releases:
+  - version: 0.15.4
+    date: 2026-05-06
+
+    added:
+      - summary: Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined`
+        pull: 1442
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.12.0
+        pull: 1441
+
+      "@cerbos/api":
+        to: 0.8.0
+        pull: 1447
+
+      "@cerbos/core":
+        to: 0.31.0
+        pull: 1449
+
   - version: 0.15.3
     date: 2026-05-01
 

@@ -1,20 +1,20 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[EmbeddedBundle.bundleId](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.EmbeddedBundle.html#bundleid)"
-      pull: 1446
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.12.0
-      pull: 1441
-
-    "@cerbos/api":
-      to: 0.8.0
-      pull: 1447
-
 releases:
+  - version: 0.31.0
+    date: 2026-05-06
+
+    added:
+      - summary: "[EmbeddedBundle.bundleId](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.EmbeddedBundle.html#bundleid)"
+        pull: 1446
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.12.0
+        pull: 1441
+
+      "@cerbos/api":
+        to: 0.8.0
+        pull: 1447
+
   - version: 0.30.0
     date: 2026-05-01
 
