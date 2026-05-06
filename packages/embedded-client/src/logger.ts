@@ -42,7 +42,7 @@ export class DecisionLogger {
 
   public constructor(
     private readonly log: Exclude<Options["onDecision"], undefined>,
-    private readonly policySource: PolicySource,
+    private readonly policySource: (bundleId: string) => PolicySource,
     private readonly userAgent: string,
   ) {
     this.ulid = monotonicFactory();
@@ -52,6 +52,7 @@ export class DecisionLogger {
     request: CheckResourcesRequestValid,
     auxData: DecodedAuxData | undefined,
     headers: Headers,
+    bundleId: string,
     response: CheckResourcesResponseWithAuditTrail | undefined,
     error: unknown,
   ): Promise<void> {
@@ -65,6 +66,7 @@ export class DecisionLogger {
       requestContext(request),
       response?.auditTrail,
       headers,
+      bundleId,
     );
 
     if (response?.response) {
@@ -76,6 +78,7 @@ export class DecisionLogger {
     request: PlanResourcesRequestValid,
     auxData: DecodedAuxData | undefined,
     headers: Headers,
+    bundleId: string,
     response: PlanResourcesResponseWithAuditTrail | undefined,
     error: unknown,
   ): Promise<void> {
@@ -89,6 +92,7 @@ export class DecisionLogger {
       requestContext(request),
       response?.auditTrail,
       headers,
+      bundleId,
     );
 
     if (response?.response) {
@@ -101,6 +105,7 @@ export class DecisionLogger {
     requestContext: RequestContext | undefined,
     auditTrail: AuditTrail | undefined,
     headers: Headers,
+    bundleId: string,
   ): Promise<string> {
     const callId = this.ulid();
 
@@ -117,7 +122,7 @@ export class DecisionLogger {
         forwardedFor: "",
         userAgent: this.userAgent,
       },
-      policySource: this.policySource,
+      policySource: this.policySource(bundleId),
       requestContext,
     });
 

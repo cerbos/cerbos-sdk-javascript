@@ -203,7 +203,7 @@ describe("PolicyLoader", () => {
         public async start(index: EmbeddedServerIndex): Promise<void> {
           await this.loader["~start"]({
             loadRuleTable: this.loadRuleTable[index],
-          } as unknown as EmbeddedServer);
+          });
         }
 
         public async finish(): Promise<void> {

@@ -1,13 +1,16 @@
 import type { BundleValid } from "@cerbos/api/cerbos/cloud/epdp/v2/epdp_pb";
 import { BundleService } from "@cerbos/api/cerbos/cloud/epdp/v2/epdp_pb";
 import { NotOK, Status } from "@cerbos/core";
-import type { Server } from "@cerbos/embedded-server";
 import type { Client as HubClient } from "@cerbos/hub/~internal";
 import { createClient as createHubClient } from "@cerbos/hub/~internal";
 
 import { createUserAgent } from "./fetch.js";
 import { defaultInterval, minimumInterval } from "./interval.js";
 import type { PolicyLoaderOptions } from "./options.js";
+
+interface Server {
+  loadRuleTable(ruleTable: Uint8Array): void;
+}
 
 /**
  * Loader to fetch policy bundles from Cerbos Hub.
