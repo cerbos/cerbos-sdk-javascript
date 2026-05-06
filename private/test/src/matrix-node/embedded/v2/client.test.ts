@@ -125,7 +125,11 @@ describe("Embedded", () => {
         storeId,
         policySource: {
           kind: "hub",
-          embeddedBundle: { ruleId, scopes },
+          embeddedBundle: {
+            ruleId,
+            scopes,
+            bundleId: "",
+          },
         },
       });
     }

@@ -1,5 +1,9 @@
 unreleased:
-  type: patch
+  type: minor
+
+  added:
+    - summary: "[EmbeddedBundle.bundleId](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.EmbeddedBundle.html#bundleid)"
+      pull: 1446
 
   bumped:
     "@bufbuild/protobuf":

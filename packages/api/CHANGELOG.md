@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- `cerbos.audit.v1.PolicySource.Hub.EmbeddedBundle.bundleId` and `cerbos.cloud.epdp.v2.LoadRuleTableResponse` ([#1446](https://github.com/cerbos/cerbos-sdk-javascript/pull/1446))
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.12.0 ([#1441](https://github.com/cerbos/cerbos-sdk-javascript/pull/1441))

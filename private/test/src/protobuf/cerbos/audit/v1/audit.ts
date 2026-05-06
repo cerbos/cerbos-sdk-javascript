@@ -175,6 +175,7 @@ export interface PolicySource_Hub {
 export interface PolicySource_Hub_EmbeddedBundle {
   ruleId: string;
   scopes: string[];
+  bundleId: string;
 }
 
 export interface PolicySource_Hub_LocalBundle {
@@ -1922,7 +1923,7 @@ export const PolicySource_Hub: MessageFns<PolicySource_Hub> = {
 };
 
 function createBasePolicySource_Hub_EmbeddedBundle(): PolicySource_Hub_EmbeddedBundle {
-  return { ruleId: "", scopes: [] };
+  return { ruleId: "", scopes: [], bundleId: "" };
 }
 
 export const PolicySource_Hub_EmbeddedBundle: MessageFns<PolicySource_Hub_EmbeddedBundle> =
@@ -1936,6 +1937,9 @@ export const PolicySource_Hub_EmbeddedBundle: MessageFns<PolicySource_Hub_Embedd
       }
       for (const v of message.scopes) {
         writer.uint32(18).string(v!);
+      }
+      if (message.bundleId !== "") {
+        writer.uint32(26).string(message.bundleId);
       }
       return writer;
     },
@@ -1967,6 +1971,14 @@ export const PolicySource_Hub_EmbeddedBundle: MessageFns<PolicySource_Hub_Embedd
             message.scopes.push(reader.string());
             continue;
           }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.bundleId = reader.string();
+            continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -1983,6 +1995,9 @@ export const PolicySource_Hub_EmbeddedBundle: MessageFns<PolicySource_Hub_Embedd
       }
       if (message.scopes?.length) {
         obj.scopes = message.scopes;
+      }
+      if (message.bundleId !== "") {
+        obj.bundleId = message.bundleId;
       }
       return obj;
     },

@@ -56,6 +56,10 @@ message Metadata {
   google.protobuf.Timestamp built_at = 4 [(buf.validate.field).required = true];
 }
 
+message LoadRuleTableResponse {
+  string bundle_id = 1;
+}
+
 message CheckResourcesResponse {
   cerbos.response.v1.CheckResourcesResponse response = 1 [(buf.validate.field).required = true];
   cerbos.audit.v1.AuditTrail audit_trail = 2 [(buf.validate.field).required = true];
