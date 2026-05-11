@@ -33,24 +33,23 @@
       "rangeStrategy": "pin"
     },
     {
-      "matchPackageNames": ["@bufbuild/*"],
-      "groupName": "buf"
-    },
-    {
-      "matchPackageNames": ["@connectrpc/*"],
-      "groupName": "connect"
-    },
-    {
-      "matchPackageNames": ["@grpc/*"],
-      "groupName": "grpc"
-    },
-    {
-      "matchPackageNames": ["@opentelemetry/*"],
-      "groupName": "opentelemetry"
-    },
-    {
-      "matchPackageNames": ["yaml"],
-      "groupName": "yaml"
+      "matchPackageNames": [
+        "@bufbuild/protobuf",
+        "@bufbuild/protovalidate",
+        "@connectrpc/connect",
+        "@connectrpc/connect-node",
+        "@connectrpc/connect-web",
+        "@connectrpc/validate",
+        "@grpc/grpc-js",
+        "@opentelemetry/api",
+        "@opentelemetry/instrumentation",
+        "@opentelemetry/semantic-conventions",
+        "ulid",
+        "use-deep-compare-effect",
+        "uuid",
+        "yaml"
+      ],
+      "groupName": "dependencies"
     },
     {
       "description": "@types/node should match the Node.js version",
