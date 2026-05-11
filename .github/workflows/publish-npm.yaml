@@ -26,8 +26,7 @@ jobs:
       - name: Set up Node.js
         uses: ./.github/actions/setup-node
         with:
-          restore-cache: false
-          save-cache: false
+          cache: false
 
       - name: Publish
         run: scripts/publish

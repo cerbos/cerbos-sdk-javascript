@@ -15,12 +15,6 @@ jobs:
   cache:
     name: Cache dependencies
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        only-scripts:
-          - true
-          - false
     steps:
       - name: Check out code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -29,12 +23,8 @@ jobs:
 
       - name: Cache dependencies
         uses: ./.github/actions/setup-node
-        with:
-          only-scripts: ${{ matrix.only-scripts }}
-          prune-cache: true
 
       - name: Lint
-        if: (!matrix.only-scripts)
         uses: ./.github/actions/lint
         with:
           github-app-client-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
