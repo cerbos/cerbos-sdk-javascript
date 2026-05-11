@@ -3,29 +3,14 @@ name: Set up Node.js
 description: Install Node.js and npm dependencies
 
 inputs:
+  cache:
+    description: Cache dependencies?
+    required: false
+    default: "true"
+
   node-version:
     description: Version of Node.js to install
     required: false
-
-  only-scripts:
-    description: Only install dependencies for running scripts?
-    required: false
-    default: "false"
-
-  prune-cache:
-    description: Prune cache?
-    required: false
-    default: "false"
-
-  restore-cache:
-    description: Restore cache?
-    required: false
-    default: "true"
-
-  save-cache:
-    description: Save cache?
-    required: false
-    default: "true"
 
 runs:
   using: composite
@@ -39,34 +24,7 @@ runs:
         package-manager-cache: false
 
     - name: Set up pnpm
-      uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5.0.0
-
-    - name: Get pnpm store path
-      id: pnpm-store
-      shell: bash
-      run: printf "path=%s\n" $(pnpm store path --silent) >> "${GITHUB_OUTPUT}"
-
-    - name: Restore cached dependencies
-      id: restore-cache
-      if: inputs.restore-cache == 'true'
-      uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      uses: pnpm/action-setup@739bfe42ca9233c5e6aca07c1a25a9d34aca49b0 # v6.0.7
       with:
-        path: ${{ steps.pnpm-store.outputs.path }}
-        key: pnpm-${{ runner.os }}-${{ inputs.only-scripts }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: pnpm-${{ runner.os }}-${{ inputs.only-scripts }}-
-
-    - name: Install dependencies
-      shell: bash
-      run: pnpm install --frozen-lockfile${{ inputs.only-scripts == 'true' && ' --config.dedupe-peer-dependents=false --filter=./private/scripts' || '' }}
-
-    - name: Prune cache
-      if: inputs.prune-cache == 'true' && steps.restore-cache.outputs.cache-hit != 'true'
-      shell: bash
-      run: pnpm store prune
-
-    - name: Cache dependencies
-      if: inputs.save-cache == 'true' && steps.restore-cache.outputs.cache-hit != 'true'
-      uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
-      with:
-        path: ${{ steps.pnpm-store.outputs.path }}
-        key: ${{ steps.restore-cache.outputs.cache-primary-key }}
+        cache: ${{ inputs.cache }}
+        run_install: true

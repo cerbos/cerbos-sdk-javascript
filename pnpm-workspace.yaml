@@ -1,7 +1,11 @@
-ignoredBuiltDependencies:
-  - "@bufbuild/buf"
-  - esbuild
-  - protobufjs
+packages:
+  - packages/*
+  - private/*
+
+allowBuilds:
+  "@bufbuild/buf": false
+  esbuild: false
+  protobufjs: false
 
 linkWorkspacePackages: true
 
@@ -11,9 +15,5 @@ minimumReleaseAgeExclude:
   - react
   - react-dom
   - scheduler
-
-packages:
-  - packages/*
-  - private/*
 
 saveExact: true
