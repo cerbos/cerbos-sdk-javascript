@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Removed
+
+- Support for Node.js 20, which is now [end-of-life][nodejs-eol] ([#1454](https://github.com/cerbos/cerbos-sdk-javascript/pull/1454))
 
 ## [0.5.6] - 2026-05-06
 
@@ -166,4 +168,5 @@ No notable changes.
 [@connectrpc/connect-node]: https://github.com/connectrpc/connect-es
 [@connectrpc/connect-web]: https://github.com/connectrpc/connect-es
 [@connectrpc/validate]: https://github.com/connectrpc/validate-es
+[nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases
 [opossum]: https://nodeshift.dev/opossum/

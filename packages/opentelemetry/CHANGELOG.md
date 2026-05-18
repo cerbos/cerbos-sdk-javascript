@@ -8,6 +8,10 @@
 
 - Bump dependency on [@opentelemetry/semantic-conventions] to 1.41.1 ([#1453](https://github.com/cerbos/cerbos-sdk-javascript/pull/1453))
 
+### Removed
+
+- Support for Node.js 20, which is now [end-of-life][nodejs-eol] ([#1454](https://github.com/cerbos/cerbos-sdk-javascript/pull/1454))
+
 ## [0.10.4] - 2026-05-06
 
 ### Changed

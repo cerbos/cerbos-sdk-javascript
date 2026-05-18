@@ -6,6 +6,10 @@
 
 - Bump dependency on [yaml] to 2.9.0 ([#1450](https://github.com/cerbos/cerbos-sdk-javascript/pull/1450), [#1453](https://github.com/cerbos/cerbos-sdk-javascript/pull/1453))
 
+### Removed
+
+- Support for Node.js 20, which is now [end-of-life][nodejs-eol] ([#1454](https://github.com/cerbos/cerbos-sdk-javascript/pull/1454))
+
 ## [0.6.5] - 2026-05-06
 
 ### Changed

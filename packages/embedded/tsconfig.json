@@ -3,7 +3,7 @@
   "include": ["src"],
   "references": [{ "path": "../core" }],
   "compilerOptions": {
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": ["ES2024", "DOM"],
     "outDir": "lib",
     "rootDir": "src",
     "tsBuildInfoFile": "lib/embedded.tsbuildinfo"

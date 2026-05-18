@@ -6,7 +6,7 @@ Client library for interacting with [Cerbos Hub](https://www.cerbos.dev/product-
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 
 ## Installation
 
@@ -42,7 +42,7 @@ For more details, [see the `StoresClient` class documentation](https://cerbos.gi
 
 ## CommonJS support
 
-This package is ESM-only, but may be `require`d from CommonJS modules in Node.js versions 20.19.5+, 22.15+, and 24+.
+This package is ESM-only, but may be `require`d from CommonJS modules in Node.js versions 22.15+ and 24+.
 
 ## Further reading
 

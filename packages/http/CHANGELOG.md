@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Removed
+
+- Support for Node.js 20, which is now [end-of-life][nodejs-eol] ([#1454](https://github.com/cerbos/cerbos-sdk-javascript/pull/1454))
 
 ## [0.28.1] - 2026-05-06
 

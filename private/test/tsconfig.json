@@ -15,7 +15,7 @@
   "compilerOptions": {
     "checkJs": true,
     "jsx": "react-jsx",
-    "lib": ["ES2022", "ES2024.Promise", "DOM"],
+    "lib": ["ES2024", "DOM"],
     "outDir": "lib",
     "rootDir": "src",
     "tsBuildInfoFile": "lib/test.tsbuildinfo"

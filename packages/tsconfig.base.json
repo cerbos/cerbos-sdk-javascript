@@ -2,6 +2,7 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "declarationMap": true,
+    "lib": ["ES2024"],
     "sourceMap": true
   }
 }

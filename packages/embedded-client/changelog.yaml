@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  removed:
+    - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
+      pull: 1454
+
 releases:
   - version: 0.6.0
     date: 2026-05-06
@@ -205,6 +212,7 @@ references:
   "@cerbos/core": ../core/README.md
   "@cerbos/embedded-server": https://www.npmjs.com/package/@cerbos/embedded-server
   "@cerbos/hub": ../hub/README.md
+  nodejs-eol: https://github.com/nodejs/release#end-of-life-releases
   ulid: https://github.com/ulid/javascript
 
 initialCommit: e55b224b1a6dcdd6ea9b2472bc498b5223d19b5e
