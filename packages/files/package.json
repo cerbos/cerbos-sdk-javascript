@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@cerbos/core": "^0.31.0",
-    "yaml": "^2.8.4"
+    "yaml": "^2.9.0"
   },
   "publishConfig": {
     "access": "public",
