@@ -1,10 +1,14 @@
 unreleased:
-  type: patch
+  type: minor
 
   bumped:
     yaml:
       to: 2.9.0
       pulls: [1450, 1453]
+
+  removed:
+    - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
+      pull: 1454
 
 releases:
   - version: 0.6.5

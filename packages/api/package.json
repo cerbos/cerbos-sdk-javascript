@@ -15,7 +15,7 @@
   "author": "Cerbos <help@cerbos.dev> (https://www.cerbos.dev)",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 20"
+    "node": ">= 22"
   },
   "exports": {
     "./*": {

@@ -1,3 +1,10 @@
+unreleased:
+  type: minor
+
+  removed:
+    - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
+      pull: 1454
+
 releases:
   - version: 0.31.0
     date: 2026-05-06

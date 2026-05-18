@@ -1,6 +1,6 @@
 ignores:
   - "@bufbuild/protoc-gen-es"
-  - "@tsconfig/node20"
+  - "@tsconfig/node22"
   - "@tsconfig/strictest"
   - "@types/node"
   - "@types/web"

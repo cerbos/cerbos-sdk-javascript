@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Removed
+
+- Support for Node.js 20, which is now [end-of-life][nodejs-eol] ([#1454](https://github.com/cerbos/cerbos-sdk-javascript/pull/1454))
 
 ## [0.8.0] - 2026-05-06
 
@@ -109,3 +111,4 @@ No notable changes.
 [0.2.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.1.0...@cerbos/api@0.2.0
 [0.1.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/7c9a46d98af3f606f28deb6f5485446ebdf18d11...@cerbos/api@0.1.0
 [@bufbuild/protobuf]: https://github.com/bufbuild/protobuf-es
+[nodejs-eol]: https://github.com/nodejs/release#end-of-life-releases

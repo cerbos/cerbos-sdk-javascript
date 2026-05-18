@@ -7,7 +7,7 @@ Client library for interacting with the Cerbos policy decision point service ove
 ## Prerequisites
 
 - Cerbos 0.16+
-- Node.js 20+
+- Node.js 22+
 
 ## Installation
 
@@ -41,7 +41,7 @@ For more details, [see the `GRPC` class documentation](https://cerbos.github.io/
 
 ## CommonJS support
 
-This package is ESM-only, but may be `require`d from CommonJS modules in Node.js versions 20.19.5+, 22.15+, and 24+.
+This package is ESM-only, but may be `require`d from CommonJS modules in Node.js versions 22.15+ and 24+.
 
 ## Further reading
 

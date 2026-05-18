@@ -1,5 +1,5 @@
 unreleased:
-  type: patch
+  type: minor
 
   bumped:
     "@opentelemetry/instrumentation":
@@ -9,6 +9,10 @@ unreleased:
     "@opentelemetry/semantic-conventions":
       to: 1.41.1
       pull: 1453
+
+  removed:
+    - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
+      pull: 1454
 
 releases:
   - version: 0.10.4
