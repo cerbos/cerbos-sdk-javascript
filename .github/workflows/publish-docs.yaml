@@ -45,7 +45,7 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure()
-        uses: cerbos/actions/notify-slack@6e173289a5f7dbcc0a62e6cb761e18f22f0b2070 # main
+        uses: cerbos/actions/notify-slack@025d2a858c99b1e9c062351376d0b42988c5e52c # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}
 
@@ -66,6 +66,6 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure()
-        uses: cerbos/actions/notify-slack@6e173289a5f7dbcc0a62e6cb761e18f22f0b2070 # main
+        uses: cerbos/actions/notify-slack@025d2a858c99b1e9c062351376d0b42988c5e52c # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}

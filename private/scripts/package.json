@@ -8,9 +8,9 @@
     "execa": "9.6.1",
     "node-html-parser": "7.1.0",
     "prettier": "3.8.3",
-    "semver": "7.7.4",
+    "semver": "7.8.0",
     "typedoc": "0.28.19",
     "yaml": "2.9.0",
-    "zod": "4.4.1"
+    "zod": "4.4.3"
   }
 }

@@ -2,7 +2,7 @@ name: cerbos-sdk-javascript-scripts
 
 services:
   lychee:
-    image: lycheeverse/lychee:0.24.1-alpine@sha256:d74d9df462b4efd68fc8f6f5f7eb5a8f8235b7490137ff1e1a9adb405d140b46
+    image: lycheeverse/lychee:0.24.2-alpine@sha256:2255c0b916cc8fc4193f59a4549358a6bae0f7d4ea16b5e1dd4c3b2733c35504
     environment:
       - GITHUB_TOKEN
     working_dir: /input
