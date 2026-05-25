@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- [`OutputResult.error`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#error) property ([#1452](https://github.com/cerbos/cerbos-sdk-javascript/pull/1452))
+
 ### Removed
 
 - Support for Node.js 20, which is now [end-of-life][nodejs-eol] ([#1454](https://github.com/cerbos/cerbos-sdk-javascript/pull/1454))

@@ -238,6 +238,7 @@ describe("Client", () => {
               action: versionIsAtLeast("0.51.0", cerbosVersion) ? "delete" : "",
               source: "resource.document.v1#delete",
               value: "delete_allowed:me@example.com",
+              error: undefined,
             },
           ];
 

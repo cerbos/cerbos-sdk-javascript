@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+### Added
+
+- Cerbos v0.54 updates ([#1452](https://github.com/cerbos/cerbos-sdk-javascript/pull/1452))
+  - `cerbos.engine.v1.OutputEntry.error`
+  - `cerbos.policy.v1.RolePolicy.constants`
+  - `cerbos.policy.v1.RolePolicy.variables`
+  - `cerbos.policy.v1.RoleRule.name`
+  - `cerbos.policy.v1.RoleRule.output`
+
 ### Removed
 
 - Support for Node.js 20, which is now [end-of-life][nodejs-eol] ([#1454](https://github.com/cerbos/cerbos-sdk-javascript/pull/1454))

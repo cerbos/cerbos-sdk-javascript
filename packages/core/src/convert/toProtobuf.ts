@@ -476,7 +476,15 @@ function resourceRuleToProtobuf({
 }
 
 function rolePolicyToProtobuf({
-  rolePolicy: { role, version = "", parentRoles = [], scope = "", rules },
+  rolePolicy: {
+    role,
+    version = "",
+    parentRoles = [],
+    scope = "",
+    rules,
+    constants,
+    variables,
+  },
 }: RolePolicy): RolePolicyValid {
   return {
     $typeName: "cerbos.policy.v1.RolePolicy",
@@ -486,6 +494,8 @@ function rolePolicyToProtobuf({
     scope,
     scopePermissions: ScopePermissionsProtobuf.UNSPECIFIED,
     rules: rules.map(roleRuleToProtobuf),
+    constants: constants && constantsToProtobuf(constants),
+    variables: variables && variablesToProtobuf(variables),
   };
 }
 
@@ -493,12 +503,16 @@ function roleRuleToProtobuf({
   resource,
   allowActions,
   condition,
+  name = "",
+  output,
 }: RoleRule): RoleRuleValid {
   return {
     $typeName: "cerbos.policy.v1.RoleRule",
     resource,
     allowActions,
     condition: condition && conditionToProtobuf(condition),
+    name,
+    output: output && outputToProtobuf(output),
   };
 }
 

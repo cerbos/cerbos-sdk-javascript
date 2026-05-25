@@ -104,12 +104,16 @@ export interface RolePolicy {
   scope: string;
   rules: RoleRule[];
   scopePermissions: ScopePermissions;
+  variables: Variables | undefined;
+  constants: Constants | undefined;
 }
 
 export interface RoleRule {
   resource: string;
   allowActions: string[];
   condition: Condition | undefined;
+  name: string;
+  output: Output | undefined;
 }
 
 export interface PrincipalPolicy {
@@ -1250,6 +1254,8 @@ function createBaseRolePolicy(): RolePolicy {
     scope: "",
     rules: [],
     scopePermissions: 0,
+    variables: undefined,
+    constants: undefined,
   };
 }
 
@@ -1277,6 +1283,12 @@ export const RolePolicy: MessageFns<RolePolicy> = {
     }
     if (message.scopePermissions !== 0) {
       writer.uint32(32).int32(message.scopePermissions);
+    }
+    if (message.variables !== undefined) {
+      Variables.encode(message.variables, writer.uint32(58).fork()).join();
+    }
+    if (message.constants !== undefined) {
+      Constants.encode(message.constants, writer.uint32(66).fork()).join();
     }
     return writer;
   },
@@ -1337,6 +1349,22 @@ export const RolePolicy: MessageFns<RolePolicy> = {
           message.scopePermissions = reader.int32() as any;
           continue;
         }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.variables = Variables.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.constants = Constants.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1366,12 +1394,24 @@ export const RolePolicy: MessageFns<RolePolicy> = {
     if (message.scopePermissions !== 0) {
       obj.scopePermissions = scopePermissionsToJSON(message.scopePermissions);
     }
+    if (message.variables !== undefined) {
+      obj.variables = Variables.toJSON(message.variables);
+    }
+    if (message.constants !== undefined) {
+      obj.constants = Constants.toJSON(message.constants);
+    }
     return obj;
   },
 };
 
 function createBaseRoleRule(): RoleRule {
-  return { resource: "", allowActions: [], condition: undefined };
+  return {
+    resource: "",
+    allowActions: [],
+    condition: undefined,
+    name: "",
+    output: undefined,
+  };
 }
 
 export const RoleRule: MessageFns<RoleRule> = {
@@ -1387,6 +1427,12 @@ export const RoleRule: MessageFns<RoleRule> = {
     }
     if (message.condition !== undefined) {
       Condition.encode(message.condition, writer.uint32(26).fork()).join();
+    }
+    if (message.name !== "") {
+      writer.uint32(34).string(message.name);
+    }
+    if (message.output !== undefined) {
+      Output.encode(message.output, writer.uint32(42).fork()).join();
     }
     return writer;
   },
@@ -1423,6 +1469,22 @@ export const RoleRule: MessageFns<RoleRule> = {
           message.condition = Condition.decode(reader, reader.uint32());
           continue;
         }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.output = Output.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1442,6 +1504,12 @@ export const RoleRule: MessageFns<RoleRule> = {
     }
     if (message.condition !== undefined) {
       obj.condition = Condition.toJSON(message.condition);
+    }
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.output !== undefined) {
+      obj.output = Output.toJSON(message.output);
     }
     return obj;
   },

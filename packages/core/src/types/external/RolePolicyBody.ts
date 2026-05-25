@@ -1,4 +1,6 @@
+import type { Constants } from "./Constants.js";
 import type { RoleRule } from "./RoleRule.js";
+import type { Variables } from "./Variables.js";
 
 /**
  * A {@link https://docs.cerbos.dev/cerbos/latest/policies/role_policies | policy} defining rules for actions that can be performed by a given role.
@@ -37,4 +39,20 @@ export interface RolePolicyBody {
    * Rules defining the actions that can be performed by the role.
    */
   rules: RoleRule[];
+
+  /**
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#constants | Constants} defined for use in conditions.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.54.
+   */
+  constants?: Constants | undefined;
+
+  /**
+   * {@link https://docs.cerbos.dev/cerbos/latest/policies/variables#variables | Variables} defined for use in conditions.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.54.
+   */
+  variables?: Variables | undefined;
 }

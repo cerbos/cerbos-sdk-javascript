@@ -86,6 +86,7 @@ describe("CheckResourcesResult", () => {
           action: "answer",
           source: "resource.document.v1/scope#rule",
           value: 42,
+          error: undefined,
         },
       ],
     });

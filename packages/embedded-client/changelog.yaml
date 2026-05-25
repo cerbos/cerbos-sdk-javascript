@@ -1,6 +1,10 @@
 unreleased:
   type: minor
 
+  added:
+    - summary: "[`OutputResult.error`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#error) property"
+      pull: 1452
+
   removed:
     - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
       pull: 1454

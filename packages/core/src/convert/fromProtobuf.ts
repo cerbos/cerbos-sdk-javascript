@@ -859,11 +859,13 @@ function outputResultFromProtobuf({
   action,
   src,
   val,
+  error,
 }: OutputEntry): OutputResult {
   return {
     action,
     source: src,
     value: val && valueFromProtobuf(val),
+    error: error || undefined,
   };
 }
 

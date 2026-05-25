@@ -3,7 +3,6 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "postinstall": "pnpm --workspace-root run build",
     "test": "../../scripts/test",
     "test:servers:start": "servers/start",
     "test:servers:stop": "servers/stop"
