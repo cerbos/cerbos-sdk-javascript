@@ -86,6 +86,32 @@ export interface Dependency {
   callCount: bigint;
 }
 
+export interface ServiceSummary {
+  name: string;
+  spanCount: number;
+  errorSpanCount: number;
+}
+
+export interface TraceSummary {
+  traceId: string;
+  rootServiceName: string;
+  rootOperationName: string;
+  minStartTimeUnixNano: bigint;
+  maxEndTimeUnixNano: bigint;
+  spanCount: number;
+  errorSpanCount: number;
+  orphanSpanCount: number;
+  services: ServiceSummary[];
+}
+
+export interface FindTraceSummariesRequest {
+  query: TraceQueryParameters | undefined;
+}
+
+export interface FindTraceSummariesResponse {
+  summaries: TraceSummary[];
+}
+
 function createBaseGetTraceRequest(): GetTraceRequest {
   return {
     traceId: "",
@@ -996,6 +1022,384 @@ export const Dependency: MessageFns<Dependency> = {
   },
 };
 
+function createBaseServiceSummary(): ServiceSummary {
+  return { name: "", spanCount: 0, errorSpanCount: 0 };
+}
+
+export const ServiceSummary: MessageFns<ServiceSummary> = {
+  encode(
+    message: ServiceSummary,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
+    }
+    if (message.spanCount !== 0) {
+      writer.uint32(16).int32(message.spanCount);
+    }
+    if (message.errorSpanCount !== 0) {
+      writer.uint32(24).int32(message.errorSpanCount);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ServiceSummary {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseServiceSummary();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.spanCount = reader.int32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.errorSpanCount = reader.int32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  toJSON(message: ServiceSummary): unknown {
+    const obj: any = {};
+    if (message.name !== "") {
+      obj.name = message.name;
+    }
+    if (message.spanCount !== 0) {
+      obj.spanCount = Math.round(message.spanCount);
+    }
+    if (message.errorSpanCount !== 0) {
+      obj.errorSpanCount = Math.round(message.errorSpanCount);
+    }
+    return obj;
+  },
+};
+
+function createBaseTraceSummary(): TraceSummary {
+  return {
+    traceId: "",
+    rootServiceName: "",
+    rootOperationName: "",
+    minStartTimeUnixNano: 0n,
+    maxEndTimeUnixNano: 0n,
+    spanCount: 0,
+    errorSpanCount: 0,
+    orphanSpanCount: 0,
+    services: [],
+  };
+}
+
+export const TraceSummary: MessageFns<TraceSummary> = {
+  encode(
+    message: TraceSummary,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.traceId !== "") {
+      writer.uint32(10).string(message.traceId);
+    }
+    if (message.rootServiceName !== "") {
+      writer.uint32(18).string(message.rootServiceName);
+    }
+    if (message.rootOperationName !== "") {
+      writer.uint32(26).string(message.rootOperationName);
+    }
+    if (message.minStartTimeUnixNano !== 0n) {
+      if (
+        BigInt.asUintN(64, message.minStartTimeUnixNano) !==
+        message.minStartTimeUnixNano
+      ) {
+        throw new globalThis.Error(
+          "value provided for field message.minStartTimeUnixNano of type fixed64 too large",
+        );
+      }
+      writer.uint32(33).fixed64(message.minStartTimeUnixNano);
+    }
+    if (message.maxEndTimeUnixNano !== 0n) {
+      if (
+        BigInt.asUintN(64, message.maxEndTimeUnixNano) !==
+        message.maxEndTimeUnixNano
+      ) {
+        throw new globalThis.Error(
+          "value provided for field message.maxEndTimeUnixNano of type fixed64 too large",
+        );
+      }
+      writer.uint32(41).fixed64(message.maxEndTimeUnixNano);
+    }
+    if (message.spanCount !== 0) {
+      writer.uint32(48).int32(message.spanCount);
+    }
+    if (message.errorSpanCount !== 0) {
+      writer.uint32(56).int32(message.errorSpanCount);
+    }
+    if (message.orphanSpanCount !== 0) {
+      writer.uint32(64).int32(message.orphanSpanCount);
+    }
+    for (const v of message.services) {
+      ServiceSummary.encode(v!, writer.uint32(74).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TraceSummary {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTraceSummary();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.traceId = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.rootServiceName = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.rootOperationName = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 33) {
+            break;
+          }
+
+          message.minStartTimeUnixNano = reader.fixed64() as bigint;
+          continue;
+        }
+        case 5: {
+          if (tag !== 41) {
+            break;
+          }
+
+          message.maxEndTimeUnixNano = reader.fixed64() as bigint;
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.spanCount = reader.int32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.errorSpanCount = reader.int32();
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.orphanSpanCount = reader.int32();
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.services.push(ServiceSummary.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  toJSON(message: TraceSummary): unknown {
+    const obj: any = {};
+    if (message.traceId !== "") {
+      obj.traceId = message.traceId;
+    }
+    if (message.rootServiceName !== "") {
+      obj.rootServiceName = message.rootServiceName;
+    }
+    if (message.rootOperationName !== "") {
+      obj.rootOperationName = message.rootOperationName;
+    }
+    if (message.minStartTimeUnixNano !== 0n) {
+      obj.minStartTimeUnixNano = message.minStartTimeUnixNano.toString();
+    }
+    if (message.maxEndTimeUnixNano !== 0n) {
+      obj.maxEndTimeUnixNano = message.maxEndTimeUnixNano.toString();
+    }
+    if (message.spanCount !== 0) {
+      obj.spanCount = Math.round(message.spanCount);
+    }
+    if (message.errorSpanCount !== 0) {
+      obj.errorSpanCount = Math.round(message.errorSpanCount);
+    }
+    if (message.orphanSpanCount !== 0) {
+      obj.orphanSpanCount = Math.round(message.orphanSpanCount);
+    }
+    if (message.services?.length) {
+      obj.services = message.services.map((e) => ServiceSummary.toJSON(e));
+    }
+    return obj;
+  },
+};
+
+function createBaseFindTraceSummariesRequest(): FindTraceSummariesRequest {
+  return { query: undefined };
+}
+
+export const FindTraceSummariesRequest: MessageFns<FindTraceSummariesRequest> =
+  {
+    encode(
+      message: FindTraceSummariesRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.query !== undefined) {
+        TraceQueryParameters.encode(
+          message.query,
+          writer.uint32(10).fork(),
+        ).join();
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): FindTraceSummariesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseFindTraceSummariesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.query = TraceQueryParameters.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    toJSON(message: FindTraceSummariesRequest): unknown {
+      const obj: any = {};
+      if (message.query !== undefined) {
+        obj.query = TraceQueryParameters.toJSON(message.query);
+      }
+      return obj;
+    },
+  };
+
+function createBaseFindTraceSummariesResponse(): FindTraceSummariesResponse {
+  return { summaries: [] };
+}
+
+export const FindTraceSummariesResponse: MessageFns<FindTraceSummariesResponse> =
+  {
+    encode(
+      message: FindTraceSummariesResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.summaries) {
+        TraceSummary.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): FindTraceSummariesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseFindTraceSummariesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.summaries.push(
+              TraceSummary.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    toJSON(message: FindTraceSummariesResponse): unknown {
+      const obj: any = {};
+      if (message.summaries?.length) {
+        obj.summaries = message.summaries.map((e) => TraceSummary.toJSON(e));
+      }
+      return obj;
+    },
+  };
+
 export type QueryServiceService = typeof QueryServiceService;
 export const QueryServiceService = {
   getTrace: {
@@ -1063,6 +1467,19 @@ export const QueryServiceService = {
     responseDeserialize: (value: Buffer): DependenciesResponse =>
       DependenciesResponse.decode(value),
   },
+  findTraceSummaries: {
+    path: "/jaeger.api_v3.QueryService/FindTraceSummaries" as const,
+    requestStream: false as const,
+    responseStream: true as const,
+    requestSerialize: (value: FindTraceSummariesRequest): Buffer =>
+      Buffer.from(FindTraceSummariesRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer): FindTraceSummariesRequest =>
+      FindTraceSummariesRequest.decode(value),
+    responseSerialize: (value: FindTraceSummariesResponse): Buffer =>
+      Buffer.from(FindTraceSummariesResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer): FindTraceSummariesResponse =>
+      FindTraceSummariesResponse.decode(value),
+  },
 } as const;
 
 export interface QueryServiceServer extends UntypedServiceImplementation {
@@ -1073,6 +1490,10 @@ export interface QueryServiceServer extends UntypedServiceImplementation {
   getDependencies: handleUnaryCall<
     GetDependenciesRequest,
     DependenciesResponse
+  >;
+  findTraceSummaries: handleServerStreamingCall<
+    FindTraceSummariesRequest,
+    FindTraceSummariesResponse
   >;
 }
 
@@ -1167,6 +1588,15 @@ export interface QueryServiceClient extends Client {
       response: DependenciesResponse,
     ) => void,
   ): ClientUnaryCall;
+  findTraceSummaries(
+    request: FindTraceSummariesRequest,
+    options?: Partial<CallOptions>,
+  ): ClientReadableStream<FindTraceSummariesResponse>;
+  findTraceSummaries(
+    request: FindTraceSummariesRequest,
+    metadata?: Metadata,
+    options?: Partial<CallOptions>,
+  ): ClientReadableStream<FindTraceSummariesResponse>;
 }
 
 export const QueryServiceClient = makeGenericClientConstructor(
