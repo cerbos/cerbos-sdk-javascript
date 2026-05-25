@@ -21,4 +21,12 @@ export interface OutputResult {
    * The result of evaluating the output expression.
    */
   value: Value | undefined;
+
+  /**
+   * Error encountered when evaluating the output expression.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.54.
+   */
+  error: string | undefined;
 }

@@ -1,6 +1,19 @@
 unreleased:
   type: minor
 
+  added:
+    - summary: "[`OutputResult.error`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#error) property"
+      details: Requires a policy decision point server running Cerbos 0.54+.
+      pull: 1452
+
+    - summary: "[`RolePolicyBody.constants`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#constants) and [`variables`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#variables) properties"
+      details: Requires a policy decision point server running Cerbos 0.54+.
+      pull: 1452
+
+    - summary: "[`RoleRule.name`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#name) and [`output`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#output) properties"
+      details: Requires a policy decision point server running Cerbos 0.54+.
+      pull: 1452
+
   removed:
     - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
       pull: 1454

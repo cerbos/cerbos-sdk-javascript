@@ -153,6 +153,7 @@ export function testCerbosServiceClient(
                     : "",
                   source: "resource.document.v1#delete",
                   value: "delete_allowed:me@example.com",
+                  error: undefined,
                 },
               ]
             : [];
@@ -281,6 +282,7 @@ export function testCerbosServiceClient(
                         : "",
                       source: "resource.document.v1#delete",
                       value: "delete_allowed:me@example.com",
+                      error: undefined,
                     },
                   ]
                 : [];
@@ -754,6 +756,7 @@ export function testCerbosServiceClient(
                       : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
+                    error: undefined,
                   },
                 ]
               : [];
@@ -847,6 +850,7 @@ export function testCerbosServiceClient(
                       : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
+                    error: undefined,
                   },
                 ]
               : [];
@@ -945,6 +949,7 @@ export function testCerbosServiceClient(
                       : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
+                    error: undefined,
                   },
                 ]
               : [];
@@ -1029,6 +1034,7 @@ export function testCerbosServiceClient(
                         : "",
                       source: "resource.document.v1#delete",
                       value: "delete_allowed:me@example.com",
+                      error: undefined,
                     },
                   ]
                 : [];
@@ -1150,6 +1156,7 @@ export function testCerbosServiceClient(
                       : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
+                    error: undefined,
                   },
                 ]
               : [];
@@ -1358,6 +1365,7 @@ export function testCerbosServiceClient(
                       : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
+                    error: undefined,
                   },
                 ]
               : [];
@@ -1571,6 +1579,7 @@ export function testCerbosServiceClient(
                       : "",
                     source: "resource.document.v1#delete",
                     value: "delete_allowed:me@example.com",
+                    error: undefined,
                   },
                 ]
               : [];
@@ -1770,6 +1779,7 @@ export function testCerbosServiceClient(
                         : "",
                       source: "resource.document.v1#delete",
                       value: "delete_allowed:me@example.com",
+                      error: undefined,
                     },
                   ]
                 : [];

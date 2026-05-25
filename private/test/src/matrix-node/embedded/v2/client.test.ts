@@ -299,6 +299,7 @@ describe("Embedded", () => {
                 action: "delete",
                 source: "resource.document.v1#delete",
                 value: "delete_allowed:me@example.com",
+                error: undefined,
               },
             ] satisfies OutputResult[];
 
