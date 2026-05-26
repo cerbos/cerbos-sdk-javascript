@@ -1,6 +1,11 @@
 unreleased:
   type: minor
 
+  bumped:
+    "@cerbos/api":
+      to: 0.9.0
+      pull: 1460
+
   removed:
     - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
       pull: 1454

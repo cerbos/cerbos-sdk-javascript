@@ -20,6 +20,10 @@ unreleased:
       pull: 1456
 
   bumped:
+    "@cerbos/api":
+      to: 0.9.0
+      pull: 1460
+
     "@grpc/grpc-js":
       to: 1.14.4
       pull: 1457

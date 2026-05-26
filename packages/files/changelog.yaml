@@ -13,6 +13,10 @@ unreleased:
       pull: 1456
 
   bumped:
+    "@cerbos/api":
+      to: 0.9.0
+      pull: 1460
+
     yaml:
       to: 2.9.0
       pulls: [1450, 1453]

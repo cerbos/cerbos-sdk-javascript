@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Bump dependency on [@cerbos/api] to 0.9.0 ([#1460](https://github.com/cerbos/cerbos-sdk-javascript/pull/1460))
+
 ### Removed
 
 - Support for Node.js 20, which is now [end-of-life][nodejs-eol] ([#1454](https://github.com/cerbos/cerbos-sdk-javascript/pull/1454))
