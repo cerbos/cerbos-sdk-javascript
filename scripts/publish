@@ -18,6 +18,8 @@ if [[ "${expected_version}" != "${actual_version}" ]]; then
   exit 1
 fi
 
+pnpm run build
+
 cd "${package_dir}"
 
 npm publish --verbose

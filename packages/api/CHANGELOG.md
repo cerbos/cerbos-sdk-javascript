@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Fix release workflow to include compiled code in published package ([#1461](https://github.com/cerbos/cerbos-sdk-javascript/pull/1461))
 
 ## [0.9.0] - 2026-05-26
 
