@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Bump dependency on [@cerbos/api] to 0.9.0 ([#1460](https://github.com/cerbos/cerbos-sdk-javascript/pull/1460))
+- Bump dependency on [@cerbos/api] to 0.9.1 ([#1462](https://github.com/cerbos/cerbos-sdk-javascript/pull/1462))
 
 ### Removed
 
