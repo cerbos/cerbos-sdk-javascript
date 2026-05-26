@@ -22,7 +22,7 @@
 
   Previously, these fields could be set in an [`AddOrUpdatePoliciesRequest`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AddOrUpdatePoliciesRequest.html), but were omitted from [`GetPoliciesResponse`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.GetPoliciesResponse.html), so round-tripping role policies to and from the policy decision point server was lossy.
 
-- Bump dependency on [@cerbos/api] to 0.9.0 ([#1460](https://github.com/cerbos/cerbos-sdk-javascript/pull/1460))
+- Bump dependency on [@cerbos/api] to 0.9.1 ([#1462](https://github.com/cerbos/cerbos-sdk-javascript/pull/1462))
 
 ### Removed
 

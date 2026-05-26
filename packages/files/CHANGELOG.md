@@ -12,7 +12,7 @@
 
 - Deserialize [`RolePolicyBody.version`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#version) and [`RoleRule.condition`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#condition) ([#1456](https://github.com/cerbos/cerbos-sdk-javascript/pull/1456))
 
-- Bump dependency on [@cerbos/api] to 0.9.0 ([#1460](https://github.com/cerbos/cerbos-sdk-javascript/pull/1460))
+- Bump dependency on [@cerbos/api] to 0.9.1 ([#1462](https://github.com/cerbos/cerbos-sdk-javascript/pull/1462))
 
 - Bump dependency on [yaml] to 2.9.0 ([#1450](https://github.com/cerbos/cerbos-sdk-javascript/pull/1450), [#1453](https://github.com/cerbos/cerbos-sdk-javascript/pull/1453))
 
