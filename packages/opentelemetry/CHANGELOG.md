@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Bump dependency on [@cerbos/api] to 0.9.0 ([#1460](https://github.com/cerbos/cerbos-sdk-javascript/pull/1460))
+
 - Bump dependency on [@opentelemetry/instrumentation] to 0.218.0 ([#1453](https://github.com/cerbos/cerbos-sdk-javascript/pull/1453))
 
 - Bump dependency on [@opentelemetry/semantic-conventions] to 1.41.1 ([#1453](https://github.com/cerbos/cerbos-sdk-javascript/pull/1453))

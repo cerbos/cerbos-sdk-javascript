@@ -1,21 +1,21 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Cerbos v0.54 updates
-      details: |-
-        - `cerbos.engine.v1.OutputEntry.error`
-        - `cerbos.policy.v1.RolePolicy.constants`
-        - `cerbos.policy.v1.RolePolicy.variables`
-        - `cerbos.policy.v1.RoleRule.name`
-        - `cerbos.policy.v1.RoleRule.output`
-      pull: 1452
-
-  removed:
-    - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
-      pull: 1454
-
 releases:
+  - version: 0.9.0
+    date: 2026-05-26
+
+    added:
+      - summary: Cerbos v0.54 updates
+        details: |-
+          - `cerbos.engine.v1.OutputEntry.error`
+          - `cerbos.policy.v1.RolePolicy.constants`
+          - `cerbos.policy.v1.RolePolicy.variables`
+          - `cerbos.policy.v1.RoleRule.name`
+          - `cerbos.policy.v1.RoleRule.output`
+        pull: 1452
+
+    removed:
+      - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
+        pull: 1454
+
   - version: 0.8.0
     date: 2026-05-06
 
