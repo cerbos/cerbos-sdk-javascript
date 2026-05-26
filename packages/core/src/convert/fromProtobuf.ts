@@ -1172,8 +1172,11 @@ function resourceRuleFromProtobuf({
 
 function rolePolicyFromProtobuf({
   policyType,
+  version,
   parentRoles,
   scope,
+  constants,
+  variables,
   rules,
 }: RolePolicyProtobuf): RolePolicy {
   requireOneOf("RolePolicy.policyType", policyType, "role");
@@ -1181,8 +1184,11 @@ function rolePolicyFromProtobuf({
   return {
     rolePolicy: {
       role: policyType.value,
+      version,
       parentRoles: parentRoles,
       scope,
+      constants: constants && constantsFromProtobuf(constants),
+      variables: variables && variablesFromProtobuf(variables),
       rules: rules.map(roleRuleFromProtobuf),
     },
   };
@@ -1191,10 +1197,16 @@ function rolePolicyFromProtobuf({
 function roleRuleFromProtobuf({
   resource,
   allowActions,
+  condition,
+  name,
+  output,
 }: RoleRuleProtobuf): RoleRule {
   return {
     resource,
     allowActions,
+    condition: condition && conditionFromProtobuf(condition),
+    name,
+    output: output && outputFromProtobuf(output),
   };
 }
 

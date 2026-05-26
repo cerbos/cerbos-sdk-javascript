@@ -8,13 +8,19 @@
 
   Requires a policy decision point server running Cerbos 0.54+.
 
-- [`RolePolicyBody.constants`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#constants) and [`variables`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#variables) properties ([#1452](https://github.com/cerbos/cerbos-sdk-javascript/pull/1452))
+- [`RolePolicyBody.constants`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#constants) and [`variables`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#variables) properties ([#1452](https://github.com/cerbos/cerbos-sdk-javascript/pull/1452), [#1456](https://github.com/cerbos/cerbos-sdk-javascript/pull/1456))
 
   Requires a policy decision point server running Cerbos 0.54+.
 
-- [`RoleRule.name`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#name) and [`output`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#output) properties ([#1452](https://github.com/cerbos/cerbos-sdk-javascript/pull/1452))
+- [`RoleRule.name`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#name) and [`output`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#output) properties ([#1452](https://github.com/cerbos/cerbos-sdk-javascript/pull/1452), [#1456](https://github.com/cerbos/cerbos-sdk-javascript/pull/1456))
 
   Requires a policy decision point server running Cerbos 0.54+.
+
+### Changed
+
+- Deserialize [`RolePolicyBody.version`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#version) and [`RoleRule.condition`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#condition) ([#1456](https://github.com/cerbos/cerbos-sdk-javascript/pull/1456))
+
+  Previously, these fields could be set in an [`AddOrUpdatePoliciesRequest`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AddOrUpdatePoliciesRequest.html), but were omitted from [`GetPoliciesResponse`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.GetPoliciesResponse.html), so round-tripping role policies to and from the policy decision point server was lossy.
 
 ### Removed
 

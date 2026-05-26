@@ -1,6 +1,17 @@
 unreleased:
   type: minor
 
+  added:
+    - summary: "[`RolePolicyBody.constants`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#constants) and [`variables`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#variables) properties"
+      pulls: [1452, 1456]
+
+    - summary: "[`RoleRule.name`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#name) and [`output`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#output) properties"
+      pulls: [1452, 1456]
+
+  changed:
+    - summary: Deserialize [`RolePolicyBody.version`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#version) and [`RoleRule.condition`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#condition)
+      pull: 1456
+
   bumped:
     yaml:
       to: 2.9.0
