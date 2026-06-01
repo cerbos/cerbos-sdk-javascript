@@ -18,6 +18,6 @@ minimumReleaseAgeExclude:
 
 overrides:
   # https://github.com/arethetypeswrong/arethetypeswrong.github.io/issues/258
-  "@arethetypeswrong/core@0.18.2>fflate": 0.8.2
+  "@arethetypeswrong/core@0.18.2>fflate": 0.8.3
 
 saveExact: true
