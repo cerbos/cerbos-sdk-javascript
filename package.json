@@ -1,10 +1,10 @@
 {
   "name": "@cerbos/sdk-javascript",
   "private": true,
-  "packageManager": "pnpm@11.4.0+sha512.f0febc7e37552ab485494a914241b338e0b3580b93d54ce31f00933015880863129038a1b4ae4e414a0ee63ac35bf21197e990172c4a68256450b5636310968f",
+  "packageManager": "pnpm@11.5.1+sha512.93f7b57422ea7068257235b4c16eb60762eb68e1dc23723199cc739043ea9be2c4143274a399d8c6defa2b1176226d9ca1c4b63482d6200c1a8fbaa78c1d1485",
   "engines": {
     "node": "25.9.0",
-    "pnpm": "11.4.0"
+    "pnpm": "11.5.1"
   },
   "scripts": {
     "all:parallel": "concurrently --group --prefix=none",
@@ -46,7 +46,7 @@
     "test:servers:stop": "pnpm run --filter=./private/test test:servers:stop"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.18.2",
+    "@arethetypeswrong/cli": "0.18.3",
     "@bufbuild/buf": "1.70.0",
     "@bufbuild/protoc-gen-es": "2.12.0",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
@@ -54,13 +54,13 @@
     "@tsconfig/strictest": "2.0.8",
     "@types/node": "22.19.19",
     "@types/web": "0.0.349",
-    "concurrently": "10.0.0",
+    "concurrently": "10.0.3",
     "depcheck": "1.4.7",
     "eslint": "9.39.4",
     "prettier": "3.8.3",
     "prettier-plugin-pkg": "0.22.1",
     "ts-proto": "2.11.8",
-    "tsx": "4.22.3",
+    "tsx": "4.22.4",
     "typedoc": "0.28.19",
     "typedoc-plugin-mdn-links": "5.1.1",
     "typescript": "6.0.3"
