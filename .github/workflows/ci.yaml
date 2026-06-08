@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
 
@@ -51,7 +51,7 @@ jobs:
         run: pnpm run generate
 
       - name: Check for uncommitted changes
-        uses: cerbos/actions/check-repo-status@0c9f5496bb1c168e663ad7ecb99ad0d2b947ba46 # main
+        uses: cerbos/actions/check-repo-status@aa71e4b2b40b8d8d17b2a9ab3550433ec3fa0729 # main
 
   test-matrix:
     name: Generate test matrix
@@ -60,7 +60,7 @@ jobs:
       matrix: ${{ steps.test-matrix.outputs.matrix }}
     steps:
       - name: Check out code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
 
@@ -84,7 +84,7 @@ jobs:
       matrix: ${{ fromJSON(needs.test-matrix.outputs.matrix).parallel }}
     steps:
       - name: Check out code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
 
@@ -112,7 +112,7 @@ jobs:
       group: ci-test-serial
     steps:
       - name: Check out code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
 
@@ -141,6 +141,6 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure() && github.event_name == 'schedule'
-        uses: cerbos/actions/notify-slack@0c9f5496bb1c168e663ad7ecb99ad0d2b947ba46 # main
+        uses: cerbos/actions/notify-slack@aa71e4b2b40b8d8d17b2a9ab3550433ec3fa0729 # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}
