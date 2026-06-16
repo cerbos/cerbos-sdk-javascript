@@ -57,6 +57,7 @@
 - Use [OpenTelemetry Semantic Conventions v1.39](https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.39.0) ([#1373](https://github.com/cerbos/cerbos-sdk-javascript/pull/1373))
 
   There are breaking changes which affect the attributes on spans produced by this package:
+
   - `rpc.system` is replaced by `rpc.system.name`;
   - `rpc.service` is removed;
   - `rpc.method` is now the fully-qualified name (`cerbos.svc.v1.CerbosService/CheckResources` instead of `CheckResources`); and

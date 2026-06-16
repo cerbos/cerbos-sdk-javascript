@@ -15,6 +15,7 @@ No notable changes.
 ### Added
 
 - Cerbos v0.54 updates ([#1452](https://github.com/cerbos/cerbos-sdk-javascript/pull/1452))
+
   - `cerbos.engine.v1.OutputEntry.error`
   - `cerbos.policy.v1.RolePolicy.constants`
   - `cerbos.policy.v1.RolePolicy.variables`
@@ -40,6 +41,7 @@ No notable changes.
 ### Added
 
 - Cerbos v0.52 updates ([#1437](https://github.com/cerbos/cerbos-sdk-javascript/pull/1437))
+
   - `cerbos.audit.v1.PolicySource.Git.hash`
   - `cerbos.audit.v1.PolicySource.Hub.LocalBundle.bundleId`
   - `cerbos.audit.v1.PolicySource.Hub.RemoteBundle`
@@ -49,6 +51,7 @@ No notable changes.
 ### Added
 
 - Cerbos v0.51 updates ([#1344](https://github.com/cerbos/cerbos-sdk-javascript/pull/1344))
+
   - `cerbos.audit.v1.AccessLogEntry.requestContext`
   - `cerbos.audit.v1.DecisionLogEntry.requestContext`
   - `cerbos.audit.v1.RequestContext`
