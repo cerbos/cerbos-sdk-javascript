@@ -45,6 +45,7 @@
 ### Added
 
 - Further policy source updates for Cerbos 0.52 ([#1437](https://github.com/cerbos/cerbos-sdk-javascript/pull/1437))
+
   - [`LocalBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.LocalBundle.html#bundleid)
   - [`PolicySourceGit.hash`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicySourceGit.html#hash)
 
@@ -251,6 +252,7 @@
 ### Added
 
 - Support for fetching audit logs ([#945](https://github.com/cerbos/cerbos-sdk-javascript/pull/945))
+
   - [`Client.getAccessLogEntry`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#getaccesslogentry) method
   - [`Client.getDecisionLogEntry`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#getdecisionlogentry) method
   - [`Client.listAccessLogEntries`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listaccesslogentries) method
