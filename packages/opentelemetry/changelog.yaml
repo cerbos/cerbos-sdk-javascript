@@ -7,8 +7,8 @@ unreleased:
       pull: 1462
 
     "@opentelemetry/instrumentation":
-      to: 0.218.0
-      pull: 1453
+      to: 0.219.0
+      pulls: [1453, 1473]
 
     "@opentelemetry/semantic-conventions":
       to: 1.41.1

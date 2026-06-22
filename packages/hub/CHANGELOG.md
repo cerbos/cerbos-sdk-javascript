@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Bump dependency on [@connectrpc/connect] to 2.1.2 ([#1473](https://github.com/cerbos/cerbos-sdk-javascript/pull/1473))
+
+- Bump dependency on [@connectrpc/connect-node] to 2.1.2 ([#1473](https://github.com/cerbos/cerbos-sdk-javascript/pull/1473))
+
+- Bump dependency on [@connectrpc/connect-web] to 2.1.2 ([#1473](https://github.com/cerbos/cerbos-sdk-javascript/pull/1473))
+
 ### Removed
 
 - Support for Node.js 20, which is now [end-of-life][nodejs-eol] ([#1454](https://github.com/cerbos/cerbos-sdk-javascript/pull/1454))

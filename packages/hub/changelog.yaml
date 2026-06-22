@@ -1,6 +1,19 @@
 unreleased:
   type: minor
 
+  bumped:
+    "@connectrpc/connect":
+      to: 2.1.2
+      pull: 1473
+
+    "@connectrpc/connect-node":
+      to: 2.1.2
+      pull: 1473
+
+    "@connectrpc/connect-web":
+      to: 2.1.2
+      pull: 1473
+
   removed:
     - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
       pull: 1454
