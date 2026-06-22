@@ -65,9 +65,9 @@
   },
   "dependencies": {
     "@cerbos/core": "^0.31.0",
-    "@connectrpc/connect": "^2.1.1",
-    "@connectrpc/connect-node": "^2.1.1",
-    "@connectrpc/connect-web": "^2.1.1",
+    "@connectrpc/connect": "^2.1.2",
+    "@connectrpc/connect-node": "^2.1.2",
+    "@connectrpc/connect-web": "^2.1.2",
     "@connectrpc/validate": "^0.2.0"
   },
   "publishConfig": {

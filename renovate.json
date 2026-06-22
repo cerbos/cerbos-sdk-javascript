@@ -1,6 +1,18 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>cerbos/renovate"],
+  "customManagers": [
+    {
+      "description": "https://github.com/renovatebot/renovate/issues/38067",
+      "customType": "jsonata",
+      "managerFilePatterns": ["/(^|/)package\\.json$/"],
+      "fileFormat": "json",
+      "matchStrings": [
+        "{\"depName\": devEngines.packageManager.name, \"currentValue\": devEngines.packageManager.version, \"datasource\": \"npm\", \"versioning\": \"npm\"}",
+        "{\"depName\": devEngines.runtime.name, \"currentValue\": devEngines.runtime.version, \"datasource\": devEngines.runtime.name, \"versioning\": devEngines.runtime.name}"
+      ]
+    }
+  ],
   "packageRules": [
     {
       "matchDepTypes": ["dependencies", "peerDependencies"],
@@ -28,7 +40,12 @@
       "rangeStrategy": "pin"
     },
     {
-      "matchManagers": ["docker-compose", "github-actions", "nodenv"],
+      "matchManagers": [
+        "custom.jsonata",
+        "docker-compose",
+        "github-actions",
+        "nodenv"
+      ],
       "groupName": "development dependencies",
       "rangeStrategy": "pin"
     },
