@@ -23,9 +23,7 @@ message BundleInfo {
     repeated string download_urls = 3 [(buf.validate.field).repeated = {
       unique: true
       min_items: 1
-      items: {
-        string: {min_len: 1}
-      }
+      items: {string: {min_len: 1}}
     }];
   }
 

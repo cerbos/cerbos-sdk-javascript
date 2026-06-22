@@ -18,9 +18,7 @@ message StringMatch {
   message InList {
     repeated string values = 1 [(buf.validate.field).repeated = {
       max_items: 10
-      items: {
-        string: {min_len: 1}
-      }
+      items: {string: {min_len: 1}}
     }];
   }
 
@@ -52,9 +50,7 @@ message GetFilesRequest {
     min_items: 1
     max_items: 10
     unique: true
-    items: {
-      string: {min_len: 1}
-    }
+    items: {string: {min_len: 1}}
   }];
 }
 
