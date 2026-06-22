@@ -85,9 +85,7 @@ message GetBundleRequest {
   repeated string scopes = 2 [(buf.validate.field).repeated = {
     max_items: 128
     unique: true
-    items: {
-      string: {min_len: 1}
-    }
+    items: {string: {min_len: 1}}
   }];
   optional Bundle.Metadata if_modified_since = 3;
 }
