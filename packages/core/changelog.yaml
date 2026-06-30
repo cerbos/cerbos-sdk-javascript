@@ -20,9 +20,17 @@ unreleased:
       pull: 1456
 
   bumped:
+    "@bufbuild/protobuf":
+      to: 2.12.1
+      pull: 1478
+
     "@cerbos/api":
       to: 0.9.1
       pull: 1462
+
+    uuid:
+      to: 14.0.1
+      pull: 1478
 
   removed:
     - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
