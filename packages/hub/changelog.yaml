@@ -2,6 +2,10 @@ unreleased:
   type: minor
 
   bumped:
+    "@bufbuild/protobuf":
+      to: 2.12.1
+      pull: 1478
+
     "@connectrpc/connect":
       to: 2.1.2
       pull: 1473

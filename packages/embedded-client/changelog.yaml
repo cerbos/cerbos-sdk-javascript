@@ -6,6 +6,10 @@ unreleased:
       pull: 1452
 
   bumped:
+    "@bufbuild/protobuf":
+      to: 2.12.1
+      pull: 1478
+
     "@cerbos/api":
       to: 0.9.1
       pull: 1462
