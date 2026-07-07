@@ -32,9 +32,11 @@ export interface Ports {
 }
 
 export type CerbosService = keyof {
-  [Service in keyof Ports as Ports[Service] extends CerbosPorts
-    ? Service
-    : never]: true;
+  [
+    Service in keyof Ports as Ports[Service] extends CerbosPorts
+      ? Service
+      : never
+  ]: true;
 };
 
 interface DockerComposeContainer {

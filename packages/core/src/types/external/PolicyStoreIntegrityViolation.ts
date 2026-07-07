@@ -11,8 +11,7 @@ export interface PolicyStoreIntegrityViolation {
    * The policy cannot be disabled or deleted because it is required by other policies.
    */
   requiredByOtherPolicies:
-    | PolicyStoreIntegrityViolationRequiredByOtherPolicies
-    | undefined;
+    PolicyStoreIntegrityViolationRequiredByOtherPolicies | undefined;
 }
 
 /**

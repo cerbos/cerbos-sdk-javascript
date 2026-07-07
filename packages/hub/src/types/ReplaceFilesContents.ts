@@ -4,8 +4,7 @@ import type { File } from "./File.js";
  * Files to upload to a store.
  */
 export type ReplaceFilesContents =
-  | ReplaceFilesContentsUnzipped
-  | ReplaceFilesContentsZipped;
+  ReplaceFilesContentsUnzipped | ReplaceFilesContentsZipped;
 
 /**
  * Files to upload to a store.

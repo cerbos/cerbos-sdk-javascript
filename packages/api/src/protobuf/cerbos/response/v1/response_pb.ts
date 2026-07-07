@@ -1507,9 +1507,7 @@ export enum InspectPoliciesResponse_Attribute_Kind {
  * @generated from enum cerbos.response.v1.InspectPoliciesResponse.Attribute.Kind
  */
 export type InspectPoliciesResponse_Attribute_KindJson =
-  | "KIND_UNSPECIFIED"
-  | "KIND_PRINCIPAL_ATTRIBUTE"
-  | "KIND_RESOURCE_ATTRIBUTE";
+  "KIND_UNSPECIFIED" | "KIND_PRINCIPAL_ATTRIBUTE" | "KIND_RESOURCE_ATTRIBUTE";
 
 /**
  * Describes the enum cerbos.response.v1.InspectPoliciesResponse.Attribute.Kind.
@@ -1604,10 +1602,7 @@ export enum InspectPoliciesResponse_DerivedRole_Kind {
  * @generated from enum cerbos.response.v1.InspectPoliciesResponse.DerivedRole.Kind
  */
 export type InspectPoliciesResponse_DerivedRole_KindJson =
-  | "KIND_UNSPECIFIED"
-  | "KIND_UNDEFINED"
-  | "KIND_EXPORTED"
-  | "KIND_IMPORTED";
+  "KIND_UNSPECIFIED" | "KIND_UNDEFINED" | "KIND_EXPORTED" | "KIND_IMPORTED";
 
 /**
  * Describes the enum cerbos.response.v1.InspectPoliciesResponse.DerivedRole.Kind.

@@ -2,9 +2,7 @@
  * Filter to match a string.
  */
 export type StringMatch =
-  | StringMatchEquals
-  | StringMatchContains
-  | StringMatchIn;
+  StringMatchEquals | StringMatchContains | StringMatchIn;
 
 /**
  * Filter to match a string exactly.

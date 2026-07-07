@@ -824,11 +824,7 @@ export enum HeaderParameter_Type {
  * @generated from enum grpc.gateway.protoc_gen_openapiv2.options.HeaderParameter.Type
  */
 export type HeaderParameter_TypeJson =
-  | "UNKNOWN"
-  | "STRING"
-  | "NUMBER"
-  | "INTEGER"
-  | "BOOLEAN";
+  "UNKNOWN" | "STRING" | "NUMBER" | "INTEGER" | "BOOLEAN";
 
 /**
  * Describes the enum grpc.gateway.protoc_gen_openapiv2.options.HeaderParameter.Type.
@@ -2544,10 +2540,7 @@ export enum SecurityScheme_Type {
  * @generated from enum grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme.Type
  */
 export type SecurityScheme_TypeJson =
-  | "TYPE_INVALID"
-  | "TYPE_BASIC"
-  | "TYPE_API_KEY"
-  | "TYPE_OAUTH2";
+  "TYPE_INVALID" | "TYPE_BASIC" | "TYPE_API_KEY" | "TYPE_OAUTH2";
 
 /**
  * Describes the enum grpc.gateway.protoc_gen_openapiv2.options.SecurityScheme.Type.

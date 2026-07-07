@@ -39,8 +39,7 @@ interface DescEndpoint<I extends DescMessage> {
 
 type DescEndpoints<Service extends DescService> = {
   [Method in keyof Service["method"]]:
-    | DescEndpoint<Service["method"][Method]["input"]>
-    | undefined;
+    DescEndpoint<Service["method"][Method]["input"]> | undefined;
 };
 
 interface Endpoint {

@@ -46,10 +46,7 @@ export enum Effect {
  * @generated from enum cerbos.effect.v1.Effect
  */
 export type EffectJson =
-  | "EFFECT_UNSPECIFIED"
-  | "EFFECT_ALLOW"
-  | "EFFECT_DENY"
-  | "EFFECT_NO_MATCH";
+  "EFFECT_UNSPECIFIED" | "EFFECT_ALLOW" | "EFFECT_DENY" | "EFFECT_NO_MATCH";
 
 /**
  * Describes the enum cerbos.effect.v1.Effect.

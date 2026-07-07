@@ -325,8 +325,7 @@ export interface FeatureSet {
   jsonFormat?: FeatureSet_JsonFormat | undefined;
   enforceNamingStyle?: FeatureSet_EnforceNamingStyle | undefined;
   defaultSymbolVisibility?:
-    | FeatureSet_VisibilityFeature_DefaultSymbolVisibility
-    | undefined;
+    FeatureSet_VisibilityFeature_DefaultSymbolVisibility | undefined;
 }
 
 export enum FeatureSet_FieldPresence {

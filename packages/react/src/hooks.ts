@@ -71,9 +71,7 @@ export function useCerbos(): ClientWithPrincipal {
  * @category Type aliases
  */
 export type AsyncResult<T> =
-  | AsyncResultLoading
-  | AsyncResultSuccess<T>
-  | AsyncResultFailure;
+  AsyncResultLoading | AsyncResultSuccess<T> | AsyncResultFailure;
 
 /**
  * Result of a pending async method call.

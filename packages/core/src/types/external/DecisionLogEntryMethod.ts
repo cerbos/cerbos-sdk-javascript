@@ -7,8 +7,7 @@ import type { PlanResourcesOutput } from "./PlanResourcesOutput.js";
  * The outcome of a decision made by the policy decision point server.
  */
 export type DecisionLogEntryMethod =
-  | DecisionLogEntryCheckResources
-  | DecisionLogEntryPlanResources;
+  DecisionLogEntryCheckResources | DecisionLogEntryPlanResources;
 
 /**
  * The outcome of a `CheckResources` decision made by the policy decision point server.

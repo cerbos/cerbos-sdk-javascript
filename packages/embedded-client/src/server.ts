@@ -104,8 +104,7 @@ export class Server {
     let bundleId = "";
     let error: unknown = undefined;
     let responseWithAuditTrail:
-      | CheckResourcesResponseWithAuditTrail
-      | undefined = undefined;
+      CheckResourcesResponseWithAuditTrail | undefined = undefined;
 
     try {
       auxData = await this.decodeAuxData(request.auxData);
@@ -171,8 +170,7 @@ export class Server {
     let bundleId = "";
     let error: unknown = undefined;
     let responseWithAuditTrail:
-      | PlanResourcesResponseWithAuditTrail
-      | undefined = undefined;
+      PlanResourcesResponseWithAuditTrail | undefined = undefined;
 
     try {
       auxData = await this.decodeAuxData(request.auxData);

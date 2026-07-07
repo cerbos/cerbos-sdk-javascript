@@ -8439,9 +8439,7 @@ export enum Ignore {
  * @generated from enum buf.validate.Ignore
  */
 export type IgnoreJson =
-  | "IGNORE_UNSPECIFIED"
-  | "IGNORE_IF_ZERO_VALUE"
-  | "IGNORE_ALWAYS";
+  "IGNORE_UNSPECIFIED" | "IGNORE_IF_ZERO_VALUE" | "IGNORE_ALWAYS";
 
 /**
  * Describes the enum buf.validate.Ignore.

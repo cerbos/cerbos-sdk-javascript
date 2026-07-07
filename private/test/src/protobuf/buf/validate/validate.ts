@@ -106,13 +106,9 @@ export interface PredefinedRules {
 export interface FloatRules {
   const?: number | undefined;
   lessThan:
-    | { $case: "lt"; lt: number }
-    | { $case: "lte"; lte: number }
-    | undefined;
+    { $case: "lt"; lt: number } | { $case: "lte"; lte: number } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: number }
-    | { $case: "gte"; gte: number }
-    | undefined;
+    { $case: "gt"; gt: number } | { $case: "gte"; gte: number } | undefined;
   in: number[];
   notIn: number[];
   finite?: boolean | undefined;
@@ -122,13 +118,9 @@ export interface FloatRules {
 export interface DoubleRules {
   const?: number | undefined;
   lessThan:
-    | { $case: "lt"; lt: number }
-    | { $case: "lte"; lte: number }
-    | undefined;
+    { $case: "lt"; lt: number } | { $case: "lte"; lte: number } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: number }
-    | { $case: "gte"; gte: number }
-    | undefined;
+    { $case: "gt"; gt: number } | { $case: "gte"; gte: number } | undefined;
   in: number[];
   notIn: number[];
   finite?: boolean | undefined;
@@ -138,13 +130,9 @@ export interface DoubleRules {
 export interface Int32Rules {
   const?: number | undefined;
   lessThan:
-    | { $case: "lt"; lt: number }
-    | { $case: "lte"; lte: number }
-    | undefined;
+    { $case: "lt"; lt: number } | { $case: "lte"; lte: number } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: number }
-    | { $case: "gte"; gte: number }
-    | undefined;
+    { $case: "gt"; gt: number } | { $case: "gte"; gte: number } | undefined;
   in: number[];
   notIn: number[];
   example: number[];
@@ -153,13 +141,9 @@ export interface Int32Rules {
 export interface Int64Rules {
   const?: bigint | undefined;
   lessThan:
-    | { $case: "lt"; lt: bigint }
-    | { $case: "lte"; lte: bigint }
-    | undefined;
+    { $case: "lt"; lt: bigint } | { $case: "lte"; lte: bigint } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: bigint }
-    | { $case: "gte"; gte: bigint }
-    | undefined;
+    { $case: "gt"; gt: bigint } | { $case: "gte"; gte: bigint } | undefined;
   in: bigint[];
   notIn: bigint[];
   example: bigint[];
@@ -168,13 +152,9 @@ export interface Int64Rules {
 export interface UInt32Rules {
   const?: number | undefined;
   lessThan:
-    | { $case: "lt"; lt: number }
-    | { $case: "lte"; lte: number }
-    | undefined;
+    { $case: "lt"; lt: number } | { $case: "lte"; lte: number } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: number }
-    | { $case: "gte"; gte: number }
-    | undefined;
+    { $case: "gt"; gt: number } | { $case: "gte"; gte: number } | undefined;
   in: number[];
   notIn: number[];
   example: number[];
@@ -183,13 +163,9 @@ export interface UInt32Rules {
 export interface UInt64Rules {
   const?: bigint | undefined;
   lessThan:
-    | { $case: "lt"; lt: bigint }
-    | { $case: "lte"; lte: bigint }
-    | undefined;
+    { $case: "lt"; lt: bigint } | { $case: "lte"; lte: bigint } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: bigint }
-    | { $case: "gte"; gte: bigint }
-    | undefined;
+    { $case: "gt"; gt: bigint } | { $case: "gte"; gte: bigint } | undefined;
   in: bigint[];
   notIn: bigint[];
   example: bigint[];
@@ -198,13 +174,9 @@ export interface UInt64Rules {
 export interface SInt32Rules {
   const?: number | undefined;
   lessThan:
-    | { $case: "lt"; lt: number }
-    | { $case: "lte"; lte: number }
-    | undefined;
+    { $case: "lt"; lt: number } | { $case: "lte"; lte: number } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: number }
-    | { $case: "gte"; gte: number }
-    | undefined;
+    { $case: "gt"; gt: number } | { $case: "gte"; gte: number } | undefined;
   in: number[];
   notIn: number[];
   example: number[];
@@ -213,13 +185,9 @@ export interface SInt32Rules {
 export interface SInt64Rules {
   const?: bigint | undefined;
   lessThan:
-    | { $case: "lt"; lt: bigint }
-    | { $case: "lte"; lte: bigint }
-    | undefined;
+    { $case: "lt"; lt: bigint } | { $case: "lte"; lte: bigint } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: bigint }
-    | { $case: "gte"; gte: bigint }
-    | undefined;
+    { $case: "gt"; gt: bigint } | { $case: "gte"; gte: bigint } | undefined;
   in: bigint[];
   notIn: bigint[];
   example: bigint[];
@@ -228,13 +196,9 @@ export interface SInt64Rules {
 export interface Fixed32Rules {
   const?: number | undefined;
   lessThan:
-    | { $case: "lt"; lt: number }
-    | { $case: "lte"; lte: number }
-    | undefined;
+    { $case: "lt"; lt: number } | { $case: "lte"; lte: number } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: number }
-    | { $case: "gte"; gte: number }
-    | undefined;
+    { $case: "gt"; gt: number } | { $case: "gte"; gte: number } | undefined;
   in: number[];
   notIn: number[];
   example: number[];
@@ -243,13 +207,9 @@ export interface Fixed32Rules {
 export interface Fixed64Rules {
   const?: bigint | undefined;
   lessThan:
-    | { $case: "lt"; lt: bigint }
-    | { $case: "lte"; lte: bigint }
-    | undefined;
+    { $case: "lt"; lt: bigint } | { $case: "lte"; lte: bigint } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: bigint }
-    | { $case: "gte"; gte: bigint }
-    | undefined;
+    { $case: "gt"; gt: bigint } | { $case: "gte"; gte: bigint } | undefined;
   in: bigint[];
   notIn: bigint[];
   example: bigint[];
@@ -258,13 +218,9 @@ export interface Fixed64Rules {
 export interface SFixed32Rules {
   const?: number | undefined;
   lessThan:
-    | { $case: "lt"; lt: number }
-    | { $case: "lte"; lte: number }
-    | undefined;
+    { $case: "lt"; lt: number } | { $case: "lte"; lte: number } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: number }
-    | { $case: "gte"; gte: number }
-    | undefined;
+    { $case: "gt"; gt: number } | { $case: "gte"; gte: number } | undefined;
   in: number[];
   notIn: number[];
   example: number[];
@@ -273,13 +229,9 @@ export interface SFixed32Rules {
 export interface SFixed64Rules {
   const?: bigint | undefined;
   lessThan:
-    | { $case: "lt"; lt: bigint }
-    | { $case: "lte"; lte: bigint }
-    | undefined;
+    { $case: "lt"; lt: bigint } | { $case: "lte"; lte: bigint } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: bigint }
-    | { $case: "gte"; gte: bigint }
-    | undefined;
+    { $case: "gt"; gt: bigint } | { $case: "gte"; gte: bigint } | undefined;
   in: bigint[];
   notIn: bigint[];
   example: bigint[];
@@ -378,13 +330,9 @@ export interface AnyRules {
 export interface DurationRules {
   const?: Duration | undefined;
   lessThan:
-    | { $case: "lt"; lt: Duration }
-    | { $case: "lte"; lte: Duration }
-    | undefined;
+    { $case: "lt"; lt: Duration } | { $case: "lte"; lte: Duration } | undefined;
   greaterThan:
-    | { $case: "gt"; gt: Duration }
-    | { $case: "gte"; gte: Duration }
-    | undefined;
+    { $case: "gt"; gt: Duration } | { $case: "gte"; gte: Duration } | undefined;
   in: Duration[];
   notIn: Duration[];
   example: Duration[];

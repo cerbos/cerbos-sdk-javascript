@@ -7,8 +7,7 @@ import type { ResourceQuery } from "./ResourceQuery.js";
  * Input to {@link Client.planResources}.
  */
 export type PlanResourcesRequest =
-  | PlanResourcesRequestWithAction
-  | PlanResourcesRequestWithActions;
+  PlanResourcesRequestWithAction | PlanResourcesRequestWithActions;
 
 /**
  * Common fields for inputs to {@link Client.planResources}.

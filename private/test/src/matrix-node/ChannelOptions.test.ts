@@ -19,11 +19,13 @@ type UnsupportedOptions =
 describe("ChannelOptions", () => {
   it("is compatible with the supported upstream options", () => {
     expectTypeOf<Ours>().toEqualTypeOf<{
-      [K in keyof Theirs as string extends K
-        ? never
-        : K extends UnsupportedOptions
+      [
+        K in keyof Theirs as string extends K
           ? never
-          : K]?: Theirs[K] | undefined;
+          : K extends UnsupportedOptions
+            ? never
+            : K
+      ]?: Theirs[K] | undefined;
     }>();
   });
 });
