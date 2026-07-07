@@ -51,8 +51,7 @@ async function instantiate(
 
 function instantiated(
   instantiated:
-    | WebAssembly.Instance
-    | WebAssembly.WebAssemblyInstantiatedSource,
+    WebAssembly.Instance | WebAssembly.WebAssemblyInstantiatedSource,
 ): WebAssembly.Instance {
   return instantiated instanceof WebAssembly.Instance
     ? instantiated

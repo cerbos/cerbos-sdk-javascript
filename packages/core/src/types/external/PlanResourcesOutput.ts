@@ -6,8 +6,7 @@ import type { ValidationError } from "./ValidationError.js";
  * Output from a `PlanResources` invocation.
  */
 export type PlanResourcesOutput =
-  | PlanResourcesConditionalOutput
-  | PlanResourcesUnconditionalOutput;
+  PlanResourcesConditionalOutput | PlanResourcesUnconditionalOutput;
 
 /**
  * Common fields between different {@link PlanResourcesOutput} types.

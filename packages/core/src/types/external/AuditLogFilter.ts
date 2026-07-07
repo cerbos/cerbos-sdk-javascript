@@ -2,9 +2,7 @@
  * Criteria to match audit log entries.
  */
 export type AuditLogFilter =
-  | AuditLogFilterBetween
-  | AuditLogFilterSince
-  | AuditLogFilterTail;
+  AuditLogFilterBetween | AuditLogFilterSince | AuditLogFilterTail;
 
 /**
  * Match audit log entries captured between two timestamps.

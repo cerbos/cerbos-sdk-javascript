@@ -137,10 +137,7 @@ export enum HealthCheckResponse_ServingStatus {
  * @generated from enum grpc.health.v1.HealthCheckResponse.ServingStatus
  */
 export type HealthCheckResponse_ServingStatusJson =
-  | "UNKNOWN"
-  | "SERVING"
-  | "NOT_SERVING"
-  | "SERVICE_UNKNOWN";
+  "UNKNOWN" | "SERVING" | "NOT_SERVING" | "SERVICE_UNKNOWN";
 
 /**
  * Describes the enum grpc.health.v1.HealthCheckResponse.ServingStatus.

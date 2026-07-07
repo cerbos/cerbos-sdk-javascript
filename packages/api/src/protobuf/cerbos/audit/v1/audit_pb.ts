@@ -912,10 +912,7 @@ export enum PolicySource_Database_Driver {
  * @generated from enum cerbos.audit.v1.PolicySource.Database.Driver
  */
 export type PolicySource_Database_DriverJson =
-  | "DRIVER_UNSPECIFIED"
-  | "DRIVER_MYSQL"
-  | "DRIVER_POSTGRES"
-  | "DRIVER_SQLITE3";
+  "DRIVER_UNSPECIFIED" | "DRIVER_MYSQL" | "DRIVER_POSTGRES" | "DRIVER_SQLITE3";
 
 /**
  * Describes the enum cerbos.audit.v1.PolicySource.Database.Driver.

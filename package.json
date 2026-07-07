@@ -4,7 +4,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.8.0",
+      "version": "11.9.0",
       "onFail": "download"
     },
     "runtime": {
@@ -60,13 +60,13 @@
     "@tsconfig/node22": "22.0.5",
     "@tsconfig/strictest": "2.0.8",
     "@types/node": "22.20.0",
-    "@types/web": "0.0.350",
+    "@types/web": "0.0.352",
     "concurrently": "10.0.3",
     "depcheck": "1.4.7",
     "eslint": "9.39.4",
-    "prettier": "3.8.4",
+    "prettier": "3.9.4",
     "prettier-plugin-pkg": "0.22.1",
-    "ts-proto": "2.11.8",
+    "ts-proto": "2.11.10",
     "tsx": "4.22.4",
     "typedoc": "0.28.19",
     "typedoc-plugin-mdn-links": "5.1.1",

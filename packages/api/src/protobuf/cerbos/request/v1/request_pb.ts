@@ -1156,9 +1156,7 @@ export enum ListAuditLogEntriesRequest_Kind {
  * @generated from enum cerbos.request.v1.ListAuditLogEntriesRequest.Kind
  */
 export type ListAuditLogEntriesRequest_KindJson =
-  | "KIND_UNSPECIFIED"
-  | "KIND_ACCESS"
-  | "KIND_DECISION";
+  "KIND_UNSPECIFIED" | "KIND_ACCESS" | "KIND_DECISION";
 
 /**
  * Describes the enum cerbos.request.v1.ListAuditLogEntriesRequest.Kind.

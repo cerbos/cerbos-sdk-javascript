@@ -105,9 +105,7 @@ export enum ValidationError_Source {
  * @generated from enum cerbos.schema.v1.ValidationError.Source
  */
 export type ValidationError_SourceJson =
-  | "SOURCE_UNSPECIFIED"
-  | "SOURCE_PRINCIPAL"
-  | "SOURCE_RESOURCE";
+  "SOURCE_UNSPECIFIED" | "SOURCE_PRINCIPAL" | "SOURCE_RESOURCE";
 
 /**
  * Describes the enum cerbos.schema.v1.ValidationError.Source.

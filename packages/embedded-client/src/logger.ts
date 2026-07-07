@@ -254,7 +254,6 @@ function metadata(headers: Headers): Record<string, string[]> {
 function requestContext({
   requestContext,
 }: CheckResourcesRequestValid | PlanResourcesRequestValid):
-  | RequestContext
-  | undefined {
+  RequestContext | undefined {
   return requestContext && requestContextFromProtobuf(requestContext);
 }

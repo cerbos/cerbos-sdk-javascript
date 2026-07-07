@@ -7,8 +7,7 @@ import type { ValidationError } from "./ValidationError.js";
  * A query plan that can be used to obtain a list of resources on which a principal is allowed to perform a particular action.
  */
 export type PlanResourcesResponse =
-  | PlanResourcesConditionalResponse
-  | PlanResourcesUnconditionalResponse;
+  PlanResourcesConditionalResponse | PlanResourcesUnconditionalResponse;
 
 /**
  * Common fields between different {@link PlanResourcesResponse} types.

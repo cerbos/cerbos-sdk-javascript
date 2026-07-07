@@ -14,12 +14,7 @@ export type MessageInit<T extends Message> = {
 
 // Adapted from https://github.com/bufbuild/protobuf-es/blob/v2.5.2/packages/protobuf/src/types.ts#L196-L204
 type FieldInit<F> = F extends
-  | Date
-  | Uint8Array
-  | bigint
-  | boolean
-  | string
-  | number
+  Date | Uint8Array | bigint | boolean | string | number
   ? F
   : F extends (infer T)[]
     ? FieldInit<T>[]

@@ -1609,16 +1609,13 @@ function transformOneOf<
   oneOf: OneOf,
   transforms: {
     [Case in Exclude<OneOf["case"], undefined>]:
-      | ((oneOf: Extract<OneOf, { case: Case }>["value"]) => Result)
-      | Unexpected;
+      ((oneOf: Extract<OneOf, { case: Case }>["value"]) => Result) | Unexpected;
   },
 ): Result {
   requireField(descriptor, oneOf);
 
   const transform = transforms[oneOf.case as OneOf["case"]] as
-    | ((value: OneOf["value"]) => Result)
-    | Unexpected
-    | undefined;
+    ((value: OneOf["value"]) => Result) | Unexpected | undefined;
 
   if (!transform || isUnexpected(transform)) {
     throw new Error(

@@ -27,4 +27,4 @@ jobs:
           persist-credentials: false
 
       - name: Run zizmor
-        uses: cerbos/actions/lint-actions@c56def2b535edd8fb11a557e3ea46a1608f27212 # main
+        uses: cerbos/actions/lint-actions@52f1500fb4d5fffeda0c2f964e4028037b357557 # main

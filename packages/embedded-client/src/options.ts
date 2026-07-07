@@ -115,9 +115,7 @@ export enum SchemaEnforcement {
  * - the contents of a previously-downloaded policy bundle (or a promise resolving to one).
  */
 export type PolicySource =
-  | PolicyLoader
-  | PolicyLoaderOptions
-  | Awaitable<ArrayBufferView>;
+  PolicyLoader | PolicyLoaderOptions | Awaitable<ArrayBufferView>;
 
 /**
  * Options for creating a {@link PolicyLoader}.
