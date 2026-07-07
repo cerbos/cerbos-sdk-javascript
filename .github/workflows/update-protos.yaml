@@ -31,7 +31,7 @@ jobs:
         run: pnpm run generate
 
       - name: Create pull request
-        uses: cerbos/actions/create-pull-request@c56def2b535edd8fb11a557e3ea46a1608f27212 # main
+        uses: cerbos/actions/create-pull-request@c13fcab984ee65bf1968882d0d1a9ada8cd8e059 # main
         with:
           client-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
           private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
@@ -47,6 +47,6 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure()
-        uses: cerbos/actions/notify-slack@c56def2b535edd8fb11a557e3ea46a1608f27212 # main
+        uses: cerbos/actions/notify-slack@c13fcab984ee65bf1968882d0d1a9ada8cd8e059 # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}
