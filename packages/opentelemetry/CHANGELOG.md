@@ -8,9 +8,9 @@
 
 - Bump dependency on [@cerbos/api] to 0.9.1 ([#1462](https://github.com/cerbos/cerbos-sdk-javascript/pull/1462))
 
-- Bump dependency on [@opentelemetry/instrumentation] to 0.219.0 ([#1453](https://github.com/cerbos/cerbos-sdk-javascript/pull/1453), [#1473](https://github.com/cerbos/cerbos-sdk-javascript/pull/1473))
+- Bump dependency on [@opentelemetry/instrumentation] to 0.220.0 ([#1453](https://github.com/cerbos/cerbos-sdk-javascript/pull/1453), [#1473](https://github.com/cerbos/cerbos-sdk-javascript/pull/1473), [#1489](https://github.com/cerbos/cerbos-sdk-javascript/pull/1489))
 
-- Bump dependency on [@opentelemetry/semantic-conventions] to 1.41.1 ([#1453](https://github.com/cerbos/cerbos-sdk-javascript/pull/1453))
+- Bump dependency on [@opentelemetry/semantic-conventions] to 1.42.0 ([#1453](https://github.com/cerbos/cerbos-sdk-javascript/pull/1453), [#1489](https://github.com/cerbos/cerbos-sdk-javascript/pull/1489))
 
 ### Removed
 
