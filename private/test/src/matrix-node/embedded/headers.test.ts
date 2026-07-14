@@ -1,16 +1,15 @@
-import { readFileSync } from "fs";
+import { readFile } from "fs/promises";
+import { resolve } from "path";
 
 import { describe } from "vitest";
 
 import type { DecisionLogEntry } from "@cerbos/core";
-import { Embedded } from "@cerbos/embedded";
+import { Embedded } from "@cerbos/embedded-client";
 
-import { testHeaders } from "../../../client/headers.js";
-import { embeddedV1UserAgent, newEmbeddedBundle } from "../../../helpers.js";
+import { testHeaders } from "../../client/headers.js";
+import { embeddedUserAgent, readEmbeddedServerWASM } from "../../helpers.js";
 
 describe("Client", () => {
-  const bundle = readFileSync(newEmbeddedBundle.path);
-
   const decisionLogEntries = new Map<string, DecisionLogEntry>();
 
   function onDecision(entry: DecisionLogEntry): void {
@@ -28,13 +27,17 @@ describe("Client", () => {
   }
 
   testHeaders({
-    type: "embedded | v1",
+    type: "embedded | v2",
     client: (options) =>
-      new Embedded(bundle, {
+      new Embedded({
         ...options,
+        policies: readFile(
+          resolve(__dirname, "../../../bundles/PS2MX9855QURB3Y8.crrt"),
+        ),
+        wasm: readEmbeddedServerWASM(),
         onDecision,
       }),
-    defaultUserAgent: embeddedV1UserAgent,
+    defaultUserAgent: embeddedUserAgent,
     getDecisionLogEntry,
   });
 });

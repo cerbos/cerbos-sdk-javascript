@@ -10,7 +10,7 @@ export type PolicySource =
   | PolicySourceBlob
   | PolicySourceDatabase
   | PolicySourceDisk
-  | PolicySourceEmbeddedPDP
+  | PolicySourceEmbeddedPDP // eslint-disable-line @typescript-eslint/no-deprecated
   | PolicySourceGit
   | PolicySourceHub;
 
@@ -94,7 +94,9 @@ export function policySourceIsDisk(
 }
 
 /**
- * Policies sourced from an {@link https://docs.cerbos.dev/cerbos-hub/legacy/decision-points-embedded | embedded policy decision point}.
+ * Policies sourced from a legacy embedded policy decision point.
+ *
+ * @deprecated
  */
 export interface PolicySourceEmbeddedPDP {
   /**
@@ -120,9 +122,12 @@ export interface PolicySourceEmbeddedPDP {
 
 /**
  * Type guard to check if a {@link PolicySource} is a {@link PolicySourceEmbeddedPDP}.
+ *
+ * @deprecated
  */
 export function policySourceIsEmbeddedPDP(
   source: PolicySource,
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
 ): source is PolicySourceEmbeddedPDP {
   return source.kind === "embeddedPDP";
 }
@@ -175,7 +180,7 @@ export function policySourceIsGit(
 export type PolicySourceHub =
   | PolicySourceHubDeployment // eslint-disable-line @typescript-eslint/no-deprecated
   | PolicySourceHubEmbeddedBundle
-  | PolicySourceHubLabel
+  | PolicySourceHubLabel // eslint-disable-line @typescript-eslint/no-deprecated
   | PolicySourceHubLocalBundle
   | PolicySourceHubPlayground
   | PolicySourceHubRemoteBundle;
@@ -243,20 +248,25 @@ export function policySourceIsHubEmbeddedBundle(
 }
 
 /**
- * Policies sourced from a {@link https://docs.cerbos.dev/cerbos-hub/legacy/deployment-labels | label} in {@link https://www.cerbos.dev/product-cerbos-hub | Cerbos Hub} using the {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub | `hub` storage driver}.
+ * Policies sourced from a legacy label in {@link https://www.cerbos.dev/product-cerbos-hub | Cerbos Hub} using the {@link https://docs.cerbos.dev/cerbos/latest/configuration/storage.html#hub | `hub` storage driver}.
+ *
+ * @deprecated
  */
 export interface PolicySourceHubLabel extends PolicySourceHubBase {
   /**
-   * The {@link https://docs.cerbos.dev/cerbos-hub/legacy/deployment-labels | label} from which the policy bundle was downloaded.
+   * The label from which the policy bundle was downloaded.
    */
   label: string;
 }
 
 /**
  * Type guard to check if a {@link PolicySource} is a {@link PolicySourceHubLabel}.
+ *
+ * @deprecated
  */
 export function policySourceIsHubLabel(
   source: PolicySource,
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
 ): source is PolicySourceHubLabel {
   return policySourceIsHub(source) && "label" in source;
 }

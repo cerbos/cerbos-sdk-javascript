@@ -1,5 +1,4 @@
 import { readFile } from "fs/promises";
-import { resolve } from "path";
 import { hrtime } from "process";
 import { setTimeout } from "timers/promises";
 import { fileURLToPath } from "url";
@@ -22,7 +21,6 @@ import { describe, expect } from "vitest";
 
 import type { Client, DecisionLogEntry } from "@cerbos/core";
 import { CheckResourcesResult } from "@cerbos/core";
-import type { BundleMetadata } from "@cerbos/embedded";
 
 import type { QueryServiceClient } from "./protobuf/jaeger/proto/api_v3/query_service.js";
 import type {
@@ -31,10 +29,7 @@ import type {
 } from "./protobuf/opentelemetry/proto/trace/v1/trace.js";
 import { versionIsAtLeast } from "./servers.js";
 
-const { version: embeddedV1SdkVersion } =
-  require("../../../packages/embedded/package.json") as { version: string };
-
-const { version: embeddedV2SdkVersion } =
+const { version: embeddedSdkVersion } =
   require("../../../packages/embedded-client/package.json") as {
     version: string;
   };
@@ -290,9 +285,7 @@ export async function retry<T>(
   }
 }
 
-export const embeddedV1UserAgent = `cerbos-sdk-javascript-embedded/${embeddedV1SdkVersion}`;
-
-export const embeddedV2UserAgent = `cerbos-sdk-javascript-embedded-client/${embeddedV2SdkVersion}`;
+export const embeddedUserAgent = `cerbos-sdk-javascript-embedded-client/${embeddedSdkVersion}`;
 
 export const grpcUserAgent = `cerbos-sdk-javascript-grpc/${grpcSdkVersion} grpc-node-js/${grpcJsVersion}`;
 
@@ -312,53 +305,6 @@ export async function getDecisionLogEntry(
     return entry;
   });
 }
-
-export interface EmbeddedBundle {
-  path: string;
-  etag: string;
-  metadata: BundleMetadata;
-}
-
-function embeddedBundle(
-  etag: string,
-  metadata: BundleMetadata,
-): EmbeddedBundle {
-  return {
-    path: resolve(__dirname, `../bundles/${metadata.commit}.wasm`),
-    etag,
-    metadata,
-  };
-}
-
-export const oldEmbeddedBundle = embeddedBundle(
-  '"9017f17ef4224dc634cf33b25201d463"',
-  {
-    builtAt: new Date(Date.UTC(2024, 2, 25, 11, 45, 14)),
-    commit: "68337848cb3f987627da7381653d82c6d4e368a5",
-    policies: [
-      "cerbos.resource.document.v1",
-      "cerbos.resource.document.v1/test",
-    ],
-    sourceAttributes: {},
-  },
-);
-
-export const newEmbeddedBundle = embeddedBundle(
-  '"89b9908716aa06e61be705156e3ae61c"',
-  {
-    builtAt: new Date(Date.UTC(2025, 1, 10, 9, 44, 24)),
-    commit: "0647f50e09a801132ca15110c6d6ca8a3496f1b0",
-    policies: [],
-    sourceAttributes: {
-      "cerbos.resource.document.v1": {
-        source: "document.yaml",
-      },
-      "cerbos.resource.document.v1/test": {
-        source: "test/document.yaml",
-      },
-    },
-  },
-);
 
 export async function readEmbeddedServerWASM(): Promise<Buffer> {
   return await readFile(

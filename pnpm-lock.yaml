@@ -280,21 +280,6 @@ importers:
         specifier: ^14.0.1
         version: 14.0.1
 
-  packages/embedded:
-    dependencies:
-      '@bufbuild/protobuf':
-        specifier: ^2.12.1
-        version: 2.12.1
-      '@cerbos/api':
-        specifier: ^0.9.1
-        version: link:../api
-      '@cerbos/core':
-        specifier: ^0.31.0
-        version: link:../core
-      ulid:
-        specifier: ^3.0.2
-        version: 3.0.2
-
   packages/embedded-client:
     dependencies:
       '@bufbuild/protobuf':
@@ -481,9 +466,6 @@ importers:
       '@cerbos/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@cerbos/embedded':
-        specifier: workspace:*
-        version: link:../../packages/embedded
       '@cerbos/embedded-client':
         specifier: workspace:*
         version: link:../../packages/embedded-client

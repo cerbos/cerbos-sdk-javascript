@@ -6,6 +6,10 @@
 
 - Bump dependency on [@bufbuild/protobuf] to 2.12.1 ([#1478](https://github.com/cerbos/cerbos-sdk-javascript/pull/1478))
 
+### Removed
+
+- `cerbos.cloud.epdp.v1.Metadata` ([#1493](https://github.com/cerbos/cerbos-sdk-javascript/pull/1493))
+
 ## [0.9.1] - 2026-05-26
 
 ### Changed
