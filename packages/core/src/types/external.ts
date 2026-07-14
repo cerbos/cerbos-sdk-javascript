@@ -33,6 +33,7 @@ export * from "./external/Effect.js";
 export * from "./external/EmbeddedBundle.js";
 export * from "./external/EnablePoliciesRequest.js";
 export * from "./external/EnablePoliciesResponse.js";
+export * from "./external/EvaluationError.js";
 export * from "./external/ExportConstantsBody.js";
 export * from "./external/ExportVariablesBody.js";
 export * from "./external/GetPoliciesRequest.js";

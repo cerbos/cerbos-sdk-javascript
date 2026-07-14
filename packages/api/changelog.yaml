@@ -1,6 +1,14 @@
 unreleased:
   type: minor
 
+  added:
+    - summary: Cerbos v0.54 updates
+      details: |-
+        - `cerbos.engine.v1.CheckOutput.evaluationErrors`
+        - `cerbos.engine.v1.EvaluationError`
+        - `cerbos.engine.v1.PlanResourcesOutput.evaluationErrors`
+      pull: 1492
+
   bumped:
     "@bufbuild/protobuf":
       to: 2.12.1

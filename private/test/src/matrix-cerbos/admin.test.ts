@@ -307,6 +307,7 @@ describe("Client", () => {
                     effectiveDerivedRoles: ["OWNER"],
                     validationErrors: [principalValidationError],
                     outputs,
+                    evaluationErrors: [],
                   },
                   {
                     requestId: request.requestId,
@@ -331,6 +332,7 @@ describe("Client", () => {
                     effectiveDerivedRoles: [],
                     validationErrors: [principalValidationError],
                     outputs,
+                    evaluationErrors: [],
                   },
                   {
                     requestId: request.requestId,
@@ -362,6 +364,7 @@ describe("Client", () => {
                       },
                     ],
                     outputs,
+                    evaluationErrors: [],
                   },
                 ],
                 error: undefined,
@@ -441,6 +444,7 @@ describe("Client", () => {
                   policyVersion: "1",
                   scope: "test",
                   validationErrors: [principalValidationError],
+                  evaluationErrors: [],
                   kind: PlanKind.ALWAYS_ALLOWED,
                 },
                 error: undefined,
@@ -518,6 +522,7 @@ describe("Client", () => {
                   policyVersion: "1",
                   scope: "test",
                   validationErrors: [principalValidationError],
+                  evaluationErrors: [],
                   kind: PlanKind.CONDITIONAL,
                   condition: new PlanExpression("eq", [
                     new PlanExpressionVariable("request.resource.attr.owner"),

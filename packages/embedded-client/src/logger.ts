@@ -182,6 +182,7 @@ function checkOutputs(
       outputs: result.outputs,
       effectiveDerivedRoles: result.meta.effectiveDerivedRoles,
       validationErrors: result.validationErrors,
+      evaluationErrors: []
     });
   });
 }
@@ -221,6 +222,7 @@ function planResourcesOutput(
     actions: response.actions,
     policyVersion: response.policyVersion,
     scope: request.resource.scope,
+    evaluationErrors: [],
     validationErrors: response.validationErrors,
     kind: response.resourceKind,
     matchedScopes: response.meta?.matchedScopes ?? {},
