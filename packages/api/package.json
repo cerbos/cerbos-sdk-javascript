@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/api",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "type": "module",
   "description": "Generated code used by the Cerbos client libraries",
   "repository": {

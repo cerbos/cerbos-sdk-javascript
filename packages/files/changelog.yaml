@@ -18,8 +18,8 @@ unreleased:
       pull: 1478
 
     "@cerbos/api":
-      to: 0.9.1
-      pull: 1462
+      to: 0.10.0
+      pull: 1494
 
     yaml:
       to: 2.9.0

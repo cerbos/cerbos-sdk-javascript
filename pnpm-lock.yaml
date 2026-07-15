@@ -274,7 +274,7 @@ importers:
         specifier: ^2.12.1
         version: 2.12.1
       '@cerbos/api':
-        specifier: ^0.9.1
+        specifier: ^0.10.0
         version: link:../api
       uuid:
         specifier: ^14.0.1
@@ -289,7 +289,7 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0(@bufbuild/protobuf@2.12.1)
       '@cerbos/api':
-        specifier: ^0.9.1
+        specifier: ^0.10.0
         version: link:../api
       '@cerbos/core':
         specifier: ^0.31.0
@@ -310,7 +310,7 @@ importers:
         specifier: ^2.12.1
         version: 2.12.1
       '@cerbos/api':
-        specifier: ^0.9.1
+        specifier: ^0.10.0
         version: link:../api
       '@cerbos/core':
         specifier: ^0.31.0
@@ -325,7 +325,7 @@ importers:
         specifier: ^2.12.1
         version: 2.12.1
       '@cerbos/api':
-        specifier: ^0.9.1
+        specifier: ^0.10.0
         version: link:../api
       '@cerbos/core':
         specifier: ^0.31.0
@@ -340,7 +340,7 @@ importers:
         specifier: ^2.12.1
         version: 2.12.1
       '@cerbos/api':
-        specifier: ^0.9.1
+        specifier: ^0.10.0
         version: link:../api
       '@cerbos/core':
         specifier: ^0.31.0
@@ -373,7 +373,7 @@ importers:
         specifier: ^2.12.1
         version: 2.12.1
       '@cerbos/api':
-        specifier: ^0.9.1
+        specifier: ^0.10.0
         version: link:../api
       '@cerbos/core':
         specifier: ^0.31.0
