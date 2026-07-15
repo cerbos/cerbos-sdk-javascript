@@ -15,8 +15,8 @@ unreleased:
       pulls: [1453, 1473, 1489]
 
     "@opentelemetry/semantic-conventions":
-      to: 1.42.0
-      pulls: [1453, 1489]
+      to: 1.43.0
+      pulls: [1453, 1489, 1496]
 
   removed:
     - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
