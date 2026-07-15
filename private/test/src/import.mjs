@@ -1,6 +1,5 @@
 import "@cerbos/api/cerbos/policy/v1/policy_pb";
 import "@cerbos/core";
-import "@cerbos/embedded";
 import "@cerbos/embedded-client";
 import "@cerbos/files";
 import "@cerbos/grpc";

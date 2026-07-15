@@ -1,10 +1,14 @@
 unreleased:
-  type: patch
+  type: minor
 
   bumped:
     "@bufbuild/protobuf":
       to: 2.12.1
       pull: 1478
+
+  removed:
+    - summary: "`cerbos.cloud.epdp.v1.Metadata`"
+      pull: 1493
 
 releases:
   - version: 0.9.1

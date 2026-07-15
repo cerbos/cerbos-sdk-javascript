@@ -5,7 +5,6 @@ clean: true
 inputs:
   - directory: proto
     types:
-      - cerbos.cloud.epdp.v1.Metadata
       - cerbos.cloud.epdp.v2.BundleService
       - cerbos.cloud.epdp.v2.CheckResourcesResponse
       - cerbos.cloud.epdp.v2.Config

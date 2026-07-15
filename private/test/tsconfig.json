@@ -3,7 +3,6 @@
   "include": ["src"],
   "references": [
     { "path": "../../packages/core" },
-    { "path": "../../packages/embedded" },
     { "path": "../../packages/embedded-client" },
     { "path": "../../packages/files" },
     { "path": "../../packages/grpc" },
