@@ -41,7 +41,7 @@ import {
   readEmbeddedServerWASM,
 } from "../../helpers.js";
 
-describe.todo("Embedded", () => {
+describe("Embedded", () => {
   const onDecision = vitest.fn<Exclude<Options["onDecision"], undefined>>();
 
   interface TestCase {

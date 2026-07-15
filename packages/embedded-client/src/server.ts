@@ -114,7 +114,6 @@ export class Server {
       const server = await this.server();
       ({ bundleId } = server);
 
-      // @ts-expect-error -- requires @cerbos/embedded-server v0.6.0
       serverResponse = server.checkResources(serverRequest);
 
       clientResponse = clientCheckResourcesResponse(
@@ -171,7 +170,6 @@ export class Server {
       const server = await this.server();
       ({ bundleId } = server);
 
-      // @ts-expect-error -- requires @cerbos/embedded-server v0.6.0
       serverResponse = server.planResources(serverRequest);
 
       clientResponse = clientPlanResourcesResponse(

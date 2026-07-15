@@ -14,6 +14,8 @@
 
 - Bump dependency on [@cerbos/api] to 0.10.0 ([#1494](https://github.com/cerbos/cerbos-sdk-javascript/pull/1494))
 
+- Bump dependency on [@cerbos/embedded-server] to 0.6.0 ([#1497](https://github.com/cerbos/cerbos-sdk-javascript/pull/1497))
+
 ### Removed
 
 - Support for Node.js 20, which is now [end-of-life][nodejs-eol] ([#1454](https://github.com/cerbos/cerbos-sdk-javascript/pull/1454))
