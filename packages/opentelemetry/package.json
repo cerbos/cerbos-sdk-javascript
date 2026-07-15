@@ -57,7 +57,7 @@
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",
     "@opentelemetry/instrumentation": "^0.220.0",
-    "@opentelemetry/semantic-conventions": "^1.42.0"
+    "@opentelemetry/semantic-conventions": "^1.43.0"
   },
   "publishConfig": {
     "access": "public",
