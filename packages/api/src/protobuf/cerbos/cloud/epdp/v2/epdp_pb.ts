@@ -25,14 +25,14 @@ import type {
 } from "../../../audit/v1/audit_pb.js";
 import { file_cerbos_audit_v1_audit } from "../../../audit/v1/audit_pb.js";
 import type {
-  CheckResourcesResponse as CheckResourcesResponse$1,
-  CheckResourcesResponseJson as CheckResourcesResponseJson$1,
-  CheckResourcesResponseValid as CheckResourcesResponseValid$1,
-  PlanResourcesResponse as PlanResourcesResponse$1,
-  PlanResourcesResponseJson as PlanResourcesResponseJson$1,
-  PlanResourcesResponseValid as PlanResourcesResponseValid$1,
-} from "../../../response/v1/response_pb.js";
-import { file_cerbos_response_v1_response } from "../../../response/v1/response_pb.js";
+  CheckOutput,
+  CheckOutputJson,
+  CheckOutputValid,
+  PlanResourcesOutput,
+  PlanResourcesOutputJson,
+  PlanResourcesOutputValid,
+} from "../../../engine/v1/engine_pb.js";
+import { file_cerbos_engine_v1_engine } from "../../../engine/v1/engine_pb.js";
 import { file_google_api_visibility } from "../../../../google/api/visibility_pb.js";
 import type {
   Empty,
@@ -57,11 +57,11 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_cerbos_cloud_epdp_v2_epdp: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "Ch9jZXJib3MvY2xvdWQvZXBkcC92Mi9lcGRwLnByb3RvEhRjZXJib3MuY2xvdWQuZXBkcC52MiKqBAoGQ29uZmlnEjkKCWV2YWx1YXRvchgBIAEoCzImLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5FdmFsdWF0b3ISMwoGc2NoZW1hGAIgASgLMiMuY2VyYm9zLmNsb3VkLmVwZHAudjIuQ29uZmlnLlNjaGVtYRruAQoJRXZhbHVhdG9yEkQKB2dsb2JhbHMYASADKAsyMy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuRXZhbHVhdG9yLkdsb2JhbHNFbnRyeRIeChZkZWZhdWx0X3BvbGljeV92ZXJzaW9uGAIgASgJEhwKFGxlbmllbnRfc2NvcGVfc2VhcmNoGAMgASgIEhUKDWRlZmF1bHRfc2NvcGUYBCABKAkaRgoMR2xvYmFsc0VudHJ5EgsKA2tleRgBIAEoCRIlCgV2YWx1ZRgCIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5WYWx1ZToCOAEavgEKBlNjaGVtYRJECgtlbmZvcmNlbWVudBgBIAEoDjIvLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5TY2hlbWEuRW5mb3JjZW1lbnQibgoLRW5mb3JjZW1lbnQSGwoXRU5GT1JDRU1FTlRfVU5TUEVDSUZJRUQQABIUChBFTkZPUkNFTUVOVF9OT05FEAESFAoQRU5GT1JDRU1FTlRfV0FSThACEhYKEkVORk9SQ0VNRU5UX1JFSkVDVBADIkQKBUVycm9yEioKBGNvZGUYASABKA4yEC5nb29nbGUucnBjLkNvZGVCCrpIB4IBBBABIAASDwoHbWVzc2FnZRgCIAEoCSKoAQoITWV0YWRhdGESHwoOY2VyYm9zX3ZlcnNpb24YASABKAlCB7pIBHICEAESJAoSY2VyYm9zX2NvbW1pdF9oYXNoGAIgASgJQgi6SAVyA5gBKBIfCg13YXNtX2NoZWNrc3VtGAMgASgJQgi6SAVyA5gBQBI0CghidWlsdF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBrpIA8gBASIqChVMb2FkUnVsZVRhYmxlUmVzcG9uc2USEQoJYnVuZGxlX2lkGAEgASgJIpgBChZDaGVja1Jlc291cmNlc1Jlc3BvbnNlEkQKCHJlc3BvbnNlGAEgASgLMiouY2VyYm9zLnJlc3BvbnNlLnYxLkNoZWNrUmVzb3VyY2VzUmVzcG9uc2VCBrpIA8gBARI4CgthdWRpdF90cmFpbBgCIAEoCzIbLmNlcmJvcy5hdWRpdC52MS5BdWRpdFRyYWlsQga6SAPIAQEilgEKFVBsYW5SZXNvdXJjZXNSZXNwb25zZRJDCghyZXNwb25zZRgBIAEoCzIpLmNlcmJvcy5yZXNwb25zZS52MS5QbGFuUmVzb3VyY2VzUmVzcG9uc2VCBrpIA8gBARI4CgthdWRpdF90cmFpbBgCIAEoCzIbLmNlcmJvcy5hdWRpdC52MS5BdWRpdFRyYWlsQga6SAPIAQEipAEKBkJ1bmRsZRI/CghtZXRhZGF0YRgBIAEoCzIlLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkJ1bmRsZS5NZXRhZGF0YUIGukgDyAEBEhAKCGNvbnRlbnRzGAIgASgMGkcKCE1ldGFkYXRhEhsKCWJ1bmRsZV9pZBgBIAEoCUIIukgFcgOYARASHgoNcnVsZV9yZXZpc2lvbhgCIAEoA0IHukgEIgIgACKtAQoQR2V0QnVuZGxlUmVxdWVzdBIZCgdydWxlX2lkGAEgASgJQgi6SAVyA5gBDBIhCgZzY29wZXMYAiADKAlCEbpIDpIBCxCAARgBIgRyAhABEkUKEWlmX21vZGlmaWVkX3NpbmNlGAMgASgLMiUuY2VyYm9zLmNsb3VkLmVwZHAudjIuQnVuZGxlLk1ldGFkYXRhSACIAQFCFAoSX2lmX21vZGlmaWVkX3NpbmNlIoQBChFHZXRCdW5kbGVSZXNwb25zZRIuCgZidW5kbGUYASABKAsyHC5jZXJib3MuY2xvdWQuZXBkcC52Mi5CdW5kbGVIABIuCgxub3RfbW9kaWZpZWQYAiABKAsyFi5nb29nbGUucHJvdG9idWYuRW1wdHlIAEIPCgZyZXN1bHQSBbpIAggBMogBCg1CdW5kbGVTZXJ2aWNlEmEKCUdldEJ1bmRsZRImLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkdldEJ1bmRsZVJlcXVlc3QaJy5jZXJib3MuY2xvdWQuZXBkcC52Mi5HZXRCdW5kbGVSZXNwb25zZSIDkAIBGhT60uSTAg4SDEVYUEVSSU1FTlRBTEJ4ChxkZXYuY2VyYm9zLmFwaS5jbG91ZC52Mi5lcGRwWj1naXRodWIuY29tL2NlcmJvcy9jbG91ZC1hcGkvZ2VucGIvY2VyYm9zL2Nsb3VkL2VwZHAvdjI7ZXBkcHYyqgIYQ2VyYm9zLkFwaS5DbG91ZC5WMi5FcGRwYgZwcm90bzM",
+    "Ch9jZXJib3MvY2xvdWQvZXBkcC92Mi9lcGRwLnByb3RvEhRjZXJib3MuY2xvdWQuZXBkcC52MiKqBAoGQ29uZmlnEjkKCWV2YWx1YXRvchgBIAEoCzImLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5FdmFsdWF0b3ISMwoGc2NoZW1hGAIgASgLMiMuY2VyYm9zLmNsb3VkLmVwZHAudjIuQ29uZmlnLlNjaGVtYRruAQoJRXZhbHVhdG9yEkQKB2dsb2JhbHMYASADKAsyMy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuRXZhbHVhdG9yLkdsb2JhbHNFbnRyeRIeChZkZWZhdWx0X3BvbGljeV92ZXJzaW9uGAIgASgJEhwKFGxlbmllbnRfc2NvcGVfc2VhcmNoGAMgASgIEhUKDWRlZmF1bHRfc2NvcGUYBCABKAkaRgoMR2xvYmFsc0VudHJ5EgsKA2tleRgBIAEoCRIlCgV2YWx1ZRgCIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5WYWx1ZToCOAEavgEKBlNjaGVtYRJECgtlbmZvcmNlbWVudBgBIAEoDjIvLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5TY2hlbWEuRW5mb3JjZW1lbnQibgoLRW5mb3JjZW1lbnQSGwoXRU5GT1JDRU1FTlRfVU5TUEVDSUZJRUQQABIUChBFTkZPUkNFTUVOVF9OT05FEAESFAoQRU5GT1JDRU1FTlRfV0FSThACEhYKEkVORk9SQ0VNRU5UX1JFSkVDVBADIkQKBUVycm9yEioKBGNvZGUYASABKA4yEC5nb29nbGUucnBjLkNvZGVCCrpIB4IBBBABIAASDwoHbWVzc2FnZRgCIAEoCSKoAQoITWV0YWRhdGESHwoOY2VyYm9zX3ZlcnNpb24YASABKAlCB7pIBHICEAESJAoSY2VyYm9zX2NvbW1pdF9oYXNoGAIgASgJQgi6SAVyA5gBKBIfCg13YXNtX2NoZWNrc3VtGAMgASgJQgi6SAVyA5gBQBI0CghidWlsdF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBrpIA8gBASIqChVMb2FkUnVsZVRhYmxlUmVzcG9uc2USEQoJYnVuZGxlX2lkGAEgASgJIoIBChZDaGVja1Jlc291cmNlc1Jlc3BvbnNlEi4KB291dHB1dHMYASADKAsyHS5jZXJib3MuZW5naW5lLnYxLkNoZWNrT3V0cHV0EjgKC2F1ZGl0X3RyYWlsGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWxCBrpIA8gBASKQAQoVUGxhblJlc291cmNlc1Jlc3BvbnNlEj0KBm91dHB1dBgBIAEoCzIlLmNlcmJvcy5lbmdpbmUudjEuUGxhblJlc291cmNlc091dHB1dEIGukgDyAEBEjgKC2F1ZGl0X3RyYWlsGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWxCBrpIA8gBASKkAQoGQnVuZGxlEj8KCG1ldGFkYXRhGAEgASgLMiUuY2VyYm9zLmNsb3VkLmVwZHAudjIuQnVuZGxlLk1ldGFkYXRhQga6SAPIAQESEAoIY29udGVudHMYAiABKAwaRwoITWV0YWRhdGESGwoJYnVuZGxlX2lkGAEgASgJQgi6SAVyA5gBEBIeCg1ydWxlX3JldmlzaW9uGAIgASgDQge6SAQiAiAAIq0BChBHZXRCdW5kbGVSZXF1ZXN0EhkKB3J1bGVfaWQYASABKAlCCLpIBXIDmAEMEiEKBnNjb3BlcxgCIAMoCUIRukgOkgELEIABGAEiBHICEAESRQoRaWZfbW9kaWZpZWRfc2luY2UYAyABKAsyJS5jZXJib3MuY2xvdWQuZXBkcC52Mi5CdW5kbGUuTWV0YWRhdGFIAIgBAUIUChJfaWZfbW9kaWZpZWRfc2luY2UihAEKEUdldEJ1bmRsZVJlc3BvbnNlEi4KBmJ1bmRsZRgBIAEoCzIcLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkJ1bmRsZUgAEi4KDG5vdF9tb2RpZmllZBgCIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eUgAQg8KBnJlc3VsdBIFukgCCAEyiAEKDUJ1bmRsZVNlcnZpY2USYQoJR2V0QnVuZGxlEiYuY2VyYm9zLmNsb3VkLmVwZHAudjIuR2V0QnVuZGxlUmVxdWVzdBonLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkdldEJ1bmRsZVJlc3BvbnNlIgOQAgEaFPrS5JMCDhIMRVhQRVJJTUVOVEFMQngKHGRldi5jZXJib3MuYXBpLmNsb3VkLnYyLmVwZHBaPWdpdGh1Yi5jb20vY2VyYm9zL2Nsb3VkLWFwaS9nZW5wYi9jZXJib3MvY2xvdWQvZXBkcC92MjtlcGRwdjKqAhhDZXJib3MuQXBpLkNsb3VkLlYyLkVwZHBiBnByb3RvMw",
     [
       file_buf_validate_validate,
       file_cerbos_audit_v1_audit,
-      file_cerbos_response_v1_response,
+      file_cerbos_engine_v1_engine,
       file_google_api_visibility,
       file_google_protobuf_empty,
       file_google_protobuf_struct,
@@ -409,9 +409,9 @@ export const LoadRuleTableResponseSchema: GenMessage<
 export type CheckResourcesResponse =
   Message<"cerbos.cloud.epdp.v2.CheckResourcesResponse"> & {
     /**
-     * @generated from field: cerbos.response.v1.CheckResourcesResponse response = 1;
+     * @generated from field: repeated cerbos.engine.v1.CheckOutput outputs = 1;
      */
-    response?: CheckResourcesResponse$1 | undefined;
+    outputs: CheckOutput[];
 
     /**
      * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
@@ -424,9 +424,9 @@ export type CheckResourcesResponse =
  */
 export type CheckResourcesResponseJson = {
   /**
-   * @generated from field: cerbos.response.v1.CheckResourcesResponse response = 1;
+   * @generated from field: repeated cerbos.engine.v1.CheckOutput outputs = 1;
    */
-  response?: CheckResourcesResponseJson$1;
+  outputs?: CheckOutputJson[];
 
   /**
    * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
@@ -440,9 +440,9 @@ export type CheckResourcesResponseJson = {
 export type CheckResourcesResponseValid =
   Message<"cerbos.cloud.epdp.v2.CheckResourcesResponse"> & {
     /**
-     * @generated from field: cerbos.response.v1.CheckResourcesResponse response = 1;
+     * @generated from field: repeated cerbos.engine.v1.CheckOutput outputs = 1;
      */
-    response: CheckResourcesResponseValid$1;
+    outputs: CheckOutputValid[];
 
     /**
      * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
@@ -468,9 +468,9 @@ export const CheckResourcesResponseSchema: GenMessage<
 export type PlanResourcesResponse =
   Message<"cerbos.cloud.epdp.v2.PlanResourcesResponse"> & {
     /**
-     * @generated from field: cerbos.response.v1.PlanResourcesResponse response = 1;
+     * @generated from field: cerbos.engine.v1.PlanResourcesOutput output = 1;
      */
-    response?: PlanResourcesResponse$1 | undefined;
+    output?: PlanResourcesOutput | undefined;
 
     /**
      * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
@@ -483,9 +483,9 @@ export type PlanResourcesResponse =
  */
 export type PlanResourcesResponseJson = {
   /**
-   * @generated from field: cerbos.response.v1.PlanResourcesResponse response = 1;
+   * @generated from field: cerbos.engine.v1.PlanResourcesOutput output = 1;
    */
-  response?: PlanResourcesResponseJson$1;
+  output?: PlanResourcesOutputJson;
 
   /**
    * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
@@ -499,9 +499,9 @@ export type PlanResourcesResponseJson = {
 export type PlanResourcesResponseValid =
   Message<"cerbos.cloud.epdp.v2.PlanResourcesResponse"> & {
     /**
-     * @generated from field: cerbos.response.v1.PlanResourcesResponse response = 1;
+     * @generated from field: cerbos.engine.v1.PlanResourcesOutput output = 1;
      */
-    response: PlanResourcesResponseValid$1;
+    output: PlanResourcesOutputValid;
 
     /**
      * @generated from field: cerbos.audit.v1.AuditTrail audit_trail = 2;
