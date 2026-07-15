@@ -108,51 +108,48 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
         });
 
         describe("unary", () => {
-          it.skipIf(embedded)(
-            "records spans for successful calls",
-            async () => {
-              const [result, span] = await captureSpan(
-                spanExporter,
-                async () =>
-                  await client.isAllowed({
-                    principal: {
-                      id: "someone@example.com",
-                      roles: ["USER"],
-                    },
-                    resource: {
-                      kind: "folder",
-                      id: "test",
-                    },
-                    action: "edit",
-                  }),
-              );
+          it("records spans for successful calls", async () => {
+            const [result, span] = await captureSpan(
+              spanExporter,
+              async () =>
+                await client.isAllowed({
+                  principal: {
+                    id: "someone@example.com",
+                    roles: ["USER"],
+                  },
+                  resource: {
+                    kind: "folder",
+                    id: "test",
+                  },
+                  action: "edit",
+                }),
+            );
 
-              const attributes: ExpectedAttributes = {
-                service: "cerbos.svc.v1.CerbosService",
-                method: "CheckResources",
-                status: Status.OK,
-              };
+            const attributes: ExpectedAttributes = {
+              service: "cerbos.svc.v1.CerbosService",
+              method: "CheckResources",
+              status: Status.OK,
+            };
 
-              expect(result).toEqual({ value: false });
+            expect(result).toEqual({ value: false });
 
-              expect(span).toMatchObject({
-                name: "cerbos.svc.v1.CerbosService/CheckResources",
-                kind: SpanKind.CLIENT,
-                attributes: clientAttributes(attributes),
-                status: {
-                  code: SpanStatusCode.UNSET,
-                },
-              } satisfies Partial<ReadableSpan>);
+            expect(span).toMatchObject({
+              name: "cerbos.svc.v1.CerbosService/CheckResources",
+              kind: SpanKind.CLIENT,
+              attributes: clientAttributes(attributes),
+              status: {
+                code: SpanStatusCode.UNSET,
+              },
+            } satisfies Partial<ReadableSpan>);
 
-              await expectMetrics(
-                metricReader,
-                clientAttributes(attributes),
-                span.duration,
-              );
+            await expectMetrics(
+              metricReader,
+              clientAttributes(attributes),
+              span.duration,
+            );
 
-              await expectServerSpan(span, attributes);
-            },
-          );
+            await expectServerSpan(span, attributes);
+          });
 
           it("records spans for unsuccessful calls", async () => {
             const [result, span] = await captureSpan(
