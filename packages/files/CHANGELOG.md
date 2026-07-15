@@ -14,7 +14,7 @@
 
 - Bump dependency on [@bufbuild/protobuf] to 2.12.1 ([#1478](https://github.com/cerbos/cerbos-sdk-javascript/pull/1478))
 
-- Bump dependency on [@cerbos/api] to 0.9.1 ([#1462](https://github.com/cerbos/cerbos-sdk-javascript/pull/1462))
+- Bump dependency on [@cerbos/api] to 0.10.0 ([#1494](https://github.com/cerbos/cerbos-sdk-javascript/pull/1494))
 
 - Bump dependency on [yaml] to 2.9.0 ([#1450](https://github.com/cerbos/cerbos-sdk-javascript/pull/1450), [#1453](https://github.com/cerbos/cerbos-sdk-javascript/pull/1453))
 
