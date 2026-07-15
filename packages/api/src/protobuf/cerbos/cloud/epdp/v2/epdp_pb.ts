@@ -25,9 +25,15 @@ import type {
 } from "../../../audit/v1/audit_pb.js";
 import { file_cerbos_audit_v1_audit } from "../../../audit/v1/audit_pb.js";
 import type {
+  CheckInput,
+  CheckInputJson,
+  CheckInputValid,
   CheckOutput,
   CheckOutputJson,
   CheckOutputValid,
+  PlanResourcesInput,
+  PlanResourcesInputJson,
+  PlanResourcesInputValid,
   PlanResourcesOutput,
   PlanResourcesOutputJson,
   PlanResourcesOutputValid,
@@ -57,7 +63,7 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_cerbos_cloud_epdp_v2_epdp: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "Ch9jZXJib3MvY2xvdWQvZXBkcC92Mi9lcGRwLnByb3RvEhRjZXJib3MuY2xvdWQuZXBkcC52MiKqBAoGQ29uZmlnEjkKCWV2YWx1YXRvchgBIAEoCzImLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5FdmFsdWF0b3ISMwoGc2NoZW1hGAIgASgLMiMuY2VyYm9zLmNsb3VkLmVwZHAudjIuQ29uZmlnLlNjaGVtYRruAQoJRXZhbHVhdG9yEkQKB2dsb2JhbHMYASADKAsyMy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuRXZhbHVhdG9yLkdsb2JhbHNFbnRyeRIeChZkZWZhdWx0X3BvbGljeV92ZXJzaW9uGAIgASgJEhwKFGxlbmllbnRfc2NvcGVfc2VhcmNoGAMgASgIEhUKDWRlZmF1bHRfc2NvcGUYBCABKAkaRgoMR2xvYmFsc0VudHJ5EgsKA2tleRgBIAEoCRIlCgV2YWx1ZRgCIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5WYWx1ZToCOAEavgEKBlNjaGVtYRJECgtlbmZvcmNlbWVudBgBIAEoDjIvLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5TY2hlbWEuRW5mb3JjZW1lbnQibgoLRW5mb3JjZW1lbnQSGwoXRU5GT1JDRU1FTlRfVU5TUEVDSUZJRUQQABIUChBFTkZPUkNFTUVOVF9OT05FEAESFAoQRU5GT1JDRU1FTlRfV0FSThACEhYKEkVORk9SQ0VNRU5UX1JFSkVDVBADIkQKBUVycm9yEioKBGNvZGUYASABKA4yEC5nb29nbGUucnBjLkNvZGVCCrpIB4IBBBABIAASDwoHbWVzc2FnZRgCIAEoCSKoAQoITWV0YWRhdGESHwoOY2VyYm9zX3ZlcnNpb24YASABKAlCB7pIBHICEAESJAoSY2VyYm9zX2NvbW1pdF9oYXNoGAIgASgJQgi6SAVyA5gBKBIfCg13YXNtX2NoZWNrc3VtGAMgASgJQgi6SAVyA5gBQBI0CghidWlsdF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBrpIA8gBASIqChVMb2FkUnVsZVRhYmxlUmVzcG9uc2USEQoJYnVuZGxlX2lkGAEgASgJIoIBChZDaGVja1Jlc291cmNlc1Jlc3BvbnNlEi4KB291dHB1dHMYASADKAsyHS5jZXJib3MuZW5naW5lLnYxLkNoZWNrT3V0cHV0EjgKC2F1ZGl0X3RyYWlsGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWxCBrpIA8gBASKQAQoVUGxhblJlc291cmNlc1Jlc3BvbnNlEj0KBm91dHB1dBgBIAEoCzIlLmNlcmJvcy5lbmdpbmUudjEuUGxhblJlc291cmNlc091dHB1dEIGukgDyAEBEjgKC2F1ZGl0X3RyYWlsGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWxCBrpIA8gBASKkAQoGQnVuZGxlEj8KCG1ldGFkYXRhGAEgASgLMiUuY2VyYm9zLmNsb3VkLmVwZHAudjIuQnVuZGxlLk1ldGFkYXRhQga6SAPIAQESEAoIY29udGVudHMYAiABKAwaRwoITWV0YWRhdGESGwoJYnVuZGxlX2lkGAEgASgJQgi6SAVyA5gBEBIeCg1ydWxlX3JldmlzaW9uGAIgASgDQge6SAQiAiAAIq0BChBHZXRCdW5kbGVSZXF1ZXN0EhkKB3J1bGVfaWQYASABKAlCCLpIBXIDmAEMEiEKBnNjb3BlcxgCIAMoCUIRukgOkgELEIABGAEiBHICEAESRQoRaWZfbW9kaWZpZWRfc2luY2UYAyABKAsyJS5jZXJib3MuY2xvdWQuZXBkcC52Mi5CdW5kbGUuTWV0YWRhdGFIAIgBAUIUChJfaWZfbW9kaWZpZWRfc2luY2UihAEKEUdldEJ1bmRsZVJlc3BvbnNlEi4KBmJ1bmRsZRgBIAEoCzIcLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkJ1bmRsZUgAEi4KDG5vdF9tb2RpZmllZBgCIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eUgAQg8KBnJlc3VsdBIFukgCCAEyiAEKDUJ1bmRsZVNlcnZpY2USYQoJR2V0QnVuZGxlEiYuY2VyYm9zLmNsb3VkLmVwZHAudjIuR2V0QnVuZGxlUmVxdWVzdBonLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkdldEJ1bmRsZVJlc3BvbnNlIgOQAgEaFPrS5JMCDhIMRVhQRVJJTUVOVEFMQngKHGRldi5jZXJib3MuYXBpLmNsb3VkLnYyLmVwZHBaPWdpdGh1Yi5jb20vY2VyYm9zL2Nsb3VkLWFwaS9nZW5wYi9jZXJib3MvY2xvdWQvZXBkcC92MjtlcGRwdjKqAhhDZXJib3MuQXBpLkNsb3VkLlYyLkVwZHBiBnByb3RvMw",
+    "Ch9jZXJib3MvY2xvdWQvZXBkcC92Mi9lcGRwLnByb3RvEhRjZXJib3MuY2xvdWQuZXBkcC52MiKqBAoGQ29uZmlnEjkKCWV2YWx1YXRvchgBIAEoCzImLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5FdmFsdWF0b3ISMwoGc2NoZW1hGAIgASgLMiMuY2VyYm9zLmNsb3VkLmVwZHAudjIuQ29uZmlnLlNjaGVtYRruAQoJRXZhbHVhdG9yEkQKB2dsb2JhbHMYASADKAsyMy5jZXJib3MuY2xvdWQuZXBkcC52Mi5Db25maWcuRXZhbHVhdG9yLkdsb2JhbHNFbnRyeRIeChZkZWZhdWx0X3BvbGljeV92ZXJzaW9uGAIgASgJEhwKFGxlbmllbnRfc2NvcGVfc2VhcmNoGAMgASgIEhUKDWRlZmF1bHRfc2NvcGUYBCABKAkaRgoMR2xvYmFsc0VudHJ5EgsKA2tleRgBIAEoCRIlCgV2YWx1ZRgCIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5WYWx1ZToCOAEavgEKBlNjaGVtYRJECgtlbmZvcmNlbWVudBgBIAEoDjIvLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkNvbmZpZy5TY2hlbWEuRW5mb3JjZW1lbnQibgoLRW5mb3JjZW1lbnQSGwoXRU5GT1JDRU1FTlRfVU5TUEVDSUZJRUQQABIUChBFTkZPUkNFTUVOVF9OT05FEAESFAoQRU5GT1JDRU1FTlRfV0FSThACEhYKEkVORk9SQ0VNRU5UX1JFSkVDVBADIkQKBUVycm9yEioKBGNvZGUYASABKA4yEC5nb29nbGUucnBjLkNvZGVCCrpIB4IBBBABIAASDwoHbWVzc2FnZRgCIAEoCSKoAQoITWV0YWRhdGESHwoOY2VyYm9zX3ZlcnNpb24YASABKAlCB7pIBHICEAESJAoSY2VyYm9zX2NvbW1pdF9oYXNoGAIgASgJQgi6SAVyA5gBKBIfCg13YXNtX2NoZWNrc3VtGAMgASgJQgi6SAVyA5gBQBI0CghidWlsdF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBrpIA8gBASIqChVMb2FkUnVsZVRhYmxlUmVzcG9uc2USEQoJYnVuZGxlX2lkGAEgASgJIkUKFUNoZWNrUmVzb3VyY2VzUmVxdWVzdBIsCgZpbnB1dHMYASADKAsyHC5jZXJib3MuZW5naW5lLnYxLkNoZWNrSW5wdXQiggEKFkNoZWNrUmVzb3VyY2VzUmVzcG9uc2USLgoHb3V0cHV0cxgBIAMoCzIdLmNlcmJvcy5lbmdpbmUudjEuQ2hlY2tPdXRwdXQSOAoLYXVkaXRfdHJhaWwYAiABKAsyGy5jZXJib3MuYXVkaXQudjEuQXVkaXRUcmFpbEIGukgDyAEBIlMKFFBsYW5SZXNvdXJjZXNSZXF1ZXN0EjsKBWlucHV0GAEgASgLMiQuY2VyYm9zLmVuZ2luZS52MS5QbGFuUmVzb3VyY2VzSW5wdXRCBrpIA8gBASKQAQoVUGxhblJlc291cmNlc1Jlc3BvbnNlEj0KBm91dHB1dBgBIAEoCzIlLmNlcmJvcy5lbmdpbmUudjEuUGxhblJlc291cmNlc091dHB1dEIGukgDyAEBEjgKC2F1ZGl0X3RyYWlsGAIgASgLMhsuY2VyYm9zLmF1ZGl0LnYxLkF1ZGl0VHJhaWxCBrpIA8gBASKkAQoGQnVuZGxlEj8KCG1ldGFkYXRhGAEgASgLMiUuY2VyYm9zLmNsb3VkLmVwZHAudjIuQnVuZGxlLk1ldGFkYXRhQga6SAPIAQESEAoIY29udGVudHMYAiABKAwaRwoITWV0YWRhdGESGwoJYnVuZGxlX2lkGAEgASgJQgi6SAVyA5gBEBIeCg1ydWxlX3JldmlzaW9uGAIgASgDQge6SAQiAiAAIq0BChBHZXRCdW5kbGVSZXF1ZXN0EhkKB3J1bGVfaWQYASABKAlCCLpIBXIDmAEMEiEKBnNjb3BlcxgCIAMoCUIRukgOkgELEIABGAEiBHICEAESRQoRaWZfbW9kaWZpZWRfc2luY2UYAyABKAsyJS5jZXJib3MuY2xvdWQuZXBkcC52Mi5CdW5kbGUuTWV0YWRhdGFIAIgBAUIUChJfaWZfbW9kaWZpZWRfc2luY2UihAEKEUdldEJ1bmRsZVJlc3BvbnNlEi4KBmJ1bmRsZRgBIAEoCzIcLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkJ1bmRsZUgAEi4KDG5vdF9tb2RpZmllZBgCIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eUgAQg8KBnJlc3VsdBIFukgCCAEyiAEKDUJ1bmRsZVNlcnZpY2USYQoJR2V0QnVuZGxlEiYuY2VyYm9zLmNsb3VkLmVwZHAudjIuR2V0QnVuZGxlUmVxdWVzdBonLmNlcmJvcy5jbG91ZC5lcGRwLnYyLkdldEJ1bmRsZVJlc3BvbnNlIgOQAgEaFPrS5JMCDhIMRVhQRVJJTUVOVEFMQngKHGRldi5jZXJib3MuYXBpLmNsb3VkLnYyLmVwZHBaPWdpdGh1Yi5jb20vY2VyYm9zL2Nsb3VkLWFwaS9nZW5wYi9jZXJib3MvY2xvdWQvZXBkcC92MjtlcGRwdjKqAhhDZXJib3MuQXBpLkNsb3VkLlYyLkVwZHBiBnByb3RvMw",
     [
       file_buf_validate_validate,
       file_cerbos_audit_v1_audit,
@@ -404,6 +410,47 @@ export const LoadRuleTableResponseSchema: GenMessage<
 > = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 3);
 
 /**
+ * @generated from message cerbos.cloud.epdp.v2.CheckResourcesRequest
+ */
+export type CheckResourcesRequest =
+  Message<"cerbos.cloud.epdp.v2.CheckResourcesRequest"> & {
+    /**
+     * @generated from field: repeated cerbos.engine.v1.CheckInput inputs = 1;
+     */
+    inputs: CheckInput[];
+  };
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.CheckResourcesRequest
+ */
+export type CheckResourcesRequestJson = {
+  /**
+   * @generated from field: repeated cerbos.engine.v1.CheckInput inputs = 1;
+   */
+  inputs?: CheckInputJson[];
+};
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.CheckResourcesRequest
+ */
+export type CheckResourcesRequestValid =
+  Message<"cerbos.cloud.epdp.v2.CheckResourcesRequest"> & {
+    /**
+     * @generated from field: repeated cerbos.engine.v1.CheckInput inputs = 1;
+     */
+    inputs: CheckInputValid[];
+  };
+
+/**
+ * Describes the message cerbos.cloud.epdp.v2.CheckResourcesRequest.
+ * Use `create(CheckResourcesRequestSchema)` to create a new message.
+ */
+export const CheckResourcesRequestSchema: GenMessage<
+  CheckResourcesRequest,
+  { jsonType: CheckResourcesRequestJson; validType: CheckResourcesRequestValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 4);
+
+/**
  * @generated from message cerbos.cloud.epdp.v2.CheckResourcesResponse
  */
 export type CheckResourcesResponse =
@@ -460,7 +507,48 @@ export const CheckResourcesResponseSchema: GenMessage<
     jsonType: CheckResourcesResponseJson;
     validType: CheckResourcesResponseValid;
   }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 4);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 5);
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.PlanResourcesRequest
+ */
+export type PlanResourcesRequest =
+  Message<"cerbos.cloud.epdp.v2.PlanResourcesRequest"> & {
+    /**
+     * @generated from field: cerbos.engine.v1.PlanResourcesInput input = 1;
+     */
+    input?: PlanResourcesInput | undefined;
+  };
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.PlanResourcesRequest
+ */
+export type PlanResourcesRequestJson = {
+  /**
+   * @generated from field: cerbos.engine.v1.PlanResourcesInput input = 1;
+   */
+  input?: PlanResourcesInputJson;
+};
+
+/**
+ * @generated from message cerbos.cloud.epdp.v2.PlanResourcesRequest
+ */
+export type PlanResourcesRequestValid =
+  Message<"cerbos.cloud.epdp.v2.PlanResourcesRequest"> & {
+    /**
+     * @generated from field: cerbos.engine.v1.PlanResourcesInput input = 1;
+     */
+    input: PlanResourcesInputValid;
+  };
+
+/**
+ * Describes the message cerbos.cloud.epdp.v2.PlanResourcesRequest.
+ * Use `create(PlanResourcesRequestSchema)` to create a new message.
+ */
+export const PlanResourcesRequestSchema: GenMessage<
+  PlanResourcesRequest,
+  { jsonType: PlanResourcesRequestJson; validType: PlanResourcesRequestValid }
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 6);
 
 /**
  * @generated from message cerbos.cloud.epdp.v2.PlanResourcesResponse
@@ -516,7 +604,7 @@ export type PlanResourcesResponseValid =
 export const PlanResourcesResponseSchema: GenMessage<
   PlanResourcesResponse,
   { jsonType: PlanResourcesResponseJson; validType: PlanResourcesResponseValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 5);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 7);
 
 /**
  * @generated from message cerbos.cloud.epdp.v2.Bundle
@@ -570,7 +658,7 @@ export type BundleValid = Message<"cerbos.cloud.epdp.v2.Bundle"> & {
 export const BundleSchema: GenMessage<
   Bundle,
   { jsonType: BundleJson; validType: BundleValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 6);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 8);
 
 /**
  * @generated from message cerbos.cloud.epdp.v2.Bundle.Metadata
@@ -612,7 +700,7 @@ export type Bundle_MetadataValid = Bundle_Metadata;
 export const Bundle_MetadataSchema: GenMessage<
   Bundle_Metadata,
   { jsonType: Bundle_MetadataJson; validType: Bundle_MetadataValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 6, 0);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 8, 0);
 
 /**
  * @generated from message cerbos.cloud.epdp.v2.GetBundleRequest
@@ -664,7 +752,7 @@ export type GetBundleRequestValid = GetBundleRequest;
 export const GetBundleRequestSchema: GenMessage<
   GetBundleRequest,
   { jsonType: GetBundleRequestJson; validType: GetBundleRequestValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 7);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 9);
 
 /**
  * @generated from message cerbos.cloud.epdp.v2.GetBundleResponse
@@ -740,7 +828,7 @@ export type GetBundleResponseValid =
 export const GetBundleResponseSchema: GenMessage<
   GetBundleResponse,
   { jsonType: GetBundleResponseJson; validType: GetBundleResponseValid }
-> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 8);
+> = /*@__PURE__*/ messageDesc(file_cerbos_cloud_epdp_v2_epdp, 10);
 
 /**
  * @generated from service cerbos.cloud.epdp.v2.BundleService

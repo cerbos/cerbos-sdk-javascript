@@ -9,6 +9,18 @@ unreleased:
         - `cerbos.engine.v1.PlanResourcesOutput.evaluationErrors`
       pull: 1492
 
+  changed:
+    - summary: Host ↔ WASM contract for embedded policy decision points
+      details: |-
+        - Added
+          - `cerbos.cloud.epdp.v2.CheckResourcesRequest`
+          - `cerbos.cloud.epdp.v2.PlanResourcesRequest`
+
+        - Replaced
+          - `cerbos.cloud.epdp.v2.CheckResourcesResponse.response` → `outputs`
+          - `cerbos.cloud.epdp.v2.PlanResourcesResponse.response` → `output`
+      pull: 1492
+
   bumped:
     "@bufbuild/protobuf":
       to: 2.12.1
