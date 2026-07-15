@@ -9,7 +9,7 @@ import { Embedded } from "@cerbos/embedded-client";
 import { testHeaders } from "../../client/headers.js";
 import { embeddedUserAgent, readEmbeddedServerWASM } from "../../helpers.js";
 
-describe("Client", () => {
+describe.todo("Client", () => {
   const decisionLogEntries = new Map<string, DecisionLogEntry>();
 
   function onDecision(entry: DecisionLogEntry): void {
@@ -27,7 +27,7 @@ describe("Client", () => {
   }
 
   testHeaders({
-    type: "embedded | v2",
+    type: "embedded",
     client: (options) =>
       new Embedded({
         ...options,

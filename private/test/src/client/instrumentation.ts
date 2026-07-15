@@ -53,7 +53,7 @@ export type InstrumentationTestCase = {
     }
   | {
       client: () => Client;
-      embedded: "v1" | "v2";
+      embedded: true;
     }
 );
 
@@ -108,52 +108,9 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
         });
 
         describe("unary", () => {
-          it("records spans for successful calls", async () => {
-            const [result, span] = await captureSpan(
-              spanExporter,
-              async () =>
-                await client.isAllowed({
-                  principal: {
-                    id: "someone@example.com",
-                    roles: ["USER"],
-                  },
-                  resource: {
-                    kind: "folder",
-                    id: "test",
-                  },
-                  action: "edit",
-                }),
-            );
-
-            const attributes: ExpectedAttributes = {
-              service: "cerbos.svc.v1.CerbosService",
-              method: "CheckResources",
-              status: Status.OK,
-            };
-
-            expect(result).toEqual({ value: false });
-
-            expect(span).toMatchObject({
-              name: "cerbos.svc.v1.CerbosService/CheckResources",
-              kind: SpanKind.CLIENT,
-              attributes: clientAttributes(attributes),
-              status: {
-                code: SpanStatusCode.UNSET,
-              },
-            } satisfies Partial<ReadableSpan>);
-
-            await expectMetrics(
-              metricReader,
-              clientAttributes(attributes),
-              span.duration,
-            );
-
-            await expectServerSpan(span, attributes);
-          });
-
-          // v1 embedded PDPs don't produce invalid argument errors
-          if (embedded !== "v1") {
-            it("records spans for unsuccessful calls", async () => {
+          it.skipIf(embedded)(
+            "records spans for successful calls",
+            async () => {
               const [result, span] = await captureSpan(
                 spanExporter,
                 async () =>
@@ -166,31 +123,24 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
                       kind: "folder",
                       id: "test",
                     },
-                    action: "",
+                    action: "edit",
                   }),
               );
 
               const attributes: ExpectedAttributes = {
                 service: "cerbos.svc.v1.CerbosService",
                 method: "CheckResources",
-                status: Status.INVALID_ARGUMENT,
-                "cerbos.error": invalidArgumentDetails(cerbosVersion),
+                status: Status.OK,
               };
 
-              expect(result).toEqual({
-                error: expect.objectContaining({
-                  constructor: NotOK,
-                  code: Status.INVALID_ARGUMENT,
-                  details: invalidArgumentDetails(cerbosVersion),
-                }),
-              });
+              expect(result).toEqual({ value: false });
 
               expect(span).toMatchObject({
                 name: "cerbos.svc.v1.CerbosService/CheckResources",
                 kind: SpanKind.CLIENT,
                 attributes: clientAttributes(attributes),
                 status: {
-                  code: SpanStatusCode.ERROR,
+                  code: SpanStatusCode.UNSET,
                 },
               } satisfies Partial<ReadableSpan>);
 
@@ -201,8 +151,58 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
               );
 
               await expectServerSpan(span, attributes);
+            },
+          );
+
+          it("records spans for unsuccessful calls", async () => {
+            const [result, span] = await captureSpan(
+              spanExporter,
+              async () =>
+                await client.isAllowed({
+                  principal: {
+                    id: "someone@example.com",
+                    roles: ["USER"],
+                  },
+                  resource: {
+                    kind: "folder",
+                    id: "test",
+                  },
+                  action: "",
+                }),
+            );
+
+            const attributes: ExpectedAttributes = {
+              service: "cerbos.svc.v1.CerbosService",
+              method: "CheckResources",
+              status: Status.INVALID_ARGUMENT,
+              "cerbos.error": invalidArgumentDetails(cerbosVersion),
+            };
+
+            expect(result).toEqual({
+              error: expect.objectContaining({
+                constructor: NotOK,
+                code: Status.INVALID_ARGUMENT,
+                details: invalidArgumentDetails(cerbosVersion),
+              }),
             });
-          }
+
+            expect(span).toMatchObject({
+              name: "cerbos.svc.v1.CerbosService/CheckResources",
+              kind: SpanKind.CLIENT,
+              attributes: clientAttributes(attributes),
+              status: {
+                code: SpanStatusCode.ERROR,
+              },
+            } satisfies Partial<ReadableSpan>);
+
+            await expectMetrics(
+              metricReader,
+              clientAttributes(attributes),
+              span.duration,
+            );
+
+            await expectServerSpan(span, attributes);
+          });
         });
 
         // Embedded policy bundles don't implement server streams

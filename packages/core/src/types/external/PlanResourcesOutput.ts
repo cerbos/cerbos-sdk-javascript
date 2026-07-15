@@ -1,3 +1,4 @@
+import type { EvaluationError } from "./EvaluationError.js";
 import type { PlanExpressionOperand } from "./PlanExpressionOperand.js";
 import { PlanKind } from "./PlanKind.js";
 import type { ValidationError } from "./ValidationError.js";
@@ -43,6 +44,14 @@ export interface PlanResourcesOutputBase {
    * Any schema validation errors for the principal or resource attributes.
    */
   validationErrors: ValidationError[];
+
+  /**
+   * Any errors encountered when evaluating the plan.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.54.
+   */
+  evaluationErrors: EvaluationError[];
 }
 
 /**

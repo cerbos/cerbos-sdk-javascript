@@ -30,6 +30,7 @@ import type {
   CheckInput as CheckInputProtobuf,
   CheckOutput as CheckOutputProtobuf,
   CheckOutput_ActionEffect,
+  EvaluationError as EvaluationErrorProtobuf,
   OutputEntry as OutputEntry,
   PlanResourcesFilter_Expression_Operand,
   PlanResourcesInput as PlanResourcesInputProtobuf,
@@ -129,6 +130,7 @@ import type {
   DisablePoliciesResponse,
   EmbeddedBundle,
   EnablePoliciesResponse,
+  EvaluationError,
   ExportConstants,
   ExportVariables,
   GetPoliciesResponse,
@@ -608,6 +610,7 @@ export function checkOutputFromProtobuf({
   effectiveDerivedRoles,
   validationErrors,
   outputs,
+  evaluationErrors,
 }: CheckOutputProtobuf): CheckOutput {
   return {
     requestId,
@@ -621,6 +624,7 @@ export function checkOutputFromProtobuf({
     effectiveDerivedRoles,
     validationErrors: validationErrors.map(validationErrorFromProtobuf),
     outputs: outputs.map(outputResultFromProtobuf),
+    evaluationErrors: evaluationErrors.map(evaluationErrorFromProtobuf),
   };
 }
 
@@ -633,6 +637,20 @@ function checkOutputActionEffectFromProtobuf({
     effect: effectFromProtobuf(effect),
     policy,
     scope,
+  };
+}
+
+function evaluationErrorFromProtobuf(
+  evaluationError: EvaluationErrorProtobuf,
+): EvaluationError {
+  requireOneOf("EvaluationError.error", evaluationError.error, "celError");
+
+  const { expression, message } = evaluationError.error.value;
+
+  return {
+    kind: "cel",
+    expression,
+    message,
   };
 }
 
@@ -696,6 +714,7 @@ export function planResourcesOutputFromProtobuf({
   policyVersion,
   scope,
   validationErrors,
+  evaluationErrors,
 }: PlanResourcesOutputProtobuf): PlanResourcesOutput {
   const base: PlanResourcesOutputBase = {
     requestId,
@@ -703,6 +722,7 @@ export function planResourcesOutputFromProtobuf({
     policyVersion,
     scope,
     validationErrors: validationErrors.map(validationErrorFromProtobuf),
+    evaluationErrors: evaluationErrors.map(evaluationErrorFromProtobuf),
   };
 
   requireField("PlanResourcesOutput.filter", filter);

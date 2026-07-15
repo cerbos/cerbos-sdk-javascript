@@ -2,7 +2,25 @@
 
 ## [Unreleased]
 
+### Added
+
+- Cerbos v0.54 updates ([#1492](https://github.com/cerbos/cerbos-sdk-javascript/pull/1492))
+
+  - `cerbos.engine.v1.CheckOutput.evaluationErrors`
+  - `cerbos.engine.v1.EvaluationError`
+  - `cerbos.engine.v1.PlanResourcesOutput.evaluationErrors`
+
 ### Changed
+
+- Host ↔ WASM contract for embedded policy decision points ([#1492](https://github.com/cerbos/cerbos-sdk-javascript/pull/1492))
+
+  - Added
+    - `cerbos.cloud.epdp.v2.CheckResourcesRequest`
+    - `cerbos.cloud.epdp.v2.PlanResourcesRequest`
+
+  - Replaced
+    - `cerbos.cloud.epdp.v2.CheckResourcesResponse.response` → `outputs`
+    - `cerbos.cloud.epdp.v2.PlanResourcesResponse.response` → `output`
 
 - Bump dependency on [@bufbuild/protobuf] to 2.12.1 ([#1478](https://github.com/cerbos/cerbos-sdk-javascript/pull/1478))
 

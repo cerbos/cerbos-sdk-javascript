@@ -2,6 +2,9 @@ unreleased:
   type: minor
 
   added:
+    - summary: "[`CheckOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckOutput.html#evaluationerrors) and [`PlanResourcesOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesOutputBase.html#evaluationerrors) properties"
+      pull: 1492
+
     - summary: "[`OutputResult.error`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#error) property"
       pull: 1452
 

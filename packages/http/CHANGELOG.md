@@ -4,6 +4,10 @@
 
 ### Added
 
+- [`CheckOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckOutput.html#evaluationerrors) and [`PlanResourcesOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesOutputBase.html#evaluationerrors) properties ([#1492](https://github.com/cerbos/cerbos-sdk-javascript/pull/1492))
+
+  Requires a policy decision point server running Cerbos 0.54+.
+
 - [`OutputResult.error`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#error) property ([#1452](https://github.com/cerbos/cerbos-sdk-javascript/pull/1452))
 
   Requires a policy decision point server running Cerbos 0.54+.

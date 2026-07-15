@@ -88,6 +88,7 @@ export interface PlanResourcesOutput {
   validationErrors: ValidationError[];
   actions: string[];
   matchedScopes: { [key: string]: string };
+  evaluationErrors: EvaluationError[];
 }
 
 export interface PlanResourcesOutput_MatchedScopesEntry {
@@ -110,6 +111,7 @@ export interface CheckOutput {
   effectiveDerivedRoles: string[];
   validationErrors: ValidationError[];
   outputs: OutputEntry[];
+  evaluationErrors: EvaluationError[];
 }
 
 export interface CheckOutput_ActionEffect {
@@ -121,6 +123,15 @@ export interface CheckOutput_ActionEffect {
 export interface CheckOutput_ActionsEntry {
   key: string;
   value: CheckOutput_ActionEffect | undefined;
+}
+
+export interface EvaluationError {
+  error: { $case: "celError"; celError: EvaluationError_CELError } | undefined;
+}
+
+export interface EvaluationError_CELError {
+  expression: string;
+  message: string;
 }
 
 export interface OutputEntry {
@@ -763,6 +774,7 @@ function createBasePlanResourcesOutput(): PlanResourcesOutput {
     validationErrors: [],
     actions: [],
     matchedScopes: {},
+    evaluationErrors: [],
   };
 }
 
@@ -809,6 +821,9 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
         ).join();
       },
     );
+    for (const v of message.evaluationErrors) {
+      EvaluationError.encode(v!, writer.uint32(90).fork()).join();
+    }
     return writer;
   },
 
@@ -911,6 +926,16 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
           }
           continue;
         }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.evaluationErrors.push(
+            EvaluationError.decode(reader, reader.uint32()),
+          );
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -962,6 +987,11 @@ export const PlanResourcesOutput: MessageFns<PlanResourcesOutput> = {
           obj.matchedScopes[k] = v;
         });
       }
+    }
+    if (message.evaluationErrors?.length) {
+      obj.evaluationErrors = message.evaluationErrors.map((e) =>
+        EvaluationError.toJSON(e),
+      );
     }
     return obj;
   },
@@ -1153,6 +1183,7 @@ function createBaseCheckOutput(): CheckOutput {
     effectiveDerivedRoles: [],
     validationErrors: [],
     outputs: [],
+    evaluationErrors: [],
   };
 }
 
@@ -1183,6 +1214,9 @@ export const CheckOutput: MessageFns<CheckOutput> = {
     }
     for (const v of message.outputs) {
       OutputEntry.encode(v!, writer.uint32(50).fork()).join();
+    }
+    for (const v of message.evaluationErrors) {
+      EvaluationError.encode(v!, writer.uint32(58).fork()).join();
     }
     return writer;
   },
@@ -1251,6 +1285,16 @@ export const CheckOutput: MessageFns<CheckOutput> = {
           message.outputs.push(OutputEntry.decode(reader, reader.uint32()));
           continue;
         }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.evaluationErrors.push(
+            EvaluationError.decode(reader, reader.uint32()),
+          );
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1290,6 +1334,11 @@ export const CheckOutput: MessageFns<CheckOutput> = {
     }
     if (message.outputs?.length) {
       obj.outputs = message.outputs.map((e) => OutputEntry.toJSON(e));
+    }
+    if (message.evaluationErrors?.length) {
+      obj.evaluationErrors = message.evaluationErrors.map((e) =>
+        EvaluationError.toJSON(e),
+      );
     }
     return obj;
   },
@@ -1442,6 +1491,129 @@ export const CheckOutput_ActionsEntry: MessageFns<CheckOutput_ActionsEntry> = {
     }
     if (message.value !== undefined) {
       obj.value = CheckOutput_ActionEffect.toJSON(message.value);
+    }
+    return obj;
+  },
+};
+
+function createBaseEvaluationError(): EvaluationError {
+  return { error: undefined };
+}
+
+export const EvaluationError: MessageFns<EvaluationError> = {
+  encode(
+    message: EvaluationError,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    switch (message.error?.$case) {
+      case "celError":
+        EvaluationError_CELError.encode(
+          message.error.celError,
+          writer.uint32(10).fork(),
+        ).join();
+        break;
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EvaluationError {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEvaluationError();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.error = {
+            $case: "celError",
+            celError: EvaluationError_CELError.decode(reader, reader.uint32()),
+          };
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  toJSON(message: EvaluationError): unknown {
+    const obj: any = {};
+    if (message.error?.$case === "celError") {
+      obj.celError = EvaluationError_CELError.toJSON(message.error.celError);
+    }
+    return obj;
+  },
+};
+
+function createBaseEvaluationError_CELError(): EvaluationError_CELError {
+  return { expression: "", message: "" };
+}
+
+export const EvaluationError_CELError: MessageFns<EvaluationError_CELError> = {
+  encode(
+    message: EvaluationError_CELError,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.expression !== "") {
+      writer.uint32(10).string(message.expression);
+    }
+    if (message.message !== "") {
+      writer.uint32(18).string(message.message);
+    }
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): EvaluationError_CELError {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEvaluationError_CELError();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.expression = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.message = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  toJSON(message: EvaluationError_CELError): unknown {
+    const obj: any = {};
+    if (message.expression !== "") {
+      obj.expression = message.expression;
+    }
+    if (message.message !== "") {
+      obj.message = message.message;
     }
     return obj;
   },

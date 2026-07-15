@@ -1,4 +1,5 @@
 import type { CheckOutputActionEffect } from "./CheckOutputActionEffect.js";
+import type { EvaluationError } from "./EvaluationError.js";
 import type { OutputResult } from "./OutputResult.js";
 import type { ValidationError } from "./ValidationError.js";
 
@@ -38,4 +39,12 @@ export interface CheckOutput {
    * Requires the Cerbos policy decision point server to be at least v0.27.
    */
   outputs: OutputResult[];
+
+  /**
+   * Any errors encountered when evaluating the policy decisions.
+   *
+   * @remarks
+   * Requires the Cerbos policy decision point server to be at least v0.54.
+   */
+  evaluationErrors: EvaluationError[];
 }

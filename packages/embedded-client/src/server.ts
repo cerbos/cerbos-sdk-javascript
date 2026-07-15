@@ -1,21 +1,27 @@
-/* eslint-disable @typescript-eslint/no-deprecated */
-
 import { timestampDate } from "@bufbuild/protobuf/wkt";
 
 import type {
-  CheckResourcesResponse as CheckResourcesResponseWithAuditTrail,
   ConfigValid,
-  PlanResourcesResponse as PlanResourcesResponseWithAuditTrail,
+  CheckResourcesRequestValid as ServerCheckResourcesRequest,
+  CheckResourcesResponse as ServerCheckResourcesResponse,
+  PlanResourcesRequestValid as ServerPlanResourcesRequest,
+  PlanResourcesResponse as ServerPlanResourcesResponse,
 } from "@cerbos/api/cerbos/cloud/epdp/v2/epdp_pb";
 import type {
-  CheckResourcesRequestValid,
-  PlanResourcesRequestValid,
-  AuxDataValid as RequestAuxData,
+  CheckInputValid as CheckInput,
+  AuxDataValid as ServerAuxData,
+} from "@cerbos/api/cerbos/engine/v1/engine_pb";
+import type {
+  AuxDataValid as ClientAuxData,
+  CheckResourcesRequestValid as ClientCheckResourcesRequest,
+  PlanResourcesRequestValid as ClientPlanResourcesRequest,
 } from "@cerbos/api/cerbos/request/v1/request_pb";
 import type {
-  CheckResourcesResponse,
-  PlanResourcesResponse,
-  ServerInfoResponse,
+  CheckResourcesResponse_ResultEntryValid as CheckResourcesResult,
+  CheckResourcesResponseValid as ClientCheckResourcesResponse,
+  PlanResourcesResponseValid as ClientPlanResourcesResponse,
+  CheckResourcesResponse_ResultEntry_Meta_EffectMetaValid as EffectMeta,
+  ServerInfoResponseValid as ServerInfoResponse,
 } from "@cerbos/api/cerbos/response/v1/response_pb";
 import { CerbosService as cerbos } from "@cerbos/api/cerbos/svc/v1/svc_pb";
 import type {
@@ -26,10 +32,7 @@ import {
   HealthCheckResponse_ServingStatus,
   Health as health,
 } from "@cerbos/api/grpc/health/v1/health_pb";
-import type {
-  PolicySource as AuditPolicySource,
-  DecodedAuxData,
-} from "@cerbos/core";
+import type { PolicySource as AuditPolicySource } from "@cerbos/core";
 import { NotOK, Status } from "@cerbos/core";
 import { requireField } from "@cerbos/core/~internal";
 import { Server as EmbeddedServer, metadata } from "@cerbos/embedded-server";
@@ -97,52 +100,43 @@ export class Server {
   }
 
   public async checkResources(
-    request: CheckResourcesRequestValid,
+    clientRequest: ClientCheckResourcesRequest,
     headers: Headers,
-  ): Promise<CheckResourcesResponse> {
-    let auxData: DecodedAuxData | undefined = undefined;
+  ): Promise<ClientCheckResourcesResponse> {
+    const serverRequest = await this.serverCheckResourcesRequest(clientRequest);
+
     let bundleId = "";
+    let serverResponse: ServerCheckResourcesResponse | undefined = undefined;
+    let clientResponse: ClientCheckResourcesResponse | undefined = undefined;
     let error: unknown = undefined;
-    let responseWithAuditTrail:
-      CheckResourcesResponseWithAuditTrail | undefined = undefined;
 
     try {
-      auxData = await this.decodeAuxData(request.auxData);
-
       const server = await this.server();
       ({ bundleId } = server);
 
-      responseWithAuditTrail = server.checkResources(
-        {
-          ...request,
-          auxData: undefined,
-          includeMeta: true,
-        },
-        decodedAuxDataToProtobuf(auxData),
+      // @ts-expect-error -- requires @cerbos/embedded-server v0.6.0
+      serverResponse = server.checkResources(serverRequest);
+
+      clientResponse = clientCheckResourcesResponse(
+        clientRequest,
+        serverResponse,
       );
 
-      const { response } = responseWithAuditTrail;
-      requireField("CheckResourcesResponse.response", response);
-      return response;
+      return clientResponse;
     } catch (caught) {
       error = caught;
       throw caught;
     } finally {
       if (this.logger) {
         await this.logger.logCheckResources(
-          request,
-          auxData,
           headers,
           bundleId,
-          responseWithAuditTrail,
+          clientRequest,
+          serverRequest,
+          serverResponse,
+          clientResponse,
           error,
         );
-      }
-
-      if (responseWithAuditTrail?.response && !request.includeMeta) {
-        for (const result of responseWithAuditTrail.response.results) {
-          result.meta = undefined;
-        }
       }
     }
   }
@@ -163,59 +157,43 @@ export class Server {
   }
 
   public async planResources(
-    request: PlanResourcesRequestValid,
+    clientRequest: ClientPlanResourcesRequest,
     headers: Headers,
-  ): Promise<PlanResourcesResponse> {
-    let auxData: DecodedAuxData | undefined = undefined;
+  ): Promise<ClientPlanResourcesResponse> {
+    const serverRequest = await this.serverPlanResourcesRequest(clientRequest);
+
     let bundleId = "";
+    let serverResponse: ServerPlanResourcesResponse | undefined = undefined;
+    let clientResponse: ClientPlanResourcesResponse | undefined = undefined;
     let error: unknown = undefined;
-    let responseWithAuditTrail:
-      PlanResourcesResponseWithAuditTrail | undefined = undefined;
 
     try {
-      auxData = await this.decodeAuxData(request.auxData);
-
       const server = await this.server();
       ({ bundleId } = server);
 
-      responseWithAuditTrail = server.planResources(
-        {
-          ...request,
-          actions: request.action ? [request.action] : request.actions,
-          auxData: undefined,
-          includeMeta: true,
-        },
-        decodedAuxDataToProtobuf(auxData),
+      // @ts-expect-error -- requires @cerbos/embedded-server v0.6.0
+      serverResponse = server.planResources(serverRequest);
+
+      clientResponse = clientPlanResourcesResponse(
+        clientRequest,
+        serverResponse,
       );
 
-      const { response } = responseWithAuditTrail;
-      requireField("PlanResourcesResponse.response", response);
-
-      if (request.action && response.meta) {
-        response.meta.matchedScope =
-          response.meta.matchedScopes[request.action] ?? "";
-
-        response.meta.matchedScopes = {};
-      }
-
-      return response;
+      return clientResponse;
     } catch (caught) {
       error = caught;
       throw caught;
     } finally {
       if (this.logger) {
         await this.logger.logPlanResources(
-          request,
-          auxData,
           headers,
           bundleId,
-          responseWithAuditTrail,
+          clientRequest,
+          serverRequest,
+          serverResponse,
+          clientResponse,
           error,
         );
-      }
-
-      if (responseWithAuditTrail?.response && !request.includeMeta) {
-        responseWithAuditTrail.response.meta = undefined;
       }
     }
   }
@@ -231,15 +209,65 @@ export class Server {
     };
   }
 
-  private async decodeAuxData(
-    auxData: RequestAuxData | undefined,
-  ): Promise<DecodedAuxData | undefined> {
+  private async serverCheckResourcesRequest({
+    requestId,
+    principal,
+    resources,
+    auxData: clientAuxData,
+  }: ClientCheckResourcesRequest): Promise<ServerCheckResourcesRequest> {
+    const serverAuxData = await this.serverAuxData(clientAuxData);
+
+    return {
+      $typeName: "cerbos.cloud.epdp.v2.CheckResourcesRequest",
+      inputs: resources.map(({ resource, actions }): CheckInput => ({
+        $typeName: "cerbos.engine.v1.CheckInput",
+        requestId,
+        principal,
+        resource,
+        actions,
+        auxData: serverAuxData,
+      })),
+    };
+  }
+
+  private async serverPlanResourcesRequest({
+    requestId,
+    principal,
+    resource,
+    action, // eslint-disable-line @typescript-eslint/no-deprecated
+    actions,
+    auxData: clientAuxData,
+    includeMeta,
+  }: ClientPlanResourcesRequest): Promise<ServerPlanResourcesRequest> {
+    const serverAuxData = await this.serverAuxData(clientAuxData);
+
+    return {
+      $typeName: "cerbos.cloud.epdp.v2.PlanResourcesRequest",
+      input: {
+        $typeName: "cerbos.engine.v1.PlanResourcesInput",
+        requestId,
+        principal,
+        resource,
+        action: "",
+        actions: actions.length ? actions : [action],
+        auxData: serverAuxData,
+        includeMeta,
+      },
+    };
+  }
+
+  private async serverAuxData(
+    auxData: ClientAuxData | undefined,
+  ): Promise<ServerAuxData | undefined> {
     if (!auxData?.jwt) {
       return undefined;
     }
 
     const { token, keySetId } = auxData.jwt;
-    return { jwt: await this.decodeJWTPayload({ token, keySetId }) };
+
+    return decodedAuxDataToProtobuf({
+      jwt: await this.decodeJWTPayload({ token, keySetId }),
+    });
   }
 }
 
@@ -320,4 +348,93 @@ class Wrapper {
     const { bundleId } = this.server.loadRuleTable(ruleTable);
     this.bundleId = bundleId;
   }
+}
+
+function clientCheckResourcesResponse(
+  { requestId, resources, includeMeta }: ClientCheckResourcesRequest,
+  { outputs }: ServerCheckResourcesResponse,
+): ClientCheckResourcesResponse {
+  return {
+    $typeName: "cerbos.response.v1.CheckResourcesResponse",
+    cerbosCallId: "",
+    requestId: requestId,
+    results: outputs.map((output, i): CheckResourcesResult => {
+      const input = resources[i];
+
+      if (input?.resource.id !== output.resourceId) {
+        throw new NotOK(Status.INTERNAL, "invariant violated");
+      }
+
+      const { resource } = input;
+
+      return {
+        $typeName: "cerbos.response.v1.CheckResourcesResponse.ResultEntry",
+        resource: {
+          $typeName:
+            "cerbos.response.v1.CheckResourcesResponse.ResultEntry.Resource",
+          kind: resource.kind,
+          id: resource.id,
+          policyVersion: resource.policyVersion,
+          scope: resource.scope,
+        },
+        actions: Object.fromEntries(
+          Object.entries(output.actions).map(([action, { effect }]) => [
+            action,
+            effect,
+          ]),
+        ),
+        outputs: output.outputs,
+        validationErrors: output.validationErrors,
+        meta: includeMeta
+          ? {
+              $typeName:
+                "cerbos.response.v1.CheckResourcesResponse.ResultEntry.Meta",
+              actions: Object.fromEntries(
+                Object.entries(output.actions).map(
+                  ([action, { policy, scope }]) => [
+                    action,
+                    {
+                      $typeName:
+                        "cerbos.response.v1.CheckResourcesResponse.ResultEntry.Meta.EffectMeta",
+                      matchedPolicy: policy,
+                      matchedScope: scope,
+                    } satisfies EffectMeta,
+                  ],
+                ),
+              ),
+              effectiveDerivedRoles: output.effectiveDerivedRoles,
+            }
+          : undefined,
+      };
+    }),
+  };
+}
+
+function clientPlanResourcesResponse(
+  { requestId, action, actions, includeMeta }: ClientPlanResourcesRequest, // eslint-disable-line @typescript-eslint/no-deprecated
+  { output }: ServerPlanResourcesResponse,
+): ClientPlanResourcesResponse {
+  requireField("PlanResourcesResponse.output", output);
+
+  return {
+    $typeName: "cerbos.response.v1.PlanResourcesResponse",
+    cerbosCallId: "",
+    requestId: requestId,
+    resourceKind: output.kind,
+    policyVersion: output.policyVersion,
+    action: output.action, // eslint-disable-line @typescript-eslint/no-deprecated
+    actions: output.actions,
+    validationErrors: output.validationErrors,
+    filter: output.filter,
+    meta: includeMeta
+      ? {
+          $typeName: "cerbos.response.v1.PlanResourcesResponse.Meta",
+          filterDebug: output.filterDebug,
+          matchedScope: actions.length
+            ? ""
+            : (output.matchedScopes[action] ?? ""),
+          matchedScopes: actions.length ? output.matchedScopes : {},
+        }
+      : undefined,
+  };
 }

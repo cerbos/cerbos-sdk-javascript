@@ -7,7 +7,7 @@ package cerbos.cloud.epdp.v2;
 
 import "buf/validate/validate.proto";
 import "cerbos/audit/v1/audit.proto";
-import "cerbos/response/v1/response.proto";
+import "cerbos/engine/v1/engine.proto";
 import "google/api/visibility.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
@@ -60,13 +60,21 @@ message LoadRuleTableResponse {
   string bundle_id = 1;
 }
 
+message CheckResourcesRequest {
+  repeated cerbos.engine.v1.CheckInput inputs = 1;
+}
+
 message CheckResourcesResponse {
-  cerbos.response.v1.CheckResourcesResponse response = 1 [(buf.validate.field).required = true];
+  repeated cerbos.engine.v1.CheckOutput outputs = 1;
   cerbos.audit.v1.AuditTrail audit_trail = 2 [(buf.validate.field).required = true];
 }
 
+message PlanResourcesRequest {
+  cerbos.engine.v1.PlanResourcesInput input = 1 [(buf.validate.field).required = true];
+}
+
 message PlanResourcesResponse {
-  cerbos.response.v1.PlanResourcesResponse response = 1 [(buf.validate.field).required = true];
+  cerbos.engine.v1.PlanResourcesOutput output = 1 [(buf.validate.field).required = true];
   cerbos.audit.v1.AuditTrail audit_trail = 2 [(buf.validate.field).required = true];
 }
 

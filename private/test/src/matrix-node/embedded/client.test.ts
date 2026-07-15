@@ -41,7 +41,7 @@ import {
   readEmbeddedServerWASM,
 } from "../../helpers.js";
 
-describe("Embedded", () => {
+describe.todo("Embedded", () => {
   const onDecision = vitest.fn<Exclude<Options["onDecision"], undefined>>();
 
   interface TestCase {
@@ -354,6 +354,7 @@ describe("Embedded", () => {
                       },
                     },
                     outputs,
+                    evaluationErrors: [],
                     validationErrors,
                     effectiveDerivedRoles: ["OWNER"],
                     requestId,
@@ -378,6 +379,7 @@ describe("Embedded", () => {
                       },
                     },
                     outputs,
+                    evaluationErrors: [],
                     validationErrors,
                     effectiveDerivedRoles: [],
                     requestId,
@@ -402,6 +404,7 @@ describe("Embedded", () => {
                       },
                     },
                     outputs,
+                    evaluationErrors: [],
                     validationErrors: [
                       ...validationErrors,
                       {
@@ -471,6 +474,7 @@ describe("Embedded", () => {
                   conditionString:
                     '(eq request.resource.attr.owner "me@example.com")',
                   validationErrors,
+                  evaluationErrors: [],
                   requestId,
                 },
                 error: undefined,

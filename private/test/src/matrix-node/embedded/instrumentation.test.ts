@@ -11,8 +11,8 @@ import { testInstrumentation } from "../../client/instrumentation.js";
 import { readEmbeddedServerWASM } from "../../helpers.js";
 
 testInstrumentation({
-  type: "embedded | v2",
-  embedded: "v2",
+  type: "embedded",
+  embedded: true,
   cerbosVersion: metadata.cerbosVersion,
   client: () =>
     new Embedded({
