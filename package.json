@@ -4,7 +4,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.10.0",
+      "version": "11.11.0",
       "onFail": "download"
     },
     "runtime": {
@@ -53,18 +53,18 @@
     "test:servers:stop": "pnpm run --filter=./private/test test:servers:stop"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.18.4",
+    "@arethetypeswrong/cli": "0.18.5",
     "@bufbuild/buf": "1.71.0",
     "@bufbuild/protoc-gen-es": "2.12.1",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@tsconfig/node22": "22.0.5",
     "@tsconfig/strictest": "2.0.8",
-    "@types/node": "22.20.0",
+    "@types/node": "22.20.1",
     "@types/web": "0.0.352",
     "concurrently": "10.0.3",
     "depcheck": "1.4.7",
-    "eslint": "9.39.4",
-    "prettier": "3.9.4",
+    "eslint": "9.39.5",
+    "prettier": "3.9.5",
     "prettier-plugin-pkg": "0.22.1",
     "ts-proto": "2.12.0",
     "tsx": "4.23.0",
