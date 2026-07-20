@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.32.0] - 2026-07-20
+
 ### Added
 
 - [`CheckOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckOutput.html#evaluationerrors) and [`PlanResourcesOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesOutputBase.html#evaluationerrors) properties ([#1492](https://github.com/cerbos/cerbos-sdk-javascript/pull/1492))
@@ -430,7 +434,8 @@
 
 - Common types for gRPC and HTTP clients ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.31.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.32.0...HEAD
+[0.32.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.31.0...@cerbos/core@0.32.0
 [0.31.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.30.0...@cerbos/core@0.31.0
 [0.30.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.29.0...@cerbos/core@0.30.0
 [0.29.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/core@0.28.1...@cerbos/core@0.29.0

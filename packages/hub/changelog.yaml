@@ -1,28 +1,32 @@
-unreleased:
-  type: minor
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.12.1
-      pull: 1478
-
-    "@connectrpc/connect":
-      to: 2.1.2
-      pull: 1473
-
-    "@connectrpc/connect-node":
-      to: 2.1.2
-      pull: 1473
-
-    "@connectrpc/connect-web":
-      to: 2.1.2
-      pull: 1473
-
-  removed:
-    - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
-      pull: 1454
-
 releases:
+  - version: 0.6.0
+    date: 2026-07-20
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.12.1
+        pull: 1478
+
+      "@cerbos/core":
+        to: 0.32.0
+        pull: 1501
+
+      "@connectrpc/connect":
+        to: 2.1.2
+        pull: 1473
+
+      "@connectrpc/connect-node":
+        to: 2.1.2
+        pull: 1473
+
+      "@connectrpc/connect-web":
+        to: 2.1.2
+        pull: 1473
+
+    removed:
+      - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
+        pull: 1454
+
   - version: 0.5.6
     date: 2026-05-06
 

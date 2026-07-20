@@ -1,28 +1,32 @@
-unreleased:
-  type: minor
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.12.1
-      pull: 1478
-
-    "@cerbos/api":
-      to: 0.10.0
-      pull: 1494
-
-    "@opentelemetry/instrumentation":
-      to: 0.220.0
-      pulls: [1453, 1473, 1489]
-
-    "@opentelemetry/semantic-conventions":
-      to: 1.43.0
-      pulls: [1453, 1489, 1496]
-
-  removed:
-    - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
-      pull: 1454
-
 releases:
+  - version: 0.11.0
+    date: 2026-07-20
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.12.1
+        pull: 1478
+
+      "@cerbos/api":
+        to: 0.10.0
+        pull: 1494
+
+      "@cerbos/core":
+        to: 0.32.0
+        pull: 1501
+
+      "@opentelemetry/instrumentation":
+        to: 0.220.0
+        pulls: [1453, 1473, 1489]
+
+      "@opentelemetry/semantic-conventions":
+        to: 1.43.0
+        pulls: [1453, 1489, 1496]
+
+    removed:
+      - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
+        pull: 1454
+
   - version: 0.10.4
     date: 2026-05-06
 

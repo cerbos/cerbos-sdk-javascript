@@ -1,31 +1,39 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[`CheckOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckOutput.html#evaluationerrors) and [`PlanResourcesOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesOutputBase.html#evaluationerrors) properties"
-      pull: 1492
-
-    - summary: "[`OutputResult.error`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#error) property"
-      pull: 1452
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.12.1
-      pull: 1478
-
-    "@cerbos/api":
-      to: 0.10.0
-      pull: 1494
-
-    "@cerbos/embedded-server":
-      to: 0.6.1
-      pulls: [1497, 1498]
-
-  removed:
-    - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
-      pull: 1454
-
 releases:
+  - version: 0.7.0
+    date: 2026-07-20
+
+    added:
+      - summary: "[`CheckOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckOutput.html#evaluationerrors) and [`PlanResourcesOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesOutputBase.html#evaluationerrors) properties"
+        pull: 1492
+
+      - summary: "[`OutputResult.error`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#error) property"
+        pull: 1452
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.12.1
+        pull: 1478
+
+      "@cerbos/api":
+        to: 0.10.0
+        pull: 1494
+
+      "@cerbos/core":
+        to: 0.32.0
+        pull: 1501
+
+      "@cerbos/embedded-server":
+        to: 0.6.1
+        pulls: [1497, 1498]
+
+      "@cerbos/hub":
+        to: 0.6.0
+        pull: 1501
+
+    removed:
+      - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
+        pull: 1454
+
   - version: 0.6.0
     date: 2026-05-06
 
