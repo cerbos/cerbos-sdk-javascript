@@ -295,7 +295,7 @@ importers:
         specifier: ^0.31.0
         version: link:../core
       '@cerbos/embedded-server':
-        specifier: ^0.6.0
+        specifier: ^0.6.1
         version: 0.6.1(@bufbuild/protobuf@2.12.1)(@cerbos/api@packages+api)
       '@cerbos/hub':
         specifier: ^0.5.6

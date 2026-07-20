@@ -18,8 +18,8 @@ unreleased:
       pull: 1494
 
     "@cerbos/embedded-server":
-      to: 0.6.0
-      pull: 1497
+      to: 0.6.1
+      pulls: [1497, 1498]
 
   removed:
     - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
