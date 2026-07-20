@@ -1,46 +1,50 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: "[`CheckOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckOutput.html#evaluationerrors) and [`PlanResourcesOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesOutputBase.html#evaluationerrors) properties"
-      details: Requires a policy decision point server running Cerbos 0.54+.
-      pull: 1492
-
-    - summary: "[`OutputResult.error`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#error) property"
-      details: Requires a policy decision point server running Cerbos 0.54+.
-      pull: 1452
-
-    - summary: "[`RolePolicyBody.constants`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#constants) and [`variables`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#variables) properties"
-      details: Requires a policy decision point server running Cerbos 0.54+.
-      pulls: [1452, 1456]
-
-    - summary: "[`RoleRule.name`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#name) and [`output`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#output) properties"
-      details: Requires a policy decision point server running Cerbos 0.54+.
-      pulls: [1452, 1456]
-
-  changed:
-    - summary: Deserialize [`RolePolicyBody.version`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#version) and [`RoleRule.condition`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#condition)
-      details: Previously, these fields could be set in an [`AddOrUpdatePoliciesRequest`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AddOrUpdatePoliciesRequest.html), but were omitted from [`GetPoliciesResponse`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.GetPoliciesResponse.html), so round-tripping role policies to and from the policy decision point server was lossy.
-      pull: 1456
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.12.1
-      pull: 1478
-
-    "@cerbos/api":
-      to: 0.10.0
-      pull: 1494
-
-    "@grpc/grpc-js":
-      to: 1.14.4
-      pull: 1457
-
-  removed:
-    - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
-      pull: 1454
-
 releases:
+  - version: 0.28.0
+    date: 2026-07-20
+
+    added:
+      - summary: "[`CheckOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckOutput.html#evaluationerrors) and [`PlanResourcesOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesOutputBase.html#evaluationerrors) properties"
+        details: Requires a policy decision point server running Cerbos 0.54+.
+        pull: 1492
+
+      - summary: "[`OutputResult.error`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#error) property"
+        details: Requires a policy decision point server running Cerbos 0.54+.
+        pull: 1452
+
+      - summary: "[`RolePolicyBody.constants`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#constants) and [`variables`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#variables) properties"
+        details: Requires a policy decision point server running Cerbos 0.54+.
+        pulls: [1452, 1456]
+
+      - summary: "[`RoleRule.name`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#name) and [`output`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#output) properties"
+        details: Requires a policy decision point server running Cerbos 0.54+.
+        pulls: [1452, 1456]
+
+    changed:
+      - summary: Deserialize [`RolePolicyBody.version`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#version) and [`RoleRule.condition`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#condition)
+        details: Previously, these fields could be set in an [`AddOrUpdatePoliciesRequest`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AddOrUpdatePoliciesRequest.html), but were omitted from [`GetPoliciesResponse`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.GetPoliciesResponse.html), so round-tripping role policies to and from the policy decision point server was lossy.
+        pull: 1456
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.12.1
+        pull: 1478
+
+      "@cerbos/api":
+        to: 0.10.0
+        pull: 1494
+
+      "@cerbos/core":
+        to: 0.32.0
+        pull: 1501
+
+      "@grpc/grpc-js":
+        to: 1.14.4
+        pull: 1457
+
+    removed:
+      - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
+        pull: 1454
+
   - version: 0.27.1
     date: 2026-05-06
 

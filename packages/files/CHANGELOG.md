@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.7.0] - 2026-07-20
+
 ### Added
 
 - [`RolePolicyBody.constants`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#constants) and [`variables`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#variables) properties ([#1452](https://github.com/cerbos/cerbos-sdk-javascript/pull/1452), [#1456](https://github.com/cerbos/cerbos-sdk-javascript/pull/1456))
@@ -15,6 +19,8 @@
 - Bump dependency on [@bufbuild/protobuf] to 2.12.1 ([#1478](https://github.com/cerbos/cerbos-sdk-javascript/pull/1478))
 
 - Bump dependency on [@cerbos/api] to 0.10.0 ([#1494](https://github.com/cerbos/cerbos-sdk-javascript/pull/1494))
+
+- Bump dependency on [@cerbos/core] to 0.32.0 ([#1501](https://github.com/cerbos/cerbos-sdk-javascript/pull/1501))
 
 - Bump dependency on [yaml] to 2.9.0 ([#1450](https://github.com/cerbos/cerbos-sdk-javascript/pull/1450), [#1453](https://github.com/cerbos/cerbos-sdk-javascript/pull/1453))
 
@@ -294,7 +300,8 @@
 
 - A package to load Cerbos policies from YAML or JSON files ([#611](https://github.com/cerbos/cerbos-sdk-javascript/pull/611))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.6.5...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.7.0...HEAD
+[0.7.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.6.5...@cerbos/files@0.7.0
 [0.6.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.6.4...@cerbos/files@0.6.5
 [0.6.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.6.3...@cerbos/files@0.6.4
 [0.6.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.6.2...@cerbos/files@0.6.3

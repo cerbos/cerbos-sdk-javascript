@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.7.0] - 2026-07-20
+
 ### Added
 
 - [`CheckOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckOutput.html#evaluationerrors) and [`PlanResourcesOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesOutputBase.html#evaluationerrors) properties ([#1492](https://github.com/cerbos/cerbos-sdk-javascript/pull/1492))
@@ -14,7 +18,11 @@
 
 - Bump dependency on [@cerbos/api] to 0.10.0 ([#1494](https://github.com/cerbos/cerbos-sdk-javascript/pull/1494))
 
+- Bump dependency on [@cerbos/core] to 0.32.0 ([#1501](https://github.com/cerbos/cerbos-sdk-javascript/pull/1501))
+
 - Bump dependency on [@cerbos/embedded-server] to 0.6.1 ([#1497](https://github.com/cerbos/cerbos-sdk-javascript/pull/1497), [#1498](https://github.com/cerbos/cerbos-sdk-javascript/pull/1498))
+
+- Bump dependency on [@cerbos/hub] to 0.6.0 ([#1501](https://github.com/cerbos/cerbos-sdk-javascript/pull/1501))
 
 ### Removed
 
@@ -149,7 +157,8 @@
 
 - Client library for new embedded policy decision point servers ([#1312](https://github.com/cerbos/cerbos-sdk-javascript/pull/1312))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.6.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.7.0...HEAD
+[0.7.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.6.0...@cerbos/embedded-client@0.7.0
 [0.6.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.5.3...@cerbos/embedded-client@0.6.0
 [0.5.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.5.2...@cerbos/embedded-client@0.5.3
 [0.5.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.5.1...@cerbos/embedded-client@0.5.2

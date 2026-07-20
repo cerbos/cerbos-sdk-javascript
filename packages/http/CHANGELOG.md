@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.29.0] - 2026-07-20
+
 ### Added
 
 - [`CheckOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckOutput.html#evaluationerrors) and [`PlanResourcesOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesOutputBase.html#evaluationerrors) properties ([#1492](https://github.com/cerbos/cerbos-sdk-javascript/pull/1492))
@@ -29,6 +33,8 @@
 - Bump dependency on [@bufbuild/protobuf] to 2.12.1 ([#1478](https://github.com/cerbos/cerbos-sdk-javascript/pull/1478))
 
 - Bump dependency on [@cerbos/api] to 0.10.0 ([#1494](https://github.com/cerbos/cerbos-sdk-javascript/pull/1494))
+
+- Bump dependency on [@cerbos/core] to 0.32.0 ([#1501](https://github.com/cerbos/cerbos-sdk-javascript/pull/1501))
 
 ### Removed
 
@@ -552,7 +558,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.28.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.29.0...HEAD
+[0.29.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.28.1...@cerbos/http@0.29.0
 [0.28.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.28.0...@cerbos/http@0.28.1
 [0.28.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.27.0...@cerbos/http@0.28.0
 [0.27.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.26.2...@cerbos/http@0.27.0
