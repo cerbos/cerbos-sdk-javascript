@@ -12,7 +12,7 @@
     "@cerbos/api": "workspace:*",
     "@cerbos/core": "workspace:*",
     "@cerbos/embedded-client": "workspace:*",
-    "@cerbos/embedded-server": "0.6.0",
+    "@cerbos/embedded-server": "0.6.1",
     "@cerbos/files": "workspace:*",
     "@cerbos/grpc": "workspace:*",
     "@cerbos/http": "workspace:*",
