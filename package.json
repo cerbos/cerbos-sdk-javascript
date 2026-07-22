@@ -64,7 +64,7 @@
     "@typescript/native": "npm:typescript@7.0.2",
     "concurrently": "10.0.3",
     "depcheck": "1.4.7",
-    "eslint": "9.39.5",
+    "eslint": "10.7.0",
     "prettier": "3.9.5",
     "prettier-plugin-pkg": "0.22.1",
     "ts-proto": "2.12.0",
