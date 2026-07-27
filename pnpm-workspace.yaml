@@ -6,6 +6,7 @@ allowBuilds:
   "@bufbuild/buf": false
   esbuild: false
   protobufjs: false
+  unrs-resolver: false
 
 linkWorkspacePackages: true
 
