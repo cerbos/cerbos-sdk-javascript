@@ -1,9 +1,9 @@
 import { defineConfig } from "eslint/config";
-import typescriptPlugin from "typescript-eslint";
+import { configs as typescriptPresets } from "typescript-eslint";
 
 export const typescriptConfig = defineConfig(
-  ...typescriptPlugin.configs.strictTypeChecked,
-  ...typescriptPlugin.configs.stylisticTypeChecked,
+  ...typescriptPresets.strictTypeChecked,
+  ...typescriptPresets.stylisticTypeChecked,
   {
     languageOptions: {
       parserOptions: {

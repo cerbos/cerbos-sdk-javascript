@@ -1,7 +1,7 @@
 import { fileURLToPath } from "url";
 
 import { defineConfig } from "eslint/config";
-import importPlugin from "eslint-plugin-import";
+import { flatConfigs as importPresets } from "eslint-plugin-import-x";
 
 const noExtraneousDependencies = {
   devDependencies: false,
@@ -11,25 +11,26 @@ const noExtraneousDependencies = {
 };
 
 export const importConfig = defineConfig(
-  importPlugin.flatConfigs.typescript,
+  importPresets.recommended,
+  importPresets.typescript,
   {
     settings: {
-      "import/internal-regex": "^@cerbos/",
+      "import-x/internal-regex": "^@cerbos/",
     },
     rules: {
-      "import/consistent-type-specifier-style": ["warn", "prefer-top-level"],
-      "import/export": "warn",
-      "import/newline-after-import": "warn",
-      "import/no-duplicates": "warn",
-      "import/no-extraneous-dependencies": [
+      "import-x/consistent-type-specifier-style": ["warn", "prefer-top-level"],
+      "import-x/export": "warn",
+      "import-x/newline-after-import": "warn",
+      "import-x/no-duplicates": "warn",
+      "import-x/no-extraneous-dependencies": [
         "warn",
         {
           ...noExtraneousDependencies,
           devDependencies: ["private/**", "eslint.config.mjs"],
         },
       ],
-      "import/no-named-as-default": "warn",
-      "import/order": [
+      "import-x/no-named-as-default": "warn",
+      "import-x/order": [
         "warn",
         {
           alphabetize: {
@@ -53,13 +54,13 @@ export const importConfig = defineConfig(
   {
     ignores: ["**/*.config.*"],
     rules: {
-      "import/no-default-export": "warn",
+      "import-x/no-default-export": "warn",
     },
   },
   {
     files: ["packages/hub/**"],
     rules: {
-      "import/no-extraneous-dependencies": [
+      "import-x/no-extraneous-dependencies": [
         "warn",
         {
           ...noExtraneousDependencies,
