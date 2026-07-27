@@ -2,7 +2,7 @@ name: cerbos-sdk-javascript-test
 
 services:
   certificates:
-    image: ruby:4.0.5-alpine@sha256:f48938e9ae72a4d32e728b03c306e7a7ff21f0cb6c2ed33f44a078c700b2aea6
+    image: ruby:4.0.6-alpine@sha256:6ec7aeb4f3f0b67a21fb73a83fc20a4055696e64b933229f68ec805a3de38fcc
     entrypoint: /generate-certificates
     volumes:
       - type: bind
@@ -66,7 +66,7 @@ services:
         condition: service_completed_successfully
 
   mtls:
-    image: traefik:v3.7.7@sha256:1cb3845d7a05e1473c9086351426597e911db49db382b6e4769f9b0744962ac8
+    image: traefik:v3.7.8@sha256:4299bbed850421258fc5448c2e0e6ad350981d4d335a68de11b92448aedbefe5
     command:
       - --entrypoints.grpc.address=:3593
       - --ping
@@ -117,7 +117,7 @@ services:
       - CERBOS_CONFIG=/config/tracing.yaml
 
   jaeger:
-    image: jaegertracing/jaeger:2.19.0@sha256:ede4864215be4cd85bd8c3129a2fea6c5713c5653c7282c429dba123014bc68b
+    image: jaegertracing/jaeger:2.20.0@sha256:46a886260e04002d8f45e213fc39063fa11a50446048fdaa64786fc0840cb9f8
     healthcheck:
       test:
         - CMD
