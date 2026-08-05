@@ -4,8 +4,9 @@
 
 ### Added
 
-- Cerbos v0.55 updates ([#1509](https://github.com/cerbos/cerbos-sdk-javascript/pull/1509))
+- Cerbos v0.55 updates ([#1509](https://github.com/cerbos/cerbos-sdk-javascript/pull/1509), [#1511](https://github.com/cerbos/cerbos-sdk-javascript/pull/1511))
 
+  - `cerbos.cloud.epdp.v2.Config.Evaluator.strictEvaluation`
   - `cerbos.engine.v1.AuxData.jwts`
   - `cerbos.request.v1.AuxData.jwts`
 

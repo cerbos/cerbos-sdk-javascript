@@ -81,6 +81,19 @@ export interface Options extends Pick<
    * @defaultValue `SchemaEnforcement.NONE`
    */
   schemaEnforcement?: SchemaEnforcement | undefined;
+
+  /**
+   * Enable {@link https://docs.cerbos.dev/cerbos/latest/configuration/engine#strict_evaluation | strict evaluation}?
+   *
+   * By default, when an error is raised during the evaluation of a policy condition (for example, comparing incompatible types or referencing a missing attribute), the affected expression is treated as not satisfied and the evaluation carries on.
+   * The error is included in the audit log entry for the request.
+   * Because a rule whose condition raises an error never matches, an `EFFECT_DENY` rule could be silently skipped.
+   *
+   * Setting `strictEvaluation` to `true` makes such errors deny the affected action.
+   *
+   * @defaultValue `false`
+   */
+  strictEvaluation?: boolean | undefined;
 }
 
 /**
