@@ -7,11 +7,9 @@ import { beforeAll, describe, expect, it } from "vitest";
 
 import type {
   AccessLogEntry,
-  AuxData,
   CheckResourcesRequest,
   Client,
   DecisionLogEntry,
-  DecodedAuxData,
   DerivedRoles,
   InspectPoliciesResponse,
   ListAccessLogEntriesRequest,
@@ -134,15 +132,8 @@ describe("Client", () => {
           source: ValidationErrorSource.PRINCIPAL,
         } satisfies ValidationError;
 
-        const decodedAuxData = {
-          jwt: { delete: true },
-        } satisfies DecodedAuxData;
-
-        const auxData = {
-          jwt: {
-            token: new UnsecuredJWT(decodedAuxData.jwt).encode(),
-          },
-        } satisfies AuxData;
+        const claims = { delete: true };
+        const token = new UnsecuredJWT(claims).encode();
 
         const requestContext: RequestContext | undefined = versionIsAtLeast(
           "0.51.0",
@@ -182,7 +173,7 @@ describe("Client", () => {
           expectedDecisionLogEntry: WithTimestampMatcher<DecisionLogEntry>;
         }
 
-        async function checkResources(): Promise<AuditLogTestCase> {
+        async function checkResourcesWithJWT(): Promise<AuditLogTestCase> {
           const request = {
             principal,
             resources: [
@@ -223,9 +214,9 @@ describe("Client", () => {
                 actions: ["view", "edit", "delete"],
               },
             ],
-            auxData,
+            auxData: { jwt: { token } },
             includeMetadata: true,
-            requestId: "check-resources",
+            requestId: "check-resources-jwt",
             requestContext,
           } satisfies CheckResourcesRequest;
 
@@ -281,7 +272,7 @@ describe("Client", () => {
                   principal,
                   resource,
                   actions,
-                  auxData: decodedAuxData,
+                  auxData: { jwt: claims },
                 })),
                 outputs: [
                   {
@@ -373,7 +364,198 @@ describe("Client", () => {
           };
         }
 
-        async function planResourcesUnconditional(): Promise<AuditLogTestCase> {
+        async function checkResourcesWithJWTs(): Promise<AuditLogTestCase> {
+          const request = {
+            principal,
+            resources: [
+              {
+                resource: {
+                  kind: "document",
+                  id: "mine",
+                  policyVersion: "1",
+                  scope: "test",
+                  attr: {
+                    owner: "me@example.com",
+                  },
+                },
+                actions: ["view", "edit", "delete"],
+              },
+              {
+                resource: {
+                  kind: "document",
+                  id: "theirs",
+                  policyVersion: "1",
+                  scope: "test",
+                  attr: {
+                    owner: "them@example.com",
+                  },
+                },
+                actions: ["view", "edit", "delete"],
+              },
+              {
+                resource: {
+                  kind: "document",
+                  id: "invalid",
+                  policyVersion: "1",
+                  scope: "test",
+                  attr: {
+                    owner: 123,
+                  },
+                },
+                actions: ["view", "edit", "delete"],
+              },
+            ],
+            auxData: { jwts: { app: { token } } },
+            includeMetadata: true,
+            requestId: "check-resources-jwts",
+            requestContext,
+          } satisfies CheckResourcesRequest;
+
+          const response = await reloadable.checkResources(request, {
+            headers,
+          });
+
+          const outputs: OutputResult[] = [
+            {
+              action: "delete",
+              source: "resource.document.v1#delete",
+              value: "delete_allowed:me@example.com",
+              error: undefined,
+            },
+          ];
+
+          return {
+            expectedAccessLogEntry: {
+              callId: response.cerbosCallId,
+              timestamp: expect.any(Date),
+              peer: expectedPeer,
+              metadata: expectedMetadata,
+              method: "/cerbos.svc.v1.CerbosService/CheckResources",
+              statusCode: Status.OK,
+              oversized: false,
+              policySource: expectedPolicySource,
+              requestContext,
+            },
+            expectedDecisionLogEntry: {
+              callId: response.cerbosCallId,
+              timestamp: expect.any(Date),
+              peer: expectedPeer,
+              metadata: expectedMetadata,
+              oversized: false,
+              policySource: expectedPolicySource,
+              requestContext,
+              auditTrail: {
+                effectivePolicies: {
+                  "resource.document.v1": {
+                    driver: "disk",
+                    source: "document.yaml",
+                  },
+                  "resource.document.v1/test": {
+                    driver: "disk",
+                    source: "test/document.yaml",
+                  },
+                },
+              },
+              method: {
+                name: "CheckResources",
+                inputs: request.resources.map(({ resource, actions }) => ({
+                  requestId: request.requestId,
+                  principal,
+                  resource,
+                  actions,
+                  auxData: { jwts: { app: claims } },
+                })),
+                outputs: [
+                  {
+                    requestId: request.requestId,
+                    resourceId: "mine",
+                    actions: {
+                      view: {
+                        effect: Effect.ALLOW,
+                        policy: "resource.document.v1/test",
+                        scope: "test",
+                      },
+                      edit: {
+                        effect: Effect.ALLOW,
+                        policy: "resource.document.v1/test",
+                        scope: "test",
+                      },
+                      delete: {
+                        effect: Effect.ALLOW,
+                        policy: "resource.document.v1/test",
+                        scope: "",
+                      },
+                    },
+                    effectiveDerivedRoles: ["OWNER"],
+                    validationErrors: [principalValidationError],
+                    outputs,
+                    evaluationErrors: [],
+                  },
+                  {
+                    requestId: request.requestId,
+                    resourceId: "theirs",
+                    actions: {
+                      view: {
+                        effect: Effect.ALLOW,
+                        policy: "resource.document.v1/test",
+                        scope: "test",
+                      },
+                      edit: {
+                        effect: Effect.DENY,
+                        policy: "resource.document.v1/test",
+                        scope: "",
+                      },
+                      delete: {
+                        effect: Effect.ALLOW,
+                        policy: "resource.document.v1/test",
+                        scope: "",
+                      },
+                    },
+                    effectiveDerivedRoles: [],
+                    validationErrors: [principalValidationError],
+                    outputs,
+                    evaluationErrors: [],
+                  },
+                  {
+                    requestId: request.requestId,
+                    resourceId: "invalid",
+                    actions: {
+                      view: {
+                        effect: Effect.ALLOW,
+                        policy: "resource.document.v1/test",
+                        scope: "test",
+                      },
+                      edit: {
+                        effect: Effect.DENY,
+                        policy: "resource.document.v1/test",
+                        scope: "",
+                      },
+                      delete: {
+                        effect: Effect.ALLOW,
+                        policy: "resource.document.v1/test",
+                        scope: "",
+                      },
+                    },
+                    effectiveDerivedRoles: [],
+                    validationErrors: [
+                      principalValidationError,
+                      {
+                        path: "/owner",
+                        message: "expected string, but got number",
+                        source: ValidationErrorSource.RESOURCE,
+                      },
+                    ],
+                    outputs,
+                    evaluationErrors: [],
+                  },
+                ],
+                error: undefined,
+              },
+            },
+          };
+        }
+
+        async function planResourcesWithJWTUnconditional(): Promise<AuditLogTestCase> {
           const request = {
             principal,
             resource: {
@@ -385,9 +567,9 @@ describe("Client", () => {
               },
             },
             action: "edit",
-            auxData,
+            auxData: { jwt: { token } },
             includeMetadata: true,
-            requestId: "plan-resources-unconditional",
+            requestId: "plan-resources-jwt-unconditional",
             requestContext,
           } satisfies PlanResourcesRequest;
 
@@ -435,7 +617,7 @@ describe("Client", () => {
                   resource: request.resource,
                   action: request.action,
                   actions: [request.action],
-                  auxData: decodedAuxData,
+                  auxData: { jwt: claims },
                 },
                 output: {
                   requestId: request.requestId,
@@ -453,19 +635,21 @@ describe("Client", () => {
           };
         }
 
-        async function planResourcesConditional(): Promise<AuditLogTestCase> {
+        async function planResourcesWithJWTsUnconditional(): Promise<AuditLogTestCase> {
           const request = {
             principal,
             resource: {
               kind: "document",
               policyVersion: "1",
               scope: "test",
-              attr: {},
+              attr: {
+                owner: "me@example.com",
+              },
             },
             action: "edit",
-            auxData,
+            auxData: { jwts: { app: { token } } },
             includeMetadata: true,
-            requestId: "plan-resources-unconditional",
+            requestId: "plan-resources-jwts-unconditional",
             requestContext,
           } satisfies PlanResourcesRequest;
 
@@ -513,7 +697,85 @@ describe("Client", () => {
                   resource: request.resource,
                   action: request.action,
                   actions: [request.action],
-                  auxData: decodedAuxData,
+                  auxData: { jwts: { app: claims } },
+                },
+                output: {
+                  requestId: request.requestId,
+                  action: request.action,
+                  actions: [request.action],
+                  policyVersion: "1",
+                  scope: "test",
+                  validationErrors: [principalValidationError],
+                  evaluationErrors: [],
+                  kind: PlanKind.ALWAYS_ALLOWED,
+                },
+                error: undefined,
+              },
+            },
+          };
+        }
+
+        async function planResourcesWithJWTConditional(): Promise<AuditLogTestCase> {
+          const request = {
+            principal,
+            resource: {
+              kind: "document",
+              policyVersion: "1",
+              scope: "test",
+              attr: {},
+            },
+            action: "edit",
+            auxData: { jwt: { token } },
+            includeMetadata: true,
+            requestId: "plan-resources-jwt-conditional",
+            requestContext,
+          } satisfies PlanResourcesRequest;
+
+          const response = await reloadable.planResources(request, {
+            headers,
+          });
+
+          return {
+            expectedAccessLogEntry: {
+              callId: response.cerbosCallId,
+              timestamp: expect.any(Date),
+              peer: expectedPeer,
+              metadata: expectedMetadata,
+              method: "/cerbos.svc.v1.CerbosService/PlanResources",
+              statusCode: Status.OK,
+              oversized: false,
+              policySource: expectedPolicySource,
+              requestContext,
+            },
+            expectedDecisionLogEntry: {
+              callId: response.cerbosCallId,
+              timestamp: expect.any(Date),
+              peer: expectedPeer,
+              metadata: expectedMetadata,
+              oversized: false,
+              policySource: expectedPolicySource,
+              requestContext,
+              auditTrail: {
+                effectivePolicies: {
+                  "resource.document.v1": {
+                    driver: "disk",
+                    source: "document.yaml",
+                  },
+                  "resource.document.v1/test": {
+                    driver: "disk",
+                    source: "test/document.yaml",
+                  },
+                },
+              },
+              method: {
+                name: "PlanResources",
+                input: {
+                  requestId: request.requestId,
+                  principal,
+                  resource: request.resource,
+                  action: request.action,
+                  actions: [request.action],
+                  auxData: { jwt: claims },
                 },
                 output: {
                   requestId: request.requestId,
@@ -537,11 +799,117 @@ describe("Client", () => {
           };
         }
 
-        describe.each([
-          ["checkResources", checkResources],
-          ["planResources (unconditional)", planResourcesUnconditional],
-          ["planResources (conditional)", planResourcesConditional],
-        ])("%s", (_, testCaseFactory) => {
+        async function planResourcesWithJWTsConditional(): Promise<AuditLogTestCase> {
+          const request = {
+            principal,
+            resource: {
+              kind: "document",
+              policyVersion: "1",
+              scope: "test",
+              attr: {},
+            },
+            action: "edit",
+            auxData: { jwts: { app: { token } } },
+            includeMetadata: true,
+            requestId: "plan-resources-jwts-conditional",
+            requestContext,
+          } satisfies PlanResourcesRequest;
+
+          const response = await reloadable.planResources(request, {
+            headers,
+          });
+
+          return {
+            expectedAccessLogEntry: {
+              callId: response.cerbosCallId,
+              timestamp: expect.any(Date),
+              peer: expectedPeer,
+              metadata: expectedMetadata,
+              method: "/cerbos.svc.v1.CerbosService/PlanResources",
+              statusCode: Status.OK,
+              oversized: false,
+              policySource: expectedPolicySource,
+              requestContext,
+            },
+            expectedDecisionLogEntry: {
+              callId: response.cerbosCallId,
+              timestamp: expect.any(Date),
+              peer: expectedPeer,
+              metadata: expectedMetadata,
+              oversized: false,
+              policySource: expectedPolicySource,
+              requestContext,
+              auditTrail: {
+                effectivePolicies: {
+                  "resource.document.v1": {
+                    driver: "disk",
+                    source: "document.yaml",
+                  },
+                  "resource.document.v1/test": {
+                    driver: "disk",
+                    source: "test/document.yaml",
+                  },
+                },
+              },
+              method: {
+                name: "PlanResources",
+                input: {
+                  requestId: request.requestId,
+                  principal,
+                  resource: request.resource,
+                  action: request.action,
+                  actions: [request.action],
+                  auxData: { jwts: { app: claims } },
+                },
+                output: {
+                  requestId: request.requestId,
+                  action: request.action,
+                  actions: [request.action],
+                  policyVersion: "1",
+                  scope: "test",
+                  validationErrors: [principalValidationError],
+                  evaluationErrors: [],
+                  kind: PlanKind.CONDITIONAL,
+                  condition: new PlanExpression("eq", [
+                    new PlanExpressionVariable("request.resource.attr.owner"),
+                    new PlanExpressionValue("me@example.com"),
+                  ]),
+                  conditionString:
+                    '(eq request.resource.attr.owner "me@example.com")',
+                },
+                error: undefined,
+              },
+            },
+          };
+        }
+
+        const cases: [string, () => Promise<AuditLogTestCase>][] = [
+          ["checkResources with JWT", checkResourcesWithJWT],
+          [
+            "planResources with JWT (unconditional)",
+            planResourcesWithJWTUnconditional,
+          ],
+          [
+            "planResources with JWT (conditional)",
+            planResourcesWithJWTConditional,
+          ],
+        ];
+
+        if (versionIsAtLeast("0.55.0", cerbosVersion)) {
+          cases.push(
+            ["checkResources with JWTs", checkResourcesWithJWTs],
+            [
+              "planResources with JWTs (unconditional)",
+              planResourcesWithJWTsUnconditional,
+            ],
+            [
+              "planResources with JWTs (conditional)",
+              planResourcesWithJWTsConditional,
+            ],
+          );
+        }
+
+        describe.each(cases)("%s", (_, testCaseFactory) => {
           let testCase: AuditLogTestCase;
           let sent: Date;
           let received: Date;
@@ -945,6 +1313,69 @@ describe("Client", () => {
 });
 
 function expectedInspectedPolicies(): InspectPoliciesResponse["policies"] {
+  if (versionIsAtLeast("0.55.0", cerbosVersion)) {
+    return {
+      "derived_roles.owner": {
+        id: "owner.yaml",
+        actions: [],
+        attributes: [
+          {
+            kind: InspectedAttributeKind.RESOURCE,
+            name: "owner",
+          },
+        ],
+        constants: [],
+        derivedRoles: [
+          {
+            kind: InspectedDerivedRoleKind.EXPORTED,
+            name: "OWNER",
+            source: "derived_roles.owner",
+          },
+        ],
+        variables: [],
+      },
+      "resource.document.v1": {
+        id: "document.yaml",
+        actions: ["delete"],
+        attributes: [],
+        constants: [
+          {
+            kind: InspectedConstantKind.LOCAL,
+            name: "output",
+            value: "delete_allowed:%s",
+            source: "resource.document.v1",
+            used: true,
+          },
+        ],
+        derivedRoles: [],
+        variables: [
+          {
+            kind: InspectedVariableKind.LOCAL,
+            name: "allow_deletion",
+            definition:
+              "globals.allow_deletion && (\n  (has(request.aux_data.jwt) && request.aux_data.jwt.delete) ||\n  request.aux_data.jwts.app.claims.delete\n)",
+            source: "resource.document.v1",
+            used: true,
+          },
+        ],
+      },
+      "resource.document.v1/test": {
+        id: "test/document.yaml",
+        actions: ["edit", "view"],
+        attributes: [],
+        constants: [],
+        derivedRoles: [
+          {
+            kind: InspectedDerivedRoleKind.IMPORTED,
+            name: "OWNER",
+            source: "derived_roles.owner",
+          },
+        ],
+        variables: [],
+      },
+    };
+  }
+
   if (versionIsAtLeast("0.40.0", cerbosVersion)) {
     return {
       "derived_roles.owner": {

@@ -32,9 +32,9 @@ import {
   HealthCheckResponse_ServingStatus,
   Health as health,
 } from "@cerbos/api/grpc/health/v1/health_pb";
-import type { PolicySource as AuditPolicySource } from "@cerbos/core";
+import type { PolicySource as AuditPolicySource, Value } from "@cerbos/core";
 import { NotOK, Status } from "@cerbos/core";
-import { requireField } from "@cerbos/core/~internal";
+import { isEmptyObject, requireField } from "@cerbos/core/~internal";
 import { Server as EmbeddedServer, metadata } from "@cerbos/embedded-server";
 
 import {
@@ -257,14 +257,33 @@ export class Server {
   private async serverAuxData(
     auxData: ClientAuxData | undefined,
   ): Promise<ServerAuxData | undefined> {
-    if (!auxData?.jwt) {
+    if (!auxData) {
       return undefined;
     }
 
-    const { token, keySetId } = auxData.jwt;
+    if (auxData.jwt) {
+      const { token, keySetId } = auxData.jwt;
+
+      return decodedAuxDataToProtobuf({
+        jwt: await this.decodeJWTPayload({ token, keySetId }),
+      });
+    }
+
+    if (isEmptyObject(auxData.jwts)) {
+      return undefined;
+    }
 
     return decodedAuxDataToProtobuf({
-      jwt: await this.decodeJWTPayload({ token, keySetId }),
+      jwts: Object.fromEntries(
+        await Promise.all(
+          Object.entries(auxData.jwts).map<
+            Promise<[string, Record<string, Value>]>
+          >(async ([name, { token, keySetId }]) => [
+            name,
+            await this.decodeJWTPayload({ token, keySetId }),
+          ]),
+        ),
+      ),
     });
   }
 }

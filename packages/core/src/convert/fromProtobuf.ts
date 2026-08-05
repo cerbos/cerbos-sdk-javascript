@@ -107,6 +107,7 @@ import { ValidationError_Source } from "@cerbos/api/cerbos/schema/v1/schema_pb";
 import type { HealthCheckResponse as HealthCheckResponseProtobuf } from "@cerbos/api/grpc/health/v1/health_pb";
 import { HealthCheckResponse_ServingStatus } from "@cerbos/api/grpc/health/v1/health_pb";
 
+import { isEmptyObject } from "../internal.js";
 import type {
   AccessLogEntry,
   AuditTrail,
@@ -580,9 +581,21 @@ function resourceFromProtobuf({
   };
 }
 
-function decodedAuxDataFromProtobuf({ jwt }: AuxDataProtobuf): DecodedAuxData {
+function decodedAuxDataFromProtobuf({
+  jwt,
+  jwts,
+}: AuxDataProtobuf): DecodedAuxData {
+  if (isEmptyObject(jwts)) {
+    return { jwt: valuesFromProtobuf(jwt) };
+  }
+
   return {
-    jwt: valuesFromProtobuf(jwt),
+    jwts: Object.fromEntries(
+      Object.entries(jwts).map(([name, { claims }]) => [
+        name,
+        valuesFromProtobuf(claims),
+      ]),
+    ),
   };
 }
 

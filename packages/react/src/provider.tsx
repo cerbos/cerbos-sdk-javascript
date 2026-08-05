@@ -37,7 +37,7 @@ export interface CerbosProviderProps {
    * {@link @cerbos/embedded-client!Options.decodeJWTPayload | an embedded PDP client }
    * to decode the token.
    */
-  auxData?: Pick<AuxData, "jwt"> | undefined;
+  auxData?: AuxData | undefined;
 }
 
 /**

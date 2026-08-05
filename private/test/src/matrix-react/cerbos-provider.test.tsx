@@ -31,11 +31,13 @@ function getPrincipal(alternate: boolean): Principal {
   }
 }
 
-function getAuxData(alternate: boolean): Pick<AuxData, "jwt"> {
+function getAuxData(alternate: boolean): AuxData {
   if (alternate) {
     return {
-      jwt: {
-        token: "test-token-2",
+      jwts: {
+        app: {
+          token: "test-token-2",
+        },
       },
     };
   } else {

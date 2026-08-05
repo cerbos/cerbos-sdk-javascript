@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+### Added
+
+- Cerbos v0.55 updates ([#1509](https://github.com/cerbos/cerbos-sdk-javascript/pull/1509))
+
+  - `cerbos.engine.v1.AuxData.jwts`
+  - `cerbos.request.v1.AuxData.jwts`
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.13.0 ([#1502](https://github.com/cerbos/cerbos-sdk-javascript/pull/1502))

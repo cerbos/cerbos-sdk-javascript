@@ -119,6 +119,8 @@ import {
   auditLogFilterIsBetween,
   auditLogFilterIsSince,
   auditLogFilterIsTail,
+  auxDataHasJWT,
+  auxDataHasJWTs,
   matchIsMatchAll,
   matchIsMatchAny,
   matchIsMatchExpr,
@@ -648,15 +650,29 @@ function resourceToProtobuf({
   };
 }
 
-function auxDataToProtobuf({ jwt }: AuxData): AuxDataValid | undefined {
-  if (!jwt) {
-    return undefined;
+function auxDataToProtobuf(auxData: AuxData): AuxDataValid | undefined {
+  if (auxDataHasJWT(auxData)) {
+    return {
+      $typeName: "cerbos.request.v1.AuxData",
+      jwt: jwtToProtobuf(auxData.jwt),
+      jwts: {},
+    };
   }
 
-  return {
-    $typeName: "cerbos.request.v1.AuxData",
-    jwt: jwtToProtobuf(jwt),
-  };
+  if (auxDataHasJWTs(auxData)) {
+    return {
+      $typeName: "cerbos.request.v1.AuxData",
+      jwt: undefined,
+      jwts: Object.fromEntries(
+        Object.entries(auxData.jwts).map(([name, jwt]) => [
+          name,
+          jwtToProtobuf(jwt),
+        ]),
+      ),
+    };
+  }
+
+  return undefined;
 }
 
 function jwtToProtobuf({ token, keySetId = "" }: JWT): AuxData_JWTValid {
