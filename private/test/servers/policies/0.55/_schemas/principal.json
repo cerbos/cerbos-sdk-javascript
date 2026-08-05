@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "country": {
+      "type": "object",
+      "properties": {
+        "alpha2": {
+          "type": "string",
+          "pattern": "[A-Z]{2}"
+        },
+        "alpha3": {
+          "type": "string",
+          "pattern": "[A-Z]{3}"
+        }
+      }
+    }
+  }
+}

@@ -35,6 +35,17 @@ export function isObject(value: unknown): value is Record<string, unknown> {
 }
 
 /** @internal */
+export function isEmptyObject(object: Record<string, unknown>): boolean {
+  for (const key in object) {
+    if (Object.hasOwn(object, key)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/** @internal */
 export function methodName(method: DescMethod): string {
   return `${method.parent.typeName}/${method.name}`;
 }

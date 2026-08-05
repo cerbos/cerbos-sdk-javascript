@@ -86,11 +86,17 @@ export interface CheckResourcesRequest_ResourceEntry {
 
 export interface AuxData {
   jwt: AuxData_JWT | undefined;
+  jwts: { [key: string]: AuxData_JWT };
 }
 
 export interface AuxData_JWT {
   token: string;
   keySetId: string;
+}
+
+export interface AuxData_JwtsEntry {
+  key: string;
+  value: AuxData_JWT | undefined;
 }
 
 export interface AddOrUpdatePolicyRequest {
@@ -1195,7 +1201,7 @@ export const CheckResourcesRequest_ResourceEntry: MessageFns<CheckResourcesReque
   };
 
 function createBaseAuxData(): AuxData {
-  return { jwt: undefined };
+  return { jwt: undefined, jwts: {} };
 }
 
 export const AuxData: MessageFns<AuxData> = {
@@ -1206,6 +1212,14 @@ export const AuxData: MessageFns<AuxData> = {
     if (message.jwt !== undefined) {
       AuxData_JWT.encode(message.jwt, writer.uint32(10).fork()).join();
     }
+    globalThis.Object.entries(message.jwts).forEach(
+      ([key, value]: [string, AuxData_JWT]) => {
+        AuxData_JwtsEntry.encode(
+          { key: key as any, value },
+          writer.uint32(18).fork(),
+        ).join();
+      },
+    );
     return writer;
   },
 
@@ -1225,6 +1239,17 @@ export const AuxData: MessageFns<AuxData> = {
           message.jwt = AuxData_JWT.decode(reader, reader.uint32());
           continue;
         }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          const entry2 = AuxData_JwtsEntry.decode(reader, reader.uint32());
+          if (entry2.value !== undefined) {
+            message.jwts[entry2.key] = entry2.value;
+          }
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1238,6 +1263,18 @@ export const AuxData: MessageFns<AuxData> = {
     const obj: any = {};
     if (message.jwt !== undefined) {
       obj.jwt = AuxData_JWT.toJSON(message.jwt);
+    }
+    if (message.jwts) {
+      const entries = globalThis.Object.entries(message.jwts) as [
+        string,
+        AuxData_JWT,
+      ][];
+      if (entries.length > 0) {
+        obj.jwts = {};
+        entries.forEach(([k, v]) => {
+          obj.jwts[k] = AuxData_JWT.toJSON(v);
+        });
+      }
     }
     return obj;
   },
@@ -1301,6 +1338,69 @@ export const AuxData_JWT: MessageFns<AuxData_JWT> = {
     }
     if (message.keySetId !== "") {
       obj.keySetId = message.keySetId;
+    }
+    return obj;
+  },
+};
+
+function createBaseAuxData_JwtsEntry(): AuxData_JwtsEntry {
+  return { key: "", value: undefined };
+}
+
+export const AuxData_JwtsEntry: MessageFns<AuxData_JwtsEntry> = {
+  encode(
+    message: AuxData_JwtsEntry,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.key !== "") {
+      writer.uint32(10).string(message.key);
+    }
+    if (message.value !== undefined) {
+      AuxData_JWT.encode(message.value, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AuxData_JwtsEntry {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAuxData_JwtsEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.key = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.value = AuxData_JWT.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  toJSON(message: AuxData_JwtsEntry): unknown {
+    const obj: any = {};
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = AuxData_JWT.toJSON(message.value);
     }
     return obj;
   },

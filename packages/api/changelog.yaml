@@ -1,5 +1,12 @@
 unreleased:
-  type: patch
+  type: minor
+
+  added:
+    - summary: Cerbos v0.55 updates
+      details: |-
+        - `cerbos.engine.v1.AuxData.jwts`
+        - `cerbos.request.v1.AuxData.jwts`
+      pull: 1509
 
   bumped:
     "@bufbuild/protobuf":

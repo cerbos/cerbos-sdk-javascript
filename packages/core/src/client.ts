@@ -104,7 +104,13 @@ import type {
   ValidationError,
   ValidationFailedCallback,
 } from "./types/external.js";
-import { Service, ServiceStatus, Status } from "./types/external.js";
+import {
+  Service,
+  ServiceStatus,
+  Status,
+  auxDataHasJWT,
+  auxDataHasJWTs,
+} from "./types/external.js";
 
 /**
  * HTTP headers from which to construct a {@link Headers} object.
@@ -1231,7 +1237,7 @@ export abstract class Client {
    */
   public withPrincipal(
     principal: Principal,
-    auxData: Pick<AuxData, "jwt"> = {},
+    auxData?: AuxData,
   ): ClientWithPrincipal<this> {
     return new ClientWithPrincipal(this, principal, auxData);
   }
@@ -1387,9 +1393,9 @@ export class ClientWithPrincipal<ClientType extends Client = Client> {
     /**
      * Auxiliary data related to the principal for whom this instance was created.
      *
-     * @defaultValue `{}`
+     * @defaultValue `undefined`
      */
-    public readonly auxData: Pick<AuxData, "jwt"> = {},
+    public readonly auxData?: AuxData | undefined,
   ) {}
 
   /**
@@ -1441,10 +1447,10 @@ export class ClientWithPrincipal<ClientType extends Client = Client> {
   >({ auxData = {}, ...rest }: Omit<Request, "principal">): Request {
     return {
       principal: this.principal,
-      auxData: {
-        ...this.auxData,
-        ...auxData,
-      },
+      auxData:
+        auxDataHasJWT(auxData) || auxDataHasJWTs(auxData)
+          ? auxData
+          : this.auxData,
       ...rest,
     } as Request;
   }

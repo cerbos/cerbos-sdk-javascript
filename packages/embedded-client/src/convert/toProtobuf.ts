@@ -2,6 +2,7 @@ import type { ConfigValid } from "@cerbos/api/cerbos/cloud/epdp/v2/epdp_pb";
 import { Config_Schema_Enforcement } from "@cerbos/api/cerbos/cloud/epdp/v2/epdp_pb";
 import type { AuxDataValid as EngineAuxData } from "@cerbos/api/cerbos/engine/v1/engine_pb";
 import type { DecodedAuxData } from "@cerbos/core";
+import { decodedAuxDataHasJWT, decodedAuxDataHasJWTs } from "@cerbos/core";
 import { valuesToProtobuf } from "@cerbos/core/~internal";
 
 import type { Options } from "../options.js";
@@ -62,8 +63,29 @@ export function decodedAuxDataToProtobuf(
     return undefined;
   }
 
-  return {
-    $typeName: "cerbos.engine.v1.AuxData",
-    jwt: valuesToProtobuf(auxData.jwt),
-  };
+  if (decodedAuxDataHasJWT(auxData)) {
+    return {
+      $typeName: "cerbos.engine.v1.AuxData",
+      jwt: valuesToProtobuf(auxData.jwt),
+      jwts: {},
+    };
+  }
+
+  if (decodedAuxDataHasJWTs(auxData)) {
+    return {
+      $typeName: "cerbos.engine.v1.AuxData",
+      jwt: {},
+      jwts: Object.fromEntries(
+        Object.entries(auxData.jwts).map(([name, jwt]) => [
+          name,
+          {
+            $typeName: "cerbos.engine.v1.AuxData.JWT",
+            claims: valuesToProtobuf(jwt),
+          },
+        ]),
+      ),
+    };
+  }
+
+  return undefined;
 }

@@ -1,5 +1,9 @@
 unreleased:
-  type: patch
+  type: minor
+
+  added:
+    - summary: Support for multiple JWTs in auxiliary data
+      pull: 1509
 
   bumped:
     "@bufbuild/protobuf":

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Support for multiple JWTs in auxiliary data ([#1509](https://github.com/cerbos/cerbos-sdk-javascript/pull/1509))
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.13.0 ([#1502](https://github.com/cerbos/cerbos-sdk-javascript/pull/1502))

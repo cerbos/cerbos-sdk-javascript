@@ -2,7 +2,11 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Added
+
+- Support for multiple JWTs in auxiliary data ([#1509](https://github.com/cerbos/cerbos-sdk-javascript/pull/1509))
+
+  Requires a policy decision point server running Cerbos 0.55+.
 
 ## [0.4.0] - 2026-07-20
 
