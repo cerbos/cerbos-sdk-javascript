@@ -1,20 +1,20 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Cerbos v0.55 updates
-      details: |-
-        - `cerbos.cloud.epdp.v2.Config.Evaluator.strictEvaluation`
-        - `cerbos.engine.v1.AuxData.jwts`
-        - `cerbos.request.v1.AuxData.jwts`
-      pulls: [1509, 1511]
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.13.0
-      pull: 1502
-
 releases:
+  - version: 0.11.0
+    date: 2026-08-07
+
+    added:
+      - summary: Cerbos v0.55 updates
+        details: |-
+          - `cerbos.cloud.epdp.v2.Config.Evaluator.strictEvaluation`
+          - `cerbos.engine.v1.AuxData.jwts`
+          - `cerbos.request.v1.AuxData.jwts`
+        pulls: [1509, 1511]
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.13.0
+        pull: 1502
+
   - version: 0.10.0
     date: 2026-07-15
 

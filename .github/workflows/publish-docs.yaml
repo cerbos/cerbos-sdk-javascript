@@ -5,6 +5,7 @@ on:
   push:
     tags:
       - "@cerbos/*@*"
+      - "!@cerbos/api@*"
 
 concurrency:
   group: publish-docs
