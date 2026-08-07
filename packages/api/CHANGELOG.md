@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.11.0] - 2026-08-07
+
 ### Added
 
 - Cerbos v0.55 updates ([#1509](https://github.com/cerbos/cerbos-sdk-javascript/pull/1509), [#1511](https://github.com/cerbos/cerbos-sdk-javascript/pull/1511))
@@ -160,7 +164,8 @@
 
 - Generated code ([#1271](https://github.com/cerbos/cerbos-sdk-javascript/pull/1271))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.10.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.11.0...HEAD
+[0.11.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.10.0...@cerbos/api@0.11.0
 [0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.9.1...@cerbos/api@0.10.0
 [0.9.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.9.0...@cerbos/api@0.9.1
 [0.9.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.8.0...@cerbos/api@0.9.0

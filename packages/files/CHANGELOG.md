@@ -6,6 +6,8 @@
 
 - Bump dependency on [@bufbuild/protobuf] to 2.13.0 ([#1502](https://github.com/cerbos/cerbos-sdk-javascript/pull/1502))
 
+- Bump dependency on [@cerbos/api] to 0.11.0 ([#1512](https://github.com/cerbos/cerbos-sdk-javascript/pull/1512))
+
 ## [0.7.0] - 2026-07-20
 
 ### Added
