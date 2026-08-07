@@ -14,6 +14,7 @@ export function configToProtobuf({
   globals = {},
   lenientScopeSearch = false,
   schemaEnforcement,
+  strictEvaluation = false,
 }: Pick<
   Options,
   | "defaultPolicyVersion"
@@ -21,6 +22,7 @@ export function configToProtobuf({
   | "globals"
   | "lenientScopeSearch"
   | "schemaEnforcement"
+  | "strictEvaluation"
 >): ConfigValid {
   return {
     $typeName: "cerbos.cloud.epdp.v2.Config",
@@ -30,6 +32,7 @@ export function configToProtobuf({
       defaultScope,
       globals: valuesToProtobuf(globals),
       lenientScopeSearch,
+      strictEvaluation,
     },
     schema: {
       $typeName: "cerbos.cloud.epdp.v2.Config.Schema",

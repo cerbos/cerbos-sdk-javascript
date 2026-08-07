@@ -4,9 +4,10 @@ unreleased:
   added:
     - summary: Cerbos v0.55 updates
       details: |-
+        - `cerbos.cloud.epdp.v2.Config.Evaluator.strictEvaluation`
         - `cerbos.engine.v1.AuxData.jwts`
         - `cerbos.request.v1.AuxData.jwts`
-      pull: 1509
+      pulls: [1509, 1511]
 
   bumped:
     "@bufbuild/protobuf":

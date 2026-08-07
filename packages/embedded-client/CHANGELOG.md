@@ -6,6 +6,8 @@
 
 - Support for multiple JWTs in auxiliary data ([#1509](https://github.com/cerbos/cerbos-sdk-javascript/pull/1509))
 
+- [`Options.strictEvaluation`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded-client.Options.html#strictevaluation) to configure the embedded policy decision point server to perform [strict evaluation](https://docs.cerbos.dev/cerbos/latest/configuration/engine#strict_evaluation) ([#1511](https://github.com/cerbos/cerbos-sdk-javascript/pull/1511))
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.13.0 ([#1502](https://github.com/cerbos/cerbos-sdk-javascript/pull/1502))
