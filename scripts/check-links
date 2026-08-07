@@ -25,6 +25,7 @@ check() {
     --config /input/scripts/lychee.toml \
     "${excludes[@]}" \
     --remap "^https://cerbos\.github\.io/cerbos-sdk-javascript/ file:///input/docs/" \
+    --remap "^https://docs\.cerbos\.dev/cerbos/latest/ https://docs.cerbos.dev/cerbos/prerelease/" \
     "$@" \
     2> >(grep -v -E "Skipping fragment check for [^ ]+ within a plaintext file")
 }
