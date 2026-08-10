@@ -8,6 +8,7 @@ import {
   satisfies,
   inc as semverBump,
   compare as semverCompare,
+  lt as semverLessThan,
 } from "semver";
 import type { ZodType } from "zod";
 import { z } from "zod";
@@ -54,16 +55,24 @@ const versionSchema = z
   .transform((version) => version.replace(/^v/, ""));
 
 async function fetchNodeVersions(): Promise<string[]> {
-  const [majorVersions, schedule] = await Promise.all([
+  const [versions, schedule] = await Promise.all([
     fetchJson(
       "https://nodejs.org/dist/index.json",
       z
-        .array(
-          z
-            .object({ version: versionSchema })
-            .transform(({ version }) => major(version)),
-        )
-        .transform((majorVersions) => new Set(majorVersions)),
+        .array(z.object({ version: versionSchema }))
+        .transform((versions): string[] => {
+          const grouped = new Map<number, string>();
+
+          for (const { version } of versions) {
+            const majorVersion = major(version);
+            const existing = grouped.get(majorVersion);
+            if (!existing || semverLessThan(existing, version)) {
+              grouped.set(majorVersion, version);
+            }
+          }
+
+          return Array.from(grouped.values()).sort(semverCompare);
+        }),
     ),
     fetchJson(
       "https://raw.githubusercontent.com/nodejs/Release/main/schedule.json",
@@ -76,19 +85,14 @@ async function fetchNodeVersions(): Promise<string[]> {
 
   const today = formatISO(Date.now(), { representation: "date" });
 
-  const versions: string[] = [];
+  return versions.filter((version) => {
+    const { start, end } = schedule[major(version)] ?? {
+      start: Infinity,
+      end: Infinity,
+    };
 
-  for (const [version, { start, end }] of Object.entries(schedule)) {
-    if (
-      start < today &&
-      today <= end &&
-      majorVersions.has(parseInt(version, 10))
-    ) {
-      versions.push(version);
-    }
-  }
-
-  return versions;
+    return start < today && today <= end;
+  });
 }
 
 interface Versions {
