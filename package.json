@@ -9,7 +9,7 @@
     },
     "runtime": {
       "name": "node",
-      "version": "25.9.0",
+      "version": "26.7.0",
       "onFail": "warn"
     }
   },
