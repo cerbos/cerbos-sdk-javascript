@@ -17,7 +17,7 @@ testInstrumentation({
   client: () =>
     new Embedded({
       policies: readFile(
-        resolve(__dirname, "../../../bundles/PS2MX9855QURB3Y8.crrt"),
+        resolve(__dirname, "../../../bundles/SWFF3MKI4L1ACYAV.crrt"),
       ),
       wasm: readEmbeddedServerWASM(),
       decodeJWTPayload: ({ token }): DecodedJWTPayload =>

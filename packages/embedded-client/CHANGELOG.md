@@ -14,6 +14,8 @@
 
 - Bump dependency on [@cerbos/api] to 0.11.0 ([#1512](https://github.com/cerbos/cerbos-sdk-javascript/pull/1512))
 
+- Bump dependency on [@cerbos/embedded-server] to 0.7.0 ([#1517](https://github.com/cerbos/cerbos-sdk-javascript/pull/1517))
+
 ## [0.7.0] - 2026-07-20
 
 ### Added
