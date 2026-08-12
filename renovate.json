@@ -53,6 +53,7 @@
       "matchPackageNames": [
         "@bufbuild/protobuf",
         "@bufbuild/protovalidate",
+        "@cerbos/embedded-server",
         "@connectrpc/connect",
         "@connectrpc/connect-node",
         "@connectrpc/connect-web",
