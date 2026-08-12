@@ -17,6 +17,10 @@ unreleased:
       to: 0.11.0
       pull: 1512
 
+    "@cerbos/embedded-server":
+      to: 0.7.0
+      pull: 1517
+
 releases:
   - version: 0.7.0
     date: 2026-07-20
