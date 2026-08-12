@@ -71,7 +71,7 @@ describe("Embedded", () => {
       });
     }
 
-    const localBundleId = "PS2MX9855QURB3Y8";
+    const localBundleId = "SWFF3MKI4L1ACYAV";
 
     const testCases: TestCase[] = [
       {
