@@ -18,8 +18,8 @@ unreleased:
       pull: 1512
 
     "@cerbos/embedded-server":
-      to: 0.7.0
-      pull: 1517
+      to: 0.7.1
+      pulls: [1517, 1518]
 
 releases:
   - version: 0.7.0
