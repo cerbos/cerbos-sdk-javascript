@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.8.0] - 2026-08-13
+
 ### Added
 
 - Support for multiple JWTs in auxiliary data ([#1509](https://github.com/cerbos/cerbos-sdk-javascript/pull/1509))
@@ -14,7 +18,11 @@
 
 - Bump dependency on [@cerbos/api] to 0.11.0 ([#1512](https://github.com/cerbos/cerbos-sdk-javascript/pull/1512))
 
+- Bump dependency on [@cerbos/core] to 0.33.0 ([#1519](https://github.com/cerbos/cerbos-sdk-javascript/pull/1519))
+
 - Bump dependency on [@cerbos/embedded-server] to 0.7.1 ([#1517](https://github.com/cerbos/cerbos-sdk-javascript/pull/1517), [#1518](https://github.com/cerbos/cerbos-sdk-javascript/pull/1518))
+
+- Bump dependency on [@cerbos/hub] to 0.6.1 ([#1519](https://github.com/cerbos/cerbos-sdk-javascript/pull/1519))
 
 ## [0.7.0] - 2026-07-20
 
@@ -169,7 +177,8 @@
 
 - Client library for new embedded policy decision point servers ([#1312](https://github.com/cerbos/cerbos-sdk-javascript/pull/1312))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.7.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.8.0...HEAD
+[0.8.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.7.0...@cerbos/embedded-client@0.8.0
 [0.7.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.6.0...@cerbos/embedded-client@0.7.0
 [0.6.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.5.3...@cerbos/embedded-client@0.6.0
 [0.5.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.5.2...@cerbos/embedded-client@0.5.3

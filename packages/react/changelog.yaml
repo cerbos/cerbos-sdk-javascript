@@ -1,12 +1,17 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Support for multiple JWTs in auxiliary data
-      details: Requires a policy decision point server running Cerbos 0.55+.
-      pull: 1509
-
 releases:
+  - version: 0.5.0
+    date: 2026-08-13
+
+    added:
+      - summary: Support for multiple JWTs in auxiliary data
+        details: Requires a policy decision point server running Cerbos 0.55+.
+        pull: 1509
+
+    bumped:
+      "@cerbos/core":
+        to: 0.33.0
+        pull: 1519
+
   - version: 0.4.0
     date: 2026-07-20
 

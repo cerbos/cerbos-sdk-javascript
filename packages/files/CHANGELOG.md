@@ -2,11 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.7.1] - 2026-08-13
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.13.0 ([#1502](https://github.com/cerbos/cerbos-sdk-javascript/pull/1502))
 
 - Bump dependency on [@cerbos/api] to 0.11.0 ([#1512](https://github.com/cerbos/cerbos-sdk-javascript/pull/1512))
+
+- Bump dependency on [@cerbos/core] to 0.33.0 ([#1519](https://github.com/cerbos/cerbos-sdk-javascript/pull/1519))
 
 ## [0.7.0] - 2026-07-20
 
@@ -304,7 +310,8 @@
 
 - A package to load Cerbos policies from YAML or JSON files ([#611](https://github.com/cerbos/cerbos-sdk-javascript/pull/611))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.7.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.7.1...HEAD
+[0.7.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.7.0...@cerbos/files@0.7.1
 [0.7.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.6.5...@cerbos/files@0.7.0
 [0.6.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.6.4...@cerbos/files@0.6.5
 [0.6.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/files@0.6.3...@cerbos/files@0.6.4
