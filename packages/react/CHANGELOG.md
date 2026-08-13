@@ -2,11 +2,19 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.5.0] - 2026-08-13
+
 ### Added
 
 - Support for multiple JWTs in auxiliary data ([#1509](https://github.com/cerbos/cerbos-sdk-javascript/pull/1509))
 
   Requires a policy decision point server running Cerbos 0.55+.
+
+### Changed
+
+- Bump dependency on [@cerbos/core] to 0.33.0 ([#1519](https://github.com/cerbos/cerbos-sdk-javascript/pull/1519))
 
 ## [0.4.0] - 2026-07-20
 
@@ -166,7 +174,8 @@
 
 - A collection of React hooks for interacting with Cerbos policy decision points ([#876](https://github.com/cerbos/cerbos-sdk-javascript/pull/876), [#918](https://github.com/cerbos/cerbos-sdk-javascript/pull/918))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.4.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.5.0...HEAD
+[0.5.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.4.0...@cerbos/react@0.5.0
 [0.4.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.3.6...@cerbos/react@0.4.0
 [0.3.6]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.3.5...@cerbos/react@0.3.6
 [0.3.5]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/react@0.3.4...@cerbos/react@0.3.5

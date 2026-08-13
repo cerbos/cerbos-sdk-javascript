@@ -1,27 +1,35 @@
-unreleased:
-  type: minor
-
-  added:
-    - summary: Support for multiple JWTs in auxiliary data
-      pull: 1509
-
-    - summary: "[`Options.strictEvaluation`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded-client.Options.html#strictevaluation) to configure the embedded policy decision point server to perform [strict evaluation](https://docs.cerbos.dev/cerbos/latest/configuration/engine#strict_evaluation)"
-      pull: 1511
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.13.0
-      pull: 1502
-
-    "@cerbos/api":
-      to: 0.11.0
-      pull: 1512
-
-    "@cerbos/embedded-server":
-      to: 0.7.1
-      pulls: [1517, 1518]
-
 releases:
+  - version: 0.8.0
+    date: 2026-08-13
+
+    added:
+      - summary: Support for multiple JWTs in auxiliary data
+        pull: 1509
+
+      - summary: "[`Options.strictEvaluation`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded-client.Options.html#strictevaluation) to configure the embedded policy decision point server to perform [strict evaluation](https://docs.cerbos.dev/cerbos/latest/configuration/engine#strict_evaluation)"
+        pull: 1511
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.13.0
+        pull: 1502
+
+      "@cerbos/api":
+        to: 0.11.0
+        pull: 1512
+
+      "@cerbos/core":
+        to: 0.33.0
+        pull: 1519
+
+      "@cerbos/embedded-server":
+        to: 0.7.1
+        pulls: [1517, 1518]
+
+      "@cerbos/hub":
+        to: 0.6.1
+        pull: 1519
+
   - version: 0.7.0
     date: 2026-07-20
 

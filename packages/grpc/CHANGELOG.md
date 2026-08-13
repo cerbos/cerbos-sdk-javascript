@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.29.0] - 2026-08-13
+
 ### Added
 
 - Support for multiple JWTs in auxiliary data ([#1509](https://github.com/cerbos/cerbos-sdk-javascript/pull/1509))
@@ -13,6 +17,8 @@
 - Bump dependency on [@bufbuild/protobuf] to 2.13.0 ([#1502](https://github.com/cerbos/cerbos-sdk-javascript/pull/1502))
 
 - Bump dependency on [@cerbos/api] to 0.11.0 ([#1512](https://github.com/cerbos/cerbos-sdk-javascript/pull/1512))
+
+- Bump dependency on [@cerbos/core] to 0.33.0 ([#1519](https://github.com/cerbos/cerbos-sdk-javascript/pull/1519))
 
 ## [0.28.0] - 2026-07-20
 
@@ -644,7 +650,8 @@
 
 - Separate gRPC client for server-side Node.js applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.28.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.29.0...HEAD
+[0.29.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.28.0...@cerbos/grpc@0.29.0
 [0.28.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.27.1...@cerbos/grpc@0.28.0
 [0.27.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.27.0...@cerbos/grpc@0.27.1
 [0.27.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/grpc@0.26.0...@cerbos/grpc@0.27.0
