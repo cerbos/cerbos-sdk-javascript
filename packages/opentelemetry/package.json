@@ -50,7 +50,7 @@
     "metrics"
   ],
   "peerDependencies": {
-    "@bufbuild/protobuf": "^2.13.0",
+    "@bufbuild/protobuf": "^2.14.0",
     "@cerbos/api": "^0.11.0",
     "@cerbos/core": "^0.33.0"
   },

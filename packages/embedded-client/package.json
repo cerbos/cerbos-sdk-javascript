@@ -49,7 +49,7 @@
     "WASM"
   ],
   "peerDependencies": {
-    "@bufbuild/protobuf": "^2.13.0",
+    "@bufbuild/protobuf": "^2.14.0",
     "@cerbos/api": "^0.11.0",
     "@cerbos/embedded-server": "^0.7.1"
   },
