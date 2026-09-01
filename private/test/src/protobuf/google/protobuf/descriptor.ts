@@ -666,188 +666,197 @@ export const FileOptions: MessageFns<FileOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): FileOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseFileOptions();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.javaPackage = reader.string();
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.javaOuterClassname = reader.string();
-          continue;
-        }
-        case 10: {
-          if (tag !== 80) {
-            break;
-          }
-
-          message.javaMultipleFiles = reader.bool();
-          continue;
-        }
-        case 20: {
-          if (tag !== 160) {
-            break;
-          }
-
-          message.javaGenerateEqualsAndHash = reader.bool();
-          continue;
-        }
-        case 27: {
-          if (tag !== 216) {
-            break;
-          }
-
-          message.javaStringCheckUtf8 = reader.bool();
-          continue;
-        }
-        case 9: {
-          if (tag !== 72) {
-            break;
-          }
-
-          message.optimizeFor = reader.int32() as any;
-          continue;
-        }
-        case 11: {
-          if (tag !== 90) {
-            break;
-          }
-
-          message.goPackage = reader.string();
-          continue;
-        }
-        case 16: {
-          if (tag !== 128) {
-            break;
-          }
-
-          message.ccGenericServices = reader.bool();
-          continue;
-        }
-        case 17: {
-          if (tag !== 136) {
-            break;
-          }
-
-          message.javaGenericServices = reader.bool();
-          continue;
-        }
-        case 18: {
-          if (tag !== 144) {
-            break;
-          }
-
-          message.pyGenericServices = reader.bool();
-          continue;
-        }
-        case 23: {
-          if (tag !== 184) {
-            break;
-          }
-
-          message.deprecated = reader.bool();
-          continue;
-        }
-        case 31: {
-          if (tag !== 248) {
-            break;
-          }
-
-          message.ccEnableArenas = reader.bool();
-          continue;
-        }
-        case 36: {
-          if (tag !== 290) {
-            break;
-          }
-
-          message.objcClassPrefix = reader.string();
-          continue;
-        }
-        case 37: {
-          if (tag !== 298) {
-            break;
-          }
-
-          message.csharpNamespace = reader.string();
-          continue;
-        }
-        case 39: {
-          if (tag !== 314) {
-            break;
-          }
-
-          message.swiftPrefix = reader.string();
-          continue;
-        }
-        case 40: {
-          if (tag !== 322) {
-            break;
-          }
-
-          message.phpClassPrefix = reader.string();
-          continue;
-        }
-        case 41: {
-          if (tag !== 330) {
-            break;
-          }
-
-          message.phpNamespace = reader.string();
-          continue;
-        }
-        case 44: {
-          if (tag !== 354) {
-            break;
-          }
-
-          message.phpMetadataNamespace = reader.string();
-          continue;
-        }
-        case 45: {
-          if (tag !== 362) {
-            break;
-          }
-
-          message.rubyPackage = reader.string();
-          continue;
-        }
-        case 50: {
-          if (tag !== 402) {
-            break;
-          }
-
-          message.features = FeatureSet.decode(reader, reader.uint32());
-          continue;
-        }
-        case 999: {
-          if (tag !== 7994) {
-            break;
-          }
-
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseFileOptions();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.javaPackage = reader.string();
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.javaOuterClassname = reader.string();
+            continue;
+          }
+          case 10: {
+            if (tag !== 80) {
+              break;
+            }
+
+            message.javaMultipleFiles = reader.bool();
+            continue;
+          }
+          case 20: {
+            if (tag !== 160) {
+              break;
+            }
+
+            message.javaGenerateEqualsAndHash = reader.bool();
+            continue;
+          }
+          case 27: {
+            if (tag !== 216) {
+              break;
+            }
+
+            message.javaStringCheckUtf8 = reader.bool();
+            continue;
+          }
+          case 9: {
+            if (tag !== 72) {
+              break;
+            }
+
+            message.optimizeFor = reader.int32() as any;
+            continue;
+          }
+          case 11: {
+            if (tag !== 90) {
+              break;
+            }
+
+            message.goPackage = reader.string();
+            continue;
+          }
+          case 16: {
+            if (tag !== 128) {
+              break;
+            }
+
+            message.ccGenericServices = reader.bool();
+            continue;
+          }
+          case 17: {
+            if (tag !== 136) {
+              break;
+            }
+
+            message.javaGenericServices = reader.bool();
+            continue;
+          }
+          case 18: {
+            if (tag !== 144) {
+              break;
+            }
+
+            message.pyGenericServices = reader.bool();
+            continue;
+          }
+          case 23: {
+            if (tag !== 184) {
+              break;
+            }
+
+            message.deprecated = reader.bool();
+            continue;
+          }
+          case 31: {
+            if (tag !== 248) {
+              break;
+            }
+
+            message.ccEnableArenas = reader.bool();
+            continue;
+          }
+          case 36: {
+            if (tag !== 290) {
+              break;
+            }
+
+            message.objcClassPrefix = reader.string();
+            continue;
+          }
+          case 37: {
+            if (tag !== 298) {
+              break;
+            }
+
+            message.csharpNamespace = reader.string();
+            continue;
+          }
+          case 39: {
+            if (tag !== 314) {
+              break;
+            }
+
+            message.swiftPrefix = reader.string();
+            continue;
+          }
+          case 40: {
+            if (tag !== 322) {
+              break;
+            }
+
+            message.phpClassPrefix = reader.string();
+            continue;
+          }
+          case 41: {
+            if (tag !== 330) {
+              break;
+            }
+
+            message.phpNamespace = reader.string();
+            continue;
+          }
+          case 44: {
+            if (tag !== 354) {
+              break;
+            }
+
+            message.phpMetadataNamespace = reader.string();
+            continue;
+          }
+          case 45: {
+            if (tag !== 362) {
+              break;
+            }
+
+            message.rubyPackage = reader.string();
+            continue;
+          }
+          case 50: {
+            if (tag !== 402) {
+              break;
+            }
+
+            message.features = FeatureSet.decode(reader, reader.uint32());
+            continue;
+          }
+          case 999: {
+            if (tag !== 7994) {
+              break;
+            }
+
+            message.uninterpretedOption.push(
+              UninterpretedOption.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: FileOptions): unknown {
@@ -1007,76 +1016,85 @@ export const MessageOptions: MessageFns<MessageOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): MessageOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMessageOptions();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
-          }
-
-          message.messageSetWireFormat = reader.bool();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.noStandardDescriptorAccessor = reader.bool();
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.deprecated = reader.bool();
-          continue;
-        }
-        case 7: {
-          if (tag !== 56) {
-            break;
-          }
-
-          message.mapEntry = reader.bool();
-          continue;
-        }
-        case 11: {
-          if (tag !== 88) {
-            break;
-          }
-
-          message.deprecatedLegacyJsonFieldConflicts = reader.bool();
-          continue;
-        }
-        case 12: {
-          if (tag !== 98) {
-            break;
-          }
-
-          message.features = FeatureSet.decode(reader, reader.uint32());
-          continue;
-        }
-        case 999: {
-          if (tag !== 7994) {
-            break;
-          }
-
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMessageOptions();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.messageSetWireFormat = reader.bool();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
+
+            message.noStandardDescriptorAccessor = reader.bool();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.deprecated = reader.bool();
+            continue;
+          }
+          case 7: {
+            if (tag !== 56) {
+              break;
+            }
+
+            message.mapEntry = reader.bool();
+            continue;
+          }
+          case 11: {
+            if (tag !== 88) {
+              break;
+            }
+
+            message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+            continue;
+          }
+          case 12: {
+            if (tag !== 98) {
+              break;
+            }
+
+            message.features = FeatureSet.decode(reader, reader.uint32());
+            continue;
+          }
+          case 999: {
+            if (tag !== 7994) {
+              break;
+            }
+
+            message.uninterpretedOption.push(
+              UninterpretedOption.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: MessageOptions): unknown {
@@ -1196,147 +1214,156 @@ export const FieldOptions: MessageFns<FieldOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): FieldOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseFieldOptions();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
-          }
-
-          message.ctype = reader.int32() as any;
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.packed = reader.bool();
-          continue;
-        }
-        case 6: {
-          if (tag !== 48) {
-            break;
-          }
-
-          message.jstype = reader.int32() as any;
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.lazy = reader.bool();
-          continue;
-        }
-        case 15: {
-          if (tag !== 120) {
-            break;
-          }
-
-          message.unverifiedLazy = reader.bool();
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.deprecated = reader.bool();
-          continue;
-        }
-        case 10: {
-          if (tag !== 80) {
-            break;
-          }
-
-          message.weak = reader.bool();
-          continue;
-        }
-        case 16: {
-          if (tag !== 128) {
-            break;
-          }
-
-          message.debugRedact = reader.bool();
-          continue;
-        }
-        case 17: {
-          if (tag !== 136) {
-            break;
-          }
-
-          message.retention = reader.int32() as any;
-          continue;
-        }
-        case 19: {
-          if (tag === 152) {
-            message.targets.push(reader.int32() as any);
-
-            continue;
-          }
-
-          if (tag === 154) {
-            const end2 = reader.uint32() + reader.pos;
-            while (reader.pos < end2) {
-              message.targets.push(reader.int32() as any);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
+    }
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseFieldOptions();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
             }
 
+            message.ctype = reader.int32() as any;
             continue;
           }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
+            message.packed = reader.bool();
+            continue;
+          }
+          case 6: {
+            if (tag !== 48) {
+              break;
+            }
+
+            message.jstype = reader.int32() as any;
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.lazy = reader.bool();
+            continue;
+          }
+          case 15: {
+            if (tag !== 120) {
+              break;
+            }
+
+            message.unverifiedLazy = reader.bool();
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.deprecated = reader.bool();
+            continue;
+          }
+          case 10: {
+            if (tag !== 80) {
+              break;
+            }
+
+            message.weak = reader.bool();
+            continue;
+          }
+          case 16: {
+            if (tag !== 128) {
+              break;
+            }
+
+            message.debugRedact = reader.bool();
+            continue;
+          }
+          case 17: {
+            if (tag !== 136) {
+              break;
+            }
+
+            message.retention = reader.int32() as any;
+            continue;
+          }
+          case 19: {
+            if (tag === 152) {
+              message.targets.push(reader.int32() as any);
+
+              continue;
+            }
+
+            if (tag === 154) {
+              const end2 = reader.uint32() + reader.pos;
+              while (reader.pos < end2) {
+                message.targets.push(reader.int32() as any);
+              }
+
+              continue;
+            }
+
+            break;
+          }
+          case 20: {
+            if (tag !== 162) {
+              break;
+            }
+
+            message.editionDefaults.push(
+              FieldOptions_EditionDefault.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 21: {
+            if (tag !== 170) {
+              break;
+            }
+
+            message.features = FeatureSet.decode(reader, reader.uint32());
+            continue;
+          }
+          case 22: {
+            if (tag !== 178) {
+              break;
+            }
+
+            message.featureSupport = FieldOptions_FeatureSupport.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 999: {
+            if (tag !== 7994) {
+              break;
+            }
+
+            message.uninterpretedOption.push(
+              UninterpretedOption.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
           break;
         }
-        case 20: {
-          if (tag !== 162) {
-            break;
-          }
-
-          message.editionDefaults.push(
-            FieldOptions_EditionDefault.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-        case 21: {
-          if (tag !== 170) {
-            break;
-          }
-
-          message.features = FeatureSet.decode(reader, reader.uint32());
-          continue;
-        }
-        case 22: {
-          if (tag !== 178) {
-            break;
-          }
-
-          message.featureSupport = FieldOptions_FeatureSupport.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        }
-        case 999: {
-          if (tag !== 7994) {
-            break;
-          }
-
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
     }
-    return message;
   },
 
   toJSON(message: FieldOptions): unknown {
@@ -1423,34 +1450,43 @@ export const FieldOptions_EditionDefault: MessageFns<FieldOptions_EditionDefault
     ): FieldOptions_EditionDefault {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseFieldOptions_EditionDefault();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 3: {
-            if (tag !== 24) {
-              break;
-            }
-
-            message.edition = reader.int32() as any;
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.value = reader.string();
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseFieldOptions_EditionDefault();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 3: {
+              if (tag !== 24) {
+                break;
+              }
+
+              message.edition = reader.int32() as any;
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.value = reader.string();
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: FieldOptions_EditionDefault): unknown {
@@ -1513,50 +1549,59 @@ export const FieldOptions_FeatureSupport: MessageFns<FieldOptions_FeatureSupport
     ): FieldOptions_FeatureSupport {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseFieldOptions_FeatureSupport();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 8) {
-              break;
-            }
-
-            message.editionIntroduced = reader.int32() as any;
-            continue;
-          }
-          case 2: {
-            if (tag !== 16) {
-              break;
-            }
-
-            message.editionDeprecated = reader.int32() as any;
-            continue;
-          }
-          case 3: {
-            if (tag !== 26) {
-              break;
-            }
-
-            message.deprecationWarning = reader.string();
-            continue;
-          }
-          case 4: {
-            if (tag !== 32) {
-              break;
-            }
-
-            message.editionRemoved = reader.int32() as any;
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseFieldOptions_FeatureSupport();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 8) {
+                break;
+              }
+
+              message.editionIntroduced = reader.int32() as any;
+              continue;
+            }
+            case 2: {
+              if (tag !== 16) {
+                break;
+              }
+
+              message.editionDeprecated = reader.int32() as any;
+              continue;
+            }
+            case 3: {
+              if (tag !== 26) {
+                break;
+              }
+
+              message.deprecationWarning = reader.string();
+              continue;
+            }
+            case 4: {
+              if (tag !== 32) {
+                break;
+              }
+
+              message.editionRemoved = reader.int32() as any;
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: FieldOptions_FeatureSupport): unknown {
@@ -1610,36 +1655,45 @@ export const OneofOptions: MessageFns<OneofOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): OneofOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseOneofOptions();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.features = FeatureSet.decode(reader, reader.uint32());
-          continue;
-        }
-        case 999: {
-          if (tag !== 7994) {
-            break;
-          }
-
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseOneofOptions();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.features = FeatureSet.decode(reader, reader.uint32());
+            continue;
+          }
+          case 999: {
+            if (tag !== 7994) {
+              break;
+            }
+
+            message.uninterpretedOption.push(
+              UninterpretedOption.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: OneofOptions): unknown {
@@ -1680,44 +1734,53 @@ export const ServiceOptions: MessageFns<ServiceOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): ServiceOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseServiceOptions();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 34: {
-          if (tag !== 274) {
-            break;
-          }
-
-          message.features = FeatureSet.decode(reader, reader.uint32());
-          continue;
-        }
-        case 33: {
-          if (tag !== 264) {
-            break;
-          }
-
-          message.deprecated = reader.bool();
-          continue;
-        }
-        case 999: {
-          if (tag !== 7994) {
-            break;
-          }
-
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseServiceOptions();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 34: {
+            if (tag !== 274) {
+              break;
+            }
+
+            message.features = FeatureSet.decode(reader, reader.uint32());
+            continue;
+          }
+          case 33: {
+            if (tag !== 264) {
+              break;
+            }
+
+            message.deprecated = reader.bool();
+            continue;
+          }
+          case 999: {
+            if (tag !== 7994) {
+              break;
+            }
+
+            message.uninterpretedOption.push(
+              UninterpretedOption.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: ServiceOptions): unknown {
@@ -1772,52 +1835,61 @@ export const MethodOptions: MessageFns<MethodOptions> = {
   decode(input: BinaryReader | Uint8Array, length?: number): MethodOptions {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMethodOptions();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 33: {
-          if (tag !== 264) {
-            break;
-          }
-
-          message.deprecated = reader.bool();
-          continue;
-        }
-        case 34: {
-          if (tag !== 272) {
-            break;
-          }
-
-          message.idempotencyLevel = reader.int32() as any;
-          continue;
-        }
-        case 35: {
-          if (tag !== 282) {
-            break;
-          }
-
-          message.features = FeatureSet.decode(reader, reader.uint32());
-          continue;
-        }
-        case 999: {
-          if (tag !== 7994) {
-            break;
-          }
-
-          message.uninterpretedOption.push(
-            UninterpretedOption.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseMethodOptions();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 33: {
+            if (tag !== 264) {
+              break;
+            }
+
+            message.deprecated = reader.bool();
+            continue;
+          }
+          case 34: {
+            if (tag !== 272) {
+              break;
+            }
+
+            message.idempotencyLevel = reader.int32() as any;
+            continue;
+          }
+          case 35: {
+            if (tag !== 282) {
+              break;
+            }
+
+            message.features = FeatureSet.decode(reader, reader.uint32());
+            continue;
+          }
+          case 999: {
+            if (tag !== 7994) {
+              break;
+            }
+
+            message.uninterpretedOption.push(
+              UninterpretedOption.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: MethodOptions): unknown {
@@ -1916,76 +1988,85 @@ export const UninterpretedOption: MessageFns<UninterpretedOption> = {
   ): UninterpretedOption {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseUninterpretedOption();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.name.push(
-            UninterpretedOption_NamePart.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.identifierValue = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 32) {
-            break;
-          }
-
-          message.positiveIntValue = reader.uint64() as bigint;
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.negativeIntValue = reader.int64() as bigint;
-          continue;
-        }
-        case 6: {
-          if (tag !== 49) {
-            break;
-          }
-
-          message.doubleValue = reader.double();
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.stringValue = reader.bytes();
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.aggregateValue = reader.string();
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseUninterpretedOption();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.name.push(
+              UninterpretedOption_NamePart.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.identifierValue = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 32) {
+              break;
+            }
+
+            message.positiveIntValue = reader.uint64() as bigint;
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.negativeIntValue = reader.int64() as bigint;
+            continue;
+          }
+          case 6: {
+            if (tag !== 49) {
+              break;
+            }
+
+            message.doubleValue = reader.double();
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.stringValue = reader.bytes();
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.aggregateValue = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: UninterpretedOption): unknown {
@@ -2051,34 +2132,43 @@ export const UninterpretedOption_NamePart: MessageFns<UninterpretedOption_NamePa
     ): UninterpretedOption_NamePart {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseUninterpretedOption_NamePart();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.namePart = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 16) {
-              break;
-            }
-
-            message.isExtension = reader.bool();
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseUninterpretedOption_NamePart();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.namePart = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 16) {
+                break;
+              }
+
+              message.isExtension = reader.bool();
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: UninterpretedOption_NamePart): unknown {
@@ -2153,82 +2243,91 @@ export const FeatureSet: MessageFns<FeatureSet> = {
   decode(input: BinaryReader | Uint8Array, length?: number): FeatureSet {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseFeatureSet();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
-          }
-
-          message.fieldPresence = reader.int32() as any;
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.enumType = reader.int32() as any;
-          continue;
-        }
-        case 3: {
-          if (tag !== 24) {
-            break;
-          }
-
-          message.repeatedFieldEncoding = reader.int32() as any;
-          continue;
-        }
-        case 4: {
-          if (tag !== 32) {
-            break;
-          }
-
-          message.utf8Validation = reader.int32() as any;
-          continue;
-        }
-        case 5: {
-          if (tag !== 40) {
-            break;
-          }
-
-          message.messageEncoding = reader.int32() as any;
-          continue;
-        }
-        case 6: {
-          if (tag !== 48) {
-            break;
-          }
-
-          message.jsonFormat = reader.int32() as any;
-          continue;
-        }
-        case 7: {
-          if (tag !== 56) {
-            break;
-          }
-
-          message.enforceNamingStyle = reader.int32() as any;
-          continue;
-        }
-        case 8: {
-          if (tag !== 64) {
-            break;
-          }
-
-          message.defaultSymbolVisibility = reader.int32() as any;
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseFeatureSet();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.fieldPresence = reader.int32() as any;
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
+
+            message.enumType = reader.int32() as any;
+            continue;
+          }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
+
+            message.repeatedFieldEncoding = reader.int32() as any;
+            continue;
+          }
+          case 4: {
+            if (tag !== 32) {
+              break;
+            }
+
+            message.utf8Validation = reader.int32() as any;
+            continue;
+          }
+          case 5: {
+            if (tag !== 40) {
+              break;
+            }
+
+            message.messageEncoding = reader.int32() as any;
+            continue;
+          }
+          case 6: {
+            if (tag !== 48) {
+              break;
+            }
+
+            message.jsonFormat = reader.int32() as any;
+            continue;
+          }
+          case 7: {
+            if (tag !== 56) {
+              break;
+            }
+
+            message.enforceNamingStyle = reader.int32() as any;
+            continue;
+          }
+          case 8: {
+            if (tag !== 64) {
+              break;
+            }
+
+            message.defaultSymbolVisibility = reader.int32() as any;
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: FeatureSet): unknown {
@@ -2303,18 +2402,27 @@ export const FeatureSet_VisibilityFeature: MessageFns<FeatureSet_VisibilityFeatu
     ): FeatureSet_VisibilityFeature {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseFeatureSet_VisibilityFeature();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseFeatureSet_VisibilityFeature();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(_: FeatureSet_VisibilityFeature): unknown {
