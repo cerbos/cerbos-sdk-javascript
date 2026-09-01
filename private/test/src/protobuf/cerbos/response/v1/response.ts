@@ -431,95 +431,107 @@ export const PlanResourcesResponse: MessageFns<PlanResourcesResponse> = {
   ): PlanResourcesResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePlanResourcesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.requestId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.action = reader.string();
-          continue;
-        }
-        case 9: {
-          if (tag !== 74) {
-            break;
-          }
-
-          message.actions.push(reader.string());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.resourceKind = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.policyVersion = reader.string();
-          continue;
-        }
-        case 5: {
-          if (tag !== 42) {
-            break;
-          }
-
-          message.filter = PlanResourcesFilter.decode(reader, reader.uint32());
-          continue;
-        }
-        case 6: {
-          if (tag !== 50) {
-            break;
-          }
-
-          message.meta = PlanResourcesResponse_Meta.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        }
-        case 7: {
-          if (tag !== 58) {
-            break;
-          }
-
-          message.validationErrors.push(
-            ValidationError.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-        case 8: {
-          if (tag !== 66) {
-            break;
-          }
-
-          message.cerbosCallId = reader.string();
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePlanResourcesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.requestId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.action = reader.string();
+            continue;
+          }
+          case 9: {
+            if (tag !== 74) {
+              break;
+            }
+
+            message.actions.push(reader.string());
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.resourceKind = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.policyVersion = reader.string();
+            continue;
+          }
+          case 5: {
+            if (tag !== 42) {
+              break;
+            }
+
+            message.filter = PlanResourcesFilter.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 6: {
+            if (tag !== 50) {
+              break;
+            }
+
+            message.meta = PlanResourcesResponse_Meta.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+          case 7: {
+            if (tag !== 58) {
+              break;
+            }
+
+            message.validationErrors.push(
+              ValidationError.decode(reader, reader.uint32()),
+            );
+            continue;
+          }
+          case 8: {
+            if (tag !== 66) {
+              break;
+            }
+
+            message.cerbosCallId = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: PlanResourcesResponse): unknown {
@@ -590,48 +602,58 @@ export const PlanResourcesResponse_Meta: MessageFns<PlanResourcesResponse_Meta> 
     ): PlanResourcesResponse_Meta {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBasePlanResourcesResponse_Meta();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.filterDebug = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.matchedScope = reader.string();
-            continue;
-          }
-          case 3: {
-            if (tag !== 26) {
-              break;
-            }
-
-            const entry3 = PlanResourcesResponse_Meta_MatchedScopesEntry.decode(
-              reader,
-              reader.uint32(),
-            );
-            if (entry3.value !== undefined) {
-              message.matchedScopes[entry3.key] = entry3.value;
-            }
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBasePlanResourcesResponse_Meta();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.filterDebug = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.matchedScope = reader.string();
+              continue;
+            }
+            case 3: {
+              if (tag !== 26) {
+                break;
+              }
+
+              const entry3 =
+                PlanResourcesResponse_Meta_MatchedScopesEntry.decode(
+                  reader,
+                  reader.uint32(),
+                );
+              if (entry3.value !== undefined) {
+                message.matchedScopes[entry3.key] = entry3.value;
+              }
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: PlanResourcesResponse_Meta): unknown {
@@ -683,34 +705,44 @@ export const PlanResourcesResponse_Meta_MatchedScopesEntry: MessageFns<PlanResou
     ): PlanResourcesResponse_Meta_MatchedScopesEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBasePlanResourcesResponse_Meta_MatchedScopesEntry();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.key = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.value = reader.string();
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message =
+          createBasePlanResourcesResponse_Meta_MatchedScopesEntry();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.key = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.value = reader.string();
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: PlanResourcesResponse_Meta_MatchedScopesEntry): unknown {
@@ -760,51 +792,61 @@ export const CheckResourceSetResponse: MessageFns<CheckResourceSetResponse> = {
   ): CheckResourceSetResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourceSetResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.requestId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          const entry2 = CheckResourceSetResponse_ResourceInstancesEntry.decode(
-            reader,
-            reader.uint32(),
-          );
-          if (entry2.value !== undefined) {
-            message.resourceInstances[entry2.key] = entry2.value;
-          }
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.meta = CheckResourceSetResponse_Meta.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourceSetResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.requestId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            const entry2 =
+              CheckResourceSetResponse_ResourceInstancesEntry.decode(
+                reader,
+                reader.uint32(),
+              );
+            if (entry2.value !== undefined) {
+              message.resourceInstances[entry2.key] = entry2.value;
+            }
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.meta = CheckResourceSetResponse_Meta.decode(
+              reader,
+              reader.uint32(),
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: CheckResourceSetResponse): unknown {
@@ -862,43 +904,52 @@ export const CheckResourceSetResponse_ActionEffectMap: MessageFns<CheckResourceS
     ): CheckResourceSetResponse_ActionEffectMap {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseCheckResourceSetResponse_ActionEffectMap();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            const entry1 =
-              CheckResourceSetResponse_ActionEffectMap_ActionsEntry.decode(
-                reader,
-                reader.uint32(),
-              );
-            if (entry1.value !== undefined) {
-              message.actions[entry1.key] = entry1.value;
-            }
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.validationErrors.push(
-              ValidationError.decode(reader, reader.uint32()),
-            );
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseCheckResourceSetResponse_ActionEffectMap();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              const entry1 =
+                CheckResourceSetResponse_ActionEffectMap_ActionsEntry.decode(
+                  reader,
+                  reader.uint32(),
+                );
+              if (entry1.value !== undefined) {
+                message.actions[entry1.key] = entry1.value;
+              }
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.validationErrors.push(
+                ValidationError.decode(reader, reader.uint32()),
+              );
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: CheckResourceSetResponse_ActionEffectMap): unknown {
@@ -949,35 +1000,44 @@ export const CheckResourceSetResponse_ActionEffectMap_ActionsEntry: MessageFns<C
     ): CheckResourceSetResponse_ActionEffectMap_ActionsEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message =
-        createBaseCheckResourceSetResponse_ActionEffectMap_ActionsEntry();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.key = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 16) {
-              break;
-            }
-
-            message.value = reader.int32() as any;
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message =
+          createBaseCheckResourceSetResponse_ActionEffectMap_ActionsEntry();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.key = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 16) {
+                break;
+              }
+
+              message.value = reader.int32() as any;
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(
@@ -1021,33 +1081,42 @@ export const CheckResourceSetResponse_Meta: MessageFns<CheckResourceSetResponse_
     ): CheckResourceSetResponse_Meta {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseCheckResourceSetResponse_Meta();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            const entry1 =
-              CheckResourceSetResponse_Meta_ResourceInstancesEntry.decode(
-                reader,
-                reader.uint32(),
-              );
-            if (entry1.value !== undefined) {
-              message.resourceInstances[entry1.key] = entry1.value;
-            }
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseCheckResourceSetResponse_Meta();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              const entry1 =
+                CheckResourceSetResponse_Meta_ResourceInstancesEntry.decode(
+                  reader,
+                  reader.uint32(),
+                );
+              if (entry1.value !== undefined) {
+                message.resourceInstances[entry1.key] = entry1.value;
+              }
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: CheckResourceSetResponse_Meta): unknown {
@@ -1093,34 +1162,43 @@ export const CheckResourceSetResponse_Meta_EffectMeta: MessageFns<CheckResourceS
     ): CheckResourceSetResponse_Meta_EffectMeta {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseCheckResourceSetResponse_Meta_EffectMeta();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.matchedPolicy = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.matchedScope = reader.string();
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseCheckResourceSetResponse_Meta_EffectMeta();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.matchedPolicy = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.matchedScope = reader.string();
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: CheckResourceSetResponse_Meta_EffectMeta): unknown {
@@ -1165,41 +1243,50 @@ export const CheckResourceSetResponse_Meta_ActionMeta: MessageFns<CheckResourceS
     ): CheckResourceSetResponse_Meta_ActionMeta {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseCheckResourceSetResponse_Meta_ActionMeta();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            const entry1 =
-              CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.decode(
-                reader,
-                reader.uint32(),
-              );
-            if (entry1.value !== undefined) {
-              message.actions[entry1.key] = entry1.value;
-            }
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.effectiveDerivedRoles.push(reader.string());
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseCheckResourceSetResponse_Meta_ActionMeta();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              const entry1 =
+                CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry.decode(
+                  reader,
+                  reader.uint32(),
+                );
+              if (entry1.value !== undefined) {
+                message.actions[entry1.key] = entry1.value;
+              }
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.effectiveDerivedRoles.push(reader.string());
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: CheckResourceSetResponse_Meta_ActionMeta): unknown {
@@ -1251,38 +1338,47 @@ export const CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry: MessageFns<C
     ): CheckResourceSetResponse_Meta_ActionMeta_ActionsEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message =
-        createBaseCheckResourceSetResponse_Meta_ActionMeta_ActionsEntry();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.key = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.value = CheckResourceSetResponse_Meta_EffectMeta.decode(
-              reader,
-              reader.uint32(),
-            );
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message =
+          createBaseCheckResourceSetResponse_Meta_ActionMeta_ActionsEntry();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.key = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.value = CheckResourceSetResponse_Meta_EffectMeta.decode(
+                reader,
+                reader.uint32(),
+              );
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(
@@ -1329,38 +1425,47 @@ export const CheckResourceSetResponse_Meta_ResourceInstancesEntry: MessageFns<Ch
     ): CheckResourceSetResponse_Meta_ResourceInstancesEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message =
-        createBaseCheckResourceSetResponse_Meta_ResourceInstancesEntry();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.key = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.value = CheckResourceSetResponse_Meta_ActionMeta.decode(
-              reader,
-              reader.uint32(),
-            );
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message =
+          createBaseCheckResourceSetResponse_Meta_ResourceInstancesEntry();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.key = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.value = CheckResourceSetResponse_Meta_ActionMeta.decode(
+                reader,
+                reader.uint32(),
+              );
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(
@@ -1407,38 +1512,47 @@ export const CheckResourceSetResponse_ResourceInstancesEntry: MessageFns<CheckRe
     ): CheckResourceSetResponse_ResourceInstancesEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message =
-        createBaseCheckResourceSetResponse_ResourceInstancesEntry();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.key = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.value = CheckResourceSetResponse_ActionEffectMap.decode(
-              reader,
-              reader.uint32(),
-            );
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message =
+          createBaseCheckResourceSetResponse_ResourceInstancesEntry();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.key = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.value = CheckResourceSetResponse_ActionEffectMap.decode(
+                reader,
+                reader.uint32(),
+              );
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: CheckResourceSetResponse_ResourceInstancesEntry): unknown {
@@ -1483,39 +1597,48 @@ export const CheckResourceBatchResponse: MessageFns<CheckResourceBatchResponse> 
     ): CheckResourceBatchResponse {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseCheckResourceBatchResponse();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.requestId = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.results.push(
-              CheckResourceBatchResponse_ActionEffectMap.decode(
-                reader,
-                reader.uint32(),
-              ),
-            );
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseCheckResourceBatchResponse();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.requestId = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.results.push(
+                CheckResourceBatchResponse_ActionEffectMap.decode(
+                  reader,
+                  reader.uint32(),
+                ),
+              );
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: CheckResourceBatchResponse): unknown {
@@ -1565,51 +1688,60 @@ export const CheckResourceBatchResponse_ActionEffectMap: MessageFns<CheckResourc
     ): CheckResourceBatchResponse_ActionEffectMap {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseCheckResourceBatchResponse_ActionEffectMap();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.resourceId = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            const entry2 =
-              CheckResourceBatchResponse_ActionEffectMap_ActionsEntry.decode(
-                reader,
-                reader.uint32(),
-              );
-            if (entry2.value !== undefined) {
-              message.actions[entry2.key] = entry2.value;
-            }
-            continue;
-          }
-          case 3: {
-            if (tag !== 26) {
-              break;
-            }
-
-            message.validationErrors.push(
-              ValidationError.decode(reader, reader.uint32()),
-            );
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseCheckResourceBatchResponse_ActionEffectMap();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.resourceId = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              const entry2 =
+                CheckResourceBatchResponse_ActionEffectMap_ActionsEntry.decode(
+                  reader,
+                  reader.uint32(),
+                );
+              if (entry2.value !== undefined) {
+                message.actions[entry2.key] = entry2.value;
+              }
+              continue;
+            }
+            case 3: {
+              if (tag !== 26) {
+                break;
+              }
+
+              message.validationErrors.push(
+                ValidationError.decode(reader, reader.uint32()),
+              );
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: CheckResourceBatchResponse_ActionEffectMap): unknown {
@@ -1663,35 +1795,44 @@ export const CheckResourceBatchResponse_ActionEffectMap_ActionsEntry: MessageFns
     ): CheckResourceBatchResponse_ActionEffectMap_ActionsEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message =
-        createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.key = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 16) {
-              break;
-            }
-
-            message.value = reader.int32() as any;
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message =
+          createBaseCheckResourceBatchResponse_ActionEffectMap_ActionsEntry();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.key = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 16) {
+                break;
+              }
+
+              message.value = reader.int32() as any;
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(
@@ -1738,44 +1879,56 @@ export const CheckResourcesResponse: MessageFns<CheckResourcesResponse> = {
   ): CheckResourcesResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseCheckResourcesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.requestId = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.results.push(
-            CheckResourcesResponse_ResultEntry.decode(reader, reader.uint32()),
-          );
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.cerbosCallId = reader.string();
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseCheckResourcesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.requestId = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.results.push(
+              CheckResourcesResponse_ResultEntry.decode(
+                reader,
+                reader.uint32(),
+              ),
+            );
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.cerbosCallId = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: CheckResourcesResponse): unknown {
@@ -1846,74 +1999,83 @@ export const CheckResourcesResponse_ResultEntry: MessageFns<CheckResourcesRespon
     ): CheckResourcesResponse_ResultEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseCheckResourcesResponse_ResultEntry();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.resource =
-              CheckResourcesResponse_ResultEntry_Resource.decode(
-                reader,
-                reader.uint32(),
-              );
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            const entry2 =
-              CheckResourcesResponse_ResultEntry_ActionsEntry.decode(
-                reader,
-                reader.uint32(),
-              );
-            if (entry2.value !== undefined) {
-              message.actions[entry2.key] = entry2.value;
-            }
-            continue;
-          }
-          case 3: {
-            if (tag !== 26) {
-              break;
-            }
-
-            message.validationErrors.push(
-              ValidationError.decode(reader, reader.uint32()),
-            );
-            continue;
-          }
-          case 4: {
-            if (tag !== 34) {
-              break;
-            }
-
-            message.meta = CheckResourcesResponse_ResultEntry_Meta.decode(
-              reader,
-              reader.uint32(),
-            );
-            continue;
-          }
-          case 5: {
-            if (tag !== 42) {
-              break;
-            }
-
-            message.outputs.push(OutputEntry.decode(reader, reader.uint32()));
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseCheckResourcesResponse_ResultEntry();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.resource =
+                CheckResourcesResponse_ResultEntry_Resource.decode(
+                  reader,
+                  reader.uint32(),
+                );
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              const entry2 =
+                CheckResourcesResponse_ResultEntry_ActionsEntry.decode(
+                  reader,
+                  reader.uint32(),
+                );
+              if (entry2.value !== undefined) {
+                message.actions[entry2.key] = entry2.value;
+              }
+              continue;
+            }
+            case 3: {
+              if (tag !== 26) {
+                break;
+              }
+
+              message.validationErrors.push(
+                ValidationError.decode(reader, reader.uint32()),
+              );
+              continue;
+            }
+            case 4: {
+              if (tag !== 34) {
+                break;
+              }
+
+              message.meta = CheckResourcesResponse_ResultEntry_Meta.decode(
+                reader,
+                reader.uint32(),
+              );
+              continue;
+            }
+            case 5: {
+              if (tag !== 42) {
+                break;
+              }
+
+              message.outputs.push(OutputEntry.decode(reader, reader.uint32()));
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: CheckResourcesResponse_ResultEntry): unknown {
@@ -1981,50 +2143,59 @@ export const CheckResourcesResponse_ResultEntry_Resource: MessageFns<CheckResour
     ): CheckResourcesResponse_ResultEntry_Resource {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseCheckResourcesResponse_ResultEntry_Resource();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.id = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.kind = reader.string();
-            continue;
-          }
-          case 3: {
-            if (tag !== 26) {
-              break;
-            }
-
-            message.policyVersion = reader.string();
-            continue;
-          }
-          case 4: {
-            if (tag !== 34) {
-              break;
-            }
-
-            message.scope = reader.string();
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseCheckResourcesResponse_ResultEntry_Resource();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.id = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.kind = reader.string();
+              continue;
+            }
+            case 3: {
+              if (tag !== 26) {
+                break;
+              }
+
+              message.policyVersion = reader.string();
+              continue;
+            }
+            case 4: {
+              if (tag !== 34) {
+                break;
+              }
+
+              message.scope = reader.string();
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: CheckResourcesResponse_ResultEntry_Resource): unknown {
@@ -2078,41 +2249,50 @@ export const CheckResourcesResponse_ResultEntry_Meta: MessageFns<CheckResourcesR
     ): CheckResourcesResponse_ResultEntry_Meta {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseCheckResourcesResponse_ResultEntry_Meta();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            const entry1 =
-              CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.decode(
-                reader,
-                reader.uint32(),
-              );
-            if (entry1.value !== undefined) {
-              message.actions[entry1.key] = entry1.value;
-            }
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.effectiveDerivedRoles.push(reader.string());
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseCheckResourcesResponse_ResultEntry_Meta();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              const entry1 =
+                CheckResourcesResponse_ResultEntry_Meta_ActionsEntry.decode(
+                  reader,
+                  reader.uint32(),
+                );
+              if (entry1.value !== undefined) {
+                message.actions[entry1.key] = entry1.value;
+              }
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.effectiveDerivedRoles.push(reader.string());
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: CheckResourcesResponse_ResultEntry_Meta): unknown {
@@ -2162,35 +2342,44 @@ export const CheckResourcesResponse_ResultEntry_Meta_EffectMeta: MessageFns<Chec
     ): CheckResourcesResponse_ResultEntry_Meta_EffectMeta {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message =
-        createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.matchedPolicy = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.matchedScope = reader.string();
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message =
+          createBaseCheckResourcesResponse_ResultEntry_Meta_EffectMeta();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.matchedPolicy = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.matchedScope = reader.string();
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(
@@ -2235,39 +2424,48 @@ export const CheckResourcesResponse_ResultEntry_Meta_ActionsEntry: MessageFns<Ch
     ): CheckResourcesResponse_ResultEntry_Meta_ActionsEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message =
-        createBaseCheckResourcesResponse_ResultEntry_Meta_ActionsEntry();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.key = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.value =
-              CheckResourcesResponse_ResultEntry_Meta_EffectMeta.decode(
-                reader,
-                reader.uint32(),
-              );
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message =
+          createBaseCheckResourcesResponse_ResultEntry_Meta_ActionsEntry();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.key = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.value =
+                CheckResourcesResponse_ResultEntry_Meta_EffectMeta.decode(
+                  reader,
+                  reader.uint32(),
+                );
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(
@@ -2311,35 +2509,44 @@ export const CheckResourcesResponse_ResultEntry_ActionsEntry: MessageFns<CheckRe
     ): CheckResourcesResponse_ResultEntry_ActionsEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message =
-        createBaseCheckResourcesResponse_ResultEntry_ActionsEntry();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.key = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 16) {
-              break;
-            }
-
-            message.value = reader.int32() as any;
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message =
+          createBaseCheckResourcesResponse_ResultEntry_ActionsEntry();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.key = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 16) {
+                break;
+              }
+
+              message.value = reader.int32() as any;
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: CheckResourcesResponse_ResultEntry_ActionsEntry): unknown {
@@ -2376,26 +2583,35 @@ export const AddOrUpdatePolicyResponse: MessageFns<AddOrUpdatePolicyResponse> =
     ): AddOrUpdatePolicyResponse {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseAddOrUpdatePolicyResponse();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.success = Empty.decode(reader, reader.uint32());
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseAddOrUpdatePolicyResponse();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.success = Empty.decode(reader, reader.uint32());
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: AddOrUpdatePolicyResponse): unknown {
@@ -2440,43 +2656,52 @@ export const ListAuditLogEntriesResponse: MessageFns<ListAuditLogEntriesResponse
     ): ListAuditLogEntriesResponse {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseListAuditLogEntriesResponse();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.entry = {
-              $case: "accessLogEntry",
-              accessLogEntry: AccessLogEntry.decode(reader, reader.uint32()),
-            };
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.entry = {
-              $case: "decisionLogEntry",
-              decisionLogEntry: DecisionLogEntry.decode(
-                reader,
-                reader.uint32(),
-              ),
-            };
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseListAuditLogEntriesResponse();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.entry = {
+                $case: "accessLogEntry",
+                accessLogEntry: AccessLogEntry.decode(reader, reader.uint32()),
+              };
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.entry = {
+                $case: "decisionLogEntry",
+                decisionLogEntry: DecisionLogEntry.decode(
+                  reader,
+                  reader.uint32(),
+                ),
+              };
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: ListAuditLogEntriesResponse): unknown {
@@ -2521,42 +2746,51 @@ export const ServerInfoResponse: MessageFns<ServerInfoResponse> = {
   ): ServerInfoResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseServerInfoResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.version = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.commit = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.buildDate = reader.string();
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseServerInfoResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.version = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.commit = reader.string();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.buildDate = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: ServerInfoResponse): unknown {
@@ -2595,26 +2829,35 @@ export const ListPoliciesResponse: MessageFns<ListPoliciesResponse> = {
   ): ListPoliciesResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseListPoliciesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.policyIds.push(reader.string());
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseListPoliciesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.policyIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: ListPoliciesResponse): unknown {
@@ -2644,26 +2887,35 @@ export const GetPolicyResponse: MessageFns<GetPolicyResponse> = {
   decode(input: BinaryReader | Uint8Array, length?: number): GetPolicyResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetPolicyResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.policies.push(Policy.decode(reader, reader.uint32()));
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseGetPolicyResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.policies.push(Policy.decode(reader, reader.uint32()));
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: GetPolicyResponse): unknown {
@@ -2696,26 +2948,35 @@ export const DeletePolicyResponse: MessageFns<DeletePolicyResponse> = {
   ): DeletePolicyResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDeletePolicyResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
-          }
-
-          message.deletedPolicies = reader.uint32();
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseDeletePolicyResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.deletedPolicies = reader.uint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: DeletePolicyResponse): unknown {
@@ -2748,26 +3009,35 @@ export const DisablePolicyResponse: MessageFns<DisablePolicyResponse> = {
   ): DisablePolicyResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDisablePolicyResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
-          }
-
-          message.disabledPolicies = reader.uint32();
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseDisablePolicyResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.disabledPolicies = reader.uint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: DisablePolicyResponse): unknown {
@@ -2800,26 +3070,35 @@ export const EnablePolicyResponse: MessageFns<EnablePolicyResponse> = {
   ): EnablePolicyResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEnablePolicyResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
-          }
-
-          message.enabledPolicies = reader.uint32();
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseEnablePolicyResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.enabledPolicies = reader.uint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: EnablePolicyResponse): unknown {
@@ -2857,32 +3136,41 @@ export const InspectPoliciesResponse: MessageFns<InspectPoliciesResponse> = {
   ): InspectPoliciesResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseInspectPoliciesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          const entry1 = InspectPoliciesResponse_ResultsEntry.decode(
-            reader,
-            reader.uint32(),
-          );
-          if (entry1.value !== undefined) {
-            message.results[entry1.key] = entry1.value;
-          }
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseInspectPoliciesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            const entry1 = InspectPoliciesResponse_ResultsEntry.decode(
+              reader,
+              reader.uint32(),
+            );
+            if (entry1.value !== undefined) {
+              message.results[entry1.key] = entry1.value;
+            }
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: InspectPoliciesResponse): unknown {
@@ -2928,34 +3216,43 @@ export const InspectPoliciesResponse_Attribute: MessageFns<InspectPoliciesRespon
     ): InspectPoliciesResponse_Attribute {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseInspectPoliciesResponse_Attribute();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 8) {
-              break;
-            }
-
-            message.kind = reader.int32() as any;
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.name = reader.string();
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseInspectPoliciesResponse_Attribute();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 8) {
+                break;
+              }
+
+              message.kind = reader.int32() as any;
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.name = reader.string();
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: InspectPoliciesResponse_Attribute): unknown {
@@ -2998,42 +3295,51 @@ export const InspectPoliciesResponse_DerivedRole: MessageFns<InspectPoliciesResp
     ): InspectPoliciesResponse_DerivedRole {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseInspectPoliciesResponse_DerivedRole();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.name = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 16) {
-              break;
-            }
-
-            message.kind = reader.int32() as any;
-            continue;
-          }
-          case 3: {
-            if (tag !== 26) {
-              break;
-            }
-
-            message.source = reader.string();
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseInspectPoliciesResponse_DerivedRole();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.name = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 16) {
+                break;
+              }
+
+              message.kind = reader.int32() as any;
+              continue;
+            }
+            case 3: {
+              if (tag !== 26) {
+                break;
+              }
+
+              message.source = reader.string();
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: InspectPoliciesResponse_DerivedRole): unknown {
@@ -3088,58 +3394,69 @@ export const InspectPoliciesResponse_Constant: MessageFns<InspectPoliciesRespons
     ): InspectPoliciesResponse_Constant {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseInspectPoliciesResponse_Constant();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.name = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.value = Value.unwrap(Value.decode(reader, reader.uint32()));
-            continue;
-          }
-          case 3: {
-            if (tag !== 24) {
-              break;
-            }
-
-            message.kind = reader.int32() as any;
-            continue;
-          }
-          case 4: {
-            if (tag !== 34) {
-              break;
-            }
-
-            message.source = reader.string();
-            continue;
-          }
-          case 5: {
-            if (tag !== 40) {
-              break;
-            }
-
-            message.used = reader.bool();
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseInspectPoliciesResponse_Constant();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.name = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.value = Value.unwrap(
+                Value.decode(reader, reader.uint32()),
+              );
+              continue;
+            }
+            case 3: {
+              if (tag !== 24) {
+                break;
+              }
+
+              message.kind = reader.int32() as any;
+              continue;
+            }
+            case 4: {
+              if (tag !== 34) {
+                break;
+              }
+
+              message.source = reader.string();
+              continue;
+            }
+            case 5: {
+              if (tag !== 40) {
+                break;
+              }
+
+              message.used = reader.bool();
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: InspectPoliciesResponse_Constant): unknown {
@@ -3197,58 +3514,67 @@ export const InspectPoliciesResponse_Variable: MessageFns<InspectPoliciesRespons
     ): InspectPoliciesResponse_Variable {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseInspectPoliciesResponse_Variable();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.name = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.value = reader.string();
-            continue;
-          }
-          case 3: {
-            if (tag !== 24) {
-              break;
-            }
-
-            message.kind = reader.int32() as any;
-            continue;
-          }
-          case 4: {
-            if (tag !== 34) {
-              break;
-            }
-
-            message.source = reader.string();
-            continue;
-          }
-          case 5: {
-            if (tag !== 40) {
-              break;
-            }
-
-            message.used = reader.bool();
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseInspectPoliciesResponse_Variable();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.name = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.value = reader.string();
+              continue;
+            }
+            case 3: {
+              if (tag !== 24) {
+                break;
+              }
+
+              message.kind = reader.int32() as any;
+              continue;
+            }
+            case 4: {
+              if (tag !== 34) {
+                break;
+              }
+
+              message.source = reader.string();
+              continue;
+            }
+            case 5: {
+              if (tag !== 40) {
+                break;
+              }
+
+              message.used = reader.bool();
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: InspectPoliciesResponse_Variable): unknown {
@@ -3328,77 +3654,95 @@ export const InspectPoliciesResponse_Result: MessageFns<InspectPoliciesResponse_
     ): InspectPoliciesResponse_Result {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseInspectPoliciesResponse_Result();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.actions.push(reader.string());
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.variables.push(
-              InspectPoliciesResponse_Variable.decode(reader, reader.uint32()),
-            );
-            continue;
-          }
-          case 3: {
-            if (tag !== 26) {
-              break;
-            }
-
-            message.policyId = reader.string();
-            continue;
-          }
-          case 4: {
-            if (tag !== 34) {
-              break;
-            }
-
-            message.derivedRoles.push(
-              InspectPoliciesResponse_DerivedRole.decode(
-                reader,
-                reader.uint32(),
-              ),
-            );
-            continue;
-          }
-          case 5: {
-            if (tag !== 42) {
-              break;
-            }
-
-            message.attributes.push(
-              InspectPoliciesResponse_Attribute.decode(reader, reader.uint32()),
-            );
-            continue;
-          }
-          case 6: {
-            if (tag !== 50) {
-              break;
-            }
-
-            message.constants.push(
-              InspectPoliciesResponse_Constant.decode(reader, reader.uint32()),
-            );
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseInspectPoliciesResponse_Result();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.actions.push(reader.string());
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.variables.push(
+                InspectPoliciesResponse_Variable.decode(
+                  reader,
+                  reader.uint32(),
+                ),
+              );
+              continue;
+            }
+            case 3: {
+              if (tag !== 26) {
+                break;
+              }
+
+              message.policyId = reader.string();
+              continue;
+            }
+            case 4: {
+              if (tag !== 34) {
+                break;
+              }
+
+              message.derivedRoles.push(
+                InspectPoliciesResponse_DerivedRole.decode(
+                  reader,
+                  reader.uint32(),
+                ),
+              );
+              continue;
+            }
+            case 5: {
+              if (tag !== 42) {
+                break;
+              }
+
+              message.attributes.push(
+                InspectPoliciesResponse_Attribute.decode(
+                  reader,
+                  reader.uint32(),
+                ),
+              );
+              continue;
+            }
+            case 6: {
+              if (tag !== 50) {
+                break;
+              }
+
+              message.constants.push(
+                InspectPoliciesResponse_Constant.decode(
+                  reader,
+                  reader.uint32(),
+                ),
+              );
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: InspectPoliciesResponse_Result): unknown {
@@ -3461,37 +3805,46 @@ export const InspectPoliciesResponse_ResultsEntry: MessageFns<InspectPoliciesRes
     ): InspectPoliciesResponse_ResultsEntry {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseInspectPoliciesResponse_ResultsEntry();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 10) {
-              break;
-            }
-
-            message.key = reader.string();
-            continue;
-          }
-          case 2: {
-            if (tag !== 18) {
-              break;
-            }
-
-            message.value = InspectPoliciesResponse_Result.decode(
-              reader,
-              reader.uint32(),
-            );
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseInspectPoliciesResponse_ResultsEntry();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 10) {
+                break;
+              }
+
+              message.key = reader.string();
+              continue;
+            }
+            case 2: {
+              if (tag !== 18) {
+                break;
+              }
+
+              message.value = InspectPoliciesResponse_Result.decode(
+                reader,
+                reader.uint32(),
+              );
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: InspectPoliciesResponse_ResultsEntry): unknown {
@@ -3525,18 +3878,27 @@ export const AddOrUpdateSchemaResponse: MessageFns<AddOrUpdateSchemaResponse> =
     ): AddOrUpdateSchemaResponse {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBaseAddOrUpdateSchemaResponse();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseAddOrUpdateSchemaResponse();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(_: AddOrUpdateSchemaResponse): unknown {
@@ -3566,26 +3928,35 @@ export const ListSchemasResponse: MessageFns<ListSchemasResponse> = {
   ): ListSchemasResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseListSchemasResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.schemaIds.push(reader.string());
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseListSchemasResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.schemaIds.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: ListSchemasResponse): unknown {
@@ -3615,26 +3986,35 @@ export const GetSchemaResponse: MessageFns<GetSchemaResponse> = {
   decode(input: BinaryReader | Uint8Array, length?: number): GetSchemaResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetSchemaResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.schemas.push(Schema.decode(reader, reader.uint32()));
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseGetSchemaResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.schemas.push(Schema.decode(reader, reader.uint32()));
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: GetSchemaResponse): unknown {
@@ -3667,26 +4047,35 @@ export const DeleteSchemaResponse: MessageFns<DeleteSchemaResponse> = {
   ): DeleteSchemaResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDeleteSchemaResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break;
-          }
-
-          message.deletedSchemas = reader.uint32();
-          continue;
-        }
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseDeleteSchemaResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.deletedSchemas = reader.uint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(message: DeleteSchemaResponse): unknown {
@@ -3716,18 +4105,27 @@ export const ReloadStoreResponse: MessageFns<ReloadStoreResponse> = {
   ): ReloadStoreResponse {
     const reader =
       input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseReloadStoreResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skip(tag & 7);
+    const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+    if (previousRecursionDepth >= 100) {
+      throw new globalThis.Error("protobuf decode recursion limit exceeded");
     }
-    return message;
+    (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+    try {
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseReloadStoreResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    } finally {
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+    }
   },
 
   toJSON(_: ReloadStoreResponse): unknown {
@@ -3758,26 +4156,35 @@ export const PurgeStoreRevisionsResponse: MessageFns<PurgeStoreRevisionsResponse
     ): PurgeStoreRevisionsResponse {
       const reader =
         input instanceof BinaryReader ? input : new BinaryReader(input);
-      const end = length === undefined ? reader.len : reader.pos + length;
-      const message = createBasePurgeStoreRevisionsResponse();
-      while (reader.pos < end) {
-        const tag = reader.uint32();
-        switch (tag >>> 3) {
-          case 1: {
-            if (tag !== 8) {
-              break;
-            }
-
-            message.affectedRows = reader.uint32();
-            continue;
-          }
-        }
-        if ((tag & 7) === 4 || tag === 0) {
-          break;
-        }
-        reader.skip(tag & 7);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
       }
-      return message;
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBasePurgeStoreRevisionsResponse();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+            case 1: {
+              if (tag !== 8) {
+                break;
+              }
+
+              message.affectedRows = reader.uint32();
+              continue;
+            }
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
     },
 
     toJSON(message: PurgeStoreRevisionsResponse): unknown {
