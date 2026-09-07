@@ -265,14 +265,14 @@ importers:
   packages/api:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.14.0
-        version: 2.14.0
+        specifier: ^2.14.1
+        version: 2.14.1
 
   packages/core:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.14.0
-        version: 2.14.0
+        specifier: ^2.14.1
+        version: 2.14.1
       '@cerbos/api':
         specifier: ^0.11.0
         version: link:../api
@@ -283,11 +283,11 @@ importers:
   packages/embedded-client:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.14.0
-        version: 2.14.0
+        specifier: ^2.14.1
+        version: 2.14.1
       '@bufbuild/protovalidate':
         specifier: ^1.2.0
-        version: 1.2.0(@bufbuild/protobuf@2.14.0)
+        version: 1.2.0(@bufbuild/protobuf@2.14.1)
       '@cerbos/api':
         specifier: ^0.11.0
         version: link:../api
@@ -296,7 +296,7 @@ importers:
         version: link:../core
       '@cerbos/embedded-server':
         specifier: ^0.7.1
-        version: 0.7.1(@bufbuild/protobuf@2.14.0)(@cerbos/api@packages+api)
+        version: 0.7.1(@bufbuild/protobuf@2.14.1)(@cerbos/api@packages+api)
       '@cerbos/hub':
         specifier: ^0.6.1
         version: link:../hub
@@ -307,8 +307,8 @@ importers:
   packages/files:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.14.0
-        version: 2.14.0
+        specifier: ^2.14.1
+        version: 2.14.1
       '@cerbos/api':
         specifier: ^0.11.0
         version: link:../api
@@ -322,8 +322,8 @@ importers:
   packages/grpc:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.14.0
-        version: 2.14.0
+        specifier: ^2.14.1
+        version: 2.14.1
       '@cerbos/api':
         specifier: ^0.11.0
         version: link:../api
@@ -337,8 +337,8 @@ importers:
   packages/http:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.14.0
-        version: 2.14.0
+        specifier: ^2.14.1
+        version: 2.14.1
       '@cerbos/api':
         specifier: ^0.11.0
         version: link:../api
@@ -349,29 +349,29 @@ importers:
   packages/hub:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.14.0
-        version: 2.14.0
+        specifier: ^2.14.1
+        version: 2.14.1
       '@cerbos/core':
         specifier: ^0.33.0
         version: link:../core
       '@connectrpc/connect':
         specifier: ^2.1.2
-        version: 2.1.2(@bufbuild/protobuf@2.14.0)
+        version: 2.1.2(@bufbuild/protobuf@2.14.1)
       '@connectrpc/connect-node':
         specifier: ^2.1.2
-        version: 2.1.2(@bufbuild/protobuf@2.14.0)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.0))
+        version: 2.1.2(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))
       '@connectrpc/connect-web':
         specifier: ^2.1.2
-        version: 2.1.2(@bufbuild/protobuf@2.14.0)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.0))
+        version: 2.1.2(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))
       '@connectrpc/validate':
         specifier: ^0.2.0
-        version: 0.2.0(@bufbuild/protobuf@2.14.0)(@bufbuild/protovalidate@1.2.0(@bufbuild/protobuf@2.14.0))(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.0))
+        version: 0.2.0(@bufbuild/protobuf@2.14.1)(@bufbuild/protovalidate@1.2.0(@bufbuild/protobuf@2.14.1))(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))
 
   packages/opentelemetry:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^2.14.0
-        version: 2.14.0
+        specifier: ^2.14.1
+        version: 2.14.1
       '@cerbos/api':
         specifier: ^0.11.0
         version: link:../api
@@ -382,8 +382,8 @@ importers:
         specifier: ^1.9.1
         version: 1.9.1
       '@opentelemetry/instrumentation':
-        specifier: ^0.221.0
-        version: 0.221.0(@opentelemetry/api@1.9.1)(supports-color@7.2.0)
+        specifier: ^0.222.0
+        version: 0.222.0(@opentelemetry/api@1.9.1)(supports-color@7.2.0)
       '@opentelemetry/semantic-conventions':
         specifier: ^1.43.0
         version: 1.43.0
@@ -464,8 +464,8 @@ importers:
   private/test:
     devDependencies:
       '@bufbuild/protobuf':
-        specifier: 2.14.0
-        version: 2.14.0
+        specifier: 2.14.1
+        version: 2.14.1
       '@cerbos/api':
         specifier: workspace:*
         version: link:../../packages/api
@@ -477,7 +477,7 @@ importers:
         version: link:../../packages/embedded-client
       '@cerbos/embedded-server':
         specifier: 0.7.1
-        version: 0.7.1(@bufbuild/protobuf@2.14.0)(@cerbos/api@packages+api)
+        version: 0.7.1(@bufbuild/protobuf@2.14.1)(@cerbos/api@packages+api)
       '@cerbos/files':
         specifier: workspace:*
         version: link:../../packages/files
@@ -498,10 +498,10 @@ importers:
         version: link:../../packages/react
       '@connectrpc/connect':
         specifier: 2.1.2
-        version: 2.1.2(@bufbuild/protobuf@2.14.0)
+        version: 2.1.2(@bufbuild/protobuf@2.14.1)
       '@connectrpc/connect-node':
         specifier: 2.1.2
-        version: 2.1.2(@bufbuild/protobuf@2.14.0)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.0))
+        version: 2.1.2(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))
       '@grpc/grpc-js':
         specifier: 1.14.4
         version: 1.14.4
@@ -716,6 +716,9 @@ packages:
 
   '@bufbuild/protobuf@2.14.0':
     resolution: {integrity: sha512-C3UGsiCwSprE2NKIIFA3hCDlpXTMCAXRZuEVp88L1GY36Y41+rYL5fryE+nOFhp4p4JPQvdV8PQ4DWgHgeTE+w==}
+
+  '@bufbuild/protobuf@2.14.1':
+    resolution: {integrity: sha512-agRJn3+EJDUe8AvxTx/LnHA/GErvLE62pSaSk7+MwFOtOv8eWBu/qCq2qoZjBjVZ3C2aiFJCveuSs17KMkYGOw==}
 
   '@bufbuild/protoc-gen-es@2.14.0':
     resolution: {integrity: sha512-/Rrui0BJWSRONiKGYzqWq9ivGN3+cYkmc47QWITufr7K6yDb8HfssuJUSQZeptyg/rHbHrfDzCUjzoJ2pwuafg==}
@@ -1081,8 +1084,8 @@ packages:
       '@emnapi/core': ^1.7.1 || ^2.0.0-alpha.4
       '@emnapi/runtime': ^1.7.1 || ^2.0.0-alpha.4
 
-  '@opentelemetry/api-logs@0.221.0':
-    resolution: {integrity: sha512-OlanaW1vv7ufTqQ3/fPLI4arGt5ZoM+P8abOMki6uEYnpRazepSWDwDnnw+la7kE26SHVC18//SMccrDvLKOXQ==}
+  '@opentelemetry/api-logs@0.222.0':
+    resolution: {integrity: sha512-9mb1If+IF6u0ZVXkHQ6ogEae5HwA6ajIVUgpSDQyRASxft6BSXHvBvPooRle3yFN/fKnCdSOnuu0OC3PLcF6+g==}
     engines: {node: '>=8.0.0'}
 
   '@opentelemetry/api@1.9.1':
@@ -1101,8 +1104,8 @@ packages:
     peerDependencies:
       '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
-  '@opentelemetry/instrumentation@0.221.0':
-    resolution: {integrity: sha512-cCk80Z/iRDf/5gfsKMB4f74LqVA5yKETB/9ojPzVW/6/f70iu89nJvGxsFCxx4XfSohaOofkU19kiYm84AiAlw==}
+  '@opentelemetry/instrumentation@0.222.0':
+    resolution: {integrity: sha512-fhbRDuAgzPKpq1k5+hX3uS+3QAYNca0on0Ngot/R8dDsQtuFaADeZnG2uSgxABuvcI7S2phAaRhbct9jieeKZw==}
     engines: {node: ^18.19.0 || >=20.6.0}
     peerDependencies:
       '@opentelemetry/api': ^1.3.0
@@ -3385,16 +3388,18 @@ snapshots:
       '@bufbuild/buf-win32-arm64': 1.72.0
       '@bufbuild/buf-win32-x64': 1.72.0
 
-  '@bufbuild/cel-spec@0.4.0(@bufbuild/protobuf@2.14.0)':
+  '@bufbuild/cel-spec@0.4.0(@bufbuild/protobuf@2.14.1)':
     dependencies:
-      '@bufbuild/protobuf': 2.14.0
+      '@bufbuild/protobuf': 2.14.1
 
-  '@bufbuild/cel@0.4.0(@bufbuild/protobuf@2.14.0)':
+  '@bufbuild/cel@0.4.0(@bufbuild/protobuf@2.14.1)':
     dependencies:
-      '@bufbuild/cel-spec': 0.4.0(@bufbuild/protobuf@2.14.0)
-      '@bufbuild/protobuf': 2.14.0
+      '@bufbuild/cel-spec': 0.4.0(@bufbuild/protobuf@2.14.1)
+      '@bufbuild/protobuf': 2.14.1
 
   '@bufbuild/protobuf@2.14.0': {}
+
+  '@bufbuild/protobuf@2.14.1': {}
 
   '@bufbuild/protoc-gen-es@2.14.0(@bufbuild/protobuf@2.14.0)(supports-color@7.2.0)':
     dependencies:
@@ -3412,38 +3417,38 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@bufbuild/protovalidate@1.2.0(@bufbuild/protobuf@2.14.0)':
+  '@bufbuild/protovalidate@1.2.0(@bufbuild/protobuf@2.14.1)':
     dependencies:
-      '@bufbuild/cel': 0.4.0(@bufbuild/protobuf@2.14.0)
-      '@bufbuild/protobuf': 2.14.0
+      '@bufbuild/cel': 0.4.0(@bufbuild/protobuf@2.14.1)
+      '@bufbuild/protobuf': 2.14.1
 
-  '@cerbos/embedded-server@0.7.1(@bufbuild/protobuf@2.14.0)(@cerbos/api@packages+api)':
+  '@cerbos/embedded-server@0.7.1(@bufbuild/protobuf@2.14.1)(@cerbos/api@packages+api)':
     dependencies:
-      '@bufbuild/protobuf': 2.14.0
+      '@bufbuild/protobuf': 2.14.1
       '@cerbos/api': link:packages/api
 
   '@colors/colors@1.5.0':
     optional: true
 
-  '@connectrpc/connect-node@2.1.2(@bufbuild/protobuf@2.14.0)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.0))':
+  '@connectrpc/connect-node@2.1.2(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))':
     dependencies:
-      '@bufbuild/protobuf': 2.14.0
-      '@connectrpc/connect': 2.1.2(@bufbuild/protobuf@2.14.0)
+      '@bufbuild/protobuf': 2.14.1
+      '@connectrpc/connect': 2.1.2(@bufbuild/protobuf@2.14.1)
 
-  '@connectrpc/connect-web@2.1.2(@bufbuild/protobuf@2.14.0)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.0))':
+  '@connectrpc/connect-web@2.1.2(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))':
     dependencies:
-      '@bufbuild/protobuf': 2.14.0
-      '@connectrpc/connect': 2.1.2(@bufbuild/protobuf@2.14.0)
+      '@bufbuild/protobuf': 2.14.1
+      '@connectrpc/connect': 2.1.2(@bufbuild/protobuf@2.14.1)
 
-  '@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.0)':
+  '@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1)':
     dependencies:
-      '@bufbuild/protobuf': 2.14.0
+      '@bufbuild/protobuf': 2.14.1
 
-  '@connectrpc/validate@0.2.0(@bufbuild/protobuf@2.14.0)(@bufbuild/protovalidate@1.2.0(@bufbuild/protobuf@2.14.0))(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.0))':
+  '@connectrpc/validate@0.2.0(@bufbuild/protobuf@2.14.1)(@bufbuild/protovalidate@1.2.0(@bufbuild/protobuf@2.14.1))(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))':
     dependencies:
-      '@bufbuild/protobuf': 2.14.0
-      '@bufbuild/protovalidate': 1.2.0(@bufbuild/protobuf@2.14.0)
-      '@connectrpc/connect': 2.1.2(@bufbuild/protobuf@2.14.0)
+      '@bufbuild/protobuf': 2.14.1
+      '@bufbuild/protovalidate': 1.2.0(@bufbuild/protobuf@2.14.1)
+      '@connectrpc/connect': 2.1.2(@bufbuild/protobuf@2.14.1)
 
   '@csstools/color-helpers@6.1.1': {}
 
@@ -3667,7 +3672,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.3
     optional: true
 
-  '@opentelemetry/api-logs@0.221.0':
+  '@opentelemetry/api-logs@0.222.0':
     dependencies:
       '@opentelemetry/api': 1.9.1
 
@@ -3682,10 +3687,10 @@ snapshots:
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/semantic-conventions': 1.43.0
 
-  '@opentelemetry/instrumentation@0.221.0(@opentelemetry/api@1.9.1)(supports-color@7.2.0)':
+  '@opentelemetry/instrumentation@0.222.0(@opentelemetry/api@1.9.1)(supports-color@7.2.0)':
     dependencies:
       '@opentelemetry/api': 1.9.1
-      '@opentelemetry/api-logs': 0.221.0
+      '@opentelemetry/api-logs': 0.222.0
       import-in-the-middle: 3.3.3
       require-in-the-middle: 8.0.1(supports-color@7.2.0)
     transitivePeerDependencies:
@@ -5361,11 +5366,11 @@ snapshots:
 
   ts-proto-descriptors@2.1.0:
     dependencies:
-      '@bufbuild/protobuf': 2.14.0
+      '@bufbuild/protobuf': 2.14.1
 
   ts-proto@2.12.1:
     dependencies:
-      '@bufbuild/protobuf': 2.14.0
+      '@bufbuild/protobuf': 2.14.1
       case-anything: 2.1.13
       ts-poet: 6.12.0
       ts-proto-descriptors: 2.1.0
