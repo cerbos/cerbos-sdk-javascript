@@ -22,10 +22,10 @@ jobs:
           persist-credentials: false
 
       - name: Cache dependencies
-        uses: ./.github/actions/setup-node
+        uses: $/.github/actions/setup-node
 
       - name: Lint
-        uses: ./.github/actions/lint
+        uses: $/.github/actions/lint
         with:
           github-app-client-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
           github-app-private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}

@@ -24,7 +24,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js
-        uses: ./.github/actions/setup-node
+        uses: $/.github/actions/setup-node
         with:
           cache: false
 
@@ -33,6 +33,6 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure()
-        uses: cerbos/actions/notify-slack@e430738da1a60ed8a0522c94f6bd13b1e289ac65 # main
+        uses: cerbos/actions/notify-slack@0d9b5e1ccb075eb3b6817a6f1718b9c189498c0a # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}

@@ -4,7 +4,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.24.0",
+      "version": "11.25.0",
       "onFail": "download"
     },
     "runtime": {
@@ -55,7 +55,7 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.5",
     "@bufbuild/buf": "1.72.0",
-    "@bufbuild/protoc-gen-es": "2.14.0",
+    "@bufbuild/protoc-gen-es": "2.14.1",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@tsconfig/node22": "22.0.6",
     "@tsconfig/strictest": "2.0.8",
@@ -67,7 +67,7 @@
     "prettier": "3.9.6",
     "prettier-plugin-pkg": "0.22.1",
     "ts-proto": "2.12.1",
-    "tsx": "4.23.12",
+    "tsx": "4.23.13",
     "typedoc": "0.28.20",
     "typedoc-plugin-mdn-links": "5.1.1",
     "typescript": "npm:@typescript/typescript6@6.0.2"

@@ -6,11 +6,11 @@
     "@types/semver": "7.8.0",
     "date-fns": "4.4.0",
     "execa": "10.0.1",
-    "node-html-parser": "9.0.1",
+    "node-html-parser": "9.0.2",
     "prettier": "3.9.6",
     "semver": "7.8.5",
     "typedoc": "0.28.20",
     "yaml": "2.9.0",
-    "zod": "4.4.3"
+    "zod": "4.5.4"
   }
 }

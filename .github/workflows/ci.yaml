@@ -39,10 +39,10 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js
-        uses: ./.github/actions/setup-node
+        uses: $/.github/actions/setup-node
 
       - name: Lint
-        uses: ./.github/actions/lint
+        uses: $/.github/actions/lint
         with:
           github-app-client-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
           github-app-private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
@@ -51,7 +51,7 @@ jobs:
         run: pnpm run generate
 
       - name: Check for uncommitted changes
-        uses: cerbos/actions/check-repo-status@e430738da1a60ed8a0522c94f6bd13b1e289ac65 # main
+        uses: cerbos/actions/check-repo-status@0d9b5e1ccb075eb3b6817a6f1718b9c189498c0a # main
 
   test-matrix:
     name: Generate test matrix
@@ -65,7 +65,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js
-        uses: ./.github/actions/setup-node
+        uses: $/.github/actions/setup-node
 
       - id: test-matrix
         name: Generate test matrix
@@ -89,7 +89,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js
-        uses: ./.github/actions/setup-node
+        uses: $/.github/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
 
@@ -119,7 +119,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js
-        uses: ./.github/actions/setup-node
+        uses: $/.github/actions/setup-node
         with:
           node-version: ${{ matrix.node }}
 
@@ -145,6 +145,6 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure() && github.event_name == 'schedule'
-        uses: cerbos/actions/notify-slack@e430738da1a60ed8a0522c94f6bd13b1e289ac65 # main
+        uses: cerbos/actions/notify-slack@0d9b5e1ccb075eb3b6817a6f1718b9c189498c0a # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}
