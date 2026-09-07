@@ -22,7 +22,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js
-        uses: ./.github/actions/setup-node
+        uses: $/.github/actions/setup-node
 
       - name: Update protos
         run: pnpm run proto
@@ -31,7 +31,7 @@ jobs:
         run: pnpm run generate
 
       - name: Create pull request
-        uses: cerbos/actions/create-pull-request@8831726fc1a57acfc5b19850a76ce006e14861ae # main
+        uses: cerbos/actions/create-pull-request@0d9b5e1ccb075eb3b6817a6f1718b9c189498c0a # main
         with:
           client-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
           private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
@@ -47,6 +47,6 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure()
-        uses: cerbos/actions/notify-slack@8831726fc1a57acfc5b19850a76ce006e14861ae # main
+        uses: cerbos/actions/notify-slack@0d9b5e1ccb075eb3b6817a6f1718b9c189498c0a # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}

@@ -27,7 +27,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js
-        uses: ./.github/actions/setup-node
+        uses: $/.github/actions/setup-node
 
       - name: Generate docs
         run: pnpm run docs
@@ -46,7 +46,7 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure()
-        uses: cerbos/actions/notify-slack@8831726fc1a57acfc5b19850a76ce006e14861ae # main
+        uses: cerbos/actions/notify-slack@0d9b5e1ccb075eb3b6817a6f1718b9c189498c0a # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}
 
@@ -67,6 +67,6 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure()
-        uses: cerbos/actions/notify-slack@8831726fc1a57acfc5b19850a76ce006e14861ae # main
+        uses: cerbos/actions/notify-slack@0d9b5e1ccb075eb3b6817a6f1718b9c189498c0a # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}
