@@ -91,7 +91,7 @@ jobs:
       - name: Set up Node.js
         uses: $/.github/actions/setup-node
         with:
-          node-version: ${{ matrix.node }}
+          runtime: node@${{ matrix.node }}
 
       - name: Set up tests
         if: matrix.setup
@@ -121,7 +121,7 @@ jobs:
       - name: Set up Node.js
         uses: $/.github/actions/setup-node
         with:
-          node-version: ${{ matrix.node }}
+          runtime: node@${{ matrix.node }}
 
       - name: Set up tests
         if: matrix.setup
