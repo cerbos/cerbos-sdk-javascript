@@ -6,6 +6,18 @@ unreleased:
       to: 2.14.1
       pulls: [1523, 1529]
 
+    "@connectrpc/connect":
+      to: 2.2.0
+      pull: 1534
+
+    "@connectrpc/connect-node":
+      to: 2.2.0
+      pull: 1534
+
+    "@connectrpc/connect-web":
+      to: 2.2.0
+      pull: 1534
+
 releases:
   - version: 0.6.1
     date: 2026-08-13
