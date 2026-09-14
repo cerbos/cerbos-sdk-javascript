@@ -4,12 +4,12 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.2.1",
+      "version": "12.4.0",
       "onFail": "download"
     },
     "runtime": {
       "name": "node",
-      "version": "26.8.1",
+      "version": "26.8.2",
       "onFail": "warn"
     }
   },
@@ -60,13 +60,13 @@
     "@tsconfig/node22": "22.0.6",
     "@tsconfig/strictest": "2.0.8",
     "@types/node": "22.20.1",
-    "@types/web": "0.0.354",
+    "@types/web": "0.0.356",
     "@typescript/native": "npm:typescript@7.0.2",
     "depcheck": "1.4.7",
-    "eslint": "10.9.1",
+    "eslint": "10.10.0",
     "prettier": "3.9.6",
     "prettier-plugin-pkg": "0.22.1",
-    "ts-proto": "2.12.1",
+    "ts-proto": "2.12.3",
     "tsx": "4.23.13",
     "typedoc": "0.28.20",
     "typedoc-plugin-mdn-links": "5.1.1",
