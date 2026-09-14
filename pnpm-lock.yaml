@@ -257,17 +257,17 @@ importers:
         specifier: ^0.33.0
         version: link:../core
       '@connectrpc/connect':
-        specifier: ^2.1.2
-        version: 2.1.2(@bufbuild/protobuf@2.14.1)
+        specifier: ^2.2.0
+        version: 2.2.0(@bufbuild/protobuf@2.14.1)
       '@connectrpc/connect-node':
-        specifier: ^2.1.2
-        version: 2.1.2(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))
+        specifier: ^2.2.0
+        version: 2.2.0(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.2.0(@bufbuild/protobuf@2.14.1))
       '@connectrpc/connect-web':
-        specifier: ^2.1.2
-        version: 2.1.2(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))
+        specifier: ^2.2.0
+        version: 2.2.0(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.2.0(@bufbuild/protobuf@2.14.1))
       '@connectrpc/validate':
         specifier: ^0.2.0
-        version: 0.2.0(@bufbuild/protobuf@2.14.1)(@bufbuild/protovalidate@1.2.0(@bufbuild/protobuf@2.14.1))(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))
+        version: 0.2.0(@bufbuild/protobuf@2.14.1)(@bufbuild/protovalidate@1.2.0(@bufbuild/protobuf@2.14.1))(@connectrpc/connect@2.2.0(@bufbuild/protobuf@2.14.1))
 
   packages/opentelemetry:
     dependencies:
@@ -399,11 +399,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/react
       '@connectrpc/connect':
-        specifier: 2.1.2
-        version: 2.1.2(@bufbuild/protobuf@2.14.1)
+        specifier: 2.2.0
+        version: 2.2.0(@bufbuild/protobuf@2.14.1)
       '@connectrpc/connect-node':
-        specifier: 2.1.2
-        version: 2.1.2(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))
+        specifier: 2.2.0
+        version: 2.2.0(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.2.0(@bufbuild/protobuf@2.14.1))
       '@grpc/grpc-js':
         specifier: 1.14.4
         version: 1.14.4
@@ -648,21 +648,21 @@ packages:
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
     engines: {node: '>=0.1.90'}
 
-  '@connectrpc/connect-node@2.1.2':
-    resolution: {integrity: sha512-+i/aAOpsI8sIx1mbYp6d99zvxaUSF6t/jP9Ux9maAmjsZPgmIQ3JuIeYi0zJIP9zlCnBlJjkpPosshCgdRuThQ==}
-    engines: {node: '>=20'}
+  '@connectrpc/connect-node@2.2.0':
+    resolution: {integrity: sha512-E6uUO6e11WdynAuBjuN+0WpHjqxEM9BNDdfDIJHcn49Esg/WxSIbn2y1KFt9XL96IJi01qdBbvubcdpBz1X3Zw==}
+    engines: {node: '>=22'}
     peerDependencies:
       '@bufbuild/protobuf': ^2.7.0
-      '@connectrpc/connect': 2.1.2
+      '@connectrpc/connect': 2.2.0
 
-  '@connectrpc/connect-web@2.1.2':
-    resolution: {integrity: sha512-1tfaK85MU+gJjwwmL31d2rzdf0XCYX99chZf63uG89SGBUd4XuZ4ZzhGo2u79TPXOE6nLIZQ2okrpyey42PYdg==}
+  '@connectrpc/connect-web@2.2.0':
+    resolution: {integrity: sha512-uuBUcBTYfb/r1o98LzCCZk1H90yx0vmZ5m21dpw/q4EUwsKwkCDGI8H0aEdjcZld+Q2jJ5A5ADvPqfb6lzQ/sg==}
     peerDependencies:
       '@bufbuild/protobuf': ^2.7.0
-      '@connectrpc/connect': 2.1.2
+      '@connectrpc/connect': 2.2.0
 
-  '@connectrpc/connect@2.1.2':
-    resolution: {integrity: sha512-MXkBijtcX09R10Eb6sFeIetc6w6746eio6xtfuyVOH7oQAacT1X0GzMIQFux6Qy8cq3W/T5qX5Bei8YbFtmRGA==}
+  '@connectrpc/connect@2.2.0':
+    resolution: {integrity: sha512-M63OQ1ZFcPUm85CuewJ9G9CMV8LjzGR9935xOnXNQGSazAbwMb3x2W7vXBYM1zqrP7XFD8uxp/dUAhirclgwnQ==}
     peerDependencies:
       '@bufbuild/protobuf': ^2.7.0
 
@@ -3327,25 +3327,25 @@ snapshots:
   '@colors/colors@1.5.0':
     optional: true
 
-  '@connectrpc/connect-node@2.1.2(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))':
+  '@connectrpc/connect-node@2.2.0(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.2.0(@bufbuild/protobuf@2.14.1))':
     dependencies:
       '@bufbuild/protobuf': 2.14.1
-      '@connectrpc/connect': 2.1.2(@bufbuild/protobuf@2.14.1)
+      '@connectrpc/connect': 2.2.0(@bufbuild/protobuf@2.14.1)
 
-  '@connectrpc/connect-web@2.1.2(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))':
+  '@connectrpc/connect-web@2.2.0(@bufbuild/protobuf@2.14.1)(@connectrpc/connect@2.2.0(@bufbuild/protobuf@2.14.1))':
     dependencies:
       '@bufbuild/protobuf': 2.14.1
-      '@connectrpc/connect': 2.1.2(@bufbuild/protobuf@2.14.1)
+      '@connectrpc/connect': 2.2.0(@bufbuild/protobuf@2.14.1)
 
-  '@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1)':
+  '@connectrpc/connect@2.2.0(@bufbuild/protobuf@2.14.1)':
     dependencies:
       '@bufbuild/protobuf': 2.14.1
 
-  '@connectrpc/validate@0.2.0(@bufbuild/protobuf@2.14.1)(@bufbuild/protovalidate@1.2.0(@bufbuild/protobuf@2.14.1))(@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.14.1))':
+  '@connectrpc/validate@0.2.0(@bufbuild/protobuf@2.14.1)(@bufbuild/protovalidate@1.2.0(@bufbuild/protobuf@2.14.1))(@connectrpc/connect@2.2.0(@bufbuild/protobuf@2.14.1))':
     dependencies:
       '@bufbuild/protobuf': 2.14.1
       '@bufbuild/protovalidate': 1.2.0(@bufbuild/protobuf@2.14.1)
-      '@connectrpc/connect': 2.1.2(@bufbuild/protobuf@2.14.1)
+      '@connectrpc/connect': 2.2.0(@bufbuild/protobuf@2.14.1)
 
   '@csstools/color-helpers@6.1.1': {}
 
