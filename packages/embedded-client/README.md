@@ -45,6 +45,18 @@ await cerbos.isAllowed({
 }); // => true
 ```
 
+In edge runtimes that do not support global timers (for example, Cloudflare Workers), `@cerbos/embedded-client` must be imported dynamically:
+
+```typescript
+export default {
+  async fetch(request) {
+    const { Embedded } = await import("@cerbos/embedded-client");
+
+    // ...
+  },
+} satisfies ExportedHandler;
+```
+
 For more details, [see the `Embedded` class documentation](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_embedded-client.Embedded.html).
 
 ## CommonJS support

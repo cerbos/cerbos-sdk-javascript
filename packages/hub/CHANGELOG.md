@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Handle lack of support for `redirect: "error"` in `fetch` on edge workers ([#1537](https://github.com/cerbos/cerbos-sdk-javascript/pull/1537))
+
 - Bump dependency on [@bufbuild/protobuf] to 2.14.1 ([#1523](https://github.com/cerbos/cerbos-sdk-javascript/pull/1523), [#1529](https://github.com/cerbos/cerbos-sdk-javascript/pull/1529))
 
 - Bump dependency on [@connectrpc/connect] to 2.2.0 ([#1534](https://github.com/cerbos/cerbos-sdk-javascript/pull/1534))
