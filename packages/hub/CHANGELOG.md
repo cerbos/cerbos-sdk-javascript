@@ -2,11 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.6.2] - 2026-09-15
+
 ### Changed
 
 - Handle lack of support for `redirect: "error"` in `fetch` on edge workers ([#1537](https://github.com/cerbos/cerbos-sdk-javascript/pull/1537))
 
 - Bump dependency on [@bufbuild/protobuf] to 2.14.1 ([#1523](https://github.com/cerbos/cerbos-sdk-javascript/pull/1523), [#1529](https://github.com/cerbos/cerbos-sdk-javascript/pull/1529))
+
+- Bump dependency on [@cerbos/core] to 0.33.1 ([#1538](https://github.com/cerbos/cerbos-sdk-javascript/pull/1538))
 
 - Bump dependency on [@connectrpc/connect] to 2.2.0 ([#1534](https://github.com/cerbos/cerbos-sdk-javascript/pull/1534))
 
@@ -178,7 +184,8 @@
 
 - A client for interacting with policy stores in Cerbos Hub ([#1173](https://github.com/cerbos/cerbos-sdk-javascript/pull/1173), [#1191](https://github.com/cerbos/cerbos-sdk-javascript/pull/1191))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.2...HEAD
+[0.6.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.1...@cerbos/hub@0.6.2
 [0.6.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.0...@cerbos/hub@0.6.1
 [0.6.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.6...@cerbos/hub@0.6.0
 [0.5.6]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.5...@cerbos/hub@0.5.6

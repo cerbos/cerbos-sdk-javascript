@@ -2,9 +2,17 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.30.1] - 2026-09-15
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.14.1 ([#1523](https://github.com/cerbos/cerbos-sdk-javascript/pull/1523), [#1529](https://github.com/cerbos/cerbos-sdk-javascript/pull/1529))
+
+- Bump dependency on [@cerbos/api] to 0.11.1 ([#1538](https://github.com/cerbos/cerbos-sdk-javascript/pull/1538))
+
+- Bump dependency on [@cerbos/core] to 0.33.1 ([#1538](https://github.com/cerbos/cerbos-sdk-javascript/pull/1538))
 
 ## [0.30.0] - 2026-08-13
 
@@ -576,7 +584,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.30.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.30.1...HEAD
+[0.30.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.30.0...@cerbos/http@0.30.1
 [0.30.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.29.0...@cerbos/http@0.30.0
 [0.29.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.28.1...@cerbos/http@0.29.0
 [0.28.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.28.0...@cerbos/http@0.28.1

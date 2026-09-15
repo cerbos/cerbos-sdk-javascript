@@ -1,28 +1,32 @@
-unreleased:
-  type: patch
-
-  changed:
-    - summary: 'Handle lack of support for `redirect: "error"` in `fetch` on edge workers'
-      pull: 1537
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.14.1
-      pulls: [1523, 1529]
-
-    "@connectrpc/connect":
-      to: 2.2.0
-      pull: 1534
-
-    "@connectrpc/connect-node":
-      to: 2.2.0
-      pull: 1534
-
-    "@connectrpc/connect-web":
-      to: 2.2.0
-      pull: 1534
-
 releases:
+  - version: 0.6.2
+    date: 2026-09-15
+
+    changed:
+      - summary: 'Handle lack of support for `redirect: "error"` in `fetch` on edge workers'
+        pull: 1537
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.14.1
+        pulls: [1523, 1529]
+
+      "@cerbos/core":
+        to: 0.33.1
+        pull: 1538
+
+      "@connectrpc/connect":
+        to: 2.2.0
+        pull: 1534
+
+      "@connectrpc/connect-node":
+        to: 2.2.0
+        pull: 1534
+
+      "@connectrpc/connect-web":
+        to: 2.2.0
+        pull: 1534
+
   - version: 0.6.1
     date: 2026-08-13
 
