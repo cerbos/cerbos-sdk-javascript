@@ -1,6 +1,10 @@
 unreleased:
   type: patch
 
+  changed:
+    - summary: 'Handle lack of support for `redirect: "error"` in `fetch` on edge workers'
+      pull: 1537
+
   bumped:
     "@bufbuild/protobuf":
       to: 2.14.1
