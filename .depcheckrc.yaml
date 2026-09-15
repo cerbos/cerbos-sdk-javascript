@@ -4,6 +4,7 @@ ignores:
   - "@tsconfig/strictest"
   - "@types/node"
   - "@types/web"
+  - npm
   - prettier-plugin-pkg
   - ts-proto
   - typedoc-plugin-mdn-links
