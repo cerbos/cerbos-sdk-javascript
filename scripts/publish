@@ -22,4 +22,4 @@ pnpm run build
 
 cd "${package_dir}"
 
-npm publish --verbose
+pnpm exec npm publish --verbose
