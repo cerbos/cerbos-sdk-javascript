@@ -4,12 +4,12 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.4.0",
+      "version": "12.4.2",
       "onFail": "download"
     },
     "runtime": {
       "name": "node",
-      "version": "26.8.2",
+      "version": "26.9.0",
       "onFail": "warn"
     }
   },
@@ -54,20 +54,20 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.5",
-    "@bufbuild/buf": "1.72.0",
-    "@bufbuild/protoc-gen-es": "2.14.1",
+    "@bufbuild/buf": "1.73.0",
+    "@bufbuild/protoc-gen-es": "2.15.0",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@tsconfig/node22": "22.0.6",
     "@tsconfig/strictest": "2.0.8",
-    "@types/node": "22.20.1",
+    "@types/node": "22.20.3",
     "@types/web": "0.0.356",
     "@typescript/native": "npm:typescript@7.0.2",
     "depcheck": "1.4.7",
     "eslint": "10.10.0",
     "npm": "12.0.2",
-    "prettier": "3.9.6",
+    "prettier": "3.9.7",
     "prettier-plugin-pkg": "0.22.1",
-    "ts-proto": "2.12.3",
+    "ts-proto": "2.12.4",
     "tsx": "4.23.13",
     "typedoc": "0.28.20",
     "typedoc-plugin-mdn-links": "5.1.1",
