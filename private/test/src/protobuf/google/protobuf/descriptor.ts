@@ -13,6 +13,7 @@ export enum Edition {
   EDITION_PROTO3 = 999,
   EDITION_2023 = 1000,
   EDITION_2024 = 1001,
+  EDITION_2026 = 1002,
   EDITION_UNSTABLE = 9999,
   EDITION_1_TEST_ONLY = 1,
   EDITION_2_TEST_ONLY = 2,
@@ -36,6 +37,8 @@ export function editionToJSON(object: Edition): string {
       return "EDITION_2023";
     case Edition.EDITION_2024:
       return "EDITION_2024";
+    case Edition.EDITION_2026:
+      return "EDITION_2026";
     case Edition.EDITION_UNSTABLE:
       return "EDITION_UNSTABLE";
     case Edition.EDITION_1_TEST_ONLY:
@@ -256,6 +259,7 @@ export interface FieldOptions_FeatureSupport {
   editionDeprecated?: Edition | undefined;
   deprecationWarning?: string | undefined;
   editionRemoved?: Edition | undefined;
+  removalError?: string | undefined;
 }
 
 export interface OneofOptions {
@@ -479,6 +483,7 @@ export enum FeatureSet_EnforceNamingStyle {
   ENFORCE_NAMING_STYLE_UNKNOWN = 0,
   STYLE2024 = 1,
   STYLE_LEGACY = 2,
+  STYLE2026 = 3,
 }
 
 export function featureSet_EnforceNamingStyleToJSON(
@@ -491,6 +496,8 @@ export function featureSet_EnforceNamingStyleToJSON(
       return "STYLE2024";
     case FeatureSet_EnforceNamingStyle.STYLE_LEGACY:
       return "STYLE_LEGACY";
+    case FeatureSet_EnforceNamingStyle.STYLE2026:
+      return "STYLE2026";
     default:
       throw new globalThis.Error(
         "Unrecognized enum value " +
@@ -1507,6 +1514,7 @@ function createBaseFieldOptions_FeatureSupport(): FieldOptions_FeatureSupport {
     editionDeprecated: 0,
     deprecationWarning: "",
     editionRemoved: 0,
+    removalError: "",
   };
 }
 
@@ -1539,6 +1547,9 @@ export const FieldOptions_FeatureSupport: MessageFns<FieldOptions_FeatureSupport
         message.editionRemoved !== 0
       ) {
         writer.uint32(32).int32(message.editionRemoved);
+      }
+      if (message.removalError !== undefined && message.removalError !== "") {
+        writer.uint32(42).string(message.removalError);
       }
       return writer;
     },
@@ -1592,6 +1603,14 @@ export const FieldOptions_FeatureSupport: MessageFns<FieldOptions_FeatureSupport
               message.editionRemoved = reader.int32() as any;
               continue;
             }
+            case 5: {
+              if (tag !== 42) {
+                break;
+              }
+
+              message.removalError = reader.string();
+              continue;
+            }
           }
           if ((tag & 7) === 4 || tag === 0) {
             break;
@@ -1629,6 +1648,9 @@ export const FieldOptions_FeatureSupport: MessageFns<FieldOptions_FeatureSupport
         message.editionRemoved !== 0
       ) {
         obj.editionRemoved = editionToJSON(message.editionRemoved);
+      }
+      if (message.removalError !== undefined && message.removalError !== "") {
+        obj.removalError = message.removalError;
       }
       return obj;
     },
