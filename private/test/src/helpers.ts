@@ -4,7 +4,7 @@ import { setTimeout } from "timers/promises";
 import { fileURLToPath } from "url";
 
 import type { ServiceError } from "@grpc/grpc-js";
-import { Metadata } from "@grpc/grpc-js";
+import { Metadata, status } from "@grpc/grpc-js";
 import type { Attributes, HrTime } from "@opentelemetry/api";
 import { ValueType, context, trace } from "@opentelemetry/api";
 import type { Histogram, MetricDescriptor } from "@opentelemetry/sdk-metrics";
@@ -179,10 +179,7 @@ function isServiceError(error: unknown): error is ServiceError {
 }
 
 function isTraceNotFound(error: unknown): error is ServiceError {
-  return (
-    isServiceError(error) &&
-    error.details === "cannot retrieve trace: trace not found"
-  );
+  return isServiceError(error) && error.code === status.NOT_FOUND;
 }
 
 function secondsSince(start: bigint): number {
