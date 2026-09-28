@@ -6,6 +6,10 @@ unreleased:
       to: 2.15.0
       pull: 1542
 
+  "@bufbuild/protovalidate":
+    to: 1.3.0
+    pull: 1545
+
 releases:
   - version: 0.8.1
     date: 2026-09-15
