@@ -2,7 +2,7 @@ name: cerbos-sdk-javascript-test
 
 services:
   certificates:
-    image: ruby:4.0.6-alpine@sha256:6ec7aeb4f3f0b67a21fb73a83fc20a4055696e64b933229f68ec805a3de38fcc
+    image: ruby:4.0.7-alpine@sha256:1ca7cb33e970630d571e0da6140e0bc925faec8f1f8f51f9f2cdf5e5f5eed7c9
     entrypoint: /generate-certificates
     volumes:
       - type: bind
@@ -66,7 +66,7 @@ services:
         condition: service_completed_successfully
 
   mtls:
-    image: traefik:v3.7.13@sha256:f86a2cab1b5c649070c49f883c743dd32d8485a56e3368c5f93b9e91f1e91259
+    image: traefik:v3.7.13@sha256:24841fe2de7304c149343d877d2923b4c8800a38ba015dea9174c23b20e344a0
     command:
       - --entrypoints.grpc.address=:3593
       - --ping
