@@ -1,10 +1,12 @@
+# yaml-language-server: $schema=../changelog.schema.json
+
 unreleased:
   type: patch
 
   bumped:
     "@bufbuild/protobuf":
       to: 2.15.0
-      pull: 1542
+      pullRequests: [1542]
 
 releases:
   - version: 0.11.1
@@ -13,7 +15,7 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.14.1
-        pulls: [1523, 1529]
+        pullRequests: [1523, 1529]
 
   - version: 0.11.0
     date: 2026-08-07
@@ -24,12 +26,12 @@ releases:
           - `cerbos.cloud.epdp.v2.Config.Evaluator.strictEvaluation`
           - `cerbos.engine.v1.AuxData.jwts`
           - `cerbos.request.v1.AuxData.jwts`
-        pulls: [1509, 1511]
+        pullRequests: [1509, 1511]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.13.0
-        pull: 1502
+        pullRequests: [1502]
 
   - version: 0.10.0
     date: 2026-07-15
@@ -40,7 +42,7 @@ releases:
           - `cerbos.engine.v1.CheckOutput.evaluationErrors`
           - `cerbos.engine.v1.EvaluationError`
           - `cerbos.engine.v1.PlanResourcesOutput.evaluationErrors`
-        pull: 1492
+        pullRequests: [1492]
 
     changed:
       - summary: Host ↔ WASM contract for embedded policy decision points
@@ -52,23 +54,23 @@ releases:
           - Replaced
             - `cerbos.cloud.epdp.v2.CheckResourcesResponse.response` → `outputs`
             - `cerbos.cloud.epdp.v2.PlanResourcesResponse.response` → `output`
-        pull: 1492
+        pullRequests: [1492]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.12.1
-        pull: 1478
+        pullRequests: [1478]
 
     removed:
       - summary: "`cerbos.cloud.epdp.v1.Metadata`"
-        pull: 1493
+        pullRequests: [1493]
 
   - version: 0.9.1
     date: 2026-05-26
 
     changed:
       - summary: Fix release workflow to include compiled code in published package
-        pull: 1461
+        pullRequests: [1461]
 
   - version: 0.9.0
     date: 2026-05-26
@@ -81,23 +83,23 @@ releases:
           - `cerbos.policy.v1.RolePolicy.variables`
           - `cerbos.policy.v1.RoleRule.name`
           - `cerbos.policy.v1.RoleRule.output`
-        pull: 1452
+        pullRequests: [1452]
 
     removed:
       - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
-        pull: 1454
+        pullRequests: [1454]
 
   - version: 0.8.0
     date: 2026-05-06
 
     added:
       - summary: "`cerbos.audit.v1.PolicySource.Hub.EmbeddedBundle.bundleId` and `cerbos.cloud.epdp.v2.LoadRuleTableResponse`"
-        pull: 1446
+        pullRequests: [1446]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.12.0
-        pull: 1441
+        pullRequests: [1441]
 
   - version: 0.7.0
     date: 2026-05-01
@@ -108,7 +110,7 @@ releases:
           - `cerbos.audit.v1.PolicySource.Git.hash`
           - `cerbos.audit.v1.PolicySource.Hub.LocalBundle.bundleId`
           - `cerbos.audit.v1.PolicySource.Hub.RemoteBundle`
-        pull: 1437
+        pullRequests: [1437]
 
   - version: 0.6.0
     date: 2026-02-03
@@ -133,71 +135,71 @@ releases:
           - `cerbos.svc.v1.CerbosAdminService.deletePolicy`
           - `cerbos.svc.v1.CerbosAdminService.purgeStoreRevisions`
           - `google.rpc.Status`
-        pull: 1344
+        pullRequests: [1344]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.11.0
-        pull: 1355
+        pullRequests: [1355]
 
   - version: 0.5.1
     date: 2026-01-12
 
     changed:
       - summary: Migrate documentation to TypeDoc
-        pull: 1332
+        pullRequests: [1332]
 
   - version: 0.5.0
     date: 2026-01-07
 
     added:
       - summary: "`cerbos.epdp.v2.Config.defaultScope`"
-        pull: 1316
+        pullRequests: [1316]
 
     changed:
       - summary: Convert package to ESM
-        pull: 1330
+        pullRequests: [1330]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.10.2
-        pull: 1320
+        pullRequests: [1320]
 
   - version: 0.4.0
     date: 2025-12-12
 
     added:
       - summary: "`cerbos.epdp.v2.BundleService`"
-        pull: 1312
+        pullRequests: [1312]
 
   - version: 0.3.0
     date: 2025-11-20
 
     added:
       - summary: "`cerbos.epdp.v2.CheckResourcesResponse` and `cerbos.epdp.v2.PlanResourcesResponse`"
-        pull: 1287
+        pullRequests: [1287]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.10.1
-        pull: 1281
+        pullRequests: [1281]
 
   - version: 0.2.0
     date: 2025-11-12
 
     added:
       - summary: "`cerbos.epdp.v2.Config`, `cerbos.epdp.v2.Error`, and `cerbos.epdp.v2.Metadata`"
-        pull: 1279
+        pullRequests: [1279]
 
       - summary: JSON types
-        pull: 1279
+        pullRequests: [1279]
 
   - version: 0.1.0
     date: 2025-11-07
 
     added:
       - summary: Generated code
-        pull: 1271
+        pullRequests: [1271]
 
 references:
   "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es

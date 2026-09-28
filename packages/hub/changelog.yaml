@@ -1,10 +1,12 @@
+# yaml-language-server: $schema=../changelog.schema.json
+
 unreleased:
   type: patch
 
   bumped:
     "@bufbuild/protobuf":
       to: 2.15.0
-      pull: 1542
+      pullRequests: [1542]
 
 releases:
   - version: 0.6.2
@@ -12,28 +14,28 @@ releases:
 
     changed:
       - summary: 'Handle lack of support for `redirect: "error"` in `fetch` on edge workers'
-        pull: 1537
+        pullRequests: [1537]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.14.1
-        pulls: [1523, 1529]
+        pullRequests: [1523, 1529]
 
       "@cerbos/core":
         to: 0.33.1
-        pull: 1538
+        pullRequests: [1538]
 
       "@connectrpc/connect":
         to: 2.2.0
-        pull: 1534
+        pullRequests: [1534]
 
       "@connectrpc/connect-node":
         to: 2.2.0
-        pull: 1534
+        pullRequests: [1534]
 
       "@connectrpc/connect-web":
         to: 2.2.0
-        pull: 1534
+        pullRequests: [1534]
 
   - version: 0.6.1
     date: 2026-08-13
@@ -41,11 +43,11 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.13.0
-        pull: 1502
+        pullRequests: [1502]
 
       "@cerbos/core":
         to: 0.33.0
-        pull: 1519
+        pullRequests: [1519]
 
   - version: 0.6.0
     date: 2026-07-20
@@ -53,43 +55,43 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.12.1
-        pull: 1478
+        pullRequests: [1478]
 
       "@cerbos/core":
         to: 0.32.0
-        pull: 1501
+        pullRequests: [1501]
 
       "@connectrpc/connect":
         to: 2.1.2
-        pull: 1473
+        pullRequests: [1473]
 
       "@connectrpc/connect-node":
         to: 2.1.2
-        pull: 1473
+        pullRequests: [1473]
 
       "@connectrpc/connect-web":
         to: 2.1.2
-        pull: 1473
+        pullRequests: [1473]
 
     removed:
       - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
-        pull: 1454
+        pullRequests: [1454]
 
   - version: 0.5.6
     date: 2026-05-06
 
     added:
       - summary: Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined`
-        pull: 1442
+        pullRequests: [1442]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.12.0
-        pull: 1441
+        pullRequests: [1441]
 
       "@cerbos/core":
         to: 0.31.0
-        pull: 1449
+        pullRequests: [1449]
 
   - version: 0.5.5
     date: 2026-05-01
@@ -97,7 +99,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.30.0
-        pull: 1439
+        pullRequests: [1439]
 
   - version: 0.5.4
     date: 2026-04-28
@@ -105,7 +107,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.29.0
-        pull: 1436
+        pullRequests: [1436]
 
   - version: 0.5.3
     date: 2026-04-27
@@ -113,74 +115,74 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.28.1
-        pull: 1432
+        pullRequests: [1432]
 
   - version: 0.5.2
     date: 2026-02-04
 
     changed:
       - summary: Drop dependency on [opossum] to avoid requiring an [`EventEmitter`](https://nodejs.org/api/events.html#class-eventemitter) polyfill in browsers
-        pull: 1360
+        pullRequests: [1360]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.11.0
-        pull: 1355
+        pullRequests: [1355]
 
       "@cerbos/core":
         to: 0.28.0
-        pull: 1361
+        pullRequests: [1361]
 
   - version: 0.5.1
     date: 2026-01-12
 
     changed:
       - summary: Migrate documentation to TypeDoc
-        pull: 1332
+        pullRequests: [1332]
 
     bumped:
       "@cerbos/core":
         to: 0.27.1
-        pull: 1340
+        pullRequests: [1340]
 
   - version: 0.5.0
     date: 2026-01-07
 
     changed:
       - summary: Convert package to ESM
-        pull: 1330
+        pullRequests: [1330]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.10.2
-        pull: 1320
+        pullRequests: [1320]
 
       "@cerbos/core":
         to: 0.27.0
-        pull: 1331
+        pullRequests: [1331]
 
   - version: 0.4.0
     date: 2025-12-15
 
     changed:
       - summary: Use [@connectrpc/connect-web] in browsers
-        pull: 1317
+        pullRequests: [1317]
 
   - version: 0.3.0
     date: 2025-12-12
 
     changed:
       - summary: Migrate to [@connectrpc/validate]
-        pull: 1294
+        pullRequests: [1294]
 
     bumped:
       "@cerbos/core":
         to: 0.26.0
-        pull: 1313
+        pullRequests: [1313]
 
       "@connectrpc/connect":
         to: 2.1.1
-        pull: 1291
+        pullRequests: [1291]
 
   - version: 0.2.4
     date: 2025-11-20
@@ -188,11 +190,11 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.10.1
-        pull: 1281
+        pullRequests: [1281]
 
       "@cerbos/core":
         to: 0.25.2
-        pull: 1288
+        pullRequests: [1288]
 
   - version: 0.2.3
     date: 2025-11-12
@@ -200,7 +202,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.25.1
-        pull: 1280
+        pullRequests: [1280]
 
   - version: 0.2.2
     date: 2025-11-07
@@ -208,11 +210,11 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.10.0
-        pull: 1260
+        pullRequests: [1260]
 
       "@cerbos/core":
         to: 0.25.0
-        pull: 1273
+        pullRequests: [1273]
 
   - version: 0.2.1
     date: 2025-10-14
@@ -220,35 +222,35 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.9.0
-        pull: 1236
+        pullRequests: [1236]
 
   - version: 0.2.0
     date: 2025-09-15
 
     changed:
       - summary: Ignore "already exists" errors in circuit breaker
-        pull: 1210
+        pullRequests: [1210]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.8.0
-        pulls: [1216, 1227]
+        pullRequests: [1216, 1227]
 
       "@bufbuild/protovalidate":
         to: 1.0.0
-        pull: 1231
+        pullRequests: [1231]
 
       "@cerbos/core":
         to: 0.24.1
-        pull: 1233
+        pullRequests: [1233]
 
       "@connectrpc/connect":
         to: 2.1.0
-        pulls: [1211, 1219]
+        pullRequests: [1211, 1219]
 
       "@connectrpc/connect-node":
         to: 2.1.0
-        pulls: [1211, 1219]
+        pullRequests: [1211, 1219]
 
   - version: 0.1.1
     date: 2025-08-11
@@ -256,30 +258,30 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.6.3
-        pulls: [1200, 1202, 1205]
+        pullRequests: [1200, 1202, 1205]
 
       "@bufbuild/protovalidate":
         to: 0.8.0
-        pulls: [1200, 1205]
+        pullRequests: [1200, 1205]
 
       "@cerbos/core":
         to: 0.24.0
-        pull: 1208
+        pullRequests: [1208]
 
       "@connectrpc/connect":
         to: 2.0.3
-        pull: 1203
+        pullRequests: [1203]
 
       "@connectrpc/connect-node":
         to: 2.0.3
-        pull: 1203
+        pullRequests: [1203]
 
   - version: 0.1.0
     date: 2025-07-02
 
     added:
       - summary: A client for interacting with policy stores in Cerbos Hub
-        pulls: [1173, 1191]
+        pullRequests: [1173, 1191]
 
 references:
   "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es

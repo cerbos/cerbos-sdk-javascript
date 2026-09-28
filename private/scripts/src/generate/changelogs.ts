@@ -1,4 +1,8 @@
-import { readChangelog, writeChangelog } from "../utils/changelogs.js";
+import {
+  readChangelog,
+  writeChangelog,
+  writeChangelogSchema,
+} from "../utils/changelogs.js";
 import type { Package } from "../utils/packages.js";
 import { listPackages } from "../utils/packages.js";
 import { planReleases } from "../utils/releases.js";
@@ -12,6 +16,8 @@ async function generateChangelog(pkg: Package): Promise<void> {
     });
   }
 }
+
+await writeChangelogSchema();
 
 const packages = await listPackages();
 

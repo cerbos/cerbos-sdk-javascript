@@ -13,7 +13,7 @@ import {
 import type { ZodType } from "zod";
 import { z } from "zod";
 
-import { read } from "../utils/files.js";
+import { read, repositoryPath } from "../utils/files.js";
 import { isoDateSchema } from "../utils/schemas.js";
 
 async function fetchJson<T>(
@@ -158,11 +158,7 @@ async function fetchReactVersions(): Promise<Versions> {
       peerDependencies: z.object({ react: z.string() }),
     })
     .parse(
-      JSON.parse(
-        await read(
-          new URL("../../../../packages/react/package.json", import.meta.url),
-        ),
-      ),
+      JSON.parse(await read(repositoryPath("packages/react/package.json"))),
     );
 
   const {
