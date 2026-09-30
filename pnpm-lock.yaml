@@ -258,7 +258,7 @@ importers:
         version: link:../core
       '@cerbos/embedded-server':
         specifier: ^0.7.1
-        version: 0.7.1(@bufbuild/protobuf@2.15.0)(@cerbos/api@packages+api)
+        version: 0.7.2(@bufbuild/protobuf@2.15.0)(@cerbos/api@packages+api)
       '@cerbos/hub':
         specifier: ^0.6.2
         version: link:../hub
@@ -438,8 +438,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/embedded-client
       '@cerbos/embedded-server':
-        specifier: 0.7.1
-        version: 0.7.1(@bufbuild/protobuf@2.15.0)(@cerbos/api@packages+api)
+        specifier: 0.7.2
+        version: 0.7.2(@bufbuild/protobuf@2.15.0)(@cerbos/api@packages+api)
       '@cerbos/files':
         specifier: workspace:*
         version: link:../../packages/files
@@ -706,11 +706,11 @@ packages:
   '@cacheable/utils@2.5.0':
     resolution: {integrity: sha512-buipgOVDkkPXNR5+xBpDw7Zk2n1EvU7qBJCNUcL7rhQ//kfpOXPAvQ511Os0vpLYJ1pZnvudNytkQt2hst3wqA==}
 
-  '@cerbos/embedded-server@0.7.1':
-    resolution: {integrity: sha512-86D3eXJDDnlbg21dM/OGML1uOhq7ozWjlCZSUHXEYYZ8A8gujTsr3KDLz1+57Jn9w0vOR2WOoZjfkyqXvS6aZA==}
+  '@cerbos/embedded-server@0.7.2':
+    resolution: {integrity: sha512-DxkQd/LdPpOJnqYU/9HqJbZvs73fNx8/Hwk3j8cIGhHzKhaVQTBTbmdog1buWHa5jb1T3HMWU+TLRWxgpRF5vQ==}
     engines: {node: '>= 22'}
     peerDependencies:
-      '@bufbuild/protobuf': ^2.13.0
+      '@bufbuild/protobuf': ^2.15.0
       '@cerbos/api': ^0.11.0
 
   '@colors/colors@1.5.0':
@@ -3478,7 +3478,7 @@ snapshots:
       hashery: 1.5.1
       keyv: 5.6.0
 
-  '@cerbos/embedded-server@0.7.1(@bufbuild/protobuf@2.15.0)(@cerbos/api@packages+api)':
+  '@cerbos/embedded-server@0.7.2(@bufbuild/protobuf@2.15.0)(@cerbos/api@packages+api)':
     dependencies:
       '@bufbuild/protobuf': 2.15.0
       '@cerbos/api': link:packages/api
