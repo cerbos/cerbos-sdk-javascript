@@ -13,7 +13,7 @@ import {
 } from "yaml";
 import { z } from "zod";
 
-import { read, write } from "./files.js";
+import { read, repositoryPath, write } from "./files.js";
 import { repositoryUrl } from "./git.js";
 import type { Package } from "./packages.js";
 import {
@@ -21,30 +21,36 @@ import {
   semverSchema,
   sortedArray,
   sortedRecord,
+  toJSONSchema,
 } from "./schemas.js";
 
-const pullOrPulls = z
-  .object({ pull: z.number().int() })
-  .or(z.object({ pulls: sortedArray(z.number().int()) }));
+const pullRequests = {
+  pullRequests: sortedArray(z.number().int().positive()),
+};
 
-const entrySchema = z
-  .object({
-    summary: z.string(),
-    details: z.string().optional(),
-  })
-  .and(pullOrPulls);
+const entrySchema = z.strictObject({
+  summary: z.string(),
+  details: z.string().optional(),
+  ...pullRequests,
+});
 
 export type Entry = z.infer<typeof entrySchema>;
 
-const bumpSchema = z.object({ to: z.string() }).and(pullOrPulls);
+const bumpSchema = z.strictObject({
+  to: z.string(),
+  ...pullRequests,
+});
 
 export type Bump = z.infer<typeof bumpSchema>;
 
-const packageRenameSchema = z.object({ from: z.string() }).and(pullOrPulls);
+const packageRenameSchema = z.strictObject({
+  from: z.string(),
+  ...pullRequests,
+});
 
 export type PackageRename = z.infer<typeof packageRenameSchema>;
 
-const entriesSchema = z.object({
+const entriesSchema = z.strictObject({
   added: z.array(entrySchema).min(1).optional(),
   changed: z.array(entrySchema).min(1).optional(),
   bumped: sortedRecord(bumpSchema).optional(),
@@ -54,12 +60,11 @@ const entriesSchema = z.object({
 
 export type Entries = z.infer<typeof entriesSchema>;
 
-const releaseSchema = z
-  .object({
-    version: semverSchema,
-    date: isoDateSchema,
-  })
-  .and(entriesSchema);
+const releaseSchema = z.strictObject({
+  version: semverSchema,
+  date: isoDateSchema,
+  ...entriesSchema.shape,
+});
 
 export type Release = z.infer<typeof releaseSchema>;
 
@@ -71,14 +76,15 @@ const releaseTypeSchema = z.enum(["major", "minor", "patch"]);
 
 export type ReleaseType = z.infer<typeof releaseTypeSchema>;
 
-const unreleasedChangesSchema = z
-  .object({ type: releaseTypeSchema })
-  .and(entriesSchema);
+const unreleasedChangesSchema = z.strictObject({
+  type: releaseTypeSchema,
+  ...entriesSchema.shape,
+});
 
 export type UnreleasedChanges = z.infer<typeof unreleasedChangesSchema>;
 
 const changelogSchema = z
-  .object({
+  .strictObject({
     unreleased: unreleasedChangesSchema.optional(),
     releases: sortedArray(releaseSchema, compareReleases).optional(),
     references: sortedRecord(z.string()).optional(),
@@ -124,16 +130,26 @@ export async function writeChangelog(
   ]);
 }
 
+export async function writeChangelogSchema(): Promise<void> {
+  await write(
+    repositoryPath("packages/changelog.schema.json"),
+    JSON.stringify(toJSONSchema(changelogSchema), null, 2),
+  );
+}
+
 function changelogToYaml(changelog: Changelog): string {
   const document = new Document(changelog, {
     aliasDuplicateObjects: false,
   });
 
+  document.commentBefore =
+    " yaml-language-server: $schema=../changelog.schema.json";
+
   visit(document, {
     Map(_, node) {
       for (const [previous, current] of eachSlice(node.items, 2)) {
         if (isScalar(current.key)) {
-          if (current.key.value === "pulls" && isSeq(current.value)) {
+          if (current.key.value === "pullRequests" && isSeq(current.value)) {
             current.value.flow = true;
           }
 
@@ -235,17 +251,17 @@ function entriesToMarkdown(
 
   const changes = [
     ...changed,
-    ...Object.entries(bumped).map(([dependency, { to, ...pullOrPulls }]) => ({
+    ...Object.entries(bumped).map(([dependency, { to, pullRequests }]) => ({
       summary: `Bump dependency on [${dependency}] to ${to}`,
-      ...pullOrPulls,
+      pullRequests,
     })),
   ];
 
   if (renamedPackage) {
-    const { from, ...pullOrPulls } = renamedPackage;
+    const { from, pullRequests } = renamedPackage;
     changes.unshift({
       summary: `Renamed package from \`${from}\` to \`${packageName}\``,
-      ...pullOrPulls,
+      pullRequests,
     });
   }
 
@@ -268,15 +284,18 @@ function entryListToMarkdown(entries: Entry[]): string {
   return entries.map(entryToMarkdown).join("\n\n");
 }
 
-function entryToMarkdown({ summary, details, ...pullOrPulls }: Entry): string {
-  const pulls = "pull" in pullOrPulls ? [pullOrPulls.pull] : pullOrPulls.pulls;
-  let markdown = `- ${summary} (${pulls.map((pull) => `[#${pull}](${repositoryUrl}/pull/${pull})`).join(", ")})\n\n`;
+function entryToMarkdown({ summary, details, pullRequests }: Entry): string {
+  let markdown = `- ${summary} (${pullRequests.map(pullRequestToMarkdown).join(", ")})\n\n`;
 
   if (details) {
     markdown += `${details.replaceAll(/^(?!\n)/gm, "  ")}\n\n`;
   }
 
   return markdown;
+}
+
+function pullRequestToMarkdown(pullRequest: number): string {
+  return `[#${pullRequest}](${repositoryUrl}/pull/${pullRequest})`;
 }
 
 function diffReference(version: string, from: string, to: string): string {

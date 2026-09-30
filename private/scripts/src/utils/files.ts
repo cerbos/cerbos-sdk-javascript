@@ -1,6 +1,11 @@
 import { readFile, writeFile } from "fs/promises";
+import { join } from "path";
 
 import { format } from "prettier";
+
+export function repositoryPath(...segments: string[]): string {
+  return join(import.meta.dirname, "..", "..", "..", "..", ...segments);
+}
 
 export async function read(path: string | URL): Promise<string> {
   return await readFile(path, { encoding: "utf8" });

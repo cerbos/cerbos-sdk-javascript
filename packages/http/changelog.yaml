@@ -1,10 +1,12 @@
+# yaml-language-server: $schema=../changelog.schema.json
+
 unreleased:
   type: patch
 
   bumped:
     "@bufbuild/protobuf":
       to: 2.15.0
-      pull: 1542
+      pullRequests: [1542]
 
 releases:
   - version: 0.30.1
@@ -13,15 +15,15 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.14.1
-        pulls: [1523, 1529]
+        pullRequests: [1523, 1529]
 
       "@cerbos/api":
         to: 0.11.1
-        pull: 1538
+        pullRequests: [1538]
 
       "@cerbos/core":
         to: 0.33.1
-        pull: 1538
+        pullRequests: [1538]
 
   - version: 0.30.0
     date: 2026-08-13
@@ -29,20 +31,20 @@ releases:
     added:
       - summary: Support for multiple JWTs in auxiliary data
         details: Requires a policy decision point server running Cerbos 0.55+.
-        pull: 1509
+        pullRequests: [1509]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.13.0
-        pull: 1502
+        pullRequests: [1502]
 
       "@cerbos/api":
         to: 0.11.0
-        pull: 1512
+        pullRequests: [1512]
 
       "@cerbos/core":
         to: 0.33.0
-        pull: 1519
+        pullRequests: [1519]
 
   - version: 0.29.0
     date: 2026-07-20
@@ -50,41 +52,41 @@ releases:
     added:
       - summary: "[`CheckOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckOutput.html#evaluationerrors) and [`PlanResourcesOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesOutputBase.html#evaluationerrors) properties"
         details: Requires a policy decision point server running Cerbos 0.54+.
-        pull: 1492
+        pullRequests: [1492]
 
       - summary: "[`OutputResult.error`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#error) property"
         details: Requires a policy decision point server running Cerbos 0.54+.
-        pull: 1452
+        pullRequests: [1452]
 
       - summary: "[`RolePolicyBody.constants`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#constants) and [`variables`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#variables) properties"
         details: Requires a policy decision point server running Cerbos 0.54+.
-        pulls: [1452, 1456]
+        pullRequests: [1452, 1456]
 
       - summary: "[`RoleRule.name`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#name) and [`output`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#output) properties"
         details: Requires a policy decision point server running Cerbos 0.54+.
-        pulls: [1452, 1456]
+        pullRequests: [1452, 1456]
 
     changed:
       - summary: Deserialize [`RolePolicyBody.version`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#version) and [`RoleRule.condition`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RoleRule.html#condition)
         details: Previously, these fields could be set in an [`AddOrUpdatePoliciesRequest`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AddOrUpdatePoliciesRequest.html), but were omitted from [`GetPoliciesResponse`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.GetPoliciesResponse.html), so round-tripping role policies to and from the policy decision point server was lossy.
-        pull: 1456
+        pullRequests: [1456]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.12.1
-        pull: 1478
+        pullRequests: [1478]
 
       "@cerbos/api":
         to: 0.10.0
-        pull: 1494
+        pullRequests: [1494]
 
       "@cerbos/core":
         to: 0.32.0
-        pull: 1501
+        pullRequests: [1501]
 
     removed:
       - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
-        pull: 1454
+        pullRequests: [1454]
 
   - version: 0.28.1
     date: 2026-05-06
@@ -92,15 +94,15 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.12.0
-        pull: 1441
+        pullRequests: [1441]
 
       "@cerbos/api":
         to: 0.8.0
-        pull: 1447
+        pullRequests: [1447]
 
       "@cerbos/core":
         to: 0.31.0
-        pull: 1449
+        pullRequests: [1449]
 
   - version: 0.28.0
     date: 2026-05-01
@@ -110,16 +112,16 @@ releases:
         details: |-
           - [`LocalBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.LocalBundle.html#bundleid)
           - [`PolicySourceGit.hash`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicySourceGit.html#hash)
-        pull: 1437
+        pullRequests: [1437]
 
     bumped:
       "@cerbos/api":
         to: 0.7.0
-        pull: 1438
+        pullRequests: [1438]
 
       "@cerbos/core":
         to: 0.30.0
-        pull: 1439
+        pullRequests: [1439]
 
   - version: 0.27.0
     date: 2026-04-28
@@ -127,12 +129,12 @@ releases:
     added:
       - summary: "[`PolicySourceHubRemoteBundle`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicySourceHubRemoteBundle.html) as a possible type for [`AccessLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AccessLogEntry.html#policysource) and [`DecisionLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#policysource)"
         details: Requires a policy decision point server running Cerbos 0.52+.
-        pull: 1418
+        pullRequests: [1418]
 
     bumped:
       "@cerbos/core":
         to: 0.29.0
-        pull: 1436
+        pullRequests: [1436]
 
   - version: 0.26.2
     date: 2026-04-27
@@ -140,14 +142,14 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.28.1
-        pull: 1432
+        pullRequests: [1432]
 
   - version: 0.26.1
     date: 2026-03-27
 
     changed:
       - summary: Drop dependency on [qs]
-        pull: 1377
+        pullRequests: [1377]
 
   - version: 0.26.0
     date: 2026-02-04
@@ -155,40 +157,40 @@ releases:
     added:
       - summary: "[`Client.deletePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deletepolicy) and [`Client.deletePolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deletepolicies) methods to delete policies"
         details: Requires a policy decision point server running Cerbos 0.51+.
-        pull: 1344
+        pullRequests: [1344]
 
       - summary: "[`PolicyStoreIntegrityViolated`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.PolicyStoreIntegrityViolated.html) error, thrown when disabling or deleting a policy violates the integrity of the store"
         details: Requires a policy decision point server running Cerbos 0.51+.
-        pull: 1344
+        pullRequests: [1344]
 
       - summary: Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html)
         details: Requires a policy decision point server running Cerbos 0.51+.
-        pull: 1344
+        pullRequests: [1344]
 
       - summary: "[`OutputResult.action`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#action) property"
         details: Requires a policy decision point server running Cerbos 0.51+.
-        pull: 1344
+        pullRequests: [1344]
 
       - summary: Support for [versioned role policies](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RolePolicyBody.html#version)
         details: Requires a policy decision point server running Cerbos 0.51+.
-        pull: 1344
+        pullRequests: [1344]
 
       - summary: "[`Client.purgeStoreRevisions`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#purgestorerevisions) method to clear history from dynamic policy stores"
         details: Requires a policy decision point server running Cerbos 0.51+.
-        pull: 1344
+        pullRequests: [1344]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.11.0
-        pull: 1355
+        pullRequests: [1355]
 
       "@cerbos/api":
         to: 0.6.0
-        pull: 1358
+        pullRequests: [1358]
 
       "@cerbos/core":
         to: 0.28.0
-        pull: 1361
+        pullRequests: [1361]
 
   - version: 0.25.0
     date: 2026-01-22
@@ -196,54 +198,54 @@ releases:
     changed:
       - summary: Use `POST /admin/policy/disable` to disable policies
         details: Requires a policy decision point server running Cerbos 0.26+.
-        pull: 1348
+        pullRequests: [1348]
 
   - version: 0.24.2
     date: 2026-01-15
 
     changed:
       - summary: Ignore unknown fields when parsing responses from the policy decision point server
-        pull: 1341
+        pullRequests: [1341]
 
   - version: 0.24.1
     date: 2026-01-12
 
     changed:
       - summary: Migrate documentation to TypeDoc
-        pull: 1332
+        pullRequests: [1332]
 
     bumped:
       "@cerbos/api":
         to: 0.5.1
-        pull: 1340
+        pullRequests: [1340]
 
       "@cerbos/core":
         to: 0.27.1
-        pull: 1340
+        pullRequests: [1340]
 
   - version: 0.24.0
     date: 2026-01-07
 
     changed:
       - summary: Convert package to ESM
-        pull: 1330
+        pullRequests: [1330]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.10.2
-        pull: 1320
+        pullRequests: [1320]
 
       "@cerbos/api":
         to: 0.5.0
-        pull: 1331
+        pullRequests: [1331]
 
       "@cerbos/core":
         to: 0.27.0
-        pull: 1331
+        pullRequests: [1331]
 
       qs:
         to: 6.14.1
-        pull: 1325
+        pullRequests: [1325]
 
   - version: 0.23.5
     date: 2025-12-12
@@ -251,11 +253,11 @@ releases:
     bumped:
       "@cerbos/api":
         to: 0.4.0
-        pull: 1313
+        pullRequests: [1313]
 
       "@cerbos/core":
         to: 0.26.0
-        pull: 1313
+        pullRequests: [1313]
 
   - version: 0.23.4
     date: 2025-11-20
@@ -263,15 +265,15 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.10.1
-        pull: 1281
+        pullRequests: [1281]
 
       "@cerbos/api":
         to: 0.3.0
-        pull: 1288
+        pullRequests: [1288]
 
       "@cerbos/core":
         to: 0.25.2
-        pull: 1288
+        pullRequests: [1288]
 
   - version: 0.23.3
     date: 2025-11-12
@@ -279,23 +281,23 @@ releases:
     bumped:
       "@cerbos/api":
         to: 0.2.0
-        pull: 1280
+        pullRequests: [1280]
 
       "@cerbos/core":
         to: 0.25.1
-        pull: 1280
+        pullRequests: [1280]
 
   - version: 0.23.2
     date: 2025-11-07
 
     changed:
       - summary: Migrate to `protoc-gen-es` and extract generated code to its own package
-        pull: 1271
+        pullRequests: [1271]
 
     bumped:
       "@cerbos/core":
         to: 0.25.0
-        pull: 1273
+        pullRequests: [1273]
 
   - version: 0.23.1
     date: 2025-09-15
@@ -303,7 +305,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.24.1
-        pull: 1233
+        pullRequests: [1233]
 
   - version: 0.23.0
     date: 2025-08-11
@@ -311,19 +313,19 @@ releases:
     added:
       - summary: "[`AccessLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AccessLogEntry.html#policysource) and [`DecisionLogEntry.policySource`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#policysource) properties"
         details: Requires a policy decision point server running Cerbos 0.46+.
-        pull: 1193
+        pullRequests: [1193]
 
       - summary: Include [scope permissions](https://docs.cerbos.dev/cerbos/latest/policies/scope_permissions) when retrieving resource and principal policies via the Admin API
-        pull: 1201
+        pullRequests: [1201]
 
     bumped:
       "@cerbos/core":
         to: 0.24.0
-        pull: 1208
+        pullRequests: [1208]
 
     removed:
       - summary: Support for scope permissions in role policies
-        pull: 1201
+        pullRequests: [1201]
 
   - version: 0.22.1
     date: 2025-07-02
@@ -331,7 +333,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.23.0
-        pull: 1192
+        pullRequests: [1192]
 
   - version: 0.22.0
     date: 2025-06-02
@@ -339,19 +341,19 @@ releases:
     added:
       - summary: Support for multiple actions in [`Client.planResources`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#planresources)
         details: Requires a policy decision point server running Cerbos 0.44+.
-        pull: 1146
+        pullRequests: [1146]
 
       - summary: "[`AccessLogEntry.oversized`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.AccessLogEntry.html#oversized) and [`DecisionLogEntry.oversized`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.DecisionLogEntry.html#oversized) properties"
-        pull: 1165
+        pullRequests: [1165]
 
     bumped:
       "@cerbos/core":
         to: 0.22.0
-        pull: 1167
+        pullRequests: [1167]
 
     removed:
       - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
-        pull: 1166
+        pullRequests: [1166]
 
   - version: 0.21.2
     date: 2025-03-12
@@ -359,7 +361,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.21.1
-        pull: 1121
+        pullRequests: [1121]
 
   - version: 0.21.1
     date: 2025-02-13
@@ -367,23 +369,23 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.21.0
-        pull: 1097
+        pullRequests: [1097]
 
   - version: 0.21.0
     date: 2025-02-06
 
     added:
       - summary: "[`Client.checkHealth`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#checkhealth) method to check the health of services provided by the policy decision point server"
-        pull: 1085
+        pullRequests: [1085]
 
     bumped:
       "@cerbos/core":
         to: 0.20.0
-        pull: 1086
+        pullRequests: [1086]
 
       qs:
         to: 6.14.0
-        pull: 1077
+        pullRequests: [1077]
 
   - version: 0.20.0
     date: 2024-11-27
@@ -391,24 +393,24 @@ releases:
     added:
       - summary: "[`Client.inspectPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#inspectpolicies) method to inspect policy details"
         details: Requires a policy decision point server running Cerbos 0.35+.
-        pull: 1051
+        pullRequests: [1051]
 
       - summary: Support for filtering [`Client.listPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listpolicies) results by policy ID
         details: Requires a policy decision point server running Cerbos 0.37+.
-        pull: 1051
+        pullRequests: [1051]
 
       - summary: Support for [constants](https://docs.cerbos.dev/cerbos/latest/policies/variables#constants)
         details: Requires a policy decision point server running Cerbos 0.40+.
-        pull: 1051
+        pullRequests: [1051]
 
     bumped:
       "@cerbos/core":
         to: 0.19.0
-        pull: 1053
+        pullRequests: [1053]
 
       qs:
         to: 6.13.1
-        pull: 1046
+        pullRequests: [1046]
 
   - version: 0.19.2
     date: 2024-08-19
@@ -416,19 +418,19 @@ releases:
     bumped:
       qs:
         to: 6.13.0
-        pulls: [976, 985]
+        pullRequests: [976, 985]
 
   - version: 0.19.1
     date: 2024-06-11
 
     changed:
       - summary: Cancel unused response bodies
-        pull: 956
+        pullRequests: [956]
 
     bumped:
       "@cerbos/core":
         to: 0.18.1
-        pull: 969
+        pullRequests: [969]
 
   - version: 0.19.0
     date: 2024-05-15
@@ -442,54 +444,54 @@ releases:
           - [`Client.listDecisionLogEntries`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listdecisionlogentries) method
           - [`CheckResourcesResponse.cerbosCallId`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.CheckResourcesResponse.html#cerboscallid) property
           - [`PlanResourcesResponse.cerbosCallId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesResponseBase.html#cerboscallid) property
-        pull: 945
+        pullRequests: [945]
 
     bumped:
       "@cerbos/core":
         to: 0.18.0
-        pull: 951
+        pullRequests: [951]
 
   - version: 0.18.1
     date: 2024-04-23
 
     changed:
       - summary: Support legacy Node.js module resolution and place `default` export last
-        pull: 937
+        pullRequests: [937]
 
     bumped:
       "@cerbos/core":
         to: 0.17.1
-        pull: 938
+        pullRequests: [938]
 
       qs:
         to: 6.12.1
-        pull: 933
+        pullRequests: [933]
 
   - version: 0.18.0
     date: 2024-04-12
 
     added:
       - summary: "[`Client.withPrincipal`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#withprincipal) method to create a client instance with a pre-specified principal"
-        pulls: [868, 877]
+        pullRequests: [868, 877]
 
       - summary: "[`signal`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestOptions.html#signal) option to all methods, so that requests can be aborted using an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)"
-        pull: 894
+        pullRequests: [894]
 
     changed:
       - summary: Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements)
-        pull: 852
+        pullRequests: [852]
 
       - summary: Prevent importing package internals
-        pull: 867
+        pullRequests: [867]
 
     bumped:
       "@cerbos/core":
         to: 0.17.0
-        pull: 929
+        pullRequests: [929]
 
       qs:
         to: 6.12.0
-        pull: 856
+        pullRequests: [856]
 
   - version: 0.17.0
     date: 2024-02-29
@@ -497,12 +499,12 @@ releases:
     added:
       - summary: "[`Output.when`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.Output.html#when) to define [conditional policy rule outputs](https://docs.cerbos.dev/cerbos/latest/policies/outputs) using the Admin API"
         details: Requires a policy decision point server running Cerbos 0.33+.
-        pull: 829
+        pullRequests: [829]
 
     bumped:
       "@cerbos/core":
         to: 0.16.0
-        pull: 835
+        pullRequests: [835]
 
   - version: 0.16.0
     date: 2024-01-11
@@ -510,12 +512,12 @@ releases:
     added:
       - summary: "[`userAgent`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.Options.html#useragent) option to `HTTP` constructor, and [`headers`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestOptions.html#headers) option to all methods"
         details: Note that if you were previously setting the `User-Agent` header via the `headers` option, you'll now need to do so using the dedicated `userAgent` option.
-        pull: 776
+        pullRequests: [776]
 
     bumped:
       "@cerbos/core":
         to: 0.15.0
-        pull: 781
+        pullRequests: [781]
 
   - version: 0.15.0
     date: 2023-10-02
@@ -525,16 +527,16 @@ releases:
         details: |-
           This makes the API consistent with policy expressions.
           `attributes` is still supported for backwards compatibility, but is now deprecated.
-        pull: 694
+        pullRequests: [694]
 
     bumped:
       "@cerbos/core":
         to: 0.14.0
-        pull: 695
+        pullRequests: [695]
 
     removed:
       - summary: Support for Node.js 16, which is now [end-of-life][nodejs-eol]
-        pull: 669
+        pullRequests: [669]
 
   - version: 0.14.0
     date: 2023-08-16
@@ -542,17 +544,17 @@ releases:
     added:
       - summary: Support for OpenTelemetry span context propagation
         details: Requires a policy decision point server running Cerbos 0.30+, and [@cerbos/opentelemetry] 0.3+.
-        pull: 638
+        pullRequests: [638]
 
     bumped:
       "@cerbos/core":
         to: 0.13.0
-        pull: 645
+        pullRequests: [645]
 
     removed:
       - summary: Dependency on [abab](https://github.com/jsdom/abab), which is no longer necessary since dropping support for Node.js 14
         details: The `btoa` global function is [supported in Node.js 16+ and all modern browsers](https://developer.mozilla.org/en-US/docs/Web/API/btoa#browser_compatibility).
-        pull: 639
+        pullRequests: [639]
 
   - version: 0.13.0
     date: 2023-07-18
@@ -560,16 +562,16 @@ releases:
     added:
       - summary: Support for filtering [`Client.listPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listpolicies) results by policy name, scope, and version
         details: Requires a policy decision point server running Cerbos 0.29+.
-        pull: 568
+        pullRequests: [568]
 
       - summary: Support for [exporting and importing variable sets](https://docs.cerbos.dev/cerbos/latest/policies/variables) in policies
         details: Requires a policy decision point server running Cerbos 0.29+.
-        pull: 598
+        pullRequests: [598]
 
     bumped:
       "@cerbos/core":
         to: 0.12.0
-        pull: 599
+        pullRequests: [599]
 
   - version: 0.12.0
     date: 2023-06-07
@@ -577,20 +579,20 @@ releases:
     added:
       - summary: Support for user-defined policy rule outputs
         details: Requires a policy decision point server running Cerbos 0.27+.
-        pulls: [542, 543, 551]
+        pullRequests: [542, 543, 551]
 
     bumped:
       "@cerbos/core":
         to: 0.11.0
-        pull: 550
+        pullRequests: [550]
 
       qs:
         to: 6.11.2
-        pull: 530
+        pullRequests: [530]
 
     removed:
       - summary: Support for Node.js 14, which is now [end-of-life][nodejs-eol]
-        pull: 521
+        pullRequests: [521]
 
   - version: 0.11.0
     date: 2023-04-18
@@ -598,20 +600,20 @@ releases:
     added:
       - summary: "[`includeDisabled`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.ListPoliciesRequest.html#includedisabled) option to [`Client.listPolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#listpolicies) method to include disabled policies in the list"
         details: Requires a policy decision point server running Cerbos 0.26+.
-        pull: 475
+        pullRequests: [475]
 
       - summary: "[`Client.enablePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#enablepolicy) and [`Client.enablePolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#enablepolicies) methods to enable policies"
         details: Requires a policy decision point server running Cerbos 0.26+.
-        pull: 475
+        pullRequests: [475]
 
     changed:
       - summary: Space-separate the `User-Agent` header for `node-fetch` compatibility
-        pull: 505
+        pullRequests: [505]
 
     bumped:
       "@cerbos/core":
         to: 0.10.0
-        pull: 506
+        pullRequests: [506]
 
   - version: 0.10.1
     date: 2023-03-23
@@ -619,23 +621,23 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.9.1
-        pull: 481
+        pullRequests: [481]
 
     removed:
       - summary: Unused generated code
-        pull: 480
+        pullRequests: [480]
 
   - version: 0.10.0
     date: 2023-03-21
 
     added:
       - summary: "[`headers`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.Options.html#headers) option to add headers to every request"
-        pull: 471
+        pullRequests: [471]
 
     bumped:
       qs:
         to: 6.11.1
-        pull: 459
+        pullRequests: [459]
 
   - version: 0.9.0
     date: 2023-02-15
@@ -643,47 +645,47 @@ releases:
     added:
       - summary: "[`Client.disablePolicy`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#disablepolicy) and [`Client.disablePolicies`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#disablepolicies) methods to disable policies"
         details: Requires a policy decision point server running Cerbos 0.25+.
-        pull: 429
+        pullRequests: [429]
 
       - summary: "[OpenTelemetry](https://opentelemetry.io) support"
-        pull: 438
+        pullRequests: [438]
 
     changed:
       - summary: "[`Client.deleteSchema`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deleteschema) and [`Client.deleteSchemas`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.Client.html#deleteschemas) now return whether schemas were deleted"
         details: Requires a policy decision point server running Cerbos 0.25+.
-        pull: 429
+        pullRequests: [429]
 
       - summary: "[`Policy.metadata.storeIdentifer`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicyMetadata.html#storeidentifer) is now deprecated, replaced by [`Policy.metadata.storeIdentifier`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PolicyMetadata.html#storeidentifier)"
-        pull: 439
+        pullRequests: [439]
 
     bumped:
       "@cerbos/core":
         to: 0.9.0
-        pull: 446
+        pullRequests: [446]
 
   - version: 0.8.1
     date: 2022-11-24
 
     changed:
       - summary: Document principal and resource `attributes` fields in examples
-        pull: 358
+        pullRequests: [358]
 
     bumped:
       "@cerbos/core":
         to: 0.8.1
-        pull: 359
+        pullRequests: [359]
 
   - version: 0.8.0
     date: 2022-09-08
 
     changed:
       - summary: Use [`NotOK.fromJSON`](https://cerbos.github.io/cerbos-sdk-javascript/classes/_cerbos_core.NotOK.html#fromjson) factory method to parse JSON-serialized unsucessful responses
-        pull: 249
+        pullRequests: [249]
 
     bumped:
       "@cerbos/core":
         to: 0.8.0
-        pull: 250
+        pullRequests: [250]
 
   - version: 0.7.1
     date: 2022-09-06
@@ -691,19 +693,19 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.7.1
-        pull: 246
+        pullRequests: [246]
 
   - version: 0.7.0
     date: 2022-08-24
 
     added:
       - summary: Support for the [admin API](https://docs.cerbos.dev/cerbos/latest/api/admin_api)
-        pull: 209
+        pullRequests: [209]
 
     bumped:
       "@cerbos/core":
         to: 0.7.0
-        pull: 221
+        pullRequests: [221]
 
   - version: 0.6.0
     date: 2022-07-01
@@ -713,31 +715,31 @@ releases:
         details: |-
           Requires a policy decision point server running Cerbos 0.19+.
           [`PlanResourcesResponse.validationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesResponseBase.html#validationerrors) will always be an empty array if the client is connected to an earlier version of Cerbos.
-        pull: 123
+        pullRequests: [123]
 
     bumped:
       "@cerbos/core":
         to: 0.6.0
-        pull: 136
+        pullRequests: [136]
 
   - version: 0.5.1
     date: 2022-06-09
 
     changed:
       - summary: Make README links relative to file to fix broken links on npmjs.com
-        pull: 103
+        pullRequests: [103]
 
     bumped:
       "@cerbos/core":
         to: 0.5.1
-        pull: 104
+        pullRequests: [104]
 
   - version: 0.5.0
     date: 2022-06-07
 
     added:
       - summary: Separate HTTP client for browser-based applications
-        pull: 73
+        pullRequests: [73]
 
 references:
   "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es

@@ -149,7 +149,7 @@ async function prepareRelease(
     if (pkg.changelog.releases?.length) {
       (pkg.unreleased.bumped ??= {})[dependency] = {
         to: newVersion,
-        pull: pullRequest,
+        pullRequests: [pullRequest],
       };
 
       (pkg.changelog.references ??= {})[dependency] =

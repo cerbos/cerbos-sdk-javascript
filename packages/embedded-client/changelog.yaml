@@ -1,10 +1,16 @@
+# yaml-language-server: $schema=../changelog.schema.json
+
 unreleased:
   type: patch
 
   bumped:
     "@bufbuild/protobuf":
       to: 2.15.0
-      pull: 1542
+      pullRequests: [1542]
+
+    "@bufbuild/protovalidate":
+      to: 1.3.0
+      pullRequests: [1545]
 
 releases:
   - version: 0.8.1
@@ -13,116 +19,116 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.14.1
-        pulls: [1523, 1529]
+        pullRequests: [1523, 1529]
 
       "@cerbos/api":
         to: 0.11.1
-        pull: 1538
+        pullRequests: [1538]
 
       "@cerbos/core":
         to: 0.33.1
-        pull: 1538
+        pullRequests: [1538]
 
       "@cerbos/hub":
         to: 0.6.2
-        pull: 1538
+        pullRequests: [1538]
 
   - version: 0.8.0
     date: 2026-08-13
 
     added:
       - summary: Support for multiple JWTs in auxiliary data
-        pull: 1509
+        pullRequests: [1509]
 
       - summary: "[`Options.strictEvaluation`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded-client.Options.html#strictevaluation) to configure the embedded policy decision point server to perform [strict evaluation](https://docs.cerbos.dev/cerbos/latest/configuration/engine#strict_evaluation)"
-        pull: 1511
+        pullRequests: [1511]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.13.0
-        pull: 1502
+        pullRequests: [1502]
 
       "@cerbos/api":
         to: 0.11.0
-        pull: 1512
+        pullRequests: [1512]
 
       "@cerbos/core":
         to: 0.33.0
-        pull: 1519
+        pullRequests: [1519]
 
       "@cerbos/embedded-server":
         to: 0.7.1
-        pulls: [1517, 1518]
+        pullRequests: [1517, 1518]
 
       "@cerbos/hub":
         to: 0.6.1
-        pull: 1519
+        pullRequests: [1519]
 
   - version: 0.7.0
     date: 2026-07-20
 
     added:
       - summary: "[`CheckOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.CheckOutput.html#evaluationerrors) and [`PlanResourcesOutput.evaluationErrors`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.PlanResourcesOutputBase.html#evaluationerrors) properties"
-        pull: 1492
+        pullRequests: [1492]
 
       - summary: "[`OutputResult.error`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#error) property"
-        pull: 1452
+        pullRequests: [1452]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.12.1
-        pull: 1478
+        pullRequests: [1478]
 
       "@cerbos/api":
         to: 0.10.0
-        pull: 1494
+        pullRequests: [1494]
 
       "@cerbos/core":
         to: 0.32.0
-        pull: 1501
+        pullRequests: [1501]
 
       "@cerbos/embedded-server":
         to: 0.6.1
-        pulls: [1497, 1498]
+        pullRequests: [1497, 1498]
 
       "@cerbos/hub":
         to: 0.6.0
-        pull: 1501
+        pullRequests: [1501]
 
     removed:
       - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
-        pull: 1454
+        pullRequests: [1454]
 
   - version: 0.6.0
     date: 2026-05-06
 
     added:
       - summary: Support for [`exactOptionalPropertyTypes`](https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes) by typing optional properties with explicit `| undefined`
-        pull: 1442
+        pullRequests: [1442]
 
       - summary: Populate [`EmbeddedBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.EmbeddedBundle.html#bundleid) (or [`LocalBundle.bundleId`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.LocalBundle.html#bundleid)) in audit log entries
-        pull: 1448
+        pullRequests: [1448]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.12.0
-        pull: 1441
+        pullRequests: [1441]
 
       "@cerbos/api":
         to: 0.8.0
-        pull: 1447
+        pullRequests: [1447]
 
       "@cerbos/core":
         to: 0.31.0
-        pull: 1449
+        pullRequests: [1449]
 
       "@cerbos/embedded-server":
         to: 0.5.0
-        pull: 1448
+        pullRequests: [1448]
 
       "@cerbos/hub":
         to: 0.5.6
-        pull: 1449
+        pullRequests: [1449]
 
   - version: 0.5.3
     date: 2026-05-01
@@ -130,19 +136,19 @@ releases:
     bumped:
       "@cerbos/api":
         to: 0.7.0
-        pull: 1438
+        pullRequests: [1438]
 
       "@cerbos/core":
         to: 0.30.0
-        pull: 1439
+        pullRequests: [1439]
 
       "@cerbos/embedded-server":
         to: 0.4.5
-        pull: 1439
+        pullRequests: [1439]
 
       "@cerbos/hub":
         to: 0.5.5
-        pull: 1439
+        pullRequests: [1439]
 
   - version: 0.5.2
     date: 2026-04-28
@@ -150,11 +156,11 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.29.0
-        pull: 1436
+        pullRequests: [1436]
 
       "@cerbos/hub":
         to: 0.5.4
-        pull: 1436
+        pullRequests: [1436]
 
   - version: 0.5.1
     date: 2026-04-27
@@ -162,135 +168,135 @@ releases:
     bumped:
       "@bufbuild/protovalidate":
         to: 1.2.0
-        pull: 1431
+        pullRequests: [1431]
 
       "@cerbos/core":
         to: 0.28.1
-        pull: 1432
+        pullRequests: [1432]
 
       "@cerbos/hub":
         to: 0.5.3
-        pull: 1432
+        pullRequests: [1432]
 
   - version: 0.5.0
     date: 2026-02-04
 
     added:
       - summary: Support for additional [request context](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.RequestContext.html)
-        pull: 1344
+        pullRequests: [1344]
 
       - summary: "[`OutputResult.action`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_core.OutputResult.html#action) property"
-        pulls: [1344, 1359]
+        pullRequests: [1344, 1359]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.11.0
-        pull: 1355
+        pullRequests: [1355]
 
       "@bufbuild/protovalidate":
         to: 1.1.1
-        pull: 1355
+        pullRequests: [1355]
 
       "@cerbos/api":
         to: 0.6.0
-        pull: 1358
+        pullRequests: [1358]
 
       "@cerbos/core":
         to: 0.28.0
-        pull: 1361
+        pullRequests: [1361]
 
       "@cerbos/embedded-server":
         to: 0.4.1
-        pulls: [1359, 1361]
+        pullRequests: [1359, 1361]
 
       "@cerbos/hub":
         to: 0.5.2
-        pull: 1361
+        pullRequests: [1361]
 
   - version: 0.4.0
     date: 2026-01-12
 
     added:
       - summary: "[`Options.defaultScope`](https://cerbos.github.io/cerbos-sdk-javascript/interfaces/_cerbos_embedded-client.Options.html#defaultscope) to configure the embedded policy decision point server's [default scope](https://docs.cerbos.dev/cerbos/latest/configuration/engine#default_scope)"
-        pull: 1333
+        pullRequests: [1333]
 
     changed:
       - summary: Stop overriding the embedded policy decision point server's default schema enforcement level
         details: |-
           Previously the client set the schema enforcement level to `WARN` by default.
           Now the default is determined by the server (currently `NONE`).
-        pull: 1333
+        pullRequests: [1333]
 
       - summary: Migrate documentation to TypeDoc
-        pull: 1332
+        pullRequests: [1332]
 
     bumped:
       "@cerbos/api":
         to: 0.5.1
-        pull: 1340
+        pullRequests: [1340]
 
       "@cerbos/core":
         to: 0.27.1
-        pull: 1340
+        pullRequests: [1340]
 
       "@cerbos/embedded-server":
         to: 0.3.1
-        pull: 1333
+        pullRequests: [1333]
 
       "@cerbos/hub":
         to: 0.5.1
-        pull: 1340
+        pullRequests: [1340]
 
   - version: 0.3.0
     date: 2026-01-07
 
     changed:
       - summary: Convert package to ESM
-        pull: 1330
+        pullRequests: [1330]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.10.2
-        pull: 1320
+        pullRequests: [1320]
 
       "@bufbuild/protovalidate":
         to: 1.1.0
-        pull: 1320
+        pullRequests: [1320]
 
       "@cerbos/api":
         to: 0.5.0
-        pull: 1331
+        pullRequests: [1331]
 
       "@cerbos/core":
         to: 0.27.0
-        pull: 1331
+        pullRequests: [1331]
 
       "@cerbos/hub":
         to: 0.5.0
-        pull: 1331
+        pullRequests: [1331]
 
   - version: 0.2.0
     date: 2025-12-15
 
     added:
       - summary: Compatibility with Vite's `?init` imports
-        pull: 1317
+        pullRequests: [1317]
 
     bumped:
       "@cerbos/embedded-server":
         to: 0.2.0
-        pull: 1317
+        pullRequests: [1317]
 
       "@cerbos/hub":
         to: 0.4.0
-        pull: 1318
+        pullRequests: [1318]
 
   - version: 0.1.0
     date: 2025-12-12
 
     added:
       - summary: Client library for new embedded policy decision point servers
-        pull: 1312
+        pullRequests: [1312]
 
 references:
   "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es

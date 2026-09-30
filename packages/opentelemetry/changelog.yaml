@@ -1,10 +1,12 @@
+# yaml-language-server: $schema=../changelog.schema.json
+
 unreleased:
   type: patch
 
   bumped:
     "@bufbuild/protobuf":
       to: 2.15.0
-      pull: 1542
+      pullRequests: [1542]
 
 releases:
   - version: 0.11.2
@@ -13,19 +15,19 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.14.1
-        pulls: [1523, 1529]
+        pullRequests: [1523, 1529]
 
       "@cerbos/api":
         to: 0.11.1
-        pull: 1538
+        pullRequests: [1538]
 
       "@cerbos/core":
         to: 0.33.1
-        pull: 1538
+        pullRequests: [1538]
 
       "@opentelemetry/instrumentation":
         to: 0.222.0
-        pull: 1529
+        pullRequests: [1529]
 
   - version: 0.11.1
     date: 2026-08-13
@@ -33,19 +35,19 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.13.0
-        pull: 1502
+        pullRequests: [1502]
 
       "@cerbos/api":
         to: 0.11.0
-        pull: 1512
+        pullRequests: [1512]
 
       "@cerbos/core":
         to: 0.33.0
-        pull: 1519
+        pullRequests: [1519]
 
       "@opentelemetry/instrumentation":
         to: 0.221.0
-        pull: 1502
+        pullRequests: [1502]
 
   - version: 0.11.0
     date: 2026-07-20
@@ -53,27 +55,27 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.12.1
-        pull: 1478
+        pullRequests: [1478]
 
       "@cerbos/api":
         to: 0.10.0
-        pull: 1494
+        pullRequests: [1494]
 
       "@cerbos/core":
         to: 0.32.0
-        pull: 1501
+        pullRequests: [1501]
 
       "@opentelemetry/instrumentation":
         to: 0.220.0
-        pulls: [1453, 1473, 1489]
+        pullRequests: [1453, 1473, 1489]
 
       "@opentelemetry/semantic-conventions":
         to: 1.43.0
-        pulls: [1453, 1489, 1496]
+        pullRequests: [1453, 1489, 1496]
 
     removed:
       - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
-        pull: 1454
+        pullRequests: [1454]
 
   - version: 0.10.4
     date: 2026-05-06
@@ -81,19 +83,19 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.12.0
-        pull: 1441
+        pullRequests: [1441]
 
       "@cerbos/api":
         to: 0.8.0
-        pull: 1447
+        pullRequests: [1447]
 
       "@cerbos/core":
         to: 0.31.0
-        pull: 1449
+        pullRequests: [1449]
 
       "@opentelemetry/instrumentation":
         to: 0.216.0
-        pull: 1444
+        pullRequests: [1444]
 
   - version: 0.10.3
     date: 2026-05-01
@@ -101,11 +103,11 @@ releases:
     bumped:
       "@cerbos/api":
         to: 0.7.0
-        pull: 1438
+        pullRequests: [1438]
 
       "@cerbos/core":
         to: 0.30.0
-        pull: 1439
+        pullRequests: [1439]
 
   - version: 0.10.2
     date: 2026-04-28
@@ -113,7 +115,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.29.0
-        pull: 1436
+        pullRequests: [1436]
 
   - version: 0.10.1
     date: 2026-04-27
@@ -121,15 +123,15 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.28.1
-        pull: 1432
+        pullRequests: [1432]
 
       "@opentelemetry/api":
         to: 1.9.1
-        pull: 1411
+        pullRequests: [1411]
 
       "@opentelemetry/instrumentation":
         to: 0.215.0
-        pulls: [1411, 1429]
+        pullRequests: [1411, 1429]
 
   - version: 0.10.0
     date: 2026-03-27
@@ -143,16 +145,16 @@ releases:
           - `rpc.service` is removed;
           - `rpc.method` is now the fully-qualified name (`cerbos.svc.v1.CerbosService/CheckResources` instead of `CheckResources`); and
           - the numeric `rpc.grpc.status_code` is replaced by the string `rpc.response.status_code` (`INVALID_ARGUMENT` instead of `3`).
-        pull: 1373
+        pullRequests: [1373]
 
     bumped:
       "@opentelemetry/instrumentation":
         to: 0.213.0
-        pulls: [1376, 1384]
+        pullRequests: [1376, 1384]
 
       "@opentelemetry/semantic-conventions":
         to: 1.40.0
-        pull: 1384
+        pullRequests: [1384]
 
   - version: 0.9.0
     date: 2026-02-04
@@ -160,23 +162,23 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.11.0
-        pull: 1355
+        pullRequests: [1355]
 
       "@cerbos/api":
         to: 0.6.0
-        pull: 1358
+        pullRequests: [1358]
 
       "@cerbos/core":
         to: 0.28.0
-        pull: 1361
+        pullRequests: [1361]
 
       "@opentelemetry/instrumentation":
         to: 0.211.0
-        pull: 1352
+        pullRequests: [1352]
 
       "@opentelemetry/semantic-conventions":
         to: 1.39.0
-        pull: 1352
+        pullRequests: [1352]
 
   - version: 0.8.2
     date: 2026-01-22
@@ -184,43 +186,43 @@ releases:
     bumped:
       "@opentelemetry/instrumentation":
         to: 0.209.0
-        pull: 1347
+        pullRequests: [1347]
 
   - version: 0.8.1
     date: 2026-01-12
 
     changed:
       - summary: Migrate documentation to TypeDoc
-        pull: 1332
+        pullRequests: [1332]
 
     bumped:
       "@cerbos/api":
         to: 0.5.1
-        pull: 1340
+        pullRequests: [1340]
 
       "@cerbos/core":
         to: 0.27.1
-        pull: 1340
+        pullRequests: [1340]
 
   - version: 0.8.0
     date: 2026-01-07
 
     changed:
       - summary: Convert package to ESM
-        pull: 1330
+        pullRequests: [1330]
 
     bumped:
       "@bufbuild/protobuf":
         to: 2.10.2
-        pull: 1320
+        pullRequests: [1320]
 
       "@cerbos/api":
         to: 0.5.0
-        pull: 1331
+        pullRequests: [1331]
 
       "@cerbos/core":
         to: 0.27.0
-        pull: 1331
+        pullRequests: [1331]
 
   - version: 0.7.3
     date: 2025-12-12
@@ -228,11 +230,11 @@ releases:
     bumped:
       "@cerbos/api":
         to: 0.4.0
-        pull: 1313
+        pullRequests: [1313]
 
       "@cerbos/core":
         to: 0.26.0
-        pull: 1313
+        pullRequests: [1313]
 
   - version: 0.7.2
     date: 2025-11-20
@@ -240,15 +242,15 @@ releases:
     bumped:
       "@bufbuild/protobuf":
         to: 2.10.1
-        pull: 1281
+        pullRequests: [1281]
 
       "@cerbos/api":
         to: 0.3.0
-        pull: 1288
+        pullRequests: [1288]
 
       "@cerbos/core":
         to: 0.25.2
-        pull: 1288
+        pullRequests: [1288]
 
   - version: 0.7.1
     date: 2025-11-12
@@ -256,19 +258,19 @@ releases:
     bumped:
       "@cerbos/api":
         to: 0.2.0
-        pull: 1280
+        pullRequests: [1280]
 
       "@cerbos/core":
         to: 0.25.1
-        pull: 1280
+        pullRequests: [1280]
 
       "@opentelemetry/instrumentation":
         to: 0.208.0
-        pull: 1275
+        pullRequests: [1275]
 
       "@opentelemetry/semantic-conventions":
         to: 1.38.0
-        pull: 1275
+        pullRequests: [1275]
 
   - version: 0.7.0
     date: 2025-11-07
@@ -276,11 +278,11 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.25.0
-        pull: 1273
+        pullRequests: [1273]
 
       "@opentelemetry/instrumentation":
         to: 0.207.0
-        pull: 1261
+        pullRequests: [1261]
 
   - version: 0.6.4
     date: 2025-10-14
@@ -288,7 +290,7 @@ releases:
     bumped:
       "@opentelemetry/instrumentation":
         to: 0.206.0
-        pull: 1250
+        pullRequests: [1250]
 
   - version: 0.6.3
     date: 2025-09-15
@@ -296,15 +298,15 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.24.1
-        pull: 1233
+        pullRequests: [1233]
 
       "@opentelemetry/instrumentation":
         to: 0.205.0
-        pulls: [1223, 1228]
+        pullRequests: [1223, 1228]
 
       "@opentelemetry/semantic-conventions":
         to: 1.37.0
-        pull: 1223
+        pullRequests: [1223]
 
   - version: 0.6.2
     date: 2025-08-11
@@ -312,15 +314,15 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.24.0
-        pull: 1208
+        pullRequests: [1208]
 
       "@opentelemetry/instrumentation":
         to: 0.203.0
-        pull: 1198
+        pullRequests: [1198]
 
       "@opentelemetry/semantic-conventions":
         to: 1.36.0
-        pull: 1198
+        pullRequests: [1198]
 
   - version: 0.6.1
     date: 2025-07-02
@@ -328,11 +330,11 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.23.0
-        pull: 1192
+        pullRequests: [1192]
 
       "@opentelemetry/instrumentation":
         to: 0.202.0
-        pull: 1169
+        pullRequests: [1169]
 
   - version: 0.6.0
     date: 2025-06-02
@@ -340,19 +342,19 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.22.0
-        pull: 1167
+        pullRequests: [1167]
 
       "@opentelemetry/instrumentation":
         to: 0.201.1
-        pulls: [1126, 1156, 1159]
+        pullRequests: [1126, 1156, 1159]
 
       "@opentelemetry/semantic-conventions":
         to: 1.34.0
-        pulls: [1140, 1152, 1159]
+        pullRequests: [1140, 1152, 1159]
 
     removed:
       - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
-        pull: 1166
+        pullRequests: [1166]
 
   - version: 0.5.9
     date: 2025-03-12
@@ -360,7 +362,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.21.1
-        pull: 1121
+        pullRequests: [1121]
 
   - version: 0.5.8
     date: 2025-02-19
@@ -368,7 +370,7 @@ releases:
     bumped:
       "@opentelemetry/instrumentation":
         to: 0.57.2
-        pull: 1098
+        pullRequests: [1098]
 
   - version: 0.5.7
     date: 2025-02-13
@@ -376,11 +378,11 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.21.0
-        pull: 1097
+        pullRequests: [1097]
 
       "@opentelemetry/semantic-conventions":
         to: 1.30.0
-        pulls: [1090, 1094]
+        pullRequests: [1090, 1094]
 
   - version: 0.5.6
     date: 2025-02-06
@@ -388,11 +390,11 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.20.0
-        pull: 1086
+        pullRequests: [1086]
 
       "@opentelemetry/instrumentation":
         to: 0.57.1
-        pulls: [1057, 1066, 1074]
+        pullRequests: [1057, 1066, 1074]
 
   - version: 0.5.5
     date: 2024-11-27
@@ -400,27 +402,27 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.19.0
-        pull: 1053
+        pullRequests: [1053]
 
       "@opentelemetry/instrumentation":
         to: 0.55.0
-        pulls: [1040, 1048]
+        pullRequests: [1040, 1048]
 
       "@opentelemetry/semantic-conventions":
         to: 1.28.0
-        pull: 1048
+        pullRequests: [1048]
 
   - version: 0.5.4
     date: 2024-10-30
 
     changed:
       - summary: Migrate away from [deprecated semantic attributes](https://github.com/open-telemetry/opentelemetry-js/pull/4690)
-        pull: 1018
+        pullRequests: [1018]
 
     bumped:
       "@opentelemetry/instrumentation":
         to: 0.54.0
-        pull: 1032
+        pullRequests: [1032]
 
   - version: 0.5.3
     date: 2024-09-23
@@ -428,11 +430,11 @@ releases:
     bumped:
       "@opentelemetry/instrumentation":
         to: 0.53.0
-        pull: 997
+        pullRequests: [997]
 
       "@opentelemetry/semantic-conventions":
         to: 1.27.0
-        pulls: [994, 997]
+        pullRequests: [994, 997]
 
   - version: 0.5.2
     date: 2024-08-19
@@ -440,11 +442,11 @@ releases:
     bumped:
       "@opentelemetry/instrumentation":
         to: 0.52.1
-        pull: 972
+        pullRequests: [972]
 
       "@opentelemetry/semantic-conventions":
         to: 1.25.1
-        pull: 972
+        pullRequests: [972]
 
   - version: 0.5.1
     date: 2024-06-11
@@ -452,94 +454,94 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.18.1
-        pull: 969
+        pullRequests: [969]
 
       "@opentelemetry/api":
         to: 1.9.0
-        pull: 963
+        pullRequests: [963]
 
       "@opentelemetry/instrumentation":
         to: 0.52.0
-        pull: 963
+        pullRequests: [963]
 
       "@opentelemetry/semantic-conventions":
         to: 1.25.0
-        pull: 963
+        pullRequests: [963]
 
   - version: 0.5.0
     date: 2024-05-15
 
     added:
       - summary: Instrumentation for server streams
-        pull: 945
+        pullRequests: [945]
 
     bumped:
       "@cerbos/core":
         to: 0.18.0
-        pull: 951
+        pullRequests: [951]
 
       "@opentelemetry/instrumentation":
         to: 0.51.1
-        pulls: [940, 947]
+        pullRequests: [940, 947]
 
       "@opentelemetry/semantic-conventions":
         to: 1.24.1
-        pulls: [940, 947]
+        pullRequests: [940, 947]
 
   - version: 0.4.6
     date: 2024-04-23
 
     changed:
       - summary: Support legacy Node.js module resolution and place `default` export last
-        pull: 937
+        pullRequests: [937]
 
     bumped:
       "@cerbos/core":
         to: 0.17.1
-        pull: 938
+        pullRequests: [938]
 
   - version: 0.4.5
     date: 2024-04-12
 
     changed:
       - summary: Prevent importing package internals
-        pull: 867
+        pullRequests: [867]
 
       - summary: Use individually-exported semantic attributes values to improve minification
-        pull: 889
+        pullRequests: [889]
 
     bumped:
       "@cerbos/core":
         to: 0.17.0
-        pull: 929
+        pullRequests: [929]
 
       "@opentelemetry/instrumentation":
         to: 0.50.0
-        pull: 914
+        pullRequests: [914]
 
       "@opentelemetry/semantic-conventions":
         to: 1.23.0
-        pull: 914
+        pullRequests: [914]
 
   - version: 0.4.4
     date: 2024-04-08
 
     changed:
       - summary: Publish package from GitHub Actions and [generate provenance statement](https://docs.npmjs.com/generating-provenance-statements)
-        pull: 852
+        pullRequests: [852]
 
     bumped:
       "@opentelemetry/api":
         to: 1.8.0
-        pull: 836
+        pullRequests: [836]
 
       "@opentelemetry/instrumentation":
         to: 0.49.1
-        pull: 836
+        pullRequests: [836]
 
       "@opentelemetry/semantic-conventions":
         to: 1.22.0
-        pull: 836
+        pullRequests: [836]
 
   - version: 0.4.3
     date: 2024-02-29
@@ -547,15 +549,15 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.16.0
-        pull: 835
+        pullRequests: [835]
 
       "@opentelemetry/instrumentation":
         to: 0.48.0
-        pulls: [786, 801]
+        pullRequests: [786, 801]
 
       "@opentelemetry/semantic-conventions":
         to: 1.21.0
-        pulls: [786, 801]
+        pullRequests: [786, 801]
 
   - version: 0.4.2
     date: 2024-01-11
@@ -563,15 +565,15 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.15.0
-        pull: 781
+        pullRequests: [781]
 
       "@opentelemetry/instrumentation":
         to: 0.46.0
-        pull: 771
+        pullRequests: [771]
 
       "@opentelemetry/semantic-conventions":
         to: 1.19.0
-        pull: 771
+        pullRequests: [771]
 
   - version: 0.4.1
     date: 2023-12-08
@@ -579,15 +581,15 @@ releases:
     bumped:
       "@opentelemetry/api":
         to: 1.7.0
-        pulls: [710, 740]
+        pullRequests: [710, 740]
 
       "@opentelemetry/instrumentation":
         to: 0.45.1
-        pulls: [710, 740]
+        pullRequests: [710, 740]
 
       "@opentelemetry/semantic-conventions":
         to: 1.18.1
-        pulls: [710, 740]
+        pullRequests: [710, 740]
 
   - version: 0.4.0
     date: 2023-10-02
@@ -595,23 +597,23 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.14.0
-        pull: 695
+        pullRequests: [695]
 
       "@opentelemetry/api":
         to: 1.6.0
-        pull: 670
+        pullRequests: [670]
 
       "@opentelemetry/instrumentation":
         to: 0.43.0
-        pull: 670
+        pullRequests: [670]
 
       "@opentelemetry/semantic-conventions":
         to: 1.17.0
-        pull: 670
+        pullRequests: [670]
 
     removed:
       - summary: Support for Node.js 16, which is now [end-of-life][nodejs-eol]
-        pull: 669
+        pullRequests: [669]
 
   - version: 0.3.0
     date: 2023-08-16
@@ -619,23 +621,23 @@ releases:
     added:
       - summary: Span context propagation
         details: Requires a policy decision point server running Cerbos 0.30+, and [@cerbos/grpc] 0.13+ or [@cerbos/http] 0.14+.
-        pull: 638
+        pullRequests: [638]
 
       - summary: "`rpc.client.duration` metric"
-        pull: 644
+        pullRequests: [644]
 
     bumped:
       "@cerbos/core":
         to: 0.13.0
-        pull: 645
+        pullRequests: [645]
 
       "@opentelemetry/instrumentation":
         to: 0.41.2
-        pulls: [614, 635]
+        pullRequests: [614, 635]
 
       "@opentelemetry/semantic-conventions":
         to: 1.15.2
-        pulls: [614, 635]
+        pullRequests: [614, 635]
 
   - version: 0.2.1
     date: 2023-07-18
@@ -643,15 +645,15 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.12.0
-        pull: 599
+        pullRequests: [599]
 
       "@opentelemetry/instrumentation":
         to: 0.41.0
-        pulls: [557, 590]
+        pullRequests: [557, 590]
 
       "@opentelemetry/semantic-conventions":
         to: 1.15.0
-        pulls: [557, 590]
+        pullRequests: [557, 590]
 
   - version: 0.2.0
     date: 2023-06-07
@@ -659,19 +661,19 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.11.0
-        pull: 550
+        pullRequests: [550]
 
       "@opentelemetry/instrumentation":
         to: 0.39.1
-        pull: 525
+        pullRequests: [525]
 
       "@opentelemetry/semantic-conventions":
         to: 1.13.0
-        pull: 525
+        pullRequests: [525]
 
     removed:
       - summary: Support for Node.js 14, which is now [end-of-life][nodejs-eol]
-        pull: 521
+        pullRequests: [521]
 
   - version: 0.1.3
     date: 2023-04-18
@@ -679,15 +681,15 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.10.0
-        pull: 506
+        pullRequests: [506]
 
       "@opentelemetry/instrumentation":
         to: 0.38.0
-        pulls: [493, 503]
+        pullRequests: [493, 503]
 
       "@opentelemetry/semantic-conventions":
         to: 1.12.0
-        pulls: [493, 503]
+        pullRequests: [493, 503]
 
   - version: 0.1.2
     date: 2023-03-23
@@ -695,7 +697,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.9.1
-        pull: 481
+        pullRequests: [481]
 
   - version: 0.1.1
     date: 2023-03-21
@@ -703,22 +705,22 @@ releases:
     bumped:
       "@opentelemetry/api":
         to: 1.4.1
-        pulls: [464, 473]
+        pullRequests: [464, 473]
 
       "@opentelemetry/instrumentation":
         to: 0.36.1
-        pulls: [464, 473]
+        pullRequests: [464, 473]
 
       "@opentelemetry/semantic-conventions":
         to: 1.10.1
-        pulls: [464, 473]
+        pullRequests: [464, 473]
 
   - version: 0.1.0
     date: 2023-02-15
 
     added:
       - summary: "[OpenTelemetry](https://opentelemetry.io) instrumentation for the [@cerbos/grpc] and [@cerbos/http] client libraries"
-        pull: 438
+        pullRequests: [438]
 
 references:
   "@bufbuild/protobuf": https://github.com/bufbuild/protobuf-es

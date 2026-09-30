@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=../changelog.schema.json
+
 unreleased:
   type: patch
 
@@ -8,7 +10,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.33.1
-        pull: 1538
+        pullRequests: [1538]
 
   - version: 0.5.0
     date: 2026-08-13
@@ -16,12 +18,12 @@ releases:
     added:
       - summary: Support for multiple JWTs in auxiliary data
         details: Requires a policy decision point server running Cerbos 0.55+.
-        pull: 1509
+        pullRequests: [1509]
 
     bumped:
       "@cerbos/core":
         to: 0.33.0
-        pull: 1519
+        pullRequests: [1519]
 
   - version: 0.4.0
     date: 2026-07-20
@@ -29,11 +31,11 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.32.0
-        pull: 1501
+        pullRequests: [1501]
 
     removed:
       - summary: Support for Node.js 20, which is now [end-of-life][nodejs-eol]
-        pull: 1454
+        pullRequests: [1454]
 
   - version: 0.3.6
     date: 2026-05-06
@@ -41,7 +43,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.31.0
-        pull: 1449
+        pullRequests: [1449]
 
   - version: 0.3.5
     date: 2026-05-01
@@ -49,7 +51,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.30.0
-        pull: 1439
+        pullRequests: [1439]
 
   - version: 0.3.4
     date: 2026-04-28
@@ -57,7 +59,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.29.0
-        pull: 1436
+        pullRequests: [1436]
 
   - version: 0.3.3
     date: 2026-04-27
@@ -65,7 +67,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.28.1
-        pull: 1432
+        pullRequests: [1432]
 
   - version: 0.3.2
     date: 2026-02-04
@@ -73,31 +75,31 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.28.0
-        pull: 1361
+        pullRequests: [1361]
 
   - version: 0.3.1
     date: 2026-01-12
 
     changed:
       - summary: Migrate documentation to TypeDoc
-        pull: 1332
+        pullRequests: [1332]
 
     bumped:
       "@cerbos/core":
         to: 0.27.1
-        pull: 1340
+        pullRequests: [1340]
 
   - version: 0.3.0
     date: 2026-01-07
 
     changed:
       - summary: Convert package to ESM
-        pull: 1330
+        pullRequests: [1330]
 
     bumped:
       "@cerbos/core":
         to: 0.27.0
-        pull: 1331
+        pullRequests: [1331]
 
   - version: 0.2.7
     date: 2025-12-12
@@ -105,7 +107,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.26.0
-        pull: 1313
+        pullRequests: [1313]
 
   - version: 0.2.6
     date: 2025-11-20
@@ -113,7 +115,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.25.2
-        pull: 1288
+        pullRequests: [1288]
 
   - version: 0.2.5
     date: 2025-11-12
@@ -121,7 +123,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.25.1
-        pull: 1280
+        pullRequests: [1280]
 
   - version: 0.2.4
     date: 2025-11-07
@@ -129,7 +131,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.25.0
-        pull: 1273
+        pullRequests: [1273]
 
   - version: 0.2.3
     date: 2025-09-15
@@ -137,7 +139,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.24.1
-        pull: 1233
+        pullRequests: [1233]
 
   - version: 0.2.2
     date: 2025-08-11
@@ -145,7 +147,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.24.0
-        pull: 1208
+        pullRequests: [1208]
 
   - version: 0.2.1
     date: 2025-07-02
@@ -153,7 +155,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.23.0
-        pull: 1192
+        pullRequests: [1192]
 
   - version: 0.2.0
     date: 2025-06-02
@@ -161,11 +163,11 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.22.0
-        pull: 1167
+        pullRequests: [1167]
 
     removed:
       - summary: Support for Node.js 18, which is now [end-of-life][nodejs-eol]
-        pull: 1166
+        pullRequests: [1166]
 
   - version: 0.1.7
     date: 2025-03-12
@@ -173,7 +175,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.21.1
-        pull: 1121
+        pullRequests: [1121]
 
   - version: 0.1.6
     date: 2025-02-13
@@ -181,7 +183,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.21.0
-        pull: 1097
+        pullRequests: [1097]
 
   - version: 0.1.5
     date: 2025-02-06
@@ -189,7 +191,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.20.0
-        pull: 1086
+        pullRequests: [1086]
 
   - version: 0.1.4
     date: 2024-11-27
@@ -197,7 +199,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.19.0
-        pull: 1053
+        pullRequests: [1053]
 
   - version: 0.1.3
     date: 2024-06-11
@@ -205,7 +207,7 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.18.1
-        pull: 969
+        pullRequests: [969]
 
   - version: 0.1.2
     date: 2024-05-15
@@ -213,26 +215,26 @@ releases:
     bumped:
       "@cerbos/core":
         to: 0.18.0
-        pull: 951
+        pullRequests: [951]
 
   - version: 0.1.1
     date: 2024-04-23
 
     changed:
       - summary: Support legacy Node.js module resolution and place `default` export last
-        pull: 937
+        pullRequests: [937]
 
     bumped:
       "@cerbos/core":
         to: 0.17.1
-        pull: 938
+        pullRequests: [938]
 
   - version: 0.1.0
     date: 2024-04-12
 
     added:
       - summary: A collection of React hooks for interacting with Cerbos policy decision points
-        pulls: [876, 918]
+        pullRequests: [876, 918]
 
 references:
   "@cerbos/core": ../core/README.md
