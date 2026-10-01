@@ -98,7 +98,7 @@ async function fetchNodeVersions(): Promise<string[]> {
 interface Versions {
   previous: string[];
   latest: string;
-  prerelease: string;
+  prerelease: string | undefined;
 }
 
 async function fetchCerbosVersions(): Promise<Versions> {
@@ -150,24 +150,49 @@ async function fetchCerbosVersions(): Promise<Versions> {
   };
 }
 
+async function fetchEmbeddedServerVersions(): Promise<Versions> {
+  return await fetchPeerDependencyVersions(
+    "EPDP",
+    "embedded-client",
+    "@cerbos/embedded-server",
+    { groupMinorVersions: false },
+  );
+}
+
 async function fetchReactVersions(): Promise<Versions> {
-  const {
-    peerDependencies: { react: requirement },
-  } = z
-    .object({
-      peerDependencies: z.object({ react: z.string() }),
-    })
+  return await fetchPeerDependencyVersions("React", "react", "react", {
+    prereleaseTag: "canary",
+  });
+}
+
+async function fetchPeerDependencyVersions(
+  name: string,
+  pkg: string,
+  dependency: string,
+  {
+    groupMinorVersions: shouldGroupMinorVersions = true,
+    prereleaseTag,
+  }: {
+    groupMinorVersions?: boolean;
+    prereleaseTag?: string;
+  } = {},
+): Promise<Versions> {
+  const { peerDependencies } = z
+    .object({ peerDependencies: z.record(z.string(), z.string()) })
     .parse(
-      JSON.parse(await read(repositoryPath("packages/react/package.json"))),
+      JSON.parse(await read(repositoryPath("packages", pkg, "package.json"))),
     );
 
-  const {
-    "dist-tags": { canary },
-    versions: allVersions,
-  } = await fetchJson(
-    "https://registry.npmjs.com/react",
+  const requirement = peerDependencies[dependency];
+
+  if (!requirement) {
+    throw new Error(`${pkg} does not have a peer dependency on ${dependency}`);
+  }
+
+  const { "dist-tags": tags, versions: allVersions } = await fetchJson(
+    `https://registry.npmjs.com/${dependency}`,
     z.object({
-      "dist-tags": z.object({ canary: z.string() }),
+      "dist-tags": z.record(z.string(), z.string()),
       versions: z
         .record(z.string(), z.unknown())
         .transform((versions) => Object.keys(versions).sort(semverCompare)),
@@ -175,21 +200,32 @@ async function fetchReactVersions(): Promise<Versions> {
     { headers: { Accept: "application/vnd.npm.install-v1+json" } },
   );
 
-  const matchingVersions = allVersions.filter(
+  let versions = allVersions.filter(
     (version) => satisfies(version, requirement) && !prerelease(version),
   );
 
-  const minimumVersion = matchingVersions[0];
-  const versions = groupMinorVersions(matchingVersions);
+  const minimumVersion = versions[0];
 
-  if (minimumVersion && minimumVersion !== versions[0]) {
-    versions.unshift(minimumVersion);
+  if (shouldGroupMinorVersions) {
+    versions = groupMinorVersions(versions);
+
+    if (minimumVersion && minimumVersion !== versions[0]) {
+      versions.unshift(minimumVersion);
+    }
+  }
+
+  let prereleaseVersion: string | undefined;
+  if (prereleaseTag) {
+    prereleaseVersion = tags[prereleaseTag];
+    if (!prereleaseVersion) {
+      throw new Error(`${dependency} does not have a tag ${prereleaseTag}`);
+    }
   }
 
   return {
     previous: versions.slice(0, -1),
-    latest: latestVersion("React", versions),
-    prerelease: canary,
+    latest: latestVersion(name, versions),
+    prerelease: prereleaseVersion,
   };
 }
 
@@ -200,6 +236,7 @@ interface MatrixEntry {
   test: string;
   node: string;
   cerbos?: string;
+  embeddedServer?: string;
   react?: string;
 }
 
@@ -236,6 +273,20 @@ function cerbosEntry(node: string, cerbos: string): MatrixEntry {
   };
 }
 
+function embeddedServerEntry(
+  node: string,
+  embeddedServer: string,
+): MatrixEntry {
+  return {
+    required: true,
+    title: `EPDP ${embeddedServer} | Node ${node}`,
+    setup: `pnpm --filter=./private/test add --save-dev @cerbos/embedded-server@${embeddedServer} && pnpm dedupe`, // https://github.com/pnpm/pnpm/issues/16432
+    test: "pnpm run test matrix-embedded-server",
+    node,
+    embeddedServer,
+  };
+}
+
 function reactEntry(node: string, react: string): MatrixEntry {
   return {
     required: !prerelease(react),
@@ -258,13 +309,14 @@ function matrixEntries(
   return [
     ...others.previous.map((other) => entry(latestNode, other)),
     ...nodes.map((node) => entry(node, others.latest)),
-    entry(latestNode, others.prerelease),
+    ...(others.prerelease ? [entry(latestNode, others.prerelease)] : []),
   ];
 }
 
-const [nodes, cerboses, reacts] = await Promise.all([
+const [nodes, cerboses, embeddedServers, reacts] = await Promise.all([
   fetchNodeVersions(),
   fetchCerbosVersions(),
+  fetchEmbeddedServerVersions(),
   fetchReactVersions(),
 ]);
 
@@ -273,6 +325,7 @@ const matrix = {
     include: [
       ...nodes.map((node) => nodeEntry(node)),
       ...matrixEntries(nodes, cerboses, cerbosEntry),
+      ...matrixEntries(nodes, embeddedServers, embeddedServerEntry),
       ...matrixEntries(nodes, reacts, reactEntry),
     ],
   },

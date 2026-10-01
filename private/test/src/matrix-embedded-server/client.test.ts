@@ -34,12 +34,12 @@ import { Embedded, SchemaEnforcement } from "@cerbos/embedded-client";
 import { metadata } from "@cerbos/embedded-server";
 import { credentialsFromEnv } from "@cerbos/hub";
 
-import { testCerbosServiceClient } from "../../client/cerbos.js";
+import { testCerbosServiceClient } from "../client/cerbos.js";
 import {
   callIdPattern,
   embeddedUserAgent,
   readEmbeddedServerWASM,
-} from "../../helpers.js";
+} from "../helpers.js";
 
 describe("Embedded", () => {
   const onDecision = vitest.fn<Exclude<Options["onDecision"], undefined>>();
@@ -78,9 +78,7 @@ describe("Embedded", () => {
         source: "local",
         client: (options) =>
           client(
-            readFile(
-              resolve(__dirname, `../../../bundles/${localBundleId}.crrt`),
-            ),
+            readFile(resolve(__dirname, `../../bundles/${localBundleId}.crrt`)),
             options,
           ),
         bundleId: localBundleId,
