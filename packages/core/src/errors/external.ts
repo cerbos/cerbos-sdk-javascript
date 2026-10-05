@@ -1,4 +1,4 @@
-import { setErrorNameAndStack } from "../internal.js";
+import { isEnumValue, setErrorNameAndStack } from "../internal.js";
 import type {
   PolicyStoreIntegrityViolation,
   StatusNotOK,
@@ -53,7 +53,7 @@ function code(error: unknown): StatusNotOK {
   if (
     has(error, "code") &&
     typeof error.code === "number" &&
-    error.code in Status
+    isEnumValue(Status, error.code)
   ) {
     return error.code || Status.UNKNOWN;
   }

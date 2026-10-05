@@ -107,7 +107,7 @@ import { ValidationError_Source } from "@cerbos/api/cerbos/schema/v1/schema_pb";
 import type { HealthCheckResponse as HealthCheckResponseProtobuf } from "@cerbos/api/grpc/health/v1/health_pb";
 import { HealthCheckResponse_ServingStatus } from "@cerbos/api/grpc/health/v1/health_pb";
 
-import { isEmptyObject } from "../internal.js";
+import { isEmptyObject, isEnumValue } from "../internal.js";
 import type {
   AccessLogEntry,
   AuditTrail,
@@ -215,6 +215,7 @@ import {
   SchemaDefinition,
   ScopePermissions,
   ServiceStatus,
+  Status,
   ValidationErrorSource,
 } from "../types/external.js";
 import type { OmitFromEach } from "../types/internal.js";
@@ -238,6 +239,7 @@ export function accessLogEntryFromProtobuf({
 
   requireField("AccessLogEntry.timestamp", timestamp);
   requireField("AccessLogEntry.peer", peer);
+  requireEnum("AccessLogEntry.statusCode", Status, statusCode);
 
   return {
     callId,
@@ -1647,8 +1649,11 @@ function transformOneOf<
 ): Result {
   requireField(descriptor, oneOf);
 
-  const transform = transforms[oneOf.case as OneOf["case"]] as
-    ((value: OneOf["value"]) => Result) | Unexpected | undefined;
+  let transform: ((value: OneOf["value"]) => Result) | Unexpected | undefined;
+
+  if (oneOf.case !== undefined) {
+    transform = transforms[oneOf.case as Exclude<OneOf["case"], undefined>];
+  }
 
   if (!transform || isUnexpected(transform)) {
     throw new Error(
@@ -1683,5 +1688,21 @@ export function requireField<T>(
 ): asserts value is T {
   if (value === undefined) {
     throw new Error(`Missing ${descriptor}`);
+  }
+}
+
+function requireEnum<T extends Record<string, string | number>>(
+  descriptor: string,
+  numericEnum: T,
+  value: number,
+): asserts value is number & T[keyof T] {
+  if (!isEnumValue(numericEnum, value)) {
+    const entries = Object.entries(numericEnum).filter(
+      ([, value]) => typeof value === "number",
+    );
+
+    throw new Error(
+      `Unexpected ${descriptor}: wanted ${entries.map(([key, value]) => `${key}:${value}`).join("|")}, got ${value}`,
+    );
   }
 }

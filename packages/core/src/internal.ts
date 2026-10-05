@@ -30,6 +30,14 @@ export function cancelBody(response: Response): void {
 }
 
 /** @internal */
+export function isEnumValue<T extends Record<string, string | number>>(
+  numericEnum: T,
+  value: number,
+): value is number & T[keyof T] {
+  return value in numericEnum;
+}
+
+/** @internal */
 export function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
