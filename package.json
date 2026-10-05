@@ -4,7 +4,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.6.0",
+      "version": "12.8.2",
       "onFail": "download"
     },
     "runtime": {
@@ -55,7 +55,7 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.5",
     "@bufbuild/buf": "1.73.0",
-    "@bufbuild/protoc-gen-es": "2.15.0",
+    "@bufbuild/protoc-gen-es": "2.16.0",
     "@cerbos/sdk-javascript-eslint": "workspace:*",
     "@tsconfig/node22": "22.0.6",
     "@tsconfig/strictest": "2.0.8",
