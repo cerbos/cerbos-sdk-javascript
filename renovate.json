@@ -17,13 +17,11 @@
       "rangeStrategy": "widen"
     },
     {
-      "matchDepTypes": ["devDependencies"],
-      "groupName": "development dependencies",
-      "rangeStrategy": "pin"
-    },
-    {
-      "matchDepTypes": ["engines", "packageManager"],
-      "matchFileNames": ["package.json"],
+      "matchDepTypes": [
+        "devDependencies",
+        "devEngines.packageManager",
+        "devEngines.runtime"
+      ],
       "groupName": "development dependencies",
       "rangeStrategy": "pin"
     },
