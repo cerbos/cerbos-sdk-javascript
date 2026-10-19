@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@cerbos/api": "^0.11.1",
-    "uuid": "^14.0.2"
+    "uuid": "^14.0.3"
   },
   "publishConfig": {
     "access": "public",
