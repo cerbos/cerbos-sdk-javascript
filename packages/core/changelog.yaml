@@ -8,6 +8,10 @@ unreleased:
       to: 2.16.0
       pullRequests: [1542, 1549]
 
+    uuid:
+      to: 14.0.3
+      pullRequests: [1557]
+
 releases:
   - version: 0.33.1
     date: 2026-09-15

@@ -6,6 +6,8 @@
 
 - Bump dependency on [@bufbuild/protobuf] to 2.16.0 ([#1542](https://github.com/cerbos/cerbos-sdk-javascript/pull/1542), [#1549](https://github.com/cerbos/cerbos-sdk-javascript/pull/1549))
 
+- Bump dependency on [uuid] to 14.0.3 ([#1557](https://github.com/cerbos/cerbos-sdk-javascript/pull/1557))
+
 ## [0.33.1] - 2026-09-15
 
 ### Changed
