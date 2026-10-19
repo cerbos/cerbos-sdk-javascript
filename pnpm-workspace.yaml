@@ -12,6 +12,9 @@ autoDedupe: true
 
 linkWorkspacePackages: true
 
+lockfile:
+  includeResolutionSettings: true
+
 minimumReleaseAge: 7200 # 5 days
 minimumReleaseAgeExclude:
   - "@cerbos/*"
