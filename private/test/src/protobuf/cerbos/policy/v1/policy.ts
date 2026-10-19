@@ -902,7 +902,7 @@ export const Metadata: MessageFns<Metadata> = {
       }
     }
     if (message.hash !== undefined) {
-      obj.hash = message.hash;
+      obj.hash = message.hash.toString();
     }
     if (message.storeIdentifer !== "") {
       obj.storeIdentifer = message.storeIdentifer;

@@ -1348,29 +1348,29 @@ export const FloatRules: MessageFns<FloatRules> = {
   toJSON(message: FloatRules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const !== 0) {
-      obj.const = message.const;
+      obj.const = floatToJson(message.const);
     }
     if (message.lessThan?.$case === "lt") {
-      obj.lt = message.lessThan.lt;
+      obj.lt = floatToJson(message.lessThan.lt);
     } else if (message.lessThan?.$case === "lte") {
-      obj.lte = message.lessThan.lte;
+      obj.lte = floatToJson(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
-      obj.gt = message.greaterThan.gt;
+      obj.gt = floatToJson(message.greaterThan.gt);
     } else if (message.greaterThan?.$case === "gte") {
-      obj.gte = message.greaterThan.gte;
+      obj.gte = floatToJson(message.greaterThan.gte);
     }
     if (message.in?.length) {
-      obj.in = message.in;
+      obj.in = message.in.map((e) => floatToJson(e));
     }
     if (message.notIn?.length) {
-      obj.notIn = message.notIn;
+      obj.notIn = message.notIn.map((e) => floatToJson(e));
     }
     if (message.finite !== undefined && message.finite !== false) {
       obj.finite = message.finite;
     }
     if (message.example?.length) {
-      obj.example = message.example;
+      obj.example = message.example.map((e) => floatToJson(e));
     }
     return obj;
   },
@@ -1558,29 +1558,29 @@ export const DoubleRules: MessageFns<DoubleRules> = {
   toJSON(message: DoubleRules): unknown {
     const obj: any = {};
     if (message.const !== undefined && message.const !== 0) {
-      obj.const = message.const;
+      obj.const = floatToJson(message.const);
     }
     if (message.lessThan?.$case === "lt") {
-      obj.lt = message.lessThan.lt;
+      obj.lt = floatToJson(message.lessThan.lt);
     } else if (message.lessThan?.$case === "lte") {
-      obj.lte = message.lessThan.lte;
+      obj.lte = floatToJson(message.lessThan.lte);
     }
     if (message.greaterThan?.$case === "gt") {
-      obj.gt = message.greaterThan.gt;
+      obj.gt = floatToJson(message.greaterThan.gt);
     } else if (message.greaterThan?.$case === "gte") {
-      obj.gte = message.greaterThan.gte;
+      obj.gte = floatToJson(message.greaterThan.gte);
     }
     if (message.in?.length) {
-      obj.in = message.in;
+      obj.in = message.in.map((e) => floatToJson(e));
     }
     if (message.notIn?.length) {
-      obj.notIn = message.notIn;
+      obj.notIn = message.notIn.map((e) => floatToJson(e));
     }
     if (message.finite !== undefined && message.finite !== false) {
       obj.finite = message.finite;
     }
     if (message.example?.length) {
-      obj.example = message.example;
+      obj.example = message.example.map((e) => floatToJson(e));
     }
     return obj;
   },
@@ -5551,6 +5551,14 @@ function base64FromBytes(arr: Uint8Array): string {
     });
     return globalThis.btoa(bin.join(""));
   }
+}
+
+function floatToJson(
+  value: number | null | undefined,
+): number | string | null | undefined {
+  return typeof value === "number" && !globalThis.Number.isFinite(value)
+    ? globalThis.String(value)
+    : value;
 }
 
 function toTimestamp(date: Date): Timestamp {

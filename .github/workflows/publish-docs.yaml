@@ -37,7 +37,7 @@ jobs:
         run: tar --create --file "${RUNNER_TEMP}/artifact.tar" --verbose .
 
       - name: Upload artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: github-pages
           path: ${{ runner.temp }}/artifact.tar
@@ -46,7 +46,7 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure()
-        uses: cerbos/actions/notify-slack@ba8869c5e94070146ec8e4e62e02527412697bae # main
+        uses: cerbos/actions/notify-slack@6f636d2f02ee257dd226044f85ca097b901b3572 # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}
 
@@ -67,6 +67,6 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure()
-        uses: cerbos/actions/notify-slack@ba8869c5e94070146ec8e4e62e02527412697bae # main
+        uses: cerbos/actions/notify-slack@6f636d2f02ee257dd226044f85ca097b901b3572 # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}

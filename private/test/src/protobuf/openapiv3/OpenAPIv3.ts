@@ -365,7 +365,7 @@ export const DefaultType: MessageFns<DefaultType> = {
   toJSON(message: DefaultType): unknown {
     const obj: any = {};
     if (message.oneof?.$case === "number") {
-      obj.number = message.oneof.number;
+      obj.number = floatToJson(message.oneof.number);
     } else if (message.oneof?.$case === "boolean") {
       obj.boolean = message.oneof.boolean;
     } else if (message.oneof?.$case === "string") {
@@ -1538,16 +1538,16 @@ export const Schema: MessageFns<Schema> = {
       obj.title = message.title;
     }
     if (message.multipleOf !== 0) {
-      obj.multipleOf = message.multipleOf;
+      obj.multipleOf = floatToJson(message.multipleOf);
     }
     if (message.maximum !== 0) {
-      obj.maximum = message.maximum;
+      obj.maximum = floatToJson(message.maximum);
     }
     if (message.exclusiveMaximum !== false) {
       obj.exclusiveMaximum = message.exclusiveMaximum;
     }
     if (message.minimum !== 0) {
-      obj.minimum = message.minimum;
+      obj.minimum = floatToJson(message.minimum);
     }
     if (message.exclusiveMinimum !== false) {
       obj.exclusiveMinimum = message.exclusiveMinimum;
@@ -1908,6 +1908,14 @@ export const Xml: MessageFns<Xml> = {
     return obj;
   },
 };
+
+function floatToJson(
+  value: number | null | undefined,
+): number | string | null | undefined {
+  return typeof value === "number" && !globalThis.Number.isFinite(value)
+    ? globalThis.String(value)
+    : value;
+}
 
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;

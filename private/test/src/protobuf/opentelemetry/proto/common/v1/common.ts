@@ -192,7 +192,7 @@ export const AnyValue: MessageFns<AnyValue> = {
     } else if (message.value?.$case === "intValue") {
       obj.intValue = message.value.intValue.toString();
     } else if (message.value?.$case === "doubleValue") {
-      obj.doubleValue = message.value.doubleValue;
+      obj.doubleValue = floatToJson(message.value.doubleValue);
     } else if (message.value?.$case === "arrayValue") {
       obj.arrayValue = ArrayValue.toJSON(message.value.arrayValue);
     } else if (message.value?.$case === "kvlistValue") {
@@ -505,6 +505,14 @@ function base64FromBytes(arr: Uint8Array): string {
     });
     return globalThis.btoa(bin.join(""));
   }
+}
+
+function floatToJson(
+  value: number | null | undefined,
+): number | string | null | undefined {
+  return typeof value === "number" && !globalThis.Number.isFinite(value)
+    ? globalThis.String(value)
+    : value;
 }
 
 export interface MessageFns<T> {

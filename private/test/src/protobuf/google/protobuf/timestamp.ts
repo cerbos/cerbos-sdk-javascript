@@ -76,17 +76,23 @@ export const Timestamp: MessageFns<Timestamp> = {
     }
   },
 
-  toJSON(message: Timestamp): unknown {
-    const obj: any = {};
-    if (message.seconds !== 0n) {
-      obj.seconds = message.seconds.toString();
-    }
-    if (message.nanos !== 0) {
-      obj.nanos = Math.round(message.nanos);
-    }
-    return obj;
+  toJSON(message: Timestamp): string {
+    return timestampToJson(
+      globalThis.Number(message.seconds ?? 0),
+      message.nanos ?? 0,
+    );
   },
 };
+
+function timestampToJson(seconds: number, nanos: number): string {
+  const date = new globalThis.Date(seconds * 1_000).toISOString().slice(0, 19);
+  if (nanos === 0) {
+    return `${date}Z`;
+  }
+  const padded = nanos.toString().padStart(9, "0");
+  const len = nanos % 1_000_000 === 0 ? 3 : nanos % 1_000 === 0 ? 6 : 9;
+  return `${date}.${padded.slice(0, len)}Z`;
+}
 
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;

@@ -5,12 +5,12 @@
   "devDependencies": {
     "@types/semver": "7.8.0",
     "date-fns": "4.4.0",
-    "execa": "10.1.0",
+    "execa": "10.1.1",
     "node-html-parser": "9.0.4",
-    "prettier": "3.9.9",
+    "prettier": "3.9.10",
     "semver": "7.8.5",
     "typedoc": "0.28.20",
     "yaml": "2.9.1",
-    "zod": "4.6.5"
+    "zod": "4.6.7"
   }
 }
