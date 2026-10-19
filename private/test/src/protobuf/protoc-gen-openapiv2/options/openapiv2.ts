@@ -444,11 +444,13 @@ export const Swagger: MessageFns<Swagger> = {
     if (message.basePath !== "") {
       writer.uint32(34).string(message.basePath);
     }
-    writer.uint32(42).fork();
-    for (const v of message.schemes) {
-      writer.int32(v);
+    if (message.schemes.length !== 0) {
+      writer.uint32(42).fork();
+      for (const v of message.schemes) {
+        writer.int32(v);
+      }
+      writer.join();
     }
-    writer.join();
     for (const v of message.consumes) {
       writer.uint32(50).string(v!);
     }
@@ -924,11 +926,13 @@ export const Operation: MessageFns<Operation> = {
         ).join();
       },
     );
-    writer.uint32(82).fork();
-    for (const v of message.schemes) {
-      writer.int32(v);
+    if (message.schemes.length !== 0) {
+      writer.uint32(82).fork();
+      for (const v of message.schemes) {
+        writer.int32(v);
+      }
+      writer.join();
     }
-    writer.join();
     if (message.deprecated !== false) {
       writer.uint32(88).bool(message.deprecated);
     }
@@ -2754,11 +2758,13 @@ export const JSONSchema: MessageFns<JSONSchema> = {
     for (const v of message.array) {
       writer.uint32(274).string(v!);
     }
-    writer.uint32(282).fork();
-    for (const v of message.type) {
-      writer.int32(v);
+    if (message.type.length !== 0) {
+      writer.uint32(282).fork();
+      for (const v of message.type) {
+        writer.int32(v);
+      }
+      writer.join();
     }
-    writer.join();
     if (message.format !== "") {
       writer.uint32(290).string(message.format);
     }
@@ -3058,16 +3064,16 @@ export const JSONSchema: MessageFns<JSONSchema> = {
       obj.example = message.example;
     }
     if (message.multipleOf !== 0) {
-      obj.multipleOf = message.multipleOf;
+      obj.multipleOf = floatToJson(message.multipleOf);
     }
     if (message.maximum !== 0) {
-      obj.maximum = message.maximum;
+      obj.maximum = floatToJson(message.maximum);
     }
     if (message.exclusiveMaximum !== false) {
       obj.exclusiveMaximum = message.exclusiveMaximum;
     }
     if (message.minimum !== 0) {
-      obj.minimum = message.minimum;
+      obj.minimum = floatToJson(message.minimum);
     }
     if (message.exclusiveMinimum !== false) {
       obj.exclusiveMinimum = message.exclusiveMinimum;
@@ -4296,6 +4302,14 @@ export const Scopes_ScopeEntry: MessageFns<Scopes_ScopeEntry> = {
     return obj;
   },
 };
+
+function floatToJson(
+  value: number | null | undefined,
+): number | string | null | undefined {
+  return typeof value === "number" && !globalThis.Number.isFinite(value)
+    ? globalThis.String(value)
+    : value;
+}
 
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;
