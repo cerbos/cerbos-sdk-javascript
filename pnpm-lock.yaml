@@ -239,8 +239,8 @@ importers:
         specifier: ^0.11.1
         version: link:../api
       uuid:
-        specifier: ^14.0.2
-        version: 14.0.2
+        specifier: ^14.0.3
+        version: 14.0.3
 
   packages/embedded-client:
     dependencies:
@@ -293,8 +293,8 @@ importers:
         specifier: ^0.33.1
         version: link:../core
       '@grpc/grpc-js':
-        specifier: ^1.14.5
-        version: 1.14.5
+        specifier: ^1.14.6
+        version: 1.14.6
 
   packages/http:
     dependencies:
@@ -465,8 +465,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0(@bufbuild/protobuf@2.16.0)(@connectrpc/connect@2.2.0(@bufbuild/protobuf@2.16.0))
       '@grpc/grpc-js':
-        specifier: 1.14.5
-        version: 1.14.5
+        specifier: 1.14.6
+        version: 1.14.6
       '@opentelemetry/api':
         specifier: 1.9.1
         version: 1.9.1
@@ -989,8 +989,8 @@ packages:
   '@gerrit0/mini-shiki@3.23.0':
     resolution: {integrity: sha512-bEMORlG0cqdjVyCEuU0cDQbORWX+kYCeo0kV1lbxF5bt4r7SID2l9bqsxJEM0zndaxpOUT7riCyIVEuqq/Ynxg==}
 
-  '@grpc/grpc-js@1.14.5':
-    resolution: {integrity: sha512-7VZM+SVdEcUUqSQeNI3zM8Qs/BhQKZndPo2h5VkYkAM8Iz0wJIa8mKV5ekQGqG8UUsnkQ0NMxIxwkIHYvj0qOw==}
+  '@grpc/grpc-js@1.14.6':
+    resolution: {integrity: sha512-SgC/B3/VZ8lTyOZ4Cwk6f1skWhmkNAaVfiX90qd5u1rRXGKk1//8FTUEN9GvOUq7rfWIqAYkA3CoyumYVpOS6g==}
     engines: {node: '>=12.10.0'}
 
   '@grpc/proto-loader@0.8.1':
@@ -3128,8 +3128,8 @@ packages:
     peerDependencies:
       react: '>=16.13'
 
-  uuid@14.0.2:
-    resolution: {integrity: sha512-xZe/16rV4aa+HGSOCiY2YeLT1OybRLrrkL/Rqaq7p7GMVXjFh+6wN4oMYgjFmnSnhY8t6Xpdl2l9qmnHYuMHwQ==}
+  uuid@14.0.3:
+    resolution: {integrity: sha512-Sc5u1VVln93y1Xnz4R+CunOZc7R9LUcTmhj7Rc7Eg3HVcf7rVn2FOoa812fe0W8p3jD7xeoGSYbfqCGGH2B6xw==}
     hasBin: true
 
   validate-npm-package-name@5.0.1:
@@ -3785,7 +3785,7 @@ snapshots:
       '@shikijs/types': 3.23.0
       '@shikijs/vscode-textmate': 10.0.2
 
-  '@grpc/grpc-js@1.14.5':
+  '@grpc/grpc-js@1.14.6':
     dependencies:
       '@grpc/proto-loader': 0.8.1
       '@js-sdsl/ordered-map': 4.4.2
@@ -5801,7 +5801,7 @@ snapshots:
       dequal: 2.0.3
       react: 19.3.0
 
-  uuid@14.0.2: {}
+  uuid@14.0.3: {}
 
   validate-npm-package-name@5.0.1: {}
 
