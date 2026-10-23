@@ -262,7 +262,7 @@ importers:
         version: link:../core
       '@cerbos/embedded-server':
         specifier: ^0.7.1
-        version: 0.7.2(@bufbuild/protobuf@2.16.0)(@cerbos/api@packages+api)
+        version: 0.7.3(@bufbuild/protobuf@2.16.0)(@cerbos/api@packages+api)
       '@cerbos/hub':
         specifier: ^0.6.2
         version: link:../hub
@@ -442,8 +442,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/embedded-client
       '@cerbos/embedded-server':
-        specifier: 0.7.2
-        version: 0.7.2(@bufbuild/protobuf@2.16.0)(@cerbos/api@packages+api)
+        specifier: 0.7.3
+        version: 0.7.3(@bufbuild/protobuf@2.16.0)(@cerbos/api@packages+api)
       '@cerbos/files':
         specifier: workspace:*
         version: link:../../packages/files
@@ -702,12 +702,12 @@ packages:
   '@cacheable/utils@2.5.0':
     resolution: {integrity: sha512-buipgOVDkkPXNR5+xBpDw7Zk2n1EvU7qBJCNUcL7rhQ//kfpOXPAvQ511Os0vpLYJ1pZnvudNytkQt2hst3wqA==}
 
-  '@cerbos/embedded-server@0.7.2':
-    resolution: {integrity: sha512-DxkQd/LdPpOJnqYU/9HqJbZvs73fNx8/Hwk3j8cIGhHzKhaVQTBTbmdog1buWHa5jb1T3HMWU+TLRWxgpRF5vQ==}
+  '@cerbos/embedded-server@0.7.3':
+    resolution: {integrity: sha512-/xc7HAC1eB6qd5HhW4v3CmFvJAxnjHwAprB4JDZM2PSO2D+9Psc7aKTDl972KV9XIyPI/QLUn/xVDBM9ty9/gA==}
     engines: {node: '>= 22'}
     peerDependencies:
-      '@bufbuild/protobuf': ^2.15.0
-      '@cerbos/api': ^0.11.0
+      '@bufbuild/protobuf': ^2.16.0
+      '@cerbos/api': ^0.11.1
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -1098,12 +1098,14 @@ packages:
   '@opentelemetry/sdk-trace-base@2.12.0':
     resolution: {integrity: sha512-JOERgZCxRM06FEJ5kEWxlSRChah6MmXDx3KwCruqEv/iEyLkTokCSemf2y1w8oIHtfrr8EVTpzebq/31vn2Cpg==}
     engines: {node: ^18.19.0 || >=20.6.0}
+    deprecated: Use @opentelemetry/sdk-trace package
     peerDependencies:
       '@opentelemetry/api': '>=1.3.0 <1.10.0'
 
   '@opentelemetry/sdk-trace-node@2.12.0':
     resolution: {integrity: sha512-9DufH1IlmQMoKAfot5y/FhTP1RnmhLb5K6eKmJO/bvzPjYwPAazoiAUbTZFdPbqxOXN0FEbhZx/e6SB1Og4jmg==}
     engines: {node: ^18.19.0 || >=20.6.0}
+    deprecated: Use @opentelemetry/sdk-trace package
     peerDependencies:
       '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
@@ -3460,7 +3462,7 @@ snapshots:
       hashery: 1.5.1
       keyv: 5.6.0
 
-  '@cerbos/embedded-server@0.7.2(@bufbuild/protobuf@2.16.0)(@cerbos/api@packages+api)':
+  '@cerbos/embedded-server@0.7.3(@bufbuild/protobuf@2.16.0)(@cerbos/api@packages+api)':
     dependencies:
       '@bufbuild/protobuf': 2.16.0
       '@cerbos/api': link:packages/api
