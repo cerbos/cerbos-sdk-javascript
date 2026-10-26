@@ -1,5 +1,21 @@
 # yaml-language-server: $schema=../changelog.schema.json
 
+unreleased:
+  type: minor
+
+  changed:
+    - summary: Migrate to OpenTelemetry JS SDK v3
+      pullRequests: [1560]
+
+  bumped:
+    "@opentelemetry/api":
+      to: 1.10.0
+      pullRequests: [1560]
+
+    "@opentelemetry/instrumentation":
+      to: 0.300.0
+      pullRequests: [1560]
+
 releases:
   - version: 0.11.3
     date: 2026-10-26

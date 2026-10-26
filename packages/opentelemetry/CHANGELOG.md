@@ -2,7 +2,13 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Migrate to OpenTelemetry JS SDK v3 ([#1560](https://github.com/cerbos/cerbos-sdk-javascript/pull/1560))
+
+- Bump dependency on [@opentelemetry/api] to 1.10.0 ([#1560](https://github.com/cerbos/cerbos-sdk-javascript/pull/1560))
+
+- Bump dependency on [@opentelemetry/instrumentation] to 0.300.0 ([#1560](https://github.com/cerbos/cerbos-sdk-javascript/pull/1560))
 
 ## [0.11.3] - 2026-10-26
 
