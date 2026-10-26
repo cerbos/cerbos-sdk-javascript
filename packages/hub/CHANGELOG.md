@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.6.3] - 2026-10-26
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.16.0 ([#1542](https://github.com/cerbos/cerbos-sdk-javascript/pull/1542), [#1549](https://github.com/cerbos/cerbos-sdk-javascript/pull/1549))
+
+- Bump dependency on [@cerbos/core] to 0.33.2 ([#1565](https://github.com/cerbos/cerbos-sdk-javascript/pull/1565))
 
 ## [0.6.2] - 2026-09-15
 
@@ -186,7 +192,8 @@
 
 - A client for interacting with policy stores in Cerbos Hub ([#1173](https://github.com/cerbos/cerbos-sdk-javascript/pull/1173), [#1191](https://github.com/cerbos/cerbos-sdk-javascript/pull/1191))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.2...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.3...HEAD
+[0.6.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.2...@cerbos/hub@0.6.3
 [0.6.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.1...@cerbos/hub@0.6.2
 [0.6.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.0...@cerbos/hub@0.6.1
 [0.6.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.5.6...@cerbos/hub@0.6.0
