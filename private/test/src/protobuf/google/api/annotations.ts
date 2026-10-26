@@ -4,3 +4,5 @@
 /* eslint-disable */
 
 export const protobufPackage = "google.api";
+
+export const protobufFileName = "google/api/annotations.proto";

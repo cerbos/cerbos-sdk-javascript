@@ -61,6 +61,8 @@ import {
 
 export const protobufPackage = "cerbos.svc.v1";
 
+export const protobufFileName = "cerbos/svc/v1/svc.proto";
+
 export type CerbosServiceService = typeof CerbosServiceService;
 export const CerbosServiceService = {
   checkResourceSet: {

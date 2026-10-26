@@ -7,6 +7,9 @@ import { KeyValue } from "../../common/v1/common.js";
 
 export const protobufPackage = "opentelemetry.proto.resource.v1";
 
+export const protobufFileName =
+  "opentelemetry/proto/resource/v1/resource.proto";
+
 export interface Resource {
   attributes: KeyValue[];
   droppedAttributesCount: number;

@@ -6,6 +6,8 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "cerbos.schema.v1";
 
+export const protobufFileName = "cerbos/schema/v1/schema.proto";
+
 export interface ValidationError {
   path: string;
   message: string;

@@ -6,6 +6,8 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "google.protobuf";
 
+export const protobufFileName = "google/protobuf/struct.proto";
+
 export enum NullValue {
   NULL_VALUE = 0,
 }

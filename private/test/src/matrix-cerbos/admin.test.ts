@@ -615,7 +615,7 @@ describe("Client", () => {
                   requestId: request.requestId,
                   principal,
                   resource: request.resource,
-                  action: request.action,
+                  action: request.action, // eslint-disable-line @typescript-eslint/no-deprecated
                   actions: [request.action],
                   auxData: { jwt: claims },
                 },
@@ -695,7 +695,7 @@ describe("Client", () => {
                   requestId: request.requestId,
                   principal,
                   resource: request.resource,
-                  action: request.action,
+                  action: request.action, // eslint-disable-line @typescript-eslint/no-deprecated
                   actions: [request.action],
                   auxData: { jwts: { app: claims } },
                 },
@@ -773,7 +773,7 @@ describe("Client", () => {
                   requestId: request.requestId,
                   principal,
                   resource: request.resource,
-                  action: request.action,
+                  action: request.action, // eslint-disable-line @typescript-eslint/no-deprecated
                   actions: [request.action],
                   auxData: { jwt: claims },
                 },
@@ -857,7 +857,7 @@ describe("Client", () => {
                   requestId: request.requestId,
                   principal,
                   resource: request.resource,
-                  action: request.action,
+                  action: request.action, // eslint-disable-line @typescript-eslint/no-deprecated
                   actions: [request.action],
                   auxData: { jwts: { app: claims } },
                 },

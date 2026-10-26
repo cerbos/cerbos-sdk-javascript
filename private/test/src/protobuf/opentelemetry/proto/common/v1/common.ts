@@ -6,6 +6,8 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "opentelemetry.proto.common.v1";
 
+export const protobufFileName = "opentelemetry/proto/common/v1/common.proto";
+
 export interface AnyValue {
   value:
     | { $case: "stringValue"; stringValue: string }

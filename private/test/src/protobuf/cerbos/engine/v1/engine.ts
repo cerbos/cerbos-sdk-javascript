@@ -9,6 +9,8 @@ import { ValidationError } from "../../schema/v1/schema.js";
 
 export const protobufPackage = "cerbos.engine.v1";
 
+export const protobufFileName = "cerbos/engine/v1/engine.proto";
+
 export interface PlanResourcesInput {
   requestId: string;
   action: string;

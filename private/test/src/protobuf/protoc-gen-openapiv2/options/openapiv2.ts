@@ -7,6 +7,8 @@ import { Value } from "../../google/protobuf/struct.js";
 
 export const protobufPackage = "grpc.gateway.protoc_gen_openapiv2.options";
 
+export const protobufFileName = "protoc-gen-openapiv2/options/openapiv2.proto";
+
 export enum Scheme {
   UNKNOWN = 0,
   HTTP = 1,

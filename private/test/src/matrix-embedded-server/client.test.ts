@@ -454,7 +454,7 @@ describe("Embedded", () => {
                 input: {
                   principal,
                   resource,
-                  action: "edit",
+                  action: "edit", // eslint-disable-line @typescript-eslint/no-deprecated
                   actions: ["edit"],
                   auxData: decodedAuxData,
                   requestId,

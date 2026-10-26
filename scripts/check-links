@@ -5,6 +5,7 @@ set -o pipefail
 
 excludes=(
   --exclude https://www.npmjs.com/
+  --exclude https://npmx.dev/package-code/
   --exclude https://opentelemetry.io/
 )
 

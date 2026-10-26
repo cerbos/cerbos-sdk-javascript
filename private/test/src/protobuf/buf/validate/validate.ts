@@ -8,6 +8,8 @@ import { Timestamp } from "../../google/protobuf/timestamp.js";
 
 export const protobufPackage = "buf.validate";
 
+export const protobufFileName = "buf/validate/validate.proto";
+
 export enum Ignore {
   IGNORE_UNSPECIFIED = 0,
   IGNORE_IF_ZERO_VALUE = 1,

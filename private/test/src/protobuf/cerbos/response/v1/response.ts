@@ -13,6 +13,8 @@ import { Schema, ValidationError } from "../../schema/v1/schema.js";
 
 export const protobufPackage = "cerbos.response.v1";
 
+export const protobufFileName = "cerbos/response/v1/response.proto";
+
 export interface PlanResourcesResponse {
   requestId: string;
   action: string;

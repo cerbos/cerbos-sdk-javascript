@@ -5,6 +5,8 @@
 
 export const protobufPackage = "google.api";
 
+export const protobufFileName = "google/api/field_behavior.proto";
+
 export enum FieldBehavior {
   FIELD_BEHAVIOR_UNSPECIFIED = 0,
   OPTIONAL = 1,

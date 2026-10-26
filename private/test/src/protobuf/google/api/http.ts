@@ -6,6 +6,8 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "google.api";
 
+export const protobufFileName = "google/api/http.proto";
+
 export interface HttpRule {
   selector: string;
   pattern:

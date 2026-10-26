@@ -6,6 +6,8 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "google.protobuf";
 
+export const protobufFileName = "google/protobuf/timestamp.proto";
+
 export interface Timestamp {
   seconds: bigint;
   nanos: number;

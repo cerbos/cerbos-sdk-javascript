@@ -22,11 +22,8 @@ import { Transport } from "./transport.js";
 
 /**
  * Configuration for OpenTelemetry instrumentation of Cerbos clients.
- *
- * @remarks
- * See {@link https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_instrumentation.InstrumentationConfig.html | `InstrumentationConfig` documentation from OpenTelemetry}.
  */
-export type CerbosInstrumentationConfig = InstrumentationConfig;
+export interface CerbosInstrumentationConfig extends InstrumentationConfig {} // eslint-disable-line @typescript-eslint/no-empty-object-type
 
 /**
  * OpenTelemetry instrumentation for Cerbos clients.

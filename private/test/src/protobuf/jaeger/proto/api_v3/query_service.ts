@@ -23,6 +23,8 @@ import { TracesData } from "../../../opentelemetry/proto/trace/v1/trace.js";
 
 export const protobufPackage = "jaeger.api_v3";
 
+export const protobufFileName = "jaeger/proto/api_v3/query_service.proto";
+
 export interface GetTraceRequest {
   traceId: string;
   startTime: Date | undefined;
