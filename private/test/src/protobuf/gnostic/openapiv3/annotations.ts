@@ -4,3 +4,5 @@
 /* eslint-disable */
 
 export const protobufPackage = "openapi.v3";
+
+export const protobufFileName = "gnostic/openapiv3/annotations.proto";

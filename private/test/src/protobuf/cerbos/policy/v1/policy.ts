@@ -9,6 +9,8 @@ import { Effect, effectToJSON } from "../../effect/v1/effect.js";
 
 export const protobufPackage = "cerbos.policy.v1";
 
+export const protobufFileName = "cerbos/policy/v1/policy.proto";
+
 export enum ScopePermissions {
   SCOPE_PERMISSIONS_UNSPECIFIED = 0,
   SCOPE_PERMISSIONS_OVERRIDE_PARENT = 1,

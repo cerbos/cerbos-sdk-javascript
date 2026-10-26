@@ -8,6 +8,8 @@ import { Resource } from "../../resource/v1/resource.js";
 
 export const protobufPackage = "opentelemetry.proto.trace.v1";
 
+export const protobufFileName = "opentelemetry/proto/trace/v1/trace.proto";
+
 export interface TracesData {
   resourceSpans: ResourceSpans[];
 }

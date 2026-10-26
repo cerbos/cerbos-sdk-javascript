@@ -15,6 +15,8 @@ import { SourceAttributes } from "../../policy/v1/policy.js";
 
 export const protobufPackage = "cerbos.audit.v1";
 
+export const protobufFileName = "cerbos/audit/v1/audit.proto";
+
 export interface AccessLogEntry {
   callId: string;
   timestamp: Date | undefined;

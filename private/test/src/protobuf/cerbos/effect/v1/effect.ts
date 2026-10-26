@@ -5,6 +5,8 @@
 
 export const protobufPackage = "cerbos.effect.v1";
 
+export const protobufFileName = "cerbos/effect/v1/effect.proto";
+
 export enum Effect {
   EFFECT_UNSPECIFIED = 0,
   EFFECT_ALLOW = 1,

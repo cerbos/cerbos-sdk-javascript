@@ -7,6 +7,8 @@ import { Any as Any1 } from "../google/protobuf/any.js";
 
 export const protobufPackage = "openapi.v3";
 
+export const protobufFileName = "openapiv3/OpenAPIv3.proto";
+
 export interface AdditionalPropertiesItem {
   oneof:
     | { $case: "schemaOrReference"; schemaOrReference: SchemaOrReference }

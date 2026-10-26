@@ -6,6 +6,8 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
 export const protobufPackage = "google.protobuf";
 
+export const protobufFileName = "google/protobuf/descriptor.proto";
+
 export enum Edition {
   EDITION_UNKNOWN = 0,
   EDITION_LEGACY = 900,

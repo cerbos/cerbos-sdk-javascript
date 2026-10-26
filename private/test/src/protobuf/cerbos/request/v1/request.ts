@@ -17,6 +17,8 @@ import { Schema } from "../../schema/v1/schema.js";
 
 export const protobufPackage = "cerbos.request.v1";
 
+export const protobufFileName = "cerbos/request/v1/request.proto";
+
 export interface PlanResourcesRequest {
   requestId: string;
   action: string;
