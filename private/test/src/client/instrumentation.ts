@@ -1,14 +1,23 @@
 import { ChannelCredentials } from "@grpc/grpc-js";
 import type { Attributes } from "@opentelemetry/api";
-import { SpanKind, SpanStatusCode, metrics } from "@opentelemetry/api";
+import {
+  SpanKind,
+  SpanStatusCode,
+  context,
+  metrics,
+  propagation,
+  trace,
+} from "@opentelemetry/api";
+import { AsyncLocalStorageContextManager } from "@opentelemetry/context-async-hooks";
+import { W3CTraceContextPropagator } from "@opentelemetry/core";
 import type { MetricReader } from "@opentelemetry/sdk-metrics";
 import { MeterProvider } from "@opentelemetry/sdk-metrics";
-import type { ReadableSpan } from "@opentelemetry/sdk-trace-base";
+import type { ReadableSpan } from "@opentelemetry/sdk-trace";
 import {
   InMemorySpanExporter,
   SimpleSpanProcessor,
-} from "@opentelemetry/sdk-trace-base";
-import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
+  TracerProvider,
+} from "@opentelemetry/sdk-trace";
 import {
   ATTR_RPC_GRPC_STATUS_CODE,
   ATTR_RPC_METHOD,
@@ -77,9 +86,17 @@ export function testInstrumentation(...cases: InstrumentationTestCase[]): void {
 
       spanExporter = new InMemorySpanExporter();
 
-      new NodeTracerProvider({
-        spanProcessors: [new SimpleSpanProcessor(spanExporter)],
-      }).register();
+      trace.setGlobalTracerProvider(
+        new TracerProvider({
+          spanProcessors: [new SimpleSpanProcessor({ exporter: spanExporter })],
+        }),
+      );
+
+      context.setGlobalContextManager(
+        new AsyncLocalStorageContextManager().enable(),
+      );
+
+      propagation.setGlobalPropagator(new W3CTraceContextPropagator());
 
       cerbosInstrumentation.enable();
     });

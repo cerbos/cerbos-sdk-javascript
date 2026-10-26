@@ -16,7 +16,7 @@ import {
 import type {
   InMemorySpanExporter,
   ReadableSpan,
-} from "@opentelemetry/sdk-trace-base";
+} from "@opentelemetry/sdk-trace";
 import { describe, expect } from "vitest";
 
 import type { Client, DecisionLogEntry } from "@cerbos/core";
