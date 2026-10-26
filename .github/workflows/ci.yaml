@@ -41,17 +41,17 @@ jobs:
       - name: Set up Node.js
         uses: $/.github/actions/setup-node
 
-      - name: Lint
-        uses: $/.github/actions/lint
-        with:
-          github-app-client-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
-          github-app-private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
-
       - name: Generate code
         run: pnpm run generate
 
       - name: Check for uncommitted changes
         uses: cerbos/actions/check-repo-status@3b65c15c153c9bbfab65116b25692065e3f6a91e # main
+
+      - name: Lint
+        uses: $/.github/actions/lint
+        with:
+          github-app-client-id: ${{ secrets.CERBOS_BOT_CLIENT_ID }}
+          github-app-private-key: ${{ secrets.CERBOS_BOT_PRIVATE_KEY }}
 
   test-matrix:
     name: Generate test matrix
