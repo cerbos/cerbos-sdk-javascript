@@ -1,14 +1,18 @@
 # yaml-language-server: $schema=../changelog.schema.json
 
-unreleased:
-  type: patch
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.16.0
-      pullRequests: [1542, 1549]
-
 releases:
+  - version: 0.6.3
+    date: 2026-10-26
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.16.0
+        pullRequests: [1542, 1549]
+
+      "@cerbos/core":
+        to: 0.33.2
+        pullRequests: [1565]
+
   - version: 0.6.2
     date: 2026-09-15
 

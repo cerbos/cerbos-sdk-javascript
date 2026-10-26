@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.11.2] - 2026-10-26
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.16.0 ([#1542](https://github.com/cerbos/cerbos-sdk-javascript/pull/1542), [#1549](https://github.com/cerbos/cerbos-sdk-javascript/pull/1549))
@@ -172,7 +176,8 @@
 
 - Generated code ([#1271](https://github.com/cerbos/cerbos-sdk-javascript/pull/1271))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.11.1...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.11.2...HEAD
+[0.11.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.11.1...@cerbos/api@0.11.2
 [0.11.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.11.0...@cerbos/api@0.11.1
 [0.11.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.10.0...@cerbos/api@0.11.0
 [0.10.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/api@0.9.1...@cerbos/api@0.10.0

@@ -1,18 +1,26 @@
 # yaml-language-server: $schema=../changelog.schema.json
 
-unreleased:
-  type: patch
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.16.0
-      pullRequests: [1542, 1549]
-
-    "@grpc/grpc-js":
-      to: 1.14.6
-      pullRequests: [1545, 1557]
-
 releases:
+  - version: 0.29.2
+    date: 2026-10-26
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.16.0
+        pullRequests: [1542, 1549]
+
+      "@cerbos/api":
+        to: 0.11.2
+        pullRequests: [1565]
+
+      "@cerbos/core":
+        to: 0.33.2
+        pullRequests: [1565]
+
+      "@grpc/grpc-js":
+        to: 1.14.6
+        pullRequests: [1545, 1557]
+
   - version: 0.29.1
     date: 2026-09-15
 

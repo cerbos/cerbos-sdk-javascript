@@ -1,18 +1,26 @@
 # yaml-language-server: $schema=../changelog.schema.json
 
-unreleased:
-  type: patch
-
-  bumped:
-    "@bufbuild/protobuf":
-      to: 2.16.0
-      pullRequests: [1542, 1549]
-
-    "@opentelemetry/instrumentation":
-      to: 0.223.0
-      pullRequests: [1553]
-
 releases:
+  - version: 0.11.3
+    date: 2026-10-26
+
+    bumped:
+      "@bufbuild/protobuf":
+        to: 2.16.0
+        pullRequests: [1542, 1549]
+
+      "@cerbos/api":
+        to: 0.11.2
+        pullRequests: [1565]
+
+      "@cerbos/core":
+        to: 0.33.2
+        pullRequests: [1565]
+
+      "@opentelemetry/instrumentation":
+        to: 0.223.0
+        pullRequests: [1553]
+
   - version: 0.11.2
     date: 2026-09-15
 
