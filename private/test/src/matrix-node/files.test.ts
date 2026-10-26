@@ -15,7 +15,7 @@ describe("readDirectory", () => {
           apiVersion: "api.cerbos.dev/v1",
           description: "",
           disabled: false,
-          variables: {},
+          variables: {}, // eslint-disable-line @typescript-eslint/no-deprecated
           exportVariables: {
             name: "d",
             definitions: {
@@ -27,7 +27,7 @@ describe("readDirectory", () => {
           apiVersion: "api.cerbos.dev/v1",
           description: "",
           disabled: false,
-          variables: {},
+          variables: {}, // eslint-disable-line @typescript-eslint/no-deprecated
           derivedRoles: {
             name: "c",
             definitions: [
@@ -42,7 +42,7 @@ describe("readDirectory", () => {
           apiVersion: "api.cerbos.dev/v1",
           description: "",
           disabled: false,
-          variables: {},
+          variables: {}, // eslint-disable-line @typescript-eslint/no-deprecated
           resourcePolicy: {
             resource: "a",
             version: "default",
@@ -63,7 +63,7 @@ describe("readDirectory", () => {
           apiVersion: "api.cerbos.dev/v1",
           description: "",
           disabled: false,
-          variables: {},
+          variables: {}, // eslint-disable-line @typescript-eslint/no-deprecated
           principalPolicy: {
             principal: "b",
             version: "default",

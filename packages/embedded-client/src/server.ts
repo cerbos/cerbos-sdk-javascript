@@ -246,7 +246,7 @@ export class Server {
         requestId,
         principal,
         resource,
-        action: "",
+        action: "", // eslint-disable-line @typescript-eslint/no-deprecated
         actions: actions.length ? actions : [action],
         auxData: serverAuxData,
         includeMeta,
