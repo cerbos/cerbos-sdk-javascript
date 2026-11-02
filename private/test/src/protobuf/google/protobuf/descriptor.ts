@@ -332,6 +332,8 @@ export interface FeatureSet {
   enforceNamingStyle?: FeatureSet_EnforceNamingStyle | undefined;
   defaultSymbolVisibility?:
     FeatureSet_VisibilityFeature_DefaultSymbolVisibility | undefined;
+  enforceProtoLimits?:
+    FeatureSet_ProtoLimitsFeature_EnforceProtoLimits | undefined;
 }
 
 export enum FeatureSet_FieldPresence {
@@ -538,6 +540,33 @@ export function featureSet_VisibilityFeature_DefaultSymbolVisibilityToJSON(
         "Unrecognized enum value " +
           object +
           " for enum FeatureSet_VisibilityFeature_DefaultSymbolVisibility",
+      );
+  }
+}
+
+export interface FeatureSet_ProtoLimitsFeature {}
+
+export enum FeatureSet_ProtoLimitsFeature_EnforceProtoLimits {
+  PROTO_LIMITS_UNKNOWN = 0,
+  LEGACY_NO_EXPLICIT_LIMITS = 1,
+  PROTO_LIMITS2026 = 2,
+}
+
+export function featureSet_ProtoLimitsFeature_EnforceProtoLimitsToJSON(
+  object: FeatureSet_ProtoLimitsFeature_EnforceProtoLimits,
+): string {
+  switch (object) {
+    case FeatureSet_ProtoLimitsFeature_EnforceProtoLimits.PROTO_LIMITS_UNKNOWN:
+      return "PROTO_LIMITS_UNKNOWN";
+    case FeatureSet_ProtoLimitsFeature_EnforceProtoLimits.LEGACY_NO_EXPLICIT_LIMITS:
+      return "LEGACY_NO_EXPLICIT_LIMITS";
+    case FeatureSet_ProtoLimitsFeature_EnforceProtoLimits.PROTO_LIMITS2026:
+      return "PROTO_LIMITS2026";
+    default:
+      throw new globalThis.Error(
+        "Unrecognized enum value " +
+          object +
+          " for enum FeatureSet_ProtoLimitsFeature_EnforceProtoLimits",
       );
   }
 }
@@ -2217,6 +2246,7 @@ function createBaseFeatureSet(): FeatureSet {
     jsonFormat: 0,
     enforceNamingStyle: 0,
     defaultSymbolVisibility: 0,
+    enforceProtoLimits: 0,
   };
 }
 
@@ -2260,6 +2290,12 @@ export const FeatureSet: MessageFns<FeatureSet> = {
       message.defaultSymbolVisibility !== 0
     ) {
       writer.uint32(64).int32(message.defaultSymbolVisibility);
+    }
+    if (
+      message.enforceProtoLimits !== undefined &&
+      message.enforceProtoLimits !== 0
+    ) {
+      writer.uint32(72).int32(message.enforceProtoLimits);
     }
     return writer;
   },
@@ -2342,6 +2378,14 @@ export const FeatureSet: MessageFns<FeatureSet> = {
             message.defaultSymbolVisibility = reader.int32() as any;
             continue;
           }
+          case 9: {
+            if (tag !== 72) {
+              break;
+            }
+
+            message.enforceProtoLimits = reader.int32() as any;
+            continue;
+          }
         }
         if ((tag & 7) === 4 || tag === 0) {
           break;
@@ -2403,6 +2447,15 @@ export const FeatureSet: MessageFns<FeatureSet> = {
           message.defaultSymbolVisibility,
         );
     }
+    if (
+      message.enforceProtoLimits !== undefined &&
+      message.enforceProtoLimits !== 0
+    ) {
+      obj.enforceProtoLimits =
+        featureSet_ProtoLimitsFeature_EnforceProtoLimitsToJSON(
+          message.enforceProtoLimits,
+        );
+    }
     return obj;
   },
 };
@@ -2450,6 +2503,54 @@ export const FeatureSet_VisibilityFeature: MessageFns<FeatureSet_VisibilityFeatu
     },
 
     toJSON(_: FeatureSet_VisibilityFeature): unknown {
+      const obj: any = {};
+      return obj;
+    },
+  };
+
+function createBaseFeatureSet_ProtoLimitsFeature(): FeatureSet_ProtoLimitsFeature {
+  return {};
+}
+
+export const FeatureSet_ProtoLimitsFeature: MessageFns<FeatureSet_ProtoLimitsFeature> =
+  {
+    encode(
+      _: FeatureSet_ProtoLimitsFeature,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number,
+    ): FeatureSet_ProtoLimitsFeature {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const previousRecursionDepth = (reader as any).__tsProtoDecodeDepth ?? 0;
+      if (previousRecursionDepth >= 100) {
+        throw new globalThis.Error("protobuf decode recursion limit exceeded");
+      }
+      (reader as any).__tsProtoDecodeDepth = previousRecursionDepth + 1;
+      try {
+        const end = length === undefined ? reader.len : reader.pos + length;
+        const message = createBaseFeatureSet_ProtoLimitsFeature();
+        while (reader.pos < end) {
+          const tag = reader.uint32();
+          switch (tag >>> 3) {
+          }
+          if ((tag & 7) === 4 || tag === 0) {
+            break;
+          }
+          reader.skip(tag & 7);
+        }
+        return message;
+      } finally {
+        (reader as any).__tsProtoDecodeDepth = previousRecursionDepth;
+      }
+    },
+
+    toJSON(_: FeatureSet_ProtoLimitsFeature): unknown {
       const obj: any = {};
       return obj;
     },
