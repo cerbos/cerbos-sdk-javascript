@@ -2,7 +2,13 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Bump dependency on [@connectrpc/connect] to 2.3.0 ([#1566](https://github.com/cerbos/cerbos-sdk-javascript/pull/1566))
+
+- Bump dependency on [@connectrpc/connect-node] to 2.3.0 ([#1566](https://github.com/cerbos/cerbos-sdk-javascript/pull/1566))
+
+- Bump dependency on [@connectrpc/connect-web] to 2.3.0 ([#1566](https://github.com/cerbos/cerbos-sdk-javascript/pull/1566))
 
 ## [0.6.3] - 2026-10-26
 
