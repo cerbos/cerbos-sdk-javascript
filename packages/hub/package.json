@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/hub",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "type": "module",
   "description": "Client library for interacting with Cerbos Hub from server-side Node.js applications",
   "repository": {

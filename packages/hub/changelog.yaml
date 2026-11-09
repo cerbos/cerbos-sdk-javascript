@@ -1,22 +1,22 @@
 # yaml-language-server: $schema=../changelog.schema.json
 
-unreleased:
-  type: patch
-
-  bumped:
-    "@connectrpc/connect":
-      to: 2.3.0
-      pullRequests: [1566]
-
-    "@connectrpc/connect-node":
-      to: 2.3.0
-      pullRequests: [1566]
-
-    "@connectrpc/connect-web":
-      to: 2.3.0
-      pullRequests: [1566]
-
 releases:
+  - version: 0.6.4
+    date: 2026-11-09
+
+    bumped:
+      "@connectrpc/connect":
+        to: 2.3.0
+        pullRequests: [1566]
+
+      "@connectrpc/connect-node":
+        to: 2.3.0
+        pullRequests: [1566]
+
+      "@connectrpc/connect-web":
+        to: 2.3.0
+        pullRequests: [1566]
+
   - version: 0.6.3
     date: 2026-10-26
 
