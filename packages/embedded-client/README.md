@@ -8,7 +8,7 @@ Policy bundles are loaded from [Cerbos Hub](https://www.cerbos.dev/product-cerbo
 ## Prerequisites
 
 - Node.js 22+
-- A [Cerbos Hub](https://hub.cerbos.cloud) account
+- A [Cerbos Hub](https://www.cerbos.dev/product-cerbos-hub) account
 
 ## Installation
 
