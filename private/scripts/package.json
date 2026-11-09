@@ -6,9 +6,9 @@
     "@types/semver": "7.8.0",
     "date-fns": "4.4.0",
     "execa": "10.2.1",
-    "node-html-parser": "9.0.5",
+    "node-html-parser": "9.0.6",
     "prettier": "3.9.10",
-    "semver": "7.8.5",
+    "semver": "7.8.6",
     "typedoc": "0.28.20",
     "yaml": "2.9.1",
     "zod": "4.6.7"
