@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.6.4] - 2026-11-09
+
 ### Changed
 
 - Bump dependency on [@connectrpc/connect] to 2.3.0 ([#1566](https://github.com/cerbos/cerbos-sdk-javascript/pull/1566))
@@ -198,7 +202,8 @@
 
 - A client for interacting with policy stores in Cerbos Hub ([#1173](https://github.com/cerbos/cerbos-sdk-javascript/pull/1173), [#1191](https://github.com/cerbos/cerbos-sdk-javascript/pull/1191))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.3...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.4...HEAD
+[0.6.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.3...@cerbos/hub@0.6.4
 [0.6.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.2...@cerbos/hub@0.6.3
 [0.6.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.1...@cerbos/hub@0.6.2
 [0.6.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/hub@0.6.0...@cerbos/hub@0.6.1

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.12.0] - 2026-11-09
+
 ### Changed
 
 - Migrate to OpenTelemetry JS SDK v3 ([#1560](https://github.com/cerbos/cerbos-sdk-javascript/pull/1560))
@@ -489,7 +493,8 @@
 
 - [OpenTelemetry](https://opentelemetry.io) instrumentation for the [@cerbos/grpc] and [@cerbos/http] client libraries ([#438](https://github.com/cerbos/cerbos-sdk-javascript/pull/438))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.11.3...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.12.0...HEAD
+[0.12.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.11.3...@cerbos/opentelemetry@0.12.0
 [0.11.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.11.2...@cerbos/opentelemetry@0.11.3
 [0.11.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.11.1...@cerbos/opentelemetry@0.11.2
 [0.11.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.11.0...@cerbos/opentelemetry@0.11.1

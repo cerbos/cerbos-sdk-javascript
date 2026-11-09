@@ -1,9 +1,14 @@
 # yaml-language-server: $schema=../changelog.schema.json
 
-unreleased:
-  type: patch
-
 releases:
+  - version: 0.8.3
+    date: 2026-11-09
+
+    bumped:
+      "@cerbos/hub":
+        to: 0.6.4
+        pullRequests: [1572]
+
   - version: 0.8.2
     date: 2026-10-26
 
