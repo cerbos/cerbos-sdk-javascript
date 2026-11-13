@@ -27,7 +27,7 @@ import {
   methodName,
 } from "@cerbos/core/~internal";
 
-import type { RequestInitWithUrl } from "./endpoints.js";
+import type { Init } from "./endpoints.js";
 import { endpoints } from "./endpoints.js";
 
 export class Transport implements CoreTransport {
@@ -105,7 +105,7 @@ export class Transport implements CoreTransport {
 
     headers.set("User-Agent", this.userAgent);
 
-    const init: RequestInitWithUrl = {
+    const init: Init = {
       url: this.baseUrl + endpoint.path,
       method: endpoint.method,
       headers,

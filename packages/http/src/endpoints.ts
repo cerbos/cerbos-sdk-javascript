@@ -20,16 +20,18 @@ import {
 import { Health as health } from "@cerbos/api/grpc/health/v1/health_pb";
 import { methodName } from "@cerbos/core/~internal";
 
-export interface RequestInitWithUrl extends RequestInit {
+export interface Init extends RequestInit {
   url: string;
+  method: HttpMethod;
+  headers: Headers;
 }
 
 type HttpMethod = "GET" | "POST" | "DELETE";
 
 type Serialize<I extends DescMessage = DescMessage> = (
   request: MessageValidType<I>,
-  init: RequestInitWithUrl,
-) => RequestInitWithUrl;
+  init: Init,
+) => Init;
 
 interface DescEndpoint<I extends DescMessage> {
   method: HttpMethod;
@@ -170,10 +172,14 @@ defineEndpoints(health, {
 });
 
 function serializeToBody<I extends DescMessage>(schema: I): Serialize<I> {
-  return (request, init) => ({
-    ...init,
-    body: toJsonString(schema, request as MessageShape<I>),
-  });
+  return (request, init) => {
+    init.headers.set("Content-Type", "application/json");
+
+    return {
+      ...init,
+      body: toJsonString(schema, request as MessageShape<I>),
+    };
+  };
 }
 
 function serializeToQueryString<I extends DescMessage>(
