@@ -33,6 +33,7 @@
     {
       "matchPackageNames": [
         "@bufbuild/protobuf",
+        "@bufbuild/protoc-gen-es",
         "@bufbuild/protovalidate",
         "@cerbos/embedded-server",
         "@connectrpc/connect",

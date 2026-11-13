@@ -1,5 +1,29 @@
 # yaml-language-server: $schema=../changelog.schema.json
 
+unreleased:
+  type: minor
+
+  changed:
+    - summary: Use [OpenTelemetry Semantic Conventions v1.45](https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.45.0)
+      details: |-
+        There are breaking changes which affect the attributes on spans produced by this package:
+
+        - `rpc.response.status_code` is replaced by `rpc.status_code`.
+      pullRequests: [1574]
+
+  bumped:
+    "@bufbuild/protobuf":
+      to: 2.17.0
+      pullRequests: [1574]
+
+    "@opentelemetry/instrumentation":
+      to: 0.301.0
+      pullRequests: [1574]
+
+    "@opentelemetry/semantic-conventions":
+      to: 1.45.0
+      pullRequests: [1574]
+
 releases:
   - version: 0.12.0
     date: 2026-11-09

@@ -8,7 +8,7 @@
     "test:servers:stop": "servers/stop"
   },
   "devDependencies": {
-    "@bufbuild/protobuf": "2.16.0",
+    "@bufbuild/protobuf": "2.17.0",
     "@cerbos/api": "workspace:*",
     "@cerbos/core": "workspace:*",
     "@cerbos/embedded-client": "workspace:*",
@@ -27,7 +27,7 @@
     "@opentelemetry/core": "3.0.0",
     "@opentelemetry/sdk-metrics": "3.0.0",
     "@opentelemetry/sdk-trace": "3.0.0",
-    "@opentelemetry/semantic-conventions": "1.44.0",
+    "@opentelemetry/semantic-conventions": "1.45.0",
     "@testing-library/react": "16.3.3",
     "@testing-library/user-event": "14.6.8",
     "@types/react": "19.3.0",

@@ -1,5 +1,13 @@
 # yaml-language-server: $schema=../changelog.schema.json
 
+unreleased:
+  type: patch
+
+  bumped:
+    "@bufbuild/protobuf":
+      to: 2.17.0
+      pullRequests: [1574]
+
 releases:
   - version: 0.6.4
     date: 2026-11-09

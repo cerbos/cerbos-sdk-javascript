@@ -23,6 +23,7 @@ import {
   ATTR_RPC_METHOD,
   ATTR_RPC_RESPONSE_STATUS_CODE,
   ATTR_RPC_SERVICE,
+  ATTR_RPC_STATUS_CODE,
   ATTR_RPC_SYSTEM,
   ATTR_RPC_SYSTEM_NAME,
 } from "@opentelemetry/semantic-conventions/incubating";
@@ -443,7 +444,7 @@ function clientAttributes({
   return {
     [ATTR_RPC_SYSTEM_NAME]: "grpc",
     [ATTR_RPC_METHOD]: `${service}/${method}`,
-    [ATTR_RPC_RESPONSE_STATUS_CODE]: Status[status],
+    [ATTR_RPC_STATUS_CODE]: Status[status],
     ...rest,
   };
 }
@@ -473,7 +474,7 @@ function serverAttributes(
           },
         },
         {
-          key: ATTR_RPC_RESPONSE_STATUS_CODE,
+          key: ATTR_RPC_RESPONSE_STATUS_CODE, // eslint-disable-line @typescript-eslint/no-deprecated
           value: {
             value: {
               $case: "stringValue",
