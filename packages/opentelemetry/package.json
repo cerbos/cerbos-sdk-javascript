@@ -50,14 +50,14 @@
     "metrics"
   ],
   "peerDependencies": {
-    "@bufbuild/protobuf": "^2.16.0",
+    "@bufbuild/protobuf": "^2.17.0",
     "@cerbos/api": "^0.11.2",
     "@cerbos/core": "^0.33.2"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.10.0",
-    "@opentelemetry/instrumentation": "^0.300.0",
-    "@opentelemetry/semantic-conventions": "^1.44.0"
+    "@opentelemetry/instrumentation": "^0.301.0",
+    "@opentelemetry/semantic-conventions": "^1.45.0"
   },
   "publishConfig": {
     "access": "public",
