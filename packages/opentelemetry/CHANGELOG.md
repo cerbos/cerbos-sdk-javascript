@@ -4,6 +4,12 @@
 
 ### Changed
 
+- Use [OpenTelemetry Semantic Conventions v1.45](https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.45.0) ([#1574](https://github.com/cerbos/cerbos-sdk-javascript/pull/1574))
+
+  There are breaking changes which affect the attributes on spans produced by this package:
+
+  - `rpc.response.status_code` is replaced by `rpc.status_code`.
+
 - Bump dependency on [@bufbuild/protobuf] to 2.17.0 ([#1574](https://github.com/cerbos/cerbos-sdk-javascript/pull/1574))
 
 - Bump dependency on [@opentelemetry/instrumentation] to 0.301.0 ([#1574](https://github.com/cerbos/cerbos-sdk-javascript/pull/1574))

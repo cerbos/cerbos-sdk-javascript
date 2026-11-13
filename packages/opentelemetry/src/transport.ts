@@ -16,7 +16,7 @@ import {
 } from "@opentelemetry/api";
 import {
   ATTR_RPC_METHOD,
-  ATTR_RPC_RESPONSE_STATUS_CODE,
+  ATTR_RPC_STATUS_CODE,
   ATTR_RPC_SYSTEM_NAME,
 } from "@opentelemetry/semantic-conventions/incubating";
 
@@ -137,7 +137,7 @@ export class Transport implements CoreTransport {
     return {
       call: context.bind(activeContext, fn),
       succeeded: (): void => {
-        attributes[ATTR_RPC_RESPONSE_STATUS_CODE] = Status[Status.OK];
+        attributes[ATTR_RPC_STATUS_CODE] = Status[Status.OK];
         finish();
       },
       failed: (error: unknown): void => {
@@ -151,7 +151,7 @@ export class Transport implements CoreTransport {
             error instanceof AbstractErrorResponse ||
             error instanceof NotOK
           ) {
-            attributes[ATTR_RPC_RESPONSE_STATUS_CODE] = Status[error.code];
+            attributes[ATTR_RPC_STATUS_CODE] = Status[error.code];
           }
         }
 
