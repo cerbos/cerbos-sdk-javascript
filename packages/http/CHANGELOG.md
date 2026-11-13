@@ -6,6 +6,8 @@
 
 - Set `Content-Type` header ([#1573](https://github.com/cerbos/cerbos-sdk-javascript/pull/1573))
 
+- Bump dependency on [@bufbuild/protobuf] to 2.17.0 ([#1574](https://github.com/cerbos/cerbos-sdk-javascript/pull/1574))
+
 ## [0.30.2] - 2026-10-26
 
 ### Changed

@@ -1,5 +1,8 @@
 # yaml-language-server: $schema=../changelog.schema.json
 
+unreleased:
+  type: patch
+
 releases:
   - version: 0.5.2
     date: 2026-10-26
