@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-No notable changes.
+### Changed
+
+- Set `Content-Type` header ([#1573](https://github.com/cerbos/cerbos-sdk-javascript/pull/1573))
 
 ## [0.30.2] - 2026-10-26
 

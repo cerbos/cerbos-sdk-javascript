@@ -1,5 +1,12 @@
 # yaml-language-server: $schema=../changelog.schema.json
 
+unreleased:
+  type: patch
+
+  changed:
+    - summary: Set `Content-Type` header
+      pullRequests: [1573]
+
 releases:
   - version: 0.30.2
     date: 2026-10-26
