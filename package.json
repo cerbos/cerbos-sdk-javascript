@@ -4,7 +4,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.17.0",
+      "version": "12.18.0",
       "onFail": "download"
     },
     "runtime": {
@@ -60,11 +60,11 @@
     "@tsconfig/node22": "22.0.6",
     "@tsconfig/strictest": "2.0.8",
     "@types/node": "22.20.5",
-    "@types/web": "0.0.360",
+    "@types/web": "0.0.361",
     "@typescript/native": "npm:typescript@7.0.2",
     "depcheck": "1.4.7",
     "eslint": "10.14.0",
-    "npm": "12.2.1",
+    "npm": "12.2.2",
     "prettier": "3.9.10",
     "prettier-plugin-pkg": "0.22.1",
     "ts-proto": "2.18.4",
