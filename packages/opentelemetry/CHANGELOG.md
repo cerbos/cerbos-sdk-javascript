@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.13.0] - 2026-11-13
+
 ### Changed
 
 - Use [OpenTelemetry Semantic Conventions v1.45](https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.45.0) ([#1574](https://github.com/cerbos/cerbos-sdk-javascript/pull/1574))
@@ -11,6 +15,10 @@
   - `rpc.response.status_code` is replaced by `rpc.status_code`.
 
 - Bump dependency on [@bufbuild/protobuf] to 2.17.0 ([#1574](https://github.com/cerbos/cerbos-sdk-javascript/pull/1574))
+
+- Bump dependency on [@cerbos/api] to 0.11.3 ([#1578](https://github.com/cerbos/cerbos-sdk-javascript/pull/1578))
+
+- Bump dependency on [@cerbos/core] to 0.33.3 ([#1578](https://github.com/cerbos/cerbos-sdk-javascript/pull/1578))
 
 - Bump dependency on [@opentelemetry/instrumentation] to 0.301.0 ([#1574](https://github.com/cerbos/cerbos-sdk-javascript/pull/1574))
 
@@ -505,7 +513,8 @@
 
 - [OpenTelemetry](https://opentelemetry.io) instrumentation for the [@cerbos/grpc] and [@cerbos/http] client libraries ([#438](https://github.com/cerbos/cerbos-sdk-javascript/pull/438))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.12.0...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.13.0...HEAD
+[0.13.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.12.0...@cerbos/opentelemetry@0.13.0
 [0.12.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.11.3...@cerbos/opentelemetry@0.12.0
 [0.11.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.11.2...@cerbos/opentelemetry@0.11.3
 [0.11.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/opentelemetry@0.11.1...@cerbos/opentelemetry@0.11.2

@@ -1,6 +1,6 @@
 {
   "name": "@cerbos/http",
-  "version": "0.30.2",
+  "version": "0.30.3",
   "type": "module",
   "description": "Client library for interacting with the Cerbos policy decision point service over HTTP from browser-based applications",
   "repository": {
@@ -50,10 +50,10 @@
   ],
   "peerDependencies": {
     "@bufbuild/protobuf": "^2.17.0",
-    "@cerbos/api": "^0.11.2"
+    "@cerbos/api": "^0.11.3"
   },
   "dependencies": {
-    "@cerbos/core": "^0.33.2"
+    "@cerbos/core": "^0.33.3"
   },
   "publishConfig": {
     "access": "public",

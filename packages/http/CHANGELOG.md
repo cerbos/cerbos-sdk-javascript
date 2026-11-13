@@ -2,11 +2,19 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.30.3] - 2026-11-13
+
 ### Changed
 
 - Set `Content-Type` header ([#1573](https://github.com/cerbos/cerbos-sdk-javascript/pull/1573))
 
 - Bump dependency on [@bufbuild/protobuf] to 2.17.0 ([#1574](https://github.com/cerbos/cerbos-sdk-javascript/pull/1574))
+
+- Bump dependency on [@cerbos/api] to 0.11.3 ([#1578](https://github.com/cerbos/cerbos-sdk-javascript/pull/1578))
+
+- Bump dependency on [@cerbos/core] to 0.33.3 ([#1578](https://github.com/cerbos/cerbos-sdk-javascript/pull/1578))
 
 ## [0.30.2] - 2026-10-26
 
@@ -598,7 +606,8 @@
 
 - Separate HTTP client for browser-based applications ([#73](https://github.com/cerbos/cerbos-sdk-javascript/pull/73))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.30.2...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.30.3...HEAD
+[0.30.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.30.2...@cerbos/http@0.30.3
 [0.30.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.30.1...@cerbos/http@0.30.2
 [0.30.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.30.0...@cerbos/http@0.30.1
 [0.30.0]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/http@0.29.0...@cerbos/http@0.30.0
