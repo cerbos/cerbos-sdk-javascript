@@ -2,9 +2,19 @@
 
 ## [Unreleased]
 
+No notable changes.
+
+## [0.8.4] - 2026-11-13
+
 ### Changed
 
 - Bump dependency on [@bufbuild/protobuf] to 2.17.0 ([#1574](https://github.com/cerbos/cerbos-sdk-javascript/pull/1574))
+
+- Bump dependency on [@cerbos/api] to 0.11.3 ([#1578](https://github.com/cerbos/cerbos-sdk-javascript/pull/1578))
+
+- Bump dependency on [@cerbos/core] to 0.33.3 ([#1578](https://github.com/cerbos/cerbos-sdk-javascript/pull/1578))
+
+- Bump dependency on [@cerbos/hub] to 0.6.5 ([#1578](https://github.com/cerbos/cerbos-sdk-javascript/pull/1578))
 
 ## [0.8.3] - 2026-11-09
 
@@ -211,7 +221,8 @@
 
 - Client library for new embedded policy decision point servers ([#1312](https://github.com/cerbos/cerbos-sdk-javascript/pull/1312))
 
-[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.8.3...HEAD
+[unreleased]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.8.4...HEAD
+[0.8.4]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.8.3...@cerbos/embedded-client@0.8.4
 [0.8.3]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.8.2...@cerbos/embedded-client@0.8.3
 [0.8.2]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.8.1...@cerbos/embedded-client@0.8.2
 [0.8.1]: https://github.com/cerbos/cerbos-sdk-javascript/compare/@cerbos/embedded-client@0.8.0...@cerbos/embedded-client@0.8.1
