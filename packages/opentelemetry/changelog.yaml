@@ -1,5 +1,13 @@
 # yaml-language-server: $schema=../changelog.schema.json
 
+unreleased:
+  type: patch
+
+  bumped:
+    "@opentelemetry/instrumentation":
+      to: 0.301.1
+      pullRequests: [1579]
+
 releases:
   - version: 0.13.0
     date: 2026-11-13
