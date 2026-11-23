@@ -111,6 +111,7 @@ describe("react hooks", () => {
 
 const client = {
   withPrincipal(): ClientWithPrincipal {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-class-instance-assignment
     return {
       client: this,
       ...clientWithPrincipal,
