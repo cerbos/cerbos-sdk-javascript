@@ -5,8 +5,8 @@ unreleased:
 
   bumped:
     "@opentelemetry/instrumentation":
-      to: 0.301.1
-      pullRequests: [1579]
+      to: 0.301.2
+      pullRequests: [1579, 1581]
 
 releases:
   - version: 0.13.0
