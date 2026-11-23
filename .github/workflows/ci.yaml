@@ -45,7 +45,7 @@ jobs:
         run: pnpm run generate
 
       - name: Check for uncommitted changes
-        uses: cerbos/actions/check-repo-status@4155ab4469b7f665dcec04a90af9e40a2234ba42 # main
+        uses: cerbos/actions/check-repo-status@fbb87be09441f0d105713c45366bd81eb125b8c5 # main
 
       - name: Lint
         uses: $/.github/actions/lint
@@ -145,6 +145,6 @@ jobs:
 
       - name: Notify Slack on failure
         if: failure() && github.event_name == 'schedule'
-        uses: cerbos/actions/notify-slack@4155ab4469b7f665dcec04a90af9e40a2234ba42 # main
+        uses: cerbos/actions/notify-slack@fbb87be09441f0d105713c45366bd81eb125b8c5 # main
         with:
           webhook-url: ${{ secrets.SLACK_CI_NOTIFICATIONS_WEBHOOK_URL }}
